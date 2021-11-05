@@ -1,0 +1,9 @@
+/*# sourceURL=app-input-item-size.component.scss */
+
+app-input-item-size {
+  display: block;
+
+  hr[dsh-br-tp] {
+    border-top: 1px dashed var(--app-root-border-color);
+  }
+}

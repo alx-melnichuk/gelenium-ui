@@ -1,0 +1,18 @@
+{
+  "semi": true,
+  "printWidth": 140,
+  "tabWidth": 2,
+  "endOfLine": "auto",
+  "singleQuote": true,
+  "quoteProps": "consistent",
+  "trailingComma": "es5",
+  "arrowParens": "always",
+  "overrides": [
+    {
+      "files": ["*.md", "*.json", "*.js"],
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
+}

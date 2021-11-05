@@ -1,0 +1,58 @@
+/*# sourceURL=lm-components.component.scss */
+
+:host {
+  height: 100%;
+  display: flex;
+  color: #060e12;  // # color: #2a3338;  // color: #20262D;
+
+  .lcm-left-side {
+    flex-shrink: 0;
+    flex-basis: 149px;
+    @media (min-width: 800px) { flex-basis: 200px; }
+    @media (min-width: 1000px) { flex-basis: 250px; }
+    @media (min-width: 1200px) { flex-basis: 300px; }
+
+    display: flex;
+    flex-direction: column;
+  }
+  .lcm-right-side-wrap {
+    flex-grow: 1;
+    flex-basis: 100%;
+    overflow-y: auto;
+  }
+  .lcm-right-side {
+    display: flex;
+    justify-content: center;
+  }
+  .lcm-right-side-data {
+    max-width: 650px;
+  }
+  .lcm-r-border {
+    border-right-width: var(--app-root-border-width);
+    border-right-style: var(--app-root-border-style);
+    border-right-color: var(--app-root-border-color);
+    box-sizing: border-box;
+  }
+
+  .lcm-item {
+    padding: 10px 15px;
+  }
+  .lcm-ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .lcm-li {
+    padding: 2px 0;
+    display: block;
+  }
+  .lcm-li-href {
+    padding: 2px 0 2px 20px;
+    display: block;
+  }
+  .lcm-li-active {
+    color: #007FFF;
+    font-weight: 500;
+    background-color: #F0F7FF;
+  }
+}

@@ -1,0 +1,124 @@
+<div class="in-section">
+  <h3>Validation</h3>
+  <p>The "isError" parameter sets the field to the error display state.
+    The "helperText" parameter can be used to display an error message.
+    A thin border (exterOutlined) or a red underline (exterUnderline|exterStandard) signals the 
+    user about an erroneous value in this input field.
+    The red frame is displayed even if the input field is disabled (isDisabled).
+  </p>
+</div>
+
+<form class="in-section" [formGroup]="formGroup03" novalidate>
+
+  <div>
+    <grn-input class="in-item" formControlName="input03a"
+      exterOutlined label="Error" isError>
+    </grn-input>
+
+    <grn-input class="in-item" formControlName="input03b"
+      exterOutlined label="Error-Disabled"
+      isDisabled isError helperText="Incorrect entry.">
+    </grn-input>
+  </div>
+
+  <div>
+    <grn-input class="in-item" formControlName="input03c"
+      exterUnderline label="Error" isError>
+    </grn-input>
+
+    <grn-input class="in-item" formControlName="input03d"
+      exterUnderline label="Error-Disabled"
+      isDisabled isError helperText="Incorrect entry.">
+    </grn-input>
+  </div>
+
+  <div>
+    <grn-input class="in-item" formControlName="input03e"
+      exterStandard label="Error" isError>
+    </grn-input>
+
+    <grn-input class="in-item" formControlName="input03f"
+      label="Error-Disabled"
+      isDisabled isError helperText="Incorrect entry.">
+    </grn-input>
+  </div>
+
+</form>
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-tab-group animationDuration="0ms">
+      <mat-tab [label]="labelHtml">
+        <pre>
+&lt;form [formGroup]="formGroup03" novalidate&gt;
+
+  &lt;div&gt;
+    &lt;grn-input class="in-item" formControlName="input03a"
+      exterOutlined label="Error" isError&gt;
+    &lt;/grn-input&gt;
+
+    &lt;grn-input class="in-item" formControlName="input03b"
+      exterOutlined label="Error-Disabled"
+      isDisabled isError helperText="Incorrect entry."&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;grn-input class="in-item" formControlName="input03c"
+      exterUnderline label="Error" isError&gt;
+    &lt;/grn-input&gt;
+
+    &lt;grn-input class="in-item" formControlName="input03d"
+      exterUnderline label="Error-Disabled"
+      isDisabled isError helperText="Incorrect entry."&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;grn-input class="in-item" formControlName="input03e"
+      exterStandard label="Error" isError&gt;
+    &lt;/grn-input&gt;
+
+    &lt;grn-input class="in-item" formControlName="input03f"
+      label="Error-Disabled"
+      isDisabled isError helperText="Incorrect entry."&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre>
+      </mat-tab>
+      <mat-tab [label]="labelTs">
+        <pre>
+import &#123; Component, ViewEncapsulation &#125; from '@angular/core';
+import &#123; FormControl, FormGroup &#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class InputComponent &#123;
+  public formGroup03: FormGroup = new FormGroup(&#123;
+    input03a: new FormControl('Hello World', []),
+    input03b: new FormControl('Hello World', []),
+    input03c: new FormControl('Hello World', []),
+    input03d: new FormControl('Hello World', []),
+    input03e: new FormControl('Hello World', []),
+    input03f: new FormControl('Hello World', []),
+  &#125;);
+&#125;</pre>
+      </mat-tab>
+      <mat-tab [label]="labelCss">
+        <pre>
+.in-item &#123;
+  width: 240px;
+  margin: 10px 10px;
+&#125;</pre>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+</mat-accordion>

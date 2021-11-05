@@ -1,0 +1,19 @@
+<div class="lcm-left-side lcm-r-border">
+  <div class="lcm-item">Components</div>
+  <div class="lcm-item">
+    <ul class="lcm-ul">
+      <li [ngClass]="['lcm-li']" *ngFor="let urlItem of urlList">
+        <a class="lcm-li-href" [routerLink]="[urlItem.url]" [routerLinkActive]="['lcm-li-active']">
+          {{ urlItem.label }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="lcm-right-side-wrap">
+  <div class="lcm-right-side">
+    <div class="lcm-right-side-data">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+/*# sourceURL=app.component.scss */
+
+app-root {
+  --app-root-border-width: 2px;
+  --app-root-border-style: solid;
+  --app-root-border-color: #E5E8EC;
+  --app-root-header-height: 42px;
+  --app-root-footer-height: 0px;
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &>.app-header {
+    flex-shrink: 0;
+    flex-basis: var(--app-root-header-height);
+  }
+  &>.app-middle {
+    flex-grow: 1;
+    height: fit-content; // IMPORTANT for scrolling in safari
+    overflow-y: hidden;
+    position: relative;
+  }
+  &>.app-footer {
+    flex-shrink: 0;
+    flex-basis: var(--app-root-footer-height);
+  }
+
+  .app-brd-bt {
+    border-bottom-width: var(--app-root-border-width);
+    border-bottom-style: var(--app-root-border-style);
+    border-bottom-color: var(--app-root-border-color);
+    box-sizing: border-box;
+  }
+}

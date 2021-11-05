@@ -1,0 +1,7 @@
+// mxAlignItems(center)
+@mixin mxAlignItems($value) {
+  -webkit-align-items: $value;
+  -webkit-box-align: $value;
+  -ms-flex-align: $value;
+  align-items: $value;
+}
