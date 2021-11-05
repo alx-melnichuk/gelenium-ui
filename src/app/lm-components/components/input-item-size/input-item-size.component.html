@@ -1,6 +1,8 @@
 <div class="in-section">
   <h3>Item size.</h3>
-  <p>If you want to reduce the size of the input element, you can use the "szSmall" attribute.</p>
+  <p>
+    If you want to reduce the size of the input element, you can use the "szSmall" attribute.
+  </p>
 </div>
 
 <div class="in-section">
@@ -15,137 +17,166 @@
 <form class="in-section" [formGroup]="formGroup04" novalidate>
 
   <div>
+    <div class="in-item iis-row iis-text">
+      <span>{{ 'Item height: ' +
+        (exterior04==='standard' ? '39px': '38px') + ';' }}
+      </span>
+    </div>
+    <div class="in-item iis-row iis-text">
+      <span>{{ 'Item height: ' +
+        (exterior04==='standard' ? '23px' : '38px') + '; label is hidden' }}
+      </span>
+    </div>
+  </div>
+
+  <div>
     <grn-input class="in-item" formControlName="input04a"
      label="Size Short" szShort autoComplete="off"
-     helperText="Item height: 38px"
      [exterOutlined]="exterior04==='outlined' ? '':null"
      [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
 
     <grn-input class="in-item" formControlName="input04a"
      label="Size Short" szShort autoComplete="off" hiddenLabel
-     helperText="Item height: 38px hidden label"
      [exterOutlined]="exterior04==='outlined' ? '':null"
      [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
   </div>
+
   <hr dsh-br-tp>
+
+  <div>
+    <div class="in-item iis-row iis-text">
+      <span>Item height: 44px;</span>
+    </div>
+    <div class="in-item iis-row iis-text">
+      <span>{{ 'Item height: ' +
+        (exterior04==='standard' ? '28px' : '44px') + '; label is hidden' }}
+      </span>
+    </div>
+  </div>
 
   <div>
     <grn-input class="in-item" formControlName="input04b"
      label="Size Small" szSmall autoComplete="off"
-     helperText="Item height: 44px"
      [exterOutlined]="exterior04==='outlined' ? '':null"
      [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
 
     <grn-input class="in-item" formControlName="input04b"
      label="Size Small" szSmall autoComplete="off" hiddenLabel
-     helperText="Item height: 44px hidden label"
      [exterOutlined]="exterior04==='outlined' ? '':null"
      [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
   </div>
+
   <hr dsh-br-tp>
+
+  <div>
+    <div class="in-item iis-row iis-text">
+      <span>Item height: 50px;</span>
+    </div>
+    <div class="in-item iis-row iis-text">
+      <span>{{ 'Item height: ' +
+        (exterior04==='standard' ? '34px' : '50px') + '; label is hidden' }}
+      </span>
+    </div>
+  </div>
 
   <div>
     <grn-input class="in-item" formControlName="input04c"
      label="Size Middle" szMiddle autoComplete="off"
-     helperText="Item height: 50px"
      [exterOutlined]="exterior04==='outlined' ? '':null"
      [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
 
     <grn-input class="in-item" formControlName="input04c"
      label="Size Middle" szMiddle autoComplete="off" hiddenLabel
-     helperText="Item height: 50px hidden label"
      [exterOutlined]="exterior04==='outlined' ? '':null"
      [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
   </div>
+
   <hr dsh-br-tp>
+
+  <div>
+    <div class="in-item iis-row iis-text">
+      <span>Item height: 56px;</span>
+    </div>
+    <div class="in-item iis-row iis-text">
+      <span>{{ 'Item height: ' +
+        (exterior04==='standard' ? '40px' : '56px') + '; label is hidden' }}
+      </span>
+    </div>
+  </div>
 
   <div>
     <grn-input class="in-item" formControlName="input04d"
      label="Size Wide" szWide autoComplete="off"
-     helperText="Item height: 56px"
      [exterOutlined]="exterior04==='outlined' ? '':null"
      [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
 
     <grn-input class="in-item" formControlName="input04d"
      label="Size Wide" szWide autoComplete="off" hiddenLabel
-     helperText="Item height: 56px hidden label"
      [exterOutlined]="exterior04==='outlined' ? '':null"
      [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
   </div>
+
   <hr dsh-br-tp>
+
+  <div>
+    <div class="in-item iis-row iis-text">
+      <span>Item height: 62px;</span>
+    </div>
+    <div class="in-item iis-row iis-text">
+      <span>{{ 'Item height: ' +
+        (exterior04==='standard' ? '46px' : '62px') + '; label is hidden' }}
+      </span>
+    </div>
+  </div>
 
   <div>
     <grn-input class="in-item" formControlName="input04e"
      label="Size Large" szLarge autoComplete="off"
-     helperText="Item height: 62px"
      [exterOutlined]="exterior04==='outlined' ? '':null"
      [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
 
     <grn-input class="in-item" formControlName="input04e"
      label="Size Large" szLarge autoComplete="off" hiddenLabel
-     helperText="Item height: 62px hidden label"
      [exterOutlined]="exterior04==='outlined' ? '':null"
      [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
   </div>
+
   <hr dsh-br-tp>
+
+  <div>
+    <div class="in-item iis-row iis-text">
+      <span>Item height: 68px;</span>
+    </div>
+    <div class="in-item iis-row iis-text">
+      <span>{{ 'Item height: ' +
+        (exterior04==='standard' ? '52px' : '68px') + '; label is hidden' }}
+      </span>
+    </div>
+  </div>
 
   <div>
     <grn-input class="in-item" formControlName="input04f"
      label="Size Huge" szHuge autoComplete="off"
-     helperText="Item height: 68px"
      [exterOutlined]="exterior04==='outlined' ? '':null"
      [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
 
     <grn-input class="in-item" formControlName="input04f"
      label="Size Huge" szHuge autoComplete="off" hiddenLabel
-     helperText="Item height: 68px hidden label"
      [exterOutlined]="exterior04==='outlined' ? '':null"
      [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
   </div>
-
-  <!-- <div>
-    <grn-input class="in-item" formControlName="input04c"
-     label="Size Normal" autoComplete="off" hiddenLabel9
-     helperText="Some important text"
-     [exterOutlined]="exterior04==='outlined' ? '':null"
-     [exterUnderline]="exterior04==='underline' ? '':null">
-    </grn-input>
-  </div> -->
-
-
-
-
-  <!-- <div>
-    <grn-input class="in-item" formControlName="input04c" exterUnderline label="Size Small" szSmall>
-    </grn-input>
-  </div> -->
-
-  <!-- <div>
-    <grn-input class="in-item" formControlName="input04d" exterUnderline label="Size Normal">
-    </grn-input>
-  </div> -->
-
-  <!-- <div>
-    <grn-input class="in-item" formControlName="input04e" label="Size Small" szSmall>
-    </grn-input>
-  </div> -->
-
-  <!-- <div>
-    <grn-input class="in-item" formControlName="input04f" label="Size Normal">
-    </grn-input>
-  </div> -->
 
 </form>
 
@@ -161,19 +192,19 @@
   &lt;div&gt;
     &lt;grn-input class="in-item" formControlName="input03a" exterOutlined label="Error" isError&gt;
     &lt;/grn-input&gt;
-    &lt;grn-input class="in-item" formControlName="input03b" exterOutlined label="Error-Disabled" isDisabled isError helperText="Incorrect entry."&gt;
+    &lt;grn-input class="in-item" formControlName="input03b" exterOutlined label="Error-Disabled" isDisabled isError helperText9="Incorrect entry."&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
   &lt;div&gt;
     &lt;grn-input class="in-item" formControlName="input03c" exterUnderline label="Error" isError&gt;
     &lt;/grn-input&gt;
-    &lt;grn-input class="in-item" formControlName="input03d" exterUnderline label="Error-Disabled" isDisabled isError helperText="Incorrect entry."&gt;
+    &lt;grn-input class="in-item" formControlName="input03d" exterUnderline label="Error-Disabled" isDisabled isError helperText9="Incorrect entry."&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
   &lt;div&gt;
     &lt;grn-input class="in-item" formControlName="input03e" exterStandard label="Error" isError&gt;
     &lt;/grn-input&gt;
-    &lt;grn-input class="in-item" formControlName="input03f" label="Error-Disabled" isDisabled isError helperText="Incorrect entry."&gt;
+    &lt;grn-input class="in-item" formControlName="input03f" label="Error-Disabled" isDisabled isError helperText9="Incorrect entry."&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 &lt;/form&gt;</pre> -->
