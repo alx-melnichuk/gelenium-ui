@@ -7,8 +7,9 @@ app-input-item-size {
     display: inline-flex;
   }
   .iis-text {
-    font-size: 0.84em;
     color: #00000096;
+    font-size: 0.84em;
+    font-style: italic;
   }
   hr[dsh-br-tp] {
     border-top: 1px dashed var(--app-root-border-color);

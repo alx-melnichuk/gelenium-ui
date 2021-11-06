@@ -57,7 +57,7 @@ export class GrnFrameInputComponent implements OnInit {
 
   @HostBinding('class')
   public get getClass(): string | null {
-    return this.getClassForFrameSize(this.frameSize, 'gfi-size-');
+    return 'gfi-size-' + this.getFrameSizeMode(this.frameSize);
   }
 
   public get isOutlinedExterior(): boolean {
@@ -89,7 +89,7 @@ export class GrnFrameInputComponent implements OnInit {
     console.log();
     this.clickFrame.emit();
   }
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method, @typescript-eslint/no-empty-function
+
   ngOnInit(): void {
     if (!this.frameSize) {
       this.frameSize = FrameSize.sizeWide;
@@ -148,7 +148,7 @@ export class GrnFrameInputComponent implements OnInit {
     return result;
   }
 
-  public getClassForFrameSize(frameSize: FrameSize | null, prefix = 'gfi-sz-'): string {
+  public getFrameSizeMode(frameSize: FrameSize | null): string {
     let result = 'wide';
     switch (frameSize) {
       case FrameSize.sizeShort:
@@ -170,6 +170,6 @@ export class GrnFrameInputComponent implements OnInit {
         result = 'huge';
         break;
     }
-    return prefix + result;
+    return result;
   }
 }

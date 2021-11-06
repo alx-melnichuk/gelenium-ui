@@ -14,8 +14,7 @@
   [attr.data-shrink]="isLabelShrink"
   [attr.for]="inputId"
   [attr.id]="inputId + '-label'"
->
-  {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
+>{{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
 </label>
 
 <div [ngClass]="['gfi-frame', 'Grn-palette', 'GrnInputFrame'
@@ -38,9 +37,13 @@
     , (isFocused ? 'Grn-focused': '')
     , (getClassPalette('plt-brd-clr-', isError, isFocused, isDisabled, isMouseEnter))
   ]">
-    <legend *ngIf="!hiddenLabel" [ngClass]="['gfi-legend', (isLabelShrink ? 'gfi-lgnd-shrink': '')]">
+    <legend *ngIf="!hiddenLabel"
+      [ngClass]="['gfi-legend'
+        , (isLabelShrink ? 'gfi-lgnd-shrink': '')
+        , (!!label || isRequired ? 'gfi-lgnd-indent': '')
+    ]">
       <span class="gfi-lgnd-text">
-        &nbsp;{{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>&nbsp;
+        {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
       </span>
     </legend>
   </fieldset>
