@@ -61,7 +61,7 @@
 }
 
 grn-frame-input { //outline: 1px dashed crimson;
-  --gfi-line-height: 1.4375rem;
+  --gfi-line-height: 1.4375em;
   --gfi-border-width: 1px;
   --gfi-legend-pd-lf-rg: 0.6ex; // 4.7px     0.6ex=3.8px  0.56ex=3.55px
   --gfi-sz-short: 38px;
@@ -76,7 +76,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   -ms-flex-direction: column;
   flex-direction: column;
   line-height: var(--gfi-line-height);
-  letter-spacing: 0.00938rem; // #!!root
+  // #!! letter-spacing: 0.00938em; // #!!root
   min-width: 0;
   padding: 0;
   margin: 0;
@@ -103,7 +103,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
   // Section "Label".
   .gfi-label { // outline: 1px dashed green;
-    // #!! font-family: "Roboto","Helvetica","Arial",sans-serif;    // #!! font-weight: 400;    // #!! font-size: 1rem;    // line-height: 1.4375em;
+    // #!! font-family: "Roboto","Helvetica","Arial",sans-serif;    // #!! font-weight: 400;    // #!! font-size: 1em;    // line-height: 1.4375em;
     // #!! letter-spacing: 0.00938em;
     padding: 0;
     position: absolute;
@@ -126,7 +126,7 @@ grn-frame-input { //outline: 1px dashed crimson;
     }
     &.gfi-lbl-shrink {
       max-width: calc(133% - 1.50em); // # calc(133% - 24px)
-      @include mxTransformTranslateXYScale(calc(0.25*var(--gfi-base-size)), -0.5625em, 0.75); // (14px, -9px, 0.75)
+      @include mxTransformTranslateXYScale(calc(0.25*var(--gfi-base-size)), calc(-0.4*var(--gfi-line-height)), 0.75); // (14px, -9px, 0.75)
     }
   }  
   .gfi-lbl-underline {
@@ -153,7 +153,7 @@ grn-frame-input { //outline: 1px dashed crimson;
  
   // Section "Frame".
   .gfi-frame { // outline: 1px dashed blueviolet;
-    // #!! font-family: "Roboto","Helvetica","Arial",sans-serif;    // #!! font-weight: 400;    // #!! font-size: 1rem;    // #!! line-height: 1.4375rem;  // line-height: 1.1876em; // small
+    // #!! font-family: "Roboto","Helvetica","Arial",sans-serif;    // #!! font-weight: 400;    // #!! font-size: 1em;    // #!! line-height: 1.4375em;  // line-height: 1.1876em; // small
     // #!! letter-spacing: 0.00938em; // TODO ??
     box-sizing: border-box;
     cursor: text;
@@ -165,6 +165,9 @@ grn-frame-input { //outline: 1px dashed crimson;
       cursor: default;
     }
     // input {  outline: 1px dashed orange;} // # TODO temp;
+  }
+  .gfi-frm-molding {
+    height: 1.4375em;
   }
   .gfi-frm-outlined {
     padding: 0px calc(0.25*var(--gfi-base-size)); // top/bottom: 0px right/left: 14px;
@@ -180,8 +183,10 @@ grn-frame-input { //outline: 1px dashed crimson;
     transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     padding: 0px calc(0.214285714*var(--gfi-base-size)); // top/bottom: 0px, right/left: 12px;
     &>.gfi-frm-molding {
-      padding-top: calc((var(--gfi-base-size) - 1.4375em)*0.757575758); // 25px;
-      padding-bottom: calc((var(--gfi-base-size) - 1.4375em)*0.242424242); // 8px;
+      // padding-top: calc((var(--gfi-base-size) - 1.4375em)*0.757575); // 25px;
+      // padding-bottom: calc((var(--gfi-base-size) - 1.4375em)*0.243); // 8.019px;
+      padding-top: calc((var(--gfi-base-size) - 1.4375em)*0.757524); // 24.998px;
+      padding-bottom: calc((var(--gfi-base-size) - 1.4375em)*0.243055); // 8.021px;
     }
   }
   label+.gfi-frm-standard {
@@ -291,10 +296,10 @@ grn-frame-input { //outline: 1px dashed crimson;
   .gfi-helper-text {
     // font-family: "Roboto","Helvetica","Arial",sans-serif; // #!!
     // font-weight: 400; // #!!
-    min-height: 1.1875rem;
+    min-height: 1.1875em;
     font-size: 0.75em; // #!! 12px
     line-height: 1.66; // #!!
-    letter-spacing: 0.03333em; // #!!
+    // #!! letter-spacing: 0.03333em; // #!!
     text-align: left;
     margin-top: 3px;
     margin-bottom: 0;
