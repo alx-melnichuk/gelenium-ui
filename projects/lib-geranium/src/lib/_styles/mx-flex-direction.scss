@@ -1,0 +1,6 @@
+
+@mixin mxFlexDirection($value) {
+  -webkit-flex-direction: $value;
+  -ms-flex-direction: $value;
+  flex-direction: $value;
+}
