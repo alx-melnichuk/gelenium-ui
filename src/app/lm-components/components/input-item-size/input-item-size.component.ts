@@ -42,9 +42,7 @@ export class InputItemSizeComponent implements OnInit {
     input04e: new FormControl('Demo Size Large', []),
     input04f: new FormControl('Demo Size Huge', []),
   });
-  // public exterior04 = 'outlined';
-  // public exterior04 = 'underline';
-  public exterior04 = 'standard';
+  public exterior04 = 'outlined';
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

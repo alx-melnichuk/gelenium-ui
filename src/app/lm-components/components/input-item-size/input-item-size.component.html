@@ -1,7 +1,8 @@
 <div class="in-section">
   <h3>Item size.</h3>
   <p>
-    The input element has the ability to change the height. This requires adding one of the following attributes:
+    This element has the ability to change its height.
+    This requires adding one of the following attributes:
   </p>
   <ul>
     <li>"szShort" - sets the height to 38px;</li>
@@ -12,8 +13,13 @@
     <li>"szHuge" - sets the height to 68px;</li>
   </ul>
   <p>
-    It is possible to hide the display of the label (legend).
-    In this case, for the "Standard" mode, the height of the element is reduced by a value of 1em.
+    In order to hide the label (legend), add the "hiddenLabel" attribute.
+  </p>
+  <p>
+    The font size for native input and label is determined from the parent container.
+    The size of the font can be defined with the css-style for the "grn-input" tag.
+    In the example, this is implemented with the styles "iis-fn-sz-large" and "iis-fn-sz-huge".
+    We can change the font size at the grn-input tag level, but the element itself will not change the height.
   </p>
 </div>
 
@@ -28,19 +34,8 @@
 
 <form class="in-section" [formGroup]="formGroup04" novalidate>
 
-  <div>
-    <div class="in-item iis-row iis-text">
-      <span>{{ 'Item height: '
-        + (exterior04==='standard' ? '39px': '38px')
-        + ';' }}
-      </span>
-    </div>
-    <div class="in-item iis-row iis-text">
-      <span>{{ 'Item height: '
-        + (exterior04==='standard' ? '23px' : '38px')
-        + '; label is hidden' }}
-      </span>
-    </div>
+  <div class="in-item iis-row iis-text">
+    <span>Item height: 38px; font-size: 16px;</span>
   </div>
 
   <div>
@@ -57,18 +52,9 @@
     </grn-input>
   </div>
 
-  <hr dsh-br-tp>
 
-  <div>
-    <div class="in-item iis-row iis-text">
-      <span>Item height: 44px;</span>
-    </div>
-    <div class="in-item iis-row iis-text">
-      <span>{{ 'Item height: '
-        + (exterior04==='standard' ? '28px' : '44px')
-        + '; label is hidden' }}
-      </span>
-    </div>
+  <div class="in-item iis-row iis-text">
+    <span>Item height: 44px; font-size: 16px;</span>
   </div>
 
   <div>
@@ -85,18 +71,9 @@
     </grn-input>
   </div>
 
-  <hr dsh-br-tp>
 
-  <div>
-    <div class="in-item iis-row iis-text">
-      <span>Item height: 50px;</span>
-    </div>
-    <div class="in-item iis-row iis-text">
-      <span>{{ 'Item height: '
-        + (exterior04==='standard' ? '34px' : '50px')
-        + '; label is hidden' }}
-      </span>
-    </div>
+  <div class="in-item iis-row iis-text">
+    <span>Item height: 50px; font-size: 16px;</span>
   </div>
 
   <div>
@@ -113,18 +90,9 @@
     </grn-input>
   </div>
 
-  <hr dsh-br-tp>
 
-  <div>
-    <div class="in-item iis-row iis-text">
-      <span>Item height: 56px;</span>
-    </div>
-    <div class="in-item iis-row iis-text">
-      <span>{{ 'Item height: '
-        + (exterior04==='standard' ? '40px' : '56px')
-        + '; label is hidden' }}
-      </span>
-    </div>
+  <div class="in-item iis-row iis-text">
+    <span>Item height: 56px; font-size: 16px;</span>
   </div>
 
   <div>
@@ -141,56 +109,38 @@
     </grn-input>
   </div>
 
-  <hr dsh-br-tp>
 
-   <div>
-    <div class="in-item iis-row iis-text">
-      <span>Item height: 62px;</span>
-    </div>
-    <div class="in-item iis-row iis-text">
-      <span>{{ 'Item height: '
-        + (exterior04==='standard' ? '46px' : '62px')
-        + '; label is hidden' }}
-      </span>
-    </div>
+  <div class="in-item iis-row iis-text">
+    <span>Item height: 62px; font-size: 18px;</span>
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input04e"
+    <grn-input class="in-item iis-fn-sz-large" formControlName="input04e"
       label="Size Large" szLarge autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input04e"
+    <grn-input class="in-item iis-fn-sz-large" formControlName="input04e"
       hiddenLabel szLarge autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
   </div>
 
-  <hr dsh-br-tp>
 
-  <div>
-    <div class="in-item iis-row iis-text">
-      <span>Item height: 68px;</span>
-    </div>
-    <div class="in-item iis-row iis-text">
-      <span>{{ 'Item height: '
-        + (exterior04==='standard' ? '52px' : '68px')
-        + '; label is hidden' }}
-      </span>
-    </div>
+  <div class="in-item iis-row iis-text">
+    <span>Item height: 68px; font-size: 20px;</span>
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input04f"
+    <grn-input class="in-item iis-fn-sz-huge" formControlName="input04f"
       label="Size Huge" szHuge autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input04f"
+    <grn-input class="in-item iis-fn-sz-huge" formControlName="input04f"
       hiddenLabel szHuge autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
@@ -209,19 +159,8 @@
         <pre class="in-fw-nr">
 &lt;form class="in-section" [formGroup]="formGroup04" novalidate&gt;
 
-  &lt;div&gt;
-    &lt;div class="in-item iis-row iis-text"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; 'Item height: '
-        + (exterior04==='standard' ? '39px': '38px')
-        + ';' &#125;&#125;
-      &lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class="in-item iis-row iis-text"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; 'Item height: '
-        + (exterior04==='standard' ? '23px' : '38px')
-        + '; label is hidden' &#125;&#125;
-      &lt;/span&gt;
-    &lt;/div&gt;
+  &lt;div class="in-item iis-row iis-text"&gt;
+    &lt;span&gt;Item height: 38px; font-size: 16px;&lt;/span&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
@@ -238,18 +177,9 @@
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
-  &lt;hr dsh-br-tp&gt;
 
-  &lt;div&gt;
-    &lt;div class="in-item iis-row iis-text"&gt;
-      &lt;span&gt;Item height: 44px;&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class="in-item iis-row iis-text"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; 'Item height: '
-        + (exterior04==='standard' ? '28px' : '44px')
-        + '; label is hidden' &#125;&#125;
-      &lt;/span&gt;
-    &lt;/div&gt;
+  &lt;div class="in-item iis-row iis-text"&gt;
+    &lt;span&gt;Item height: 44px; font-size: 16px;&lt;/span&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
@@ -266,18 +196,9 @@
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
-  &lt;hr dsh-br-tp&gt;
 
-  &lt;div&gt;
-    &lt;div class="in-item iis-row iis-text"&gt;
-      &lt;span&gt;Item height: 50px;&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class="in-item iis-row iis-text"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; 'Item height: '
-        + (exterior04==='standard' ? '34px' : '50px')
-        + '; label is hidden' &#125;&#125;
-      &lt;/span&gt;
-    &lt;/div&gt;
+  &lt;div class="in-item iis-row iis-text"&gt;
+    &lt;span&gt;Item height: 50px; font-size: 16px;&lt;/span&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
@@ -294,18 +215,9 @@
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
-  &lt;hr dsh-br-tp&gt;
 
-  &lt;div&gt;
-    &lt;div class="in-item iis-row iis-text"&gt;
-      &lt;span&gt;Item height: 56px;&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class="in-item iis-row iis-text"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; 'Item height: '
-        + (exterior04==='standard' ? '40px' : '56px')
-        + '; label is hidden' &#125;&#125;
-      &lt;/span&gt;
-    &lt;/div&gt;
+  &lt;div class="in-item iis-row iis-text"&gt;
+    &lt;span&gt;Item height: 56px; font-size: 16px;&lt;/span&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
@@ -322,64 +234,45 @@
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
-  &lt;hr dsh-br-tp&gt;
 
-   &lt;div&gt;
-    &lt;div class="in-item iis-row iis-text"&gt;
-      &lt;span&gt;Item height: 62px;&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class="in-item iis-row iis-text"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; 'Item height: '
-        + (exterior04==='standard' ? '46px' : '62px')
-        + '; label is hidden' &#125;&#125;
-      &lt;/span&gt;
-    &lt;/div&gt;
+  &lt;div class="in-item iis-row iis-text"&gt;
+    &lt;span&gt;Item height: 62px; font-size: 18px;&lt;/span&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input04e"
+    &lt;grn-input class="in-item iis-fn-sz-large" formControlName="input04e"
       label="Size Large" szLarge autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input04e"
+    &lt;grn-input class="in-item iis-fn-sz-large" formControlName="input04e"
       hiddenLabel szLarge autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
-  &lt;hr dsh-br-tp&gt;
 
-  &lt;div&gt;
-    &lt;div class="in-item iis-row iis-text"&gt;
-      &lt;span&gt;Item height: 68px;&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class="in-item iis-row iis-text"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; 'Item height: '
-        + (exterior04==='standard' ? '52px' : '68px')
-        + '; label is hidden' &#125;&#125;
-      &lt;/span&gt;
-    &lt;/div&gt;
+  &lt;div class="in-item iis-row iis-text"&gt;
+    &lt;span&gt;Item height: 68px; font-size: 20px;&lt;/span&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input04f"
+    &lt;grn-input class="in-item iis-fn-sz-huge" formControlName="input04f"
       label="Size Huge" szHuge autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input04f"
+    &lt;grn-input class="in-item iis-fn-sz-huge" formControlName="input04f"
       hiddenLabel szHuge autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
-&lt;/form&gt;
-      </pre>
+&lt;/form&gt;</pre>
     </mat-tab>
       <mat-tab [label]="labelTs">
         <pre>
@@ -412,14 +305,18 @@ export class InputComponent &#123;
 &#125;
 .iis-row &#123;
   display: inline-flex;
+  padding-top: 10px;
 &#125;
 .iis-text &#123;
   color: #00000096;
   font-size: 0.84em;
   font-style: italic;
 &#125;
-hr[dsh-br-tp] &#123;
-  border-top: 1px dashed var(--app-root-border-color);
+.iis-fn-sz-large &#123;
+  font-size: 18px;
+  &#125;
+.iis-fn-sz-huge &#123;
+  font-size: 20px;
 &#125;</pre>
       </mat-tab>
     </mat-tab-group>

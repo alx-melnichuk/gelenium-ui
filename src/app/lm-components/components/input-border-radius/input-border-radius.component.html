@@ -1,0 +1,137 @@
+<div class="in-section">
+  <h3>Border radius.</h3>
+  <p>
+    border-radius.
+  </p>
+</div>
+
+<div class="in-section">
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior09" aria-label="Font Style">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <!-- <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle> -->
+  </mat-button-toggle-group>
+</div>
+
+<div class="in-section ibr-slider-box">
+  <span>border-radius = ( BaseSize * <b class="ibr-slider-value">{{ borderRadius }}</b>/100 )</span>
+  <mat-slider class="ibr-slider" min="0" max="50" step="5" [value]="borderRadius" (input)="inputBorderRadius($event)"></mat-slider>
+</div>
+
+<form class="in-section ibr-outlined-radius ibr-underline-radius" [formGroup]="formGroup09" novalidate>
+
+  <div class="in-item ibr-row ibr-text">
+    <span>Item height: 38px; font-size: 16px;</span>
+  </div>
+
+  <div>
+    <grn-input class="in-item" formControlName="input09a"
+      label="Size Short" szShort autoComplete="off"
+      [exterOutlined]="exterior09==='outlined' ? '':null"
+      [exterUnderline]="exterior09==='underline' ? '':null">
+    </grn-input>
+
+    <grn-input class="in-item" formControlName="input09a"
+      hiddenLabel szShort autoComplete="off"
+      [exterOutlined]="exterior09==='outlined' ? '':null"
+      [exterUnderline]="exterior09==='underline' ? '':null">
+    </grn-input>
+  </div>
+
+
+  <div class="in-item ibr-row ibr-text">
+    <span>Item height: 44px; font-size: 16px;</span>
+  </div>
+
+  <div>
+    <grn-input class="in-item" formControlName="input09b"
+      label="Size Small" szSmall autoComplete="off"
+      [exterOutlined]="exterior09==='outlined' ? '':null"
+      [exterUnderline]="exterior09==='underline' ? '':null">
+    </grn-input>
+
+    <grn-input class="in-item" formControlName="input09b"
+      hiddenLabel szSmall autoComplete="off"
+      [exterOutlined]="exterior09==='outlined' ? '':null"
+      [exterUnderline]="exterior09==='underline' ? '':null">
+    </grn-input>
+  </div>
+
+
+  <div class="in-item ibr-row ibr-text">
+    <span>Item height: 50px; font-size: 16px;</span>
+  </div>
+
+  <div>
+    <grn-input class="in-item" formControlName="input09c"
+      label="Size Middle" szMiddle autoComplete="off"
+      [exterOutlined]="exterior09==='outlined' ? '':null"
+      [exterUnderline]="exterior09==='underline' ? '':null">
+    </grn-input>
+
+    <grn-input class="in-item" formControlName="input09c"
+      hiddenLabel szMiddle autoComplete="off"
+      [exterOutlined]="exterior09==='outlined' ? '':null"
+      [exterUnderline]="exterior09==='underline' ? '':null">
+    </grn-input>
+  </div>
+
+
+  <div class="in-item ibr-row ibr-text">
+    <span>Item height: 56px; font-size: 16px;</span>
+  </div>
+
+  <div>
+    <grn-input class="in-item" formControlName="input09d"
+      label="Size Wide" szWide autoComplete="off"
+      [exterOutlined]="exterior09==='outlined' ? '':null"
+      [exterUnderline]="exterior09==='underline' ? '':null">
+    </grn-input>
+
+    <grn-input class="in-item" formControlName="input09d"
+      hiddenLabel szWide autoComplete="off"
+      [exterOutlined]="exterior09==='outlined' ? '':null"
+      [exterUnderline]="exterior09==='underline' ? '':null">
+    </grn-input>
+  </div>
+
+
+  <div class="in-item ibr-row ibr-text">
+    <span>Item height: 62px; font-size: 18px;</span>
+  </div>
+
+  <div>
+    <grn-input class="in-item ibr-fn-sz-large" formControlName="input09e"
+      label="Size Large" szLarge autoComplete="off"
+      [exterOutlined]="exterior09==='outlined' ? '':null"
+      [exterUnderline]="exterior09==='underline' ? '':null">
+    </grn-input>
+
+    <grn-input class="in-item ibr-fn-sz-large" formControlName="input09e"
+      hiddenLabel szLarge autoComplete="off"
+      [exterOutlined]="exterior09==='outlined' ? '':null"
+      [exterUnderline]="exterior09==='underline' ? '':null">
+    </grn-input>
+  </div>
+
+
+  <div class="in-item ibr-row ibr-text">
+    <span>Item height: 68px; font-size: 20px;</span>
+  </div>
+
+  <div>
+    <grn-input class="in-item ibr-fn-sz-huge" formControlName="input09f"
+      label="Size Huge" szHuge autoComplete="off"
+      [exterOutlined]="exterior09==='outlined' ? '':null"
+      [exterUnderline]="exterior09==='underline' ? '':null">
+    </grn-input>
+
+    <grn-input class="in-item ibr-fn-sz-huge" formControlName="input09f"
+      hiddenLabel szHuge autoComplete="off"
+      [exterOutlined]="exterior09==='outlined' ? '':null"
+      [exterUnderline]="exterior09==='underline' ? '':null">
+    </grn-input>
+  </div>
+
+</form>

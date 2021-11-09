@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent implements OnInit {
-  public showNum = '04';
+  public showNum = '09';
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

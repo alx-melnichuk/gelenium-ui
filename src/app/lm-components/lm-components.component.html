@@ -1,14 +1,23 @@
 <div class="lcm-left-side lcm-r-border">
   <div class="lcm-item">Components</div>
-  <div class="lcm-item">
-    <ul class="lcm-ul">
-      <li [ngClass]="['lcm-li']" *ngFor="let urlItem of urlList">
-        <a class="lcm-li-href" [routerLink]="[urlItem.url]" [routerLinkActive]="['lcm-li-active']">
-          {{ urlItem.label }}
-        </a>
-      </li>
-    </ul>
-  </div>
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Input
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul class="lcm-ul">
+        <li class="lcm-li" *ngFor="let urlItem of inputUrlList">
+          <!-- <a class="lcm-li-href" [routerLink]="[urlItem.url + '#demo1']" [routerLinkActive]="['lcm-li-active']">
+            {{ urlItem.label }}
+          </a> -->
+          <a class="lcm-li-href" [href]="urlItem.url">{{ urlItem.label }}</a>
+        </li>
+      </ul>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
 <div class="lcm-right-side-wrap">
   <div class="lcm-right-side">

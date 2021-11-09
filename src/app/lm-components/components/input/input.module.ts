@@ -17,6 +17,7 @@ import { InputNumericalValueModule } from '../input-numerical-value/input-numeri
 import { InputHelperTextModule } from '../input-helper-text/input-helper-text.module';
 import { InputPaletteCustomizationModule } from '../input-palette-customization/input-palette-customization.module';
 import { InputOrnamentsModule } from '../input-ornaments/input-ornaments.module';
+import { InputBorderRadiusModule } from '../input-border-radius/input-border-radius.module';
 
 @NgModule({
   declarations: [InputComponent],
@@ -36,6 +37,7 @@ import { InputOrnamentsModule } from '../input-ornaments/input-ornaments.module'
     InputHelperTextModule,
     InputPaletteCustomizationModule,
     InputOrnamentsModule,
+    InputBorderRadiusModule,
   ],
 })
 export class InputModule {}
