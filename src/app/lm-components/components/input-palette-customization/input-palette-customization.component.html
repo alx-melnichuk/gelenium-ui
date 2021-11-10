@@ -1,4 +1,4 @@
-<div class="in-section">
+<div class="in-section" *ngIf="false">
   <h3>Palette customization</h3>
   <p>
     You can customize the color palette for the input element.
@@ -6,7 +6,7 @@
   </p>
   <pre>
 // Let's create our own color palette.
-.in-customization .Grn-palette &#123;
+.ipc-customization .Grn-palette &#123;
 // The default border color.
 --in07-default-color: #00acc1;
 // Border and label color on error.
@@ -39,35 +39,35 @@
 &#125;</pre>
   <p>
     All the CSS classes that define the colors of the input element are children of the "Grn-palette" CSS classes.
-    Add a custom "in-customization" CSS class to define our colors.
+    Add a custom "ipc-customization" CSS class to define our colors.
   </p>
   <p>
     To replace the color of the label, we define a group of CSS classes.
   </p>
   <pre>
 // Default color of the label.
-.in-customization .Grn-palette .plt-clr-default
+.ipc-customization .Grn-palette .plt-clr-default
 &#123; color: var(--in07-label-default-color); &#125;
 // The color of the label on error.
-.in-customization .Grn-palette .plt-clr-error
+.ipc-customization .Grn-palette .plt-clr-error
 &#123; color: var(--in07-error-color); &#125;
 // The color of the label on mouse over and on error.
-.in-customization .Grn-palette .plt-clr-mouse-error
+.ipc-customization .Grn-palette .plt-clr-mouse-error
 &#123; color: var(--in07-error-hover-color); &#125;
 // The color of the label on mouse hover.
-.in-customization .Grn-palette .plt-clr-mouse
+.ipc-customization .Grn-palette .plt-clr-mouse
 &#123; color: var(--in07-default-color); &#125;
 // The color of the label when the input element receives focus.
-.in-customization .Grn-palette .plt-clr-focused
+.ipc-customization .Grn-palette .plt-clr-focused
 &#123; color: var(--in07-focused-color); &#125;
 // The color of the label when the input element is disabled.
-.in-customization .Grn-palette .plt-clr-disabled
+.ipc-customization .Grn-palette .plt-clr-disabled
 &#123; color: var(--in07-label-disabled-color); &#125;</pre>
   <p>
     Likewise to replace the "Outlined" border color define a group of CSS classes.
   </p>
   <pre>
-.in-customization .Grn-palette .plt-brd-clr-XXX
+.ipc-customization .Grn-palette .plt-brd-clr-XXX
 &#123; border-color: var(--in07-outlined-default-brd-color); &#125;</pre>
   <p>
     Where XXX - take the values from the previous example.
@@ -76,7 +76,7 @@
     Likewise, to replace the "Underline" background color, define a group of CSS classes.
   </p>
   <pre>
-.in-customization .Grn-palette .plt-bg-clr-XXX
+.ipc-customization .Grn-palette .plt-bg-clr-XXX
 &#123; background-color: var(--in07-underline-default-bg-color); &#125;</pre>
   <p>
     Where XXX - take the values from the previous example.
@@ -85,7 +85,7 @@
     Likewise, to replace the "Underline" and "Standard" colors, define a group of CSS classes.
   </p>
   <pre>
-.in-customization .Grn-palette .plt-brd-bt-clr-XXX:before 
+.ipc-customization .Grn-palette .plt-brd-bt-clr-XXX:before 
 &#123; border-bottom-color: var(--in07-substrate-before-brd-color); &#125;</pre>
   <p>
     Where XXX - take the values from the previous example.
@@ -105,114 +105,91 @@
   </mat-button-toggle-group>
 </div>
 
-<style>
-  .in-customization .Grn-palette {
-    --in07-default-color: #00acc1;
-    --in07-error-color: #ad1457;
-    --in07-error-hover-color: #f06292;
-    --in07-focused-color: #0097a7;
 
-    --in07-label-default-color: #5c6bc0;
-    --in07-label-disabled-color: #9c27b0;
+<form class="in-section" [formGroup]="formGroup07" novalidate>
 
-    --in07-outlined-default-brd-color: #5c6bc0;
+  <div class="ipc-customization">
 
-    --in07-underline-default-bg-color: rgba(178, 235, 242, 0.6);
-    --in07-underline-focused-bg-color: rgba(178, 235, 242, 0.4);
-    --in07-underline-disabled-bg-color: rgba(178, 235, 242, 0.2);
-
-    --in07-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
-  }
-
-  .in-customization .Grn-palette .plt-clr-default         { color: var(--in07-label-default-color); }
-  .in-customization .Grn-palette .plt-clr-error           { color: var(--in07-error-color); }
-  .in-customization .Grn-palette .plt-clr-mouse-error     { color: var(--in07-error-hover-color); }
-  .in-customization .Grn-palette .plt-clr-mouse           { color: var(--in07-default-color); }
-  .in-customization .Grn-palette .plt-clr-focused         { color: var(--in07-focused-color); }
-  .in-customization .Grn-palette .plt-clr-disabled        { color: var(--in07-label-disabled-color); }
-
-  .in-customization .Grn-palette .plt-brd-clr-default     { border-color: var(--in07-outlined-default-brd-color); }
-  .in-customization .Grn-palette .plt-brd-clr-error       { border-color: var(--in07-error-color); }
-  .in-customization .Grn-palette .plt-brd-clr-mouse-error { border-color: var(--in07-error-hover-color); }
-  .in-customization .Grn-palette .plt-brd-clr-mouse       { border-color: var(--in07-default-color); }
-  .in-customization .Grn-palette .plt-brd-clr-focused     { border-color: var(--in07-focused-color); }
-  .in-customization .Grn-palette .plt-brd-clr-disabled    { border-color: var(--in07-label-disabled-color); }
+    <div>
+      <grn-input class="in-item" formControlName="input07a"
+        label="Simple Text" type="text" autoComplete="off"
+        [exterOutlined]="exterior07==='outlined' ? '':null"
+        [exterUnderline]="exterior07==='underline' ? '':null">
+      </grn-input>
   
-  .in-customization .Grn-palette .plt-bg-clr-default      { background-color: var(--in07-underline-default-bg-color); }
-  .in-customization .Grn-palette .plt-bg-clr-error        { background-color: var(--in07-underline-default-bg-color); }
-  .in-customization .Grn-palette .plt-bg-clr-mouse-error  { background-color: var(--in07-underline-focused-bg-color); }
-  .in-customization .Grn-palette .plt-bg-clr-mouse        { background-color: var(--in07-underline-focused-bg-color); }
-  .in-customization .Grn-palette .plt-bg-clr-focused      { background-color: var(--in07-underline-focused-bg-color); }
-  .in-customization .Grn-palette .plt-bg-clr-disabled     { background-color: var(--in07-underline-disabled-bg-color); }
+      <grn-input class="in-item" formControlName="input07b"
+        label="Required Text" isRequired autoComplete="off"
+        [exterOutlined]="exterior07==='outlined' ? '':null"
+        [exterUnderline]="exterior07==='underline' ? '':null">
+      </grn-input>
+    </div>
+  
+    <div>
+      <grn-input class="in-item" formControlName="input07c"
+        label="Read Only" isReadOnly autoComplete="off"
+        helperText="Enter a value for the parameter."
+        [exterOutlined]="exterior07==='outlined' ? '':null"
+        [exterUnderline]="exterior07==='underline' ? '':null">
+      </grn-input>
+  
+      <grn-input class="in-item" formControlName="input07d"
+        label="Disabled" isDisabled
+        helperText="The parameter is defined."
+        [exterOutlined]="exterior07==='outlined' ? '':null"
+        [exterUnderline]="exterior07==='underline' ? '':null">
+      </grn-input>
+    </div>
 
-  .in-customization .Grn-palette .plt-brd-bt-clr-default:before     { border-bottom-color: var(--in07-substrate-before-brd-color); }
-  .in-customization .Grn-palette .plt-brd-bt-clr-error:before       { border-bottom-color: var(--in07-error-color); }
-  .in-customization .Grn-palette .plt-brd-bt-clr-error:after        { border-bottom-color: var(--in07-error-color); }
-  .in-customization .Grn-palette .plt-brd-bt-clr-mouse-error:before { border-bottom-color: var(--in07-error-hover-color); }
-  .in-customization .Grn-palette .plt-brd-bt-clr-mouse:before       { border-bottom-color: var(--in07-default-color); }
-  .in-customization .Grn-palette .plt-brd-bt-clr-focused:after      { border-bottom-color: var(--in07-focused-color); }
-  .in-customization .Grn-palette .plt-brd-bt-clr-disabled:before    { border-bottom-color: var(--in07-substrate-before-brd-color); }
-
-</style>
-
-<form class="in-section in-customization" [formGroup]="formGroup07" novalidate>
-
-  <div>
-    <grn-input class="in-item" formControlName="input07a"
-      label="Simple Text" type="text" autoComplete="off"
-      [exterOutlined]="exterior07==='outlined' ? '':null"
-      [exterUnderline]="exterior07==='underline' ? '':null">
-    </grn-input>
-
-    <grn-input class="in-item" formControlName="input07b"
-      label="Required Text" isRequired autoComplete="off"
-      [exterOutlined]="exterior07==='outlined' ? '':null"
-      [exterUnderline]="exterior07==='underline' ? '':null">
-    </grn-input>
-  </div>
-
-  <div>
-    <grn-input class="in-item" formControlName="input07c"
-      label="Read Only" isReadOnly autoComplete="off"
-      helperText="Enter a value for the parameter."
-      [exterOutlined]="exterior07==='outlined' ? '':null"
-      [exterUnderline]="exterior07==='underline' ? '':null">
-    </grn-input>
-
-    <grn-input class="in-item" formControlName="input07d"
-      label="Disabled" isDisabled
-      helperText="The parameter is defined."
-      [exterOutlined]="exterior07==='outlined' ? '':null"
-      [exterUnderline]="exterior07==='underline' ? '':null">
-    </grn-input>
-  </div>
-
-  <div>
-    <grn-input class="in-item" formControlName="input07e"
-      isRequired
-      minLength="{{ minLength07e }}"
-      maxLength="{{ maxLength07e }}"
-      autoComplete="off"
-      [label]="!!controls07.input07e.errors ?
-        'Naming error' : 'Enter the name'"
-      [exterOutlined]="exterior07==='outlined' ? '':null"
-      [exterUnderline]="exterior07==='underline' ? '':null"
-      helperText="{{
-        (controls07.input07e.errors?.required ? 'Required field.':
-          (controls07.input07e.errors?.minlength ?
-            'Minimum length ' + controls07.input07e.errors?.minlength.requiredLength + ' characters.':
-            (controls07.input07e.errors?.maxlength ?
-              'Maximum length ' + controls07.input07e.errors?.maxlength.requiredLength + ' characters.':'')
+    <div>
+      <grn-input class="in-item" formControlName="input07e"
+        isRequired
+        minLength="{{ minLength07e }}"
+        maxLength="{{ maxLength07e }}"
+        autoComplete="off"
+        [label]="!!controls07.input07e.errors ?
+          'Naming error' : 'Enter the name'"
+        [exterOutlined]="exterior07==='outlined' ? '':null"
+        [exterUnderline]="exterior07==='underline' ? '':null"
+        helperText="{{
+          (controls07.input07e.errors?.required ? 'Required field.':
+            (controls07.input07e.errors?.minlength ?
+              'Minimum length ' + controls07.input07e.errors?.minlength.requiredLength + ' characters.':
+              (controls07.input07e.errors?.maxlength ?
+                'Maximum length ' + controls07.input07e.errors?.maxlength.requiredLength + ' characters.':'')
+            )
           )
-        )
+        }}">
+      </grn-input>
+  
+      <grn-input class="in-item" formControlName="input07f"
+        label="Error-Disabled"
+        isDisabled isError helperText="Incorrect entry."
+        [exterOutlined]="exterior07==='outlined' ? '':null"
+        [exterUnderline]="exterior07==='underline' ? '':null">
+      </grn-input>
+    </div>
+    
+  </div>
+
+
+  
+  <div>
+    <span class="ipc-text">Style like Bootstrap</span>
+  </div>
+
+  <div>
+    <grn-input class="in-item ipc-bstrap" formControlName="input07g"
+      exterOutlined szShort hiddenLabel autoComplete="off"
+      isRequired
+      helperText="{{
+        (controls07.input07g.errors?.required
+          ? 'Required field.': 'Enter value.')
       }}">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input07f"
-      label="Error-Disabled"
-      isDisabled isError helperText="Incorrect entry."
-      [exterOutlined]="exterior07==='outlined' ? '':null"
-      [exterUnderline]="exterior07==='underline' ? '':null">
+    <grn-input class="in-item ipc-bstrap" formControlName="input07h"
+      exterOutlined szShort hiddenLabel autoComplete="off"
+      isDisabled helperText="Disabled">
     </grn-input>
   </div>
 
@@ -226,7 +203,7 @@
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
         <pre class="in-fw-nr">
-&lt;form class="in-customization" [formGroup]="formGroup07" novalidate&gt;
+&lt;form class="ipc-customization" [formGroup]="formGroup07" novalidate&gt;
 
   &lt;div&gt;
     &lt;grn-input class="in-item" formControlName="input07a"
@@ -330,7 +307,7 @@ export class InputComponent &#123;
   margin: 10px 10px;
 &#125;
 
-.in-customization .Grn-palette &#123;
+.ipc-customization .Grn-palette &#123;
   --in07-default-color: #00acc1;
   --in07-error-color: #ad1457;
   --in07-error-hover-color: #f06292;
@@ -348,82 +325,82 @@ export class InputComponent &#123;
   --in07-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
 &#125;
 
-.in-customization .Grn-palette .plt-clr-default &#123;
+.ipc-customization .Grn-palette .plt-clr-default &#123;
   color: var(--in07-label-default-color);
 &#125;
-.in-customization .Grn-palette .plt-clr-error &#123;
+.ipc-customization .Grn-palette .plt-clr-error &#123;
   color: var(--in07-error-color);
 &#125;
-.in-customization .Grn-palette .plt-clr-mouse-error &#123;
+.ipc-customization .Grn-palette .plt-clr-mouse-error &#123;
   color: var(--in07-error-hover-color);
 &#125;
-.in-customization .Grn-palette .plt-clr-mouse &#123;
+.ipc-customization .Grn-palette .plt-clr-mouse &#123;
   color: var(--in07-default-color);
 &#125;
-.in-customization .Grn-palette .plt-clr-focused &#123;
+.ipc-customization .Grn-palette .plt-clr-focused &#123;
   color: var(--in07-focused-color);
 &#125;
-.in-customization .Grn-palette .plt-clr-disabled &#123;
+.ipc-customization .Grn-palette .plt-clr-disabled &#123;
   color: var(--in07-label-disabled-color);
 &#125;
 
-.in-customization .Grn-palette .plt-brd-clr-default &#123;
+.ipc-customization .Grn-palette .plt-brd-clr-default &#123;
   border-color: var(--in07-outlined-default-brd-color);
 &#125;
-.in-customization .Grn-palette .plt-brd-clr-error &#123;
+.ipc-customization .Grn-palette .plt-brd-clr-error &#123;
   border-color: var(--in07-error-color);
 &#125;
-.in-customization .Grn-palette .plt-brd-clr-mouse-error &#123;
+.ipc-customization .Grn-palette .plt-brd-clr-mouse-error &#123;
   border-color: var(--in07-error-hover-color);
 &#125;
-.in-customization .Grn-palette .plt-brd-clr-mouse &#123;
+.ipc-customization .Grn-palette .plt-brd-clr-mouse &#123;
   border-color: var(--in07-default-color);
 &#125;
-.in-customization .Grn-palette .plt-brd-clr-focused &#123;
+.ipc-customization .Grn-palette .plt-brd-clr-focused &#123;
   border-color: var(--in07-focused-color);
 &#125;
-.in-customization .Grn-palette .plt-brd-clr-disabled &#123;
+.ipc-customization .Grn-palette .plt-brd-clr-disabled &#123;
   border-color: var(--in07-label-disabled-color);
 &#125;
 
-.in-customization .Grn-palette .plt-bg-clr-default &#123;
+.ipc-customization .Grn-palette .plt-bg-clr-default &#123;
   background-color: var(--in07-underline-default-bg-color);
 &#125;
-.in-customization .Grn-palette .plt-bg-clr-error &#123;
+.ipc-customization .Grn-palette .plt-bg-clr-error &#123;
   background-color: var(--in07-underline-default-bg-color);
 &#125;
-.in-customization .Grn-palette .plt-bg-clr-mouse-error &#123;
+.ipc-customization .Grn-palette .plt-bg-clr-mouse-error &#123;
   background-color: var(--in07-underline-focused-bg-color);
 &#125;
-.in-customization .Grn-palette .plt-bg-clr-mouse &#123;
+.ipc-customization .Grn-palette .plt-bg-clr-mouse &#123;
   background-color: var(--in07-underline-focused-bg-color);
 &#125;
-.in-customization .Grn-palette .plt-bg-clr-focused &#123;
+.ipc-customization .Grn-palette .plt-bg-clr-focused &#123;
   background-color: var(--in07-underline-focused-bg-color);
 &#125;
-.in-customization .Grn-palette .plt-bg-clr-disabled &#123;
+.ipc-customization .Grn-palette .plt-bg-clr-disabled &#123;
   background-color: var(--in07-underline-disabled-bg-color);
 &#125;
 
-.in-customization .Grn-palette .plt-brd-bt-clr-default:before &#123;
+.ipc-customization .Grn-palette .plt-brd-bt-clr-default:before &#123;
   border-bottom-color: var(--in07-substrate-before-brd-color);
 &#125;
-.in-customization .Grn-palette .plt-brd-bt-clr-error:before &#123;
+.ipc-customization .Grn-palette .plt-brd-bt-clr-error:before &#123;
   border-bottom-color: var(--in07-error-color);
 &#125;
-.in-customization .Grn-palette .plt-brd-bt-clr-error:after &#123;
+.ipc-customization .Grn-palette .plt-brd-bt-clr-error:after &#123;
   border-bottom-color: var(--in07-error-color);
 &#125;
-.in-customization .Grn-palette .plt-brd-bt-clr-mouse-error:before &#123;
+.ipc-customization .Grn-palette .plt-brd-bt-clr-mouse-error:before &#123;
   border-bottom-color: var(--in07-error-hover-color);
 &#125;
-.in-customization .Grn-palette .plt-brd-bt-clr-mouse:before &#123;
+.ipc-customization .Grn-palette .plt-brd-bt-clr-mouse:before &#123;
   border-bottom-color: var(--in07-default-color);
 &#125;
-.in-customization .Grn-palette .plt-brd-bt-clr-focused:after &#123;
+.ipc-customization .Grn-palette .plt-brd-bt-clr-focused:after &#123;
   border-bottom-color: var(--in07-focused-color);
 &#125;
-.in-customization .Grn-palette .plt-brd-bt-clr-disabled:before &#123;
+.ipc-customization .Grn-palette .plt-brd-bt-clr-disabled:before &#123;
   border-bottom-color: var(--in07-substrate-before-brd-color);
 &#125;</pre>
       </mat-tab>

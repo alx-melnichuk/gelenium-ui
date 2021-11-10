@@ -46,8 +46,6 @@ export class InputBorderRadiusComponent implements OnInit {
   public borderRadius = 50;
 
   public exterior09 = 'outlined';
-  // public exterior09 = 'underline';
-  // public exterior09 = 'standard';
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

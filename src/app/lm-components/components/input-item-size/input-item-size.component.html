@@ -1,7 +1,7 @@
 <div class="in-section">
   <h3>Item size.</h3>
   <p>
-    This element has the ability to change its height.
+    You can change the height of the element.
     This requires adding one of the following attributes:
   </p>
   <ul>
@@ -13,6 +13,28 @@
     <li>"szHuge" - sets the height to 68px;</li>
   </ul>
   <p>
+    For internal calculations, the value of the "--gfi-base-size" css variable of the "grn-frame-input" 
+    css-style is determined, which contains the height of the element.
+    The value of this css variable is determined according to the size attribute "szXXX".
+    It looks like this:
+  </p>
+  <pre>
+    grn-frame-input &#123;
+      --gfi-sz-short: 38px;
+      --gfi-sz-small: 44px;
+      --gfi-sz-middle: 50px;
+      --gfi-sz-wide: 56px;
+      --gfi-sz-large: 62px;
+      --gfi-sz-huge: 68px;
+    
+      &.gfi-size-short  &#123; --gfi-base-size: var(--gfi-sz-short); &#125;
+      &.gfi-size-small  &#123; --gfi-base-size: var(--gfi-sz-small); &#125;
+      &.gfi-size-middle &#123; --gfi-base-size: var(--gfi-sz-middle); &#125;
+      &.gfi-size-wide   &#123; --gfi-base-size: var(--gfi-sz-wide); &#125;
+      &.gfi-size-large  &#123; --gfi-base-size: var(--gfi-sz-large); &#125;
+      &.gfi-size-huge   &#123; --gfi-base-size: var(--gfi-sz-huge); &#125;
+    &#125;</pre>
+  <p>
     In order to hide the label (legend), add the "hiddenLabel" attribute.
   </p>
   <p>
@@ -20,6 +42,10 @@
     The size of the font can be defined with the css-style for the "grn-input" tag.
     In the example, this is implemented with the styles "iis-fn-sz-large" and "iis-fn-sz-huge".
     We can change the font size at the grn-input tag level, but the element itself will not change the height.
+  </p>
+  <p>
+    The height of the element remains the same even when the font size is changed
+    (from font-size: 10px to font-size: 26px).
   </p>
 </div>
 
@@ -157,7 +183,7 @@
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
         <pre class="in-fw-nr">
-&lt;form class="in-section" [formGroup]="formGroup04" novalidate&gt;
+&lt;form [formGroup]="formGroup04" novalidate&gt;
 
   &lt;div class="in-item iis-row iis-text"&gt;
     &lt;span&gt;Item height: 38px; font-size: 16px;&lt;/span&gt;
