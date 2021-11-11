@@ -102,7 +102,7 @@ export function PropertyChange2<T = any>(callback: (value: T, simpleChange?: Pro
 /*
 export class AppComponent {
   @PropertyChange2<string>(function (value, simpleChange) {
-      console.log(`title is changed to: ${value}`);
+    console .log(`title is changed to: ${value}`);
   })
   @Input()
   title: string;

@@ -257,10 +257,6 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
     return result;
   }
 
-  public doClickFrame(): void {
-    console.log('doClickFrame()');
-  }
-
   // ** Private API **
 
   private prepareFormGroup(isRequiredVal: boolean, minLength: number, maxLength: number): void {

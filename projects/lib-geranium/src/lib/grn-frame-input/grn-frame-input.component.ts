@@ -47,17 +47,15 @@ export class GrnFrameInputComponent implements OnInit {
   @Input()
   public frameSize: FrameSize | null = null;
 
-  @Output()
-  readonly clickFrame: EventEmitter<void> = new EventEmitter();
-
   @HostBinding('class.Grn-palette')
   public get getGrnPalette(): boolean {
     return true;
   }
 
-  @HostBinding('class')
-  public get getClass(): string | null {
-    return 'gfi-size-' + this.getFrameSizeMode(this.frameSize);
+  @HostBinding('style')
+  public get getStyle(): string | null {
+    const value = this.getValueByFrameSize(this.frameSize);
+    return value != null ? '--gfi-base-size: ' + value + 'px;' : '';
   }
 
   public get isOutlinedExterior(): boolean {
@@ -82,12 +80,6 @@ export class GrnFrameInputComponent implements OnInit {
   @HostListener('mouseleave')
   public eventMouseLeave(): void {
     this.isMouseEnter = false;
-  }
-
-  @HostListener('click')
-  public eventClickFrame(): void {
-    console.log();
-    this.clickFrame.emit();
   }
 
   ngOnInit(): void {
@@ -148,26 +140,26 @@ export class GrnFrameInputComponent implements OnInit {
     return result;
   }
 
-  public getFrameSizeMode(frameSize: FrameSize | null): string {
-    let result = 'wide';
+  public getValueByFrameSize(frameSize: FrameSize | null): number | null {
+    let result: number | null = null;
     switch (frameSize) {
       case FrameSize.sizeShort:
-        result = 'short';
+        result = 38;
         break;
       case FrameSize.sizeSmall:
-        result = 'small';
+        result = 44;
         break;
       case FrameSize.sizeMiddle:
-        result = 'middle';
+        result = 50;
         break;
       case FrameSize.sizeWide:
-        result = 'wide';
+        result = 56;
         break;
       case FrameSize.sizeLarge:
-        result = 'large';
+        result = 62;
         break;
       case FrameSize.sizeHuge:
-        result = 'huge';
+        result = 68;
         break;
     }
     return result;

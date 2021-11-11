@@ -13,27 +13,9 @@
     <li>"szHuge" - sets the height to 68px;</li>
   </ul>
   <p>
-    For internal calculations, the value of the "--gfi-base-size" css variable of the "grn-frame-input" 
-    css-style is determined, which contains the height of the element.
-    The value of this css variable is determined according to the size attribute "szXXX".
-    It looks like this:
+    The size of the element's height is set in the "&#8209;&#8209;gfi&#8209;base-size" ccc variable in accordance with the "szXXX" size attribute.
+    All padding and offset calculations are determined by the value of this variable and the font size.
   </p>
-  <pre>
-    grn-frame-input &#123;
-      --gfi-sz-short: 38px;
-      --gfi-sz-small: 44px;
-      --gfi-sz-middle: 50px;
-      --gfi-sz-wide: 56px;
-      --gfi-sz-large: 62px;
-      --gfi-sz-huge: 68px;
-    
-      &.gfi-size-short  &#123; --gfi-base-size: var(--gfi-sz-short); &#125;
-      &.gfi-size-small  &#123; --gfi-base-size: var(--gfi-sz-small); &#125;
-      &.gfi-size-middle &#123; --gfi-base-size: var(--gfi-sz-middle); &#125;
-      &.gfi-size-wide   &#123; --gfi-base-size: var(--gfi-sz-wide); &#125;
-      &.gfi-size-large  &#123; --gfi-base-size: var(--gfi-sz-large); &#125;
-      &.gfi-size-huge   &#123; --gfi-base-size: var(--gfi-sz-huge); &#125;
-    &#125;</pre>
   <p>
     In order to hide the label (legend), add the "hiddenLabel" attribute.
   </p>

@@ -4,16 +4,18 @@
     It is possible to add a different ornament (picture or text) for the input line.
     It will appear as a prefix or suffix for the input string.
     You can define the reaction to pressing an element of the ornament.
-    <br/>To add a prefix, you need to add a tag with the "grnOrnament" attribute inside the "grn-input" tag. (&lt;span grnOrnament&gt;kg&lt;/span&gt;)
-    <br/>To add a suffix, you need to add a tag with the "grnOrnamentEnd" attribute inside the "grn-input" tag. (&lt;span grnOrnamentEnd&gt;cm&lt;/span&gt;)
-    <br/>Adding a prefix or suffix turns off the animation of the legend for this input field.
+    <br />To add a prefix, you need to add a tag with the "grnOrnament" attribute inside the "grn-input" tag. (&lt;span
+    grnOrnament&gt;kg&lt;/span&gt;)
+    <br />To add a suffix, you need to add a tag with the "grnOrnamentEnd" attribute inside the "grn-input" tag.
+    (&lt;span grnOrnamentEnd&gt;cm&lt;/span&gt;)
+    <br />Adding a prefix or suffix turns off the animation of the legend for this input field.
   </p>
   <p>For example:</p>
   <ul>
     <li>you can use the prefix "kg" to enter the weight value;</li>
     <li>you can use the "cm" suffix to enter the height value;</li>
     <li>you can use the button with the icon to display the password;</li>
-  </ul>      
+  </ul>
 </div>
 
 <div class="in-section">
@@ -25,75 +27,26 @@
   </mat-button-toggle-group>
 </div>
 
-<style>
-  .in-ornament .in-btn-eye {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    background-color: transparent;
-    outline: 0;
-    border: 0;
-    margin: 0;
-    cursor: pointer;
-    user-select: none;
-    vertical-align: middle;
-    flex: 0 0 auto;
-    font-size: 1.5rem;
-    padding: 8px;
-    border-radius: 50%;
-    overflow: visible;
-    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  }
-  .in-ornament .in-btn-eye:hover { background-color: rgba(0, 0, 0, 0.04); }
-  .in-ornament .in-btn-eye.press-right { margin-right: -12px; }
-  .in-ornament .in-btn-eye.press-left { margin-left: -12px; }
 
-  .in-ornament .in-icon-eye {
-    background: center no-repeat;
-    user-select: none;
-    width: 1em;
-    height: 1em;
-    display: inline-block;
-    font-size: 1.5rem;
-    flex-shrink: 0;
-    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  }
-  .in-ornament .in-icon-eye:not(.crossed) { background-image: url('/assets/icons/Eye.svg'); }
-  .in-ornament .in-icon-eye.crossed { background-image: url('/assets/icons/EyeCrossed.svg'); }
-
-  .in-ornament .in-passwd-size input[type="password"].gi-input { font-size: 20px; }
-</style>
-  
 <form class="in-section in-ornament" [formGroup]="formGroup08" novalidate>
 
   <div>
-    <grn-input class="in-item" formControlName="input08a"
-      label="Enter the mass"
-      helperText="The value is greater than zero."
-      autoComplete="off"
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null">
+    <grn-input class="in-item" formControlName="input08a" label="Enter the mass"
+      helperText="The value is greater than zero." autoComplete="off"
+      [exterOutlined]="exterior08==='outlined' ? '':null" [exterUnderline]="exterior08==='underline' ? '':null">
       <span grnOrnament>kg</span>
     </grn-input>
-    
-    <grn-input class="in-item" formControlName="input08b"
-      label="Enter the height" autoComplete="off"
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null">
+
+    <grn-input class="in-item" formControlName="input08b" label="Enter the height" autoComplete="off"
+      [exterOutlined]="exterior08==='outlined' ? '':null" [exterUnderline]="exterior08==='underline' ? '':null">
       <span grnOrnamentEnd>см</span>
     </grn-input>
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input08c"
-      label="Enter the number in words"
-      isRequired
-      minLength="{{ minLength08 }}"
-      maxLength="{{ maxLength08 }}"
-      autoComplete="off"
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null"
+    <grn-input class="in-item" formControlName="input08c" label="Enter the number in words" isRequired
+      minLength="{{ minLength08 }}" maxLength="{{ maxLength08 }}" autoComplete="off"
+      [exterOutlined]="exterior08==='outlined' ? '':null" [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="{{
         (controls08.input08c.errors?.required ? 'Required field.':
           (controls08.input08c.errors?.minlength ? 'Minimum length ' + controls08.input08c.errors?.minlength.requiredLength + ' characters.':
@@ -104,14 +57,9 @@
       <span grnOrnament>$</span>
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input08d"
-      label="Enter the number in words"
-      isRequired
-      minLength="{{ minLength08 }}"
-      maxLength="{{ maxLength08 }}"
-      autoComplete="off"
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null"
+    <grn-input class="in-item" formControlName="input08d" label="Enter the number in words" isRequired
+      minLength="{{ minLength08 }}" maxLength="{{ maxLength08 }}" autoComplete="off"
+      [exterOutlined]="exterior08==='outlined' ? '':null" [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="{{
         (controls08.input08d.errors?.required ? 'Required field.':
           (controls08.input08d.errors?.minlength ? 'Minimum length ' + controls08.input08d.errors?.minlength.requiredLength + ' characters.':
@@ -124,13 +72,9 @@
   </div>
 
   <div>
-    <grn-input class="in-item in-passwd-size"
-      formControlName="input08e" label="Enter password"
-      [type]="isBtnEyeCrossed08e ? 'text':'password'"
-      isRequired
-      autoComplete="off"
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null"
+    <grn-input class="in-item in-passwd-size" formControlName="input08e" label="Enter password"
+      [type]="isBtnEyeCrossed08e ? 'text':'password'" isRequired autoComplete="off"
+      [exterOutlined]="exterior08==='outlined' ? '':null" [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="{{
         (controls08.input08e.errors?.required ? 'The password value is required.':'Enter the password value.') 
       }}">
@@ -138,15 +82,10 @@
         <span [ngClass]="['in-icon-eye', (isBtnEyeCrossed08e ? 'crossed':'')]"></span>
       </button>
     </grn-input>
-    
-    <grn-input class="in-item in-passwd-size"
-      formControlName="input08f" label="Enter password"
-      
-      [type]="isBtnEyeCrossed08f ? 'text':'password'"
-      isRequired
-      autoComplete="off"
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null"
+
+    <grn-input class="in-item in-passwd-size" formControlName="input08f" label="Enter password"
+      [type]="isBtnEyeCrossed08f ? 'text':'password'" isRequired autoComplete="off"
+      [exterOutlined]="exterior08==='outlined' ? '':null" [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="{{
         (controls08.input08f.errors?.required ? 'The password value is required.':'Enter the password value.') 
       }}">
@@ -364,11 +303,37 @@ export class InputComponent &#123;
   flex-shrink: 0;
   transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 &#125;
+
 .in-ornament .in-icon-eye:not(.crossed) &#123;
-  background-image: url('/assets/icons/Eye.svg');
+  background-image: url("data:image/svg+xml,"
+  + "&lt;svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'"
+  + " viewBox='0 0 24 24' fill='rgb(0 0 0 / 54%)'&gt;"
+  + "&lt;path d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9"
+  + ".27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-"
+  + "5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1"
+  + ".34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/&gt;"
+  + "&lt;/svg&gt;");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 24px 24px;
 &#125;
 .in-ornament .in-icon-eye.crossed &#123;
-  background-image: url('/assets/icons/EyeCrossed.svg');
+  background-image: url("data:image/svg+xml,"
+  + "&lt;svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'"
+  + " viewBox='0 0 24 24' fill='rgb(0 0 0 / 54%)'&gt;"
+  + "&lt;path d='M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 "
+  + "2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0"
+  + "-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28"
+  + " 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1."
+  + "55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM"
+  + "7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22"
+  + " 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2."
+  + "24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78 3.15 3.15.02-.16c0-1.66-1"
+  + ".34-3-3-3l-.17.01z'/&gt;"
+  + "&lt;/svg&gt;");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 24px 24px;
 &#125;
 
 .in-ornament .in-passwd-size input[type="password"].gi-input &#123;

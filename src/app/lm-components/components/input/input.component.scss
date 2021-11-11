@@ -31,4 +31,47 @@ app-input {
   hr[br-tp] {
     border-top: 1px solid var(--app-root-border-color);
   }
+
+  .in-api-class-name {
+    margin-top: 28px;
+    margin-bottom: 0;
+    display: block;
+    font-weight: bold;
+    font-size: 20px;
+    background: none;
+  }
+  .in-break-word {
+    word-break: break-word;
+  }
+
+  .in-api-param {
+    background: rgba(0,0,0,.06);
+    padding: 3px;
+    margin-left: 3px;
+  }
+  table.in-api-tab {
+    border-collapse: collapse;
+    border: 1px solid rgba(0,0,0,.12);
+    tr {
+      border-top: 1px solid rgba(0,0,0,.12);
+    }
+    th, td {
+      &:not(:last-of-type) {
+        border-right: 1px solid rgba(0,0,0,.12);
+      }
+    }
+    th {
+      font-weight: 400;
+      max-width: 100px;
+      padding: 14px 16px;
+      text-align: left;
+      background: whitesmoke;
+    }
+    th, td {
+      padding: 8px 16px;
+    }
+  }
+  .in-ds-block {
+    display: block;
+  }
 }

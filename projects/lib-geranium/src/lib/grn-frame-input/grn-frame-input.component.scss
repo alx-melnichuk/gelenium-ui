@@ -64,12 +64,6 @@
 grn-frame-input { //outline: 1px dashed crimson;
   --gfi-line-height: 1.4375em;
   --gfi-border-width: 1px;
-  --gfi-sz-short: 38px;
-  --gfi-sz-small: 44px;
-  --gfi-sz-middle: 50px;
-  --gfi-sz-wide: 56px;
-  --gfi-sz-large: 62px;
-  --gfi-sz-huge: 68px;
   --gfi-legend-pd-lf-rg: 0.6ex; // 4.7px     0.6ex=3.8px  0.56ex=3.55px
 
   --gfi-outlined-border-radius: calc(var(--gfi-base-size)/10);
@@ -88,24 +82,6 @@ grn-frame-input { //outline: 1px dashed crimson;
   border: 0;
   vertical-align: top;
 
-  &.gfi-size-short {
-    --gfi-base-size: var(--gfi-sz-short);
-  }
-  &.gfi-size-small {
-    --gfi-base-size: var(--gfi-sz-small);
-  }
-  &.gfi-size-middle {
-    --gfi-base-size: var(--gfi-sz-middle);
-  }
-  &.gfi-size-wide {
-    --gfi-base-size: var(--gfi-sz-wide);
-  }
-  &.gfi-size-large {
-    --gfi-base-size: var(--gfi-sz-large);
-  }
-  &.gfi-size-huge {
-    --gfi-base-size: var(--gfi-sz-huge);
-  }
   // Section "Label".
   .gfi-label { // outline: 1px dashed green;
     // #!! font-family: "Roboto","Helvetica","Arial",sans-serif;    // #!! font-weight: 400;    // #!! font-size: 1em;    // line-height: 1.4375 em;
