@@ -1,0 +1,25 @@
+/*# sourceURL=app-infinite-scroll.component.scss */
+
+app-infinite-scroll {
+  display: block;
+
+  .is-item-wrap {
+    outline: 1px dashed blue;
+    height: 500px;
+    // overflow-y: scroll;
+  }
+  .is-items {
+    outline: 1px dashed green;
+    width: 400px;
+  }
+  .is-item-row {
+    display: flex;
+    padding: 10px 10px;
+  }
+  .is-label {
+    flex-basis: 100px;
+  }
+  .is-value {
+    flex-grow: 1;
+  }
+}

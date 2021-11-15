@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { UrlItem, URL_COMPONENTS, URL_INPUT, URL_SELECT } from './lm-components.interface';
+import { UrlItem, URL_COMPONENTS, URL_INFINITE_SCROLL, URL_INPUT } from './lm-components.interface';
 
 @Component({
   selector: 'app-lm-components',
@@ -10,7 +10,7 @@ import { UrlItem, URL_COMPONENTS, URL_INPUT, URL_SELECT } from './lm-components.
 })
 export class LmComponentsComponent implements OnInit {
   public inputUrlList: UrlItem[] = this.createInputUrlList();
-
+  public infiniteScroll: UrlItem[] = [this.createUrlItem('InfiniteScroll', '/' + URL_COMPONENTS + '/' + URL_INFINITE_SCROLL + '#Main')];
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method, @typescript-eslint/no-empty-function
@@ -18,27 +18,24 @@ export class LmComponentsComponent implements OnInit {
 
   // ** Private API **
 
+  private createUrlItem(label: string, url: string): UrlItem {
+    return { label, url } as UrlItem;
+  }
+
   private createInputUrlList(): UrlItem[] {
     const result: UrlItem[] = [];
     const urlInput = '/' + URL_COMPONENTS + '/' + URL_INPUT;
-    result.push({ label: 'Basic', url: urlInput + '#Basic' } as UrlItem);
-    result.push({ label: 'Attributes', url: urlInput + '#Attributes' } as UrlItem);
-    result.push({ label: 'Validation', url: urlInput + '#Validation' } as UrlItem);
-    result.push({ label: 'Item Size', url: urlInput + '#ItemSize' } as UrlItem);
-    result.push({ label: 'Numerical Value', url: urlInput + '#NumericalValue' } as UrlItem);
-    result.push({ label: 'Helper Text', url: urlInput + '#HelperText' } as UrlItem);
-    result.push({ label: 'Palette Customization', url: urlInput + '#PaletteCustomization' } as UrlItem);
-    result.push({ label: 'Ornaments', url: urlInput + '#Ornaments' } as UrlItem);
-    result.push({ label: 'Border Radius', url: urlInput + '#BorderRadius' } as UrlItem);
+    result.push(this.createUrlItem('Basic', urlInput + '#Basic'));
+    result.push(this.createUrlItem('Attributes', urlInput + '#Attributes'));
+    result.push(this.createUrlItem('Validation', urlInput + '#Validation'));
+    result.push(this.createUrlItem('Item Size', urlInput + '#ItemSize'));
+    result.push(this.createUrlItem('Numerical Value', urlInput + '#NumericalValue'));
+    result.push(this.createUrlItem('Helper Text', urlInput + '#HelperText'));
+    result.push(this.createUrlItem('Palette Customization', urlInput + '#PaletteCustomization'));
+    result.push(this.createUrlItem('Ornaments', urlInput + '#Ornaments'));
+    result.push(this.createUrlItem('Border Radius', urlInput + '#BorderRadius'));
     // result.push({ label: '', url: urlInput + '#' } as UrlItem);
 
     return result;
   }
-
-  // private createUrlList(): UrlItem[] {
-  //   const result = [];
-  //   result.push({ label: 'Input', url: '/' + URL_COMPONENTS + '/' + URL_INPUT } as UrlItem);
-  //   result.push({ label: 'Select', url: '/' + URL_COMPONENTS + '/' + URL_SELECT } as UrlItem);
-  //   return result;
-  // }
 }

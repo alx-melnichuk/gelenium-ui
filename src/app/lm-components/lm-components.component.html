@@ -10,9 +10,19 @@
       </mat-expansion-panel-header>
       <ul class="lcm-ul">
         <li class="lcm-li" *ngFor="let urlItem of inputUrlList">
-          <!-- <a class="lcm-li-href" [routerLink]="[urlItem.url + '#demo1']" [routerLinkActive]="['lcm-li-active']">
-            {{ urlItem.label }}
-          </a> -->
+          <!-- <a class="lcm-li-href" [routerLink]="[urlItem.url + '#demo1']" [routerLinkActive]="['lcm-li-active']">{{ urlItem.label }}</a> -->
+          <a class="lcm-li-href" [href]="urlItem.url">{{ urlItem.label }}</a>
+        </li>
+      </ul>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Iinfinite Scroll
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul class="lcm-ul">
+        <li class="lcm-li" *ngFor="let urlItem of infiniteScroll">
           <a class="lcm-li-href" [href]="urlItem.url">{{ urlItem.label }}</a>
         </li>
       </ul>
