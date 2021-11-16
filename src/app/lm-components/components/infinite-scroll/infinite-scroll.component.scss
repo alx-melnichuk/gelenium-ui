@@ -3,23 +3,11 @@
 app-infinite-scroll {
   display: block;
 
-  .is-item-wrap {
-    outline: 1px dashed blue;
-    height: 500px;
-    // overflow-y: scroll;
+  .is-section {
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
-  .is-items {
-    outline: 1px dashed green;
-    width: 400px;
-  }
-  .is-item-row {
-    display: flex;
-    padding: 10px 10px;
-  }
-  .is-label {
-    flex-basis: 100px;
-  }
-  .is-value {
-    flex-grow: 1;
+  pre.is-fw-nr b {
+    font-weight: normal;
   }
 }

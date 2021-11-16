@@ -1,34 +1,17 @@
 <h3>Component: "GrnInfiniteScroll"</h3>
 
+<section *ngIf="!showNum || showNum==='01'" id="Basic">
+  <app-infinite-scroll-basic></app-infinite-scroll-basic>
+  <hr br-tp>
+</section>
+
+<section *ngIf="!showNum || showNum==='02'" id="Optional">
+  <app-infinite-scroll-optional></app-infinite-scroll-optional>
+  <hr br-tp>
+</section>
+
+
 <section id="Main">
 
-  <p>infinite-scroll works!</p>
-  <!-- <app-infinite-scroll (scrolled)="onScroll()"></app-infinite-scroll> -->
-  <div class="is-item-wrap">
-    <grn-infinite-scroll (scrolled)="doScroll()" style="overflow-y: scroll; height: 100%;">
-      <div class="is-items" *ngFor="let item of list; trackBy: trackByIdFn">
-        <div class="is-item-row">
-          <span class="is-label">name</span>
-          <span class="is-value">{{ item.name }}</span>
-        </div>
-        <div class="is-item-row">
-          <span class="is-label">surname</span>
-          <span class="is-value">{{ item.surname }}</span>
-        </div>
-        <div class="is-item-row">
-          <span class="is-label">email</span>
-          <span class="is-value">{{ item.email }}</span>
-        </div>
-        <div class="is-item-row">
-          <span class="is-label">city</span>
-          <span class="is-value">{{ item.city }}</span>
-        </div>
-        <div class="is-item-row">
-          <span class="is-label">phone</span>
-          <span class="is-value">{{ item.phone }}</span>
-        </div>
-      </div>
-    </grn-infinite-scroll>
-  </div>
 
 </section>

@@ -10,7 +10,8 @@ import { UrlItem, URL_COMPONENTS, URL_INFINITE_SCROLL, URL_INPUT } from './lm-co
 })
 export class LmComponentsComponent implements OnInit {
   public inputUrlList: UrlItem[] = this.createInputUrlList();
-  public infiniteScroll: UrlItem[] = [this.createUrlItem('InfiniteScroll', '/' + URL_COMPONENTS + '/' + URL_INFINITE_SCROLL + '#Main')];
+  public infiniteScrollUrlList: UrlItem[] = this.createInfiniteScrollUrlList();
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method, @typescript-eslint/no-empty-function
@@ -24,18 +25,24 @@ export class LmComponentsComponent implements OnInit {
 
   private createInputUrlList(): UrlItem[] {
     const result: UrlItem[] = [];
-    const urlInput = '/' + URL_COMPONENTS + '/' + URL_INPUT;
-    result.push(this.createUrlItem('Basic', urlInput + '#Basic'));
-    result.push(this.createUrlItem('Attributes', urlInput + '#Attributes'));
-    result.push(this.createUrlItem('Validation', urlInput + '#Validation'));
-    result.push(this.createUrlItem('Item Size', urlInput + '#ItemSize'));
-    result.push(this.createUrlItem('Numerical Value', urlInput + '#NumericalValue'));
-    result.push(this.createUrlItem('Helper Text', urlInput + '#HelperText'));
-    result.push(this.createUrlItem('Palette Customization', urlInput + '#PaletteCustomization'));
-    result.push(this.createUrlItem('Ornaments', urlInput + '#Ornaments'));
-    result.push(this.createUrlItem('Border Radius', urlInput + '#BorderRadius'));
-    // result.push({ label: '', url: urlInput + '#' } as UrlItem);
+    const url = '/' + URL_COMPONENTS + '/' + URL_INPUT;
+    result.push(this.createUrlItem('Basic', url + '#Basic'));
+    result.push(this.createUrlItem('Attributes', url + '#Attributes'));
+    result.push(this.createUrlItem('Validation', url + '#Validation'));
+    result.push(this.createUrlItem('Item Size', url + '#ItemSize'));
+    result.push(this.createUrlItem('Numerical Value', url + '#NumericalValue'));
+    result.push(this.createUrlItem('Helper Text', url + '#HelperText'));
+    result.push(this.createUrlItem('Palette Customization', url + '#PaletteCustomization'));
+    result.push(this.createUrlItem('Ornaments', url + '#Ornaments'));
+    result.push(this.createUrlItem('Border Radius', url + '#BorderRadius'));
+    return result;
+  }
 
+  private createInfiniteScrollUrlList(): UrlItem[] {
+    const result: UrlItem[] = [];
+    const url = '/' + URL_COMPONENTS + '/' + URL_INFINITE_SCROLL;
+    result.push(this.createUrlItem('Basic', url + '#Basic'));
+    result.push(this.createUrlItem('Optional', url + '#Optional'));
     return result;
   }
 }

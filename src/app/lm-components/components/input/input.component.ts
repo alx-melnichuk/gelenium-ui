@@ -15,8 +15,4 @@ export class InputComponent implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {}
-
-  // ** Public API **
-
-  // ** Private API **
 }

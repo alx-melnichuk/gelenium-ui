@@ -22,7 +22,7 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ul class="lcm-ul">
-        <li class="lcm-li" *ngFor="let urlItem of infiniteScroll">
+        <li class="lcm-li" *ngFor="let urlItem of infiniteScrollUrlList">
           <a class="lcm-li-href" [href]="urlItem.url">{{ urlItem.label }}</a>
         </li>
       </ul>
