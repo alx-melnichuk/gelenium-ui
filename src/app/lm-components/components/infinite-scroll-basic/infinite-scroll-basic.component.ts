@@ -53,7 +53,6 @@ export class InfiniteScrollBasicComponent {
   }
 
   public doScroll(): void {
-    console.log('doScroll()');
     this.isLoading = true;
     setTimeout(() => {
       this.elements1.push(...this.createElementList(CN_CNT));

@@ -2,7 +2,7 @@
   <div class="lcm-item">Components</div>
 
   <mat-accordion>
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="expandedInput">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Input
@@ -15,10 +15,10 @@
         </li>
       </ul>
     </mat-expansion-panel>
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="expandedInfiniteScroll">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Iinfinite Scroll
+          Infinite Scroll
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ul class="lcm-ul">

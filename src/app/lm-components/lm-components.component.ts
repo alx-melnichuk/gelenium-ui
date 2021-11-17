@@ -9,11 +9,16 @@ import { UrlItem, URL_COMPONENTS, URL_INFINITE_SCROLL, URL_INPUT } from './lm-co
   encapsulation: ViewEncapsulation.None,
 })
 export class LmComponentsComponent implements OnInit {
+  public expandedInput = false;
   public inputUrlList: UrlItem[] = this.createInputUrlList();
+  public expandedInfiniteScroll = false;
   public infiniteScrollUrlList: UrlItem[] = this.createInfiniteScrollUrlList();
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor() {
+    this.updateStatusExpandedByPathname();
+  }
+
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method, @typescript-eslint/no-empty-function
   ngOnInit(): void {}
 
@@ -23,9 +28,13 @@ export class LmComponentsComponent implements OnInit {
     return { label, url } as UrlItem;
   }
 
+  private getPathInput(): string {
+    return '/' + URL_COMPONENTS + '/' + URL_INPUT;
+  }
+
   private createInputUrlList(): UrlItem[] {
     const result: UrlItem[] = [];
-    const url = '/' + URL_COMPONENTS + '/' + URL_INPUT;
+    const url = this.getPathInput();
     result.push(this.createUrlItem('Basic', url + '#Basic'));
     result.push(this.createUrlItem('Attributes', url + '#Attributes'));
     result.push(this.createUrlItem('Validation', url + '#Validation'));
@@ -38,11 +47,21 @@ export class LmComponentsComponent implements OnInit {
     return result;
   }
 
+  private getPathInfiniteScroll(): string {
+    return '/' + URL_COMPONENTS + '/' + URL_INFINITE_SCROLL;
+  }
+
   private createInfiniteScrollUrlList(): UrlItem[] {
     const result: UrlItem[] = [];
-    const url = '/' + URL_COMPONENTS + '/' + URL_INFINITE_SCROLL;
+    const url = this.getPathInfiniteScroll();
     result.push(this.createUrlItem('Basic', url + '#Basic'));
     result.push(this.createUrlItem('Optional', url + '#Optional'));
     return result;
+  }
+
+  private updateStatusExpandedByPathname(): void {
+    const pathname = location.pathname;
+    this.expandedInput = pathname.startsWith(this.getPathInput());
+    this.expandedInfiniteScroll = pathname.startsWith(this.getPathInfiniteScroll());
   }
 }
