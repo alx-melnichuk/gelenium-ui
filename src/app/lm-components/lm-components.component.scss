@@ -60,5 +60,51 @@ app-lm-components {
   .mat-expansion-panel-header.mat-expanded {
     height: 48px;
   }
+
+
+  .lc-api-class {
+    margin-top: 28px;
+    margin-bottom: 0;
+    display: block;
+    font-weight: bold;
+    font-size: 20px;
+    background: none;
+  }
+  .lc-brk-wrd {
+    word-break: break-word;
+  }
+  .lc-api-param {
+    background: rgba(0,0,0,.06);
+    padding: 3px;
+    margin-left: 3px;
+  }
+  table.lc-api-tab {
+    border-collapse: collapse;
+    border: 1px solid rgba(0,0,0,.12);
+    tr {
+      border-top: 1px solid rgba(0,0,0,.12);
+    }
+    th, td {
+      &:not(:last-of-type) {
+        border-right: 1px solid rgba(0,0,0,.12);
+      }
+    }
+    th {
+      font-weight: 400;
+      max-width: 100px;
+      text-align: left;
+      background: whitesmoke;
+    }
+    th, td {
+      padding: 8px 16px;
+      code {
+        display: block;
+      }
+    }
+  }
+  .lc-ds-blc {
+    display: block;
+  }
+
 }
 

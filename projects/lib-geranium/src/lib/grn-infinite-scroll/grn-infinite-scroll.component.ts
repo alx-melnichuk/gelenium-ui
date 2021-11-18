@@ -14,6 +14,7 @@ import {
 
 @Component({
   selector: 'grn-infinite-scroll',
+  exportAs: 'grnInfiniteScroll',
   templateUrl: './grn-infinite-scroll.component.html',
   styleUrls: ['./grn-infinite-scroll.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -24,7 +25,7 @@ export class GrnInfiniteScrollComponent implements AfterViewInit, OnInit, OnDest
   public options: IntersectionObserverInit = {};
 
   @Output()
-  readonly scrolled = new EventEmitter();
+  readonly scrolled: EventEmitter<void> = new EventEmitter();
 
   @ViewChild('anchor')
   public anchor: ElementRef<HTMLElement> | undefined;

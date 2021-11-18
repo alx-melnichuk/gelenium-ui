@@ -18,6 +18,7 @@ import { InputHelperTextModule } from '../input-helper-text/input-helper-text.mo
 import { InputPaletteCustomizationModule } from '../input-palette-customization/input-palette-customization.module';
 import { InputOrnamentsModule } from '../input-ornaments/input-ornaments.module';
 import { InputBorderRadiusModule } from '../input-border-radius/input-border-radius.module';
+import { InputApiModule } from '../input-api/input-api.module';
 
 @NgModule({
   declarations: [InputComponent],
@@ -38,6 +39,7 @@ import { InputBorderRadiusModule } from '../input-border-radius/input-border-rad
     InputPaletteCustomizationModule,
     InputOrnamentsModule,
     InputBorderRadiusModule,
+    InputApiModule,
   ],
 })
 export class InputModule {}

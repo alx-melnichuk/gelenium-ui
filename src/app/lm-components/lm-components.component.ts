@@ -44,6 +44,7 @@ export class LmComponentsComponent implements OnInit {
     result.push(this.createUrlItem('Palette Customization', url + '#PaletteCustomization'));
     result.push(this.createUrlItem('Ornaments', url + '#Ornaments'));
     result.push(this.createUrlItem('Border Radius', url + '#BorderRadius'));
+    result.push(this.createUrlItem('Api', url + '#Api'));
     return result;
   }
 
@@ -56,6 +57,7 @@ export class LmComponentsComponent implements OnInit {
     const url = this.getPathInfiniteScroll();
     result.push(this.createUrlItem('Basic', url + '#Basic'));
     result.push(this.createUrlItem('Optional', url + '#Optional'));
+    result.push(this.createUrlItem('Api', url + '#Api'));
     return result;
   }
 

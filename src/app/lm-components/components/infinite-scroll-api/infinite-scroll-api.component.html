@@ -1,0 +1,44 @@
+<div id="Api" class="lc-api-class">
+  <code>GrnInfiniteScroll</code>
+</div>
+<p class="lc-brk-wrd">
+  <span>Selector:</span>
+  <span class="lc-api-param">grn-infinite-scroll</span>
+</p>
+<p class="lc-brk-wrd">
+  <span>Exported as:</span>
+  <span class="lc-api-param">grnInfiniteScroll</span>
+</p>
+
+<h4>Properties</h4>
+
+<table class="lc-api-tab">
+  <tbody>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>options: IntersectionObserverInit;</code>
+      </td>
+      <td>
+        <span>Parameter dictionary for initializing IntersectionObserver. Optional.
+          <br />(default = &#123;&#125;;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>scrolled: EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>When this event occurs, it is required to get a new chunk of data for the list.</span>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

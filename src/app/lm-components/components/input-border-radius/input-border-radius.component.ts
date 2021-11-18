@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSliderChange } from '@angular/material/slider';
 
@@ -19,7 +19,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputBorderRadiusComponent implements OnInit {
+export class InputBorderRadiusComponent {
   @Input()
   public labelShowSource = CN_LABEL_SHOW_SOURCE;
   @Input()
@@ -54,9 +54,6 @@ export class InputBorderRadiusComponent implements OnInit {
   public get getClass(): string | null {
     return '--ibr-border-radius: ' + this.borderRadius + ';';
   }
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function, @angular-eslint/no-empty-lifecycle-method
-  ngOnInit(): void {}
 
   public inputBorderRadius(event: MatSliderChange): void {
     if (!!event && event.value != null) {

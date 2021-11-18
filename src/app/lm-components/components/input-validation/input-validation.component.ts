@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { CN_LABEL_CSS, CN_LABEL_HTML, CN_LABEL_SHOW_SOURCE, CN_LABEL_TS } from '../constants';
@@ -10,7 +10,7 @@ import { CN_LABEL_CSS, CN_LABEL_HTML, CN_LABEL_SHOW_SOURCE, CN_LABEL_TS } from '
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputValidationComponent implements OnInit {
+export class InputValidationComponent {
   @Input()
   public labelShowSource = CN_LABEL_SHOW_SOURCE;
   @Input()
@@ -31,7 +31,4 @@ export class InputValidationComponent implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function, @angular-eslint/no-empty-lifecycle-method
-  ngOnInit(): void {}
 }

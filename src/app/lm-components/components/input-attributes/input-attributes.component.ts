@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {
@@ -18,7 +18,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputAttributesComponent implements OnInit {
+export class InputAttributesComponent {
   @Input()
   public labelShowSource = CN_LABEL_SHOW_SOURCE;
   @Input()
@@ -47,7 +47,4 @@ export class InputAttributesComponent implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function, @angular-eslint/no-empty-lifecycle-method
-  ngOnInit(): void {}
 }
