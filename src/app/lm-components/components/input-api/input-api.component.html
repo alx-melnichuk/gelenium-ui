@@ -34,7 +34,8 @@
         <code>type: string;</code>
       </td>
       <td>
-        <span>The type of the native input element.<br />(default = InputType.text.valueOf();)</span>
+        <span>The type of the native input element.<br />(default =
+          InputType.text.valueOf();)</span>
       </td>
     </tr>
     <tr>
@@ -52,7 +53,8 @@
         <code>exterOutlined: string | null;</code>
       </td>
       <td>
-        <span>Changes the appearance of the element to "Outlined" mode.<br />Attribute (no content).</span>
+        <span>Changes the appearance of the element to "Outlined" mode.<br />Attribute (no
+          content).</span>
       </td>
     </tr>
     <tr>
@@ -61,7 +63,8 @@
         <code>exterUnderline: string | null;</code>
       </td>
       <td>
-        <span>Changes the appearance of the element to "Underline" mode.<br />Attribute (no content).</span>
+        <span>Changes the appearance of the element to "Underline" mode.<br />Attribute (no
+          content).</span>
       </td>
     </tr>
     <tr>
@@ -70,7 +73,8 @@
         <code>exterStandard: string | null;</code>
       </td>
       <td>
-        <span>Changes the appearance of the element to "Standard" mode. Default.<br />Attribute (no content).</span>
+        <span>Changes the appearance of the element to "Standard" mode. Default.<br />Attribute (no
+          content).</span>
       </td>
     </tr>
     <tr>
@@ -106,7 +110,8 @@
         <code>lbShrink: string | null;</code>
       </td>
       <td>
-        <span>Disable label animation. The label is always static, at the top.<br />Attribute (no content).</span>
+        <span>Disable label animation. The label is always static, at the top.<br />Attribute (no
+          content).</span>
       </td>
     </tr>
     <tr>
@@ -115,7 +120,8 @@
         <code>szShort: string | null;</code>
       </td>
       <td>
-        <span>Changes the size of the element in "szShort" mode (height: 38px).<br />Attribute (no content).</span>
+        <span>Changes the size of the element in "szShort" mode (height: 38px).<br />Attribute (no
+          content).</span>
       </td>
     </tr>
     <tr>
@@ -124,7 +130,8 @@
         <code>szSmall: string | null;</code>
       </td>
       <td>
-        <span>Changes the size of the element in "szSmall" mode (height: 44px).<br />Attribute (no content).</span>
+        <span>Changes the size of the element in "szSmall" mode (height: 44px).<br />Attribute (no
+          content).</span>
       </td>
     </tr>
     <tr>
@@ -133,7 +140,8 @@
         <code>szMiddle: string | null;</code>
       </td>
       <td>
-        <span>Changes the size of the element in "szMiddle" mode (height: 50px).<br />Attribute (no content).</span>
+        <span>Changes the size of the element in "szMiddle" mode (height: 50px).<br />Attribute (no
+          content).</span>
       </td>
     </tr>
     <tr>
@@ -142,7 +150,8 @@
         <code>szNormal: string | null;</code>
       </td>
       <td>
-        <span>Changes the size of the element in "szNormal" mode (height: 56px). Default.<br />Attribute (no
+        <span>Changes the size of the element in "szNormal" mode (height: 56px).
+          Default.<br />Attribute (no
           content).</span>
       </td>
     </tr>
@@ -152,7 +161,8 @@
         <code>szLarge: string | null;</code>
       </td>
       <td>
-        <span>Changes the size of the element in "szLarge" mode (height: 62px).<br />Attribute (no content).</span>
+        <span>Changes the size of the element in "szLarge" mode (height: 62px).<br />Attribute (no
+          content).</span>
       </td>
     </tr>
     <tr>
@@ -161,7 +171,8 @@
         <code>szHuge: string | null;</code>
       </td>
       <td>
-        <span>Changes the size of the element in "szHuge" mode (height: 68px).<br />Attribute (no content).</span>
+        <span>Changes the size of the element in "szHuge" mode (height: 68px).<br />Attribute (no
+          content).</span>
       </td>
     </tr>
     <tr>
@@ -179,7 +190,8 @@
         <code>isError: string | null;</code>
       </td>
       <td>
-        <span>Forces the error status of an item to be displayed.<br />Attribute (no content).</span>
+        <span>Forces the error status of an item to be displayed.<br />Attribute (no
+          content).</span>
       </td>
     </tr>
     <tr>
@@ -188,7 +200,8 @@
         <code>pattern: string;</code>
       </td>
       <td>
-        <span>The attribute defines a regular expression that is passed to the native input element to validate the
+        <span>The attribute defines a regular expression that is passed to the native input element
+          to validate the
           input value.
           Applies to an input element of type: text, tel, email, url, password, and search.
           <br />(default = '';)
@@ -289,5 +302,53 @@
         </span>
       </td>
     </tr>
+
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>inputData: EventEmitter&lt;Event&gt;;</code>
+      </td>
+      <td>
+        <span>The event is called when the user changes the value of an element.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>changeData: EventEmitter&lt;Event&gt;;</code>
+      </td>
+      <td>
+        <span>The event is called when the user has finished changing the value of an
+          element.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>keydownData: EventEmitter&lt;KeyboardEvent&gt;;</code>
+      </td>
+      <td>
+        <span>The event is called when any button moves down.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>keypressData: EventEmitter&lt;KeyboardEvent&gt;;</code>
+      </td>
+      <td>
+        <span>The event is called when a button that has a printable character is pressed.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>keyupData: EventEmitter&lt;KeyboardEvent&gt;;</code>
+      </td>
+      <td>
+        <span>The event is called when any button moves up.</span>
+      </td>
+    </tr>
+
   </tbody>
 </table>

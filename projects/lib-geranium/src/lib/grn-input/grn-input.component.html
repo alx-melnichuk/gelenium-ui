@@ -1,6 +1,5 @@
 <ng-container [formGroup]="formGroup">
-  <grn-frame-input
-    [inputId]="id"
+  <grn-frame-input [inputId]="id"
     [label]="label"
     [exterior]="exteriorValue"
     [isRequired]="isRequiredVal"
@@ -11,13 +10,11 @@
     [hiddenLabel]="hiddenLabelVal"
     [isError]="!!formControl.errors || isErrorVal"
     [helperText]="helperText"
-    [frameSize]="frameSize"
-  >
+    [frameSize]="frameSize">
     <div class="gi-ornament">
       <ng-content select="[grnOrnament]"></ng-content>
     </div>
     <input #inputElement
-      aria-invalid="false"
       formControlName="textData"
       [attr.id]="id"
       [type]="typeVal"
@@ -38,77 +35,14 @@
       [grnOnlyByRegex]="!!onlyByRegex ? onlyByRegex : null"
       (focus)="doFocusInputElement()"
       (blur)="doBlurInputElement()"
-    />
+      (input)="doInput($event)"
+      (change)="doChange($event)"
+      (keydown)="doKeydown($event)"
+      (keypress)="doKeypress($event)"
+      (keyup)="doKeyup($event)" />
     <div class="gi-ornament-end">
       <ng-content select="[grnOrnamentEnd]"></ng-content>
     </div>
   </grn-frame-input>
-  
+
 </ng-container>
-
-<!-- <pre>
-invalid={{formControl.invalid}}
-errors={{formControl.errors | json }}
-</pre> -->
-
-
-
-<!--
-outlined - очерченный
-
-<div class="=MuiFormControl-root =MuiTextField-root css-i44wyl">
-  <label class="=MuiInputLabel-root =MuiInputLabel-formControl =MuiInputLabel-animated =MuiFormLabel-root =MuiFormLabel-colorPrimary
-    MuiInputLabel-outlined
-    css-p0rm37" data-shrink="false" for="outlined-basic" id="outlined-basic-label"
-  >Outlined
-  </label>
-  <div class="MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl
-    MuiOutlinedInput-root
-    css-1v4ccyo">
-    <input type="text" aria-invalid="false" id="outlined-basic"
-      class="MuiOutlinedInput-input MuiInputBase-input css-1x5jdmq" value="" />
-    <fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-igs3ac">
-      <legend class="css-dhh0px">
-        <span>Outlined</span>
-      </legend>
-    </fieldset>
-  </div>
-</div>
-
-underline - подчеркивать
-<div class="=MuiFormControl-root =MuiTextField-root css-i44wyl">
-  <label class="=MuiInputLabel-root =MuiInputLabel-formControl =MuiInputLabel-animated =MuiFormLabel-root =MuiFormLabel-colorPrimary
-    MuiInputLabel-filled
-    css-14x1nlk"
-    data-shrink="false" for="filled-basic" id="filled-basic-label"
-  >Filled
-  </label>
-  <div class="MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl
-    MuiFilledInput-root
-    MuiFilledInput-underline
-    css-q44vsa">
-    <input type="text" aria-invalid="false" id="filled-basic"
-      class="MuiFilledInput-input MuiInputBase-input css-2bxn45" value="" />
-  </div>
-</div>
-
-
-standard
-<div class="=MuiFormControl-root =MuiTextField-root css-i44wyl">
-  <label class="=MuiInputLabel-root =MuiInputLabel-formControl =MuiInputLabel-animated =MuiFormLabel-root =MuiFormLabel-colorPrimary
-    MuiInputLabel-standard
-    MuiInputLabel-shrink // сокращаться при фокусе или заполнении данными
-    css-mqt2s5"
-    data-shrink="false" for="standard-basic" id="standard-basic-label"
-  >Standard
-  </label>
-  <div class="MuiInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl
-    Mui-focused // при фокусе
-    MuiInput-underline
-    css-1wt0ykv">
-    <input type="text" aria-invalid="false" id="standard-basic"
-      class="MuiInput-input MuiInputBase-input css-mnn31" value="" />
-  </div>
-</div>
-
--->

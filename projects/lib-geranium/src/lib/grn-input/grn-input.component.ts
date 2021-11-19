@@ -4,12 +4,14 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  EventEmitter,
   forwardRef,
   HostBinding,
   Inject,
   Input,
   OnChanges,
   OnInit,
+  Output,
   PLATFORM_ID,
   SimpleChanges,
   ViewChild,
@@ -27,7 +29,6 @@ import {
   Validator,
   ValidatorFn,
 } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 import { AutoUnsubscribe } from '../decorators/auto-unsubscribe.decorator';
 import { FrameSize } from '../grn-frame-input/grn-frame-input.interface';
@@ -107,6 +108,17 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   @Input()
   public maxLength: string | null = null;
 
+  @Output()
+  readonly inputData: EventEmitter<Event> = new EventEmitter();
+  @Output()
+  readonly changeData: EventEmitter<Event> = new EventEmitter();
+  @Output()
+  readonly keydownData: EventEmitter<KeyboardEvent> = new EventEmitter();
+  @Output()
+  readonly keypressData: EventEmitter<KeyboardEvent> = new EventEmitter();
+  @Output()
+  readonly keyupData: EventEmitter<KeyboardEvent> = new EventEmitter();
+
   @ViewChild('inputElement')
   public inputElement: ElementRef | null = null;
 
@@ -148,13 +160,8 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   public isFilled = false;
   public isHelperTextFilled = false;
 
-  private valueChangesSub: Subscription;
-
   // eslint-disable-next-line @typescript-eslint/ban-types
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.valueChangesSub = this.formControl.valueChanges.subscribe((value: any) => this.onChange(value));
-  }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.type) {
@@ -245,6 +252,27 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   public doBlurInputElement(): void {
     this.isFocused = false;
     this.isFilled = !!this.formControl.value;
+  }
+
+  public doInput(event: Event): void {
+    this.inputData.emit(event);
+    this.onChange(this.formControl.value);
+  }
+
+  public doChange(event: Event): void {
+    this.changeData.emit(event);
+  }
+
+  public doKeydown(event: KeyboardEvent): void {
+    this.keydownData.emit(event);
+  }
+
+  public doKeypress(event: KeyboardEvent): void {
+    this.keypressData.emit(event);
+  }
+
+  public doKeyup(event: KeyboardEvent): void {
+    this.keyupData.emit(event);
   }
 
   public getClassForHelperText(isError: boolean, isDisabled: boolean): string {
