@@ -13,8 +13,10 @@
     <li>"szHuge" - sets the height to 68px;</li>
   </ul>
   <p>
-    The size of the element's height is set in the "&#8209;&#8209;gfi&#8209;base-size" ccc variable in accordance with the "szXXX" size attribute.
-    All padding and offset calculations are determined by the value of this variable and the font size.
+    The size of the element's height is set in the "&#8209;&#8209;gfi&#8209;base-size" ccc variable
+    in accordance with the "szXXX" size attribute.
+    All padding and offset calculations are determined by the value of this variable and the font
+    size.
   </p>
   <p>
     In order to hide the label (legend), add the "hiddenLabel" attribute.
@@ -23,7 +25,8 @@
     The font size for native input and label is determined from the parent container.
     The size of the font can be defined with the css-style for the "grn-input" tag.
     In the example, this is implemented with the styles "iis-fn-sz-large" and "iis-fn-sz-huge".
-    We can change the font size at the grn-input tag level, but the element itself will not change the height.
+    We can change the font size at the grn-input tag level, but the element itself will not change
+    the height.
   </p>
   <p>
     The height of the element remains the same even when the font size is changed
@@ -33,28 +36,37 @@
 
 <div class="in-section">
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior04" aria-label="Font Style">
+  <mat-button-toggle-group [(ngModel)]="exterior04"
+    aria-label="Font Style">
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
     <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
     <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
   </mat-button-toggle-group>
 </div>
 
-<form class="in-section" [formGroup]="formGroup04" novalidate>
+<form class="in-section"
+  [formGroup]="formGroup04"
+  novalidate>
 
   <div class="in-item iis-row iis-text">
     <span>Item height: 38px; font-size: 16px;</span>
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input04a"
-      label="Size Short" szShort autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input04a"
+      label="Size Short"
+      szShort
+      autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input04a"
-      hiddenLabel szShort autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input04a"
+      hiddenLabel
+      szShort
+      autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -66,14 +78,20 @@
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input04b"
-      label="Size Small" szSmall autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input04b"
+      label="Size Small"
+      szSmall
+      autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input04b"
-      hiddenLabel szSmall autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input04b"
+      hiddenLabel
+      szSmall
+      autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -85,14 +103,20 @@
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input04c"
-      label="Size Middle" szMiddle autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input04c"
+      label="Size Middle"
+      szMiddle
+      autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input04c"
-      hiddenLabel szMiddle autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input04c"
+      hiddenLabel
+      szMiddle
+      autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -104,14 +128,20 @@
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input04d"
-      label="Size Wide" szWide autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input04d"
+      label="Size Wide"
+      szWide
+      autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input04d"
-      hiddenLabel szWide autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input04d"
+      hiddenLabel
+      szWide
+      autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -123,14 +153,20 @@
   </div>
 
   <div>
-    <grn-input class="in-item iis-fn-sz-large" formControlName="input04e"
-      label="Size Large" szLarge autoComplete="off"
+    <grn-input class="in-item iis-fn-sz-large"
+      formControlName="input04e"
+      label="Size Large"
+      szLarge
+      autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item iis-fn-sz-large" formControlName="input04e"
-      hiddenLabel szLarge autoComplete="off"
+    <grn-input class="in-item iis-fn-sz-large"
+      formControlName="input04e"
+      hiddenLabel
+      szLarge
+      autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -142,14 +178,20 @@
   </div>
 
   <div>
-    <grn-input class="in-item iis-fn-sz-huge" formControlName="input04f"
-      label="Size Huge" szHuge autoComplete="off"
+    <grn-input class="in-item iis-fn-sz-huge"
+      formControlName="input04f"
+      label="Size Huge"
+      szHuge
+      autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item iis-fn-sz-huge" formControlName="input04f"
-      hiddenLabel szHuge autoComplete="off"
+    <grn-input class="in-item iis-fn-sz-huge"
+      formControlName="input04f"
+      hiddenLabel
+      szHuge
+      autoComplete="off"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -164,7 +206,7 @@
     </mat-expansion-panel-header>
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
-        <pre class="in-fw-nr">
+        <pre class="fw-nr">
 &lt;form [formGroup]="formGroup04" novalidate&gt;
 
   &lt;div class="in-item iis-row iis-text"&gt;
@@ -281,7 +323,7 @@
   &lt;/div&gt;
 
 &lt;/form&gt;</pre>
-    </mat-tab>
+      </mat-tab>
       <mat-tab [label]="labelTs">
         <pre>
 import &#123; Component, ViewEncapsulation &#125; from '@angular/core';

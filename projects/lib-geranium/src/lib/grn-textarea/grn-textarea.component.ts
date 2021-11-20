@@ -2,7 +2,6 @@ import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ContentChild,
   ElementRef,
   EventEmitter,
   forwardRef,
@@ -10,7 +9,6 @@ import {
   Inject,
   Input,
   OnChanges,
-  OnInit,
   Output,
   PLATFORM_ID,
   SimpleChanges,
@@ -18,44 +16,38 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  AbstractControl,
+  NG_VALUE_ACCESSOR,
+  NG_VALIDATORS,
+  ControlValueAccessor,
+  Validator,
   FormControl,
   FormGroup,
-  Validators,
-  ControlValueAccessor,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
+  AbstractControl,
   ValidationErrors,
-  Validator,
   ValidatorFn,
+  Validators,
 } from '@angular/forms';
 
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 
-import { InputType, InputTypeUtil } from './grn-input.interface';
-import { GrnOrnamentEndDirective } from './grn-ornament-end.directive';
-import { GrnOrnamentDirective } from './grn-ornament.directive';
-
 let identifier = 0;
 
 @Component({
-  selector: 'grn-input',
-  exportAs: 'grnInput',
-  templateUrl: './grn-input.component.html',
-  styleUrls: ['./grn-input.component.scss'],
+  selector: 'grn-textarea',
+  exportAs: 'grnTextarea',
+  templateUrl: './grn-textarea.component.html',
+  styleUrls: ['./grn-textarea.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => GrnInputComponent), multi: true },
-    { provide: NG_VALIDATORS, useExisting: forwardRef(() => GrnInputComponent), multi: true },
+    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => GrnTextareaComponent), multi: true },
+    { provide: NG_VALIDATORS, useExisting: forwardRef(() => GrnTextareaComponent), multi: true },
   ],
 })
-export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
+export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Validator {
   @Input()
-  public id = 'grn_input_' + ++identifier;
-  @Input()
-  public type: string = InputType.text.valueOf();
+  public id = 'grn_textarea_' + ++identifier;
   @Input()
   public label = '';
   @Input()
@@ -88,20 +80,18 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   public hiddenLabel: string | null = null;
   @Input()
   public isError: string | null = null;
-  @Input()
-  public pattern = '';
-  @Input()
-  public onlyByRegex = '';
+  // @Input()
+  // public pattern = '';
+  // @Input()
+  // public onlyByRegex = '';
   @Input()
   public autoComplete = '';
   @Input()
   public helperText: string | null = null;
-  @Input()
-  public step: string | null = null;
-  @Input()
-  public min: string | null = null;
-  @Input()
-  public max: string | null = null;
+  // @Input()
+  // public min: string | null = null;
+  // @Input()
+  // public max: string | null = null;
   @Input()
   public minLength: string | null = null;
   @Input()
@@ -118,18 +108,18 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   @Output()
   readonly keyupData: EventEmitter<KeyboardEvent> = new EventEmitter();
 
-  @ViewChild('inputElement')
-  public inputElementRef: ElementRef | null = null;
-  @ContentChild(GrnOrnamentDirective, { static: true })
-  public grnOrnament: GrnOrnamentDirective | undefined;
-  @ContentChild(GrnOrnamentEndDirective, { static: true })
-  public grnOrnamentEnd: GrnOrnamentEndDirective | undefined;
+  @ViewChild('textareaElement')
+  public textareaElementRef: ElementRef | null = null;
   @HostBinding('class')
   public get getClassesRoot(): string[] {
-    return ['GrnControl', 'GrnInputField'];
+    return ['GrnControl', 'GrnTextareaField'];
+  }
+  @HostBinding('style')
+  public get getStyle(): string | null {
+    const value = this.numberLines > 0 ? this.numberLines : null;
+    return value != null ? '--gt-number-lines: ' + value + ';' : '';
   }
 
-  public typeVal: InputType = InputType.text;
   public exterior: Exterior = Exterior.standard;
   public isReadOnlyVal = false; // Binding attribute "isReadOnly".
   public isRequiredVal = false; // Binding attribute "isRequired".
@@ -156,13 +146,12 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   public isFilled = false;
   public isHelperTextFilled = false;
 
+  public numberLines = 1;
+
   // eslint-disable-next-line @typescript-eslint/ban-types
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.type) {
-      this.typeVal = (InputTypeUtil.create(this.type) as InputType) || InputType.text;
-    }
     if (changes.exterOutlined || changes.exterUnderline || changes.exterStandard) {
       this.exterior = ExteriorUtil.setExterior(this.exterOutlined, this.exterUnderline, this.exterStandard);
     }
@@ -188,10 +177,6 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
     if (changes.isRequired || !!minLength || !!maxLength) {
       this.prepareFormGroup(this.isRequiredVal, this.parseNumber(minLength, -1), this.parseNumber(maxLength, -1));
     }
-  }
-
-  ngOnInit(): void {
-    this.isOrnament = this.grnOrnament || this.grnOrnamentEnd ? true : false;
   }
 
   // ** ControlValueAccessor - start **
@@ -236,8 +221,8 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   // ** Public API **
 
   public focus(): void {
-    if (isPlatformBrowser(this.platformId) && !!this.inputElementRef) {
-      this.inputElementRef.nativeElement.focus();
+    if (isPlatformBrowser(this.platformId) && !!this.textareaElementRef) {
+      this.textareaElementRef.nativeElement.focus();
     }
   }
 
@@ -253,6 +238,7 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   public doInput(event: Event): void {
     this.inputData.emit(event);
     this.onChange(this.formControl.value);
+    this.updateHeight();
   }
 
   public doChange(event: Event): void {
@@ -307,5 +293,14 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
       }
     }
     return result;
+  }
+
+  private getNumberLines(value: string): number {
+    return (value || '').split('\n').length;
+  }
+
+  private updateHeight(): void {
+    const numberLines = this.getNumberLines(this.formControl.value);
+    this.numberLines = numberLines > 0 ? numberLines : 1;
   }
 }

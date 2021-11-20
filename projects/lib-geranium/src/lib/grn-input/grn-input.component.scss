@@ -1,24 +1,23 @@
 /*# sourceURL=grn-input.component.scss */
 
-@import '../_styles/mx-display-inline-flex.scss';
 @import '../_styles/mx-align-items.scss';
+@import '../_styles/mx-display-inline-flex.scss';
+@import '../_styles/mx-flex-direction.scss';
 
 
 grn-input {    // # outline: 1px dashed green;
   @include mxDisplayInlineFlex();
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  @include mxFlexDirection(column);
   font-family: "Roboto","Helvetica","Arial",sans-serif; // #!!root
   font-weight: 400; // #!!root
   font-size: 1em; // #!!root
 
   position: relative;
-  min-width: 0;
+  // min-width: 0;
   padding: 0;
-  margin: 0;
-  border: 0;
-  vertical-align: top;
+  // margin: 0;
+  // border: 0;
+  vertical-align: top; // #!!
 
   // input
   .gi-input {
@@ -33,6 +32,7 @@ grn-input {    // # outline: 1px dashed green;
     background: none;
     // ! height: var(--cntl-input-frame-custom-size, var(--cntl -input-frame-base-size));  // 1.4375em; // height: 1.1876em; // my size
     margin: 0;
+    padding: 0;
     -webkit-tap-highlight-color: transparent;
     // display: block;
     min-width: 0;
@@ -41,9 +41,6 @@ grn-input {    // # outline: 1px dashed green;
     animation-name: mui-auto-fill-cancel;
     -webkit-animation-duration: 10ms;
     animation-duration: 10ms;
-    // padding: 8.5px 14px; // small    // padding: 16.5px 14px;    // padding: 6px 0 7px; // my
-
-    padding: 0px 0px;
 
     &:focus {
       outline: 0;
@@ -52,7 +49,6 @@ grn-input {    // # outline: 1px dashed green;
       opacity: 1;
       -webkit-text-fill-color: rgba(0, 0, 0, 0.38);
     }
-
   }
 
   // Input content "ornament"

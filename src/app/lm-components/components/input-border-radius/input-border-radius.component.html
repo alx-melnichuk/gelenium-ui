@@ -3,7 +3,8 @@
   <p>
     You can change the value of the rounding radius in outlined appearance mode.
     To do this, you need to specify a new value for the rounding radius in the
-    "&#8209;&#8209;gfi&#8209;outlined-border-radius" css-variable for the "grn&#8209;frame-input" css-style.
+    "&#8209;&#8209;gfi&#8209;outlined-border-radius" css-variable for the "grn&#8209;frame-input"
+    css-style.
     For example:
   </p>
   <pre>
@@ -14,7 +15,10 @@
     This value for the fillet radius corresponds to 50% of the height of the current element.
     The minimum value for the fillet radius is 0.
     The maximum value for the fillet radius is 50% of the height of the current element.
-    The value of the css-variable "<a href="/components/input#ItemSize">&#8209;&#8209;gfi&#8209;base-size</a>" determines the height of the current element.
+    The value of the css-variable "<a href="/components/input#ItemSize">
+      &#8209;&#8209;gfi&#8209;base-size
+    </a>" determines the height
+    of the current element.
   </p>
   <p>
     In this case, you also need to change the value of the left indent for correct display.
@@ -28,7 +32,8 @@
     --gfi-outlined-frm-pd-lf-rg: calc(var(--gfi-base-size)*0.57);
   &#125;</pre>
   <p>
-    In our example, the value of the coefficient for changing the fillet radius will change dynamically.
+    In our example, the value of the coefficient for changing the fillet radius will change
+    dynamically.
     For this, an additional css-variable "&#8209;&#8209;ibr-border-radius" is used.
     As a result, we get the following:
   </p>
@@ -50,10 +55,12 @@
     Similarly, you can change the fillet radius for the underline appearance mode.
   </p>
   <p>
-    To do this, you need to specify a new value for the rounding radius in the 
-    css-variable "&#8209;&#8209;gfi-underline-border-radius" for the css-style "grn&#8209;frame-input".
-    And you also need to change the value of the left indentation value of the 
-    css-variable "&#8209;&#8209;gfi-underline-frm-pd-lf-rg" for the css-style "grn&#8209;frame-input".
+    To do this, you need to specify a new value for the rounding radius in the
+    css-variable "&#8209;&#8209;gfi-underline-border-radius" for the css-style
+    "grn&#8209;frame-input".
+    And you also need to change the value of the left indentation value of the
+    css-variable "&#8209;&#8209;gfi-underline-frm-pd-lf-rg" for the css-style
+    "grn&#8209;frame-input".
   </p>
   <p>
     We get the following:
@@ -78,7 +85,8 @@
 
 <div class="in-section">
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior09" aria-label="Font Style">
+  <mat-button-toggle-group [(ngModel)]="exterior09"
+    aria-label="Font Style">
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
     <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
   </mat-button-toggle-group>
@@ -86,24 +94,37 @@
 
 <div class="in-section ibr-slider-box">
   <span>border-radius = ( BaseSize * <b class="ibr-slider-value">{{ borderRadius }}</b>/100 )</span>
-  <mat-slider class="ibr-slider" min="0" max="50" step="5" [value]="borderRadius" (input)="inputBorderRadius($event)"></mat-slider>
+  <mat-slider class="ibr-slider"
+    min="0"
+    max="50"
+    step="5"
+    [value]="borderRadius"
+    (input)="inputBorderRadius($event)"></mat-slider>
 </div>
 
-<form class="in-section ibr-outlined-radius ibr-underline-radius" [formGroup]="formGroup09" novalidate>
+<form class="in-section ibr-outlined-radius ibr-underline-radius"
+  [formGroup]="formGroup09"
+  novalidate>
 
   <div class="in-item ibr-row ibr-text">
     <span>Item height: 38px; font-size: 16px;</span>
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input09a"
-      label="Size Short" szShort autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input09a"
+      label="Size Short"
+      szShort
+      autoComplete="off"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input09a"
-      hiddenLabel szShort autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input09a"
+      hiddenLabel
+      szShort
+      autoComplete="off"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -115,14 +136,20 @@
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input09b"
-      label="Size Small" szSmall autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input09b"
+      label="Size Small"
+      szSmall
+      autoComplete="off"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input09b"
-      hiddenLabel szSmall autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input09b"
+      hiddenLabel
+      szSmall
+      autoComplete="off"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -134,14 +161,20 @@
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input09c"
-      label="Size Middle" szMiddle autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input09c"
+      label="Size Middle"
+      szMiddle
+      autoComplete="off"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input09c"
-      hiddenLabel szMiddle autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input09c"
+      hiddenLabel
+      szMiddle
+      autoComplete="off"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -153,14 +186,20 @@
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input09d"
-      label="Size Wide" szWide autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input09d"
+      label="Size Wide"
+      szWide
+      autoComplete="off"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input09d"
-      hiddenLabel szWide autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input09d"
+      hiddenLabel
+      szWide
+      autoComplete="off"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -172,14 +211,20 @@
   </div>
 
   <div>
-    <grn-input class="in-item ibr-fn-sz-large" formControlName="input09e"
-      label="Size Large" szLarge autoComplete="off"
+    <grn-input class="in-item ibr-fn-sz-large"
+      formControlName="input09e"
+      label="Size Large"
+      szLarge
+      autoComplete="off"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item ibr-fn-sz-large" formControlName="input09e"
-      hiddenLabel szLarge autoComplete="off"
+    <grn-input class="in-item ibr-fn-sz-large"
+      formControlName="input09e"
+      hiddenLabel
+      szLarge
+      autoComplete="off"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -191,14 +236,20 @@
   </div>
 
   <div>
-    <grn-input class="in-item ibr-fn-sz-huge" formControlName="input09f"
-      label="Size Huge" szHuge autoComplete="off"
+    <grn-input class="in-item ibr-fn-sz-huge"
+      formControlName="input09f"
+      label="Size Huge"
+      szHuge
+      autoComplete="off"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item ibr-fn-sz-huge" formControlName="input09f"
-      hiddenLabel szHuge autoComplete="off"
+    <grn-input class="in-item ibr-fn-sz-huge"
+      formControlName="input09f"
+      hiddenLabel
+      szHuge
+      autoComplete="off"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -213,7 +264,7 @@
     </mat-expansion-panel-header>
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
-        <pre class="in-fw-nr">
+        <pre class="fw-nr">
 &lt;form class="ibr-outlined-radius ibr-underline-radius"
   [formGroup]="formGroup09" novalidate&gt;
 
@@ -331,9 +382,9 @@
   &lt;/div&gt;
 
 &lt;/form&gt;</pre>
-</mat-tab>
-  <mat-tab [label]="labelTs">
-    <pre>
+      </mat-tab>
+      <mat-tab [label]="labelTs">
+        <pre>
 import &#123; Component, ViewEncapsulation &#125; from '@angular/core';
 import &#123; FormControl, FormGroup &#125; from '@angular/forms';
 
@@ -361,9 +412,9 @@ export class InputComponent &#123;
   &#125;
 
 &#125;</pre>
-    </mat-tab>
+      </mat-tab>
       <mat-tab [label]="labelCss">
-       <pre>
+        <pre>
 .ibr-row &#123;
   display: inline-flex;
   padding-top: 10px;

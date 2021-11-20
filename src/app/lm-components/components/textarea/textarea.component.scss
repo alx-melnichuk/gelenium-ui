@@ -1,18 +1,18 @@
-/*# sourceURL=input.component.scss */
+/*# sourceURL=textarea.component.scss */
 
-app-input {
+app-textarea {
   display: block;
 
-  .in-section {
+  .ta-section {
     margin-top: 20px;
     margin-bottom: 15px;
   }
-  .in-row {
+  .ta-row {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
   }
-  .in-item {
+  .ta-item {
     width: 240px;
     margin: 10px 10px;
   }

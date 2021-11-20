@@ -1,0 +1,94 @@
+<div class="ta-section">
+  <h3>Basic</h3>
+  <p>
+    The GrnTextarea component is a form control. It includes: label, input and help text.
+    It comes in three versions: with an outline (exterOutlined), with a fill (exterUnderline) and
+    standard (exterStandard - the default).
+  </p>
+</div>
+
+<form class="ta-section"
+  [formGroup]="formGroup01"
+  novalidate>
+
+  <div>
+    <!-- <grn-input class="ta-item" formControlName="input01a" exterOutlined label="Outlined">
+    </grn-input> -->
+    <grn-textarea class="ta-item"
+      formControlName="input01a"
+      exterOutlined
+      label="Outlined">
+    </grn-textarea>
+  </div>
+
+  <div>
+    <!-- <grn-input class="ta-item" formControlName="input01b" exterUnderline label="Underline">
+    </grn-input> -->
+  </div>
+
+  <div>
+    <!-- <grn-input class="ta-item" formControlName="input01c" exterStandard label="Standard">
+    </grn-input> -->
+  </div>
+
+</form>
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-tab-group animationDuration="0ms">
+      <mat-tab [label]="labelHtml">
+        <pre>
+&lt;form [formGroup]="formGroup01" novalidate&gt;
+
+  <!-- &lt;div&gt;
+    &lt;grn-input class="ta-item" formControlName="input01a"
+      exterOutlined label="Outlined"&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;grn-input class="ta-item" formControlName="input01b"
+      exterUnderline label="Underline"&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;grn-input class="ta-item" formControlName="input01c"
+      exterStandard label="Standard"&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt; -->
+
+&lt;/form&gt;</pre>
+      </mat-tab>
+      <mat-tab [label]="labelTs">
+        <pre>
+import &#123; Component, ViewEncapsulation &#125; from '@angular/core';
+import &#123; FormControl, FormGroup &#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class TextareaComponent &#123;
+  public formGroup01: FormGroup = new FormGroup(&#123;
+    input01a: new FormControl('', []),
+    input01b: new FormControl('', []),
+    input01c: new FormControl('', []),
+  &#125;);
+&#125;</pre>
+      </mat-tab>
+      <mat-tab [label]="labelCss">
+        <pre>
+.ta-item &#123;
+  width: 240px;
+  margin: 10px 10px;
+&#125;</pre>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+</mat-accordion>

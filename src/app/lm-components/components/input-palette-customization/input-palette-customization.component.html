@@ -38,7 +38,8 @@
 --in07-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
 &#125;</pre>
   <p>
-    All the CSS classes that define the colors of the input element are children of the "Grn-palette" CSS classes.
+    All the CSS classes that define the colors of the input element are children of the
+    "Grn-palette" CSS classes.
     Add a custom "ipc-customization" CSS class to define our colors.
   </p>
   <p>
@@ -100,7 +101,8 @@
 
 <div class="in-section">
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior07" aria-label="Font Style">
+  <mat-button-toggle-group [(ngModel)]="exterior07"
+    aria-label="Font Style">
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
     <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
     <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
@@ -108,34 +110,47 @@
 </div>
 
 
-<form class="in-section" [formGroup]="formGroup07" novalidate>
+<form class="in-section"
+  [formGroup]="formGroup07"
+  novalidate>
 
   <div class="ipc-customization">
 
     <div>
-      <grn-input class="in-item" formControlName="input07a"
-        label="Simple Text" type="text" autoComplete="off"
+      <grn-input class="in-item"
+        formControlName="input07a"
+        label="Simple Text"
+        type="text"
+        autoComplete="off"
         [exterOutlined]="exterior07==='outlined' ? '':null"
         [exterUnderline]="exterior07==='underline' ? '':null">
       </grn-input>
-  
-      <grn-input class="in-item" formControlName="input07b"
-        label="Required Text" isRequired autoComplete="off"
+
+      <grn-input class="in-item"
+        formControlName="input07b"
+        label="Required Text"
+        isRequired
+        autoComplete="off"
         [exterOutlined]="exterior07==='outlined' ? '':null"
         [exterUnderline]="exterior07==='underline' ? '':null">
       </grn-input>
     </div>
-  
+
     <div>
-      <grn-input class="in-item" formControlName="input07c"
-        label="Read Only" isReadOnly autoComplete="off"
+      <grn-input class="in-item"
+        formControlName="input07c"
+        label="Read Only"
+        isReadOnly
+        autoComplete="off"
         helperText="Enter a value for the parameter."
         [exterOutlined]="exterior07==='outlined' ? '':null"
         [exterUnderline]="exterior07==='underline' ? '':null">
       </grn-input>
-  
-      <grn-input class="in-item" formControlName="input07d"
-        label="Disabled" isDisabled
+
+      <grn-input class="in-item"
+        formControlName="input07d"
+        label="Disabled"
+        isDisabled
         helperText="The parameter is defined."
         [exterOutlined]="exterior07==='outlined' ? '':null"
         [exterUnderline]="exterior07==='underline' ? '':null">
@@ -143,7 +158,8 @@
     </div>
 
     <div>
-      <grn-input class="in-item" formControlName="input07e"
+      <grn-input class="in-item"
+        formControlName="input07e"
         isRequired
         minLength="{{ minLength07e }}"
         maxLength="{{ maxLength07e }}"
@@ -162,15 +178,18 @@
           )
         }}">
       </grn-input>
-  
-      <grn-input class="in-item" formControlName="input07f"
+
+      <grn-input class="in-item"
+        formControlName="input07f"
         label="Error-Disabled"
-        isDisabled isError helperText="Incorrect entry."
+        isDisabled
+        isError
+        helperText="Incorrect entry."
         [exterOutlined]="exterior07==='outlined' ? '':null"
         [exterUnderline]="exterior07==='underline' ? '':null">
       </grn-input>
     </div>
-    
+
   </div>
 
 
@@ -179,8 +198,12 @@
   </div>
 
   <div>
-    <grn-input class="in-item ipc-bstrap" formControlName="input07g"
-      exterOutlined szShort hiddenLabel autoComplete="off"
+    <grn-input class="in-item ipc-bstrap"
+      formControlName="input07g"
+      exterOutlined
+      szShort
+      hiddenLabel
+      autoComplete="off"
       isRequired
       helperText="{{
         (controls07.input07g.errors?.required
@@ -188,9 +211,14 @@
       }}">
     </grn-input>
 
-    <grn-input class="in-item ipc-bstrap" formControlName="input07h"
-      exterOutlined szShort hiddenLabel autoComplete="off"
-      isDisabled helperText="Disabled">
+    <grn-input class="in-item ipc-bstrap"
+      formControlName="input07h"
+      exterOutlined
+      szShort
+      hiddenLabel
+      autoComplete="off"
+      isDisabled
+      helperText="Disabled">
     </grn-input>
   </div>
 
@@ -203,7 +231,7 @@
     </mat-expansion-panel-header>
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
-        <pre class="in-fw-nr">
+        <pre class="fw-nr">
 &lt;form class="ipc-customization" [formGroup]="formGroup07" novalidate&gt;
 
   &lt;div&gt;
@@ -477,4 +505,3 @@ export class InputComponent &#123;
 
   </mat-expansion-panel>
 </mat-accordion>
-

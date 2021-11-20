@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { UrlItem, URL_COMPONENTS, URL_INFINITE_SCROLL, URL_INPUT } from './lm-components.interface';
+import { UrlItem, URL_COMPONENTS, URL_INFINITE_SCROLL, URL_INPUT, URL_TEXTAREA } from './lm-components.interface';
 
 @Component({
   selector: 'app-lm-components',
@@ -13,6 +13,8 @@ export class LmComponentsComponent implements OnInit {
   public inputUrlList: UrlItem[] = this.createInputUrlList();
   public expandedInfiniteScroll = false;
   public infiniteScrollUrlList: UrlItem[] = this.createInfiniteScrollUrlList();
+  public expandedTextarea = false;
+  public textareaUrlList: UrlItem[] = this.createTextareaUrlList();
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {
@@ -61,9 +63,22 @@ export class LmComponentsComponent implements OnInit {
     return result;
   }
 
+  private getPathTextarea(): string {
+    return '/' + URL_COMPONENTS + '/' + URL_TEXTAREA;
+  }
+
+  private createTextareaUrlList(): UrlItem[] {
+    const result: UrlItem[] = [];
+    const url = this.getPathTextarea();
+    result.push(this.createUrlItem('Basic', url + '#Basic'));
+    // result.push(this.createUrlItem('Api', url + '#Api'));
+    return result;
+  }
+
   private updateStatusExpandedByPathname(): void {
     const pathname = location.pathname;
     this.expandedInput = pathname.startsWith(this.getPathInput());
     this.expandedInfiniteScroll = pathname.startsWith(this.getPathInfiniteScroll());
+    this.expandedTextarea = pathname.startsWith(this.getPathTextarea());
   }
 }

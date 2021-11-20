@@ -1,17 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  HostBinding,
-  HostListener,
-  Input,
-  OnInit,
-  Output,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { ExteriorValue, ExteriorValueUtil } from '../grn-input/grn-input.interface';
-import { FrameSize } from './grn-frame-input.interface';
+import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
+import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 
 @Component({
   selector: 'grn-frame-input',
@@ -27,7 +17,7 @@ export class GrnFrameInputComponent implements OnInit {
   @Input()
   public label = '';
   @Input()
-  public exterior: ExteriorValue = ExteriorValue.standard;
+  public exterior: Exterior = Exterior.standard;
   @Input()
   public isRequired = false;
   @Input()
@@ -54,18 +44,18 @@ export class GrnFrameInputComponent implements OnInit {
 
   @HostBinding('style')
   public get getStyle(): string | null {
-    const value = this.getValueByFrameSize(this.frameSize);
+    const value = FrameSizeUtil.getValue(this.frameSize);
     return value != null ? '--gfi-base-size: ' + value + 'px;' : '';
   }
 
   public get isOutlinedExterior(): boolean {
-    return ExteriorValueUtil.isOutlined(this.exterior);
+    return ExteriorUtil.isOutlined(this.exterior);
   }
   public get isUnderlineExterior(): boolean {
-    return ExteriorValueUtil.isUnderline(this.exterior);
+    return ExteriorUtil.isUnderline(this.exterior);
   }
   public get isStandardExterior(): boolean {
-    return ExteriorValueUtil.isStandard(this.exterior);
+    return ExteriorUtil.isStandard(this.exterior);
   }
 
   public isMouseEnter = false;
@@ -136,31 +126,6 @@ export class GrnFrameInputComponent implements OnInit {
       result = 'plt-clr-error';
     } else if (isDisabled) {
       result = 'plt-clr-disabled';
-    }
-    return result;
-  }
-
-  public getValueByFrameSize(frameSize: FrameSize | null): number | null {
-    let result: number | null = null;
-    switch (frameSize) {
-      case FrameSize.sizeShort:
-        result = 38;
-        break;
-      case FrameSize.sizeSmall:
-        result = 44;
-        break;
-      case FrameSize.sizeMiddle:
-        result = 50;
-        break;
-      case FrameSize.sizeWide:
-        result = 56;
-        break;
-      case FrameSize.sizeLarge:
-        result = 62;
-        break;
-      case FrameSize.sizeHuge:
-        result = 68;
-        break;
     }
     return result;
   }

@@ -1,36 +1,3 @@
-export enum ExteriorValue {
-  standard = 'standard',
-  outlined = 'outlined',
-  underline = 'underline',
-}
-
-export class ExteriorValueUtil {
-  public static create(value: string): ExteriorValue | null {
-    let result: ExteriorValue | null = null;
-    switch (value) {
-      case ExteriorValue.standard.valueOf():
-        result = ExteriorValue.standard;
-        break;
-      case ExteriorValue.outlined.valueOf():
-        result = ExteriorValue.outlined;
-        break;
-      case ExteriorValue.underline.valueOf():
-        result = ExteriorValue.underline;
-        break;
-    }
-    return result;
-  }
-  public static isOutlined(value: ExteriorValue): boolean {
-    return ExteriorValue.outlined === value;
-  }
-  public static isUnderline(value: ExteriorValue): boolean {
-    return ExteriorValue.underline === value;
-  }
-  public static isStandard(value: ExteriorValue): boolean {
-    return ExteriorValue.standard === value;
-  }
-}
-
 export enum InputType {
   color = 'color', //
   date = 'date', //

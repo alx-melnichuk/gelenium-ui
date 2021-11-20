@@ -4,9 +4,11 @@
     It is possible to add a different ornament (picture or text) for the input line.
     It will appear as a prefix or suffix for the input string.
     You can define the reaction to pressing an element of the ornament.
-    <br />To add a prefix, you need to add a tag with the "grnOrnament" attribute inside the "grn-input" tag. (&lt;span
+    <br />To add a prefix, you need to add a tag with the "grnOrnament" attribute inside the
+    "grn-input" tag. (&lt;span
     grnOrnament&gt;kg&lt;/span&gt;)
-    <br />To add a suffix, you need to add a tag with the "grnOrnamentEnd" attribute inside the "grn-input" tag.
+    <br />To add a suffix, you need to add a tag with the "grnOrnamentEnd" attribute inside the
+    "grn-input" tag.
     (&lt;span grnOrnamentEnd&gt;cm&lt;/span&gt;)
     <br />Adding a prefix or suffix turns off the animation of the legend for this input field.
   </p>
@@ -20,7 +22,8 @@
 
 <div class="in-section">
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior08" aria-label="Font Style">
+  <mat-button-toggle-group [(ngModel)]="exterior08"
+    aria-label="Font Style">
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
     <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
     <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
@@ -28,25 +31,41 @@
 </div>
 
 
-<form class="in-section in-ornament" [formGroup]="formGroup08" novalidate>
+<form class="in-section in-ornament"
+  [formGroup]="formGroup08"
+  novalidate>
 
   <div>
-    <grn-input class="in-item" formControlName="input08a" label="Enter the mass"
-      helperText="The value is greater than zero." autoComplete="off"
-      [exterOutlined]="exterior08==='outlined' ? '':null" [exterUnderline]="exterior08==='underline' ? '':null">
+    <grn-input class="in-item"
+      formControlName="input08a"
+      label="Enter the mass"
+      helperText="The value is greater than zero."
+      autoComplete="off"
+      [exterOutlined]="exterior08==='outlined' ? '':null"
+      [exterUnderline]="exterior08==='underline' ? '':null">
       <span grnOrnament>kg</span>
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input08b" label="Enter the height" autoComplete="off"
-      [exterOutlined]="exterior08==='outlined' ? '':null" [exterUnderline]="exterior08==='underline' ? '':null">
+    <grn-input class="in-item"
+      formControlName="input08b"
+      label="Enter the height"
+      autoComplete="off"
+      [exterOutlined]="exterior08==='outlined' ? '':null"
+      [exterUnderline]="exterior08==='underline' ? '':null">
       <span grnOrnamentEnd>см</span>
     </grn-input>
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input08c" label="Enter the number in words" isRequired
-      minLength="{{ minLength08 }}" maxLength="{{ maxLength08 }}" autoComplete="off"
-      [exterOutlined]="exterior08==='outlined' ? '':null" [exterUnderline]="exterior08==='underline' ? '':null"
+    <grn-input class="in-item"
+      formControlName="input08c"
+      label="Enter the number in words"
+      isRequired
+      minLength="{{ minLength08 }}"
+      maxLength="{{ maxLength08 }}"
+      autoComplete="off"
+      [exterOutlined]="exterior08==='outlined' ? '':null"
+      [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="{{
         (controls08.input08c.errors?.required ? 'Required field.':
           (controls08.input08c.errors?.minlength ? 'Minimum length ' + controls08.input08c.errors?.minlength.requiredLength + ' characters.':
@@ -57,9 +76,15 @@
       <span grnOrnament>$</span>
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input08d" label="Enter the number in words" isRequired
-      minLength="{{ minLength08 }}" maxLength="{{ maxLength08 }}" autoComplete="off"
-      [exterOutlined]="exterior08==='outlined' ? '':null" [exterUnderline]="exterior08==='underline' ? '':null"
+    <grn-input class="in-item"
+      formControlName="input08d"
+      label="Enter the number in words"
+      isRequired
+      minLength="{{ minLength08 }}"
+      maxLength="{{ maxLength08 }}"
+      autoComplete="off"
+      [exterOutlined]="exterior08==='outlined' ? '':null"
+      [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="{{
         (controls08.input08d.errors?.required ? 'Required field.':
           (controls08.input08d.errors?.minlength ? 'Minimum length ' + controls08.input08d.errors?.minlength.requiredLength + ' characters.':
@@ -72,24 +97,38 @@
   </div>
 
   <div>
-    <grn-input class="in-item in-passwd-size" formControlName="input08e" label="Enter password"
-      [type]="isBtnEyeCrossed08e ? 'text':'password'" isRequired autoComplete="off"
-      [exterOutlined]="exterior08==='outlined' ? '':null" [exterUnderline]="exterior08==='underline' ? '':null"
+    <grn-input class="in-item in-passwd-size"
+      formControlName="input08e"
+      label="Enter password"
+      [type]="isBtnEyeCrossed08e ? 'text':'password'"
+      isRequired
+      autoComplete="off"
+      [exterOutlined]="exterior08==='outlined' ? '':null"
+      [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="{{
         (controls08.input08e.errors?.required ? 'The password value is required.':'Enter the password value.') 
       }}">
-      <button grnOrnament class="in-btn-eye press-left" (click)="isBtnEyeCrossed08e=!isBtnEyeCrossed08e">
+      <button grnOrnament
+        class="in-btn-eye press-left"
+        (click)="isBtnEyeCrossed08e=!isBtnEyeCrossed08e">
         <span [ngClass]="['in-icon-eye', (isBtnEyeCrossed08e ? 'crossed':'')]"></span>
       </button>
     </grn-input>
 
-    <grn-input class="in-item in-passwd-size" formControlName="input08f" label="Enter password"
-      [type]="isBtnEyeCrossed08f ? 'text':'password'" isRequired autoComplete="off"
-      [exterOutlined]="exterior08==='outlined' ? '':null" [exterUnderline]="exterior08==='underline' ? '':null"
+    <grn-input class="in-item in-passwd-size"
+      formControlName="input08f"
+      label="Enter password"
+      [type]="isBtnEyeCrossed08f ? 'text':'password'"
+      isRequired
+      autoComplete="off"
+      [exterOutlined]="exterior08==='outlined' ? '':null"
+      [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="{{
         (controls08.input08f.errors?.required ? 'The password value is required.':'Enter the password value.') 
       }}">
-      <button grnOrnamentEnd class="in-btn-eye press-right" (click)="isBtnEyeCrossed08f=!isBtnEyeCrossed08f">
+      <button grnOrnamentEnd
+        class="in-btn-eye press-right"
+        (click)="isBtnEyeCrossed08f=!isBtnEyeCrossed08f">
         <span [ngClass]="['in-icon-eye', (isBtnEyeCrossed08f ? 'crossed':'')]"></span>
       </button>
     </grn-input>
@@ -104,7 +143,7 @@
     </mat-expansion-panel-header>
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
-        <pre class="in-fw-nr">
+        <pre class="fw-nr">
 &lt;form class="in-ornament" [formGroup]="formGroup08" novalidate&gt;
 
   &lt;div&gt;

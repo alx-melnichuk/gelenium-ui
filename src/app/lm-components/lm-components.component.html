@@ -2,6 +2,7 @@
   <div class="lcm-item">Components</div>
 
   <mat-accordion>
+
     <mat-expansion-panel [expanded]="expandedInput">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -9,12 +10,15 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ul class="lcm-ul">
-        <li class="lcm-li" *ngFor="let urlItem of inputUrlList">
+        <li class="lcm-li"
+          *ngFor="let urlItem of inputUrlList">
           <!-- <a class="lcm-li-href" [routerLink]="[urlItem.url + '#demo1']" [routerLinkActive]="['lcm-li-active']">{{ urlItem.label }}</a> -->
-          <a class="lcm-li-href" [href]="urlItem.url">{{ urlItem.label }}</a>
+          <a class="lcm-li-href"
+            [href]="urlItem.url">{{ urlItem.label }}</a>
         </li>
       </ul>
     </mat-expansion-panel>
+
     <mat-expansion-panel [expanded]="expandedInfiniteScroll">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -22,11 +26,29 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ul class="lcm-ul">
-        <li class="lcm-li" *ngFor="let urlItem of infiniteScrollUrlList">
-          <a class="lcm-li-href" [href]="urlItem.url">{{ urlItem.label }}</a>
+        <li class="lcm-li"
+          *ngFor="let urlItem of infiniteScrollUrlList">
+          <a class="lcm-li-href"
+            [href]="urlItem.url">{{ urlItem.label }}</a>
         </li>
       </ul>
     </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="expandedTextarea">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Textarea
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul class="lcm-ul">
+        <li class="lcm-li"
+          *ngFor="let urlItem of textareaUrlList">
+          <a class="lcm-li-href"
+            [href]="urlItem.url">{{ urlItem.label }}</a>
+        </li>
+      </ul>
+    </mat-expansion-panel>
+
   </mat-accordion>
 </div>
 <div class="lcm-right-side-wrap">

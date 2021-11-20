@@ -33,4 +33,16 @@ app-root {
     border-bottom-color: var(--app-root-border-color);
     box-sizing: border-box;
   }
+
+
+  hr[br-tp] {
+    border-top: 1px solid var(--app-root-border-color);
+  }
+  pre.fw-nr b {
+    font-weight: normal;
+  }
+  .mat-expansion-panel {
+    margin-bottom: 20px;
+  }
+
 }
