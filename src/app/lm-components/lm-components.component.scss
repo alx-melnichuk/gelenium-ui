@@ -101,6 +101,11 @@ app-lm-components {
         display: block;
       }
     }
+    ul {
+      margin-block-start: 0;
+      margin-block-end: 0;
+      padding-inline-start: 30px;
+    }
   }
   .lc-ds-blc {
     display: block;

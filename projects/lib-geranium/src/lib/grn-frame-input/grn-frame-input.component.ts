@@ -74,7 +74,7 @@ export class GrnFrameInputComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.frameSize) {
-      this.frameSize = FrameSize.sizeWide;
+      this.frameSize = FrameSize.wide;
     }
   }
 

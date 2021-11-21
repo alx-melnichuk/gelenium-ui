@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaComponent {
-  public showNum = '';
+  public showNum = '02';
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

@@ -4,7 +4,7 @@
 @import '../_styles/mx-flex-direction.scss';
 
 
-grn-textarea {  outline: 1px dashed green;
+grn-textarea { // outline: 1px dashed green;
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
   font-family: "Roboto","Helvetica","Arial",sans-serif; // #!!root
@@ -18,7 +18,7 @@ grn-textarea {  outline: 1px dashed green;
   // border: 0;
   vertical-align: top; // #!!
 
-  .gt-textarea {
+  .gt-textarea { // outline: 1px dashed orange;} // # TODO temp;
     // font: inherit;           // #!! from root
     font-size: inherit;      // #!! from root
     font-family: inherit;    // #!! from root
@@ -30,7 +30,7 @@ grn-textarea {  outline: 1px dashed green;
     background: none;
     // ! height: var(--cntl-input-frame-custom-size, var(--cntl -input-frame-base-size));  // 1.4375em; // height: 1.1876em; // my size
     // height: auto;
-    height: calc(var(--gt-number-lines)*var(--gfi-line-height));
+    // height: calc(var(--gt-number-lines)*var(--gfi-line-height));
     margin: 0;
     padding: 0;
     -webkit-tap-highlight-color: transparent;

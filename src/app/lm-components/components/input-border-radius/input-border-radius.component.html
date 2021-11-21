@@ -104,7 +104,8 @@
 
 <form class="in-section ibr-outlined-radius ibr-underline-radius"
   [formGroup]="formGroup09"
-  novalidate>
+  novalidate
+  autocomplete="off">
 
   <div class="in-item ibr-row ibr-text">
     <span>Item height: 38px; font-size: 16px;</span>
@@ -114,8 +115,7 @@
     <grn-input class="in-item"
       formControlName="input09a"
       label="Size Short"
-      szShort
-      autoComplete="off"
+      frameSize="short"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -123,8 +123,7 @@
     <grn-input class="in-item"
       formControlName="input09a"
       hiddenLabel
-      szShort
-      autoComplete="off"
+      frameSize="short"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -139,8 +138,7 @@
     <grn-input class="in-item"
       formControlName="input09b"
       label="Size Small"
-      szSmall
-      autoComplete="off"
+      frameSize="small"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -148,8 +146,7 @@
     <grn-input class="in-item"
       formControlName="input09b"
       hiddenLabel
-      szSmall
-      autoComplete="off"
+      frameSize="small"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -164,8 +161,7 @@
     <grn-input class="in-item"
       formControlName="input09c"
       label="Size Middle"
-      szMiddle
-      autoComplete="off"
+      frameSize="middle"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -173,8 +169,7 @@
     <grn-input class="in-item"
       formControlName="input09c"
       hiddenLabel
-      szMiddle
-      autoComplete="off"
+      frameSize="middle"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -189,8 +184,7 @@
     <grn-input class="in-item"
       formControlName="input09d"
       label="Size Wide"
-      szWide
-      autoComplete="off"
+      frameSize="wide"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -198,8 +192,7 @@
     <grn-input class="in-item"
       formControlName="input09d"
       hiddenLabel
-      szWide
-      autoComplete="off"
+      frameSize="wide"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -214,8 +207,7 @@
     <grn-input class="in-item ibr-fn-sz-large"
       formControlName="input09e"
       label="Size Large"
-      szLarge
-      autoComplete="off"
+      frameSize="large"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -223,8 +215,7 @@
     <grn-input class="in-item ibr-fn-sz-large"
       formControlName="input09e"
       hiddenLabel
-      szLarge
-      autoComplete="off"
+      frameSize="large"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -239,8 +230,7 @@
     <grn-input class="in-item ibr-fn-sz-huge"
       formControlName="input09f"
       label="Size Huge"
-      szHuge
-      autoComplete="off"
+      frameSize="huge"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -248,8 +238,7 @@
     <grn-input class="in-item ibr-fn-sz-huge"
       formControlName="input09f"
       hiddenLabel
-      szHuge
-      autoComplete="off"
+      frameSize="huge"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null">
     </grn-input>
@@ -266,21 +255,27 @@
       <mat-tab [label]="labelHtml">
         <pre class="fw-nr">
 &lt;form class="ibr-outlined-radius ibr-underline-radius"
-  [formGroup]="formGroup09" novalidate&gt;
+  [formGroup]="formGroup09"
+  novalidate
+  autocomplete="off"&gt;
 
   &lt;div class="in-item ibr-row ibr-text"&gt;
     &lt;span&gt;Item height: 38px; font-size: 16px;&lt;/span&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input09a"
-      label="Size Short" szShort autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input09a"
+      label="Size Short"
+      frameSize="short"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input09a"
-      hiddenLabel szShort autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input09a"
+      hiddenLabel
+      frameSize="short"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -292,14 +287,18 @@
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input09b"
-      label="Size Small" szSmall autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input09b"
+      label="Size Small"
+      frameSize="small"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input09b"
-      hiddenLabel szSmall autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input09b"
+      hiddenLabel
+      frameSize="small"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -311,14 +310,18 @@
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input09c"
-      label="Size Middle" szMiddle autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input09c"
+      label="Size Middle"
+      frameSize="middle"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input09c"
-      hiddenLabel szMiddle autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input09c"
+      hiddenLabel
+      frameSize="middle"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -330,14 +333,18 @@
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input09d"
-      label="Size Wide" szWide autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input09d"
+      label="Size Wide"
+      frameSize="wide"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input09d"
-      hiddenLabel szWide autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input09d"
+      hiddenLabel
+      frameSize="wide"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -349,14 +356,18 @@
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item ibr-fn-sz-large" formControlName="input09e"
-      label="Size Large" szLarge autoComplete="off"
+    &lt;grn-input class="in-item ibr-fn-sz-large"
+      formControlName="input09e"
+      label="Size Large"
+      frameSize="large"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item ibr-fn-sz-large" formControlName="input09e"
-      hiddenLabel szLarge autoComplete="off"
+    &lt;grn-input class="in-item ibr-fn-sz-large"
+      formControlName="input09e"
+      hiddenLabel
+      frameSize="large"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -368,14 +379,18 @@
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item ibr-fn-sz-huge" formControlName="input09f"
-      label="Size Huge" szHuge autoComplete="off"
+    &lt;grn-input class="in-item ibr-fn-sz-huge"
+      formControlName="input09f"
+      label="Size Huge"
+      frameSize="huge"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item ibr-fn-sz-huge" formControlName="input09f"
-      hiddenLabel szHuge autoComplete="off"
+    &lt;grn-input class="in-item ibr-fn-sz-huge"
+      formControlName="input09f"
+      hiddenLabel
+      frameSize="huge"
       [exterOutlined]="exterior09==='outlined' ? '':null"
       [exterUnderline]="exterior09==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;

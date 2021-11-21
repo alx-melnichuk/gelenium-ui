@@ -112,7 +112,8 @@
 
 <form class="in-section"
   [formGroup]="formGroup07"
-  novalidate>
+  novalidate
+  autocomplete="off">
 
   <div class="ipc-customization">
 
@@ -121,7 +122,6 @@
         formControlName="input07a"
         label="Simple Text"
         type="text"
-        autoComplete="off"
         [exterOutlined]="exterior07==='outlined' ? '':null"
         [exterUnderline]="exterior07==='underline' ? '':null">
       </grn-input>
@@ -130,7 +130,6 @@
         formControlName="input07b"
         label="Required Text"
         isRequired
-        autoComplete="off"
         [exterOutlined]="exterior07==='outlined' ? '':null"
         [exterUnderline]="exterior07==='underline' ? '':null">
       </grn-input>
@@ -141,7 +140,6 @@
         formControlName="input07c"
         label="Read Only"
         isReadOnly
-        autoComplete="off"
         helperText="Enter a value for the parameter."
         [exterOutlined]="exterior07==='outlined' ? '':null"
         [exterUnderline]="exterior07==='underline' ? '':null">
@@ -163,7 +161,6 @@
         isRequired
         minLength="{{ minLength07e }}"
         maxLength="{{ maxLength07e }}"
-        autoComplete="off"
         [label]="!!controls07.input07e.errors ?
           'Naming error' : 'Enter the name'"
         [exterOutlined]="exterior07==='outlined' ? '':null"
@@ -201,22 +198,36 @@
     <grn-input class="in-item ipc-bstrap"
       formControlName="input07g"
       exterOutlined
-      szShort
+      frameSize="short"
       hiddenLabel
-      autoComplete="off"
       isRequired
       helperText="{{
         (controls07.input07g.errors?.required
           ? 'Required field.': 'Enter value.')
       }}">
     </grn-input>
+  </div>
 
+  <div>
     <grn-input class="in-item ipc-bstrap"
       formControlName="input07h"
       exterOutlined
-      szShort
+      frameSize="short"
       hiddenLabel
-      autoComplete="off"
+      isRequired
+      helperText="{{
+        (controls07.input07h.errors?.required
+          ? 'Required field.': 'Enter value.')
+      }}">
+    </grn-input>
+  </div>
+
+  <div>
+    <grn-input class="in-item ipc-bstrap"
+      formControlName="input07i"
+      exterOutlined
+      frameSize="short"
+      hiddenLabel
       isDisabled
       helperText="Disabled">
     </grn-input>
@@ -232,62 +243,86 @@
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
         <pre class="fw-nr">
-&lt;form class="ipc-customization" [formGroup]="formGroup07" novalidate&gt;
+&lt;form class="in-section"
+  [formGroup]="formGroup07"
+  novalidate
+  autocomplete="off"&gt;
 
-  &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input07a"
-      label="Simple Text" type="text" autoComplete="off"
-      [exterOutlined]="exterior07==='outlined' ? '':null"
-      [exterUnderline]="exterior07==='underline' ? '':null"&gt;
-    &lt;/grn-input&gt;
+  &lt;div class="ipc-customization"&gt;
 
-    &lt;grn-input class="in-item" formControlName="input07b"
-      label="Required Text" isRequired autoComplete="off"
-      [exterOutlined]="exterior07==='outlined' ? '':null"
-      [exterUnderline]="exterior07==='underline' ? '':null"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
+    &lt;div&gt;
+      &lt;grn-input class="in-item"
+        formControlName="input07a"
+        label="Simple Text"
+        type="text"
+        [exterOutlined]="exterior07==='outlined' ? '':null"
+        [exterUnderline]="exterior07==='underline' ? '':null"&gt;
+      &lt;/grn-input&gt;
 
-  &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input07c"
-      label="Read Only" isReadOnly autoComplete="off"
-      helperText="Enter a value for the parameter."
-      [exterOutlined]="exterior07==='outlined' ? '':null"
-      [exterUnderline]="exterior07==='underline' ? '':null"&gt;
-    &lt;/grn-input&gt;
+      &lt;grn-input class="in-item"
+        formControlName="input07b"
+        label="Required Text"
+        isRequired
+        [exterOutlined]="exterior07==='outlined' ? '':null"
+        [exterUnderline]="exterior07==='underline' ? '':null"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
 
-    &lt;grn-input class="in-item" formControlName="input07d"
-      label="Disabled" isDisabled
-      helperText="The parameter is defined."
-      [exterOutlined]="exterior07==='outlined' ? '':null"
-      [exterUnderline]="exterior07==='underline' ? '':null"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
+    &lt;div&gt;
+      &lt;grn-input class="in-item"
+        formControlName="input07c"
+        label="Read Only"
+        isReadOnly
+        helperText="Enter a value for the parameter."
+        [exterOutlined]="exterior07==='outlined' ? '':null"
+        [exterUnderline]="exterior07==='underline' ? '':null"&gt;
+      &lt;/grn-input&gt;
 
-  &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input07e"
-      isRequired
-      minLength="<b>&#123;</b>&#123; minLength07e &#125;&#125;"
-      maxLength="<b>&#123;</b>&#123; maxLength07e &#125;&#125;"
-      autoComplete="off"
-      [label]="!!controls07.input07e.errors ?
-       'Naming error' : 'Enter the name'"
-      [exterOutlined]="exterior07==='outlined' ? '':null"
-      [exterUnderline]="exterior07==='underline' ? '':null"
-      helperText="<b>&#123;</b>&#123;
-        (controls07.input07e.errors?.required ? 'Required field.':
-          (controls07.input07e.errors?.minlength ?
-            'Minimum length '
-            + controls07.input07e.errors?.minlength.requiredLength
-            + ' characters.':
-            (controls07.input07e.errors?.maxlength ?
-              'Maximum length '
-              + controls07.input07e.errors?.maxlength.requiredLength
-              + ' characters.':'')
+      &lt;grn-input class="in-item"
+        formControlName="input07d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is defined."
+        [exterOutlined]="exterior07==='outlined' ? '':null"
+        [exterUnderline]="exterior07==='underline' ? '':null"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div&gt;
+      &lt;grn-input class="in-item"
+        formControlName="input07e"
+        isRequired
+        minLength="<b>&#123;</b>&#123; minLength07e &#125;&#125;"
+        maxLength="<b>&#123;</b>&#123; maxLength07e &#125;&#125;"
+        [label]="!!controls07.input07e.errors ?
+          'Naming error' : 'Enter the name'"
+        [exterOutlined]="exterior07==='outlined' ? '':null"
+        [exterUnderline]="exterior07==='underline' ? '':null"
+        helperText="<b>&#123;</b>&#123;
+          (controls07.input07e.errors?.required ? 'Required field.':
+            (controls07.input07e.errors?.minlength ?
+              'Minimum length '
+              + controls07.input07e.errors?.minlength.requiredLength
+              + ' characters.':
+              (controls07.input07e.errors?.maxlength ?
+                'Maximum length '
+                + controls07.input07e.errors?.maxlength.requiredLength
+                + ' characters.':'')
+            )
           )
-        )
-      &#125;&#125;"&gt;
-    &lt;/grn-input&gt;
+        &#125;&#125;"&gt;
+      &lt;/grn-input&gt;
+
+      &lt;grn-input class="in-item"
+        formControlName="input07f"
+        label="Error-Disabled"
+        isDisabled
+        isError
+        helperText="Incorrect entry."
+        [exterOutlined]="exterior07==='outlined' ? '':null"
+        [exterUnderline]="exterior07==='underline' ? '':null"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
 
     &lt;grn-input class="in-item" formControlName="input07f"
       label="Error-Disabled"
@@ -303,21 +338,43 @@
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item ipc-bstrap" formControlName="input07g"
-      exterOutlined szShort hiddenLabel autoComplete="off"
+    &lt;grn-input class="in-item ipc-bstrap"
+      formControlName="input07g"
+      exterOutlined
+      frameSize="short"
+      hiddenLabel
       isRequired
       helperText="<b>&#123;</b>&#123;
         (controls07.input07g.errors?.required
           ? 'Required field.': 'Enter value.')
       &#125;&#125;"&gt;
     &lt;/grn-input&gt;
+  &lt;/div&gt;
 
-    &lt;grn-input class="in-item ipc-bstrap" formControlName="input07h"
-      exterOutlined szShort hiddenLabel autoComplete="off"
-      isDisabled helperText="Disabled"&gt;
+  &lt;div&gt;
+    &lt;grn-input class="in-item ipc-bstrap"
+      formControlName="input07h"
+      exterOutlined
+      frameSize="short"
+      hiddenLabel
+      isRequired
+      helperText="<b>&#123;</b>&#123;
+        (controls07.input07h.errors?.required
+          ? 'Required field.': 'Enter value.')
+      &#125;&#125;"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
+  &lt;div&gt;
+    &lt;grn-input class="in-item ipc-bstrap"
+      formControlName="input07i"
+      exterOutlined
+      frameSize="short"
+      hiddenLabel
+      isDisabled
+      helperText="Disabled"&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
 
 &lt;/form&gt;</pre>
       </mat-tab>
@@ -347,7 +404,8 @@ export class InputComponent &#123;
     ]),
     input07f: new FormControl('Hello World', []),
     input07g: new FormControl('Hello World', [Validators.required]),
-    input07h: new FormControl('Hello World', []),
+    input07h: new FormControl('', [Validators.required]),
+    input07i: new FormControl('Hello World', []),
   &#125;;
   public formGroup07: FormGroup = new FormGroup(this.controls07);
   public exterior07 = 'outlined';

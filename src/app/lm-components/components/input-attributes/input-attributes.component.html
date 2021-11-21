@@ -2,44 +2,54 @@
   <h3>Attributes</h3>
   <p>The following attributes are supported:</p>
   <ul>
-    <li>"id" - parameter for defining the unique identifier of the input field (id="unique_identifier");</li>
+    <li>"id" - parameter for defining the unique identifier of the input field
+      (id="unique_identifier");</li>
     <li>"isRequired" - a sign that the field is required (isRequired);</li>
     <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
     <li>"type" - indicate the type of the input element (type="password");</li>
     <li>"autoComplete" - the value of the autocomplete parameter for the input field.
-      <br/>&nbsp;&nbsp;autoComplete="off" - The browser is not permitted to automatically enter or select a value for this field.
-      <br/>&nbsp;&nbsp;autoComplete="new-password" - A new password.
-      <br/>&nbsp;&nbsp;autoComplete="current-password" - The user's current password.
+      <br />&nbsp;&nbsp;autoComplete="off" - The browser is not permitted to automatically enter or
+      select a value for this field.
+      <br />&nbsp;&nbsp;autoComplete="new-password" - A new password.
+      <br />&nbsp;&nbsp;autoComplete="current-password" - The user's current password.
     </li>
     <li>"isReadOnly" - read-only access flag (isReadOnly);</li>
-    <li>"lbShrink" - an attribute, the presence of which leads to permanent display of the label in the field header 
+    <li>"lbShrink" - an attribute, the presence of which leads to permanent display of the label in
+      the field header
       without transformation into a placeholder (lbShrink);
     </li>
-    <li>"helperText" - the parameter is used to provide context about the input of the field or error message (helperText="Some important text").</li>
+    <li>"helperText" - the parameter is used to provide context about the input of the field or
+      error message (helperText="Some important text").</li>
   </ul>
 </div>
 
 <div class="in-section">
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior02" aria-label="Font Style">
+  <mat-button-toggle-group [(ngModel)]="exterior02"
+    aria-label="Font Style">
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
     <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
     <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
   </mat-button-toggle-group>
 </div>
 
-<form class="in-section" [formGroup]="formGroup02" novalidate>
+<form class="in-section"
+  [formGroup]="formGroup02"
+  novalidate
+  autocomplete="off">
 
   <div>
-    <grn-input class="in-item" formControlName="input02a"
+    <grn-input class="in-item"
+      formControlName="input02a"
       id="unique_identifier"
       label="Required"
       isRequired
       [exterOutlined]="exterior02==='outlined' ? '':null"
       [exterUnderline]="exterior02==='underline' ? '':null">
     </grn-input>
-  
-    <grn-input class="in-item" formControlName="input02b"
+
+    <grn-input class="in-item"
+      formControlName="input02b"
       label="Disabled"
       isDisabled
       [exterOutlined]="exterior02==='outlined' ? '':null"
@@ -48,15 +58,17 @@
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input02c"
+    <grn-input class="in-item"
+      formControlName="input02c"
       label="Password"
       type="password"
       autoComplete="current-password"
       [exterOutlined]="exterior02==='outlined' ? '':null"
       [exterUnderline]="exterior02==='underline' ? '':null">
     </grn-input>
-  
-    <grn-input class="in-item" formControlName="input02d"
+
+    <grn-input class="in-item"
+      formControlName="input02d"
       label="Read Only"
       isReadOnly
       [exterOutlined]="exterior02==='outlined' ? '':null"
@@ -65,22 +77,29 @@
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input02e"
-      label="Number" lbShrink type="number"
+    <grn-input class="in-item"
+      formControlName="input02e"
+      label="Number"
+      lbShrink
+      type="number"
       [exterOutlined]="exterior02==='outlined' ? '':null"
       [exterUnderline]="exterior02==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input02f"
-      label="Search field" type="search"
+    <grn-input class="in-item"
+      formControlName="input02f"
+      label="Search field"
+      type="search"
       [exterOutlined]="exterior02==='outlined' ? '':null"
       [exterUnderline]="exterior02==='underline' ? '':null">
     </grn-input>
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input02g"
-      label="Helper text" helperText="Some important text"
+    <grn-input class="in-item"
+      formControlName="input02g"
+      label="Helper text"
+      helperText="Some important text"
       [exterOutlined]="exterior02==='outlined' ? '':null"
       [exterUnderline]="exterior02==='underline' ? '':null">
     </grn-input>
@@ -96,7 +115,7 @@
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
         <pre>
-&lt;form [formGroup]="formGroup02" novalidate&gt;
+&lt;form [formGroup]="formGroup02" novalidate autocomplete="off"&gt;
 
   &lt;div&gt;
     &lt;grn-input class="in-item" formControlName="input02a"

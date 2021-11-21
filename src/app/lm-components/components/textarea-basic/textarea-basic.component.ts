@@ -25,7 +25,4 @@ export class TextareaBasicComponent {
     input01b: new FormControl('', []),
     input01c: new FormControl('', []),
   });
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
 }

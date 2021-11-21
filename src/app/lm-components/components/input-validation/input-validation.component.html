@@ -2,44 +2,67 @@
   <h3>Validation</h3>
   <p>The "isError" parameter sets the field to the error display state.
     The "helperText" parameter can be used to display an error message.
-    A thin border (exterOutlined) or a red underline (exterUnderline|exterStandard) signals the 
+    A thin border (exterOutlined) or a red underline (exterUnderline | exterStandard) signals the
     user about an erroneous value in this input field.
     The red frame is displayed even if the input field is disabled (isDisabled).
   </p>
 </div>
 
-<form class="in-section" [formGroup]="formGroup03" novalidate>
+<form class="in-section"
+  [formGroup]="formGroup03"
+  novalidate
+  autocomplete="off">
 
   <div>
-    <grn-input class="in-item" formControlName="input03a"
-      exterOutlined label="Error" isError>
+    <grn-input class="in-item"
+      formControlName="input03a"
+      exterOutlined
+      label="Error"
+      isError>
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input03b"
-      exterOutlined label="Error-Disabled"
-      isDisabled isError helperText="Incorrect entry.">
-    </grn-input>
-  </div>
-
-  <div>
-    <grn-input class="in-item" formControlName="input03c"
-      exterUnderline label="Error" isError>
-    </grn-input>
-
-    <grn-input class="in-item" formControlName="input03d"
-      exterUnderline label="Error-Disabled"
-      isDisabled isError helperText="Incorrect entry.">
-    </grn-input>
-  </div>
-
-  <div>
-    <grn-input class="in-item" formControlName="input03e"
-      exterStandard label="Error" isError>
-    </grn-input>
-
-    <grn-input class="in-item" formControlName="input03f"
+    <grn-input class="in-item"
+      formControlName="input03b"
+      exterOutlined
       label="Error-Disabled"
-      isDisabled isError helperText="Incorrect entry.">
+      isDisabled
+      isError
+      helperText="Incorrect entry.">
+    </grn-input>
+  </div>
+
+  <div>
+    <grn-input class="in-item"
+      formControlName="input03c"
+      exterUnderline
+      label="Error"
+      isError>
+    </grn-input>
+
+    <grn-input class="in-item"
+      formControlName="input03d"
+      exterUnderline
+      label="Error-Disabled"
+      isDisabled
+      isError
+      helperText="Incorrect entry.">
+    </grn-input>
+  </div>
+
+  <div>
+    <grn-input class="in-item"
+      formControlName="input03e"
+      exterStandard
+      label="Error"
+      isError>
+    </grn-input>
+
+    <grn-input class="in-item"
+      formControlName="input03f"
+      label="Error-Disabled"
+      isDisabled
+      isError
+      helperText="Incorrect entry.">
     </grn-input>
   </div>
 
@@ -53,7 +76,7 @@
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
         <pre>
-&lt;form [formGroup]="formGroup03" novalidate&gt;
+&lt;form [formGroup]="formGroup03" novalidate autocomplete="off"&gt;
 
   &lt;div&gt;
     &lt;grn-input class="in-item" formControlName="input03a"

@@ -48,7 +48,8 @@ export class InputPaletteCustomizationComponent {
     ]),
     input07f: new FormControl('Hello World', []),
     input07g: new FormControl('Hello World', [Validators.required]),
-    input07h: new FormControl('Hello World', []),
+    input07h: new FormControl('', [Validators.required]),
+    input07i: new FormControl('Hello World', []),
   };
   public formGroup07: FormGroup = new FormGroup(this.controls07);
   public exterior07 = 'outlined';

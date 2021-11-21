@@ -10,7 +10,7 @@
     [hiddenLabel]="hiddenLabelVal"
     [isError]="!!formControl.errors || isErrorVal"
     [helperText]="helperText"
-    [frameSize]="frameSize">
+    [frameSize]="frameSizeVal">
     <div class="gi-ornament">
       <ng-content select="[grnOrnament]"></ng-content>
     </div>
@@ -18,7 +18,7 @@
       formControlName="textData"
       [attr.id]="id"
       [type]="typeVal"
-      [ngClass]="['gi-input', 'gfi-elem-hgt', 'gfi-elem-pdn', 'GrnInputBase'
+      [ngClass]="['gi-input', 'gfi-molding', 'GrnInputBase'
         , (isOutlinedExterior ? 'gi-outlined': '')
         , (isUnderlineExterior ? 'gi-underline': '')
         , (isStandardExterior ? 'gi-standard': '')

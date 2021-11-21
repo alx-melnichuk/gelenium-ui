@@ -33,14 +33,14 @@
 
 <form class="in-section in-ornament"
   [formGroup]="formGroup08"
-  novalidate>
+  novalidate
+  autocomplete="off">
 
   <div>
     <grn-input class="in-item"
       formControlName="input08a"
       label="Enter the mass"
       helperText="The value is greater than zero."
-      autoComplete="off"
       [exterOutlined]="exterior08==='outlined' ? '':null"
       [exterUnderline]="exterior08==='underline' ? '':null">
       <span grnOrnament>kg</span>
@@ -49,7 +49,6 @@
     <grn-input class="in-item"
       formControlName="input08b"
       label="Enter the height"
-      autoComplete="off"
       [exterOutlined]="exterior08==='outlined' ? '':null"
       [exterUnderline]="exterior08==='underline' ? '':null">
       <span grnOrnamentEnd>см</span>
@@ -63,7 +62,6 @@
       isRequired
       minLength="{{ minLength08 }}"
       maxLength="{{ maxLength08 }}"
-      autoComplete="off"
       [exterOutlined]="exterior08==='outlined' ? '':null"
       [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="{{
@@ -82,7 +80,6 @@
       isRequired
       minLength="{{ minLength08 }}"
       maxLength="{{ maxLength08 }}"
-      autoComplete="off"
       [exterOutlined]="exterior08==='outlined' ? '':null"
       [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="{{
@@ -102,7 +99,6 @@
       label="Enter password"
       [type]="isBtnEyeCrossed08e ? 'text':'password'"
       isRequired
-      autoComplete="off"
       [exterOutlined]="exterior08==='outlined' ? '':null"
       [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="{{
@@ -120,7 +116,6 @@
       label="Enter password"
       [type]="isBtnEyeCrossed08f ? 'text':'password'"
       isRequired
-      autoComplete="off"
       [exterOutlined]="exterior08==='outlined' ? '':null"
       [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="{{
@@ -144,20 +139,20 @@
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
         <pre class="fw-nr">
-&lt;form class="in-ornament" [formGroup]="formGroup08" novalidate&gt;
+&lt;form class="in-ornament" [formGroup]="formGroup08" novalidate
+  autocomplete="off"&gt;
 
   &lt;div&gt;
     &lt;grn-input class="in-item" formControlName="input08a"
       label="Enter the mass"
       helperText="The value is greater than zero."
-      autoComplete="off"
       [exterOutlined]="exterior08==='outlined' ? '':null"
       [exterUnderline]="exterior08==='underline' ? '':null"&gt;
       &lt;span grnOrnament&gt;kg&lt;/span&gt;
     &lt;/grn-input&gt;
     
     &lt;grn-input class="in-item" formControlName="input08b"
-      label="Enter the height" autoComplete="off"
+      label="Enter the height"
       [exterOutlined]="exterior08==='outlined' ? '':null"
       [exterUnderline]="exterior08==='underline' ? '':null"&gt;
       &lt;span grnOrnamentEnd&gt;см&lt;/span&gt;
@@ -170,7 +165,6 @@
       isRequired
       minLength="<b>&#123;</b>&#123; minLength08 &#125;&#125;"
       maxLength="<b>&#123;</b>&#123; maxLength08 &#125;&#125;"
-      autoComplete="off"
       [exterOutlined]="exterior08==='outlined' ? '':null"
       [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="<b>&#123;</b>&#123;
@@ -194,7 +188,6 @@
       isRequired
       minLength="<b>&#123;</b>&#123; minLength08 &#125;&#125;"
       maxLength="<b>&#123;</b>&#123; maxLength08 &#125;&#125;"
-      autoComplete="off"
       [exterOutlined]="exterior08==='outlined' ? '':null"
       [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="<b>&#123;</b>&#123;
@@ -219,7 +212,6 @@
       formControlName="input08e" label="Enter password"
       [type]="isBtnEyeCrossed08e ? 'text':'password'"
       isRequired
-      autoComplete="off"
       [exterOutlined]="exterior08==='outlined' ? '':null"
       [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="<b>&#123;</b>&#123;
@@ -240,7 +232,6 @@
       
       [type]="isBtnEyeCrossed08f ? 'text':'password'"
       isRequired
-      autoComplete="off"
       [exterOutlined]="exterior08==='outlined' ? '':null"
       [exterUnderline]="exterior08==='underline' ? '':null"
       helperText="<b>&#123;</b>&#123;

@@ -10,7 +10,7 @@
     [hiddenLabel]="hiddenLabelVal"
     [isError]="!!formControl.errors || isErrorVal"
     [helperText]="helperText"
-    [frameSize]="frameSize">
+    [frameSize]="frameSizeVal">
     <!-- <div class="gi-ornament">
       <ng-content select="[grnOrnament]"></ng-content>
     </div> -->
@@ -19,7 +19,8 @@
       cols99="33"
       formControlName="textData"
       [attr.id]="id"
-      [ngClass]="['gt-textarea', 'gfi-elem-pdn', 'GrnTextareaBase'
+      [rows]="currentRows"
+      [ngClass]="['gt-textarea', 'gfi-molding', 'GrnTextareaBase'
         , (isOutlinedExterior ? 'gt-outlined': '')
         , (isUnderlineExterior ? 'gt-underline': '')
         , (isStandardExterior ? 'gt-standard': '')
@@ -39,7 +40,7 @@
     </textarea>
     <!-- <input #inputElement
       formControlName="textData"
-      [attr.id]="id"
+      +[attr.id]="id"
        [type]="typeVal"
       [ngClass]="['gi-input', 'gfi-frm-molding', 'GrnInputBase-input'
         , (isOutlinedExterior ? 'gi-outlined': '')
@@ -48,21 +49,21 @@
         , (isDisabledVal ? 'Grn-disabled': '')
         , (!!formControl.errors ? 'Grn-error': '')
       ]"
-      [attr.disabled]="isDisabledVal ? '': null"
-      [attr.autocomplete]="!!autoComplete ? autoComplete : null"
-      [attr.readonly]="isReadOnlyVal ? '': null"
+      +[attr.disabled]="isDisabledVal ? '': null"
+      +[attr.autocomplete]="!!autoComplete ? autoComplete : null"
+      +[attr.readonly]="isReadOnlyVal ? '': null"
        [attr.min]="min"
        [attr.max]="max"
        [attr.step]="step"
        [pattern]="pattern"
-      [grnOnlyByRegex]="!!onlyByRegex ? onlyByRegex : null"
-      (focus)="doFocus()"
-      (blur)="doBlur()"
-      (input)="doInput($event)"
-      (change)="doChange($event)"
-      (keydown)="doKeydown($event)"
-      (keypress)="doKeypress($event)"
-      (keyup)="doKeyup($event)" /> -->
+       [grnOnlyByRegex]="!!onlyByRegex ? onlyByRegex : null"
+      +(focus)="doFocus()"
+      +(blur)="doBlur()"
+      +(input)="doInput($event)"
+      +(change)="doChange($event)"
+      +(keydown)="doKeydown($event)"
+      +(keypress)="doKeypress($event)"
+      +(keyup)="doKeyup($event)" /> -->
     <!-- <div class="gi-ornament-end">
       <ng-content select="[grnOrnamentEnd]"></ng-content>
     </div> -->

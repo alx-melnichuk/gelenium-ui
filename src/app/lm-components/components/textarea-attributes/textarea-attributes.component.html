@@ -1,0 +1,302 @@
+<div class="in-section">
+  <h3>Attributes</h3>
+  <p>The following attributes are supported:</p>
+  <ul>
+    <li>"id" - parameter for defining the unique identifier of the input field
+      (id="unique_identifier");</li>
+    +<li>"isRequired" - a sign that the field is required (isRequired);</li>
+    +<li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
+    <li></li>
+    <li>"autoComplete" - the value of the autocomplete parameter for the textarea field.
+      <br />&nbsp;&nbsp;autoComplete="off" - The browser is not permitted to automatically enter or
+      select a value for this field.
+    </li>
+    <li>"isReadOnly" - read-only access flag (isReadOnly);</li>
+    <li>"lbShrink" - an attribute, the presence of which leads to permanent display of the label in
+      the field header
+      without transformation into a placeholder (lbShrink);
+    </li>
+    <li>"helperText" - the parameter is used to provide context about the input of the field or
+      error message (helperText="Some important text").</li>
+  </ul>
+</div>
+
+<div class="in-section">
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior02"
+    aria-label="Font Style">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
+<form class="in-section"
+  [formGroup]="formGroup02"
+  novalidate
+  autocomplete="off">
+
+  <div class="ta-group">
+    <div>
+      <div class="ta-item taa-text">
+        Attribute: isRequired.
+      </div>
+      <grn-textarea class="ta-item"
+        formControlName="input02a"
+        id="unique_identifier"
+        label="Required"
+        isRequired
+        cntRows="2"
+        [exterOutlined]="exterior02==='outlined' ? '':null"
+        [exterUnderline]="exterior02==='underline' ? '':null">
+      </grn-textarea>
+    </div>
+
+    <div>
+      <div class="ta-item taa-text">
+        Attribute: isDisabled.
+      </div>
+      <grn-textarea class="ta-item"
+        formControlName="input02b"
+        label="Disabled"
+        isDisabled
+        cntRows="2"
+        [exterOutlined]="exterior02==='outlined' ? '':null"
+        [exterUnderline]="exterior02==='underline' ? '':null">
+      </grn-textarea>
+    </div>
+  </div>
+
+  <div class="ta-group">
+    <div>
+      <div class="ta-item taa-text">
+        Attribute: lbShrink.
+      </div>
+      <grn-textarea class="ta-item"
+        formControlName="input02c"
+        label="Permanent label"
+        lbShrink
+        cntRows="2"
+        [exterOutlined]="exterior02==='outlined' ? '':null"
+        [exterUnderline]="exterior02==='underline' ? '':null">
+      </grn-textarea>
+    </div>
+
+    <div>
+      <div class="ta-item taa-text">
+        Attribute: hiddenLabel.
+      </div>
+      <grn-textarea class="ta-item"
+        formControlName="input02d"
+        label="hiddenLabel"
+        hiddenLabel
+        cntRows="2"
+        [exterOutlined]="exterior02==='outlined' ? '':null"
+        [exterUnderline]="exterior02==='underline' ? '':null">
+      </grn-textarea>
+    </div>
+  </div>
+
+  <div class="ta-group">
+    <div>
+      <div class="ta-item taa-text">
+        Attribute: helperText.
+      </div>
+      <grn-textarea class="ta-item"
+        formControlName="input02e"
+        label="Helper text"
+        helperText="Some important text"
+        cntRows="2"
+        [exterOutlined]="exterior02==='outlined' ? '':null"
+        [exterUnderline]="exterior02==='underline' ? '':null">
+      </grn-textarea>
+    </div>
+
+    <div>
+      <div class="ta-item taa-text">
+        Attribute: isReadOnly.
+      </div>
+      <grn-textarea class="ta-item"
+        formControlName="input02f"
+        label="Read Only"
+        isReadOnly
+        cntRows="2"
+        [exterOutlined]="exterior02==='outlined' ? '':null"
+        [exterUnderline]="exterior02==='underline' ? '':null">
+      </grn-textarea>
+    </div>
+  </div>
+
+  <div class="ta-group">
+    <div>
+      <div class="ta-item taa-text">
+        State: empty.
+      </div>
+      <grn-textarea class="ta-item"
+        formControlName="input02g"
+        label="Enter value"
+        cntRows="2"
+        helperText="Enter the value as required."
+        [exterOutlined]="exterior02==='outlined' ? '':null"
+        [exterUnderline]="exterior02==='underline' ? '':null">
+      </grn-textarea>
+    </div>
+
+    <div>
+      <div class="ta-item taa-text">
+        Attribute: isError.
+      </div>
+      <grn-textarea class="ta-item"
+        formControlName="input02h"
+        [label]="!controls02.input02h.value ? 'Requires a value':'Parameter value'"
+        cntRows="2"
+        [isError]="!controls02.input02h.value ? '':null"
+        [helperText]="!controls02.input02h.value
+          ? 'The field is not filled.': 'The field is filled.'"
+        [exterOutlined]="exterior02==='outlined' ? '':null"
+        [exterUnderline]="exterior02==='underline' ? '':null">
+      </grn-textarea>
+    </div>
+  </div>
+
+  <div class="ta-group">
+    <div>
+      <div class="ta-item taa-text">
+        Status: error and attribute: lbShrink.
+      </div>
+      <grn-textarea class="ta-item"
+        formControlName="input02i"
+        [label]="controls02.input02i.errors ? 'Error':'Value'"
+        lbShrink
+        cntRows="2"
+        isRequired
+        [helperText]="controls02.input02i.errors?.required
+          ? 'Required field.': 'Enter value.'"
+        [exterOutlined]="exterior02==='outlined' ? '':null"
+        [exterUnderline]="exterior02==='underline' ? '':null">
+      </grn-textarea>
+    </div>
+
+    <div>
+      <div class="ta-item taa-text">Attribute: isError + isDisabled.</div>
+      <grn-textarea class="ta-item"
+        formControlName="input02j"
+        label="Error-Disabled"
+        isReadOnly
+        cntRows="2"
+        isError
+        isDisabled
+        helperText="Parameter disabled"
+        [exterOutlined]="exterior02==='outlined' ? '':null"
+        [exterUnderline]="exterior02==='underline' ? '':null">
+      </grn-textarea>
+    </div>
+  </div>
+
+
+
+
+</form>
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-tab-group animationDuration="0ms">
+      <mat-tab [label]="labelHtml">
+        <pre>
+&lt;form [formGroup]="formGroup02" novalidate autocomplete="off"&gt;
+
+  &lt;div&gt;
+    &lt;grn-input class="in-item" formControlName="input02a"
+      id="unique_identifier"
+      label="Required"
+      isRequired 
+      [exterOutlined]="exterior02==='outlined' ? '':null"
+      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
+    &lt;/grn-input&gt;
+  
+    &lt;grn-input class="in-item" formControlName="input02b"
+      label="Disabled"
+      isDisabled
+      [exterOutlined]="exterior02==='outlined' ? '':null"
+      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;grn-input class="in-item" formControlName="input02c"
+      label="Password"
+      type="password"
+      autoComplete="current-password"
+      [exterOutlined]="exterior02==='outlined' ? '':null"
+      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
+    &lt;/grn-input&gt;
+  
+    &lt;grn-input class="in-item" formControlName="input02d"
+      label="Read Only"
+      isReadOnly
+      [exterOutlined]="exterior02==='outlined' ? '':null"
+      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;grn-input class="in-item" formControlName="input02e"
+      label="Number" lbShrink type="number"
+      [exterOutlined]="exterior02==='outlined' ? '':null"
+      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
+    &lt;/grn-input&gt;
+
+    &lt;grn-input class="in-item" formControlName="input02f"
+      label="Search field" type="search"
+      [exterOutlined]="exterior02==='outlined' ? '':null"
+      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;grn-input class="in-item" formControlName="input02g"
+      label="Helper text" helperText="Some important text"
+      [exterOutlined]="exterior02==='outlined' ? '':null"
+      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre>
+      </mat-tab>
+      <mat-tab [label]="labelTs">
+        <pre>
+import &#123; Component, ViewEncapsulation &#125; from '@angular/core';
+import &#123; FormControl, FormGroup, Validators &#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class InputComponent &#123;
+  public formGroup02: FormGroup = new FormGroup(&#123;
+    input02a: new FormControl('Hello World', [Validators.required]),
+    input02b: new FormControl('Hello World', []),
+    input02c: new FormControl('', []),
+    input02d: new FormControl('Hello World', []),
+    input02e: new FormControl('', []),
+    input02f: new FormControl('Hello World', []),
+    input02g: new FormControl('Hello World', []),
+  &#125;);
+  public exterior02 = 'outlined';
+&#125;</pre>
+      </mat-tab>
+      <mat-tab [label]="labelCss">
+        <pre>
+.in-item &#123;
+  width: 240px;
+  margin: 10px 10px;
+&#125;</pre>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+</mat-accordion>

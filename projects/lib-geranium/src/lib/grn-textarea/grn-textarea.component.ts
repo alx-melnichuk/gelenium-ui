@@ -29,7 +29,7 @@ import {
 } from '@angular/forms';
 
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
-import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
+import { FrameSize, FrameSizeType, FrameSizeUtil } from '../interfaces/frame-size.interface';
 
 let identifier = 0;
 
@@ -65,37 +65,25 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   @Input()
   public lbShrink: string | null = null;
   @Input()
-  public szShort: string | null = null;
-  @Input()
-  public szSmall: string | null = null;
-  @Input()
-  public szMiddle: string | null = null;
-  @Input()
-  public szNormal: string | null = null;
-  @Input()
-  public szLarge: string | null = null;
-  @Input()
-  public szHuge: string | null = null;
+  public frameSize: FrameSizeType | null = null;
   @Input()
   public hiddenLabel: string | null = null;
   @Input()
   public isError: string | null = null;
-  // @Input()
-  // public pattern = '';
-  // @Input()
-  // public onlyByRegex = '';
   @Input()
   public autoComplete = '';
   @Input()
   public helperText: string | null = null;
-  // @Input()
-  // public min: string | null = null;
-  // @Input()
-  // public max: string | null = null;
   @Input()
   public minLength: string | null = null;
   @Input()
   public maxLength: string | null = null;
+  @Input()
+  public minRows: string | null = null;
+  @Input()
+  public cntRows: string | null = null;
+  @Input()
+  public maxRows: string | null = null;
 
   @Output()
   readonly inputData: EventEmitter<Event> = new EventEmitter();
@@ -114,11 +102,11 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   public get getClassesRoot(): string[] {
     return ['GrnControl', 'GrnTextareaField'];
   }
-  @HostBinding('style')
-  public get getStyle(): string | null {
-    const value = this.numberLines > 0 ? this.numberLines : null;
-    return value != null ? '--gt-number-lines: ' + value + ';' : '';
-  }
+  // @HostBinding('style')
+  // public get getStyle(): string | null {
+  //   // const value = this.numberLines > 0 ? this.numberLines : null;
+  //   return ''; // value != null ? '--gt-number-lines: ' + value + ';' : '';
+  // }
 
   public exterior: Exterior = Exterior.standard;
   public isReadOnlyVal = false; // Binding attribute "isReadOnly".
@@ -126,7 +114,7 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   public isDisabledVal = false; // Binding attribute "isDisabled".
   public isLabelShrink = false; // Binding attribute "lbShrink".
   public isOrnament = false;
-  public frameSize: FrameSize | null = null;
+  public frameSizeVal: FrameSize | null = FrameSize.wide;
   public hiddenLabelVal = false; // Binding attribute "hiddenLabel".
   public isErrorVal = false; // Binding attribute "isError".
 
@@ -146,7 +134,10 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   public isFilled = false;
   public isHelperTextFilled = false;
 
-  public numberLines = 1;
+  public currentRows = 1;
+  public minRowsVal = 0;
+  public cntRowsVal = 0;
+  public maxRowsVal = 0;
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
@@ -164,18 +155,26 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     }
     this.isLabelShrink = changes.lbShrink ? this.lbShrink !== null : this.isLabelShrink;
 
-    if (changes.szShort || changes.szSmall || changes.szMiddle || changes.szNormal || changes.szLarge || changes.szHuge) {
-      this.frameSize = FrameSizeUtil.setFrameSize(this.szShort, this.szSmall, this.szMiddle, this.szNormal, this.szLarge, this.szHuge);
+    if (changes.frameSize) {
+      this.frameSizeVal = FrameSizeUtil.create(this.frameSize || FrameSize.wide.valueOf());
     }
-
     this.hiddenLabelVal = changes.hiddenLabel ? this.hiddenLabel !== null : this.hiddenLabelVal;
     this.isErrorVal = changes.isError ? this.isError !== null : this.isErrorVal;
     this.isHelperTextFilled = changes.helperText ? !!this.helperText : this.isHelperTextFilled;
 
-    const minLength = changes.minLength ? (this.minLength as string) : '';
-    const maxLength = changes.maxLength ? (this.maxLength as string) : '';
-    if (changes.isRequired || !!minLength || !!maxLength) {
-      this.prepareFormGroup(this.isRequiredVal, this.parseNumber(minLength, -1), this.parseNumber(maxLength, -1));
+    if (changes.isRequired || changes.minLength || changes.maxLength) {
+      this.prepareFormGroup(this.isRequiredVal, this.parseNumber(this.minLength || '', -1), this.parseNumber(this.maxLength || '', -1));
+    }
+
+    if (changes.minRows) {
+      this.minRowsVal = this.parseNumber(this.minRows || '', 0);
+    }
+    if (changes.cntRows) {
+      this.cntRowsVal = this.parseNumber(this.cntRows || '', 0);
+      this.currentRows = this.cntRowsVal > 0 ? this.cntRowsVal : this.currentRows;
+    }
+    if (changes.maxRows) {
+      this.maxRowsVal = this.parseNumber(this.maxRows || '', 0);
     }
   }
 
@@ -238,7 +237,9 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   public doInput(event: Event): void {
     this.inputData.emit(event);
     this.onChange(this.formControl.value);
-    this.updateHeight();
+    if (this.cntRowsVal === 0) {
+      this.updateHeight(this.getNumberLines(this.formControl.value), this.minRowsVal, this.maxRowsVal);
+    }
   }
 
   public doChange(event: Event): void {
@@ -299,8 +300,14 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     return (value || '').split('\n').length;
   }
 
-  private updateHeight(): void {
-    const numberLines = this.getNumberLines(this.formControl.value);
-    this.numberLines = numberLines > 0 ? numberLines : 1;
+  private updateHeight(numberLines: number, minRowsVal: number, maxRowsVal: number): void {
+    let currentRows = numberLines;
+    if (minRowsVal > 0 && minRowsVal > currentRows) {
+      currentRows = minRowsVal;
+    }
+    if (maxRowsVal > 0 && currentRows > maxRowsVal) {
+      currentRows = maxRowsVal;
+    }
+    this.currentRows = currentRows > 0 ? currentRows : 1;
   }
 }

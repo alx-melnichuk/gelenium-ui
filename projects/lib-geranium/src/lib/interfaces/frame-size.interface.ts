@@ -1,113 +1,86 @@
+export type FrameSizeType = 'short' | 'small' | 'middle' | 'wide' | 'large' | 'huge';
+
 export enum FrameSize {
-  sizeShort = 'szShort',
-  sizeSmall = 'szSmall',
-  sizeMiddle = 'szMiddle', // 50px
-  sizeWide = 'szWide', //     56px
-  sizeLarge = 'szLarge',
-  sizeHuge = 'szHuge',
+  short = 'short',
+  small = 'small',
+  middle = 'middle',
+  wide = 'wide',
+  large = 'large',
+  huge = 'huge',
 }
 
 export enum FrameSizeValue {
-  sizeShort = 38, // 38px - bootstrap
-  sizeSmall = 44,
-  sizeMiddle = 50,
-  sizeWide = 56,
-  sizeLarge = 62,
-  sizeHuge = 68,
+  short = 38, // 38px - bootstrap
+  small = 44,
+  middle = 50,
+  wide = 56,
+  large = 62,
+  huge = 68,
 }
 
 export class FrameSizeUtil {
   public static create(value: string): FrameSize | null {
     let result: FrameSize | null = null;
     switch (value) {
-      case FrameSize.sizeShort.valueOf():
-        result = FrameSize.sizeShort;
+      case FrameSize.short.valueOf():
+        result = FrameSize.short;
         break;
-      case FrameSize.sizeSmall.valueOf():
-        result = FrameSize.sizeSmall;
+      case FrameSize.small.valueOf():
+        result = FrameSize.small;
         break;
-      case FrameSize.sizeMiddle.valueOf():
-        result = FrameSize.sizeMiddle;
+      case FrameSize.middle.valueOf():
+        result = FrameSize.middle;
         break;
-      case FrameSize.sizeWide.valueOf():
-        result = FrameSize.sizeWide;
+      case FrameSize.wide.valueOf():
+        result = FrameSize.wide;
         break;
-      case FrameSize.sizeLarge.valueOf():
-        result = FrameSize.sizeLarge;
+      case FrameSize.large.valueOf():
+        result = FrameSize.large;
         break;
-      case FrameSize.sizeHuge.valueOf():
-        result = FrameSize.sizeHuge;
+      case FrameSize.huge.valueOf():
+        result = FrameSize.huge;
         break;
     }
     return result;
   }
   public static isShort(value: FrameSize): boolean {
-    return FrameSize.sizeShort === value;
+    return FrameSize.short === value;
   }
   public static isSmall(value: FrameSize): boolean {
-    return FrameSize.sizeSmall === value;
+    return FrameSize.small === value;
   }
   public static isMiddle(value: FrameSize): boolean {
-    return FrameSize.sizeMiddle === value;
+    return FrameSize.middle === value;
   }
   public static isWide(value: FrameSize): boolean {
-    return FrameSize.sizeWide === value;
+    return FrameSize.wide === value;
   }
   public static isLarge(value: FrameSize): boolean {
-    return FrameSize.sizeLarge === value;
+    return FrameSize.large === value;
   }
   public static isHuge(value: FrameSize): boolean {
-    return FrameSize.sizeHuge === value;
-  }
-  public static setFrameSize(
-    szShort: string | null,
-    szSmall: string | null,
-    szMiddle: string | null,
-    szNormal: string | null,
-    szLarge: string | null,
-    szHuge: string | null
-  ): FrameSize | null {
-    let result: FrameSize | null = null;
-    if (szShort !== null) {
-      result = FrameSize.sizeShort;
-    }
-    if (szSmall !== null) {
-      result = FrameSize.sizeSmall;
-    }
-    if (szMiddle !== null) {
-      result = FrameSize.sizeMiddle;
-    }
-    if (szNormal !== null) {
-      result = FrameSize.sizeWide;
-    }
-    if (szLarge !== null) {
-      result = FrameSize.sizeLarge;
-    }
-    if (szHuge !== null) {
-      result = FrameSize.sizeHuge;
-    }
-    return result;
+    return FrameSize.huge === value;
   }
   public static getValue(frameSize: FrameSize | null): number | null {
     let result: number | null = null;
     switch (frameSize) {
-      case FrameSize.sizeShort:
-        result = FrameSizeValue.sizeShort;
+      case FrameSize.short:
+        result = FrameSizeValue.short;
         break;
-      case FrameSize.sizeSmall:
-        result = FrameSizeValue.sizeSmall;
+      case FrameSize.small:
+        result = FrameSizeValue.small;
         break;
-      case FrameSize.sizeMiddle:
-        result = FrameSizeValue.sizeMiddle;
+      case FrameSize.middle:
+        result = FrameSizeValue.middle;
         break;
-      case FrameSize.sizeWide:
-        result = FrameSizeValue.sizeWide;
+      case FrameSize.wide:
+        result = FrameSizeValue.wide;
         break;
-      case FrameSize.sizeLarge:
-        result = FrameSizeValue.sizeLarge;
+      case FrameSize.large:
+        result = FrameSizeValue.large;
         break;
-      case FrameSize.sizeHuge:
-        result = FrameSizeValue.sizeHuge;
+      case FrameSize.huge:
+        result = FrameSizeValue.huge;
         break;
     }
     return result;

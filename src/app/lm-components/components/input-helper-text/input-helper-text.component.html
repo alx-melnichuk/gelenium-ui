@@ -1,22 +1,30 @@
 <div class="in-section">
   <h3>Helper text</h3>
   <p>
-    The height of the input element depends on the presence of the "helperText" auxiliary text. 
-    If two input elements are located on the same line and the first has auxiliary text, and the second does not, 
+    The height of the input element depends on the presence of the "helperText" auxiliary text.
+    If two input elements are located on the same line and the first has auxiliary text, and the
+    second does not,
     then they will differ in height. It will look like this:
   </p>
 </div>
 
-<form class="in-section" [formGroup]="formGroup06" novalidate>
+<form class="in-section"
+  [formGroup]="formGroup06"
+  novalidate
+  autocomplete="off">
 
   <div style="display: flex; align-items: center;">
-    <grn-input class="in-item" formControlName="input06a"
-      exterOutlined label="Enter the name"
+    <grn-input class="in-item"
+      formControlName="input06a"
+      exterOutlined
+      label="Enter the name"
       helperText="The name must be complete.">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input06b"
-      exterOutlined label="Enter the name">
+    <grn-input class="in-item"
+      formControlName="input06b"
+      exterOutlined
+      label="Enter the name">
     </grn-input>
   </div>
 
@@ -28,7 +36,7 @@
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <pre>
-&lt;form [formGroup]="formGroup06" novalidate&gt;
+&lt;form [formGroup]="formGroup06" novalidate autocomplete="off"&gt;
 
   &lt;div style="display: flex; align-items: center;"&gt;
     &lt;grn-input class="in-item" formControlName="input06a"
@@ -73,17 +81,22 @@ export class InputComponent &#123;
   </mat-accordion>
 
   <p>
-    For a quick fix, you can add a helperText property with a space value to the second input element (helperText=" ").
+    For a quick fix, you can add a helperText property with a space value to the second input
+    element (helperText=" ").
   </p>
 
   <div style="display: flex; align-items: center;">
-    <grn-input class="in-item" formControlName="input06c"
-      exterOutlined label="Enter the name"
+    <grn-input class="in-item"
+      formControlName="input06c"
+      exterOutlined
+      label="Enter the name"
       helperText="The name must be complete.">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input06d"
-      exterOutlined label="Enter the name"
+    <grn-input class="in-item"
+      formControlName="input06d"
+      exterOutlined
+      label="Enter the name"
       helperText=" ">
     </grn-input>
   </div>
@@ -96,7 +109,7 @@ export class InputComponent &#123;
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <pre>
-&lt;form [formGroup]="formGroup06" novalidate&gt;
+&lt;form [formGroup]="formGroup06" novalidate autocomplete="off"&gt;
 
   &lt;div style="display: flex; align-items: center;"&gt;
     &lt;grn-input class="in-item" formControlName="input06c"

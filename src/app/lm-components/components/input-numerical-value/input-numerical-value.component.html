@@ -13,19 +13,21 @@
   </p>
   <p>
     An alternative is to use the grnOnlyByRegex directive.
-    This directive allows you to enter only those values that match the specified regular expression.
-    The value of the onlyByRegex parameter is passed to the specified directive that is added to the input element.
+    This directive allows you to enter only those values that match the specified regular
+    expression.
+    The value of the onlyByRegex parameter is passed to the specified directive that is added to the
+    input element.
     To enter only numbers, you can use: onlyByRegex="^[\d]+$" or [onlyByRegex]="'^[\\d]+$'".
   </p>
   <p>
     The following templates can be specified in the grnOnlyByRegex directive as an input parameter:
   </p>
   <ul>
-    <li>'#numeric' - which matches the regular expression<br/>
+    <li>'#numeric' - which matches the regular expression<br />
       '^-?(\d+)$';</li>
-    <li>'#numeric(,2)' - which matches the regular expression<br/>
+    <li>'#numeric(,2)' - which matches the regular expression<br />
       '^-?(\d+(\.\d&#123;0,2&#125;)?|\.\d&#123;0,2&#125;)$';</li>
-    <li>'#numeric(12,2)' - which matches the regular expression<br/>
+    <li>'#numeric(12,2)' - which matches the regular expression<br />
       '^-?(\d&#123;1,12&#125;(\.\d&#123;0,2&#125;)?|\.\d&#123;0,2&#125;)$';</li>
   </ul>
   <p>
@@ -36,74 +38,96 @@
 
 <div class="in-section">
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior05" aria-label="Font Style">
+  <mat-button-toggle-group [(ngModel)]="exterior05"
+    aria-label="Font Style">
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
     <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
     <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
   </mat-button-toggle-group>
 </div>
 
-<form class="in-section" [formGroup]="formGroup05" novalidate>
+<form class="in-section"
+  [formGroup]="formGroup05"
+  novalidate
+  autocomplete="off">
 
   <div>
-    <grn-input class="in-item" formControlName="input05a"
-      exterOutlined label="type=Number step=5 min=0 max=50"
-      lbShrink type="number" autoComplete="off"
-      step="5" min="0" max="50"
+    <grn-input class="in-item"
+      formControlName="input05a"
+      exterOutlined
+      label="type=Number step=5 min=0 max=50"
+      lbShrink
+      type="number"
+      step="5"
+      min="0"
+      max="50"
       [exterOutlined]="exterior05==='outlined' ? '':null"
       [exterUnderline]="exterior05==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input05b"
-      exterOutlined label="Pattern(^[0-9]+$)"
-      lbShrink type="text" pattern="^[0-9]+$"
-      autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input05b"
+      exterOutlined
+      label="Pattern(^[0-9]+$)"
+      lbShrink
+      type="text"
+      pattern="^[0-9]+$"
       [exterOutlined]="exterior05==='outlined' ? '':null"
       [exterUnderline]="exterior05==='underline' ? '':null">
     </grn-input>
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input05c"
-      exterOutlined label="onlyByRegex(^-?(\d+)$)"
-      lbShrink [onlyByRegex]="'^-?(\\d+)$'"
-      autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input05c"
+      exterOutlined
+      label="onlyByRegex(^-?(\d+)$)"
+      lbShrink
+      [onlyByRegex]="'^-?(\\d+)$'"
       [exterOutlined]="exterior05==='outlined' ? '':null"
       [exterUnderline]="exterior05==='underline' ? '':null">
     </grn-input>
-  
-    <grn-input class="in-item" formControlName="input05d"
-      exterOutlined label="onlyByRegex(#numeric)"
-      lbShrink [onlyByRegex]="'#numeric'"
-      autoComplete="off"
+
+    <grn-input class="in-item"
+      formControlName="input05d"
+      exterOutlined
+      label="onlyByRegex(#numeric)"
+      lbShrink
+      [onlyByRegex]="'#numeric'"
       [exterOutlined]="exterior05==='outlined' ? '':null"
       [exterUnderline]="exterior05==='underline' ? '':null">
     </grn-input>
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input05e"
-      exterOutlined label="onlyByRegex(#numeric(,2))"
-      lbShrink [onlyByRegex]="'#numeric(,2)'"
-      autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input05e"
+      exterOutlined
+      label="onlyByRegex(#numeric(,2))"
+      lbShrink
+      [onlyByRegex]="'#numeric(,2)'"
       [exterOutlined]="exterior05==='outlined' ? '':null"
       [exterUnderline]="exterior05==='underline' ? '':null">
     </grn-input>
 
-    <grn-input class="in-item" formControlName="input05f"
-      exterOutlined label="onlyByRegex(#numeric(12,2))"
-      lbShrink [onlyByRegex]="'#numeric(12,2)'"
-      autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input05f"
+      exterOutlined
+      label="onlyByRegex(#numeric(12,2))"
+      lbShrink
+      [onlyByRegex]="'#numeric(12,2)'"
       [exterOutlined]="exterior05==='outlined' ? '':null"
       [exterUnderline]="exterior05==='underline' ? '':null">
     </grn-input>
   </div>
 
   <div>
-    <grn-input class="in-item" formControlName="input05g"
-      exterOutlined label="onlyByRegex(^[\ ,\d,a-z]+$)"
-      lbShrink [onlyByRegex]="'^[\\ ,\\d,a-z]+$'"
-      autoComplete="off"
+    <grn-input class="in-item"
+      formControlName="input05g"
+      exterOutlined
+      label="onlyByRegex(^[\ ,\d,a-z]+$)"
+      lbShrink
+      [onlyByRegex]="'^[\\ ,\\d,a-z]+$'"
       [exterOutlined]="exterior05==='outlined' ? '':null"
       [exterUnderline]="exterior05==='underline' ? '':null">
     </grn-input>
@@ -119,12 +143,12 @@
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
         <pre>
-&lt;form [formGroup]="formGroup05" novalidate&gt;
+&lt;form [formGroup]="formGroup05" novalidate autocomplete="off"&gt;
 
   &lt;div&gt;
     &lt;grn-input class="in-item" formControlName="input05a"
       exterOutlined label="type=Number step=5 min=0 max=50"
-      lbShrink type="number" autoComplete="off"
+      lbShrink type="number"
       step="5" min="0" max="50"
       [exterOutlined]="exterior05==='outlined' ? '':null"
       [exterUnderline]="exterior05==='underline' ? '':null"&gt;
@@ -133,7 +157,6 @@
     &lt;grn-input class="in-item" formControlName="input05b"
       exterOutlined label="Pattern(^[0-9]+$)"
       lbShrink type="text" pattern="^[0-9]+$"
-      autoComplete="off"
       [exterOutlined]="exterior05==='outlined' ? '':null"
       [exterUnderline]="exterior05==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -143,7 +166,6 @@
     &lt;grn-input class="in-item" formControlName="input05c"
       exterOutlined label="onlyByRegex(^-?(\d+)$)"
       lbShrink [onlyByRegex]="'^-?(\\d+)$'"
-      autoComplete="off"
       [exterOutlined]="exterior05==='outlined' ? '':null"
       [exterUnderline]="exterior05==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -151,7 +173,6 @@
     &lt;grn-input class="in-item" formControlName="input05d"
       exterOutlined label="onlyByRegex(#numeric)"
       lbShrink [onlyByRegex]="'#numeric'"
-      autoComplete="off"
       [exterOutlined]="exterior05==='outlined' ? '':null"
       [exterUnderline]="exterior05==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -161,7 +182,6 @@
     &lt;grn-input class="in-item" formControlName="input05e"
       exterOutlined label="onlyByRegex(#numeric(,2))"
       lbShrink [onlyByRegex]="'#numeric(,2)'"
-      autoComplete="off"
       [exterOutlined]="exterior05==='outlined' ? '':null"
       [exterUnderline]="exterior05==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -169,7 +189,6 @@
     &lt;grn-input class="in-item" formControlName="input05f"
       exterOutlined label="onlyByRegex(#numeric(12,2))"
       lbShrink [onlyByRegex]="'#numeric(12,2)'"
-      autoComplete="off"
       [exterOutlined]="exterior05==='outlined' ? '':null"
       [exterUnderline]="exterior05==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -179,7 +198,6 @@
     &lt;grn-input class="in-item" formControlName="input05g"
       exterOutlined label="onlyByRegex(^[\ ,\d,a-z]+$)"
       lbShrink [onlyByRegex]="'^[\\ ,\\d,a-z]+$'"
-      autoComplete="off"
       [exterOutlined]="exterior05==='outlined' ? '':null"
       [exterUnderline]="exterior05==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;

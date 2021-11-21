@@ -2,21 +2,21 @@
   <h3>Item size.</h3>
   <p>
     You can change the height of the element.
-    This requires adding one of the following attributes:
+    To do this, add the "frameSize" parameter with one of the following values:
   </p>
   <ul>
-    <li>"szShort" - sets the height to 38px;</li>
-    <li>"szSmall" - sets the height to 44px;</li>
-    <li>"szMiddle" - sets the height to 50px;</li>
-    <li>"szWide" - sets the height to 56px (default);</li>
-    <li>"szLarge" - sets the height to 62px;</li>
-    <li>"szHuge" - sets the height to 68px;</li>
+    <li>"short" - sets the height to 38px;</li>
+    <li>"small" - sets the height to 44px;</li>
+    <li>"middle" - sets the height to 50px;</li>
+    <li>"wide" - sets the height to 56px (default);</li>
+    <li>"large" - sets the height to 62px;</li>
+    <li>"huge" - sets the height to 68px;</li>
   </ul>
   <p>
-    The size of the element's height is set in the "&#8209;&#8209;gfi&#8209;base-size" ccc variable
-    in accordance with the "szXXX" size attribute.
-    All padding and offset calculations are determined by the value of this variable and the font
-    size.
+    The size of the element height is set in the css-variable "&#8209;&#8209;gfi&#8209;base-size"
+    according to the value of the "frameSize" parameter.
+    All padding and offset calculations are determined by the value of this variable and the
+    current font size.
   </p>
   <p>
     In order to hide the label (legend), add the "hiddenLabel" attribute.
@@ -46,7 +46,8 @@
 
 <form class="in-section"
   [formGroup]="formGroup04"
-  novalidate>
+  novalidate
+  autocomplete="off">
 
   <div class="in-item iis-row iis-text">
     <span>Item height: 38px; font-size: 16px;</span>
@@ -56,8 +57,7 @@
     <grn-input class="in-item"
       formControlName="input04a"
       label="Size Short"
-      szShort
-      autoComplete="off"
+      frameSize="short"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -65,8 +65,7 @@
     <grn-input class="in-item"
       formControlName="input04a"
       hiddenLabel
-      szShort
-      autoComplete="off"
+      frameSize="short"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -81,8 +80,7 @@
     <grn-input class="in-item"
       formControlName="input04b"
       label="Size Small"
-      szSmall
-      autoComplete="off"
+      frameSize="small"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -90,8 +88,7 @@
     <grn-input class="in-item"
       formControlName="input04b"
       hiddenLabel
-      szSmall
-      autoComplete="off"
+      frameSize="small"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -106,8 +103,7 @@
     <grn-input class="in-item"
       formControlName="input04c"
       label="Size Middle"
-      szMiddle
-      autoComplete="off"
+      frameSize="middle"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -115,8 +111,7 @@
     <grn-input class="in-item"
       formControlName="input04c"
       hiddenLabel
-      szMiddle
-      autoComplete="off"
+      frameSize="middle"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -131,8 +126,7 @@
     <grn-input class="in-item"
       formControlName="input04d"
       label="Size Wide"
-      szWide
-      autoComplete="off"
+      frameSize="wide"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -140,8 +134,7 @@
     <grn-input class="in-item"
       formControlName="input04d"
       hiddenLabel
-      szWide
-      autoComplete="off"
+      frameSize="wide"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -156,8 +149,7 @@
     <grn-input class="in-item iis-fn-sz-large"
       formControlName="input04e"
       label="Size Large"
-      szLarge
-      autoComplete="off"
+      frameSize="large"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -165,8 +157,7 @@
     <grn-input class="in-item iis-fn-sz-large"
       formControlName="input04e"
       hiddenLabel
-      szLarge
-      autoComplete="off"
+      frameSize="large"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -181,8 +172,7 @@
     <grn-input class="in-item iis-fn-sz-huge"
       formControlName="input04f"
       label="Size Huge"
-      szHuge
-      autoComplete="off"
+      frameSize="huge"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -190,8 +180,7 @@
     <grn-input class="in-item iis-fn-sz-huge"
       formControlName="input04f"
       hiddenLabel
-      szHuge
-      autoComplete="off"
+      frameSize="huge"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null">
     </grn-input>
@@ -206,22 +195,28 @@
     </mat-expansion-panel-header>
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
-        <pre class="fw-nr">
-&lt;form [formGroup]="formGroup04" novalidate&gt;
+        <pre>
+&lt;form [formGroup]="formGroup04"
+  novalidate
+  autocomplete="off"&gt;
 
   &lt;div class="in-item iis-row iis-text"&gt;
     &lt;span&gt;Item height: 38px; font-size: 16px;&lt;/span&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input04a"
-      label="Size Short" szShort autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input04a"
+      label="Size Short"
+      frameSize="short"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input04a"
-      hiddenLabel szShort autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input04a"
+      hiddenLabel
+      frameSize="short"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -233,14 +228,18 @@
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input04b"
-      label="Size Small" szSmall autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input04b"
+      label="Size Small"
+      frameSize="small"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input04b"
-      hiddenLabel szSmall autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input04b"
+      hiddenLabel
+      frameSize="small"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -252,14 +251,18 @@
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input04c"
-      label="Size Middle" szMiddle autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input04c"
+      label="Size Middle"
+      frameSize="middle"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input04c"
-      hiddenLabel szMiddle autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input04c"
+      hiddenLabel
+      frameSize="middle"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -271,14 +274,18 @@
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input04d"
-      label="Size Wide" szWide autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input04d"
+      label="Size Wide"
+      frameSize="wide"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input04d"
-      hiddenLabel szWide autoComplete="off"
+    &lt;grn-input class="in-item"
+      formControlName="input04d"
+      hiddenLabel
+      frameSize="wide"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -290,14 +297,18 @@
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item iis-fn-sz-large" formControlName="input04e"
-      label="Size Large" szLarge autoComplete="off"
+    &lt;grn-input class="in-item iis-fn-sz-large"
+      formControlName="input04e"
+      label="Size Large"
+      frameSize="large"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item iis-fn-sz-large" formControlName="input04e"
-      hiddenLabel szLarge autoComplete="off"
+    &lt;grn-input class="in-item iis-fn-sz-large"
+      formControlName="input04e"
+      hiddenLabel
+      frameSize="large"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
@@ -309,14 +320,18 @@
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item iis-fn-sz-huge" formControlName="input04f"
-      label="Size Huge" szHuge autoComplete="off"
+    &lt;grn-input class="in-item iis-fn-sz-huge"
+      formControlName="input04f"
+      label="Size Huge"
+      frameSize="huge"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item iis-fn-sz-huge" formControlName="input04f"
-      hiddenLabel szHuge autoComplete="off"
+    &lt;grn-input class="in-item iis-fn-sz-huge"
+      formControlName="input04f"
+      hiddenLabel
+      frameSize="huge"
       [exterOutlined]="exterior04==='outlined' ? '':null"
       [exterUnderline]="exterior04==='underline' ? '':null"&gt;
     &lt;/grn-input&gt;

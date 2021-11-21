@@ -31,7 +31,7 @@ import {
 } from '@angular/forms';
 
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
-import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
+import { FrameSize, FrameSizeType, FrameSizeUtil } from '../interfaces/frame-size.interface';
 
 import { InputType, InputTypeUtil } from './grn-input.interface';
 import { GrnOrnamentEndDirective } from './grn-ornament-end.directive';
@@ -73,17 +73,7 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   @Input()
   public lbShrink: string | null = null;
   @Input()
-  public szShort: string | null = null;
-  @Input()
-  public szSmall: string | null = null;
-  @Input()
-  public szMiddle: string | null = null;
-  @Input()
-  public szNormal: string | null = null;
-  @Input()
-  public szLarge: string | null = null;
-  @Input()
-  public szHuge: string | null = null;
+  public frameSize: FrameSizeType | null = null;
   @Input()
   public hiddenLabel: string | null = null;
   @Input()
@@ -136,7 +126,7 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   public isDisabledVal = false; // Binding attribute "isDisabled".
   public isLabelShrink = false; // Binding attribute "lbShrink".
   public isOrnament = false;
-  public frameSize: FrameSize | null = null;
+  public frameSizeVal: FrameSize | null = FrameSize.wide;
   public hiddenLabelVal = false; // Binding attribute "hiddenLabel".
   public isErrorVal = false; // Binding attribute "isError".
 
@@ -175,18 +165,15 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
     }
     this.isLabelShrink = changes.lbShrink ? this.lbShrink !== null : this.isLabelShrink;
 
-    if (changes.szShort || changes.szSmall || changes.szMiddle || changes.szNormal || changes.szLarge || changes.szHuge) {
-      this.frameSize = FrameSizeUtil.setFrameSize(this.szShort, this.szSmall, this.szMiddle, this.szNormal, this.szLarge, this.szHuge);
+    if (changes.frameSize) {
+      this.frameSizeVal = FrameSizeUtil.create(this.frameSize || FrameSize.wide.valueOf());
     }
-
     this.hiddenLabelVal = changes.hiddenLabel ? this.hiddenLabel !== null : this.hiddenLabelVal;
     this.isErrorVal = changes.isError ? this.isError !== null : this.isErrorVal;
     this.isHelperTextFilled = changes.helperText ? !!this.helperText : this.isHelperTextFilled;
 
-    const minLength = changes.minLength ? (this.minLength as string) : '';
-    const maxLength = changes.maxLength ? (this.maxLength as string) : '';
-    if (changes.isRequired || !!minLength || !!maxLength) {
-      this.prepareFormGroup(this.isRequiredVal, this.parseNumber(minLength, -1), this.parseNumber(maxLength, -1));
+    if (changes.isRequired || changes.minLength || changes.maxLength) {
+      this.prepareFormGroup(this.isRequiredVal, this.parseNumber(this.minLength || '', -1), this.parseNumber(this.maxLength || '', -1));
     }
   }
 
