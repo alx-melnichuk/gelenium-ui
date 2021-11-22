@@ -47,34 +47,22 @@
         <span>The content of the label.<br />(default = '';)</span>
       </td>
     </tr>
+
     <tr>
       <td>
         <code>@Input()</code>
-        <code>exterOutlined: string | null;</code>
+        <code>exterior: string | null;</code>
       </td>
       <td>
-        <span>Changes the appearance of the element to "Outlined" mode.<br />Attribute (no
-          content).</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>exterUnderline: string | null;</code>
-      </td>
-      <td>
-        <span>Changes the appearance of the element to "Underline" mode.<br />Attribute (no
-          content).</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>exterStandard: string | null;</code>
-      </td>
-      <td>
-        <span>Changes the appearance of the element to "Standard" mode. Default.<br />Attribute (no
-          content).</span>
+        <span>
+          Determines the appearance of an element.<br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"outlined";</li>
+          <li>"underline";</li>
+          <li>"standard" (default);</li>
+        </ul>
       </td>
     </tr>
     <tr>
@@ -117,12 +105,12 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>frameSize: FrameSizeType | null;</code>
+        <code>frameSize: string | null;</code>
       </td>
       <td>
         <span>Determines the size of the element.<br />
           It can take the following values:
-        </span><br />
+        </span>
         <ul>
           <li>"short" - height: 38px;</li>
           <li>"small" - height: 44px;</li>

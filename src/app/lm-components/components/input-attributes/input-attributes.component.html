@@ -44,16 +44,14 @@
       id="unique_identifier"
       label="Required"
       isRequired
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null">
+      [exterior]="exterior02">
     </grn-input>
 
     <grn-input class="in-item"
       formControlName="input02b"
       label="Disabled"
       isDisabled
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null">
+      [exterior]="exterior02">
     </grn-input>
   </div>
 
@@ -63,16 +61,14 @@
       label="Password"
       type="password"
       autoComplete="current-password"
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null">
+      [exterior]="exterior02">
     </grn-input>
 
     <grn-input class="in-item"
       formControlName="input02d"
       label="Read Only"
       isReadOnly
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null">
+      [exterior]="exterior02">
     </grn-input>
   </div>
 
@@ -82,16 +78,14 @@
       label="Number"
       lbShrink
       type="number"
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null">
+      [exterior]="exterior02">
     </grn-input>
 
     <grn-input class="in-item"
       formControlName="input02f"
       label="Search field"
       type="search"
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null">
+      [exterior]="exterior02">
     </grn-input>
   </div>
 
@@ -100,8 +94,7 @@
       formControlName="input02g"
       label="Helper text"
       helperText="Some important text"
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null">
+      [exterior]="exterior02">
     </grn-input>
   </div>
 
@@ -115,61 +108,68 @@
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
         <pre>
-&lt;form [formGroup]="formGroup02" novalidate autocomplete="off"&gt;
+&lt;form class="in-section"
+  [formGroup]="formGroup02"
+  novalidate
+  autocomplete="off"&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input02a"
+    &lt;grn-input class="in-item"
+      formControlName="input02a"
       id="unique_identifier"
       label="Required"
-      isRequired 
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
+      isRequired
+      [exterior]="exterior02"&gt;
     &lt;/grn-input&gt;
-  
-    &lt;grn-input class="in-item" formControlName="input02b"
+
+    &lt;grn-input class="in-item"
+      formControlName="input02b"
       label="Disabled"
       isDisabled
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
+      [exterior]="exterior02"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input02c"
+    &lt;grn-input class="in-item"
+      formControlName="input02c"
       label="Password"
       type="password"
       autoComplete="current-password"
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
+      [exterior]="exterior02"&gt;
     &lt;/grn-input&gt;
-  
-    &lt;grn-input class="in-item" formControlName="input02d"
+
+    &lt;grn-input class="in-item"
+      formControlName="input02d"
       label="Read Only"
       isReadOnly
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
+      [exterior]="exterior02"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input02e"
-      label="Number" lbShrink type="number"
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input02e"
+      label="Number"
+      lbShrink
+      type="number"
+      [exterior]="exterior02"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input02f"
-      label="Search field" type="search"
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input02f"
+      label="Search field"
+      type="search"
+      [exterior]="exterior02"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input02g"
-      label="Helper text" helperText="Some important text"
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input02g"
+      label="Helper text"
+      helperText="Some important text"
+      [exterior]="exterior02"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 

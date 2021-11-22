@@ -51,11 +51,7 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   @Input()
   public label = '';
   @Input()
-  public exterOutlined: string | null = null;
-  @Input()
-  public exterUnderline: string | null = null;
-  @Input()
-  public exterStandard: string | null = null;
+  public exterior: string | null = null; // ExteriorType
   @Input()
   public isReadOnly: string | null = null;
   @Input()
@@ -108,7 +104,7 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   //   return ''; // value != null ? '--gt-number-lines: ' + value + ';' : '';
   // }
 
-  public exterior: Exterior = Exterior.standard;
+  public exteriorVal: Exterior = Exterior.standard;
   public isReadOnlyVal = false; // Binding attribute "isReadOnly".
   public isRequiredVal = false; // Binding attribute "isRequired".
   public isDisabledVal = false; // Binding attribute "isDisabled".
@@ -117,16 +113,6 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   public frameSizeVal: FrameSize | null = FrameSize.wide;
   public hiddenLabelVal = false; // Binding attribute "hiddenLabel".
   public isErrorVal = false; // Binding attribute "isError".
-
-  public get isOutlinedExterior(): boolean {
-    return ExteriorUtil.isOutlined(this.exterior);
-  }
-  public get isUnderlineExterior(): boolean {
-    return ExteriorUtil.isUnderline(this.exterior);
-  }
-  public get isStandardExterior(): boolean {
-    return ExteriorUtil.isStandard(this.exterior);
-  }
 
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
@@ -143,8 +129,8 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.exterOutlined || changes.exterUnderline || changes.exterStandard) {
-      this.exterior = ExteriorUtil.setExterior(this.exterOutlined, this.exterUnderline, this.exterStandard);
+    if (changes.exterior) {
+      this.exteriorVal = ExteriorUtil.create(this.exterior) || Exterior.standard;
     }
     this.isReadOnlyVal = changes.isReadOnly ? this.isReadOnly !== null : this.isReadOnlyVal;
     this.isRequiredVal = changes.isRequired ? this.isRequired !== null : this.isRequiredVal;
@@ -168,13 +154,15 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
 
     if (changes.minRows) {
       this.minRowsVal = this.parseNumber(this.minRows || '', 0);
+      this.updateHeight(0, this.minRowsVal, this.maxRowsVal);
+    }
+    if (changes.maxRows) {
+      this.maxRowsVal = this.parseNumber(this.maxRows || '', 0);
+      this.updateHeight(0, this.minRowsVal, this.maxRowsVal);
     }
     if (changes.cntRows) {
       this.cntRowsVal = this.parseNumber(this.cntRows || '', 0);
       this.currentRows = this.cntRowsVal > 0 ? this.cntRowsVal : this.currentRows;
-    }
-    if (changes.maxRows) {
-      this.maxRowsVal = this.parseNumber(this.maxRows || '', 0);
     }
   }
 

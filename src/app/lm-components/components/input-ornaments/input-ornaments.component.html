@@ -41,16 +41,14 @@
       formControlName="input08a"
       label="Enter the mass"
       helperText="The value is greater than zero."
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null">
+      [exterior]="exterior08">
       <span grnOrnament>kg</span>
     </grn-input>
 
     <grn-input class="in-item"
       formControlName="input08b"
       label="Enter the height"
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null">
+      [exterior]="exterior08">
       <span grnOrnamentEnd>см</span>
     </grn-input>
   </div>
@@ -62,8 +60,7 @@
       isRequired
       minLength="{{ minLength08 }}"
       maxLength="{{ maxLength08 }}"
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null"
+      [exterior]="exterior08"
       helperText="{{
         (controls08.input08c.errors?.required ? 'Required field.':
           (controls08.input08c.errors?.minlength ? 'Minimum length ' + controls08.input08c.errors?.minlength.requiredLength + ' characters.':
@@ -80,8 +77,7 @@
       isRequired
       minLength="{{ minLength08 }}"
       maxLength="{{ maxLength08 }}"
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null"
+      [exterior]="exterior08"
       helperText="{{
         (controls08.input08d.errors?.required ? 'Required field.':
           (controls08.input08d.errors?.minlength ? 'Minimum length ' + controls08.input08d.errors?.minlength.requiredLength + ' characters.':
@@ -99,8 +95,7 @@
       label="Enter password"
       [type]="isBtnEyeCrossed08e ? 'text':'password'"
       isRequired
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null"
+      [exterior]="exterior08"
       helperText="{{
         (controls08.input08e.errors?.required ? 'The password value is required.':'Enter the password value.') 
       }}">
@@ -116,8 +111,7 @@
       label="Enter password"
       [type]="isBtnEyeCrossed08f ? 'text':'password'"
       isRequired
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null"
+      [exterior]="exterior08"
       helperText="{{
         (controls08.input08f.errors?.required ? 'The password value is required.':'Enter the password value.') 
       }}">
@@ -139,63 +133,65 @@
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
         <pre class="fw-nr">
-&lt;form class="in-ornament" [formGroup]="formGroup08" novalidate
+&lt;form class="in-ornament"
+  [formGroup]="formGroup08"
+  novalidate
   autocomplete="off"&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input08a"
+    &lt;grn-input class="in-item"
+      formControlName="input08a"
       label="Enter the mass"
       helperText="The value is greater than zero."
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null"&gt;
+      [exterior]="exterior08"&gt;
       &lt;span grnOrnament&gt;kg&lt;/span&gt;
     &lt;/grn-input&gt;
-    
-    &lt;grn-input class="in-item" formControlName="input08b"
+
+    &lt;grn-input class="in-item"
+      formControlName="input08b"
       label="Enter the height"
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null"&gt;
+      [exterior]="exterior08"&gt;
       &lt;span grnOrnamentEnd&gt;см&lt;/span&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input08c"
+    &lt;grn-input class="in-item"
+      formControlName="input08c"
       label="Enter the number in words"
       isRequired
       minLength="<b>&#123;</b>&#123; minLength08 &#125;&#125;"
       maxLength="<b>&#123;</b>&#123; maxLength08 &#125;&#125;"
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null"
+      [exterior]="exterior08"
       helperText="<b>&#123;</b>&#123;
         (controls08.input08c.errors?.required ? 'Required field.':
           (controls08.input08c.errors?.minlength ?
             'Minimum length '
-             + controls08.input08c.errors?.minlength.requiredLength
-             + ' characters.':
+            + controls08.input08c.errors?.minlength.requiredLength
+            + ' characters.':
             (controls08.input08c.errors?.maxlength ?
               'Maximum length '
-               + controls08.input08c.errors?.maxlength.requiredLength
-               + ' characters.':'')
+              + controls08.input08c.errors?.maxlength.requiredLength
+              + ' characters.':'')
           )
         )
       &#125;&#125;"&gt;
       &lt;span grnOrnament&gt;$&lt;/span&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input08d"
+    &lt;grn-input class="in-item"
+      formControlName="input08d"
       label="Enter the number in words"
       isRequired
       minLength="<b>&#123;</b>&#123; minLength08 &#125;&#125;"
       maxLength="<b>&#123;</b>&#123; maxLength08 &#125;&#125;"
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null"
+      [exterior]="exterior08"
       helperText="<b>&#123;</b>&#123;
         (controls08.input08d.errors?.required ? 'Required field.':
           (controls08.input08d.errors?.minlength ?
             'Minimum length '
-             + controls08.input08d.errors?.minlength.requiredLength
-             + ' characters.':
+            + controls08.input08d.errors?.minlength.requiredLength
+            + ' characters.':
             (controls08.input08d.errors?.maxlength ?
               'Maximum length '
               + controls08.input08d.errors?.maxlength.requiredLength
@@ -209,40 +205,41 @@
 
   &lt;div&gt;
     &lt;grn-input class="in-item in-passwd-size"
-      formControlName="input08e" label="Enter password"
+      formControlName="input08e"
+      label="Enter password"
       [type]="isBtnEyeCrossed08e ? 'text':'password'"
       isRequired
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null"
+      [exterior]="exterior08"
       helperText="<b>&#123;</b>&#123;
         (controls08.input08e.errors?.required ?
-         'The password value is required.':
+         'The password value is required.' :
          'Enter the password value.') 
       &#125;&#125;"&gt;
-      &lt;button grnOrnament class="in-btn-eye press-left"
+      &lt;button grnOrnament
+        class="in-btn-eye press-left"
         (click)="isBtnEyeCrossed08e=!isBtnEyeCrossed08e"&gt;
         &lt;span [ngClass]="['in-icon-eye'
           , (isBtnEyeCrossed08e ? 'crossed':'')]"&gt;
         &lt;/span&gt;
       &lt;/button&gt;
     &lt;/grn-input&gt;
-    
+
     &lt;grn-input class="in-item in-passwd-size"
-      formControlName="input08f" label="Enter password"
-      
+      formControlName="input08f"
+      label="Enter password"
       [type]="isBtnEyeCrossed08f ? 'text':'password'"
       isRequired
-      [exterOutlined]="exterior08==='outlined' ? '':null"
-      [exterUnderline]="exterior08==='underline' ? '':null"
+      [exterior]="exterior08"
       helperText="<b>&#123;</b>&#123;
         (controls08.input08f.errors?.required ?
           'The password value is required.':
           'Enter the password value.') 
       &#125;&#125;"&gt;
-      &lt;button grnOrnamentEnd class="in-btn-eye press-right"
+      &lt;button grnOrnamentEnd
+        class="in-btn-eye press-right"
         (click)="isBtnEyeCrossed08f=!isBtnEyeCrossed08f"&gt;
         &lt;span [ngClass]="['in-icon-eye'
-        , (isBtnEyeCrossed08f ? 'crossed':'')]"&gt;
+          , (isBtnEyeCrossed08f ? 'crossed':'')]"&gt;
         &lt;/span&gt;
       &lt;/button&gt;
     &lt;/grn-input&gt;

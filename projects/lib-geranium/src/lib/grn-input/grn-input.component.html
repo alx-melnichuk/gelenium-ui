@@ -1,7 +1,7 @@
 <ng-container [formGroup]="formGroup">
   <grn-frame-input [inputId]="id"
     [label]="label"
-    [exterior]="exterior"
+    [exterior]="exteriorVal"
     [isRequired]="isRequiredVal"
     [isDisabled]="isDisabledVal"
     [isFocused]="isFocused"
@@ -18,10 +18,7 @@
       formControlName="textData"
       [attr.id]="id"
       [type]="typeVal"
-      [ngClass]="['gi-input', 'gfi-molding', 'GrnInputBase'
-        , (isOutlinedExterior ? 'gi-outlined': '')
-        , (isUnderlineExterior ? 'gi-underline': '')
-        , (isStandardExterior ? 'gi-standard': '')
+      [ngClass]="['gi-input', 'gfi-molding', 'GrnInputBase', 'gi-' + exteriorVal
         , (isDisabledVal ? 'Grn-disabled': '')
         , (!!formControl.errors ? 'Grn-error': '')
       ]"

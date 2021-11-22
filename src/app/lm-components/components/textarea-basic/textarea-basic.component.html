@@ -5,8 +5,8 @@
     You can enter text in multiline mode.
     If the "cntRows" parameter is not specified, then the element's height will dynamically change
     depending on the number of lines in the element's text.
-    It comes in three versions: with an outline (exterOutlined), with a fill (exterUnderline) and
-    standard (exterStandard - the default).
+    It comes in three versions: with an outline (exterior="outlined"), with a fill
+    (exterior="underline") and standard (exterior="standard" - the default).
   </p>
 </div>
 
@@ -19,7 +19,7 @@
     <grn-textarea class="ta-item"
       formControlName="input01a"
       label="Outlined"
-      exterOutlined>
+      exterior="outlined">
     </grn-textarea>
   </div>
 
@@ -27,7 +27,7 @@
     <grn-textarea class="ta-item"
       formControlName="input01b"
       label="Underline"
-      exterUnderline>
+      exterior="underline">
     </grn-textarea>
   </div>
 
@@ -35,7 +35,7 @@
     <grn-textarea class="ta-item"
       formControlName="input01c"
       label="Standard"
-      exterStandard>
+      exterior="standard">
     </grn-textarea>
   </div>
 
@@ -49,13 +49,15 @@
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
         <pre>
-&lt;form [formGroup]="formGroup01" novalidate autocomplete="off"&gt;
+&lt;form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off"&gt;
 
   &lt;div&gt;
     &lt;grn-textarea class="ta-item"
       formControlName="input01a"
       label="Outlined"
-      exterOutlined&gt;
+      exterior="outlined"&gt;
     &lt;/grn-textarea&gt;
   &lt;/div&gt;
 
@@ -63,7 +65,7 @@
     &lt;grn-textarea class="ta-item"
       formControlName="input01b"
       label="Underline"
-      exterUnderline&gt;
+      exterior="underline"&gt;
     &lt;/grn-textarea&gt;
   &lt;/div&gt;
 
@@ -71,7 +73,7 @@
     &lt;grn-textarea class="ta-item"
       formControlName="input01c"
       label="Standard"
-      exterStandard&gt;
+      exterior="standard"&gt;
     &lt;/grn-textarea&gt;
   &lt;/div&gt;
 

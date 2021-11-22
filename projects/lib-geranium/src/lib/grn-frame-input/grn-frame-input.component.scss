@@ -141,7 +141,8 @@ grn-frame-input { //outline: 1px dashed crimson;
     box-sizing: border-box;
     cursor: text;
     @include mxDisplayInlineFlex();
-    @include mxAlignItems(center);
+    // @include mxAlignItems(center);
+    @include mxAlignItems(baseline);
     position: relative;
     border-radius: inherit;
     &.Grn-disabled {

@@ -2,8 +2,8 @@
   <h3>Basic</h3>
   <p>
     The GrnInput component is a form control. It includes: label, input and help text.
-    It comes in three versions: with an outline (exterOutlined), with a fill (exterUnderline) and
-    standard (exterStandard - the default).
+    It comes in three versions: with an outline (exterior="outlined"), with a fill
+    (exterior="underline") and standard (exterior="standard" - the default).
   </p>
 </div>
 
@@ -15,7 +15,7 @@
   <div>
     <grn-input class="in-item"
       formControlName="input01a"
-      exterOutlined
+      exterior="outlined"
       label="Outlined">
     </grn-input>
   </div>
@@ -23,7 +23,7 @@
   <div>
     <grn-input class="in-item"
       formControlName="input01b"
-      exterUnderline
+      exterior="underline"
       label="Underline">
     </grn-input>
   </div>
@@ -31,7 +31,7 @@
   <div>
     <grn-input class="in-item"
       formControlName="input01c"
-      exterStandard
+      exterior="standard"
       label="Standard">
     </grn-input>
   </div>
@@ -46,23 +46,32 @@
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
         <pre>
-&lt;form [formGroup]="formGroup01" novalidate autocomplete="off"&gt;
+&lt;form class="in-section"
+  [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off"&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input01a"
-      exterOutlined label="Outlined"&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input01a"
+      exterior="outlined"
+      label="Outlined"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input01b"
-      exterUnderline label="Underline"&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input01b"
+      exterior="underline"
+      label="Underline"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input01c"
-      exterStandard label="Standard"&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input01c"
+      exterior="standard"
+      label="Standard"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 

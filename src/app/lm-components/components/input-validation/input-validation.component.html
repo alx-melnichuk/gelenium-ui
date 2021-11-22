@@ -2,7 +2,8 @@
   <h3>Validation</h3>
   <p>The "isError" parameter sets the field to the error display state.
     The "helperText" parameter can be used to display an error message.
-    A thin border (exterOutlined) or a red underline (exterUnderline | exterStandard) signals the
+    A thin border (exterior="outlined") or a red underline
+    (exterior="underline" | exterior="standard") signals the
     user about an erroneous value in this input field.
     The red frame is displayed even if the input field is disabled (isDisabled).
   </p>
@@ -16,14 +17,14 @@
   <div>
     <grn-input class="in-item"
       formControlName="input03a"
-      exterOutlined
+      exterior="outlined"
       label="Error"
       isError>
     </grn-input>
 
     <grn-input class="in-item"
       formControlName="input03b"
-      exterOutlined
+      exterior="outlined"
       label="Error-Disabled"
       isDisabled
       isError
@@ -34,14 +35,14 @@
   <div>
     <grn-input class="in-item"
       formControlName="input03c"
-      exterUnderline
+      exterior="underline"
       label="Error"
       isError>
     </grn-input>
 
     <grn-input class="in-item"
       formControlName="input03d"
-      exterUnderline
+      exterior="underline"
       label="Error-Disabled"
       isDisabled
       isError
@@ -52,13 +53,14 @@
   <div>
     <grn-input class="in-item"
       formControlName="input03e"
-      exterStandard
+      exterior="standard"
       label="Error"
       isError>
     </grn-input>
 
     <grn-input class="in-item"
       formControlName="input03f"
+      exterior="standard"
       label="Error-Disabled"
       isDisabled
       isError
@@ -76,38 +78,61 @@
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
         <pre>
-&lt;form [formGroup]="formGroup03" novalidate autocomplete="off"&gt;
+&lt;form [formGroup]="formGroup03"
+  novalidate
+  autocomplete="off"&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input03a"
-      exterOutlined label="Error" isError&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input03a"
+      exterior="outlined"
+      label="Error"
+      isError&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input03b"
-      exterOutlined label="Error-Disabled"
-      isDisabled isError helperText="Incorrect entry."&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-  &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input03c"
-      exterUnderline label="Error" isError&gt;
-    &lt;/grn-input&gt;
-
-    &lt;grn-input class="in-item" formControlName="input03d"
-      exterUnderline label="Error-Disabled"
-      isDisabled isError helperText="Incorrect entry."&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-  &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input03e"
-      exterStandard label="Error" isError&gt;
-    &lt;/grn-input&gt;
-
-    &lt;grn-input class="in-item" formControlName="input03f"
+    &lt;grn-input class="in-item"
+      formControlName="input03b"
+      exterior="outlined"
       label="Error-Disabled"
-      isDisabled isError helperText="Incorrect entry."&gt;
+      isDisabled
+      isError
+      helperText="Incorrect entry."&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input03c"
+      exterior="underline"
+      label="Error"
+      isError&gt;
+    &lt;/grn-input&gt;
+
+    &lt;grn-input class="in-item"
+      formControlName="input03d"
+      exterior="underline"
+      label="Error-Disabled"
+      isDisabled
+      isError
+      helperText="Incorrect entry."&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input03e"
+      exterior="standard"
+      label="Error"
+      isError&gt;
+    &lt;/grn-input&gt;
+
+    &lt;grn-input class="in-item"
+      formControlName="input03f"
+      exterior="standard"
+      label="Error-Disabled"
+      isDisabled
+      isError
+      helperText="Incorrect entry."&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 

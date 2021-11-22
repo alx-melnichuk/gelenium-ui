@@ -19,7 +19,7 @@ export enum FrameSizeValue {
 }
 
 export class FrameSizeUtil {
-  public static create(value: string): FrameSize | null {
+  public static create(value: string | null): FrameSize | null {
     let result: FrameSize | null = null;
     switch (value) {
       case FrameSize.short.valueOf():

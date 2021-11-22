@@ -2,22 +2,34 @@
   <h3>Attributes</h3>
   <p>The following attributes are supported:</p>
   <ul>
-    <li>"id" - parameter for defining the unique identifier of the input field
-      (id="unique_identifier");</li>
-    +<li>"isRequired" - a sign that the field is required (isRequired);</li>
-    +<li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
-    <li></li>
-    <li>"autoComplete" - the value of the autocomplete parameter for the textarea field.
-      <br />&nbsp;&nbsp;autoComplete="off" - The browser is not permitted to automatically enter or
-      select a value for this field.
+    <li>"id" - parameter for defining the unique identifier of the field;</li>
+    <li>"isReadOnly" - a sign that the field is read-only;</li>
+    <li>"isRequired" - a sign that the field is required;</li>
+    <li>"isDisabled" - a sign that the field is disabled;</li>
+    <li>"lbShrink" - a sign that the field has a permanent label,
+      without being converted to a placeholder;</li>
+    <li>"hiddenLabel" - a sign that the field has no label at all;</li>
+    <li>"helperText" - the parameter is used to provide context for a given
+      field or error message;</li>
+    <li>"isError" - a sign that the field is in error;</li>
+    <li>"minLength" - sets the minimum field length;
+      <pre class="fw-nr">
+( minLength="2", min02=4; minLength="<b>&#123;</b>&#123;min02&#125;&#125;" [minLength]="''+min02" )</pre>
     </li>
-    <li>"isReadOnly" - read-only access flag (isReadOnly);</li>
-    <li>"lbShrink" - an attribute, the presence of which leads to permanent display of the label in
-      the field header
-      without transformation into a placeholder (lbShrink);
+    <li>"maxLength" - sets the maximum field length;
+      <pre class="fw-nr">
+( maxLength="2", max02=4; maxLength="<b>&#123;</b>&#123;max02&#125;&#125;" [maxLength]="''+max02" )</pre>
     </li>
-    <li>"helperText" - the parameter is used to provide context about the input of the field or
-      error message (helperText="Some important text").</li>
+    <li>"cntRows" - sets the number of lines that, when multiplied by the line
+      height, determine the total height. If not specified, the height is
+      determined by the number of lines in the text.
+    </li>
+    <li>"minRows" - sets the number of lines that, when multiplied by the line
+      height, determine the min height. Active if there is no "cntRows".
+    </li>
+    <li>"maxRows" - sets the number of lines that, when multiplied by the line
+      height, determine the max height. Active if there is no "cntRows".
+    </li>
   </ul>
 </div>
 
@@ -37,32 +49,31 @@
   autocomplete="off">
 
   <div class="ta-group">
+
     <div>
       <div class="ta-item taa-text">
-        Attribute: isRequired.
+        State: empty and attribute: cntRows=2.
       </div>
       <grn-textarea class="ta-item"
         formControlName="input02a"
         id="unique_identifier"
-        label="Required"
-        isRequired
+        label="Enter value"
         cntRows="2"
-        [exterOutlined]="exterior02==='outlined' ? '':null"
-        [exterUnderline]="exterior02==='underline' ? '':null">
+        [exterior]="exterior02">
       </grn-textarea>
     </div>
 
     <div>
       <div class="ta-item taa-text">
-        Attribute: isDisabled.
+        Attribute: isRequired.
       </div>
       <grn-textarea class="ta-item"
         formControlName="input02b"
-        label="Disabled"
-        isDisabled
+        id="unique_identifier"
+        label="Required"
+        isRequired
         cntRows="2"
-        [exterOutlined]="exterior02==='outlined' ? '':null"
-        [exterUnderline]="exterior02==='underline' ? '':null">
+        [exterior]="exterior02">
       </grn-textarea>
     </div>
   </div>
@@ -77,8 +88,7 @@
         label="Permanent label"
         lbShrink
         cntRows="2"
-        [exterOutlined]="exterior02==='outlined' ? '':null"
-        [exterUnderline]="exterior02==='underline' ? '':null">
+        [exterior]="exterior02">
       </grn-textarea>
     </div>
 
@@ -91,8 +101,36 @@
         label="hiddenLabel"
         hiddenLabel
         cntRows="2"
-        [exterOutlined]="exterior02==='outlined' ? '':null"
-        [exterUnderline]="exterior02==='underline' ? '':null">
+        [exterior]="exterior02">
+      </grn-textarea>
+    </div>
+  </div>
+
+  <div class="ta-group">
+    <div>
+      <div class="ta-item taa-text">
+        Attribute: isReadOnly.
+      </div>
+      <grn-textarea class="ta-item"
+        formControlName="input02e"
+        label="Read Only"
+        isReadOnly
+        cntRows="2"
+        [exterior]="exterior02">
+      </grn-textarea>
+    </div>
+
+    <div>
+      <div class="ta-item taa-text">
+        Attribute: isDisabled.
+      </div>
+      <grn-textarea class="ta-item"
+        formControlName="input02f"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        cntRows="2"
+        [exterior]="exterior02">
       </grn-textarea>
     </div>
   </div>
@@ -103,42 +141,11 @@
         Attribute: helperText.
       </div>
       <grn-textarea class="ta-item"
-        formControlName="input02e"
-        label="Helper text"
-        helperText="Some important text"
-        cntRows="2"
-        [exterOutlined]="exterior02==='outlined' ? '':null"
-        [exterUnderline]="exterior02==='underline' ? '':null">
-      </grn-textarea>
-    </div>
-
-    <div>
-      <div class="ta-item taa-text">
-        Attribute: isReadOnly.
-      </div>
-      <grn-textarea class="ta-item"
-        formControlName="input02f"
-        label="Read Only"
-        isReadOnly
-        cntRows="2"
-        [exterOutlined]="exterior02==='outlined' ? '':null"
-        [exterUnderline]="exterior02==='underline' ? '':null">
-      </grn-textarea>
-    </div>
-  </div>
-
-  <div class="ta-group">
-    <div>
-      <div class="ta-item taa-text">
-        State: empty.
-      </div>
-      <grn-textarea class="ta-item"
         formControlName="input02g"
-        label="Enter value"
+        label="Helper text"
+        helperText="The parameter value must be entered."
         cntRows="2"
-        helperText="Enter the value as required."
-        [exterOutlined]="exterior02==='outlined' ? '':null"
-        [exterUnderline]="exterior02==='underline' ? '':null">
+        [exterior]="exterior02">
       </grn-textarea>
     </div>
 
@@ -153,8 +160,7 @@
         [isError]="!controls02.input02h.value ? '':null"
         [helperText]="!controls02.input02h.value
           ? 'The field is not filled.': 'The field is filled.'"
-        [exterOutlined]="exterior02==='outlined' ? '':null"
-        [exterUnderline]="exterior02==='underline' ? '':null">
+        [exterior]="exterior02">
       </grn-textarea>
     </div>
   </div>
@@ -162,18 +168,22 @@
   <div class="ta-group">
     <div>
       <div class="ta-item taa-text">
-        Status: error and attribute: lbShrink.
+        Attribute: isRequired, minLength.
       </div>
       <grn-textarea class="ta-item"
         formControlName="input02i"
         [label]="controls02.input02i.errors ? 'Error':'Value'"
-        lbShrink
         cntRows="2"
         isRequired
-        [helperText]="controls02.input02i.errors?.required
-          ? 'Required field.': 'Enter value.'"
-        [exterOutlined]="exterior02==='outlined' ? '':null"
-        [exterUnderline]="exterior02==='underline' ? '':null">
+        minLength="{{minLength02}}"
+        helperText="{{(controls02.input02i.errors?.required ?
+          'Required field.':
+          (controls02.input02i.errors?.minlength ?
+            'Minimum length ' + controls02.input02i.errors?.minlength.requiredLength
+            + ' characters.':'Enter value.'
+          )
+        )}}"
+        [exterior]="exterior02">
       </grn-textarea>
     </div>
 
@@ -186,15 +196,39 @@
         cntRows="2"
         isError
         isDisabled
-        helperText="Parameter disabled"
-        [exterOutlined]="exterior02==='outlined' ? '':null"
-        [exterUnderline]="exterior02==='underline' ? '':null">
+        helperText="The parameter is disabled."
+        [exterior]="exterior02">
       </grn-textarea>
     </div>
   </div>
 
+  <div class="ta-group">
+    <div>
+      <div class="ta-item taa-text">
+        Height by number of lines.
+      </div>
+      <grn-textarea class="ta-item"
+        formControlName="input02k"
+        label="Parameter value"
+        helperText="Height by number of lines."
+        [exterior]="exterior02">
+      </grn-textarea>
+    </div>
 
-
+    <div>
+      <div class="ta-item taa-text">
+        Height: min = 2 max = 6.
+      </div>
+      <grn-textarea class="ta-item"
+        formControlName="input02l"
+        label="Parameter value"
+        minRows="2"
+        maxRows="6"
+        helperText="Height: min = 2 max = 6."
+        [exterior]="exterior02">
+      </grn-textarea>
+    </div>
+  </div>
 
 </form>
 
@@ -208,61 +242,6 @@
         <pre>
 &lt;form [formGroup]="formGroup02" novalidate autocomplete="off"&gt;
 
-  &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input02a"
-      id="unique_identifier"
-      label="Required"
-      isRequired 
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
-    &lt;/grn-input&gt;
-  
-    &lt;grn-input class="in-item" formControlName="input02b"
-      label="Disabled"
-      isDisabled
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-  &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input02c"
-      label="Password"
-      type="password"
-      autoComplete="current-password"
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
-    &lt;/grn-input&gt;
-  
-    &lt;grn-input class="in-item" formControlName="input02d"
-      label="Read Only"
-      isReadOnly
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-  &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input02e"
-      label="Number" lbShrink type="number"
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
-    &lt;/grn-input&gt;
-
-    &lt;grn-input class="in-item" formControlName="input02f"
-      label="Search field" type="search"
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-  &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input02g"
-      label="Helper text" helperText="Some important text"
-      [exterOutlined]="exterior02==='outlined' ? '':null"
-      [exterUnderline]="exterior02==='underline' ? '':null"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
 
 &lt;/form&gt;</pre>
       </mat-tab>

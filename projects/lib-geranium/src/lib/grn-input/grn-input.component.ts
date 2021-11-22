@@ -31,7 +31,7 @@ import {
 } from '@angular/forms';
 
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
-import { FrameSize, FrameSizeType, FrameSizeUtil } from '../interfaces/frame-size.interface';
+import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 
 import { InputType, InputTypeUtil } from './grn-input.interface';
 import { GrnOrnamentEndDirective } from './grn-ornament-end.directive';
@@ -59,11 +59,7 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   @Input()
   public label = '';
   @Input()
-  public exterOutlined: string | null = null;
-  @Input()
-  public exterUnderline: string | null = null;
-  @Input()
-  public exterStandard: string | null = null;
+  public exterior: string | null = null; // ExteriorType
   @Input()
   public isReadOnly: string | null = null;
   @Input()
@@ -73,7 +69,7 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   @Input()
   public lbShrink: string | null = null;
   @Input()
-  public frameSize: FrameSizeType | null = null;
+  public frameSize: string | null = null; // FrameSizeType
   @Input()
   public hiddenLabel: string | null = null;
   @Input()
@@ -120,25 +116,15 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   }
 
   public typeVal: InputType = InputType.text;
-  public exterior: Exterior = Exterior.standard;
+  public exteriorVal: Exterior = Exterior.standard;
   public isReadOnlyVal = false; // Binding attribute "isReadOnly".
   public isRequiredVal = false; // Binding attribute "isRequired".
   public isDisabledVal = false; // Binding attribute "isDisabled".
   public isLabelShrink = false; // Binding attribute "lbShrink".
   public isOrnament = false;
-  public frameSizeVal: FrameSize | null = FrameSize.wide;
+  public frameSizeVal: FrameSize = FrameSize.wide;
   public hiddenLabelVal = false; // Binding attribute "hiddenLabel".
   public isErrorVal = false; // Binding attribute "isError".
-
-  public get isOutlinedExterior(): boolean {
-    return ExteriorUtil.isOutlined(this.exterior);
-  }
-  public get isUnderlineExterior(): boolean {
-    return ExteriorUtil.isUnderline(this.exterior);
-  }
-  public get isStandardExterior(): boolean {
-    return ExteriorUtil.isStandard(this.exterior);
-  }
 
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
@@ -153,8 +139,8 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
     if (changes.type) {
       this.typeVal = (InputTypeUtil.create(this.type) as InputType) || InputType.text;
     }
-    if (changes.exterOutlined || changes.exterUnderline || changes.exterStandard) {
-      this.exterior = ExteriorUtil.setExterior(this.exterOutlined, this.exterUnderline, this.exterStandard);
+    if (changes.exterior) {
+      this.exteriorVal = ExteriorUtil.create(this.exterior) || Exterior.standard;
     }
     this.isReadOnlyVal = changes.isReadOnly ? this.isReadOnly !== null : this.isReadOnlyVal;
     this.isRequiredVal = changes.isRequired ? this.isRequired !== null : this.isRequiredVal;
@@ -166,7 +152,7 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
     this.isLabelShrink = changes.lbShrink ? this.lbShrink !== null : this.isLabelShrink;
 
     if (changes.frameSize) {
-      this.frameSizeVal = FrameSizeUtil.create(this.frameSize || FrameSize.wide.valueOf());
+      this.frameSizeVal = FrameSizeUtil.create(this.frameSize) || FrameSize.wide;
     }
     this.hiddenLabelVal = changes.hiddenLabel ? this.hiddenLabel !== null : this.hiddenLabelVal;
     this.isErrorVal = changes.isError ? this.isError !== null : this.isErrorVal;

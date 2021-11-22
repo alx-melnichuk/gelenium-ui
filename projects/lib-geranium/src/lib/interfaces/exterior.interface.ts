@@ -1,3 +1,5 @@
+export type ExteriorType = 'standard' | 'outlined' | 'underline';
+
 export enum Exterior {
   standard = 'standard',
   outlined = 'outlined',
@@ -5,7 +7,7 @@ export enum Exterior {
 }
 
 export class ExteriorUtil {
-  public static create(value: string): Exterior | null {
+  public static create(value: string | null): Exterior | null {
     let result: Exterior | null = null;
     switch (value) {
       case Exterior.standard.valueOf():
@@ -28,12 +30,5 @@ export class ExteriorUtil {
   }
   public static isStandard(value: Exterior): boolean {
     return Exterior.standard === value;
-  }
-  public static setExterior(exterOutlined: string | null, exterUnderline: string | null, exterStandard: string | null): Exterior {
-    let result = Exterior.standard;
-    result = exterOutlined !== null ? Exterior.outlined : result;
-    result = exterUnderline !== null ? Exterior.underline : result;
-    result = exterStandard !== null ? Exterior.standard : result;
-    return result;
   }
 }

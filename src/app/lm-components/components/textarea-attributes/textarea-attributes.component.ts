@@ -35,22 +35,22 @@ export class TextareaAttributesComponent {
   public labelCss = CN_LABEL_CSS;
 
   public controls02 = {
-    input02a: new FormControl('Hello World', [Validators.required]),
-    input02b: new FormControl('Hello World', []),
-    input02c: new FormControl('Hello World', []),
+    input02a: new FormControl('', []),
+    input02b: new FormControl('Hello World', [Validators.required]),
+    input02c: new FormControl('', []),
     input02d: new FormControl('Hello World', []),
     input02e: new FormControl('Hello World', []),
     input02f: new FormControl('Hello World', []),
-    input02g: new FormControl('', []),
+    input02g: new FormControl('Hello World', []),
     input02h: new FormControl('', []),
-    input02i: new FormControl('', [Validators.required]),
+    input02i: new FormControl('', [Validators.required, Validators.minLength(4)]),
     input02j: new FormControl('Hello World', []),
-    // i, j, k
+    input02k: new FormControl('', []),
+    input02l: new FormControl('', []),
   };
   public formGroup02: FormGroup = new FormGroup(this.controls02);
   public exterior02 = 'outlined';
   public minLength02 = 4;
-  public maxLength02 = 15;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

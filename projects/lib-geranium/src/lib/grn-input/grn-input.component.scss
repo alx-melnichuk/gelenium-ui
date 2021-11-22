@@ -54,7 +54,9 @@ grn-input {    // # outline: 1px dashed green;
   // Input content "ornament"
   .gi-ornament,
   .gi-ornament-end {
+    // outline: 1px dashed fuchsia;
     display: flex;
+    // display: inline-table;
     height: 0.01em;
     max-height: 2em;
     @include mxAlignItems(center);

@@ -16,14 +16,14 @@
   <div style="display: flex; align-items: center;">
     <grn-input class="in-item"
       formControlName="input06a"
-      exterOutlined
+      exterior="outlined"
       label="Enter the name"
       helperText="The name must be complete.">
     </grn-input>
 
     <grn-input class="in-item"
       formControlName="input06b"
-      exterOutlined
+      exterior="outlined"
       label="Enter the name">
     </grn-input>
   </div>
@@ -37,15 +37,23 @@
         <mat-tab [label]="labelHtml">
           <pre>
 &lt;form [formGroup]="formGroup06" novalidate autocomplete="off"&gt;
+&lt;form class="in-section"
+  [formGroup]="formGroup06"
+  novalidate
+  autocomplete="off"&gt;
 
   &lt;div style="display: flex; align-items: center;"&gt;
-    &lt;grn-input class="in-item" formControlName="input06a"
-      exterOutlined label="Enter the name"
+    &lt;grn-input class="in-item"
+      formControlName="input06a"
+      exterior="outlined"
+      label="Enter the name"
       helperText="The name must be complete."&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input06b"
-      exterOutlined label="Enter the name"&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input06b"
+      exterior="outlined"
+      label="Enter the name"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
@@ -88,14 +96,14 @@ export class InputComponent &#123;
   <div style="display: flex; align-items: center;">
     <grn-input class="in-item"
       formControlName="input06c"
-      exterOutlined
+      exterior="outlined"
       label="Enter the name"
       helperText="The name must be complete.">
     </grn-input>
 
     <grn-input class="in-item"
       formControlName="input06d"
-      exterOutlined
+      exterior="outlined"
       label="Enter the name"
       helperText=" ">
     </grn-input>
@@ -109,16 +117,23 @@ export class InputComponent &#123;
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <pre>
-&lt;form [formGroup]="formGroup06" novalidate autocomplete="off"&gt;
+&lt;form
+  [formGroup]="formGroup06"
+  novalidate
+  autocomplete="off"&gt;
 
   &lt;div style="display: flex; align-items: center;"&gt;
-    &lt;grn-input class="in-item" formControlName="input06c"
-      exterOutlined label="Enter the name"
+    &lt;grn-input class="in-item"
+      formControlName="input06c"
+      exterior="outlined"
+      label="Enter the name"
       helperText="The name must be complete."&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input06d"
-      exterOutlined label="Enter the name"
+    &lt;grn-input class="in-item"
+      formControlName="input06d"
+      exterior="outlined"
+      label="Enter the name"
       helperText=" "&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;

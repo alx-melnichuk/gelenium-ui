@@ -54,82 +54,68 @@
   <div>
     <grn-input class="in-item"
       formControlName="input05a"
-      exterOutlined
       label="type=Number step=5 min=0 max=50"
       lbShrink
       type="number"
       step="5"
       min="0"
       max="50"
-      [exterOutlined]="exterior05==='outlined' ? '':null"
-      [exterUnderline]="exterior05==='underline' ? '':null">
+      [exterior]="exterior05">
     </grn-input>
 
     <grn-input class="in-item"
       formControlName="input05b"
-      exterOutlined
       label="Pattern(^[0-9]+$)"
       lbShrink
       type="text"
       pattern="^[0-9]+$"
-      [exterOutlined]="exterior05==='outlined' ? '':null"
-      [exterUnderline]="exterior05==='underline' ? '':null">
+      [exterior]="exterior05">
     </grn-input>
   </div>
 
   <div>
     <grn-input class="in-item"
       formControlName="input05c"
-      exterOutlined
       label="onlyByRegex(^-?(\d+)$)"
       lbShrink
       [onlyByRegex]="'^-?(\\d+)$'"
-      [exterOutlined]="exterior05==='outlined' ? '':null"
-      [exterUnderline]="exterior05==='underline' ? '':null">
+      [exterior]="exterior05">
     </grn-input>
 
     <grn-input class="in-item"
       formControlName="input05d"
-      exterOutlined
       label="onlyByRegex(#numeric)"
       lbShrink
       [onlyByRegex]="'#numeric'"
-      [exterOutlined]="exterior05==='outlined' ? '':null"
-      [exterUnderline]="exterior05==='underline' ? '':null">
+      [exterior]="exterior05">
     </grn-input>
   </div>
 
   <div>
     <grn-input class="in-item"
       formControlName="input05e"
-      exterOutlined
       label="onlyByRegex(#numeric(,2))"
       lbShrink
       [onlyByRegex]="'#numeric(,2)'"
-      [exterOutlined]="exterior05==='outlined' ? '':null"
-      [exterUnderline]="exterior05==='underline' ? '':null">
+      [exterior]="exterior05">
     </grn-input>
 
     <grn-input class="in-item"
       formControlName="input05f"
-      exterOutlined
       label="onlyByRegex(#numeric(12,2))"
       lbShrink
       [onlyByRegex]="'#numeric(12,2)'"
-      [exterOutlined]="exterior05==='outlined' ? '':null"
-      [exterUnderline]="exterior05==='underline' ? '':null">
+      [exterior]="exterior05">
     </grn-input>
   </div>
 
   <div>
     <grn-input class="in-item"
       formControlName="input05g"
-      exterOutlined
       label="onlyByRegex(^[\ ,\d,a-z]+$)"
       lbShrink
       [onlyByRegex]="'^[\\ ,\\d,a-z]+$'"
-      [exterOutlined]="exterior05==='outlined' ? '':null"
-      [exterUnderline]="exterior05==='underline' ? '':null">
+      [exterior]="exterior05">
     </grn-input>
   </div>
 
@@ -143,63 +129,75 @@
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
         <pre>
-&lt;form [formGroup]="formGroup05" novalidate autocomplete="off"&gt;
+&lt;form [formGroup]="formGroup05"
+  novalidate
+  autocomplete="off"&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input05a"
-      exterOutlined label="type=Number step=5 min=0 max=50"
-      lbShrink type="number"
-      step="5" min="0" max="50"
-      [exterOutlined]="exterior05==='outlined' ? '':null"
-      [exterUnderline]="exterior05==='underline' ? '':null"&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input05a"
+      label="type=Number step=5 min=0 max=50"
+      lbShrink
+      type="number"
+      step="5"
+      min="0"
+      max="50"
+      [exterior]="exterior05"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input05b"
-      exterOutlined label="Pattern(^[0-9]+$)"
-      lbShrink type="text" pattern="^[0-9]+$"
-      [exterOutlined]="exterior05==='outlined' ? '':null"
-      [exterUnderline]="exterior05==='underline' ? '':null"&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input05b"
+      label="Pattern(^[0-9]+$)"
+      lbShrink
+      type="text"
+      pattern="^[0-9]+$"
+      [exterior]="exterior05"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input05c"
-      exterOutlined label="onlyByRegex(^-?(\d+)$)"
-      lbShrink [onlyByRegex]="'^-?(\\d+)$'"
-      [exterOutlined]="exterior05==='outlined' ? '':null"
-      [exterUnderline]="exterior05==='underline' ? '':null"&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input05c"
+      label="onlyByRegex(^-?(\d+)$)"
+      lbShrink
+      [onlyByRegex]="'^-?(\\d+)$'"
+      [exterior]="exterior05"&gt;
     &lt;/grn-input&gt;
-  
-    &lt;grn-input class="in-item" formControlName="input05d"
-      exterOutlined label="onlyByRegex(#numeric)"
-      lbShrink [onlyByRegex]="'#numeric'"
-      [exterOutlined]="exterior05==='outlined' ? '':null"
-      [exterUnderline]="exterior05==='underline' ? '':null"&gt;
+
+    &lt;grn-input class="in-item"
+      formControlName="input05d"
+      label="onlyByRegex(#numeric)"
+      lbShrink
+      [onlyByRegex]="'#numeric'"
+      [exterior]="exterior05"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input05e"
-      exterOutlined label="onlyByRegex(#numeric(,2))"
-      lbShrink [onlyByRegex]="'#numeric(,2)'"
-      [exterOutlined]="exterior05==='outlined' ? '':null"
-      [exterUnderline]="exterior05==='underline' ? '':null"&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input05e"
+      label="onlyByRegex(#numeric(,2))"
+      lbShrink
+      [onlyByRegex]="'#numeric(,2)'"
+      [exterior]="exterior05"&gt;
     &lt;/grn-input&gt;
 
-    &lt;grn-input class="in-item" formControlName="input05f"
-      exterOutlined label="onlyByRegex(#numeric(12,2))"
-      lbShrink [onlyByRegex]="'#numeric(12,2)'"
-      [exterOutlined]="exterior05==='outlined' ? '':null"
-      [exterUnderline]="exterior05==='underline' ? '':null"&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input05f"
+      label="onlyByRegex(#numeric(12,2))"
+      lbShrink
+      [onlyByRegex]="'#numeric(12,2)'"
+      [exterior]="exterior05"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
   &lt;div&gt;
-    &lt;grn-input class="in-item" formControlName="input05g"
-      exterOutlined label="onlyByRegex(^[\ ,\d,a-z]+$)"
-      lbShrink [onlyByRegex]="'^[\\ ,\\d,a-z]+$'"
-      [exterOutlined]="exterior05==='outlined' ? '':null"
-      [exterUnderline]="exterior05==='underline' ? '':null"&gt;
+    &lt;grn-input class="in-item"
+      formControlName="input05g"
+      label="onlyByRegex(^[\ ,\d,a-z]+$)"
+      lbShrink
+      [onlyByRegex]="'^[\\ ,\\d,a-z]+$'"
+      [exterior]="exterior05"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
