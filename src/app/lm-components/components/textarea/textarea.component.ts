@@ -9,7 +9,4 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 })
 export class TextareaComponent {
   public showNum = '02';
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
 }

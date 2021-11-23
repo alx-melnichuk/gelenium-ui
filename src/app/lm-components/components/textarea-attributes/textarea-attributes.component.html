@@ -1,4 +1,4 @@
-<div class="in-section">
+<section mr-vr>
   <h3>Attributes</h3>
   <p>The following attributes are supported:</p>
   <ul>
@@ -13,12 +13,12 @@
       field or error message;</li>
     <li>"isError" - a sign that the field is in error;</li>
     <li>"minLength" - sets the minimum field length;
-      <pre class="fw-nr">
-( minLength="2", min02=4; minLength="<b>&#123;</b>&#123;min02&#125;&#125;" [minLength]="''+min02" )</pre>
+      <!-- <pre class="fw-nr">
+( minLength="2", min02=4; minLength="<b>&#123;</b>&#123;min02&#125;&#125;" [minLength]="''+min02" )</pre> -->
     </li>
     <li>"maxLength" - sets the maximum field length;
-      <pre class="fw-nr">
-( maxLength="2", max02=4; maxLength="<b>&#123;</b>&#123;max02&#125;&#125;" [maxLength]="''+max02" )</pre>
+      <!-- <pre class="fw-nr">
+( maxLength="2", max02=4; maxLength="<b>&#123;</b>&#123;max02&#125;&#125;" [maxLength]="''+max02" )</pre> -->
     </li>
     <li>"cntRows" - sets the number of lines that, when multiplied by the line
       height, determine the total height. If not specified, the height is
@@ -31,9 +31,13 @@
       height, determine the max height. Active if there is no "cntRows".
     </li>
   </ul>
-</div>
+  <p>
+    These examples used the attribute: cntRows="2" or [cntRows]="cntRowsStr"
+    or [cntRows]=" ' '+cntRows".
+  </p>
+</section>
 
-<div class="in-section">
+<section mr-vr>
   <span>exterior: </span>
   <mat-button-toggle-group [(ngModel)]="exterior02"
     aria-label="Font Style">
@@ -41,21 +45,19 @@
     <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
     <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
   </mat-button-toggle-group>
-</div>
+</section>
 
-<form class="in-section"
-  [formGroup]="formGroup02"
+<form [formGroup]="formGroup02"
   novalidate
   autocomplete="off">
 
-  <div class="ta-group">
+  <div class="app-group">
 
-    <div>
-      <div class="ta-item taa-text">
-        State: empty and attribute: cntRows=2.
+    <div class="app-elem">
+      <div>
+        <small><em>State: empty.</em></small>
       </div>
-      <grn-textarea class="ta-item"
-        formControlName="input02a"
+      <grn-textarea formControlName="input02a"
         id="unique_identifier"
         label="Enter value"
         cntRows="2"
@@ -63,192 +65,183 @@
       </grn-textarea>
     </div>
 
-    <div>
-      <div class="ta-item taa-text">
-        Attribute: isRequired.
+    <div class="app-elem">
+      <div>
+        <small><em>Attributes: isRequired, helperText.</em></small>
       </div>
-      <grn-textarea class="ta-item"
-        formControlName="input02b"
+      <grn-textarea formControlName="input02b"
         id="unique_identifier"
-        label="Required"
+        label="Required field"
+        [cntRows]="cntRowsStr"
         isRequired
-        cntRows="2"
+        helperText="A value must be entered."
         [exterior]="exterior02">
       </grn-textarea>
     </div>
-  </div>
 
-  <div class="ta-group">
-    <div>
-      <div class="ta-item taa-text">
-        Attribute: lbShrink.
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: isReadOnly.</em></small>
       </div>
-      <grn-textarea class="ta-item"
-        formControlName="input02c"
+      <grn-textarea formControlName="input02c"
+        label="Read Only"
+        [cntRows]="''+cntRows"
+        isReadOnly
+        helperText="The parameter is read only."
+        [exterior]="exterior02">
+      </grn-textarea>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: isDisabled.</em></small>
+      </div>
+      <grn-textarea formControlName="input02d"
+        label="Disabled"
+        cntRows="2"
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior02">
+      </grn-textarea>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: lbShrink.</em></small>
+      </div>
+      <grn-textarea formControlName="input02e"
         label="Permanent label"
-        lbShrink
         cntRows="2"
+        lbShrink
+        helperText="The position of the label is fixed."
         [exterior]="exterior02">
       </grn-textarea>
     </div>
 
-    <div>
-      <div class="ta-item taa-text">
-        Attribute: hiddenLabel.
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: hiddenLabel.</em></small>
       </div>
-      <grn-textarea class="ta-item"
-        formControlName="input02d"
+      <grn-textarea formControlName="input02f"
         label="hiddenLabel"
         hiddenLabel
         cntRows="2"
-        [exterior]="exterior02">
-      </grn-textarea>
-    </div>
-  </div>
-
-  <div class="ta-group">
-    <div>
-      <div class="ta-item taa-text">
-        Attribute: isReadOnly.
-      </div>
-      <grn-textarea class="ta-item"
-        formControlName="input02e"
-        label="Read Only"
-        isReadOnly
-        cntRows="2"
+        helperText="The label is not displayed."
         [exterior]="exterior02">
       </grn-textarea>
     </div>
 
-    <div>
-      <div class="ta-item taa-text">
-        Attribute: isDisabled.
-      </div>
-      <grn-textarea class="ta-item"
-        formControlName="input02f"
-        label="Disabled"
-        isDisabled
-        helperText="The parameter is disabled."
-        cntRows="2"
-        [exterior]="exterior02">
-      </grn-textarea>
-    </div>
-  </div>
-
-  <div class="ta-group">
-    <div>
-      <div class="ta-item taa-text">
-        Attribute: helperText.
-      </div>
-      <grn-textarea class="ta-item"
-        formControlName="input02g"
-        label="Helper text"
-        helperText="The parameter value must be entered."
-        cntRows="2"
-        [exterior]="exterior02">
-      </grn-textarea>
-    </div>
-
-    <div>
-      <div class="ta-item taa-text">
-        Attribute: isError.
-      </div>
-      <grn-textarea class="ta-item"
-        formControlName="input02h"
-        [label]="!controls02.input02h.value ? 'Requires a value':'Parameter value'"
-        cntRows="2"
-        [isError]="!controls02.input02h.value ? '':null"
-        [helperText]="!controls02.input02h.value
-          ? 'The field is not filled.': 'The field is filled.'"
-        [exterior]="exterior02">
-      </grn-textarea>
-    </div>
-  </div>
-
-  <div class="ta-group">
-    <div>
-      <div class="ta-item taa-text">
-        Attribute: isRequired, minLength.
-      </div>
-      <grn-textarea class="ta-item"
-        formControlName="input02i"
-        [label]="controls02.input02i.errors ? 'Error':'Value'"
-        cntRows="2"
-        isRequired
-        minLength="{{minLength02}}"
-        helperText="{{(controls02.input02i.errors?.required ?
-          'Required field.':
-          (controls02.input02i.errors?.minlength ?
-            'Minimum length ' + controls02.input02i.errors?.minlength.requiredLength
-            + ' characters.':'Enter value.'
-          )
-        )}}"
-        [exterior]="exterior02">
-      </grn-textarea>
-    </div>
-
-    <div>
-      <div class="ta-item taa-text">Attribute: isError + isDisabled.</div>
-      <grn-textarea class="ta-item"
-        formControlName="input02j"
-        label="Error-Disabled"
-        isReadOnly
-        cntRows="2"
-        isError
-        isDisabled
-        helperText="The parameter is disabled."
-        [exterior]="exterior02">
-      </grn-textarea>
-    </div>
-  </div>
-
-  <div class="ta-group">
-    <div>
-      <div class="ta-item taa-text">
-        Height by number of lines.
-      </div>
-      <grn-textarea class="ta-item"
-        formControlName="input02k"
-        label="Parameter value"
-        helperText="Height by number of lines."
-        [exterior]="exterior02">
-      </grn-textarea>
-    </div>
-
-    <div>
-      <div class="ta-item taa-text">
-        Height: min = 2 max = 6.
-      </div>
-      <grn-textarea class="ta-item"
-        formControlName="input02l"
-        label="Parameter value"
-        minRows="2"
-        maxRows="6"
-        helperText="Height: min = 2 max = 6."
-        [exterior]="exterior02">
-      </grn-textarea>
-    </div>
   </div>
 
 </form>
 
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-tab-group animationDuration="0ms">
-      <mat-tab [label]="labelHtml">
-        <pre>
-&lt;form [formGroup]="formGroup02" novalidate autocomplete="off"&gt;
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <pre source="html">
+&lt;form [formGroup]="formGroup02"
+  novalidate
+  autocomplete="off"&gt;
 
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;State: empty.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-textarea formControlName="input02a"
+        id="unique_identifier"
+        label="Enter value"
+        cntRows="2"
+        [exterior]="exterior02"&gt;
+      &lt;/grn-textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;
+          Attributes: isRequired, helperText.
+        &lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-textarea formControlName="input02b"
+        id="unique_identifier"
+        label="Required field"
+        cntRows="2"
+        isRequired
+        helperText="A value must be entered."
+        [exterior]="exterior02"&gt;
+      &lt;/grn-textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-textarea formControlName="input02c"
+        label="Read Only"
+        cntRows="2"
+        isReadOnly
+        helperText="The parameter is read only."
+        [exterior]="exterior02"&gt;
+      &lt;/grn-textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attribute: isDisabled.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-textarea formControlName="input02d"
+        label="Disabled"
+        cntRows="2"
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior02"&gt;
+      &lt;/grn-textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attribute: lbShrink.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-textarea formControlName="input02e"
+        label="Permanent label"
+        cntRows="2"
+        lbShrink
+        helperText="The position of the label is fixed."
+        [exterior]="exterior02"&gt;
+      &lt;/grn-textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attribute: hiddenLabel.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-textarea formControlName="input02f"
+        label="hiddenLabel"
+        hiddenLabel
+        cntRows="2"
+        helperText="The label is not displayed."
+        [exterior]="exterior02"&gt;
+      &lt;/grn-textarea&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
 
 &lt;/form&gt;</pre>
-      </mat-tab>
-      <mat-tab [label]="labelTs">
-        <pre>
-import &#123; Component, ViewEncapsulation &#125; from '@angular/core';
-import &#123; FormControl, FormGroup, Validators &#125; from '@angular/forms';
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
 
 @Component(&#123;
   selector: 'app-input',
@@ -256,26 +249,31 @@ import &#123; FormControl, FormGroup, Validators &#125; from '@angular/forms';
   styleUrls: ['./input.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
-export class InputComponent &#123;
+export class TextareaComponent &#123;
   public formGroup02: FormGroup = new FormGroup(&#123;
-    input02a: new FormControl('Hello World', [Validators.required]),
-    input02b: new FormControl('Hello World', []),
-    input02c: new FormControl('', []),
+    input02a: new FormControl('', []),
+    input02b: new FormControl('Hello World', [
+      Validators.required]),
+    input02c: new FormControl('Hello World', []),
     input02d: new FormControl('Hello World', []),
     input02e: new FormControl('', []),
     input02f: new FormControl('Hello World', []),
-    input02g: new FormControl('Hello World', []),
   &#125;);
   public exterior02 = 'outlined';
 &#125;</pre>
-      </mat-tab>
-      <mat-tab [label]="labelCss">
-        <pre>
-.in-item &#123;
-  width: 240px;
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;             
+.app-elem &#123;
+  min-width: 25ch;
   margin: 10px 10px;
 &#125;</pre>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-expansion-panel>
-</mat-accordion>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

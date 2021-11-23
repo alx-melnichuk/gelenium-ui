@@ -1,21 +1,23 @@
 <h3>Component: "GrnTextarea"</h3>
 
-<section *ngIf="!showNum || showNum==='01'"
+<div *ngIf="!showNum || showNum==='01'"
   id="Basic">
   <app-textarea-basic></app-textarea-basic>
   <hr br-tp>
-</section>
+</div>
 
-<section *ngIf="!showNum || showNum==='02'"
+<div *ngIf="!showNum || showNum==='02'"
   id="Attributes">
   <app-textarea-attributes></app-textarea-attributes>
   <hr br-tp>
-</section>
+</div>
 
-<!-- <section *ngIf="!showNum || showNum==='03'" id="Validation">
-  <app-input-validation></app-input-validation>
+
+<div *ngIf="!showNum || showNum==='03'"
+  id="Validation">
+  <app-textarea-validation></app-textarea-validation>
   <hr br-tp>
-</section> -->
+</div>
 
 <!-- <section *ngIf="!showNum || showNum==='04'" id="ItemSize">
   <app-input-item-size></app-input-item-size>

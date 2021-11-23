@@ -72,7 +72,7 @@ export class LmComponentsComponent implements OnInit {
     const url = this.getPathTextarea();
     result.push(this.createUrlItem('Basic', url + '#Basic'));
     result.push(this.createUrlItem('Attributes', url + '#Attributes'));
-    // result.push(this.createUrlItem('Validation', url + '#Validation'));
+    result.push(this.createUrlItem('Validation', url + '#Validation'));
     // result.push(this.createUrlItem('Item Size', url + '#ItemSize'));
     // result.push(this.createUrlItem('Ornaments', url + '#Ornaments'));
     // result.push(this.createUrlItem('Border Radius', url + '#BorderRadius'));

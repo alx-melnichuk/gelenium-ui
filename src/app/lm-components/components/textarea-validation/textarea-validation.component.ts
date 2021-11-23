@@ -12,13 +12,13 @@ import {
 } from '../constants';
 
 @Component({
-  selector: 'app-textarea-attributes',
-  templateUrl: './textarea-attributes.component.html',
-  styleUrls: ['./textarea-attributes.component.scss'],
+  selector: 'app-textarea-validation',
+  templateUrl: './textarea-validation.component.html',
+  styleUrls: ['./textarea-validation.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextareaAttributesComponent {
+export class TextareaValidationComponent {
   @Input()
   public labelShowSource = CN_LABEL_SHOW_SOURCE;
   @Input()
@@ -34,16 +34,12 @@ export class TextareaAttributesComponent {
   @Input()
   public labelCss = CN_LABEL_CSS;
 
-  public controls02 = {
-    input02a: new FormControl('', []),
-    input02b: new FormControl('Hello World', [Validators.required]),
-    input02c: new FormControl('Hello World', []),
-    input02d: new FormControl('Hello World', []),
-    input02e: new FormControl('', []),
-    input02f: new FormControl('Hello World', []),
+  public exterior03 = 'outlined';
+  public minLength03 = 4;
+  public controls03 = {
+    input03a: new FormControl('', []),
+    input03b: new FormControl('', [Validators.required, Validators.minLength(this.minLength03)]),
+    input03c: new FormControl('Hello World', []),
   };
-  public formGroup02: FormGroup = new FormGroup(this.controls02);
-  public exterior02 = 'outlined';
-  public cntRowsStr = '2';
-  public cntRows = 2;
+  public formGroup03: FormGroup = new FormGroup(this.controls03);
 }

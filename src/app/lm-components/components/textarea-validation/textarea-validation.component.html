@@ -1,0 +1,210 @@
+<section mr-vr>
+  <h3>Validation</h3>
+
+  <p>The isError parameter sets the field to the error display state.</p>
+  <p>In case of a field error:</p>
+  <ul>
+    <li>displays a red box for "outlined";</li>
+    <li>red underline is displayed for "underline" or "standard";</li>
+    <li>the content of "label" is displayed in red;</li>
+    <li>the content of "helperText" is displayed in red;</li>
+    <li>the specified elements are displayed in red even if the field is disabled (isDisabled);</li>
+  </ul>
+  <p>
+    An error condition also occurs when the constraints set by the reactive form and attributes are
+    violated.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior03"
+    aria-label="Font Style">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup03"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: isError.</em></small>
+      </div>
+      <grn-textarea formControlName="input03a"
+        [label]="!controls03.input03a.value ? 'Requires a value':'Parameter value'"
+        cntRows="2"
+        [isError]="!controls03.input03a.value ? '':null"
+        [helperText]="!controls03.input03a.value
+          ? 'The field is not filled.': 'The field is filled.'"
+        [exterior]="exterior03">
+      </grn-textarea>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: isRequired, minLength.</em></small>
+      </div>
+      <grn-textarea formControlName="input03b"
+        [label]="controls03.input03b.errors ? 'Error':'Value'"
+        cntRows="2"
+        isRequired
+        minLength="{{minLength03}}"
+        helperText="{{(controls03.input03b.errors?.required ?
+          'Required field.':
+          (controls03.input03b.errors?.minlength ?
+            'Minimum length ' + controls03.input03b.errors?.minlength.requiredLength
+            + ' characters.':'Enter value.'
+          )
+        )}}"
+        [exterior]="exterior03">
+      </grn-textarea>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: isError + isDisabled.</em></small>
+      </div>
+      <grn-textarea formControlName="input03c"
+        label="Error-Disabled"
+        cntRows="2"
+        isReadOnly
+        isError
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior03">
+      </grn-textarea>
+    </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <pre source="html">
+&lt;form [formGroup]="formGroup03"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;
+          Attribute: isError.
+        &lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-textarea formControlName="input03a"
+        [label]="!controls03.input03a.value
+          ? 'Requires a value':'Parameter value'"
+        cntRows="2"
+        [isError]="!controls03.input03a.value ? '':null"
+        [helperText]="!controls03.input03a.value
+          ? 'The field is not filled.'
+          : 'The field is filled.'"
+        [exterior]="exterior03"&gt;
+      &lt;/grn-textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;
+          Attribute: isRequired, minLength.
+        &lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-textarea formControlName="input03b"
+        [label]="controls03.input03b.errors
+          ? 'Error':'Value'"
+        cntRows="2"
+        isRequired
+        minLength="<b>&#123;</b>&#123;minLength03&#125;&#125;"
+        helperText="<b>&#123;</b>&#123;
+        (controls03.input03b.errors?.required ?
+        'Required field.': (
+          controls03.input03b.errors?.minlength
+          ? 'Minimum length '
+          + controls03.input03b.errors?
+            .minlength.requiredLength
+          + ' characters.':'Enter value.'
+        ))&#125;&#125;"
+        [exterior]="exterior03"&gt;
+      &lt;/grn-textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;
+          Attribute: isError + isDisabled.
+        &lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-textarea formControlName="input03c"
+        label="Error-Disabled"
+        cntRows="2"
+        isReadOnly
+        isError
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior03"&gt;
+      &lt;/grn-textarea&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class TextareaComponent &#123;
+  public minLength03 = 4;
+  public controls03 = &#123;
+    input03a: new FormControl('', []),
+    input03b: new FormControl('', [
+      Validators.required,
+      Validators.minLength(this.minLength03)
+    ]),
+    input03c: new FormControl('Hello World', []),
+  &#125;;
+  public formGroup03: FormGroup = new FormGroup(this.controls03);
+  public exterior03 = 'outlined';
+&#125;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;             
+.app-elem &#123;
+  min-width: 25ch;
+  margin: 10px 10px;
+&#125;</pre>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
