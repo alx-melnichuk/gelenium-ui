@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import {
   CN_LABEL_CSS,
@@ -12,13 +12,13 @@ import {
 } from '../constants';
 
 @Component({
-  selector: 'app-textarea-attributes',
-  templateUrl: './textarea-attributes.component.html',
-  styleUrls: ['./textarea-attributes.component.scss'],
+  selector: 'app-textarea-capability',
+  templateUrl: './textarea-capability.component.html',
+  styleUrls: ['./textarea-capability.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextareaAttributesComponent {
+export class TextareaCapabilityComponent {
   @Input()
   public labelShowSource = CN_LABEL_SHOW_SOURCE;
   @Input()
@@ -34,14 +34,13 @@ export class TextareaAttributesComponent {
   @Input()
   public labelCss = CN_LABEL_CSS;
 
-  public formGroup02: FormGroup = new FormGroup({
-    input02a: new FormControl('', []),
-    input02b: new FormControl('Hello World', [Validators.required]),
-    input02c: new FormControl('Hello World', []),
-    input02d: new FormControl('Hello World', []),
-    input02e: new FormControl('', []),
-    input02f: new FormControl('Hello World', []),
+  public text1 = 'line 1\nline 2';
+  public text2 = this.text1 + '\nline 3\nline 4\nline 5';
+  public formGroup04: FormGroup = new FormGroup({
+    input04a: new FormControl(this.text1, []),
+    input04b: new FormControl(this.text2, []),
+    input04c: new FormControl(this.text1, []),
+    input04d: new FormControl(this.text2, []),
   });
-  public exterior02 = 'outlined';
-  public cntRows = 2;
+  public exterior04 = 'outlined';
 }

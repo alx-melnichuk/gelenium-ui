@@ -73,10 +73,8 @@ export class LmComponentsComponent implements OnInit {
     result.push(this.createUrlItem('Basic', url + '#Basic'));
     result.push(this.createUrlItem('Attributes', url + '#Attributes'));
     result.push(this.createUrlItem('Validation', url + '#Validation'));
-    // result.push(this.createUrlItem('Item Size', url + '#ItemSize'));
-    // result.push(this.createUrlItem('Ornaments', url + '#Ornaments'));
-    // result.push(this.createUrlItem('Border Radius', url + '#BorderRadius'));
-    // result.push(this.createUrlItem('Api', url + '#Api'));
+    result.push(this.createUrlItem('Capability', url + '#Capability'));
+    result.push(this.createUrlItem('Api', url + '#Api'));
     return result;
   }
 

@@ -34,31 +34,39 @@
 
     <div class="app-elem">
       <div>
-        <small><em>Attribute: isError.</em></small>
+        <small>
+          <em>Attribute: isError.</em>
+        </small>
       </div>
       <grn-textarea formControlName="input03a"
-        [label]="!controls03.input03a.value ? 'Requires a value':'Parameter value'"
-        cntRows="2"
+        [label]="!controls03.input03a.value
+          ? 'Requires a value':'Parameter value'"
+        [cntRows]="2"
         [isError]="!controls03.input03a.value ? '':null"
         [helperText]="!controls03.input03a.value
-          ? 'The field is not filled.': 'The field is filled.'"
+          ? 'The field is not filled.'
+          : 'The field is filled.'"
         [exterior]="exterior03">
       </grn-textarea>
     </div>
 
     <div class="app-elem">
       <div>
-        <small><em>Attribute: isRequired, minLength.</em></small>
+        <small>
+          <em>Attribute: isRequired, minLength.</em>
+        </small>
       </div>
       <grn-textarea formControlName="input03b"
         [label]="controls03.input03b.errors ? 'Error':'Value'"
-        cntRows="2"
+        [cntRows]="2"
         isRequired
-        minLength="{{minLength03}}"
-        helperText="{{(controls03.input03b.errors?.required ?
+        [minLength]="minLength03"
+        helperText="
+        {{(controls03.input03b.errors?.required ?
           'Required field.':
           (controls03.input03b.errors?.minlength ?
-            'Minimum length ' + controls03.input03b.errors?.minlength.requiredLength
+            'Minimum length '
+            + controls03.input03b.errors?.minlength.requiredLength
             + ' characters.':'Enter value.'
           )
         )}}"
@@ -68,11 +76,13 @@
 
     <div class="app-elem">
       <div>
-        <small><em>Attribute: isError + isDisabled.</em></small>
+        <small>
+          <em>Attribute: isError + isDisabled.</em>
+        </small>
       </div>
       <grn-textarea formControlName="input03c"
         label="Error-Disabled"
-        cntRows="2"
+        [cntRows]="2"
         isReadOnly
         isError
         isDisabled
@@ -102,14 +112,14 @@
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
-        &lt;small&gt;&lt;em&gt;
-          Attribute: isError.
-        &lt;/em&gt;&lt;/small&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isError.&lt;/em&gt;
+        &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-textarea formControlName="input03a"
         [label]="!controls03.input03a.value
           ? 'Requires a value':'Parameter value'"
-        cntRows="2"
+        [cntRows]="2"
         [isError]="!controls03.input03a.value ? '':null"
         [helperText]="!controls03.input03a.value
           ? 'The field is not filled.'
@@ -120,38 +130,37 @@
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
-        &lt;small&gt;&lt;em&gt;
-          Attribute: isRequired, minLength.
-        &lt;/em&gt;&lt;/small&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isRequired, minLength.&lt;/em&gt;
+        &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-textarea formControlName="input03b"
-        [label]="controls03.input03b.errors
-          ? 'Error':'Value'"
-        cntRows="2"
+        [label]="controls03.input03b.errors ? 'Error':'Value'"
+        [cntRows]="2"
         isRequired
-        minLength="<b>&#123;</b>&#123;minLength03&#125;&#125;"
-        helperText="<b>&#123;</b>&#123;
-        (controls03.input03b.errors?.required ?
-        'Required field.': (
-          controls03.input03b.errors?.minlength
-          ? 'Minimum length '
-          + controls03.input03b.errors?
-            .minlength.requiredLength
-          + ' characters.':'Enter value.'
-        ))&#125;&#125;"
+        [minLength]="minLength03"
+        helperText="
+        <b>&#123;</b>&#123;(controls03.input03b.errors?.required ?
+          'Required field.':
+          (controls03.input03b.errors?.minlength ?
+            'Minimum length '
+            + controls03.input03b.errors?.minlength.requiredLength
+            + ' characters.':'Enter value.'
+          )
+        )&#125;&#125;"
         [exterior]="exterior03"&gt;
       &lt;/grn-textarea&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
-        &lt;small&gt;&lt;em&gt;
-          Attribute: isError + isDisabled.
-        &lt;/em&gt;&lt;/small&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isError + isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-textarea formControlName="input03c"
         label="Error-Disabled"
-        cntRows="2"
+        [cntRows]="2"
         isReadOnly
         isError
         isDisabled

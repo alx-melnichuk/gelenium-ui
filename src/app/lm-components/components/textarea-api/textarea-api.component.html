@@ -1,13 +1,13 @@
 <div class="lc-api-class">
-  <code>GrnInput</code>
+  <code>GrnTextarea</code>
 </div>
 <p class="lc-brk-wrd">
   <span>Selector:</span>
-  <span class="lc-api-param">grn-input</span>
+  <span class="lc-api-param">grn-textarea</span>
 </p>
 <p class="lc-brk-wrd">
   <span>Exported as:</span>
-  <span class="lc-api-param">grnInput</span>
+  <span class="lc-api-param">grnTextarea</span>
 </p>
 
 <h4>Properties</h4>
@@ -25,17 +25,8 @@
         <code>id: string;</code>
       </td>
       <td>
-        <span>ID of the native input element.<br />(default = 'grn_input_' + ++identifier;)</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>type: string;</code>
-      </td>
-      <td>
-        <span>The type of the native input element.<br />(default =
-          InputType.text.valueOf();)</span>
+        <span>ID of the native textarea element.<br />(default = 'grn_textarea_' +
+          ++identifier;)</span>
       </td>
     </tr>
     <tr>
@@ -47,7 +38,6 @@
         <span>The content of the label.<br />(default = '';)</span>
       </td>
     </tr>
-
     <tr>
       <td>
         <code>@Input()</code>
@@ -112,12 +102,12 @@
           It can take the following values:
         </span>
         <ul>
-          <li>"short" - height: 38px;</li>
-          <li>"small" - height: 44px;</li>
-          <li>"middle" - height: 50px;</li>
-          <li>"normal" - height: 56px;</li>
-          <li>"large" - height: 62px;</li>
-          <li>"huge" - height: 68px;</li>
+          <li>"short" - if one line is height: 38px;</li>
+          <li>"small" - if one line is height: 44px;</li>
+          <li>"middle" - if one line is height: 50px;</li>
+          <li>"normal" - if one line is height: 56px;</li>
+          <li>"large" - if one line is height: 62px;</li>
+          <li>"huge" - if one line is height: 68px;</li>
         </ul>
       </td>
     </tr>
@@ -136,38 +126,8 @@
         <code>isError: string | null;</code>
       </td>
       <td>
-        <span>Forces the error status of an item to be displayed.<br />Attribute (no
-          content).</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>pattern: string;</code>
-      </td>
-      <td>
-        <span>The attribute defines a regular expression that is passed to the native input element
-          to validate the
-          input value.
-          Applies to an input element of type: text, tel, email, url, password, and search.
-          <br />(default = '';)
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>onlyByRegex: string;</code>
-      </td>
-      <td>
-        <span>Attribute, defines a regular expression for the grnOnlyByRegex directive.
-          This directive checks the input value against the specified regular expression.
-          <br />'#numeric' - which matches the regular expression '^-?(\d+)$';
-          <br />'#numeric(,2)' - which matches the regular expression
-          '^-?(\d+(\.\d&#123;0,2&#125;)?|\.\d&#123;0,2&#125;)$';
-          <br />'#numeric(12,2)' - which matches the regular expression
-          '^-?(\d&#123;1,12&#125;(\.\d&#123;0,2&#125;)?|\.\d&#123;0,2&#125;)$';
-          <br />(default = '';)
+        <span>Forces the error status of an item to be displayed.<br />
+          Attribute (no content).
         </span>
       </td>
     </tr>
@@ -177,7 +137,7 @@
         <code>autoComplete: string;</code>
       </td>
       <td>
-        <span>Defines permissions for autocomplete native input.
+        <span>Defines permissions for autocomplete native textarea.
           <br />(default = '';)
         </span>
       </td>
@@ -196,10 +156,10 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>step: string;</code>
+        <code>minLength: number | null;</code>
       </td>
       <td>
-        <span>The step value for increasing / decreasing the value of the input element.
+        <span>Defines the minimum number of characters for an textarea element.
           <br />(default = null;)
         </span>
       </td>
@@ -207,10 +167,10 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>min: string;</code>
+        <code>maxLength: number | null;</code>
       </td>
       <td>
-        <span>Determines the minimum value that is acceptable for an input element.
+        <span>Defines the maximum number of characters for an textarea element.
           <br />(default = null;)
         </span>
       </td>
@@ -218,10 +178,13 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>max: string;</code>
+        <code>minRows: number | null;</code>
       </td>
       <td>
-        <span>Determines the maximum value that is acceptable for an input element.
+        <span>
+          Defines the minimum number of visible rows.
+          The minimum height of the text area is calculated as "minRows"
+          multiplied by to the line height. Active if "cntRows" is not specified.
           <br />(default = null;)
         </span>
       </td>
@@ -229,10 +192,13 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>minLength: string;</code>
+        <code>cntRows: number | null;</code>
       </td>
       <td>
-        <span>Defines the minimum number of characters for an input element.
+        <span>
+          Defines the number of visible rows.
+          The height of the text area is calculated as "cntRows"
+          multiplied by to the line height.
           <br />(default = null;)
         </span>
       </td>
@@ -240,10 +206,13 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>maxLength: string;</code>
+        <code>maxRows: number | null;</code>
       </td>
       <td>
-        <span>Defines the maximum number of characters for an input element.
+        <span>
+          Defines the maximum number of visible rows.
+          The maximum height of the text area is calculated as "maxRows"
+          multiplied by to the line height. Active if "cntRows" is not specified.
           <br />(default = null;)
         </span>
       </td>

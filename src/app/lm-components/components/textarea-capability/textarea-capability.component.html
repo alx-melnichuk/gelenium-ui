@@ -1,0 +1,232 @@
+<section mr-vr>
+  <h3>Capability</h3>
+  <p>
+    Since this is a textarea field, when you click on "Enter", a new line is added.
+    The number of visible lines depends on the height of the element.
+    The rest of the lines can be seen by scrolling.<br />
+    There are the following parameters that control the height of the element:
+  </p>
+  <ul>
+    <li>
+      "cntRows" - sets the number of visible rows; <br />
+      The height of the text area is calculated as "cntRows" multiplied
+      by the height of the row.<br />
+      <code>
+          [cntRows]="2" or cnt02=4; [cntRows]="cnt02"
+        </code>
+    </li>
+    <li>
+      "minRows" - sets the minimum number of visible rows; <br />
+      The minimum height of the text area is calculated as "minRows" multiplied by
+      to the line height. Active if "cntRows" is not specified. <br />
+      <code>
+        [minRows]="2" or minRows=4; [minRows]="minRows"
+      </code>
+    </li>
+    <li>
+      "maxRows" - sets the maximum number of visible rows; <br />
+      The maximum height of the text area is calculated as "maxRows" multiplied by
+      to the line height. Active if "cntRows" is not specified. <br />
+      <code>
+        [maxRows]="2" or maxRows=4; [maxRows]="maxRows"
+      </code>
+    </li>
+    <li>
+      If none of "cntRows", "maxRows", "maxRows" is specified then
+      the height of the text area is calculated as "number of lines"
+      multiplied by the height of the line.
+    </li>
+  </ul>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior04"
+    aria-label="Font Style">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup04"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Height by number of lines.</em>
+        </small>
+      </div>
+      <grn-textarea formControlName="input04a"
+        label="Parameter value"
+        helperText="Height by number of lines."
+        [exterior]="exterior04">
+      </grn-textarea>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: cntRows=4.</em>
+        </small>
+      </div>
+      <grn-textarea formControlName="input04b"
+        label="Parameter value"
+        [cntRows]="4"
+        helperText="Only 4 lines."
+        [exterior]="exterior04">
+      </grn-textarea>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: minRows=4.</em>
+        </small>
+      </div>
+      <grn-textarea formControlName="input04c"
+        label="Parameter value"
+        [minRows]="4"
+        helperText="Minimum 4 lines."
+        [exterior]="exterior04">
+      </grn-textarea>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: maxRows=4.</em>
+        </small>
+      </div>
+      <grn-textarea formControlName="input04d"
+        label="Parameter value"
+        [maxRows]="4"
+        helperText="Maximum 4 lines."
+        [exterior]="exterior04">
+      </grn-textarea>
+    </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <pre source="html">
+&lt;form [formGroup]="formGroup04"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Height by number of lines.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-textarea formControlName="input04a"
+        label="Parameter value"
+        helperText="Height by number of lines."
+        [exterior]="exterior04"&gt;
+      &lt;/grn-textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: cntRows=4.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-textarea formControlName="input04b"
+        label="Parameter value"
+        [cntRows]="4"
+        helperText="Only 4 lines."
+        [exterior]="exterior04"&gt;
+      &lt;/grn-textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: minRows=4.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-textarea formControlName="input04c"
+        label="Parameter value"
+        [minRows]="4"
+        helperText="Minimum 4 lines."
+        [exterior]="exterior04"&gt;
+      &lt;/grn-textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: maxRows=4.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-textarea formControlName="input04d"
+        label="Parameter value"
+        [maxRows]="4"
+        helperText="Maximum 4 lines."
+        [exterior]="exterior04"&gt;
+      &lt;/grn-textarea&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class TextareaComponent &#123;
+  public text1 = 'line 1\nline 2';
+  public text2 = this.text1 + '\nline 3\nline 4\nline 5';
+  public formGroup04: FormGroup = new FormGroup(&#123;
+    input04a: new FormControl(this.text1, []),
+    input04b: new FormControl(this.text2, []),
+    input04c: new FormControl(this.text1, []),
+    input04d: new FormControl(this.text2, []),
+  &#125;);
+  public exterior04 = 'outlined';
+&#125;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;             
+.app-elem &#123;
+  min-width: 25ch;
+  margin: 10px 10px;
+&#125;</pre>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

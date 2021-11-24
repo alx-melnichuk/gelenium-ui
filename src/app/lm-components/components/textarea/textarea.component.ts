@@ -8,5 +8,5 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaComponent {
-  public showNum = '02';
+  public showNum = '';
 }

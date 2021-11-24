@@ -2,38 +2,33 @@
   <h3>Attributes</h3>
   <p>The following attributes are supported:</p>
   <ul>
-    <li>"id" - parameter for defining the unique identifier of the field;</li>
-    <li>"isReadOnly" - a sign that the field is read-only;</li>
-    <li>"isRequired" - a sign that the field is required;</li>
-    <li>"isDisabled" - a sign that the field is disabled;</li>
+    <li>"id" - parameter for defining the unique identifier of the field
+      (id="unique_identifier");</li>
+    <li>"isReadOnly" - a sign that the field is read-only (isReadOnly);</li>
+    <li>"isRequired" - a sign that the field is required (isRequired);</li>
+    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
     <li>"lbShrink" - a sign that the field has a permanent label,
-      without being converted to a placeholder;</li>
-    <li>"hiddenLabel" - a sign that the field has no label at all;</li>
+      without being converted to a placeholder (lbShrink);</li>
+    <li>"hiddenLabel" - a sign that the field has no label at all (hiddenLabel);</li>
     <li>"helperText" - the parameter is used to provide context for a given
-      field or error message;</li>
-    <li>"isError" - a sign that the field is in error;</li>
-    <li>"minLength" - sets the minimum field length;
-      <!-- <pre class="fw-nr">
-( minLength="2", min02=4; minLength="<b>&#123;</b>&#123;min02&#125;&#125;" [minLength]="''+min02" )</pre> -->
+      field or error message (helperText="Enter value");</li>
+    <li>"isError" - a sign that the field is in error (isError);</li>
+    <li>"minLength" - sets the minimum field length;<br />
+      <code>
+        [minLength]="2" or min02=4; [minLength]="min02"
+      </code>
     </li>
-    <li>"maxLength" - sets the maximum field length;
-      <!-- <pre class="fw-nr">
-( maxLength="2", max02=4; maxLength="<b>&#123;</b>&#123;max02&#125;&#125;" [maxLength]="''+max02" )</pre> -->
-    </li>
-    <li>"cntRows" - sets the number of lines that, when multiplied by the line
-      height, determine the total height. If not specified, the height is
-      determined by the number of lines in the text.
-    </li>
-    <li>"minRows" - sets the number of lines that, when multiplied by the line
-      height, determine the min height. Active if there is no "cntRows".
-    </li>
-    <li>"maxRows" - sets the number of lines that, when multiplied by the line
-      height, determine the max height. Active if there is no "cntRows".
+    <li>"maxLength" - sets the maximum field length;<br />
+      <code>
+        [maxLength]="2" or max02=4; [maxLength]="max02"
+      </code>
     </li>
   </ul>
   <p>
-    These examples used the attribute: cntRows="2" or [cntRows]="cntRowsStr"
-    or [cntRows]=" ' '+cntRows".
+    For clarity, two visible lines of the text area are indicated.<br />
+    <code>
+      [cntRows]="2" or [cntRows]="cntRows"
+    </code>
   </p>
 </section>
 
@@ -60,7 +55,7 @@
       <grn-textarea formControlName="input02a"
         id="unique_identifier"
         label="Enter value"
-        cntRows="2"
+        [cntRows]="2"
         [exterior]="exterior02">
       </grn-textarea>
     </div>
@@ -72,7 +67,7 @@
       <grn-textarea formControlName="input02b"
         id="unique_identifier"
         label="Required field"
-        [cntRows]="cntRowsStr"
+        [cntRows]="cntRows"
         isRequired
         helperText="A value must be entered."
         [exterior]="exterior02">
@@ -85,7 +80,7 @@
       </div>
       <grn-textarea formControlName="input02c"
         label="Read Only"
-        [cntRows]="''+cntRows"
+        [cntRows]="cntRows"
         isReadOnly
         helperText="The parameter is read only."
         [exterior]="exterior02">
@@ -98,7 +93,7 @@
       </div>
       <grn-textarea formControlName="input02d"
         label="Disabled"
-        cntRows="2"
+        [cntRows]="cntRows"
         isDisabled
         helperText="The parameter is disabled."
         [exterior]="exterior02">
@@ -111,7 +106,7 @@
       </div>
       <grn-textarea formControlName="input02e"
         label="Permanent label"
-        cntRows="2"
+        [cntRows]="cntRows"
         lbShrink
         helperText="The position of the label is fixed."
         [exterior]="exterior02">
@@ -125,7 +120,7 @@
       <grn-textarea formControlName="input02f"
         label="hiddenLabel"
         hiddenLabel
-        cntRows="2"
+        [cntRows]="cntRows"
         helperText="The label is not displayed."
         [exterior]="exterior02">
       </grn-textarea>
@@ -157,21 +152,19 @@
       &lt;grn-textarea formControlName="input02a"
         id="unique_identifier"
         label="Enter value"
-        cntRows="2"
+        [cntRows]="2"
         [exterior]="exterior02"&gt;
       &lt;/grn-textarea&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
-        &lt;small&gt;&lt;em&gt;
-          Attributes: isRequired, helperText.
-        &lt;/em&gt;&lt;/small&gt;
+        &lt;small&gt;&lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;&lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-textarea formControlName="input02b"
         id="unique_identifier"
         label="Required field"
-        cntRows="2"
+        [cntRows]="cntRows"
         isRequired
         helperText="A value must be entered."
         [exterior]="exterior02"&gt;
@@ -184,7 +177,7 @@
       &lt;/div&gt;
       &lt;grn-textarea formControlName="input02c"
         label="Read Only"
-        cntRows="2"
+        [cntRows]="cntRows"
         isReadOnly
         helperText="The parameter is read only."
         [exterior]="exterior02"&gt;
@@ -197,7 +190,7 @@
       &lt;/div&gt;
       &lt;grn-textarea formControlName="input02d"
         label="Disabled"
-        cntRows="2"
+        [cntRows]="cntRows"
         isDisabled
         helperText="The parameter is disabled."
         [exterior]="exterior02"&gt;
@@ -210,7 +203,7 @@
       &lt;/div&gt;
       &lt;grn-textarea formControlName="input02e"
         label="Permanent label"
-        cntRows="2"
+        [cntRows]="cntRows"
         lbShrink
         helperText="The position of the label is fixed."
         [exterior]="exterior02"&gt;
@@ -224,7 +217,7 @@
       &lt;grn-textarea formControlName="input02f"
         label="hiddenLabel"
         hiddenLabel
-        cntRows="2"
+        [cntRows]="cntRows"
         helperText="The label is not displayed."
         [exterior]="exterior02"&gt;
       &lt;/grn-textarea&gt;
@@ -252,14 +245,15 @@ import &#123;
 export class TextareaComponent &#123;
   public formGroup02: FormGroup = new FormGroup(&#123;
     input02a: new FormControl('', []),
-    input02b: new FormControl('Hello World', [
-      Validators.required]),
+    input02b: new FormControl('Hello World'
+      , [Validators.required]),
     input02c: new FormControl('Hello World', []),
     input02d: new FormControl('Hello World', []),
     input02e: new FormControl('', []),
     input02f: new FormControl('Hello World', []),
   &#125;);
   public exterior02 = 'outlined';
+  public cntRows = 2;
 &#125;</pre>
         </mat-tab>
         <mat-tab [label]="labelCss">

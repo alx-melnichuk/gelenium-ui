@@ -34,7 +34,6 @@ export class TextareaValidationComponent {
   @Input()
   public labelCss = CN_LABEL_CSS;
 
-  public exterior03 = 'outlined';
   public minLength03 = 4;
   public controls03 = {
     input03a: new FormControl('', []),
@@ -42,4 +41,5 @@ export class TextareaValidationComponent {
     input03c: new FormControl('Hello World', []),
   };
   public formGroup03: FormGroup = new FormGroup(this.controls03);
+  public exterior03 = 'outlined';
 }
