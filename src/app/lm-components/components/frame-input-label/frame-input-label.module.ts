@@ -7,11 +7,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { GrnInputModule } from 'projects/lib-geranium/src/lib/grn-input/grn-input.module';
 
-import { InputHelperTextComponent } from './input-helper-text.component';
+import { FrameInputLabelComponent } from './frame-input-label.component';
 
 @NgModule({
-  declarations: [InputHelperTextComponent],
+  declarations: [FrameInputLabelComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GrnInputModule],
-  exports: [InputHelperTextComponent],
+  exports: [FrameInputLabelComponent],
 })
-export class InputHelperTextModule {}
+export class FrameInputLabelModule {}

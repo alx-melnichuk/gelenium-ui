@@ -12,13 +12,13 @@ import {
 } from '../constants';
 
 @Component({
-  selector: 'app-input-item-size',
-  templateUrl: './input-item-size.component.html',
-  styleUrls: ['./input-item-size.component.scss'],
+  selector: 'app-frame-input-label',
+  templateUrl: './frame-input-label.component.html',
+  styleUrls: ['./frame-input-label.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputItemSizeComponent {
+export class FrameInputLabelComponent {
   @Input()
   public labelShowSource = CN_LABEL_SHOW_SOURCE;
   @Input()
@@ -34,15 +34,11 @@ export class InputItemSizeComponent {
   @Input()
   public labelCss = CN_LABEL_CSS;
 
-  public formGroup04: FormGroup = new FormGroup({
-    input04a: new FormControl('Demo Size Short', []),
-    input04b: new FormControl('Demo Size Small', []),
-    input04c: new FormControl('Demo Size Middle', []),
-    input04d: new FormControl('Demo Size Wide', []),
-    input04e: new FormControl('Demo Size Large', []),
-    input04f: new FormControl('Demo Size Huge', []),
+  public formGroup03: FormGroup = new FormGroup({
+    input03a: new FormControl('', []),
+    input03b: new FormControl('Hello World', []),
   });
-  public exterior04 = 'outlined';
+  public exterior03 = 'outlined';
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

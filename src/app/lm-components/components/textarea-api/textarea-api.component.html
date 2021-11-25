@@ -25,8 +25,9 @@
         <code>id: string;</code>
       </td>
       <td>
-        <span>ID of the native textarea element.<br />(default = 'grn_textarea_' +
-          ++identifier;)</span>
+        <span>ID of the native textarea element.
+          <br />(default = 'grn_textarea_' + ++identifier;)
+        </span>
       </td>
     </tr>
     <tr>
@@ -70,7 +71,9 @@
         <code>isRequired: string | null;</code>
       </td>
       <td>
-        <span>Adds a validation condition: required field.<br />Attribute (no content).</span>
+        <span>Adds a validation condition: required field.
+          <br />Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -88,8 +91,9 @@
         <code>lbShrink: string | null;</code>
       </td>
       <td>
-        <span>Disable label animation. The label is always static, at the top.<br />Attribute (no
-          content).</span>
+        <span>Disable label animation. The label is always static, at the top.
+          <br />Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -117,7 +121,9 @@
         <code>hiddenLabel: string | null;</code>
       </td>
       <td>
-        <span>Disables the display of the label.<br />Attribute (no content).</span>
+        <span>Disables the display of the label.
+          <br />Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -126,8 +132,8 @@
         <code>isError: string | null;</code>
       </td>
       <td>
-        <span>Forces the error status of an item to be displayed.<br />
-          Attribute (no content).
+        <span>Forces the error status of an item to be displayed.
+          <br />Attribute (no content).
         </span>
       </td>
     </tr>
@@ -150,6 +156,17 @@
       <td>
         <span>Specifies the text for additional clarification or error.
           <br />(default = null;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>wdFull: string;</code>
+      </td>
+      <td>
+        <span>Sets the parent's width (width: 100%;).
+          <br />Attribute (no content).
         </span>
       </td>
     </tr>
@@ -181,8 +198,7 @@
         <code>minRows: number | null;</code>
       </td>
       <td>
-        <span>
-          Defines the minimum number of visible rows.
+        <span>Defines the minimum number of visible rows.
           The minimum height of the text area is calculated as "minRows"
           multiplied by to the line height. Active if "cntRows" is not specified.
           <br />(default = null;)
@@ -195,8 +211,7 @@
         <code>cntRows: number | null;</code>
       </td>
       <td>
-        <span>
-          Defines the number of visible rows.
+        <span>Defines the number of visible rows.
           The height of the text area is calculated as "cntRows"
           multiplied by to the line height.
           <br />(default = null;)
@@ -209,8 +224,7 @@
         <code>maxRows: number | null;</code>
       </td>
       <td>
-        <span>
-          Defines the maximum number of visible rows.
+        <span>Defines the maximum number of visible rows.
           The maximum height of the text area is calculated as "maxRows"
           multiplied by to the line height. Active if "cntRows" is not specified.
           <br />(default = null;)
@@ -233,8 +247,8 @@
         <code>changeData: EventEmitter&lt;Event&gt;;</code>
       </td>
       <td>
-        <span>The event is called when the user has finished changing the value of an
-          element.</span>
+        <span>The event is called when the user has finished changing the value
+          of an element.</span>
       </td>
     </tr>
     <tr>
@@ -252,7 +266,8 @@
         <code>keypressData: EventEmitter&lt;KeyboardEvent&gt;;</code>
       </td>
       <td>
-        <span>The event is called when a button that has a printable character is pressed.</span>
+        <span>The event is called when a button that has a printable
+          character is pressed.</span>
       </td>
     </tr>
     <tr>

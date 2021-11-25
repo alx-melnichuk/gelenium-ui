@@ -1,17 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { URL_COMPONENTS, URL_FRAME_INPUT } from '../../lm-components.interface';
-
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputComponent {
+export class FrameInputComponent {
   public showNum = '';
-  public urlFrameInput = '/' + URL_COMPONENTS + '/' + URL_FRAME_INPUT;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

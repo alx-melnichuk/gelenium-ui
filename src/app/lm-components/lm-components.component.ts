@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { UrlItem, URL_COMPONENTS, URL_INFINITE_SCROLL, URL_INPUT, URL_TEXTAREA } from './lm-components.interface';
+import { UrlItem, URL_COMPONENTS, URL_FRAME_INPUT, URL_INFINITE_SCROLL, URL_INPUT, URL_TEXTAREA } from './lm-components.interface';
 
 @Component({
   selector: 'app-lm-components',
@@ -9,6 +9,8 @@ import { UrlItem, URL_COMPONENTS, URL_INFINITE_SCROLL, URL_INPUT, URL_TEXTAREA }
   encapsulation: ViewEncapsulation.None,
 })
 export class LmComponentsComponent implements OnInit {
+  public expandedFrameInput = false;
+  public frameInputUrlList: UrlItem[] = this.createFrameInputUrlList();
   public expandedInput = false;
   public inputUrlList: UrlItem[] = this.createInputUrlList();
   public expandedInfiniteScroll = false;
@@ -30,6 +32,24 @@ export class LmComponentsComponent implements OnInit {
     return { label, url } as UrlItem;
   }
 
+  // ** FrameInput **
+
+  private getPathFrameInput(): string {
+    return '/' + URL_COMPONENTS + '/' + URL_FRAME_INPUT;
+  }
+
+  private createFrameInputUrlList(): UrlItem[] {
+    const result: UrlItem[] = [];
+    const url = this.getPathFrameInput();
+    result.push(this.createUrlItem('Basic', url + '#Basic'));
+    result.push(this.createUrlItem('FrameSize', url + '#FrameSize'));
+    result.push(this.createUrlItem('Label', url + '#Label'));
+    result.push(this.createUrlItem('Helper text', url + '#HelperText'));
+    return result;
+  }
+
+  // ** Input **
+
   private getPathInput(): string {
     return '/' + URL_COMPONENTS + '/' + URL_INPUT;
   }
@@ -40,15 +60,16 @@ export class LmComponentsComponent implements OnInit {
     result.push(this.createUrlItem('Basic', url + '#Basic'));
     result.push(this.createUrlItem('Attributes', url + '#Attributes'));
     result.push(this.createUrlItem('Validation', url + '#Validation'));
-    result.push(this.createUrlItem('Item Size', url + '#ItemSize'));
     result.push(this.createUrlItem('Numerical Value', url + '#NumericalValue'));
-    result.push(this.createUrlItem('Helper Text', url + '#HelperText'));
+    result.push(this.createUrlItem('Helper text', url + '#HelperText'));
     result.push(this.createUrlItem('Palette Customization', url + '#PaletteCustomization'));
     result.push(this.createUrlItem('Ornaments', url + '#Ornaments'));
     result.push(this.createUrlItem('Border Radius', url + '#BorderRadius'));
     result.push(this.createUrlItem('Api', url + '#Api'));
     return result;
   }
+
+  // ** InfiniteScroll **
 
   private getPathInfiniteScroll(): string {
     return '/' + URL_COMPONENTS + '/' + URL_INFINITE_SCROLL;
@@ -62,6 +83,8 @@ export class LmComponentsComponent implements OnInit {
     result.push(this.createUrlItem('Api', url + '#Api'));
     return result;
   }
+
+  // ** Textarea **
 
   private getPathTextarea(): string {
     return '/' + URL_COMPONENTS + '/' + URL_TEXTAREA;
@@ -80,8 +103,11 @@ export class LmComponentsComponent implements OnInit {
 
   private updateStatusExpandedByPathname(): void {
     const pathname = location.pathname;
+    this.expandedFrameInput = pathname.startsWith(this.getPathFrameInput());
     this.expandedInput = pathname.startsWith(this.getPathInput());
     this.expandedInfiniteScroll = pathname.startsWith(this.getPathInfiniteScroll());
     this.expandedTextarea = pathname.startsWith(this.getPathTextarea());
   }
+
+  // ** **
 }

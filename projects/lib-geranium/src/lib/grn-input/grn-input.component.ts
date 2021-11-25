@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -133,7 +134,7 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   public isHelperTextFilled = false;
 
   // eslint-disable-next-line @typescript-eslint/ban-types
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.type) {
@@ -175,8 +176,12 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   public onTouched: () => void = () => {};
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public writeValue(value: any): void {
+    const isFilledOld = !!this.formControl.value;
     this.formControl.setValue(value, { emitEvent: false });
     this.isFilled = !!this.formControl.value;
+    if (isFilledOld !== this.isFilled) {
+      this.changeDetectorRef.markForCheck();
+    }
   }
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public registerOnChange(fn: any): void {

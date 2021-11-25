@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputItemSizeComponent } from './input-item-size.component';
+import { FrameInputLabelComponent } from './frame-input-label.component';
 
-describe('InputItemSizeComponent', () => {
-  let component: InputItemSizeComponent;
-  let fixture: ComponentFixture<InputItemSizeComponent>;
+describe('FrameInputLabelComponent', () => {
+  let component: FrameInputLabelComponent;
+  let fixture: ComponentFixture<FrameInputLabelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InputItemSizeComponent ]
+      declarations: [ FrameInputLabelComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InputItemSizeComponent);
+    fixture = TestBed.createComponent(FrameInputLabelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

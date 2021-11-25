@@ -83,7 +83,10 @@ form div>small em {
 
 
 hr[br-tp] {
-  border-top: 1px solid var(--app-root-border-color);
+  border-top: 1px solid #ababab;
+}
+hr[br-nn] {
+  border: none;
 }
 pre.fw-nr b {
   font-weight: normal;

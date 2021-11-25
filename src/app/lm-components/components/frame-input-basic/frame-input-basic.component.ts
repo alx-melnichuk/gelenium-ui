@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { CN_LABEL_CSS, CN_LABEL_HTML, CN_LABEL_SHOW_SOURCE, CN_LABEL_TS } from '../constants';
 
 @Component({
-  selector: 'app-input-helper-text',
-  templateUrl: './input-helper-text.component.html',
-  styleUrls: ['./input-helper-text.component.scss'],
+  selector: 'app-frame-input-basic',
+  templateUrl: './frame-input-basic.component.html',
+  styleUrls: ['./frame-input-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputHelperTextComponent {
+export class FrameInputBasicComponent {
   @Input()
   public labelShowSource = CN_LABEL_SHOW_SOURCE;
   @Input()
@@ -20,11 +20,10 @@ export class InputHelperTextComponent {
   @Input()
   public labelCss = CN_LABEL_CSS;
 
-  public formGroup06: FormGroup = new FormGroup({
-    input06a: new FormControl('Hello World', []),
-    input06b: new FormControl('Hello World', []),
-    input06c: new FormControl('Hello World', []),
-    input06d: new FormControl('Hello World', []),
+  public formGroup01: FormGroup = new FormGroup({
+    input01a: new FormControl('', []),
+    input01b: new FormControl('', []),
+    input01c: new FormControl('', []),
   });
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

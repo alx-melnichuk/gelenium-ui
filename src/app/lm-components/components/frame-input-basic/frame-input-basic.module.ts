@@ -7,11 +7,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { GrnInputModule } from 'projects/lib-geranium/src/lib/grn-input/grn-input.module';
 
-import { InputItemSizeComponent } from './input-item-size.component';
+import { FrameInputBasicComponent } from './frame-input-basic.component';
 
 @NgModule({
-  declarations: [InputItemSizeComponent],
+  declarations: [FrameInputBasicComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GrnInputModule],
-  exports: [InputItemSizeComponent],
+  exports: [FrameInputBasicComponent],
 })
-export class InputItemSizeModule {}
+export class FrameInputBasicModule {}

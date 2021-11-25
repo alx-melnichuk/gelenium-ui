@@ -3,16 +3,15 @@
 
   <mat-accordion>
 
-    <mat-expansion-panel [expanded]="expandedInput">
+    <mat-expansion-panel [expanded]="expandedFrameInput">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Input
+          Frame Input
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ul class="lcm-ul">
         <li class="lcm-li"
-          *ngFor="let urlItem of inputUrlList">
-          <!-- <a class="lcm-li-href" [routerLink]="[urlItem.url + '#demo1']" [routerLinkActive]="['lcm-li-active']">{{ urlItem.label }}</a> -->
+          *ngFor="let urlItem of frameInputUrlList">
           <a class="lcm-li-href"
             [href]="urlItem.url">{{ urlItem.label }}</a>
         </li>
@@ -28,6 +27,21 @@
       <ul class="lcm-ul">
         <li class="lcm-li"
           *ngFor="let urlItem of infiniteScrollUrlList">
+          <a class="lcm-li-href"
+            [href]="urlItem.url">{{ urlItem.label }}</a>
+        </li>
+      </ul>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="expandedInput">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Input
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul class="lcm-ul">
+        <li class="lcm-li"
+          *ngFor="let urlItem of inputUrlList">
           <a class="lcm-li-href"
             [href]="urlItem.url">{{ urlItem.label }}</a>
         </li>

@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -71,6 +72,8 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   @Input()
   public helperText: string | null = null;
   @Input()
+  public wdFull: string | null = null;
+  @Input()
   public minLength: number | null = null;
   @Input()
   public maxLength: number | null = null;
@@ -118,7 +121,7 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   public currentRows = 1;
 
   // eslint-disable-next-line @typescript-eslint/ban-types
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.exterior) {
@@ -161,9 +164,17 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   public onTouched: () => void = () => {};
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public writeValue(value: any): void {
+    const isFilledOld = !!this.formControl.value;
+    const cntLinesOld = this.getNumberLines(this.formControl.value);
     this.formControl.setValue(value, { emitEvent: false });
     this.isFilled = !!this.formControl.value;
-    this.updateCurrentRows(this.formControl.value, this.cntRows, this.minRows, this.maxRows);
+    const cntLines = this.getNumberLines(this.formControl.value);
+    if (cntLinesOld != cntLines) {
+      this.updateCurrentRows(this.formControl.value, this.cntRows, this.minRows, this.maxRows);
+    }
+    if (isFilledOld !== this.isFilled || cntLinesOld != cntLines) {
+      this.changeDetectorRef.markForCheck();
+    }
   }
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public registerOnChange(fn: any): void {
