@@ -15,6 +15,11 @@ app-root {
   &>.app-header {
     flex-shrink: 0;
     flex-basis: var(--app-root-header-height);
+    display: flex;
+    align-items: center;
+    article {
+      padding: 0 10px;
+    }
   }
   &>.app-middle {
     flex-grow: 1;

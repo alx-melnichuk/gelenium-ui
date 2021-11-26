@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FrameInputComponent {
-  public showNum = '';
+  public showNum = '05';
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
