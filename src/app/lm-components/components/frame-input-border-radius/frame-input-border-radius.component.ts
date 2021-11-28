@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatSliderChange } from '@angular/material/slider';
 
 import { URL_COMPONENTS, URL_FRAME_INPUT } from '../../lm-components.interface';
 
@@ -46,8 +47,20 @@ export class FrameInputBorderRadiusComponent {
   });
   public exterior05 = 'outlined';
   public isHiddenLabel = false;
+  public borderRadius = 50;
   public urlFrameInput = '/' + URL_COMPONENTS + '/' + URL_FRAME_INPUT;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
+
+  @HostBinding('style')
+  public get getClass(): string | null {
+    return '--ibr-border-radius: ' + this.borderRadius + ';';
+  }
+
+  public inputBorderRadius(event: MatSliderChange): void {
+    if (!!event && event.value != null) {
+      this.borderRadius = event.value;
+    }
+  }
 }
