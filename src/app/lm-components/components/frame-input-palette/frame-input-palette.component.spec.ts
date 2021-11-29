@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputBorderRadiusComponent } from './input-border-radius.component';
+import { FrameInputPaletteComponent } from './frame-input-palette.component';
 
-describe('InputBorderRadiusComponent', () => {
-  let component: InputBorderRadiusComponent;
-  let fixture: ComponentFixture<InputBorderRadiusComponent>;
+describe('FrameInputPaletteComponent', () => {
+  let component: FrameInputPaletteComponent;
+  let fixture: ComponentFixture<FrameInputPaletteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InputBorderRadiusComponent ]
+      declarations: [ FrameInputPaletteComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InputBorderRadiusComponent);
+    fixture = TestBed.createComponent(FrameInputPaletteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

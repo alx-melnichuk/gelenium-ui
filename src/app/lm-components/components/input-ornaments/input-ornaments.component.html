@@ -57,8 +57,8 @@
       formControlName="input08c"
       label="Enter the number in words"
       isRequired
-      minLength="{{ minLength08 }}"
-      maxLength="{{ maxLength08 }}"
+      [minLength]="minLength08"
+      [maxLength]="maxLength08"
       [exterior]="exterior08"
       helperText="{{
         (controls08.input08c.errors?.required ? 'Required field.':
@@ -74,8 +74,8 @@
       formControlName="input08d"
       label="Enter the number in words"
       isRequired
-      minLength="{{ minLength08 }}"
-      maxLength="{{ maxLength08 }}"
+      [minLength]="minLength08"
+      [maxLength]="maxLength08"
       [exterior]="exterior08"
       helperText="{{
         (controls08.input08d.errors?.required ? 'Required field.':
@@ -159,8 +159,8 @@
       formControlName="input08c"
       label="Enter the number in words"
       isRequired
-      minLength="<b>&#123;</b>&#123; minLength08 &#125;&#125;"
-      maxLength="<b>&#123;</b>&#123; maxLength08 &#125;&#125;"
+      [minLength]="minLength08"
+      [maxLength]="maxLength08"
       [exterior]="exterior08"
       helperText="<b>&#123;</b>&#123;
         (controls08.input08c.errors?.required ? 'Required field.':
@@ -182,8 +182,8 @@
       formControlName="input08d"
       label="Enter the number in words"
       isRequired
-      minLength="<b>&#123;</b>&#123; minLength08 &#125;&#125;"
-      maxLength="<b>&#123;</b>&#123; maxLength08 &#125;&#125;"
+      [minLength]="minLength08"
+      [maxLength]="maxLength08"
       [exterior]="exterior08"
       helperText="<b>&#123;</b>&#123;
         (controls08.input08d.errors?.required ? 'Required field.':

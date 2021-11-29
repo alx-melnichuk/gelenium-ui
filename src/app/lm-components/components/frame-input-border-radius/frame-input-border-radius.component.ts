@@ -55,7 +55,7 @@ export class FrameInputBorderRadiusComponent {
 
   @HostBinding('style')
   public get getClass(): string | null {
-    return '--ibr-border-radius: ' + this.borderRadius + ';';
+    return '--fibr-border-radius: ' + this.borderRadius + ';';
   }
 
   public inputBorderRadius(event: MatSliderChange): void {

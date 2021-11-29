@@ -1,5 +1,4 @@
 <section mr-vr>
-  <h3>Frame Size</h3>
   <h3>Border radius.</h3>
   <p>
     You can change the value of the rounding radius in outlined appearance mode.
@@ -9,7 +8,7 @@
     For example:
   </p>
   <pre>
-  .ibr-outlined-radius grn-frame-input &#123;
+  .fibr-outlined-radius grn-frame-input &#123;
     --gfi-outlined-border-radius: calc(var(--gfi-base-size)*0.5);
   &#125;</pre>
   <p>
@@ -27,20 +26,20 @@
     For example:
   </p>
   <pre>
-  .ibr-outlined-radius grn-frame-input &#123;
+  .fibr-outlined-radius grn-frame-input &#123;
     --gfi-outlined-border-radius: calc(var(--gfi-base-size)*0.5);
     --gfi-outlined-frm-pd-lf-rg: calc(var(--gfi-base-size)*0.57);
   &#125;</pre>
   <p>
     In our example, the value of the coefficient for changing the fillet radius will change
     dynamically.
-    For this, an additional css-variable "&#8209;&#8209;ibr-border-radius" is used.
+    For this, an additional css-variable "&#8209;&#8209;fibr-border-radius" is used.
     As a result, we get the following:
   </p>
   <pre>
-  .ibr-outlined-radius grn-frame-input &#123;
+  .fibr-outlined-radius grn-frame-input &#123;
     --gfi-outlined-border-radius:
-      calc(var(--gfi-base-size)*var(--ibr-border-radius)/100);
+      calc(var(--gfi-base-size)*var(--fibr-border-radius)/100);
     --gfi-outlined-frm-pd-lf-rg: calc(0.57*var(--gfi-base-size));
   &#125;</pre>
   <p>
@@ -66,9 +65,9 @@
     We get the following:
   </p>
   <pre>
-    .ibr-underline-radius grn-frame-input &#123;
+    .fibr-underline-radius grn-frame-input &#123;
       --gfi-underline-border-radius:
-        calc(var(--gfi-base-size)*var(--ibr-border-radius)/100);
+        calc(var(--gfi-base-size)*var(--fibr-border-radius)/100);
       --gfi-underline-frm-pd-lf-rg: calc(0.4*var(--gfi-base-size));
     &#125;
   </pre>
@@ -374,17 +373,17 @@ export class FrameInputComponent &#123;
   font-size: 20px;
 &#125;
 
---ibr-border-radius: 20;
+--fibr-border-radius: 20;
 
 .fibr-outlined-radius grn-frame-input &#123;
   --gfi-outlined-border-radius
-    : calc(var(--gfi-base-size)*var(--ibr-border-radius)/100);
+    : calc(var(--gfi-base-size)*var(--fibr-border-radius)/100);
   --gfi-outlined-frm-pd-lf-rg: calc(0.57*var(--gfi-base-size));
 &#125;
 
 .fibr-underline-radius grn-frame-input &#123;
   --gfi-underline-border-radius
-    : calc(var(--gfi-base-size)*var(--ibr-border-radius)/100);
+    : calc(var(--gfi-base-size)*var(--fibr-border-radius)/100);
   --gfi-underline-frm-pd-lf-rg: calc(0.4*var(--gfi-base-size));
 &#125;</pre>
         </mat-tab>

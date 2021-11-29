@@ -6,6 +6,8 @@ import { FrameInputFrameSizeModule } from '../frame-input-frame-size/frame-input
 import { FrameInputLabelModule } from '../frame-input-label/frame-input-label.module';
 import { FrameInputHelperTextModule } from '../frame-input-helper-text/frame-input-helper-text.module';
 import { FrameInputBorderRadiusModule } from '../frame-input-border-radius/frame-input-border-radius.module';
+import { FrameInputPaletteModule } from '../frame-input-palette/frame-input-palette.module';
+import { FrameInputApiModule } from '../frame-input-api/frame-input-api.module';
 
 import { FrameInputComponent } from './frame-input.component';
 
@@ -18,6 +20,8 @@ import { FrameInputComponent } from './frame-input.component';
     FrameInputLabelModule,
     FrameInputHelperTextModule,
     FrameInputBorderRadiusModule,
+    FrameInputPaletteModule,
+    FrameInputApiModule,
   ],
   exports: [FrameInputComponent],
 })

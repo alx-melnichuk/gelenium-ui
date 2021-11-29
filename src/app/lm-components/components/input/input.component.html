@@ -18,36 +18,9 @@
   <hr br-tp>
 </div>
 
-<!-- // TOD del; <section *ngIf="!showNum || showNum==='04'" id="ItemSize">
-  <app-input-item-size></app-input-item-size>
-  <hr br-tp>
-</section> -->
-
 <div *ngIf="!showNum || showNum==='05'"
   id="NumericalValue">
   <app-input-numerical-value></app-input-numerical-value>
-  <hr br-tp>
-</div>
-
-<!-- <section *ngIf="!showNum || showNum==='06'"
-  id="HelperText">
-  <app-input-helper-text></app-input-helper-text>
-  <hr br-tp>
-</section> -->
-<section mr-vr
-  id="HelperText">
-  <h3>Helper text</h3>
-  <p>
-    Interesting examples of using "helperText" can be found on the
-    <a [href]="urlFrameInput + '#HelperText'">"GrnFrameInput#HelperText"</a>
-    page.
-  </p>
-  <hr br-tp>
-</section>
-
-<div *ngIf="!showNum || showNum==='07'"
-  id="PaletteCustomization">
-  <app-input-palette-customization></app-input-palette-customization>
   <hr br-tp>
 </div>
 
@@ -57,11 +30,45 @@
   <hr br-tp>
 </div>
 
-<div *ngIf="!showNum || showNum==='09'"
-  id="BorderRadius">
-  <app-input-border-radius></app-input-border-radius>
+<section mr-vr
+  id="ItemSize">
+  <h3>Item Size</h3>
+  <p>
+    The <a [href]="urlFrameInput + '#FrameSize'">"GrnFrameInput#FrameSize"</a>
+    page shows you how to resize an element.
+  </p>
   <hr br-tp>
-</div>
+</section>
+
+<section mr-vr
+  id="HelperText">
+  <h3>Helper text</h3>
+  <p>
+    The <a [href]="urlFrameInput + '#HelperText'">"GrnFrameInput#HelperText"</a>
+    page shows you how to effectively use the helperText property.
+  </p>
+  <hr br-tp>
+</section>
+
+<section mr-vr
+  id="BorderRadius">
+  <h3>Border Radius</h3>
+  <p>
+    The <a [href]="urlFrameInput + '#BorderRadius'">"GrnFrameInput#BorderRadius"</a>
+    page shows you how to change the rounding radius of an element.
+  </p>
+  <hr br-tp>
+</section>
+
+<section mr-vr
+  id="Palette">
+  <h3>Palette</h3>
+  <p>
+    The <a [href]="urlFrameInput + '#Palette'">"GrnFrameInput#Palette"</a>
+    page shows you how to change the color palette of an element.
+  </p>
+  <hr br-tp>
+</section>
 
 <div *ngIf="!showNum || showNum==='10'"
   id="Api">

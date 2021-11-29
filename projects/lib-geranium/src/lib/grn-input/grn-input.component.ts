@@ -84,16 +84,17 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   @Input()
   public helperText: string | null = null;
   @Input()
-  public step: string | null = null;
+  public wdFull: string | null = null;
   @Input()
-  public min: string | null = null;
+  public step: number | null = null;
   @Input()
-  public max: string | null = null;
+  public min: number | null = null;
   @Input()
-  public minLength: string | null = null;
+  public max: number | null = null;
   @Input()
-  public maxLength: string | null = null;
-
+  public minLength: number | null = null;
+  @Input()
+  public maxLength: number | null = null;
   @Output()
   readonly inputData: EventEmitter<Event> = new EventEmitter();
   @Output()
@@ -160,7 +161,7 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
     this.isHelperTextFilled = changes.helperText ? !!this.helperText : this.isHelperTextFilled;
 
     if (changes.isRequired || changes.minLength || changes.maxLength) {
-      this.prepareFormGroup(this.isRequiredVal, this.parseNumber(this.minLength || '', -1), this.parseNumber(this.maxLength || '', -1));
+      this.prepareFormGroup(this.isRequiredVal, this.minLength, this.maxLength);
     }
   }
 
@@ -261,16 +262,16 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
 
   // ** Private API **
 
-  private prepareFormGroup(isRequiredVal: boolean, minLength: number, maxLength: number): void {
+  private prepareFormGroup(isRequiredVal: boolean, minLength: number | null, maxLength: number | null): void {
     this.formControl.clearValidators();
     const newValidator: ValidatorFn[] = [];
     if (isRequiredVal) {
       newValidator.push(Validators.required);
     }
-    if (minLength > 0) {
+    if (!!minLength && minLength > 0) {
       newValidator.push(Validators.minLength(minLength));
     }
-    if (maxLength > 0) {
+    if (!!maxLength && maxLength > 0) {
       newValidator.push(Validators.maxLength(maxLength));
     }
     this.formControl.setValidators(newValidator);

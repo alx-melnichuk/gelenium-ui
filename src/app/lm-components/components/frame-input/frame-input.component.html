@@ -6,16 +6,6 @@
   <hr br-tp>
 </div>
 
-<!-- <section *ngIf="!showNum || showNum==='02'" id="Attributes">
-  <app-input-attributes></app-input-attributes>
-  <hr br-tp>
-</section> -->
-
-<!-- <section *ngIf="!showNum || showNum==='03'" id="Validation">
-  <app-input-validation></app-input-validation>
-  <hr br-tp>
-</section> -->
-
 <div *ngIf="!showNum || showNum==='02'"
   id="FrameSize">
   <app-frame-input-frame-size></app-frame-input-frame-size>
@@ -28,11 +18,6 @@
   <hr br-tp>
 </div>
 
-<!-- <section *ngIf="!showNum || showNum==='05'" id="NumericalValue">
-  <app-input-numerical-value></app-input-numerical-value>
-  <hr br-tp>
-</section> -->
-
 <div *ngIf="!showNum || showNum==='04'"
   id="HelperText">
   <app-frame-input-helper-text></app-frame-input-helper-text>
@@ -44,25 +29,17 @@
   <app-frame-input-border-radius></app-frame-input-border-radius>
   <hr br-tp>
 </div>
-<!-- <section *ngIf="!showNum || showNum==='07'" id="PaletteCustomization">
-  <app-input-palette-customization></app-input-palette-customization>
-  <hr br-tp>
-</section> -->
 
-<!-- <section *ngIf="!showNum || showNum==='08'" id="Ornaments">
-  <app-input-ornaments></app-input-ornaments>
-  <hr br-tp>
-</section> -->
+<div *ngIf="!showNum || showNum==='06'"
+  id="Palette">
+  <app-frame-input-palette></app-frame-input-palette>
+</div>
 
-<!-- <section *ngIf="!showNum || showNum==='09'" id="BorderRadius">
-  <app-input-border-radius></app-input-border-radius>
+<section *ngIf="!showNum || showNum==='07'"
+  id="Api">
+  <app-frame-input-api></app-frame-input-api>
   <hr br-tp>
-</section> -->
-
-<!-- <section *ngIf="!showNum || showNum==='10'" id="Api">
-  <app-input-api></app-input-api>
-  <hr br-tp>
-</section> -->
+</section>
 
 <br />
 <br />

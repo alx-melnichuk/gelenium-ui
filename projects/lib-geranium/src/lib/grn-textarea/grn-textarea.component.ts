@@ -148,7 +148,6 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     }
 
     if (changes.minRows || changes.maxRows) {
-      // this.currentRows = this.getCurrentRows(0, this.minRows, this.maxRows);
       this.updateCurrentRows('', this.cntRows, this.minRows, this.maxRows);
     }
     if (changes.cntRows) {

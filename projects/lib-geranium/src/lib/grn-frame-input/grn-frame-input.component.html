@@ -13,8 +13,8 @@
 ]"
   [attr.data-shrink]="isLabelShrink"
   [attr.for]="inputId"
-  [attr.id]="inputId + '-label'"
->{{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
+  [attr.id]="inputId + '-label'">
+  {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
 </label>
 
 <div [ngClass]="['gfi-frame', 'Grn-palette', 'GrnInputFrame'
@@ -30,7 +30,8 @@
   , (isFocused ? 'Grn-focused': '')
 ]">
   <ng-content></ng-content>
-  <fieldset *ngIf="isOutlinedExterior" aria-hidden="true"
+  <fieldset *ngIf="isOutlinedExterior"
+    aria-hidden="true"
     [ngClass]="['gfi-outlined-fieldset', 'GrnInput-Outlined'
     , (isFocused ? 'Grn-focused': '')
     , (isDisabled ? 'Grn-disabled': '')
@@ -56,7 +57,6 @@
   , (isFocused ? 'Grn-focused': '')
   , (getClassForHelperText(isError, isDisabled))
 ]"
-  [attr.id]="inputId + '-helper-text'"
->
+  [attr.id]="inputId + '-helper-text'">
   {{ helperText }}
 </p>

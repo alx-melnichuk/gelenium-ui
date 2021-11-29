@@ -42,9 +42,12 @@ export class LmComponentsComponent implements OnInit {
     const result: UrlItem[] = [];
     const url = this.getPathFrameInput();
     result.push(this.createUrlItem('Basic', url + '#Basic'));
-    result.push(this.createUrlItem('FrameSize', url + '#FrameSize'));
+    result.push(this.createUrlItem('Frame size', url + '#FrameSize'));
     result.push(this.createUrlItem('Label', url + '#Label'));
     result.push(this.createUrlItem('Helper text', url + '#HelperText'));
+    result.push(this.createUrlItem('Border radius', url + '#BorderRadius'));
+    result.push(this.createUrlItem('Palette', url + '#Palette'));
+    result.push(this.createUrlItem('Api', url + '#Api'));
     return result;
   }
 
@@ -60,11 +63,12 @@ export class LmComponentsComponent implements OnInit {
     result.push(this.createUrlItem('Basic', url + '#Basic'));
     result.push(this.createUrlItem('Attributes', url + '#Attributes'));
     result.push(this.createUrlItem('Validation', url + '#Validation'));
-    result.push(this.createUrlItem('Numerical Value', url + '#NumericalValue'));
-    result.push(this.createUrlItem('Helper text', url + '#HelperText'));
-    result.push(this.createUrlItem('Palette Customization', url + '#PaletteCustomization'));
+    result.push(this.createUrlItem('Numerical value', url + '#NumericalValue'));
     result.push(this.createUrlItem('Ornaments', url + '#Ornaments'));
-    result.push(this.createUrlItem('Border Radius', url + '#BorderRadius'));
+    result.push(this.createUrlItem('Item size', url + '#ItemSize'));
+    result.push(this.createUrlItem('Helper text', url + '#HelperText'));
+    result.push(this.createUrlItem('Border radius', url + '#BorderRadius'));
+    result.push(this.createUrlItem('Palette', url + '#Palette'));
     result.push(this.createUrlItem('Api', url + '#Api'));
     return result;
   }
@@ -97,6 +101,10 @@ export class LmComponentsComponent implements OnInit {
     result.push(this.createUrlItem('Attributes', url + '#Attributes'));
     result.push(this.createUrlItem('Validation', url + '#Validation'));
     result.push(this.createUrlItem('Capability', url + '#Capability'));
+    result.push(this.createUrlItem('Item size', url + '#ItemSize'));
+    result.push(this.createUrlItem('Helper text', url + '#HelperText'));
+    result.push(this.createUrlItem('Border radius', url + '#BorderRadius'));
+    result.push(this.createUrlItem('Palette', url + '#Palette'));
     result.push(this.createUrlItem('Api', url + '#Api'));
     return result;
   }

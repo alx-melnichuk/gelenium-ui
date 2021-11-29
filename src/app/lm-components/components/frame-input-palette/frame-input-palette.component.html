@@ -1,0 +1,639 @@
+<section mr-vr>
+  <h3>Palette.</h3>
+  <p>
+    You can customize the color palette for the input element.
+    To avoid duplicating color codes, we will use the following CSS variables:
+  </p>
+  <pre>
+// Let's create our own color palette.
+.fip-customization .Grn-palette &#123;
+// The default border color.
+--fip-default-color: #00acc1;
+// Border and label color on error.
+--fip-error-color: #ad1457;
+// Border and label color on error and mouse hover.
+--fip-error-hover-color: #f06292;
+// The color of the frame and label when receiving focus.
+--fip-focused-color: #0097a7;
+
+// The default color for the label.
+--fip-label-default-color: #5c6bc0;
+// The color of the label if the element is disabled.
+--fip-label-disabled-color: #9c27b0;
+
+// For the exterior "Outlined":
+// The default border color.
+--fip-outlined-default-brd-color: #5c6bc0;
+
+// For the exterior "Underline":
+// Default background color.
+--fip-underline-default-bg-color: rgba(178, 235, 242, 0.6);
+// The background color when receiving focus.
+--fip-underline-focused-bg-color: rgba(178, 235, 242, 0.4);
+// The background color when the element is disabled.
+--fip-underline-disabled-bg-color: rgba(178, 235, 242, 0.2);
+
+// For the exterior "Underline" and "Standard":
+// The default bottom border color.
+--fip-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
+&#125;</pre>
+  <p>
+    All the CSS classes that define the colors of the input element are children of the
+    "Grn-palette" CSS classes.
+    Add a custom "fip-customization" CSS class to define our colors.
+  </p>
+  <p>
+    To replace the color of the label, we define a group of CSS classes.
+  </p>
+  <pre>
+// Default color of the label.
+.fip-customization .Grn-palette .plt-clr-default
+&#123; color: var(--fip-label-default-color); &#125;
+// The color of the label on error.
+.fip-customization .Grn-palette .plt-clr-error
+&#123; color: var(--fip-error-color); &#125;
+// The color of the label on mouse over and on error.
+.fip-customization .Grn-palette .plt-clr-mouse-error
+&#123; color: var(--fip-error-hover-color); &#125;
+// The color of the label on mouse hover.
+.fip-customization .Grn-palette .plt-clr-mouse
+&#123; color: var(--fip-default-color); &#125;
+// The color of the label when the input element receives focus.
+.fip-customization .Grn-palette .plt-clr-focused
+&#123; color: var(--fip-focused-color); &#125;
+// The color of the label when the input element is disabled.
+.fip-customization .Grn-palette .plt-clr-disabled
+&#123; color: var(--fip-label-disabled-color); &#125;</pre>
+  <p>
+    Likewise to replace the "Outlined" border color define a group of CSS classes.
+  </p>
+  <pre>
+.fip-customization .Grn-palette .plt-brd-clr-XXX
+&#123; border-color: var(--fip-outlined-default-brd-color); &#125;</pre>
+  <p>
+    Where XXX - take the values from the previous example.
+  </p>
+  <p>
+    Likewise, to replace the "Underline" background color, define a group of CSS classes.
+  </p>
+  <pre>
+.fip-customization .Grn-palette .plt-bg-clr-XXX
+&#123; background-color: var(--fip-underline-default-bg-color); &#125;</pre>
+  <p>
+    Where XXX - take the values from the previous example.
+  </p>
+  <p>
+    Likewise, to replace the "Underline" and "Standard" colors, define a group of CSS classes.
+  </p>
+  <pre>
+.fip-customization .Grn-palette .plt-brd-bt-clr-XXX:before 
+&#123; border-bottom-color: var(--fip-substrate-before-brd-color); &#125;</pre>
+  <p>
+    Where XXX - take the values from the previous example.
+  </p>
+  <p>
+    The following example demonstrates how to change the colors of an input element.
+  </p>
+  <p>
+    The css-style "fip-bstrap" implements a bootstrap-style color palette.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior06">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup06"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group fip-customization">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>State: empty.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input06a"
+        label="Enter value"
+        [exterior]="exterior06">
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: isRequired, helperText.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input06b"
+        label="Required field"
+        isRequired
+        helperText="A value must be entered."
+        [exterior]="exterior06">
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isReadOnly.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input06c"
+        label="Read Only"
+        isReadOnly
+        helperText="The parameter is read only."
+        [exterior]="exterior06">
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isDisabled.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input06d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior06">
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isRequired, minLength.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input06e"
+        [label]="controls06.input06e.errors ? 'Error':'Value'"
+        isRequired
+        [minLength]="minLength06e"
+        helperText="
+        {{(controls06.input06e.errors?.required ?
+          'Required field.':
+          (controls06.input06e.errors?.minlength ?
+            'Minimum length '
+            + controls06.input06e.errors?.minlength.requiredLength
+            + ' characters.'
+            :'Enter value.'
+          )
+        )}}"
+        [exterior]="exterior06">
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isError + isDisabled.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input06f"
+        label="Error-Disabled"
+        isError
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior06">
+      </grn-input>
+    </div>
+
+  </div>
+
+
+  <div class="app-group">
+    <small>
+      <em>Style like Bootstrap</em>
+    </small>
+  </div>
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: isRequired, helperText.</em>
+        </small>
+      </div>
+      <grn-input class="fip-bstrap"
+        formControlName="input06g"
+        frameSize="short"
+        hiddenLabel
+        exterior="outlined"
+        isRequired
+        helperText="{{
+          (controls06.input06g.errors?.required
+            ? 'Required field.': 'Enter value.')
+        }}">
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: isRequired, helperText.</em>
+        </small>
+      </div>
+      <grn-input class="fip-bstrap"
+        style="width: 25ch;"
+        formControlName="input06h"
+        frameSize="short"
+        hiddenLabel
+        exterior="outlined"
+        isRequired
+        helperText="{{
+          (controls06.input06h.errors?.required
+            ? 'Required field.': 'Enter value.')
+        }}">
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: isDisabled.</em>
+        </small>
+      </div>
+      <grn-input class="fip-bstrap"
+        formControlName="input06i"
+        frameSize="short"
+        hiddenLabel
+        exterior="outlined"
+        isDisabled
+        helperText="The parameter is disabled.">
+      </grn-input>
+    </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <pre source="html">
+&lt;form [formGroup]="formGroup06"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group fip-customization"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;State: empty.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06a"
+        label="Enter value"
+        [exterior]="exterior06"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06b"
+        label="Required field"
+        isRequired
+        helperText="A value must be entered."
+        [exterior]="exterior06"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06c"
+        label="Read Only"
+        isReadOnly
+        helperText="The parameter is read only."
+        [exterior]="exterior06"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior06"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isRequired, minLength.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06e"
+        [label]="controls06.input06e.errors ? 'Error':'Value'"
+        isRequired
+        [minLength]="minLength06e"
+        helperText="
+        <b>&#123;</b>&#123;(controls06.input06e.errors?.required ?
+          'Required field.':
+          (controls06.input06e.errors?.minlength ?
+            'Minimum length '
+            + controls06.input06e.errors?.minlength.requiredLength
+            + ' characters.'
+            :'Enter value.'
+          )
+        )&#125;&#125;"
+        [exterior]="exterior06"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isError + isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06f"
+        label="Error-Disabled"
+        isError
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior06"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+
+  &lt;div class="app-group"&gt;
+    &lt;small&gt;
+      &lt;em&gt;Style like Bootstrap&lt;/em&gt;
+    &lt;/small&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input class="fip-bstrap"
+        formControlName="input06g"
+        frameSize="short"
+        hiddenLabel
+        exterior="outlined"
+        isRequired
+        helperText="<b>&#123;</b>&#123;
+          (controls06.input06g.errors?.required
+            ? 'Required field.': 'Enter value.')
+        &#125;&#125;"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input class="fip-bstrap"
+        style="width: 25ch;"
+        formControlName="input06h"
+        frameSize="short"
+        hiddenLabel
+        exterior="outlined"
+        isRequired
+        helperText="<b>&#123;</b>&#123;
+          (controls06.input06h.errors?.required
+            ? 'Required field.': 'Enter value.')
+        &#125;&#125;"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input class="fip-bstrap"
+        formControlName="input06i"
+        frameSize="short"
+        hiddenLabel
+        exterior="outlined"
+        isDisabled
+        helperText="The parameter is disabled."&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameInputComponent &#123;
+  public minLength06e = 5;
+  public controls06 = &#123;
+    input06a: new FormControl('', []),
+    input06b: new FormControl('Hello World', [Validators.required]),
+    input06c: new FormControl('Hello World', []),
+    input06d: new FormControl('Hello World', []),
+    input06e: new FormControl('demo', [
+      Validators.required, Validators.minLength(this.minLength06e)
+    ]),
+    input06f: new FormControl('Hello World', []),
+    input06g: new FormControl('Hello World', [Validators.required]),
+    input06h: new FormControl('', [Validators.required]),
+    input06i: new FormControl('Hello World', []),
+  &#125;;
+  public formGroup06: FormGroup = new FormGroup(this.controls06);
+  public exterior06 = 'outlined';
+&#125;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <pre source="css">
+.app-elem &#123;
+  min-width: 25ch;
+  margin: 10px 10px;
+&#125;
+.fip-customization .Grn-palette &#123;
+  --fip-default-color: #00acc1;
+  --fip-error-color: #ad1457;
+  --fip-error-hover-color: #f06292;
+  --fip-focused-color: #0097a7;
+
+  --fip-label-default-color: #5c6bc0;
+  --fip-label-disabled-color: #9c27b0;
+
+  --fip-outlined-default-brd-color: #5c6bc0;
+
+  --fip-underline-default-bg-color: rgba(178, 235, 242, 0.6);
+  --fip-underline-focused-bg-color: rgba(178, 235, 242, 0.4);
+  --fip-underline-disabled-bg-color: rgba(178, 235, 242, 0.2);
+
+  --fip-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
+&#125;
+
+.fip-customization .Grn-palette .plt-clr-default &#123;
+  color: var(--fip-label-default-color);
+&#125;
+.fip-customization .Grn-palette .plt-clr-error &#123;
+  color: var(--fip-error-color);
+&#125;
+.fip-customization .Grn-palette .plt-clr-mouse-error &#123;
+  color: var(--fip-error-hover-color);
+&#125;
+.fip-customization .Grn-palette .plt-clr-mouse &#123;
+  color: var(--fip-default-color);
+&#125;
+.fip-customization .Grn-palette .plt-clr-focused &#123;
+  color: var(--fip-focused-color);
+&#125;
+.fip-customization .Grn-palette .plt-clr-disabled &#123;
+  color: var(--fip-label-disabled-color);
+&#125;
+
+.fip-customization .Grn-palette .plt-brd-clr-default &#123;
+  border-color: var(--fip-outlined-default-brd-color);
+&#125;
+.fip-customization .Grn-palette .plt-brd-clr-error &#123;
+  border-color: var(--fip-error-color);
+&#125;
+.fip-customization .Grn-palette .plt-brd-clr-mouse-error &#123;
+  border-color: var(--fip-error-hover-color);
+&#125;
+.fip-customization .Grn-palette .plt-brd-clr-mouse &#123;
+  border-color: var(--fip-default-color);
+&#125;
+.fip-customization .Grn-palette .plt-brd-clr-focused &#123;
+  border-color: var(--fip-focused-color);
+&#125;
+.fip-customization .Grn-palette .plt-brd-clr-disabled &#123;
+  border-color: var(--fip-label-disabled-color);
+&#125;
+
+.fip-customization .Grn-palette .plt-bg-clr-default &#123;
+  background-color: var(--fip-underline-default-bg-color);
+&#125;
+.fip-customization .Grn-palette .plt-bg-clr-error &#123;
+  background-color: var(--fip-underline-default-bg-color);
+&#125;
+.fip-customization .Grn-palette .plt-bg-clr-mouse-error &#123;
+  background-color: var(--fip-underline-focused-bg-color);
+&#125;
+.fip-customization .Grn-palette .plt-bg-clr-mouse &#123;
+  background-color: var(--fip-underline-focused-bg-color);
+&#125;
+.fip-customization .Grn-palette .plt-bg-clr-focused &#123;
+  background-color: var(--fip-underline-focused-bg-color);
+&#125;
+.fip-customization .Grn-palette .plt-bg-clr-disabled &#123;
+  background-color: var(--fip-underline-disabled-bg-color);
+&#125;
+
+.fip-customization .Grn-palette .plt-brd-bt-clr-default:before &#123;
+  border-bottom-color: var(--fip-substrate-before-brd-color);
+&#125;
+.fip-customization .Grn-palette .plt-brd-bt-clr-error:before &#123;
+  border-bottom-color: var(--fip-error-color);
+&#125;
+.fip-customization .Grn-palette .plt-brd-bt-clr-error:after &#123;
+  border-bottom-color: var(--fip-error-color);
+&#125;
+.fip-customization .Grn-palette .plt-brd-bt-clr-mouse-error:before &#123;
+  border-bottom-color: var(--fip-error-hover-color);
+&#125;
+.fip-customization .Grn-palette .plt-brd-bt-clr-mouse:before &#123;
+  border-bottom-color: var(--fip-default-color);
+&#125;
+.fip-customization .Grn-palette .plt-brd-bt-clr-focused:after &#123;
+  border-bottom-color: var(--fip-focused-color);
+&#125;
+.fip-customization .Grn-palette .plt-brd-bt-clr-disabled:before &#123;
+  border-bottom-color: var(--fip-substrate-before-brd-color);
+&#125;
+
+
+
+.fip-bstrap &#123;
+  color: #495057;
+&#125;
+.fip-bstrap .Grn-palette &#123;
+  --cntl-error-color: #dc3545;
+  --cntl-error-hover-color: #dc3545;
+  --cntl-focused-color: #80bdff;
+  --cntl-outlined-default-brd-color: #ced4da;
+&#125;
+.fip-bstrap .Grn-palette .plt-brd-clr-mouse &#123;
+  border-color: var(--cntl-outlined-default-brd-color);
+&#125;
+.fip-bstrap .gfi-outlined-fieldset.Grn-focused &#123;
+  border-width: 1px;
+&#125;
+.fip-bstrap .gfi-outlined-fieldset.Grn-focused.plt-brd-clr-error &#123;
+  box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
+&#125;
+.fip-bstrap .gfi-outlined-fieldset.Grn-focused:not(.plt-brd-clr-error) &#123;
+  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+&#125;
+.fip-bstrap .gfi-frm-outlined.Grn-disabled &#123;
+  background-color: #e9ecef;
+  opacity: 1;
+&#125;
+.fip-bstrap .gi-input.gi-outlined.Grn-error &#123;
+  padding-right: 1.4em;
+  background-image: url("data:image/svg+xml,"
+  + "&lt;svg xmlns='http://www.w3.org/2000/svg' width='12' "
+  + "height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'&gt;"
+  + "&lt;circle cx='6' cy='6' r='4.5'/&gt;"
+  + "&lt;path stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/&gt;"
+  + "&lt;circle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/&gt;"
+  + "&lt;/svg&gt;");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+&#125;</pre>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

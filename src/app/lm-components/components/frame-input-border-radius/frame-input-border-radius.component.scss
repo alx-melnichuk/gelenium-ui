@@ -25,17 +25,17 @@ app-frame-input-border-radius {
     font-size: 20px;
   }
 
-  --ibr-border-radius: 20;
+  --fibr-border-radius: 20;
 
   .fibr-outlined-radius grn-frame-input {
     --gfi-outlined-border-radius
-      : calc(var(--gfi-base-size)*var(--ibr-border-radius)/100);
+      : calc(var(--gfi-base-size)*var(--fibr-border-radius)/100);
     --gfi-outlined-frm-pd-lf-rg: calc(0.57*var(--gfi-base-size));
   }
 
   .fibr-underline-radius grn-frame-input {
     --gfi-underline-border-radius
-      : calc(var(--gfi-base-size)*var(--ibr-border-radius)/100);
+      : calc(var(--gfi-base-size)*var(--fibr-border-radius)/100);
     --gfi-underline-frm-pd-lf-rg: calc(0.4*var(--gfi-base-size));
   }
 }

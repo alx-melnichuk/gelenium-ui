@@ -11,15 +11,14 @@ grn-input {    // # outline: 1px dashed green;
   font-family: "Roboto","Helvetica","Arial",sans-serif; // #!!root
   font-weight: 400; // #!!root
   font-size: 1em; // #!!root
-
   position: relative;
-  // min-width: 0;
   padding: 0;
-  // margin: 0;
-  // border: 0;
   vertical-align: top; // #!!
+  &[wdFull] {
+    width: 100%;
+  }
 
-  // input
+  // Input
   .gi-input {
     // font: inherit;           // #!! from root
     font-size: inherit;      // #!! from root
