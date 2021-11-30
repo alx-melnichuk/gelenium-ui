@@ -18,11 +18,12 @@
   <hr br-tp>
 </div>
 
-<div *ngIf="!showNum || showNum==='05'"
+<div *ngIf="!showNum || showNum==='04'"
   id="NumericalValue">
-  <app-input-numerical-value></app-input-numerical-value>
+  <app-input-numerical></app-input-numerical>
   <hr br-tp>
 </div>
+
 
 <div *ngIf="!showNum || showNum==='08'"
   id="Ornaments">
@@ -31,6 +32,7 @@
 </div>
 
 <section mr-vr
+  *ngIf="!showNum"
   id="ItemSize">
   <h3>Item Size</h3>
   <p>
@@ -41,6 +43,7 @@
 </section>
 
 <section mr-vr
+  *ngIf="!showNum"
   id="HelperText">
   <h3>Helper text</h3>
   <p>
@@ -51,6 +54,7 @@
 </section>
 
 <section mr-vr
+  *ngIf="!showNum"
   id="BorderRadius">
   <h3>Border Radius</h3>
   <p>
@@ -61,6 +65,7 @@
 </section>
 
 <section mr-vr
+  *ngIf="!showNum"
   id="Palette">
   <h3>Palette</h3>
   <p>

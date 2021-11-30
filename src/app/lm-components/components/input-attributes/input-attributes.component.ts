@@ -35,13 +35,20 @@ export class InputAttributesComponent {
   public labelCss = CN_LABEL_CSS;
 
   public formGroup02: FormGroup = new FormGroup({
-    input02a: new FormControl('Hello World', [Validators.required]),
-    input02b: new FormControl('Hello World', []),
-    input02c: new FormControl('', []),
+    input02a: new FormControl('', []),
+    input02b: new FormControl('Hello World', [Validators.required]),
+    input02c: new FormControl('Hello World', []),
     input02d: new FormControl('Hello World', []),
     input02e: new FormControl('', []),
     input02f: new FormControl('Hello World', []),
-    input02g: new FormControl('Hello World', []),
+    input02g: new FormControl('', []),
+    input02h: new FormControl('', []),
+    input02i: new FormControl('Hello World', []),
+    input02j: new FormControl('', []),
+    input02k: new FormControl('', []),
+    input02l: new FormControl('', []),
+    input02m: new FormControl('', []),
+    input02n: new FormControl('', []),
   });
   public exterior02 = 'outlined';
 

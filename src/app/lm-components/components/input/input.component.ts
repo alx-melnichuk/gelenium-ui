@@ -10,7 +10,7 @@ import { URL_COMPONENTS, URL_FRAME_INPUT } from '../../lm-components.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent {
-  public showNum = '';
+  public showNum = '04';
   public urlFrameInput = '/' + URL_COMPONENTS + '/' + URL_FRAME_INPUT;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

@@ -1,148 +1,181 @@
-<div class="in-section">
+<section mr-vr>
   <h3>Validation</h3>
   <p>
     The "isError" parameter sets the field to the error display state.
     The "helperText" parameter can be used to display an error message.
-    A thin border (exterior="outlined") or a red underline
-    (exterior="underline" | exterior="standard") signals the
-    user about an erroneous value in this input field.
-    The red frame is displayed even if the input field is disabled (isDisabled).
   </p>
-</div>
+  <p>In case the field is in error:</p>
+  <ul>
+    <li>displays a red box for "outlined";</li>
+    <li>red underline is displayed for "underline" or "standard";</li>
+    <li>the content of "label" is displayed in red;</li>
+    <li>the content of "helperText" is displayed in red;</li>
+    <li>the specified elements are displayed in red even if the field is disabled (isDisabled);</li>
+  </ul>
+  <p>
+    An error condition also occurs when the constraints set by the reactive form and attributes are
+    violated.
+  </p>
+</section>
 
-<form class="in-section"
-  [formGroup]="formGroup03"
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior03">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup03"
   novalidate
   autocomplete="off">
 
-  <div>
-    <grn-input class="in-item"
-      formControlName="input03a"
-      exterior="outlined"
-      label="Error"
-      isError>
-    </grn-input>
+  <div class="app-group">
 
-    <grn-input class="in-item"
-      formControlName="input03b"
-      exterior="outlined"
-      label="Error-Disabled"
-      isDisabled
-      isError
-      helperText="Incorrect entry.">
-    </grn-input>
-  </div>
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isError.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input03a"
+        [label]="!controls03.input03a.value
+          ? 'Requires a value':'Parameter value'"
+        [isError]="!controls03.input03a.value ? '':null"
+        wdFull
+        [helperText]="controls03.input03a.value
+        ? 'The field is filled.'
+        : 'The field is not filled.'"
+        [exterior]="exterior03">
+      </grn-input>
+    </div>
 
-  <div>
-    <grn-input class="in-item"
-      formControlName="input03c"
-      exterior="underline"
-      label="Error"
-      isError>
-    </grn-input>
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isRequired, minLength.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input03b"
+        [label]="controls03.input03b.errors ? 'Error':'Value'"
+        isRequired
+        [minLength]="minLength03"
+        wdFull
+        [helperText]="controls03.input03b.errors?.required
+        ?'Required field.'
+        :(controls03.input03b.errors?.minlength
+          ?'Minimum length '
+          + controls03.input03b.errors?.minlength.requiredLength
+          + ' characters.'
+          :'Enter value.')"
+        [exterior]="exterior03">
+      </grn-input>
+    </div>
 
-    <grn-input class="in-item"
-      formControlName="input03d"
-      exterior="underline"
-      label="Error-Disabled"
-      isDisabled
-      isError
-      helperText="Incorrect entry.">
-    </grn-input>
-  </div>
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isError + isDisabled.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input03c"
+        label="Error-Disabled"
+        isError
+        isDisabled
+        wdFull
+        helperText="The parameter is disabled."
+        [exterior]="exterior03">
+      </grn-input>
+    </div>
 
-  <div>
-    <grn-input class="in-item"
-      formControlName="input03e"
-      exterior="standard"
-      label="Error"
-      isError>
-    </grn-input>
-
-    <grn-input class="in-item"
-      formControlName="input03f"
-      exterior="standard"
-      label="Error-Disabled"
-      isDisabled
-      isError
-      helperText="Incorrect entry.">
-    </grn-input>
   </div>
 
 </form>
 
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-tab-group animationDuration="0ms">
-      <mat-tab [label]="labelHtml">
-        <pre>
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <pre source="html">
 &lt;form [formGroup]="formGroup03"
   novalidate
   autocomplete="off"&gt;
 
-  &lt;div&gt;
-    &lt;grn-input class="in-item"
-      formControlName="input03a"
-      exterior="outlined"
-      label="Error"
-      isError&gt;
-    &lt;/grn-input&gt;
+  &lt;div class="app-group"&gt;
 
-    &lt;grn-input class="in-item"
-      formControlName="input03b"
-      exterior="outlined"
-      label="Error-Disabled"
-      isDisabled
-      isError
-      helperText="Incorrect entry."&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isError.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input03a"
+        [label]="!controls03.input03a.value
+          ? 'Requires a value':'Parameter value'"
+        [isError]="!controls03.input03a.value ? '':null"
+        wdFull
+        [helperText]="controls03.input03a.value
+        ? 'The field is filled.'
+        : 'The field is not filled.'"
+        [exterior]="exterior03"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
 
-  &lt;div&gt;
-    &lt;grn-input class="in-item"
-      formControlName="input03c"
-      exterior="underline"
-      label="Error"
-      isError&gt;
-    &lt;/grn-input&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isRequired, minLength.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input03b"
+        [label]="controls03.input03b.errors ? 'Error':'Value'"
+        isRequired
+        [minLength]="minLength03"
+        wdFull
+        [helperText]="controls03.input03b.errors?.required
+        ?'Required field.'
+        :(controls03.input03b.errors?.minlength
+          ?'Minimum length '
+          + controls03.input03b.errors?.minlength.requiredLength
+          + ' characters.'
+          :'Enter value.')"
+        [exterior]="exterior03"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
 
-    &lt;grn-input class="in-item"
-      formControlName="input03d"
-      exterior="underline"
-      label="Error-Disabled"
-      isDisabled
-      isError
-      helperText="Incorrect entry."&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isError + isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input03c"
+        label="Error-Disabled"
+        isError
+        isDisabled
+        wdFull
+        helperText="The parameter is disabled."
+        [exterior]="exterior03"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
 
-  &lt;div&gt;
-    &lt;grn-input class="in-item"
-      formControlName="input03e"
-      exterior="standard"
-      label="Error"
-      isError&gt;
-    &lt;/grn-input&gt;
-
-    &lt;grn-input class="in-item"
-      formControlName="input03f"
-      exterior="standard"
-      label="Error-Disabled"
-      isDisabled
-      isError
-      helperText="Incorrect entry."&gt;
-    &lt;/grn-input&gt;
   &lt;/div&gt;
 
 &lt;/form&gt;</pre>
-      </mat-tab>
-      <mat-tab [label]="labelTs">
-        <pre>
-import &#123; Component, ViewEncapsulation &#125; from '@angular/core';
-import &#123; FormControl, FormGroup &#125; from '@angular/forms';
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
 
 @Component(&#123;
   selector: 'app-input',
@@ -151,23 +184,31 @@ import &#123; FormControl, FormGroup &#125; from '@angular/forms';
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class InputComponent &#123;
-  public formGroup03: FormGroup = new FormGroup(&#123;
-    input03a: new FormControl('Hello World', []),
-    input03b: new FormControl('Hello World', []),
+  public minLength03 = 4;
+  public controls03 = &#123;
+    input03a: new FormControl('', []),
+    input03b: new FormControl('', [
+      Validators.required,
+      Validators.minLength(this.minLength03)
+    ]),
     input03c: new FormControl('Hello World', []),
-    input03d: new FormControl('Hello World', []),
-    input03e: new FormControl('Hello World', []),
-    input03f: new FormControl('Hello World', []),
-  &#125;);
+  &#125;;
+  public formGroup03: FormGroup = new FormGroup(this.controls03);
+  public exterior03 = 'outlined';
 &#125;</pre>
-      </mat-tab>
-      <mat-tab [label]="labelCss">
-        <pre>
-.in-item &#123;
-  width: 240px;
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;             
+.app-elem &#123;
+  min-width: 26ch;
   margin: 10px 10px;
 &#125;</pre>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-expansion-panel>
-</mat-accordion>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

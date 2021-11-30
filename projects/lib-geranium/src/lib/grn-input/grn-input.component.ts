@@ -139,7 +139,7 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.type) {
-      this.typeVal = (InputTypeUtil.create(this.type) as InputType) || InputType.text;
+      this.typeVal = InputTypeUtil.create(this.type) || InputType.text;
     }
     if (changes.exterior) {
       this.exteriorVal = ExteriorUtil.create(this.exterior) || Exterior.standard;
@@ -230,6 +230,7 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   }
 
   public doInput(event: Event): void {
+    console.log('doInput() value="' + this.formControl.value + '" event=', event, ')'); // TODO del;
     this.inputData.emit(event);
     this.onChange(this.formControl.value);
   }
@@ -239,6 +240,7 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   }
 
   public doKeydown(event: KeyboardEvent): void {
+    console.log('doKeydown() value="' + this.formControl.value + '"'); // TODO del;
     this.keydownData.emit(event);
   }
 

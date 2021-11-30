@@ -15,8 +15,7 @@
       <ng-content select="[grnOrnament]"></ng-content>
     </div> -->
     <textarea #textareaElement
-      rows99="1"
-      cols99="33"
+      [cols]="cntCols"
       formControlName="textData"
       [attr.id]="id"
       [rows]="currentRows"
@@ -35,32 +34,6 @@
       (keypress)="doKeypress($event)"
       (keyup)="doKeyup($event)">
     </textarea>
-    <!-- <input #inputElement
-      formControlName="textData"
-      +[attr.id]="id"
-       [type]="typeVal"
-      [ngClass]="['gi-input', 'gfi-frm-molding', 'GrnInputBase-input'
-        , (isOutlinedExterior ? 'gi-outlined': '')
-        , (isUnderlineExterior ? 'gi-underline': '')
-        , (isStandardExterior ? 'gi-standard': '')
-        , (isDisabledVal ? 'Grn-disabled': '')
-        , (!!formControl.errors ? 'Grn-error': '')
-      ]"
-      +[attr.disabled]="isDisabledVal ? '': null"
-      +[attr.autocomplete]="!!autoComplete ? autoComplete : null"
-      +[attr.readonly]="isReadOnlyVal ? '': null"
-       [attr.min]="min"
-       [attr.max]="max"
-       [attr.step]="step"
-       [pattern]="pattern"
-       [grnOnlyByRegex]="!!onlyByRegex ? onlyByRegex : null"
-      +(focus)="doFocus()"
-      +(blur)="doBlur()"
-      +(input)="doInput($event)"
-      +(change)="doChange($event)"
-      +(keydown)="doKeydown($event)"
-      +(keypress)="doKeypress($event)"
-      +(keyup)="doKeyup($event)" /> -->
     <!-- <div class="gi-ornament-end">
       <ng-content select="[grnOrnamentEnd]"></ng-content>
     </div> -->

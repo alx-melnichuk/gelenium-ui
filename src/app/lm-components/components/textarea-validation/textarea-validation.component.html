@@ -1,8 +1,10 @@
 <section mr-vr>
   <h3>Validation</h3>
-
-  <p>The isError parameter sets the field to the error display state.</p>
-  <p>In case of a field error:</p>
+  <p>
+    The "isError" parameter sets the field to the error display state.
+    The "helperText" parameter can be used to display an error message.
+  </p>
+  <p>In case the field is in error:</p>
   <ul>
     <li>displays a red box for "outlined";</li>
     <li>red underline is displayed for "underline" or "standard";</li>
@@ -42,6 +44,7 @@
           ? 'Requires a value':'Parameter value'"
         [cntRows]="2"
         [isError]="!controls03.input03a.value ? '':null"
+        wdFull
         [helperText]="!controls03.input03a.value
           ? 'The field is not filled.'
           : 'The field is filled.'"
@@ -60,15 +63,14 @@
         [cntRows]="2"
         isRequired
         [minLength]="minLength03"
-        helperText="
-        {{(controls03.input03b.errors?.required ?
-          'Required field.':
-          (controls03.input03b.errors?.minlength ?
-            'Minimum length '
-            + controls03.input03b.errors?.minlength.requiredLength
-            + ' characters.':'Enter value.'
-          )
-        )}}"
+        wdFull
+        [helperText]="controls03.input03b.errors?.required ?
+        'Required field.':
+        (controls03.input03b.errors?.minlength
+        ? 'Minimum length '
+         + controls03.input03b.errors?.minlength.requiredLength
+         + ' characters.'
+        :'Enter value.')"
         [exterior]="exterior03">
       </grn-textarea>
     </div>
@@ -84,6 +86,7 @@
         [cntRows]="2"
         isError
         isDisabled
+        wdFull
         helperText="The parameter is disabled."
         [exterior]="exterior03">
       </grn-textarea>
@@ -119,6 +122,7 @@
           ? 'Requires a value':'Parameter value'"
         [cntRows]="2"
         [isError]="!controls03.input03a.value ? '':null"
+        wdFull
         [helperText]="!controls03.input03a.value
           ? 'The field is not filled.'
           : 'The field is filled.'"
@@ -137,15 +141,14 @@
         [cntRows]="2"
         isRequired
         [minLength]="minLength03"
-        helperText="
-        <b>&#123;</b>&#123;(controls03.input03b.errors?.required ?
-          'Required field.':
-          (controls03.input03b.errors?.minlength ?
-            'Minimum length '
-            + controls03.input03b.errors?.minlength.requiredLength
-            + ' characters.':'Enter value.'
-          )
-        )&#125;&#125;"
+        wdFull
+        [helperText]="controls03.input03b.errors?.required ?
+        'Required field.':
+        (controls03.input03b.errors?.minlength
+        ? 'Minimum length '
+         + controls03.input03b.errors?.minlength.requiredLength
+         + ' characters.'
+        :'Enter value.')"
         [exterior]="exterior03"&gt;
       &lt;/grn-textarea&gt;
     &lt;/div&gt;
@@ -159,9 +162,9 @@
       &lt;grn-textarea formControlName="input03c"
         label="Error-Disabled"
         [cntRows]="2"
-        isReadOnly
         isError
         isDisabled
+        wdFull
         helperText="The parameter is disabled."
         [exterior]="exterior03"&gt;
       &lt;/grn-textarea&gt;
@@ -207,7 +210,7 @@ export class TextareaComponent &#123;
   flex-wrap: wrap;
 &#125;             
 .app-elem &#123;
-  min-width: 25ch;
+  min-width: 26ch;
   margin: 10px 10px;
 &#125;</pre>
         </mat-tab>

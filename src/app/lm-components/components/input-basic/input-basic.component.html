@@ -1,86 +1,97 @@
-<div class="in-section">
+<section mr-vr>
   <h3>Basic</h3>
   <p>
     The GrnInput component is a form control. It includes: label, input and help text.
     It comes in three versions: with an outline (exterior="outlined"), with a fill
     (exterior="underline") and standard (exterior="standard" - the default).
   </p>
-</div>
+</section>
 
-<form class="in-section"
-  [formGroup]="formGroup01"
+<form [formGroup]="formGroup01"
   novalidate
   autocomplete="off">
 
-  <div>
-    <grn-input class="in-item"
-      formControlName="input01a"
-      exterior="outlined"
-      label="Outlined">
-    </grn-input>
-  </div>
+  <div class="app-group">
 
-  <div>
-    <grn-input class="in-item"
-      formControlName="input01b"
-      exterior="underline"
-      label="Underline">
-    </grn-input>
-  </div>
+    <div class="app-elem">
+      <grn-input formControlName="input01a"
+        label="Outlined"
+        wdFull
+        exterior="outlined">
+      </grn-input>
+    </div>
 
-  <div>
-    <grn-input class="in-item"
-      formControlName="input01c"
-      exterior="standard"
-      label="Standard">
-    </grn-input>
+    <div class="app-elem">
+      <grn-input formControlName="input01b"
+        label="Underline"
+        wdFull
+        exterior="underline">
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <grn-input formControlName="input01c"
+        label="Standard"
+        wdFull
+        exterior="standard">
+      </grn-input>
+    </div>
+
   </div>
 
 </form>
 
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-tab-group animationDuration="0ms">
-      <mat-tab [label]="labelHtml">
-        <pre>
-&lt;form class="in-section"
-  [formGroup]="formGroup01"
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <pre source="html">
+&lt;form [formGroup]="formGroup01"
   novalidate
   autocomplete="off"&gt;
 
-  &lt;div&gt;
-    &lt;grn-input class="in-item"
-      formControlName="input01a"
-      exterior="outlined"
-      label="Outlined"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
+  &lt;div class="app-group"&gt;
 
-  &lt;div&gt;
-    &lt;grn-input class="in-item"
-      formControlName="input01b"
-      exterior="underline"
-      label="Underline"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;grn-input formControlName="input01a"
+        label="Outlined"
+        wdFull
+        exterior="outlined"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
 
-  &lt;div&gt;
-    &lt;grn-input class="in-item"
-      formControlName="input01c"
-      exterior="standard"
-      label="Standard"&gt;
-    &lt;/grn-input&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;grn-input formControlName="input01b"
+        label="Underline"
+        wdFull
+        exterior="underline"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;grn-input formControlName="input01c"
+        label="Standard"
+        wdFull
+        exterior="standard"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
   &lt;/div&gt;
 
 &lt;/form&gt;</pre>
-      </mat-tab>
-      <mat-tab [label]="labelTs">
-        <pre>
-import &#123; Component, ViewEncapsulation &#125; from '@angular/core';
-import &#123; FormControl, FormGroup &#125; from '@angular/forms';
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
 
 @Component(&#123;
   selector: 'app-input',
@@ -95,14 +106,19 @@ export class InputComponent &#123;
     input01c: new FormControl('', []),
   &#125;);
 &#125;</pre>
-      </mat-tab>
-      <mat-tab [label]="labelCss">
-        <pre>
-.in-item &#123;
-  width: 240px;
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;             
+.app-elem &#123;
+  min-width: 26ch;
   margin: 10px 10px;
 &#125;</pre>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-expansion-panel>
-</mat-accordion>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

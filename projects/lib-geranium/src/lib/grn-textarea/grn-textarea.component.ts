@@ -83,6 +83,8 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   public cntRows: number | null = null;
   @Input()
   public maxRows: number | null = null;
+  @Input()
+  public cntCols: number | null = null;
 
   @Output()
   readonly inputData: EventEmitter<Event> = new EventEmitter();

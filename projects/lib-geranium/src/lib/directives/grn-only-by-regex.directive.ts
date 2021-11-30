@@ -43,12 +43,16 @@ export class GrnOnlyByRegexDirective implements OnChanges {
     this.currentValue = this.elementRef.nativeElement.value;
   }
 
-  @HostListener('input')
-  public doInputChange(): void {
+  @HostListener('input', ['$event'])
+  public doInputChange(event: Event): void {
     const newValue = this.elementRef.nativeElement.value;
     if (!!this.regExp && !!newValue) {
       if (!this.regExp.test(newValue)) {
         this.elementRef.nativeElement.value = this.currentValue;
+        // console.log('OnlyByRegex.doInput() !regExp(newValue) currValue="' + this.elementRef.nativeElement.value + '"'); // TODO del;
+        // event.preventDefault();
+        // event.stopPropagation();
+        event.stopImmediatePropagation();
       }
     }
     this.currentValue = null;
