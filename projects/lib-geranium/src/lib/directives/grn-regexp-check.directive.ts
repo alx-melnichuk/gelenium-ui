@@ -3,7 +3,7 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorF
 
 export function regexpCheckValidator(regExpVal: RegExp, name: string): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    const result = regExpVal.test(control.value);
+    const result = !control.value || regExpVal.test(control.value);
     return !result ? { [name]: { value: control.value } } : null;
   };
 }
@@ -13,17 +13,17 @@ export interface GrnRegexpCheck {
   regexp: string;
 }
 
-const NAME = 'regexpCheck';
+const REGEXPCHECK_NAME = 'regexpCheck';
 
 @Directive({
-  selector: 'input[grnRegexpCheck]',
+  selector: '[grnRegexpCheck]',
   providers: [{ provide: NG_VALIDATORS, useExisting: GrnRegexpCheckDirective, multi: true }],
 })
 export class GrnRegexpCheckDirective implements OnChanges, Validator {
   @Input()
   public grnRegexpCheck: string | GrnRegexpCheck | null = null;
 
-  private name = NAME;
+  private name = REGEXPCHECK_NAME;
   private regExp: RegExp | null = null;
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -34,7 +34,7 @@ export class GrnRegexpCheckDirective implements OnChanges, Validator {
         const typeValue = typeof this.grnRegexpCheck;
         if (typeValue === 'object') {
           const valueObj: GrnRegexpCheck = this.grnRegexpCheck as GrnRegexpCheck;
-          this.name = valueObj.name ? valueObj.name : NAME;
+          this.name = valueObj.name ? valueObj.name : REGEXPCHECK_NAME;
           regExpStr = valueObj.regexp;
         } else if (typeValue === 'string') {
           regExpStr = this.grnRegexpCheck as string;

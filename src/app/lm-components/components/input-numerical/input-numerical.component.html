@@ -51,7 +51,8 @@
   novalidate
   autocomplete="off">
 
-  <div class="app-group">
+  <div class="app-group"
+    *ngIf="false">
 
     <div class="app-elem">
       <div>
@@ -189,7 +190,49 @@
 
   </div>
 
+  <!-- <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: onlyByRegex="^[\ ,\d,a-z]+$".</em>
+      </small>
+    </div>
+    <grn-input formControlName="input04a"
+      wdFull
+      [label]="!formGroup04.controls.input04a.value
+        ?'Enter number':'Number'"
+      grnRegexMatch="^-?(\d+)$"
+      [helperText]="!formGroup04.controls.input04a.value
+        ?'Enter your number value.'
+        :'The value is correct.'"
+      [exterior]="exterior04">
+    </grn-input>
+  </div> -->
+
+  <input #inputElement
+    formControlName="input04a"
+    grnRegexCheck9="'^-?(\\d+)$'"
+    grnOnlyByRegex9="'^-?(\\d+)$'"
+    grnRegexpMatch9="'^-?(\\d+)$'"
+    grnRegexMatch="^-?(\d+)$"
+    grnRegexRemove="/[^\d]/gm"
+    (input)="doInput2($event)" />
+
+  <pre>
+value='{{ formGroup04.controls.input04a.value }}'
+errors={{ formGroup04.controls.input04a.errors | json }}
+</pre>
+
+
 </form>
+
+<!-- <input type="text"
+  [(ngModel)]="demo1"
+  name="name1"
+  grnRegexRemove="/[^\w\d\s_-]/gm"
+  (input)="doInput2($event)" />
+<pre>
+  demo1='{{ demo1 }}'
+</pre> -->
 
 <mat-accordion>
   <mat-expansion-panel>

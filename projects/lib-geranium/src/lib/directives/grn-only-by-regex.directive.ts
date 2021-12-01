@@ -1,4 +1,5 @@
 import { Directive, ElementRef, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { NgControl } from '@angular/forms';
 
 export const NAME_NUMERIC = '#numeric';
 export const REGEXP_NUMBER = '^-?(\\d+)$';
@@ -14,7 +15,7 @@ const valueMap: { [key: string]: string } = {
 };
 
 @Directive({
-  selector: 'input[grnOnlyByRegex]',
+  selector: '[grnOnlyByRegex]',
 })
 export class GrnOnlyByRegexDirective implements OnChanges {
   @Input()
@@ -23,7 +24,7 @@ export class GrnOnlyByRegexDirective implements OnChanges {
   private regExp: RegExp | null = null;
   private currentValue: string | null = null;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, private control: NgControl) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.grnOnlyByRegex) {
@@ -38,20 +39,23 @@ export class GrnOnlyByRegexDirective implements OnChanges {
     }
   }
 
-  @HostListener('keydown')
-  public doKeydown(): void {
-    this.currentValue = this.elementRef.nativeElement.value;
+  @HostListener('keydown', ['$event'])
+  public doKeydown(event: Event): void {
+    this.currentValue = this.control.control?.value;
+    // console.log('doKeydown() target.value="' + (event.target as any).value + '" currentValue="' + this.currentValue + '"');
   }
 
   @HostListener('input', ['$event'])
   public doInputChange(event: Event): void {
-    const newValue = this.elementRef.nativeElement.value;
-    if (!!this.regExp && !!newValue) {
+    // const newValue = this.elementRef.nativeElement.value;
+    const newValue = this.control.control?.value;
+    if (!!this.regExp && !!this.control.control && !!newValue) {
       if (!this.regExp.test(newValue)) {
-        this.elementRef.nativeElement.value = this.currentValue;
+        // this.elementRef.nativeElement.value = this.currentValue;
+        this.control.control.setValue(this.currentValue, { emitEvent: false });
         // console.log('OnlyByRegex.doInput() !regExp(newValue) currValue="' + this.elementRef.nativeElement.value + '"'); // TODO del;
-        // event.preventDefault();
-        // event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
         event.stopImmediatePropagation();
       }
     }

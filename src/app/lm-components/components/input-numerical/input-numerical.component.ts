@@ -50,9 +50,10 @@ export class InputNumericalComponent {
   public exterior04 = 'outlined';
   public exterior05 = 'outlined';
 
+  public demo1 = '';
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
   public doInput2(event: any): void {
-    console.log('doInput2() value="' + this.formGroup04.controls.input04c.value + '" (', event, ')'); // TODO del;
+    console.log('doInput2() value="' + this.formGroup04.controls.input04c.value + '" cancelBubble=', event.cancelBubble); // TODO del;
   }
 }
