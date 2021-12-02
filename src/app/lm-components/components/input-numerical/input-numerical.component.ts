@@ -42,18 +42,8 @@ export class InputNumericalComponent {
     input04e: new FormControl('12345678901234567890.12', []),
     input04f: new FormControl('123456789012.12', []),
     input04g: new FormControl('between 3 and 6', []),
-
-    input05e: new FormControl('12345678901234567890.12', []),
-    input05f: new FormControl('123456789012.12', []),
-    input05g: new FormControl('between 3 and 6', []),
   });
   public exterior04 = 'outlined';
-  public exterior05 = 'outlined';
-
-  public demo1 = '';
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
-  public doInput2(event: any): void {
-    console.log('doInput2() value="' + this.formGroup04.controls.input04c.value + '" cancelBubble=', event.cancelBubble); // TODO del;
-  }
 }

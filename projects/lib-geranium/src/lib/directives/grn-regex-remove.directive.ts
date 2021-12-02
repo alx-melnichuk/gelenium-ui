@@ -46,13 +46,14 @@ export class GrnRegexRemoveDirective implements OnChanges {
 
   @HostListener('input', ['$event'])
   public doInput(event: Event): void {
-    if (!event.cancelBubble && !!this.regex && !!this.control.control) {
-      // console.log('doInputR() cancelBubble=', event.cancelBubble); // TODO del;
-      const value = (event.target as any).value;
-      const newValue = value.replace(this.regex, '');
-      if (!!newValue && value !== newValue) {
-        (event.target as any).value = newValue;
-        this.control.control.setValue(newValue, { emitEvent: false });
+    // https://github.com/angular/angular/issues/9587 "event.stopImmediatePropagation() called from listeners not working"
+    // Added Event.cancelBubble check to make sure there was no call to event.stopImmediatePropagation() in previous handlers.
+    if (!!event && !event.cancelBubble && !!this.regex && !!this.control.control) {
+      const newValue = this.control.control.value;
+      const value = newValue ? newValue.replace(this.regex, '') : '';
+      if (!!newValue && newValue !== value) {
+        (event.target as any).value = value;
+        this.control.control.setValue(value, { emitEvent: false });
         event.stopImmediatePropagation();
       }
     }

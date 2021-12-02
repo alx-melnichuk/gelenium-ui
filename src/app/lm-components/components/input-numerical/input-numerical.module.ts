@@ -6,9 +6,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { GrnInputModule } from 'projects/lib-geranium/src/lib/grn-input/grn-input.module';
+import { LibDirectivesModule } from 'projects/lib-geranium/src/lib/directives/lib-directives.module';
 
 import { InputNumericalComponent } from './input-numerical.component';
-import { LibDirectivesModule } from 'projects/lib-geranium/src/lib/directives/lib-directives.module'; // TODO del;
 
 @NgModule({
   declarations: [InputNumericalComponent],

@@ -222,9 +222,13 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   }
 
   public doInput(event: Event): void {
-    this.inputData.emit(event);
-    this.onChange(this.formControl.value);
-    this.updateCurrentRows(this.formControl.value, this.cntRows, this.minRows, this.maxRows);
+    // https://github.com/angular/angular/issues/9587 "event.stopImmediatePropagation() called from listeners not working"
+    // Added Event.cancelBubble check to make sure there was no call to event.stopImmediatePropagation() in previous handlers.
+    if (!!event && !event.cancelBubble) {
+      this.inputData.emit(event);
+      this.onChange(this.formControl.value);
+      this.updateCurrentRows(this.formControl.value, this.cntRows, this.minRows, this.maxRows);
+    }
   }
 
   public doChange(event: Event): void {

@@ -78,8 +78,6 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   @Input()
   public pattern = '';
   @Input()
-  public onlyByRegex = '';
-  @Input()
   public autoComplete = '';
   @Input()
   public helperText: string | null = null;
@@ -230,9 +228,12 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   }
 
   public doInput(event: Event): void {
-    console.log('doInput() value="' + this.formControl.value + '" event=', event, ')'); // TODO del;
-    this.inputData.emit(event);
-    this.onChange(this.formControl.value);
+    // https://github.com/angular/angular/issues/9587 "event.stopImmediatePropagation() called from listeners not working"
+    // Added Event.cancelBubble check to make sure there was no call to event.stopImmediatePropagation() in previous handlers.
+    if (!!event && !event.cancelBubble) {
+      this.inputData.emit(event);
+      this.onChange(this.formControl.value);
+    }
   }
 
   public doChange(event: Event): void {
@@ -240,7 +241,6 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   }
 
   public doKeydown(event: KeyboardEvent): void {
-    console.log('doKeydown() value="' + this.formControl.value + '"'); // TODO del;
     this.keydownData.emit(event);
   }
 

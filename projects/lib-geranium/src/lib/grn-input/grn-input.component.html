@@ -20,8 +20,7 @@
       [type]="typeVal"
       [ngClass]="['gi-input', 'gfi-molding', 'GrnInputBase', 'gi-' + exteriorVal
         , (isDisabledVal ? 'Grn-disabled': '')
-        , (!!formControl.errors ? 'Grn-error': '')
-      ]"
+        , (!!formControl.errors ? 'Grn-error': '')]"
       [attr.disabled]="isDisabledVal ? '': null"
       [attr.autocomplete]="!!autoComplete ? autoComplete : null"
       [attr.readonly]="isReadOnlyVal ? '': null"
@@ -29,7 +28,6 @@
       [attr.max]="max"
       [attr.step]="step"
       [pattern]="pattern"
-      [grnOnlyByRegex]="!!onlyByRegex ? onlyByRegex : null"
       (focus)="doFocus()"
       (blur)="doBlur()"
       (input)="doInput($event)"

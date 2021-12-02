@@ -1,4 +1,4 @@
-<div class="in-section">
+<section mr-vr>
   <h3>Ornaments for the input line.</h3>
   <p>
     It is possible to add a different ornament (picture or text) for the input line.
@@ -18,109 +18,167 @@
     <li>you can use the "cm" suffix to enter the height value;</li>
     <li>you can use the button with the icon to display the password;</li>
   </ul>
-</div>
+</section>
 
-<div class="in-section">
+<section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior08">
+  <mat-button-toggle-group [(ngModel)]="exterior05">
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
     <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
     <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
   </mat-button-toggle-group>
-</div>
+</section>
 
-
-<form class="in-section in-ornament"
-  [formGroup]="formGroup08"
+<form class="io-ornament"
+  [formGroup]="formGroup05"
   novalidate
   autocomplete="off">
 
-  <div>
-    <grn-input class="in-item"
-      formControlName="input08a"
-      label="Enter the mass"
-      helperText="The value is greater than zero."
-      [exterior]="exterior08">
-      <span grnOrnament>kg</span>
-    </grn-input>
+  <div class="app-group">
 
-    <grn-input class="in-item"
-      formControlName="input08b"
-      label="Enter the height"
-      [exterior]="exterior08">
-      <span grnOrnamentEnd>см</span>
-    </grn-input>
-  </div>
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Section: "grnOrnament".</em>
+        </small>
+      </div>
+      <grn-input formControlName="input05a"
+        label="Enter the mass"
+        helperText="The value is greater than zero."
+        [exterior]="exterior05">
+        <span grnOrnament>kg</span>
+      </grn-input>
+    </div>
 
-  <div>
-    <grn-input class="in-item"
-      formControlName="input08c"
-      label="Enter the number in words"
-      isRequired
-      [minLength]="minLength08"
-      [maxLength]="maxLength08"
-      [exterior]="exterior08"
-      helperText="{{
-        (controls08.input08c.errors?.required ? 'Required field.':
-          (controls08.input08c.errors?.minlength ? 'Minimum length ' + controls08.input08c.errors?.minlength.requiredLength + ' characters.':
-            (controls08.input08c.errors?.maxlength ? 'Maximum length ' + controls08.input08c.errors?.maxlength.requiredLength + ' characters.':'')
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Section: "grnOrnamentEnd".</em>
+        </small>
+      </div>
+      <grn-input formControlName="input05b"
+        label="Enter the height"
+        [exterior]="exterior05">
+        <span grnOrnamentEnd>см</span>
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Section: "grnOrnament".</em>
+        </small>
+      </div>
+      <grn-input formControlName="input05c"
+        label="Enter the number in words"
+        isRequired
+        [minLength]="minLength05"
+        [maxLength]="maxLength08"
+        [exterior]="exterior05"
+        [helperText]="
+        (controls05.input05c.errors?.required
+        ? 'Required field.'
+        : (controls05.input05c.errors?.minlength
+          ? 'Minimum length '
+          + controls05.input05c.errors?.minlength.requiredLength
+          + ' characters.'
+          : (controls05.input05c.errors?.maxlength
+            ? 'Maximum length '
+            + controls05.input05c.errors?.maxlength.requiredLength
+            + ' characters.'
+            :'')
           )
-        )
-      }}">
-      <span grnOrnament>$</span>
-    </grn-input>
+        )">
+        <span grnOrnament>$</span>
+      </grn-input>
+    </div>
 
-    <grn-input class="in-item"
-      formControlName="input08d"
-      label="Enter the number in words"
-      isRequired
-      [minLength]="minLength08"
-      [maxLength]="maxLength08"
-      [exterior]="exterior08"
-      helperText="{{
-        (controls08.input08d.errors?.required ? 'Required field.':
-          (controls08.input08d.errors?.minlength ? 'Minimum length ' + controls08.input08d.errors?.minlength.requiredLength + ' characters.':
-            (controls08.input08d.errors?.maxlength ? 'Maximum length ' + controls08.input08d.errors?.maxlength.requiredLength + ' characters.':'')
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Section: "grnOrnamentEnd".</em>
+        </small>
+      </div>
+      <grn-input formControlName="input05d"
+        label="Enter the number in words"
+        isRequired
+        [minLength]="minLength05"
+        [maxLength]="maxLength08"
+        [exterior]="exterior05"
+        [helperText]="
+        (controls05.input05d.errors?.required
+        ? 'Required field.'
+        : (controls05.input05d.errors?.minlength
+          ? 'Minimum length '
+          + controls05.input05d.errors?.minlength.requiredLength
+          + ' characters.'
+          : (controls05.input05d.errors?.maxlength
+            ? 'Maximum length '
+            + controls05.input05d.errors?.maxlength.requiredLength
+            + ' characters.'
+            :'')
           )
-        )
-      }}">
-      <span grnOrnamentEnd>$</span>
-    </grn-input>
+        )">
+        <span grnOrnamentEnd>$</span>
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Section: "grnOrnament".</em>
+        </small>
+      </div>
+      <grn-input formControlName="input05e"
+        label="Enter password"
+        [type]="isBtnEyeCrossed05e ? 'text':'password'"
+        isRequired
+        [exterior]="exterior05"
+        [helperText]="
+        controls05.input05e.errors?.required
+        ? 'The password value is required.'
+        :'Enter the password value.'">
+        <button grnOrnament
+          class="io-btn-eye press-left"
+          (click)="isBtnEyeCrossed05e=!isBtnEyeCrossed05e">
+          <span [ngClass]="[
+            'io-icon-eye', (isBtnEyeCrossed05e ? 'crossed':'')
+          ]"></span>
+        </button>
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Section: "grnOrnamentEnd".</em>
+        </small>
+      </div>
+      <grn-input formControlName="input05f"
+        label="Enter password"
+        [type]="isBtnEyeCrossed05f ? 'text':'password'"
+        isRequired
+        [exterior]="exterior05"
+        [helperText]="
+          controls05.input05f.errors?.required
+          ? 'The password value is required.'
+          : 'Enter the password value.'">
+        <button grnOrnamentEnd
+          class="io-btn-eye press-right"
+          (click)="isBtnEyeCrossed05f=!isBtnEyeCrossed05f">
+          <span [ngClass]="[
+            'io-icon-eye', (isBtnEyeCrossed05f ? 'crossed':'')
+          ]"></span>
+        </button>
+        <!-- <span grnOrnamentEnd
+          style="outline: 1px dashed green;">
+          <span class="io-icon-eye9">#</span>
+        </span> -->
+      </grn-input>
+    </div>
+
   </div>
 
-  <div>
-    <grn-input class="in-item in-passwd-size"
-      formControlName="input08e"
-      label="Enter password"
-      [type]="isBtnEyeCrossed08e ? 'text':'password'"
-      isRequired
-      [exterior]="exterior08"
-      helperText="{{
-        (controls08.input08e.errors?.required ? 'The password value is required.':'Enter the password value.') 
-      }}">
-      <button grnOrnament
-        class="in-btn-eye press-left"
-        (click)="isBtnEyeCrossed08e=!isBtnEyeCrossed08e">
-        <span [ngClass]="['in-icon-eye', (isBtnEyeCrossed08e ? 'crossed':'')]"></span>
-      </button>
-    </grn-input>
-
-    <grn-input class="in-item in-passwd-size"
-      formControlName="input08f"
-      label="Enter password"
-      [type]="isBtnEyeCrossed08f ? 'text':'password'"
-      isRequired
-      [exterior]="exterior08"
-      helperText="{{
-        (controls08.input08f.errors?.required ? 'The password value is required.':'Enter the password value.') 
-      }}">
-      <button grnOrnamentEnd
-        class="in-btn-eye press-right"
-        (click)="isBtnEyeCrossed08f=!isBtnEyeCrossed08f">
-        <span [ngClass]="['in-icon-eye', (isBtnEyeCrossed08f ? 'crossed':'')]"></span>
-      </button>
-    </grn-input>
-  </div>
 
 </form>
 
@@ -132,117 +190,7 @@
     <mat-tab-group animationDuration="0ms">
       <mat-tab [label]="labelHtml">
         <pre class="fw-nr">
-&lt;form class="in-ornament"
-  [formGroup]="formGroup08"
-  novalidate
-  autocomplete="off"&gt;
-
-  &lt;div&gt;
-    &lt;grn-input class="in-item"
-      formControlName="input08a"
-      label="Enter the mass"
-      helperText="The value is greater than zero."
-      [exterior]="exterior08"&gt;
-      &lt;span grnOrnament&gt;kg&lt;/span&gt;
-    &lt;/grn-input&gt;
-
-    &lt;grn-input class="in-item"
-      formControlName="input08b"
-      label="Enter the height"
-      [exterior]="exterior08"&gt;
-      &lt;span grnOrnamentEnd&gt;см&lt;/span&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-  &lt;div&gt;
-    &lt;grn-input class="in-item"
-      formControlName="input08c"
-      label="Enter the number in words"
-      isRequired
-      [minLength]="minLength08"
-      [maxLength]="maxLength08"
-      [exterior]="exterior08"
-      helperText="<b>&#123;</b>&#123;
-        (controls08.input08c.errors?.required ? 'Required field.':
-          (controls08.input08c.errors?.minlength ?
-            'Minimum length '
-            + controls08.input08c.errors?.minlength.requiredLength
-            + ' characters.':
-            (controls08.input08c.errors?.maxlength ?
-              'Maximum length '
-              + controls08.input08c.errors?.maxlength.requiredLength
-              + ' characters.':'')
-          )
-        )
-      &#125;&#125;"&gt;
-      &lt;span grnOrnament&gt;$&lt;/span&gt;
-    &lt;/grn-input&gt;
-
-    &lt;grn-input class="in-item"
-      formControlName="input08d"
-      label="Enter the number in words"
-      isRequired
-      [minLength]="minLength08"
-      [maxLength]="maxLength08"
-      [exterior]="exterior08"
-      helperText="<b>&#123;</b>&#123;
-        (controls08.input08d.errors?.required ? 'Required field.':
-          (controls08.input08d.errors?.minlength ?
-            'Minimum length '
-            + controls08.input08d.errors?.minlength.requiredLength
-            + ' characters.':
-            (controls08.input08d.errors?.maxlength ?
-              'Maximum length '
-              + controls08.input08d.errors?.maxlength.requiredLength
-              + ' characters.':'')
-          )
-        )
-      &#125;&#125;"&gt;
-      &lt;span grnOrnamentEnd&gt;$&lt;/span&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-  &lt;div&gt;
-    &lt;grn-input class="in-item in-passwd-size"
-      formControlName="input08e"
-      label="Enter password"
-      [type]="isBtnEyeCrossed08e ? 'text':'password'"
-      isRequired
-      [exterior]="exterior08"
-      helperText="<b>&#123;</b>&#123;
-        (controls08.input08e.errors?.required ?
-         'The password value is required.' :
-         'Enter the password value.') 
-      &#125;&#125;"&gt;
-      &lt;button grnOrnament
-        class="in-btn-eye press-left"
-        (click)="isBtnEyeCrossed08e=!isBtnEyeCrossed08e"&gt;
-        &lt;span [ngClass]="['in-icon-eye'
-          , (isBtnEyeCrossed08e ? 'crossed':'')]"&gt;
-        &lt;/span&gt;
-      &lt;/button&gt;
-    &lt;/grn-input&gt;
-
-    &lt;grn-input class="in-item in-passwd-size"
-      formControlName="input08f"
-      label="Enter password"
-      [type]="isBtnEyeCrossed08f ? 'text':'password'"
-      isRequired
-      [exterior]="exterior08"
-      helperText="<b>&#123;</b>&#123;
-        (controls08.input08f.errors?.required ?
-          'The password value is required.':
-          'Enter the password value.') 
-      &#125;&#125;"&gt;
-      &lt;button grnOrnamentEnd
-        class="in-btn-eye press-right"
-        (click)="isBtnEyeCrossed08f=!isBtnEyeCrossed08f"&gt;
-        &lt;span [ngClass]="['in-icon-eye'
-          , (isBtnEyeCrossed08f ? 'crossed':'')]"&gt;
-        &lt;/span&gt;
-      &lt;/button&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
+&lt;form class="io-ornament"
 
 &lt;/form&gt;</pre>
       </mat-tab>
@@ -258,38 +206,42 @@ import &#123; FormControl, FormGroup &#125; from '@angular/forms';
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class InputComponent &#123;
-  public minLength08 = 4;
+  public minLength05 = 4;
   public maxLength08 = 15;
-  public controls08 = &#123;
-    input08a: new FormControl('thirty', []),
-    input08b: new FormControl('thirty', []),
-    input08c: new FormControl('one', [
+  public controls05 = &#123;
+    input05a: new FormControl('thirty', []),
+    input05b: new FormControl('thirty', []),
+    input05c: new FormControl('one', [
       Validators.required,
-      Validators.minLength(this.minLength08),
+      Validators.minLength(this.minLength05),
       Validators.maxLength(this.maxLength08)
     ]),
-    input08d: new FormControl('five hundred ninety eight', [
+    input05d: new FormControl('five hundred ninety eight', [
       Validators.required,
-      Validators.minLength(this.minLength08),
+      Validators.minLength(this.minLength05),
       Validators.maxLength(this.maxLength08),
     ]),
-    input08e: new FormControl('thirty', [Validators.required]),
-    input08f: new FormControl('thirty', [Validators.required]),
+    input05e: new FormControl('thirty', [Validators.required]),
+    input05f: new FormControl('thirty', [Validators.required]),
   &#125;;
-  public formGroup08: FormGroup = new FormGroup(this.controls08);
-  public exterior08 = 'outlined';
-  public isBtnEyeCrossed08e = false;
-  public isBtnEyeCrossed08f = false;
+  public formGroup05: FormGroup = new FormGroup(this.controls05);
+  public exterior05 = 'outlined';
+  public isBtnEyeCrossed05e = false;
+  public isBtnEyeCrossed05f = false;
 &#125;</pre>
       </mat-tab>
       <mat-tab [label]="labelCss">
         <pre>
-.in-item &#123;
-  width: 240px;
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;             
+.app-elem &#123;
+  min-width: 26ch;
   margin: 10px 10px;
 &#125;
 
-.in-ornament .in-btn-eye &#123;
+.io-ornament .io-btn-eye &#123;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -303,23 +255,16 @@ export class InputComponent &#123;
   vertical-align: middle;
   flex: 0 0 auto;
   font-size: 1.5rem;
-  padding: 8px;
+  // padding: 8px;
   border-radius: 50%;
   overflow: visible;
-  transition: background-color 150ms
-    cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 &#125;
-.in-ornament .in-btn-eye:hover &#123;
-  background-color: rgba(0, 0, 0, 0.04);
-&#125;
-.in-ornament .in-btn-eye.press-right &#123;
-  margin-right: -12px;
-&#125;
-.in-ornament .in-btn-eye.press-left &#123;
-  margin-left: -12px;
-&#125;
+.io-ornament .io-btn-eye:hover &#123; background-color: rgba(0, 0, 0, 0.04); &#125;
+.io-ornament .io-btn-eye.press-right &#123; margin-right: -12px; &#125;
+.io-ornament .io-btn-eye.press-left &#123; margin-left: -12px; &#125;
 
-.in-ornament .in-icon-eye &#123;
+.io-ornament .io-icon-eye &#123;
   background: center no-repeat;
   user-select: none;
   width: 1em;
@@ -329,8 +274,7 @@ export class InputComponent &#123;
   flex-shrink: 0;
   transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 &#125;
-
-.in-ornament .in-icon-eye:not(.crossed) &#123;
+.io-ornament .io-icon-eye:not(.crossed) &#123;
   background-image: url("data:image/svg+xml,"
   + "&lt;svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'"
   + " viewBox='0 0 24 24' fill='rgb(0 0 0 / 54%)'&gt;"
@@ -343,7 +287,7 @@ export class InputComponent &#123;
   background-position: center center;
   background-size: 24px 24px;
 &#125;
-.in-ornament .in-icon-eye.crossed &#123;
+.io-ornament .io-icon-eye.crossed &#123;
   background-image: url("data:image/svg+xml,"
   + "&lt;svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'"
   + " viewBox='0 0 24 24' fill='rgb(0 0 0 / 54%)'&gt;"
@@ -360,10 +304,6 @@ export class InputComponent &#123;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 24px 24px;
-&#125;
-
-.in-ornament .in-passwd-size input[type="password"].gi-input &#123;
-  font-size: 20px;
 &#125;</pre>
       </mat-tab>
     </mat-tab-group>

@@ -1,5 +1,4 @@
-<section mr-vr
-  *ngIf="false">
+<section mr-vr>
   <h3>Numerical value</h3>
   <p>
     When using an input element with type="number", there are the following problems:
@@ -13,15 +12,14 @@
     This allows the error status to be displayed when entering non-numeric values.
   </p>
   <p>
-    An alternative is to use the grnOnlyByRegex directive.
+    An alternative is to use the grnRegexMatch directive.
     This directive allows you to enter only those values that match the specified regular
     expression.
-    The value of the onlyByRegex parameter is passed to the specified directive that is added to the
-    input element.
-    To enter only numbers, you can use: onlyByRegex="^[\d]+$" or [onlyByRegex]="'^[\\d]+$'".
+    To enter only numbers, you can use: grnRegexMatch="^-?(\d+)$", [grnRegexMatch]="'^-?(\\d+)$'"
+    or [grnRegexMatch]="'/^-?(\\d+)$/i'".
   </p>
   <p>
-    The following templates can be specified in the grnOnlyByRegex directive as an input parameter:
+    The following templates can be specified in the grnRegexMatch directive as an input parameter:
   </p>
   <ul>
     <li>'#numeric' - which matches the regular expression<br />
@@ -32,8 +30,9 @@
       '^-?(\d&#123;1,12&#125;(\.\d&#123;0,2&#125;)?|\.\d&#123;0,2&#125;)$';</li>
   </ul>
   <p>
-    You can also specify your own regular expressions as an input parameter.
-    For example: numbers, lowercase characters, and space. [onlyByRegex]="'^[\ ,\d,a-z]+$'"
+    You can also specify your own regular expressions as an input parameter.<br />
+    For example: numbers, lowercase characters, and space.<br />
+    grnRegexMatch="^[\ ,\d,a-z]+$"
   </p>
 </section>
 
@@ -51,8 +50,7 @@
   novalidate
   autocomplete="off">
 
-  <div class="app-group"
-    *ngIf="false">
+  <div class="app-group">
 
     <div class="app-elem">
       <div>
@@ -101,14 +99,14 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: onlyByRegex="^-?(\\d+)$".</em>
+          <em>Attrib.: grnRegexMatch="/^-?(\d+)$/".</em>
         </small>
       </div>
       <grn-input formControlName="input04c"
         wdFull
         [label]="!formGroup04.controls.input04c.value
           ?'Enter number':'Number'"
-        [onlyByRegex]="'^-?(\\d+)$'"
+        grnRegexMatch="/^-?(\d+)$/"
         [helperText]="!formGroup04.controls.input04c.value
           ?'Enter your number value.'
           :'The value is correct.'"
@@ -119,14 +117,14 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: onlyByRegex="#numeric".</em>
+          <em>Attrib.: grnRegexMatch="#numeric".</em>
         </small>
       </div>
       <grn-input formControlName="input04d"
         wdFull
         [label]="!formGroup04.controls.input04d.value
           ?'Enter number':'Number'"
-        [onlyByRegex]="'#numeric'"
+        grnRegexMatch="#numeric"
         [helperText]="!formGroup04.controls.input04d.value
           ?'Enter your number value.'
           :'The value is correct.'"
@@ -137,14 +135,14 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: onlyByRegex="#numeric(,2)".</em>
+          <em>Attrib.: grnRegexMatch="#numeric(,2)".</em>
         </small>
       </div>
       <grn-input formControlName="input04e"
         wdFull
         [label]="!formGroup04.controls.input04e.value
           ?'Enter number':'Number'"
-        [onlyByRegex]="'#numeric(,2)'"
+        grnRegexMatch="#numeric(,2)"
         [helperText]="!formGroup04.controls.input04e.value
           ?'Enter your number value.'
           :'The value is correct.'"
@@ -155,14 +153,14 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: onlyByRegex="#numeric(12,2)".</em>
+          <em>Attrib.: grnRegexMatch="#numeric(12,2)".</em>
         </small>
       </div>
       <grn-input formControlName="input04f"
         wdFull
         [label]="!formGroup04.controls.input04f.value
           ?'Enter number':'Number'"
-        [onlyByRegex]="'#numeric(12,2)'"
+        grnRegexMatch="#numeric(12,2)"
         [helperText]="!formGroup04.controls.input04f.value
           ?'Enter your number value.'
           :'The value is correct.'"
@@ -173,14 +171,14 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: onlyByRegex="^[\ ,\d,a-z]+$".</em>
+          <em>Attrib.: grnRegexMatch="^[\ ,\d,a-z]+$"</em>
         </small>
       </div>
       <grn-input formControlName="input04g"
         wdFull
         [label]="!formGroup04.controls.input04g.value
           ?'Enter number':'Number'"
-        [onlyByRegex]="'^[\\ ,\\d,a-z]+$'"
+        grnRegexMatch="^[\ ,\d,a-z]+$"
         [helperText]="!formGroup04.controls.input04g.value
           ?'Enter your number value.'
           :'The value is correct.'"
@@ -190,136 +188,169 @@
 
   </div>
 
-  <!-- <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: onlyByRegex="^[\ ,\d,a-z]+$".</em>
-      </small>
-    </div>
-    <grn-input formControlName="input04a"
-      wdFull
-      [label]="!formGroup04.controls.input04a.value
-        ?'Enter number':'Number'"
-      grnRegexMatch="^-?(\d+)$"
-      [helperText]="!formGroup04.controls.input04a.value
-        ?'Enter your number value.'
-        :'The value is correct.'"
-      [exterior]="exterior04">
-    </grn-input>
-  </div> -->
-
-  <input #inputElement
-    formControlName="input04a"
-    grnRegexCheck9="'^-?(\\d+)$'"
-    grnOnlyByRegex9="'^-?(\\d+)$'"
-    grnRegexpMatch9="'^-?(\\d+)$'"
-    grnRegexMatch="^-?(\d+)$"
-    grnRegexRemove="/[^\d]/gm"
-    (input)="doInput2($event)" />
-
-  <pre>
-value='{{ formGroup04.controls.input04a.value }}'
-errors={{ formGroup04.controls.input04a.errors | json }}
-</pre>
-
-
 </form>
 
-<!-- <input type="text"
-  [(ngModel)]="demo1"
-  name="name1"
-  grnRegexRemove="/[^\w\d\s_-]/gm"
-  (input)="doInput2($event)" />
-<pre>
-  demo1='{{ demo1 }}'
-</pre> -->
-
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-tab-group animationDuration="0ms">
-      <mat-tab [label]="labelHtml">
-        <pre>
-&lt;form [formGroup]="formGroup05"
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <pre source="html">
+&lt;form [formGroup]="formGroup04"
   novalidate
   autocomplete="off"&gt;
 
-  &lt;div&gt;
-    &lt;grn-input class="in-item"
-      formControlName="input05a"
-      label="type=Number step=5 min=0 max=50"
-      lbShrink
-      type="number"
-      [step]="5"
-      [min]="0"
-      [max]="50"
-      [exterior]="exterior05"&gt;
-    &lt;/grn-input&gt;
+  &lt;div class="app-group"&gt;
 
-    &lt;grn-input class="in-item"
-      formControlName="input05b"
-      label="Pattern(^[0-9]+$)"
-      lbShrink
-      type="text"
-      pattern="^[0-9]+$"
-      [exterior]="exterior05"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: min=0 max=50 step=5.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input04a"
+        wdFull
+        [label]="!formGroup04.controls.input04a.value
+          ?'Enter number':'Number'"
+        type="number"
+        [step]="5"
+        [min]="0"
+        [max]="50"
+        [helperText]="!formGroup04.controls.input04a.value
+          ?'Enter your number value.'
+          :'The value is entered.'"
+        [exterior]="exterior04"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
 
-  &lt;div&gt;
-    &lt;grn-input class="in-item"
-      formControlName="input05c"
-      label="onlyByRegex(^-?(\d+)$)"
-      lbShrink
-      [onlyByRegex]="'^-?(\\d+)$'"
-      [exterior]="exterior05"&gt;
-    &lt;/grn-input&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: pattern="^[0-9]+$".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input04b"
+        wdFull
+        [label]="formGroup04.controls.input04b.errors
+          ?'Error'
+          :(!formGroup04.controls.input04b.value
+            ?'Enter number':'Number')"
+        type="text"
+        pattern="^[0-9]+$"
+        [helperText]="formGroup04.controls.input04b.errors
+          ?'The value is not correct.'
+          :(!formGroup04.controls.input04b.value
+            ?'Enter your number value.'
+            :'The value is correct.')"
+        [exterior]="exterior04"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
 
-    &lt;grn-input class="in-item"
-      formControlName="input05d"
-      label="onlyByRegex(#numeric)"
-      lbShrink
-      [onlyByRegex]="'#numeric'"
-      [exterior]="exterior05"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attrib.: grnRegexMatch="/^-?(\d+)$/".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input04c"
+        wdFull
+        [label]="!formGroup04.controls.input04c.value
+          ?'Enter number':'Number'"
+        grnRegexMatch="/^-?(\d+)$/"
+        [helperText]="!formGroup04.controls.input04c.value
+          ?'Enter your number value.'
+          :'The value is correct.'"
+        [exterior]="exterior04"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
 
-  &lt;div&gt;
-    &lt;grn-input class="in-item"
-      formControlName="input05e"
-      label="onlyByRegex(#numeric(,2))"
-      lbShrink
-      [onlyByRegex]="'#numeric(,2)'"
-      [exterior]="exterior05"&gt;
-    &lt;/grn-input&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attrib.: grnRegexMatch="#numeric".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input04d"
+        wdFull
+        [label]="!formGroup04.controls.input04d.value
+          ?'Enter number':'Number'"
+        grnRegexMatch="#numeric"
+        [helperText]="!formGroup04.controls.input04d.value
+          ?'Enter your number value.'
+          :'The value is correct.'"
+        [exterior]="exterior04"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
 
-    &lt;grn-input class="in-item"
-      formControlName="input05f"
-      label="onlyByRegex(#numeric(12,2))"
-      lbShrink
-      [onlyByRegex]="'#numeric(12,2)'"
-      [exterior]="exterior05"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attrib.: grnRegexMatch="#numeric(,2)".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input04e"
+        wdFull
+        [label]="!formGroup04.controls.input04e.value
+          ?'Enter number':'Number'"
+        grnRegexMatch="#numeric(,2)"
+        [helperText]="!formGroup04.controls.input04e.value
+          ?'Enter your number value.'
+          :'The value is correct.'"
+        [exterior]="exterior04"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
 
-  &lt;div&gt;
-    &lt;grn-input class="in-item"
-      formControlName="input05g"
-      label="onlyByRegex(^[\ ,\d,a-z]+$)"
-      lbShrink
-      [onlyByRegex]="'^[\\ ,\\d,a-z]+$'"
-      [exterior]="exterior05"&gt;
-    &lt;/grn-input&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attrib.: grnRegexMatch="#numeric(12,2)".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input04f"
+        wdFull
+        [label]="!formGroup04.controls.input04f.value
+          ?'Enter number':'Number'"
+        grnRegexMatch="#numeric(12,2)"
+        [helperText]="!formGroup04.controls.input04f.value
+          ?'Enter your number value.'
+          :'The value is correct.'"
+        [exterior]="exterior04"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attrib.: grnRegexMatch="^[\ ,\d,a-z]+$"&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input04g"
+        wdFull
+        [label]="!formGroup04.controls.input04g.value
+          ?'Enter number':'Number'"
+        grnRegexMatch="^[\ ,\d,a-z]+$"
+        [helperText]="!formGroup04.controls.input04g.value
+          ?'Enter your number value.'
+          :'The value is correct.'"
+        [exterior]="exterior04"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
   &lt;/div&gt;
 
 &lt;/form&gt;</pre>
-      </mat-tab>
-      <mat-tab [label]="labelTs">
-        <pre>
-import &#123; Component, ViewEncapsulation &#125; from '@angular/core';
-import &#123; FormControl, FormGroup &#125; from '@angular/forms';
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
 
 @Component(&#123;
   selector: 'app-input',
@@ -328,25 +359,30 @@ import &#123; FormControl, FormGroup &#125; from '@angular/forms';
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class InputComponent &#123;
-  public formGroup05: FormGroup = new FormGroup(&#123;
-    input05a: new FormControl('', []),
-    input05b: new FormControl('', []),
-    input05c: new FormControl('', []),
-    input05d: new FormControl('-12345678901234567890', []),
-    input05e: new FormControl('12345678901234567890.12', []),
-    input05f: new FormControl('123456789012.12', []),
-    input05g: new FormControl('between 3 and 6', []),
+  public formGroup04: FormGroup = new FormGroup(&#123;
+    input04a: new FormControl('', []),
+    input04b: new FormControl('', []),
+    input04c: new FormControl('', []),
+    input04d: new FormControl('-12345678901234567890', []),
+    input04e: new FormControl('12345678901234567890.12', []),
+    input04f: new FormControl('123456789012.12', []),
+    input04g: new FormControl('between 3 and 6', []),
   &#125;);
-  public exterior05 = 'outlined';
+  public exterior04 = 'outlined';
 &#125;</pre>
-      </mat-tab>
-      <mat-tab [label]="labelCss">
-        <pre>
-.in-item &#123;
-  width: 240px;
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;             
+.app-elem &#123;
+  min-width: 26ch;
   margin: 10px 10px;
 &#125;</pre>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-expansion-panel>
-</mat-accordion>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

@@ -34,25 +34,25 @@ export class InputOrnamentsComponent {
   @Input()
   public labelCss = CN_LABEL_CSS;
 
-  public minLength08 = 4;
+  public minLength05 = 4;
   public maxLength08 = 15;
-  public controls08 = {
-    input08a: new FormControl('thirty', []),
-    input08b: new FormControl('thirty', []),
-    input08c: new FormControl('one', [Validators.required, Validators.minLength(this.minLength08), Validators.maxLength(this.maxLength08)]),
-    input08d: new FormControl('five hundred ninety eight', [
+  public controls05 = {
+    input05a: new FormControl('thirty', []),
+    input05b: new FormControl('thirty', []),
+    input05c: new FormControl('one', [Validators.required, Validators.minLength(this.minLength05), Validators.maxLength(this.maxLength08)]),
+    input05d: new FormControl('five hundred ninety eight', [
       Validators.required,
-      Validators.minLength(this.minLength08),
+      Validators.minLength(this.minLength05),
       Validators.maxLength(this.maxLength08),
     ]),
-    input08e: new FormControl('thirty', [Validators.required]),
-    input08f: new FormControl('thirty', [Validators.required]),
+    input05e: new FormControl('thirty', [Validators.required]),
+    input05f: new FormControl('thirty thirtythirtythirtythirty', [Validators.required]),
   };
-  public formGroup08: FormGroup = new FormGroup(this.controls08);
-  public exterior08 = 'outlined';
-  public isBtnEyeCrossed08e = false;
-  public isBtnEyeCrossed08f = false;
-
+  public formGroup05: FormGroup = new FormGroup(this.controls05);
+  // public exterior05 = 'outlined';
+  public exterior05 = 'underline';
+  public isBtnEyeCrossed05e = false;
+  public isBtnEyeCrossed05f = false;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }
