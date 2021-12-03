@@ -149,7 +149,11 @@ grn-frame-input { //outline: 1px dashed crimson;
       cursor: default;
     }
     // input {  outline: 1px dashed orange;} // # TODO temp;
+    .gfi-damper {
+      line-height: var(--gfi-line-height);
+    }
   }
+  
   .gfi-frm-outlined {
     padding: 0px var(--gfi-outlined-frm-pd-lf-rg); // # top/bottom: 0px right/left: 14px;
     &>.gfi-molding {

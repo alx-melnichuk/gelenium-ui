@@ -1,31 +1,9 @@
 /*# sourceURL=lm-components.component.scss */
 
 app-lm-components {
+  display: block;
   height: 100%;
-  display: flex;
   color: #060e12;  // # color: #2a3338;  // color: #20262D;
-
-  .lcm-item {
-    padding: 10px 15px;
-  }
-  .lcm-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .lcm-li {
-    padding: 2px 0;
-    display: block;
-  }
-  .lcm-li-href {
-    padding: 2px 0 2px 10px;
-    display: block;
-  }
-  .lcm-li-active {
-    color: #007FFF;
-    font-weight: 500;
-    background-color: #F0F7FF;
-  }
 
   .lc-brk-wrd {
     word-break: break-word;

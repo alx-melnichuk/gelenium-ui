@@ -3,6 +3,10 @@
 app-input-ornaments {
   display: block;
 
+  .io-elem {
+    width: 26ch;
+  }
+
   .io-ornament .io-btn-eye {
     display: inline-flex;
     align-items: center;
@@ -17,14 +21,15 @@ app-input-ornaments {
     vertical-align: middle;
     flex: 0 0 auto;
     font-size: 1.5rem;
-    // padding: 8px;
     border-radius: 50%;
     overflow: visible;
     transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
   .io-ornament .io-btn-eye:hover { background-color: rgba(0, 0, 0, 0.04); }
-  .io-ornament .io-btn-eye.press-right { margin-right: -12px; }
-  .io-ornament .io-btn-eye.press-left { margin-left: -12px; }
+
+  .io-ornament .io-mr-rg  { margin-right: -12px; }
+  .io-ornament .io-mr-lf { margin-left: -12px; }
+  .io-ornament .io-mr-bt { margin-bottom: 4px;}
 
   .io-ornament .io-icon-eye {
     background: center no-repeat;
@@ -66,5 +71,9 @@ app-input-ornaments {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 24px 24px;
+  }
+
+  .io-ornament .io-passwd-big .gi-input {
+    font-size: 20px;
   }
 }

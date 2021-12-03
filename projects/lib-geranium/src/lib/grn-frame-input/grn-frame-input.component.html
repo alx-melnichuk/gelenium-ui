@@ -40,8 +40,8 @@
   ]">
     <legend *ngIf="!hiddenLabel"
       [ngClass]="['gfi-legend'
-        , (isLabelShrink ? 'gfi-lgnd-shrink': '')
-        , (!!label || isRequired ? 'gfi-lgnd-indent': '')
+      , (isLabelShrink ? 'gfi-lgnd-shrink': '')
+      , (!!label || isRequired ? 'gfi-lgnd-indent': '')
     ]">
       <span class="gfi-lgnd-text">
         {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>

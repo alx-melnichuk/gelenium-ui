@@ -18,6 +18,17 @@
     <li>you can use the "cm" suffix to enter the height value;</li>
     <li>you can use the button with the icon to display the password;</li>
   </ul>
+  <p>
+    You can increase/decrease the font size for an input element without changing
+    the size of the element.
+    For example, when entering a password, you can increase the font size to display
+    larger black circles.<br />
+    To do this, add a style:
+  </p>
+  <pre>
+.io-ornament .io-passwd-big .gi-input &#123;
+  font-size: 20px;
+&#125;</pre>
 </section>
 
 <section mr-vr>
@@ -36,7 +47,7 @@
 
   <div class="app-group">
 
-    <div class="app-elem">
+    <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnament".</em>
@@ -50,7 +61,7 @@
       </grn-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnamentEnd".</em>
@@ -63,7 +74,7 @@
       </grn-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnament".</em>
@@ -73,7 +84,7 @@
         label="Enter the number in words"
         isRequired
         [minLength]="minLength05"
-        [maxLength]="maxLength08"
+        [maxLength]="maxLength05"
         [exterior]="exterior05"
         [helperText]="
         (controls05.input05c.errors?.required
@@ -93,7 +104,7 @@
       </grn-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnamentEnd".</em>
@@ -103,7 +114,7 @@
         label="Enter the number in words"
         isRequired
         [minLength]="minLength05"
-        [maxLength]="maxLength08"
+        [maxLength]="maxLength05"
         [exterior]="exterior05"
         [helperText]="
         (controls05.input05d.errors?.required
@@ -123,7 +134,7 @@
       </grn-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnament".</em>
@@ -139,7 +150,7 @@
         ? 'The password value is required.'
         :'Enter the password value.'">
         <button grnOrnament
-          class="io-btn-eye press-left"
+          class="io-btn-eye io-mr-bt io-mr-lf"
           (click)="isBtnEyeCrossed05e=!isBtnEyeCrossed05e">
           <span [ngClass]="[
             'io-icon-eye', (isBtnEyeCrossed05e ? 'crossed':'')
@@ -148,15 +159,17 @@
       </grn-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnamentEnd".</em>
         </small>
       </div>
       <grn-input formControlName="input05f"
+        [ngClass]="[(!isBtnEyeCrossed05f ?'io-passwd-big':'')]"
         label="Enter password"
         [type]="isBtnEyeCrossed05f ? 'text':'password'"
+        wdFull
         isRequired
         [exterior]="exterior05"
         [helperText]="
@@ -164,38 +177,180 @@
           ? 'The password value is required.'
           : 'Enter the password value.'">
         <button grnOrnamentEnd
-          class="io-btn-eye press-right"
+          class="io-btn-eye io-mr-bt io-mr-rg"
           (click)="isBtnEyeCrossed05f=!isBtnEyeCrossed05f">
           <span [ngClass]="[
             'io-icon-eye', (isBtnEyeCrossed05f ? 'crossed':'')
           ]"></span>
         </button>
-        <!-- <span grnOrnamentEnd
-          style="outline: 1px dashed green;">
-          <span class="io-icon-eye9">#</span>
-        </span> -->
       </grn-input>
     </div>
 
   </div>
 
-
 </form>
 
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-tab-group animationDuration="0ms">
-      <mat-tab [label]="labelHtml">
-        <pre class="fw-nr">
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <pre source="html">
 &lt;form class="io-ornament"
+  [formGroup]="formGroup05"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem io-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "grnOrnament".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input05a"
+        label="Enter the mass"
+        helperText="The value is greater than zero."
+        [exterior]="exterior05"&gt;
+        &lt;span grnOrnament&gt;kg&lt;/span&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem io-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "grnOrnamentEnd".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input05b"
+        label="Enter the height"
+        [exterior]="exterior05"&gt;
+        &lt;span grnOrnamentEnd&gt;см&lt;/span&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem io-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "grnOrnament".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input05c"
+        label="Enter the number in words"
+        isRequired
+        [minLength]="minLength05"
+        [maxLength]="maxLength05"
+        [exterior]="exterior05"
+        [helperText]="
+        (controls05.input05c.errors?.required
+        ? 'Required field.'
+        : (controls05.input05c.errors?.minlength
+          ? 'Minimum length '
+          + controls05.input05c.errors?.minlength.requiredLength
+          + ' characters.'
+          : (controls05.input05c.errors?.maxlength
+            ? 'Maximum length '
+            + controls05.input05c.errors?.maxlength.requiredLength
+            + ' characters.'
+            :'')
+          )
+        )"&gt;
+        &lt;span grnOrnament&gt;$&lt;/span&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem io-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "grnOrnamentEnd".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input05d"
+        label="Enter the number in words"
+        isRequired
+        [minLength]="minLength05"
+        [maxLength]="maxLength05"
+        [exterior]="exterior05"
+        [helperText]="
+        (controls05.input05d.errors?.required
+        ? 'Required field.'
+        : (controls05.input05d.errors?.minlength
+          ? 'Minimum length '
+          + controls05.input05d.errors?.minlength.requiredLength
+          + ' characters.'
+          : (controls05.input05d.errors?.maxlength
+            ? 'Maximum length '
+            + controls05.input05d.errors?.maxlength.requiredLength
+            + ' characters.'
+            :'')
+          )
+        )"&gt;
+        &lt;span grnOrnamentEnd&gt;$&lt;/span&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem io-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "grnOrnament".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input05e"
+        label="Enter password"
+        [type]="isBtnEyeCrossed05e ? 'text':'password'"
+        isRequired
+        [exterior]="exterior05"
+        [helperText]="
+        controls05.input05e.errors?.required
+        ? 'The password value is required.'
+        :'Enter the password value.'"&gt;
+        &lt;button grnOrnament
+          class="io-btn-eye io-mr-bt io-mr-lf"
+          (click)="isBtnEyeCrossed05e=!isBtnEyeCrossed05e"&gt;
+          &lt;span [ngClass]="[
+            'io-icon-eye', (isBtnEyeCrossed05e ? 'crossed':'')
+          ]"&gt;&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem io-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "grnOrnamentEnd".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input05f"
+        [ngClass]="[(!isBtnEyeCrossed05f ?'io-passwd-big':'')]"
+        label="Enter password"
+        [type]="isBtnEyeCrossed05f ? 'text':'password'"
+        wdFull
+        isRequired
+        [exterior]="exterior05"
+        [helperText]="
+          controls05.input05f.errors?.required
+          ? 'The password value is required.'
+          : 'Enter the password value.'"&gt;
+        &lt;button grnOrnamentEnd
+          class="io-btn-eye io-mr-bt io-mr-rg"
+          (click)="isBtnEyeCrossed05f=!isBtnEyeCrossed05f"&gt;
+          &lt;span [ngClass]="[
+            'io-icon-eye', (isBtnEyeCrossed05f ? 'crossed':'')
+          ]"&gt;&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
 
 &lt;/form&gt;</pre>
-      </mat-tab>
-      <mat-tab [label]="labelTs">
-        <pre>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <pre source="ts">
 import &#123; Component, ViewEncapsulation &#125; from '@angular/core';
 import &#123; FormControl, FormGroup &#125; from '@angular/forms';
 
@@ -207,19 +362,19 @@ import &#123; FormControl, FormGroup &#125; from '@angular/forms';
 &#125;)
 export class InputComponent &#123;
   public minLength05 = 4;
-  public maxLength08 = 15;
+  public maxLength05 = 15;
   public controls05 = &#123;
     input05a: new FormControl('thirty', []),
     input05b: new FormControl('thirty', []),
     input05c: new FormControl('one', [
       Validators.required,
       Validators.minLength(this.minLength05),
-      Validators.maxLength(this.maxLength08)
+      Validators.maxLength(this.maxLength05)
     ]),
     input05d: new FormControl('five hundred ninety eight', [
       Validators.required,
       Validators.minLength(this.minLength05),
-      Validators.maxLength(this.maxLength08),
+      Validators.maxLength(this.maxLength05),
     ]),
     input05e: new FormControl('thirty', [Validators.required]),
     input05f: new FormControl('thirty', [Validators.required]),
@@ -229,9 +384,9 @@ export class InputComponent &#123;
   public isBtnEyeCrossed05e = false;
   public isBtnEyeCrossed05f = false;
 &#125;</pre>
-      </mat-tab>
-      <mat-tab [label]="labelCss">
-        <pre>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <pre source="css">
 .app-group &#123;
   display: flex;
   flex-wrap: wrap;
@@ -239,6 +394,9 @@ export class InputComponent &#123;
 .app-elem &#123;
   min-width: 26ch;
   margin: 10px 10px;
+&#125;
+.io-elem &#123;
+  width: 26ch;
 &#125;
 
 .io-ornament .io-btn-eye &#123;
@@ -255,14 +413,15 @@ export class InputComponent &#123;
   vertical-align: middle;
   flex: 0 0 auto;
   font-size: 1.5rem;
-  // padding: 8px;
   border-radius: 50%;
   overflow: visible;
   transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 &#125;
 .io-ornament .io-btn-eye:hover &#123; background-color: rgba(0, 0, 0, 0.04); &#125;
-.io-ornament .io-btn-eye.press-right &#123; margin-right: -12px; &#125;
-.io-ornament .io-btn-eye.press-left &#123; margin-left: -12px; &#125;
+
+.io-ornament .io-mr-rg  &#123; margin-right: -12px; &#125;
+.io-ornament .io-mr-lf &#123; margin-left: -12px; &#125;
+.io-ornament .io-mr-bt &#123; margin-bottom: 4px; &#125;
 
 .io-ornament .io-icon-eye &#123;
   background: center no-repeat;
@@ -304,8 +463,13 @@ export class InputComponent &#123;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 24px 24px;
+&#125;
+
+.io-ornament .io-passwd-big .gi-input &#123;
+  font-size: 20px;
 &#125;</pre>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-expansion-panel>
-</mat-accordion>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

@@ -4,43 +4,41 @@
 @import '../_styles/mx-flex-direction.scss';
 
 
-grn-textarea { // outline: 1px dashed green;
+grn-textarea {
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
-  font-family: "Roboto","Helvetica","Arial",sans-serif; // #!!root
-  font-weight: 400; // #!!root
-  font-size: 1em; // #!!root
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1em;
   position: relative;
   padding: 0;
-  vertical-align: top; // #!!
+  vertical-align: top;
   &[wdFull] {
     width: 100%;
   }
 
-  .gt-textarea { // outline: 1px dashed orange;} // # TODO temp;
-    // font: inherit;           // #!! from root
-    font-size: inherit;      // #!! from root
-    font-family: inherit;    // #!! from root
-    letter-spacing: inherit; // #!! from root
-    line-height: inherit;    // #!! from root
+  // Textarea
+  // The 'gfi-damper' style sets the line height:
+  // - line-height: var(--gfi-line-height);
+  // - where: --gfi-line-height: 1.4375em;
+  // This allows you to automatically change the padding when the font size changes.
+  .gt-textarea {
+    font-size: inherit;
+    font-family: inherit;
+    letter-spacing: inherit;
     color: inherit;
     border: 0;
     box-sizing: content-box;
     background: none;
-    // ! height: var(--cntl-input-frame-custom-size, var(--cntl -input-frame-base-size));  // 1.4375em; // height: 1.1876em; // my size
-    // height: auto;
-    // height: calc(var(--gt-number-lines)*var(--gfi-line-height));
     margin: 0;
     padding: 0;
     -webkit-tap-highlight-color: transparent;
-    // display: block;
     min-width: 0;
     width: 100%;
     -webkit-animation-name: mui-auto-fill-cancel;
     animation-name: mui-auto-fill-cancel;
     -webkit-animation-duration: 10ms;
     animation-duration: 10ms;
-
     resize: none;
 
     &:focus {
@@ -50,5 +48,20 @@ grn-textarea { // outline: 1px dashed green;
       opacity: 1;
       -webkit-text-fill-color: rgba(0, 0, 0, 0.38);
     }
+  }
+
+    // Textarea content "ornament"
+  .gt-ornament,
+  .gt-ornament-end {
+    display: inline-block;
+    height: 0.01em;
+    max-height: 2em;
+    white-space: nowrap;
+  }
+  .gt-ornament>:last-of-type {
+    margin-right: 8px;
+  }
+  .gt-ornament-end>:first-of-type {
+    margin-left: 8px;
   }
 }

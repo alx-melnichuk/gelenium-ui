@@ -1,23 +1,28 @@
-<div class="is-section">
+<section mr-vr>
   <h3>Optional</h3>
   <p>
-    Above, there was an example where the "grn-infinite-scroll" component itself has the css-property: overflow-y:
+    Above, there was an example where the "grn-infinite-scroll" component itself has the
+    css-property: overflow-y:
     scroll (or overflow: auto).
-    Now let's consider the option when the parent element has this css-property, and not the "grn-infinite-scroll"
+    Now let's consider the option when the parent element has this css-property, and not the
+    "grn-infinite-scroll"
     component itself.
   </p>
   <p>
-    Add an additional container "iso-item-wrap" with the required css-property overflow-y: scroll (or overflow: auto).
+    Add an additional container "iso-item-wrap" with the required css-property overflow-y: scroll
+    (or overflow: auto).
     And inside this container we will place the "grn-infinite-scroll" component.
   </p>
-</div>
+</section>
 
-<div class="is-section iso-block">
+<div class="iso-block">
   <div class="iso-item-wrap">
 
     <grn-infinite-scroll (scrolled)="doScroll()">
 
-      <div class="iso-items" *ngFor="let item of elements2; let idx=index; let count=count; trackBy: trackByIdFn">
+      <div class="iso-items"
+        *ngFor="let item of elements2; let idx=index;
+        let count=count; trackBy: trackByIdFn">
         <div class="iso-row">
           <span class="iso-label">serial number</span>
           <span class="iso-value">{{ idx+1 }}/{{ count }} </span>
@@ -39,32 +44,36 @@
     </grn-infinite-scroll>
 
   </div>
-  <div *ngIf="isLoading" class="iso-loading">Loading...</div>
+  <div *ngIf="isLoading"
+    class="iso-loading">
+    Loading...
+  </div>
 </div>
 
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-tab-group animationDuration="0ms">
-      <mat-tab [label]="labelHtml">
-        <pre class="is-fw-nr">
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <pre source="html">
 &lt;div class="iso-block"&gt;
   &lt;div class="iso-item-wrap"&gt;
 
     &lt;grn-infinite-scroll (scrolled)="doScroll()"&gt;
 
       &lt;div class="iso-items"
-        *ngFor="let item of elements2; let idx=index; let count=count;
-        trackBy: trackByIdFn"&gt;
+        *ngFor="let item of elements2; let idx=index;
+        let count=count; trackBy: trackByIdFn"&gt;
         &lt;div class="iso-row"&gt;
           &lt;span class="iso-label"&gt;serial number&lt;/span&gt;
           &lt;span class="iso-value"&gt;<b>&#123;</b>&#123; idx+1 &#125;&#125;/<b>&#123;</b>&#123; count &#125;&#125; &lt;/span&gt;
         &lt;/div&gt;
         &lt;div class="iso-row"&gt;
           &lt;span class="iso-label"&gt;participant&lt;/span&gt;
-          &lt;span class="iso-value"&gt;<b>&#123;</b>&#123;item.name&#125;&#125; <b>&#123;</b>&#123;item.surname&#125;&#125;&lt;/span&gt;
+          &lt;span class="iso-value"&gt;<b>&#123;</b>&#123; item.name &#125;&#125; <b>&#123;</b>&#123; item.surname &#125;&#125;&lt;/span&gt;
         &lt;/div&gt;
         &lt;div class="iso-row"&gt;
           &lt;span class="iso-label"&gt;email&lt;/span&gt;
@@ -79,14 +88,15 @@
     &lt;/grn-infinite-scroll&gt;
 
   &lt;/div&gt;
-  &lt;div *ngIf="isLoading" class="iso-loading"&gt;Loading...&lt;/div&gt;
+  &lt;div *ngIf="isLoading" class="iso-loading"&gt;
+    Loading...
+  &lt;/div&gt;
 &lt;/div&gt;</pre>
-      </mat-tab>
-      <mat-tab [label]="labelTs">
-        <pre>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <pre source="ts">
 import &#123;
-  ChangeDetectionStrategy, ChangeDetectorRef, Component,
-  ViewEncapsulation
+  ChangeDetectorRef, Component, ViewEncapsulation
 &#125; from '@angular/core';
 
 export interface Element &#123;
@@ -115,9 +125,8 @@ const CN_SURNAME3 = ['Perez', 'Thompson', 'White', 'Harris',
   templateUrl: './infinite-scroll-optional.component.html',
   styleUrls: ['./infinite-scroll-optional.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 &#125;)
-export class InfiniteScrollOptionalComponent &#123;
+export class InfiniteScrollComponent &#123;
   public elements2: Element[] = [];
   public isLoading = false;
 
@@ -177,9 +186,9 @@ export class InfiniteScrollOptionalComponent &#123;
     return result;
   &#125;
 &#125;</pre>
-      </mat-tab>
-      <mat-tab [label]="labelCss">
-        <pre>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <pre source="css">
 .iso-block &#123;
   position: relative;
 &#125;
@@ -214,7 +223,8 @@ export class InfiniteScrollOptionalComponent &#123;
   justify-content: center;
   align-items: center;
 &#125;</pre>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-expansion-panel>
-</mat-accordion>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

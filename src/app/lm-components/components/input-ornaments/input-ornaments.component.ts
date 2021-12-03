@@ -35,22 +35,21 @@ export class InputOrnamentsComponent {
   public labelCss = CN_LABEL_CSS;
 
   public minLength05 = 4;
-  public maxLength08 = 15;
+  public maxLength05 = 15;
   public controls05 = {
     input05a: new FormControl('thirty', []),
     input05b: new FormControl('thirty', []),
-    input05c: new FormControl('one', [Validators.required, Validators.minLength(this.minLength05), Validators.maxLength(this.maxLength08)]),
+    input05c: new FormControl('one', [Validators.required, Validators.minLength(this.minLength05), Validators.maxLength(this.maxLength05)]),
     input05d: new FormControl('five hundred ninety eight', [
       Validators.required,
       Validators.minLength(this.minLength05),
-      Validators.maxLength(this.maxLength08),
+      Validators.maxLength(this.maxLength05),
     ]),
     input05e: new FormControl('thirty', [Validators.required]),
-    input05f: new FormControl('thirty thirtythirtythirtythirty', [Validators.required]),
+    input05f: new FormControl('thirty', [Validators.required]),
   };
   public formGroup05: FormGroup = new FormGroup(this.controls05);
-  // public exterior05 = 'outlined';
-  public exterior05 = 'underline';
+  public exterior05 = 'outlined';
   public isBtnEyeCrossed05e = false;
   public isBtnEyeCrossed05f = false;
   // eslint-disable-next-line @typescript-eslint/no-empty-function

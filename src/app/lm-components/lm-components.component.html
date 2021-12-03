@@ -1,72 +1,57 @@
-<div class="app-left-side app-brd-rg">
-  <div class="lcm-item">Components</div>
+<app-site-scheme>
+  <div sideLeftPanel>
 
-  <mat-accordion>
+    <div class="ss-item">Components</div>
 
-    <mat-expansion-panel [expanded]="expandedFrameInput">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Frame Input
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <ul class="lcm-ul">
-        <li class="lcm-li"
-          *ngFor="let urlItem of frameInputUrlList">
-          <a class="lcm-li-href"
-            [href]="urlItem.url">{{ urlItem.label }}</a>
-        </li>
-      </ul>
-    </mat-expansion-panel>
+    <mat-accordion displayMode="flat">
 
-    <mat-expansion-panel [expanded]="expandedInfiniteScroll">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Infinite Scroll
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <ul class="lcm-ul">
-        <li class="lcm-li"
-          *ngFor="let urlItem of infiniteScrollUrlList">
-          <a class="lcm-li-href"
-            [href]="urlItem.url">{{ urlItem.label }}</a>
-        </li>
-      </ul>
-    </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="expandedFrameInput">
+        <mat-expansion-panel-header [expandedHeight]="expandedHeight">
+          <mat-panel-title>FrameInput</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul class="ss-ul">
+          <li *ngFor="let urlItem of urlListFrameInput">
+            <a [href]="urlItem.url">{{ urlItem.label }}</a>
+          </li>
+        </ul>
+      </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="expandedInput">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Input
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <ul class="lcm-ul">
-        <li class="lcm-li"
-          *ngFor="let urlItem of inputUrlList">
-          <a class="lcm-li-href"
-            [href]="urlItem.url">{{ urlItem.label }}</a>
-        </li>
-      </ul>
-    </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="expandedInfiniteScroll">
+        <mat-expansion-panel-header [expandedHeight]="expandedHeight">
+          <mat-panel-title>InfiniteScroll</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul class="ss-ul">
+          <li *ngFor="let urlItem of urlListInfiniteScroll">
+            <a [href]="urlItem.url">{{ urlItem.label }}</a>
+          </li>
+        </ul>
+      </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="expandedTextarea">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Textarea
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <ul class="lcm-ul">
-        <li class="lcm-li"
-          *ngFor="let urlItem of textareaUrlList">
-          <a class="lcm-li-href"
-            [href]="urlItem.url">{{ urlItem.label }}</a>
-        </li>
-      </ul>
-    </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="expandedInput">
+        <mat-expansion-panel-header [expandedHeight]="expandedHeight">
+          <mat-panel-title>Input</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul class="ss-ul">
+          <li *ngFor="let urlItem of urlListInput">
+            <a [href]="urlItem.url">{{ urlItem.label }}</a>
+          </li>
+        </ul>
+      </mat-expansion-panel>
 
-  </mat-accordion>
-</div>
-<div class="app-right-side">
-  <div class="app-right-side-content">
+      <mat-expansion-panel [expanded]="expandedTextarea">
+        <mat-expansion-panel-header [expandedHeight]="expandedHeight">
+          <mat-panel-title>Textarea</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul class="ss-ul">
+          <li *ngFor="let urlItem of urlListTextarea">
+            <a [href]="urlItem.url">{{ urlItem.label }}</a>
+          </li>
+        </ul>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </div>
+  <div sideMainPanel>
     <router-outlet></router-outlet>
   </div>
-</div>
+</app-site-scheme>

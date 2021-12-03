@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { URL_COMPONENTS, URL_FRAME_INPUT } from '../../lm-components.interface';
+
+import { URL_FRAME_INPUT, URL_ROOT } from '../../constants/url.constants';
 
 @Component({
   selector: 'app-textarea',
@@ -10,5 +11,5 @@ import { URL_COMPONENTS, URL_FRAME_INPUT } from '../../lm-components.interface';
 })
 export class TextareaComponent {
   public showNum = '';
-  public urlFrameInput = '/' + URL_COMPONENTS + '/' + URL_FRAME_INPUT;
+  public urlFrameInput = '/' + URL_ROOT + '/' + URL_FRAME_INPUT;
 }

@@ -1,0 +1,42 @@
+/*# sourceURL=site-scheme.component.scss */
+
+app-site-scheme {
+  height: 100%;
+  display: flex;
+
+  .ss-left-side {
+    flex-shrink: 0;
+    flex-basis: 149px;
+    @media (min-width: 800px) { flex-basis: 200px; }
+    @media (min-width: 1000px) { flex-basis: 250px; }
+    @media (min-width: 1200px) { flex-basis: 300px; }
+    display: flex;
+    flex-direction: column;
+  }
+  .ss-main-side {
+    flex-grow: 1;
+    flex-basis: 100%;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .ss-main-side-content {
+    padding: 0 16px;
+    box-sizing: border-box;
+    @media (min-width: 600px) { width: 100%; }
+    @media (min-width: 900px) { width: calc(100% - 6%); }
+    @media (min-width: 1200px) { width: 900px; }
+  }
+  
+  .ss-item {
+    padding: 10px 15px;
+  }
+  .ss-ul {
+    list-style: none;
+    margin: 0;
+    padding-inline-start: 10px;
+    &>li {
+      line-height: 1.7;
+    }
+  }
+}

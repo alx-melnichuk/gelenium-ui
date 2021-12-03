@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSliderChange } from '@angular/material/slider';
 
-import { URL_COMPONENTS, URL_FRAME_INPUT } from '../../lm-components.interface';
+import { URL_FRAME_INPUT, URL_ROOT } from '../../constants/url.constants';
 
 import {
   CN_LABEL_CSS,
@@ -48,7 +48,7 @@ export class FrameInputBorderRadiusComponent {
   public exterior05 = 'outlined';
   public isHiddenLabel = false;
   public borderRadius = 50;
-  public urlFrameInput = '/' + URL_COMPONENTS + '/' + URL_FRAME_INPUT;
+  public urlFrameInput = '/' + URL_ROOT + '/' + URL_FRAME_INPUT;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

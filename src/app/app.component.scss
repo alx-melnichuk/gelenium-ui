@@ -39,52 +39,13 @@ app-root {
     border-bottom-color: var(--app-root-border-color);
     box-sizing: border-box;
   }
-
-
-  .app-left-side {
-    flex-shrink: 0;
-    flex-basis: 149px;
-    @media (min-width: 800px) { flex-basis: 200px; }
-    @media (min-width: 1000px) { flex-basis: 250px; }
-    @media (min-width: 1200px) { flex-basis: 300px; }
-    display: flex;
-    flex-direction: column;
-  }
   .app-brd-rg {
     border-right-width: var(--app-root-border-width);
     border-right-style: var(--app-root-border-style);
     border-right-color: var(--app-root-border-color);
     box-sizing: border-box;
   }
-  .app-right-side {
-    flex-grow: 1;
-    flex-basis: 100%;
-    overflow-y: auto;
-    display: flex;
-    justify-content: center;
-  }
-  .app-right-side-content {
-    padding: 0 16px;
-    box-sizing: border-box;
-    @media (min-width: 600px) { width: 100%; }
-    @media (min-width: 900px) { width: calc(100% - 6%); }
-    @media (min-width: 1200px) { width: 900px; }
-  }
   
-
-  // .ta-section {
-  //   margin-top: 20px;
-  //   margin-bottom: 15px;
-  // }
-  // .ta-row {
-  //   display: flex;
-  //   flex-wrap: wrap;
-  //   width: 100%;
-  // }
-  // .ta-item {
-  //   width: 240px;
-  //   margin: 10px 10px;
-  // }
   .app-group {
     display: flex;
     flex-wrap: wrap;
@@ -96,11 +57,5 @@ app-root {
   .app-elem>div {
     margin-bottom: 13px;
   }
-
-  // .ta-text {
-  //   color: #00000096;
-  //   font-size: 0.84em;
-  //   font-style: italic;
-  // }
 
 }
