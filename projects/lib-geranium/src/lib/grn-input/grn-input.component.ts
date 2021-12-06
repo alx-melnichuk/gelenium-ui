@@ -20,16 +20,17 @@ import {
 } from '@angular/core';
 import {
   AbstractControl,
+  ControlValueAccessor,
   FormControl,
   FormGroup,
-  Validators,
-  ControlValueAccessor,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
   Validator,
   ValidatorFn,
+  Validators,
 } from '@angular/forms';
+import { GrnRegisterValidation } from '../directives/grn-regex.interface';
 
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
@@ -52,7 +53,7 @@ let identifier = 0;
     { provide: NG_VALIDATORS, useExisting: forwardRef(() => GrnInputComponent), multi: true },
   ],
 })
-export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
+export class GrnInputComponent extends GrnRegisterValidation implements OnInit, OnChanges, ControlValueAccessor, Validator {
   @Input()
   public id = 'grn_input_' + ++identifier;
   @Input()
@@ -133,9 +134,13 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   public isHelperTextFilled = false;
 
   // eslint-disable-next-line @typescript-eslint/ban-types
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private changeDetectorRef: ChangeDetectorRef) {
+    super();
+    console.log('GrnInput();'); // TODO del;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('GrnInput.ngOnChanges();'); // TODO del;
     if (changes.type) {
       this.typeVal = InputTypeUtil.create(this.type) || InputType.text;
     }
@@ -166,6 +171,16 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   ngOnInit(): void {
     this.isOrnament = this.grnOrnament || this.grnOrnamentEnd ? true : false;
   }
+
+  // ** GrnRegisterValidation - start **
+
+  public registerValidatorFn(validatorFn: ValidatorFn): void {
+    if (!!validatorFn && !this.formControl.hasValidator(validatorFn)) {
+      this.formControl.addValidators(validatorFn);
+    }
+  }
+
+  // ** GrnRegisterValidation - finish **
 
   // ** ControlValueAccessor - start **
 

@@ -1,3 +1,5 @@
+import { ValidatorFn } from '@angular/forms';
+
 export interface GrnRegex {
   name?: string;
   regex: string;
@@ -15,4 +17,12 @@ export class GrnRegexUtil {
     }
     return result;
   }
+}
+
+// export declare interface ValidatorFn {
+//   (control: AbstractControl): ValidationErrors | null;
+// }
+
+export abstract class GrnRegisterValidation {
+  abstract registerValidatorFn(validatorFn: ValidatorFn): void;
 }

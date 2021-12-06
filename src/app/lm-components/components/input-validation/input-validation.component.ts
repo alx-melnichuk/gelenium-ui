@@ -9,7 +9,7 @@ import {
   CN_LABEL_STANDARD,
   CN_LABEL_TS,
   CN_LABEL_UNDERLINE,
-} from '../constants';
+} from 'src/app/constants/labels';
 
 @Component({
   selector: 'app-input-validation',

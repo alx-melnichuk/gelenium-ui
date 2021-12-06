@@ -1,1 +1,52 @@
-<p>regex-check-basic works!</p>
+<section mr-vr>
+  <h3>Basic</h3>
+  <p>
+    The "GrnRegexCheck" directive implements checking the value of an element against
+    a regular expression.
+    This directive gets the value of an element through the ControlValueAccessor interface.
+    If the element does not support this interface, then the directive will not work.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior01">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attrib.: grnRegexCheck="/^-?(\d+)$/".</em>
+        </small>
+      </div>
+      <grn-input formControlName="input01a"
+        wdFull
+        [label]="!formGroup01.controls.input01a.value
+          ?'Enter number':'Number'"
+        grnRegexCheck="/^-?(\d+)$/"
+        [helperText]="formGroup01.controls.input01a.errors
+        ?'The value is not correct.'
+        :(!formGroup01.controls.input01a.value
+          ?'Enter your number value.'
+          :'The value is correct.')"
+        [exterior]="exterior01">
+      </grn-input>
+    </div>
+
+
+
+  </div>
+</form>
+<pre>
+input01a.errors={{ formGroup01.controls.input01a.errors | json }}
+</pre>
