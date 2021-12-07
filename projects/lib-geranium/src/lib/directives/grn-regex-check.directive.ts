@@ -1,7 +1,8 @@
-import { Directive, Host, Input, OnChanges, Optional, Self, SimpleChanges } from '@angular/core';
-import { AbstractControl, NgControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn, FormControl } from '@angular/forms';
+import { Directive, Inject, Input, OnChanges, Optional, SimpleChanges } from '@angular/core';
+import { AbstractControl, NgControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-import { GrnRegex, GrnRegexUtil, GrnRegisterValidation } from './grn-regex.interface';
+import { GRN_NODE_INTERNAL_VALIDATOR, GrnNodeInternalValidator } from './grn-node-internal-validator.interface';
+import { GrnRegexCheck, GrnRegexCheckUtil } from './grn-regex-check.interface';
 import { RegexUtil } from './regex.util';
 
 export function regexCheckValidator(regExpVal: RegExp, name: string): ValidatorFn {
@@ -11,51 +12,33 @@ export function regexCheckValidator(regExpVal: RegExp, name: string): ValidatorF
   };
 }
 
-// export const regexCheckValidatorFn: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-//   const result = !control || !control.value || regExpVal.test(control.value);
-//   return result ? null : { [name]: { value: control.value } };
-// };
-
-const REGEX_CHECK_NAME = 'regexpCheck';
-
 @Directive({
   selector: '[grnRegexCheck]',
-  // providers: [{ provide: NG_VALIDATORS, useExisting: GrnRegexCheckDirective, multi: true }],
 })
-export class GrnRegexCheckDirective implements OnChanges /*, Validator*/ {
+export class GrnRegexCheckDirective implements OnChanges {
   @Input()
-  public grnRegexCheck: string | GrnRegex | null = null;
+  public grnRegexCheck: string | GrnRegexCheck | null = null;
 
-  private name = REGEX_CHECK_NAME;
-  private regex: RegExp | null = null;
-
-  constructor(private control: NgControl, @Optional() private registerValidation: GrnRegisterValidation) {
-    console.log('GrnRegexCheck();'); // TODO del;
+  constructor(
+    private control: NgControl,
+    @Optional() @Inject(GRN_NODE_INTERNAL_VALIDATOR) private nodeInternalValidator: GrnNodeInternalValidator | null
+  ) {
+    console.log('GrnRegexCheck();');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('GrnRegexCheck.ngOnChanges();'); // TODO del;
-    if (changes.grnRegexCheck) {
-      const grnRegex: GrnRegex | null = GrnRegexUtil.create(this.grnRegexCheck);
-      this.name = grnRegex?.name || REGEX_CHECK_NAME;
-      this.regex = RegexUtil.create(grnRegex?.regex || null);
-      if (this.control && this.control.control && !!this.regex) {
-        const validatorFn: ValidatorFn = regexCheckValidator(this.regex, this.name);
+    if (changes.grnRegexCheck && this.control && this.control.control) {
+      const regexCheck: GrnRegexCheck = GrnRegexCheckUtil.create(this.grnRegexCheck) || {};
+      const list = Object.keys(regexCheck);
+      for (const name of list) {
+        const regex = RegexUtil.create(regexCheck[name]);
+        if (!regex) continue;
+        const validatorFn: ValidatorFn = regexCheckValidator(regex, name);
         this.control.control.addValidators(validatorFn);
-        if (this.registerValidation) {
-          console.log('GrnRegexCheck.ngOnChanges(); this.registerValidation'); // TODO del;
-          this.registerValidation.registerValidatorFn(validatorFn);
+        if (this.nodeInternalValidator != null) {
+          this.nodeInternalValidator.addValidators(validatorFn);
         }
       }
     }
   }
-
-  /*validate(control: AbstractControl): ValidationErrors | null {
-    // if (!!control && !!this.regex) {
-    //   const formControl: FormControl = control as FormControl;
-    //   const regexCheckValidatorFn: ValidatorFn = regexCheckValidator(this.regex, this.name);
-    //   formControl.addValidators(regexCheckValidatorFn);
-    // }
-    return this.regex ? regexCheckValidator(this.regex, this.name)(control) : null;
-  }*/
 }

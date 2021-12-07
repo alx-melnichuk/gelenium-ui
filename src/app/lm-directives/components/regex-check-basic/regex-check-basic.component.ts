@@ -34,16 +34,12 @@ export class RegexCheckBasicComponent {
   @Input()
   public labelCss = CN_LABEL_CSS;
 
-  public data01 = '123';
-  public formGroup01: FormGroup = new FormGroup({
+  public demo01 = '1';
+  public control01 = {
     input01a: new FormControl('', []),
     input01b: new FormControl('', []),
-    input01c: new FormControl('', []),
-    input01d: new FormControl('-12345678901234567890', []),
-    input01e: new FormControl('12345678901234567890.12', []),
-    input01f: new FormControl('123456789012.12', []),
-    input01g: new FormControl('between 3 and 6', []),
-  });
+  };
+  public formGroup01: FormGroup = new FormGroup(this.control01);
   public exterior01 = 'outlined';
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

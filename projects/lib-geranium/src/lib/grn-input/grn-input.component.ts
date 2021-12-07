@@ -20,6 +20,7 @@ import {
 } from '@angular/core';
 import {
   AbstractControl,
+  AsyncValidatorFn,
   ControlValueAccessor,
   FormControl,
   FormGroup,
@@ -30,8 +31,8 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { GrnRegisterValidation } from '../directives/grn-regex.interface';
 
+import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-node-internal-validator.interface';
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 
@@ -51,9 +52,10 @@ let identifier = 0;
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => GrnInputComponent), multi: true },
     { provide: NG_VALIDATORS, useExisting: forwardRef(() => GrnInputComponent), multi: true },
+    { provide: GRN_NODE_INTERNAL_VALIDATOR, useExisting: GrnInputComponent },
   ],
 })
-export class GrnInputComponent extends GrnRegisterValidation implements OnInit, OnChanges, ControlValueAccessor, Validator {
+export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccessor, Validator, GrnNodeInternalValidator {
   @Input()
   public id = 'grn_input_' + ++identifier;
   @Input()
@@ -134,13 +136,9 @@ export class GrnInputComponent extends GrnRegisterValidation implements OnInit, 
   public isHelperTextFilled = false;
 
   // eslint-disable-next-line @typescript-eslint/ban-types
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private changeDetectorRef: ChangeDetectorRef) {
-    super();
-    console.log('GrnInput();'); // TODO del;
-  }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('GrnInput.ngOnChanges();'); // TODO del;
     if (changes.type) {
       this.typeVal = InputTypeUtil.create(this.type) || InputType.text;
     }
@@ -171,16 +169,6 @@ export class GrnInputComponent extends GrnRegisterValidation implements OnInit, 
   ngOnInit(): void {
     this.isOrnament = this.grnOrnament || this.grnOrnamentEnd ? true : false;
   }
-
-  // ** GrnRegisterValidation - start **
-
-  public registerValidatorFn(validatorFn: ValidatorFn): void {
-    if (!!validatorFn && !this.formControl.hasValidator(validatorFn)) {
-      this.formControl.addValidators(validatorFn);
-    }
-  }
-
-  // ** GrnRegisterValidation - finish **
 
   // ** ControlValueAccessor - start **
 
@@ -224,6 +212,22 @@ export class GrnInputComponent extends GrnRegisterValidation implements OnInit, 
   }
 
   // ** Validator - finish **
+
+  // ** GrnNodeInternalValidator - start **
+
+  public addValidators(validators: ValidatorFn | ValidatorFn[]): void {
+    if (validators != null) {
+      this.formControl.addValidators(validators);
+    }
+  }
+
+  public addAsyncValidators(validators: AsyncValidatorFn | AsyncValidatorFn[]): void {
+    if (validators != null) {
+      this.formControl.addAsyncValidators(validators);
+    }
+  }
+
+  // ** GrnNodeInternalValidator - finish **
 
   // ** Public API **
 

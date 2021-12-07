@@ -27,10 +27,12 @@ import {
   ValidationErrors,
   ValidatorFn,
   Validators,
+  AsyncValidatorFn,
 } from '@angular/forms';
 
+import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-node-internal-validator.interface';
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
-import { FrameSize, FrameSizeType, FrameSizeUtil } from '../interfaces/frame-size.interface';
+import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 
 let identifier = 0;
 
@@ -44,9 +46,10 @@ let identifier = 0;
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => GrnTextareaComponent), multi: true },
     { provide: NG_VALIDATORS, useExisting: forwardRef(() => GrnTextareaComponent), multi: true },
+    { provide: GRN_NODE_INTERNAL_VALIDATOR, useExisting: GrnTextareaComponent },
   ],
 })
-export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Validator {
+export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Validator, GrnNodeInternalValidator {
   @Input()
   public id = 'grn_textarea_' + ++identifier;
   @Input()
@@ -203,6 +206,22 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   }
 
   // ** Validator - finish **
+
+  // ** GrnNodeInternalValidator - start **
+
+  public addValidators(validators: ValidatorFn | ValidatorFn[]): void {
+    if (validators != null) {
+      this.formControl.addValidators(validators);
+    }
+  }
+
+  public addAsyncValidators(validators: AsyncValidatorFn | AsyncValidatorFn[]): void {
+    if (validators != null) {
+      this.formControl.addAsyncValidators(validators);
+    }
+  }
+
+  // ** GrnNodeInternalValidator - finish **
 
   // ** Public API **
 

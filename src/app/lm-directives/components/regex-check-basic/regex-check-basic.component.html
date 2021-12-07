@@ -1,11 +1,174 @@
 <section mr-vr>
   <h3>Basic</h3>
   <p>
-    The "GrnRegexCheck" directive implements checking the value of an element against
+    The GrnRegexCheck directive implements checking the value of an element against
     a regular expression.
-    This directive gets the value of an element through the ControlValueAccessor interface.
-    If the element does not support this interface, then the directive will not work.
+    Sometimes you want to restrict user input to some kind of business logic.
+    To do this, you can use the
+    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/pattern"
+      target="_blank">"pattern"</a> attribute of the native input element.
   </p>
+  <p>
+    For example, an input field can contain up to three letters.
+  </p>
+  <pre>
+    &lt;style&gt;
+      input.rcb-input.ng-invalid &#123;
+        border: red solid 2px;
+        outline-color: red;
+      &#125;
+    &lt;/style&gt;
+    &lt;input class="rcb-input"
+      type="text"
+      name="demo01"
+      [(ngModel)]="demo01"
+      [ngModelOptions]="&#123;standalone: true&#125;"
+      pattern="[A-Za-z]&#123;1,3&#125;"
+      #ctrlDemo01="ngModel" /&gt;
+    &lt;code&gt;
+      &lt;small&gt;
+        &lt;pre&gt;errors=<b>&#123;</b>&#123; ctrlDemo01.errors | json &#125;&#125;&lt;/pre&gt;
+      &lt;/small&gt;
+    &lt;/code&gt;</pre>
+</section>
+
+<style>
+  input.rcb-input.ng-invalid {
+    border: red solid 2px;
+    outline-color: red;
+  }
+</style>
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>pattern="[A-Za-z]&#123;1,3&#125;".</em>
+      </small>
+    </div>
+    <input class="rcb-input"
+      type="text"
+      name="demo01"
+      [(ngModel)]="demo01"
+      [ngModelOptions]="{standalone: true}"
+      pattern="[A-Za-z]{1,3}"
+      #ctrlDemo01="ngModel" />
+    <code>
+      <small>
+        <pre>errors={{ ctrlDemo01.errors | json }}</pre>
+      </small>
+    </code>
+  </div>
+</div>
+
+<section mr-vr>
+  <p>
+    But there are situations when you need to apply several restrictions and display
+    a separate error for each. In such cases, you can use the "grnRegexCheck" directive.
+  </p>
+  <p>
+    Example: "pattern and grnRegexCheck".
+  </p>
+  <p>
+    The input field can only contain: letters and digits.
+    To fulfill the condition contains letters, apply the "pattern" attribute.
+    And to fulfill the condition contains digits, apply the "RegexCheck" directive.
+  </p>
+  <p>
+    Let's prepare a regular expression to check for the presence of letters.
+    Since we can have digits in addition to letters, this must be taken into account in the regular
+    expression.
+    Our expression has two parts:
+  </p>
+  <ul>
+    <li>expression <code>(?=.*[a-zA-Z])</code> - checks for letters;</li>
+    <li>expression <code>[a-zA-Z\d]&#123;1,&#125;</code> - contains a set of valid characters (at
+      least one);
+    </li>
+  </ul>
+  <p>
+    Let's consider the case that only letters and numbers can be valid, and otherwise - an error.
+  </p>
+  <p>As a result, we get:</p>
+  <ul>
+    <li>expression <code>^(?=.*[a-zA-Z])[a-zA-Z\d]&#123;1,&#125;$</code> - condition check contains
+      letters;</li>
+    <li>expression <code>^(?=.*[\d])[a-zA-Z\d]&#123;1,&#125;$</code> - condition check contains
+      digits;</li>
+  </ul>
+  <p>
+    The "RegexCheck" directive supports the following forms for describing regular expressions:
+  </p>
+  <ul>
+    <li><code>grnRegexCheck ="^-?(\d+)$"</code></li>
+    <li><code>[grnRegexCheck]="'^-?(\\d+)$'"</code></li>
+    <li><code>grnRegexCheck ="/^-?(\d+)$/i"</code></li>
+    <li><code>[grnRegexCheck]="'/^-?(\\d+)$/i'"</code></li>
+  </ul>
+  <p>
+    In case the value does not match the regular expression, then the error object displays
+    'regexpCheck' (this is the default value).
+  </p>
+  <p>
+    Let's say we need to apply three or more constraints on the value of an input field.
+    The methods described earlier will not work here.
+    But we can apply the "RegexCheck" directive with the configuration.
+    This directive as an input parameter can accept an object with fields: key, value.
+    The key is the name of the property in the error object.
+    The value is a regular expression string.
+  </p>
+  <br />
+  <p>
+    Let's look at another example.
+  </p>
+  <p>
+    Suppose we need to define a new secret key (or password).
+    The field value can contain various characters.
+    But this should be done:
+  </p>
+  <ul>
+    <li>letters must be present</li>
+    <li>digits must be present:</li>
+    <li>symbols must be present: "!@#$%^&*"</li>
+  </ul>
+  <p>
+    Let's prepare a regular expression to check for the presence of letters.
+    Our expression has two parts:
+  </p>
+  <ul>
+    <li>expression <code>(?=.*[a-zA-Z])</code> - checks for letters;</li>
+    <li>expression <code>[\w\W]&#123;1,&#125;</code> - contains all possible characters
+      (at least one);</li>
+  </ul>
+  <p>
+    <code>
+      \w - Matches any letter, digit or underscore.<br/>
+      Equivalent to [a-zA-Z0-9_].<br/>
+      \W - Matches anything other than a letter, digit or underscore.<br/>
+      Equivalent to [^a-zA-Z0-9_]
+    </code>
+  </p>
+  <p>As a result, we get:</p>
+  <ul>
+    <li>expression <code>^(?=.*[a-zA-Z])[\w\W]&#123;1,&#125;$</code> - condition check contains
+      letters;</li>
+    <li>expression <code>^(?=.*[\d])[\w\W]&#123;1,&#125;$</code> - condition check contains
+      digits;</li>
+    <li>
+      expression <code>^(?=.*[!@#$%^&*])[\w\W]&#123;1,&#125;$</code> - condition check contains
+      symbols: "!@#$%^&*";
+    </li>
+  </ul>
+  <p>
+    Thus, the application of the directive is as follows:
+  </p>
+  <pre>
+    [grnRegexCheck]="&#123;
+      'checkLetters': '^(?=.*[a-zA-Z])[\\w\\W]&#123;1,&#125;$',
+      'checkDigits': '^(?=.*\\d)[\\w\\W]&#123;1,&#125;$',
+      'checkSymbols': '^(?=.*[!@#$%^&*])[\\w\\W]&#123;1,&#125;$'
+    &#125;"
+  </pre>
+
 </section>
 
 <section mr-vr>
@@ -26,27 +189,187 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>Attrib.: grnRegexCheck="/^-?(\d+)$/".</em>
+          <em>pattern="[a-zA-Z]", grnRegexCheck="\d".</em>
         </small>
       </div>
       <grn-input formControlName="input01a"
         wdFull
         [label]="!formGroup01.controls.input01a.value
-          ?'Enter number':'Number'"
-        grnRegexCheck="/^-?(\d+)$/"
-        [helperText]="formGroup01.controls.input01a.errors
-        ?'The value is not correct.'
-        :(!formGroup01.controls.input01a.value
-          ?'Enter your number value.'
-          :'The value is correct.')"
+          ?'Enter a digit and symbol':'A digit and symbol'"
+        pattern="(?=.*[a-zA-Z])[a-zA-Z\d]{1,}"
+        grnRegexCheck="(?=.*\d)[a-zA-Z\d]{1,}"
+        [helperText]="
+        !formGroup01.controls.input01a.errors
+        ?(!formGroup01.controls.input01a.value
+          ? 'Enter your value.':'The value is correct.'
+         )
+        :(formGroup01.controls.input01a.errors?.pattern
+          ? 'The field must have characters.'
+          : (formGroup01.controls.input01a.errors?.regexpCheck
+             ?'The field must have digits.'
+             :'The value is not correct.')  
+         )"
         [exterior]="exterior01">
       </grn-input>
     </div>
 
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Check: [a-zA-Z], [\d], [!@#$%^&*].</em>
+        </small>
+      </div>
+      <grn-input formControlName="input01b"
+        wdFull
+        [label]="!control01.input01b.value
+          ?'Enter parameter':'Parameter'"
+        [grnRegexCheck]="{
+          'checkLetters': '^(?=.*[a-zA-Z])[\\w\\W]{1,}$',
+          'checkDigits': '^(?=.*\\d)[\\w\\W]{1,}$',
+          'checkSymbols': '^(?=.*[!@#$%^&*])[\\w\\W]{1,}$'
+        }"
+        [helperText]="
+        !control01.input01b.errors
+        ?(!control01.input01b.value
+          ? 'Enter your value.':'The value is correct.'
+         )
+        :(control01.input01b.errors.checkLetters
+          ?'Letters must be present'
+          :(control01.input01b.errors.checkDigits
+             ?'Digits must be present.'
+             :(control01.input01b.errors.checkSymbols
+               ?'Must be characters from the set [!@#$%^&*].'
+               :'The value is not correct.'
+              )
+            )
+         )"
+        [exterior]="exterior01">
+      </grn-input>
 
+    </div>
 
   </div>
+
 </form>
-<pre>
-input01a.errors={{ formGroup01.controls.input01a.errors | json }}
-</pre>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <pre source="html">
+&lt;form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;pattern="[a-zA-Z]", grnRegexCheck="\d".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input01a"
+        wdFull
+        [label]="!formGroup01.controls.input01a.value
+          ?'Enter a digit and symbol':'A digit and symbol'"
+        pattern="(?=.*[a-zA-Z])[a-zA-Z\d]&#123;1,&#125;"
+        grnRegexCheck="(?=.*\d)[a-zA-Z\d]&#123;1,&#125;"
+        [helperText]="
+        !formGroup01.controls.input01a.errors
+        ?(!formGroup01.controls.input01a.value
+          ? 'Enter your value.':'The value is correct.'
+         )
+        :(formGroup01.controls.input01a.errors?.pattern
+          ? 'The field must have characters.'
+          : (formGroup01.controls.input01a.errors?.regexpCheck
+             ?'The field must have digits.'
+             :'The value is not correct.')
+         )"
+        [exterior]="exterior01"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Check: [a-zA-Z], [\d], [!@#$%^&*].&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input01b"
+        wdFull
+        [label]="!control01.input01b.value
+          ?'Enter parameter':'Parameter'"
+        [grnRegexCheck]="&#123;
+          'checkLetters': '^(?=.*[a-zA-Z])[\\w\\W]&#123;1,&#125;$',
+          'checkDigits': '^(?=.*\\d)[\\w\\W]&#123;1,&#125;$',
+          'checkSymbols': '^(?=.*[!@#$%^&*])[\\w\\W]&#123;1,&#125;$'
+        &#125;"
+        [helperText]="
+        !control01.input01b.errors
+        ?(!control01.input01b.value
+          ? 'Enter your value.':'The value is correct.'
+         )
+        :(control01.input01b.errors.checkLetters
+          ?'Letters must be present'
+          :(control01.input01b.errors.checkDigits
+             ?'Digits must be present.'
+             :(control01.input01b.errors.checkSymbols
+               ?'Must be characters from the set [!@#$%^&*].'
+               :'The value is not correct.'
+              )
+            )
+         )"
+        [exterior]="exterior01"&gt;
+      &lt;/grn-input&gt;
+
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class InputComponent &#123;
+  public demo01 = '1';
+  public control01 = &#123;
+    input01a: new FormControl('', []),
+    input01b: new FormControl('', []),
+  &#125;;
+  public formGroup01: FormGroup = new FormGroup(this.control01);
+  public exterior01 = 'outlined';
+&#125;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;             
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
