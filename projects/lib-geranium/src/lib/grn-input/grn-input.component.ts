@@ -218,12 +218,14 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   public addValidators(validators: ValidatorFn | ValidatorFn[]): void {
     if (validators != null) {
       this.formControl.addValidators(validators);
+      this.formControl.updateValueAndValidity();
     }
   }
 
   public addAsyncValidators(validators: AsyncValidatorFn | AsyncValidatorFn[]): void {
     if (validators != null) {
       this.formControl.addAsyncValidators(validators);
+      this.formControl.updateValueAndValidity();
     }
   }
 

@@ -22,9 +22,7 @@ export class GrnRegexCheckDirective implements OnChanges {
   constructor(
     private control: NgControl,
     @Optional() @Inject(GRN_NODE_INTERNAL_VALIDATOR) private nodeInternalValidator: GrnNodeInternalValidator | null
-  ) {
-    console.log('GrnRegexCheck();');
-  }
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.grnRegexCheck && this.control && this.control.control) {
@@ -38,6 +36,7 @@ export class GrnRegexCheckDirective implements OnChanges {
         if (this.nodeInternalValidator != null) {
           this.nodeInternalValidator.addValidators(validatorFn);
         }
+        this.control.control.updateValueAndValidity();
       }
     }
   }

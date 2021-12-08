@@ -1,0 +1,92 @@
+<section mr-vr>
+  <h3>API: GrnRegexCheck</h3>
+  <p>
+    Selector:
+    <span fw500>grn-regex-check</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>grnRegexCheck</span>
+  </p>
+  <p>
+    The directive checks the value of the input against the specified regular expression.
+    If a mismatch is detected, then an error occurs with the "regexCheck" property.
+  </p>
+</section>
+
+<section mr-vr>
+  <h4>Properties</h4>
+</section>
+
+<table class="app-tab">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <td>
+      <code>@Input()</code>
+      <code>grnRegexCheck: string | GrnRegexCheck | null;</code>
+    </td>
+    <td>
+      <span>A regular expression value or configuration object.
+        <br />
+        Examples of input value as regular expression:
+      </span>
+      <ul>
+        <li><code>grnRegexCheck ="^-?(\d+)$"</code></li>
+        <li><code>[grnRegexCheck]="'^-?(\\d+)$'"</code></li>
+        <li><code>grnRegexCheck ="/^-?(\d+)$/i"</code></li>
+        <li><code>[grnRegexCheck]="'/^-?(\\d+)$/i'"</code></li>
+      </ul>
+      <span>
+        An example of an input value as a configuration:<br />
+        <code>
+          [grnRegexCheck]="&#123;<br />
+          'Letters': '^(?=.*[a-zA-Z])[\\w\\W]&#123;1,&#125;$',<br />
+          'Digits': '^(?=.*\\d)[\\w\\W]&#123;1,&#125;$',<br />
+          'Symbols': '^(?=.*[!@#$%^&*])[\\w\\W]&#123;1,&#125;$'<br />
+        &#125;"
+        </code>
+      </span>
+    </td>
+  </tr>
+</table>
+
+<section mr-vr>
+  <h4>Additionally.</h4>
+  <p>
+    At the moment of creation, the "GrnRegexCheck" directive adds its validation function to the
+    Form Control.
+    This works great if it's a simple control.
+    For example, the GrnInput component is a complex control.
+    Since it has its internal control element (FormControl), to which all validation functions
+    apply.
+    It turns out that the "GrnRegexCheck" directive can pass its validation function only to the
+    external implementation of the "GrnInput" component.
+    And the internal control element of the "GrnInput" component will not know anything about the
+    new validation function.
+    As a result, the "GrnInput" component will not be able to correctly apply the new validation
+    function.
+  </p>
+  <p>
+    To solve this problem, a mechanism of interaction between the "GrnRegexCheck" directive and the
+    "GrnInput" component has been implemented.
+    The "GrnInput" component implements the provider with the "GRN_NODE_INTERNAL_VALIDATOR" token.
+    The "GrnRegexCheck" directive, when created, gets an instance of this provider, if any.
+    The provider instance has its own "GrnNodeInternalValidator" interface.
+    This interface provides methods for adding validation functions.
+  </p>
+  <ul>
+    <li><code>addValidators(validators: ValidatorFn | ValidatorFn[]): void;</code></li>
+    <li><code>addAsyncValidators(validators: AsyncValidatorFn | AsyncValidatorFn[]): void;</code>
+    </li>
+  </ul>
+  <p>
+    Thus, the "GrnRegexCheck" directive passes its check functions to the "GrnInput" component.
+    And the "GrnInput" component in turn applies the new validation function to its internal control
+    (FormControl).
+    And everything works great.
+  </p>
+</section>

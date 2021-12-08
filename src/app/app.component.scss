@@ -60,4 +60,35 @@ app-root {
   .app-group div>small {
     color: #00000096;
   }
+
+  table.app-tab {
+    border-collapse: collapse;
+    border: 1px solid rgba(0,0,0,.12);
+    tr {
+      border-top: 1px solid rgba(0,0,0,.12);
+    }
+    th, td {
+      &:not(:last-of-type) {
+        border-right: 1px solid rgba(0,0,0,.12);
+      }
+    }
+    th {
+      font-weight: 400;
+      max-width: 100px;
+      text-align: left;
+      background: whitesmoke;
+    }
+    th, td {
+      padding: 8px 16px;
+      code {
+        display: block;
+      }
+    }
+    ul {
+      margin-block-start: 0;
+      margin-block-end: 0;
+      padding-inline-start: 30px;
+    }
+  }
+
 }

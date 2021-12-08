@@ -1,4 +1,4 @@
-export const REGEX_CHECK_NAME = 'regexpCheck';
+export const REGEX_CHECK_NAME = 'regexCheck';
 
 export declare type GrnRegexCheck = { [key: string]: string };
 

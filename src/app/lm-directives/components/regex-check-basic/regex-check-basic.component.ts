@@ -38,6 +38,9 @@ export class RegexCheckBasicComponent {
   public control01 = {
     input01a: new FormControl('', []),
     input01b: new FormControl('', []),
+    input01c: new FormControl('01/0', []),
+    input01d: new FormControl('01/0', []),
+    input01e: new FormControl('(99', []),
   };
   public formGroup01: FormGroup = new FormGroup(this.control01);
   public exterior01 = 'outlined';

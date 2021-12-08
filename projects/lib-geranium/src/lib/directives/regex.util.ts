@@ -4,14 +4,18 @@
 export class RegexUtil {
   public static create(value: string | null): RegExp | null {
     let result: RegExp | null = null;
-    if (value) {
-      const regParts = value.match(/^\/(.*?)\/(.*?)$/);
-      if (regParts !== null) {
+    const text = value?.trim();
+    if (text) {
+      const start = text.indexOf('/');
+      const finish = text.lastIndexOf('/');
+      if (start !== -1 && finish !== -1 && start !== finish) {
+        const pattern = text.substr(start + 1, finish - 1);
+        const flag: string | undefined = text.length > finish + 1 ? text.substr(finish + 1) : undefined;
         // Regex pattern with delimiters.
-        result = new RegExp(regParts[1], regParts[2]);
+        result = new RegExp(pattern, flag);
       } else {
         // Regex pattern without delimiters.
-        result = new RegExp(value);
+        result = new RegExp(text);
       }
     }
     return result;
