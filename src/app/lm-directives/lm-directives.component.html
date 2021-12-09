@@ -6,10 +6,8 @@
     <mat-accordion displayMode="flat">
 
       <mat-expansion-panel [expanded]="expandedRegexCheck">
-        <mat-expansion-panel-header expandedHeight="48px">
-          <mat-panel-title>
-            RegexCheck
-          </mat-panel-title>
+        <mat-expansion-panel-header expandedHeight="expandedHeight">
+          <mat-panel-title>RegexCheck</mat-panel-title>
         </mat-expansion-panel-header>
         <ul class="ss-ul">
           <li *ngFor="let urlItem of urlListRegexCheck">
@@ -17,6 +15,28 @@
           </li>
         </ul>
       </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="expandedRegexMatch">
+        <mat-expansion-panel-header expandedHeight="expandedHeight">
+          <mat-panel-title>RegexMatch</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul class="ss-ul">
+          <li *ngFor="let urlItem of urlListRegexMatch">
+            <a [href]="urlItem.url">{{ urlItem.label }}</a>
+          </li>
+        </ul>
+      </mat-expansion-panel>
+
+      <!-- <mat-expansion-panel [expanded]="expandedRegexRemove">
+        <mat-expansion-panel-header expandedHeight="expandedHeight">
+          <mat-panel-title>RegexRemove</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul class="ss-ul">
+          <li *ngFor="let urlItem of urlListRegexRemove">
+            <a [href]="urlItem.url">{{ urlItem.label }}</a>
+          </li>
+        </ul>
+      </mat-expansion-panel> -->
 
     </mat-accordion>
   </div>

@@ -1,29 +1,12 @@
 import { Directive, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NgControl } from '@angular/forms';
+import { GrnRegexMatchUtil } from './grn-regex-match.interface';
 
 import { RegexUtil } from './regex.util';
 
-export const NAME_NUMERIC = '#numeric';
-export const REGEXP_NUMERIC = '^-?(\\d+)$';
-
-export const NAME_NUMERIC_EXP = '#numeric-exp';
-export const REGEXP_NUMERIC_EXP = '^-?[\\d.]+(?:e-?\\d+)?$';
-
-export const NAME_NUMERIC_DECIMAL2 = '#numeric(,2)';
-export const REGEXP_NUMERIC_DECIMAL2 = '^-?(\\d+(\\.\\d{0,2})?|\\.\\d{0,2})$';
-
-export const NAME_NUMERIC12_DECIMAL2 = '#numeric(12,2)';
-export const REGEXP_NUMERIC12_DECIMAL2 = '^-?(\\d{1,12}(\\.\\d{0,2})?|\\.\\d{0,2})$';
-
-const valueMap: { [key: string]: string } = {
-  [NAME_NUMERIC]: REGEXP_NUMERIC,
-  [NAME_NUMERIC_EXP]: REGEXP_NUMERIC_EXP,
-  [NAME_NUMERIC_DECIMAL2]: REGEXP_NUMERIC_DECIMAL2,
-  [NAME_NUMERIC12_DECIMAL2]: REGEXP_NUMERIC12_DECIMAL2,
-};
-
 @Directive({
   selector: '[grnRegexMatch]',
+  exportAs: 'grnRegexMatch',
 })
 export class GrnRegexMatchDirective implements OnChanges {
   @Input()
@@ -40,11 +23,8 @@ export class GrnRegexMatchDirective implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.grnRegexMatch) {
-      let grnRegexMatch = this.grnRegexMatch;
-      if (grnRegexMatch && grnRegexMatch.startsWith(NAME_NUMERIC)) {
-        grnRegexMatch = valueMap[grnRegexMatch] || grnRegexMatch;
-      }
-      this.regex = RegexUtil.create(grnRegexMatch);
+      const regexStr = GrnRegexMatchUtil.create(this.grnRegexMatch);
+      this.regex = RegexUtil.create(regexStr);
     }
   }
 

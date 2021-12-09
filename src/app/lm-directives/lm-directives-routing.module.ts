@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { RegexCheckComponent } from './components/regex-check/regex-check.component';
+import { RegexMatchComponent } from './components/regex-match/regex-match.component';
+// import { RegexRemoveComponent } from './components/regex-remove/regex-remove.component';
 import { LmDirectivesComponent } from './lm-directives.component';
 
 const routes: Routes = [
@@ -10,6 +12,8 @@ const routes: Routes = [
     component: LmDirectivesComponent,
     children: [
       { path: 'regex-check', component: RegexCheckComponent },
+      { path: 'regex-match', component: RegexMatchComponent },
+      // { path: 'regex-remove', component: RegexRemoveComponent },
       { path: '**', redirectTo: 'regex-check' },
     ],
   },

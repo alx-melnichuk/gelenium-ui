@@ -10,16 +10,15 @@ import {
   CN_LABEL_TS,
   CN_LABEL_UNDERLINE,
 } from 'src/app/constants/labels';
-import { URL_REGEX_MATCH, URL_ROOT } from 'src/app/lm-directives/constants/url.constants';
 
 @Component({
-  selector: 'app-input-numerical',
-  templateUrl: './input-numerical.component.html',
-  styleUrls: ['./input-numerical.component.scss'],
+  selector: 'app-regex-match-basic',
+  templateUrl: './regex-match-basic.component.html',
+  styleUrls: ['./regex-match-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputNumericalComponent {
+export class RegexMatchBasicComponent {
   @Input()
   public labelShowSource = CN_LABEL_SHOW_SOURCE;
   @Input()
@@ -34,18 +33,18 @@ export class InputNumericalComponent {
   public labelTs = CN_LABEL_TS;
   @Input()
   public labelCss = CN_LABEL_CSS;
-  public urlRegexMatch = '/' + URL_ROOT + '/' + URL_REGEX_MATCH;
 
-  public formGroup04: FormGroup = new FormGroup({
-    input04a: new FormControl('', []),
-    input04b: new FormControl('', []),
-    input04c: new FormControl('', []),
-    input04d: new FormControl('-12345678901234567890', []),
-    input04e: new FormControl('12345678901234567890.12', []),
-    input04f: new FormControl('123456789012.12', []),
-    input04g: new FormControl('between 3 and 6', []),
-  });
-  public exterior04 = 'outlined';
+  public control01 = {
+    input01a: new FormControl('', []),
+    input01b: new FormControl('-1234567890123456.12345', []),
+    input01c: new FormControl('-12345678901234567890', []),
+    input01d: new FormControl('12345678901234567890.12', []),
+    input01e: new FormControl('123456789012.12', []),
+    input01f: new FormControl('123456789012', []),
+    input01g: new FormControl('123456789012.12', []),
+  };
+  public formGroup01: FormGroup = new FormGroup(this.control01);
+  public exterior01 = 'outlined';
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }

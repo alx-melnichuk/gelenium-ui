@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
+import { EXPANDED_HEIGHT } from '../constants/constants';
 import { UrlItem, UrlItemUtil } from '../interfaces/url-item.interface';
-import { EXPANDED_HEIGHT, URL_FRAME_INPUT, URL_INFINITE_SCROLL, URL_INPUT, URL_ROOT, URL_TEXTAREA } from './constants/url.constants';
+import { URL_FRAME_INPUT, URL_INFINITE_SCROLL, URL_INPUT, URL_ROOT, URL_TEXTAREA } from './constants/url.constants';
 
 @Component({
   selector: 'app-lm-components',
@@ -109,6 +110,8 @@ export class LmComponentsComponent implements OnInit {
     result.push(UrlItemUtil.create('Api', url + '#Api'));
     return result;
   }
+
+  // ** -- **
 
   private updateStatusExpandedByPathname(): void {
     const pathname = location.pathname;

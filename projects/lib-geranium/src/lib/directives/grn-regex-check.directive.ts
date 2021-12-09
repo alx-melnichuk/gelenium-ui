@@ -14,6 +14,7 @@ export function regexCheckValidator(regExpVal: RegExp, name: string): ValidatorF
 
 @Directive({
   selector: '[grnRegexCheck]',
+  exportAs: 'grnRegexCheck',
 })
 export class GrnRegexCheckDirective implements OnChanges {
   @Input()

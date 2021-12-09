@@ -1,0 +1,87 @@
+<section mr-vr>
+  <h3>API: GrnRegexMatch</h3>
+  <p>
+    Selector:
+    <span fw500>grn-regex-match</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>grnRegexMatch</span>
+  </p>
+  <p>
+    The directive allows you to enter only those values that match the specified regular expression.
+  </p>
+</section>
+
+<section mr-vr>
+  <h4>Properties</h4>
+</section>
+
+<table class="app-tab">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <td>
+      <code>@Input()</code>
+      <code>grnRegexMatch: string | null;</code>
+    </td>
+    <td>
+      <span>A regular expression value.</span>
+      <ul>
+        <li><code>grnRegexMatch ="^-?(\d+)$"</code></li>
+        <li><code>[grnRegexMatch]="'^-?(\\d+)$'"</code></li>
+        <li><code>grnRegexMatch ="/^-?(\d+)$/i"</code></li>
+        <li><code>[grnRegexMatch]="'/^-?(\\d+)$/i'"</code></li>
+      </ul>
+      <span>
+        An example of an input value as a configuration:<br />
+        <code>
+          [grnRegexCheck]="&#123;<br />
+          'Letters': '^(?=.*[a-zA-Z])[\\w\\W]&#123;1,&#125;$',<br />
+          'Digits': '^(?=.*\\d)[\\w\\W]&#123;1,&#125;$',<br />
+          'Symbols': '^(?=.*[!@#$%^&*])[\\w\\W]&#123;1,&#125;$'<br />
+        &#125;"
+        </code>
+      </span>
+    </td>
+  </tr>
+</table>
+
+<section mr-vr>
+  <p>
+    The following templates can be used as an input parameter:
+  </p>
+</section>
+<table class="app-tab">
+  <tr>
+    <th>Template</th>
+    <th>Regular expression</th>
+  </tr>
+  <tr>
+    <td><code>'#numeric'</code></td>
+    <td><code>'^-?(\\d+)$'</code></td>
+  </tr>
+  <tr>
+    <td><code>'#numeric-exp'</code></td>
+    <td><code>'^-?[\\d.]+(?:e-?\\d*)?$'</code></td>
+  </tr>
+  <tr>
+    <td><code>'#numeric()'</code></td>
+    <td><code>'^-?(\\d+(\\.\\d*)?|\\.\\d*)$'</code></td>
+  </tr>
+  <tr>
+    <td><code>'#numeric12_2'</code></td>
+    <td><code>'^-?(\\d&#123;1,12&#125;(\\.\\d&#123;0,2&#125;)?|\\.\\d&#123;0,2&#125;)$'</code>
+    </td>
+  </tr>
+  <tr>
+    <td><code>'#numeric(X,Y)'</code></td>
+    <td>
+      <code>'^-?(\\d&#123;1,X&#125;(\\.\\d&#123;0,Y&#125;)?|\\.\\d&#123;0,Y&#125;)$'</code>
+      <small>where X and Y are integers greater than zero;</small>
+    </td>
+  </tr>
+</table>

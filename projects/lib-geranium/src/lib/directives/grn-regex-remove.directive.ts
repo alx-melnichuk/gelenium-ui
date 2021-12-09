@@ -25,6 +25,7 @@ import { RegexUtil } from './regex.util';
 
 @Directive({
   selector: '[grnRegexRemove]',
+  exportAs: 'grnRegexRemove',
 })
 export class GrnRegexRemoveDirective implements OnChanges {
   @Input()

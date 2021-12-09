@@ -1,4 +1,3 @@
-export const EXPANDED_HEIGHT = '48px';
 export const URL_ROOT = 'components';
 export const URL_FRAME_INPUT = 'frame-input';
 export const URL_INPUT = 'input';
