@@ -31,9 +31,9 @@
     <td>
       <span>A regular expression value.</span>
       <ul>
-        <li><code>grnRegexMatch ="^-?(\d+)$"</code></li>
+        <li><code>grnRegexMatch="^-?(\d+)$"</code></li>
         <li><code>[grnRegexMatch]="'^-?(\\d+)$'"</code></li>
-        <li><code>grnRegexMatch ="/^-?(\d+)$/i"</code></li>
+        <li><code>grnRegexMatch="/^-?(\d+)$/i"</code></li>
         <li><code>[grnRegexMatch]="'/^-?(\\d+)$/i'"</code></li>
       </ul>
       <span>
@@ -85,3 +85,41 @@
     </td>
   </tr>
 </table>
+
+<section mr-vr>
+  <h4>Additionally.</h4>
+  <p>
+    In angular, directives are created in the order of their description, and for this reason, it is
+    advisable to specify the first GrnRegexMatch directive.
+    Because it filters changes to the value of the input element.
+    When the GrnRegexMatch directive cancels the input changes it calls
+    "event.stopImmediatePropagation();".
+    This should have canceled calls to other subscriptions on this node.
+    (<a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/stopImmediatePropagation"
+      target="_blank">Event.stopImmediatePropagation();</a>)
+    However, this does not happen (
+    <a href="https://github.com/angular/angular/issues/9587"
+      target="_blank">event.stopImmediatePropagation() called from listeners not working</a>).
+    For this reason, it is required to check the value of "event.cancelBubble" in subscriptions.
+    If the value is "false", then the event.stopImmediatePropagation () method was not called and
+    you can continue working.
+    When the value is "true" - the method was called and no action is required.
+    This check will help prevent further processing in cases where the GrnRegexMatch directive
+    canceled changes.
+  </p>
+  <pre source="ts">
+@HostListener('input', ['$event'])
+public doInput(event: Event): void &#123;
+  // https://github.com/angular/angular/issues/9587
+  // "event.stopImmediatePropagation() called from listeners not working"
+  // Added Event.cancelBubble check to make sure there was no call 
+  // to event.stopImmediatePropagation() in previous handlers.
+  if (!!event && !event.cancelBubble) &#123;
+    // Further processing.
+  &#125;
+&#125;
+  </pre>
+  <p>
+    Important! Remember that a regular expression must allow you to enter data sequentially.
+  </p>
+</section>
