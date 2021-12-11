@@ -1,4 +1,5 @@
-<section mr-vr>
+<section mr-vr
+  *ngIf="false">
   <h3>Ornaments for the input line.</h3>
   <p>
     It is possible to add a different ornament (picture or text) for the input line.
@@ -56,12 +57,13 @@
       <grn-input formControlName="input05a"
         label="Enter the mass"
         helperText="The value is greater than zero."
-        [exterior]="exterior05">
-        <span grnOrnament>kg</span>
+        lbShrink9="false"
+        exterior9="exterior05">
+        <span grnOrnament9>kg</span>
       </grn-input>
     </div>
 
-    <div class="app-elem io-elem">
+    <!-- <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnamentEnd".</em>
@@ -72,9 +74,9 @@
         [exterior]="exterior05">
         <span grnOrnamentEnd>см</span>
       </grn-input>
-    </div>
+    </div> -->
 
-    <div class="app-elem io-elem">
+    <!-- <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnament".</em>
@@ -102,9 +104,9 @@
         )">
         <span grnOrnament>$</span>
       </grn-input>
-    </div>
+    </div> -->
 
-    <div class="app-elem io-elem">
+    <!-- <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnamentEnd".</em>
@@ -132,9 +134,9 @@
         )">
         <span grnOrnamentEnd>$</span>
       </grn-input>
-    </div>
+    </div> -->
 
-    <div class="app-elem io-elem">
+    <!-- <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnament".</em>
@@ -157,9 +159,9 @@
           ]"></span>
         </button>
       </grn-input>
-    </div>
+    </div> -->
 
-    <div class="app-elem io-elem">
+    <!-- <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnamentEnd".</em>
@@ -184,7 +186,7 @@
           ]"></span>
         </button>
       </grn-input>
-    </div>
+    </div> -->
 
   </div>
 

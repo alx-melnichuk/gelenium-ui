@@ -6,8 +6,9 @@
     [isDisabled]="isDisabledVal"
     [isFocused]="isFocused"
     [isFilled]="isFilled"
-    [isLabelShrink]="isFocused || isFilled || isLabelShrink || isOrnament"
-    [hiddenLabel]="hiddenLabelVal"
+    [isLabelShrink]="isLabelShrink"
+    [isOrnament]="isOrnament"
+    [hiddenLabel]="isHiddenLabel"
     [isError]="!!formControl.errors || isErrorVal"
     [helperText]="helperText"
     [frameSize]="frameSizeVal">

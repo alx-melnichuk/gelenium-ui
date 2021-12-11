@@ -1,27 +1,22 @@
 <label *ngIf="!hiddenLabel"
   [ngClass]="['gfi-label', 'GrnInputLabel'
-  , (isOutlinedExterior ? 'gfi-lbl-outlined': '')
-  , (isUnderlineExterior ? 'gfi-lbl-underline': '')
-  , (isStandardExterior ? 'gfi-lbl-standard': '')
+  , 'gfi-lbl-' + exterior
   , (isRequired ? 'Grn-required': '')
-  , (isLabelShrink ? 'gfi-lbl-shrink': '')
+  , (isLabelShrinkValue ? 'gfi-lbl-shrink': '')
   , (isError ? 'Grn-error': '')
   , (isDisabled ? 'Grn-disabled': '')
   , (isFocused ? 'Grn-focused': '')
   , (isFilled ? 'Grn-filled': '')
   , (getClassPalette('plt-clr-', isError, isFocused, isDisabled, isMouseEnter))
 ]"
-  [attr.data-shrink]="isLabelShrink"
+  [attr.data-shrink]="isLabelShrinkValue"
   [attr.for]="inputId"
   [attr.id]="inputId + '-label'">
   {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
 </label>
-
 <div [ngClass]="['gfi-frame', 'Grn-palette', 'GrnInputFrame'
-  , (isUnderlineExterior ? 'gfi-frm-underline': '')
   , (isUnderlineExterior ? getClassPaletteBg('plt-bg-clr-', isError, isFocused, isDisabled, isMouseEnter): '')
-  , (isStandardExterior ? 'gfi-frm-standard': '')
-  , (isOutlinedExterior ? 'gfi-frm-outlined': '')
+  , 'gfi-frm-' + exterior
   , (isUnderlineExterior || isStandardExterior ? 'gfi-substrate-frm': '')
   , (isUnderlineExterior || isStandardExterior ? 'substrate': '')
   , (isUnderlineExterior || isStandardExterior ? getClassPalette('plt-brd-bt-clr-', isError, isFocused, isDisabled, isMouseEnter): '')
@@ -40,7 +35,7 @@
   ]">
     <legend *ngIf="!hiddenLabel"
       [ngClass]="['gfi-legend'
-      , (isLabelShrink ? 'gfi-lgnd-shrink': '')
+      , (isLabelShrinkValue ? 'gfi-lgnd-shrink': '')
       , (!!label || isRequired ? 'gfi-lgnd-indent': '')
     ]">
       <span class="gfi-lgnd-text">

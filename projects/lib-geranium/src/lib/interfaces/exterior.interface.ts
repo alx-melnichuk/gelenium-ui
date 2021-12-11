@@ -7,8 +7,11 @@ export enum Exterior {
 }
 
 export class ExteriorUtil {
-  public static create(value: string | null): Exterior | null {
-    let result: Exterior | null = null;
+  public static create(value: Exterior | null, defaultValue: Exterior | null): Exterior {
+    return ExteriorUtil.convert((value || defaultValue || '').toString(), Exterior.standard) as Exterior;
+  }
+  public static convert(value: string | null, defaultValue: Exterior | null = null): Exterior | null {
+    let result: Exterior | null = defaultValue;
     switch (value) {
       case Exterior.standard.valueOf():
         result = Exterior.standard;
@@ -22,13 +25,13 @@ export class ExteriorUtil {
     }
     return result;
   }
-  public static isOutlined(value: Exterior): boolean {
+  public static isOutlined(value: Exterior | null): boolean {
     return Exterior.outlined === value;
   }
-  public static isUnderline(value: Exterior): boolean {
+  public static isUnderline(value: Exterior | null): boolean {
     return Exterior.underline === value;
   }
-  public static isStandard(value: Exterior): boolean {
+  public static isStandard(value: Exterior | null): boolean {
     return Exterior.standard === value;
   }
 }

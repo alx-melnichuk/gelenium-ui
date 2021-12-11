@@ -1,7 +1,22 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  HostListener,
+  Inject,
+  InjectionToken,
+  Input,
+  OnChanges,
+  Optional,
+  SimpleChanges,
+  ViewEncapsulation,
+} from '@angular/core';
 
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
+import { GrnFrameInputConfig } from './grn-frame-input.interface';
+
+export const GRN_FRAME_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('GRN_FRAME_INPUT_CONFIG');
 
 @Component({
   selector: 'grn-frame-input',
@@ -11,13 +26,13 @@ import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GrnFrameInputComponent implements OnInit {
+export class GrnFrameInputComponent implements OnChanges {
   @Input()
   public inputId = '';
   @Input()
   public label = '';
   @Input()
-  public exterior: Exterior = Exterior.standard;
+  public exterior: Exterior | null = null;
   @Input()
   public isRequired = false;
   @Input()
@@ -27,9 +42,11 @@ export class GrnFrameInputComponent implements OnInit {
   @Input()
   public isFilled = false;
   @Input()
-  public isLabelShrink = false;
+  public isLabelShrink: boolean | null = null;
   @Input()
-  public hiddenLabel = false;
+  public isOrnament = false;
+  @Input()
+  public hiddenLabel: boolean | null = null;
   @Input()
   public isError = false;
   @Input()
@@ -57,10 +74,32 @@ export class GrnFrameInputComponent implements OnInit {
   public get isStandardExterior(): boolean {
     return ExteriorUtil.isStandard(this.exterior);
   }
-
+  public get isLabelShrinkValue(): boolean {
+    return this.isFocused || this.isFilled || this.isLabelShrink || this.isOrnament;
+  }
   public isMouseEnter = false;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor(@Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private config: GrnFrameInputConfig | null) {
+    this.exterior = ExteriorUtil.create(this.exterior, this.config?.exterior || null);
+    this.frameSize = FrameSizeUtil.create(this.frameSize, this.config?.frameSize || null);
+    this.isLabelShrink = this.createBoolean(this.isLabelShrink, this.config?.isLabelShrink);
+    this.hiddenLabel = this.createBoolean(this.hiddenLabel, this.config?.hiddenLabel);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.exterior) {
+      this.exterior = ExteriorUtil.create(this.exterior, this.config?.exterior || null);
+    }
+    if (changes.frameSize) {
+      this.frameSize = FrameSizeUtil.create(this.frameSize, this.config?.frameSize || null);
+    }
+    if (changes.isLabelShrink) {
+      this.isLabelShrink = this.createBoolean(this.isLabelShrink, this.config?.isLabelShrink);
+    }
+    if (changes.hiddenLabel) {
+      this.hiddenLabel = this.createBoolean(this.hiddenLabel, this.config?.hiddenLabel);
+    }
+  }
 
   @HostListener('mouseenter')
   public eventMouseEnter(): void {
@@ -70,12 +109,6 @@ export class GrnFrameInputComponent implements OnInit {
   @HostListener('mouseleave')
   public eventMouseLeave(): void {
     this.isMouseEnter = false;
-  }
-
-  ngOnInit(): void {
-    if (!this.frameSize) {
-      this.frameSize = FrameSize.wide;
-    }
   }
 
   // ** Public API **
@@ -128,5 +161,11 @@ export class GrnFrameInputComponent implements OnInit {
       result = 'plt-clr-disabled';
     }
     return result;
+  }
+
+  // ** Private API **
+
+  private createBoolean(value: boolean | null, defaultValue: boolean | undefined): boolean {
+    return value != null ? value : defaultValue != null ? defaultValue : false;
   }
 }

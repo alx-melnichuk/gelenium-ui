@@ -107,14 +107,14 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     return ['GrnControl', 'GrnTextareaField'];
   }
 
-  public exteriorVal: Exterior = Exterior.standard;
+  public exteriorVal: Exterior | null = null;
   public isReadOnlyVal = false; // Binding attribute "isReadOnly".
   public isRequiredVal = false; // Binding attribute "isRequired".
   public isDisabledVal = false; // Binding attribute "isDisabled".
-  public isLabelShrink = false; // Binding attribute "lbShrink".
+  public isLabelShrink: boolean | null = null; // Binding attribute "lbShrink".
   public isOrnament = false;
-  public frameSizeVal: FrameSize | null = FrameSize.wide;
-  public hiddenLabelVal = false; // Binding attribute "hiddenLabel".
+  public frameSizeVal: FrameSize | null = null;
+  public isHiddenLabel: boolean | null = null; // Binding attribute "hiddenLabel".
   public isErrorVal = false; // Binding attribute "isError".
 
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
@@ -130,7 +130,7 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.exterior) {
-      this.exteriorVal = ExteriorUtil.create(this.exterior) || Exterior.standard;
+      this.exteriorVal = ExteriorUtil.convert(this.exterior);
     }
     this.isReadOnlyVal = changes.isReadOnly ? this.isReadOnly !== null : this.isReadOnlyVal;
     this.isRequiredVal = changes.isRequired ? this.isRequired !== null : this.isRequiredVal;
@@ -139,12 +139,13 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
       this.isDisabledVal = this.isDisabled !== null;
       this.setDisabledState(this.isDisabledVal);
     }
-    this.isLabelShrink = changes.lbShrink ? this.lbShrink !== null : this.isLabelShrink;
-
-    if (changes.frameSize) {
-      this.frameSizeVal = FrameSizeUtil.create(this.frameSize) || FrameSize.wide;
+    if (changes.lbShrink) {
+      this.isLabelShrink = this.lbShrink === '' || this.lbShrink === 'true' ? true : this.lbShrink === 'false' ? false : null;
     }
-    this.hiddenLabelVal = changes.hiddenLabel ? this.hiddenLabel !== null : this.hiddenLabelVal;
+    if (changes.frameSize) {
+      this.frameSizeVal = FrameSizeUtil.convert(this.frameSize);
+    }
+    this.isHiddenLabel = changes.hiddenLabel ? this.hiddenLabel !== null : this.isHiddenLabel;
     this.isErrorVal = changes.isError ? this.isError !== null : this.isErrorVal;
     this.isHelperTextFilled = changes.helperText ? !!this.helperText : this.isHelperTextFilled;
 

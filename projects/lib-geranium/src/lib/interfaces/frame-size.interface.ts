@@ -19,8 +19,11 @@ export enum FrameSizeValue {
 }
 
 export class FrameSizeUtil {
-  public static create(value: string | null): FrameSize | null {
-    let result: FrameSize | null = null;
+  public static create(value: FrameSize | null, defaultValue: FrameSize | null): FrameSize {
+    return FrameSizeUtil.convert((value || defaultValue || '').toString(), FrameSize.wide) as FrameSize;
+  }
+  public static convert(value: string | null, defaultValue: FrameSize | null = null): FrameSize | null {
+    let result: FrameSize | null = defaultValue;
     switch (value) {
       case FrameSize.short.valueOf():
         result = FrameSize.short;
@@ -43,22 +46,22 @@ export class FrameSizeUtil {
     }
     return result;
   }
-  public static isShort(value: FrameSize): boolean {
+  public static isShort(value: FrameSize | null): boolean {
     return FrameSize.short === value;
   }
-  public static isSmall(value: FrameSize): boolean {
+  public static isSmall(value: FrameSize | null): boolean {
     return FrameSize.small === value;
   }
-  public static isMiddle(value: FrameSize): boolean {
+  public static isMiddle(value: FrameSize | null): boolean {
     return FrameSize.middle === value;
   }
-  public static isWide(value: FrameSize): boolean {
+  public static isWide(value: FrameSize | null): boolean {
     return FrameSize.wide === value;
   }
-  public static isLarge(value: FrameSize): boolean {
+  public static isLarge(value: FrameSize | null): boolean {
     return FrameSize.large === value;
   }
-  public static isHuge(value: FrameSize): boolean {
+  public static isHuge(value: FrameSize | null): boolean {
     return FrameSize.huge === value;
   }
   public static getValue(frameSize: FrameSize | null): number | null {
