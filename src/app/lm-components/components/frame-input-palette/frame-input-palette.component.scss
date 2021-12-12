@@ -106,13 +106,13 @@ app-frame-input-palette {
     color: #495057;
   }
   .fip-bstrap .Grn-palette {
-    --cntl-error-color: #dc3545;
-    --cntl-error-hover-color: #dc3545;
-    --cntl-focused-color: #80bdff;
-    --cntl-outlined-default-brd-color: #ced4da;
+    --g-err-cl: #dc3545;
+    --g-err-hov-cl: #dc3545;
+    --g-foc-cl: #80bdff;
+    --g-o-def-br-cl: #ced4da;
   }
   .fip-bstrap .Grn-palette .plt-brd-clr-mouse {
-    border-color: var(--cntl-outlined-default-brd-color);
+    border-color: var(--g-o-def-br-cl);
   }
   .fip-bstrap .gfi-outlined-fieldset.Grn-focused {
     border-width: 1px;

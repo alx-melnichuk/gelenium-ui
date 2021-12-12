@@ -45,8 +45,7 @@
   </fieldset>
 </div>
 <p *ngIf="!!helperText"
-  [ngClass]="['gfi-helper-text', 'GrnHelperText'
-  , (isStandardExterior ? 'gfi-hlp-standard': '')
+  [ngClass]="['gfi-helper-text', 'GrnHelperText', 'gfi-hlp-' + exterior
   , (isError ? 'Grn-error': '')
   , (isDisabled ? 'Grn-disabled': '')
   , (isFocused ? 'Grn-focused': '')

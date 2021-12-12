@@ -49,6 +49,7 @@ export class LmComponentsComponent implements OnInit {
     result.push(UrlItemUtil.create('Helper text', url + '#HelperText'));
     result.push(UrlItemUtil.create('Border radius', url + '#BorderRadius'));
     result.push(UrlItemUtil.create('Palette', url + '#Palette'));
+    result.push(UrlItemUtil.create('Config', url + '#Config'));
     result.push(UrlItemUtil.create('Api', url + '#Api'));
     return result;
   }

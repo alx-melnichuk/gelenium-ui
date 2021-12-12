@@ -1,19 +1,22 @@
 <h3>Component: "GrnInfiniteScroll"</h3>
 
-<section *ngIf="!showNum || showNum==='01'" id="Basic">
+<div *ngIf="!showNum || showNum==='01'"
+  id="Basic">
   <app-infinite-scroll-basic></app-infinite-scroll-basic>
   <hr br-tp>
-</section>
+</div>
 
-<section *ngIf="!showNum || showNum==='02'" id="Optional">
+<div *ngIf="!showNum || showNum==='02'"
+  id="Optional">
   <app-infinite-scroll-optional></app-infinite-scroll-optional>
   <hr br-tp>
-</section>
+</div>
 
-<section *ngIf="!showNum || showNum==='03'" id="Api">
+<div *ngIf="!showNum || showNum==='03'"
+  id="Api">
   <app-infinite-scroll-api></app-infinite-scroll-api>
   <hr br-tp>
-</section>
+</div>
 
 <br />
 <br />

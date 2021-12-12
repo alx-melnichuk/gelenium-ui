@@ -20,8 +20,7 @@ grn-input {    // # outline: 1px dashed green;
 
   // Input
   // The 'gfi-damper' style sets the line height:
-  // - line-height: var(--gfi-line-height);
-  // - where: --gfi-line-height: 1.4375em;
+  // - line-height: var(--gfi-ln-hg);  - where: --gfi-ln-hg: 1.4375em;
   // This allows you to automatically change the padding when the font size changes.
   .gi-input {
     font-size: inherit;
@@ -55,7 +54,7 @@ grn-input {    // # outline: 1px dashed green;
   .gi-ornament-end {
     display: inline-block;
     height: 0.01em;
-    max-height: 2em;
+    max-height: inherit;
     white-space: nowrap;
   }
   .gi-ornament>:last-of-type {

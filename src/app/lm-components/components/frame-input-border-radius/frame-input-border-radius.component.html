@@ -3,32 +3,32 @@
   <p>
     You can change the value of the rounding radius in outlined appearance mode.
     To do this, you need to specify a new value for the rounding radius in the
-    "&#8209;&#8209;gfi&#8209;outlined-border-radius" css-variable for the "grn&#8209;frame-input"
+    "&#8209;&#8209;gfi-o-br-rd" css-variable for the "grn-frame-input"
     css-style.
     For example:
   </p>
   <pre>
   .fibr-outlined-radius grn-frame-input &#123;
-    --gfi-outlined-border-radius: calc(var(--gfi-base-size)*0.5);
+    --gfi-o-br-rd: calc(var(--gfi-size)*0.5);
   &#125;</pre>
   <p>
     This value for the fillet radius corresponds to 50% of the height of the current element.
     The minimum value for the fillet radius is 0.
     The maximum value for the fillet radius is 50% of the height of the current element.
     The value of the css-variable
-    <a [href]="urlFrameInput + '#HelperText'">"&#8209;&#8209;gfi&#8209;base-size"</a>
+    <a [href]="urlFrameInput + '#FrameSize'">"&#8209;&#8209;gfi-size"</a>
     determines the height of the current element.
   </p>
   <p>
     In this case, you also need to change the value of the left indent for correct display.
     The value of the left indentation is determined by the special css-variable
-    "&#8209;&#8209;gfi-outlined-frm-pd-lf-rg" in the css-style "grn-frame-input".
+    "&#8209;&#8209;gfi-o-lgnd-pd" in the css-style "grn-frame-input".
     For example:
   </p>
   <pre>
   .fibr-outlined-radius grn-frame-input &#123;
-    --gfi-outlined-border-radius: calc(var(--gfi-base-size)*0.5);
-    --gfi-outlined-frm-pd-lf-rg: calc(var(--gfi-base-size)*0.57);
+    --gfi-o-br-rd: calc(var(--gfi-size)*0.5);
+    --gfi-o-lgnd-pd: calc(var(--gfi-size)*0.57);
   &#125;</pre>
   <p>
     In our example, the value of the coefficient for changing the fillet radius will change
@@ -38,27 +38,26 @@
   </p>
   <pre>
   .fibr-outlined-radius grn-frame-input &#123;
-    --gfi-outlined-border-radius:
-      calc(var(--gfi-base-size)*var(--fibr-border-radius)/100);
-    --gfi-outlined-frm-pd-lf-rg: calc(0.57*var(--gfi-base-size));
+    --gfi-o-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
+    --gfi-o-lgnd-pd: calc(0.57*var(--gfi-size));
   &#125;</pre>
   <p>
     This is what the original values look like:
   </p>
   <pre>
   grn-frame-input &#123;
-    --gfi-outlined-border-radius: calc(var(--gfi-base-size)/10);
-    --gfi-outlined-frm-pd-lf-rg: calc(0.25*var(--gfi-base-size));
+    --gfi-o-br-rd: calc(var(--gfi-size)/10);
+    --gfi-o-lgnd-pd: calc(0.25*var(--gfi-size));
   &#125;</pre>
   <p>
     Similarly, you can change the fillet radius for the underline appearance mode.
   </p>
   <p>
     To do this, you need to specify a new value for the rounding radius in the
-    css-variable "&#8209;&#8209;gfi-underline-border-radius" for the css-style
+    css-variable "&#8209;&#8209;gfi-u-br-rd" for the css-style
     "grn&#8209;frame-input".
     And you also need to change the value of the left indentation value of the
-    css-variable "&#8209;&#8209;gfi-underline-frm-pd-lf-rg" for the css-style
+    css-variable "&#8209;&#8209;gfi-u-lgnd-pd" for the css-style
     "grn&#8209;frame-input".
   </p>
   <p>
@@ -66,9 +65,8 @@
   </p>
   <pre>
     .fibr-underline-radius grn-frame-input &#123;
-      --gfi-underline-border-radius:
-        calc(var(--gfi-base-size)*var(--fibr-border-radius)/100);
-      --gfi-underline-frm-pd-lf-rg: calc(0.4*var(--gfi-base-size));
+      --gfi-u-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
+      --gfi-u-lgnd-pd: calc(0.4*var(--gfi-size));
     &#125;
   </pre>
   <p>
@@ -76,8 +74,8 @@
   </p>
   <pre>
     grn-frame-input &#123;
-    --gfi-underline-border-radius: calc(var(--gfi-base-size)/10);
-    --gfi-underline-frm-pd-lf-rg: calc(0.214285714*var(--gfi-base-size));
+    --gfi-u-br-rd: calc(var(--gfi-size)/10);
+    --gfi-u-lgnd-pd: calc(0.214285714*var(--gfi-size));
     &#125;
   </pre>
 </section>
@@ -326,9 +324,9 @@ import &#123;
 &#125; from '@angular/forms';
 
 @Component(&#123;
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class FrameInputComponent &#123;
@@ -376,15 +374,13 @@ export class FrameInputComponent &#123;
 --fibr-border-radius: 20;
 
 .fibr-outlined-radius grn-frame-input &#123;
-  --gfi-outlined-border-radius
-    : calc(var(--gfi-base-size)*var(--fibr-border-radius)/100);
-  --gfi-outlined-frm-pd-lf-rg: calc(0.57*var(--gfi-base-size));
+  --gfi-o-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
+  --gfi-o-lgnd-pd: calc(0.57*var(--gfi-size));
 &#125;
 
 .fibr-underline-radius grn-frame-input &#123;
-  --gfi-underline-border-radius
-    : calc(var(--gfi-base-size)*var(--fibr-border-radius)/100);
-  --gfi-underline-frm-pd-lf-rg: calc(0.4*var(--gfi-base-size));
+  --gfi-u-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
+  --gfi-u-lgnd-pd: calc(0.4*var(--gfi-size));
 &#125;</pre>
         </mat-tab>
       </mat-tab-group>

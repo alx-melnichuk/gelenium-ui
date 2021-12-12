@@ -33,13 +33,20 @@
 <div *ngIf="!showNum || showNum==='06'"
   id="Palette">
   <app-frame-input-palette></app-frame-input-palette>
+  <hr br-tp>
 </div>
 
-<section *ngIf="!showNum || showNum==='07'"
+<div *ngIf="!showNum || showNum==='07'"
+  id="Config">
+  <app-frame-input-config></app-frame-input-config>
+  <hr br-tp>
+</div>
+
+<div *ngIf="!showNum || showNum==='08'"
   id="Api">
   <app-frame-input-api></app-frame-input-api>
   <hr br-tp>
-</section>
+</div>
 
 <br />
 <br />

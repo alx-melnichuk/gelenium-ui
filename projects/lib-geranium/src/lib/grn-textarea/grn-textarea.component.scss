@@ -19,8 +19,7 @@ grn-textarea {
 
   // Textarea
   // The 'gfi-damper' style sets the line height:
-  // - line-height: var(--gfi-line-height);
-  // - where: --gfi-line-height: 1.4375em;
+  // - line-height: var(--gfi-ln-hg);  where: --gfi-ln-hg: 1.4375em;
   // This allows you to automatically change the padding when the font size changes.
   .gt-textarea {
     font-size: inherit;

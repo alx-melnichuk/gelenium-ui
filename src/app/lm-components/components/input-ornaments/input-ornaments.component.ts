@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, NgZone, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {
@@ -11,26 +11,12 @@ import {
   CN_LABEL_UNDERLINE,
 } from 'src/app/constants/labels';
 
-import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/grn-frame-input/grn-frame-input.interface';
-import { Exterior } from 'projects/lib-geranium/src/lib/interfaces/exterior.interface';
-import { FrameSize } from 'projects/lib-geranium/src/lib/interfaces/frame-size.interface';
-import { GRN_FRAME_INPUT_CONFIG } from 'projects/lib-geranium/src/lib/grn-frame-input/grn-frame-input.component';
-
-const grnFrameInputConfigDefault: GrnFrameInputConfig = {
-  // exterior: Exterior.underline,
-  exterior: Exterior.outlined,
-  frameSize: FrameSize.wide,
-  // frameSize: FrameSize.large,
-  // isLabelShrink: true,
-  // hiddenLabel: true,
-};
 @Component({
   selector: 'app-input-ornaments',
   templateUrl: './input-ornaments.component.html',
   styleUrls: ['./input-ornaments.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: GRN_FRAME_INPUT_CONFIG, useValue: grnFrameInputConfigDefault }],
 })
 export class InputOrnamentsComponent {
   @Input()
@@ -51,7 +37,7 @@ export class InputOrnamentsComponent {
   public minLength05 = 4;
   public maxLength05 = 15;
   public controls05 = {
-    input05a: new FormControl('' /*'thirty'*/, []),
+    input05a: new FormControl('thirty', []),
     input05b: new FormControl('thirty', []),
     input05c: new FormControl('one', [Validators.required, Validators.minLength(this.minLength05), Validators.maxLength(this.maxLength05)]),
     input05d: new FormControl('five hundred ninety eight', [

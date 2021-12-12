@@ -44,8 +44,6 @@ export class GrnFrameInputComponent implements OnChanges {
   @Input()
   public isLabelShrink: boolean | null = null;
   @Input()
-  public isOrnament = false;
-  @Input()
   public hiddenLabel: boolean | null = null;
   @Input()
   public isError = false;
@@ -62,7 +60,7 @@ export class GrnFrameInputComponent implements OnChanges {
   @HostBinding('style')
   public get getStyle(): string | null {
     const value = FrameSizeUtil.getValue(this.frameSize);
-    return value != null ? '--gfi-base-size: ' + value + 'px;' : '';
+    return value != null ? '--gfi-size: ' + value + 'px;' : '';
   }
 
   public get isOutlinedExterior(): boolean {
@@ -75,7 +73,7 @@ export class GrnFrameInputComponent implements OnChanges {
     return ExteriorUtil.isStandard(this.exterior);
   }
   public get isLabelShrinkValue(): boolean {
-    return this.isFocused || this.isFilled || this.isLabelShrink || this.isOrnament;
+    return !!(this.isFocused || this.isFilled || this.isLabelShrink);
   }
   public isMouseEnter = false;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -165,7 +163,7 @@ export class GrnFrameInputComponent implements OnChanges {
 
   // ** Private API **
 
-  private createBoolean(value: boolean | null, defaultValue: boolean | undefined): boolean {
-    return value != null ? value : defaultValue != null ? defaultValue : false;
+  private createBoolean(value: boolean | null, defaultValue: boolean | undefined): boolean | null {
+    return value != null ? value : defaultValue != null ? defaultValue : value;
   }
 }

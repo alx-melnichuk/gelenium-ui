@@ -28,14 +28,12 @@ app-frame-input-border-radius {
   --fibr-border-radius: 20;
 
   .fibr-outlined-radius grn-frame-input {
-    --gfi-outlined-border-radius
-      : calc(var(--gfi-base-size)*var(--fibr-border-radius)/100);
-    --gfi-outlined-frm-pd-lf-rg: calc(0.57*var(--gfi-base-size));
+    --gfi-o-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
+    --gfi-o-lgnd-pd: calc(0.57*var(--gfi-size));
   }
 
   .fibr-underline-radius grn-frame-input {
-    --gfi-underline-border-radius
-      : calc(var(--gfi-base-size)*var(--fibr-border-radius)/100);
-    --gfi-underline-frm-pd-lf-rg: calc(0.4*var(--gfi-base-size));
+    --gfi-u-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
+    --gfi-u-lgnd-pd: calc(0.4*var(--gfi-size));
   }
 }

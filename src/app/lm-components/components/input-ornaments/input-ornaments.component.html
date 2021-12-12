@@ -1,5 +1,4 @@
-<section mr-vr
-  *ngIf="false">
+<section mr-vr>
   <h3>Ornaments for the input line.</h3>
   <p>
     It is possible to add a different ornament (picture or text) for the input line.
@@ -30,6 +29,10 @@
 .io-ornament .io-passwd-big .gi-input &#123;
   font-size: 20px;
 &#125;</pre>
+  <p>
+    You can add the "lbShrink" attribute and the legend will be fixed in the title.
+    Nor will the legend descend to the pre-holder position.
+  </p>
 </section>
 
 <section mr-vr>
@@ -56,14 +59,14 @@
       </div>
       <grn-input formControlName="input05a"
         label="Enter the mass"
+        lbShrink
         helperText="The value is greater than zero."
-        lbShrink9="false"
-        exterior9="exterior05">
-        <span grnOrnament9>kg</span>
+        [exterior]="exterior05">
+        <span grnOrnament>kg</span>
       </grn-input>
     </div>
 
-    <!-- <div class="app-elem io-elem">
+    <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnamentEnd".</em>
@@ -71,12 +74,13 @@
       </div>
       <grn-input formControlName="input05b"
         label="Enter the height"
+        lbShrink
         [exterior]="exterior05">
         <span grnOrnamentEnd>см</span>
       </grn-input>
-    </div> -->
+    </div>
 
-    <!-- <div class="app-elem io-elem">
+    <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnament".</em>
@@ -84,6 +88,7 @@
       </div>
       <grn-input formControlName="input05c"
         label="Enter the number in words"
+        lbShrink
         isRequired
         [minLength]="minLength05"
         [maxLength]="maxLength05"
@@ -104,9 +109,9 @@
         )">
         <span grnOrnament>$</span>
       </grn-input>
-    </div> -->
+    </div>
 
-    <!-- <div class="app-elem io-elem">
+    <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnamentEnd".</em>
@@ -114,6 +119,7 @@
       </div>
       <grn-input formControlName="input05d"
         label="Enter the number in words"
+        lbShrink
         isRequired
         [minLength]="minLength05"
         [maxLength]="maxLength05"
@@ -134,17 +140,18 @@
         )">
         <span grnOrnamentEnd>$</span>
       </grn-input>
-    </div> -->
+    </div>
 
-    <!-- <div class="app-elem io-elem">
+    <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnament".</em>
         </small>
       </div>
       <grn-input formControlName="input05e"
-        label="Enter password"
         [type]="isBtnEyeCrossed05e ? 'text':'password'"
+        label="Enter password"
+        lbShrink
         isRequired
         [exterior]="exterior05"
         [helperText]="
@@ -159,9 +166,9 @@
           ]"></span>
         </button>
       </grn-input>
-    </div> -->
+    </div>
 
-    <!-- <div class="app-elem io-elem">
+    <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnamentEnd".</em>
@@ -169,8 +176,9 @@
       </div>
       <grn-input formControlName="input05f"
         [ngClass]="[(!isBtnEyeCrossed05f ?'io-passwd-big':'')]"
-        label="Enter password"
         [type]="isBtnEyeCrossed05f ? 'text':'password'"
+        label="Enter password"
+        lbShrink
         wdFull
         isRequired
         [exterior]="exterior05"
@@ -186,7 +194,7 @@
           ]"></span>
         </button>
       </grn-input>
-    </div> -->
+    </div>
 
   </div>
 
@@ -216,6 +224,7 @@
       &lt;/div&gt;
       &lt;grn-input formControlName="input05a"
         label="Enter the mass"
+        lbShrink
         helperText="The value is greater than zero."
         [exterior]="exterior05"&gt;
         &lt;span grnOrnament&gt;kg&lt;/span&gt;
@@ -230,6 +239,7 @@
       &lt;/div&gt;
       &lt;grn-input formControlName="input05b"
         label="Enter the height"
+        lbShrink
         [exterior]="exterior05"&gt;
         &lt;span grnOrnamentEnd&gt;см&lt;/span&gt;
       &lt;/grn-input&gt;
@@ -243,6 +253,7 @@
       &lt;/div&gt;
       &lt;grn-input formControlName="input05c"
         label="Enter the number in words"
+        lbShrink
         isRequired
         [minLength]="minLength05"
         [maxLength]="maxLength05"
@@ -273,6 +284,7 @@
       &lt;/div&gt;
       &lt;grn-input formControlName="input05d"
         label="Enter the number in words"
+        lbShrink
         isRequired
         [minLength]="minLength05"
         [maxLength]="maxLength05"
@@ -302,8 +314,9 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input05e"
-        label="Enter password"
         [type]="isBtnEyeCrossed05e ? 'text':'password'"
+        label="Enter password"
+        lbShrink
         isRequired
         [exterior]="exterior05"
         [helperText]="
@@ -328,8 +341,9 @@
       &lt;/div&gt;
       &lt;grn-input formControlName="input05f"
         [ngClass]="[(!isBtnEyeCrossed05f ?'io-passwd-big':'')]"
-        label="Enter password"
         [type]="isBtnEyeCrossed05f ? 'text':'password'"
+        label="Enter password"
+        lbShrink
         wdFull
         isRequired
         [exterior]="exterior05"
