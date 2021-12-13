@@ -7,21 +7,21 @@
   , (isDisabled ? 'Grn-disabled': '')
   , (isFocused ? 'Grn-focused': '')
   , (isFilled ? 'Grn-filled': '')
-  , (getClassPalette('plt-clr-', isError, isFocused, isDisabled, isMouseEnter))
+  , ('p-lbl-' + paletteMode(isError, isFocused, isDisabled, isMouseEnter) + '-cl')
 ]"
   [attr.data-shrink]="isLabelShrinkValue"
   [attr.for]="inputId"
   [attr.id]="inputId + '-label'">
   {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
 </label>
-<div [ngClass]="['gfi-frame', 'Grn-palette', 'GrnInputFrame'
-  , (isUnderlineExterior ? getClassPaletteBg('plt-bg-clr-', isError, isFocused, isDisabled, isMouseEnter): '')
-  , 'gfi-frm-' + exterior
-  , (isUnderlineExterior || isStandardExterior ? 'gfi-substrate-frm': '')
-  , (isUnderlineExterior || isStandardExterior ? 'substrate': '')
-  , (isUnderlineExterior || isStandardExterior ? getClassPalette('plt-brd-bt-clr-', isError, isFocused, isDisabled, isMouseEnter): '')
+<div [ngClass]="['gfi-frame', 'Grn-palette', 'GrnInputFrame', 'gfi-frm-' + exterior
+  , (isUnderlineExterior ? ('p-u-' + paletteModeBg(isError, isFocused, isDisabled, isMouseEnter) + '-bg-cl'): '')
+  , (isStandardExterior || isUnderlineExterior ? 'gfi-substrate-frm': '')
+  , (isStandardExterior || isUnderlineExterior ? 'substrate': '')
+  , (isStandardExterior || isUnderlineExterior ? ('p-su-' + paletteMode(isError, isFocused, isDisabled, isMouseEnter) + '-br-cl'): '')
   , (isError ? 'Grn-error': '')
   , (isDisabled ? 'Grn-disabled': '')
+  , (isDisabled ? 'p-inp-dis-cl': '')
   , (isFocused ? 'Grn-focused': '')
 ]">
   <ng-content></ng-content>
@@ -31,7 +31,7 @@
     , (isFocused ? 'Grn-focused': '')
     , (isDisabled ? 'Grn-disabled': '')
     , (isFocused ? 'Grn-focused': '')
-    , (getClassPalette('plt-brd-clr-', isError, isFocused, isDisabled, isMouseEnter))
+    , ('p-o-' + paletteMode(isError, isFocused, isDisabled, isMouseEnter) + '-br-cl')
   ]">
     <legend *ngIf="!hiddenLabel"
       [ngClass]="['gfi-legend'
@@ -49,7 +49,7 @@
   , (isError ? 'Grn-error': '')
   , (isDisabled ? 'Grn-disabled': '')
   , (isFocused ? 'Grn-focused': '')
-  , (getClassForHelperText(isError, isDisabled))
+  , ('p-lbl-' + paletteHelperText(isError, isDisabled) + '-cl')
 ]"
   [attr.id]="inputId + '-helper-text'">
   {{ helperText }}

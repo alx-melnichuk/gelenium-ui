@@ -7,57 +7,103 @@
 @import '../_styles/mx-transform-translate-x-y-scale.scss';
 
 :root {
-  // Form Control:
-  --g-def-cl: rgba(0, 0, 0, 0.87);
-  // error color (.Grn-error)
+  // The color of the label and border on mouse hover.
+  --g-hov-cl: rgba(0, 0, 0, 0.87);
+  // The color of the label and border in an error state.
   --g-err-cl: #d32f2f;
-  --g-err-hov-cl: #ff8950;
-  // Color when there is input focus (.Grn-focused)
+  // The color of the label and border on mouse hover in an error state.
+  --g-hov-err-cl: #ff8950;
+  // The color of the border and label when getting focus.
   --g-foc-cl: #1976d2;
+
   // For "label"
+  // The default color for the label.
   --g-lbl-def-cl: rgba(0, 0, 0, 0.6);
+  // The color of the label and border in the state is disabled.
   --g-lbl-dis-cl: rgba(0, 0, 0, 0.38);
+
   // For "gfi-frm-outlined"
+  // The default border color for "outlined" mode.
   --g-o-def-br-cl: rgba(0, 0, 0, 0.23);
-  // For "gfi-frm-underline"  
+
+  // For "gfi-frm-underline"
+  // The default background color and on error for "underline" mode.
   --g-u-def-bg-cl: rgba(0, 0, 0, 0.06);
+  // The  background color when getting focus for "underline" mode.
   --g-u-foc-bg-cl: rgba(0, 0, 0, 0.04);
+  // The background color on mouse hover for the "underline" mode.
   --g-u-hov-bg-cl: rgba(0, 0, 0, 0.09);
+  // The background color in the state is disabled for the "underline" mode.
   --g-u-dis-bg-cl: rgba(0, 0, 0, 0.12);
+
   // For "gfi-frm-underline" and "gfi-frm-standard"
+  // The default bottom border color for "underline" and "standard" modes.
   --g-su-bef-br-cl: rgba(0, 0, 0, 0.42);
+  // The lower border color in the state is disabled for the "underline" and "standard" modes.
   --g-su-dis-br-cl: rgba(0, 0, 0, 0.32);
 
   .Grn-palette {
-    // Color for "label" and "helperText"
-    .plt-clr-default         { color: var(--g-lbl-def-cl); }
-    .plt-clr-error           { color: var(--g-err-cl);    }
-    .plt-clr-mouse-error     { color: var(--g-err-hov-cl); }
-    .plt-clr-mouse           { color: var(--g-def-cl); }
-    .plt-clr-focused         { color: var(--g-foc-cl);  }
-    .plt-clr-disabled        { color: var(--g-lbl-dis-cl); }
-    // Border-color ("outlined")
-    .plt-brd-clr-default     { border-color: var(--g-o-def-br-cl); }
-    .plt-brd-clr-error       { border-color: var(--g-err-cl); }
-    .plt-brd-clr-mouse-error { border-color: var(--g-err-hov-cl); }
-    .plt-brd-clr-mouse       { border-color: var(--g-def-cl); }
-    .plt-brd-clr-focused     { border-color: var(--g-foc-cl);  }
-    .plt-brd-clr-disabled    { border-color: var(--g-lbl-dis-cl); }
-    // Background-color ("underline")
-    .plt-bg-clr-default      { background-color: var(--g-u-def-bg-cl); }
-    .plt-bg-clr-error        { background-color: var(--g-u-def-bg-cl); }
-    .plt-bg-clr-mouse-error  { background-color: var(--g-u-hov-bg-cl); }
-    .plt-bg-clr-mouse        { background-color: var(--g-u-hov-bg-cl); }
-    .plt-bg-clr-focused      { background-color: var(--g-u-foc-bg-cl); }
-    .plt-bg-clr-disabled     { background-color: var(--g-u-dis-bg-cl); }
-    // For "underline" and "standard"
-    .plt-brd-bt-clr-default:before     { border-bottom-color: var(--g-su-bef-br-cl); }
-    .plt-brd-bt-clr-error:before       { border-bottom-color: var(--g-err-cl); }
-    .plt-brd-bt-clr-error:after        { border-bottom-color: var(--g-err-cl); }
-    .plt-brd-bt-clr-mouse-error:before { border-bottom-color: var(--g-err-hov-cl); }
-    .plt-brd-bt-clr-mouse:before       { border-bottom-color: var(--g-def-cl); }
-    .plt-brd-bt-clr-focused:after      { border-bottom-color: var(--g-foc-cl); }
-    .plt-brd-bt-clr-disabled:before    { border-bottom-color: var(--g-su-dis-br-cl); }
+    // Color for "Input".
+    // The color in state is disabled for an input element.
+    .p-inp-dis-cl        { color: var(--g-lbl-dis-cl); }
+
+    // Color for "label" and "helperText".
+    // The default color for the label and helperText.
+    .p-lbl-def-cl        { color: var(--g-lbl-def-cl); }
+    // The color of the label and helperText in an error state.
+    .p-lbl-err-cl        { color: var(--g-err-cl);     }
+    // The color of the label and helperText on mouse hover in an error state.
+    .p-lbl-hov-err-cl    { color: var(--g-hov-err-cl); }
+    // The color of the label and helperText on mouse hover.
+    .p-lbl-hov-cl        { color: var(--g-hov-cl);     }
+    // The color of the label and helperText when getting focus.
+    .p-lbl-foc-cl        { color: var(--g-foc-cl);     }
+    // The color of the label and helperText in state is disabled.
+    .p-lbl-dis-cl        { color: var(--g-lbl-dis-cl); }
+
+    // Border-color for "outlined" mode.
+    // The default border color for "outlined" mode.
+    .p-o-def-br-cl       { border-color: var(--g-o-def-br-cl); }
+    // The border color in an error state for "outlined" mode.
+    .p-o-err-br-cl       { border-color: var(--g-err-cl);      }
+    // The border color on mouse hover in an error state for "outlined" mode.
+    .p-o-hov-err-br-cl   { border-color: var(--g-hov-err-cl);  }
+    // The border color on mouse hover for "outlined" mode.
+    .p-o-hov-br-cl       { border-color: var(--g-hov-cl);      }
+    // The border color when getting focus for "outlined" mode.
+    .p-o-foc-br-cl       { border-color: var(--g-foc-cl);      }
+    // The border color in state is disabled for "outlined" mode.
+    .p-o-dis-br-cl       { border-color: var(--g-lbl-dis-cl);  }
+
+    // Background-color for "underline" mode.
+    // The default background color for "underline" mode.
+    .p-u-def-bg-cl      { background-color: var(--g-u-def-bg-cl); }
+    // The background color in an error state for "underline" mode.
+    .p-u-err-bg-cl      { background-color: var(--g-u-def-bg-cl); }
+    // The background color on mouse hover in an error state  for "underline" mode.
+    .p-u-hov-err-bg-cl  { background-color: var(--g-u-hov-bg-cl); }
+    // The background color on mouse hover for "underline" mode.
+    .p-u-hov-bg-cl      { background-color: var(--g-u-hov-bg-cl); }
+    // The background color when getting focus for "underline" mode.
+    .p-u-foc-bg-cl      { background-color: var(--g-u-foc-bg-cl); }
+    // The background color in state is disabled for "underline" mode.
+    .p-u-dis-bg-cl      { background-color: var(--g-u-dis-bg-cl); }
+
+    // Border-bottom-color for "underline" and "standard" mode.
+    // The default border bottom color for "standard" and "underline" mode.
+    .p-su-def-br-cl:before     { border-bottom-color: var(--g-su-bef-br-cl); }
+    // The border bottom color in an error state for "standard" and "underline" mode.
+    .p-su-err-br-cl:before     { border-bottom-color: var(--g-err-cl);       }
+    // The border bottom color in an error state for "standard" and "underline" mode.
+    .p-su-err-br-cl:after      { border-bottom-color: var(--g-err-cl);       }
+    // The border bottom color on mouse hover in an error state for "standard" and "underline" mode.
+    .p-su-hov-err-br-cl:before { border-bottom-color: var(--g-hov-err-cl);   }
+    // The border bottom color on mouse hover for "standard" and "underline" mode.
+    .p-su-hov-br-cl:before     { border-bottom-color: var(--g-hov-cl);       }
+    // The border bottom color when getting focus for "standard" and "underline" mode.
+    .p-su-foc-br-cl:after      { border-bottom-color: var(--g-foc-cl);       }
+    // The border bottom color in state is disabled for "standard" and "underline" mode.
+    .p-su-dis-br-cl:before     { border-bottom-color: var(--g-su-dis-br-cl); }
   }
 }
 
@@ -287,10 +333,6 @@ grn-frame-input { //outline: 1px dashed crimson;
     text-align: left;
     margin-top: 3px;
     margin-bottom: 0;
-    &.gfi-hlp-standard {
-      margin-right: 0;
-      margin-left: 0;
-    }
     &.gfi-hlp-outlined {
       margin-right: var(--gfi-o-lgnd-pd);
       margin-left: var(--gfi-o-lgnd-pd);

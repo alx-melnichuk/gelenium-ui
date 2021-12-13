@@ -274,16 +274,6 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
     this.keyupData.emit(event);
   }
 
-  public getClassForHelperText(isError: boolean, isDisabled: boolean): string {
-    let result = 'plt-clr-default';
-    if (isError) {
-      result = 'plt-clr-error';
-    } else if (isDisabled) {
-      result = 'plt-clr-disabled';
-    }
-    return result;
-  }
-
   // ** Private API **
 
   private prepareFormGroup(isRequiredVal: boolean, minLength: number | null, maxLength: number | null): void {

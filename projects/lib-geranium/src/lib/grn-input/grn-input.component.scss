@@ -43,10 +43,6 @@ grn-input {    // # outline: 1px dashed green;
     &:focus {
       outline: 0;
     }
-    &.Grn-disabled {
-      opacity: 1;
-      -webkit-text-fill-color: rgba(0, 0, 0, 0.38);
-    }
   }
 
   // Input content "ornament"

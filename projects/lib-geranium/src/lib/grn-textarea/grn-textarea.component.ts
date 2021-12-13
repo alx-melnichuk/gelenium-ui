@@ -112,7 +112,6 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   public isRequiredVal = false; // Binding attribute "isRequired".
   public isDisabledVal = false; // Binding attribute "isDisabled".
   public isLabelShrink: boolean | null = null; // Binding attribute "lbShrink".
-  public isOrnament = false;
   public frameSizeVal: FrameSize | null = null;
   public isHiddenLabel: boolean | null = null; // Binding attribute "hiddenLabel".
   public isErrorVal = false; // Binding attribute "isError".
@@ -267,16 +266,6 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
 
   public doKeyup(event: KeyboardEvent): void {
     this.keyupData.emit(event);
-  }
-
-  public getClassForHelperText(isError: boolean, isDisabled: boolean): string {
-    let result = 'plt-clr-default';
-    if (isError) {
-      result = 'plt-clr-error';
-    } else if (isDisabled) {
-      result = 'plt-clr-disabled';
-    }
-    return result;
   }
 
   // ** Private API **

@@ -111,52 +111,52 @@ export class GrnFrameInputComponent implements OnChanges {
 
   // ** Public API **
 
-  public getClassPalette(prefix: string, isError: boolean, isFocused: boolean, isDisabled: boolean, isMouseEnter: boolean): string {
-    let result = 'default';
+  public paletteMode(isError: boolean, isFocused: boolean, isDisabled: boolean, isMouseEnter: boolean): string {
+    let result = 'def';
     if (isError) {
-      result = 'error';
+      result = 'err';
       if (isMouseEnter && !isFocused && !isDisabled) {
-        result = 'mouse-error';
+        result = 'hov-err';
       }
     } else {
       if (isFocused) {
-        result = 'focused';
+        result = 'foc';
       } else if (isDisabled) {
-        result = 'disabled';
+        result = 'dis';
       } else if (isMouseEnter) {
-        result = 'mouse';
+        result = 'hov';
       }
     }
-    return prefix + result;
+    return result;
   }
 
-  public getClassPaletteBg(prefix: string, isError: boolean, isFocused: boolean, isDisabled: boolean, isMouseEnter: boolean): string {
-    let result = 'default';
+  public paletteModeBg(isError: boolean, isFocused: boolean, isDisabled: boolean, isMouseEnter: boolean): string {
+    let result = 'def';
     if (isError) {
-      result = 'error';
+      result = 'err';
       if (isMouseEnter && !isFocused && !isDisabled) {
-        result = 'mouse-error';
+        result = 'hov-err';
       } else if (isDisabled) {
-        result = 'disabled';
+        result = 'dis';
       }
     } else {
       if (isFocused) {
-        result = 'focused';
+        result = 'foc';
       } else if (isDisabled) {
-        result = 'disabled';
+        result = 'dis';
       } else if (isMouseEnter) {
-        result = 'mouse';
+        result = 'hov';
       }
     }
-    return prefix + result;
+    return result;
   }
 
-  public getClassForHelperText(isError: boolean, isDisabled: boolean): string {
-    let result = 'plt-clr-default';
+  public paletteHelperText(isError: boolean, isDisabled: boolean): string {
+    let result = 'def';
     if (isError) {
-      result = 'plt-clr-error';
+      result = 'err';
     } else if (isDisabled) {
-      result = 'plt-clr-disabled';
+      result = 'dis';
     }
     return result;
   }

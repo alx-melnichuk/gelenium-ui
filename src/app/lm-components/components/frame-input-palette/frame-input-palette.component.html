@@ -6,78 +6,86 @@
   </p>
   <pre>
 // Let's create our own color palette.
-.fip-customization .Grn-palette &#123;
-// The default border color.
---fip-default-color: #00acc1;
-// Border and label color on error.
---fip-error-color: #ad1457;
-// Border and label color on error and mouse hover.
---fip-error-hover-color: #f06292;
-// The color of the frame and label when receiving focus.
---fip-focused-color: #0097a7;
+.fip-specific .Grn-palette &#123;
+  // The default border color.
+  --fip-default-color: #00acc1;
+  // Border and label color on error.
+  --fip-error-color: #ad1457;
+  // Border and label color on error and mouse hover.
+  --fip-error-hover-color: #f06292;
+  // The color of the frame and label when receiving focus.
+  --fip-focused-color: #0097a7;
 
-// The default color for the label.
---fip-label-default-color: #5c6bc0;
-// The color of the label if the element is disabled.
---fip-label-disabled-color: #9c27b0;
+  // The default color for the label.
+  --fip-label-default-color: #5c6bc0;
+  // The color of the label if the element is disabled.
+  --fip-label-disabled-color: #9c27b0;
 
-// For the exterior "Outlined":
-// The default border color.
---fip-outlined-default-brd-color: #5c6bc0;
+  // For the exterior "Outlined":
+  // The default border color.
+  --fip-outlined-default-brd-color: #5c6bc0;
 
-// For the exterior "Underline":
-// Default background color.
---fip-underline-default-bg-color: rgba(178, 235, 242, 0.6);
-// The background color when receiving focus.
---fip-underline-focused-bg-color: rgba(178, 235, 242, 0.4);
-// The background color when the element is disabled.
---fip-underline-disabled-bg-color: rgba(178, 235, 242, 0.2);
+  // For the exterior "Underline":
+  // Default background color.
+  --fip-underline-default-bg-color: rgba(178, 235, 242, 0.6);
+  // The background color when receiving focus.
+  --fip-underline-focused-bg-color: rgba(178, 235, 242, 0.4);
+  // The background color when the element is disabled.
+  --fip-underline-disabled-bg-color: rgba(178, 235, 242, 0.2);
 
-// For the exterior "Underline" and "Standard":
-// The default bottom border color.
---fip-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
+  // For the exterior "Underline" and "Standard":
+  // The default bottom border color.
+  --fip-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
 &#125;</pre>
   <p>
     All the CSS classes that define the colors of the input element are children of the
     "Grn-palette" CSS classes.
-    Add a custom "fip-customization" CSS class to define our colors.
+    Add a custom "fip-specific" CSS class to define our colors.
   </p>
   <p>
     To replace the color of the label, we define a group of CSS classes.
   </p>
   <pre>
 // Default color of the label.
-.fip-customization .Grn-palette .plt-clr-default
+.fip-specific .Grn-palette .p-lbl-def-cl
 &#123; color: var(--fip-label-default-color); &#125;
 // The color of the label on error.
-.fip-customization .Grn-palette .plt-clr-error
+.fip-specific .Grn-palette .p-lbl-err-cl
 &#123; color: var(--fip-error-color); &#125;
 // The color of the label on mouse over and on error.
-.fip-customization .Grn-palette .plt-clr-mouse-error
+.fip-specific .Grn-palette .p-lbl-hov-err-cl
 &#123; color: var(--fip-error-hover-color); &#125;
 // The color of the label on mouse hover.
-.fip-customization .Grn-palette .plt-clr-mouse
+.fip-specific .Grn-palette .p-lbl-hov-cl
 &#123; color: var(--fip-default-color); &#125;
 // The color of the label when the input element receives focus.
-.fip-customization .Grn-palette .plt-clr-focused
+.fip-specific .Grn-palette .p-lbl-foc-cl
 &#123; color: var(--fip-focused-color); &#125;
 // The color of the label when the input element is disabled.
-.fip-customization .Grn-palette .plt-clr-disabled
+.fip-specific .Grn-palette .p-lbl-dis-cl
 &#123; color: var(--fip-label-disabled-color); &#125;</pre>
   <p>
     Likewise to replace the "Outlined" border color define a group of CSS classes.
   </p>
   <pre>
-.fip-customization .Grn-palette .plt-brd-clr-XXX
+.fip-specific .Grn-palette .p-o-XXX-br-cl
 &#123; border-color: var(--fip-outlined-default-brd-color); &#125;</pre>
   <p>
-    Where XXX - take the values from the previous example.
+    Where XXX - take the following values:
   </p>
+  <ul>
+    <li><code>def</code> - The default border color.</li>
+    <li><code>err</code> - The border color in an error state.</li>
+    <li><code>hov-err</code> - The border color on mouse hover in an error state.</li>
+    <li><code>hov</code> - The border color on mouse hover</li>
+    <li><code>foc</code> - The border color when getting focus.</li>
+    <li><code>dis</code> - The border color in state is disabled.</li>
+  </ul>
   <p>
     Likewise, to replace the "Underline" background color, define a group of CSS classes.
   </p>
   <pre>
-.fip-customization .Grn-palette .plt-bg-clr-XXX
+.fip-specific .Grn-palette .p-u-XXX-bg-cl
 &#123; background-color: var(--fip-underline-default-bg-color); &#125;</pre>
   <p>
     Where XXX - take the values from the previous example.
@@ -86,7 +94,7 @@
     Likewise, to replace the "Underline" and "Standard" colors, define a group of CSS classes.
   </p>
   <pre>
-.fip-customization .Grn-palette .plt-brd-bt-clr-XXX:before 
+.fip-specific .Grn-palette .p-su-XXX-br-cl:before 
 &#123; border-bottom-color: var(--fip-substrate-before-brd-color); &#125;</pre>
   <p>
     Where XXX - take the values from the previous example.
@@ -113,7 +121,7 @@
   autocomplete="off">
 
   <div>
-    <div class="app-group fip-customization">
+    <div class="app-group fip-specific">
 
       <div class="app-elem">
         <div>
@@ -293,7 +301,7 @@
   autocomplete="off"&gt;
 
   &lt;div&gt;
-    &lt;div class="app-group fip-customization"&gt;
+    &lt;div class="app-group fip-specific"&gt;
 
       &lt;div class="app-elem"&gt;
         &lt;div&gt;
@@ -499,7 +507,7 @@ export class FrameInputComponent &#123;
   min-width: 26ch;
   margin: 10px 10px;
 &#125;
-.fip-customization .Grn-palette &#123;
+.fip-specific .Grn-palette &#123;
   --fip-default-color: #00acc1;
   --fip-error-color: #ad1457;
   --fip-error-hover-color: #f06292;
@@ -517,82 +525,82 @@ export class FrameInputComponent &#123;
   --fip-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
 &#125;
 
-.fip-customization .Grn-palette .plt-clr-default &#123;
+.fip-specific .Grn-palette .p-lbl-def-cl &#123;
   color: var(--fip-label-default-color);
 &#125;
-.fip-customization .Grn-palette .plt-clr-error &#123;
+.fip-specific .Grn-palette .p-lbl-err-cl &#123;
   color: var(--fip-error-color);
 &#125;
-.fip-customization .Grn-palette .plt-clr-mouse-error &#123;
+.fip-specific .Grn-palette .p-lbl-hov-err-cl &#123;
   color: var(--fip-error-hover-color);
 &#125;
-.fip-customization .Grn-palette .plt-clr-mouse &#123;
+.fip-specific .Grn-palette .p-lbl-hov-cl &#123;
   color: var(--fip-default-color);
 &#125;
-.fip-customization .Grn-palette .plt-clr-focused &#123;
+.fip-specific .Grn-palette .p-lbl-foc-cl &#123;
   color: var(--fip-focused-color);
 &#125;
-.fip-customization .Grn-palette .plt-clr-disabled &#123;
+.fip-specific .Grn-palette .p-lbl-dis-cl &#123;
   color: var(--fip-label-disabled-color);
 &#125;
 
-.fip-customization .Grn-palette .plt-brd-clr-default &#123;
+.fip-specific .Grn-palette .p-o-def-br-cl &#123;
   border-color: var(--fip-outlined-default-brd-color);
 &#125;
-.fip-customization .Grn-palette .plt-brd-clr-error &#123;
+.fip-specific .Grn-palette .p-o-err-br-cl &#123;
   border-color: var(--fip-error-color);
 &#125;
-.fip-customization .Grn-palette .plt-brd-clr-mouse-error &#123;
+.fip-specific .Grn-palette .p-o-hov-err-br-cl &#123;
   border-color: var(--fip-error-hover-color);
 &#125;
-.fip-customization .Grn-palette .plt-brd-clr-mouse &#123;
+.fip-specific .Grn-palette .p-o-hov-br-cl &#123;
   border-color: var(--fip-default-color);
 &#125;
-.fip-customization .Grn-palette .plt-brd-clr-focused &#123;
+.fip-specific .Grn-palette .p-o-foc-br-cl &#123;
   border-color: var(--fip-focused-color);
 &#125;
-.fip-customization .Grn-palette .plt-brd-clr-disabled &#123;
+.fip-specific .Grn-palette .p-o-dis-br-cl &#123;
   border-color: var(--fip-label-disabled-color);
 &#125;
 
-.fip-customization .Grn-palette .plt-bg-clr-default &#123;
+.fip-specific .Grn-palette .p-u-def-bg-cl &#123;
   background-color: var(--fip-underline-default-bg-color);
 &#125;
-.fip-customization .Grn-palette .plt-bg-clr-error &#123;
+.fip-specific .Grn-palette .p-u-err-bg-cl &#123;
   background-color: var(--fip-underline-default-bg-color);
 &#125;
-.fip-customization .Grn-palette .plt-bg-clr-mouse-error &#123;
+.fip-specific .Grn-palette .p-u-hov-err-bg-cl &#123;
   background-color: var(--fip-underline-focused-bg-color);
 &#125;
-.fip-customization .Grn-palette .plt-bg-clr-mouse &#123;
+.fip-specific .Grn-palette .p-u-hov-bg-cl &#123;
   background-color: var(--fip-underline-focused-bg-color);
 &#125;
-.fip-customization .Grn-palette .plt-bg-clr-focused &#123;
+.fip-specific .Grn-palette .p-u-foc-bg-cl &#123;
   background-color: var(--fip-underline-focused-bg-color);
 &#125;
-.fip-customization .Grn-palette .plt-bg-clr-disabled &#123;
+.fip-specific .Grn-palette .p-u-dis-bg-cl &#123;
   background-color: var(--fip-underline-disabled-bg-color);
 &#125;
 
-.fip-customization .Grn-palette .plt-brd-bt-clr-default:before &#123;
+.fip-specific .Grn-palette .p-su-def-br-cl:before &#123;
   border-bottom-color: var(--fip-substrate-before-brd-color);
 &#125;
-.fip-customization .Grn-palette .plt-brd-bt-clr-error:before &#123;
+.fip-specific .Grn-palette .p-su-err-br-cl:before &#123;
   border-bottom-color: var(--fip-error-color);
 &#125;
-.fip-customization .Grn-palette .plt-brd-bt-clr-error:after &#123;
+.fip-specific .Grn-palette .p-su-err-br-cl:after &#123;
   border-bottom-color: var(--fip-error-color);
 &#125;
-.fip-customization .Grn-palette .plt-brd-bt-clr-mouse-error:before &#123;
+.fip-specific .Grn-palette .p-su-hov-err-br-cl:before &#123;
   border-bottom-color: var(--fip-error-hover-color);
 &#125;
-.fip-customization .Grn-palette .plt-brd-bt-clr-mouse:before &#123;
+.fip-specific .Grn-palette .p-su-hov-br-cl:before &#123;
   border-bottom-color: var(--fip-default-color);
 &#125;
-.fip-customization .Grn-palette .plt-brd-bt-clr-focused:after &#123;
+.fip-specific .Grn-palette .p-su-foc-br-cl:after &#123;
   border-bottom-color: var(--fip-focused-color);
 &#125;
-.fip-customization .Grn-palette .plt-brd-bt-clr-disabled:before &#123;
+.fip-specific .Grn-palette .p-su-dis-br-cl:before &#123;
   border-bottom-color: var(--fip-substrate-before-brd-color);
 &#125;
 
@@ -603,20 +611,20 @@ export class FrameInputComponent &#123;
 &#125;
 .fip-bstrap .Grn-palette &#123;
   --g-err-cl: #dc3545;
-  --g-err-hov-cl: #dc3545;
+  --g-hov-err-cl: #dc3545;
   --g-foc-cl: #80bdff;
   --g-o-def-br-cl: #ced4da;
 &#125;
-.fip-bstrap .Grn-palette .plt-brd-clr-mouse &#123;
+.fip-bstrap .Grn-palette .p-o-hov-br-cl &#123;
   border-color: var(--g-o-def-br-cl);
 &#125;
 .fip-bstrap .gfi-outlined-fieldset.Grn-focused &#123;
   border-width: 1px;
 &#125;
-.fip-bstrap .gfi-outlined-fieldset.Grn-focused.plt-brd-clr-error &#123;
+.fip-bstrap .gfi-outlined-fieldset.Grn-focused.p-o-err-br-cl &#123;
   box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
 &#125;
-.fip-bstrap .gfi-outlined-fieldset.Grn-focused:not(.plt-brd-clr-error) &#123;
+.fip-bstrap .gfi-outlined-fieldset.Grn-focused:not(.p-o-err-br-cl) &#123;
   box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
 &#125;
 .fip-bstrap .gfi-frm-outlined.Grn-disabled &#123;
