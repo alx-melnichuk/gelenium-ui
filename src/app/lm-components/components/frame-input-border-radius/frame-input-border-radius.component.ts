@@ -50,6 +50,19 @@ export class FrameInputBorderRadiusComponent {
   public borderRadius = 50;
   public urlFrameInput = '/' + URL_ROOT + '/' + URL_FRAME_INPUT;
 
+  public formGroup06: FormGroup = new FormGroup({
+    input06a: new FormControl('Demo - A', []),
+    input06b: new FormControl('Demo - B', []),
+    input06c: new FormControl('Demo - C', []),
+    input06d: new FormControl('Demo - D', []),
+    input06e: new FormControl('Demo - E', []),
+    input06f: new FormControl('Demo - F', []),
+    input06h: new FormControl('Demo - H', []),
+    input06i: new FormControl('Demo - I', []),
+    input06j: new FormControl('Demo - J', []),
+    input06k: new FormControl('Demo - K', []),
+    input06l: new FormControl('Demo - L', []),
+  });
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 

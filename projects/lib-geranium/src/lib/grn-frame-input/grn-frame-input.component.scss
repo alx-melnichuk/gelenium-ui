@@ -38,7 +38,7 @@
 
   // For "gfi-frm-underline" and "gfi-frm-standard"
   // The default bottom border color for "underline" and "standard" modes.
-  --g-su-bef-br-cl: rgba(0, 0, 0, 0.42);
+  --g-su-def-br-cl: rgba(0, 0, 0, 0.42);
   // The lower border color in the state is disabled for the "underline" and "standard" modes.
   --g-su-dis-br-cl: rgba(0, 0, 0, 0.32);
 
@@ -91,7 +91,7 @@
 
     // Border-bottom-color for "underline" and "standard" mode.
     // The default border bottom color for "standard" and "underline" mode.
-    .p-su-def-br-cl:before     { border-bottom-color: var(--g-su-bef-br-cl); }
+    .p-su-def-br-cl:before     { border-bottom-color: var(--g-su-def-br-cl); }
     // The border bottom color in an error state for "standard" and "underline" mode.
     .p-su-err-br-cl:before     { border-bottom-color: var(--g-err-cl);       }
     // The border bottom color in an error state for "standard" and "underline" mode.
@@ -108,21 +108,38 @@
 }
 
 grn-frame-input { //outline: 1px dashed crimson;
+  // The value of the "line height" parameter for the input element.
   --gfi-ln-hg: 1.4375em;
+  // The value of the size of the border of the frame.
   --gfi-br-wd: 1px;
-  --gfi-lgnd-pd: 0.6ex; // 4.7px     0.6ex=3.8px  0.56ex=3.55px  // vert
 
+  // For "outlined" mode.
+  // Small indentation of the legend from the border for "outlined" mode.
+  --gfi-o-lgn-pd: 0.6ex;
+  // Determines the x transform value at the shrink position (top) for "outlined" mode.
+  --gfi-o-lgn-tr-x: calc(-0.36*var(--gfi-ln-hg));
+  // The value of the radius of the rounding of the border for "outlined" mode.
   --gfi-o-br-rd: calc(var(--gfi-size)/10);
-  --gfi-o-lgnd-wd: calc(133% - 1.5em);
-  --gfi-o-lgnd-wd-2: calc(100% - 1.5em);
-  --gfi-o-lgnd-pd: calc(0.25*var(--gfi-size)); // 14
-  --gfi-o-lgnd-pd-2: calc(0.25*var(--gfi-size)); // 14
+  // Max width of the label in a shrink position (in the top) for "outlined" mode.
+  --gfi-o-lbl-wd: calc(133% - 1.5em);
+  // Max width of the label in the unshrink position (in the middle) for "outline" mode.
+  --gfi-o-lbl-wd-2: calc(100% - 1.5em);
+  // Left padding of the label in a shrink position (in the top) for "outlined" mode.
+  --gfi-o-lbl-pd: calc(0.25*var(--gfi-size));
+  // Left padding of the label in the unshrink position (in the middle) for "outline" mode.
+  --gfi-o-lbl-pd-2: calc(0.25*var(--gfi-size));
 
-  --gfi-u-br-rd: calc(var(--gfi-size)/10);
-  --gfi-u-lgnd-wd: calc(133% - 1.5em);
-  --gfi-u-lgnd-wd-2: calc(100% - 1.5em);
-  --gfi-u-lgnd-pd: calc(0.214285714*var(--gfi-size)); // 12px;
-  --gfi-u-lgnd-pd-2: calc(0.214285714*var(--gfi-size)); // 12px;
+  // For "underline" mode.
+  // The value of the radius of the rounding of the border for "underline" mode.
+  --gfi-u-br-rd: calc(var(--gfi-size)/10) calc(var(--gfi-size)/10) 0 0;
+  // Max width of the label in a shrink position (in the top) for "underline" mode.
+  --gfi-u-lbl-wd: calc(133% - 1.5em);
+  // Max width of the label in the unshrink position (in the middle) for "underline" mode.
+  --gfi-u-lbl-wd-2: calc(100% - 1.5em);
+  // Left padding of the label in a shrink position (in the top) for "underline" mode.
+  --gfi-u-lbl-pd: calc(0.214285714*var(--gfi-size));
+  // Left padding of the label in the unshrink position (in the middle) for "underline" mode.
+  --gfi-u-lbl-pd-2: calc(0.214285714*var(--gfi-size));
 
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
@@ -154,24 +171,24 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
   .gfi-lbl-outlined {
     &.gfi-lbl-shrink {
-      max-width: var(--gfi-o-lgnd-wd); // # calc(133% - 24px)
-      @include mxTransformTranslateXYScale(var(--gfi-o-lgnd-pd), calc(-0.4*var(--gfi-ln-hg)), 0.75); // # (14px, -9px, 0.75)
+      max-width: var(--gfi-o-lbl-wd); // # calc(133% - 24px)
+      @include mxTransformTranslateXYScale(var(--gfi-o-lbl-pd), var(--gfi-o-lgn-tr-x), 0.75); // # (14px, -9px, 0.75)
     }
     &:not(.gfi-lbl-shrink) {
-      max-width: var(--gfi-o-lgnd-wd-2); // # calc(100% - 24px)
-      @include mxTransformTranslateXYScale(var(--gfi-o-lgnd-pd-2), calc((var(--gfi-size) - var(--gfi-ln-hg))/2), 1); // # (14px, 16.5px, 1)
+      max-width: var(--gfi-o-lbl-wd-2); // # calc(100% - 24px)
+      @include mxTransformTranslateXYScale(var(--gfi-o-lbl-pd-2), calc((var(--gfi-size) - var(--gfi-ln-hg))/2), 1); // # (14px, 16.5px, 1)
     }
   }  
   .gfi-lbl-underline {
     &.gfi-lbl-shrink {
-      max-width: var(--gfi-u-lgnd-wd); // # calc(133% - 24px)
-      @include mxTransformTranslateXYScale(var(--gfi-u-lgnd-pd)
+      max-width: var(--gfi-u-lbl-wd); // # calc(133% - 24px)
+      @include mxTransformTranslateXYScale(var(--gfi-u-lbl-pd)
         , calc(((var(--gfi-size) - var(--gfi-ln-hg))*0.757524 - var(--gfi-ln-hg)*0.5)*0.45 )
         , 0.75); // # 12px, 6.07px, 0.75  // # (12px, 7px, 0.75) original
     }
     &:not(.gfi-lbl-shrink) {
-      max-width: var(--gfi-u-lgnd-wd-2); // # calc(100% - 24px)
-      @include mxTransformTranslateXYScale(var(--gfi-u-lgnd-pd-2), calc((var(--gfi-size) - var(--gfi-ln-hg))/2), 1); // # 12px, 16.5px, 1
+      max-width: var(--gfi-u-lbl-wd-2); // # calc(100% - 24px)
+      @include mxTransformTranslateXYScale(var(--gfi-u-lbl-pd-2), calc((var(--gfi-size) - var(--gfi-ln-hg))/2), 1); // # 12px, 16.5px, 1
     }
   }
   .gfi-lbl-standard {
@@ -207,27 +224,26 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
   
   .gfi-frm-outlined {
-    padding: 0px var(--gfi-o-lgnd-pd); // # top/bottom: 0px right/left: 14px;
+    padding: 0px var(--gfi-o-lbl-pd); // # top/bottom: 0px right/left: 14px;
     &>.gfi-molding {
-      margin-top: calc((var(--gfi-size) - var(--gfi-ln-hg))/2); // # 16.5px;
-      margin-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))/2); // # 16.5px;
+      padding-top: calc((var(--gfi-size) - var(--gfi-ln-hg))/2); // # 16.5px;
+      padding-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))/2); // # 16.5px;
     }
   }
   .gfi-frm-underline {
-    border-top-left-radius: var(--gfi-u-br-rd);
-    border-top-right-radius: var(--gfi-u-br-rd);
+    border-radius: var(--gfi-u-br-rd);
     -webkit-transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    padding: 0px var(--gfi-u-lgnd-pd); // # top/bottom: 0px, right/left: 12px;
+    padding: 0px var(--gfi-u-lbl-pd); // # top/bottom: 0px, right/left: 12px;
     &>.gfi-molding {
-      margin-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75); // # 24.75px;
-      margin-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.25); // # 8.25px;
+      padding-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75); // # 24.75px;
+      padding-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.25); // # 8.25px;
     }
   }
   .gfi-frm-standard {
     &>.gfi-molding {
-      margin-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75); // # 24.75px;
-      margin-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.25); // # 8.25px;
+      padding-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75); // # 24.75px;
+      padding-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.25); // # 8.25px;
     }
   }
 
@@ -279,7 +295,7 @@ grn-frame-input { //outline: 1px dashed crimson;
     top: 0;
     left: 0;
     margin: 0;
-    padding: 0px calc(var(--gfi-o-lgnd-pd) - var(--gfi-lgnd-pd) - 0.4px); // (14px - 4,4px)=9,6px;
+    padding: 0px calc(var(--gfi-o-lbl-pd) - var(--gfi-o-lgn-pd) - 0.4px); // (14px - 4,4px)=9,6px;
     pointer-events: none;
     border-radius: var(--gfi-o-br-rd);
     border-style: solid;
@@ -312,7 +328,7 @@ grn-frame-input { //outline: 1px dashed crimson;
       -webkit-transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
       transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
       &.gfi-lgnd-indent {
-        padding: 0 var(--gfi-lgnd-pd);
+        padding: 0 var(--gfi-o-lgn-pd);
       }
     }
   }
@@ -334,12 +350,12 @@ grn-frame-input { //outline: 1px dashed crimson;
     margin-top: 3px;
     margin-bottom: 0;
     &.gfi-hlp-outlined {
-      margin-right: var(--gfi-o-lgnd-pd);
-      margin-left: var(--gfi-o-lgnd-pd);
+      margin-right: var(--gfi-o-lbl-pd);
+      margin-left: var(--gfi-o-lbl-pd);
     }
     &.gfi-hlp-underline {
-      margin-right: var(--gfi-u-lgnd-pd);
-      margin-left: var(--gfi-u-lgnd-pd);
+      margin-right: var(--gfi-u-lbl-pd);
+      margin-left: var(--gfi-u-lbl-pd);
     }
   }
 }
