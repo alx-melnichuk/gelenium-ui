@@ -4,7 +4,7 @@
     You can customize the color palette for the input element.
     To avoid duplicating color codes, we will use the following CSS variables:
   </p>
-  <pre>
+  <code><pre>
 // Let's create our own color palette.
 .fip-specific .Grn-palette &#123;
   // The default border color.
@@ -36,7 +36,7 @@
   // For the exterior "Underline" and "Standard":
   // The default bottom border color.
   --fip-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
-&#125;</pre>
+&#125;</pre></code>
   <p>
     All the CSS classes that define the colors of the input element are children of the
     "Grn-palette" CSS classes.
@@ -45,7 +45,7 @@
   <p>
     To replace the color of the label, we define a group of CSS classes.
   </p>
-  <pre>
+  <code><pre>
 // Default color of the label.
 .fip-specific .Grn-palette .p-lbl-def-cl
 &#123; color: var(--fip-label-default-color); &#125;
@@ -63,13 +63,13 @@
 &#123; color: var(--fip-focused-color); &#125;
 // The color of the label when the input element is disabled.
 .fip-specific .Grn-palette .p-lbl-dis-cl
-&#123; color: var(--fip-label-disabled-color); &#125;</pre>
+&#123; color: var(--fip-label-disabled-color); &#125;</pre></code>
   <p>
     Likewise to replace the "Outlined" border color define a group of CSS classes.
   </p>
-  <pre>
+  <code><pre>
 .fip-specific .Grn-palette .p-o-XXX-br-cl
-&#123; border-color: var(--fip-outlined-default-brd-color); &#125;</pre>
+&#123; border-color: var(--fip-outlined-default-brd-color); &#125;</pre></code>
   <p>
     Where XXX - take the following values:
   </p>
@@ -84,18 +84,18 @@
   <p>
     Likewise, to replace the "Underline" background color, define a group of CSS classes.
   </p>
-  <pre>
+  <code><pre>
 .fip-specific .Grn-palette .p-u-XXX-bg-cl
-&#123; background-color: var(--fip-underline-default-bg-color); &#125;</pre>
+&#123; background-color: var(--fip-underline-default-bg-color); &#125;</pre></code>
   <p>
     Where XXX - take the values from the previous example.
   </p>
   <p>
     Likewise, to replace the "Underline" and "Standard" colors, define a group of CSS classes.
   </p>
-  <pre>
+  <code><pre>
 .fip-specific .Grn-palette .p-su-XXX-br-cl:before 
-&#123; border-bottom-color: var(--fip-substrate-before-brd-color); &#125;</pre>
+&#123; border-bottom-color: var(--fip-substrate-before-brd-color); &#125;</pre></code>
   <p>
     Where XXX - take the values from the previous example.
   </p>
@@ -295,7 +295,7 @@
       </mat-expansion-panel-header>
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
-          <pre source="html">
+          <code><pre source="html">
 &lt;form [formGroup]="formGroup06"
   novalidate
   autocomplete="off"&gt;
@@ -465,10 +465,10 @@
 
   &lt;/div&gt;
 
-&lt;/form&gt;</pre>
+&lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
-          <pre source="ts">
+          <code><pre source="ts">
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
@@ -499,10 +499,10 @@ export class FrameInputComponent &#123;
   &#125;;
   public formGroup06: FormGroup = new FormGroup(this.controls06);
   public exterior06 = 'outlined';
-&#125;</pre>
+&#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
-          <pre source="css">
+          <code><pre source="css">
 .app-group &#123;
   display: flex;
   flex-wrap: wrap;
@@ -647,7 +647,7 @@ export class FrameInputComponent &#123;
   background-repeat: no-repeat;
   background-position: right center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-&#125;</pre>
+&#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
     </mat-expansion-panel>

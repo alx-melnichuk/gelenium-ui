@@ -44,19 +44,4 @@ grn-input {    // # outline: 1px dashed green;
       outline: 0;
     }
   }
-
-  // Input content "ornament"
-  .gi-ornament,
-  .gi-ornament-end {
-    display: inline-block;
-    height: 0.01em;
-    max-height: inherit;
-    white-space: nowrap;
-  }
-  .gi-ornament>:last-of-type {
-    margin-right: 8px;
-  }
-  .gi-ornament-end>:first-of-type {
-    margin-left: 8px;
-  }
 }

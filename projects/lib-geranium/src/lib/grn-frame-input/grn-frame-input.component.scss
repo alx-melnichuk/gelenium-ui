@@ -107,7 +107,7 @@
   }
 }
 
-grn-frame-input { //outline: 1px dashed crimson;
+grn-frame-input { //outline: 1px dashed crimson; 
   // The value of the "line height" parameter for the input element.
   --gfi-ln-hg: 1.4375em;
   // The value of the size of the border of the frame.
@@ -120,26 +120,35 @@ grn-frame-input { //outline: 1px dashed crimson;
   --gfi-o-lgn-tr-x: calc(-0.36*var(--gfi-ln-hg));
   // The value of the radius of the rounding of the border for "outlined" mode.
   --gfi-o-br-rd: calc(var(--gfi-size)/10);
-  // Max width of the label in a shrink position (in the top) for "outlined" mode.
-  --gfi-o-lbl-wd: calc(133% - 1.5em);
-  // Max width of the label in the unshrink position (in the middle) for "outline" mode.
-  --gfi-o-lbl-wd-2: calc(100% - 1.5em);
+
   // Left padding of the label in a shrink position (in the top) for "outlined" mode.
   --gfi-o-lbl-pd: calc(0.25*var(--gfi-size));
   // Left padding of the label in the unshrink position (in the middle) for "outline" mode.
-  --gfi-o-lbl-pd-2: calc(0.25*var(--gfi-size));
+  --gfi-o-lbl2-pd-lf: calc(0.25*var(--gfi-size));
+  // Right padding of the label in the unshrink position (in the middle) for "outline" mode.
+  --gfi-o-lbl2-pd-rg: calc(0.174*var(--gfi-size));
+
+  // Max width of the label in a shrink position (in the top) for "outlined" mode.
+  --gfi-o-lbl-wd: calc(133% - 2.66*var(--gfi-o-lbl-pd));
+  // Max width of the label in the unshrink position (in the middle) for "outline" mode.
+  --gfi-o-lbl2-wd: calc(100% - var(--gfi-o-lbl2-pd-lf) - var(--gfi-o-lbl2-pd-rg));
 
   // For "underline" mode.
   // The value of the radius of the rounding of the border for "underline" mode.
   --gfi-u-br-rd: calc(var(--gfi-size)/10) calc(var(--gfi-size)/10) 0 0;
-  // Max width of the label in a shrink position (in the top) for "underline" mode.
-  --gfi-u-lbl-wd: calc(133% - 1.5em);
-  // Max width of the label in the unshrink position (in the middle) for "underline" mode.
-  --gfi-u-lbl-wd-2: calc(100% - 1.5em);
+
   // Left padding of the label in a shrink position (in the top) for "underline" mode.
   --gfi-u-lbl-pd: calc(0.214285714*var(--gfi-size));
   // Left padding of the label in the unshrink position (in the middle) for "underline" mode.
-  --gfi-u-lbl-pd-2: calc(0.214285714*var(--gfi-size));
+  --gfi-u-lbl2-pd-lf: calc(0.214285714*var(--gfi-size));
+  // Right padding of the label in the unshrink position (in the middle) for "underline" mode.
+  --gfi-u-lbl2-pd-rg: calc(0.214285714*var(--gfi-size));
+
+  // Max width of the label in a shrink position (in the top) for "underline" mode.
+  // --gfi-u-lbl-wd: calc(133% - 1.5em);
+  --gfi-u-lbl-wd: calc(133% - 2.66*var(--gfi-u-lbl-pd));
+  // Max width of the label in the unshrink position (in the middle) for "underline" mode.
+  --gfi-u-lbl2-wd: calc(100% - var(--gfi-u-lbl2-pd-lf) - var(--gfi-u-lbl2-pd-rg));
 
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
@@ -175,8 +184,8 @@ grn-frame-input { //outline: 1px dashed crimson;
       @include mxTransformTranslateXYScale(var(--gfi-o-lbl-pd), var(--gfi-o-lgn-tr-x), 0.75); // # (14px, -9px, 0.75)
     }
     &:not(.gfi-lbl-shrink) {
-      max-width: var(--gfi-o-lbl-wd-2); // # calc(100% - 24px)
-      @include mxTransformTranslateXYScale(var(--gfi-o-lbl-pd-2), calc((var(--gfi-size) - var(--gfi-ln-hg))/2), 1); // # (14px, 16.5px, 1)
+      max-width: var(--gfi-o-lbl2-wd); // # calc(100% - 24px)
+      @include mxTransformTranslateXYScale(var(--gfi-o-lbl2-pd-lf), calc((var(--gfi-size) - var(--gfi-ln-hg))/2), 1); // # (14px, 16.5px, 1)
     }
   }  
   .gfi-lbl-underline {
@@ -187,8 +196,8 @@ grn-frame-input { //outline: 1px dashed crimson;
         , 0.75); // # 12px, 6.07px, 0.75  // # (12px, 7px, 0.75) original
     }
     &:not(.gfi-lbl-shrink) {
-      max-width: var(--gfi-u-lbl-wd-2); // # calc(100% - 24px)
-      @include mxTransformTranslateXYScale(var(--gfi-u-lbl-pd-2), calc((var(--gfi-size) - var(--gfi-ln-hg))/2), 1); // # 12px, 16.5px, 1
+      max-width: var(--gfi-u-lbl2-wd); // # calc(100% - 24px)
+      @include mxTransformTranslateXYScale(var(--gfi-u-lbl2-pd-lf), calc((var(--gfi-size) - var(--gfi-ln-hg))/2), 1); // # 12px, 16.5px, 1
     }
   }
   .gfi-lbl-standard {
@@ -224,7 +233,12 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
   
   .gfi-frm-outlined {
-    padding: 0px var(--gfi-o-lbl-pd); // # top/bottom: 0px right/left: 14px;
+    &.gfi-lbl-pd-lf {
+      padding-left: var(--gfi-o-lbl-pd);  // # 14px;
+    }
+    &.gfi-lbl-pd-rg {
+      padding-right: var(--gfi-o-lbl-pd); // # 14px;
+    }
     &>.gfi-molding {
       padding-top: calc((var(--gfi-size) - var(--gfi-ln-hg))/2); // # 16.5px;
       padding-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))/2); // # 16.5px;
@@ -234,7 +248,12 @@ grn-frame-input { //outline: 1px dashed crimson;
     border-radius: var(--gfi-u-br-rd);
     -webkit-transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    padding: 0px var(--gfi-u-lbl-pd); // # top/bottom: 0px, right/left: 12px;
+    &.gfi-lbl-pd-lf {
+      padding-left: var(--gfi-u-lbl-pd);  // # 12px;
+    }
+    &.gfi-lbl-pd-rg {
+      padding-right: var(--gfi-u-lbl-pd); // # 12px;
+    }
     &>.gfi-molding {
       padding-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75); // # 24.75px;
       padding-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.25); // # 8.25px;
@@ -357,5 +376,14 @@ grn-frame-input { //outline: 1px dashed crimson;
       margin-right: var(--gfi-u-lbl-pd);
       margin-left: var(--gfi-u-lbl-pd);
     }
+  }
+
+  // Input content "ornament"
+  grnOrnament,
+  grnOrnamentEnd {
+    display: inline-block;
+    height: 0.01em;
+    max-height: inherit;
+    white-space: nowrap;
   }
 }

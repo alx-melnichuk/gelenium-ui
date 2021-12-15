@@ -7,29 +7,40 @@ app-input-ornaments {
     width: 26ch;
   }
 
-  .io-ornament .io-btn-eye {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    background-color: transparent;
+  .io-ornament .io-pd-6 {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+  .io-ornament .io-pd-8 {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .io-ornament .io-btn {
     outline: 0;
     border: 0;
     margin: 0;
+    box-sizing: border-box;
     cursor: pointer;
     user-select: none;
-    vertical-align: middle;
-    flex: 0 0 auto;
-    font-size: 1.5rem;
     border-radius: 50%;
+    background-color: transparent;
+  }
+  .io-ornament .io-btn:hover { background-color: rgba(0, 0, 0, 0.04); }
+
+  .io-uncode {
+    font-size: 20px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  .io-ornament .io-btn-eye {
+    padding-top: 3px;
+    vertical-align: middle;
     overflow: visible;
     transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
-  .io-ornament .io-btn-eye:hover { background-color: rgba(0, 0, 0, 0.04); }
-
-  .io-ornament .io-mr-rg  { margin-right: -12px; }
-  .io-ornament .io-mr-lf { margin-left: -12px; }
-  .io-ornament .io-mr-bt { margin-bottom: 4px;}
+  // .io-ornament .io-btn-eye:hover { background-color: rgba(0, 0, 0, 0.04); }
 
   .io-ornament .io-icon-eye {
     background: center no-repeat;

@@ -8,7 +8,7 @@
     Next, specify the resulting object in the list of providers for the entire application (at the
     level of the AppComponent).
   </p>
-  <pre>
+  <code><pre>
   const grnFrameInputConfigDefault: GrnFrameInputConfig = &#123;
     exterior: Exterior.outlined,
     frameSize: FrameSize.small,
@@ -29,7 +29,7 @@
   export class AppComponent &#123;
     title = 'demo';
   &#125;
-  </pre>
+  </pre></code>
   <p>
     After that, all input elements based on the "GrnFrameInput" component will have the same
     configuration.
@@ -119,12 +119,12 @@
     <li>"exterior" will have the value "outlined".</li>
     <li>"frameSize" will have the value "small" (height to 44px;).</li>
   </ul>
-  <pre>
+  <code><pre>
     const grnFrameInputConfigDefault: GrnFrameInputConfig = &#123;
       exterior: Exterior.outlined,
       frameSize: FrameSize.small,
     &#125;;
-  </pre>
+  </pre></code>
 </section>
 
 <section mr-vr>
@@ -139,21 +139,21 @@
   <p>
     For example, let's specify the following parameters:
   </p>
-  <pre>
+  <code><pre>
   frameSize="middle"
   exterior="underline"
-  </pre>
+  </pre></code>
   <p>
     In other words, there is the following order of determining the configuration parameters:
   </p>
   <ul>
     <li>
       Standard values are taken.
-      <pre>
+      <code><pre>
   exterior="standard",
   frameSize="wide",
   isLabelShrink=false,
-  hiddenLabel=false</pre>
+  hiddenLabel=false</pre></code>
     </li>
     <li>
       Values from the default configuration provider (if there is one).
@@ -209,7 +209,7 @@
       </mat-expansion-panel-header>
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
-          <pre source="html">
+          <code><pre source="html">
 &lt;form class="io-ornament"
   [formGroup]="formGroup07"
   novalidate
@@ -245,10 +245,10 @@
 
   &lt;/div&gt;
 
-&lt;/form&gt;</pre>
+&lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
-          <pre source="ts">
+          <code><pre source="ts">
 import &#123; Component, ViewEncapsulation &#125; from '@angular/core';
 import &#123; FormControl, FormGroup &#125; from '@angular/forms';
 
@@ -263,10 +263,10 @@ export class FrameInputComponent &#123;
     input07a: new FormControl('', []),
     input07b: new FormControl('', []),
   &#125;);
-&#125;</pre>
+&#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
-          <pre source="css">
+          <code><pre source="css">
 .app-group &#123;
   display: flex;
   flex-wrap: wrap;
@@ -274,7 +274,7 @@ export class FrameInputComponent &#123;
 .app-elem &#123;
   min-width: 26ch;
   margin: 10px 10px;
-&#125;</pre>
+&#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
     </mat-expansion-panel>

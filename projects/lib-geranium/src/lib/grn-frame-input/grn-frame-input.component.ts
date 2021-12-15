@@ -1,6 +1,8 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ContentChild,
   HostBinding,
   HostListener,
   Inject,
@@ -11,6 +13,8 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
+import { GrnOrnamentEndDirective } from '../grn-input/grn-ornament-end.directive';
+import { GrnOrnamentDirective } from '../grn-input/grn-ornament.directive';
 
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
@@ -26,7 +30,7 @@ export const GRN_FRAME_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('G
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GrnFrameInputComponent implements OnChanges {
+export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
   @Input()
   public inputId = '';
   @Input()
@@ -52,17 +56,19 @@ export class GrnFrameInputComponent implements OnChanges {
   @Input()
   public frameSize: FrameSize | null = null;
 
+  @ContentChild(GrnOrnamentDirective)
+  public grnOrnament: GrnOrnamentDirective | null = null;
+  @ContentChild(GrnOrnamentEndDirective)
+  public grnOrnamentEnd: GrnOrnamentEndDirective | null = null;
+
   @HostBinding('class.Grn-palette')
   public get getGrnPalette(): boolean {
     return true;
   }
-
   @HostBinding('style')
-  public get getStyle(): string | null {
-    const value = FrameSizeUtil.getValue(this.frameSize);
-    return value != null ? '--gfi-size: ' + value + 'px;' : '';
+  public get getStyle(): { [klass: string]: unknown } | null {
+    return this.getFrameStyle();
   }
-
   public get isOutlinedExterior(): boolean {
     return ExteriorUtil.isOutlined(this.exterior);
   }
@@ -76,12 +82,24 @@ export class GrnFrameInputComponent implements OnChanges {
     return !!(this.isFocused || this.isFilled || this.isLabelShrink);
   }
   public isMouseEnter = false;
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public ornamentWidth = 0;
+  public ornamentEndWidth = 0;
+
   constructor(@Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private config: GrnFrameInputConfig | null) {
     this.exterior = ExteriorUtil.create(this.exterior, this.config?.exterior || null);
     this.frameSize = FrameSizeUtil.create(this.frameSize, this.config?.frameSize || null);
     this.isLabelShrink = this.createBoolean(this.isLabelShrink, this.config?.isLabelShrink);
     this.hiddenLabel = this.createBoolean(this.hiddenLabel, this.config?.hiddenLabel);
+  }
+
+  @HostListener('mouseenter')
+  public eventMouseEnter(): void {
+    this.isMouseEnter = true;
+  }
+
+  @HostListener('mouseleave')
+  public eventMouseLeave(): void {
+    this.isMouseEnter = false;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -99,14 +117,9 @@ export class GrnFrameInputComponent implements OnChanges {
     }
   }
 
-  @HostListener('mouseenter')
-  public eventMouseEnter(): void {
-    this.isMouseEnter = true;
-  }
-
-  @HostListener('mouseleave')
-  public eventMouseLeave(): void {
-    this.isMouseEnter = false;
+  ngAfterViewInit(): void {
+    this.ornamentWidth = this.grnOrnament?.elementRef.nativeElement.offsetWidth || 0;
+    this.ornamentEndWidth = this.grnOrnamentEnd?.elementRef.nativeElement.offsetWidth || 0;
   }
 
   // ** Public API **
@@ -165,5 +178,20 @@ export class GrnFrameInputComponent implements OnChanges {
 
   private createBoolean(value: boolean | null, defaultValue: boolean | undefined): boolean | null {
     return value != null ? value : defaultValue != null ? defaultValue : value;
+  }
+
+  private getFrameStyle(): { [klass: string]: unknown } | null {
+    const result: { [klass: string]: unknown } = {};
+    const value = FrameSizeUtil.getValue(this.frameSize);
+    if (value != null) {
+      result['--gfi-size'] = value + 'px';
+    }
+    if (this.ornamentWidth > 0) {
+      result['--gfi-o-lbl2-pd-lf'] = this.ornamentWidth + 'px';
+    }
+    if (this.ornamentEndWidth > 0) {
+      result['--gfi-o-lbl2-pd-rg'] = this.ornamentEndWidth + 'px';
+    }
+    return result;
   }
 }

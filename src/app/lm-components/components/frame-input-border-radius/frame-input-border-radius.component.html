@@ -7,10 +7,10 @@
     css-style.
     For example:
   </p>
-  <pre>
+  <code><pre>
   .fibr-outlined-radius grn-frame-input &#123;
     --gfi-o-br-rd: calc(var(--gfi-size)*0.5);
-  &#125;</pre>
+  &#125;</pre></code>
   <p>
     This value for the fillet radius corresponds to 50% of the height of the current element.
     The minimum value for the fillet radius is 0.
@@ -25,30 +25,30 @@
     "--gfi-o-lbl-pd" in the css-style "grn-frame-input".
     For example:
   </p>
-  <pre>
+  <code><pre>
   .fibr-outlined-radius grn-frame-input &#123;
     --gfi-o-br-rd: calc(var(--gfi-size)*0.5);
     --gfi-o-lbl-pd: calc(var(--gfi-size)*0.57);
-  &#125;</pre>
+  &#125;</pre></code>
   <p>
     In our example, the value of the coefficient for changing the fillet radius will change
     dynamically.
     For this, an additional css-variable "--fibr-border-radius" is used.
     As a result, we get the following:
   </p>
-  <pre>
+  <code><pre>
   .fibr-outlined-radius grn-frame-input &#123;
     --gfi-o-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
     --gfi-o-lbl-pd: calc(0.57*var(--gfi-size));
-  &#125;</pre>
+  &#125;</pre></code>
   <p>
     This is what the original values look like:
   </p>
-  <pre>
+  <code><pre>
   grn-frame-input &#123;
     --gfi-o-br-rd: calc(var(--gfi-size)/10);
     --gfi-o-lbl-pd: calc(0.25*var(--gfi-size));
-  &#125;</pre>
+  &#125;</pre></code>
   <p>
     Similarly, you can change the fillet radius for the underline appearance mode.
   </p>
@@ -63,21 +63,21 @@
   <p>
     We get the following:
   </p>
-  <pre>
+  <code><pre>
     .fibr-underline-radius grn-frame-input &#123;
       --gfi-u-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
       --gfi-u-lbl-pd: calc(0.4*var(--gfi-size));
     &#125;
-  </pre>
+  </pre></code>
   <p>
     This is what the original values look like:
   </p>
-  <pre>
+  <code><pre>
     grn-frame-input &#123;
     --gfi-u-br-rd: calc(var(--gfi-size)/10);
     --gfi-u-lbl-pd: calc(0.214285714*var(--gfi-size));
     &#125;
-  </pre>
+  </pre></code>
 </section>
 
 <section mr-vr>
@@ -216,7 +216,7 @@
       </mat-expansion-panel-header>
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
-          <pre source="html">
+          <code><pre source="html">
 &lt;form class="fibr-outlined-radius fibr-underline-radius"
   [formGroup]="formGroup05"
   novalidate
@@ -313,10 +313,10 @@
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
-&lt;/form&gt;</pre>
+&lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
-          <pre source="ts">
+          <code><pre source="ts">
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
@@ -342,10 +342,10 @@ export class FrameInputComponent &#123;
   public exterior05 = 'outlined';
   public isHiddenLabel = false;
   public borderRadius = 50;
-&#125;</pre>
+&#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
-          <pre source="css">
+          <code><pre source="css">
 .app-elem &#123;
   min-width: 26ch;
   margin: 10px 10px;
@@ -367,7 +367,7 @@ export class FrameInputComponent &#123;
 .fibr-underline-radius grn-frame-input &#123;
   --gfi-u-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
   --gfi-u-lbl-pd: calc(0.4*var(--gfi-size));
-&#125;</pre>
+&#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
     </mat-expansion-panel>
@@ -382,11 +382,11 @@ export class FrameInputComponent &#123;
     "--gfi-o-br-rd".<br />
     By default, this variable has the following meaning:
   </p>
-  <pre>--gfi-o-br-rd: calc(var(--gfi-size)/10);</pre>
+  <code><pre>--gfi-o-br-rd: calc(var(--gfi-size)/10);</pre></code>
   <p>
     This variable is further used as follows:
   </p>
-  <pre>border-radius: var(--gfi-o-br-rd);</pre>
+  <code><pre>border-radius: var(--gfi-o-br-rd);</pre></code>
   <p>
     Thus, we can assign another valid value to this variable according to the description in
     "<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">
@@ -397,7 +397,7 @@ export class FrameInputComponent &#123;
     "--gfi-o-lbl-pd".<br />
     By default, this variable has the following meaning:
   </p>
-  <pre>--gfi-o-lbl-pd: calc(0.25*var(--gfi-size));</pre>
+  <code><pre>--gfi-o-lbl-pd: calc(0.25*var(--gfi-size));</pre></code>
 </section>
 
 <section mr-vr>
@@ -407,11 +407,11 @@ export class FrameInputComponent &#123;
     "--gfi-u-br-rd".<br />
     By default, this variable has the following meaning:
   </p>
-  <pre>--gfi-u-br-rd: calc(var(--gfi-size)/10) calc(var(--gfi-size)/10) 0 0;</pre>
+  <code><pre>--gfi-u-br-rd: calc(var(--gfi-size)/10) calc(var(--gfi-size)/10) 0 0;</pre></code>
   <p>
     This variable is further used as follows:
   </p>
-  <pre>border-radius: var(--gfi-u-br-rd);</pre>
+  <code><pre>border-radius: var(--gfi-u-br-rd);</pre></code>
   <p>
     Thus, we can assign another valid value to this variable according to the description in
     "<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">
@@ -424,7 +424,7 @@ export class FrameInputComponent &#123;
     "--gfi-u-lbl-pd".<br />
     By default, this variable has the following meaning:
   </p>
-  <pre>--gfi-u-lbl-pd: calc(0.214285714*var(--gfi-size));</pre>
+  <code><pre>--gfi-u-lbl-pd: calc(0.214285714*var(--gfi-size));</pre></code>
   <p>
     If in the "underline" mode we want to round the bottom corners, then we additionally need to
     specify the height of the block with the bottom frame.
@@ -432,7 +432,7 @@ export class FrameInputComponent &#123;
   <p>
     Here's an example:
   </p>
-  <pre>
+  <code><pre>
 .fibr-radius-h grn-frame-input &#123;
   --gfi-u-br-rd: 0 0 0 calc(var(--gfi-size)/3);
   --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
@@ -441,7 +441,7 @@ export class FrameInputComponent &#123;
     height: calc(0.65*var(--gfi-size));
   &#125;
 &#125;
-  </pre>
+  </pre></code>
 </section>
 
 <form [formGroup]="formGroup06"
@@ -633,7 +633,7 @@ export class FrameInputComponent &#123;
       </mat-expansion-panel-header>
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
-          <pre source="html">
+          <code><pre source="html">
 &lt;form [formGroup]="formGroup06"
   novalidate
   autocomplete="off"&gt;
@@ -808,10 +808,10 @@ export class FrameInputComponent &#123;
     &lt;/div&gt;
   &lt;/div&gt;
 
-&lt;/form&gt;</pre>
+&lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
-          <pre source="ts">
+          <code><pre source="ts">
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
@@ -839,10 +839,10 @@ export class FrameInputComponent &#123;
     input06k: new FormControl('Demo - K', []),
     input06l: new FormControl('Demo - L', []),
   &#125;);
-&#125;</pre>
+&#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
-          <pre source="css">
+          <code><pre source="css">
 .app-group &#123;
   display: flex;
   flex-wrap: wrap;
@@ -921,7 +921,7 @@ export class FrameInputComponent &#123;
     height: calc(0.65*var(--gfi-size));
   &#125;
 &#125;
-&#125;</pre>
+&#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
     </mat-expansion-panel>

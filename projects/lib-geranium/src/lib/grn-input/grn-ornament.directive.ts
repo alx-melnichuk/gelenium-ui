@@ -1,8 +1,8 @@
 import { Directive, ElementRef } from '@angular/core';
 
 @Directive({
-  selector: '[grnOrnament]',
+  selector: '[grnOrnament],grnOrnament',
 })
 export class GrnOrnamentDirective {
-  constructor(private elementRef: ElementRef) {}
+  constructor(public elementRef: ElementRef) {}
 }

@@ -11,9 +11,9 @@
     [isError]="!!formControl.errors || isErrorVal"
     [helperText]="helperText"
     [frameSize]="frameSizeVal">
-    <div class="gi-ornament">
+    <grnOrnament *ngIf="grnOrnamentList.length">
       <ng-content select="[grnOrnament]"></ng-content>
-    </div>
+    </grnOrnament>
     <input #inputElement
       formControlName="textData"
       [attr.id]="id"
@@ -35,8 +35,8 @@
       (keydown)="doKeydown($event)"
       (keypress)="doKeypress($event)"
       (keyup)="doKeyup($event)" />
-    <div class="gi-ornament-end">
+    <grnOrnamentEnd *ngIf="grnOrnamentEndList.length">
       <ng-content select="[grnOrnamentEnd]"></ng-content>
-    </div>
+    </grnOrnamentEnd>
   </grn-frame-input>
 </ng-container>

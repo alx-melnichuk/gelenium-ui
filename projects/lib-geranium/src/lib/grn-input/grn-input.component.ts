@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ContentChild,
+  ContentChildren,
   ElementRef,
   EventEmitter,
   forwardRef,
@@ -11,9 +11,9 @@ import {
   Inject,
   Input,
   OnChanges,
-  OnInit,
   Output,
   PLATFORM_ID,
+  QueryList,
   SimpleChanges,
   ViewChild,
   ViewEncapsulation,
@@ -55,7 +55,7 @@ let identifier = 0;
     { provide: GRN_NODE_INTERNAL_VALIDATOR, useExisting: GrnInputComponent },
   ],
 })
-export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccessor, Validator, GrnNodeInternalValidator {
+export class GrnInputComponent implements OnChanges, ControlValueAccessor, Validator, GrnNodeInternalValidator {
   @Input()
   public id = 'grn_input_' + ++identifier;
   @Input()
@@ -109,10 +109,12 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
 
   @ViewChild('inputElement')
   public inputElementRef: ElementRef | null = null;
-  @ContentChild(GrnOrnamentDirective, { static: true })
-  public grnOrnament: GrnOrnamentDirective | undefined;
-  @ContentChild(GrnOrnamentEndDirective, { static: true })
-  public grnOrnamentEnd: GrnOrnamentEndDirective | undefined;
+
+  @ContentChildren(GrnOrnamentDirective)
+  public grnOrnamentList!: QueryList<GrnOrnamentDirective>;
+  @ContentChildren(GrnOrnamentEndDirective)
+  public grnOrnamentEndList!: QueryList<GrnOrnamentEndDirective>;
+
   @HostBinding('class')
   public get getClassesRoot(): string[] {
     return ['GrnControl', 'GrnInputField'];
@@ -124,7 +126,6 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
   public isRequiredVal = false; // Binding attribute "isRequired".
   public isDisabledVal = false; // Binding attribute "isDisabled".
   public isLabelShrink: boolean | null = null; // Binding attribute "lbShrink".
-  public isOrnament = false;
   public frameSizeVal: FrameSize | null = null;
   public isHiddenLabel: boolean | null = null; // Binding attribute "hiddenLabel".
   public isErrorVal = false; // Binding attribute "isError".
@@ -165,10 +166,6 @@ export class GrnInputComponent implements OnInit, OnChanges, ControlValueAccesso
     if (changes.isRequired || changes.minLength || changes.maxLength) {
       this.prepareFormGroup(this.isRequiredVal, this.minLength, this.maxLength);
     }
-  }
-
-  ngOnInit(): void {
-    this.isOrnament = this.grnOrnament || this.grnOrnamentEnd ? true : false;
   }
 
   // ** ControlValueAccessor - start **

@@ -200,7 +200,7 @@
       </mat-expansion-panel-header>
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
-          <pre source="html">
+          <code><pre source="html">
 &lt;form [formGroup]="formGroup04"
   novalidate
   autocomplete="off"&gt;
@@ -343,10 +343,10 @@
 
   &lt;/div&gt;
 
-&lt;/form&gt;</pre>
+&lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
-          <pre source="ts">
+          <code><pre source="ts">
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
@@ -371,10 +371,10 @@ export class InputComponent &#123;
     input04g: new FormControl('between 3 and 6', []),
   &#125;);
   public exterior04 = 'outlined';
-&#125;</pre>
+&#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
-          <pre source="css">
+          <code><pre source="css">
 .app-group &#123;
   display: flex;
   flex-wrap: wrap;
@@ -382,7 +382,7 @@ export class InputComponent &#123;
 .app-elem &#123;
   min-width: 26ch;
   margin: 10px 10px;
-&#125;</pre>
+&#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
     </mat-expansion-panel>

@@ -47,11 +47,15 @@ export class InputOrnamentsComponent {
     ]),
     input05e: new FormControl('thirty', [Validators.required]),
     input05f: new FormControl('thirty', [Validators.required]),
+    input05g: new FormControl('thirty', [Validators.required]),
+    input05h: new FormControl('thirty', [Validators.required]),
   };
   public formGroup05: FormGroup = new FormGroup(this.controls05);
   public exterior05 = 'outlined';
   public isBtnEyeCrossed05e = false;
   public isBtnEyeCrossed05f = false;
+  public isBtnEyeCrossed05g = false;
+  public isBtnEyeCrossed05h = false;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }
