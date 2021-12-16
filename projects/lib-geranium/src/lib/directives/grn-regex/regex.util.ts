@@ -9,8 +9,8 @@ export class RegexUtil {
       const start = text.indexOf('/');
       const finish = text.lastIndexOf('/');
       if (start !== -1 && finish !== -1 && start !== finish) {
-        const pattern = text.substr(start + 1, finish - 1);
-        const flag: string | undefined = text.length > finish + 1 ? text.substr(finish + 1) : undefined;
+        const pattern = text.substring(start + 1, finish - 1);
+        const flag: string | undefined = text.length > finish + 1 ? text.substring(finish + 1) : undefined;
         // Regex pattern with delimiters.
         result = new RegExp(pattern, flag);
       } else {

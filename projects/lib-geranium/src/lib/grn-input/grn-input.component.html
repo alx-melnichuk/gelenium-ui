@@ -1,5 +1,6 @@
 <ng-container [formGroup]="formGroup">
-  <grn-frame-input [inputId]="id"
+  <grn-frame-input [ngClass]="classesFrameInput"
+    [inputId]="id"
     [label]="label"
     [exterior]="exteriorVal"
     [isRequired]="isRequiredVal"
@@ -11,9 +12,13 @@
     [isError]="!!formControl.errors || isErrorVal"
     [helperText]="helperText"
     [frameSize]="frameSizeVal">
-    <grnOrnament *ngIf="grnOrnamentList.length">
+    <span #grnOrnament
+      class="gfi-ornament-wrap">
       <ng-content select="[grnOrnament]"></ng-content>
-    </grnOrnament>
+    </span>
+    <!-- <grnOrnament *ngIf="grnOrnamentList.length">
+      <ng-content select="[grnOrnament]"></ng-content>
+    </grnOrnament> -->
     <input #inputElement
       formControlName="textData"
       [attr.id]="id"
@@ -35,8 +40,12 @@
       (keydown)="doKeydown($event)"
       (keypress)="doKeypress($event)"
       (keyup)="doKeyup($event)" />
-    <grnOrnamentEnd *ngIf="grnOrnamentEndList.length">
+    <!-- <grnOrnamentEnd *ngIf="grnOrnamentEndList.length">
       <ng-content select="[grnOrnamentEnd]"></ng-content>
-    </grnOrnamentEnd>
+    </grnOrnamentEnd> -->
+    <span #grnOrnamentEnd
+      class="gfi-ornament-wrap">
+      <ng-content select="[grnOrnamentEnd]"></ng-content>
+    </span>
   </grn-frame-input>
 </ng-container>

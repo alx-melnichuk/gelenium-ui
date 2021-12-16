@@ -1,8 +1,9 @@
 import { Directive, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { GrnRegexMatchUtil } from './grn-regex-match.interface';
 
 import { RegexUtil } from './regex.util';
+
+import { GrnRegexMatchUtil } from './grn-regex-match.interface';
 
 /**
  * @description

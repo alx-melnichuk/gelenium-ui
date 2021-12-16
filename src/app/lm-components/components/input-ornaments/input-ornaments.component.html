@@ -49,7 +49,8 @@
   novalidate
   autocomplete="off">
 
-  <div class="app-group">
+  <div class="app-group"
+    *ngIf="false">
 
     <div class="app-elem io-elem">
       <div>
@@ -58,6 +59,7 @@
         </small>
       </div>
       <grn-input formControlName="input05a"
+        class="gfi-u-orn-mr gfi-s-orn-mr"
         label="Enter the mass"
         helperText="The value is greater than zero."
         [exterior]="exterior05">
@@ -87,6 +89,7 @@
         </small>
       </div>
       <grn-input formControlName="input05c"
+        class="gfi-u-orn-mr gfi-s-orn-mr"
         label="Enter a small number in words"
         isRequired
         [minLength]="minLength05"
@@ -149,6 +152,7 @@
         </small>
       </div>
       <grn-input formControlName="input05e"
+        class="gfi-u-orn-mr gfi-s-orn-mr"
         [type]="isBtnEyeCrossed05e ? 'text':'password'"
         label="Enter a unique password in words"
         isRequired
@@ -193,14 +197,17 @@
         </button>
       </grn-input>
     </div>
+  </div>
 
+  <div class="app-group">
     <div class="app-elem io-elem">
-      <div>
+      <div [grnFrameSize]="'wide'">
         <small>
           <em>Section: "grnOrnament" + uncode.</em>
         </small>
       </div>
       <grn-input formControlName="input05g"
+        class="gfi-ornament"
         [type]="isBtnEyeCrossed05g ? 'text':'password'"
         label="Enter a unique password in words"
         isRequired
@@ -217,13 +224,14 @@
       </grn-input>
     </div>
 
-    <div class="app-elem io-elem">
+    <!-- <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnamentEnd" + uncode.</em>
         </small>
       </div>
       <grn-input formControlName="input05h"
+        class="gfi-ornament-end"
         [type]="isBtnEyeCrossed05h ? 'text':'password'"
         label="Enter a unique password in words"
         isRequired
@@ -233,12 +241,12 @@
         ? 'The password value is required.'
         :'Enter the password value.'">
         <button grnOrnamentEnd
-          class="io-uncode io-btn"
+          class="io-uncode io-btn io-underline"
           (click)="isBtnEyeCrossed05h=!isBtnEyeCrossed05h">
           <span>{{ isBtnEyeCrossed05h ? '&#128275;': '&#128274;' }}</span>
         </button>
       </grn-input>
-    </div>
+    </div> -->
 
   </div>
 </form>

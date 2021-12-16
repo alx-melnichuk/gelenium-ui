@@ -127,7 +127,6 @@ grn-frame-input { //outline: 1px dashed crimson;
   --gfi-o-lbl2-pd-lf: calc(0.25*var(--gfi-size));
   // Right padding of the label in the unshrink position (in the middle) for "outline" mode.
   --gfi-o-lbl2-pd-rg: calc(0.174*var(--gfi-size));
-
   // Max width of the label in a shrink position (in the top) for "outlined" mode.
   --gfi-o-lbl-wd: calc(133% - 2.66*var(--gfi-o-lbl-pd));
   // Max width of the label in the unshrink position (in the middle) for "outline" mode.
@@ -136,19 +135,26 @@ grn-frame-input { //outline: 1px dashed crimson;
   // For "underline" mode.
   // The value of the radius of the rounding of the border for "underline" mode.
   --gfi-u-br-rd: calc(var(--gfi-size)/10) calc(var(--gfi-size)/10) 0 0;
-
   // Left padding of the label in a shrink position (in the top) for "underline" mode.
-  --gfi-u-lbl-pd: calc(0.214285714*var(--gfi-size));
+  --gfi-u-lbl-pd: calc(0.21428*var(--gfi-size));
   // Left padding of the label in the unshrink position (in the middle) for "underline" mode.
-  --gfi-u-lbl2-pd-lf: calc(0.214285714*var(--gfi-size));
+  --gfi-u-lbl2-pd-lf: calc(0.21428*var(--gfi-size));
   // Right padding of the label in the unshrink position (in the middle) for "underline" mode.
-  --gfi-u-lbl2-pd-rg: calc(0.214285714*var(--gfi-size));
-
+  --gfi-u-lbl2-pd-rg: calc(0.21428*var(--gfi-size));
   // Max width of the label in a shrink position (in the top) for "underline" mode.
   // --gfi-u-lbl-wd: calc(133% - 1.5em);
   --gfi-u-lbl-wd: calc(133% - 2.66*var(--gfi-u-lbl-pd));
   // Max width of the label in the unshrink position (in the middle) for "underline" mode.
   --gfi-u-lbl2-wd: calc(100% - var(--gfi-u-lbl2-pd-lf) - var(--gfi-u-lbl2-pd-rg));
+
+  // Left padding of the label in the unshrink position (in the middle) for "standard" mode.
+  --gfi-s-lbl2-pd-lf: 0px;
+  // Right padding of the label in the unshrink position (in the middle) for "standard" mode.
+  --gfi-s-lbl2-pd-rg: 0px;
+  // Max width of the label in a shrink position (in the top) for "standard" mode.
+  --gfi-s-lbl-wd: 133%;
+  // Max width of the label in the unshrink position (in the middle) for "standard" mode.
+  --gfi-s-lbl2-wd: calc(100% - var(--gfi-s-lbl2-pd-lf) - var(--gfi-s-lbl2-pd-rg));
 
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
@@ -161,7 +167,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   vertical-align: top;
 
   // Section "Label".
-  .gfi-label { // outline: 1px dashed green;
+  .gfi-label {  outline: 1px dashed green;
     // #!! font-family: "Roboto","Helvetica","Arial",sans-serif;    // #!! font-weight: 400;    // #!! font-size: 1em;    // line-height: 1.4375 em;
     // #!! letter-spacing: 0.00938em;
     padding: 0;
@@ -202,16 +208,17 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
   .gfi-lbl-standard {
     &.gfi-lbl-shrink {
-      max-width: 133%;
+      max-width: var(--gfi-s-lbl-wd); // # 133%;
       @include mxTransformTranslateXYScale(0, -1.5px, 0.75); // # (0px, -1.5px, 0.75) original
     }
     &:not(.gfi-lbl-shrink) {
-      max-width: 100%;
-      @include mxTransformTranslateXYScale(0, calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75), 1); // # 0px 24.75px, 1
+      max-width: var(--gfi-s-lbl2-wd); // # calc(100% - 0px);
+      @include mxTransformTranslateXYScale(var(--gfi-s-lbl2-pd-lf), calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75), 1); // # 0px, 24.75px, 1
     }
   }
   
- 
+
+
   // Section "Frame".
   .gfi-frame { // outline: 1px dashed blueviolet;
     // #!! font-family: "Roboto","Helvetica","Arial",sans-serif;    // #!! font-weight: 400;    // #!! font-size: 1em;    // #!! line-height: 1.4375 em;  // line-height: 1.1876em; // small
@@ -219,8 +226,8 @@ grn-frame-input { //outline: 1px dashed crimson;
     box-sizing: border-box;
     cursor: text;
     @include mxDisplayInlineFlex();
-    // @include mxAlignItems(center);
-    @include mxAlignItems(baseline);
+    @include mxAlignItems(center);
+    // #!! @include mxAlignItems(baseline);
     position: relative;
     border-radius: inherit;
     &.Grn-disabled {
@@ -233,12 +240,6 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
   
   .gfi-frm-outlined {
-    &.gfi-lbl-pd-lf {
-      padding-left: var(--gfi-o-lbl-pd);  // # 14px;
-    }
-    &.gfi-lbl-pd-rg {
-      padding-right: var(--gfi-o-lbl-pd); // # 14px;
-    }
     &>.gfi-molding {
       padding-top: calc((var(--gfi-size) - var(--gfi-ln-hg))/2); // # 16.5px;
       padding-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))/2); // # 16.5px;
@@ -248,12 +249,6 @@ grn-frame-input { //outline: 1px dashed crimson;
     border-radius: var(--gfi-u-br-rd);
     -webkit-transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    &.gfi-lbl-pd-lf {
-      padding-left: var(--gfi-u-lbl-pd);  // # 12px;
-    }
-    &.gfi-lbl-pd-rg {
-      padding-right: var(--gfi-u-lbl-pd); // # 12px;
-    }
     &>.gfi-molding {
       padding-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75); // # 24.75px;
       padding-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.25); // # 8.25px;
@@ -379,11 +374,39 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
 
   // Input content "ornament"
-  grnOrnament,
-  grnOrnamentEnd {
-    display: inline-block;
-    height: 0.01em;
+  &:not(.gfi-ornament) {
+    .gfi-frm-outlined {
+      padding-left: var(--gfi-o-lbl-pd);  // # 14px;
+    }
+    .gfi-frm-underline {
+      padding-left: var(--gfi-u-lbl-pd);  // # 12px;
+    }  
+  }
+  &:not(.gfi-ornament-end) {
+    .gfi-frm-outlined {
+      padding-right: var(--gfi-o-lbl-pd); // # 14px;
+    }
+    .gfi-frm-underline {
+      padding-right: var(--gfi-u-lbl-pd); // # 12px;
+    }  
+  }
+
+  &.gfi-ornament {
+    .gfi-frm-underline, .gfi-frm-standard {
+      .gfi-ornament-wrap {
+        margin-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.5);
+      }
+    }
+  }
+  &.gfi-ornament-end {
+    .gfi-frm-standard {
+      .gfi-ornament-wrap {
+        margin-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.5);
+      }
+    }
+  }
+  
+  .gfi-ornament-wrap {
     max-height: inherit;
-    white-space: nowrap;
   }
 }

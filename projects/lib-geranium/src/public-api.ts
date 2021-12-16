@@ -5,8 +5,8 @@
 export * from './lib/lib-geranium.service';
 export * from './lib/lib-geranium.module';
 
-export * from './lib/directives/lib-directives.module';
-export * from './lib/directives/grn-only-by-regex.directive';
+export * from './lib/directives/grn-regex/public-api';
+export * from './lib/directives/grn-ornament/public-api';
 
 export * from './lib/grn-frame-input/grn-frame-input.module';
 export * from './lib/grn-infinite-scroll/grn-infinite-scroll.module';

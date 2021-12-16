@@ -1,23 +1,28 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
+  ElementRef,
   HostBinding,
   HostListener,
   Inject,
   InjectionToken,
   Input,
   OnChanges,
+  OnInit,
   Optional,
+  Renderer2,
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
-import { GrnOrnamentEndDirective } from '../grn-input/grn-ornament-end.directive';
-import { GrnOrnamentDirective } from '../grn-input/grn-ornament.directive';
 
+import { GrnOrnamentEndDirective } from '../directives/grn-ornament/grn-ornament-end.directive';
+import { GrnOrnamentDirective } from '../directives/grn-ornament/grn-ornament.directive';
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
+
 import { GrnFrameInputConfig } from './grn-frame-input.interface';
 
 export const GRN_FRAME_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('GRN_FRAME_INPUT_CONFIG');
@@ -56,19 +61,19 @@ export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
   @Input()
   public frameSize: FrameSize | null = null;
 
-  @ContentChild(GrnOrnamentDirective)
-  public grnOrnament: GrnOrnamentDirective | null = null;
-  @ContentChild(GrnOrnamentEndDirective)
-  public grnOrnamentEnd: GrnOrnamentEndDirective | null = null;
+  @ContentChild('grnOrnament', { static: true })
+  public grnOrnament: ElementRef | undefined;
+  @ContentChild('grnOrnamentEnd', { static: true })
+  public grnOrnamentEnd: ElementRef | undefined;
 
   @HostBinding('class.Grn-palette')
   public get getGrnPalette(): boolean {
     return true;
   }
-  @HostBinding('style')
-  public get getStyle(): { [klass: string]: unknown } | null {
-    return this.getFrameStyle();
-  }
+  // @HostBinding('style')
+  // public get getStyle(): { [klass: string]: unknown } | null {
+  //   return this.getFrameStyle();
+  // }
   public get isOutlinedExterior(): boolean {
     return ExteriorUtil.isOutlined(this.exterior);
   }
@@ -85,7 +90,12 @@ export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
   public ornamentWidth = 0;
   public ornamentEndWidth = 0;
 
-  constructor(@Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private config: GrnFrameInputConfig | null) {
+  constructor(
+    @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private config: GrnFrameInputConfig | null,
+    private renderer: Renderer2,
+    private elementRef: ElementRef,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
     this.exterior = ExteriorUtil.create(this.exterior, this.config?.exterior || null);
     this.frameSize = FrameSizeUtil.create(this.frameSize, this.config?.frameSize || null);
     this.isLabelShrink = this.createBoolean(this.isLabelShrink, this.config?.isLabelShrink);
@@ -108,6 +118,8 @@ export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
     }
     if (changes.frameSize) {
       this.frameSize = FrameSizeUtil.create(this.frameSize, this.config?.frameSize || null);
+      const value = FrameSizeUtil.getValue(this.frameSize);
+      this.setStyle('--gfi-size', value ? value + 'px' : null);
     }
     if (changes.isLabelShrink) {
       this.isLabelShrink = this.createBoolean(this.isLabelShrink, this.config?.isLabelShrink);
@@ -118,8 +130,18 @@ export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.ornamentWidth = this.grnOrnament?.elementRef.nativeElement.offsetWidth || 0;
-    this.ornamentEndWidth = this.grnOrnamentEnd?.elementRef.nativeElement.offsetWidth || 0;
+    this.ornamentWidth = this.grnOrnament?.nativeElement.offsetWidth || 0;
+    this.ornamentEndWidth = this.grnOrnamentEnd?.nativeElement.offsetWidth || 0;
+    if (this.ornamentWidth > 0) {
+      this.setStyle('--gfi-o-lbl2-pd-lf', this.ornamentWidth + 'px');
+      this.setStyle('--gfi-u-lbl2-pd-lf', this.ornamentWidth + 'px');
+      this.setStyle('--gfi-s-lbl2-pd-lf', this.ornamentWidth + 'px');
+    }
+    if (this.ornamentEndWidth > 0) {
+      this.setStyle('--gfi-o-lbl2-pd-rg', this.ornamentEndWidth + 'px');
+      this.setStyle('--gfi-u-lbl2-pd-rg', this.ornamentEndWidth + 'px');
+      this.setStyle('--gfi-s-lbl2-pd-rg', this.ornamentEndWidth + 'px');
+    }
   }
 
   // ** Public API **
@@ -188,10 +210,22 @@ export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
     }
     if (this.ornamentWidth > 0) {
       result['--gfi-o-lbl2-pd-lf'] = this.ornamentWidth + 'px';
+      result['--gfi-u-lbl2-pd-lf'] = this.ornamentWidth + 'px';
+      result['--gfi-s-lbl2-pd-lf'] = this.ornamentWidth + 'px';
     }
     if (this.ornamentEndWidth > 0) {
       result['--gfi-o-lbl2-pd-rg'] = this.ornamentEndWidth + 'px';
+      result['--gfi-u-lbl2-pd-rg'] = this.ornamentEndWidth + 'px';
+      result['--gfi-s-lbl2-pd-rg'] = this.ornamentEndWidth + 'px';
     }
+    console.log('getFrameStyle()'); // TODO del;
     return result;
+  }
+
+  private setStyle(styleName: string, styleValue: string | null | undefined): void {
+    if (!!this.elementRef && styleName) {
+      this.elementRef.nativeElement.style.setProperty(styleName, styleValue);
+      this.changeDetectorRef.markForCheck();
+    }
   }
 }

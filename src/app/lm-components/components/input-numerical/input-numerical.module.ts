@@ -6,7 +6,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { GrnInputModule } from 'projects/lib-geranium/src/lib/grn-input/grn-input.module';
-import { LibDirectivesModule } from 'projects/lib-geranium/src/lib/directives/lib-directives.module';
+import { GrnRegexModule } from 'projects/lib-geranium/src/lib/directives/grn-regex/grn-regex.module';
 
 import { InputNumericalComponent } from './input-numerical.component';
 
@@ -20,7 +20,7 @@ import { InputNumericalComponent } from './input-numerical.component';
     MatExpansionModule,
     MatTabsModule,
     GrnInputModule,
-    LibDirectivesModule,
+    GrnRegexModule,
   ],
   exports: [InputNumericalComponent],
 })

@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ContentChildren,
+  ContentChild,
   ElementRef,
   EventEmitter,
   forwardRef,
@@ -13,7 +13,6 @@ import {
   OnChanges,
   Output,
   PLATFORM_ID,
-  QueryList,
   SimpleChanges,
   ViewChild,
   ViewEncapsulation,
@@ -32,13 +31,11 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-node-internal-validator.interface';
+import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 
 import { InputType, InputTypeUtil } from './grn-input.interface';
-import { GrnOrnamentEndDirective } from './grn-ornament-end.directive';
-import { GrnOrnamentDirective } from './grn-ornament.directive';
 
 let identifier = 0;
 
@@ -110,10 +107,13 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   @ViewChild('inputElement')
   public inputElementRef: ElementRef | null = null;
 
-  @ContentChildren(GrnOrnamentDirective)
-  public grnOrnamentList!: QueryList<GrnOrnamentDirective>;
-  @ContentChildren(GrnOrnamentEndDirective)
-  public grnOrnamentEndList!: QueryList<GrnOrnamentEndDirective>;
+  // @ContentChildren(GrnOrnamentDirective)
+  // public grnOrnamentList!: QueryList<GrnOrnamentDirective>;
+  // @ContentChildren(GrnOrnamentEndDirective)
+  // public grnOrnamentEndList!: QueryList<GrnOrnamentEndDirective>;
+
+  // @ContentChild('grnOrnament2', { static: false })
+  // public grnOrnament2: ElementRef | undefined;
 
   @HostBinding('class')
   public get getClassesRoot(): string[] {
@@ -135,9 +135,17 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public isFocused = false;
   public isFilled = false;
   public isHelperTextFilled = false;
+  public classesFrameInput: string[] = [];
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private changeDetectorRef: ChangeDetectorRef,
+    private elementRef: ElementRef
+  ) {
+    const className = this.elementRef.nativeElement.className as string;
+    this.classesFrameInput = className.split(' ').filter((name) => name.startsWith('gfi-'));
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.type) {

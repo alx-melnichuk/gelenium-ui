@@ -542,15 +542,19 @@
   <tr>
     <td><code>--gfi-o-lbl2-pd-lf: calc(0.25*var(--gfi-size));</code></td>
     <td>
-      <span>Left padding of the label in the unshrink position (in the middle) for "outline"
-        mode.</span>
+      <span>
+        Left padding of the label in the unshrink position (in the middle) for "outline" mode.
+        The value is adjusted when the "GrnOrnament" element is present.
+      </span>
     </td>
   </tr>
   <tr>
     <td><code>--gfi-o-lbl2-pd-rg: calc(0.174*var(--gfi-size));</code></td>
     <td>
-      <span>Right padding of the label in the unshrink position (in the middle) for "outline"
-        mode.</span>
+      <span>
+        Right padding of the label in the unshrink position (in the middle) for "outline" mode.
+        The value is adjusted when the "GrnOrnamentEnd" element is present.
+      </span>
     </td>
   </tr>
 
@@ -590,15 +594,19 @@
   <tr>
     <td><code>--gfi-u-lbl2-pd-lf: calc(0.214285714*var(--gfi-size));</code></td>
     <td>
-      <span>Left padding of the label in the unshrink position (in the middle) for "underline"
-        mode.</span>
+      <span>
+        Left padding of the label in the unshrink position (in the middle) for "underline" mode.
+        The value is adjusted when the "GrnOrnament" element is present.
+      </span>
     </td>
   </tr>
   <tr>
     <td><code>--gfi-u-lbl2-pd-rg: calc(0.214285714*var(--gfi-size));</code></td>
     <td>
-      <span>Right padding of the label in the unshrink position (in the middle) for "underline"
-        mode.</span>
+      <span>
+        Right padding of the label in the unshrink position (in the middle) for "underline" mode.
+        The value is adjusted when the "GrnOrnamentEnd" element is present.
+      </span>
     </td>
   </tr>
   <tr>
@@ -614,6 +622,49 @@
     <td>
       <span>Max width of the label in the unshrink position (in the middle) for "underline"
         mode.</span>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>--gfi-s-lbl2-pd-lf: 0px;</code>
+    </td>
+    <td>
+      <span>
+        Left padding of the label in the unshrink position (in the middle) for "standard" mode.
+        The value is adjusted when the "GrnOrnament" element is present.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>--gfi-s-lbl2-pd-rg: 0px;</code>
+    </td>
+    <td>
+      <span>
+        Right padding of the label in the unshrink position (in the middle) for "standard" mode.
+        The value is adjusted when the "GrnOrnamentEnd" element is present.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>--gfi-s-lbl-wd: 133%;</code>
+    </td>
+    <td>
+      <span>
+        Max width of the label in a shrink position (in the top) for "standard" mode.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>--gfi-s-lbl2-wd: calc(100% - var(--gfi-s-lbl2-pd-lf) - var(--gfi-s-lbl2-pd-rg));</code>
+    </td>
+    <td>
+      <span>
+        Max width of the label in the unshrink position (in the middle) for "standard" mode.
+      </span>
     </td>
   </tr>
 </table>
