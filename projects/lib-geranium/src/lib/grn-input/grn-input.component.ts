@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ContentChild,
   ElementRef,
   EventEmitter,
   forwardRef,
@@ -106,15 +105,6 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
 
   @ViewChild('inputElement')
   public inputElementRef: ElementRef | null = null;
-
-  // @ContentChildren(GrnOrnamentDirective)
-  // public grnOrnamentList!: QueryList<GrnOrnamentDirective>;
-  // @ContentChildren(GrnOrnamentEndDirective)
-  // public grnOrnamentEndList!: QueryList<GrnOrnamentEndDirective>;
-
-  // @ContentChild('grnOrnament2', { static: false })
-  // public grnOrnament2: ElementRef | undefined;
-
   @HostBinding('class')
   public get getClassesRoot(): string[] {
     return ['GrnControl', 'GrnInputField'];
@@ -135,17 +125,9 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public isFocused = false;
   public isFilled = false;
   public isHelperTextFilled = false;
-  public classesFrameInput: string[] = [];
 
-  constructor(
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private changeDetectorRef: ChangeDetectorRef,
-    private elementRef: ElementRef
-  ) {
-    const className = this.elementRef.nativeElement.className as string;
-    this.classesFrameInput = className.split(' ').filter((name) => name.startsWith('gfi-'));
-  }
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.type) {
@@ -212,9 +194,8 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
 
   // ** Validator - start **
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public validate(control: AbstractControl): ValidationErrors | null {
-    return this.formControl.errors;
+    return !control ? null : this.formControl.errors;
   }
 
   // ** Validator - finish **
@@ -294,16 +275,5 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
       newValidator.push(Validators.maxLength(maxLength));
     }
     this.formControl.setValidators(newValidator);
-  }
-
-  private parseNumber(value: string, defaultValue: number): number {
-    let result = defaultValue;
-    if (value) {
-      const valueFloat: number = parseFloat(value);
-      if (!isNaN(valueFloat) && isFinite(valueFloat)) {
-        result = valueFloat;
-      }
-    }
-    return result;
   }
 }

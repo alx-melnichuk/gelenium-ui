@@ -121,7 +121,6 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   public isFocused = false;
   public isFilled = false;
   public isHelperTextFilled = false;
-
   public currentRows = 1;
 
   // eslint-disable-next-line @typescript-eslint/ban-types

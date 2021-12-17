@@ -117,9 +117,9 @@ grn-frame-input { //outline: 1px dashed crimson;
   // Small indentation of the legend from the border for "outlined" mode.
   --gfi-o-lgn-pd: 0.6ex;
   // Determines the x transform value at the shrink position (top) for "outlined" mode.
-  --gfi-o-lgn-tr-x: calc(-0.36*var(--gfi-ln-hg));
+  // --gfi-o-lgn-tr-x: calc(-0.36*var(--gfi-ln-hg));
   // The value of the radius of the rounding of the border for "outlined" mode.
-  --gfi-o-br-rd: calc(var(--gfi-size)/10);
+  // --gfi-o-br-rd: calc(var(--gfi-size)/10);
 
   // Left padding of the label in a shrink position (in the top) for "outlined" mode.
   --gfi-o-lbl-pd: calc(0.25*var(--gfi-size));
@@ -128,9 +128,9 @@ grn-frame-input { //outline: 1px dashed crimson;
   // Right padding of the label in the unshrink position (in the middle) for "outline" mode.
   --gfi-o-lbl2-pd-rg: calc(0.174*var(--gfi-size));
   // Max width of the label in a shrink position (in the top) for "outlined" mode.
-  --gfi-o-lbl-wd: calc(133% - 2.66*var(--gfi-o-lbl-pd));
+  // --gfi-o-lbl-wd: calc(133% - 2.66*var(--gfi-o-lbl-pd));
   // Max width of the label in the unshrink position (in the middle) for "outline" mode.
-  --gfi-o-lbl2-wd: calc(100% - var(--gfi-o-lbl2-pd-lf) - var(--gfi-o-lbl2-pd-rg));
+  // --gfi-o-lbl2-wd: calc(100% - var(--gfi-o-lbl2-pd-lf) - var(--gfi-o-lbl2-pd-rg));
 
   // For "underline" mode.
   // The value of the radius of the rounding of the border for "underline" mode.
@@ -142,19 +142,18 @@ grn-frame-input { //outline: 1px dashed crimson;
   // Right padding of the label in the unshrink position (in the middle) for "underline" mode.
   --gfi-u-lbl2-pd-rg: calc(0.21428*var(--gfi-size));
   // Max width of the label in a shrink position (in the top) for "underline" mode.
-  // --gfi-u-lbl-wd: calc(133% - 1.5em);
-  --gfi-u-lbl-wd: calc(133% - 2.66*var(--gfi-u-lbl-pd));
+  // --gfi-u-lbl-wd: calc(133% - 2.66*var(--gfi-u-lbl-pd));
   // Max width of the label in the unshrink position (in the middle) for "underline" mode.
-  --gfi-u-lbl2-wd: calc(100% - var(--gfi-u-lbl2-pd-lf) - var(--gfi-u-lbl2-pd-rg));
+  // --gfi-u-lbl2-wd: calc(100% - var(--gfi-u-lbl2-pd-lf) - var(--gfi-u-lbl2-pd-rg));
 
   // Left padding of the label in the unshrink position (in the middle) for "standard" mode.
   --gfi-s-lbl2-pd-lf: 0px;
   // Right padding of the label in the unshrink position (in the middle) for "standard" mode.
   --gfi-s-lbl2-pd-rg: 0px;
   // Max width of the label in a shrink position (in the top) for "standard" mode.
-  --gfi-s-lbl-wd: 133%;
+  // --gfi-s-lbl-wd: 133%;
   // Max width of the label in the unshrink position (in the middle) for "standard" mode.
-  --gfi-s-lbl2-wd: calc(100% - var(--gfi-s-lbl2-pd-lf) - var(--gfi-s-lbl2-pd-rg));
+  // --gfi-s-lbl2-wd: calc(100% - var(--gfi-s-lbl2-pd-lf) - var(--gfi-s-lbl2-pd-rg));
 
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
@@ -167,7 +166,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   vertical-align: top;
 
   // Section "Label".
-  .gfi-label {  outline: 1px dashed green;
+  .gfi-label { // outline: 1px dashed green;
     // #!! font-family: "Roboto","Helvetica","Arial",sans-serif;    // #!! font-weight: 400;    // #!! font-size: 1em;    // line-height: 1.4375 em;
     // #!! letter-spacing: 0.00938em;
     padding: 0;
@@ -186,33 +185,33 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
   .gfi-lbl-outlined {
     &.gfi-lbl-shrink {
-      max-width: var(--gfi-o-lbl-wd); // # calc(133% - 24px)
-      @include mxTransformTranslateXYScale(var(--gfi-o-lbl-pd), var(--gfi-o-lgn-tr-x), 0.75); // # (14px, -9px, 0.75)
+      max-width: var(--gfi-o-lbl-wd, calc(133% - 2.66*var(--gfi-o-lbl-pd))); // # calc(133% - 24px)
+      @include mxTransformTranslateXYScale(var(--gfi-o-lbl-pd), var( --gfi-o-lgn-tr-x, calc(-0.36*var(--gfi-ln-hg)) ), 0.75); // # (14px, -9px, 0.75)
     }
     &:not(.gfi-lbl-shrink) {
-      max-width: var(--gfi-o-lbl2-wd); // # calc(100% - 24px)
+      max-width: var(--gfi-o-lbl2-wd, calc(100% - var(--gfi-o-lbl2-pd-lf) - var(--gfi-o-lbl2-pd-rg))); // # calc(100% - 24px)
       @include mxTransformTranslateXYScale(var(--gfi-o-lbl2-pd-lf), calc((var(--gfi-size) - var(--gfi-ln-hg))/2), 1); // # (14px, 16.5px, 1)
     }
   }  
   .gfi-lbl-underline {
     &.gfi-lbl-shrink {
-      max-width: var(--gfi-u-lbl-wd); // # calc(133% - 24px)
+      max-width: var(--gfi-u-lbl-wd, calc(133% - 2.66*var(--gfi-u-lbl-pd))); // # calc(133% - 24px)
       @include mxTransformTranslateXYScale(var(--gfi-u-lbl-pd)
         , calc(((var(--gfi-size) - var(--gfi-ln-hg))*0.757524 - var(--gfi-ln-hg)*0.5)*0.45 )
         , 0.75); // # 12px, 6.07px, 0.75  // # (12px, 7px, 0.75) original
     }
     &:not(.gfi-lbl-shrink) {
-      max-width: var(--gfi-u-lbl2-wd); // # calc(100% - 24px)
+      max-width: var(--gfi-u-lbl2-wd, calc(100% - var(--gfi-u-lbl2-pd-lf) - var(--gfi-u-lbl2-pd-rg))); // # calc(100% - 24px)
       @include mxTransformTranslateXYScale(var(--gfi-u-lbl2-pd-lf), calc((var(--gfi-size) - var(--gfi-ln-hg))/2), 1); // # 12px, 16.5px, 1
     }
   }
   .gfi-lbl-standard {
     &.gfi-lbl-shrink {
-      max-width: var(--gfi-s-lbl-wd); // # 133%;
+      max-width: var(--gfi-s-lbl-wd, 133%); // # 133%;
       @include mxTransformTranslateXYScale(0, -1.5px, 0.75); // # (0px, -1.5px, 0.75) original
     }
     &:not(.gfi-lbl-shrink) {
-      max-width: var(--gfi-s-lbl2-wd); // # calc(100% - 0px);
+      max-width: var(--gfi-s-lbl2-wd, calc(100% - var(--gfi-s-lbl2-pd-lf) - var(--gfi-s-lbl2-pd-rg))); // # calc(100% - 0px);
       @include mxTransformTranslateXYScale(var(--gfi-s-lbl2-pd-lf), calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75), 1); // # 0px, 24.75px, 1
     }
   }
@@ -258,6 +257,39 @@ grn-frame-input { //outline: 1px dashed crimson;
     &>.gfi-molding {
       padding-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75); // # 24.75px;
       padding-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.25); // # 8.25px;
+    }
+  }
+
+  
+  .gfi-ornament-wrap {
+    max-height: inherit;
+  }
+
+  .gfi-frm-outlined {
+    .gfi-ornament-wrap:empty+.gfi-molding2 {
+      padding-left: var(--gfi-o-lbl-pd);  // # 14px;
+    }
+    .gfi-ornament-end-wrap:empty+.gfi-input-pd-rg {
+      padding-right: var(--gfi-o-lbl-pd); // # 14px;
+    }
+  }
+  .gfi-frm-underline {
+    .gfi-ornament-wrap:empty+.gfi-molding2 {
+      padding-left: var(--gfi-u-lbl-pd);  // # 12px;
+    }
+    .gfi-ornament-end-wrap:empty+.gfi-input-pd-rg {
+      padding-right: var(--gfi-u-lbl-pd); // # 12px;
+    }
+  }
+
+  .gfi-frm-underline, .gfi-frm-standard {
+    .gfi-ornament-wrap:not(:empty) {
+      margin-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.5);
+    }
+  }
+  .gfi-frm-standard {
+    .gfi-ornament-end-wrap:not(:empty) {
+      margin-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.5);
     }
   }
 
@@ -311,7 +343,7 @@ grn-frame-input { //outline: 1px dashed crimson;
     margin: 0;
     padding: 0px calc(var(--gfi-o-lbl-pd) - var(--gfi-o-lgn-pd) - 0.4px); // (14px - 4,4px)=9,6px;
     pointer-events: none;
-    border-radius: var(--gfi-o-br-rd);
+    border-radius: var(--gfi-o-br-rd, calc(var(--gfi-size)/10));
     border-style: solid;
     overflow: hidden;
     min-width: 0%;
@@ -371,42 +403,5 @@ grn-frame-input { //outline: 1px dashed crimson;
       margin-right: var(--gfi-u-lbl-pd);
       margin-left: var(--gfi-u-lbl-pd);
     }
-  }
-
-  // Input content "ornament"
-  &:not(.gfi-ornament) {
-    .gfi-frm-outlined {
-      padding-left: var(--gfi-o-lbl-pd);  // # 14px;
-    }
-    .gfi-frm-underline {
-      padding-left: var(--gfi-u-lbl-pd);  // # 12px;
-    }  
-  }
-  &:not(.gfi-ornament-end) {
-    .gfi-frm-outlined {
-      padding-right: var(--gfi-o-lbl-pd); // # 14px;
-    }
-    .gfi-frm-underline {
-      padding-right: var(--gfi-u-lbl-pd); // # 12px;
-    }  
-  }
-
-  &.gfi-ornament {
-    .gfi-frm-underline, .gfi-frm-standard {
-      .gfi-ornament-wrap {
-        margin-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.5);
-      }
-    }
-  }
-  &.gfi-ornament-end {
-    .gfi-frm-standard {
-      .gfi-ornament-wrap {
-        margin-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.5);
-      }
-    }
-  }
-  
-  .gfi-ornament-wrap {
-    max-height: inherit;
   }
 }

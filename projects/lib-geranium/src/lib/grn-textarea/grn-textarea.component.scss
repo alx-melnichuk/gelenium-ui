@@ -43,24 +43,5 @@ grn-textarea {
     &:focus {
       outline: 0;
     }
-    &.Grn-disabled {
-      opacity: 1;
-      -webkit-text-fill-color: rgba(0, 0, 0, 0.38);
-    }
-  }
-
-    // Textarea content "ornament"
-  .gt-ornament,
-  .gt-ornament-end {
-    display: inline-block;
-    height: 0.01em;
-    max-height: 2em;
-    white-space: nowrap;
-  }
-  .gt-ornament>:last-of-type {
-    margin-right: 8px;
-  }
-  .gt-ornament-end>:first-of-type {
-    margin-left: 8px;
   }
 }

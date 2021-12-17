@@ -1,6 +1,5 @@
 <ng-container [formGroup]="formGroup">
-  <grn-frame-input [ngClass]="classesFrameInput"
-    [inputId]="id"
+  <grn-frame-input [inputId]="id"
     [label]="label"
     [exterior]="exteriorVal"
     [isRequired]="isRequiredVal"
@@ -16,14 +15,11 @@
       class="gfi-ornament-wrap">
       <ng-content select="[grnOrnament]"></ng-content>
     </span>
-    <!-- <grnOrnament *ngIf="grnOrnamentList.length">
-      <ng-content select="[grnOrnament]"></ng-content>
-    </grnOrnament> -->
     <input #inputElement
       formControlName="textData"
       [attr.id]="id"
       [type]="typeVal"
-      [ngClass]="['gi-input', 'gfi-damper', 'gfi-molding', 'GrnInputBase', 'gi-' + exteriorVal
+      [ngClass]="['gi-input', 'gfi-damper', 'gfi-molding', 'gfi-molding2', 'GrnInputBase', 'gi-' + exteriorVal
         , (isDisabledVal ? 'Grn-disabled': '')
         , (!!formControl.errors ? 'Grn-error': '')]"
       [attr.disabled]="isDisabledVal ? '': null"
@@ -40,12 +36,10 @@
       (keydown)="doKeydown($event)"
       (keypress)="doKeypress($event)"
       (keyup)="doKeyup($event)" />
-    <!-- <grnOrnamentEnd *ngIf="grnOrnamentEndList.length">
-      <ng-content select="[grnOrnamentEnd]"></ng-content>
-    </grnOrnamentEnd> -->
     <span #grnOrnamentEnd
-      class="gfi-ornament-wrap">
+      class="gfi-ornament-end-wrap">
       <ng-content select="[grnOrnamentEnd]"></ng-content>
     </span>
+    <span class="gfi-input-pd-rg"></span>
   </grn-frame-input>
 </ng-container>

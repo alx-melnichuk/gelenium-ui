@@ -11,15 +11,16 @@
     [isError]="!!formControl.errors || isErrorVal"
     [helperText]="helperText"
     [frameSize]="frameSizeVal">
-    <div class="gt-ornament">
+    <span #grnOrnament
+      class="gfi-ornament-wrap">
       <ng-content select="[grnOrnament]"></ng-content>
-    </div>
+    </span>
     <textarea #textareaElement
       [cols]="cntCols"
       formControlName="textData"
       [attr.id]="id"
       [rows]="currentRows"
-      [ngClass]="['gt-textarea', 'gfi-damper', 'gfi-molding', 'GrnTextareaBase', 'gt-' + exteriorVal
+      [ngClass]="['gt-textarea', 'gfi-damper', 'gfi-molding', 'gfi-molding2', 'GrnTextareaBase', 'gt-' + exteriorVal
         , (isDisabledVal ? 'Grn-disabled': '')
         , (!!formControl.errors ? 'Grn-error': '')
       ]"
@@ -34,9 +35,11 @@
       (keypress)="doKeypress($event)"
       (keyup)="doKeyup($event)">
     </textarea>
-    <div class="gt-ornament-end">
+    <span #grnOrnamentEnd
+      class="gfi-ornament-end-wrap">
       <ng-content select="[grnOrnamentEnd]"></ng-content>
-    </div>
+    </span>
+    <span class="gfi-input-pd-rg"></span>
   </grn-frame-input>
 
 </ng-container>
