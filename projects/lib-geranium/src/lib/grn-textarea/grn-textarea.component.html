@@ -15,12 +15,16 @@
       class="gfi-ornament-wrap">
       <ng-content select="[grnOrnament]"></ng-content>
     </span>
+    <span #grnOrnamentEnd
+      class="gfi-ornament-end-wrap">
+      <ng-content select="[grnOrnamentEnd]"></ng-content>
+    </span>
     <textarea #textareaElement
       [cols]="cntCols"
       formControlName="textData"
       [attr.id]="id"
       [rows]="currentRows"
-      [ngClass]="['gt-textarea', 'gfi-damper', 'gfi-molding', 'gfi-molding2', 'GrnTextareaBase', 'gt-' + exteriorVal
+      [ngClass]="['gt-textarea', 'gfi-damper', 'gfi-molding-ver', 'gfi-molding-hor', 'GrnTextareaBase', 'gt-' + exteriorVal
         , (isDisabledVal ? 'Grn-disabled': '')
         , (!!formControl.errors ? 'Grn-error': '')
       ]"
@@ -35,11 +39,5 @@
       (keypress)="doKeypress($event)"
       (keyup)="doKeyup($event)">
     </textarea>
-    <span #grnOrnamentEnd
-      class="gfi-ornament-end-wrap">
-      <ng-content select="[grnOrnamentEnd]"></ng-content>
-    </span>
-    <span class="gfi-input-pd-rg"></span>
   </grn-frame-input>
-
 </ng-container>

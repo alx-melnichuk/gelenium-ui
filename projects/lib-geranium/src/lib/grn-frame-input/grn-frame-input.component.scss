@@ -146,6 +146,9 @@ grn-frame-input { //outline: 1px dashed crimson;
   // Max width of the label in the unshrink position (in the middle) for "underline" mode.
   // --gfi-u-lbl2-wd: calc(100% - var(--gfi-u-lbl2-pd-lf) - var(--gfi-u-lbl2-pd-rg));
 
+
+  // Left padding of the label in a shrink position (in the top) for "standard" mode.
+  // --gfi-s-lbl-pd: 0px;
   // Left padding of the label in the unshrink position (in the middle) for "standard" mode.
   --gfi-s-lbl2-pd-lf: 0px;
   // Right padding of the label in the unshrink position (in the middle) for "standard" mode.
@@ -207,8 +210,8 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
   .gfi-lbl-standard {
     &.gfi-lbl-shrink {
-      max-width: var(--gfi-s-lbl-wd, 133%); // # 133%;
-      @include mxTransformTranslateXYScale(0, -1.5px, 0.75); // # (0px, -1.5px, 0.75) original
+      max-width: var(--gfi-s-lbl-wd, calc(133% - 2.66*var(--gfi-s-lbl-pd, 0))); // # 133%;
+      @include mxTransformTranslateXYScale(var(--gfi-s-lbl-pd, 0), -1.5px, 0.75); // # (0px, -1.5px, 0.75) original
     }
     &:not(.gfi-lbl-shrink) {
       max-width: var(--gfi-s-lbl2-wd, calc(100% - var(--gfi-s-lbl2-pd-lf) - var(--gfi-s-lbl2-pd-rg))); // # calc(100% - 0px);
@@ -239,7 +242,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
   
   .gfi-frm-outlined {
-    &>.gfi-molding {
+    &>.gfi-molding-ver {
       padding-top: calc((var(--gfi-size) - var(--gfi-ln-hg))/2); // # 16.5px;
       padding-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))/2); // # 16.5px;
     }
@@ -248,40 +251,50 @@ grn-frame-input { //outline: 1px dashed crimson;
     border-radius: var(--gfi-u-br-rd);
     -webkit-transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    &>.gfi-molding {
+    &>.gfi-molding-ver {
       padding-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75); // # 24.75px;
       padding-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.25); // # 8.25px;
     }
   }
   .gfi-frm-standard {
-    &>.gfi-molding {
+    &>.gfi-molding-ver {
       padding-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75); // # 24.75px;
       padding-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.25); // # 8.25px;
     }
   }
 
-  
+  // Ornament "padding".
   .gfi-ornament-wrap {
     max-height: inherit;
   }
-
+  .gfi-ornament-end-wrap {
+    order: 1;
+  }
   .gfi-frm-outlined {
-    .gfi-ornament-wrap:empty+.gfi-molding2 {
+    .gfi-ornament-wrap:empty~.gfi-molding-hor {
       padding-left: var(--gfi-o-lbl-pd);  // # 14px;
     }
-    .gfi-ornament-end-wrap:empty+.gfi-input-pd-rg {
+    .gfi-ornament-end-wrap:empty~.gfi-molding-hor {
       padding-right: var(--gfi-o-lbl-pd); // # 14px;
     }
   }
   .gfi-frm-underline {
-    .gfi-ornament-wrap:empty+.gfi-molding2 {
+    .gfi-ornament-wrap:empty~.gfi-molding-hor {
       padding-left: var(--gfi-u-lbl-pd);  // # 12px;
     }
-    .gfi-ornament-end-wrap:empty+.gfi-input-pd-rg {
+    .gfi-ornament-end-wrap:empty~.gfi-molding-hor {
       padding-right: var(--gfi-u-lbl-pd); // # 12px;
     }
   }
-
+  .gfi-frm-standard {
+    .gfi-ornament-wrap:empty~.gfi-molding-hor {
+      padding-left: var(--gfi-s-lbl-pd, 0);  // # 0px;
+    }
+    .gfi-ornament-end-wrap:empty~.gfi-molding-hor {
+      padding-right: var(--gfi-s-lbl-pd, 0); // # 0px;
+    }
+  }
+  // Ornament "margin-top".
   .gfi-frm-underline, .gfi-frm-standard {
     .gfi-ornament-wrap:not(:empty) {
       margin-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.5);

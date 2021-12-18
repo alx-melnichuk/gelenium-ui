@@ -49,8 +49,7 @@
   novalidate
   autocomplete="off">
 
-  <div class="app-group"
-    *ngIf="false">
+  <div class="app-group">
 
     <div class="app-elem io-elem">
       <div>
@@ -59,7 +58,6 @@
         </small>
       </div>
       <grn-input formControlName="input05a"
-        class="gfi-u-orn-mr gfi-s-orn-mr"
         label="Enter the mass"
         helperText="The value is greater than zero."
         [exterior]="exterior05">
@@ -89,7 +87,6 @@
         </small>
       </div>
       <grn-input formControlName="input05c"
-        class="gfi-u-orn-mr gfi-s-orn-mr"
         label="Enter a small number in words"
         isRequired
         [minLength]="minLength05"
@@ -152,7 +149,6 @@
         </small>
       </div>
       <grn-input formControlName="input05e"
-        class="gfi-u-orn-mr gfi-s-orn-mr"
         [type]="isBtnEyeCrossed05e ? 'text':'password'"
         label="Enter a unique password in words"
         isRequired
@@ -197,11 +193,9 @@
         </button>
       </grn-input>
     </div>
-  </div>
 
-  <div class="app-group">
     <div class="app-elem io-elem">
-      <div [grnFrameSize]="'wide'">
+      <div>
         <small>
           <em>Section: "grnOrnament" + uncode.</em>
         </small>
@@ -268,41 +262,40 @@
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnament".&lt;/em&gt;
+          &lt;em&gt;Section: "grnOrnament" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input05a"
         label="Enter the mass"
-        lbShrink
         helperText="The value is greater than zero."
         [exterior]="exterior05"&gt;
-        &lt;span grnOrnament&gt;kg&lt;/span&gt;
+        &lt;span grnOrnament
+          class="io-pd-8"&gt;kg&lt;/span&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnamentEnd".&lt;/em&gt;
+          &lt;em&gt;Section: "grnOrnamentEnd" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input05b"
         label="Enter the height"
-        lbShrink
         [exterior]="exterior05"&gt;
-        &lt;span grnOrnamentEnd&gt;см&lt;/span&gt;
+        &lt;span grnOrnamentEnd
+          class="io-pd-8"&gt;см&lt;/span&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnament".&lt;/em&gt;
+          &lt;em&gt;Section: "grnOrnament" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input05c"
-        label="Enter the number in words"
-        lbShrink
+        label="Enter a small number in words"
         isRequired
         [minLength]="minLength05"
         [maxLength]="maxLength05"
@@ -321,19 +314,19 @@
             :'')
           )
         )"&gt;
-        &lt;span grnOrnament&gt;$&lt;/span&gt;
+        &lt;span grnOrnament
+          class="io-pd-8"&gt;$&lt;/span&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnamentEnd".&lt;/em&gt;
+          &lt;em&gt;Section: "grnOrnamentEnd" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input05d"
-        label="Enter the number in words"
-        lbShrink
+        label="Enter a small number in words"
         isRequired
         [minLength]="minLength05"
         [maxLength]="maxLength05"
@@ -352,20 +345,20 @@
             :'')
           )
         )"&gt;
-        &lt;span grnOrnamentEnd&gt;$&lt;/span&gt;
+        &lt;span grnOrnamentEnd
+          class="io-pd-8"&gt;$&lt;/span&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnament".&lt;/em&gt;
+          &lt;em&gt;Section: "grnOrnament" + icon.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input05e"
         [type]="isBtnEyeCrossed05e ? 'text':'password'"
-        label="Enter password"
-        lbShrink
+        label="Enter a unique password in words"
         isRequired
         [exterior]="exterior05"
         [helperText]="
@@ -373,7 +366,7 @@
         ? 'The password value is required.'
         :'Enter the password value.'"&gt;
         &lt;button grnOrnament
-          class="io-btn-eye"
+          class="io-btn-eye io-btn"
           (click)="isBtnEyeCrossed05e=!isBtnEyeCrossed05e"&gt;
           &lt;span [ngClass]="[
             'io-icon-eye', (isBtnEyeCrossed05e ? 'crossed':'')
@@ -385,14 +378,13 @@
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnamentEnd".&lt;/em&gt;
+          &lt;em&gt;Section: "grnOrnamentEnd" + icon.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input05f"
         [ngClass]="[(!isBtnEyeCrossed05f ?'io-passwd-big':'')]"
         [type]="isBtnEyeCrossed05f ? 'text':'password'"
-        label="Enter password"
-        lbShrink
+        label="Enter a unique password in words"
         wdFull
         isRequired
         [exterior]="exterior05"
@@ -401,7 +393,7 @@
           ? 'The password value is required.'
           : 'Enter the password value.'"&gt;
         &lt;button grnOrnamentEnd
-          class="io-btn-eye"
+          class="io-btn-eye io-btn"
           (click)="isBtnEyeCrossed05f=!isBtnEyeCrossed05f"&gt;
           &lt;span [ngClass]="[
             'io-icon-eye', (isBtnEyeCrossed05f ? 'crossed':'')
@@ -410,8 +402,53 @@
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
-  &lt;/div&gt;
+    &lt;div class="app-elem io-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "grnOrnament" + uncode.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input05g"
+        [type]="isBtnEyeCrossed05g ? 'text':'password'"
+        label="Enter a unique password in words"
+        isRequired
+        [exterior]="exterior05"
+        [helperText]="
+        controls05.input05g.errors?.required
+        ? 'The password value is required.'
+        :'Enter the password value.'"&gt;
+        &lt;button grnOrnament
+          class="io-uncode io-btn"
+          (click)="isBtnEyeCrossed05g=!isBtnEyeCrossed05g"&gt;
+          &lt;span&gt;<b>&#123;</b>&#123; isBtnEyeCrossed05g ? '&#128275;': '&#128274;' &#125;&#125;&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
 
+    &lt;div class="app-elem io-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "grnOrnamentEnd" + uncode.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input05h"
+        [type]="isBtnEyeCrossed05h ? 'text':'password'"
+        label="Enter a unique password in words"
+        isRequired
+        [exterior]="exterior05"
+        [helperText]="
+        controls05.input05h.errors?.required
+        ? 'The password value is required.'
+        :'Enter the password value.'"&gt;
+        &lt;button grnOrnamentEnd
+          class="io-uncode io-btn io-underline"
+          (click)="isBtnEyeCrossed05h=!isBtnEyeCrossed05h"&gt;
+          &lt;span&gt;<b>&#123;</b>&#123; isBtnEyeCrossed05h ? '&#128275;': '&#128274;' &#125;&#125;&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
 &lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
@@ -463,27 +500,36 @@ export class InputComponent &#123;
 .io-elem &#123;
   width: 26ch;
 &#125;
+.io-ornament .io-pd-8 &#123;
+  padding-left: 8px;
+  padding-right: 8px;
+&#125;
 
-.io-ornament .io-btn-eye &#123;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  background-color: transparent;
+.io-ornament .io-btn &#123;
   outline: 0;
   border: 0;
   margin: 0;
+  box-sizing: border-box;
   cursor: pointer;
   user-select: none;
-  vertical-align: middle;
-  flex: 0 0 auto;
-  font-size: 1.5rem;
   border-radius: 50%;
+  background-color: transparent;
+&#125;
+
+.io-ornament .io-btn:hover &#123; background-color: rgba(0, 0, 0, 0.04); &#125;
+
+.io-uncode &#123;
+  font-size: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+&#125;
+
+.io-ornament .io-btn-eye &#123;
+  padding-top: 3px;
+  vertical-align: middle;
   overflow: visible;
   transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 &#125;
-.io-ornament .io-btn-eye:hover &#123; background-color: rgba(0, 0, 0, 0.04); &#125;
-
 
 .io-ornament .io-icon-eye &#123;
   background: center no-repeat;
