@@ -1,0 +1,54 @@
+<section mr-vr>
+  <h3>Ornaments for the textarea.</h3>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior05">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form class="io-ornament"
+  [formGroup]="formGroup05"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem io-elem">
+      <div>
+        <small>
+          <em>Section: "grnOrnament" + text.</em>
+        </small>
+      </div>
+      <grn-textarea formControlName="input05a"
+        label="Enter the mass"
+        [cntRows]="1"
+        helperText="The value is greater than zero."
+        [exterior]="exterior05">
+        <span grnOrnament
+          class="io-pd-8">kg</span>
+      </grn-textarea>
+    </div>
+
+    <div class="app-elem io-elem">
+      <div>
+        <small>
+          <em>Section: "grnOrnamentEnd" + text.</em>
+        </small>
+      </div>
+      <grn-textarea formControlName="input05b"
+        label="Enter the height"
+        [cntRows]="1"
+        [exterior]="exterior05">
+        <span grnOrnamentEnd
+          class="io-pd-8">см</span>
+      </grn-textarea>
+    </div>
+
+  </div>
+
+</form>

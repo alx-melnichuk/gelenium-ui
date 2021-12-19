@@ -23,7 +23,8 @@
   , (isDisabled ? 'Grn-disabled': '')
   , (isDisabled ? 'p-inp-dis-cl': '')
   , (isFocused ? 'Grn-focused': '')
-]">
+]"
+  (click)="doClickFrame($event)">
   <ng-content></ng-content>
   <fieldset *ngIf="isOutlinedExterior"
     aria-hidden="true"

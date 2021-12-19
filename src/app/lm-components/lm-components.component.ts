@@ -104,6 +104,7 @@ export class LmComponentsComponent implements OnInit {
     result.push(UrlItemUtil.create('Attributes', url + '#Attributes'));
     result.push(UrlItemUtil.create('Validation', url + '#Validation'));
     result.push(UrlItemUtil.create('Capability', url + '#Capability'));
+    result.push(UrlItemUtil.create('Ornaments', url + '#Ornaments'));
     result.push(UrlItemUtil.create('Item size', url + '#ItemSize'));
     result.push(UrlItemUtil.create('Helper text', url + '#HelperText'));
     result.push(UrlItemUtil.create('Border radius', url + '#BorderRadius'));

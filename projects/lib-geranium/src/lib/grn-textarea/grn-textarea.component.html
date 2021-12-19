@@ -10,7 +10,8 @@
     [hiddenLabel]="isHiddenLabel"
     [isError]="!!formControl.errors || isErrorVal"
     [helperText]="helperText"
-    [frameSize]="frameSizeVal">
+    [frameSize]="frameSizeVal"
+    (clickFrame)="doClickFrame()">
     <span #grnOrnament
       class="gfi-ornament-wrap">
       <ng-content select="[grnOrnament]"></ng-content>
@@ -24,7 +25,7 @@
       formControlName="textData"
       [attr.id]="id"
       [rows]="currentRows"
-      [ngClass]="['gt-textarea', 'gfi-damper', 'gfi-molding-ver', 'gfi-molding-hor', 'GrnTextareaBase', 'gt-' + exteriorVal
+      [ngClass]="['gt-textarea', 'gfi-damper', 'gfi-molding-mr-ver', 'gfi-molding-pd-hor', 'GrnTextareaBase', 'gt-' + exteriorVal
         , (isDisabledVal ? 'Grn-disabled': '')
         , (!!formControl.errors ? 'Grn-error': '')
       ]"
@@ -37,7 +38,8 @@
       (change)="doChange($event)"
       (keydown)="doKeydown($event)"
       (keypress)="doKeypress($event)"
-      (keyup)="doKeyup($event)">
+      (keyup)="doKeyup($event)"
+      (click)="$event.stopPropagation();">
     </textarea>
   </grn-frame-input>
 </ng-container>

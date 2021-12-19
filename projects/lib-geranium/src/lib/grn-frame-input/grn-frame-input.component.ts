@@ -1,10 +1,10 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
+  EventEmitter,
   HostBinding,
   HostListener,
   Inject,
@@ -12,7 +12,7 @@ import {
   Input,
   OnChanges,
   Optional,
-  Renderer2,
+  Output,
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
@@ -57,6 +57,9 @@ export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
   public helperText: string | null = null;
   @Input()
   public frameSize: FrameSize | null = null;
+
+  @Output()
+  readonly clickFrame: EventEmitter<Event> = new EventEmitter();
 
   @ContentChild('grnOrnament', { static: true })
   public grnOrnament: ElementRef | undefined;
@@ -113,12 +116,7 @@ export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
   public ornamentWidth = 0;
   public ornamentEndWidth = 0;
 
-  constructor(
-    @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private config: GrnFrameInputConfig | null,
-    private renderer: Renderer2,
-    private elementRef: ElementRef,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {
+  constructor(@Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private config: GrnFrameInputConfig | null) {
     this.exterior = ExteriorUtil.create(this.exterior, this.config?.exterior || null);
     this.frameSize = FrameSizeUtil.create(this.frameSize, this.config?.frameSize || null);
     this.isLabelShrink = this.createBoolean(this.isLabelShrink, this.config?.isLabelShrink);
@@ -206,6 +204,10 @@ export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
       result = 'dis';
     }
     return result;
+  }
+
+  public doClickFrame(event: Event): void {
+    this.clickFrame.emit(event);
   }
 
   // ** Private API **

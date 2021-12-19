@@ -10,7 +10,7 @@ import { URL_FRAME_INPUT, URL_ROOT } from '../../constants/url.constants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent {
-  public showNum = '';
+  public showNum = '05';
   public urlFrameInput = '/' + URL_ROOT + '/' + URL_FRAME_INPUT;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

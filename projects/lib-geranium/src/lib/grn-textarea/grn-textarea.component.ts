@@ -228,7 +228,7 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
 
   public focus(): void {
     if (isPlatformBrowser(this.platformId) && !!this.textareaElementRef) {
-      this.textareaElementRef.nativeElement.focus();
+      (this.textareaElementRef.nativeElement as HTMLInputElement).focus();
     }
   }
 
@@ -265,6 +265,10 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
 
   public doKeyup(event: KeyboardEvent): void {
     this.keyupData.emit(event);
+  }
+
+  public doClickFrame(): void {
+    this.focus();
   }
 
   // ** Private API **
