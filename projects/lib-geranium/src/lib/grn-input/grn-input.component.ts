@@ -33,6 +33,7 @@ import {
 import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
+import { OrnamAlign, OrnamAlignUtil } from '../interfaces/ornam-align.interface';
 
 import { InputType, InputTypeUtil } from './grn-input.interface';
 
@@ -70,6 +71,10 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public lbShrink: string | null = null;
   @Input()
   public frameSize: string | null = null; // FrameSizeType
+  @Input()
+  public ornamAlign: string | null = null; // OrnamAlign
+  @Input()
+  public ornamEndAlign: string | null = null; // OrnamAlign
   @Input()
   public hiddenLabel: string | null = null;
   @Input()
@@ -117,6 +122,8 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public isDisabledVal = false; // Binding attribute "isDisabled".
   public isLabelShrink: boolean | null = null; // Binding attribute "lbShrink".
   public frameSizeVal: FrameSize | null = null;
+  public ornamAlignVal: OrnamAlign | null = null;
+  public ornamEndAlignVal: OrnamAlign | null = null;
   public isHiddenLabel: boolean | null = null; // Binding attribute "hiddenLabel".
   public isErrorVal = false; // Binding attribute "isError".
 
@@ -149,6 +156,12 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
     if (changes.frameSize) {
       this.frameSizeVal = FrameSizeUtil.convert(this.frameSize);
     }
+    if (changes.ornamAlign) {
+      this.ornamAlignVal = OrnamAlignUtil.convert(this.ornamAlign);
+    }
+    if (changes.ornamEndAlign) {
+      this.ornamEndAlignVal = OrnamAlignUtil.convert(this.ornamEndAlign);
+    }
     this.isHiddenLabel = changes.hiddenLabel ? this.hiddenLabel !== null : this.isHiddenLabel;
     this.isErrorVal = changes.isError ? this.isError !== null : this.isErrorVal;
     this.isHelperTextFilled = changes.helperText ? !!this.helperText : this.isHelperTextFilled;
@@ -168,7 +181,7 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public writeValue(value: any): void {
     const isFilledOld = !!this.formControl.value;
     this.formControl.setValue(value, { emitEvent: false });
-    this.isFilled = !!this.formControl.value;
+    this.isFilled = this.formControl.value !== '' && this.formControl.value != null;
     if (isFilledOld !== this.isFilled) {
       this.changeDetectorRef.markForCheck();
     }

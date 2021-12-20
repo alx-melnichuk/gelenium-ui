@@ -62,7 +62,7 @@
         helperText="The value is greater than zero."
         [exterior]="exterior05">
         <span grnOrnament
-          class="io-pd-8">kg</span>
+          class="gfi-su-ornam io-pd-hor">kg</span>
       </grn-input>
     </div>
 
@@ -76,7 +76,7 @@
         label="Enter the height"
         [exterior]="exterior05">
         <span grnOrnamentEnd
-          class="io-pd-8">см</span>
+          class="gfi-su-ornam io-pd-hor">cm</span>
       </grn-input>
     </div>
 
@@ -107,7 +107,7 @@
           )
         )">
         <span grnOrnament
-          class="io-pd-8">$</span>
+          class="gfi-ornam io-pd-hor">$</span>
       </grn-input>
     </div>
 
@@ -138,7 +138,7 @@
           )
         )">
         <span grnOrnamentEnd
-          class="io-pd-8">$</span>
+          class="gfi-ornam io-pd-hor">$</span>
       </grn-input>
     </div>
 
@@ -158,7 +158,7 @@
         ? 'The password value is required.'
         :'Enter the password value.'">
         <button grnOrnament
-          class="io-btn-eye io-btn"
+          class="gfi-ornam io-btn io-btn-eye"
           (click)="isBtnEyeCrossed05e=!isBtnEyeCrossed05e">
           <span [ngClass]="[
             'io-icon-eye', (isBtnEyeCrossed05e ? 'crossed':'')
@@ -185,7 +185,7 @@
           ? 'The password value is required.'
           : 'Enter the password value.'">
         <button grnOrnamentEnd
-          class="io-btn-eye io-btn"
+          class="gfi-ornam io-btn io-btn-eye"
           (click)="isBtnEyeCrossed05f=!isBtnEyeCrossed05f">
           <span [ngClass]="[
             'io-icon-eye', (isBtnEyeCrossed05f ? 'crossed':'')
@@ -201,6 +201,7 @@
         </small>
       </div>
       <grn-input formControlName="input05g"
+        class="io-demo"
         [type]="isBtnEyeCrossed05g ? 'text':'password'"
         label="Enter a unique password in words"
         isRequired
@@ -210,7 +211,7 @@
         ? 'The password value is required.'
         :'Enter the password value.'">
         <button grnOrnament
-          class="io-uncode io-btn"
+          class="gfi-ornam io-btn io-uncode"
           (click)="isBtnEyeCrossed05g=!isBtnEyeCrossed05g">
           <span>{{ isBtnEyeCrossed05g ? '&#128275;': '&#128274;' }}</span>
         </button>
@@ -233,14 +234,121 @@
         ? 'The password value is required.'
         :'Enter the password value.'">
         <button grnOrnamentEnd
-          class="io-uncode io-btn io-underline"
+          class="gfi-ornam io-btn io-uncode"
           (click)="isBtnEyeCrossed05h=!isBtnEyeCrossed05h">
           <span>{{ isBtnEyeCrossed05h ? '&#128275;': '&#128274;' }}</span>
         </button>
       </grn-input>
     </div>
 
+    <div class="io-elem2">
+      <div>
+        <small>
+          <em>regex=/^-?(\d+)$/, uncode</em>
+        </small>
+      </div>
+      <grn-input formControlName="input05i"
+        wdFull
+        [label]="controls05.input05i.value === ''
+          ?'Enter number':'Number'"
+        grnRegexMatch="/^-?(\d+)$/"
+        [helperText]="controls05.input05i.value === ''
+          ?'Enter your number value.'
+          :'The value is correct.'"
+        [exterior]="exterior05">
+        <button grnOrnament
+          class="io-btn io-uncode2"
+          (click)="controls05.input05i.setValue(
+            (controls05.input05i.value || 0) - 1)">
+          &#8854;
+        </button>
+        <button grnOrnamentEnd
+          class="io-btn io-uncode2"
+          (click)="controls05.input05i.setValue(
+            (controls05.input05i.value || 0) + 1)">
+          &#8853;
+        </button>
+      </grn-input>
+    </div>
+
   </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Demonstration of the alignment of the ornament.</em>
+      </small>
+    </div>
+  </div>
+
+  <section mr-vr>
+    <span>ornamAlign: </span>
+    <mat-button-toggle-group [(ngModel)]="ornamAlign05"
+      [ngModelOptions]="{ standalone: true }">
+      <mat-button-toggle value="default">default</mat-button-toggle>
+      <mat-button-toggle value="center">center</mat-button-toggle>
+      <mat-button-toggle value="flex-start">flex-start</mat-button-toggle>
+      <mat-button-toggle value="flex-end">flex-end</mat-button-toggle>
+      <mat-button-toggle value="baseline">baseline</mat-button-toggle>
+      <mat-button-toggle value="stretch">stretch</mat-button-toggle>
+    </mat-button-toggle-group>
+  </section>
+
+  <div class="app-group">
+
+    <div class="app-elem io-elem">
+      <div>
+        <small>
+          <em>Section: "grnOrnament" + text.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input05j"
+        [label]="controls05.input05j.value === ''
+          ?'Enter a value':'Value'"
+        [ornamAlign]="ornamAlign05"
+        [exterior]="exterior05"
+        [helperText]="controls05.input05j.value === ''
+          ?'Enter your value.'
+          :'The value is correct.'">
+        <span grnOrnament
+          class="gfi-ornam io-pd-hor">$</span>
+      </grn-input>
+    </div>
+
+    <div class="app-elem io-elem">
+      <div>
+        <small>
+          <em>Section: "grnOrnamentEnd" + text.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input05k"
+        [label]="controls05.input05k.value === ''
+          ?'Enter a value':'Value'"
+        [ornamEndAlign]="ornamEndAlign05"
+        [exterior]="exterior05"
+        [helperText]="controls05.input05k.value === ''
+          ?'Enter your value.'
+          :'The value is correct.'">
+        <span grnOrnamentEnd
+          class="gfi-ornam io-pd-hor">$</span>
+      </grn-input>
+    </div>
+
+  </div>
+
+  <section mr-vr>
+    <span>ornamEndAlign: </span>
+    <mat-button-toggle-group [(ngModel)]="ornamEndAlign05"
+      [ngModelOptions]="{ standalone: true }">
+      <mat-button-toggle value="default">default</mat-button-toggle>
+      <mat-button-toggle value="center">center</mat-button-toggle>
+      <mat-button-toggle value="flex-start">flex-start</mat-button-toggle>
+      <mat-button-toggle value="flex-end">flex-end</mat-button-toggle>
+      <mat-button-toggle value="baseline">baseline</mat-button-toggle>
+      <mat-button-toggle value="stretch">stretch</mat-button-toggle>
+    </mat-button-toggle-group>
+  </section>
+
 </form>
 
 <section mr-vr>
@@ -270,7 +378,7 @@
         helperText="The value is greater than zero."
         [exterior]="exterior05"&gt;
         &lt;span grnOrnament
-          class="io-pd-8"&gt;kg&lt;/span&gt;
+          class="gfi-su-ornam io-pd-hor"&gt;kg&lt;/span&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -284,7 +392,7 @@
         label="Enter the height"
         [exterior]="exterior05"&gt;
         &lt;span grnOrnamentEnd
-          class="io-pd-8"&gt;см&lt;/span&gt;
+          class="gfi-su-ornam io-pd-hor"&gt;cm&lt;/span&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -315,7 +423,7 @@
           )
         )"&gt;
         &lt;span grnOrnament
-          class="io-pd-8"&gt;$&lt;/span&gt;
+          class="gfi-ornam io-pd-hor"&gt;$&lt;/span&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -346,7 +454,7 @@
           )
         )"&gt;
         &lt;span grnOrnamentEnd
-          class="io-pd-8"&gt;$&lt;/span&gt;
+          class="gfi-ornam io-pd-hor"&gt;$&lt;/span&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -366,7 +474,7 @@
         ? 'The password value is required.'
         :'Enter the password value.'"&gt;
         &lt;button grnOrnament
-          class="io-btn-eye io-btn"
+          class="gfi-ornam io-btn io-btn-eye"
           (click)="isBtnEyeCrossed05e=!isBtnEyeCrossed05e"&gt;
           &lt;span [ngClass]="[
             'io-icon-eye', (isBtnEyeCrossed05e ? 'crossed':'')
@@ -393,7 +501,7 @@
           ? 'The password value is required.'
           : 'Enter the password value.'"&gt;
         &lt;button grnOrnamentEnd
-          class="io-btn-eye io-btn"
+          class="gfi-ornam io-btn io-btn-eye"
           (click)="isBtnEyeCrossed05f=!isBtnEyeCrossed05f"&gt;
           &lt;span [ngClass]="[
             'io-icon-eye', (isBtnEyeCrossed05f ? 'crossed':'')
@@ -409,6 +517,7 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input05g"
+        class="io-demo"
         [type]="isBtnEyeCrossed05g ? 'text':'password'"
         label="Enter a unique password in words"
         isRequired
@@ -418,7 +527,7 @@
         ? 'The password value is required.'
         :'Enter the password value.'"&gt;
         &lt;button grnOrnament
-          class="io-uncode io-btn"
+          class="gfi-ornam io-btn io-uncode"
           (click)="isBtnEyeCrossed05g=!isBtnEyeCrossed05g"&gt;
           &lt;span&gt;<b>&#123;</b>&#123; isBtnEyeCrossed05g ? '&#128275;': '&#128274;' &#125;&#125;&lt;/span&gt;
         &lt;/button&gt;
@@ -441,14 +550,95 @@
         ? 'The password value is required.'
         :'Enter the password value.'"&gt;
         &lt;button grnOrnamentEnd
-          class="io-uncode io-btn io-underline"
+          class="gfi-ornam io-btn io-uncode"
           (click)="isBtnEyeCrossed05h=!isBtnEyeCrossed05h"&gt;
           &lt;span&gt;<b>&#123;</b>&#123; isBtnEyeCrossed05h ? '&#128275;': '&#128274;' &#125;&#125;&lt;/span&gt;
         &lt;/button&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
+    &lt;div class="io-elem2"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;regex=/^-?(\d+)$/, uncode&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input05i"
+        wdFull
+        [label]="controls05.input05i.value === ''
+          ?'Enter number':'Number'"
+        grnRegexMatch="/^-?(\d+)$/"
+        [helperText]="controls05.input05i.value === ''
+          ?'Enter your number value.'
+          :'The value is correct.'"
+        [exterior]="exterior05"&gt;
+        &lt;button grnOrnament
+          class="io-btn io-uncode2"
+          (click)="controls05.input05i.setValue(
+            (controls05.input05i.value || 0) - 1)"&gt;
+          &#8854;
+        &lt;/button&gt;
+        &lt;button grnOrnamentEnd
+          class="io-btn io-uncode2"
+          (click)="controls05.input05i.setValue(
+            (controls05.input05i.value || 0) + 1)"&gt;
+          &#8853;
+        &lt;/button&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
   &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Demonstration of the alignment of the ornament.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem io-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "grnOrnament" + text.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input05j"
+        [label]="controls05.input05j.value === ''
+          ?'Enter a value':'Value'"
+        [ornamAlign]="ornamAlign05"
+        [exterior]="exterior05"
+        [helperText]="controls05.input05j.value === ''
+          ?'Enter your value.'
+          :'The value is correct.'"&gt;
+        &lt;span grnOrnament
+          class="gfi-ornam io-pd-hor"&gt;$&lt;/span&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem io-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "grnOrnamentEnd" + text.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input05k"
+        [label]="controls05.input05k.value === ''
+          ?'Enter a value':'Value'"
+        [ornamEndAlign]="ornamEndAlign05"
+        [exterior]="exterior05"
+        [helperText]="controls05.input05k.value === ''
+          ?'Enter your value.'
+          :'The value is correct.'"&gt;
+        &lt;span grnOrnamentEnd
+          class="gfi-ornam io-pd-hor"&gt;$&lt;/span&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
 &lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
@@ -463,7 +653,7 @@ import &#123; FormControl, FormGroup &#125; from '@angular/forms';
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class InputComponent &#123;
-  public minLength05 = 4;
+  public minLength05 = 3;
   public maxLength05 = 15;
   public controls05 = &#123;
     input05a: new FormControl('thirty', []),
@@ -473,18 +663,27 @@ export class InputComponent &#123;
       Validators.minLength(this.minLength05),
       Validators.maxLength(this.maxLength05)
     ]),
-    input05d: new FormControl('five hundred ninety eight', [
+    input05d: new FormControl('five hundred', [
       Validators.required,
       Validators.minLength(this.minLength05),
       Validators.maxLength(this.maxLength05),
     ]),
     input05e: new FormControl('thirty', [Validators.required]),
     input05f: new FormControl('thirty', [Validators.required]),
+    input05g: new FormControl('thirty', [Validators.required]),
+    input05h: new FormControl('thirty', [Validators.required]),
+    input05i: new FormControl('', [Validators.required]),
+    input05j: new FormControl('test', []),
+    input05k: new FormControl('test', []),
   &#125;;
   public formGroup05: FormGroup = new FormGroup(this.controls05);
   public exterior05 = 'outlined';
   public isBtnEyeCrossed05e = false;
   public isBtnEyeCrossed05f = false;
+  public isBtnEyeCrossed05g = false;
+  public isBtnEyeCrossed05h = false;
+  public ornamAlign05 = 'default';
+  public ornamEndAlign05 = 'default';
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

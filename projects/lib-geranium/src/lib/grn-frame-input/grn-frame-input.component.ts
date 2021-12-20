@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
@@ -19,6 +19,7 @@ import {
 
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
+import { OrnamAlign, OrnamAlignUtil } from '../interfaces/ornam-align.interface';
 
 import { GrnFrameInputConfig } from './grn-frame-input.interface';
 
@@ -32,7 +33,7 @@ export const GRN_FRAME_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('G
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
+export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   @Input()
   public inputId = '';
   @Input()
@@ -57,6 +58,10 @@ export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
   public helperText: string | null = null;
   @Input()
   public frameSize: FrameSize | null = null;
+  @Input()
+  public ornamAlign: OrnamAlign | null = null;
+  @Input()
+  public ornamEndAlign: OrnamAlign | null = null;
 
   @Output()
   readonly clickFrame: EventEmitter<Event> = new EventEmitter();
@@ -74,30 +79,39 @@ export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
   public get frameSizeValue(): string | null {
     return this.frameSizeVal > 0 ? this.frameSizeVal + 'px' : null;
   }
-  @HostBinding('style.--gfi-o-lbl2-pd-lf')
-  public get labelOPaddingLeft(): string | null {
+  @HostBinding('style.--gfi-ornam-wd')
+  public get ornamentWidthValue(): string | null {
     return this.ornamentWidth > 0 ? this.ornamentWidth + 'px' : null;
   }
-  @HostBinding('style.--gfi-u-lbl2-pd-lf')
-  public get labelUPaddingLeft(): string | null {
-    return this.ornamentWidth > 0 ? this.ornamentWidth + 'px' : null;
-  }
-  @HostBinding('style.--gfi-s-lbl2-pd-lf')
-  public get labelSPaddingLeft(): string | null {
-    return this.ornamentWidth > 0 ? this.ornamentWidth + 'px' : null;
-  }
-  @HostBinding('style.--gfi-o-lbl2-pd-rg')
-  public get label2OPaddingLeft(): string | null {
+  @HostBinding('style.--gfi-ornam-end-wd')
+  public get ornamentEndWidthValue(): string | null {
     return this.ornamentEndWidth > 0 ? this.ornamentEndWidth + 'px' : null;
   }
-  @HostBinding('style.--gfi-u-lbl2-pd-rg')
-  public get label2UPaddingLeft(): string | null {
-    return this.ornamentEndWidth > 0 ? this.ornamentEndWidth + 'px' : null;
-  }
-  @HostBinding('style.--gfi-s-lbl2-pd-rg')
-  public get label2SPaddingLeft(): string | null {
-    return this.ornamentEndWidth > 0 ? this.ornamentEndWidth + 'px' : null;
-  }
+
+  // @HostBinding('style.--gfi-o-lbl2-pd-lf')
+  // public get labelOPaddingLeft(): string | null {
+  //   return this.ornamentWidth > 0 ? this.ornamentWidth + 'px' : null;
+  // }
+  // @HostBinding('style.--gfi-u-lbl2-pd-lf')
+  // public get labelUPaddingLeft(): string | null {
+  //   return this.ornamentWidth > 0 ? this.ornamentWidth + 'px' : null;
+  // }
+  // @HostBinding('style.--gfi-s-lbl2-pd-lf')
+  // public get labelSPaddingLeft(): string | null {
+  //   return this.ornamentWidth > 0 ? this.ornamentWidth + 'px' : null;
+  // }
+  // @HostBinding('style.--gfi-o-lbl2-pd-rg')
+  // public get label2OPaddingLeft(): string | null {
+  //   return this.ornamentEndWidth > 0 ? this.ornamentEndWidth + 'px' : null;
+  // }
+  // @HostBinding('style.--gfi-u-lbl2-pd-rg')
+  // public get label2UPaddingLeft(): string | null {
+  //   return this.ornamentEndWidth > 0 ? this.ornamentEndWidth + 'px' : null;
+  // }
+  // @HostBinding('style.--gfi-s-lbl2-pd-rg')
+  // public get label2SPaddingLeft(): string | null {
+  //   return this.ornamentEndWidth > 0 ? this.ornamentEndWidth + 'px' : null;
+  // }
 
   public get isOutlinedExterior(): boolean {
     return ExteriorUtil.isOutlined(this.exterior);
@@ -119,6 +133,8 @@ export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
   constructor(@Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private config: GrnFrameInputConfig | null) {
     this.exterior = ExteriorUtil.create(this.exterior, this.config?.exterior || null);
     this.frameSize = FrameSizeUtil.create(this.frameSize, this.config?.frameSize || null);
+    this.ornamAlign = OrnamAlignUtil.create(this.ornamAlign, this.config?.ornamAlign || null);
+    this.ornamEndAlign = OrnamAlignUtil.create(this.ornamEndAlign, this.config?.ornamEndAlign || null);
     this.isLabelShrink = this.createBoolean(this.isLabelShrink, this.config?.isLabelShrink);
     this.hiddenLabel = this.createBoolean(this.hiddenLabel, this.config?.hiddenLabel);
   }
@@ -141,6 +157,12 @@ export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
       this.frameSize = FrameSizeUtil.create(this.frameSize, this.config?.frameSize || null);
       this.frameSizeVal = FrameSizeUtil.getValue(this.frameSize) || 0;
     }
+    if (changes.ornamAlign) {
+      this.ornamAlign = OrnamAlignUtil.create(this.ornamAlign, this.config?.ornamAlign || null);
+    }
+    if (changes.ornamEndAlign) {
+      this.ornamEndAlign = OrnamAlignUtil.create(this.ornamEndAlign, this.config?.ornamEndAlign || null);
+    }
     if (changes.isLabelShrink) {
       this.isLabelShrink = this.createBoolean(this.isLabelShrink, this.config?.isLabelShrink);
     }
@@ -149,7 +171,7 @@ export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     this.ornamentWidth = this.grnOrnament?.nativeElement.offsetWidth || 0;
     this.ornamentEndWidth = this.grnOrnamentEnd?.nativeElement.offsetWidth || 0;
   }
@@ -202,6 +224,27 @@ export class GrnFrameInputComponent implements OnChanges, AfterViewInit {
       result = 'err';
     } else if (isDisabled) {
       result = 'dis';
+    }
+    return result;
+  }
+
+  public getOrnamAlign(ornamAlign: OrnamAlign | null, isEnd: boolean, exterior: Exterior | null): string {
+    let result = '';
+    if (ornamAlign) {
+      result = ornamAlign.valueOf();
+      if (ornamAlign === OrnamAlign.default) {
+        switch (exterior) {
+          case Exterior.outlined:
+            result = OrnamAlign.center.valueOf();
+            break;
+          case Exterior.underline:
+            result = !isEnd ? OrnamAlign.flexEnd.valueOf() : OrnamAlign.center.valueOf();
+            break;
+          case Exterior.standard:
+            result = OrnamAlign.flexEnd.valueOf();
+            break;
+        }
+      }
     }
     return result;
   }

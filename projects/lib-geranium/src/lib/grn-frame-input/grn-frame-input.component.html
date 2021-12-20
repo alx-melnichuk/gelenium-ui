@@ -17,8 +17,9 @@
 <div [ngClass]="['gfi-frame', 'Grn-palette', 'GrnInputFrame', 'gfi-frm-' + exterior
   , (isUnderlineExterior ? ('p-u-' + paletteModeBg(isError, isFocused, isDisabled, isMouseEnter) + '-bg-cl'): '')
   , (isStandardExterior || isUnderlineExterior ? 'gfi-substrate-frm': '')
-  , (isStandardExterior || isUnderlineExterior ? 'substrate': '')
   , (isStandardExterior || isUnderlineExterior ? ('p-su-' + paletteMode(isError, isFocused, isDisabled, isMouseEnter) + '-br-cl'): '')
+  , (ornamAlign ? 'gfi-orn-' + getOrnamAlign(ornamAlign, false, exterior): '')
+  , (ornamEndAlign ? 'gfi-orn-end-' + getOrnamAlign(ornamEndAlign, true, exterior): '')
   , (isError ? 'Grn-error': '')
   , (isDisabled ? 'Grn-disabled': '')
   , (isDisabled ? 'p-inp-dis-cl': '')

@@ -10,20 +10,22 @@
     [hiddenLabel]="isHiddenLabel"
     [isError]="!!formControl.errors || isErrorVal"
     [helperText]="helperText"
-    [frameSize]="frameSizeVal">
+    [frameSize]="frameSizeVal"
+    [ornamAlign]="ornamAlignVal"
+    [ornamEndAlign]="ornamEndAlignVal">
     <span #grnOrnament
-      class="gfi-ornament-wrap">
+      class="gfi-wrap-ornam">
       <ng-content select="[grnOrnament]"></ng-content>
     </span>
     <span #grnOrnamentEnd
-      class="gfi-ornament-end-wrap">
+      class="gfi-wrap-ornam-end">
       <ng-content select="[grnOrnamentEnd]"></ng-content>
     </span>
     <input #inputElement
       formControlName="textData"
       [attr.id]="id"
       [type]="typeVal"
-      [ngClass]="['gi-input', 'gfi-damper', 'gfi-molding-pd-ver', 'gfi-molding-pd-hor', 'GrnInputBase', 'gi-' + exteriorVal
+      [ngClass]="['gi-input', 'gfi-elem', 'gfi-elem-pd-ver', 'gfi-elem-pd-hor', 'GrnInputBase', 'gi-' + exteriorVal
           , (isDisabledVal ? 'Grn-disabled': '')
           , (!!formControl.errors ? 'Grn-error': '')]"
       [attr.disabled]="isDisabledVal ? '': null"

@@ -13,11 +13,11 @@
     [frameSize]="frameSizeVal"
     (clickFrame)="doClickFrame()">
     <span #grnOrnament
-      class="gfi-ornament-wrap">
+      class="gfi-wrap-ornam">
       <ng-content select="[grnOrnament]"></ng-content>
     </span>
     <span #grnOrnamentEnd
-      class="gfi-ornament-end-wrap">
+      class="gfi-wrap-ornam-end">
       <ng-content select="[grnOrnamentEnd]"></ng-content>
     </span>
     <textarea #textareaElement
@@ -25,7 +25,7 @@
       formControlName="textData"
       [attr.id]="id"
       [rows]="currentRows"
-      [ngClass]="['gt-textarea', 'gfi-damper', 'gfi-molding-mr-ver', 'gfi-molding-pd-hor', 'GrnTextareaBase', 'gt-' + exteriorVal
+      [ngClass]="['gt-textarea', 'gfi-elem', 'gfi-elem-mr-ver', 'gfi-elem-pd-hor', 'GrnTextareaBase', 'gt-' + exteriorVal
         , (isDisabledVal ? 'Grn-disabled': '')
         , (!!formControl.errors ? 'Grn-error': '')
       ]"

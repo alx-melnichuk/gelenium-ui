@@ -39,6 +39,15 @@
     <li>'url';</li>
     <li>'week';</li>
   </ul>
+  <p>
+    For a field with the "color" type, it is desirable to set a non-empty value (for example,
+    "#000000"), otherwise, a warning may appear:<br />
+    <i>
+      platform-browser.js:745 The specified value "" does not conform to the required format.
+      The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+    </i><br />
+    This warning appears when there are two input elements of type "color" and "date".
+  </p>
 </section>
 
 <section mr-vr>
@@ -558,7 +567,7 @@ export class InputComponent &#123;
     input02i: new FormControl('Hello World', []),
     input02j: new FormControl('', []),
     input02k: new FormControl('', []),
-    input02l: new FormControl('', []),
+    input02l: new FormControl('#000000', []),
     input02m: new FormControl('', []),
     input02n: new FormControl('', []),
   &#125;);

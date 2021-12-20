@@ -6,12 +6,17 @@ app-input-ornaments {
   .io-elem {
     width: 26ch;
   }
-
-  .io-ornament .io-pd-8 {
+  .io-elem2 {
+    margin: 10px 10px;
+    width: 160px;
+  }
+  .io-elem2 > div {
+    margin-bottom: 13px;
+  }
+  .io-ornament .io-pd-hor {
     padding-left: 8px;
     padding-right: 8px;
   }
-
   .io-ornament .io-btn {
     outline: 0;
     border: 0;
@@ -23,15 +28,26 @@ app-input-ornaments {
     background-color: transparent;
   }
   .io-ornament .io-btn:hover { background-color: rgba(0, 0, 0, 0.04); }
-
   .io-uncode {
     font-size: 20px;
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
-
+  .io-uncode2 {
+    font-size: 24px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: #00000080;
+    &:hover {
+      color: #000000fa;
+    }
+  }
   .io-ornament .io-btn-eye {
     vertical-align: middle;
     overflow: visible;
     transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    padding-top: 5px;
+    padding-bottom: 4px;
   }
 
   .io-ornament .io-icon-eye {

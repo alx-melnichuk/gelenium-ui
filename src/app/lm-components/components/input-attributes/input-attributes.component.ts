@@ -46,7 +46,7 @@ export class InputAttributesComponent {
     input02i: new FormControl('Hello World', []),
     input02j: new FormControl('', []),
     input02k: new FormControl('', []),
-    input02l: new FormControl('', []),
+    input02l: new FormControl('#000000', []),
     input02m: new FormControl('', []),
     input02n: new FormControl('', []),
   });
