@@ -50,6 +50,24 @@
   autocomplete="off">
 
   <div class="app-group">
+    <div class="app-elem io-elem">
+      <div>
+        <small>
+          <em>Section: "grnOrnament" + text.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input05a"
+        label="Enter the mass test demostration"
+        helperText="The value is greater than zero."
+        [exterior]="exterior05">
+        <span grnOrnament9
+          class="gfi-su-ornam io-pd-hor">kg</span>
+      </grn-input>
+    </div>
+  </div>
+
+  <div class="app-group"
+    *ngIf="false">
 
     <div class="app-elem io-elem">
       <div>
@@ -273,7 +291,8 @@
 
   </div>
 
-  <div class="app-elem">
+  <div class="app-elem"
+    *ngIf="false">
     <div>
       <small>
         <em>Demonstration of the alignment of the ornament.</em>
@@ -281,7 +300,8 @@
     </div>
   </div>
 
-  <section mr-vr>
+  <section mr-vr
+    *ngIf="false">
     <span>ornamAlign: </span>
     <mat-button-toggle-group [(ngModel)]="ornamAlign05"
       [ngModelOptions]="{ standalone: true }">
@@ -294,7 +314,8 @@
     </mat-button-toggle-group>
   </section>
 
-  <div class="app-group">
+  <div class="app-group"
+    *ngIf="false">
 
     <div class="app-elem io-elem">
       <div>
@@ -336,7 +357,8 @@
 
   </div>
 
-  <section mr-vr>
+  <section mr-vr
+    *ngIf="false">
     <span>ornamEndAlign: </span>
     <mat-button-toggle-group [(ngModel)]="ornamEndAlign05"
       [ngModelOptions]="{ standalone: true }">
@@ -699,11 +721,17 @@ export class InputComponent &#123;
 .io-elem &#123;
   width: 26ch;
 &#125;
-.io-ornament .io-pd-8 &#123;
+.io-elem2 &#123;
+  margin: 10px 10px;
+  width: 160px;
+&#125;
+.io-elem2 > div &#123;
+  margin-bottom: 13px;
+&#125;
+.io-ornament .io-pd-hor &#123;
   padding-left: 8px;
   padding-right: 8px;
 &#125;
-
 .io-ornament .io-btn &#123;
   outline: 0;
   border: 0;
@@ -714,22 +742,30 @@ export class InputComponent &#123;
   border-radius: 50%;
   background-color: transparent;
 &#125;
-
-.io-ornament .io-btn:hover &#123; background-color: rgba(0, 0, 0, 0.04); &#125;
-
+.io-ornament .io-btn:hover &#123;
+  background-color: rgba(0, 0, 0, 0.04);
+&#125;
 .io-uncode &#123;
   font-size: 20px;
   padding-top: 6px;
   padding-bottom: 6px;
 &#125;
-
+.io-uncode2 &#123;
+  font-size: 24px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #00000080;
+  &:hover &#123;
+    color: #000000fa;
+  &#125;
+&#125;
 .io-ornament .io-btn-eye &#123;
-  padding-top: 3px;
   vertical-align: middle;
   overflow: visible;
   transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  padding-top: 5px;
+  padding-bottom: 4px;
 &#125;
-
 .io-ornament .io-icon-eye &#123;
   background: center no-repeat;
   user-select: none;

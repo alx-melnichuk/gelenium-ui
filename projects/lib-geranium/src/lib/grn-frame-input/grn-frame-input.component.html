@@ -1,8 +1,8 @@
 <label *ngIf="!hiddenLabel"
   [ngClass]="['gfi-label', 'GrnInputLabel'
-  , 'gfi-lbl-' + exterior
+  , 'gfi-' + exterior?.substring(0,1) + '-lbl'
+  , (isLabelShrinkValue ? 'gfi-shrink': '')
   , (isRequired ? 'Grn-required': '')
-  , (isLabelShrinkValue ? 'gfi-lbl-shrink': '')
   , (isError ? 'Grn-error': '')
   , (isDisabled ? 'Grn-disabled': '')
   , (isFocused ? 'Grn-focused': '')

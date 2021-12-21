@@ -109,58 +109,42 @@
 
 grn-frame-input { //outline: 1px dashed crimson; 
   // The value of the "line height" parameter for the input element.
-  --gfi-ln-hg: 1.4375em;
-  // The value of the size of the border of the frame.
-  --gfi-br-wd: 1px;
+  --gfi-ln-hg: 1.4375em;  // 23px default
 
   // For "outlined" mode.
   // Small indentation of the legend from the border for "outlined" mode.
   --gfi-o-lgn-pd: 0.6ex;
-  // Determines the x transform value at the shrink position (top) for "outlined" mode.
-  // --gfi-o-lgn-tr-x: calc(-0.36*var(--gfi-ln-hg));
   // The value of the radius of the rounding of the border for "outlined" mode.
   // --gfi-o-br-rd: calc(var(--gfi-size)/10);
 
   // Left padding of the label in a shrink position (in the top) for "outlined" mode.
-  --gfi-o-lbl-pd: calc(0.25*var(--gfi-size));
-  // Left padding of the label in the unshrink position (in the middle) for "outline" mode.
-  --gfi-o-lbl2-pd-lf: calc(0.25*var(--gfi-size));
-  // Right padding of the label in the unshrink position (in the middle) for "outline" mode.
-  --gfi-o-lbl2-pd-rg: calc(0.174*var(--gfi-size));
+  --gfi-o-lbl-pd: calc(0.25*var(--gfi-size)); // TODO #1
   // Max width of the label in a shrink position (in the top) for "outlined" mode.
   // --gfi-o-lbl-wd: calc(133% - 2.66*var(--gfi-o-lbl-pd));
   // Max width of the label in the unshrink position (in the middle) for "outline" mode.
-  // --gfi-o-lbl2-wd: calc(100% - var(--gfi-o-lbl2-pd-lf) - var(--gfi-o-lbl2-pd-rg));
+  // --gfi-o-lbl2-wd: calc(100% - var(--gfi-o-lbl-pd) - var(--gfi-o-lbl-pd));
 
   // For "underline" mode.
   // The value of the radius of the rounding of the border for "underline" mode.
   --gfi-u-br-rd: calc(var(--gfi-size)/10) calc(var(--gfi-size)/10) 0 0;
   // Left padding of the label in a shrink position (in the top) for "underline" mode.
-  --gfi-u-lbl-pd: calc(0.21428*var(--gfi-size));
-  // Left padding of the label in the unshrink position (in the middle) for "underline" mode.
-  --gfi-u-lbl2-pd-lf: calc(0.21428*var(--gfi-size));
-  // Right padding of the label in the unshrink position (in the middle) for "underline" mode.
-  --gfi-u-lbl2-pd-rg: calc(0.21428*var(--gfi-size));
+  --gfi-u-lbl-pd: calc(0.21428*var(--gfi-size)); // TODO #1
   // Max width of the label in a shrink position (in the top) for "underline" mode.
   // --gfi-u-lbl-wd: calc(133% - 2.66*var(--gfi-u-lbl-pd));
   // Max width of the label in the unshrink position (in the middle) for "underline" mode.
-  // --gfi-u-lbl2-wd: calc(100% - var(--gfi-u-lbl2-pd-lf) - var(--gfi-u-lbl2-pd-rg));
+  // --gfi-u-lbl2-wd: calc(100% - var(--gfi-u-lbl-pd) - var(--gfi-u-lbl-pd));
 
 
   // Left padding of the label in a shrink position (in the top) for "standard" mode.
-  // --gfi-s-lbl-pd: 0px;
-  // Left padding of the label in the unshrink position (in the middle) for "standard" mode.
-  --gfi-s-lbl2-pd-lf: 0px;
-  // Right padding of the label in the unshrink position (in the middle) for "standard" mode.
-  --gfi-s-lbl2-pd-rg: 0px;
+  --gfi-s-lbl-pd: 0px; // TODO #1
   // Max width of the label in a shrink position (in the top) for "standard" mode.
   // --gfi-s-lbl-wd: 133%;
   // Max width of the label in the unshrink position (in the middle) for "standard" mode.
-  // --gfi-s-lbl2-wd: calc(100% - var(--gfi-s-lbl2-pd-lf) - var(--gfi-s-lbl2-pd-rg));
+  // --gfi-s-lbl2-wd: calc(100% - var(--gfi-s-lbl-pd) - var(--gfi-s-lbl-pd));
 
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
-  line-height: var(--gfi-ln-hg);
+  line-height: 1.4375em; // #!!var(--gfi-ln-hg);
   // #!! letter-spacing: 0.00938em; // #!!root
   min-width: 0;
   padding: 0;
@@ -187,44 +171,32 @@ grn-frame-input { //outline: 1px dashed crimson;
     pointer-events: none;
   }
 
-
-  .gfi-lbl-outlined.gfi-lbl-shrink {
-    max-width: var(--gfi-o-lbl-wd, calc(133% - 2.66*var(--gfi-o-lbl-pd))); // # calc(133% - 24px)
-    @include mxTransformTranslateXYScale(var(--gfi-o-lbl-pd), var(--gfi-o-lgn-tr-x, calc(-0.36*var(--gfi-ln-hg)) ), 0.75); // # (14px, -9px, 0.75)
+  .gfi-label.gfi-shrink {
+    max-width: var(--gfi--lbl-wd); // # calc(133% - 24px)
+    @include mxTransformTranslateXYScale(var(--gfi--lbl-pd), var(--gfi--lbl-trn-y), 0.75); // # (0px, -1.5px, 0.75) original
   }
-  .gfi-lbl-underline.gfi-lbl-shrink {
-    max-width: var(--gfi-u-lbl-wd, calc(133% - 2.66*var(--gfi-u-lbl-pd))); // # calc(133% - 24px)
-    @include mxTransformTranslateXYScale(var(--gfi-u-lbl-pd), calc(((var(--gfi-size) - var(--gfi-ln-hg))*0.757524 - var(--gfi-ln-hg)*0.5)*0.45 ), 0.75); // # 12px, 6.07px, 0.75  // # (12px, 7px, 0.75) original
+  .gfi-label:not(.gfi-shrink) {
+    max-width: var(--gfi--lbl2-wd);
+    @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi--lbl-pd)) , var(--gfi--lbl2-trn-y) , 1);
   }
-  .gfi-lbl-standard.gfi-lbl-shrink {
-    max-width: var(--gfi-s-lbl-wd, calc(133% - 2.66*var(--gfi-s-lbl-pd, 0))); // # 133%;
-    @include mxTransformTranslateXYScale(var(--gfi-s-lbl-pd, 0), -1.5px, 0.75); // # (0px, -1.5px, 0.75) original
-  }
-
-  .gfi-lbl-outlined:not(.gfi-lbl-shrink) {
-    max-width: var(--gfi-o-lbl2-wd, calc(100%
-      - var(--gfi-ornam-wd, var(--gfi-o-lbl2-pd-lf))
-      - var(--gfi-ornam-end-wd, var(--gfi-o-lbl2-pd-rg))
-    )); // # calc(100% - 24px)
-    @include mxTransformTranslateXYScale(
-        var(--gfi-ornam-wd, var(--gfi-o-lbl2-pd-lf)) , calc((var(--gfi-size) - var(--gfi-ln-hg))/2) , 1); // # (14px, 16.5px, 1)
-  }
-  .gfi-lbl-underline:not(.gfi-lbl-shrink) {
-    max-width: var(--gfi-u-lbl2-wd, calc(100%
-      - var(--gfi-ornam-wd, var(--gfi-u-lbl2-pd-lf))
-      - var(--gfi-ornam-end-wd, var(--gfi-u-lbl2-pd-rg))
-    )); // # calc(100% - 24px)
-    @include mxTransformTranslateXYScale(
-        var(--gfi-ornam-wd, var(--gfi-u-lbl2-pd-lf)) , calc((var(--gfi-size) - var(--gfi-ln-hg))/2) , 1); // # 12px, 16.5px, 1
-  }
-  .gfi-lbl-standard:not(.gfi-lbl-shrink) {
-    max-width: var(--gfi-s-lbl2-wd, calc(100%
-      - var(--gfi-ornam-wd, var(--gfi-s-lbl2-pd-lf))
-      - var(--gfi-ornam-end-wd, var(--gfi-s-lbl2-pd-rg))
-    )); // # calc(100% - 0px);
-    @include mxTransformTranslateXYScale(
-        var(--gfi-ornam-wd, var(--gfi-s-lbl2-pd-lf)) , calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75) , 1); // # 0px, 24.75px, 1
-  }
+  // .gfi-label.gfi-o-lbl:not(.gfi-shrink) {
+  //   // max-width: var(--gfi--lbl2-wd, calc(100% - var(--gfi-ornam-wd, var(--gfi--lbl-pd)) - var(--gfi-ornam-end-wd, var(--gfi--lbl-pd)) )); // # calc(100% - 24px)
+  //   // max-width: var(--gfi-o-lbl2-wd, calc(100% - var(--gfi-ornam-wd, var(--gfi-o-lbl-pd)) - var(--gfi-ornam-end-wd, var(--gfi-o-lbl-pd)) )); // # calc(100% - 24px)
+  //   @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi--lbl-pd)) , var(--gfi--lbl2-trn-y) , 1); // # (14px, 16.5px, 1)
+  //   // @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi-o-lbl-pd)) , calc((var(--gfi-size) - var(--gfi-ln-hg))/2) , 1); // # (14px, 16.5px, 1)
+  // }
+  // .gfi-label.gfi-u-lbl:not(.gfi-shrink) {
+  //   // max-width: var(--gfi--lbl2-wd, calc(100% - var(--gfi-ornam-wd, var(--gfi--lbl-pd)) - var(--gfi-ornam-end-wd, var(--gfi--lbl-pd)) )); // # calc(100% - 24px)
+  //   // max-width: var(--gfi-u-lbl2-wd, calc(100% - var(--gfi-ornam-wd, var(--gfi-u-lbl-pd)) - var(--gfi-ornam-end-wd, var(--gfi-u-lbl-pd)) )); // # calc(100% - 24px)
+  //   @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi--lbl-pd)) , var(--gfi--lbl2-trn-y) , 1); // # 12px, 16.5px, 1
+  //   // @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi-u-lbl-pd)) , calc((var(--gfi-size) - var(--gfi-ln-hg))/2) , 1); // # 12px, 16.5px, 1
+  // }
+  // .gfi-label.gfi-s-lbl:not(.gfi-shrink) {
+  //   // max-width: var(--gfi--lbl2-wd, calc(100% - var(--gfi-ornam-wd, var(--gfi--lbl-pd)) - var(--gfi-ornam-end-wd, var(--gfi--lbl-pd)) )); // # calc(100% - 0px);
+  //   // max-width: var(--gfi-s-lbl2-wd, calc(100% - var(--gfi-ornam-wd, var(--gfi-s-lbl-pd)) - var(--gfi-ornam-end-wd, var(--gfi-s-lbl-pd)) )); // # calc(100% - 0px);
+  //   @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi--lbl-pd)) , var(--gfi--lbl2-trn-y) , 1); // # 0px, 24.75px, 1
+  //   // @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi-s-lbl-pd)) , calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75) , 1); // # 0px, 24.75px, 1
+  // }
 
   // Section "Frame".
   .gfi-frame { // outline: 1px dashed blueviolet;
@@ -340,7 +312,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   // For "gfi-frm-underline" and "gfi-frm-standard"
   .gfi-substrate-frm {
     &:before {
-      border-bottom-width: var(--gfi-br-wd);
+      border-bottom-width: 1px;
       border-bottom-style: solid;
       left: 0;
       bottom: 0;
@@ -355,11 +327,11 @@ grn-frame-input { //outline: 1px dashed crimson;
       border-bottom-style: dotted;
     }
     &:hover:not(.Grn-disabled):before {
-      border-bottom-width: calc(var(--gfi-br-wd) + 1px);
+      border-bottom-width: 2px;
     }
 
     &:after {
-      border-bottom-width: calc(var(--gfi-br-wd) + 1px);
+      border-bottom-width: 2px;
       border-bottom-style: solid;
       left: 0;
       bottom: 0;
@@ -392,10 +364,10 @@ grn-frame-input { //outline: 1px dashed crimson;
     overflow: hidden;
     min-width: 0%;
     &:not(.Grn-focused) {
-      border-width: var(--gfi-br-wd);
+      border-width: 1px;
     }
     &.Grn-focused {
-      border-width: calc(var(--gfi-br-wd) + 1px);
+      border-width: 2px;
     }
   }
 
@@ -403,7 +375,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   .gfi-legend {
     display: block;
     width: auto;
-    height: var(--gfi-br-wd);
+    height: 1px; // border-width: 1px;
     font-size: 0.75em; // #!! 12px
     visibility: hidden;
     padding-inline-start: 0;

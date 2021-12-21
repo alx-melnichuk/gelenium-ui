@@ -501,12 +501,6 @@
     </td>
   </tr>
   <tr>
-    <td><code>--gfi-br-wd: 1px;</code></td>
-    <td>
-      <span>The value of the size of the border of the frame.</span>
-    </td>
-  </tr>
-  <tr>
     <td colspan="2">
       <small><em>For "outlined" mode.</em></small>
     </td>
@@ -515,14 +509,6 @@
     <td><code>--gfi-o-lgn-pd: 0.6ex;</code></td>
     <td>
       <span>Small indentation of the legend from the border for "outlined" mode.</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>--gfi-o-lgn-tr-x: calc(-0.36*var(--gfi-ln-hg));</code></td>
-    <td>
-      <span>
-        Determines the x transform value at the shrink position (top) for "outlined" mode.
-      </span>
     </td>
   </tr>
   <tr>
@@ -540,25 +526,6 @@
     </td>
   </tr>
   <tr>
-    <td><code>--gfi-o-lbl2-pd-lf: calc(0.25*var(--gfi-size));</code></td>
-    <td>
-      <span>
-        Left padding of the label in the unshrink position (in the middle) for "outline" mode.
-        The value is adjusted when the "GrnOrnament" element is present.
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>--gfi-o-lbl2-pd-rg: calc(0.174*var(--gfi-size));</code></td>
-    <td>
-      <span>
-        Right padding of the label in the unshrink position (in the middle) for "outline" mode.
-        The value is adjusted when the "GrnOrnamentEnd" element is present.
-      </span>
-    </td>
-  </tr>
-
-  <tr>
     <td><code>--gfi-o-lbl-wd: calc(133% - 2.66*var(--gfi-o-lbl-pd));</code></td>
     <td>
       <span>Max width of the label in a shrink position (in the top) for "outlined" mode.</span>
@@ -566,7 +533,7 @@
   </tr>
   <tr>
     <td>
-      <code>--gfi-o-lbl2-wd: calc(100% - var(--gfi-o-lbl2-pd-lf) - var(--gfi-o-lbl2-pd-rg));</code>
+      <code>--gfi-o-lbl2-wd: calc(100% - var(--gfi-o-lbl-pd) - var(--gfi-o-lbl-pd));</code>
     </td>
     <td>
       <span>
@@ -592,24 +559,6 @@
     </td>
   </tr>
   <tr>
-    <td><code>--gfi-u-lbl2-pd-lf: calc(0.214285714*var(--gfi-size));</code></td>
-    <td>
-      <span>
-        Left padding of the label in the unshrink position (in the middle) for "underline" mode.
-        The value is adjusted when the "GrnOrnament" element is present.
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>--gfi-u-lbl2-pd-rg: calc(0.214285714*var(--gfi-size));</code></td>
-    <td>
-      <span>
-        Right padding of the label in the unshrink position (in the middle) for "underline" mode.
-        The value is adjusted when the "GrnOrnamentEnd" element is present.
-      </span>
-    </td>
-  </tr>
-  <tr>
     <td><code>--gfi-u-lbl-wd: calc(133% - 2.66*var(--gfi-u-lbl-pd));</code></td>
     <td>
       <span>Max width of the label in a shrink position (in the top) for "underline" mode.</span>
@@ -617,7 +566,7 @@
   </tr>
   <tr>
     <td>
-      <code>--gfi-u-lbl2-wd: calc(100% - var(--gfi-u-lbl2-pd-lf) - var(--gfi-u-lbl2-pd-rg));</code>
+      <code>--gfi-u-lbl2-wd: calc(100% - var(--gfi-u-lbl-pd) - var(--gfi-u-lbl-pd));</code>
     </td>
     <td>
       <span>Max width of the label in the unshrink position (in the middle) for "underline"
@@ -636,28 +585,6 @@
   </tr>
   <tr>
     <td>
-      <code>--gfi-s-lbl2-pd-lf: 0px;</code>
-    </td>
-    <td>
-      <span>
-        Left padding of the label in the unshrink position (in the middle) for "standard" mode.
-        The value is adjusted when the "GrnOrnament" element is present.
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>--gfi-s-lbl2-pd-rg: 0px;</code>
-    </td>
-    <td>
-      <span>
-        Right padding of the label in the unshrink position (in the middle) for "standard" mode.
-        The value is adjusted when the "GrnOrnamentEnd" element is present.
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
       <code>--gfi-s-lbl-wd: 133%;</code>
     </td>
     <td>
@@ -668,7 +595,7 @@
   </tr>
   <tr>
     <td>
-      <code>--gfi-s-lbl2-wd: calc(100% - var(--gfi-s-lbl2-pd-lf) - var(--gfi-s-lbl2-pd-rg));</code>
+      <code>--gfi-s-lbl2-wd: calc(100% - var(--gfi-s-lbl-pd) - var(--gfi-s-lbl-pd));</code>
     </td>
     <td>
       <span>
