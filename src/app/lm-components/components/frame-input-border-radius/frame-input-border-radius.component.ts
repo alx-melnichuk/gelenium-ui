@@ -13,6 +13,7 @@ import {
   CN_LABEL_TS,
   CN_LABEL_UNDERLINE,
 } from 'src/app/constants/labels';
+import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/grn-frame-input/grn-frame-input.interface';
 
 @Component({
   selector: 'app-frame-input-border-radius',
@@ -63,6 +64,31 @@ export class FrameInputBorderRadiusComponent {
     input06k: new FormControl('Demo - K', []),
     input06l: new FormControl('Demo - L', []),
   });
+  public configShort: GrnFrameInputConfig = {
+    oLabelPd: 21.66, // 0.57*var(--gfi-size)
+    uLabelPd: 15.2, // 0.4*var(--gfi-size)
+  };
+  public configSmall: GrnFrameInputConfig = {
+    oLabelPd: 25.08, // 0.57*var(--gfi-size)
+    uLabelPd: 17.6, // 0.4*var(--gfi-size)
+  };
+  public configMiddle: GrnFrameInputConfig = {
+    oLabelPd: 28.5, // 0.57*var(--gfi-size)
+    uLabelPd: 20, // 0.4*var(--gfi-size)
+  };
+  public configWide: GrnFrameInputConfig = {
+    oLabelPd: 31.92, // 0.57*var(--gfi-size)
+    uLabelPd: 22.4, // 0.4*var(--gfi-size)
+  };
+  public configLarge: GrnFrameInputConfig = {
+    oLabelPd: 35.34, // 0.57*var(--gfi-size)
+    uLabelPd: 24.8, // 0.4*var(--gfi-size)
+  };
+  public configHuge: GrnFrameInputConfig = {
+    oLabelPd: 38.76, // 0.57*var(--gfi-size)
+    uLabelPd: 27.2, // 0.4*var(--gfi-size)
+  };
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 

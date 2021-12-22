@@ -125,7 +125,8 @@
       label="Enter value"
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="short"
-      [exterior]="exterior05">
+      [exterior]="exterior05"
+      [config]="configShort">
     </grn-input>
   </div>
   <hr br-nn>
@@ -140,7 +141,8 @@
       label="Enter value"
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="small"
-      [exterior]="exterior05">
+      [exterior]="exterior05"
+      [config]="configSmall">
     </grn-input>
   </div>
   <hr br-nn>
@@ -155,7 +157,8 @@
       label="Enter value"
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="middle"
-      [exterior]="exterior05">
+      [exterior]="exterior05"
+      [config]="configMiddle">
     </grn-input>
   </div>
   <hr br-nn>
@@ -170,7 +173,8 @@
       label="Enter value"
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="wide"
-      [exterior]="exterior05">
+      [exterior]="exterior05"
+      [config]="configWide">
     </grn-input>
   </div>
   <hr br-nn>
@@ -186,7 +190,8 @@
       label="Enter value"
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="large"
-      [exterior]="exterior05">
+      [exterior]="exterior05"
+      [config]="configLarge">
     </grn-input>
   </div>
   <hr br-nn>
@@ -202,7 +207,8 @@
       label="Enter value"
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="huge"
-      [exterior]="exterior05">
+      [exterior]="exterior05"
+      [config]="configHuge">
     </grn-input>
   </div>
 
@@ -436,7 +442,7 @@ export class FrameInputComponent &#123;
 .fibr-radius-h grn-frame-input &#123;
   --gfi-u-br-rd: 0 0 0 calc(var(--gfi-size)/3);
   --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
-  .gfi-frm-underline:before, .gfi-frm-underline:after &#123;
+  .gfi-u-frm:before, .gfi-u-frm:after &#123;
     border-radius: var(--gfi-u-br-rd);
     height: calc(0.65*var(--gfi-size));
   &#125;
@@ -882,7 +888,7 @@ export class FrameInputComponent &#123;
 .fibr-radius-h grn-frame-input &#123;
   --gfi-u-br-rd: 0 0 0 calc(var(--gfi-size)/3);
   --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
-  .gfi-frm-underline:before, .gfi-frm-underline:after &#123;
+  .gfi-u-frm:before, .gfi-u-frm:after &#123;
     border-radius: var(--gfi-u-br-rd);
     height: calc(0.65*var(--gfi-size));
   &#125;
@@ -890,7 +896,7 @@ export class FrameInputComponent &#123;
 .fibr-radius-i grn-frame-input &#123;
   --gfi-u-br-rd: 0 0 calc(var(--gfi-size)/3) 0;
   --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
-  .gfi-frm-underline:before, .gfi-frm-underline:after &#123;
+  .gfi-u-frm:before, .gfi-u-frm:after &#123;
     border-radius: var(--gfi-u-br-rd);
     height: calc(0.65*var(--gfi-size));
   &#125;
@@ -899,7 +905,7 @@ export class FrameInputComponent &#123;
 .fibr-radius-j grn-frame-input &#123;
   --gfi-u-br-rd: calc(var(--gfi-size)/3) 0 0 calc(var(--gfi-size)/3);
   --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
-  .gfi-frm-underline:before, .gfi-frm-underline:after &#123;
+  .gfi-u-frm:before, .gfi-u-frm:after &#123;
     border-radius: var(--gfi-u-br-rd);
     height: calc(0.65*var(--gfi-size));
   &#125;
@@ -907,7 +913,7 @@ export class FrameInputComponent &#123;
 .fibr-radius-k grn-frame-input &#123;
   --gfi-u-br-rd: 0 calc(var(--gfi-size)/3) calc(var(--gfi-size)/3) 0;
   --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
-  .gfi-frm-underline:before, .gfi-frm-underline:after &#123;
+  .gfi-u-frm:before, .gfi-u-frm:after &#123;
     border-radius: var(--gfi-u-br-rd);
     height: calc(0.65*var(--gfi-size));
   &#125;
@@ -916,7 +922,7 @@ export class FrameInputComponent &#123;
 .fibr-radius-l grn-frame-input &#123;
   --gfi-u-br-rd: calc(var(--gfi-size)/3);
   --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
-  .gfi-frm-underline:before, .gfi-frm-underline:after &#123;
+  .gfi-u-frm:before, .gfi-u-frm:after &#123;
     border-radius: var(--gfi-u-br-rd);
     height: calc(0.65*var(--gfi-size));
   &#125;

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-frame-input',
@@ -7,8 +7,20 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FrameInputComponent {
+export class FrameInputComponent implements OnInit, AfterViewInit {
   public showNum = '';
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor() {
+    // eslint-disable-next-line no-restricted-syntax
+    console.time('start time');
+  }
+
+  ngOnInit(): void {
+    console.timeLog('start time');
+  }
+
+  ngAfterViewInit(): void {
+    // eslint-disable-next-line no-restricted-syntax
+    console.timeEnd('start time');
+  }
 }

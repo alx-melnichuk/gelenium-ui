@@ -31,6 +31,7 @@ import {
 } from '@angular/forms';
 
 import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
+import { GrnFrameInputConfig } from '../grn-frame-input/grn-frame-input.interface';
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 import { OrnamAlign, OrnamAlignUtil } from '../interfaces/ornam-align.interface';
@@ -60,23 +61,25 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   @Input()
   public label = '';
   @Input()
-  public exterior: string | null = null; // ExteriorType
-  @Input()
   public isReadOnly: string | null = null;
   @Input()
   public isRequired: string | null = null;
   @Input()
   public isDisabled: string | null = null;
   @Input()
-  public lbShrink: string | null = null;
+  public exterior: string | null = null; // ExteriorType
   @Input()
   public frameSize: string | null = null; // FrameSizeType
   @Input()
-  public ornamAlign: string | null = null; // OrnamAlign
-  @Input()
-  public ornamEndAlign: string | null = null; // OrnamAlign
+  public lbShrink: string | null = null;
   @Input()
   public hiddenLabel: string | null = null;
+  @Input()
+  public ornamLfAlign: string | null = null; // OrnamAlign
+  @Input()
+  public ornamRgAlign: string | null = null; // OrnamAlign
+  @Input()
+  public config: GrnFrameInputConfig | null = null;
   @Input()
   public isError: string | null = null;
   @Input()
@@ -122,8 +125,8 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public isDisabledVal = false; // Binding attribute "isDisabled".
   public isLabelShrink: boolean | null = null; // Binding attribute "lbShrink".
   public frameSizeVal: FrameSize | null = null;
-  public ornamAlignVal: OrnamAlign | null = null;
-  public ornamEndAlignVal: OrnamAlign | null = null;
+  public ornamLfAlignVal: OrnamAlign | null = null;
+  public ornamRgAlignVal: OrnamAlign | null = null;
   public isHiddenLabel: boolean | null = null; // Binding attribute "hiddenLabel".
   public isErrorVal = false; // Binding attribute "isError".
 
@@ -156,11 +159,11 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
     if (changes.frameSize) {
       this.frameSizeVal = FrameSizeUtil.convert(this.frameSize);
     }
-    if (changes.ornamAlign) {
-      this.ornamAlignVal = OrnamAlignUtil.convert(this.ornamAlign);
+    if (changes.ornamLfAlign) {
+      this.ornamLfAlignVal = OrnamAlignUtil.convert(this.ornamLfAlign);
     }
-    if (changes.ornamEndAlign) {
-      this.ornamEndAlignVal = OrnamAlignUtil.convert(this.ornamEndAlign);
+    if (changes.ornamRgAlign) {
+      this.ornamRgAlignVal = OrnamAlignUtil.convert(this.ornamRgAlign);
     }
     this.isHiddenLabel = changes.hiddenLabel ? this.hiddenLabel !== null : this.isHiddenLabel;
     this.isErrorVal = changes.isError ? this.isError !== null : this.isErrorVal;

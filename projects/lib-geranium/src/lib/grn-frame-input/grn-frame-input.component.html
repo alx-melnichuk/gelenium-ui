@@ -14,12 +14,12 @@
   [attr.id]="inputId + '-label'">
   {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
 </label>
-<div [ngClass]="['gfi-frame', 'Grn-palette', 'GrnInputFrame', 'gfi-frm-' + exterior
+<div [ngClass]="['gfi-frame', 'Grn-palette', 'GrnInputFrame', 'gfi-' + exterior?.substring(0,1) + '-frm'
   , (isUnderlineExterior ? ('p-u-' + paletteModeBg(isError, isFocused, isDisabled, isMouseEnter) + '-bg-cl'): '')
   , (isStandardExterior || isUnderlineExterior ? 'gfi-substrate-frm': '')
   , (isStandardExterior || isUnderlineExterior ? ('p-su-' + paletteMode(isError, isFocused, isDisabled, isMouseEnter) + '-br-cl'): '')
-  , (ornamAlign ? 'gfi-orn-' + getOrnamAlign(ornamAlign, false, exterior): '')
-  , (ornamEndAlign ? 'gfi-orn-end-' + getOrnamAlign(ornamEndAlign, true, exterior): '')
+  , (ornamLfAlign ? 'gfi-orn-lf-' + getOrnamAlign(ornamLfAlign, false, exterior): '')
+  , (ornamRgAlign ? 'gfi-orn-rg-' + getOrnamAlign(ornamRgAlign, true, exterior): '')
   , (isError ? 'Grn-error': '')
   , (isDisabled ? 'Grn-disabled': '')
   , (isDisabled ? 'p-inp-dis-cl': '')

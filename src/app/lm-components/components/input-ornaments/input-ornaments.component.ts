@@ -59,8 +59,8 @@ export class InputOrnamentsComponent {
   public isBtnEyeCrossed05f = false;
   public isBtnEyeCrossed05g = false;
   public isBtnEyeCrossed05h = false;
-  public ornamAlign05 = 'default';
-  public ornamEndAlign05 = 'default';
+  public ornamLfAlign05 = 'default';
+  public ornamRgAlign05 = 'default';
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }

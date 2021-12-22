@@ -4,12 +4,12 @@
     It is possible to add a different ornament (picture or text) for the input line.
     It will appear as a prefix or suffix for the input string.
     You can define the reaction to pressing an element of the ornament.
-    <br />To add a prefix, you need to add a tag with the "grnOrnament" attribute inside the
+    <br />To add a prefix, you need to add a tag with the "grnOrnamentLf" attribute inside the
     "grn-input" tag. (&lt;span
-    grnOrnament&gt;kg&lt;/span&gt;)
-    <br />To add a suffix, you need to add a tag with the "grnOrnamentEnd" attribute inside the
+    grnOrnamentLf&gt;kg&lt;/span&gt;)
+    <br />To add a suffix, you need to add a tag with the "grnOrnamentRg" attribute inside the
     "grn-input" tag.
-    (&lt;span grnOrnamentEnd&gt;cm&lt;/span&gt;)
+    (&lt;span grnOrnamentRg&gt;cm&lt;/span&gt;)
     <br />Adding a prefix or suffix turns off the animation of the legend for this input field.
   </p>
   <p>For example:</p>
@@ -60,11 +60,27 @@
         label="Enter the mass test demostration"
         helperText="The value is greater than zero."
         [exterior]="exterior05">
-        <span grnOrnament9
+        <span grnOrnamentLf
           class="gfi-su-ornam io-pd-hor">kg</span>
       </grn-input>
     </div>
+
+    <!-- <div class="app-elem io-elem">
+      <div>
+        <small>
+          <em>Section: "grnOrnament" + text.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input05a"
+        label="Enter the mass test demostration"
+        helperText="The value is greater than zero."
+        [exterior]="exterior05">
+        <span grnOrnamentRg
+          class="gfi-su-ornam io-pd-hor">kg</span>
+      </grn-input>
+    </div> -->
   </div>
+
 
   <div class="app-group"
     *ngIf="false">
@@ -72,14 +88,14 @@
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grnOrnament" + text.</em>
+          <em>Section: "grnOrnamentLf" + text.</em>
         </small>
       </div>
       <grn-input formControlName="input05a"
         label="Enter the mass"
         helperText="The value is greater than zero."
         [exterior]="exterior05">
-        <span grnOrnament
+        <span grnOrnamentLf
           class="gfi-su-ornam io-pd-hor">kg</span>
       </grn-input>
     </div>
@@ -87,13 +103,13 @@
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grnOrnamentEnd" + text.</em>
+          <em>Section: "grnOrnamentRg" + text.</em>
         </small>
       </div>
       <grn-input formControlName="input05b"
         label="Enter the height"
         [exterior]="exterior05">
-        <span grnOrnamentEnd
+        <span grnOrnamentRg
           class="gfi-su-ornam io-pd-hor">cm</span>
       </grn-input>
     </div>
@@ -101,7 +117,7 @@
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grnOrnament" + text.</em>
+          <em>Section: "grnOrnamentLf" + text.</em>
         </small>
       </div>
       <grn-input formControlName="input05c"
@@ -124,7 +140,7 @@
             :'')
           )
         )">
-        <span grnOrnament
+        <span grnOrnamentLf
           class="gfi-ornam io-pd-hor">$</span>
       </grn-input>
     </div>
@@ -132,7 +148,7 @@
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grnOrnamentEnd" + text.</em>
+          <em>Section: "grnOrnamentRg" + text.</em>
         </small>
       </div>
       <grn-input formControlName="input05d"
@@ -155,7 +171,7 @@
             :'')
           )
         )">
-        <span grnOrnamentEnd
+        <span grnOrnamentRg
           class="gfi-ornam io-pd-hor">$</span>
       </grn-input>
     </div>
@@ -163,7 +179,7 @@
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grnOrnament" + icon.</em>
+          <em>Section: "grnOrnamentLf" + icon.</em>
         </small>
       </div>
       <grn-input formControlName="input05e"
@@ -175,7 +191,7 @@
         controls05.input05e.errors?.required
         ? 'The password value is required.'
         :'Enter the password value.'">
-        <button grnOrnament
+        <button grnOrnamentLf
           class="gfi-ornam io-btn io-btn-eye"
           (click)="isBtnEyeCrossed05e=!isBtnEyeCrossed05e">
           <span [ngClass]="[
@@ -188,7 +204,7 @@
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grnOrnamentEnd" + icon.</em>
+          <em>Section: "grnOrnamentRg" + icon.</em>
         </small>
       </div>
       <grn-input formControlName="input05f"
@@ -202,7 +218,7 @@
           controls05.input05f.errors?.required
           ? 'The password value is required.'
           : 'Enter the password value.'">
-        <button grnOrnamentEnd
+        <button grnOrnamentRg
           class="gfi-ornam io-btn io-btn-eye"
           (click)="isBtnEyeCrossed05f=!isBtnEyeCrossed05f">
           <span [ngClass]="[
@@ -215,7 +231,7 @@
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grnOrnament" + uncode.</em>
+          <em>Section: "grnOrnamentLf" + uncode.</em>
         </small>
       </div>
       <grn-input formControlName="input05g"
@@ -228,7 +244,7 @@
         controls05.input05g.errors?.required
         ? 'The password value is required.'
         :'Enter the password value.'">
-        <button grnOrnament
+        <button grnOrnamentLf
           class="gfi-ornam io-btn io-uncode"
           (click)="isBtnEyeCrossed05g=!isBtnEyeCrossed05g">
           <span>{{ isBtnEyeCrossed05g ? '&#128275;': '&#128274;' }}</span>
@@ -239,7 +255,7 @@
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grnOrnamentEnd" + uncode.</em>
+          <em>Section: "grnOrnamentRg" + uncode.</em>
         </small>
       </div>
       <grn-input formControlName="input05h"
@@ -251,7 +267,7 @@
         controls05.input05h.errors?.required
         ? 'The password value is required.'
         :'Enter the password value.'">
-        <button grnOrnamentEnd
+        <button grnOrnamentRg
           class="gfi-ornam io-btn io-uncode"
           (click)="isBtnEyeCrossed05h=!isBtnEyeCrossed05h">
           <span>{{ isBtnEyeCrossed05h ? '&#128275;': '&#128274;' }}</span>
@@ -274,13 +290,13 @@
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior05">
-        <button grnOrnament
+        <button grnOrnamentLf
           class="io-btn io-uncode2"
           (click)="controls05.input05i.setValue(
             (controls05.input05i.value || 0) - 1)">
           &#8854;
         </button>
-        <button grnOrnamentEnd
+        <button grnOrnamentRg
           class="io-btn io-uncode2"
           (click)="controls05.input05i.setValue(
             (controls05.input05i.value || 0) + 1)">
@@ -303,7 +319,7 @@
   <section mr-vr
     *ngIf="false">
     <span>ornamAlign: </span>
-    <mat-button-toggle-group [(ngModel)]="ornamAlign05"
+    <mat-button-toggle-group [(ngModel)]="ornamLfAlign05"
       [ngModelOptions]="{ standalone: true }">
       <mat-button-toggle value="default">default</mat-button-toggle>
       <mat-button-toggle value="center">center</mat-button-toggle>
@@ -320,18 +336,18 @@
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grnOrnament" + text.</em>
+          <em>Section: "grnOrnamentLf" + text.</em>
         </small>
       </div>
       <grn-input formControlName="input05j"
         [label]="controls05.input05j.value === ''
           ?'Enter a value':'Value'"
-        [ornamAlign]="ornamAlign05"
+        [ornamLfAlign]="ornamLfAlign05"
         [exterior]="exterior05"
         [helperText]="controls05.input05j.value === ''
           ?'Enter your value.'
           :'The value is correct.'">
-        <span grnOrnament
+        <span grnOrnamentLf
           class="gfi-ornam io-pd-hor">$</span>
       </grn-input>
     </div>
@@ -339,18 +355,18 @@
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grnOrnamentEnd" + text.</em>
+          <em>Section: "grnOrnamentRg" + text.</em>
         </small>
       </div>
       <grn-input formControlName="input05k"
         [label]="controls05.input05k.value === ''
           ?'Enter a value':'Value'"
-        [ornamEndAlign]="ornamEndAlign05"
+        [ornamRgAlign]="ornamRgAlign05"
         [exterior]="exterior05"
         [helperText]="controls05.input05k.value === ''
           ?'Enter your value.'
           :'The value is correct.'">
-        <span grnOrnamentEnd
+        <span grnOrnamentRg
           class="gfi-ornam io-pd-hor">$</span>
       </grn-input>
     </div>
@@ -359,8 +375,8 @@
 
   <section mr-vr
     *ngIf="false">
-    <span>ornamEndAlign: </span>
-    <mat-button-toggle-group [(ngModel)]="ornamEndAlign05"
+    <span>ornamRgAlign: </span>
+    <mat-button-toggle-group [(ngModel)]="ornamRgAlign05"
       [ngModelOptions]="{ standalone: true }">
       <mat-button-toggle value="default">default</mat-button-toggle>
       <mat-button-toggle value="center">center</mat-button-toggle>
@@ -407,13 +423,13 @@
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnamentEnd" + text.&lt;/em&gt;
+          &lt;em&gt;Section: "grnOrnamentRg" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input05b"
         label="Enter the height"
         [exterior]="exterior05"&gt;
-        &lt;span grnOrnamentEnd
+        &lt;span grnOrnamentRg
           class="gfi-su-ornam io-pd-hor"&gt;cm&lt;/span&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
@@ -452,7 +468,7 @@
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnamentEnd" + text.&lt;/em&gt;
+          &lt;em&gt;Section: "grnOrnamentRg" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input05d"
@@ -475,7 +491,7 @@
             :'')
           )
         )"&gt;
-        &lt;span grnOrnamentEnd
+        &lt;span grnOrnamentRg
           class="gfi-ornam io-pd-hor"&gt;$&lt;/span&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
@@ -508,7 +524,7 @@
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnamentEnd" + icon.&lt;/em&gt;
+          &lt;em&gt;Section: "grnOrnamentRg" + icon.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input05f"
@@ -522,7 +538,7 @@
           controls05.input05f.errors?.required
           ? 'The password value is required.'
           : 'Enter the password value.'"&gt;
-        &lt;button grnOrnamentEnd
+        &lt;button grnOrnamentRg
           class="gfi-ornam io-btn io-btn-eye"
           (click)="isBtnEyeCrossed05f=!isBtnEyeCrossed05f"&gt;
           &lt;span [ngClass]="[
@@ -559,7 +575,7 @@
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnamentEnd" + uncode.&lt;/em&gt;
+          &lt;em&gt;Section: "grnOrnamentRg" + uncode.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input05h"
@@ -571,7 +587,7 @@
         controls05.input05h.errors?.required
         ? 'The password value is required.'
         :'Enter the password value.'"&gt;
-        &lt;button grnOrnamentEnd
+        &lt;button grnOrnamentRg
           class="gfi-ornam io-btn io-uncode"
           (click)="isBtnEyeCrossed05h=!isBtnEyeCrossed05h"&gt;
           &lt;span&gt;<b>&#123;</b>&#123; isBtnEyeCrossed05h ? '&#128275;': '&#128274;' &#125;&#125;&lt;/span&gt;
@@ -600,7 +616,7 @@
             (controls05.input05i.value || 0) - 1)"&gt;
           &#8854;
         &lt;/button&gt;
-        &lt;button grnOrnamentEnd
+        &lt;button grnOrnamentRg
           class="io-btn io-uncode2"
           (click)="controls05.input05i.setValue(
             (controls05.input05i.value || 0) + 1)"&gt;
@@ -630,7 +646,7 @@
       &lt;grn-input formControlName="input05j"
         [label]="controls05.input05j.value === ''
           ?'Enter a value':'Value'"
-        [ornamAlign]="ornamAlign05"
+        [ornamAlign]="ornamLfAlign05"
         [exterior]="exterior05"
         [helperText]="controls05.input05j.value === ''
           ?'Enter your value.'
@@ -643,18 +659,18 @@
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnamentEnd" + text.&lt;/em&gt;
+          &lt;em&gt;Section: "grnOrnamentRg" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input05k"
         [label]="controls05.input05k.value === ''
           ?'Enter a value':'Value'"
-        [ornamEndAlign]="ornamEndAlign05"
+        [ornamRgAlign]="ornamRgAlign05"
         [exterior]="exterior05"
         [helperText]="controls05.input05k.value === ''
           ?'Enter your value.'
           :'The value is correct.'"&gt;
-        &lt;span grnOrnamentEnd
+        &lt;span grnOrnamentRg
           class="gfi-ornam io-pd-hor"&gt;$&lt;/span&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
@@ -704,8 +720,8 @@ export class InputComponent &#123;
   public isBtnEyeCrossed05f = false;
   public isBtnEyeCrossed05g = false;
   public isBtnEyeCrossed05h = false;
-  public ornamAlign05 = 'default';
-  public ornamEndAlign05 = 'default';
+  public ornamLfAlign05 = 'default';
+  public ornamRgAlign05 = 'default';
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

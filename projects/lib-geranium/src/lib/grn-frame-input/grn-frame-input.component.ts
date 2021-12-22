@@ -39,8 +39,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   @Input()
   public label = '';
   @Input()
-  public exterior: Exterior | null = null;
-  @Input()
   public isRequired = false;
   @Input()
   public isDisabled = false;
@@ -49,27 +47,32 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   @Input()
   public isFilled = false;
   @Input()
+  public isError = false;
+  @Input()
+  public helperText: string | null = null;
+
+  @Input()
+  public exterior: Exterior | null = null;
+  @Input()
+  public frameSize: FrameSize | null = null;
+  @Input()
   public isLabelShrink: boolean | null = null;
   @Input()
   public hiddenLabel: boolean | null = null;
   @Input()
-  public isError = false;
+  public ornamLfAlign: OrnamAlign | null = null;
   @Input()
-  public helperText: string | null = null;
+  public ornamRgAlign: OrnamAlign | null = null;
   @Input()
-  public frameSize: FrameSize | null = null;
-  @Input()
-  public ornamAlign: OrnamAlign | null = null;
-  @Input()
-  public ornamEndAlign: OrnamAlign | null = null;
+  public config: GrnFrameInputConfig | null = null;
 
   @Output()
   readonly clickFrame: EventEmitter<Event> = new EventEmitter();
 
-  @ContentChild('grnOrnament', { static: true })
-  public grnOrnament: ElementRef | undefined;
-  @ContentChild('grnOrnamentEnd', { static: true })
-  public grnOrnamentEnd: ElementRef | undefined;
+  @ContentChild('grnOrnamentLf', { static: true })
+  public grnOrnamentLf: ElementRef | undefined;
+  @ContentChild('grnOrnamentRg', { static: true })
+  public grnOrnamentRg: ElementRef | undefined;
 
   @HostBinding('class.Grn-palette')
   public get getGrnPalette(): boolean {
@@ -78,14 +81,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   @HostBinding('style.--gfi-size')
   public get frameSizeValue(): string | null {
     return this.frameSizeVal > 0 ? this.frameSizeVal + 'px' : null;
-  }
-  @HostBinding('style.--gfi-ornam-wd')
-  public get ornamentWidthValue(): string | null {
-    return this.ornamentWidth > 0 ? this.ornamentWidth + 'px' : null;
-  }
-  @HostBinding('style.--gfi-ornam-end-wd')
-  public get ornamentEndWidthValue(): string | null {
-    return this.ornamentEndWidth > 0 ? this.ornamentEndWidth + 'px' : null;
   }
 
   public get isOutlinedExterior(): boolean {
@@ -104,16 +99,16 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   public frameSizeVal = 0;
   public lineHeight = 0;
   public labelPadding = 0;
-  public ornamentWidth = 0;
-  public ornamentEndWidth = 0;
+  public ornamentLfWidth = 0;
+  public ornamentRgWidth = 0;
 
-  constructor(@Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private config: GrnFrameInputConfig | null, private elementRef: ElementRef) {
-    this.exterior = ExteriorUtil.create(this.exterior, this.config?.exterior || null);
-    this.frameSize = FrameSizeUtil.create(this.frameSize, this.config?.frameSize || null);
-    this.ornamAlign = OrnamAlignUtil.create(this.ornamAlign, this.config?.ornamAlign || null);
-    this.ornamEndAlign = OrnamAlignUtil.create(this.ornamEndAlign, this.config?.ornamEndAlign || null);
-    this.isLabelShrink = this.createBoolean(this.isLabelShrink, this.config?.isLabelShrink);
-    this.hiddenLabel = this.createBoolean(this.hiddenLabel, this.config?.hiddenLabel);
+  private actualConfig: GrnFrameInputConfig | null = null;
+
+  constructor(
+    @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null,
+    private hostRef: ElementRef<HTMLElement>
+  ) {
+    this.actualConfig = this.initConfig(this.rootConfig);
   }
 
   @HostListener('mouseenter')
@@ -127,41 +122,46 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.config) {
+      this.actualConfig = this.initConfig(this.config != null ? this.config : this.rootConfig);
+    }
     if (changes.exterior) {
-      this.exterior = ExteriorUtil.create(this.exterior, this.config?.exterior || null);
+      this.exterior = ExteriorUtil.create(this.exterior, this.actualConfig?.exterior || null);
     }
     if (changes.frameSize) {
-      this.frameSize = FrameSizeUtil.create(this.frameSize, this.config?.frameSize || null);
+      this.frameSize = FrameSizeUtil.create(this.frameSize, this.actualConfig?.frameSize || null);
       this.frameSizeVal = FrameSizeUtil.getValue(this.frameSize) || 0;
       this.setPropertyFrameSize(this.frameSizeVal);
     }
     if (changes.exterior || changes.frameSize) {
-      this.labelPadding = this.getLabelPadding(this.frameSizeVal, this.exterior) || 0;
+      this.labelPadding = this.getLabelPadding(this.frameSizeVal, this.exterior, this.actualConfig) || 0;
       this.setPropertyLabelPadding(this.labelPadding);
-      this.setPropertyLabelTranslateY(this.exterior, this.frameSizeVal, this.lineHeight);
-      this.setPropertyLabel2Padding(this.labelPadding, this.ornamentWidth, this.ornamentEndWidth);
+      this.setPropertyLabelPaddingVer(this.exterior, this.frameSizeVal, this.lineHeight);
+      this.setPropertyLabel2Padding(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
     }
-    if (changes.ornamAlign) {
-      this.ornamAlign = OrnamAlignUtil.create(this.ornamAlign, this.config?.ornamAlign || null);
+    if (changes.ornamLfAlign) {
+      this.ornamLfAlign = OrnamAlignUtil.create(this.ornamLfAlign, this.actualConfig?.ornamLfAlign || null);
     }
-    if (changes.ornamEndAlign) {
-      this.ornamEndAlign = OrnamAlignUtil.create(this.ornamEndAlign, this.config?.ornamEndAlign || null);
+    if (changes.ornamRgAlign) {
+      this.ornamRgAlign = OrnamAlignUtil.create(this.ornamRgAlign, this.actualConfig?.ornamRgAlign || null);
     }
     if (changes.isLabelShrink) {
-      this.isLabelShrink = this.createBoolean(this.isLabelShrink, this.config?.isLabelShrink);
+      this.isLabelShrink = this.createBoolean(this.isLabelShrink, this.actualConfig?.isLabelShrink);
     }
     if (changes.hiddenLabel) {
-      this.hiddenLabel = this.createBoolean(this.hiddenLabel, this.config?.hiddenLabel);
+      this.hiddenLabel = this.createBoolean(this.hiddenLabel, this.actualConfig?.hiddenLabel);
     }
   }
 
   ngAfterContentInit(): void {
-    const lineHeightPx = getComputedStyle(this.elementRef.nativeElement).getPropertyValue('line-height');
+    const lineHeightPx = getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height');
     this.lineHeight = Number(lineHeightPx.replace('px', ''));
-    this.setPropertyLabelTranslateY(this.exterior, this.frameSizeVal, this.lineHeight);
-    this.ornamentWidth = this.grnOrnament?.nativeElement.offsetWidth || 0;
-    this.ornamentEndWidth = this.grnOrnamentEnd?.nativeElement.offsetWidth || 0;
-    this.setPropertyLabel2Padding(this.labelPadding, this.ornamentWidth, this.ornamentEndWidth);
+    this.lineHeight = 23;
+    this.setPropertyLabelPaddingVer(this.exterior, this.frameSizeVal, this.lineHeight);
+    this.ornamentLfWidth = this.grnOrnamentLf?.nativeElement.offsetWidth || 0;
+    this.ornamentRgWidth = this.grnOrnamentRg?.nativeElement.offsetWidth || 0;
+    this.setPropertyOrnamentLf(this.ornamentLfWidth);
+    this.setPropertyLabel2Padding(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
   }
 
   // ** Public API **
@@ -247,6 +247,18 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     return value != null ? value : defaultValue != null ? defaultValue : value;
   }
 
+  private initConfig(config: GrnFrameInputConfig | null): GrnFrameInputConfig | null {
+    if (config != null) {
+      this.exterior = ExteriorUtil.create(this.exterior, config?.exterior || null);
+      this.frameSize = FrameSizeUtil.create(this.frameSize, config?.frameSize || null);
+      this.ornamLfAlign = OrnamAlignUtil.create(this.ornamLfAlign, config?.ornamLfAlign || null);
+      this.ornamRgAlign = OrnamAlignUtil.create(this.ornamRgAlign, config?.ornamRgAlign || null);
+      this.isLabelShrink = this.createBoolean(this.isLabelShrink, config?.isLabelShrink);
+      this.hiddenLabel = this.createBoolean(this.hiddenLabel, config?.hiddenLabel);
+    }
+    return config;
+  }
+
   private setProperty(element: ElementRef | undefined, propertyName: string, propertyValue: string | null): void {
     if (!!element && !!propertyName) {
       (element.nativeElement as HTMLElement).style.setProperty(propertyName, propertyValue);
@@ -254,22 +266,28 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   }
 
   private setPropertyFrameSize(frameSizeValue: number): void {
-    this.setProperty(this.elementRef, '--gfi--size', frameSizeValue > 0 ? frameSizeValue + 'px' : null);
+    this.setProperty(this.hostRef, '--gfi--size', frameSizeValue > 0 ? frameSizeValue + 'px' : null);
   }
 
-  private setPropertyLabelTranslateY(exterior: Exterior | null, frameSize: number, lineHeight: number): void {
-    this.setProperty(this.elementRef, '--gfi--lbl-trn-y', this.getLabelTranslateY(exterior, frameSize, lineHeight));
-    this.setProperty(this.elementRef, '--gfi--lbl2-trn-y', this.getLabel2TranslateY(exterior, frameSize, lineHeight));
+  private setPropertyLabelPaddingVer(exterior: Exterior | null, frameSize: number, lineHeight: number): void {
+    this.setProperty(this.hostRef, '--gfi--lbl-pd-tp', this.getLabelPaddingVer(true, exterior, frameSize, lineHeight));
+    this.setProperty(this.hostRef, '--gfi--lbl-pd-bt', this.getLabelPaddingVer(false, exterior, frameSize, lineHeight));
+    this.setProperty(this.hostRef, '--gfi--lbl-trn-y', this.getLabelTranslateY(exterior, frameSize, lineHeight));
+    this.setProperty(this.hostRef, '--gfi--lbl2-trn-y', this.getLabel2TranslateY(exterior, frameSize, lineHeight));
   }
 
   private setPropertyLabelPadding(labelPadding: number): void {
     const labelPaddingPx = labelPadding != null ? labelPadding + 'px' : labelPadding;
-    this.setProperty(this.elementRef, '--gfi--lbl-pd', labelPaddingPx);
-    this.setProperty(this.elementRef, '--gfi--lbl-wd', this.getLabelMaxWidth(labelPadding));
+    this.setProperty(this.hostRef, '--gfi--lbl-pd', labelPaddingPx);
+    this.setProperty(this.hostRef, '--gfi--lbl-wd', this.getLabelMaxWidth(labelPadding));
   }
 
-  private setPropertyLabel2Padding(labelPadding: number, ornamentWidth: number, ornamentEndWidth: number): void {
-    this.setProperty(this.elementRef, '--gfi--lbl2-wd', this.getLabel2MaxWidth(labelPadding, ornamentWidth, ornamentEndWidth));
+  private setPropertyOrnamentLf(ornamentLfWidth: number): void {
+    this.setProperty(this.hostRef, '--gfi--orn-lf', ornamentLfWidth > 0 ? ornamentLfWidth + 'px' : null);
+  }
+
+  private setPropertyLabel2Padding(labelPadding: number, ornamentLfWidth: number, ornamentRgWidth: number): void {
+    this.setProperty(this.hostRef, '--gfi--lbl2-wd', this.getLabel2MaxWidth(labelPadding, ornamentLfWidth, ornamentRgWidth));
   }
 
   // Determines the y transform value at the shrink position (top).
@@ -290,9 +308,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     }
     return result;
   }
-  // @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi--lbl-pd)) , calc((var(--gfi-size) - var(--gfi-ln-hg))/2) , 1); // # (14px, 16.5px, 1)
-  // @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi--lbl-pd)) , calc((var(--gfi-size) - var(--gfi-ln-hg))/2) , 1); // # 12px, 16.5px, 1
-  // @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi--lbl-pd)) , calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75) , 1); // # 0px, 24.75px, 1
   // Determines the y transform value at the unshrink position (in the middle).
   private getLabel2TranslateY(exterior: Exterior | null, frameSize: number, lineHeight: number): string | null {
     let result: string | null = null;
@@ -320,27 +335,47 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     return result;
   }
   // Max width of the label in the unshrink position (in the middle).
-  private getLabel2MaxWidth(labelPadding: number | null, ornamentWidth: number, ornamentEndWidth: number): string | null {
+  private getLabel2MaxWidth(labelPadding: number | null, ornamentLfWidth: number, ornamentRgWidth: number): string | null {
     let result: string | null = null;
-    if (labelPadding != null && labelPadding > -1 && ornamentWidth > -1 && ornamentEndWidth > -1) {
-      const value = (ornamentWidth > 0 ? ornamentWidth : labelPadding) + (ornamentEndWidth > 0 ? ornamentEndWidth : labelPadding);
+    if (labelPadding != null && labelPadding > -1) {
+      const value = (ornamentLfWidth > 0 ? ornamentLfWidth : labelPadding) + (ornamentRgWidth > 0 ? ornamentRgWidth : labelPadding);
       result = value === 0 ? '100%' : 'calc(100% - ' + value.toFixed(2) + 'px)';
     }
     return result;
   }
 
-  private getLabelPadding(frameSizeValue: number, exterior: Exterior | null): number | null {
+  private getLabelPadding(frameSizeVal: number, exterior: Exterior | null, config: GrnFrameInputConfig | null): number | null {
     let result: number | null = null;
-    if (frameSizeValue > 0 && !!exterior) {
+    if (frameSizeVal > 0 && !!exterior) {
       switch (exterior) {
         case Exterior.outlined:
-          result = Math.round(100 * 0.25 * frameSizeValue) / 100; // --gfi-o-lbl-pd: calc(0.25*var(--gfi-size)); // TODO #2
+          result = config?.oLabelPd || Math.round(100 * 0.25 * frameSizeVal) / 100;
+          // --gfi-o-lbl-pd: calc(0.25*var(--gfi-size)); // TODO #2
           break;
         case Exterior.underline:
-          result = Math.round(100 * 0.21428 * frameSizeValue) / 100; // --gfi-u-lbl-pd: calc(0.21428*var(--gfi-size));// TODO #2
+          result = config?.uLabelPd || Math.round(100 * 0.21428 * frameSizeVal) / 100;
+          // --gfi-u-lbl-pd: calc(0.21428*var(--gfi-size));// TODO #2
           break;
         case Exterior.standard:
-          result = 0; // --gfi-s-lbl-pd: 0px;// TODO #2
+          result = config?.sLabelPd || 0; // --gfi-s-lbl-pd: 0px;// TODO #2
+          break;
+      }
+    }
+    return result;
+  }
+
+  private getLabelPaddingVer(isTop: boolean, exterior: Exterior | null, frameSize: number, lineHeight: number): string | null {
+    let result: string | null = null;
+    if (exterior != null && frameSize > 0 && lineHeight > 0) {
+      switch (exterior) {
+        case Exterior.outlined:
+          result = String(((frameSize - lineHeight) / 2).toFixed(2)) + 'px'; // calc((var(--gfi-size) - var(--gfi-ln-hg))/2)
+          break;
+        case Exterior.underline:
+          result = String(((frameSize - lineHeight) * (isTop ? 0.75 : 0.25)).toFixed(2)) + 'px'; // calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75)
+          break;
+        case Exterior.standard:
+          result = String(((frameSize - lineHeight) * (isTop ? 0.75 : 0.25)).toFixed(2)) + 'px'; // calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75)
           break;
       }
     }

@@ -22,11 +22,11 @@
   // The color of the label and border in the state is disabled.
   --g-lbl-dis-cl: rgba(0, 0, 0, 0.38);
 
-  // For "gfi-frm-outlined"
+  // For "frame" - outlined
   // The default border color for "outlined" mode.
   --g-o-def-br-cl: rgba(0, 0, 0, 0.23);
 
-  // For "gfi-frm-underline"
+  // For "frame" - underline
   // The default background color and on error for "underline" mode.
   --g-u-def-bg-cl: rgba(0, 0, 0, 0.06);
   // The  background color when getting focus for "underline" mode.
@@ -36,7 +36,7 @@
   // The background color in the state is disabled for the "underline" mode.
   --g-u-dis-bg-cl: rgba(0, 0, 0, 0.12);
 
-  // For "gfi-frm-underline" and "gfi-frm-standard"
+  // For "frame" - underline and standard
   // The default bottom border color for "underline" and "standard" modes.
   --g-su-def-br-cl: rgba(0, 0, 0, 0.42);
   // The lower border color in the state is disabled for the "underline" and "standard" modes.
@@ -107,40 +107,39 @@
   }
 }
 
-grn-frame-input { //outline: 1px dashed crimson; 
+grn-frame-input { //outline: 1px dashed crimson;
   // The value of the "line height" parameter for the input element.
   --gfi-ln-hg: 1.4375em;  // 23px default
 
   // For "outlined" mode.
   // Small indentation of the legend from the border for "outlined" mode.
-  --gfi-o-lgn-pd: 0.6ex;
+  --gfi-o-lgn-pd: 0.3437em;
   // The value of the radius of the rounding of the border for "outlined" mode.
   // --gfi-o-br-rd: calc(var(--gfi-size)/10);
 
   // Left padding of the label in a shrink position (in the top) for "outlined" mode.
   --gfi-o-lbl-pd: calc(0.25*var(--gfi-size)); // TODO #1
-  // Max width of the label in a shrink position (in the top) for "outlined" mode.
-  // --gfi-o-lbl-wd: calc(133% - 2.66*var(--gfi-o-lbl-pd));
-  // Max width of the label in the unshrink position (in the middle) for "outline" mode.
-  // --gfi-o-lbl2-wd: calc(100% - var(--gfi-o-lbl-pd) - var(--gfi-o-lbl-pd));
 
   // For "underline" mode.
   // The value of the radius of the rounding of the border for "underline" mode.
   --gfi-u-br-rd: calc(var(--gfi-size)/10) calc(var(--gfi-size)/10) 0 0;
   // Left padding of the label in a shrink position (in the top) for "underline" mode.
   --gfi-u-lbl-pd: calc(0.21428*var(--gfi-size)); // TODO #1
-  // Max width of the label in a shrink position (in the top) for "underline" mode.
-  // --gfi-u-lbl-wd: calc(133% - 2.66*var(--gfi-u-lbl-pd));
-  // Max width of the label in the unshrink position (in the middle) for "underline" mode.
-  // --gfi-u-lbl2-wd: calc(100% - var(--gfi-u-lbl-pd) - var(--gfi-u-lbl-pd));
 
-
+  // For "standard" mode.
   // Left padding of the label in a shrink position (in the top) for "standard" mode.
   --gfi-s-lbl-pd: 0px; // TODO #1
-  // Max width of the label in a shrink position (in the top) for "standard" mode.
-  // --gfi-s-lbl-wd: 133%;
-  // Max width of the label in the unshrink position (in the middle) for "standard" mode.
-  // --gfi-s-lbl2-wd: calc(100% - var(--gfi-s-lbl-pd) - var(--gfi-s-lbl-pd));
+
+// // Left padding of the label in a shrink position (in the top).
+
+// // Max width of the label in a shrink position (in the top).
+// // --gfi-o-lbl-wd: calc(133% - 2.66*var(--gfi-o-lbl-pd));
+// // --gfi-u-lbl-wd: calc(133% - 2.66*var(--gfi-u-lbl-pd));
+// // --gfi-s-lbl-wd: 133%;
+// // Max width of the label in the unshrink position (in the middle).
+// // --gfi-o-lbl2-wd: calc(100% - var(--gfi-o-lbl-pd) - var(--gfi-o-lbl-pd));
+// // --gfi-u-lbl2-wd: calc(100% - var(--gfi-u-lbl-pd) - var(--gfi-u-lbl-pd));
+// // --gfi-s-lbl2-wd: calc(100% - var(--gfi-s-lbl-pd) - var(--gfi-s-lbl-pd));
 
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
@@ -177,26 +176,8 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
   .gfi-label:not(.gfi-shrink) {
     max-width: var(--gfi--lbl2-wd);
-    @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi--lbl-pd)) , var(--gfi--lbl2-trn-y) , 1);
+    @include mxTransformTranslateXYScale( var(--gfi--orn-lf, var(--gfi--lbl-pd)) , var(--gfi--lbl2-trn-y) , 1);
   }
-  // .gfi-label.gfi-o-lbl:not(.gfi-shrink) {
-  //   // max-width: var(--gfi--lbl2-wd, calc(100% - var(--gfi-ornam-wd, var(--gfi--lbl-pd)) - var(--gfi-ornam-end-wd, var(--gfi--lbl-pd)) )); // # calc(100% - 24px)
-  //   // max-width: var(--gfi-o-lbl2-wd, calc(100% - var(--gfi-ornam-wd, var(--gfi-o-lbl-pd)) - var(--gfi-ornam-end-wd, var(--gfi-o-lbl-pd)) )); // # calc(100% - 24px)
-  //   @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi--lbl-pd)) , var(--gfi--lbl2-trn-y) , 1); // # (14px, 16.5px, 1)
-  //   // @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi-o-lbl-pd)) , calc((var(--gfi-size) - var(--gfi-ln-hg))/2) , 1); // # (14px, 16.5px, 1)
-  // }
-  // .gfi-label.gfi-u-lbl:not(.gfi-shrink) {
-  //   // max-width: var(--gfi--lbl2-wd, calc(100% - var(--gfi-ornam-wd, var(--gfi--lbl-pd)) - var(--gfi-ornam-end-wd, var(--gfi--lbl-pd)) )); // # calc(100% - 24px)
-  //   // max-width: var(--gfi-u-lbl2-wd, calc(100% - var(--gfi-ornam-wd, var(--gfi-u-lbl-pd)) - var(--gfi-ornam-end-wd, var(--gfi-u-lbl-pd)) )); // # calc(100% - 24px)
-  //   @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi--lbl-pd)) , var(--gfi--lbl2-trn-y) , 1); // # 12px, 16.5px, 1
-  //   // @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi-u-lbl-pd)) , calc((var(--gfi-size) - var(--gfi-ln-hg))/2) , 1); // # 12px, 16.5px, 1
-  // }
-  // .gfi-label.gfi-s-lbl:not(.gfi-shrink) {
-  //   // max-width: var(--gfi--lbl2-wd, calc(100% - var(--gfi-ornam-wd, var(--gfi--lbl-pd)) - var(--gfi-ornam-end-wd, var(--gfi--lbl-pd)) )); // # calc(100% - 0px);
-  //   // max-width: var(--gfi-s-lbl2-wd, calc(100% - var(--gfi-ornam-wd, var(--gfi-s-lbl-pd)) - var(--gfi-ornam-end-wd, var(--gfi-s-lbl-pd)) )); // # calc(100% - 0px);
-  //   @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi--lbl-pd)) , var(--gfi--lbl2-trn-y) , 1); // # 0px, 24.75px, 1
-  //   // @include mxTransformTranslateXYScale( var(--gfi-ornam-wd, var(--gfi-s-lbl-pd)) , calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75) , 1); // # 0px, 24.75px, 1
-  // }
 
   // Section "Frame".
   .gfi-frame { // outline: 1px dashed blueviolet;
@@ -216,100 +197,25 @@ grn-frame-input { //outline: 1px dashed crimson;
     // input {  outline: 1px dashed orange;} // # TODO temp;
     .gfi-elem {
       line-height: var(--gfi-ln-hg);
-      // align-self: stretch;
       align-self: baseline;
     }
   }
-  
-  .gfi-frm-outlined {
-    &>.gfi-elem-pd-ver {
-      padding-top: calc((var(--gfi-size) - var(--gfi-ln-hg))/2); // # 16.5px;
-      padding-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))/2); // # 16.5px;
-    }
-    &>.gfi-elem-mr-ver {
-      margin-top: calc((var(--gfi-size) - var(--gfi-ln-hg))/2); // # 16.5px;
-      margin-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))/2); // # 16.5px;
-    }
-  }
-  .gfi-frm-underline {
+  // underline
+  .gfi-u-frm {
     border-radius: var(--gfi-u-br-rd);
     -webkit-transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
   }
-  .gfi-frm-underline, .gfi-frm-standard {
-    &>.gfi-elem-pd-ver {
-      padding-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75); // # 24.75px;
-      padding-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.25); // # 8.25px;
-    }
-    &>.gfi-elem-mr-ver {
-      margin-top: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75); // # 24.75px;
-      margin-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.25); // # 8.25px;
-    }
+  .gfi-elem-pd-ver {
+    padding-top: var(--gfi--lbl-pd-tp);    // # o:16.5px; us:24.75px;
+    padding-bottom: var(--gfi--lbl-pd-bt); // # o:16.5px; us: 8.25px;
+  }
+  .gfi-elem-mr-ver {
+    margin-top: var(--gfi--lbl-pd-tp);     // # o:16.5px; us:24.75px;
+    margin-bottom: var(--gfi--lbl-pd-bt);  // # o:16.5px; us: 8.25px;
   }
 
-  // Ornament "padding".
-  .gfi-wrap-ornam {
-    max-height: inherit;
-  }
-  .gfi-wrap-ornam-end {
-    order: 1;
-  }
-
-  .gfi-frm-outlined {
-    .gfi-wrap-ornam:empty~.gfi-elem-pd-hor {
-      padding-left: var(--gfi-o-lbl-pd);  // # 14px;
-    }
-    .gfi-wrap-ornam-end:empty~.gfi-elem-pd-hor {
-      padding-right: var(--gfi-o-lbl-pd); // # 14px;
-    }
-  }
-  .gfi-frm-underline {
-    .gfi-wrap-ornam:empty~.gfi-elem-pd-hor {
-      padding-left: var(--gfi-u-lbl-pd);  // # 12px;
-    }
-    .gfi-wrap-ornam-end:empty~.gfi-elem-pd-hor {
-      padding-right: var(--gfi-u-lbl-pd); // # 12px;
-    }
-  }
-  .gfi-frm-standard {
-    .gfi-wrap-ornam:empty~.gfi-elem-pd-hor {
-      padding-left: var(--gfi-s-lbl-pd, 0);  // # 0px;
-    }
-    .gfi-wrap-ornam-end:empty~.gfi-elem-pd-hor {
-      padding-right: var(--gfi-s-lbl-pd, 0); // # 0px;
-    }
-  }
-
-  .gfi-orn-center .gfi-wrap-ornam,
-  .gfi-orn-end-center .gfi-wrap-ornam-end {
-    align-self: center;
-  }
-  .gfi-orn-flex-start .gfi-wrap-ornam,
-  .gfi-orn-end-flex-start .gfi-wrap-ornam-end {
-    align-self: flex-start;
-  }
-  .gfi-orn-flex-end .gfi-wrap-ornam,
-  .gfi-orn-end-flex-end .gfi-wrap-ornam-end {
-    align-self: flex-end;
-  }
-  .gfi-orn-baseline .gfi-wrap-ornam,
-  .gfi-orn-end-baseline .gfi-wrap-ornam-end {
-    align-self: baseline;
-  }
-  .gfi-orn-stretch .gfi-wrap-ornam,
-  .gfi-orn-end-stretch .gfi-wrap-ornam-end {
-    align-self: stretch;
-  }
-  .gfi-frm-underline .gfi-wrap-ornam,
-  .gfi-frm-standard .gfi-wrap-ornam,
-  .gfi-frm-standard .gfi-wrap-ornam-end {
-    .gfi-su-ornam {
-      display: inline-block;
-      margin-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.25); // # 8.25px;
-    }
-  }
-
-  // For "gfi-frm-underline" and "gfi-frm-standard"
+  // For "frame" underline and standard
   .gfi-substrate-frm {
     &:before {
       border-bottom-width: 1px;
@@ -357,7 +263,7 @@ grn-frame-input { //outline: 1px dashed crimson;
     top: 0;
     left: 0;
     margin: 0;
-    padding: 0px calc(var(--gfi-o-lbl-pd) - var(--gfi-o-lgn-pd) - 0.4px); // (14px - 4,4px)=9,6px;
+    padding: 0px calc(var(--gfi-o-lbl-pd) - var(--gfi-o-lgn-pd)); // (14px - 4,4px)=9,6px;
     pointer-events: none;
     border-radius: var(--gfi-o-br-rd, calc(var(--gfi-size)/10));
     border-style: solid;
@@ -411,47 +317,50 @@ grn-frame-input { //outline: 1px dashed crimson;
     text-align: left;
     margin-top: 3px;
     margin-bottom: 0;
-    &.gfi-hlp-outlined {
-      margin-right: var(--gfi-o-lbl-pd);
-      margin-left: var(--gfi-o-lbl-pd);
-    }
-    &.gfi-hlp-underline {
-      margin-right: var(--gfi-u-lbl-pd);
-      margin-left: var(--gfi-u-lbl-pd);
-    }
+    margin-right: var(--gfi--lbl-pd);
+    margin-left: var(--gfi--lbl-pd);
   }
 
+    // Ornament "padding".
+  .gfi-ornam-lf {
+    max-height: inherit;
+  }
+  .gfi-ornam-rg {
+    order: 1;
+  }
+  .gfi-ornam-lf:empty~.gfi-elem-pd-hor {
+    padding-left: var(--gfi--lbl-pd);  // # o:14px; u:12px; s:0px;
+  }
+  .gfi-ornam-rg:empty~.gfi-elem-pd-hor {
+    padding-right: var(--gfi--lbl-pd); // # o:14px; u:12px; s:0px;
+  }
+
+  .gfi-orn-lf-center .gfi-ornam-lf,
+  .gfi-orn-rg-center .gfi-ornam-rg {
+    align-self: center;
+  }
+  .gfi-orn-lf-flex-start .gfi-ornam-lf,
+  .gfi-orn-rg-flex-start .gfi-ornam-rg {
+    align-self: flex-start;
+  }
+  .gfi-orn-lf-flex-end .gfi-ornam-lf,
+  .gfi-orn-rg-flex-end .gfi-ornam-rg {
+    align-self: flex-end;
+  }
+  .gfi-orn-lf-baseline .gfi-ornam-lf,
+  .gfi-orn-rg-baseline .gfi-ornam-rg {
+    align-self: baseline;
+  }
+  .gfi-orn-lf-stretch .gfi-ornam-lf,
+  .gfi-orn-rg-stretch .gfi-ornam-rg {
+    align-self: stretch;
+  }
+  .gfi-u-frm .gfi-ornam-lf,
+  .gfi-s-frm .gfi-ornam-lf,
+  .gfi-s-frm .gfi-ornam-rg {
+    .gfi-su-ornam {
+      display: inline-block;
+      margin-bottom: var(--gfi--lbl-pd-bt); // # 8.25px;
+    }
+  }
 }
-
-
-.gfi-ornam2 {
-  .gfi-frm-outlined {
-    .gfi-wrap-ornam, .gfi-wrap-ornam-end {
-      align-self: center;
-    }
-  }
-  .gfi-frm-underline {
-    .gfi-wrap-ornam {
-      align-self: flex-end;
-      .gfi-su-ornam {
-        display: inline-block;
-        margin-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.25); // # 8.25px;
-      }
-    }
-    .gfi-wrap-ornam-end {
-      align-self: center;
-    }
-  }
-  .gfi-frm-standard {
-    .gfi-wrap-ornam, .gfi-wrap-ornam-end {
-      align-self: flex-end;
-      .gfi-su-ornam {
-        display: inline-block;
-        margin-bottom: calc((var(--gfi-size) - var(--gfi-ln-hg))*0.25); // # 8.25px;
-      }
-    }
-  }
-}
-
-
-

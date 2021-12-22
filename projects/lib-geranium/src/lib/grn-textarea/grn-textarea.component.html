@@ -12,13 +12,13 @@
     [helperText]="helperText"
     [frameSize]="frameSizeVal"
     (clickFrame)="doClickFrame()">
-    <span #grnOrnament
-      class="gfi-wrap-ornam">
-      <ng-content select="[grnOrnament]"></ng-content>
+    <span #grnOrnamentLf
+      class="gfi-ornam-lf">
+      <ng-content select="[grnOrnamentLf]"></ng-content>
     </span>
-    <span #grnOrnamentEnd
-      class="gfi-wrap-ornam-end">
-      <ng-content select="[grnOrnamentEnd]"></ng-content>
+    <span #grnOrnamentRg
+      class="gfi-ornam-rg">
+      <ng-content select="[grnOrnamentRg]"></ng-content>
     </span>
     <textarea #textareaElement
       [cols]="cntCols"
