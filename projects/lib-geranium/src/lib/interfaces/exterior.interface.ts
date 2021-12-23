@@ -8,7 +8,7 @@ export enum Exterior {
 
 export class ExteriorUtil {
   public static create(value: Exterior | null, defaultValue: Exterior | null): Exterior {
-    return ExteriorUtil.convert((value || defaultValue || '').toString(), Exterior.standard) as Exterior;
+    return ExteriorUtil.convert((value || defaultValue || '').toString(), Exterior.outlined) as Exterior;
   }
   public static convert(value: string | null, defaultValue: Exterior | null = null): Exterior | null {
     let result: Exterior | null = defaultValue;

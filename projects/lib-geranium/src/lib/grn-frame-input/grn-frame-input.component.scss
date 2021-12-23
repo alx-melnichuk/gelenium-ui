@@ -91,19 +91,19 @@
 
     // Border-bottom-color for "underline" and "standard" mode.
     // The default border bottom color for "standard" and "underline" mode.
-    .p-su-def-br-cl:before     { border-bottom-color: var(--g-su-def-br-cl); }
+    .gfi-su-pal-def-br-cl:before     { border-bottom-color: var(--g-su-def-br-cl); }
     // The border bottom color in an error state for "standard" and "underline" mode.
-    .p-su-err-br-cl:before     { border-bottom-color: var(--g-err-cl);       }
+    .gfi-su-pal-err-br-cl:before     { border-bottom-color: var(--g-err-cl);       }
     // The border bottom color in an error state for "standard" and "underline" mode.
-    .p-su-err-br-cl:after      { border-bottom-color: var(--g-err-cl);       }
+    .gfi-su-pal-err-br-cl:after      { border-bottom-color: var(--g-err-cl);       }
     // The border bottom color on mouse hover in an error state for "standard" and "underline" mode.
-    .p-su-hov-err-br-cl:before { border-bottom-color: var(--g-hov-err-cl);   }
+    .gfi-su-pal-hov-err-br-cl:before { border-bottom-color: var(--g-hov-err-cl);   }
     // The border bottom color on mouse hover for "standard" and "underline" mode.
-    .p-su-hov-br-cl:before     { border-bottom-color: var(--g-hov-cl);       }
+    .gfi-su-pal-hov-br-cl:before     { border-bottom-color: var(--g-hov-cl);       }
     // The border bottom color when getting focus for "standard" and "underline" mode.
-    .p-su-foc-br-cl:after      { border-bottom-color: var(--g-foc-cl);       }
+    .gfi-su-pal-foc-br-cl:after      { border-bottom-color: var(--g-foc-cl);       }
     // The border bottom color in state is disabled for "standard" and "underline" mode.
-    .p-su-dis-br-cl:before     { border-bottom-color: var(--g-su-dis-br-cl); }
+    .gfi-su-pal-dis-br-cl:before     { border-bottom-color: var(--g-su-dis-br-cl); }
   }
 }
 
@@ -113,7 +113,7 @@ grn-frame-input { //outline: 1px dashed crimson;
 
   // For "outlined" mode.
   // Small indentation of the legend from the border for "outlined" mode.
-  --gfi-o-lgn-pd: 0.3437em;
+  --gfi-lgn-pd: 0.3437em; // # 5.5px
   // The value of the radius of the rounding of the border for "outlined" mode.
   // --gfi-o-br-rd: calc(var(--gfi-size)/10);
 
@@ -152,7 +152,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   vertical-align: top;
 
   // Section "Label".
-  .gfi-label { // outline: 1px dashed green;
+  &>label { // outline: 1px dashed green;
     // #!! font-family: "Roboto","Helvetica","Arial",sans-serif;    // #!! font-weight: 400;    // #!! font-size: 1em;    // line-height: 1.4375 em;
     // #!! letter-spacing: 0.00938em;
     padding: 0;
@@ -168,19 +168,21 @@ grn-frame-input { //outline: 1px dashed crimson;
     transition: color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,max-width 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     z-index: 1;
     pointer-events: none;
-  }
-
-  .gfi-label.gfi-shrink {
-    max-width: var(--gfi--lbl-wd); // # calc(133% - 24px)
-    @include mxTransformTranslateXYScale(var(--gfi--lbl-pd), var(--gfi--lbl-trn-y), 0.75); // # (0px, -1.5px, 0.75) original
-  }
-  .gfi-label:not(.gfi-shrink) {
-    max-width: var(--gfi--lbl2-wd);
-    @include mxTransformTranslateXYScale( var(--gfi--orn-lf, var(--gfi--lbl-pd)) , var(--gfi--lbl2-trn-y) , 1);
+    &.gfi-shrink {
+      // # --lbl-pd-lf: o:14px; u:12px; s:0px;
+      // #  calc(133% - 2.66*(--lbl-pd-lf)) # o: calc(133% - 37.24px); u: calc(133% - 31.92px); s: calc(133% - 0px);
+      max-width: var(--lbl-wd);
+      @include mxTransformTranslateXYScale(var(--lbl-pd-lf), var(--lbl-trn-y), 0.75); // # (0px, -1.5px, 0.75) original
+    }
+    &:not(.gfi-shrink) {
+      // # calc(100% - 2*(--lbl-pd-lf)) # o: calc(100% - 28px); u: calc(100% - 24px); s: calc(100% - 0px);
+      max-width: var(--lbl2-wd); 
+      @include mxTransformTranslateXYScale( var(--orn-lf, var(--lbl-pd-lf)) , var(--lbl2-trn-y) , 1); // #  --lbl-pd-lf = o:14px; u:12px; s:0px;
+    }
   }
 
   // Section "Frame".
-  .gfi-frame { // outline: 1px dashed blueviolet;
+  &>div { // outline: 1px dashed blueviolet;
     // #!! font-family: "Roboto","Helvetica","Arial",sans-serif;    // #!! font-weight: 400;    // #!! font-size: 1em;    // #!! line-height: 1.4375 em;  // line-height: 1.1876em; // small
     // #!! letter-spacing: 0.00938em; // TODO ??
     box-sizing: border-box;
@@ -190,33 +192,33 @@ grn-frame-input { //outline: 1px dashed crimson;
     // @include mxAlignItems(baseline);
     flex-wrap: nowrap;
     position: relative;
-    border-radius: inherit;
+    // border-radius: inherit;
     &.Grn-disabled {
       cursor: default;
     }
-    // input {  outline: 1px dashed orange;} // # TODO temp;
-    .gfi-elem {
-      line-height: var(--gfi-ln-hg);
-      align-self: baseline;
-    }
+  }
+  input, textarea { // outline: 1px dashed orange; // # TODO temp;
+    line-height: var(--gfi-ln-hg);
+    align-self: baseline;
+  }
+  input[elemPdVer] {
+    padding-top: var(--lbl-pd-tp);    // # o:16.5px; us:24.75px;
+    padding-bottom: var(--lbl-pd-bt); // # o:16.5px; us: 8.25px;
+  }
+  textarea[elemMrVer] {
+    margin-top: var(--lbl-pd-tp);     // # o:16.5px; us:24.75px;
+    margin-bottom: var(--lbl-pd-bt);  // # o:16.5px; us: 8.25px;
   }
   // underline
-  .gfi-u-frm {
+  &>div[exterior="underline"] {
     border-radius: var(--gfi-u-br-rd);
     -webkit-transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
   }
-  .gfi-elem-pd-ver {
-    padding-top: var(--gfi--lbl-pd-tp);    // # o:16.5px; us:24.75px;
-    padding-bottom: var(--gfi--lbl-pd-bt); // # o:16.5px; us: 8.25px;
-  }
-  .gfi-elem-mr-ver {
-    margin-top: var(--gfi--lbl-pd-tp);     // # o:16.5px; us:24.75px;
-    margin-bottom: var(--gfi--lbl-pd-bt);  // # o:16.5px; us: 8.25px;
-  }
 
   // For "frame" underline and standard
-  .gfi-substrate-frm {
+
+  &>div[frm-btm] {
     &:before {
       border-bottom-width: 1px;
       border-bottom-style: solid;
@@ -235,7 +237,6 @@ grn-frame-input { //outline: 1px dashed crimson;
     &:hover:not(.Grn-disabled):before {
       border-bottom-width: 2px;
     }
-
     &:after {
       border-bottom-width: 2px;
       border-bottom-style: solid;
@@ -255,7 +256,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
 
   // Section "Fieldset".
-  .gfi-outlined-fieldset {
+  fieldset {
     text-align: left;
     position: absolute;
     bottom: 0;
@@ -263,7 +264,7 @@ grn-frame-input { //outline: 1px dashed crimson;
     top: 0;
     left: 0;
     margin: 0;
-    padding: 0px calc(var(--gfi-o-lbl-pd) - var(--gfi-o-lgn-pd)); // (14px - 4,4px)=9,6px;
+    padding: 0px calc(var(--gfi-o-lbl-pd) - var(--gfi-lgn-pd)); // (14px - 4,4px)=9,6px;
     pointer-events: none;
     border-radius: var(--gfi-o-br-rd, calc(var(--gfi-size)/10));
     border-style: solid;
@@ -275,38 +276,39 @@ grn-frame-input { //outline: 1px dashed crimson;
     &.Grn-focused {
       border-width: 2px;
     }
+    box-sizing: inherit;
   }
 
   // Section "Legend".
-  .gfi-legend {
+  legend {
+    float: unset;
     display: block;
     width: auto;
-    height: 1px; // border-width: 1px;
+    height: 1px;
     font-size: 0.75em; // #!! 12px
     visibility: hidden;
-    padding-inline-start: 0;
-    padding-inline-end: 0;
-    &:not(.gfi-lgnd-shrink) {
+    padding: 0;
+    &:not(.gfi-lgn-shrink) {
       max-width: 0.01px;
       -webkit-transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
       transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     }
-    &.gfi-lgnd-shrink {
+    &.gfi-lgn-shrink {
       max-width: 100%;
       -webkit-transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
       transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
-      &.gfi-lgnd-indent {
-        padding: 0 var(--gfi-o-lgn-pd);
+      &.gfi-lgn-indent {
+        padding: 0 var(--gfi-lgn-pd);
       }
     }
-  }
-  .gfi-lgnd-text {
-    display: inline-block;
-    height: inherit;
+    &>span {
+      display: inline-block;
+      height: inherit;
+    }
   }
 
   // Section "HelperText"
-  .gfi-helper-text {
+  &>p {
     // font-family: "Roboto","Helvetica","Arial",sans-serif; // #!!
     // font-weight: 400; // #!!
     min-height: 1.1875em;
@@ -317,11 +319,13 @@ grn-frame-input { //outline: 1px dashed crimson;
     text-align: left;
     margin-top: 3px;
     margin-bottom: 0;
-    margin-right: var(--gfi--lbl-pd);
-    margin-left: var(--gfi--lbl-pd);
+    margin-right: var(--lbl-pd-lf); // # o:14px; u:12px; s:0px;
+    margin-left: var(--lbl-pd-lf); // # o:14px; u:12px; s:0px;
   }
 
-    // Ornament "padding".
+  // ** Additional settings **
+  
+  // Ornament "padding".
   .gfi-ornam-lf {
     max-height: inherit;
   }
@@ -329,38 +333,49 @@ grn-frame-input { //outline: 1px dashed crimson;
     order: 1;
   }
   .gfi-ornam-lf:empty~.gfi-elem-pd-hor {
-    padding-left: var(--gfi--lbl-pd);  // # o:14px; u:12px; s:0px;
+    padding-left: var(--lbl-pd-lf); // # o:14px; u:12px; s:0px;
   }
   .gfi-ornam-rg:empty~.gfi-elem-pd-hor {
-    padding-right: var(--gfi--lbl-pd); // # o:14px; u:12px; s:0px;
+    padding-right: var(--lbl-pd-lf); // # o:14px; u:12px; s:0px;
   }
 
-  .gfi-orn-lf-center .gfi-ornam-lf,
-  .gfi-orn-rg-center .gfi-ornam-rg {
+  span[orn-lf="center"], span[orn-rg="center"] {
     align-self: center;
   }
-  .gfi-orn-lf-flex-start .gfi-ornam-lf,
-  .gfi-orn-rg-flex-start .gfi-ornam-rg {
+  span[orn-lf="flex-start"], span[orn-rg="flex-start"] {
     align-self: flex-start;
   }
-  .gfi-orn-lf-flex-end .gfi-ornam-lf,
-  .gfi-orn-rg-flex-end .gfi-ornam-rg {
+  span[orn-lf="flex-end"], span[orn-rg="flex-end"] {
     align-self: flex-end;
   }
-  .gfi-orn-lf-baseline .gfi-ornam-lf,
-  .gfi-orn-rg-baseline .gfi-ornam-rg {
+  span[orn-lf="baseline"], span[orn-rg="baseline"] {
     align-self: baseline;
   }
-  .gfi-orn-lf-stretch .gfi-ornam-lf,
-  .gfi-orn-rg-stretch .gfi-ornam-rg {
+  span[orn-lf="stretch"], span[orn-rg="stretch"] {
     align-self: stretch;
   }
+
+  span[ext-o][orn-lf="default"], span[ext-o][orn-rg="default"] {
+    align-self: center;
+  }
+  span[ext-u][orn-lf="default"] {
+    align-self: flex-end;
+  }
+  span[ext-u][orn-rg="default"] {
+    align-self: center;
+  }
+  span[ext-s][orn-lf="default"], span[ext-s][orn-rg="default"] {
+    align-self: flex-end;
+  }
+
+  //  outlined, underline, standard
+
   .gfi-u-frm .gfi-ornam-lf,
   .gfi-s-frm .gfi-ornam-lf,
   .gfi-s-frm .gfi-ornam-rg {
     .gfi-su-ornam {
       display: inline-block;
-      margin-bottom: var(--gfi--lbl-pd-bt); // # 8.25px;
+      margin-bottom: var(--lbl-pd-bt); // # 8.25px;
     }
   }
 }

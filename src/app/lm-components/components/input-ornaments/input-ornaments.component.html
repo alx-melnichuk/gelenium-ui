@@ -53,14 +53,16 @@
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grnOrnament" + text.</em>
+          <em>Section: "grnOrnament" + text!!.</em>
         </small>
       </div>
       <grn-input formControlName="input05a"
+        class="demo1"
         label="Enter the mass test demostration"
         helperText="The value is greater than zero."
-        [exterior]="exterior05">
-        <span grnOrnamentLf
+        [exterior]="exterior05"
+        [config]="config05">
+        <span grnOrnamentLf9
           class="gfi-su-ornam io-pd-hor">kg</span>
       </grn-input>
     </div>
@@ -342,7 +344,7 @@
       <grn-input formControlName="input05j"
         [label]="controls05.input05j.value === ''
           ?'Enter a value':'Value'"
-        [ornamLfAlign]="ornamLfAlign05"
+        ornamLfAlign9="ornamLfAlign05"
         [exterior]="exterior05"
         [helperText]="controls05.input05j.value === ''
           ?'Enter your value.'
@@ -361,7 +363,7 @@
       <grn-input formControlName="input05k"
         [label]="controls05.input05k.value === ''
           ?'Enter a value':'Value'"
-        [ornamRgAlign]="ornamRgAlign05"
+        ornamRgAlign9="ornamRgAlign05"
         [exterior]="exterior05"
         [helperText]="controls05.input05k.value === ''
           ?'Enter your value.'

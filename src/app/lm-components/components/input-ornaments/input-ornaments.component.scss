@@ -3,6 +3,24 @@
 app-input-ornaments {
   display: block;
 
+  // .demo1 .gfi-label:not(.gfi-shrink) {  // work
+  //   max-width: calc(133% - 4px);
+  //   transform: translate(35px, 17.5px) scale(1);
+  // }
+  // .demo1 .gfi-elem { // work
+  //   padding-top: var(--lbl-pd-tp);    // # o:16.5px; us:24.75px;
+  //   padding-bottom: var(--lbl-pd-bt); // # o:16.5px; us: 8.25px;
+  // }
+  // .demo1 .gfi-elem { // work
+  //   padding-top: 15px;    // # o:16.5px; us:24.75px;
+  //   padding-bottom: 15px; // # o:16.5px; us: 8.25px;
+  // }
+  // .demo1 .gfi-u-frm { // work
+  //   color: aqua;
+  //   border-radius: var(--gfi-u-br-rd);
+  // }
+
+
   .io-elem {
     width: 26ch;
   }

@@ -10,6 +10,7 @@ import {
   Inject,
   Input,
   OnChanges,
+  Optional,
   Output,
   PLATFORM_ID,
   SimpleChanges,
@@ -31,6 +32,7 @@ import {
 } from '@angular/forms';
 
 import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
+import { GRN_FRAME_INPUT_CONFIG } from '../grn-frame-input/grn-frame-input.component';
 import { GrnFrameInputConfig } from '../grn-frame-input/grn-frame-input.interface';
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
@@ -74,10 +76,6 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public lbShrink: string | null = null;
   @Input()
   public hiddenLabel: string | null = null;
-  @Input()
-  public ornamLfAlign: string | null = null; // OrnamAlign
-  @Input()
-  public ornamRgAlign: string | null = null; // OrnamAlign
   @Input()
   public config: GrnFrameInputConfig | null = null;
   @Input()
@@ -125,8 +123,6 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public isDisabledVal = false; // Binding attribute "isDisabled".
   public isLabelShrink: boolean | null = null; // Binding attribute "lbShrink".
   public frameSizeVal: FrameSize | null = null;
-  public ornamLfAlignVal: OrnamAlign | null = null;
-  public ornamRgAlignVal: OrnamAlign | null = null;
   public isHiddenLabel: boolean | null = null; // Binding attribute "hiddenLabel".
   public isErrorVal = false; // Binding attribute "isError".
 
@@ -136,10 +132,24 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public isFilled = false;
   public isHelperTextFilled = false;
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private changeDetectorRef: ChangeDetectorRef) {}
+  public ornamLfAlign: OrnamAlign = OrnamAlign.default;
+  public ornamRgAlign: OrnamAlign = OrnamAlign.default;
+  public actualConfig: GrnFrameInputConfig | null = null;
+
+  constructor(
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private changeDetectorRef: ChangeDetectorRef,
+    @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null
+  ) {
+    this.actualConfig = this.initConfig(this.rootConfig || {});
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.config) {
+      const config = { ...(this.rootConfig || {}), ...(this.config || {}) };
+      this.actualConfig = this.initConfig(config);
+    }
     if (changes.type) {
       this.typeVal = InputTypeUtil.create(this.type) || InputType.text;
     }
@@ -158,12 +168,6 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
     }
     if (changes.frameSize) {
       this.frameSizeVal = FrameSizeUtil.convert(this.frameSize);
-    }
-    if (changes.ornamLfAlign) {
-      this.ornamLfAlignVal = OrnamAlignUtil.convert(this.ornamLfAlign);
-    }
-    if (changes.ornamRgAlign) {
-      this.ornamRgAlignVal = OrnamAlignUtil.convert(this.ornamRgAlign);
     }
     this.isHiddenLabel = changes.hiddenLabel ? this.hiddenLabel !== null : this.isHiddenLabel;
     this.isErrorVal = changes.isError ? this.isError !== null : this.isErrorVal;
@@ -291,5 +295,13 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
       newValidator.push(Validators.maxLength(maxLength));
     }
     this.formControl.setValidators(newValidator);
+  }
+
+  private initConfig(config: GrnFrameInputConfig | null): GrnFrameInputConfig | null {
+    if (config != null) {
+      this.ornamLfAlign = OrnamAlignUtil.create(config?.ornamLfAlign || this.ornamLfAlign, null);
+      this.ornamRgAlign = OrnamAlignUtil.create(config?.ornamRgAlign || this.ornamRgAlign, null);
+    }
+    return config;
   }
 }

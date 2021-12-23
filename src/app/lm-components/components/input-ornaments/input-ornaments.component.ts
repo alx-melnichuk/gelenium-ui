@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/grn-frame-input/grn-frame-input.interface';
+import { OrnamAlign } from 'projects/lib-geranium/src/lib/interfaces/ornam-align.interface';
 
 import {
   CN_LABEL_CSS,
@@ -61,6 +63,17 @@ export class InputOrnamentsComponent {
   public isBtnEyeCrossed05h = false;
   public ornamLfAlign05 = 'default';
   public ornamRgAlign05 = 'default';
+
+  public config05: GrnFrameInputConfig = {
+    ornamLfAlign: OrnamAlign.flexStart,
+    ornamRgAlign: OrnamAlign.flexStart,
+  };
+  // default = 'default',
+  // center = 'center',
+  // flexStart = 'flex-start',
+  // flexEnd = 'flex-end',
+  // baseline = 'baseline',
+  // stretch = 'stretch',
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }

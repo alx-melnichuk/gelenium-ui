@@ -78,25 +78,25 @@ app-frame-input-palette {
     background-color: var(--fip-underline-disabled-bg-color);
   }
 
-  .fip-specific .Grn-palette .p-su-def-br-cl:before {
+  .fip-specific .Grn-palette .gfi-su-pal-def-br-cl:before {
     border-bottom-color: var(--fip-substrate-before-brd-color);
   }
-  .fip-specific .Grn-palette .p-su-err-br-cl:before {
+  .fip-specific .Grn-palette .gfi-su-pal-err-br-cl:before {
     border-bottom-color: var(--fip-error-color);
   }
-  .fip-specific .Grn-palette .p-su-err-br-cl:after {
+  .fip-specific .Grn-palette .gfi-su-pal-err-br-cl:after {
     border-bottom-color: var(--fip-error-color);
   }
-  .fip-specific .Grn-palette .p-su-hov-err-br-cl:before {
+  .fip-specific .Grn-palette .gfi-su-pal-hov-err-br-cl:before {
     border-bottom-color: var(--fip-error-hover-color);
   }
-  .fip-specific .Grn-palette .p-su-hov-br-cl:before {
+  .fip-specific .Grn-palette .gfi-su-pal-hov-br-cl:before {
     border-bottom-color: var(--fip-default-color);
   }
-  .fip-specific .Grn-palette .p-su-foc-br-cl:after {
+  .fip-specific .Grn-palette .gfi-su-pal-foc-br-cl:after {
     border-bottom-color: var(--fip-focused-color);
   }
-  .fip-specific .Grn-palette .p-su-dis-br-cl:before {
+  .fip-specific .Grn-palette .gfi-su-pal-dis-br-cl:before {
     border-bottom-color: var(--fip-substrate-before-brd-color);
   }
 
@@ -114,20 +114,20 @@ app-frame-input-palette {
   .fip-bstrap .Grn-palette .p-o-hov-br-cl {
     border-color: var(--g-o-def-br-cl);
   }
-  .fip-bstrap .gfi-outlined-fieldset.Grn-focused {
+  .fip-bstrap .gfi-fieldset.Grn-focused {
     border-width: 1px;
   }
-  .fip-bstrap .gfi-outlined-fieldset.Grn-focused.p-o-err-br-cl {
+  .fip-bstrap .gfi-fieldset.Grn-focused.p-o-err-br-cl {
     box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
   }
-  .fip-bstrap .gfi-outlined-fieldset.Grn-focused:not(.p-o-err-br-cl) {
+  .fip-bstrap .gfi-fieldset.Grn-focused:not(.p-o-err-br-cl) {
     box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
   }
   .fip-bstrap .gfi-o-frm.Grn-disabled {
     background-color: #e9ecef;
     opacity: 1;
   }
-  .fip-bstrap .gi-input.gi-outlined.Grn-error {
+  .fip-bstrap .gi-input.Grn-error {
     padding-right: 1.4em;
     background-image: url("data:image/svg+xml,"
     + "<svg xmlns='http://www.w3.org/2000/svg' width='12' "
@@ -139,5 +139,6 @@ app-frame-input-palette {
     background-repeat: no-repeat;
     background-position: right center;
     background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    margin-right: 3px;
   }
 }

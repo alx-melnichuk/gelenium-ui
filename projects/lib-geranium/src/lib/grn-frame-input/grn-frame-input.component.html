@@ -14,22 +14,21 @@
   [attr.id]="inputId + '-label'">
   {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
 </label>
-<div [ngClass]="['gfi-frame', 'Grn-palette', 'GrnInputFrame', 'gfi-' + exterior?.substring(0,1) + '-frm'
+<div frame
+  [ngClass]="['gfi-frame', 'Grn-palette', 'GrnInputFrame', 'gfi-' + exterior?.substring(0,1) + '-frm'
   , (isUnderlineExterior ? ('p-u-' + paletteModeBg(isError, isFocused, isDisabled, isMouseEnter) + '-bg-cl'): '')
-  , (isStandardExterior || isUnderlineExterior ? 'gfi-substrate-frm': '')
-  , (isStandardExterior || isUnderlineExterior ? ('p-su-' + paletteMode(isError, isFocused, isDisabled, isMouseEnter) + '-br-cl'): '')
-  , (ornamLfAlign ? 'gfi-orn-lf-' + getOrnamAlign(ornamLfAlign, false, exterior): '')
-  , (ornamRgAlign ? 'gfi-orn-rg-' + getOrnamAlign(ornamRgAlign, true, exterior): '')
+  , (isStandardExterior || isUnderlineExterior ? ('gfi-su-pal-' + paletteMode(isError, isFocused, isDisabled, isMouseEnter) + '-br-cl'): '')
   , (isError ? 'Grn-error': '')
   , (isDisabled ? 'Grn-disabled': '')
   , (isDisabled ? 'p-inp-dis-cl': '')
   , (isFocused ? 'Grn-focused': '')
 ]"
+  [attr.frm-btm]="isStandardExterior || isUnderlineExterior ? '' : null"
   (click)="doClickFrame($event)">
   <ng-content></ng-content>
   <fieldset *ngIf="isOutlinedExterior"
     aria-hidden="true"
-    [ngClass]="['gfi-outlined-fieldset', 'GrnInput-Outlined'
+    [ngClass]="['gfi-fieldset'
     , (isFocused ? 'Grn-focused': '')
     , (isDisabled ? 'Grn-disabled': '')
     , (isFocused ? 'Grn-focused': '')
@@ -37,17 +36,17 @@
   ]">
     <legend *ngIf="!hiddenLabel"
       [ngClass]="['gfi-legend'
-      , (isLabelShrinkValue ? 'gfi-lgnd-shrink': '')
-      , (!!label || isRequired ? 'gfi-lgnd-indent': '')
+      , (isLabelShrinkValue ? 'gfi-lgn-shrink': '')
+      , (!!label || isRequired ? 'gfi-lgn-indent': '')
     ]">
-      <span class="gfi-lgnd-text">
+      <span class="gfi-lgn-text">
         {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
       </span>
     </legend>
   </fieldset>
 </div>
 <p *ngIf="!!helperText"
-  [ngClass]="['gfi-helper-text', 'GrnHelperText', 'gfi-hlp-' + exterior
+  [ngClass]="['gfi-helper-text', 'GrnHelperText', 'gfi-' + exterior?.substring(0,1) + '-hlp'
   , (isError ? 'Grn-error': '')
   , (isDisabled ? 'Grn-disabled': '')
   , (isFocused ? 'Grn-focused': '')
