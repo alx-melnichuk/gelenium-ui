@@ -1,4 +1,5 @@
-<section mr-vr>
+<section mr-vr
+  *ngIf="false">
   <h3>Attributes</h3>
   <p>The following attributes are supported:</p>
   <ul>
@@ -115,10 +116,15 @@
       <grn-input formControlName="input02d"
         label="Disabled"
         isDisabled
+        isError9
         helperText="The parameter is disabled."
         [exterior]="exterior02">
       </grn-input>
     </div>
+
+  </div>
+  <div class="app-group"
+    *ngIf="false">
 
     <div class="app-elem">
       <div>

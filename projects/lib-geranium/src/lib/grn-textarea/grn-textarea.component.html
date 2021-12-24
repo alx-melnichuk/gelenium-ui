@@ -27,8 +27,8 @@
       [attr.id]="id"
       [rows]="currentRows"
       [ngClass]="['gt-textarea', 'gfi-elem', 'gfi-elem-mr-ver', 'gfi-elem-pd-hor', 'GrnTextareaBase', 'gt-' + exteriorVal
-        , (isDisabledVal ? 'Grn-disabled': '')
-        , (!!formControl.errors ? 'Grn-error': '')
+        , (isDisabledVal ? 'gfi-disabled': '')
+        , (!!formControl.errors ? 'gfi-error': '')
       ]"
       [attr.disabled]="isDisabledVal ? '': null"
       [attr.autocomplete]="!!autoComplete ? autoComplete : null"

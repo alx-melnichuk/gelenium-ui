@@ -1,4 +1,5 @@
-<section mr-vr>
+<section mr-vr
+  *ngIf="false">
   <h3>Palette.</h3>
   <p>
     You can customize the color palette for the input element.
@@ -47,22 +48,22 @@
   </p>
   <code><pre>
 // Default color of the label.
-.fip-specific .Grn-palette .p-lbl-def-cl
+.fip-specific .gfi-label.gfi-default
 &#123; color: var(--fip-label-default-color); &#125;
 // The color of the label on error.
-.fip-specific .Grn-palette .p-lbl-err-cl
+.fip-specific .gfi-label.gfi-error
 &#123; color: var(--fip-error-color); &#125;
 // The color of the label on mouse over and on error.
-.fip-specific .Grn-palette .p-lbl-hov-err-cl
+.fip-specific .gfi-label.gfi-hover.gfi-error
 &#123; color: var(--fip-error-hover-color); &#125;
 // The color of the label on mouse hover.
-.fip-specific .Grn-palette .p-lbl-hov-cl
+.fip-specific .gfi-label.gfi-hover:not(.gfi-error)
 &#123; color: var(--fip-default-color); &#125;
 // The color of the label when the input element receives focus.
-.fip-specific .Grn-palette .p-lbl-foc-cl
+.fip-specific .gfi-label.gfi-focused:not(.gfi-error)
 &#123; color: var(--fip-focused-color); &#125;
 // The color of the label when the input element is disabled.
-.fip-specific .Grn-palette .p-lbl-dis-cl
+.fip-specific .Grn-palette label.gfi-disabled
 &#123; color: var(--fip-label-disabled-color); &#125;</pre></code>
   <p>
     Likewise to replace the "Outlined" border color define a group of CSS classes.
@@ -529,41 +530,41 @@ export class FrameInputComponent &#123;
   --fip-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
 &#125;
 
-.fip-specific .Grn-palette .p-lbl-def-cl &#123;
+.fip-specific .gfi-label.gfi-default &#123;
   color: var(--fip-label-default-color);
 &#125;
-.fip-specific .Grn-palette .p-lbl-err-cl &#123;
+.fip-specific .gfi-label.gfi-error &#123;
   color: var(--fip-error-color);
 &#125;
-.fip-specific .Grn-palette .p-lbl-hov-err-cl &#123;
+.fip-specific .gfi-label.gfi-hover.gfi-error &#123;
   color: var(--fip-error-hover-color);
 &#125;
-.fip-specific .Grn-palette .p-lbl-hov-cl &#123;
+.fip-specific .gfi-label.gfi-hover:not(.gfi-error) &#123;
   color: var(--fip-default-color);
 &#125;
-.fip-specific .Grn-palette .p-lbl-foc-cl &#123;
+.fip-specific ..gfi-label.gfi-focused:not(.gfi-error) &#123;
   color: var(--fip-focused-color);
 &#125;
-.fip-specific .Grn-palette .p-lbl-dis-cl &#123;
+.fip-specific .Grn-palette label.gfi-disabled &#123;
   color: var(--fip-label-disabled-color);
 &#125;
 
-.fip-specific .Grn-palette .p-o-def-br-cl &#123;
+.fip-specific .gfi-fieldset.gfi-default &#123;
   border-color: var(--fip-outlined-default-brd-color);
 &#125;
-.fip-specific .Grn-palette .p-o-err-br-cl &#123;
+.fip-specific .gfi-fieldset.gfi-error:not(.gfi-hover) &#123;
   border-color: var(--fip-error-color);
 &#125;
-.fip-specific .Grn-palette .p-o-hov-err-br-cl &#123;
+.fip-specific .gfi-fieldset.gfi-hover.gfi-error &#123;
   border-color: var(--fip-error-hover-color);
 &#125;
-.fip-specific .Grn-palette .p-o-hov-br-cl &#123;
+.fip-specific .gfi-fieldset.gfi-hover:not(.gfi-error) &#123;
   border-color: var(--fip-default-color);
 &#125;
-.fip-specific .Grn-palette .p-o-foc-br-cl &#123;
+.fip-specific .gfi-fieldset.gfi-focused:not(.gfi-error) &#123;
   border-color: var(--fip-focused-color);
 &#125;
-.fip-specific .Grn-palette .p-o-dis-br-cl &#123;
+.fip-specific .gfi-fieldset.gfi-disabled:not(.gfi-error) &#123;
   border-color: var(--fip-label-disabled-color);
 &#125;
 
@@ -619,23 +620,23 @@ export class FrameInputComponent &#123;
   --g-foc-cl: #80bdff;
   --g-o-def-br-cl: #ced4da;
 &#125;
-.fip-bstrap .Grn-palette .p-o-hov-br-cl &#123;
+.fip-bstrap .gfi-fieldset.gfi-hover:not(.gfi-error) &#123;
   border-color: var(--g-o-def-br-cl);
 &#125;
-.fip-bstrap .gfi-fieldset.Grn-focused &#123;
+.fip-bstrap .gfi-fieldset.gfi-focused &#123;
   border-width: 1px;
 &#125;
-.fip-bstrap .gfi-fieldset.Grn-focused.p-o-err-br-cl &#123;
+.fip-bstrap .gfi-fieldset.gfi-focused.gfi-error &#123;
   box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
 &#125;
-.fip-bstrap .gfi-fieldset.Grn-focused:not(.p-o-err-br-cl) &#123;
+.fip-bstrap .gfi-fieldset.gfi-focused:not(.gfi-error) &#123;
   box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
 &#125;
-.fip-bstrap .gfi-o-frm.Grn-disabled &#123;
+.fip-bstrap .gfi-o-frm.gfi-disabled &#123;
   background-color: #e9ecef;
   opacity: 1;
 &#125;
-.fip-bstrap .gi-input.gi-outlined.Grn-error &#123;
+.fip-bstrap .gi-input.gi-outlined.gfi-error &#123;
   padding-right: 1.4em;
   background-image: url("data:image/svg+xml,"
   + "&lt;svg xmlns='http://www.w3.org/2000/svg' width='12' "

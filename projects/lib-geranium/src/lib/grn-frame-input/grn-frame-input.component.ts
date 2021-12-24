@@ -19,7 +19,7 @@ import {
 
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
-import { OrnamAlign, OrnamAlignUtil } from '../interfaces/ornam-align.interface';
+import { OrnamAlign } from '../interfaces/ornam-align.interface';
 
 import { GrnFrameInputConfig } from './grn-frame-input.interface';
 
@@ -88,8 +88,8 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   public get isStandardExterior(): boolean {
     return ExteriorUtil.isStandard(this.exterior);
   }
-  public get isLabelShrinkValue(): boolean {
-    return !!(this.isFocused || this.isFilled || this.isLabelShrink);
+  public get isShrinkValue(): boolean {
+    return !!(this.isFocused || this.isFilled || this.isLabelShrink); // TODO del;
   }
 
   public isMouseEnter = false;

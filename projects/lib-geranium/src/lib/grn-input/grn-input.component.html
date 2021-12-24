@@ -36,8 +36,8 @@
       [attr.id]="id"
       [type]="typeVal"
       [ngClass]="['gi-input', 'gfi-elem', 'gfi-elem-pd-hor', 'GrnInputBase', 'gi-' + exteriorVal
-          , (isDisabledVal ? 'Grn-disabled': '')
-          , (!!formControl.errors ? 'Grn-error': '')]"
+          , (isDisabledVal ? 'gfi-disabled': '')
+          , (!!formControl.errors ? 'gfi-error': '')]"
       [attr.disabled]="isDisabledVal ? '': null"
       [attr.autocomplete]="!!autoComplete ? autoComplete : null"
       [attr.readonly]="isReadOnlyVal ? '': null"

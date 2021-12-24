@@ -21,41 +21,41 @@ app-frame-input-palette {
     --fip-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
   }
 
-  .fip-specific .Grn-palette .p-lbl-def-cl {
+  .fip-specific .gfi-label.gfi-default {
     color: var(--fip-label-default-color);
   }
-  .fip-specific .Grn-palette .p-lbl-err-cl {
+  .fip-specific .gfi-label.gfi-error:not(.gfi-hover) {
     color: var(--fip-error-color);
   }
-  .fip-specific .Grn-palette .p-lbl-hov-err-cl {
+  .fip-specific .gfi-label.gfi-hover.gfi-error {
     color: var(--fip-error-hover-color);
   }
-  .fip-specific .Grn-palette .p-lbl-hov-cl {
+  .fip-specific .gfi-label.gfi-hover:not(.gfi-error) {
     color: var(--fip-default-color);
   }
-  .fip-specific .Grn-palette .p-lbl-foc-cl {
+  .fip-specific .gfi-label.gfi-focused:not(.gfi-error) {
     color: var(--fip-focused-color);
   }
-  .fip-specific .Grn-palette .p-lbl-dis-cl {
+  .fip-specific .gfi-label.gfi-disabled:not(.gfi-error) {
     color: var(--fip-label-disabled-color);
   }
 
-  .fip-specific .Grn-palette .p-o-def-br-cl {
+  .fip-specific .gfi-fieldset.gfi-default {
     border-color: var(--fip-outlined-default-brd-color);
   }
-  .fip-specific .Grn-palette .p-o-err-br-cl {
+  .fip-specific .gfi-fieldset.gfi-error:not(.gfi-hover) {
     border-color: var(--fip-error-color);
   }
-  .fip-specific .Grn-palette .p-o-hov-err-br-cl {
+  .fip-specific .gfi-fieldset.gfi-hover.gfi-error {
     border-color: var(--fip-error-hover-color);
   }
-  .fip-specific .Grn-palette .p-o-hov-br-cl {
+  .fip-specific .gfi-fieldset.gfi-hover:not(.gfi-error) {
     border-color: var(--fip-default-color);
   }
-  .fip-specific .Grn-palette .p-o-foc-br-cl {
+  .fip-specific .gfi-fieldset.gfi-focused:not(.gfi-error) {
     border-color: var(--fip-focused-color);
   }
-  .fip-specific .Grn-palette .p-o-dis-br-cl {
+  .fip-specific .gfi-fieldset.gfi-disabled:not(.gfi-error) {
     border-color: var(--fip-label-disabled-color);
   }
   
@@ -111,23 +111,24 @@ app-frame-input-palette {
     --g-foc-cl: #80bdff;
     --g-o-def-br-cl: #ced4da;
   }
-  .fip-bstrap .Grn-palette .p-o-hov-br-cl {
+  .fip-bstrap .gfi-fieldset.gfi-hover:not(.gfi-error) {
     border-color: var(--g-o-def-br-cl);
   }
-  .fip-bstrap .gfi-fieldset.Grn-focused {
+  .fip-bstrap .gfi-fieldset.gfi-focused {
     border-width: 1px;
   }
-  .fip-bstrap .gfi-fieldset.Grn-focused.p-o-err-br-cl {
+  // .fip-bstrap .gfi-fieldset.gfi-focused.p -o-err-br-cl  // .p -o-err-br-cl - .gfi-fieldset.gfi-error:not(.gfi-hover)
+  .fip-bstrap .gfi-fieldset.gfi-focused.gfi-error {
     box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
   }
-  .fip-bstrap .gfi-fieldset.Grn-focused:not(.p-o-err-br-cl) {
+  .fip-bstrap .gfi-fieldset.gfi-focused:not(.gfi-error) {
     box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
   }
-  .fip-bstrap .gfi-o-frm.Grn-disabled {
+  .fip-bstrap .gfi-o-frm.gfi-disabled {
     background-color: #e9ecef;
     opacity: 1;
   }
-  .fip-bstrap .gi-input.Grn-error {
+  .fip-bstrap .gi-input.gfi-error {
     padding-right: 1.4em;
     background-image: url("data:image/svg+xml,"
     + "<svg xmlns='http://www.w3.org/2000/svg' width='12' "
