@@ -1,77 +1,74 @@
-<label *ngIf="!hiddenLabel"
-  [ngClass]="['gfi-label'
-  , 'gfi-' + exterior?.substring(0,1) + '-lbl'
-  , (isLabelShrink ? 'gfi-shrink': '')
-  , (isFilled ? 'gfi-filled': '')
-
-  , (!isError && !isMouseEnter && !isFocused && !isDisabled ? 'gfi-default' : '')
-  , (isError ? 'gfi-error': '')
-  , (isMouseEnter && !isDisabled && !isFocused ? 'gfi-hover' : '')
-  , (isFocused ? 'gfi-focused': '')
-  , (isDisabled ? 'gfi-disabled': '')
-
-  , (isRequired ? 'gfi-required': '')
-  ,   ('p-lbl-' + paletteMode(isError, isFocused, isDisabled, isMouseEnter) + '-cl')
-  ]"
-  [attr.shr]="isLabelShrink ? '' : null"
-  [attr.fil]="isFilled ? '' : null"
-  [attr.def]="!isError && !isMouseEnter && !isFocused && !isDisabled ? '' : null"
-  [attr.err]="isError ? '' : null"
-  [attr.hov]="isMouseEnter && !isDisabled && !isFocused ? '' : null"
-  [attr.foc]="isFocused ? '' : null"
-  [attr.dis]="isDisabled ? '' : null"
-  [attr.id]="inputId + '-label'"
-  [attr.for]="inputId">
-  {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
-</label>
-<div [ngClass]="['gfi-frame', 'Grn-palette'
-    , 'gfi-' + exterior?.substring(0,1) + '-frm'
-    , (isUnderlineExterior ? ('p-u-' + paletteModeBg(isError, isFocused, isDisabled, isMouseEnter) + '-bg-cl'): '')
-    , (isStandardExterior || isUnderlineExterior ? ('gfi-su-pal-' + paletteMode(isError, isFocused, isDisabled, isMouseEnter) + '-br-cl'): '')
+<section #sectionElement>
+  <label *ngIf="!hiddenLabel"
+    [ngClass]="['gfi-label'
+    , (isLabelShrink ? 'gfi-shrink': '')
+    , (isFilled ? 'gfi-filled': '')
     , (isError ? 'gfi-error': '')
-    , (isDisabled ? 'gfi-disabled': '')
-    , (isDisabled ? 'p-inp-dis-cl': '')
     , (isFocused ? 'gfi-focused': '')
-  ]"
-  [attr.frm-btm]="isStandardExterior || isUnderlineExterior ? '' : null"
-  (click)="doClickFrame($event)">
-  <ng-content></ng-content>
-  <fieldset *ngIf="isOutlinedExterior"
-    [ngClass]="['gfi-fieldset'
-
-      , (!isError && !isMouseEnter && !isFocused && !isDisabled ? 'gfi-default' : '')
-      , (isError ? 'gfi-error': '')
-      , (isMouseEnter && !isDisabled && !isFocused ? 'gfi-hover' : '')
-      , (isFocused ? 'gfi-focused': '')
-      , (isDisabled ? 'gfi-disabled': '')
-    
-      , ('p-o-' + paletteMode(isError, isFocused, isDisabled, isMouseEnter) + '-br-cl')
+    , (isDisabled ? 'gfi-disabled': '')
+    , (isRequired ? 'gfi-required': '')
     ]"
-    [attr.def]="!isError && !isMouseEnter && !isFocused && !isDisabled ? '' : null"
+    [attr.shr]="isLabelShrink ? '' : null"
+    [attr.fil]="isFilled ? '' : null"
     [attr.err]="isError ? '' : null"
-    [attr.hov]="isMouseEnter && !isDisabled && !isFocused ? '' : null"
     [attr.foc]="isFocused ? '' : null"
     [attr.dis]="isDisabled ? '' : null"
-    aria-hidden="true">
-    <legend *ngIf="!hiddenLabel"
-      [ngClass]="['gfi-legend'
-      , (isShrinkValue ? 'gfi-lgn-shrink': '')
-      , (!!label || isRequired ? 'gfi-lgn-indent': '')
-    ]">
-      <span class="gfi-lgn-text">
-        {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
-      </span>
-    </legend>
-  </fieldset>
-</div>
+    [attr.id]="inputId + '-label'"
+    [attr.for]="inputId">
+    {{ label }}<span *ngIf="isRequired"
+      class="">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
+  </label>
+  <div [ngClass]="['gfi-frame', 'Grn-palette'
+      , 'gfi-' + exterior?.substring(0,1) + '-frm'
+      , (isUnderlineExterior ? ('p-u-' + paletteModeBg(isError, isFocused, isDisabled, isMouseEnter) + '-bg-cl'): '')
+      , (isError ? 'gfi-error': '')
+      , (isDisabled ? 'gfi-disabled': '')
+      , (isFocused ? 'gfi-focused': '')
+    ]"
+    [attr.err]="isError ? '' : null"
+    [attr.foc]="isFocused ? '' : null"
+    [attr.dis]="isDisabled ? '' : null"
+    [attr.frm-br]="isStandardExterior || isUnderlineExterior ? '' : null"
+    [attr.frm-br-cl]="isStandardExterior || isUnderlineExterior ? '' : null"
+    (click)="doClickFrame($event)">
+    <ng-content></ng-content>
+    <fieldset *ngIf="isOutlinedExterior"
+      [ngClass]="['gfi-fieldset'
+        , (isError ? 'gfi-error': '')
+        , (isFocused ? 'gfi-focused': '')
+        , (isDisabled ? 'gfi-disabled': '')
+      ]"
+      [attr.err]="isError ? '' : null"
+      [attr.foc]="isFocused ? '' : null"
+      [attr.dis]="isDisabled ? '' : null"
+      aria-hidden="true">
+      <legend *ngIf="!hiddenLabel"
+        [ngClass]="['gfi-legend'
+        , (isLabelShrink ? 'gfi-shrink': '')
+        , (isFilled ? 'gfi-filled': '')
+        , (isFocused ? 'gfi-focused': '')
+        , (!!label || isRequired ? 'gfi-lgn-indent': '')
+        ]"
+        [attr.shr]="isLabelShrink ? '' : null"
+        [attr.fil]="isFilled ? '' : null"
+        [attr.foc]="isFocused ? '' : null"
+        [attr.ind]="!!label || isRequired ? '' : null">
+        <span class="gfi-lgn-text">
+          {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
+        </span>
+      </legend>
+    </fieldset>
+  </div>
+</section>
 <p *ngIf="!!helperText"
-  [ngClass]="['gfi-helper-text', 'GrnHelperText'
-  , 'gfi-' + exterior?.substring(0,1) + '-hlp'
-  , (isError ? 'gfi-error': '')
-  , (isDisabled ? 'gfi-disabled': '')
-  , (isFocused ? 'gfi-focused': '')
-  , ('p-lbl-' + paletteHelperText(isError, isDisabled) + '-cl')
-]"
+  [ngClass]="['gfi-helper-text'
+    , (isError ? 'gfi-error': '')
+    , (isDisabled ? 'gfi-disabled': '')
+    , (isFocused ? 'gfi-focused': '')
+  ]"
+  [attr.err]="isError ? '' : null"
+  [attr.foc]="isFocused ? '' : null"
+  [attr.dis]="isDisabled ? '' : null"
   [attr.id]="inputId + '-helper-text'">
   {{ helperText }}
 </p>

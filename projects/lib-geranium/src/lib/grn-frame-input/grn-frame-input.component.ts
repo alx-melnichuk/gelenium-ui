@@ -1,5 +1,6 @@
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
@@ -14,6 +15,7 @@ import {
   Optional,
   Output,
   SimpleChanges,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -33,7 +35,7 @@ export const GRN_FRAME_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('G
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
+export class GrnFrameInputComponent implements OnChanges, AfterContentInit, AfterViewInit {
   @Input()
   public inputId = '';
   @Input()
@@ -65,18 +67,32 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   @Output()
   readonly clickFrame: EventEmitter<Event> = new EventEmitter();
 
+  @ViewChild('sectionElement')
+  public sectionElement: ElementRef | null = null;
   @ContentChild('grnOrnamentLf', { static: true })
   public grnOrnamentLf: ElementRef | undefined;
   @ContentChild('grnOrnamentRg', { static: true })
   public grnOrnamentRg: ElementRef | undefined;
 
+  @HostBinding('class.gfi-outlined')
+  public get getGfiOutlined(): boolean {
+    return ExteriorUtil.isOutlined(this.exterior);
+  }
+  @HostBinding('class.gfi-underline')
+  public get getGfiUnderline(): boolean {
+    return ExteriorUtil.isUnderline(this.exterior);
+  }
+  @HostBinding('class.gfi-standard')
+  public get getGfiStandard(): boolean {
+    return ExteriorUtil.isStandard(this.exterior);
+  }
   @HostBinding('class.Grn-palette')
   public get getGrnPalette(): boolean {
-    return true;
+    return true; // TODO del;
   }
   @HostBinding('style.--gfi-size')
   public get frameSizeValue(): string | null {
-    return this.frameSizeVal > 0 ? this.frameSizeVal + 'px' : null;
+    return this.frameSizeVal > 0 ? this.frameSizeVal + 'px' : null; // TODO del;
   }
 
   public get isOutlinedExterior(): boolean {
@@ -88,9 +104,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   public get isStandardExterior(): boolean {
     return ExteriorUtil.isStandard(this.exterior);
   }
-  public get isShrinkValue(): boolean {
-    return !!(this.isFocused || this.isFilled || this.isLabelShrink); // TODO del;
-  }
 
   public isMouseEnter = false;
   public frameSizeVal = 0;
@@ -98,8 +111,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   public labelPadding = 0;
   public ornamentLfWidth = 0;
   public ornamentRgWidth = 0;
-  // public ornamLfAlign: OrnamAlign = OrnamAlign.default;
-  // public ornamRgAlign: OrnamAlign = OrnamAlign.default;
   public actualConfig: GrnFrameInputConfig | null = null;
 
   constructor(
@@ -113,7 +124,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   public eventMouseEnter(): void {
     this.isMouseEnter = true;
   }
-
   @HostListener('mouseleave')
   public eventMouseLeave(): void {
     this.isMouseEnter = false;
@@ -138,18 +148,13 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
       this.setPropertyLabelPaddingVer(this.exterior, this.frameSizeVal, this.lineHeight);
       this.setPropertyLabel2Padding(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
     }
-    // if (changes.ornamLfAlign) {
-    //   this.ornamLfAlign = OrnamAlignUtil.create(this.ornamLfAlign, this.actualConfig?.ornamLfAlign || null);
-    // }
-    // if (changes.ornamRgAlign) {
-    //   this.ornamRgAlign = OrnamAlignUtil.create(this.ornamRgAlign, this.actualConfig?.ornamRgAlign || null);
-    // }
     if (changes.isLabelShrink) {
       this.isLabelShrink = this.createBoolean(this.isLabelShrink, this.actualConfig?.isLabelShrink);
     }
     if (changes.hiddenLabel) {
       this.hiddenLabel = this.createBoolean(this.hiddenLabel, this.actualConfig?.hiddenLabel);
     }
+    // console.log('OnChanges'); // TODO del;
   }
 
   ngAfterContentInit(): void {
@@ -160,6 +165,12 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     this.ornamentRgWidth = this.grnOrnamentRg?.nativeElement.offsetWidth || 0;
     this.setPropertyOrnamentLf(this.ornamentLfWidth);
     this.setPropertyLabel2Padding(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
+  }
+
+  ngAfterViewInit(): void {
+    if (this.sectionElement === null) {
+      console.log('sectionElement != null ', this.sectionElement != null); // TODO del;
+    }
   }
 
   // ** Public API **
@@ -204,16 +215,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     return result;
   }
 
-  public paletteHelperText(isError: boolean, isDisabled: boolean): string {
-    let result = 'def';
-    if (isError) {
-      result = 'err';
-    } else if (isDisabled) {
-      result = 'dis';
-    }
-    return result;
-  }
-
   public getOrnamAlign(ornamAlign: OrnamAlign | undefined, isEnd: boolean, exterior: Exterior | null): string | null {
     let result = null;
     if (ornamAlign != null) {
@@ -253,8 +254,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     if (config != null) {
       this.exterior = ExteriorUtil.create(this.exterior, config?.exterior || null);
       this.frameSize = FrameSizeUtil.create(this.frameSize, config?.frameSize || null);
-      // this.ornamLfAlign = OrnamAlignUtil.create(this.ornamLfAlign, config?.ornamLfAlign || null);
-      // this.ornamRgAlign = OrnamAlignUtil.create(this.ornamRgAlign, config?.ornamRgAlign || null);
       this.isLabelShrink = this.createBoolean(this.isLabelShrink, config?.isLabelShrink);
       this.hiddenLabel = this.createBoolean(this.hiddenLabel, config?.hiddenLabel);
     }

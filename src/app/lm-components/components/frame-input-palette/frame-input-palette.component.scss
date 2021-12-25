@@ -4,78 +4,78 @@ app-frame-input-palette {
   display: block;
 
   .fip-specific .Grn-palette {
-    --fip-default-color: #00acc1;
+    --fip-hover-color: #00acc1;
     --fip-error-color: #ad1457;
-    --fip-error-hover-color: #f06292;
+    --fip-hover-error-color: #f06292;
     --fip-focused-color: #0097a7;
 
     --fip-label-default-color: #5c6bc0;
     --fip-label-disabled-color: #9c27b0;
-
-    --fip-outlined-default-brd-color: #5c6bc0;
-
-    --fip-underline-default-bg-color: rgba(178, 235, 242, 0.6);
-    --fip-underline-focused-bg-color: rgba(178, 235, 242, 0.4);
-    --fip-underline-disabled-bg-color: rgba(178, 235, 242, 0.2);
+    // outlined
+    --fip-o-default-brd-color: #5c6bc0;
+    // underline
+    --fip-u-default-bg-color: rgba(178, 235, 242, 0.6);
+    --fip-u-focused-bg-color: rgba(178, 235, 242, 0.4);
+    --fip-u-disabled-bg-color: rgba(178, 235, 242, 0.2);
 
     --fip-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
   }
 
-  .fip-specific .gfi-label.gfi-default {
+  .fip-specific :not(:hover)>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+
     color: var(--fip-label-default-color);
   }
-  .fip-specific .gfi-label.gfi-error:not(.gfi-hover) {
+  .fip-specific .gfi-label.gfi-error { //+
     color: var(--fip-error-color);
   }
-  .fip-specific .gfi-label.gfi-hover.gfi-error {
-    color: var(--fip-error-hover-color);
+  .fip-specific :hover>.gfi-label.gfi-error:not(.gfi-focused):not(.gfi-disabled) { //+
+    color: var(--fip-hover-error-color);
   }
-  .fip-specific .gfi-label.gfi-hover:not(.gfi-error) {
-    color: var(--fip-default-color);
+  .fip-specific :hover>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+
+    color: var(--fip-hover-color);
   }
-  .fip-specific .gfi-label.gfi-focused:not(.gfi-error) {
+  .fip-specific .gfi-label.gfi-focused:not(.gfi-error) { //+
     color: var(--fip-focused-color);
   }
-  .fip-specific .gfi-label.gfi-disabled:not(.gfi-error) {
+  .fip-specific .gfi-label.gfi-disabled:not(.gfi-error) { //+
     color: var(--fip-label-disabled-color);
   }
 
-  .fip-specific .gfi-fieldset.gfi-default {
-    border-color: var(--fip-outlined-default-brd-color);
+  .fip-specific :not(:hover)>.gfi-fieldset:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+
+    border-color: var(--fip-o-default-brd-color);
   }
-  .fip-specific .gfi-fieldset.gfi-error:not(.gfi-hover) {
+  .fip-specific fieldset.gfi-error { //+
     border-color: var(--fip-error-color);
   }
-  .fip-specific .gfi-fieldset.gfi-hover.gfi-error {
-    border-color: var(--fip-error-hover-color);
+  .fip-specific :hover>.gfi-fieldset.gfi-error:not(.gfi-focused):not(.gfi-disabled) { //+
+    border-color: var(--fip-hover-error-color);
   }
-  .fip-specific .gfi-fieldset.gfi-hover:not(.gfi-error) {
-    border-color: var(--fip-default-color);
+  .fip-specific :hover>.gfi-fieldset:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+
+    border-color: var(--fip-hover-color);
   }
-  .fip-specific .gfi-fieldset.gfi-focused:not(.gfi-error) {
+  .fip-specific .gfi-fieldset.gfi-focused:not(.gfi-error) { //+
     border-color: var(--fip-focused-color);
   }
-  .fip-specific .gfi-fieldset.gfi-disabled:not(.gfi-error) {
+  .fip-specific .gfi-fieldset.gfi-disabled:not(.gfi-error) { //+
     border-color: var(--fip-label-disabled-color);
   }
   
   .fip-specific .Grn-palette .p-u-def-bg-cl {
-    background-color: var(--fip-underline-default-bg-color);
+    background-color: var(--fip-u-default-bg-color);
   }
   .fip-specific .Grn-palette .p-u-err-bg-cl {
-    background-color: var(--fip-underline-default-bg-color);
+    background-color: var(--fip-u-default-bg-color);
   }
   .fip-specific .Grn-palette .p-u-hov-err-bg-cl {
-    background-color: var(--fip-underline-focused-bg-color);
+    background-color: var(--fip-u-focused-bg-color);
   }
   .fip-specific .Grn-palette .p-u-hov-bg-cl {
-    background-color: var(--fip-underline-focused-bg-color);
+    background-color: var(--fip-u-focused-bg-color);
   }
   .fip-specific .Grn-palette .p-u-foc-bg-cl {
-    background-color: var(--fip-underline-focused-bg-color);
+    background-color: var(--fip-u-focused-bg-color);
   }
   .fip-specific .Grn-palette .p-u-dis-bg-cl {
-    background-color: var(--fip-underline-disabled-bg-color);
+    background-color: var(--fip-u-disabled-bg-color);
   }
 
   .fip-specific .Grn-palette .gfi-su-pal-def-br-cl:before {
@@ -88,10 +88,10 @@ app-frame-input-palette {
     border-bottom-color: var(--fip-error-color);
   }
   .fip-specific .Grn-palette .gfi-su-pal-hov-err-br-cl:before {
-    border-bottom-color: var(--fip-error-hover-color);
+    border-bottom-color: var(--fip-hover-error-color);
   }
   .fip-specific .Grn-palette .gfi-su-pal-hov-br-cl:before {
-    border-bottom-color: var(--fip-default-color);
+    border-bottom-color: var(--fip-hover-color);
   }
   .fip-specific .Grn-palette .gfi-su-pal-foc-br-cl:after {
     border-bottom-color: var(--fip-focused-color);
@@ -100,7 +100,49 @@ app-frame-input-palette {
     border-bottom-color: var(--fip-substrate-before-brd-color);
   }
 
+  .fip-specific .gfi-helper-text:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
+    color: var(--fip-label-default-color);
+  }
+  .fip-specific .gfi-helper-text.gfi-error {
+    color: var(--fip-error-color);
+  }
+  .fip-specific .gfi-helper-text.gfi-focused:not(.gfi-error) {
+    color: var(--fip-label-default-color);
+  }
+  .fip-specific .gfi-helper-text.gfi-disabled:not(.gfi-error) {
+    color: var(--fip-label-disabled-color);
+  }
+  // // Color for "helperText".
+  // p:not([err]):not([foc]):not([dis]) { //+ The default color for the helperText.
+  //   color: var(--g-lbl-def-cl);
+  // }
+  //++ p[err] { // The color of the helperText in an error state.  //   color: var(--g-err-cl);  // }
 
+  // p[foc]:not([err]) { // The color of the helperText when getting focus.
+  //   color: var(--g-lbl-def-cl);
+  // }
+
+  // .fip-specific :not(:hover)>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+  //   color: var(--fip-label-default-color);  // }
+  // .fip-specific .gfi-label.gfi-error { //+  //   color: var(--fip-error-color);  // }
+  // .fip-specific :hover>.gfi-label.gfi-error:not(.gfi-focused):not(.gfi-disabled) { //+  //   color: var(--fip-hover-error-color);  // }
+  // .fip-specific :hover>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+  //   color: var(--fip-hover-color);  // }
+  // .fip-specific .gfi-label.gfi-focused:not(.gfi-error) { //+  //   color: var(--fip-focused-color);  // }
+  // .fip-specific .gfi-label.gfi-disabled:not(.gfi-error) { //+  //   color: var(--fip-label-disabled-color);  // }
+
+  // .fip-specific :not(:hover)>.gfi-fieldset:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+
+  //   border-color: var(--fip-o-default-brd-color);
+  // }
+  //++ .fip-specific fieldset.gfi-error { //+  //   border-color: var(--fip-error-color);  // }
+
+  // .fip-specific :hover>.gfi-fieldset.gfi-error:not(.gfi-focused):not(.gfi-disabled) { //+
+  //   border-color: var(--fip-hover-error-color);
+  // }
+  // .fip-specific :hover>.gfi-fieldset:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+
+  //   border-color: var(--fip-hover-color);
+  // }
+  // .fip-specific .gfi-fieldset.gfi-focused:not(.gfi-error) { //+
+  //   border-color: var(--fip-focused-color);
+  // }
 
   .fip-bstrap {
     color: #495057;
@@ -140,6 +182,6 @@ app-frame-input-palette {
     background-repeat: no-repeat;
     background-position: right center;
     background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-    margin-right: 3px;
+    margin-right: 5px;
   }
 }
