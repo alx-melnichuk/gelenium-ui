@@ -18,9 +18,9 @@
     {{ label }}<span *ngIf="isRequired"
       class="">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
   </label>
-  <div [ngClass]="['gfi-frame', 'Grn-palette'
+  <div [ngClass]="['gfi-frame'
       , 'gfi-' + exterior?.substring(0,1) + '-frm'
-      , (isUnderlineExterior ? ('p-u-' + paletteModeBg(isError, isFocused, isDisabled, isMouseEnter) + '-bg-cl'): '')
+      , (isStandardExterior || isUnderlineExterior ? 'gfi-su-frm' : '')
       , (isError ? 'gfi-error': '')
       , (isDisabled ? 'gfi-disabled': '')
       , (isFocused ? 'gfi-focused': '')
@@ -29,7 +29,7 @@
     [attr.foc]="isFocused ? '' : null"
     [attr.dis]="isDisabled ? '' : null"
     [attr.frm-br]="isStandardExterior || isUnderlineExterior ? '' : null"
-    [attr.frm-br-cl]="isStandardExterior || isUnderlineExterior ? '' : null"
+    [attr.frm-bg]="isUnderlineExterior ? '' : null"
     (click)="doClickFrame($event)">
     <ng-content></ng-content>
     <fieldset *ngIf="isOutlinedExterior"

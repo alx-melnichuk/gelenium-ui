@@ -3,7 +3,7 @@
 app-frame-input-palette {
   display: block;
 
-  .fip-specific .Grn-palette {
+  .fip-specific .grn-frame-input {
     --fip-hover-color: #00acc1;
     --fip-error-color: #ad1457;
     --fip-hover-error-color: #f06292;
@@ -11,143 +11,127 @@ app-frame-input-palette {
 
     --fip-label-default-color: #5c6bc0;
     --fip-label-disabled-color: #9c27b0;
-    // outlined
+    // For "frame" - outlined
     --fip-o-default-brd-color: #5c6bc0;
-    // underline
+    // For "frame" - underline
     --fip-u-default-bg-color: rgba(178, 235, 242, 0.6);
+    --fip-u-error-bg-color: rgba(240, 98, 146, 0.15);
+    --fip-u-hover-error-bg-color: rgba(240, 94, 146, 0.09);
+    // --fip-u-hover-error-bg-color: rgba(240, 94, 220, 0.1);
+    --fip-u-hover-bg-color: rgba(172, 235, 236, 0.3);
     --fip-u-focused-bg-color: rgba(178, 235, 242, 0.4);
     --fip-u-disabled-bg-color: rgba(178, 235, 242, 0.2);
-
-    --fip-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
+    // For "frame" - standard and underline
+    --fip-su-default-brd-color: rgba(101, 1, 151, 0.9);
   }
 
-  .fip-specific :not(:hover)>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+
+  // Color for "label".
+   // The default color for the label.
+  .fip-specific :not(:hover)>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
     color: var(--fip-label-default-color);
-  }
-  .fip-specific .gfi-label.gfi-error { //+
+  } // The color of the label in an error state.
+  .fip-specific .gfi-label.gfi-error {
     color: var(--fip-error-color);
-  }
-  .fip-specific :hover>.gfi-label.gfi-error:not(.gfi-focused):not(.gfi-disabled) { //+
+  } // The color of the label on mouse hover in an error state.
+  .fip-specific :hover>.gfi-label.gfi-error:not(.gfi-focused):not(.gfi-disabled) {
     color: var(--fip-hover-error-color);
-  }
-  .fip-specific :hover>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+
+  } // The color of the label on mouse hover.
+  .fip-specific :hover>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
     color: var(--fip-hover-color);
-  }
-  .fip-specific .gfi-label.gfi-focused:not(.gfi-error) { //+
+  } // The color of the label when getting focus.
+  .fip-specific .gfi-label.gfi-focused:not(.gfi-error) {
     color: var(--fip-focused-color);
-  }
-  .fip-specific .gfi-label.gfi-disabled:not(.gfi-error) { //+
+  } // The color of the label in state is disabled.
+  .fip-specific .gfi-label.gfi-disabled:not(.gfi-error) {
     color: var(--fip-label-disabled-color);
   }
 
-  .fip-specific :not(:hover)>.gfi-fieldset:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+
+  // Border-color for "outlined" mode.
+   // The default border color.
+  .fip-specific :not(:hover)>.gfi-fieldset:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
     border-color: var(--fip-o-default-brd-color);
-  }
-  .fip-specific fieldset.gfi-error { //+
+  } // The border color in an error state.
+  .fip-specific .gfi-fieldset.gfi-error {
     border-color: var(--fip-error-color);
-  }
-  .fip-specific :hover>.gfi-fieldset.gfi-error:not(.gfi-focused):not(.gfi-disabled) { //+
+  } // The border color on mouse hover in an error state.
+  .fip-specific :hover>.gfi-fieldset.gfi-error:not(.gfi-focused):not(.gfi-disabled) {
     border-color: var(--fip-hover-error-color);
-  }
-  .fip-specific :hover>.gfi-fieldset:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+
+  } // The border color on mouse hover.
+  .fip-specific :hover>.gfi-fieldset:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
     border-color: var(--fip-hover-color);
-  }
-  .fip-specific .gfi-fieldset.gfi-focused:not(.gfi-error) { //+
+  } // The border color when getting focus.
+  .fip-specific .gfi-fieldset.gfi-focused:not(.gfi-error) {
     border-color: var(--fip-focused-color);
-  }
-  .fip-specific .gfi-fieldset.gfi-disabled:not(.gfi-error) { //+
+  } // The border color in state is disabled.
+  .fip-specific .gfi-fieldset.gfi-disabled:not(.gfi-error) {
     border-color: var(--fip-label-disabled-color);
   }
   
-  .fip-specific .Grn-palette .p-u-def-bg-cl {
+  // Background-color for "underline" mode.
+   // The default background color.
+  .fip-specific .gfi-u-frm:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
     background-color: var(--fip-u-default-bg-color);
-  }
-  .fip-specific .Grn-palette .p-u-err-bg-cl {
-    background-color: var(--fip-u-default-bg-color);
-  }
-  .fip-specific .Grn-palette .p-u-hov-err-bg-cl {
+  } // The background color in an error state.
+  .fip-specific .gfi-u-frm.gfi-error {
+    background-color: var(--fip-u-error-bg-color);
+  } // The background color on mouse hover in an error state.
+  .fip-specific .gfi-u-frm:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled) {
+    background-color: var(--fip-u-hover-error-bg-color);
+  } // The background color on mouse hover.
+  .fip-specific .gfi-u-frm:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
+    background-color: var(--fip-u-hover-bg-color);
+  } // The background color when getting focus.
+  .fip-specific .gfi-u-frm.gfi-focused:not(.gfi-error) {
     background-color: var(--fip-u-focused-bg-color);
-  }
-  .fip-specific .Grn-palette .p-u-hov-bg-cl {
-    background-color: var(--fip-u-focused-bg-color);
-  }
-  .fip-specific .Grn-palette .p-u-foc-bg-cl {
-    background-color: var(--fip-u-focused-bg-color);
-  }
-  .fip-specific .Grn-palette .p-u-dis-bg-cl {
+  } // The background color in state is disabled.
+  .fip-specific .gfi-u-frm.gfi-disabled:not(.gfi-error) {
     background-color: var(--fip-u-disabled-bg-color);
   }
 
-  .fip-specific .Grn-palette .gfi-su-pal-def-br-cl:before {
-    border-bottom-color: var(--fip-substrate-before-brd-color);
-  }
-  .fip-specific .Grn-palette .gfi-su-pal-err-br-cl:before {
+  // Border-bottom-color for "underline" and "standard" mode.
+   // The default border bottom color.
+  .fip-specific .gfi-su-frm:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled):before {
+    border-bottom-color: var(--fip-su-default-brd-color);
+  } // The border bottom color in an error state.
+  .fip-specific .gfi-su-frm.gfi-error:before {
     border-bottom-color: var(--fip-error-color);
-  }
-  .fip-specific .Grn-palette .gfi-su-pal-err-br-cl:after {
+  } // The border bottom color in an error state.
+  .fip-specific .gfi-su-frm.gfi-error:after {
     border-bottom-color: var(--fip-error-color);
-  }
-  .fip-specific .Grn-palette .gfi-su-pal-hov-err-br-cl:before {
+  } // The border bottom color on mouse hover in an error state.
+  .fip-specific .gfi-su-frm:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled):before {
     border-bottom-color: var(--fip-hover-error-color);
-  }
-  .fip-specific .Grn-palette .gfi-su-pal-hov-br-cl:before {
+  } // The border bottom color on mouse hover.
+  .fip-specific .gfi-su-frm:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled):before {
     border-bottom-color: var(--fip-hover-color);
-  }
-  .fip-specific .Grn-palette .gfi-su-pal-foc-br-cl:after {
+  } // The border bottom color when getting focus.
+  .fip-specific .gfi-su-frm.gfi-focused:not(.gfi-error):after {
     border-bottom-color: var(--fip-focused-color);
-  }
-  .fip-specific .Grn-palette .gfi-su-pal-dis-br-cl:before {
-    border-bottom-color: var(--fip-substrate-before-brd-color);
+  } // The border bottom color in state is disabled.
+  .fip-specific .gfi-su-frm.gfi-disabled:not(.gfi-error):before {
+    border-bottom-color: var(--fip-su-default-brd-color);
   }
 
+  // Color for "helperText".
+  // The default color for the helperText.
   .fip-specific .gfi-helper-text:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
     color: var(--fip-label-default-color);
-  }
+  } // The color of the helperText in an error state.
   .fip-specific .gfi-helper-text.gfi-error {
     color: var(--fip-error-color);
-  }
+  } // The color of the helperText when getting focus.
   .fip-specific .gfi-helper-text.gfi-focused:not(.gfi-error) {
     color: var(--fip-label-default-color);
-  }
+  } // The color of the helperText in state is disabled.
   .fip-specific .gfi-helper-text.gfi-disabled:not(.gfi-error) {
     color: var(--fip-label-disabled-color);
   }
-  // // Color for "helperText".
-  // p:not([err]):not([foc]):not([dis]) { //+ The default color for the helperText.
-  //   color: var(--g-lbl-def-cl);
-  // }
-  //++ p[err] { // The color of the helperText in an error state.  //   color: var(--g-err-cl);  // }
 
-  // p[foc]:not([err]) { // The color of the helperText when getting focus.
-  //   color: var(--g-lbl-def-cl);
-  // }
-
-  // .fip-specific :not(:hover)>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+  //   color: var(--fip-label-default-color);  // }
-  // .fip-specific .gfi-label.gfi-error { //+  //   color: var(--fip-error-color);  // }
-  // .fip-specific :hover>.gfi-label.gfi-error:not(.gfi-focused):not(.gfi-disabled) { //+  //   color: var(--fip-hover-error-color);  // }
-  // .fip-specific :hover>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+  //   color: var(--fip-hover-color);  // }
-  // .fip-specific .gfi-label.gfi-focused:not(.gfi-error) { //+  //   color: var(--fip-focused-color);  // }
-  // .fip-specific .gfi-label.gfi-disabled:not(.gfi-error) { //+  //   color: var(--fip-label-disabled-color);  // }
-
-  // .fip-specific :not(:hover)>.gfi-fieldset:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+
-  //   border-color: var(--fip-o-default-brd-color);
-  // }
-  //++ .fip-specific fieldset.gfi-error { //+  //   border-color: var(--fip-error-color);  // }
-
-  // .fip-specific :hover>.gfi-fieldset.gfi-error:not(.gfi-focused):not(.gfi-disabled) { //+
-  //   border-color: var(--fip-hover-error-color);
-  // }
-  // .fip-specific :hover>.gfi-fieldset:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) { //+
-  //   border-color: var(--fip-hover-color);
-  // }
-  // .fip-specific .gfi-fieldset.gfi-focused:not(.gfi-error) { //+
-  //   border-color: var(--fip-focused-color);
-  // }
-
+  // BootStrap
   .fip-bstrap {
     color: #495057;
   }
-  .fip-bstrap .Grn-palette {
+  .fip-bstrap .grn-frame-input {
     --g-err-cl: #dc3545;
     --g-hov-err-cl: #dc3545;
     --g-foc-cl: #80bdff;
@@ -156,10 +140,13 @@ app-frame-input-palette {
   .fip-bstrap .gfi-fieldset.gfi-hover:not(.gfi-error) {
     border-color: var(--g-o-def-br-cl);
   }
+
+  .fip-bstrap :hover>.gfi-fieldset:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
+    border-color: var(--g-o-def-br-cl);
+  }
   .fip-bstrap .gfi-fieldset.gfi-focused {
     border-width: 1px;
   }
-  // .fip-bstrap .gfi-fieldset.gfi-focused.p -o-err-br-cl  // .p -o-err-br-cl - .gfi-fieldset.gfi-error:not(.gfi-hover)
   .fip-bstrap .gfi-fieldset.gfi-focused.gfi-error {
     box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
   }

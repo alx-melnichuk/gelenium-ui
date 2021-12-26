@@ -68,7 +68,7 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
   readonly clickFrame: EventEmitter<Event> = new EventEmitter();
 
   @ViewChild('sectionElement')
-  public sectionElement: ElementRef | null = null;
+  public sectionElement: ElementRef | undefined;
   @ContentChild('grnOrnamentLf', { static: true })
   public grnOrnamentLf: ElementRef | undefined;
   @ContentChild('grnOrnamentRg', { static: true })
@@ -86,7 +86,7 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
   public get getGfiStandard(): boolean {
     return ExteriorUtil.isStandard(this.exterior);
   }
-  @HostBinding('class.Grn-palette')
+  @HostBinding('class.grn-frame-input')
   public get getGrnPalette(): boolean {
     return true; // TODO del;
   }
@@ -105,7 +105,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
     return ExteriorUtil.isStandard(this.exterior);
   }
 
-  public isMouseEnter = false;
   public frameSizeVal = 0;
   public lineHeight = 0;
   public labelPadding = 0;
@@ -118,15 +117,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
     private hostRef: ElementRef<HTMLElement>
   ) {
     this.actualConfig = this.initConfig(this.rootConfig || {});
-  }
-
-  @HostListener('mouseenter')
-  public eventMouseEnter(): void {
-    this.isMouseEnter = true;
-  }
-  @HostListener('mouseleave')
-  public eventMouseLeave(): void {
-    this.isMouseEnter = false;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -168,52 +158,12 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
   }
 
   ngAfterViewInit(): void {
-    if (this.sectionElement === null) {
-      console.log('sectionElement != null ', this.sectionElement != null); // TODO del;
+    if (this.sectionElement !== null) {
+      console.log('2sectionElement != null ', this.sectionElement != null); // TODO del;
     }
   }
 
   // ** Public API **
-
-  public paletteMode(isError: boolean, isFocused: boolean, isDisabled: boolean, isMouseEnter: boolean): string {
-    let result = 'def';
-    if (isError) {
-      result = 'err';
-      if (isMouseEnter && !isFocused && !isDisabled) {
-        result = 'hov-err';
-      }
-    } else {
-      if (isFocused) {
-        result = 'foc';
-      } else if (isDisabled) {
-        result = 'dis';
-      } else if (isMouseEnter) {
-        result = 'hov';
-      }
-    }
-    return result;
-  }
-
-  public paletteModeBg(isError: boolean, isFocused: boolean, isDisabled: boolean, isMouseEnter: boolean): string {
-    let result = 'def';
-    if (isError) {
-      result = 'err';
-      if (isMouseEnter && !isFocused && !isDisabled) {
-        result = 'hov-err';
-      } else if (isDisabled) {
-        result = 'dis';
-      }
-    } else {
-      if (isFocused) {
-        result = 'foc';
-      } else if (isDisabled) {
-        result = 'dis';
-      } else if (isMouseEnter) {
-        result = 'hov';
-      }
-    }
-    return result;
-  }
 
   public getOrnamAlign(ornamAlign: OrnamAlign | undefined, isEnd: boolean, exterior: Exterior | null): string | null {
     let result = null;
@@ -261,10 +211,21 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
   }
 
   private setProperty(element: ElementRef | undefined, propertyName: string, propertyValue: string | null): void {
-    if (!!element && !!propertyName) {
-      (element.nativeElement as HTMLElement).style.setProperty(propertyName, propertyValue);
+    if (propertyName) {
+      if (element) {
+        (element.nativeElement as HTMLElement).style.setProperty(propertyName, propertyValue);
+      }
     }
   }
+
+  /*private setPropertyMap(element: ElementRef | undefined): void {
+    if (element) {
+      for (const propertyName of Object.keys(this.propertyMap)) {
+        (element.nativeElement as HTMLElement).style.setProperty(propertyName, this.propertyMap[propertyName]);
+      }
+      this.propertyMap = {};
+    }
+  }*/
 
   private setPropertyFrameSize(frameSizeValue: number): void {
     this.setProperty(this.hostRef, '--gfi--size', frameSizeValue > 0 ? frameSizeValue + 'px' : null);

@@ -50,9 +50,7 @@ export class InputAttributesComponent {
     input02m: new FormControl('', []),
     input02n: new FormControl('', []),
   });
-  // public exterior02 = 'outlined';
-  public exterior02 = 'underline';
-  // public exterior02 = 'standard';
+  public exterior02 = 'outlined';
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

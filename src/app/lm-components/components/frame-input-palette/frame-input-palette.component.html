@@ -7,13 +7,13 @@
   </p>
   <code><pre>
 // Let's create our own color palette.
-.fip-specific .Grn-palette &#123;
+.fip-specific .grn-frame-input &#123;
   // The default border color.
   --fip-default-color: #00acc1;
   // Border and label color on error.
   --fip-error-color: #ad1457;
   // Border and label color on error and mouse hover.
-  --fip-error-hover-color: #f06292;
+  --fip-hover-error-color: #f06292;
   // The color of the frame and label when receiving focus.
   --fip-focused-color: #0097a7;
 
@@ -28,11 +28,11 @@
 
   // For the exterior "Underline":
   // Default background color.
-  --fip-underline-default-bg-color: rgba(178, 235, 242, 0.6);
+  --fip-u-default-bg-color: rgba(178, 235, 242, 0.6);
   // The background color when receiving focus.
-  --fip-underline-focused-bg-color: rgba(178, 235, 242, 0.4);
+  --fip-u-focused-bg-color: rgba(178, 235, 242, 0.4);
   // The background color when the element is disabled.
-  --fip-underline-disabled-bg-color: rgba(178, 235, 242, 0.2);
+  --fip-u-disabled-bg-color: rgba(178, 235, 242, 0.2);
 
   // For the exterior "Underline" and "Standard":
   // The default bottom border color.
@@ -40,7 +40,7 @@
 &#125;</pre></code>
   <p>
     All the CSS classes that define the colors of the input element are children of the
-    "Grn-palette" CSS classes.
+    "grn-frame-input" CSS classes.
     Add a custom "fip-specific" CSS class to define our colors.
   </p>
   <p>
@@ -48,44 +48,27 @@
   </p>
   <code><pre>
 // Default color of the label.
-.fip-specific .gfi-label.gfi-default
+.fip-specific :not(:hover)>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)
 &#123; color: var(--fip-label-default-color); &#125;
 // The color of the label on error.
 .fip-specific .gfi-label.gfi-error
 &#123; color: var(--fip-error-color); &#125;
 // The color of the label on mouse over and on error.
-.fip-specific .gfi-label.gfi-hover.gfi-error
-&#123; color: var(--fip-error-hover-color); &#125;
+.fip-specific :hover>.gfi-label.gfi-error:not(.gfi-focused):not(.gfi-disabled)
+&#123; color: var(--fip-hover-error-color); &#125;
 // The color of the label on mouse hover.
-.fip-specific .gfi-label.gfi-hover:not(.gfi-error)
-&#123; color: var(--fip-default-color); &#125;
+.fip-specific :hover>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)
+&#123; color: var(--fip-hover-color); &#125;
 // The color of the label when the input element receives focus.
 .fip-specific .gfi-label.gfi-focused:not(.gfi-error)
 &#123; color: var(--fip-focused-color); &#125;
 // The color of the label when the input element is disabled.
-.fip-specific .Grn-palette label.gfi-disabled
+.fip-specific .gfi-label.gfi-disabled:not(.gfi-error)
 &#123; color: var(--fip-label-disabled-color); &#125;</pre></code>
   <p>
     Likewise to replace the "Outlined" border color define a group of CSS classes.
   </p>
-  <p>
-    Likewise, to replace the "Underline" background color, define a group of CSS classes.
-  </p>
-  <code><pre>
-.fip-specific .Grn-palette .p-u-XXX-bg-cl
-&#123; background-color: var(--fip-underline-default-bg-color); &#125;</pre></code>
-  <p>
-    Where XXX - take the values from the previous example.
-  </p>
-  <p>
-    Likewise, to replace the "Underline" and "Standard" colors, define a group of CSS classes.
-  </p>
-  <code><pre>
-.fip-specific .Grn-palette .gfi-su-pal-XXX-br-cl:before 
-&#123; border-bottom-color: var(--fip-substrate-before-brd-color); &#125;</pre></code>
-  <p>
-    Where XXX - take the values from the previous example.
-  </p>
+
   <p>
     The following example demonstrates how to change the colors of an input element.
   </p>
@@ -498,109 +481,13 @@ export class FrameInputComponent &#123;
   min-width: 26ch;
   margin: 10px 10px;
 &#125;
-.fip-specific .Grn-palette &#123;
-  --fip-default-color: #00acc1;
-  --fip-error-color: #ad1457;
-  --fip-error-hover-color: #f06292;
-  --fip-focused-color: #0097a7;
-
-  --fip-label-default-color: #5c6bc0;
-  --fip-label-disabled-color: #9c27b0;
-
-  --fip-outlined-default-brd-color: #5c6bc0;
-
-  --fip-underline-default-bg-color: rgba(178, 235, 242, 0.6);
-  --fip-underline-focused-bg-color: rgba(178, 235, 242, 0.4);
-  --fip-underline-disabled-bg-color: rgba(178, 235, 242, 0.2);
-
-  --fip-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
-&#125;
-
-.fip-specific .gfi-label.gfi-default &#123;
-  color: var(--fip-label-default-color);
-&#125;
-.fip-specific .gfi-label.gfi-error &#123;
-  color: var(--fip-error-color);
-&#125;
-.fip-specific .gfi-label.gfi-hover.gfi-error &#123;
-  color: var(--fip-error-hover-color);
-&#125;
-.fip-specific .gfi-label.gfi-hover:not(.gfi-error) &#123;
-  color: var(--fip-default-color);
-&#125;
-.fip-specific ..gfi-label.gfi-focused:not(.gfi-error) &#123;
-  color: var(--fip-focused-color);
-&#125;
-.fip-specific .Grn-palette label.gfi-disabled &#123;
-  color: var(--fip-label-disabled-color);
-&#125;
-
-.fip-specific .gfi-fieldset.gfi-default &#123;
-  border-color: var(--fip-outlined-default-brd-color);
-&#125;
-.fip-specific .gfi-fieldset.gfi-error:not(.gfi-hover) &#123;
-  border-color: var(--fip-error-color);
-&#125;
-.fip-specific .gfi-fieldset.gfi-hover.gfi-error &#123;
-  border-color: var(--fip-error-hover-color);
-&#125;
-.fip-specific .gfi-fieldset.gfi-hover:not(.gfi-error) &#123;
-  border-color: var(--fip-default-color);
-&#125;
-.fip-specific .gfi-fieldset.gfi-focused:not(.gfi-error) &#123;
-  border-color: var(--fip-focused-color);
-&#125;
-.fip-specific .gfi-fieldset.gfi-disabled:not(.gfi-error) &#123;
-  border-color: var(--fip-label-disabled-color);
-&#125;
-
-.fip-specific .Grn-palette .p-u-def-bg-cl &#123;
-  background-color: var(--fip-underline-default-bg-color);
-&#125;
-.fip-specific .Grn-palette .p-u-err-bg-cl &#123;
-  background-color: var(--fip-underline-default-bg-color);
-&#125;
-.fip-specific .Grn-palette .p-u-hov-err-bg-cl &#123;
-  background-color: var(--fip-underline-focused-bg-color);
-&#125;
-.fip-specific .Grn-palette .p-u-hov-bg-cl &#123;
-  background-color: var(--fip-underline-focused-bg-color);
-&#125;
-.fip-specific .Grn-palette .p-u-foc-bg-cl &#123;
-  background-color: var(--fip-underline-focused-bg-color);
-&#125;
-.fip-specific .Grn-palette .p-u-dis-bg-cl &#123;
-  background-color: var(--fip-underline-disabled-bg-color);
-&#125;
-
-.fip-specific .Grn-palette .gfi-su-pal-def-br-cl:before &#123;
-  border-bottom-color: var(--fip-substrate-before-brd-color);
-&#125;
-.fip-specific .Grn-palette .gfi-su-pal-err-br-cl:before &#123;
-  border-bottom-color: var(--fip-error-color);
-&#125;
-.fip-specific .Grn-palette .gfi-su-pal-err-br-cl:after &#123;
-  border-bottom-color: var(--fip-error-color);
-&#125;
-.fip-specific .Grn-palette .gfi-su-pal-hov-err-br-cl:before &#123;
-  border-bottom-color: var(--fip-error-hover-color);
-&#125;
-.fip-specific .Grn-palette .gfi-su-pal-hov-br-cl:before &#123;
-  border-bottom-color: var(--fip-default-color);
-&#125;
-.fip-specific .Grn-palette .gfi-su-pal-foc-br-cl:after &#123;
-  border-bottom-color: var(--fip-focused-color);
-&#125;
-.fip-specific .Grn-palette .gfi-su-pal-dis-br-cl:before &#123;
-  border-bottom-color: var(--fip-substrate-before-brd-color);
-&#125;
 
 
 
 .fip-bstrap &#123;
   color: #495057;
 &#125;
-.fip-bstrap .Grn-palette &#123;
+.fip-bstrap .grn-frame-input &#123;
   --g-err-cl: #dc3545;
   --g-hov-err-cl: #dc3545;
   --g-foc-cl: #80bdff;
