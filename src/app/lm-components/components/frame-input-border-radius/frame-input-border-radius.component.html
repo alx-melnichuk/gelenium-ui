@@ -22,13 +22,12 @@
   <p>
     In this case, you also need to change the value of the left indent for correct display.
     The value of the left indentation is determined by the special css-variable
-    "--gfi-o-lbl-pd" in the css-style "grn-frame-input".
+    "?--gfi-o-lbl-pd" in the css-style "grn-frame-input".
     For example:
   </p>
   <code><pre>
   .fibr-outlined-radius grn-frame-input &#123;
     --gfi-o-br-rd: calc(var(--gfi-size)*0.5);
-    --gfi-o-lbl-pd: calc(var(--gfi-size)*0.57);
   &#125;</pre></code>
   <p>
     In our example, the value of the coefficient for changing the fillet radius will change
@@ -39,7 +38,6 @@
   <code><pre>
   .fibr-outlined-radius grn-frame-input &#123;
     --gfi-o-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
-    --gfi-o-lbl-pd: calc(0.57*var(--gfi-size));
   &#125;</pre></code>
   <p>
     This is what the original values look like:
@@ -47,17 +45,16 @@
   <code><pre>
   grn-frame-input &#123;
     --gfi-o-br-rd: calc(var(--gfi-size)/10);
-    --gfi-o-lbl-pd: calc(0.25*var(--gfi-size));
   &#125;</pre></code>
   <p>
     Similarly, you can change the fillet radius for the underline appearance mode.
   </p>
   <p>
     To do this, you need to specify a new value for the rounding radius in the
-    css-variable "--gfi-u-br-rd" for the css-style
+    css-variable "?--gfi-u-br-rd" for the css-style
     "grn-frame-input".
     And you also need to change the value of the left indentation value of the
-    css-variable "--gfi-u-lbl-pd" for the css-style
+    css-variable "?--gfi-u-lbl-pd" for the css-style
     "grn-frame-input".
   </p>
   <p>
@@ -66,7 +63,6 @@
   <code><pre>
     .fibr-underline-radius grn-frame-input &#123;
       --gfi-u-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
-      --gfi-u-lbl-pd: calc(0.4*var(--gfi-size));
     &#125;
   </pre></code>
   <p>
@@ -75,7 +71,6 @@
   <code><pre>
     grn-frame-input &#123;
     --gfi-u-br-rd: calc(var(--gfi-size)/10);
-    --gfi-u-lbl-pd: calc(0.214285714*var(--gfi-size));
     &#125;
   </pre></code>
 </section>
@@ -367,12 +362,10 @@ export class FrameInputComponent &#123;
 
 .fibr-outlined-radius grn-frame-input &#123;
   --gfi-o-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
-  --gfi-o-lbl-pd: calc(0.57*var(--gfi-size));
 &#125;
 
 .fibr-underline-radius grn-frame-input &#123;
   --gfi-u-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
-  --gfi-u-lbl-pd: calc(0.4*var(--gfi-size));
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -400,10 +393,10 @@ export class FrameInputComponent &#123;
     It is also necessary to change the value of the left padding so that the label does not
     intersect with the border.
     For "outline" mode, the left and right padding values are set by the css variable
-    "--gfi-o-lbl-pd".<br />
+    "?--gfi-o-lbl-pd".<br />
     By default, this variable has the following meaning:
   </p>
-  <code><pre>--gfi-o-lbl-pd: calc(0.25*var(--gfi-size));</pre></code>
+  <code><pre>?--gfi-o-lbl-pd: calc(0.25*var(--gfi-size));</pre></code>
 </section>
 
 <section mr-vr>
@@ -427,10 +420,10 @@ export class FrameInputComponent &#123;
     It is also necessary to change the value of the left padding so that the label does not
     intersect with the border.
     For "underline" mode, the left and right padding values are set by the css variable
-    "--gfi-u-lbl-pd".<br />
+    "?--gfi-u-lbl-pd".<br />
     By default, this variable has the following meaning:
   </p>
-  <code><pre>--gfi-u-lbl-pd: calc(0.214285714*var(--gfi-size));</pre></code>
+  <code><pre>?--gfi-u-lbl-pd: calc(0.214285714*var(--gfi-size));</pre></code>
   <p>
     If in the "underline" mode we want to round the bottom corners, then we additionally need to
     specify the height of the block with the bottom frame.
@@ -441,7 +434,6 @@ export class FrameInputComponent &#123;
   <code><pre>
 .fibr-radius-h grn-frame-input &#123;
   --gfi-u-br-rd: 0 0 0 calc(var(--gfi-size)/3);
-  --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
   .gfi-u-frm:before, .gfi-u-frm:after &#123;
     border-radius: var(--gfi-u-br-rd);
     height: calc(0.65*var(--gfi-size));
@@ -471,7 +463,8 @@ export class FrameInputComponent &#123;
       <grn-input formControlName="input06a"
         class="fibr-radius-a"
         label="Enter value"
-        exterior="outlined">
+        exterior="outlined"
+        [config]="configOutlined">
       </grn-input>
     </div>
 
@@ -484,7 +477,8 @@ export class FrameInputComponent &#123;
       <grn-input formControlName="input06b"
         class="fibr-radius-b"
         label="Enter value"
-        exterior="outlined">
+        exterior="outlined"
+        [config]="configOutlined">
       </grn-input>
     </div>
 
@@ -501,7 +495,8 @@ export class FrameInputComponent &#123;
       <grn-input formControlName="input06c"
         class="fibr-radius-c"
         label="Enter value"
-        exterior="outlined">
+        exterior="outlined"
+        [config]="configOutlined">
       </grn-input>
     </div>
 
@@ -514,7 +509,8 @@ export class FrameInputComponent &#123;
       <grn-input formControlName="input06d"
         class="fibr-radius-d"
         label="Enter value"
-        exterior="outlined">
+        exterior="outlined"
+        [config]="configOutlined">
       </grn-input>
     </div>
 
@@ -538,7 +534,8 @@ export class FrameInputComponent &#123;
       <grn-input formControlName="input06e"
         class="fibr-radius-e"
         label="Enter value"
-        exterior="underline">
+        exterior="underline"
+        [config]="configUnderline">
       </grn-input>
     </div>
 
@@ -551,7 +548,8 @@ export class FrameInputComponent &#123;
       <grn-input formControlName="input06f"
         class="fibr-radius-f"
         label="Enter value"
-        exterior="underline">
+        exterior="underline"
+        [config]="configUnderline">
       </grn-input>
     </div>
 
@@ -567,7 +565,8 @@ export class FrameInputComponent &#123;
       <grn-input formControlName="input06h"
         class="fibr-radius-h"
         label="Enter value"
-        exterior="underline">
+        exterior="underline"
+        [config]="configUnderline">
       </grn-input>
     </div>
 
@@ -580,7 +579,8 @@ export class FrameInputComponent &#123;
       <grn-input formControlName="input06i"
         class="fibr-radius-i"
         label="Enter value"
-        exterior="underline">
+        exterior="underline"
+        [config]="configUnderline">
       </grn-input>
     </div>
   </div>
@@ -595,7 +595,8 @@ export class FrameInputComponent &#123;
       <grn-input formControlName="input06j"
         class="fibr-radius-j"
         label="Enter value"
-        exterior="underline">
+        exterior="underline"
+        [config]="configUnderline">
       </grn-input>
     </div>
 
@@ -608,7 +609,8 @@ export class FrameInputComponent &#123;
       <grn-input formControlName="input06k"
         class="fibr-radius-k"
         label="Enter value"
-        exterior="underline">
+        exterior="underline"
+        [config]="configUnderline">
       </grn-input>
     </div>
   </div>
@@ -623,7 +625,8 @@ export class FrameInputComponent &#123;
       <grn-input formControlName="input06l"
         class="fibr-radius-l"
         label="Enter value"
-        exterior="underline">
+        exterior="underline"
+        [config]="configUnderline">
       </grn-input>
     </div>
   </div>
@@ -860,34 +863,27 @@ export class FrameInputComponent &#123;
 
 .fibr-radius-a grn-frame-input &#123;
   --gfi-o-br-rd: calc(var(--gfi-size)/4) 0 0 calc(var(--gfi-size)/4);
-  --gfi-o-lbl-pd: calc(0.37*var(--gfi-size));
 &#125;
 .fibr-radius-b grn-frame-input &#123;
   --gfi-o-br-rd: 0 calc(var(--gfi-size)/4) calc(var(--gfi-size)/4) 0;
-  --gfi-o-lbl-pd: calc(0.37*var(--gfi-size));
 &#125;
 .fibr-radius-c grn-frame-input &#123;
   --gfi-o-br-rd: calc(var(--gfi-size)/4) 0 calc(var(--gfi-size)/4) 0;
-  --gfi-o-lbl-pd: calc(0.37*var(--gfi-size));
 &#125;
 .fibr-radius-d grn-frame-input &#123;
   --gfi-o-br-rd: 0 calc(var(--gfi-size)/4) 0 calc(var(--gfi-size)/4);
-  --gfi-o-lbl-pd: calc(0.37*var(--gfi-size));
 &#125;
 
 .fibr-radius-e grn-frame-input &#123;
   --gfi-u-br-rd: calc(var(--gfi-size)/3) 0 0 0;
-  --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
 &#125;
 .fibr-radius-f grn-frame-input &#123;
   --gfi-u-br-rd: 0 calc(var(--gfi-size)/3) 0 0;
-  --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
 &#125;
 
 
 .fibr-radius-h grn-frame-input &#123;
   --gfi-u-br-rd: 0 0 0 calc(var(--gfi-size)/3);
-  --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
   .gfi-u-frm:before, .gfi-u-frm:after &#123;
     border-radius: var(--gfi-u-br-rd);
     height: calc(0.65*var(--gfi-size));
@@ -895,7 +891,6 @@ export class FrameInputComponent &#123;
 &#125;
 .fibr-radius-i grn-frame-input &#123;
   --gfi-u-br-rd: 0 0 calc(var(--gfi-size)/3) 0;
-  --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
   .gfi-u-frm:before, .gfi-u-frm:after &#123;
     border-radius: var(--gfi-u-br-rd);
     height: calc(0.65*var(--gfi-size));
@@ -904,7 +899,6 @@ export class FrameInputComponent &#123;
 
 .fibr-radius-j grn-frame-input &#123;
   --gfi-u-br-rd: calc(var(--gfi-size)/3) 0 0 calc(var(--gfi-size)/3);
-  --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
   .gfi-u-frm:before, .gfi-u-frm:after &#123;
     border-radius: var(--gfi-u-br-rd);
     height: calc(0.65*var(--gfi-size));
@@ -912,7 +906,6 @@ export class FrameInputComponent &#123;
 &#125;
 .fibr-radius-k grn-frame-input &#123;
   --gfi-u-br-rd: 0 calc(var(--gfi-size)/3) calc(var(--gfi-size)/3) 0;
-  --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
   .gfi-u-frm:before, .gfi-u-frm:after &#123;
     border-radius: var(--gfi-u-br-rd);
     height: calc(0.65*var(--gfi-size));
@@ -921,7 +914,6 @@ export class FrameInputComponent &#123;
 
 .fibr-radius-l grn-frame-input &#123;
   --gfi-u-br-rd: calc(var(--gfi-size)/3);
-  --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
   .gfi-u-frm:before, .gfi-u-frm:after &#123;
     border-radius: var(--gfi-u-br-rd);
     height: calc(0.65*var(--gfi-size));

@@ -48,23 +48,17 @@ grn-frame-input { //outline: 1px dashed crimson;
   --g-su-dis-br-cl: rgba(0, 0, 0, 0.32);
 
 
-  // The value of the "line height" parameter for the input element.
-  --gfi-ln-hg: 1.4375em;  // 23px default
 
   // For "outlined" mode.
   // Small indentation of the legend from the border for "outlined" mode.
-  --gfi-lgn-pd: 0.3437em; // # 5.5px
+  --g-o-lgn-pd: 0.3437em; // # 5.5px
   // The value of the radius of the rounding of the border for "outlined" mode.
   // --gfi-o-br-rd: calc(var(--gfi-size)/10);
-
-  // Left padding of the label in a shrink position (in the top) for "outlined" mode.
-  --gfi-o-lbl-pd: calc(0.25*var(--gfi-size)); // TODO #1
 
   // For "underline" mode.
   // The value of the radius of the rounding of the border for "underline" mode.
   --gfi-u-br-rd: calc(var(--gfi-size)/10) calc(var(--gfi-size)/10) 0 0;
   // Left padding of the label in a shrink position (in the top) for "underline" mode.
-  --gfi-u-lbl-pd: calc(0.21428*var(--gfi-size)); // TODO #1
 
   // For "standard" mode.
   // Left padding of the label in a shrink position (in the top) for "standard" mode.
@@ -73,12 +67,12 @@ grn-frame-input { //outline: 1px dashed crimson;
 // // Left padding of the label in a shrink position (in the top).
 
 // // Max width of the label in a shrink position (in the top).
-// // --gfi-o-lbl-wd: calc(133% - 2.66*var(--gfi-o-lbl-pd));
-// // --gfi-u-lbl-wd: calc(133% - 2.66*var(--gfi-u-lbl-pd));
+// // --gfi-o-lbl-wd: calc(133% - 2.66*var(--lbl-pd-lf));
+// // --gfi-u-lbl-wd: calc(133% - 2.66*var(--lbl-pd-lf));
 // // --gfi-s-lbl-wd: 133%;
 // // Max width of the label in the unshrink position (in the middle).
-// // --gfi-o-lbl2-wd: calc(100% - var(--gfi-o-lbl-pd) - var(--gfi-o-lbl-pd));
-// // --gfi-u-lbl2-wd: calc(100% - var(--gfi-u-lbl-pd) - var(--gfi-u-lbl-pd));
+// // --gfi-o-lbl2-wd: calc(100% - var(--lbl-pd-lf) - var(--lbl-pd-lf));
+// // --gfi-u-lbl2-wd: calc(100% - var(--lbl-pd-lf) - var(--lbl-pd-lf));
 // // --gfi-s-lbl2-wd: calc(100% - var(--gfi-s-lbl-pd) - var(--gfi-s-lbl-pd));
 
   @include mxDisplayInlineFlex();
@@ -86,13 +80,19 @@ grn-frame-input { //outline: 1px dashed crimson;
   font-family: "Roboto","Helvetica","Arial",sans-serif;
   font-weight: 400;
   font-size: 1em;
-  line-height: 1.4375em; // #!!var(--gfi-ln-hg);
+  line-height: 1.4375em; // The value of the "line height" for the input element. // # 23px for font-size: 16px
   min-width: 0;
   padding: 0;
   margin: 0;
   border: 0;
   vertical-align: top;
 
+  &[ext-o], &[ext-u] {
+    border-radius: var(--br-rd);
+  }
+  section {
+    border-radius: inherit;
+  }
   // Section "Label".
   label { // outline: 1px dashed green;
     padding: 0;
@@ -144,7 +144,7 @@ grn-frame-input { //outline: 1px dashed crimson;
     @include mxDisplayInlineFlex();    // # @include mxAlignItems(center);    // # @include mxAlignItems(baseline);
     flex-wrap: nowrap;
     position: relative;
-    // ? border-radius: inherit;
+    border-radius: inherit; // TODO !!
     &:not([dis]) {
       cursor: text;
     }
@@ -154,14 +154,14 @@ grn-frame-input { //outline: 1px dashed crimson;
     }
   }
   input, textarea { // outline: 1px dashed orange; // # TODO temp;
-    line-height: var(--gfi-ln-hg);
+    line-height: inherit;
     align-self: baseline;
   }
-  input[elemPdVer] {
+  input[elem-pd-ver] {
     padding-top: var(--lbl-pd-tp);    // # o:16.5px; us:24.75px;
     padding-bottom: var(--lbl-pd-bt); // # o:16.5px; us: 8.25px;
   }
-  textarea[elemMrVer] {
+  textarea[elem-mr-ver] {
     margin-top: var(--lbl-pd-tp);     // # o:16.5px; us:24.75px;
     margin-bottom: var(--lbl-pd-bt);  // # o:16.5px; us: 8.25px;
   }
@@ -178,6 +178,7 @@ grn-frame-input { //outline: 1px dashed crimson;
       transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
       pointer-events: none;
       border-bottom-width: 1px;
+      border-radius: inherit;
     }
     &:not([dis]):before {
       border-bottom-style: solid;
@@ -189,8 +190,6 @@ grn-frame-input { //outline: 1px dashed crimson;
       border-bottom-width: 2px;
     }
     &:after {
-      border-bottom-width: 2px;
-      border-bottom-style: solid;
       left: 0;
       bottom: 0;
       content: "";
@@ -200,6 +199,9 @@ grn-frame-input { //outline: 1px dashed crimson;
       -webkit-transition: -webkit-transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
       transition: transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
       pointer-events: none;
+      border-bottom-width: 2px;
+      border-bottom-style: solid;
+      border-radius: inherit;
     }
     &[foc]:after {
       @include mxTransformScaleX(1);
@@ -233,7 +235,6 @@ grn-frame-input { //outline: 1px dashed crimson;
 
   // underline
   div[frm-bg] {
-    border-radius: var(--gfi-u-br-rd);
     -webkit-transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
   }
@@ -269,9 +270,9 @@ grn-frame-input { //outline: 1px dashed crimson;
     top: 0;
     left: 0;
     margin: 0;
-    padding: 0px calc(var(--gfi-o-lbl-pd) - var(--gfi-lgn-pd)); // (14px - 4,4px)=9,6px;
+    padding: 0px calc(var(--lbl-pd-lf) - var(--g-o-lgn-pd)); // (14px - 4,4px)=9,6px;
     pointer-events: none;
-    border-radius: var(--gfi-o-br-rd, calc(var(--gfi-size)/10));
+    border-radius: inherit;
     border-style: solid;
     overflow: hidden;
     min-width: 0%;
@@ -323,7 +324,7 @@ grn-frame-input { //outline: 1px dashed crimson;
       -webkit-transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
       transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
       &[ind] { // .gfi-lgn-indent
-        padding: 0 var(--gfi-lgn-pd);
+        padding: 0 var(--g-o-lgn-pd);
       }
     }
     &>span {

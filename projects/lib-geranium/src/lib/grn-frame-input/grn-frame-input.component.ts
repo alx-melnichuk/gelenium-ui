@@ -90,6 +90,7 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
   public get getGrnPalette(): boolean {
     return true; // TODO del;
   }
+
   @HostBinding('style.--gfi-size')
   public get frameSizeValue(): string | null {
     return this.frameSizeVal > 0 ? this.frameSizeVal + 'px' : null; // TODO del;
@@ -126,13 +127,18 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
     }
     if (changes.exterior) {
       this.exterior = ExteriorUtil.create(this.exterior, this.actualConfig?.exterior || null);
+      this.setAttribute(this.hostRef.nativeElement, 'ext-o', ExteriorUtil.isOutlined(this.exterior) ? '' : null);
+      this.setAttribute(this.hostRef.nativeElement, 'ext-u', ExteriorUtil.isUnderline(this.exterior) ? '' : null);
+      this.setAttribute(this.hostRef.nativeElement, 'ext-s', ExteriorUtil.isStandard(this.exterior) ? '' : null);
     }
     if (changes.frameSize) {
       this.frameSize = FrameSizeUtil.create(this.frameSize, this.actualConfig?.frameSize || null);
       this.frameSizeVal = FrameSizeUtil.getValue(this.frameSize) || 0;
-      this.setPropertyFrameSize(this.frameSizeVal);
+      this.setProperty(this.hostRef, '--gfi--size', this.frameSizeVal > 0 ? this.frameSizeVal + 'px' : null);
     }
     if (changes.exterior || changes.frameSize) {
+      this.setProperty(this.hostRef, '--br-rd', this.getBorderRadius(this.exterior, this.frameSizeVal));
+
       this.labelPadding = this.getLabelPadding(this.frameSizeVal, this.exterior, this.actualConfig) || 0;
       this.setPropertyLabelPaddingHor(this.labelPadding);
       this.setPropertyLabelPaddingVer(this.exterior, this.frameSizeVal, this.lineHeight);
@@ -144,22 +150,23 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
     if (changes.hiddenLabel) {
       this.hiddenLabel = this.createBoolean(this.hiddenLabel, this.actualConfig?.hiddenLabel);
     }
-    // console.log('OnChanges'); // TODO del;
   }
 
   ngAfterContentInit(): void {
     const lineHeightPx = getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height');
     this.lineHeight = Number(lineHeightPx.replace('px', ''));
     this.setPropertyLabelPaddingVer(this.exterior, this.frameSizeVal, this.lineHeight);
+
     this.ornamentLfWidth = this.grnOrnamentLf?.nativeElement.offsetWidth || 0;
+    this.setProperty(this.hostRef, '--orn-lf', this.ornamentLfWidth > 0 ? this.ornamentLfWidth + 'px' : null);
+
     this.ornamentRgWidth = this.grnOrnamentRg?.nativeElement.offsetWidth || 0;
-    this.setPropertyOrnamentLf(this.ornamentLfWidth);
     this.setPropertyLabel2Padding(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
   }
 
   ngAfterViewInit(): void {
     if (this.sectionElement !== null) {
-      console.log('2sectionElement != null ', this.sectionElement != null); // TODO del;
+      // console.log('2sectionElement != null ', this.sectionElement != null); // TODO del;
     }
   }
 
@@ -210,25 +217,20 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
     return config;
   }
 
-  private setProperty(element: ElementRef | undefined, propertyName: string, propertyValue: string | null): void {
-    if (propertyName) {
-      if (element) {
-        (element.nativeElement as HTMLElement).style.setProperty(propertyName, propertyValue);
+  private setAttribute(htmlElement: HTMLElement | undefined, attributeName: string, attributeValue: string | null): void {
+    if (htmlElement && attributeName) {
+      if (attributeValue != null) {
+        htmlElement.setAttribute(attributeName, attributeValue);
+      } else if (htmlElement.hasAttribute(attributeName)) {
+        htmlElement.removeAttribute(attributeName);
       }
     }
   }
 
-  /*private setPropertyMap(element: ElementRef | undefined): void {
-    if (element) {
-      for (const propertyName of Object.keys(this.propertyMap)) {
-        (element.nativeElement as HTMLElement).style.setProperty(propertyName, this.propertyMap[propertyName]);
-      }
-      this.propertyMap = {};
+  private setProperty(element: ElementRef | undefined, propertyName: string, propertyValue: string | null): void {
+    if (element && propertyName) {
+      (element.nativeElement as HTMLElement).style.setProperty(propertyName, propertyValue);
     }
-  }*/
-
-  private setPropertyFrameSize(frameSizeValue: number): void {
-    this.setProperty(this.hostRef, '--gfi--size', frameSizeValue > 0 ? frameSizeValue + 'px' : null);
   }
 
   private setPropertyLabelPaddingVer(exterior: Exterior | null, frameSize: number, lineHeight: number): void {
@@ -244,10 +246,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
     this.setProperty(this.hostRef, '--lbl-wd', this.getLabelMaxWidth(labelPadding));
   }
 
-  private setPropertyOrnamentLf(ornamentLfWidth: number): void {
-    this.setProperty(this.hostRef, '--orn-lf', ornamentLfWidth > 0 ? ornamentLfWidth + 'px' : null);
-  }
-
   private setPropertyLabel2Padding(labelPadding: number, ornamentLfWidth: number, ornamentRgWidth: number): void {
     this.setProperty(this.hostRef, '--lbl2-wd', this.getLabel2MaxWidth(labelPadding, ornamentLfWidth, ornamentRgWidth));
   }
@@ -256,16 +254,11 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
   private getLabelTranslateY(exterior: Exterior | null, frameSize: number, lineHeight: number): string | null {
     let result: string | null = null;
     if (exterior != null && frameSize > 0 && lineHeight > 0) {
-      switch (exterior) {
-        case Exterior.outlined:
-          result = ((-0.75 * lineHeight) / 2).toFixed(2) + 'px'; // # -8.28px
-          break;
-        case Exterior.underline:
-          result = (((frameSize - lineHeight) * 0.757524 - lineHeight * 0.5) * 0.45).toFixed(2) + 'px'; // # 6,0742314
-          break;
-        case Exterior.standard:
-          result = '-1.5px';
-          break;
+      result = '-1.5px';
+      if (exterior === Exterior.outlined) {
+        result = ((-0.75 * lineHeight) / 2).toFixed(2) + 'px'; // # -8.28px
+      } else if (exterior === Exterior.underline) {
+        result = (((frameSize - lineHeight) * 0.757524 - lineHeight * 0.5) * 0.45).toFixed(2) + 'px'; // # 6,0742314
       }
     }
     return result;
@@ -301,12 +294,10 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
     if (frameSizeVal > 0 && !!exterior) {
       switch (exterior) {
         case Exterior.outlined:
-          result = config?.oLabelPd || Math.round(100 * 0.25 * frameSizeVal) / 100;
-          // --gfi-o-lbl-pd: calc(0.25*var(--gfi-size)); // TODO #2
+          result = config?.oLabelPd || Math.round(100 * 0.25 * frameSizeVal) / 100; // --lbl-pd-lf: calc(0.25*var(--gfi-size)); // TODO #2
           break;
         case Exterior.underline:
-          result = config?.uLabelPd || Math.round(100 * 0.21428 * frameSizeVal) / 100;
-          // --gfi-u-lbl-pd: calc(0.21428*var(--gfi-size));// TODO #2
+          result = config?.uLabelPd || Math.round(100 * 0.21428 * frameSizeVal) / 100; // --lbl-pd-lf: calc(0.21428*var(--gfi-size));// TODO #2
           break;
         case Exterior.standard:
           result = config?.sLabelPd || 0; // --gfi-s-lbl-pd: 0px;// TODO #2
@@ -329,6 +320,19 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
         case Exterior.standard:
           result = String(((frameSize - lineHeight) * (isTop ? 0.75 : 0.25)).toFixed(2)) + 'px'; // calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75)
           break;
+      }
+    }
+    return result;
+  }
+
+  private getBorderRadius(exterior: Exterior | null, frameSize: number): string | null {
+    let result: string | null = null;
+    if (exterior && frameSize > 0) {
+      if (exterior === Exterior.outlined) {
+        result = (frameSize / 10).toFixed(2) + 'px';
+      } else if (exterior === Exterior.underline) {
+        const value = (frameSize / 10).toFixed(2) + 'px';
+        result = value + ' ' + value + ' 0 0';
       }
     }
     return result;

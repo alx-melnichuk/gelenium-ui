@@ -27,84 +27,66 @@ app-frame-input-border-radius {
 
   --fibr-border-radius: 20;
 
-  .fibr-outlined-radius grn-frame-input {
-    --gfi-o-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
-    --gfi-o-lbl-pd: calc(0.57*var(--gfi-size));
+  .fibr-outlined-radius .gfi-outlined {
+    border-radius: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
   }
 
-  .fibr-underline-radius grn-frame-input {
+  .fibr-underline-radius .gfi-underline {
     --fibr-u-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
-    --gfi-u-br-rd: var(--fibr-u-br-rd) var(--fibr-u-br-rd) 0 0;
-    --gfi-u-lbl-pd: calc(0.4*var(--gfi-size));
+    border-radius: var(--fibr-u-br-rd) var(--fibr-u-br-rd) 0 0;
   }
 
 
-  .fibr-radius-a grn-frame-input {
-    --gfi-o-br-rd: calc(var(--gfi-size)/4) 0 0 calc(var(--gfi-size)/4);
-    --gfi-o-lbl-pd: calc(0.37*var(--gfi-size));
+  .fibr-radius-a .grn-frame-input {
+    border-radius: calc(var(--gfi-size)/4) 0 0 calc(var(--gfi-size)/4);
   }
-  .fibr-radius-b grn-frame-input {
-    --gfi-o-br-rd: 0 calc(var(--gfi-size)/4) calc(var(--gfi-size)/4) 0;
-    --gfi-o-lbl-pd: calc(0.37*var(--gfi-size));
+  .fibr-radius-b .grn-frame-input {
+    border-radius: 0 calc(var(--gfi-size)/4) calc(var(--gfi-size)/4) 0;
   }
-  .fibr-radius-c grn-frame-input {
-    --gfi-o-br-rd: calc(var(--gfi-size)/4) 0 calc(var(--gfi-size)/4) 0;
-    --gfi-o-lbl-pd: calc(0.37*var(--gfi-size));
+  .fibr-radius-c .grn-frame-input {
+    border-radius: calc(var(--gfi-size)/4) 0 calc(var(--gfi-size)/4) 0;
   }
-  .fibr-radius-d grn-frame-input {
-    --gfi-o-br-rd: 0 calc(var(--gfi-size)/4) 0 calc(var(--gfi-size)/4);
-    --gfi-o-lbl-pd: calc(0.37*var(--gfi-size));
+  .fibr-radius-d .grn-frame-input {
+    border-radius: 0 calc(var(--gfi-size)/4) 0 calc(var(--gfi-size)/4);
   }
 
-  .fibr-radius-e grn-frame-input {
-    --gfi-u-br-rd: calc(var(--gfi-size)/3) 0 0 0;
-    --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
+  .fibr-radius-e .grn-frame-input {
+    border-radius: calc(var(--gfi-size)/3) 0 0 0;
   }
-  .fibr-radius-f grn-frame-input {
-    --gfi-u-br-rd: 0 calc(var(--gfi-size)/3) 0 0;
-    --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
+  .fibr-radius-f .grn-frame-input {
+    border-radius: 0 calc(var(--gfi-size)/3) 0 0;
   }
 
 
-  .fibr-radius-h grn-frame-input {
-    --gfi-u-br-rd: 0 0 0 calc(var(--gfi-size)/3);
-    --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
+  .fibr-radius-h .grn-frame-input {
+    border-radius: 0 0 0 calc(var(--gfi-size)/3);
     .gfi-u-frm:before, .gfi-u-frm:after {
-      border-radius: var(--gfi-u-br-rd);
       height: calc(0.65*var(--gfi-size));
     }
   }
   .fibr-radius-i grn-frame-input {
-    --gfi-u-br-rd: 0 0 calc(var(--gfi-size)/3) 0;
-    --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
+    border-radius: 0 0 calc(var(--gfi-size)/3) 0;
     .gfi-u-frm:before, .gfi-u-frm:after {
-      border-radius: var(--gfi-u-br-rd);
       height: calc(0.65*var(--gfi-size));
     }
   }
 
   .fibr-radius-j grn-frame-input {
-    --gfi-u-br-rd: calc(var(--gfi-size)/3) 0 0 calc(var(--gfi-size)/3);
-    --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
+    border-radius: calc(var(--gfi-size)/3) 0 0 calc(var(--gfi-size)/3);
     .gfi-u-frm:before, .gfi-u-frm:after {
-      border-radius: var(--gfi-u-br-rd);
       height: calc(0.65*var(--gfi-size));
     }
   }
   .fibr-radius-k grn-frame-input {
-    --gfi-u-br-rd: 0 calc(var(--gfi-size)/3) calc(var(--gfi-size)/3) 0;
-    --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
+    border-radius: 0 calc(var(--gfi-size)/3) calc(var(--gfi-size)/3) 0;
     .gfi-u-frm:before, .gfi-u-frm:after {
-      border-radius: var(--gfi-u-br-rd);
       height: calc(0.65*var(--gfi-size));
     }
   }
 
   .fibr-radius-l grn-frame-input {
-    --gfi-u-br-rd: calc(var(--gfi-size)/3);
-    --gfi-u-lbl-pd: calc(0.37*var(--gfi-size));
+    border-radius: calc(var(--gfi-size)/3);
     .gfi-u-frm:before, .gfi-u-frm:after {
-      border-radius: var(--gfi-u-br-rd);
       height: calc(0.65*var(--gfi-size));
     }
   }
