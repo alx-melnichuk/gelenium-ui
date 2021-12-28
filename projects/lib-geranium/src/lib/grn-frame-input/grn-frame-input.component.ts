@@ -1,21 +1,19 @@
 import {
   AfterContentInit,
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
   ElementRef,
   EventEmitter,
   HostBinding,
-  HostListener,
   Inject,
   InjectionToken,
   Input,
   OnChanges,
   Optional,
   Output,
+  Renderer2,
   SimpleChanges,
-  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -35,13 +33,23 @@ export const GRN_FRAME_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('G
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GrnFrameInputComponent implements OnChanges, AfterContentInit, AfterViewInit {
+export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   @Input()
   public inputId = '';
   @Input()
   public label = '';
+
   @Input()
-  public isRequired = false;
+  public config: GrnFrameInputConfig | null = null;
+  @Input()
+  public exterior: Exterior | null = null;
+  @Input()
+  public frameSize: FrameSize | null = null;
+  @Input()
+  public isLabelShrink: boolean | null = null;
+  @Input()
+  public hiddenLabel: boolean | null = null;
+
   @Input()
   public isDisabled = false;
   @Input()
@@ -52,44 +60,16 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
   public isError = false;
   @Input()
   public helperText: string | null = null;
-
   @Input()
-  public exterior: Exterior | null = null;
-  @Input()
-  public frameSize: FrameSize | null = null;
-  @Input()
-  public isLabelShrink: boolean | null = null;
-  @Input()
-  public hiddenLabel: boolean | null = null;
-  @Input()
-  public config: GrnFrameInputConfig | null = null;
+  public isRequired = false;
 
   @Output()
   readonly clickFrame: EventEmitter<Event> = new EventEmitter();
 
-  @ViewChild('sectionElement')
-  public sectionElement: ElementRef | undefined;
   @ContentChild('grnOrnamentLf', { static: true })
   public grnOrnamentLf: ElementRef | undefined;
   @ContentChild('grnOrnamentRg', { static: true })
   public grnOrnamentRg: ElementRef | undefined;
-
-  @HostBinding('class.gfi-outlined')
-  public get getGfiOutlined(): boolean {
-    return ExteriorUtil.isOutlined(this.exterior);
-  }
-  @HostBinding('class.gfi-underline')
-  public get getGfiUnderline(): boolean {
-    return ExteriorUtil.isUnderline(this.exterior);
-  }
-  @HostBinding('class.gfi-standard')
-  public get getGfiStandard(): boolean {
-    return ExteriorUtil.isStandard(this.exterior);
-  }
-  @HostBinding('class.grn-frame-input')
-  public get getGrnPalette(): boolean {
-    return true; // TODO del;
-  }
 
   @HostBinding('style.--gfi-size')
   public get frameSizeValue(): string | null {
@@ -115,9 +95,11 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
 
   constructor(
     @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null,
-    private hostRef: ElementRef<HTMLElement>
+    private hostRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
   ) {
     this.actualConfig = this.initConfig(this.rootConfig || {});
+    this.setClass(this.hostRef, 'grn-frame-input', true);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -127,9 +109,9 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
     }
     if (changes.exterior) {
       this.exterior = ExteriorUtil.create(this.exterior, this.actualConfig?.exterior || null);
-      this.setAttribute(this.hostRef.nativeElement, 'ext-o', ExteriorUtil.isOutlined(this.exterior) ? '' : null);
-      this.setAttribute(this.hostRef.nativeElement, 'ext-u', ExteriorUtil.isUnderline(this.exterior) ? '' : null);
-      this.setAttribute(this.hostRef.nativeElement, 'ext-s', ExteriorUtil.isStandard(this.exterior) ? '' : null);
+      this.setAttrAndClass(this.hostRef, 'gfi-outlined', 'ext-o', ExteriorUtil.isOutlined(this.exterior) ? '' : null);
+      this.setAttrAndClass(this.hostRef, 'gfi-underline', 'ext-u', ExteriorUtil.isUnderline(this.exterior) ? '' : null);
+      this.setAttrAndClass(this.hostRef, 'gfi-standard', 'ext-s', ExteriorUtil.isStandard(this.exterior) ? '' : null);
     }
     if (changes.frameSize) {
       this.frameSize = FrameSizeUtil.create(this.frameSize, this.actualConfig?.frameSize || null);
@@ -138,7 +120,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
     }
     if (changes.exterior || changes.frameSize) {
       this.setProperty(this.hostRef, '--br-rd', this.getBorderRadius(this.exterior, this.frameSizeVal));
-
       this.labelPadding = this.getLabelPadding(this.frameSizeVal, this.exterior, this.actualConfig) || 0;
       this.setPropertyLabelPaddingHor(this.labelPadding);
       this.setPropertyLabelPaddingVer(this.exterior, this.frameSizeVal, this.lineHeight);
@@ -146,10 +127,25 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
     }
     if (changes.isLabelShrink) {
       this.isLabelShrink = this.createBoolean(this.isLabelShrink, this.actualConfig?.isLabelShrink);
+      this.setAttrAndClass(this.hostRef, 'gfi-shrink', 'shr', this.isLabelShrink ? '' : null);
     }
     if (changes.hiddenLabel) {
       this.hiddenLabel = this.createBoolean(this.hiddenLabel, this.actualConfig?.hiddenLabel);
     }
+    if (changes.isDisabled) {
+      this.setAttrAndClass(this.hostRef, 'gfi-disabled', 'dis', this.isDisabled ? '' : null);
+    }
+    if (changes.isFocused) {
+      this.setAttrAndClass(this.hostRef, 'gfi-focused', 'foc', this.isFocused ? '' : null);
+    }
+    if (changes.isFilled) {
+      this.setAttrAndClass(this.hostRef, 'gfi-filled', 'fil', this.isFilled ? '' : null);
+    }
+    if (changes.isError) {
+      this.setAttrAndClass(this.hostRef, 'gfi-error', 'err', this.isError ? '' : null);
+    }
+    // public helperText: string | null = null;
+    // public isRequired = false;
   }
 
   ngAfterContentInit(): void {
@@ -164,34 +160,18 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
     this.setPropertyLabel2Padding(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
   }
 
-  ngAfterViewInit(): void {
-    if (this.sectionElement !== null) {
-      // console.log('2sectionElement != null ', this.sectionElement != null); // TODO del;
-    }
-  }
-
   // ** Public API **
 
   public getOrnamAlign(ornamAlign: OrnamAlign | undefined, isEnd: boolean, exterior: Exterior | null): string | null {
     let result = null;
     if (ornamAlign != null) {
-      result = ornamAlign.valueOf();
       if (ornamAlign === OrnamAlign.default) {
         result = OrnamAlign.center.valueOf();
         if (exterior === Exterior.standard || (exterior === Exterior.underline && !isEnd)) {
           result = OrnamAlign.flexEnd.valueOf();
         }
-        /*switch (exterior) {
-          case Exterior.outlined:
-            result = OrnamAlign.center.valueOf();
-            break;
-          case Exterior.underline:
-            result = !isEnd ? OrnamAlign.flexEnd.valueOf() : OrnamAlign.center.valueOf();
-            break;
-          case Exterior.standard:
-            result = OrnamAlign.flexEnd.valueOf();
-            break;
-        }*/
+      } else {
+        result = ornamAlign.valueOf();
       }
     }
     return result;
@@ -217,19 +197,41 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit, Afte
     return config;
   }
 
-  private setAttribute(htmlElement: HTMLElement | undefined, attributeName: string, attributeValue: string | null): void {
-    if (htmlElement && attributeName) {
+  private setAttribute(element: ElementRef | undefined, attributeName: string, attributeValue: string | null): void {
+    if (element && element.nativeElement && attributeName) {
       if (attributeValue != null) {
-        htmlElement.setAttribute(attributeName, attributeValue);
-      } else if (htmlElement.hasAttribute(attributeName)) {
-        htmlElement.removeAttribute(attributeName);
+        this.renderer.setAttribute(element.nativeElement, attributeName, attributeValue);
+      } else {
+        this.renderer.removeAttribute(element.nativeElement, attributeName);
       }
     }
   }
 
   private setProperty(element: ElementRef | undefined, propertyName: string, propertyValue: string | null): void {
-    if (element && propertyName) {
+    if (element && element.nativeElement && propertyName) {
       (element.nativeElement as HTMLElement).style.setProperty(propertyName, propertyValue);
+    }
+  }
+
+  private setClass(element: ElementRef | undefined, className: string, isAdd: boolean): void {
+    if (element && element.nativeElement && className) {
+      if (isAdd) {
+        this.renderer.addClass(element.nativeElement, className);
+      } else {
+        this.renderer.removeClass(element.nativeElement, className);
+      }
+    }
+  }
+
+  private setAttrAndClass(element: ElementRef | undefined, className: string, attrName: string, attrValue: string | null): void {
+    if (element && element.nativeElement && attrName && className) {
+      if (attrValue != null) {
+        this.renderer.setAttribute(element.nativeElement, attrName, attrValue);
+        this.renderer.addClass(element.nativeElement, className);
+      } else {
+        this.renderer.removeAttribute(element.nativeElement, attrName);
+        this.renderer.removeClass(element.nativeElement, className);
+      }
     }
   }
 

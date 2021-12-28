@@ -8,9 +8,9 @@ app-frame-input-palette {
     --fip-error-color: #ad1457;
     --fip-hover-error-color: #f06292;
     --fip-focused-color: #0097a7;
+    --fip-disabled-color: #9c27b0;
 
     --fip-label-default-color: #5c6bc0;
-    --fip-label-disabled-color: #9c27b0;
     // For "frame" - outlined
     --fip-o-default-brd-color: #5c6bc0;
     // For "frame" - underline
@@ -26,45 +26,47 @@ app-frame-input-palette {
   }
 
   // Color for "label".
-   // The default color for the label.
-  .fip-specific :not(:hover)>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
+
+  // The state without mouse hover, error, focused and disabled.
+  .fip-specific .grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)>.gfi-label {
     color: var(--fip-label-default-color);
-  } // The color of the label in an error state.
-  .fip-specific .gfi-label.gfi-error {
-    color: var(--fip-error-color);
-  } // The color of the label on mouse hover in an error state.
-  .fip-specific :hover>.gfi-label.gfi-error:not(.gfi-focused):not(.gfi-disabled) {
-    color: var(--fip-hover-error-color);
-  } // The color of the label on mouse hover.
-  .fip-specific :hover>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
+  } // The state with mouse hover but without error, focused and disabled.
+  .fip-specific .grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)>.gfi-label {
     color: var(--fip-hover-color);
-  } // The color of the label when getting focus.
-  .fip-specific .gfi-label.gfi-focused:not(.gfi-error) {
+  } // The state with error.
+  .fip-specific .grn-frame-input.gfi-error>.gfi-label {
+    color: var(--fip-error-color);
+  } // The state with mouse hover and error but without focused and disabled.
+  .fip-specific .grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled)>.gfi-label {
+    color: var(--fip-hover-error-color);
+  }  // The state with focused but without error.
+  .fip-specific .grn-frame-input.gfi-focused:not(.gfi-error)>.gfi-label {
     color: var(--fip-focused-color);
-  } // The color of the label in state is disabled.
-  .fip-specific .gfi-label.gfi-disabled:not(.gfi-error) {
-    color: var(--fip-label-disabled-color);
+  } // The state with disabled but without error.
+  .fip-specific .grn-frame-input.gfi-disabled:not(.gfi-error)>.gfi-label {
+    color: var(--fip-disabled-color);
   }
 
   // Border-color for "outlined" mode.
-   // The default border color.
-  .fip-specific :not(:hover)>.gfi-fieldset:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
+
+  // The state without mouse hover, error, focused and disabled.
+  .fip-specific .grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
     border-color: var(--fip-o-default-brd-color);
-  } // The border color in an error state.
-  .fip-specific .gfi-fieldset.gfi-error {
-    border-color: var(--fip-error-color);
-  } // The border color on mouse hover in an error state.
-  .fip-specific :hover>.gfi-fieldset.gfi-error:not(.gfi-focused):not(.gfi-disabled) {
-    border-color: var(--fip-hover-error-color);
-  } // The border color on mouse hover.
-  .fip-specific :hover>.gfi-fieldset:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
+  } // The state with mouse hover but without error, focused and disabled.
+  .fip-specific .grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
     border-color: var(--fip-hover-color);
-  } // The border color when getting focus.
-  .fip-specific .gfi-fieldset.gfi-focused:not(.gfi-error) {
+  } // The state with error.
+  .fip-specific .grn-frame-input.gfi-error .gfi-fieldset {
+    border-color: var(--fip-error-color);
+  } // The state with mouse hover and error but without focused and disabled.
+  .fip-specific .grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
+    border-color: var(--fip-hover-error-color);
+  } // The state with focused but without error.
+  .fip-specific .grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset {
     border-color: var(--fip-focused-color);
-  } // The border color in state is disabled.
-  .fip-specific .gfi-fieldset.gfi-disabled:not(.gfi-error) {
-    border-color: var(--fip-label-disabled-color);
+  } // The state with disabled but without error.
+  .fip-specific .grn-frame-input.gfi-disabled:not(.gfi-error) .gfi-fieldset {
+    border-color: var(--fip-disabled-color);
   }
   
   // Background-color for "underline" mode.
@@ -124,7 +126,7 @@ app-frame-input-palette {
     color: var(--fip-label-default-color);
   } // The color of the helperText in state is disabled.
   .fip-specific .gfi-helper-text.gfi-disabled:not(.gfi-error) {
-    color: var(--fip-label-disabled-color);
+    color: var(--fip-disabled-color);
   }
 
   // BootStrap
