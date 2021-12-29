@@ -6,7 +6,7 @@ app-frame-input-palette {
   .fip-specific .grn-frame-input {
     --fip-hover-color: #00acc1;
     --fip-error-color: #ad1457;
-    --fip-hover-error-color: #f06292;
+    --fip-hover-error-color: #f3006a;
     --fip-focused-color: #0097a7;
     --fip-disabled-color: #9c27b0;
 
@@ -30,19 +30,19 @@ app-frame-input-palette {
   // The state without mouse hover, error, focused and disabled.
   .fip-specific .grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)>.gfi-label {
     color: var(--fip-label-default-color);
-  } // The state with mouse hover but without error, focused and disabled.
+  }// The state with mouse hover but without error, focused and disabled.
   .fip-specific .grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)>.gfi-label {
     color: var(--fip-hover-color);
-  } // The state with error.
+  }// The state with error.
   .fip-specific .grn-frame-input.gfi-error>.gfi-label {
     color: var(--fip-error-color);
-  } // The state with mouse hover and error but without focused and disabled.
+  }// The state with mouse hover and error but without focused and disabled.
   .fip-specific .grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled)>.gfi-label {
     color: var(--fip-hover-error-color);
-  }  // The state with focused but without error.
+  } // The state with focused but without error.
   .fip-specific .grn-frame-input.gfi-focused:not(.gfi-error)>.gfi-label {
     color: var(--fip-focused-color);
-  } // The state with disabled but without error.
+  }// The state with disabled but without error.
   .fip-specific .grn-frame-input.gfi-disabled:not(.gfi-error)>.gfi-label {
     color: var(--fip-disabled-color);
   }
@@ -52,66 +52,66 @@ app-frame-input-palette {
   // The state without mouse hover, error, focused and disabled.
   .fip-specific .grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
     border-color: var(--fip-o-default-brd-color);
-  } // The state with mouse hover but without error, focused and disabled.
+  }// The state with mouse hover but without error, focused and disabled.
   .fip-specific .grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
     border-color: var(--fip-hover-color);
-  } // The state with error.
+  }// The state with error.
   .fip-specific .grn-frame-input.gfi-error .gfi-fieldset {
     border-color: var(--fip-error-color);
-  } // The state with mouse hover and error but without focused and disabled.
+  }// The state with mouse hover and error but without focused and disabled.
   .fip-specific .grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
     border-color: var(--fip-hover-error-color);
-  } // The state with focused but without error.
+  }// The state with focused but without error.
   .fip-specific .grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset {
     border-color: var(--fip-focused-color);
-  } // The state with disabled but without error.
+  }// The state with disabled but without error.
   .fip-specific .grn-frame-input.gfi-disabled:not(.gfi-error) .gfi-fieldset {
     border-color: var(--fip-disabled-color);
   }
   
   // Background-color for "underline" mode.
-   // The default background color.
-  .fip-specific .gfi-u-frm:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
+  // The state without mouse hover, error, focused and disabled.
+  .fip-specific .gfi-underline:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)>.gfi-frame {
     background-color: var(--fip-u-default-bg-color);
-  } // The background color in an error state.
-  .fip-specific .gfi-u-frm.gfi-error {
-    background-color: var(--fip-u-error-bg-color);
-  } // The background color on mouse hover in an error state.
-  .fip-specific .gfi-u-frm:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled) {
-    background-color: var(--fip-u-hover-error-bg-color);
-  } // The background color on mouse hover.
-  .fip-specific .gfi-u-frm:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
+  } // The state with mouse hover but without error, focused and disabled.
+  .fip-specific .gfi-underline:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)>.gfi-frame {
     background-color: var(--fip-u-hover-bg-color);
-  } // The background color when getting focus.
-  .fip-specific .gfi-u-frm.gfi-focused:not(.gfi-error) {
+  } // The state with error.
+  .fip-specific .gfi-underline.gfi-error>.gfi-frame {
+    background-color: var(--fip-u-error-bg-color);
+  } // The state with mouse hover and error but without focused and disabled.
+  .fip-specific .gfi-underline:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled)>.gfi-frame {
+    background-color: var(--fip-u-hover-error-bg-color);
+  } // The state with focused but without error.
+  .fip-specific .gfi-underline.gfi-focused:not(.gfi-error)>.gfi-frame {
     background-color: var(--fip-u-focused-bg-color);
-  } // The background color in state is disabled.
-  .fip-specific .gfi-u-frm.gfi-disabled:not(.gfi-error) {
+  } // The state with disabled but without error.
+  .fip-specific .gfi-underline.gfi-disabled:not(.gfi-error)>.gfi-frame {
     background-color: var(--fip-u-disabled-bg-color);
   }
 
   // Border-bottom-color for "underline" and "standard" mode.
-   // The default border bottom color.
-  .fip-specific .gfi-su-frm:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled):before {
+  // The state without mouse hover, error, focused and disabled.
+  .fip-specific .gfi-border:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)>.gfi-frame:before {
     border-bottom-color: var(--fip-su-default-brd-color);
-  } // The border bottom color in an error state.
-  .fip-specific .gfi-su-frm.gfi-error:before {
-    border-bottom-color: var(--fip-error-color);
-  } // The border bottom color in an error state.
-  .fip-specific .gfi-su-frm.gfi-error:after {
-    border-bottom-color: var(--fip-error-color);
-  } // The border bottom color on mouse hover in an error state.
-  .fip-specific .gfi-su-frm:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled):before {
-    border-bottom-color: var(--fip-hover-error-color);
-  } // The border bottom color on mouse hover.
-  .fip-specific .gfi-su-frm:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled):before {
+  } // The state with mouse hover but without error, focused and disabled.
+  .fip-specific .gfi-border:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)>.gfi-frame:before {
     border-bottom-color: var(--fip-hover-color);
-  } // The border bottom color when getting focus.
-  .fip-specific .gfi-su-frm.gfi-focused:not(.gfi-error):after {
+  } // The state with error.
+  .fip-specific .gfi-border.gfi-error>.gfi-frame:before {
+    border-bottom-color: var(--fip-error-color);
+  }
+  .fip-specific .gfi-border.gfi-error>.gfi-frame:after {
+    border-bottom-color: var(--fip-error-color);
+  } // The state with mouse hover and error but without focused and disabled.
+  .fip-specific .gfi-border:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled)>.gfi-frame:before {
+    border-bottom-color: var(--fip-hover-error-color);
+  } // The state with focused but without error.
+  .fip-specific .gfi-border.gfi-focused:not(.gfi-error)>.gfi-frame:after {
     border-bottom-color: var(--fip-focused-color);
-  } // The border bottom color in state is disabled.
-  .fip-specific .gfi-su-frm.gfi-disabled:not(.gfi-error):before {
-    border-bottom-color: var(--fip-su-default-brd-color);
+  } // The state with disabled but without error.
+  .fip-specific .gfi-border.gfi-disabled:not(.gfi-error)>.gfi-frame:before {
+    border-bottom-color: var(--fip-disabled-color);
   }
 
   // Color for "helperText".

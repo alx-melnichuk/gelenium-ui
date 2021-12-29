@@ -13,62 +13,43 @@ grn-frame-input { //outline: 1px dashed crimson;
   // The color of the label and border in an error state.
   --g-err-cl: #d32f2f;
   // The color of the label and border on mouse hover in an error state.
-  --g-hov-err-cl: #ff8950;
+  --g-hov-err-cl: #ff0000; // #fb1b67
   // The color of the border and label when getting focus.
   --g-foc-cl: #1976d2;
   // The color of the label and border in the state is disabled.
-  --g-dis-cl: rgba(0, 0, 0, 0.38); //+
+  --g-dis-cl: #787878; // rgba(0, 0, 0, 0.38); //+
 
   // For "label"
   // The default color for the label.
   --g-lbl-def-cl: rgba(0, 0, 0, 0.6); //++
 
+  // For "outlined" mode.
+  // Small indentation of the legend from the border for "outlined" mode.
+  --g-o-lgn-pd: 0.3437em; // # 5.5px
+
   // For "frame" - outlined
   // The default border color for "outlined" mode.
   --g-o-def-br-cl: rgba(0, 0, 0, 0.23);
 
-
   // For "frame" - underline
   // The default background color for "underline" mode.
   --g-u-def-bg-cl: rgba(0, 0, 0, 0.06); //+
-  // The background color in an error state for "underline" mode.
-  --g-u-err-bg-cl: var(--g-u-def-bg-cl);
-  // // The background color when getting focus for "underline" mode.
-  // --g-u-foc-bg-cl: rgba(0, 0, 0, 0.04);
   // The background color on mouse hover for the "underline" mode.
-  --g-u-hov-bg-cl: rgba(0, 0, 0, 0.09); //+
+  --g-u-hov-bg-cl: #1976d20b; // rgba(0, 0, 0, 0.09); //+
+  // The background color in an error state for "underline" mode.
+  --g-u-err-bg-cl: #d32f2f0f; //rgba(150, 0, 0, 0.06); // #d32f2f0f
   // The background color on mouse hover in an error state  for "underline" mode.
-  --g-u-hov-err-bg-cl: var(--g-u-hov-bg-cl);
+  --g-u-hov-err-bg-cl: #d32f2f0b; // var(--g-u-hov-bg-cl);
+  // The background color when getting focus for "underline" mode.
+  --g-u-foc-bg-cl: #1976d20f; //rgba(0, 0, 0, 0.04);
   // The background color in the state is disabled for the "underline" mode.
-  --g-u-dis-bg-cl: rgba(0, 0, 0, 0.12); //+
+  // --g-u-dis-bg-cl: rgba(0, 0, 0, 0.12); //+
+  --g-u-dis-bg-cl: #7878783b;
 
   // For "frame" - standard and underline
   // The default bottom border color for "underline" and "standard" modes.
   --g-su-def-br-cl: rgba(0, 0, 0, 0.42);
-  // The lower border color in the state is disabled for the "underline" and "standard" modes.
-  --g-su-dis-br-cl: rgba(0, 0, 0, 0.32);
 
-
-
-  // For "outlined" mode.
-  // Small indentation of the legend from the border for "outlined" mode.
-  --g-o-lgn-pd: 0.3437em; // # 5.5px
-  // The value of the radius of the rounding of the border for "outlined" mode.
-  // --gfi-o-br-rd: calc(var(--gfi-size)/10);
-
-  // For "underline" mode.
-  // The value of the radius of the rounding of the border for "underline" mode.
-  --gfi-u-br-rd: calc(var(--gfi-size)/10) calc(var(--gfi-size)/10) 0 0;
-  // Left padding of the label in a shrink position (in the top) for "underline" mode.
-
-  // For "standard" mode.
-  // Left padding of the label in a shrink position (in the top) for "standard" mode.
-  --gfi-s-lbl-pd: 0px; // TODO #1
-
-// // Left padding of the label in a shrink position (in the top).
-
-// // Max width of the label in a shrink position (in the top).// // --gfi-o-lbl-wd: calc(133% - 2.66*var(--lbl-pd-lf));// // --gfi-u-lbl-wd: calc(133% - 2.66*var(--lbl-pd-lf));// // --gfi-s-lbl-wd: 133%;
-// // Max width of the label in the unshrink position (in the middle).// // --gfi-o-lbl2-wd: calc(100% - var(--lbl-pd-lf) - var(--lbl-pd-lf));// // --gfi-u-lbl2-wd: calc(100% - var(--lbl-pd-lf) - var(--lbl-pd-lf));// // --gfi-s-lbl2-wd: calc(100% - var(--gfi-s-lbl-pd) - var(--gfi-s-lbl-pd));
 
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
@@ -159,7 +140,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
 
   // For "frame" underline and standard
-  div[frm-br] {
+  &[frm-br]>div {
     &:before {
       left: 0;
       bottom: 0;
@@ -171,15 +152,6 @@ grn-frame-input { //outline: 1px dashed crimson;
       pointer-events: none;
       border-bottom-width: 1px;
       border-radius: inherit;
-    }
-    &:not([dis]):before {
-      border-bottom-style: solid;
-    }
-    &[dis]:before {
-      border-bottom-style: dotted;
-    }
-    &:hover:not([dis]):before {
-      border-bottom-width: 2px;
     }
     &:after {
       left: 0;
@@ -195,64 +167,58 @@ grn-frame-input { //outline: 1px dashed crimson;
       border-bottom-style: solid;
       border-radius: inherit;
     }
-    &[foc]:after {
+  }
+  &[frm-br] {
+    &:not([dis])>div:before {
+      border-bottom-style: solid;
+    }
+    &[dis]>div:before {
+      border-bottom-style: dotted;
+    }
+    &:hover:not([dis])>div:before {
+      border-bottom-width: 2px;
+    }
+    &[foc]>div:after {
       @include mxTransformScaleX(1);
     }
   }
+
   // Border-bottom-color for "underline" and "standard" mode.
-  div[frm-br] {
-    // The default border bottom color. //.gfi-su-frm:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled):before
-    &:not(:hover):not([err]):not([foc]):not([dis]):before {
-      border-bottom-color: var(--g-su-def-br-cl);
-    } // The border bottom color in an error state. //.gfi-su-frm.gfi-error:before
-    &[err]:before {
-      border-bottom-color: var(--g-err-cl);
-    } // The border bottom color in an error state. //.gfi-su-frm.gfi-error:after
-    &[err]:after {
-      border-bottom-color: var(--g-err-cl);
-    } // The border bottom color on mouse hover in an error state. //.gfi-su-frm:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled):before
-    &:hover[err]:not([foc]):not([dis]):before {
-      border-bottom-color: var(--g-hov-err-cl);
-    } // The border bottom color on mouse hover. //.gfi-su-frm:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled):before
-    &:hover:not([err]):not([foc]):not([dis]):before {
-      border-bottom-color: var(--g-hov-cl);
-    } // The border bottom color when getting focus. //.gfi-su-frm.gfi-focused:not(.gfi-error):after
-    &[foc]:not([err]):after {
-      border-bottom-color: var(--g-foc-cl);
-    } // The border bottom color in state is disabled. //.gfi-su-frm.gfi-disabled:not(.gfi-error):before
-    &[dis]:not([err]):before {
-      border-bottom-color: var(--g-su-dis-br-cl);
-    }
+  &[frm-br] {
+    // The state without mouse hover, error, focused and disabled.
+    &:not(:hover):not([err]):not([foc]):not([dis])>div:before { border-bottom-color: var(--g-su-def-br-cl);  }
+    // The state with mouse hover but without error, focused and disabled.
+    &:hover:not([err]):not([foc]):not([dis])>div:before { border-bottom-color: var(--g-hov-cl); }
+    // The state with error.
+    &[err]>div:before { border-bottom-color: var(--g-err-cl); }
+    &[err]>div:after { border-bottom-color: var(--g-err-cl); }
+    // The state with mouse hover and error but without focused and disabled.
+    &:hover[err]:not([foc]):not([dis])>div:before { border-bottom-color: var(--g-hov-err-cl);  }
+    // The state with focused but without error.
+    &[foc]:not([err])>div:after { border-bottom-color: var(--g-foc-cl); }
+    // The state with disabled but without error.
+    &[dis]:not([err])>div:before { border-bottom-color: var(--g-dis-cl); }
   }
 
   // underline
-  div[frm-bg] {
+  &[ext-u]>div {
     -webkit-transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
   }
   // Background-color for "underline" mode.
-  div[frm-bg] {
-    // The default background color. //.gfi-u-frm:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)
-    &:not(:hover):not([err]):not([dis]) {
-      background-color: var(--g-u-def-bg-cl);
-    } // The background color in an error state. //.gfi-u-frm.gfi-error
-    &[err] {
-      background-color: var(--g-u-err-bg-cl);
-    } // The background color on mouse hover in an error state. //.gfi-u-frm:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled)
-    &:hover[err]:not([dis]) {
-      background-color: var(--g-u-hov-err-bg-cl);
-    } // The background color on mouse hover. //.gfi-u-frm:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)
-    &:hover:not([err]):not([dis]) {
-      background-color: var(--g-u-hov-bg-cl);
-    }
-    // // The background color when getting focus. //.gfi-u-frm.gfi-focused:not(.gfi-error)
-    // &[foc]:not([err]) {
-    //   background-color: var(--g-u-foc-bg-cl);
-    // }
-    // The background color in state is disabled. //.gfi-u-frm.gfi-disabled:not(.gfi-error)
-    &[dis]:not([err]) {
-      background-color: var(--g-u-dis-bg-cl);
-    }
+  &[ext-u] {
+    // The state without mouse hover, error, focused and disabled.
+    &:not(:hover):not([err]):not([foc]):not([dis])>div {      background-color: var(--g-u-def-bg-cl);    }
+    // The state with mouse hover but without error, focused and disabled.
+    &:hover:not([err]):not([foc]):not([dis])>div { background-color: var(--g-u-hov-bg-cl);  }
+    // The state with error.
+    &[err]>div { background-color: var(--g-u-err-bg-cl); }
+    // The state with mouse hover and error but without focused and disabled.
+    &:hover[err]:not([foc]):not([dis])>div { background-color: var(--g-u-hov-err-bg-cl); }
+    // The state with focused but without error.
+    &[foc]:not([err])>div { background-color: var(--g-u-foc-bg-cl); }
+    // The state with disabled but without error.
+    &[dis]:not([err])>div { background-color: var(--g-u-dis-bg-cl); }
   }
 
   // Section "Fieldset".
@@ -271,12 +237,12 @@ grn-frame-input { //outline: 1px dashed crimson;
     overflow: hidden;
     min-width: 0%;
     box-sizing: inherit;
-    &:not([foc]) {
-      border-width: 1px;
-    }
-    &[foc] {
-      border-width: 2px;
-    }
+  }
+  &:not([foc]) fieldset {
+    border-width: 1px;
+  }
+  &[foc] fieldset {
+    border-width: 2px;
   }
   // Border-color for "outlined" mode.
   // The state without mouse hover, error, focused and disabled.
@@ -292,7 +258,6 @@ grn-frame-input { //outline: 1px dashed crimson;
   // The state with disabled but without error.
   &[dis]:not([err]) fieldset { border-color: var(--g-dis-cl);  }
 
-
   // Section "Legend".
   legend {
     float: unset;
@@ -302,24 +267,27 @@ grn-frame-input { //outline: 1px dashed crimson;
     font-size: 0.75em; // #!! 12px
     visibility: hidden;
     padding: 0;
-    &:not([shr]):not([fil]):not([foc]) { // .gfi-legend:not(.gfi-shrink):not(.gfi-filled):not(.gfi-focused)
-      max-width: 0.01px;
-      -webkit-transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-      transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    }
-    &[shr], &[fil], &[foc] { // .gfi-legend.gfi-shrink, .gfi-legend.gfi-filled, .gfi-legend.gfi-focused
-      max-width: 100%;
-      -webkit-transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
-      transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
-      &[ind] { // .gfi-lgn-indent
-        padding: 0 var(--g-o-lgn-pd);
-      }
-    }
     &>span {
       display: inline-block;
       height: inherit;
     }
   }
+  &[shr], &[foc], &[fil] { // .gfi-shrink .gfi-legend, .gfi-focused .gfi-legend, .gfi-filled .gfi-legend
+    legend {
+      max-width: 100%;
+      -webkit-transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
+      transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
+    }
+    &[ind] legend {
+      padding: 0 var(--g-o-lgn-pd);
+    }
+  }
+  &:not([shr]):not([fil]):not([foc]) legend { // .grn-frame-input:not(.gfi-shrink):not(.gfi-filled):not(.gfi-focused) .gfi-legend
+    max-width: 0.01px;
+    -webkit-transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+  }
+  
 
   // Section "HelperText"
   p {

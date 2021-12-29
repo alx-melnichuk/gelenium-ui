@@ -4,33 +4,14 @@
   {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
 </label>
 <div [ngClass]="['gfi-frame'
-    , 'gfi-' + exterior?.substring(0,1) + '-frm'
-    , (isStandardExterior || isUnderlineExterior ? 'gfi-su-frm' : '')
-    , (isError ? 'gfi-error': '')
-    , (isDisabled ? 'gfi-disabled': '')
-    , (isFocused ? 'gfi-focused': '')
   ]"
-  [attr.err]="isError ? '' : null"
-  [attr.foc]="isFocused ? '' : null"
-  [attr.dis]="isDisabled ? '' : null"
-  [attr.frm-br]="isStandardExterior || isUnderlineExterior ? '' : null"
-  [attr.frm-bg]="isUnderlineExterior ? '' : null"
   (click)="doClickFrame($event)">
   <ng-content></ng-content>
   <fieldset *ngIf="isOutlinedExterior"
     class="gfi-fieldset"
     aria-hidden="true">
     <legend *ngIf="!hiddenLabel"
-      [ngClass]="['gfi-legend'
-      , (isLabelShrink ? 'gfi-shrink': '')
-      , (isFilled ? 'gfi-filled': '')
-      , (isFocused ? 'gfi-focused': '')
-      , (!!label || isRequired ? 'gfi-lgn-indent': '')
-      ]"
-      [attr.shr]="isLabelShrink ? '' : null"
-      [attr.fil]="isFilled ? '' : null"
-      [attr.foc]="isFocused ? '' : null"
-      [attr.ind]="!!label || isRequired ? '' : null">
+      class="gfi-legend">
       <span class="gfi-lgn-text">
         {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
       </span>

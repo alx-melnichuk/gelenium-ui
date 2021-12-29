@@ -46,24 +46,6 @@ export class FrameInputBorderRadiusComponent {
     input05e: new FormControl('Demo Size Large', []),
     input05f: new FormControl('Demo Size Huge', []),
   });
-  public exterior05 = 'outlined';
-  public isHiddenLabel = false;
-  public borderRadius = 50;
-  public urlFrameInput = '/' + URL_ROOT + '/' + URL_FRAME_INPUT;
-
-  public formGroup06: FormGroup = new FormGroup({
-    input06a: new FormControl('Demo - A', []),
-    input06b: new FormControl('Demo - B', []),
-    input06c: new FormControl('Demo - C', []),
-    input06d: new FormControl('Demo - D', []),
-    input06e: new FormControl('Demo - E', []),
-    input06f: new FormControl('Demo - F', []),
-    input06h: new FormControl('Demo - H', []),
-    input06i: new FormControl('Demo - I', []),
-    input06j: new FormControl('Demo - J', []),
-    input06k: new FormControl('Demo - K', []),
-    input06l: new FormControl('Demo - L', []),
-  });
   public configShort: GrnFrameInputConfig = {
     oLabelPd: 21.66, // 0.57*FrameSizeValue.short
     uLabelPd: 15.2, // 0.4*FrameSizeValue.short
@@ -88,11 +70,27 @@ export class FrameInputBorderRadiusComponent {
     oLabelPd: 38.76, // 0.57*FrameSizeValue.huge
     uLabelPd: 27.2, // 0.4*FrameSizeValue.huge
   };
+  public exterior05 = 'outlined';
+  public isHiddenLabel = false;
+  public borderRadius = 50;
+  public urlFrameInput = '/' + URL_ROOT + '/' + URL_FRAME_INPUT;
 
+  public formGroup06: FormGroup = new FormGroup({
+    input06a: new FormControl('Demo - A', []),
+    input06b: new FormControl('Demo - B', []),
+    input06c: new FormControl('Demo - C', []),
+    input06d: new FormControl('Demo - D', []),
+    input06e: new FormControl('Demo - E', []),
+    input06f: new FormControl('Demo - F', []),
+    input06h: new FormControl('Demo - H', []),
+    input06i: new FormControl('Demo - I', []),
+    input06j: new FormControl('Demo - J', []),
+    input06k: new FormControl('Demo - K', []),
+    input06l: new FormControl('Demo - L', []),
+  });
   public configOutlined: GrnFrameInputConfig = {
     oLabelPd: 20.72, // 0.37*FrameSizeValue.wide
   };
-
   public configUnderline: GrnFrameInputConfig = {
     uLabelPd: 20.72, // 0.37*FrameSizeValue.wide
   };

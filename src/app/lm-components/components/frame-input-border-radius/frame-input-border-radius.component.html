@@ -2,33 +2,39 @@
   <h3>Border radius.</h3>
   <p>
     You can change the value of the rounding radius in outlined appearance mode.
-    To do this, you need to specify a new value for the rounding radius in the
-    "--gfi-o-br-rd" css-variable for the "grn-frame-input"
-    css-style.
+    This requires specifying a value for the "border-radius" property for the
+    "grn-frame-input".<br />
     For example:
   </p>
   <code><pre>
-  .fibr-outlined-radius grn-frame-input &#123;
-    --gfi-o-br-rd: calc(var(--gfi-size)*0.5);
+  .fibr-outlined-radius .grn-frame-input.gfi-outlined &#123;
+    border-radius: calc(var(--size)*0.5);
   &#125;</pre></code>
   <p>
     This value for the fillet radius corresponds to 50% of the height of the current element.
-    The minimum value for the fillet radius is 0.
-    The maximum value for the fillet radius is 50% of the height of the current element.
+    The minimum value for the fillet radius is 0.<br />
+    The maximum value for the fillet radius is 50% of the height of the current element.<br />
     The value of the css-variable
-    <a [href]="urlFrameInput + '#FrameSize'">"--gfi-size"</a>
+    <a [href]="urlFrameInput + '#FrameSize'">"--size"</a>
     determines the height of the current element.
   </p>
   <p>
     In this case, you also need to change the value of the left indent for correct display.
-    The value of the left indentation is determined by the special css-variable
-    "?--gfi-o-lbl-pd" in the css-style "grn-frame-input".
+    The value of the left indent is determined by the configuration for each size,
+    respectively.<br />
     For example:
   </p>
   <code><pre>
-  .fibr-outlined-radius grn-frame-input &#123;
-    --gfi-o-br-rd: calc(var(--gfi-size)*0.5);
-  &#125;</pre></code>
+  public configShort: GrnFrameInputConfig = &#123;
+    oLabelPd: 21.66, // 0.57*FrameSizeValue.short
+    uLabelPd: 15.2, // 0.4*FrameSizeValue.short
+  &#125;;
+  public configSmall: GrnFrameInputConfig = &#123;
+    oLabelPd: 25.08, // 0.57*FrameSizeValue.small
+    uLabelPd: 17.6, // 0.4*FrameSizeValue.small
+  &#125;;
+  ...
+  </pre></code>
   <p>
     In our example, the value of the coefficient for changing the fillet radius will change
     dynamically.
@@ -36,42 +42,30 @@
     As a result, we get the following:
   </p>
   <code><pre>
-  .fibr-outlined-radius grn-frame-input &#123;
-    --gfi-o-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
+  .fibr-outlined-radius .grn-frame-input.gfi-outlined &#123;
+    border-radius: calc(var(--size)*var(--fibr-border-radius)/100);
   &#125;</pre></code>
   <p>
-    This is what the original values look like:
+    Initial value of the fillet radius:
   </p>
-  <code><pre>
-  grn-frame-input &#123;
-    --gfi-o-br-rd: calc(var(--gfi-size)/10);
-  &#125;</pre></code>
+  <code><pre>border-radius: calc(var(--size)/10);</pre></code>
   <p>
     Similarly, you can change the fillet radius for the underline appearance mode.
   </p>
   <p>
-    To do this, you need to specify a new value for the rounding radius in the
-    css-variable "?--gfi-u-br-rd" for the css-style
-    "grn-frame-input".
-    And you also need to change the value of the left indentation value of the
-    css-variable "?--gfi-u-lbl-pd" for the css-style
-    "grn-frame-input".
+    To do this, you also need to specify the value of the "border-radius" property
+    for the "grn-frame-input" css style.
+    And you also need to change the value of the left indentation.
+    How we did it above by specifying the required indentation in the configuration.
   </p>
   <p>
     We get the following:
   </p>
   <code><pre>
-    .fibr-underline-radius grn-frame-input &#123;
-      --gfi-u-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
-    &#125;
-  </pre></code>
-  <p>
-    This is what the original values look like:
-  </p>
-  <code><pre>
-    grn-frame-input &#123;
-    --gfi-u-br-rd: calc(var(--gfi-size)/10);
-    &#125;
+  .fibr-underline-radius .gfi-underline &#123;
+    --fibr-u-br-rd: calc(var(--size)*var(--fibr-border-radius)/100);
+    border-radius: var(--fibr-u-br-rd) var(--fibr-u-br-rd) 0 0;
+  &#125;
   </pre></code>
 </section>
 
@@ -233,7 +227,8 @@
       label="Enter value"
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="short"
-      [exterior]="exterior05"&gt;
+      [exterior]="exterior05"
+      [config]="configShort"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
   &lt;hr br-nn&gt;
@@ -248,7 +243,8 @@
       label="Enter value"
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="small"
-      [exterior]="exterior05"&gt;
+      [exterior]="exterior05"
+      [config]="configSmall"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
   &lt;hr br-nn&gt;
@@ -263,7 +259,8 @@
       label="Enter value"
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="middle"
-      [exterior]="exterior05"&gt;
+      [exterior]="exterior05"
+      [config]="configMiddle"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
   &lt;hr br-nn&gt;
@@ -278,7 +275,8 @@
       label="Enter value"
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="wide"
-      [exterior]="exterior05"&gt;
+      [exterior]="exterior05"
+      [config]="configWide"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
   &lt;hr br-nn&gt;
@@ -294,7 +292,8 @@
       label="Enter value"
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="large"
-      [exterior]="exterior05"&gt;
+      [exterior]="exterior05"
+      [config]="configLarge"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
   &lt;hr br-nn&gt;
@@ -310,7 +309,8 @@
       label="Enter value"
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="huge"
-      [exterior]="exterior05"&gt;
+      [exterior]="exterior05"
+      [config]="configHuge"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
@@ -343,6 +343,32 @@ export class FrameInputComponent &#123;
   public exterior05 = 'outlined';
   public isHiddenLabel = false;
   public borderRadius = 50;
+
+  public configShort: GrnFrameInputConfig = &#123;
+    oLabelPd: 21.66, // 0.57*FrameSizeValue.short
+    uLabelPd: 15.2, // 0.4*FrameSizeValue.short
+  &#125;;
+  public configSmall: GrnFrameInputConfig = &#123;
+    oLabelPd: 25.08, // 0.57*FrameSizeValue.small
+    uLabelPd: 17.6, // 0.4*FrameSizeValue.small
+  &#125;;
+  public configMiddle: GrnFrameInputConfig = &#123;
+    oLabelPd: 28.5, // 0.57*FrameSizeValue.middle
+    uLabelPd: 20, // 0.4*FrameSizeValue.middle
+  &#125;;
+  public configWide: GrnFrameInputConfig = &#123;
+    oLabelPd: 31.92, // 0.57*FrameSizeValue.wide
+    uLabelPd: 22.4, // 0.4*FrameSizeValue.wide
+  &#125;;
+  public configLarge: GrnFrameInputConfig = &#123;
+    oLabelPd: 35.34, // 0.57*FrameSizeValue.large
+    uLabelPd: 24.8, // 0.4*FrameSizeValue.large
+  &#125;;
+  public configHuge: GrnFrameInputConfig = &#123;
+    oLabelPd: 38.76, // 0.57*FrameSizeValue.huge
+    uLabelPd: 27.2, // 0.4*FrameSizeValue.huge
+  &#125;;
+
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -360,12 +386,13 @@ export class FrameInputComponent &#123;
 
 --fibr-border-radius: 20;
 
-.fibr-outlined-radius grn-frame-input &#123;
-  --gfi-o-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
+.fibr-outlined-radius .gfi-outlined &#123;
+  border-radius: calc(var(--size)*var(--fibr-border-radius)/100);
 &#125;
 
-.fibr-underline-radius grn-frame-input &#123;
-  --gfi-u-br-rd: calc(var(--gfi-size)*var(--fibr-border-radius)/100);
+.fibr-underline-radius .gfi-underline &#123;
+  --fibr-u-br-rd: calc(var(--size)*var(--fibr-border-radius)/100);
+  border-radius: var(--fibr-u-br-rd) var(--fibr-u-br-rd) 0 0;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -377,53 +404,31 @@ export class FrameInputComponent &#123;
 <section mr-vr>
   <h4>Border radius in "outlined" mode.</h4>
   <p>
-    For the "outlined" mode, the value of the border rounding radius is set by the css variable
-    "--gfi-o-br-rd".<br />
-    By default, this variable has the following meaning:
-  </p>
-  <code><pre>--gfi-o-br-rd: calc(var(--gfi-size)/10);</pre></code>
-  <p>
-    This variable is further used as follows:
-  </p>
-  <code><pre>border-radius: var(--gfi-o-br-rd);</pre></code>
-  <p>
-    Thus, we can assign another valid value to this variable according to the description in
-    "<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">
-      border-radius</a>".
+    Thus, to describe the radius of the rounding, we can assign any valid (in accordance
+    with the description of
+    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">
+      "border-radius"</a>) value.<br />
     It is also necessary to change the value of the left padding so that the label does not
     intersect with the border.
-    For "outline" mode, the left and right padding values are set by the css variable
-    "?--gfi-o-lbl-pd".<br />
-    By default, this variable has the following meaning:
   </p>
-  <code><pre>?--gfi-o-lbl-pd: calc(0.25*var(--gfi-size));</pre></code>
 </section>
 
 <section mr-vr>
   <h4>Border radius in "underline" mode.</h4>
   <p>
-    For the "underline" mode, the value of the border rounding radius is set by the css variable
-    "--gfi-u-br-rd".<br />
-    By default, this variable has the following meaning:
-  </p>
-  <code><pre>--gfi-u-br-rd: calc(var(--gfi-size)/10) calc(var(--gfi-size)/10) 0 0;</pre></code>
-  <p>
-    This variable is further used as follows:
-  </p>
-  <code><pre>border-radius: var(--gfi-u-br-rd);</pre></code>
-  <p>
-    Thus, we can assign another valid value to this variable according to the description in
-    "<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">
-      border-radius</a>".
+    For the "underline" mode, the value of the border rounding radius is set in the same way.<br />
   </p>
   <p>
+    Initial value of the fillet radius:
+  </p>
+  <code><pre>border-radius: calc(var(--size)/10) calc(var(--size)/10) 0 0;</pre></code>
+  <p>
+    And in this case, we can use any valid value as described in
+    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">
+      "border-radius"</a>.<br />
     It is also necessary to change the value of the left padding so that the label does not
     intersect with the border.
-    For "underline" mode, the left and right padding values are set by the css variable
-    "?--gfi-u-lbl-pd".<br />
-    By default, this variable has the following meaning:
   </p>
-  <code><pre>?--gfi-u-lbl-pd: calc(0.214285714*var(--gfi-size));</pre></code>
   <p>
     If in the "underline" mode we want to round the bottom corners, then we additionally need to
     specify the height of the block with the bottom frame.
@@ -432,14 +437,13 @@ export class FrameInputComponent &#123;
     Here's an example:
   </p>
   <code><pre>
-.fibr-radius-h grn-frame-input &#123;
-  --gfi-u-br-rd: 0 0 0 calc(var(--gfi-size)/3);
-  .gfi-u-frm:before, .gfi-u-frm:after &#123;
-    border-radius: var(--gfi-u-br-rd);
-    height: calc(0.65*var(--gfi-size));
+  .fibr-radius-h .gfi-underline &#123;
+    border-radius: 0 0 0 calc(var(--size)/3);
   &#125;
-&#125;
-  </pre></code>
+  .fibr-radius-h .gfi-underline .gfi-frame:before,
+  .fibr-radius-h .gfi-underline .gfi-frame:after &#123;
+    height: calc(0.65*var(--size));
+  &#125;</pre></code>
 </section>
 
 <form [formGroup]="formGroup06"
@@ -631,7 +635,6 @@ export class FrameInputComponent &#123;
     </div>
   </div>
 
-
 </form>
 
 <section mr-vr>
@@ -654,6 +657,7 @@ export class FrameInputComponent &#123;
   &lt;/div&gt;
 
   &lt;div class="app-group"&gt;
+
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -663,7 +667,8 @@ export class FrameInputComponent &#123;
       &lt;grn-input formControlName="input06a"
         class="fibr-radius-a"
         label="Enter value"
-        exterior="outlined"&gt;
+        exterior="outlined"
+        [config]="configOutlined"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -676,12 +681,15 @@ export class FrameInputComponent &#123;
       &lt;grn-input formControlName="input06b"
         class="fibr-radius-b"
         label="Enter value"
-        exterior="outlined"&gt;
+        exterior="outlined"
+        [config]="configOutlined"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
+
   &lt;/div&gt;
 
   &lt;div class="app-group"&gt;
+
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -691,7 +699,8 @@ export class FrameInputComponent &#123;
       &lt;grn-input formControlName="input06c"
         class="fibr-radius-c"
         label="Enter value"
-        exterior="outlined"&gt;
+        exterior="outlined"
+        [config]="configOutlined"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -704,9 +713,11 @@ export class FrameInputComponent &#123;
       &lt;grn-input formControlName="input06d"
         class="fibr-radius-d"
         label="Enter value"
-        exterior="outlined"&gt;
+        exterior="outlined"
+        [config]="configOutlined"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
+
   &lt;/div&gt;
 
   &lt;hr br-nn&gt;
@@ -717,6 +728,7 @@ export class FrameInputComponent &#123;
   &lt;/div&gt;
 
   &lt;div class="app-group"&gt;
+
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -726,7 +738,8 @@ export class FrameInputComponent &#123;
       &lt;grn-input formControlName="input06e"
         class="fibr-radius-e"
         label="Enter value"
-        exterior="underline"&gt;
+        exterior="underline"
+        [config]="configUnderline"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -739,9 +752,11 @@ export class FrameInputComponent &#123;
       &lt;grn-input formControlName="input06f"
         class="fibr-radius-f"
         label="Enter value"
-        exterior="underline"&gt;
+        exterior="underline"
+        [config]="configUnderline"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
+
   &lt;/div&gt;
 
   &lt;div class="app-group"&gt;
@@ -754,7 +769,8 @@ export class FrameInputComponent &#123;
       &lt;grn-input formControlName="input06h"
         class="fibr-radius-h"
         label="Enter value"
-        exterior="underline"&gt;
+        exterior="underline"
+        [config]="configUnderline"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -767,7 +783,8 @@ export class FrameInputComponent &#123;
       &lt;grn-input formControlName="input06i"
         class="fibr-radius-i"
         label="Enter value"
-        exterior="underline"&gt;
+        exterior="underline"
+        [config]="configUnderline"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -782,7 +799,8 @@ export class FrameInputComponent &#123;
       &lt;grn-input formControlName="input06j"
         class="fibr-radius-j"
         label="Enter value"
-        exterior="underline"&gt;
+        exterior="underline"
+        [config]="configUnderline"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -795,7 +813,8 @@ export class FrameInputComponent &#123;
       &lt;grn-input formControlName="input06k"
         class="fibr-radius-k"
         label="Enter value"
-        exterior="underline"&gt;
+        exterior="underline"
+        [config]="configUnderline"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -804,15 +823,14 @@ export class FrameInputComponent &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;
-            Demo - L (top-[left,right], bottom-[left,right])
-          &lt;/em&gt;
+          &lt;em&gt;Demo - L (top-[left,right], bottom-[left,right])&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input06l"
         class="fibr-radius-l"
         label="Enter value"
-        exterior="underline"&gt;
+        exterior="underline"
+        [config]="configUnderline"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -848,6 +866,14 @@ export class FrameInputComponent &#123;
     input06k: new FormControl('Demo - K', []),
     input06l: new FormControl('Demo - L', []),
   &#125;);
+
+  public configOutlined: GrnFrameInputConfig = &#123;
+    oLabelPd: 20.72, // 0.37*FrameSizeValue.wide
+  &#125;;
+  public configUnderline: GrnFrameInputConfig = &#123;
+    uLabelPd: 20.72, // 0.37*FrameSizeValue.wide
+  &#125;;
+
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -861,64 +887,58 @@ export class FrameInputComponent &#123;
   margin: 10px 10px;
 &#125;
 
-.fibr-radius-a grn-frame-input &#123;
-  --gfi-o-br-rd: calc(var(--gfi-size)/4) 0 0 calc(var(--gfi-size)/4);
+.fibr-radius-a .gfi-outlined &#123;
+  border-radius: calc(var(--size)/4) 0 0 calc(var(--size)/4);
 &#125;
-.fibr-radius-b grn-frame-input &#123;
-  --gfi-o-br-rd: 0 calc(var(--gfi-size)/4) calc(var(--gfi-size)/4) 0;
+.fibr-radius-b .gfi-outlined &#123;
+  border-radius: 0 calc(var(--size)/4) calc(var(--size)/4) 0;
 &#125;
-.fibr-radius-c grn-frame-input &#123;
-  --gfi-o-br-rd: calc(var(--gfi-size)/4) 0 calc(var(--gfi-size)/4) 0;
+.fibr-radius-c .gfi-outlined &#123;
+  border-radius: calc(var(--size)/4) 0 calc(var(--size)/4) 0;
 &#125;
-.fibr-radius-d grn-frame-input &#123;
-  --gfi-o-br-rd: 0 calc(var(--gfi-size)/4) 0 calc(var(--gfi-size)/4);
-&#125;
-
-.fibr-radius-e grn-frame-input &#123;
-  --gfi-u-br-rd: calc(var(--gfi-size)/3) 0 0 0;
-&#125;
-.fibr-radius-f grn-frame-input &#123;
-  --gfi-u-br-rd: 0 calc(var(--gfi-size)/3) 0 0;
+.fibr-radius-d .gfi-outlined &#123;
+  border-radius: 0 calc(var(--size)/4) 0 calc(var(--size)/4);
 &#125;
 
+.fibr-radius-e .gfi-underlin &#123;
+  border-radius: calc(var(--size)/3) 0 0 0;
+&#125;
+.fibr-radius-f .gfi-underlin &#123;
+  border-radius: 0 calc(var(--size)/3) 0 0;
+&#125;
 
-.fibr-radius-h grn-frame-input &#123;
-  --gfi-u-br-rd: 0 0 0 calc(var(--gfi-size)/3);
-  .gfi-u-frm:before, .gfi-u-frm:after &#123;
-    border-radius: var(--gfi-u-br-rd);
-    height: calc(0.65*var(--gfi-size));
+
+.fibr-radius-h .gfi-underline &#123;
+  border-radius: 0 0 0 calc(var(--size)/3);
+  .gfi-frame:before, .gfi-frame:after &#123;
+    height: calc(0.65*var(--size));
   &#125;
 &#125;
-.fibr-radius-i grn-frame-input &#123;
-  --gfi-u-br-rd: 0 0 calc(var(--gfi-size)/3) 0;
-  .gfi-u-frm:before, .gfi-u-frm:after &#123;
-    border-radius: var(--gfi-u-br-rd);
-    height: calc(0.65*var(--gfi-size));
-  &#125;
-&#125;
-
-.fibr-radius-j grn-frame-input &#123;
-  --gfi-u-br-rd: calc(var(--gfi-size)/3) 0 0 calc(var(--gfi-size)/3);
-  .gfi-u-frm:before, .gfi-u-frm:after &#123;
-    border-radius: var(--gfi-u-br-rd);
-    height: calc(0.65*var(--gfi-size));
-  &#125;
-&#125;
-.fibr-radius-k grn-frame-input &#123;
-  --gfi-u-br-rd: 0 calc(var(--gfi-size)/3) calc(var(--gfi-size)/3) 0;
-  .gfi-u-frm:before, .gfi-u-frm:after &#123;
-    border-radius: var(--gfi-u-br-rd);
-    height: calc(0.65*var(--gfi-size));
+.fibr-radius-i .gfi-underline &#123;
+  border-radius: 0 0 calc(var(--size)/3) 0;
+  .gfi-frame:before, .gfi-frame:after &#123;
+    height: calc(0.65*var(--size));
   &#125;
 &#125;
 
-.fibr-radius-l grn-frame-input &#123;
-  --gfi-u-br-rd: calc(var(--gfi-size)/3);
-  .gfi-u-frm:before, .gfi-u-frm:after &#123;
-    border-radius: var(--gfi-u-br-rd);
-    height: calc(0.65*var(--gfi-size));
+.fibr-radius-j .gfi-underline &#123;
+  border-radius: calc(var(--size)/3) 0 0 calc(var(--size)/3);
+  .gfi-frame:before, .gfi-frame:after &#123;
+    height: calc(0.65*var(--size));
   &#125;
 &#125;
+.fibr-radius-k .gfi-underline &#123;
+  border-radius: 0 calc(var(--size)/3) calc(var(--size)/3) 0;
+  .gfi-frame:before, .gfi-frame:after &#123;
+    height: calc(0.65*var(--size));
+  &#125;
+&#125;
+
+.fibr-radius-l .gfi-underline &#123;
+  border-radius: calc(var(--size)/3);
+  .gfi-frame:before, .gfi-frame:after &#123;
+    height: calc(0.65*var(--size));
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

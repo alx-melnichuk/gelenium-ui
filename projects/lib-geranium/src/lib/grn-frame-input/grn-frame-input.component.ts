@@ -71,11 +71,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   @ContentChild('grnOrnamentRg', { static: true })
   public grnOrnamentRg: ElementRef | undefined;
 
-  @HostBinding('style.--gfi-size')
-  public get frameSizeValue(): string | null {
-    return this.frameSizeVal > 0 ? this.frameSizeVal + 'px' : null; // TODO del;
-  }
-
   public get isOutlinedExterior(): boolean {
     return ExteriorUtil.isOutlined(this.exterior);
   }
@@ -112,11 +107,13 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
       this.setAttrAndClass(this.hostRef, 'gfi-outlined', 'ext-o', ExteriorUtil.isOutlined(this.exterior) ? '' : null);
       this.setAttrAndClass(this.hostRef, 'gfi-underline', 'ext-u', ExteriorUtil.isUnderline(this.exterior) ? '' : null);
       this.setAttrAndClass(this.hostRef, 'gfi-standard', 'ext-s', ExteriorUtil.isStandard(this.exterior) ? '' : null);
+      const isBorder = ExteriorUtil.isStandard(this.exterior) || ExteriorUtil.isUnderline(this.exterior);
+      this.setAttrAndClass(this.hostRef, 'gfi-border', 'frm-br', isBorder ? '' : null);
     }
     if (changes.frameSize) {
       this.frameSize = FrameSizeUtil.create(this.frameSize, this.actualConfig?.frameSize || null);
       this.frameSizeVal = FrameSizeUtil.getValue(this.frameSize) || 0;
-      this.setProperty(this.hostRef, '--gfi--size', this.frameSizeVal > 0 ? this.frameSizeVal + 'px' : null);
+      this.setProperty(this.hostRef, '--size', this.frameSizeVal > 0 ? this.frameSizeVal + 'px' : null);
     }
     if (changes.exterior || changes.frameSize) {
       this.setProperty(this.hostRef, '--br-rd', this.getBorderRadius(this.exterior, this.frameSizeVal));
@@ -145,7 +142,9 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
       this.setAttrAndClass(this.hostRef, 'gfi-error', 'err', this.isError ? '' : null);
     }
     // public helperText: string | null = null;
-    // public isRequired = false;
+    if (changes.label || changes.isRequired) {
+      this.setAttrAndClass(this.hostRef, 'gfi-lgn-indent', 'ind', !!this.label || this.isRequired ? '' : null);
+    }
   }
 
   ngAfterContentInit(): void {
@@ -296,13 +295,13 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     if (frameSizeVal > 0 && !!exterior) {
       switch (exterior) {
         case Exterior.outlined:
-          result = config?.oLabelPd || Math.round(100 * 0.25 * frameSizeVal) / 100; // --lbl-pd-lf: calc(0.25*var(--gfi-size)); // TODO #2
+          result = config?.oLabelPd || Math.round(100 * 0.25 * frameSizeVal) / 100; // --lbl-pd-lf: calc(0.25*var(--size)); // TODO #2
           break;
         case Exterior.underline:
-          result = config?.uLabelPd || Math.round(100 * 0.21428 * frameSizeVal) / 100; // --lbl-pd-lf: calc(0.21428*var(--gfi-size));// TODO #2
+          result = config?.uLabelPd || Math.round(100 * 0.21428 * frameSizeVal) / 100; // --lbl-pd-lf: calc(0.21428*var(--size));// TODO #2
           break;
         case Exterior.standard:
-          result = config?.sLabelPd || 0; // --gfi-s-lbl-pd: 0px;// TODO #2
+          result = config?.sLabelPd || 0; // --lbl-pd: 0px;// TODO #2
           break;
       }
     }
@@ -314,13 +313,13 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     if (exterior != null && frameSize > 0 && lineHeight > 0) {
       switch (exterior) {
         case Exterior.outlined:
-          result = String(((frameSize - lineHeight) / 2).toFixed(2)) + 'px'; // calc((var(--gfi-size) - var(--gfi-ln-hg))/2)
+          result = String(((frameSize - lineHeight) / 2).toFixed(2)) + 'px'; // calc((var(--size) - var(--gfi-ln-hg))/2)
           break;
         case Exterior.underline:
-          result = String(((frameSize - lineHeight) * (isTop ? 0.75 : 0.25)).toFixed(2)) + 'px'; // calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75)
+          result = String(((frameSize - lineHeight) * (isTop ? 0.75 : 0.25)).toFixed(2)) + 'px'; // calc((var(--size) - var(--gfi-ln-hg))*0.75)
           break;
         case Exterior.standard:
-          result = String(((frameSize - lineHeight) * (isTop ? 0.75 : 0.25)).toFixed(2)) + 'px'; // calc((var(--gfi-size) - var(--gfi-ln-hg))*0.75)
+          result = String(((frameSize - lineHeight) * (isTop ? 0.75 : 0.25)).toFixed(2)) + 'px'; // calc((var(--size) - var(--gfi-ln-hg))*0.75)
           break;
       }
     }
