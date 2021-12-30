@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { CN_LABEL_CSS, CN_LABEL_HTML, CN_LABEL_SHOW_SOURCE, CN_LABEL_TS } from 'src/app/constants/labels';
 
 import { GRN_FRAME_INPUT_CONFIG } from 'projects/lib-geranium/src/lib/grn-frame-input/grn-frame-input.component';
-import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/grn-frame-input/grn-frame-input.interface';
+import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/interfaces/grn-frame-input-config.interface';
 import { Exterior } from 'projects/lib-geranium/src/lib/interfaces/exterior.interface';
 import { FrameSize } from 'projects/lib-geranium/src/lib/interfaces/frame-size.interface';
 import { URL_FRAME_INPUT, URL_ROOT } from '../../constants/url.constants';

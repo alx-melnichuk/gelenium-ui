@@ -33,12 +33,13 @@ import {
 
 import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
 import { GRN_FRAME_INPUT_CONFIG } from '../grn-frame-input/grn-frame-input.component';
-import { GrnFrameInputConfig } from '../grn-frame-input/grn-frame-input.interface';
+import { GrnFrameInputConfig, GrnFrameInputConfigUtil } from '../interfaces/grn-frame-input-config.interface';
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 import { OrnamAlign, OrnamAlignUtil } from '../interfaces/ornam-align.interface';
 
 import { InputType, InputTypeUtil } from './grn-input.interface';
+import { HtmlElemUtil } from '../utils/html-elem.util';
 
 let identifier = 0;
 
@@ -63,11 +64,7 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   @Input()
   public label = '';
   @Input()
-  public isReadOnly: string | null = null;
-  @Input()
-  public isRequired: string | null = null;
-  @Input()
-  public isDisabled: string | null = null;
+  public config: GrnFrameInputConfig | null = null;
   @Input()
   public exterior: string | null = null; // ExteriorType
   @Input()
@@ -77,15 +74,19 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   @Input()
   public hiddenLabel: string | null = null;
   @Input()
-  public config: GrnFrameInputConfig | null = null;
+  public isDisabled: string | null = null;
   @Input()
   public isError: string | null = null;
+  @Input()
+  public helperText: string | null = null;
+  @Input()
+  public isRequired: string | null = null;
+  @Input()
+  public isReadOnly: string | null = null;
   @Input()
   public pattern = '';
   @Input()
   public autoComplete = '';
-  @Input()
-  public helperText: string | null = null;
   @Input()
   public wdFull: string | null = null;
   @Input()
@@ -117,12 +118,12 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   }
 
   public typeVal: InputType = InputType.text;
-  public exteriorVal: Exterior | null = null;
+  public exteriorVal: Exterior = ExteriorUtil.create(null, null);
   public isReadOnlyVal = false; // Binding attribute "isReadOnly".
   public isRequiredVal = false; // Binding attribute "isRequired".
   public isDisabledVal = false; // Binding attribute "isDisabled".
   public isLabelShrink: boolean | null = null; // Binding attribute "lbShrink".
-  public frameSizeVal: FrameSize | null = null;
+  public frameSizeVal: FrameSize = FrameSizeUtil.create(null, null);
   public isHiddenLabel: boolean | null = null; // Binding attribute "hiddenLabel".
   public isErrorVal = false; // Binding attribute "isError".
 
@@ -130,48 +131,59 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public isFocused = false;
   public isFilled = false;
-  public isHelperTextFilled = false;
 
   public ornamLfAlign: OrnamAlign = OrnamAlign.default;
   public ornamRgAlign: OrnamAlign = OrnamAlign.default;
-  public actualConfig: GrnFrameInputConfig | null = null;
+  public actualConfig: GrnFrameInputConfig;
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: Object,
     private changeDetectorRef: ChangeDetectorRef,
-    @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null
+    @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null,
+    private hostRef: ElementRef<HTMLElement>
   ) {
     this.actualConfig = this.initConfig(this.rootConfig || {});
+    const labelPadding = this.getLabelPadding(this.exteriorVal, this.frameSizeVal, this.actualConfig) || 0;
+    this.setPropertyLabelPaddingHor(labelPadding);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
-      const config = { ...(this.rootConfig || {}), ...(this.config || {}) };
-      this.actualConfig = this.initConfig(config);
+      this.actualConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
     }
     if (changes.type) {
       this.typeVal = InputTypeUtil.create(this.type) || InputType.text;
     }
     if (changes.exterior) {
-      this.exteriorVal = ExteriorUtil.convert(this.exterior);
+      this.exteriorVal = ExteriorUtil.create(ExteriorUtil.convert(this.exterior), this.actualConfig?.exterior || null);
     }
-    this.isReadOnlyVal = changes.isReadOnly ? this.isReadOnly !== null : this.isReadOnlyVal;
-    this.isRequiredVal = changes.isRequired ? this.isRequired !== null : this.isRequiredVal;
-
-    if (changes.isDisabled) {
-      this.isDisabledVal = this.isDisabled !== null;
-      this.setDisabledState(this.isDisabledVal);
+    if (changes.frameSize) {
+      this.frameSizeVal = FrameSizeUtil.create(FrameSizeUtil.convert(this.frameSize), this.actualConfig?.frameSize || null);
+    }
+    if (changes.exterior || changes.frameSize) {
+      const labelPadding = this.getLabelPadding(this.exteriorVal, this.frameSizeVal, this.actualConfig) || 0;
+      this.setPropertyLabelPaddingHor(labelPadding);
     }
     if (changes.lbShrink) {
       this.isLabelShrink = this.lbShrink === '' || this.lbShrink === 'true' ? true : this.lbShrink === 'false' ? false : null;
     }
-    if (changes.frameSize) {
-      this.frameSizeVal = FrameSizeUtil.convert(this.frameSize);
+    if (changes.hiddenLabel) {
+      this.isHiddenLabel = this.hiddenLabel !== null;
     }
-    this.isHiddenLabel = changes.hiddenLabel ? this.hiddenLabel !== null : this.isHiddenLabel;
-    this.isErrorVal = changes.isError ? this.isError !== null : this.isErrorVal;
-    this.isHelperTextFilled = changes.helperText ? !!this.helperText : this.isHelperTextFilled;
+    if (changes.isDisabled) {
+      this.isDisabledVal = this.isDisabled !== null;
+      this.setDisabledState(this.isDisabledVal);
+    }
+    if (changes.isError) {
+      this.isErrorVal = this.isError !== null;
+    }
+    if (changes.isRequired) {
+      this.isRequiredVal = this.isRequired !== null;
+    }
+    if (changes.isReadOnly) {
+      this.isReadOnlyVal = this.isReadOnly !== null;
+    }
 
     if (changes.isRequired || changes.minLength || changes.maxLength) {
       this.prepareFormGroup(this.isRequiredVal, this.minLength, this.maxLength);
@@ -297,11 +309,19 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
     this.formControl.setValidators(newValidator);
   }
 
-  private initConfig(config: GrnFrameInputConfig | null): GrnFrameInputConfig | null {
-    if (config != null) {
-      this.ornamLfAlign = OrnamAlignUtil.create(config?.ornamLfAlign || this.ornamLfAlign, null);
-      this.ornamRgAlign = OrnamAlignUtil.create(config?.ornamRgAlign || this.ornamRgAlign, null);
-    }
+  private initConfig(config: GrnFrameInputConfig): GrnFrameInputConfig {
+    this.ornamLfAlign = OrnamAlignUtil.create(config?.ornamLfAlign || this.ornamLfAlign, null);
+    this.ornamRgAlign = OrnamAlignUtil.create(config?.ornamRgAlign || this.ornamRgAlign, null);
     return config;
+  }
+
+  private getLabelPadding(exteriorVal: Exterior, frameSizeVal: FrameSize, actualConfig: GrnFrameInputConfig): number | null {
+    const frameSizePx = FrameSizeUtil.getValue(frameSizeVal) || 0;
+    return GrnFrameInputConfigUtil.getLabelPaddingHor(frameSizePx, exteriorVal, actualConfig) || 0;
+  }
+
+  private setPropertyLabelPaddingHor(labelPadding: number): void {
+    const labelPaddingPx = labelPadding != null ? labelPadding + 'px' : labelPadding;
+    HtmlElemUtil.setProperty(this.hostRef, '--pd-lf', labelPaddingPx);
   }
 }

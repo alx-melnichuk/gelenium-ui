@@ -1,11 +1,11 @@
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
   EventEmitter,
-  HostBinding,
   Inject,
   InjectionToken,
   Input,
@@ -19,9 +19,9 @@ import {
 
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
+import { GrnFrameInputConfig, GrnFrameInputConfigUtil } from '../interfaces/grn-frame-input-config.interface';
 import { OrnamAlign } from '../interfaces/ornam-align.interface';
-
-import { GrnFrameInputConfig } from './grn-frame-input.interface';
+import { HtmlElemUtil } from '../utils/html-elem.util';
 
 export const GRN_FRAME_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('GRN_FRAME_INPUT_CONFIG');
 
@@ -35,10 +35,7 @@ export const GRN_FRAME_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('G
 })
 export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   @Input()
-  public inputId = '';
-  @Input()
   public label = '';
-
   @Input()
   public config: GrnFrameInputConfig | null = null;
   @Input()
@@ -49,7 +46,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   public isLabelShrink: boolean | null = null;
   @Input()
   public hiddenLabel: boolean | null = null;
-
   @Input()
   public isDisabled = false;
   @Input()
@@ -58,8 +54,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   public isFilled = false;
   @Input()
   public isError = false;
-  @Input()
-  public helperText: string | null = null;
   @Input()
   public isRequired = false;
 
@@ -74,12 +68,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   public get isOutlinedExterior(): boolean {
     return ExteriorUtil.isOutlined(this.exterior);
   }
-  public get isUnderlineExterior(): boolean {
-    return ExteriorUtil.isUnderline(this.exterior);
-  }
-  public get isStandardExterior(): boolean {
-    return ExteriorUtil.isStandard(this.exterior);
-  }
 
   public frameSizeVal = 0;
   public lineHeight = 0;
@@ -89,61 +77,72 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   public actualConfig: GrnFrameInputConfig | null = null;
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null,
     private hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {
     this.actualConfig = this.initConfig(this.rootConfig || {});
-    this.setClass(this.hostRef, 'grn-frame-input', true);
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-frame-input', true);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
-      const config = { ...(this.rootConfig || {}), ...(this.config || {}) };
-      this.actualConfig = this.initConfig(config);
+      this.actualConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
     }
     if (changes.exterior) {
       this.exterior = ExteriorUtil.create(this.exterior, this.actualConfig?.exterior || null);
-      this.setAttrAndClass(this.hostRef, 'gfi-outlined', 'ext-o', ExteriorUtil.isOutlined(this.exterior) ? '' : null);
-      this.setAttrAndClass(this.hostRef, 'gfi-underline', 'ext-u', ExteriorUtil.isUnderline(this.exterior) ? '' : null);
-      this.setAttrAndClass(this.hostRef, 'gfi-standard', 'ext-s', ExteriorUtil.isStandard(this.exterior) ? '' : null);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-outlined', ExteriorUtil.isOutlined(this.exterior));
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ext-o', ExteriorUtil.isOutlined(this.exterior) ? '' : null);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-underline', ExteriorUtil.isUnderline(this.exterior));
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ext-u', ExteriorUtil.isUnderline(this.exterior) ? '' : null);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-standard', ExteriorUtil.isStandard(this.exterior));
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ext-s', ExteriorUtil.isStandard(this.exterior) ? '' : null);
       const isBorder = ExteriorUtil.isStandard(this.exterior) || ExteriorUtil.isUnderline(this.exterior);
-      this.setAttrAndClass(this.hostRef, 'gfi-border', 'frm-br', isBorder ? '' : null);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-border', isBorder);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'frm-br', isBorder ? '' : null);
     }
     if (changes.frameSize) {
       this.frameSize = FrameSizeUtil.create(this.frameSize, this.actualConfig?.frameSize || null);
       this.frameSizeVal = FrameSizeUtil.getValue(this.frameSize) || 0;
-      this.setProperty(this.hostRef, '--size', this.frameSizeVal > 0 ? this.frameSizeVal + 'px' : null);
+      HtmlElemUtil.setProperty(this.hostRef, '--size', this.frameSizeVal > 0 ? this.frameSizeVal + 'px' : null);
     }
     if (changes.exterior || changes.frameSize) {
-      this.setProperty(this.hostRef, '--br-rd', this.getBorderRadius(this.exterior, this.frameSizeVal));
-      this.labelPadding = this.getLabelPadding(this.frameSizeVal, this.exterior, this.actualConfig) || 0;
+      HtmlElemUtil.setProperty(this.hostRef, '--br-rd', this.getBorderRadius(this.exterior, this.frameSizeVal));
+      this.labelPadding = GrnFrameInputConfigUtil.getLabelPaddingHor(this.frameSizeVal, this.exterior, this.actualConfig) || 0;
+      this.changeDetectorRef.markForCheck();
       this.setPropertyLabelPaddingHor(this.labelPadding);
       this.setPropertyLabelPaddingVer(this.exterior, this.frameSizeVal, this.lineHeight);
       this.setPropertyLabel2Padding(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
     }
     if (changes.isLabelShrink) {
       this.isLabelShrink = this.createBoolean(this.isLabelShrink, this.actualConfig?.isLabelShrink);
-      this.setAttrAndClass(this.hostRef, 'gfi-shrink', 'shr', this.isLabelShrink ? '' : null);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-shrink', !!this.isLabelShrink);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'shr', this.isLabelShrink ? '' : null);
     }
     if (changes.hiddenLabel) {
       this.hiddenLabel = this.createBoolean(this.hiddenLabel, this.actualConfig?.hiddenLabel);
     }
     if (changes.isDisabled) {
-      this.setAttrAndClass(this.hostRef, 'gfi-disabled', 'dis', this.isDisabled ? '' : null);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-disabled', this.isDisabled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
     }
     if (changes.isFocused) {
-      this.setAttrAndClass(this.hostRef, 'gfi-focused', 'foc', this.isFocused ? '' : null);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-focused', this.isFocused);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'foc', this.isFocused ? '' : null);
     }
     if (changes.isFilled) {
-      this.setAttrAndClass(this.hostRef, 'gfi-filled', 'fil', this.isFilled ? '' : null);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-filled', this.isFilled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);
     }
     if (changes.isError) {
-      this.setAttrAndClass(this.hostRef, 'gfi-error', 'err', this.isError ? '' : null);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-error', this.isError);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isError ? '' : null);
     }
-    // public helperText: string | null = null;
     if (changes.label || changes.isRequired) {
-      this.setAttrAndClass(this.hostRef, 'gfi-lgn-indent', 'ind', !!this.label || this.isRequired ? '' : null);
+      const isIndent = !!this.label || this.isRequired;
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-lgn-indent', isIndent);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ind', isIndent ? '' : null);
     }
   }
 
@@ -153,7 +152,7 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     this.setPropertyLabelPaddingVer(this.exterior, this.frameSizeVal, this.lineHeight);
 
     this.ornamentLfWidth = this.grnOrnamentLf?.nativeElement.offsetWidth || 0;
-    this.setProperty(this.hostRef, '--orn-lf', this.ornamentLfWidth > 0 ? this.ornamentLfWidth + 'px' : null);
+    HtmlElemUtil.setProperty(this.hostRef, '--orn-lf', this.ornamentLfWidth > 0 ? this.ornamentLfWidth + 'px' : null);
 
     this.ornamentRgWidth = this.grnOrnamentRg?.nativeElement.offsetWidth || 0;
     this.setPropertyLabel2Padding(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
@@ -196,59 +195,21 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     return config;
   }
 
-  private setAttribute(element: ElementRef | undefined, attributeName: string, attributeValue: string | null): void {
-    if (element && element.nativeElement && attributeName) {
-      if (attributeValue != null) {
-        this.renderer.setAttribute(element.nativeElement, attributeName, attributeValue);
-      } else {
-        this.renderer.removeAttribute(element.nativeElement, attributeName);
-      }
-    }
-  }
-
-  private setProperty(element: ElementRef | undefined, propertyName: string, propertyValue: string | null): void {
-    if (element && element.nativeElement && propertyName) {
-      (element.nativeElement as HTMLElement).style.setProperty(propertyName, propertyValue);
-    }
-  }
-
-  private setClass(element: ElementRef | undefined, className: string, isAdd: boolean): void {
-    if (element && element.nativeElement && className) {
-      if (isAdd) {
-        this.renderer.addClass(element.nativeElement, className);
-      } else {
-        this.renderer.removeClass(element.nativeElement, className);
-      }
-    }
-  }
-
-  private setAttrAndClass(element: ElementRef | undefined, className: string, attrName: string, attrValue: string | null): void {
-    if (element && element.nativeElement && attrName && className) {
-      if (attrValue != null) {
-        this.renderer.setAttribute(element.nativeElement, attrName, attrValue);
-        this.renderer.addClass(element.nativeElement, className);
-      } else {
-        this.renderer.removeAttribute(element.nativeElement, attrName);
-        this.renderer.removeClass(element.nativeElement, className);
-      }
-    }
-  }
-
   private setPropertyLabelPaddingVer(exterior: Exterior | null, frameSize: number, lineHeight: number): void {
-    this.setProperty(this.hostRef, '--lbl-pd-tp', this.getLabelPaddingVer(true, exterior, frameSize, lineHeight));
-    this.setProperty(this.hostRef, '--lbl-pd-bt', this.getLabelPaddingVer(false, exterior, frameSize, lineHeight));
-    this.setProperty(this.hostRef, '--lbl-trn-y', this.getLabelTranslateY(exterior, frameSize, lineHeight));
-    this.setProperty(this.hostRef, '--lbl2-trn-y', this.getLabel2TranslateY(exterior, frameSize, lineHeight));
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-tp', this.getLabelPaddingVer(true, exterior, frameSize, lineHeight));
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-bt', this.getLabelPaddingVer(false, exterior, frameSize, lineHeight));
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-trn-y', this.getLabelTranslateY(exterior, frameSize, lineHeight));
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl2-trn-y', this.getLabel2TranslateY(exterior, frameSize, lineHeight));
   }
 
   private setPropertyLabelPaddingHor(labelPadding: number): void {
     const labelPaddingPx = labelPadding != null ? labelPadding + 'px' : labelPadding;
-    this.setProperty(this.hostRef, '--lbl-pd-lf', labelPaddingPx);
-    this.setProperty(this.hostRef, '--lbl-wd', this.getLabelMaxWidth(labelPadding));
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-lf', labelPaddingPx);
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-wd', this.getLabelMaxWidth(labelPadding));
   }
 
   private setPropertyLabel2Padding(labelPadding: number, ornamentLfWidth: number, ornamentRgWidth: number): void {
-    this.setProperty(this.hostRef, '--lbl2-wd', this.getLabel2MaxWidth(labelPadding, ornamentLfWidth, ornamentRgWidth));
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl2-wd', this.getLabel2MaxWidth(labelPadding, ornamentLfWidth, ornamentRgWidth));
   }
 
   // Determines the y transform value at the shrink position (top).
@@ -286,24 +247,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     if (labelPadding != null && labelPadding > -1) {
       const value = (ornamentLfWidth > 0 ? ornamentLfWidth : labelPadding) + (ornamentRgWidth > 0 ? ornamentRgWidth : labelPadding);
       result = value === 0 ? '100%' : 'calc(100% - ' + value.toFixed(2) + 'px)';
-    }
-    return result;
-  }
-
-  private getLabelPadding(frameSizeVal: number, exterior: Exterior | null, config: GrnFrameInputConfig | null): number | null {
-    let result: number | null = null;
-    if (frameSizeVal > 0 && !!exterior) {
-      switch (exterior) {
-        case Exterior.outlined:
-          result = config?.oLabelPd || Math.round(100 * 0.25 * frameSizeVal) / 100; // --lbl-pd-lf: calc(0.25*var(--size)); // TODO #2
-          break;
-        case Exterior.underline:
-          result = config?.uLabelPd || Math.round(100 * 0.21428 * frameSizeVal) / 100; // --lbl-pd-lf: calc(0.21428*var(--size));// TODO #2
-          break;
-        case Exterior.standard:
-          result = config?.sLabelPd || 0; // --lbl-pd: 0px;// TODO #2
-          break;
-      }
     }
     return result;
   }

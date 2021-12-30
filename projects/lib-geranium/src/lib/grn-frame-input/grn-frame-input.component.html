@@ -1,10 +1,8 @@
 <label *ngIf="!hiddenLabel"
-  class="gfi-label"
-  [attr.for]="inputId">
+  class="gfi-label">
   {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
 </label>
-<div [ngClass]="['gfi-frame'
-  ]"
+<div class="gfi-frame"
   (click)="doClickFrame($event)">
   <ng-content></ng-content>
   <fieldset *ngIf="isOutlinedExterior"
@@ -18,16 +16,3 @@
     </legend>
   </fieldset>
 </div>
-
-<!-- <p *ngIf="!!helperText"
-  [ngClass]="['gfi-helper-text'
-    , (isError ? 'gfi-error': '')
-    , (isDisabled ? 'gfi-disabled': '')
-    , (isFocused ? 'gfi-focused': '')
-  ]"
-  [attr.err]="isError ? '' : null"
-  [attr.foc]="isFocused ? '' : null"
-  [attr.dis]="isDisabled ? '' : null"
-  [attr.id]="inputId + '-helper-text'">
-  {{ helperText }}
-</p> -->

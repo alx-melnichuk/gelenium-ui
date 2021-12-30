@@ -7,50 +7,6 @@
 @import '../_styles/mx-transform-translate-x-y-scale.scss';
 
 grn-frame-input { //outline: 1px dashed crimson;
-
-  // The color of the label and border on mouse hover.
-  --g-hov-cl: rgba(0, 0, 0, 0.87);
-  // The color of the label and border in an error state.
-  --g-err-cl: #d32f2f;
-  // The color of the label and border on mouse hover in an error state.
-  --g-hov-err-cl: #ff0000; // #fb1b67
-  // The color of the border and label when getting focus.
-  --g-foc-cl: #1976d2;
-  // The color of the label and border in the state is disabled.
-  --g-dis-cl: #787878; // rgba(0, 0, 0, 0.38); //+
-
-  // For "label"
-  // The default color for the label.
-  --g-lbl-def-cl: rgba(0, 0, 0, 0.6); //++
-
-  // For "outlined" mode.
-  // Small indentation of the legend from the border for "outlined" mode.
-  --g-o-lgn-pd: 0.3437em; // # 5.5px
-
-  // For "frame" - outlined
-  // The default border color for "outlined" mode.
-  --g-o-def-br-cl: rgba(0, 0, 0, 0.23);
-
-  // For "frame" - underline
-  // The default background color for "underline" mode.
-  --g-u-def-bg-cl: rgba(0, 0, 0, 0.06); //+
-  // The background color on mouse hover for the "underline" mode.
-  --g-u-hov-bg-cl: #1976d20b; // rgba(0, 0, 0, 0.09); //+
-  // The background color in an error state for "underline" mode.
-  --g-u-err-bg-cl: #d32f2f0f; //rgba(150, 0, 0, 0.06); // #d32f2f0f
-  // The background color on mouse hover in an error state  for "underline" mode.
-  --g-u-hov-err-bg-cl: #d32f2f0b; // var(--g-u-hov-bg-cl);
-  // The background color when getting focus for "underline" mode.
-  --g-u-foc-bg-cl: #1976d20f; //rgba(0, 0, 0, 0.04);
-  // The background color in the state is disabled for the "underline" mode.
-  // --g-u-dis-bg-cl: rgba(0, 0, 0, 0.12); //+
-  --g-u-dis-bg-cl: #7878783b;
-
-  // For "frame" - standard and underline
-  // The default bottom border color for "underline" and "standard" modes.
-  --g-su-def-br-cl: rgba(0, 0, 0, 0.42);
-
-
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
   font-family: "Roboto","Helvetica","Arial",sans-serif;
@@ -102,17 +58,29 @@ grn-frame-input { //outline: 1px dashed crimson;
 
   // Color for "label".
   // The state without mouse hover, error, focused and disabled.
-  &:not(:hover):not([err]):not([foc]):not([dis])>label { color: var(--g-lbl-def-cl);  }
+  &:not(:hover):not([err]):not([foc]):not([dis])>label {
+    color: var(--gfi-lbl-def-cl);
+  }
   // The state with mouse hover but without error, focused and disabled.
-  &:hover:not([err]):not([foc]):not([dis])>label { color: var(--g-hov-cl);  }
+  &:hover:not([err]):not([foc]):not([dis])>label {
+    color: var(--gfi-hov-cl);
+  }
   // The state with error.
-  &[err]>label { color: var(--g-err-cl); }
+  &[err]>label {
+    color: var(--gfi-err-cl);
+  }
   // The state with mouse hover and error but without focused and disabled.
-  &:hover[err]:not([foc]):not([dis])>label { color: var(--g-hov-err-cl);  }
+  &:hover[err]:not([foc]):not([dis])>label {
+    color: var(--gfi-hov-err-cl);
+  }
   // The state with focused but without error.
-  &[foc]:not([err])>label { color: var(--g-foc-cl);  }
+  &[foc]:not([err])>label {
+    color: var(--gfi-foc-cl);
+  }
   // The state with disabled but without error.
-  &[dis]:not([err])>label { color: var(--g-dis-cl);  }
+  &[dis]:not([err])>label {
+    color: var(--gfi-dis-cl);
+  }
 
   // Section "Frame".
   div { // # outline: 1px dashed blueviolet;
@@ -123,7 +91,7 @@ grn-frame-input { //outline: 1px dashed crimson;
     border-radius: inherit;
   }
   &[dis]:not([err])>div {
-    color: var(--g-dis-cl); // The color in state is disabled for an input element.
+    color: var(--gfi-dis-cl); // The color in state is disabled for an input element.
   }
 
   input, textarea { // outline: 1px dashed orange; // # TODO temp;
@@ -186,18 +154,32 @@ grn-frame-input { //outline: 1px dashed crimson;
   // Border-bottom-color for "underline" and "standard" mode.
   &[frm-br] {
     // The state without mouse hover, error, focused and disabled.
-    &:not(:hover):not([err]):not([foc]):not([dis])>div:before { border-bottom-color: var(--g-su-def-br-cl);  }
+    &:not(:hover):not([err]):not([foc]):not([dis])>div:before {
+      border-bottom-color: var(--gfi-su-def-br-cl);
+    }
     // The state with mouse hover but without error, focused and disabled.
-    &:hover:not([err]):not([foc]):not([dis])>div:before { border-bottom-color: var(--g-hov-cl); }
+    &:hover:not([err]):not([foc]):not([dis])>div:before {
+      border-bottom-color: var(--gfi-hov-cl);
+    }
     // The state with error.
-    &[err]>div:before { border-bottom-color: var(--g-err-cl); }
-    &[err]>div:after { border-bottom-color: var(--g-err-cl); }
+    &[err]>div:before {
+      border-bottom-color: var(--gfi-err-cl);
+    }
+    &[err]>div:after {
+      border-bottom-color: var(--gfi-err-cl);
+    }
     // The state with mouse hover and error but without focused and disabled.
-    &:hover[err]:not([foc]):not([dis])>div:before { border-bottom-color: var(--g-hov-err-cl);  }
+    &:hover[err]:not([foc]):not([dis])>div:before {
+      border-bottom-color: var(--gfi-hov-err-cl);
+    }
     // The state with focused but without error.
-    &[foc]:not([err])>div:after { border-bottom-color: var(--g-foc-cl); }
+    &[foc]:not([err])>div:after {
+      border-bottom-color: var(--gfi-foc-cl);
+    }
     // The state with disabled but without error.
-    &[dis]:not([err])>div:before { border-bottom-color: var(--g-dis-cl); }
+    &[dis]:not([err])>div:before {
+      border-bottom-color: var(--gfi-dis-cl);
+    }
   }
 
   // underline
@@ -208,17 +190,29 @@ grn-frame-input { //outline: 1px dashed crimson;
   // Background-color for "underline" mode.
   &[ext-u] {
     // The state without mouse hover, error, focused and disabled.
-    &:not(:hover):not([err]):not([foc]):not([dis])>div {      background-color: var(--g-u-def-bg-cl);    }
+    &:not(:hover):not([err]):not([foc]):not([dis])>div {
+      background-color: var(--gfi-u-def-bg-cl);
+    }
     // The state with mouse hover but without error, focused and disabled.
-    &:hover:not([err]):not([foc]):not([dis])>div { background-color: var(--g-u-hov-bg-cl);  }
+    &:hover:not([err]):not([foc]):not([dis])>div {
+      background-color: var(--gfi-u-hov-bg-cl);
+    }
     // The state with error.
-    &[err]>div { background-color: var(--g-u-err-bg-cl); }
+    &[err]>div {
+      background-color: var(--gfi-u-err-bg-cl);
+    }
     // The state with mouse hover and error but without focused and disabled.
-    &:hover[err]:not([foc]):not([dis])>div { background-color: var(--g-u-hov-err-bg-cl); }
+    &:hover[err]:not([foc]):not([dis])>div {
+      background-color: var(--gfi-u-hov-err-bg-cl);
+    }
     // The state with focused but without error.
-    &[foc]:not([err])>div { background-color: var(--g-u-foc-bg-cl); }
+    &[foc]:not([err])>div {
+      background-color: var(--gfi-u-foc-bg-cl);
+    }
     // The state with disabled but without error.
-    &[dis]:not([err])>div { background-color: var(--g-u-dis-bg-cl); }
+    &[dis]:not([err])>div {
+      background-color: var(--gfi-u-dis-bg-cl);
+    }
   }
 
   // Section "Fieldset".
@@ -230,7 +224,7 @@ grn-frame-input { //outline: 1px dashed crimson;
     top: 0;
     left: 0;
     margin: 0;
-    padding: 0px calc(var(--lbl-pd-lf) - var(--g-o-lgn-pd)); // (14px - 4,4px)=9,6px;
+    padding: 0px calc(var(--lbl-pd-lf) - var(--gfi-o-lgn-pd)); // (14px - 4,4px)=9,6px;
     pointer-events: none;
     border-radius: inherit;
     border-style: solid;
@@ -246,17 +240,29 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
   // Border-color for "outlined" mode.
   // The state without mouse hover, error, focused and disabled.
-  &:not(:hover):not([err]):not([foc]):not([dis]) fieldset { border-color: var(--g-o-def-br-cl);  }
+  &:not(:hover):not([err]):not([foc]):not([dis]) fieldset {
+    border-color: var(--gfi-o-def-br-cl);
+  }
   // The state with mouse hover but without error, focused and disabled.
-  &:hover:not([err]):not([foc]):not([dis]) fieldset { border-color: var(--g-hov-cl);  }
+  &:hover:not([err]):not([foc]):not([dis]) fieldset {
+    border-color: var(--gfi-hov-cl);
+  }
   // The state with error.
-  &[err] fieldset { border-color: var(--g-err-cl); }
+  &[err] fieldset {
+    border-color: var(--gfi-err-cl);
+  }
   // The state with mouse hover and error but without focused and disabled.
-  &:hover[err]:not([foc]):not([dis]) fieldset { border-color: var(--g-hov-err-cl);  }
+  &:hover[err]:not([foc]):not([dis]) fieldset {
+    border-color: var(--gfi-hov-err-cl);
+  }
   // The state with focused but without error.
-  &[foc]:not([err]) fieldset { border-color: var(--g-foc-cl);  }
+  &[foc]:not([err]) fieldset {
+    border-color: var(--gfi-foc-cl);
+  }
   // The state with disabled but without error.
-  &[dis]:not([err]) fieldset { border-color: var(--g-dis-cl);  }
+  &[dis]:not([err]) fieldset {
+    border-color: var(--gfi-dis-cl);
+  }
 
   // Section "Legend".
   legend {
@@ -279,7 +285,7 @@ grn-frame-input { //outline: 1px dashed crimson;
       transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
     }
     &[ind] legend {
-      padding: 0 var(--g-o-lgn-pd);
+      padding: 0 var(--gfi-o-lgn-pd);
     }
   }
   &:not([shr]):not([fil]):not([foc]) legend { // .grn-frame-input:not(.gfi-shrink):not(.gfi-filled):not(.gfi-focused) .gfi-legend
@@ -288,38 +294,6 @@ grn-frame-input { //outline: 1px dashed crimson;
     transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
   }
   
-
-  // Section "HelperText"
-  p {
-    // font-family: "Roboto","Helvetica","Arial",sans-serif; // #!!
-    // font-weight: 400; // #!!
-    min-height: 1.1875em;
-    font-size: 0.75em; // #!! 12px
-    line-height: 1.66; // #!!
-    height: 1.66em;
-    // #!! letter-spacing: 0.03333em; // #!!
-    text-align: left;
-    margin-top: 3px;
-    margin-bottom: 0;
-    margin-right: var(--lbl-pd-lf); // # o:14px; u:12px; s:0px;
-    margin-left: var(--lbl-pd-lf); // # o:14px; u:12px; s:0px;
-  }
-
-  // Color for "helperText".
-  // The default color for the helperText. //.gfi-helper-text:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)
-  p:not([err]):not([foc]):not([dis]) {
-    color: var(--g-lbl-def-cl);
-  } // The color of the helperText in an error state. //.gfi-helper-text.gfi-error
-  p[err] {
-    color: var(--g-err-cl);
-  } // The color of the helperText when getting focus. //.gfi-helper-text.gfi-focused:not(.gfi-error)
-  p[foc]:not([err]) {
-    color: var(--g-lbl-def-cl);
-  } // The color of the helperText in state is disabled. //.gfi-helper-text.gfi-disabled:not(.gfi-error)
-  p[dis]:not([err]) {
-    color: var(--g-dis-cl);
-  }
-
   // ** Additional settings **
   
   // Ornament "padding".

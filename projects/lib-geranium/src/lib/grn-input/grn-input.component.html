@@ -1,6 +1,5 @@
 <ng-container [formGroup]="formGroup">
-  <grn-frame-input [inputId]="id"
-    [label]="label"
+  <grn-frame-input [label]="label"
     [exterior]="exteriorVal"
     [isRequired]="isRequiredVal"
     [isDisabled]="isDisabledVal"
@@ -9,23 +8,22 @@
     [isLabelShrink]="isLabelShrink"
     [hiddenLabel]="isHiddenLabel"
     [isError]="!!formControl.errors || isErrorVal"
-    [helperText]="helperText"
     [frameSize]="frameSizeVal"
     [config]="config">
     <span #grnOrnamentLf
       ornam-lf
-      [attr.ext-o]="exterior==='outlined'?'':null"
-      [attr.ext-u]="exterior==='underline'?'':null"
-      [attr.ext-s]="exterior==='standard'?'':null"
+      [attr.ext-o]="exterior === 'outlined' ? '' : null"
+      [attr.ext-u]="exterior === 'underline' ? '' : null"
+      [attr.ext-s]="exterior === 'standard' ? '' : null"
       [attr.orn-lf]="ornamLfAlign"
       class="gfi-ornam-lf">
       <ng-content select="[grnOrnamentLf]"></ng-content>
     </span>
     <span #grnOrnamentRg
       ornam-rg
-      [attr.ext-o]="exterior==='outlined'?'':null"
-      [attr.ext-u]="exterior==='underline'?'':null"
-      [attr.ext-s]="exterior==='standard'?'':null"
+      [attr.ext-o]="exterior === 'outlined' ? '' : null"
+      [attr.ext-u]="exterior === 'underline' ? '' : null"
+      [attr.ext-s]="exterior === 'standard' ? '' : null"
       [attr.orn-rg]="ornamRgAlign"
       class="gfi-ornam-rg">
       <ng-content select="[grnOrnamentRg]"></ng-content>
@@ -35,7 +33,7 @@
       elem-pd-ver
       [attr.id]="id"
       [type]="typeVal"
-      [ngClass]="['gi-input', 'gfi-elem', 'gfi-elem-pd-hor', 'GrnInputBase', 'gi-' + exteriorVal
+      [ngClass]="['gi-input', 'gfi-elem', 'gfi-elem-pd-hor', 'gi-' + exteriorVal
           , (isDisabledVal ? 'gfi-disabled': '')
           , (!!formControl.errors ? 'gfi-error': '')]"
       [attr.disabled]="isDisabledVal ? '': null"
@@ -54,3 +52,8 @@
       (keyup)="doKeyup($event)" />
   </grn-frame-input>
 </ng-container>
+<grn-hint-or-error [text]="helperText"
+  [isError]="!!formControl.errors || isErrorVal"
+  [isFocused]="isFocused"
+  [isDisabled]="isDisabledVal">
+</grn-hint-or-error>

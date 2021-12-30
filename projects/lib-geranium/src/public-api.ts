@@ -7,7 +7,8 @@ export * from './lib/lib-geranium.module';
 
 export * from './lib/directives/grn-regex/public-api';
 
-export * from './lib/grn-frame-input/grn-frame-input.module';
-export * from './lib/grn-infinite-scroll/grn-infinite-scroll.module';
-export * from './lib/grn-input/grn-input.module';
-export * from './lib/grn-textarea/grn-textarea.module';
+export * from './lib/grn-frame-input/public-api';
+export * from './lib/grn-hint-or-error/public-api';
+export * from './lib/grn-infinite-scroll/public-api';
+export * from './lib/grn-input/public-api';
+export * from './lib/grn-textarea/public-api';

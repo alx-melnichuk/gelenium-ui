@@ -1,0 +1,28 @@
+/*# sourceURL=grn-hint-or-error.component.scss */
+
+grn-hint-or-error {
+  display: block;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  min-height: 1.1875em;
+  font-size: 0.75em;
+  line-height: 1.66;
+  height: 1.66em;
+  text-align: left;
+  margin-top: 3px;
+  margin-bottom: 0;
+
+  // The state without error, focused and disabled.
+  &:not([err]):not([foc]):not([dis]) {
+    color: var(--gfi-lbl-def-cl);
+  } // The state with error.
+  &[err] {
+    color: var(--gfi-err-cl);
+  } // The state with focused but without error.
+  &[foc]:not([err]) {
+    color: var(--gfi-hov-cl);
+  } // The state with disabled but without error.
+  &[dis]:not([err]) {
+    color: var(--gfi-dis-cl);
+  }
+}
