@@ -33,13 +33,14 @@ import {
 
 import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
 import { GRN_FRAME_INPUT_CONFIG } from '../grn-frame-input/grn-frame-input.component';
-import { GrnFrameInputConfig, GrnFrameInputConfigUtil } from '../interfaces/grn-frame-input-config.interface';
+import { GrnFrameInputConfig } from '../interfaces/grn-frame-input-config.interface';
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 import { OrnamAlign, OrnamAlignUtil } from '../interfaces/ornam-align.interface';
+import { HtmlElemUtil } from '../utils/html-elem.util';
+import { LabelPaddingUtil } from '../utils/label-padding.util';
 
 import { InputType, InputTypeUtil } from './grn-input.interface';
-import { HtmlElemUtil } from '../utils/html-elem.util';
 
 let identifier = 0;
 
@@ -317,7 +318,7 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
 
   private getLabelPadding(exteriorVal: Exterior, frameSizeVal: FrameSize, actualConfig: GrnFrameInputConfig): number | null {
     const frameSizePx = FrameSizeUtil.getValue(frameSizeVal) || 0;
-    return GrnFrameInputConfigUtil.getLabelPaddingHor(frameSizePx, exteriorVal, actualConfig) || 0;
+    return LabelPaddingUtil.hor(frameSizePx, exteriorVal, actualConfig) || 0;
   }
 
   private setPropertyLabelPaddingHor(labelPadding: number): void {

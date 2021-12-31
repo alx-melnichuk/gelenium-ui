@@ -19,9 +19,10 @@ import {
 
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
-import { GrnFrameInputConfig, GrnFrameInputConfigUtil } from '../interfaces/grn-frame-input-config.interface';
+import { GrnFrameInputConfig } from '../interfaces/grn-frame-input-config.interface';
 import { OrnamAlign } from '../interfaces/ornam-align.interface';
 import { HtmlElemUtil } from '../utils/html-elem.util';
+import { LabelPaddingUtil } from '../utils/label-padding.util';
 
 export const GRN_FRAME_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('GRN_FRAME_INPUT_CONFIG');
 
@@ -109,7 +110,7 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     }
     if (changes.exterior || changes.frameSize) {
       HtmlElemUtil.setProperty(this.hostRef, '--br-rd', this.getBorderRadius(this.exterior, this.frameSizeVal));
-      this.labelPadding = GrnFrameInputConfigUtil.getLabelPaddingHor(this.frameSizeVal, this.exterior, this.actualConfig) || 0;
+      this.labelPadding = LabelPaddingUtil.hor(this.frameSizeVal, this.exterior, this.actualConfig) || 0;
       this.changeDetectorRef.markForCheck();
       this.setPropertyLabelPaddingHor(this.labelPadding);
       this.setPropertyLabelPaddingVer(this.exterior, this.frameSizeVal, this.lineHeight);
@@ -196,8 +197,8 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   }
 
   private setPropertyLabelPaddingVer(exterior: Exterior | null, frameSize: number, lineHeight: number): void {
-    HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-tp', this.getLabelPaddingVer(true, exterior, frameSize, lineHeight));
-    HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-bt', this.getLabelPaddingVer(false, exterior, frameSize, lineHeight));
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-tp', LabelPaddingUtil.ver(true, exterior, frameSize, lineHeight));
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-bt', LabelPaddingUtil.ver(false, exterior, frameSize, lineHeight));
     HtmlElemUtil.setProperty(this.hostRef, '--lbl-trn-y', this.getLabelTranslateY(exterior, frameSize, lineHeight));
     HtmlElemUtil.setProperty(this.hostRef, '--lbl2-trn-y', this.getLabel2TranslateY(exterior, frameSize, lineHeight));
   }
@@ -247,24 +248,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     if (labelPadding != null && labelPadding > -1) {
       const value = (ornamentLfWidth > 0 ? ornamentLfWidth : labelPadding) + (ornamentRgWidth > 0 ? ornamentRgWidth : labelPadding);
       result = value === 0 ? '100%' : 'calc(100% - ' + value.toFixed(2) + 'px)';
-    }
-    return result;
-  }
-
-  private getLabelPaddingVer(isTop: boolean, exterior: Exterior | null, frameSize: number, lineHeight: number): string | null {
-    let result: string | null = null;
-    if (exterior != null && frameSize > 0 && lineHeight > 0) {
-      switch (exterior) {
-        case Exterior.outlined:
-          result = String(((frameSize - lineHeight) / 2).toFixed(2)) + 'px'; // calc((var(--size) - var(--gfi-ln-hg))/2)
-          break;
-        case Exterior.underline:
-          result = String(((frameSize - lineHeight) * (isTop ? 0.75 : 0.25)).toFixed(2)) + 'px'; // calc((var(--size) - var(--gfi-ln-hg))*0.75)
-          break;
-        case Exterior.standard:
-          result = String(((frameSize - lineHeight) * (isTop ? 0.75 : 0.25)).toFixed(2)) + 'px'; // calc((var(--size) - var(--gfi-ln-hg))*0.75)
-          break;
-      }
     }
     return result;
   }
