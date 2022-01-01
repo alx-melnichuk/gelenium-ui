@@ -86,7 +86,6 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     this.actualConfig = this.initConfig(this.rootConfig || {});
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-frame-input', true);
   }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
       this.actualConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
@@ -108,7 +107,7 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
       this.frameSizeVal = FrameSizeUtil.getValue(this.frameSize) || 0;
       HtmlElemUtil.setProperty(this.hostRef, '--size', this.frameSizeVal > 0 ? this.frameSizeVal + 'px' : null);
     }
-    if (changes.exterior || changes.frameSize) {
+    if ((changes.exterior || changes.frameSize) && this.exterior && this.frameSizeVal > 0) {
       HtmlElemUtil.setProperty(this.hostRef, '--br-rd', this.getBorderRadius(this.exterior, this.frameSizeVal));
       this.labelPadding = LabelPaddingUtil.hor(this.frameSizeVal, this.exterior, this.actualConfig) || 0;
       this.changeDetectorRef.markForCheck();
@@ -195,12 +194,72 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     }
     return config;
   }
+  private initConfig2(config: GrnFrameInputConfig): GrnFrameInputConfig {
+    console.log('#initConfig() start'); // TODO del;
+    // exterior?: Exterior;
+    this.updateExterior(ExteriorUtil.create(this.exterior || null, config.exterior || null));
+    // frameSize?: FrameSize;
+    // frameSizeVal?: number;
+    this.updateFrameSize(FrameSizeUtil.create(this.frameSize, config.frameSize || null), config.frameSizeVal);
+    if (this.exterior && this.frameSizeVal > 0) {
+      this.updateExteriorAndFrameSize(this.exterior, this.frameSizeVal);
+    }
+    // isLabelShrink?: boolean;
+    // hiddenLabel?: boolean;
+    // ornamLfAlign?: OrnamAlign;
+    // ornamRgAlign?: OrnamAlign;
+    // // For "outlined" mode.
+    // oLabelPd?: number; // px
+    // // For "underline" mode.
+    // uLabelPd?: number; // px
+    // // For "standard" mode.
+    // sLabelPd?: number; // px
 
-  private setPropertyLabelPaddingVer(exterior: Exterior | null, frameSize: number, lineHeight: number): void {
-    HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-tp', LabelPaddingUtil.ver(true, exterior, frameSize, lineHeight));
-    HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-bt', LabelPaddingUtil.ver(false, exterior, frameSize, lineHeight));
-    HtmlElemUtil.setProperty(this.hostRef, '--lbl-trn-y', this.getLabelTranslateY(exterior, frameSize, lineHeight));
-    HtmlElemUtil.setProperty(this.hostRef, '--lbl2-trn-y', this.getLabel2TranslateY(exterior, frameSize, lineHeight));
+    this.isLabelShrink = this.createBoolean(this.isLabelShrink, config?.isLabelShrink);
+    this.hiddenLabel = this.createBoolean(this.hiddenLabel, config?.hiddenLabel);
+
+    console.log('#initConfig() finish'); // TODO del;
+    return config;
+  }
+
+  private updateExterior(exterior: Exterior): void {
+    console.log('#updateExterior()'); // TODO del;
+    this.exterior = exterior;
+    // this.exterior = ExteriorUtil.create(this.exterior, this.actualConfig?.exterior || null);
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-outlined', ExteriorUtil.isOutlined(this.exterior));
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ext-o', ExteriorUtil.isOutlined(this.exterior) ? '' : null);
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-underline', ExteriorUtil.isUnderline(this.exterior));
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ext-u', ExteriorUtil.isUnderline(this.exterior) ? '' : null);
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-standard', ExteriorUtil.isStandard(this.exterior));
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ext-s', ExteriorUtil.isStandard(this.exterior) ? '' : null);
+    const isBorder = ExteriorUtil.isStandard(this.exterior) || ExteriorUtil.isUnderline(this.exterior);
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-border', isBorder);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'frm-br', isBorder ? '' : null);
+  }
+  private updateFrameSize(frameSize: FrameSize | null, frameSizeVal: number | undefined): void {
+    console.log('#updateFrameSize()'); // TODO del;
+    this.frameSize = frameSize; // FrameSizeUtil.create(this.frameSize, this.actualConfig?.frameSize || null);
+    this.frameSizeVal = FrameSizeUtil.getValue(this.frameSize) || 0;
+    if (frameSizeVal && frameSizeVal > 0) {
+      this.frameSizeVal = frameSizeVal;
+    }
+    HtmlElemUtil.setProperty(this.hostRef, '--size', this.frameSizeVal > 0 ? this.frameSizeVal + 'px' : null);
+  }
+  private updateExteriorAndFrameSize(exterior: Exterior, frameSizeVal: number): void {
+    console.log('#updateExteriorAndFrameSize()'); // TODO del;
+    HtmlElemUtil.setProperty(this.hostRef, '--br-rd', this.getBorderRadius(exterior, frameSizeVal));
+    this.labelPadding = LabelPaddingUtil.hor(frameSizeVal, exterior, this.actualConfig) || 0;
+    this.changeDetectorRef.markForCheck();
+    this.setPropertyLabelPaddingHor(this.labelPadding);
+    this.setPropertyLabelPaddingVer(exterior, frameSizeVal, this.lineHeight);
+    this.setPropertyLabel2Padding(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
+  }
+
+  private setPropertyLabelPaddingVer(exterior: Exterior | null, frameSizeVal: number, lineHeight: number): void {
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-tp', LabelPaddingUtil.ver(true, exterior, frameSizeVal, lineHeight));
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-bt', LabelPaddingUtil.ver(false, exterior, frameSizeVal, lineHeight));
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-trn-y', this.getLabelTranslateY(exterior, frameSizeVal, lineHeight));
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl2-trn-y', this.getLabel2TranslateY(exterior, frameSizeVal, lineHeight));
   }
 
   private setPropertyLabelPaddingHor(labelPadding: number): void {
@@ -214,23 +273,23 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
   }
 
   // Determines the y transform value at the shrink position (top).
-  private getLabelTranslateY(exterior: Exterior | null, frameSize: number, lineHeight: number): string | null {
+  private getLabelTranslateY(exterior: Exterior | null, frameSizeVal: number, lineHeight: number): string | null {
     let result: string | null = null;
-    if (exterior != null && frameSize > 0 && lineHeight > 0) {
+    if (exterior != null && frameSizeVal > 0 && lineHeight > 0) {
       result = '-1.5px';
       if (exterior === Exterior.outlined) {
         result = ((-0.75 * lineHeight) / 2).toFixed(2) + 'px'; // # -8.28px
       } else if (exterior === Exterior.underline) {
-        result = (((frameSize - lineHeight) * 0.757524 - lineHeight * 0.5) * 0.45).toFixed(2) + 'px'; // # 6,0742314
+        result = (((frameSizeVal - lineHeight) * 0.757524 - lineHeight * 0.5) * 0.45).toFixed(2) + 'px'; // # 6,0742314
       }
     }
     return result;
   }
   // Determines the y transform value at the unshrink position (in the middle).
-  private getLabel2TranslateY(exterior: Exterior | null, frameSize: number, lineHeight: number): string | null {
+  private getLabel2TranslateY(exterior: Exterior | null, frameSizeVal: number, lineHeight: number): string | null {
     let result: string | null = null;
-    if (exterior != null && frameSize > 0 && lineHeight > 0) {
-      result = ((frameSize - lineHeight) * (Exterior.standard === exterior ? 0.75 : 0.5)).toFixed(2) + 'px';
+    if (exterior != null && frameSizeVal > 0 && lineHeight > 0) {
+      result = ((frameSizeVal - lineHeight) * (Exterior.standard === exterior ? 0.75 : 0.5)).toFixed(2) + 'px';
     }
     return result;
   }
@@ -252,13 +311,13 @@ export class GrnFrameInputComponent implements OnChanges, AfterContentInit {
     return result;
   }
 
-  private getBorderRadius(exterior: Exterior | null, frameSize: number): string | null {
+  private getBorderRadius(exterior: Exterior | null, frameSizeVal: number): string | null {
     let result: string | null = null;
-    if (exterior && frameSize > 0) {
+    if (exterior && frameSizeVal > 0) {
       if (exterior === Exterior.outlined) {
-        result = (frameSize / 10).toFixed(2) + 'px';
+        result = (frameSizeVal / 10).toFixed(2) + 'px';
       } else if (exterior === Exterior.underline) {
-        const value = (frameSize / 10).toFixed(2) + 'px';
+        const value = (frameSizeVal / 10).toFixed(2) + 'px';
         result = value + ' ' + value + ' 0 0';
       }
     }

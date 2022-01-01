@@ -6,13 +6,13 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
-  HostBinding,
   Inject,
   Input,
   OnChanges,
   Optional,
   Output,
   PLATFORM_ID,
+  Renderer2,
   SimpleChanges,
   ViewChild,
   ViewEncapsulation,
@@ -33,9 +33,9 @@ import {
 
 import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
 import { GRN_FRAME_INPUT_CONFIG } from '../grn-frame-input/grn-frame-input.component';
-import { GrnFrameInputConfig } from '../interfaces/grn-frame-input-config.interface';
 import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
+import { GrnFrameInputConfig } from '../interfaces/grn-frame-input-config.interface';
 import { OrnamAlign, OrnamAlignUtil } from '../interfaces/ornam-align.interface';
 import { HtmlElemUtil } from '../utils/html-elem.util';
 import { LabelPaddingUtil } from '../utils/label-padding.util';
@@ -113,10 +113,6 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
 
   @ViewChild('inputElement')
   public inputElementRef: ElementRef | null = null;
-  @HostBinding('class')
-  public get getClassesRoot(): string[] {
-    return ['GrnControl', 'GrnInputField'];
-  }
 
   public typeVal: InputType = InputType.text;
   public exteriorVal: Exterior = ExteriorUtil.create(null, null);
@@ -132,7 +128,6 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public isFocused = false;
   public isFilled = false;
-
   public ornamLfAlign: OrnamAlign = OrnamAlign.default;
   public ornamRgAlign: OrnamAlign = OrnamAlign.default;
   public actualConfig: GrnFrameInputConfig;
@@ -142,11 +137,14 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
     @Inject(PLATFORM_ID) private platformId: Object,
     private changeDetectorRef: ChangeDetectorRef,
     @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null,
-    private hostRef: ElementRef<HTMLElement>
+    private hostRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
   ) {
     this.actualConfig = this.initConfig(this.rootConfig || {});
     const labelPadding = this.getLabelPadding(this.exteriorVal, this.frameSizeVal, this.actualConfig) || 0;
     this.setPropertyLabelPaddingHor(labelPadding);
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-input', true);
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-control', true);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

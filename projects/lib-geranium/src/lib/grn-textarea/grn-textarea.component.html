@@ -42,3 +42,8 @@
     </textarea>
   </grn-frame-input>
 </ng-container>
+<grn-hint-or-error [text]="helperText"
+  [isError]="!!formControl.errors || isErrorVal"
+  [isFocused]="isFocused"
+  [isDisabled]="isDisabledVal">
+</grn-hint-or-error>

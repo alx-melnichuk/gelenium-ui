@@ -3,7 +3,7 @@
 app-frame-input-palette {
   display: block;
 
-  .fip-specific .grn-frame-input {
+  .fip-specific {
     --fip-hover-color: #00acc1;
     --fip-error-color: #ad1457;
     --fip-hover-error-color: #f3006a;
@@ -127,6 +127,22 @@ app-frame-input-palette {
   } // The color of the helperText in state is disabled.
   .fip-specific .gfi-helper-text.gfi-disabled:not(.gfi-error) {
     color: var(--fip-disabled-color);
+  }
+
+  .fip-specific .gfi-hint-or-error {
+    // The state without error, focused and disabled.
+    &:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
+      color: var(--fip-label-default-color);
+    } // The state with error.
+    &.gfi-error {
+      color: var(--fip-error-color);
+    } // The state with focused but without error.
+    &.gfi-focused:not(.gfi-error) {
+      color: var(--fip-focused-color);
+    } // The state with disabled but without error.
+    &.gfi-disabled:not(.gfi-error) {
+      color: var(--fip-disabled-color);
+    }
   }
 
   // BootStrap
