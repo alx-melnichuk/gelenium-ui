@@ -5,7 +5,7 @@ import { OrnamAlign } from './ornam-align.interface';
 export interface GrnFrameInputConfig {
   exterior?: Exterior;
   frameSize?: FrameSize;
-  frameSizeVal?: number;
+  frameSizeValue?: number;
   isLabelShrink?: boolean;
   hiddenLabel?: boolean;
   ornamLfAlign?: OrnamAlign;

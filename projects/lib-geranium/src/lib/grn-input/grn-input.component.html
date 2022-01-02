@@ -1,15 +1,15 @@
 <ng-container [formGroup]="formGroup">
-  <grn-frame-input [label]="label"
-    [exterior]="exteriorVal"
-    [isRequired]="isRequiredVal"
-    [isDisabled]="isDisabledVal"
-    [isFocused]="isFocused"
-    [isFilled]="isFilled"
-    [isLabelShrink]="isLabelShrink"
-    [hiddenLabel]="isHiddenLabel"
-    [isError]="!!formControl.errors || isErrorVal"
-    [frameSize]="frameSizeVal"
-    [config]="config">
+  <grn-frame-input label9="label"
+    [config]="config"
+    [exterior]="exterior2"
+    [frameSize]="frameSize2"
+    isLabelShrink9="isLabelShrink"
+    hiddenLabel9="isHiddenLabel"
+    isDisabled9="isDisabledVal"
+    isFocused9="isFocused"
+    isFilled9="isFilled"
+    isError9="!!formControl.errors || isErrorVal"
+    isRequired9="isRequiredVal">
     <span #grnOrnamentLf
       ornam-lf
       [attr.ext-o]="exterior === 'outlined' ? '' : null"
@@ -34,8 +34,8 @@
       [attr.id]="id"
       [type]="typeVal"
       [ngClass]="['gi-input', 'gfi-elem', 'gfi-elem-pd-hor', 'gi-' + exteriorVal
-          , (isDisabledVal ? 'gfi-disabled': '')
-          , (!!formControl.errors ? 'gfi-error': '')]"
+        , (isDisabledVal ? 'gfi-disabled': '')
+        , (!!formControl.errors ? 'gfi-error': '')]"
       [attr.disabled]="isDisabledVal ? '': null"
       [attr.autocomplete]="!!autoComplete ? autoComplete : null"
       [attr.readonly]="isReadOnlyVal ? '': null"

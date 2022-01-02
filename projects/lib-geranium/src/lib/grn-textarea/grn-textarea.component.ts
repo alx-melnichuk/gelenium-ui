@@ -111,12 +111,12 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   @ViewChild('textareaElement')
   public textareaElementRef: ElementRef | null = null;
 
-  public exteriorVal: Exterior = ExteriorUtil.create(null, null);
+  public exteriorVal: Exterior = ExteriorUtil.create(null);
   public isReadOnlyVal = false; // Binding attribute "isReadOnly".
   public isRequiredVal = false; // Binding attribute "isRequired".
   public isDisabledVal = false; // Binding attribute "isDisabled".
   public isLabelShrink: boolean | null = null; // Binding attribute "lbShrink".
-  public frameSizeVal: FrameSize = FrameSizeUtil.create(null, null);
+  public frameSizeVal: FrameSize = FrameSizeUtil.create(null);
   public isHiddenLabel: boolean | null = null; // Binding attribute "hiddenLabel".
   public isErrorVal = false; // Binding attribute "isError".
 
@@ -149,10 +149,10 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
       this.actualConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
     }
     if (changes.exterior) {
-      this.exteriorVal = ExteriorUtil.create(ExteriorUtil.convert(this.exterior), this.actualConfig?.exterior || null);
+      this.exteriorVal = ExteriorUtil.create(ExteriorUtil.convert(this.exterior) || this.actualConfig?.exterior || null);
     }
     if (changes.frameSize) {
-      this.frameSizeVal = FrameSizeUtil.create(FrameSizeUtil.convert(this.frameSize), this.actualConfig?.frameSize || null);
+      this.frameSizeVal = FrameSizeUtil.create(FrameSizeUtil.convert(this.frameSize) || this.actualConfig?.frameSize || null);
     }
     if (changes.exterior || changes.frameSize) {
       const labelPadding = this.getLabelPadding(this.exteriorVal, this.frameSizeVal, this.actualConfig) || 0;

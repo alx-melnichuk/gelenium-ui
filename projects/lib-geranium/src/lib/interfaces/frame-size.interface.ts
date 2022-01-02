@@ -19,11 +19,11 @@ export enum FrameSizeValue {
 }
 
 export class FrameSizeUtil {
-  public static create(value: FrameSize | null, defaultValue: FrameSize | null): FrameSize {
-    return FrameSizeUtil.convert((value || defaultValue || '').toString(), FrameSize.wide) as FrameSize;
+  public static create(value: FrameSize | null): FrameSize {
+    return FrameSizeUtil.convert((value || '').toString() || FrameSize.wide) as FrameSize;
   }
-  public static convert(value: string | null, defaultValue: FrameSize | null = null): FrameSize | null {
-    let result: FrameSize | null = defaultValue;
+  public static convert(value: string | null): FrameSize | null {
+    let result: FrameSize | null = null;
     switch (value) {
       case FrameSize.short.valueOf():
         result = FrameSize.short;

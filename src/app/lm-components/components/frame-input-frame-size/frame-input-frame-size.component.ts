@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/interfaces/grn-frame-input-config.interface';
+import { Exterior, FrameSize } from 'projects/lib-geranium/src/public-api';
 
 import {
   CN_LABEL_CSS,
@@ -44,7 +46,21 @@ export class FrameInputFrameSizeComponent {
   });
   public exterior02 = 'outlined';
   public isHiddenLabel = false;
-
+  public config: GrnFrameInputConfig = {
+    // exterior: Exterior.standard,
+    frameSize: FrameSize.large,
+    // frameSizeVal?: number;
+    // isLabelShrink?: boolean;
+    // hiddenLabel?: boolean;
+    // ornamLfAlign?: OrnamAlign;
+    // ornamRgAlign?: OrnamAlign;
+    // // For "outlined" mode.
+    // oLabelPd?: number; // px
+    // // For "underline" mode.
+    // uLabelPd?: number; // px
+    // // For "standard" mode.
+    // sLabelPd?: number; // px
+  };
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }
