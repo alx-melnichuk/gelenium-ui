@@ -116,18 +116,15 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
   public inputElementRef: ElementRef | null = null;
 
   public typeVal: InputType = InputType.text;
-  public exteriorVal: Exterior = ExteriorUtil.create(null);
   public exterior2: Exterior | null = null;
-  public innExterior: Exterior = ExteriorUtil.create(null);
+  public innExterior: Exterior | null = null;
+  public frameSize2: FrameSize | null = null;
+  public innFrameSizeValue = 0;
 
   public isReadOnlyVal = false; // Binding attribute "isReadOnly".
   public isRequiredVal = false; // Binding attribute "isRequired".
   public isDisabledVal = false; // Binding attribute "isDisabled".
   public isLabelShrink: boolean | null = null; // Binding attribute "lbShrink".
-  public frameSizeVal: FrameSize = FrameSizeUtil.create(null);
-  public frameSize2: FrameSize | null = null;
-  public innFrameSize: FrameSize = FrameSizeUtil.create(null);
-  public innFrameSizeValue: number | undefined;
 
   public isHiddenLabel: boolean | null = null; // Binding attribute "hiddenLabel".
   public isErrorVal = false; // Binding attribute "isError".
@@ -149,14 +146,14 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
     private renderer: Renderer2
   ) {
     this.currConfig = this.initConfig(this.rootConfig || {});
-    // const labelPadding = this.getLabelPadding(this.exteriorVal, this.frameSizeVal, this.actualConfig) || 0;
-    // this.setPropertyLabelPaddingHor(labelPadding);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-input', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-control', true);
+    console.log('');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
+      console.log('@Input.OnChanges config=', this.config);
       this.currConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
     }
     if (changes.type) {
@@ -164,14 +161,17 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
     }
     if (changes.exterior) {
       console.log('@Input.OnChanges exterior=', this.exterior);
-      this.updateExterior(ExteriorUtil.convert(this.exterior) || this.currConfig.exterior || null);
+      this.exterior2 = ExteriorUtil.convert(this.exterior);
+      this.innExterior = this.updateExterior(this.exterior2 || this.currConfig.exterior || null);
     }
     if (changes.frameSize) {
       console.log('@Input.OnChanges frameSize=', this.frameSize);
-      this.updateFrameSize(FrameSizeUtil.convert(this.frameSize) || this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
+      this.frameSize2 = FrameSizeUtil.convert(this.frameSize);
+      const configFrameSizeValue = this.currConfig.frameSizeValue;
+      this.innFrameSizeValue = this.updateFrameSizeValue(this.frameSize2 || this.currConfig.frameSize || null, configFrameSizeValue);
     }
-    if (changes.exterior || changes.frameSize) {
-      const labelPadding = this.getLabelPadding(this.exteriorVal, this.frameSizeVal, this.currConfig) || 0;
+    if ((changes.exterior || changes.frameSize) && this.innExterior && this.innFrameSizeValue > 0) {
+      const labelPadding = LabelPaddingUtil.hor(this.innFrameSizeValue, this.innExterior, this.currConfig) || 0;
       this.setPropertyLabelPaddingHor(labelPadding);
     }
     if (changes.lbShrink) {
@@ -200,41 +200,40 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
   }
 
   ngOnInit(): void {
-    const isExterior = !!this.exterior;
-    const isFrameSize = !!this.frameSize;
+    const isExterior = this.innExterior == null;
+    const isFrameSizeValue = this.innFrameSizeValue === 0;
     // exterior?: Exterior;
-    if (this.exterior == null) {
+    if (isExterior) {
       console.log('@Input.OnInit exterior=', this.exterior);
-      this.updateExterior(this.currConfig.exterior || null);
+      this.innExterior = this.updateExterior(this.currConfig.exterior || null);
     }
     // frameSize?: FrameSize;
     // frameSizeValue?: number;
-    if (this.frameSize == null) {
+    if (isFrameSizeValue) {
       console.log('@Input.OnInit frameSize=', this.frameSize);
-      this.updateFrameSize(this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
+      const configFrameSizeValue = this.currConfig.frameSizeValue;
+      this.innFrameSizeValue = this.updateFrameSizeValue(this.currConfig.frameSize || null, configFrameSizeValue);
     }
-    // if ((!isExterior || !isFrameSize) && this.exterior && this.frameSizeValue > 0) {
-    //   this.labelPadding = this.updateLabelPadding(this.exterior, this.frameSizeValue, this.currConfig);
-    //   this.setPropertyLabelPaddingHor(this.labelPadding);
-    // }
+    if ((isExterior || isFrameSizeValue) && this.innExterior && this.innFrameSizeValue > 0) {
+      const labelPadding = LabelPaddingUtil.hor(this.innFrameSizeValue, this.innExterior, this.currConfig) || 0;
+      this.setPropertyLabelPaddingHor(labelPadding);
+    }
   }
 
-  public updateExterior(exterior: Exterior | null): void {
-    console.log('@Input.updateExterior() exterior="' + exterior + '"'); // TODO del;
-    this.exterior2 = exterior;
-    this.innExterior = ExteriorUtil.create(exterior);
-    // this.exteriorVal = ExteriorUtil.create(ExteriorUtil.convert(this.exterior) || this.currConfig.exterior || null); // TODO del;
+  private updateExterior(exterior: Exterior | null): Exterior {
+    const result: Exterior = ExteriorUtil.create(exterior);
+    // const result: Exterior | null = ExteriorUtil.convert(exterior);
+    // this.innExterior = ExteriorUtil.create(result || configExterior || null);
+    console.log(`@Input.updateExterior() exterior="${exterior}" innExterior=${result}`); // TODO del;
+    return result;
   }
-  private updateFrameSize(frameSize: FrameSize | null, frameSizeValue: number | undefined): void {
-    console.log('@Input.updateFrameSize() frameSize=', frameSize, ' frameSizeValue=', frameSizeValue); // TODO del;
-    this.frameSize2 = frameSize;
-    this.innFrameSize = FrameSizeUtil.create(frameSize);
-    this.innFrameSizeValue = FrameSizeUtil.getValue(this.frameSize2) || 0;
+  private updateFrameSizeValue(frameSize: FrameSize | null, frameSizeValue?: number): number {
+    let result = FrameSizeUtil.getValue(FrameSizeUtil.create(frameSize)) || 0;
     if (frameSize === null && frameSizeValue && frameSizeValue > 0) {
-      this.innFrameSizeValue = frameSizeValue;
+      result = frameSizeValue;
     }
-    console.log('@Input.updateFrameSize() innFrameSizeValue=', this.innFrameSizeValue);
-    // HtmlElemUtil.setProperty(this.hostRef, '--size', this.frameSizeValue > 0 ? this.frameSizeValue + 'px' : null);
+    console.log(`@Input.updateFrameSize() frameSize="${frameSize}" innFrameSizeValue=${result}`); // TODO del;
+    return result;
   }
 
   // ** ControlValueAccessor - start **
@@ -360,11 +359,6 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
     this.ornamLfAlign = OrnamAlignUtil.create(config?.ornamLfAlign || this.ornamLfAlign, null);
     this.ornamRgAlign = OrnamAlignUtil.create(config?.ornamRgAlign || this.ornamRgAlign, null);
     return config;
-  }
-
-  private getLabelPadding(exteriorVal: Exterior, frameSizeVal: FrameSize, actualConfig: GrnFrameInputConfig): number | null {
-    const frameSizePx = FrameSizeUtil.getValue(frameSizeVal) || 0;
-    return LabelPaddingUtil.hor(frameSizePx, exteriorVal, actualConfig) || 0;
   }
 
   private setPropertyLabelPaddingHor(labelPadding: number): void {

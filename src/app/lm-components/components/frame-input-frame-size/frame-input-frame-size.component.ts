@@ -47,7 +47,7 @@ export class FrameInputFrameSizeComponent {
   public exterior02 = 'outlined';
   public isHiddenLabel = false;
   public config: GrnFrameInputConfig = {
-    // exterior: Exterior.standard,
+    exterior: Exterior.standard,
     frameSize: FrameSize.large,
     // frameSizeVal?: number;
     // isLabelShrink?: boolean;
@@ -61,6 +61,11 @@ export class FrameInputFrameSizeComponent {
     // // For "standard" mode.
     // sLabelPd?: number; // px
   };
+  public config2: GrnFrameInputConfig = {
+    exterior: Exterior.underline,
+    frameSize: FrameSize.middle,
+  };
+  public isConfig2 = false;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }

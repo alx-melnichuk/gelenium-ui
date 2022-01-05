@@ -1,8 +1,8 @@
 <ng-container [formGroup]="formGroup">
   <grn-frame-input label9="label"
     [config]="config"
-    [exterior]="exterior2"
-    [frameSize]="frameSize2"
+    exterior9="exterior2"
+    frameSize9="frameSize2"
     isLabelShrink9="isLabelShrink"
     hiddenLabel9="isHiddenLabel"
     isDisabled9="isDisabledVal"
@@ -33,7 +33,7 @@
       elem-pd-ver
       [attr.id]="id"
       [type]="typeVal"
-      [ngClass]="['gi-input', 'gfi-elem', 'gfi-elem-pd-hor', 'gi-' + exteriorVal
+      [ngClass]="['gi-input', 'gfi-elem', 'gfi-elem-pd-hor', 'gi-' + innExterior
         , (isDisabledVal ? 'gfi-disabled': '')
         , (!!formControl.errors ? 'gfi-error': '')]"
       [attr.disabled]="isDisabledVal ? '': null"
