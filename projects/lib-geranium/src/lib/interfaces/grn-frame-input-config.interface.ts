@@ -8,6 +8,7 @@ export interface GrnFrameInputConfig {
   frameSizeValue?: number;
   isLabelShrink?: boolean;
   hiddenLabel?: boolean;
+  labelPd?: number; // px
   ornamLfAlign?: OrnamAlign;
   ornamRgAlign?: OrnamAlign;
   // For "outlined" mode.

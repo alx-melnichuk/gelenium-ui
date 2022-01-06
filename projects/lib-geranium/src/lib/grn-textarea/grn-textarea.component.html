@@ -1,20 +1,31 @@
 <ng-container [formGroup]="formGroup">
   <grn-frame-input [label]="label"
-    [exterior]="exteriorVal"
-    [isRequired]="isRequiredVal"
-    [isDisabled]="isDisabledVal"
+    [config]="config"
+    [exterior]="exterior2"
+    [frameSize]="frameSize2"
+    [isLabelShrink]="isLabelShrink2"
+    [hiddenLabel]="isHiddenLabel2"
+    [isDisabled]="isDisabled2"
     [isFocused]="isFocused"
     [isFilled]="isFilled"
-    [isLabelShrink]="isLabelShrink"
-    [hiddenLabel]="isHiddenLabel"
-    [isError]="!!formControl.errors || isErrorVal"
-    [frameSize]="frameSizeVal"
+    [isError]="!!formControl.errors || isError2"
+    [isRequired]="isRequired2"
     (clickFrame)="doClickFrame()">
     <span #grnOrnamentLf
+      ornam-lf
+      [attr.ext-o]="isOutlined ? '' : null"
+      [attr.ext-u]="isUnderline ? '' : null"
+      [attr.ext-s]="isStandard ? '' : null"
+      [attr.orn-lf]="ornamLfAlign"
       class="gfi-ornam-lf">
       <ng-content select="[grnOrnamentLf]"></ng-content>
     </span>
     <span #grnOrnamentRg
+      ornam-rg
+      [attr.ext-o]="isOutlined ? '' : null"
+      [attr.ext-u]="isUnderline ? '' : null"
+      [attr.ext-s]="isStandard ? '' : null"
+      [attr.orn-rg]="ornamRgAlign"
       class="gfi-ornam-rg">
       <ng-content select="[grnOrnamentRg]"></ng-content>
     </span>
@@ -24,13 +35,13 @@
       elem-mr-ver
       [attr.id]="id"
       [rows]="currentRows"
-      [ngClass]="['gt-textarea', 'gfi-elem', 'gfi-elem-mr-ver', 'gfi-elem-pd-hor', 'GrnTextareaBase', 'gt-' + exteriorVal
-        , (isDisabledVal ? 'gfi-disabled': '')
+      [ngClass]="['gt-textarea', 'gfi-elem', 'gfi-elem-mr-ver', 'gfi-elem-pd-hor', 'GrnTextareaBase', 'gt-' + exterior2
+        , (isDisabled2 ? 'gfi-disabled': '')
         , (!!formControl.errors ? 'gfi-error': '')
       ]"
-      [attr.disabled]="isDisabledVal ? '': null"
+      [attr.disabled]="isDisabled2 ? '': null"
       [attr.autocomplete]="!!autoComplete ? autoComplete : null"
-      [attr.readonly]="isReadOnlyVal ? '': null"
+      [attr.readonly]="isReadOnly2 ? '': null"
       (focus)="doFocus()"
       (blur)="doBlur()"
       (input)="doInput($event)"
@@ -42,8 +53,9 @@
     </textarea>
   </grn-frame-input>
 </ng-container>
-<grn-hint-or-error [text]="helperText"
-  [isError]="!!formControl.errors || isErrorVal"
+<grn-hint-or-error *ngIf="!!helperText"
+  [text]="helperText"
+  [isError]="!!formControl.errors || isError2"
   [isFocused]="isFocused"
-  [isDisabled]="isDisabledVal">
+  [isDisabled]="isDisabled2">
 </grn-hint-or-error>

@@ -1,5 +1,4 @@
 import { Exterior } from '../interfaces/exterior.interface';
-import { GrnFrameInputConfig } from '../interfaces/grn-frame-input-config.interface';
 
 export class LabelPaddingUtil {
   // Get the top or bottom padding for the GrnFrameInpu element.
@@ -21,19 +20,13 @@ export class LabelPaddingUtil {
     return result;
   }
   // Get left/right padding for the GrnFrameInpu element.
-  public static hor(frameSizeVal: number, exterior: Exterior | null, config: GrnFrameInputConfig | null): number | null {
-    let result: number | null = null;
-    if (frameSizeVal > 0 && !!exterior) {
-      switch (exterior) {
-        case Exterior.outlined:
-          result = config?.oLabelPd || Math.round(100 * 0.25 * frameSizeVal) / 100; // --lbl-pd-lf: calc(0.25*var(--size)); // TODO #2
-          break;
-        case Exterior.underline:
-          result = config?.uLabelPd || Math.round(100 * 0.21428 * frameSizeVal) / 100; // --lbl-pd-lf: calc(0.21428*var(--size));// TODO #2
-          break;
-        case Exterior.standard:
-          result = config?.sLabelPd || 0; // --lbl-pd: 0px;// TODO #2
-          break;
+  public static hor(frameSizeVal: number, exterior: Exterior): number {
+    let result = 0;
+    if (frameSizeVal > 0) {
+      if (exterior === Exterior.outlined) {
+        result = Math.round(100 * 0.25 * frameSizeVal) / 100; // --lbl-pd-lf: calc(0.25*var(--size)); // TODO #2
+      } else if (exterior === Exterior.underline) {
+        result = Math.round(100 * 0.21428 * frameSizeVal) / 100; // --lbl-pd-lf: calc(0.21428*var(--size));// TODO #2
       }
     }
     return result;

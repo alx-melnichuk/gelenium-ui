@@ -9,6 +9,7 @@ import {
   Inject,
   Input,
   OnChanges,
+  OnInit,
   Optional,
   Output,
   PLATFORM_ID,
@@ -55,7 +56,7 @@ let identifier = 0;
     { provide: GRN_NODE_INTERNAL_VALIDATOR, useExisting: GrnTextareaComponent },
   ],
 })
-export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Validator, GrnNodeInternalValidator {
+export class GrnTextareaComponent implements OnChanges, OnInit, ControlValueAccessor, Validator, GrnNodeInternalValidator {
   @Input()
   public id = 'grn_textarea_' + ++identifier;
   @Input()
@@ -75,9 +76,9 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   @Input()
   public isError: string | null = null;
   @Input()
-  public helperText: string | null = null;
-  @Input()
   public isRequired: string | null = null;
+  @Input()
+  public helperText: string | null = null;
   @Input()
   public isReadOnly: string | null = null;
   @Input()
@@ -111,14 +112,29 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   @ViewChild('textareaElement')
   public textareaElementRef: ElementRef | null = null;
 
-  public exteriorVal: Exterior = ExteriorUtil.create(null);
-  public isReadOnlyVal = false; // Binding attribute "isReadOnly".
-  public isRequiredVal = false; // Binding attribute "isRequired".
-  public isDisabledVal = false; // Binding attribute "isDisabled".
-  public isLabelShrink: boolean | null = null; // Binding attribute "lbShrink".
-  public frameSizeVal: FrameSize = FrameSizeUtil.create(null);
-  public isHiddenLabel: boolean | null = null; // Binding attribute "hiddenLabel".
-  public isErrorVal = false; // Binding attribute "isError".
+  public get isOutlined(): boolean {
+    return ExteriorUtil.isOutlined(this.innExterior);
+  }
+  public get isUnderline(): boolean {
+    return ExteriorUtil.isUnderline(this.innExterior);
+  }
+  public get isStandard(): boolean {
+    return ExteriorUtil.isStandard(this.innExterior);
+  }
+
+  public currConfig: GrnFrameInputConfig = {};
+  public exterior2: Exterior | null = null;
+  public innExterior: Exterior | null = null;
+  public frameSize2: FrameSize | null = null;
+  public innFrameSizeValue = 0;
+  public isLabelShrink2: boolean | null = null; // Binding attribute "lbShrink".
+  public isHiddenLabel2: boolean | null = null; // Binding attribute "hiddenLabel".
+  public labelPadding = 0;
+
+  public isReadOnly2 = false; // Binding attribute "isReadOnly".
+  public isRequired2 = false; // Binding attribute "isRequired".
+  public isDisabled2 = false; // Binding attribute "isDisabled".
+  public isError2 = false; // Binding attribute "isError".
 
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
@@ -126,7 +142,6 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   public isFilled = false;
   public ornamLfAlign: OrnamAlign = OrnamAlign.default;
   public ornamRgAlign: OrnamAlign = OrnamAlign.default;
-  public actualConfig: GrnFrameInputConfig;
   public currentRows = 1;
 
   constructor(
@@ -137,55 +152,83 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     private hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {
-    this.actualConfig = this.initConfig(this.rootConfig || {});
-    const labelPadding = this.getLabelPadding(this.exteriorVal, this.frameSizeVal, this.actualConfig) || 0;
-    this.setPropertyLabelPaddingHor(labelPadding);
+    this.currConfig = this.initConfig(this.rootConfig || {});
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-textarea', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-control', true);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    let isLabelPadding = false;
     if (changes.config) {
-      this.actualConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
+      console.log('%Text.OnChanges config=', this.config);
+      this.currConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
     }
-    if (changes.exterior) {
-      this.exteriorVal = ExteriorUtil.create(ExteriorUtil.convert(this.exterior) || this.actualConfig?.exterior || null);
+    if (changes.exterior || (changes.config && !this.exterior)) {
+      console.log('%Text.OnChanges exterior=', this.exterior);
+      this.exterior2 = ExteriorUtil.convert(this.exterior);
+      this.innExterior = this.updateExterior(this.exterior2 || this.currConfig.exterior || null);
+      isLabelPadding = true;
     }
-    if (changes.frameSize) {
-      this.frameSizeVal = FrameSizeUtil.create(FrameSizeUtil.convert(this.frameSize) || this.actualConfig?.frameSize || null);
+    if (changes.frameSize || (changes.config && !this.frameSize)) {
+      console.log('%Text.OnChanges frameSize=', this.frameSize);
+      this.frameSize2 = FrameSizeUtil.convert(this.frameSize);
+      const configFrameSizeValue = this.currConfig.frameSizeValue;
+      this.innFrameSizeValue = this.updateFrameSizeValue(this.frameSize2 || this.currConfig.frameSize || null, configFrameSizeValue);
+      isLabelPadding = true;
     }
-    if (changes.exterior || changes.frameSize) {
-      const labelPadding = this.getLabelPadding(this.exteriorVal, this.frameSizeVal, this.actualConfig) || 0;
-      this.setPropertyLabelPaddingHor(labelPadding);
+    if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
+      const labelPd = this.currConfig?.labelPd || 0;
+      this.labelPadding = labelPd > 0 ? labelPd : LabelPaddingUtil.hor(this.innFrameSizeValue, this.innExterior);
+      this.setPropertyLabelPaddingHor(this.labelPadding);
     }
     if (changes.lbShrink) {
-      this.isLabelShrink = this.lbShrink === '' || this.lbShrink === 'true' ? true : this.lbShrink === 'false' ? false : null;
+      this.isLabelShrink2 = this.lbShrink === '' || this.lbShrink === 'true' ? true : this.lbShrink === 'false' ? false : null;
     }
     if (changes.hiddenLabel) {
-      this.isHiddenLabel = this.hiddenLabel !== null;
+      this.isHiddenLabel2 = this.hiddenLabel !== null;
     }
     if (changes.isDisabled) {
-      this.isDisabledVal = this.isDisabled !== null;
-      this.setDisabledState(this.isDisabledVal);
+      this.isDisabled2 = this.isDisabled !== null;
+      this.setDisabledState(this.isDisabled2);
     }
     if (changes.isError) {
-      this.isErrorVal = this.isError !== null;
+      this.isError2 = this.isError !== null;
     }
     if (changes.isRequired) {
-      this.isRequiredVal = this.isRequired !== null;
+      this.isRequired2 = this.isRequired !== null;
     }
     if (changes.isReadOnly) {
-      this.isReadOnlyVal = this.isReadOnly !== null;
+      this.isReadOnly2 = this.isReadOnly !== null;
     }
 
     if (changes.isRequired || changes.minLength || changes.maxLength) {
-      this.prepareFormGroup(this.isRequiredVal, this.minLength, this.maxLength);
+      this.prepareFormGroup(this.isRequired2, this.minLength, this.maxLength);
     }
     if (changes.minRows || changes.maxRows) {
       this.updateCurrentRows('', this.cntRows, this.minRows, this.maxRows);
     }
     if (changes.cntRows) {
       this.currentRows = this.cntRows != null && this.cntRows > 0 ? this.cntRows : this.currentRows;
+    }
+  }
+
+  ngOnInit(): void {
+    let isLabelPadding = false;
+    if (this.innExterior == null) {
+      console.log('%Text.OnInit exterior=', this.exterior);
+      this.innExterior = this.updateExterior(this.currConfig.exterior || null);
+      isLabelPadding = true;
+    }
+    if (this.innFrameSizeValue === 0) {
+      console.log('%Text.OnInit frameSize=', this.frameSize);
+      const configFrameSizeValue = this.currConfig.frameSizeValue;
+      this.innFrameSizeValue = this.updateFrameSizeValue(this.currConfig.frameSize || null, configFrameSizeValue);
+      isLabelPadding = true;
+    }
+    if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
+      const labelPd = this.currConfig?.labelPd || 0;
+      const labelPadding = labelPd > 0 ? labelPd : LabelPaddingUtil.hor(this.innFrameSizeValue, this.innExterior);
+      this.setPropertyLabelPaddingHor(labelPadding);
     }
   }
 
@@ -303,10 +346,10 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
 
   // ** Private API **
 
-  private prepareFormGroup(isRequiredVal: boolean, minLength: number | null, maxLength: number | null): void {
+  private prepareFormGroup(isRequired: boolean, minLength: number | null, maxLength: number | null): void {
     this.formControl.clearValidators();
     const newValidator: ValidatorFn[] = [];
-    if (isRequiredVal) {
+    if (isRequired) {
       newValidator.push(Validators.required);
     }
     if (!!minLength && minLength > 0) {
@@ -324,9 +367,19 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     return config;
   }
 
-  private getLabelPadding(exteriorVal: Exterior, frameSizeVal: FrameSize, actualConfig: GrnFrameInputConfig): number | null {
-    const frameSizePx = FrameSizeUtil.getValue(frameSizeVal) || 0;
-    return LabelPaddingUtil.hor(frameSizePx, exteriorVal, actualConfig) || 0;
+  private updateExterior(exterior: Exterior | null): Exterior {
+    const result: Exterior = ExteriorUtil.create(exterior);
+    console.log(`%Text.updateExterior() exterior="${exterior}" innExterior=${result}`); // TODO del;
+    return result;
+  }
+
+  private updateFrameSizeValue(frameSize: FrameSize | null, frameSizeValue?: number): number {
+    let result = FrameSizeUtil.getValue(FrameSizeUtil.create(frameSize)) || 0;
+    if (frameSize === null && frameSizeValue && frameSizeValue > 0) {
+      result = frameSizeValue;
+    }
+    console.log(`%Text.updateFrameSize() frameSize="${frameSize}" innFrameSizeValue=${result}`); // TODO del;
+    return result;
   }
 
   private setPropertyLabelPaddingHor(labelPadding: number): void {

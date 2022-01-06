@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Exterior } from 'projects/lib-geranium/src/lib/interfaces/exterior.interface';
+import { FrameSize } from 'projects/lib-geranium/src/lib/interfaces/frame-size.interface';
+import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/interfaces/grn-frame-input-config.interface';
 
 import {
   CN_LABEL_CSS,
@@ -58,4 +61,19 @@ export class TextareaOrnamentsComponent {
   public isBtnEyeCrossed05h = false;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
+  public config: GrnFrameInputConfig = {
+    // exterior: Exterior.outlined,
+    exterior: Exterior.underline,
+    // exterior: Exterior.standard,
+    // frameSizeVal?: number;
+    frameSize: FrameSize.middle,
+    // frameSize: FrameSize.large,
+    // frameSizeValue: 54,
+    // isLabelShrink: true, // isLabelShrink?: boolean;
+    // hiddenLabel: true, // hiddenLabel?: boolean;
+    // ornamLfAlign?: OrnamAlign;
+    // ornamRgAlign?: OrnamAlign;
+    labelPd: 18, // labelPd?: number; // px
+  };
+  public isConfig = false;
 }

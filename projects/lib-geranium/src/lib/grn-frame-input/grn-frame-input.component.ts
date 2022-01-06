@@ -1,7 +1,6 @@
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -71,16 +70,17 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
     return ExteriorUtil.isOutlined(this.innExterior);
   }
 
+  public currConfig: GrnFrameInputConfig = {};
   public innExterior: Exterior | null = null;
   public innFrameSizeValue = 0;
-  public lineHeight = 0;
+  public innIsLabelShrink: boolean | null = null;
+  public innHiddenLabel: boolean | null = null;
   public labelPadding = 0;
+  public lineHeight = 0;
   public ornamentLfWidth = 0;
   public ornamentRgWidth = 0;
-  public currConfig: GrnFrameInputConfig = {};
 
   constructor(
-    private changeDetectorRef: ChangeDetectorRef,
     @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null,
     private hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
@@ -90,40 +90,40 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    let isLabelPadding = false;
     let isConfigFirstChange = false;
     if (changes.config) {
       console.log('Frame.OnChanges config=', this.config);
       this.currConfig = { ...(this.rootConfig || {}), ...(this.config || {}) };
       isConfigFirstChange = changes.config.firstChange;
     }
-    const isChangeExterior = changes.config && !this.exterior;
-    if (changes.exterior || isChangeExterior) {
+    if (changes.exterior || (changes.config && !this.exterior)) {
       console.log('Frame.OnChanges exterior=', this.exterior);
       this.innExterior = this.updateExterior(this.exterior || this.currConfig.exterior || null);
+      isLabelPadding = true;
     }
-    const isChangeFrameSize = changes.config && !this.frameSize;
-    if (changes.frameSize || isChangeFrameSize) {
+    if (changes.frameSize || (changes.config && !this.frameSize)) {
       console.log('Frame.OnChanges frameSize=', this.frameSize);
       this.innFrameSizeValue = this.updateFrameSize(this.frameSize || this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
+      isLabelPadding = true;
     }
-    const isChangeExteriorOrFrameSize = isChangeExterior || isChangeFrameSize;
-    if ((changes.exterior || changes.frameSize || isChangeExteriorOrFrameSize) && this.innExterior && this.innFrameSizeValue > 0) {
-      console.log('Frame.OnChanges exterior || frameSize  exterior=', this.innExterior, ' frameSize=', this.frameSize);
-      this.labelPadding = this.updateLabelPadding(this.innExterior, this.innFrameSizeValue, this.currConfig);
+    if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
+      console.log('Frame.OnChanges LabelPadding  exterior=', this.innExterior, ' frameSize=', this.frameSize); // TODO !!!
+      this.labelPadding = this.updateLabelPadding(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
       this.setPropertyLabelPaddingHor(this.labelPadding);
       const eFirst = changes.exterior?.firstChange;
       const fFirst = changes.frameSize?.firstChange;
-      console.log(`Frame.OnChanges exterior || frameSize  cFirstChange=${isConfigFirstChange} eFirstChan=${eFirst} fFirstChan=${fFirst}`);
+      console.log(`Frame.OnChanges LabelPadding  cFirChan=${isConfigFirstChange} exteriorFirChan=${eFirst} frameSizeFirChan=${fFirst}`);
       if (!(isConfigFirstChange || changes.exterior?.firstChange || changes.frameSize?.firstChange)) {
         this.setPropertyLabelPaddingVer(this.innExterior, this.innFrameSizeValue, this.lineHeight);
         this.setPropertyLabel2Padding(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
       }
     }
-    if (changes.isLabelShrink) {
-      this.updateLabelShrink(this.isLabelShrink != null ? this.isLabelShrink : this.currConfig.isLabelShrink || false);
+    if (changes.isLabelShrink || (changes.config && this.isLabelShrink == null)) {
+      this.innIsLabelShrink = this.updateLabelShrink(this.isLabelShrink, this.currConfig.isLabelShrink);
     }
-    if (changes.hiddenLabel) {
-      this.hiddenLabel = this.createBoolean(this.hiddenLabel, this.currConfig.hiddenLabel || false);
+    if (changes.hiddenLabel || (changes.config && this.hiddenLabel == null)) {
+      this.innHiddenLabel = this.updateHiddenLabel(this.hiddenLabel, this.currConfig.hiddenLabel);
     }
     if (changes.isDisabled) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-disabled', this.isDisabled);
@@ -149,34 +149,27 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
   }
 
   ngOnInit(): void {
-    const isExterior = this.innExterior == null;
-    const isFrameSizeValue = this.innFrameSizeValue === 0;
-    // exterior?: Exterior;
-    if (isExterior) {
+    let isLabelPadding = false;
+    if (this.innExterior == null) {
       console.log('Frame.OnInit exterior=', this.innExterior);
       this.innExterior = this.updateExterior(this.currConfig.exterior || null);
+      isLabelPadding = true;
     }
-    // frameSize?: FrameSize;
-    // frameSizeValue?: number;
-    if (isFrameSizeValue) {
+    if (this.innFrameSizeValue === 0) {
       console.log('Frame.OnInit frameSize=', this.frameSize);
       this.innFrameSizeValue = this.updateFrameSize(this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
+      isLabelPadding = true;
     }
-    if ((isExterior || isFrameSizeValue) && this.innExterior && this.innFrameSizeValue > 0) {
-      this.labelPadding = this.updateLabelPadding(this.innExterior, this.innFrameSizeValue, this.currConfig);
+    if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
+      this.labelPadding = this.updateLabelPadding(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
       this.setPropertyLabelPaddingHor(this.labelPadding);
     }
-    // isLabelShrink?: boolean;
-    if (this.isLabelShrink == null) {
-      this.updateLabelShrink(this.currConfig.isLabelShrink || false);
+    if (this.innIsLabelShrink == null) {
+      this.innIsLabelShrink = this.updateLabelShrink(this.isLabelShrink, this.currConfig.isLabelShrink);
     }
-    // hiddenLabel?: boolean;
-    if (this.hiddenLabel == null) {
-      this.hiddenLabel = this.currConfig.hiddenLabel || false;
+    if (this.innHiddenLabel == null) {
+      this.innHiddenLabel = this.updateHiddenLabel(this.hiddenLabel, this.currConfig.hiddenLabel);
     }
-    // oLabelPd?: number; // px
-    // uLabelPd?: number; // px
-    // sLabelPd?: number; // px
   }
 
   ngAfterContentInit(): void {
@@ -232,6 +225,7 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'frm-br', isBorder ? '' : null);
     return result;
   }
+
   private updateFrameSize(frameSizeInp: FrameSize | null, frameSizeValueInp?: number): number {
     const frameSize: FrameSize = FrameSizeUtil.create(frameSizeInp);
     let frameSizeValue = FrameSizeUtil.getValue(frameSize) || 0;
@@ -242,17 +236,28 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
     console.log(`Frame.updateFrameSizeValue() frameSize=${frameSize} frameSizeValue=${frameSizeValue}`); // TODO del;
     return frameSizeValue;
   }
-  private updateLabelPadding(exterior: Exterior, frameSizeValue: number, currConfig: GrnFrameInputConfig): number {
-    console.log('Frame.updateLabelPadding()'); // TODO del;
+
+  private updateLabelPadding(exterior: Exterior, frameSizeValue: number, labelPd?: number): number {
     HtmlElemUtil.setProperty(this.hostRef, '--br-rd', this.getBorderRadius(exterior, frameSizeValue));
-    this.changeDetectorRef.markForCheck();
-    return LabelPaddingUtil.hor(frameSizeValue, exterior, currConfig) || 0;
+    const result = labelPd != null && labelPd > 0 ? labelPd : LabelPaddingUtil.hor(frameSizeValue, exterior);
+    console.log(`Frame.updateLabelPadding() result=${result}`); // TODO del;
+    return result;
   }
-  private updateLabelShrink(isLabelShrink: boolean | null): void {
-    console.log('Frame.updateLabelShrink() isLabelShrink=', isLabelShrink); // TODO del;
-    this.isLabelShrink = this.createBoolean(isLabelShrink, false);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-shrink', !!this.isLabelShrink);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'shr', this.isLabelShrink ? '' : null);
+
+  private updateLabelShrink(isLabelShrinkInp: boolean | null, configIsLabelShrink?: boolean): boolean {
+    const result = this.createBoolean(isLabelShrinkInp, configIsLabelShrink != null ? configIsLabelShrink : false);
+    console.log('Frame.updateLabelShrink() isLabelShrink=', result); // TODO del;
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-shrink', result);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'shr', result ? '' : null);
+    return result;
+  }
+
+  private updateHiddenLabel(hiddenLabelInp: boolean | null, configHiddenLabel?: boolean): boolean {
+    const result = this.createBoolean(hiddenLabelInp, configHiddenLabel != null ? configHiddenLabel : false);
+    console.log('Frame.updateHiddenLabel() hiddenLabel=', result); // TODO del;
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-hidden-label', result);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'hlbl', result ? '' : null);
+    return result;
   }
 
   private setPropertyLabelPaddingVer(exterior: Exterior | null, frameSizeValue: number, lineHeight: number): void {
@@ -281,7 +286,6 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
     );
     HtmlElemUtil.setProperty(this.hostRef, '--lbl2-wd', this.getLabel2MaxWidth(labelPadding, ornamentLfWidth, ornamentRgWidth));
   }
-
   // Determines the y transform value at the shrink position (top).
   private getLabelTranslateY(exterior: Exterior | null, frameSizeValue: number, lineHeight: number): string | null {
     let result: string | null = null;

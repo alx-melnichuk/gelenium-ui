@@ -43,4 +43,9 @@ grn-textarea {
       outline: 0;
     }
   }
+
+  grn-hint-or-error {
+    margin-right: var(--pd-lf);
+    margin-left: var(--pd-lf);  
+  }
 }

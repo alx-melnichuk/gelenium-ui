@@ -46,11 +46,11 @@
 <section mr-vr>
   <mat-slide-toggle color="primary"
     [checked]="isHiddenLabel"
-    (change)="isHiddenLabel=$event.checked; isConfig2=!isConfig2;">
+    (change)="isHiddenLabel=$event.checked; isConfig=!isConfig;">
     is hiddenLabel
   </mat-slide-toggle>
 </section>
-isConfig2={{isConfig2}}
+isConfig={{isConfig}}
 <form [formGroup]="formGroup02"
   novalidate
   autocomplete="off">
@@ -146,10 +146,12 @@ isConfig2={{isConfig2}}
         <em>"Demo" height: 56px;</em>
       </small>
     </div>
-    <grn-input formControlName="input02f"
-      [config]="isConfig2 ? null : config2"
+    <grn-input formControlName="input02z"
+      label="Enter value"
+      [config]="isConfig ? null : config"
       exterior9="'underline'"
-      frameSize9="'middle'">
+      frameSize9="'middle'"
+      [helperText]="'Demo helperText'">
     </grn-input>
   </div>
 </form>

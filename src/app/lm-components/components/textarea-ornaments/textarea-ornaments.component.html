@@ -11,6 +11,13 @@
   </mat-button-toggle-group>
 </section>
 
+<section mr-vr>
+  <input type="checkbox"
+    [(ngModel)]="isConfig" />
+  isConfig={{isConfig}}
+</section>
+
+
 <form class="io-ornament"
   [formGroup]="formGroup05"
   novalidate
@@ -26,15 +33,17 @@
       </div>
       <grn-textarea formControlName="input05a"
         label="Enter the mass"
-        [cntRows]="2"
-        helperText="The value is greater than zero."
-        [exterior]="exterior05">
-        <span grnOrnament
+        [cntRows]="1"
+        [config]="!isConfig ? null : config"
+        exterior9="exterior05"
+        frameSize9="'middle'"
+        helperText="The value is greater than zero.">
+        <span grnOrnament9
           class="io-pd-8">kg</span>
       </grn-textarea>
     </div>
 
-    <div class="app-elem io-elem">
+    <!-- <div class="app-elem io-elem">
       <div>
         <small>
           <em>Section: "grnOrnamentEnd" + text.</em>
@@ -43,11 +52,14 @@
       <grn-textarea formControlName="input05b"
         label="Enter the height"
         [cntRows]="2"
-        [exterior]="exterior05">
-        <span grnOrnamentEnd
+        [config]="!isConfig ? null : config"
+        exterior9="exterior05"
+        frameSize9="'middle'"
+        helperText="The value is greater than zero.">
+        <span grnOrnamentEnd9
           class="io-pd-8">см</span>
       </grn-textarea>
-    </div>
+    </div> -->
 
   </div>
 
