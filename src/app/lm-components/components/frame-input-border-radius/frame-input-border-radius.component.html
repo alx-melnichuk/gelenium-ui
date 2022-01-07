@@ -115,7 +115,7 @@
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="short"
       [exterior]="exterior05"
-      [config]="configShort">
+      [config]="exterior05 === 'outlined' ? configOutlinedShort : configUnderlineShort">
     </grn-input>
   </div>
   <hr br-nn>
@@ -131,7 +131,7 @@
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="small"
       [exterior]="exterior05"
-      [config]="configSmall">
+      [config]="exterior05 === 'outlined' ? configOutlinedSmall : configUnderlineSmall">
     </grn-input>
   </div>
   <hr br-nn>
@@ -147,7 +147,7 @@
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="middle"
       [exterior]="exterior05"
-      [config]="configMiddle">
+      [config]="exterior05 === 'outlined' ? configOutlinedMiddle : configUnderlineMiddle">
     </grn-input>
   </div>
   <hr br-nn>
@@ -163,7 +163,7 @@
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="wide"
       [exterior]="exterior05"
-      [config]="configWide">
+      [config]="exterior05 === 'outlined' ? configOutlinedWide : configUnderlineWide">
     </grn-input>
   </div>
   <hr br-nn>
@@ -180,7 +180,7 @@
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="large"
       [exterior]="exterior05"
-      [config]="configLarge">
+      [config]="exterior05 === 'outlined' ? configOutlinedLarge : configUnderlineLarge">
     </grn-input>
   </div>
   <hr br-nn>
@@ -197,7 +197,7 @@
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="huge"
       [exterior]="exterior05"
-      [config]="configHuge">
+      [config]="exterior05 === 'outlined' ? configOutlinedHuge : configUnderlineHuge">
     </grn-input>
   </div>
 

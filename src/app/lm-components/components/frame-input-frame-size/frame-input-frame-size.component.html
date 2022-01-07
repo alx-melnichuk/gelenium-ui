@@ -148,9 +148,10 @@ isConfig={{isConfig}}
     </div>
     <grn-input formControlName="input02z"
       label="Enter value"
-      [config]="isConfig ? null : config"
+      [config]="!isConfig ? null : config"
       exterior9="'underline'"
       frameSize9="'middle'"
+      isRequired9
       [helperText]="'Demo helperText'">
     </grn-input>
   </div>

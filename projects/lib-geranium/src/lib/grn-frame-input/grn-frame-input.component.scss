@@ -224,7 +224,7 @@ grn-frame-input { //outline: 1px dashed crimson;
     top: 0;
     left: 0;
     margin: 0;
-    padding: 0px calc(var(--lbl-pd-lf) - var(--gfi-o-lgn-pd)); // (14px - 4,4px)=9,6px;
+    padding: 0px calc(var(--lbl-pd-lf) - var(--gfi-o-lgn-pd));
     pointer-events: none;
     border-radius: inherit;
     border-style: solid;
@@ -237,6 +237,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
   &[foc] fieldset {
     border-width: 2px;
+    padding-left: calc(var(--lbl-pd-lf) - var(--gfi-o-lgn-pd) - 1px);
   }
   // Border-color for "outlined" mode.
   // The state without mouse hover, error, focused and disabled.
@@ -270,12 +271,12 @@ grn-frame-input { //outline: 1px dashed crimson;
     display: block;
     width: auto;
     height: 1px;
-    font-size: 0.75em; // #!! 12px
     visibility: hidden;
     padding: 0;
     &>span {
       display: inline-block;
       height: inherit;
+      font-size: 0.75em;
     }
   }
   &[shr], &[foc], &[fil] { // .gfi-shrink .gfi-legend, .gfi-focused .gfi-legend, .gfi-filled .gfi-legend

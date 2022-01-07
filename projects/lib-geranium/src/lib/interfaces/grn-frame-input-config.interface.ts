@@ -11,10 +11,4 @@ export interface GrnFrameInputConfig {
   labelPd?: number; // px
   ornamLfAlign?: OrnamAlign;
   ornamRgAlign?: OrnamAlign;
-  // For "outlined" mode.
-  oLabelPd?: number; // px
-  // For "underline" mode.
-  uLabelPd?: number; // px
-  // For "standard" mode.
-  sLabelPd?: number; // px
 }

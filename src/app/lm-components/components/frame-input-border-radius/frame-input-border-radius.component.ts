@@ -46,30 +46,44 @@ export class FrameInputBorderRadiusComponent {
     input05e: new FormControl('Demo Size Large', []),
     input05f: new FormControl('Demo Size Huge', []),
   });
-  public configShort: GrnFrameInputConfig = {
-    oLabelPd: 21.66, // 0.57*FrameSizeValue.short
-    uLabelPd: 15.2, // 0.4*FrameSizeValue.short
+  public configOutlinedShort: GrnFrameInputConfig = {
+    labelPd: 21.66, // 0.57*FrameSizeValue.short
   };
-  public configSmall: GrnFrameInputConfig = {
-    oLabelPd: 25.08, // 0.57*FrameSizeValue.small
-    uLabelPd: 17.6, // 0.4*FrameSizeValue.small
+  public configOutlinedSmall: GrnFrameInputConfig = {
+    labelPd: 25.08, // 0.57*FrameSizeValue.small
   };
-  public configMiddle: GrnFrameInputConfig = {
-    oLabelPd: 28.5, // 0.57*FrameSizeValue.middle
-    uLabelPd: 20, // 0.4*FrameSizeValue.middle
+  public configOutlinedMiddle: GrnFrameInputConfig = {
+    labelPd: 28.5, // 0.57*FrameSizeValue.middle
   };
-  public configWide: GrnFrameInputConfig = {
-    oLabelPd: 31.92, // 0.57*FrameSizeValue.wide
-    uLabelPd: 22.4, // 0.4*FrameSizeValue.wide
+  public configOutlinedWide: GrnFrameInputConfig = {
+    labelPd: 31.92, // 0.57*FrameSizeValue.wide
   };
-  public configLarge: GrnFrameInputConfig = {
-    oLabelPd: 35.34, // 0.57*FrameSizeValue.large
-    uLabelPd: 24.8, // 0.4*FrameSizeValue.large
+  public configOutlinedLarge: GrnFrameInputConfig = {
+    labelPd: 35.34, // 0.57*FrameSizeValue.large
   };
-  public configHuge: GrnFrameInputConfig = {
-    oLabelPd: 38.76, // 0.57*FrameSizeValue.huge
-    uLabelPd: 27.2, // 0.4*FrameSizeValue.huge
+  public configOutlinedHuge: GrnFrameInputConfig = {
+    labelPd: 38.76, // 0.57*FrameSizeValue.huge
   };
+
+  public configUnderlineShort: GrnFrameInputConfig = {
+    labelPd: 15.2, // 0.4*FrameSizeValue.short
+  };
+  public configUnderlineSmall: GrnFrameInputConfig = {
+    labelPd: 17.6, // 0.4*FrameSizeValue.small
+  };
+  public configUnderlineMiddle: GrnFrameInputConfig = {
+    labelPd: 20, // 0.4*FrameSizeValue.middle
+  };
+  public configUnderlineWide: GrnFrameInputConfig = {
+    labelPd: 22.4, // 0.4*FrameSizeValue.wide
+  };
+  public configUnderlineLarge: GrnFrameInputConfig = {
+    labelPd: 24.8, // 0.4*FrameSizeValue.large
+  };
+  public configUnderlineHuge: GrnFrameInputConfig = {
+    labelPd: 27.2, // 0.4*FrameSizeValue.huge
+  };
+
   public exterior05 = 'outlined';
   public isHiddenLabel = false;
   public borderRadius = 50;
@@ -89,10 +103,10 @@ export class FrameInputBorderRadiusComponent {
     input06l: new FormControl('Demo - L', []),
   });
   public configOutlined: GrnFrameInputConfig = {
-    oLabelPd: 20.72, // 0.37*FrameSizeValue.wide
+    labelPd: 20.72, // 0.37*FrameSizeValue.wide
   };
   public configUnderline: GrnFrameInputConfig = {
-    uLabelPd: 20.72, // 0.37*FrameSizeValue.wide
+    labelPd: 20.72, // 0.37*FrameSizeValue.wide
   };
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
