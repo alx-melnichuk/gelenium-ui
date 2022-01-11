@@ -17,7 +17,6 @@ app-frame-input-palette {
     --fip-u-default-bg-color: rgba(178, 235, 242, 0.6);
     --fip-u-error-bg-color: rgba(240, 98, 146, 0.15);
     --fip-u-hover-error-bg-color: rgba(240, 94, 146, 0.09);
-    // --fip-u-hover-error-bg-color: rgba(240, 94, 220, 0.1);
     --fip-u-hover-bg-color: rgba(172, 235, 236, 0.3);
     --fip-u-focused-bg-color: rgba(178, 235, 242, 0.4);
     --fip-u-disabled-bg-color: rgba(178, 235, 242, 0.2);
@@ -149,33 +148,49 @@ app-frame-input-palette {
   .fip-bstrap {
     color: #495057;
   }
-  .fip-bstrap .grn-frame-input {
+  .fip-bstrap {
     --g-err-cl: #dc3545;
     --g-hov-err-cl: #dc3545;
     --g-foc-cl: #80bdff;
     --g-o-def-br-cl: #ced4da;
   }
-  .fip-bstrap .gfi-fieldset.gfi-hover:not(.gfi-error) {
-    border-color: var(--g-o-def-br-cl);
-  }
 
-  .fip-bstrap :hover>.gfi-fieldset:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
+  .fip-bstrap>.grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
     border-color: var(--g-o-def-br-cl);
   }
-  .fip-bstrap .gfi-fieldset.gfi-focused {
-    border-width: 1px;
+  .fip-bstrap>.grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
+    border-color: var(--g-o-def-br-cl);
   }
-  .fip-bstrap .gfi-fieldset.gfi-focused.gfi-error {
-    box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
+  .fip-bstrap>.grn-frame-input.gfi-error .gfi-fieldset {
+    border-color: var(--g-err-cl);
   }
-  .fip-bstrap .gfi-fieldset.gfi-focused:not(.gfi-error) {
-    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+  .fip-bstrap>.grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
+    border-color: var(--g-hov-err-cl);
   }
-  .fip-bstrap .gfi-o-frm.gfi-disabled {
+  .fip-bstrap>.grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset {
+    border-color: var(--g-foc-cl);
+  }
+  .fip-bstrap>.grn-frame-input.gfi-disabled .gfi-fieldset {
+    border-color: var(--g-o-def-br-cl);
+  }
+  .fip-bstrap>.grn-frame-input.gfi-disabled {
     background-color: #e9ecef;
     opacity: 1;
   }
-  .fip-bstrap .gi-input.gfi-error {
+  .fip-bstrap>grn-hint-or-error.gfi-error {
+    color: var(--g-err-cl);
+  }
+
+  .fip-bstrap>.grn-frame-input.gfi-focused .gfi-fieldset {
+    border-width: 1px;
+  }
+  .fip-bstrap>.grn-frame-input.gfi-focused.gfi-error .gfi-fieldset {
+    box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
+  }
+  .fip-bstrap>.grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset {
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+  }
+  .fip-bstrap>.grn-frame-input.gfi-error .gi-input {
     padding-right: 1.4em;
     background-image: url("data:image/svg+xml,"
     + "<svg xmlns='http://www.w3.org/2000/svg' width='12' "

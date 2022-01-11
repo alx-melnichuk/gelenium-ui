@@ -164,17 +164,14 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
   ngOnChanges(changes: SimpleChanges): void {
     let isLabelPadding = false;
     if (changes.config) {
-      console.log('@Input.OnChanges config=', this.config);
       this.currConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
     }
     if (changes.exterior || (changes.config && !this.exterior)) {
-      console.log('@Input.OnChanges exterior=', this.exterior);
       this.exterior2 = ExteriorUtil.convert(this.exterior);
       this.innExterior = this.updateExterior(this.exterior2 || this.currConfig.exterior || null);
       isLabelPadding = true;
     }
     if (changes.frameSize || (changes.config && !this.frameSize)) {
-      console.log('@Input.OnChanges frameSize=', this.frameSize);
       this.frameSize2 = FrameSizeUtil.convert(this.frameSize);
       const configFrameSizeValue = this.currConfig.frameSizeValue;
       this.innFrameSizeValue = this.updateFrameSizeValue(this.frameSize2 || this.currConfig.frameSize || null, configFrameSizeValue);
@@ -216,12 +213,10 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
   ngOnInit(): void {
     let isLabelPadding = false;
     if (this.innExterior == null) {
-      console.log('@Input.OnInit exterior=', this.exterior);
       this.innExterior = this.updateExterior(this.currConfig.exterior || null);
       isLabelPadding = true;
     }
     if (this.innFrameSizeValue === 0) {
-      console.log('@Input.OnInit frameSize=', this.frameSize);
       const configFrameSizeValue = this.currConfig.frameSizeValue;
       this.innFrameSizeValue = this.updateFrameSizeValue(this.currConfig.frameSize || null, configFrameSizeValue);
       isLabelPadding = true;
@@ -359,9 +354,7 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
   }
 
   private updateExterior(exterior: Exterior | null): Exterior {
-    const result: Exterior = ExteriorUtil.create(exterior);
-    console.log(`@Input.updateExterior() exterior="${exterior}" innExterior=${result}`); // TODO del;
-    return result;
+    return ExteriorUtil.create(exterior);
   }
 
   private updateFrameSizeValue(frameSize: FrameSize | null, frameSizeValue?: number): number {
@@ -369,7 +362,6 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
     if (frameSize === null && frameSizeValue && frameSizeValue > 0) {
       result = frameSizeValue;
     }
-    console.log(`@Input.updateFrameSize() frameSize="${frameSize}" innFrameSizeValue=${result}`); // TODO del;
     return result;
   }
 

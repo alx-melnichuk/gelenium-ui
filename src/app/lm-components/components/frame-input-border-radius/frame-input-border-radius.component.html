@@ -7,7 +7,7 @@
     For example:
   </p>
   <code><pre>
-  .fibr-outlined-radius .grn-frame-input.gfi-outlined &#123;
+  .fibr-outlined-radius .gfi-outlined &#123;
     border-radius: calc(var(--size)*0.5);
   &#125;</pre></code>
   <p>
@@ -25,16 +25,27 @@
     For example:
   </p>
   <code><pre>
-  public configShort: GrnFrameInputConfig = &#123;
-    oLabelPd: 21.66, // 0.57*FrameSizeValue.short
-    uLabelPd: 15.2, // 0.4*FrameSizeValue.short
+  public configOutlinedShort: GrnFrameInputConfig = &#123;
+    labelPd: 21.66, // 0.57*FrameSizeValue.short
   &#125;;
-  public configSmall: GrnFrameInputConfig = &#123;
-    oLabelPd: 25.08, // 0.57*FrameSizeValue.small
-    uLabelPd: 17.6, // 0.4*FrameSizeValue.small
+  public configOutlinedSmall: GrnFrameInputConfig = &#123;
+    labelPd: 25.08, // 0.57*FrameSizeValue.small
   &#125;;
   ...
-  </pre></code>
+  public configOutlinedHuge: GrnFrameInputConfig = &#123;
+    labelPd: 38.76, // 0.57*FrameSizeValue.huge
+  &#125;;
+
+  public configUnderlineShort: GrnFrameInputConfig = &#123;
+    labelPd: 15.2, // 0.4*FrameSizeValue.short
+  &#125;;
+  public configUnderlineSmall: GrnFrameInputConfig = &#123;
+    labelPd: 17.6, // 0.4*FrameSizeValue.small
+  &#125;;
+  ...
+  public configUnderlineHuge: GrnFrameInputConfig = &#123;
+    labelPd: 27.2, // 0.4*FrameSizeValue.huge
+  &#125;;</pre></code>
   <p>
     In our example, the value of the coefficient for changing the fillet radius will change
     dynamically.
@@ -42,7 +53,7 @@
     As a result, we get the following:
   </p>
   <code><pre>
-  .fibr-outlined-radius .grn-frame-input.gfi-outlined &#123;
+  .fibr-outlined-radius .gfi-outlined &#123;
     border-radius: calc(var(--size)*var(--fibr-border-radius)/100);
   &#125;</pre></code>
   <p>
@@ -228,7 +239,7 @@
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="short"
       [exterior]="exterior05"
-      [config]="configShort"&gt;
+      [config]="exterior05 === 'outlined' ? configOutlinedShort : configUnderlineShort"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
   &lt;hr br-nn&gt;
@@ -244,7 +255,7 @@
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="small"
       [exterior]="exterior05"
-      [config]="configSmall"&gt;
+      [config]="exterior05 === 'outlined' ? configOutlinedSmall : configUnderlineSmall"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
   &lt;hr br-nn&gt;
@@ -260,7 +271,7 @@
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="middle"
       [exterior]="exterior05"
-      [config]="configMiddle"&gt;
+      [config]="exterior05 === 'outlined' ? configOutlinedMiddle : configUnderlineMiddle"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
   &lt;hr br-nn&gt;
@@ -276,7 +287,7 @@
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="wide"
       [exterior]="exterior05"
-      [config]="configWide"&gt;
+      [config]="exterior05 === 'outlined' ? configOutlinedWide : configUnderlineWide"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
   &lt;hr br-nn&gt;
@@ -293,7 +304,7 @@
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="large"
       [exterior]="exterior05"
-      [config]="configLarge"&gt;
+      [config]="exterior05 === 'outlined' ? configOutlinedLarge : configUnderlineLarge"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
   &lt;hr br-nn&gt;
@@ -310,7 +321,7 @@
       [hiddenLabel]="isHiddenLabel ? '':null"
       frameSize="huge"
       [exterior]="exterior05"
-      [config]="configHuge"&gt;
+      [config]="exterior05 === 'outlined' ? configOutlinedHuge : configUnderlineHuge"&gt;
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
@@ -344,30 +355,49 @@ export class FrameInputComponent &#123;
   public isHiddenLabel = false;
   public borderRadius = 50;
 
-  public configShort: GrnFrameInputConfig = &#123;
-    oLabelPd: 21.66, // 0.57*FrameSizeValue.short
-    uLabelPd: 15.2, // 0.4*FrameSizeValue.short
+  public configOutlinedShort: GrnFrameInputConfig = &#123;
+    labelPd: 21.66, // 0.57*FrameSizeValue.short
   &#125;;
-  public configSmall: GrnFrameInputConfig = &#123;
-    oLabelPd: 25.08, // 0.57*FrameSizeValue.small
-    uLabelPd: 17.6, // 0.4*FrameSizeValue.small
+  public configOutlinedSmall: GrnFrameInputConfig = &#123;
+    labelPd: 25.08, // 0.57*FrameSizeValue.small
   &#125;;
-  public configMiddle: GrnFrameInputConfig = &#123;
-    oLabelPd: 28.5, // 0.57*FrameSizeValue.middle
-    uLabelPd: 20, // 0.4*FrameSizeValue.middle
+  public configOutlinedMiddle: GrnFrameInputConfig = &#123;
+    labelPd: 28.5, // 0.57*FrameSizeValue.middle
   &#125;;
-  public configWide: GrnFrameInputConfig = &#123;
-    oLabelPd: 31.92, // 0.57*FrameSizeValue.wide
-    uLabelPd: 22.4, // 0.4*FrameSizeValue.wide
+  public configOutlinedWide: GrnFrameInputConfig = &#123;
+    labelPd: 31.92, // 0.57*FrameSizeValue.wide
   &#125;;
-  public configLarge: GrnFrameInputConfig = &#123;
-    oLabelPd: 35.34, // 0.57*FrameSizeValue.large
-    uLabelPd: 24.8, // 0.4*FrameSizeValue.large
+  public configOutlinedLarge: GrnFrameInputConfig = &#123;
+    labelPd: 35.34, // 0.57*FrameSizeValue.large
   &#125;;
-  public configHuge: GrnFrameInputConfig = &#123;
-    oLabelPd: 38.76, // 0.57*FrameSizeValue.huge
-    uLabelPd: 27.2, // 0.4*FrameSizeValue.huge
+  public configOutlinedHuge: GrnFrameInputConfig = &#123;
+    labelPd: 38.76, // 0.57*FrameSizeValue.huge
   &#125;;
+
+  public configUnderlineShort: GrnFrameInputConfig = &#123;
+    labelPd: 15.2, // 0.4*FrameSizeValue.short
+  &#125;;
+  public configUnderlineSmall: GrnFrameInputConfig = &#123;
+    labelPd: 17.6, // 0.4*FrameSizeValue.small
+  &#125;;
+  public configUnderlineMiddle: GrnFrameInputConfig = &#123;
+    labelPd: 20, // 0.4*FrameSizeValue.middle
+  &#125;;
+  public configUnderlineWide: GrnFrameInputConfig = &#123;
+    labelPd: 22.4, // 0.4*FrameSizeValue.wide
+  &#125;;
+  public configUnderlineLarge: GrnFrameInputConfig = &#123;
+    labelPd: 24.8, // 0.4*FrameSizeValue.large
+  &#125;;
+  public configUnderlineHuge: GrnFrameInputConfig = &#123;
+    labelPd: 27.2, // 0.4*FrameSizeValue.huge
+  &#125;;
+
+  public inputBorderRadius(event: MatSliderChange): void &#123;
+    if (!!event && event.value != null) &#123;
+      this.borderRadius = event.value;
+    &#125;
+  &#125;
 
 &#125;</pre></code>
         </mat-tab>
@@ -868,10 +898,10 @@ export class FrameInputComponent &#123;
   &#125;);
 
   public configOutlined: GrnFrameInputConfig = &#123;
-    oLabelPd: 20.72, // 0.37*FrameSizeValue.wide
+    labelPd: 20.72, // 0.37*FrameSizeValue.wide
   &#125;;
   public configUnderline: GrnFrameInputConfig = &#123;
-    uLabelPd: 20.72, // 0.37*FrameSizeValue.wide
+    labelPd: 20.72, // 0.37*FrameSizeValue.wide
   &#125;;
 
 &#125;</pre></code>

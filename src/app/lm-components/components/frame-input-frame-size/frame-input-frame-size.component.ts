@@ -43,26 +43,9 @@ export class FrameInputFrameSizeComponent {
     input02d: new FormControl('Demo Size Wide', []),
     input02e: new FormControl('Demo Size Large', []),
     input02f: new FormControl('Demo Size Huge', []),
-
-    input02z: new FormControl('Demo', []),
   });
   public exterior02 = 'outlined';
   public isHiddenLabel = false;
-  public config: GrnFrameInputConfig = {
-    // exterior: Exterior.outlined,
-    // exterior: Exterior.underline,
-    exterior: Exterior.standard,
-    // frameSizeVal?: number;
-    // frameSize: FrameSize.middle,
-    frameSize: FrameSize.large,
-    // frameSizeValue: 54,
-    // isLabelShrink: true, // isLabelShrink?: boolean;
-    // hiddenLabel: true, // hiddenLabel?: boolean;
-    // ornamLfAlign?: OrnamAlign;
-    // ornamRgAlign?: OrnamAlign;
-    labelPd: 18, // labelPd?: number; // px
-  };
-  public isConfig = false;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }

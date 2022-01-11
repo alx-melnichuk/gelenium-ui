@@ -35,10 +35,7 @@
       elem-mr-ver
       [attr.id]="id"
       [rows]="currentRows"
-      [ngClass]="['gt-textarea', 'gfi-elem', 'gfi-elem-mr-ver', 'gfi-elem-pd-hor', 'GrnTextareaBase', 'gt-' + exterior2
-        , (isDisabled2 ? 'gfi-disabled': '')
-        , (!!formControl.errors ? 'gfi-error': '')
-      ]"
+      class="gt-textarea gfi-elem gfi-elem-mr-ver gfi-elem-pd-hor"
       [attr.disabled]="isDisabled2 ? '': null"
       [attr.autocomplete]="!!autoComplete ? autoComplete : null"
       [attr.readonly]="isReadOnly2 ? '': null"

@@ -160,17 +160,14 @@ export class GrnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
   ngOnChanges(changes: SimpleChanges): void {
     let isLabelPadding = false;
     if (changes.config) {
-      console.log('%Text.OnChanges config=', this.config);
       this.currConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
     }
     if (changes.exterior || (changes.config && !this.exterior)) {
-      console.log('%Text.OnChanges exterior=', this.exterior);
       this.exterior2 = ExteriorUtil.convert(this.exterior);
       this.innExterior = this.updateExterior(this.exterior2 || this.currConfig.exterior || null);
       isLabelPadding = true;
     }
     if (changes.frameSize || (changes.config && !this.frameSize)) {
-      console.log('%Text.OnChanges frameSize=', this.frameSize);
       this.frameSize2 = FrameSizeUtil.convert(this.frameSize);
       const configFrameSizeValue = this.currConfig.frameSizeValue;
       this.innFrameSizeValue = this.updateFrameSizeValue(this.frameSize2 || this.currConfig.frameSize || null, configFrameSizeValue);
@@ -215,12 +212,10 @@ export class GrnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
   ngOnInit(): void {
     let isLabelPadding = false;
     if (this.innExterior == null) {
-      console.log('%Text.OnInit exterior=', this.exterior);
       this.innExterior = this.updateExterior(this.currConfig.exterior || null);
       isLabelPadding = true;
     }
     if (this.innFrameSizeValue === 0) {
-      console.log('%Text.OnInit frameSize=', this.frameSize);
       const configFrameSizeValue = this.currConfig.frameSizeValue;
       this.innFrameSizeValue = this.updateFrameSizeValue(this.currConfig.frameSize || null, configFrameSizeValue);
       isLabelPadding = true;
@@ -368,9 +363,7 @@ export class GrnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
   }
 
   private updateExterior(exterior: Exterior | null): Exterior {
-    const result: Exterior = ExteriorUtil.create(exterior);
-    console.log(`%Text.updateExterior() exterior="${exterior}" innExterior=${result}`); // TODO del;
-    return result;
+    return ExteriorUtil.create(exterior);
   }
 
   private updateFrameSizeValue(frameSize: FrameSize | null, frameSizeValue?: number): number {
@@ -378,7 +371,6 @@ export class GrnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
     if (frameSize === null && frameSizeValue && frameSizeValue > 0) {
       result = frameSizeValue;
     }
-    console.log(`%Text.updateFrameSize() frameSize="${frameSize}" innFrameSizeValue=${result}`); // TODO del;
     return result;
   }
 

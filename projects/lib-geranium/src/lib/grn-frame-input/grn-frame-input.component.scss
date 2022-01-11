@@ -286,7 +286,7 @@ grn-frame-input { //outline: 1px dashed crimson;
       transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
     }
     &[ind] legend {
-      padding: 0 var(--gfi-o-lgn-pd);
+      padding: 0 calc(var(--gfi-o-lgn-pd) - 1px);
     }
   }
   &:not([shr]):not([fil]):not([foc]) legend { // .grn-frame-input:not(.gfi-shrink):not(.gfi-filled):not(.gfi-focused) .gfi-legend

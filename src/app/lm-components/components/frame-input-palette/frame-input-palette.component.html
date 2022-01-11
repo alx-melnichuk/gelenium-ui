@@ -1,43 +1,37 @@
-<section mr-vr
-  *ngIf="false">
+<section mr-vr>
   <h3>Palette.</h3>
   <p>
     You can customize the color palette for the input element.
     To avoid duplicating color codes, we will use the following CSS variables:
   </p>
   <code><pre>
-// Let's create our own color palette.
-.fip-specific .grn-frame-input &#123;
-  // The default border color.
-  --fip-default-color: #00acc1;
-  // Border and label color on error.
-  --fip-error-color: #ad1457;
-  // Border and label color on error and mouse hover.
-  --fip-hover-error-color: #f06292;
-  // The color of the frame and label when receiving focus.
-  --fip-focused-color: #0097a7;
+  // Let's create our own color palette.
+  .fip-specific &#123;
+    // The color of the label and border on mouse hover.
+    --fip-hover-color: #00acc1;
+    // The color of the label and border in an error state.
+    --fip-error-color: #ad1457;
+    // The color of the label and border on mouse hover in an error state.
+    --fip-hover-error-color: #f3006a;
+    // The color of the border and label when getting focus.
+    --fip-focused-color: #0097a7;
+    // The color of the label and border in the state is disabled.
+    --fip-disabled-color: #9c27b0;
 
-  // The default color for the label.
-  --fip-label-default-color: #5c6bc0;
-  // The color of the label if the element is disabled.
-  --fip-label-disabled-color: #9c27b0;
-
-  // For the exterior "Outlined":
-  // The default border color.
-  --fip-outlined-default-brd-color: #5c6bc0;
-
-  // For the exterior "Underline":
-  // Default background color.
-  --fip-u-default-bg-color: rgba(178, 235, 242, 0.6);
-  // The background color when receiving focus.
-  --fip-u-focused-bg-color: rgba(178, 235, 242, 0.4);
-  // The background color when the element is disabled.
-  --fip-u-disabled-bg-color: rgba(178, 235, 242, 0.2);
-
-  // For the exterior "Underline" and "Standard":
-  // The default bottom border color.
-  --fip-substrate-before-brd-color: rgba(101, 1, 151, 0.9);
-&#125;</pre></code>
+    --fip-label-default-color: #5c6bc0;
+    // For "frame" - outlined
+    --fip-o-default-brd-color: #5c6bc0;
+    // For "frame" - underline
+    --fip-u-default-bg-color: rgba(178, 235, 242, 0.6);
+    --fip-u-error-bg-color: rgba(240, 98, 146, 0.15);
+    --fip-u-hover-error-bg-color: rgba(240, 94, 146, 0.09);
+    // --fip-u-hover-error-bg-color: rgba(240, 94, 220, 0.1);
+    --fip-u-hover-bg-color: rgba(172, 235, 236, 0.3);
+    --fip-u-focused-bg-color: rgba(178, 235, 242, 0.4);
+    --fip-u-disabled-bg-color: rgba(178, 235, 242, 0.2);
+    // For "frame" - standard and underline
+    --fip-su-default-brd-color: rgba(101, 1, 151, 0.9);
+  &#125;</pre></code>
   <p>
     All the CSS classes that define the colors of the input element are children of the
     "grn-frame-input" CSS classes.
@@ -47,24 +41,25 @@
     To replace the color of the label, we define a group of CSS classes.
   </p>
   <code><pre>
-// Default color of the label.
-.fip-specific :not(:hover)>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)
-&#123; color: var(--fip-label-default-color); &#125;
-// The color of the label on error.
-.fip-specific .gfi-label.gfi-error
-&#123; color: var(--fip-error-color); &#125;
-// The color of the label on mouse over and on error.
-.fip-specific :hover>.gfi-label.gfi-error:not(.gfi-focused):not(.gfi-disabled)
-&#123; color: var(--fip-hover-error-color); &#125;
-// The color of the label on mouse hover.
-.fip-specific :hover>.gfi-label:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)
-&#123; color: var(--fip-hover-color); &#125;
-// The color of the label when the input element receives focus.
-.fip-specific .gfi-label.gfi-focused:not(.gfi-error)
-&#123; color: var(--fip-focused-color); &#125;
-// The color of the label when the input element is disabled.
-.fip-specific .gfi-label.gfi-disabled:not(.gfi-error)
-&#123; color: var(--fip-label-disabled-color); &#125;</pre></code>
+// The state without mouse hover, error, focused and disabled.
+.fip-specific .grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)>.gfi-label &#123;
+  color: var(--fip-label-default-color);
+&#125; // The state with mouse hover but without error, focused and disabled.
+.fip-specific .grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)>.gfi-label &#123;
+  color: var(--fip-hover-color);
+&#125; // The state with error.
+.fip-specific .grn-frame-input.gfi-error>.gfi-label &#123;
+  color: var(--fip-error-color);
+&#125; // The state with mouse hover and error but without focused and disabled.
+.fip-specific .grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled)>.gfi-label &#123;
+  color: var(--fip-hover-error-color);
+&#125; // The state with focused but without error.
+.fip-specific .grn-frame-input.gfi-focused:not(.gfi-error)>.gfi-label &#123;
+  color: var(--fip-focused-color);
+&#125; // The state with disabled but without error.
+.fip-specific .grn-frame-input.gfi-disabled:not(.gfi-error)>.gfi-label &#123;
+  color: var(--fip-disabled-color);
+&#125;</pre></code>
   <p>
     Likewise to replace the "Outlined" border color define a group of CSS classes.
   </p>
@@ -196,8 +191,7 @@
     </small>
   </div>
 
-  <div class="app-group"
-    *ngIf="false">
+  <div class="app-group">
 
     <div class="app-elem">
       <div>
@@ -484,33 +478,195 @@ export class FrameInputComponent &#123;
 &#125;
 
 
+.fip-specific &#123;
+  --fip-hover-color: #00acc1;
+  --fip-error-color: #ad1457;
+  --fip-hover-error-color: #f3006a;
+  --fip-focused-color: #0097a7;
+  --fip-disabled-color: #9c27b0;
 
+  --fip-label-default-color: #5c6bc0;
+  // For "frame" - outlined
+  --fip-o-default-brd-color: #5c6bc0;
+  // For "frame" - underline
+  --fip-u-default-bg-color: rgba(178, 235, 242, 0.6);
+  --fip-u-error-bg-color: rgba(240, 98, 146, 0.15);
+  --fip-u-hover-error-bg-color: rgba(240, 94, 146, 0.09);
+  --fip-u-hover-bg-color: rgba(172, 235, 236, 0.3);
+  --fip-u-focused-bg-color: rgba(178, 235, 242, 0.4);
+  --fip-u-disabled-bg-color: rgba(178, 235, 242, 0.2);
+  // For "frame" - standard and underline
+  --fip-su-default-brd-color: rgba(101, 1, 151, 0.9);
+&#125;
+
+// Color for "label".
+
+// The state without mouse hover, error, focused and disabled.
+.fip-specific .grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-label &#123;
+  color: var(--fip-label-default-color);
+&#125;// The state with mouse hover but without error, focused and disabled.
+.fip-specific .grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-label &#123;
+  color: var(--fip-hover-color);
+&#125;// The state with error.
+.fip-specific .grn-frame-input.gfi-error&gt;.gfi-label &#123;
+  color: var(--fip-error-color);
+&#125;// The state with mouse hover and error but without focused and disabled.
+.fip-specific .grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-label &#123;
+  color: var(--fip-hover-error-color);
+&#125; // The state with focused but without error.
+.fip-specific .grn-frame-input.gfi-focused:not(.gfi-error)&gt;.gfi-label &#123;
+  color: var(--fip-focused-color);
+&#125;// The state with disabled but without error.
+.fip-specific .grn-frame-input.gfi-disabled:not(.gfi-error)&gt;.gfi-label &#123;
+  color: var(--fip-disabled-color);
+&#125;
+
+// Border-color for "outlined" mode.
+
+// The state without mouse hover, error, focused and disabled.
+.fip-specific .grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
+  border-color: var(--fip-o-default-brd-color);
+&#125;// The state with mouse hover but without error, focused and disabled.
+.fip-specific .grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
+  border-color: var(--fip-hover-color);
+&#125;// The state with error.
+.fip-specific .grn-frame-input.gfi-error .gfi-fieldset &#123;
+  border-color: var(--fip-error-color);
+&#125;// The state with mouse hover and error but without focused and disabled.
+.fip-specific .grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
+  border-color: var(--fip-hover-error-color);
+&#125;// The state with focused but without error.
+.fip-specific .grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset &#123;
+  border-color: var(--fip-focused-color);
+&#125;// The state with disabled but without error.
+.fip-specific .grn-frame-input.gfi-disabled:not(.gfi-error) .gfi-fieldset &#123;
+  border-color: var(--fip-disabled-color);
+&#125;
+
+// Background-color for "underline" mode.
+// The state without mouse hover, error, focused and disabled.
+.fip-specific .gfi-underline:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-frame &#123;
+  background-color: var(--fip-u-default-bg-color);
+&#125; // The state with mouse hover but without error, focused and disabled.
+.fip-specific .gfi-underline:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-frame &#123;
+  background-color: var(--fip-u-hover-bg-color);
+&#125; // The state with error.
+.fip-specific .gfi-underline.gfi-error&gt;.gfi-frame &#123;
+  background-color: var(--fip-u-error-bg-color);
+&#125; // The state with mouse hover and error but without focused and disabled.
+.fip-specific .gfi-underline:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-frame &#123;
+  background-color: var(--fip-u-hover-error-bg-color);
+&#125; // The state with focused but without error.
+.fip-specific .gfi-underline.gfi-focused:not(.gfi-error)&gt;.gfi-frame &#123;
+  background-color: var(--fip-u-focused-bg-color);
+&#125; // The state with disabled but without error.
+.fip-specific .gfi-underline.gfi-disabled:not(.gfi-error)&gt;.gfi-frame &#123;
+  background-color: var(--fip-u-disabled-bg-color);
+&#125;
+
+// Border-bottom-color for "underline" and "standard" mode.
+// The state without mouse hover, error, focused and disabled.
+.fip-specific .gfi-border:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-frame:before &#123;
+  border-bottom-color: var(--fip-su-default-brd-color);
+&#125; // The state with mouse hover but without error, focused and disabled.
+.fip-specific .gfi-border:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-frame:before &#123;
+  border-bottom-color: var(--fip-hover-color);
+&#125; // The state with error.
+.fip-specific .gfi-border.gfi-error&gt;.gfi-frame:before &#123;
+  border-bottom-color: var(--fip-error-color);
+&#125;
+.fip-specific .gfi-border.gfi-error&gt;.gfi-frame:after &#123;
+  border-bottom-color: var(--fip-error-color);
+&#125; // The state with mouse hover and error but without focused and disabled.
+.fip-specific .gfi-border:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-frame:before &#123;
+  border-bottom-color: var(--fip-hover-error-color);
+&#125; // The state with focused but without error.
+.fip-specific .gfi-border.gfi-focused:not(.gfi-error)&gt;.gfi-frame:after &#123;
+  border-bottom-color: var(--fip-focused-color);
+&#125; // The state with disabled but without error.
+.fip-specific .gfi-border.gfi-disabled:not(.gfi-error)&gt;.gfi-frame:before &#123;
+  border-bottom-color: var(--fip-disabled-color);
+&#125;
+
+// Color for "helperText".
+// The default color for the helperText.
+.fip-specific .gfi-helper-text:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) &#123;
+  color: var(--fip-label-default-color);
+&#125; // The color of the helperText in an error state.
+.fip-specific .gfi-helper-text.gfi-error &#123;
+  color: var(--fip-error-color);
+&#125; // The color of the helperText when getting focus.
+.fip-specific .gfi-helper-text.gfi-focused:not(.gfi-error) &#123;
+  color: var(--fip-label-default-color);
+&#125; // The color of the helperText in state is disabled.
+.fip-specific .gfi-helper-text.gfi-disabled:not(.gfi-error) &#123;
+  color: var(--fip-disabled-color);
+&#125;
+
+.fip-specific .gfi-hint-or-error &#123;
+  // The state without error, focused and disabled.
+  &:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) &#123;
+    color: var(--fip-label-default-color);
+  &#125; // The state with error.
+  &.gfi-error &#123;
+    color: var(--fip-error-color);
+  &#125; // The state with focused but without error.
+  &.gfi-focused:not(.gfi-error) &#123;
+    color: var(--fip-focused-color);
+  &#125; // The state with disabled but without error.
+  &.gfi-disabled:not(.gfi-error) &#123;
+    color: var(--fip-disabled-color);
+  &#125;
+&#125;
+
+
+// BootStrap
 .fip-bstrap &#123;
   color: #495057;
 &#125;
-.fip-bstrap .grn-frame-input &#123;
+.fip-bstrap &#123;
   --g-err-cl: #dc3545;
   --g-hov-err-cl: #dc3545;
   --g-foc-cl: #80bdff;
   --g-o-def-br-cl: #ced4da;
 &#125;
-.fip-bstrap .gfi-fieldset.gfi-hover:not(.gfi-error) &#123;
+
+.fip-bstrap&gt;.grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
   border-color: var(--g-o-def-br-cl);
 &#125;
-.fip-bstrap .gfi-fieldset.gfi-focused &#123;
-  border-width: 1px;
+.fip-bstrap&gt;.grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
+  border-color: var(--g-o-def-br-cl);
 &#125;
-.fip-bstrap .gfi-fieldset.gfi-focused.gfi-error &#123;
-  box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
+.fip-bstrap&gt;.grn-frame-input.gfi-error .gfi-fieldset &#123;
+  border-color: var(--g-err-cl);
 &#125;
-.fip-bstrap .gfi-fieldset.gfi-focused:not(.gfi-error) &#123;
-  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+.fip-bstrap&gt;.grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
+  border-color: var(--g-hov-err-cl);
 &#125;
-.fip-bstrap .gfi-o-frm.gfi-disabled &#123;
+.fip-bstrap&gt;.grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset &#123;
+  border-color: var(--g-foc-cl);
+&#125;
+.fip-bstrap&gt;.grn-frame-input.gfi-disabled .gfi-fieldset &#123;
+  border-color: var(--g-o-def-br-cl);
+&#125;
+.fip-bstrap&gt;.grn-frame-input.gfi-disabled &#123;
   background-color: #e9ecef;
   opacity: 1;
 &#125;
-.fip-bstrap .gi-input.gfi-error &#123;
+.fip-bstrap&gt;grn-hint-or-error.gfi-error &#123;
+  color: var(--g-err-cl);
+&#125;
+
+.fip-bstrap&gt;.grn-frame-input.gfi-focused .gfi-fieldset &#123;
+  border-width: 1px;
+&#125;
+.fip-bstrap&gt;.grn-frame-input.gfi-focused.gfi-error .gfi-fieldset &#123;
+  box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
+&#125;
+.fip-bstrap&gt;.grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset &#123;
+  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+&#125;
+.fip-bstrap>.grn-frame-input.gfi-error .gi-input &#123;
   padding-right: 1.4em;
   background-image: url("data:image/svg+xml,"
   + "&lt;svg xmlns='http://www.w3.org/2000/svg' width='12' "
@@ -522,6 +678,7 @@ export class FrameInputComponent &#123;
   background-repeat: no-repeat;
   background-position: right center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+  margin-right: 5px;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

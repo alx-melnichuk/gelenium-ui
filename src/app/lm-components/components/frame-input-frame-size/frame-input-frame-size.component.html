@@ -46,16 +46,16 @@
 <section mr-vr>
   <mat-slide-toggle color="primary"
     [checked]="isHiddenLabel"
-    (change)="isHiddenLabel=$event.checked; isConfig=!isConfig;">
+    (change)="isHiddenLabel=$event.checked">
     is hiddenLabel
   </mat-slide-toggle>
 </section>
-isConfig={{isConfig}}
+
 <form [formGroup]="formGroup02"
   novalidate
   autocomplete="off">
 
-  <!--  <div class="app-elem">
+  <div class="app-elem">
     <div>
       <small>
         <em>"Short" height: 38px; font-size: 16px;</em>
@@ -139,22 +139,8 @@ isConfig={{isConfig}}
       frameSize="huge"
       [exterior]="exterior02">
     </grn-input>
-  </div> -->
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>"Demo" height: 56px;</em>
-      </small>
-    </div>
-    <grn-input formControlName="input02z"
-      label="Enter value"
-      [config]="!isConfig ? null : config"
-      exterior9="'underline'"
-      frameSize9="'middle'"
-      isRequired9
-      [helperText]="'Demo helperText'">
-    </grn-input>
   </div>
+
 </form>
 
 <section mr-vr>

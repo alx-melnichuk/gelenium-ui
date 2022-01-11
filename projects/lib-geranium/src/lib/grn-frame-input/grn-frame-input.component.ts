@@ -93,27 +93,20 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
     let isLabelPadding = false;
     let isConfigFirstChange = false;
     if (changes.config) {
-      console.log('Frame.OnChanges config=', this.config);
       this.currConfig = { ...(this.rootConfig || {}), ...(this.config || {}) };
       isConfigFirstChange = changes.config.firstChange;
     }
     if (changes.exterior || (changes.config && !this.exterior)) {
-      console.log('Frame.OnChanges exterior=', this.exterior);
       this.innExterior = this.updateExterior(this.exterior || this.currConfig.exterior || null);
       isLabelPadding = true;
     }
     if (changes.frameSize || (changes.config && !this.frameSize)) {
-      console.log('Frame.OnChanges frameSize=', this.frameSize);
       this.innFrameSizeValue = this.updateFrameSize(this.frameSize || this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
       isLabelPadding = true;
     }
     if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      console.log('Frame.OnChanges LabelPadding  exterior=', this.innExterior, ' frameSize=', this.frameSize); // TODO !!!
       this.labelPadding = this.updateLabelPadding(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
       this.setPropertyLabelPaddingHor(this.labelPadding);
-      const eFirst = changes.exterior?.firstChange;
-      const fFirst = changes.frameSize?.firstChange;
-      console.log(`Frame.OnChanges LabelPadding  cFirChan=${isConfigFirstChange} exteriorFirChan=${eFirst} frameSizeFirChan=${fFirst}`);
       if (!(isConfigFirstChange || changes.exterior?.firstChange || changes.frameSize?.firstChange)) {
         this.setPropertyLabelPaddingVer(this.innExterior, this.innFrameSizeValue, this.lineHeight);
         this.setPropertyLabel2Padding(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
@@ -151,12 +144,10 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
   ngOnInit(): void {
     let isLabelPadding = false;
     if (this.innExterior == null) {
-      console.log('Frame.OnInit exterior=', this.innExterior);
       this.innExterior = this.updateExterior(this.currConfig.exterior || null);
       isLabelPadding = true;
     }
     if (this.innFrameSizeValue === 0) {
-      console.log('Frame.OnInit frameSize=', this.frameSize);
       this.innFrameSizeValue = this.updateFrameSize(this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
       isLabelPadding = true;
     }
@@ -173,8 +164,6 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
   }
 
   ngAfterContentInit(): void {
-    console.log('');
-    console.log('Frame.AfterContentInit() start'); // TODO del;
     const lineHeightPx = getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height');
     this.lineHeight = Number(lineHeightPx.replace('px', ''));
     this.setPropertyLabelPaddingVer(this.innExterior, this.innFrameSizeValue, this.lineHeight);
@@ -184,8 +173,6 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
 
     this.ornamentRgWidth = this.grnOrnamentRg?.nativeElement.offsetWidth || 0;
     this.setPropertyLabel2Padding(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
-    console.log('Frame.AfterContentInit() finish'); // TODO del;
-    console.log('');
   }
 
   // ** Public API **
@@ -213,7 +200,6 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
 
   private updateExterior(exterior: Exterior | null): Exterior {
     const result: Exterior = ExteriorUtil.create(exterior);
-    console.log('Frame.updateExterior() exterior=', result); // TODO del;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-outlined', ExteriorUtil.isOutlined(result));
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ext-o', ExteriorUtil.isOutlined(result) ? '' : null);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-underline', ExteriorUtil.isUnderline(result));
@@ -233,20 +219,16 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
       frameSizeValue = frameSizeValueInp;
     }
     HtmlElemUtil.setProperty(this.hostRef, '--size', frameSizeValue > 0 ? frameSizeValue + 'px' : null);
-    console.log(`Frame.updateFrameSizeValue() frameSize=${frameSize} frameSizeValue=${frameSizeValue}`); // TODO del;
     return frameSizeValue;
   }
 
   private updateLabelPadding(exterior: Exterior, frameSizeValue: number, labelPd?: number): number {
     HtmlElemUtil.setProperty(this.hostRef, '--br-rd', this.getBorderRadius(exterior, frameSizeValue));
-    const result = labelPd != null && labelPd > 0 ? labelPd : LabelPaddingUtil.hor(frameSizeValue, exterior);
-    console.log(`Frame.updateLabelPadding() result=${result}`); // TODO del;
-    return result;
+    return labelPd != null && labelPd > 0 ? labelPd : LabelPaddingUtil.hor(frameSizeValue, exterior);
   }
 
   private updateLabelShrink(isLabelShrinkInp: boolean | null, configIsLabelShrink?: boolean): boolean {
     const result = this.createBoolean(isLabelShrinkInp, configIsLabelShrink != null ? configIsLabelShrink : false);
-    console.log('Frame.updateLabelShrink() isLabelShrink=', result); // TODO del;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-shrink', result);
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'shr', result ? '' : null);
     return result;
@@ -254,14 +236,12 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
 
   private updateHiddenLabel(hiddenLabelInp: boolean | null, configHiddenLabel?: boolean): boolean {
     const result = this.createBoolean(hiddenLabelInp, configHiddenLabel != null ? configHiddenLabel : false);
-    console.log('Frame.updateHiddenLabel() hiddenLabel=', result); // TODO del;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-hidden-label', result);
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'hlbl', result ? '' : null);
     return result;
   }
 
   private setPropertyLabelPaddingVer(exterior: Exterior | null, frameSizeValue: number, lineHeight: number): void {
-    console.log(`Frame.setPropertyLabelPaddingVer() lineHeight=${lineHeight}`);
     HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-tp', LabelPaddingUtil.ver(true, exterior, frameSizeValue, lineHeight));
     HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-bt', LabelPaddingUtil.ver(false, exterior, frameSizeValue, lineHeight));
     HtmlElemUtil.setProperty(this.hostRef, '--lbl-trn-y', this.getLabelTranslateY(exterior, frameSizeValue, lineHeight));
@@ -269,21 +249,12 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
   }
 
   private setPropertyLabelPaddingHor(labelPadding: number): void {
-    console.log('Frame.setPropertyLabelPaddingHor() labelPadding=', labelPadding); // TODO del;
     const labelPaddingPx = labelPadding != null ? labelPadding + 'px' : labelPadding;
     HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-lf', labelPaddingPx);
     HtmlElemUtil.setProperty(this.hostRef, '--lbl-wd', this.getLabelMaxWidth(labelPadding));
   }
 
   private setPropertyLabel2Padding(labelPadding: number, ornamentLfWidth: number, ornamentRgWidth: number): void {
-    console.log(
-      'setPropertyLabel2Padding() labelPadding=',
-      labelPadding,
-      ' ornamentLfWidth=',
-      ornamentLfWidth,
-      ' ornamentRgWidth=',
-      ornamentRgWidth
-    );
     HtmlElemUtil.setProperty(this.hostRef, '--lbl2-wd', this.getLabel2MaxWidth(labelPadding, ornamentLfWidth, ornamentRgWidth));
   }
   // Determines the y transform value at the shrink position (top).
