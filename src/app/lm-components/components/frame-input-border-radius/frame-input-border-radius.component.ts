@@ -96,6 +96,7 @@ export class FrameInputBorderRadiusComponent {
     input06d: new FormControl('Demo - D', []),
     input06e: new FormControl('Demo - E', []),
     input06f: new FormControl('Demo - F', []),
+    input06g: new FormControl('Demo - G', []),
     input06h: new FormControl('Demo - H', []),
     input06i: new FormControl('Demo - I', []),
     input06j: new FormControl('Demo - J', []),

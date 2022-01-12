@@ -8,7 +8,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewEncapsul
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FrameInputComponent implements OnInit, AfterViewInit {
-  public showNum = '07';
+  public showNum = '';
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {
     // eslint-disable-next-line no-restricted-syntax

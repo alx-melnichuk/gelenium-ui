@@ -550,6 +550,24 @@ export class FrameInputComponent &#123;
 
   </div>
 
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Demo - E (border-radius: 5%/50%)</em>
+        </small>
+      </div>
+      <grn-input formControlName="input06e"
+        class="fibr-radius-e"
+        label="Enter value"
+        exterior="outlined"
+        [config]="configOutlined">
+      </grn-input>
+    </div>
+
+  </div>
+
   <hr br-nn>
   <div>
     <small>
@@ -562,11 +580,11 @@ export class FrameInputComponent &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Demo - E (top-left)</em>
+          <em>Demo - F (top-left)</em>
         </small>
       </div>
-      <grn-input formControlName="input06e"
-        class="fibr-radius-e"
+      <grn-input formControlName="input06f"
+        class="fibr-radius-f"
         label="Enter value"
         exterior="underline"
         [config]="configUnderline">
@@ -576,11 +594,11 @@ export class FrameInputComponent &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Demo - F (top-right)</em>
+          <em>Demo - G (top-right)</em>
         </small>
       </div>
-      <grn-input formControlName="input06f"
-        class="fibr-radius-f"
+      <grn-input formControlName="input06g"
+        class="fibr-radius-g"
         label="Enter value"
         exterior="underline"
         [config]="configUnderline">
@@ -750,6 +768,24 @@ export class FrameInputComponent &#123;
 
   &lt;/div&gt;
 
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Demo - E (border-radius: 5%/50%)&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06e"
+        class="fibr-radius-e"
+        label="Enter value"
+        exterior="outlined"
+        [config]="configOutlined"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
   &lt;hr br-nn&gt;
   &lt;div&gt;
     &lt;small&gt;
@@ -762,11 +798,11 @@ export class FrameInputComponent &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Demo - E (top-left)&lt;/em&gt;
+          &lt;em&gt;Demo - F (top-left)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input06e"
-        class="fibr-radius-e"
+      &lt;grn-input formControlName="input06f"
+        class="fibr-radius-f"
         label="Enter value"
         exterior="underline"
         [config]="configUnderline"&gt;
@@ -776,11 +812,11 @@ export class FrameInputComponent &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Demo - F (top-right)&lt;/em&gt;
+          &lt;em&gt;Demo - G (top-right)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input06f"
-        class="fibr-radius-f"
+      &lt;grn-input formControlName="input06g"
+        class="fibr-radius-g"
         label="Enter value"
         exterior="underline"
         [config]="configUnderline"&gt;
@@ -890,6 +926,7 @@ export class FrameInputComponent &#123;
     input06d: new FormControl('Demo - D', []),
     input06e: new FormControl('Demo - E', []),
     input06f: new FormControl('Demo - F', []),
+    input06g: new FormControl('Demo - G', []),
     input06h: new FormControl('Demo - H', []),
     input06i: new FormControl('Demo - I', []),
     input06j: new FormControl('Demo - J', []),
@@ -930,10 +967,14 @@ export class FrameInputComponent &#123;
   border-radius: 0 calc(var(--size)/4) 0 calc(var(--size)/4);
 &#125;
 
-.fibr-radius-e .gfi-underlin &#123;
+.fibr-radius-e .gfi-outlined &#123;
+  border-radius: 5% / 50%;
+&#125;
+
+.fibr-radius-F .gfi-underlin &#123;
   border-radius: calc(var(--size)/3) 0 0 0;
 &#125;
-.fibr-radius-f .gfi-underlin &#123;
+.fibr-radius-G .gfi-underlin &#123;
   border-radius: 0 calc(var(--size)/3) 0 0;
 &#125;
 

@@ -23,18 +23,6 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>inputId: string;</code>
-    </td>
-    <td>
-      <span>Data entry item identifier.
-        Specified in the value of the "for" attribute for the label.
-        <br />(default = '';)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
       <code>label: string;</code>
     </td>
     <td>
@@ -44,7 +32,16 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>exterior: string | null;</code>
+      <code>config: GrnFrameInputConfig | null = null;</code>
+    </td>
+    <td>
+      <span>Defines a configuration object.</span>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>@Input()</code>
+      <code>exterior: Exterior | null = null;</code>
     </td>
     <td>
       <span>
@@ -54,19 +51,47 @@
       <ul>
         <li>"outlined";</li>
         <li>"underline";</li>
-        <li>"standard" (default);</li>
+        <li>"standard";</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>
       <code>@Input()</code>
-      <code>isRequired: boolean;</code>
+      <code>frameSize: FrameSize | null = null;</code>
     </td>
     <td>
-      <span>Adds a validation condition: required field.
-        <br />(default = false;)
+      <span>Determines the size of the element.<br />
+        It can take the following values:
       </span>
+      <ul>
+        <li>"short" - if one line is height: 38px;</li>
+        <li>"small" - if one line is height: 44px;</li>
+        <li>"middle" - if one line is height: 50px;</li>
+        <li>"normal" - if one line is height: 56px; (default)</li>
+        <li>"large" - if one line is height: 62px;</li>
+        <li>"huge" - if one line is height: 68px;</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>@Input()</code>
+      <code>isLabelShrink: boolean | null = null;</code>
+    </td>
+    <td>
+      <span>
+        An indication that the label has moved up and shrunk.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>@Input()</code>
+      <code>hiddenLabel: boolean | null = null;</code>
+    </td>
+    <td>
+      <span>Disables the display of the label.</span>
     </td>
   </tr>
   <tr>
@@ -101,27 +126,6 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>isLabelShrink: boolean;</code>
-    </td>
-    <td>
-      <span>An indication that the label has moved up and shrunk.
-        <br />(default = false;)</span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>hiddenLabel: boolean;</code>
-    </td>
-    <td>
-      <span>Disables the display of the label.
-        <br />(default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
       <code>isError: boolean;</code>
     </td>
     <td>
@@ -133,31 +137,25 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>helperText: string;</code>
+      <code>isRequired: boolean;</code>
     </td>
     <td>
-      <span>Specifies the text for additional clarification or error.
-        <br />(default = null;)
+      <span>Adds a validation condition: required field.
+        <br />(default = false;)
       </span>
     </td>
   </tr>
   <tr>
     <td>
-      <code>@Input()</code>
-      <code>frameSize: FrameSize;</code>
+      <code>@Output()</code>
+      <code>
+        readonly clickFrame: EventEmitter&lt;Event&gt; = new EventEmitter();
+      </code>
     </td>
     <td>
-      <span>Determines the size of the element.<br />
-        It can take the following values:
+      <span>
+        Defines a click event on the element's frame
       </span>
-      <ul>
-        <li>"short" - if one line is height: 38px;</li>
-        <li>"small" - if one line is height: 44px;</li>
-        <li>"middle" - if one line is height: 50px;</li>
-        <li>"normal" - if one line is height: 56px; (default)</li>
-        <li>"large" - if one line is height: 62px;</li>
-        <li>"huge" - if one line is height: 68px;</li>
-      </ul>
     </td>
   </tr>
 </table>
@@ -172,147 +170,97 @@
   </tr>
 
   <tr>
-    <td><code>--g-hov-cl: rgba(0, 0, 0, 0.87);</code></td>
+    <td><code>--gfi-hov-cl: rgba(0, 0, 0, 0.87);</code></td>
     <td>
       <span>The color of the label and border on mouse hover.</span>
     </td>
   </tr>
   <tr>
-    <td><code>--g-err-cl: #d32f2f;</code></td>
+    <td><code>--gfi-err-cl: #d32f2f;</code></td>
     <td>
       <span>The color of the label and border in an error state.</span>
     </td>
   </tr>
   <tr>
-    <td><code>--g-hov-err-cl: #ff8950;</code></td>
+    <td><code>--gfi-hov-err-cl: #ff0000;</code></td>
     <td>
       <span>The color of the label and border on mouse hover in an error state.</span>
     </td>
   </tr>
   <tr>
-    <td><code>--g-foc-cl: #1976d2;</code></td>
+    <td><code>--gfi-foc-cl: #1976d2;</code></td>
     <td>
       <span>The color of the border and label when getting focus.</span>
     </td>
   </tr>
-
   <tr>
-    <td><code>--g-lbl-def-cl: rgba(0, 0, 0, 0.6);</code></td>
-    <td>
-      <span>The default color for the label.</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>--g-lbl-dis-cl: rgba(0, 0, 0, 0.38);</code></td>
+    <td><code>--gfi-dis-cl: #787878;</code></td>
     <td>
       <span>The color of the label and border in the state is disabled.</span>
     </td>
   </tr>
 
   <tr>
-    <td><code>--g-o-def-br-cl: rgba(0, 0, 0, 0.23);</code></td>
+    <td><code>--gfi-lbl-def-cl: rgba(0, 0, 0, 0.6);</code></td>
+    <td>
+      <span>The default color for the label.</span>
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>--gfi-o-lgn-pd: 0.3em;</code></td>
+    <td>
+      <span>Small indentation of the legend from the border for "outlined" mode.</span>
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>--gfi-o-def-br-cl: rgba(0, 0, 0, 0.23);</code></td>
     <td>
       <span>The default border color for "outlined" mode.</span>
     </td>
   </tr>
 
   <tr>
-    <td><code>--g-u-def-bg-cl: rgba(0, 0, 0, 0.06);</code></td>
+    <td><code>--gfi-u-def-bg-cl: rgba(0, 0, 0, 0.06);</code></td>
     <td>
-      <span>The default background color and on error for "underline" mode.</span>
+      <span>The default background color for "underline" mode.</span>
     </td>
   </tr>
   <tr>
-    <td><code>--g-u-foc-bg-cl: rgba(0, 0, 0, 0.04);</code></td>
-    <td>
-      <span>The background color when getting focus for "underline" mode.</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>--g-u-hov-bg-cl: rgba(0, 0, 0, 0.09);</code></td>
+    <td><code>--gfi-u-hov-bg-cl: #1976d20b;</code></td>
     <td>
       <span>The background color on mouse hover for the "underline" mode.</span>
     </td>
   </tr>
   <tr>
-    <td><code>--g-u-dis-bg-cl: rgba(0, 0, 0, 0.12);</code></td>
+    <td><code>--gfi-u-err-bg-cl: #d32f2f0f;</code></td>
+    <td>
+      <span>The background color in an error state for "underline" mode.</span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--gfi-u-hov-err-bg-cl: #d32f2f0b;</code></td>
+    <td>
+      <span>The background color on mouse hover in an error state for "underline" mode.</span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--gfi-u-foc-bg-cl: #1976d20f;</code></td>
+    <td>
+      <span>The background color when getting focus for "underline" mode.</span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--gfi-u-dis-bg-cl: #7878783b;</code></td>
     <td>
       <span>The background color in the state is disabled for the "underline" mode.</span>
     </td>
   </tr>
   <tr>
-    <td><code>--g-su-def-br-cl: rgba(0, 0, 0, 0.42);</code></td>
+    <td><code>--gfi-su-def-br-cl: rgba(0, 0, 0, 0.42);</code></td>
     <td>
       <span>The default bottom border color for "underline" and "standard" modes.</span>
-    </td>
-  </tr>
-</table>
-
-<section mr-vr>
-  <h4>Child classes for "grn-frame-input" at the level ??// TODO ??.</h4>
-</section>
-
-<table class="app-tab">
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-  </tr>
-
-  <tr>
-    <td colspan="2">
-      <small><em>Color for "Input".</em></small>
-    </td>
-  </tr>
-
-  <tr>
-    <td colspan="2">
-      <small><em>Color for "label" and "helperText".</em></small>
-    </td>
-  </tr>
-
-  <tr>
-    <td colspan="2">
-      <small><em>Border-color for "outlined" mode.</em></small>
-    </td>
-  </tr>
-
-  <tr>
-    <td colspan="2">
-      <small><em>Background-color for "underline" mode.</em></small>
-    </td>
-  </tr>
-
-  <tr>
-    <td colspan="2">
-      <small><em>Border-bottom-color for "underline" and "standard" mode.</em></small>
-    </td>
-  </tr>
-</table>
-
-<section mr-vr>
-  <h4>Css variables at the "grn-frame-input" level.</h4>
-</section>
-
-<table class="app-tab">
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-  </tr>
-
-  <tr>
-    <td colspan="2">
-      <small><em>For "outlined" mode.</em></small>
-    </td>
-  </tr>
-  <tr>
-    <td><code>--g-o-lgn-pd: 0.6ex;</code></td>
-    <td>
-      <span>Small indentation of the legend from the border for "outlined" mode.</span>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      <small><em>For "underline" mode.</em></small>
     </td>
   </tr>
 </table>

@@ -50,10 +50,14 @@ app-frame-input-border-radius {
     border-radius: 0 calc(var(--size)/4) 0 calc(var(--size)/4);
   }
 
-  .fibr-radius-e .gfi-underlin {
+  .fibr-radius-e .gfi-outlined {
+    border-radius: 5% / 50%;
+  }
+
+  .fibr-radius-f .gfi-underlin {
     border-radius: calc(var(--size)/3) 0 0 0;
   }
-  .fibr-radius-f .gfi-underlin {
+  .fibr-radius-g .gfi-underlin {
     border-radius: 0 calc(var(--size)/3) 0 0;
   }
 

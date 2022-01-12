@@ -62,7 +62,7 @@
           background.
         </li>
         <li>
-          "standard" - The border is just at the bottom of the element. (default)
+          "standard" - The border is just at the bottom of the element.
         </li>
       </ul>
       <span>(optional)</span>
@@ -88,6 +88,15 @@
     </td>
   </tr>
   <tr>
+    <td><code>frameSizeValue?: number;</code></td>
+    <td>
+      <span>
+        This property sets the height of the element in pixels.
+        This property applies only if there is no "frameSize" property.
+      </span>
+    </td>
+  </tr>
+  <tr>
     <td><code>isLabelShrink?: boolean;</code></td>
     <td>
       <span>
@@ -101,13 +110,54 @@
     <td><code>hiddenLabel?: boolean;</code></td>
     <td>
       <span>
-        Disables the display of the label.
+        Disabled the display of the label.
         <br />(default = false;)
       </span><br />
       <span>(optional)</span>
     </td>
   </tr>
-
+  <tr>
+    <td><code>labelPd?: number;</code></td>
+    <td>
+      <span>
+        The value of the label offset from the frame (in pixels).
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>ornamLfAlign?: OrnamAlign;</code></td>
+    <td>
+      <span>
+        This property controls the vertical alignment for the left ornament.
+        It takes the following values:
+      </span>
+      <ul>
+        <li>"default" - defines the default</li>
+        <li>"center" - defines middle alignment</li>
+        <li>"flexStart" - defines top alignment</li>
+        <li>"flexEnd" - defines bottom alignment</li>
+        <li>"baseline" - defines baseline alignment</li>
+        <li>"stretch" - stretches across the entire height</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><code>ornamRgAlign?: OrnamAlign;</code></td>
+    <td>
+      <span>
+        This property controls the vertical alignment of the right ornament.
+        It takes the following values:
+      </span>
+      <ul>
+        <li>"default" - defines the default</li>
+        <li>"center" - defines middle alignment</li>
+        <li>"flexStart" - defines top alignment</li>
+        <li>"flexEnd" - defines bottom alignment</li>
+        <li>"baseline" - defines baseline alignment</li>
+        <li>"stretch" - stretches across the entire height</li>
+      </ul>
+    </td>
+  </tr>
 </table>
 
 <section mr-vr>
