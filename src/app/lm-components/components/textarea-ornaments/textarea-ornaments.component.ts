@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Exterior } from 'projects/lib-geranium/src/lib/interfaces/exterior.interface';
-import { FrameSize } from 'projects/lib-geranium/src/lib/interfaces/frame-size.interface';
 import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/interfaces/grn-frame-input-config.interface';
+import { OrnamAlign } from 'projects/lib-geranium/src/lib/interfaces/ornam-align.interface';
 
 import {
   CN_LABEL_CSS,
@@ -40,14 +39,16 @@ export class TextareaOrnamentsComponent {
   public minLength05 = 4;
   public maxLength05 = 15;
   public controls05 = {
-    input05a: new FormControl('thirty', []),
-    input05b: new FormControl('thirty', []),
-    input05c: new FormControl('one', [Validators.required, Validators.minLength(this.minLength05), Validators.maxLength(this.maxLength05)]),
-    input05d: new FormControl('five hundred ninety eight', [
-      Validators.required,
-      Validators.minLength(this.minLength05),
-      Validators.maxLength(this.maxLength05),
-    ]),
+    input05a: new FormControl('', []),
+    input05b: new FormControl('First line\nSecond line', []),
+    input05c: new FormControl('', []),
+    input05d: new FormControl('', []),
+    // input05c: new FormControl('one', [Validators.required, Validators.minLength(this.minLength05), Validators.maxLength(this.maxLength05)]),
+    // input05d: new FormControl('five hundred ninety eight', [
+    //   Validators.required,
+    //   Validators.minLength(this.minLength05),
+    //   Validators.maxLength(this.maxLength05),
+    // ]),
     input05e: new FormControl('thirty', [Validators.required]),
     input05f: new FormControl('thirty', [Validators.required]),
     input05g: new FormControl('thirty', [Validators.required]),
@@ -55,25 +56,18 @@ export class TextareaOrnamentsComponent {
   };
   public formGroup05: FormGroup = new FormGroup(this.controls05);
   public exterior05 = 'outlined';
+  public isBtnEye05c = false;
+  public isBtnEye05d = false;
+
   public isBtnEyeCrossed05e = false;
   public isBtnEyeCrossed05f = false;
   public isBtnEyeCrossed05g = false;
   public isBtnEyeCrossed05h = false;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
-  public config: GrnFrameInputConfig = {
-    // exterior: Exterior.outlined,
-    exterior: Exterior.underline,
-    // exterior: Exterior.standard,
-    // frameSizeVal?: number;
-    frameSize: FrameSize.middle,
-    // frameSize: FrameSize.large,
-    // frameSizeValue: 54,
-    // isLabelShrink: true, // isLabelShrink?: boolean;
-    // hiddenLabel: true, // hiddenLabel?: boolean;
-    // ornamLfAlign?: OrnamAlign;
-    // ornamRgAlign?: OrnamAlign;
-    labelPd: 18, // labelPd?: number; // px
+  public configBaseline: GrnFrameInputConfig = {
+    ornamLfAlign: OrnamAlign.baseline,
+    ornamRgAlign: OrnamAlign.baseline,
   };
   public isConfig = false;
 }

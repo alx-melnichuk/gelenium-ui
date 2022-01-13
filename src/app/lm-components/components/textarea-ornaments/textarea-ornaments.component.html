@@ -1,5 +1,18 @@
 <section mr-vr>
   <h3>Ornaments for the textarea.</h3>
+  <p>
+    It is possible to add a different ornament (picture or text) for the input line.
+    It will appear as a prefix or suffix for the input string.
+    You can define the reaction to pressing an element of the ornament.
+    <br />To add a prefix, you need to add a tag with the "grnOrnamentLf" attribute inside the
+    "grn-input" tag. (&lt;span grnOrnamentLf&gt;kg&lt;/span&gt;)
+    <br />To add a suffix, you need to add a tag with the "grnOrnamentRg" attribute inside the
+    "grn-input" tag.
+    (&lt;span grnOrnamentRg&gt;cm&lt;/span&gt;)
+    <br />
+    Adding a prefix or suffix does not disable legend animation for that input field.
+  </p>
+
 </section>
 
 <section mr-vr>
@@ -11,13 +24,6 @@
   </mat-button-toggle-group>
 </section>
 
-<section mr-vr>
-  <input type="checkbox"
-    [(ngModel)]="isConfig" />
-  isConfig={{isConfig}}
-</section>
-
-
 <form class="io-ornament"
   [formGroup]="formGroup05"
   novalidate
@@ -25,41 +31,79 @@
 
   <div class="app-group">
 
-    <div class="app-elem io-elem">
+    <div class="app-elem to-elem">
       <div>
         <small>
-          <em>Section: "grnOrnament" + text.</em>
+          <em>Section: "grnOrnamentLf" + text.</em>
         </small>
       </div>
       <grn-textarea formControlName="input05a"
         label="Enter the mass"
-        [cntRows]="1"
-        [config]="!isConfig ? null : config"
-        exterior9="exterior05"
-        frameSize9="'middle'"
-        helperText="The value is greater than zero.">
-        <span grnOrnament9
-          class="io-pd-8">kg</span>
+        [cntRows]="2"
+        helperText="The field must have a value."
+        [exterior]="exterior05"
+        [config]="configBaseline">
+        <span grnOrnamentLf
+          class="to-pd-hor">kg</span>
       </grn-textarea>
     </div>
 
-    <!-- <div class="app-elem io-elem">
+    <div class="app-elem to-elem">
       <div>
         <small>
-          <em>Section: "grnOrnamentEnd" + text.</em>
+          <em>Section: "grnOrnamentRg" + text.</em>
         </small>
       </div>
       <grn-textarea formControlName="input05b"
         label="Enter the height"
         [cntRows]="2"
-        [config]="!isConfig ? null : config"
-        exterior9="exterior05"
-        frameSize9="'middle'"
-        helperText="The value is greater than zero.">
-        <span grnOrnamentEnd9
-          class="io-pd-8">см</span>
+        helperText="The field must have a value."
+        [exterior]="exterior05"
+        [config]="configBaseline">
+        <span grnOrnamentRg
+          class="to-pd-hor">cm</span>
       </grn-textarea>
-    </div> -->
+    </div>
+
+    <div class="app-elem to-elem">
+      <div>
+        <small>
+          <em>Section: "grnOrnamentLf" + uncode.</em>
+        </small>
+      </div>
+      <grn-textarea formControlName="input05c"
+        label="Enter text value"
+        [cntRows]="2"
+        helperText="The field must have a value."
+        [exterior]="exterior05"
+        [config]="configBaseline">
+        <button grnOrnamentLf
+          class="to-btn to-uncode"
+          (click)="isBtnEye05c=!isBtnEye05c">
+          <span>{{ isBtnEye05c ? '&#128153;': '&#128154;' }}</span>
+        </button>
+      </grn-textarea>
+    </div>
+
+    <div class="app-elem to-elem">
+      <div>
+        <small>
+          <em>Section: "grnOrnamentRg" + uncode.</em>
+        </small>
+      </div>
+      <grn-textarea formControlName="input05d"
+        label="Enter text value"
+        [cntRows]="2"
+        helperText="The field must have a value."
+        [exterior]="exterior05"
+        [config]="configBaseline">
+        <button grnOrnamentRg
+          class="to-btn to-uncode"
+          (click)="isBtnEye05d=!isBtnEye05d">
+          <span>{{ isBtnEye05d ? '&#129505;': '&#128156;' }}</span>
+        </button>
+      </grn-textarea>
+    </div>
 
   </div>
 

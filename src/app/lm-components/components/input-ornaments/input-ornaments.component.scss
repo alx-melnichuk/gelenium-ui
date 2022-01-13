@@ -3,19 +3,6 @@
 app-input-ornaments {
   display: block;
 
-  // .demo1 .gfi-label:not(.gfi-shrink) {  // work
-  //   max-width: calc(133% - 4px);
-  //   transform: translate(35px, 17.5px) scale(1);
-  // }
-  // .demo1 .gfi-elem { // work
-  //   padding-top: var(--lbl-pd-tp);    // # o:16.5px; us:24.75px;
-  //   padding-bottom: var(--lbl-pd-bt); // # o:16.5px; us: 8.25px;
-  // }
-  // .demo1 .gfi-elem { // work
-  //   padding-top: 15px;    // # o:16.5px; us:24.75px;
-  //   padding-bottom: 15px; // # o:16.5px; us: 8.25px;
-  // }
-
   .io-elem {
     width: 26ch;
   }
@@ -24,12 +11,13 @@ app-input-ornaments {
     width: 160px;
   }
   .io-elem2 > div {
-    margin-bottom: 13px;
+    margin-bottom: 6px;
   }
-  .io-ornament .io-pd-hor {
+  .io-pd-hor {
     padding-left: 8px;
     padding-right: 8px;
   }
+
   .io-ornament .io-btn {
     outline: 0;
     border: 0;
@@ -51,7 +39,7 @@ app-input-ornaments {
   .io-uncode2 {
     font-size: 24px;
     padding-top: 2px;
-    padding-bottom: 2px;
+    padding-bottom: 5px;
     color: #00000080;
     &:hover {
       color: #000000fa;

@@ -340,10 +340,10 @@ grn-frame-input { //outline: 1px dashed crimson;
     align-self: flex-end;
   }
 
-  .gfi-u-frm .gfi-ornam-lf,
-  .gfi-s-frm .gfi-ornam-lf,
-  .gfi-s-frm .gfi-ornam-rg {
-    .gfi-su-ornam {
+  &[ext-u]>div>span[ornam-lf],
+  &[ext-s]>div>span[ornam-lf], 
+  &[ext-s]>div>span[ornam-rg] {
+    &>.gfi-su-ornam {
       display: inline-block;
       margin-bottom: var(--lbl-pd-bt); // # 8.25px;
     }

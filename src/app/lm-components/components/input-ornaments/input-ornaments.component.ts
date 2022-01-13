@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/interfaces/grn-frame-input-config.interface';
-import { OrnamAlign } from 'projects/lib-geranium/src/lib/interfaces/ornam-align.interface';
+import { OrnamAlign, OrnamAlignUtil } from 'projects/lib-geranium/src/lib/interfaces/ornam-align.interface';
 
 import {
   CN_LABEL_CSS,
@@ -39,14 +39,10 @@ export class InputOrnamentsComponent {
   public minLength05 = 3;
   public maxLength05 = 15;
   public controls05 = {
-    input05a: new FormControl('thirty', []),
+    input05a: new FormControl('', []),
     input05b: new FormControl('thirty', []),
     input05c: new FormControl('one', [Validators.required, Validators.minLength(this.minLength05), Validators.maxLength(this.maxLength05)]),
-    input05d: new FormControl('five hundred', [
-      Validators.required,
-      Validators.minLength(this.minLength05),
-      Validators.maxLength(this.maxLength05),
-    ]),
+    input05d: new FormControl('', [Validators.required, Validators.minLength(this.minLength05), Validators.maxLength(this.maxLength05)]),
     input05e: new FormControl('thirty', [Validators.required]),
     input05f: new FormControl('thirty', [Validators.required]),
     input05g: new FormControl('thirty', [Validators.required]),
@@ -61,19 +57,20 @@ export class InputOrnamentsComponent {
   public isBtnEyeCrossed05f = false;
   public isBtnEyeCrossed05g = false;
   public isBtnEyeCrossed05h = false;
-  public ornamLfAlign05 = 'default';
-  public ornamRgAlign05 = 'default';
+  public ornamLfAlign05 = 'baseline';
+  public ornamRgAlign05 = 'baseline';
 
-  public config05: GrnFrameInputConfig = {
-    ornamLfAlign: OrnamAlign.flexStart,
-    ornamRgAlign: OrnamAlign.flexStart,
-  };
-  // default = 'default',
-  // center = 'center',
-  // flexStart = 'flex-start',
-  // flexEnd = 'flex-end',
-  // baseline = 'baseline',
-  // stretch = 'stretch',
+  public config05: GrnFrameInputConfig = {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor() {
+    this.changeConfig05(this.convert(this.ornamLfAlign05), this.convert(this.ornamRgAlign05));
+  }
+
+  public convert(ornamAlign: string | null): OrnamAlign {
+    return OrnamAlignUtil.convert(ornamAlign) || OrnamAlign.default;
+  }
+
+  public changeConfig05(ornamLfAlign: OrnamAlign | undefined, ornamRgAlign: OrnamAlign | undefined): void {
+    this.config05 = { ornamLfAlign, ornamRgAlign };
+  }
 }

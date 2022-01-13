@@ -49,7 +49,15 @@
         <span>The content of the label.<br />(default = '';)</span>
       </td>
     </tr>
-
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>config: GrnFrameInputConfig | null = null;</code>
+      </td>
+      <td>
+        <span>Defines a configuration object.</span>
+      </td>
+    </tr>
     <tr>
       <td>
         <code>@Input()</code>
@@ -65,43 +73,6 @@
           <li>"underline";</li>
           <li>"standard" (default);</li>
         </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>isReadOnly: string | null;</code>
-      </td>
-      <td>
-        <span>Whether the element is readonly.<br />Attribute (no content).</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>isRequired: string | null;</code>
-      </td>
-      <td>
-        <span>Adds a validation condition: required field.<br />Attribute (no content).</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>isDisabled: string | null;</code>
-      </td>
-      <td>
-        <span>The element is disabled.<br />Attribute (no content).</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>lbShrink: string | null;</code>
-      </td>
-      <td>
-        <span>Disable label animation. The label is always static, at the top.<br />Attribute (no
-          content).</span>
       </td>
     </tr>
     <tr>
@@ -126,10 +97,33 @@
     <tr>
       <td>
         <code>@Input()</code>
+        <code>lbShrink: string | null;</code>
+      </td>
+      <td>
+        <span>
+          Disable label animation. The label is always static, at the top.<br />
+          Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
         <code>hiddenLabel: string | null;</code>
       </td>
       <td>
-        <span>Disables the display of the label.<br />Attribute (no content).</span>
+        <span>
+          Disables the display of the label.<br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isDisabled: string | null;</code>
+      </td>
+      <td>
+        <span>The element is disabled.<br />Attribute (no content).</span>
       </td>
     </tr>
     <tr>
@@ -138,8 +132,41 @@
         <code>isError: string | null;</code>
       </td>
       <td>
-        <span>Forces the error status of an item to be displayed.<br />Attribute (no
-          content).</span>
+        <span>
+          Forces the error status of an item to be displayed.<br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isRequired: string | null;</code>
+      </td>
+      <td>
+        <span>
+          Adds a validation condition: required field.<br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>helperText: string;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text for additional clarification or error.
+          <br />(default = null;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isReadOnly: string | null;</code>
+      </td>
+      <td>
+        <span>Whether the element is readonly.<br />Attribute (no content).</span>
       </td>
     </tr>
     <tr>
@@ -148,9 +175,9 @@
         <code>pattern: string;</code>
       </td>
       <td>
-        <span>The attribute defines a regular expression that is passed to the native input element
-          to validate the
-          input value.
+        <span>
+          The attribute defines a regular expression that is passed to the native input element
+          to validate the input value.
           Applies to an input element of type: text, tel, email, url, password, and search.
           <br />(default = '';)
         </span>
@@ -170,21 +197,11 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>helperText: string;</code>
-      </td>
-      <td>
-        <span>Specifies the text for additional clarification or error.
-          <br />(default = null;)
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
         <code>wdFull: string;</code>
       </td>
       <td>
-        <span>Sets the parent's width (width: 100%;).
+        <span>
+          Sets the width to the parent's width (width: 100%;).
           <br />Attribute (no content).
         </span>
       </td>
@@ -195,7 +212,7 @@
         <code>step: number;</code>
       </td>
       <td>
-        <span>The step value for increasing / decreasing the value of the input element.
+        <span>The step value for increasing/decreasing the value of the input element.
           <br />(default = null;)
         </span>
       </td>
