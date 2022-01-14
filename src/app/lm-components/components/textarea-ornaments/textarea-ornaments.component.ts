@@ -36,38 +36,21 @@ export class TextareaOrnamentsComponent {
   @Input()
   public labelCss = CN_LABEL_CSS;
 
-  public minLength05 = 4;
-  public maxLength05 = 15;
   public controls05 = {
     input05a: new FormControl('', []),
     input05b: new FormControl('First line\nSecond line', []),
     input05c: new FormControl('', []),
     input05d: new FormControl('', []),
-    // input05c: new FormControl('one', [Validators.required, Validators.minLength(this.minLength05), Validators.maxLength(this.maxLength05)]),
-    // input05d: new FormControl('five hundred ninety eight', [
-    //   Validators.required,
-    //   Validators.minLength(this.minLength05),
-    //   Validators.maxLength(this.maxLength05),
-    // ]),
-    input05e: new FormControl('thirty', [Validators.required]),
-    input05f: new FormControl('thirty', [Validators.required]),
-    input05g: new FormControl('thirty', [Validators.required]),
-    input05h: new FormControl('thirty', [Validators.required]),
   };
   public formGroup05: FormGroup = new FormGroup(this.controls05);
   public exterior05 = 'outlined';
   public isBtnEye05c = false;
   public isBtnEye05d = false;
 
-  public isBtnEyeCrossed05e = false;
-  public isBtnEyeCrossed05f = false;
-  public isBtnEyeCrossed05g = false;
-  public isBtnEyeCrossed05h = false;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
   public configBaseline: GrnFrameInputConfig = {
     ornamLfAlign: OrnamAlign.baseline,
     ornamRgAlign: OrnamAlign.baseline,
   };
-  public isConfig = false;
 }

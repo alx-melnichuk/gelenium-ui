@@ -209,7 +209,8 @@
         [helperText]="
         controls05.input05g.errors?.required
         ? 'The password value is required.'
-        :'Enter the password value.'">
+        :'Enter the password value.'"
+        [ornamLfAlign]="'baseline'">
         <button grnOrnamentLf
           class="io-btn io-uncode"
           (click)="isBtnEyeCrossed05g=!isBtnEyeCrossed05g">
@@ -232,7 +233,8 @@
         [helperText]="
         controls05.input05h.errors?.required
         ? 'The password value is required.'
-        :'Enter the password value.'">
+        :'Enter the password value.'"
+        [config]="config05h">
         <button grnOrnamentRg
           class="io-btn io-uncode"
           (click)="isBtnEyeCrossed05h=!isBtnEyeCrossed05h">
@@ -527,11 +529,12 @@
         [helperText]="
         controls05.input05g.errors?.required
         ? 'The password value is required.'
-        :'Enter the password value.'"&gt;
+        :'Enter the password value.'"
+        [ornamLfAlign]="'baseline'"&gt;
         &lt;button grnOrnamentLf
           class="io-btn io-uncode"
           (click)="isBtnEyeCrossed05g=!isBtnEyeCrossed05g"&gt;
-          &lt;span&gt;<b>&#123;</b>&#123; isBtnEyeCrossed05g ? '&#128275;': '&#128274;' &#125;&#125;&lt;/span&gt;
+          &lt;span&gt;<b>&#123;</b>&#123; isBtnEyeCrossed05g ? '&amp;#128275;': '&amp;#128274;' &#125;&#125;&lt;/span&gt;
         &lt;/button&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
@@ -550,11 +553,12 @@
         [helperText]="
         controls05.input05h.errors?.required
         ? 'The password value is required.'
-        :'Enter the password value.'"&gt;
+        :'Enter the password value.'"
+        [config]="config05h"&gt;
         &lt;button grnOrnamentRg
           class="io-btn io-uncode"
           (click)="isBtnEyeCrossed05h=!isBtnEyeCrossed05h"&gt;
-          &lt;span&gt;<b>&#123;</b>&#123; isBtnEyeCrossed05h ? '&#128275;': '&#128274;' &#125;&#125;&lt;/span&gt;
+          &lt;span&gt;<b>&#123;</b>&#123; isBtnEyeCrossed05h ? '&amp;#128275;': '&amp;#128274;' &#125;&#125;&lt;/span&gt;
         &lt;/button&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
@@ -578,13 +582,13 @@
           class="io-btn io-uncode2"
           (click)="controls05.input05i.setValue(
             (controls05.input05i.value || 0) - 1)"&gt;
-          &#8854;
+          &amp;#8854;
         &lt;/button&gt;
         &lt;button grnOrnamentRg
           class="io-btn io-uncode2"
           (click)="controls05.input05i.setValue(
             (controls05.input05i.value || 0) + 1)"&gt;
-          &#8853;
+          &amp;#8853;
         &lt;/button&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
@@ -640,6 +644,7 @@
     &lt;/div&gt;
 
   &lt;/div&gt;
+
 &lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
@@ -683,6 +688,9 @@ export class InputComponent &#123;
   public isBtnEyeCrossed05f = false;
   public isBtnEyeCrossed05g = false;
   public isBtnEyeCrossed05h = false;
+  public config05h: GrnFrameInputConfig = &#123;
+    ornamRgAlign: OrnamAlign.baseline,
+  &#125;;
   public ornamLfAlign05 = 'baseline';
   public ornamRgAlign05 = 'baseline';
 

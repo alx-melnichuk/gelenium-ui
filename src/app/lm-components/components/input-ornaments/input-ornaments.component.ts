@@ -57,6 +57,9 @@ export class InputOrnamentsComponent {
   public isBtnEyeCrossed05f = false;
   public isBtnEyeCrossed05g = false;
   public isBtnEyeCrossed05h = false;
+  public config05h: GrnFrameInputConfig = {
+    ornamRgAlign: OrnamAlign.baseline,
+  };
   public ornamLfAlign05 = 'baseline';
   public ornamRgAlign05 = 'baseline';
 

@@ -101,6 +101,10 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
   public minLength: number | null = null;
   @Input()
   public maxLength: number | null = null;
+  @Input()
+  public ornamLfAlign: string | null = null; // OrnamAlign
+  @Input()
+  public ornamRgAlign: string | null = null; // OrnamAlign
 
   @Output()
   readonly inputData: EventEmitter<Event> = new EventEmitter();
@@ -127,10 +131,10 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
   }
 
   public currConfig: GrnFrameInputConfig = {};
-  public exterior2: Exterior | null = null;
   public innExterior: Exterior | null = null;
-  public frameSize2: FrameSize | null = null;
+  public exterior2: Exterior | null = null;
   public innFrameSizeValue = 0;
+  public frameSize2: FrameSize | null = null;
   public isLabelShrink2: boolean | null = null; // Binding attribute "lbShrink".
   public isHiddenLabel2: boolean | null = null; // Binding attribute "hiddenLabel".
   public labelPadding = 0;
@@ -145,8 +149,8 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public isFocused = false;
   public isFilled = false;
-  public ornamLfAlign: OrnamAlign = OrnamAlign.default;
-  public ornamRgAlign: OrnamAlign = OrnamAlign.default;
+  public ornamLfAlign2: OrnamAlign = OrnamAlign.default;
+  public ornamRgAlign2: OrnamAlign = OrnamAlign.default;
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -181,6 +185,12 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
       const labelPd = this.currConfig?.labelPd || 0;
       this.labelPadding = labelPd > 0 ? labelPd : LabelPaddingUtil.hor(this.innFrameSizeValue, this.innExterior);
       this.setPropertyLabelPaddingHor(this.labelPadding);
+    }
+    if (changes.ornamLfAlign || (changes.config && !this.ornamLfAlign)) {
+      this.ornamLfAlign2 = OrnamAlignUtil.convert(this.ornamLfAlign) || this.currConfig.ornamLfAlign || OrnamAlign.default;
+    }
+    if (changes.ornamRgAlign || (changes.config && !this.ornamRgAlign)) {
+      this.ornamRgAlign2 = OrnamAlignUtil.convert(this.ornamRgAlign) || this.currConfig.ornamRgAlign || OrnamAlign.default;
     }
     if (changes.lbShrink) {
       this.isLabelShrink2 = this.lbShrink === '' || this.lbShrink === 'true' ? true : this.lbShrink === 'false' ? false : null;
@@ -348,8 +358,8 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
   }
 
   private initConfig(config: GrnFrameInputConfig): GrnFrameInputConfig {
-    this.ornamLfAlign = OrnamAlignUtil.create(config?.ornamLfAlign || this.ornamLfAlign, null);
-    this.ornamRgAlign = OrnamAlignUtil.create(config?.ornamRgAlign || this.ornamRgAlign, null);
+    this.ornamLfAlign2 = OrnamAlignUtil.create(config?.ornamLfAlign || this.ornamLfAlign2, null);
+    this.ornamRgAlign2 = OrnamAlignUtil.create(config?.ornamRgAlign || this.ornamRgAlign2, null);
     return config;
   }
 
