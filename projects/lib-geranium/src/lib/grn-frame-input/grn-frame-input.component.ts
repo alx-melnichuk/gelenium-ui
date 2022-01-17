@@ -261,11 +261,13 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
   private getLabelTranslateY(exterior: Exterior | null, frameSizeValue: number, lineHeight: number): string | null {
     let result: string | null = null;
     if (exterior != null && frameSizeValue > 0 && lineHeight > 0) {
-      result = '-1.5px';
-      if (exterior === Exterior.outlined) {
-        result = ((-0.75 * lineHeight) / 2).toFixed(2) + 'px'; // # -8.28px
+      result = lineHeight * 0.25 + 'px';
+      if (exterior === Exterior.standard) {
+        result = ((frameSizeValue * 0.75 - lineHeight * 1.27) * 0.4).toFixed(2) + 'px';
+      } else if (exterior === Exterior.outlined) {
+        result = ((-0.75 * lineHeight) / 2).toFixed(2) + 'px';
       } else if (exterior === Exterior.underline) {
-        result = (((frameSizeValue - lineHeight) * 0.757524 - lineHeight * 0.5) * 0.45).toFixed(2) + 'px'; // # 6,0742314
+        result = ((frameSizeValue * 0.757 - lineHeight * 1.257) * 0.45).toFixed(2) + 'px';
       }
     }
     return result;
