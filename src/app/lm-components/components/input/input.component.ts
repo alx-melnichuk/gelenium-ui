@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { URL_FRAME_INPUT, URL_ROOT } from '../../constants/url.constants';
 
@@ -9,21 +9,17 @@ import { URL_FRAME_INPUT, URL_ROOT } from '../../constants/url.constants';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputComponent implements OnInit, AfterViewInit {
-  public showNum = '';
+export class InputComponent implements AfterViewInit {
+  public showNum = '05';
   public urlFrameInput = '/' + URL_ROOT + '/' + URL_FRAME_INPUT;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {
     // eslint-disable-next-line no-restricted-syntax
-    console.time('start time');
-  }
-
-  ngOnInit(): void {
-    console.timeLog('start time');
+    console.time('InputComponent');
   }
 
   ngAfterViewInit(): void {
     // eslint-disable-next-line no-restricted-syntax
-    console.timeEnd('start time');
+    console.timeEnd('InputComponent');
   }
 }

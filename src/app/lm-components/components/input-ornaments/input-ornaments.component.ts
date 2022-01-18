@@ -60,8 +60,8 @@ export class InputOrnamentsComponent {
   public config05h: GrnFrameInputConfig = {
     ornamRgAlign: OrnamAlign.baseline,
   };
-  public ornamLfAlign05 = 'baseline';
-  public ornamRgAlign05 = 'baseline';
+  public ornamLfAlign05 = 'default';
+  public ornamRgAlign05 = 'default';
 
   public config05: GrnFrameInputConfig = {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function

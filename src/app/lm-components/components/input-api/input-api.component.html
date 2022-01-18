@@ -27,7 +27,9 @@
         <code>id: string;</code>
       </td>
       <td>
-        <span>ID of the native input element.<br />(default = 'grn_input_' + ++identifier;)</span>
+        <span>
+          ID of the native input element.<br />(default = 'grn_input_' + ++identifier;)
+        </span>
       </td>
     </tr>
     <tr>
@@ -88,7 +90,7 @@
           <li>"short" - height: 38px;</li>
           <li>"small" - height: 44px;</li>
           <li>"middle" - height: 50px;</li>
-          <li>"normal" - height: 56px;</li>
+          <li>"wide" - height: 56px; (default);</li>
           <li>"large" - height: 62px;</li>
           <li>"huge" - height: 68px;</li>
         </ul>
@@ -317,8 +319,8 @@
         <code>changeData: EventEmitter&lt;Event&gt;;</code>
       </td>
       <td>
-        <span>The event is called when the user has finished changing the value of an
-          element.</span>
+        <span>The event is called when the user has finished changing the value
+          of an element.</span>
       </td>
     </tr>
     <tr>

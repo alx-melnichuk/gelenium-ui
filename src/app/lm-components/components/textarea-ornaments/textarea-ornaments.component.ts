@@ -50,7 +50,6 @@ export class TextareaOrnamentsComponent {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
   public configBaseline: GrnFrameInputConfig = {
-    ornamLfAlign: OrnamAlign.baseline,
     ornamRgAlign: OrnamAlign.baseline,
   };
 }

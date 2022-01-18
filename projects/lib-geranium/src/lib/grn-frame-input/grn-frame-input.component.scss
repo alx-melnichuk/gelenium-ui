@@ -12,7 +12,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   font-family: "Roboto","Helvetica","Arial",sans-serif;
   font-weight: 400;
   font-size: 1em;
-  line-height: 1.4375em; // The value of the "line height" for the input element. // # 23px for font-size: 16px
+  line-height: 1.4375em; // The value of the "line height" for the input element. (23px for font-size: 16px)
   min-width: 0;
   padding: 0;
   margin: 0;
@@ -47,13 +47,13 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
   &[shr], &[foc], &[fil] {
     &>label {
-      max-width: var(--lbl-wd); // #  calc(133% - 2.66*(--lbl-pd-lf)) # o: calc(133% - 37.24px); u: calc(133% - 31.92px); s: calc(133% - 0px);
-      @include mxTransformTranslateXYScale(var(--lbl-pd-lf), var(--lbl-trn-y), 0.75); // # (0px, -1.5px, 0.75) original
+      max-width: var(--lbl-wd);
+      @include mxTransformTranslateXYScale(var(--lbl-pd-lf), var(--lbl-trn-y), 0.75);
     }
   }
   &:not([shr]):not([foc]):not([fil])>label {
-    max-width: var(--lbl2-wd); // # calc(100% - 2*(--lbl-pd-lf)) # o: calc(100% - 28px); u: calc(100% - 24px); s: calc(100% - 0px);
-    @include mxTransformTranslateXYScale( var(--orn-lf, var(--lbl-pd-lf)) , var(--lbl2-trn-y) , 1); // #  --lbl-pd-lf = o:14px; u:12px; s:0px;
+    max-width: var(--lbl2-wd);
+    @include mxTransformTranslateXYScale( var(--orn-lf, var(--lbl-pd-lf)) , var(--lbl2-trn-y) , 1);
   }
 
   // Color for "label".
@@ -83,9 +83,9 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
 
   // Section "Frame".
-  div { // # outline: 1px dashed blueviolet;
+  div {
     box-sizing: border-box;
-    @include mxDisplayInlineFlex();    // # @include mxAlignItems(center);    // # @include mxAlignItems(baseline);
+    @include mxDisplayInlineFlex();
     flex-wrap: nowrap;
     position: relative;
     border-radius: inherit;
@@ -94,17 +94,17 @@ grn-frame-input { //outline: 1px dashed crimson;
     color: var(--gfi-dis-cl); // The color in state is disabled for an input element.
   }
 
-  input, textarea { // outline: 1px dashed orange; // # TODO temp;
+  input, textarea {
     line-height: inherit;
     align-self: baseline;
   }
   input[elem-pd-ver] {
-    padding-top: var(--lbl-pd-tp);    // # o:16.5px; us:24.75px;
-    padding-bottom: var(--lbl-pd-bt); // # o:16.5px; us: 8.25px;
+    padding-top: var(--lbl-pd-tp);
+    padding-bottom: var(--lbl-pd-bt);
   }
   textarea[elem-mr-ver] {
-    margin-top: var(--lbl-pd-tp);     // # o:16.5px; us:24.75px;
-    margin-bottom: var(--lbl-pd-bt);  // # o:16.5px; us: 8.25px;
+    margin-top: var(--lbl-pd-tp);
+    margin-bottom: var(--lbl-pd-bt);
   }
 
   // For "frame" underline and standard
@@ -305,10 +305,10 @@ grn-frame-input { //outline: 1px dashed crimson;
     order: 1;
   }
   .gfi-ornam-lf:empty~.gfi-elem-pd-hor {
-    padding-left: var(--lbl-pd-lf); // # o:14px; u:12px; s:0px;
+    padding-left: var(--lbl-pd-lf);
   }
   .gfi-ornam-rg:empty~.gfi-elem-pd-hor {
-    padding-right: var(--lbl-pd-lf); // # o:14px; u:12px; s:0px;
+    padding-right: var(--lbl-pd-lf);
   }
 
   span[orn-lf="center"], span[orn-rg="center"] {
@@ -327,25 +327,28 @@ grn-frame-input { //outline: 1px dashed crimson;
     align-self: stretch;
   }
 
-  span[ext-o][orn-lf="default"], span[ext-o][orn-rg="default"] {
+  &[ext-o]>div>span[orn-lf="default"],
+  &[ext-o]>div>span[orn-rg="default"] {
+  // span[ext-o][orn-lf="default"], span[ext-o][orn-rg="default"] 
     align-self: center;
   }
-  span[ext-u][orn-lf="default"] {
-    align-self: flex-end;
+  &[ext-u]>div>span[orn-lf="default"] { // span[ext-u][orn-lf="default"] {
+    align-self: baseline;
   }
-  span[ext-u][orn-rg="default"] {
+  &[ext-u]>div>span[orn-rg="default"] { // span[ext-u][orn-rg="default"] {
     align-self: center;
   }
-  span[ext-s][orn-lf="default"], span[ext-s][orn-rg="default"] {
-    align-self: flex-end;
+  &[ext-s]>div>span[orn-lf="default"],
+  &[ext-s]>div>span[orn-rg="default"] { // span[ext-s][orn-lf="default"], span[ext-s][orn-rg="default"] {
+    align-self: baseline;
   }
 
-  &[ext-u]>div>span[ornam-lf],
-  &[ext-s]>div>span[ornam-lf], 
-  &[ext-s]>div>span[ornam-rg] {
+  &[ext-u]>div>span[orn-lf],
+  &[ext-s]>div>span[orn-lf], 
+  &[ext-s]>div>span[orn-rg] {
     &>.gfi-su-ornam {
       display: inline-block;
-      margin-bottom: var(--lbl-pd-bt); // # 8.25px;
+      margin-bottom: var(--lbl-pd-bt);
     }
   }
 }

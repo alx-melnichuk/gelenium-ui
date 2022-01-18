@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -58,7 +59,7 @@ let identifier = 0;
     { provide: GRN_NODE_INTERNAL_VALIDATOR, useExisting: GrnInputComponent },
   ],
 })
-export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccessor, Validator, GrnNodeInternalValidator {
+export class GrnInputComponent implements OnChanges, OnInit, AfterViewInit, ControlValueAccessor, Validator, GrnNodeInternalValidator {
   @Input()
   public id = 'grn_input_' + ++identifier;
   @Input()
@@ -118,7 +119,11 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
   readonly keyupData: EventEmitter<KeyboardEvent> = new EventEmitter();
 
   @ViewChild('inputElement')
-  public inputElementRef: ElementRef | null = null;
+  public inputElementRef: ElementRef<HTMLElement> | null = null;
+  @ViewChild('grnOrnamentLf', { static: true })
+  public grnOrnamentLf: ElementRef<HTMLElement> | undefined;
+  @ViewChild('grnOrnamentRg', { static: true })
+  public grnOrnamentRg: ElementRef<HTMLElement> | undefined;
 
   public get isOutlined(): boolean {
     return ExteriorUtil.isOutlined(this.innExterior);
@@ -188,9 +193,11 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
     }
     if (changes.ornamLfAlign || (changes.config && !this.ornamLfAlign)) {
       this.ornamLfAlign2 = OrnamAlignUtil.convert(this.ornamLfAlign) || this.currConfig.ornamLfAlign || OrnamAlign.default;
+      this.updateOrnamLfAlign(this.grnOrnamentLf, this.ornamLfAlign2);
     }
     if (changes.ornamRgAlign || (changes.config && !this.ornamRgAlign)) {
       this.ornamRgAlign2 = OrnamAlignUtil.convert(this.ornamRgAlign) || this.currConfig.ornamRgAlign || OrnamAlign.default;
+      this.updateOrnamRgAlign(this.grnOrnamentRg, this.ornamRgAlign2);
     }
     if (changes.lbShrink) {
       this.isLabelShrink2 = this.lbShrink === '' || this.lbShrink === 'true' ? true : this.lbShrink === 'false' ? false : null;
@@ -235,6 +242,15 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
       const labelPd = this.currConfig?.labelPd || 0;
       const labelPadding = labelPd > 0 ? labelPd : LabelPaddingUtil.hor(this.innFrameSizeValue, this.innExterior);
       this.setPropertyLabelPaddingHor(labelPadding);
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (this.ornamLfAlign2) {
+      this.updateOrnamLfAlign(this.grnOrnamentLf, this.ornamLfAlign2);
+    }
+    if (this.ornamRgAlign2) {
+      this.updateOrnamRgAlign(this.grnOrnamentRg, this.ornamRgAlign2);
     }
   }
 
@@ -373,6 +389,14 @@ export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccesso
       result = frameSizeValue;
     }
     return result;
+  }
+
+  private updateOrnamLfAlign(ornamentLf: ElementRef<HTMLElement> | undefined, ornamLfAlign: OrnamAlign): void {
+    HtmlElemUtil.setAttr(this.renderer, ornamentLf, 'orn-lf', ornamLfAlign.toString());
+  }
+
+  private updateOrnamRgAlign(ornamentRg: ElementRef<HTMLElement> | undefined, ornamRgAlign: OrnamAlign): void {
+    HtmlElemUtil.setAttr(this.renderer, ornamentRg, 'orn-rg', ornamRgAlign.toString());
   }
 
   private setPropertyLabelPaddingHor(labelPadding: number): void {

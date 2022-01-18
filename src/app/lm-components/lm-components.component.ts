@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { EXPANDED_HEIGHT } from '../constants/constants';
 import { UrlItem, UrlItemUtil } from '../interfaces/url-item.interface';
@@ -10,7 +10,7 @@ import { URL_FRAME_INPUT, URL_INFINITE_SCROLL, URL_INPUT, URL_ROOT, URL_TEXTAREA
   styleUrls: ['./lm-components.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class LmComponentsComponent implements OnInit {
+export class LmComponentsComponent implements OnInit, AfterViewInit {
   public expandedHeight = EXPANDED_HEIGHT;
 
   public expandedFrameInput = false;
@@ -27,10 +27,17 @@ export class LmComponentsComponent implements OnInit {
 
   constructor() {
     this.updateStatusExpandedByPathname();
+    // eslint-disable-next-line no-restricted-syntax
+    console.time('LmComponentsComponent');
   }
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method, @typescript-eslint/no-empty-function
   ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    // eslint-disable-next-line no-restricted-syntax
+    console.timeEnd('LmComponentsComponent');
+  }
 
   // ** Private API **
 

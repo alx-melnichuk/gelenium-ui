@@ -42,7 +42,7 @@
         [cntRows]="2"
         helperText="The field must have a value."
         [exterior]="exterior05"
-        [config]="configBaseline">
+        [ornamLfAlign]="'baseline'">
         <span grnOrnamentLf
           class="to-pd-hor">kg</span>
       </grn-textarea>
@@ -76,7 +76,7 @@
         [cntRows]="2"
         helperText="The field must have a value."
         [exterior]="exterior05"
-        [ornamRgAlign]="'baseline'">
+        [ornamLfAlign]="'baseline'">
         <button grnOrnamentLf
           class="to-btn to-uncode"
           (click)="isBtnEye05c=!isBtnEye05c">
@@ -136,7 +136,7 @@
         [cntRows]="2"
         helperText="The field must have a value."
         [exterior]="exterior05"
-        [config]="configBaseline"&gt;
+        [ornamLfAlign]="'baseline'"&gt;
         &lt;span grnOrnamentLf
           class="to-pd-hor"&gt;kg&lt;/span&gt;
       &lt;/grn-textarea&gt;
@@ -170,7 +170,7 @@
         [cntRows]="2"
         helperText="The field must have a value."
         [exterior]="exterior05"
-        [ornamRgAlign]="'baseline'"&gt;
+        [ornamLfAlign]="'baseline'"&gt;
         &lt;button grnOrnamentLf
           class="to-btn to-uncode"
           (click)="isBtnEye05c=!isBtnEye05c"&gt;
@@ -228,7 +228,6 @@ export class TextareaComponent &#123;
 
   constructor() &#123;&#125;
   public configBaseline: GrnFrameInputConfig = &#123;
-    ornamLfAlign: OrnamAlign.baseline,
     ornamRgAlign: OrnamAlign.baseline,
   &#125;;
 &#125;</pre></code>

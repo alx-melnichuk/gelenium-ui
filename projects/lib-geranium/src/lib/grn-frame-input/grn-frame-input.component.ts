@@ -62,9 +62,9 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
   readonly clickFrame: EventEmitter<Event> = new EventEmitter();
 
   @ContentChild('grnOrnamentLf', { static: true })
-  public grnOrnamentLf: ElementRef | undefined;
+  public grnOrnamentLf: ElementRef<HTMLElement> | undefined;
   @ContentChild('grnOrnamentRg', { static: true })
-  public grnOrnamentRg: ElementRef | undefined;
+  public grnOrnamentRg: ElementRef<HTMLElement> | undefined;
 
   public get isOutlinedExterior(): boolean {
     return ExteriorUtil.isOutlined(this.innExterior);
