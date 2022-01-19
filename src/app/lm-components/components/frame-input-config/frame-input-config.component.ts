@@ -7,7 +7,7 @@ import { GRN_FRAME_INPUT_CONFIG } from 'projects/lib-geranium/src/lib/grn-frame-
 import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/interfaces/grn-frame-input-config.interface';
 import { Exterior } from 'projects/lib-geranium/src/lib/interfaces/exterior.interface';
 import { FrameSize } from 'projects/lib-geranium/src/lib/interfaces/frame-size.interface';
-import { URL_FRAME_INPUT, URL_ROOT } from '../../constants/url.constants';
+import { UrlComponents } from '../../constants/url-components.constants';
 
 const grnFrameInputConfigDefault: GrnFrameInputConfig = {
   exterior: Exterior.outlined,
@@ -32,7 +32,7 @@ export class FrameInputConfigComponent {
   @Input()
   public labelCss = CN_LABEL_CSS;
 
-  public urlFrameInput = '/' + URL_ROOT + '/' + URL_FRAME_INPUT;
+  public urlFrameInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME_INPUT');
   public formGroup07: FormGroup = new FormGroup({
     input07a: new FormControl('', []),
     input07b: new FormControl('', []),

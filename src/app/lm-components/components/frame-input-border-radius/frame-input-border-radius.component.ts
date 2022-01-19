@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSliderChange } from '@angular/material/slider';
 
-import { URL_FRAME_INPUT, URL_ROOT } from '../../constants/url.constants';
+import { UrlComponents } from '../../constants/url-components.constants';
 
 import {
   CN_LABEL_CSS,
@@ -87,7 +87,7 @@ export class FrameInputBorderRadiusComponent {
   public exterior05 = 'outlined';
   public isHiddenLabel = false;
   public borderRadius = 50;
-  public urlFrameInput = '/' + URL_ROOT + '/' + URL_FRAME_INPUT;
+  public urlFrameInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME_INPUT');
 
   public formGroup06: FormGroup = new FormGroup({
     input06a: new FormControl('Demo - A', []),

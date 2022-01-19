@@ -2,7 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { EXPANDED_HEIGHT } from '../constants/constants';
 import { UrlItem, UrlItemUtil } from '../interfaces/url-item.interface';
-import { URL_ROOT, URL_REGEX_CHECK, URL_REGEX_MATCH, URL_REGEX_REMOVE } from './constants/url.constants';
+
+import { UrlDirectives } from './constants/url-directives.constants';
 
 @Component({
   selector: 'app-lm-directives',
@@ -33,7 +34,7 @@ export class LmDirectivesComponent implements OnInit {
   // ** RegexCheck **
 
   private getPathRegexCheck(): string {
-    return '/' + URL_ROOT + '/' + URL_REGEX_CHECK;
+    return '/' + UrlDirectives.get('URL_DIRECTIVES') + '/' + UrlDirectives.get('URL_REGEX_CHECK');
   }
 
   private createUrlListRegexCheck(): UrlItem[] {
@@ -47,7 +48,7 @@ export class LmDirectivesComponent implements OnInit {
   // ** RegexMatch **
 
   private getPathRegexMatch(): string {
-    return '/' + URL_ROOT + '/' + URL_REGEX_MATCH;
+    return '/' + UrlDirectives.get('URL_DIRECTIVES') + '/' + UrlDirectives.get('URL_REGEX_MATCH');
   }
 
   private createUrlListRegexMatch(): UrlItem[] {
@@ -61,7 +62,7 @@ export class LmDirectivesComponent implements OnInit {
   // ** RegexRemove **
 
   private getPathRegexRemove(): string {
-    return '/' + URL_ROOT + '/' + URL_REGEX_REMOVE;
+    return '/' + UrlDirectives.get('URL_DIRECTIVES') + '/' + UrlDirectives.get('URL_REGEX_REMOVE');
   }
 
   private createUrlListRegexRemove(): UrlItem[] {

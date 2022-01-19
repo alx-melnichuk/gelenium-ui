@@ -11,6 +11,9 @@ import { FrameInputConfigModule } from '../frame-input-config/frame-input-config
 import { FrameInputApiModule } from '../frame-input-api/frame-input-api.module';
 
 import { FrameInputComponent } from './frame-input.component';
+import { UrlComponents } from '../../constants/url-components.constants';
+
+UrlComponents.add('URL_FRAME_INPUT', 'frame-input');
 
 @NgModule({
   declarations: [FrameInputComponent],

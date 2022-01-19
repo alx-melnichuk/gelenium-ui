@@ -10,7 +10,6 @@ import {
   CN_LABEL_TS,
   CN_LABEL_UNDERLINE,
 } from 'src/app/constants/labels';
-import { URL_REGEX_MATCH, URL_ROOT } from 'src/app/lm-directives/constants/url.constants';
 
 @Component({
   selector: 'app-input-numerical',
@@ -34,7 +33,7 @@ export class InputNumericalComponent {
   public labelTs = CN_LABEL_TS;
   @Input()
   public labelCss = CN_LABEL_CSS;
-  public urlRegexMatch = '/' + URL_ROOT + '/' + URL_REGEX_MATCH;
+  public urlRegexMatch = '/' + 'directives' + '/' + 'regex-match';
 
   public formGroup04: FormGroup = new FormGroup({
     input04a: new FormControl('', []),

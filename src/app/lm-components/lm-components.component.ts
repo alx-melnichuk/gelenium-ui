@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/co
 
 import { EXPANDED_HEIGHT } from '../constants/constants';
 import { UrlItem, UrlItemUtil } from '../interfaces/url-item.interface';
-import { URL_FRAME_INPUT, URL_INFINITE_SCROLL, URL_INPUT, URL_ROOT, URL_TEXTAREA } from './constants/url.constants';
+import { UrlComponents } from './constants/url-components.constants';
 
 @Component({
   selector: 'app-lm-components',
@@ -15,6 +15,9 @@ export class LmComponentsComponent implements OnInit, AfterViewInit {
 
   public expandedFrameInput = false;
   public urlListFrameInput: UrlItem[] = this.createUrlListFrameInput();
+
+  public expandedHintOrError = false;
+  public urlListHintOrError: UrlItem[] = this.createUrlListHintOrError();
 
   public expandedInfiniteScroll = false;
   public urlListInfiniteScroll: UrlItem[] = this.createUrlListInfiniteScroll();
@@ -44,7 +47,7 @@ export class LmComponentsComponent implements OnInit, AfterViewInit {
   // ** FrameInput **
 
   private getPathFrameInput(): string {
-    return '/' + URL_ROOT + '/' + URL_FRAME_INPUT;
+    return '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME_INPUT');
   }
 
   private createUrlListFrameInput(): UrlItem[] {
@@ -61,10 +64,24 @@ export class LmComponentsComponent implements OnInit, AfterViewInit {
     return result;
   }
 
+  // ** HintOrError **
+
+  private getPathHintOrError(): string {
+    return '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_HINT_OR_ERROR');
+  }
+
+  private createUrlListHintOrError(): UrlItem[] {
+    const result: UrlItem[] = [];
+    const url = this.getPathHintOrError();
+    result.push(UrlItemUtil.create('Basic', url + '#Basic'));
+    result.push(UrlItemUtil.create('Api', url + '#Api'));
+    return result;
+  }
+
   // ** InfiniteScroll **
 
   private getPathInfiniteScroll(): string {
-    return '/' + URL_ROOT + '/' + URL_INFINITE_SCROLL;
+    return '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_INFINITE_SCROLL');
   }
 
   private createUrlListInfiniteScroll(): UrlItem[] {
@@ -79,7 +96,7 @@ export class LmComponentsComponent implements OnInit, AfterViewInit {
   // ** Input **
 
   private getPathInput(): string {
-    return '/' + URL_ROOT + '/' + URL_INPUT;
+    return '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_INPUT');
   }
 
   private createUrlListInput(): UrlItem[] {
@@ -101,7 +118,7 @@ export class LmComponentsComponent implements OnInit, AfterViewInit {
   // ** Textarea **
 
   private getPathTextarea(): string {
-    return '/' + URL_ROOT + '/' + URL_TEXTAREA;
+    return '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_TEXTAREA');
   }
 
   private createUrlListTextarea(): UrlItem[] {
@@ -125,6 +142,7 @@ export class LmComponentsComponent implements OnInit, AfterViewInit {
   private updateStatusExpandedByPathname(): void {
     const pathname = location.pathname;
     this.expandedFrameInput = pathname.startsWith(this.getPathFrameInput());
+    this.expandedHintOrError = pathname.startsWith(this.getPathHintOrError());
     this.expandedInfiniteScroll = pathname.startsWith(this.getPathInfiniteScroll());
     this.expandedInput = pathname.startsWith(this.getPathInput());
     this.expandedTextarea = pathname.startsWith(this.getPathTextarea());

@@ -30,7 +30,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
 
   // Section "Label".
-  label { // outline: 1px dashed green;
+  label {
     padding: 0;
     position: absolute;
     display: block;
@@ -279,7 +279,7 @@ grn-frame-input { //outline: 1px dashed crimson;
       font-size: 0.75em;
     }
   }
-  &[shr], &[foc], &[fil] { // .gfi-shrink .gfi-legend, .gfi-focused .gfi-legend, .gfi-filled .gfi-legend
+  &[shr], &[foc], &[fil] {
     legend {
       max-width: 100%;
       -webkit-transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
@@ -289,7 +289,7 @@ grn-frame-input { //outline: 1px dashed crimson;
       padding: 0 calc(var(--gfi-o-lgn-pd) - 1px);
     }
   }
-  &:not([shr]):not([fil]):not([foc]) legend { // .grn-frame-input:not(.gfi-shrink):not(.gfi-filled):not(.gfi-focused) .gfi-legend
+  &:not([shr]):not([fil]):not([foc]) legend {
     max-width: 0.01px;
     -webkit-transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
@@ -329,17 +329,16 @@ grn-frame-input { //outline: 1px dashed crimson;
 
   &[ext-o]>div>span[orn-lf="default"],
   &[ext-o]>div>span[orn-rg="default"] {
-  // span[ext-o][orn-lf="default"], span[ext-o][orn-rg="default"] 
     align-self: center;
   }
-  &[ext-u]>div>span[orn-lf="default"] { // span[ext-u][orn-lf="default"] {
+  &[ext-u]>div>span[orn-lf="default"] {
     align-self: baseline;
   }
-  &[ext-u]>div>span[orn-rg="default"] { // span[ext-u][orn-rg="default"] {
+  &[ext-u]>div>span[orn-rg="default"] {
     align-self: center;
   }
   &[ext-s]>div>span[orn-lf="default"],
-  &[ext-s]>div>span[orn-rg="default"] { // span[ext-s][orn-lf="default"], span[ext-s][orn-rg="default"] {
+  &[ext-s]>div>span[orn-rg="default"] {
     align-self: baseline;
   }
 
