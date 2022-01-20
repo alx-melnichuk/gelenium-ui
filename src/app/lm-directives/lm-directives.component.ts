@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { EXPANDED_HEIGHT } from '../constants/constants';
+import { EXPANDED_HEIGHT } from 'src/app/lib-core/constants/constants';
+
 import { UrlItem, UrlItemUtil } from '../interfaces/url-item.interface';
 
 import { UrlDirectives } from './constants/url-directives.constants';
@@ -40,8 +41,8 @@ export class LmDirectivesComponent implements OnInit {
   private createUrlListRegexCheck(): UrlItem[] {
     const result: UrlItem[] = [];
     const url = this.getPathRegexCheck();
-    result.push(UrlItemUtil.create('Basic', url + '#Basic'));
-    result.push(UrlItemUtil.create('Api', url + '#Api'));
+    result.push(UrlItemUtil.create('Basic', url, 'Basic'));
+    result.push(UrlItemUtil.create('Api', url, 'Api'));
     return result;
   }
 
@@ -54,8 +55,8 @@ export class LmDirectivesComponent implements OnInit {
   private createUrlListRegexMatch(): UrlItem[] {
     const result: UrlItem[] = [];
     const url = this.getPathRegexMatch();
-    result.push(UrlItemUtil.create('Basic', url + '#Basic'));
-    result.push(UrlItemUtil.create('Api', url + '#Api'));
+    result.push(UrlItemUtil.create('Basic', url, 'Basic'));
+    result.push(UrlItemUtil.create('Api', url, 'Api'));
     return result;
   }
 
@@ -68,8 +69,8 @@ export class LmDirectivesComponent implements OnInit {
   private createUrlListRegexRemove(): UrlItem[] {
     const result: UrlItem[] = [];
     const url = this.getPathRegexRemove();
-    result.push(UrlItemUtil.create('Basic', url + '#Basic'));
-    result.push(UrlItemUtil.create('Api', url + '#Api'));
+    result.push(UrlItemUtil.create('Basic', url, 'Basic'));
+    result.push(UrlItemUtil.create('Api', url, 'Api'));
     return result;
   }
 

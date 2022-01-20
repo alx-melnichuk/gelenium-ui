@@ -11,7 +11,8 @@
         </mat-expansion-panel-header>
         <ul class="ss-ul">
           <li *ngFor="let urlItem of urlListFrameInput">
-            <a [href]="urlItem.url">{{ urlItem.label }}</a>
+            <a [routerLink]="[urlItem.url]"
+              [fragment]="urlItem.fragment">{{ urlItem.label }}</a>
           </li>
         </ul>
       </mat-expansion-panel>
@@ -22,7 +23,8 @@
         </mat-expansion-panel-header>
         <ul class="ss-ul">
           <li *ngFor="let urlItem of urlListInfiniteScroll">
-            <a [href]="urlItem.url">{{ urlItem.label }}</a>
+            <a [routerLink]="[urlItem.url]"
+              [fragment]="urlItem.fragment">{{ urlItem.label }}</a>
           </li>
         </ul>
       </mat-expansion-panel>
@@ -33,7 +35,8 @@
         </mat-expansion-panel-header>
         <ul class="ss-ul">
           <li *ngFor="let urlItem of urlListInput">
-            <a [href]="urlItem.url">{{ urlItem.label }}</a>
+            <a [routerLink]="[urlItem.url]"
+              [fragment]="urlItem.fragment">{{ urlItem.label }}</a>
           </li>
         </ul>
       </mat-expansion-panel>
@@ -44,7 +47,8 @@
         </mat-expansion-panel-header>
         <ul class="ss-ul">
           <li *ngFor="let urlItem of urlListTextarea">
-            <a [href]="urlItem.url">{{ urlItem.label }}</a>
+            <a [routerLink]="[urlItem.url]"
+              [fragment]="urlItem.fragment">{{ urlItem.label }}</a>
           </li>
         </ul>
       </mat-expansion-panel>

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { CN_LABEL_CSS, CN_LABEL_HTML, CN_LABEL_SHOW_SOURCE, CN_LABEL_TS } from 'src/app/constants/labels';
+import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from 'src/app/lib-core/constants/constants';
 
 @Component({
   selector: 'app-textarea-basic',
@@ -12,13 +12,13 @@ import { CN_LABEL_CSS, CN_LABEL_HTML, CN_LABEL_SHOW_SOURCE, CN_LABEL_TS } from '
 })
 export class TextareaBasicComponent {
   @Input()
-  public labelShowSource = CN_LABEL_SHOW_SOURCE;
+  public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
-  public labelHtml = CN_LABEL_HTML;
+  public labelHtml = LABEL_HTML;
   @Input()
-  public labelTs = CN_LABEL_TS;
+  public labelTs = LABEL_TS;
   @Input()
-  public labelCss = CN_LABEL_CSS;
+  public labelCss = LABEL_CSS;
 
   public formGroup01: FormGroup = new FormGroup({
     input01a: new FormControl('', []),

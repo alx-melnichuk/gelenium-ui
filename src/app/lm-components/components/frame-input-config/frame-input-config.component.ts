@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { CN_LABEL_CSS, CN_LABEL_HTML, CN_LABEL_SHOW_SOURCE, CN_LABEL_TS } from 'src/app/constants/labels';
+import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from 'src/app/lib-core/constants/constants';
 
 import { GRN_FRAME_INPUT_CONFIG } from 'projects/lib-geranium/src/lib/grn-frame-input/grn-frame-input.component';
 import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/interfaces/grn-frame-input-config.interface';
@@ -24,13 +24,13 @@ const grnFrameInputConfigDefault: GrnFrameInputConfig = {
 })
 export class FrameInputConfigComponent {
   @Input()
-  public labelShowSource = CN_LABEL_SHOW_SOURCE;
+  public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
-  public labelHtml = CN_LABEL_HTML;
+  public labelHtml = LABEL_HTML;
   @Input()
-  public labelTs = CN_LABEL_TS;
+  public labelTs = LABEL_TS;
   @Input()
-  public labelCss = CN_LABEL_CSS;
+  public labelCss = LABEL_CSS;
 
   public urlFrameInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME_INPUT');
   public formGroup07: FormGroup = new FormGroup({

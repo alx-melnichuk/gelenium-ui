@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { EXPANDED_HEIGHT } from '../constants/constants';
+import { EXPANDED_HEIGHT } from 'src/app/lib-core/constants/constants';
+
 import { UrlItem, UrlItemUtil } from '../interfaces/url-item.interface';
 import { UrlComponents } from './constants/url-components.constants';
 
@@ -53,14 +54,14 @@ export class LmComponentsComponent implements OnInit, AfterViewInit {
   private createUrlListFrameInput(): UrlItem[] {
     const result: UrlItem[] = [];
     const url = this.getPathFrameInput();
-    result.push(UrlItemUtil.create('Basic', url + '#Basic'));
-    result.push(UrlItemUtil.create('Frame size', url + '#FrameSize'));
-    result.push(UrlItemUtil.create('Label', url + '#Label'));
-    result.push(UrlItemUtil.create('Helper text', url + '#HelperText'));
-    result.push(UrlItemUtil.create('Border radius', url + '#BorderRadius'));
-    result.push(UrlItemUtil.create('Palette', url + '#Palette'));
-    result.push(UrlItemUtil.create('Config', url + '#Config'));
-    result.push(UrlItemUtil.create('Api', url + '#Api'));
+    result.push(UrlItemUtil.create('Basic', url, 'Basic'));
+    result.push(UrlItemUtil.create('Frame size', url, 'FrameSize'));
+    result.push(UrlItemUtil.create('Label', url, 'Label'));
+    result.push(UrlItemUtil.create('Helper text', url, 'HelperText'));
+    result.push(UrlItemUtil.create('Border radius', url, 'BorderRadius'));
+    result.push(UrlItemUtil.create('Palette', url, 'Palette'));
+    result.push(UrlItemUtil.create('Config', url, 'Config'));
+    result.push(UrlItemUtil.create('Api', url, 'Api'));
     return result;
   }
 
@@ -73,8 +74,8 @@ export class LmComponentsComponent implements OnInit, AfterViewInit {
   private createUrlListHintOrError(): UrlItem[] {
     const result: UrlItem[] = [];
     const url = this.getPathHintOrError();
-    result.push(UrlItemUtil.create('Basic', url + '#Basic'));
-    result.push(UrlItemUtil.create('Api', url + '#Api'));
+    result.push(UrlItemUtil.create('Basic', url, 'Basic'));
+    result.push(UrlItemUtil.create('Api', url, 'Api'));
     return result;
   }
 
@@ -87,9 +88,9 @@ export class LmComponentsComponent implements OnInit, AfterViewInit {
   private createUrlListInfiniteScroll(): UrlItem[] {
     const result: UrlItem[] = [];
     const url = this.getPathInfiniteScroll();
-    result.push(UrlItemUtil.create('Basic', url + '#Basic'));
-    result.push(UrlItemUtil.create('Optional', url + '#Optional'));
-    result.push(UrlItemUtil.create('Api', url + '#Api'));
+    result.push(UrlItemUtil.create('Basic', url, 'Basic'));
+    result.push(UrlItemUtil.create('Optional', url, 'Optional'));
+    result.push(UrlItemUtil.create('Api', url, 'Api'));
     return result;
   }
 
@@ -102,16 +103,16 @@ export class LmComponentsComponent implements OnInit, AfterViewInit {
   private createUrlListInput(): UrlItem[] {
     const result: UrlItem[] = [];
     const url = this.getPathInput();
-    result.push(UrlItemUtil.create('Basic', url + '#Basic'));
-    result.push(UrlItemUtil.create('Attributes', url + '#Attributes'));
-    result.push(UrlItemUtil.create('Validation', url + '#Validation'));
-    result.push(UrlItemUtil.create('Numerical value', url + '#NumericalValue'));
-    result.push(UrlItemUtil.create('Ornaments', url + '#Ornaments'));
-    result.push(UrlItemUtil.create('Item size', url + '#ItemSize'));
-    result.push(UrlItemUtil.create('Helper text', url + '#HelperText'));
-    result.push(UrlItemUtil.create('Border radius', url + '#BorderRadius'));
-    result.push(UrlItemUtil.create('Palette', url + '#Palette'));
-    result.push(UrlItemUtil.create('Api', url + '#Api'));
+    result.push(UrlItemUtil.create('Basic', url, 'Basic'));
+    result.push(UrlItemUtil.create('Attributes', url, 'Attributes'));
+    result.push(UrlItemUtil.create('Validation', url, 'Validation'));
+    result.push(UrlItemUtil.create('Numerical value', url, 'NumericalValue'));
+    result.push(UrlItemUtil.create('Ornaments', url, 'Ornaments'));
+    result.push(UrlItemUtil.create('Item size', url, 'ItemSize'));
+    result.push(UrlItemUtil.create('Helper text', url, 'HelperText'));
+    result.push(UrlItemUtil.create('Border radius', url, 'BorderRadius'));
+    result.push(UrlItemUtil.create('Palette', url, 'Palette'));
+    result.push(UrlItemUtil.create('Api', url, 'Api'));
     return result;
   }
 
@@ -124,16 +125,16 @@ export class LmComponentsComponent implements OnInit, AfterViewInit {
   private createUrlListTextarea(): UrlItem[] {
     const result: UrlItem[] = [];
     const url = this.getPathTextarea();
-    result.push(UrlItemUtil.create('Basic', url + '#Basic'));
-    result.push(UrlItemUtil.create('Attributes', url + '#Attributes'));
-    result.push(UrlItemUtil.create('Validation', url + '#Validation'));
-    result.push(UrlItemUtil.create('Capability', url + '#Capability'));
-    result.push(UrlItemUtil.create('Ornaments', url + '#Ornaments'));
-    result.push(UrlItemUtil.create('Item size', url + '#ItemSize'));
-    result.push(UrlItemUtil.create('Helper text', url + '#HelperText'));
-    result.push(UrlItemUtil.create('Border radius', url + '#BorderRadius'));
-    result.push(UrlItemUtil.create('Palette', url + '#Palette'));
-    result.push(UrlItemUtil.create('Api', url + '#Api'));
+    result.push(UrlItemUtil.create('Basic', url, 'Basic'));
+    result.push(UrlItemUtil.create('Attributes', url, 'Attributes'));
+    result.push(UrlItemUtil.create('Validation', url, 'Validation'));
+    result.push(UrlItemUtil.create('Capability', url, 'Capability'));
+    result.push(UrlItemUtil.create('Ornaments', url, 'Ornaments'));
+    result.push(UrlItemUtil.create('Item size', url, 'ItemSize'));
+    result.push(UrlItemUtil.create('Helper text', url, 'HelperText'));
+    result.push(UrlItemUtil.create('Border radius', url, 'BorderRadius'));
+    result.push(UrlItemUtil.create('Palette', url, 'Palette'));
+    result.push(UrlItemUtil.create('Api', url, 'Api'));
     return result;
   }
 

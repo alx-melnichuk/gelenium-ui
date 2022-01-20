@@ -205,8 +205,10 @@
         </mat-tab>
         <mat-tab [label]="labelTs">
           <code><pre source="ts">
-import &#123; Component, ViewEncapsulation &#125; from '@angular/core';
+import &#123; ChangeDetectionStrategy, Component, Input, ViewEncapsulation &#125; from '@angular/core';
 import &#123; FormControl, FormGroup &#125; from '@angular/forms';
+import &#123; GrnFrameInputConfig &#125; from 'projects/lib-geranium/src/lib/interfaces/grn-frame-input-config.interface';
+import &#123; OrnamAlign &#125; from 'projects/lib-geranium/src/lib/interfaces/ornam-align.interface';
 
 @Component(&#123;
   selector: 'app-input',

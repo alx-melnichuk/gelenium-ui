@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { CN_LABEL_SHOW_SOURCE, CN_LABEL_HTML, CN_LABEL_TS, CN_LABEL_CSS } from 'src/app/constants/labels';
+import { LABEL_SHOW_SOURCE, LABEL_HTML, LABEL_TS, LABEL_CSS } from 'src/app/lib-core/constants/constants';
 
 export interface Element {
   name: string;
@@ -26,13 +26,13 @@ const CN_SURNAME3 = ['Perez', 'Thompson', 'White', 'Harris', 'Sanchez', 'Clark',
 })
 export class InfiniteScrollOptionalComponent {
   @Input()
-  public labelShowSource = CN_LABEL_SHOW_SOURCE;
+  public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
-  public labelHtml = CN_LABEL_HTML;
+  public labelHtml = LABEL_HTML;
   @Input()
-  public labelTs = CN_LABEL_TS;
+  public labelTs = LABEL_TS;
   @Input()
-  public labelCss = CN_LABEL_CSS;
+  public labelCss = LABEL_CSS;
 
   public elements2: Element[] = [];
   public isLoading = false;

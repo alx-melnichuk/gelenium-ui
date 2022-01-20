@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { FormsModule } from '@angular/forms';
 
 import { LmComponentsComponent } from './lm-components.component';
 import { SiteSchemeModule } from '../lib-site/components/site-scheme/site-scheme.module';
@@ -17,6 +18,7 @@ import { LmComponentsRoutingModule } from './lm-components-routing.module';
   imports: [
     CommonModule,
     MatExpansionModule,
+    FormsModule,
     SiteSchemeModule,
     FrameInputModule,
     HintOrErrorModule,
@@ -26,4 +28,8 @@ import { LmComponentsRoutingModule } from './lm-components-routing.module';
     LmComponentsRoutingModule,
   ],
 })
-export class LmComponentsModule {}
+export class LmComponentsModule {
+  constructor() {
+    console.log('LmComponentsModule();');
+  }
+}

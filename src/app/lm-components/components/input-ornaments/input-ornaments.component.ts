@@ -4,14 +4,14 @@ import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/interfaces/gr
 import { OrnamAlign, OrnamAlignUtil } from 'projects/lib-geranium/src/lib/interfaces/ornam-align.interface';
 
 import {
-  CN_LABEL_CSS,
-  CN_LABEL_HTML,
-  CN_LABEL_OUTLINED,
-  CN_LABEL_SHOW_SOURCE,
-  CN_LABEL_STANDARD,
-  CN_LABEL_TS,
-  CN_LABEL_UNDERLINE,
-} from 'src/app/constants/labels';
+  LABEL_CSS,
+  LABEL_HTML,
+  LABEL_OUTLINED,
+  LABEL_SHOW_SOURCE,
+  LABEL_STANDARD,
+  LABEL_TS,
+  LABEL_UNDERLINE,
+} from 'src/app/lib-core/constants/constants';
 
 @Component({
   selector: 'app-input-ornaments',
@@ -22,19 +22,19 @@ import {
 })
 export class InputOrnamentsComponent {
   @Input()
-  public labelShowSource = CN_LABEL_SHOW_SOURCE;
+  public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
-  public labelOutlined = CN_LABEL_OUTLINED;
+  public labelOutlined = LABEL_OUTLINED;
   @Input()
-  public labelUnderline = CN_LABEL_UNDERLINE;
+  public labelUnderline = LABEL_UNDERLINE;
   @Input()
-  public labelStandard = CN_LABEL_STANDARD;
+  public labelStandard = LABEL_STANDARD;
   @Input()
-  public labelHtml = CN_LABEL_HTML;
+  public labelHtml = LABEL_HTML;
   @Input()
-  public labelTs = CN_LABEL_TS;
+  public labelTs = LABEL_TS;
   @Input()
-  public labelCss = CN_LABEL_CSS;
+  public labelCss = LABEL_CSS;
 
   public minLength05 = 3;
   public maxLength05 = 15;
