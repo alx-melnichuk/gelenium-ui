@@ -25,26 +25,6 @@ const routes: Routes = [
       { path: URL_INFINITE_SCROLL, component: InfiniteScrollComponent },
       { path: URL_INPUT, component: InputComponent },
       { path: URL_TEXTAREA, component: TextareaComponent },
-      // {
-      //   path: URL_FRAME_INPUT,
-      //   loadChildren: () => import('./components/frame-input/frame-input.module').then((m) => m.FrameInputModule),
-      // },
-      // {
-      //   path: URL_HINT_OR_ERROR,
-      //   loadChildren: () => import('./components/hint-or-error/hint-or-error.module').then((m) => m.HintOrErrorModule),
-      // },
-      // {
-      //   path: URL_INFINITE_SCROLL,
-      //   loadChildren: () => import('./components/infinite-scroll/infinite-scroll.module').then((m) => m.InfiniteScrollModule),
-      // },
-      // {
-      //   path: URL_INPUT,
-      //   loadChildren: () => import('./components/input/input.module').then((m) => m.InputModule),
-      // },
-      // {
-      //   path: URL_TEXTAREA,
-      //   loadChildren: () => import('./components/textarea/textarea.module').then((m) => m.TextareaModule),
-      // },
       { path: '**', redirectTo: URL_INPUT },
     ],
   },
