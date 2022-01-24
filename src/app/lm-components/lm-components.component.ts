@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { EXPANDED_HEIGHT } from 'src/app/lib-core/constants/constants';
+import { SiteItem, SiteMenu, SiteUrl } from 'src/app//lib-core/constants/site-menu';
 
-import { UrlItem, UrlItemUtil } from '../interfaces/url-item.interface';
-import { UrlComponents } from './constants/url-components.constants';
+// import { ItemData, UrlItem, UrlItemUtil } from '../lib-core/interfaces/url-item.interface';
 
 @Component({
   selector: 'app-lm-components',
@@ -13,24 +13,10 @@ import { UrlComponents } from './constants/url-components.constants';
 })
 export class LmComponentsComponent implements OnInit, AfterViewInit {
   public expandedHeight = EXPANDED_HEIGHT;
-
-  public expandedFrameInput = false;
-  public urlListFrameInput: UrlItem[] = this.createUrlListFrameInput();
-
-  public expandedHintOrError = false;
-  public urlListHintOrError: UrlItem[] = this.createUrlListHintOrError();
-
-  public expandedInfiniteScroll = false;
-  public urlListInfiniteScroll: UrlItem[] = this.createUrlListInfiniteScroll();
-
-  public expandedInput = false;
-  public urlListInput: UrlItem[] = this.createUrlListInput();
-
-  public expandedTextarea = false;
-  public urlListTextarea: UrlItem[] = this.createUrlListTextarea();
+  public itemDataList: SiteItem[] = SiteMenu.getItems('Components');
 
   constructor() {
-    this.updateStatusExpandedByPathname();
+    this.updateStatusExpandedByPathname(this.itemDataList);
     // eslint-disable-next-line no-restricted-syntax
     console.time('LmComponentsComponent');
   }
@@ -43,111 +29,23 @@ export class LmComponentsComponent implements OnInit, AfterViewInit {
     console.timeEnd('LmComponentsComponent');
   }
 
+  // ** Public API **
+
+  public trackByItemData(index: number, item: SiteItem): number {
+    return item.order;
+  }
+
+  public trackByUrlItem(index: number, item: SiteUrl): string {
+    return item.url + '#' + item.fragment;
+  }
+
   // ** Private API **
 
-  // ** FrameInput **
-
-  private getPathFrameInput(): string {
-    return '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME_INPUT');
-  }
-
-  private createUrlListFrameInput(): UrlItem[] {
-    const result: UrlItem[] = [];
-    const url = this.getPathFrameInput();
-    result.push(UrlItemUtil.create('Basic', url, 'Basic'));
-    result.push(UrlItemUtil.create('Frame size', url, 'FrameSize'));
-    result.push(UrlItemUtil.create('Label', url, 'Label'));
-    result.push(UrlItemUtil.create('Helper text', url, 'HelperText'));
-    result.push(UrlItemUtil.create('Border radius', url, 'BorderRadius'));
-    result.push(UrlItemUtil.create('Palette', url, 'Palette'));
-    result.push(UrlItemUtil.create('Config', url, 'Config'));
-    result.push(UrlItemUtil.create('Api', url, 'Api'));
-    return result;
-  }
-
-  // ** HintOrError **
-
-  private getPathHintOrError(): string {
-    return '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_HINT_OR_ERROR');
-  }
-
-  private createUrlListHintOrError(): UrlItem[] {
-    const result: UrlItem[] = [];
-    const url = this.getPathHintOrError();
-    result.push(UrlItemUtil.create('Basic', url, 'Basic'));
-    result.push(UrlItemUtil.create('Api', url, 'Api'));
-    return result;
-  }
-
-  // ** InfiniteScroll **
-
-  private getPathInfiniteScroll(): string {
-    return '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_INFINITE_SCROLL');
-  }
-
-  private createUrlListInfiniteScroll(): UrlItem[] {
-    const result: UrlItem[] = [];
-    const url = this.getPathInfiniteScroll();
-    result.push(UrlItemUtil.create('Basic', url, 'Basic'));
-    result.push(UrlItemUtil.create('Optional', url, 'Optional'));
-    result.push(UrlItemUtil.create('Api', url, 'Api'));
-    return result;
-  }
-
-  // ** Input **
-
-  private getPathInput(): string {
-    return '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_INPUT');
-  }
-
-  private createUrlListInput(): UrlItem[] {
-    const result: UrlItem[] = [];
-    const url = this.getPathInput();
-    result.push(UrlItemUtil.create('Basic', url, 'Basic'));
-    result.push(UrlItemUtil.create('Attributes', url, 'Attributes'));
-    result.push(UrlItemUtil.create('Validation', url, 'Validation'));
-    result.push(UrlItemUtil.create('Numerical value', url, 'NumericalValue'));
-    result.push(UrlItemUtil.create('Ornaments', url, 'Ornaments'));
-    result.push(UrlItemUtil.create('Item size', url, 'ItemSize'));
-    result.push(UrlItemUtil.create('Helper text', url, 'HelperText'));
-    result.push(UrlItemUtil.create('Border radius', url, 'BorderRadius'));
-    result.push(UrlItemUtil.create('Palette', url, 'Palette'));
-    result.push(UrlItemUtil.create('Api', url, 'Api'));
-    return result;
-  }
-
-  // ** Textarea **
-
-  private getPathTextarea(): string {
-    return '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_TEXTAREA');
-  }
-
-  private createUrlListTextarea(): UrlItem[] {
-    const result: UrlItem[] = [];
-    const url = this.getPathTextarea();
-    result.push(UrlItemUtil.create('Basic', url, 'Basic'));
-    result.push(UrlItemUtil.create('Attributes', url, 'Attributes'));
-    result.push(UrlItemUtil.create('Validation', url, 'Validation'));
-    result.push(UrlItemUtil.create('Capability', url, 'Capability'));
-    result.push(UrlItemUtil.create('Ornaments', url, 'Ornaments'));
-    result.push(UrlItemUtil.create('Item size', url, 'ItemSize'));
-    result.push(UrlItemUtil.create('Helper text', url, 'HelperText'));
-    result.push(UrlItemUtil.create('Border radius', url, 'BorderRadius'));
-    result.push(UrlItemUtil.create('Palette', url, 'Palette'));
-    result.push(UrlItemUtil.create('Api', url, 'Api'));
-    return result;
-  }
-
-  // ** -- **
-
-  private updateStatusExpandedByPathname(): void {
+  private updateStatusExpandedByPathname(itemDataList: SiteItem[]): void {
     const pathname = location.pathname;
-    this.expandedFrameInput = pathname.startsWith(this.getPathFrameInput());
-    this.expandedHintOrError = pathname.startsWith(this.getPathHintOrError());
-    this.expandedInfiniteScroll = pathname.startsWith(this.getPathInfiniteScroll());
-    this.expandedInput = pathname.startsWith(this.getPathInput());
-    this.expandedTextarea = pathname.startsWith(this.getPathTextarea());
+    for (const itemData of itemDataList) {
+      const url = itemData.siteUrls.length > 0 ? itemData.siteUrls[0].url : '';
+      itemData.expanded = pathname.startsWith(url);
+    }
   }
-
-  // ** **
 }
