@@ -2,4 +2,9 @@
 
 app-hint-or-error-basic {
   display: block;
+
+  input.heb-input.ng-invalid {
+    border: red solid 2px;
+    outline-color: red;
+  }
 }

@@ -1,1 +1,186 @@
-<p>hint-or-error-basic works!</p>
+<section mr-vr>
+  <h3>Basic</h3>
+  <p>
+    The GrnHintOrErrorComponent component is a simple utility component.
+    Its main tasks are:
+  </p>
+  <ul>
+    <li>display hint text; (color: var(--gfi-lbl-def-cl));</li>
+    <li>display error text (color: var(--gfi-err-cl));</li>
+    <li>
+      display hint text when the input element has received focus
+      (color: var(--gfi-hov-cl));
+    </li>
+    <li>display tooltip on disabled (color: var(--gfi-dis-cl));</li>
+  </ul>
+  <p>
+    All css variables are global css variables from the GrnFrameInput component.
+    This component is used in GrnInputComponent and GrnTextareaComponent.
+    <br />
+    Here is an example of usage:
+  </p>
+  <code>
+    <pre>
+  &lt;grn-hint-or-error *ngIf="!!helperText"
+    [text]="helperText"
+    [isError]="!!formControl.errors || isError2"
+    [isFocused]="isFocused"
+    [isDisabled]="isDisabled2"&gt;
+  &lt;/grn-hint-or-error&gt;
+    </pre>
+  </code>
+</section>
+
+<section mr-vr>
+  <input type="checkbox"
+    id="isDisabled"
+    [(ngModel)]="isDisabled01"
+    (change)="changeIsDisabled()">
+  <label for="isDisabled"> Is disabled</label><br>
+</section>
+
+<form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <input class="heb-input"
+        type="text"
+        formControlName="input01a"
+        required
+        minlength="4"
+        (focus)="isFocusInput01a=true"
+        (blur)="isFocusInput01a=false" />
+      <grn-hint-or-error
+        [text]="controls01.input01a.invalid ? 'The value is not correct.' : 'The value is correct.'"
+        [isError]="controls01.input01a.invalid"
+        [isFocused]="isFocusInput01a"
+        [isDisabled]="controls01.input01a.disabled">
+      </grn-hint-or-error>
+    </div>
+
+    <div class="app-elem">
+      <input class="heb-input"
+        type="text"
+        formControlName="input01b"
+        required
+        (focus)="isFocusInput01b=true"
+        (blur)="isFocusInput01b=false" />
+      <grn-hint-or-error
+        [text]="controls01.input01b.invalid ? 'The value is not correct.' : 'The value is correct.'"
+        [isError]="controls01.input01b.invalid"
+        [isFocused]="isFocusInput01b"
+        [isDisabled]="controls01.input01b.disabled">
+      </grn-hint-or-error>
+    </div>
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;input class="heb-input"
+        type="text"
+        formControlName="input01a"
+        required
+        minlength="4"
+        (focus)="isFocusInput01a=true"
+        (blur)="isFocusInput01a=false" /&gt;
+      &lt;grn-hint-or-error
+        [text]="controls01.input01a.invalid
+          ? 'The value is not correct.' : 'The value is correct.'"
+        [isError]="controls01.input01a.invalid"
+        [isFocused]="isFocusInput01a"
+        [isDisabled]="controls01.input01a.disabled"&gt;
+      &lt;/grn-hint-or-error&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;input class="heb-input"
+        type="text"
+        formControlName="input01b"
+        required
+        (focus)="isFocusInput01b=true"
+        (blur)="isFocusInput01b=false" /&gt;
+      &lt;grn-hint-or-error
+        [text]="controls01.input01b.invalid
+          ? 'The value is not correct.' : 'The value is correct.'"
+        [isError]="controls01.input01b.invalid"
+        [isFocused]="isFocusInput01b"
+        [isDisabled]="controls01.input01b.disabled"&gt;
+      &lt;/grn-hint-or-error&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-textarea',
+  templateUrl: './textarea.component.html',
+  styleUrls: ['./textarea.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class TextareaComponent &#123;
+  public controls01 = &#123;
+    input01a: new FormControl('is', []),
+    input01b: new FormControl('demo', []),
+  &#125;;
+  public formGroup01: FormGroup = new FormGroup(this.controls01);
+  public isDisabled01 = false;
+  public isFocusInput01a = false;
+  public isFocusInput01b = false;
+
+  public changeIsDisabled(): void &#123;
+    if (this.isDisabled01) &#123;
+      this.formGroup01.disable();
+    &#125; else &#123;
+      this.formGroup01.enable();
+    &#125;
+  &#125;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+input.heb-input.ng-invalid &#123;
+  border: red solid 2px;
+  outline-color: red;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

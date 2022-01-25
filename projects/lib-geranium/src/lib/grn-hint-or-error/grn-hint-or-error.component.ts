@@ -13,6 +13,7 @@ import { HtmlElemUtil } from '../utils/html-elem.util';
 
 @Component({
   selector: 'grn-hint-or-error',
+  exportAs: 'grnHintOrError',
   templateUrl: './grn-hint-or-error.component.html',
   styleUrls: ['./grn-hint-or-error.component.scss'],
   encapsulation: ViewEncapsulation.None,
