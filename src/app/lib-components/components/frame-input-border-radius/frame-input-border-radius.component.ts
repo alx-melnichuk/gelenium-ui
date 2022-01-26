@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatSliderChange } from '@angular/material/slider';
 
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
@@ -117,11 +116,5 @@ export class FrameInputBorderRadiusComponent {
   @HostBinding('style')
   public get getClass(): string | null {
     return '--fibr-border-radius: ' + this.borderRadius + ';';
-  }
-
-  public inputBorderRadius(event: MatSliderChange): void {
-    if (!!event && event.value != null) {
-      this.borderRadius = event.value;
-    }
   }
 }

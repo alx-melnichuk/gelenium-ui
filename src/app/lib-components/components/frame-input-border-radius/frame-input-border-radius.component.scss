@@ -3,6 +3,11 @@
 app-frame-input-border-radius {
   display: block;
 
+  .fibr-border-radius-marks {
+    margin-left: 15px;
+    height: 5px;
+  }
+
   .fibr-slider-box {
     width: 46ch;
     display: flex;

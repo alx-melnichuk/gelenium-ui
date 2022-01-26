@@ -1,6 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
-// import { filter } from 'rxjs/operators';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+
+import { AnchorScrollerService } from 'src/app/lib-core/services/anchor-scroller.service';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +8,12 @@ import { NavigationStart, Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'geranium-demo';
-  constructor(private router: Router) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        // Navigation started.
-        console.log(event.url);
-      }
-    });
-    /*this.router.events
-      .pipe((e) => e instanceof NavigationStart)
-      .subscribe((e) => {
-      const navigation = router.getCurrentNavigation();
-      console.log('router.events ', navigation);
-      // tracingService.trace({id: navigation.extras.state.tracingId});
-    });*/
+
+  constructor(private anchorScrollerService: AnchorScrollerService) {}
+
+  ngOnInit(): void {
+    this.anchorScrollerService.listenForRouterEvents();
   }
 }

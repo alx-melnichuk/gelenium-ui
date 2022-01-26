@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { EXPANDED_HEIGHT } from 'src/app/lib-core/constants/constants';
-import { SiteItem, SiteMenu, SiteUrl } from 'src/app//lib-core/constants/site-menu';
+import { SiteItem, SiteMenu, SiteUrl } from 'src/app/lib-core/constants/site-menu';
 
 @Component({
   selector: 'app-lm-directives',

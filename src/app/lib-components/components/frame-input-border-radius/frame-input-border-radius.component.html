@@ -90,16 +90,31 @@
 
 <section mr-vr
   class="fibr-slider-box">
-  <span>
-    border-radius = ( BaseSize * <b class="fibr-slider-value">{{ borderRadius }}</b>/100)
-  </span>
-  <mat-slider class="fibr-slider"
-    color="primary"
+  <p>
+    <span>
+      border-radius = ( BaseSize * <b class="fibr-slider-value">{{ borderRadius }}</b>/100)
+    </span>
+  </p>
+  <input type="range"
+    class="fibr-border-radius-marks"
     min="0"
     max="50"
     step="5"
-    [value]="borderRadius"
-    (input)="inputBorderRadius($event)"></mat-slider>
+    list="border-radius-marks"
+    [(ngModel)]="borderRadius" />
+  <datalist id="border-radius-marks">
+    <option value="0"></option>
+    <option value="5"></option>
+    <option value="10"></option>
+    <option value="15"></option>
+    <option value="20"></option>
+    <option value="25"></option>
+    <option value="30"></option>
+    <option value="35"></option>
+    <option value="40"></option>
+    <option value="45"></option>
+    <option value="50"></option>
+  </datalist>
 </section>
 
 <section mr-vr>
@@ -330,7 +345,7 @@
         <mat-tab [label]="labelTs">
           <code><pre source="ts">
 import &#123;
-  Component, ViewEncapsulation
+  Component, ViewEncapsulation, HostBinding
 &#125; from '@angular/core';
 import &#123;
   FormControl, FormGroup
@@ -393,12 +408,10 @@ export class FrameInputComponent &#123;
     labelPd: 27.2, // 0.4*FrameSizeValue.huge
   &#125;;
 
-  public inputBorderRadius(event: MatSliderChange): void &#123;
-    if (!!event && event.value != null) &#123;
-      this.borderRadius = event.value;
-    &#125;
+  @HostBinding('style')
+  public get getClass(): string | null &#123;
+    return '--fibr-border-radius: ' + this.borderRadius + ';';
   &#125;
-
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

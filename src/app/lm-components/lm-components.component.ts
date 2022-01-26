@@ -1,9 +1,7 @@
-import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { EXPANDED_HEIGHT } from 'src/app/lib-core/constants/constants';
-import { SiteItem, SiteMenu, SiteUrl } from 'src/app//lib-core/constants/site-menu';
-
-// import { ItemData, UrlItem, UrlItemUtil } from '../lib-core/interfaces/url-item.interface';
+import { SiteItem, SiteMenu, SiteUrl } from 'src/app/lib-core/constants/site-menu';
 
 @Component({
   selector: 'app-lm-components',
@@ -11,20 +9,20 @@ import { SiteItem, SiteMenu, SiteUrl } from 'src/app//lib-core/constants/site-me
   styleUrls: ['./lm-components.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class LmComponentsComponent implements OnInit, AfterViewInit {
+export class LmComponentsComponent implements OnInit, AfterContentInit {
   public expandedHeight = EXPANDED_HEIGHT;
   public itemDataList: SiteItem[] = SiteMenu.getItems('Components');
 
   constructor() {
     this.updateStatusExpandedByPathname(this.itemDataList);
+  }
+
+  ngOnInit(): void {
     // eslint-disable-next-line no-restricted-syntax
     console.time('LmComponentsComponent');
   }
 
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method, @typescript-eslint/no-empty-function
-  ngOnInit(): void {}
-
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     // eslint-disable-next-line no-restricted-syntax
     console.timeEnd('LmComponentsComponent');
   }

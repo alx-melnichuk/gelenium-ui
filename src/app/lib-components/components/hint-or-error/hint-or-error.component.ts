@@ -1,5 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { AnchorScrollerService } from 'src/app/lib-core/services/anchor-scroller.service';
+
 @Component({
   selector: 'app-hint-or-error',
   templateUrl: './hint-or-error.component.html',
@@ -10,8 +12,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ViewEncapsulation } 
 export class HintOrErrorComponent implements AfterViewInit {
   public showNum = '';
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {
+  constructor(private anchorScrollerService: AnchorScrollerService) {
     // eslint-disable-next-line no-restricted-syntax
     console.time('HintOrErrorComponent');
   }
@@ -19,5 +20,8 @@ export class HintOrErrorComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     // eslint-disable-next-line no-restricted-syntax
     console.timeEnd('HintOrErrorComponent');
+    Promise.resolve().then(() => {
+      this.anchorScrollerService.scrollByFragmentFromPath();
+    });
   }
 }
