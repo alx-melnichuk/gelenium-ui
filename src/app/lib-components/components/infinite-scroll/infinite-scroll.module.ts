@@ -18,7 +18,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Optional', url, fragment: 'Optional' },
   { label: 'Api', url, fragment: 'Api' },
 ];
-SiteMenu.addItem('Components', 'InfiniteScroll', { order: 2, expanded: false, label: 'InfiniteScroll', siteUrls });
+SiteMenu.addItem('Components', 'InfiniteScroll', { label: 'InfiniteScroll', siteUrls });
 
 @NgModule({
   declarations: [InfiniteScrollComponent],

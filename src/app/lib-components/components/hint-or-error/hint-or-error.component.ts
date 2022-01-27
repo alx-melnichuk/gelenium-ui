@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { AnchorScrollerService } from 'src/app/lib-core/services/anchor-scroller.service';
+import { ScrollAfterRoutingUtil } from 'src/app/lib-core/utils/scroll-after-routing.util';
 
 @Component({
   selector: 'app-hint-or-error',
@@ -12,16 +12,9 @@ import { AnchorScrollerService } from 'src/app/lib-core/services/anchor-scroller
 export class HintOrErrorComponent implements AfterViewInit {
   public showNum = '';
 
-  constructor(private anchorScrollerService: AnchorScrollerService) {
-    // eslint-disable-next-line no-restricted-syntax
-    console.time('HintOrErrorComponent');
-  }
-
   ngAfterViewInit(): void {
-    // eslint-disable-next-line no-restricted-syntax
-    console.timeEnd('HintOrErrorComponent');
     Promise.resolve().then(() => {
-      this.anchorScrollerService.scrollByFragmentFromPath();
+      ScrollAfterRoutingUtil.scrollByFragmentFromPath();
     });
   }
 }

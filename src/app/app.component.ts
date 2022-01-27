@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
-import { AnchorScrollerService } from 'src/app/lib-core/services/anchor-scroller.service';
+import { ScrollAfterRoutingUtil } from 'src/app/lib-core/utils/scroll-after-routing.util';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +12,11 @@ import { AnchorScrollerService } from 'src/app/lib-core/services/anchor-scroller
 })
 export class AppComponent implements OnInit {
   title = 'geranium-demo';
+  private routerEventsSub: Subscription | null = null;
 
-  constructor(private anchorScrollerService: AnchorScrollerService) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.anchorScrollerService.listenForRouterEvents();
+    this.routerEventsSub = ScrollAfterRoutingUtil.listenForRouterEvents(this.router);
   }
 }

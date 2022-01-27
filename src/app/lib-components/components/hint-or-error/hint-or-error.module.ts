@@ -15,7 +15,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Basic', url, fragment: 'Basic' },
   { label: 'Api', url, fragment: 'Api' },
 ];
-SiteMenu.addItem('Components', 'HintOrError', { order: 1, expanded: false, label: 'HintOrError', siteUrls });
+SiteMenu.addItem('Components', 'HintOrError', { label: 'HintOrError', siteUrls });
 
 @NgModule({
   declarations: [HintOrErrorComponent],

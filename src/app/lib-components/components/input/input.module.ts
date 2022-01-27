@@ -28,7 +28,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Palette', url, fragment: 'Palette' },
   { label: 'Api', url, fragment: 'Api' },
 ];
-SiteMenu.addItem('Components', 'Input', { order: 3, expanded: false, label: 'Input', siteUrls });
+SiteMenu.addItem('Components', 'Input', { label: 'Input', siteUrls });
 
 @NgModule({
   declarations: [InputComponent],

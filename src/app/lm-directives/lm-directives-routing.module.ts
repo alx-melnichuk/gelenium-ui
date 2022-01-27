@@ -3,9 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { UrlDirectives } from './constants/url-directives.constants';
 import { LmDirectivesComponent } from './lm-directives.component';
-import { RegexCheckComponent } from './components/regex-check/regex-check.component';
-import { RegexMatchComponent } from './components/regex-match/regex-match.component';
-import { RegexRemoveComponent } from './components/regex-remove/regex-remove.component';
+import { RegexCheckComponent } from '../lib-directives/components/regex-check/regex-check.component';
+import { RegexMatchComponent } from '../lib-directives/components/regex-match/regex-match.component';
+import { RegexRemoveComponent } from '../lib-directives/components/regex-remove/regex-remove.component';
 
 const URL_REGEX_CHECK = UrlDirectives.get('URL_REGEX_CHECK');
 const URL_REGEX_MATCH = UrlDirectives.get('URL_REGEX_MATCH');

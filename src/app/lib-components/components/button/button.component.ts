@@ -3,23 +3,23 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ViewEncapsulation } 
 import { ScrollAfterRoutingUtil } from 'src/app/lib-core/utils/scroll-after-routing.util';
 
 @Component({
-  selector: 'app-frame-input',
-  templateUrl: './frame-input.component.html',
-  styleUrls: ['./frame-input.component.scss'],
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FrameInputComponent implements AfterViewInit {
+export class ButtonComponent implements AfterViewInit {
   public showNum = '';
 
   constructor() {
     // eslint-disable-next-line no-restricted-syntax
-    console.time('FrameInputComponent');
+    console.time('ButtonComponent');
   }
 
   ngAfterViewInit(): void {
     // eslint-disable-next-line no-restricted-syntax
-    console.timeEnd('FrameInputComponent');
+    console.timeEnd('ButtonComponent');
     Promise.resolve().then(() => {
       ScrollAfterRoutingUtil.scrollByFragmentFromPath();
     });

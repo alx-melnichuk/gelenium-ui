@@ -28,7 +28,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Palette', url, fragment: 'Palette' },
   { label: 'Api', url, fragment: 'Api' },
 ];
-SiteMenu.addItem('Components', 'Textarea', { order: 3, expanded: false, label: 'Textarea', siteUrls });
+SiteMenu.addItem('Components', 'Textarea', { label: 'Textarea', siteUrls });
 
 @NgModule({
   declarations: [TextareaComponent],

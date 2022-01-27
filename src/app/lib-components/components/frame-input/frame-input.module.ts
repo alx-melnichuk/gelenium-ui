@@ -28,7 +28,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Config', url, fragment: 'Config' },
   { label: 'Api', url, fragment: 'Api' },
 ];
-SiteMenu.addItem('Components', 'FrameInput', { order: 0, expanded: false, label: 'FrameInput', siteUrls });
+SiteMenu.addItem('Components', 'FrameInput', { label: 'FrameInput', siteUrls });
 
 @NgModule({
   declarations: [FrameInputComponent],
