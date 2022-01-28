@@ -7,15 +7,12 @@
 grn-textarea {
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
-  font-weight: 400;
-  font-size: 1em;
-  position: relative;
   padding: 0;
   vertical-align: top;
   &[wdFull] {
     width: 100%;
   }
+  position: relative;
 
   // Textarea
   // The 'gfi-elem' style sets the line height: 1.4375em;

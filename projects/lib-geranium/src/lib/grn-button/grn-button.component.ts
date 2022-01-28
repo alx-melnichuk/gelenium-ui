@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -10,10 +11,11 @@ import {
   Optional,
   Renderer2,
   SimpleChanges,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 
-import { ButtonShape, ButtonShapeUtil } from '../interfaces/button-shape.interface';
+import { ButtonExterior, ButtonExteriorUtil } from '../interfaces/button-exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 import { GrnButtonConfig } from '../interfaces/grn-button-config.interface';
 import { HtmlElemUtil } from '../utils/html-elem.util';
@@ -27,19 +29,22 @@ export const GRN_BUTTON_CONFIG = new InjectionToken<GrnButtonConfig>('GRN_BUTTON
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GrnButtonComponent implements OnChanges, OnInit {
+export class GrnButtonComponent implements OnChanges, OnInit, AfterViewInit {
   @Input()
   public config: GrnButtonConfig | null = null;
   @Input()
-  public btnShape: string | null = null; // ButtonShapeType
+  public exterior: string | null = null; // ButtonExteriorType
   @Input()
   public frameSize: string | null = null; // FrameSizeType
   @Input()
   public isDisabled = false;
 
+  @ViewChild('buttonElement')
+  public buttonElementRef: ElementRef<HTMLElement> | undefined;
+
   public currConfig: GrnButtonConfig = {};
-  public innBtnShape: ButtonShape | null = null;
-  public btnShape2: ButtonShape | null = null;
+  public innExterior: ButtonExterior | null = null;
+  public exterior2: ButtonExterior | null = null;
   public innFrameSizeValue = 0;
   public frameSize2: FrameSize | null = null;
 
@@ -49,7 +54,6 @@ export class GrnButtonComponent implements OnChanges, OnInit {
     private renderer: Renderer2
   ) {
     this.currConfig = this.rootConfig || {};
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-button', true);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -59,51 +63,89 @@ export class GrnButtonComponent implements OnChanges, OnInit {
       this.currConfig = { ...(this.rootConfig || {}), ...(this.config || {}) };
       isConfigFirstChange = changes.config.firstChange;
     }
-    if (changes.btnShape || (changes.config && !this.btnShape)) {
-      this.btnShape2 = ButtonShapeUtil.convert(this.btnShape);
-      this.innBtnShape = this.updateBtnShape(this.btnShape2 || this.currConfig.btnShape || null);
+    if (changes.exterior || (changes.config && !this.exterior)) {
+      this.exterior2 = ButtonExteriorUtil.convert(this.exterior);
+      this.innExterior = this.createExterior(this.exterior2 || this.currConfig.exterior || null);
+      this.settingExterior(this.buttonElementRef, this.innExterior);
       isLabelPadding = true;
     }
 
     if (changes.frameSize || (changes.config && !this.frameSize)) {
       this.frameSize2 = FrameSizeUtil.convert(this.frameSize);
       const configFrameSizeValue = this.currConfig.frameSizeValue;
-      this.innFrameSizeValue = this.updateFrameSize(this.frameSize2 || this.currConfig.frameSize || null, configFrameSizeValue);
+      this.innFrameSizeValue = this.createFrameSize(this.frameSize2 || this.currConfig.frameSize || null, configFrameSizeValue);
+      this.settingFrameSize(this.buttonElementRef, this.innFrameSizeValue);
       isLabelPadding = true;
     }
 
-    /*if (isLabelPadding && this.innBtnShape && this.innFrameSizeValue > 0) {
-      this.labelPadding = this.updateLabelPadding(this.innBtnShape, this.innFrameSizeValue, this.currConfig.labelPd);
+    /*if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
+      this.labelPadding = this.updateLabelPadding(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
       this.setPropertyLabelPaddingHor(this.labelPadding);
       if (!(isConfigFirstChange || changes.exterior?.firstChange || changes.frameSize?.firstChange)) {
-        this.setPropertyLabelPaddingVer(this.innBtnShape, this.innFrameSizeValue, this.lineHeight);
+        this.setPropertyLabelPaddingVer(this.innExterior, this.innFrameSizeValue, this.lineHeight);
         this.setPropertyLabel2Padding(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
       }
     }*/
   }
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method, @typescript-eslint/no-empty-function
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+    let isLabelPadding = false;
+    if (this.innExterior == null) {
+      this.exterior2 = ButtonExteriorUtil.convert(this.exterior);
+      this.innExterior = this.createExterior(this.currConfig.exterior || null);
+      this.settingExterior(this.buttonElementRef, this.innExterior);
+      isLabelPadding = true;
+    }
+    if (this.innFrameSizeValue === 0) {
+      this.frameSize2 = FrameSizeUtil.convert(this.frameSize);
+      this.innFrameSizeValue = this.createFrameSize(this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
+      this.settingFrameSize(this.buttonElementRef, this.innFrameSizeValue);
+      isLabelPadding = true;
+    }
+    // if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
+    //   this.labelPadding = this.updateLabelPadding(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
+    //   this.setPropertyLabelPaddingHor(this.labelPadding);
+    // }
+  }
+
+  ngAfterViewInit(): void {
+    if (this.innExterior) {
+      this.settingExterior(this.buttonElementRef, this.innExterior);
+    }
+    if (this.innFrameSizeValue > 0) {
+      this.settingFrameSize(this.buttonElementRef, this.innFrameSizeValue);
+    }
+  }
+
+  // ** Public API **
+
+  public doClick(event: any): void {
+    console.log('doClick()');
+  }
 
   // ** Private API **
 
-  private updateBtnShape(btnShape: ButtonShape | null): ButtonShape {
-    const result: ButtonShape = ButtonShapeUtil.create(btnShape);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gb-text', ButtonShapeUtil.isText(result));
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'shp-t', ButtonShapeUtil.isText(result) ? '' : null);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gb-contained', ButtonShapeUtil.isContained(result));
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'shp-c', ButtonShapeUtil.isContained(result) ? '' : null);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gb-outlined', ButtonShapeUtil.isOutlined(result));
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'shp-o', ButtonShapeUtil.isOutlined(result) ? '' : null);
-    return result;
+  private createExterior(exterior: ButtonExterior | null): ButtonExterior {
+    return ButtonExteriorUtil.create(exterior);
+  }
+  private settingExterior(elem: ElementRef<HTMLElement> | undefined, exterior: ButtonExterior | null): void {
+    HtmlElemUtil.setClass(this.renderer, elem, 'gb-text', ButtonExteriorUtil.isText(exterior));
+    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-t', ButtonExteriorUtil.isText(exterior) ? '' : null);
+    HtmlElemUtil.setClass(this.renderer, elem, 'gb-contained', ButtonExteriorUtil.isContained(exterior));
+    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-c', ButtonExteriorUtil.isContained(exterior) ? '' : null);
+    HtmlElemUtil.setClass(this.renderer, elem, 'gb-outlined', ButtonExteriorUtil.isOutlined(exterior));
+    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', ButtonExteriorUtil.isOutlined(exterior) ? '' : null);
   }
 
-  private updateFrameSize(frameSizeInp: FrameSize | null, frameSizeValueInp?: number): number {
+  private createFrameSize(frameSizeInp: FrameSize | null, frameSizeValueInp?: number): number {
     const frameSize: FrameSize = FrameSizeUtil.create(frameSizeInp);
     let frameSizeValue = FrameSizeUtil.getValue(frameSize) || 0;
     if (frameSizeInp === null && frameSizeValueInp && frameSizeValueInp > 0) {
       frameSizeValue = frameSizeValueInp;
     }
-    HtmlElemUtil.setProperty(this.hostRef, '--size', frameSizeValue > 0 ? frameSizeValue + 'px' : null);
     return frameSizeValue;
+  }
+  private settingFrameSize(elem: ElementRef<HTMLElement> | undefined, frameSizeValue: number): void {
+    HtmlElemUtil.setProperty(elem, '--size', frameSizeValue > 0 ? frameSizeValue + 'px' : null);
   }
 }

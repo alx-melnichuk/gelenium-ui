@@ -6,10 +6,11 @@ import { GrnFrameInputModule } from './grn-frame-input/grn-frame-input.module';
 import { GrnInfiniteScrollModule } from './grn-infinite-scroll/grn-infinite-scroll.module';
 import { GrnInputModule } from './grn-input/grn-input.module';
 import { GrnTextareaModule } from './grn-textarea/grn-textarea.module';
+import { GrnTouchRippleModule } from './grn-touch-ripple/grn-touch-ripple.module';
 
 @NgModule({
   declarations: [],
-  imports: [GrnRegexModule, GrnFrameInputModule, GrnInfiniteScrollModule, GrnInputModule, GrnTextareaModule],
+  imports: [GrnRegexModule, GrnFrameInputModule, GrnInfiniteScrollModule, GrnInputModule, GrnTextareaModule, GrnTouchRippleModule],
   exports: [],
 })
 export class LibGeraniumModule {}

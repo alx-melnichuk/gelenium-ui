@@ -10,7 +10,6 @@ app-root {
   height: 100%;
   display: flex;
   flex-direction: column;
-  line-height: 1.5;
 
   &>.app-header {
     flex-shrink: 0;
@@ -59,6 +58,10 @@ app-root {
   }
   .app-group div>small {
     color: #00000096;
+  }
+  .app-item {
+    min-width: 16ch;
+    margin: 10px 10px;
   }
 
   table.app-tab {

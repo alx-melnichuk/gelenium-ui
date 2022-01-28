@@ -1,1 +1,9 @@
-<p>grn-button works!</p>
+<button #buttonElement
+  type="button"
+  tabindex="0"
+  class="grn-btn-reset grn-button"
+  [attr.disabled]="isDisabled ? '' : null"
+  (click)="doClick($event)">
+  <ng-content></ng-content>
+  <grn-touch-ripple></grn-touch-ripple>
+</button>

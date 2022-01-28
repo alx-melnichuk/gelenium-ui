@@ -9,9 +9,6 @@
 grn-frame-input { //outline: 1px dashed crimson;
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
-  font-weight: 400;
-  font-size: 1em;
   line-height: 1.4375em; // The value of the "line height" for the input element. (23px for font-size: 16px)
   min-width: 0;
   padding: 0;
@@ -21,12 +18,6 @@ grn-frame-input { //outline: 1px dashed crimson;
 
   &[ext-o], &[ext-u] {
     border-radius: var(--br-rd);
-  }
-  &:not([dis]) {
-    cursor: text;
-  }
-  &[dis] {
-    cursor: default;
   }
 
   // Section "Label".
