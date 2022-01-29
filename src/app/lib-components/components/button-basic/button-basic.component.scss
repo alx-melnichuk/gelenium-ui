@@ -2,4 +2,16 @@
 
 app-button-basic {
   display: block;
+
+  .bb-demo {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  .bb-interval {
+    display: flex;
+    &>:not(:first-of-type) {
+      margin-left: 15px;
+    }
+  }
 }

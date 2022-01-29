@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, HostListener, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewEncapsulation,
+} from '@angular/core';
+import { HtmlElemUtil } from '../utils/html-elem.util';
 
 const RIPPLE_CLASS = 'gtr-ripple';
 
@@ -9,28 +20,29 @@ const RIPPLE_CLASS = 'gtr-ripple';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GrnTouchRippleComponent implements OnInit {
+export class GrnTouchRippleComponent implements OnChanges, OnInit {
+  @Input()
+  public isCenter: string | null = null;
+  @Input()
+  public rippleColor: string | null = null;
+
+  private innIsCenter = false;
   private checkParentSuccessful = false;
 
   constructor(private hostRef: ElementRef<HTMLElement>) {}
 
-  @HostListener('click', ['$event'])
-  public doClick(event: PointerEvent): void {
-    const clientHeight = this.hostRef.nativeElement.parentElement?.clientHeight;
-    const clientWidth = this.hostRef.nativeElement.parentElement?.clientWidth;
-    if (this.checkParentSuccessful && clientHeight && clientWidth) {
-      const radius = Math.min(clientWidth, clientHeight) / 2;
-      const circle = document.createElement('span');
-      circle.style.width = circle.style.height = `${radius}px`;
-      circle.style.left = `${event.offsetX - radius / 2}px`;
-      circle.style.top = `${event.offsetY - radius / 2}px`;
-      circle.classList.add(RIPPLE_CLASS);
+  @HostListener('mousedown', ['$event'])
+  public doMousedown(event: MouseEvent): void {
+    this.doRipple(event, this.innIsCenter);
+  }
 
-      const list = this.hostRef.nativeElement.children;
-      for (let idx = 0; idx < list.length; idx++) {
-        list.item(idx)?.remove();
-      }
-      this.hostRef.nativeElement.appendChild(circle);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.isCenter) {
+      this.innIsCenter = this.isCenter === '' || this.isCenter === 'true';
+    }
+    if (changes.rippleColor) {
+      const color = this.rippleColor && this.rippleColor.length < 33 ? this.rippleColor : null;
+      HtmlElemUtil.setProperty(this.hostRef, '--gtr-ripple-color', color);
     }
   }
 
@@ -46,6 +58,44 @@ export class GrnTouchRippleComponent implements OnInit {
         console.log('The parent element must have "overflow: hidden".');
       }
       this.checkParentSuccessful = checkRelative && checkOverflow;
+    }
+  }
+
+  // ** Private API **
+
+  private doRipple(event: MouseEvent, isCenter: boolean): void {
+    const parentElement = this.hostRef.nativeElement.parentElement;
+    if (!this.checkParentSuccessful || !parentElement) {
+      return;
+    }
+    const clientHeight = parentElement.clientHeight;
+    const clientWidth = parentElement.clientWidth;
+    if (this.checkParentSuccessful && clientHeight && clientWidth && event.currentTarget) {
+      const radius = Math.min(clientWidth, clientHeight) / 2;
+      const rect = (event.currentTarget as HTMLElement).getBoundingClientRect() || { left: 0, top: 0 };
+      let offsetX = Math.round(event.clientX - rect.left);
+      let offsetY = Math.round(event.clientY - rect.top);
+      if (isCenter) {
+        offsetX = Math.round(clientWidth / 2);
+        offsetY = Math.round(clientHeight / 2);
+      }
+      const left = offsetX - radius / 2;
+      const top = offsetY - radius / 2;
+
+      const circle = document.createElement('span');
+      circle.style.width = circle.style.height = `${radius}px`;
+      circle.style.left = `${left}px`;
+      circle.style.top = `${top}px`;
+      circle.classList.add(RIPPLE_CLASS);
+      this.hostRef.nativeElement.appendChild(circle);
+
+      const startTimer = setTimeout(() => {
+        clearTimeout(startTimer);
+        const children = this.hostRef.nativeElement.children;
+        if (children.length > 0) {
+          children.item(0)?.remove();
+        }
+      }, 1000);
     }
   }
 }

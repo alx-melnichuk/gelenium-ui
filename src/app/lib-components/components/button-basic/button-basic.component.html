@@ -6,38 +6,77 @@
     It appears in three versions:
   </p>
   <ul>
-    <li>as text (btnShape="text" - default)</li>
-    <li>as a container (btnShape="contained")</li>
-    <li>as an outline (btnShape="outlined")</li>
+    <li>as text (exterior="text" - default)</li>
+    <li>as a container (exterior="contained")</li>
+    <li>as an outline (exterior="outlined")</li>
   </ul>
 </section>
 
-<grn-button exterior="contained">
-  Contained
-</grn-button>
+<div class="bb-demo">
+  <div class="bb-interval">
 
-<div>
+    <grn-button exterior="text">
+      <span>Text</span>
+    </grn-button>
 
-  <!--<div class="app-group">
+    <grn-button exterior="contained">
+      <span>Contained</span>
+    </grn-button>
 
-    <div class="app-item">
-      <grn-button exterior="text">
-        <span>Text</span>
-      </grn-button>
-    </div>
+    <grn-button exterior="outlined">
+      <span>Outlined</span>
+    </grn-button>
 
-    <div class="app-item">
-      <grn-button exterior="contained">
-        Contained
-      </grn-button>
-    </div>
-
-    <div class="app-item">
-      <grn-button exterior="outlined">
-        <span>Outlined</span>
-      </grn-button>
-    </div>
-
-  </div>-->
-
+  </div>
 </div>
+
+<section mr-vr>
+  <h4>Button with "text" exterior.</h4>
+  <p>
+    Buttons with the "text" exterior are for less important actions.
+  </p>
+</section>
+
+<div class="bb-demo">
+  <div class="bb-interval">
+
+    <grn-button exterior="text">
+      <span>Additionally</span>
+    </grn-button>
+
+    <grn-button exterior="text"
+      isDisabled>
+      <span>Disabled</span>
+    </grn-button>
+
+  </div>
+</div>
+
+<section mr-vr>
+  <h4>Button with "contained" exterior.</h4>
+  <p>
+    Buttons with the "contained" exterior are for important actions.
+  </p>
+</section>
+
+<div class="bb-demo">
+  <div class="bb-interval">
+
+    <grn-button exterior="contained">
+      <span>Important</span>
+    </grn-button>
+
+    <grn-button exterior="contained"
+      isDisabled>
+      <span>Disabled</span>
+    </grn-button>
+
+  </div>
+</div>
+
+<!-- <section mr-vr>
+  <h4>Button with "outlined" exterior.</h4>
+  <p>
+    Buttons with the "outlined" exterior are for more important actions.
+  </p>
+</section> -->

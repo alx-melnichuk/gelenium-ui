@@ -1,9 +1,10 @@
 <button #buttonElement
+  grnBtn
   type="button"
   tabindex="0"
-  class="grn-btn-reset grn-button"
-  [attr.disabled]="isDisabled ? '' : null"
+  class="grn-button"
   (click)="doClick($event)">
   <ng-content></ng-content>
-  <grn-touch-ripple></grn-touch-ripple>
+  <grn-touch-ripple *ngIf="!innIsDisabled"
+    [rippleColor]="innRippleColor"></grn-touch-ripple>
 </button>
