@@ -4,7 +4,9 @@
   tabindex="0"
   class="grn-button"
   (click)="doClick($event)">
-  <ng-content></ng-content>
+  <span elem-pd-ver>
+    <ng-content></ng-content>
+  </span>
   <grn-touch-ripple *ngIf="!innIsDisabled"
     [rippleColor]="innRippleColor"></grn-touch-ripple>
 </button>

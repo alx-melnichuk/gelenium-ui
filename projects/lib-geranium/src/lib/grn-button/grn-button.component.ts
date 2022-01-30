@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
@@ -29,7 +30,7 @@ export const GRN_BUTTON_CONFIG = new InjectionToken<GrnButtonConfig>('GRN_BUTTON
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GrnButtonComponent implements OnChanges, OnInit, AfterViewInit {
+export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, AfterViewInit {
   @Input()
   public config: GrnButtonConfig | null = null;
   @Input()
@@ -39,7 +40,7 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterViewInit {
   @Input()
   public isDisabled: string | null = null;
   @Input()
-  public notUppercase: string | null = null;
+  public uppercase: string | null = null;
 
   @ViewChild('buttonElement')
   public buttonElementRef: ElementRef<HTMLElement> | undefined;
@@ -50,8 +51,10 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterViewInit {
   public innFrameSizeValue = 0;
   public frameSize2: FrameSize | null = null;
   public innIsDisabled: boolean | null = null;
-  public innNotUppercase: boolean | null = null;
+  public innUppercase: boolean | null = null;
   public innRippleColor: string | null = null;
+  // public labelPadding = 0;
+  public lineHeight = 0;
 
   constructor(
     @Optional() @Inject(GRN_BUTTON_CONFIG) private rootConfig: GrnButtonConfig | null,
@@ -81,22 +84,20 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterViewInit {
       this.settingFrameSize(this.buttonElementRef, this.innFrameSizeValue);
       isLabelPadding = true;
     }
-
-    /*if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      this.labelPadding = this.updateLabelPadding(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
-      this.setPropertyLabelPaddingHor(this.labelPadding);
+    if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
+      // this.labelPadding = this.updateLabelPadding(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
+      // this.setPropertyLabelPaddingHor(this.labelPadding);
       if (!(isConfigFirstChange || changes.exterior?.firstChange || changes.frameSize?.firstChange)) {
         this.setPropertyLabelPaddingVer(this.innExterior, this.innFrameSizeValue, this.lineHeight);
-        this.setPropertyLabel2Padding(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
       }
-    }*/
+    }
     if (changes.isDisabled) {
       this.innIsDisabled = this.isDisabled === '' || this.isDisabled === 'true';
       this.settingIsDisabled(this.buttonElementRef, this.innIsDisabled);
     }
-    if (changes.notUppercase) {
-      this.innNotUppercase = this.notUppercase === '' || this.notUppercase === 'true';
-      this.settingNotUppercase(this.buttonElementRef, this.innNotUppercase);
+    if (changes.uppercase) {
+      this.innUppercase = this.uppercase === '' || this.uppercase === 'true';
+      this.settingUppercase(this.buttonElementRef, this.innUppercase);
     }
   }
 
@@ -114,18 +115,29 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterViewInit {
       this.settingFrameSize(this.buttonElementRef, this.innFrameSizeValue);
       isLabelPadding = true;
     }
-    // if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-    //   this.labelPadding = this.updateLabelPadding(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
-    //   this.setPropertyLabelPaddingHor(this.labelPadding);
-    // }
+    if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
+      // this.labelPadding = this.updateLabelPadding(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
+      // this.setPropertyLabelPaddingHor(this.labelPadding);
+    }
     if (this.innIsDisabled === null) {
       this.innIsDisabled = false;
       this.settingIsDisabled(this.buttonElementRef, this.innIsDisabled);
     }
-    if (this.innNotUppercase === null) {
-      this.innNotUppercase = false;
-      this.settingNotUppercase(this.buttonElementRef, this.innNotUppercase);
+    if (this.innUppercase === null) {
+      this.innUppercase = false;
+      this.settingUppercase(this.buttonElementRef, this.innUppercase);
     }
+  }
+
+  ngAfterContentInit(): void {
+    if (this.buttonElementRef) {
+      const lineHeightPx = getComputedStyle(this.buttonElementRef.nativeElement).getPropertyValue('line-height');
+      console.log('tn lineHeightPx=', lineHeightPx);
+    }
+    const lineHeightPx = getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height');
+    console.log('lineHeightPx=', lineHeightPx);
+    this.lineHeight = Number(lineHeightPx.replace('px', ''));
+    this.setPropertyLabelPaddingVer(this.innExterior, this.innFrameSizeValue, this.lineHeight);
   }
 
   ngAfterViewInit(): void {
@@ -133,13 +145,13 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterViewInit {
       this.settingExterior(this.buttonElementRef, this.innExterior);
     }
     if (this.innFrameSizeValue > 0) {
-      this.settingFrameSize(this.buttonElementRef, this.innFrameSizeValue);
+      this.settingFrameSize(this.hostRef, this.innFrameSizeValue);
     }
     if (this.innIsDisabled !== null) {
       this.settingIsDisabled(this.buttonElementRef, this.innIsDisabled);
     }
-    if (this.innNotUppercase !== null) {
-      this.settingNotUppercase(this.buttonElementRef, this.innNotUppercase);
+    if (this.innUppercase !== null) {
+      this.settingUppercase(this.buttonElementRef, this.innUppercase);
     }
   }
 
@@ -168,7 +180,7 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterViewInit {
   }
 
   private createFrameSize(frameSizeInp: FrameSize | null, frameSizeValueInp?: number): number {
-    const frameSize: FrameSize = FrameSizeUtil.create(frameSizeInp);
+    const frameSize: FrameSize = FrameSizeUtil.convert((frameSizeInp || '').toString() || FrameSize.small) as FrameSize;
     let frameSizeValue = FrameSizeUtil.getValue(frameSize) || 0;
     if (frameSizeInp === null && frameSizeValueInp && frameSizeValueInp > 0) {
       frameSizeValue = frameSizeValueInp;
@@ -184,7 +196,24 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterViewInit {
     HtmlElemUtil.setAttr(this.renderer, elem, 'disabled', isDisabled ? '' : null);
   }
 
-  private settingNotUppercase(elem: ElementRef<HTMLElement> | undefined, notUppercase: boolean): void {
-    HtmlElemUtil.setAttr(this.renderer, elem, 'notUppercase', notUppercase ? '' : null);
+  private settingUppercase(elem: ElementRef<HTMLElement> | undefined, uppercase: boolean): void {
+    HtmlElemUtil.setAttr(this.renderer, elem, 'uppercase', uppercase ? '' : null);
+  }
+
+  private setPropertyLabelPaddingVer(exterior: ButtonExterior | null, frameSizeValue: number, lineHeight: number): void {
+    if (exterior != null && frameSizeValue > 0 && lineHeight > 0) {
+      HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-ver', this.labelPaddingVer(true, exterior, frameSizeValue, lineHeight));
+    }
+  }
+
+  private labelPaddingVer(isTop: boolean, exterior: ButtonExterior | null, frameSize: number, lineHeight: number): string | null {
+    let result: number | null = null;
+    if (exterior != null && frameSize > 0 && lineHeight > 0) {
+      result = (frameSize - lineHeight) / 2;
+      // if (exterior === ButtonExterior.outlined) {
+      //   result--;
+      // }
+    }
+    return result != null ? String(result) + 'px' : null;
   }
 }
