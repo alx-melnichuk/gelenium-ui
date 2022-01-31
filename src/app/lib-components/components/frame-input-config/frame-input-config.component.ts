@@ -5,12 +5,12 @@ import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from 'src/app/lib-
 
 import { GRN_FRAME_INPUT_CONFIG } from 'projects/lib-geranium/src/lib/grn-frame-input/grn-frame-input.component';
 import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/interfaces/grn-frame-input-config.interface';
-import { Exterior } from 'projects/lib-geranium/src/lib/interfaces/exterior.interface';
+import { InputExterior } from 'projects/lib-geranium/src/lib/interfaces/input-exterior.interface';
 import { FrameSize } from 'projects/lib-geranium/src/lib/interfaces/frame-size.interface';
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 const grnFrameInputConfigDefault: GrnFrameInputConfig = {
-  exterior: Exterior.outlined,
+  exterior: InputExterior.outlined,
   frameSize: FrameSize.small,
 };
 

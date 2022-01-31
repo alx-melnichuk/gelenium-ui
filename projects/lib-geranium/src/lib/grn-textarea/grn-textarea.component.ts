@@ -35,7 +35,7 @@ import {
 
 import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
 import { GRN_FRAME_INPUT_CONFIG } from '../grn-frame-input/grn-frame-input.component';
-import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
+import { InputExterior, InputExteriorUtil } from '../interfaces/input-exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 import { GrnFrameInputConfig } from '../interfaces/grn-frame-input-config.interface';
 import { OrnamAlign, OrnamAlignUtil } from '../interfaces/ornam-align.interface';
@@ -122,18 +122,18 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
   public grnOrnamentRg: ElementRef<HTMLElement> | undefined;
 
   public get isOutlined(): boolean {
-    return ExteriorUtil.isOutlined(this.innExterior);
+    return InputExteriorUtil.isOutlined(this.innExterior);
   }
   public get isUnderline(): boolean {
-    return ExteriorUtil.isUnderline(this.innExterior);
+    return InputExteriorUtil.isUnderline(this.innExterior);
   }
   public get isStandard(): boolean {
-    return ExteriorUtil.isStandard(this.innExterior);
+    return InputExteriorUtil.isStandard(this.innExterior);
   }
 
   public currConfig: GrnFrameInputConfig = {};
-  public innExterior: Exterior | null = null;
-  public exterior2: Exterior | null = null;
+  public innExterior: InputExterior | null = null;
+  public exterior2: InputExterior | null = null;
   public innFrameSizeValue = 0;
   public frameSize2: FrameSize | null = null;
   public isLabelShrink2: boolean | null = null; // Binding attribute "lbShrink".
@@ -172,7 +172,7 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
       this.currConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
     }
     if (changes.exterior || (changes.config && !this.exterior)) {
-      this.exterior2 = ExteriorUtil.convert(this.exterior);
+      this.exterior2 = InputExteriorUtil.convert(this.exterior);
       this.innExterior = this.updateExterior(this.exterior2 || this.currConfig.exterior || null);
       isLabelPadding = true;
     }
@@ -183,8 +183,7 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
       isLabelPadding = true;
     }
     if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      const labelPd = this.currConfig?.labelPd || 0;
-      this.labelPadding = labelPd > 0 ? labelPd : LabelPaddingUtil.hor(this.innFrameSizeValue, this.innExterior);
+      this.labelPadding = LabelPaddingUtil.hor(this.innExterior, this.innFrameSizeValue, this.currConfig?.labelPd);
       this.setPropertyLabelPaddingHor(this.labelPadding);
     }
     if (changes.ornamLfAlign || (changes.config && !this.ornamLfAlign)) {
@@ -238,8 +237,7 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
       isLabelPadding = true;
     }
     if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      const labelPd = this.currConfig?.labelPd || 0;
-      const labelPadding = labelPd > 0 ? labelPd : LabelPaddingUtil.hor(this.innFrameSizeValue, this.innExterior);
+      const labelPadding = LabelPaddingUtil.hor(this.innExterior, this.innFrameSizeValue, this.currConfig?.labelPd);
       this.setPropertyLabelPaddingHor(labelPadding);
     }
   }
@@ -388,8 +386,8 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
     return config;
   }
 
-  private updateExterior(exterior: Exterior | null): Exterior {
-    return ExteriorUtil.create(exterior);
+  private updateExterior(exterior: InputExterior | null): InputExterior {
+    return InputExteriorUtil.create(exterior);
   }
 
   private updateFrameSizeValue(frameSize: FrameSize | null, frameSizeValue?: number): number {

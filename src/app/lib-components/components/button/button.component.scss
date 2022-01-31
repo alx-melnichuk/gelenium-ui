@@ -2,4 +2,14 @@
 
 app-button {
   display: block;
+
+  .b-items {
+    display: flex;
+    flex-wrap: wrap;
+    // align-items: center;
+    &>* {
+      margin-left: 10%;
+    }
+  }
+
 }

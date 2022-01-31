@@ -1,10 +1,12 @@
 <button #buttonElement
+  grnClear
   grnBtn
+  grnIndent
   type="button"
   tabindex="0"
   class="grn-button"
   (click)="doClick($event)">
-  <span elem-pd-ver>
+  <span btn-pd-ver>
     <ng-content></ng-content>
   </span>
   <grn-touch-ripple *ngIf="!innIsDisabled"

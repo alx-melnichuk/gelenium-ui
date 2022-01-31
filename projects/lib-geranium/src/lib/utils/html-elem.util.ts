@@ -1,9 +1,9 @@
 import { ElementRef, Renderer2 } from '@angular/core';
 
 export class HtmlElemUtil {
-  public static setProperty(element: ElementRef | undefined, propertyName: string, propertyValue: string | null): void {
+  public static setProperty(element: ElementRef | undefined, propertyName: string, propertyValue: string | null | undefined): void {
     if (element && element.nativeElement && propertyName) {
-      (element.nativeElement as HTMLElement).style.setProperty(propertyName, propertyValue);
+      (element.nativeElement as HTMLElement).style.setProperty(propertyName, propertyValue || null);
     }
   }
   public static setClass(renderer: Renderer2, element: ElementRef | undefined, className: string, isAdd: boolean): void {
@@ -15,10 +15,10 @@ export class HtmlElemUtil {
       }
     }
   }
-  public static setAttr(renderer: Renderer2, element: ElementRef | undefined, attrName: string, attrValue: string | null): void {
+  public static setAttr(renderer: Renderer2, element: ElementRef | undefined, attrName: string, attrVal: string | null | undefined): void {
     if (renderer && element && element.nativeElement && attrName) {
-      if (attrValue != null) {
-        renderer.setAttribute(element.nativeElement, attrName, attrValue);
+      if (attrVal != null) {
+        renderer.setAttribute(element.nativeElement, attrName, attrVal);
       } else {
         renderer.removeAttribute(element.nativeElement, attrName);
       }

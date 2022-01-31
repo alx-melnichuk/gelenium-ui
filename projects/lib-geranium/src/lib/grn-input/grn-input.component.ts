@@ -35,7 +35,7 @@ import {
 
 import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
 import { GRN_FRAME_INPUT_CONFIG } from '../grn-frame-input/grn-frame-input.component';
-import { Exterior, ExteriorUtil } from '../interfaces/exterior.interface';
+import { InputExterior, InputExteriorUtil } from '../interfaces/input-exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 import { GrnFrameInputConfig } from '../interfaces/grn-frame-input-config.interface';
 import { OrnamAlign, OrnamAlignUtil } from '../interfaces/ornam-align.interface';
@@ -126,18 +126,18 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterViewInit, Cont
   public grnOrnamentRg: ElementRef<HTMLElement> | undefined;
 
   public get isOutlined(): boolean {
-    return ExteriorUtil.isOutlined(this.innExterior);
+    return InputExteriorUtil.isOutlined(this.innExterior);
   }
   public get isUnderline(): boolean {
-    return ExteriorUtil.isUnderline(this.innExterior);
+    return InputExteriorUtil.isUnderline(this.innExterior);
   }
   public get isStandard(): boolean {
-    return ExteriorUtil.isStandard(this.innExterior);
+    return InputExteriorUtil.isStandard(this.innExterior);
   }
 
   public currConfig: GrnFrameInputConfig = {};
-  public innExterior: Exterior | null = null;
-  public exterior2: Exterior | null = null;
+  public innExterior: InputExterior | null = null;
+  public exterior2: InputExterior | null = null;
   public innFrameSizeValue = 0;
   public frameSize2: FrameSize | null = null;
   public isLabelShrink2: boolean | null = null; // Binding attribute "lbShrink".
@@ -176,28 +176,26 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterViewInit, Cont
       this.currConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
     }
     if (changes.exterior || (changes.config && !this.exterior)) {
-      this.exterior2 = ExteriorUtil.convert(this.exterior);
-      this.innExterior = this.updateExterior(this.exterior2 || this.currConfig.exterior || null);
+      this.exterior2 = InputExteriorUtil.convert(this.exterior);
+      this.innExterior = InputExteriorUtil.create(this.exterior2 || this.currConfig.exterior || null);
       isLabelPadding = true;
     }
     if (changes.frameSize || (changes.config && !this.frameSize)) {
       this.frameSize2 = FrameSizeUtil.convert(this.frameSize);
-      const configFrameSizeValue = this.currConfig.frameSizeValue;
-      this.innFrameSizeValue = this.updateFrameSizeValue(this.frameSize2 || this.currConfig.frameSize || null, configFrameSizeValue);
+      this.innFrameSizeValue = this.createFrameSize(this.frameSize2 || this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
       isLabelPadding = true;
     }
     if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      const labelPd = this.currConfig?.labelPd || 0;
-      this.labelPadding = labelPd > 0 ? labelPd : LabelPaddingUtil.hor(this.innFrameSizeValue, this.innExterior);
+      this.labelPadding = LabelPaddingUtil.hor(this.innExterior, this.innFrameSizeValue, this.currConfig?.labelPd);
       this.setPropertyLabelPaddingHor(this.labelPadding);
     }
     if (changes.ornamLfAlign || (changes.config && !this.ornamLfAlign)) {
       this.ornamLfAlign2 = OrnamAlignUtil.convert(this.ornamLfAlign) || this.currConfig.ornamLfAlign || OrnamAlign.default;
-      this.updateOrnamLfAlign(this.grnOrnamentLf, this.ornamLfAlign2);
+      this.setPropertyOrnamLeft(this.grnOrnamentLf, this.ornamLfAlign2);
     }
     if (changes.ornamRgAlign || (changes.config && !this.ornamRgAlign)) {
       this.ornamRgAlign2 = OrnamAlignUtil.convert(this.ornamRgAlign) || this.currConfig.ornamRgAlign || OrnamAlign.default;
-      this.updateOrnamRgAlign(this.grnOrnamentRg, this.ornamRgAlign2);
+      this.setPropertyOrnamRight(this.grnOrnamentRg, this.ornamRgAlign2);
     }
     if (changes.lbShrink) {
       this.isLabelShrink2 = this.lbShrink === '' || this.lbShrink === 'true' ? true : this.lbShrink === 'false' ? false : null;
@@ -230,27 +228,25 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterViewInit, Cont
   ngOnInit(): void {
     let isLabelPadding = false;
     if (this.innExterior == null) {
-      this.innExterior = this.updateExterior(this.currConfig.exterior || null);
+      this.innExterior = InputExteriorUtil.create(this.currConfig.exterior || null);
       isLabelPadding = true;
     }
     if (this.innFrameSizeValue === 0) {
-      const configFrameSizeValue = this.currConfig.frameSizeValue;
-      this.innFrameSizeValue = this.updateFrameSizeValue(this.currConfig.frameSize || null, configFrameSizeValue);
+      this.innFrameSizeValue = this.createFrameSize(this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
       isLabelPadding = true;
     }
     if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      const labelPd = this.currConfig?.labelPd || 0;
-      const labelPadding = labelPd > 0 ? labelPd : LabelPaddingUtil.hor(this.innFrameSizeValue, this.innExterior);
+      const labelPadding = LabelPaddingUtil.hor(this.innExterior, this.innFrameSizeValue, this.currConfig?.labelPd);
       this.setPropertyLabelPaddingHor(labelPadding);
     }
   }
 
   ngAfterViewInit(): void {
     if (this.ornamLfAlign2) {
-      this.updateOrnamLfAlign(this.grnOrnamentLf, this.ornamLfAlign2);
+      this.setPropertyOrnamLeft(this.grnOrnamentLf, this.ornamLfAlign2);
     }
     if (this.ornamRgAlign2) {
-      this.updateOrnamRgAlign(this.grnOrnamentRg, this.ornamRgAlign2);
+      this.setPropertyOrnamRight(this.grnOrnamentRg, this.ornamRgAlign2);
     }
   }
 
@@ -379,23 +375,20 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterViewInit, Cont
     return config;
   }
 
-  private updateExterior(exterior: Exterior | null): Exterior {
-    return ExteriorUtil.create(exterior);
-  }
-
-  private updateFrameSizeValue(frameSize: FrameSize | null, frameSizeValue?: number): number {
-    let result = FrameSizeUtil.getValue(FrameSizeUtil.create(frameSize)) || 0;
-    if (frameSize === null && frameSizeValue && frameSizeValue > 0) {
-      result = frameSizeValue;
+  private createFrameSize(frameSizeInp: FrameSize | null, frameSizeValueInp?: number): number {
+    const frameSize: FrameSize = FrameSizeUtil.convert((frameSizeInp || '').toString() || FrameSize.wide) as FrameSize;
+    let frameSizeValue = FrameSizeUtil.getValue(frameSize) || 0;
+    if (frameSizeInp === null && frameSizeValueInp && frameSizeValueInp > 0) {
+      frameSizeValue = frameSizeValueInp;
     }
-    return result;
+    return frameSizeValue;
   }
 
-  private updateOrnamLfAlign(ornamentLf: ElementRef<HTMLElement> | undefined, ornamLfAlign: OrnamAlign): void {
+  private setPropertyOrnamLeft(ornamentLf: ElementRef<HTMLElement> | undefined, ornamLfAlign: OrnamAlign): void {
     HtmlElemUtil.setAttr(this.renderer, ornamentLf, 'orn-lf', ornamLfAlign.toString());
   }
 
-  private updateOrnamRgAlign(ornamentRg: ElementRef<HTMLElement> | undefined, ornamRgAlign: OrnamAlign): void {
+  private setPropertyOrnamRight(ornamentRg: ElementRef<HTMLElement> | undefined, ornamRgAlign: OrnamAlign): void {
     HtmlElemUtil.setAttr(this.renderer, ornamentRg, 'orn-rg', ornamRgAlign.toString());
   }
 

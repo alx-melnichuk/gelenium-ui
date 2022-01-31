@@ -39,8 +39,6 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, 
   public frameSize: string | null = null; // FrameSizeType
   @Input()
   public isDisabled: string | null = null;
-  @Input()
-  public uppercase: string | null = null;
 
   @ViewChild('buttonElement')
   public buttonElementRef: ElementRef<HTMLElement> | undefined;
@@ -51,7 +49,6 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, 
   public innFrameSizeValue = 0;
   public frameSize2: FrameSize | null = null;
   public innIsDisabled: boolean | null = null;
-  public innUppercase: boolean | null = null;
   public innRippleColor: string | null = null;
   // public labelPadding = 0;
   public lineHeight = 0;
@@ -73,7 +70,7 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, 
     }
     if (changes.exterior || (changes.config && !this.exterior)) {
       this.exterior2 = ButtonExteriorUtil.convert(this.exterior);
-      this.innExterior = this.createExterior(this.exterior2 || this.currConfig.exterior || null);
+      this.innExterior = ButtonExteriorUtil.create(this.exterior2 || this.currConfig.exterior || null);
       this.settingExterior(this.buttonElementRef, this.innExterior);
       isLabelPadding = true;
     }
@@ -85,32 +82,30 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, 
       isLabelPadding = true;
     }
     if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      // this.labelPadding = this.updateLabelPadding(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
-      // this.setPropertyLabelPaddingHor(this.labelPadding);
-      if (!(isConfigFirstChange || changes.exterior?.firstChange || changes.frameSize?.firstChange)) {
-        this.setPropertyLabelPaddingVer(this.innExterior, this.innFrameSizeValue, this.lineHeight);
+      // const borderRadius = this.getBorderRadius(this.innExterior, this.innFrameSizeValue);
+      // this.settingBorderRadius(this.hostRef, borderRadius);
+      // this.labelPadding = LabelPaddingUtil.hor(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
+      // this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
+      if (this.lineHeight > 0) {
+        const labelPaddingVer = this.createLabelPaddingVer(this.innExterior, this.innFrameSizeValue, this.lineHeight);
+        this.settingLabelPaddingVer(this.hostRef, labelPaddingVer);
+        // this.settingLabel2Padding(this.hostRef, this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
       }
     }
     if (changes.isDisabled) {
       this.innIsDisabled = this.isDisabled === '' || this.isDisabled === 'true';
       this.settingIsDisabled(this.buttonElementRef, this.innIsDisabled);
     }
-    if (changes.uppercase) {
-      this.innUppercase = this.uppercase === '' || this.uppercase === 'true';
-      this.settingUppercase(this.buttonElementRef, this.innUppercase);
-    }
   }
 
   ngOnInit(): void {
     let isLabelPadding = false;
     if (this.innExterior === null) {
-      this.exterior2 = ButtonExteriorUtil.convert(this.exterior);
-      this.innExterior = this.createExterior(this.currConfig.exterior || null);
+      this.innExterior = ButtonExteriorUtil.create(this.currConfig.exterior || null);
       this.settingExterior(this.buttonElementRef, this.innExterior);
       isLabelPadding = true;
     }
     if (this.innFrameSizeValue === 0) {
-      this.frameSize2 = FrameSizeUtil.convert(this.frameSize);
       this.innFrameSizeValue = this.createFrameSize(this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
       this.settingFrameSize(this.buttonElementRef, this.innFrameSizeValue);
       isLabelPadding = true;
@@ -123,17 +118,9 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, 
       this.innIsDisabled = false;
       this.settingIsDisabled(this.buttonElementRef, this.innIsDisabled);
     }
-    if (this.innUppercase === null) {
-      this.innUppercase = false;
-      this.settingUppercase(this.buttonElementRef, this.innUppercase);
-    }
   }
 
   ngAfterContentInit(): void {
-    if (this.buttonElementRef) {
-      const lineHeightPx = getComputedStyle(this.buttonElementRef.nativeElement).getPropertyValue('line-height');
-      console.log('tn lineHeightPx=', lineHeightPx);
-    }
     const lineHeightPx = getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height');
     console.log('lineHeightPx=', lineHeightPx);
     this.lineHeight = Number(lineHeightPx.replace('px', ''));
@@ -150,9 +137,6 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, 
     if (this.innIsDisabled !== null) {
       this.settingIsDisabled(this.buttonElementRef, this.innIsDisabled);
     }
-    if (this.innUppercase !== null) {
-      this.settingUppercase(this.buttonElementRef, this.innUppercase);
-    }
   }
 
   // ** Public API **
@@ -163,9 +147,6 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, 
 
   // ** Private API **
 
-  private createExterior(exterior: ButtonExterior | null): ButtonExterior {
-    return ButtonExteriorUtil.create(exterior);
-  }
   private settingExterior(elem: ElementRef<HTMLElement> | undefined, exterior: ButtonExterior | null): void {
     HtmlElemUtil.setClass(this.renderer, elem, 'gb-text', ButtonExteriorUtil.isText(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-t', ButtonExteriorUtil.isText(exterior) ? '' : null);
@@ -196,24 +177,26 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, 
     HtmlElemUtil.setAttr(this.renderer, elem, 'disabled', isDisabled ? '' : null);
   }
 
-  private settingUppercase(elem: ElementRef<HTMLElement> | undefined, uppercase: boolean): void {
-    HtmlElemUtil.setAttr(this.renderer, elem, 'uppercase', uppercase ? '' : null);
-  }
-
   private setPropertyLabelPaddingVer(exterior: ButtonExterior | null, frameSizeValue: number, lineHeight: number): void {
     if (exterior != null && frameSizeValue > 0 && lineHeight > 0) {
-      HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-ver', this.labelPaddingVer(true, exterior, frameSizeValue, lineHeight));
+      const borderRadius = (frameSizeValue / 10).toFixed(2) + 'px';
+      HtmlElemUtil.setProperty(this.hostRef, '--br-rd', borderRadius);
+      HtmlElemUtil.setProperty(this.hostRef, '--lbl-pd-ver', this.createLabelPaddingVer(exterior, frameSizeValue, lineHeight));
     }
   }
 
-  private labelPaddingVer(isTop: boolean, exterior: ButtonExterior | null, frameSize: number, lineHeight: number): string | null {
+  private createLabelPaddingVer(exterior: ButtonExterior | null, frameSize: number, lineHeight: number): string | null {
     let result: number | null = null;
     if (exterior != null && frameSize > 0 && lineHeight > 0) {
       result = (frameSize - lineHeight) / 2;
-      // if (exterior === ButtonExterior.outlined) {
-      //   result--;
-      // }
+      if (exterior === ButtonExterior.outlined) {
+        result--;
+      }
     }
     return result != null ? String(result) + 'px' : null;
+  }
+
+  private settingLabelPaddingVer(elem: ElementRef<HTMLElement> | undefined, labelPadding: string | null): void {
+    HtmlElemUtil.setProperty(elem, '--lbl-pd-ver', labelPadding);
   }
 }

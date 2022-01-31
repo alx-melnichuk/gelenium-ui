@@ -1,9 +1,9 @@
-import { Exterior } from './exterior.interface';
+import { InputExterior } from './input-exterior.interface';
 import { FrameSize } from './frame-size.interface';
 import { OrnamAlign } from './ornam-align.interface';
 
 export interface GrnFrameInputConfig {
-  exterior?: Exterior;
+  exterior?: InputExterior;
   frameSize?: FrameSize;
   frameSizeValue?: number;
   isLabelShrink?: boolean;
