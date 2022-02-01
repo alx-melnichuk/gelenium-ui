@@ -49,13 +49,15 @@ pre[source] {
   box-sizing: border-box;
 }
 pre[source=html] {
-  background-color: rgb(250 235 215 / 30%);
+  // background-color: rgb(250 235 215 / 30%);
+  background-color: rgb(226 255 231 / 30%);
 }
 pre[source=ts] {
   background-color: rgb(240 255 255 / 30%);
 }
 pre[source=css] {
-  background-color: rgb(245 245 220 / 30%);
+  // background-color: rgb(245 245 220 / 30%);
+  background-color: rgb(255 243 252 / 30%);
 }
 
 [fw500] {

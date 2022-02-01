@@ -14,11 +14,6 @@
 
 <div class="b-items">
 
-  <grn-button exterior="text"
-    uppercase>
-    Text
-  </grn-button>
-
   <grn-button exterior="contained"
     uppercase>
     Contained
@@ -29,10 +24,294 @@
     Outlined
   </grn-button>
 
+  <grn-button exterior="text"
+    uppercase>
+    Text
+  </grn-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="b-items"&gt;
+
+  &lt;grn-button exterior="contained"
+    uppercase&gt;
+    Contained
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="outlined"
+    uppercase&gt;
+    Outlined
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="text"
+    uppercase&gt;
+    Text
+  &lt;/grn-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.b-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+  &amp;&gt;* &#123;
+    margin-left: 10%;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<section mr-vr
+  id="contained-button">
+  <h4>Button with "contained" exterior.</h4>
+  <p>
+    Buttons with the "contained" exterior are for important primary actions.
+  </p>
+</section>
+
+<div class="b-items">
+
+  <grn-button exterior="contained"
+    uppercase>
+    <span>Primary</span>
+  </grn-button>
+
+  <grn-button exterior="contained"
+    isDisabled
+    uppercase>
+    <span>Disabled</span>
+  </grn-button>
+
+  <div class="grn-button"
+    ext-c
+    uppercase>
+    <a [routerLink]="[routerLink]"
+      [fragment]="'contained-button'"
+      class="grn-btn"
+      grnBtn
+      sz-small>
+      Link
+      <grn-touch-ripple></grn-touch-ripple>
+    </a>
+  </div>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="b-items"&gt;
+
+  &lt;grn-button exterior="contained"
+    uppercase&gt;
+    &lt;span&gt;Primary&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="contained"
+    isDisabled
+    uppercase&gt;
+    &lt;span&gt;Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;div class="grn-button"
+    ext-c
+    uppercase&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="'contained-button'"
+      class="grn-btn"
+      grnBtn
+      sz-small&gt;
+      Link
+      &lt;grn-touch-ripple&gt;&lt;/grn-touch-ripple&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.b-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+  &amp;&gt;* &#123;
+    margin-left: 10%;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<section mr-vr
+  id="outlined-button">
+  <h4>Button with "outlined" exterior.</h4>
+  <p>
+    Buttons with the "outlined" exterior are for important secondary actions.
+  </p>
+</section>
+
+<div class="b-items">
+
+  <grn-button exterior="outlined"
+    uppercase>
+    <span>Secondary</span>
+  </grn-button>
+
+  <grn-button exterior="outlined"
+    isDisabled
+    uppercase>
+    <span>Disabled</span>
+  </grn-button>
+
+  <div class="grn-button"
+    ext-o
+    uppercase>
+    <a [routerLink]="[routerLink]"
+      [fragment]="'outlined-button'"
+      class="grn-btn"
+      grnBtn
+      sz-small>
+      Link
+      <grn-touch-ripple></grn-touch-ripple>
+    </a>
+  </div>
+
 </div>
 
 
 <section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="b-items"&gt;
+
+  &lt;grn-button exterior="outlined"
+    uppercase&gt;
+    &lt;span&gt;Secondary&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="outlined"
+    isDisabled
+    uppercase&gt;
+    &lt;span&gt;Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;div class="grn-button"
+    ext-o
+    uppercase&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="'outlined-button'"
+      class="grn-btn"
+      grnBtn
+      sz-small&gt;
+      Link
+      &lt;grn-touch-ripple&gt;&lt;/grn-touch-ripple&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.b-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+  &amp;&gt;* &#123;
+    margin-left: 10%;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<section mr-vr
+  id="text-button">
   <div>
     <h4>Button with "text" exterior.</h4>
     <p>
@@ -54,33 +333,90 @@
     <span>Disabled</span>
   </grn-button>
 
+
+  <div class="grn-button"
+    ext-t
+    uppercase>
+    <a [routerLink]="[routerLink]"
+      [fragment]="'text-button'"
+      class="grn-btn"
+      grnBtn
+      sz-small>
+      Link
+      <grn-touch-ripple></grn-touch-ripple>
+    </a>
+  </div>
+
 </div>
 
 <section mr-vr>
-  <h4>Button with "contained" exterior.</h4>
-  <p>
-    Buttons with the "contained" exterior are for important actions.
-  </p>
-</section>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="b-items"&gt;
 
-<div class="b-items">
+  &lt;grn-button exterior="text"
+    uppercase&gt;
+    &lt;span&gt;Additionally&lt;/span&gt;
+  &lt;/grn-button&gt;
 
-  <grn-button exterior="contained"
-    uppercase>
-    <span>Important</span>
-  </grn-button>
-
-  <grn-button exterior="contained"
+  &lt;grn-button exterior="text"
     isDisabled
-    uppercase>
-    <span>Disabled</span>
-  </grn-button>
+    uppercase&gt;
+    &lt;span&gt;Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
 
-</div>
 
-<!-- <section mr-vr>
-  <h4>Button with "outlined" exterior.</h4>
-  <p>
-    Buttons with the "outlined" exterior are for more important actions.
-  </p>
-</section> -->
+  &lt;div class="grn-button"
+    ext-t
+    uppercase&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="'text-button'"
+      class="grn-btn"
+      grnBtn
+      sz-small&gt;
+      Link
+      &lt;grn-touch-ripple&gt;&lt;/grn-touch-ripple&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.b-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+  &amp;&gt;* &#123;
+    margin-left: 10%;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

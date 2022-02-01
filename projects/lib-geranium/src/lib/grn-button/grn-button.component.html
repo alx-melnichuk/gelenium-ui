@@ -1,14 +1,17 @@
 <button #buttonElement
   grnClear
   grnBtn
-  grnIndent
   type="button"
   tabindex="0"
-  class="grn-button"
+  class="grn-btn grn-settings"
+  [attr.disabled]="innIsDisabled ? '' : null"
   (click)="doClick($event)">
   <span btn-pd-ver>
     <ng-content></ng-content>
   </span>
   <grn-touch-ripple *ngIf="!innIsDisabled"
-    [rippleColor]="innRippleColor"></grn-touch-ripple>
+    [attr.ext-t]="isText ? '' : null"
+    [attr.ext-c]="isContained ? '' : null"
+    [attr.ext-o]="isOutlined ? '' : null"
+    rippleColor9="innRippleColor"></grn-touch-ripple>
 </button>

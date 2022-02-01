@@ -35,12 +35,14 @@ import {
 
 import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
 import { GRN_FRAME_INPUT_CONFIG } from '../grn-frame-input/grn-frame-input.component';
-import { InputExterior, InputExteriorUtil } from '../interfaces/input-exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 import { GrnFrameInputConfig } from '../interfaces/grn-frame-input-config.interface';
+import { InputExterior, InputExteriorUtil } from '../interfaces/input-exterior.interface';
 import { OrnamAlign, OrnamAlignUtil } from '../interfaces/ornam-align.interface';
+import { BooleanUtil } from '../utils/boolean.util';
 import { HtmlElemUtil } from '../utils/html-elem.util';
-import { LabelPaddingUtil } from '../utils/label-padding.util';
+import { InputLabelUtil } from '../utils/input-label.util';
+import { NumberUtil } from '../utils/number.util';
 
 let identifier = 0;
 
@@ -138,12 +140,12 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
   public frameSize2: FrameSize | null = null;
   public isLabelShrink2: boolean | null = null; // Binding attribute "lbShrink".
   public isHiddenLabel2: boolean | null = null; // Binding attribute "hiddenLabel".
-  public labelPadding = 0;
+  public labelPadding: number | null = null;
 
-  public isReadOnly2 = false; // Binding attribute "isReadOnly".
-  public isRequired2 = false; // Binding attribute "isRequired".
-  public isDisabled2 = false; // Binding attribute "isDisabled".
-  public isError2 = false; // Binding attribute "isError".
+  public isReadOnly2: boolean | null = null; // Binding attribute "isReadOnly".
+  public isRequired2: boolean | null = null; // Binding attribute "isRequired".
+  public isDisabled2: boolean | null = null; // Binding attribute "isDisabled".
+  public isError2: boolean | null = null; // Binding attribute "isError".
 
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
@@ -167,32 +169,32 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    let isLabelPadding = false;
+    let isModifyLabelPadding = false;
     if (changes.config) {
       this.currConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
     }
     if (changes.exterior || (changes.config && !this.exterior)) {
       this.exterior2 = InputExteriorUtil.convert(this.exterior);
-      this.innExterior = this.updateExterior(this.exterior2 || this.currConfig.exterior || null);
-      isLabelPadding = true;
+      this.innExterior = InputExteriorUtil.create(this.exterior2 || this.currConfig.exterior || null);
+      isModifyLabelPadding = true;
     }
     if (changes.frameSize || (changes.config && !this.frameSize)) {
       this.frameSize2 = FrameSizeUtil.convert(this.frameSize);
-      const configFrameSizeValue = this.currConfig.frameSizeValue;
-      this.innFrameSizeValue = this.updateFrameSizeValue(this.frameSize2 || this.currConfig.frameSize || null, configFrameSizeValue);
-      isLabelPadding = true;
+      this.innFrameSizeValue = this.createFrameSize(this.frameSize2 || this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
+      isModifyLabelPadding = true;
     }
-    if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      this.labelPadding = LabelPaddingUtil.hor(this.innExterior, this.innFrameSizeValue, this.currConfig?.labelPd);
-      this.setPropertyLabelPaddingHor(this.labelPadding);
+    if (isModifyLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
+      // Determine new parameter values that depend on: innExterior, innFrameSizeValue.
+      this.labelPadding = InputLabelUtil.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
+      this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
     }
     if (changes.ornamLfAlign || (changes.config && !this.ornamLfAlign)) {
       this.ornamLfAlign2 = OrnamAlignUtil.convert(this.ornamLfAlign) || this.currConfig.ornamLfAlign || OrnamAlign.default;
-      this.updateOrnamLfAlign(this.grnOrnamentLf, this.ornamLfAlign2);
+      this.settingOrnamentLeft(this.grnOrnamentLf, this.ornamLfAlign2);
     }
     if (changes.ornamRgAlign || (changes.config && !this.ornamRgAlign)) {
       this.ornamRgAlign2 = OrnamAlignUtil.convert(this.ornamRgAlign) || this.currConfig.ornamRgAlign || OrnamAlign.default;
-      this.updateOrnamRgAlign(this.grnOrnamentRg, this.ornamRgAlign2);
+      this.settingOrnamentRight(this.grnOrnamentRg, this.ornamRgAlign2);
     }
     if (changes.lbShrink) {
       this.isLabelShrink2 = this.lbShrink === '' || this.lbShrink === 'true' ? true : this.lbShrink === 'false' ? false : null;
@@ -201,17 +203,17 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
       this.isHiddenLabel2 = this.hiddenLabel !== null;
     }
     if (changes.isDisabled) {
-      this.isDisabled2 = this.isDisabled !== null;
+      this.isDisabled2 = BooleanUtil.init(this.isDisabled);
       this.setDisabledState(this.isDisabled2);
     }
     if (changes.isError) {
-      this.isError2 = this.isError !== null;
+      this.isError2 = BooleanUtil.init(this.isError);
     }
     if (changes.isRequired) {
-      this.isRequired2 = this.isRequired !== null;
+      this.isRequired2 = BooleanUtil.init(this.isRequired);
     }
     if (changes.isReadOnly) {
-      this.isReadOnly2 = this.isReadOnly !== null;
+      this.isReadOnly2 = BooleanUtil.init(this.isReadOnly);
     }
 
     if (changes.isRequired || changes.minLength || changes.maxLength) {
@@ -226,28 +228,30 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
   }
 
   ngOnInit(): void {
-    let isLabelPadding = false;
+    let isModifyLabelPadding = false;
     if (this.innExterior == null) {
-      this.innExterior = this.updateExterior(this.currConfig.exterior || null);
-      isLabelPadding = true;
+      this.innExterior = InputExteriorUtil.create(this.currConfig.exterior || null);
+      isModifyLabelPadding = true;
     }
     if (this.innFrameSizeValue === 0) {
-      const configFrameSizeValue = this.currConfig.frameSizeValue;
-      this.innFrameSizeValue = this.updateFrameSizeValue(this.currConfig.frameSize || null, configFrameSizeValue);
-      isLabelPadding = true;
+      this.innFrameSizeValue = this.createFrameSize(this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
+      isModifyLabelPadding = true;
     }
-    if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      const labelPadding = LabelPaddingUtil.hor(this.innExterior, this.innFrameSizeValue, this.currConfig?.labelPd);
-      this.setPropertyLabelPaddingHor(labelPadding);
+    if (isModifyLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
+      // Determine new parameter values that depend on: innExterior, innFrameSizeValue.
+      this.labelPadding = InputLabelUtil.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
+      this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
     }
   }
 
   ngAfterViewInit(): void {
     if (this.ornamLfAlign2) {
-      this.updateOrnamLfAlign(this.grnOrnamentLf, this.ornamLfAlign2);
+      // Determine new parameter values that depend on: grnOrnamentLf, ornamLfAlign2.
+      this.settingOrnamentLeft(this.grnOrnamentLf, this.ornamLfAlign2);
     }
     if (this.ornamRgAlign2) {
-      this.updateOrnamRgAlign(this.grnOrnamentRg, this.ornamRgAlign2);
+      // Determine new parameter values that depend on: grnOrnamentRg, ornamRgAlign2.
+      this.settingOrnamentRight(this.grnOrnamentRg, this.ornamRgAlign2);
     }
   }
 
@@ -280,7 +284,7 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
     this.onTouched = fn;
   }
 
-  public setDisabledState(isDisabled: boolean): void {
+  public setDisabledState(isDisabled: boolean | null): void {
     if (isDisabled) {
       this.formGroup.disable();
     } else {
@@ -365,7 +369,7 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
 
   // ** Private API **
 
-  private prepareFormGroup(isRequired: boolean, minLength: number | null, maxLength: number | null): void {
+  private prepareFormGroup(isRequired: boolean | null, minLength: number | null, maxLength: number | null): void {
     this.formControl.clearValidators();
     const newValidator: ValidatorFn[] = [];
     if (isRequired) {
@@ -380,41 +384,6 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
     this.formControl.setValidators(newValidator);
   }
 
-  private initConfig(config: GrnFrameInputConfig): GrnFrameInputConfig {
-    this.ornamLfAlign2 = OrnamAlignUtil.create(config?.ornamLfAlign || this.ornamLfAlign2, null);
-    this.ornamRgAlign2 = OrnamAlignUtil.create(config?.ornamRgAlign || this.ornamRgAlign2, null);
-    return config;
-  }
-
-  private updateExterior(exterior: InputExterior | null): InputExterior {
-    return InputExteriorUtil.create(exterior);
-  }
-
-  private updateFrameSizeValue(frameSize: FrameSize | null, frameSizeValue?: number): number {
-    let result = FrameSizeUtil.getValue(FrameSizeUtil.create(frameSize)) || 0;
-    if (frameSize === null && frameSizeValue && frameSizeValue > 0) {
-      result = frameSizeValue;
-    }
-    return result;
-  }
-
-  private updateOrnamLfAlign(ornamentLf: ElementRef<HTMLElement> | undefined, ornamLfAlign: OrnamAlign): void {
-    HtmlElemUtil.setAttr(this.renderer, ornamentLf, 'orn-lf', ornamLfAlign.toString());
-  }
-
-  private updateOrnamRgAlign(ornamentRg: ElementRef<HTMLElement> | undefined, ornamRgAlign: OrnamAlign): void {
-    HtmlElemUtil.setAttr(this.renderer, ornamentRg, 'orn-rg', ornamRgAlign.toString());
-  }
-
-  private setPropertyLabelPaddingHor(labelPadding: number): void {
-    const labelPaddingPx = labelPadding != null ? labelPadding + 'px' : labelPadding;
-    HtmlElemUtil.setProperty(this.hostRef, '--pd-lf', labelPaddingPx);
-  }
-
-  private getNumberLines(value: string): number {
-    return (value || '').split('\n').length;
-  }
-
   private updateCurrentRows(value: string, cntRows: number | null, minRows: number | null, maxRows: number | null): void {
     if (!cntRows) {
       let result = this.getNumberLines(value);
@@ -426,5 +395,36 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
       }
       this.currentRows = result > 0 ? result : 1;
     }
+  }
+
+  private getNumberLines(value: string): number {
+    return (value || '').split('\n').length;
+  }
+
+  private initConfig(config: GrnFrameInputConfig): GrnFrameInputConfig {
+    this.ornamLfAlign2 = OrnamAlignUtil.create(config?.ornamLfAlign || this.ornamLfAlign2, null);
+    this.ornamRgAlign2 = OrnamAlignUtil.create(config?.ornamRgAlign || this.ornamRgAlign2, null);
+    return config;
+  }
+
+  private createFrameSize(frameSizeInp: FrameSize | null, frameSizeValueInp?: number): number {
+    const frameSize: FrameSize = FrameSizeUtil.create(frameSizeInp);
+    let frameSizeValue = FrameSizeUtil.getValue(frameSize) || 0;
+    if (frameSizeInp === null && frameSizeValueInp && frameSizeValueInp > 0) {
+      frameSizeValue = frameSizeValueInp;
+    }
+    return frameSizeValue;
+  }
+
+  private settingLabelPaddingHor(elem: ElementRef<HTMLElement> | undefined, labelPadding: number | null): void {
+    HtmlElemUtil.setProperty(elem, '--pd-lf', NumberUtil.str(labelPadding)?.concat('px'));
+  }
+
+  private settingOrnamentLeft(ornamentLf: ElementRef<HTMLElement> | undefined, ornamLfAlign: OrnamAlign): void {
+    HtmlElemUtil.setAttr(this.renderer, ornamentLf, 'orn-lf', ornamLfAlign.toString());
+  }
+
+  private settingOrnamentRight(ornamentRg: ElementRef<HTMLElement> | undefined, ornamRgAlign: OrnamAlign): void {
+    HtmlElemUtil.setAttr(this.renderer, ornamentRg, 'orn-rg', ornamRgAlign.toString());
   }
 }

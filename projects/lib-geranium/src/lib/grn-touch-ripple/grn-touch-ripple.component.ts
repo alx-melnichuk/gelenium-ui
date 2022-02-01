@@ -24,7 +24,7 @@ export class GrnTouchRippleComponent implements OnChanges, OnInit {
   @Input()
   public isCenter: string | null = null;
   @Input()
-  public rippleColor: string | null = null;
+  public rippleColor: string | null = null; // 'rgba(255, 255, 255, 0.3)'
 
   private innIsCenter = false;
   private checkParentSuccessful = false;

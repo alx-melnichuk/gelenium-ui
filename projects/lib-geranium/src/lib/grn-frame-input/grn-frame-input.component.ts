@@ -17,13 +17,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { InputExterior, InputExteriorUtil } from '../interfaces/input-exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 import { GrnFrameInputConfig } from '../interfaces/grn-frame-input-config.interface';
+import { InputExterior, InputExteriorUtil } from '../interfaces/input-exterior.interface';
 import { OrnamAlign } from '../interfaces/ornam-align.interface';
 import { HtmlElemUtil } from '../utils/html-elem.util';
-import { InputLabelUtil, PaddingVertical, TranslateVertical } from '../utils/input-label.util';
-import { LabelPaddingUtil } from '../utils/label-padding.util';
+import { InputLabelUtil, PaddingVerRes, TranslateVerRes } from '../utils/input-label.util';
 import { NumberUtil } from '../utils/number.util';
 
 export const GRN_FRAME_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('GRN_FRAME_INPUT_CONFIG');
@@ -50,15 +49,15 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
   @Input()
   public hiddenLabel: boolean | null = null;
   @Input()
-  public isDisabled = false;
+  public isDisabled: boolean | null = null;
   @Input()
   public isFocused = false;
   @Input()
   public isFilled = false;
   @Input()
-  public isError = false;
+  public isError: boolean | null = null;
   @Input()
-  public isRequired = false;
+  public isRequired: boolean | null = null;
 
   @Output()
   readonly clickFrame: EventEmitter<Event> = new EventEmitter();
@@ -77,10 +76,10 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
   public innFrameSizeValue = 0;
   public innIsLabelShrink: boolean | null = null;
   public innHiddenLabel: boolean | null = null;
-  public labelPadding = 0;
-  public lineHeight = 0;
-  public ornamentLfWidth = 0;
-  public ornamentRgWidth = 0;
+  public labelPadding: number | null = null;
+  public lineHeight: number | null = null;
+  public ornamentLfWidth: number | null = null;
+  public ornamentRgWidth: number | null = null;
 
   constructor(
     @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null,
@@ -107,21 +106,17 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
       isModifyLabelPadding = true;
     }
     if (isModifyLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
+      // Determine new parameter values that depend on: innExterior, innFrameSizeValue.
       this.settingBorderRadius(this.hostRef, this.getBorderRadius(this.innExterior, this.innFrameSizeValue));
-
-      this.labelPadding = LabelPaddingUtil.hor(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
-      this.setLabelPaddingHor(this.hostRef, this.labelPadding);
+      this.labelPadding = InputLabelUtil.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
+      this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
       this.settingLabelMaxWidth(this.hostRef, this.getLabelMaxWidth(this.labelPadding));
 
-      if (this.lineHeight > 0) {
-        const paddingVertical = InputLabelUtil.paddingVertical(this.innExterior, this.innFrameSizeValue, this.lineHeight);
-        this.settingLabelPaddingVer(this.hostRef, paddingVertical);
-
-        const translateVertical = InputLabelUtil.translateVertical(this.innExterior, this.innFrameSizeValue, this.lineHeight);
-        this.settingLabelTranslateVer(this.hostRef, translateVertical);
-
-        const maxWidth = this.getLabel2MaxWidth(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
-        this.settingLabel2MaxWidth(this.hostRef, maxWidth);
+      if (this.lineHeight != null) {
+        // Determine new parameter values that depend on: innExterior, innFrameSizeValue, lineHeight.
+        this.settingLabelPaddingVer(this.hostRef, InputLabelUtil.paddingVer(this.innExterior, this.innFrameSizeValue, this.lineHeight));
+        this.settingLabelTranslateVer(this.hostRef, InputLabelUtil.translateVer(this.innExterior, this.innFrameSizeValue, this.lineHeight));
+        this.settingLabel2MaxWidth(this.hostRef, this.getLabel2MaxWidth(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth));
       }
     }
     if (changes.isLabelShrink || (changes.config && this.isLabelShrink == null)) {
@@ -133,46 +128,39 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
       this.settingHiddenLabel(this.hostRef, this.innHiddenLabel);
     }
     if (changes.isDisabled) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-disabled', this.isDisabled);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
+      this.settingDisabled(this.hostRef, this.isDisabled);
     }
     if (changes.isFocused) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-focused', this.isFocused);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'foc', this.isFocused ? '' : null);
+      this.settingFocused(this.hostRef, this.isFocused);
     }
     if (changes.isFilled) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-filled', this.isFilled);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);
+      this.settingFilled(this.hostRef, this.isFilled);
     }
     if (changes.isError) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-error', this.isError);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isError ? '' : null);
+      this.settingError(this.hostRef, this.isError);
     }
     if (changes.label || changes.isRequired) {
-      const isIndent = !!this.label || this.isRequired;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-lgn-indent', isIndent);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ind', isIndent ? '' : null);
+      this.settingIndent(this.hostRef, !!this.label || this.isRequired);
     }
   }
 
   ngOnInit(): void {
-    let isLabelPadding = false;
+    let isModifyLabelPadding = false;
     if (this.innExterior == null) {
       this.innExterior = InputExteriorUtil.create(this.currConfig.exterior || null);
       this.settingExterior(this.hostRef, this.innExterior);
-      isLabelPadding = true;
+      isModifyLabelPadding = true;
     }
     if (this.innFrameSizeValue === 0) {
       this.innFrameSizeValue = this.createFrameSize(this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
       this.settingFrameSize(this.hostRef, this.innFrameSizeValue);
-      isLabelPadding = true;
+      isModifyLabelPadding = true;
     }
-    if (isLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      const borderRadius = this.getBorderRadius(this.innExterior, this.innFrameSizeValue);
-      this.settingBorderRadius(this.hostRef, borderRadius);
-
-      this.labelPadding = LabelPaddingUtil.hor(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
-      this.setLabelPaddingHor(this.hostRef, this.labelPadding);
+    if (isModifyLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
+      // Determine new parameter values that depend on: innExterior, innFrameSizeValue.
+      this.settingBorderRadius(this.hostRef, this.getBorderRadius(this.innExterior, this.innFrameSizeValue));
+      this.labelPadding = InputLabelUtil.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
+      this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
       this.settingLabelMaxWidth(this.hostRef, this.getLabelMaxWidth(this.labelPadding));
     }
     if (this.innIsLabelShrink == null) {
@@ -186,22 +174,17 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
   }
 
   ngAfterContentInit(): void {
+    // Get the line height from the style set.
     const lineHeightPx = getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height');
     this.lineHeight = Number(lineHeightPx.replace('px', ''));
-
-    const paddingVertical = InputLabelUtil.paddingVertical(this.innExterior, this.innFrameSizeValue, this.lineHeight);
-    this.settingLabelPaddingVer(this.hostRef, paddingVertical);
-
-    const translateVertical = InputLabelUtil.translateVertical(this.innExterior, this.innFrameSizeValue, this.lineHeight);
-    this.settingLabelTranslateVer(this.hostRef, translateVertical);
-
-    this.ornamentLfWidth = this.grnOrnamentLf?.nativeElement.offsetWidth || 0;
-    HtmlElemUtil.setProperty(this.hostRef, '--orn-lf', this.ornamentLfWidth > 0 ? this.ornamentLfWidth + 'px' : null);
-
-    this.ornamentRgWidth = this.grnOrnamentRg?.nativeElement.offsetWidth || 0;
-
-    const maxWidth = this.getLabel2MaxWidth(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth);
-    this.settingLabel2MaxWidth(this.hostRef, maxWidth);
+    // Get the width of the ornament block.
+    this.ornamentLfWidth = this.grnOrnamentLf?.nativeElement.offsetWidth || null;
+    this.ornamentRgWidth = this.grnOrnamentRg?.nativeElement.offsetWidth || null;
+    this.settingOrnamentLf(this.hostRef, this.ornamentLfWidth);
+    // Determine new parameter values that depend on: innExterior, innFrameSizeValue, lineHeight.
+    this.settingLabelPaddingVer(this.hostRef, InputLabelUtil.paddingVer(this.innExterior, this.innFrameSizeValue, this.lineHeight));
+    this.settingLabelTranslateVer(this.hostRef, InputLabelUtil.translateVer(this.innExterior, this.innFrameSizeValue, this.lineHeight));
+    this.settingLabel2MaxWidth(this.hostRef, this.getLabel2MaxWidth(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth));
   }
 
   // ** Public API **
@@ -240,7 +223,7 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
   }
 
   private createFrameSize(frameSizeInp: FrameSize | null, frameSizeValueInp?: number): number {
-    const frameSize: FrameSize = FrameSizeUtil.convert((frameSizeInp || '').toString() || FrameSize.wide) as FrameSize;
+    const frameSize: FrameSize = FrameSizeUtil.create(frameSizeInp);
     let frameSizeValue = FrameSizeUtil.getValue(frameSize) || 0;
     if (frameSizeInp === null && frameSizeValueInp && frameSizeValueInp > 0) {
       frameSizeValue = frameSizeValueInp;
@@ -266,17 +249,17 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
     HtmlElemUtil.setAttr(this.renderer, elem, 'hlbl', hiddenLabel ? '' : null);
   }
 
-  private settingLabelPaddingVer(el: ElementRef<HTMLElement> | undefined, paddingVertical: PaddingVertical): void {
+  private settingLabelPaddingVer(el: ElementRef<HTMLElement> | undefined, paddingVertical: PaddingVerRes): void {
     HtmlElemUtil.setProperty(el, '--lbl-pd-tp', NumberUtil.str(paddingVertical.labelPaddingTop)?.concat('px'));
     HtmlElemUtil.setProperty(el, '--lbl-pd-bt', NumberUtil.str(paddingVertical.labelPaddingBottom)?.concat('px'));
   }
 
-  private settingLabelTranslateVer(el: ElementRef<HTMLElement> | undefined, translateVertical: TranslateVertical): void {
+  private settingLabelTranslateVer(el: ElementRef<HTMLElement> | undefined, translateVertical: TranslateVerRes): void {
     HtmlElemUtil.setProperty(el, '--lbl-trn-y', NumberUtil.str(translateVertical.labelTranslateY)?.concat('px'));
     HtmlElemUtil.setProperty(el, '--lbl2-trn-y', NumberUtil.str(translateVertical.label2TranslateY)?.concat('px'));
   }
 
-  private setLabelPaddingHor(elem: ElementRef<HTMLElement> | undefined, labelPadding: number): void {
+  private settingLabelPaddingHor(elem: ElementRef<HTMLElement> | undefined, labelPadding: number | null): void {
     HtmlElemUtil.setProperty(elem, '--lbl-pd-lf', NumberUtil.str(labelPadding)?.concat('px'));
   }
 
@@ -284,8 +267,37 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
     HtmlElemUtil.setProperty(elem, '--lbl-wd', maxWidth);
   }
 
-  private settingLabel2MaxWidth(elem: ElementRef<HTMLElement> | undefined, maxWidth: string | null): void {
-    HtmlElemUtil.setProperty(elem, '--lbl2-wd', maxWidth);
+  private settingLabel2MaxWidth(elem: ElementRef<HTMLElement> | undefined, maxWidth2: string | null): void {
+    HtmlElemUtil.setProperty(elem, '--lbl2-wd', maxWidth2);
+  }
+
+  private settingOrnamentLf(elem: ElementRef<HTMLElement> | undefined, ornamentLfWidth: number | null): void {
+    HtmlElemUtil.setProperty(elem, '--orn-lf', NumberUtil.str(ornamentLfWidth)?.concat('px'));
+  }
+
+  private settingDisabled(elem: ElementRef<HTMLElement> | undefined, isDisabled: boolean | null): void {
+    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-disabled', isDisabled || false);
+    HtmlElemUtil.setAttr(this.renderer, elem, 'dis', isDisabled ? '' : null);
+  }
+
+  private settingFocused(elem: ElementRef<HTMLElement> | undefined, isFocused: boolean): void {
+    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-focused', isFocused);
+    HtmlElemUtil.setAttr(this.renderer, elem, 'foc', isFocused ? '' : null);
+  }
+
+  private settingFilled(elem: ElementRef<HTMLElement> | undefined, isFilled: boolean): void {
+    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-filled', isFilled);
+    HtmlElemUtil.setAttr(this.renderer, elem, 'fil', isFilled ? '' : null);
+  }
+
+  private settingError(elem: ElementRef<HTMLElement> | undefined, isError: boolean | null): void {
+    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-error', isError || false);
+    HtmlElemUtil.setAttr(this.renderer, elem, 'err', isError ? '' : null);
+  }
+
+  private settingIndent(elem: ElementRef<HTMLElement> | undefined, isIndent: boolean | null): void {
+    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-lgn-indent', isIndent || false);
+    HtmlElemUtil.setAttr(this.renderer, elem, 'ind', isIndent ? '' : null);
   }
   // Max width of the label in a shrink position (in the top).
   private getLabelMaxWidth(labelPadding: number | null): string | null {
@@ -296,10 +308,12 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
     return result;
   }
   // Max width of the label in the unshrink position (in the middle).
-  private getLabel2MaxWidth(labelPadding: number | null, ornamentLfWidth: number, ornamentRgWidth: number): string | null {
+  private getLabel2MaxWidth(labelPadding: number | null, ornamentLfWidth: number | null, ornamentRgWidth: number | null): string | null {
     let result: string | null = null;
     if (labelPadding != null && labelPadding > -1) {
-      const value = (ornamentLfWidth > 0 ? ornamentLfWidth : labelPadding) + (ornamentRgWidth > 0 ? ornamentRgWidth : labelPadding);
+      const valueLfWidth = ornamentLfWidth != null ? ornamentLfWidth : labelPadding;
+      const valueRgWidth = ornamentRgWidth != null ? ornamentRgWidth : labelPadding;
+      const value = valueLfWidth + valueRgWidth;
       result = value === 0 ? '100%' : 'calc(100% - ' + value.toFixed(2) + 'px)';
     }
     return result;

@@ -20,7 +20,7 @@ export enum FrameSizeValue {
 
 export class FrameSizeUtil {
   public static create(value: FrameSize | null): FrameSize {
-    return FrameSizeUtil.convert((value || '').toString() || FrameSize.wide) as FrameSize;
+    return FrameSizeUtil.convert((value || '').toString()) || FrameSize.wide;
   }
   public static convert(value: string | null): FrameSize | null {
     let result: FrameSize | null = null;

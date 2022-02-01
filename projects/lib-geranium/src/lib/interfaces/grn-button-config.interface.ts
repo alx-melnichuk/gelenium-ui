@@ -5,4 +5,5 @@ export interface GrnButtonConfig {
   exterior?: ButtonExterior;
   frameSize?: FrameSize;
   frameSizeValue?: number;
+  labelPd?: number; // px
 }
