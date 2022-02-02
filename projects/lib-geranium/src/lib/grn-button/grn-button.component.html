@@ -1,17 +1,34 @@
-<button #buttonElement
-  grnClear
-  grnBtn
-  type="button"
-  tabindex="0"
-  class="grn-btn grn-settings"
-  [attr.disabled]="innIsDisabled ? '' : null"
-  (click)="doClick($event)">
-  <span btn-pd-ver>
-    <ng-content></ng-content>
-  </span>
-  <grn-touch-ripple *ngIf="!innIsDisabled"
-    [attr.ext-t]="isText ? '' : null"
-    [attr.ext-c]="isContained ? '' : null"
-    [attr.ext-o]="isOutlined ? '' : null"
-    rippleColor9="innRippleColor"></grn-touch-ripple>
-</button>
+<ng-container *ngIf="!linkElement; else elseBlockLink">
+  <button #buttonElement
+    grnClear
+    grnBtn
+    type="button"
+    tabindex="0"
+    class="grn-btn grn-settings"
+    [attr.disabled]="innIsDisabled ? '' : null"
+    [attr.dis]="innIsDisabled ? '' : null"
+    (click)="doClick($event)">
+    <span btn-pd-ver>
+      <ng-content></ng-content>
+    </span>
+    <grn-touch-ripple *ngIf="!innIsDisabled"
+      [attr.ext-t]="isText ? '' : null"
+      [attr.ext-c]="isContained ? '' : null"
+      [attr.ext-o]="isOutlined ? '' : null">
+    </grn-touch-ripple>
+  </button>
+</ng-container>
+<ng-template #elseBlockLink>
+  <div class="grn-btn grn-settings"
+    grnBtn
+    [attr.dis]="innIsDisabled ? '' : null"
+    (click)="doClick($event)">
+    <ng-content select="a"></ng-content>
+    <grn-touch-ripple *ngIf="!innIsDisabled"
+      skip-events
+      [attr.ext-t]="isText ? '' : null"
+      [attr.ext-c]="isContained ? '' : null"
+      [attr.ext-o]="isOutlined ? '' : null">
+    </grn-touch-ripple>
+  </div>
+</ng-template>

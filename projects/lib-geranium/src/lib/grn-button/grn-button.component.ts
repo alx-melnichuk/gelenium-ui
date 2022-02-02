@@ -2,6 +2,7 @@ import {
   AfterContentInit,
   ChangeDetectionStrategy,
   Component,
+  ContentChild,
   ElementRef,
   Inject,
   InjectionToken,
@@ -14,17 +15,20 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import { GrnTouchRippleComponent } from '../grn-touch-ripple/grn-touch-ripple.component';
 
 import { ButtonExterior, ButtonExteriorUtil } from '../interfaces/button-exterior.interface';
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 import { GrnButtonConfig } from '../interfaces/grn-button-config.interface';
 import { HtmlElemUtil } from '../utils/html-elem.util';
 import { NumberUtil } from '../utils/number.util';
+import { GrnLinkDirective } from './grn-link.directive';
 
 export const GRN_BUTTON_CONFIG = new InjectionToken<GrnButtonConfig>('GRN_BUTTON_CONFIG');
 
 @Component({
   selector: 'grn-button',
+  exportAs: 'grnButton',
   templateUrl: './grn-button.component.html',
   styleUrls: ['./grn-button.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -42,6 +46,10 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
 
   @ViewChild('buttonElement')
   public buttonElementRef: ElementRef<HTMLElement> | undefined;
+  @ViewChild(GrnTouchRippleComponent)
+  public touchRipple: GrnTouchRippleComponent | undefined;
+  @ContentChild(GrnLinkDirective, { static: true })
+  public linkElement: GrnLinkDirective | undefined;
 
   public get isText(): boolean {
     return ButtonExteriorUtil.isText(this.innExterior);
@@ -141,14 +149,16 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     // this.settingOrnamentLf(this.hostRef, this.ornamentLfWidth);
     // Determine new parameter values that depend on: innExterior, innFrameSizeValue, lineHeight.
     this.settingLabelPaddingVer(this.hostRef, this.paddingVer(this.innExterior, this.innFrameSizeValue, this.lineHeight));
-    // this.settingLabelTranslateVer(this.hostRef, InputLabelUtil.translateVer(this.innExterior, this.innFrameSizeValue, this.lineHeight));
-    // this.settingLabel2MaxWidth(this.hostRef, this.getLabel2MaxWidth(this.labelPadding, this.ornamentLfWidth, this.ornamentRgWidth));
+
+    this.settingLink(this.linkElement?.templateRef);
   }
 
   // ** Public API **
 
-  public doClick(event: any): void {
-    console.log('doClick()');
+  public doClick(event: MouseEvent): void {
+    if (this.linkElement && this.touchRipple) {
+      this.touchRipple.touchRipple(event);
+    }
   }
 
   // ** Private API **
@@ -207,7 +217,7 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   }
 
   private settingLabelPaddingHor(elem: ElementRef<HTMLElement> | undefined, labelPadding: number | null): void {
-    HtmlElemUtil.setProperty(elem, '--pd-hor', NumberUtil.str(labelPadding)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, '--lbl-pd-hor', NumberUtil.str(labelPadding)?.concat('px'));
   }
 
   private settingLabelPaddingVer(elem: ElementRef<HTMLElement> | undefined, labelPadding: number | null): void {
@@ -220,5 +230,10 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
 
   private settingIsDisabled(elem: ElementRef<HTMLElement> | undefined, isDisabled: boolean): void {
     HtmlElemUtil.setAttr(this.renderer, elem, 'disabled', isDisabled ? '' : null);
+  }
+
+  private settingLink(elem: ElementRef<HTMLElement> | undefined): void {
+    HtmlElemUtil.setAttr(this.renderer, elem, 'linkClear', '');
+    HtmlElemUtil.setAttr(this.renderer, elem, 'btn-pd-ver', '');
   }
 }

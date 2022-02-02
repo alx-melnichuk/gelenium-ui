@@ -15,6 +15,7 @@ const RIPPLE_CLASS = 'gtr-ripple';
 
 @Component({
   selector: 'grn-touch-ripple',
+  exportAs: 'grnTouchRipple',
   template: '',
   styleUrls: ['./grn-touch-ripple.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -24,7 +25,7 @@ export class GrnTouchRippleComponent implements OnChanges, OnInit {
   @Input()
   public isCenter: string | null = null;
   @Input()
-  public rippleColor: string | null = null; // 'rgba(255, 255, 255, 0.3)'
+  public rippleColor: string | null = null; // '#1976d2', '#1976d280', 'rgba(255, 255, 255, 0.3)'  maxLength(32)
 
   private innIsCenter = false;
   private checkParentSuccessful = false;
@@ -59,6 +60,12 @@ export class GrnTouchRippleComponent implements OnChanges, OnInit {
       }
       this.checkParentSuccessful = checkRelative && checkOverflow;
     }
+  }
+
+  // ** Public API **
+
+  public touchRipple(event: MouseEvent, isCenter: boolean = this.innIsCenter): void {
+    this.doRipple(event, isCenter);
   }
 
   // ** Private API **
