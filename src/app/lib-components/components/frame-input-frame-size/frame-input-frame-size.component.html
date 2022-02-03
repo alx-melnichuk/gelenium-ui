@@ -141,6 +141,50 @@
     </grn-input>
   </div>
 
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Config" height: 57px; font-size: 16px;</em>
+      </small>
+    </div>
+    <grn-input formControlName="input02g"
+      label="Enter value"
+      [hiddenLabel]="isHiddenLabel ? '':null"
+      [config]="config02g"
+      [exterior]="exterior02">
+    </grn-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Config" height: 57px; font-size: 18px;</em>
+      </small>
+    </div>
+    <grn-input formControlName="input02h"
+      class="fifs-large"
+      label="Enter value"
+      [hiddenLabel]="isHiddenLabel ? '':null"
+      [config]="config02g"
+      [exterior]="exterior02">
+    </grn-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Config" height: 57px; font-size: 20px;</em>
+      </small>
+    </div>
+    <grn-input formControlName="input02i"
+      class="fifs-huge"
+      label="Enter value"
+      [hiddenLabel]="isHiddenLabel ? '':null"
+      [config]="config02g"
+      [exterior]="exterior02">
+    </grn-input>
+  </div>
+
 </form>
 
 <section mr-vr>
@@ -242,6 +286,51 @@
     &lt;/grn-input&gt;
   &lt;/div&gt;
 
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Config" height: 57px; font-size: 16px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;grn-input formControlName="input02g"
+      label="Enter value"
+      [hiddenLabel]="isHiddenLabel ? '':null"
+      [config]="config02g"
+      [exterior]="exterior02"&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Config" height: 57px; font-size: 18px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;grn-input formControlName="input02h"
+      class="fifs-large"
+      label="Enter value"
+      [hiddenLabel]="isHiddenLabel ? '':null"
+      [config]="config02g"
+      [exterior]="exterior02"&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Config" height: 57px; font-size: 20px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;grn-input formControlName="input02i"
+      class="fifs-huge"
+      label="Enter value"
+      [hiddenLabel]="isHiddenLabel ? '':null"
+      [config]="config02g"
+      [exterior]="exterior02"&gt;
+    &lt;/grn-input&gt;
+  &lt;/div&gt;
+
 &lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
@@ -267,9 +356,16 @@ export class FrameInputComponent &#123;
     input02d: new FormControl('Demo Size Wide', []),
     input02e: new FormControl('Demo Size Large', []),
     input02f: new FormControl('Demo Size Huge', []),
+    input02g: new FormControl('Demo Size Config', []),
+    input02h: new FormControl('Demo Size Config', []),
+    input02i: new FormControl('Demo Size Config', []),
   &#125;);
   public exterior02 = 'outlined';
   public isHiddenLabel = false;
+  // GrnFrameInputConfig
+  public config02g = &#123;
+    frameSizeValue: 53,
+  &#125;;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

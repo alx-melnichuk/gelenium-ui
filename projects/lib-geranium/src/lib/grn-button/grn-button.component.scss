@@ -6,20 +6,20 @@
   font-weight: 500;
   font-size: 0.875em;
   line-height: 1.75;
-
+  
   &>.grn-btn {
-    &[grnClear] {
+    &[grn-clear] {
       appearance: none;
       margin: 0;
       padding: 0;
       border: none;
       outline: none;
     }
-    &[grnBtn] {
+    &[grn-btn] {
       -webkit-tap-highlight-color: transparent;
       align-items: center;
       background-color: transparent;
-      border-radius: var(--gb-br-rd, var(--br-rd, 4px));
+      border-radius: var(--gb-br-rd, var(--fs-br-rd, 4px));
       box-sizing: border-box;
       cursor: pointer;
       display: inline-flex;
@@ -37,7 +37,7 @@
       text-transform: inherit;
       user-select: none;
       vertical-align: middle;
-    
+      width: inherit;
       // &:not([disabled]) {
       //   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
       //     box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
@@ -48,8 +48,8 @@
     &>span[btn-pd-ver], &>a[btn-pd-ver] {
       padding-top: var(--gb-lbl-pd-tp, var(--lbl-pd-ver, 0.4821em));
       padding-bottom: var(--gb-lbl-pd-bt, var(--lbl-pd-ver, 0.4821em));
-      padding-left: var(--gb-lbl-pd-lf, var(--pd-hor, 1.1428em));
-      padding-right: var(--gb-lbl-pd-rg, var(--pd-hor, 1.1428em));
+      padding-left: var(--gb-lbl-pd-lf, var(--fs-lbl-pd-hor, 1.1428em));
+      padding-right: var(--gb-lbl-pd-rg, var(--fs-lbl-pd-hor, 1.1428em));
     }
     &[dis] {
       cursor: default;
@@ -99,9 +99,11 @@
   &[ext-o]>.grn-btn {
     &:not([dis]) {
       color: #1976d2;
-      border: 1px solid rgba(25, 118, 210, 0.5);
+      // border: 1px solid rgba(25, 118, 210, 0.5);
+      border: 1px solid #1976d280;
       &:hover {
-        background-color: rgba(25, 118, 210, 0.04);
+        // background-color: rgba(25, 118, 210, 0.04);
+        background-color: #1976d20d;
         border-color: #1976d2;
       }
     }
@@ -115,7 +117,8 @@
     &:not([dis]) {
       color: #1976d2;
       &:hover {
-        background-color: rgba(25, 118, 210, 0.04);
+        // background-color: rgba(25, 118, 210, 0.04);
+        background-color: #1976d20d;
       }
     }
     &[dis] {
@@ -129,7 +132,13 @@
     }
   }
 
-  &[uppercase] {
-    text-transform: uppercase;
+  &:not([noUppercase])>.grn-btn[grn-btn] {
+    &>span[btn-pd-ver], &>a[btn-pd-ver] {
+      text-transform: uppercase;
+    }
   }
+  &[wdFull] {
+    width: 100%;
+  }
+
 }

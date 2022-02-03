@@ -3,18 +3,19 @@
   <p>
     The GrnButton component is a styled button.
     <br />
-    It appears in three versions:
+    It comes in three versions:
   </p>
   <ul>
-    <li>as text (exterior="text" - default)</li>
     <li>as a container (exterior="contained")</li>
     <li>as an outline (exterior="outlined")</li>
+    <li>as text (exterior="text" - default)</li>
   </ul>
   <p>
     The content of the grnButton component is determined by the content
     between its opening and closing tags.
     This can be a fragment of html elements that will be displayed as
     the content of the button.
+    <br />
     Another option, the content of the hyperlink - in this case, the
     hyperlink will remain.
     In practice, there are often situations when a button is displayed
@@ -25,18 +26,15 @@
 
 <div class="b-items">
 
-  <grn-button exterior="contained"
-    uppercase>
+  <grn-button exterior="contained">
     Contained
   </grn-button>
 
-  <grn-button exterior="outlined"
-    uppercase>
+  <grn-button exterior="outlined">
     Outlined
   </grn-button>
 
-  <grn-button exterior="text"
-    uppercase>
+  <grn-button exterior="text">
     Text
   </grn-button>
 
@@ -53,18 +51,15 @@
           <code><pre source="html">
 &lt;div class="b-items"&gt;
 
-  &lt;grn-button exterior="contained"
-    uppercase&gt;
+  &lt;grn-button exterior="contained"&gt;
     Contained
   &lt;/grn-button&gt;
 
-  &lt;grn-button exterior="outlined"
-    uppercase&gt;
+  &lt;grn-button exterior="outlined"&gt;
     Outlined
   &lt;/grn-button&gt;
 
-  &lt;grn-button exterior="text"
-    uppercase&gt;
+  &lt;grn-button exterior="text"&gt;
     Text
   &lt;/grn-button&gt;
 
@@ -114,19 +109,16 @@ export class ButtonComponent &#123;
 
 <div class="b-items">
 
-  <grn-button exterior="contained"
-    uppercase>
+  <grn-button exterior="contained">
     <span>Primary</span>
   </grn-button>
 
   <grn-button exterior="contained"
-    isDisabled
-    uppercase>
+    isDisabled>
     <span>Primary Disabled</span>
   </grn-button>
 
-  <grn-button exterior="contained"
-    uppercase>
+  <grn-button exterior="contained">
     <a [routerLink]="[routerLink]"
       [fragment]="'contained-button'">
       Link
@@ -134,8 +126,7 @@ export class ButtonComponent &#123;
   </grn-button>
 
   <grn-button exterior="contained"
-    isDisabled
-    uppercase>
+    isDisabled>
     <a [routerLink]="[routerLink]"
       [fragment]="'contained-button'">
       Link Disabled
@@ -155,19 +146,16 @@ export class ButtonComponent &#123;
           <code><pre source="html">
 &lt;div class="b-items"&gt;
 
-  &lt;grn-button exterior="contained"
-    uppercase&gt;
+  &lt;grn-button exterior="contained"&gt;
     &lt;span&gt;Primary&lt;/span&gt;
   &lt;/grn-button&gt;
 
   &lt;grn-button exterior="contained"
-    isDisabled
-    uppercase&gt;
+    isDisabled&gt;
     &lt;span&gt;Primary Disabled&lt;/span&gt;
   &lt;/grn-button&gt;
 
-  &lt;grn-button exterior="contained"
-    uppercase&gt;
+  &lt;grn-button exterior="contained"&gt;
     &lt;a [routerLink]="[routerLink]"
       [fragment]="'contained-button'"&gt;
       Link
@@ -175,8 +163,7 @@ export class ButtonComponent &#123;
   &lt;/grn-button&gt;
 
   &lt;grn-button exterior="contained"
-    isDisabled
-    uppercase&gt;
+    isDisabled&gt;
     &lt;a [routerLink]="[routerLink]"
       [fragment]="'contained-button'"&gt;
       Link Disabled
@@ -230,19 +217,16 @@ export class ButtonComponent &#123;
 
 <div class="b-items">
 
-  <grn-button exterior="outlined"
-    uppercase>
+  <grn-button exterior="outlined">
     <span>Secondary</span>
   </grn-button>
 
   <grn-button exterior="outlined"
-    isDisabled
-    uppercase>
-    <span>Disabled</span>
+    isDisabled>
+    <span>Secondary Disabled</span>
   </grn-button>
 
-  <grn-button exterior="outlined"
-    uppercase>
+  <grn-button exterior="outlined">
     <a [routerLink]="[routerLink]"
       [fragment]="'outlined-button'">
       Link
@@ -250,8 +234,7 @@ export class ButtonComponent &#123;
   </grn-button>
 
   <grn-button exterior="outlined"
-    isDisabled
-    uppercase>
+    isDisabled>
     <a [routerLink]="[routerLink]"
       [fragment]="'outlined-button'">
       Link Disabled
@@ -271,6 +254,29 @@ export class ButtonComponent &#123;
           <code><pre source="html">
 &lt;div class="b-items"&gt;
 
+  &lt;grn-button exterior="outlined"&gt;
+    &lt;span&gt;Secondary&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="outlined"
+    isDisabled&gt;
+    &lt;span&gt;Secondary Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="outlined"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="'outlined-button'"&gt;
+      Link
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="outlined"
+    isDisabled&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="'outlined-button'"&gt;
+      Link Disabled
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
 
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -321,32 +327,32 @@ export class ButtonComponent &#123;
 
 <div class="b-items">
 
-  <grn-button exterior="text"
-    uppercase>
+  <grn-button exterior="text">
     <span>Additionally</span>
   </grn-button>
 
   <grn-button exterior="text"
-    isDisabled
-    uppercase>
-    <span>Disabled</span>
+    isDisabled>
+    <span>Additionally Disabled</span>
   </grn-button>
 
-
-  <!-- <div class="grn-button"
-    ext-t
-    uppercase>
+  <grn-button exterior="text">
     <a [routerLink]="[routerLink]"
-      [fragment]="'text-button'"
-      class="grn-btn"
-      grnBtn
-      sz-small>
+      [fragment]="'text-button'">
       Link
-      <grn-touch-ripple></grn-touch-ripple>
     </a>
-  </div> -->
+  </grn-button>
+
+  <grn-button exterior="text"
+    isDisabled>
+    <a [routerLink]="[routerLink]"
+      [fragment]="'text-button'">
+      Link Disabled
+    </a>
+  </grn-button>
 
 </div>
+
 
 <section mr-vr>
   <mat-accordion>
@@ -359,30 +365,29 @@ export class ButtonComponent &#123;
           <code><pre source="html">
 &lt;div class="b-items"&gt;
 
-  &lt;grn-button exterior="text"
-    uppercase&gt;
+  &lt;grn-button exterior="text"&gt;
     &lt;span&gt;Additionally&lt;/span&gt;
   &lt;/grn-button&gt;
 
   &lt;grn-button exterior="text"
-    isDisabled
-    uppercase&gt;
-    &lt;span&gt;Disabled&lt;/span&gt;
+    isDisabled&gt;
+    &lt;span&gt;Additionally Disabled&lt;/span&gt;
   &lt;/grn-button&gt;
 
-
-  &lt;div class="grn-button"
-    ext-t
-    uppercase&gt;
+  &lt;grn-button exterior="text"&gt;
     &lt;a [routerLink]="[routerLink]"
-      [fragment]="'text-button'"
-      class="grn-btn"
-      grnBtn
-      sz-small&gt;
+      [fragment]="'text-button'"&gt;
       Link
-      &lt;grn-touch-ripple&gt;&lt;/grn-touch-ripple&gt;
     &lt;/a&gt;
-  &lt;/div&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="text"
+    isDisabled&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="'text-button'"&gt;
+      Link Disabled
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
 
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -391,9 +396,6 @@ export class ButtonComponent &#123;
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
-import &#123;
-  FormControl, FormGroup, Validators
-&#125; from '@angular/forms';
 
 @Component(&#123;
   selector: 'app-button',
@@ -410,8 +412,11 @@ export class ButtonComponent &#123;
 .b-items &#123;
   display: flex;
   flex-wrap: wrap;
-  &amp;&gt;* &#123;
-    margin-left: 10%;
+  &amp;&gt;:first-child &#123;
+    margin-left: 3%;
+  &#125;
+  &amp;&gt;:not(first-child) &#123;
+    margin-left: 7%;
   &#125;
 &#125;</pre></code>
         </mat-tab>

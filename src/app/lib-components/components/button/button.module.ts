@@ -8,6 +8,7 @@ import { ButtonComponent } from './button.component';
 
 import { ButtonBasicModule } from '../button-basic/button-basic.module';
 import { ButtonAttributesModule } from '../button-attributes/button-attributes.module';
+import { ButtonSizeModule } from '../button-size/button-size.module';
 
 UrlComponents.add('URL_BUTTON', 'button');
 
@@ -15,13 +16,14 @@ const url = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get(
 const siteUrls: SiteUrl[] = [
   { label: 'Basic', url, fragment: 'Basic' },
   { label: 'Attributes', url, fragment: 'Attributes' },
+  { label: 'Size', url, fragment: 'Size' },
   { label: 'Api', url, fragment: 'Api' },
 ];
 SiteMenu.addItem('Components', 'Button', { label: 'Button', siteUrls });
 
 @NgModule({
   declarations: [ButtonComponent],
-  imports: [CommonModule, ButtonBasicModule, ButtonAttributesModule],
+  imports: [CommonModule, ButtonBasicModule, ButtonAttributesModule, ButtonSizeModule],
   exports: [ButtonComponent],
 })
 export class ButtonModule {}

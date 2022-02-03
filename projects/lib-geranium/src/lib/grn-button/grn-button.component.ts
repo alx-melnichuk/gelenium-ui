@@ -1,15 +1,21 @@
+import { GrnButtonSizeDirective } from './grn-button-size.directive';
+import { isPlatformBrowser } from '@angular/common';
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
   ElementRef,
+  EventEmitter,
   Inject,
   InjectionToken,
   Input,
   OnChanges,
   OnInit,
   Optional,
+  Output,
+  PLATFORM_ID,
   Renderer2,
   SimpleChanges,
   ViewChild,
@@ -26,6 +32,8 @@ import { GrnLinkDirective } from './grn-link.directive';
 
 export const GRN_BUTTON_CONFIG = new InjectionToken<GrnButtonConfig>('GRN_BUTTON_CONFIG');
 
+let identifier = 0;
+
 @Component({
   selector: 'grn-button',
   exportAs: 'grnButton',
@@ -34,7 +42,9 @@ export const GRN_BUTTON_CONFIG = new InjectionToken<GrnButtonConfig>('GRN_BUTTON
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
+export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, AfterViewInit {
+  @Input()
+  public id = 'grn_button_' + ++identifier;
   @Input()
   public config: GrnButtonConfig | null = null;
   @Input()
@@ -44,12 +54,17 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   @Input()
   public isDisabled: string | null = null;
 
+  @Output()
+  readonly clickData: EventEmitter<Event> = new EventEmitter();
+
   @ViewChild('buttonElement')
   public buttonElementRef: ElementRef<HTMLElement> | undefined;
   @ViewChild(GrnTouchRippleComponent)
   public touchRipple: GrnTouchRippleComponent | undefined;
   @ContentChild(GrnLinkDirective, { static: true })
   public linkElement: GrnLinkDirective | undefined;
+  @ViewChild(GrnButtonSizeDirective)
+  public buttonSizeDir: GrnButtonSizeDirective | undefined;
 
   public get isText(): boolean {
     return ButtonExteriorUtil.isText(this.innExterior);
@@ -69,10 +84,14 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   public labelPadding: number | null = null;
   public lineHeight: number | null = null;
 
+  public isFocused = false;
+
   public innRippleColor: string | null = null;
   public innIsDisabled: boolean | null = null; // ?
 
   constructor(
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    @Inject(PLATFORM_ID) private platformId: Object,
     @Optional() @Inject(GRN_BUTTON_CONFIG) private rootConfig: GrnButtonConfig | null,
     private hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
@@ -100,9 +119,10 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     }
     if (isModifyLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
       // Determine new parameter values that depend on: innExterior, innFrameSizeValue.
-      this.settingBorderRadius(this.hostRef, this.getBorderRadius(this.innFrameSizeValue));
-      this.labelPadding = this.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
-      this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
+      // # remove to GrnFrameSize
+      // # this.settingBorderRadius(this.hostRef, this.getBorderRadius(this.innFrameSizeValue)); // #
+      // # this.labelPadding = this.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
+      // # this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
 
       if (this.lineHeight != null) {
         // Determine new parameter values that depend on: innExterior, innFrameSizeValue, lineHeight.
@@ -128,13 +148,9 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       isModifyLabelPadding = true;
     }
     if (isModifyLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      this.settingBorderRadius(this.hostRef, this.getBorderRadius(this.innFrameSizeValue));
-      this.labelPadding = this.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
-      this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
-    }
-    if (this.innIsDisabled === null) {
-      this.innIsDisabled = false;
-      this.settingIsDisabled(this.buttonElementRef, this.innIsDisabled);
+      // # this.settingBorderRadius(this.hostRef, this.getBorderRadius(this.innFrameSizeValue));
+      // # this.labelPadding = this.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
+      // # this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
     }
   }
 
@@ -151,14 +167,36 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     this.settingLabelPaddingVer(this.hostRef, this.paddingVer(this.innExterior, this.innFrameSizeValue, this.lineHeight));
 
     this.settingLink(this.linkElement?.templateRef);
+    console.log('ngAfterContentInit(); buttonSizeDir != null - ', this.buttonSizeDir != null);
+  }
+
+  ngAfterViewInit(): void {
+    console.log('ngAfterViewInit(); buttonSizeDir != null - ', this.buttonSizeDir != null);
   }
 
   // ** Public API **
 
   public doClick(event: MouseEvent): void {
-    if (this.linkElement && this.touchRipple) {
-      this.touchRipple.touchRipple(event);
+    if (!!event && !event.cancelBubble) {
+      if (this.linkElement && this.touchRipple) {
+        this.touchRipple.touchRipple(event);
+      }
+      this.clickData.emit(event);
     }
+  }
+
+  public focus(): void {
+    if (isPlatformBrowser(this.platformId) && !!this.buttonElementRef) {
+      this.buttonElementRef.nativeElement.focus();
+    }
+  }
+
+  public doFocus(): void {
+    this.settingFocused(this.hostRef, (this.isFocused = true));
+  }
+
+  public doBlur(): void {
+    this.settingFocused(this.hostRef, (this.isFocused = false));
   }
 
   // ** Private API **
@@ -167,19 +205,20 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     return ButtonExteriorUtil.isText(exterior) || ButtonExteriorUtil.isOutlined(exterior) ? 'rgba(25, 118, 210, 0.3)' : null;
   }
   // Get left/right padding for the GrnFrameInpu element.
-  private paddingLfRg(exterior: ButtonExterior, frameSizeVal: number, configLabelPd: number | undefined): number | null {
-    let result: number | null = configLabelPd || null;
-    if (frameSizeVal > 0 && (!result || result <= 0)) {
-      if (exterior === ButtonExterior.text) {
-        result = 8; // Math.round(100 * 0.2045 * frameSizeVal) / 100; // 9px
-      } else if (exterior === ButtonExterior.contained) {
-        result = 16; // Math.round(100 * 0.3636 * frameSizeVal) / 100; // 16px
-      } else if (exterior === ButtonExterior.outlined) {
-        result = 15; // Math.round(100 * 0.3409 * frameSizeVal) / 100; // 15px
-      }
-    }
-    return result;
-  }
+  // # remove to GrnFrameSize
+  // private paddingLfRg(exterior: ButtonExterior, frameSizeVal: number, configLabelPd: number | undefined): number | null {
+  //   let result: number | null = configLabelPd || null;
+  //   if (frameSizeVal > 0 && (!result || result <= 0)) {
+  //     if (exterior === ButtonExterior.contained) {
+  //       result = Math.round(100 * 0.3636 * frameSizeVal) / 100; // 16px
+  //     } else if (exterior === ButtonExterior.outlined) {
+  //       result = Math.round(100 * 0.3409 * frameSizeVal) / 100; // 15px
+  //     } else if (exterior === ButtonExterior.text) {
+  //       result = Math.round(100 * 0.2045 * frameSizeVal) / 100; // 9px
+  //     }
+  //   }
+  //   return result;
+  // }
   private paddingVer(exterior: ButtonExterior | null, frameSize: number, lineHeight: number): number | null {
     let result: number | null = null;
     if (exterior != null && frameSize > 0 && lineHeight > 0) {
@@ -190,13 +229,14 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     }
     return result;
   }
-  private getBorderRadius(frameSizeValue: number): string | null {
-    let result: string | null = null;
-    if (frameSizeValue > 0) {
-      result = (frameSizeValue / 10).toFixed(2) + 'px';
-    }
-    return result;
-  }
+  // # remove to GrnFrameSize
+  // private getBorderRadius(frameSizeValue: number): string | null {
+  //   let result: string | null = null;
+  //   if (frameSizeValue > 0) {
+  //     result = Math.round(100 * (frameSizeValue / 10)) / 100 + 'px';
+  //   }
+  //   return result;
+  // }
 
   private settingExterior(elem: ElementRef<HTMLElement> | undefined, exterior: ButtonExterior | null): void {
     HtmlElemUtil.setClass(this.renderer, elem, 'gb-text', ButtonExteriorUtil.isText(exterior));
@@ -206,7 +246,7 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     HtmlElemUtil.setClass(this.renderer, elem, 'gb-outlined', ButtonExteriorUtil.isOutlined(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', ButtonExteriorUtil.isOutlined(exterior) ? '' : null);
   }
-
+  // # remove to GrnFrameSize
   private createFrameSize(frameSizeInp: FrameSize | null, frameSizeValueInp?: number): number {
     const frameSize: FrameSize = FrameSizeUtil.convert((frameSizeInp || '').toString()) || FrameSize.small;
     let frameSizeValue = FrameSizeUtil.getValue(frameSize) || 0;
@@ -215,18 +255,18 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     }
     return frameSizeValue;
   }
-
-  private settingLabelPaddingHor(elem: ElementRef<HTMLElement> | undefined, labelPadding: number | null): void {
-    HtmlElemUtil.setProperty(elem, '--lbl-pd-hor', NumberUtil.str(labelPadding)?.concat('px'));
-  }
+  // # remove to GrnFrameSize
+  // private settingLabelPaddingHor(elem: ElementRef<HTMLElement> | undefined, labelPadding: number | null): void {
+  //   HtmlElemUtil.setProperty(elem, '--lbl-pd-hor', NumberUtil.str(labelPadding)?.concat('px'));
+  // }
 
   private settingLabelPaddingVer(elem: ElementRef<HTMLElement> | undefined, labelPadding: number | null): void {
     HtmlElemUtil.setProperty(elem, '--lbl-pd-ver', NumberUtil.str(labelPadding)?.concat('px'));
   }
-
-  private settingBorderRadius(elem: ElementRef<HTMLElement> | undefined, borderRadius: string | null): void {
-    HtmlElemUtil.setProperty(elem, '--br-rd', borderRadius);
-  }
+  // # remove to GrnFrameSize
+  // private settingBorderRadius(elem: ElementRef<HTMLElement> | undefined, borderRadius: string | null): void {
+  //   HtmlElemUtil.setProperty(elem, '--br-rd', borderRadius);
+  // }
 
   private settingIsDisabled(elem: ElementRef<HTMLElement> | undefined, isDisabled: boolean): void {
     HtmlElemUtil.setAttr(this.renderer, elem, 'disabled', isDisabled ? '' : null);
@@ -235,5 +275,10 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   private settingLink(elem: ElementRef<HTMLElement> | undefined): void {
     HtmlElemUtil.setAttr(this.renderer, elem, 'linkClear', '');
     HtmlElemUtil.setAttr(this.renderer, elem, 'btn-pd-ver', '');
+  }
+
+  private settingFocused(elem: ElementRef<HTMLElement> | undefined, isFocused: boolean): void {
+    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-focused', isFocused);
+    HtmlElemUtil.setAttr(this.renderer, elem, 'foc', isFocused ? '' : null);
   }
 }

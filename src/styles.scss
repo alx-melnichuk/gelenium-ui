@@ -47,17 +47,27 @@ pre[source] {
   overflow: auto;
   max-width: calc(100vw - 32px);
   box-sizing: border-box;
+  // for block: &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02) &#125;&#125;&lt;/span&gt;
+  b {
+    font-weight: normal;
+  }
 }
 pre[source=html] {
   // background-color: rgb(250 235 215 / 30%);
-  background-color: rgb(226 255 231 / 30%);
+  // background-color: rgb(226 255 231 / 30%);
+  // background-color: #e3f2fd66;
+  background-color: #e3fde566;
 }
 pre[source=ts] {
-  background-color: rgb(240 255 255 / 30%);
+  // background-color: rgb(240 255 255 / 30%);
+  // background-color: #e0f2f166;
+  background-color: #e4fdfc66;
 }
 pre[source=css] {
   // background-color: rgb(245 245 220 / 30%);
-  background-color: rgb(255 243 252 / 30%);
+  // background-color: rgb(255 243 252 / 30%);
+  // background-color: #f9fbe766;
+  background-color: #fbe2ff1f;
 }
 
 [fw500] {

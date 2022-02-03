@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
+import { FrameSize } from 'projects/lib-geranium/src/lib/interfaces/frame-size.interface';
+import { GrnButtonConfig } from 'projects/lib-geranium/src/lib/interfaces/grn-button-config.interface';
 
 import {
   BTN_CONTAINED,
@@ -11,13 +13,13 @@ import {
 } from 'src/app/lib-core/constants/constants';
 
 @Component({
-  selector: 'app-button-attributes',
-  templateUrl: './button-attributes.component.html',
-  styleUrls: ['./button-attributes.component.scss'],
+  selector: 'app-button-size',
+  templateUrl: './button-size.component.html',
+  styleUrls: ['./button-size.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonAttributesComponent {
+export class ButtonSizeComponent {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -33,10 +35,15 @@ export class ButtonAttributesComponent {
   @Input()
   public labelText = BTN_TEXT;
 
-  public exterior02 = 'contained';
+  public exterior03 = 'contained';
   public routerLink = '/components/button';
-  public fragment = 'attribute-button';
 
+  public config: GrnButtonConfig = {
+    // exterior?: ButtonExterior;
+    frameSize: FrameSize.middle, // frameSize?: FrameSize;
+    // frameSizeValue?: number;
+    // labelPd?: number; // px
+  };
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 

@@ -9,11 +9,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { GrnButtonModule } from 'projects/lib-geranium/src/lib/grn-button/grn-button.module';
 
-import { ButtonAttributesComponent } from './button-attributes.component';
+import { ButtonSizeComponent } from './button-size.component';
 
 @NgModule({
-  declarations: [ButtonAttributesComponent],
+  declarations: [ButtonSizeComponent],
   imports: [CommonModule, FormsModule, RouterModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GrnButtonModule],
-  exports: [ButtonAttributesComponent],
+  exports: [ButtonSizeComponent],
 })
-export class ButtonAttributesModule {}
+export class ButtonSizeModule {}

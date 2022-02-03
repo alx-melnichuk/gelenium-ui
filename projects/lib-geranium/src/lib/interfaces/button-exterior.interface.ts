@@ -8,7 +8,7 @@ export enum ButtonExterior {
 
 export class ButtonExteriorUtil {
   public static create(value: ButtonExterior | null): ButtonExterior {
-    return ButtonExteriorUtil.convert((value || '').toString() || ButtonExterior.text.toString()) as ButtonExterior;
+    return ButtonExteriorUtil.convert((value || '').toString()) || ButtonExterior.text;
   }
   public static convert(value: string | null): ButtonExterior | null {
     let result: ButtonExterior | null = null;

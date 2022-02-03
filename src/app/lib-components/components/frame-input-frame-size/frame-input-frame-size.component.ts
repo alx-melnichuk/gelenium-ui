@@ -41,9 +41,16 @@ export class FrameInputFrameSizeComponent {
     input02d: new FormControl('Demo Size Wide', []),
     input02e: new FormControl('Demo Size Large', []),
     input02f: new FormControl('Demo Size Huge', []),
+    input02g: new FormControl('Demo Size Config', []),
+    input02h: new FormControl('Demo Size Config', []),
+    input02i: new FormControl('Demo Size Config', []),
   });
   public exterior02 = 'outlined';
   public isHiddenLabel = false;
+  // GrnFrameInputConfig
+  public config02g = {
+    frameSizeValue: 57,
+  };
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }

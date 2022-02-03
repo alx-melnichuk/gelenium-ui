@@ -1,8 +1,10 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostListener,
+  Inject,
   Input,
   OnChanges,
   OnInit,
@@ -30,7 +32,7 @@ export class GrnTouchRippleComponent implements OnChanges, OnInit {
   private innIsCenter = false;
   private checkParentSuccessful = false;
 
-  constructor(private hostRef: ElementRef<HTMLElement>) {}
+  constructor(private hostRef: ElementRef<HTMLElement>, @Inject(DOCUMENT) private document: Document) {}
 
   @HostListener('mousedown', ['$event'])
   public doMousedown(event: MouseEvent): void {
@@ -89,7 +91,7 @@ export class GrnTouchRippleComponent implements OnChanges, OnInit {
       const left = offsetX - radius / 2;
       const top = offsetY - radius / 2;
 
-      const circle = document.createElement('span');
+      const circle = this.document.createElement('span');
       circle.style.width = circle.style.height = `${radius}px`;
       circle.style.left = `${left}px`;
       circle.style.top = `${top}px`;
