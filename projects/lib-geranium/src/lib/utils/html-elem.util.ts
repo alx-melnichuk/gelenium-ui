@@ -1,12 +1,12 @@
 import { ElementRef, Renderer2 } from '@angular/core';
 
 export class HtmlElemUtil {
-  public static setProperty(element: ElementRef | undefined, propertyName: string, propertyValue: string | null | undefined): void {
-    if (element && element.nativeElement && propertyName) {
-      (element.nativeElement as HTMLElement).style.setProperty(propertyName, propertyValue || null);
+  public static setProperty(element: ElementRef<HTMLElement> | undefined, name: string, value: string | null | undefined): void {
+    if (element && element.nativeElement && name) {
+      (element.nativeElement as HTMLElement).style.setProperty(name, value || null);
     }
   }
-  public static setClass(renderer: Renderer2, element: ElementRef | undefined, className: string, isAdd: boolean): void {
+  public static setClass(renderer: Renderer2, element: ElementRef<HTMLElement> | undefined, className: string, isAdd: boolean): void {
     if (renderer && element && element.nativeElement && className) {
       if (isAdd) {
         renderer.addClass(element.nativeElement, className);
@@ -15,12 +15,12 @@ export class HtmlElemUtil {
       }
     }
   }
-  public static setAttr(renderer: Renderer2, element: ElementRef | undefined, attrName: string, attrVal: string | null | undefined): void {
-    if (renderer && element && element.nativeElement && attrName) {
-      if (attrVal != null) {
-        renderer.setAttribute(element.nativeElement, attrName, attrVal);
+  public static setAttr(rendr: Renderer2, elem: ElementRef<HTMLElement> | undefined, name: string, value: string | null | undefined): void {
+    if (rendr && elem && elem.nativeElement && name) {
+      if (value != null) {
+        rendr.setAttribute(elem.nativeElement, name, value);
       } else {
-        renderer.removeAttribute(element.nativeElement, attrName);
+        rendr.removeAttribute(elem.nativeElement, name);
       }
     }
   }

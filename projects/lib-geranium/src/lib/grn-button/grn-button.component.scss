@@ -19,7 +19,7 @@
       -webkit-tap-highlight-color: transparent;
       align-items: center;
       background-color: transparent;
-      border-radius: var(--gb-br-rd, var(--fs-br-rd, 4px));
+      border-radius: var(--gb-br-rd, var(--s-br-rd, 4px));
       box-sizing: border-box;
       cursor: pointer;
       display: inline-flex;
@@ -46,10 +46,10 @@
       // }
     }
     &>span[btn-pd-ver], &>a[btn-pd-ver] {
-      padding-top: var(--gb-lbl-pd-tp, var(--lbl-pd-ver, 0.4821em));
-      padding-bottom: var(--gb-lbl-pd-bt, var(--lbl-pd-ver, 0.4821em));
-      padding-left: var(--gb-lbl-pd-lf, var(--fs-lbl-pd-hor, 1.1428em));
-      padding-right: var(--gb-lbl-pd-rg, var(--fs-lbl-pd-hor, 1.1428em));
+      padding-top: var(--gb-lbl-pd-tp, var(--s-lbl-pd-ver, 0.4821em));
+      padding-bottom: var(--gb-lbl-pd-bt, var(--s-lbl-pd-ver, 0.4821em));
+      padding-left: var(--gb-lbl-pd-lf, var(--s-lbl-pd-hor, 1.1428em));
+      padding-right: var(--gb-lbl-pd-rg, var(--s-lbl-pd-hor, 1.1428em));
     }
     &[dis] {
       cursor: default;

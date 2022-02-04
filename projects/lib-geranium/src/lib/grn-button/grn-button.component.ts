@@ -1,8 +1,6 @@
-import { GrnButtonSizeDirective } from './grn-button-size.directive';
 import { isPlatformBrowser } from '@angular/common';
 import {
   AfterContentInit,
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
@@ -27,8 +25,9 @@ import { ButtonExterior, ButtonExteriorUtil } from '../interfaces/button-exterio
 import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
 import { GrnButtonConfig } from '../interfaces/grn-button-config.interface';
 import { HtmlElemUtil } from '../utils/html-elem.util';
-import { NumberUtil } from '../utils/number.util';
+
 import { GrnLinkDirective } from './grn-link.directive';
+import { GrnFrameSizeValue, GrnFrameSizeValueAndLineHeight, GrnSizeDirective } from './grn-size.directive';
 
 export const GRN_BUTTON_CONFIG = new InjectionToken<GrnButtonConfig>('GRN_BUTTON_CONFIG');
 
@@ -42,17 +41,17 @@ let identifier = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, AfterViewInit {
+export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   @Input()
   public id = 'grn_button_' + ++identifier;
   @Input()
-  public config: GrnButtonConfig | null = null;
+  public config: GrnButtonConfig | undefined;
   @Input()
-  public exterior: string | null = null; // ButtonExteriorType
+  public exterior: string | undefined; // ButtonExteriorType
   @Input()
-  public frameSize: string | null = null; // FrameSizeType
+  public frameSize: string | undefined; // FrameSizeType
   @Input()
-  public isDisabled: string | null = null;
+  public isDisabled: string | undefined; // +
 
   @Output()
   readonly clickData: EventEmitter<Event> = new EventEmitter();
@@ -63,8 +62,8 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, 
   public touchRipple: GrnTouchRippleComponent | undefined;
   @ContentChild(GrnLinkDirective, { static: true })
   public linkElement: GrnLinkDirective | undefined;
-  @ViewChild(GrnButtonSizeDirective)
-  public buttonSizeDir: GrnButtonSizeDirective | undefined;
+  @ViewChild(GrnSizeDirective)
+  public sizeDir: GrnSizeDirective | undefined;
 
   public get isText(): boolean {
     return ButtonExteriorUtil.isText(this.innExterior);
@@ -76,18 +75,15 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, 
     return ButtonExteriorUtil.isOutlined(this.innExterior);
   }
 
-  public currConfig: GrnButtonConfig = {};
-  public innExterior: ButtonExterior | null = null;
-  public exterior2: ButtonExterior | null = null;
+  public currConfig: GrnButtonConfig = {}; // +
+  public innExterior: ButtonExterior | undefined; // +
+  // public exterior2: ButtonExterior | null = null;
+  public innFrameSize: FrameSize | undefined;
   public innFrameSizeValue = 0;
-  public frameSize2: FrameSize | null = null;
-  public labelPadding: number | null = null;
-  public lineHeight: number | null = null;
+  // public frameSize2: FrameSize | null = null;
 
-  public isFocused = false;
-
-  public innRippleColor: string | null = null;
-  public innIsDisabled: boolean | null = null; // ?
+  public isFocused = false; // +
+  public innIsDisabled: boolean | null = null; // +
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -101,81 +97,70 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    let isModifyLabelPadding = false;
+    let isExterior = false;
+    let isFrameSize = false;
+    let isFrameSizeValue = false;
     if (changes.config) {
       this.currConfig = { ...(this.rootConfig || {}), ...(this.config || {}) };
+      const cfgExterior = this.currConfig.exterior;
+      isExterior = !this.exterior && !!cfgExterior && this.innExterior !== cfgExterior;
+      const cfgFrameSize = this.currConfig.frameSize;
+      isFrameSize = !this.frameSize && !!cfgFrameSize && this.innFrameSize !== cfgFrameSize;
+      const cfgFrameSizeValue = this.currConfig.frameSizeValue;
+      isFrameSizeValue = !this.frameSize && !cfgFrameSize && !!cfgFrameSizeValue && this.innFrameSizeValue !== cfgFrameSizeValue;
+      // this.currConfig.labelPd
     }
-    if (changes.exterior || (changes.config && !this.exterior)) {
-      this.exterior2 = ButtonExteriorUtil.convert(this.exterior);
-      this.innExterior = ButtonExteriorUtil.create(this.exterior2 || this.currConfig.exterior || null);
+    if (changes.exterior || isExterior) {
+      const exterior = ButtonExteriorUtil.convert(this.exterior || this.currConfig.exterior?.toString());
+      this.innExterior = exterior || ButtonExterior.text;
+      console.log(`this.innExterior=${this.innExterior} isModifyExterior=${isExterior}`);
       this.settingExterior(this.hostRef, this.innExterior);
-      this.innRippleColor = this.getRippleColor(this.innExterior);
-      isModifyLabelPadding = true;
     }
-    if (changes.frameSize || (changes.config && !this.frameSize)) {
-      this.frameSize2 = FrameSizeUtil.convert(this.frameSize);
-      this.innFrameSizeValue = this.createFrameSize(this.frameSize2 || this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
-      isModifyLabelPadding = true;
+    if (changes.frameSize || isFrameSize || isFrameSizeValue) {
+      const frameSize = FrameSizeUtil.convert(this.frameSize || this.currConfig.frameSize?.toString());
+      this.innFrameSize = frameSize || FrameSize.small;
+      this.innFrameSizeValue =
+        FrameSizeUtil.getValue(frameSize) || this.currConfig.frameSizeValue || FrameSizeUtil.getValue(this.innFrameSize) || 0;
+      console.log(`this.frameSize=${this.frameSize}`);
+      console.log(`this.innFrameSize=${this.innFrameSize}`);
+      console.log(`this.innFrameSizeValue=${this.innFrameSizeValue}`);
     }
-    if (isModifyLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      // Determine new parameter values that depend on: innExterior, innFrameSizeValue.
-      // # remove to GrnFrameSize
-      // # this.settingBorderRadius(this.hostRef, this.getBorderRadius(this.innFrameSizeValue)); // #
-      // # this.labelPadding = this.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
-      // # this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
-
-      if (this.lineHeight != null) {
-        // Determine new parameter values that depend on: innExterior, innFrameSizeValue, lineHeight.
-        this.settingLabelPaddingVer(this.hostRef, this.paddingVer(this.innExterior, this.innFrameSizeValue, this.lineHeight));
-      }
+    if (this.sizeDir && isExterior) {
+      console.log('sizeDir.modifyProperties();');
+      this.sizeDir.modifyProperties();
     }
     if (changes.isDisabled) {
-      this.innIsDisabled = this.isDisabled === '' || this.isDisabled === 'true';
-      this.settingIsDisabled(this.buttonElementRef, this.innIsDisabled);
+      this.innIsDisabled = this.isDisabled === '' || this.isDisabled === 'true'; // +
+      this.settingIsDisabled(this.buttonElementRef, this.innIsDisabled); // +
     }
   }
 
   ngOnInit(): void {
-    let isModifyLabelPadding = false;
-    if (this.innExterior === null) {
+    if (!this.innExterior) {
       this.innExterior = ButtonExteriorUtil.create(this.currConfig.exterior || null);
+      console.log(`@@this.innExterior=${this.innExterior}`);
       this.settingExterior(this.hostRef, this.innExterior);
-      this.innRippleColor = this.getRippleColor(this.innExterior);
-      isModifyLabelPadding = true;
+    }
+    if (!this.innFrameSize) {
+      this.innFrameSize = FrameSizeUtil.create(this.currConfig.frameSize || FrameSize.small);
+      console.log(`@@this.innFrameSize=${this.innFrameSize}`);
     }
     if (this.innFrameSizeValue === 0) {
-      this.innFrameSizeValue = this.createFrameSize(this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
-      isModifyLabelPadding = true;
-    }
-    if (isModifyLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      // # this.settingBorderRadius(this.hostRef, this.getBorderRadius(this.innFrameSizeValue));
-      // # this.labelPadding = this.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
-      // # this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
+      this.innFrameSizeValue = FrameSizeUtil.getValue(this.innFrameSize || this.currConfig.frameSizeValue) || 0;
+      console.log(`@@this.innFrameSizeValue=${this.innFrameSizeValue}`);
     }
   }
 
   ngAfterContentInit(): void {
-    // Get the line height from the style set.
-    const lineHeightPx = getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height');
-    this.lineHeight = Number(lineHeightPx.replace('px', ''));
-    console.log('lineHeightPx=', lineHeightPx);
     // // Get the width of the ornament block.
     // this.ornamentLfWidth = this.grnOrnamentLf?.nativeElement.offsetWidth || null;
     // this.ornamentRgWidth = this.grnOrnamentRg?.nativeElement.offsetWidth || null;
     // this.settingOrnamentLf(this.hostRef, this.ornamentLfWidth);
-    // Determine new parameter values that depend on: innExterior, innFrameSizeValue, lineHeight.
-    this.settingLabelPaddingVer(this.hostRef, this.paddingVer(this.innExterior, this.innFrameSizeValue, this.lineHeight));
 
     this.settingLink(this.linkElement?.templateRef);
-    console.log('ngAfterContentInit(); buttonSizeDir != null - ', this.buttonSizeDir != null);
-  }
-
-  ngAfterViewInit(): void {
-    console.log('ngAfterViewInit(); buttonSizeDir != null - ', this.buttonSizeDir != null);
   }
 
   // ** Public API **
-
   public doClick(event: MouseEvent): void {
     if (!!event && !event.cancelBubble) {
       if (this.linkElement && this.touchRipple) {
@@ -184,61 +169,53 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, 
       this.clickData.emit(event);
     }
   }
-
   public focus(): void {
     if (isPlatformBrowser(this.platformId) && !!this.buttonElementRef) {
       this.buttonElementRef.nativeElement.focus();
     }
   }
-
   public doFocus(): void {
     this.settingFocused(this.hostRef, (this.isFocused = true));
   }
-
   public doBlur(): void {
     this.settingFocused(this.hostRef, (this.isFocused = false));
   }
-
-  // ** Private API **
-
-  private getRippleColor(exterior: ButtonExterior | null): string | null {
-    return ButtonExteriorUtil.isText(exterior) || ButtonExteriorUtil.isOutlined(exterior) ? 'rgba(25, 118, 210, 0.3)' : null;
-  }
-  // Get left/right padding for the GrnFrameInpu element.
-  // # remove to GrnFrameSize
-  // private paddingLfRg(exterior: ButtonExterior, frameSizeVal: number, configLabelPd: number | undefined): number | null {
-  //   let result: number | null = configLabelPd || null;
-  //   if (frameSizeVal > 0 && (!result || result <= 0)) {
-  //     if (exterior === ButtonExterior.contained) {
-  //       result = Math.round(100 * 0.3636 * frameSizeVal) / 100; // 16px
-  //     } else if (exterior === ButtonExterior.outlined) {
-  //       result = Math.round(100 * 0.3409 * frameSizeVal) / 100; // 15px
-  //     } else if (exterior === ButtonExterior.text) {
-  //       result = Math.round(100 * 0.2045 * frameSizeVal) / 100; // 9px
-  //     }
-  //   }
-  //   return result;
-  // }
-  private paddingVer(exterior: ButtonExterior | null, frameSize: number, lineHeight: number): number | null {
-    let result: number | null = null;
-    if (exterior != null && frameSize > 0 && lineHeight > 0) {
-      result = (frameSize - lineHeight) / 2;
+  // ** Methods for interacting with GrnSizeDirective. **
+  public getSizeBorderRadius: GrnFrameSizeValue = (frameSizeValue: number): number => {
+    const borderRadiusRatio = 0.1;
+    return frameSizeValue > 0 ? Math.round(100 * borderRadiusRatio * frameSizeValue) / 100 : 0;
+  };
+  public getSizePaddingHor: GrnFrameSizeValue = (frameSizeValue: number): number => {
+    let result = this.currConfig.labelPd || 0;
+    const exterior = this.innExterior;
+    if (frameSizeValue > 0 && result <= 0 && exterior) {
+      let ratioValue = 0.2045;
+      if (exterior === ButtonExterior.contained) {
+        ratioValue = 0.3636;
+      } else if (exterior === ButtonExterior.outlined) {
+        ratioValue = 0.3409;
+      }
+      result = Math.round(100 * ratioValue * frameSizeValue) / 100;
+    }
+    // console.log(`getSizePaddingHor(frameSizeValue:${frameSizeValue})=${result} labelPd=${this.currConfig.labelPd}`);
+    return result;
+  };
+  public getSizePaddingVer: GrnFrameSizeValueAndLineHeight = (frameSizeValue: number, lineHeight: number): number => {
+    let result = 0;
+    const exterior = this.innExterior;
+    if (frameSizeValue > 0 && lineHeight > 0 && exterior) {
+      result = (frameSizeValue - lineHeight) / 2;
       if (exterior === ButtonExterior.outlined) {
         result--;
       }
     }
+    // console.log(`getSizePaddingVer(frameSizeValue:${frameSizeValue})=${result} lineHeight=${lineHeight}`);
     return result;
-  }
-  // # remove to GrnFrameSize
-  // private getBorderRadius(frameSizeValue: number): string | null {
-  //   let result: string | null = null;
-  //   if (frameSizeValue > 0) {
-  //     result = Math.round(100 * (frameSizeValue / 10)) / 100 + 'px';
-  //   }
-  //   return result;
-  // }
+  };
 
-  private settingExterior(elem: ElementRef<HTMLElement> | undefined, exterior: ButtonExterior | null): void {
+  // ** Private API **
+
+  private settingExterior(elem: ElementRef<HTMLElement> | undefined, exterior: ButtonExterior | undefined): void {
     HtmlElemUtil.setClass(this.renderer, elem, 'gb-text', ButtonExteriorUtil.isText(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-t', ButtonExteriorUtil.isText(exterior) ? '' : null);
     HtmlElemUtil.setClass(this.renderer, elem, 'gb-contained', ButtonExteriorUtil.isContained(exterior));
@@ -246,27 +223,6 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit, 
     HtmlElemUtil.setClass(this.renderer, elem, 'gb-outlined', ButtonExteriorUtil.isOutlined(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', ButtonExteriorUtil.isOutlined(exterior) ? '' : null);
   }
-  // # remove to GrnFrameSize
-  private createFrameSize(frameSizeInp: FrameSize | null, frameSizeValueInp?: number): number {
-    const frameSize: FrameSize = FrameSizeUtil.convert((frameSizeInp || '').toString()) || FrameSize.small;
-    let frameSizeValue = FrameSizeUtil.getValue(frameSize) || 0;
-    if (frameSizeInp === null && frameSizeValueInp && frameSizeValueInp > 0) {
-      frameSizeValue = frameSizeValueInp;
-    }
-    return frameSizeValue;
-  }
-  // # remove to GrnFrameSize
-  // private settingLabelPaddingHor(elem: ElementRef<HTMLElement> | undefined, labelPadding: number | null): void {
-  //   HtmlElemUtil.setProperty(elem, '--lbl-pd-hor', NumberUtil.str(labelPadding)?.concat('px'));
-  // }
-
-  private settingLabelPaddingVer(elem: ElementRef<HTMLElement> | undefined, labelPadding: number | null): void {
-    HtmlElemUtil.setProperty(elem, '--lbl-pd-ver', NumberUtil.str(labelPadding)?.concat('px'));
-  }
-  // # remove to GrnFrameSize
-  // private settingBorderRadius(elem: ElementRef<HTMLElement> | undefined, borderRadius: string | null): void {
-  //   HtmlElemUtil.setProperty(elem, '--br-rd', borderRadius);
-  // }
 
   private settingIsDisabled(elem: ElementRef<HTMLElement> | undefined, isDisabled: boolean): void {
     HtmlElemUtil.setAttr(this.renderer, elem, 'disabled', isDisabled ? '' : null);

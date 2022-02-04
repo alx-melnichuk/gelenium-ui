@@ -104,14 +104,25 @@
   </div>
 </div>
 
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      [(ngModel)]="isFrameSize"> isFrameSize
+  </label>
+  <label>
+    <input type="checkbox"
+      [(ngModel)]="isConfig"> isConfig
+  </label>
+</section>
+
 <div class="app-group">
   <div class="app-elem">
     <div>
       <small><em>"Wide" height: 56px; font-size: 16px;</em></small>
     </div>
-    <grn-button [exterior]="exterior03"
-      frameSize9="wide"
-      config9="config">
+    <grn-button exterior9="exterior03"
+      frameSize9="isFrameSize ? 'wide': undefined"
+      [config]="isConfig ? config : undefined">
       <span>{{ getLabel(exterior03) }}</span>
     </grn-button>
   </div>

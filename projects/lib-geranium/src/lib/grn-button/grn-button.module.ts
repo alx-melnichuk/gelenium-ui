@@ -4,12 +4,12 @@ import { CommonModule } from '@angular/common';
 import { GrnTouchRippleModule } from '../grn-touch-ripple/grn-touch-ripple.module';
 
 import { GrnButtonComponent } from './grn-button.component';
-import { GrnButtonSizeDirective } from './grn-button-size.directive';
+import { GrnSizeDirective } from './grn-size.directive';
 import { GrnLinkDirective } from './grn-link.directive';
 
 @NgModule({
-  declarations: [GrnButtonComponent, GrnLinkDirective, GrnButtonSizeDirective],
+  declarations: [GrnButtonComponent, GrnLinkDirective, GrnSizeDirective],
   imports: [CommonModule, GrnTouchRippleModule],
-  exports: [GrnButtonComponent, GrnLinkDirective, GrnButtonSizeDirective],
+  exports: [GrnButtonComponent, GrnLinkDirective, GrnSizeDirective],
 })
 export class GrnButtonModule {}

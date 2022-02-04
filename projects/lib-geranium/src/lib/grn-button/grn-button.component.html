@@ -1,10 +1,11 @@
 <ng-container *ngIf="!linkElement; else elseBlockLink">
   <button #buttonElement
-    [grnButtonSize]="frameSize2 || currConfig.frameSize"
-    [grnButtonSizeValue]="currConfig.frameSizeValue"
-    [grnButtonSizeLabelPd]="currConfig.labelPd"
-    [grnButtonSizeExterior]="exterior2 || this.currConfig.exterior"
-    #buttonSize=grnButtonSize
+    [grnSize]="innFrameSize"
+    [grnSizeValue]="innFrameSizeValue"
+    [grnSizeBorderRadius]="getSizeBorderRadius"
+    [grnSizePaddingHor]="getSizePaddingHor"
+    [grnSizePaddingVer]="getSizePaddingVer"
+    #frameSize=grnSize
     grn-clear
     grn-btn
     type="button"
