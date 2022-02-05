@@ -46,10 +46,8 @@
       // }
     }
     &>span[btn-pd-ver], &>a[btn-pd-ver] {
-      padding-top: var(--gb-lbl-pd-tp, var(--s-lbl-pd-ver, 0.4821em));
-      padding-bottom: var(--gb-lbl-pd-bt, var(--s-lbl-pd-ver, 0.4821em));
-      padding-left: var(--gb-lbl-pd-lf, var(--s-lbl-pd-hor, 1.1428em));
-      padding-right: var(--gb-lbl-pd-rg, var(--s-lbl-pd-hor, 1.1428em));
+      padding-top: var(--gb-lbl-pd-tp, var(--s-lbl-pd-tp, 0.4821em));
+      padding-bottom: var(--gb-lbl-pd-bt, var(--s-lbl-pd-bt, 0.4821em));
     }
     &[dis] {
       cursor: default;
@@ -141,4 +139,19 @@
     width: 100%;
   }
 
+  // ** Additional settings **
+  
+  // Ornament "padding".
+  .gb-ornam-lf {
+    max-height: inherit;
+  }
+  .gb-ornam-rg {
+    order: 1;
+  }
+  .gb-ornam-lf:empty~.gb-elem-pd-hor {
+    padding-left: var(--gb-lbl-pd-lf, var(--s-lbl-pd-lf, 1.1428em));
+  }
+  .gb-ornam-rg:empty~.gb-elem-pd-hor {
+    padding-right: var(--gb-lbl-pd-rg, var(--s-lbl-pd-rg, 1.1428em));
+  }
 }

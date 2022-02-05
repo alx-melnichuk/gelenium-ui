@@ -1,23 +1,26 @@
 <ng-container *ngIf="!linkElement; else elseBlockLink">
   <button #buttonElement
-    [grnSize]="innFrameSize"
-    [grnSizeValue]="innFrameSizeValue"
-    [grnSizeBorderRadius]="getSizeBorderRadius"
-    [grnSizePaddingHor]="getSizePaddingHor"
-    [grnSizePaddingVer]="getSizePaddingVer"
-    #frameSize=grnSize
+    class="grn-btn grn-settings"
     grn-clear
     grn-btn
     type="button"
     tabindex="0"
-    class="grn-btn grn-settings"
+    [grnSize]="frameSize2 || currConfig.frameSize"
+    [grnSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
+    [grnSizeModify]="exterior || currConfig.exterior || ('' + currConfig.labelPd)"
+    [grnSizeBorderRadius]="getSizeBorderRadius"
+    [grnSizePaddingHor]="getSizePaddingHor"
+    [grnSizePaddingVer]="getSizePaddingVer"
     [attr.id]="id"
     [attr.disabled]="innIsDisabled ? '' : null"
     [attr.dis]="innIsDisabled ? '' : null"
     (focus)="doFocus()"
     (blur)="doBlur()"
     (click)="doClick($event)">
-    <span btn-pd-ver>
+    <ng-container [ngTemplateOutlet]="templateOrnament">
+    </ng-container>
+    <span btn-pd-ver
+      class="gb-label gb-elem-pd-hor">
       <ng-content></ng-content>
     </span>
     <grn-touch-ripple *ngIf="!innIsDisabled"
@@ -30,8 +33,17 @@
 <ng-template #elseBlockLink>
   <div class="grn-btn grn-settings"
     grn-btn
+    [grnSize]="frameSize2 || currConfig.frameSize"
+    [grnSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
+    [grnSizeModify]="exterior || currConfig.exterior || ('' + currConfig.labelPd)"
+    [grnSizeBorderRadius]="getSizeBorderRadius"
+    [grnSizePaddingHor]="getSizePaddingHor"
+    [grnSizePaddingVer]="getSizePaddingVer"
+    [attr.id]="id"
     [attr.dis]="innIsDisabled ? '' : null"
     (click)="doClick($event)">
+    <ng-container [ngTemplateOutlet]="templateOrnament">
+    </ng-container>
     <ng-content select="a"></ng-content>
     <grn-touch-ripple *ngIf="!innIsDisabled"
       skip-events
@@ -40,4 +52,14 @@
       [attr.ext-o]="isOutlined ? '' : null">
     </grn-touch-ripple>
   </div>
+</ng-template>
+
+
+<ng-template #templateOrnament>
+  <span class="gb-ornam-lf">
+    <ng-content select="[grnOrnamentLf]"></ng-content>
+  </span>
+  <span class="gb-ornam-rg">
+    <ng-content select="[grnOrnamentRg]"></ng-content>
+  </span>
 </ng-template>

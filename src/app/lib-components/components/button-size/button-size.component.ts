@@ -36,19 +36,13 @@ export class ButtonSizeComponent {
   @Input()
   public labelText = BTN_TEXT;
 
-  public exterior03 = 'contained';
+  public exterior03 = 'outlined';
   public routerLink = '/components/button';
-
-  // -- demo =V
-  public isFrameSize = false;
-  public isConfig = false;
-  public config: GrnButtonConfig = {
-    // exterior: ButtonExterior.outlined, // exterior?: ButtonExterior;
-    frameSize: FrameSize.small, // frameSize?: FrameSize; middle
-    // frameSizeValue: 57, // frameSizeValue?: number;
-    // labelPd: 14.9, // labelPd?: number; // px
+  public fragment = 'button-size';
+  // GrnFrameInputConfig
+  public config03 = {
+    frameSizeValue: 57,
   };
-  // -- demo =A
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
