@@ -32,11 +32,12 @@
 </section>
 
 <section mr-vr>
-  <input type="checkbox"
-    id="isDisabled"
-    [(ngModel)]="isDisabled01"
-    (change)="changeIsDisabled()">
-  <label for="isDisabled"> Is disabled</label><br>
+  <label>
+    <input type="checkbox"
+      [(ngModel)]="isDisabled01"
+      (change)="changeIsDisabled()" />
+    Is disabled
+  </label>
 </section>
 
 <form [formGroup]="formGroup01"

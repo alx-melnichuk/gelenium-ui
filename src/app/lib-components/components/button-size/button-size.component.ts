@@ -39,13 +39,10 @@ export class ButtonSizeComponent {
   public exterior03 = 'outlined';
   public routerLink = '/components/button';
   public fragment = 'button-size';
-  // GrnFrameInputConfig
+  // GrnButtonConfig
   public config03 = {
     frameSizeValue: 57,
   };
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
-
   public getLabel(exterior: string): string {
     return exterior ? exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   }

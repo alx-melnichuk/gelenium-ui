@@ -3,19 +3,10 @@
 app-frame-input-border-radius {
   display: block;
 
-  .fibr-border-radius-marks {
-    margin-left: 15px;
-    height: 5px;
-  }
-
   .fibr-slider-box {
     width: 46ch;
     display: flex;
     align-items: center;
-  }
-  .fibr-slider {
-    flex-grow: 1;
-    margin-left: 7px;
   }
   .fibr-slider-value {
     width: 25px;
@@ -23,6 +14,11 @@ app-frame-input-border-radius {
     text-align: center;
     color: #3f51b5;
   }
+  .fibr-border-radius-marks {
+    margin-left: 15px;
+    height: 5px;
+  }
+
   .fibr-large {
     font-size: 18px;
   }

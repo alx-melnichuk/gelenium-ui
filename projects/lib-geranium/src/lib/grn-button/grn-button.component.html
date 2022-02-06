@@ -7,7 +7,7 @@
     tabindex="0"
     [grnSize]="frameSize2 || currConfig.frameSize"
     [grnSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
-    [grnSizeModify]="exterior || currConfig.exterior || ('' + currConfig.labelPd)"
+    [grnSizeModify]="exterior + ' ' + currConfig.exterior + ' ' + currConfig.labelPd"
     [grnSizeBorderRadius]="getSizeBorderRadius"
     [grnSizePaddingHor]="getSizePaddingHor"
     [grnSizePaddingVer]="getSizePaddingVer"
@@ -35,7 +35,7 @@
     grn-btn
     [grnSize]="frameSize2 || currConfig.frameSize"
     [grnSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
-    [grnSizeModify]="exterior || currConfig.exterior || ('' + currConfig.labelPd)"
+    [grnSizeModify]="exterior + ' ' + currConfig.exterior + ' ' + currConfig.labelPd"
     [grnSizeBorderRadius]="getSizeBorderRadius"
     [grnSizePaddingHor]="getSizePaddingHor"
     [grnSizePaddingVer]="getSizePaddingVer"
@@ -56,10 +56,10 @@
 
 
 <ng-template #templateOrnament>
-  <span class="gb-ornam-lf">
-    <ng-content select="[grnOrnamentLf]"></ng-content>
-  </span>
-  <span class="gb-ornam-rg">
-    <ng-content select="[grnOrnamentRg]"></ng-content>
-  </span>
+  <i orn-lf>
+    <ng-content select="[grn-orn-lf]"></ng-content>
+  </i>
+  <i orn-rg>
+    <ng-content select="[grn-orn-rg]"></ng-content>
+  </i>
 </ng-template>
