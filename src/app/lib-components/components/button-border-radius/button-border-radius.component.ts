@@ -1,8 +1,8 @@
-import { GrnButtonConfig } from 'projects/lib-geranium/src/lib/interfaces/grn-button-config.interface';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
-import { FrameSize, FrameSizeUtil } from 'projects/lib-geranium/src/public-api';
+import { FrameSize, FrameSizeUtil } from 'projects/lib-geranium/src/lib/interfaces/frame-size.interface';
+import { GrnButtonConfig } from 'projects/lib-geranium/src/lib/interfaces/grn-button-config.interface';
 
 import {
   BTN_CONTAINED,

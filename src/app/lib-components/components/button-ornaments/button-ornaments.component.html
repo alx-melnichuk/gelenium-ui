@@ -1,0 +1,49 @@
+<section mr-vr>
+  <h3>Ornaments for the "button" element.</h3>
+  <p>
+    For the GrnButton component, it is possible to display an ornament
+    (picture or text).
+    It will appear as a prefix or suffix for the button name.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior05a">
+    <mat-button-toggle value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "grnOrnamentLf" + text.</em></small>
+    </div>
+    <grn-button [exterior]="exterior05a"
+      noUppercase>
+      <span grn-orn-lf
+        class="bo-icon bo-icon-add">+</span>
+      <span>Add new value</span>
+    </grn-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "grnOrnamentRg" + text.</em></small>
+    </div>
+    <grn-button [exterior]="exterior05a"
+      noUppercase>
+      <span grn-orn-rg
+        class="io-pd-hor">~</span>
+      <span>Edit current value</span>
+    </grn-button>
+  </div>
+</div>
+
+
+<!--      <a [routerLink]="[routerLink]"
+        [fragment]="fragment">
+        <span>{{ getLabel(exterior04a) }} Link</span>
+-->

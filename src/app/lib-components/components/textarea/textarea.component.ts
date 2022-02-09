@@ -15,7 +15,14 @@ export class TextareaComponent implements AfterViewInit {
   public showNum = '';
   public urlFrameInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME_INPUT');
 
+  constructor() {
+    // eslint-disable-next-line no-restricted-syntax
+    console.time('TextareaComponent');
+  }
+
   ngAfterViewInit(): void {
+    // eslint-disable-next-line no-restricted-syntax
+    console.timeEnd('TextareaComponent');
     Promise.resolve().then(() => {
       ScrollAfterRoutingUtil.scrollByFragmentFromPath();
     });
