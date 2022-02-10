@@ -1,4 +1,5 @@
-<section mr-vr>
+<section mr-vr
+  [attr.id]="fragment">
   <h3>Ornaments for the "button" element.</h3>
   <p>
     For the GrnButton component, it is possible to display an ornament
@@ -17,33 +18,93 @@
 </section>
 
 <div class="app-group">
+
   <div class="app-elem">
     <div>
-      <small><em>Section: "grnOrnamentLf" + text.</em></small>
+      <small><em>Section: "grn-orn-lf" + svg.</em></small>
     </div>
     <grn-button [exterior]="exterior05a"
       noUppercase>
-      <span grn-orn-lf
-        class="bo-icon bo-icon-add">+</span>
-      <span>Add new value</span>
+      <i grn-orn-lf
+        class="bo-icon">
+        <svg>
+          <use
+            href="/assets/icons/lib-components/button-ornaments/icon-circle-left.svg#arrow-circle-down"
+            height="24"
+            width="24"></use>
+        </svg>
+      </i>
+      <span>Previous value</span>
     </grn-button>
   </div>
 
   <div class="app-elem">
     <div>
-      <small><em>Section: "grnOrnamentRg" + text.</em></small>
+      <small><em>Section: "grn-orn-rg" + svg.</em></small>
     </div>
     <grn-button [exterior]="exterior05a"
       noUppercase>
-      <span grn-orn-rg
-        class="io-pd-hor">~</span>
-      <span>Edit current value</span>
+      <span>Next value</span>
+      <div grn-orn-rg
+        class="bo-icon">
+        <svg>
+          <use
+            href="/assets/icons/lib-components/button-ornaments/icon-circle-right.svg#arrow-circle-down"
+            height="24"
+            width="24"></use>
+        </svg>
+      </div>
     </grn-button>
   </div>
+
 </div>
 
+<div class="app-group">
 
-<!--      <a [routerLink]="[routerLink]"
-        [fragment]="fragment">
-        <span>{{ getLabel(exterior04a) }} Link</span>
--->
+  <div class="app-elem">
+    <div>
+      <small><em>Section: Link "grn-orn-lf" + svg.</em></small>
+    </div>
+    <grn-button [exterior]="exterior05a"
+      noUppercase>
+      <i grn-orn-lf></i>
+      <a [routerLink]="[routerLink]"
+        [fragment]="fragment"
+        class="bo-link">
+        <i class="bo-icon">
+          <svg>
+            <use
+              href="/assets/icons/lib-components/button-ornaments/icon-circle-left.svg#arrow-circle-down"
+              height="24"
+              width="24"></use>
+          </svg>
+        </i>
+        <span>Previous page Link</span>
+      </a>
+    </grn-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: Link "grn-orn-rg" + svg.</em></small>
+    </div>
+    <grn-button [exterior]="exterior05a"
+      noUppercase>
+      <a [routerLink]="[routerLink]"
+        [fragment]="fragment"
+        class="bo-link">
+        <span>Next page Link</span>
+        <i class="bo-icon">
+          <svg>
+            <use
+              href="/assets/icons/lib-components/button-ornaments/icon-circle-right.svg#arrow-circle-down"
+              height="24"
+              width="24"></use>
+          </svg>
+        </i>
+      </a>
+      <i grn-orn-rg></i>
+    </grn-button>
+  </div>
+
+</div>

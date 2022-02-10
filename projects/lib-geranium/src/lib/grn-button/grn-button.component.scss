@@ -159,6 +159,7 @@
     &>i[orn-lf], &>i[orn-rg] {
       max-height: inherit;
       font-style: normal;
+      display: inline-flex;
     }
     &>i[orn-rg] {
       order: 1;
