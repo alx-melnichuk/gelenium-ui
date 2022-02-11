@@ -141,20 +141,6 @@
 
   // ** Additional settings **
   
-  // Ornament "padding".
-  /*.gb-ornam-lf {
-    max-height: inherit;
-  }
-  .gb-ornam-rg {
-    order: 1;
-  }
-  .gb-ornam-lf:empty~.gb-elem-pd-hor {
-    padding-left: var(--gb-lbl-pd-lf, var(--s-lbl-pd-lf, 1.1428em));
-  }
-  .gb-ornam-rg:empty~.gb-elem-pd-hor {
-    padding-right: var(--gb-lbl-pd-rg, var(--s-lbl-pd-rg, 1.1428em));
-  }*/
-
   &>.grn-btn {
     &>i[orn-lf], &>i[orn-rg] {
       max-height: inherit;

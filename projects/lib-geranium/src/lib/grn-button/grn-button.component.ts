@@ -5,14 +5,12 @@ import {
   Component,
   ContentChild,
   ElementRef,
-  EventEmitter,
   Inject,
   InjectionToken,
   Input,
   OnChanges,
   OnInit,
   Optional,
-  Output,
   PLATFORM_ID,
   Renderer2,
   SimpleChanges,
@@ -58,9 +56,6 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   public frameSize: string | undefined; // FrameSizeType
   @Input()
   public isDisabled: string | undefined; // +
-
-  @Output()
-  readonly clickData: EventEmitter<Event> = new EventEmitter();
 
   @ViewChild('buttonElement')
   public buttonElementRef: ElementRef<HTMLElement> | undefined;
@@ -149,11 +144,8 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
 
   // ** Public API **
   public doClick(event: MouseEvent): void {
-    if (!!event && !event.cancelBubble) {
-      if (this.linkElement && this.touchRipple) {
-        this.touchRipple.touchRipple(event);
-      }
-      this.clickData.emit(event);
+    if (!!event && !event.cancelBubble && this.linkElement && this.touchRipple) {
+      this.touchRipple.touchRipple(event);
     }
   }
   public focus(): void {

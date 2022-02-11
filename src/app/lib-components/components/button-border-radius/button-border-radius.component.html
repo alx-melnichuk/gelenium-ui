@@ -1,5 +1,4 @@
-<section mr-vr
-  [attr.id]="fragment">
+<section mr-vr>
   <h3>Border radius.</h3>
   <p>
     The GrnButton component has the ability to change the "border-radius" css property.
@@ -15,8 +14,9 @@
   </p>
 </section>
 
-<section mr-vr>
-  <span>exterior: </span>
+<section mr-vr
+  [attr.id]="fragment1">
+  <span [attr.id]="fragment2">exterior: </span>
   <mat-button-toggle-group [(ngModel)]="exterior04a">
     <mat-button-toggle value="contained">{{ labelContained }}</mat-button-toggle>
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
@@ -86,7 +86,7 @@
         ? getConfig(round(getValue(sizeShort) * labelPdRatio)) : undefined"
       [frameSize]="sizeShort">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment">
+        [fragment]="fragment1">
         <span>{{ getLabel(exterior04a) }} Link</span>
       </a>
     </grn-button>
@@ -117,7 +117,7 @@
         ? getConfig(round(getValue(sizeSmall) * labelPdRatio)) : undefined"
       [frameSize]="sizeSmall">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment">
+        [fragment]="fragment2">
         <span>{{ getLabel(exterior04a) }} Link</span>
       </a>
     </grn-button>
@@ -148,7 +148,7 @@
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment">
+        [fragment]="fragment1">
         <span>{{ getLabel(exterior04a) }} Link</span>
       </a>
     </grn-button>
@@ -179,7 +179,7 @@
         ? getConfig(round(getValue(sizeWide) * labelPdRatio)) : undefined"
       [frameSize]="sizeWide">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment">
+        [fragment]="fragment2">
         <span>{{ getLabel(exterior04a) }} Link</span>
       </a>
     </grn-button>
@@ -212,7 +212,7 @@
         ? getConfig(round(getValue(sizeLarge) * labelPdRatio)) : undefined"
       [frameSize]="sizeLarge">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment">
+        [fragment]="fragment1">
         <span>{{ getLabel(exterior04a) }} Link</span>
       </a>
     </grn-button>
@@ -245,7 +245,7 @@
         ? getConfig(round(getValue(sizeHuge) * labelPdRatio)) : undefined"
       [frameSize]="sizeHuge">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment">
+        [fragment]="fragment2">
         <span>{{ getLabel(exterior04a) }} Link</span>
       </a>
     </grn-button>
@@ -286,7 +286,7 @@
         ? getConfig(round(getValue(sizeShort) * labelPdRatio)) : undefined"
       [frameSize]="sizeShort"&gt;
       &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment"&gt;
+        [fragment]="fragment1"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
     &lt;/grn-button&gt;
@@ -317,7 +317,7 @@
         ? getConfig(round(getValue(sizeSmall) * labelPdRatio)) : undefined"
       [frameSize]="sizeSmall"&gt;
       &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment"&gt;
+        [fragment]="fragment2"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
     &lt;/grn-button&gt;
@@ -348,7 +348,7 @@
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle"&gt;
       &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment"&gt;
+        [fragment]="fragment1"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
     &lt;/grn-button&gt;
@@ -379,7 +379,7 @@
         ? getConfig(round(getValue(sizeWide) * labelPdRatio)) : undefined"
       [frameSize]="sizeWide"&gt;
       &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment"&gt;
+        [fragment]="fragment2"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
     &lt;/grn-button&gt;
@@ -412,7 +412,7 @@
         ? getConfig(round(getValue(sizeLarge) * labelPdRatio)) : undefined"
       [frameSize]="sizeLarge"&gt;
       &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment"&gt;
+        [fragment]="fragment1"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
     &lt;/grn-button&gt;
@@ -445,7 +445,7 @@
         ? getConfig(round(getValue(sizeHuge) * labelPdRatio)) : undefined"
       [frameSize]="sizeHuge"&gt;
       &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment"&gt;
+        [fragment]="fragment2"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
     &lt;/grn-button&gt;
@@ -467,7 +467,8 @@ import &#123;
 export class ButtonComponent &#123;
   public exterior04a = 'outlined';
   public routerLink = '/components/button';
-  public fragment = 'button-button-size';
+  public fragment1 = 'border-radius1';
+  public fragment2 = 'border-radius2';
   public borderRadius = 50;
   public propRadius = '--gb-br-rd';
   public isAddPadding04a = true;
@@ -530,8 +531,9 @@ export class ButtonComponent &#123;
   </p>
 </section>
 
-<section mr-vr>
-  <span>exterior: </span>
+<section mr-vr
+  [attr.id]="fragment3">
+  <span [attr.id]="fragment4">exterior: </span>
   <mat-button-toggle-group [(ngModel)]="exterior04b">
     <mat-button-toggle value="contained">{{ labelContained }}</mat-button-toggle>
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
@@ -579,7 +581,7 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment">
+        [fragment]="fragment3">
         <span>{{ 'A - ' + getLabel(exterior04b) }} Link</span>
       </a>
     </grn-button>
@@ -611,7 +613,7 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment">
+        [fragment]="fragment4">
         <span>{{ 'B - ' + getLabel(exterior04b) }} Link</span>
       </a>
     </grn-button>
@@ -643,7 +645,7 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment">
+        [fragment]="fragment3">
         <span>{{ 'C - ' + getLabel(exterior04b) }} Link</span>
       </a>
     </grn-button>
@@ -675,7 +677,7 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment">
+        [fragment]="fragment4">
         <span>{{ 'D - ' + getLabel(exterior04b) }} Link</span>
       </a>
     </grn-button>
@@ -704,7 +706,7 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment">
+        [fragment]="fragment3">
         <span>{{ 'E - ' + getLabel(exterior04b) }} Link</span>
       </a>
     </grn-button>
@@ -752,7 +754,7 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle"&gt;
       &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment"&gt;
+        [fragment]="fragment3"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; 'A - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
     &lt;/grn-button&gt;
@@ -784,7 +786,7 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle"&gt;
       &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment"&gt;
+        [fragment]="fragment4"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; 'B - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
     &lt;/grn-button&gt;
@@ -816,7 +818,7 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle"&gt;
       &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment"&gt;
+        [fragment]="fragment3"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; 'C - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
     &lt;/grn-button&gt;
@@ -848,7 +850,7 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle"&gt;
       &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment"&gt;
+        [fragment]="fragment4"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; 'D - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
     &lt;/grn-button&gt;
@@ -877,7 +879,7 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle"&gt;
       &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment"&gt;
+        [fragment]="fragment3"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; 'E - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
     &lt;/grn-button&gt;
@@ -899,7 +901,8 @@ import &#123;
 export class ButtonComponent &#123;
   public exterior04b = 'outlined';
   public routerLink = '/components/button';
-  public fragment = 'button-button-size';
+  public fragment3 = 'border-radius3';
+  public fragment4 = 'border-radius4';
   public propRadius = '--gb-br-rd';
   public isAddPadding04b = true;
   public radiusRatio = 0.3;

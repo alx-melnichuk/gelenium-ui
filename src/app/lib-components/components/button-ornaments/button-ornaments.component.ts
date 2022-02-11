@@ -38,10 +38,17 @@ export class ButtonOrnamentsComponent {
   public labelText = BTN_TEXT;
 
   public exterior05a = 'outlined';
-  public routerLink = '/components/button';
-  public fragment = 'button-ornaments';
+  public exterior05b = 'outlined';
+  public exterior05c = 'outlined';
+  public exterior05d = 'outlined';
+  public exterior05e = 'outlined';
+  public exterior05f = 'outlined';
 
-  public getLabel(exterior: string): string {
-    return exterior ? exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
-  }
+  public routerLink = '/components/button';
+  public fragment1 = 'ornaments-link1';
+  public fragment2 = 'ornaments-link2';
+  public fragment3 = 'ornaments-link3';
+  public fragment4 = 'ornaments-link4';
+  public fragment5 = 'ornaments-link5';
+  public fragment6 = 'ornaments-link6';
 }

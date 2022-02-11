@@ -38,7 +38,8 @@ export class ButtonSizeComponent {
 
   public exterior03 = 'outlined';
   public routerLink = '/components/button';
-  public fragment = 'button-size';
+  public fragment1 = 'size1';
+  public fragment2 = 'size2';
   // GrnButtonConfig
   public config03 = {
     frameSizeValue: 57,

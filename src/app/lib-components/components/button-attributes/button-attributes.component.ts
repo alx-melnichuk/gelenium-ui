@@ -35,7 +35,8 @@ export class ButtonAttributesComponent {
 
   public exterior02 = 'contained';
   public routerLink = '/components/button';
-  public fragment = 'attribute-button';
+  public fragment1 = 'attribute1';
+  public fragment2 = 'attribute2';
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

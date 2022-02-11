@@ -20,4 +20,7 @@ export class ButtonBasicComponent {
   public labelCss = LABEL_CSS;
 
   public routerLink = '/components/button';
+  public fragment1 = 'basic1';
+  public fragment2 = 'basic2';
+  public fragment3 = 'basic3';
 }

@@ -15,8 +15,7 @@
     [attr.disabled]="innIsDisabled ? '' : null"
     [attr.dis]="innIsDisabled ? '' : null"
     (focus)="doFocus()"
-    (blur)="doBlur()"
-    (click)="doClick($event)">
+    (blur)="doBlur()">
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
     <span btn-pd-ver

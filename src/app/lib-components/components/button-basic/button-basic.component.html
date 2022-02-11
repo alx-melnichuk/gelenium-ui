@@ -100,7 +100,7 @@ export class ButtonComponent &#123;
 
 
 <section mr-vr
-  id="contained-button">
+  [attr.id]="fragment1">
   <h4>Button with "contained" exterior.</h4>
   <p>
     Buttons with the "contained" exterior are for important primary actions.
@@ -120,7 +120,7 @@ export class ButtonComponent &#123;
 
   <grn-button exterior="contained">
     <a [routerLink]="[routerLink]"
-      [fragment]="'contained-button'">
+      [fragment]="fragment1">
       Link
     </a>
   </grn-button>
@@ -128,7 +128,7 @@ export class ButtonComponent &#123;
   <grn-button exterior="contained"
     isDisabled>
     <a [routerLink]="[routerLink]"
-      [fragment]="'contained-button'">
+      [fragment]="fragment1">
       Link Disabled
     </a>
   </grn-button>
@@ -157,7 +157,7 @@ export class ButtonComponent &#123;
 
   &lt;grn-button exterior="contained"&gt;
     &lt;a [routerLink]="[routerLink]"
-      [fragment]="'contained-button'"&gt;
+      [fragment]="fragment1"&gt;
       Link
     &lt;/a&gt;
   &lt;/grn-button&gt;
@@ -165,7 +165,7 @@ export class ButtonComponent &#123;
   &lt;grn-button exterior="contained"
     isDisabled&gt;
     &lt;a [routerLink]="[routerLink]"
-      [fragment]="'contained-button'"&gt;
+      [fragment]="fragment1"&gt;
       Link Disabled
     &lt;/a&gt;
   &lt;/grn-button&gt;
@@ -186,6 +186,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public routerLink = '/components/button';
+  public fragment1 = 'basic1';
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -208,7 +209,7 @@ export class ButtonComponent &#123;
 
 
 <section mr-vr
-  id="outlined-button">
+  [attr.id]="fragment2">
   <h4>Button with "outlined" exterior.</h4>
   <p>
     Buttons with the "outlined" exterior are for important secondary actions.
@@ -228,7 +229,7 @@ export class ButtonComponent &#123;
 
   <grn-button exterior="outlined">
     <a [routerLink]="[routerLink]"
-      [fragment]="'outlined-button'">
+      [fragment]="fragment2">
       Link
     </a>
   </grn-button>
@@ -236,7 +237,7 @@ export class ButtonComponent &#123;
   <grn-button exterior="outlined"
     isDisabled>
     <a [routerLink]="[routerLink]"
-      [fragment]="'outlined-button'">
+      [fragment]="fragment2">
       Link Disabled
     </a>
   </grn-button>
@@ -265,7 +266,7 @@ export class ButtonComponent &#123;
 
   &lt;grn-button exterior="outlined"&gt;
     &lt;a [routerLink]="[routerLink]"
-      [fragment]="'outlined-button'"&gt;
+      [fragment]="fragment2"&gt;
       Link
     &lt;/a&gt;
   &lt;/grn-button&gt;
@@ -273,7 +274,7 @@ export class ButtonComponent &#123;
   &lt;grn-button exterior="outlined"
     isDisabled&gt;
     &lt;a [routerLink]="[routerLink]"
-      [fragment]="'outlined-button'"&gt;
+      [fragment]="fragment2"&gt;
       Link Disabled
     &lt;/a&gt;
   &lt;/grn-button&gt;
@@ -294,6 +295,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public routerLink = '/components/button';
+  public fragment2 = 'basic2';
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -316,7 +318,7 @@ export class ButtonComponent &#123;
 
 
 <section mr-vr
-  id="text-button">
+  [attr.id]="fragment3">
   <div>
     <h4>Button with "text" exterior.</h4>
     <p>
@@ -338,7 +340,7 @@ export class ButtonComponent &#123;
 
   <grn-button exterior="text">
     <a [routerLink]="[routerLink]"
-      [fragment]="'text-button'">
+      [fragment]="fragment3">
       Link
     </a>
   </grn-button>
@@ -346,7 +348,7 @@ export class ButtonComponent &#123;
   <grn-button exterior="text"
     isDisabled>
     <a [routerLink]="[routerLink]"
-      [fragment]="'text-button'">
+      [fragment]="fragment3">
       Link Disabled
     </a>
   </grn-button>
@@ -376,7 +378,7 @@ export class ButtonComponent &#123;
 
   &lt;grn-button exterior="text"&gt;
     &lt;a [routerLink]="[routerLink]"
-      [fragment]="'text-button'"&gt;
+      [fragment]="fragment3"&gt;
       Link
     &lt;/a&gt;
   &lt;/grn-button&gt;
@@ -384,7 +386,7 @@ export class ButtonComponent &#123;
   &lt;grn-button exterior="text"
     isDisabled&gt;
     &lt;a [routerLink]="[routerLink]"
-      [fragment]="'text-button'"&gt;
+      [fragment]="fragment3"&gt;
       Link Disabled
     &lt;/a&gt;
   &lt;/grn-button&gt;
@@ -405,6 +407,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public routerLink = '/components/button';
+  public fragment3 = 'basic3';
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
