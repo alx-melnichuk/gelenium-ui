@@ -1,7 +1,4 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
-import { ButtonExterior } from 'projects/lib-geranium/src/lib/interfaces/button-exterior.interface';
-import { FrameSize } from 'projects/lib-geranium/src/lib/interfaces/frame-size.interface';
-import { GrnButtonConfig } from 'projects/lib-geranium/src/lib/interfaces/grn-button-config.interface';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 import {
   BTN_CONTAINED,
@@ -36,10 +33,18 @@ export class ButtonSizeComponent {
   @Input()
   public labelText = BTN_TEXT;
 
-  public exterior03 = 'outlined';
+  public exterior03a = 'outlined';
+  public exterior03b = 'outlined';
   public routerLink = '/components/button';
-  public fragment1 = 'size1';
-  public fragment2 = 'size2';
+  public fragment03a = 'size-link3a';
+  public fragment03b = 'size-link3b';
+  public fragment03c = 'size-link3c';
+  public fragment03d = 'size-link3d';
+  public fragment03e = 'size-link3e';
+  public fragment03f = 'size-link3f';
+  public fragment03g = 'size-link3g';
+  public fragment03h = 'size-link3h';
+  public fragment03i = 'size-link3i';
   // GrnButtonConfig
   public config03 = {
     frameSizeValue: 57,

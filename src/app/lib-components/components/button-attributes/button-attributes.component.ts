@@ -33,10 +33,13 @@ export class ButtonAttributesComponent {
   @Input()
   public labelText = BTN_TEXT;
 
-  public exterior02 = 'contained';
+  public exterior02a = 'outlined';
   public routerLink = '/components/button';
-  public fragment1 = 'attribute1';
-  public fragment2 = 'attribute2';
+  public fragment02a = 'attribute-link02a';
+  public fragment02b = 'attribute-link02b';
+  public fragment02c = 'attribute-link02c';
+  public fragment02d = 'attribute-link02d';
+  public fragment02e = 'attribute-link02e';
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

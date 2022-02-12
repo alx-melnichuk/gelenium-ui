@@ -14,9 +14,8 @@
   </p>
 </section>
 
-<section mr-vr
-  [attr.id]="fragment1">
-  <span [attr.id]="fragment2">exterior: </span>
+<section mr-vr>
+  <span>exterior: </span>
   <mat-button-toggle-group [(ngModel)]="exterior04a">
     <mat-button-toggle value="contained">{{ labelContained }}</mat-button-toggle>
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
@@ -62,13 +61,16 @@
 </section>
 
 
+<div class="app-group">
+  <div [attr.id]="fragment04a">
+    <small><em>"Short" height: 38px; font-size: 16px;</em></small>
+  </div>
+</div>
+
 <div class="app-group"
   [attr.style]="safeStyle(propRadius + ':'
     + round(getValue(sizeShort) * borderRadius / 100) + 'px')">
   <div class="app-elem">
-    <div>
-      <small><em>"Short" height: 38px; font-size: 16px;</em></small>
-    </div>
     <grn-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeShort) * labelPdRatio)) : undefined"
@@ -78,182 +80,19 @@
   </div>
 
   <div class="app-elem">
-    <div>
-      <small><em>"Short" height: 38px; font-size: 16px;</em></small>
-    </div>
     <grn-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeShort) * labelPdRatio)) : undefined"
       [frameSize]="sizeShort">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment1">
+        [fragment]="fragment04a">
         <span>{{ getLabel(exterior04a) }} Link</span>
       </a>
     </grn-button>
   </div>
 </div>
 
-<div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeSmall) * borderRadius / 100) + 'px')">
-  <div class="app-elem">
-    <div>
-      <small><em>"Small" height: 44px; font-size: 16px;</em></small>
-    </div>
-    <grn-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeSmall) * labelPdRatio)) : undefined"
-      [frameSize]="sizeSmall">
-      <span>{{ getLabel(exterior04a) }}</span>
-    </grn-button>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small><em>"Small" height: 44px; font-size: 16px;</em></small>
-    </div>
-    <grn-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeSmall) * labelPdRatio)) : undefined"
-      [frameSize]="sizeSmall">
-      <a [routerLink]="[routerLink]"
-        [fragment]="fragment2">
-        <span>{{ getLabel(exterior04a) }} Link</span>
-      </a>
-    </grn-button>
-  </div>
-</div>
-
-<div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeMiddle) * borderRadius / 100) + 'px')">
-  <div class="app-elem">
-    <div>
-      <small><em>"Middle" height: 50px; font-size: 16px;</em></small>
-    </div>
-    <grn-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
-      [frameSize]="sizeMiddle">
-      <span>{{ getLabel(exterior04a) }}</span>
-    </grn-button>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small><em>"Middle" height: 50px; font-size: 16px;</em></small>
-    </div>
-    <grn-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
-      [frameSize]="sizeMiddle">
-      <a [routerLink]="[routerLink]"
-        [fragment]="fragment1">
-        <span>{{ getLabel(exterior04a) }} Link</span>
-      </a>
-    </grn-button>
-  </div>
-</div>
-
-<div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeWide) * borderRadius / 100) + 'px')">
-  <div class="app-elem">
-    <div>
-      <small><em>"Wide" height: 56px; font-size: 16px;</em></small>
-    </div>
-    <grn-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeWide) * labelPdRatio)) : undefined"
-      [frameSize]="sizeWide">
-      <span>{{ getLabel(exterior04a) }}</span>
-    </grn-button>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small><em>"Wide" height: 56px; font-size: 16px;</em></small>
-    </div>
-    <grn-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeWide) * labelPdRatio)) : undefined"
-      [frameSize]="sizeWide">
-      <a [routerLink]="[routerLink]"
-        [fragment]="fragment2">
-        <span>{{ getLabel(exterior04a) }} Link</span>
-      </a>
-    </grn-button>
-  </div>
-</div>
-
-<div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-   + round(getValue(sizeLarge) * borderRadius / 100) + 'px')">
-  <div class="app-elem">
-    <div>
-      <small><em>"Large" height: 62px; font-size: 18px;</em></small>
-    </div>
-    <grn-button class="bbr-large"
-      [exterior]="exterior04a"
-      [config]="isAddPadding04a
-       ? getConfig(round(getValue(sizeLarge) * labelPdRatio)) : undefined"
-      [frameSize]="sizeLarge">
-      <span>{{ getLabel(exterior04a) }}</span>
-    </grn-button>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small><em>"Large" height: 62px; font-size: 18px;</em></small>
-    </div>
-    <grn-button class="bbr-large"
-      [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeLarge) * labelPdRatio)) : undefined"
-      [frameSize]="sizeLarge">
-      <a [routerLink]="[routerLink]"
-        [fragment]="fragment1">
-        <span>{{ getLabel(exterior04a) }} Link</span>
-      </a>
-    </grn-button>
-  </div>
-</div>
-
-<div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeHuge) * borderRadius / 100) + 'px')">
-  <div class="app-elem">
-    <div>
-      <small><em>"Huge" height: 68px; font-size: 20px;</em></small>
-    </div>
-    <grn-button class="bbr-huge"
-      [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeHuge) * labelPdRatio)) : undefined"
-      [frameSize]="sizeHuge">
-      <span>{{ getLabel(exterior04a) }}</span>
-    </grn-button>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small><em>"Huge" height: 68px; font-size: 20px;</em></small>
-    </div>
-    <grn-button class="bbr-huge"
-      [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeHuge) * labelPdRatio)) : undefined"
-      [frameSize]="sizeHuge">
-      <a [routerLink]="[routerLink]"
-        [fragment]="fragment2">
-        <span>{{ getLabel(exterior04a) }} Link</span>
-      </a>
-    </grn-button>
-  </div>
-</div>
-
-
-<section mr-vr>
+<section mr-vr2>
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -266,9 +105,6 @@
   [attr.style]="safeStyle(propRadius + ':'
     + round(getValue(sizeShort) * borderRadius / 100) + 'px')"&gt;
   &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;"Short" height: 38px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
-    &lt;/div&gt;
     &lt;grn-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeShort) * labelPdRatio)) : undefined"
@@ -278,174 +114,12 @@
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;"Short" height: 38px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
-    &lt;/div&gt;
     &lt;grn-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeShort) * labelPdRatio)) : undefined"
       [frameSize]="sizeShort"&gt;
       &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment1"&gt;
-        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
-      &lt;/a&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeSmall) * borderRadius / 100) + 'px')"&gt;
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;"Small" height: 44px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeSmall) * labelPdRatio)) : undefined"
-      [frameSize]="sizeSmall"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;"Small" height: 44px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeSmall) * labelPdRatio)) : undefined"
-      [frameSize]="sizeSmall"&gt;
-      &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment2"&gt;
-        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
-      &lt;/a&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeMiddle) * borderRadius / 100) + 'px')"&gt;
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;"Middle" height: 50px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
-      [frameSize]="sizeMiddle"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;"Middle" height: 50px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
-      [frameSize]="sizeMiddle"&gt;
-      &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment1"&gt;
-        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
-      &lt;/a&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeWide) * borderRadius / 100) + 'px')"&gt;
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;"Wide" height: 56px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeWide) * labelPdRatio)) : undefined"
-      [frameSize]="sizeWide"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;"Wide" height: 56px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeWide) * labelPdRatio)) : undefined"
-      [frameSize]="sizeWide"&gt;
-      &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment2"&gt;
-        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
-      &lt;/a&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-   + round(getValue(sizeLarge) * borderRadius / 100) + 'px')"&gt;
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;"Large" height: 62px; font-size: 18px;&lt;/em&gt;&lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button class="bbr-large"
-      [exterior]="exterior04a"
-      [config]="isAddPadding04a
-       ? getConfig(round(getValue(sizeLarge) * labelPdRatio)) : undefined"
-      [frameSize]="sizeLarge"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;"Large" height: 62px; font-size: 18px;&lt;/em&gt;&lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button class="bbr-large"
-      [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeLarge) * labelPdRatio)) : undefined"
-      [frameSize]="sizeLarge"&gt;
-      &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment1"&gt;
-        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
-      &lt;/a&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeHuge) * borderRadius / 100) + 'px')"&gt;
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;"Huge" height: 68px; font-size: 20px;&lt;/em&gt;&lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button class="bbr-huge"
-      [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeHuge) * labelPdRatio)) : undefined"
-      [frameSize]="sizeHuge"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;"Huge" height: 68px; font-size: 20px;&lt;/em&gt;&lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button class="bbr-huge"
-      [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? getConfig(round(getValue(sizeHuge) * labelPdRatio)) : undefined"
-      [frameSize]="sizeHuge"&gt;
-      &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment2"&gt;
+        [fragment]="fragment04a"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
     &lt;/grn-button&gt;
@@ -467,18 +141,648 @@ import &#123;
 export class ButtonComponent &#123;
   public exterior04a = 'outlined';
   public routerLink = '/components/button';
-  public fragment1 = 'border-radius1';
-  public fragment2 = 'border-radius2';
+  public fragment04a = 'size-link4a';
   public borderRadius = 50;
   public propRadius = '--gb-br-rd';
   public isAddPadding04a = true;
   public labelPdRatio = 0.4;
 
   public sizeShort = FrameSize.short;
+
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
+
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public round(value: number): number &#123;
+    return Math.round(100 * value) / 100;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<div class="app-group">
+  <div [attr.id]="fragment04b">
+    <small><em>"Small" height: 44px; font-size: 16px;</em></small>
+  </div>
+</div>
+
+<div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + round(getValue(sizeSmall) * borderRadius / 100) + 'px')">
+  <div class="app-elem">
+    <grn-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeSmall) * labelPdRatio)) : undefined"
+      [frameSize]="sizeSmall">
+      <span>{{ getLabel(exterior04a) }}</span>
+    </grn-button>
+  </div>
+
+  <div class="app-elem">
+    <grn-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeSmall) * labelPdRatio)) : undefined"
+      [frameSize]="sizeSmall">
+      <a [routerLink]="[routerLink]"
+        [fragment]="fragment04b">
+        <span>{{ getLabel(exterior04a) }} Link</span>
+      </a>
+    </grn-button>
+  </div>
+</div>
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + round(getValue(sizeSmall) * borderRadius / 100) + 'px')"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeSmall) * labelPdRatio)) : undefined"
+      [frameSize]="sizeSmall"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeSmall) * labelPdRatio)) : undefined"
+      [frameSize]="sizeSmall"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        [fragment]="fragment04b"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior04a = 'outlined';
+  public routerLink = '/components/button';
+  public fragment04b = 'size-link4b';
+  public borderRadius = 50;
+  public propRadius = '--gb-br-rd';
+  public isAddPadding04a = true;
+  public labelPdRatio = 0.4;
+
   public sizeSmall = FrameSize.small;
+
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
+
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public round(value: number): number &#123;
+    return Math.round(100 * value) / 100;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<div class="app-group">
+  <div [attr.id]="fragment04c">
+    <small><em>"Middle" height: 50px; font-size: 16px;</em></small>
+  </div>
+</div>
+
+<div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + round(getValue(sizeMiddle) * borderRadius / 100) + 'px')">
+  <div class="app-elem">
+    <grn-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
+      [frameSize]="sizeMiddle">
+      <span>{{ getLabel(exterior04a) }}</span>
+    </grn-button>
+  </div>
+
+  <div class="app-elem">
+    <grn-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
+      [frameSize]="sizeMiddle">
+      <a [routerLink]="[routerLink]"
+        [fragment]="fragment04c">
+        <span>{{ getLabel(exterior04a) }} Link</span>
+      </a>
+    </grn-button>
+  </div>
+</div>
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + round(getValue(sizeMiddle) * borderRadius / 100) + 'px')"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
+      [frameSize]="sizeMiddle"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
+      [frameSize]="sizeMiddle"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        [fragment]="fragment04c"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior04a = 'outlined';
+  public routerLink = '/components/button';
+  public fragment04c = 'size-link4c';
+  public borderRadius = 50;
+  public propRadius = '--gb-br-rd';
+  public isAddPadding04a = true;
+  public labelPdRatio = 0.4;
+
   public sizeMiddle = FrameSize.middle;
+
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
+
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public round(value: number): number &#123;
+    return Math.round(100 * value) / 100;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<div class="app-group">
+  <div [attr.id]="fragment04d">
+    <small><em>"Wide" height: 56px; font-size: 16px;</em></small>
+  </div>
+</div>
+
+<div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + round(getValue(sizeWide) * borderRadius / 100) + 'px')">
+  <div class="app-elem">
+    <grn-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeWide) * labelPdRatio)) : undefined"
+      [frameSize]="sizeWide">
+      <span>{{ getLabel(exterior04a) }}</span>
+    </grn-button>
+  </div>
+
+  <div class="app-elem">
+    <grn-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeWide) * labelPdRatio)) : undefined"
+      [frameSize]="sizeWide">
+      <a [routerLink]="[routerLink]"
+        [fragment]="fragment04d">
+        <span>{{ getLabel(exterior04a) }} Link</span>
+      </a>
+    </grn-button>
+  </div>
+</div>
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + round(getValue(sizeWide) * borderRadius / 100) + 'px')"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeWide) * labelPdRatio)) : undefined"
+      [frameSize]="sizeWide"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeWide) * labelPdRatio)) : undefined"
+      [frameSize]="sizeWide"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        [fragment]="fragment04d"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior04a = 'outlined';
+  public routerLink = '/components/button';
+  public fragment04d = 'size-link4d';
+  public borderRadius = 50;
+  public propRadius = '--gb-br-rd';
+  public isAddPadding04a = true;
+  public labelPdRatio = 0.4;
+
   public sizeWide = FrameSize.wide;
+
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
+
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public round(value: number): number &#123;
+    return Math.round(100 * value) / 100;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<div class="app-group">
+  <div [attr.id]="fragment04e">
+    <small><em>"Large" height: 62px; font-size: 18px;;</em></small>
+  </div>
+</div>
+
+<div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+   + round(getValue(sizeLarge) * borderRadius / 100) + 'px')">
+  <div class="app-elem">
+    <grn-button class="bbr-large"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+       ? getConfig(round(getValue(sizeLarge) * labelPdRatio)) : undefined"
+      [frameSize]="sizeLarge">
+      <span>{{ getLabel(exterior04a) }}</span>
+    </grn-button>
+  </div>
+
+  <div class="app-elem">
+    <grn-button class="bbr-large"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeLarge) * labelPdRatio)) : undefined"
+      [frameSize]="sizeLarge">
+      <a [routerLink]="[routerLink]"
+        [fragment]="fragment04e">
+        <span>{{ getLabel(exterior04a) }} Link</span>
+      </a>
+    </grn-button>
+  </div>
+</div>
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+   + round(getValue(sizeLarge) * borderRadius / 100) + 'px')"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button class="bbr-large"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+       ? getConfig(round(getValue(sizeLarge) * labelPdRatio)) : undefined"
+      [frameSize]="sizeLarge"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button class="bbr-large"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeLarge) * labelPdRatio)) : undefined"
+      [frameSize]="sizeLarge"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        [fragment]="fragment04e"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior04a = 'outlined';
+  public routerLink = '/components/button';
+  public fragment04e = 'size-link4e';
+  public borderRadius = 50;
+  public propRadius = '--gb-br-rd';
+  public isAddPadding04a = true;
+  public labelPdRatio = 0.4;
+
   public sizeLarge = FrameSize.large;
+
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
+
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public round(value: number): number &#123;
+    return Math.round(100 * value) / 100;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.bbr-large &#123;
+  font-size: 18px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<div class="app-group">
+  <div [attr.id]="fragment04f">
+    <small><em>"Huge" height: 68px; font-size: 20px;</em></small>
+  </div>
+</div>
+
+<div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + round(getValue(sizeHuge) * borderRadius / 100) + 'px')">
+  <div class="app-elem">
+    <grn-button class="bbr-huge"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeHuge) * labelPdRatio)) : undefined"
+      [frameSize]="sizeHuge">
+      <span>{{ getLabel(exterior04a) }}</span>
+    </grn-button>
+  </div>
+
+  <div class="app-elem">
+    <grn-button class="bbr-huge"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeHuge) * labelPdRatio)) : undefined"
+      [frameSize]="sizeHuge">
+      <a [routerLink]="[routerLink]"
+        [fragment]="fragment04f">
+        <span>{{ getLabel(exterior04a) }} Link</span>
+      </a>
+    </grn-button>
+  </div>
+</div>
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + round(getValue(sizeHuge) * borderRadius / 100) + 'px')"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button class="bbr-huge"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeHuge) * labelPdRatio)) : undefined"
+      [frameSize]="sizeHuge"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button class="bbr-huge"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? getConfig(round(getValue(sizeHuge) * labelPdRatio)) : undefined"
+      [frameSize]="sizeHuge"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        [fragment]="fragment04f"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior04a = 'outlined';
+  public routerLink = '/components/button';
+  public fragment04f = 'size-link4f';
+  public borderRadius = 50;
+  public propRadius = '--gb-br-rd';
+  public isAddPadding04a = true;
+  public labelPdRatio = 0.4;
+
   public sizeHuge = FrameSize.huge;
 
   constructor(private sanitizer: DomSanitizer) &#123;&#125;
@@ -499,7 +803,6 @@ export class ButtonComponent &#123;
   public getConfig(labelPd: number): GrnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
-
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -512,10 +815,7 @@ export class ButtonComponent &#123;
   min-width: 26ch;
   margin: 10px 10px;
 &#125;
-.bs-large &#123;
-  font-size: 18px;
-&#125;
-.bs-huge &#123;
+.bbr-huge &#123;
   font-size: 20px;
 &#125;</pre></code>
         </mat-tab>
@@ -525,15 +825,15 @@ export class ButtonComponent &#123;
 </section>
 
 
+
 <section mr-vr>
   <p>
     Below are other possible values for "border-radius".
   </p>
 </section>
 
-<section mr-vr
-  [attr.id]="fragment3">
-  <span [attr.id]="fragment4">exterior: </span>
+<section mr-vr>
+  <span>exterior: </span>
   <mat-button-toggle-group [(ngModel)]="exterior04b">
     <mat-button-toggle value="contained">{{ labelContained }}</mat-button-toggle>
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
@@ -557,7 +857,7 @@ export class ButtonComponent &#123;
 </div>
 
 <div class="app-group">
-  <div>
+  <div [attr.id]="fragment04g">
     <small><em>Demo - A (top-left, bottom-left)</em></small>
   </div>
 </div>
@@ -581,15 +881,108 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment3">
+        [fragment]="fragment04g">
         <span>{{ 'A - ' + getLabel(exterior04b) }} Link</span>
       </a>
     </grn-button>
   </div>
 </div>
 
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 0 '
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px')"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
+      [frameSize]="sizeMiddle"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; 'A - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
+      [frameSize]="sizeMiddle"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        [fragment]="fragment04g"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; 'A - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior04b = 'outlined';
+  public routerLink = '/components/button';
+  public fragment04g = 'size-link4g';
+  public propRadius = '--gb-br-rd';
+  public isAddPadding04b = true;
+  public radiusRatio = 0.3;
+  public sizeMiddle = FrameSize.middle;
+
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
+
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public round(value: number): number &#123;
+    return Math.round(100 * value) / 100;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
 <div class="app-group">
-  <div>
+  <div [attr.id]="fragment04h">
     <small><em>Demo - B (top-right, bottom-right)</em></small>
   </div>
 </div>
@@ -613,15 +1006,108 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment4">
+        [fragment]="fragment04h">
         <span>{{ 'B - ' + getLabel(exterior04b) }} Link</span>
       </a>
     </grn-button>
   </div>
 </div>
 
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ': 0 '
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px '
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0')"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
+      [frameSize]="sizeMiddle"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; 'B - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
+      [frameSize]="sizeMiddle"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        [fragment]="fragment04h"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; 'B - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior04b = 'outlined';
+  public routerLink = '/components/button';
+  public fragment04h = 'size-link4h';
+  public propRadius = '--gb-br-rd';
+  public isAddPadding04b = true;
+  public radiusRatio = 0.3;
+  public sizeMiddle = FrameSize.middle;
+
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
+
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public round(value: number): number &#123;
+    return Math.round(100 * value) / 100;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
 <div class="app-group">
-  <div>
+  <div [attr.id]="fragment04i">
     <small><em>Demo - C (top-left, bottom-right)</em></small>
   </div>
 </div>
@@ -645,15 +1131,108 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment3">
+        [fragment]="fragment04i">
         <span>{{ 'C - ' + getLabel(exterior04b) }} Link</span>
       </a>
     </grn-button>
   </div>
 </div>
 
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ': '
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 '
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0')"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
+      [frameSize]="sizeMiddle"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; 'C - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
+      [frameSize]="sizeMiddle"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        [fragment]="fragment04i"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; 'C - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior04b = 'outlined';
+  public routerLink = '/components/button';
+  public fragment04i = 'size-link4i';
+  public propRadius = '--gb-br-rd';
+  public isAddPadding04b = true;
+  public radiusRatio = 0.3;
+  public sizeMiddle = FrameSize.middle;
+
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
+
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public round(value: number): number &#123;
+    return Math.round(100 * value) / 100;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
 <div class="app-group">
-  <div>
+  <div [attr.id]="fragment04j">
     <small><em>Demo - D (bottom-right, top-left)</em></small>
   </div>
 </div>
@@ -677,15 +1256,108 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment4">
+        [fragment]="fragment04j">
         <span>{{ 'D - ' + getLabel(exterior04b) }} Link</span>
       </a>
     </grn-button>
   </div>
 </div>
 
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ': 0 '
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 '
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px')"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
+      [frameSize]="sizeMiddle"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; 'D - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
+      [frameSize]="sizeMiddle"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        [fragment]="fragment04j"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; 'D - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior04b = 'outlined';
+  public routerLink = '/components/button';
+  public fragment04j = 'size-link4j';
+  public propRadius = '--gb-br-rd';
+  public isAddPadding04b = true;
+  public radiusRatio = 0.3;
+  public sizeMiddle = FrameSize.middle;
+
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
+
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public round(value: number): number &#123;
+    return Math.round(100 * value) / 100;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
 <div class="app-group">
-  <div>
+  <div [attr.id]="fragment04k">
     <small><em>Demo - E (border-radius: 8%/50%)</em></small>
   </div>
 </div>
@@ -706,15 +1378,14 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment3">
+        [fragment]="fragment04k">
         <span>{{ 'E - ' + getLabel(exterior04b) }} Link</span>
       </a>
     </grn-button>
   </div>
 </div>
 
-
-<section mr-vr>
+<section mr-vr2>
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -723,146 +1394,6 @@ export class ButtonComponent &#123;
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;div class="app-group"&gt;
-  &lt;div&gt;
-    &lt;small&gt;&lt;em&gt;"Middle" height: 50px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="app-group"&gt;
-  &lt;div&gt;
-    &lt;small&gt;&lt;em&gt;Demo - A (top-left, bottom-left)&lt;/em&gt;&lt;/small&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 0 '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px')"&gt;
-  &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
-      [frameSize]="sizeMiddle"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; 'A - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
-      [frameSize]="sizeMiddle"&gt;
-      &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment3"&gt;
-        &lt;span&gt;<b>&#123;</b>&#123; 'A - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
-      &lt;/a&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="app-group"&gt;
-  &lt;div&gt;
-    &lt;small&gt;&lt;em&gt;Demo - B (top-right, bottom-right)&lt;/em&gt;&lt;/small&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ': 0 '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0')"&gt;
-  &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
-      [frameSize]="sizeMiddle"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; 'B - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
-      [frameSize]="sizeMiddle"&gt;
-      &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment4"&gt;
-        &lt;span&gt;<b>&#123;</b>&#123; 'B - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
-      &lt;/a&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="app-group"&gt;
-  &lt;div&gt;
-    &lt;small&gt;&lt;em&gt;Demo - C (top-left, bottom-right)&lt;/em&gt;&lt;/small&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ': '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0')"&gt;
-  &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
-      [frameSize]="sizeMiddle"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; 'C - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
-      [frameSize]="sizeMiddle"&gt;
-      &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment3"&gt;
-        &lt;span&gt;<b>&#123;</b>&#123; 'C - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
-      &lt;/a&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="app-group"&gt;
-  &lt;div&gt;
-    &lt;small&gt;&lt;em&gt;Demo - D (bottom-right, top-left)&lt;/em&gt;&lt;/small&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ': 0 '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px')"&gt;
-  &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
-      [frameSize]="sizeMiddle"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; 'D - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
-      [frameSize]="sizeMiddle"&gt;
-      &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment4"&gt;
-        &lt;span&gt;<b>&#123;</b>&#123; 'D - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
-      &lt;/a&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="app-group"&gt;
-  &lt;div&gt;
-    &lt;small&gt;&lt;em&gt;Demo - E (border-radius: 8%/50%)&lt;/em&gt;&lt;/small&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
 &lt;div class="app-group bbr-demo-e"&gt;
   &lt;div class="app-elem"&gt;
     &lt;grn-button [exterior]="exterior04b"
@@ -879,7 +1410,7 @@ export class ButtonComponent &#123;
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : undefined"
       [frameSize]="sizeMiddle"&gt;
       &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment3"&gt;
+        [fragment]="fragment04k"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; 'E - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
     &lt;/grn-button&gt;
@@ -901,18 +1432,11 @@ import &#123;
 export class ButtonComponent &#123;
   public exterior04b = 'outlined';
   public routerLink = '/components/button';
-  public fragment3 = 'border-radius3';
-  public fragment4 = 'border-radius4';
+  public fragment04k = 'size-link4k';
   public propRadius = '--gb-br-rd';
   public isAddPadding04b = true;
   public radiusRatio = 0.3;
-
-  public sizeShort = FrameSize.short;
-  public sizeSmall = FrameSize.small;
   public sizeMiddle = FrameSize.middle;
-  public sizeWide = FrameSize.wide;
-  public sizeLarge = FrameSize.large;
-  public sizeHuge = FrameSize.huge;
 
   constructor(private sanitizer: DomSanitizer) &#123;&#125;
 
@@ -932,7 +1456,6 @@ export class ButtonComponent &#123;
   public getConfig(labelPd: number): GrnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
-
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -945,17 +1468,15 @@ export class ButtonComponent &#123;
   min-width: 26ch;
   margin: 10px 10px;
 &#125;
-.bs-large &#123;
-  font-size: 18px;
-&#125;
-.bs-huge &#123;
-  font-size: 20px;
-&#125;
 .bbr-demo-e &#123;
   --gb-br-rd: 8%/50%;
-&#125;</pre></code>
+&#125;
+</pre></code>
         </mat-tab>
       </mat-tab-group>
     </mat-expansion-panel>
   </mat-accordion>
 </section>
+
+<hr br-nn />
+<hr br-nn />

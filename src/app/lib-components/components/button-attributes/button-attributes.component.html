@@ -1,6 +1,5 @@
-<section mr-vr
-  [attr.id]="fragment1">
-  <h3 [attr.id]="fragment2">Attributes</h3>
+<section mr-vr>
+  <h3>Attributes</h3>
   The following attributes are supported:
   <p>The following attributes are supported:</p>
   <ul>
@@ -17,9 +16,10 @@
   </ul>
 </section>
 
-<section mr-vr>
+<section mr-vr
+  [attr.id]="fragment02a">
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior02">
+  <mat-button-toggle-group [(ngModel)]="exterior02a">
     <mat-button-toggle value="contained">{{ labelContained }}</mat-button-toggle>
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
     <mat-button-toggle value="text">{{ labelText }}</mat-button-toggle>
@@ -27,159 +27,29 @@
 </section>
 
 <div class="app-group">
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: none</em>
-      </small>
-    </div>
-    <grn-button [exterior]="exterior02">
-      <span>{{ getLabel(exterior02) }}</span>
-    </grn-button>
+  <div [attr.id]="fragment02a">
+    <small><em>No attributes</em></small>
   </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: none</em>
-      </small>
-    </div>
-    <grn-button [exterior]="exterior02">
-      <a [routerLink]="[routerLink]"
-        [fragment]="fragment1">
-        <span>{{ getLabel(exterior02) }} Link</span>
-      </a>
-    </grn-button>
-  </div>
-
 </div>
 
 <div class="app-group">
-
   <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: noUppercase</em>
-      </small>
-    </div>
-    <grn-button [exterior]="exterior02"
-      noUppercase>
-      <span>{{ getLabel(exterior02) }}</span>
+    <grn-button [exterior]="exterior02a">
+      <span>{{ getLabel(exterior02a) }}</span>
     </grn-button>
   </div>
 
   <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: uppercase</em>
-      </small>
-    </div>
-    <grn-button [exterior]="exterior02"
-      noUppercase>
+    <grn-button [exterior]="exterior02a">
       <a [routerLink]="[routerLink]"
-        [fragment]="fragment2">
-        <span>{{ getLabel(exterior02) }} Link</span>
+        [fragment]="fragment02a">
+        <span>{{ getLabel(exterior02a) }} Link</span>
       </a>
     </grn-button>
   </div>
-
 </div>
 
-<div class="app-group">
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: isDisabled</em>
-      </small>
-    </div>
-    <grn-button [exterior]="exterior02"
-      isDisabled>
-      <span>{{ getLabel(exterior02) }}</span>
-    </grn-button>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: isDisabled</em>
-      </small>
-    </div>
-    <grn-button [exterior]="exterior02"
-      isDisabled>
-      <a [routerLink]="[routerLink]"
-        [fragment]="fragment1">
-        <span>{{ getLabel(exterior02) }} Link</span>
-      </a>
-    </grn-button>
-  </div>
-
-</div>
-
-<div class="app-group">
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: wdFull</em>
-      </small>
-    </div>
-    <grn-button [exterior]="exterior02"
-      wdFull>
-      <span>{{ getLabel(exterior02) }}</span>
-    </grn-button>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: wdFull</em>
-      </small>
-    </div>
-    <grn-button [exterior]="exterior02"
-      wdFull>
-      <a [routerLink]="[routerLink]"
-        [fragment]="fragment2">
-        <span>{{ getLabel(exterior02) }} Link</span>
-      </a>
-    </grn-button>
-  </div>
-
-</div>
-
-<div class="app-group">
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: noElevation (for "contained")</em>
-      </small>
-    </div>
-    <grn-button [exterior]="exterior02"
-      noElevation>
-      <span>{{ getLabel(exterior02) }}</span>
-    </grn-button>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: noElevation (for "contained")</em>
-      </small>
-    </div>
-    <grn-button [exterior]="exterior02"
-      noElevation>
-      <a [routerLink]="[routerLink]"
-        [fragment]="fragment1">
-        <span>{{ getLabel(exterior02) }} Link</span>
-      </a>
-    </grn-button>
-  </div>
-
-</div>
-
-<section mr-vr>
+<section mr-vr2>
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -189,156 +59,20 @@
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"&gt;
-
   &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attributes: none&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior02"&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02) &#125;&#125;&lt;/span&gt;
+    &lt;grn-button [exterior]="exterior02a"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125;&lt;/span&gt;
     &lt;/grn-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attributes: none&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior02"&gt;
+    &lt;grn-button [exterior]="exterior02a"&gt;
       &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment1"&gt;
-        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02) &#125;&#125; Link&lt;/span&gt;
+        [fragment]="fragment02a"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
     &lt;/grn-button&gt;
   &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="app-group"&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attribute: noUppercase&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior02"
-      noUppercase&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attributes: uppercase&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior02"
-      noUppercase&gt;
-      &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment2"&gt;
-        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02) &#125;&#125; Link&lt;/span&gt;
-      &lt;/a&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="app-group"&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attribute: isDisabled&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior02"
-      isDisabled&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attributes: isDisabled&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior02"
-      isDisabled&gt;
-      &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment1"&gt;
-        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02) &#125;&#125; Link&lt;/span&gt;
-      &lt;/a&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="app-group"&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attribute: wdFull&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior02"
-      wdFull&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attributes: wdFull&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior02"
-      wdFull&gt;
-      &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment2"&gt;
-        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02) &#125;&#125; Link&lt;/span&gt;
-      &lt;/a&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="app-group"&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attribute: noElevation (for "contained")&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior02"
-      noElevation&gt;
-      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attributes: noElevation (for "contained")&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior02"
-      noElevation&gt;
-      &lt;a [routerLink]="[routerLink]"
-        [fragment]="fragment1"&gt;
-        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02) &#125;&#125; Link&lt;/span&gt;
-      &lt;/a&gt;
-    &lt;/grn-button&gt;
-  &lt;/div&gt;
-
 &lt;/div&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
@@ -354,10 +88,9 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class ButtonComponent &#123;
-  public exterior02 = 'contained';
+  public exterior02a = 'outlined';
   public routerLink = '/components/button';
-  public fragment1 = 'attribute1';
-  public fragment2 = 'attribute2';
+  public fragment02a = 'attribute-link02a';
   public getLabel(exterior: string): string &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
@@ -379,3 +112,378 @@ export class ButtonComponent &#123;
     </mat-expansion-panel>
   </mat-accordion>
 </section>
+
+<hr br-nn />
+
+<div class="app-group">
+  <div [attr.id]="fragment02b">
+    <small><em>Attribute: noUppercase</em></small>
+  </div>
+</div>
+
+<div class="app-group">
+  <div class="app-elem">
+    <grn-button [exterior]="exterior02a"
+      noUppercase>
+      <span>{{ getLabel(exterior02a) }}</span>
+    </grn-button>
+  </div>
+
+  <div class="app-elem">
+    <grn-button [exterior]="exterior02a"
+      noUppercase>
+      <a [routerLink]="[routerLink]"
+        [fragment]="fragment02b">
+        <span>{{ getLabel(exterior02a) }} Link</span>
+      </a>
+    </grn-button>
+  </div>
+</div>
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior02a"
+      noUppercase&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125;&lt;/span&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior02a"
+      noUppercase&gt;
+      &lt;a [routerLink]="[routerLink]"
+        [fragment]="fragment02b"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior02a = 'outlined';
+  public routerLink = '/components/button';
+  public fragment02b = 'attribute-link02b';
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+<div class="app-group">
+  <div [attr.id]="fragment02c">
+    <small><em>Attribute: isDisabled</em></small>
+  </div>
+</div>
+
+<div class="app-group">
+  <div class="app-elem">
+    <grn-button [exterior]="exterior02a"
+      isDisabled>
+      <span>{{ getLabel(exterior02a) }}</span>
+    </grn-button>
+  </div>
+
+  <div class="app-elem">
+    <grn-button [exterior]="exterior02a"
+      isDisabled>
+      <a [routerLink]="[routerLink]"
+        [fragment]="fragment02c">
+        <span>{{ getLabel(exterior02a) }} Link</span>
+      </a>
+    </grn-button>
+  </div>
+</div>
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior02a"
+      isDisabled&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125;&lt;/span&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior02a"
+      isDisabled&gt;
+      &lt;a [routerLink]="[routerLink]"
+        [fragment]="fragment02c"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior02a = 'outlined';
+  public routerLink = '/components/button';
+  public fragment02c = 'attribute-link02c';
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+<div class="app-group">
+  <div [attr.id]="fragment02d">
+    <small><em>Attribute: wdFull</em></small>
+  </div>
+</div>
+
+<div class="app-group">
+  <div class="app-elem">
+    <grn-button [exterior]="exterior02a"
+      wdFull>
+      <span>{{ getLabel(exterior02a) }}</span>
+    </grn-button>
+  </div>
+
+  <div class="app-elem">
+    <grn-button [exterior]="exterior02a"
+      wdFull>
+      <a [routerLink]="[routerLink]"
+        [fragment]="fragment02d">
+        <span>{{ getLabel(exterior02a) }} Link</span>
+      </a>
+    </grn-button>
+  </div>
+</div>
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior02a"
+      wdFull&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125;&lt;/span&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior02a"
+      wdFull&gt;
+      &lt;a [routerLink]="[routerLink]"
+        [fragment]="fragment02d"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior02a = 'outlined';
+  public routerLink = '/components/button';
+  public fragment02d = 'attribute-link02d';
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+<div class="app-group">
+  <div [attr.id]="fragment02e">
+    <small><em>Attribute: noElevation (for "contained")</em></small>
+  </div>
+</div>
+
+<div class="app-group">
+  <div class="app-elem">
+    <grn-button [exterior]="exterior02a"
+      noElevation>
+      <span>{{ getLabel(exterior02a) }}</span>
+    </grn-button>
+  </div>
+
+  <div class="app-elem">
+    <grn-button [exterior]="exterior02a"
+      noElevation>
+      <a [routerLink]="[routerLink]"
+        [fragment]="fragment02e">
+        <span>{{ getLabel(exterior02a) }} Link</span>
+      </a>
+    </grn-button>
+  </div>
+</div>
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior02a"
+      noElevation&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125;&lt;/span&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;grn-button [exterior]="exterior02a"
+      noElevation&gt;
+      &lt;a [routerLink]="[routerLink]"
+        [fragment]="fragment02e"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/grn-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior02a = 'outlined';
+  public routerLink = '/components/button';
+  public fragment02e = 'attribute-link02e';
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+<hr br-nn />

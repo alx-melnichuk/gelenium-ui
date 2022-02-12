@@ -39,10 +39,19 @@ export class ButtonBorderRadiusComponent {
 
   public exterior04a = 'outlined';
   public routerLink = '/components/button';
-  public fragment1 = 'border-radius1';
-  public fragment2 = 'border-radius2';
-  public fragment3 = 'border-radius3';
-  public fragment4 = 'border-radius4';
+  public fragment04a = 'size-link4a';
+  public fragment04b = 'size-link4b';
+  public fragment04c = 'size-link4c';
+  public fragment04d = 'size-link4d';
+  public fragment04e = 'size-link4e';
+  public fragment04f = 'size-link4f';
+  public fragment04g = 'size-link4g';
+  public fragment04h = 'size-link4h';
+  public fragment04i = 'size-link4i';
+  public fragment04j = 'size-link4j';
+  public fragment04k = 'size-link4k';
+  public fragment04l = 'size-link4l';
+
   public borderRadius = 50;
   public propRadius = '--gb-br-rd';
   public isAddPadding04a = true;
