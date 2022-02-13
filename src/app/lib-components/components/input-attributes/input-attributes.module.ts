@@ -8,10 +8,20 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { GrnInputModule } from 'projects/lib-geranium/src/lib/grn-input/grn-input.module';
 
 import { InputAttributesComponent } from './input-attributes.component';
+import { GrnInput2Module } from 'projects/lib-geranium/src/lib/grn-input2/grn-input2.module';
 
 @NgModule({
   declarations: [InputAttributesComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GrnInputModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonToggleModule,
+    MatExpansionModule,
+    MatTabsModule,
+    GrnInputModule,
+    GrnInput2Module,
+  ],
   exports: [InputAttributesComponent],
 })
 export class InputAttributesModule {}

@@ -10,6 +10,7 @@ export * from './lib/directives/grn-size/public-api';
 
 export * from './lib/grn-button/public-api';
 export * from './lib/grn-frame-input/public-api';
+export * from './lib/grn-frame-input2/public-api'; // TODO del;
 export * from './lib/grn-hint-or-error/public-api';
 export * from './lib/grn-infinite-scroll/public-api';
 export * from './lib/grn-input/public-api';

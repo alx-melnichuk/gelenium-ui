@@ -37,6 +37,8 @@ export class InputLabelUtil {
         result = Math.round(100 * 0.25 * frameSizeVal) / 100;
       } else if (exterior === InputExterior.underline) {
         result = Math.round(100 * 0.21428 * frameSizeVal) / 100;
+      } else if (exterior === InputExterior.standard) {
+        result = 0;
       }
     }
     return result;

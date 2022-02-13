@@ -143,27 +143,34 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   }
 
   // ** Public API **
+
   public doClick(event: MouseEvent): void {
     if (!!event && !event.cancelBubble && this.linkElement && this.touchRipple) {
       this.touchRipple.touchRipple(event);
     }
   }
+
   public focus(): void {
     if (isPlatformBrowser(this.platformId) && !!this.buttonElementRef) {
       this.buttonElementRef.nativeElement.focus();
     }
   }
+
   public doFocus(): void {
     this.settingFocused(this.hostRef, (this.isFocused = true));
   }
+
   public doBlur(): void {
     this.settingFocused(this.hostRef, (this.isFocused = false));
   }
+
   // ** Methods for interacting with GrnSizeDirective. **
-  public getSizeBorderRadius: GrnSizeBorderRadius = (frameSizeValue: number): number => {
+
+  public getSizeBorderRadius: GrnSizeBorderRadius = (frameSizeValue: number): string => {
     const borderRadiusRatio = 0.1;
-    return frameSizeValue > 0 ? Math.round(100 * borderRadiusRatio * frameSizeValue) / 100 : 0;
+    return (frameSizeValue > 0 ? Math.round(100 * borderRadiusRatio * frameSizeValue) / 100 : 0) + 'px';
   };
+
   public getSizePaddingHor: GrnSizePaddingHor = (frameSizeValue: number): GrnSizePaddingHorRes => {
     let result = this.currConfig.labelPd || 0;
     const exterior = this.innExterior;
@@ -179,6 +186,7 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     // console.log(`getSizePaddingHor(frameSizeValue:${frameSizeValue})=${result} labelPd=${this.currConfig.labelPd}`);
     return { left: result, right: result };
   };
+
   public getSizePaddingVer: GrnSizePaddingVer = (frameSizeValue: number, lineHeight: number): GrnSizePaddingVerRes => {
     let result = 0;
     const exterior = this.innExterior;
@@ -206,12 +214,14 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   private settingIsDisabled(elem: ElementRef<HTMLElement> | undefined, isDisabled: boolean): void {
     HtmlElemUtil.setAttr(this.renderer, elem, 'disabled', isDisabled ? '' : null);
   }
+
   private settingLink(elem: ElementRef<HTMLElement> | undefined): void {
     HtmlElemUtil.setAttr(this.renderer, elem, 'linkClear', '');
     HtmlElemUtil.setAttr(this.renderer, elem, 'btn-pd-ver', '');
     HtmlElemUtil.setClass(this.renderer, elem, 'gb-label', true);
     HtmlElemUtil.setClass(this.renderer, elem, 'gb-elem-pd-hor', true);
   }
+
   private settingFocused(elem: ElementRef<HTMLElement> | undefined, isFocused: boolean): void {
     HtmlElemUtil.setClass(this.renderer, elem, 'gfi-focused', isFocused);
     HtmlElemUtil.setAttr(this.renderer, elem, 'foc', isFocused ? '' : null);

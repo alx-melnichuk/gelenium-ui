@@ -1,4 +1,5 @@
-<section mr-vr>
+<section mr-vr
+  *ngIf="false">
   <h3>Attributes</h3>
   <p>The following attributes are supported:</p>
   <ul>
@@ -67,7 +68,32 @@
   autocomplete="off">
 
   <div class="app-group">
+    <style>
+      .io-pd-hor {
+        padding: 0 10px;
+      }
+    </style>
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>State: empty.</em>
+        </small>
+      </div>
+      <grn-input2 formControlName="input02a"
+        id="unique_identifier"
+        label="Enter value Demonstration test"
+        [exterior]="exterior02">
+        <span grnOrnamentLf
+          class="io-pd-hor">k1</span>
+        <span grnOrnamentRg
+          class="io-pd-hor">g2</span>
+      </grn-input2>
+    </div>
+  </div>
 
+
+  <div class="app-group">
+    <!--
     <div class="app-elem">
       <div>
         <small>
@@ -80,7 +106,7 @@
         [exterior]="exterior02">
       </grn-input>
     </div>
-
+    
     <div class="app-elem">
       <div>
         <small>
@@ -292,7 +318,7 @@
         [exterior]="exterior02">
       </grn-input>
     </div>
-
+  -->
   </div>
 
 </form>
