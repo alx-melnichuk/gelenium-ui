@@ -63,6 +63,26 @@
   </mat-button-toggle-group>
 </section>
 
+<section mr-vr>
+  <span>Config: </span>
+  <mat-button-toggle-group [(ngModel)]="config02">
+    <mat-button-toggle value="null">null</mat-button-toggle>
+    <mat-button-toggle value="config02a">exterior</mat-button-toggle>
+    <mat-button-toggle value="config02b">frameSize</mat-button-toggle>
+    <mat-button-toggle value="config02c">frameSizeValue</mat-button-toggle>
+    <mat-button-toggle value="config02d">LabelShrink</mat-button-toggle>
+    <mat-button-toggle value="config02e">hiddenLabel</mat-button-toggle>
+    <mat-button-toggle value="config02f">labelPd</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      [(ngModel)]="isRequired" /> isRequired
+  </label>
+</section>
+
 <form [formGroup]="formGroup02"
   novalidate
   autocomplete="off">
@@ -81,11 +101,16 @@
       </div>
       <grn-input2 formControlName="input02a"
         id="unique_identifier"
-        label="Enter value Demonstration test"
-        [exterior]="exterior02">
-        <span grnOrnamentLf
+        (click)="doClick()"
+        label="Enter value Demonstration DEMO1DEMO2"
+        [exterior]="exterior02"
+        [config]="getConfig(config02)"
+        [isRequired]="isRequired ? '' : null"
+        ornamLfAlign9="'flex-start'"
+        [helperText]="isRequired ? 'Required field.' : null">
+        <span grnOrnamentLf9
           class="io-pd-hor">k1</span>
-        <span grnOrnamentRg
+        <span grnOrnamentRg9
           class="io-pd-hor">g2</span>
       </grn-input2>
     </div>

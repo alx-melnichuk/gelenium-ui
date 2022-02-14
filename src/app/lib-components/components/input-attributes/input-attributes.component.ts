@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FrameSize } from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
+import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-input-config.interface';
+import { InputExterior } from 'projects/lib-geranium/src/lib/_interfaces/input-exterior.interface';
 
 import {
   LABEL_CSS,
@@ -54,6 +57,58 @@ export class InputAttributesComponent {
   // public exterior02 = 'underline';
   // public exterior02 = 'standard';
 
+  public config02 = '';
+  public config02a: GrnFrameInputConfig = {
+    exterior: InputExterior.underline,
+  };
+  public config02b: GrnFrameInputConfig = {
+    frameSize: FrameSize.wide,
+  };
+  public config02c: GrnFrameInputConfig = {
+    frameSizeValue: 56,
+  };
+  public config02d: GrnFrameInputConfig = {
+    isLabelShrink: true,
+  };
+  public config02e: GrnFrameInputConfig = {
+    hiddenLabel: true,
+  };
+  public config02f: GrnFrameInputConfig = {
+    labelPd: 40,
+  };
+  // public config02f: GrnFrameInputConfig = {
+  //   exterior?: InputExterior;
+  //   frameSize?: FrameSize;
+  //   frameSizeValue?: number;
+  //   isLabelShrink?: boolean;
+  //   hiddenLabel?: boolean;
+  //   labelPd?: number; // px
+  //   ornamLfAlign?: OrnamAlign;
+  //   ornamRgAlign?: OrnamAlign;
+  // };
+  public isRequired = false;
+  public isError = false;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
+
+  public getConfig(config02: string): GrnFrameInputConfig | null {
+    let result = null;
+    if ('config02a' === config02) {
+      result = this.config02a;
+    } else if ('config02b' === config02) {
+      result = this.config02b;
+    } else if ('config02c' === config02) {
+      result = this.config02c;
+    } else if ('config02d' === config02) {
+      result = this.config02d;
+    } else if ('config02e' === config02) {
+      result = this.config02e;
+    } else if ('config02f' === config02) {
+      result = this.config02f;
+    }
+    return result;
+  }
+  public doClick(): void {
+    console.log('doClick()');
+  }
 }

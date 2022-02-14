@@ -1,25 +1,21 @@
 import {
-  AfterContentInit,
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
+  Inject,
   InjectionToken,
   Input,
   OnChanges,
   OnInit,
-  Output,
+  Optional,
   Renderer2,
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 
-import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
-import { GrnFrameInputConfig } from '../interfaces/grn-frame-input-config.interface';
-import { InputExterior, InputExteriorUtil } from '../interfaces/input-exterior.interface';
-import { OrnamAlign } from '../interfaces/ornam-align.interface';
-import { HtmlElemUtil } from '../utils/html-elem.util';
+import { GrnFrameInputConfig } from '../_interfaces/grn-frame-input-config.interface';
+import { InputExterior, InputExteriorUtil } from '../_interfaces/input-exterior.interface';
+import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 export const GRN_FRAME_INPUT2_CONFIG = new InjectionToken<GrnFrameInputConfig>('GRN_FRAME_INPUT2_CONFIG');
 
@@ -30,15 +26,13 @@ export const GRN_FRAME_INPUT2_CONFIG = new InjectionToken<GrnFrameInputConfig>('
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GrnFrameInput2Component implements OnChanges, OnInit, AfterContentInit, AfterViewInit {
+export class GrnFrameInput2Component implements OnChanges, OnInit {
   @Input()
   public label = '';
   @Input()
   public config: GrnFrameInputConfig | null = null;
   @Input()
   public exterior: InputExterior | null = null;
-  @Input()
-  public frameSize: FrameSize | undefined | null;
   @Input()
   public isLabelShrink: boolean | null = null;
   @Input()
@@ -54,24 +48,21 @@ export class GrnFrameInput2Component implements OnChanges, OnInit, AfterContentI
   @Input()
   public isRequired: boolean | null = null;
 
-  @Output()
-  readonly clickFrame: EventEmitter<Event> = new EventEmitter();
-
   public get isOutlinedExterior(): boolean {
     return InputExteriorUtil.isOutlined(this.innExterior);
   }
 
-  public defaultFrameSize = FrameSizeUtil.getValue(FrameSize.middle) || 0;
   public currConfig: GrnFrameInputConfig = {};
-
   public innExterior: InputExterior | null = null;
-  public innFrameSizeValue = 0;
   public innIsLabelShrink: boolean | null = null;
   public innHiddenLabel: boolean | null = null;
-  public labelPadding: number | null = null;
 
-  constructor(private hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {
-    this.currConfig = {};
+  constructor(
+    @Optional() @Inject(GRN_FRAME_INPUT2_CONFIG) private rootConfig: GrnFrameInputConfig | null,
+    private hostRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {
+    this.currConfig = this.rootConfig || {};
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-frame-input', true);
   }
 
@@ -83,10 +74,6 @@ export class GrnFrameInput2Component implements OnChanges, OnInit, AfterContentI
       this.innExterior = InputExteriorUtil.create(this.exterior || this.currConfig.exterior || null);
       this.settingExterior(this.hostRef, this.innExterior);
     }
-    if (changes.frameSize || (changes.config && !this.frameSize)) {
-      this.innFrameSizeValue = this.createFrameSize(this.frameSize || this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
-      this.settingFrameSize(this.hostRef, this.innFrameSizeValue);
-    }
     if (changes.isLabelShrink || (changes.config && this.isLabelShrink == null)) {
       this.innIsLabelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig.isLabelShrink;
       this.settingLabelShrink(this.hostRef, this.innIsLabelShrink);
@@ -96,19 +83,25 @@ export class GrnFrameInput2Component implements OnChanges, OnInit, AfterContentI
       this.settingHiddenLabel(this.hostRef, this.innHiddenLabel);
     }
     if (changes.isDisabled) {
-      this.settingDisabled(this.hostRef, this.isDisabled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-disabled', this.isDisabled || false);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
     }
     if (changes.isFocused) {
-      this.settingFocused(this.hostRef, this.isFocused);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-focused', this.isFocused);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'foc', this.isFocused ? '' : null);
     }
     if (changes.isFilled) {
-      this.settingFilled(this.hostRef, this.isFilled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-filled', this.isFilled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);
     }
     if (changes.isError) {
-      this.settingError(this.hostRef, this.isError);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-error', this.isError || false);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isError ? '' : null);
     }
     if (changes.label || changes.isRequired) {
-      this.settingIndent(this.hostRef, !!this.label || this.isRequired);
+      const isIndent = !!this.label || this.isRequired;
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-lgn-indent', isIndent || false);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ind', isIndent ? '' : null);
     }
   }
 
@@ -116,10 +109,6 @@ export class GrnFrameInput2Component implements OnChanges, OnInit, AfterContentI
     if (this.innExterior == null) {
       this.innExterior = InputExteriorUtil.create(this.currConfig.exterior || null);
       this.settingExterior(this.hostRef, this.innExterior);
-    }
-    if (this.innFrameSizeValue === 0) {
-      this.innFrameSizeValue = this.createFrameSize(this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
-      this.settingFrameSize(this.hostRef, this.innFrameSizeValue);
     }
     if (this.innIsLabelShrink == null) {
       this.innIsLabelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig.isLabelShrink;
@@ -131,33 +120,7 @@ export class GrnFrameInput2Component implements OnChanges, OnInit, AfterContentI
     }
   }
 
-  ngAfterContentInit(): void {
-    console.log(`ngAfterContentInit()`);
-  }
-
-  ngAfterViewInit(): void {
-    console.log(`ngAfterViewInit()`);
-  }
   // ** Public API **
-
-  public getOrnamAlign(ornamAlign: OrnamAlign | undefined, isEnd: boolean, exterior: InputExterior | null): string | null {
-    let result = null;
-    if (ornamAlign != null) {
-      if (ornamAlign === OrnamAlign.default) {
-        result = OrnamAlign.center.valueOf();
-        if (exterior === InputExterior.standard || (exterior === InputExterior.underline && !isEnd)) {
-          result = OrnamAlign.flexEnd.valueOf();
-        }
-      } else {
-        result = ornamAlign.valueOf();
-      }
-    }
-    return result;
-  }
-
-  public doClickFrame(event: Event): void {
-    this.clickFrame.emit(event);
-  }
 
   // ** Private API **
 
@@ -173,19 +136,6 @@ export class GrnFrameInput2Component implements OnChanges, OnInit, AfterContentI
     HtmlElemUtil.setAttr(this.renderer, elem, 'frm-br', isBorder ? '' : null);
   }
 
-  private createFrameSize(frameSizeInp: FrameSize | null, frameSizeValueInp?: number): number {
-    const frameSize: FrameSize = FrameSizeUtil.create(frameSizeInp);
-    let frameSizeValue = FrameSizeUtil.getValue(frameSize) || 0;
-    if (frameSizeInp === null && frameSizeValueInp && frameSizeValueInp > 0) {
-      frameSizeValue = frameSizeValueInp;
-    }
-    return frameSizeValue;
-  }
-
-  private settingFrameSize(elem: ElementRef<HTMLElement> | undefined, frameSizeValue: number): void {
-    HtmlElemUtil.setProperty(elem, '--size', frameSizeValue > 0 ? frameSizeValue + 'px' : null);
-  }
-
   private settingLabelShrink(elem: ElementRef<HTMLElement> | undefined, isLabelShrink: boolean): void {
     HtmlElemUtil.setClass(this.renderer, elem, 'gfi-shrink', isLabelShrink);
     HtmlElemUtil.setAttr(this.renderer, elem, 'shr', isLabelShrink ? '' : null);
@@ -194,30 +144,5 @@ export class GrnFrameInput2Component implements OnChanges, OnInit, AfterContentI
   private settingHiddenLabel(elem: ElementRef<HTMLElement> | undefined, hiddenLabel: boolean): void {
     HtmlElemUtil.setClass(this.renderer, elem, 'gfi-hidden-label', hiddenLabel);
     HtmlElemUtil.setAttr(this.renderer, elem, 'hlbl', hiddenLabel ? '' : null);
-  }
-
-  private settingDisabled(elem: ElementRef<HTMLElement> | undefined, isDisabled: boolean | null): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-disabled', isDisabled || false);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'dis', isDisabled ? '' : null);
-  }
-
-  private settingFocused(elem: ElementRef<HTMLElement> | undefined, isFocused: boolean): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-focused', isFocused);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'foc', isFocused ? '' : null);
-  }
-
-  private settingFilled(elem: ElementRef<HTMLElement> | undefined, isFilled: boolean): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-filled', isFilled);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'fil', isFilled ? '' : null);
-  }
-
-  private settingError(elem: ElementRef<HTMLElement> | undefined, isError: boolean | null): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-error', isError || false);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'err', isError ? '' : null);
-  }
-
-  private settingIndent(elem: ElementRef<HTMLElement> | undefined, isIndent: boolean | null): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-lgn-indent', isIndent || false);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ind', isIndent ? '' : null);
   }
 }

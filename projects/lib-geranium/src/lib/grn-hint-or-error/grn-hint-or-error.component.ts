@@ -9,7 +9,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { HtmlElemUtil } from '../utils/html-elem.util';
+import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 @Component({
   selector: 'grn-hint-or-error',

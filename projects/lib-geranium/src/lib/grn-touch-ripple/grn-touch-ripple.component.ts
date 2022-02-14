@@ -11,7 +11,7 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
-import { HtmlElemUtil } from '../utils/html-elem.util';
+import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 const RIPPLE_CLASS = 'gtr-ripple';
 

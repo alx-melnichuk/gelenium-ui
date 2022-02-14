@@ -35,14 +35,14 @@ import {
 
 import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
 import { GRN_FRAME_INPUT_CONFIG } from '../grn-frame-input/grn-frame-input.component';
-import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
-import { GrnFrameInputConfig } from '../interfaces/grn-frame-input-config.interface';
-import { InputExterior, InputExteriorUtil } from '../interfaces/input-exterior.interface';
-import { OrnamAlign, OrnamAlignUtil } from '../interfaces/ornam-align.interface';
-import { BooleanUtil } from '../utils/boolean.util';
-import { HtmlElemUtil } from '../utils/html-elem.util';
-import { InputLabelUtil } from '../utils/input-label.util';
-import { NumberUtil } from '../utils/number.util';
+import { FrameSize, FrameSizeUtil } from '../_interfaces/frame-size.interface';
+import { GrnFrameInputConfig } from '../_interfaces/grn-frame-input-config.interface';
+import { InputExterior, InputExteriorUtil } from '../_interfaces/input-exterior.interface';
+import { OrnamAlign, OrnamAlignUtil } from '../_interfaces/ornam-align.interface';
+import { BooleanUtil } from '../_utils/boolean.util';
+import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { InputLabelUtil } from '../_utils/input-label.util';
+import { NumberUtil } from '../_utils/number.util';
 
 let identifier = 0;
 
@@ -185,7 +185,7 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
     }
     if (isModifyLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
       // Determine new parameter values that depend on: innExterior, innFrameSizeValue.
-      this.labelPadding = InputLabelUtil.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
+      this.labelPadding = InputLabelUtil.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd || null);
       this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
     }
     if (changes.ornamLfAlign || (changes.config && !this.ornamLfAlign)) {
@@ -204,7 +204,7 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
     }
     if (changes.isDisabled) {
       this.isDisabled2 = BooleanUtil.init(this.isDisabled);
-      this.setDisabledState(this.isDisabled2);
+      this.setDisabled(this.isDisabled2);
     }
     if (changes.isError) {
       this.isError2 = BooleanUtil.init(this.isError);
@@ -239,7 +239,7 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
     }
     if (isModifyLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
       // Determine new parameter values that depend on: innExterior, innFrameSizeValue.
-      this.labelPadding = InputLabelUtil.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
+      this.labelPadding = InputLabelUtil.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd || null);
       this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
     }
   }
@@ -284,7 +284,7 @@ export class GrnTextareaComponent implements OnChanges, OnInit, AfterViewInit, C
     this.onTouched = fn;
   }
 
-  public setDisabledState(isDisabled: boolean | null): void {
+  public setDisabled(isDisabled: boolean | null): void {
     if (isDisabled) {
       this.formGroup.disable();
     } else {

@@ -9,6 +9,11 @@ grn-hint-or-error {
   height: 1.66em;
   margin-top: 3px;
   margin-bottom: 0;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
 
   // The state without error, focused and disabled.
   &:not([err]):not([foc]):not([dis]) {

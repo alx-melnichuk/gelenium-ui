@@ -26,10 +26,11 @@ import {
 } from '../directives/grn-size/grn-size.directive';
 import { GrnTouchRippleComponent } from '../grn-touch-ripple/grn-touch-ripple.component';
 
-import { ButtonExterior, ButtonExteriorUtil } from '../interfaces/button-exterior.interface';
-import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
-import { GrnButtonConfig } from '../interfaces/grn-button-config.interface';
-import { HtmlElemUtil } from '../utils/html-elem.util';
+import { ButtonExterior, ButtonExteriorUtil } from '../_interfaces/button-exterior.interface';
+import { FrameSize, FrameSizeUtil } from '../_interfaces/frame-size.interface';
+import { GrnButtonConfig } from '../_interfaces/grn-button-config.interface';
+import { BooleanUtil } from '../_utils/boolean.util';
+import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GrnLinkDirective } from './grn-link.directive';
 
@@ -78,8 +79,6 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   public defaultFrameSize = FrameSizeUtil.getValue(FrameSize.small) || 0;
   public currConfig: GrnButtonConfig = {};
   public innExterior: ButtonExterior | undefined;
-  // public innFrameSize: FrameSize | undefined;
-  // public innFrameSizeValue = 0;
   public frameSize2: FrameSize | undefined;
   public isFocused = false;
   public innIsDisabled: boolean | null = null;
@@ -109,15 +108,10 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     }
     if (changes.frameSize || (changes.config && !this.frameSize)) {
       this.frameSize2 = FrameSizeUtil.convert(this.frameSize) || undefined;
-      // console.log(`@C this.frameSize=${this.frameSize}`);
-      // #this.innFrameSize = FrameSizeUtil.convert(this.frameSize) || this.currConfig.frameSize;
-      // #this.innFrameSizeValue = FrameSizeUtil.getValue(this.innFrameSize || null) || this.currConfig.frameSizeValue || this.defaultFrameSize;
-      // #console.log(`@C this.innFrameSize=${this.innFrameSize}`);
-      // #console.log(`@C this.innFrameSizeValue=${this.innFrameSizeValue}`);
     }
     if (changes.isDisabled) {
-      this.innIsDisabled = this.isDisabled === '' || this.isDisabled === 'true'; // +
-      this.settingIsDisabled(this.buttonElementRef, this.innIsDisabled); // +
+      this.innIsDisabled = BooleanUtil.init(this.isDisabled || null);
+      this.settingIsDisabled(this.buttonElementRef, this.innIsDisabled || false);
     }
   }
 
@@ -127,14 +121,6 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       this.settingExterior(this.hostRef, this.innExterior);
       // console.log(`@I this.innExterior=${this.innExterior}`);
     }
-    // #if (!this.innFrameSize) {
-    // #  this.innFrameSize = FrameSizeUtil.convert(this.frameSize) || this.currConfig.frameSize;
-    // #  console.log(`@I this.innFrameSize=${this.innFrameSize}`);
-    // #}
-    // #if (this.innFrameSizeValue === 0) {
-    // #  this.innFrameSizeValue = FrameSizeUtil.getValue(this.innFrameSize || null) || this.currConfig.frameSizeValue || this.defaultFrameSize;
-    // #  console.log(`@I this.innFrameSizeValue=${this.innFrameSizeValue}`);
-    // #}
   }
 
   ngAfterContentInit(): void {

@@ -13,7 +13,7 @@ import {
   LABEL_UNDERLINE,
 } from 'src/app/lib-core/constants/constants';
 
-import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/interfaces/grn-frame-input-config.interface';
+import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-input-config.interface';
 
 @Component({
   selector: 'app-frame-input-border-radius',

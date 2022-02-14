@@ -19,7 +19,56 @@ grn-frame-input2 { // outline: 1px dashed crimson;
   &[wdFull] {
     width: 100%;
   }
-  border-radius: var(--gfi-br-rd, var(--s-br-rd));
+  // Small indentation of the legend from the border for "outlined" mode.
+  --o-lgn-pd-def: 0.3em;
+  // frameSize: 56px; font-size: 16px; 
+  &[ext-o] {
+    --br-rd-def: 0.35em;
+    --lbl-pd-tp-def: 1.03125em; // 16.5px
+    --lbl-pd-bt-def: 1.03125em; // 16.5px
+    --lbl-pd-lf-def: 0.875em; // 14px
+    --lbl-pd-rg-def: 0.875em; // 14px
+    --lbl-wd-def: calc(133% - 1.66 * 1.75em); // 133% - 46.48px
+    --lbl-trn-y-def: -0.53875em; // -8.62px
+    --lbl2-wd-def: calc(100% - 1.75em); // 100% - 28px
+    --lbl2-trn-y-def: 1.03125em; // 16.5px
+    }
+  &[ext-u] {
+    --br-rd-def: 0.35em 0.35em 0px 0px; 
+    --lbl-pd-tp-def: 1.546875em; // 24.75px
+    --lbl-pd-bt-def: 0.515625em; // 8.25px
+    --lbl-pd-lf-def: 0.75em; // 12px
+    --lbl-pd-rg-def: 0.75em; // 12px
+    --lbl-wd-def: calc(133% - 1.66 * 1.5em); // 133% - 39.84px
+    --lbl-trn-y-def: 0.379375em; // 6.07px
+    --lbl2-wd-def: calc(100% - 1.5em); // 100% - 24px
+    --lbl2-trn-y-def: 1.03125em; // 16.5px
+  }
+  &[ext-s] {
+    --lbl-pd-tp-def: 1.546875em; // 24.75px
+    --lbl-pd-bt-def: 0.515625em; // 8.25px
+    --lbl-pd-lf-def: 0;
+    --lbl-pd-rg-def: 0;
+    --lbl-wd-def: 133%;
+    --lbl-trn-y-def: 0.32em; // 5.12px
+    --lbl2-wd-def: 100%;
+    --lbl2-trn-y-def: 1.546875em; // 24.75px
+  }
+
+  border-radius: var(--gfi-br-rd, var(--s-br-rd, var(--br-rd-def)));
+
+  input, textarea {
+    line-height: inherit;
+    align-self: baseline;
+  }
+  input[elem-pd-ver] {
+    padding-top: var(--gfi-lbl-pd-tp, var(--s-lbl-pd-tp, var(--lbl-pd-tp-def)));
+    padding-bottom: var(--gfi-lbl-pd-bt, var(--s-lbl-pd-bt, var(--lbl-pd-bt-def)));
+  }
+  textarea[elem-mr-ver] {
+    margin-top: var(--gfi-lbl-pd-tp, var(--s-lbl-pd-tp, var(--lbl-pd-tp-def)));
+    margin-bottom: var(--gfi-lbl-pd-bt, var(--s-lbl-pd-bt, var(--lbl-pd-bt-def)));
+  }
 
   // Section "Label".
   label {
@@ -39,13 +88,23 @@ grn-frame-input2 { // outline: 1px dashed crimson;
   }
   &[shr], &[foc], &[fil] {
     label {
-      max-width: var(--lbl-wd);
-      @include mxTransformTranslateXYScale(var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, 1.1428em)), var(--lbl-trn-y), 0.75);
+      max-width: var(--gfi-lbl-wd, var(--lbl-wd, var(--lbl-wd-def)));
+      // @include mxTransformTranslateXYScale(var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--lbl-pd-lf-def))), var(--lbl-trn-y), 0.75);
+      @include mxTransformTranslateXYScale(
+        var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--lbl-pd-lf-def))),
+        var(--gfi-lbl-trn-y, var(--lbl-trn-y, var(--lbl-trn-y-def))),
+        0.75
+      );
     }
   }
   &:not([shr]):not([foc]):not([fil]) label {
-    max-width: var(--lbl2-wd);
-    @include mxTransformTranslateXYScale( var(--orn-lf, var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, 1.1428em))) , var(--lbl2-trn-y) , 1);
+    max-width: var(--gfi-lbl2-wd, var(--lbl2-wd, var(--lbl2-wd-def)));
+    // @include mxTransformTranslateXYScale(var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--lbl-pd-lf-def))), var(--lbl2-trn-y) , 1);
+    @include mxTransformTranslateXYScale(
+      var(--orn-lbl-pd-lf, var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--lbl-pd-lf-def)))),
+      var(--gfi-lbl2-trn-y, var(--lbl2-trn-y, var(--lbl2-trn-y-def))),
+      1
+    );
   }
 
   // Color for "label".
@@ -86,19 +145,6 @@ grn-frame-input2 { // outline: 1px dashed crimson;
   &[dis]:not([err]) div[frm] {
     color: var(--gfi-dis-cl); // The color in state is disabled for an input element.
   }
-
-  input, textarea {
-    line-height: inherit;
-    align-self: baseline;
-  }
-  input[elem-pd-ver] {
-    padding-top: var(--gfi-lbl-pd-tp, var(--s-lbl-pd-tp, 0.4821em));
-    padding-bottom: var(--gfi-lbl-pd-bt, var(--s-lbl-pd-bt, 0.4821em));
-  }
-  textarea[elem-mr-ver] {
-    margin-top: var(--gfi-lbl-pd-tp, var(--s-lbl-pd-tp, 0.4821em));
-    margin-bottom: var(--gfi-lbl-pd-bt, var(--s-lbl-pd-bt, 0.4821em));
-}
 
   // For "frame" underline and standard
   &[frm-br] div[frm] {
@@ -217,7 +263,7 @@ grn-frame-input2 { // outline: 1px dashed crimson;
     top: 0;
     left: 0;
     margin: 0;
-    padding: 0px calc(var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, 1.1428em)) - var(--gfi-o-lgn-pd));
+    padding: 0px calc(var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--lbl-pd-lf-def))) - var(--gfi-o-lgn-pd, var(--o-lgn-pd-def)));
     pointer-events: none;
     border-radius: inherit;
     border-style: solid;
@@ -230,7 +276,7 @@ grn-frame-input2 { // outline: 1px dashed crimson;
   }
   &[foc] fieldset {
     border-width: 2px;
-    padding-left: calc(var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, 1.1428em)) - var(--gfi-o-lgn-pd) - 1px);
+    padding-left: calc(var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--lbl-pd-lf-def))) - var(--gfi-o-lgn-pd, var(--o-lgn-pd-def)) - 1px);
   }
   // Border-color for "outlined" mode.
   // The state without mouse hover, error, focused and disabled.
@@ -279,7 +325,7 @@ grn-frame-input2 { // outline: 1px dashed crimson;
       transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
     }
     &[ind] legend {
-      padding: 0 calc(var(--gfi-o-lgn-pd) - 1px);
+      padding: 0 calc(var(--gfi-o-lgn-pd, var(--o-lgn-pd-def)) - 1px);
     }
   }
   &:not([shr]):not([fil]):not([foc]) legend {
@@ -298,10 +344,11 @@ grn-frame-input2 { // outline: 1px dashed crimson;
     order: 1;
   }
   .gfi-ornam-lf:empty~.gfi-elem-pd-hor {
-    padding-left: var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, 1.1428em));
+    padding-left: var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--lbl-pd-lf-def)));
   }
   .gfi-ornam-rg:empty~.gfi-elem-pd-hor {
-    padding-right: var(--gfi-lbl-pd-rg, var(--s-lbl-pd-rg, 1.1428em));  }
+    padding-right: var(--gfi-lbl-pd-rg, var(--s-lbl-pd-rg, var(--lbl-pd-rg-def)));
+  }
 
   span[orn-lf="center"], span[orn-rg="center"] {
     align-self: center;

@@ -3,9 +3,7 @@
     [label]="label"
     [config]="config"
     [exterior]="exterior2"
-    [frameSize]="frameSize2"
     [isLabelShrink]="isLabelShrink2"
-    hiddenLabel9="hiddenLabel"
     [hiddenLabel]="isHiddenLabel2"
     [isDisabled]="isDisabled2"
     [isFocused]="isFocused"
@@ -17,8 +15,7 @@
     [grnSizeModify]="exterior2 + ' ' + currConfig.exterior + ' ' + currConfig.labelPd"
     [grnSizeBorderRadius]="getSizeBorderRadius"
     [grnSizePaddingHor]="getSizePaddingHor"
-    [grnSizePaddingVer]="getSizePaddingVer"
-    [grnSizeAfterChanges]="getSizeAfterChanges">
+    [grnSizePaddingVer]="getSizePaddingVer">
 
     <span #grnOrnamentLf
       class="gfi-ornam-lf">
@@ -50,54 +47,10 @@
       (keyup)="doKeyup($event)" />
 
   </grn-frame-input2>
-
-  <!--
-  <grn-frame-input2 [attr.wdFull]="wdFull"
-    [label]="label"
-    [config]="config"
-    [exterior]="exterior2"
-    [frameSize]="frameSize2"
-    [isLabelShrink]="isLabelShrink2"
-    [hiddenLabel]="isHiddenLabel2"
-    [isDisabled]="isDisabled2"
-    [isFocused]="isFocused"
-    [isFilled]="isFilled"
-    [isError]="!!formControl.errors || isError2"
-    [isRequired]="isRequired2">
-    <span #grnOrnamentLf
-      class="gfi-ornam-lf">
-      <ng-content select="[grnOrnamentLf]"></ng-content>
-    </span>
-    <span #grnOrnamentRg
-      class="gfi-ornam-rg">
-      <ng-content select="[grnOrnamentRg]"></ng-content>
-    </span>
-    <input #inputElement
-      formControlName="textData"
-      elem-pd-ver
-      [attr.id]="id"
-      [type]="typeVal"
-      class="gi-input gfi-elem gfi-elem-pd-hor"
-      [attr.disabled]="isDisabled2 ? '': null"
-      [attr.autocomplete]="!!autoComplete ? autoComplete : null"
-      [attr.readonly]="isReadOnly2 ? '': null"
-      [attr.min]="min"
-      [attr.max]="max"
-      [attr.step]="step"
-      [pattern]="pattern"
-      (focus)="doFocus()"
-      (blur)="doBlur()"
-      (input)="doInput($event)"
-      (change)="doChange($event)"
-      (keydown)="doKeydown($event)"
-      (keypress)="doKeypress($event)"
-      (keyup)="doKeyup($event)" />
-  </grn-frame-input2>
--->
 </ng-container>
-<!-- <grn-hint-or-error *ngIf="!!helperText"
+<grn-hint-or-error *ngIf="!!helperText"
   [text]="helperText"
   [isError]="!!formControl.errors || isError2"
   [isFocused]="isFocused"
   [isDisabled]="isDisabled2">
-</grn-hint-or-error> -->
+</grn-hint-or-error>

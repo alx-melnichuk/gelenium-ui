@@ -1,13 +1,13 @@
-import { InputExterior } from '../interfaces/input-exterior.interface';
+import { InputExterior } from '../_interfaces/input-exterior.interface';
 
 export interface PaddingVerRes {
-  labelPaddingTop: number | null;
-  labelPaddingBottom: number | null;
+  paddingTop: number | null;
+  paddingBottom: number | null;
 }
 
 export interface TranslateVerRes {
-  labelTranslateY: number | null;
-  label2TranslateY: number | null;
+  translateY: number | null;
+  translateY2: number | null;
 }
 
 export class InputLabelUtil {
@@ -25,13 +25,13 @@ export class InputLabelUtil {
   }
 
   public static paddingVer(exterior: InputExterior | null, frameSizeValue: number, lineHeight: number | null): PaddingVerRes {
-    const labelPaddingTop = InputLabelUtil.paddingTpBt(true, exterior, frameSizeValue, lineHeight);
-    const labelPaddingBottom = InputLabelUtil.paddingTpBt(false, exterior, frameSizeValue, lineHeight);
-    return { labelPaddingTop, labelPaddingBottom };
+    const paddingTop = InputLabelUtil.paddingTpBt(true, exterior, frameSizeValue, lineHeight);
+    const paddingBottom = InputLabelUtil.paddingTpBt(false, exterior, frameSizeValue, lineHeight);
+    return { paddingTop, paddingBottom };
   }
   // Get left/right padding for the GrnFrameInpu element.
-  public static paddingLfRg(exterior: InputExterior, frameSizeVal: number, configLabelPd: number | undefined): number | null {
-    let result: number | null = configLabelPd || null;
+  public static paddingLfRg(exterior: InputExterior, frameSizeVal: number, configLabelPd: number | null): number | null {
+    let result: number | null = configLabelPd;
     if (frameSizeVal > 0 && (!result || result <= 0)) {
       if (exterior === InputExterior.outlined) {
         result = Math.round(100 * 0.25 * frameSizeVal) / 100;
@@ -68,8 +68,8 @@ export class InputLabelUtil {
   }
 
   public static translateVer(exterior: InputExterior | null, frameSizeValue: number, lineHeight: number | null): TranslateVerRes {
-    const labelTranslateY = InputLabelUtil.translateY(exterior, frameSizeValue, lineHeight);
-    const label2TranslateY = InputLabelUtil.translate2Y(exterior, frameSizeValue, lineHeight);
-    return { labelTranslateY, label2TranslateY };
+    const translateY = InputLabelUtil.translateY(exterior, frameSizeValue, lineHeight);
+    const translateY2 = InputLabelUtil.translate2Y(exterior, frameSizeValue, lineHeight);
+    return { translateY, translateY2 };
   }
 }

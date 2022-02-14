@@ -17,13 +17,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { FrameSize, FrameSizeUtil } from '../interfaces/frame-size.interface';
-import { GrnFrameInputConfig } from '../interfaces/grn-frame-input-config.interface';
-import { InputExterior, InputExteriorUtil } from '../interfaces/input-exterior.interface';
-import { OrnamAlign } from '../interfaces/ornam-align.interface';
-import { HtmlElemUtil } from '../utils/html-elem.util';
-import { InputLabelUtil, PaddingVerRes, TranslateVerRes } from '../utils/input-label.util';
-import { NumberUtil } from '../utils/number.util';
+import { FrameSize, FrameSizeUtil } from '../_interfaces/frame-size.interface';
+import { GrnFrameInputConfig } from '../_interfaces/grn-frame-input-config.interface';
+import { InputExterior, InputExteriorUtil } from '../_interfaces/input-exterior.interface';
+import { OrnamAlign } from '../_interfaces/ornam-align.interface';
+import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { InputLabelUtil, PaddingVerRes, TranslateVerRes } from '../_utils/input-label.util';
+import { NumberUtil } from '../_utils/number.util';
 
 export const GRN_FRAME_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('GRN_FRAME_INPUT_CONFIG');
 
@@ -108,7 +108,7 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
     if (isModifyLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
       // Determine new parameter values that depend on: innExterior, innFrameSizeValue.
       this.settingBorderRadius(this.hostRef, this.getBorderRadius(this.innExterior, this.innFrameSizeValue));
-      this.labelPadding = InputLabelUtil.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
+      this.labelPadding = InputLabelUtil.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd || null);
       this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
       this.settingLabelMaxWidth(this.hostRef, this.getLabelMaxWidth(this.labelPadding));
 
@@ -159,7 +159,7 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
     if (isModifyLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
       // Determine new parameter values that depend on: innExterior, innFrameSizeValue.
       this.settingBorderRadius(this.hostRef, this.getBorderRadius(this.innExterior, this.innFrameSizeValue));
-      this.labelPadding = InputLabelUtil.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd);
+      this.labelPadding = InputLabelUtil.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd || null);
       this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
       this.settingLabelMaxWidth(this.hostRef, this.getLabelMaxWidth(this.labelPadding));
     }
@@ -250,13 +250,13 @@ export class GrnFrameInputComponent implements OnChanges, OnInit, AfterContentIn
   }
 
   private settingLabelPaddingVer(el: ElementRef<HTMLElement> | undefined, paddingVertical: PaddingVerRes): void {
-    HtmlElemUtil.setProperty(el, '--lbl-pd-tp', NumberUtil.str(paddingVertical.labelPaddingTop)?.concat('px'));
-    HtmlElemUtil.setProperty(el, '--lbl-pd-bt', NumberUtil.str(paddingVertical.labelPaddingBottom)?.concat('px'));
+    HtmlElemUtil.setProperty(el, '--lbl-pd-tp', NumberUtil.str(paddingVertical.paddingTop)?.concat('px'));
+    HtmlElemUtil.setProperty(el, '--lbl-pd-bt', NumberUtil.str(paddingVertical.paddingBottom)?.concat('px'));
   }
 
   private settingLabelTranslateVer(el: ElementRef<HTMLElement> | undefined, translateVertical: TranslateVerRes): void {
-    HtmlElemUtil.setProperty(el, '--lbl-trn-y', NumberUtil.str(translateVertical.labelTranslateY)?.concat('px'));
-    HtmlElemUtil.setProperty(el, '--lbl2-trn-y', NumberUtil.str(translateVertical.label2TranslateY)?.concat('px'));
+    HtmlElemUtil.setProperty(el, '--lbl-trn-y', NumberUtil.str(translateVertical.translateY)?.concat('px'));
+    HtmlElemUtil.setProperty(el, '--lbl2-trn-y', NumberUtil.str(translateVertical.translateY2)?.concat('px'));
   }
 
   private settingLabelPaddingHor(elem: ElementRef<HTMLElement> | undefined, labelPadding: number | null): void {
