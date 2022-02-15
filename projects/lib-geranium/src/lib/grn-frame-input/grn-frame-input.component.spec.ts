@@ -8,9 +8,8 @@ describe('GrnFrameInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GrnFrameInputComponent ]
-    })
-    .compileComponents();
+      declarations: [GrnFrameInputComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

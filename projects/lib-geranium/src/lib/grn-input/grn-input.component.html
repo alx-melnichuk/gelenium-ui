@@ -3,14 +3,19 @@
     [label]="label"
     [config]="config"
     [exterior]="exterior2"
-    [frameSize]="frameSize2"
     [isLabelShrink]="isLabelShrink2"
     [hiddenLabel]="isHiddenLabel2"
     [isDisabled]="isDisabled2"
     [isFocused]="isFocused"
     [isFilled]="isFilled"
     [isError]="!!formControl.errors || isError2"
-    [isRequired]="isRequired2">
+    [isRequired]="isRequired2"
+    [grnSize]="frameSize2 || currConfig.frameSize"
+    [grnSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
+    [grnSizeModify]="exterior2 + ' ' + currConfig.exterior + ' ' + currConfig.labelPd"
+    [grnSizeBorderRadius]="getSizeBorderRadius"
+    [grnSizePaddingHor]="getSizePaddingHor"
+    [grnSizePaddingVer]="getSizePaddingVer">
     <span #grnOrnamentLf
       class="gfi-ornam-lf">
       <ng-content select="[grnOrnamentLf]"></ng-content>

@@ -40,7 +40,7 @@ grn-input {
   }
 
   grn-hint-or-error {
-    margin-right: var(--pd-lf);
-    margin-left: var(--pd-lf);  
+    padding-right: var(--gi-he-pd-lf, var(--he-pd-lf));
+    padding-left: var(--gi-he-pd-rg, var(--he-pd-lf));  
   }
 }

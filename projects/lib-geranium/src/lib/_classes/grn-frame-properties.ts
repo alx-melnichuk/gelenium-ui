@@ -22,7 +22,6 @@ export class GrnFrameProperties {
         result = radius + ' ' + radius + ' 0px 0px';
       }
     }
-    // console.log(`valueSizeBorderRadius(frameSizeValue:${frameSizeValue})=${result}`);
     return result;
   }
 
@@ -44,7 +43,6 @@ export class GrnFrameProperties {
     HtmlElemUtil.setProperty(this.hostRef, '--lbl2-wd', this.getLabel2MaxWidth(left, right, ornamentLfWidth, ornamentRgWidth));
     HtmlElemUtil.setProperty(this.hostRef, '--he-pd-lf', NumberUtil.str(left || null)?.concat('px'));
     HtmlElemUtil.setProperty(this.hostRef, '--orn-lbl-pd-lf', NumberUtil.str(ornamentLfWidth || null)?.concat('px'));
-    console.log(`valueSizePaddingHor(frameSizeValue:${frameSizeValue})={left: ${left}, right: ${right}} conf.labelPd=${configLabelPd}`);
     return { left, right };
   }
 
@@ -60,7 +58,6 @@ export class GrnFrameProperties {
     const translateVer = InputLabelUtil.translateVer(exterior, frameSizeValue, lineHeight);
     HtmlElemUtil.setProperty(this.hostRef, '--lbl-trn-y', NumberUtil.str(translateVer.translateY)?.concat('px'));
     HtmlElemUtil.setProperty(this.hostRef, '--lbl2-trn-y', NumberUtil.str(translateVer.translateY2)?.concat('px'));
-    console.log(`valueSizePaddingVer(frameSizeValue:${frameSizeValue})={ top: ${top}, biiom: ${bottom} } lineHeight=${lineHeight}`);
     return { top, bottom };
   }
 

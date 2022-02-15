@@ -2,8 +2,7 @@
   class="gfi-label">
   {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
 </label>
-<div class="gfi-frame"
-  (click)="doClickFrame($event)">
+<div class="gfi-frame">
   <ng-content></ng-content>
   <fieldset *ngIf="isOutlinedExterior"
     class="gfi-fieldset"

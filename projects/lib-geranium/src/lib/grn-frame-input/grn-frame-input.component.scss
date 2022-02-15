@@ -6,7 +6,8 @@
 @import '../_styles/mx-transform-scale-x.scss';
 @import '../_styles/mx-transform-translate-x-y-scale.scss';
 
-grn-frame-input { //outline: 1px dashed crimson;
+
+grn-frame-input { // outline: 1px dashed crimson;
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
   line-height: 1.4375em; // The value of the "line height" for the input element. (23px for font-size: 16px)
@@ -15,9 +16,58 @@ grn-frame-input { //outline: 1px dashed crimson;
   margin: 0;
   border: 0;
   vertical-align: top;
+  &[wdFull] {
+    width: 100%;
+  }
+  // Small indentation of the legend from the border for "outlined" mode.
+  --def-o-lgn-pd: 0.3em;
+  // frameSize: 56px; font-size: 16px; 
+  &[ext-o] {
+    --def-br-rd: 0.35em;
+    --def-lbl-pd-tp: 1.03125em; // 16.5px
+    --def-lbl-pd-bt: 1.03125em; // 16.5px
+    --def-lbl-pd-lf: 0.875em; // 14px
+    --def-lbl-pd-rg: 0.875em; // 14px
+    --def-lbl-wd: calc(133% - 1.66 * 1.75em); // 133% - 46.48px
+    --def-lbl-trn-y: -0.53875em; // -8.62px
+    --def-lbl2-wd: calc(100% - 1.75em); // 100% - 28px
+    --def-lbl2-trn-y: 1.03125em; // 16.5px
+    }
+  &[ext-u] {
+    --def-br-rd: 0.35em 0.35em 0px 0px; 
+    --def-lbl-pd-tp: 1.546875em; // 24.75px
+    --def-lbl-pd-bt: 0.515625em; // 8.25px
+    --def-lbl-pd-lf: 0.75em; // 12px
+    --def-lbl-pd-rg: 0.75em; // 12px
+    --def-lbl-wd: calc(133% - 1.66 * 1.5em); // 133% - 39.84px
+    --def-lbl-trn-y: 0.379375em; // 6.07px
+    --def-lbl2-wd: calc(100% - 1.5em); // 100% - 24px
+    --def-lbl2-trn-y: 1.03125em; // 16.5px
+  }
+  &[ext-s] {
+    --def-lbl-pd-tp: 1.546875em; // 24.75px
+    --def-lbl-pd-bt: 0.515625em; // 8.25px
+    --def-lbl-pd-lf: 0;
+    --def-lbl-pd-rg: 0;
+    --def-lbl-wd: 133%;
+    --def-lbl-trn-y: 0.32em; // 5.12px
+    --def-lbl2-wd: 100%;
+    --def-lbl2-trn-y: 1.546875em; // 24.75px
+  }
 
-  &[ext-o], &[ext-u] {
-    border-radius: var(--br-rd);
+  border-radius: var(--gfi-br-rd, var(--s-br-rd, var(--def-br-rd)));
+
+  input, textarea {
+    line-height: inherit;
+    align-self: baseline;
+  }
+  input[elem-pd-ver] {
+    padding-top: var(--gfi-lbl-pd-tp, var(--s-lbl-pd-tp, var(--def-lbl-pd-tp)));
+    padding-bottom: var(--gfi-lbl-pd-bt, var(--s-lbl-pd-bt, var(--def-lbl-pd-bt)));
+  }
+  textarea[elem-mr-ver] {
+    margin-top: var(--gfi-lbl-pd-tp, var(--s-lbl-pd-tp, var(--def-lbl-pd-tp)));
+    margin-bottom: var(--gfi-lbl-pd-bt, var(--s-lbl-pd-bt, var(--def-lbl-pd-bt)));
   }
 
   // Section "Label".
@@ -37,65 +87,61 @@ grn-frame-input { //outline: 1px dashed crimson;
     pointer-events: none;
   }
   &[shr], &[foc], &[fil] {
-    &>label {
-      max-width: var(--lbl-wd);
-      @include mxTransformTranslateXYScale(var(--lbl-pd-lf), var(--lbl-trn-y), 0.75);
+    label {
+      max-width: var(--gfi-lbl-wd, var(--lbl-wd, var(--def-lbl-wd)));
+      @include mxTransformTranslateXYScale(
+        var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf))),
+        var(--gfi-lbl-trn-y, var(--lbl-trn-y, var(--def-lbl-trn-y))),
+        0.75
+      );
     }
   }
-  &:not([shr]):not([foc]):not([fil])>label {
-    max-width: var(--lbl2-wd);
-    @include mxTransformTranslateXYScale( var(--orn-lf, var(--lbl-pd-lf)) , var(--lbl2-trn-y) , 1);
+  &:not([shr]):not([foc]):not([fil]) label {
+    max-width: var(--gfi-lbl2-wd, var(--lbl2-wd, var(--def-lbl2-wd)));
+    @include mxTransformTranslateXYScale(
+      var(--orn-lbl-pd-lf, var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf)))),
+      var(--gfi-lbl2-trn-y, var(--lbl2-trn-y, var(--def-lbl2-trn-y))),
+      1
+    );
   }
 
   // Color for "label".
   // The state without mouse hover, error, focused and disabled.
-  &:not(:hover):not([err]):not([foc]):not([dis])>label {
+  &:not(:hover):not([err]):not([foc]):not([dis]) label {
     color: var(--gfi-lbl-def-cl);
   }
   // The state with mouse hover but without error, focused and disabled.
-  &:hover:not([err]):not([foc]):not([dis])>label {
+  &:hover:not([err]):not([foc]):not([dis]) label {
     color: var(--gfi-hov-cl);
   }
   // The state with error.
-  &[err]>label {
+  &[err] label {
     color: var(--gfi-err-cl);
   }
   // The state with mouse hover and error but without focused and disabled.
-  &:hover[err]:not([foc]):not([dis])>label {
+  &:hover[err]:not([foc]):not([dis]) label {
     color: var(--gfi-hov-err-cl);
   }
   // The state with focused but without error.
-  &[foc]:not([err])>label {
+  &[foc]:not([err]) label {
     color: var(--gfi-foc-cl);
   }
   // The state with disabled but without error.
-  &[dis]:not([err])>label {
+  &[dis]:not([err]) label {
     color: var(--gfi-dis-cl);
   }
 
   // Section "Frame".
-  div {
+  &>div {
     box-sizing: border-box;
     @include mxDisplayInlineFlex();
     flex-wrap: nowrap;
     position: relative;
     border-radius: inherit;
+    width: 100%;
   }
   &[dis]:not([err])>div {
     color: var(--gfi-dis-cl); // The color in state is disabled for an input element.
-  }
-
-  input, textarea {
-    line-height: inherit;
-    align-self: baseline;
-  }
-  input[elem-pd-ver] {
-    padding-top: var(--lbl-pd-tp);
-    padding-bottom: var(--lbl-pd-bt);
-  }
-  textarea[elem-mr-ver] {
-    margin-top: var(--lbl-pd-tp);
-    margin-bottom: var(--lbl-pd-bt);
   }
 
   // For "frame" underline and standard
@@ -215,7 +261,7 @@ grn-frame-input { //outline: 1px dashed crimson;
     top: 0;
     left: 0;
     margin: 0;
-    padding: 0px calc(var(--lbl-pd-lf) - var(--gfi-o-lgn-pd));
+    padding: 0px calc(var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf))) - var(--gfi-o-lgn-pd, var(--def-o-lgn-pd)));
     pointer-events: none;
     border-radius: inherit;
     border-style: solid;
@@ -228,7 +274,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   }
   &[foc] fieldset {
     border-width: 2px;
-    padding-left: calc(var(--lbl-pd-lf) - var(--gfi-o-lgn-pd) - 1px);
+    padding-left: calc(var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf))) - var(--gfi-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
   }
   // Border-color for "outlined" mode.
   // The state without mouse hover, error, focused and disabled.
@@ -277,7 +323,7 @@ grn-frame-input { //outline: 1px dashed crimson;
       transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
     }
     &[ind] legend {
-      padding: 0 calc(var(--gfi-o-lgn-pd) - 1px);
+      padding: 0 calc(var(--gfi-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
     }
   }
   &:not([shr]):not([fil]):not([foc]) legend {
@@ -296,12 +342,11 @@ grn-frame-input { //outline: 1px dashed crimson;
     order: 1;
   }
   .gfi-ornam-lf:empty~.gfi-elem-pd-hor {
-    padding-left: var(--lbl-pd-lf);
+    padding-left: var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf)));
   }
   .gfi-ornam-rg:empty~.gfi-elem-pd-hor {
-    padding-right: var(--lbl-pd-lf);
+    padding-right: var(--gfi-lbl-pd-rg, var(--s-lbl-pd-rg, var(--def-lbl-pd-rg)));
   }
-
   span[orn-lf="center"], span[orn-rg="center"] {
     align-self: center;
   }
@@ -338,7 +383,7 @@ grn-frame-input { //outline: 1px dashed crimson;
   &[ext-s]>div>span[orn-rg] {
     &>.gfi-su-ornam {
       display: inline-block;
-      margin-bottom: var(--lbl-pd-bt);
+      margin-bottom: var(--gfi-lbl-pd-bt, var(--s-lbl-pd-bt, var(--def-lbl-pd-bt)));
     }
   }
 }

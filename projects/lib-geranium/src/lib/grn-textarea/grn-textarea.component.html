@@ -1,8 +1,8 @@
 <ng-container [formGroup]="formGroup">
-  <grn-frame-input [label]="label"
+  <grn-frame-input [attr.wdFull]="wdFull"
+    [label]="label"
     [config]="config"
     [exterior]="exterior2"
-    [frameSize]="frameSize2"
     [isLabelShrink]="isLabelShrink2"
     [hiddenLabel]="isHiddenLabel2"
     [isDisabled]="isDisabled2"
@@ -10,7 +10,12 @@
     [isFilled]="isFilled"
     [isError]="!!formControl.errors || isError2"
     [isRequired]="isRequired2"
-    (clickFrame)="doClickFrame()">
+    [grnSize]="frameSize2 || currConfig.frameSize"
+    [grnSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
+    [grnSizeModify]="exterior2 + ' ' + currConfig.exterior + ' ' + currConfig.labelPd"
+    [grnSizeBorderRadius]="getSizeBorderRadius"
+    [grnSizePaddingHor]="getSizePaddingHor"
+    [grnSizePaddingVer]="getSizePaddingVer">
     <span #grnOrnamentLf
       class="gfi-ornam-lf">
       <ng-content select="[grnOrnamentLf]"></ng-content>

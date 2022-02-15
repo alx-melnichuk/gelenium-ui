@@ -12,7 +12,7 @@ import { UrlComponents } from '../../../lm-components/constants/url-components.c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent implements AfterViewInit {
-  public showNum = '02';
+  public showNum = '';
   public urlFrameInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME_INPUT');
 
   constructor() {

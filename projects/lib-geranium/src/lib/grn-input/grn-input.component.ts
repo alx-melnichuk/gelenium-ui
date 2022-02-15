@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
-  AfterViewInit,
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -34,15 +34,21 @@ import {
 } from '@angular/forms';
 
 import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
+import {
+  GrnSizeBorderRadius,
+  GrnSizePaddingHor,
+  GrnSizePaddingHorRes,
+  GrnSizePaddingVer,
+  GrnSizePaddingVerRes,
+} from '../directives/grn-size/grn-size.directive';
 import { GRN_FRAME_INPUT_CONFIG } from '../grn-frame-input/grn-frame-input.component';
+import { GrnFrameProperties } from '../_classes/grn-frame-properties';
 import { FrameSize, FrameSizeUtil } from '../_interfaces/frame-size.interface';
 import { GrnFrameInputConfig } from '../_interfaces/grn-frame-input-config.interface';
 import { InputExterior, InputExteriorUtil } from '../_interfaces/input-exterior.interface';
 import { OrnamAlign, OrnamAlignUtil } from '../_interfaces/ornam-align.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { InputLabelUtil } from '../_utils/input-label.util';
-import { NumberUtil } from '../_utils/number.util';
 
 import { InputType, InputTypeUtil } from './grn-input.interface';
 
@@ -61,7 +67,7 @@ let identifier = 0;
     { provide: GRN_NODE_INTERNAL_VALIDATOR, useExisting: GrnInputComponent },
   ],
 })
-export class GrnInputComponent implements OnChanges, OnInit, AfterViewInit, ControlValueAccessor, Validator, GrnNodeInternalValidator {
+export class GrnInputComponent implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GrnNodeInternalValidator {
   @Input()
   public id = 'grn_input_' + ++identifier;
   @Input()
@@ -89,11 +95,11 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterViewInit, Cont
   @Input()
   public isReadOnly: string | null = null;
   @Input()
-  public pattern = '';
-  @Input()
   public autoComplete = '';
   @Input()
   public wdFull: string | null = null;
+  @Input()
+  public pattern = '';
   @Input()
   public step: number | null = null;
   @Input()
@@ -127,37 +133,30 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterViewInit, Cont
   @ViewChild('grnOrnamentRg', { static: true })
   public grnOrnamentRg: ElementRef<HTMLElement> | undefined;
 
-  public get isOutlined(): boolean {
-    return InputExteriorUtil.isOutlined(this.innExterior);
-  }
-  public get isUnderline(): boolean {
-    return InputExteriorUtil.isUnderline(this.innExterior);
-  }
-  public get isStandard(): boolean {
-    return InputExteriorUtil.isStandard(this.innExterior);
-  }
-
+  public defaultFrameSize = FrameSizeUtil.getValue(FrameSize.middle) || 0;
   public currConfig: GrnFrameInputConfig = {};
-  public innExterior: InputExterior | null = null;
   public exterior2: InputExterior | null = null;
-  public innFrameSizeValue = 0;
+  public innExterior: InputExterior | null = null;
   public frameSize2: FrameSize | null = null;
   public isLabelShrink2: boolean | null = null; // Binding attribute "lbShrink".
   public isHiddenLabel2: boolean | null = null; // Binding attribute "hiddenLabel".
-  public labelPadding: number | null = null;
-
   public typeVal: InputType = InputType.text;
-  public isReadOnly2: boolean | null = null; // Binding attribute "isReadOnly".
-  public isRequired2: boolean | null = null; // Binding attribute "isRequired".
   public isDisabled2: boolean | null = null; // Binding attribute "isDisabled".
   public isError2: boolean | null = null; // Binding attribute "isError".
+  public isRequired2: boolean | null = null; // Binding attribute "isRequired".
+  public isReadOnly2: boolean | null = null; // Binding attribute "isReadOnly".
+  public ornamLfAlign2: OrnamAlign = OrnamAlign.default;
+  public ornamRgAlign2: OrnamAlign = OrnamAlign.default;
+
+  public ornamentLfWidth = 0;
+  public ornamentRgWidth = 0;
 
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public isFocused = false;
   public isFilled = false;
-  public ornamLfAlign2: OrnamAlign = OrnamAlign.default;
-  public ornamRgAlign2: OrnamAlign = OrnamAlign.default;
+
+  private frameProperties: GrnFrameProperties = new GrnFrameProperties(this.hostRef);
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -173,43 +172,24 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterViewInit, Cont
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    let isModifyLabelPadding = false;
+    if (changes.type) {
+      this.typeVal = InputTypeUtil.create(this.type) || InputType.text;
+    }
     if (changes.config) {
       this.currConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
     }
     if (changes.exterior || (changes.config && !this.exterior)) {
       this.exterior2 = InputExteriorUtil.convert(this.exterior);
       this.innExterior = InputExteriorUtil.create(this.exterior2 || this.currConfig.exterior || null);
-      isModifyLabelPadding = true;
     }
     if (changes.frameSize || (changes.config && !this.frameSize)) {
       this.frameSize2 = FrameSizeUtil.convert(this.frameSize);
-      this.innFrameSizeValue = this.createFrameSize(this.frameSize2 || this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
-      isModifyLabelPadding = true;
-    }
-    if (isModifyLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      // Determine new parameter values that depend on: innExterior, innFrameSizeValue.
-      this.labelPadding = InputLabelUtil.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd || null);
-      this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
-    }
-    if (changes.ornamLfAlign || (changes.config && !this.ornamLfAlign)) {
-      this.ornamLfAlign2 = OrnamAlignUtil.convert(this.ornamLfAlign) || this.currConfig.ornamLfAlign || OrnamAlign.default;
-      this.settingOrnamentLeft(this.grnOrnamentLf, this.ornamLfAlign2);
-    }
-    if (changes.ornamRgAlign || (changes.config && !this.ornamRgAlign)) {
-      this.ornamRgAlign2 = OrnamAlignUtil.convert(this.ornamRgAlign) || this.currConfig.ornamRgAlign || OrnamAlign.default;
-      this.settingOrnamentRight(this.grnOrnamentRg, this.ornamRgAlign2);
     }
     if (changes.lbShrink) {
-      // this.isLabelShrink2 = this.lbShrink === '' || this.lbShrink === 'true' ? true : this.lbShrink === 'false' ? false : null;
       this.isLabelShrink2 = BooleanUtil.init(this.lbShrink);
     }
     if (changes.hiddenLabel) {
-      // this.isHiddenLabel2 = this.hiddenLabel === '' || this.hiddenLabel === 'true' ? true : this.hiddenLabel === 'false' ? false : null;
       this.isHiddenLabel2 = BooleanUtil.init(this.hiddenLabel);
-    }
-    if (changes.type) {
-      this.typeVal = InputTypeUtil.create(this.type) || InputType.text;
     }
     if (changes.isDisabled) {
       this.isDisabled2 = BooleanUtil.init(this.isDisabled);
@@ -224,6 +204,14 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterViewInit, Cont
     if (changes.isReadOnly) {
       this.isReadOnly2 = BooleanUtil.init(this.isReadOnly);
     }
+    if (changes.ornamLfAlign || (changes.config && !this.ornamLfAlign)) {
+      this.ornamLfAlign2 = OrnamAlignUtil.convert(this.ornamLfAlign) || this.currConfig.ornamLfAlign || OrnamAlign.default;
+      this.settingOrnamentLeft(this.grnOrnamentLf, this.ornamLfAlign2);
+    }
+    if (changes.ornamRgAlign || (changes.config && !this.ornamRgAlign)) {
+      this.ornamRgAlign2 = OrnamAlignUtil.convert(this.ornamRgAlign) || this.currConfig.ornamRgAlign || OrnamAlign.default;
+      this.settingOrnamentRight(this.grnOrnamentRg, this.ornamRgAlign2);
+    }
 
     if (changes.isRequired || changes.minLength || changes.maxLength) {
       this.prepareFormGroup(this.isRequired2, this.minLength, this.maxLength);
@@ -231,23 +219,15 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterViewInit, Cont
   }
 
   ngOnInit(): void {
-    let isModifyLabelPadding = false;
     if (this.innExterior == null) {
       this.innExterior = InputExteriorUtil.create(this.currConfig.exterior || null);
-      isModifyLabelPadding = true;
-    }
-    if (this.innFrameSizeValue === 0) {
-      this.innFrameSizeValue = this.createFrameSize(this.currConfig.frameSize || null, this.currConfig.frameSizeValue);
-      isModifyLabelPadding = true;
-    }
-    if (isModifyLabelPadding && this.innExterior && this.innFrameSizeValue > 0) {
-      // Determine new parameter values that depend on: innExterior, innFrameSizeValue.
-      this.labelPadding = InputLabelUtil.paddingLfRg(this.innExterior, this.innFrameSizeValue, this.currConfig.labelPd || null);
-      this.settingLabelPaddingHor(this.hostRef, this.labelPadding);
     }
   }
 
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
+    // Get the width of the ornament block.
+    this.ornamentLfWidth = this.grnOrnamentLf?.nativeElement.offsetWidth || 0;
+    this.ornamentRgWidth = this.grnOrnamentRg?.nativeElement.offsetWidth || 0;
     if (this.ornamLfAlign2) {
       // Determine new parameter values that depend on: grnOrnamentLf, ornamLfAlign2.
       this.settingOrnamentLeft(this.grnOrnamentLf, this.ornamLfAlign2);
@@ -360,6 +340,27 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterViewInit, Cont
     this.keyupData.emit(event);
   }
 
+  // ** Methods for interacting with GrnSizeDirective. **
+
+  public getSizeBorderRadius: GrnSizeBorderRadius = (frameSizeValue: number, lineHeight: number): string => {
+    return this.frameProperties.valueSizeBorderRadius(frameSizeValue, lineHeight, this.innExterior);
+  };
+  public getSizePaddingHor: GrnSizePaddingHor = (frameSizeValue: number, lineHeight: number): GrnSizePaddingHorRes => {
+    return this.frameProperties.valueSizePaddingHor(
+      frameSizeValue,
+      lineHeight,
+      this.innExterior,
+      this.currConfig.labelPd || null,
+      this.ornamentLfWidth,
+      this.ornamentRgWidth
+    );
+  };
+  public getSizePaddingVer: GrnSizePaddingVer = (frameSizeValue: number, lineHeight: number): GrnSizePaddingVerRes => {
+    return this.frameProperties.valueSizePaddingVer(frameSizeValue, lineHeight, this.innExterior);
+  };
+
+  // ** - **
+
   // ** Private API **
 
   private prepareFormGroup(isRequired: boolean | null, minLength: number | null, maxLength: number | null): void {
@@ -381,19 +382,6 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterViewInit, Cont
     this.ornamLfAlign2 = OrnamAlignUtil.create(config?.ornamLfAlign || this.ornamLfAlign2, null);
     this.ornamRgAlign2 = OrnamAlignUtil.create(config?.ornamRgAlign || this.ornamRgAlign2, null);
     return config;
-  }
-
-  private createFrameSize(frameSizeInp: FrameSize | null, frameSizeValueInp?: number): number {
-    const frameSize: FrameSize = FrameSizeUtil.create(frameSizeInp);
-    let frameSizeValue = FrameSizeUtil.getValue(frameSize) || 0;
-    if (frameSizeInp === null && frameSizeValueInp && frameSizeValueInp > 0) {
-      frameSizeValue = frameSizeValueInp;
-    }
-    return frameSizeValue;
-  }
-
-  private settingLabelPaddingHor(elem: ElementRef<HTMLElement> | undefined, labelPadding: number | null): void {
-    HtmlElemUtil.setProperty(elem, '--pd-lf', NumberUtil.str(labelPadding)?.concat('px'));
   }
 
   private settingOrnamentLeft(ornamentLf: ElementRef<HTMLElement> | undefined, ornamLfAlign: OrnamAlign): void {
