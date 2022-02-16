@@ -1,6 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -67,7 +66,7 @@ let identifier = 0;
     { provide: GRN_NODE_INTERNAL_VALIDATOR, useExisting: GrnInputComponent },
   ],
 })
-export class GrnInputComponent implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GrnNodeInternalValidator {
+export class GrnInputComponent implements OnChanges, OnInit, ControlValueAccessor, Validator, GrnNodeInternalValidator {
   @Input()
   public id = 'grn_input_' + ++identifier;
   @Input()
@@ -116,22 +115,12 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   public ornamRgAlign: string | null = null; // OrnamAlign
 
   @Output()
-  readonly inputData: EventEmitter<Event> = new EventEmitter();
+  readonly focused: EventEmitter<void> = new EventEmitter();
   @Output()
-  readonly changeData: EventEmitter<Event> = new EventEmitter();
-  @Output()
-  readonly keydownData: EventEmitter<KeyboardEvent> = new EventEmitter();
-  @Output()
-  readonly keypressData: EventEmitter<KeyboardEvent> = new EventEmitter();
-  @Output()
-  readonly keyupData: EventEmitter<KeyboardEvent> = new EventEmitter();
+  readonly blured: EventEmitter<void> = new EventEmitter();
 
   @ViewChild('inputElement')
   public inputElementRef: ElementRef<HTMLElement> | null = null;
-  @ViewChild('grnOrnamentLf', { static: true })
-  public grnOrnamentLf: ElementRef<HTMLElement> | undefined;
-  @ViewChild('grnOrnamentRg', { static: true })
-  public grnOrnamentRg: ElementRef<HTMLElement> | undefined;
 
   public defaultFrameSize = FrameSizeUtil.getValue(FrameSize.middle) || 0;
   public currConfig: GrnFrameInputConfig = {};
@@ -147,9 +136,6 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   public isReadOnly2: boolean | null = null; // Binding attribute "isReadOnly".
   public ornamLfAlign2: OrnamAlign = OrnamAlign.default;
   public ornamRgAlign2: OrnamAlign = OrnamAlign.default;
-
-  public ornamentLfWidth = 0;
-  public ornamentRgWidth = 0;
 
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
@@ -204,14 +190,6 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     if (changes.isReadOnly) {
       this.isReadOnly2 = BooleanUtil.init(this.isReadOnly);
     }
-    if (changes.ornamLfAlign || (changes.config && !this.ornamLfAlign)) {
-      this.ornamLfAlign2 = OrnamAlignUtil.convert(this.ornamLfAlign) || this.currConfig.ornamLfAlign || OrnamAlign.default;
-      this.settingOrnamentLeft(this.grnOrnamentLf, this.ornamLfAlign2);
-    }
-    if (changes.ornamRgAlign || (changes.config && !this.ornamRgAlign)) {
-      this.ornamRgAlign2 = OrnamAlignUtil.convert(this.ornamRgAlign) || this.currConfig.ornamRgAlign || OrnamAlign.default;
-      this.settingOrnamentRight(this.grnOrnamentRg, this.ornamRgAlign2);
-    }
 
     if (changes.isRequired || changes.minLength || changes.maxLength) {
       this.prepareFormGroup(this.isRequired2, this.minLength, this.maxLength);
@@ -221,20 +199,6 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   ngOnInit(): void {
     if (this.innExterior == null) {
       this.innExterior = InputExteriorUtil.create(this.currConfig.exterior || null);
-    }
-  }
-
-  ngAfterContentInit(): void {
-    // Get the width of the ornament block.
-    this.ornamentLfWidth = this.grnOrnamentLf?.nativeElement.offsetWidth || 0;
-    this.ornamentRgWidth = this.grnOrnamentRg?.nativeElement.offsetWidth || 0;
-    if (this.ornamLfAlign2) {
-      // Determine new parameter values that depend on: grnOrnamentLf, ornamLfAlign2.
-      this.settingOrnamentLeft(this.grnOrnamentLf, this.ornamLfAlign2);
-    }
-    if (this.ornamRgAlign2) {
-      // Determine new parameter values that depend on: grnOrnamentRg, ornamRgAlign2.
-      this.settingOrnamentRight(this.grnOrnamentRg, this.ornamRgAlign2);
     }
   }
 
@@ -308,36 +272,21 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterContentInit, C
 
   public doFocus(): void {
     this.isFocused = true;
+    this.focused.emit();
   }
 
   public doBlur(): void {
     this.isFocused = false;
     this.isFilled = !!this.formControl.value;
+    this.blured.emit();
   }
 
   public doInput(event: Event): void {
     // https://github.com/angular/angular/issues/9587 "event.stopImmediatePropagation() called from listeners not working"
     // Added Event.cancelBubble check to make sure there was no call to event.stopImmediatePropagation() in previous handlers.
     if (!!event && !event.cancelBubble) {
-      this.inputData.emit(event);
       this.onChange(this.formControl.value);
     }
-  }
-
-  public doChange(event: Event): void {
-    this.changeData.emit(event);
-  }
-
-  public doKeydown(event: KeyboardEvent): void {
-    this.keydownData.emit(event);
-  }
-
-  public doKeypress(event: KeyboardEvent): void {
-    this.keypressData.emit(event);
-  }
-
-  public doKeyup(event: KeyboardEvent): void {
-    this.keyupData.emit(event);
   }
 
   // ** Methods for interacting with GrnSizeDirective. **
@@ -346,14 +295,7 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     return this.frameProperties.valueSizeBorderRadius(frameSizeValue, lineHeight, this.innExterior);
   };
   public getSizePaddingHor: GrnSizePaddingHor = (frameSizeValue: number, lineHeight: number): GrnSizePaddingHorRes => {
-    return this.frameProperties.valueSizePaddingHor(
-      frameSizeValue,
-      lineHeight,
-      this.innExterior,
-      this.currConfig.labelPd || null,
-      this.ornamentLfWidth,
-      this.ornamentRgWidth
-    );
+    return this.frameProperties.valueSizePaddingHor(frameSizeValue, lineHeight, this.innExterior, this.currConfig.labelPd || null);
   };
   public getSizePaddingVer: GrnSizePaddingVer = (frameSizeValue: number, lineHeight: number): GrnSizePaddingVerRes => {
     return this.frameProperties.valueSizePaddingVer(frameSizeValue, lineHeight, this.innExterior);
@@ -382,13 +324,5 @@ export class GrnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     this.ornamLfAlign2 = OrnamAlignUtil.create(config?.ornamLfAlign || this.ornamLfAlign2, null);
     this.ornamRgAlign2 = OrnamAlignUtil.create(config?.ornamRgAlign || this.ornamRgAlign2, null);
     return config;
-  }
-
-  private settingOrnamentLeft(ornamentLf: ElementRef<HTMLElement> | undefined, ornamLfAlign: OrnamAlign): void {
-    HtmlElemUtil.setAttr(this.renderer, ornamentLf, 'orn-lf', ornamLfAlign.toString());
-  }
-
-  private settingOrnamentRight(ornamentRg: ElementRef<HTMLElement> | undefined, ornamRgAlign: OrnamAlign): void {
-    HtmlElemUtil.setAttr(this.renderer, ornamentRg, 'orn-rg', ornamRgAlign.toString());
   }
 }

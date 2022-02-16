@@ -41,7 +41,7 @@
 
 <section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior02">
+  <mat-button-toggle-group [(ngModel)]="exterior02a">
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
     <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
     <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
@@ -49,297 +49,62 @@
 </section>
 
 <section mr-vr>
-  <mat-slide-toggle color="primary"
-    [checked]="isHiddenLabel"
-    (change)="isHiddenLabel=$event.checked">
-    is hiddenLabel
-  </mat-slide-toggle>
+  <label>
+    <input type="checkbox"
+      [(ngModel)]="isHiddenLabel02a" />
+    Is hiddenLabel
+  </label>
 </section>
 
-<form [formGroup]="formGroup02"
+<form [formGroup]="formGroup02a"
   novalidate
   autocomplete="off">
 
-  <div class="app-elem">
+  <div class="app-group">
     <div>
-      <small>
-        <em>"Short" height: 38px; font-size: 16px;</em>
-      </small>
+      <small><em>"Short" height: 38px; font-size: 16px;</em></small>
     </div>
-    <grn-input formControlName="input02a"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="short"
-      [exterior]="exterior02">
-    </grn-input>
   </div>
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>"Small" height: 44px; font-size: 16px;</em>
-      </small>
+  <div class="app-group">
+    <div class="app-elem fifs-indent">
+      <grn-input formControlName="input02a"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02a ? '':null"
+        frameSize="short"
+        [exterior]="exterior02a">
+      </grn-input>
     </div>
-    <grn-input formControlName="input02b"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="small"
-      [exterior]="exterior02">
-    </grn-input>
   </div>
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>"Middle" height: 50px; font-size: 16px;</em>
-      </small>
-    </div>
-    <grn-input formControlName="input02c"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="middle"
-      [exterior]="exterior02">
-    </grn-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>"Wide" height: 56px; font-size: 16px;</em>
-      </small>
-    </div>
-    <grn-input formControlName="input02d"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="wide"
-      [exterior]="exterior02">
-    </grn-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>"Large" height: 62px; font-size: 18px;</em>
-      </small>
-    </div>
-    <grn-input formControlName="input02e"
-      class="fifs-large"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="large"
-      [exterior]="exterior02">
-    </grn-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>"Huge" height: 68px; font-size: 20px;</em>
-      </small>
-    </div>
-    <grn-input formControlName="input02f"
-      class="fifs-huge"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="huge"
-      [exterior]="exterior02">
-    </grn-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>"Config" height: 57px; font-size: 16px;</em>
-      </small>
-    </div>
-    <grn-input formControlName="input02g"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      [config]="config02g"
-      [exterior]="exterior02">
-    </grn-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>"Config" height: 57px; font-size: 18px;</em>
-      </small>
-    </div>
-    <grn-input formControlName="input02h"
-      class="fifs-large"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      [config]="config02g"
-      [exterior]="exterior02">
-    </grn-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>"Config" height: 57px; font-size: 20px;</em>
-      </small>
-    </div>
-    <grn-input formControlName="input02i"
-      class="fifs-huge"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      [config]="config02g"
-      [exterior]="exterior02">
-    </grn-input>
-  </div>
-
-</form>
-
-<section mr-vr>
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-tab-group animationDuration="0ms">
-        <mat-tab [label]="labelHtml">
-          <code><pre source="html">
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
 &lt;form [formGroup]="formGroup02"
   novalidate
   autocomplete="off"&gt;
 
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Short" height: 38px; font-size: 16px;&lt;/em&gt;
-      &lt;/small&gt;
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem fifs-indent"&gt;
+      &lt;grn-input formControlName="input02a"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02a ? '':null"
+        frameSize="short"
+        [exterior]="exterior02a"&gt;
+      &lt;/grn-input&gt;
     &lt;/div&gt;
-    &lt;grn-input formControlName="input02a"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="short"
-      [exterior]="exterior02"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Small" height: 44px; font-size: 16px;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-input formControlName="input02b"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="small"
-      [exterior]="exterior02"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Middle" height: 50px; font-size: 16px;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-input formControlName="input02c"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="middle"
-      [exterior]="exterior02"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Wide" height: 56px; font-size: 16px;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-input formControlName="input02d"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="wide"
-      [exterior]="exterior02"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Large" height: 62px; font-size: 18px;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-input formControlName="input02e"
-      class="fifs-large"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="large"
-      [exterior]="exterior02"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Huge" height: 68px; font-size: 20px;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-input formControlName="input02f"
-      class="fifs-huge"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="huge"
-      [exterior]="exterior02"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Config" height: 57px; font-size: 16px;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-input formControlName="input02g"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      [config]="config02g"
-      [exterior]="exterior02"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Config" height: 57px; font-size: 18px;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-input formControlName="input02h"
-      class="fifs-large"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      [config]="config02g"
-      [exterior]="exterior02"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Config" height: 57px; font-size: 20px;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-input formControlName="input02i"
-      class="fifs-huge"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      [config]="config02g"
-      [exterior]="exterior02"&gt;
-    &lt;/grn-input&gt;
   &lt;/div&gt;
 
 &lt;/form&gt;</pre></code>
-        </mat-tab>
-        <mat-tab [label]="labelTs">
-          <code><pre source="ts">
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
@@ -354,27 +119,15 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class FrameInputComponent &#123;
-  public formGroup02: FormGroup = new FormGroup(&#123;
+  public formGroup02a: FormGroup = new FormGroup(&#123;
     input02a: new FormControl('Demo Size Short', []),
-    input02b: new FormControl('Demo Size Small', []),
-    input02c: new FormControl('Demo Size Middle', []),
-    input02d: new FormControl('Demo Size Wide', []),
-    input02e: new FormControl('Demo Size Large', []),
-    input02f: new FormControl('Demo Size Huge', []),
-    input02g: new FormControl('Demo Size Config', []),
-    input02h: new FormControl('Demo Size Config', []),
-    input02i: new FormControl('Demo Size Config', []),
   &#125;);
   public exterior02 = 'outlined';
-  public isHiddenLabel = false;
-  // GrnFrameInputConfig
-  public config02g = &#123;
-    frameSizeValue: 53,
-  &#125;;
+  public isHiddenLabel02a = false;
 &#125;</pre></code>
-        </mat-tab>
-        <mat-tab [label]="labelCss">
-          <code><pre source="css">
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
 .app-group &#123;
   display: flex;
   flex-wrap: wrap;
@@ -383,14 +136,761 @@ export class FrameInputComponent &#123;
   min-width: 26ch;
   margin: 10px 10px;
 &#125;
+.fifs-indent &#123;
+  margin-top: 15px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+
+  <div class="app-group">
+    <div>
+      <small><em>"Small" height: 44px; font-size: 16px;</em></small>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem fifs-indent">
+      <grn-input formControlName="input02b"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02a ? '':null"
+        frameSize="small"
+        [exterior]="exterior02a">
+      </grn-input>
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup02"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem fifs-indent"&gt;
+      &lt;grn-input formControlName="input02b"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02a ? '':null"
+        frameSize="small"
+        [exterior]="exterior02a"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameInputComponent &#123;
+  public formGroup02a: FormGroup = new FormGroup(&#123;
+    input02b: new FormControl('Demo Size Small', []),
+  &#125;);
+  public exterior02 = 'outlined';
+  public isHiddenLabel02a = false;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.fifs-indent &#123;
+  margin-top: 15px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+
+  <div class="app-group">
+    <div>
+      <small><em>"Middle" height: 50px; font-size: 16px;</em></small>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem fifs-indent">
+      <grn-input formControlName="input02c"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02a ? '':null"
+        frameSize="middle"
+        [exterior]="exterior02a">
+      </grn-input>
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup02"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem fifs-indent"&gt;
+      &lt;grn-input formControlName="input02c"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02a ? '':null"
+        frameSize="middle"
+        [exterior]="exterior02a"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameInputComponent &#123;
+  public formGroup02a: FormGroup = new FormGroup(&#123;
+    input02c: new FormControl('Demo Size Middle', []),
+  &#125;);
+  public exterior02 = 'outlined';
+  public isHiddenLabel02a = false;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.fifs-indent &#123;
+  margin-top: 15px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+
+  <div class="app-group">
+    <div>
+      <small><em>"Wide" height: 56px; font-size: 16px;</em></small>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem fifs-indent">
+      <grn-input formControlName="input02d"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02a ? '':null"
+        frameSize="wide"
+        [exterior]="exterior02a">
+      </grn-input>
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup02"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem fifs-indent"&gt;
+      &lt;grn-input formControlName="input02d"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02a ? '':null"
+        frameSize="wide"
+        [exterior]="exterior02a"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameInputComponent &#123;
+  public formGroup02a: FormGroup = new FormGroup(&#123;
+    input02d: new FormControl('Demo Size Wide', []),
+  &#125;);
+  public exterior02 = 'outlined';
+  public isHiddenLabel02a = false;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.fifs-indent &#123;
+  margin-top: 15px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+
+  <div class="app-group">
+    <div>
+      <small><em>"Large" height: 62px; font-size: 18px;</em></small>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem fifs-indent">
+      <grn-input formControlName="input02e"
+        class="fifs-large"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02a ? '':null"
+        frameSize="large"
+        [exterior]="exterior02a">
+      </grn-input>
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup02"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem fifs-indent"&gt;
+      &lt;grn-input formControlName="input02e"
+        class="fifs-large"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02a ? '':null"
+        frameSize="large"
+        [exterior]="exterior02a"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameInputComponent &#123;
+  public formGroup02a: FormGroup = new FormGroup(&#123;
+    input02e: new FormControl('Demo Size Large', []),
+  &#125;);
+  public exterior02 = 'outlined';
+  public isHiddenLabel02a = false;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.fifs-indent &#123;
+  margin-top: 15px;
+&#125;
 .fifs-large &#123;
   font-size: 18px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+
+  <div class="app-group">
+    <div>
+      <small><em>"Huge" height: 68px; font-size: 20px;</em></small>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem fifs-indent">
+      <grn-input formControlName="input02f"
+        class="fifs-huge"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02a ? '':null"
+        frameSize="huge"
+        [exterior]="exterior02a">
+      </grn-input>
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup02"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem fifs-indent"&gt;
+      &lt;grn-input formControlName="input02f"
+        class="fifs-huge"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02a ? '':null"
+        frameSize="huge"
+        [exterior]="exterior02a"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameInputComponent &#123;
+  public formGroup02a: FormGroup = new FormGroup(&#123;
+    input02f: new FormControl('Demo Size Huge', []),
+  &#125;);
+  public exterior02 = 'outlined';
+  public isHiddenLabel02a = false;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.fifs-indent &#123;
+  margin-top: 15px;
 &#125;
 .fifs-huge &#123;
   font-size: 20px;
 &#125;</pre></code>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-expansion-panel>
-  </mat-accordion>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+</form>
+
+<hr br-nn />
+
+
+<h4>Configuration for custom height (57px).</h4>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior02b">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
 </section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      [(ngModel)]="isHiddenLabel02b" />
+    Is hiddenLabel
+  </label>
+</section>
+
+<form [formGroup]="formGroup02b"
+  novalidate
+  autocomplete="off">
+
+
+  <div class="app-group">
+    <div>
+      <small><em>"Config" height: 57px; font-size: 16px;</em></small>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem fifs-indent">
+      <grn-input formControlName="input02g"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02b ? '':null"
+        [config]="config02g"
+        [exterior]="exterior02b">
+      </grn-input>
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup02"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem fifs-indent"&gt;
+      &lt;grn-input formControlName="input02g"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02b ? '':null"
+        [config]="config02g"
+        [exterior]="exterior02b"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameInputComponent &#123;
+  public formGroup02b: FormGroup = new FormGroup(&#123;
+    input02g: new FormControl('Demo Size Config', []),
+  &#125;);
+  public exterior02b = 'outlined';
+  public isHiddenLabel02b = false;
+  public config02g = &#123;
+    frameSizeValue: 57,
+  &#125;;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.fifs-indent &#123;
+  margin-top: 15px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+
+  <div class="app-group">
+    <div>
+      <small><em>"Config" height: 57px; font-size: 18px;</em></small>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem fifs-indent">
+      <grn-input formControlName="input02h"
+        class="fifs-large"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02b ? '':null"
+        [config]="config02g"
+        [exterior]="exterior02b">
+      </grn-input>
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup02"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem fifs-indent"&gt;
+      &lt;grn-input formControlName="input02h"
+        class="fifs-large"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02b ? '':null"
+        [config]="config02g"
+        [exterior]="exterior02b"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameInputComponent &#123;
+  public formGroup02b: FormGroup = new FormGroup(&#123;
+    input02h: new FormControl('Demo Size Config', []),
+  &#125;);
+  public exterior02b = 'outlined';
+  public isHiddenLabel02b = false;
+  public config02g = &#123;
+    frameSizeValue: 57,
+  &#125;;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.fifs-indent &#123;
+  margin-top: 15px;
+&#125;
+.fifs-large &#123;
+  font-size: 18px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+  <div class="app-group">
+    <div>
+      <small><em>"Config" height: 57px; font-size: 20px;</em></small>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem fifs-indent">
+      <grn-input formControlName="input02i"
+        class="fifs-huge"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02b ? '':null"
+        [config]="config02g"
+        [exterior]="exterior02b">
+      </grn-input>
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup02"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem fifs-indent"&gt;
+      &lt;grn-input formControlName="input02i"
+        class="fifs-huge"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel02b ? '':null"
+        [config]="config02g"
+        [exterior]="exterior02b"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameInputComponent &#123;
+  public formGroup02b: FormGroup = new FormGroup(&#123;
+    input02i: new FormControl('Demo Size Config', []),
+  &#125;);
+  public exterior02b = 'outlined';
+  public isHiddenLabel02b = false;
+  public config02g = &#123;
+    frameSizeValue: 57,
+  &#125;;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.fifs-indent &#123;
+  margin-top: 15px;
+&#125;
+.fifs-huge &#123;
+  font-size: 20px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+
+</form>
+
+<hr br-nn />
+<hr br-nn />

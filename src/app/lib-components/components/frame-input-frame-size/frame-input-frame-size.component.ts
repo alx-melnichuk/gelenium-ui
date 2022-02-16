@@ -34,19 +34,25 @@ export class FrameInputFrameSizeComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public formGroup02: FormGroup = new FormGroup({
+  public formGroup02a: FormGroup = new FormGroup({
     input02a: new FormControl('Demo Size Short', []),
     input02b: new FormControl('Demo Size Small', []),
     input02c: new FormControl('Demo Size Middle', []),
     input02d: new FormControl('Demo Size Wide', []),
     input02e: new FormControl('Demo Size Large', []),
     input02f: new FormControl('Demo Size Huge', []),
+  });
+  public exterior02a = 'outlined';
+  public isHiddenLabel02a = false;
+
+  public formGroup02b: FormGroup = new FormGroup({
     input02g: new FormControl('Demo Size Config', []),
     input02h: new FormControl('Demo Size Config', []),
     input02i: new FormControl('Demo Size Config', []),
   });
-  public exterior02 = 'outlined';
-  public isHiddenLabel = false;
+  public exterior02b = 'outlined';
+  public isHiddenLabel02b = false;
+
   // GrnFrameInputConfig
   public config02g = {
     frameSizeValue: 57,

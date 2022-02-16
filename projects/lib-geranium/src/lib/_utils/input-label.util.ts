@@ -34,9 +34,9 @@ export class InputLabelUtil {
     let result: number | null = configLabelPd;
     if (frameSizeVal > 0 && (!result || result <= 0)) {
       if (exterior === InputExterior.outlined) {
-        result = Math.round(100 * 0.25 * frameSizeVal) / 100;
+        result = Math.round(0.25 * frameSizeVal * 100) / 100;
       } else if (exterior === InputExterior.underline) {
-        result = Math.round(100 * 0.21428 * frameSizeVal) / 100;
+        result = Math.round(0.21428 * frameSizeVal * 100) / 100;
       } else if (exterior === InputExterior.standard) {
         result = 0;
       }
@@ -47,13 +47,13 @@ export class InputLabelUtil {
   public static translateY(exterior: InputExterior | null, frameSizeValue: number, lineHeight: number | null): number | null {
     let result: number | null = null;
     if (exterior != null && frameSizeValue > 0 && lineHeight != null) {
-      result = Math.round(100 * lineHeight * 0.25) / 100;
+      result = Math.round(lineHeight * 0.25 * 100) / 100;
       if (exterior === InputExterior.standard) {
-        result = Math.round(100 * ((frameSizeValue * 0.75 - lineHeight * 1.27) * 0.4)) / 100;
+        result = Math.round((frameSizeValue * 0.75 - lineHeight * 1.27) * 0.4 * 100) / 100;
       } else if (exterior === InputExterior.outlined) {
-        result = Math.round(100 * ((-0.75 * lineHeight) / 2)) / 100;
+        result = Math.round(((-0.75 * lineHeight) / 2) * 100) / 100;
       } else if (exterior === InputExterior.underline) {
-        result = Math.round(100 * ((frameSizeValue * 0.757 - lineHeight * 1.257) * 0.45)) / 100;
+        result = Math.round((frameSizeValue * 0.757 - lineHeight * 1.257) * 0.45 * 100) / 100;
       }
     }
     return result;
@@ -62,7 +62,7 @@ export class InputLabelUtil {
   public static translate2Y(exterior: InputExterior | null, frameSizeValue: number, lineHeight: number | null): number | null {
     let result: number | null = null;
     if (exterior != null && frameSizeValue > 0 && lineHeight != null) {
-      result = Math.round(100 * ((frameSizeValue - lineHeight) * (InputExterior.standard === exterior ? 0.75 : 0.5))) / 100;
+      result = Math.round((frameSizeValue - lineHeight) * (InputExterior.standard === exterior ? 0.75 : 0.5) * 100) / 100;
     }
     return result;
   }

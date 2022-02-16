@@ -10,6 +10,7 @@ export * from './lib/_decorators/public-api';
 export * from './lib/_interfaces/public-api';
 export * from './lib/_utils/public-api';
 
+export * from './lib/directives/grn-ornament/public-api';
 export * from './lib/directives/grn-regex/public-api';
 export * from './lib/directives/grn-size/public-api';
 

@@ -80,7 +80,7 @@ export class ButtonBorderRadiusComponent {
     return this.sanitizer.bypassSecurityTrustStyle(style);
   }
   public round(value: number): number {
-    return Math.round(100 * value) / 100;
+    return Math.round(value * 100) / 100;
   }
   public getConfig(labelPd: number): GrnButtonConfig {
     return { labelPd };

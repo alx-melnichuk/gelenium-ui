@@ -154,7 +154,7 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
 
   public getSizeBorderRadius: GrnSizeBorderRadius = (frameSizeValue: number): string => {
     const borderRadiusRatio = 0.1;
-    return (frameSizeValue > 0 ? Math.round(100 * borderRadiusRatio * frameSizeValue) / 100 : 0) + 'px';
+    return (frameSizeValue > 0 ? Math.round(borderRadiusRatio * frameSizeValue * 100) / 100 : 0) + 'px';
   };
 
   public getSizePaddingHor: GrnSizePaddingHor = (frameSizeValue: number): GrnSizePaddingHorRes => {
@@ -167,7 +167,7 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       } else if (exterior === ButtonExterior.outlined) {
         ratioValue = 0.3409;
       }
-      result = Math.round(100 * ratioValue * frameSizeValue) / 100;
+      result = Math.round(ratioValue * frameSizeValue * 100) / 100;
     }
     // console.log(`getSizePaddingHor(frameSizeValue:${frameSizeValue})=${result} labelPd=${this.currConfig.labelPd}`);
     return { left: result, right: result };

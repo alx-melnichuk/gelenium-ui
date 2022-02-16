@@ -4,11 +4,11 @@
     It is possible to add a different ornament (picture or text) for the input line.
     It will appear as a prefix or suffix for the input string.
     You can define the reaction to pressing an element of the ornament.
-    <br />To add a prefix, you need to add a tag with the "grnOrnamentLf" attribute inside the
-    "grn-input" tag. (&lt;span grnOrnamentLf&gt;kg&lt;/span&gt;)
-    <br />To add a suffix, you need to add a tag with the "grnOrnamentRg" attribute inside the
+    <br />To add a prefix, you need to add a tag with the "grn-orn-lf" attribute inside the
+    "grn-input" tag. (&lt;span grn-orn-lf&gt;kg&lt;/span&gt;)
+    <br />To add a suffix, you need to add a tag with the "grn-orn-rg" attribute inside the
     "grn-input" tag.
-    (&lt;span grnOrnamentRg&gt;cm&lt;/span&gt;)
+    (&lt;span grn-orn-rg&gt;cm&lt;/span&gt;)
     <br />
     Adding a prefix or suffix does not disable legend animation for that input field.
   </p>
@@ -34,7 +34,7 @@
     <div class="app-elem to-elem">
       <div>
         <small>
-          <em>Section: "grnOrnamentLf" + text.</em>
+          <em>Section: "grn-orn-lf" + text.</em>
         </small>
       </div>
       <grn-textarea formControlName="input05a"
@@ -43,7 +43,7 @@
         helperText="The field must have a value."
         [exterior]="exterior05"
         [ornamLfAlign]="'baseline'">
-        <span grnOrnamentLf
+        <span grn-orn-lf
           class="to-pd-hor">kg</span>
       </grn-textarea>
     </div>
@@ -51,7 +51,7 @@
     <div class="app-elem to-elem">
       <div>
         <small>
-          <em>Section: "grnOrnamentRg" + text.</em>
+          <em>Section: "grn-orn-rg" + text.</em>
         </small>
       </div>
       <grn-textarea formControlName="input05b"
@@ -60,7 +60,7 @@
         helperText="The field must have a value."
         [exterior]="exterior05"
         [config]="configBaseline">
-        <span grnOrnamentRg
+        <span grn-orn-rg
           class="to-pd-hor">cm</span>
       </grn-textarea>
     </div>
@@ -68,7 +68,7 @@
     <div class="app-elem to-elem">
       <div>
         <small>
-          <em>Section: "grnOrnamentLf" + uncode.</em>
+          <em>Section: "grn-orn-lf" + uncode.</em>
         </small>
       </div>
       <grn-textarea formControlName="input05c"
@@ -77,7 +77,7 @@
         helperText="The field must have a value."
         [exterior]="exterior05"
         [ornamLfAlign]="'baseline'">
-        <button grnOrnamentLf
+        <button grn-orn-lf
           class="to-btn to-uncode"
           (click)="isBtnEye05c=!isBtnEye05c">
           <span>{{ isBtnEye05c ? '&#128153;': '&#128154;' }}</span>
@@ -88,7 +88,7 @@
     <div class="app-elem to-elem">
       <div>
         <small>
-          <em>Section: "grnOrnamentRg" + uncode.</em>
+          <em>Section: "grn-orn-rg" + uncode.</em>
         </small>
       </div>
       <grn-textarea formControlName="input05d"
@@ -97,7 +97,7 @@
         helperText="The field must have a value."
         [exterior]="exterior05"
         [config]="configBaseline">
-        <button grnOrnamentRg
+        <button grn-orn-rg
           class="to-btn to-uncode"
           (click)="isBtnEye05d=!isBtnEye05d">
           <span>{{ isBtnEye05d ? '&#129505;': '&#128156;' }}</span>
@@ -128,7 +128,7 @@
     &lt;div class="app-elem to-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnamentLf" + text.&lt;/em&gt;
+          &lt;em&gt;Section: "grn-orn-lf" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-textarea formControlName="input05a"
@@ -137,7 +137,7 @@
         helperText="The field must have a value."
         [exterior]="exterior05"
         [ornamLfAlign]="'baseline'"&gt;
-        &lt;span grnOrnamentLf
+        &lt;span grn-orn-lf
           class="to-pd-hor"&gt;kg&lt;/span&gt;
       &lt;/grn-textarea&gt;
     &lt;/div&gt;
@@ -145,7 +145,7 @@
     &lt;div class="app-elem to-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnamentRg" + text.&lt;/em&gt;
+          &lt;em&gt;Section: "grn-orn-rg" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-textarea formControlName="input05b"
@@ -154,7 +154,7 @@
         helperText="The field must have a value."
         [exterior]="exterior05"
         [config]="configBaseline"&gt;
-        &lt;span grnOrnamentRg
+        &lt;span grn-orn-rg
           class="to-pd-hor"&gt;cm&lt;/span&gt;
       &lt;/grn-textarea&gt;
     &lt;/div&gt;
@@ -162,7 +162,7 @@
     &lt;div class="app-elem to-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnamentLf" + uncode.&lt;/em&gt;
+          &lt;em&gt;Section: "grn-orn-lf" + uncode.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-textarea formControlName="input05c"
@@ -171,7 +171,7 @@
         helperText="The field must have a value."
         [exterior]="exterior05"
         [ornamLfAlign]="'baseline'"&gt;
-        &lt;button grnOrnamentLf
+        &lt;button grn-orn-lf
           class="to-btn to-uncode"
           (click)="isBtnEye05c=!isBtnEye05c"&gt;
           &lt;span&gt;<b>&#123;</b>&#123; isBtnEye05c ? '&amp;#128153;': '&amp;#128154;' &#125;&#125;&lt;/span&gt;
@@ -182,7 +182,7 @@
     &lt;div class="app-elem to-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grnOrnamentRg" + uncode.&lt;/em&gt;
+          &lt;em&gt;Section: "grn-orn-rg" + uncode.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-textarea formControlName="input05d"
@@ -191,7 +191,7 @@
         helperText="The field must have a value."
         [exterior]="exterior05"
         [config]="configBaseline"&gt;
-        &lt;button grnOrnamentRg
+        &lt;button grn-orn-rg
           class="to-btn to-uncode"
           (click)="isBtnEye05d=!isBtnEye05d"&gt;
           &lt;span&gt;<b>&#123;</b>&#123; isBtnEye05d ? '&amp;#129505;': '&amp;#128156;' &#125;&#125;&lt;/span&gt;

@@ -15,7 +15,7 @@ export class GrnFrameProperties {
   public valueSizeBorderRadius(frameSizeValue: number, lineHeight: number, exterior: InputExterior | null): string {
     let result = '';
     if (frameSizeValue > 0 && lineHeight > 0 && exterior) {
-      const radius = '' + Math.round(100 * (frameSizeValue / 10)) / 100 + 'px';
+      const radius = '' + Math.round((frameSizeValue / 10) * 100) / 100 + 'px';
       if (exterior === InputExterior.outlined) {
         result = radius;
       } else if (exterior === InputExterior.underline) {
@@ -30,19 +30,17 @@ export class GrnFrameProperties {
     frameSizeValue: number,
     lineHeight: number,
     exterior: InputExterior | null,
-    configLabelPd: number | null,
-    ornamentLfWidth: number,
-    ornamentRgWidth: number
+    configLabelPd: number | null
   ): GrnSizePaddingHorRes {
     let left = 0;
     let right = 0;
     if (frameSizeValue > 0 && lineHeight > 0 && exterior) {
       left = right = InputLabelUtil.paddingLfRg(exterior, frameSizeValue, configLabelPd) || 0;
     }
-    HtmlElemUtil.setProperty(this.hostRef, '--lbl-wd', this.getLabelMaxWidth(left, right));
-    HtmlElemUtil.setProperty(this.hostRef, '--lbl2-wd', this.getLabel2MaxWidth(left, right, ornamentLfWidth, ornamentRgWidth));
+    const pdLfRgWd = Math.round(1.66 * (left + right) * 100) / 100;
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-wd', NumberUtil.str(pdLfRgWd)?.concat('px'));
+
     HtmlElemUtil.setProperty(this.hostRef, '--he-pd-lf', NumberUtil.str(left || null)?.concat('px'));
-    HtmlElemUtil.setProperty(this.hostRef, '--orn-lbl-pd-lf', NumberUtil.str(ornamentLfWidth || null)?.concat('px'));
     return { left, right };
   }
 
@@ -62,24 +60,4 @@ export class GrnFrameProperties {
   }
 
   // ** - **
-
-  // ** Private API **
-
-  // Max width of the label in a shrink position (in the top).
-  protected getLabelMaxWidth(paddingLeft: number, paddingRight: number): string | null {
-    const paddingLfRt = (paddingLeft > -1 ? paddingLeft : 0) + (paddingRight > -1 ? paddingRight : 0);
-    return paddingLfRt === 0 ? '133%' : 'calc(133% - ' + Math.round(100 * 1.66 * paddingLfRt) / 100 + 'px)';
-  }
-
-  // Max width of the label in the unshrink position (in the middle).
-  protected getLabel2MaxWidth(paddingLeft: number, paddingRight: number, ornamentLfWidth: number, ornamentRgWidth: number): string | null {
-    let result: string | null = null;
-    if (paddingLeft > -1 && paddingRight > -1) {
-      const valueLfWidth = ornamentLfWidth > 0 ? ornamentLfWidth : paddingLeft;
-      const valueRgWidth = ornamentRgWidth > 0 ? ornamentRgWidth : paddingRight;
-      const value = valueLfWidth + valueRgWidth;
-      result = value === 0 ? '100%' : 'calc(100% - ' + Math.round(100 * value) / 100 + 'px)';
-    }
-    return result;
-  }
 }

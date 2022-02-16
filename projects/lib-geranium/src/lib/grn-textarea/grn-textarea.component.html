@@ -15,15 +15,20 @@
     [grnSizeModify]="exterior2 + ' ' + currConfig.exterior + ' ' + currConfig.labelPd"
     [grnSizeBorderRadius]="getSizeBorderRadius"
     [grnSizePaddingHor]="getSizePaddingHor"
-    [grnSizePaddingVer]="getSizePaddingVer">
-    <span #grnOrnamentLf
+    [grnSizePaddingVer]="getSizePaddingVer"
+    grnOrnament
+    [grnOrnamentLfAlign]="ornamLfAlign || (currConfig.ornamLfAlign || null)"
+    [grnOrnamentRgAlign]="ornamRgAlign || (currConfig.ornamRgAlign || null)">
+
+    <span orn-lf
       class="gfi-ornam-lf">
-      <ng-content select="[grnOrnamentLf]"></ng-content>
+      <ng-content select="[grn-orn-lf]"></ng-content>
     </span>
-    <span #grnOrnamentRg
+    <span orn-rg
       class="gfi-ornam-rg">
-      <ng-content select="[grnOrnamentRg]"></ng-content>
+      <ng-content select="[grn-orn-rg]"></ng-content>
     </span>
+
     <textarea #textareaElement
       [cols]="cntCols"
       formControlName="textData"
@@ -36,13 +41,9 @@
       [attr.readonly]="isReadOnly2 ? '': null"
       (focus)="doFocus()"
       (blur)="doBlur()"
-      (input)="doInput($event)"
-      (change)="doChange($event)"
-      (keydown)="doKeydown($event)"
-      (keypress)="doKeypress($event)"
-      (keyup)="doKeyup($event)"
       (click)="$event.stopPropagation();">
     </textarea>
+
   </grn-frame-input>
 </ng-container>
 <grn-hint-or-error *ngIf="!!helperText"

@@ -28,9 +28,8 @@ grn-frame-input { // outline: 1px dashed crimson;
     --def-lbl-pd-bt: 1.03125em; // 16.5px
     --def-lbl-pd-lf: 0.875em; // 14px
     --def-lbl-pd-rg: 0.875em; // 14px
-    --def-lbl-wd: calc(133% - 1.66 * 1.75em); // 133% - 46.48px
+    --def-lbl-wd: 2.905em; // calc(133% - [1.66 * 2 * 0.875em])
     --def-lbl-trn-y: -0.53875em; // -8.62px
-    --def-lbl2-wd: calc(100% - 1.75em); // 100% - 28px
     --def-lbl2-trn-y: 1.03125em; // 16.5px
     }
   &[ext-u] {
@@ -39,9 +38,8 @@ grn-frame-input { // outline: 1px dashed crimson;
     --def-lbl-pd-bt: 0.515625em; // 8.25px
     --def-lbl-pd-lf: 0.75em; // 12px
     --def-lbl-pd-rg: 0.75em; // 12px
-    --def-lbl-wd: calc(133% - 1.66 * 1.5em); // 133% - 39.84px
+    --def-lbl-wd: 2.49em; // calc(133% - [1.66 * 2 * 0.75em])
     --def-lbl-trn-y: 0.379375em; // 6.07px
-    --def-lbl2-wd: calc(100% - 1.5em); // 100% - 24px
     --def-lbl2-trn-y: 1.03125em; // 16.5px
   }
   &[ext-s] {
@@ -49,9 +47,8 @@ grn-frame-input { // outline: 1px dashed crimson;
     --def-lbl-pd-bt: 0.515625em; // 8.25px
     --def-lbl-pd-lf: 0;
     --def-lbl-pd-rg: 0;
-    --def-lbl-wd: 133%;
+    --def-lbl-wd: 0; // calc(133% - [1.66 * 2 * 0])
     --def-lbl-trn-y: 0.32em; // 5.12px
-    --def-lbl2-wd: 100%;
     --def-lbl2-trn-y: 1.546875em; // 24.75px
   }
 
@@ -88,7 +85,7 @@ grn-frame-input { // outline: 1px dashed crimson;
   }
   &[shr], &[foc], &[fil] {
     label {
-      max-width: var(--gfi-lbl-wd, var(--lbl-wd, var(--def-lbl-wd)));
+      max-width: calc(133% - var(--gfi-lbl-wd, var(--lbl-wd, var(--def-lbl-wd))));
       @include mxTransformTranslateXYScale(
         var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf))),
         var(--gfi-lbl-trn-y, var(--lbl-trn-y, var(--def-lbl-trn-y))),
@@ -97,7 +94,10 @@ grn-frame-input { // outline: 1px dashed crimson;
     }
   }
   &:not([shr]):not([foc]):not([fil]) label {
-    max-width: var(--gfi-lbl2-wd, var(--lbl2-wd, var(--def-lbl2-wd)));
+    max-width: calc(100%
+    - var(--orn-lbl-pd-lf, var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf))))
+    - var(--orn-lbl-pd-rg, var(--gfi-lbl-pd-rg, var(--s-lbl-pd-rg, var(--def-lbl-pd-rg))))
+    );
     @include mxTransformTranslateXYScale(
       var(--orn-lbl-pd-lf, var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf)))),
       var(--gfi-lbl2-trn-y, var(--lbl2-trn-y, var(--def-lbl2-trn-y))),
@@ -339,6 +339,7 @@ grn-frame-input { // outline: 1px dashed crimson;
     max-height: inherit;
   }
   .gfi-ornam-rg {
+    max-height: inherit;
     order: 1;
   }
   .gfi-ornam-lf:empty~.gfi-elem-pd-hor {
@@ -347,6 +348,7 @@ grn-frame-input { // outline: 1px dashed crimson;
   .gfi-ornam-rg:empty~.gfi-elem-pd-hor {
     padding-right: var(--gfi-lbl-pd-rg, var(--s-lbl-pd-rg, var(--def-lbl-pd-rg)));
   }
+
   span[orn-lf="center"], span[orn-rg="center"] {
     align-self: center;
   }
