@@ -26,7 +26,7 @@
   </mat-button-toggle-group>
 </section>
 
-<form [formGroup]="formGroup03"
+<form [formGroup]="formGroup03a"
   novalidate
   autocomplete="off">
 
@@ -43,6 +43,88 @@
         [exterior]="exterior03">
       </grn-input>
     </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup03a"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attribute: lbShrink.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input03a"
+        label="Permanent label"
+        lbShrink
+        helperText="The position of the label is fixed."
+        [exterior]="exterior03"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameInputComponent &#123;
+  public exterior03a = 'outlined';
+  public formGroup03a: FormGroup = new FormGroup(&#123;
+    input03a: new FormControl('', []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<form [formGroup]="formGroup03b"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
 
     <div class="app-elem">
       <div>
@@ -69,23 +151,11 @@
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;form [formGroup]="formGroup03"
+&lt;form [formGroup]="formGroup03b"
   novalidate
   autocomplete="off"&gt;
 
   &lt;div class="app-group"&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;&lt;em&gt;Attribute: lbShrink.&lt;/em&gt;&lt;/small&gt;
-      &lt;/div&gt;
-      &lt;grn-input formControlName="input03a"
-        label="Permanent label"
-        lbShrink
-        helperText="The position of the label is fixed."
-        [exterior]="exterior03"&gt;
-      &lt;/grn-input&gt;
-    &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
@@ -119,11 +189,10 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class FrameInputComponent &#123;
-  public formGroup03: FormGroup = new FormGroup(&#123;
-    input03a: new FormControl('', []),
+  public exterior03b = 'outlined';
+  public formGroup03b: FormGroup = new FormGroup(&#123;
     input03b: new FormControl('Hello World', []),
   &#125;);
-  public exterior03 = 'outlined';
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -141,3 +210,5 @@ export class FrameInputComponent &#123;
     </mat-expansion-panel>
   </mat-accordion>
 </section>
+
+<hr br-nn />

@@ -34,11 +34,13 @@ export class FrameInputLabelComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public formGroup03: FormGroup = new FormGroup({
+  public exterior03 = 'outlined';
+  public formGroup03a: FormGroup = new FormGroup({
     input03a: new FormControl('', []),
+  });
+  public formGroup03b: FormGroup = new FormGroup({
     input03b: new FormControl('Hello World', []),
   });
-  public exterior03 = 'outlined';
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

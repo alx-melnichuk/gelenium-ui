@@ -14,6 +14,8 @@ import {
 } from 'src/app/lib-core/constants/constants';
 
 import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-input-config.interface';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { FrameSize, FrameSizeUtil } from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
 
 @Component({
   selector: 'app-frame-input-border-radius',
@@ -38,6 +40,26 @@ export class FrameInputBorderRadiusComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
+  public urlFrameInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME_INPUT');
+
+  public borderRadius = 50;
+  public propRadius = '--gfi-br-rd';
+  public ratioOutlined = 0.58;
+  public ratioUnderline = 0.4;
+
+  public labelPdRatio = 0.58; // TODO del;
+
+  public exterior05 = 'outlined';
+  public isAddPadding05 = true;
+  public isHiddenLabel05 = false;
+
+  public sizeShort = FrameSize.short;
+  public sizeSmall = FrameSize.small;
+  public sizeMiddle = FrameSize.middle;
+  public sizeWide = FrameSize.wide;
+  public sizeLarge = FrameSize.large;
+  public sizeHuge = FrameSize.huge;
+
   public formGroup05: FormGroup = new FormGroup({
     input05a: new FormControl('Demo Size Short', []),
     input05b: new FormControl('Demo Size Small', []),
@@ -46,48 +68,9 @@ export class FrameInputBorderRadiusComponent {
     input05e: new FormControl('Demo Size Large', []),
     input05f: new FormControl('Demo Size Huge', []),
   });
-  public configOutlinedShort: GrnFrameInputConfig = {
-    labelPd: 21.66, // 0.57*FrameSizeValue.short
-  };
-  public configOutlinedSmall: GrnFrameInputConfig = {
-    labelPd: 25.08, // 0.57*FrameSizeValue.small
-  };
-  public configOutlinedMiddle: GrnFrameInputConfig = {
-    labelPd: 28.5, // 0.57*FrameSizeValue.middle
-  };
-  public configOutlinedWide: GrnFrameInputConfig = {
-    labelPd: 31.92, // 0.57*FrameSizeValue.wide
-  };
-  public configOutlinedLarge: GrnFrameInputConfig = {
-    labelPd: 35.34, // 0.57*FrameSizeValue.large
-  };
-  public configOutlinedHuge: GrnFrameInputConfig = {
-    labelPd: 38.76, // 0.57*FrameSizeValue.huge
-  };
 
-  public configUnderlineShort: GrnFrameInputConfig = {
-    labelPd: 15.2, // 0.4*FrameSizeValue.short
-  };
-  public configUnderlineSmall: GrnFrameInputConfig = {
-    labelPd: 17.6, // 0.4*FrameSizeValue.small
-  };
-  public configUnderlineMiddle: GrnFrameInputConfig = {
-    labelPd: 20, // 0.4*FrameSizeValue.middle
-  };
-  public configUnderlineWide: GrnFrameInputConfig = {
-    labelPd: 22.4, // 0.4*FrameSizeValue.wide
-  };
-  public configUnderlineLarge: GrnFrameInputConfig = {
-    labelPd: 24.8, // 0.4*FrameSizeValue.large
-  };
-  public configUnderlineHuge: GrnFrameInputConfig = {
-    labelPd: 27.2, // 0.4*FrameSizeValue.huge
-  };
-
-  public exterior05 = 'outlined';
-  public isHiddenLabel = false;
-  public borderRadius = 50;
-  public urlFrameInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME_INPUT');
+  public isAddPadding06 = true;
+  public isHiddenLabel06 = false;
 
   public formGroup06: FormGroup = new FormGroup({
     input06a: new FormControl('Demo - A', []),
@@ -96,25 +79,29 @@ export class FrameInputBorderRadiusComponent {
     input06d: new FormControl('Demo - D', []),
     input06e: new FormControl('Demo - E', []),
     input06f: new FormControl('Demo - F', []),
-    input06g: new FormControl('Demo - G', []),
-    input06h: new FormControl('Demo - H', []),
-    input06i: new FormControl('Demo - I', []),
-    input06j: new FormControl('Demo - J', []),
-    input06k: new FormControl('Demo - K', []),
-    input06l: new FormControl('Demo - L', []),
   });
   public configOutlined: GrnFrameInputConfig = {
-    labelPd: 20.72, // 0.37*FrameSizeValue.wide
+    labelPd: 18.5, // 0.37*FrameSizeValue.middle
   };
   public configUnderline: GrnFrameInputConfig = {
-    labelPd: 20.72, // 0.37*FrameSizeValue.wide
+    labelPd: 18.5, // 0.37*FrameSizeValue.middle
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor(private sanitizer: DomSanitizer) {}
 
-  @HostBinding('style')
-  public get getClass(): string | null {
-    return '--fibr-border-radius: ' + this.borderRadius + ';';
+  public safeStyle(style: string): SafeStyle {
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  }
+  public getValue(value: FrameSize): number {
+    return FrameSizeUtil.getValue(value) || 0;
+  }
+  public getRadius(value: number, exterior: string): string {
+    return exterior === 'underline' ? value + 'px ' + value + 'px 0 0' : value + 'px';
+  }
+  public getRatio(exterior: string): number {
+    return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
+  }
+  public getConfig(labelPd: number): GrnFrameInputConfig {
+    return { labelPd };
   }
 }

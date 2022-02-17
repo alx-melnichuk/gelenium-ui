@@ -1,84 +1,56 @@
 <section mr-vr>
   <h3>Border radius.</h3>
   <p>
-    You can change the value of the rounding radius in outlined appearance mode.
-    This requires specifying a value for the "border-radius" property for the
-    "grn-frame-input".<br />
-    For example:
+    For components that use Grn-frame-input it is possible to change the border-radius
+    css property.
+    This requires creating a css variable "--gfi-br-rd" at the level of the component
+    or any parent element.
+    The value of this css variable can be any valid (as described by
+    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">
+      "border-radius"
+    </a>) value.
+  </p>
+  <span>For example:</span>
+  <code><pre>
+&lt;div&gt;
+  &lt;grn-input style="--gfi-br-rd: 25px;"
+    [(ngModel)]="inputData"
+    label="Enter value"
+    exterior="outlined"
+    [config]="&#123; labelPd: 29 &#125;"&gt;
+  &lt;/grn-input&gt;
+&lt;/div&gt;</pre></code>
+  <span>Another example:</span>
+  <code><pre>
+&lt;div style="--gfi-br-rd: 25px;"&gt;
+  &lt;grn-input [(ngModel)]="inputData"
+    label="Enter value"
+    exterior="outlined"
+    [config]="&#123; labelPd: 29 &#125;"&gt;
+  &lt;/grn-input&gt;
+&lt;/div&gt;</pre></code>
+  <p>
+    In the same way, you can change the border-radius for the "Underline" mode.
   </p>
   <code><pre>
-  .fibr-outlined-radius .gfi-outlined &#123;
-    border-radius: calc(var(--size)*0.5);
-  &#125;</pre></code>
+&lt;div&gt;
+  &lt;grn-input style="--gfi-br-rd: 25px 25px 0 0;"
+    [(ngModel)]="inputData"
+    label="Enter value"
+    exterior="underline"
+    [config]="&#123; labelPd: 20 &#125;"&gt;
+  &lt;/grn-input&gt;
+&lt;/div&gt;</pre></code>
   <p>
-    This value for the fillet radius corresponds to 50% of the height of the current element.
+    This value for the fillet radius corresponds to 50% of the height of the current element.<br />
     The minimum value for the fillet radius is 0.<br />
     The maximum value for the fillet radius is 50% of the height of the current element.<br />
-    The value of the css-variable
-    <a [href]="urlFrameInput + '#FrameSize'">"--size"</a>
-    determines the height of the current element.
   </p>
   <p>
-    In this case, you also need to change the value of the left indent for correct display.
-    The value of the left indent is determined by the configuration for each size,
-    respectively.<br />
-    For example:
+    You can also change the value of the left / right indents, for a more convenient perception.
   </p>
-  <code><pre>
-  public configOutlinedShort: GrnFrameInputConfig = &#123;
-    labelPd: 21.66, // 0.57*FrameSizeValue.short
-  &#125;;
-  public configOutlinedSmall: GrnFrameInputConfig = &#123;
-    labelPd: 25.08, // 0.57*FrameSizeValue.small
-  &#125;;
-  ...
-  public configOutlinedHuge: GrnFrameInputConfig = &#123;
-    labelPd: 38.76, // 0.57*FrameSizeValue.huge
-  &#125;;
-
-  public configUnderlineShort: GrnFrameInputConfig = &#123;
-    labelPd: 15.2, // 0.4*FrameSizeValue.short
-  &#125;;
-  public configUnderlineSmall: GrnFrameInputConfig = &#123;
-    labelPd: 17.6, // 0.4*FrameSizeValue.small
-  &#125;;
-  ...
-  public configUnderlineHuge: GrnFrameInputConfig = &#123;
-    labelPd: 27.2, // 0.4*FrameSizeValue.huge
-  &#125;;</pre></code>
-  <p>
-    In our example, the value of the coefficient for changing the fillet radius will change
-    dynamically.
-    For this, an additional css-variable "--fibr-border-radius" is used.
-    As a result, we get the following:
-  </p>
-  <code><pre>
-  .fibr-outlined-radius .gfi-outlined &#123;
-    border-radius: calc(var(--size)*var(--fibr-border-radius)/100);
-  &#125;</pre></code>
-  <p>
-    Initial value of the fillet radius:
-  </p>
-  <code><pre>border-radius: calc(var(--size)/10);</pre></code>
-  <p>
-    Similarly, you can change the fillet radius for the underline appearance mode.
-  </p>
-  <p>
-    To do this, you also need to specify the value of the "border-radius" property
-    for the "grn-frame-input" css style.
-    And you also need to change the value of the left indentation.
-    How we did it above by specifying the required indentation in the configuration.
-  </p>
-  <p>
-    We get the following:
-  </p>
-  <code><pre>
-  .fibr-underline-radius .gfi-underline &#123;
-    --fibr-u-br-rd: calc(var(--size)*var(--fibr-border-radius)/100);
-    border-radius: var(--fibr-u-br-rd) var(--fibr-u-br-rd) 0 0;
-  &#125;
-  </pre></code>
 </section>
+
 
 <section mr-vr>
   <span>exterior: </span>
@@ -118,375 +90,756 @@
 </section>
 
 <section mr-vr>
-  <mat-slide-toggle color="primary"
-    [checked]="isHiddenLabel"
-    (change)="isHiddenLabel=$event.checked">
-    is hiddenLabel
-  </mat-slide-toggle>
+  <label>
+    <input type="checkbox"
+      [(ngModel)]="isAddPadding05" />
+    Add padding ( BaseSize * {{ getRatio(exterior05) }})
+  </label>
 </section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      [(ngModel)]="isHiddenLabel05" />
+    is hiddenLabel
+  </label>
+</section>
+
 
 <form class="fibr-outlined-radius fibr-underline-radius"
   [formGroup]="formGroup05"
   novalidate
   autocomplete="off">
 
-  <div class="app-elem">
+  <div class="app-group">
     <div>
-      <small>
-        <em>"Short" height: 38px; font-size: 16px;</em>
-      </small>
+      <small><em>"Short" height: 38px; font-size: 16px;</em></small>
     </div>
-    <grn-input formControlName="input05a"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="short"
-      [exterior]="exterior05"
-      [config]="exterior05 === 'outlined' ? configOutlinedShort : configUnderlineShort">
-    </grn-input>
   </div>
-  <hr br-nn>
+  <hr br-nn-m8>
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>"Small" height: 44px; font-size: 16px;</em>
-      </small>
-    </div>
-    <grn-input formControlName="input05b"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="small"
-      [exterior]="exterior05"
-      [config]="exterior05 === 'outlined' ? configOutlinedSmall : configUnderlineSmall">
-    </grn-input>
-  </div>
-  <hr br-nn>
+  <div class="app-group"
+    [attr.style]="safeStyle(propRadius + ':'
+      + getRadius(getValue(sizeShort) * borderRadius / 100, exterior05))">
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>"Middle" height: 50px; font-size: 16px;</em>
-      </small>
+    <div class="app-elem">
+      <grn-input formControlName="input05a"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel05 ? '':null"
+        frameSize="short"
+        [exterior]="exterior05"
+        [config]="isAddPadding05
+          ? getConfig(getValue(sizeShort) * getRatio(exterior05)) : null">
+      </grn-input>
     </div>
-    <grn-input formControlName="input05c"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="middle"
-      [exterior]="exterior05"
-      [config]="exterior05 === 'outlined' ? configOutlinedMiddle : configUnderlineMiddle">
-    </grn-input>
-  </div>
-  <hr br-nn>
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>"Wide" height: 56px; font-size: 16px;</em>
-      </small>
-    </div>
-    <grn-input formControlName="input05d"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="wide"
-      [exterior]="exterior05"
-      [config]="exterior05 === 'outlined' ? configOutlinedWide : configUnderlineWide">
-    </grn-input>
-  </div>
-  <hr br-nn>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>"Large" height: 62px; font-size: 18px;</em>
-      </small>
-    </div>
-    <grn-input formControlName="input05e"
-      class="fibr-large"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="large"
-      [exterior]="exterior05"
-      [config]="exterior05 === 'outlined' ? configOutlinedLarge : configUnderlineLarge">
-    </grn-input>
-  </div>
-  <hr br-nn>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>"Huge" height: 68px; font-size: 20px;</em>
-      </small>
-    </div>
-    <grn-input formControlName="input05f"
-      class="fibr-huge"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="huge"
-      [exterior]="exterior05"
-      [config]="exterior05 === 'outlined' ? configOutlinedHuge : configUnderlineHuge">
-    </grn-input>
   </div>
 
-</form>
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + getRadius(getValue(sizeShort) * borderRadius / 100, exterior05))"&gt;
 
-<section mr-vr>
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-tab-group animationDuration="0ms">
-        <mat-tab [label]="labelHtml">
-          <code><pre source="html">
-&lt;form class="fibr-outlined-radius fibr-underline-radius"
-  [formGroup]="formGroup05"
-  novalidate
-  autocomplete="off"&gt;
+&lt;div class="app-elem"&gt;
+  &lt;grn-input formControlName="input05a"
+    label="Enter value"
+    [hiddenLabel]="isHiddenLabel05 ? '':null"
+    frameSize="short"
+    [exterior]="exterior05"
+    [config]="isAddPadding05
+      ? getConfig(getValue(sizeShort) * getRatio(exterior05)) : null"&gt;
+  &lt;/grn-input&gt;
+&lt;/div&gt;
 
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Short" height: 38px; font-size: 16px;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-input formControlName="input05a"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="short"
-      [exterior]="exterior05"
-      [config]="exterior05 === 'outlined' ? configOutlinedShort : configUnderlineShort"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-  &lt;hr br-nn&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Small" height: 44px; font-size: 16px;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-input formControlName="input05b"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="small"
-      [exterior]="exterior05"
-      [config]="exterior05 === 'outlined' ? configOutlinedSmall : configUnderlineSmall"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-  &lt;hr br-nn&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Middle" height: 50px; font-size: 16px;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-input formControlName="input05c"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="middle"
-      [exterior]="exterior05"
-      [config]="exterior05 === 'outlined' ? configOutlinedMiddle : configUnderlineMiddle"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-  &lt;hr br-nn&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Wide" height: 56px; font-size: 16px;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-input formControlName="input05d"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="wide"
-      [exterior]="exterior05"
-      [config]="exterior05 === 'outlined' ? configOutlinedWide : configUnderlineWide"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-  &lt;hr br-nn&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Large" height: 62px; font-size: 18px;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-input formControlName="input05e"
-      class="fibr-large"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="large"
-      [exterior]="exterior05"
-      [config]="exterior05 === 'outlined' ? configOutlinedLarge : configUnderlineLarge"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-  &lt;hr br-nn&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;"Huge" height: 68px; font-size: 20px;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;grn-input formControlName="input05f"
-      class="fibr-huge"
-      label="Enter value"
-      [hiddenLabel]="isHiddenLabel ? '':null"
-      frameSize="huge"
-      [exterior]="exterior05"
-      [config]="exterior05 === 'outlined' ? configOutlinedHuge : configUnderlineHuge"&gt;
-    &lt;/grn-input&gt;
-  &lt;/div&gt;
-
-&lt;/form&gt;</pre></code>
-        </mat-tab>
-        <mat-tab [label]="labelTs">
-          <code><pre source="ts">
+&lt;/div&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
 import &#123;
-  Component, ViewEncapsulation, HostBinding
+  Component, ViewEncapsulation
 &#125; from '@angular/core';
 import &#123;
   FormControl, FormGroup
 &#125; from '@angular/forms';
 
 @Component(&#123;
-  selector: 'app-frame-input',
-  templateUrl: './frame-input.component.html',
-  styleUrls: ['./frame-input.component.scss'],
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
-export class FrameInputComponent &#123;
+export class ButtonComponent &#123;
+  public borderRadius = 50;
+  public propRadius = '--gfi-br-rd';
+  public ratioOutlined = 0.58;
+  public ratioUnderline = 0.4;
+  public exterior05 = 'outlined';
+  public isAddPadding05 = true;
+
+  public sizeShort = FrameSize.short;
+
   public formGroup05: FormGroup = new FormGroup(&#123;
     input05a: new FormControl('Demo Size Short', []),
-    input05b: new FormControl('Demo Size Small', []),
-    input05c: new FormControl('Demo Size Middle', []),
-    input05d: new FormControl('Demo Size Wide', []),
-    input05e: new FormControl('Demo Size Large', []),
-    input05f: new FormControl('Demo Size Huge', []),
-  &#125;);
-  public exterior05 = 'outlined';
-  public isHiddenLabel = false;
-  public borderRadius = 50;
+  &#125;
 
-  public configOutlinedShort: GrnFrameInputConfig = &#123;
-    labelPd: 21.66, // 0.57*FrameSizeValue.short
-  &#125;;
-  public configOutlinedSmall: GrnFrameInputConfig = &#123;
-    labelPd: 25.08, // 0.57*FrameSizeValue.small
-  &#125;;
-  public configOutlinedMiddle: GrnFrameInputConfig = &#123;
-    labelPd: 28.5, // 0.57*FrameSizeValue.middle
-  &#125;;
-  public configOutlinedWide: GrnFrameInputConfig = &#123;
-    labelPd: 31.92, // 0.57*FrameSizeValue.wide
-  &#125;;
-  public configOutlinedLarge: GrnFrameInputConfig = &#123;
-    labelPd: 35.34, // 0.57*FrameSizeValue.large
-  &#125;;
-  public configOutlinedHuge: GrnFrameInputConfig = &#123;
-    labelPd: 38.76, // 0.57*FrameSizeValue.huge
-  &#125;;
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
 
-  public configUnderlineShort: GrnFrameInputConfig = &#123;
-    labelPd: 15.2, // 0.4*FrameSizeValue.short
-  &#125;;
-  public configUnderlineSmall: GrnFrameInputConfig = &#123;
-    labelPd: 17.6, // 0.4*FrameSizeValue.small
-  &#125;;
-  public configUnderlineMiddle: GrnFrameInputConfig = &#123;
-    labelPd: 20, // 0.4*FrameSizeValue.middle
-  &#125;;
-  public configUnderlineWide: GrnFrameInputConfig = &#123;
-    labelPd: 22.4, // 0.4*FrameSizeValue.wide
-  &#125;;
-  public configUnderlineLarge: GrnFrameInputConfig = &#123;
-    labelPd: 24.8, // 0.4*FrameSizeValue.large
-  &#125;;
-  public configUnderlineHuge: GrnFrameInputConfig = &#123;
-    labelPd: 27.2, // 0.4*FrameSizeValue.huge
-  &#125;;
-
-  @HostBinding('style')
-  public get getClass(): string | null &#123;
-    return '--fibr-border-radius: ' + this.borderRadius + ';';
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public getRadius(value: number, exterior: string): string &#123;
+    return exterior === 'underline' ? value + 'px ' + value + 'px 0 0' : value + 'px';
+  &#125;
+  public getRatio(exterior: string): number &#123;
+    return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
-        </mat-tab>
-        <mat-tab [label]="labelCss">
-          <code><pre source="css">
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+  <hr br-nn>
+
+  <div class="app-group">
+    <div>
+      <small><em>"Small" height: 44px; font-size: 16px;</em></small>
+    </div>
+  </div>
+  <hr br-nn-m8>
+
+  <div class="app-group"
+    [attr.style]="safeStyle(propRadius + ':'
+      + getRadius(getValue(sizeSmall) * borderRadius / 100, exterior05))">
+
+    <div class="app-elem">
+      <grn-input formControlName="input05b"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel05 ? '':null"
+        frameSize="small"
+        [exterior]="exterior05"
+        [config]="isAddPadding05
+          ? getConfig(getValue(sizeSmall) * getRatio(exterior05)) : null">
+      </grn-input>
+    </div>
+
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + getRadius(getValue(sizeSmall) * borderRadius / 100, exterior05))"&gt;
+
+&lt;div class="app-elem"&gt;
+  &lt;grn-input formControlName="input05b"
+    label="Enter value"
+    [hiddenLabel]="isHiddenLabel05 ? '':null"
+    frameSize="small"
+    [exterior]="exterior05"
+    [config]="isAddPadding05
+      ? getConfig(getValue(sizeSmall) * getRatio(exterior05)) : null"&gt;
+  &lt;/grn-input&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public borderRadius = 50;
+  public propRadius = '--gfi-br-rd';
+  public ratioOutlined = 0.58;
+  public ratioUnderline = 0.4;
+  public exterior05 = 'outlined';
+  public isAddPadding05 = true;
+
+  public sizeSmall = FrameSize.small;
+
+  public formGroup05: FormGroup = new FormGroup(&#123;
+    input05b: new FormControl('Demo Size Small', []),
+  &#125;
+
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
+
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public getRadius(value: number, exterior: string): string &#123;
+    return exterior === 'underline' ? value + 'px ' + value + 'px 0 0' : value + 'px';
+  &#125;
+  public getRatio(exterior: string): number &#123;
+    return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
+  &#125;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+  <hr br-nn>
+
+  <div class="app-group">
+    <div>
+      <small><em>"Middle" height: 50px; font-size: 16px;</em></small>
+    </div>
+  </div>
+  <hr br-nn-m8>
+
+  <div class="app-group"
+    [attr.style]="safeStyle(propRadius + ':'
+      + getRadius(getValue(sizeMiddle) * borderRadius / 100, exterior05))">
+
+    <div class="app-elem">
+      <grn-input formControlName="input05c"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel05 ? '':null"
+        frameSize="middle"
+        [exterior]="exterior05"
+        [config]="isAddPadding05
+          ? getConfig(getValue(sizeMiddle) * getRatio(exterior05)) : null">
+      </grn-input>
+    </div>
+
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + getRadius(getValue(sizeMiddle) * borderRadius / 100, exterior05))"&gt;
+
+&lt;div class="app-elem"&gt;
+  &lt;grn-input formControlName="input05c"
+    label="Enter value"
+    [hiddenLabel]="isHiddenLabel05 ? '':null"
+    frameSize="middle"
+    [exterior]="exterior05"
+    [config]="isAddPadding05
+      ? getConfig(getValue(sizeMiddle) * getRatio(exterior05)) : null"&gt;
+  &lt;/grn-input&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public borderRadius = 50;
+  public propRadius = '--gfi-br-rd';
+  public ratioOutlined = 0.58;
+  public ratioUnderline = 0.4;
+  public exterior05 = 'outlined';
+  public isAddPadding05 = true;
+
+  public sizeMiddle = FrameSize.middle;
+
+  public formGroup05: FormGroup = new FormGroup(&#123;
+    input05c: new FormControl('Demo Size Middle', []),
+  &#125;
+
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
+
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public getRadius(value: number, exterior: string): string &#123;
+    return exterior === 'underline' ? value + 'px ' + value + 'px 0 0' : value + 'px';
+  &#125;
+  public getRatio(exterior: string): number &#123;
+    return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
+  &#125;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+  <hr br-nn>
+
+  <div class="app-group">
+    <div>
+      <small><em>"Wide" height: 56px; font-size: 16px;</em></small>
+    </div>
+  </div>
+  <hr br-nn-m8>
+
+  <div class="app-group"
+    [attr.style]="safeStyle(propRadius + ':'
+      + getRadius(getValue(sizeWide) * borderRadius / 100, exterior05))">
+
+    <div class="app-elem">
+      <grn-input formControlName="input05d"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel05 ? '':null"
+        frameSize="wide"
+        [exterior]="exterior05"
+        [config]="isAddPadding05
+          ? getConfig(getValue(sizeWide) * getRatio(exterior05)) : null">
+      </grn-input>
+    </div>
+
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + getRadius(getValue(sizeWide) * borderRadius / 100, exterior05))"&gt;
+
+&lt;div class="app-elem"&gt;
+  &lt;grn-input formControlName="input05d"
+    label="Enter value"
+    [hiddenLabel]="isHiddenLabel05 ? '':null"
+    frameSize="wide"
+    [exterior]="exterior05"
+    [config]="isAddPadding05
+      ? getConfig(getValue(sizeWide) * getRatio(exterior05)) : null"&gt;
+  &lt;/grn-input&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public borderRadius = 50;
+  public propRadius = '--gfi-br-rd';
+  public ratioOutlined = 0.58;
+  public ratioUnderline = 0.4;
+  public exterior05 = 'outlined';
+  public isAddPadding05 = true;
+
+  public sizeWide = FrameSize.wide;
+
+  public formGroup05: FormGroup = new FormGroup(&#123;
+    input05d: new FormControl('Demo Size Wide', []),
+  &#125;
+
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
+
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public getRadius(value: number, exterior: string): string &#123;
+    return exterior === 'underline' ? value + 'px ' + value + 'px 0 0' : value + 'px';
+  &#125;
+  public getRatio(exterior: string): number &#123;
+    return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
+  &#125;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+  <hr br-nn>
+
+  <div class="app-group">
+    <div>
+      <small><em>"Large" height: 62px; font-size: 18px;</em></small>
+    </div>
+  </div>
+  <hr br-nn-m8>
+
+  <div class="app-group"
+    [attr.style]="safeStyle(propRadius + ':'
+      + getRadius(getValue(sizeLarge) * borderRadius / 100, exterior05))">
+
+    <div class="app-elem">
+      <grn-input formControlName="input05e"
+        class="fibr-large"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel05 ? '':null"
+        frameSize="large"
+        [exterior]="exterior05"
+        [config]="isAddPadding05
+          ? getConfig(getValue(sizeLarge) * getRatio(exterior05)) : null">
+      </grn-input>
+    </div>
+
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + getRadius(getValue(sizeLarge) * borderRadius / 100, exterior05))"&gt;
+
+&lt;div class="app-elem"&gt;
+  &lt;grn-input formControlName="input05e"
+    class="fibr-large"
+    label="Enter value"
+    [hiddenLabel]="isHiddenLabel05 ? '':null"
+    frameSize="large"
+    [exterior]="exterior05"
+    [config]="isAddPadding05
+      ? getConfig(getValue(sizeLarge) * getRatio(exterior05)) : null"&gt;
+  &lt;/grn-input&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public borderRadius = 50;
+  public propRadius = '--gfi-br-rd';
+  public ratioOutlined = 0.58;
+  public ratioUnderline = 0.4;
+  public exterior05 = 'outlined';
+  public isAddPadding05 = true;
+
+  public sizeLarge = FrameSize.large;
+
+  public formGroup05: FormGroup = new FormGroup(&#123;
+    input05e: new FormControl('Demo Size Large', []),
+  &#125;
+
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
+
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public getRadius(value: number, exterior: string): string &#123;
+    return exterior === 'underline' ? value + 'px ' + value + 'px 0 0' : value + 'px';
+  &#125;
+  public getRatio(exterior: string): number &#123;
+    return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
+  &#125;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
 .app-elem &#123;
   min-width: 26ch;
   margin: 10px 10px;
 &#125;
 .fibr-large &#123;
   font-size: 18px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+  <hr br-nn>
+
+  <div class="app-group">
+    <div>
+      <small><em>"Huge" height: 68px; font-size: 20px;</em></small>
+    </div>
+  </div>
+  <hr br-nn-m8>
+
+  <div class="app-group"
+    [attr.style]="safeStyle(propRadius + ':'
+      + getRadius(getValue(sizeHuge) * borderRadius / 100, exterior05))">
+
+    <div class="app-elem">
+      <grn-input formControlName="input05f"
+        class="fibr-huge"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel05 ? '':null"
+        frameSize="huge"
+        [exterior]="exterior05"
+        [config]="isAddPadding05
+          ? getConfig(getValue(sizeHuge) * getRatio(exterior05)) : null">
+      </grn-input>
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="safeStyle(propRadius + ':'
+    + getRadius(getValue(sizeHuge) * borderRadius / 100, exterior05))"&gt;
+
+&lt;div class="app-elem"&gt;
+  &lt;grn-input formControlName="input05f"
+    class="fibr-huge"
+    label="Enter value"
+    [hiddenLabel]="isHiddenLabel05 ? '':null"
+    frameSize="huge"
+    [exterior]="exterior05"
+    [config]="isAddPadding05
+      ? getConfig(getValue(sizeHuge) * getRatio(exterior05)) : null"&gt;
+  &lt;/grn-input&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public borderRadius = 50;
+  public propRadius = '--gfi-br-rd';
+  public ratioOutlined = 0.58;
+  public ratioUnderline = 0.4;
+  public exterior05 = 'outlined';
+  public isAddPadding05 = true;
+
+  public sizeHuge = FrameSize.huge;
+
+  public formGroup05: FormGroup = new FormGroup(&#123;
+    input05f: new FormControl('Demo Size Huge', []),
+  &#125;
+
+  constructor(private sanitizer: DomSanitizer) &#123;&#125;
+
+  public safeStyle(style: string): SafeStyle &#123;
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  &#125;
+  public getValue(value: FrameSize): number &#123;
+    return FrameSizeUtil.getValue(value) || 0;
+  &#125;
+  public getRadius(value: number, exterior: string): string &#123;
+    return exterior === 'underline' ? value + 'px ' + value + 'px 0 0' : value + 'px';
+  &#125;
+  public getRatio(exterior: string): number &#123;
+    return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
+  &#125;
+  public getConfig(labelPd: number): GrnButtonConfig &#123;
+    return &#123; labelPd &#125;;
+  &#125;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
 &#125;
 .fibr-huge &#123;
   font-size: 20px;
-&#125;
-
---fibr-border-radius: 20;
-
-.fibr-outlined-radius .gfi-outlined &#123;
-  border-radius: calc(var(--size)*var(--fibr-border-radius)/100);
-&#125;
-
-.fibr-underline-radius .gfi-underline &#123;
-  --fibr-u-br-rd: calc(var(--size)*var(--fibr-border-radius)/100);
-  border-radius: var(--fibr-u-br-rd) var(--fibr-u-br-rd) 0 0;
 &#125;</pre></code>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-expansion-panel>
-  </mat-accordion>
-</section>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+</form>
+
+
+<hr br-nn>
 
 
 <section mr-vr>
-  <h4>Border radius in "outlined" mode.</h4>
   <p>
-    Thus, to describe the radius of the rounding, we can assign any valid (in accordance
-    with the description of
-    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">
-      "border-radius"</a>) value.<br />
-    It is also necessary to change the value of the left padding so that the label does not
-    intersect with the border.
+    Below are other possible values for "border-radius".
   </p>
 </section>
 
 <section mr-vr>
-  <h4>Border radius in "underline" mode.</h4>
-  <p>
-    For the "underline" mode, the value of the border rounding radius is set in the same way.<br />
-  </p>
-  <p>
-    Initial value of the fillet radius:
-  </p>
-  <code><pre>border-radius: calc(var(--size)/10) calc(var(--size)/10) 0 0;</pre></code>
-  <p>
-    And in this case, we can use any valid value as described in
-    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">
-      "border-radius"</a>.<br />
-    It is also necessary to change the value of the left padding so that the label does not
-    intersect with the border.
-  </p>
-  <p>
-    If in the "underline" mode we want to round the bottom corners, then we additionally need to
-    specify the height of the block with the bottom frame.
-  </p>
-  <p>
-    Here's an example:
-  </p>
-  <code><pre>
-  .fibr-radius-h .gfi-underline &#123;
-    border-radius: 0 0 0 calc(var(--size)/3);
-  &#125;
-  .fibr-radius-h .gfi-underline .gfi-frame:before,
-  .fibr-radius-h .gfi-underline .gfi-frame:after &#123;
-    height: calc(0.65*var(--size));
-  &#125;</pre></code>
+  <label>
+    <input type="checkbox"
+      [(ngModel)]="isAddPadding06" />
+    Add padding ( BaseSize * {{ getRatio(exterior05) }})
+  </label>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      [(ngModel)]="isHiddenLabel06" />
+    is hiddenLabel
+  </label>
 </section>
 
 <form [formGroup]="formGroup06"
@@ -500,424 +853,56 @@ export class FrameInputComponent &#123;
   </div>
 
   <div class="app-group">
+    <div>
+      <small><em>Demo - A (top-left, bottom-left)</em></small>
+    </div>
+  </div>
+  <hr br-nn-m8>
 
+  <div class="app-group">
     <div class="app-elem">
-      <div>
-        <small>
-          <em>Demo - A (top-left, bottom-left)</em>
-        </small>
-      </div>
-      <grn-input formControlName="input06a"
-        class="fibr-radius-a"
+
+      <grn-input style="--gfi-br-rd: 12.5px 0px 0px 12.5px;"
+        formControlName="input06a"
         label="Enter value"
+        [hiddenLabel]="isHiddenLabel06 ? '':null"
         exterior="outlined"
-        [config]="configOutlined">
+        [config]="isAddPadding06 ? configOutlined : null">
       </grn-input>
-    </div>
 
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Demo - B (top-right, bottom-right)</em>
-        </small>
-      </div>
-      <grn-input formControlName="input06b"
-        class="fibr-radius-b"
-        label="Enter value"
-        exterior="outlined"
-        [config]="configOutlined">
-      </grn-input>
-    </div>
-
-  </div>
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Demo - C (top-left, bottom-right)</em>
-        </small>
-      </div>
-      <grn-input formControlName="input06c"
-        class="fibr-radius-c"
-        label="Enter value"
-        exterior="outlined"
-        [config]="configOutlined">
-      </grn-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Demo - D (bottom-right, top-left)</em>
-        </small>
-      </div>
-      <grn-input formControlName="input06d"
-        class="fibr-radius-d"
-        label="Enter value"
-        exterior="outlined"
-        [config]="configOutlined">
-      </grn-input>
-    </div>
-
-  </div>
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Demo - E (border-radius: 5%/50%)</em>
-        </small>
-      </div>
-      <grn-input formControlName="input06e"
-        class="fibr-radius-e"
-        label="Enter value"
-        exterior="outlined"
-        [config]="configOutlined">
-      </grn-input>
-    </div>
-
-  </div>
-
-  <hr br-nn>
-  <div>
-    <small>
-      <em>For "underline" mode.</em>
-    </small>
-  </div>
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Demo - F (top-left)</em>
-        </small>
-      </div>
-      <grn-input formControlName="input06f"
-        class="fibr-radius-f"
-        label="Enter value"
-        exterior="underline"
-        [config]="configUnderline">
-      </grn-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Demo - G (top-right)</em>
-        </small>
-      </div>
-      <grn-input formControlName="input06g"
-        class="fibr-radius-g"
-        label="Enter value"
-        exterior="underline"
-        [config]="configUnderline">
-      </grn-input>
-    </div>
-
-  </div>
-
-  <div class="app-group">
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Demo - H (bottom-left)</em>
-        </small>
-      </div>
-      <grn-input formControlName="input06h"
-        class="fibr-radius-h"
-        label="Enter value"
-        exterior="underline"
-        [config]="configUnderline">
-      </grn-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Demo - I (bottom-right)</em>
-        </small>
-      </div>
-      <grn-input formControlName="input06i"
-        class="fibr-radius-i"
-        label="Enter value"
-        exterior="underline"
-        [config]="configUnderline">
-      </grn-input>
     </div>
   </div>
 
-  <div class="app-group">
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Demo - J (top-left, bottom-left)</em>
-        </small>
-      </div>
-      <grn-input formControlName="input06j"
-        class="fibr-radius-j"
-        label="Enter value"
-        exterior="underline"
-        [config]="configUnderline">
-      </grn-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Demo - K (top-right, bottom-right)</em>
-        </small>
-      </div>
-      <grn-input formControlName="input06k"
-        class="fibr-radius-k"
-        label="Enter value"
-        exterior="underline"
-        [config]="configUnderline">
-      </grn-input>
-    </div>
-  </div>
-
-  <div class="app-group">
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Demo - L (top-[left,right], bottom-[left,right])</em>
-        </small>
-      </div>
-      <grn-input formControlName="input06l"
-        class="fibr-radius-l"
-        label="Enter value"
-        exterior="underline"
-        [config]="configUnderline">
-      </grn-input>
-    </div>
-  </div>
-
-</form>
-
-<section mr-vr>
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-tab-group animationDuration="0ms">
-        <mat-tab [label]="labelHtml">
-          <code><pre source="html">
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
 &lt;form [formGroup]="formGroup06"
+  class="app-group"
   novalidate
   autocomplete="off"&gt;
 
-  &lt;div&gt;
-    &lt;small&gt;
-      &lt;em&gt;For "outlined" mode.&lt;/em&gt;
-    &lt;/small&gt;
-  &lt;/div&gt;
+  &lt;div class="app-elem"&gt;
 
-  &lt;div class="app-group"&gt;
+    &lt;grn-input style="--gfi-br-rd: 12.5px 0px 0px 12.5px;"
+      formControlName="input06a"
+      label="Enter value"
+      [hiddenLabel]="isHiddenLabel06 ? '':null"
+      exterior="outlined"
+      [config]="isAddPadding06 ? configOutlined : null"&gt;
+    &lt;/grn-input&gt;
 
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Demo - A (top-left, bottom-left)&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;grn-input formControlName="input06a"
-        class="fibr-radius-a"
-        label="Enter value"
-        exterior="outlined"
-        [config]="configOutlined"&gt;
-      &lt;/grn-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Demo - B (top-right, bottom-right)&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;grn-input formControlName="input06b"
-        class="fibr-radius-b"
-        label="Enter value"
-        exterior="outlined"
-        [config]="configOutlined"&gt;
-      &lt;/grn-input&gt;
-    &lt;/div&gt;
-
-  &lt;/div&gt;
-
-  &lt;div class="app-group"&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Demo - C (top-left, bottom-right)&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;grn-input formControlName="input06c"
-        class="fibr-radius-c"
-        label="Enter value"
-        exterior="outlined"
-        [config]="configOutlined"&gt;
-      &lt;/grn-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Demo - D (bottom-right, top-left)&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;grn-input formControlName="input06d"
-        class="fibr-radius-d"
-        label="Enter value"
-        exterior="outlined"
-        [config]="configOutlined"&gt;
-      &lt;/grn-input&gt;
-    &lt;/div&gt;
-
-  &lt;/div&gt;
-
-  &lt;div class="app-group"&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Demo - E (border-radius: 5%/50%)&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;grn-input formControlName="input06e"
-        class="fibr-radius-e"
-        label="Enter value"
-        exterior="outlined"
-        [config]="configOutlined"&gt;
-      &lt;/grn-input&gt;
-    &lt;/div&gt;
-
-  &lt;/div&gt;
-
-  &lt;hr br-nn&gt;
-  &lt;div&gt;
-    &lt;small&gt;
-      &lt;em&gt;For "underline" mode.&lt;/em&gt;
-    &lt;/small&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-group"&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Demo - F (top-left)&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;grn-input formControlName="input06f"
-        class="fibr-radius-f"
-        label="Enter value"
-        exterior="underline"
-        [config]="configUnderline"&gt;
-      &lt;/grn-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Demo - G (top-right)&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;grn-input formControlName="input06g"
-        class="fibr-radius-g"
-        label="Enter value"
-        exterior="underline"
-        [config]="configUnderline"&gt;
-      &lt;/grn-input&gt;
-    &lt;/div&gt;
-
-  &lt;/div&gt;
-
-  &lt;div class="app-group"&gt;
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Demo - H (bottom-left)&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;grn-input formControlName="input06h"
-        class="fibr-radius-h"
-        label="Enter value"
-        exterior="underline"
-        [config]="configUnderline"&gt;
-      &lt;/grn-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Demo - I (bottom-right)&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;grn-input formControlName="input06i"
-        class="fibr-radius-i"
-        label="Enter value"
-        exterior="underline"
-        [config]="configUnderline"&gt;
-      &lt;/grn-input&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-group"&gt;
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Demo - J (top-left, bottom-left)&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;grn-input formControlName="input06j"
-        class="fibr-radius-j"
-        label="Enter value"
-        exterior="underline"
-        [config]="configUnderline"&gt;
-      &lt;/grn-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Demo - K (top-right, bottom-right)&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;grn-input formControlName="input06k"
-        class="fibr-radius-k"
-        label="Enter value"
-        exterior="underline"
-        [config]="configUnderline"&gt;
-      &lt;/grn-input&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-group"&gt;
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Demo - L (top-[left,right], bottom-[left,right])&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;grn-input formControlName="input06l"
-        class="fibr-radius-l"
-        label="Enter value"
-        exterior="underline"
-        [config]="configUnderline"&gt;
-      &lt;/grn-input&gt;
-    &lt;/div&gt;
   &lt;/div&gt;
 
 &lt;/form&gt;</pre></code>
-        </mat-tab>
-        <mat-tab [label]="labelTs">
-          <code><pre source="ts">
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
@@ -926,38 +911,25 @@ import &#123;
 &#125; from '@angular/forms';
 
 @Component(&#123;
-  selector: 'app-frame-input',
-  templateUrl: './frame-input.component.html',
-  styleUrls: ['./frame-input.component.scss'],
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
-export class FrameInputComponent &#123;
+export class ButtonComponent &#123;
+  public isAddPadding06 = true;
+  public isHiddenLabel06 = false;
+  public configOutlined: GrnFrameInputConfig = &#123;
+    labelPd: 18.5, // 0.37*FrameSizeValue.middle (50px)
+  &#125;;
+
   public formGroup06: FormGroup = new FormGroup(&#123;
     input06a: new FormControl('Demo - A', []),
-    input06b: new FormControl('Demo - B', []),
-    input06c: new FormControl('Demo - C', []),
-    input06d: new FormControl('Demo - D', []),
-    input06e: new FormControl('Demo - E', []),
-    input06f: new FormControl('Demo - F', []),
-    input06g: new FormControl('Demo - G', []),
-    input06h: new FormControl('Demo - H', []),
-    input06i: new FormControl('Demo - I', []),
-    input06j: new FormControl('Demo - J', []),
-    input06k: new FormControl('Demo - K', []),
-    input06l: new FormControl('Demo - L', []),
-  &#125;);
-
-  public configOutlined: GrnFrameInputConfig = &#123;
-    labelPd: 20.72, // 0.37*FrameSizeValue.wide
-  &#125;;
-  public configUnderline: GrnFrameInputConfig = &#123;
-    labelPd: 20.72, // 0.37*FrameSizeValue.wide
-  &#125;;
-
+  &#125;
 &#125;</pre></code>
-        </mat-tab>
-        <mat-tab [label]="labelCss">
-          <code><pre source="css">
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
 .app-group &#123;
   display: flex;
   flex-wrap: wrap;
@@ -965,67 +937,520 @@ export class FrameInputComponent &#123;
 .app-elem &#123;
   min-width: 26ch;
   margin: 10px 10px;
-&#125;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
 
-.fibr-radius-a .gfi-outlined &#123;
-  border-radius: calc(var(--size)/4) 0 0 calc(var(--size)/4);
-&#125;
-.fibr-radius-b .gfi-outlined &#123;
-  border-radius: 0 calc(var(--size)/4) calc(var(--size)/4) 0;
-&#125;
-.fibr-radius-c .gfi-outlined &#123;
-  border-radius: calc(var(--size)/4) 0 calc(var(--size)/4) 0;
-&#125;
-.fibr-radius-d .gfi-outlined &#123;
-  border-radius: 0 calc(var(--size)/4) 0 calc(var(--size)/4);
-&#125;
-
-.fibr-radius-e .gfi-outlined &#123;
-  border-radius: 5% / 50%;
-&#125;
-
-.fibr-radius-F .gfi-underlin &#123;
-  border-radius: calc(var(--size)/3) 0 0 0;
-&#125;
-.fibr-radius-G .gfi-underlin &#123;
-  border-radius: 0 calc(var(--size)/3) 0 0;
-&#125;
+  <hr br-nn>
 
 
-.fibr-radius-h .gfi-underline &#123;
-  border-radius: 0 0 0 calc(var(--size)/3);
-  .gfi-frame:before, .gfi-frame:after &#123;
-    height: calc(0.65*var(--size));
-  &#125;
-&#125;
-.fibr-radius-i .gfi-underline &#123;
-  border-radius: 0 0 calc(var(--size)/3) 0;
-  .gfi-frame:before, .gfi-frame:after &#123;
-    height: calc(0.65*var(--size));
-  &#125;
-&#125;
+  <div class="app-group">
+    <div>
+      <small><em>Demo - B (top-right, bottom-right)</em></small>
+    </div>
+  </div>
+  <hr br-nn-m8>
 
-.fibr-radius-j .gfi-underline &#123;
-  border-radius: calc(var(--size)/3) 0 0 calc(var(--size)/3);
-  .gfi-frame:before, .gfi-frame:after &#123;
-    height: calc(0.65*var(--size));
-  &#125;
-&#125;
-.fibr-radius-k .gfi-underline &#123;
-  border-radius: 0 calc(var(--size)/3) calc(var(--size)/3) 0;
-  .gfi-frame:before, .gfi-frame:after &#123;
-    height: calc(0.65*var(--size));
-  &#125;
-&#125;
+  <div class="app-group">
+    <div class="app-elem">
 
-.fibr-radius-l .gfi-underline &#123;
-  border-radius: calc(var(--size)/3);
-  .gfi-frame:before, .gfi-frame:after &#123;
-    height: calc(0.65*var(--size));
+      <grn-input style="--gfi-br-rd: 0px 12.5px 12.5px 0px;"
+        formControlName="input06b"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel06 ? '':null"
+        exterior="outlined"
+        [config]="isAddPadding06 ? configOutlined : null">
+      </grn-input>
+
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup06"
+  class="app-group"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-elem"&gt;
+
+    &lt;grn-input style="--gfi-br-rd: 0px 12.5px 12.5px 0px;"
+      formControlName="input06b"
+      label="Enter value"
+      [hiddenLabel]="isHiddenLabel06 ? '':null"
+      exterior="outlined"
+      [config]="isAddPadding06 ? configOutlined : null"&gt;
+    &lt;/grn-input&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public isAddPadding06 = true;
+  public isHiddenLabel06 = false;
+  public configOutlined: GrnFrameInputConfig = &#123;
+    labelPd: 18.5, // 0.37*FrameSizeValue.middle (50px)
+  &#125;;
+
+  public formGroup06: FormGroup = new FormGroup(&#123;
+    input06b: new FormControl('Demo - B', []),
   &#125;
 &#125;</pre></code>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-expansion-panel>
-  </mat-accordion>
-</section>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+  <hr br-nn>
+
+
+  <div class="app-group">
+    <div>
+      <small><em>Demo - C (top-left, bottom-right)</em></small>
+    </div>
+  </div>
+  <hr br-nn-m8>
+
+  <div class="app-group">
+    <div class="app-elem">
+
+      <grn-input style="--gfi-br-rd: 12.5px 0px 12.5px 0px;"
+        formControlName="input06c"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel06 ? '':null"
+        exterior="outlined"
+        [config]="isAddPadding06 ? configOutlined : null">
+      </grn-input>
+
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup06"
+  class="app-group"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-elem"&gt;
+
+    &lt;grn-input style="--gfi-br-rd: 12.5px 0px 12.5px 0px;"
+      formControlName="input06c"
+      label="Enter value"
+      [hiddenLabel]="isHiddenLabel06 ? '':null"
+      exterior="outlined"
+      [config]="isAddPadding06 ? configOutlined : null"&gt;
+    &lt;/grn-input&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public isAddPadding06 = true;
+  public isHiddenLabel06 = false;
+  public configOutlined: GrnFrameInputConfig = &#123;
+    labelPd: 18.5, // 0.37*FrameSizeValue.middle (50px)
+  &#125;;
+
+  public formGroup06: FormGroup = new FormGroup(&#123;
+    input06c: new FormControl('Demo - C', []),
+  &#125;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+  <hr br-nn>
+
+
+  <div class="app-group">
+    <div>
+      <small><em>Demo - D (bottom-right, top-left)</em></small>
+    </div>
+  </div>
+  <hr br-nn-m8>
+
+  <div class="app-group">
+    <div class="app-elem">
+
+      <grn-input style="--gfi-br-rd: 0px 12.5px 0px 12.5px;"
+        formControlName="input06d"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel06 ? '':null"
+        exterior="outlined"
+        [config]="isAddPadding06 ? configOutlined : null">
+      </grn-input>
+
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup06"
+  class="app-group"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-elem"&gt;
+
+    &lt;grn-input style="--gfi-br-rd: 0px 12.5px 0px 12.5px;"
+      formControlName="input06d"
+      label="Enter value"
+      [hiddenLabel]="isHiddenLabel06 ? '':null"
+      exterior="outlined"
+      [config]="isAddPadding06 ? configOutlined : null"&gt;
+    &lt;/grn-input&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public isAddPadding06 = true;
+  public isHiddenLabel06 = false;
+  public configOutlined: GrnFrameInputConfig = &#123;
+    labelPd: 18.5, // 0.37*FrameSizeValue.middle (50px)
+  &#125;;
+
+  public formGroup06: FormGroup = new FormGroup(&#123;
+    input06d: new FormControl('Demo - D', []),
+  &#125;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+  <hr br-nn>
+
+
+  <div class="app-group">
+    <div>
+      <small><em>Demo - E (border-radius: 5%/50%)</em></small>
+    </div>
+  </div>
+  <hr br-nn-m8>
+
+  <div class="app-group">
+    <div class="app-elem">
+
+      <grn-input style="--gfi-br-rd: 5% / 50%;"
+        formControlName="input06e"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel06 ? '':null"
+        exterior="outlined"
+        [config]="isAddPadding06 ? configOutlined : null">
+      </grn-input>
+
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup06"
+  class="app-group"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-elem"&gt;
+
+    &lt;grn-input style="--gfi-br-rd: 5% / 50%;"
+      formControlName="input06e"
+      label="Enter value"
+      [hiddenLabel]="isHiddenLabel06 ? '':null"
+      exterior="outlined"
+      [config]="isAddPadding06 ? configOutlined : null"&gt;
+    &lt;/grn-input&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public isAddPadding06 = true;
+  public isHiddenLabel06 = false;
+  public configOutlined: GrnFrameInputConfig = &#123;
+    labelPd: 18.5, // 0.37*FrameSizeValue.middle (50px)
+  &#125;;
+
+  public formGroup06: FormGroup = new FormGroup(&#123;
+    input06e: new FormControl('Demo - E', []),
+  &#125;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+  <hr br-nn>
+
+
+  <div>
+    <small>
+      <em>For "underline" mode.</em>
+    </small>
+  </div>
+
+  <div class="app-group">
+    <div>
+      <small><em>Demo - F (border-radius: 16.66px)</em></small>
+    </div>
+  </div>
+  <hr br-nn-m8>
+
+  <div class="app-group">
+    <div class="app-elem">
+
+      <style>
+        .radius-f {
+          /* FrameSize.middle [50px] / 3 */
+          --gfi-br-rd: 16.66667px;
+        }
+
+        .radius-f div.gfi-frame:before,
+        .radius-f div.gfi-frame:after {
+          /* FrameSize.middle [50px] */
+          height: 50px;
+        }
+      </style>
+
+      <grn-input class="radius-f"
+        formControlName="input06f"
+        label="Enter value"
+        [hiddenLabel]="isHiddenLabel06 ? '':null"
+        exterior="underline"
+        [config]="isAddPadding06 ? configOutlined : null">
+      </grn-input>
+
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup06"
+  class="app-group"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-elem"&gt;
+
+    &lt;style&gt;
+      .radius-f &#123;
+        /* FrameSize.middle [50px] / 3 */
+        --gfi-br-rd: 16.66667px;
+      &#125;
+      .radius-f div.gfi-frame:before,
+      .radius-f div.gfi-frame:after &#123;
+        /* FrameSize.middle [50px] */
+        height: 50px;
+      &#125;
+    &lt;/style&gt;
+
+    &lt;grn-input  class="radius-f"
+      formControlName="input06f"
+      label="Enter value"
+      [hiddenLabel]="isHiddenLabel06 ? '':null"
+      exterior="outlined"
+      [config]="isAddPadding06 ? configOutlined : null"&gt;
+    &lt;/grn-input&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public isAddPadding06 = true;
+  public isHiddenLabel06 = false;
+  public configOutlined: GrnFrameInputConfig = &#123;
+    labelPd: 18.5, // 0.37*FrameSizeValue.middle (50px)
+  &#125;;
+
+  public formGroup06: FormGroup = new FormGroup(&#123;
+    input06f: new FormControl('Demo - F', []),
+  &#125;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+</form>
+
+<hr br-nn />
+<hr br-nn />
