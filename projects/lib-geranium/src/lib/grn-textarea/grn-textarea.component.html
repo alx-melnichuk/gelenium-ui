@@ -10,12 +10,13 @@
     [isFilled]="isFilled"
     [isError]="!!formControl.errors || isError2"
     [isRequired]="isRequired2"
-    [grnSize]="frameSize2 || currConfig.frameSize"
+    [grnInputExterior]="exterior || (currConfig.exterior || null)"
+    (grnInputExteriorChange)="grnSize.updateProperties()"
+    [grnSize]="frameSize || (currConfig.frameSize || null)"
+    #grnSize="grnSize"
     [grnSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
-    [grnSizeModify]="exterior2 + ' ' + currConfig.exterior + ' ' + currConfig.labelPd"
-    [grnSizeBorderRadius]="getSizeBorderRadius"
-    [grnSizePaddingHor]="getSizePaddingHor"
-    [grnSizePaddingVer]="getSizePaddingVer"
+    [grnSizeLabelPd]="currConfig.labelPd || null"
+    (grnSizeChange)="doSizeChange($event)"
     grnOrnament
     [grnOrnamentLfAlign]="ornamLfAlign || (currConfig.ornamLfAlign || null)"
     [grnOrnamentRgAlign]="ornamRgAlign || (currConfig.ornamRgAlign || null)">

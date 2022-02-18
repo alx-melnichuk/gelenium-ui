@@ -1,18 +1,15 @@
-import { Directive, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Inject, Input, OnChanges, Optional, Output, SimpleChanges } from '@angular/core';
 
-import { FrameSize, FrameSizeUtil } from '../../_interfaces/frame-size.interface';
+import { FrameSizeUtil } from '../../_interfaces/frame-size.interface';
+import {
+  GrnSizePaddingHorRes,
+  GrnSizePaddingVerHorRes,
+  GrnSizePaddingVerRes,
+  GrnSizePrepareData,
+  GRN_SIZE_PREPARE_DATA,
+} from '../../_interfaces/grn-size-prepare-data.interface';
 import { HtmlElemUtil } from '../../_utils/html-elem.util';
 import { NumberUtil } from '../../_utils/number.util';
-
-export type GrnSizeBorderRadius = (frameSizeValue: number, lineHeight: number) => string;
-
-export type GrnSizePaddingHorRes = { left: number; right: number };
-
-export type GrnSizePaddingHor = (frameSizeValue: number, lineHeight: number) => GrnSizePaddingHorRes;
-
-export type GrnSizePaddingVerRes = { top: number; bottom: number };
-
-export type GrnSizePaddingVer = (frameSizeValue: number, lineHeight: number) => GrnSizePaddingVerRes;
 
 @Directive({
   selector: '[grnSize]',
@@ -20,64 +17,57 @@ export type GrnSizePaddingVer = (frameSizeValue: number, lineHeight: number) => 
 })
 export class GrnSizeDirective implements OnChanges {
   @Input()
-  public grnSize: FrameSize | undefined;
+  public grnSize: string | null = null;
   @Input()
-  public grnSizeValue: number | undefined;
+  public grnSizeValue: number | null = null;
   @Input()
-  public grnSizeModify: string | undefined;
-  @Input()
-  public grnSizeBorderRadius: GrnSizeBorderRadius | undefined;
-  @Input()
-  public grnSizePaddingHor: GrnSizePaddingHor | undefined;
-  @Input()
-  public grnSizePaddingVer: GrnSizePaddingVer | undefined;
+  public grnSizeLabelPd: number | null = null;
+
+  @Output()
+  readonly grnSizeChange: EventEmitter<GrnSizePaddingVerHorRes> = new EventEmitter();
 
   public frameSizeValue = 0;
   public lineHeight = 0;
 
-  constructor(private hostRef: ElementRef<HTMLElement>) {}
+  constructor(
+    @Optional() @Inject(GRN_SIZE_PREPARE_DATA) private grnSizePrepareData: GrnSizePrepareData | null,
+    private hostRef: ElementRef<HTMLElement>
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!this.lineHeight) {
+    if (this.lineHeight === 0) {
       this.lineHeight = this.getLineHeight(this.hostRef);
     }
-    let isModify = !!changes.grnSizeModify;
+    let isModify = false; // !!changes.grnSizeModify;
     if (changes.grnSize || changes.grnSizeValue) {
       const frameSizeValueOld = this.frameSizeValue;
-      this.frameSizeValue = FrameSizeUtil.getValue(this.grnSize || null) || this.grnSizeValue || 0;
+      const frameSize = FrameSizeUtil.convert(this.grnSize);
+      this.frameSizeValue = FrameSizeUtil.getValue(frameSize) || this.grnSizeValue || 0;
       const isModifySize = this.frameSizeValue !== frameSizeValueOld;
       isModify = !isModify && isModifySize ? isModifySize : isModify;
     }
     if (isModify) {
-      this.modifyPaddingHor();
-      this.modifyPaddingVer();
+      this.updateProperties();
     }
   }
 
   // ** Public API **
 
-  public modifyPaddingHor(): void {
-    const borderRadius =
-      this.frameSizeValue > 0 && this.lineHeight > 0 && this.grnSizeBorderRadius
-        ? this.grnSizeBorderRadius(this.frameSizeValue, this.lineHeight)
-        : undefined;
-    HtmlElemUtil.setProperty(this.hostRef, '--s-br-rd', borderRadius);
-
-    const paddingHorRes =
-      this.frameSizeValue > 0 && this.lineHeight > 0 && this.grnSizePaddingHor
-        ? this.grnSizePaddingHor(this.frameSizeValue, this.lineHeight)
-        : undefined;
-    HtmlElemUtil.setProperty(this.hostRef, '--s-lbl-pd-lf', NumberUtil.str(paddingHorRes?.left)?.concat('px'));
-    HtmlElemUtil.setProperty(this.hostRef, '--s-lbl-pd-rg', NumberUtil.str(paddingHorRes?.right)?.concat('px'));
-  }
-
-  public modifyPaddingVer(): void {
-    const paddingVerRes =
-      this.frameSizeValue > 0 && this.lineHeight > 0 && this.grnSizePaddingVer
-        ? this.grnSizePaddingVer(this.frameSizeValue, this.lineHeight)
-        : undefined;
-    HtmlElemUtil.setProperty(this.hostRef, '--s-lbl-pd-tp', NumberUtil.str(paddingVerRes?.top)?.concat('px'));
-    HtmlElemUtil.setProperty(this.hostRef, '--s-lbl-pd-bt', NumberUtil.str(paddingVerRes?.bottom)?.concat('px'));
+  public updateProperties(): void {
+    this.modifyBorderRadius();
+    const paddingHor: GrnSizePaddingHorRes | null = this.modifyHorizontalPadding();
+    const paddingVer: GrnSizePaddingVerRes | null = this.modifyverticalPadding();
+    if (paddingHor !== null && paddingVer !== null) {
+      this.grnSizeChange.emit({
+        ...paddingHor,
+        ...paddingVer,
+        ...{
+          frameSizeValue: this.frameSizeValue,
+          lineHeight: this.lineHeight,
+          exterior: this.grnSizePrepareData?.getExterior() || '',
+        },
+      });
+    }
   }
 
   // ** Private API **
@@ -90,5 +80,36 @@ export class GrnSizeDirective implements OnChanges {
       result = Number(lineHeightPx.replace('px', ''));
     }
     return result;
+  }
+
+  private modifyBorderRadius(): void {
+    if (this.frameSizeValue > 0 && this.lineHeight > 0) {
+      const borderRadius = this.grnSizePrepareData ? this.grnSizePrepareData.getBorderRadius(this.frameSizeValue, this.lineHeight) : null;
+      HtmlElemUtil.setProperty(this.hostRef, '--s-br-rd', borderRadius);
+    }
+  }
+
+  private modifyHorizontalPadding(): GrnSizePaddingHorRes | null {
+    let paddingHorRes: GrnSizePaddingHorRes | null = null;
+    if (this.frameSizeValue > 0 && this.lineHeight > 0) {
+      if (this.grnSizeLabelPd) {
+        paddingHorRes = { left: this.grnSizeLabelPd, right: this.grnSizeLabelPd };
+      } else if (this.grnSizePrepareData) {
+        paddingHorRes = this.grnSizePrepareData.getPaddingHor(this.frameSizeValue, this.lineHeight);
+      }
+      HtmlElemUtil.setProperty(this.hostRef, '--s-lbl-pd-lf', NumberUtil.str(paddingHorRes?.left)?.concat('px'));
+      HtmlElemUtil.setProperty(this.hostRef, '--s-lbl-pd-rg', NumberUtil.str(paddingHorRes?.right)?.concat('px'));
+    }
+    return paddingHorRes;
+  }
+
+  private modifyverticalPadding(): GrnSizePaddingVerRes | null {
+    let paddingVerRes: GrnSizePaddingVerRes | null = null;
+    if (this.frameSizeValue > 0 && this.lineHeight > 0) {
+      paddingVerRes = this.grnSizePrepareData ? this.grnSizePrepareData.getPaddingVer(this.frameSizeValue, this.lineHeight) : null;
+      HtmlElemUtil.setProperty(this.hostRef, '--s-lbl-pd-tp', NumberUtil.str(paddingVerRes?.top)?.concat('px'));
+      HtmlElemUtil.setProperty(this.hostRef, '--s-lbl-pd-bt', NumberUtil.str(paddingVerRes?.bottom)?.concat('px'));
+    }
+    return paddingVerRes;
   }
 }

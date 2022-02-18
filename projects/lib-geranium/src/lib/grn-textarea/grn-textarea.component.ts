@@ -9,7 +9,6 @@ import {
   Inject,
   Input,
   OnChanges,
-  OnInit,
   Optional,
   Output,
   PLATFORM_ID,
@@ -33,21 +32,16 @@ import {
 } from '@angular/forms';
 
 import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
-import {
-  GrnSizeBorderRadius,
-  GrnSizePaddingHor,
-  GrnSizePaddingHorRes,
-  GrnSizePaddingVer,
-  GrnSizePaddingVerRes,
-} from '../directives/grn-size/grn-size.directive';
 import { GRN_FRAME_INPUT_CONFIG } from '../grn-frame-input/grn-frame-input.component';
-import { GrnFrameProperties } from '../_classes/grn-frame-properties';
 import { FrameSize, FrameSizeUtil } from '../_interfaces/frame-size.interface';
 import { GrnFrameInputConfig } from '../_interfaces/grn-frame-input-config.interface';
+import { GrnSizePaddingVerHorRes } from '../_interfaces/grn-size-prepare-data.interface';
 import { InputExterior, InputExteriorUtil } from '../_interfaces/input-exterior.interface';
 import { OrnamAlign, OrnamAlignUtil } from '../_interfaces/ornam-align.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { InputLabelUtil } from '../_utils/input-label.util';
+import { NumberUtil } from '../_utils/number.util';
 
 let identifier = 0;
 
@@ -64,7 +58,7 @@ let identifier = 0;
     { provide: GRN_NODE_INTERNAL_VALIDATOR, useExisting: GrnTextareaComponent },
   ],
 })
-export class GrnTextareaComponent implements OnChanges, OnInit, ControlValueAccessor, Validator, GrnNodeInternalValidator {
+export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Validator, GrnNodeInternalValidator {
   @Input()
   public id = 'grn_textarea_' + ++identifier;
   @Input()
@@ -72,7 +66,7 @@ export class GrnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
   @Input()
   public config: GrnFrameInputConfig | null = null;
   @Input()
-  public exterior: string | null = null; // ExteriorType
+  public exterior: string | null = null; // InputExteriorType
   @Input()
   public frameSize: string | null = null; // FrameSizeType
   @Input()
@@ -121,7 +115,6 @@ export class GrnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
   public defaultFrameSize = FrameSizeUtil.getValue(FrameSize.middle) || 0;
   public currConfig: GrnFrameInputConfig = {};
   public exterior2: InputExterior | null = null;
-  public innExterior: InputExterior | null = null;
   public frameSize2: FrameSize | null = null;
   public isLabelShrink2: boolean | null = null; // Binding attribute "lbShrink".
   public isHiddenLabel2: boolean | null = null; // Binding attribute "hiddenLabel".
@@ -137,8 +130,6 @@ export class GrnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
   public isFocused = false;
   public isFilled = false;
   public currentRows = 1;
-
-  private frameProperties: GrnFrameProperties = new GrnFrameProperties(this.hostRef);
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -159,7 +150,6 @@ export class GrnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
     }
     if (changes.exterior || (changes.config && !this.exterior)) {
       this.exterior2 = InputExteriorUtil.convert(this.exterior);
-      this.innExterior = InputExteriorUtil.create(this.exterior2 || this.currConfig.exterior || null);
     }
     if (changes.frameSize || (changes.config && !this.frameSize)) {
       this.frameSize2 = FrameSizeUtil.convert(this.frameSize);
@@ -183,6 +173,7 @@ export class GrnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
     if (changes.isReadOnly) {
       this.isReadOnly2 = BooleanUtil.init(this.isReadOnly);
     }
+
     if (changes.isRequired || changes.minLength || changes.maxLength) {
       this.prepareFormGroup(this.isRequired2, this.minLength, this.maxLength);
     }
@@ -191,12 +182,6 @@ export class GrnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
     }
     if (changes.cntRows) {
       this.currentRows = this.cntRows != null && this.cntRows > 0 ? this.cntRows : this.currentRows;
-    }
-  }
-
-  ngOnInit(): void {
-    if (this.innExterior == null) {
-      this.innExterior = InputExteriorUtil.create(this.currConfig.exterior || null);
     }
   }
 
@@ -293,19 +278,27 @@ export class GrnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
     }
   }
 
-  // ** Methods for interacting with GrnSizeDirective. **
+  // ** Formation of additional parameters. **
 
-  public getSizeBorderRadius: GrnSizeBorderRadius = (frameSizeValue: number, lineHeight: number): string => {
-    return this.frameProperties.valueSizeBorderRadius(frameSizeValue, lineHeight, this.innExterior);
-  };
-  public getSizePaddingHor: GrnSizePaddingHor = (frameSizeValue: number, lineHeight: number): GrnSizePaddingHorRes => {
-    return this.frameProperties.valueSizePaddingHor(frameSizeValue, lineHeight, this.innExterior, this.currConfig.labelPd || null);
-  };
-  public getSizePaddingVer: GrnSizePaddingVer = (frameSizeValue: number, lineHeight: number): GrnSizePaddingVerRes => {
-    return this.frameProperties.valueSizePaddingVer(frameSizeValue, lineHeight, this.innExterior);
-  };
+  public doSizeChange(paddingVerHor: GrnSizePaddingVerHorRes): void {
+    // paddingHor
+    const left = paddingVerHor.left;
+    const right = paddingVerHor.right;
 
-  // ** - **
+    const pdLfRgWd = Math.round(1.66 * (left + right) * 100) / 100;
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-wd', NumberUtil.str(pdLfRgWd)?.concat('px'));
+
+    HtmlElemUtil.setProperty(this.hostRef, '--he-pd-lf', NumberUtil.str(left || null)?.concat('px'));
+
+    // paddingVer
+    const frameSizeValue = paddingVerHor.frameSizeValue;
+    const lineHeight = paddingVerHor.lineHeight;
+    const exterior = InputExteriorUtil.convert(paddingVerHor.exterior);
+
+    const translateVer = InputLabelUtil.translateVer(exterior, frameSizeValue, lineHeight);
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-trn-y', NumberUtil.str(translateVer.translateY)?.concat('px'));
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl2-trn-y', NumberUtil.str(translateVer.translateY2)?.concat('px'));
+  }
 
   // ** Private API **
 
@@ -346,13 +339,5 @@ export class GrnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
     this.ornamLfAlign2 = OrnamAlignUtil.create(config?.ornamLfAlign || this.ornamLfAlign2, null);
     this.ornamRgAlign2 = OrnamAlignUtil.create(config?.ornamRgAlign || this.ornamRgAlign2, null);
     return config;
-  }
-
-  private settingOrnamentLeft(ornamentLf: ElementRef<HTMLElement> | undefined, ornamLfAlign: OrnamAlign): void {
-    HtmlElemUtil.setAttr(this.renderer, ornamentLf, 'orn-lf', ornamLfAlign.toString());
-  }
-
-  private settingOrnamentRight(ornamentRg: ElementRef<HTMLElement> | undefined, ornamRgAlign: OrnamAlign): void {
-    HtmlElemUtil.setAttr(this.renderer, ornamentRg, 'orn-rg', ornamRgAlign.toString());
   }
 }

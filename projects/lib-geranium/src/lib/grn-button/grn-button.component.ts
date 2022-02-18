@@ -17,13 +17,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  GrnSizeBorderRadius,
-  GrnSizePaddingHor,
-  GrnSizePaddingHorRes,
-  GrnSizePaddingVer,
-  GrnSizePaddingVerRes,
-} from '../directives/grn-size/grn-size.directive';
+
 import { GrnTouchRippleComponent } from '../grn-touch-ripple/grn-touch-ripple.component';
 
 import { ButtonExterior, ButtonExteriorUtil } from '../_interfaces/button-exterior.interface';
@@ -152,12 +146,12 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
 
   // ** Methods for interacting with GrnSizeDirective. **
 
-  public getSizeBorderRadius: GrnSizeBorderRadius = (frameSizeValue: number): string => {
+  /*public getSizeBorderRadius: GrnSizeBorderRadius = (frameSizeValue: number): string => {
     const borderRadiusRatio = 0.1;
     return (frameSizeValue > 0 ? Math.round(borderRadiusRatio * frameSizeValue * 100) / 100 : 0) + 'px';
-  };
+  };*/
 
-  public getSizePaddingHor: GrnSizePaddingHor = (frameSizeValue: number): GrnSizePaddingHorRes => {
+  /*public getSizePaddingHor: GrnSizePaddingHor = (frameSizeValue: number): GrnSizePaddingHorRes => {
     let result = this.currConfig.labelPd || 0;
     const exterior = this.innExterior;
     if (frameSizeValue > 0 && result <= 0 && exterior) {
@@ -171,9 +165,9 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     }
     // console.log(`getSizePaddingHor(frameSizeValue:${frameSizeValue})=${result} labelPd=${this.currConfig.labelPd}`);
     return { left: result, right: result };
-  };
+  };*/
 
-  public getSizePaddingVer: GrnSizePaddingVer = (frameSizeValue: number, lineHeight: number): GrnSizePaddingVerRes => {
+  /*public getSizePaddingVer: GrnSizePaddingVer = (frameSizeValue: number, lineHeight: number): GrnSizePaddingVerRes => {
     let result = 0;
     const exterior = this.innExterior;
     if (frameSizeValue > 0 && lineHeight > 0 && exterior) {
@@ -184,7 +178,7 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     }
     // console.log(`getSizePaddingVer(frameSizeValue:${frameSizeValue})=${result} lineHeight=${lineHeight}`);
     return { top: result, bottom: result };
-  };
+  };*/
 
   // ** Private API **
 
