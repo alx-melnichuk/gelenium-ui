@@ -42,6 +42,7 @@
       [attr.readonly]="isReadOnly2 ? '': null"
       (focus)="doFocus()"
       (blur)="doBlur()"
+      (input)="doInput($event)"
       (click)="$event.stopPropagation();">
     </textarea>
 

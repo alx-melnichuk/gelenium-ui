@@ -1,4 +1,5 @@
 import { Directive, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+
 import { ButtonExterior, ButtonExteriorUtil } from '../../_interfaces/button-exterior.interface';
 import {
   GrnSizePaddingHorRes,
@@ -17,7 +18,7 @@ export class GrnButtonExteriorDirective implements OnChanges, GrnSizePrepareData
   public grnButtonExterior: string | null = null; // ButtonExteriorType
 
   @Output()
-  readonly grnInputExteriorChange: EventEmitter<void> = new EventEmitter();
+  readonly grnButtonExteriorChange: EventEmitter<void> = new EventEmitter();
 
   public innExterior: ButtonExterior | null = null;
 
@@ -25,13 +26,13 @@ export class GrnButtonExteriorDirective implements OnChanges, GrnSizePrepareData
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.grnInputExterior) {
+    if (changes.grnButtonExterior) {
       const exteriorInp = ButtonExteriorUtil.convert(this.grnButtonExterior);
       const exterior = ButtonExteriorUtil.create(exteriorInp);
       if (this.innExterior !== exterior) {
         this.innExterior = exterior;
       }
-      this.grnInputExteriorChange.emit();
+      this.grnButtonExteriorChange.emit();
     }
   }
 
@@ -42,44 +43,20 @@ export class GrnButtonExteriorDirective implements OnChanges, GrnSizePrepareData
   };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getBorderRadius = (frameSizeValue: number, lineHeight: number): string | null => {
-    /*let result: string | null = null;
-    const radius =
-      frameSizeValue > 0 && (this.innExterior === InputExterior.outlined || this.innExterior === InputExterior.underline)
-        ? Math.round((frameSizeValue / 10) * 100) / 100 + 'px'
-        : null;
-    if (this.innExterior === InputExterior.outlined) {
-      result = radius;
-    } else if (this.innExterior === InputExterior.underline) {
-      result = radius !== null ? radius + ' ' + radius + ' 0px 0px' : null;
-    } else if (this.innExterior === InputExterior.standard) {
-      result = null;
-    }
-    return result;*/
-    return null;
+    const borderRadiusRatio = 0.1;
+    return (frameSizeValue > 0 ? Math.round(borderRadiusRatio * frameSizeValue * 100) / 100 : 0) + 'px';
   };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getPaddingHor = (frameSizeValue: number, lineHeight: number): GrnSizePaddingHorRes | null => {
-    /*const ratio1 = this.innExterior === InputExterior.outlined ? 0.25 : null;
-    const ratio2 = this.innExterior === InputExterior.underline ? 0.21428 : null;
-    const ratio = ratio1 || ratio2;
-    const value = ratio ? Math.round(ratio * frameSizeValue * 100) / 100 : null;
-    return value !== null ? { left: value, right: value } : null;*/
-    return null;
+    const ratio = this.innExterior === ButtonExterior.contained ? 0.3636 : this.innExterior === ButtonExterior.outlined ? 0.3409 : 0.2045;
+    const value = frameSizeValue > 0 ? Math.round(ratio * frameSizeValue * 100) / 100 : null;
+    return value !== null ? { left: value, right: value } : null;
   };
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   public getPaddingVer = (frameSizeValue: number, lineHeight: number): GrnSizePaddingVerRes | null => {
-    /*let result: GrnSizePaddingVerRes | null = null;
-    const param = frameSizeValue > 0 && lineHeight > 0 ? frameSizeValue - lineHeight : null;
-    if (param != null) {
-      if (this.innExterior === InputExterior.outlined) {
-        const value = param / 2;
-        result = { top: value, bottom: value };
-      } else if (this.innExterior === InputExterior.underline || this.innExterior === InputExterior.standard) {
-        result = { top: param * 0.75, bottom: param * 0.25 };
-      }
-    }
-    return result;*/
-    return null;
+    const param = frameSizeValue > 0 && lineHeight > 0 ? (frameSizeValue - lineHeight) / 2 : null;
+    const value = param === null ? null : this.innExterior === ButtonExterior.outlined ? param - 1 : param;
+    return value !== null ? { top: value, bottom: value } : null;
   };
 
   // ** Implementation of the GrnSizePrepareData interface. (finish) **

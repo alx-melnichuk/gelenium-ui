@@ -59,21 +59,10 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   @ContentChild(GrnLinkDirective, { static: true })
   public linkElement: GrnLinkDirective | undefined;
 
-  public get isText(): boolean {
-    return ButtonExteriorUtil.isText(this.innExterior);
-  }
-  public get isContained(): boolean {
-    return ButtonExteriorUtil.isContained(this.innExterior);
-  }
-  public get isOutlined(): boolean {
-    return ButtonExteriorUtil.isOutlined(this.innExterior);
-  }
-
   public defaultExterior = ButtonExterior.text;
   public defaultFrameSize = FrameSizeUtil.getValue(FrameSize.small) || 0;
   public currConfig: GrnButtonConfig = {};
   public innExterior: ButtonExterior | undefined;
-  public frameSize2: FrameSize | undefined;
   public isFocused = false;
   public innIsDisabled: boolean | null = null;
 
@@ -99,9 +88,6 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
         this.settingExterior(this.hostRef, this.innExterior);
         // console.log(`@C this.innExterior=${this.innExterior}`);
       }
-    }
-    if (changes.frameSize || (changes.config && !this.frameSize)) {
-      this.frameSize2 = FrameSizeUtil.convert(this.frameSize) || undefined;
     }
     if (changes.isDisabled) {
       this.innIsDisabled = BooleanUtil.init(this.isDisabled || null);
@@ -143,42 +129,6 @@ export class GrnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   public doBlur(): void {
     this.settingFocused(this.hostRef, (this.isFocused = false));
   }
-
-  // ** Methods for interacting with GrnSizeDirective. **
-
-  /*public getSizeBorderRadius: GrnSizeBorderRadius = (frameSizeValue: number): string => {
-    const borderRadiusRatio = 0.1;
-    return (frameSizeValue > 0 ? Math.round(borderRadiusRatio * frameSizeValue * 100) / 100 : 0) + 'px';
-  };*/
-
-  /*public getSizePaddingHor: GrnSizePaddingHor = (frameSizeValue: number): GrnSizePaddingHorRes => {
-    let result = this.currConfig.labelPd || 0;
-    const exterior = this.innExterior;
-    if (frameSizeValue > 0 && result <= 0 && exterior) {
-      let ratioValue = 0.2045;
-      if (exterior === ButtonExterior.contained) {
-        ratioValue = 0.3636;
-      } else if (exterior === ButtonExterior.outlined) {
-        ratioValue = 0.3409;
-      }
-      result = Math.round(ratioValue * frameSizeValue * 100) / 100;
-    }
-    // console.log(`getSizePaddingHor(frameSizeValue:${frameSizeValue})=${result} labelPd=${this.currConfig.labelPd}`);
-    return { left: result, right: result };
-  };*/
-
-  /*public getSizePaddingVer: GrnSizePaddingVer = (frameSizeValue: number, lineHeight: number): GrnSizePaddingVerRes => {
-    let result = 0;
-    const exterior = this.innExterior;
-    if (frameSizeValue > 0 && lineHeight > 0 && exterior) {
-      result = (frameSizeValue - lineHeight) / 2;
-      if (exterior === ButtonExterior.outlined) {
-        result--;
-      }
-    }
-    // console.log(`getSizePaddingVer(frameSizeValue:${frameSizeValue})=${result} lineHeight=${lineHeight}`);
-    return { top: result, bottom: result };
-  };*/
 
   // ** Private API **
 

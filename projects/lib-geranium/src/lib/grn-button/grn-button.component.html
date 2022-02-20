@@ -5,12 +5,12 @@
     grn-btn
     type="button"
     tabindex="0"
-    grnSize9="frameSize2 || currConfig.frameSize"
-    grnSizeValue9="currConfig.frameSizeValue || defaultFrameSize"
-    grnSizeModify9="exterior + ' ' + currConfig.exterior + ' ' + currConfig.labelPd"
-    grnSizeBorderRadius9="getSizeBorderRadius"
-    grnSizePaddingHor9="getSizePaddingHor"
-    grnSizePaddingVer9="getSizePaddingVer"
+    [grnButtonExterior]="exterior || currConfig.exterior || null"
+    (grnButtonExteriorChange)="grnSize.updateProperties()"
+    [grnSize]="frameSize || currConfig.frameSize || null"
+    #grnSize="grnSize"
+    [grnSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
+    [grnSizeLabelPd]="currConfig.labelPd || null"
     [attr.id]="id"
     [attr.disabled]="innIsDisabled ? '' : null"
     [attr.dis]="innIsDisabled ? '' : null"
@@ -22,22 +22,19 @@
       class="gb-label gb-elem-pd-hor">
       <ng-content></ng-content>
     </span>
-    <grn-touch-ripple *ngIf="!innIsDisabled"
-      [attr.ext-t]="isText ? '' : null"
-      [attr.ext-c]="isContained ? '' : null"
-      [attr.ext-o]="isOutlined ? '' : null">
+    <grn-touch-ripple *ngIf="!innIsDisabled">
     </grn-touch-ripple>
   </button>
 </ng-container>
 <ng-template #elseBlockLink>
   <div class="grn-btn grn-settings"
     grn-btn
-    grnSize9="frameSize2 || currConfig.frameSize"
-    grnSizeValue9="currConfig.frameSizeValue || defaultFrameSize"
-    grnSizeModify9="exterior + ' ' + currConfig.exterior + ' ' + currConfig.labelPd"
-    grnSizeBorderRadius9="getSizeBorderRadius"
-    grnSizePaddingHor9="getSizePaddingHor"
-    grnSizePaddingVer9="getSizePaddingVer"
+    [grnButtonExterior]="exterior || currConfig.exterior || null"
+    (grnButtonExteriorChange)="grnSize.updateProperties()"
+    [grnSize]="frameSize || currConfig.frameSize || null"
+    #grnSize="grnSize"
+    [grnSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
+    [grnSizeLabelPd]="currConfig.labelPd || null"
     [attr.id]="id"
     [attr.dis]="innIsDisabled ? '' : null"
     (click)="doClick($event)">
@@ -45,10 +42,7 @@
     </ng-container>
     <ng-content select="a"></ng-content>
     <grn-touch-ripple *ngIf="!innIsDisabled"
-      skip-events
-      [attr.ext-t]="isText ? '' : null"
-      [attr.ext-c]="isContained ? '' : null"
-      [attr.ext-o]="isOutlined ? '' : null">
+      skip-events>
     </grn-touch-ripple>
   </div>
 </ng-template>
