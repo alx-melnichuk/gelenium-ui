@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnChanges, Output, Renderer2, SimpleChanges } from '@angular/core';
 
 import {
   GrnSizePaddingHorRes,
@@ -7,6 +7,7 @@ import {
   GRN_SIZE_PREPARE_DATA,
 } from '../../_interfaces/grn-size-prepare-data.interface';
 import { InputExterior, InputExteriorUtil } from '../../_interfaces/input-exterior.interface';
+import { HtmlElemUtil } from '../../_utils/html-elem.util';
 
 @Directive({
   selector: '[grnInputExterior]',
@@ -16,22 +17,26 @@ import { InputExterior, InputExteriorUtil } from '../../_interfaces/input-exteri
 export class GrnInputExteriorDirective implements OnChanges, GrnSizePrepareData {
   @Input()
   public grnInputExterior: string | null = null; // InputExteriorType
+  @Input()
+  public grnInputElementRef: ElementRef<HTMLElement> | null = null;
 
   @Output()
   readonly grnInputExteriorChange: EventEmitter<void> = new EventEmitter();
 
-  public innExterior: InputExterior | null = null;
+  public innExterior: InputExterior = InputExteriorUtil.create(null);
+  public elementRef: ElementRef<HTMLElement> = this.hostRef;
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor(private hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.grnInputElementRef) {
+      this.elementRef = this.grnInputElementRef || this.hostRef;
+    }
     if (changes.grnInputExterior) {
       const exteriorInp = InputExteriorUtil.convert(this.grnInputExterior);
       const exterior = InputExteriorUtil.create(exteriorInp);
-      if (this.innExterior !== exterior) {
-        this.innExterior = exterior;
-      }
+      this.innExterior = exterior;
+      this.settingExterior(this.elementRef, exterior);
       this.grnInputExteriorChange.emit();
     }
   }
@@ -39,7 +44,7 @@ export class GrnInputExteriorDirective implements OnChanges, GrnSizePrepareData 
   // ** Implementation of the GrnSizePrepareData interface. (start) **
 
   public getExterior = (): string | null => {
-    return this.grnInputExterior;
+    return this.innExterior;
   };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getBorderRadius = (frameSizeValue: number, lineHeight: number): string | null => {
@@ -81,4 +86,18 @@ export class GrnInputExteriorDirective implements OnChanges, GrnSizePrepareData 
   };
 
   // ** Implementation of the GrnSizePrepareData interface. (finish) **
+
+  // ** Private API **
+
+  private settingExterior(elem: ElementRef<HTMLElement>, exterior: InputExterior): void {
+    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-outlined', InputExteriorUtil.isOutlined(exterior));
+    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', InputExteriorUtil.isOutlined(exterior) ? '' : null);
+    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-underline', InputExteriorUtil.isUnderline(exterior));
+    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-u', InputExteriorUtil.isUnderline(exterior) ? '' : null);
+    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-standard', InputExteriorUtil.isStandard(exterior));
+    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-s', InputExteriorUtil.isStandard(exterior) ? '' : null);
+    const isBorder = InputExteriorUtil.isStandard(exterior) || InputExteriorUtil.isUnderline(exterior);
+    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-border', isBorder);
+    HtmlElemUtil.setAttr(this.renderer, elem, 'frm-br', isBorder ? '' : null);
+  }
 }

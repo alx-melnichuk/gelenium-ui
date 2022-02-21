@@ -7,10 +7,10 @@ export enum ButtonExterior {
 }
 
 export class ButtonExteriorUtil {
-  public static create(value: ButtonExterior | null | undefined): ButtonExterior {
+  public static create(value: ButtonExterior | null): ButtonExterior {
     return ButtonExteriorUtil.convert((value || '').toString()) || ButtonExterior.text;
   }
-  public static convert(value: string | null | undefined): ButtonExterior | null {
+  public static convert(value: string | null): ButtonExterior | null {
     let result: ButtonExterior | null = null;
     switch (value) {
       case ButtonExterior.text.valueOf():
@@ -26,13 +26,13 @@ export class ButtonExteriorUtil {
     return result;
   }
 
-  public static isText(value: ButtonExterior | null | undefined): boolean {
+  public static isText(value: ButtonExterior | null): boolean {
     return ButtonExterior.text === value;
   }
-  public static isContained(value: ButtonExterior | null | undefined): boolean {
+  public static isContained(value: ButtonExterior | null): boolean {
     return ButtonExterior.contained === value;
   }
-  public static isOutlined(value: ButtonExterior | null | undefined): boolean {
+  public static isOutlined(value: ButtonExterior | null): boolean {
     return ButtonExterior.outlined === value;
   }
 }

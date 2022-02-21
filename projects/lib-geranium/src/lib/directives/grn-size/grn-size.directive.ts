@@ -22,12 +22,15 @@ export class GrnSizeDirective implements OnChanges {
   public grnSizeValue: number | null = null;
   @Input()
   public grnSizeLabelPd: number | null = null;
+  @Input()
+  public grnSizeElementRef: ElementRef<HTMLElement> | null = null;
 
   @Output()
   readonly grnSizeChange: EventEmitter<GrnSizePaddingVerHorRes> = new EventEmitter();
 
   public frameSizeValue = 0;
   public lineHeight = 0;
+  public elementRef: ElementRef<HTMLElement> = this.hostRef;
 
   constructor(
     @Optional() @Inject(GRN_SIZE_PREPARE_DATA) private grnSizePrepareData: GrnSizePrepareData | null,
@@ -35,10 +38,13 @@ export class GrnSizeDirective implements OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.grnButtonElementRef) {
+      this.elementRef = this.grnSizeElementRef || this.hostRef;
+    }
     if (this.lineHeight === 0) {
       this.lineHeight = this.getLineHeight(this.hostRef);
     }
-    let isModify = false; // !!changes.grnSizeModify;
+    let isModify = !!changes.grnSizeLabelPd;
     if (changes.grnSize || changes.grnSizeValue) {
       const frameSizeValueOld = this.frameSizeValue;
       const frameSize = FrameSizeUtil.convert(this.grnSize);
@@ -85,7 +91,7 @@ export class GrnSizeDirective implements OnChanges {
   private modifyBorderRadius(): void {
     if (this.frameSizeValue > 0 && this.lineHeight > 0) {
       const borderRadius = this.grnSizePrepareData ? this.grnSizePrepareData.getBorderRadius(this.frameSizeValue, this.lineHeight) : null;
-      HtmlElemUtil.setProperty(this.hostRef, '--s-br-rd', borderRadius);
+      HtmlElemUtil.setProperty(this.elementRef, '--s-br-rd', borderRadius);
     }
   }
 
@@ -97,8 +103,8 @@ export class GrnSizeDirective implements OnChanges {
       } else if (this.grnSizePrepareData) {
         paddingHorRes = this.grnSizePrepareData.getPaddingHor(this.frameSizeValue, this.lineHeight);
       }
-      HtmlElemUtil.setProperty(this.hostRef, '--s-lbl-pd-lf', NumberUtil.str(paddingHorRes?.left)?.concat('px'));
-      HtmlElemUtil.setProperty(this.hostRef, '--s-lbl-pd-rg', NumberUtil.str(paddingHorRes?.right)?.concat('px'));
+      HtmlElemUtil.setProperty(this.elementRef, '--s-lbl-pd-lf', NumberUtil.str(paddingHorRes?.left || null)?.concat('px') || null);
+      HtmlElemUtil.setProperty(this.elementRef, '--s-lbl-pd-rg', NumberUtil.str(paddingHorRes?.right || null)?.concat('px') || null);
     }
     return paddingHorRes;
   }
@@ -107,8 +113,8 @@ export class GrnSizeDirective implements OnChanges {
     let paddingVerRes: GrnSizePaddingVerRes | null = null;
     if (this.frameSizeValue > 0 && this.lineHeight > 0) {
       paddingVerRes = this.grnSizePrepareData ? this.grnSizePrepareData.getPaddingVer(this.frameSizeValue, this.lineHeight) : null;
-      HtmlElemUtil.setProperty(this.hostRef, '--s-lbl-pd-tp', NumberUtil.str(paddingVerRes?.top)?.concat('px'));
-      HtmlElemUtil.setProperty(this.hostRef, '--s-lbl-pd-bt', NumberUtil.str(paddingVerRes?.bottom)?.concat('px'));
+      HtmlElemUtil.setProperty(this.elementRef, '--s-lbl-pd-tp', NumberUtil.str(paddingVerRes?.top || null)?.concat('px') || null);
+      HtmlElemUtil.setProperty(this.elementRef, '--s-lbl-pd-bt', NumberUtil.str(paddingVerRes?.bottom || null)?.concat('px') || null);
     }
     return paddingVerRes;
   }

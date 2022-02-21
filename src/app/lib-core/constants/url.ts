@@ -7,7 +7,7 @@ export class Url {
     }
     return result;
   }
-  public static add(name: string, value: string | undefined): void {
+  public static add(name: string, value: string | null): void {
     if (name) {
       if (value) {
         Url.objMap[name] = value;

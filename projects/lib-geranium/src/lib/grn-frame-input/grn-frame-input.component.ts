@@ -14,7 +14,8 @@ import {
 } from '@angular/core';
 
 import { GrnFrameInputConfig } from '../_interfaces/grn-frame-input-config.interface';
-import { InputExterior, InputExteriorUtil } from '../_interfaces/input-exterior.interface';
+import { GrnSizePrepareData, GRN_SIZE_PREPARE_DATA } from '../_interfaces/grn-size-prepare-data.interface';
+import { InputExterior } from '../_interfaces/input-exterior.interface';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 export const GRN_FRAME_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('GRN_FRAME_INPUT_CONFIG');
@@ -31,8 +32,6 @@ export class GrnFrameInputComponent implements OnChanges, OnInit {
   public label = '';
   @Input()
   public config: GrnFrameInputConfig | null = null;
-  @Input()
-  public exterior: InputExterior | null = null;
   @Input()
   public isLabelShrink: boolean | null = null;
   @Input()
@@ -51,16 +50,16 @@ export class GrnFrameInputComponent implements OnChanges, OnInit {
   public wdFull: string | null = null;
 
   public get isOutlinedExterior(): boolean {
-    return InputExteriorUtil.isOutlined(this.innExterior);
+    return InputExterior.outlined === this.grnSizePrepareData?.getExterior();
   }
 
   public currConfig: GrnFrameInputConfig = {};
-  public innExterior: InputExterior | null = null;
   public innIsLabelShrink: boolean | null = null;
   public innHiddenLabel: boolean | null = null;
 
   constructor(
     @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null,
+    @Optional() @Inject(GRN_SIZE_PREPARE_DATA) public grnSizePrepareData: GrnSizePrepareData | null,
     private hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {
@@ -71,10 +70,6 @@ export class GrnFrameInputComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
       this.currConfig = { ...(this.config || {}) };
-    }
-    if (changes.exterior || (changes.config && !this.exterior)) {
-      this.innExterior = InputExteriorUtil.create(this.exterior || this.currConfig.exterior || null);
-      this.settingExterior(this.hostRef, this.innExterior);
     }
     if (changes.isLabelShrink || (changes.config && this.isLabelShrink == null)) {
       this.innIsLabelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig.isLabelShrink;
@@ -108,10 +103,6 @@ export class GrnFrameInputComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    if (this.innExterior == null) {
-      this.innExterior = InputExteriorUtil.create(this.currConfig.exterior || null);
-      this.settingExterior(this.hostRef, this.innExterior);
-    }
     if (this.innIsLabelShrink == null) {
       this.innIsLabelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig.isLabelShrink;
       this.settingLabelShrink(this.hostRef, this.innIsLabelShrink);
@@ -126,24 +117,12 @@ export class GrnFrameInputComponent implements OnChanges, OnInit {
 
   // ** Private API **
 
-  private settingExterior(elem: ElementRef<HTMLElement> | undefined, exterior: InputExterior | null): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-outlined', InputExteriorUtil.isOutlined(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', InputExteriorUtil.isOutlined(exterior) ? '' : null);
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-underline', InputExteriorUtil.isUnderline(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-u', InputExteriorUtil.isUnderline(exterior) ? '' : null);
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-standard', InputExteriorUtil.isStandard(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-s', InputExteriorUtil.isStandard(exterior) ? '' : null);
-    const isBorder = InputExteriorUtil.isStandard(exterior) || InputExteriorUtil.isUnderline(exterior);
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-border', isBorder);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'frm-br', isBorder ? '' : null);
-  }
-
-  private settingLabelShrink(elem: ElementRef<HTMLElement> | undefined, isLabelShrink: boolean): void {
+  private settingLabelShrink(elem: ElementRef<HTMLElement>, isLabelShrink: boolean): void {
     HtmlElemUtil.setClass(this.renderer, elem, 'gfi-shrink', isLabelShrink);
     HtmlElemUtil.setAttr(this.renderer, elem, 'shr', isLabelShrink ? '' : null);
   }
 
-  private settingHiddenLabel(elem: ElementRef<HTMLElement> | undefined, hiddenLabel: boolean): void {
+  private settingHiddenLabel(elem: ElementRef<HTMLElement>, hiddenLabel: boolean): void {
     HtmlElemUtil.setClass(this.renderer, elem, 'gfi-hidden-label', hiddenLabel);
     HtmlElemUtil.setAttr(this.renderer, elem, 'hlbl', hiddenLabel ? '' : null);
   }

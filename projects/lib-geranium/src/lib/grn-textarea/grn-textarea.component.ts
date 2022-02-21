@@ -36,7 +36,7 @@ import { GRN_FRAME_INPUT_CONFIG } from '../grn-frame-input/grn-frame-input.compo
 import { FrameSize, FrameSizeUtil } from '../_interfaces/frame-size.interface';
 import { GrnFrameInputConfig } from '../_interfaces/grn-frame-input-config.interface';
 import { GrnSizePaddingVerHorRes } from '../_interfaces/grn-size-prepare-data.interface';
-import { InputExterior, InputExteriorUtil } from '../_interfaces/input-exterior.interface';
+import { InputExteriorUtil } from '../_interfaces/input-exterior.interface';
 import { OrnamAlign, OrnamAlignUtil } from '../_interfaces/ornam-align.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
@@ -114,8 +114,6 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
 
   public defaultFrameSize = FrameSizeUtil.getValue(FrameSize.middle) || 0;
   public currConfig: GrnFrameInputConfig = {};
-  public exterior2: InputExterior | null = null;
-  public frameSize2: FrameSize | null = null;
   public isLabelShrink2: boolean | null = null; // Binding attribute "lbShrink".
   public isHiddenLabel2: boolean | null = null; // Binding attribute "hiddenLabel".
   public isDisabled2: boolean | null = null; // Binding attribute "isDisabled".
@@ -147,12 +145,6 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
       this.currConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
-    }
-    if (changes.exterior || (changes.config && !this.exterior)) {
-      this.exterior2 = InputExteriorUtil.convert(this.exterior);
-    }
-    if (changes.frameSize || (changes.config && !this.frameSize)) {
-      this.frameSize2 = FrameSizeUtil.convert(this.frameSize);
     }
     if (changes.lbShrink) {
       this.isLabelShrink2 = BooleanUtil.init(this.lbShrink);
@@ -279,9 +271,9 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     const right = paddingVerHor.right;
 
     const pdLfRgWd = Math.round(1.66 * (left + right) * 100) / 100;
-    HtmlElemUtil.setProperty(this.hostRef, '--lbl-wd', NumberUtil.str(pdLfRgWd)?.concat('px'));
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-wd', NumberUtil.str(pdLfRgWd)?.concat('px') || null);
 
-    HtmlElemUtil.setProperty(this.hostRef, '--he-pd-lf', NumberUtil.str(left || null)?.concat('px'));
+    HtmlElemUtil.setProperty(this.hostRef, '--he-pd-lf', NumberUtil.str(left || null)?.concat('px') || null);
 
     // paddingVer
     const frameSizeValue = paddingVerHor.frameSizeValue;
@@ -289,8 +281,8 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     const exterior = InputExteriorUtil.convert(paddingVerHor.exterior);
 
     const translateVer = InputLabelUtil.translateVer(exterior, frameSizeValue, lineHeight);
-    HtmlElemUtil.setProperty(this.hostRef, '--lbl-trn-y', NumberUtil.str(translateVer.translateY)?.concat('px'));
-    HtmlElemUtil.setProperty(this.hostRef, '--lbl2-trn-y', NumberUtil.str(translateVer.translateY2)?.concat('px'));
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl-trn-y', NumberUtil.str(translateVer.translateY)?.concat('px') || null);
+    HtmlElemUtil.setProperty(this.hostRef, '--lbl2-trn-y', NumberUtil.str(translateVer.translateY2)?.concat('px') || null);
   }
 
   // ** Private API **

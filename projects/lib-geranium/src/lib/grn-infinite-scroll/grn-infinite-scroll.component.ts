@@ -28,9 +28,9 @@ export class GrnInfiniteScrollComponent implements AfterViewInit, OnInit, OnDest
   readonly scrolled: EventEmitter<void> = new EventEmitter();
 
   @ViewChild('anchor')
-  public anchor: ElementRef<HTMLElement> | undefined;
+  public anchor: ElementRef<HTMLElement> | null = null;
 
-  private observer: IntersectionObserver | undefined;
+  private observer: IntersectionObserver | null = null;
 
   constructor(private host: ElementRef) {}
 
@@ -48,13 +48,13 @@ export class GrnInfiniteScrollComponent implements AfterViewInit, OnInit, OnDest
   }
 
   ngAfterViewInit(): void {
-    if (this.observer != undefined && this.anchor != undefined) {
+    if (this.observer !== null && this.anchor !== null) {
       this.observer.observe(this.anchor.nativeElement);
     }
   }
 
   ngOnDestroy(): void {
-    if (this.observer != undefined) {
+    if (this.observer !== null) {
       this.observer.disconnect();
     }
   }

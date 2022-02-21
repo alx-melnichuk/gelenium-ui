@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnChanges, Output, Renderer2, SimpleChanges } from '@angular/core';
 
 import { ButtonExterior, ButtonExteriorUtil } from '../../_interfaces/button-exterior.interface';
 import {
@@ -7,6 +7,7 @@ import {
   GrnSizePrepareData,
   GRN_SIZE_PREPARE_DATA,
 } from '../../_interfaces/grn-size-prepare-data.interface';
+import { HtmlElemUtil } from '../../_utils/html-elem.util';
 
 @Directive({
   selector: '[grnButtonExterior]',
@@ -16,21 +17,27 @@ import {
 export class GrnButtonExteriorDirective implements OnChanges, GrnSizePrepareData {
   @Input()
   public grnButtonExterior: string | null = null; // ButtonExteriorType
+  @Input()
+  public grnButtonElementRef: ElementRef<HTMLElement> | null = null;
 
   @Output()
   readonly grnButtonExteriorChange: EventEmitter<void> = new EventEmitter();
 
   public innExterior: ButtonExterior | null = null;
+  public elementRef: ElementRef<HTMLElement> = this.hostRef;
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor(private hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.grnButtonElementRef) {
+      this.elementRef = this.grnButtonElementRef || this.hostRef;
+    }
     if (changes.grnButtonExterior) {
       const exteriorInp = ButtonExteriorUtil.convert(this.grnButtonExterior);
       const exterior = ButtonExteriorUtil.create(exteriorInp);
       if (this.innExterior !== exterior) {
         this.innExterior = exterior;
+        this.settingExterior(this.elementRef, exterior);
       }
       this.grnButtonExteriorChange.emit();
     }
@@ -60,4 +67,15 @@ export class GrnButtonExteriorDirective implements OnChanges, GrnSizePrepareData
   };
 
   // ** Implementation of the GrnSizePrepareData interface. (finish) **
+
+  // ** Private API **
+
+  private settingExterior(elem: ElementRef<HTMLElement>, exterior: ButtonExterior): void {
+    HtmlElemUtil.setClass(this.renderer, elem, 'gb-text', ButtonExteriorUtil.isText(exterior));
+    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-t', ButtonExteriorUtil.isText(exterior) ? '' : null);
+    HtmlElemUtil.setClass(this.renderer, elem, 'gb-contained', ButtonExteriorUtil.isContained(exterior));
+    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-c', ButtonExteriorUtil.isContained(exterior) ? '' : null);
+    HtmlElemUtil.setClass(this.renderer, elem, 'gb-outlined', ButtonExteriorUtil.isOutlined(exterior));
+    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', ButtonExteriorUtil.isOutlined(exterior) ? '' : null);
+  }
 }

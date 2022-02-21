@@ -19,10 +19,10 @@ export enum FrameSizeValue {
 }
 
 export class FrameSizeUtil {
-  public static create(value: FrameSize | null | undefined): FrameSize {
-    return FrameSizeUtil.convert(value?.toString()) || FrameSize.middle;
+  public static create(value: FrameSize | null): FrameSize {
+    return FrameSizeUtil.convert(value ? value.toString() : null) || FrameSize.middle;
   }
-  public static convert(value: string | null | undefined): FrameSize | null {
+  public static convert(value: string | null): FrameSize | null {
     let result: FrameSize | null = null;
     switch (value) {
       case FrameSize.short.valueOf():

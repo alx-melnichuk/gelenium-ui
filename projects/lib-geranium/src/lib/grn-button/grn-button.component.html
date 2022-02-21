@@ -6,6 +6,7 @@
     type="button"
     tabindex="0"
     [grnButtonExterior]="exterior || currConfig.exterior || null"
+    [grnButtonElementRef]="hostRef"
     (grnButtonExteriorChange)="grnSize.updateProperties()"
     [grnSize]="frameSize || currConfig.frameSize || null"
     #grnSize="grnSize"
@@ -30,6 +31,7 @@
   <div class="grn-btn grn-settings"
     grn-btn
     [grnButtonExterior]="exterior || currConfig.exterior || null"
+    [grnButtonElementRef]="hostRef"
     (grnButtonExteriorChange)="grnSize.updateProperties()"
     [grnSize]="frameSize || currConfig.frameSize || null"
     #grnSize="grnSize"
