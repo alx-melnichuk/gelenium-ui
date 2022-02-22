@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { GrnInputExteriorModule } from '../directives/grn-input-exterior/grn-input-exterior.module';
-import { GrnOrnamentModule } from '../directives/grn-ornament/grn-ornament.module';
-import { GrnSizeModule } from '../directives/grn-size/grn-size.module';
+import { GrnFrameExteriorInputModule } from '../directives/grn-frame-exterior-input/grn-frame-exterior-input.module';
 import { GrnFrameInputModule } from '../grn-frame-input/grn-frame-input.module';
+import { GrnFrameLabelModule } from '../directives/grn-frame-label/grn-frame-label.module';
+import { GrnFrameOrnamentModule } from '../directives/grn-frame-ornament/grn-frame-ornament.module';
+import { GrnFrameSizeModule } from '../directives/grn-frame-size/grn-frame-size.module';
 import { GrnHintOrErrorModule } from '../grn-hint-or-error/grn-hint-or-error.module';
 
 import { GrnInputComponent } from './grn-input.component';
@@ -15,10 +16,11 @@ import { GrnInputComponent } from './grn-input.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    GrnInputExteriorModule,
-    GrnOrnamentModule,
-    GrnSizeModule,
+    GrnFrameExteriorInputModule,
     GrnFrameInputModule,
+    GrnFrameLabelModule,
+    GrnFrameOrnamentModule,
+    GrnFrameSizeModule,
     GrnHintOrErrorModule,
   ],
   exports: [GrnInputComponent],

@@ -10,9 +10,12 @@ export * from './lib/_decorators/public-api';
 export * from './lib/_interfaces/public-api';
 export * from './lib/_utils/public-api';
 
-export * from './lib/directives/grn-ornament/public-api';
+export * from './lib/directives/grn-frame-exterior-button/public-api';
+export * from './lib/directives/grn-frame-exterior-input/public-api';
+export * from './lib/directives/grn-frame-label/public-api';
+export * from './lib/directives/grn-frame-ornament/public-api';
+export * from './lib/directives/grn-frame-size/public-api';
 export * from './lib/directives/grn-regex/public-api';
-export * from './lib/directives/grn-size/public-api';
 
 export * from './lib/grn-button/public-api';
 export * from './lib/grn-frame-input/public-api';

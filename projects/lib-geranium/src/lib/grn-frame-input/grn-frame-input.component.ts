@@ -14,7 +14,6 @@ import {
 } from '@angular/core';
 
 import { GrnFrameInputConfig } from '../_interfaces/grn-frame-input-config.interface';
-import { GrnSizePrepareData, GRN_SIZE_PREPARE_DATA } from '../_interfaces/grn-size-prepare-data.interface';
 import { InputExterior } from '../_interfaces/input-exterior.interface';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
@@ -30,6 +29,8 @@ export const GRN_FRAME_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('G
 export class GrnFrameInputComponent implements OnChanges, OnInit {
   @Input()
   public label = '';
+  @Input()
+  public exterior: string | null = null; // InputExteriorType
   @Input()
   public config: GrnFrameInputConfig | null = null;
   @Input()
@@ -50,7 +51,7 @@ export class GrnFrameInputComponent implements OnChanges, OnInit {
   public wdFull: string | null = null;
 
   public get isOutlinedExterior(): boolean {
-    return InputExterior.outlined === this.grnSizePrepareData?.getExterior();
+    return InputExterior.outlined === this.exterior;
   }
 
   public currConfig: GrnFrameInputConfig = {};
@@ -59,7 +60,6 @@ export class GrnFrameInputComponent implements OnChanges, OnInit {
 
   constructor(
     @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null,
-    @Optional() @Inject(GRN_SIZE_PREPARE_DATA) public grnSizePrepareData: GrnSizePrepareData | null,
     private hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {

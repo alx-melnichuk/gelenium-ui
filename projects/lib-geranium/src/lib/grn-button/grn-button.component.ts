@@ -50,9 +50,9 @@ export class GrnButtonComponent implements OnChanges, AfterContentInit {
   @Input()
   public isDisabled: string | null = null;
 
-  @ViewChild('buttonElement')
+  @ViewChild('buttonElement', { static: true })
   public buttonElementRef: ElementRef<HTMLElement> | null = null;
-  @ViewChild(GrnTouchRippleComponent)
+  @ViewChild(GrnTouchRippleComponent, { static: true })
   public touchRipple: GrnTouchRippleComponent | null = null;
   @ContentChild(GrnLinkDirective, { static: true })
   public linkElement: GrnLinkDirective | null = null;
@@ -60,7 +60,7 @@ export class GrnButtonComponent implements OnChanges, AfterContentInit {
   public defaultFrameSize = FrameSizeUtil.getValue(FrameSize.small) || 0;
   public currConfig: GrnButtonConfig = {};
   public isFocused = false;
-  public innIsDisabled: boolean | null = null;
+  public isDisabled2: boolean | null = null; // Binding attribute "isDisabled".
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -78,8 +78,7 @@ export class GrnButtonComponent implements OnChanges, AfterContentInit {
       this.currConfig = { ...(this.rootConfig || {}), ...(this.config || {}) };
     }
     if (changes.isDisabled) {
-      this.innIsDisabled = BooleanUtil.init(this.isDisabled || null);
-      this.settingIsDisabled(this.buttonElementRef, this.innIsDisabled || false);
+      this.isDisabled2 = BooleanUtil.init(this.isDisabled);
     }
   }
 
@@ -111,10 +110,6 @@ export class GrnButtonComponent implements OnChanges, AfterContentInit {
   }
 
   // ** Private API **
-
-  private settingIsDisabled(elem: ElementRef<HTMLElement> | null, isDisabled: boolean): void {
-    HtmlElemUtil.setAttr(this.renderer, elem, 'disabled', isDisabled ? '' : null);
-  }
 
   private settingFocused(elem: ElementRef<HTMLElement> | null, isFocused: boolean): void {
     HtmlElemUtil.setClass(this.renderer, elem, 'gfi-focused', isFocused);

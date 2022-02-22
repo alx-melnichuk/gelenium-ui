@@ -1,84 +1,86 @@
 import { Directive, ElementRef, EventEmitter, Input, OnChanges, Output, Renderer2, SimpleChanges } from '@angular/core';
 
 import {
-  GrnSizePaddingHorRes,
-  GrnSizePaddingVerRes,
-  GrnSizePrepareData,
-  GRN_SIZE_PREPARE_DATA,
-} from '../../_interfaces/grn-size-prepare-data.interface';
+  GrnFrameSizePaddingHorRes,
+  GrnFrameSizePaddingVerRes,
+  GrnFrameSizePrepareData,
+} from '../../_interfaces/grn-frame-size-prepare-data.interface';
 import { InputExterior, InputExteriorUtil } from '../../_interfaces/input-exterior.interface';
 import { HtmlElemUtil } from '../../_utils/html-elem.util';
 
 @Directive({
-  selector: '[grnInputExterior]',
-  exportAs: 'grnInputExterior',
-  providers: [{ provide: GRN_SIZE_PREPARE_DATA, useExisting: GrnInputExteriorDirective }],
+  selector: '[grnFrameExteriorInput]',
+  exportAs: 'grnFrameExteriorInput',
 })
-export class GrnInputExteriorDirective implements OnChanges, GrnSizePrepareData {
+export class GrnFrameExteriorInputDirective implements OnChanges, GrnFrameSizePrepareData {
   @Input()
-  public grnInputExterior: string | null = null; // InputExteriorType
+  public grnFrameExteriorInput: string | null = null; // InputExteriorType
   @Input()
-  public grnInputElementRef: ElementRef<HTMLElement> | null = null;
+  public grnFrameExteriorInputElementRef: ElementRef<HTMLElement> | null = null;
 
   @Output()
-  readonly grnInputExteriorChange: EventEmitter<void> = new EventEmitter();
+  readonly grnFrameExteriorInputChange: EventEmitter<void> = new EventEmitter();
 
-  public innExterior: InputExterior = InputExteriorUtil.create(null);
+  public exterior: InputExterior = InputExteriorUtil.create(null);
   public elementRef: ElementRef<HTMLElement> = this.hostRef;
 
   constructor(private hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.grnInputElementRef) {
-      this.elementRef = this.grnInputElementRef || this.hostRef;
+    if (changes.grnFrameExteriorInputElementRef) {
+      this.elementRef = this.grnFrameExteriorInputElementRef || this.hostRef;
     }
-    if (changes.grnInputExterior) {
-      const exteriorInp = InputExteriorUtil.convert(this.grnInputExterior);
+    if (changes.grnFrameExteriorInput) {
+      const exteriorInp = InputExteriorUtil.convert(this.grnFrameExteriorInput);
       const exterior = InputExteriorUtil.create(exteriorInp);
-      this.innExterior = exterior;
+      this.exterior = exterior;
       this.settingExterior(this.elementRef, exterior);
-      this.grnInputExteriorChange.emit();
+      this.grnFrameExteriorInputChange.emit();
     }
   }
 
   // ** Implementation of the GrnSizePrepareData interface. (start) **
 
   public getExterior = (): string | null => {
-    return this.innExterior;
+    return this.exterior;
   };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getBorderRadius = (frameSizeValue: number, lineHeight: number): string | null => {
     let result: string | null = null;
     const radius =
-      frameSizeValue > 0 && (this.innExterior === InputExterior.outlined || this.innExterior === InputExterior.underline)
+      frameSizeValue > 0 && (this.exterior === InputExterior.outlined || this.exterior === InputExterior.underline)
         ? Math.round((frameSizeValue / 10) * 100) / 100 + 'px'
         : null;
-    if (this.innExterior === InputExterior.outlined) {
+    if (this.exterior === InputExterior.outlined) {
       result = radius;
-    } else if (this.innExterior === InputExterior.underline) {
+    } else if (this.exterior === InputExterior.underline) {
       result = radius !== null ? radius + ' ' + radius + ' 0px 0px' : null;
-    } else if (this.innExterior === InputExterior.standard) {
+    } else if (this.exterior === InputExterior.standard) {
       result = null;
     }
     return result;
   };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public getPaddingHor = (frameSizeValue: number, lineHeight: number): GrnSizePaddingHorRes | null => {
-    const ratio1 = this.innExterior === InputExterior.outlined ? 0.25 : null;
-    const ratio2 = this.innExterior === InputExterior.underline ? 0.21428 : null;
-    const ratio = ratio1 || ratio2;
-    const value = ratio ? Math.round(ratio * frameSizeValue * 100) / 100 : null;
+  public getPaddingHor = (frameSizeValue: number, lineHeight: number): GrnFrameSizePaddingHorRes | null => {
+    let value: number | null = null;
+    if (this.exterior === InputExterior.outlined) {
+      value = Math.round(0.25 * frameSizeValue * 100) / 100;
+    } else if (this.exterior === InputExterior.underline) {
+      value = Math.round(0.21428 * frameSizeValue * 100) / 100;
+    } else if (this.exterior === InputExterior.standard) {
+      value = 0;
+    }
     return value !== null ? { left: value, right: value } : null;
   };
 
-  public getPaddingVer = (frameSizeValue: number, lineHeight: number): GrnSizePaddingVerRes | null => {
-    let result: GrnSizePaddingVerRes | null = null;
+  public getPaddingVer = (frameSizeValue: number, lineHeight: number): GrnFrameSizePaddingVerRes | null => {
+    let result: GrnFrameSizePaddingVerRes | null = null;
     const param = frameSizeValue > 0 && lineHeight > 0 ? frameSizeValue - lineHeight : null;
     if (param != null) {
-      if (this.innExterior === InputExterior.outlined) {
+      if (this.exterior === InputExterior.outlined) {
         const value = param / 2;
         result = { top: value, bottom: value };
-      } else if (this.innExterior === InputExterior.underline || this.innExterior === InputExterior.standard) {
+      } else if (this.exterior === InputExterior.underline || this.exterior === InputExterior.standard) {
         result = { top: param * 0.75, bottom: param * 0.25 };
       }
     }

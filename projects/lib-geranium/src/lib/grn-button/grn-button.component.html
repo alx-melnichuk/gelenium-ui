@@ -5,16 +5,18 @@
     grn-btn
     type="button"
     tabindex="0"
-    [grnButtonExterior]="exterior || currConfig.exterior || null"
-    [grnButtonElementRef]="hostRef"
-    (grnButtonExteriorChange)="grnSize.updateProperties()"
-    [grnSize]="frameSize || currConfig.frameSize || null"
-    #grnSize="grnSize"
-    [grnSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
-    [grnSizeLabelPd]="currConfig.labelPd || null"
+    [grnFrameExteriorButton]="exterior || currConfig.exterior || null"
+    [grnFrameExteriorButtonElementRef]="hostRef"
+    #grnFrameExteriorButton="grnFrameExteriorButton"
+    (grnFrameExteriorButtonChange)="grnFrameSize.updatePaddingVerAndHor()"
+    [grnFrameSize]="frameSize || currConfig.frameSize || null"
+    #grnFrameSize="grnFrameSize"
+    [grnFrameSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
+    [grnFrameSizeLabelPd]="currConfig.labelPd || null"
+    [grnFrameSizePrepareData]="grnFrameExteriorButton"
     [attr.id]="id"
-    [attr.disabled]="innIsDisabled ? '' : null"
-    [attr.dis]="innIsDisabled ? '' : null"
+    [attr.disabled]="isDisabled2 ? '' : null"
+    [attr.dis]="isDisabled2 ? '' : null"
     (focus)="doFocus()"
     (blur)="doBlur()">
     <ng-container [ngTemplateOutlet]="templateOrnament">
@@ -23,32 +25,33 @@
       class="gb-label gb-elem-pd-hor">
       <ng-content></ng-content>
     </span>
-    <grn-touch-ripple *ngIf="!innIsDisabled">
+    <grn-touch-ripple *ngIf="!isDisabled2">
     </grn-touch-ripple>
   </button>
 </ng-container>
 <ng-template #elseBlockLink>
   <div class="grn-btn grn-settings"
     grn-btn
-    [grnButtonExterior]="exterior || currConfig.exterior || null"
-    [grnButtonElementRef]="hostRef"
-    (grnButtonExteriorChange)="grnSize.updateProperties()"
-    [grnSize]="frameSize || currConfig.frameSize || null"
-    #grnSize="grnSize"
-    [grnSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
-    [grnSizeLabelPd]="currConfig.labelPd || null"
+    [grnFrameExteriorButton]="exterior || currConfig.exterior || null"
+    [grnFrameExteriorButtonElementRef]="hostRef"
+    #grnFrameExteriorButton="grnFrameExteriorButton"
+    (grnFrameExteriorButtonChange)="grnFrameSize.updatePaddingVerAndHor()"
+    [grnFrameSize]="frameSize || currConfig.frameSize || null"
+    #grnFrameSize="grnFrameSize"
+    [grnFrameSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
+    [grnFrameSizeLabelPd]="currConfig.labelPd || null"
+    [grnFrameSizePrepareData]="grnFrameExteriorButton"
     [attr.id]="id"
-    [attr.dis]="innIsDisabled ? '' : null"
+    [attr.dis]="isDisabled2 ? '' : null"
     (click)="doClick($event)">
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
     <ng-content select="a"></ng-content>
-    <grn-touch-ripple *ngIf="!innIsDisabled"
+    <grn-touch-ripple *ngIf="!isDisabled2"
       skip-events>
     </grn-touch-ripple>
   </div>
 </ng-template>
-
 
 <ng-template #templateOrnament>
   <i orn-lf>

@@ -10,20 +10,20 @@ export const PROP_ORN_LBL_PD_LF = '--orn-lbl-pd-lf';
 export const PROP_ORN_LBL_PD_RG = '--orn-lbl-pd-rg';
 
 @Directive({
-  selector: '[grnOrnament]',
+  selector: '[grnFrameOrnament]',
+  exportAs: 'grnFrameOrnament',
 })
-export class GrnOrnamentDirective implements OnChanges, AfterContentInit {
+export class GrnFrameOrnamentDirective implements OnChanges, AfterContentInit {
   @Input()
-  public grnOrnamentLfAlign: string | null = null; // OrnamAlign
+  public grnFrameOrnamentLfAlign: string | null = null; // OrnamAlign
   @Input()
-  public grnOrnamentRgAlign: string | null = null; // OrnamAlign
+  public grnFrameOrnamentRgAlign: string | null = null; // OrnamAlign
 
   private isInit = true;
   private ornamentLf: HTMLElement | null = null;
   private ornamentRg: HTMLElement | null = null;
   private ornamentLfElemRef: ElementRef<HTMLElement> | null = null;
   private ornamentRgElemRef: ElementRef<HTMLElement> | null = null;
-
   private ornamentLfWidth = 0;
   private ornamentRgWidth = 0;
 
@@ -42,12 +42,12 @@ export class GrnOrnamentDirective implements OnChanges, AfterContentInit {
 
       this.isInit = false;
     }
-    if (changes.grnOrnamentLfAlign && this.ornamentLfElemRef) {
-      const ornamLfAlign2 = OrnamAlignUtil.convert(this.grnOrnamentLfAlign || null) || OrnamAlign.default;
+    if (changes.grnFrameOrnamentLfAlign && this.ornamentLfElemRef) {
+      const ornamLfAlign2 = OrnamAlignUtil.convert(this.grnFrameOrnamentLfAlign || null) || OrnamAlign.default;
       HtmlElemUtil.setAttr(this.renderer, this.ornamentLfElemRef, ATTR_ORN_LF, ornamLfAlign2.toString());
     }
-    if (changes.grnOrnamentRgAlign && this.ornamentRgElemRef) {
-      const ornamRgAlign2 = OrnamAlignUtil.convert(this.grnOrnamentRgAlign || null) || OrnamAlign.default;
+    if (changes.grnFrameOrnamentRgAlign && this.ornamentRgElemRef) {
+      const ornamRgAlign2 = OrnamAlignUtil.convert(this.grnFrameOrnamentRgAlign || null) || OrnamAlign.default;
       HtmlElemUtil.setAttr(this.renderer, this.ornamentRgElemRef, ATTR_ORN_RG, ornamRgAlign2.toString());
     }
   }
@@ -57,8 +57,7 @@ export class GrnOrnamentDirective implements OnChanges, AfterContentInit {
     this.ornamentLfWidth = this.ornamentLf?.offsetWidth || 0;
     this.ornamentRgWidth = this.ornamentRg?.offsetWidth || 0;
 
-    const parentElement = this.hostRef.nativeElement.parentElement;
-    const parentElementRef = this.ornamentLfWidth > 0 || this.ornamentRgWidth > 0 ? HtmlElemUtil.getElementRef(parentElement) : null;
+    const parentElementRef = HtmlElemUtil.getElementRef(this.hostRef.nativeElement.parentElement);
     if (this.ornamentLfWidth > 0) {
       HtmlElemUtil.setProperty(parentElementRef, PROP_ORN_LBL_PD_LF, NumberUtil.str(this.ornamentLfWidth)?.concat('px') || null);
     }

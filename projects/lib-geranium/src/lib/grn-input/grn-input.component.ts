@@ -35,13 +35,8 @@ import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../direct
 import { GRN_FRAME_INPUT_CONFIG } from '../grn-frame-input/grn-frame-input.component';
 import { FrameSize, FrameSizeUtil } from '../_interfaces/frame-size.interface';
 import { GrnFrameInputConfig } from '../_interfaces/grn-frame-input-config.interface';
-import { GrnSizePaddingVerHorRes } from '../_interfaces/grn-size-prepare-data.interface';
-import { InputExteriorUtil } from '../_interfaces/input-exterior.interface';
-import { OrnamAlign, OrnamAlignUtil } from '../_interfaces/ornam-align.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { InputLabelUtil } from '../_utils/input-label.util';
-import { NumberUtil } from '../_utils/number.util';
 
 import { InputType, InputTypeUtil } from './grn-input.interface';
 
@@ -125,8 +120,6 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public isError2: boolean | null = null; // Binding attribute "isError".
   public isRequired2: boolean | null = null; // Binding attribute "isRequired".
   public isReadOnly2: boolean | null = null; // Binding attribute "isReadOnly".
-  public ornamLfAlign2: OrnamAlign = OrnamAlign.default;
-  public ornamRgAlign2: OrnamAlign = OrnamAlign.default;
 
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
@@ -138,10 +131,10 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
     @Inject(PLATFORM_ID) private platformId: Object,
     private changeDetectorRef: ChangeDetectorRef,
     @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null,
-    private hostRef: ElementRef<HTMLElement>,
+    public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {
-    this.currConfig = this.initConfig(this.rootConfig || {});
+    this.currConfig = this.rootConfig || {};
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-input', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-control', true);
   }
@@ -151,7 +144,7 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
       this.typeVal = InputTypeUtil.create(this.type) || InputType.text;
     }
     if (changes.config) {
-      this.currConfig = this.initConfig({ ...(this.rootConfig || {}), ...(this.config || {}) });
+      this.currConfig = { ...(this.rootConfig || {}), ...(this.config || {}) };
     }
     if (changes.lbShrink) {
       this.isLabelShrink2 = BooleanUtil.init(this.lbShrink);
@@ -267,26 +260,6 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
 
   // ** Formation of additional parameters. **
 
-  public doSizeChange(paddingVerHor: GrnSizePaddingVerHorRes): void {
-    // paddingHor
-    const left = paddingVerHor.left;
-    const right = paddingVerHor.right;
-
-    const pdLfRgWd = Math.round(1.66 * (left + right) * 100) / 100;
-    HtmlElemUtil.setProperty(this.hostRef, '--lbl-wd', NumberUtil.str(pdLfRgWd)?.concat('px') || null);
-
-    HtmlElemUtil.setProperty(this.hostRef, '--he-pd-lf', NumberUtil.str(left || null)?.concat('px') || null);
-
-    // paddingVer
-    const frameSizeValue = paddingVerHor.frameSizeValue;
-    const lineHeight = paddingVerHor.lineHeight;
-    const exterior = InputExteriorUtil.convert(paddingVerHor.exterior);
-
-    const translateVer = InputLabelUtil.translateVer(exterior, frameSizeValue, lineHeight);
-    HtmlElemUtil.setProperty(this.hostRef, '--lbl-trn-y', NumberUtil.str(translateVer.translateY)?.concat('px') || null);
-    HtmlElemUtil.setProperty(this.hostRef, '--lbl2-trn-y', NumberUtil.str(translateVer.translateY2)?.concat('px') || null);
-  }
-
   // ** Private API **
 
   private prepareFormGroup(isRequired: boolean | null, minLength: number | null, maxLength: number | null): void {
@@ -302,11 +275,5 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
       newValidator.push(Validators.maxLength(maxLength));
     }
     this.formControl.setValidators(newValidator);
-  }
-
-  private initConfig(config: GrnFrameInputConfig): GrnFrameInputConfig {
-    this.ornamLfAlign2 = OrnamAlignUtil.create(config?.ornamLfAlign || this.ornamLfAlign2, null);
-    this.ornamRgAlign2 = OrnamAlignUtil.create(config?.ornamRgAlign || this.ornamRgAlign2, null);
-    return config;
   }
 }

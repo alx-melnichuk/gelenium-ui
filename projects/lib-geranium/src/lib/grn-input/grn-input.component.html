@@ -1,6 +1,7 @@
 <ng-container [formGroup]="formGroup">
   <grn-frame-input [attr.wdFull]="wdFull"
     [label]="label"
+    [exterior]="grnFrameExteriorInput.exterior"
     [config]="config"
     [isLabelShrink]="isLabelShrink2"
     [hiddenLabel]="isHiddenLabel2"
@@ -9,16 +10,21 @@
     [isFilled]="isFilled"
     [isError]="!!formControl.errors || isError2"
     [isRequired]="isRequired2"
-    [grnInputExterior]="exterior || currConfig.exterior || null"
-    (grnInputExteriorChange)="grnSize.updateProperties()"
-    [grnSize]="frameSize || currConfig.frameSize || null"
-    #grnSize="grnSize"
-    [grnSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
-    [grnSizeLabelPd]="currConfig.labelPd || null"
-    (grnSizeChange)="doSizeChange($event)"
-    grnOrnament
-    [grnOrnamentLfAlign]="ornamLfAlign || (currConfig.ornamLfAlign || null)"
-    [grnOrnamentRgAlign]="ornamRgAlign || (currConfig.ornamRgAlign || null)">
+    [grnFrameExteriorInput]="exterior || (currConfig.exterior || null)"
+    #grnFrameExteriorInput="grnFrameExteriorInput"
+    (grnFrameExteriorInputChange)="grnFrameSize.updatePaddingVerAndHor()"
+    grnFrameLabel
+    #grnFrameLabel="grnFrameLabel"
+    [grnFrameLabelElementRef]="hostRef"
+    [grnFrameSize]="frameSize || (currConfig.frameSize || null)"
+    #grnFrameSize="grnFrameSize"
+    [grnFrameSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
+    [grnFrameSizeLabelPd]="currConfig.labelPd || null"
+    [grnFrameSizePrepareData]="grnFrameExteriorInput"
+    (grnFrameSizeChange)="grnFrameLabel.updateByPaddingVerHor($event)"
+    grnFrameOrnament
+    [grnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig.ornamLfAlign || null)"
+    [grnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig.ornamRgAlign || null)">
 
     <span orn-lf
       class="gfi-ornam-lf">

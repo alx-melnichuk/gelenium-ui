@@ -2,51 +2,49 @@ import { Directive, ElementRef, EventEmitter, Input, OnChanges, Output, Renderer
 
 import { ButtonExterior, ButtonExteriorUtil } from '../../_interfaces/button-exterior.interface';
 import {
-  GrnSizePaddingHorRes,
-  GrnSizePaddingVerRes,
-  GrnSizePrepareData,
-  GRN_SIZE_PREPARE_DATA,
-} from '../../_interfaces/grn-size-prepare-data.interface';
+  GrnFrameSizePaddingHorRes,
+  GrnFrameSizePaddingVerRes,
+  GrnFrameSizePrepareData,
+} from '../../_interfaces/grn-frame-size-prepare-data.interface';
 import { HtmlElemUtil } from '../../_utils/html-elem.util';
 
 @Directive({
-  selector: '[grnButtonExterior]',
-  exportAs: 'grnButtonExterior',
-  providers: [{ provide: GRN_SIZE_PREPARE_DATA, useExisting: GrnButtonExteriorDirective }],
+  selector: '[grnFrameExteriorButton]',
+  exportAs: 'grnFrameExteriorButton',
 })
-export class GrnButtonExteriorDirective implements OnChanges, GrnSizePrepareData {
+export class GrnFrameExteriorButtonDirective implements OnChanges, GrnFrameSizePrepareData {
   @Input()
-  public grnButtonExterior: string | null = null; // ButtonExteriorType
+  public grnFrameExteriorButton: string | null = null; // ButtonExteriorType
   @Input()
-  public grnButtonElementRef: ElementRef<HTMLElement> | null = null;
+  public grnFrameExteriorButtonElementRef: ElementRef<HTMLElement> | null = null;
 
   @Output()
-  readonly grnButtonExteriorChange: EventEmitter<void> = new EventEmitter();
+  readonly grnFrameExteriorButtonChange: EventEmitter<void> = new EventEmitter();
 
-  public innExterior: ButtonExterior | null = null;
+  public exterior: ButtonExterior | null = null;
   public elementRef: ElementRef<HTMLElement> = this.hostRef;
 
   constructor(private hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.grnButtonElementRef) {
-      this.elementRef = this.grnButtonElementRef || this.hostRef;
+    if (changes.grnFrameExteriorButtonElementRef) {
+      this.elementRef = this.grnFrameExteriorButtonElementRef || this.hostRef;
     }
-    if (changes.grnButtonExterior) {
-      const exteriorInp = ButtonExteriorUtil.convert(this.grnButtonExterior);
+    if (changes.grnFrameExteriorButton) {
+      const exteriorInp = ButtonExteriorUtil.convert(this.grnFrameExteriorButton);
       const exterior = ButtonExteriorUtil.create(exteriorInp);
-      if (this.innExterior !== exterior) {
-        this.innExterior = exterior;
+      if (this.exterior !== exterior) {
+        this.exterior = exterior;
         this.settingExterior(this.elementRef, exterior);
       }
-      this.grnButtonExteriorChange.emit();
+      this.grnFrameExteriorButtonChange.emit();
     }
   }
 
   // ** Implementation of the GrnSizePrepareData interface. (start) **
 
   public getExterior = (): string | null => {
-    return this.grnButtonExterior;
+    return this.grnFrameExteriorButton;
   };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getBorderRadius = (frameSizeValue: number, lineHeight: number): string | null => {
@@ -54,15 +52,15 @@ export class GrnButtonExteriorDirective implements OnChanges, GrnSizePrepareData
     return (frameSizeValue > 0 ? Math.round(borderRadiusRatio * frameSizeValue * 100) / 100 : 0) + 'px';
   };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public getPaddingHor = (frameSizeValue: number, lineHeight: number): GrnSizePaddingHorRes | null => {
-    const ratio = this.innExterior === ButtonExterior.contained ? 0.3636 : this.innExterior === ButtonExterior.outlined ? 0.3409 : 0.2045;
+  public getPaddingHor = (frameSizeValue: number, lineHeight: number): GrnFrameSizePaddingHorRes | null => {
+    const ratio = this.exterior === ButtonExterior.contained ? 0.3636 : this.exterior === ButtonExterior.outlined ? 0.3409 : 0.2045;
     const value = frameSizeValue > 0 ? Math.round(ratio * frameSizeValue * 100) / 100 : null;
     return value !== null ? { left: value, right: value } : null;
   };
 
-  public getPaddingVer = (frameSizeValue: number, lineHeight: number): GrnSizePaddingVerRes | null => {
+  public getPaddingVer = (frameSizeValue: number, lineHeight: number): GrnFrameSizePaddingVerRes | null => {
     const param = frameSizeValue > 0 && lineHeight > 0 ? (frameSizeValue - lineHeight) / 2 : null;
-    const value = param === null ? null : this.innExterior === ButtonExterior.outlined ? param - 1 : param;
+    const value = param === null ? null : this.exterior === ButtonExterior.outlined ? param - 1 : param;
     return value !== null ? { top: value, bottom: value } : null;
   };
 
