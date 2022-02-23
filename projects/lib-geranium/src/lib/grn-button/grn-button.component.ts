@@ -58,7 +58,7 @@ export class GrnButtonComponent implements OnChanges, AfterContentInit {
   public linkElement: GrnLinkDirective | null = null;
 
   public defaultFrameSize = FrameSizeUtil.getValue(FrameSize.small) || 0;
-  public currConfig: GrnButtonConfig = {};
+  public currConfig: GrnButtonConfig | null = null;
   public isFocused = false;
   public isDisabled2: boolean | null = null; // Binding attribute "isDisabled".
 
@@ -69,13 +69,13 @@ export class GrnButtonComponent implements OnChanges, AfterContentInit {
     public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {
-    this.currConfig = this.rootConfig || {};
+    this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-button', true);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
-      this.currConfig = { ...(this.rootConfig || {}), ...(this.config || {}) };
+      this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.isDisabled) {
       this.isDisabled2 = BooleanUtil.init(this.isDisabled);

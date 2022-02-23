@@ -7,6 +7,7 @@ import {
   EventEmitter,
   forwardRef,
   Inject,
+  InjectionToken,
   Input,
   OnChanges,
   Optional,
@@ -32,13 +33,14 @@ import {
 } from '@angular/forms';
 
 import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
-import { GRN_FRAME_INPUT_CONFIG } from '../grn-frame-input/grn-frame-input.component';
 import { FrameSize, FrameSizeUtil } from '../_interfaces/frame-size.interface';
 import { GrnFrameInputConfig } from '../_interfaces/grn-frame-input-config.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 let identifier = 0;
+
+export const GRN_TEXTAREA_CONFIG = new InjectionToken<GrnFrameInputConfig>('GRN_TEXTAREA_CONFIG');
 
 @Component({
   selector: 'grn-textarea',
@@ -108,11 +110,8 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   public textareaElementRef: ElementRef | null = null;
 
   public defaultFrameSize = FrameSizeUtil.getValue(FrameSize.middle) || 0;
-  public currConfig: GrnFrameInputConfig = {};
-  public isLabelShrink2: boolean | null = null; // Binding attribute "lbShrink".
-  public isHiddenLabel2: boolean | null = null; // Binding attribute "hiddenLabel".
+  public currConfig: GrnFrameInputConfig | null = null;
   public isDisabled2: boolean | null = null; // Binding attribute "isDisabled".
-  public isError2: boolean | null = null; // Binding attribute "isError".
   public isRequired2: boolean | null = null; // Binding attribute "isRequired".
   public isReadOnly2: boolean | null = null; // Binding attribute "isReadOnly".
 
@@ -126,31 +125,22 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: Object,
     private changeDetectorRef: ChangeDetectorRef,
-    @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null,
+    @Optional() @Inject(GRN_TEXTAREA_CONFIG) private rootConfig: GrnFrameInputConfig | null,
     public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {
-    this.currConfig = this.rootConfig || {};
+    this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-textarea', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-control', true);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
-      this.currConfig = { ...(this.rootConfig || {}), ...(this.config || {}) };
-    }
-    if (changes.lbShrink) {
-      this.isLabelShrink2 = BooleanUtil.init(this.lbShrink);
-    }
-    if (changes.hiddenLabel) {
-      this.isHiddenLabel2 = BooleanUtil.init(this.hiddenLabel);
+      this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.isDisabled) {
       this.isDisabled2 = BooleanUtil.init(this.isDisabled);
       this.setDisabled(this.isDisabled2);
-    }
-    if (changes.isError) {
-      this.isError2 = BooleanUtil.init(this.isError);
     }
     if (changes.isRequired) {
       this.isRequired2 = BooleanUtil.init(this.isRequired);
@@ -256,7 +246,9 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     }
   }
 
-  // ** Formation of additional parameters. **
+  public getBoolean(value: string | null): boolean | null {
+    return BooleanUtil.init(value);
+  }
 
   // ** Private API **
 

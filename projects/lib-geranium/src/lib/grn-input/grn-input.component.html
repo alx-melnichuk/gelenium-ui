@@ -1,62 +1,61 @@
 <ng-container [formGroup]="formGroup">
-  <grn-frame-input [attr.wdFull]="wdFull"
-    [label]="label"
-    [exterior]="grnFrameExteriorInput.exterior"
-    [config]="config"
-    [isLabelShrink]="isLabelShrink2"
-    [hiddenLabel]="isHiddenLabel2"
-    [isDisabled]="isDisabled2"
-    [isFocused]="isFocused"
-    [isFilled]="isFilled"
-    [isError]="!!formControl.errors || isError2"
-    [isRequired]="isRequired2"
-    [grnFrameExteriorInput]="exterior || (currConfig.exterior || null)"
-    #grnFrameExteriorInput="grnFrameExteriorInput"
-    (grnFrameExteriorInputChange)="grnFrameSize.updatePaddingVerAndHor()"
-    grnFrameLabel
-    #grnFrameLabel="grnFrameLabel"
-    [grnFrameLabelElementRef]="hostRef"
-    [grnFrameSize]="frameSize || (currConfig.frameSize || null)"
-    #grnFrameSize="grnFrameSize"
-    [grnFrameSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
-    [grnFrameSizeLabelPd]="currConfig.labelPd || null"
-    [grnFrameSizePrepareData]="grnFrameExteriorInput"
-    (grnFrameSizeChange)="grnFrameLabel.updateByPaddingVerHor($event)"
-    grnFrameOrnament
-    [grnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig.ornamLfAlign || null)"
-    [grnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig.ornamRgAlign || null)">
+  <div #prepareData="grnFrameExteriorInput"
+    [grnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
+    [grnFrameExteriorInputElementRef]="grnFrameInput.hostRef">
+    <grn-frame-input #grnFrameInput
+      [attr.wdFull]="wdFull"
+      [label]="label"
+      [exterior]="prepareData.exterior"
+      [config]="currConfig"
+      [isLabelShrink]="getBoolean(lbShrink)"
+      [hiddenLabel]="getBoolean(hiddenLabel)"
+      [isDisabled]="isDisabled2"
+      [isFocused]="isFocused"
+      [isFilled]="isFilled"
+      [isError]="!!formControl.errors || getBoolean(isError)"
+      [isRequired]="isRequired2"
+      #grnFrameSize="grnFrameSize"
+      [grnFrameSize]="frameSize || (currConfig?.frameSize || null)"
+      [grnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
+      [grnFrameSizeLabelPd]="currConfig?.labelPd || null"
+      [grnFrameSizePrepareData]="prepareData"
+      [grnFrameSizeModify]="prepareData.exterior"
+      grnFrameOrnament
+      [grnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
+      [grnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)">
 
-    <span orn-lf
-      class="gfi-ornam-lf">
-      <ng-content select="[grn-orn-lf]"></ng-content>
-    </span>
-    <span orn-rg
-      class="gfi-ornam-rg">
-      <ng-content select="[grn-orn-rg]"></ng-content>
-    </span>
+      <span orn-lf
+        class="gfi-ornam-lf">
+        <ng-content select="[grn-orn-lf]"></ng-content>
+      </span>
+      <span orn-rg
+        class="gfi-ornam-rg">
+        <ng-content select="[grn-orn-rg]"></ng-content>
+      </span>
 
-    <input #inputElement
-      formControlName="textData"
-      elem-pd-ver
-      [attr.id]="id"
-      [type]="typeVal"
-      class="gi-input gfi-elem gfi-elem-pd-hor"
-      [attr.disabled]="isDisabled2 ? '': null"
-      [attr.autocomplete]="!!autoComplete ? autoComplete : null"
-      [attr.readonly]="isReadOnly2 ? '': null"
-      [attr.min]="min"
-      [attr.max]="max"
-      [attr.step]="step"
-      [pattern]="pattern"
-      (focus)="doFocus()"
-      (blur)="doBlur()"
-      (input)="doInput($event)" />
+      <input #inputElement
+        formControlName="textData"
+        elem-pd-ver
+        [attr.id]="id"
+        [type]="typeVal"
+        class="gi-input gfi-elem gfi-elem-pd-hor"
+        [attr.disabled]="isDisabled2 ? '': null"
+        [attr.autocomplete]="!!autoComplete ? autoComplete : null"
+        [attr.readonly]="getBoolean(isReadOnly) ? '': null"
+        [attr.min]="min"
+        [attr.max]="max"
+        [attr.step]="step"
+        [pattern]="pattern"
+        (focus)="doFocus()"
+        (blur)="doBlur()"
+        (input)="doInput($event)" />
 
-  </grn-frame-input>
+    </grn-frame-input>
+  </div>
 </ng-container>
 <grn-hint-or-error *ngIf="!!helperText"
   [text]="helperText"
-  [isError]="!!formControl.errors || isError2"
+  [isError]="!!formControl.errors || getBoolean(isError)"
   [isFocused]="isFocused"
   [isDisabled]="isDisabled2">
 </grn-hint-or-error>

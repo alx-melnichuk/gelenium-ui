@@ -164,18 +164,17 @@
   // ** Additional settings **
   
   &>.grn-btn {
-    &>i[orn-lf], &>i[orn-rg] {
+    &>span[orn-lf], &>span[orn-rg] {
       max-height: inherit;
-      font-style: normal;
       display: inline-flex;
     }
-    &>i[orn-rg] {
+    &>span[orn-rg] {
       order: 1;
     }
-    &>i[orn-lf]:empty~.gb-elem-pd-hor {
+    &>span[orn-lf]:empty~.gb-elem-pd-hor {
       padding-left: var(--gb-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf)));
     }
-    &>i[orn-rg]:empty~.gb-elem-pd-hor {
+    &>span[orn-rg]:empty~.gb-elem-pd-hor {
       padding-right: var(--gb-lbl-pd-rg, var(--s-lbl-pd-rg, var(--def-lbl-pd-rg)));
     }
   }

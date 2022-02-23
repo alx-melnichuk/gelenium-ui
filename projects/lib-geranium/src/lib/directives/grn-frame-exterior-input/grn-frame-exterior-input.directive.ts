@@ -7,6 +7,7 @@ import {
 } from '../../_interfaces/grn-frame-size-prepare-data.interface';
 import { InputExterior, InputExteriorUtil } from '../../_interfaces/input-exterior.interface';
 import { HtmlElemUtil } from '../../_utils/html-elem.util';
+import { NumberUtil } from '../../_utils/number.util';
 
 @Directive({
   selector: '[grnFrameExteriorInput]',
@@ -24,17 +25,18 @@ export class GrnFrameExteriorInputDirective implements OnChanges, GrnFrameSizePr
   public exterior: InputExterior = InputExteriorUtil.create(null);
   public elementRef: ElementRef<HTMLElement> = this.hostRef;
 
-  constructor(private hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
+  constructor(public hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.grnFrameExteriorInputElementRef) {
       this.elementRef = this.grnFrameExteriorInputElementRef || this.hostRef;
     }
+    // const s1 = `${changes.grnFrameExteriorInput ? 'Change.emit() exterior=' + this.exterior : ''}`;
+    // console.log(`ngOnChanges() ${s1}`);
     if (changes.grnFrameExteriorInput) {
       const exteriorInp = InputExteriorUtil.convert(this.grnFrameExteriorInput);
       const exterior = InputExteriorUtil.create(exteriorInp);
       this.exterior = exterior;
-      this.settingExterior(this.elementRef, exterior);
       this.grnFrameExteriorInputChange.emit();
     }
   }
@@ -70,6 +72,12 @@ export class GrnFrameExteriorInputDirective implements OnChanges, GrnFrameSizePr
     } else if (this.exterior === InputExterior.standard) {
       value = 0;
     }
+    if (value !== null) {
+      // paddingHor
+      const pdLfRgWd = Math.round(1.66 * (2 * value) * 100) / 100;
+      HtmlElemUtil.setProperty(this.elementRef, '--lbl-wd', NumberUtil.str(pdLfRgWd)?.concat('px') || null);
+      HtmlElemUtil.setProperty(this.elementRef, '--he-pd-lf', NumberUtil.str(value)?.concat('px') || null);
+    }
     return value !== null ? { left: value, right: value } : null;
   };
 
@@ -84,6 +92,14 @@ export class GrnFrameExteriorInputDirective implements OnChanges, GrnFrameSizePr
         result = { top: param * 0.75, bottom: param * 0.25 };
       }
     }
+    if (result !== null) {
+      // paddingVer
+      const translateY = this.translateY(this.exterior, frameSizeValue, lineHeight);
+      HtmlElemUtil.setProperty(this.elementRef, '--lbl-trn-y', NumberUtil.str(translateY)?.concat('px') || null);
+
+      const translateY2 = this.translate2Y(this.exterior, frameSizeValue, lineHeight);
+      HtmlElemUtil.setProperty(this.elementRef, '--lbl2-trn-y', NumberUtil.str(translateY2)?.concat('px') || null);
+    }
     return result;
   };
 
@@ -91,15 +107,27 @@ export class GrnFrameExteriorInputDirective implements OnChanges, GrnFrameSizePr
 
   // ** Private API **
 
-  private settingExterior(elem: ElementRef<HTMLElement>, exterior: InputExterior): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-outlined', InputExteriorUtil.isOutlined(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', InputExteriorUtil.isOutlined(exterior) ? '' : null);
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-underline', InputExteriorUtil.isUnderline(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-u', InputExteriorUtil.isUnderline(exterior) ? '' : null);
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-standard', InputExteriorUtil.isStandard(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-s', InputExteriorUtil.isStandard(exterior) ? '' : null);
-    const isBorder = InputExteriorUtil.isStandard(exterior) || InputExteriorUtil.isUnderline(exterior);
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-border', isBorder);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'frm-br', isBorder ? '' : null);
+  // Determines the y transform value at the shrink position (top).
+  public translateY(exterior: InputExterior | null, frameSizeValue: number, lineHeight: number | null): number | null {
+    let result: number | null = null;
+    if (exterior != null && frameSizeValue > 0 && lineHeight != null) {
+      result = Math.round(lineHeight * 0.25 * 100) / 100;
+      if (exterior === InputExterior.standard) {
+        result = Math.round((frameSizeValue * 0.75 - lineHeight * 1.27) * 0.4 * 100) / 100;
+      } else if (exterior === InputExterior.outlined) {
+        result = Math.round(((-0.75 * lineHeight) / 2) * 100) / 100;
+      } else if (exterior === InputExterior.underline) {
+        result = Math.round((frameSizeValue * 0.757 - lineHeight * 1.257) * 0.45 * 100) / 100;
+      }
+    }
+    return result;
+  }
+  // Determines the y transform value at the unshrink position (in the middle).
+  public translate2Y(exterior: InputExterior | null, frameSizeValue: number, lineHeight: number | null): number | null {
+    let result: number | null = null;
+    if (exterior != null && frameSizeValue > 0 && lineHeight != null) {
+      result = Math.round((frameSizeValue - lineHeight) * (InputExterior.standard === exterior ? 0.75 : 0.5) * 100) / 100;
+    }
+    return result;
   }
 }

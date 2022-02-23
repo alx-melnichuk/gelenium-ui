@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, Inject, Input, OnChanges, Optional, Output, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 
 import { FrameSizeUtil } from '../../_interfaces/frame-size.interface';
 import {
@@ -25,6 +25,8 @@ export class GrnFrameSizeDirective implements OnChanges {
   public grnFrameSizeElementRef: ElementRef<HTMLElement> | null = null;
   @Input()
   public grnFrameSizePrepareData: GrnFrameSizePrepareData | null = null;
+  @Input()
+  public grnFrameSizeModify: string | null = null;
 
   @Output()
   readonly grnFrameSizeChange: EventEmitter<GrnFrameSizePaddingVerHorRes> = new EventEmitter();
@@ -32,8 +34,9 @@ export class GrnFrameSizeDirective implements OnChanges {
   public frameSizeValue = 0;
   public lineHeight = 0;
   public elementRef: ElementRef<HTMLElement> = this.hostRef;
+  public paddingVerHorRes: GrnFrameSizePaddingVerHorRes | null = null;
 
-  constructor(private hostRef: ElementRef<HTMLElement>) {}
+  constructor(public hostRef: ElementRef<HTMLElement>) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.grnButtonElementRef) {
@@ -42,7 +45,7 @@ export class GrnFrameSizeDirective implements OnChanges {
     if (this.lineHeight === 0) {
       this.lineHeight = this.getLineHeight(this.hostRef);
     }
-    let isModify = !!changes.grnFrameSizeLabelPd;
+    let isModify = !!changes.grnFrameSizeLabelPd || !!changes.grnFrameSizeModify;
     if (changes.grnFrameSize || changes.grnFrameSizeValue) {
       const frameSizeValueOld = this.frameSizeValue;
       const frameSize = FrameSizeUtil.convert(this.grnFrameSize);
@@ -50,6 +53,8 @@ export class GrnFrameSizeDirective implements OnChanges {
       const isModifySize = this.frameSizeValue !== frameSizeValueOld;
       isModify = !isModify && isModifySize ? isModifySize : isModify;
     }
+    // const s1 = changes.grnFrameSizeModify ? 'grnFrameSizeModify=' + this.grnFrameSizeModify : '';
+    // console.log(`ngOnChanges()${isModify ? ' + updatePaddingVerAndHor()' : ''} ${s1}`);
     if (isModify) {
       this.updatePaddingVerAndHor();
     }
@@ -58,11 +63,12 @@ export class GrnFrameSizeDirective implements OnChanges {
   // ** Public API **
 
   public updatePaddingVerAndHor(): void {
+    // console.log(`updatePaddingVerAndHor()`);
     this.modifyBorderRadius();
     const paddingHor: GrnFrameSizePaddingHorRes | null = this.modifyHorizontalPadding();
     const paddingVer: GrnFrameSizePaddingVerRes | null = this.modifyverticalPadding();
     if (paddingHor !== null && paddingVer !== null) {
-      this.grnFrameSizeChange.emit({
+      this.paddingVerHorRes = {
         ...paddingHor,
         ...paddingVer,
         ...{
@@ -70,7 +76,8 @@ export class GrnFrameSizeDirective implements OnChanges {
           lineHeight: this.lineHeight,
           exterior: this.grnFrameSizePrepareData?.getExterior() || '',
         },
-      });
+      };
+      this.grnFrameSizeChange.emit(this.paddingVerHorRes);
     }
   }
 

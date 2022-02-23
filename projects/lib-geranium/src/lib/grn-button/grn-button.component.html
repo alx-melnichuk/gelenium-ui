@@ -5,14 +5,14 @@
     grn-btn
     type="button"
     tabindex="0"
-    [grnFrameExteriorButton]="exterior || currConfig.exterior || null"
+    [grnFrameExteriorButton]="exterior || currConfig?.exterior || null"
     [grnFrameExteriorButtonElementRef]="hostRef"
     #grnFrameExteriorButton="grnFrameExteriorButton"
     (grnFrameExteriorButtonChange)="grnFrameSize.updatePaddingVerAndHor()"
-    [grnFrameSize]="frameSize || currConfig.frameSize || null"
+    [grnFrameSize]="frameSize || currConfig?.frameSize || null"
     #grnFrameSize="grnFrameSize"
-    [grnFrameSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
-    [grnFrameSizeLabelPd]="currConfig.labelPd || null"
+    [grnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
+    [grnFrameSizeLabelPd]="currConfig?.labelPd || null"
     [grnFrameSizePrepareData]="grnFrameExteriorButton"
     [attr.id]="id"
     [attr.disabled]="isDisabled2 ? '' : null"
@@ -32,14 +32,14 @@
 <ng-template #elseBlockLink>
   <div class="grn-btn grn-settings"
     grn-btn
-    [grnFrameExteriorButton]="exterior || currConfig.exterior || null"
+    [grnFrameExteriorButton]="exterior || currConfig?.exterior || null"
     [grnFrameExteriorButtonElementRef]="hostRef"
     #grnFrameExteriorButton="grnFrameExteriorButton"
     (grnFrameExteriorButtonChange)="grnFrameSize.updatePaddingVerAndHor()"
-    [grnFrameSize]="frameSize || currConfig.frameSize || null"
+    [grnFrameSize]="frameSize || currConfig?.frameSize || null"
     #grnFrameSize="grnFrameSize"
-    [grnFrameSizeValue]="currConfig.frameSizeValue || defaultFrameSize"
-    [grnFrameSizeLabelPd]="currConfig.labelPd || null"
+    [grnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
+    [grnFrameSizeLabelPd]="currConfig?.labelPd || null"
     [grnFrameSizePrepareData]="grnFrameExteriorButton"
     [attr.id]="id"
     [attr.dis]="isDisabled2 ? '' : null"
@@ -54,10 +54,10 @@
 </ng-template>
 
 <ng-template #templateOrnament>
-  <i orn-lf>
+  <span orn-lf>
     <ng-content select="[grn-orn-lf]"></ng-content>
-  </i>
-  <i orn-rg>
+  </span>
+  <span orn-rg>
     <ng-content select="[grn-orn-rg]"></ng-content>
-  </i>
+  </span>
 </ng-template>

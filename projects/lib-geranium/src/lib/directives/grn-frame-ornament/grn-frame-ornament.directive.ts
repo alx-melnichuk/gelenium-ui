@@ -27,7 +27,7 @@ export class GrnFrameOrnamentDirective implements OnChanges, AfterContentInit {
   private ornamentLfWidth = 0;
   private ornamentRgWidth = 0;
 
-  constructor(private hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
+  constructor(public hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.isInit) {

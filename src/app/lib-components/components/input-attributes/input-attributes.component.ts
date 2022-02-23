@@ -76,6 +76,7 @@ export class InputAttributesComponent {
   public config02f: GrnFrameInputConfig = {
     labelPd: 40,
   };
+  public config: GrnFrameInputConfig = { exterior: InputExterior.underline };
   // public config02f: GrnFrameInputConfig = {
   //   exterior?: InputExterior;
   //   frameSize?: FrameSize;
@@ -88,6 +89,8 @@ export class InputAttributesComponent {
   // };
   public isRequired = false;
   public isError = false;
+
+  public isConfig = false;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
@@ -107,8 +110,5 @@ export class InputAttributesComponent {
       result = this.config02f;
     }
     return result;
-  }
-  public doClick(): void {
-    console.log('doClick()');
   }
 }
