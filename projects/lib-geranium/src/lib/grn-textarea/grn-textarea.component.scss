@@ -7,12 +7,15 @@
 grn-textarea {
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
+  position: relative;
   padding: 0;
   vertical-align: top;
   &[wdFull] {
     width: 100%;
+    .gt-textarea {
+      width: 100%;
+    }
   }
-  position: relative;
 
   // Textarea
   // The 'gfi-elem' style sets the line height: 1.4375em;
@@ -28,8 +31,6 @@ grn-textarea {
     margin: 0;
     padding: 0;
     -webkit-tap-highlight-color: transparent;
-    min-width: 0;
-    width: 100%;
     -webkit-animation-name: mui-auto-fill-cancel;
     animation-name: mui-auto-fill-cancel;
     -webkit-animation-duration: 10ms;

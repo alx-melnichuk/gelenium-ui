@@ -11,6 +11,9 @@ grn-input {
   vertical-align: top;
   &[wdFull] {
     width: 100%;
+    .gi-input {
+      width: 100%;
+    }
   }
 
   // Input
@@ -27,8 +30,6 @@ grn-input {
     margin: 0;
     padding: 0;
     -webkit-tap-highlight-color: transparent;
-    min-width: 0;
-    width: 100%;
     -webkit-animation-name: mui-auto-fill-cancel;
     animation-name: mui-auto-fill-cancel;
     -webkit-animation-duration: 10ms;

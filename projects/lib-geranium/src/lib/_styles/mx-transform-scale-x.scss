@@ -1,7 +1,0 @@
-
-@mixin mxTransformScaleX($scaleX) {
-  -webkit-transform: scaleX($scaleX);
-  -moz-transform: scaleX($scaleX);
-  -ms-transform: scaleX($scaleX);
-  transform: scaleX($scaleX);
-}

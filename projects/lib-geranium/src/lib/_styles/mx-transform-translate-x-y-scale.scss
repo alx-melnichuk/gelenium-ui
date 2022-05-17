@@ -1,7 +1,0 @@
-
-@mixin mxTransformTranslateXYScale($translateX, $translateY, $scale) {
-  -webkit-transform: translate($translateX, $translateY) scale($scale);
-  -moz-transform: translate($translateX, $translateY) scale($scale);
-  -ms-transform: translate($translateX, $translateY) scale($scale);
-  transform: translate($translateX, $translateY) scale($scale);
-}

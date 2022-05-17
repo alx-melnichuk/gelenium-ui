@@ -3,8 +3,9 @@
 @import '../_styles/mx-align-items.scss';
 @import '../_styles/mx-display-inline-flex.scss';
 @import '../_styles/mx-flex-direction.scss';
-@import '../_styles/mx-transform-scale-x.scss';
-@import '../_styles/mx-transform-translate-x-y-scale.scss';
+@import '../_styles/mx-transform-scale-x-y.scss';
+@import '../_styles/mx-transform-translate-x-y-scale-x-y.scss';
+@import '../_styles/mx-transform-scale-x-y-translate-x-y.scss';
 
 
 grn-frame-input { // outline: 1px dashed crimson;
@@ -16,9 +17,11 @@ grn-frame-input { // outline: 1px dashed crimson;
   margin: 0;
   border: 0;
   vertical-align: top;
+
   &[wdFull] {
     width: 100%;
   }
+
   // Small indentation of the legend from the border for "outlined" mode.
   --def-o-lgn-pd: 0.3em;
   // frameSize: 56px; font-size: 16px; 
@@ -86,10 +89,11 @@ grn-frame-input { // outline: 1px dashed crimson;
   &[shr], &[foc], &[fil] {
     label {
       max-width: calc(133% - var(--gfi-lbl-wd, var(--lbl-wd, var(--def-lbl-wd))));
-      @include mxTransformTranslateXYScale(
-        var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf))),
-        var(--gfi-lbl-trn-y, var(--lbl-trn-y, var(--def-lbl-trn-y))),
-        0.75
+      @include mxTransform_TranslateXY_ScaleXY(
+        var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf))), // $translateX
+        var(--gfi-lbl-trn-y, var(--lbl-trn-y, var(--def-lbl-trn-y))), // $translateY
+        0.75, // $scaleX
+        0.75  // $scaleY
       );
     }
   }
@@ -98,10 +102,11 @@ grn-frame-input { // outline: 1px dashed crimson;
     - var(--orn-lbl-pd-lf, var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf))))
     - var(--orn-lbl-pd-rg, var(--gfi-lbl-pd-rg, var(--s-lbl-pd-rg, var(--def-lbl-pd-rg))))
     );
-    @include mxTransformTranslateXYScale(
-      var(--orn-lbl-pd-lf, var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf)))),
-      var(--gfi-lbl2-trn-y, var(--lbl2-trn-y, var(--def-lbl2-trn-y))),
-      1
+    @include mxTransform_TranslateXY_ScaleXY(
+      var(--orn-lbl-pd-lf, var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf)))), // $translateX
+      var(--gfi-lbl2-trn-y, var(--lbl2-trn-y, var(--def-lbl2-trn-y))), // $translateY
+      1,  // $scaleX
+      1   // $scaleY
     );
   }
 
@@ -144,56 +149,58 @@ grn-frame-input { // outline: 1px dashed crimson;
     color: var(--gfi-dis-cl); // The color in state is disabled for an input element.
   }
 
-  // For "frame" underline and standard
-  &[frm-br]>div {
-    &:before {
-      left: 0;
-      bottom: 0;
-      content: "\00a0";
-      position: absolute;
-      right: 0;
-      -webkit-transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-      transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-      pointer-events: none;
-      border-bottom-width: 1px;
-      border-radius: inherit;
-    }
-    &:after {
-      left: 0;
-      bottom: 0;
-      content: "";
-      position: absolute;
-      right: 0;
-      @include mxTransformScaleX(0);
-      -webkit-transition: -webkit-transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-      transition: transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-      pointer-events: none;
-      border-bottom-width: 2px;
-      border-bottom-style: solid;
-      border-radius: inherit;
-    }
+  // The bottom border frame for the "underline" and "standard" mode.
+
+  // Fragment before the input field for the "underline" and "standard" mode.
+  &[frm-su]>div:before {
+    border-bottom: 1px solid var(--gfi-su-def-br-cl);
+    border-radius: inherit;
+    left: 0;
+    bottom: 0;
+    content: "\00a0";
+    position: absolute;
+    right: 0;
+    -webkit-transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    pointer-events: none;
   }
-  &[frm-br] {
-    &:not([dis])>div:before {
-      border-bottom-style: solid;
-    }
-    &[dis]>div:before {
-      border-bottom-style: dotted;
-    }
-    &:hover:not([dis])>div:before {
-      border-bottom-width: 2px;
-    }
-    &[foc]>div:after {
-      @include mxTransformScaleX(1);
-    }
+  &[frm-su][dis]>div:before {
+    border-bottom-style: dotted;
+  }
+
+  // Fragment after the input field for the "underline" and "standard" mode.
+  &[frm-su]>div:after {
+    border-bottom: 2px solid var(--gfi-foc-cl);
+    border-radius: inherit;
+    left: 0;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    right: 0;
+    @include mxTransform_ScaleXY(
+      0, // $scaleX
+      1  // $scaleY
+    );
+    -webkit-transition: -webkit-transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    transition: transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    pointer-events: none;
+  }
+  &[frm-su][err]>div:after {
+    border-bottom-color: var(--gfi-err-cl);
+  }
+  // The effect on gaining input focus is "increase the length of the bottom border from 0 to 100%."
+  // Effect on loss of input focus "reducing the length of the lower border from 100% to 0".
+  &[frm-su][foc]>div:after {
+    @include mxTransform_ScaleXY_TranslateXY(
+      1, // $scaleX
+      1, // $scaleY
+      0, // $translateX
+      0  // $translateY
+    );
   }
 
   // Border-bottom-color for "underline" and "standard" mode.
-  &[frm-br] {
-    // The state without mouse hover, error, focused and disabled.
-    &:not(:hover):not([err]):not([foc]):not([dis])>div:before {
-      border-bottom-color: var(--gfi-su-def-br-cl);
-    }
+  &[frm-su] {
     // The state with mouse hover but without error, focused and disabled.
     &:hover:not([err]):not([foc]):not([dis])>div:before {
       border-bottom-color: var(--gfi-hov-cl);
@@ -202,30 +209,30 @@ grn-frame-input { // outline: 1px dashed crimson;
     &[err]>div:before {
       border-bottom-color: var(--gfi-err-cl);
     }
-    &[err]>div:after {
-      border-bottom-color: var(--gfi-err-cl);
-    }
     // The state with mouse hover and error but without focused and disabled.
     &:hover[err]:not([foc]):not([dis])>div:before {
       border-bottom-color: var(--gfi-hov-err-cl);
-    }
-    // The state with focused but without error.
-    &[foc]:not([err])>div:after {
-      border-bottom-color: var(--gfi-foc-cl);
     }
     // The state with disabled but without error.
     &[dis]:not([err])>div:before {
       border-bottom-color: var(--gfi-dis-cl);
     }
   }
+  &[frm-su][ext-s] {
+    // The state with mouse hover but without error, focused and disabled.
+    &:hover:not([foc]):not([dis])>div:before {
+      border-bottom-width: 2px;
+    }
 
-  // underline
-  &[ext-u]>div {
+  }
+
+  // Background color animation for "underlined" mode.
+  &[bgr-u]>div {
     -webkit-transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
   }
   // Background-color for "underline" mode.
-  &[ext-u] {
+  &[bgr-u] {
     // The state without mouse hover, error, focused and disabled.
     &:not(:hover):not([err]):not([foc]):not([dis])>div {
       background-color: var(--gfi-u-def-bg-cl);
@@ -235,7 +242,7 @@ grn-frame-input { // outline: 1px dashed crimson;
       background-color: var(--gfi-u-hov-bg-cl);
     }
     // The state with error.
-    &[err]>div {
+    &:not([dis])[err]>div {
       background-color: var(--gfi-u-err-bg-cl);
     }
     // The state with mouse hover and error but without focused and disabled.
@@ -247,7 +254,7 @@ grn-frame-input { // outline: 1px dashed crimson;
       background-color: var(--gfi-u-foc-bg-cl);
     }
     // The state with disabled but without error.
-    &[dis]:not([err])>div {
+    &[dis]>div {
       background-color: var(--gfi-u-dis-bg-cl);
     }
   }
@@ -275,6 +282,9 @@ grn-frame-input { // outline: 1px dashed crimson;
   &[foc] fieldset {
     border-width: 2px;
     padding-left: calc(var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf))) - var(--gfi-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
+  }
+  &[dis] fieldset {
+    border-style: dotted;
   }
   // Border-color for "outlined" mode.
   // The state without mouse hover, error, focused and disabled.

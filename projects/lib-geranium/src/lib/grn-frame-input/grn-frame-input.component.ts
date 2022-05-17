@@ -130,11 +130,12 @@ export class GrnFrameInputComponent implements OnChanges, OnInit {
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', InputExteriorUtil.isOutlined(exterior) ? '' : null);
     HtmlElemUtil.setClass(this.renderer, elem, 'gfi-underline', InputExteriorUtil.isUnderline(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-u', InputExteriorUtil.isUnderline(exterior) ? '' : null);
+    HtmlElemUtil.setAttr(this.renderer, elem, 'bgr-u', InputExteriorUtil.isUnderline(exterior) ? '' : null);
     HtmlElemUtil.setClass(this.renderer, elem, 'gfi-standard', InputExteriorUtil.isStandard(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-s', InputExteriorUtil.isStandard(exterior) ? '' : null);
     const isBorder = InputExteriorUtil.isStandard(exterior) || InputExteriorUtil.isUnderline(exterior);
     HtmlElemUtil.setClass(this.renderer, elem, 'gfi-border', isBorder);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'frm-br', isBorder ? '' : null);
+    HtmlElemUtil.setAttr(this.renderer, elem, 'frm-su', isBorder ? '' : null);
   }
 
   private settingLabelShrink(elem: ElementRef<HTMLElement>, isLabelShrink: boolean): void {

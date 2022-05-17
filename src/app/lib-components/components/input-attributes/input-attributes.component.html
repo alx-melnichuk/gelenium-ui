@@ -1,5 +1,4 @@
-<section mr-vr
-  *ngIf="false">
+<section mr-vr>
   <h3>Attributes</h3>
   <p>The following attributes are supported:</p>
   <ul>
@@ -63,39 +62,13 @@
   </mat-button-toggle-group>
 </section>
 
-<section mr-vr>
-  <label>
-    <input type="checkbox"
-      [(ngModel)]="isConfig" />isConfig
-  </label>
-</section>
-
 <form [formGroup]="formGroup02"
   novalidate
   autocomplete="off">
 
   <div class="app-group">
 
-    <!-- demo -->
     <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: lbShrink.</em>
-        </small>
-      </div>
-      <grn-input formControlName="input02e"
-        label="Permanent label"
-        lbShrink9
-        hiddenLabel9
-        [config]="isConfig ? config : null"
-        helperText="The position of the label is fixed."
-        [exterior]="isConfig ? null : exterior02">
-      </grn-input>
-    </div>
-
-
-
-    <!-- <div class="app-elem">
       <div>
         <small>
           <em>State: empty.</em>
@@ -269,7 +242,6 @@
         </small>
       </div>
       <grn-input formControlName="input02l"
-        style="width: 100px;"
         [label]="!formGroup02.controls.input02l.value
           ? 'Enter color':'Color'"
         lbShrink
@@ -318,7 +290,7 @@
           + (formGroup02.controls.input02n.value) + '\''"
         [exterior]="exterior02">
       </grn-input>
-    </div> -->
+    </div>
 
   </div>
 
