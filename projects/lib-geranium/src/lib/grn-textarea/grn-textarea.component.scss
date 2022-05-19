@@ -3,18 +3,30 @@
 @import '../_styles/mx-display-inline-flex.scss';
 @import '../_styles/mx-flex-direction.scss';
 
-
 grn-textarea {
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
   position: relative;
   padding: 0;
   vertical-align: top;
+
+  &>div[ext] {
+    width: 100%;
+  }
+
   &[wdFull] {
     width: 100%;
     .gt-textarea {
       width: 100%;
     }
+  }
+
+  &[noHeEllipsis] {
+    grn-hint-or-error {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+    }  
   }
 
   // Textarea
@@ -43,7 +55,7 @@ grn-textarea {
   }
 
   grn-hint-or-error {
-    margin-right: var(--pd-lf);
-    margin-left: var(--pd-lf);  
+    margin-left: var(--gt-he-pd-lf, var(--he-pd-lf));
+    margin-right: var(--gt-he-pd-rg, var(--he-pd-rg)); 
   }
 }

@@ -41,7 +41,7 @@
       -webkit-tap-highlight-color: transparent;
       align-items: center;
       background-color: transparent;
-      border-radius: var(--gb-br-rd, var(--s-br-rd, var(--def-br-rd)));
+      border-radius: var(--gb-br-rd, var(--br-rd, var(--def-br-rd)));
       box-sizing: border-box;
       cursor: pointer;
       display: inline-flex;
@@ -68,8 +68,8 @@
       // }
     }
     &>span, &>a {
-      padding-top: var(--gb-lbl-pd-tp, var(--s-lbl-pd-tp, var(--def-lbl-pd-tp)));
-      padding-bottom: var(--gb-lbl-pd-bt, var(--s-lbl-pd-bt, var(--def-lbl-pd-bt)));
+      padding-top: var(--gb-lbl-pd-tp, var(--lbl-pd-tp, var(--def-lbl-pd-tp)));
+      padding-bottom: var(--gb-lbl-pd-bt, var(--lbl-pd-bt, var(--def-lbl-pd-bt)));
     }
     &[dis] {
       cursor: default;
@@ -172,10 +172,10 @@
       order: 1;
     }
     &>span[orn-lf]:empty~.gb-elem-pd-hor {
-      padding-left: var(--gb-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf)));
+      padding-left: var(--gb-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf)));
     }
     &>span[orn-rg]:empty~.gb-elem-pd-hor {
-      padding-right: var(--gb-lbl-pd-rg, var(--s-lbl-pd-rg, var(--def-lbl-pd-rg)));
+      padding-right: var(--gb-lbl-pd-rg, var(--lbl-pd-rg, var(--def-lbl-pd-rg)));
     }
   }
 }

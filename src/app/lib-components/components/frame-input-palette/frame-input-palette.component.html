@@ -81,170 +81,102 @@
   </mat-button-toggle-group>
 </section>
 
-<form [formGroup]="formGroup06"
+<form [formGroup]="formGroup06a"
   novalidate
   autocomplete="off">
 
-  <div>
-    <div class="app-group fip-specific">
+  <div class="app-group fip-specific">
 
-      <div class="app-elem">
-        <div>
-          <small>
-            <em>State: empty.</em>
-          </small>
-        </div>
-        <grn-input formControlName="input06a"
-          label="Enter value"
-          [exterior]="exterior06">
-        </grn-input>
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>State: empty.</em>
+        </small>
       </div>
+      <grn-input formControlName="input06a"
+        label="Enter value"
+        [exterior]="exterior06">
+      </grn-input>
+    </div>
 
-      <div class="app-elem">
-        <div>
-          <small>
-            <em>Attributes: isRequired, helperText.</em>
-          </small>
-        </div>
-        <grn-input formControlName="input06b"
-          label="Required field"
-          isRequired
-          helperText="A value must be entered."
-          [exterior]="exterior06">
-        </grn-input>
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: isRequired, helperText.</em>
+        </small>
       </div>
+      <grn-input formControlName="input06b"
+        label="Required field"
+        isRequired
+        helperText="A value must be entered."
+        [exterior]="exterior06">
+      </grn-input>
+    </div>
 
-      <div class="app-elem">
-        <div>
-          <small>
-            <em>Attribute: isReadOnly.</em>
-          </small>
-        </div>
-        <grn-input formControlName="input06c"
-          label="Read Only"
-          isReadOnly
-          helperText="The parameter is read only."
-          [exterior]="exterior06">
-        </grn-input>
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isReadOnly.</em>
+        </small>
       </div>
+      <grn-input formControlName="input06c"
+        label="Read Only"
+        isReadOnly
+        helperText="The parameter is read only."
+        [exterior]="exterior06">
+      </grn-input>
+    </div>
 
-      <div class="app-elem">
-        <div>
-          <small>
-            <em>Attribute: isDisabled.</em>
-          </small>
-        </div>
-        <grn-input formControlName="input06d"
-          label="Disabled"
-          isDisabled
-          helperText="The parameter is disabled."
-          [exterior]="exterior06">
-        </grn-input>
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isDisabled.</em>
+        </small>
       </div>
+      <grn-input formControlName="input06d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior06">
+      </grn-input>
+    </div>
 
-      <div class="app-elem">
-        <div>
-          <small>
-            <em>Attribute: isRequired, minLength.</em>
-          </small>
-        </div>
-        <grn-input formControlName="input06e"
-          [label]="controls06.input06e.errors ? 'Error':'Value'"
-          isRequired
-          [minLength]="minLength06e"
-          helperText="
-        {{(controls06.input06e.errors?.required ?
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isRequired, minLength.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input06e"
+        [label]="controls06a.input06e.errors ? 'Error':'Value'"
+        isRequired
+        [minLength]="minLength06e"
+        helperText="
+        {{(controls06a.input06e.errors?.required ?
           'Required field.':
-          (controls06.input06e.errors?.minlength ?
+          (controls06a.input06e.errors?.minlength ?
             'Minimum length '
-            + controls06.input06e.errors?.minlength.requiredLength
+            + controls06a.input06e.errors?.minlength.requiredLength
             + ' characters.'
             :'Enter value.'
           )
         )}}"
-          [exterior]="exterior06">
-        </grn-input>
-      </div>
-
-      <div class="app-elem">
-        <div>
-          <small>
-            <em>Attribute: isError + isDisabled.</em>
-          </small>
-        </div>
-        <grn-input formControlName="input06f"
-          label="Error-Disabled"
-          isError
-          isDisabled
-          helperText="The parameter is disabled."
-          [exterior]="exterior06">
-        </grn-input>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="app-group">
-    <small>
-      <em>Style like Bootstrap</em>
-    </small>
-  </div>
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attributes: isRequired, helperText.</em>
-        </small>
-      </div>
-      <grn-input class="fip-bstrap"
-        formControlName="input06g"
-        frameSize="short"
-        hiddenLabel
-        exterior="outlined"
-        isRequired
-        helperText="{{
-          (controls06.input06g.errors?.required
-            ? 'Required field.': 'Enter value.')
-        }}">
+        [exterior]="exterior06">
       </grn-input>
     </div>
 
     <div class="app-elem">
       <div>
         <small>
-          <em>Attributes: isRequired, helperText.</em>
+          <em>Attribute: isError + isDisabled.</em>
         </small>
       </div>
-      <grn-input class="fip-bstrap"
-        style="width: 25ch;"
-        formControlName="input06h"
-        frameSize="short"
-        hiddenLabel
-        exterior="outlined"
-        isRequired
-        helperText="{{
-          (controls06.input06h.errors?.required
-            ? 'Required field.': 'Enter value.')
-        }}">
-      </grn-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attributes: isDisabled.</em>
-        </small>
-      </div>
-      <grn-input class="fip-bstrap"
-        formControlName="input06i"
-        frameSize="short"
-        hiddenLabel
-        exterior="outlined"
+      <grn-input formControlName="input06f"
+        label="Error-Disabled"
+        isError
         isDisabled
-        helperText="The parameter is disabled.">
+        helperText="The parameter is disabled."
+        [exterior]="exterior06">
       </grn-input>
     </div>
 
@@ -261,134 +193,21 @@
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;form [formGroup]="formGroup06"
+&lt;form [formGroup]="formGroup06a"
   novalidate
   autocomplete="off"&gt;
 
-  &lt;div&gt;
-    &lt;div class="app-group fip-specific"&gt;
-
-      &lt;div class="app-elem"&gt;
-        &lt;div&gt;
-          &lt;small&gt;
-            &lt;em&gt;State: empty.&lt;/em&gt;
-          &lt;/small&gt;
-        &lt;/div&gt;
-        &lt;grn-input formControlName="input06a"
-          label="Enter value"
-          [exterior]="exterior06"&gt;
-        &lt;/grn-input&gt;
-      &lt;/div&gt;
-
-      &lt;div class="app-elem"&gt;
-        &lt;div&gt;
-          &lt;small&gt;
-            &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
-          &lt;/small&gt;
-        &lt;/div&gt;
-        &lt;grn-input formControlName="input06b"
-          label="Required field"
-          isRequired
-          helperText="A value must be entered."
-          [exterior]="exterior06"&gt;
-        &lt;/grn-input&gt;
-      &lt;/div&gt;
-
-      &lt;div class="app-elem"&gt;
-        &lt;div&gt;
-          &lt;small&gt;
-            &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
-          &lt;/small&gt;
-        &lt;/div&gt;
-        &lt;grn-input formControlName="input06c"
-          label="Read Only"
-          isReadOnly
-          helperText="The parameter is read only."
-          [exterior]="exterior06"&gt;
-        &lt;/grn-input&gt;
-      &lt;/div&gt;
-
-      &lt;div class="app-elem"&gt;
-        &lt;div&gt;
-          &lt;small&gt;
-            &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
-          &lt;/small&gt;
-        &lt;/div&gt;
-        &lt;grn-input formControlName="input06d"
-          label="Disabled"
-          isDisabled
-          helperText="The parameter is disabled."
-          [exterior]="exterior06"&gt;
-        &lt;/grn-input&gt;
-      &lt;/div&gt;
-
-      &lt;div class="app-elem"&gt;
-        &lt;div&gt;
-          &lt;small&gt;
-            &lt;em&gt;Attribute: isRequired, minLength.&lt;/em&gt;
-          &lt;/small&gt;
-        &lt;/div&gt;
-        &lt;grn-input formControlName="input06e"
-          [label]="controls06.input06e.errors ? 'Error':'Value'"
-          isRequired
-          [minLength]="minLength06e"
-          helperText="
-        <b>&#123;</b>&#123;(controls06.input06e.errors?.required ?
-          'Required field.':
-          (controls06.input06e.errors?.minlength ?
-            'Minimum length '
-            + controls06.input06e.errors?.minlength.requiredLength
-            + ' characters.'
-            :'Enter value.'
-          )
-        )&#125;&#125;"
-          [exterior]="exterior06"&gt;
-        &lt;/grn-input&gt;
-      &lt;/div&gt;
-
-      &lt;div class="app-elem"&gt;
-        &lt;div&gt;
-          &lt;small&gt;
-            &lt;em&gt;Attribute: isError + isDisabled.&lt;/em&gt;
-          &lt;/small&gt;
-        &lt;/div&gt;
-        &lt;grn-input formControlName="input06f"
-          label="Error-Disabled"
-          isError
-          isDisabled
-          helperText="The parameter is disabled."
-          [exterior]="exterior06"&gt;
-        &lt;/grn-input&gt;
-      &lt;/div&gt;
-
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-
-  &lt;div class="app-group"&gt;
-    &lt;small&gt;
-      &lt;em&gt;Style like Bootstrap&lt;/em&gt;
-    &lt;/small&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-group"&gt;
+  &lt;div class="app-group fip-specific"&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
+          &lt;em&gt;State: empty.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input class="fip-bstrap"
-        formControlName="input06g"
-        frameSize="short"
-        hiddenLabel
-        exterior="outlined"
-        isRequired
-        helperText="<b>&#123;</b>&#123;
-          (controls06.input06g.errors?.required
-            ? 'Required field.': 'Enter value.')
-        &#125;&#125;"&gt;
+      &lt;grn-input formControlName="input06a"
+        label="Enter value"
+        [exterior]="exterior06"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -398,33 +217,78 @@
           &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input class="fip-bstrap"
-        style="width: 25ch;"
-        formControlName="input06h"
-        frameSize="short"
-        hiddenLabel
-        exterior="outlined"
+      &lt;grn-input formControlName="input06b"
+        label="Required field"
         isRequired
-        helperText="<b>&#123;</b>&#123;
-          (controls06.input06h.errors?.required
-            ? 'Required field.': 'Enter value.')
-        &#125;&#125;"&gt;
+        helperText="A value must be entered."
+        [exterior]="exterior06"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attributes: isDisabled.&lt;/em&gt;
+          &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input class="fip-bstrap"
-        formControlName="input06i"
-        frameSize="short"
-        hiddenLabel
-        exterior="outlined"
+      &lt;grn-input formControlName="input06c"
+        label="Read Only"
+        isReadOnly
+        helperText="The parameter is read only."
+        [exterior]="exterior06"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06d"
+        label="Disabled"
         isDisabled
-        helperText="The parameter is disabled."&gt;
+        helperText="The parameter is disabled."
+        [exterior]="exterior06"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isRequired, minLength.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06e"
+        [label]="controls06a.input06e.errors ? 'Error':'Value'"
+        isRequired
+        [minLength]="minLength06e"
+        helperText="
+      <b>&#123;</b>&#123;(controls06a.input06e.errors?.required ?
+        'Required field.':
+        (controls06a.input06e.errors?.minlength ?
+          'Minimum length '
+          + controls06a.input06e.errors?.minlength.requiredLength
+          + ' characters.'
+          :'Enter value.'
+        )
+      )&#125;&#125;"
+        [exterior]="exterior06"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isError + isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06f"
+        label="Error-Disabled"
+        isError
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior06"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -449,7 +313,7 @@ import &#123;
 &#125;)
 export class FrameInputComponent &#123;
   public minLength06e = 5;
-  public controls06 = &#123;
+  public controls06a = &#123;
     input06a: new FormControl('', []),
     input06b: new FormControl('Hello World', [Validators.required]),
     input06c: new FormControl('Hello World', []),
@@ -458,11 +322,8 @@ export class FrameInputComponent &#123;
       Validators.required, Validators.minLength(this.minLength06e)
     ]),
     input06f: new FormControl('Hello World', []),
-    input06g: new FormControl('Hello World', [Validators.required]),
-    input06h: new FormControl('', [Validators.required]),
-    input06i: new FormControl('Hello World', []),
   &#125;;
-  public formGroup06: FormGroup = new FormGroup(this.controls06);
+  public formGroup06a: FormGroup = new FormGroup(this.controls06a);
   public exterior06 = 'outlined';
 &#125;</pre></code>
         </mat-tab>
@@ -517,7 +378,7 @@ export class FrameInputComponent &#123;
 .fip-specific .grn-frame-input.gfi-focused:not(.gfi-error)&gt;.gfi-label &#123;
   color: var(--fip-focused-color);
 &#125;// The state with disabled but without error.
-.fip-specific .grn-frame-input.gfi-disabled:not(.gfi-error)&gt;.gfi-label &#123;
+.fip-specific .grn-frame-input.gfi-disabled&gt;.gfi-label &#123;
   color: var(--fip-disabled-color);
 &#125;
 
@@ -539,7 +400,7 @@ export class FrameInputComponent &#123;
 .fip-specific .grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset &#123;
   border-color: var(--fip-focused-color);
 &#125;// The state with disabled but without error.
-.fip-specific .grn-frame-input.gfi-disabled:not(.gfi-error) .gfi-fieldset &#123;
+.fip-specific .grn-frame-input.gfi-disabled .gfi-fieldset &#123;
   border-color: var(--fip-disabled-color);
 &#125;
 
@@ -560,7 +421,7 @@ export class FrameInputComponent &#123;
 .fip-specific .gfi-underline.gfi-focused:not(.gfi-error)&gt;.gfi-frame &#123;
   background-color: var(--fip-u-focused-bg-color);
 &#125; // The state with disabled but without error.
-.fip-specific .gfi-underline.gfi-disabled:not(.gfi-error)&gt;.gfi-frame &#123;
+.fip-specific .gfi-underline.gfi-disabled&gt;.gfi-frame &#123;
   background-color: var(--fip-u-disabled-bg-color);
 &#125;
 
@@ -584,41 +445,224 @@ export class FrameInputComponent &#123;
 .fip-specific .gfi-border.gfi-focused:not(.gfi-error)&gt;.gfi-frame:after &#123;
   border-bottom-color: var(--fip-focused-color);
 &#125; // The state with disabled but without error.
-.fip-specific .gfi-border.gfi-disabled:not(.gfi-error)&gt;.gfi-frame:before &#123;
+.fip-specific .gfi-border.gfi-disabled&gt;.gfi-frame:before &#123;
   border-bottom-color: var(--fip-disabled-color);
 &#125;
 
-// Color for "helperText".
-// The default color for the helperText.
-.fip-specific .gfi-helper-text:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) &#123;
-  color: var(--fip-label-default-color);
-&#125; // The color of the helperText in an error state.
-.fip-specific .gfi-helper-text.gfi-error &#123;
-  color: var(--fip-error-color);
-&#125; // The color of the helperText when getting focus.
-.fip-specific .gfi-helper-text.gfi-focused:not(.gfi-error) &#123;
-  color: var(--fip-label-default-color);
-&#125; // The color of the helperText in state is disabled.
-.fip-specific .gfi-helper-text.gfi-disabled:not(.gfi-error) &#123;
-  color: var(--fip-disabled-color);
-&#125;
-
+// Color for "HintOrError".
 .fip-specific .gfi-hint-or-error &#123;
   // The state without error, focused and disabled.
   &:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) &#123;
     color: var(--fip-label-default-color);
   &#125; // The state with error.
-  &.gfi-error &#123;
+  &.gfi-error:not(.gfi-disabled) &#123;
     color: var(--fip-error-color);
   &#125; // The state with focused but without error.
   &.gfi-focused:not(.gfi-error) &#123;
     color: var(--fip-focused-color);
   &#125; // The state with disabled but without error.
-  &.gfi-disabled:not(.gfi-error) &#123;
+  &.gfi-disabled &#123;
     color: var(--fip-disabled-color);
   &#125;
-&#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
 
+<form [formGroup]="formGroup06b"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+    <small>
+      <em>Style like Bootstrap</em>
+    </small>
+  </div>
+
+  <div class="app-group">
+
+    <div class="app-elem"
+      style="width: 15em;">
+      <div>
+        <small>
+          <em>Attributes: isRequired, helperText.</em>
+        </small>
+      </div>
+      <grn-input class="fip-bstrap"
+        formControlName="input06g"
+        frameSize="short"
+        hiddenLabel
+        exterior="outlined"
+        isRequired
+        wdFull
+        helperText="{{
+          (controls06b.input06g.errors?.required
+            ? 'Required field.': 'Enter value.')
+        }}">
+      </grn-input>
+    </div>
+
+    <div class="app-elem"
+      style="width: 15em;">
+      <div>
+        <small>
+          <em>Attributes: isRequired, helperText.</em>
+        </small>
+      </div>
+      <grn-input class="fip-bstrap"
+        formControlName="input06h"
+        frameSize="short"
+        hiddenLabel
+        exterior="outlined"
+        isRequired
+        wdFull
+        helperText="{{
+          (controls06b.input06h.errors?.required
+            ? 'Required field.': 'Enter value.')
+        }}">
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: isDisabled.</em>
+        </small>
+      </div>
+      <grn-input class="fip-bstrap"
+        formControlName="input06i"
+        frameSize="short"
+        hiddenLabel
+        exterior="outlined"
+        isDisabled
+        helperText="The parameter is disabled.">
+      </grn-input>
+    </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup06b"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;small&gt;
+      &lt;em&gt;Style like Bootstrap&lt;/em&gt;
+    &lt;/small&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"
+      style="width: 15em;"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input class="fip-bstrap"
+        formControlName="input06g"
+        frameSize="short"
+        hiddenLabel
+        exterior="outlined"
+        isRequired
+        wdFull
+        helperText="<b>&#123;</b>&#123;
+          (controls06b.input06g.errors?.required
+            ? 'Required field.': 'Enter value.')
+        &#125;&#125;"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"
+      style="width: 15em;"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input class="fip-bstrap"
+        formControlName="input06h"
+        frameSize="short"
+        hiddenLabel
+        exterior="outlined"
+        isRequired
+        wdFull
+        helperText="<b>&#123;</b>&#123;
+          (controls06b.input06h.errors?.required
+            ? 'Required field.': 'Enter value.')
+        &#125;&#125;"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input class="fip-bstrap"
+        formControlName="input06i"
+        frameSize="short"
+        hiddenLabel
+        exterior="outlined"
+        isDisabled
+        helperText="The parameter is disabled."&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameInputComponent &#123;
+  public controls06b = &#123;
+    input06g: new FormControl('Hello World', [Validators.required]),
+    input06h: new FormControl('', [Validators.required]),
+    input06i: new FormControl('Hello World', []),
+  &#125;;
+  public formGroup06b: FormGroup = new FormGroup(this.controls06b);
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
 
 // BootStrap
 .fip-bstrap &#123;
@@ -629,44 +673,51 @@ export class FrameInputComponent &#123;
   --g-hov-err-cl: #dc3545;
   --g-foc-cl: #80bdff;
   --g-o-def-br-cl: #ced4da;
+  --g-dis-bgr-cl: #e9ecef;
+&#125;
+.fip-bstrap .grn-frame-input &#123;
+  line-height: 1.5;
 &#125;
 
-.fip-bstrap&gt;.grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
   border-color: var(--g-o-def-br-cl);
 &#125;
-.fip-bstrap&gt;.grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
   border-color: var(--g-o-def-br-cl);
 &#125;
-.fip-bstrap&gt;.grn-frame-input.gfi-error .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input.gfi-error .gfi-fieldset &#123;
   border-color: var(--g-err-cl);
 &#125;
-.fip-bstrap&gt;.grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
   border-color: var(--g-hov-err-cl);
 &#125;
-.fip-bstrap&gt;.grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset &#123;
   border-color: var(--g-foc-cl);
 &#125;
-.fip-bstrap&gt;.grn-frame-input.gfi-disabled .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input.gfi-disabled .gfi-fieldset &#123;
   border-color: var(--g-o-def-br-cl);
 &#125;
-.fip-bstrap&gt;.grn-frame-input.gfi-disabled &#123;
-  background-color: #e9ecef;
+.fip-bstrap .grn-frame-input.gfi-disabled &#123;
+  background-color: var(--g-dis-bgr-cl);
   opacity: 1;
 &#125;
-.fip-bstrap&gt;grn-hint-or-error.gfi-error &#123;
+.fip-bstrap grn-hint-or-error.gfi-error &#123;
   color: var(--g-err-cl);
 &#125;
 
-.fip-bstrap&gt;.grn-frame-input.gfi-focused .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input.gfi-disabled .gfi-fieldset &#123;
+  border-style: solid;
+&#125;
+.fip-bstrap .grn-frame-input.gfi-focused .gfi-fieldset &#123;
   border-width: 1px;
 &#125;
-.fip-bstrap&gt;.grn-frame-input.gfi-focused.gfi-error .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input.gfi-focused.gfi-error .gfi-fieldset &#123;
   box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
 &#125;
-.fip-bstrap&gt;.grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset &#123;
   box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
 &#125;
-.fip-bstrap>.grn-frame-input.gfi-error .gi-input &#123;
+.fip-bstrap .grn-frame-input.gfi-error .gi-input &#123;
   padding-right: 1.4em;
   background-image: url("data:image/svg+xml,"
   + "&lt;svg xmlns='http://www.w3.org/2000/svg' width='12' "

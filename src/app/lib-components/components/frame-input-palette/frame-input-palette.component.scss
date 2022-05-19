@@ -42,7 +42,7 @@ app-frame-input-palette {
   .fip-specific .grn-frame-input.gfi-focused:not(.gfi-error)>.gfi-label {
     color: var(--fip-focused-color);
   }// The state with disabled but without error.
-  .fip-specific .grn-frame-input.gfi-disabled:not(.gfi-error)>.gfi-label {
+  .fip-specific .grn-frame-input.gfi-disabled>.gfi-label {
     color: var(--fip-disabled-color);
   }
 
@@ -64,7 +64,7 @@ app-frame-input-palette {
   .fip-specific .grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset {
     border-color: var(--fip-focused-color);
   }// The state with disabled but without error.
-  .fip-specific .grn-frame-input.gfi-disabled:not(.gfi-error) .gfi-fieldset {
+  .fip-specific .grn-frame-input.gfi-disabled .gfi-fieldset {
     border-color: var(--fip-disabled-color);
   }
   
@@ -85,7 +85,7 @@ app-frame-input-palette {
   .fip-specific .gfi-underline.gfi-focused:not(.gfi-error)>.gfi-frame {
     background-color: var(--fip-u-focused-bg-color);
   } // The state with disabled but without error.
-  .fip-specific .gfi-underline.gfi-disabled:not(.gfi-error)>.gfi-frame {
+  .fip-specific .gfi-underline.gfi-disabled>.gfi-frame {
     background-color: var(--fip-u-disabled-bg-color);
   }
 
@@ -109,37 +109,23 @@ app-frame-input-palette {
   .fip-specific .gfi-border.gfi-focused:not(.gfi-error)>.gfi-frame:after {
     border-bottom-color: var(--fip-focused-color);
   } // The state with disabled but without error.
-  .fip-specific .gfi-border.gfi-disabled:not(.gfi-error)>.gfi-frame:before {
+  .fip-specific .gfi-border.gfi-disabled>.gfi-frame:before {
     border-bottom-color: var(--fip-disabled-color);
   }
 
-  // Color for "helperText".
-  // The default color for the helperText.
-  .fip-specific .gfi-helper-text:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
-    color: var(--fip-label-default-color);
-  } // The color of the helperText in an error state.
-  .fip-specific .gfi-helper-text.gfi-error {
-    color: var(--fip-error-color);
-  } // The color of the helperText when getting focus.
-  .fip-specific .gfi-helper-text.gfi-focused:not(.gfi-error) {
-    color: var(--fip-label-default-color);
-  } // The color of the helperText in state is disabled.
-  .fip-specific .gfi-helper-text.gfi-disabled:not(.gfi-error) {
-    color: var(--fip-disabled-color);
-  }
-
+  // Color for "HintOrError".
   .fip-specific .gfi-hint-or-error {
     // The state without error, focused and disabled.
     &:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
       color: var(--fip-label-default-color);
     } // The state with error.
-    &.gfi-error {
+    &.gfi-error:not(.gfi-disabled) {
       color: var(--fip-error-color);
     } // The state with focused but without error.
     &.gfi-focused:not(.gfi-error) {
       color: var(--fip-focused-color);
     } // The state with disabled but without error.
-    &.gfi-disabled:not(.gfi-error) {
+    &.gfi-disabled {
       color: var(--fip-disabled-color);
     }
   }
@@ -153,44 +139,51 @@ app-frame-input-palette {
     --g-hov-err-cl: #dc3545;
     --g-foc-cl: #80bdff;
     --g-o-def-br-cl: #ced4da;
+    --g-dis-bgr-cl: #e9ecef;
+  }
+  .fip-bstrap .grn-frame-input {
+    line-height: 1.5;
   }
 
-  .fip-bstrap>.grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
+  .fip-bstrap .grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
     border-color: var(--g-o-def-br-cl);
   }
-  .fip-bstrap>.grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
+  .fip-bstrap .grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
     border-color: var(--g-o-def-br-cl);
   }
-  .fip-bstrap>.grn-frame-input.gfi-error .gfi-fieldset {
+  .fip-bstrap .grn-frame-input.gfi-error .gfi-fieldset {
     border-color: var(--g-err-cl);
   }
-  .fip-bstrap>.grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
+  .fip-bstrap .grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset {
     border-color: var(--g-hov-err-cl);
   }
-  .fip-bstrap>.grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset {
+  .fip-bstrap .grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset {
     border-color: var(--g-foc-cl);
   }
-  .fip-bstrap>.grn-frame-input.gfi-disabled .gfi-fieldset {
+  .fip-bstrap .grn-frame-input.gfi-disabled .gfi-fieldset {
     border-color: var(--g-o-def-br-cl);
   }
-  .fip-bstrap>.grn-frame-input.gfi-disabled {
-    background-color: #e9ecef;
+  .fip-bstrap .grn-frame-input.gfi-disabled {
+    background-color: var(--g-dis-bgr-cl);
     opacity: 1;
   }
-  .fip-bstrap>grn-hint-or-error.gfi-error {
+  .fip-bstrap grn-hint-or-error.gfi-error {
     color: var(--g-err-cl);
   }
 
-  .fip-bstrap>.grn-frame-input.gfi-focused .gfi-fieldset {
+  .fip-bstrap .grn-frame-input.gfi-disabled .gfi-fieldset {
+    border-style: solid;
+  }
+  .fip-bstrap .grn-frame-input.gfi-focused .gfi-fieldset {
     border-width: 1px;
   }
-  .fip-bstrap>.grn-frame-input.gfi-focused.gfi-error .gfi-fieldset {
+  .fip-bstrap .grn-frame-input.gfi-focused.gfi-error .gfi-fieldset {
     box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
   }
-  .fip-bstrap>.grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset {
+  .fip-bstrap .grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset {
     box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
   }
-  .fip-bstrap>.grn-frame-input.gfi-error .gi-input {
+  .fip-bstrap .grn-frame-input.gfi-error .gi-input {
     padding-right: 1.4em;
     background-image: url("data:image/svg+xml,"
     + "<svg xmlns='http://www.w3.org/2000/svg' width='12' "

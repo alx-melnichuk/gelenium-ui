@@ -17,10 +17,7 @@ grn-frame-input { // outline: 1px dashed crimson;
   margin: 0;
   border: 0;
   vertical-align: top;
-
-  &[wdFull] {
-    width: 100%;
-  }
+  width: 100%;
 
   // Small indentation of the legend from the border for "outlined" mode.
   --def-o-lgn-pd: 0.3em;
@@ -55,19 +52,21 @@ grn-frame-input { // outline: 1px dashed crimson;
     --def-lbl2-trn-y: 1.546875em; // 24.75px
   }
 
-  border-radius: var(--gfi-br-rd, var(--s-br-rd, var(--def-br-rd)));
+  border-radius: var(--gfi-br-rd, var(--br-rd, var(--def-br-rd)));
 
-  input, textarea {
-    line-height: inherit;
-    align-self: baseline;
-  }
-  input[elem-pd-ver] {
-    padding-top: var(--gfi-lbl-pd-tp, var(--s-lbl-pd-tp, var(--def-lbl-pd-tp)));
-    padding-bottom: var(--gfi-lbl-pd-bt, var(--s-lbl-pd-bt, var(--def-lbl-pd-bt)));
-  }
-  textarea[elem-mr-ver] {
-    margin-top: var(--gfi-lbl-pd-tp, var(--s-lbl-pd-tp, var(--def-lbl-pd-tp)));
-    margin-bottom: var(--gfi-lbl-pd-bt, var(--s-lbl-pd-bt, var(--def-lbl-pd-bt)));
+  &>div {
+    [elem-pd-ver], [elem-mr-ver] {
+      line-height: inherit;
+      align-self: baseline;
+    }
+    [elem-pd-ver] {
+      padding-top: var(--gfi-lbl-pd-tp, var(--lbl-pd-tp, var(--def-lbl-pd-tp)));
+      padding-bottom: var(--gfi-lbl-pd-bt, var(--lbl-pd-bt, var(--def-lbl-pd-bt)));
+    }
+    [elem-mr-ver] {
+      margin-top: var(--gfi-lbl-pd-tp, var(--lbl-pd-tp, var(--def-lbl-pd-tp)));
+      margin-bottom: var(--gfi-lbl-pd-bt, var(--lbl-pd-bt, var(--def-lbl-pd-bt)));
+    }
   }
 
   // Section "Label".
@@ -90,7 +89,7 @@ grn-frame-input { // outline: 1px dashed crimson;
     label {
       max-width: calc(133% - var(--gfi-lbl-wd, var(--lbl-wd, var(--def-lbl-wd))));
       @include mxTransform_TranslateXY_ScaleXY(
-        var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf))), // $translateX
+        var(--gfi-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf))), // $translateX
         var(--gfi-lbl-trn-y, var(--lbl-trn-y, var(--def-lbl-trn-y))), // $translateY
         0.75, // $scaleX
         0.75  // $scaleY
@@ -99,11 +98,11 @@ grn-frame-input { // outline: 1px dashed crimson;
   }
   &:not([shr]):not([foc]):not([fil]) label {
     max-width: calc(100%
-    - var(--orn-lbl-pd-lf, var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf))))
-    - var(--orn-lbl-pd-rg, var(--gfi-lbl-pd-rg, var(--s-lbl-pd-rg, var(--def-lbl-pd-rg))))
+    - var(--orn-lbl-pd-lf, var(--gfi-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf))))
+    - var(--orn-lbl-pd-rg, var(--gfi-lbl-pd-rg, var(--lbl-pd-rg, var(--def-lbl-pd-rg))))
     );
     @include mxTransform_TranslateXY_ScaleXY(
-      var(--orn-lbl-pd-lf, var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf)))), // $translateX
+      var(--orn-lbl-pd-lf, var(--gfi-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf)))), // $translateX
       var(--gfi-lbl2-trn-y, var(--lbl2-trn-y, var(--def-lbl2-trn-y))), // $translateY
       1,  // $scaleX
       1   // $scaleY
@@ -120,7 +119,7 @@ grn-frame-input { // outline: 1px dashed crimson;
     color: var(--gfi-hov-cl);
   }
   // The state with error.
-  &[err] label {
+  &[err]:not([dis]) label {
     color: var(--gfi-err-cl);
   }
   // The state with mouse hover and error but without focused and disabled.
@@ -132,7 +131,7 @@ grn-frame-input { // outline: 1px dashed crimson;
     color: var(--gfi-foc-cl);
   }
   // The state with disabled but without error.
-  &[dis]:not([err]) label {
+  &[dis] label {
     color: var(--gfi-dis-cl);
   }
 
@@ -145,7 +144,7 @@ grn-frame-input { // outline: 1px dashed crimson;
     border-radius: inherit;
     width: 100%;
   }
-  &[dis]:not([err])>div {
+  &[dis]>div {
     color: var(--gfi-dis-cl); // The color in state is disabled for an input element.
   }
 
@@ -206,7 +205,7 @@ grn-frame-input { // outline: 1px dashed crimson;
       border-bottom-color: var(--gfi-hov-cl);
     }
     // The state with error.
-    &[err]>div:before {
+    &[err]:not([dis])>div:before {
       border-bottom-color: var(--gfi-err-cl);
     }
     // The state with mouse hover and error but without focused and disabled.
@@ -214,7 +213,7 @@ grn-frame-input { // outline: 1px dashed crimson;
       border-bottom-color: var(--gfi-hov-err-cl);
     }
     // The state with disabled but without error.
-    &[dis]:not([err])>div:before {
+    &[dis]>div:before {
       border-bottom-color: var(--gfi-dis-cl);
     }
   }
@@ -268,7 +267,7 @@ grn-frame-input { // outline: 1px dashed crimson;
     top: 0;
     left: 0;
     margin: 0;
-    padding: 0px calc(var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf))) - var(--gfi-o-lgn-pd, var(--def-o-lgn-pd)));
+    padding: 0px calc(var(--gfi-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf))) - var(--gfi-o-lgn-pd, var(--def-o-lgn-pd)));
     pointer-events: none;
     border-radius: inherit;
     border-style: solid;
@@ -281,7 +280,7 @@ grn-frame-input { // outline: 1px dashed crimson;
   }
   &[foc] fieldset {
     border-width: 2px;
-    padding-left: calc(var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf))) - var(--gfi-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
+    padding-left: calc(var(--gfi-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf))) - var(--gfi-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
   }
   &[dis] fieldset {
     border-style: dotted;
@@ -296,7 +295,7 @@ grn-frame-input { // outline: 1px dashed crimson;
     border-color: var(--gfi-hov-cl);
   }
   // The state with error.
-  &[err] fieldset {
+  &[err]:not([dis]) fieldset {
     border-color: var(--gfi-err-cl);
   }
   // The state with mouse hover and error but without focused and disabled.
@@ -308,7 +307,7 @@ grn-frame-input { // outline: 1px dashed crimson;
     border-color: var(--gfi-foc-cl);
   }
   // The state with disabled but without error.
-  &[dis]:not([err]) fieldset {
+  &[dis] fieldset {
     border-color: var(--gfi-dis-cl);
   }
 
@@ -353,10 +352,10 @@ grn-frame-input { // outline: 1px dashed crimson;
     order: 1;
   }
   .gfi-ornam-lf:empty~.gfi-elem-pd-hor {
-    padding-left: var(--gfi-lbl-pd-lf, var(--s-lbl-pd-lf, var(--def-lbl-pd-lf)));
+    padding-left: var(--gfi-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf)));
   }
   .gfi-ornam-rg:empty~.gfi-elem-pd-hor {
-    padding-right: var(--gfi-lbl-pd-rg, var(--s-lbl-pd-rg, var(--def-lbl-pd-rg)));
+    padding-right: var(--gfi-lbl-pd-rg, var(--lbl-pd-rg, var(--def-lbl-pd-rg)));
   }
 
   span[orn-lf="center"], span[orn-rg="center"] {
@@ -395,7 +394,7 @@ grn-frame-input { // outline: 1px dashed crimson;
   &[ext-s]>div>span[orn-rg] {
     &>.gfi-su-ornam {
       display: inline-block;
-      margin-bottom: var(--gfi-lbl-pd-bt, var(--s-lbl-pd-bt, var(--def-lbl-pd-bt)));
+      margin-bottom: var(--gfi-lbl-pd-bt, var(--lbl-pd-bt, var(--def-lbl-pd-bt)));
     }
   }
 }

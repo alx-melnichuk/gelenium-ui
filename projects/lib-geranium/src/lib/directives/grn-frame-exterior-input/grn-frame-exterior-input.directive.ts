@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, Input, OnChanges, Output, Renderer2, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
 import {
   GrnFrameSizePaddingHorRes,
@@ -25,14 +25,12 @@ export class GrnFrameExteriorInputDirective implements OnChanges, GrnFrameSizePr
   public exterior: InputExterior = InputExteriorUtil.create(null);
   public elementRef: ElementRef<HTMLElement> = this.hostRef;
 
-  constructor(public hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
+  constructor(public hostRef: ElementRef<HTMLElement>) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.grnFrameExteriorInputElementRef) {
       this.elementRef = this.grnFrameExteriorInputElementRef || this.hostRef;
     }
-    // const s1 = `${changes.grnFrameExteriorInput ? 'Change.emit() exterior=' + this.exterior : ''}`;
-    // console.log(`ngOnChanges() ${s1}`);
     if (changes.grnFrameExteriorInput) {
       const exteriorInp = InputExteriorUtil.convert(this.grnFrameExteriorInput);
       const exterior = InputExteriorUtil.create(exteriorInp);
@@ -77,6 +75,7 @@ export class GrnFrameExteriorInputDirective implements OnChanges, GrnFrameSizePr
       const pdLfRgWd = Math.round(1.66 * (2 * value) * 100) / 100;
       HtmlElemUtil.setProperty(this.elementRef, '--lbl-wd', NumberUtil.str(pdLfRgWd)?.concat('px') || null);
       HtmlElemUtil.setProperty(this.elementRef, '--he-pd-lf', NumberUtil.str(value)?.concat('px') || null);
+      HtmlElemUtil.setProperty(this.elementRef, '--he-pd-rg', NumberUtil.str(value)?.concat('px') || null);
     }
     return value !== null ? { left: value, right: value } : null;
   };

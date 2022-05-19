@@ -19,8 +19,7 @@
     <li>you can use the button with the icon to display the password;</li>
   </ul>
   <p>
-    You can increase/decrease the font size for an input element without changing
-    the size of the element.
+    You can increase/decrease the font size for an input element.
     For example, when entering a password, you can increase the font size to display
     larger black circles.<br />
     To do this, add a style:
@@ -29,6 +28,10 @@
 .io-ornament .io-passwd-big .gi-input &#123;
   font-size: 20px;
 &#125;</pre></code>
+  <p>
+    In this case, you need to add the "wdFull" attribute, otherwise when you change
+    the font size, the length of the input element will change.
+  </p>
   <p>
     You can add the "lbShrink" attribute and the legend will be fixed in the title.
     Nor will the legend descend to the pre-holder position.
@@ -149,8 +152,10 @@
         </small>
       </div>
       <grn-input formControlName="input05e"
+        [ngClass]="[(!isBtnEyeCrossed05e ?'io-passwd-big':'')]"
         [type]="isBtnEyeCrossed05e ? 'text':'password'"
         label="Enter a unique password in words"
+        wdFull
         isRequired
         [exterior]="exterior05"
         [helperText]="
@@ -469,8 +474,10 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;grn-input formControlName="input05e"
+        [ngClass]="[(!isBtnEyeCrossed05e ?'io-passwd-big':'')]"
         [type]="isBtnEyeCrossed05e ? 'text':'password'"
         label="Enter a unique password in words"
+        wdFull
         isRequired
         [exterior]="exterior05"
         [helperText]="

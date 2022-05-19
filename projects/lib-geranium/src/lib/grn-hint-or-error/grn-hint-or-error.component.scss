@@ -19,13 +19,13 @@ grn-hint-or-error {
   &:not([err]):not([foc]):not([dis]) {
     color: var(--gfi-lbl-def-cl);
   } // The state with error.
-  &[err] {
+  &[err]:not([dis]) {
     color: var(--gfi-err-cl);
   } // The state with focused but without error.
   &[foc]:not([err]) {
     color: var(--gfi-hov-cl);
   } // The state with disabled but without error.
-  &[dis]:not([err]) {
+  &[dis] {
     color: var(--gfi-dis-cl);
   }
 }

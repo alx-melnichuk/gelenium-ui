@@ -9,11 +9,24 @@ grn-input {
   position: relative;
   padding: 0;
   vertical-align: top;
+
+  &>div[ext] {
+    width: 100%;
+  }
+
   &[wdFull] {
     width: 100%;
     .gi-input {
       width: 100%;
     }
+  }
+
+  &[noHeEllipsis] {
+    grn-hint-or-error {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+    }  
   }
 
   // Input
@@ -41,7 +54,7 @@ grn-input {
   }
 
   grn-hint-or-error {
-    padding-right: var(--gi-he-pd-lf, var(--he-pd-lf));
-    padding-left: var(--gi-he-pd-rg, var(--he-pd-lf));  
+    padding-left: var(--gi-he-pd-lf, var(--he-pd-lf));
+    padding-right: var(--gi-he-pd-rg, var(--he-pd-rg));
   }
 }

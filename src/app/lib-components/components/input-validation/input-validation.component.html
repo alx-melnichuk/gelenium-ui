@@ -43,7 +43,6 @@
         [label]="!controls03.input03a.value
           ? 'Requires a value':'Parameter value'"
         [isError]="!controls03.input03a.value ? '':null"
-        wdFull
         [helperText]="controls03.input03a.value
         ? 'The field is filled.'
         : 'The field is not filled.'"
@@ -61,7 +60,6 @@
         [label]="controls03.input03b.errors ? 'Error':'Value'"
         isRequired
         [minLength]="minLength03"
-        wdFull
         [helperText]="controls03.input03b.errors?.required
         ?'Required field.'
         :(controls03.input03b.errors?.minlength
@@ -83,7 +81,6 @@
         label="Error-Disabled"
         isError
         isDisabled
-        wdFull
         helperText="The parameter is disabled."
         [exterior]="exterior03">
       </grn-input>
@@ -118,7 +115,6 @@
         [label]="!controls03.input03a.value
           ? 'Requires a value':'Parameter value'"
         [isError]="!controls03.input03a.value ? '':null"
-        wdFull
         [helperText]="controls03.input03a.value
         ? 'The field is filled.'
         : 'The field is not filled.'"
@@ -136,7 +132,6 @@
         [label]="controls03.input03b.errors ? 'Error':'Value'"
         isRequired
         [minLength]="minLength03"
-        wdFull
         [helperText]="controls03.input03b.errors?.required
         ?'Required field.'
         :(controls03.input03b.errors?.minlength
@@ -158,7 +153,6 @@
         label="Error-Disabled"
         isError
         isDisabled
-        wdFull
         helperText="The parameter is disabled."
         [exterior]="exterior03"&gt;
       &lt;/grn-input&gt;

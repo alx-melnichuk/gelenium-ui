@@ -1,7 +1,9 @@
 <ng-container [formGroup]="formGroup">
-  <div #prepareData="grnFrameExteriorInput"
+  <div ext
+    class="gi-wrap"
+    #prepareData="grnFrameExteriorInput"
     [grnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
-    [grnFrameExteriorInputElementRef]="grnFrameInput.hostRef">
+    [grnFrameExteriorInputElementRef]="hostRef">
     <grn-frame-input #grnFrameInput
       [attr.wdFull]="wdFull"
       [label]="label"
