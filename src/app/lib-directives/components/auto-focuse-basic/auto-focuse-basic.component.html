@@ -1,0 +1,88 @@
+<section mr-vr>
+  <h3>Basic</h3>
+  <p>
+    The GrnAutoFocuse directive
+  </p>
+
+</section>
+<section mr-vr>
+  <p>mode</p>
+
+</section>
+
+<form [formGroup]="formGroup01a"
+  novalidate
+  autocomplete="off">
+
+  <div>
+    <input type="radio"
+      id="mode01surname"
+      value="surname"
+      formControlName="mode01a"
+      (change)="doChangeMode01()">
+    <label for="mode01surname">mode surname</label>
+  </div>
+
+  <div>
+    <input type="radio"
+      id="mode01name"
+      value="name"
+      formControlName="mode01a"
+      (change)="doChangeMode01()">
+    <label for="mode01name">mode name</label>
+  </div>
+
+  <div>
+    <input type="radio"
+      id="mode01patronymic"
+      value="patronymic"
+      formControlName="mode01a"
+      (change)="doChangeMode01()">
+    <label for="mode01patronymic">mode patronymic</label>
+  </div>
+
+  <pre>
+  mode01a.value={{ control01a.mode01a.value }}
+</pre>
+</form>
+
+
+<form [formGroup]="formGroup01b"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small><em>Surname</em></small>
+      </div>
+      <input class="rcb-input"
+        type="text"
+        formControlName="input01surname"
+        [grnAutoFocuse]="'' + (currentMode01 === 'surname')" />
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small><em>Name</em></small>
+      </div>
+      <input class="rcb-input"
+        type="text"
+        formControlName="input01name"
+        [grnAutoFocuse]="'' + (currentMode01 === 'name')" />
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small><em>Patronymic</em></small>
+      </div>
+      <input class="rcb-input"
+        type="text"
+        formControlName="input01patronymic"
+        [grnAutoFocuse]="'' + (currentMode01 === 'patronymic')" />
+    </div>
+
+  </div>
+
+</form>

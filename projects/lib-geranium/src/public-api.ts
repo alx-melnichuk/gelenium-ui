@@ -5,11 +5,12 @@
 export * from './lib/lib-geranium.service';
 export * from './lib/lib-geranium.module';
 
-export * from './lib/_classes/public-api';
+// export * from './lib/_classes/public-api';
 export * from './lib/_decorators/public-api';
 export * from './lib/_interfaces/public-api';
 export * from './lib/_utils/public-api';
 
+export * from './lib/directives/grn-auto-focuse/public-api';
 export * from './lib/directives/grn-frame-exterior-button/public-api';
 export * from './lib/directives/grn-frame-exterior-input/public-api';
 export * from './lib/directives/grn-frame-ornament/public-api';
