@@ -7,7 +7,7 @@ import { GrnAutoFocuseDirective } from './grn-auto-focuse.directive';
   exportAs: 'grnAutoFocuseOwner',
 })
 export class GrnAutoFocuseOwnerDirective implements AfterContentInit, AfterViewInit {
-  @ContentChildren(GrnAutoFocuseDirective)
+  @ContentChildren(GrnAutoFocuseDirective, { descendants: true })
   public list!: QueryList<GrnAutoFocuseDirective>;
 
   constructor(public hostRef: ElementRef<HTMLElement>) {}

@@ -8,7 +8,7 @@ import { HtmlElemUtil } from '../../_utils/html-elem.util';
 })
 export class GrnAutoFocuseDirective implements OnChanges, AfterViewInit {
   @Input()
-  public grnAutoFocuse: string | null = null;
+  public grnAutoFocuse: string | boolean | null = null;
 
   private innIsAutoFocuse = false;
   public get isAutoFocuse(): boolean {
@@ -28,7 +28,7 @@ export class GrnAutoFocuseDirective implements OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.grnAutoFocuse) {
-      const value = BooleanUtil.init(this.grnAutoFocuse);
+      const value = BooleanUtil.init(this.grnAutoFocuse != null ? '' + this.grnAutoFocuse : null);
       this.innIsAutoFocuse = value === null ? false : value;
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'auto-focuse', this.innIsAutoFocuse ? '' : null);
     }
@@ -45,7 +45,10 @@ export class GrnAutoFocuseDirective implements OnChanges, AfterViewInit {
   // ** Public API **
 
   public focuseElement(): void {
-    this.hostRef.nativeElement.focus();
+    const isDisabled = (this.hostRef.nativeElement as HTMLInputElement).disabled;
+    if (!isDisabled) {
+      this.hostRef.nativeElement.focus();
+    }
   }
 
   public setIsHasOwner(isHasOwner: boolean): void {
