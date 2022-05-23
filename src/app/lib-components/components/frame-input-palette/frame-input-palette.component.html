@@ -450,18 +450,18 @@ export class FrameInputComponent &#123;
 &#125;
 
 // Color for "HintOrError".
-.fip-specific .gfi-hint-or-error &#123;
+.fip-specific .gfhe-hint-or-error &#123;
   // The state without error, focused and disabled.
-  &:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) &#123;
+  &:not(.gfhe-error):not(.gfhe-focused):not(.gfhe-disabled) &#123;
     color: var(--fip-label-default-color);
   &#125; // The state with error.
-  &.gfi-error:not(.gfi-disabled) &#123;
+  &.gfhe-error:not(.gfhe-disabled) &#123;
     color: var(--fip-error-color);
   &#125; // The state with focused but without error.
-  &.gfi-focused:not(.gfi-error) &#123;
+  &.gfhe-focused:not(.gfhe-error) &#123;
     color: var(--fip-focused-color);
   &#125; // The state with disabled but without error.
-  &.gfi-disabled &#123;
+  &.gfhe-disabled &#123;
     color: var(--fip-disabled-color);
   &#125;
 &#125;</pre></code>
@@ -701,7 +701,7 @@ export class FrameInputComponent &#123;
   background-color: var(--g-dis-bgr-cl);
   opacity: 1;
 &#125;
-.fip-bstrap grn-hint-or-error.gfi-error &#123;
+.fip-bstrap grn-hint-or-error.gfhe-error &#123;
   color: var(--g-err-cl);
 &#125;
 

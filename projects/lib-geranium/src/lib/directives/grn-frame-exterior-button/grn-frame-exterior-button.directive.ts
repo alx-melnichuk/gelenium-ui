@@ -49,7 +49,8 @@ export class GrnFrameExteriorButtonDirective implements OnChanges, GrnFrameSizeP
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getBorderRadius = (frameSizeValue: number, lineHeight: number): string | null => {
     const borderRadiusRatio = 0.1;
-    return (frameSizeValue > 0 ? Math.round(borderRadiusRatio * frameSizeValue * 100) / 100 : 0) + 'px';
+    // The radius value must be an integer, otherwise the frame in the "dotted" style is poorly drawn.
+    return (frameSizeValue > 0 ? Math.round(Math.round(borderRadiusRatio * frameSizeValue * 100) / 100) : 0) + 'px';
   };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getPaddingHor = (frameSizeValue: number, lineHeight: number): GrnFrameSizePaddingHorRes | null => {

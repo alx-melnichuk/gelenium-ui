@@ -5,6 +5,7 @@ import { SiteMenu, SiteUrl } from 'src/app/lib-core/constants/site-menu';
 import { UrlDirectives } from 'src/app/lm-directives/constants/url-directives.constants';
 
 import { AutoFocuseBasicModule } from '../auto-focuse-basic/auto-focuse-basic.module';
+import { AutoFocuseApiModule } from '../auto-focuse-api/auto-focuse-api.module';
 
 import { AutoFocuseComponent } from './auto-focuse.component';
 
@@ -19,7 +20,7 @@ SiteMenu.addItem('Directives', 'AutoFocuse', { label: 'AutoFocuse', siteUrls });
 
 @NgModule({
   declarations: [AutoFocuseComponent],
-  imports: [CommonModule, AutoFocuseBasicModule],
+  imports: [CommonModule, AutoFocuseBasicModule, AutoFocuseApiModule],
   exports: [AutoFocuseComponent],
 })
 export class AutoFocuseModule {}

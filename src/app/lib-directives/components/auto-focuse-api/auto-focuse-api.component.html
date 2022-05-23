@@ -1,0 +1,78 @@
+<section mr-vr>
+  <h3>API: GrnAutoFocuse</h3>
+  <p>
+    Selector:
+    <span fw500>[grnAutoFocuse]</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>grnAutoFocuse</span>
+  </p>
+  <p>
+    The directive transfers input focus to the current element.
+  </p>
+</section>
+
+<section mr-vr>
+  <h4>Properties</h4>
+</section>
+
+<table class="app-tab">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <td>
+      <code>@Input()</code>
+      <code>grnAutoFocuse: string | boolean | null = null;</code>
+    </td>
+    <td>
+      <span>Can take the following values:</span>
+      <ul>
+        <li><code>empty string (default);</code></li>
+        <li><code>true/false (boolean type);</code></li>
+        <li><code>"true"/"false" (string type);</code></li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<section mr-vr>
+  <h4>Additionally.</h4>
+  <p>
+    When the input parameter is true or "empty string", the current element is
+    given the "auto-focuse" attribute.
+    This allows you to check the correct operation of this directive.
+  </p>
+</section>
+
+<section mr-vr>
+  <h3>API: GrnAutoFocuseOwner</h3>
+  <p>
+    Selector:
+    <span fw500>[grnAutoFocuseOwner]</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>grnAutoFocuseOwner</span>
+  </p>
+  <p>
+    The directive allows you to transfer the input focus to the specified element with a
+    complex page structure.
+  </p>
+  <p>
+    The directive defines the first nested child GrnAutoFocuse directive with a positive
+    input parameter value (or "empty string").
+    And after that, it calls the method of the child directive GrnAutoFocuse to transfer
+    the input focus.
+  </p>
+  <p>
+    This directive is placed as close as possible to the root of the current page.
+    This is necessary to get the "OnAfterViewInit" hook at the moment when all child
+    elements have already been rendered.
+    In other words, it is required to determine the moment when the current page has
+    completed its rendering.
+  </p>
+</section>

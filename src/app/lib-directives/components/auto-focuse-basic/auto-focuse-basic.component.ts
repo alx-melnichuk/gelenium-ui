@@ -66,8 +66,8 @@ export class AutoFocuseBasicComponent implements OnInit {
       location.href = this.addPrm(location.href, CN_MODE1A, this.mode1a);
       this.changeDetectorRef.markForCheck();
     } else if (mode === MODE_B) {
-      this.formGroup01b.enable();
       this.formGroup01a.disable();
+      this.formGroup01b.enable();
       location.href = this.removePrm(location.href, CN_MODE1A);
       location.href = this.addPrm(location.href, CN_MODE, this.mode);
       location.href = this.addPrm(location.href, CN_MODE1B, this.mode1b);

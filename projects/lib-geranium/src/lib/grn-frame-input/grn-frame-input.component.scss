@@ -8,7 +8,7 @@
 @import '../_styles/mx-transform-scale-x-y-translate-x-y.scss';
 
 
-grn-frame-input { // outline: 1px dashed crimson;
+grn-frame-input {
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
   line-height: 1.4375em; // The value of the "line height" for the input element. (23px for font-size: 16px)
@@ -23,7 +23,7 @@ grn-frame-input { // outline: 1px dashed crimson;
   --def-o-lgn-pd: 0.3em;
   // frameSize: 56px; font-size: 16px; 
   &[ext-o] {
-    --def-br-rd: 0.35em;
+    --def-br-rd: 6px;
     --def-lbl-pd-tp: 1.03125em; // 16.5px
     --def-lbl-pd-bt: 1.03125em; // 16.5px
     --def-lbl-pd-lf: 0.875em; // 14px
@@ -33,7 +33,7 @@ grn-frame-input { // outline: 1px dashed crimson;
     --def-lbl2-trn-y: 1.03125em; // 16.5px
     }
   &[ext-u] {
-    --def-br-rd: 0.35em 0.35em 0px 0px; 
+    --def-br-rd: 6px 6px 0px 0px; 
     --def-lbl-pd-tp: 1.546875em; // 24.75px
     --def-lbl-pd-bt: 0.515625em; // 8.25px
     --def-lbl-pd-lf: 0.75em; // 12px
@@ -270,13 +270,10 @@ grn-frame-input { // outline: 1px dashed crimson;
     padding: 0px calc(var(--gfi-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf))) - var(--gfi-o-lgn-pd, var(--def-o-lgn-pd)));
     pointer-events: none;
     border-radius: inherit;
-    border-style: solid;
+    border: 1px solid var(--gfi-o-def-br-cl);
     overflow: hidden;
     min-width: 0%;
     box-sizing: inherit;
-  }
-  &:not([foc]) fieldset {
-    border-width: 1px;
   }
   &[foc] fieldset {
     border-width: 2px;
@@ -286,10 +283,6 @@ grn-frame-input { // outline: 1px dashed crimson;
     border-style: dotted;
   }
   // Border-color for "outlined" mode.
-  // The state without mouse hover, error, focused and disabled.
-  &:not(:hover):not([err]):not([foc]):not([dis]) fieldset {
-    border-color: var(--gfi-o-def-br-cl);
-  }
   // The state with mouse hover but without error, focused and disabled.
   &:hover:not([err]):not([foc]):not([dis]) fieldset {
     border-color: var(--gfi-hov-cl);

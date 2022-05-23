@@ -114,18 +114,18 @@ app-frame-input-palette {
   }
 
   // Color for "HintOrError".
-  .fip-specific .gfi-hint-or-error {
+  .fip-specific .gfhe-hint-or-error {
     // The state without error, focused and disabled.
-    &:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) {
+    &:not(.gfhe-error):not(.gfhe-focused):not(.gfhe-disabled) {
       color: var(--fip-label-default-color);
     } // The state with error.
-    &.gfi-error:not(.gfi-disabled) {
+    &.gfhe-error:not(.gfhe-disabled) {
       color: var(--fip-error-color);
     } // The state with focused but without error.
-    &.gfi-focused:not(.gfi-error) {
+    &.gfhe-focused:not(.gfhe-error) {
       color: var(--fip-focused-color);
     } // The state with disabled but without error.
-    &.gfi-disabled {
+    &.gfhe-disabled {
       color: var(--fip-disabled-color);
     }
   }
@@ -167,7 +167,7 @@ app-frame-input-palette {
     background-color: var(--g-dis-bgr-cl);
     opacity: 1;
   }
-  .fip-bstrap grn-hint-or-error.gfi-error {
+  .fip-bstrap grn-hint-or-error.gfhe-error {
     color: var(--g-err-cl);
   }
 
