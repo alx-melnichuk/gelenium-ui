@@ -14,6 +14,7 @@ import {
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 const RIPPLE_CLASS = 'gtr-ripple';
+let identifier = 0;
 
 @Component({
   selector: 'grn-touch-ripple',
@@ -24,6 +25,8 @@ const RIPPLE_CLASS = 'gtr-ripple';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GrnTouchRippleComponent implements OnChanges, OnInit {
+  @Input()
+  public id = 'grn_touch_ripple_' + ++identifier;
   @Input()
   public isCenter: string | null = null;
   @Input()

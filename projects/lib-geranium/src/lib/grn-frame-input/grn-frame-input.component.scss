@@ -21,9 +21,9 @@ grn-frame-input {
 
   // Small indentation of the legend from the border for "outlined" mode.
   --def-o-lgn-pd: 0.3em;
-  // frameSize: 56px; font-size: 16px; 
+  // frameSize: 56px; font-size: 16px;
   &[ext-o] {
-    --def-br-rd: 6px;
+    --def-br-rd: 0.35em;
     --def-lbl-pd-tp: 1.03125em; // 16.5px
     --def-lbl-pd-bt: 1.03125em; // 16.5px
     --def-lbl-pd-lf: 0.875em; // 14px
@@ -33,7 +33,7 @@ grn-frame-input {
     --def-lbl2-trn-y: 1.03125em; // 16.5px
     }
   &[ext-u] {
-    --def-br-rd: 6px 6px 0px 0px; 
+    --def-br-rd: 0.35em 0.35em 0px 0px;
     --def-lbl-pd-tp: 1.546875em; // 24.75px
     --def-lbl-pd-bt: 0.515625em; // 8.25px
     --def-lbl-pd-lf: 0.75em; // 12px
@@ -279,9 +279,7 @@ grn-frame-input {
     border-width: 2px;
     padding-left: calc(var(--gfi-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf))) - var(--gfi-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
   }
-  &[dis] fieldset {
-    border-style: dotted;
-  }
+
   // Border-color for "outlined" mode.
   // The state with mouse hover but without error, focused and disabled.
   &:hover:not([err]):not([foc]):not([dis]) fieldset {
@@ -299,10 +297,12 @@ grn-frame-input {
   &[foc]:not([err]) fieldset {
     border-color: var(--gfi-foc-cl);
   }
-  // The state with disabled but without error.
-  &[dis] fieldset {
-    border-color: var(--gfi-dis-cl);
-  }
+  // The radius value must be an integer, otherwise the frame in the "dotted" style is poorly drawn.
+  // // The state with disabled but without error.
+  // &[dis] fieldset {
+  //   border-color: var(--gfi-dis-cl);
+  //   border-style: dotted;
+  // }
 
   // Section "Legend".
   legend {

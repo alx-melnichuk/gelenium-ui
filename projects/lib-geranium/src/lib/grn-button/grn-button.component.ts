@@ -49,11 +49,15 @@ export class GrnButtonComponent implements OnChanges, AfterContentInit {
   public frameSize: string | null = null; // FrameSizeType
   @Input()
   public isDisabled: string | null = null;
+  @Input()
+  public isNoRipple: string | null = null;
 
   @ViewChild('buttonElement', { static: true })
   public buttonElementRef: ElementRef<HTMLElement> | null = null;
-  @ViewChild(GrnTouchRippleComponent, { static: true })
+
+  @ViewChild(GrnTouchRippleComponent, { static: false })
   public touchRipple: GrnTouchRippleComponent | null = null;
+
   @ContentChild(GrnLinkDirective, { static: true })
   public linkElement: GrnLinkDirective | null = null;
 
@@ -61,6 +65,7 @@ export class GrnButtonComponent implements OnChanges, AfterContentInit {
   public currConfig: GrnButtonConfig | null = null;
   public isFocused = false;
   public isDisabled2: boolean | null = null; // Binding attribute "isDisabled".
+  public isNoRipple2: boolean | null = null; // Binding attribute "isNoRipple".
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -79,18 +84,25 @@ export class GrnButtonComponent implements OnChanges, AfterContentInit {
     }
     if (changes.isDisabled) {
       this.isDisabled2 = BooleanUtil.init(this.isDisabled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gb-disabled', this.isDisabled2 || false);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled2 ? '' : null);
+    }
+    if (changes.isNoRipple) {
+      this.isNoRipple2 = BooleanUtil.init(this.isNoRipple);
     }
   }
 
   ngAfterContentInit(): void {
-    // Add the required properties for the hyperlink element.
-    this.settingLink(this.linkElement?.templateRef || null);
+    if (this.linkElement?.templateRef) {
+      // Add the required properties for the hyperlink element.
+      this.settingLink(this.linkElement.templateRef);
+    }
   }
 
   // ** Public API **
 
   public doClick(event: MouseEvent): void {
-    if (!!event && !event.cancelBubble && this.linkElement && this.touchRipple) {
+    if (!!event && !event.cancelBubble && this.linkElement && this.touchRipple && !this.isNoRipple2) {
       this.touchRipple.touchRipple(event);
     }
   }

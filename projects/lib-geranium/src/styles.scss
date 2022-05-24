@@ -29,7 +29,7 @@
   // --bg-blue-A400: #3d5afe;
   // --bg-blue-A700: #304ffe;
 
-  // ** Frame-Input **
+  // ** grn Frame Input **
   // The color of the label and border on mouse hover.
   --gfi-hov-cl: rgba(0, 0, 0, 0.87);
   // The color of the label and border in an error state.
@@ -66,25 +66,20 @@
   // For "frame" - standard and underline
   // The default bottom border color for "underline" and "standard" modes.
   --gfi-su-def-br-cl: rgba(0, 0, 0, 0.42);
-  
 
-  // ** Button **
+  // ** **
+
+  // ** grn Button **
+  --gb-base-cl: #1976d2;
+  --gb-dis-cl: #00000042;
+  --gb-co-dis-cl: #0000001f;
+  --gb-ot-hov-bg-cl: #1976d20a;
   // Exterior: "contained"
   --gb-c-cl: #fff;
-  --gb-c-bg-cl: #1976d2;
   --gb-c-hov-bg-cl: #1565c0;
-  --gb-c-dis-cl: rgba(0, 0, 0, 0.26);
-  --gb-c-dis-bg-cl: rgba(0, 0, 0, 0.12);
   // Exterior: "outlined"
-  --gb-o-cl: #1976d2;
   --gb-o-brd-cl: #1976d280;
-  --gb-o-hov-bg-cl: #1976d20d;
-  --gb-o-hov-brd-cl: #1976d2;
-  --gb-o-dis-brd-cl: 1px solid;
-  --gb-o-dis-cl: rgba(16, 16, 16, 0.3);
-  // Exterior: "text"
-  --gb-t-cl: #1976d2;
-  --gb-t-hov-bg-cl: #1976d20d;
-  --gb-t-dis-cl: rgba(0, 0, 0, 0.26);
+
+  // ** **
 
 }

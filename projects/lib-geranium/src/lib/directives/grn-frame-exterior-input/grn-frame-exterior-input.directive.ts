@@ -47,10 +47,9 @@ export class GrnFrameExteriorInputDirective implements OnChanges, GrnFrameSizePr
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getBorderRadius = (frameSizeValue: number, lineHeight: number): string | null => {
     let result: string | null = null;
-    // The radius value must be an integer, otherwise the frame in the "dotted" style is poorly drawn.
     const radius =
       frameSizeValue > 0 && (this.exterior === InputExterior.outlined || this.exterior === InputExterior.underline)
-        ? Math.round(Math.round((frameSizeValue / 10) * 100) / 100) + 'px'
+        ? Math.round((frameSizeValue / 10) * 100) / 100 + 'px'
         : null;
     if (this.exterior === InputExterior.outlined) {
       result = radius;

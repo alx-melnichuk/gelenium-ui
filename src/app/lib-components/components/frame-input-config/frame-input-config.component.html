@@ -8,7 +8,7 @@
     Next, specify the resulting object in the list of providers for the entire application (at the
     level of the AppComponent).
   </p>
-  <code><pre>
+  <code><pre source="ts">
   const grnFrameInputConfigDefault: GrnFrameInputConfig = &#123;
     exterior: Exterior.outlined,
     frameSize: FrameSize.small,
@@ -28,8 +28,7 @@
   &#125;)
   export class AppComponent &#123;
     title = 'demo';
-  &#125;
-  </pre></code>
+  &#125;</pre></code>
   <p>
     After that, all input elements based on the "GrnFrameInput" component will have the same
     configuration.
@@ -169,12 +168,11 @@
     <li>"exterior" will have the value "outlined".</li>
     <li>"frameSize" will have the value "small" (height to 44px;).</li>
   </ul>
-  <code><pre>
+  <code><pre source="ts">
     const grnFrameInputConfigDefault: GrnFrameInputConfig = &#123;
       exterior: Exterior.outlined,
       frameSize: FrameSize.small,
-    &#125;;
-  </pre></code>
+    &#125;;</pre></code>
 </section>
 
 <section mr-vr>
@@ -189,17 +187,16 @@
   <p>
     For example, let's specify the following parameters:
   </p>
-  <code><pre>
+  <code><pre source="ts">
   frameSize="wide"
-  exterior="underline"
-  </pre></code>
+  exterior="underline"</pre></code>
   <p>
     In other words, there is the following order of determining the configuration parameters:
   </p>
   <ul>
     <li>
       Standard values are taken.
-      <code><pre>
+      <code><pre source="ts">
   exterior="standard",
   frameSize="middle",
   isLabelShrink=false,

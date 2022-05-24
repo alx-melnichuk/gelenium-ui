@@ -1,0 +1,435 @@
+<section mr-vr>
+  <h3>Palette.</h3>
+  <p>
+    You can customize the color palette for the buttons.
+    To do this, let's define our own values for the required CSS variables.
+  </p>
+  <p>
+    All the CSS classes that define the colors of the button element are children of the
+    "grn-button"
+    CSS classes.
+    Let's add a custom CSS class "bp-specific" to define our colors.
+  </p>
+</section>
+
+
+<section mr-vr
+  [attr.id]="fragment1">
+  <h4>Button with "contained" exterior.</h4>
+  <p>
+    An example of defining css variables for buttons with a "contained" appearance.
+  </p>
+</section>
+
+<div class="b-items bp-specific">
+
+  <grn-button exterior="contained">
+    <span>Primary</span>
+  </grn-button>
+
+  <grn-button exterior="contained"
+    isDisabled>
+    <span>Primary Disabled</span>
+  </grn-button>
+
+  <grn-button exterior="contained">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment1">
+      Link
+    </a>
+  </grn-button>
+
+  <grn-button exterior="contained"
+    isDisabled>
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment1">
+      Link Disabled
+    </a>
+  </grn-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="b-items bp-specific"&gt;
+
+  &lt;grn-button exterior="contained"&gt;
+    &lt;span&gt;Primary&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="contained"
+    isDisabled&gt;
+    &lt;span&gt;Primary Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="contained"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment1"&gt;
+      Link
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="contained"
+    isDisabled&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment1"&gt;
+      Link Disabled
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment1 = 'palette1';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.b-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+  &amp;&gt;:first-child &#123;
+    margin-left: 3%;
+  &#125;
+  &amp;&gt;:not(first-child) &#123;
+    margin-left: 7%;
+  &#125;
+&#125;
+
+// Exterior: "contained"
+.bp-specific .grn-button.gb-contained:not(.gb-disabled)&gt;.grn-btn &#123;
+  --gtr-ripple-color: #686aec5d;
+  color: #00acc1;
+  background-color: #b2ebf299;
+  &:hover &#123;
+    background-color: #acebec4d;
+  &#125;
+&#125;
+.bp-specific .grn-button.gb-contained.gb-disabled&gt;.grn-btn &#123;
+  color: #9c27b090;
+  background-color: #b2ebf233;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  [attr.id]="fragment2">
+  <h4>Button with "outlined" exterior.</h4>
+  <p>
+    An example of defining css variables for buttons with a "outlined" appearance.
+  </p>
+</section>
+
+<div class="b-items bp-specific">
+
+  <grn-button exterior="outlined">
+    <span>Secondary</span>
+  </grn-button>
+
+  <grn-button exterior="outlined"
+    isDisabled>
+    <span>Secondary Disabled</span>
+  </grn-button>
+
+  <grn-button exterior="outlined">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment2">
+      Link
+    </a>
+  </grn-button>
+
+  <grn-button exterior="outlined"
+    isDisabled>
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment2">
+      Link Disabled
+    </a>
+  </grn-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="b-items bp-specific"&gt;
+
+  &lt;grn-button exterior="outlined"&gt;
+    &lt;span&gt;Secondary&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="outlined"
+    isDisabled&gt;
+    &lt;span&gt;Secondary Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="outlined"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment2"&gt;
+      Link
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="outlined"
+    isDisabled&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment2"&gt;
+      Link Disabled
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment2 = 'palette2';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.b-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+  &amp;&gt;:first-child &#123;
+    margin-left: 3%;
+  &#125;
+  &amp;&gt;:not(first-child) &#123;
+    margin-left: 7%;
+  &#125;
+&#125;
+
+// Exterior: "outlined"
+.bp-specific .grn-button.gb-outlined:not(.gb-disabled)&gt;.grn-btn &#123;
+  --gtr-ripple-color: #19d2944d;
+  color: #00acc1;
+  border-color: #00acc1a0;
+  &:hover &#123;
+    background-color: #b2ebf299;
+    border-color: #00acc1;
+  &#125;
+&#125;
+.bp-specific .grn-button.gb-outlined.gb-disabled&gt;.grn-btn &#123;
+  color: #9c27b090;
+  border-color: #9c27b070;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  [attr.id]="fragment3">
+  <div>
+    <h4>Button with "text" exterior.</h4>
+    <p>
+      An example of defining css variables for buttons with a "text" appearance.
+    </p>
+  </div>
+</section>
+
+<div class="b-items bp-specific">
+
+  <grn-button exterior="text">
+    <span>Additionally</span>
+  </grn-button>
+
+  <grn-button exterior="text"
+    isDisabled>
+    <span>Additionally Disabled</span>
+  </grn-button>
+
+  <grn-button exterior="text">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment3">
+      Link
+    </a>
+  </grn-button>
+
+  <grn-button exterior="text"
+    isDisabled>
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment3">
+      Link Disabled
+    </a>
+  </grn-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="b-items bp-specific"&gt;
+
+  &lt;grn-button exterior="text"&gt;
+    &lt;span&gt;Additionally&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="text"
+    isDisabled&gt;
+    &lt;span&gt;Additionally Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="text"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment3"&gt;
+      Link
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button exterior="text"
+    isDisabled&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment3"&gt;
+      Link Disabled
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment3 = 'palette3';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.b-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+  &amp;&gt;:first-child &#123;
+    margin-left: 3%;
+  &#125;
+  &amp;&gt;:not(first-child) &#123;
+    margin-left: 7%;
+  &#125;
+&#125;
+
+// Exterior: "text"
+.bp-specific .grn-button.gb-text:not(.gb-disabled)&gt;.grn-btn &#123;
+  --gtr-ripple-color: #19d2944d;
+  color: #00acc1;
+  &:hover &#123;
+    background-color: #b2ebf299;
+  &#125;
+&#125;
+.bp-specific .grn-button.gb-text.gb-disabled&gt;.grn-btn &#123;
+  color: #9c27b090;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  [attr.id]="fragment4">
+  <div>
+    <h4>Bootstrap style buttons.</h4>
+  </div>
+</section>
+
+<div class="b-items bp-bstrap">
+
+  <grn-button exterior="contained"
+    noElevation
+    frameSize="short"
+    isNoRipple
+    class="btn-primary">
+    <span>Primary</span>
+  </grn-button>
+
+  <grn-button exterior="contained"
+    noElevation
+    frameSize="short"
+    isDisabled>
+    <span>Primary Disabled</span>
+  </grn-button>
+
+  <grn-button exterior="contained"
+    noElevation
+    frameSize="short">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment4">
+      Primary Link
+    </a>
+  </grn-button>
+
+  <grn-button exterior="contained"
+    noElevation
+    frameSize="short"
+    isDisabled>
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment4">
+      Primary Link Disabled
+    </a>
+  </grn-button>
+
+</div>

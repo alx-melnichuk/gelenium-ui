@@ -16,7 +16,6 @@
     [grnFrameSizePrepareData]="grnFrameExteriorButton"
     [attr.id]="id"
     [attr.disabled]="isDisabled2 ? '' : null"
-    [attr.dis]="isDisabled2 ? '' : null"
     (focus)="doFocus()"
     (blur)="doBlur()">
     <ng-container [ngTemplateOutlet]="templateOrnament">
@@ -25,7 +24,7 @@
       class="gb-label gb-elem-pd-hor">
       <ng-content></ng-content>
     </span>
-    <grn-touch-ripple *ngIf="!isDisabled2">
+    <grn-touch-ripple *ngIf="!isDisabled2 && !isNoRipple2">
     </grn-touch-ripple>
   </button>
 </ng-container>
@@ -42,12 +41,11 @@
     [grnFrameSizeLabelPd]="currConfig?.labelPd || null"
     [grnFrameSizePrepareData]="grnFrameExteriorButton"
     [attr.id]="id"
-    [attr.dis]="isDisabled2 ? '' : null"
     (click)="doClick($event)">
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
     <ng-content select="a"></ng-content>
-    <grn-touch-ripple *ngIf="!isDisabled2"
+    <grn-touch-ripple *ngIf="!isDisabled2 && !isNoRipple2"
       skip-events>
     </grn-touch-ripple>
   </div>
@@ -61,3 +59,6 @@
     <ng-content select="[grn-orn-rg]"></ng-content>
   </span>
 </ng-template>
+
+<!-- <grn-touch-ripple>
+</grn-touch-ripple> -->

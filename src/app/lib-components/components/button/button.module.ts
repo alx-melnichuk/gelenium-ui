@@ -11,6 +11,7 @@ import { ButtonAttributesModule } from '../button-attributes/button-attributes.m
 import { ButtonSizeModule } from '../button-size/button-size.module';
 import { ButtonBorderRadiusModule } from '../button-border-radius/button-border-radius.module';
 import { ButtonOrnamentsModule } from '../button-ornaments/button-ornaments.module';
+import { ButtonPaletteModule } from '../button-palette/button-palette.module';
 
 UrlComponents.add('URL_BUTTON', 'button');
 
@@ -21,13 +22,22 @@ const siteUrls: SiteUrl[] = [
   { label: 'Size', url, fragment: 'Size' },
   { label: 'Border Radius', url, fragment: 'BorderRadius' },
   { label: 'Ornaments', url, fragment: 'Ornaments' },
+  { label: 'Palette', url, fragment: 'Palette' },
   { label: 'Api', url, fragment: 'Api' },
 ];
 SiteMenu.addItem('Components', 'Button', { label: 'Button', siteUrls });
 
 @NgModule({
   declarations: [ButtonComponent],
-  imports: [CommonModule, ButtonBasicModule, ButtonAttributesModule, ButtonSizeModule, ButtonBorderRadiusModule, ButtonOrnamentsModule],
+  imports: [
+    CommonModule,
+    ButtonBasicModule,
+    ButtonAttributesModule,
+    ButtonSizeModule,
+    ButtonBorderRadiusModule,
+    ButtonOrnamentsModule,
+    ButtonPaletteModule,
+  ],
   exports: [ButtonComponent],
 })
 export class ButtonModule {}
