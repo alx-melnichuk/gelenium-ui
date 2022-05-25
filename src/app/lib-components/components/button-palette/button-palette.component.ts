@@ -1,6 +1,9 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from 'src/app/lib-core/constants/constants';
+import { GrnButtonConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-button-config.interface';
+import { ButtonExterior } from 'projects/lib-geranium/src/lib/_interfaces/button-exterior.interface';
+import { FrameSize } from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
 
 @Component({
   selector: 'app-button-palette',
@@ -24,4 +27,30 @@ export class ButtonPaletteComponent {
   public fragment2 = 'palette2';
   public fragment3 = 'palette3';
   public fragment4 = 'palette4';
+  public fragment5 = 'palette5';
+  public fragment6 = 'palette6';
+  public fragment7 = 'palette7';
+  public fragment8 = 'palette8';
+  public fragment9 = 'palette9';
+  public fragment10 = 'palette10';
+  public fragment11 = 'palette11';
+  public fragment12 = 'palette12';
+
+  public config: GrnButtonConfig = {
+    exterior: ButtonExterior.contained,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  };
+
+  public config1: GrnButtonConfig = {
+    exterior: ButtonExterior.outlined,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  };
+
+  public config_: GrnButtonConfig = {
+    exterior: ButtonExterior.text,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  };
 }

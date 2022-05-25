@@ -88,15 +88,15 @@ grn-button {
   // Exterior: "contained"
   &[ext-c] {
     &:not([dis])>[grn-btn] {
-      color: var(--gb-c-cl);
-      background-color: var(--gb-base-cl);
+      color: var(--gb-c-def-cl);
+      background-color: var(--gb-c-def-bg-cl);
       &:hover {
         background-color: var(--gb-c-hov-bg-cl);
       }
     }
     &[dis]>[grn-btn] {
-      color: var(--gb-dis-cl);
-      background-color: var(--gb-co-dis-cl);
+      color: var(--gb-c-dis-cl);
+      background-color: var(--gb-c-dis-bg-cl);
     }
   }
   &[ext-c]:not([dis]):not([noElevation])>[grn-btn] {
@@ -118,29 +118,29 @@ grn-button {
   // Exterior: "outlined"
   &[ext-o] {
     &:not([dis])>[grn-btn] {
-      color: var(--gb-base-cl);
-      border: 1px solid var(--gb-o-brd-cl);
+      color: var(--gb-o-def-cl);
+      border: 1px solid var(--gb-o-def-br-cl);
       &:hover {
-        background-color: var(--gb-ot-hov-bg-cl);
-        border-color: var(--gb-base-cl);
+        background-color: var(--gb-o-hov-bg-cl);
+        border-color: var(--gb-o-hov-br-cl);
       }
     }
     &[dis]>[grn-btn] {
-      color: var(--gb-dis-cl);
-      border: 1px solid var(--gb-co-dis-cl);
+      color: var(--gb-o-dis-cl);
+      border: 1px solid var(--gb-o-dis-br-cl);
     }
   }
 
   // Exterior: "text"
   &[ext-t] {
     &:not([dis])>[grn-btn] {
-      color: var(--gb-base-cl);
+      color: var(--gb-t-def-cl);
       &:hover {
-        background-color: var(--gb-ot-hov-bg-cl);
+        background-color: var(--gb-t-hov-bg-cl);
       }
     }
     &[dis]>[grn-btn] {
-      color: var(--gb-dis-cl);
+      color: var(--gb-t-dis-cl);
     }
   }
 

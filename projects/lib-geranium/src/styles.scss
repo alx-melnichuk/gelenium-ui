@@ -70,15 +70,32 @@
   // ** **
 
   // ** grn Button **
-  --gb-base-cl: #1976d2;
-  --gb-dis-cl: #00000042;
-  --gb-co-dis-cl: #0000001f;
-  --gb-ot-hov-bg-cl: #1976d20a;
   // Exterior: "contained"
-  --gb-c-cl: #fff;
+  --gb-c-def-cl: #fff;
+  --gb-c-def-bg-cl: #1976d2;
+  // :hover
   --gb-c-hov-bg-cl: #1565c0;
+  // disable
+  --gb-c-dis-cl: #00000042;
+  --gb-c-dis-bg-cl: #0000001f;
+
   // Exterior: "outlined"
-  --gb-o-brd-cl: #1976d280;
+  --gb-o-def-cl: #1976d2;
+  --gb-o-def-br-cl: #1976d280;
+  // :hover
+  --gb-o-hov-bg-cl: #1976d20a;
+  --gb-o-hov-br-cl: #1976d2;
+  // disable
+  --gb-o-dis-cl: #00000042;
+  --gb-o-dis-br-cl: #0000001f;
+
+  // Exterior: "text"
+  --gb-t-def-cl: #1976d2;
+  // :hover
+  --gb-t-hov-bg-cl: #1976d20a;
+  // disable
+  --gb-t-dis-cl: #00000042;
+
 
   // ** **
 

@@ -24,7 +24,7 @@
       class="gb-label gb-elem-pd-hor">
       <ng-content></ng-content>
     </span>
-    <grn-touch-ripple *ngIf="!isDisabled2 && !isNoRipple2">
+    <grn-touch-ripple *ngIf="!isDisabled2 && !isNoRipple2 && !currConfig?.isNoRipple">
     </grn-touch-ripple>
   </button>
 </ng-container>
@@ -45,7 +45,7 @@
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
     <ng-content select="a"></ng-content>
-    <grn-touch-ripple *ngIf="!isDisabled2 && !isNoRipple2"
+    <grn-touch-ripple *ngIf="!isDisabled2 && !isNoRipple2 && !currConfig?.isNoRipple"
       skip-events>
     </grn-touch-ripple>
   </div>
@@ -59,6 +59,3 @@
     <ng-content select="[grn-orn-rg]"></ng-content>
   </span>
 </ng-template>
-
-<!-- <grn-touch-ripple>
-</grn-touch-ripple> -->

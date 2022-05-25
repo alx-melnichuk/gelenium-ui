@@ -6,10 +6,11 @@ app-button {
   .b-items {
     display: flex;
     flex-wrap: wrap;
-    // align-items: center;
+
     &>:first-child {
       margin-left: 3%;
     }
+
     &>:not(first-child) {
       margin-left: 7%;
     }

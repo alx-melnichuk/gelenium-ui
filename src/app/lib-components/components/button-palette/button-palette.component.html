@@ -21,7 +21,7 @@
   </p>
 </section>
 
-<div class="b-items bp-specific">
+<div class="bp-items bp-specific">
 
   <grn-button exterior="contained">
     <span>Primary</span>
@@ -58,7 +58,7 @@
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;div class="b-items bp-specific"&gt;
+&lt;div class="bp-items bp-specific"&gt;
 
   &lt;grn-button exterior="contained"&gt;
     &lt;span&gt;Primary&lt;/span&gt;
@@ -105,15 +105,15 @@ export class ButtonComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.b-items &#123;
+.bp-items &#123;
   display: flex;
   flex-wrap: wrap;
-  &amp;&gt;:first-child &#123;
-    margin-left: 3%;
-  &#125;
-  &amp;&gt;:not(first-child) &#123;
-    margin-left: 7%;
-  &#125;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
 &#125;
 
 // Exterior: "contained"
@@ -146,7 +146,7 @@ export class ButtonComponent &#123;
   </p>
 </section>
 
-<div class="b-items bp-specific">
+<div class="bp-items bp-specific">
 
   <grn-button exterior="outlined">
     <span>Secondary</span>
@@ -183,7 +183,7 @@ export class ButtonComponent &#123;
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;div class="b-items bp-specific"&gt;
+&lt;div class="bp-items bp-specific"&gt;
 
   &lt;grn-button exterior="outlined"&gt;
     &lt;span&gt;Secondary&lt;/span&gt;
@@ -230,15 +230,15 @@ export class ButtonComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.b-items &#123;
+.bp-items &#123;
   display: flex;
   flex-wrap: wrap;
-  &amp;&gt;:first-child &#123;
-    margin-left: 3%;
-  &#125;
-  &amp;&gt;:not(first-child) &#123;
-    margin-left: 7%;
-  &#125;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
 &#125;
 
 // Exterior: "outlined"
@@ -274,7 +274,7 @@ export class ButtonComponent &#123;
   </div>
 </section>
 
-<div class="b-items bp-specific">
+<div class="bp-items bp-specific">
 
   <grn-button exterior="text">
     <span>Additionally</span>
@@ -311,7 +311,7 @@ export class ButtonComponent &#123;
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;div class="b-items bp-specific"&gt;
+&lt;div class="bp-items bp-specific"&gt;
 
   &lt;grn-button exterior="text"&gt;
     &lt;span&gt;Additionally&lt;/span&gt;
@@ -358,15 +358,15 @@ export class ButtonComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.b-items &#123;
+.bp-items &#123;
   display: flex;
   flex-wrap: wrap;
-  &amp;&gt;:first-child &#123;
-    margin-left: 3%;
-  &#125;
-  &amp;&gt;:not(first-child) &#123;
-    margin-left: 7%;
-  &#125;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
 &#125;
 
 // Exterior: "text"
@@ -394,38 +394,41 @@ export class ButtonComponent &#123;
   <div>
     <h4>Bootstrap style buttons.</h4>
   </div>
+  <p>Button style in "Primary" mode.</p>
 </section>
 
-<div class="b-items bp-bstrap">
+<div class="bp-items">
 
-  <grn-button exterior="contained"
+  <grn-button class="bs-btn bs-btn-contained bs-primary"
     noElevation
-    frameSize="short"
-    isNoRipple
-    class="btn-primary">
+    noUppercase
+    [config]="config">
     <span>Primary</span>
   </grn-button>
 
-  <grn-button exterior="contained"
+  <grn-button class="bs-btn bs-btn-contained bs-primary"
     noElevation
-    frameSize="short"
-    isDisabled>
+    noUppercase
+    isDisabled
+    [config]="config">
     <span>Primary Disabled</span>
   </grn-button>
 
-  <grn-button exterior="contained"
+  <grn-button class="bs-btn bs-btn-contained bs-primary"
     noElevation
-    frameSize="short">
+    noUppercase
+    [config]="config">
     <a [routerLink]="[routerLink]"
       [fragment]="fragment4">
       Primary Link
     </a>
   </grn-button>
 
-  <grn-button exterior="contained"
+  <grn-button class="bs-btn bs-btn-contained bs-primary"
     noElevation
-    frameSize="short"
-    isDisabled>
+    noUppercase
+    isDisabled
+    [config]="config">
     <a [routerLink]="[routerLink]"
       [fragment]="fragment4">
       Primary Link Disabled
@@ -433,3 +436,1590 @@ export class ButtonComponent &#123;
   </grn-button>
 
 </div>
+
+<p></p>
+
+<div class="bp-items">
+
+  <grn-button class="bs-btn bs-btn-outline bs-primary"
+    noUppercase
+    [config]="config1">
+    <span>Primary</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-outline bs-primary"
+    noUppercase
+    isDisabled
+    [config]="config1">
+    <span>Primary Disabled</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-outline bs-primary"
+    noUppercase
+    [config]="config1">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment4">
+      Primary Link
+    </a>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-outline bs-primary"
+    noUppercase
+    isDisabled
+    [config]="config1">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment4">
+      Primary Link Disabled
+    </a>
+  </grn-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bp-items"&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-primary"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;span&gt;Primary&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-primary"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;span&gt;Primary Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-primary"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment4"&gt;
+      Primary Link
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-primary"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment4"&gt;
+      Primary Link Disabled
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GrnButtonConfig &#125; from 'projects/lib-geranium/src/lib/_interfaces/grn-button-config.interface';
+import &#123; ButtonExterior &#125; from 'projects/lib-geranium/src/lib/_interfaces/button-exterior.interface';
+import &#123; FrameSize &#125; from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment4 = 'palette4';
+  public config: GrnButtonConfig = &#123;
+    exterior: ButtonExterior.text,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.bp-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: bstrap **
+
+.grn-button.bs-btn &#123;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  --gb-lbl-pd-lf: 0.75rem;
+  --gb-lbl-pd-rg: 0.75rem;
+&#125;
+.grn-button.bs-btn:not(.gb-disabled)&gt;.grn-btn &#123;
+  transition:
+    color .15s ease-in-out,
+    background-color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
+&#125;
+.grn-button.bs-btn.gb-disabled&gt;.grn-btn &#123;
+  opacity: .65;
+&#125;
+
+// ** Style: bstrap "Primary" **
+.grn-button.bs-btn-primary&gt;.grn-btn &#123;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+&#125;
+.grn-button.bs-btn-primary:not(.gb-disabled)&gt;.grn-btn:hover &#123;
+  background-color: #0069d9;
+  border-color: #0062cc;
+&#125;
+.grn-button.bs-btn-primary:not(.gb-disabled)&gt;.grn-btn:active,
+.grn-button.bs-btn-primary:not(.gb-disabled).active&gt;.grn-btn &#123;
+  background-color: #0062cc;
+  border-color: #005cbf;
+&#125;
+.grn-button.bs-btn-primary:not(.gb-disabled)&gt;.grn-btn:focus-within,
+.grn-button.bs-btn-primary:not(.gb-disabled).focus&gt;.grn-btn &#123;
+  background-color: #0069d9;
+  border-color: #0062cc;
+  box-shadow: 0 0 0 0.2rem rgb(38 143 255 / 50%);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  [attr.id]="fragment5">
+  <p>Button style in "Secondary" mode.</p>
+</section>
+
+<div class="bp-items">
+
+  <grn-button class="bs-btn bs-btn-contained bs-secondary"
+    noElevation
+    noUppercase
+    [config]="config">
+    <span>Secondary</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-contained bs-secondary"
+    noElevation
+    noUppercase
+    isDisabled
+    [config]="config">
+    <span>Secondary Disabled</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-contained bs-secondary"
+    noElevation
+    noUppercase
+    [config]="config">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment5">
+      Secondary Link
+    </a>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-contained bs-secondary"
+    noElevation
+    noUppercase
+    isDisabled
+    [config]="config">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment5">
+      Secondary Link Disabled
+    </a>
+  </grn-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bp-items"&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-secondary"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;span&gt;Secondary&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-secondary"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;span&gt;Secondary Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-secondary"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment5"&gt;
+      Secondary Link
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-secondary"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment5"&gt;
+      Secondary Link Disabled
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GrnButtonConfig &#125; from 'projects/lib-geranium/src/lib/_interfaces/grn-button-config.interface';
+import &#123; ButtonExterior &#125; from 'projects/lib-geranium/src/lib/_interfaces/button-exterior.interface';
+import &#123; FrameSize &#125; from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment5 = 'palette5';
+  public config: GrnButtonConfig = &#123;
+    exterior: ButtonExterior.text,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.bp-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: bstrap **
+
+.grn-button.bs-btn &#123;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  --gb-lbl-pd-lf: 0.75rem;
+  --gb-lbl-pd-rg: 0.75rem;
+&#125;
+.grn-button.bs-btn:not(.gb-disabled)&gt;.grn-btn &#123;
+  transition:
+    color .15s ease-in-out,
+    background-color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
+&#125;
+.grn-button.bs-btn.gb-disabled&gt;.grn-btn &#123;
+  opacity: .65;
+&#125;
+
+// ** Style: bstrap "Secondary" **
+.grn-button.bs-btn-secondary&gt;.grn-btn &#123;
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+&#125;
+.grn-button.bs-btn-secondary:not(.gb-disabled)&gt;.grn-btn:hover &#123;
+  background-color: #5a6268;
+  border-color: #545b62;
+&#125;
+.grn-button.bs-btn-secondary:not(.gb-disabled)&gt;.grn-btn:active,
+.grn-button.bs-btn-secondary:not(.gb-disabled).active&gt;.grn-btn &#123;
+  background-color: #545b62;
+  border-color: #4e555b;
+&#125;
+.grn-button.bs-btn-secondary:not(.gb-disabled)&gt;.grn-btn:focus-within,
+.grn-button.bs-btn-secondary:not(.gb-disabled).focus&gt;.grn-btn &#123;
+  background-color: #5a6268;
+  border-color: #545b62;
+  box-shadow: 0 0 0 0.2rem rgb(130 138 145 / 50%);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  [attr.id]="fragment6">
+  <p>Button style in "Success" mode.</p>
+</section>
+
+<div class="bp-items">
+
+  <grn-button class="bs-btn bs-btn-success"
+    noUppercase
+    [config]="config_">
+    <span>Success</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-success"
+    noUppercase
+    isDisabled
+    [config]="config_">
+    <span>Success Disabled</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-success"
+    noUppercase
+    [config]="config_">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment6">
+      Success Link
+    </a>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-success"
+    noUppercase
+    isDisabled
+    [config]="config_">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment6">
+      Success Link Disabled
+    </a>
+  </grn-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bp-items"&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-success"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;span&gt;Success&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-success"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;span&gt;Success Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-success"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment6"&gt;
+      Success Link
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-success"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment6"&gt;
+      Success Link Disabled
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GrnButtonConfig &#125; from 'projects/lib-geranium/src/lib/_interfaces/grn-button-config.interface';
+import &#123; ButtonExterior &#125; from 'projects/lib-geranium/src/lib/_interfaces/button-exterior.interface';
+import &#123; FrameSize &#125; from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment6 = 'palette6';
+  public config: GrnButtonConfig = &#123;
+    exterior: ButtonExterior.text,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.bp-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: bstrap **
+
+.grn-button.bs-btn &#123;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  --gb-lbl-pd-lf: 0.75rem;
+  --gb-lbl-pd-rg: 0.75rem;
+&#125;
+.grn-button.bs-btn:not(.gb-disabled)&gt;.grn-btn &#123;
+  transition:
+    color .15s ease-in-out,
+    background-color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
+&#125;
+.grn-button.bs-btn.gb-disabled&gt;.grn-btn &#123;
+  opacity: .65;
+&#125;
+
+// ** Style: bstrap "Success" **
+.grn-button.bs-btn-success&gt;.grn-btn &#123;
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+&#125;
+.grn-button.bs-btn-success:not(.gb-disabled)&gt;.grn-btn:hover &#123;
+  background-color: #218838;
+  border-color: #1e7e34;
+&#125;
+.grn-button.bs-btn-success:not(.gb-disabled)&gt;.grn-btn:active,
+.grn-button.bs-btn-success:not(.gb-disabled).active&gt;.grn-btn &#123;
+  background-color: #1e7e34;
+  border-color: #1c7430;
+&#125;
+.grn-button.bs-btn-success:not(.gb-disabled)&gt;.grn-btn:focus-within,
+.grn-button.bs-btn-success:not(.gb-disabled).focus&gt;.grn-btn &#123;
+  background-color: #218838;
+  border-color: #1e7e34;
+  box-shadow: 0 0 0 0.2rem rgb(72 180 97 / 50%);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  [attr.id]="fragment7">
+  <p>Button style in "Danger" mode.</p>
+</section>
+
+<div class="bp-items">
+
+  <grn-button class="bs-btn bs-btn-danger"
+    noUppercase
+    [config]="config_">
+    <span>Danger</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-danger"
+    noUppercase
+    isDisabled
+    [config]="config_">
+    <span>Danger Disabled</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-danger"
+    noUppercase
+    [config]="config_">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment7">
+      Danger Link
+    </a>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-danger"
+    noUppercase
+    isDisabled
+    [config]="config_">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment7">
+      Danger Link Disabled
+    </a>
+  </grn-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bp-items"&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-danger"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;span&gt;Danger&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-danger"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;span&gt;Danger Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-danger"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment7"&gt;
+      Danger Link
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-danger"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment7"&gt;
+      Danger Link Disabled
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GrnButtonConfig &#125; from 'projects/lib-geranium/src/lib/_interfaces/grn-button-config.interface';
+import &#123; ButtonExterior &#125; from 'projects/lib-geranium/src/lib/_interfaces/button-exterior.interface';
+import &#123; FrameSize &#125; from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment7 = 'palette7';
+  public config: GrnButtonConfig = &#123;
+    exterior: ButtonExterior.text,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.bp-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: bstrap **
+
+.grn-button.bs-btn &#123;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  --gb-lbl-pd-lf: 0.75rem;
+  --gb-lbl-pd-rg: 0.75rem;
+&#125;
+.grn-button.bs-btn:not(.gb-disabled)&gt;.grn-btn &#123;
+  transition:
+    color .15s ease-in-out,
+    background-color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
+&#125;
+.grn-button.bs-btn.gb-disabled&gt;.grn-btn &#123;
+  opacity: .65;
+&#125;
+
+// ** Style: bstrap "Danger" **
+.grn-button.bs-btn-danger&gt;.grn-btn &#123;
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+&#125;
+.grn-button.bs-btn-danger:not(.gb-disabled)&gt;.grn-btn:hover &#123;
+  background-color: #c82333;
+  border-color: #bd2130;
+&#125;
+.grn-button.bs-btn-danger:not(.gb-disabled)&gt;.grn-btn:active,
+.grn-button.bs-btn-danger:not(.gb-disabled).active&gt;.grn-btn &#123;
+  background-color: #bd2130;
+  border-color: #b21f2d;
+&#125;
+.grn-button.bs-btn-danger:not(.gb-disabled)&gt;.grn-btn:focus-within,
+.grn-button.bs-btn-danger:not(.gb-disabled).focus&gt;.grn-btn &#123;
+  background-color: #c82333;
+  border-color: #bd2130;
+  box-shadow: 0 0 0 0.2rem rgb(225 83 97 / 50%);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  [attr.id]="fragment8">
+  <p>Button style in "Warning" mode.</p>
+</section>
+
+<div class="bp-items">
+
+  <grn-button class="bs-btn bs-btn-warning"
+    noUppercase
+    [config]="config_">
+    <span>Warning</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-warning"
+    noUppercase
+    isDisabled
+    [config]="config_">
+    <span>Warning Disabled</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-warning"
+    noUppercase
+    [config]="config_">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment8">
+      Warning Link
+    </a>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-warning"
+    noUppercase
+    isDisabled
+    [config]="config_">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment8">
+      Warning Link Disabled
+    </a>
+  </grn-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bp-items"&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-warning"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;span&gt;Warning&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-warning"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;span&gt;Warning Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-warning"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment8"&gt;
+      Warning Link
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-warning"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment8"&gt;
+      Warning Link Disabled
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GrnButtonConfig &#125; from 'projects/lib-geranium/src/lib/_interfaces/grn-button-config.interface';
+import &#123; ButtonExterior &#125; from 'projects/lib-geranium/src/lib/_interfaces/button-exterior.interface';
+import &#123; FrameSize &#125; from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment8 = 'palette8';
+  public config: GrnButtonConfig = &#123;
+    exterior: ButtonExterior.text,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.bp-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: bstrap **
+
+.grn-button.bs-btn &#123;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  --gb-lbl-pd-lf: 0.75rem;
+  --gb-lbl-pd-rg: 0.75rem;
+&#125;
+.grn-button.bs-btn:not(.gb-disabled)&gt;.grn-btn &#123;
+  transition:
+    color .15s ease-in-out,
+    background-color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
+&#125;
+.grn-button.bs-btn.gb-disabled&gt;.grn-btn &#123;
+  opacity: .65;
+&#125;
+
+// ** Style: bstrap "Warning" **
+.grn-button.bs-btn-warning&gt;.grn-btn &#123;
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+&#125;
+.grn-button.bs-btn-warning:not(.gb-disabled)&gt;.grn-btn:hover &#123;
+  background-color: #e0a800;
+  border-color: #d39e00;
+&#125;
+.grn-button.bs-btn-warning:not(.gb-disabled)&gt;.grn-btn:active,
+.grn-button.bs-btn-warning:not(.gb-disabled).active&gt;.grn-btn &#123;
+  background-color: #d39e00;
+  border-color: #c69500;
+&#125;
+.grn-button.bs-btn-warning:not(.gb-disabled)&gt;.grn-btn:focus-within,
+.grn-button.bs-btn-warning:not(.gb-disabled).focus&gt;.grn-btn &#123;
+  background-color: #e0a800;
+  border-color: #d39e00;
+  box-shadow: 0 0 0 0.2rem rgb(222 170 12 / 50%);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  [attr.id]="fragment9">
+  <p>Button style in "Info" mode.</p>
+</section>
+
+<div class="bp-items">
+
+  <grn-button class="bs-btn bs-btn-info"
+    noUppercase
+    [config]="config_">
+    <span>Info</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-info"
+    noUppercase
+    isDisabled
+    [config]="config_">
+    <span>Info Disabled</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-info"
+    noUppercase
+    [config]="config_">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment9">
+      Info Link
+    </a>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-info"
+    noUppercase
+    isDisabled
+    [config]="config_">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment9">
+      Info Link Disabled
+    </a>
+  </grn-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bp-items"&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-info"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;span&gt;Info&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-info"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;span&gt;Info Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-info"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment9"&gt;
+      Info Link
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-info"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment9"&gt;
+      Info Link Disabled
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GrnButtonConfig &#125; from 'projects/lib-geranium/src/lib/_interfaces/grn-button-config.interface';
+import &#123; ButtonExterior &#125; from 'projects/lib-geranium/src/lib/_interfaces/button-exterior.interface';
+import &#123; FrameSize &#125; from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment9 = 'palette9';
+  public config: GrnButtonConfig = &#123;
+    exterior: ButtonExterior.text,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.bp-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: bstrap **
+
+.grn-button.bs-btn &#123;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  --gb-lbl-pd-lf: 0.75rem;
+  --gb-lbl-pd-rg: 0.75rem;
+&#125;
+.grn-button.bs-btn:not(.gb-disabled)&gt;.grn-btn &#123;
+  transition:
+    color .15s ease-in-out,
+    background-color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
+&#125;
+.grn-button.bs-btn.gb-disabled&gt;.grn-btn &#123;
+  opacity: .65;
+&#125;
+
+// ** Style: bstrap "Info" **
+.grn-button.bs-btn-info&gt;.grn-btn &#123;
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+&#125;
+.grn-button.bs-btn-info:not(.gb-disabled)&gt;.grn-btn:hover &#123;
+  background-color: #138496;
+  border-color: #117a8b;
+&#125;
+.grn-button.bs-btn-info:not(.gb-disabled)&gt;.grn-btn:active,
+.grn-button.bs-btn-info:not(.gb-disabled).active&gt;.grn-btn &#123;
+  background-color: #117a8b;
+  border-color: #10707f;
+&#125;
+.grn-button.bs-btn-info:not(.gb-disabled)&gt;.grn-btn:focus-within,
+.grn-button.bs-btn-info:not(.gb-disabled).focus&gt;.grn-btn &#123;
+  background-color: #138496;
+  border-color: #117a8b;
+  box-shadow: 0 0 0 0.2rem rgb(58 176 195 / 50%);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  [attr.id]="fragment10">
+  <p>Button style in "Light" mode.</p>
+</section>
+
+<div class="bp-items">
+
+  <grn-button class="bs-btn bs-btn-light"
+    noUppercase
+    [config]="config_">
+    <span>Light</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-light"
+    noUppercase
+    isDisabled
+    [config]="config_">
+    <span>Light Disabled</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-light"
+    noUppercase
+    [config]="config_">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment10">
+      Light Link
+    </a>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-light"
+    noUppercase
+    isDisabled
+    [config]="config_">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment10">
+      Light Link Disabled
+    </a>
+  </grn-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bp-items"&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-light"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;span&gt;Light&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-light"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;span&gt;Light Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-light"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment10"&gt;
+      Light Link
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-light"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment10"&gt;
+      Light Link Disabled
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GrnButtonConfig &#125; from 'projects/lib-geranium/src/lib/_interfaces/grn-button-config.interface';
+import &#123; ButtonExterior &#125; from 'projects/lib-geranium/src/lib/_interfaces/button-exterior.interface';
+import &#123; FrameSize &#125; from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment10 = 'palette10';
+  public config: GrnButtonConfig = &#123;
+    exterior: ButtonExterior.text,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.bp-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: bstrap **
+
+.grn-button.bs-btn &#123;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  --gb-lbl-pd-lf: 0.75rem;
+  --gb-lbl-pd-rg: 0.75rem;
+&#125;
+.grn-button.bs-btn:not(.gb-disabled)&gt;.grn-btn &#123;
+  transition:
+    color .15s ease-in-out,
+    background-color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
+&#125;
+.grn-button.bs-btn.gb-disabled&gt;.grn-btn &#123;
+  opacity: .65;
+&#125;
+
+// ** Style: bstrap "Light" **
+.grn-button.bs-btn-light&gt;.grn-btn &#123;
+  color: #212529;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+&#125;
+.grn-button.bs-btn-light:not(.gb-disabled)&gt;.grn-btn:hover &#123;
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+&#125;
+.grn-button.bs-btn-light:not(.gb-disabled)&gt;.grn-btn:active,
+.grn-button.bs-btn-light:not(.gb-disabled).active&gt;.grn-btn &#123;
+  background-color: #dae0e5;
+  border-color: #d3d9df;
+&#125;
+.grn-button.bs-btn-light:not(.gb-disabled)&gt;.grn-btn:focus-within,
+.grn-button.bs-btn-light:not(.gb-disabled).focus&gt;.grn-btn &#123;
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+  box-shadow: 0 0 0 0.2rem rgb(216 217 219 / 50%);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  [attr.id]="fragment11">
+  <p>Button style in "Dark" mode.</p>
+</section>
+
+<div class="bp-items">
+
+  <grn-button class="bs-btn bs-btn-dark"
+    noUppercase
+    [config]="config_">
+    <span>Dark</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-dark"
+    noUppercase
+    isDisabled
+    [config]="config_">
+    <span>Dark Disabled</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-dark"
+    noUppercase
+    [config]="config_">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment11">
+      Dark Link
+    </a>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-dark"
+    noUppercase
+    isDisabled
+    [config]="config_">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment11">
+      Dark Link Disabled
+    </a>
+  </grn-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bp-items"&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-dark"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;span&gt;Dark&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-dark"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;span&gt;Dark Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-dark"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment11"&gt;
+      Dark Link
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-dark"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment11"&gt;
+      Dark Link Disabled
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GrnButtonConfig &#125; from 'projects/lib-geranium/src/lib/_interfaces/grn-button-config.interface';
+import &#123; ButtonExterior &#125; from 'projects/lib-geranium/src/lib/_interfaces/button-exterior.interface';
+import &#123; FrameSize &#125; from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment11 = 'palette11';
+  public config: GrnButtonConfig = &#123;
+    exterior: ButtonExterior.text,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.bp-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: bstrap **
+
+.grn-button.bs-btn &#123;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  --gb-lbl-pd-lf: 0.75rem;
+  --gb-lbl-pd-rg: 0.75rem;
+&#125;
+.grn-button.bs-btn:not(.gb-disabled)&gt;.grn-btn &#123;
+  transition:
+    color .15s ease-in-out,
+    background-color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
+&#125;
+.grn-button.bs-btn.gb-disabled&gt;.grn-btn &#123;
+  opacity: .65;
+&#125;
+
+// ** Style: bstrap "Dark" **
+.grn-button.bs-btn-dark&gt;.grn-btn &#123;
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
+&#125;
+.grn-button.bs-btn-dark:not(.gb-disabled)&gt;.grn-btn:hover &#123;
+  background-color: #23272b;
+  border-color: #1d2124;
+&#125;
+.grn-button.bs-btn-dark:not(.gb-disabled)&gt;.grn-btn:active,
+.grn-button.bs-btn-dark:not(.gb-disabled).active&gt;.grn-btn &#123;
+  background-color: #1d2124;
+  border-color: #171a1d;
+&#125;
+.grn-button.bs-btn-dark:not(.gb-disabled)&gt;.grn-btn:focus-within,
+.grn-button.bs-btn-dark:not(.gb-disabled).focus&gt;.grn-btn &#123;
+  background-color: #23272b;
+  border-color: #1d2124;
+  box-shadow: 0 0 0 0.2rem rgb(82 88 93 / 50%);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+<section mr-vr
+  [attr.id]="fragment12">
+  <p>Button style in "Link" mode.</p>
+</section>
+
+<div class="bp-items">
+
+  <grn-button class="bs-btn bs-btn-link"
+    noUppercase
+    [config]="config_">
+    <span>Link</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-link"
+    noUppercase
+    isDisabled
+    [config]="config_">
+    <span>Link Disabled</span>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-link"
+    noUppercase
+    [config]="config_">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment12">
+      Link - Link
+    </a>
+  </grn-button>
+
+  <grn-button class="bs-btn bs-btn-link"
+    noUppercase
+    isDisabled
+    [config]="config_">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment12">
+      Link - Link Disabled
+    </a>
+  </grn-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bp-items"&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-link"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;span&gt;Link&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-link"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;span&gt;Link Disabled&lt;/span&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-link"
+    noUppercase
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment12"&gt;
+      Link - Link
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+  &lt;grn-button class="bs-btn bs-btn-link"
+    noUppercase
+    isDisabled
+    [config]="config_"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment12"&gt;
+      Link - Link Disabled
+    &lt;/a&gt;
+  &lt;/grn-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GrnButtonConfig &#125; from 'projects/lib-geranium/src/lib/_interfaces/grn-button-config.interface';
+import &#123; ButtonExterior &#125; from 'projects/lib-geranium/src/lib/_interfaces/button-exterior.interface';
+import &#123; FrameSize &#125; from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment12 = 'palette12';
+  public config: GrnButtonConfig = &#123;
+    exterior: ButtonExterior.text,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.bp-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: bstrap **
+
+.grn-button.bs-btn &#123;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  --gb-lbl-pd-lf: 0.75rem;
+  --gb-lbl-pd-rg: 0.75rem;
+&#125;
+.grn-button.bs-btn:not(.gb-disabled)&gt;.grn-btn &#123;
+  transition:
+    color .15s ease-in-out,
+    background-color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
+&#125;
+.grn-button.bs-btn.gb-disabled&gt;.grn-btn &#123;
+  opacity: .65;
+&#125;
+
+// ** Style: bstrap "Link" **
+.grn-button.bs-btn-link:not(.gb-disabled)&gt;.grn-btn &#123;
+  color: #007bff;
+&#125;
+.grn-button.bs-btn-link.gb-disabled&gt;.grn-btn &#123;
+  color: #6c757d;
+&#125;
+.grn-button.bs-btn-link:not(.gb-disabled)&gt;.grn-btn:hover &#123;
+  color: #0056b3;
+  text-decoration: underline;
+  background-color: transparent;
+&#125;
+.grn-button.bs-btn-link:not(.gb-disabled)&gt;.grn-btn:focus-within,
+.grn-button.bs-btn-link:not(.gb-disabled).focus&gt;.grn-btn &#123;
+  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

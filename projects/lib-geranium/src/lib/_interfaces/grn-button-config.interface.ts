@@ -6,4 +6,5 @@ export interface GrnButtonConfig {
   frameSize?: FrameSize;
   frameSizeValue?: number;
   labelPd?: number; // px
+  isNoRipple?: boolean;
 }
