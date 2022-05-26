@@ -70,33 +70,15 @@
   // ** **
 
   // ** grn Button **
+  --gb-def-cl: #1976d2;
+  --gb-dis-cl: #00000042;
+  --gb-dis-cl2: #0000001f;
+  --gb-hov-bg-cl: #1976d20a;
   // Exterior: "contained"
-  --gb-c-def-cl: #fff;
-  --gb-c-def-bg-cl: #1976d2;
-  // :hover
-  --gb-c-hov-bg-cl: #1565c0;
-  // disable
-  --gb-c-dis-cl: #00000042;
-  --gb-c-dis-bg-cl: #0000001f;
-
+  --gb-def-cl2: #fff;
+  --gb-hov-bg-cl2: #1565c0;
   // Exterior: "outlined"
-  --gb-o-def-cl: #1976d2;
-  --gb-o-def-br-cl: #1976d280;
-  // :hover
-  --gb-o-hov-bg-cl: #1976d20a;
-  --gb-o-hov-br-cl: #1976d2;
-  // disable
-  --gb-o-dis-cl: #00000042;
-  --gb-o-dis-br-cl: #0000001f;
-
-  // Exterior: "text"
-  --gb-t-def-cl: #1976d2;
-  // :hover
-  --gb-t-hov-bg-cl: #1976d20a;
-  // disable
-  --gb-t-dis-cl: #00000042;
-
-
+  --gb-br-cl: #1976d280;
   // ** **
 
 }

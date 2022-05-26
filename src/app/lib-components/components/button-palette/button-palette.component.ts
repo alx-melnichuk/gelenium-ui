@@ -36,19 +36,29 @@ export class ButtonPaletteComponent {
   public fragment11 = 'palette11';
   public fragment12 = 'palette12';
 
-  public config: GrnButtonConfig = {
+  public isDisabledPrimary = false;
+  public isDisabledSecondary = false;
+  public isDisabledSuccess = false;
+  public isDisabledDanger = false;
+  public isDisabledWarning = false;
+  public isDisabledInfo = false;
+  public isDisabledLight = false;
+  public isDisabledDark = false;
+  public isDisabledReference = false;
+
+  public cfgContained: GrnButtonConfig = {
     exterior: ButtonExterior.contained,
     frameSize: FrameSize.short,
     isNoRipple: true,
   };
 
-  public config1: GrnButtonConfig = {
+  public cfgOutlined: GrnButtonConfig = {
     exterior: ButtonExterior.outlined,
     frameSize: FrameSize.short,
     isNoRipple: true,
   };
 
-  public config_: GrnButtonConfig = {
+  public cfgText: GrnButtonConfig = {
     exterior: ButtonExterior.text,
     frameSize: FrameSize.short,
     isNoRipple: true,

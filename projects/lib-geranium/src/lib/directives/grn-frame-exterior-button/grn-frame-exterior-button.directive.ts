@@ -69,6 +69,7 @@ export class GrnFrameExteriorButtonDirective implements OnChanges, GrnFrameSizeP
   // ** Private API **
 
   private settingExterior(elem: ElementRef<HTMLElement>, exterior: ButtonExterior): void {
+    HtmlElemUtil.setAttr(this.renderer, elem, 'ext', exterior != null ? '' : null);
     HtmlElemUtil.setClass(this.renderer, elem, 'gb-text', ButtonExteriorUtil.isText(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-t', ButtonExteriorUtil.isText(exterior) ? '' : null);
     HtmlElemUtil.setClass(this.renderer, elem, 'gb-contained', ButtonExteriorUtil.isContained(exterior));

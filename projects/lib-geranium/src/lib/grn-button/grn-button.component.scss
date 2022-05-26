@@ -86,18 +86,12 @@ grn-button {
   }
 
   // Exterior: "contained"
-  &[ext-c] {
-    &:not([dis])>[grn-btn] {
-      color: var(--gb-c-def-cl);
-      background-color: var(--gb-c-def-bg-cl);
-      &:hover {
-        background-color: var(--gb-c-hov-bg-cl);
-      }
-    }
-    &[dis]>[grn-btn] {
-      color: var(--gb-c-dis-cl);
-      background-color: var(--gb-c-dis-bg-cl);
-    }
+  &[ext-c]>[grn-btn] {
+    --def-cl: var(--gb-c-def-cl, var(--gb-def-cl2));
+    --def-bg-cl: var(--gb-c-def-bg-cl, var(--gb-def-cl));
+    --hov-bg-cl: var(--gb-c-hov-bg-cl, var(--gb-hov-bg-cl2));
+    --dis-cl: var(--gb-c-dis-cl, var(--gb-dis-cl));
+    --dis-bg-cl: var(--gb-c-dis-bg-cl, var(--gb-dis-cl2));
   }
   &[ext-c]:not([dis]):not([noElevation])>[grn-btn] {
     box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
@@ -114,36 +108,40 @@ grn-button {
         0px 3px 14px 2px rgb(0 0 0 / 12%);
     }
   }
-
   // Exterior: "outlined"
-  &[ext-o] {
-    &:not([dis])>[grn-btn] {
-      color: var(--gb-o-def-cl);
-      border: 1px solid var(--gb-o-def-br-cl);
-      &:hover {
-        background-color: var(--gb-o-hov-bg-cl);
-        border-color: var(--gb-o-hov-br-cl);
-      }
-    }
-    &[dis]>[grn-btn] {
-      color: var(--gb-o-dis-cl);
-      border: 1px solid var(--gb-o-dis-br-cl);
-    }
+  &[ext-o]>[grn-btn] {
+    border-width: 1px;
+    border-style: solid;
+    --def-cl: var(--gb-o-def-cl, var(--gb-def-cl));
+    --def-br-cl: var(--gb-o-def-br-cl, var(--gb-br-cl));
+    --hov-bg-cl: var(--gb-o-hov-bg-cl, var(--gb-hov-bg-cl));
+    --hov-br-cl: var(--gb-o-hov-br-cl, var(--gb-def-cl));
+    --dis-cl: var(--gb-o-dis-cl, var(--gb-dis-cl));
+    --dis-br-cl: var(--gb-o-dis-br-cl, var(--gb-dis-cl2));
   }
-
   // Exterior: "text"
-  &[ext-t] {
+  &[ext-t]>[grn-btn] {
+    --def-cl: var(--gb-t-def-cl, var(--gb-def-cl));
+    --hov-bg-cl: var(--gb-t-hov-bg-cl, var(--gb-hov-bg-cl));
+    --dis-cl: var(--gb-t-dis-cl, var(--gb-dis-cl));
+  }
+
+  &[ext] {
     &:not([dis])>[grn-btn] {
-      color: var(--gb-t-def-cl);
+      color: var(--def-cl);
+      background-color: var(--def-bg-cl);
+      border-color: var(--def-br-cl);
       &:hover {
-        background-color: var(--gb-t-hov-bg-cl);
+        background-color: var(--hov-bg-cl);
+        border-color: var(--hov-br-cl);
       }
     }
     &[dis]>[grn-btn] {
-      color: var(--gb-t-dis-cl);
+      color: var(--dis-cl);
+      background-color: var(--dis-bg-cl);
+      border-color: var(--dis-br-cl);
     }
   }
-
 
   &[ext-t]>[grn-btn], &[ext-o]>[grn-btn] {
     .gtr-ripple {
