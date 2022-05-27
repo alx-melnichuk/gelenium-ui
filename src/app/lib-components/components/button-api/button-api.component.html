@@ -1,0 +1,105 @@
+<section mr-vr>
+  <h3>API: GrnButton</h3>
+  <p>
+    Selector:
+    <span fw500>grn-button</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>grnButton</span>
+  </p>
+</section>
+
+<section mr-vr>
+  <h4>Properties</h4>
+</section>
+
+<table class="app-tab">
+  <tbody>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>id: string;</code>
+      </td>
+      <td>
+        <span>
+          ID of the native button.<br />(default = 'grn_button_' + ++identifier;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>config: GrnButtonConfig | null = null;</code>
+      </td>
+      <td>
+        <span>Defines a configuration object.</span><br />
+        <a [href]="urlButton + '#Config'">More details.</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>exterior: string | null;</code>
+      </td>
+      <td>
+        <span>
+          Determines the appearance of an button.<br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"contained";</li>
+          <li>"outlined";</li>
+          <li>"text" (default);</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>frameSize: string | null;</code>
+      </td>
+      <td>
+        <span>Determines the size of the button.</span><br />
+        <a [href]="urlFrameInput + '#FrameSize'">More details.</a><br />
+        <span>It can take the following values:</span>
+        <ul>
+          <li>"short" - height: 38px;</li>
+          <li>"small" - height: 44px (default);</li>
+          <li>"middle" - height: 50px;</li>
+          <li>"wide" - height: 56px;</li>
+          <li>"large" - height: 62px;</li>
+          <li>"huge" - height: 68px;</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isDisabled: string | null;</code>
+      </td>
+      <td>
+        <span>The element is disabled.<br />Attribute (no content).</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoRipple: string | null;</code>
+      </td>
+      <td>
+        <span>
+          Flag for disabling the ripple effect.<br />
+          Attribute (no content).
+        </span><br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />

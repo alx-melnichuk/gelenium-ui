@@ -13,6 +13,7 @@ import { ButtonBorderRadiusModule } from '../button-border-radius/button-border-
 import { ButtonOrnamentsModule } from '../button-ornaments/button-ornaments.module';
 import { ButtonPaletteModule } from '../button-palette/button-palette.module';
 import { ButtonConfigModule } from '../button-config/button-config.module';
+import { ButtonApiModule } from '../button-api/button-api.module';
 
 UrlComponents.add('URL_BUTTON', 'button');
 
@@ -25,7 +26,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Ornaments', url, fragment: 'Ornaments' },
   { label: 'Palette', url, fragment: 'Palette' },
   { label: 'Config', url, fragment: 'Config' },
-  // { label: 'Api', url, fragment: 'Api' },
+  { label: 'Api', url, fragment: 'Api' },
 ];
 SiteMenu.addItem('Components', 'Button', { label: 'Button', siteUrls });
 
@@ -40,6 +41,7 @@ SiteMenu.addItem('Components', 'Button', { label: 'Button', siteUrls });
     ButtonOrnamentsModule,
     ButtonPaletteModule,
     ButtonConfigModule,
+    ButtonApiModule,
   ],
   exports: [ButtonComponent],
 })
