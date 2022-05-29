@@ -53,6 +53,12 @@ export class GrnFrameInputComponent implements OnChanges, OnInit {
   public get isOutlinedExterior(): boolean {
     return InputExterior.outlined === this.exterior;
   }
+  public get isUnderlineExterior(): boolean {
+    return InputExterior.underline === this.exterior;
+  }
+  public get isStandardExterior(): boolean {
+    return InputExterior.standard === this.exterior;
+  }
 
   public currConfig: GrnFrameInputConfig | null = null;
   public innIsLabelShrink: boolean | null = null;
@@ -91,10 +97,10 @@ export class GrnFrameInputComponent implements OnChanges, OnInit {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-disabled', this.isDisabled || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
     }
-    if (changes.isFocused) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-focused', this.isFocused);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'foc', this.isFocused ? '' : null);
-    }
+    // if (changes.isFocused) {
+    //   HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-focused', this.isFocused);
+    //   HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'foc', this.isFocused ? '' : null);
+    // }
     if (changes.isFilled) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-filled', this.isFilled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);
@@ -126,16 +132,19 @@ export class GrnFrameInputComponent implements OnChanges, OnInit {
   // ** Private API **
 
   private settingExterior(elem: ElementRef<HTMLElement>, exterior: InputExterior | null): void {
+    HtmlElemUtil.setAttr(this.renderer, elem, 'dcr-br', '');
+
     HtmlElemUtil.setClass(this.renderer, elem, 'gfi-outlined', InputExteriorUtil.isOutlined(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', InputExteriorUtil.isOutlined(exterior) ? '' : null);
+
     HtmlElemUtil.setClass(this.renderer, elem, 'gfi-underline', InputExteriorUtil.isUnderline(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-u', InputExteriorUtil.isUnderline(exterior) ? '' : null);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'bgr-u', InputExteriorUtil.isUnderline(exterior) ? '' : null);
+
     HtmlElemUtil.setClass(this.renderer, elem, 'gfi-standard', InputExteriorUtil.isStandard(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-s', InputExteriorUtil.isStandard(exterior) ? '' : null);
+
     const isBorder = InputExteriorUtil.isStandard(exterior) || InputExteriorUtil.isUnderline(exterior);
     HtmlElemUtil.setClass(this.renderer, elem, 'gfi-border', isBorder);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'frm-su', isBorder ? '' : null);
   }
 
   private settingLabelShrink(elem: ElementRef<HTMLElement>, isLabelShrink: boolean): void {

@@ -2,9 +2,13 @@
   class="gfi-label">
   {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
 </label>
-<div class="gfi-frame">
+<div class="gfi-frame"
+  [attr.dcr-bg]="isUnderlineExterior ? '' : null"
+  [attr.dcr-bb]="isUnderlineExterior || isStandardExterior? '': null"
+  decor-brb>
   <ng-content></ng-content>
   <fieldset *ngIf="isOutlinedExterior"
+    dcr-br
     class="gfi-fieldset"
     aria-hidden="true">
     <legend *ngIf="!innHiddenLabel"
