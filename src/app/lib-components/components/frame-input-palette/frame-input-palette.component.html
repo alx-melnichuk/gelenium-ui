@@ -11,6 +11,7 @@
     --fip-hover-color: #00acc1;
     // The color of the label and border in an error state.
     --fip-error-color: #ad1457;
+    --fip-error-color2: #c13874eb;
     // The color of the label and border on mouse hover in an error state.
     --fip-hover-error-color: #f3006a;
     // The color of the border and label when getting focus.
@@ -41,29 +42,32 @@
     To replace the color of the label, we define a group of CSS classes.
   </p>
   <code><pre source="css">
-// The state without mouse hover, error, focused and disabled.
-.fip-specific .grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)>.gfi-label &#123;
+// Color for "label".
+// The state without: disabled, error, mouse hover, focused.
+.fip-specific .grn-frame-input:not(.gfi-disabled):not(.gfi-error):not(:hover):not(:focus-within)&gt;.gfi-label &#123;
   color: var(--fip-label-default-color);
-&#125; // The state with mouse hover but without error, focused and disabled.
-.fip-specific .grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)>.gfi-label &#123;
+&#125; // The state without: disabled, error, focused and with mouse hover.
+.fip-specific .grn-frame-input:not(.gfi-disabled):not(.gfi-error):hover:not(:focus-within)&gt;.gfi-label &#123;
   color: var(--fip-hover-color);
-&#125; // The state with error.
-.fip-specific .grn-frame-input.gfi-error>.gfi-label &#123;
-  color: var(--fip-error-color);
-&#125; // The state with mouse hover and error but without focused and disabled.
-.fip-specific .grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled)>.gfi-label &#123;
-  color: var(--fip-hover-error-color);
-&#125; // The state with focused but without error.
-.fip-specific .grn-frame-input.gfi-focused:not(.gfi-error)>.gfi-label &#123;
+&#125; // The state without: disabled, error and with focused.
+.fip-specific .grn-frame-input:not(.gfi-disabled):not(.gfi-error):focus-within&gt;.gfi-label &#123;
   color: var(--fip-focused-color);
-&#125; // The state with disabled but without error.
-.fip-specific .grn-frame-input.gfi-disabled:not(.gfi-error)>.gfi-label &#123;
+&#125; // The state without: disabled, mouse hover, focused and with error.
+.fip-specific .grn-frame-input:not(.gfi-disabled).gfi-error:not(:hover):not(:focus-within)&gt;.gfi-label &#123;
+  color: var(--fip-error-color);
+&#125; // The state without: disabled, focused and with error, mouse hover.
+.fip-specific .grn-frame-input:not(.gfi-disabled).gfi-error:hover:not(:focus-within)&gt;.gfi-label &#123;
+  color: var(--fip-hover-error-color);
+&#125; // The state without: disabled and with error, focused.
+.fip-specific .grn-frame-input:not(.gfi-disabled).gfi-error:focus-within&gt;.gfi-label &#123;
+  color: var(--fip-error-color);
+&#125; // The state with disabled.
+.fip-specific .grn-frame-input.gfi-disabled&gt;.gfi-label &#123;
   color: var(--fip-disabled-color);
 &#125;</pre></code>
   <p>
     Likewise to replace the "Outlined" border color define a group of CSS classes.
   </p>
-
   <p>
     The following example demonstrates how to change the colors of an input element.
   </p>
@@ -74,7 +78,7 @@
 
 <section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior06">
+  <mat-button-toggle-group [(ngModel)]="exterior06a">
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
     <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
     <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
@@ -95,7 +99,7 @@
       </div>
       <grn-input formControlName="input06a"
         label="Enter value"
-        [exterior]="exterior06">
+        [exterior]="exterior06a">
       </grn-input>
     </div>
 
@@ -109,7 +113,7 @@
         label="Required field"
         isRequired
         helperText="A value must be entered."
-        [exterior]="exterior06">
+        [exterior]="exterior06a">
       </grn-input>
     </div>
 
@@ -123,7 +127,7 @@
         label="Read Only"
         isReadOnly
         helperText="The parameter is read only."
-        [exterior]="exterior06">
+        [exterior]="exterior06a">
       </grn-input>
     </div>
 
@@ -137,7 +141,7 @@
         label="Disabled"
         isDisabled
         helperText="The parameter is disabled."
-        [exterior]="exterior06">
+        [exterior]="exterior06a">
       </grn-input>
     </div>
 
@@ -150,7 +154,7 @@
       <grn-input formControlName="input06e"
         [label]="controls06a.input06e.errors ? 'Error':'Value'"
         isRequired
-        [minLength]="minLength06e"
+        [minLength]="minLength06a"
         helperText="
         {{(controls06a.input06e.errors?.required ?
           'Required field.':
@@ -161,7 +165,7 @@
             :'Enter value.'
           )
         )}}"
-        [exterior]="exterior06">
+        [exterior]="exterior06a">
       </grn-input>
     </div>
 
@@ -176,7 +180,7 @@
         isError
         isDisabled
         helperText="The parameter is disabled."
-        [exterior]="exterior06">
+        [exterior]="exterior06a">
       </grn-input>
     </div>
 
@@ -207,7 +211,7 @@
       &lt;/div&gt;
       &lt;grn-input formControlName="input06a"
         label="Enter value"
-        [exterior]="exterior06"&gt;
+        [exterior]="exterior06a"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -221,7 +225,7 @@
         label="Required field"
         isRequired
         helperText="A value must be entered."
-        [exterior]="exterior06"&gt;
+        [exterior]="exterior06a"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -235,7 +239,7 @@
         label="Read Only"
         isReadOnly
         helperText="The parameter is read only."
-        [exterior]="exterior06"&gt;
+        [exterior]="exterior06a"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -249,7 +253,7 @@
         label="Disabled"
         isDisabled
         helperText="The parameter is disabled."
-        [exterior]="exterior06"&gt;
+        [exterior]="exterior06a"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -262,7 +266,7 @@
       &lt;grn-input formControlName="input06e"
         [label]="controls06a.input06e.errors ? 'Error':'Value'"
         isRequired
-        [minLength]="minLength06e"
+        [minLength]="minLength06a"
         helperText="
       <b>&#123;</b>&#123;(controls06a.input06e.errors?.required ?
         'Required field.':
@@ -273,7 +277,7 @@
           :'Enter value.'
         )
       )&#125;&#125;"
-        [exterior]="exterior06"&gt;
+        [exterior]="exterior06a"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -288,7 +292,7 @@
         isError
         isDisabled
         helperText="The parameter is disabled."
-        [exterior]="exterior06"&gt;
+        [exterior]="exterior06a"&gt;
       &lt;/grn-input&gt;
     &lt;/div&gt;
 
@@ -312,19 +316,19 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class FrameInputComponent &#123;
-  public minLength06e = 5;
+  public minLength06a = 5;
   public controls06a = &#123;
     input06a: new FormControl('', []),
     input06b: new FormControl('Hello World', [Validators.required]),
     input06c: new FormControl('Hello World', []),
     input06d: new FormControl('Hello World', []),
     input06e: new FormControl('demo', [
-      Validators.required, Validators.minLength(this.minLength06e)
+      Validators.required, Validators.minLength(this.minLength06a)
     ]),
     input06f: new FormControl('Hello World', []),
   &#125;;
   public formGroup06a: FormGroup = new FormGroup(this.controls06a);
-  public exterior06 = 'outlined';
+  public exterior06a = 'outlined';
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -361,90 +365,97 @@ export class FrameInputComponent &#123;
 &#125;
 
 // Color for "label".
-
-// The state without mouse hover, error, focused and disabled.
-.fip-specific .grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-label &#123;
+// +The state without: disabled, error, mouse hover, focused.
+.fip-specific .grn-frame-input:not(.gfi-disabled):not(.gfi-error):not(:hover):not(:focus-within)&gt;.gfi-label &#123;
   color: var(--fip-label-default-color);
-&#125;// The state with mouse hover but without error, focused and disabled.
-.fip-specific .grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-label &#123;
+&#125; // The state without: disabled, error, focused and with mouse hover.
+.fip-specific .grn-frame-input:not(.gfi-disabled):not(.gfi-error):hover:not(:focus-within)&gt;.gfi-label &#123;
   color: var(--fip-hover-color);
-&#125;// The state with error.
-.fip-specific .grn-frame-input.gfi-error&gt;.gfi-label &#123;
-  color: var(--fip-error-color);
-&#125;// The state with mouse hover and error but without focused and disabled.
-.fip-specific .grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-label &#123;
-  color: var(--fip-hover-error-color);
-&#125; // The state with focused but without error.
-.fip-specific .grn-frame-input.gfi-focused:not(.gfi-error)&gt;.gfi-label &#123;
+&#125; // The state without: disabled, error and with focused.
+.fip-specific .grn-frame-input:not(.gfi-disabled):not(.gfi-error):focus-within&gt;.gfi-label &#123;
   color: var(--fip-focused-color);
-&#125;// The state with disabled but without error.
+&#125; // The state without: disabled, mouse hover, focused and with error.
+.fip-specific .grn-frame-input:not(.gfi-disabled).gfi-error:not(:hover):not(:focus-within)&gt;.gfi-label &#123;
+  color: var(--fip-error-color);
+&#125; // The state without: disabled, focused and with error, mouse hover.
+.fip-specific .grn-frame-input:not(.gfi-disabled).gfi-error:hover:not(:focus-within)&gt;.gfi-label &#123;
+  color: var(--fip-hover-error-color);
+&#125; // The state without: disabled and with error, focused.
+.fip-specific .grn-frame-input:not(.gfi-disabled).gfi-error:focus-within&gt;.gfi-label &#123;
+  color: var(--fip-error-color);
+&#125; // The state with disabled.
 .fip-specific .grn-frame-input.gfi-disabled&gt;.gfi-label &#123;
   color: var(--fip-disabled-color);
 &#125;
 
 // Border-color for "outlined" mode.
-
-// The state without mouse hover, error, focused and disabled.
-.fip-specific .grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
+// +The state without: disabled, error, mouse hover, focused.
+.fip-specific .grn-frame-input:not(.gfi-disabled):not(.gfi-error):not(:hover):not(:focus-within) .gfi-fieldset &#123;
   border-color: var(--fip-o-default-brd-color);
-&#125;// The state with mouse hover but without error, focused and disabled.
-.fip-specific .grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
+&#125; // The state without: disabled, error, focused and with mouse hover.
+.fip-specific .grn-frame-input:not(.gfi-disabled):not(.gfi-error):hover:not(:focus-within) .gfi-fieldset &#123;
   border-color: var(--fip-hover-color);
-&#125;// The state with error.
-.fip-specific .grn-frame-input.gfi-error .gfi-fieldset &#123;
-  border-color: var(--fip-error-color);
-&#125;// The state with mouse hover and error but without focused and disabled.
-.fip-specific .grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
-  border-color: var(--fip-hover-error-color);
-&#125;// The state with focused but without error.
-.fip-specific .grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset &#123;
+&#125; // The state without: disabled, error and with focused.
+.fip-specific .grn-frame-input:not(.gfi-disabled):not(.gfi-error):focus-within .gfi-fieldset &#123;
   border-color: var(--fip-focused-color);
-&#125;// The state with disabled but without error.
+&#125; // The state without: disabled, mouse hover, focused and with error.
+.fip-specific .grn-frame-input:not(.gfi-disabled).gfi-error:not(:hover):not(:focus-within) .gfi-fieldset &#123;
+  border-color: var(--fip-error-color);
+&#125; // The state without: disabled, focused and with error, mouse hover.
+.fip-specific .grn-frame-input:not(.gfi-disabled).gfi-error:hover:not(:focus-within) .gfi-fieldset &#123;
+  border-color: var(--fip-hover-error-color);
+&#125; // The state without: disabled and with error, focused.
+.fip-specific .grn-frame-input:not(.gfi-disabled).gfi-error:focus-within .gfi-fieldset &#123;
+  border-color: var(--fip-error-color);
+&#125; // The state with disabled.
 .fip-specific .grn-frame-input.gfi-disabled .gfi-fieldset &#123;
   border-color: var(--fip-disabled-color);
 &#125;
 
 // Background-color for "underline" mode.
-// The state without mouse hover, error, focused and disabled.
-.fip-specific .gfi-underline:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-frame &#123;
+// +The state without: disabled, error, mouse hover, focused.
+.fip-specific .gfi-underline:not(.gfi-disabled):not(.gfi-error):not(:hover):not(:focus-within)&gt;.gfi-frame &#123;
   background-color: var(--fip-u-default-bg-color);
-&#125; // The state with mouse hover but without error, focused and disabled.
-.fip-specific .gfi-underline:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-frame &#123;
+&#125; // The state without: disabled, error, focused and with mouse hover.
+.fip-specific .gfi-underline:not(.gfi-disabled):not(.gfi-error):hover:not(:focus-within)&gt;.gfi-frame &#123;
   background-color: var(--fip-u-hover-bg-color);
-&#125; // The state with error.
-.fip-specific .gfi-underline.gfi-error&gt;.gfi-frame &#123;
-  background-color: var(--fip-u-error-bg-color);
-&#125; // The state with mouse hover and error but without focused and disabled.
-.fip-specific .gfi-underline:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-frame &#123;
-  background-color: var(--fip-u-hover-error-bg-color);
-&#125; // The state with focused but without error.
-.fip-specific .gfi-underline.gfi-focused:not(.gfi-error)&gt;.gfi-frame &#123;
+&#125; // The state without: disabled, error and with focused.
+.fip-specific .gfi-underline:not(.gfi-disabled):not(.gfi-error):focus-within&gt;.gfi-frame &#123;
   background-color: var(--fip-u-focused-bg-color);
-&#125; // The state with disabled but without error.
+&#125; // The state without: disabled, mouse hover, focused and with error.
+.fip-specific .gfi-underline:not(.gfi-disabled).gfi-error:not(:hover):not(:focus-within)&gt;.gfi-frame &#123;
+  background-color: var(--fip-u-error-bg-color);
+&#125; // The state without: disabled, focused and with error, mouse hover.
+.fip-specific .gfi-underline:not(.gfi-disabled).gfi-error:hover:not(:focus-within)&gt;.gfi-frame &#123;
+  background-color: var(--fip-u-hover-error-bg-color);
+&#125; // The state without: disabled and with error, focused.
+.fip-specific .gfi-underline:not(.gfi-disabled).gfi-error:focus-within&gt;.gfi-frame &#123;
+  background-color: var(--fip-u-focused-error-bg-color);
+&#125; // The state with disabled.
 .fip-specific .gfi-underline.gfi-disabled&gt;.gfi-frame &#123;
   background-color: var(--fip-u-disabled-bg-color);
 &#125;
 
 // Border-bottom-color for "underline" and "standard" mode.
-// The state without mouse hover, error, focused and disabled.
-.fip-specific .gfi-border:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-frame:before &#123;
+// +The state without: disabled, error, mouse hover, focused.
+.fip-specific .gfi-border:not(.gfi-disabled):not(.gfi-error):not(:hover):not(:focus-within)&gt;.gfi-frame:before &#123;
   border-bottom-color: var(--fip-su-default-brd-color);
-&#125; // The state with mouse hover but without error, focused and disabled.
-.fip-specific .gfi-border:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-frame:before &#123;
+&#125; // The state without: disabled, error, focused and with mouse hover.
+.fip-specific .gfi-border:not(.gfi-disabled):not(.gfi-error):hover:not(:focus-within)&gt;.gfi-frame:before &#123;
   border-bottom-color: var(--fip-hover-color);
-&#125; // The state with error.
-.fip-specific .gfi-border.gfi-error&gt;.gfi-frame:before &#123;
+&#125; // The state without: disabled, mouse hover, focused and with error.
+.fip-specific .gfi-border:not(.gfi-disabled).gfi-error:not(:hover):not(:focus-within)&gt;.gfi-frame:before &#123;
   border-bottom-color: var(--fip-error-color);
-&#125;
-.fip-specific .gfi-border.gfi-error&gt;.gfi-frame:after &#123;
-  border-bottom-color: var(--fip-error-color);
-&#125; // The state with mouse hover and error but without focused and disabled.
-.fip-specific .gfi-border:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled)&gt;.gfi-frame:before &#123;
+&#125; // The state without: disabled, focused and with error, mouse hover.
+.fip-specific .gfi-border:not(.gfi-disabled).gfi-error:hover:not(:focus-within)&gt;.gfi-frame:before &#123;
   border-bottom-color: var(--fip-hover-error-color);
-&#125; // The state with focused but without error.
-.fip-specific .gfi-border.gfi-focused:not(.gfi-error)&gt;.gfi-frame:after &#123;
+&#125; // The state without: disabled, error.
+.fip-specific .gfi-border:not(.gfi-disabled):not(.gfi-error)&gt;.gfi-frame:after &#123;
   border-bottom-color: var(--fip-focused-color);
-&#125; // The state with disabled but without error.
+&#125; // The state without: disabled and with error.
+.fip-specific .gfi-border:not(.gfi-disabled).gfi-error&gt;.gfi-frame:after &#123;
+  border-bottom-color: var(--fip-error-color);
+&#125; // The state with disabled.
 .fip-specific .gfi-border.gfi-disabled&gt;.gfi-frame:before &#123;
   border-bottom-color: var(--fip-disabled-color);
 &#125;
@@ -452,14 +463,17 @@ export class FrameInputComponent &#123;
 // Color for "HintOrError".
 .fip-specific .gfhe-hint-or-error &#123;
   // The state without error, focused and disabled.
-  &:not(.gfhe-error):not(.gfhe-focused):not(.gfhe-disabled) &#123;
+  &:not(.gfhe-disabled):not(.gfhe-error):not(.gfhe-focused) &#123;
     color: var(--fip-label-default-color);
   &#125; // The state with error.
-  &.gfhe-error:not(.gfhe-disabled) &#123;
-    color: var(--fip-error-color);
+  &:not(.gfhe-disabled).gfhe-error &#123;
+    color: var(--fip-error-color2);
   &#125; // The state with focused but without error.
-  &.gfhe-focused:not(.gfhe-error) &#123;
+  &:not(.gfhe-disabled).gfhe-focused:not(.gfhe-error) &#123;
     color: var(--fip-focused-color);
+  &#125; // The state with focused and error.
+  &:not(.gfhe-disabled).gfhe-focused.gfhe-error &#123;
+    color: var(--fip-error-color);
   &#125; // The state with disabled but without error.
   &.gfhe-disabled &#123;
     color: var(--fip-disabled-color);
@@ -679,19 +693,19 @@ export class FrameInputComponent &#123;
   line-height: 1.5;
 &#125;
 
-.fip-bstrap .grn-frame-input:not(:hover):not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input:not(:hover):not(.gfi-error):not(:focus-within):not(.gfi-disabled) .gfi-fieldset &#123;
   border-color: var(--g-o-def-br-cl);
 &#125;
-.fip-bstrap .grn-frame-input:hover:not(.gfi-error):not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input:hover:not(.gfi-error):not(:focus-within):not(.gfi-disabled) .gfi-fieldset &#123;
   border-color: var(--g-o-def-br-cl);
 &#125;
 .fip-bstrap .grn-frame-input.gfi-error .gfi-fieldset &#123;
   border-color: var(--g-err-cl);
 &#125;
-.fip-bstrap .grn-frame-input:hover.gfi-error:not(.gfi-focused):not(.gfi-disabled) .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input:hover.gfi-error:not(:focus-within):not(.gfi-disabled) .gfi-fieldset &#123;
   border-color: var(--g-hov-err-cl);
 &#125;
-.fip-bstrap .grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input:focus-within:not(.gfi-error) .gfi-fieldset &#123;
   border-color: var(--g-foc-cl);
 &#125;
 .fip-bstrap .grn-frame-input.gfi-disabled .gfi-fieldset &#123;
@@ -708,13 +722,13 @@ export class FrameInputComponent &#123;
 .fip-bstrap .grn-frame-input.gfi-disabled .gfi-fieldset &#123;
   border-style: solid;
 &#125;
-.fip-bstrap .grn-frame-input.gfi-focused .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input:focus-within .gfi-fieldset &#123;
   border-width: 1px;
 &#125;
-.fip-bstrap .grn-frame-input.gfi-focused.gfi-error .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input:focus-within.gfi-error .gfi-fieldset &#123;
   box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
 &#125;
-.fip-bstrap .grn-frame-input.gfi-focused:not(.gfi-error) .gfi-fieldset &#123;
+.fip-bstrap .grn-frame-input:focus-within:not(.gfi-error) .gfi-fieldset &#123;
   box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
 &#125;
 .fip-bstrap .grn-frame-input.gfi-error .gi-input &#123;
@@ -736,3 +750,365 @@ export class FrameInputComponent &#123;
     </mat-expansion-panel>
   </mat-accordion>
 </section>
+
+<hr br-nn>
+
+<section mr-vr>
+  <p>
+    It is also possible to change the color palette for an input element
+    by defining appropriate CSS variables.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior06c">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup06c"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group fip-second">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>State: empty.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input06j"
+        label="Enter value"
+        [exterior]="exterior06c">
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: isRequired, helperText.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input06k"
+        label="Required field"
+        isRequired
+        helperText="A value must be entered."
+        [exterior]="exterior06c">
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isReadOnly.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input06l"
+        label="Read Only"
+        isReadOnly
+        helperText="The parameter is read only."
+        [exterior]="exterior06c">
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isDisabled.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input06m"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior06c">
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isRequired, minLength.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input06n"
+        [label]="controls06c.input06n.errors ? 'Error':'Value'"
+        isRequired
+        [minLength]="minLength06a"
+        helperText="
+        {{(controls06c.input06n.errors?.required ?
+          'Required field.':
+          (controls06c.input06n.errors?.minlength ?
+            'Minimum length '
+            + controls06c.input06n.errors?.minlength.requiredLength
+            + ' characters.'
+            :'Enter value.'
+          )
+        )}}"
+        [exterior]="exterior06c">
+      </grn-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isError + isDisabled.</em>
+        </small>
+      </div>
+      <grn-input formControlName="input06o"
+        label="Error-Disabled"
+        isError
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior06c">
+      </grn-input>
+    </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup06c"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group fip-second"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;State: empty.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06j"
+        label="Enter value"
+        [exterior]="exterior06c"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06k"
+        label="Required field"
+        isRequired
+        helperText="A value must be entered."
+        [exterior]="exterior06c"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06l"
+        label="Read Only"
+        isReadOnly
+        helperText="The parameter is read only."
+        [exterior]="exterior06c"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06m"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior06c"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isRequired, minLength.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06n"
+        [label]="controls06c.input06n.errors ? 'Error':'Value'"
+        isRequired
+        [minLength]="minLength06a"
+        helperText="
+        <b>&#123;</b>&#123;(controls06c.input06n.errors?.required ?
+          'Required field.':
+          (controls06c.input06n.errors?.minlength ?
+            'Minimum length '
+            + controls06c.input06n.errors?.minlength.requiredLength
+            + ' characters.'
+            :'Enter value.'
+          )
+        )&#125;&#125;"
+        [exterior]="exterior06c"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isError + isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;grn-input formControlName="input06o"
+        label="Error-Disabled"
+        isError
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior06c"&gt;
+      &lt;/grn-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameInputComponent &#123;
+  public minLength06c = 5;
+  public controls06c = &#123;
+    input06j: new FormControl('', []),
+    input06k: new FormControl('Hello World', [Validators.required]),
+    input06l: new FormControl('Hello World', []),
+    input06m: new FormControl('Hello World', []),
+    input06n: new FormControl('demo', [
+      Validators.required, Validators.minLength(this.minLength06c)
+    ]),
+    input06o: new FormControl('Hello World', []),
+  &#125;;
+  public formGroup06c: FormGroup = new FormGroup(this.controls06c);
+  public exterior06c = 'outlined';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+
+// The second variant of the palette definition.
+
+.fip-second &#123;
+  // ** Section: Color "label". **
+  // The state without disabled, error, hover, focused.
+  --gfi-def-lb-cl: #558b2f;
+  // The state without disabled, error, focused and with hover.
+  --gfi-hov-lb-cl: #1b5e20; // #689f38;
+  // The state without disabled, error and with focused.
+  --gfi-foc-lb-cl: #2e7d32;
+  // The state without disabled, hover, focused and error.
+  --gfi-err-lb-cl: #ef6c00;
+  // The state without disabled, focused and error, hover.
+  --gfi-hov-err-lb-cl: #e66502;
+  // The state without disabled and error, focused.
+  --gfi-foc-err-lb-cl: #e65100;
+  // The state with disabled.
+  --gfi-dis-lb-cl: #ab47bc;
+
+  // ** Section: Background-Color "div.gfi-frame" for "Underline" mode. **
+  // The state without disabled, error, hover, focused.
+  --gfi-def-bg-cl: #e8f5e9;
+  // The state without disabled, error, focused and with hover.
+  --gfi-hov-bg-cl: #dcedc8; // #689f38;
+  // The state without disabled, error and with focused.
+  --gfi-foc-bg-cl: #c8e6c9;
+  // The state without disabled, hover, focused and error.
+  --gfi-err-bg-cl: #fcd9ce;
+  // The state without disabled, focused and error, hover.
+  --gfi-hov-err-bg-cl: #fbe9e7;
+  // The state without disabled and error, focused.
+  --gfi-foc-err-bg-cl: #ffd3c5;
+  // The state with disabled.
+  --gfi-dis-bg-cl: #f6e8f8;
+
+  // Border-Bottom-Color "div.gfi-frame" for "Outlined" and "Standard" mode.
+  // The state without disabled, error, hover, focused.
+  --gfi-def-brb-bf: #558b2f;
+  // The state without disabled, error and with hover.
+  --gfi-hov-brb-bf: #1b5e20;
+  // The state without disabled, hover, focused and error.
+  --gfi-err-brb-bf: #ef6c00;
+  // The state without disabled, focused and error, hover.
+  --gfi-hov-err-brb-bf: #e66502;
+  // The state without disabled, error and focused.
+  --gfi-foc-brb-af: #2e7d32;
+  // The state without disabled and error, focused.
+  --gfi-err-brb-af: #e65100;
+  // The state with disabled.
+  --gfi-dis-brb-bf: #ab47bc;
+
+  // ** Section "Fieldset" for "Outlined" mode. **
+  // The state without disabled, error, hover, focused.
+  --gfi-def-br-cl: #558b2f;
+  // The state without disabled, error, focused and with hover.
+  --gfi-hov-br-cl: #1b5e20;
+  // The state without disabled, error and with focused.
+  --gfi-foc-br-cl: #2e7d32;
+  // The state without disabled, hover, focused and error.
+  --gfi-err-br-cl: #ef6c00;
+  // The state without disabled, focused and error, hover.
+  --gfi-hov-err-br-cl: #e66502;
+  // The state without disabled and error, focused.
+  --gfi-foc-err-br-cl: #e65100;
+  // The state with disabled.
+  --gfi-dis-br-cl: #ab47bc;
+
+  // Color for "HintOrError".
+  // The state without error, focused and disabled.
+  --ghoe-def-cl: #558b2f;
+  // The state with error.
+  --ghoe-err-cl: #ef6c00;
+  // The state with focused but without error.
+  --ghoe-hov-cl: #1b5e20;
+  // The state with focused but with error.
+  --ghoe-foc-err-cl: #e65100;
+  // The state with disabled but without error.
+  --ghoe-dis-cl: #ab47bc;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn>

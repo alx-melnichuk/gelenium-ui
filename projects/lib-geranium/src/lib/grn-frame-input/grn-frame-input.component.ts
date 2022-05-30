@@ -40,8 +40,6 @@ export class GrnFrameInputComponent implements OnChanges, OnInit {
   @Input()
   public isDisabled: boolean | null = null;
   @Input()
-  public isFocused = false;
-  @Input()
   public isFilled = false;
   @Input()
   public isError: boolean | null = null;
@@ -97,10 +95,6 @@ export class GrnFrameInputComponent implements OnChanges, OnInit {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-disabled', this.isDisabled || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
     }
-    // if (changes.isFocused) {
-    //   HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-focused', this.isFocused);
-    //   HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'foc', this.isFocused ? '' : null);
-    // }
     if (changes.isFilled) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-filled', this.isFilled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);

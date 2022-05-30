@@ -34,17 +34,17 @@ export class FrameInputPaletteComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public minLength06e = 5;
+  public minLength06a = 5;
   public controls06a = {
     input06a: new FormControl('', []),
     input06b: new FormControl('Hello World', [Validators.required]),
     input06c: new FormControl('Hello World', []),
     input06d: new FormControl('Hello World', []),
-    input06e: new FormControl('demo', [Validators.required, Validators.minLength(this.minLength06e)]),
+    input06e: new FormControl('demo', [Validators.required, Validators.minLength(this.minLength06a)]),
     input06f: new FormControl('Hello World', []),
   };
   public formGroup06a: FormGroup = new FormGroup(this.controls06a);
-  public exterior06 = 'outlined';
+  public exterior06a = 'outlined';
 
   public controls06b = {
     input06g: new FormControl('Hello World', [Validators.required]),
@@ -52,6 +52,18 @@ export class FrameInputPaletteComponent {
     input06i: new FormControl('Hello World', []),
   };
   public formGroup06b: FormGroup = new FormGroup(this.controls06b);
+
+  public minLength06c = 5;
+  public controls06c = {
+    input06j: new FormControl('', []),
+    input06k: new FormControl('Hello World', [Validators.required]),
+    input06l: new FormControl('Hello World', []),
+    input06m: new FormControl('Hello World', []),
+    input06n: new FormControl('demo', [Validators.required, Validators.minLength(this.minLength06c)]),
+    input06o: new FormControl('Hello World', []),
+  };
+  public formGroup06c: FormGroup = new FormGroup(this.controls06c);
+  public exterior06c = 'outlined';
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

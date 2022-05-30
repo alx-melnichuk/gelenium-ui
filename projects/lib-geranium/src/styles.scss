@@ -34,6 +34,7 @@
   --gfi-hov-cl: rgba(0, 0, 0, 0.87);
   // The color of the label and border in an error state.
   --gfi-err-cl: #d32f2f;
+  --gfi-err-cl2: #d32f2fcf;
   // The color of the label and border on mouse hover in an error state.
   --gfi-hov-err-cl: #ff0000;
   // The color of the border and label when getting focus.
@@ -43,27 +44,27 @@
 
   // For "label"
   // The default color for the label.
-  --gfi-def-lb-cl: rgba(0, 0, 0, 0.6);
+  --gfi-def-cl1: rgba(0, 0, 0, 0.6);
 
   // For "frame" - outlined
   // The default border color for "outlined" mode.
-  --gfi-def-br-cl: rgba(0, 0, 0, 0.23);
+  --gfi-def-cl2: rgba(0, 0, 0, 0.23);
 
   // For "frame" - underline
   // The default background color for "underline" mode.
-  --gfi-def-bg-cl: rgba(0, 0, 0, 0.06);
+  --gfi-def2-cl: rgba(0, 0, 0, 0.06);
   // The background color on mouse hover for the "underline" mode.
-  --gfi-hov-bg-cl: #1976d20b;
+  --gfi-hov2-cl: #1976d20b;
   // The background color when getting focus for "underline" mode.
-  --gfi-foc-bg-cl: #1976d20f;
+  --gfi-foc2-cl: #1976d20f;
   // The background color in an error state for "underline" mode.
-  --gfi-err-bg-cl: #d32f2f0f;
+  --gfi-err2-cl: #d32f2f0f;
   // The background color on mouse hover in an error state  for "underline" mode.
-  --gfi-hov-err-bg-cl: #d32f2f0b;
+  --gfi-hov-err2-cl: #d32f2f0b;
   // The background color when getting focus in an error state for "underline" mode.
-  --gfi-foc-err-bg-cl: #ce51512d; // rgba(0, 0, 0, 0.06);
+  --gfi-foc-err2-cl: #ce51512d; // rgba(0, 0, 0, 0.06);
   // The background color in the state is disabled for the "underline" mode.
-  --gfi-dis-bg-cl: #7878783b;
+  --gfi-dis2-cl: #7878783b;
 
   // For "frame" - standard and underline
   // The default bottom border color for "underline" and "standard" modes.

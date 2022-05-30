@@ -93,32 +93,38 @@ grn-frame-input {
       1   // $scaleY
     );
   }
+  // ** Section: Color "label". **
+  &:not([dis]) {
+    &:not([err]) {
+      // The state without disabled, error, hover, focused.
+      &:not(:hover):not(:focus-within)>label {
+        color: var(--gfi-def-lb-cl, var(--gfi-def-cl1));
+      } // The state without disabled, error, focused and with hover.
+      &:hover:not(:focus-within)>label {
+        color: var(--gfi-hov-lb-cl, var(--gfi-hov-cl));
+      } // The state without disabled, error and with focused.
+      &:focus-within>label {
+        color: var(--gfi-foc-lb-cl, var(--gfi-foc-cl));
+      }
+    }
+    &[err] {
+      // The state without disabled, hover, focused and error.
+      &:not(:hover):not(:focus-within)>label {
+        color: var(--gfi-err-lb-cl, var(--gfi-err-cl));
+      } // The state without disabled, focused and error, hover.
+      &:hover:not(:focus-within)>label {
+        color: var(--gfi-hov-err-lb-cl, var(--gfi-hov-err-cl));
+      } // The state without disabled and error, focused.
+      &:focus-within>label {
+        color: var(--gfi-foc-err-lb-cl, var(--gfi-err-cl));
+      }
+    }
+  }
+  // The state with disabled.
+  &[dis]>label {
+    color: var(--gfi-dis-lb-cl, var(--gfi-dis-cl));
+  }
 
-  // Color for "label".
-  // The state without mouse hover, error, focused and disabled.
-  &:not(:hover):not([err]):not(:focus-within):not([dis]) label {
-    color: var(--gfi-def-lb-cl);
-  }
-  // The state with mouse hover but without error, focused and disabled.
-  &:hover:not([err]):not(:focus-within):not([dis]) label {
-    color: var(--gfi-hov-cl);
-  }
-  // The state with error.
-  &[err]:not([dis]) label {
-    color: var(--gfi-err-cl);
-  }
-  // The state with mouse hover and error but without focused and disabled.
-  &:hover[err]:not(:focus-within):not([dis]) label {
-    color: var(--gfi-hov-err-cl);
-  }
-  // The state with focused but without error.
-  &:focus-within:not([err]) label {
-    color: var(--gfi-foc-cl);
-  }
-  // The state with disabled but without error.
-  &[dis] label {
-    color: var(--gfi-dis-cl);
-  }
 
   // ** Section "div.gfi-frame". **
   &>div {
@@ -134,37 +140,40 @@ grn-frame-input {
   }
   
 
-  // ** dcr-bg Section: Background-Color "div.gfi-frame" for "Underline" mode. **
+  // ** Section: Background-Color "div.gfi-frame" for "Underline" mode. **
   &>[dcr-bg] {
     -webkit-transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
   }
   &:not([dis]) {
     &:not([err]) {
+      // The state without disabled, error, hover, focused.
       &:not(:hover):not(:focus-within)>[dcr-bg] {
-        background-color: var(--gfi-u-def-bg-cl, var(--gfi-def-bg-cl));
-      }
+        background-color: var(--gfi-def-bg-cl, var(--gfi-def2-cl));
+      } // The state without disabled, error, focused and with hover.
       &:hover:not(:focus-within)>[dcr-bg] {
-        background-color: var(--gfi-u-hov-bg-cl, var(--gfi-hov-bg-cl));
-      }
+        background-color: var(--gfi-hov-bg-cl, var(--gfi-hov2-cl));
+      } // The state without disabled, error and with focused.
       &:focus-within>[dcr-bg] {
-        background-color: var(--gfi-u-foc-bg-cl, var(--gfi-foc-bg-cl));
+        background-color: var(--gfi-foc-bg-cl, var(--gfi-foc2-cl));
       }
     }
     &[err] {
+      // The state without disabled, hover, focused and error.
       &:not(:hover):not(:focus-within)>[dcr-bg] {
-        background-color: var(--gfi-u-err-bg-cl, var(--gfi-err-bg-cl));
-      }
+        background-color: var(--gfi-err-bg-cl, var(--gfi-err2-cl));
+      } // The state without disabled, focused and error, hover.
       &:hover:not(:focus-within)>[dcr-bg] {
-        background-color: var(--gfi-u-hov-err-bg-cl, var(--gfi-hov-err-bg-cl));
-      }
+        background-color: var(--gfi-hov-err-bg-cl, var(--gfi-hov-err2-cl));
+      } // The state without disabled and error, focused.
       &:focus-within>[dcr-bg] {
-        background-color: var(--gfi-u-foc-err-bg-cl, var(--gfi-foc-err-bg-cl));
+        background-color: var(--gfi-foc-err-bg-cl, var(--gfi-foc-err2-cl));
       }
     }
   }
+  // The state with disabled.
   &[dis]>[dcr-bg] {
-    background-color: var(--gfi-u-dis-bg-cl, var(--gfi-dis-bg-cl));
+    background-color: var(--gfi-dis-bg-cl, var(--gfi-dis2-cl));
   }
 
 
@@ -220,32 +229,35 @@ grn-frame-input {
   // Border-Bottom-Color "div.gfi-frame" for "Outlined" and "Standard" mode.
   &:not([dis]) {
     &:not([err]) {
+      // The state without disabled, error, hover, focused.
       &:not(:hover):not(:focus-within)>[dcr-bb]:before {
-        border-bottom-color: var(--gfi-u-def-brb-bf, var(--gfi-def-bg-cl2));
-      }
+        border-bottom-color: var(--gfi-def-brb-bf, var(--gfi-def-bg-cl2));
+      } // The state without disabled, error and with hover.
       &:hover>[dcr-bb]:before {
-        border-bottom-color: var(--gfi-u-hov-brb-bf, var(--gfi-hov-cl));
+        border-bottom-color: var(--gfi-hov-brb-bf, var(--gfi-hov-cl));
       }
     }
     &[err] {
+      // The state without disabled, hover, focused and error.
       &:not(:hover):not(:focus-within)>[dcr-bb]:before {
-        border-bottom-color: var(--gfi-u-err-brb-bf, var(--gfi-err-cl));
-      }
+        border-bottom-color: var(--gfi-err-brb-bf, var(--gfi-err-cl));
+      } // The state without disabled, focused and error, hover.
       &:hover:not(:focus-within)>[dcr-bb]:before {
-        border-bottom-color: var(--gfi-u-hov-err-brb-bf, var(--gfi-hov-err-cl));
+        border-bottom-color: var(--gfi-hov-err-brb-bf, var(--gfi-hov-err-cl));
       }
     }
   }
   &:not([dis]) {
+    // The state without disabled, error and focused.
     &:not([err])>[dcr-bb]:after {
-      border-bottom-color: var(--gfi-u-foc-cl, var(--gfi-foc-cl));
-    }
+      border-bottom-color: var(--gfi-foc-brb-af, var(--gfi-foc-cl));
+    } // The state without disabled and error, focused.
     &[err]>[dcr-bb]:after {
-      border-bottom-color: var(--gfi-u-err-cl, var(--gfi-err-cl));
+      border-bottom-color: var(--gfi-err-brb-af, var(--gfi-err-cl));
     }
-  }
+  } // The state with disabled.
   &[dis]>[dcr-bb]:before {
-    border-bottom-color: var(--gfi-u-dis-brb-bf, var(--gfi-dis-cl));
+    border-bottom-color: var(--gfi-dis-brb-bf, var(--gfi-dis-cl));
   }
 
 
@@ -278,33 +290,35 @@ grn-frame-input {
     border-color: var(--gfi-dis-cl);
     border-style: dotted;
   }*/
-  // ** dcr-br Section: Border-Color "div.gfi-frame fieldset" for "Outlined" mode. **
+  // ** Section: Border-Color "div.gfi-frame fieldset" for "Outlined" mode. **
   &:not([dis]) {
     &:not([err]) {
+      // The state without disabled, error, hover, focused.
       &:not(:hover):not(:focus-within) [dcr-br] {
-        border-color: var(--gfi-o-def-br-cl, var(--gfi-def-br-cl));
-      }
+        border-color: var(--gfi-def-br-cl, var(--gfi-def-cl2));
+      } // The state without disabled, error, focused and with hover.
       &:hover:not(:focus-within) [dcr-br] {
-        border-color: var(--gfi-o-hov-br-cl, var(--gfi-hov-cl));
-      }
+        border-color: var(--gfi-hov-br-cl, var(--gfi-hov-cl));
+      } // The state without disabled, error and with focused.
       &:focus-within [dcr-br] {
-        border-color: var(--gfi-o-foc-br-cl, var(--gfi-foc-cl));
+        border-color: var(--gfi-foc-br-cl, var(--gfi-foc-cl));
       }
     }
     &[err] {
+      // The state without disabled, hover, focused and error.
       &:not(:hover):not(:focus-within) [dcr-br] {
-        border-color: var(--gfi-o-err-br-cl, var(--gfi-err-cl));
-      }
+        border-color: var(--gfi-err-br-cl, var(--gfi-err-cl));
+      } // The state without disabled, focused and error, hover.
       &:hover:not(:focus-within) [dcr-br] {
-        border-color: var(--gfi-o-hov-err-br-cl, var(--gfi-hov-err-cl));
-      }
+        border-color: var(--gfi-hov-err-br-cl, var(--gfi-hov-err-cl));
+      } // The state without disabled and error, focused.
       &:focus-within [dcr-br] {
-        border-color: var(--gfi-o-foc-err-br-cl, var(--gfi-err-cl));
+        border-color: var(--gfi-foc-err-br-cl, var(--gfi-err-cl));
       }
     }
-  }
+  } // The state with disabled.
   &[dis] [dcr-br] {
-    border-color: var(--gfi-o-dis-br-cl, var(--gfi-def-br-cl));
+    border-color: var(--gfi-dis-br-cl, var(--gfi-def-cl2));
   }
 
   

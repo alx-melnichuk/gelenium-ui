@@ -17,15 +17,18 @@ grn-hint-or-error {
 
   // The state without error, focused and disabled.
   &:not([err]):not([foc]):not([dis]) {
-    color: var(--gfi-lbl-def-cl);
+    color: var(--ghoe-def-cl, var(--gfi-def-cl1));
   } // The state with error.
   &[err]:not([dis]) {
-    color: var(--gfi-err-cl);
+    color: var(--ghoe-err-cl, var(--gfi-err-cl2));
   } // The state with focused but without error.
   &[foc]:not([err]) {
-    color: var(--gfi-hov-cl);
+    color: var(--ghoe-hov-cl, var(--gfi-hov-cl));
+  } // The state with focused but with error.
+  &[foc][err] {
+    color: var(--ghoe-foc-err-cl, var(--gfi-err-cl));
   } // The state with disabled but without error.
   &[dis] {
-    color: var(--gfi-dis-cl);
+    color: var(--ghoe-dis-cl, var(--gfi-dis-cl));
   }
 }
