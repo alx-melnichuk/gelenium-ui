@@ -18,7 +18,7 @@ export * from './lib/directives/grn-frame-size/public-api';
 export * from './lib/directives/grn-regex/public-api';
 
 export * from './lib/grn-button/public-api';
-export * from './lib/grn-frame-input/public-api';
+export * from './lib/grn-frame/public-api';
 export * from './lib/grn-hint-or-error/public-api';
 export * from './lib/grn-infinite-scroll/public-api';
 export * from './lib/grn-input/public-api';

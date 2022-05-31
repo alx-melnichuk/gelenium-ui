@@ -13,26 +13,26 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { GrnFrameInputConfig } from '../_interfaces/grn-frame-input-config.interface';
+import { GrnFrameConfig } from '../_interfaces/grn-frame-config.interface';
 import { InputExterior, InputExteriorUtil } from '../_interfaces/input-exterior.interface';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
-export const GRN_FRAME_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('GRN_FRAME_INPUT_CONFIG');
+export const GRN_FRAME_CONFIG = new InjectionToken<GrnFrameConfig>('GRN_FRAME_CONFIG');
 
 @Component({
-  selector: 'grn-frame-input',
-  templateUrl: './grn-frame-input.component.html',
-  styleUrls: ['./grn-frame-input.component.scss'],
+  selector: 'grn-frame',
+  templateUrl: './grn-frame.component.html',
+  styleUrls: ['./grn-frame.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GrnFrameInputComponent implements OnChanges, OnInit {
+export class GrnFrameComponent implements OnChanges, OnInit {
   @Input()
   public label = '';
   @Input()
   public exterior: string | null = null; // InputExteriorType
   @Input()
-  public config: GrnFrameInputConfig | null = null;
+  public config: GrnFrameConfig | null = null;
   @Input()
   public isLabelShrink: boolean | null = null;
   @Input()
@@ -58,18 +58,18 @@ export class GrnFrameInputComponent implements OnChanges, OnInit {
     return InputExterior.standard === this.exterior;
   }
 
-  public currConfig: GrnFrameInputConfig | null = null;
+  public currConfig: GrnFrameConfig | null = null;
   public innIsLabelShrink: boolean | null = null;
   public innHiddenLabel: boolean | null = null;
   public innExterior: InputExterior | null = null;
 
   constructor(
-    @Optional() @Inject(GRN_FRAME_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null,
+    @Optional() @Inject(GRN_FRAME_CONFIG) private rootConfig: GrnFrameConfig | null,
     public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {
     this.currConfig = this.rootConfig;
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-frame-input', true);
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-frame', true);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

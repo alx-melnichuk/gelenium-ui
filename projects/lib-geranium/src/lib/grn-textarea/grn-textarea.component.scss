@@ -55,7 +55,7 @@ grn-textarea {
   }
 
   grn-hint-or-error {
-    margin-left: var(--gt-he-pd-lf, var(--he-pd-lf));
-    margin-right: var(--gt-he-pd-rg, var(--he-pd-rg)); 
+    padding-left: var(--gt-he-pd-lf, var(--he-pd-lf));
+    padding-right: var(--gt-he-pd-rg, var(--he-pd-rg)); 
   }
 }

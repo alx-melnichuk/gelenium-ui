@@ -207,7 +207,7 @@
           <code><pre source="ts">
 import &#123; ChangeDetectionStrategy, Component, Input, ViewEncapsulation &#125; from '@angular/core';
 import &#123; FormControl, FormGroup &#125; from '@angular/forms';
-import &#123; GrnFrameInputConfig &#125; from 'projects/lib-geranium/src/lib/interfaces/grn-frame-input-config.interface';
+import &#123; GrnFrameConfig &#125; from 'projects/lib-geranium/src/lib/interfaces/grn-frame-config.interface';
 import &#123; OrnamAlign &#125; from 'projects/lib-geranium/src/lib/interfaces/ornam-align.interface';
 
 @Component(&#123;
@@ -227,11 +227,12 @@ export class TextareaComponent &#123;
   public exterior05 = 'outlined';
   public isBtnEye05c = false;
   public isBtnEye05d = false;
+  // GrnFrameConfig
+  public configBaseline: any = &#123;
+    ornamRgAlign: 'baseline',
+  &#125;;
 
   constructor() &#123;&#125;
-  public configBaseline: GrnFrameInputConfig = &#123;
-    ornamRgAlign: OrnamAlign.baseline,
-  &#125;;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

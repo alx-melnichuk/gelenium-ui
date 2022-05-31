@@ -1,8 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FrameSize } from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
-import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-input-config.interface';
-import { InputExterior } from 'projects/lib-geranium/src/lib/_interfaces/input-exterior.interface';
 
 import {
   LABEL_CSS,

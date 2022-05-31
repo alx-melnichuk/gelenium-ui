@@ -13,7 +13,7 @@ import {
   LABEL_UNDERLINE,
 } from 'src/app/lib-core/constants/constants';
 
-import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-input-config.interface';
+import { GrnFrameConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-config.interface';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { FrameSize, FrameSizeUtil } from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
 
@@ -80,10 +80,10 @@ export class FrameInputBorderRadiusComponent {
     input06e: new FormControl('Demo - E', []),
     input06f: new FormControl('Demo - F', []),
   });
-  public configOutlined: GrnFrameInputConfig = {
+  public configOutlined: GrnFrameConfig = {
     labelPd: 18.5, // 0.37*FrameSizeValue.middle
   };
-  public configUnderline: GrnFrameInputConfig = {
+  public configUnderline: GrnFrameConfig = {
     labelPd: 18.5, // 0.37*FrameSizeValue.middle
   };
 
@@ -101,7 +101,7 @@ export class FrameInputBorderRadiusComponent {
   public getRatio(exterior: string): number {
     return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
   }
-  public getConfig(labelPd: number): GrnFrameInputConfig {
+  public getConfig(labelPd: number): GrnFrameConfig {
     return { labelPd };
   }
 }

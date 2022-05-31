@@ -3,13 +3,13 @@
   <p>
     If your application will have a single style for input elements, then you can set a single
     configuration.
-    To do this, you need to create an object with the GrnFrameInputConfig interface and define the
+    To do this, you need to create an object with the GrnFrameConfig interface and define the
     required values.
     Next, specify the resulting object in the list of providers for the entire application (at the
     level of the AppComponent).
   </p>
   <code><pre source="ts">
-  const grnFrameInputConfigDefault: GrnFrameInputConfig = &#123;
+  const grnFrameConfigDefault: GrnFrameConfig = &#123;
     exterior: InputExterior.outlined,
     frameSize: FrameSize.small,
   &#125;;
@@ -21,8 +21,8 @@
     encapsulation: ViewEncapsulation.None,
     providers: [
       &#123;
-        provide: GRN_FRAME_INPUT_CONFIG,
-        useValue: grnFrameInputConfigDefault
+        provide: GRN_FRAME_CONFIG,
+        useValue: grnFrameConfigDefault
       &#125;
     ],
   &#125;)
@@ -36,7 +36,7 @@
 </section>
 
 <section mr-vr>
-  <h4>GrnFrameInputConfig interface.</h4>
+  <h4>GrnFrameConfig interface.</h4>
 </section>
 
 <table class="app-tab">
@@ -169,7 +169,7 @@
     <li>"frameSize" will have the value "small" (height to 44px;).</li>
   </ul>
   <code><pre source="ts">
-    const grnFrameInputConfigDefault: GrnFrameInputConfig = &#123;
+    const grnFrameConfigDefault: GrnFrameConfig = &#123;
       exterior: InputExterior.outlined,
       frameSize: FrameSize.small,
     &#125;;</pre></code>
@@ -178,7 +178,7 @@
 <section mr-vr>
   <h4>2. Specify "underline" and "middle".</h4>
   <p>
-    Suppose we have a provider in our application with "GrnFrameInputConfig" and all input elements
+    Suppose we have a provider in our application with "GrnFrameConfig" and all input elements
     accept its default values.
     We can change these values for an individual element.
     To do this, you need to specify in this element those properties that do not match in the

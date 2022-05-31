@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-input-config.interface';
+import { GrnFrameConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-config.interface';
 import { OrnamAlign, OrnamAlignUtil } from 'projects/lib-geranium/src/lib/_interfaces/ornam-align.interface';
 
 import {
@@ -57,13 +57,13 @@ export class InputOrnamentsComponent {
   public isBtnEyeCrossed05f = false;
   public isBtnEyeCrossed05g = false;
   public isBtnEyeCrossed05h = false;
-  public config05h: GrnFrameInputConfig = {
+  public config05h: GrnFrameConfig = {
     ornamRgAlign: OrnamAlign.baseline,
   };
   public ornamLfAlign05 = 'default';
   public ornamRgAlign05 = 'default';
 
-  public config05: GrnFrameInputConfig = {};
+  public config05: GrnFrameConfig = {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {
     this.changeConfig05(this.convert(this.ornamLfAlign05), this.convert(this.ornamRgAlign05));

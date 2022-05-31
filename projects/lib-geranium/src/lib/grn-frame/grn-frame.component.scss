@@ -1,4 +1,4 @@
-/*# sourceURL=grn-frame-input.component.scss */
+/*# sourceURL=grn-frame.component.scss */
 
 @import '../_styles/mx-align-items.scss';
 @import '../_styles/mx-display-inline-flex.scss';
@@ -8,7 +8,7 @@
 @import '../_styles/mx-transform-scale-x-y-translate-x-y.scss';
 
 
-grn-frame-input {
+grn-frame {
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
   line-height: 1.4375em; // The value of the "line height" for the input element. (23px for font-size: 16px)
@@ -52,7 +52,7 @@ grn-frame-input {
     --def-lbl2-trn-y: 1.546875em; // 24.75px
   }
 
-  border-radius: var(--gfi-br-rd, var(--br-rd, var(--def-br-rd)));
+  border-radius: var(--gf-br-rd, var(--br-rd, var(--def-br-rd)));
 
   // ** Section "Label". **
   label {
@@ -72,10 +72,10 @@ grn-frame-input {
   }
   &[shr], &:focus-within, &[fil] {
     label {
-      max-width: calc(133% - var(--gfi-lbl-wd, var(--lbl-wd, var(--def-lbl-wd))));
+      max-width: calc(133% - var(--gf-lbl-wd, var(--lbl-wd, var(--def-lbl-wd))));
       @include mxTransform_TranslateXY_ScaleXY(
-        var(--gfi-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf))), // $translateX
-        var(--gfi-lbl-trn-y, var(--lbl-trn-y, var(--def-lbl-trn-y))), // $translateY
+        var(--gf-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf))), // $translateX
+        var(--gf-lbl-trn-y, var(--lbl-trn-y, var(--def-lbl-trn-y))), // $translateY
         0.75, // $scaleX
         0.75  // $scaleY
       );
@@ -83,12 +83,12 @@ grn-frame-input {
   }
   &:not([shr]):not(:focus-within):not([fil]) label {
     max-width: calc(100%
-    - var(--orn-lbl-pd-lf, var(--gfi-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf))))
-    - var(--orn-lbl-pd-rg, var(--gfi-lbl-pd-rg, var(--lbl-pd-rg, var(--def-lbl-pd-rg))))
+    - var(--orn-lbl-pd-lf, var(--gf-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf))))
+    - var(--orn-lbl-pd-rg, var(--gf-lbl-pd-rg, var(--lbl-pd-rg, var(--def-lbl-pd-rg))))
     );
     @include mxTransform_TranslateXY_ScaleXY(
-      var(--orn-lbl-pd-lf, var(--gfi-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf)))), // $translateX
-      var(--gfi-lbl2-trn-y, var(--lbl2-trn-y, var(--def-lbl2-trn-y))), // $translateY
+      var(--orn-lbl-pd-lf, var(--gf-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf)))), // $translateX
+      var(--gf-lbl2-trn-y, var(--lbl2-trn-y, var(--def-lbl2-trn-y))), // $translateY
       1,  // $scaleX
       1   // $scaleY
     );
@@ -98,31 +98,31 @@ grn-frame-input {
     &:not([err]) {
       // The state without disabled, error, hover, focused.
       &:not(:hover):not(:focus-within)>label {
-        color: var(--gfi-def-lb-cl, var(--gfi-def-cl1));
+        color: var(--gf-def-lb-cl, var(--gf-def-cl1));
       } // The state without disabled, error, focused and with hover.
       &:hover:not(:focus-within)>label {
-        color: var(--gfi-hov-lb-cl, var(--gfi-hov-cl));
+        color: var(--gf-hov-lb-cl, var(--gf-hov-cl));
       } // The state without disabled, error and with focused.
       &:focus-within>label {
-        color: var(--gfi-foc-lb-cl, var(--gfi-foc-cl));
+        color: var(--gf-foc-lb-cl, var(--gf-foc-cl));
       }
     }
     &[err] {
       // The state without disabled, hover, focused and error.
       &:not(:hover):not(:focus-within)>label {
-        color: var(--gfi-err-lb-cl, var(--gfi-err-cl));
+        color: var(--gf-err-lb-cl, var(--gf-err-cl));
       } // The state without disabled, focused and error, hover.
       &:hover:not(:focus-within)>label {
-        color: var(--gfi-hov-err-lb-cl, var(--gfi-hov-err-cl));
+        color: var(--gf-hov-err-lb-cl, var(--gf-hov-err-cl));
       } // The state without disabled and error, focused.
       &:focus-within>label {
-        color: var(--gfi-foc-err-lb-cl, var(--gfi-err-cl));
+        color: var(--gf-foc-err-lb-cl, var(--gf-err-cl));
       }
     }
   }
   // The state with disabled.
   &[dis]>label {
-    color: var(--gfi-dis-lb-cl, var(--gfi-dis-cl));
+    color: var(--gf-dis-lb-cl, var(--gf-dis-cl));
   }
 
 
@@ -136,7 +136,7 @@ grn-frame-input {
     width: 100%;
   }
   &[dis]>div {
-    color: var(--gfi-dis-cl); // The color in state is disabled for an input element.
+    color: var(--gf-dis-cl); // The color in state is disabled for an input element.
   }
   
 
@@ -149,31 +149,31 @@ grn-frame-input {
     &:not([err]) {
       // The state without disabled, error, hover, focused.
       &:not(:hover):not(:focus-within)>[dcr-bg] {
-        background-color: var(--gfi-def-bg-cl, var(--gfi-def2-cl));
+        background-color: var(--gf-def-bg-cl, var(--gf-def2-cl));
       } // The state without disabled, error, focused and with hover.
       &:hover:not(:focus-within)>[dcr-bg] {
-        background-color: var(--gfi-hov-bg-cl, var(--gfi-hov2-cl));
+        background-color: var(--gf-hov-bg-cl, var(--gf-hov2-cl));
       } // The state without disabled, error and with focused.
       &:focus-within>[dcr-bg] {
-        background-color: var(--gfi-foc-bg-cl, var(--gfi-foc2-cl));
+        background-color: var(--gf-foc-bg-cl, var(--gf-foc2-cl));
       }
     }
     &[err] {
       // The state without disabled, hover, focused and error.
       &:not(:hover):not(:focus-within)>[dcr-bg] {
-        background-color: var(--gfi-err-bg-cl, var(--gfi-err2-cl));
+        background-color: var(--gf-err-bg-cl, var(--gf-err2-cl));
       } // The state without disabled, focused and error, hover.
       &:hover:not(:focus-within)>[dcr-bg] {
-        background-color: var(--gfi-hov-err-bg-cl, var(--gfi-hov-err2-cl));
+        background-color: var(--gf-hov-err-bg-cl, var(--gf-hov-err2-cl));
       } // The state without disabled and error, focused.
       &:focus-within>[dcr-bg] {
-        background-color: var(--gfi-foc-err-bg-cl, var(--gfi-foc-err2-cl));
+        background-color: var(--gf-foc-err-bg-cl, var(--gf-foc-err2-cl));
       }
     }
   }
   // The state with disabled.
   &[dis]>[dcr-bg] {
-    background-color: var(--gfi-dis-bg-cl, var(--gfi-dis2-cl));
+    background-color: var(--gf-dis-bg-cl, var(--gf-dis2-cl));
   }
 
 
@@ -231,33 +231,33 @@ grn-frame-input {
     &:not([err]) {
       // The state without disabled, error, hover, focused.
       &:not(:hover):not(:focus-within)>[dcr-bb]:before {
-        border-bottom-color: var(--gfi-def-brb-bf, var(--gfi-def-bg-cl2));
+        border-bottom-color: var(--gf-def-brb-bf, var(--gf-def-bg-cl2));
       } // The state without disabled, error and with hover.
       &:hover>[dcr-bb]:before {
-        border-bottom-color: var(--gfi-hov-brb-bf, var(--gfi-hov-cl));
+        border-bottom-color: var(--gf-hov-brb-bf, var(--gf-hov-cl));
       }
     }
     &[err] {
       // The state without disabled, hover, focused and error.
       &:not(:hover):not(:focus-within)>[dcr-bb]:before {
-        border-bottom-color: var(--gfi-err-brb-bf, var(--gfi-err-cl));
+        border-bottom-color: var(--gf-err-brb-bf, var(--gf-err-cl));
       } // The state without disabled, focused and error, hover.
       &:hover:not(:focus-within)>[dcr-bb]:before {
-        border-bottom-color: var(--gfi-hov-err-brb-bf, var(--gfi-hov-err-cl));
+        border-bottom-color: var(--gf-hov-err-brb-bf, var(--gf-hov-err-cl));
       }
     }
   }
   &:not([dis]) {
     // The state without disabled, error and focused.
     &:not([err])>[dcr-bb]:after {
-      border-bottom-color: var(--gfi-foc-brb-af, var(--gfi-foc-cl));
+      border-bottom-color: var(--gf-foc-brb-af, var(--gf-foc-cl));
     } // The state without disabled and error, focused.
     &[err]>[dcr-bb]:after {
-      border-bottom-color: var(--gfi-err-brb-af, var(--gfi-err-cl));
+      border-bottom-color: var(--gf-err-brb-af, var(--gf-err-cl));
     }
   } // The state with disabled.
   &[dis]>[dcr-bb]:before {
-    border-bottom-color: var(--gfi-dis-brb-bf, var(--gfi-dis-cl));
+    border-bottom-color: var(--gf-dis-brb-bf, var(--gf-dis-cl));
   }
 
 
@@ -270,7 +270,7 @@ grn-frame-input {
     top: 0;
     left: 0;
     margin: 0;
-    padding: 0px calc(var(--gfi-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf))) - var(--gfi-o-lgn-pd, var(--def-o-lgn-pd)));
+    padding: 0px calc(var(--gf-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf))) - var(--gf-o-lgn-pd, var(--def-o-lgn-pd)));
     pointer-events: none;
     border-radius: inherit;
     border-width: 1px;
@@ -282,12 +282,12 @@ grn-frame-input {
   // For "outlined" mode. With input focus, increase the frame to 2 pixels.
   &:not([dis]):focus-within fieldset {
     border-width: 2px;
-    padding-left: calc(var(--gfi-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf))) - var(--gfi-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
+    padding-left: calc(var(--gf-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf))) - var(--gf-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
   }
   /* The radius value must be an integer, otherwise the frame in the "dotted" style is poorly drawn.
   // The state with disabled but without error.
   &[dis] fieldset {
-    border-color: var(--gfi-dis-cl);
+    border-color: var(--gf-dis-cl);
     border-style: dotted;
   }*/
   // ** Section: Border-Color "div.gfi-frame fieldset" for "Outlined" mode. **
@@ -295,30 +295,30 @@ grn-frame-input {
     &:not([err]) {
       // The state without disabled, error, hover, focused.
       &:not(:hover):not(:focus-within) [dcr-br] {
-        border-color: var(--gfi-def-br-cl, var(--gfi-def-cl2));
+        border-color: var(--gf-def-br-cl, var(--gf-def-cl2));
       } // The state without disabled, error, focused and with hover.
       &:hover:not(:focus-within) [dcr-br] {
-        border-color: var(--gfi-hov-br-cl, var(--gfi-hov-cl));
+        border-color: var(--gf-hov-br-cl, var(--gf-hov-cl));
       } // The state without disabled, error and with focused.
       &:focus-within [dcr-br] {
-        border-color: var(--gfi-foc-br-cl, var(--gfi-foc-cl));
+        border-color: var(--gf-foc-br-cl, var(--gf-foc-cl));
       }
     }
     &[err] {
       // The state without disabled, hover, focused and error.
       &:not(:hover):not(:focus-within) [dcr-br] {
-        border-color: var(--gfi-err-br-cl, var(--gfi-err-cl));
+        border-color: var(--gf-err-br-cl, var(--gf-err-cl));
       } // The state without disabled, focused and error, hover.
       &:hover:not(:focus-within) [dcr-br] {
-        border-color: var(--gfi-hov-err-br-cl, var(--gfi-hov-err-cl));
+        border-color: var(--gf-hov-err-br-cl, var(--gf-hov-err-cl));
       } // The state without disabled and error, focused.
       &:focus-within [dcr-br] {
-        border-color: var(--gfi-foc-err-br-cl, var(--gfi-err-cl));
+        border-color: var(--gf-foc-err-br-cl, var(--gf-err-cl));
       }
     }
   } // The state with disabled.
   &[dis] [dcr-br] {
-    border-color: var(--gfi-dis-br-cl, var(--gfi-def-cl2));
+    border-color: var(--gf-dis-br-cl, var(--gf-def-cl2));
   }
 
   
@@ -343,7 +343,7 @@ grn-frame-input {
       transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
     }
     &[ind] legend {
-      padding: 0 calc(var(--gfi-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
+      padding: 0 calc(var(--gf-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
     }
   }
   &:not([shr]):not([fil]):not(:focus-within) legend {
@@ -362,25 +362,25 @@ grn-frame-input {
       align-self: baseline;
     }
     &>[elem-pd-ver] {
-      padding-top: var(--gfi-lbl-pd-tp, var(--lbl-pd-tp, var(--def-lbl-pd-tp)));
-      padding-bottom: var(--gfi-lbl-pd-bt, var(--lbl-pd-bt, var(--def-lbl-pd-bt)));
+      padding-top: var(--gf-lbl-pd-tp, var(--lbl-pd-tp, var(--def-lbl-pd-tp)));
+      padding-bottom: var(--gf-lbl-pd-bt, var(--lbl-pd-bt, var(--def-lbl-pd-bt)));
     }
     &>[elem-mr-ver] {
-      margin-top: var(--gfi-lbl-pd-tp, var(--lbl-pd-tp, var(--def-lbl-pd-tp)));
-      margin-bottom: var(--gfi-lbl-pd-bt, var(--lbl-pd-bt, var(--def-lbl-pd-bt)));
+      margin-top: var(--gf-lbl-pd-tp, var(--lbl-pd-tp, var(--def-lbl-pd-tp)));
+      margin-bottom: var(--gf-lbl-pd-bt, var(--lbl-pd-bt, var(--def-lbl-pd-bt)));
     }
     &>span[orn-lf] {
       max-height: inherit;
     }
     &>span[orn-lf]:empty~[elem-pd-hor] {
-      padding-left: var(--gfi-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf)));
+      padding-left: var(--gf-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf)));
     }
     &>span[orn-rg] {
       max-height: inherit;
       order: 1;
     }
     &>span[orn-rg]:empty~[elem-pd-hor] {
-      padding-right: var(--gfi-lbl-pd-rg, var(--lbl-pd-rg, var(--def-lbl-pd-rg)));
+      padding-right: var(--gf-lbl-pd-rg, var(--lbl-pd-rg, var(--def-lbl-pd-rg)));
     }
   }
 
@@ -422,7 +422,7 @@ grn-frame-input {
   &[ext-s]>div>span[orn-rg] {
     &>.gfi-su-ornam {
       display: inline-block;
-      margin-bottom: var(--gfi-lbl-pd-bt, var(--lbl-pd-bt, var(--def-lbl-pd-bt)));
+      margin-bottom: var(--gf-lbl-pd-bt, var(--lbl-pd-bt, var(--def-lbl-pd-bt)));
     }
   }
   // ** **

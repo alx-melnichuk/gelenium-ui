@@ -34,7 +34,7 @@ import {
 
 import { GrnNodeInternalValidator, GRN_NODE_INTERNAL_VALIDATOR } from '../directives/grn-regex/grn-node-internal-validator.interface';
 import { FrameSize, FrameSizeUtil } from '../_interfaces/frame-size.interface';
-import { GrnFrameInputConfig } from '../_interfaces/grn-frame-input-config.interface';
+import { GrnFrameConfig } from '../_interfaces/grn-frame-config.interface';
 import { GrnFrameSizePaddingVerHorRes } from '../_interfaces/grn-frame-size-prepare-data.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
@@ -43,7 +43,7 @@ import { InputType, InputTypeUtil } from './grn-input.interface';
 
 let identifier = 0;
 
-export const GRN_INPUT_CONFIG = new InjectionToken<GrnFrameInputConfig>('GRN_INPUT_CONFIG');
+export const GRN_INPUT_CONFIG = new InjectionToken<GrnFrameConfig>('GRN_INPUT_CONFIG');
 
 @Component({
   selector: 'grn-input',
@@ -66,7 +66,7 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   @Input()
   public label = '';
   @Input()
-  public config: GrnFrameInputConfig | null = null;
+  public config: GrnFrameConfig | null = null;
   @Input()
   public exterior: string | null = null; // InputExteriorType
   @Input()
@@ -115,7 +115,7 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public inputElementRef: ElementRef<HTMLElement> | null = null;
 
   public defaultFrameSize = FrameSizeUtil.getValue(FrameSize.middle) || 0;
-  public currConfig: GrnFrameInputConfig | null = null;
+  public currConfig: GrnFrameConfig | null = null;
   public typeVal: InputType = InputType.text;
   public isDisabled2: boolean | null = null; // Binding attribute "isDisabled".
   public isRequired2: boolean | null = null; // Binding attribute "isRequired".
@@ -131,7 +131,7 @@ export class GrnInputComponent implements OnChanges, ControlValueAccessor, Valid
     // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: Object,
     private changeDetectorRef: ChangeDetectorRef,
-    @Optional() @Inject(GRN_INPUT_CONFIG) private rootConfig: GrnFrameInputConfig | null,
+    @Optional() @Inject(GRN_INPUT_CONFIG) private rootConfig: GrnFrameConfig | null,
     public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {

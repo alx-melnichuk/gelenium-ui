@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-input-config.interface';
+import { GrnFrameConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-config.interface';
 import { OrnamAlign } from 'projects/lib-geranium/src/lib/_interfaces/ornam-align.interface';
 
 import {
@@ -47,9 +47,9 @@ export class TextareaOrnamentsComponent {
   public isBtnEye05c = false;
   public isBtnEye05d = false;
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
-  public configBaseline: GrnFrameInputConfig = {
+  public configBaseline: GrnFrameConfig = {
     ornamRgAlign: OrnamAlign.baseline,
   };
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  constructor() {}
 }

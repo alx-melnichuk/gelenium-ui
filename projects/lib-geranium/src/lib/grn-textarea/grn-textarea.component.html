@@ -1,9 +1,8 @@
 <ng-container [formGroup]="formGroup">
   <div #prepareData="grnFrameExteriorInput"
     [grnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
-    [grnFrameExteriorInputElementRef]="grnFrameInput.hostRef">
-    <grn-frame-input #grnFrameInput
-      [attr.wdFull]="wdFull"
+    [grnFrameExteriorInputElementRef]="hostRef">
+    <grn-frame [attr.wdFull]="wdFull"
       [label]="label"
       [exterior]="prepareData.exterior"
       [config]="config"
@@ -49,7 +48,7 @@
         (click)="$event.stopPropagation();">
       </textarea>
 
-    </grn-frame-input>
+    </grn-frame>
   </div>
 </ng-container>
 <grn-hint-or-error *ngIf="!!helperText"

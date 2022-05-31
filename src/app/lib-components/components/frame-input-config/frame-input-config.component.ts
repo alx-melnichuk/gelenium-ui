@@ -4,13 +4,13 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from 'src/app/lib-core/constants/constants';
 
 import { FrameSize } from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
-import { GrnFrameInputConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-input-config.interface';
+import { GrnFrameConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-config.interface';
 import { InputExterior } from 'projects/lib-geranium/src/lib/_interfaces/input-exterior.interface';
-import { GRN_FRAME_INPUT_CONFIG } from 'projects/lib-geranium/src/lib/grn-frame-input/grn-frame-input.component';
+import { GRN_FRAME_CONFIG } from 'projects/lib-geranium/src/lib/grn-frame/grn-frame.component';
 
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
-const grnFrameInputConfigDefault: GrnFrameInputConfig = {
+const grnFrameConfigDefault: GrnFrameConfig = {
   exterior: InputExterior.outlined,
   frameSize: FrameSize.small,
 };
@@ -21,7 +21,7 @@ const grnFrameInputConfigDefault: GrnFrameInputConfig = {
   styleUrls: ['./frame-input-config.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: GRN_FRAME_INPUT_CONFIG, useValue: grnFrameInputConfigDefault }],
+  providers: [{ provide: GRN_FRAME_CONFIG, useValue: grnFrameConfigDefault }],
 })
 export class FrameInputConfigComponent {
   @Input()

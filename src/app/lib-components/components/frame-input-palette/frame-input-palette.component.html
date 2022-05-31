@@ -5,34 +5,34 @@
     To avoid duplicating color codes, we will use the following CSS variables:
   </p>
   <code><pre source="css">
-  // Let's create our own color palette.
-  .fip-specific &#123;
-    // The color of the label and border on mouse hover.
-    --fip-hover-color: #00acc1;
-    // The color of the label and border in an error state.
-    --fip-error-color: #ad1457;
-    --fip-error-color2: #c13874eb;
-    // The color of the label and border on mouse hover in an error state.
-    --fip-hover-error-color: #f3006a;
-    // The color of the border and label when getting focus.
-    --fip-focused-color: #0097a7;
-    // The color of the label and border in the state is disabled.
-    --fip-disabled-color: #9c27b0;
+// Let's create our own color palette.
+.fip-specific &#123;
+  // The color of the label and border on mouse hover.
+  --fip-hover-color: #00acc1;
+  // The color of the label and border in an error state.
+  --fip-error-color: #ad1457;
+  --fip-error-color2: #c13874eb;
+  // The color of the label and border on mouse hover in an error state.
+  --fip-hover-error-color: #f3006a;
+  // The color of the border and label when getting focus.
+  --fip-focused-color: #0097a7;
+  // The color of the label and border in the state is disabled.
+  --fip-disabled-color: #9c27b0;
 
-    --fip-label-default-color: #5c6bc0;
-    // For "frame" - outlined
-    --fip-o-default-brd-color: #5c6bc0;
-    // For "frame" - underline
-    --fip-u-default-bg-color: rgba(178, 235, 242, 0.6);
-    --fip-u-error-bg-color: rgba(240, 98, 146, 0.15);
-    --fip-u-hover-error-bg-color: rgba(240, 94, 146, 0.09);
-    // --fip-u-hover-error-bg-color: rgba(240, 94, 220, 0.1);
-    --fip-u-hover-bg-color: rgba(172, 235, 236, 0.3);
-    --fip-u-focused-bg-color: rgba(178, 235, 242, 0.4);
-    --fip-u-disabled-bg-color: rgba(178, 235, 242, 0.2);
-    // For "frame" - standard and underline
-    --fip-su-default-brd-color: rgba(101, 1, 151, 0.9);
-  &#125;</pre></code>
+  --fip-label-default-color: #5c6bc0;
+  // For "frame" - outlined
+  --fip-o-default-brd-color: #5c6bc0;
+  // For "frame" - underline
+  --fip-u-default-bg-color: rgba(178, 235, 242, 0.6);
+  --fip-u-error-bg-color: rgba(240, 98, 146, 0.15);
+  --fip-u-hover-error-bg-color: rgba(240, 94, 146, 0.09);
+  // --fip-u-hover-error-bg-color: rgba(240, 94, 220, 0.1);
+  --fip-u-hover-bg-color: rgba(172, 235, 236, 0.3);
+  --fip-u-focused-bg-color: rgba(178, 235, 242, 0.4);
+  --fip-u-disabled-bg-color: rgba(178, 235, 242, 0.2);
+  // For "frame" - standard and underline
+  --fip-su-default-brd-color: rgba(101, 1, 151, 0.9);
+&#125;</pre></code>
   <p>
     All the CSS classes that define the colors of the input element are children of the
     "grn-frame-input" CSS classes.
@@ -758,6 +758,27 @@ export class FrameInputComponent &#123;
     It is also possible to change the color palette for an input element
     by defining appropriate CSS variables.
   </p>
+  <code><pre source="css">
+// The second variant of the palette definition.
+
+.fip-second &#123;
+  // ** Section: Color "label". **
+  // The state without disabled, error, hover, focused.
+  --gfi-def-lb-cl: #558b2f;
+  // The state without disabled, error, focused and with hover.
+  --gfi-hov-lb-cl: #1b5e20; // #689f38;
+  // The state without disabled, error and with focused.
+  --gfi-foc-lb-cl: #2e7d32;
+  // The state without disabled, hover, focused and error.
+  --gfi-err-lb-cl: #ef6c00;
+  // The state without disabled, focused and error, hover.
+  --gfi-hov-err-lb-cl: #e66502;
+  // The state without disabled and error, focused.
+  --gfi-foc-err-lb-cl: #e65100;
+  // The state with disabled.
+  --gfi-dis-lb-cl: #ab47bc;
+  ...
+&#125;</pre></code>
 </section>
 
 <section mr-vr>
