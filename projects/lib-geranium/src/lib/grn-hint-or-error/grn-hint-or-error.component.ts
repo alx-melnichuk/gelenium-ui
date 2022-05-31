@@ -30,20 +30,20 @@ export class GrnHintOrErrorComponent implements OnChanges {
   public isDisabled: boolean | null = null;
 
   constructor(private renderer: Renderer2, private hostRef: ElementRef<HTMLElement>) {
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfhe-hint-or-error', true);
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'grn-hint-or-error', true);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.isError) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfhe-error', !!this.isError);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'ghe-error', !!this.isError);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isError ? '' : null);
     }
     if (changes.isFocused) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfhe-focused', !!this.isFocused);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'ghe-focused', !!this.isFocused);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'foc', this.isFocused ? '' : null);
     }
     if (changes.isDisabled) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfhe-disabled', !!this.isDisabled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'ghe-disabled', !!this.isDisabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
     }
   }

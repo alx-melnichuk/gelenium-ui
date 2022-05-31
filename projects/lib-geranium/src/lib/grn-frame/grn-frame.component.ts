@@ -92,20 +92,20 @@ export class GrnFrameComponent implements OnChanges, OnInit {
       this.settingHiddenLabel(this.hostRef, this.innHiddenLabel);
     }
     if (changes.isDisabled) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-disabled', this.isDisabled || false);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gf-disabled', this.isDisabled || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
     }
     if (changes.isFilled) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-filled', this.isFilled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gf-filled', this.isFilled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);
     }
     if (changes.isError) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-error', this.isError || false);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gf-error', this.isError || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isError ? '' : null);
     }
     if (changes.label || changes.isRequired) {
       const isIndent = !!this.label || this.isRequired;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gfi-lgn-indent', isIndent || false);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gf-lgn-indent', isIndent || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ind', isIndent ? '' : null);
     }
   }
@@ -128,26 +128,26 @@ export class GrnFrameComponent implements OnChanges, OnInit {
   private settingExterior(elem: ElementRef<HTMLElement>, exterior: InputExterior | null): void {
     HtmlElemUtil.setAttr(this.renderer, elem, 'dcr-br', '');
 
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-outlined', InputExteriorUtil.isOutlined(exterior));
+    HtmlElemUtil.setClass(this.renderer, elem, 'gf-outlined', InputExteriorUtil.isOutlined(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', InputExteriorUtil.isOutlined(exterior) ? '' : null);
 
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-underline', InputExteriorUtil.isUnderline(exterior));
+    HtmlElemUtil.setClass(this.renderer, elem, 'gf-underline', InputExteriorUtil.isUnderline(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-u', InputExteriorUtil.isUnderline(exterior) ? '' : null);
 
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-standard', InputExteriorUtil.isStandard(exterior));
+    HtmlElemUtil.setClass(this.renderer, elem, 'gf-standard', InputExteriorUtil.isStandard(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-s', InputExteriorUtil.isStandard(exterior) ? '' : null);
 
     const isBorder = InputExteriorUtil.isStandard(exterior) || InputExteriorUtil.isUnderline(exterior);
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-border', isBorder);
+    HtmlElemUtil.setClass(this.renderer, elem, 'gf-border', isBorder);
   }
 
   private settingLabelShrink(elem: ElementRef<HTMLElement>, isLabelShrink: boolean): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-shrink', isLabelShrink);
+    HtmlElemUtil.setClass(this.renderer, elem, 'gf-shrink', isLabelShrink);
     HtmlElemUtil.setAttr(this.renderer, elem, 'shr', isLabelShrink ? '' : null);
   }
 
   private settingHiddenLabel(elem: ElementRef<HTMLElement>, hiddenLabel: boolean): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-hidden-label', hiddenLabel);
+    HtmlElemUtil.setClass(this.renderer, elem, 'gf-hidden-label', hiddenLabel);
     HtmlElemUtil.setAttr(this.renderer, elem, 'hlbl', hiddenLabel ? '' : null);
   }
 }

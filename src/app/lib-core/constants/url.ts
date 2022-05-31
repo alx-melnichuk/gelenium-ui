@@ -3,7 +3,7 @@ export class Url {
   public static get(name: string): string {
     const result = name ? Url.objMap[name] : '';
     if (name && !result) {
-      console.error(`There is no value for the "${name}" parameter.`);
+      throw new Error(`There is no value for the "${name}" parameter.`);
     }
     return result;
   }

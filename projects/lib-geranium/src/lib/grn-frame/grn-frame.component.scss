@@ -126,7 +126,7 @@ grn-frame {
   }
 
 
-  // ** Section "div.gfi-frame". **
+  // ** Section "div.gf-frame". **
   &>div {
     box-sizing: border-box;
     @include mxDisplayInlineFlex();
@@ -140,7 +140,7 @@ grn-frame {
   }
   
 
-  // ** Section: Background-Color "div.gfi-frame" for "Underline" mode. **
+  // ** Section: Background-Color "div.gf-frame" for "Underline" mode. **
   &>[dcr-bg] {
     -webkit-transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
@@ -177,7 +177,7 @@ grn-frame {
   }
 
 
-  // ** Section "div.gfi-frame" for "Outlined" and "Standard" mode. **
+  // ** Section "div.gf-frame" for "Outlined" and "Standard" mode. **
   &>[dcr-bb] {
     &:before {
       border-bottom-width: 1px;
@@ -226,7 +226,7 @@ grn-frame {
       0  // $translateY
     );
   }
-  // Border-Bottom-Color "div.gfi-frame" for "Outlined" and "Standard" mode.
+  // Border-Bottom-Color "div.gf-frame" for "Outlined" and "Standard" mode.
   &:not([dis]) {
     &:not([err]) {
       // The state without disabled, error, hover, focused.
@@ -290,7 +290,7 @@ grn-frame {
     border-color: var(--gf-dis-cl);
     border-style: dotted;
   }*/
-  // ** Section: Border-Color "div.gfi-frame fieldset" for "Outlined" mode. **
+  // ** Section: Border-Color "div.gf-frame fieldset" for "Outlined" mode. **
   &:not([dis]) {
     &:not([err]) {
       // The state without disabled, error, hover, focused.
@@ -420,7 +420,7 @@ grn-frame {
   &[ext-u]>div>span[orn-lf],
   &[ext-s]>div>span[orn-lf], 
   &[ext-s]>div>span[orn-rg] {
-    &>.gfi-su-ornam {
+    &>.gf-ornam {
       display: inline-block;
       margin-bottom: var(--gf-lbl-pd-bt, var(--lbl-pd-bt, var(--def-lbl-pd-bt)));
     }

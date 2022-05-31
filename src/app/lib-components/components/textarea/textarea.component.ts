@@ -13,7 +13,7 @@ import { UrlComponents } from '../../../lm-components/constants/url-components.c
 })
 export class TextareaComponent implements AfterViewInit {
   public showNum = '';
-  public urlFrameInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME_INPUT');
+  public urlFrameInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
 
   constructor() {
     // eslint-disable-next-line no-restricted-syntax

@@ -20,10 +20,11 @@ export const SM_NULL = 'null';
 export class SiteMenu {
   public static ORDER_DEFAULT = -1;
   private static objMenu: { [key: string]: SiteMenuMap } = {};
+
   public static findMenu(nameMenu: string): SiteMenuMap | undefined {
     const result = SiteMenu.objMenu[nameMenu];
     if (nameMenu && !result) {
-      console.error(`No value for "${nameMenu}" menu.`);
+      throw new Error(`No value for "${nameMenu}" menu.`);
     }
     return result;
   }
@@ -73,9 +74,9 @@ export class SiteMenu {
     let result: SiteItem | null = null;
     if (item) {
       if (!item.label) {
-        console.error('no required field "label".');
+        throw new Error('no required field "label".');
       } else if (!item.siteUrls) {
-        console.error('no required field "siteUrls".');
+        throw new Error('no required field "siteUrls".');
       } else {
         result = {
           order: item.order || SiteMenu.ORDER_DEFAULT,
@@ -105,6 +106,17 @@ export class SiteMenu {
       const bufItem = buff.sort((itemA: SiteItem, itemB: SiteItem) => itemA.label.localeCompare(itemB.label));
       for (const item of bufItem) {
         result.push({ ...item, ...{ order: ++maxOrder } });
+      }
+    }
+    return result;
+  }
+  public static findSiteItemByUrl(siteItems: SiteItem[], urlData: string): SiteItem | null {
+    let result: SiteItem | null = null;
+    for (let idx = 0; idx < siteItems.length && !result; idx++) {
+      const item = siteItems[idx];
+      const url = item.siteUrls.length > 0 ? item.siteUrls[0].url : '';
+      if (url === urlData) {
+        result = item;
       }
     }
     return result;

@@ -1,0 +1,196 @@
+<section mr-vr>
+  <h3>Helper text</h3>
+  <p>
+    The height of the input element depends on the presence of the "helperText" auxiliary text.
+    If two input elements are located on the same line and the first has auxiliary text, and the
+    second does not,
+    then they will differ in height. It will look like this:
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior04">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup04"
+  novalidate
+  autocomplete="off">
+
+  <div style="display: flex; align-items: center;">
+
+    <grn-input class="app-elem"
+      formControlName="input04a"
+      label="Enter the first name"
+      helperText="The first name must be complete."
+      [exterior]="exterior04">
+    </grn-input>
+
+    <grn-input class="app-elem"
+      formControlName="input04b"
+      label="Enter the last name"
+      [exterior]="exterior04">
+    </grn-input>
+
+  </div>
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div style="display: flex; align-items: center;"&gt;
+
+    &lt;grn-input class="app-elem"
+      formControlName="input04a"
+      label="Enter the first name"
+      helperText="The first name must be complete."
+      [exterior]="exterior04"&gt;
+    &lt;/grn-input&gt;
+
+    &lt;grn-input class="app-elem"
+      formControlName="input04b"
+      label="Enter the last name"
+      [exterior]="exterior04"&gt;
+    &lt;/grn-input&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameComponent &#123;
+  public formGroup04: FormGroup = new FormGroup(&#123;
+    input04a: new FormControl('William', []),
+    input04b: new FormControl('Anderson', []),
+  &#125;);
+  public exterior04 = 'outlined';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <p>
+    For a quick fix, you can add a helperText property with a space value to the second input
+    element (helperText="&nbsp;").
+  </p>
+
+  <div style="display: flex; align-items: center;">
+
+    <grn-input class="app-elem"
+      formControlName="input04c"
+      label="Enter the first name"
+      helperText="The first name must be complete."
+      [exterior]="exterior04">
+    </grn-input>
+
+    <grn-input class="app-elem"
+      formControlName="input04d"
+      label="Enter the last name"
+      helperText=" "
+      [exterior]="exterior04">
+    </grn-input>
+
+  </div>
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div style="display: flex; align-items: center;"&gt;
+
+    &lt;grn-input class="app-elem"
+      formControlName="input04c"
+      label="Enter the first name"
+      helperText="The first name must be complete."
+      [exterior]="exterior04"&gt;
+    &lt;/grn-input&gt;
+
+    &lt;grn-input class="app-elem"
+      formControlName="input04d"
+      label="Enter the last name"
+      helperText=" "
+      [exterior]="exterior04"&gt;
+    &lt;/grn-input&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'frame-app-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameComponent &#123;
+  public formGroup04: FormGroup = new FormGroup(&#123;
+    input04c: new FormControl('Charlotte', []),
+    input04d: new FormControl('Robinson', []),
+  &#125;);
+  public exterior04 = 'outlined';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</form>

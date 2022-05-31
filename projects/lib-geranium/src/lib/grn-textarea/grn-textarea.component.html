@@ -23,11 +23,11 @@
       [grnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)">
 
       <span orn-lf
-        class="gfi-ornam-lf">
+        class="gf-ornam-lf">
         <ng-content select="[grn-orn-lf]"></ng-content>
       </span>
       <span orn-rg
-        class="gfi-ornam-rg">
+        class="gf-ornam-rg">
         <ng-content select="[grn-orn-rg]"></ng-content>
       </span>
 
@@ -37,7 +37,7 @@
         elem-pd-hor
         [attr.id]="id"
         [rows]="currentRows"
-        class="gt-textarea gfi-elem"
+        class="gt-textarea gf-elem"
         [attr.disabled]="isDisabled2 ? '': null"
         [attr.autocomplete]="!!autoComplete ? autoComplete : null"
         [attr.readonly]="isReadOnly2 ? '': null"

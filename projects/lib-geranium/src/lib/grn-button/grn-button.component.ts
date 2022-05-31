@@ -124,7 +124,7 @@ export class GrnButtonComponent implements OnChanges, AfterContentInit {
   // ** Private API **
 
   private settingFocused(elem: ElementRef<HTMLElement> | null, isFocused: boolean): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'gfi-focused', isFocused);
+    HtmlElemUtil.setClass(this.renderer, elem, 'gf-focused', isFocused);
     HtmlElemUtil.setAttr(this.renderer, elem, 'foc', isFocused ? '' : null);
   }
 
