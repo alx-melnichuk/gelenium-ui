@@ -148,9 +148,11 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     if (changes.isReadOnly) {
       this.isReadOnly2 = BooleanUtil.init(this.isReadOnly);
     }
-
     if (changes.isRequired || changes.minLength || changes.maxLength) {
       this.prepareFormGroup(this.isRequired2, this.minLength, this.maxLength);
+    }
+    if (changes.cntRows || changes.minRows || changes.maxRows) {
+      this.currentRows = this.cntRows || this.getCurrentRows(this.getNumberLines(this.formControl.value), this.minRows, this.maxRows);
     }
   }
 
@@ -168,7 +170,7 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     this.isFilled = this.formControl.value !== '' && this.formControl.value != null;
     const cntLines = this.getNumberLines(this.formControl.value);
     if (cntLinesOld != cntLines) {
-      this.currentRows = this.cntRows || this.getCurrentRows(this.formControl.value, this.minRows, this.maxRows);
+      this.currentRows = this.cntRows || this.getCurrentRows(this.getNumberLines(this.formControl.value), this.minRows, this.maxRows);
     }
     if (isFilledOld !== this.isFilled || cntLinesOld != cntLines) {
       this.changeDetectorRef.markForCheck();
@@ -242,7 +244,7 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     // https://github.com/angular/angular/issues/9587 "event.stopImmediatePropagation() called from listeners not working"
     // Added Event.cancelBubble check to make sure there was no call to event.stopImmediatePropagation() in previous handlers.
     if (!!event && !event.cancelBubble) {
-      this.currentRows = this.cntRows || this.getCurrentRows(this.formControl.value, this.minRows, this.maxRows);
+      this.currentRows = this.cntRows || this.getCurrentRows(this.getNumberLines(this.formControl.value), this.minRows, this.maxRows);
     }
   }
 
@@ -267,8 +269,8 @@ export class GrnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     this.formControl.setValidators(newValidator);
   }
 
-  private getCurrentRows(value: string, minRows: number | null, maxRows: number | null): number {
-    let result = this.getNumberLines(value) || 1;
+  private getCurrentRows(numberOfLines: number, minRows: number | null, maxRows: number | null): number {
+    let result = numberOfLines > 0 ? numberOfLines : 1;
     if (!!minRows && minRows > 0 && minRows > result) {
       result = minRows;
     }

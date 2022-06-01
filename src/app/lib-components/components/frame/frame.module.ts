@@ -11,6 +11,7 @@ import { FrameHelperTextModule } from '../frame-helper-text/frame-helper-text.mo
 import { FrameBorderRadiusModule } from '../frame-border-radius/frame-border-radius.module';
 import { FramePaletteModule } from '../frame-palette/frame-palette.module';
 import { FrameConfigModule } from '../frame-config/frame-config.module';
+import { FrameStructureModule } from '../frame-structure/frame-structure.module';
 import { FrameApiModule } from '../frame-api/frame-api.module';
 
 import { FrameComponent } from './frame.component';
@@ -25,6 +26,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Helper text', url, fragment: 'HelperText' },
   { label: 'Border radius', url, fragment: 'BorderRadius' },
   { label: 'Palette', url, fragment: 'Palette' },
+  { label: 'Structure', url, fragment: 'Structure' },
   { label: 'Config', url, fragment: 'Config' },
   { label: 'Api', url, fragment: 'Api' },
 ];
@@ -40,6 +42,7 @@ SiteMenu.addItem('Components', 'Frame', { label: 'Frame', siteUrls });
     FrameHelperTextModule,
     FrameBorderRadiusModule,
     FramePaletteModule,
+    FrameStructureModule,
     FrameConfigModule,
     FrameApiModule,
   ],

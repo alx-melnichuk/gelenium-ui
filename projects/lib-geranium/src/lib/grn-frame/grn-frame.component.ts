@@ -76,10 +76,7 @@ export class GrnFrameComponent implements OnChanges, OnInit {
     if (changes.config) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
-    // const s1 = `${changes.exterior ? 'exterior=' + this.exterior : ''}`;
-    // console.log(`ngOnChanges() ${s1}`);
     if (changes.exterior) {
-      // this.exterior = ExteriorUtil.create(this.exterior, this.config?.exterior || null);
       this.innExterior = InputExteriorUtil.convert(this.exterior);
       this.settingExterior(this.hostRef, this.innExterior);
     }
