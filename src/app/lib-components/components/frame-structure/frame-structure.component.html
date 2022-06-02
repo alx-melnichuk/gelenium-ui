@@ -68,8 +68,7 @@
   </p>
   <p>Example:</p>
   <code><pre source="html">
-[exterior]="exterior || currConfig.exterior"
-  </pre></code>
+[exterior]="exterior || currConfig.exterior"</pre></code>
   <p>
     The value of the input parameter "exterior" is taken first.
     If it is not specified, then the same parameter is taken from the configuration.
@@ -123,8 +122,7 @@
   <p>Example:</p>
   <code><pre source="html">
 [grnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
-[grnFrameExteriorInputElementRef]="hostRef"
-  </pre></code>
+[grnFrameExteriorInputElementRef]="hostRef"</pre></code>
   <p>
     "ElementRef" defines the DOM element to which these css parameters are added.
   </p>
