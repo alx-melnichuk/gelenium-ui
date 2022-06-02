@@ -6,7 +6,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { AutoFocuseBasicComponent } from './auto-focuse-basic.component';
 
-import { GrnAutoFocuseModule } from 'projects/lib-geranium/src/public-api';
+import { GrnAutoFocuseModule } from 'projects/gelenium-ui/src/public-api';
 
 @NgModule({
   declarations: [AutoFocuseBasicComponent],

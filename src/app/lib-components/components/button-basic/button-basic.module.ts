@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router'; // routerLink
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GrnButtonModule } from 'projects/lib-geranium/src/lib/grn-button/grn-button.module';
+import { GrnButtonModule } from 'projects/gelenium-ui/src/lib/grn-button/grn-button.module';
 
 import { ButtonBasicComponent } from './button-basic.component';
 

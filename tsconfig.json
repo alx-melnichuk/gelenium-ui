@@ -10,9 +10,9 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
-      "lib-geranium": [
-        "dist/lib-geranium/lib-geranium",
-        "dist/lib-geranium"
+      "gelenium-ui": [
+        "dist/gelenium-ui/gelenium-ui",
+        "dist/gelenium-ui"
       ]
     },
     "declaration": false,

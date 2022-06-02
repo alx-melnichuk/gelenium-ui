@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from 'src/app/lib-core/constants/constants';
-import { GrnButtonConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-button-config.interface';
-import { ButtonExterior } from 'projects/lib-geranium/src/lib/_interfaces/button-exterior.interface';
-import { FrameSize } from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
+import { GrnButtonConfig } from 'projects/gelenium-ui/src/lib/_interfaces/grn-button-config.interface';
+import { ButtonExterior } from 'projects/gelenium-ui/src/lib/_interfaces/button-exterior.interface';
+import { FrameSize } from 'projects/gelenium-ui/src/lib/_interfaces/frame-size.interface';
 
 @Component({
   selector: 'app-button-palette',

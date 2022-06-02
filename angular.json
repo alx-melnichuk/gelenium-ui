@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "geranium-demo": {
+    "gelenium-ui-demo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/geranium-demo",
+            "outputPath": "dist/gelenium-ui-demo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -32,7 +32,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/lib-geranium/src/styles.scss",
+              "projects/gelenium-ui/src/styles.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -74,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "geranium-demo:build:production"
+              "browserTarget": "gelenium-ui-demo:build:production"
             },
             "development": {
-              "browserTarget": "geranium-demo:build:development"
+              "browserTarget": "gelenium-ui-demo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,7 +85,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "geranium-demo:build"
+            "browserTarget": "gelenium-ui-demo:build"
           }
         },
         "test": {
@@ -118,23 +118,23 @@
         }
       }
     },
-    "lib-geranium": {
+    "gelenium-ui": {
       "projectType": "library",
-      "root": "projects/lib-geranium",
-      "sourceRoot": "projects/lib-geranium/src",
+      "root": "projects/gelenium-ui",
+      "sourceRoot": "projects/gelenium-ui/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/lib-geranium/ng-package.json"
+            "project": "projects/gelenium-ui/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/lib-geranium/tsconfig.lib.prod.json"
+              "tsConfig": "projects/gelenium-ui/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/lib-geranium/tsconfig.lib.json"
+              "tsConfig": "projects/gelenium-ui/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -142,24 +142,24 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/lib-geranium/src/test.ts",
-            "tsConfig": "projects/lib-geranium/tsconfig.spec.json",
-            "karmaConfig": "projects/lib-geranium/karma.conf.js"
+            "main": "projects/gelenium-ui/src/test.ts",
+            "tsConfig": "projects/gelenium-ui/tsconfig.spec.json",
+            "karmaConfig": "projects/gelenium-ui/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/lib-geranium/**/*.ts",
-              "projects/lib-geranium/**/*.html"
+              "projects/gelenium-ui/**/*.ts",
+              "projects/gelenium-ui/**/*.html"
             ]
           }
         }
       }
     }
   },
-  "defaultProject": "geranium-demo",
+  "defaultProject": "gelenium-ui-demo",
   "cli": {
     "defaultCollection": "@angular-eslint/schematics"
   }

@@ -5,7 +5,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GrnTextareaModule } from 'projects/lib-geranium/src/lib/grn-textarea/grn-textarea.module';
+import { GrnTextareaModule } from 'projects/gelenium-ui/src/lib/grn-textarea/grn-textarea.module';
 
 import { TextareaValidationComponent } from './textarea-validation.component';
 

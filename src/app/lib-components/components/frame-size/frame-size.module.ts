@@ -6,7 +6,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
-import { GrnInputModule } from 'projects/lib-geranium/src/lib/grn-input/grn-input.module';
+import { GrnInputModule } from 'projects/gelenium-ui/src/lib/grn-input/grn-input.module';
 
 import { FrameSizeComponent } from './frame-size.component';
 

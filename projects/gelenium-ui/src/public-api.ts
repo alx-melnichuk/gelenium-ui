@@ -1,5 +1,5 @@
 /*
- * Public API Surface of lib-geranium
+ * Public API Surface of gelenium-ui
  */
 
 export * from './lib/lib-geranium.service';

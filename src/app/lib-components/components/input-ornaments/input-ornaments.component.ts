@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GrnFrameConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-config.interface';
-import { OrnamAlign, OrnamAlignUtil } from 'projects/lib-geranium/src/lib/_interfaces/ornam-align.interface';
+import { GrnFrameConfig } from 'projects/gelenium-ui/src/lib/_interfaces/grn-frame-config.interface';
+import { OrnamAlign, OrnamAlignUtil } from 'projects/gelenium-ui/src/lib/_interfaces/ornam-align.interface';
 
 import {
   LABEL_CSS,

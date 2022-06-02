@@ -14,8 +14,8 @@ import {
   LABEL_UNDERLINE,
 } from 'src/app/lib-core/constants/constants';
 
-import { GrnFrameConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-config.interface';
-import { FrameSize, FrameSizeUtil } from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
+import { GrnFrameConfig } from 'projects/gelenium-ui/src/lib/_interfaces/grn-frame-config.interface';
+import { FrameSize, FrameSizeUtil } from 'projects/gelenium-ui/src/lib/_interfaces/frame-size.interface';
 
 @Component({
   selector: 'app-frame-border-radius',

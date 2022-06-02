@@ -10,8 +10,8 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/lib-geranium/tsconfig.lib.json",
-          "projects/lib-geranium/tsconfig.spec.json"
+          "projects/gelenium-ui/tsconfig.lib.json",
+          "projects/gelenium-ui/tsconfig.spec.json"
         ],
         "createDefaultProgram": true
       },

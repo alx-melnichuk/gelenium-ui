@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/lib-geranium",
+  "dest": "../../dist/gelenium-ui",
   "lib": {
     "entryFile": "src/public-api.ts"
   }

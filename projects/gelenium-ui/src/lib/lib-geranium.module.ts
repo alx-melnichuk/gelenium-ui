@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { GrnRegexModule } from 'projects/lib-geranium/src/lib/directives/grn-regex/grn-regex.module';
+import { GrnRegexModule } from 'projects/gelenium-ui/src/lib/directives/grn-regex/grn-regex.module';
 
 import { GrnFrameModule } from './grn-frame/grn-frame.module';
 import { GrnInfiniteScrollModule } from './grn-infinite-scroll/grn-infinite-scroll.module';

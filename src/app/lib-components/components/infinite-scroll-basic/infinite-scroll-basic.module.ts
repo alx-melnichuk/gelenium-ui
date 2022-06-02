@@ -4,7 +4,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GrnInfiniteScrollModule } from 'projects/lib-geranium/src/lib/grn-infinite-scroll/grn-infinite-scroll.module';
+import { GrnInfiniteScrollModule } from 'projects/gelenium-ui/src/lib/grn-infinite-scroll/grn-infinite-scroll.module';
 
 import { InfiniteScrollBasicComponent } from './infinite-scroll-basic.component';
 

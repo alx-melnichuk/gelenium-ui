@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GrnInputModule } from 'projects/lib-geranium/src/lib/grn-input/grn-input.module';
+import { GrnInputModule } from 'projects/gelenium-ui/src/lib/grn-input/grn-input.module';
 
 import { FrameConfigComponent } from './frame-config.component';
 

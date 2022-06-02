@@ -11,7 +11,7 @@ import { ScrollAfterRoutingUtil } from 'src/app/lib-core/utils/scroll-after-rout
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
-  title = 'geranium-demo';
+  title = 'gelenium-ui-demo';
   private routerEventsSub: Subscription | null = null;
 
   constructor(private router: Router) {}

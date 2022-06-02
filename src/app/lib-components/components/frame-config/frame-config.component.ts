@@ -3,10 +3,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from 'src/app/lib-core/constants/constants';
 
-import { FrameSize } from 'projects/lib-geranium/src/lib/_interfaces/frame-size.interface';
-import { GrnFrameConfig } from 'projects/lib-geranium/src/lib/_interfaces/grn-frame-config.interface';
-import { InputExterior } from 'projects/lib-geranium/src/lib/_interfaces/input-exterior.interface';
-import { GRN_FRAME_CONFIG } from 'projects/lib-geranium/src/lib/grn-frame/grn-frame.component';
+import { FrameSize } from 'projects/gelenium-ui/src/lib/_interfaces/frame-size.interface';
+import { GrnFrameConfig } from 'projects/gelenium-ui/src/lib/_interfaces/grn-frame-config.interface';
+import { InputExterior } from 'projects/gelenium-ui/src/lib/_interfaces/input-exterior.interface';
+import { GRN_FRAME_CONFIG } from 'projects/gelenium-ui/src/lib/grn-frame/grn-frame.component';
 
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
