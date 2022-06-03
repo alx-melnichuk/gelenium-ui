@@ -5,13 +5,13 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GrnInputModule } from 'projects/gelenium-ui/src/lib/grn-input/grn-input.module';
+import { GlnInputModule } from 'projects/gelenium-ui/src/lib/gln-input/gln-input.module';
 
 import { FramePaletteComponent } from './frame-palette.component';
 
 @NgModule({
   declarations: [FramePaletteComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GrnInputModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnInputModule],
   exports: [FramePaletteComponent],
 })
 export class FramePaletteModule {}

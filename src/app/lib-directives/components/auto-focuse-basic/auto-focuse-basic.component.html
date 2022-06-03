@@ -23,12 +23,12 @@
     complex: many levels of nesting or input elements.
     Or is there a complex the logic for determining the required element to which the
     input focus should be given.
-    In such cases, you can use the GrnAutoFocuse directive.
+    In such cases, you can use the GlnAutoFocuse directive.
   </p>
 
   <h4>A simple example.</h4>
   <p>
-    If the page layout has a relatively simple structure, then GrnAutoFocuse can be applied.
+    If the page layout has a relatively simple structure, then GlnAutoFocuse can be applied.
     This directive transfers input focus at the moment when the current element is already rendered.
     To do this, use the "OnAfterViewInit" hook and additionally call Promise.resolve().
   </p>
@@ -38,14 +38,14 @@
   <pre>
 &lt;form novalidation&gt;
   &lt;label&gt;
-    &lt;input type="text" ([ngModel])="modelLogin" name="login" grnAutoFocuse /&gt; Login
+    &lt;input type="text" ([ngModel])="modelLogin" name="login" glnAutoFocuse /&gt; Login
   &lt;/label&gt;
   &lt;label&gt;
     &lt;input type="password" ([ngModel])="modelPassword" name="password" /&gt; Password
   &lt;/label&gt;
 &lt;/form&gt;</pre>
   <p>
-    You can pass a boolean value to the GrnAutoFocuse directive, which will
+    You can pass a boolean value to the GlnAutoFocuse directive, which will
     determine whether the parameter value is enabled or disabled.
   </p>
   <span>
@@ -57,14 +57,14 @@
     &lt;input type="text"
      ([ngModel])="modelLogin"
       name="login"
-      [grnAutoFocuse]="!modelLogin" /&gt;
+      [glnAutoFocuse]="!modelLogin" /&gt;
     Login
   &lt;/label&gt;
   &lt;label&gt;
     &lt;input type="password"
      ([ngModel])="modelPassword"
       name="password"
-      [grnAutoFocuse]="!!modelLogin" /&gt;
+      [glnAutoFocuse]="!!modelLogin" /&gt;
     Password
   &lt;/label&gt;
 &lt;/form&gt;</pre>
@@ -80,7 +80,7 @@
       name="mode"
       value="A"
       [(ngModel)]="mode"
-      (change)="doChangeMode(mode)" /> Section "GrnAutoFocuse" is active.
+      (change)="doChangeMode(mode)" /> Section "GlnAutoFocuse" is active.
   </label>
 
   <p>Set autofocus on page load on a field:</p>
@@ -121,7 +121,7 @@
       </div>
       <input type="text"
         formControlName="surname01a"
-        [grnAutoFocuse]="mode1a === 'surname'" />
+        [glnAutoFocuse]="mode1a === 'surname'" />
     </div>
 
     <div class="app-elem">
@@ -130,7 +130,7 @@
       </div>
       <input type="text"
         formControlName="name01a"
-        [grnAutoFocuse]="mode1a === 'name'" />
+        [glnAutoFocuse]="mode1a === 'name'" />
     </div>
 
     <div class="app-elem">
@@ -139,7 +139,7 @@
       </div>
       <input type="text"
         formControlName="patronymic01a"
-        [grnAutoFocuse]="mode1a === 'patronymic'" />
+        [glnAutoFocuse]="mode1a === 'patronymic'" />
     </div>
 
   </div>
@@ -167,7 +167,7 @@
       &lt;/div&gt;
       &lt;input type="text"
         formControlName="surname01a"
-        [grnAutoFocuse]="mode1a === 'surname'" /&gt;
+        [glnAutoFocuse]="mode1a === 'surname'" /&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -176,7 +176,7 @@
       &lt;/div&gt;
       &lt;input type="text"
         formControlName="name01a"
-        [grnAutoFocuse]="mode1a === 'name'" /&gt;
+        [glnAutoFocuse]="mode1a === 'name'" /&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -185,7 +185,7 @@
       &lt;/div&gt;
       &lt;input type="text"
         formControlName="patronymic01a"
-        [grnAutoFocuse]="mode1a === 'patronymic'" /&gt;
+        [glnAutoFocuse]="mode1a === 'patronymic'" /&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;
@@ -263,23 +263,23 @@ export class AutoFocuseComponent implements OnInit &#123;
 <section mr-vr>
   <h4>Complex example.</h4>
   <p>
-    If using GrnAutoFocuse does not give the desired result, then you can additionally
-    use GrnAutoFocuseOwner.
+    If using GlnAutoFocuse does not give the desired result, then you can additionally
+    use GlnAutoFocuseOwner.
     This situation can occur when the page layout is so complex that the directive
-    GrnAutoFocuse doesn't work.
-    In other words, the input element (on which GrnAutoFocuse is present) is drawn before
+    GlnAutoFocuse doesn't work.
+    In other words, the input element (on which GlnAutoFocuse is present) is drawn before
     than the whole page layout.
-    Here we can add an additional GrnAutoFocuseOwner directive at the root level page layout.
+    Here we can add an additional GlnAutoFocuseOwner directive at the root level page layout.
     And this additional directive will be able to get the moment when the rendering of the
     page layout is completed.
-    In doing so, it will determine the first child directive GrnAutoFocuse, whose input
+    In doing so, it will determine the first child directive GlnAutoFocuse, whose input
     parameter true and will call its input focus transfer method.
   </p>
   <span>
     For example:
   </span>
   <pre>
-  &lt;form grnAutoFocuseOwner novalidation&gt;
+  &lt;form glnAutoFocuseOwner novalidation&gt;
     &lt;div&gt;
       &lt;div&gt;
         &lt;div&gt;
@@ -287,7 +287,7 @@ export class AutoFocuseComponent implements OnInit &#123;
             &lt;input type="text"
              ([ngModel])="model01"
               name="model01"
-              [grnAutoFocuse]="!model01" /&gt;
+              [glnAutoFocuse]="!model01" /&gt;
             Name01
           &lt;/label&gt;
         &lt;/div&gt;
@@ -301,7 +301,7 @@ export class AutoFocuseComponent implements OnInit &#123;
             &lt;input type="text"
              ([ngModel])="model99"
               name="model99"
-              [grnAutoFocuse]="!model99" /&gt;
+              [glnAutoFocuse]="!model99" /&gt;
             Name99
           &lt;/label&gt;
         &lt;/div&gt;
@@ -316,7 +316,7 @@ export class AutoFocuseComponent implements OnInit &#123;
       name="mode"
       value="B"
       [(ngModel)]="mode"
-      (change)="doChangeMode(mode)" /> Section "GrnAutoFocuseOwner" is active.
+      (change)="doChangeMode(mode)" /> Section "GlnAutoFocuseOwner" is active.
   </label>
 
   <p>Set autofocus on page load on a field:</p>
@@ -346,7 +346,7 @@ export class AutoFocuseComponent implements OnInit &#123;
 </section>
 
 <form [formGroup]="formGroup01b"
-  grnAutoFocuseOwner
+  glnAutoFocuseOwner
   novalidate
   autocomplete="off">
 
@@ -358,7 +358,7 @@ export class AutoFocuseComponent implements OnInit &#123;
       </div>
       <input type="text"
         formControlName="surname01b"
-        [grnAutoFocuse]="mode1b === 'surname'" />
+        [glnAutoFocuse]="mode1b === 'surname'" />
     </div>
 
     <div class="app-elem">
@@ -367,7 +367,7 @@ export class AutoFocuseComponent implements OnInit &#123;
       </div>
       <input type="text"
         formControlName="name01b"
-        [grnAutoFocuse]="mode1b === 'name'" />
+        [glnAutoFocuse]="mode1b === 'name'" />
     </div>
 
     <div class="app-elem">
@@ -376,7 +376,7 @@ export class AutoFocuseComponent implements OnInit &#123;
       </div>
       <input type="text"
         formControlName="patronymic01b"
-        [grnAutoFocuse]="mode1b === 'patronymic'" />
+        [glnAutoFocuse]="mode1b === 'patronymic'" />
     </div>
 
   </div>
@@ -393,7 +393,7 @@ export class AutoFocuseComponent implements OnInit &#123;
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;form [formGroup]="formGroup01b"
-  grnAutoFocuseOwner
+  glnAutoFocuseOwner
   novalidate
   autocomplete="off"&gt;
 
@@ -405,7 +405,7 @@ export class AutoFocuseComponent implements OnInit &#123;
       &lt;/div&gt;
       &lt;input type="text"
         formControlName="surname01b"
-        [grnAutoFocuse]="mode1b === 'surname'" /&gt;
+        [glnAutoFocuse]="mode1b === 'surname'" /&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -414,7 +414,7 @@ export class AutoFocuseComponent implements OnInit &#123;
       &lt;/div&gt;
       &lt;input type="text"
         formControlName="name01b"
-        [grnAutoFocuse]="mode1b === 'name'" /&gt;
+        [glnAutoFocuse]="mode1b === 'name'" /&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -423,7 +423,7 @@ export class AutoFocuseComponent implements OnInit &#123;
       &lt;/div&gt;
       &lt;input type="text"
         formControlName="patronymic01b"
-        [grnAutoFocuse]="mode1b === 'patronymic'" /&gt;
+        [glnAutoFocuse]="mode1b === 'patronymic'" /&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;

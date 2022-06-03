@@ -1,7 +1,7 @@
 <section mr-vr>
   <h3>Basic</h3>
   <p>
-    The "GrnRegexMatch" directive allows you to enter only those values that match the specified
+    The "GlnRegexMatch" directive allows you to enter only those values that match the specified
     regular expression.
     If the new value does not match the regular expression, then it is not accepted.
     This allows the required business logic to be implemented without displaying an error.
@@ -16,13 +16,13 @@
     <code>/^-?(\d+)$/</code>
   </p>
   <p>
-    The "GrnRegexMatch" directive supports the following forms for describing regular expressions:
+    The "GlnRegexMatch" directive supports the following forms for describing regular expressions:
   </p>
   <ul>
-    <li><code>grnRegexMatch="^-?(\d+)$"</code></li>
-    <li><code>[grnRegexMatch]="'^-?(\\d+)$'"</code></li>
-    <li><code>grnRegexMatch="/^-?(\d+)$/i"</code></li>
-    <li><code>[grnRegexMatch]="'/^-?(\\d+)$/i'"</code></li>
+    <li><code>glnRegexMatch="^-?(\d+)$"</code></li>
+    <li><code>[glnRegexMatch]="'^-?(\\d+)$'"</code></li>
+    <li><code>glnRegexMatch="/^-?(\d+)$/i"</code></li>
+    <li><code>[glnRegexMatch]="'/^-?(\\d+)$/i'"</code></li>
   </ul>
 </section>
 
@@ -38,7 +38,7 @@
 <section mr-vr>
   <h4>3. Allow: '#numeric'.</h4>
   <p>
-    The GrnRegexMatch directive has its own patterns, each of which matches a special regular
+    The GlnRegexMatch directive has its own patterns, each of which matches a special regular
     expression.
     By using these patterns, you can reduce the time you spend developing and testing your regular
     expressions.
@@ -61,7 +61,7 @@
     </tr>
   </table>
   <p>
-    The GrnRegexMatch directive fires only when the element's value has changed.
+    The GlnRegexMatch directive fires only when the element's value has changed.
     In other words, the directive listens for
     <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event"
       target="_blank">input</a> event.
@@ -91,17 +91,17 @@
           <em>1. Digits only. Regex="/^-?(\d+)$/"</em>
         </small>
       </div>
-      <grn-input formControlName="input01a"
+      <gln-input formControlName="input01a"
         wdFull
         [label]="!control01.input01a.value
           ?'Enter a digits':'A digits'"
-        grnRegexMatch="/^-?(\d+)$/"
+        glnRegexMatch="/^-?(\d+)$/"
         [helperText]="!control01.input01a.errors
         ?(!control01.input01a.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -110,112 +110,112 @@
           <em>2. Real number. Regex="/^-?(\d+)$/"</em>
         </small>
       </div>
-      <grn-input formControlName="input01b"
+      <gln-input formControlName="input01b"
         wdFull
         [label]="!control01.input01b.value
           ?'Enter a real number':'A real number'"
-        [grnRegexMatch]="'/^-?(\\d+(\\.\\d*)?|\\.\\d+)$/'"
+        [glnRegexMatch]="'/^-?(\\d+(\\.\\d*)?|\\.\\d+)$/'"
         [helperText]="!control01.input01b.errors
         ?(!control01.input01b.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
       <div>
         <small>
-          <em>3. grnRegexMatch="#numeric".</em>
+          <em>3. glnRegexMatch="#numeric".</em>
         </small>
       </div>
-      <grn-input formControlName="input01c"
+      <gln-input formControlName="input01c"
         wdFull
         [label]="!formGroup01.controls.input01c.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric"
+        glnRegexMatch="#numeric"
         [helperText]="!control01.input01c.errors
         ?(!control01.input01c.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
       <div>
         <small>
-          <em>3. grnRegexMatch="#numeric(,2)".</em>
+          <em>3. glnRegexMatch="#numeric(,2)".</em>
         </small>
       </div>
-      <grn-input formControlName="input01d"
+      <gln-input formControlName="input01d"
         wdFull
         [label]="!formGroup01.controls.input01d.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric(,2)"
+        glnRegexMatch="#numeric(,2)"
         [helperText]="!control01.input01d.errors
         ?(!control01.input01d.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
       <div>
         <small>
-          <em>3. grnRegexMatch="#numeric(12,2)".</em>
+          <em>3. glnRegexMatch="#numeric(12,2)".</em>
         </small>
       </div>
-      <grn-input formControlName="input01e"
+      <gln-input formControlName="input01e"
         wdFull
         [label]="!formGroup01.controls.input01e.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric(12,2)"
+        glnRegexMatch="#numeric(12,2)"
         [helperText]="!control01.input01e.errors
         ?(!control01.input01e.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
       <div>
         <small>
-          <em>3. grnRegexMatch="#numeric(12)".</em>
+          <em>3. glnRegexMatch="#numeric(12)".</em>
         </small>
       </div>
-      <grn-input formControlName="input01f"
+      <gln-input formControlName="input01f"
         wdFull
         [label]="!formGroup01.controls.input01f.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric(12)"
+        glnRegexMatch="#numeric(12)"
         [helperText]="!control01.input01f.errors
         ?(!control01.input01f.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
       <div>
         <small>
-          <em>3. grnRegexMatch="#numeric12_2".</em>
+          <em>3. glnRegexMatch="#numeric12_2".</em>
         </small>
       </div>
-      <grn-input formControlName="input01g"
+      <gln-input formControlName="input01g"
         wdFull
         [label]="!formGroup01.controls.input01g.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric12_2"
+        glnRegexMatch="#numeric12_2"
         [helperText]="!control01.input01g.errors
         ?(!control01.input01g.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -243,17 +243,17 @@
           &lt;em&gt;1. Digits only. Regex="/^-?(\d+)$/"&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01a"
+      &lt;gln-input formControlName="input01a"
         wdFull
         [label]="!control01.input01a.value
           ?'Enter a digits':'A digits'"
-        grnRegexMatch="/^-?(\d+)$/"
+        glnRegexMatch="/^-?(\d+)$/"
         [helperText]="!control01.input01a.errors
         ?(!control01.input01a.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -262,112 +262,112 @@
           &lt;em&gt;2. Real number. Regex="/^-?(\d+)$/"&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01b"
+      &lt;gln-input formControlName="input01b"
         wdFull
         [label]="!control01.input01b.value
           ?'Enter a real number':'A real number'"
-        [grnRegexMatch]="'/^-?(\\d+(\\.\\d*)?|\\.\\d+)$/'"
+        [glnRegexMatch]="'/^-?(\\d+(\\.\\d*)?|\\.\\d+)$/'"
         [helperText]="!control01.input01b.errors
         ?(!control01.input01b.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;3. grnRegexMatch="#numeric".&lt;/em&gt;
+          &lt;em&gt;3. glnRegexMatch="#numeric".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01c"
+      &lt;gln-input formControlName="input01c"
         wdFull
         [label]="!formGroup01.controls.input01c.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric"
+        glnRegexMatch="#numeric"
         [helperText]="!control01.input01c.errors
         ?(!control01.input01c.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;3. grnRegexMatch="#numeric(,2)".&lt;/em&gt;
+          &lt;em&gt;3. glnRegexMatch="#numeric(,2)".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01d"
+      &lt;gln-input formControlName="input01d"
         wdFull
         [label]="!formGroup01.controls.input01d.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric(,2)"
+        glnRegexMatch="#numeric(,2)"
         [helperText]="!control01.input01d.errors
         ?(!control01.input01d.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;3. grnRegexMatch="#numeric(12,2)".&lt;/em&gt;
+          &lt;em&gt;3. glnRegexMatch="#numeric(12,2)".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01e"
+      &lt;gln-input formControlName="input01e"
         wdFull
         [label]="!formGroup01.controls.input01e.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric(12,2)"
+        glnRegexMatch="#numeric(12,2)"
         [helperText]="!control01.input01e.errors
         ?(!control01.input01e.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;3. grnRegexMatch="#numeric(12)".&lt;/em&gt;
+          &lt;em&gt;3. glnRegexMatch="#numeric(12)".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01f"
+      &lt;gln-input formControlName="input01f"
         wdFull
         [label]="!formGroup01.controls.input01f.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric(12)"
+        glnRegexMatch="#numeric(12)"
         [helperText]="!control01.input01f.errors
         ?(!control01.input01f.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;3. grnRegexMatch="#numeric12_2".&lt;/em&gt;
+          &lt;em&gt;3. glnRegexMatch="#numeric12_2".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01g"
+      &lt;gln-input formControlName="input01g"
         wdFull
         [label]="!formGroup01.controls.input01g.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric12_2"
+        glnRegexMatch="#numeric12_2"
         [helperText]="!control01.input01g.errors
         ?(!control01.input01g.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;

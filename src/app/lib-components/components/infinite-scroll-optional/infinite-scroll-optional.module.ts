@@ -4,13 +4,13 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GrnInfiniteScrollModule } from 'projects/gelenium-ui/src/lib/grn-infinite-scroll/grn-infinite-scroll.module';
+import { GlnInfiniteScrollModule } from 'projects/gelenium-ui/src/lib/gln-infinite-scroll/gln-infinite-scroll.module';
 
 import { InfiniteScrollOptionalComponent } from './infinite-scroll-optional.component';
 
 @NgModule({
   declarations: [InfiniteScrollOptionalComponent],
-  imports: [CommonModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GrnInfiniteScrollModule],
+  imports: [CommonModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnInfiniteScrollModule],
   exports: [InfiniteScrollOptionalComponent],
 })
 export class InfiniteScrollOptionalModule {}

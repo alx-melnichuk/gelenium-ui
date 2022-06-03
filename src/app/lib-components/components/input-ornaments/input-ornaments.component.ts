@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GrnFrameConfig } from 'projects/gelenium-ui/src/lib/_interfaces/grn-frame-config.interface';
-import { OrnamAlign, OrnamAlignUtil } from 'projects/gelenium-ui/src/lib/_interfaces/ornam-align.interface';
+import { GlnFrameConfig } from 'projects/gelenium-ui/src/lib/_interfaces/gln-frame-config.interface';
+import { GlnOrnamAlign, GlnOrnamAlignUtil } from 'projects/gelenium-ui/src/lib/_interfaces/gln-ornam-align.interface';
 
 import {
   LABEL_CSS,
@@ -57,23 +57,23 @@ export class InputOrnamentsComponent {
   public isBtnEyeCrossed05f = false;
   public isBtnEyeCrossed05g = false;
   public isBtnEyeCrossed05h = false;
-  public config05h: GrnFrameConfig = {
-    ornamRgAlign: OrnamAlign.baseline,
+  public config05h: GlnFrameConfig = {
+    ornamRgAlign: GlnOrnamAlign.baseline,
   };
   public ornamLfAlign05 = 'default';
   public ornamRgAlign05 = 'default';
 
-  public config05: GrnFrameConfig = {};
+  public config05: GlnFrameConfig = {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {
     this.changeConfig05(this.convert(this.ornamLfAlign05), this.convert(this.ornamRgAlign05));
   }
 
-  public convert(ornamAlign: string | null): OrnamAlign {
-    return OrnamAlignUtil.convert(ornamAlign) || OrnamAlign.default;
+  public convert(ornamAlign: string | null): GlnOrnamAlign {
+    return GlnOrnamAlignUtil.convert(ornamAlign) || GlnOrnamAlign.default;
   }
 
-  public changeConfig05(ornamLfAlign: OrnamAlign | undefined, ornamRgAlign: OrnamAlign | undefined): void {
+  public changeConfig05(ornamLfAlign: GlnOrnamAlign | undefined, ornamRgAlign: GlnOrnamAlign | undefined): void {
     this.config05 = { ornamLfAlign, ornamRgAlign };
   }
 }

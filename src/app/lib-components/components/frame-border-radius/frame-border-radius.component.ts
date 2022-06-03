@@ -14,8 +14,8 @@ import {
   LABEL_UNDERLINE,
 } from 'src/app/lib-core/constants/constants';
 
-import { GrnFrameConfig } from 'projects/gelenium-ui/src/lib/_interfaces/grn-frame-config.interface';
-import { FrameSize, FrameSizeUtil } from 'projects/gelenium-ui/src/lib/_interfaces/frame-size.interface';
+import { GlnFrameConfig } from 'projects/gelenium-ui/src/lib/_interfaces/gln-frame-config.interface';
+import { GlnFrameSize, GlnFrameSizeUtil } from 'projects/gelenium-ui/src/lib/_interfaces/gln-frame-size.interface';
 
 @Component({
   selector: 'app-frame-border-radius',
@@ -53,12 +53,12 @@ export class FrameBorderRadiusComponent {
   public isAddPadding05 = true;
   public isHiddenLabel05 = false;
 
-  public sizeShort = FrameSize.short;
-  public sizeSmall = FrameSize.small;
-  public sizeMiddle = FrameSize.middle;
-  public sizeWide = FrameSize.wide;
-  public sizeLarge = FrameSize.large;
-  public sizeHuge = FrameSize.huge;
+  public sizeShort = GlnFrameSize.short;
+  public sizeSmall = GlnFrameSize.small;
+  public sizeMiddle = GlnFrameSize.middle;
+  public sizeWide = GlnFrameSize.wide;
+  public sizeLarge = GlnFrameSize.large;
+  public sizeHuge = GlnFrameSize.huge;
 
   public formGroup05: FormGroup = new FormGroup({
     input05a: new FormControl('Demo Size Short', []),
@@ -80,10 +80,10 @@ export class FrameBorderRadiusComponent {
     input06e: new FormControl('Demo - E', []),
     input06f: new FormControl('Demo - F', []),
   });
-  public configOutlined: GrnFrameConfig = {
+  public configOutlined: GlnFrameConfig = {
     labelPd: 18.5, // 0.37*FrameSizeValue.middle
   };
-  public configUnderline: GrnFrameConfig = {
+  public configUnderline: GlnFrameConfig = {
     labelPd: 18.5, // 0.37*FrameSizeValue.middle
   };
 
@@ -92,8 +92,8 @@ export class FrameBorderRadiusComponent {
   public safeStyle(style: string): SafeStyle {
     return this.sanitizer.bypassSecurityTrustStyle(style);
   }
-  public getValue(value: FrameSize): number {
-    return FrameSizeUtil.getValue(value) || 0;
+  public getValue(value: GlnFrameSize): number {
+    return GlnFrameSizeUtil.getValue(value) || 0;
   }
   public getRadius(value: number, exterior: string): string {
     return exterior === 'underline' ? value + 'px ' + value + 'px 0 0' : value + 'px';
@@ -101,7 +101,7 @@ export class FrameBorderRadiusComponent {
   public getRatio(exterior: string): number {
     return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
   }
-  public getConfig(labelPd: number): GrnFrameConfig {
+  public getConfig(labelPd: number): GlnFrameConfig {
     return { labelPd };
   }
 }

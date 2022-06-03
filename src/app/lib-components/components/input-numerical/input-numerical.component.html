@@ -13,15 +13,15 @@
   </p>
   <p>
     An alternative is to use the
-    <a [href]="urlRegexMatch + '#Basic'">"GrnRegexMatch"</a>
+    <a [href]="urlRegexMatch + '#Basic'">"GlnRegexMatch"</a>
     directive.
     This directive allows you to enter only those values that match the specified regular
     expression.
-    To enter only numbers, you can use: grnRegexMatch="^-?(\d+)$", [grnRegexMatch]="'^-?(\\d+)$'"
-    or [grnRegexMatch]="'/^-?(\\d+)$/i'".
+    To enter only numbers, you can use: glnRegexMatch="^-?(\d+)$", [glnRegexMatch]="'^-?(\\d+)$'"
+    or [glnRegexMatch]="'/^-?(\\d+)$/i'".
   </p>
   <p>
-    The following templates can be specified in the grnRegexMatch directive as an input parameter:
+    The following templates can be specified in the glnRegexMatch directive as an input parameter:
   </p>
   <ul>
     <li>'#numeric' - which matches the regular expression<br />
@@ -34,7 +34,7 @@
   <p>
     You can also specify your own regular expressions as an input parameter.<br />
     For example: numbers, lowercase characters, and space.<br />
-    grnRegexMatch="^[\ ,\d,a-z]+$"
+    glnRegexMatch="^[\ ,\d,a-z]+$"
   </p>
 </section>
 
@@ -60,7 +60,7 @@
           <em>Attribute: min=0 max=50 step=5.</em>
         </small>
       </div>
-      <grn-input formControlName="input04a"
+      <gln-input formControlName="input04a"
         wdFull
         [label]="!formGroup04.controls.input04a.value
           ?'Enter number':'Number'"
@@ -72,7 +72,7 @@
           ?'Enter your number value.'
           :'The value is entered.'"
         [exterior]="exterior04">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -81,7 +81,7 @@
           <em>Attribute: pattern="^[0-9]+$".</em>
         </small>
       </div>
-      <grn-input formControlName="input04b"
+      <gln-input formControlName="input04b"
         wdFull
         [label]="formGroup04.controls.input04b.errors
           ?'Error'
@@ -95,97 +95,97 @@
             ?'Enter your number value.'
             :'The value is correct.')"
         [exterior]="exterior04">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
       <div>
         <small>
-          <em>Attrib.: grnRegexMatch="/^-?(\d+)$/".</em>
+          <em>Attrib.: glnRegexMatch="/^-?(\d+)$/".</em>
         </small>
       </div>
-      <grn-input formControlName="input04c"
+      <gln-input formControlName="input04c"
         wdFull
         [label]="!formGroup04.controls.input04c.value
           ?'Enter number':'Number'"
-        grnRegexMatch="/^-?(\d+)$/"
+        glnRegexMatch="/^-?(\d+)$/"
         [helperText]="!formGroup04.controls.input04c.value
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
       <div>
         <small>
-          <em>Attrib.: grnRegexMatch="#numeric".</em>
+          <em>Attrib.: glnRegexMatch="#numeric".</em>
         </small>
       </div>
-      <grn-input formControlName="input04d"
+      <gln-input formControlName="input04d"
         wdFull
         [label]="!formGroup04.controls.input04d.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric"
+        glnRegexMatch="#numeric"
         [helperText]="!formGroup04.controls.input04d.value
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
       <div>
         <small>
-          <em>Attrib.: grnRegexMatch="#numeric(,2)".</em>
+          <em>Attrib.: glnRegexMatch="#numeric(,2)".</em>
         </small>
       </div>
-      <grn-input formControlName="input04e"
+      <gln-input formControlName="input04e"
         wdFull
         [label]="!formGroup04.controls.input04e.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric(,2)"
+        glnRegexMatch="#numeric(,2)"
         [helperText]="!formGroup04.controls.input04e.value
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
       <div>
         <small>
-          <em>Attrib.: grnRegexMatch="#numeric(12,2)".</em>
+          <em>Attrib.: glnRegexMatch="#numeric(12,2)".</em>
         </small>
       </div>
-      <grn-input formControlName="input04f"
+      <gln-input formControlName="input04f"
         wdFull
         [label]="!formGroup04.controls.input04f.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric(12,2)"
+        glnRegexMatch="#numeric(12,2)"
         [helperText]="!formGroup04.controls.input04f.value
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
       <div>
         <small>
-          <em>Attrib.: grnRegexMatch="^[\ ,\d,a-z]+$"</em>
+          <em>Attrib.: glnRegexMatch="^[\ ,\d,a-z]+$"</em>
         </small>
       </div>
-      <grn-input formControlName="input04g"
+      <gln-input formControlName="input04g"
         wdFull
         [label]="!formGroup04.controls.input04g.value
           ?'Enter number':'Number'"
-        grnRegexMatch="^[\ ,\d,a-z]+$"
+        glnRegexMatch="^[\ ,\d,a-z]+$"
         [helperText]="!formGroup04.controls.input04g.value
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04">
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -213,7 +213,7 @@
           &lt;em&gt;Attribute: min=0 max=50 step=5.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input04a"
+      &lt;gln-input formControlName="input04a"
         wdFull
         [label]="!formGroup04.controls.input04a.value
           ?'Enter number':'Number'"
@@ -225,7 +225,7 @@
           ?'Enter your number value.'
           :'The value is entered.'"
         [exterior]="exterior04"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -234,7 +234,7 @@
           &lt;em&gt;Attribute: pattern="^[0-9]+$".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input04b"
+      &lt;gln-input formControlName="input04b"
         wdFull
         [label]="formGroup04.controls.input04b.errors
           ?'Error'
@@ -248,97 +248,97 @@
             ?'Enter your number value.'
             :'The value is correct.')"
         [exterior]="exterior04"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attrib.: grnRegexMatch="/^-?(\d+)$/".&lt;/em&gt;
+          &lt;em&gt;Attrib.: glnRegexMatch="/^-?(\d+)$/".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input04c"
+      &lt;gln-input formControlName="input04c"
         wdFull
         [label]="!formGroup04.controls.input04c.value
           ?'Enter number':'Number'"
-        grnRegexMatch="/^-?(\d+)$/"
+        glnRegexMatch="/^-?(\d+)$/"
         [helperText]="!formGroup04.controls.input04c.value
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attrib.: grnRegexMatch="#numeric".&lt;/em&gt;
+          &lt;em&gt;Attrib.: glnRegexMatch="#numeric".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input04d"
+      &lt;gln-input formControlName="input04d"
         wdFull
         [label]="!formGroup04.controls.input04d.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric"
+        glnRegexMatch="#numeric"
         [helperText]="!formGroup04.controls.input04d.value
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attrib.: grnRegexMatch="#numeric(,2)".&lt;/em&gt;
+          &lt;em&gt;Attrib.: glnRegexMatch="#numeric(,2)".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input04e"
+      &lt;gln-input formControlName="input04e"
         wdFull
         [label]="!formGroup04.controls.input04e.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric(,2)"
+        glnRegexMatch="#numeric(,2)"
         [helperText]="!formGroup04.controls.input04e.value
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attrib.: grnRegexMatch="#numeric(12,2)".&lt;/em&gt;
+          &lt;em&gt;Attrib.: glnRegexMatch="#numeric(12,2)".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input04f"
+      &lt;gln-input formControlName="input04f"
         wdFull
         [label]="!formGroup04.controls.input04f.value
           ?'Enter number':'Number'"
-        grnRegexMatch="#numeric(12,2)"
+        glnRegexMatch="#numeric(12,2)"
         [helperText]="!formGroup04.controls.input04f.value
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attrib.: grnRegexMatch="^[\ ,\d,a-z]+$"&lt;/em&gt;
+          &lt;em&gt;Attrib.: glnRegexMatch="^[\ ,\d,a-z]+$"&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input04g"
+      &lt;gln-input formControlName="input04g"
         wdFull
         [label]="!formGroup04.controls.input04g.value
           ?'Enter number':'Number'"
-        grnRegexMatch="^[\ ,\d,a-z]+$"
+        glnRegexMatch="^[\ ,\d,a-z]+$"
         [helperText]="!formGroup04.controls.input04g.value
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;

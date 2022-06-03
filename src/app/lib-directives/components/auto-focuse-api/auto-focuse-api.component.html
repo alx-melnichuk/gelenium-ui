@@ -1,12 +1,12 @@
 <section mr-vr>
-  <h3>API: GrnAutoFocuse</h3>
+  <h3>API: GlnAutoFocuse</h3>
   <p>
     Selector:
-    <span fw500>[grnAutoFocuse]</span>
+    <span fw500>[glnAutoFocuse]</span>
   </p>
   <p>
     Exported as:
-    <span fw500>grnAutoFocuse</span>
+    <span fw500>glnAutoFocuse</span>
   </p>
   <p>
     The directive transfers input focus to the current element.
@@ -26,7 +26,7 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>grnAutoFocuse: string | boolean | null = null;</code>
+      <code>glnAutoFocuse: string | boolean | null = null;</code>
     </td>
     <td>
       <span>Can take the following values:</span>
@@ -49,23 +49,23 @@
 </section>
 
 <section mr-vr>
-  <h3>API: GrnAutoFocuseOwner</h3>
+  <h3>API: GlnAutoFocuseOwner</h3>
   <p>
     Selector:
-    <span fw500>[grnAutoFocuseOwner]</span>
+    <span fw500>[glnAutoFocuseOwner]</span>
   </p>
   <p>
     Exported as:
-    <span fw500>grnAutoFocuseOwner</span>
+    <span fw500>glnAutoFocuseOwner</span>
   </p>
   <p>
     The directive allows you to transfer the input focus to the specified element with a
     complex page structure.
   </p>
   <p>
-    The directive defines the first nested child GrnAutoFocuse directive with a positive
+    The directive defines the first nested child GlnAutoFocuse directive with a positive
     input parameter value (or "empty string").
-    And after that, it calls the method of the child directive GrnAutoFocuse to transfer
+    And after that, it calls the method of the child directive GlnAutoFocuse to transfer
     the input focus.
   </p>
   <p>

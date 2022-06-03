@@ -1,0 +1,60 @@
+<ng-container *ngIf="!linkElement; else elseBlockLink">
+  <button #buttonElement
+    class="gln-btn gln-settings"
+    gln-clear
+    gln-btn
+    type="button"
+    tabindex="0"
+    [glnFrameExteriorButton]="exterior || currConfig?.exterior || null"
+    [glnFrameExteriorButtonElementRef]="hostRef"
+    #glnFrameExteriorButton="glnFrameExteriorButton"
+    (glnFrameExteriorButtonChange)="glnFrameSize.updatePaddingVerAndHor()"
+    [glnFrameSize]="frameSize || currConfig?.frameSize || null"
+    #glnFrameSize="glnFrameSize"
+    [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
+    [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
+    [glnFrameSizePrepareData]="glnFrameExteriorButton"
+    [attr.id]="id"
+    [attr.disabled]="isDisabled2 ? '' : null"
+    (focus)="doFocus()"
+    (blur)="doBlur()">
+    <ng-container [ngTemplateOutlet]="templateOrnament">
+    </ng-container>
+    <span class="gb-label gb-elem-pd-hor">
+      <ng-content></ng-content>
+    </span>
+    <gln-touch-ripple *ngIf="!isDisabled2 && !isNoRipple2 && !currConfig?.isNoRipple">
+    </gln-touch-ripple>
+  </button>
+</ng-container>
+<ng-template #elseBlockLink>
+  <div class="gln-btn gln-settings"
+    gln-btn
+    [glnFrameExteriorButton]="exterior || currConfig?.exterior || null"
+    [glnFrameExteriorButtonElementRef]="hostRef"
+    #glnFrameExteriorButton="glnFrameExteriorButton"
+    (glnFrameExteriorButtonChange)="glnFrameSize.updatePaddingVerAndHor()"
+    [glnFrameSize]="frameSize || currConfig?.frameSize || null"
+    #glnFrameSize="glnFrameSize"
+    [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
+    [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
+    [glnFrameSizePrepareData]="glnFrameExteriorButton"
+    [attr.id]="id"
+    (click)="doClick($event)">
+    <ng-container [ngTemplateOutlet]="templateOrnament">
+    </ng-container>
+    <ng-content select="a"></ng-content>
+    <gln-touch-ripple *ngIf="!isDisabled2 && !isNoRipple2 && !currConfig?.isNoRipple"
+      skip-events>
+    </gln-touch-ripple>
+  </div>
+</ng-template>
+
+<ng-template #templateOrnament>
+  <span orn-lf>
+    <ng-content select="[gln-orn-lf]"></ng-content>
+  </span>
+  <span orn-rg>
+    <ng-content select="[gln-orn-rg]"></ng-content>
+  </span>
+</ng-template>

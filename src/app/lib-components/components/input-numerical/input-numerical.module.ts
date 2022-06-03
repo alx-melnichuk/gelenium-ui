@@ -5,8 +5,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GrnInputModule } from 'projects/gelenium-ui/src/lib/grn-input/grn-input.module';
-import { GrnRegexModule } from 'projects/gelenium-ui/src/lib/directives/grn-regex/grn-regex.module';
+import { GlnInputModule } from 'projects/gelenium-ui/src/lib/gln-input/gln-input.module';
+import { GlnRegexModule } from 'projects/gelenium-ui/src/lib/directives/gln-regex/gln-regex.module';
 
 import { InputNumericalComponent } from './input-numerical.component';
 
@@ -19,8 +19,8 @@ import { InputNumericalComponent } from './input-numerical.component';
     MatButtonToggleModule,
     MatExpansionModule,
     MatTabsModule,
-    GrnInputModule,
-    GrnRegexModule,
+    GlnInputModule,
+    GlnRegexModule,
   ],
   exports: [InputNumericalComponent],
 })

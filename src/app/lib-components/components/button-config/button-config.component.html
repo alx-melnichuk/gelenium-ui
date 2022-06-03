@@ -3,15 +3,15 @@
   <p>
     If your application will have a single style for buttons, then you can set a single
     configuration.
-    To do this, you need to create an object with the GrnButtonConfig interface and define the
+    To do this, you need to create an object with the GlnButtonConfig interface and define the
     required values.
     Next, specify the resulting object in the list of providers for the entire application (at the
     level of the AppComponent).
   </p>
   <code><pre source="ts">
-  const grnButtonConfigDefault: GrnButtonConfig = &#123;
-    exterior: ButtonExterior.contained,
-    frameSize: FrameSize.small,
+  const glnButtonConfigDefault: GlnButtonConfig = &#123;
+    exterior: GlnButtonExterior.contained,
+    frameSize: GlnFrameSize.small,
   &#125;;
 
   @Component(&#123;
@@ -21,8 +21,8 @@
     encapsulation: ViewEncapsulation.None,
     providers: [
       &#123;
-        provide: GRN_BUTTON_CONFIG,
-        useValue: grnButtonConfigDefault
+        provide: GLN_BUTTON_CONFIG,
+        useValue: glnButtonConfigDefault
       &#125;
     ],
   &#125;)
@@ -30,13 +30,13 @@
     title = 'demo';
   &#125;</pre></code>
   <p>
-    After that, all buttons based on the "GrnButtonConfig" component will have the same
+    After that, all buttons based on the "GlnButtonConfig" component will have the same
     configuration.
   </p>
 </section>
 
 <section mr-vr>
-  <h4>GrnButtonConfig interface.</h4>
+  <h4>GlnButtonConfig interface.</h4>
 </section>
 
 <table class="app-tab">
@@ -46,7 +46,7 @@
   </tr>
 
   <tr>
-    <td><code>exterior?: ButtonExterior;</code></td>
+    <td><code>exterior?: GlnButtonExterior;</code></td>
     <td>
       <span>
         This property determines the appearance of the button.
@@ -124,8 +124,8 @@
     <li>"frameSize" will have the value "middle" (height to 50px;).</li>
   </ul>
   <code><pre source="ts">
-    const grnButtonConfigDefault: GrnButtonConfig = &#123;
-      exterior: ButtonExterior.outlined,
+    const glnButtonConfigDefault: GlnButtonConfig = &#123;
+      exterior: GlnButtonExterior.outlined,
       frameSize: FrameSize.middle,
     &#125;;</pre></code>
 </section>
@@ -133,7 +133,7 @@
 <section mr-vr>
   <h4>2. Specify "underline" and "middle".</h4>
   <p>
-    Suppose we have a provider in our application with "GrnButtonConfig" and all buttons
+    Suppose we have a provider in our application with "GlnButtonConfig" and all buttons
     accept its default values.
     We can change these values for an individual element.
     To do this, you need to specify in this element those properties that do not match in the
@@ -173,9 +173,9 @@
         <em>1. Default config: "text", "small".</em>
       </small>
     </div>
-    <grn-button>
+    <gln-button>
       <span>Default</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
@@ -184,10 +184,10 @@
         <em>2. exterior="outlined", frameSize="wide".</em>
       </small>
     </div>
-    <grn-button exterior="outlined"
+    <gln-button exterior="outlined"
       frameSize="wide">
       <span>Settings</span>
-    </grn-button>
+    </gln-button>
   </div>
 
 </div>
@@ -209,9 +209,9 @@
         &lt;em&gt;1. Default config: "text", "small".&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
-    &lt;grn-button&gt;
+    &lt;gln-button&gt;
       &lt;span&gt;Default&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
@@ -220,10 +220,10 @@
         &lt;em&gt;2. exterior="outlined", frameSize="wide".&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
-    &lt;grn-button exterior="outlined"
+    &lt;gln-button exterior="outlined"
       frameSize="wide"&gt;
       &lt;span&gt;Settings&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
 &lt;/div&gt;</pre></code>

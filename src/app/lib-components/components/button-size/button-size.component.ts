@@ -45,7 +45,7 @@ export class ButtonSizeComponent {
   public fragment03g = 'size-link3g';
   public fragment03h = 'size-link3h';
   public fragment03i = 'size-link3i';
-  // GrnButtonConfig
+  // GlnButtonConfig
   public config03 = {
     frameSizeValue: 57,
   };

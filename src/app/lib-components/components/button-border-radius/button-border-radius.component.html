@@ -1,7 +1,7 @@
 <section mr-vr>
   <h3>Border radius.</h3>
   <p>
-    The GrnButton component has the ability to change the "border-radius" css property.
+    The GlnButton component has the ability to change the "border-radius" css property.
     This requires creating a css variable "--gb-br-rd" at the level of the component
     or any parent element.
     The value of this css variable can be any valid (as described by
@@ -71,16 +71,16 @@
   [attr.style]="safeStyle(propRadius + ':'
     + round(getValue(sizeShort) * borderRadius / 100) + 'px')">
   <div class="app-elem">
-    <grn-button [exterior]="exterior04a"
+    <gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeShort) * labelPdRatio)) : null"
       [frameSize]="sizeShort">
       <span>{{ getLabel(exterior04a) }}</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
-    <grn-button [exterior]="exterior04a"
+    <gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeShort) * labelPdRatio)) : null"
       [frameSize]="sizeShort">
@@ -88,7 +88,7 @@
         [fragment]="fragment04a">
         <span>{{ getLabel(exterior04a) }} Link</span>
       </a>
-    </grn-button>
+    </gln-button>
   </div>
 </div>
 
@@ -105,16 +105,16 @@
   [attr.style]="safeStyle(propRadius + ':'
     + round(getValue(sizeShort) * borderRadius / 100) + 'px')"&gt;
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04a"
+    &lt;gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeShort) * labelPdRatio)) : null"
       [frameSize]="sizeShort"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04a"
+    &lt;gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeShort) * labelPdRatio)) : null"
       [frameSize]="sizeShort"&gt;
@@ -122,7 +122,7 @@
         [fragment]="fragment04a"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -164,7 +164,7 @@ export class ButtonComponent &#123;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -196,16 +196,16 @@ export class ButtonComponent &#123;
   [attr.style]="safeStyle(propRadius + ':'
     + round(getValue(sizeSmall) * borderRadius / 100) + 'px')">
   <div class="app-elem">
-    <grn-button [exterior]="exterior04a"
+    <gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeSmall) * labelPdRatio)) : null"
       [frameSize]="sizeSmall">
       <span>{{ getLabel(exterior04a) }}</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
-    <grn-button [exterior]="exterior04a"
+    <gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeSmall) * labelPdRatio)) : null"
       [frameSize]="sizeSmall">
@@ -213,7 +213,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04b">
         <span>{{ getLabel(exterior04a) }} Link</span>
       </a>
-    </grn-button>
+    </gln-button>
   </div>
 </div>
 
@@ -230,16 +230,16 @@ export class ButtonComponent &#123;
   [attr.style]="safeStyle(propRadius + ':'
     + round(getValue(sizeSmall) * borderRadius / 100) + 'px')"&gt;
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04a"
+    &lt;gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeSmall) * labelPdRatio)) : null"
       [frameSize]="sizeSmall"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04a"
+    &lt;gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeSmall) * labelPdRatio)) : null"
       [frameSize]="sizeSmall"&gt;
@@ -247,7 +247,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04b"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -289,7 +289,7 @@ export class ButtonComponent &#123;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -321,16 +321,16 @@ export class ButtonComponent &#123;
   [attr.style]="safeStyle(propRadius + ':'
     + round(getValue(sizeMiddle) * borderRadius / 100) + 'px')">
   <div class="app-elem">
-    <grn-button [exterior]="exterior04a"
+    <gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle">
       <span>{{ getLabel(exterior04a) }}</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
-    <grn-button [exterior]="exterior04a"
+    <gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle">
@@ -338,7 +338,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04c">
         <span>{{ getLabel(exterior04a) }} Link</span>
       </a>
-    </grn-button>
+    </gln-button>
   </div>
 </div>
 
@@ -355,16 +355,16 @@ export class ButtonComponent &#123;
   [attr.style]="safeStyle(propRadius + ':'
     + round(getValue(sizeMiddle) * borderRadius / 100) + 'px')"&gt;
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04a"
+    &lt;gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04a"
+    &lt;gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle"&gt;
@@ -372,7 +372,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04c"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -414,7 +414,7 @@ export class ButtonComponent &#123;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -446,16 +446,16 @@ export class ButtonComponent &#123;
   [attr.style]="safeStyle(propRadius + ':'
     + round(getValue(sizeWide) * borderRadius / 100) + 'px')">
   <div class="app-elem">
-    <grn-button [exterior]="exterior04a"
+    <gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeWide) * labelPdRatio)) : null"
       [frameSize]="sizeWide">
       <span>{{ getLabel(exterior04a) }}</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
-    <grn-button [exterior]="exterior04a"
+    <gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeWide) * labelPdRatio)) : null"
       [frameSize]="sizeWide">
@@ -463,7 +463,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04d">
         <span>{{ getLabel(exterior04a) }} Link</span>
       </a>
-    </grn-button>
+    </gln-button>
   </div>
 </div>
 
@@ -480,16 +480,16 @@ export class ButtonComponent &#123;
   [attr.style]="safeStyle(propRadius + ':'
     + round(getValue(sizeWide) * borderRadius / 100) + 'px')"&gt;
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04a"
+    &lt;gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeWide) * labelPdRatio)) : null"
       [frameSize]="sizeWide"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04a"
+    &lt;gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeWide) * labelPdRatio)) : null"
       [frameSize]="sizeWide"&gt;
@@ -497,7 +497,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04d"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -539,7 +539,7 @@ export class ButtonComponent &#123;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -571,17 +571,17 @@ export class ButtonComponent &#123;
   [attr.style]="safeStyle(propRadius + ':'
    + round(getValue(sizeLarge) * borderRadius / 100) + 'px')">
   <div class="app-elem">
-    <grn-button class="bbr-large"
+    <gln-button class="bbr-large"
       [exterior]="exterior04a"
       [config]="isAddPadding04a
        ? getConfig(round(getValue(sizeLarge) * labelPdRatio)) : null"
       [frameSize]="sizeLarge">
       <span>{{ getLabel(exterior04a) }}</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
-    <grn-button class="bbr-large"
+    <gln-button class="bbr-large"
       [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeLarge) * labelPdRatio)) : null"
@@ -590,7 +590,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04e">
         <span>{{ getLabel(exterior04a) }} Link</span>
       </a>
-    </grn-button>
+    </gln-button>
   </div>
 </div>
 
@@ -607,17 +607,17 @@ export class ButtonComponent &#123;
   [attr.style]="safeStyle(propRadius + ':'
    + round(getValue(sizeLarge) * borderRadius / 100) + 'px')"&gt;
   &lt;div class="app-elem"&gt;
-    &lt;grn-button class="bbr-large"
+    &lt;gln-button class="bbr-large"
       [exterior]="exterior04a"
       [config]="isAddPadding04a
        ? getConfig(round(getValue(sizeLarge) * labelPdRatio)) : null"
       [frameSize]="sizeLarge"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
-    &lt;grn-button class="bbr-large"
+    &lt;gln-button class="bbr-large"
       [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeLarge) * labelPdRatio)) : null"
@@ -626,7 +626,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04e"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -668,7 +668,7 @@ export class ButtonComponent &#123;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -703,17 +703,17 @@ export class ButtonComponent &#123;
   [attr.style]="safeStyle(propRadius + ':'
     + round(getValue(sizeHuge) * borderRadius / 100) + 'px')">
   <div class="app-elem">
-    <grn-button class="bbr-huge"
+    <gln-button class="bbr-huge"
       [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeHuge) * labelPdRatio)) : null"
       [frameSize]="sizeHuge">
       <span>{{ getLabel(exterior04a) }}</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
-    <grn-button class="bbr-huge"
+    <gln-button class="bbr-huge"
       [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeHuge) * labelPdRatio)) : null"
@@ -722,7 +722,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04f">
         <span>{{ getLabel(exterior04a) }} Link</span>
       </a>
-    </grn-button>
+    </gln-button>
   </div>
 </div>
 
@@ -739,17 +739,17 @@ export class ButtonComponent &#123;
   [attr.style]="safeStyle(propRadius + ':'
     + round(getValue(sizeHuge) * borderRadius / 100) + 'px')"&gt;
   &lt;div class="app-elem"&gt;
-    &lt;grn-button class="bbr-huge"
+    &lt;gln-button class="bbr-huge"
       [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeHuge) * labelPdRatio)) : null"
       [frameSize]="sizeHuge"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
-    &lt;grn-button class="bbr-huge"
+    &lt;gln-button class="bbr-huge"
       [exterior]="exterior04a"
       [config]="isAddPadding04a
         ? getConfig(round(getValue(sizeHuge) * labelPdRatio)) : null"
@@ -758,7 +758,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04f"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -800,7 +800,7 @@ export class ButtonComponent &#123;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -867,16 +867,16 @@ export class ButtonComponent &#123;
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 0 '
     + round(getValue(sizeMiddle) * radiusRatio) + 'px')">
   <div class="app-elem">
-    <grn-button [exterior]="exterior04b"
+    <gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle">
       <span>{{ 'A - ' + getLabel(exterior04b) }}</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
-    <grn-button [exterior]="exterior04b"
+    <gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle">
@@ -884,7 +884,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04g">
         <span>{{ 'A - ' + getLabel(exterior04b) }} Link</span>
       </a>
-    </grn-button>
+    </gln-button>
   </div>
 </div>
 
@@ -902,16 +902,16 @@ export class ButtonComponent &#123;
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 0 '
     + round(getValue(sizeMiddle) * radiusRatio) + 'px')"&gt;
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
+    &lt;gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; 'A - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
+    &lt;gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle"&gt;
@@ -919,7 +919,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04g"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; 'A - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -959,7 +959,7 @@ export class ButtonComponent &#123;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -992,16 +992,16 @@ export class ButtonComponent &#123;
     + round(getValue(sizeMiddle) * radiusRatio) + 'px '
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0')">
   <div class="app-elem">
-    <grn-button [exterior]="exterior04b"
+    <gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle">
       <span>{{ 'B - ' + getLabel(exterior04b) }}</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
-    <grn-button [exterior]="exterior04b"
+    <gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle">
@@ -1009,7 +1009,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04h">
         <span>{{ 'B - ' + getLabel(exterior04b) }} Link</span>
       </a>
-    </grn-button>
+    </gln-button>
   </div>
 </div>
 
@@ -1027,16 +1027,16 @@ export class ButtonComponent &#123;
     + round(getValue(sizeMiddle) * radiusRatio) + 'px '
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0')"&gt;
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
+    &lt;gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; 'B - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
+    &lt;gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle"&gt;
@@ -1044,7 +1044,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04h"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; 'B - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -1084,7 +1084,7 @@ export class ButtonComponent &#123;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -1117,16 +1117,16 @@ export class ButtonComponent &#123;
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 '
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0')">
   <div class="app-elem">
-    <grn-button [exterior]="exterior04b"
+    <gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle">
       <span>{{ 'C - ' + getLabel(exterior04b) }}</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
-    <grn-button [exterior]="exterior04b"
+    <gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle">
@@ -1134,7 +1134,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04i">
         <span>{{ 'C - ' + getLabel(exterior04b) }} Link</span>
       </a>
-    </grn-button>
+    </gln-button>
   </div>
 </div>
 
@@ -1152,16 +1152,16 @@ export class ButtonComponent &#123;
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 '
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0')"&gt;
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
+    &lt;gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; 'C - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
+    &lt;gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle"&gt;
@@ -1169,7 +1169,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04i"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; 'C - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -1209,7 +1209,7 @@ export class ButtonComponent &#123;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -1242,16 +1242,16 @@ export class ButtonComponent &#123;
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 '
     + round(getValue(sizeMiddle) * radiusRatio) + 'px')">
   <div class="app-elem">
-    <grn-button [exterior]="exterior04b"
+    <gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle">
       <span>{{ 'D - ' + getLabel(exterior04b) }}</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
-    <grn-button [exterior]="exterior04b"
+    <gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle">
@@ -1259,7 +1259,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04j">
         <span>{{ 'D - ' + getLabel(exterior04b) }} Link</span>
       </a>
-    </grn-button>
+    </gln-button>
   </div>
 </div>
 
@@ -1277,16 +1277,16 @@ export class ButtonComponent &#123;
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 '
     + round(getValue(sizeMiddle) * radiusRatio) + 'px')"&gt;
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
+    &lt;gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; 'D - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
+    &lt;gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle"&gt;
@@ -1294,7 +1294,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04j"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; 'D - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -1334,7 +1334,7 @@ export class ButtonComponent &#123;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -1364,16 +1364,16 @@ export class ButtonComponent &#123;
 
 <div class="app-group bbr-demo-e">
   <div class="app-elem">
-    <grn-button [exterior]="exterior04b"
+    <gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle">
       <span>{{ 'E - ' + getLabel(exterior04b) }}</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
-    <grn-button [exterior]="exterior04b"
+    <gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle">
@@ -1381,7 +1381,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04k">
         <span>{{ 'E - ' + getLabel(exterior04b) }} Link</span>
       </a>
-    </grn-button>
+    </gln-button>
   </div>
 </div>
 
@@ -1396,16 +1396,16 @@ export class ButtonComponent &#123;
           <code><pre source="html">
 &lt;div class="app-group bbr-demo-e"&gt;
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
+    &lt;gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; 'E - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
-    &lt;grn-button [exterior]="exterior04b"
+    &lt;gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
         ? getConfig(round(getValue(sizeMiddle) * labelPdRatio)) : null"
       [frameSize]="sizeMiddle"&gt;
@@ -1413,7 +1413,7 @@ export class ButtonComponent &#123;
         [fragment]="fragment04k"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; 'E - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
       &lt;/a&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -1453,7 +1453,7 @@ export class ButtonComponent &#123;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>

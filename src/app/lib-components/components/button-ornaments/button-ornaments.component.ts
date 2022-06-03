@@ -1,8 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-// import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-
-// import { GrnButtonConfig } from 'projects/gelenium-ui/src/lib/interfaces/grn-button-config.interface';
-// import { FrameSize, FrameSizeUtil } from 'projects/gelenium-ui/src/public-api';
 
 import {
   BTN_CONTAINED,

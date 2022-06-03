@@ -1,7 +1,7 @@
 <section mr-vr>
   <h3>Basic</h3>
   <p>
-    The GrnRegexCheck directive implements checking the value of an element against
+    The GlnRegexCheck directive implements checking the value of an element against
     a regular expression.
     Sometimes you want to restrict user input to some kind of business logic.
     To do this, you can use the
@@ -60,15 +60,15 @@
 </div>
 
 <section mr-vr>
-  <h4>2. Use a "pattern" with RegExp and GrnRegexCheck.</h4>
+  <h4>2. Use a "pattern" with RegExp and GlnRegexCheck.</h4>
   <p>
     But there are situations when you need to apply several restrictions and display
-    a separate error for each. In such cases, you can use the "GrnRegexCheck" directive.
+    a separate error for each. In such cases, you can use the "GlnRegexCheck" directive.
   </p>
   <p>
     Let's consider the case that only letters and numbers can be valid, and otherwise - an error.
     To fulfill the condition contains letters, apply the "pattern" attribute.
-    And to fulfill the condition contains digits, apply the "GrnRegexCheck" directive.
+    And to fulfill the condition contains digits, apply the "GlnRegexCheck" directive.
   </p>
   <p>
     Let's prepare a regular expression to check for the presence of letters.
@@ -90,13 +90,13 @@
       digits;</li>
   </ul>
   <p>
-    The "GrnRegexCheck" directive supports the following forms for describing regular expressions:
+    The "GlnRegexCheck" directive supports the following forms for describing regular expressions:
   </p>
   <ul>
-    <li><code>grnRegexCheck="^-?(\d+)$"</code></li>
-    <li><code>[grnRegexCheck]="'^-?(\\d+)$'"</code></li>
-    <li><code>grnRegexCheck="/^-?(\d+)$/i"</code></li>
-    <li><code>[grnRegexCheck]="'/^-?(\\d+)$/i'"</code></li>
+    <li><code>glnRegexCheck="^-?(\d+)$"</code></li>
+    <li><code>[glnRegexCheck]="'^-?(\\d+)$'"</code></li>
+    <li><code>glnRegexCheck="/^-?(\d+)$/i"</code></li>
+    <li><code>[glnRegexCheck]="'/^-?(\\d+)$/i'"</code></li>
   </ul>
   <p>
     If the value does not match the regular expression, then the "regexCheck" property is
@@ -105,7 +105,7 @@
   <p>
     Let's say we need to apply three or more constraints on the value of an input field.
     The methods described earlier will not work here.
-    But we can apply the "GrnRegexCheck" directive with the configuration.
+    But we can apply the "GlnRegexCheck" directive with the configuration.
     This directive as an input parameter can accept an object with fields: key, value.
     The key is the name of the property in the error object.
     The value is a regular expression string.
@@ -113,7 +113,7 @@
 </section>
 
 <section mr-vr>
-  <h4>3. GrnRegexCheck configuration</h4>
+  <h4>3. GlnRegexCheck configuration</h4>
   <p>
     Suppose we need to define a new secret key (or password).
     The field value can contain various characters.
@@ -156,7 +156,7 @@
     Thus, the application of the directive is as follows:
   </p>
   <pre>
-    [grnRegexCheck]="&#123;
+    [glnRegexCheck]="&#123;
       'checkLetters': '^(?=.*[a-zA-Z])[\\w\\W]&#123;1,&#125;$',
       'checkDigits': '^(?=.*\\d)[\\w\\W]&#123;1,&#125;$',
       'checkSymbols': '^(?=.*[!@#$%^&*])[\\w\\W]&#123;1,&#125;$'
@@ -165,7 +165,7 @@
 </section>
 
 <section mr-vr>
-  <h4>4. "GrnRegexCheck" and date input.</h4>
+  <h4>4. "GlnRegexCheck" and date input.</h4>
   <p>
     Let's say we need to implement an initial check for entering a date value.
     Let's prepare a regular expression:<br />
@@ -233,15 +233,15 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>2. pattern="[a-zA-Z]", grnRegexCheck="\d".</em>
+          <em>2. pattern="[a-zA-Z]", glnRegexCheck="\d".</em>
         </small>
       </div>
-      <grn-input formControlName="input01a"
+      <gln-input formControlName="input01a"
         wdFull
         [label]="!control01.input01a.value
           ?'Enter a digit and symbol':'A digit and symbol'"
         pattern="(?=.*[a-zA-Z])[a-zA-Z\d]{1,}"
-        grnRegexCheck="(?=.*\d)[a-zA-Z\d]{1,}"
+        glnRegexCheck="(?=.*\d)[a-zA-Z\d]{1,}"
         [helperText]="
         !control01.input01a.errors
         ?(!control01.input01a.value
@@ -254,7 +254,7 @@
              :'The value is not correct.')
          )"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -263,11 +263,11 @@
           <em>3. Check: [a-zA-Z], [\d], [!@#$%^&*].</em>
         </small>
       </div>
-      <grn-input formControlName="input01b"
+      <gln-input formControlName="input01b"
         wdFull
         [label]="!control01.input01b.value
           ?'Enter parameter':'Parameter'"
-        [grnRegexCheck]="{
+        [glnRegexCheck]="{
           'checkLetters': '^(?=.*[a-zA-Z])[\\w\\W]{1,}$',
           'checkDigits': '^(?=.*\\d)[\\w\\W]{1,}$',
           'checkSymbols': '^(?=.*[!@#$%^&*])[\\w\\W]{1,}$'
@@ -288,7 +288,7 @@
             )
          )"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -297,11 +297,11 @@
           <em>4.a. Entering a date value.</em>
         </small>
       </div>
-      <grn-input formControlName="input01c"
+      <gln-input formControlName="input01c"
         wdFull
         [label]="!control01.input01c.value
           ?'Enter the date':'Date value.'"
-        grnRegexCheck="/^[0-9]{2}[\/][0-9]{2}[\/][0-9]{4}$/i"
+        glnRegexCheck="/^[0-9]{2}[\/][0-9]{2}[\/][0-9]{4}$/i"
         [helperText]="
         !control01.input01c.errors
         ?(!control01.input01c.value
@@ -312,7 +312,7 @@
           : 'The value is not correct.'
          )"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -321,11 +321,11 @@
           <em>4.b. Entering a date value.</em>
         </small>
       </div>
-      <grn-input formControlName="input01d"
+      <gln-input formControlName="input01d"
         wdFull
         [label]="!control01.input01d.value
           ?'Enter the date':'Date value.'"
-        grnRegexCheck="/^([0-9]{0,2}|[0-9]{2}[\/]([0-9]{0,2}|[0-9]{2}[\/][0-9]{0,4}))$/i"
+        glnRegexCheck="/^([0-9]{0,2}|[0-9]{2}[\/]([0-9]{0,2}|[0-9]{2}[\/][0-9]{0,4}))$/i"
         [helperText]="
         !control01.input01d.errors
         ?(!control01.input01d.value
@@ -336,7 +336,7 @@
           : 'The value is not correct.'
          )"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -345,11 +345,11 @@
           <em>5. Entering a phone number.</em>
         </small>
       </div>
-      <grn-input formControlName="input01e"
+      <gln-input formControlName="input01e"
         wdFull
         [label]="!control01.input01e.value
           ?'Enter a phone number.':'Phone number.'"
-        grnRegexCheck="/^([(][0-9]{0,3}|[(][0-9]{3}[)]([0-9]{0,3}|[0-9]{3}[-][0-9]{0,4}))$/i"
+        glnRegexCheck="/^([(][0-9]{0,3}|[(][0-9]{3}[)]([0-9]{0,3}|[0-9]{3}[-][0-9]{0,4}))$/i"
         [helperText]="
         !control01.input01e.errors
         ?(!control01.input01e.value
@@ -360,7 +360,7 @@
           : 'The phone number is not correct.'
          )"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -385,15 +385,15 @@
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;2. pattern="[a-zA-Z]", grnRegexCheck="\d".&lt;/em&gt;
+          &lt;em&gt;2. pattern="[a-zA-Z]", glnRegexCheck="\d".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01a"
+      &lt;gln-input formControlName="input01a"
         wdFull
         [label]="!control01.input01a.value
           ?'Enter a digit and symbol':'A digit and symbol'"
         pattern="(?=.*[a-zA-Z])[a-zA-Z\d]&#123;1,&#125;"
-        grnRegexCheck="(?=.*\d)[a-zA-Z\d]&#123;1,&#125;"
+        glnRegexCheck="(?=.*\d)[a-zA-Z\d]&#123;1,&#125;"
         [helperText]="
         !control01.input01a.errors
         ?(!control01.input01a.value
@@ -406,7 +406,7 @@
              :'The value is not correct.')
          )"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -415,11 +415,11 @@
           &lt;em&gt;3. Check: [a-zA-Z], [\d], [!@#$%^&*].&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01b"
+      &lt;gln-input formControlName="input01b"
         wdFull
         [label]="!control01.input01b.value
           ?'Enter parameter':'Parameter'"
-        [grnRegexCheck]="&#123;
+        [glnRegexCheck]="&#123;
           'checkLetters': '^(?=.*[a-zA-Z])[\\w\\W]&#123;1,&#125;$',
           'checkDigits': '^(?=.*\\d)[\\w\\W]&#123;1,&#125;$',
           'checkSymbols': '^(?=.*[!@#$%^&*])[\\w\\W]&#123;1,&#125;$'
@@ -440,7 +440,7 @@
             )
          )"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -449,11 +449,11 @@
           &lt;em&gt;4.a. Entering a date value.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01c"
+      &lt;gln-input formControlName="input01c"
         wdFull
         [label]="!control01.input01c.value
           ?'Enter the date':'Date value.'"
-        grnRegexCheck="/^[0-9]&#123;2&#125;[\/][0-9]&#123;2&#125;[\/][0-9]&#123;4&#125;$/i"
+        glnRegexCheck="/^[0-9]&#123;2&#125;[\/][0-9]&#123;2&#125;[\/][0-9]&#123;4&#125;$/i"
         [helperText]="
         !control01.input01c.errors
         ?(!control01.input01c.value
@@ -464,7 +464,7 @@
           : 'The value is not correct.'
          )"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -473,11 +473,11 @@
           &lt;em&gt;4.b. Entering a date value.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01d"
+      &lt;gln-input formControlName="input01d"
         wdFull
         [label]="!control01.input01d.value
           ?'Enter the date':'Date value.'"
-        grnRegexCheck="/^([0-9]&#123;0,2&#125;|[0-9]&#123;2&#125;[\/]([0-9]&#123;0,2&#125;|[0-9]&#123;2&#125;[\/][0-9]&#123;0,4&#125;))$/i"
+        glnRegexCheck="/^([0-9]&#123;0,2&#125;|[0-9]&#123;2&#125;[\/]([0-9]&#123;0,2&#125;|[0-9]&#123;2&#125;[\/][0-9]&#123;0,4&#125;))$/i"
         [helperText]="
         !control01.input01d.errors
         ?(!control01.input01d.value
@@ -488,7 +488,7 @@
           : 'The value is not correct.'
          )"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -497,11 +497,11 @@
           &lt;em&gt;5. Entering a phone number.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01e"
+      &lt;gln-input formControlName="input01e"
         wdFull
         [label]="!control01.input01e.value
           ?'Enter a phone number.':'Phone number.'"
-        grnRegexCheck="/^([(][0-9]&#123;0,3&#125;|[(][0-9]&#123;3&#125;[)]([0-9]&#123;0,3&#125;|[0-9]&#123;3&#125;[-][0-9]&#123;0,4&#125;))$/i"
+        glnRegexCheck="/^([(][0-9]&#123;0,3&#125;|[(][0-9]&#123;3&#125;[)]([0-9]&#123;0,3&#125;|[0-9]&#123;3&#125;[-][0-9]&#123;0,4&#125;))$/i"
         [helperText]="
         !control01.input01e.errors
         ?(!control01.input01e.value
@@ -512,7 +512,7 @@
           : 'The phone number is not correct.'
          )"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;

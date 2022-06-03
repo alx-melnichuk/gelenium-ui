@@ -1,7 +1,7 @@
 <section mr-vr>
   <h3>Basic</h3>
   <p>
-    When changing the value, the GrnRegexRemove directive deletes the data that matches the
+    When changing the value, the GlnRegexRemove directive deletes the data that matches the
     specified regular expression.
     The regular expression must contain those characters that should not be present in the resulting
     string.
@@ -89,17 +89,17 @@
           <em>1. Digits only. Regex="/[^\d]/gm"</em>
         </small>
       </div>
-      <grn-input formControlName="input01a"
+      <gln-input formControlName="input01a"
         wdFull
         [label]="!control01.input01a.value
           ?'Enter a digits':'A digits'"
-        grnRegexRemove="/[^\d]/gm"
+        glnRegexRemove="/[^\d]/gm"
         [helperText]="!control01.input01a.errors
         ?(!control01.input01a.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -108,17 +108,17 @@
           <em>2. Letters only. Regex="/[^A-Za-z]/gm"</em>
         </small>
       </div>
-      <grn-input formControlName="input01b"
+      <gln-input formControlName="input01b"
         wdFull
         [label]="!control01.input01b.value
           ?'Enter a letters':'A letters'"
-        grnRegexRemove="/[^A-Za-z]/gm"
+        glnRegexRemove="/[^A-Za-z]/gm"
         [helperText]="!control01.input01b.errors
         ?(!control01.input01b.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -127,18 +127,18 @@
           <em>3. Regex="/[^\ \dA-Za-z]/gm"</em>
         </small>
       </div>
-      <grn-input formControlName="input01c"
+      <gln-input formControlName="input01c"
         wdFull
         [label]="!control01.input01c.value
           ?'Enter a letters, digits, space'
           :'A letters, digits, space'"
-        grnRegexRemove="/[^\ \dA-Za-z]/gm"
+        glnRegexRemove="/[^\ \dA-Za-z]/gm"
         [helperText]="!control01.input01c.errors
         ?(!control01.input01c.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -147,11 +147,11 @@
           <em>4. Single spaces only.</em>
         </small>
       </div>
-      <grn-input formControlName="input01d"
+      <gln-input formControlName="input01d"
         wdFull
         [label]="!control01.input01d.value
           ?'Enter a surname and name':'Surname and name'"
-        grnRegexRemove="/(^[ ]+)|((?<=[ ])[ ]+)/g"
+        glnRegexRemove="/(^[ ]+)|((?<=[ ])[ ]+)/g"
         [helperText]="!control01.input01d.errors
         ?(!control01.input01d.value
           ? 'Enter value.':'The value is correct.')
@@ -159,7 +159,7 @@
         (change)="control01.input01d.setValue(
           control01.input01d.value?.trim())"
         [exterior]="exterior01">
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -187,17 +187,17 @@
           &lt;em&gt;1. Digits only. Regex="/[^\d]/gm"&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01a"
+      &lt;gln-input formControlName="input01a"
         wdFull
         [label]="!control01.input01a.value
           ?'Enter a digits':'A digits'"
-        grnRegexRemove="/[^\d]/gm"
+        glnRegexRemove="/[^\d]/gm"
         [helperText]="!control01.input01a.errors
         ?(!control01.input01a.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -206,17 +206,17 @@
           &lt;em&gt;2. Letters only. Regex="/[^A-Za-z]/gm"&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01b"
+      &lt;gln-input formControlName="input01b"
         wdFull
         [label]="!control01.input01b.value
           ?'Enter a letters':'A letters'"
-        grnRegexRemove="/[^A-Za-z]/gm"
+        glnRegexRemove="/[^A-Za-z]/gm"
         [helperText]="!control01.input01b.errors
         ?(!control01.input01b.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -225,18 +225,18 @@
           &lt;em&gt;3. Regex="/[^\ \dA-Za-z]/gm"&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01c"
+      &lt;gln-input formControlName="input01c"
         wdFull
         [label]="!control01.input01c.value
           ?'Enter a letters, digits, space'
           :'A letters, digits, space'"
-        grnRegexRemove="/[^\ \dA-Za-z]/gm"
+        glnRegexRemove="/[^\ \dA-Za-z]/gm"
         [helperText]="!control01.input01c.errors
         ?(!control01.input01c.value
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -245,11 +245,11 @@
           &lt;em&gt;4. Single spaces only.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input01d"
+      &lt;gln-input formControlName="input01d"
         wdFull
         [label]="!control01.input01d.value
           ?'Enter a surname and name':'Surname and name'"
-        grnRegexRemove="/(^[ ]+)|((?&lt;=[ ])[ ]+)/g"
+        glnRegexRemove="/(^[ ]+)|((?&lt;=[ ])[ ]+)/g"
         [helperText]="!control01.input01d.errors
         ?(!control01.input01d.value
           ? 'Enter value.':'The value is correct.')
@@ -257,7 +257,7 @@
         (change)="control01.input01d.setValue(
           control01.input01d.value?.trim())"
         [exterior]="exterior01"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;

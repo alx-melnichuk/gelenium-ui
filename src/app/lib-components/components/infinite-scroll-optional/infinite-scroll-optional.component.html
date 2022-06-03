@@ -1,24 +1,24 @@
 <section mr-vr>
   <h3>Optional</h3>
   <p>
-    Above, there was an example where the "grn-infinite-scroll" component itself has the
+    Above, there was an example where the "gln-infinite-scroll" component itself has the
     css-property: overflow-y:
     scroll (or overflow: auto).
     Now let's consider the option when the parent element has this css-property, and not the
-    "grn-infinite-scroll"
+    "gln-infinite-scroll"
     component itself.
   </p>
   <p>
     Add an additional container "iso-item-wrap" with the required css-property overflow-y: scroll
     (or overflow: auto).
-    And inside this container we will place the "grn-infinite-scroll" component.
+    And inside this container we will place the "gln-infinite-scroll" component.
   </p>
 </section>
 
 <div class="iso-block">
   <div class="iso-item-wrap">
 
-    <grn-infinite-scroll (scrolled)="doScroll()">
+    <gln-infinite-scroll (scrolled)="doScroll()">
 
       <div class="iso-items"
         *ngFor="let item of elements2; let idx=index;
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-    </grn-infinite-scroll>
+    </gln-infinite-scroll>
 
   </div>
   <div *ngIf="isLoading"
@@ -62,7 +62,7 @@
 &lt;div class="iso-block"&gt;
   &lt;div class="iso-item-wrap"&gt;
 
-    &lt;grn-infinite-scroll (scrolled)="doScroll()"&gt;
+    &lt;gln-infinite-scroll (scrolled)="doScroll()"&gt;
 
       &lt;div class="iso-items"
         *ngFor="let item of elements2; let idx=index;
@@ -85,7 +85,7 @@
         &lt;/div&gt;
       &lt;/div&gt;
 
-    &lt;/grn-infinite-scroll&gt;
+    &lt;/gln-infinite-scroll&gt;
 
   &lt;/div&gt;
   &lt;div *ngIf="isLoading" class="iso-loading"&gt;

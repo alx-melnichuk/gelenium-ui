@@ -15,7 +15,7 @@ app-button-palette {
   }
 
   // Exterior: "contained"
-  .bp-specific .grn-button.gb-contained>.grn-btn {
+  .bp-specific .gln-button.gb-contained>.gln-btn {
     --gtr-ripple-color: #686aec5d;
     --gb-c-def-cl: #00acc1;
     --gb-c-def-bg-cl: #b2ebf299;
@@ -25,7 +25,7 @@ app-button-palette {
   }
 
   // Exterior: "outlined"
-  .bp-specific .grn-button.gb-outlined>.grn-btn {
+  .bp-specific .gln-button.gb-outlined>.gln-btn {
     --gtr-ripple-color: #19d2944d;
     --gb-o-def-cl: #00acc1;
     --gb-o-def-br-cl: #00acc1a0;
@@ -36,7 +36,7 @@ app-button-palette {
    }
     
   // Exterior: "text"
-  .bp-specific .grn-button.gb-text>.grn-btn {
+  .bp-specific .gln-button.gb-text>.gln-btn {
     --gtr-ripple-color: #19d2944d;
     --gb-t-def-cl: #00acc1;
     --gb-t-hov-bg-cl: #b2ebf299;
@@ -46,7 +46,7 @@ app-button-palette {
 
   // ** Style: bstrap "bs-btn" **
 
-  .grn-button.bs-btn {
+  .gln-button.bs-btn {
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.5;
@@ -55,41 +55,41 @@ app-button-palette {
     --gb-lbl-pd-lf: 0.75rem;
     --gb-lbl-pd-rg: 0.75rem;
   }
-  .grn-button.bs-btn:not(.gb-disabled)>.grn-btn {
+  .gln-button.bs-btn:not(.gb-disabled)>.gln-btn {
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   }
-  .grn-button.bs-btn.gb-disabled>.grn-btn {
+  .gln-button.bs-btn.gb-disabled>.gln-btn {
     opacity: .65;
   }
-  .grn-button.bs-btn:not(.gb-disabled)>.grn-btn:active,
-  .grn-button.bs-btn:not(.gb-disabled).active>.grn-btn {
+  .gln-button.bs-btn:not(.gb-disabled)>.gln-btn:active,
+  .gln-button.bs-btn:not(.gb-disabled).active>.gln-btn {
     background-color: var(--bs-act-bg-cl);
   }
-  .grn-button.bs-btn:not(.gb-disabled)>.grn-btn:focus-within,
-  .grn-button.bs-btn:not(.gb-disabled).focus>.grn-btn {
+  .gln-button.bs-btn:not(.gb-disabled)>.gln-btn:focus-within,
+  .gln-button.bs-btn:not(.gb-disabled).focus>.gln-btn {
     box-shadow: 0 0 0 0.2rem var(--bs-foc-bs-cl);
   }
 
   // ** Style: bstrap "bs-btn-contained" **
 
-  .grn-button.bs-btn-contained:not(.gb-disabled)>.grn-btn:focus-within,
-  .grn-button.bs-btn-contained:not(.gb-disabled).focus>.grn-btn {
+  .gln-button.bs-btn-contained:not(.gb-disabled)>.gln-btn:focus-within,
+  .gln-button.bs-btn-contained:not(.gb-disabled).focus>.gln-btn {
     background-color: var(--bs-c-foc-bg-cl);
   }
 
   // ** Style: bstrap "bs-btn-outline" **
 
-  .grn-button.bs-btn-outline:not(.gb-disabled)>.grn-btn:hover {
+  .gln-button.bs-btn-outline:not(.gb-disabled)>.gln-btn:hover {
     color: var(--bs-o-hov-cl);
   }
-  .grn-button.bs-btn-outline:not(.gb-disabled)>.grn-btn:active,
-  .grn-button.bs-btn-outline:not(.gb-disabled).active>.grn-btn {
+  .gln-button.bs-btn-outline:not(.gb-disabled)>.gln-btn:active,
+  .gln-button.bs-btn-outline:not(.gb-disabled).active>.gln-btn {
     color: var(--bs-o-act-cl);
   }
 
   // ** Style: bstrap "Primary" **
 
-  .grn-button.bs-btn-contained.bs-primary {
+  .gln-button.bs-btn-contained.bs-primary {
     // Exterior: "contained"
     --gb-c-def-cl: #fff;
     --gb-c-def-bg-cl: #007bff;
@@ -105,7 +105,7 @@ app-button-palette {
     --gb-c-dis-bg-cl:var(--gb-c-def-bg-cl);
   }
 
-  .grn-button.bs-btn-outline.bs-primary {
+  .gln-button.bs-btn-outline.bs-primary {
     // Exterior: "outlined"
     --gb-o-def-cl: #007bff;
     --gb-o-def-br-cl: #007bff;
@@ -125,7 +125,7 @@ app-button-palette {
 
   // ** Style: bstrap "Secondary" **
 
-  .grn-button.bs-btn-contained.bs-secondary {
+  .gln-button.bs-btn-contained.bs-secondary {
     // Exterior: "contained"
     --gb-c-def-cl: #fff;
     --gb-c-def-bg-cl: #6c757d;
@@ -141,7 +141,7 @@ app-button-palette {
     --gb-c-dis-bg-cl:var(--gb-c-def-bg-cl);
   }
 
-  .grn-button.bs-btn-outline.bs-secondary {
+  .gln-button.bs-btn-outline.bs-secondary {
     // Exterior: "outlined"
     --gb-o-def-cl: #6c757d;
     --gb-o-def-br-cl: #6c757d;
@@ -161,7 +161,7 @@ app-button-palette {
 
   // ** Style: bstrap "Success" **
 
-  .grn-button.bs-btn-contained.bs-success {
+  .gln-button.bs-btn-contained.bs-success {
     // Exterior: "contained"
     --gb-c-def-cl: #fff;
     --gb-c-def-bg-cl: #28a745;
@@ -177,7 +177,7 @@ app-button-palette {
     --gb-c-dis-bg-cl:var(--gb-c-def-bg-cl);
   }
 
-  .grn-button.bs-btn-outline.bs-success {
+  .gln-button.bs-btn-outline.bs-success {
     // Exterior: "outlined"
     --gb-o-def-cl: #28a745;
     --gb-o-def-br-cl: #28a745;
@@ -197,7 +197,7 @@ app-button-palette {
 
   // ** Style: bstrap "Danger" **
 
-  .grn-button.bs-btn-contained.bs-danger {
+  .gln-button.bs-btn-contained.bs-danger {
     // Exterior: "contained"
     --gb-c-def-cl: #fff;
     --gb-c-def-bg-cl: #dc3545;
@@ -213,7 +213,7 @@ app-button-palette {
     --gb-c-dis-bg-cl:var(--gb-c-def-bg-cl);
   }
 
-  .grn-button.bs-btn-outline.bs-danger {
+  .gln-button.bs-btn-outline.bs-danger {
     // Exterior: "outlined"
     --gb-o-def-cl: #dc3545;
     --gb-o-def-br-cl: #dc3545;
@@ -233,7 +233,7 @@ app-button-palette {
 
   // ** Style: bstrap "Warning" **
 
-  .grn-button.bs-btn-contained.bs-warning {
+  .gln-button.bs-btn-contained.bs-warning {
     // Exterior: "contained"
     --gb-c-def-cl: #212529;
     --gb-c-def-bg-cl: #ffc107;
@@ -249,7 +249,7 @@ app-button-palette {
     --gb-c-dis-bg-cl:var(--gb-c-def-bg-cl);
   }
 
-  .grn-button.bs-btn-outline.bs-warning {
+  .gln-button.bs-btn-outline.bs-warning {
     // Exterior: "outlined"
     --gb-o-def-cl: #ffc107;
     --gb-o-def-br-cl: #ffc107;
@@ -269,7 +269,7 @@ app-button-palette {
 
   // ** Style: bstrap "Info" **
 
-  .grn-button.bs-btn-contained.bs-info {
+  .gln-button.bs-btn-contained.bs-info {
     // Exterior: "contained"
     --gb-c-def-cl: #fff;
     --gb-c-def-bg-cl: #17a2b8;
@@ -285,7 +285,7 @@ app-button-palette {
     --gb-c-dis-bg-cl:var(--gb-c-def-bg-cl);
   }
 
-  .grn-button.bs-btn-outline.bs-info {
+  .gln-button.bs-btn-outline.bs-info {
     // Exterior: "outlined"
     --gb-o-def-cl: #17a2b8;
     --gb-o-def-br-cl: #17a2b8;
@@ -305,7 +305,7 @@ app-button-palette {
 
   // ** Style: bstrap "Light" **
 
-  .grn-button.bs-btn-contained.bs-light {
+  .gln-button.bs-btn-contained.bs-light {
     // Exterior: "contained"
     --gb-c-def-cl: #212529;
     --gb-c-def-bg-cl: #f8f9fa;
@@ -321,7 +321,7 @@ app-button-palette {
     --gb-c-dis-bg-cl:var(--gb-c-def-bg-cl);
   }
 
-  .grn-button.bs-btn-outline.bs-light {
+  .gln-button.bs-btn-outline.bs-light {
     // Exterior: "outlined"
     --gb-o-def-cl: #c7c7c7;
     --gb-o-def-br-cl: #c7c7c7;
@@ -341,7 +341,7 @@ app-button-palette {
 
   // ** Style: bstrap "Dark" **
 
-  .grn-button.bs-btn-contained.bs-dark {
+  .gln-button.bs-btn-contained.bs-dark {
     // Exterior: "contained"
     --gb-c-def-cl: #fff;
     --gb-c-def-bg-cl: #343a40;
@@ -357,7 +357,7 @@ app-button-palette {
     --gb-c-dis-bg-cl:var(--gb-c-def-bg-cl);
   }
 
-  .grn-button.bs-btn-outline.bs-dark {
+  .gln-button.bs-btn-outline.bs-dark {
     // Exterior: "outlined"
     --gb-o-def-cl: #343a40;
     --gb-o-def-br-cl: #343a40;
@@ -377,18 +377,18 @@ app-button-palette {
 
   // ** Style: bstrap "bs-link" **
 
-  .grn-button.bs-link:not(.gb-disabled)>.grn-btn:hover {
+  .gln-button.bs-link:not(.gb-disabled)>.gln-btn:hover {
     color: var(--bs-hov-cl);
     text-decoration: underline;
   }
-  .grn-button.bs-link:not(.gb-disabled)>.grn-btn:focus-within,
-  .grn-button.bs-link:not(.gb-disabled).focus>.grn-btn {
+  .gln-button.bs-link:not(.gb-disabled)>.gln-btn:focus-within,
+  .gln-button.bs-link:not(.gb-disabled).focus>.gln-btn {
     text-decoration: underline;
   }
 
   // ** Style: bstrap "Link" **
 
-  .grn-button.bs-btn-text.bs-link {
+  .gln-button.bs-btn-text.bs-link {
     // Exterior: "text"
     --gb-t-def-cl: #007bff;
     // :hover

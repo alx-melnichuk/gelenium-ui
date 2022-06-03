@@ -53,7 +53,7 @@ export class FrameSizeComponent {
   public exterior02b = 'outlined';
   public isHiddenLabel02b = false;
 
-  // GrnFrameConfig
+  // GlnFrameConfig
   public config02g = {
     frameSizeValue: 57,
   };

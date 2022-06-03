@@ -1,7 +1,7 @@
 <section mr-vr>
   <h3>Basic</h3>
   <p>
-    The GrnHintOrErrorComponent component is a simple utility component.
+    The GlnHintOrErrorComponent component is a simple utility component.
     Its main tasks are:
   </p>
   <ul>
@@ -18,19 +18,19 @@
     <li>display tooltip on disabled (color: var(--gf-dis-cl));</li>
   </ul>
   <p>
-    All css variables are global css variables from the GrnFrame component.
-    This component is used in GrnInputComponent and GrnTextareaComponent.
+    All css variables are global css variables from the GlnFrame component.
+    This component is used in GlnInputComponent and GrnTextareaComponent.
     <br />
     Here is an example of usage:
   </p>
   <code>
     <pre>
-  &lt;grn-hint-or-error *ngIf="!!helperText"
+  &lt;gln-hint-or-error *ngIf="!!helperText"
     [text]="helperText"
     [isError]="!!formControl.errors || isError2"
     [isFocused]="isFocused"
     [isDisabled]="isDisabled2"&gt;
-  &lt;/grn-hint-or-error&gt;
+  &lt;/gln-hint-or-error&gt;
     </pre>
   </code>
 </section>
@@ -58,12 +58,12 @@
         minlength="4"
         (focus)="isFocusInput01a=true"
         (blur)="isFocusInput01a=false" />
-      <grn-hint-or-error
+      <gln-hint-or-error
         [text]="controls01.input01a.invalid ? 'The value is not correct.' : 'The value is correct.'"
         [isError]="controls01.input01a.invalid"
         [isFocused]="isFocusInput01a"
         [isDisabled]="controls01.input01a.disabled">
-      </grn-hint-or-error>
+      </gln-hint-or-error>
     </div>
 
     <div class="app-elem">
@@ -73,12 +73,12 @@
         required
         (focus)="isFocusInput01b=true"
         (blur)="isFocusInput01b=false" />
-      <grn-hint-or-error
+      <gln-hint-or-error
         [text]="controls01.input01b.invalid ? 'The value is not correct.' : 'The value is correct.'"
         [isError]="controls01.input01b.invalid"
         [isFocused]="isFocusInput01b"
         [isDisabled]="controls01.input01b.disabled">
-      </grn-hint-or-error>
+      </gln-hint-or-error>
     </div>
   </div>
 
@@ -107,13 +107,13 @@
         minlength="4"
         (focus)="isFocusInput01a=true"
         (blur)="isFocusInput01a=false" /&gt;
-      &lt;grn-hint-or-error
+      &lt;gln-hint-or-error
         [text]="controls01.input01a.invalid
           ? 'The value is not correct.' : 'The value is correct.'"
         [isError]="controls01.input01a.invalid"
         [isFocused]="isFocusInput01a"
         [isDisabled]="controls01.input01a.disabled"&gt;
-      &lt;/grn-hint-or-error&gt;
+      &lt;/gln-hint-or-error&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -123,13 +123,13 @@
         required
         (focus)="isFocusInput01b=true"
         (blur)="isFocusInput01b=false" /&gt;
-      &lt;grn-hint-or-error
+      &lt;gln-hint-or-error
         [text]="controls01.input01b.invalid
           ? 'The value is not correct.' : 'The value is correct.'"
         [isError]="controls01.input01b.invalid"
         [isFocused]="isFocusInput01b"
         [isDisabled]="controls01.input01b.disabled"&gt;
-      &lt;/grn-hint-or-error&gt;
+      &lt;/gln-hint-or-error&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 

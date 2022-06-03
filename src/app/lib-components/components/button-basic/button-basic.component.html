@@ -1,7 +1,7 @@
 <section mr-vr>
   <h3>Basic</h3>
   <p>
-    The GrnButton component is a styled button.
+    The GlnButton component is a styled button.
     <br />
     It comes in three versions:
   </p>
@@ -11,7 +11,7 @@
     <li>as text (exterior="text" - default)</li>
   </ul>
   <p>
-    The content of the grnButton component is determined by the content
+    The content of the glnButton component is determined by the content
     between its opening and closing tags.
     This can be a fragment of html elements that will be displayed as
     the content of the button.
@@ -26,17 +26,17 @@
 
 <div class="b-items">
 
-  <grn-button exterior="contained">
+  <gln-button exterior="contained">
     Contained
-  </grn-button>
+  </gln-button>
 
-  <grn-button exterior="outlined">
+  <gln-button exterior="outlined">
     Outlined
-  </grn-button>
+  </gln-button>
 
-  <grn-button exterior="text">
+  <gln-button exterior="text">
     Text
-  </grn-button>
+  </gln-button>
 
 </div>
 
@@ -51,17 +51,17 @@
           <code><pre source="html">
 &lt;div class="b-items"&gt;
 
-  &lt;grn-button exterior="contained"&gt;
+  &lt;gln-button exterior="contained"&gt;
     Contained
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
-  &lt;grn-button exterior="outlined"&gt;
+  &lt;gln-button exterior="outlined"&gt;
     Outlined
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
-  &lt;grn-button exterior="text"&gt;
+  &lt;gln-button exterior="text"&gt;
     Text
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -109,29 +109,29 @@ export class ButtonComponent &#123;
 
 <div class="b-items">
 
-  <grn-button exterior="contained">
+  <gln-button exterior="contained">
     <span>Primary</span>
-  </grn-button>
+  </gln-button>
 
-  <grn-button exterior="contained"
+  <gln-button exterior="contained"
     isDisabled>
     <span>Primary Disabled</span>
-  </grn-button>
+  </gln-button>
 
-  <grn-button exterior="contained">
+  <gln-button exterior="contained">
     <a [routerLink]="[routerLink]"
       [fragment]="fragment1">
       Link
     </a>
-  </grn-button>
+  </gln-button>
 
-  <grn-button exterior="contained"
+  <gln-button exterior="contained"
     isDisabled>
     <a [routerLink]="[routerLink]"
       [fragment]="fragment1">
       Link Disabled
     </a>
-  </grn-button>
+  </gln-button>
 
 </div>
 
@@ -146,29 +146,29 @@ export class ButtonComponent &#123;
           <code><pre source="html">
 &lt;div class="b-items"&gt;
 
-  &lt;grn-button exterior="contained"&gt;
+  &lt;gln-button exterior="contained"&gt;
     &lt;span&gt;Primary&lt;/span&gt;
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
-  &lt;grn-button exterior="contained"
+  &lt;gln-button exterior="contained"
     isDisabled&gt;
     &lt;span&gt;Primary Disabled&lt;/span&gt;
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
-  &lt;grn-button exterior="contained"&gt;
+  &lt;gln-button exterior="contained"&gt;
     &lt;a [routerLink]="[routerLink]"
       [fragment]="fragment1"&gt;
       Link
     &lt;/a&gt;
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
-  &lt;grn-button exterior="contained"
+  &lt;gln-button exterior="contained"
     isDisabled&gt;
     &lt;a [routerLink]="[routerLink]"
       [fragment]="fragment1"&gt;
       Link Disabled
     &lt;/a&gt;
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -218,29 +218,29 @@ export class ButtonComponent &#123;
 
 <div class="b-items">
 
-  <grn-button exterior="outlined">
+  <gln-button exterior="outlined">
     <span>Secondary</span>
-  </grn-button>
+  </gln-button>
 
-  <grn-button exterior="outlined"
+  <gln-button exterior="outlined"
     isDisabled>
     <span>Secondary Disabled</span>
-  </grn-button>
+  </gln-button>
 
-  <grn-button exterior="outlined">
+  <gln-button exterior="outlined">
     <a [routerLink]="[routerLink]"
       [fragment]="fragment2">
       Link
     </a>
-  </grn-button>
+  </gln-button>
 
-  <grn-button exterior="outlined"
+  <gln-button exterior="outlined"
     isDisabled>
     <a [routerLink]="[routerLink]"
       [fragment]="fragment2">
       Link Disabled
     </a>
-  </grn-button>
+  </gln-button>
 
 </div>
 
@@ -255,29 +255,29 @@ export class ButtonComponent &#123;
           <code><pre source="html">
 &lt;div class="b-items"&gt;
 
-  &lt;grn-button exterior="outlined"&gt;
+  &lt;gln-button exterior="outlined"&gt;
     &lt;span&gt;Secondary&lt;/span&gt;
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
-  &lt;grn-button exterior="outlined"
+  &lt;gln-button exterior="outlined"
     isDisabled&gt;
     &lt;span&gt;Secondary Disabled&lt;/span&gt;
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
-  &lt;grn-button exterior="outlined"&gt;
+  &lt;gln-button exterior="outlined"&gt;
     &lt;a [routerLink]="[routerLink]"
       [fragment]="fragment2"&gt;
       Link
     &lt;/a&gt;
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
-  &lt;grn-button exterior="outlined"
+  &lt;gln-button exterior="outlined"
     isDisabled&gt;
     &lt;a [routerLink]="[routerLink]"
       [fragment]="fragment2"&gt;
       Link Disabled
     &lt;/a&gt;
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -329,29 +329,29 @@ export class ButtonComponent &#123;
 
 <div class="b-items">
 
-  <grn-button exterior="text">
+  <gln-button exterior="text">
     <span>Additionally</span>
-  </grn-button>
+  </gln-button>
 
-  <grn-button exterior="text"
+  <gln-button exterior="text"
     isDisabled>
     <span>Additionally Disabled</span>
-  </grn-button>
+  </gln-button>
 
-  <grn-button exterior="text">
+  <gln-button exterior="text">
     <a [routerLink]="[routerLink]"
       [fragment]="fragment3">
       Link
     </a>
-  </grn-button>
+  </gln-button>
 
-  <grn-button exterior="text"
+  <gln-button exterior="text"
     isDisabled>
     <a [routerLink]="[routerLink]"
       [fragment]="fragment3">
       Link Disabled
     </a>
-  </grn-button>
+  </gln-button>
 
 </div>
 
@@ -367,29 +367,29 @@ export class ButtonComponent &#123;
           <code><pre source="html">
 &lt;div class="b-items"&gt;
 
-  &lt;grn-button exterior="text"&gt;
+  &lt;gln-button exterior="text"&gt;
     &lt;span&gt;Additionally&lt;/span&gt;
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
-  &lt;grn-button exterior="text"
+  &lt;gln-button exterior="text"
     isDisabled&gt;
     &lt;span&gt;Additionally Disabled&lt;/span&gt;
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
-  &lt;grn-button exterior="text"&gt;
+  &lt;gln-button exterior="text"&gt;
     &lt;a [routerLink]="[routerLink]"
       [fragment]="fragment3"&gt;
       Link
     &lt;/a&gt;
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
-  &lt;grn-button exterior="text"
+  &lt;gln-button exterior="text"
     isDisabled&gt;
     &lt;a [routerLink]="[routerLink]"
       [fragment]="fragment3"&gt;
       Link Disabled
     &lt;/a&gt;
-  &lt;/grn-button&gt;
+  &lt;/gln-button&gt;
 
 &lt;/div&gt;</pre></code>
         </mat-tab>

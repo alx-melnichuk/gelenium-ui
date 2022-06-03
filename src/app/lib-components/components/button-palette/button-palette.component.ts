@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from 'src/app/lib-core/constants/constants';
-import { GrnButtonConfig } from 'projects/gelenium-ui/src/lib/_interfaces/grn-button-config.interface';
-import { ButtonExterior } from 'projects/gelenium-ui/src/lib/_interfaces/button-exterior.interface';
-import { FrameSize } from 'projects/gelenium-ui/src/lib/_interfaces/frame-size.interface';
+import { GlnButtonConfig } from 'projects/gelenium-ui/src/lib/gln-button/gln-button-config.interface';
+import { GlnButtonExterior } from 'projects/gelenium-ui/src/lib/gln-button/gln-button-exterior.interface';
+import { GlnFrameSize } from 'projects/gelenium-ui/src/lib/_interfaces/gln-frame-size.interface';
 
 @Component({
   selector: 'app-button-palette',
@@ -46,21 +46,21 @@ export class ButtonPaletteComponent {
   public isDisabledDark = false;
   public isDisabledReference = false;
 
-  public cfgContained: GrnButtonConfig = {
-    exterior: ButtonExterior.contained,
-    frameSize: FrameSize.short,
+  public cfgContained: GlnButtonConfig = {
+    exterior: GlnButtonExterior.contained,
+    frameSize: GlnFrameSize.short,
     isNoRipple: true,
   };
 
-  public cfgOutlined: GrnButtonConfig = {
-    exterior: ButtonExterior.outlined,
-    frameSize: FrameSize.short,
+  public cfgOutlined: GlnButtonConfig = {
+    exterior: GlnButtonExterior.outlined,
+    frameSize: GlnFrameSize.short,
     isNoRipple: true,
   };
 
-  public cfgText: GrnButtonConfig = {
-    exterior: ButtonExterior.text,
-    frameSize: FrameSize.short,
+  public cfgText: GlnButtonConfig = {
+    exterior: GlnButtonExterior.text,
+    frameSize: GlnFrameSize.short,
     isNoRipple: true,
   };
 }

@@ -3,13 +3,13 @@
   <p>
     If your application will have a single style for input elements, then you can set a single
     configuration.
-    To do this, you need to create an object with the GrnFrameConfig interface and define the
+    To do this, you need to create an object with the GlnFrameConfig interface and define the
     required values.
     Next, specify the resulting object in the list of providers for the entire application (at the
     level of the AppComponent).
   </p>
   <code><pre source="ts">
-const grnFrameConfigDefault: GrnFrameConfig = &#123;
+const glnFrameConfigDefault: GlnFrameConfig = &#123;
   exterior: InputExterior.outlined,
   frameSize: FrameSize.small,
 &#125;;
@@ -21,8 +21,8 @@ const grnFrameConfigDefault: GrnFrameConfig = &#123;
   encapsulation: ViewEncapsulation.None,
   providers: [
     &#123;
-      provide: GRN_FRAME_CONFIG,
-      useValue: grnFrameConfigDefault
+      provide: GLN_FRAME_CONFIG,
+      useValue: glnFrameConfigDefault
     &#125;
   ],
 &#125;)
@@ -30,13 +30,13 @@ export class AppComponent &#123;
   title = 'demo';
 &#125;</pre></code>
   <p>
-    After that, all input elements based on the "GrnFrame" component will have the same
+    After that, all input elements based on the "GlnFrame" component will have the same
     configuration.
   </p>
 </section>
 
 <section mr-vr>
-  <h4>GrnFrameConfig interface.</h4>
+  <h4>GlnFrameConfig interface.</h4>
 </section>
 
 <table class="app-tab">
@@ -169,7 +169,7 @@ export class AppComponent &#123;
     <li>"frameSize" will have the value "small" (height to 44px;).</li>
   </ul>
   <code><pre source="ts">
-const grnFrameConfigDefault: GrnFrameConfig = &#123;
+const glnFrameConfigDefault: GlnFrameConfig = &#123;
   exterior: InputExterior.outlined,
   frameSize: FrameSize.small,
 &#125;;</pre></code>
@@ -178,7 +178,7 @@ const grnFrameConfigDefault: GrnFrameConfig = &#123;
 <section mr-vr>
   <h4>2. Specify "underline" and "middle".</h4>
   <p>
-    Suppose we have a provider in our application with "GrnFrameConfig" and all input elements
+    Suppose we have a provider in our application with "GlnFrameConfig" and all input elements
     accept its default values.
     We can change these values for an individual element.
     To do this, you need to specify in this element those properties that do not match in the
@@ -224,10 +224,10 @@ hiddenLabel=false</pre></code>
           <em>1. Default config: "outlined", "medium".</em>
         </small>
       </div>
-      <grn-input formControlName="input07a"
+      <gln-input formControlName="input07a"
         label="Enter value"
         helperText="A value must be entered.">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -236,12 +236,12 @@ hiddenLabel=false</pre></code>
           <em>2. exterior="underline", frameSize="wide".</em>
         </small>
       </div>
-      <grn-input formControlName="input07b"
+      <gln-input formControlName="input07b"
         label="Enter value"
         helperText="A value must be entered."
         frameSize="wide"
         exterior="underline">
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -270,10 +270,10 @@ hiddenLabel=false</pre></code>
           &lt;em&gt;1. Default config: "outlined", "medium".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input07a"
+      &lt;gln-input formControlName="input07a"
         label="Enter value"
         helperText="A value must be entered."&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -282,12 +282,12 @@ hiddenLabel=false</pre></code>
           &lt;em&gt;2. exterior="underline", frameSize="wide".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input07b"
+      &lt;gln-input formControlName="input07b"
         label="Enter value"
         helperText="A value must be entered."
         frameSize="wide"
         exterior="underline"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;

@@ -6,11 +6,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { AutoFocuseBasicComponent } from './auto-focuse-basic.component';
 
-import { GrnAutoFocuseModule } from 'projects/gelenium-ui/src/public-api';
+import { GlnAutoFocuseModule } from 'projects/gelenium-ui/src/public-api';
 
 @NgModule({
   declarations: [AutoFocuseBasicComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatExpansionModule, MatTabsModule, GrnAutoFocuseModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatExpansionModule, MatTabsModule, GlnAutoFocuseModule],
   exports: [AutoFocuseBasicComponent],
 })
 export class AutoFocuseBasicModule {}

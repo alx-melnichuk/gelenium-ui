@@ -4,11 +4,11 @@
     It is possible to add a different ornament (picture or text) for the input line.
     It will appear as a prefix or suffix for the input string.
     You can define the reaction to pressing an element of the ornament.
-    <br />To add a prefix, you need to add a tag with the "grn-orn-lf" attribute inside the
-    "grn-input" tag. (&lt;span grn-orn-lf&gt;kg&lt;/span&gt;)
-    <br />To add a suffix, you need to add a tag with the "grn-orn-rg" attribute inside the
-    "grn-input" tag.
-    (&lt;span grn-orn-rg&gt;cm&lt;/span&gt;)
+    <br />To add a prefix, you need to add a tag with the "gln-orn-lf" attribute inside the
+    "gln-input" tag. (&lt;span gln-orn-lf&gt;kg&lt;/span&gt;)
+    <br />To add a suffix, you need to add a tag with the "gln-orn-rg" attribute inside the
+    "gln-input" tag.
+    (&lt;span gln-orn-rg&gt;cm&lt;/span&gt;)
     <br />
     Adding a prefix or suffix does not disable legend animation for that input field.
   </p>
@@ -57,39 +57,39 @@
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grn-orn-lf" + text.</em>
+          <em>Section: "gln-orn-lf" + text.</em>
         </small>
       </div>
-      <grn-input formControlName="input05a"
+      <gln-input formControlName="input05a"
         label="Enter the mass"
         helperText="The value is greater than zero."
         [exterior]="exterior05">
-        <span grn-orn-lf
+        <span gln-orn-lf
           class="io-pd-hor">kg</span>
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grn-orn-rg" + text.</em>
+          <em>Section: "gln-orn-rg" + text.</em>
         </small>
       </div>
-      <grn-input formControlName="input05b"
+      <gln-input formControlName="input05b"
         label="Enter the height"
         [exterior]="exterior05">
-        <span grn-orn-rg
+        <span gln-orn-rg
           class="io-pd-hor">cm</span>
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grn-orn-lf" + text.</em>
+          <em>Section: "gln-orn-lf" + text.</em>
         </small>
       </div>
-      <grn-input formControlName="input05c"
+      <gln-input formControlName="input05c"
         label="Enter a small number in words"
         isRequired
         [minLength]="minLength05"
@@ -109,18 +109,18 @@
             :'')
           )
         )">
-        <span grn-orn-lf
+        <span gln-orn-lf
           class="io-pd-hor">$</span>
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grn-orn-rg" + text.</em>
+          <em>Section: "gln-orn-rg" + text.</em>
         </small>
       </div>
-      <grn-input formControlName="input05d"
+      <gln-input formControlName="input05d"
         label="Enter a small number in words"
         isRequired
         [minLength]="minLength05"
@@ -140,18 +140,18 @@
             :'')
           )
         )">
-        <span grn-orn-rg
+        <span gln-orn-rg
           class="io-pd-hor">$</span>
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grn-orn-lf" + icon.</em>
+          <em>Section: "gln-orn-lf" + icon.</em>
         </small>
       </div>
-      <grn-input formControlName="input05e"
+      <gln-input formControlName="input05e"
         [ngClass]="[(!isBtnEyeCrossed05e ?'io-passwd-big':'')]"
         [type]="isBtnEyeCrossed05e ? 'text':'password'"
         label="Enter a unique password in words"
@@ -162,23 +162,23 @@
         controls05.input05e.errors?.required
         ? 'The password value is required.'
         :'Enter the password value.'">
-        <button grn-orn-lf
+        <button gln-orn-lf
           class="io-btn io-btn-eye"
           (click)="isBtnEyeCrossed05e=!isBtnEyeCrossed05e">
           <span [ngClass]="[
             'io-icon-eye', (isBtnEyeCrossed05e ? 'crossed':'')
           ]"></span>
         </button>
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grn-orn-rg" + icon.</em>
+          <em>Section: "gln-orn-rg" + icon.</em>
         </small>
       </div>
-      <grn-input formControlName="input05f"
+      <gln-input formControlName="input05f"
         [ngClass]="[(!isBtnEyeCrossed05f ?'io-passwd-big':'')]"
         [type]="isBtnEyeCrossed05f ? 'text':'password'"
         label="Enter a unique password in words"
@@ -189,23 +189,23 @@
           controls05.input05f.errors?.required
           ? 'The password value is required.'
           : 'Enter the password value.'">
-        <button grn-orn-rg
+        <button gln-orn-rg
           class="io-btn io-btn-eye"
           (click)="isBtnEyeCrossed05f=!isBtnEyeCrossed05f">
           <span [ngClass]="[
             'io-icon-eye', (isBtnEyeCrossed05f ? 'crossed':'')
           ]"></span>
         </button>
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grn-orn-lf" + uncode.</em>
+          <em>Section: "gln-orn-lf" + uncode.</em>
         </small>
       </div>
-      <grn-input formControlName="input05g"
+      <gln-input formControlName="input05g"
         class="io-demo"
         [type]="isBtnEyeCrossed05g ? 'text':'password'"
         label="Enter a unique password in words"
@@ -216,21 +216,21 @@
         ? 'The password value is required.'
         :'Enter the password value.'"
         [ornamLfAlign]="'baseline'">
-        <button grn-orn-lf
+        <button gln-orn-lf
           class="io-btn io-uncode"
           (click)="isBtnEyeCrossed05g=!isBtnEyeCrossed05g">
           <span>{{ isBtnEyeCrossed05g ? '&#128275;': '&#128274;' }}</span>
         </button>
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grn-orn-rg" + uncode.</em>
+          <em>Section: "gln-orn-rg" + uncode.</em>
         </small>
       </div>
-      <grn-input formControlName="input05h"
+      <gln-input formControlName="input05h"
         [type]="isBtnEyeCrossed05h ? 'text':'password'"
         label="Enter a unique password in words"
         isRequired
@@ -240,12 +240,12 @@
         ? 'The password value is required.'
         :'Enter the password value.'"
         [config]="config05h">
-        <button grn-orn-rg
+        <button gln-orn-rg
           class="io-btn io-uncode"
           (click)="isBtnEyeCrossed05h=!isBtnEyeCrossed05h">
           <span>{{ isBtnEyeCrossed05h ? '&#128275;': '&#128274;' }}</span>
         </button>
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="io-elem2">
@@ -254,28 +254,28 @@
           <em>regex=/^-?(\d+)$/, uncode</em>
         </small>
       </div>
-      <grn-input formControlName="input05i"
+      <gln-input formControlName="input05i"
         wdFull
         [label]="controls05.input05i.value === ''
           ?'Enter number':'Number'"
-        grnRegexMatch="/^-?(\d+)$/"
+        glnRegexMatch="/^-?(\d+)$/"
         [helperText]="controls05.input05i.value === ''
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior05">
-        <button grn-orn-lf
+        <button gln-orn-lf
           class="io-btn io-uncode2"
           (click)="controls05.input05i.setValue(
             (controls05.input05i.value || 0) - 1)">
           &#8854;
         </button>
-        <button grn-orn-rg
+        <button gln-orn-rg
           class="io-btn io-uncode2"
           (click)="controls05.input05i.setValue(
             (controls05.input05i.value || 0) + 1)">
           &#8853;
         </button>
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -307,10 +307,10 @@
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grn-orn-lf" + text.</em>
+          <em>Section: "gln-orn-lf" + text.</em>
         </small>
       </div>
-      <grn-input formControlName="input05j"
+      <gln-input formControlName="input05j"
         [label]="controls05.input05j.value === ''
           ?'Enter a value':'Value'"
         [exterior]="exterior05"
@@ -318,18 +318,18 @@
           ?'Enter your value.'
           :'The value is correct.'"
         [config]="config05">
-        <span grn-orn-lf
+        <span gln-orn-lf
           class="gf-ornam io-pd-hor">$</span>
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem io-elem">
       <div>
         <small>
-          <em>Section: "grn-orn-rg" + text.</em>
+          <em>Section: "gln-orn-rg" + text.</em>
         </small>
       </div>
-      <grn-input formControlName="input05k"
+      <gln-input formControlName="input05k"
         [label]="controls05.input05k.value === ''
           ?'Enter a value':'Value'"
         [exterior]="exterior05"
@@ -337,9 +337,9 @@
           ?'Enter your value.'
           :'The value is correct.'"
         [config]="config05">
-        <span grn-orn-rg
+        <span gln-orn-rg
           class="gf-ornam io-pd-hor">$</span>
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -379,39 +379,39 @@
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grn-orn-lf" + text.&lt;/em&gt;
+          &lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input05a"
+      &lt;gln-input formControlName="input05a"
         label="Enter the mass"
         helperText="The value is greater than zero."
         [exterior]="exterior05"&gt;
-        &lt;span grn-orn-lf
+        &lt;span gln-orn-lf
           class="io-pd-hor"&gt;kg&lt;/span&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grn-orn-rg" + text.&lt;/em&gt;
+          &lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input05b"
+      &lt;gln-input formControlName="input05b"
         label="Enter the height"
         [exterior]="exterior05"&gt;
-        &lt;span grn-orn-rg
+        &lt;span gln-orn-rg
           class="io-pd-hor"&gt;cm&lt;/span&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grn-orn-lf" + text.&lt;/em&gt;
+          &lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input05c"
+      &lt;gln-input formControlName="input05c"
         label="Enter a small number in words"
         isRequired
         [minLength]="minLength05"
@@ -431,18 +431,18 @@
             :'')
           )
         )"&gt;
-        &lt;span grn-orn-lf
+        &lt;span gln-orn-lf
           class="io-pd-hor"&gt;$&lt;/span&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grn-orn-rg" + text.&lt;/em&gt;
+          &lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input05d"
+      &lt;gln-input formControlName="input05d"
         label="Enter a small number in words"
         isRequired
         [minLength]="minLength05"
@@ -462,18 +462,18 @@
             :'')
           )
         )"&gt;
-        &lt;span grn-orn-rg
+        &lt;span gln-orn-rg
           class="io-pd-hor"&gt;$&lt;/span&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grn-orn-lf" + icon.&lt;/em&gt;
+          &lt;em&gt;Section: "gln-orn-lf" + icon.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input05e"
+      &lt;gln-input formControlName="input05e"
         [ngClass]="[(!isBtnEyeCrossed05e ?'io-passwd-big':'')]"
         [type]="isBtnEyeCrossed05e ? 'text':'password'"
         label="Enter a unique password in words"
@@ -484,23 +484,23 @@
         controls05.input05e.errors?.required
         ? 'The password value is required.'
         :'Enter the password value.'"&gt;
-        &lt;button grn-orn-lf
+        &lt;button gln-orn-lf
           class="io-btn io-btn-eye"
           (click)="isBtnEyeCrossed05e=!isBtnEyeCrossed05e"&gt;
           &lt;span [ngClass]="[
             'io-icon-eye', (isBtnEyeCrossed05e ? 'crossed':'')
           ]"&gt;&lt;/span&gt;
         &lt;/button&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grn-orn-rg" + icon.&lt;/em&gt;
+          &lt;em&gt;Section: "gln-orn-rg" + icon.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input05f"
+      &lt;gln-input formControlName="input05f"
         [ngClass]="[(!isBtnEyeCrossed05f ?'io-passwd-big':'')]"
         [type]="isBtnEyeCrossed05f ? 'text':'password'"
         label="Enter a unique password in words"
@@ -511,23 +511,23 @@
           controls05.input05f.errors?.required
           ? 'The password value is required.'
           : 'Enter the password value.'"&gt;
-        &lt;button grn-orn-rg
+        &lt;button gln-orn-rg
           class="io-btn io-btn-eye"
           (click)="isBtnEyeCrossed05f=!isBtnEyeCrossed05f"&gt;
           &lt;span [ngClass]="[
             'io-icon-eye', (isBtnEyeCrossed05f ? 'crossed':'')
           ]"&gt;&lt;/span&gt;
         &lt;/button&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grn-orn-lf" + uncode.&lt;/em&gt;
+          &lt;em&gt;Section: "gln-orn-lf" + uncode.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input05g"
+      &lt;gln-input formControlName="input05g"
         class="io-demo"
         [type]="isBtnEyeCrossed05g ? 'text':'password'"
         label="Enter a unique password in words"
@@ -538,21 +538,21 @@
         ? 'The password value is required.'
         :'Enter the password value.'"
         [ornamLfAlign]="'baseline'"&gt;
-        &lt;button grn-orn-lf
+        &lt;button gln-orn-lf
           class="io-btn io-uncode"
           (click)="isBtnEyeCrossed05g=!isBtnEyeCrossed05g"&gt;
           &lt;span&gt;<b>&#123;</b>&#123; isBtnEyeCrossed05g ? '&amp;#128275;': '&amp;#128274;' &#125;&#125;&lt;/span&gt;
         &lt;/button&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grn-orn-rg" + uncode.&lt;/em&gt;
+          &lt;em&gt;Section: "gln-orn-rg" + uncode.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input05h"
+      &lt;gln-input formControlName="input05h"
         [type]="isBtnEyeCrossed05h ? 'text':'password'"
         label="Enter a unique password in words"
         isRequired
@@ -562,12 +562,12 @@
         ? 'The password value is required.'
         :'Enter the password value.'"
         [config]="config05h"&gt;
-        &lt;button grn-orn-rg
+        &lt;button gln-orn-rg
           class="io-btn io-uncode"
           (click)="isBtnEyeCrossed05h=!isBtnEyeCrossed05h"&gt;
           &lt;span&gt;<b>&#123;</b>&#123; isBtnEyeCrossed05h ? '&amp;#128275;': '&amp;#128274;' &#125;&#125;&lt;/span&gt;
         &lt;/button&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="io-elem2"&gt;
@@ -576,28 +576,28 @@
           &lt;em&gt;regex=/^-?(\d+)$/, uncode&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input05i"
+      &lt;gln-input formControlName="input05i"
         wdFull
         [label]="controls05.input05i.value === ''
           ?'Enter number':'Number'"
-        grnRegexMatch="/^-?(\d+)$/"
+        glnRegexMatch="/^-?(\d+)$/"
         [helperText]="controls05.input05i.value === ''
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior05"&gt;
-        &lt;button grn-orn-lf
+        &lt;button gln-orn-lf
           class="io-btn io-uncode2"
           (click)="controls05.input05i.setValue(
             (controls05.input05i.value || 0) - 1)"&gt;
           &amp;#8854;
         &lt;/button&gt;
-        &lt;button grn-orn-rg
+        &lt;button gln-orn-rg
           class="io-btn io-uncode2"
           (click)="controls05.input05i.setValue(
             (controls05.input05i.value || 0) + 1)"&gt;
           &amp;#8853;
         &lt;/button&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;
@@ -615,10 +615,10 @@
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grn-orn-lf" + text.&lt;/em&gt;
+          &lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input05j"
+      &lt;gln-input formControlName="input05j"
         [label]="controls05.input05j.value === ''
           ?'Enter a value':'Value'"
         [exterior]="exterior05"
@@ -626,18 +626,18 @@
           ?'Enter your value.'
           :'The value is correct.'"
         [config]="config05"&gt;
-        &lt;span grn-orn-lf
+        &lt;span gln-orn-lf
           class="gf-ornam io-pd-hor"&gt;$&lt;/span&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem io-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Section: "grn-orn-rg" + text.&lt;/em&gt;
+          &lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input05k"
+      &lt;gln-input formControlName="input05k"
         [label]="controls05.input05k.value === ''
           ?'Enter a value':'Value'"
         [exterior]="exterior05"
@@ -645,9 +645,9 @@
           ?'Enter your value.'
           :'The value is correct.'"
         [config]="config05"&gt;
-        &lt;span grn-orn-rg
+        &lt;span gln-orn-rg
           class="gf-ornam io-pd-hor"&gt;$&lt;/span&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;
@@ -695,13 +695,13 @@ export class InputComponent &#123;
   public isBtnEyeCrossed05f = false;
   public isBtnEyeCrossed05g = false;
   public isBtnEyeCrossed05h = false;
-  // GrnFrameConfig
+  // GlnFrameConfig
   public config05h = &#123;
     ornamRgAlign: OrnamAlign.baseline,
   &#125;;
   public ornamLfAlign05 = 'baseline';
   public ornamRgAlign05 = 'baseline';
-  // GrnFrameConfig
+  // GlnFrameConfig
   public config05 = &#123;&#125;;
 
   constructor() &#123;

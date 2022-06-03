@@ -122,7 +122,7 @@
       "projectType": "library",
       "root": "projects/gelenium-ui",
       "sourceRoot": "projects/gelenium-ui/src",
-      "prefix": "lib",
+      "prefix": "gln",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",

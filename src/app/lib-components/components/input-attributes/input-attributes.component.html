@@ -74,11 +74,11 @@
           <em>State: empty.</em>
         </small>
       </div>
-      <grn-input formControlName="input02a"
+      <gln-input formControlName="input02a"
         id="unique_identifier"
         label="Enter value"
         [exterior]="exterior02">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -87,12 +87,12 @@
           <em>Attributes: isRequired, helperText.</em>
         </small>
       </div>
-      <grn-input formControlName="input02b"
+      <gln-input formControlName="input02b"
         label="Required field"
         isRequired
         helperText="A value must be entered."
         [exterior]="exterior02">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -101,12 +101,12 @@
           <em>Attribute: isReadOnly.</em>
         </small>
       </div>
-      <grn-input formControlName="input02c"
+      <gln-input formControlName="input02c"
         label="Read Only"
         isReadOnly
         helperText="The parameter is read only."
         [exterior]="exterior02">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -115,12 +115,12 @@
           <em>Attribute: isDisabled.</em>
         </small>
       </div>
-      <grn-input formControlName="input02d"
+      <gln-input formControlName="input02d"
         label="Disabled"
         isDisabled
         helperText="The parameter is disabled."
         [exterior]="exterior02">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -129,12 +129,12 @@
           <em>Attribute: lbShrink.</em>
         </small>
       </div>
-      <grn-input formControlName="input02e"
+      <gln-input formControlName="input02e"
         label="Permanent label"
         lbShrink
         helperText="The position of the label is fixed."
         [exterior]="exterior02">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -143,12 +143,12 @@
           <em>Attribute: hiddenLabel.</em>
         </small>
       </div>
-      <grn-input formControlName="input02f"
+      <gln-input formControlName="input02f"
         label="hiddenLabel"
         hiddenLabel
         helperText="The label is not displayed."
         [exterior]="exterior02">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -157,14 +157,14 @@
           <em>Attributes: type="password".</em>
         </small>
       </div>
-      <grn-input formControlName="input02g"
+      <gln-input formControlName="input02g"
         [label]="!formGroup02.controls.input02g.value
          ? 'Enter password':'Password'"
         type="password"
         autoComplete="current-password"
         helperText="Enter your password value."
         [exterior]="exterior02">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -173,13 +173,13 @@
           <em>Attributes: type="number".</em>
         </small>
       </div>
-      <grn-input formControlName="input02h"
+      <gln-input formControlName="input02h"
         [label]="!formGroup02.controls.input02h.value
          ? 'Enter number':'Number'"
         type="number"
         helperText="Enter your number value."
         [exterior]="exterior02">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -188,13 +188,13 @@
           <em>Attributes: type="search".</em>
         </small>
       </div>
-      <grn-input formControlName="input02i"
+      <gln-input formControlName="input02i"
         [label]="!formGroup02.controls.input02i.value
          ? 'Enter search value':'Search value'"
         type="search"
         helperText="Enter your search value."
         [exterior]="exterior02">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -203,7 +203,7 @@
           <em>Attributes: type="month", lbShrink.</em>
         </small>
       </div>
-      <grn-input formControlName="input02j"
+      <gln-input formControlName="input02j"
         [label]="!formGroup02.controls.input02j.value
           ? 'Enter month':'Month'"
         lbShrink
@@ -213,7 +213,7 @@
         :'Month value is \''
         + (formGroup02.controls.input02j.value) + '\''"
         [exterior]="exterior02">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -222,7 +222,7 @@
           <em>Attributes: type="week", lbShrink.</em>
         </small>
       </div>
-      <grn-input formControlName="input02k"
+      <gln-input formControlName="input02k"
         [label]="!formGroup02.controls.input02k.value
           ? 'Enter week':'Week'"
         lbShrink
@@ -232,7 +232,7 @@
         :'Week value is \''
         + (formGroup02.controls.input02k.value) + '\''"
         [exterior]="exterior02">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -241,7 +241,7 @@
           <em>Attributes: type="color", lbShrink.</em>
         </small>
       </div>
-      <grn-input formControlName="input02l"
+      <gln-input formControlName="input02l"
         [label]="!formGroup02.controls.input02l.value
           ? 'Enter color':'Color'"
         lbShrink
@@ -250,7 +250,7 @@
         ?'Enter color.'
         :'\'' + (formGroup02.controls.input02l.value) + '\''"
         [exterior]="exterior02">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -259,7 +259,7 @@
           <em>Attributes: type="date", lbShrink.</em>
         </small>
       </div>
-      <grn-input formControlName="input02m"
+      <gln-input formControlName="input02m"
         [label]="!formGroup02.controls.input02m.value
           ? 'Enter date':'Date'"
         lbShrink
@@ -270,7 +270,7 @@
           + (formGroup02.controls.input02m.value | date:'mediumDate')
           + '\''"
         [exterior]="exterior02">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -279,7 +279,7 @@
           <em>Attributes: type="time", lbShrink.</em>
         </small>
       </div>
-      <grn-input formControlName="input02n"
+      <gln-input formControlName="input02n"
         [label]="!formGroup02.controls.input02n.value
           ? 'Enter time':'Time'"
         lbShrink
@@ -289,7 +289,7 @@
           :'Time value is \''
           + (formGroup02.controls.input02n.value) + '\''"
         [exterior]="exterior02">
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -317,11 +317,11 @@
           &lt;em&gt;State: empty.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input02a"
+      &lt;gln-input formControlName="input02a"
         id="unique_identifier"
         label="Enter value"
         [exterior]="exterior02"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -330,12 +330,12 @@
           &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input02b"
+      &lt;gln-input formControlName="input02b"
         label="Required field"
         isRequired
         helperText="A value must be entered."
         [exterior]="exterior02"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -344,12 +344,12 @@
           &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input02c"
+      &lt;gln-input formControlName="input02c"
         label="Read Only"
         isReadOnly
         helperText="The parameter is read only."
         [exterior]="exterior02"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -358,12 +358,12 @@
           &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input02d"
+      &lt;gln-input formControlName="input02d"
         label="Disabled"
         isDisabled
         helperText="The parameter is disabled."
         [exterior]="exterior02"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -372,12 +372,12 @@
           &lt;em&gt;Attribute: lbShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input02e"
+      &lt;gln-input formControlName="input02e"
         label="Permanent label"
         lbShrink
         helperText="The position of the label is fixed."
         [exterior]="exterior02"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -386,12 +386,12 @@
           &lt;em&gt;Attribute: hiddenLabel.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input02f"
+      &lt;gln-input formControlName="input02f"
         label="hiddenLabel"
         hiddenLabel
         helperText="The label is not displayed."
         [exterior]="exterior02"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -400,14 +400,14 @@
           &lt;em&gt;Attributes: type="password".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input02g"
+      &lt;gln-input formControlName="input02g"
         [label]="!formGroup02.controls.input02g.value
          ? 'Enter password':'Password'"
         type="password"
         autoComplete="current-password"
         helperText="Enter your password value."
         [exterior]="exterior02"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -416,13 +416,13 @@
           &lt;em&gt;Attributes: type="number".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input02h"
+      &lt;gln-input formControlName="input02h"
         [label]="!formGroup02.controls.input02h.value
          ? 'Enter number':'Number'"
         type="number"
         helperText="Enter your number value."
         [exterior]="exterior02"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -431,13 +431,13 @@
           &lt;em&gt;Attributes: type="search".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input02i"
+      &lt;gln-input formControlName="input02i"
         [label]="!formGroup02.controls.input02i.value
          ? 'Enter search value':'Search value'"
         type="search"
         helperText="Enter your search value."
         [exterior]="exterior02"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -446,7 +446,7 @@
           &lt;em&gt;Attributes: type="month", lbShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input02j"
+      &lt;gln-input formControlName="input02j"
         [label]="!formGroup02.controls.input02j.value
           ? 'Enter month':'Month'"
         lbShrink
@@ -456,7 +456,7 @@
         :'Month value is \''
         + (formGroup02.controls.input02j.value) + '\''"
         [exterior]="exterior02"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -465,7 +465,7 @@
           &lt;em&gt;Attributes: type="week", lbShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input02k"
+      &lt;gln-input formControlName="input02k"
         [label]="!formGroup02.controls.input02k.value
           ? 'Enter week':'Week'"
         lbShrink
@@ -475,7 +475,7 @@
         :'Week value is \''
         + (formGroup02.controls.input02k.value) + '\''"
         [exterior]="exterior02"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -484,7 +484,7 @@
           &lt;em&gt;Attributes: type="color", lbShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input02l"
+      &lt;gln-input formControlName="input02l"
         [label]="!formGroup02.controls.input02l.value
           ? 'Enter color':'Color'"
         lbShrink
@@ -493,7 +493,7 @@
         ?'Enter color.'
         :'\'' + (formGroup02.controls.input02l.value) + '\''"
         [exterior]="exterior02"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -502,7 +502,7 @@
           &lt;em&gt;Attributes: type="date", lbShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input02m"
+      &lt;gln-input formControlName="input02m"
         [label]="!formGroup02.controls.input02m.value
           ? 'Enter date':'Date'"
         lbShrink
@@ -513,7 +513,7 @@
           + (formGroup02.controls.input02m.value | date:'mediumDate')
           + '\''"
         [exterior]="exterior02"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -522,7 +522,7 @@
           &lt;em&gt;Attributes: type="time", lbShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input02n"
+      &lt;gln-input formControlName="input02n"
         [label]="!formGroup02.controls.input02n.value
           ? 'Enter time':'Time'"
         lbShrink
@@ -532,7 +532,7 @@
           :'Time value is \''
           + (formGroup02.controls.input02n.value) + '\''"
         [exterior]="exterior02"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;

@@ -3,16 +3,16 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from 'src/app/lib-core/constants/constants';
 
-import { FrameSize } from 'projects/gelenium-ui/src/lib/_interfaces/frame-size.interface';
-import { GrnFrameConfig } from 'projects/gelenium-ui/src/lib/_interfaces/grn-frame-config.interface';
-import { InputExterior } from 'projects/gelenium-ui/src/lib/_interfaces/input-exterior.interface';
-import { GRN_FRAME_CONFIG } from 'projects/gelenium-ui/src/lib/grn-frame/grn-frame.component';
+import { GlnFrameSize } from 'projects/gelenium-ui/src/lib/_interfaces/gln-frame-size.interface';
+import { GlnFrameConfig } from 'projects/gelenium-ui/src/lib/_interfaces/gln-frame-config.interface';
+import { GlnInputExterior } from 'projects/gelenium-ui/src/lib/_interfaces/gln-input-exterior.interface';
+import { GLN_FRAME_CONFIG } from 'projects/gelenium-ui/src/lib/gln-frame/gln-frame.component';
 
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
-const grnFrameConfigDefault: GrnFrameConfig = {
-  exterior: InputExterior.outlined,
-  frameSize: FrameSize.small,
+const glnFrameConfigDefault: GlnFrameConfig = {
+  exterior: GlnInputExterior.outlined,
+  frameSize: GlnFrameSize.small,
 };
 
 @Component({
@@ -21,7 +21,7 @@ const grnFrameConfigDefault: GrnFrameConfig = {
   styleUrls: ['./frame-config.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: GRN_FRAME_CONFIG, useValue: grnFrameConfigDefault }],
+  providers: [{ provide: GLN_FRAME_CONFIG, useValue: glnFrameConfigDefault }],
 })
 export class FrameConfigComponent {
   @Input()

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
-import { FrameSize, FrameSizeUtil } from 'projects/gelenium-ui/src/lib/_interfaces/frame-size.interface';
-import { GrnButtonConfig } from 'projects/gelenium-ui/src/lib/_interfaces/grn-button-config.interface';
+import { GlnButtonConfig } from 'projects/gelenium-ui/src/lib/gln-button/gln-button-config.interface';
+import { GlnFrameSize, GlnFrameSizeUtil } from 'projects/gelenium-ui/src/lib/_interfaces/gln-frame-size.interface';
 
 import {
   BTN_CONTAINED,
@@ -60,12 +60,12 @@ export class ButtonBorderRadiusComponent {
   public isAddPadding04b = true;
   public radiusRatio = 0.3;
 
-  public sizeShort = FrameSize.short;
-  public sizeSmall = FrameSize.small;
-  public sizeMiddle = FrameSize.middle;
-  public sizeWide = FrameSize.wide;
-  public sizeLarge = FrameSize.large;
-  public sizeHuge = FrameSize.huge;
+  public sizeShort = GlnFrameSize.short;
+  public sizeSmall = GlnFrameSize.small;
+  public sizeMiddle = GlnFrameSize.middle;
+  public sizeWide = GlnFrameSize.wide;
+  public sizeLarge = GlnFrameSize.large;
+  public sizeHuge = GlnFrameSize.huge;
 
   constructor(private sanitizer: DomSanitizer) {}
 
@@ -73,8 +73,8 @@ export class ButtonBorderRadiusComponent {
     return exterior ? exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   }
 
-  public getValue(value: FrameSize): number {
-    return FrameSizeUtil.getValue(value) || 0;
+  public getValue(value: GlnFrameSize): number {
+    return GlnFrameSizeUtil.getValue(value) || 0;
   }
   public safeStyle(style: string): SafeStyle {
     return this.sanitizer.bypassSecurityTrustStyle(style);
@@ -82,7 +82,7 @@ export class ButtonBorderRadiusComponent {
   public round(value: number): number {
     return Math.round(value * 100) / 100;
   }
-  public getConfig(labelPd: number): GrnButtonConfig {
+  public getConfig(labelPd: number): GlnButtonConfig {
     return { labelPd };
   }
 }

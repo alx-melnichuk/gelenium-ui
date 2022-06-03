@@ -193,16 +193,16 @@ export class InfiniteScrollBasicComponent &#123;
 <section mr-vr>
   <p>
     Now let's add the "infinite-scroll" implementation to the previous example.
-    To do this, add the "grn-infinite-scroll" component inside the container ("isb-item-wrap").
-    And move all the contents of the container into the grn-infinite-scroll component.
+    To do this, add the "gln-infinite-scroll" component inside the container ("isb-item-wrap").
+    And move all the contents of the container into the gln-infinite-scroll component.
   </p>
   <p>
-    The "grn-infinite-scroll" component adds an empty element at the end of its context:
+    The "gln-infinite-scroll" component adds an empty element at the end of its context:
   </p>
   <pre>
 &lt;div #anchor&gt;&lt;/div&gt;</pre>
   <p>
-    When the "grn-infinite-scroll" component is initialized, an observer is created:
+    When the "gln-infinite-scroll" component is initialized, an observer is created:
   </p>
   <pre>
 this.observer = new IntersectionObserver(([entry]) => &#123;
@@ -221,7 +221,7 @@ this.observer.observe(this.anchor.nativeElement);</pre>
     And when this event occurs, a request for a new data packet is executed.
   </p>
   <p>
-    The "grn-infinite-scroll" component expects it or its parent to have a css: overflow-y: scroll
+    The "gln-infinite-scroll" component expects it or its parent to have a css: overflow-y: scroll
     or
     overflow: auto property.
     This makes it possible to use Intersection Observer.
@@ -237,7 +237,7 @@ this.observer.observe(this.anchor.nativeElement);</pre>
 
 <div class="isb-block">
 
-  <grn-infinite-scroll class="isb-item-wrap"
+  <gln-infinite-scroll class="isb-item-wrap"
     (scrolled)="doScroll()">
 
     <div class="isb-items"
@@ -261,7 +261,7 @@ this.observer.observe(this.anchor.nativeElement);</pre>
       </div>
     </div>
 
-  </grn-infinite-scroll>
+  </gln-infinite-scroll>
 
   <div *ngIf="isLoading"
     class="isb-loading">
@@ -280,7 +280,7 @@ this.observer.observe(this.anchor.nativeElement);</pre>
           <pre source="html">
 &lt;div class="isb-block"&gt;
 
-  &lt;grn-infinite-scroll class="isb-item-wrap"
+  &lt;gln-infinite-scroll class="isb-item-wrap"
     (scrolled)="doScroll()"&gt;
 
     &lt;div class="isb-items"
@@ -304,7 +304,7 @@ this.observer.observe(this.anchor.nativeElement);</pre>
       &lt;/div&gt;
     &lt;/div&gt;
 
-  &lt;/grn-infinite-scroll&gt;
+  &lt;/gln-infinite-scroll&gt;
 
   &lt;div *ngIf="isLoading"
     class="isb-loading"&gt;

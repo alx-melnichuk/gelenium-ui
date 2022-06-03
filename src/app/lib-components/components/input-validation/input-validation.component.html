@@ -39,7 +39,7 @@
           <em>Attribute: isError.</em>
         </small>
       </div>
-      <grn-input formControlName="input03a"
+      <gln-input formControlName="input03a"
         [label]="!controls03.input03a.value
           ? 'Requires a value':'Parameter value'"
         [isError]="!controls03.input03a.value ? '':null"
@@ -47,7 +47,7 @@
         ? 'The field is filled.'
         : 'The field is not filled.'"
         [exterior]="exterior03">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -56,7 +56,7 @@
           <em>Attribute: isRequired, minLength.</em>
         </small>
       </div>
-      <grn-input formControlName="input03b"
+      <gln-input formControlName="input03b"
         [label]="controls03.input03b.errors ? 'Error':'Value'"
         isRequired
         [minLength]="minLength03"
@@ -68,7 +68,7 @@
           + ' characters.'
           :'Enter value.')"
         [exterior]="exterior03">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
@@ -77,13 +77,13 @@
           <em>Attribute: isError + isDisabled.</em>
         </small>
       </div>
-      <grn-input formControlName="input03c"
+      <gln-input formControlName="input03c"
         label="Error-Disabled"
         isError
         isDisabled
         helperText="The parameter is disabled."
         [exterior]="exterior03">
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -111,7 +111,7 @@
           &lt;em&gt;Attribute: isError.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input03a"
+      &lt;gln-input formControlName="input03a"
         [label]="!controls03.input03a.value
           ? 'Requires a value':'Parameter value'"
         [isError]="!controls03.input03a.value ? '':null"
@@ -119,7 +119,7 @@
         ? 'The field is filled.'
         : 'The field is not filled.'"
         [exterior]="exterior03"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -128,7 +128,7 @@
           &lt;em&gt;Attribute: isRequired, minLength.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input03b"
+      &lt;gln-input formControlName="input03b"
         [label]="controls03.input03b.errors ? 'Error':'Value'"
         isRequired
         [minLength]="minLength03"
@@ -140,7 +140,7 @@
           + ' characters.'
           :'Enter value.')"
         [exterior]="exterior03"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -149,13 +149,13 @@
           &lt;em&gt;Attribute: isError + isDisabled.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;grn-input formControlName="input03c"
+      &lt;gln-input formControlName="input03c"
         label="Error-Disabled"
         isError
         isDisabled
         helperText="The parameter is disabled."
         [exterior]="exterior03"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;

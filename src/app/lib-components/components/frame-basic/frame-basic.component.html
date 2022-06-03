@@ -1,7 +1,7 @@
 <section mr-vr>
   <h3>Basic</h3>
   <p>
-    By appearance and behavior, a group of components can be distinguished: GrnInput, GrnTextarea.
+    By appearance and behavior, a group of components can be distinguished: GlnInput, GrnTextarea.
   </p>
   <p>They have the same functionality:</p>
   <ul>
@@ -10,13 +10,13 @@
     <li>animation (shrink) of the label;</li>
   </ul>
   <p>The implementation of these functions has been moved into a separate auxiliary
-    component "GrnFrame".
+    component "GlnFrame".
     This made it possible to: eliminate code duplication and reduce development time.
   </p>
   <p>
-    Let's consider the capabilities of the "GrnFrame" component using the
-    "GrnInput" example. Some properties of "GrnInput" are passed directly to its
-    internal component "GrnFrame".
+    Let's consider the capabilities of the "GlnFrame" component using the
+    "GlnInput" example. Some properties of "GlnInput" are passed directly to its
+    internal component "GlnFrame".
   </p>
   <p>
     The "exterior" property determines the appearance of the component.
@@ -38,24 +38,24 @@
   <div class="app-group">
 
     <div class="app-elem">
-      <grn-input formControlName="input01a"
+      <gln-input formControlName="input01a"
         label="Outlined"
         exterior="outlined">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
-      <grn-input formControlName="input01b"
+      <gln-input formControlName="input01b"
         label="Underline"
         exterior="underline">
-      </grn-input>
+      </gln-input>
     </div>
 
     <div class="app-elem">
-      <grn-input formControlName="input01c"
+      <gln-input formControlName="input01c"
         label="Standard"
         exterior="standard">
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -78,24 +78,24 @@
   &lt;div class="app-group"&gt;
 
     &lt;div class="app-elem"&gt;
-      &lt;grn-input formControlName="input01a"
+      &lt;gln-input formControlName="input01a"
         label="Outlined"
         exterior="outlined"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
-      &lt;grn-input formControlName="input01b"
+      &lt;gln-input formControlName="input01b"
         label="Underline"
         exterior="underline"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
-      &lt;grn-input formControlName="input01c"
+      &lt;gln-input formControlName="input01c"
         label="Standard"
         exterior="standard"&gt;
-      &lt;/grn-input&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;

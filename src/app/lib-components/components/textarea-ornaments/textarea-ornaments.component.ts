@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { GrnFrameConfig } from 'projects/gelenium-ui/src/lib/_interfaces/grn-frame-config.interface';
-import { OrnamAlign } from 'projects/gelenium-ui/src/lib/_interfaces/ornam-align.interface';
+import { GlnFrameConfig } from 'projects/gelenium-ui/src/lib/_interfaces/gln-frame-config.interface';
+import { GlnOrnamAlign } from 'projects/gelenium-ui/src/lib/_interfaces/gln-ornam-align.interface';
 
 import {
   LABEL_CSS,
@@ -47,8 +47,8 @@ export class TextareaOrnamentsComponent {
   public isBtnEye05c = false;
   public isBtnEye05d = false;
 
-  public configBaseline: GrnFrameConfig = {
-    ornamRgAlign: OrnamAlign.baseline,
+  public configBaseline: GlnFrameConfig = {
+    ornamRgAlign: GlnOrnamAlign.baseline,
   };
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

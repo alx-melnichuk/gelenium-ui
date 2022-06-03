@@ -1,38 +1,38 @@
 <section mr-vr
   id="Ornaments">
-  <h3>Ornament for GrnButton in "button" element mode.</h3>
+  <h3>Ornament for GlnButton in "button" element mode.</h3>
   <p>
-    For the GrnButton component, it is possible to display an ornament
+    For the GlnButton component, it is possible to display an ornament
     (picture or text).
   </p>
   <p>
-    To display the ornament on the left, you need to add the "grn-orn-lf"
-    attribute to the element inside the "grn-button" content.
+    To display the ornament on the left, you need to add the "gln-orn-lf"
+    attribute to the element inside the "gln-button" content.
   </p>
   <span>
     Example:
   </span>
   <code><pre source="html">
-&lt;grn-button&gt;
-  &lt;div grn-orn-lf&gt;
+&lt;gln-button&gt;
+  &lt;div gln-orn-lf&gt;
     &lt;span&gt;left&lt;/span&gt;
   &lt;/div&gt;
   Ornament on the left
-&lt;/grn-button&gt;</pre></code>
+&lt;/gln-button&gt;</pre></code>
   <p>
-    To display the ornament on the right, you need to add the "grn-orn-rg"
-    attribute to the element inside the "grn-button" content.
+    To display the ornament on the right, you need to add the "gln-orn-rg"
+    attribute to the element inside the "gln-button" content.
   </p>
   <span>
     Example:
   </span>
   <code><pre source="html">
-&lt;grn-button&gt;
+&lt;gln-button&gt;
   Ornament on the right
-  &lt;div grn-orn-rg&gt;
+  &lt;div gln-orn-rg&gt;
     &lt;span&gt;right&lt;/span&gt;
   &lt;/div&gt;
-&lt;/grn-button&gt;</pre></code>
+&lt;/gln-button&gt;</pre></code>
   <p>
     For blocks: "&lt;span&gt;left&lt;/span&gt;" and "&lt;span&gt;right&lt;/span&gt;"
     you need to specify the value of horizontal indents.
@@ -62,30 +62,30 @@
 <div class="app-group">
   <div class="app-elem">
     <div>
-      <small><em>Section: "grn-orn-lf" + text.</em></small>
+      <small><em>Section: "gln-orn-lf" + text.</em></small>
     </div>
-    <grn-button [exterior]="exterior05a"
+    <gln-button [exterior]="exterior05a"
       noUppercase>
-      <div grn-orn-lf
+      <div gln-orn-lf
         class="bo-text bo-font-large">
         <span>&lt;</span>
       </div>
       <span>Previous value (text)</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
     <div>
-      <small><em>Section: "grn-orn-rg" + text.</em></small>
+      <small><em>Section: "gln-orn-rg" + text.</em></small>
     </div>
-    <grn-button [exterior]="exterior05a"
+    <gln-button [exterior]="exterior05a"
       noUppercase>
       <span>Next value (text)</span>
-      <div grn-orn-rg
+      <div gln-orn-rg
         class="bo-text bo-font-large">
         <span>&gt;</span>
       </div>
-    </grn-button>
+    </gln-button>
   </div>
 </div>
 
@@ -101,30 +101,30 @@
 &lt;div class="app-group"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;Section: "grn-orn-lf" + text.&lt;/em&gt;&lt;/small&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;&lt;/small&gt;
     &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior05a"
+    &lt;gln-button [exterior]="exterior05a"
       noUppercase&gt;
-      &lt;div grn-orn-lf
+      &lt;div gln-orn-lf
         class="bo-text bo-font-large"&gt;
         &lt;span&gt;&amp;lt;&lt;/span&gt;
       &lt;/div&gt;
       &lt;span&gt;Previous value (text)&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;Section: "grn-orn-rg" + text.&lt;/em&gt;&lt;/small&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;&lt;/small&gt;
     &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior05a"
+    &lt;gln-button [exterior]="exterior05a"
       noUppercase&gt;
       &lt;span&gt;Next value (text)&lt;/span&gt;
-      &lt;div grn-orn-rg
+      &lt;div gln-orn-rg
         class="bo-text bo-font-large"&gt;
         &lt;span&gt;&amp;gt;&lt;/span&gt;
       &lt;/div&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -192,30 +192,30 @@ export class ButtonComponent &#123;
 <div class="app-group">
   <div class="app-elem">
     <div>
-      <small><em>Section: "grn-orn-lf" + uncode.</em></small>
+      <small><em>Section: "gln-orn-lf" + uncode.</em></small>
     </div>
-    <grn-button [exterior]="exterior05b"
+    <gln-button [exterior]="exterior05b"
       noUppercase>
-      <div grn-orn-lf
+      <div gln-orn-lf
         class="bo-uncode bo-font-large">
         &#9668;
       </div>
       <span>Previous value (uncode)</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
     <div>
-      <small><em>Section: "grn-orn-rg" + uncode.</em></small>
+      <small><em>Section: "gln-orn-rg" + uncode.</em></small>
     </div>
-    <grn-button [exterior]="exterior05b"
+    <gln-button [exterior]="exterior05b"
       noUppercase>
       <span>Next value (uncode)</span>
-      <div grn-orn-rg
+      <div gln-orn-rg
         class="bo-uncode bo-font-large">
         &#9658;
       </div>
-    </grn-button>
+    </gln-button>
   </div>
 </div>
 
@@ -231,30 +231,30 @@ export class ButtonComponent &#123;
 &lt;div class="app-group"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;Section: "grn-orn-lf" + uncode.&lt;/em&gt;&lt;/small&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-lf" + uncode.&lt;/em&gt;&lt;/small&gt;
     &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior05b"
+    &lt;gln-button [exterior]="exterior05b"
       noUppercase&gt;
-      &lt;div grn-orn-lf
+      &lt;div gln-orn-lf
         class="bo-uncode bo-font-large"&gt;
         &amp;#9668;
       &lt;/div&gt;
       &lt;span&gt;Previous value (uncode)&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;Section: "grn-orn-rg" + uncode.&lt;/em&gt;&lt;/small&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-rg" + uncode.&lt;/em&gt;&lt;/small&gt;
     &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior05b"
+    &lt;gln-button [exterior]="exterior05b"
       noUppercase&gt;
       &lt;span&gt;Next value (uncode)&lt;/span&gt;
-      &lt;div grn-orn-rg
+      &lt;div gln-orn-rg
         class="bo-uncode bo-font-large"&gt;
         &amp;#9658;
       &lt;/div&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -357,11 +357,11 @@ export class ButtonComponent &#123;
 <div class="app-group">
   <div class="app-elem">
     <div>
-      <small><em>Section: "grn-orn-lf" + svg.</em></small>
+      <small><em>Section: "gln-orn-lf" + svg.</em></small>
     </div>
-    <grn-button [exterior]="exterior05c"
+    <gln-button [exterior]="exterior05c"
       noUppercase>
-      <div grn-orn-lf
+      <div gln-orn-lf
         class="bo-svg">
         <svg>
           <use
@@ -371,17 +371,17 @@ export class ButtonComponent &#123;
         </svg>
       </div>
       <span>Previous value (svg)</span>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
     <div>
-      <small><em>Section: "grn-orn-rg" + svg.</em></small>
+      <small><em>Section: "gln-orn-rg" + svg.</em></small>
     </div>
-    <grn-button [exterior]="exterior05c"
+    <gln-button [exterior]="exterior05c"
       noUppercase>
       <span>Next value (svg)</span>
-      <div grn-orn-rg
+      <div gln-orn-rg
         class="bo-svg">
         <svg>
           <use
@@ -390,7 +390,7 @@ export class ButtonComponent &#123;
             width="24"></use>
         </svg>
       </div>
-    </grn-button>
+    </gln-button>
   </div>
 </div>
 
@@ -406,11 +406,11 @@ export class ButtonComponent &#123;
 &lt;div class="app-group"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;Section: "grn-orn-lf" + svg.&lt;/em&gt;&lt;/small&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-lf" + svg.&lt;/em&gt;&lt;/small&gt;
     &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior05c"
+    &lt;gln-button [exterior]="exterior05c"
       noUppercase&gt;
-      &lt;div grn-orn-lf
+      &lt;div gln-orn-lf
         class="bo-svg"&gt;
         &lt;svg&gt;
           &lt;use
@@ -420,17 +420,17 @@ export class ButtonComponent &#123;
         &lt;/svg&gt;
       &lt;/div&gt;
       &lt;span&gt;Previous value (svg)&lt;/span&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;Section: "grn-orn-rg" + svg.&lt;/em&gt;&lt;/small&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-rg" + svg.&lt;/em&gt;&lt;/small&gt;
     &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior05c"
+    &lt;gln-button [exterior]="exterior05c"
       noUppercase&gt;
       &lt;span&gt;Next value (svg)&lt;/span&gt;
-      &lt;div grn-orn-rg
+      &lt;div gln-orn-rg
         class="bo-svg"&gt;
         &lt;svg&gt;
           &lt;use
@@ -439,7 +439,7 @@ export class ButtonComponent &#123;
             width="24"&gt;&lt;/use&gt;
         &lt;/svg&gt;
       &lt;/div&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -491,7 +491,7 @@ export class ButtonComponent &#123;
 
 <section mr-vr
   [attr.id]="fragment1">
-  <h3>Ornament for GrnButton in "link" element mode.</h3>
+  <h3>Ornament for GlnButton in "link" element mode.</h3>
 </section>
 
 <hr br-nn />
@@ -502,7 +502,7 @@ export class ButtonComponent &#123;
     Let's consider an example when the ornament block displays: text.
   </h4>
   <p>
-    When GrnButton is in "link" mode, its content is determined only
+    When GlnButton is in "link" mode, its content is determined only
     by the content of the "a" tag html.
     This means that the ornament block needs to be inserted into
     the ntml container of the "a" tag.
@@ -511,7 +511,7 @@ export class ButtonComponent &#123;
     Here is our example:
   </span>
   <code><pre source="html">
-&lt;i grn-orn-lf&gt;&lt;/i&gt;
+&lt;i gln-orn-lf&gt;&lt;/i&gt;
 &lt;a href="#"&gt;
   &lt;span class="bo-text"&gt;&amp;lt;&lt;/span&gt;
   &lt;span&gt;Previous link (text)&lt;/span&gt;
@@ -524,8 +524,8 @@ export class ButtonComponent &#123;
     <br />
     The css class "bo-text" defines the horizontal padding.
     <br />
-    The "&lt;i grn-orn-lf&gt;&lt;/i&gt;" fragment removes the left padding
-    for the GrnButton.
+    The "&lt;i gln-orn-lf&gt;&lt;/i&gt;" fragment removes the left padding
+    for the GlnButton.
   </p>
   <p>
     And vice versa.
@@ -535,7 +535,7 @@ export class ButtonComponent &#123;
   &lt;span&gt;Next link (text)&lt;/span&gt;
   &lt;span class="bo-text"&gt;&amp;gt;&lt;/span&gt;
 &lt;/a&gt;
-&lt;i grn-orn-rg&gt;&gt;/i&gt;</pre></code>
+&lt;i gln-orn-rg&gt;&gt;/i&gt;</pre></code>
   <p>
     If the "&lt;span class='bo-text'&gt;&amp;gt;&lt;/span&gt;" fragment is located
     after the button name, then it will be displayed to the right of it.
@@ -544,7 +544,7 @@ export class ButtonComponent &#123;
     <br />
     The css class "bo-text" defines the horizontal padding.
     <br />
-    The "&lt;i grn-orn-rg&gt;&lt;/i&gt;" fragment removes the right padding for the GrnButton.
+    The "&lt;i gln-orn-rg&gt;&lt;/i&gt;" fragment removes the right padding for the GlnButton.
   </p>
 </section>
 
@@ -560,32 +560,32 @@ export class ButtonComponent &#123;
 <div class="app-group">
   <div class="app-elem">
     <div>
-      <small><em>Section: "grn-orn-lf" + text.</em></small>
+      <small><em>Section: "gln-orn-lf" + text.</em></small>
     </div>
-    <grn-button [exterior]="exterior05d"
+    <gln-button [exterior]="exterior05d"
       noUppercase>
-      <i grn-orn-lf></i>
+      <i gln-orn-lf></i>
       <a [routerLink]="[routerLink]"
         [fragment]="fragment1">
         <span class="bo-text">&lt;</span>
         <span>Previous link (text)</span>
       </a>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
     <div>
-      <small><em>Section: "grn-orn-rg" + text.</em></small>
+      <small><em>Section: "gln-orn-rg" + text.</em></small>
     </div>
-    <grn-button [exterior]="exterior05d"
+    <gln-button [exterior]="exterior05d"
       noUppercase>
       <a [routerLink]="[routerLink]"
         [fragment]="fragment2">
         <span>Next link (text)</span>
         <span class="bo-text">&gt;</span>
       </a>
-      <i grn-orn-rg></i>
-    </grn-button>
+      <i gln-orn-rg></i>
+    </gln-button>
   </div>
 </div>
 
@@ -602,32 +602,32 @@ export class ButtonComponent &#123;
 &lt;div class="app-group"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;Section: "grn-orn-lf" + text.&lt;/em&gt;&lt;/small&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;&lt;/small&gt;
     &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior05d"
+    &lt;gln-button [exterior]="exterior05d"
       noUppercase&gt;
-      &lt;i grn-orn-lf&gt;&lt;/i&gt;
+      &lt;i gln-orn-lf&gt;&lt;/i&gt;
       &lt;a [routerLink]="[routerLink]"
         [fragment]="fragment1"&gt;
         &lt;span class="bo-text"&gt;&lt;&lt;/span&gt;
         &lt;span&gt;Previous link (text)&lt;/span&gt;
       &lt;/a&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;Section: "grn-orn-rg" + text.&lt;/em&gt;&lt;/small&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;&lt;/small&gt;
     &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior05d"
+    &lt;gln-button [exterior]="exterior05d"
       noUppercase&gt;
       &lt;a [routerLink]="[routerLink]"
         [fragment]="fragment2"&gt;
         &lt;span&gt;Next link (text)&lt;/span&gt;
         &lt;span class="bo-text"&gt;&gt;&lt;/span&gt;
       &lt;/a&gt;
-      &lt;i grn-orn-rg&gt;&lt;/i&gt;
-    &lt;/grn-button&gt;
+      &lt;i gln-orn-rg&gt;&lt;/i&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -695,32 +695,32 @@ export class ButtonComponent &#123;
 <div class="app-group">
   <div class="app-elem">
     <div>
-      <small><em>Section: "grn-orn-lf" + uncode.</em></small>
+      <small><em>Section: "gln-orn-lf" + uncode.</em></small>
     </div>
-    <grn-button [exterior]="exterior05e"
+    <gln-button [exterior]="exterior05e"
       noUppercase>
-      <i grn-orn-lf></i>
+      <i gln-orn-lf></i>
       <a [routerLink]="[routerLink]"
         [fragment]="fragment3">
         <span class="bo-uncode">&#9668;</span>
         <span>Previous link (uncode)</span>
       </a>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
     <div>
-      <small><em>Section: "grn-orn-rg" + uncode.</em></small>
+      <small><em>Section: "gln-orn-rg" + uncode.</em></small>
     </div>
-    <grn-button [exterior]="exterior05e"
+    <gln-button [exterior]="exterior05e"
       noUppercase>
       <a [routerLink]="[routerLink]"
         [fragment]="fragment4">
         <span>Next link (uncode)</span>
         <span class="bo-uncode">&#9658;</span>
       </a>
-      <i grn-orn-rg></i>
-    </grn-button>
+      <i gln-orn-rg></i>
+    </gln-button>
   </div>
 </div>
 
@@ -737,32 +737,32 @@ export class ButtonComponent &#123;
 &lt;div class="app-group"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;Section: "grn-orn-lf" + uncode.&lt;/em&gt;&lt;/small&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-lf" + uncode.&lt;/em&gt;&lt;/small&gt;
     &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior05e"
+    &lt;gln-button [exterior]="exterior05e"
       noUppercase&gt;
-      &lt;i grn-orn-lf&gt;&lt;/i&gt;
+      &lt;i gln-orn-lf&gt;&lt;/i&gt;
       &lt;a [routerLink]="[routerLink]"
         [fragment]="fragment3"&gt;
         &lt;span class="bo-uncode"&gt;&amp;#9668;&lt;/span&gt;
         &lt;span&gt;Previous link (uncode)&lt;/span&gt;
       &lt;/a&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;Section: "grn-orn-rg" + uncode.&lt;/em&gt;&lt;/small&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-rg" + uncode.&lt;/em&gt;&lt;/small&gt;
     &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior05e"
+    &lt;gln-button [exterior]="exterior05e"
       noUppercase&gt;
       &lt;a [routerLink]="[routerLink]"
         [fragment]="fragment4"&gt;
         &lt;span&gt;Next link (uncode)&lt;/span&gt;
         &lt;span class="bo-uncode"&gt;&amp;#9658;&lt;/span&gt;
       &lt;/a&gt;
-      &lt;i grn-orn-rg&gt;&lt;/i&gt;
-    &lt;/grn-button&gt;
+      &lt;i gln-orn-rg&gt;&lt;/i&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -831,11 +831,11 @@ export class ButtonComponent &#123;
 <div class="app-group">
   <div class="app-elem">
     <div>
-      <small><em>Section: "grn-orn-lf" + svg.</em></small>
+      <small><em>Section: "gln-orn-lf" + svg.</em></small>
     </div>
-    <grn-button [exterior]="exterior05f"
+    <gln-button [exterior]="exterior05f"
       noUppercase>
-      <i grn-orn-lf></i>
+      <i gln-orn-lf></i>
       <a [routerLink]="[routerLink]"
         [fragment]="fragment5"
         class="bo-link">
@@ -849,14 +849,14 @@ export class ButtonComponent &#123;
         </span>
         <span>Previous link (svg)</span>
       </a>
-    </grn-button>
+    </gln-button>
   </div>
 
   <div class="app-elem">
     <div>
-      <small><em>Section: "grn-orn-rg" + svg.</em></small>
+      <small><em>Section: "gln-orn-rg" + svg.</em></small>
     </div>
-    <grn-button [exterior]="exterior05f"
+    <gln-button [exterior]="exterior05f"
       noUppercase>
       <a [routerLink]="[routerLink]"
         [fragment]="fragment6"
@@ -871,8 +871,8 @@ export class ButtonComponent &#123;
           </svg>
         </span>
       </a>
-      <i grn-orn-rg></i>
-    </grn-button>
+      <i gln-orn-rg></i>
+    </gln-button>
   </div>
 </div>
 
@@ -888,11 +888,11 @@ export class ButtonComponent &#123;
 &lt;div class="app-group"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;Section: "grn-orn-lf" + svg.&lt;/em&gt;&lt;/small&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-lf" + svg.&lt;/em&gt;&lt;/small&gt;
     &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior05f"
+    &lt;gln-button [exterior]="exterior05f"
       noUppercase&gt;
-      &lt;i grn-orn-lf&gt;&lt;/i&gt;
+      &lt;i gln-orn-lf&gt;&lt;/i&gt;
       &lt;a [routerLink]="[routerLink]"
         [fragment]="fragment5"
         class="bo-link"&gt;
@@ -906,14 +906,14 @@ export class ButtonComponent &#123;
         &lt;/span&gt;
         &lt;span&gt;Previous link (svg)&lt;/span&gt;
       &lt;/a&gt;
-    &lt;/grn-button&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
-      &lt;small&gt;&lt;em&gt;Section: "grn-orn-rg" + svg.&lt;/em&gt;&lt;/small&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-rg" + svg.&lt;/em&gt;&lt;/small&gt;
     &lt;/div&gt;
-    &lt;grn-button [exterior]="exterior05f"
+    &lt;gln-button [exterior]="exterior05f"
       noUppercase&gt;
       &lt;a [routerLink]="[routerLink]"
         [fragment]="fragment6"
@@ -928,8 +928,8 @@ export class ButtonComponent &#123;
           &lt;/svg&gt;
         &lt;/span&gt;
       &lt;/a&gt;
-      &lt;i grn-orn-rg&gt;&lt;/i&gt;
-    &lt;/grn-button&gt;
+      &lt;i gln-orn-rg&gt;&lt;/i&gt;
+    &lt;/gln-button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre></code>
         </mat-tab>

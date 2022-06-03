@@ -20,7 +20,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "grn",
+            "prefix": "gln",
             "style": "camelCase"
           }
         ],
@@ -28,7 +28,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "grn",
+            "prefix": "gln",
             "style": "kebab-case"
           }
         ]

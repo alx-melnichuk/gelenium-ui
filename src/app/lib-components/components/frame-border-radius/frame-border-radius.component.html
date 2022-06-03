@@ -1,7 +1,7 @@
 <section mr-vr>
   <h3>Border radius.</h3>
   <p>
-    For components that use GrnFrame it is possible to change the border-radius
+    For components that use GlnFrame it is possible to change the border-radius
     css property.
     This requires creating a css variable "--gf-br-rd" at the level of the component
     or any parent element.
@@ -13,33 +13,33 @@
   <span>For example:</span>
   <code><pre source="html">
 &lt;div&gt;
-  &lt;grn-input style="--gf-br-rd: 25px;"
+  &lt;gln-input style="--gf-br-rd: 25px;"
     [(ngModel)]="inputData"
     label="Enter value"
     exterior="outlined"
     [config]="&#123; labelPd: 29 &#125;"&gt;
-  &lt;/grn-input&gt;
+  &lt;/gln-input&gt;
 &lt;/div&gt;</pre></code>
   <span>Another example:</span>
   <code><pre source="html">
 &lt;div style="--gf-br-rd: 25px;"&gt;
-  &lt;grn-input [(ngModel)]="inputData"
+  &lt;gln-input [(ngModel)]="inputData"
     label="Enter value"
     exterior="outlined"
     [config]="&#123; labelPd: 29 &#125;"&gt;
-  &lt;/grn-input&gt;
+  &lt;/gln-input&gt;
 &lt;/div&gt;</pre></code>
   <p>
     In the same way, you can change the border-radius for the "Underline" mode.
   </p>
   <code><pre source="html">
 &lt;div&gt;
-  &lt;grn-input style="--gf-br-rd: 25px 25px 0 0;"
+  &lt;gln-input style="--gf-br-rd: 25px 25px 0 0;"
     [(ngModel)]="inputData"
     label="Enter value"
     exterior="underline"
     [config]="&#123; labelPd: 20 &#125;"&gt;
-  &lt;/grn-input&gt;
+  &lt;/gln-input&gt;
 &lt;/div&gt;</pre></code>
   <p>
     This value for the fillet radius corresponds to 50% of the height of the current element.<br />
@@ -123,14 +123,14 @@
       + getRadius(getValue(sizeShort) * borderRadius / 100, exterior05))">
 
     <div class="app-elem">
-      <grn-input formControlName="input05a"
+      <gln-input formControlName="input05a"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel05 ? '':null"
         frameSize="short"
         [exterior]="exterior05"
         [config]="isAddPadding05
           ? getConfig(getValue(sizeShort) * getRatio(exterior05)) : null">
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -149,14 +149,14 @@
     + getRadius(getValue(sizeShort) * borderRadius / 100, exterior05))"&gt;
 
 &lt;div class="app-elem"&gt;
-  &lt;grn-input formControlName="input05a"
+  &lt;gln-input formControlName="input05a"
     label="Enter value"
     [hiddenLabel]="isHiddenLabel05 ? '':null"
     frameSize="short"
     [exterior]="exterior05"
     [config]="isAddPadding05
       ? getConfig(getValue(sizeShort) * getRatio(exterior05)) : null"&gt;
-  &lt;/grn-input&gt;
+  &lt;/gln-input&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;</pre></code>
@@ -204,7 +204,7 @@ export class ButtonComponent &#123;
   public getRatio(exterior: string): number &#123;
     return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -239,14 +239,14 @@ export class ButtonComponent &#123;
       + getRadius(getValue(sizeSmall) * borderRadius / 100, exterior05))">
 
     <div class="app-elem">
-      <grn-input formControlName="input05b"
+      <gln-input formControlName="input05b"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel05 ? '':null"
         frameSize="small"
         [exterior]="exterior05"
         [config]="isAddPadding05
           ? getConfig(getValue(sizeSmall) * getRatio(exterior05)) : null">
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -265,14 +265,14 @@ export class ButtonComponent &#123;
     + getRadius(getValue(sizeSmall) * borderRadius / 100, exterior05))"&gt;
 
 &lt;div class="app-elem"&gt;
-  &lt;grn-input formControlName="input05b"
+  &lt;gln-input formControlName="input05b"
     label="Enter value"
     [hiddenLabel]="isHiddenLabel05 ? '':null"
     frameSize="small"
     [exterior]="exterior05"
     [config]="isAddPadding05
       ? getConfig(getValue(sizeSmall) * getRatio(exterior05)) : null"&gt;
-  &lt;/grn-input&gt;
+  &lt;/gln-input&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;</pre></code>
@@ -320,7 +320,7 @@ export class ButtonComponent &#123;
   public getRatio(exterior: string): number &#123;
     return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -355,14 +355,14 @@ export class ButtonComponent &#123;
       + getRadius(getValue(sizeMiddle) * borderRadius / 100, exterior05))">
 
     <div class="app-elem">
-      <grn-input formControlName="input05c"
+      <gln-input formControlName="input05c"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel05 ? '':null"
         frameSize="middle"
         [exterior]="exterior05"
         [config]="isAddPadding05
           ? getConfig(getValue(sizeMiddle) * getRatio(exterior05)) : null">
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -381,14 +381,14 @@ export class ButtonComponent &#123;
     + getRadius(getValue(sizeMiddle) * borderRadius / 100, exterior05))"&gt;
 
 &lt;div class="app-elem"&gt;
-  &lt;grn-input formControlName="input05c"
+  &lt;gln-input formControlName="input05c"
     label="Enter value"
     [hiddenLabel]="isHiddenLabel05 ? '':null"
     frameSize="middle"
     [exterior]="exterior05"
     [config]="isAddPadding05
       ? getConfig(getValue(sizeMiddle) * getRatio(exterior05)) : null"&gt;
-  &lt;/grn-input&gt;
+  &lt;/gln-input&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;</pre></code>
@@ -436,7 +436,7 @@ export class ButtonComponent &#123;
   public getRatio(exterior: string): number &#123;
     return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -471,14 +471,14 @@ export class ButtonComponent &#123;
       + getRadius(getValue(sizeWide) * borderRadius / 100, exterior05))">
 
     <div class="app-elem">
-      <grn-input formControlName="input05d"
+      <gln-input formControlName="input05d"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel05 ? '':null"
         frameSize="wide"
         [exterior]="exterior05"
         [config]="isAddPadding05
           ? getConfig(getValue(sizeWide) * getRatio(exterior05)) : null">
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -497,14 +497,14 @@ export class ButtonComponent &#123;
     + getRadius(getValue(sizeWide) * borderRadius / 100, exterior05))"&gt;
 
 &lt;div class="app-elem"&gt;
-  &lt;grn-input formControlName="input05d"
+  &lt;gln-input formControlName="input05d"
     label="Enter value"
     [hiddenLabel]="isHiddenLabel05 ? '':null"
     frameSize="wide"
     [exterior]="exterior05"
     [config]="isAddPadding05
       ? getConfig(getValue(sizeWide) * getRatio(exterior05)) : null"&gt;
-  &lt;/grn-input&gt;
+  &lt;/gln-input&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;</pre></code>
@@ -552,7 +552,7 @@ export class ButtonComponent &#123;
   public getRatio(exterior: string): number &#123;
     return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -587,7 +587,7 @@ export class ButtonComponent &#123;
       + getRadius(getValue(sizeLarge) * borderRadius / 100, exterior05))">
 
     <div class="app-elem">
-      <grn-input formControlName="input05e"
+      <gln-input formControlName="input05e"
         class="fbr-large"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel05 ? '':null"
@@ -595,7 +595,7 @@ export class ButtonComponent &#123;
         [exterior]="exterior05"
         [config]="isAddPadding05
           ? getConfig(getValue(sizeLarge) * getRatio(exterior05)) : null">
-      </grn-input>
+      </gln-input>
     </div>
 
   </div>
@@ -614,7 +614,7 @@ export class ButtonComponent &#123;
     + getRadius(getValue(sizeLarge) * borderRadius / 100, exterior05))"&gt;
 
 &lt;div class="app-elem"&gt;
-  &lt;grn-input formControlName="input05e"
+  &lt;gln-input formControlName="input05e"
     class="fbr-large"
     label="Enter value"
     [hiddenLabel]="isHiddenLabel05 ? '':null"
@@ -622,7 +622,7 @@ export class ButtonComponent &#123;
     [exterior]="exterior05"
     [config]="isAddPadding05
       ? getConfig(getValue(sizeLarge) * getRatio(exterior05)) : null"&gt;
-  &lt;/grn-input&gt;
+  &lt;/gln-input&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;</pre></code>
@@ -670,7 +670,7 @@ export class ButtonComponent &#123;
   public getRatio(exterior: string): number &#123;
     return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -708,7 +708,7 @@ export class ButtonComponent &#123;
       + getRadius(getValue(sizeHuge) * borderRadius / 100, exterior05))">
 
     <div class="app-elem">
-      <grn-input formControlName="input05f"
+      <gln-input formControlName="input05f"
         class="fbr-huge"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel05 ? '':null"
@@ -716,7 +716,7 @@ export class ButtonComponent &#123;
         [exterior]="exterior05"
         [config]="isAddPadding05
           ? getConfig(getValue(sizeHuge) * getRatio(exterior05)) : null">
-      </grn-input>
+      </gln-input>
     </div>
   </div>
 
@@ -734,7 +734,7 @@ export class ButtonComponent &#123;
     + getRadius(getValue(sizeHuge) * borderRadius / 100, exterior05))"&gt;
 
 &lt;div class="app-elem"&gt;
-  &lt;grn-input formControlName="input05f"
+  &lt;gln-input formControlName="input05f"
     class="fbr-huge"
     label="Enter value"
     [hiddenLabel]="isHiddenLabel05 ? '':null"
@@ -742,7 +742,7 @@ export class ButtonComponent &#123;
     [exterior]="exterior05"
     [config]="isAddPadding05
       ? getConfig(getValue(sizeHuge) * getRatio(exterior05)) : null"&gt;
-  &lt;/grn-input&gt;
+  &lt;/gln-input&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;</pre></code>
@@ -790,7 +790,7 @@ export class ButtonComponent &#123;
   public getRatio(exterior: string): number &#123;
     return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;
   &#125;
-  public getConfig(labelPd: number): GrnButtonConfig &#123;
+  public getConfig(labelPd: number): GlnButtonConfig &#123;
     return &#123; labelPd &#125;;
   &#125;
 &#125;</pre></code>
@@ -862,13 +862,13 @@ export class ButtonComponent &#123;
   <div class="app-group">
     <div class="app-elem">
 
-      <grn-input style="--gf-br-rd: 12.5px 0px 0px 12.5px;"
+      <gln-input style="--gf-br-rd: 12.5px 0px 0px 12.5px;"
         formControlName="input06a"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel06 ? '':null"
         exterior="outlined"
         [config]="isAddPadding06 ? configOutlined : null">
-      </grn-input>
+      </gln-input>
 
     </div>
   </div>
@@ -889,13 +889,13 @@ export class ButtonComponent &#123;
 
   &lt;div class="app-elem"&gt;
 
-    &lt;grn-input style="--gf-br-rd: 12.5px 0px 0px 12.5px;"
+    &lt;gln-input style="--gf-br-rd: 12.5px 0px 0px 12.5px;"
       formControlName="input06a"
       label="Enter value"
       [hiddenLabel]="isHiddenLabel06 ? '':null"
       exterior="outlined"
       [config]="isAddPadding06 ? configOutlined : null"&gt;
-    &lt;/grn-input&gt;
+    &lt;/gln-input&gt;
 
   &lt;/div&gt;
 
@@ -919,7 +919,7 @@ import &#123;
 export class ButtonComponent &#123;
   public isAddPadding06 = true;
   public isHiddenLabel06 = false;
-  // GrnFrameConfig
+  // GlnFrameConfig
   public configOutlined = &#123;
     labelPd: 18.5, // 0.37*FrameSizeValue.middle (50px)
   &#125;;
@@ -958,13 +958,13 @@ export class ButtonComponent &#123;
   <div class="app-group">
     <div class="app-elem">
 
-      <grn-input style="--gf-br-rd: 0px 12.5px 12.5px 0px;"
+      <gln-input style="--gf-br-rd: 0px 12.5px 12.5px 0px;"
         formControlName="input06b"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel06 ? '':null"
         exterior="outlined"
         [config]="isAddPadding06 ? configOutlined : null">
-      </grn-input>
+      </gln-input>
 
     </div>
   </div>
@@ -985,13 +985,13 @@ export class ButtonComponent &#123;
 
   &lt;div class="app-elem"&gt;
 
-    &lt;grn-input style="--gf-br-rd: 0px 12.5px 12.5px 0px;"
+    &lt;gln-input style="--gf-br-rd: 0px 12.5px 12.5px 0px;"
       formControlName="input06b"
       label="Enter value"
       [hiddenLabel]="isHiddenLabel06 ? '':null"
       exterior="outlined"
       [config]="isAddPadding06 ? configOutlined : null"&gt;
-    &lt;/grn-input&gt;
+    &lt;/gln-input&gt;
 
   &lt;/div&gt;
 
@@ -1015,7 +1015,7 @@ import &#123;
 export class ButtonComponent &#123;
   public isAddPadding06 = true;
   public isHiddenLabel06 = false;
-  // GrnFrameConfig
+  // GlnFrameConfig
   public configOutlined = &#123;
     labelPd: 18.5, // 0.37*FrameSizeValue.middle (50px)
   &#125;;
@@ -1054,13 +1054,13 @@ export class ButtonComponent &#123;
   <div class="app-group">
     <div class="app-elem">
 
-      <grn-input style="--gf-br-rd: 12.5px 0px 12.5px 0px;"
+      <gln-input style="--gf-br-rd: 12.5px 0px 12.5px 0px;"
         formControlName="input06c"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel06 ? '':null"
         exterior="outlined"
         [config]="isAddPadding06 ? configOutlined : null">
-      </grn-input>
+      </gln-input>
 
     </div>
   </div>
@@ -1081,13 +1081,13 @@ export class ButtonComponent &#123;
 
   &lt;div class="app-elem"&gt;
 
-    &lt;grn-input style="--gf-br-rd: 12.5px 0px 12.5px 0px;"
+    &lt;gln-input style="--gf-br-rd: 12.5px 0px 12.5px 0px;"
       formControlName="input06c"
       label="Enter value"
       [hiddenLabel]="isHiddenLabel06 ? '':null"
       exterior="outlined"
       [config]="isAddPadding06 ? configOutlined : null"&gt;
-    &lt;/grn-input&gt;
+    &lt;/gln-input&gt;
 
   &lt;/div&gt;
 
@@ -1111,7 +1111,7 @@ import &#123;
 export class ButtonComponent &#123;
   public isAddPadding06 = true;
   public isHiddenLabel06 = false;
-  // GrnFrameConfig
+  // GlnFrameConfig
   public configOutlined = &#123;
     labelPd: 18.5, // 0.37*FrameSizeValue.middle (50px)
   &#125;;
@@ -1150,13 +1150,13 @@ export class ButtonComponent &#123;
   <div class="app-group">
     <div class="app-elem">
 
-      <grn-input style="--gf-br-rd: 0px 12.5px 0px 12.5px;"
+      <gln-input style="--gf-br-rd: 0px 12.5px 0px 12.5px;"
         formControlName="input06d"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel06 ? '':null"
         exterior="outlined"
         [config]="isAddPadding06 ? configOutlined : null">
-      </grn-input>
+      </gln-input>
 
     </div>
   </div>
@@ -1177,13 +1177,13 @@ export class ButtonComponent &#123;
 
   &lt;div class="app-elem"&gt;
 
-    &lt;grn-input style="--gf-br-rd: 0px 12.5px 0px 12.5px;"
+    &lt;gln-input style="--gf-br-rd: 0px 12.5px 0px 12.5px;"
       formControlName="input06d"
       label="Enter value"
       [hiddenLabel]="isHiddenLabel06 ? '':null"
       exterior="outlined"
       [config]="isAddPadding06 ? configOutlined : null"&gt;
-    &lt;/grn-input&gt;
+    &lt;/gln-input&gt;
 
   &lt;/div&gt;
 
@@ -1207,7 +1207,7 @@ import &#123;
 export class ButtonComponent &#123;
   public isAddPadding06 = true;
   public isHiddenLabel06 = false;
-  // GrnFrameConfig
+  // GlnFrameConfig
   public configOutlined = &#123;
     labelPd: 18.5, // 0.37*FrameSizeValue.middle (50px)
   &#125;;
@@ -1246,13 +1246,13 @@ export class ButtonComponent &#123;
   <div class="app-group">
     <div class="app-elem">
 
-      <grn-input style="--gf-br-rd: 5% / 50%;"
+      <gln-input style="--gf-br-rd: 5% / 50%;"
         formControlName="input06e"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel06 ? '':null"
         exterior="outlined"
         [config]="isAddPadding06 ? configOutlined : null">
-      </grn-input>
+      </gln-input>
 
     </div>
   </div>
@@ -1273,13 +1273,13 @@ export class ButtonComponent &#123;
 
   &lt;div class="app-elem"&gt;
 
-    &lt;grn-input style="--gf-br-rd: 5% / 50%;"
+    &lt;gln-input style="--gf-br-rd: 5% / 50%;"
       formControlName="input06e"
       label="Enter value"
       [hiddenLabel]="isHiddenLabel06 ? '':null"
       exterior="outlined"
       [config]="isAddPadding06 ? configOutlined : null"&gt;
-    &lt;/grn-input&gt;
+    &lt;/gln-input&gt;
 
   &lt;/div&gt;
 
@@ -1303,7 +1303,7 @@ import &#123;
 export class ButtonComponent &#123;
   public isAddPadding06 = true;
   public isHiddenLabel06 = false;
-  // GrnFrameConfig
+  // GlnFrameConfig
   public configOutlined = &#123;
     labelPd: 18.5, // 0.37*FrameSizeValue.middle (50px)
   &#125;;
@@ -1361,13 +1361,13 @@ export class ButtonComponent &#123;
         }
       </style>
 
-      <grn-input class="radius-f"
+      <gln-input class="radius-f"
         formControlName="input06f"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel06 ? '':null"
         exterior="underline"
         [config]="isAddPadding06 ? configOutlined : null">
-      </grn-input>
+      </gln-input>
 
     </div>
   </div>
@@ -1400,13 +1400,13 @@ export class ButtonComponent &#123;
       &#125;
     &lt;/style&gt;
 
-    &lt;grn-input  class="radius-f"
+    &lt;gln-input  class="radius-f"
       formControlName="input06f"
       label="Enter value"
       [hiddenLabel]="isHiddenLabel06 ? '':null"
       exterior="outlined"
       [config]="isAddPadding06 ? configOutlined : null"&gt;
-    &lt;/grn-input&gt;
+    &lt;/gln-input&gt;
 
   &lt;/div&gt;
 
@@ -1430,7 +1430,7 @@ import &#123;
 export class ButtonComponent &#123;
   public isAddPadding06 = true;
   public isHiddenLabel06 = false;
-  // GrnFrameConfig
+  // GlnFrameConfig
   public configOutlined = &#123;
     labelPd: 18.5, // 0.37*FrameSizeValue.middle (50px)
   &#125;;
