@@ -2,6 +2,7 @@
 
 // https://dzone.com/articles/handling-property-changes-using-decorator-an-alter
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function PropertyChange<T = any>(methodName: string, scope?: any) {
   return (target: T, key: keyof T): void => {
     const originalDescriptor = Object.getOwnPropertyDescriptor(target, key);

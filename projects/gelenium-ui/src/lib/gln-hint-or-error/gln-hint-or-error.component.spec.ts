@@ -8,9 +8,8 @@ describe('GlnHintOrErrorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GlnHintOrErrorComponent ]
-    })
-    .compileComponents();
+      declarations: [GlnHintOrErrorComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

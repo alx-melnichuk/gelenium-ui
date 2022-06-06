@@ -8,9 +8,8 @@ describe('GlnTouchRippleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GlnTouchRippleComponent ]
-    })
-    .compileComponents();
+      declarations: [GlnTouchRippleComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

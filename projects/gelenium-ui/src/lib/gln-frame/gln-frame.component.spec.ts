@@ -8,9 +8,8 @@ describe('GlnFrameComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GlnFrameComponent ]
-    })
-    .compileComponents();
+      declarations: [GlnFrameComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
