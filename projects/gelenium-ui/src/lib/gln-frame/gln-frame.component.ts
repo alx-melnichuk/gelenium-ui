@@ -16,6 +16,7 @@ import {
 import { GlnFrameConfig } from '../_interfaces/gln-frame-config.interface';
 import { GlnInputExterior, GlnInputExteriorUtil } from '../_interfaces/gln-input-exterior.interface';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { HtmlSettingUtil } from '../_utils/html-setting.util';
 
 export const GLN_FRAME_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_FRAME_CONFIG');
 
@@ -90,20 +91,18 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.settingHiddenLabel(this.hostRef, this.innHiddenLabel);
     }
     if (changes.isDisabled) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gf-disabled', this.isDisabled || false);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
+      HtmlSettingUtil.disabled(this.renderer, this.hostRef, this.isDisabled);
     }
     if (changes.isFilled) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gf-filled', this.isFilled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnf-filled', this.isFilled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);
     }
     if (changes.isError) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gf-error', this.isError || false);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isError ? '' : null);
+      HtmlSettingUtil.error(this.renderer, this.hostRef, this.isError);
     }
     if (changes.label || changes.isRequired) {
       const isIndent = !!this.label || this.isRequired;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gf-lgn-indent', isIndent || false);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnf-lgn-indent', isIndent || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ind', isIndent ? '' : null);
     }
   }
@@ -126,26 +125,26 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   private settingExterior(elem: ElementRef<HTMLElement>, exterior: GlnInputExterior | null): void {
     HtmlElemUtil.setAttr(this.renderer, elem, 'dcr-br', '');
 
-    HtmlElemUtil.setClass(this.renderer, elem, 'gf-outlined', GlnInputExteriorUtil.isOutlined(exterior));
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-outlined', GlnInputExteriorUtil.isOutlined(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', GlnInputExteriorUtil.isOutlined(exterior) ? '' : null);
 
-    HtmlElemUtil.setClass(this.renderer, elem, 'gf-underline', GlnInputExteriorUtil.isUnderline(exterior));
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-underline', GlnInputExteriorUtil.isUnderline(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-u', GlnInputExteriorUtil.isUnderline(exterior) ? '' : null);
 
-    HtmlElemUtil.setClass(this.renderer, elem, 'gf-standard', GlnInputExteriorUtil.isStandard(exterior));
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-standard', GlnInputExteriorUtil.isStandard(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-s', GlnInputExteriorUtil.isStandard(exterior) ? '' : null);
 
     const isBorder = GlnInputExteriorUtil.isStandard(exterior) || GlnInputExteriorUtil.isUnderline(exterior);
-    HtmlElemUtil.setClass(this.renderer, elem, 'gf-border', isBorder);
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-border', isBorder);
   }
 
   private settingLabelShrink(elem: ElementRef<HTMLElement>, isLabelShrink: boolean): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'gf-shrink', isLabelShrink);
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-shrink', isLabelShrink);
     HtmlElemUtil.setAttr(this.renderer, elem, 'shr', isLabelShrink ? '' : null);
   }
 
   private settingHiddenLabel(elem: ElementRef<HTMLElement>, hiddenLabel: boolean): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'gf-hidden-label', hiddenLabel);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'hlbl', hiddenLabel ? '' : null);
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-hidden-label', hiddenLabel);
+    HtmlElemUtil.setAttr(this.renderer, elem, 'hd-lb', hiddenLabel ? '' : null);
   }
 }

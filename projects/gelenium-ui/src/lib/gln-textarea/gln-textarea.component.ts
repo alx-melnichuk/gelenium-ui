@@ -37,6 +37,7 @@ import { GlnFrameSize, GlnFrameSizeUtil } from '../_interfaces/gln-frame-size.in
 import { GlnFrameConfig } from '../_interfaces/gln-frame-config.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { HtmlSettingUtil } from '../_utils/html-setting.util';
 
 let identifier = 0;
 
@@ -191,6 +192,7 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     } else {
       this.formGroup.enable();
     }
+    HtmlSettingUtil.disabled(this.renderer, this.hostRef, isDisabled);
   }
 
   // ** ControlValueAccessor - finish **
@@ -231,11 +233,13 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
 
   public doFocus(): void {
     this.isFocused = true;
+    HtmlSettingUtil.focused(this.renderer, this.hostRef, this.isFocused);
     this.focused.emit();
   }
 
   public doBlur(): void {
     this.isFocused = false;
+    HtmlSettingUtil.focused(this.renderer, this.hostRef, this.isFocused);
     this.isFilled = !!this.formControl.value;
     this.blured.emit();
   }

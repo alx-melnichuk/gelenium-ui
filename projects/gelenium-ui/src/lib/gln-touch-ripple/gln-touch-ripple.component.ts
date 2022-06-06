@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
-const RIPPLE_CLASS = 'gtr-ripple';
+const RIPPLE_CLASS = 'glntr-ripple';
 let identifier = 0;
 
 @Component({
@@ -48,7 +48,7 @@ export class GlnTouchRippleComponent implements OnChanges, OnInit {
     }
     if (changes.rippleColor) {
       const color = this.rippleColor && this.rippleColor.length < 33 ? this.rippleColor : null;
-      HtmlElemUtil.setProperty(this.hostRef, '--gtr-ripple-color', color);
+      HtmlElemUtil.setProperty(this.hostRef, '--glntr-ripple-cl', color);
     }
   }
 

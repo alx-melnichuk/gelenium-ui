@@ -1,6 +1,6 @@
 <ng-container *ngIf="!linkElement; else elseBlockLink">
   <button #buttonElement
-    class="gln-btn gln-settings"
+    class="gln-btn glnb-settings"
     gln-clear
     gln-btn
     type="button"
@@ -20,7 +20,7 @@
     (blur)="doBlur()">
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
-    <span class="gb-label gb-elem-pd-hor">
+    <span class="glnb-label glnb-elem-pd-hor">
       <ng-content></ng-content>
     </span>
     <gln-touch-ripple *ngIf="!isDisabled2 && !isNoRipple2 && !currConfig?.isNoRipple">
@@ -28,7 +28,7 @@
   </button>
 </ng-container>
 <ng-template #elseBlockLink>
-  <div class="gln-btn gln-settings"
+  <div class="gln-btn glnb-settings"
     gln-btn
     [glnFrameExteriorButton]="exterior || currConfig?.exterior || null"
     [glnFrameExteriorButtonElementRef]="hostRef"

@@ -53,7 +53,7 @@ export class ButtonBorderRadiusComponent {
   public fragment04l = 'size-link4l';
 
   public borderRadius = 50;
-  public propRadius = '--gb-br-rd';
+  public propRadius = '--glnb-br-rd';
   public isAddPadding04a = true;
   public labelPdRatio = 0.4;
   public exterior04b = 'outlined';

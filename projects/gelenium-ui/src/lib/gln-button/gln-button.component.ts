@@ -22,6 +22,7 @@ import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.co
 import { GlnFrameSize, GlnFrameSizeUtil } from '../_interfaces/gln-frame-size.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { HtmlSettingUtil } from '../_utils/html-setting.util';
 
 import { GlnButtonConfig } from './gln-button-config.interface';
 import { GlnLinkDirective } from './gln-link.directive';
@@ -84,8 +85,7 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
     }
     if (changes.isDisabled) {
       this.isDisabled2 = BooleanUtil.init(this.isDisabled);
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gb-disabled', this.isDisabled2 || false);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled2 ? '' : null);
+      HtmlSettingUtil.disabled(this.renderer, this.hostRef, this.isDisabled2);
     }
     if (changes.isNoRipple) {
       this.isNoRipple2 = BooleanUtil.init(this.isNoRipple);
@@ -114,23 +114,20 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
   }
 
   public doFocus(): void {
-    this.settingFocused(this.hostRef, (this.isFocused = true));
+    this.isFocused = true;
+    HtmlSettingUtil.focused(this.renderer, this.hostRef, this.isFocused);
   }
 
   public doBlur(): void {
-    this.settingFocused(this.hostRef, (this.isFocused = false));
+    this.isFocused = false;
+    HtmlSettingUtil.focused(this.renderer, this.hostRef, this.isFocused);
   }
 
   // ** Private API **
 
-  private settingFocused(elem: ElementRef<HTMLElement> | null, isFocused: boolean): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'gf-focused', isFocused);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'foc', isFocused ? '' : null);
-  }
-
   private settingLink(elem: ElementRef<HTMLElement> | null): void {
     HtmlElemUtil.setAttr(this.renderer, elem, 'linkClear', '');
-    HtmlElemUtil.setClass(this.renderer, elem, 'gb-label', true);
-    HtmlElemUtil.setClass(this.renderer, elem, 'gb-elem-pd-hor', true);
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-label', true);
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-elem-pd-hor', true);
   }
 }

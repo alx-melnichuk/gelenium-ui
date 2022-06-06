@@ -69,12 +69,11 @@ export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizeP
   // ** Private API **
 
   private settingExterior(elem: ElementRef<HTMLElement>, exterior: GlnButtonExterior): void {
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext', exterior != null ? '' : null);
-    HtmlElemUtil.setClass(this.renderer, elem, 'gb-text', GlnButtonExteriorUtil.isText(exterior));
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-text', GlnButtonExteriorUtil.isText(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-t', GlnButtonExteriorUtil.isText(exterior) ? '' : null);
-    HtmlElemUtil.setClass(this.renderer, elem, 'gb-contained', GlnButtonExteriorUtil.isContained(exterior));
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-contained', GlnButtonExteriorUtil.isContained(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-c', GlnButtonExteriorUtil.isContained(exterior) ? '' : null);
-    HtmlElemUtil.setClass(this.renderer, elem, 'gb-outlined', GlnButtonExteriorUtil.isOutlined(exterior));
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-outlined', GlnButtonExteriorUtil.isOutlined(exterior));
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', GlnButtonExteriorUtil.isOutlined(exterior) ? '' : null);
   }
 }

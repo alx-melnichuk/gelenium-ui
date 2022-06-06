@@ -16,7 +16,7 @@ gln-input {
 
   &[wdFull] {
     width: 100%;
-    .gi-input {
+    .glni-input {
       width: 100%;
     }
   }
@@ -30,9 +30,9 @@ gln-input {
   }
 
   // Input
-  // The 'gf-elem' style sets the line height: 1.4375em;
+  // The 'glnf-elem' style sets the line height: 1.4375em;
   // This allows you to automatically change the padding when the font size changes.
-  .gi-input {
+  .glni-input {
     font-size: inherit;
     font-family: inherit;
     letter-spacing: inherit;

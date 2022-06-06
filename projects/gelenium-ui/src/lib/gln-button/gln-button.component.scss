@@ -1,32 +1,35 @@
 /*# sourceURL=gln-button.component.scss */
 
+:root {
+  --glnb-def-cl: #1976d2;
+  --glnb-dis-cl: #00000042;
+  --glnb-dis-cl2: #0000001f;
+  --glnb-hov-bg-cl: #1976d20a;
+  // Exterior: "contained"
+  --glnb-def-cl2: #fff;
+  --glnb-hov-bg-cl2: #1565c0;
+  // Exterior: "outlined"
+  --glnb-br-cl: #1976d280;
+}
+
 gln-button {
   display: flex;
   height: max-content;
   font-weight: 500;
-  font-size: 0.875em;
+  font-size: 0.875em; // 14px
   line-height: 1.75;
   
   &[ext-c] {
-  --def-br-rd: 0.25em; // 4px;
-  --def-lbl-pd-tp: 0.375em; // 6px
-  --def-lbl-pd-bt: 0.375em; // 6px
-  --def-lbl-pd-lf: 1em; // 16px
-  --def-lbl-pd-rg: 1em; // 16px
+    --def-lbl-pd-tp: 0.375em; // 6px
+    --def-lbl-pd-lf: 1em; // 16px
   }
   &[ext-o] {
-    --def-br-rd: 0.25em; // 4px;
     --def-lbl-pd-tp: 0.3125em; // 5px
-    --def-lbl-pd-bt: 0.3125em; // 5px
     --def-lbl-pd-lf: 0.9375em; // 15px
-    --def-lbl-pd-rg: 0.9375em; // 15px
   }
   &[ext-t] {
-    --def-br-rd: 0.25em; // 4px;
     --def-lbl-pd-tp: 0.375em; // 6px
-    --def-lbl-pd-bt: 0.375em; // 6px
     --def-lbl-pd-lf: 0.5em; // 8px
-    --def-lbl-pd-rg: 0.5em; // 8px
   }
   
   &>[gln-clear] {
@@ -40,7 +43,7 @@ gln-button {
     -webkit-tap-highlight-color: transparent;
     align-items: center;
     background-color: transparent;
-    border-radius: var(--gb-br-rd, var(--br-rd, var(--def-br-rd)));
+    border-radius: var(--glnb-br-rd, var(--br-rd, 0.25em)); // 4px
     box-sizing: border-box;
     cursor: pointer;
     display: inline-flex;
@@ -61,8 +64,8 @@ gln-button {
     width: inherit;
 
     &>span, &>a {
-      padding-top: var(--gb-lbl-pd-tp, var(--lbl-pd-tp, var(--def-lbl-pd-tp)));
-      padding-bottom: var(--gb-lbl-pd-bt, var(--lbl-pd-bt, var(--def-lbl-pd-bt)));
+      padding-top: var(--glnb-lbl-pd-tp, var(--lbl-pd-tp, var(--def-lbl-pd-tp)));
+      padding-bottom: var(--glnb-lbl-pd-bt, var(--lbl-pd-bt, var(--def-lbl-pd-tp)));
     }
   }
   &:not([dis])>[gln-btn] {
@@ -86,12 +89,18 @@ gln-button {
   }
 
   // Exterior: "contained"
-  &[ext-c]>[gln-btn] {
-    --def-cl: var(--gb-c-def-cl, var(--gb-def-cl2));
-    --def-bg-cl: var(--gb-c-def-bg-cl, var(--gb-def-cl));
-    --hov-bg-cl: var(--gb-c-hov-bg-cl, var(--gb-hov-bg-cl2));
-    --dis-cl: var(--gb-c-dis-cl, var(--gb-dis-cl));
-    --dis-bg-cl: var(--gb-c-dis-bg-cl, var(--gb-dis-cl2));
+  &[ext-c] {
+    &:not([dis])>[gln-btn] {
+      color: var(--glnb-c-def-cl, var(--glnb-def-cl2));
+      background-color: var(--glnb-c-def-bg-cl, var(--glnb-def-cl));
+      &:hover {
+        background-color: var(--glnb-c-hov-bg-cl, var(--glnb-hov-bg-cl2));
+      }
+    }
+    &[dis]>[gln-btn] {
+      color: var(--glnb-c-dis-cl, var(--glnb-dis-cl));
+      background-color: var(--glnb-c-dis-bg-cl, var(--glnb-dis-cl2));
+    }
   }
   &[ext-c]:not([dis]):not([noElevation])>[gln-btn] {
     box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
@@ -112,40 +121,37 @@ gln-button {
   &[ext-o]>[gln-btn] {
     border-width: 1px;
     border-style: solid;
-    --def-cl: var(--gb-o-def-cl, var(--gb-def-cl));
-    --def-br-cl: var(--gb-o-def-br-cl, var(--gb-br-cl));
-    --hov-bg-cl: var(--gb-o-hov-bg-cl, var(--gb-hov-bg-cl));
-    --hov-br-cl: var(--gb-o-hov-br-cl, var(--gb-def-cl));
-    --dis-cl: var(--gb-o-dis-cl, var(--gb-dis-cl));
-    --dis-br-cl: var(--gb-o-dis-br-cl, var(--gb-dis-cl2));
   }
-  // Exterior: "text"
-  &[ext-t]>[gln-btn] {
-    --def-cl: var(--gb-t-def-cl, var(--gb-def-cl));
-    --hov-bg-cl: var(--gb-t-hov-bg-cl, var(--gb-hov-bg-cl));
-    --dis-cl: var(--gb-t-dis-cl, var(--gb-dis-cl));
-  }
-
-  &[ext] {
+  &[ext-o] {
     &:not([dis])>[gln-btn] {
-      color: var(--def-cl);
-      background-color: var(--def-bg-cl);
-      border-color: var(--def-br-cl);
+      color: var(--glnb-o-def-cl, var(--glnb-def-cl));
+      border-color: var(--glnb-o-def-br-cl, var(--glnb-br-cl));
       &:hover {
-        background-color: var(--hov-bg-cl);
-        border-color: var(--hov-br-cl);
+        background-color: var(--glnb-o-hov-bg-cl, var(--glnb-hov-bg-cl));
+        border-color: var(--glnb-o-hov-br-cl, var(--glnb-def-cl));
       }
     }
     &[dis]>[gln-btn] {
-      color: var(--dis-cl);
-      background-color: var(--dis-bg-cl);
-      border-color: var(--dis-br-cl);
+      color: var(--glnb-o-dis-cl, var(--glnb-dis-cl));
+      border-color: var(--glnb-o-dis-br-cl, var(--glnb-dis-cl2));
+    }
+  }
+  // Exterior: "text"
+  &[ext-t] {
+    &:not([dis])>[gln-btn] {
+      color: var(--glnb-t-def-cl, var(--glnb-def-cl));
+      &:hover {
+        background-color: var(--glnb-t-hov-bg-cl, var(--glnb-hov-bg-cl));
+      }
+    }
+    &[dis]>[gln-btn] {
+      color: var(--glnb-t-dis-cl, var(--glnb-dis-cl));
     }
   }
 
   &[ext-t]>[gln-btn], &[ext-o]>[gln-btn] {
-    .gtr-ripple {
-      background-color: var(--gtr-ripple-color, rgba(25, 118, 210, 0.3));
+    .glntr-ripple {
+      background-color: var(--glntr-ripple-cl, rgba(25, 118, 210, 0.3));
     }
   }
 
@@ -168,11 +174,11 @@ gln-button {
     &>span[orn-rg] {
       order: 1;
     }
-    &>span[orn-lf]:empty~.gb-elem-pd-hor {
-      padding-left: var(--gb-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf)));
+    &>span[orn-lf]:empty~.glnb-elem-pd-hor {
+      padding-left: var(--glnb-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf)));
     }
-    &>span[orn-rg]:empty~.gb-elem-pd-hor {
-      padding-right: var(--gb-lbl-pd-rg, var(--lbl-pd-rg, var(--def-lbl-pd-rg)));
+    &>span[orn-rg]:empty~.glnb-elem-pd-hor {
+      padding-right: var(--glnb-lbl-pd-rg, var(--lbl-pd-rg, var(--def-lbl-pd-lf)));
     }
   }
 }

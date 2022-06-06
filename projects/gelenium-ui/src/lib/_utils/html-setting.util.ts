@@ -2,13 +2,17 @@ import { ElementRef, Renderer2 } from '@angular/core';
 import { HtmlElemUtil } from './html-elem.util';
 
 export class HtmlSettingUtil {
-  public static error(renderer: Renderer2, elem: ElementRef<HTMLElement>, value: boolean): void {
-    HtmlElemUtil.setAttr(renderer, elem, 'err', value ? '' : null);
-    HtmlElemUtil.setClass(renderer, elem, 'is-error', value);
-  }
-  public static disabled(renderer: Renderer2, elem: ElementRef<HTMLElement>, value: boolean): void {
+  public static disabled(renderer: Renderer2, elem: ElementRef<HTMLElement>, value: boolean | null): void {
     HtmlElemUtil.setAttr(renderer, elem, 'dis', value ? '' : null);
-    HtmlElemUtil.setClass(renderer, elem, 'is-disabled', value);
+    HtmlElemUtil.setClass(renderer, elem, 'gln-disabled', value || false);
+  }
+  public static error(renderer: Renderer2, elem: ElementRef<HTMLElement>, value: boolean | null): void {
+    HtmlElemUtil.setAttr(renderer, elem, 'err', value ? '' : null);
+    HtmlElemUtil.setClass(renderer, elem, 'gln-error', value || false);
+  }
+  public static focused(renderer: Renderer2, elem: ElementRef<HTMLElement> | null, value: boolean | null): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-focused', value || false);
+    HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
   }
   public static readonly(renderer: Renderer2, elem: ElementRef<HTMLElement>, value: boolean): void {
     HtmlElemUtil.setAttr(renderer, elem, 'rea', value ? '' : null);

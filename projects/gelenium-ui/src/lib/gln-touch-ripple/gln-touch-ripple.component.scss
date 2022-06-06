@@ -14,13 +14,13 @@ gln-touch-ripple {
     pointer-events: none;
   }
 
-  .gtr-ripple {
+  .glntr-ripple {
     position: absolute;
     border-radius: 50%;
     transform: scale(0);
     animation: ripple 600ms linear;
     transition: background 600ms;
-    background-color: var(--gtr-ripple-color, rgba(255, 255, 255, 0.3));
+    background-color: var(--glntr-ripple-cl, rgba(255, 255, 255, 0.3));
   }
 
   @keyframes ripple {

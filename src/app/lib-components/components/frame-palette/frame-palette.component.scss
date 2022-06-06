@@ -28,97 +28,97 @@ app-frame-palette {
 
   // Color for "label".
   // +The state without: disabled, error, mouse hover, focused.
-  .fp-specific .gln-frame:not(.gf-disabled):not(.gf-error):not(:hover):not(:focus-within)>.gf-label {
+  .fp-specific .gln-frame:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within)>.glnf-label {
     color: var(--fp-label-default-color);
   } // The state without: disabled, error, focused and with mouse hover.
-  .fp-specific .gln-frame:not(.gf-disabled):not(.gf-error):hover:not(:focus-within)>.gf-label {
+  .fp-specific .gln-frame:not(.gln-disabled):not(.gln-error):hover:not(:focus-within)>.glnf-label {
     color: var(--fp-hover-color);
   } // The state without: disabled, error and with focused.
-  .fp-specific .gln-frame:not(.gf-disabled):not(.gf-error):focus-within>.gf-label {
+  .fp-specific .gln-frame:not(.gln-disabled):not(.gln-error):focus-within>.glnf-label {
     color: var(--fp-focused-color);
   } // The state without: disabled, mouse hover, focused and with error.
-  .fp-specific .gln-frame:not(.gf-disabled).gf-error:not(:hover):not(:focus-within)>.gf-label {
+  .fp-specific .gln-frame:not(.gln-disabled).gln-error:not(:hover):not(:focus-within)>.glnf-label {
     color: var(--fp-error-color);
   } // The state without: disabled, focused and with error, mouse hover.
-  .fp-specific .gln-frame:not(.gf-disabled).gf-error:hover:not(:focus-within)>.gf-label {
+  .fp-specific .gln-frame:not(.gln-disabled).gln-error:hover:not(:focus-within)>.glnf-label {
     color: var(--fp-hover-error-color);
   } // The state without: disabled and with error, focused.
-  .fp-specific .gln-frame:not(.gf-disabled).gf-error:focus-within>.gf-label {
+  .fp-specific .gln-frame:not(.gln-disabled).gln-error:focus-within>.glnf-label {
     color: var(--fp-error-color);
   } // The state with disabled.
-  .fp-specific .gln-frame.gf-disabled>.gf-label {
+  .fp-specific .gln-frame.gln-disabled>.glnf-label {
     color: var(--fp-disabled-color);
   }
 
   // Border-color for "outlined" mode.
   // +The state without: disabled, error, mouse hover, focused.
-  .fp-specific .gln-frame:not(.gf-disabled):not(.gf-error):not(:hover):not(:focus-within) .gf-fieldset {
+  .fp-specific .gln-frame:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within) .glnf-fieldset {
     border-color: var(--fp-o-default-brd-color);
   } // The state without: disabled, error, focused and with mouse hover.
-  .fp-specific .gln-frame:not(.gf-disabled):not(.gf-error):hover:not(:focus-within) .gf-fieldset {
+  .fp-specific .gln-frame:not(.gln-disabled):not(.gln-error):hover:not(:focus-within) .glnf-fieldset {
     border-color: var(--fp-hover-color);
   } // The state without: disabled, error and with focused.
-  .fp-specific .gln-frame:not(.gf-disabled):not(.gf-error):focus-within .gf-fieldset {
+  .fp-specific .gln-frame:not(.gln-disabled):not(.gln-error):focus-within .glnf-fieldset {
     border-color: var(--fp-focused-color);
   } // The state without: disabled, mouse hover, focused and with error.
-  .fp-specific .gln-frame:not(.gf-disabled).gf-error:not(:hover):not(:focus-within) .gf-fieldset {
+  .fp-specific .gln-frame:not(.gln-disabled).gln-error:not(:hover):not(:focus-within) .glnf-fieldset {
     border-color: var(--fp-error-color);
   } // The state without: disabled, focused and with error, mouse hover.
-  .fp-specific .gln-frame:not(.gf-disabled).gf-error:hover:not(:focus-within) .gf-fieldset {
+  .fp-specific .gln-frame:not(.gln-disabled).gln-error:hover:not(:focus-within) .glnf-fieldset {
     border-color: var(--fp-hover-error-color);
   } // The state without: disabled and with error, focused.
-  .fp-specific .gln-frame:not(.gf-disabled).gf-error:focus-within .gf-fieldset {
+  .fp-specific .gln-frame:not(.gln-disabled).gln-error:focus-within .glnf-fieldset {
     border-color: var(--fp-error-color);
   } // The state with disabled.
-  .fp-specific .gln-frame.gf-disabled .gf-fieldset {
+  .fp-specific .gln-frame.gln-disabled .glnf-fieldset {
     border-color: var(--fp-disabled-color);
   }
   
   // Background-color for "underline" mode.
   // +The state without: disabled, error, mouse hover, focused.
-  .fp-specific .gf-underline:not(.gf-disabled):not(.gf-error):not(:hover):not(:focus-within)>.gf-frame {
+  .fp-specific .gf-underline:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within)>.glnf-border {
     background-color: var(--fp-u-default-bg-color);
   } // The state without: disabled, error, focused and with mouse hover.
-  .fp-specific .gf-underline:not(.gf-disabled):not(.gf-error):hover:not(:focus-within)>.gf-frame {
+  .fp-specific .gf-underline:not(.gln-disabled):not(.gln-error):hover:not(:focus-within)>.glnf-border {
     background-color: var(--fp-u-hover-bg-color);
   } // The state without: disabled, error and with focused.
-  .fp-specific .gf-underline:not(.gf-disabled):not(.gf-error):focus-within>.gf-frame {
+  .fp-specific .gf-underline:not(.gln-disabled):not(.gln-error):focus-within>.glnf-border {
     background-color: var(--fp-u-focused-bg-color);
   } // The state without: disabled, mouse hover, focused and with error.
-  .fp-specific .gf-underline:not(.gf-disabled).gf-error:not(:hover):not(:focus-within)>.gf-frame {
+  .fp-specific .gf-underline:not(.gln-disabled).gln-error:not(:hover):not(:focus-within)>.glnf-border {
     background-color: var(--fp-u-error-bg-color);
   } // The state without: disabled, focused and with error, mouse hover.
-  .fp-specific .gf-underline:not(.gf-disabled).gf-error:hover:not(:focus-within)>.gf-frame {
+  .fp-specific .gf-underline:not(.gln-disabled).gln-error:hover:not(:focus-within)>.glnf-border {
     background-color: var(--fp-u-hover-error-bg-color);
   } // The state without: disabled and with error, focused.
-  .fp-specific .gf-underline:not(.gf-disabled).gf-error:focus-within>.gf-frame {
+  .fp-specific .gf-underline:not(.gln-disabled).gln-error:focus-within>.glnf-border {
     background-color: var(--fp-u-focused-error-bg-color);
   } // The state with disabled.
-  .fp-specific .gf-underline.gf-disabled>.gf-frame {
+  .fp-specific .gf-underline.gln-disabled>.glnf-border {
     background-color: var(--fp-u-disabled-bg-color);
   }
 
   // Border-bottom-color for "underline" and "standard" mode.
   // +The state without: disabled, error, mouse hover, focused.
-  .fp-specific .gf-border:not(.gf-disabled):not(.gf-error):not(:hover):not(:focus-within)>.gf-frame:before {
+  .fp-specific .glnf-border:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within)>.glnf-border:before {
     border-bottom-color: var(--fp-su-default-brd-color);
   } // The state without: disabled, error, focused and with mouse hover.
-  .fp-specific .gf-border:not(.gf-disabled):not(.gf-error):hover:not(:focus-within)>.gf-frame:before {
+  .fp-specific .glnf-border:not(.gln-disabled):not(.gln-error):hover:not(:focus-within)>.glnf-border:before {
     border-bottom-color: var(--fp-hover-color);
   } // The state without: disabled, mouse hover, focused and with error.
-  .fp-specific .gf-border:not(.gf-disabled).gf-error:not(:hover):not(:focus-within)>.gf-frame:before {
+  .fp-specific .glnf-border:not(.gln-disabled).gln-error:not(:hover):not(:focus-within)>.glnf-border:before {
     border-bottom-color: var(--fp-error-color);
   } // The state without: disabled, focused and with error, mouse hover.
-  .fp-specific .gf-border:not(.gf-disabled).gf-error:hover:not(:focus-within)>.gf-frame:before {
+  .fp-specific .glnf-border:not(.gln-disabled).gln-error:hover:not(:focus-within)>.glnf-border:before {
     border-bottom-color: var(--fp-hover-error-color);
   } // The state without: disabled, error.
-  .fp-specific .gf-border:not(.gf-disabled):not(.gf-error)>.gf-frame:after {
+  .fp-specific .glnf-border:not(.gln-disabled):not(.gln-error)>.glnf-border:after {
     border-bottom-color: var(--fp-focused-color);
   } // The state without: disabled and with error.
-  .fp-specific .gf-border:not(.gf-disabled).gf-error>.gf-frame:after {
+  .fp-specific .glnf-border:not(.gln-disabled).gln-error>.glnf-border:after {
     border-bottom-color: var(--fp-error-color);
   } // The state with disabled.
-  .fp-specific .gf-border.gf-disabled>.gf-frame:before {
+  .fp-specific .glnf-border.gln-disabled>.glnf-border:before {
     border-bottom-color: var(--fp-disabled-color);
   }
 
@@ -154,44 +154,44 @@ app-frame-palette {
   .fp-bstrap .gln-frame {
     line-height: 1.5;
   }
-  .fp-bstrap .gln-frame:not(.gf-disabled):not(.gf-error):not(:hover):not(:focus-within) .gf-fieldset {
+  .fp-bstrap .gln-frame:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within) .glnf-fieldset {
     border-color: var(--bs-def-br-cl);
   }
-  .fp-bstrap .gln-frame:not(.gf-disabled):not(.gf-error):hover:not(:focus-within) .gf-fieldset {
+  .fp-bstrap .gln-frame:not(.gln-disabled):not(.gln-error):hover:not(:focus-within) .glnf-fieldset {
     border-color: var(--bs-def-br-cl);
   }
-  .fp-bstrap .gln-frame:not(.gf-disabled):not(.gf-error):focus-within .gf-fieldset {
+  .fp-bstrap .gln-frame:not(.gln-disabled):not(.gln-error):focus-within .glnf-fieldset {
     border-color: var(--bs-foc-cl);
   }
-  .fp-bstrap .gln-frame:not(.gf-disabled).gf-error:not(:hover):not(:focus-within) .gf-fieldset {
+  .fp-bstrap .gln-frame:not(.gln-disabled).gln-error:not(:hover):not(:focus-within) .glnf-fieldset {
     border-color: var(--bs-err-cl);
   }
-  .fp-bstrap .gln-frame:not(.gf-disabled).gf-error:hover:not(:focus-within) .gf-fieldset {
+  .fp-bstrap .gln-frame:not(.gln-disabled).gln-error:hover:not(:focus-within) .glnf-fieldset {
     border-color: var(--bs-hov-err-cl);
   }
-  .fp-bstrap .gln-frame.gf-disabled .gf-fieldset {
+  .fp-bstrap .gln-frame.gln-disabled .glnf-fieldset {
     border-color: var(--bs-def-br-cl);
   }
-  .fp-bstrap .gln-frame.gf-disabled {
+  .fp-bstrap .gln-frame.gln-disabled {
     background-color: var(--bs-dis-bgr-cl);
     opacity: 1;
   }
   .fp-bstrap gln-hint-or-error.ghe-error {
     color: var(--bs-err-cl);
   }
-  .fp-bstrap .gln-frame.gf-disabled .gf-fieldset {
+  .fp-bstrap .gln-frame.gln-disabled .glnf-fieldset {
     border-style: solid;
   }
-  .fp-bstrap .gln-frame:focus-within .gf-fieldset {
+  .fp-bstrap .gln-frame:focus-within .glnf-fieldset {
     border-width: 1px;
   }
-  .fp-bstrap .gln-frame:focus-within.gf-error .gf-fieldset {
+  .fp-bstrap .gln-frame:focus-within.gln-error .glnf-fieldset {
     box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
   }
-  .fp-bstrap .gln-frame:focus-within:not(.gf-error) .gf-fieldset {
+  .fp-bstrap .gln-frame:focus-within:not(.gln-error) .glnf-fieldset {
     box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
   }
-  .fp-bstrap .gln-frame.gf-error .gi-input {
+  .fp-bstrap .gln-frame.gln-error .glni-input {
     padding-right: 1.4em;
     background-image: url("data:image/svg+xml,"
     + "<svg xmlns='http://www.w3.org/2000/svg' width='12' "
@@ -225,7 +225,7 @@ app-frame-palette {
     // The state with disabled.
     --gf-dis-lb-cl: #ab47bc;
 
-    // ** Section: Background-Color "div.gf-frame" for "Underline" mode. **
+    // ** Section: Background-Color "div.glnf-border" for "Underline" mode. **
     // The state without disabled, error, hover, focused.
     --gf-def-bg-cl: #e8f5e9;
     // The state without disabled, error, focused and with hover.
@@ -241,7 +241,7 @@ app-frame-palette {
     // The state with disabled.
     --gf-dis-bg-cl: #f6e8f8;
 
-    // Border-Bottom-Color "div.gf-frame" for "Outlined" and "Standard" mode.
+    // Border-Bottom-Color "div.glnf-border" for "Outlined" and "Standard" mode.
     // The state without disabled, error, hover, focused.
     --gf-def-brb-bf: #558b2f;
     // The state without disabled, error and with hover.

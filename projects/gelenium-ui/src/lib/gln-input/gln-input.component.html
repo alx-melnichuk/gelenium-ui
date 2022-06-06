@@ -1,6 +1,6 @@
 <ng-container [formGroup]="formGroup">
   <div ext
-    class="gi-wrap"
+    class="glni-wrap"
     #prepareData="glnFrameExteriorInput"
     [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
     [glnFrameExteriorInputElementRef]="hostRef">
@@ -25,11 +25,11 @@
       [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)">
 
       <span orn-lf
-        class="gf-ornam-lf">
+        class="glni-ornam-lf">
         <ng-content select="[gln-orn-lf]"></ng-content>
       </span>
       <span orn-rg
-        class="gf-ornam-rg">
+        class="glni-ornam-rg">
         <ng-content select="[gln-orn-rg]"></ng-content>
       </span>
 
@@ -39,7 +39,7 @@
         elem-pd-hor
         [attr.id]="id"
         [type]="typeVal"
-        class="gi-input gf-elem"
+        class="glni-input glnf-elem"
         [attr.disabled]="isDisabled2 ? '': null"
         [attr.autocomplete]="!!autoComplete ? autoComplete : null"
         [attr.readonly]="getBoolean(isReadOnly) ? '': null"
