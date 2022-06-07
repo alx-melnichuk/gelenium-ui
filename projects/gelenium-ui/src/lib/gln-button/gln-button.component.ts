@@ -41,7 +41,7 @@ let identifier = 0;
 })
 export class GlnButtonComponent implements OnChanges, AfterContentInit {
   @Input()
-  public id = 'gln_button_' + ++identifier;
+  public id = 'glnb_' + ++identifier;
   @Input()
   public config: GlnButtonConfig | null = null;
   @Input()
@@ -77,6 +77,7 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
   ) {
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-button', true);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

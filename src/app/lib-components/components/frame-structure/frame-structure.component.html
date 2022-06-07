@@ -88,14 +88,14 @@
     Componet uses css parameters for its work:
   </p>
   <ul>
-    <li>"--br-rd" - frame radius;</li>
-    <li>"--lbl-pd-lf" - left margin to the frame;</li>
-    <li>"--lbl-pd-rg" - right indent to frame;</li>
-    <li>"--lbl-pd-tp" - top indent to frame;</li>
-    <li>"--lbl-pd-bt" - bottom indent to frame;</li>
-    <li>"--lbl-wd" - label length in compressed state;</li>
-    <li>"--lbl-trn-y" - transformation value for the label in compressed state;</li>
-    <li>"--lbl2-trn-y" - transformation value for label in free state;</li>
+    <li>"--glnfs-br-rd" - frame radius;</li>
+    <li>"--glnfs-pd-lf" - left margin to the frame;</li>
+    <li>"--glnfs-pd-rg" - right indent to frame;</li>
+    <li>"--glnfs-pd-tp" - top indent to frame;</li>
+    <li>"--glnfs-pd-bt" - bottom indent to frame;</li>
+    <li>"--glnfe-mx-wd" - label length in compressed state;</li>
+    <li>"--glnfe-trn-y" - transformation value for the label in compressed state;</li>
+    <li>"--glnfe-trn2-y" - transformation value for label in free state;</li>
   </ul>
   <p>
     If you want to change the values of these parameters for all elements at once, then you need
@@ -113,11 +113,11 @@
     This directive defines the values of css parameters:
   </p>
   <ul>
-    <li>"--lbl-trn-y" - transformation value for the label in compressed state;</li>
-    <li>"--lbl2-trn-y" - transformation value for label in free state;</li>
-    <li>"--lbl-wd" - label length in compressed state;</li>
-    <li>"--he-pd-lf" - left indent for hint line;</li>
-    <li>"--he-pd-rg" - right indent for the hint line;</li>
+    <li>"--glnfe-trn-y" - transformation value for the label in compressed state;</li>
+    <li>"--glnfe-trn2-y" - transformation value for label in free state;</li>
+    <li>"--glnfe-mx-wd" - label length in compressed state;</li>
+    <li>"--glnfs-pd-lf" - left indent for hint line;</li>
+    <li>"--glnfs-pd-rg" - right indent for the hint line;</li>
   </ul>
   <p>Example:</p>
   <code><pre source="html">
@@ -153,9 +153,9 @@ getPaddingHor = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
     value of css-parameters:
   </p>
   <ul>
-    <li>"--lbl-wd" - label length in compressed state;</li>
-    <li>"--he-pd-lf" - left indent for hint line;</li>
-    <li>"--he-pd-rg" - right indent for the hint line;</li>
+    <li>"--glnfe-mx-wd" - label length in compressed state;</li>
+    <li>"--glnfs-pd-lf" - left indent for hint line;</li>
+    <li>"--glnfs-pd-rg" - right indent for the hint line;</li>
   </ul>
 
   <p>
@@ -171,8 +171,8 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
     value of css-parameters:
   </p>
   <ul>
-    <li>"--gf-lbl-trn-y" - transformation value for the label in compressed state;</li>
-    <li>"--gf-lbl2-trn-y" - transformation value for label in free state;</li>
+    <li>"--glnfe-trn-y" - transformation value for the label in compressed state;</li>
+    <li>"--glnfe-trn2-y" - transformation value for label in free state;</li>
   </ul>
 </section>
 
@@ -187,11 +187,11 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
     This directive defines the values of css parameters:
   </p>
   <ul>
-    <li>"--br-rd" - frame radius;</li>
-    <li>"--lbl-pd-lf" - left margin to the frame;</li>
-    <li>"--lbl-pd-rg" - right indent to frame;</li>
-    <li>"--lbl-pd-tp" - top indent to frame;</li>
-    <li>"--lbl-pd-bt" - bottom indent to frame;</li>
+    <li>"--glnfs-br-rd" - frame radius;</li>
+    <li>"--glnfs-pd-lf" - left margin to the frame;</li>
+    <li>"--glnfs-pd-rg" - right indent to frame;</li>
+    <li>"--glnfs-pd-tp" - top indent to frame;</li>
+    <li>"--glnfs-pd-bt" - bottom indent to frame;</li>
   </ul>
   <p>Example:</p>
   <code><pre source="html">
@@ -221,7 +221,7 @@ getBorderRadius(frameSizeValue: number, lineHeight: number): string | null;</pre
     value of css-parameters:
   </p>
   <ul>
-    <li>"--br-rd" - frame radius;</li>
+    <li>"--glnfs-br-rd" - frame radius;</li>
   </ul>
 
   <p>
@@ -237,8 +237,8 @@ getPaddingHor(frameSizeValue: number, lineHeight: number): GlnFrameSizePaddingHo
     value of css-parameters:
   </p>
   <ul>
-    <li>"--lbl-pd-lf" - left margin to the frame;</li>
-    <li>"--lbl-pd-rg" - right indent to frame;</li>
+    <li>"--glnfs-pd-lf" - left margin to the frame;</li>
+    <li>"--glnfs-pd-rg" - right indent to frame;</li>
   </ul>
 
   <p>
@@ -254,8 +254,8 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
     value of css-parameters:
   </p>
   <ul>
-    <li>"--lbl-pd-tp" - top indent to frame;</li>
-    <li>"--lbl-pd-bt" - bottom indent to frame;</li>
+    <li>"--glnfs-pd-tp" - top indent to frame;</li>
+    <li>"--glnfs-pd-bt" - bottom indent to frame;</li>
   </ul>
 </section>
 
@@ -271,14 +271,13 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
   <code><pre source="html">
 &lt;div #prepareData="glnFrameExteriorInput"
   [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
+  [glnFrameExteriorInputElementRef]="hostRef"
   // parameter value "exterior"
-  // css-parameter: "--lbl-trn-y"
-  // css-parameter: "--lbl2-trn-y"
-  // css-parameter: "--lbl-wd"
-  // css-parameter: "--he-pd-lf"
+  // css-parameter: "--glnfe-trn-y"
+  // css-parameter: "--glnfe-trn2-y"
+  // css-parameter: "--glnfe-mx-wd"
 &gt;
   &lt;gln-frame #glnFrame
-    [attr.wdFull]="wdFull"
     [label]="label"
     [exterior]="prepareData.exterior"
     [config]="currConfig"
@@ -288,22 +287,25 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
 
     #glnFrameSize="glnFrameSize"
     [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
+    [glnFrameSizeElementRef]="hostRef"
     [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
     [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
     [glnFrameSizePrepareData]="prepareData"
     [glnFrameSizeModify]="prepareData.exterior"
     // parameter value "frameSizeValue";
-    // css-parameter: "--br-rd",
-    // css-parameter: "--lbl-pd-lf",
-    // css-parameter: "--lbl-pd-rg",
-    // css-parameter: "--lbl-pd-tp",
-    // css-parameter: "--lbl-pd-bt"
+    // css-parameter: "--glnfs-br-rd",
+    // css-parameter: "--glnfs-pd-lf",
+    // css-parameter: "--glnfs-pd-rg",
+    // css-parameter: "--glnfs-pd-tp",
+    // css-parameter: "--glnfs-pd-bt"
 
     glnFrameOrnament
     [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
     [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
     // indents for ornaments (images) on the left and right;
     // alignment of ornaments vertically;
+    // css-parameter: "--glnfo-pd-lf",
+    // css-parameter: "--glnfo-pd-rg"
   &gt;
     ...
   &lt;/gln-frame&gt;

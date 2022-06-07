@@ -4,7 +4,7 @@
     gln-clear
     gln-btn
     type="button"
-    tabindex="0"
+    [attr.tabindex]="isDisabled2 ? null : 0"
     [glnFrameExteriorButton]="exterior || currConfig?.exterior || null"
     [glnFrameExteriorButtonElementRef]="hostRef"
     #glnFrameExteriorButton="glnFrameExteriorButton"
@@ -14,7 +14,7 @@
     [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
     [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
     [glnFrameSizePrepareData]="glnFrameExteriorButton"
-    [attr.id]="id"
+    [attr.id]="id + '_button'"
     [attr.disabled]="isDisabled2 ? '' : null"
     (focus)="doFocus()"
     (blur)="doBlur()">
@@ -39,7 +39,7 @@
     [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
     [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
     [glnFrameSizePrepareData]="glnFrameExteriorButton"
-    [attr.id]="id"
+    [attr.id]="id + '_link'"
     (click)="doClick($event)">
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>

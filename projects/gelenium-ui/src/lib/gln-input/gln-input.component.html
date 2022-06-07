@@ -16,6 +16,7 @@
       [isRequired]="isRequired2"
       #glnFrameSize="glnFrameSize"
       [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
+      [glnFrameSizeElementRef]="hostRef"
       [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
       [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
       [glnFrameSizePrepareData]="prepareData"
@@ -37,7 +38,7 @@
         formControlName="textData"
         elem-pd-ver
         elem-pd-hor
-        [attr.id]="id"
+        [attr.id]="id + '_input'"
         [type]="typeVal"
         class="glni-input glnf-elem"
         [attr.disabled]="isDisabled2 ? '': null"

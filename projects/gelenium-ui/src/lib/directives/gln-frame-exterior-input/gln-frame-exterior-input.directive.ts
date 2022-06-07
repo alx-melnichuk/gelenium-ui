@@ -73,9 +73,7 @@ export class GlnFrameExteriorInputDirective implements OnChanges, GlnFrameSizePr
     if (value !== null) {
       // paddingHor
       const pdLfRgWd = Math.round(1.66 * (2 * value) * 100) / 100;
-      HtmlElemUtil.setProperty(this.elementRef, '--lbl-wd', NumberUtil.str(pdLfRgWd)?.concat('px') || null);
-      HtmlElemUtil.setProperty(this.elementRef, '--he-pd-lf', NumberUtil.str(value)?.concat('px') || null);
-      HtmlElemUtil.setProperty(this.elementRef, '--he-pd-rg', NumberUtil.str(value)?.concat('px') || null);
+      HtmlElemUtil.setProperty(this.elementRef, '--glnfe-mx-wd', NumberUtil.str(pdLfRgWd)?.concat('px') || null);
     }
     return value !== null ? { left: value, right: value } : null;
   };
@@ -94,10 +92,10 @@ export class GlnFrameExteriorInputDirective implements OnChanges, GlnFrameSizePr
     if (result !== null) {
       // paddingVer
       const translateY = this.translateY(this.exterior, frameSizeValue, lineHeight);
-      HtmlElemUtil.setProperty(this.elementRef, '--lbl-trn-y', NumberUtil.str(translateY)?.concat('px') || null);
+      HtmlElemUtil.setProperty(this.elementRef, '--glnfe-trn-y', NumberUtil.str(translateY)?.concat('px') || null);
 
       const translateY2 = this.translate2Y(this.exterior, frameSizeValue, lineHeight);
-      HtmlElemUtil.setProperty(this.elementRef, '--lbl2-trn-y', NumberUtil.str(translateY2)?.concat('px') || null);
+      HtmlElemUtil.setProperty(this.elementRef, '--glnfe-trn2-y', NumberUtil.str(translateY2)?.concat('px') || null);
     }
     return result;
   };

@@ -14,6 +14,7 @@
       [isRequired]="isRequired2"
       #glnFrameSize="glnFrameSize"
       [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
+      [glnFrameSizeElementRef]="hostRef"
       [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
       [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
       [glnFrameSizePrepareData]="prepareData"
@@ -35,7 +36,7 @@
         formControlName="textData"
         elem-mr-ver
         elem-pd-hor
-        [attr.id]="id"
+        [attr.id]="id + '_textarea'"
         [rows]="currentRows"
         class="gt-textarea glnf-elem"
         [attr.disabled]="isDisabled2 ? '': null"

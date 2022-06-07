@@ -6,8 +6,6 @@ import { NumberUtil } from '../../_utils/number.util';
 
 export const ATTR_ORN_LF = 'orn-lf';
 export const ATTR_ORN_RG = 'orn-rg';
-export const PROP_ORN_LBL_PD_LF = '--orn-lbl-pd-lf';
-export const PROP_ORN_LBL_PD_RG = '--orn-lbl-pd-rg';
 
 @Directive({
   selector: '[glnFrameOrnament]',
@@ -18,6 +16,8 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
   public glnFrameOrnamentLfAlign: string | null = null; // OrnamAlign
   @Input()
   public glnFrameOrnamentRgAlign: string | null = null; // OrnamAlign
+  @Input()
+  public glnFrameOrnamentElementRef: ElementRef<HTMLElement> | null = null;
 
   private isInit = true;
   private ornamentLf: HTMLElement | null = null;
@@ -57,12 +57,14 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
     this.ornamentLfWidth = this.ornamentLf?.offsetWidth || 0;
     this.ornamentRgWidth = this.ornamentRg?.offsetWidth || 0;
 
-    const parentElementRef = HtmlElemUtil.getElementRef(this.hostRef.nativeElement.parentElement);
+    // const parentElementRef = HtmlElemUtil.getElementRef(this.hostRef.nativeElement.parentElement);
+    const elementRef: ElementRef<HTMLElement> | null = this.glnFrameOrnamentElementRef || this.hostRef;
+
     if (this.ornamentLfWidth > 0) {
-      HtmlElemUtil.setProperty(parentElementRef, PROP_ORN_LBL_PD_LF, NumberUtil.str(this.ornamentLfWidth)?.concat('px') || null);
+      HtmlElemUtil.setProperty(elementRef, '--glnfo-pd-lf', NumberUtil.str(this.ornamentLfWidth)?.concat('px') || null);
     }
     if (this.ornamentRgWidth > 0) {
-      HtmlElemUtil.setProperty(parentElementRef, PROP_ORN_LBL_PD_RG, NumberUtil.str(this.ornamentRgWidth)?.concat('px') || null);
+      HtmlElemUtil.setProperty(elementRef, '--glnfo-pd-rg', NumberUtil.str(this.ornamentRgWidth)?.concat('px') || null);
     }
   }
 }

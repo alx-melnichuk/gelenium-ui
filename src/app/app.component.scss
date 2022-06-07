@@ -1,11 +1,11 @@
 /*# sourceURL=app.component.scss */
 
 app-root {
-  --app-root-border-width: 2px;
-  --app-root-border-style: solid;
-  --app-root-border-color: #E5E8EC;
-  --app-root-header-height: 42px;
-  --app-root-footer-height: 0px;
+  --app-border-width: 2px;
+  --app-border-style: solid;
+  --app-border-color: #E5E8EC;
+  --app-header-height: 42px;
+  --app-footer-height: 0px;
 
   height: 100%;
   display: flex;
@@ -13,7 +13,7 @@ app-root {
 
   &>.app-header {
     flex-shrink: 0;
-    flex-basis: var(--app-root-header-height);
+    flex-basis: var(--app-header-height);
     display: flex;
     align-items: center;
     article {
@@ -29,19 +29,19 @@ app-root {
   }
   &>.app-footer {
     flex-shrink: 0;
-    flex-basis: var(--app-root-footer-height);
+    flex-basis: var(--app-footer-height);
   }
 
   .app-brd-bt {
-    border-bottom-width: var(--app-root-border-width);
-    border-bottom-style: var(--app-root-border-style);
-    border-bottom-color: var(--app-root-border-color);
+    border-bottom-width: var(--app-border-width);
+    border-bottom-style: var(--app-border-style);
+    border-bottom-color: var(--app-border-color);
     box-sizing: border-box;
   }
   .app-brd-rg {
-    border-right-width: var(--app-root-border-width);
-    border-right-style: var(--app-root-border-style);
-    border-right-color: var(--app-root-border-color);
+    border-right-width: var(--app-border-width);
+    border-right-style: var(--app-border-style);
+    border-right-color: var(--app-border-color);
     box-sizing: border-box;
   }
   

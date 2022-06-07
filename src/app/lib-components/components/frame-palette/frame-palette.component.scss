@@ -211,67 +211,67 @@ app-frame-palette {
   .fp-second { 
     // ** Section: Color "label". **
     // The state without disabled, error, hover, focused.
-    --gf-def-lb-cl: #558b2f;
+    --glnf-def-lb-cl: #558b2f;
     // The state without disabled, error, focused and with hover.
-    --gf-hov-lb-cl: #1b5e20; // #689f38;
+    --glnf-hov-lb-cl: #1b5e20; // #689f38;
     // The state without disabled, error and with focused.
-    --gf-foc-lb-cl: #2e7d32;
+    --glnf-foc-lb-cl: #2e7d32;
     // The state without disabled, hover, focused and error.
-    --gf-err-lb-cl: #ef6c00;
+    --glnf-err-lb-cl: #ef6c00;
     // The state without disabled, focused and error, hover.
-    --gf-hov-err-lb-cl: #c45418;
+    --glnf-hov-err-lb-cl: #c45418;
     // The state without disabled and error, focused.
-    --gf-foc-err-lb-cl: #d85e01; // #e65100;
+    --glnf-foc-err-lb-cl: #d85e01; // #e65100;
     // The state with disabled.
-    --gf-dis-lb-cl: #ab47bc;
+    --glnf-dis-lb-cl: #ab47bc;
 
     // ** Section: Background-Color "div.glnf-border" for "Underline" mode. **
     // The state without disabled, error, hover, focused.
-    --gf-def-bg-cl: #e8f5e9;
+    --glnf-def-bg-cl: #e8f5e9;
     // The state without disabled, error, focused and with hover.
-    --gf-hov-bg-cl: #dcedc8; // #689f38;
+    --glnf-hov-bg-cl: #dcedc8; // #689f38;
     // The state without disabled, error and with focused.
-    --gf-foc-bg-cl: #c8e6c9;
+    --glnf-foc-bg-cl: #c8e6c9;
     // The state without disabled, hover, focused and error.
-    --gf-err-bg-cl: #fcd9ce;
+    --glnf-err-bg-cl: #fcd9ce;
     // The state without disabled, focused and error, hover.
-    --gf-hov-err-bg-cl: #fbe9e7;
+    --glnf-hov-err-bg-cl: #fbe9e7;
     // The state without disabled and error, focused.
-    --gf-foc-err-bg-cl: #ffd3c5;
+    --glnf-foc-err-bg-cl: #ffd3c5;
     // The state with disabled.
-    --gf-dis-bg-cl: #f6e8f8;
+    --glnf-dis-bg-cl: #f6e8f8;
 
     // Border-Bottom-Color "div.glnf-border" for "Outlined" and "Standard" mode.
     // The state without disabled, error, hover, focused.
-    --gf-def-brb-bf: #558b2f;
+    --glnf-def-brb-bf: #558b2f;
     // The state without disabled, error and with hover.
-    --gf-hov-brb-bf: #1b5e20;
+    --glnf-hov-brb-bf: #1b5e20;
     // The state without disabled, hover, focused and error.
-    --gf-err-brb-bf: #ef6c00;
+    --glnf-err-brb-bf: #ef6c00;
     // The state without disabled, focused and error, hover.
-    --gf-hov-err-brb-bf: #e66502;
+    --glnf-hov-err-brb-bf: #e66502;
     // The state without disabled, error and focused.
-    --gf-foc-brb-af: #2e7d32;
+    --glnf-foc-brb-af: #2e7d32;
     // The state without disabled and error, focused.
-    --gf-err-brb-af: #e65100;
+    --glnf-foc-err-brb-af: #e65100;
     // The state with disabled.
-    --gf-dis-brb-bf: #ab47bc;
+    --glnf-dis-brb-bf: #ab47bc;
 
     // ** Section "Fieldset" for "Outlined" mode. **
     // The state without disabled, error, hover, focused.
-    --gf-def-br-cl: #558b2f;
+    --glnf-def-br-cl: #558b2f;
     // The state without disabled, error, focused and with hover.
-    --gf-hov-br-cl: #1b5e20;
+    --glnf-hov-br-cl: #1b5e20;
     // The state without disabled, error and with focused.
-    --gf-foc-br-cl: #2e7d32;
+    --glnf-foc-br-cl: #2e7d32;
     // The state without disabled, hover, focused and error.
-    --gf-err-br-cl: #ef6c00;
+    --glnf-err-br-cl: #ef6c00;
     // The state without disabled, focused and error, hover.
-    --gf-hov-err-br-cl: #c45418;
+    --glnf-hov-err-br-cl: #c45418;
     // The state without disabled and error, focused.
-    --gf-foc-err-br-cl: #d85e01;
+    --glnf-foc-err-br-cl: #d85e01;
     // The state with disabled.
-    --gf-dis-br-cl: #ab47bc;
+    --glnf-dis-br-cl: #ab47bc;
 
     // Color for "HintOrError".
     // The state without error, focused and disabled.

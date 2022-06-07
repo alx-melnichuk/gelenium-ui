@@ -54,7 +54,7 @@ gln-input {
   }
 
   gln-hint-or-error {
-    padding-left: var(--gi-he-pd-lf, var(--he-pd-lf));
-    padding-right: var(--gi-he-pd-rg, var(--he-pd-rg));
+    padding-left: var(--gi-he-pd-lf, var(--glnfs-pd-lf));
+    padding-right: var(--gi-he-pd-rg, var(--glnfs-pd-rg));
   }
 }

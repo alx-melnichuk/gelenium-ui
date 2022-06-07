@@ -95,7 +95,7 @@ export class GlnFrameSizeDirective implements OnChanges {
     if (this.frameSizeValue > 0 && this.lineHeight > 0) {
       borderRadius = this.glnFrameSizePrepareData?.getBorderRadius(this.frameSizeValue, this.lineHeight) || null;
     }
-    HtmlElemUtil.setProperty(this.elementRef, '--br-rd', borderRadius);
+    HtmlElemUtil.setProperty(this.elementRef, '--glnfs-br-rd', borderRadius);
   }
 
   private modifyHorizontalPadding(): GlnFrameSizePaddingHorRes | null {
@@ -108,9 +108,9 @@ export class GlnFrameSizeDirective implements OnChanges {
       }
     }
     const left = paddingHorRes && paddingHorRes.left !== null ? paddingHorRes.left : null;
-    HtmlElemUtil.setProperty(this.elementRef, '--lbl-pd-lf', NumberUtil.str(left)?.concat('px') || null);
+    HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-lf', NumberUtil.str(left)?.concat('px') || null);
     const right = paddingHorRes && paddingHorRes.right !== null ? paddingHorRes.right : null;
-    HtmlElemUtil.setProperty(this.elementRef, '--lbl-pd-rg', NumberUtil.str(right)?.concat('px') || null);
+    HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-rg', NumberUtil.str(right)?.concat('px') || null);
 
     return paddingHorRes;
   }
@@ -120,9 +120,9 @@ export class GlnFrameSizeDirective implements OnChanges {
     if (this.frameSizeValue > 0 && this.lineHeight > 0) {
       paddingVerRes = this.glnFrameSizePrepareData?.getPaddingVer(this.frameSizeValue, this.lineHeight) || null;
       const top = paddingVerRes && paddingVerRes.top !== null ? paddingVerRes.top : null;
-      HtmlElemUtil.setProperty(this.elementRef, '--lbl-pd-tp', NumberUtil.str(top)?.concat('px') || null);
+      HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-tp', NumberUtil.str(top)?.concat('px') || null);
       const bottom = paddingVerRes && paddingVerRes?.bottom !== null ? paddingVerRes.bottom : null;
-      HtmlElemUtil.setProperty(this.elementRef, '--lbl-pd-bt', NumberUtil.str(bottom)?.concat('px') || null);
+      HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-bt', NumberUtil.str(bottom)?.concat('px') || null);
     }
     return paddingVerRes;
   }

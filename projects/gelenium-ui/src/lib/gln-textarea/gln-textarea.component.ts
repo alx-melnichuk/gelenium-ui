@@ -58,7 +58,7 @@ export const GLN_TEXTAREA_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_TEXTA
 })
 export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Validator, GlnNodeInternalValidator {
   @Input()
-  public id = 'gln_textarea_' + ++identifier;
+  public id = 'glnt_' + ++identifier;
   @Input()
   public label = '';
   @Input()
@@ -133,6 +133,7 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-textarea', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

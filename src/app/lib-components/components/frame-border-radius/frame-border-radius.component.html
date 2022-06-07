@@ -3,7 +3,7 @@
   <p>
     For components that use GlnFrame it is possible to change the border-radius
     css property.
-    This requires creating a css variable "--gf-br-rd" at the level of the component
+    This requires creating a css variable "--glnf-br-rd" at the level of the component
     or any parent element.
     The value of this css variable can be any valid (as described by
     <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">
@@ -13,7 +13,7 @@
   <span>For example:</span>
   <code><pre source="html">
 &lt;div&gt;
-  &lt;gln-input style="--gf-br-rd: 25px;"
+  &lt;gln-input style="--glnf-br-rd: 25px;"
     [(ngModel)]="inputData"
     label="Enter value"
     exterior="outlined"
@@ -22,7 +22,7 @@
 &lt;/div&gt;</pre></code>
   <span>Another example:</span>
   <code><pre source="html">
-&lt;div style="--gf-br-rd: 25px;"&gt;
+&lt;div style="--glnf-br-rd: 25px;"&gt;
   &lt;gln-input [(ngModel)]="inputData"
     label="Enter value"
     exterior="outlined"
@@ -34,7 +34,7 @@
   </p>
   <code><pre source="html">
 &lt;div&gt;
-  &lt;gln-input style="--gf-br-rd: 25px 25px 0 0;"
+  &lt;gln-input style="--glnf-br-rd: 25px 25px 0 0;"
     [(ngModel)]="inputData"
     label="Enter value"
     exterior="underline"
@@ -178,7 +178,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public borderRadius = 50;
-  public propRadius = '--gf-br-rd';
+  public propRadius = '--glnf-br-rd';
   public ratioOutlined = 0.58;
   public ratioUnderline = 0.4;
   public exterior05 = 'outlined';
@@ -294,7 +294,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public borderRadius = 50;
-  public propRadius = '--gf-br-rd';
+  public propRadius = '--glnf-br-rd';
   public ratioOutlined = 0.58;
   public ratioUnderline = 0.4;
   public exterior05 = 'outlined';
@@ -410,7 +410,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public borderRadius = 50;
-  public propRadius = '--gf-br-rd';
+  public propRadius = '--glnf-br-rd';
   public ratioOutlined = 0.58;
   public ratioUnderline = 0.4;
   public exterior05 = 'outlined';
@@ -526,7 +526,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public borderRadius = 50;
-  public propRadius = '--gf-br-rd';
+  public propRadius = '--glnf-br-rd';
   public ratioOutlined = 0.58;
   public ratioUnderline = 0.4;
   public exterior05 = 'outlined';
@@ -644,7 +644,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public borderRadius = 50;
-  public propRadius = '--gf-br-rd';
+  public propRadius = '--glnf-br-rd';
   public ratioOutlined = 0.58;
   public ratioUnderline = 0.4;
   public exterior05 = 'outlined';
@@ -764,7 +764,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public borderRadius = 50;
-  public propRadius = '--gf-br-rd';
+  public propRadius = '--glnf-br-rd';
   public ratioOutlined = 0.58;
   public ratioUnderline = 0.4;
   public exterior05 = 'outlined';
@@ -862,7 +862,7 @@ export class ButtonComponent &#123;
   <div class="app-group">
     <div class="app-elem">
 
-      <gln-input style="--gf-br-rd: 12.5px 0px 0px 12.5px;"
+      <gln-input style="--glnf-br-rd: 12.5px 0px 0px 12.5px;"
         formControlName="input06a"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel06 ? '':null"
@@ -889,7 +889,7 @@ export class ButtonComponent &#123;
 
   &lt;div class="app-elem"&gt;
 
-    &lt;gln-input style="--gf-br-rd: 12.5px 0px 0px 12.5px;"
+    &lt;gln-input style="--glnf-br-rd: 12.5px 0px 0px 12.5px;"
       formControlName="input06a"
       label="Enter value"
       [hiddenLabel]="isHiddenLabel06 ? '':null"
@@ -958,7 +958,7 @@ export class ButtonComponent &#123;
   <div class="app-group">
     <div class="app-elem">
 
-      <gln-input style="--gf-br-rd: 0px 12.5px 12.5px 0px;"
+      <gln-input style="--glnf-br-rd: 0px 12.5px 12.5px 0px;"
         formControlName="input06b"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel06 ? '':null"
@@ -985,7 +985,7 @@ export class ButtonComponent &#123;
 
   &lt;div class="app-elem"&gt;
 
-    &lt;gln-input style="--gf-br-rd: 0px 12.5px 12.5px 0px;"
+    &lt;gln-input style="--glnf-br-rd: 0px 12.5px 12.5px 0px;"
       formControlName="input06b"
       label="Enter value"
       [hiddenLabel]="isHiddenLabel06 ? '':null"
@@ -1054,7 +1054,7 @@ export class ButtonComponent &#123;
   <div class="app-group">
     <div class="app-elem">
 
-      <gln-input style="--gf-br-rd: 12.5px 0px 12.5px 0px;"
+      <gln-input style="--glnf-br-rd: 12.5px 0px 12.5px 0px;"
         formControlName="input06c"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel06 ? '':null"
@@ -1081,7 +1081,7 @@ export class ButtonComponent &#123;
 
   &lt;div class="app-elem"&gt;
 
-    &lt;gln-input style="--gf-br-rd: 12.5px 0px 12.5px 0px;"
+    &lt;gln-input style="--glnf-br-rd: 12.5px 0px 12.5px 0px;"
       formControlName="input06c"
       label="Enter value"
       [hiddenLabel]="isHiddenLabel06 ? '':null"
@@ -1150,7 +1150,7 @@ export class ButtonComponent &#123;
   <div class="app-group">
     <div class="app-elem">
 
-      <gln-input style="--gf-br-rd: 0px 12.5px 0px 12.5px;"
+      <gln-input style="--glnf-br-rd: 0px 12.5px 0px 12.5px;"
         formControlName="input06d"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel06 ? '':null"
@@ -1177,7 +1177,7 @@ export class ButtonComponent &#123;
 
   &lt;div class="app-elem"&gt;
 
-    &lt;gln-input style="--gf-br-rd: 0px 12.5px 0px 12.5px;"
+    &lt;gln-input style="--glnf-br-rd: 0px 12.5px 0px 12.5px;"
       formControlName="input06d"
       label="Enter value"
       [hiddenLabel]="isHiddenLabel06 ? '':null"
@@ -1246,7 +1246,7 @@ export class ButtonComponent &#123;
   <div class="app-group">
     <div class="app-elem">
 
-      <gln-input style="--gf-br-rd: 5% / 50%;"
+      <gln-input style="--glnf-br-rd: 5% / 50%;"
         formControlName="input06e"
         label="Enter value"
         [hiddenLabel]="isHiddenLabel06 ? '':null"
@@ -1273,7 +1273,7 @@ export class ButtonComponent &#123;
 
   &lt;div class="app-elem"&gt;
 
-    &lt;gln-input style="--gf-br-rd: 5% / 50%;"
+    &lt;gln-input style="--glnf-br-rd: 5% / 50%;"
       formControlName="input06e"
       label="Enter value"
       [hiddenLabel]="isHiddenLabel06 ? '':null"
@@ -1351,7 +1351,7 @@ export class ButtonComponent &#123;
       <style>
         .radius-f {
           /* FrameSize.middle [50px] / 3 */
-          --gf-br-rd: 16.66667px;
+          --glnf-br-rd: 16.66667px;
         }
 
         .radius-f div.glnf-border:before,
@@ -1391,7 +1391,7 @@ export class ButtonComponent &#123;
     &lt;style&gt;
       .radius-f &#123;
         /* FrameSize.middle [50px] / 3 */
-        --gf-br-rd: 16.66667px;
+        --glnf-br-rd: 16.66667px;
       &#125;
       .radius-f div.glnf-border:before,
       .radius-f div.glnf-border:after &#123;

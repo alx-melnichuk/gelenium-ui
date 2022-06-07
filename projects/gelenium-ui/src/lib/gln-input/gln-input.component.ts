@@ -61,7 +61,7 @@ export const GLN_INPUT_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_INPUT_CO
 })
 export class GlnInputComponent implements OnChanges, ControlValueAccessor, Validator, GlnNodeInternalValidator {
   @Input()
-  public id = 'gln_input_' + ++identifier;
+  public id = 'glni_' + ++identifier;
   @Input()
   public type: string = GlnInputType.text.valueOf();
   @Input()
@@ -139,6 +139,7 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-input', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

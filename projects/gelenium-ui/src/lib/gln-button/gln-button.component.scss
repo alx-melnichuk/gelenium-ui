@@ -19,19 +19,6 @@ gln-button {
   font-size: 0.875em; // 14px
   line-height: 1.75;
   
-  &[ext-c] {
-    --def-lbl-pd-tp: 0.375em; // 6px
-    --def-lbl-pd-lf: 1em; // 16px
-  }
-  &[ext-o] {
-    --def-lbl-pd-tp: 0.3125em; // 5px
-    --def-lbl-pd-lf: 0.9375em; // 15px
-  }
-  &[ext-t] {
-    --def-lbl-pd-tp: 0.375em; // 6px
-    --def-lbl-pd-lf: 0.5em; // 8px
-  }
-  
   &>[gln-clear] {
     appearance: none;
     margin: 0;
@@ -43,7 +30,7 @@ gln-button {
     -webkit-tap-highlight-color: transparent;
     align-items: center;
     background-color: transparent;
-    border-radius: var(--glnb-br-rd, var(--br-rd, 0.25em)); // 4px
+    border-radius: var(--glnb-br-rd, var(--glnfs-br-rd, 0.25em)); // 4px
     box-sizing: border-box;
     cursor: pointer;
     display: inline-flex;
@@ -64,8 +51,8 @@ gln-button {
     width: inherit;
 
     &>span, &>a {
-      padding-top: var(--glnb-lbl-pd-tp, var(--lbl-pd-tp, var(--def-lbl-pd-tp)));
-      padding-bottom: var(--glnb-lbl-pd-bt, var(--lbl-pd-bt, var(--def-lbl-pd-tp)));
+      padding-top: var(--glnb-lbl-pd-tp, var(--glnfs-pd-tp, 0.3125em)); // 5px
+      padding-bottom: var(--glnb-lbl-pd-bt, var(--glnfs-pd-bt, 0.3125em)); // 5px
     }
   }
   &:not([dis])>[gln-btn] {
@@ -117,6 +104,7 @@ gln-button {
         0px 3px 14px 2px rgb(0 0 0 / 12%);
     }
   }
+
   // Exterior: "outlined"
   &[ext-o]>[gln-btn] {
     border-width: 1px;
@@ -136,6 +124,7 @@ gln-button {
       border-color: var(--glnb-o-dis-br-cl, var(--glnb-dis-cl2));
     }
   }
+  
   // Exterior: "text"
   &[ext-t] {
     &:not([dis])>[gln-btn] {
@@ -175,10 +164,10 @@ gln-button {
       order: 1;
     }
     &>span[orn-lf]:empty~.glnb-elem-pd-hor {
-      padding-left: var(--glnb-lbl-pd-lf, var(--lbl-pd-lf, var(--def-lbl-pd-lf)));
+      padding-left: var(--glnb-lbl-pd-lf, var(--glnfs-pd-lf, 0.9375em)); // 15px
     }
     &>span[orn-rg]:empty~.glnb-elem-pd-hor {
-      padding-right: var(--glnb-lbl-pd-rg, var(--lbl-pd-rg, var(--def-lbl-pd-lf)));
+      padding-right: var(--glnb-lbl-pd-rg, var(--glnfs-pd-rg, 0.9375em)); // 15px
     }
   }
 }
