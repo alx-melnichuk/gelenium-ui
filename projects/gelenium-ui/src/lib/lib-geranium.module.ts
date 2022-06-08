@@ -7,4 +7,8 @@ import { LibGeraniumService } from './lib-geranium.service';
   exports: [],
   providers: [LibGeraniumService],
 })
-export class LibGeraniumModule {}
+export class LibGeraniumModule {
+  constructor() {
+    console.log(`LibGeraniumModule();`);
+  }
+}

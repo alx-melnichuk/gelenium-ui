@@ -23,4 +23,8 @@ import { GlnTextareaComponent } from './gln-textarea.component';
   ],
   exports: [GlnTextareaComponent],
 })
-export class GlnTextareaModule {}
+export class GlnTextareaModule {
+  constructor() {
+    console.log(`GlnTextareaModule();`);
+  }
+}
