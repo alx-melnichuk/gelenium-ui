@@ -55,7 +55,7 @@ gln-textarea {
   }
 
   gln-hint-or-error {
-    padding-left: var(--gt-he-pd-lf, var(--glnfs-pd-lf));
-    padding-right: var(--gt-he-pd-rg, var(--glnfs-pd-rg)); 
+    padding-left: var(--glnt-he-pd-lf, var(--glnfs-pd-lf));
+    padding-right: var(--glnt-he-pd-rg, var(--glnfs-pd-rg)); 
   }
 }

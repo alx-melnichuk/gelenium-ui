@@ -1,9 +1,7 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from 'src/app/lib-core/constants/constants';
-import { GlnButtonConfig } from 'projects/gelenium-ui/src/lib/gln-button/gln-button-config.interface';
-import { GlnButtonExterior } from 'projects/gelenium-ui/src/lib/gln-button/gln-button-exterior.interface';
-import { GlnFrameSize } from 'projects/gelenium-ui/src/lib/_interfaces/gln-frame-size.interface';
+import { GlnButtonConfig, GlnButtonExterior, GlnFrameSize } from 'gelenium-ui';
 
 @Component({
   selector: 'app-button-palette',

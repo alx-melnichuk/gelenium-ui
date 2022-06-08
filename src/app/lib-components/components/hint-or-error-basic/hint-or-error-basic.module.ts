@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GlnHintOrErrorModule } from 'projects/gelenium-ui/src/lib/gln-hint-or-error/gln-hint-or-error.module';
+import { GlnHintOrErrorModule } from 'gelenium-ui';
 
 import { HintOrErrorBasicComponent } from './hint-or-error-basic.component';
 

@@ -5,7 +5,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GlnInputModule } from 'projects/gelenium-ui/src/lib/gln-input/gln-input.module';
+import { GlnInputModule } from 'gelenium-ui';
 
 import { FramePaletteComponent } from './frame-palette.component';
 

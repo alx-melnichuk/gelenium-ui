@@ -14,8 +14,7 @@ import {
   LABEL_UNDERLINE,
 } from 'src/app/lib-core/constants/constants';
 
-import { GlnFrameConfig } from 'projects/gelenium-ui/src/lib/_interfaces/gln-frame-config.interface';
-import { GlnFrameSize, GlnFrameSizeUtil } from 'projects/gelenium-ui/src/lib/_interfaces/gln-frame-size.interface';
+import { GlnFrameConfig, GlnFrameSize, GlnFrameSizeUtil } from 'gelenium-ui';
 
 @Component({
   selector: 'app-frame-border-radius',

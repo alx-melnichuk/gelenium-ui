@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GlnButtonModule } from 'projects/gelenium-ui/src/lib/gln-button/gln-button.module';
+import { GlnButtonModule } from 'gelenium-ui';
 
 import { ButtonConfigComponent } from './button-config.component';
 

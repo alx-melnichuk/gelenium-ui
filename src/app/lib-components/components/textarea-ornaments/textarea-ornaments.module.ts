@@ -5,7 +5,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GlnTextareaModule } from 'projects/gelenium-ui/src/lib/gln-textarea/gln-textarea.module';
+import { GlnTextareaModule } from 'gelenium-ui';
 
 import { TextareaOrnamentsComponent } from './textarea-ornaments.component';
 

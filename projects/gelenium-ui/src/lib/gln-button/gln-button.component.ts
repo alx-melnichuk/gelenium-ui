@@ -22,7 +22,6 @@ import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.co
 import { GlnFrameSize, GlnFrameSizeUtil } from '../_interfaces/gln-frame-size.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { HtmlSettingUtil } from '../_utils/html-setting.util';
 
 import { GlnButtonConfig } from './gln-button-config.interface';
 import { GlnLinkDirective } from './gln-link.directive';
@@ -86,7 +85,8 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
     }
     if (changes.isDisabled) {
       this.isDisabled2 = BooleanUtil.init(this.isDisabled);
-      HtmlSettingUtil.disabled(this.renderer, this.hostRef, this.isDisabled2);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabled2 || false);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
     }
     if (changes.isNoRipple) {
       this.isNoRipple2 = BooleanUtil.init(this.isNoRipple);
@@ -116,12 +116,12 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
 
   public doFocus(): void {
     this.isFocused = true;
-    HtmlSettingUtil.focused(this.renderer, this.hostRef, this.isFocused);
+    this.focused(this.renderer, this.hostRef, this.isFocused);
   }
 
   public doBlur(): void {
     this.isFocused = false;
-    HtmlSettingUtil.focused(this.renderer, this.hostRef, this.isFocused);
+    this.focused(this.renderer, this.hostRef, this.isFocused);
   }
 
   // ** Private API **
@@ -130,5 +130,10 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
     HtmlElemUtil.setAttr(this.renderer, elem, 'linkClear', '');
     HtmlElemUtil.setClass(this.renderer, elem, 'glnb-label', true);
     HtmlElemUtil.setClass(this.renderer, elem, 'glnb-elem-pd-hor', true);
+  }
+
+  private focused(renderer: Renderer2, elem: ElementRef<HTMLElement> | null, value: boolean | null): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-focused', value || false);
+    HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
   }
 }

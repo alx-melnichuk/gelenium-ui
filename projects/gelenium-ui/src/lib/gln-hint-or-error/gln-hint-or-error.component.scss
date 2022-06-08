@@ -15,20 +15,25 @@ gln-hint-or-error {
   text-overflow: ellipsis;
   box-sizing: border-box;
 
-  // The state without error, focused and disabled.
-  &:not([err]):not([foc]):not([dis]) {
-    color: var(--ghe-def-cl, var(--glnf-def-cl));
-  } // The state with error.
-  &[err]:not([dis]) {
-    color: var(--ghe-err-cl, var(--glnf-err-cl2));
-  } // The state with focused but without error.
-  &[foc]:not([err]) {
-    color: var(--ghe-hov-cl, var(--glnf-hov-cl));
-  } // The state with focused but with error.
-  &[foc][err] {
-    color: var(--ghe-foc-err-cl, var(--glnf-err-cl));
+  &:not([dis]) {
+    &:not([err]) { // The state without error, focused and disabled.
+      &:not([foc]) {
+        color: var(--glnhe-def-cl, var(--glnf-def-cl));
+      } // The state with focused but without error.
+      &[foc] {
+        color: var(--glnhe-foc-cl, var(--glnf-hov-cl));
+      }
+    }
+    &[err] { // The state with error.
+      &:not([foc]) {
+        color: var(--glnhe-err-cl, var(--glnf-err-cl2));
+      } // The state with focused but with error.
+      &[foc] {
+        color: var(--glnhe-foc-err-cl, var(--glnf-err-cl));
+      }
+    }
   } // The state with disabled but without error.
   &[dis] {
-    color: var(--ghe-dis-cl, var(--glnf-dis-cl));
+    color: var(--glnhe-dis-cl, var(--glnf-dis-cl));
   }
 }

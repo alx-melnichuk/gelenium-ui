@@ -26,7 +26,7 @@ let identifier = 0;
 })
 export class GlnTouchRippleComponent implements OnChanges, OnInit {
   @Input()
-  public id = 'gln_touch_ripple_' + ++identifier;
+  public id = 'glntr_' + ++identifier;
   @Input()
   public isCenter: string | null = null;
   @Input()

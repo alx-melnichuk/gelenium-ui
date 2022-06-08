@@ -5,8 +5,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GlnInputModule } from 'projects/gelenium-ui/src/lib/gln-input/gln-input.module';
-import { GlnRegexModule } from 'projects/gelenium-ui/src/lib/directives/gln-regex/gln-regex.module';
+import { GlnInputModule, GlnRegexModule } from 'gelenium-ui';
 
 import { RegexCheckBasicComponent } from './regex-check-basic.component';
 

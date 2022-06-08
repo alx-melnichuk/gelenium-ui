@@ -22,6 +22,21 @@
   // The color of the label and border in the state is disabled.
   --glnf-dis-cl: #787878;
 
+  // Background color for "underline" mode.
+  --glnf-def2-cl: rgba(0, 0, 0, 0.06);
+  // The state without disabled, error, focused and with hover.
+  --glnf-hov2-cl: #1976d20b;
+  // The state without disabled, error and with focused.
+  --glnf-foc2-cl: #1976d20f;
+  // The state without disabled, hover, focused and error.
+  --glnf-err2-cl: #d32f2f0f;
+  // The state without disabled, focused and error, hover.
+  --glnf-hov2-err2-cl: #d32f2f0b;
+  // The state without disabled and error, focused.
+  --glnf-foc2-err2-cl: #ce51512d;
+  // The state with disabled.
+  --glnf-dis2-cl: #7878783b;
+
   // For "frame" - outlined
   // The default border color for "outlined" mode.
   --glnf-def-cl2: rgba(0, 0, 0, 0.23);
@@ -167,33 +182,32 @@ gln-frame {
     &:not([err]) {
       // The state without disabled, error, hover, focused.
       &:not(:hover):not(:focus-within)>[dcr-bg] {
-        background-color: var(--glnf-def-bg-cl, rgba(0, 0, 0, 0.06));
+        background-color: var(--glnf-def-bg-cl, var(--glnf-def2-cl));
       } // The state without disabled, error, focused and with hover.
       &:hover:not(:focus-within)>[dcr-bg] {
-        background-color: var(--glnf-hov-bg-cl, #1976d20b);
+        background-color: var(--glnf-hov-bg-cl, var(--glnf-hov2-cl));
       } // The state without disabled, error and with focused.
       &:focus-within>[dcr-bg] {
-        background-color: var(--glnf-foc-bg-cl, #1976d20f);
+        background-color: var(--glnf-foc-bg-cl, var(--glnf-foc2-cl));
       }
     }
     &[err] {
       // The state without disabled, hover, focused and error.
       &:not(:hover):not(:focus-within)>[dcr-bg] {
-        background-color: var(--glnf-err-bg-cl, #d32f2f0f);
+        background-color: var(--glnf-err-bg-cl, var(--glnf-err2-cl));
       } // The state without disabled, focused and error, hover.
       &:hover:not(:focus-within)>[dcr-bg] {
-        background-color: var(--glnf-hov-err-bg-cl, #d32f2f0b);
+        background-color: var(--glnf-hov-err-bg-cl, var(--glnf-hov2-err2-cl));
       } // The state without disabled and error, focused.
       &:focus-within>[dcr-bg] {
-        background-color: var(--glnf-foc-err-bg-cl, #ce51512d);
+        background-color: var(--glnf-foc-err-bg-cl, var(--glnf-foc2-err2-cl));
       }
     }
   }
   // The state with disabled.
   &[dis]>[dcr-bg] {
-    background-color: var(--glnf-dis-bg-cl, #7878783b);
+    background-color: var(--glnf-dis-bg-cl, var(--glnf-dis2-cl));
   }
-
 
   // ** Section "div.glnf-border" for "Outlined" and "Standard" mode. **
   &>[dcr-bb] {

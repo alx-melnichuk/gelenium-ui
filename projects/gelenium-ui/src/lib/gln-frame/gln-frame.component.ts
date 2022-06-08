@@ -16,7 +16,6 @@ import {
 import { GlnFrameConfig } from '../_interfaces/gln-frame-config.interface';
 import { GlnInputExterior, GlnInputExteriorUtil } from '../_interfaces/gln-input-exterior.interface';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { HtmlSettingUtil } from '../_utils/html-setting.util';
 
 export const GLN_FRAME_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_FRAME_CONFIG');
 
@@ -91,14 +90,16 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.settingHiddenLabel(this.hostRef, this.innHiddenLabel);
     }
     if (changes.isDisabled) {
-      HtmlSettingUtil.disabled(this.renderer, this.hostRef, this.isDisabled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabled || false);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
     }
     if (changes.isFilled) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnf-filled', this.isFilled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);
     }
     if (changes.isError) {
-      HtmlSettingUtil.error(this.renderer, this.hostRef, this.isError);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-error', this.isError || false);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isError ? '' : null);
     }
     if (changes.label || changes.isRequired) {
       const isIndent = !!this.label || this.isRequired;
@@ -135,7 +136,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     HtmlElemUtil.setAttr(this.renderer, elem, 'ext-s', GlnInputExteriorUtil.isStandard(exterior) ? '' : null);
 
     const isBorder = GlnInputExteriorUtil.isStandard(exterior) || GlnInputExteriorUtil.isUnderline(exterior);
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-border', isBorder);
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-bottom-frame', isBorder);
   }
 
   private settingLabelShrink(elem: ElementRef<HTMLElement>, isLabelShrink: boolean): void {

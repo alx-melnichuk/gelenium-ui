@@ -38,7 +38,6 @@ import { GlnFrameConfig } from '../_interfaces/gln-frame-config.interface';
 import { GlnFrameSizePaddingVerHorRes } from '../_interfaces/gln-frame-size-prepare-data.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { HtmlSettingUtil } from '../_utils/html-setting.util';
 
 import { GlnInputType, GlnInputTypeUtil } from '../gln-input/gln-input.interface';
 
@@ -192,7 +191,6 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
     } else {
       this.formGroup.enable();
     }
-    HtmlSettingUtil.disabled(this.renderer, this.hostRef, isDisabled);
   }
 
   // ** ControlValueAccessor - finish **
@@ -233,13 +231,13 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
 
   public doFocus(): void {
     this.isFocused = true;
-    HtmlSettingUtil.focused(this.renderer, this.hostRef, this.isFocused);
+    this.focuse(this.renderer, this.hostRef, this.isFocused);
     this.focused.emit();
   }
 
   public doBlur(): void {
     this.isFocused = false;
-    HtmlSettingUtil.focused(this.renderer, this.hostRef, this.isFocused);
+    this.focuse(this.renderer, this.hostRef, this.isFocused);
     this.isFilled = !!this.formControl.value;
     this.blured.emit();
   }
@@ -271,5 +269,10 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
       newValidator.push(Validators.maxLength(maxLength));
     }
     this.formControl.setValidators(newValidator);
+  }
+
+  private focuse(renderer: Renderer2, elem: ElementRef<HTMLElement>, value: boolean): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-focused', value || false);
+    HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
   }
 }

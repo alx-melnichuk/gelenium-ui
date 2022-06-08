@@ -3,10 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from 'src/app/lib-core/constants/constants';
 
-import { GlnFrameSize } from 'projects/gelenium-ui/src/lib/_interfaces/gln-frame-size.interface';
-import { GlnFrameConfig } from 'projects/gelenium-ui/src/lib/_interfaces/gln-frame-config.interface';
-import { GlnInputExterior } from 'projects/gelenium-ui/src/lib/_interfaces/gln-input-exterior.interface';
-import { GLN_FRAME_CONFIG } from 'projects/gelenium-ui/src/lib/gln-frame/gln-frame.component';
+import { GlnFrameSize, GlnFrameConfig, GlnInputExterior, GLN_FRAME_CONFIG } from 'gelenium-ui';
 
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 

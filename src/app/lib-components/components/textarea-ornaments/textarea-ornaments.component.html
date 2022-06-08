@@ -213,10 +213,15 @@
         </mat-tab>
         <mat-tab [label]="labelTs">
           <code><pre source="ts">
-import &#123; ChangeDetectionStrategy, Component, Input, ViewEncapsulation &#125; from '@angular/core';
-import &#123; FormControl, FormGroup &#125; from '@angular/forms';
-import &#123; GlnFrameConfig &#125; from 'projects/gelenium-ui/src/lib/interfaces/gln-frame-config.interface';
-import &#123; OrnamAlign &#125; from 'projects/gelenium-ui/src/lib/interfaces/gln-ornam-align.interface';
+import &#123;
+ ChangeDetectionStrategy, Component, Input, ViewEncapsulation
+ &#125; from '@angular/core';
+import &#123;
+ FormControl, FormGroup
+ &#125; from '@angular/forms';
+import &#123;
+ GlnFrameConfig, OrnamAlign
+ &#125; from 'gelenium-ui';
 
 @Component(&#123;
   selector: 'app-input',
