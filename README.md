@@ -31,10 +31,8 @@ It comes in three versions:
 - standard (exterior="standard")
 
  [img1_input.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_input.png)
-![img1_input.png](~/img1_input.png)
-![img1_input.png](~img1_input.png)
-![img1_input.png](~/master/img1_input.png)
-![img1_input.png](~/gelenium-ui/master/img1_input.png)
+![img1_input.png](/img1_input.png)
+![img1_input.png](img1_input.png)
                 
 The element's label has an animation and smoothly transitions into a placeholder.
 
