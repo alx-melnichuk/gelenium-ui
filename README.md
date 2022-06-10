@@ -88,4 +88,4 @@ An element with an "outlined" appearance.
 An element with an "underline" appearance.
 ![img1_br_rd_und.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_br_rd_und.png)
 
-There are also other features of these components that can be seen on the demo site.
+There are also other features of these components that can be seen on the demo site [gelenium-ui-demo](https://alx-melnichuk.github.io/gelenium-ui-demo/).
