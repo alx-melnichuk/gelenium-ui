@@ -1,11 +1,9 @@
 # Gelenium-UI
 
-Version: 0.1.1
-
 Library of visual components in the style of "Material UI".
 But it is also more flexible.
 
-Demo site: [gelenium-ui-demo](https://alx-melnichuk.github.io/gelenium-ui-demo/).
+Demo site: [gelenium-ui](https://alx-melnichuk.github.io/gelenium-ui/).
 This site also has examples of use.
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
@@ -91,4 +89,4 @@ An element with an "outlined" appearance.
 An element with an "underline" appearance.
 ![img1_br_rd_und.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/img1_br_rd_und.png)
 
-There are also other features of these components that can be seen on the demo site [gelenium-ui-demo](https://alx-melnichuk.github.io/gelenium-ui-demo/).
+There are also other features of these components that can be seen on the demo site.
