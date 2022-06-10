@@ -35,7 +35,7 @@ The element's label has an animation and smoothly transitions into a placeholder
 It is possible to display an error state.
 
 An element with an "outlined" appearance.
-![img1_err.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_err_otl.png)
+![img1_err_otl.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_err_otl.png)
 
 An element with an "underline" appearance.
 ![img1_err_und.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_err_und.png)
