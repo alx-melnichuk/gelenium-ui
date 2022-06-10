@@ -1,24 +1,37 @@
-# Ggelenium-UI
+# Gelenium-UI
+
+Library of visual components in the style of "Material UI".
+But it is also more flexible.
+
+Demo site: [gelenium-ui-demo](https://alx-melnichuk.github.io/gelenium-ui-demo/).
+This site also has examples of use.
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name --project gelenium-ui` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project gelenium-ui`.
-> Note: Don't forget to add `--project gelenium-ui` or else it will be added to the default project in your `angular.json` file. 
+```bash
+# using npm
+$ npm install gelenium-ui
 
-## Build
+# using yarn
+$ yarn add gelenium-ui
+```
 
-Run `ng build gelenium-ui` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Component: "GlnInput"
 
-## Publishing
+### Basic
+The GlnInput component is a form control. It includes: label, input and help text.
+It comes in three versions:
 
-After building your library with `ng build gelenium-ui`, go to the dist folder `cd dist/gelenium-ui` and run `npm publish`.
+- with an outline (exterior="outlined" - default)
+- with a fill (exterior="underline")
+- standard (exterior="standard")
 
-## Running unit tests
+![img1_input.png](img1_input.png)
 
-Run `ng test gelenium-ui` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The element's label has an animation and smoothly transitions into a placeholder.
 
-## Further help
+An ornament (text or picture) can be placed at the beginning or at the end of an element.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![img1_orn.png](img1_orn.png)
