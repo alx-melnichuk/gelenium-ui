@@ -32,6 +32,60 @@ It comes in three versions:
                 
 The element's label has an animation and smoothly transitions into a placeholder.
 
+It is possible to display an error state.
+
+An element with an "outlined" appearance.
+![img1_err.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_err_otl.png)
+
+An element with an "underline" appearance.
+![img1_err_und.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_err_und.png)
+
+An element with an "standard" appearance.
+![img1_err_snd.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_err_snd.png)
+
+### Ornament
+
 An ornament (text or picture) can be placed at the beginning or at the end of an element.
 
-![img1_orn.png](/alx-melnichuk/gelenium-ui/blob/master/img1_orn.png?raw=true)
+![img1_ornam.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_ornam.png)
+
+
+### Frame Size
+
+The element's height is set according to the value of the frameSize parameter. 
+All padding and offsets are determined by this variable and the font size.
+
+The "frameSize" property takes the following values:
+- "short" - sets the height to 38px;
+- "small" - sets the height to 44px;
+- "middle" - sets the height to 50px (default);
+- "wide" - sets the height to 56px;
+- "large" - sets the height to 62px;
+- "huge" - sets the height to 68px;
+
+The font size for native input and label is determined from the parent container.
+The size of the font can be defined with the css-style for the "gln-input" tag.
+We can change the font size at the gln-input tag level, but the height of the element will not change.
+
+The height of the element remains the same even when the font size is changed (from font-size: 10px to 26px).
+
+It is possible to specify the height of an element. To do this, in the "config.frameSizeValue" property, we define the required height in pixels.
+
+An element with an "outlined" appearance.
+![img1_frm_otl.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_frm_otl.png)
+
+An element with an "underline" appearance.
+![img1_frm_und.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_frm_und.png)
+
+
+### Border radius
+
+For these components, you can change the border radius.
+
+An element with an "outlined" appearance.
+![img1_br_rd_otl.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_br_rd_otl.png)
+
+An element with an "underline" appearance.
+![img1_br_rd_und.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_br_rd_und.png)
+
+There are also other features of these components that can be seen on the demo site.
