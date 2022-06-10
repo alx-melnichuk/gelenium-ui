@@ -15,8 +15,4 @@ import { LmComponentsRoutingModule } from './lm-components-routing.module';
   imports: [CommonModule, MatExpansionModule, FormsModule, SiteSchemeModule, LibComponentsModule, LmComponentsRoutingModule],
   exports: [LmComponentsComponent],
 })
-export class LmComponentsModule {
-  constructor() {
-    console.log('LmComponentsModule();');
-  }
-}
+export class LmComponentsModule {}

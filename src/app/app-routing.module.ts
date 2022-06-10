@@ -23,8 +23,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-  constructor() {
-    console.log('AppRoutingModule();');
-  }
-}
+export class AppRoutingModule {}

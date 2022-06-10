@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { LibGeraniumService } from './lib-geranium.service';
 
 @NgModule({
@@ -7,8 +8,4 @@ import { LibGeraniumService } from './lib-geranium.service';
   exports: [],
   providers: [LibGeraniumService],
 })
-export class LibGeraniumModule {
-  constructor() {
-    console.log(`LibGeraniumModule();`);
-  }
-}
+export class LibGeraniumModule {}

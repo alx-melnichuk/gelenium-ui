@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { GlnFrameConfig, GlnOrnamAlign, GlnOrnamAlignUtil } from 'gelenium-ui';
+import { GlnFrameConfig, GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from 'gelenium-ui';
 
 import {
   LABEL_CSS,
@@ -58,7 +58,7 @@ export class InputOrnamentsComponent {
   public isBtnEyeCrossed05g = false;
   public isBtnEyeCrossed05h = false;
   public config05h: GlnFrameConfig = {
-    ornamRgAlign: GlnOrnamAlign.baseline,
+    ornamRgAlign: GlnFrameOrnamAlign.baseline,
   };
   public ornamLfAlign05 = 'default';
   public ornamRgAlign05 = 'default';
@@ -69,11 +69,11 @@ export class InputOrnamentsComponent {
     this.changeConfig05(this.convert(this.ornamLfAlign05), this.convert(this.ornamRgAlign05));
   }
 
-  public convert(ornamAlign: string | null): GlnOrnamAlign {
-    return GlnOrnamAlignUtil.convert(ornamAlign) || GlnOrnamAlign.default;
+  public convert(ornamAlign: string | null): GlnFrameOrnamAlign {
+    return GlnFrameOrnamAlignUtil.convert(ornamAlign) || GlnFrameOrnamAlign.default;
   }
 
-  public changeConfig05(ornamLfAlign: GlnOrnamAlign | undefined, ornamRgAlign: GlnOrnamAlign | undefined): void {
+  public changeConfig05(ornamLfAlign: GlnFrameOrnamAlign | undefined, ornamRgAlign: GlnFrameOrnamAlign | undefined): void {
     this.config05 = { ornamLfAlign, ornamRgAlign };
   }
 }

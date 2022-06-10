@@ -58,10 +58,10 @@ export class GlnTouchRippleComponent implements OnChanges, OnInit {
       const checkRelative = getComputedStyle(parentElement).getPropertyValue('position') === 'relative';
       const checkOverflow = getComputedStyle(parentElement).getPropertyValue('overflow') === 'hidden';
       if (!checkRelative) {
-        console.log('The parent element must have "position: relative".');
+        throw new Error(`The parent element must have "position: relative".`);
       }
       if (!checkOverflow) {
-        console.log('The parent element must have "overflow: hidden".');
+        throw new Error(`The parent element must have "overflow: hidden".`);
       }
       this.checkParentSuccessful = checkRelative && checkOverflow;
     }

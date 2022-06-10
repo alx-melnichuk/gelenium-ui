@@ -1,6 +1,6 @@
 import { AfterContentInit, Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 
-import { GlnOrnamAlign, GlnOrnamAlignUtil } from '../../_interfaces/gln-ornam-align.interface';
+import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from './gln-frame-ornam-align.interface';
 import { HtmlElemUtil } from '../../_utils/html-elem.util';
 import { NumberUtil } from '../../_utils/number.util';
 
@@ -43,11 +43,11 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
       this.isInit = false;
     }
     if (changes.glnFrameOrnamentLfAlign && this.ornamentLfElemRef) {
-      const ornamLfAlign2 = GlnOrnamAlignUtil.convert(this.glnFrameOrnamentLfAlign || null) || GlnOrnamAlign.default;
+      const ornamLfAlign2 = GlnFrameOrnamAlignUtil.convert(this.glnFrameOrnamentLfAlign || null) || GlnFrameOrnamAlign.default;
       HtmlElemUtil.setAttr(this.renderer, this.ornamentLfElemRef, ATTR_ORN_LF, ornamLfAlign2.toString());
     }
     if (changes.glnFrameOrnamentRgAlign && this.ornamentRgElemRef) {
-      const ornamRgAlign2 = GlnOrnamAlignUtil.convert(this.glnFrameOrnamentRgAlign || null) || GlnOrnamAlign.default;
+      const ornamRgAlign2 = GlnFrameOrnamAlignUtil.convert(this.glnFrameOrnamentRgAlign || null) || GlnFrameOrnamAlign.default;
       HtmlElemUtil.setAttr(this.renderer, this.ornamentRgElemRef, ATTR_ORN_RG, ornamRgAlign2.toString());
     }
   }

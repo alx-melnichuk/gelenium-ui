@@ -13,8 +13,4 @@ import { GlnLinkDirective } from './gln-link.directive';
   imports: [CommonModule, GlnFrameExteriorButtonModule, GlnFrameSizeModule, GlnTouchRippleModule],
   exports: [GlnButtonComponent, GlnLinkDirective],
 })
-export class GlnButtonModule {
-  constructor() {
-    console.log(`GlnButtonModule();`);
-  }
-}
+export class GlnButtonModule {}

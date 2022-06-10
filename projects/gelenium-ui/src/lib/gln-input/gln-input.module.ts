@@ -23,8 +23,4 @@ import { GlnInputComponent } from './gln-input.component';
   ],
   exports: [GlnInputComponent],
 })
-export class GlnInputModule {
-  constructor() {
-    console.log(`GlnInputModule();`);
-  }
-}
+export class GlnInputModule {}
