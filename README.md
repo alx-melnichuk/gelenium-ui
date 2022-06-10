@@ -1,5 +1,7 @@
 # Gelenium-UI
 
+Version: 0.1.1
+
 Library of visual components in the style of "Material UI".
 But it is also more flexible.
 
@@ -28,7 +30,11 @@ It comes in three versions:
 - with a fill (exterior="underline")
 - standard (exterior="standard")
 
-![img1_input.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_input.png)
+ [img1_input.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/master/img1_input.png)
+![img1_input.png](~/img1_input.png)
+![img1_input.png](~img1_input.png)
+![img1_input.png](~/master/img1_input.png)
+![img1_input.png](~/gelenium-ui/master/img1_input.png)
                 
 The element's label has an animation and smoothly transitions into a placeholder.
 
