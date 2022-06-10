@@ -28,10 +28,10 @@ It comes in three versions:
 - with a fill (exterior="underline")
 - standard (exterior="standard")
 
-![img1_input.png](img1_input.png)
+![img1_input.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/main/img1_input.png)
 
 The element's label has an animation and smoothly transitions into a placeholder.
 
 An ornament (text or picture) can be placed at the beginning or at the end of an element.
 
-![img1_orn.png](img1_orn.png)
+![img1_orn.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/main/img1_orn.png)

@@ -1,32 +1,37 @@
-
 # Gelenium-UI
 
+Library of visual components in the style of "Material UI".
+But it is also more flexible.
 
+Demo site: [gelenium-ui-demo](https://alx-melnichuk.github.io/gelenium-ui-demo/).
+This site also has examples of use.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.11.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
 
+## Installation
 
+```bash
+# using npm
+$ npm install gelenium-ui
 
-## Development server
+# using yarn
+$ yarn add gelenium-ui
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Component: "GlnInput"
 
-## Code scaffolding
+### Basic
+The GlnInput component is a form control. It includes: label, input and help text.
+It comes in three versions:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- with an outline (exterior="outlined" - default)
+- with a fill (exterior="underline")
+- standard (exterior="standard")
 
-## Build
+![img1_input.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/main/img1_input.png)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+The element's label has an animation and smoothly transitions into a placeholder.
 
-## Running unit tests
+An ornament (text or picture) can be placed at the beginning or at the end of an element.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![img1_orn.png](https://raw.githubusercontent.com/alx-melnichuk/gelenium-ui/main/img1_orn.png)
