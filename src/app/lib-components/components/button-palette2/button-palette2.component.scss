@@ -1,0 +1,203 @@
+/*# sourceURL=button-palette2.component.scss */
+
+app-button-palette2 {
+  display: block;
+
+  .bp-items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .bp-items > :first-child {
+    margin-left: 1%;
+  }
+  .bp-items > :not(first-child) {
+    margin-left: 5%;
+  }
+
+  // ** Style: bstrap "bs-btn" **
+
+  .gln-button.bs-btn {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    --glnb-lbl-pd-lf: 0.75rem;
+    --glnb-lbl-pd-rg: 0.75rem;
+  }
+  .gln-button.bs-btn:not(.gln-disabled)>.gln-btn {
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  }
+  .gln-button.bs-btn.gln-disabled>.gln-btn {
+    opacity: .65;
+  }
+  .gln-button.bs-btn:not(.gln-disabled)>.gln-btn:active,
+  .gln-button.bs-btn:not(.gln-disabled).active>.gln-btn {
+    background-color: var(--bs-act-bg-cl);
+  }
+  .gln-button.bs-btn:not(.gln-disabled)>.gln-btn:focus-within,
+  .gln-button.bs-btn:not(.gln-disabled).focus>.gln-btn {
+    box-shadow: 0 0 0 0.2rem var(--bs-foc-bs-cl);
+  }
+
+  // ** Style: bstrap "bs-btn-contained" **
+
+  .gln-button.bs-btn-contained:not(.gln-disabled)>.gln-btn:focus-within,
+  .gln-button.bs-btn-contained:not(.gln-disabled).focus>.gln-btn {
+    background-color: var(--bs-c-foc-bg-cl);
+  }
+
+  // ** Style: bstrap "bs-btn-outline" **
+
+  .gln-button.bs-btn-outline:not(.gln-disabled)>.gln-btn:hover {
+    color: var(--bs-o-hov-cl);
+  }
+  .gln-button.bs-btn-outline:not(.gln-disabled)>.gln-btn:active,
+  .gln-button.bs-btn-outline:not(.gln-disabled).active>.gln-btn {
+    color: var(--bs-o-act-cl);
+  }
+
+  // ** Style: bstrap "Primary" **
+
+  .gln-button.bs-btn-contained.bs-primary {
+    // Exterior: "contained"
+    --glnb-c-def-cl: #fff;
+    --glnb-c-def-bg-cl: #007bff;
+    // :hover
+    --glnb-c-hov-bg-cl: #0069d9;
+    // :active
+    --bs-act-bg-cl: #0062cc;
+    // :focus
+    --bs-c-foc-bg-cl: #0069d9;
+    --bs-foc-bs-cl: rgb(38 143 255 / 50%);
+    // disabled
+    --glnb-c-dis-cl: var(--glnb-c-def-cl);
+    --glnb-c-dis-bg-cl:var(--glnb-c-def-bg-cl);
+  }
+
+  .gln-button.bs-btn-outline.bs-primary {
+    // Exterior: "outlined"
+    --glnb-o-def-cl: #007bff;
+    --glnb-o-def-br-cl: #007bff;
+    // :hover
+    --bs-o-hov-cl: #fff;
+    --glnb-o-hov-bg-cl: #007bff;
+    --glnb-o-hov-br-cl: #007bff;
+    // :active
+    --bs-o-act-cl: #fff;
+    --bs-act-bg-cl: #007bff;
+    // :focus
+    --bs-foc-bs-cl: rgb(0 123 255 / 50%);
+    // disable
+    --glnb-o-dis-cl: var(--glnb-o-def-cl);
+    --glnb-o-dis-br-cl: var(--glnb-o-def-br-cl);
+  }
+
+  // ** Style: bstrap "Secondary" **
+
+  .gln-button.bs-btn-contained.bs-secondary {
+    // Exterior: "contained"
+    --glnb-c-def-cl: #fff;
+    --glnb-c-def-bg-cl: #6c757d;
+    // :hover
+    --glnb-c-hov-bg-cl: #5a6268;
+    // :active
+    --bs-act-bg-cl: #545b62;
+    // :focus
+    --bs-c-foc-bg-cl: #5a6268;
+    --bs-foc-bs-cl: rgb(130 138 145 / 50%);
+    // disabled
+    --glnb-c-dis-cl: var(--glnb-c-def-cl);
+    --glnb-c-dis-bg-cl:var(--glnb-c-def-bg-cl);
+  }
+
+  .gln-button.bs-btn-outline.bs-secondary {
+    // Exterior: "outlined"
+    --glnb-o-def-cl: #6c757d;
+    --glnb-o-def-br-cl: #6c757d;
+    // :hover
+    --bs-o-hov-cl: #fff;
+    --glnb-o-hov-bg-cl: #6c757d;
+    --glnb-o-hov-br-cl: #6c757d;
+    // :active
+    --bs-o-act-cl: #fff;
+    --bs-act-bg-cl: #6c757d;
+    // :focus
+    --bs-foc-bs-cl: rgb(108 117 125 / 50%);
+    // disable
+    --glnb-o-dis-cl: var(--glnb-o-def-cl);
+    --glnb-o-dis-br-cl: var(--glnb-o-def-br-cl);
+  }
+
+  // ** Style: bstrap "Success" **
+
+  .gln-button.bs-btn-contained.bs-success {
+    // Exterior: "contained"
+    --glnb-c-def-cl: #fff;
+    --glnb-c-def-bg-cl: #28a745;
+    // :hover
+    --glnb-c-hov-bg-cl: #218838;
+    // :active
+    --bs-act-bg-cl: #1e7e34;
+    // :focus
+    --bs-c-foc-bg-cl: #218838;
+    --bs-foc-bs-cl: rgb(72 180 97 / 50%);
+    // disabled
+    --glnb-c-dis-cl: var(--glnb-c-def-cl);
+    --glnb-c-dis-bg-cl:var(--glnb-c-def-bg-cl);
+  }
+
+  .gln-button.bs-btn-outline.bs-success {
+    // Exterior: "outlined"
+    --glnb-o-def-cl: #28a745;
+    --glnb-o-def-br-cl: #28a745;
+    // :hover
+    --bs-o-hov-cl: #fff;
+    --glnb-o-hov-bg-cl: #28a745;
+    --glnb-o-hov-br-cl: #28a745;
+    // :active
+    --bs-o-act-cl: #fff;
+    --bs-act-bg-cl: #28a745;
+    // :focus
+    --bs-foc-bs-cl: rgb(40 167 69 / 50%);
+    // disable
+    --glnb-o-dis-cl: var(--glnb-o-def-cl);
+    --glnb-o-dis-br-cl: var(--glnb-o-def-br-cl);
+  }
+
+  // ** Style: bstrap "Danger" **
+
+  .gln-button.bs-btn-contained.bs-danger {
+    // Exterior: "contained"
+    --glnb-c-def-cl: #fff;
+    --glnb-c-def-bg-cl: #dc3545;
+    // :hover
+    --glnb-c-hov-bg-cl: #c82333;
+    // :active
+    --bs-act-bg-cl: #bd2130;
+    // :focus
+    --bs-c-foc-bg-cl: #c82333;
+    --bs-foc-bs-cl: rgb(225 83 97 / 50%);
+    // disabled
+    --glnb-c-dis-cl: var(--glnb-c-def-cl);
+    --glnb-c-dis-bg-cl:var(--glnb-c-def-bg-cl);
+  }
+
+  .gln-button.bs-btn-outline.bs-danger {
+    // Exterior: "outlined"
+    --glnb-o-def-cl: #dc3545;
+    --glnb-o-def-br-cl: #dc3545;
+    // :hover
+    --bs-o-hov-cl: #fff;
+    --glnb-o-hov-bg-cl: #dc3545;
+    --glnb-o-hov-br-cl: #dc3545;
+    // :active
+    --bs-o-act-cl: #fff;
+    --bs-act-bg-cl: #dc3545;
+    // :focus
+    --bs-foc-bs-cl: rgb(220 53 69 / 50%);
+    // disable
+    --glnb-o-dis-cl: var(--glnb-o-def-cl);
+    --glnb-o-dis-br-cl: var(--glnb-o-def-br-cl);
+  }
+}

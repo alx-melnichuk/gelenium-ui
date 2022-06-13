@@ -72,9 +72,11 @@ The height of the element remains the same even when the font size is changed (f
 It is possible to specify the height of an element. To do this, in the "config.frameSizeValue" property, we define the required height in pixels.
 
 An element with an "outlined" appearance.
+
 ![img1_frm_otl.png](img1_frm_otl.png)
 
 An element with an "underline" appearance.
+
 ![img1_frm_und.png](img1_frm_und.png)
 
 
@@ -83,9 +85,11 @@ An element with an "underline" appearance.
 For these components, you can change the border radius.
 
 An element with an "outlined" appearance.
+
 ![img1_br_rd_otl.png](img1_br_rd_otl.png)
 
 An element with an "underline" appearance.
+
 ![img1_br_rd_und.png](img1_br_rd_und.png)
 
 There are also other features of these components that can be seen on the demo site.

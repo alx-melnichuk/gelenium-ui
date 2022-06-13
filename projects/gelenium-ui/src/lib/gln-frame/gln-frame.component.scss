@@ -37,11 +37,13 @@
   // The state with disabled.
   --glnf-dis2-cl: #7878783b;
 
-  // For "frame" - outlined
-  // The default border color for "outlined" mode.
+  // Border color for "outlined" mode.
+  // The default border color.
   --glnf-def-cl2: rgba(0, 0, 0, 0.23);
-}
 
+  // Border bottom color "div.glnf-border" for "underline" and "standard" mode.
+  --glnf-def-br-bt-cl: #0000006b;
+}
 
 gln-frame {
   @include mxDisplayInlineFlex();
@@ -86,7 +88,6 @@ gln-frame {
     --def-lb-trn-y: 0.32em; // 5.12px
     --def-lb-trn2-y: 1.546875em; // 24.75px
   }
-
   border-radius: var(--glnf-br-rd, var(--glnfs-br-rd, var(--def-br-rd)));
 
   // ** Section "Label". **
@@ -128,36 +129,60 @@ gln-frame {
       1   // $scaleY
     );
   }
-  // ** Section: Color "label". **
+
+  // Definition of internal variables by element state.
   &:not([dis]) {
-    &:not([err]) {
-      // The state without disabled, error, hover, focused.
-      &:not(:hover):not(:focus-within)>label {
-        color: var(--glnf-def-lb-cl, var(--glnf-def-cl));
+    &:not([err]) { // The state without disabled, error, hover, focused.
+      &:not(:hover):not(:focus-within) {
+        --glnf-label-cl: var(--glnf-def-lb-cl, var(--glnf-def-cl));
+        --glnf-dcr-br-cl: var(--glnf-def-br-cl, var(--glnf-def-cl2));
+        --glnf-dcr-bg-cl: var(--glnf-def-bg-cl, var(--glnf-def2-cl));
+        --glnf-dcr-bb-cl-bef: var(--glnf-def-brb-bf, var(--glnf-def-br-bt-cl));
       } // The state without disabled, error, focused and with hover.
-      &:hover:not(:focus-within)>label {
-        color: var(--glnf-hov-lb-cl, var(--glnf-hov-cl));
+      &:hover:not(:focus-within) {
+        --glnf-label-cl: var(--glnf-hov-lb-cl, var(--glnf-hov-cl));
+        --glnf-dcr-br-cl: var(--glnf-hov-br-cl, var(--glnf-hov-cl));
+        --glnf-dcr-bg-cl: var(--glnf-hov-bg-cl, var(--glnf-hov2-cl));
+        --glnf-dcr-bb-cl-bef: var(--glnf-hov-brb-bf, var(--glnf-hov-cl));
       } // The state without disabled, error and with focused.
-      &:focus-within>label {
-        color: var(--glnf-foc-lb-cl, var(--glnf-foc-cl));
+      &:focus-within {
+        --glnf-label-cl: var(--glnf-foc-lb-cl, var(--glnf-foc-cl));
+        --glnf-dcr-br-cl: var(--glnf-foc-br-cl, var(--glnf-foc-cl));
+        --glnf-dcr-bg-cl: var(--glnf-foc-bg-cl, var(--glnf-foc2-cl));
       }
+      --glnf-dcr-bb-cl-aft: var(--glnf-foc-brb-af, var(--glnf-foc-cl));
     }
-    &[err] {
-      // The state without disabled, hover, focused and error.
-      &:not(:hover):not(:focus-within)>label {
-        color: var(--glnf-err-lb-cl, var(--glnf-err-cl));
+    &[err] {// The state without disabled, hover, focused and error.
+      &:not(:hover):not(:focus-within) {
+        --glnf-label-cl: var(--glnf-err-lb-cl, var(--glnf-err-cl));
+        --glnf-dcr-br-cl: var(--glnf-err-br-cl, var(--glnf-err-cl));
+        --glnf-dcr-bg-cl: var(--glnf-err-bg-cl, var(--glnf-err2-cl));
+        --glnf-dcr-bb-cl-bef: var(--glnf-err-brb-bf, var(--glnf-err-cl));
       } // The state without disabled, focused and error, hover.
-      &:hover:not(:focus-within)>label {
-        color: var(--glnf-hov-err-lb-cl, var(--glnf-hov-err-cl));
+      &:hover:not(:focus-within) {
+        --glnf-label-cl: var(--glnf-hov-err-lb-cl, var(--glnf-hov-err-cl));
+        --glnf-dcr-br-cl: var(--glnf-hov-err-br-cl, var(--glnf-hov-err-cl));
+        --glnf-dcr-bg-cl: var(--glnf-hov-err-bg-cl, var(--glnf-hov2-err2-cl));
+        --glnf-dcr-bb-cl-bef: var(--glnf-hov-err-brb-bf, var(--glnf-hov-err-cl));
       } // The state without disabled and error, focused.
-      &:focus-within>label {
-        color: var(--glnf-foc-err-lb-cl, var(--glnf-err-cl));
+      &:focus-within {
+        --glnf-label-cl: var(--glnf-foc-err-lb-cl, var(--glnf-err-cl));
+        --glnf-dcr-br-cl: var(--glnf-foc-err-br-cl, var(--glnf-err-cl));
+        --glnf-dcr-bg-cl: var(--glnf-foc-err-bg-cl, var(--glnf-foc2-err2-cl));
       }
+      --glnf-dcr-bb-cl-aft: var(--glnf-foc-err-brb-af, var(--glnf-err-cl));
     }
+  } // The state with disabled.
+  &[dis] {
+    --glnf-label-cl: var(--glnf-dis-lb-cl, var(--glnf-dis-cl));
+    --glnf-dcr-br-cl: var(--glnf-dis-br-cl, var(--glnf-def-cl2));
+    --glnf-dcr-bg-cl: var(--glnf-dis-bg-cl, var(--glnf-dis2-cl));
+    --glnf-dcr-bb-cl-bef: var(--glnf-dis-brb-bf, var(--glnf-dis-cl));
   }
-  // The state with disabled.
-  &[dis]>label {
-    color: var(--glnf-dis-lb-cl, var(--glnf-dis-cl));
+  
+  // ** Section: Color "label". **
+  &>label {
+    color: var(--glnf-label-cl);
   }
 
   // ** Section "div.glnf-border". **
@@ -177,36 +202,7 @@ gln-frame {
   &>[dcr-bg] {
     -webkit-transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-  }
-  &:not([dis]) {
-    &:not([err]) {
-      // The state without disabled, error, hover, focused.
-      &:not(:hover):not(:focus-within)>[dcr-bg] {
-        background-color: var(--glnf-def-bg-cl, var(--glnf-def2-cl));
-      } // The state without disabled, error, focused and with hover.
-      &:hover:not(:focus-within)>[dcr-bg] {
-        background-color: var(--glnf-hov-bg-cl, var(--glnf-hov2-cl));
-      } // The state without disabled, error and with focused.
-      &:focus-within>[dcr-bg] {
-        background-color: var(--glnf-foc-bg-cl, var(--glnf-foc2-cl));
-      }
-    }
-    &[err] {
-      // The state without disabled, hover, focused and error.
-      &:not(:hover):not(:focus-within)>[dcr-bg] {
-        background-color: var(--glnf-err-bg-cl, var(--glnf-err2-cl));
-      } // The state without disabled, focused and error, hover.
-      &:hover:not(:focus-within)>[dcr-bg] {
-        background-color: var(--glnf-hov-err-bg-cl, var(--glnf-hov2-err2-cl));
-      } // The state without disabled and error, focused.
-      &:focus-within>[dcr-bg] {
-        background-color: var(--glnf-foc-err-bg-cl, var(--glnf-foc2-err2-cl));
-      }
-    }
-  }
-  // The state with disabled.
-  &[dis]>[dcr-bg] {
-    background-color: var(--glnf-dis-bg-cl, var(--glnf-dis2-cl));
+    background-color: var(--glnf-dcr-bg-cl);
   }
 
   // ** Section "div.glnf-border" for "Outlined" and "Standard" mode. **
@@ -251,35 +247,11 @@ gln-frame {
     @include mxTransform_ScaleXY_TranslateXY(1, 1, 0, 0); // ($scaleX, $scaleY, $translateX, $translateY)
   }
   // Border-Bottom-Color "div.glnf-border" for "Underline" and "Standard" mode.
-  &:not([dis]) {
-    &:not([err]) {
-      // The state without disabled, error, hover, focused.
-      &:not(:hover):not(:focus-within)>[dcr-bb]:before {
-        border-bottom-color: var(--glnf-def-brb-bf, #0000006b);
-      } // The state without disabled, error and with hover.
-      &:hover>[dcr-bb]:before {
-        border-bottom-color: var(--glnf-hov-brb-bf, var(--glnf-hov-cl));
-      }
-    }
-    &[err] {
-      // The state without disabled, hover, focused and error.
-      &:not(:hover):not(:focus-within)>[dcr-bb]:before {
-        border-bottom-color: var(--glnf-err-brb-bf, var(--glnf-err-cl));
-      } // The state without disabled, focused and error, hover.
-      &:hover:not(:focus-within)>[dcr-bb]:before {
-        border-bottom-color: var(--glnf-hov-err-brb-bf, var(--glnf-hov-err-cl));
-      }
-    }
-    // The state without disabled, error and focused.
-    &:not([err])>[dcr-bb]:after {
-      border-bottom-color: var(--glnf-foc-brb-af, var(--glnf-foc-cl));
-    } // The state without disabled and error, focused.
-    &[err]>[dcr-bb]:after {
-      border-bottom-color: var(--glnf-foc-err-brb-af, var(--glnf-err-cl));
-    }
-  } // The state with disabled.
-  &[dis]>[dcr-bb]:before {
-    border-bottom-color: var(--glnf-dis-brb-bf, var(--glnf-dis-cl));
+  &>[dcr-bb]:before {
+    border-bottom-color: var(--glnf-dcr-bb-cl-bef);
+  }
+  &:not([dis])>[dcr-bb]:after {
+    border-bottom-color: var(--glnf-dcr-bb-cl-aft);
   }
 
   // ** Section "Fieldset" for "Outlined" mode. **
@@ -311,39 +283,11 @@ gln-frame {
     border-color: var(--glnf-dis-cl);
     border-style: dotted;
   }*/
-  // ** Section: Border-Color "div.glnf-border fieldset" for "Outlined" mode. **
-  &:not([dis]) {
-    &:not([err]) {
-      // The state without disabled, error, hover, focused.
-      &:not(:hover):not(:focus-within) [dcr-br] {
-        border-color: var(--glnf-def-br-cl, var(--glnf-def-cl2));
-      } // The state without disabled, error, focused and with hover.
-      &:hover:not(:focus-within) [dcr-br] {
-        border-color: var(--glnf-hov-br-cl, var(--glnf-hov-cl));
-      } // The state without disabled, error and with focused.
-      &:focus-within [dcr-br] {
-        border-color: var(--glnf-foc-br-cl, var(--glnf-foc-cl));
-      }
-    }
-    &[err] {
-      // The state without disabled, hover, focused and error.
-      &:not(:hover):not(:focus-within) [dcr-br] {
-        border-color: var(--glnf-err-br-cl, var(--glnf-err-cl));
-      } // The state without disabled, focused and error, hover.
-      &:hover:not(:focus-within) [dcr-br] {
-        border-color: var(--glnf-hov-err-br-cl, var(--glnf-hov-err-cl));
-      } // The state without disabled and error, focused.
-      &:focus-within [dcr-br] {
-        border-color: var(--glnf-foc-err-br-cl, var(--glnf-err-cl));
-      }
-    }
-  } // The state with disabled.
-  &[dis] [dcr-br] {
-    border-color: var(--glnf-dis-br-cl, var(--glnf-def-cl2));
+  [dcr-br] {
+    border-color: var(--glnf-dcr-br-cl);
   }
-
   
-  // ** Section "Legend". **
+  // ** Section "Legend" on "Fieldset" for "Outlined" mode. **
   legend {
     float: unset;
     display: block;
@@ -437,7 +381,6 @@ gln-frame {
   &[ext-s]>div>span[orn-rg="default"] {
     align-self: baseline;
   }
-
   &[ext-u]>div>span[orn-lf],
   &[ext-s]>div>span[orn-lf], 
   &[ext-s]>div>span[orn-rg] {
@@ -446,5 +389,4 @@ gln-frame {
       margin-bottom: var(--glnf-lb-pd-bt, var(--glnfs-pd-bt, var(--def-lb-pd-bt)));
     }
   }
-  // ** **
 }

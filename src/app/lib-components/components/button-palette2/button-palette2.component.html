@@ -1,0 +1,944 @@
+<section mr-vr
+  [attr.id]="fragment4">
+  <div>
+    <h4>Bootstrap style buttons.</h4>
+  </div>
+  <p>Button style in "Primary" mode.</p>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      [(ngModel)]="isDisabledPrimary" />
+    Is disabled
+  </label>
+</section>
+
+<div class="bp-items">
+
+  <gln-button class="bs-btn bs-btn-contained bs-primary"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledPrimary ? '': null"
+    [config]="cfgContained">
+    <span>Primary 1</span>
+  </gln-button>
+
+  <gln-button class="bs-btn bs-btn-contained bs-primary"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledPrimary ? '': null"
+    [config]="cfgContained">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment4">
+      Primary 1 Link
+    </a>
+  </gln-button>
+
+  <gln-button class="bs-btn bs-btn-outline bs-primary"
+    noUppercase
+    [isDisabled]="isDisabledPrimary ? '': null"
+    [config]="cfgOutlined">
+    <span>Primary 2</span>
+  </gln-button>
+
+  <gln-button class="bs-btn bs-btn-outline bs-primary"
+    noUppercase
+    [isDisabled]="isDisabledPrimary ? '': null"
+    [config]="cfgOutlined">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment4">
+      Primary 2 Link
+    </a>
+  </gln-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bp-items"&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-contained bs-primary"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledPrimary ? '': null"
+    [config]="cfgContained"&gt;
+    &lt;span&gt;Primary 1&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-contained bs-primary"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledPrimary ? '': null"
+    [config]="cfgContained"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment4"&gt;
+      Primary 1 Link
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-outline bs-primary"
+    noUppercase
+    [isDisabled]="isDisabledPrimary ? '': null"
+    [config]="cfgOutlined"&gt;
+    &lt;span&gt;Primary 2&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-outline bs-primary"
+    noUppercase
+    [isDisabled]="isDisabledPrimary ? '': null"
+    [config]="cfgOutlined"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment4"&gt;
+      Primary 2 Link
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+ GlnButtonConfig, GlnButtonExterior, FrameSize
+&#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment4 = 'palette4';
+  public isDisabledPrimary = false;
+
+  public cfgContained: GlnButtonConfig = &#123;
+    exterior: GlnButtonExterior.contained,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+  public cfgOutlined: GlnButtonConfig = &#123;
+    exterior: GlnButtonExterior.outlined,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.bp-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: bstrap "bs-btn" **
+
+.gln-button.bs-btn &#123;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  --glnb-lbl-pd-lf: 0.75rem;
+  --glnb-lbl-pd-rg: 0.75rem;
+&#125;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn &#123;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+&#125;
+.gln-button.bs-btn.gln-disabled&gt;.gln-btn &#123;
+  opacity: .65;
+&#125;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:active,
+.gln-button.bs-btn:not(.gln-disabled).active&gt;.gln-btn &#123;
+  background-color: var(--bs-act-bg-cl);
+&#125;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:focus-within,
+.gln-button.bs-btn:not(.gln-disabled).focus&gt;.gln-btn &#123;
+  box-shadow: 0 0 0 0.2rem var(--bs-foc-bs-cl);
+&#125;
+
+// ** Style: bstrap "bs-btn-contained" **
+
+.gln-button.bs-btn-contained:not(.gln-disabled)&gt;.gln-btn:focus-within,
+.gln-button.bs-btn-contained:not(.gln-disabled).focus&gt;.gln-btn &#123;
+  background-color: var(--bs-c-foc-bg-cl);
+&#125;
+
+// ** Style: bstrap "bs-btn-outline" **
+
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:hover &#123;
+  color: var(--bs-o-hov-cl);
+&#125;
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:active,
+.gln-button.bs-btn-outline:not(.gln-disabled).active&gt;.gln-btn &#123;
+  color: var(--bs-o-act-cl);
+&#125;
+
+// ** Style: bstrap "Primary" **
+
+.gln-button.bs-btn-contained.bs-primary &#123;
+// Exterior: "contained"
+--glnb-c-def-cl: #fff;
+--glnb-c-def-bg-cl: #007bff;
+// :hover
+--glnb-c-hov-bg-cl: #0069d9;
+// :active
+--bs-act-bg-cl: #0062cc;
+// :focus
+--bs-c-foc-bg-cl: #0069d9;
+--bs-foc-bs-cl: rgb(38 143 255 / 50%);
+// disabled
+--glnb-c-dis-cl: var(--glnb-c-def-cl);
+--glnb-c-dis-bg-cl:var(--glnb-c-def-bg-cl);
+&#125;
+
+.gln-button.bs-btn-outline.bs-primary &#123;
+// Exterior: "outlined"
+--glnb-o-def-cl: #007bff;
+--glnb-o-def-br-cl: #007bff;
+// :hover
+--bs-o-hov-cl: #fff;
+--glnb-o-hov-bg-cl: #007bff;
+--glnb-o-hov-br-cl: #007bff;
+// :active
+--bs-o-act-cl: #fff;
+--bs-act-bg-cl: #007bff;
+// :focus
+--bs-foc-bs-cl: rgb(0 123 255 / 50%);
+// disable
+--glnb-o-dis-cl: var(--glnb-o-def-cl);
+--glnb-o-dis-br-cl: var(--glnb-o-def-br-cl);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+<section mr-vr
+  [attr.id]="fragment5">
+  <p>Button style in "Secondary" mode.</p>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      [(ngModel)]="isDisabledSecondary" />
+    Is disabled
+  </label>
+</section>
+
+<div class="bp-items">
+
+  <gln-button class="bs-btn bs-btn-contained bs-secondary"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledSecondary ? '': null"
+    [config]="cfgContained">
+    <span>Secondary 1</span>
+  </gln-button>
+
+  <gln-button class="bs-btn bs-btn-contained bs-secondary"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledSecondary ? '': null"
+    [config]="cfgContained">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment5">
+      Secondary 1 Link
+    </a>
+  </gln-button>
+
+  <gln-button class="bs-btn bs-btn-outline bs-secondary"
+    noUppercase
+    [isDisabled]="isDisabledSecondary ? '': null"
+    [config]="cfgOutlined">
+    <span>Secondary 2</span>
+  </gln-button>
+
+  <gln-button class="bs-btn bs-btn-outline bs-secondary"
+    noUppercase
+    [isDisabled]="isDisabledSecondary ? '': null"
+    [config]="cfgOutlined">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment5">
+      Secondary 2 Link
+    </a>
+  </gln-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bp-items"&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-contained bs-secondary"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledSecondary ? '': null"
+    [config]="cfgContained"&gt;
+    &lt;span&gt;Secondary 1&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-contained bs-secondary"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledSecondary ? '': null"
+    [config]="cfgContained"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment5"&gt;
+      Secondary 1 Link
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-outline bs-secondary"
+    noUppercase
+    [isDisabled]="isDisabledSecondary ? '': null"
+    [config]="cfgOutlined"&gt;
+    &lt;span&gt;Secondary 2&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-outline bs-secondary"
+    noUppercase
+    [isDisabled]="isDisabledSecondary ? '': null"
+    [config]="cfgOutlined"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment5"&gt;
+      Secondary 2 Link
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+ GlnButtonConfig, GlnButtonExterior, FrameSize
+&#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment5 = 'palette5';
+  public isDisabledSecondary = false;
+
+  public cfgContained: GlnButtonConfig = &#123;
+    exterior: GlnButtonExterior.contained,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+  public cfgOutlined: GlnButtonConfig = &#123;
+    exterior: GlnButtonExterior.outlined,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.bp-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: bstrap "bs-btn" **
+
+.gln-button.bs-btn &#123;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  --glnb-lbl-pd-lf: 0.75rem;
+  --glnb-lbl-pd-rg: 0.75rem;
+&#125;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn &#123;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+&#125;
+.gln-button.bs-btn.gln-disabled&gt;.gln-btn &#123;
+  opacity: .65;
+&#125;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:active,
+.gln-button.bs-btn:not(.gln-disabled).active&gt;.gln-btn &#123;
+  background-color: var(--bs-act-bg-cl);
+&#125;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:focus-within,
+.gln-button.bs-btn:not(.gln-disabled).focus&gt;.gln-btn &#123;
+  box-shadow: 0 0 0 0.2rem var(--bs-foc-bs-cl);
+&#125;
+
+// ** Style: bstrap "bs-btn-contained" **
+
+.gln-button.bs-btn-contained:not(.gln-disabled)&gt;.gln-btn:focus-within,
+.gln-button.bs-btn-contained:not(.gln-disabled).focus&gt;.gln-btn &#123;
+  background-color: var(--bs-c-foc-bg-cl);
+&#125;
+
+// ** Style: bstrap "bs-btn-outline" **
+
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:hover &#123;
+  color: var(--bs-o-hov-cl);
+&#125;
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:active,
+.gln-button.bs-btn-outline:not(.gln-disabled).active&gt;.gln-btn &#123;
+  color: var(--bs-o-act-cl);
+&#125;
+
+// ** Style: bstrap "Secondary" **
+
+.gln-button.bs-btn-contained.bs-secondary &#123;
+  // Exterior: "contained"
+  --glnb-c-def-cl: #fff;
+  --glnb-c-def-bg-cl: #6c757d;
+  // :hover
+  --glnb-c-hov-bg-cl: #5a6268;
+  // :active
+  --bs-act-bg-cl: #545b62;
+  // :focus
+  --bs-c-foc-bg-cl: #5a6268;
+  --bs-foc-bs-cl: rgb(130 138 145 / 50%);
+  // disabled
+  --glnb-c-dis-cl: var(--glnb-c-def-cl);
+  --glnb-c-dis-bg-cl:var(--glnb-c-def-bg-cl);
+&#125;
+
+.gln-button.bs-btn-outline.bs-secondary &#123;
+  // Exterior: "outlined"
+  --glnb-o-def-cl: #6c757d;
+  --glnb-o-def-br-cl: #6c757d;
+  // :hover
+  --bs-o-hov-cl: #fff;
+  --glnb-o-hov-bg-cl: #6c757d;
+  --glnb-o-hov-br-cl: #6c757d;
+  // :active
+  --bs-o-act-cl: #fff;
+  --bs-act-bg-cl: #6c757d;
+  // :focus
+  --bs-foc-bs-cl: rgb(108 117 125 / 50%);
+  // disable
+  --glnb-o-dis-cl: var(--glnb-o-def-cl);
+  --glnb-o-dis-br-cl: var(--glnb-o-def-br-cl);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  [attr.id]="fragment6">
+  <p>Button style in "Success" mode.</p>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      [(ngModel)]="isDisabledSuccess" />
+    Is disabled
+  </label>
+</section>
+
+<div class="bp-items">
+
+  <gln-button class="bs-btn bs-btn-contained bs-success"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledSuccess ? '': null"
+    [config]="cfgContained">
+    <span>Success 1</span>
+  </gln-button>
+
+  <gln-button class="bs-btn bs-btn-contained bs-success"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledSuccess ? '': null"
+    [config]="cfgContained">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment6">
+      Success 1 Link
+    </a>
+  </gln-button>
+
+  <gln-button class="bs-btn bs-btn-outline bs-success"
+    noUppercase
+    [isDisabled]="isDisabledSuccess ? '': null"
+    [config]="cfgOutlined">
+    <span>Success 2</span>
+  </gln-button>
+
+  <gln-button class="bs-btn bs-btn-outline bs-success"
+    noUppercase
+    [isDisabled]="isDisabledSuccess ? '': null"
+    [config]="cfgOutlined">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment6">
+      Success 2 Link
+    </a>
+  </gln-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bp-items"&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-contained bs-success"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledSuccess ? '': null"
+    [config]="cfgContained"&gt;
+    &lt;span&gt;Success 1&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-contained bs-success"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledSuccess ? '': null"
+    [config]="cfgContained"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment6"&gt;
+      Success 1 Link
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-outline bs-success"
+    noUppercase
+    [isDisabled]="isDisabledSuccess ? '': null"
+    [config]="cfgOutlined"&gt;
+    &lt;span&gt;Success 2&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-outline bs-success"
+    noUppercase
+    [isDisabled]="isDisabledSuccess ? '': null"
+    [config]="cfgOutlined"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment6"&gt;
+      Success 2 Link
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+ GlnButtonConfig, GlnButtonExterior, FrameSize
+&#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment6 = 'palette6';
+  public isDisabledSuccess = false;
+
+  public cfgContained: GlnButtonConfig = &#123;
+    exterior: GlnButtonExterior.contained,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+  public cfgOutlined: GlnButtonConfig = &#123;
+    exterior: GlnButtonExterior.outlined,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.bp-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: bstrap "bs-btn" **
+
+.gln-button.bs-btn &#123;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  --glnb-lbl-pd-lf: 0.75rem;
+  --glnb-lbl-pd-rg: 0.75rem;
+&#125;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn &#123;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+&#125;
+.gln-button.bs-btn.gln-disabled&gt;.gln-btn &#123;
+  opacity: .65;
+&#125;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:active,
+.gln-button.bs-btn:not(.gln-disabled).active&gt;.gln-btn &#123;
+  background-color: var(--bs-act-bg-cl);
+&#125;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:focus-within,
+.gln-button.bs-btn:not(.gln-disabled).focus&gt;.gln-btn &#123;
+  box-shadow: 0 0 0 0.2rem var(--bs-foc-bs-cl);
+&#125;
+
+// ** Style: bstrap "bs-btn-contained" **
+
+.gln-button.bs-btn-contained:not(.gln-disabled)&gt;.gln-btn:focus-within,
+.gln-button.bs-btn-contained:not(.gln-disabled).focus&gt;.gln-btn &#123;
+  background-color: var(--bs-c-foc-bg-cl);
+&#125;
+
+// ** Style: bstrap "bs-btn-outline" **
+
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:hover &#123;
+  color: var(--bs-o-hov-cl);
+&#125;
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:active,
+.gln-button.bs-btn-outline:not(.gln-disabled).active&gt;.gln-btn &#123;
+  color: var(--bs-o-act-cl);
+&#125;
+
+// ** Style: bstrap "Success" **
+
+.gln-button.bs-btn-contained.bs-success &#123;
+  // Exterior: "contained"
+  --glnb-c-def-cl: #fff;
+  --glnb-c-def-bg-cl: #28a745;
+  // :hover
+  --glnb-c-hov-bg-cl: #218838;
+  // :active
+  --bs-act-bg-cl: #1e7e34;
+  // :focus
+  --bs-c-foc-bg-cl: #218838;
+  --bs-foc-bs-cl: rgb(72 180 97 / 50%);
+  // disabled
+  --glnb-c-dis-cl: var(--glnb-c-def-cl);
+  --glnb-c-dis-bg-cl:var(--glnb-c-def-bg-cl);
+&#125;
+
+.gln-button.bs-btn-outline.bs-success &#123;
+  // Exterior: "outlined"
+  --glnb-o-def-cl: #28a745;
+  --glnb-o-def-br-cl: #28a745;
+  // :hover
+  --bs-o-hov-cl: #fff;
+  --glnb-o-hov-bg-cl: #28a745;
+  --glnb-o-hov-br-cl: #28a745;
+  // :active
+  --bs-o-act-cl: #fff;
+  --bs-act-bg-cl: #28a745;
+  // :focus
+  --bs-foc-bs-cl: rgb(40 167 69 / 50%);
+  // disable
+  --glnb-o-dis-cl: var(--glnb-o-def-cl);
+  --glnb-o-dis-br-cl: var(--glnb-o-def-br-cl);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  [attr.id]="fragment7">
+  <p>Button style in "Danger" mode.</p>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      [(ngModel)]="isDisabledDanger" />
+    Is disabled
+  </label>
+</section>
+
+<div class="bp-items">
+
+  <gln-button class="bs-btn bs-btn-contained bs-danger"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledDanger ? '': null"
+    [config]="cfgContained">
+    <span>Danger 1</span>
+  </gln-button>
+
+  <gln-button class="bs-btn bs-btn-contained bs-danger"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledDanger ? '': null"
+    [config]="cfgContained">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment7">
+      Danger 1 Link
+    </a>
+  </gln-button>
+
+  <gln-button class="bs-btn bs-btn-outline bs-danger"
+    noUppercase
+    [isDisabled]="isDisabledDanger ? '': null"
+    [config]="cfgOutlined">
+    <span>Danger 2</span>
+  </gln-button>
+
+  <gln-button class="bs-btn bs-btn-outline bs-danger"
+    noUppercase
+    [isDisabled]="isDisabledDanger ? '': null"
+    [config]="cfgOutlined">
+    <a [routerLink]="[routerLink]"
+      [fragment]="fragment7">
+      Danger 2 Link
+    </a>
+  </gln-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bp-items"&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-contained bs-danger"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledDanger ? '': null"
+    [config]="cfgContained"&gt;
+    &lt;span&gt;Danger 1&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-contained bs-danger"
+    noElevation
+    noUppercase
+    [isDisabled]="isDisabledDanger ? '': null"
+    [config]="cfgContained"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment7"&gt;
+      Danger 1 Link
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-outline bs-danger"
+    noUppercase
+    [isDisabled]="isDisabledDanger ? '': null"
+    [config]="cfgOutlined"&gt;
+    &lt;span&gt;Danger 2&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bs-btn bs-btn-outline bs-danger"
+    noUppercase
+    [isDisabled]="isDisabledDanger ? '': null"
+    [config]="cfgOutlined"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment7"&gt;
+      Danger 2 Link
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+ GlnButtonConfig, GlnButtonExterior, FrameSize
+&#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public fragment7 = 'palette7';
+  public isDisabledDanger = false;
+
+  public cfgContained: GlnButtonConfig = &#123;
+    exterior: GlnButtonExterior.contained,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+  public cfgOutlined: GlnButtonConfig = &#123;
+    exterior: GlnButtonExterior.outlined,
+    frameSize: FrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.bp-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bp-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bp-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: bstrap "bs-btn" **
+
+.gln-button.bs-btn &#123;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  --glnb-lbl-pd-lf: 0.75rem;
+  --glnb-lbl-pd-rg: 0.75rem;
+&#125;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn &#123;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+&#125;
+.gln-button.bs-btn.gln-disabled&gt;.gln-btn &#123;
+  opacity: .65;
+&#125;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:active,
+.gln-button.bs-btn:not(.gln-disabled).active&gt;.gln-btn &#123;
+  background-color: var(--bs-act-bg-cl);
+&#125;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:focus-within,
+.gln-button.bs-btn:not(.gln-disabled).focus&gt;.gln-btn &#123;
+  box-shadow: 0 0 0 0.2rem var(--bs-foc-bs-cl);
+&#125;
+
+// ** Style: bstrap "bs-btn-contained" **
+
+.gln-button.bs-btn-contained:not(.gln-disabled)&gt;.gln-btn:focus-within,
+.gln-button.bs-btn-contained:not(.gln-disabled).focus&gt;.gln-btn &#123;
+  background-color: var(--bs-c-foc-bg-cl);
+&#125;
+
+// ** Style: bstrap "bs-btn-outline" **
+
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:hover &#123;
+  color: var(--bs-o-hov-cl);
+&#125;
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:active,
+.gln-button.bs-btn-outline:not(.gln-disabled).active&gt;.gln-btn &#123;
+  color: var(--bs-o-act-cl);
+&#125;
+
+// ** Style: bstrap "Danger" **
+
+.gln-button.bs-btn-contained.bs-danger &#123;
+  // Exterior: "contained"
+  --glnb-c-def-cl: #fff;
+  --glnb-c-def-bg-cl: #dc3545;
+  // :hover
+  --glnb-c-hov-bg-cl: #c82333;
+  // :active
+  --bs-act-bg-cl: #bd2130;
+  // :focus
+  --bs-c-foc-bg-cl: #c82333;
+  --bs-foc-bs-cl: rgb(225 83 97 / 50%);
+  // disabled
+  --glnb-c-dis-cl: var(--glnb-c-def-cl);
+  --glnb-c-dis-bg-cl:var(--glnb-c-def-bg-cl);
+&#125;
+
+.gln-button.bs-btn-outline.bs-danger &#123;
+  // Exterior: "outlined"
+  --glnb-o-def-cl: #dc3545;
+  --glnb-o-def-br-cl: #dc3545;
+  // :hover
+  --bs-o-hov-cl: #fff;
+  --glnb-o-hov-bg-cl: #dc3545;
+  --glnb-o-hov-br-cl: #dc3545;
+  // :active
+  --bs-o-act-cl: #fff;
+  --bs-act-bg-cl: #dc3545;
+  // :focus
+  --bs-foc-bs-cl: rgb(220 53 69 / 50%);
+  // disable
+  --glnb-o-dis-cl: var(--glnb-o-def-cl);
+  --glnb-o-dis-br-cl: var(--glnb-o-def-br-cl);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

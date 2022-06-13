@@ -10,6 +10,8 @@ import { FrameLabelModule } from '../frame-label/frame-label.module';
 import { FrameHelperTextModule } from '../frame-helper-text/frame-helper-text.module';
 import { FrameBorderRadiusModule } from '../frame-border-radius/frame-border-radius.module';
 import { FramePaletteModule } from '../frame-palette/frame-palette.module';
+import { FramePalette2Module } from '../frame-palette2/frame-palette2.module';
+import { FramePalette3Module } from '../frame-palette3/frame-palette3.module';
 import { FrameConfigModule } from '../frame-config/frame-config.module';
 import { FrameStructureModule } from '../frame-structure/frame-structure.module';
 import { FrameApiModule } from '../frame-api/frame-api.module';
@@ -42,6 +44,8 @@ SiteMenu.addItem('Components', 'Frame', { label: 'Frame', siteUrls });
     FrameHelperTextModule,
     FrameBorderRadiusModule,
     FramePaletteModule,
+    FramePalette2Module,
+    FramePalette3Module,
     FrameStructureModule,
     FrameConfigModule,
     FrameApiModule,

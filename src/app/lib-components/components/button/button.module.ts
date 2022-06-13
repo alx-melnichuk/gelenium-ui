@@ -12,6 +12,8 @@ import { ButtonSizeModule } from '../button-size/button-size.module';
 import { ButtonBorderRadiusModule } from '../button-border-radius/button-border-radius.module';
 import { ButtonOrnamentsModule } from '../button-ornaments/button-ornaments.module';
 import { ButtonPaletteModule } from '../button-palette/button-palette.module';
+import { ButtonPalette2Module } from '../button-palette2/button-palette2.module';
+import { ButtonPalette3Module } from '../button-palette3/button-palette3.module';
 import { ButtonConfigModule } from '../button-config/button-config.module';
 import { ButtonApiModule } from '../button-api/button-api.module';
 
@@ -40,6 +42,8 @@ SiteMenu.addItem('Components', 'Button', { label: 'Button', siteUrls });
     ButtonBorderRadiusModule,
     ButtonOrnamentsModule,
     ButtonPaletteModule,
+    ButtonPalette2Module,
+    ButtonPalette3Module,
     ButtonConfigModule,
     ButtonApiModule,
   ],

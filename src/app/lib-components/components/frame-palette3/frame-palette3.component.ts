@@ -12,13 +12,13 @@ import {
 } from 'src/app/lib-core/constants/constants';
 
 @Component({
-  selector: 'app-frame-palette',
-  templateUrl: './frame-palette.component.html',
-  styleUrls: ['./frame-palette.component.scss'],
+  selector: 'app-frame-palette3',
+  templateUrl: './frame-palette3.component.html',
+  styleUrls: ['./frame-palette3.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FramePaletteComponent {
+export class FramePalette3Component {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -34,17 +34,17 @@ export class FramePaletteComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public minLength06a = 5;
-  public controls06a = {
-    input06a: new FormControl('', []),
-    input06b: new FormControl('Hello World', [Validators.required]),
-    input06c: new FormControl('Hello World', []),
-    input06d: new FormControl('Hello World', []),
-    input06e: new FormControl('demo', [Validators.required, Validators.minLength(this.minLength06a)]),
-    input06f: new FormControl('Hello World', []),
+  public minLength06c = 5;
+  public controls06c = {
+    input06k: new FormControl('', []),
+    input06l: new FormControl('Hello World', [Validators.required]),
+    input06m: new FormControl('Hello World', []),
+    input06n: new FormControl('Hello World', []),
+    input06o: new FormControl('demo', [Validators.required, Validators.minLength(this.minLength06c)]),
+    input06p: new FormControl('Hello World', []),
   };
-  public formGroup06a: FormGroup = new FormGroup(this.controls06a);
-  public exterior06a = 'outlined';
+  public formGroup06c: FormGroup = new FormGroup(this.controls06c);
+  public exterior06c = 'outlined';
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

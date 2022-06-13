@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FramePaletteComponent } from './frame-palette.component';
+import { ButtonPalette2Component } from './button-palette2.component';
 
-describe('FramePaletteComponent', () => {
-  let component: FramePaletteComponent;
-  let fixture: ComponentFixture<FramePaletteComponent>;
+describe('ButtonPalette2Component', () => {
+  let component: ButtonPalette2Component;
+  let fixture: ComponentFixture<ButtonPalette2Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FramePaletteComponent],
+      declarations: [ButtonPalette2Component],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FramePaletteComponent);
+    fixture = TestBed.createComponent(ButtonPalette2Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
