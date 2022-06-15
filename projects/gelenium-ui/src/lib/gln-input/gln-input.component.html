@@ -1,21 +1,19 @@
 <ng-container [formGroup]="formGroup">
-  <div ext
-    class="glni-wrap"
-    #glnFrameExteriorInput="glnFrameExteriorInput"
+  <div class="glni-wrap"
     [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
+    #glnFrameExteriorInput="glnFrameExteriorInput"
     [glnFrameExteriorInputElementRef]="hostRef">
-    <gln-frame [attr.wdFull]="wdFull"
-      [label]="label"
+    <gln-frame [label]="label"
       [exterior]="glnFrameExteriorInput.exterior"
       [config]="currConfig"
       [isLabelShrink]="getBoolean(lbShrink)"
-      [hiddenLabel]="getBoolean(hiddenLabel)"
+      [noLabel]="getBoolean(noLabel)"
       [isDisabled]="isDisabled2"
       [isFilled]="isFilled"
       [isError]="!!formControl.errors || getBoolean(isError)"
       [isRequired]="isRequired2"
-      #glnFrameSize="glnFrameSize"
       [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
+      #glnFrameSize="glnFrameSize"
       [glnFrameSizeElementRef]="hostRef"
       [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
       [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
@@ -48,7 +46,7 @@
         [attr.max]="max"
         [attr.step]="step"
         [pattern]="pattern"
-        (focus)="doFocuse()"
+        (focus)="doFocus()"
         (blur)="doBlur()"
         (input)="doInput($event)" />
 

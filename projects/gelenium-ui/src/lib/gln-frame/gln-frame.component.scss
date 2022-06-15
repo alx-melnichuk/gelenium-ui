@@ -48,13 +48,14 @@
 gln-frame {
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
-  line-height: 1.4375em; // The value of the "line height" for the input element. (23px for font-size: 16px)
+
+  position: relative;
   min-width: 0;
-  padding: 0;
+  padding: 0px;
   margin: 0;
   border: 0;
   vertical-align: top;
-  width: 100%;
+  line-height: 1.4375em; // The value of the "line height" for the input element. (23px for font-size: 16px)
 
   // Small indentation of the legend from the border for "outlined" mode.
   --def-o-lgn-pd: 0.3em;
@@ -192,7 +193,6 @@ gln-frame {
     flex-wrap: nowrap;
     position: relative;
     border-radius: inherit;
-    width: 100%;
   }
   &[dis]>div {
     color: var(--glnf-dis-cl); // The color in state is disabled for an input element.

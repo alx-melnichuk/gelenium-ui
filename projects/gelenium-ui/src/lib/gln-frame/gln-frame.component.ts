@@ -38,8 +38,6 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
   public isLabelShrink: boolean | null = null;
   @Input()
-  public hiddenLabel: boolean | null = null;
-  @Input()
   public isDisabled: boolean | null = null;
   @Input()
   public isFilled = false;
@@ -48,7 +46,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
   public isRequired: boolean | null = null;
   @Input()
-  public wdFull: string | null = null;
+  public noLabel: boolean | null = null;
 
   public get isOutlinedExterior(): boolean {
     return GlnFrameExterior.outlined === this.exterior;
@@ -62,7 +60,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
 
   public currConfig: GlnFrameConfig | null = null;
   public innIsLabelShrink: boolean | null = null;
-  public innHiddenLabel: boolean | null = null;
+  public innNoLabel: boolean | null = null;
   public innExterior: GlnFrameExterior | null = null;
 
   constructor(
@@ -86,9 +84,9 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.innIsLabelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig?.isLabelShrink;
       this.settingLabelShrink(this.hostRef, this.innIsLabelShrink);
     }
-    if (changes.hiddenLabel || (changes.config && this.hiddenLabel == null)) {
-      this.innHiddenLabel = this.hiddenLabel != null ? this.hiddenLabel : !!this.currConfig?.hiddenLabel;
-      this.settingHiddenLabel(this.hostRef, this.innHiddenLabel);
+    if (changes.noLabel || (changes.config && this.noLabel == null)) {
+      this.innNoLabel = this.noLabel != null ? this.noLabel : !!this.currConfig?.noLabel;
+      this.settingNoLabel(this.hostRef, this.innNoLabel);
     }
     if (changes.isDisabled) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabled || false);
@@ -114,9 +112,9 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.innIsLabelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig?.isLabelShrink;
       this.settingLabelShrink(this.hostRef, this.innIsLabelShrink);
     }
-    if (this.innHiddenLabel == null) {
-      this.innHiddenLabel = this.hiddenLabel != null ? this.hiddenLabel : !!this.currConfig?.hiddenLabel;
-      this.settingHiddenLabel(this.hostRef, this.innHiddenLabel);
+    if (this.innNoLabel == null) {
+      this.innNoLabel = this.noLabel != null ? this.noLabel : !!this.currConfig?.noLabel;
+      this.settingNoLabel(this.hostRef, this.innNoLabel);
     }
   }
 
@@ -145,8 +143,8 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     HtmlElemUtil.setAttr(this.renderer, elem, 'shr', isLabelShrink ? '' : null);
   }
 
-  private settingHiddenLabel(elem: ElementRef<HTMLElement>, hiddenLabel: boolean): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-hidden-label', hiddenLabel);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'hd-lb', hiddenLabel ? '' : null);
+  private settingNoLabel(elem: ElementRef<HTMLElement>, noLabel: boolean): void {
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-no-label', noLabel);
+    HtmlElemUtil.setAttr(this.renderer, elem, 'no-lb', noLabel ? '' : null);
   }
 }

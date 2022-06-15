@@ -43,7 +43,7 @@ export class FrameSizeComponent {
     input02f: new FormControl('Demo Size Huge', []),
   });
   public exterior02a = 'outlined';
-  public isHiddenLabel02a = false;
+  public isNoLabel02a = false;
 
   public formGroup02b: FormGroup = new FormGroup({
     input02g: new FormControl('Demo Size Config', []),
@@ -51,7 +51,7 @@ export class FrameSizeComponent {
     input02i: new FormControl('Demo Size Config', []),
   });
   public exterior02b = 'outlined';
-  public isHiddenLabel02b = false;
+  public isNoLabel02b = false;
 
   // GlnFrameConfig
   public config02g = {

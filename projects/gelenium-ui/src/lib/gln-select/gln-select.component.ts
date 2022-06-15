@@ -73,8 +73,6 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   @Input()
   public helperText: string | null = null;
   @Input()
-  public hiddenLabel: string | null = null;
-  @Input()
   public isDisabled: string | null = null;
   @Input()
   public isError: string | null = null;
@@ -90,6 +88,10 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   public label = '';
   @Input()
   public lbShrink: string | null = null;
+  @Input()
+  public noIcon: string | null = null;
+  @Input()
+  public noLabel: string | null = null;
   @Input()
   public sizeVisible = 0;
 
@@ -276,13 +278,15 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
     }
   }
 
-  public doFocuse(): void {
+  public doFocus(): void {
+    console.log(`doFocus()`); // TODO del;
     this.isFocused = true;
-    this.focusState(this.renderer, this.hostRef, this.isFocused);
+    // this.focusState(this.renderer, this.hostRef, this.isFocused);
     this.focused.emit();
   }
 
   public doBlur(): void {
+    console.log(`doBlur()`); // TODO del;
     this.isFocused = false;
     this.focusState(this.renderer, this.hostRef, this.isFocused);
     this.isFilled = !!this.formControl.value;

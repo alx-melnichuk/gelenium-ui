@@ -6,17 +6,13 @@
 gln-textarea {
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
-  position: relative;
-  padding: 0;
-  vertical-align: top;
-
-  &>div[ext] {
-    width: 100%;
-  }
 
   &[wdFull] {
     width: 100%;
-    .gt-textarea {
+    gln-frame {
+      width: 100%;
+    }
+    .glnt-textarea {
       width: 100%;
     }
   }
@@ -32,7 +28,7 @@ gln-textarea {
   // Textarea
   // The 'glnf-elem' style sets the line height: 1.4375em;
   // This allows you to automatically change the padding when the font size changes.
-  .gt-textarea {
+  .glnt-textarea {
     font-size: inherit;
     font-family: inherit;
     letter-spacing: inherit;

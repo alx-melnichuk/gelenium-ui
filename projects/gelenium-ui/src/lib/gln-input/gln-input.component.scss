@@ -6,16 +6,12 @@
 gln-input {
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
-  position: relative;
-  padding: 0;
-  vertical-align: top;
-
-  &>div[ext] {
-    width: 100%;
-  }
 
   &[wdFull] {
     width: 100%;
+    gln-frame {
+      width: 100%;
+    }
     .glni-input {
       width: 100%;
     }

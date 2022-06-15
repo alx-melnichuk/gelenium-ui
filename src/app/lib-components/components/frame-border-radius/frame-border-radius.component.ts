@@ -50,7 +50,7 @@ export class FrameBorderRadiusComponent {
 
   public exterior05 = 'outlined';
   public isAddPadding05 = true;
-  public isHiddenLabel05 = false;
+  public isNoLabel05 = false;
 
   public sizeShort = GlnFrameSize.short;
   public sizeSmall = GlnFrameSize.small;
@@ -69,7 +69,7 @@ export class FrameBorderRadiusComponent {
   });
 
   public isAddPadding06 = true;
-  public isHiddenLabel06 = false;
+  public isNoLabel06 = false;
 
   public formGroup06: FormGroup = new FormGroup({
     input06a: new FormControl('Demo - A', []),

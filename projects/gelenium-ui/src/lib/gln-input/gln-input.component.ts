@@ -71,8 +71,6 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
   @Input()
   public helperText: string | null = null;
   @Input()
-  public hiddenLabel: string | null = null;
-  @Input()
   public isDisabled: string | null = null;
   @Input()
   public isError: string | null = null;
@@ -92,6 +90,8 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public min: number | null = null;
   @Input()
   public minLength: number | null = null;
+  @Input()
+  public noLabel: string | null = null;
   @Input()
   public ornamLfAlign: string | null = null; // OrnamAlign
   @Input()
@@ -230,7 +230,7 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
     }
   }
 
-  public doFocuse(): void {
+  public doFocus(): void {
     this.isFocused = true;
     this.focusState(this.renderer, this.hostRef, this.isFocused);
     this.focused.emit();

@@ -7,7 +7,7 @@ export interface GlnFrameConfig {
   frameSize?: GlnFrameSize;
   frameSizeValue?: number;
   isLabelShrink?: boolean;
-  hiddenLabel?: boolean;
+  noLabel?: boolean;
   labelPd?: number; // px
   ornamLfAlign?: GlnFrameOrnamAlign;
   ornamRgAlign?: GlnFrameOrnamAlign;

@@ -1,60 +1,60 @@
-<!--
-  [grnExterior]="exterior || config.exterior"
-  #grnExterior="grnExterior"
-  (click)="trigger()"
- -->
-<div #buttonElement
-  class="glns-button"
-  glns-clear
-  glns-btn
-  type="button"
-  [attr.tabindex]="isDisabled2 ? null : 0"
-  [attr.id]="id + '_button'"
-  [attr.disabled]="isDisabled2 ? '' : null"
-  (focuse)="doFocuse()"
-  (blur)="doBlur()">
-
-  <gln-frame [label]="label"
-    [exterior]="glnFrameExteriorInput.exterior"
-    [config]="currConfig"
-    [isLabelShrink]="getBoolean(lbShrink)"
-    [hiddenLabel]="getBoolean(hiddenLabel)"
-    [isDisabled]="isDisabled2"
-    [isFilled]="isFilled"
-    [isError]="!!formControl.errors || getBoolean(isError)"
-    [isRequired]="isRequired2"
+<ng-container [formGroup]="formGroup">
+  <!--
+    [grnExterior]="exterior || config.exterior"
+    #grnExterior="grnExterior"
+    (click)="trigger()"
+  -->
+  <div class="glns-wrap"
     [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
-    [glnFrameExteriorInputElementRef]="hostRef"
     #glnFrameExteriorInput="glnFrameExteriorInput"
-    (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()"
-    [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
-    #glnFrameSize="glnFrameSize"
-    [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
-    [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
-    [glnFrameSizePrepare]="glnFrameExteriorInput"
-    [glnFrameSizeModify]="glnFrameExteriorInput.exterior">
+    [glnFrameExteriorInputElementRef]="hostRef">
+    <!--[attr.wdFull]="wdFull"-->
+    <gln-frame [label]="label"
+      [exterior]="glnFrameExteriorInput.exterior"
+      [config]="currConfig"
+      [isLabelShrink]="getBoolean(lbShrink)"
+      [noLabel]="getBoolean(noLabel)"
+      [isDisabled]="isDisabled2"
+      [isFilled]="isFilled"
+      [isError]="!!formControl.errors || getBoolean(isError)"
+      [isRequired]="isRequired2"
+      [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
+      #glnFrameSize="glnFrameSize"
+      [glnFrameSizeElementRef]="hostRef"
+      [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
+      [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
+      [glnFrameSizePrepare]="glnFrameExteriorInput"
+      [glnFrameSizeModify]="glnFrameExteriorInput.exterior">
+      <!--      glnFrameOrnament
+      [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
+      [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
+-->
+      <span orn-lf
+        class="glni-ornam-lf">
+        <ng-content select="[gln-orn-lf]"></ng-content>
+      </span>
+      <span orn-rg
+        class="glni-ornam-rg">
+        <ng-content select="[gln-orn-rg]"></ng-content>
+        <!-- <span *ngIf="!getBoolean(noIcon)"
+          [attr.opn]="isOpen ? '': null"
+          [ngClass]="[isOpen ? 'is-open' : '']">
+        </span> -->
+      </span>
 
+      <div elem-pd-ver
+        elem-pd-hor
+        elem
+        [attr.tabindex]="isDisabled2 ? null : 0"
+        [attr.id]="id + '_wrap'"
+        (focus)="doFocus()"
+        (blur)="doBlur()">
+        <div #containerRef>_________</div>
+      </div>
 
-    <span orn-lf
-      class="glni-ornam-lf">
-      <ng-content select="[gln-orn-lf]"></ng-content>
-    </span>
-    <span orn-rg
-      class="glni-ornam-rg">
-      <ng-content select="[gln-orn-rg]"></ng-content>
-      <!-- <span *ngIf="!noIcon"
-        [attr.opn]="isOpen ? '': null"
-        [ngClass]="[isOpen ? 'is-open' : '']"></span> -->
-    </span>
-
-    <div elem-pd-ver
-      elem-pd-hor>
-      <div #containerRef>Demo</div>
-    </div>
-
-    <!-- </grnFrameSize> -->
-  </gln-frame>
-</div>
+    </gln-frame>
+  </div>
+</ng-container>
 
 <!-- <grn-menu-panel *ngIf="isOpen"
   [ngClass]="['gs-panel', (isFixRight ? 'is-fix-right' : '')]"

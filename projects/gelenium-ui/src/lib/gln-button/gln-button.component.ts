@@ -121,7 +121,7 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
     }
   }
 
-  public doFocuse(): void {
+  public doFocus(): void {
     this.isFocused = true;
     this.focusState(this.renderer, this.hostRef, this.isFocused);
     this.focused.emit();

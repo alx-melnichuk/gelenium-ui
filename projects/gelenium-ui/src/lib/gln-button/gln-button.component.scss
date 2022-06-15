@@ -1,5 +1,7 @@
 /*# sourceURL=gln-button.component.scss */
 
+@import '../_styles/mx-display-flex.scss';
+
 :root {
   --glnb-def-cl: #1976d2;
   --glnb-dis-cl: #00000042;
@@ -15,7 +17,7 @@
 }
 
 gln-button {
-  display: flex;
+  @include mxDisplayFlex();
   height: max-content;
   font-weight: 500;
   font-size: 0.875em; // 14px

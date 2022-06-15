@@ -9,7 +9,7 @@
     <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
     <li>"lbShrink" - a sign that the field has a permanent label,
       without being converted to a placeholder (lbShrink);</li>
-    <li>"hiddenLabel" - a sign that the field has no label at all (hiddenLabel);</li>
+    <li>"noLabel" - a sign that the field has no label at all (noLabel);</li>
     <li>"helperText" - the parameter is used to provide context for a given
       field or error message (helperText="A value must be entered.");</li>
     <li>"isError" - a sign that the field is in error (isError);</li>
@@ -118,12 +118,12 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: hiddenLabel.</em>
+          <em>Attribute: noLabel.</em>
         </small>
       </div>
       <gln-textarea formControlName="input02f"
-        label="hiddenLabel"
-        hiddenLabel
+        label="noLabel"
+        noLabel
         [cntRows]="cntRows"
         helperText="The label is not displayed."
         [exterior]="exterior02">
@@ -226,12 +226,12 @@
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: hiddenLabel.&lt;/em&gt;
+          &lt;em&gt;Attribute: noLabel.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-textarea formControlName="input02f"
-        label="hiddenLabel"
-        hiddenLabel
+        label="noLabel"
+        noLabel
         [cntRows]="cntRows"
         helperText="The label is not displayed."
         [exterior]="exterior02"&gt;
