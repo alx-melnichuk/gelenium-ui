@@ -5,11 +5,13 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  EventEmitter,
   Inject,
   InjectionToken,
   Input,
   OnChanges,
   Optional,
+  Output,
   PLATFORM_ID,
   Renderer2,
   SimpleChanges,
@@ -19,7 +21,7 @@ import {
 
 import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
 
-import { GlnFrameSize, GlnFrameSizeUtil } from '../_interfaces/gln-frame-size.interface';
+import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
@@ -51,6 +53,11 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
   public isDisabled: string | null = null;
   @Input()
   public isNoRipple: string | null = null;
+
+  @Output()
+  readonly focused: EventEmitter<void> = new EventEmitter();
+  @Output()
+  readonly blured: EventEmitter<void> = new EventEmitter();
 
   @ViewChild('buttonElement', { static: true })
   public buttonElementRef: ElementRef<HTMLElement> | null = null;
@@ -114,14 +121,16 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
     }
   }
 
-  public doFocus(): void {
+  public doFocuse(): void {
     this.isFocused = true;
-    this.focused(this.renderer, this.hostRef, this.isFocused);
+    this.focusState(this.renderer, this.hostRef, this.isFocused);
+    this.focused.emit();
   }
 
   public doBlur(): void {
     this.isFocused = false;
-    this.focused(this.renderer, this.hostRef, this.isFocused);
+    this.focusState(this.renderer, this.hostRef, this.isFocused);
+    this.blured.emit();
   }
 
   // ** Private API **
@@ -132,7 +141,7 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
     HtmlElemUtil.setClass(this.renderer, elem, 'glnb-elem-pd-hor', true);
   }
 
-  private focused(renderer: Renderer2, elem: ElementRef<HTMLElement> | null, value: boolean | null): void {
+  private focusState(renderer: Renderer2, elem: ElementRef<HTMLElement> | null, value: boolean | null): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-focused', value || false);
     HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
   }

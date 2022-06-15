@@ -8,6 +8,7 @@ import { FrameComponent } from '../lib-components/components/frame/frame.compone
 import { HintOrErrorComponent } from '../lib-components/components/hint-or-error/hint-or-error.component';
 import { InfiniteScrollComponent } from '../lib-components/components/infinite-scroll/infinite-scroll.component';
 import { InputComponent } from '../lib-components/components/input/input.component';
+import { SelectComponent } from '../lib-components/components/select/select.component';
 import { TextareaComponent } from '../lib-components/components/textarea/textarea.component';
 
 const URL_BUTTON = UrlComponents.get('URL_BUTTON');
@@ -15,6 +16,7 @@ const URL_FRAME = UrlComponents.get('URL_FRAME');
 const URL_HINT_OR_ERROR = UrlComponents.get('URL_HINT_OR_ERROR');
 const URL_INFINITE_SCROLL = UrlComponents.get('URL_INFINITE_SCROLL');
 const URL_INPUT = UrlComponents.get('URL_INPUT');
+const URL_SELECT = UrlComponents.get('URL_SELECT');
 const URL_TEXTAREA = UrlComponents.get('URL_TEXTAREA');
 
 const routes: Routes = [
@@ -27,6 +29,7 @@ const routes: Routes = [
       { path: URL_HINT_OR_ERROR, component: HintOrErrorComponent },
       { path: URL_INFINITE_SCROLL, component: InfiniteScrollComponent },
       { path: URL_INPUT, component: InputComponent },
+      { path: URL_SELECT, component: SelectComponent },
       { path: URL_TEXTAREA, component: TextareaComponent },
       { path: '**', redirectTo: URL_INPUT },
     ],

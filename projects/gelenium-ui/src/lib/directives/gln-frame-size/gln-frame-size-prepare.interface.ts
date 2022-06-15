@@ -12,7 +12,7 @@ export type GlnFrameSizePaddingVerHorRes = {
   exterior: string;
 };
 
-export interface GlnFrameSizePrepareData {
+export interface GlnFrameSizePrepare {
   getExterior(): string | null;
   getBorderRadius(frameSizeValue: number, lineHeight: number): string | null;
   getPaddingHor(frameSizeValue: number, lineHeight: number): GlnFrameSizePaddingHorRes | null;

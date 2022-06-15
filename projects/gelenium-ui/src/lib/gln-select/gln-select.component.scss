@@ -1,0 +1,47 @@
+/*# sourceURL=gln-select.component.scss */
+
+gln-select {
+  display: flex;
+  height: max-content;
+  font-weight: 500;
+  font-size: 0.875em; // 14px
+  line-height: 1.75;
+
+  &>[glns-clear] {
+    appearance: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+  }
+  &>[glns-btn] {
+    -webkit-tap-highlight-color: transparent;
+    align-items: center;
+    background-color: transparent;
+    border-radius: var(--glnb-br-rd, var(--glnfs-br-rd, 0.25em)); // 4px
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: 1em;
+    height: max-content;
+    justify-content: center;
+    letter-spacing: inherit;
+    line-height: inherit;
+    min-width: 4.571em; // 64px
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    text-transform: inherit;
+    user-select: none;
+    vertical-align: middle;
+    width: inherit;
+
+    // &>span, &>a {
+    //   padding-top: var(--glnb-lbl-pd-tp, var(--glnfs-pd-tp, var(--def-lbl-pd-tp)));
+    //   padding-bottom: var(--glnb-lbl-pd-bt, var(--glnfs-pd-bt, var(--def-lbl-pd-tp)));
+    // }
+  }
+
+}

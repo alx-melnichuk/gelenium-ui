@@ -1,0 +1,15 @@
+<ng-template #templateRef>
+  {{ label ? label + ' ' : '' }}<ng-content></ng-content>
+</ng-template>
+<div *ngIf="multiple"
+  mul
+  class="glnmi-multiple"
+  [formGroup]="formGroup">
+  <input type="checkbox"
+    class="glnmi-check"
+    [formControl]="formControl" />
+</div>
+<div class="glnmi-content">
+  <ng-container *ngTemplateOutlet="templateRef; context: contextInfo">
+  </ng-container>
+</div>

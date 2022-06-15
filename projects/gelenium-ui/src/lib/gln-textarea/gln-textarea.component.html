@@ -1,10 +1,10 @@
 <ng-container [formGroup]="formGroup">
-  <div #prepareData="glnFrameExteriorInput"
+  <div #glnFrameExteriorInput="glnFrameExteriorInput"
     [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
     [glnFrameExteriorInputElementRef]="hostRef">
     <gln-frame [attr.wdFull]="wdFull"
       [label]="label"
-      [exterior]="prepareData.exterior"
+      [exterior]="glnFrameExteriorInput.exterior"
       [config]="config"
       [isLabelShrink]="getBoolean(lbShrink)"
       [hiddenLabel]="getBoolean(hiddenLabel)"
@@ -17,8 +17,8 @@
       [glnFrameSizeElementRef]="hostRef"
       [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
       [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
-      [glnFrameSizePrepareData]="prepareData"
-      [glnFrameSizeModify]="prepareData.exterior"
+      [glnFrameSizePrepare]="glnFrameExteriorInput"
+      [glnFrameSizeModify]="glnFrameExteriorInput.exterior"
       glnFrameOrnament
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
       [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)">
@@ -41,9 +41,9 @@
         class="gt-textarea glnf-elem"
         [attr.disabled]="isDisabled2 ? '': null"
         [attr.autocomplete]="!!autoComplete ? autoComplete : null"
-        [attr.readonly]="isReadOnly2 ? '': null"
+        [attr.readonly]="getBoolean(isReadOnly) ? '': null"
         [cols]="cntCols"
-        (focus)="doFocus()"
+        (focus)="doFocuse()"
         (blur)="doBlur()"
         (input)="doInput($event)"
         (click)="$event.stopPropagation();">

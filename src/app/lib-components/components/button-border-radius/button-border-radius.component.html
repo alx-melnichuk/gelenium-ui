@@ -147,7 +147,7 @@ export class ButtonComponent &#123;
   public isAddPadding04a = true;
   public labelPdRatio = 0.4;
 
-  public sizeShort = FrameSize.short;
+  public sizeShort = GlnFrameSize.short;
 
   constructor(private sanitizer: DomSanitizer) &#123;&#125;
 
@@ -155,8 +155,8 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getValue(value: FrameSize): number &#123;
-    return FrameSizeUtil.getValue(value) || 0;
+  public getValue(value: GlnFrameSize): number &#123;
+    return GlnFrameSizeUtil.getValue(value) || 0;
   &#125;
   public safeStyle(style: string): SafeStyle &#123;
     return this.sanitizer.bypassSecurityTrustStyle(style);
@@ -272,7 +272,7 @@ export class ButtonComponent &#123;
   public isAddPadding04a = true;
   public labelPdRatio = 0.4;
 
-  public sizeSmall = FrameSize.small;
+  public sizeSmall = GlnFrameSize.small;
 
   constructor(private sanitizer: DomSanitizer) &#123;&#125;
 
@@ -280,8 +280,8 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getValue(value: FrameSize): number &#123;
-    return FrameSizeUtil.getValue(value) || 0;
+  public getValue(value: GlnFrameSize): number &#123;
+    return GlnFrameSizeUtil.getValue(value) || 0;
   &#125;
   public safeStyle(style: string): SafeStyle &#123;
     return this.sanitizer.bypassSecurityTrustStyle(style);
@@ -397,7 +397,7 @@ export class ButtonComponent &#123;
   public isAddPadding04a = true;
   public labelPdRatio = 0.4;
 
-  public sizeMiddle = FrameSize.middle;
+  public sizeMiddle = GlnFrameSize.middle;
 
   constructor(private sanitizer: DomSanitizer) &#123;&#125;
 
@@ -405,8 +405,8 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getValue(value: FrameSize): number &#123;
-    return FrameSizeUtil.getValue(value) || 0;
+  public getValue(value: GlnFrameSize): number &#123;
+    return GlnFrameSizeUtil.getValue(value) || 0;
   &#125;
   public safeStyle(style: string): SafeStyle &#123;
     return this.sanitizer.bypassSecurityTrustStyle(style);
@@ -522,7 +522,7 @@ export class ButtonComponent &#123;
   public isAddPadding04a = true;
   public labelPdRatio = 0.4;
 
-  public sizeWide = FrameSize.wide;
+  public sizeWide = GlnFrameSize.wide;
 
   constructor(private sanitizer: DomSanitizer) &#123;&#125;
 
@@ -530,8 +530,8 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getValue(value: FrameSize): number &#123;
-    return FrameSizeUtil.getValue(value) || 0;
+  public getValue(value: GlnFrameSize): number &#123;
+    return GlnFrameSizeUtil.getValue(value) || 0;
   &#125;
   public safeStyle(style: string): SafeStyle &#123;
     return this.sanitizer.bypassSecurityTrustStyle(style);
@@ -651,7 +651,7 @@ export class ButtonComponent &#123;
   public isAddPadding04a = true;
   public labelPdRatio = 0.4;
 
-  public sizeLarge = FrameSize.large;
+  public sizeLarge = GlnFrameSize.large;
 
   constructor(private sanitizer: DomSanitizer) &#123;&#125;
 
@@ -659,8 +659,8 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getValue(value: FrameSize): number &#123;
-    return FrameSizeUtil.getValue(value) || 0;
+  public getValue(value: GlnFrameSize): number &#123;
+    return GlnFrameSizeUtil.getValue(value) || 0;
   &#125;
   public safeStyle(style: string): SafeStyle &#123;
     return this.sanitizer.bypassSecurityTrustStyle(style);
@@ -783,7 +783,7 @@ export class ButtonComponent &#123;
   public isAddPadding04a = true;
   public labelPdRatio = 0.4;
 
-  public sizeHuge = FrameSize.huge;
+  public sizeHuge = GlnFrameSize.huge;
 
   constructor(private sanitizer: DomSanitizer) &#123;&#125;
 
@@ -791,8 +791,8 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getValue(value: FrameSize): number &#123;
-    return FrameSizeUtil.getValue(value) || 0;
+  public getValue(value: GlnFrameSize): number &#123;
+    return GlnFrameSizeUtil.getValue(value) || 0;
   &#125;
   public safeStyle(style: string): SafeStyle &#123;
     return this.sanitizer.bypassSecurityTrustStyle(style);
@@ -942,7 +942,7 @@ export class ButtonComponent &#123;
   public propRadius = '--glnb-br-rd';
   public isAddPadding04b = true;
   public radiusRatio = 0.3;
-  public sizeMiddle = FrameSize.middle;
+  public sizeMiddle = GlnFrameSize.middle;
 
   constructor(private sanitizer: DomSanitizer) &#123;&#125;
 
@@ -950,8 +950,8 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getValue(value: FrameSize): number &#123;
-    return FrameSizeUtil.getValue(value) || 0;
+  public getValue(value: GlnFrameSize): number &#123;
+    return GlnFrameSizeUtil.getValue(value) || 0;
   &#125;
   public safeStyle(style: string): SafeStyle &#123;
     return this.sanitizer.bypassSecurityTrustStyle(style);
@@ -1067,7 +1067,7 @@ export class ButtonComponent &#123;
   public propRadius = '--glnb-br-rd';
   public isAddPadding04b = true;
   public radiusRatio = 0.3;
-  public sizeMiddle = FrameSize.middle;
+  public sizeMiddle = GlnFrameSize.middle;
 
   constructor(private sanitizer: DomSanitizer) &#123;&#125;
 
@@ -1075,8 +1075,8 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getValue(value: FrameSize): number &#123;
-    return FrameSizeUtil.getValue(value) || 0;
+  public getValue(value: GlnFrameSize): number &#123;
+    return GlnFrameSizeUtil.getValue(value) || 0;
   &#125;
   public safeStyle(style: string): SafeStyle &#123;
     return this.sanitizer.bypassSecurityTrustStyle(style);
@@ -1192,7 +1192,7 @@ export class ButtonComponent &#123;
   public propRadius = '--glnb-br-rd';
   public isAddPadding04b = true;
   public radiusRatio = 0.3;
-  public sizeMiddle = FrameSize.middle;
+  public sizeMiddle = GlnFrameSize.middle;
 
   constructor(private sanitizer: DomSanitizer) &#123;&#125;
 
@@ -1200,8 +1200,8 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getValue(value: FrameSize): number &#123;
-    return FrameSizeUtil.getValue(value) || 0;
+  public getValue(value: GlnFrameSize): number &#123;
+    return GlnFrameSizeUtil.getValue(value) || 0;
   &#125;
   public safeStyle(style: string): SafeStyle &#123;
     return this.sanitizer.bypassSecurityTrustStyle(style);
@@ -1317,7 +1317,7 @@ export class ButtonComponent &#123;
   public propRadius = '--glnb-br-rd';
   public isAddPadding04b = true;
   public radiusRatio = 0.3;
-  public sizeMiddle = FrameSize.middle;
+  public sizeMiddle = GlnFrameSize.middle;
 
   constructor(private sanitizer: DomSanitizer) &#123;&#125;
 
@@ -1325,8 +1325,8 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getValue(value: FrameSize): number &#123;
-    return FrameSizeUtil.getValue(value) || 0;
+  public getValue(value: GlnFrameSize): number &#123;
+    return GlnFrameSizeUtil.getValue(value) || 0;
   &#125;
   public safeStyle(style: string): SafeStyle &#123;
     return this.sanitizer.bypassSecurityTrustStyle(style);
@@ -1436,7 +1436,7 @@ export class ButtonComponent &#123;
   public propRadius = '--glnb-br-rd';
   public isAddPadding04b = true;
   public radiusRatio = 0.3;
-  public sizeMiddle = FrameSize.middle;
+  public sizeMiddle = GlnFrameSize.middle;
 
   constructor(private sanitizer: DomSanitizer) &#123;&#125;
 
@@ -1444,8 +1444,8 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getValue(value: FrameSize): number &#123;
-    return FrameSizeUtil.getValue(value) || 0;
+  public getValue(value: GlnFrameSize): number &#123;
+    return GlnFrameSizeUtil.getValue(value) || 0;
   &#125;
   public safeStyle(style: string): SafeStyle &#123;
     return this.sanitizer.bypassSecurityTrustStyle(style);

@@ -127,7 +127,7 @@
     "ElementRef" defines the DOM element to which these css parameters are added.
   </p>
   <p>
-    The directive implements the GlnFrameSizePrepareData interface, which has callback functions:
+    The directive implements the GlnFrameSizePrepare interface, which has callback functions:
   </p>
 
   <p>
@@ -198,15 +198,15 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
 [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
 [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
 [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
-[glnFrameSizePrepareData]="prepareData"</pre></code>
+[glnFrameSizePrepare]="glnFrameExteriorInput"</pre></code>
   <p>
-    There is an input parameter with interface GlnFrameSizePrepareData.
+    There is an input parameter with interface GlnFrameSizePrepare.
     Through this input parameter, the inverse functions are called to obtain the required values.
     The "line height" value is defined, which is passed when calling inverse functions.
   </p>
 
   <p>
-    The inverse functions are called through the GlnFrameSizePrepareData interface:
+    The inverse functions are called through the GlnFrameSizePrepare interface:
   </p>
   <p>
     <i>- determining the values of the frame radii;</i>
@@ -269,7 +269,7 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
   </p>
   <p>File "gln-input.component.html"</p>
   <code><pre source="html">
-&lt;div #prepareData="glnFrameExteriorInput"
+&lt;div #glnFrameExteriorInput="glnFrameExteriorInput"
   [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
   [glnFrameExteriorInputElementRef]="hostRef"
   // parameter value "exterior"
@@ -279,7 +279,7 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
 &gt;
   &lt;gln-frame #glnFrame
     [label]="label"
-    [exterior]="prepareData.exterior"
+    [exterior]="glnFrameExteriorInput.exterior"
     [config]="currConfig"
     [isLabelShrink]="getBoolean(lbShrink)"
     [hiddenLabel]="getBoolean(hiddenLabel)"
@@ -290,8 +290,8 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
     [glnFrameSizeElementRef]="hostRef"
     [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
     [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
-    [glnFrameSizePrepareData]="prepareData"
-    [glnFrameSizeModify]="prepareData.exterior"
+    [glnFrameSizePrepare]="glnFrameExteriorInput"
+    [glnFrameSizeModify]="glnFrameExteriorInput.exterior"
     // parameter value "frameSizeValue";
     // css-parameter: "--glnfs-br-rd",
     // css-parameter: "--glnfs-pd-lf",

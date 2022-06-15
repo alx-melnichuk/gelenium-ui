@@ -33,9 +33,8 @@ import {
 } from '@angular/forms';
 
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
-import { GlnFrameSize, GlnFrameSizeUtil } from '../_interfaces/gln-frame-size.interface';
-import { GlnFrameConfig } from '../_interfaces/gln-frame-config.interface';
-import { GlnFrameSizePaddingVerHorRes } from '../_interfaces/gln-frame-size-prepare-data.interface';
+import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
+import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
@@ -62,17 +61,15 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
   @Input()
   public id = 'glni_' + ++identifier;
   @Input()
-  public type: string = GlnInputType.text.valueOf();
-  @Input()
-  public label = '';
+  public autoComplete = '';
   @Input()
   public config: GlnFrameConfig | null = null;
   @Input()
-  public exterior: string | null = null; // GlnInputExteriorType
+  public exterior: string | null = null; // GlnFrameExteriorType
   @Input()
   public frameSize: string | null = null; // GlnFrameSizeType
   @Input()
-  public lbShrink: string | null = null;
+  public helperText: string | null = null;
   @Input()
   public hiddenLabel: string | null = null;
   @Input()
@@ -80,31 +77,33 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
   @Input()
   public isError: string | null = null;
   @Input()
-  public isRequired: string | null = null;
-  @Input()
-  public helperText: string | null = null;
-  @Input()
   public isReadOnly: string | null = null;
   @Input()
-  public autoComplete = '';
+  public isRequired: string | null = null;
   @Input()
-  public wdFull: string | null = null;
+  public label = '';
+  @Input()
+  public lbShrink: string | null = null;
+  @Input()
+  public max: number | null = null;
+  @Input()
+  public maxLength: number | null = null;
+  @Input()
+  public min: number | null = null;
+  @Input()
+  public minLength: number | null = null;
+  @Input()
+  public ornamLfAlign: string | null = null; // OrnamAlign
+  @Input()
+  public ornamRgAlign: string | null = null; // OrnamAlign
   @Input()
   public pattern = '';
   @Input()
   public step: number | null = null;
   @Input()
-  public min: number | null = null;
+  public type: string = GlnInputType.text.valueOf();
   @Input()
-  public max: number | null = null;
-  @Input()
-  public minLength: number | null = null;
-  @Input()
-  public maxLength: number | null = null;
-  @Input()
-  public ornamLfAlign: string | null = null; // OrnamAlign
-  @Input()
-  public ornamRgAlign: string | null = null; // OrnamAlign
+  public wdFull: string | null = null;
 
   @Output()
   readonly focused: EventEmitter<void> = new EventEmitter();
@@ -117,10 +116,8 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public defaultFrameSize = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public currConfig: GlnFrameConfig | null = null;
   public typeVal: GlnInputType = GlnInputType.text;
-  public isDisabled2: boolean | null = null; // Binding attribute "isDisabled".
+  public isDisabled2 = false; // Binding attribute "isDisabled".
   public isRequired2: boolean | null = null; // Binding attribute "isRequired".
-
-  public paddingVerHorRes: GlnFrameSizePaddingVerHorRes | null = null;
 
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
@@ -149,8 +146,8 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.isDisabled) {
-      this.isDisabled2 = BooleanUtil.init(this.isDisabled);
-      this.setDisabled(this.isDisabled2);
+      this.isDisabled2 = BooleanUtil.value(this.isDisabled);
+      this.setDisabledState(this.isDisabled2);
     }
     if (changes.isRequired) {
       this.isRequired2 = BooleanUtil.init(this.isRequired);
@@ -185,11 +182,15 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
     this.onTouched = fn;
   }
 
-  public setDisabled(isDisabled: boolean | null): void {
-    if (isDisabled) {
-      this.formGroup.disable();
-    } else {
-      this.formGroup.enable();
+  public setDisabledState(isDisabled: boolean): void {
+    if (this.isDisabled2 !== isDisabled) {
+      if (isDisabled) {
+        this.formGroup.disable();
+      } else {
+        this.formGroup.enable();
+      }
+      this.isDisabled2 = isDisabled;
+      this.changeDetectorRef.markForCheck();
     }
   }
 
@@ -229,15 +230,15 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
     }
   }
 
-  public doFocus(): void {
+  public doFocuse(): void {
     this.isFocused = true;
-    this.focuse(this.renderer, this.hostRef, this.isFocused);
+    this.focusState(this.renderer, this.hostRef, this.isFocused);
     this.focused.emit();
   }
 
   public doBlur(): void {
     this.isFocused = false;
-    this.focuse(this.renderer, this.hostRef, this.isFocused);
+    this.focusState(this.renderer, this.hostRef, this.isFocused);
     this.isFilled = !!this.formControl.value;
     this.blured.emit();
   }
@@ -271,7 +272,7 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
     this.formControl.setValidators(newValidator);
   }
 
-  private focuse(renderer: Renderer2, elem: ElementRef<HTMLElement>, value: boolean): void {
+  private focusState(renderer: Renderer2, elem: ElementRef<HTMLElement>, value: boolean): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-focused', value || false);
     HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
   }

@@ -13,9 +13,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { GlnFrameConfig } from '../_interfaces/gln-frame-config.interface';
-import { GlnInputExterior, GlnInputExteriorUtil } from '../_interfaces/gln-input-exterior.interface';
+import { GlnFrameExterior, GlnFrameExteriorUtil } from './gln-frame-exterior.interface';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+
+import { GlnFrameConfig } from './gln-frame-config.interface';
 
 export const GLN_FRAME_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_FRAME_CONFIG');
 
@@ -31,7 +32,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
   public label = '';
   @Input()
-  public exterior: string | null = null; // InputExteriorType
+  public exterior: string | null = null; // GlnFrameExteriorType
   @Input()
   public config: GlnFrameConfig | null = null;
   @Input()
@@ -50,19 +51,19 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public wdFull: string | null = null;
 
   public get isOutlinedExterior(): boolean {
-    return GlnInputExterior.outlined === this.exterior;
+    return GlnFrameExterior.outlined === this.exterior;
   }
   public get isUnderlineExterior(): boolean {
-    return GlnInputExterior.underline === this.exterior;
+    return GlnFrameExterior.underline === this.exterior;
   }
   public get isStandardExterior(): boolean {
-    return GlnInputExterior.standard === this.exterior;
+    return GlnFrameExterior.standard === this.exterior;
   }
 
   public currConfig: GlnFrameConfig | null = null;
   public innIsLabelShrink: boolean | null = null;
   public innHiddenLabel: boolean | null = null;
-  public innExterior: GlnInputExterior | null = null;
+  public innExterior: GlnFrameExterior | null = null;
 
   constructor(
     @Optional() @Inject(GLN_FRAME_CONFIG) private rootConfig: GlnFrameConfig | null,
@@ -78,7 +79,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.exterior) {
-      this.innExterior = GlnInputExteriorUtil.convert(this.exterior);
+      this.innExterior = GlnFrameExteriorUtil.convert(this.exterior);
       this.settingExterior(this.hostRef, this.innExterior);
     }
     if (changes.isLabelShrink || (changes.config && this.isLabelShrink == null)) {
@@ -123,19 +124,19 @@ export class GlnFrameComponent implements OnChanges, OnInit {
 
   // ** Private API **
 
-  private settingExterior(elem: ElementRef<HTMLElement>, exterior: GlnInputExterior | null): void {
+  private settingExterior(elem: ElementRef<HTMLElement>, exterior: GlnFrameExterior | null): void {
     HtmlElemUtil.setAttr(this.renderer, elem, 'dcr-br', '');
 
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-outlined', GlnInputExteriorUtil.isOutlined(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', GlnInputExteriorUtil.isOutlined(exterior) ? '' : null);
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-outlined', GlnFrameExteriorUtil.isOutlined(exterior));
+    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', GlnFrameExteriorUtil.isOutlined(exterior) ? '' : null);
 
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-underline', GlnInputExteriorUtil.isUnderline(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-u', GlnInputExteriorUtil.isUnderline(exterior) ? '' : null);
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-underline', GlnFrameExteriorUtil.isUnderline(exterior));
+    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-u', GlnFrameExteriorUtil.isUnderline(exterior) ? '' : null);
 
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-standard', GlnInputExteriorUtil.isStandard(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-s', GlnInputExteriorUtil.isStandard(exterior) ? '' : null);
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-standard', GlnFrameExteriorUtil.isStandard(exterior));
+    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-s', GlnFrameExteriorUtil.isStandard(exterior) ? '' : null);
 
-    const isBorder = GlnInputExteriorUtil.isStandard(exterior) || GlnInputExteriorUtil.isUnderline(exterior);
+    const isBorder = GlnFrameExteriorUtil.isStandard(exterior) || GlnFrameExteriorUtil.isUnderline(exterior);
     HtmlElemUtil.setClass(this.renderer, elem, 'glnf-bottom-frame', isBorder);
   }
 

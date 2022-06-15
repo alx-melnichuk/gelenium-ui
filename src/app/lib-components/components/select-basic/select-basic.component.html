@@ -1,0 +1,48 @@
+<section mr-vr>
+  <h3>Basic</h3>
+  <p>
+    The GlnSelect component is a form control. It includes: label, input and help text.
+    <br />
+    It comes in three versions:
+  </p>
+  <!-- <ul>
+    <li>with an outline (exterior="outlined" - default)</li>
+    <li>with a fill (exterior="underline")</li>
+    <li>standard (exterior="standard")</li>
+  </ul> -->
+</section>
+
+<form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <gln-select formControlName="input01a">
+      </gln-select>
+    </div>
+    <!-- <div class="app-elem">
+      <gln-input formControlName="input01a"
+        label="Outlined"
+        exterior="outlined">
+      </gln-input>
+    </div> -->
+
+    <!-- <div class="app-elem">
+      <gln-input formControlName="input01b"
+        label="Underline"
+        exterior="underline">
+      </gln-input>
+    </div> -->
+
+    <!-- <div class="app-elem">
+      <gln-input formControlName="input01c"
+        label="Standard"
+        exterior="standard">
+      </gln-input>
+    </div> -->
+
+  </div>
+
+</form>

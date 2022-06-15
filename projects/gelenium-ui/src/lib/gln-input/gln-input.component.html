@@ -1,12 +1,12 @@
 <ng-container [formGroup]="formGroup">
   <div ext
     class="glni-wrap"
-    #prepareData="glnFrameExteriorInput"
+    #glnFrameExteriorInput="glnFrameExteriorInput"
     [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
     [glnFrameExteriorInputElementRef]="hostRef">
     <gln-frame [attr.wdFull]="wdFull"
       [label]="label"
-      [exterior]="prepareData.exterior"
+      [exterior]="glnFrameExteriorInput.exterior"
       [config]="currConfig"
       [isLabelShrink]="getBoolean(lbShrink)"
       [hiddenLabel]="getBoolean(hiddenLabel)"
@@ -19,8 +19,8 @@
       [glnFrameSizeElementRef]="hostRef"
       [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
       [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
-      [glnFrameSizePrepareData]="prepareData"
-      [glnFrameSizeModify]="prepareData.exterior"
+      [glnFrameSizePrepare]="glnFrameExteriorInput"
+      [glnFrameSizeModify]="glnFrameExteriorInput.exterior"
       glnFrameOrnament
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
       [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)">
@@ -48,7 +48,7 @@
         [attr.max]="max"
         [attr.step]="step"
         [pattern]="pattern"
-        (focus)="doFocus()"
+        (focus)="doFocuse()"
         (blur)="doBlur()"
         (input)="doInput($event)" />
 

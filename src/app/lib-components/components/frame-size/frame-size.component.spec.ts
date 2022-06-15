@@ -8,9 +8,8 @@ describe('FrameSizeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FrameSizeComponent ]
-    })
-    .compileComponents();
+      declarations: [FrameSizeComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

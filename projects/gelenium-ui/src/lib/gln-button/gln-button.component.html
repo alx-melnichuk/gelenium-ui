@@ -1,22 +1,22 @@
 <ng-container *ngIf="!linkElement; else elseBlockLink">
   <button #buttonElement
-    class="gln-btn glnb-settings"
-    gln-clear
-    gln-btn
+    class="glnb-btn glnb-settings"
+    glnb-clear
+    glnb-btn
     type="button"
     [attr.tabindex]="isDisabled2 ? null : 0"
-    [glnFrameExteriorButton]="exterior || currConfig?.exterior || null"
+    [glnFrameExteriorButton]="exterior || (currConfig?.exterior || null)"
     [glnFrameExteriorButtonElementRef]="hostRef"
     #glnFrameExteriorButton="glnFrameExteriorButton"
     (glnFrameExteriorButtonChange)="glnFrameSize.updatePaddingVerAndHor()"
-    [glnFrameSize]="frameSize || currConfig?.frameSize || null"
+    [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
     #glnFrameSize="glnFrameSize"
     [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
     [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
-    [glnFrameSizePrepareData]="glnFrameExteriorButton"
+    [glnFrameSizePrepare]="glnFrameExteriorButton"
     [attr.id]="id + '_button'"
     [attr.disabled]="isDisabled2 ? '' : null"
-    (focus)="doFocus()"
+    (focus)="doFocuse()"
     (blur)="doBlur()">
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
@@ -28,9 +28,9 @@
   </button>
 </ng-container>
 <ng-template #elseBlockLink>
-  <div class="gln-btn glnb-settings"
-    gln-btn
-    [glnFrameExteriorButton]="exterior || currConfig?.exterior || null"
+  <div class="glnb-btn glnb-settings"
+    glnb-btn
+    [glnFrameExteriorButton]="exterior || (currConfig?.exterior || null)"
     [glnFrameExteriorButtonElementRef]="hostRef"
     #glnFrameExteriorButton="glnFrameExteriorButton"
     (glnFrameExteriorButtonChange)="glnFrameSize.updatePaddingVerAndHor()"
@@ -38,7 +38,7 @@
     #glnFrameSize="glnFrameSize"
     [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
     [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
-    [glnFrameSizePrepareData]="glnFrameExteriorButton"
+    [glnFrameSizePrepare]="glnFrameExteriorButton"
     [attr.id]="id + '_link'"
     (click)="doClick($event)">
     <ng-container [ngTemplateOutlet]="templateOrnament">

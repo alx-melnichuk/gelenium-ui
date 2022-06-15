@@ -1,0 +1,13 @@
+/*# sourceURL=gln-menu-item-panel.component */
+
+gln-menu-item-panel {
+  display: block;
+  overflow-y: auto;
+  height: var(--gmp-height);
+  max-height: var(--gmp-height);
+  position: absolute;
+  top: var(--gmp-top);
+  bottom: var(--gmp-bottom);
+  left: var(--gmp-left);
+  right: var(--gmp-right);
+}

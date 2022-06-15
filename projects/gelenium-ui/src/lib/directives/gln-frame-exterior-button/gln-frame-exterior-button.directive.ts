@@ -4,15 +4,15 @@ import { GlnButtonExterior, GlnButtonExteriorUtil } from '../../gln-button/gln-b
 import {
   GlnFrameSizePaddingHorRes,
   GlnFrameSizePaddingVerRes,
-  GlnFrameSizePrepareData,
-} from '../../_interfaces/gln-frame-size-prepare-data.interface';
+  GlnFrameSizePrepare,
+} from '../gln-frame-size/gln-frame-size-prepare.interface';
 import { HtmlElemUtil } from '../../_utils/html-elem.util';
 
 @Directive({
   selector: '[glnFrameExteriorButton]',
   exportAs: 'glnFrameExteriorButton',
 })
-export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizePrepareData {
+export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizePrepare {
   @Input()
   public glnFrameExteriorButton: string | null = null; // GlnButtonExteriorType
   @Input()

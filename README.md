@@ -28,7 +28,13 @@ It comes in three versions:
 - with a fill (exterior="underline")
 - standard (exterior="standard")
 
-![img1_input.png](img1_input.png)
+Show component by default, on hover, on focus, and on disable.
+
+ ![img2_input_d.png](img2_input_d.png)
+ ![img2_input_h.png](img2_input_h.png)
+ ![img2_input_f.png](img2_input_f.png)
+ ![img2_input_b.png](img2_input_b.png)
+
                 
 The element's label has an animation and smoothly transitions into a placeholder.
 
