@@ -240,6 +240,7 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
     this.isFocused = false;
     this.focusState(this.renderer, this.hostRef, this.isFocused);
     this.isFilled = !!this.formControl.value;
+    this.onTouched();
     this.blured.emit();
   }
 

@@ -20,7 +20,7 @@
     (blur)="doBlur()">
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
-    <span class="glnb-label glnb-elem-pd-hor">
+    <span class="glnb-label glnb-pd-hor">
       <ng-content></ng-content>
     </span>
     <gln-touch-ripple *ngIf="!isDisabled2 && !isNoRipple2 && !currConfig?.isNoRipple">
@@ -51,10 +51,10 @@
 </ng-template>
 
 <ng-template #templateOrnament>
-  <span orn-lf>
+  <span glnf-orn-lf>
     <ng-content select="[gln-orn-lf]"></ng-content>
   </span>
-  <span orn-rg>
+  <span glnf-orn-rg>
     <ng-content select="[gln-orn-rg]"></ng-content>
   </span>
 </ng-template>

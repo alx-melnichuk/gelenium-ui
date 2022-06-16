@@ -23,19 +23,19 @@
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
       [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)">
 
-      <span orn-lf
+      <span glnf-orn-lf
         class="glnt-ornam-lf">
         <ng-content select="[gln-orn-lf]"></ng-content>
       </span>
-      <span orn-rg
+      <span glnf-orn-rg
         class="glnt-ornam-rg">
         <ng-content select="[gln-orn-rg]"></ng-content>
       </span>
 
       <textarea #textareaElement
         formControlName="textData"
-        elem-mr-ver
-        elem-pd-hor
+        glnf-mr-ver
+        glnf-pd-hor
         [attr.id]="id + '_textarea'"
         [rows]="currentRows"
         class="glnt-textarea glnf-elem"

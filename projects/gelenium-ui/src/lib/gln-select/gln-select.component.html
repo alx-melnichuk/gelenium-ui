@@ -14,41 +14,47 @@
       [config]="currConfig"
       [isLabelShrink]="getBoolean(lbShrink)"
       [noLabel]="getBoolean(noLabel)"
-      [isDisabled]="isDisabled2"
+      [isDisabled]="innDisabled"
       [isFilled]="isFilled"
       [isError]="!!formControl.errors || getBoolean(isError)"
-      [isRequired]="isRequired2"
+      [isRequired]="innRequired"
       [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
       #glnFrameSize="glnFrameSize"
       [glnFrameSizeElementRef]="hostRef"
       [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
       [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
       [glnFrameSizePrepare]="glnFrameExteriorInput"
-      [glnFrameSizeModify]="glnFrameExteriorInput.exterior">
-      <!--      glnFrameOrnament
+      [glnFrameSizeModify]="glnFrameExteriorInput.exterior"
+      glnFrameOrnament
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
-      [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
--->
-      <span orn-lf
-        class="glni-ornam-lf">
+      [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)">
+
+      <span glnf-orn-lf
+        class="glns-ornam-lf">
         <ng-content select="[gln-orn-lf]"></ng-content>
       </span>
-      <span orn-rg
-        class="glni-ornam-rg">
+      <span glnf-orn-rg
+        class="glns-ornam-rg">
         <ng-content select="[gln-orn-rg]"></ng-content>
-        <!-- <span *ngIf="!getBoolean(noIcon)"
-          [attr.opn]="isOpen ? '': null"
-          [ngClass]="[isOpen ? 'is-open' : '']">
-        </span> -->
+        <svg *ngIf="!getBoolean(noIcon)"
+          ico
+          [attr.opn]="innOpen ? '': null"
+          [ngClass]="['glns-icon', (innOpen ? 'is-open' : '')]"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24">
+          <path d="M7 10l5 5 5-5z"></path>
+        </svg>
       </span>
 
-      <div elem-pd-ver
-        elem-pd-hor
-        elem
-        [attr.tabindex]="isDisabled2 ? null : 0"
+      <div [attr.tabindex]="innDisabled ? null : 0"
         [attr.id]="id + '_wrap'"
+        glnf-pd-ver
+        glnf-pd-hor
+        elem
         (focus)="doFocus()"
-        (blur)="doBlur()">
+        (blur)="doBlur()"
+        (click)="trigger()">
         <div #containerRef>_________</div>
       </div>
 
@@ -56,13 +62,15 @@
   </div>
 </ng-container>
 
-<!-- <grn-menu-panel *ngIf="isOpen"
-  [ngClass]="['gs-panel', (isFixRight ? 'is-fix-right' : '')]"
-  [isMultiple]="multiple"
-  (selected)="selectItemValue($event.value)"
+<gln-menu-item-panel *ngIf="innOpen"
+  [ngClass]="['glns-panel', (isFixRight ? 'is-fix-right' : '')]"
+  [isMultiple]="innMultiple"
+  [menuItemList]="menuItemList"
+  (selected)="selectItemValue($event.value, $event.label)"
+  (closing)="close()"
   grnClickOut
   (clickOut)="close()"
   grnEscape
   (escape)="close()">
   <ng-content></ng-content>
-</grn-menu-panel> -->
+</gln-menu-item-panel>

@@ -1,1 +1,8 @@
-<ng-content></ng-content>
+<ul glnmip-ul
+  class="glnmip-ul">
+  <li glnmip-li
+    class="glnmip-li"
+    *ngFor="let menuItem of menuItems; trackBy: trackByMenuItem">
+    {{ menuItem.label }}
+  </li>
+</ul>

@@ -7,6 +7,7 @@ import { GlnFrameModule } from '../gln-frame/gln-frame.module';
 import { GlnFrameOrnamentModule } from '../directives/gln-frame-ornament/gln-frame-ornament.module';
 import { GlnFrameSizeModule } from '../directives/gln-frame-size/gln-frame-size.module';
 import { GlnHintOrErrorModule } from '../gln-hint-or-error/gln-hint-or-error.module';
+import { GlnMenuItemModule } from '../gln-menu-item/gln-menu-item.module';
 import { GlnMenuItemPanelModule } from '../gln-menu-item-panel/gln-menu-item-panel.module';
 
 import { GlnSelectComponent } from './gln-select.component';
@@ -21,6 +22,7 @@ import { GlnSelectComponent } from './gln-select.component';
     GlnFrameOrnamentModule,
     GlnFrameSizeModule,
     GlnHintOrErrorModule,
+    GlnMenuItemModule,
     GlnMenuItemPanelModule,
   ],
   exports: [GlnSelectComponent],

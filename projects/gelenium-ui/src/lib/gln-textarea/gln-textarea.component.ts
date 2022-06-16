@@ -240,6 +240,7 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     this.isFocused = false;
     this.focusState(this.renderer, this.hostRef, this.isFocused);
     this.isFilled = !!this.formControl.value;
+    this.onTouched();
     this.blured.emit();
   }
 

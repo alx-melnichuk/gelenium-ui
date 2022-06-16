@@ -138,7 +138,7 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
   private settingLink(elem: ElementRef<HTMLElement> | null): void {
     HtmlElemUtil.setAttr(this.renderer, elem, 'linkClear', '');
     HtmlElemUtil.setClass(this.renderer, elem, 'glnb-label', true);
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-elem-pd-hor', true);
+    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-pd-hor', true);
   }
 
   private focusState(renderer: Renderer2, elem: ElementRef<HTMLElement> | null, value: boolean | null): void {

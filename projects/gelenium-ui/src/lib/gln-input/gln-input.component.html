@@ -23,19 +23,19 @@
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
       [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)">
 
-      <span orn-lf
+      <span glnf-orn-lf
         class="glni-ornam-lf">
         <ng-content select="[gln-orn-lf]"></ng-content>
       </span>
-      <span orn-rg
+      <span glnf-orn-rg
         class="glni-ornam-rg">
         <ng-content select="[gln-orn-rg]"></ng-content>
       </span>
 
       <input #inputElement
         formControlName="textData"
-        elem-pd-ver
-        elem-pd-hor
+        glnf-pd-ver
+        glnf-pd-hor
         [attr.id]="id + '_input'"
         [type]="typeVal"
         class="glni-input glnf-elem"

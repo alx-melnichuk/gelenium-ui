@@ -4,8 +4,8 @@ import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from './gln-frame-ornam-al
 import { HtmlElemUtil } from '../../_utils/html-elem.util';
 import { NumberUtil } from '../../_utils/number.util';
 
-export const ATTR_ORN_LF = 'orn-lf';
-export const ATTR_ORN_RG = 'orn-rg';
+export const ATTR_ORN_LF = 'glnf-orn-lf';
+export const ATTR_ORN_RG = 'glnf-orn-rg';
 
 @Directive({
   selector: '[glnFrameOrnament]',

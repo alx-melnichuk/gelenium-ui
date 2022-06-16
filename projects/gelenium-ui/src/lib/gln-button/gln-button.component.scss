@@ -173,17 +173,17 @@ gln-button {
   // ** Additional settings **
   
   &>[glnb-btn] {
-    &>span[orn-lf], &>span[orn-rg] {
+    &>span[glnf-orn-lf], &>span[glnf-orn-rg] {
       max-height: inherit;
       display: inline-flex;
     }
-    &>span[orn-rg] {
+    &>span[glnf-orn-rg] {
       order: 1;
     }
-    &>span[orn-lf]:empty~.glnb-elem-pd-hor {
+    &>span[glnf-orn-lf]:empty~.glnb-pd-hor {
       padding-left: var(--glnb-lbl-pd-lf, var(--glnfs-pd-lf, var(--def-lbl-pd-lf)));
     }
-    &>span[orn-rg]:empty~.glnb-elem-pd-hor {
+    &>span[glnf-orn-rg]:empty~.glnb-pd-hor {
       padding-right: var(--glnb-lbl-pd-rg, var(--glnfs-pd-rg, 0.9375em)); // 15px
       padding-right: var(--glnb-lbl-pd-rg, var(--glnfs-pd-rg, var(--def-lbl-pd-lf)));
     }
