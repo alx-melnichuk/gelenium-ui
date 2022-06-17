@@ -13,6 +13,46 @@
 </section>
 
 <input type="text">
+<p></p>
+
+<p>demoPet: {{demoPet}}</p>
+
+<label for="pet-select">Choose a pet:</label>
+<select name="pets"
+  id="pet-select"
+  multiple9
+  size9="5"
+  [(ngModel)]="demoPet">
+  <option value="">--Please choose an option--</option>
+  <option value="dog">Text Dog</option>
+  <option value="cat">Text Cat</option>
+  <option value="hamster">Text Hamster</option>
+  <!-- <option value="parrot">Text Parrot</option>
+  <option value="spider">Text Spider</option>
+  <option value="goldfish">Text Goldfish</option> -->
+
+  <option label="label Dog2">Text Dog2</option>
+  <option label="label Cat2">Text Cat2</option>
+  <option label="label Hamster2">Text Hamster2</option>
+
+  <option label="only Dog3"></option>
+  <option label="only Cat3"></option>
+  <option label="only Hamster3"></option>
+
+  <option label="value Dog4"
+    value="dog4">Text Dog4</option>
+  <option label="value Cat4"
+    value="cat4">Text Cat4</option>
+  <option label="value Hamster4"
+    value="hamster4">Text Hamster4</option>
+  <option></option>
+
+  <option>Text Dog5</option>
+  <option>Text Cat5</option>
+  <option>Text Hamster5</option>
+</select>
+
+<p></p>
 
 <form [formGroup]="formGroup01"
   novalidate
@@ -23,10 +63,17 @@
     <div class="app-elem">
       <gln-select formControlName="input01a"
         label="demo">
-        <gln-menu-item label="item01"></gln-menu-item>
-        <gln-menu-item label="item02"></gln-menu-item>
-        <gln-menu-item label="item03"></gln-menu-item>
-        <gln-menu-item label="item04"></gln-menu-item>
+        <gln-menu-item value=""><em>None</em></gln-menu-item>
+        <gln-menu-item label="label item01"
+          value="item01">context item01</gln-menu-item>
+        <gln-menu-item label="label item02"
+          value="item02">context item02</gln-menu-item>
+        <gln-menu-item value="item03">context item03</gln-menu-item>
+        <gln-menu-item value="item04">context item04</gln-menu-item>
+        <gln-menu-item label="label item05"
+          value="item05">context item05</gln-menu-item>
+        <gln-menu-item label="label item06"
+          value="item06">context item06</gln-menu-item>
       </gln-select>
     </div>
     <!-- <div class="app-elem">

@@ -1,15 +1,22 @@
 <ng-template #templateRef>
-  {{ label ? label + ' ' : '' }}<ng-content></ng-content>
+  <ng-container *ngIf="!!label; else elseBlock">{{ label }}</ng-container>
+  <ng-template #elseBlock>
+    <ng-content></ng-content>
+  </ng-template>
 </ng-template>
-<div *ngIf="multiple"
+<!-- <ng-template #templateRef>
+  {{ label ? label + ' ' : '' }}<ng-content></ng-content>
+</ng-template> -->
+
+<span *ngIf="multiple"
   mul
   class="glnmi-multiple"
   [formGroup]="formGroup">
   <input type="checkbox"
     class="glnmi-check"
     [formControl]="formControl" />
-</div>
-<div class="glnmi-content">
-  <ng-container *ngTemplateOutlet="templateRef; context: contextInfo">
-  </ng-container>
-</div>
+</span>
+<!-- <div class="glnmi-content"> -->
+<ng-container *ngTemplateOutlet="templateRef; context: contextInfo">
+</ng-container>
+<!-- </div> -->

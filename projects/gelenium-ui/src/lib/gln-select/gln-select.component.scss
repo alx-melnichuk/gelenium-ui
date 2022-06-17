@@ -16,8 +16,11 @@ gln-select {
   // # letter-spacing: 0.00938em;
 
 
-  [elem]:focus-visible {
-    outline: none;
+  [glns-elem] {
+    min-width: 41px;
+    :focus-visible {
+      outline: none;
+    }
   }
 
   [glnf-orn-rg]>[ico] {

@@ -1,14 +1,9 @@
 <ng-container [formGroup]="formGroup">
-  <!--
-    [grnExterior]="exterior || config.exterior"
-    #grnExterior="grnExterior"
-    (click)="trigger()"
-  -->
   <div class="glns-wrap"
     [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
     #glnFrameExteriorInput="glnFrameExteriorInput"
     [glnFrameExteriorInputElementRef]="hostRef">
-    <!--[attr.wdFull]="wdFull"-->
+
     <gln-frame [label]="label"
       [exterior]="glnFrameExteriorInput.exterior"
       [config]="currConfig"
@@ -38,8 +33,8 @@
         <ng-content select="[gln-orn-rg]"></ng-content>
         <svg *ngIf="!getBoolean(noIcon)"
           ico
-          [attr.opn]="innOpen ? '': null"
-          [ngClass]="['glns-icon', (innOpen ? 'is-open' : '')]"
+          [attr.opn]="isOpen ? '': null"
+          [ngClass]="['glns-icon', (isOpen ? 'is-open' : '')]"
           focusable="false"
           aria-hidden="true"
           viewBox="0 0 24 24">
@@ -51,26 +46,32 @@
         [attr.id]="id + '_wrap'"
         glnf-pd-ver
         glnf-pd-hor
-        elem
+        glns-elem
         (focus)="doFocus()"
         (blur)="doBlur()"
         (click)="trigger()">
-        <div #containerRef>_________</div>
+        <!-- {{ !isFilled ? '&ZeroWidthSpace;' : (!multiple ? selectedMenuItem?.label : 'test' ) }} -->
+        <div #containerRef
+          *ngIf="!isFilled">&ZeroWidthSpace;</div>
+        <div *ngIf="isFilled"
+          [innerHTML]="selectedMenuItem?.label"></div>
       </div>
 
     </gln-frame>
   </div>
 </ng-container>
 
-<gln-menu-item-panel *ngIf="innOpen"
+<gln-menu-item-panel *ngIf="isOpen"
   [ngClass]="['glns-panel', (isFixRight ? 'is-fix-right' : '')]"
-  [isMultiple]="innMultiple"
+  [isFixRight]="getBoolean(isFixRight)"
+  [isMultiple]="getBoolean(isMultiple)"
   [menuItemList]="menuItemList"
-  (selected)="selectItemValue($event.value, $event.label)"
-  (closing)="close()"
+  [visibleSize]="sizeVisible"
+  (selected)="selectItemValue($event, multiple)"
+  (outside)="close()"
   grnClickOut
-  (clickOut)="close()"
+  clickOut9="close()"
   grnEscape
-  (escape)="close()">
-  <ng-content></ng-content>
+  escape9="close()">
+  <ng-content select="gln-menu-item"></ng-content>
 </gln-menu-item-panel>

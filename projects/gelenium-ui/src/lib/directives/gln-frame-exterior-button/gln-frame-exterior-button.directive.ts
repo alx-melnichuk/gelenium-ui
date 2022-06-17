@@ -41,7 +41,7 @@ export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizeP
     }
   }
 
-  // ** Implementation of the GrnSizePrepareData interface. (start) **
+  // ** Implementation of the GlnSizePrepareData interface. (start) **
 
   public getExterior = (): string | null => {
     return this.glnFrameExteriorButton;
@@ -64,7 +64,7 @@ export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizeP
     return value !== null ? { top: value, bottom: value } : null;
   };
 
-  // ** Implementation of the GrnSizePrepareData interface. (finish) **
+  // ** Implementation of the GlnSizePrepareData interface. (finish) **
 
   // ** Private API **
 

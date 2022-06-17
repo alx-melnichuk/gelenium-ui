@@ -3,7 +3,7 @@ import { GlnFrameSize } from '../gln-frame/gln-frame-size.interface';
 import { GlnFrameExterior } from '../gln-frame/gln-frame-exterior.interface';
 
 // Remove to GlnFrameConfig
-export interface GrnSelectConfig {
+export interface GlnSelectConfig {
   exterior?: GlnFrameExterior;
   frameSize?: GlnFrameSize;
   frameSizeValue?: number;

@@ -25,7 +25,6 @@ import {
 } from '@angular/core';
 import {
   AbstractControl,
-  AsyncValidatorFn,
   ControlValueAccessor,
   FormControl,
   FormGroup,
@@ -33,25 +32,21 @@ import {
   NG_VALUE_ACCESSOR,
   ValidationErrors,
   Validator,
-  ValidatorFn,
-  Validators,
 } from '@angular/forms';
 
-import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
+import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { GlnMenuItemComponent } from '../gln-menu-item/gln-menu-item.component';
-import { GlnMenuItemPanelComponent } from '../gln-menu-item-panel/gln-menu-item-panel.component';
-// import { GlnFrameSizePaddingVerHorRes } from '../directives/gln-frame-size/gln-frame-size-prepare-data.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
-import { GrnSelectConfig } from './gln-select-config.interface';
-import { GlnMenuItemComponentMap } from '../gln-menu-item/grn-menu-item.interface';
+import { GlnSelectConfig } from './gln-select-config.interface';
+import { GlnMenuItem } from '../gln-menu-item/grn-menu-item.interface';
 
 let identifier = 0;
 
-export const GLN_SELECT_CONFIG = new InjectionToken<GrnSelectConfig>('GLN_SELECT_CONFIG');
+export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT_CONFIG');
 
 @Component({
   selector: 'gln-select',
@@ -66,11 +61,11 @@ export const GLN_SELECT_CONFIG = new InjectionToken<GrnSelectConfig>('GLN_SELECT
     { provide: GLN_NODE_INTERNAL_VALIDATOR, useExisting: GlnSelectComponent },
   ],
 })
-export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Validator, GlnNodeInternalValidator, AfterContentInit {
+export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Validator, AfterContentInit {
   @Input()
   public id = 'glns_' + ++identifier;
   @Input()
-  public config: GrnSelectConfig | null = null;
+  public config: GlnSelectConfig | null = null;
   @Input()
   public exterior: string | null = null; // GlnFrameExteriorType
   @Input()
@@ -102,7 +97,7 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   @Input()
   public ornamRgAlign: string | null = null; // OrnamAlign
   @Input()
-  public sizeVisible = 0;
+  public sizeVisible = -1;
 
   @Output()
   readonly focused: EventEmitter<void> = new EventEmitter();
@@ -113,9 +108,9 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   @Output()
   readonly closed: EventEmitter<void> = new EventEmitter();
   @Output()
-  readonly selected: EventEmitter<unknown | null> = new EventEmitter();
+  readonly selected: EventEmitter<GlnMenuItem | null> = new EventEmitter();
   @Output()
-  readonly selectedMultiple: EventEmitter<unknown[]> = new EventEmitter();
+  readonly selectedMultiple: EventEmitter<GlnMenuItem[]> = new EventEmitter();
 
   @ViewChild('buttonElement', { static: true })
   public buttonElementRef: ElementRef<HTMLElement> | null = null;
@@ -127,38 +122,16 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   public menuItemList!: QueryList<GlnMenuItemComponent>;
 
   public get menuItems(): GlnMenuItemComponent[] {
-    return this.menuItemList.toArray();
+    return this.menuItemList?.toArray() || [];
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set menuItems(value: GlnMenuItemComponent[]) {}
 
-  private innIsOpen = false;
-  public get isOpen(): boolean {
-    return this.innIsOpen;
-  }
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public set isOpen(value: boolean) {}
+  public isOpen = false;
 
-  private innSelectedValue: unknown | null = null;
-  public get selectedValue(): unknown | null {
-    return this.innSelectedValue;
-  }
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public set selectedValue(value: unknown | null) {}
+  public selectedMenuItem: GlnMenuItem | null = null;
 
-  private innSelectedValues: unknown[] = [];
-  public get selectedValues(): unknown[] {
-    return this.innSelectedValues;
-  }
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public set selectedValues(value: unknown | null) {}
-
-  private innSelectedLabels: string[] = [];
-  public get selectedLabels(): string[] {
-    return this.innSelectedLabels;
-  }
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public set selectedLabels(value: string[]) {}
+  public selectedMenuItems: GlnMenuItem[] = [];
 
   public defaultFrameSize = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public currConfig: GlnFrameConfig | null = null;
@@ -170,23 +143,15 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   public isFocused = false;
   public isFilled = false;
 
-  // public disabled = false; // ?
-  // public error = false; // ?
-  // public focused = false; // ?
-  public fixRight: boolean | null = null; // ?
-  public innMultiple = false; // ?
-  // public readonly = false; // ?
-  // public required = false; // ?
+  public multiple = false; // ?
 
-  public innOpen = false;
-
-  public innMenuItemMap: GlnMenuItemComponentMap = {};
+  // public innMenuItemMap: GlnMenuItemComponentMap = {};
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: Object,
     private changeDetectorRef: ChangeDetectorRef,
-    @Optional() @Inject(GLN_SELECT_CONFIG) private rootConfig: GrnSelectConfig | null,
+    @Optional() @Inject(GLN_SELECT_CONFIG) private rootConfig: GlnSelectConfig | null,
     public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {
@@ -204,24 +169,21 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
       this.innDisabled = BooleanUtil.value(this.isDisabled);
       this.setDisabledState(this.innDisabled);
     }
-    if (changes.isFixRight) {
-      this.fixRight = BooleanUtil.init(this.isFixRight);
-    }
     if (changes.isMultiple) {
-      this.innMultiple = BooleanUtil.value(this.isMultiple);
+      this.multiple = BooleanUtil.value(this.isMultiple);
     }
     if (changes.isRequired) {
       this.innRequired = BooleanUtil.init(this.isRequired);
     }
 
-    if (changes.isRequired) {
-      this.prepareFormGroup(this.innRequired);
-    }
+    // if (changes.isRequired) {
+    //   this.prepareFormGroup(this.innRequired);
+    // }
   }
 
   public ngAfterContentInit(): void {
     console.log(`a-this.menuItems.length=${this.menuItems.length}`); // TODO del;
-    this.innMenuItemMap = this.getMenuItemMap(this.menuItems, true);
+    // this.innMenuItemMap = this.getMenuItemMap(this.menuItems, true, this.id);
   }
 
   // ** ControlValueAccessor - start **
@@ -232,15 +194,26 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   public onTouched: () => void = () => {};
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public writeValue(valueInp: any): void {
-    const isFilledOld = !!this.formControl.value;
-    this.formControl.setValue(valueInp, { emitEvent: false });
-    this.isFilled = this.formControl.value !== '' && this.formControl.value != null;
-    if (isFilledOld !== this.isFilled) {
-      this.changeDetectorRef.markForCheck();
+    console.log('writeValue(); valueInp=', valueInp); // TODO del;
+
+    // const isFilledOld = !!this.formControl.value;
+    // this.formControl.setValue(valueInp, { emitEvent: false });
+    // this.isFilled = this.formControl.value !== '' && this.formControl.value != null;
+    // if (isFilledOld !== this.isFilled) {
+    //   this.changeDetectorRef.markForCheck();
+    // }
+    const menuItem = this.findMeniItemByValue(this.menuItems, valueInp);
+    if (menuItem !== null) {
+      console.log(`writeValue(); menuItem !== null`); // TODO del;
+      const isArrayValue = Array.isArray(valueInp);
+      if (this.multiple && isArrayValue) {
+        this.updateSelectedMenuItems(menuItem);
+      } else if (!this.multiple && !isArrayValue) {
+        this.updateSelectedMenuItem(menuItem);
+      }
     }
-    /*
-    const isArrayValue = Array.isArray(valueInp);
-    if (this.multiple && isArrayValue) {
+
+    /*if (this.multiple && isArrayValue) {
       const menuItemsMapItem: GlnMenuItemComponentMapItem[] = [];
       const values: unknown[] = isArrayValue ? (valueInp as unknown[]) : [valueInp];
       for (let i = 0; i < values.length; i++) {
@@ -263,15 +236,18 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
         valuesResult.push(menuItemsMapItem[j].menuItem.value);
         labelsResult.push(menuItemsMapItem[j].menuItem.label);
       }
-      this.innSelectedValues = valuesResult;
-      this.innSelectedLabels = labelsResult;
+      this.selectedValues = valuesResult;
+      this.selectedLabels = labelsResult;
       this.changeDetectorRef.markForCheck();
     } else if (!this.multiple && !isArrayValue) {
-      const item = this.innMenuItemMap[valueInp.toString()];
-      if (this.innSelectedValue !== valueInp) {
-        this.updateContainer(item?.menuItem.templateRef || null, item?.menuItem.contextInfo || {});
-        this.innSelectedValue = valueInp;
-        this.changeDetectorRef.markForCheck();
+      // const item = this.innMenuItemMap[String(valueInp)];
+      const menuItem = this.findMeniItemByValue(this.menuItems, valueInp);
+      if (this.selectedValue !== valueInp) {
+        // this.updateContainer(menuItem?.templateRef || null, menuItem?.contextInfo || {});
+        // this.selectedValue = valueInp;
+        // this.isFilled = !this.isEmpty();
+        // console.log(`this.isFilled=${this.isFilled}`); // TODO del;
+        // this.changeDetectorRef.markForCheck();
       }
     }*/
   }
@@ -307,24 +283,6 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
 
   // ** Validator - finish **
 
-  // ** GrnNodeInternalValidator - start **
-
-  public addValidators(validators: ValidatorFn | ValidatorFn[]): void {
-    if (validators != null) {
-      this.formControl.addValidators(validators);
-      this.formControl.updateValueAndValidity();
-    }
-  }
-
-  public addAsyncValidators(validators: AsyncValidatorFn | AsyncValidatorFn[]): void {
-    if (validators != null) {
-      this.formControl.addAsyncValidators(validators);
-      this.formControl.updateValueAndValidity();
-    }
-  }
-
-  // ** GrnNodeInternalValidator - finish **
-
   // ** Public API **
 
   public focus(): void {
@@ -336,7 +294,7 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   public doFocus(): void {
     console.log(`doFocus()`); // TODO del;
     this.isFocused = true;
-    // this.focusState(this.renderer, this.hostRef, this.isFocused);
+    this.focusState(this.renderer, this.hostRef, this.isFocused);
     this.focused.emit();
   }
 
@@ -344,7 +302,7 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
     console.log(`doBlur()`); // TODO del;
     this.isFocused = false;
     this.focusState(this.renderer, this.hostRef, this.isFocused);
-    this.isFilled = !!this.formControl.value;
+    // this.isFilled = !!this.formControl.value;
     this.onTouched();
     this.blured.emit();
   }
@@ -361,45 +319,65 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
     return BooleanUtil.init(value);
   }
 
-  public selectItemValue(value: unknown | null, label: string | null): void {
-    const selectValue = value !== null ? value : label;
-    if (!this.innMenuItemMap[String(selectValue)]) {
-      return;
-    }
-    if (this.innMultiple) {
-      const idx = this.innSelectedValues.indexOf(value);
-      const newValues = idx === -1 ? this.innSelectedValues.concat([value]) : this.innSelectedValues.splice(idx, 1);
+  public selectItemValue(menuItemComp: GlnMenuItemComponent, multiple: boolean): void {
+    if (multiple) {
+      this.updateSelectedMenuItems(menuItemComp);
+      const newValues = this.selectedMenuItems.slice();
+      this.selectedMultiple.emit(newValues);
       this.onChange(newValues);
-      this.selected.emit(this.innSelectedValues);
-    } else if (this.innSelectedValue !== selectValue) {
-      this.onChange(selectValue);
-      this.selected.emit(selectValue);
+    } else if (this.selectedMenuItem?.value !== menuItemComp.value) {
+      this.updateSelectedMenuItem(menuItemComp);
+      this.selected.emit(this.selectedMenuItem);
+      this.onChange(this.selectedMenuItem);
       this.close();
     }
   }
 
+  public updateSelectedMenuItem(menuItemComp: GlnMenuItemComponent): void {
+    const menuItem = menuItemComp.getMenuItem();
+    this.selectedMenuItem = menuItem.value ? menuItem : null;
+    this.isFilled = !this.isEmpty();
+    console.log(`selectedMenuItem=${this.selectedMenuItem}`); // TODO del;
+    console.log(`isFilled=${this.isFilled}`); // TODO del;
+    this.changeDetectorRef.markForCheck();
+  }
+  public updateSelectedMenuItems(menuItemComp: GlnMenuItemComponent): void {
+    const menuItem = menuItemComp.getMenuItem();
+    const idx = this.selectedMenuItems.indexOf(menuItem);
+    if (idx === -1) {
+      this.selectedMenuItems.push(menuItem);
+    } else {
+      this.selectedMenuItems.splice(idx, 1);
+    }
+    this.isFilled = !this.isEmpty();
+    console.log(`selectedValues=${this.selectedMenuItems}`); // TODO del;
+    console.log(`this.isFilled=${this.isFilled}`); // TODO del;
+    this.changeDetectorRef.markForCheck();
+  }
+
   public isEmpty(): boolean {
-    return this.innMultiple ? this.innSelectedValues.length === 0 : this.innSelectedValue === null;
+    console.log(`isEmpty() = `, this.multiple ? this.selectedMenuItems.length === 0 : this.selectedMenuItem === null); // TODO del;
+    return this.multiple ? this.selectedMenuItems.length === 0 : this.selectedMenuItem === null;
   }
 
   public open(): void {
-    if (!this.innOpen) {
-      this.innOpen = true;
+    if (!this.isOpen) {
+      this.isOpen = true;
       this.opened.emit();
       this.changeDetectorRef.markForCheck();
     }
   }
 
   public close(): void {
-    if (this.innOpen) {
-      this.innOpen = false;
+    if (this.isOpen) {
+      this.isOpen = false;
       this.closed.emit();
       this.changeDetectorRef.markForCheck();
     }
   }
 
   public trigger(): void {
-    if (this.innOpen) {
+    if (this.isOpen) {
       this.close();
     } else {
       this.open();
@@ -408,39 +386,48 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
 
   // ** Private API **
 
-  private prepareFormGroup(isRequired: boolean | null): void {
+  private focusState(renderer: Renderer2, elem: ElementRef<HTMLElement>, value: boolean): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-focused', value || false);
+    HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
+  }
+
+  private findMeniItemByValue(menuItems: GlnMenuItemComponent[], value: unknown): GlnMenuItemComponent | null {
+    let result: GlnMenuItemComponent | null = null;
+    for (let i = 0; i < menuItems.length && !result; i++) {
+      result = menuItems[i].getValue() === value ? menuItems[i] : result;
+    }
+    return result;
+  }
+
+  /*private prepareFormGroup(isRequired: boolean | null): void {
     this.formControl.clearValidators();
     const newValidator: ValidatorFn[] = [];
     if (isRequired) {
       newValidator.push(Validators.required);
     }
     this.formControl.setValidators(newValidator);
-  }
+  }*/
 
-  private focusState(renderer: Renderer2, elem: ElementRef<HTMLElement>, value: boolean): void {
-    HtmlElemUtil.setClass(renderer, elem, 'gln-focused', value || false);
-    HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
-  }
-
-  private getMenuItemMap(menuItems: GlnMenuItemComponent[], isCheckUnique: boolean): GlnMenuItemComponentMap {
+  /*private getMenuItemMap(menuItems: GlnMenuItemComponent[], isCheckUnique: boolean, id: string): GlnMenuItemComponentMap {
     const result: GlnMenuItemComponentMap = {};
     for (let i = 0; i < menuItems.length; i++) {
       const indexStr = String(menuItems[i].value || menuItems[i].label);
       if (isCheckUnique && result[indexStr] !== undefined) {
-        console.error(`Value "${indexStr}" is not unique.`);
+        console.error(`For GlnSelect "${id}", there is a non-unique value "${indexStr}" in the GlnMenuItem list.`);
       }
       result[indexStr] = { index: i, menuItem: menuItems[i] };
     }
     return result;
-  }
+  }*/
 
   // ** Private API **
 
-  private updateContainer(templateRef: TemplateRef<unknown> | null, context: unknown): void {
+  /*private updateContainer(templateRef: TemplateRef<unknown> | null, context: unknown): void {
     if (!templateRef) {
       this.containerRef.clear();
     } else {
+      this.containerRef.clear();
       this.containerRef.createEmbeddedView(templateRef, context);
     }
-  }
+  }*/
 }

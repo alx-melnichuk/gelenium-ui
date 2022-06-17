@@ -39,7 +39,7 @@ export class GlnFrameExteriorInputDirective implements OnChanges, GlnFrameSizePr
     }
   }
 
-  // ** Implementation of the GrnSizePrepareData interface. (start) **
+  // ** Implementation of the GlnSizePrepareData interface. (start) **
 
   public getExterior = (): string | null => {
     return this.exterior;
@@ -100,7 +100,7 @@ export class GlnFrameExteriorInputDirective implements OnChanges, GlnFrameSizePr
     return result;
   };
 
-  // ** Implementation of the GrnSizePrepareData interface. (finish) **
+  // ** Implementation of the GlnSizePrepareData interface. (finish) **
 
   // ** Private API **
 

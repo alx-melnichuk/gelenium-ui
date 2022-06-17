@@ -2,19 +2,21 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ContentChild,
   ElementRef,
   Input,
   OnChanges,
   Renderer2,
   SimpleChanges,
   TemplateRef,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { GlnMenuItem } from './grn-menu-item.interface';
 
 @Component({
   selector: 'gln-menu-item',
@@ -32,71 +34,67 @@ export class GlnMenuItemComponent implements OnChanges {
   @Input()
   public value: unknown | null = null;
 
-  @ContentChild('templateRef', { static: true, read: TemplateRef })
+  @ViewChild('templateRef', { static: true, read: TemplateRef })
   public templateRef!: TemplateRef<unknown>;
 
-  private innDisabled = false;
-  public get disabled(): boolean {
-    return this.innDisabled;
-  }
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public set disabled(value: boolean) {}
+  public disabled = false;
 
-  private innSelected = false;
-  public get selected(): boolean {
-    return this.innSelected;
-  }
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public set selected(value: boolean) {}
+  public selected = false;
 
-  private innMultiple = false;
-  public get multiple(): boolean {
-    return this.innMultiple;
-  }
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public set multiple(value: boolean) {}
+  public multiple = false;
 
   // eslint-disable-next-line @typescript-eslint/ban-types
-  private innContextInfo: Object | null = {};
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  public get contextInfo(): Object | null {
-    return this.innContextInfo;
-  }
-  // eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-empty-function
-  public set contextInfo(value: Object | null) {}
+  public contextInfo: Object | null = {};
 
   public formControl: FormControl = new FormControl();
   public formGroup: FormGroup = new FormGroup({ info: this.formControl });
 
-  constructor(public hostRef: ElementRef<HTMLElement>, private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(
+    public hostRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2,
+    private changeDetectorRef: ChangeDetectorRef,
+    private sanitizer: DomSanitizer
+  ) {
     console.log(`GlnMenuItem()`); // TODO del;
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.isDisabled) {
-      this.innDisabled = BooleanUtil.value(this.isDisabled);
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.innDisabled);
+      this.disabled = BooleanUtil.value(this.isDisabled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
     }
     if (changes.label) {
-      this.innContextInfo = { label: this.label };
+      this.contextInfo = { label: this.label };
     }
   }
 
   // ** Public API **
 
+  public getLabelOrInnerText(): string | null {
+    return this.label || (this.sanitizer.bypassSecurityTrustHtml(this.hostRef.nativeElement.innerHTML) as string);
+  }
+
+  public getValue(): unknown | null {
+    return this.value || this.label;
+  }
+
+  public getMenuItem(): GlnMenuItem {
+    return { label: this.getLabelOrInnerText(), value: this.value };
+  }
+
   public setSelected(value: boolean): void {
-    if (this.innSelected !== value) {
-      this.innSelected = value;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-selected', this.innSelected);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'sel', this.innSelected ? '' : null);
+    if (this.selected !== value) {
+      this.selected = value;
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-selected', this.selected);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'sel', this.selected ? '' : null);
       this.changeDetectorRef.markForCheck();
     }
   }
 
   public setMultiple(value: boolean): void {
-    if (this.innMultiple !== value) {
-      this.innMultiple = value;
+    if (this.multiple !== value) {
+      this.multiple = value;
       this.changeDetectorRef.markForCheck();
     }
   }

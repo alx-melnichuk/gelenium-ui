@@ -2,4 +2,12 @@
 
 gln-menu-item {
   display: block;
+  outline: 1px dashed green;
+  padding-top: var(--glnmip-li-pd-tp);
+  padding-bottom: var(--glnmip-li-pd-bt);
+  padding-left: var(--glnmip-li-pd-lf);
+  padding-right: var(--glnmip-li-pd-rg);
+  user-select: none;
+  // vertical-align: middle;
+  white-space: nowrap;
 }

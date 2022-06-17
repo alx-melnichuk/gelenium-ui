@@ -204,7 +204,7 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
 
   // ** Validator - finish **
 
-  // ** GrnNodeInternalValidator - start **
+  // ** GlnNodeInternalValidator - start **
 
   public addValidators(validators: ValidatorFn | ValidatorFn[]): void {
     if (validators != null) {
@@ -220,7 +220,7 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
     }
   }
 
-  // ** GrnNodeInternalValidator - finish **
+  // ** GlnNodeInternalValidator - finish **
 
   // ** Public API **
 

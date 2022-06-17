@@ -2,7 +2,10 @@
   class="glnmip-ul">
   <li glnmip-li
     class="glnmip-li"
-    *ngFor="let menuItem of menuItems; trackBy: trackByMenuItem">
-    {{ menuItem.label }}
+    *ngFor="let menuItem of menuItems; trackBy: trackByMenuItem"
+    role="option"
+    aria-selected="false"
+    [attr.data-value]="menuItem.value"
+    [innerHTML]="menuItem.getLabelOrInnerText()">
   </li>
 </ul>

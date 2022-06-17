@@ -204,7 +204,7 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
 
   // ** Validator - finish **
 
-  // ** GrnNodeInternalValidator - start **
+  // ** GlnNodeInternalValidator - start **
 
   public addValidators(validators: ValidatorFn | ValidatorFn[]): void {
     if (validators != null) {
@@ -220,7 +220,7 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     }
   }
 
-  // ** GrnNodeInternalValidator - finish **
+  // ** GlnNodeInternalValidator - finish **
 
   // ** Public API **
 
