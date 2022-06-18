@@ -334,15 +334,17 @@ gln-frame {
       margin-top: var(--glnf-lb-pd-tp, var(--glnfs-pd-tp, var(--def-lb-pd-tp)));
       margin-bottom: var(--glnf-lb-pd-bt, var(--glnfs-pd-bt, var(--def-lb-pd-bt)));
     }
-    &>span[glnf-orn-lf] {
+
+    &>span[glnf-orn-lf], &>span[glnf-orn-rg] {
       max-height: inherit;
-    }
-    &>span[glnf-orn-lf]:empty~[glnf-pd-hor] {
-      padding-left: var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf)));
+      display: inline-flex;
     }
     &>span[glnf-orn-rg] {
-      max-height: inherit;
       order: 1;
+    }
+
+    &>span[glnf-orn-lf]:empty~[glnf-pd-hor] {
+      padding-left: var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf)));
     }
     &>span[glnf-orn-rg]:empty~[glnf-pd-hor] {
       padding-right: var(--glnf-lb-pd-rg, var(--glnfs-pd-rg, var(--def-lb-pd-rg)));

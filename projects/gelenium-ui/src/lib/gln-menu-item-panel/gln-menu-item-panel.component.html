@@ -1,5 +1,6 @@
 <ul glnmip-ul
-  class="glnmip-ul">
+  class="glnmip-ul"
+  (mouseup)="doMouseupItem($event)">
   <li glnmip-li
     class="glnmip-li"
     *ngFor="let menuItem of menuItems; trackBy: trackByMenuItem"

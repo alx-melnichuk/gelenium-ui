@@ -16,7 +16,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { GlnMenuItem } from './grn-menu-item.interface';
 
 @Component({
   selector: 'gln-menu-item',
@@ -54,9 +53,7 @@ export class GlnMenuItemComponent implements OnChanges {
     private renderer: Renderer2,
     private changeDetectorRef: ChangeDetectorRef,
     private sanitizer: DomSanitizer
-  ) {
-    console.log(`GlnMenuItem()`); // TODO del;
-  }
+  ) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.isDisabled) {
@@ -73,14 +70,6 @@ export class GlnMenuItemComponent implements OnChanges {
 
   public getLabelOrInnerText(): string | null {
     return this.label || (this.sanitizer.bypassSecurityTrustHtml(this.hostRef.nativeElement.innerHTML) as string);
-  }
-
-  public getValue(): unknown | null {
-    return this.value || this.label;
-  }
-
-  public getMenuItem(): GlnMenuItem {
-    return { label: this.getLabelOrInnerText(), value: this.value };
   }
 
   public setSelected(value: boolean): void {

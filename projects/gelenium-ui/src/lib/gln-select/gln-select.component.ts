@@ -18,9 +18,7 @@ import {
   QueryList,
   Renderer2,
   SimpleChanges,
-  TemplateRef,
   ViewChild,
-  ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
 import {
@@ -42,7 +40,6 @@ import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnSelectConfig } from './gln-select-config.interface';
-import { GlnMenuItem } from '../gln-menu-item/grn-menu-item.interface';
 
 let identifier = 0;
 
@@ -108,15 +105,12 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   @Output()
   readonly closed: EventEmitter<void> = new EventEmitter();
   @Output()
-  readonly selected: EventEmitter<GlnMenuItem | null> = new EventEmitter();
+  readonly selected: EventEmitter<GlnMenuItemComponent | null> = new EventEmitter();
   @Output()
-  readonly selectedMultiple: EventEmitter<GlnMenuItem[]> = new EventEmitter();
+  readonly selectedMultiple: EventEmitter<GlnMenuItemComponent[]> = new EventEmitter();
 
   @ViewChild('buttonElement', { static: true })
   public buttonElementRef: ElementRef<HTMLElement> | null = null;
-
-  @ViewChild('containerRef', { static: true, read: ViewContainerRef })
-  public containerRef!: ViewContainerRef;
 
   @ContentChildren(GlnMenuItemComponent)
   public menuItemList!: QueryList<GlnMenuItemComponent>;
@@ -128,10 +122,12 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   public set menuItems(value: GlnMenuItemComponent[]) {}
 
   public isOpen = false;
+  public isOpen2 = false;
+  public previousIsOpen = false;
 
-  public selectedMenuItem: GlnMenuItem | null = null;
+  public selectedMenuItem: GlnMenuItemComponent | null = null;
 
-  public selectedMenuItems: GlnMenuItem[] = [];
+  public selectedMenuItems: GlnMenuItemComponent[] = [];
 
   public defaultFrameSize = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public currConfig: GlnFrameConfig | null = null;
@@ -144,8 +140,6 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   public isFilled = false;
 
   public multiple = false; // ?
-
-  // public innMenuItemMap: GlnMenuItemComponentMap = {};
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -212,44 +206,6 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
         this.updateSelectedMenuItem(menuItem);
       }
     }
-
-    /*if (this.multiple && isArrayValue) {
-      const menuItemsMapItem: GlnMenuItemComponentMapItem[] = [];
-      const values: unknown[] = isArrayValue ? (valueInp as unknown[]) : [valueInp];
-      for (let i = 0; i < values.length; i++) {
-        const currItem = this.innMenuItemMap[values[i].toString()];
-        if (!!currItem) {
-          menuItemsMapItem.push(currItem);
-          currItem.menuItem.setSelected(true);
-        }
-      }
-      const oldSelectedValues = this.selectedValues;
-      for (let n = 0; n < oldSelectedValues.length; n++) {
-        if (!values.includes(oldSelectedValues[n])) {
-          const oldItem = this.innMenuItemMap[oldSelectedValues[n].toString()];
-          oldItem?.menuItem.setSelected(false);
-        }
-      }
-      const valuesResult: unknown[] = [];
-      const labelsResult: string[] = [];
-      for (let j = 0; j < menuItemsMapItem.length; j++) {
-        valuesResult.push(menuItemsMapItem[j].menuItem.value);
-        labelsResult.push(menuItemsMapItem[j].menuItem.label);
-      }
-      this.selectedValues = valuesResult;
-      this.selectedLabels = labelsResult;
-      this.changeDetectorRef.markForCheck();
-    } else if (!this.multiple && !isArrayValue) {
-      // const item = this.innMenuItemMap[String(valueInp)];
-      const menuItem = this.findMeniItemByValue(this.menuItems, valueInp);
-      if (this.selectedValue !== valueInp) {
-        // this.updateContainer(menuItem?.templateRef || null, menuItem?.contextInfo || {});
-        // this.selectedValue = valueInp;
-        // this.isFilled = !this.isEmpty();
-        // console.log(`this.isFilled=${this.isFilled}`); // TODO del;
-        // this.changeDetectorRef.markForCheck();
-      }
-    }*/
   }
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public registerOnChange(fn: any): void {
@@ -292,57 +248,46 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   }
 
   public doFocus(): void {
-    console.log(`doFocus()`); // TODO del;
     this.isFocused = true;
     this.focusState(this.renderer, this.hostRef, this.isFocused);
     this.focused.emit();
   }
 
   public doBlur(): void {
-    console.log(`doBlur()`); // TODO del;
     this.isFocused = false;
     this.focusState(this.renderer, this.hostRef, this.isFocused);
-    // this.isFilled = !!this.formControl.value;
     this.onTouched();
     this.blured.emit();
   }
-
-  /*public doInput(event: Event): void { // ??
-    // https://github.com/angular/angular/issues/9587 "event.stopImmediatePropagation() called from listeners not working"
-    // Added Event.cancelBubble check to make sure there was no call to event.stopImmediatePropagation() in previous handlers.
-    if (!!event && !event.cancelBubble) {
-      this.onChange(this.formControl.value);
-    }
-  }*/
 
   public getBoolean(value: string | null): boolean | null {
     return BooleanUtil.init(value);
   }
 
-  public selectItemValue(menuItemComp: GlnMenuItemComponent, multiple: boolean): void {
+  public selectedItemValue(menuItemComp: GlnMenuItemComponent, multiple: boolean): void {
     if (multiple) {
       this.updateSelectedMenuItems(menuItemComp);
       const newValues = this.selectedMenuItems.slice();
       this.selectedMultiple.emit(newValues);
       this.onChange(newValues);
-    } else if (this.selectedMenuItem?.value !== menuItemComp.value) {
-      this.updateSelectedMenuItem(menuItemComp);
-      this.selected.emit(this.selectedMenuItem);
-      this.onChange(this.selectedMenuItem);
+    } else {
+      if (this.selectedMenuItem?.value !== menuItemComp.value) {
+        this.updateSelectedMenuItem(menuItemComp);
+        this.selected.emit(this.selectedMenuItem);
+        this.onChange(this.selectedMenuItem);
+      }
       this.close();
     }
   }
 
-  public updateSelectedMenuItem(menuItemComp: GlnMenuItemComponent): void {
-    const menuItem = menuItemComp.getMenuItem();
+  public updateSelectedMenuItem(menuItem: GlnMenuItemComponent): void {
     this.selectedMenuItem = menuItem.value ? menuItem : null;
     this.isFilled = !this.isEmpty();
-    console.log(`selectedMenuItem=${this.selectedMenuItem}`); // TODO del;
-    console.log(`isFilled=${this.isFilled}`); // TODO del;
+    // console.log(`selectedMenuItem=${this.selectedMenuItem}`); // TODO del;
+    // console.log(`isFilled=${this.isFilled}`); // TODO del;
     this.changeDetectorRef.markForCheck();
   }
-  public updateSelectedMenuItems(menuItemComp: GlnMenuItemComponent): void {
-    const menuItem = menuItemComp.getMenuItem();
+  public updateSelectedMenuItems(menuItem: GlnMenuItemComponent): void {
     const idx = this.selectedMenuItems.indexOf(menuItem);
     if (idx === -1) {
       this.selectedMenuItems.push(menuItem);
@@ -350,30 +295,45 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
       this.selectedMenuItems.splice(idx, 1);
     }
     this.isFilled = !this.isEmpty();
-    console.log(`selectedValues=${this.selectedMenuItems}`); // TODO del;
-    console.log(`this.isFilled=${this.isFilled}`); // TODO del;
+    // console.log(`selectedValues=${this.selectedMenuItems}`); // TODO del;
+    // console.log(`this.isFilled=${this.isFilled}`); // TODO del;
     this.changeDetectorRef.markForCheck();
   }
 
   public isEmpty(): boolean {
-    console.log(`isEmpty() = `, this.multiple ? this.selectedMenuItems.length === 0 : this.selectedMenuItem === null); // TODO del;
     return this.multiple ? this.selectedMenuItems.length === 0 : this.selectedMenuItem === null;
   }
 
   public open(): void {
+    // console.log(`open(isOpen=${this.isOpen})`); // TODO del;
     if (!this.isOpen) {
+      this.previousIsOpen = this.isOpen;
       this.isOpen = true;
+      this.isOpen2 = true;
+      // console.log(`open() isOpen=${this.isOpen} isOpen2=${this.isOpen2}`); // TODO del;
       this.opened.emit();
       this.changeDetectorRef.markForCheck();
     }
   }
 
   public close(): void {
+    // console.log(`close(isOpen=${this.isOpen})`); // TODO del;
     if (this.isOpen) {
-      this.isOpen = false;
+      this.previousIsOpen = false;
+      setTimeout(() => {
+        this.isOpen = false;
+        // console.log(`close() isOpen=${this.isOpen}`); // TODO del;
+        this.changeDetectorRef.markForCheck();
+      }, 600);
+      this.isOpen2 = false;
+      // console.log(`close() isOpen2=${this.isOpen2}`); // TODO del;
       this.closed.emit();
       this.changeDetectorRef.markForCheck();
     }
+  }
+
+  public demo(text: string): void {
+    console.log(`demo(${text})`); // TODO del;
   }
 
   public trigger(): void {
@@ -394,7 +354,8 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   private findMeniItemByValue(menuItems: GlnMenuItemComponent[], value: unknown): GlnMenuItemComponent | null {
     let result: GlnMenuItemComponent | null = null;
     for (let i = 0; i < menuItems.length && !result; i++) {
-      result = menuItems[i].getValue() === value ? menuItems[i] : result;
+      const menuItemValue = menuItems[i].value || menuItems[i].label;
+      result = menuItemValue === value ? menuItems[i] : result;
     }
     return result;
   }
@@ -418,16 +379,5 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
       result[indexStr] = { index: i, menuItem: menuItems[i] };
     }
     return result;
-  }*/
-
-  // ** Private API **
-
-  /*private updateContainer(templateRef: TemplateRef<unknown> | null, context: unknown): void {
-    if (!templateRef) {
-      this.containerRef.clear();
-    } else {
-      this.containerRef.clear();
-      this.containerRef.createEmbeddedView(templateRef, context);
-    }
   }*/
 }

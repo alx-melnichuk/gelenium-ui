@@ -12,18 +12,21 @@ gln-menu-item-panel {
   // # height: var(--gmp-height);
   // # max-height: var(--gmp-height);
   // # width: 70px; // TODO set value !
-  top: var(--gmp-top);
-  bottom: var(--gmp-bottom);
-  left: var(--gmp-left);
-  right: var(--gmp-right);
+  top: var(--gmp-top, unset);
+  bottom: var(--gmp-bottom, unset);
+  left: var(--gmp-left, unset);
+  right: var(--gmp-right, unset);
   z-index: 1;
   padding: 8px 0px;
   height: var(--glnmip-ul-height);
 
-  // opacity: 1;
+  // opacity: 0;
+
   // transform: none;
   min-width: 120px;
-  // transition: opacity 251ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 167ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  // transition: opacity 2510ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 1670ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  // #transition: opacity 2510ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  // #transition: transform 1670ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   // top: 641px;
   // left: 361px;
   // transform-origin: 60px 0px;
@@ -37,7 +40,7 @@ gln-menu-item-panel {
 
   background-color: rgb(255, 255, 255);
   color: rgba(0, 0, 0, 0.87);
-  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  // transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   border-radius: 4px;
   box-shadow: rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px;
   position: absolute;

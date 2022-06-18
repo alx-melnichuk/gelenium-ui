@@ -1,8 +1,8 @@
 import { GlnMenuItemComponent } from './gln-menu-item.component';
 
 export interface GlnMenuItem {
-  label: string | null;
-  value: unknown | null;
+  label: string;
+  value: unknown;
 }
 
 export interface GlnMenuItemComponentMapItem {

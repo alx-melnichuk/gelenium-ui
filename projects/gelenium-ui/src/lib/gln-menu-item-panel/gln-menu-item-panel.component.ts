@@ -1,5 +1,6 @@
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -11,6 +12,7 @@ import {
   QueryList,
   ViewEncapsulation,
 } from '@angular/core';
+
 import { GlnMenuItemComponent } from '../gln-menu-item/gln-menu-item.component';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
@@ -23,7 +25,7 @@ import { NumberUtil } from '../_utils/number.util';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnMenuItemPanelComponent implements AfterContentInit {
+export class GlnMenuItemPanelComponent implements AfterContentInit, AfterViewInit {
   @Input()
   public isFixRight: boolean | null = null;
   @Input()
@@ -36,7 +38,7 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
   @Output()
   readonly selected: EventEmitter<GlnMenuItemComponent> = new EventEmitter();
   @Output()
-  readonly outside: EventEmitter<void> = new EventEmitter();
+  readonly closing: EventEmitter<void> = new EventEmitter();
 
   // @ContentChildren(GlnMenuItemComponent)
   // public menuItemList!: QueryList<GlnMenuItemComponent>;
@@ -69,18 +71,38 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
     // Determine the number of visible menu items.
     this.innVisibleCount = this.getVisibleCount(this.menuItems.length, this.visibleSize);
     this.activate(this.hostRef, this.innItemHeight * this.innVisibleCount, this.isFixRight);
+    // setTimeout(() => {
+    //   HtmlElemUtil.setProperty(this.hostRef, 'opacity', '1');
+    //   HtmlElemUtil.setProperty(this.hostRef, 'transform-origin', '60px 0px');
+    // }, 100);
   }
 
-  @HostListener('document:mousedown', ['$event'])
-  public documentClick(event: Event): void {
-    const withinBoundaries = event.composedPath().includes(this.hostRef.nativeElement);
-    if (withinBoundaries) {
-      // If the mouse click is inside the area of the current item, then determine the selected menu item.
-      this.handlerClick(event);
-    } else {
-      // If the mouse click is outside the area of the current element, then send an "outside" event.
-      this.outside.emit();
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngAfterViewInit(): void {
+    // console.log(``);
+    // HtmlElemUtil.setProperty(this.hostRef, 'opacity', '1');
+  }
+
+  @HostListener('document:mouseup', ['$event'])
+  public documentMouseup(event: Event): void {
+    console.log(`documentMouseup()`); // TODO del;
+    // If the mouse click is outside the area of the current element, then send an "outside" event.
+    this.closing.emit();
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  public documentKeydown(event: KeyboardEvent): void {
+    console.log(`documentKeydown() event.code=${event.code}`, event); // TODO del;
+    // 'ArrowDown', 'ArrowUp', 'Escape', 'Enter', 'Tab'
+    switch (event.code) {
+      case 'Escape':
+        this.closing.emit();
+        break;
     }
+  }
+  @HostListener('document:keypress', ['$event'])
+  public documentKeypress(event: Event): void {
+    console.log(`documentKeypress()`, event); // TODO del;
   }
 
   // ** Public API **
@@ -88,9 +110,10 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
   public trackByMenuItem(index: number, item: GlnMenuItemComponent): string {
     return String(item.value) + '#' + String(item.label);
   }
-  // Determine the selected menu item.
-  public handlerClick(event: Event): void {
+  // If the mouse click is inside the area of the current item, then determine the selected menu item.
+  public doMouseupItem(event: Event): void {
     event.stopPropagation();
+    console.log(`doMouseupItem()`); // TODO del;
     const dataValue = (event.target as Element).getAttribute('data-value') || '';
     const result: GlnMenuItemComponent | null = this.findMeniItemByValue(this.menuItems, dataValue);
     if (!!result && !result.disabled) {
@@ -107,6 +130,10 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
       result = menuItems[i].value === value ? menuItems[i] : result;
     }
     return result;
+  }
+
+  private getVisibleCount(itemsLength: number, sizeVisible: number): number {
+    return sizeVisible > 0 && sizeVisible < itemsLength ? sizeVisible : itemsLength;
   }
 
   private getItemHeight(elem: ElementRef<HTMLElement>): number {
@@ -136,10 +163,6 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
     return liPaddingTop + lineHeight + liPaddingBottom;
   }
 
-  private getVisibleCount(itemsLength: number, sizeVisible: number): number {
-    return sizeVisible > 0 && sizeVisible < itemsLength ? sizeVisible : itemsLength;
-  }
-
   private isDownValue(parent: HTMLElement, itemsLength: number): boolean {
     const rect = parent.getBoundingClientRect();
     const value = Math.round(rect.top * 100) / 100 + Math.round(rect.height * 100) / 100 + itemsLength;
@@ -150,12 +173,12 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
   private activate(hostRef: ElementRef<HTMLElement>, height: number, isFixRight: boolean | null): void {
     const parent = hostRef.nativeElement.parentElement as HTMLElement;
     const isDown = this.isDownValue(parent, height);
-    const top = isDown ? parent.offsetHeight : null;
+    const top = isDown ? /*parent.offsetHeight*/ 100 : null;
     const bottom = isDown ? null : -parent.offsetHeight;
     const left = isFixRight ? null : 0;
     const right = isFixRight ? 0 : null;
     HtmlElemUtil.setProperty(this.hostRef, '--glnmip-ul-height', NumberUtil.str(height)?.concat('px') || null);
-    HtmlElemUtil.setProperty(this.hostRef, '--gmp-top', NumberUtil.str(top)?.concat('px') || null);
+    HtmlElemUtil.setProperty(this.hostRef, '--gmp-top', NumberUtil.str(top)?.concat('%') || null);
     HtmlElemUtil.setProperty(this.hostRef, '--gmp-bottom', NumberUtil.str(bottom)?.concat('px') || null);
     HtmlElemUtil.setProperty(this.hostRef, '--gmp-left', NumberUtil.str(left)?.concat('px') || null);
     HtmlElemUtil.setProperty(this.hostRef, '--gmp-right', NumberUtil.str(right)?.concat('px') || null);

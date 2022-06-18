@@ -31,15 +31,18 @@
       <span glnf-orn-rg
         class="glns-ornam-rg">
         <ng-content select="[gln-orn-rg]"></ng-content>
-        <svg *ngIf="!getBoolean(noIcon)"
-          ico
-          [attr.opn]="isOpen ? '': null"
-          [ngClass]="['glns-icon', (isOpen ? 'is-open' : '')]"
-          focusable="false"
-          aria-hidden="true"
-          viewBox="0 0 24 24">
-          <path d="M7 10l5 5 5-5z"></path>
-        </svg>
+        <button glns-btn
+          class="glns-btn">
+          <svg *ngIf="!getBoolean(noIcon)"
+            ico
+            [attr.opn]="isOpen ? '': null"
+            [ngClass]="['glns-icon', (isOpen ? 'is-open' : '')]"
+            focusable="false"
+            aria-hidden="true"
+            viewBox="0 0 24 24">
+            <path d="M7 10l5 5 5-5z"></path>
+          </svg>
+        </button>
       </span>
 
       <div [attr.tabindex]="innDisabled ? null : 0"
@@ -49,29 +52,28 @@
         glns-elem
         (focus)="doFocus()"
         (blur)="doBlur()"
-        (click)="trigger()">
-        <!-- {{ !isFilled ? '&ZeroWidthSpace;' : (!multiple ? selectedMenuItem?.label : 'test' ) }} -->
-        <div #containerRef
-          *ngIf="!isFilled">&ZeroWidthSpace;</div>
-        <div *ngIf="isFilled"
-          [innerHTML]="selectedMenuItem?.label"></div>
+        (mousedown)="trigger()"
+        (mouseup)="$event.stopPropagation()">
+        <div *ngIf="isFilled; else elseBlockFilled"
+          [innerHTML]="selectedMenuItem?.getLabelOrInnerText()">
+        </div>
+        <ng-template #elseBlockFilled>
+          <div>&ZeroWidthSpace;</div>
+        </ng-template>
       </div>
 
     </gln-frame>
   </div>
 </ng-container>
 
-<gln-menu-item-panel *ngIf="isOpen"
-  [ngClass]="['glns-panel', (isFixRight ? 'is-fix-right' : '')]"
-  [isFixRight]="getBoolean(isFixRight)"
-  [isMultiple]="getBoolean(isMultiple)"
-  [menuItemList]="menuItemList"
-  [visibleSize]="sizeVisible"
-  (selected)="selectItemValue($event, multiple)"
-  (outside)="close()"
-  grnClickOut
-  clickOut9="close()"
-  grnEscape
-  escape9="close()">
-  <ng-content select="gln-menu-item"></ng-content>
-</gln-menu-item-panel>
+<div [ngClass]="['glns-wrap-items', (isOpen2 ? 'is-open': '')]">
+  <gln-menu-item-panel *ngIf="isOpen"
+    [ngClass]="['glns-panel', (isFixRight ? 'is-fix-right' : '')]"
+    [isFixRight]="getBoolean(isFixRight)"
+    [isMultiple]="getBoolean(isMultiple)"
+    [menuItemList]="menuItemList"
+    [visibleSize]="sizeVisible"
+    (selected)="selectedItemValue($event, multiple)"
+    (closing)="close()">
+  </gln-menu-item-panel>
+</div>
