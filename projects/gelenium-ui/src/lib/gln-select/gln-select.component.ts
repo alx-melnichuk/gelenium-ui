@@ -1,6 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -31,6 +30,7 @@ import {
   ValidationErrors,
   Validator,
 } from '@angular/forms';
+import { GlnFrameSizePaddingVerHorRes } from '../directives/gln-frame-size/gln-frame-size-prepare.interface';
 
 import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
@@ -38,6 +38,7 @@ import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.inte
 import { GlnMenuItemComponent } from '../gln-menu-item/gln-menu-item.component';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { NumberUtil } from '../_utils/number.util';
 
 import { GlnSelectConfig } from './gln-select-config.interface';
 
@@ -58,7 +59,7 @@ export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT
     { provide: GLN_NODE_INTERNAL_VALIDATOR, useExisting: GlnSelectComponent },
   ],
 })
-export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Validator, AfterContentInit {
+export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Validator {
   @Input()
   public id = 'glns_' + ++identifier;
   @Input()
@@ -109,8 +110,8 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   @Output()
   readonly selectedMultiple: EventEmitter<GlnMenuItemComponent[]> = new EventEmitter();
 
-  @ViewChild('buttonElement', { static: true })
-  public buttonElementRef: ElementRef<HTMLElement> | null = null;
+  @ViewChild('mainElementRef', { static: true })
+  public mainElementRef: ElementRef<HTMLElement> | null = null;
 
   @ContentChildren(GlnMenuItemComponent)
   public menuItemList!: QueryList<GlnMenuItemComponent>;
@@ -122,8 +123,8 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   public set menuItems(value: GlnMenuItemComponent[]) {}
 
   public isOpen = false;
-  public isOpen2 = false;
-  public previousIsOpen = false;
+  public isHide = false;
+  public isAnimation = false;
 
   public selectedMenuItem: GlnMenuItemComponent | null = null;
 
@@ -169,15 +170,6 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
     if (changes.isRequired) {
       this.innRequired = BooleanUtil.init(this.isRequired);
     }
-
-    // if (changes.isRequired) {
-    //   this.prepareFormGroup(this.innRequired);
-    // }
-  }
-
-  public ngAfterContentInit(): void {
-    console.log(`a-this.menuItems.length=${this.menuItems.length}`); // TODO del;
-    // this.innMenuItemMap = this.getMenuItemMap(this.menuItems, true, this.id);
   }
 
   // ** ControlValueAccessor - start **
@@ -198,7 +190,6 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
     // }
     const menuItem = this.findMeniItemByValue(this.menuItems, valueInp);
     if (menuItem !== null) {
-      console.log(`writeValue(); menuItem !== null`); // TODO del;
       const isArrayValue = Array.isArray(valueInp);
       if (this.multiple && isArrayValue) {
         this.updateSelectedMenuItems(menuItem);
@@ -242,8 +233,8 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   // ** Public API **
 
   public focus(): void {
-    if (isPlatformBrowser(this.platformId) && !!this.buttonElementRef) {
-      this.buttonElementRef.nativeElement.focus();
+    if (isPlatformBrowser(this.platformId) && !!this.mainElementRef) {
+      this.mainElementRef.nativeElement.focus();
     }
   }
 
@@ -300,47 +291,52 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
     this.changeDetectorRef.markForCheck();
   }
 
+  public doAnimationStart(): void {
+    this.isAnimation = true;
+    this.changeDetectorRef.markForCheck();
+  }
+
+  public doAnimationEnd(): void {
+    this.isAnimation = false;
+    if (this.isOpen && this.isHide) {
+      this.isOpen = false;
+      this.isHide = false;
+      this.closed.emit();
+    }
+    this.changeDetectorRef.markForCheck();
+  }
+  // Determine the value of the css variable "frame size".
+  public frameChange(event: GlnFrameSizePaddingVerHorRes): void {
+    HtmlElemUtil.setProperty(this.hostRef, '--glns-frameSize', NumberUtil.str(event.frameSizeValue)?.concat('px') || null);
+  }
+
   public isEmpty(): boolean {
     return this.multiple ? this.selectedMenuItems.length === 0 : this.selectedMenuItem === null;
   }
 
+  public trigger(): void {
+    // There should be no toggles during the animation.
+    if (!this.isAnimation) {
+      if (this.isOpen) {
+        this.close();
+      } else {
+        this.open();
+      }
+    }
+  }
   public open(): void {
-    // console.log(`open(isOpen=${this.isOpen})`); // TODO del;
-    if (!this.isOpen) {
-      this.previousIsOpen = this.isOpen;
+    // You cannot open the panel during animation.
+    if (!this.isAnimation && !this.isOpen) {
       this.isOpen = true;
-      this.isOpen2 = true;
-      // console.log(`open() isOpen=${this.isOpen} isOpen2=${this.isOpen2}`); // TODO del;
+      this.isHide = false;
       this.opened.emit();
       this.changeDetectorRef.markForCheck();
     }
   }
-
   public close(): void {
-    // console.log(`close(isOpen=${this.isOpen})`); // TODO del;
-    if (this.isOpen) {
-      this.previousIsOpen = false;
-      setTimeout(() => {
-        this.isOpen = false;
-        // console.log(`close() isOpen=${this.isOpen}`); // TODO del;
-        this.changeDetectorRef.markForCheck();
-      }, 600);
-      this.isOpen2 = false;
-      // console.log(`close() isOpen2=${this.isOpen2}`); // TODO del;
-      this.closed.emit();
-      this.changeDetectorRef.markForCheck();
-    }
-  }
-
-  public demo(text: string): void {
-    console.log(`demo(${text})`); // TODO del;
-  }
-
-  public trigger(): void {
-    if (this.isOpen) {
-      this.close();
-    } else {
-      this.open();
+    // You cannot close a panel during an animation.
+    if (!this.isAnimation && this.isOpen) {
+      this.isHide = true;
     }
   }
 
@@ -359,25 +355,4 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
     }
     return result;
   }
-
-  /*private prepareFormGroup(isRequired: boolean | null): void {
-    this.formControl.clearValidators();
-    const newValidator: ValidatorFn[] = [];
-    if (isRequired) {
-      newValidator.push(Validators.required);
-    }
-    this.formControl.setValidators(newValidator);
-  }*/
-
-  /*private getMenuItemMap(menuItems: GlnMenuItemComponent[], isCheckUnique: boolean, id: string): GlnMenuItemComponentMap {
-    const result: GlnMenuItemComponentMap = {};
-    for (let i = 0; i < menuItems.length; i++) {
-      const indexStr = String(menuItems[i].value || menuItems[i].label);
-      if (isCheckUnique && result[indexStr] !== undefined) {
-        console.error(`For GlnSelect "${id}", there is a non-unique value "${indexStr}" in the GlnMenuItem list.`);
-      }
-      result[indexStr] = { index: i, menuItem: menuItems[i] };
-    }
-    return result;
-  }*/
 }

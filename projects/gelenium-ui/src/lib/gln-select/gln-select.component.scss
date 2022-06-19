@@ -8,7 +8,6 @@ gln-select {
   @include mxFlexDirection(column);
   min-width: 100px;
   position: relative;
-
   // # font-family: Roboto, Helvetica, Arial, sans-serif;
   // # font-weight: 400;
   // # font-size: 1rem; // 16px
@@ -59,11 +58,36 @@ gln-select {
     }
   }
 
+  @keyframes wrap-items-show {
+    from {
+      opacity: 0;
+      transform: scale(0.1);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes wrap-items-hide {
+    from {
+      opacity: 1;
+      transform: none;
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.1);
+    }
+  }
+
   .glns-wrap-items {
     opacity: 0;
-    transition: opacity 551ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; // transition: opacity 251ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    &.is-open {
+    &.is-open:not(.is-hide) {
+      animation: wrap-items-show 251ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
       opacity: 1;
-    }  
+    }
+    &:not(.is-open).is-hide {
+      animation: wrap-items-hide 251ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      opacity: 0;
+    }
   }
 }

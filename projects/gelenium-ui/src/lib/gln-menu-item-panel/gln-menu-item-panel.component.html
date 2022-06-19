@@ -1,10 +1,13 @@
 <ul glnmip-ul
   class="glnmip-ul"
+  tabindex="-1"
+  role="listbox"
   (mouseup)="doMouseupItem($event)">
   <li glnmip-li
     class="glnmip-li"
-    *ngFor="let menuItem of menuItems; trackBy: trackByMenuItem"
+    tabindex="-1"
     role="option"
+    *ngFor="let menuItem of menuItems; trackBy: trackByMenuItem"
     aria-selected="false"
     [attr.data-value]="menuItem.value"
     [innerHTML]="menuItem.getLabelOrInnerText()">

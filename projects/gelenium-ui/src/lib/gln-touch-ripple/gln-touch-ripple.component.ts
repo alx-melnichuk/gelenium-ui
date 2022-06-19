@@ -99,15 +99,25 @@ export class GlnTouchRippleComponent implements OnChanges, OnInit {
       circle.style.left = `${left}px`;
       circle.style.top = `${top}px`;
       circle.classList.add(RIPPLE_CLASS);
+
+      circle.addEventListener(
+        'animationend',
+        () => {
+          if (this.hostRef.nativeElement.children.length > 0) {
+            this.hostRef.nativeElement.children.item(0)?.remove();
+          }
+        },
+        // A value of "true" indicates that the listener should be called at most once after being added.
+        { once: true }
+      );
       this.hostRef.nativeElement.appendChild(circle);
 
-      const startTimer = setTimeout(() => {
-        clearTimeout(startTimer);
-        const children = this.hostRef.nativeElement.children;
-        if (children.length > 0) {
-          children.item(0)?.remove();
-        }
-      }, 1000);
+      // const startTimer = set Timeout(() => {
+      //   clear Timeout(startTimer);
+      //   if (this.hostRef.nativeElement.children.length > 0) {
+      //     this.hostRef.nativeElement.children.item(0)?.remove();
+      //   }
+      // }, 1000);
     }
   }
 }

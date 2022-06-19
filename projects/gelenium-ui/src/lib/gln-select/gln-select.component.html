@@ -20,6 +20,7 @@
       [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
       [glnFrameSizePrepare]="glnFrameExteriorInput"
       [glnFrameSizeModify]="glnFrameExteriorInput.exterior"
+      (glnFrameSizeChange)="frameChange($event)"
       glnFrameOrnament
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
       [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)">
@@ -35,7 +36,7 @@
           class="glns-btn">
           <svg *ngIf="!getBoolean(noIcon)"
             ico
-            [attr.opn]="isOpen ? '': null"
+            [attr.opn]="isOpen && !isHide ? 'is-open': null"
             [ngClass]="['glns-icon', (isOpen ? 'is-open' : '')]"
             focusable="false"
             aria-hidden="true"
@@ -46,6 +47,7 @@
       </span>
 
       <div [attr.tabindex]="innDisabled ? null : 0"
+        #mainElementRef
         [attr.id]="id + '_wrap'"
         glnf-pd-ver
         glnf-pd-hor
@@ -66,8 +68,13 @@
   </div>
 </ng-container>
 
-<div [ngClass]="['glns-wrap-items', (isOpen2 ? 'is-open': '')]">
+<div [ngClass]="['glns-wrap-items', (isHide ? 'is-hide': (isOpen ? 'is-open': ''))]"
+  tabindex="-1"
+  (animationstart)="doAnimationStart()"
+  (animationend)="doAnimationEnd()">
   <gln-menu-item-panel *ngIf="isOpen"
+    tabindex="-1"
+    [attr.no-mouse]="isAnimation ? '': null"
     [ngClass]="['glns-panel', (isFixRight ? 'is-fix-right' : '')]"
     [isFixRight]="getBoolean(isFixRight)"
     [isMultiple]="getBoolean(isMultiple)"

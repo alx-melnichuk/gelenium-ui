@@ -1,6 +1,5 @@
 import {
   AfterContentInit,
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -25,7 +24,7 @@ import { NumberUtil } from '../_utils/number.util';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnMenuItemPanelComponent implements AfterContentInit, AfterViewInit {
+export class GlnMenuItemPanelComponent implements AfterContentInit {
   @Input()
   public isFixRight: boolean | null = null;
   @Input()
@@ -39,9 +38,6 @@ export class GlnMenuItemPanelComponent implements AfterContentInit, AfterViewIni
   readonly selected: EventEmitter<GlnMenuItemComponent> = new EventEmitter();
   @Output()
   readonly closing: EventEmitter<void> = new EventEmitter();
-
-  // @ContentChildren(GlnMenuItemComponent)
-  // public menuItemList!: QueryList<GlnMenuItemComponent>;
 
   public get menuItems(): GlnMenuItemComponent[] {
     return this.menuItemList.toArray();
@@ -71,38 +67,23 @@ export class GlnMenuItemPanelComponent implements AfterContentInit, AfterViewIni
     // Determine the number of visible menu items.
     this.innVisibleCount = this.getVisibleCount(this.menuItems.length, this.visibleSize);
     this.activate(this.hostRef, this.innItemHeight * this.innVisibleCount, this.isFixRight);
-    // setTimeout(() => {
-    //   HtmlElemUtil.setProperty(this.hostRef, 'opacity', '1');
-    //   HtmlElemUtil.setProperty(this.hostRef, 'transform-origin', '60px 0px');
-    // }, 100);
-  }
-
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
-  ngAfterViewInit(): void {
-    // console.log(``);
-    // HtmlElemUtil.setProperty(this.hostRef, 'opacity', '1');
   }
 
   @HostListener('document:mouseup', ['$event'])
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public documentMouseup(event: Event): void {
-    console.log(`documentMouseup()`); // TODO del;
     // If the mouse click is outside the area of the current element, then send an "outside" event.
     this.closing.emit();
   }
 
   @HostListener('document:keydown', ['$event'])
   public documentKeydown(event: KeyboardEvent): void {
-    console.log(`documentKeydown() event.code=${event.code}`, event); // TODO del;
     // 'ArrowDown', 'ArrowUp', 'Escape', 'Enter', 'Tab'
     switch (event.code) {
       case 'Escape':
         this.closing.emit();
         break;
     }
-  }
-  @HostListener('document:keypress', ['$event'])
-  public documentKeypress(event: Event): void {
-    console.log(`documentKeypress()`, event); // TODO del;
   }
 
   // ** Public API **
@@ -113,11 +94,10 @@ export class GlnMenuItemPanelComponent implements AfterContentInit, AfterViewIni
   // If the mouse click is inside the area of the current item, then determine the selected menu item.
   public doMouseupItem(event: Event): void {
     event.stopPropagation();
-    console.log(`doMouseupItem()`); // TODO del;
     const dataValue = (event.target as Element).getAttribute('data-value') || '';
     const result: GlnMenuItemComponent | null = this.findMeniItemByValue(this.menuItems, dataValue);
     if (!!result && !result.disabled) {
-      console.log(`result.label='${result.label}', result.value='${result.value}'`); // TODO del;
+      // console.log(`result.label='${result.label}', result.value='${result.value}'`); // TODO del;
       this.selected.emit(result);
     }
   }
@@ -146,7 +126,6 @@ export class GlnMenuItemPanelComponent implements AfterContentInit, AfterViewIni
     const d = Number(getComputedStyle(elementUl).getPropertyValue('line-height').replace('px', ''));
     // Get the line height from the style set.
     const lineHeight = Number(styleDeclaration.getPropertyValue('line-height').replace('px', ''));
-    console.log(`1.getItemHeight() lineHeight=${lineHeight} d=${d}`); // TODO del;
 
     return liPaddingTop + lineHeight + liPaddingBottom;
   }
@@ -158,7 +137,6 @@ export class GlnMenuItemPanelComponent implements AfterContentInit, AfterViewIni
     const liPaddingBottom = Number(styleDeclaration.getPropertyValue('--glnmip-li-pd-bt').replace('px', ''));
     // Get the line height from the style set.
     const lineHeight = Number(styleDeclaration.getPropertyValue('line-height').replace('px', ''));
-    console.log(`3.getItemHeight() lineHeight=${lineHeight}`); // TODO del;
 
     return liPaddingTop + lineHeight + liPaddingBottom;
   }
@@ -172,14 +150,14 @@ export class GlnMenuItemPanelComponent implements AfterContentInit, AfterViewIni
 
   private activate(hostRef: ElementRef<HTMLElement>, height: number, isFixRight: boolean | null): void {
     const parent = hostRef.nativeElement.parentElement as HTMLElement;
-    const isDown = this.isDownValue(parent, height);
-    const top = isDown ? /*parent.offsetHeight*/ 100 : null;
-    const bottom = isDown ? null : -parent.offsetHeight;
+    const isDown = false; // this.isDownValue(parent, height);
+    // const top = isDown ? /*parent.offsetHeight*/ 100 : null;
+    const bottom = isDown ? null : 'calc(var(--glns-frameSize) + 4px)'; // parent.offsetHeight + 2; // ;
     const left = isFixRight ? null : 0;
     const right = isFixRight ? 0 : null;
     HtmlElemUtil.setProperty(this.hostRef, '--glnmip-ul-height', NumberUtil.str(height)?.concat('px') || null);
-    HtmlElemUtil.setProperty(this.hostRef, '--gmp-top', NumberUtil.str(top)?.concat('%') || null);
-    HtmlElemUtil.setProperty(this.hostRef, '--gmp-bottom', NumberUtil.str(bottom)?.concat('px') || null);
+    // HtmlElemUtil.setProperty(this.hostRef, '--gmp-top', NumberUtil.str(top)?.concat('%') || null);
+    HtmlElemUtil.setProperty(this.hostRef, '--gmp-bottom', bottom);
     HtmlElemUtil.setProperty(this.hostRef, '--gmp-left', NumberUtil.str(left)?.concat('px') || null);
     HtmlElemUtil.setProperty(this.hostRef, '--gmp-right', NumberUtil.str(right)?.concat('px') || null);
   }
