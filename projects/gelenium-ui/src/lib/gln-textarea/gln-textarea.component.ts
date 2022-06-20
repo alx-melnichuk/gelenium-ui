@@ -38,7 +38,7 @@ import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.inte
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
-let identifier = 0;
+let uniqueIdCounter = 0;
 
 export const GLN_TEXTAREA_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_TEXTAREA_CONFIG');
 
@@ -57,7 +57,7 @@ export const GLN_TEXTAREA_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_TEXTA
 })
 export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Validator, GlnNodeInternalValidator {
   @Input()
-  public id = 'glnt_' + ++identifier;
+  public id = `glnt-${uniqueIdCounter++}`;
   @Input()
   public autoComplete = '';
   @Input()
@@ -111,13 +111,13 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
 
   public defaultFrameSize = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public currConfig: GlnFrameConfig | null = null;
-  public isDisabled2 = false; // Binding attribute "isDisabled".
-  public isRequired2: boolean | null = null; // Binding attribute "isRequired".
-
+  public innDisabled: boolean | null = null; // Binding attribute "isDisabled".
+  public innRequired: boolean | null = null; // Binding attribute "isRequired".
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public isFocused = false;
   public isFilled = false;
+
   public currentRows = 1;
 
   constructor(
@@ -139,14 +139,14 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.isDisabled) {
-      this.isDisabled2 = BooleanUtil.value(this.isDisabled);
-      this.setDisabledState(this.isDisabled2);
+      this.innDisabled = BooleanUtil.init(this.isDisabled);
+      this.setDisabledState(!!this.innDisabled);
     }
     if (changes.isRequired) {
-      this.isRequired2 = BooleanUtil.init(this.isRequired);
+      this.innRequired = BooleanUtil.init(this.isRequired);
     }
     if (changes.isRequired || changes.minLength || changes.maxLength) {
-      this.prepareFormGroup(this.isRequired2, this.minLength, this.maxLength);
+      this.prepareFormGroup(this.innRequired, this.minLength, this.maxLength);
     }
     if (changes.cntRows || changes.minRows || changes.maxRows) {
       this.currentRows = this.cntRows || this.getCurrentRows(this.getNumberLines(this.formControl.value), this.minRows, this.maxRows);
@@ -183,13 +183,13 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   }
 
   public setDisabledState(isDisabled: boolean): void {
-    if (this.isDisabled2 !== isDisabled) {
+    if (this.innDisabled !== isDisabled) {
       if (isDisabled) {
         this.formGroup.disable();
       } else {
         this.formGroup.enable();
       }
-      this.isDisabled2 = isDisabled;
+      this.innDisabled = isDisabled;
       this.changeDetectorRef.markForCheck();
     }
   }

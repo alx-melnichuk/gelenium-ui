@@ -1,7 +1,6 @@
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -9,12 +8,18 @@ import {
   Input,
   Output,
   QueryList,
+  Renderer2,
   ViewEncapsulation,
 } from '@angular/core';
 
 import { GlnMenuItemComponent } from '../gln-menu-item/gln-menu-item.component';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
+
+const GLN_MENU_ITEM_PANEL = 'GLN-MENU-ITEM-PANEL';
+const GLN_MENU_ITEM = 'GLN-MENU-ITEM';
+
+let uniqueIdCounter = 0;
 
 @Component({
   selector: 'gln-menu-item-panel',
@@ -25,6 +30,8 @@ import { NumberUtil } from '../_utils/number.util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GlnMenuItemPanelComponent implements AfterContentInit {
+  @Input()
+  public id = `glnmip-${uniqueIdCounter++}`;
   @Input()
   public isFixRight: boolean | null = null;
   @Input()
@@ -59,7 +66,9 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set itemHeight(value: number) {}
 
-  constructor(public hostRef: ElementRef<HTMLElement>, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(public hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
+  }
 
   public ngAfterContentInit(): void {
     // Determine the height of the menu item by the properties of the "ul" element, it contains the "line height".
@@ -71,13 +80,26 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
 
   @HostListener('document:mouseup', ['$event'])
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public documentMouseup(event: Event): void {
+  public documentMouseupHandling(event: Event): void {
     // If the mouse click is outside the area of the current element, then send an "outside" event.
     this.closing.emit();
   }
 
+  @HostListener('mouseup', ['$event'])
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public mouseupHandling(event: Event): void {
+    event.stopPropagation();
+    // If the mouse click is inside the area of the current element, then determine the selected menu item.
+    const menuItem = this.getMenuItemByHtmlElement(this.getHtmlElementByEvent(event.target as HTMLElement), this.menuItems);
+    if (!menuItem) {
+      this.closing.emit();
+    } else if (!menuItem.innDisabled) {
+      this.selected.emit(menuItem);
+    }
+  }
+
   @HostListener('document:keydown', ['$event'])
-  public documentKeydown(event: KeyboardEvent): void {
+  public documentKeydownHandling(event: KeyboardEvent): void {
     // 'ArrowDown', 'ArrowUp', 'Escape', 'Enter', 'Tab'
     switch (event.code) {
       case 'Escape':
@@ -88,26 +110,24 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
 
   // ** Public API **
 
-  public trackByMenuItem(index: number, item: GlnMenuItemComponent): string {
-    return String(item.value) + '#' + String(item.label);
-  }
-  // If the mouse click is inside the area of the current item, then determine the selected menu item.
-  public doMouseupItem(event: Event): void {
-    event.stopPropagation();
-    const dataValue = (event.target as Element).getAttribute('data-value') || '';
-    const result: GlnMenuItemComponent | null = this.findMeniItemByValue(this.menuItems, dataValue);
-    if (!!result && !result.disabled) {
-      // console.log(`result.label='${result.label}', result.value='${result.value}'`); // TODO del;
-      this.selected.emit(result);
-    }
-  }
-
   // ** Private API **
 
-  private findMeniItemByValue(menuItems: GlnMenuItemComponent[], value: unknown): GlnMenuItemComponent | null {
+  private getHtmlElementByEvent(htmlElement: HTMLElement | null): HTMLElement | null {
+    let result: HTMLElement | null = null;
+    let elem: HTMLElement | null = htmlElement;
+    while (!!elem && !result && elem.tagName !== GLN_MENU_ITEM_PANEL) {
+      result = elem.tagName === GLN_MENU_ITEM ? elem : result;
+      elem = elem.parentElement;
+    }
+    return result;
+  }
+
+  private getMenuItemByHtmlElement(element: HTMLElement | null, menuItems: GlnMenuItemComponent[]): GlnMenuItemComponent | null {
     let result: GlnMenuItemComponent | null = null;
-    for (let i = 0; i < menuItems.length && !result; i++) {
-      result = menuItems[i].value === value ? menuItems[i] : result;
+    if (element && menuItems.length > 0) {
+      for (let idx = 0; idx < menuItems.length && !result; idx++) {
+        result = element === menuItems[idx].hostRef.nativeElement ? menuItems[idx] : result;
+      }
     }
     return result;
   }
@@ -150,7 +170,7 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
 
   private activate(hostRef: ElementRef<HTMLElement>, height: number, isFixRight: boolean | null): void {
     const parent = hostRef.nativeElement.parentElement as HTMLElement;
-    const isDown = false; // this.isDownValue(parent, height);
+    const isDown = true; // this.isDownValue(parent, height);
     // const top = isDown ? /*parent.offsetHeight*/ 100 : null;
     const bottom = isDown ? null : 'calc(var(--glns-frameSize) + 4px)'; // parent.offsetHeight + 2; // ;
     const left = isFixRight ? null : 0;

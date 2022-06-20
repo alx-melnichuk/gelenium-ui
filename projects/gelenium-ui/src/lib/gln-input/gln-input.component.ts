@@ -40,7 +40,7 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnInputType, GlnInputTypeUtil } from '../gln-input/gln-input.interface';
 
-let identifier = 0;
+let uniqueIdCounter = 0;
 
 export const GLN_INPUT_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_INPUT_CONFIG');
 
@@ -59,7 +59,7 @@ export const GLN_INPUT_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_INPUT_CO
 })
 export class GlnInputComponent implements OnChanges, ControlValueAccessor, Validator, GlnNodeInternalValidator {
   @Input()
-  public id = 'glni_' + ++identifier;
+  public id = `glni-${uniqueIdCounter++}`;
   @Input()
   public autoComplete = '';
   @Input()
@@ -115,14 +115,14 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
 
   public defaultFrameSize = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public currConfig: GlnFrameConfig | null = null;
-  public typeVal: GlnInputType = GlnInputType.text;
-  public isDisabled2 = false; // Binding attribute "isDisabled".
-  public isRequired2: boolean | null = null; // Binding attribute "isRequired".
-
+  public innDisabled: boolean | null = null; // Binding attribute "isDisabled".
+  public innRequired: boolean | null = null; // Binding attribute "isRequired".
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public isFocused = false;
   public isFilled = false;
+
+  public typeVal: GlnInputType = GlnInputType.text;
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -146,15 +146,15 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.isDisabled) {
-      this.isDisabled2 = BooleanUtil.value(this.isDisabled);
-      this.setDisabledState(this.isDisabled2);
+      this.innDisabled = BooleanUtil.init(this.isDisabled);
+      this.setDisabledState(!!this.innDisabled);
     }
     if (changes.isRequired) {
-      this.isRequired2 = BooleanUtil.init(this.isRequired);
+      this.innRequired = BooleanUtil.init(this.isRequired);
     }
 
     if (changes.isRequired || changes.minLength || changes.maxLength) {
-      this.prepareFormGroup(this.isRequired2, this.minLength, this.maxLength);
+      this.prepareFormGroup(this.innRequired, this.minLength, this.maxLength);
     }
   }
 
@@ -183,13 +183,13 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
   }
 
   public setDisabledState(isDisabled: boolean): void {
-    if (this.isDisabled2 !== isDisabled) {
+    if (this.innDisabled !== isDisabled) {
       if (isDisabled) {
         this.formGroup.disable();
       } else {
         this.formGroup.enable();
       }
-      this.isDisabled2 = isDisabled;
+      this.innDisabled = isDisabled;
       this.changeDetectorRef.markForCheck();
     }
   }

@@ -45,22 +45,18 @@ export class GlnRegexMatchUtil {
   public static isRealNumeric(value: string): { dimension: number; accuracy: number } | null {
     let result: { dimension: number; accuracy: number } | null = null;
     if (value && value.startsWith(NAME_NUMERIC)) {
-      const valueText = value.substr(NAME_NUMERIC.length);
+      const valueText = value.substring(NAME_NUMERIC.length);
       const start = valueText.indexOf('(');
       const finish = valueText.indexOf(')');
       if (start !== -1 && start < finish) {
-        const data = valueText.substr(start + 1, finish - start - 1);
+        const data = valueText.substring(start + 1, finish);
         const idx = data.indexOf(',');
         const separator = idx !== -1 ? idx : data.length;
-        const dimension = GlnRegexMatchUtil.parserInt(data.substr(0, separator), -1);
-        const accuracy = GlnRegexMatchUtil.parserInt(data.substr(separator + 1), -1);
+        const dimension = parseInt(data.substring(0, separator)) || -1;
+        const accuracy = parseInt(data.substring(separator + 1)) || -1;
         result = { dimension, accuracy };
       }
     }
     return result;
-  }
-  public static parserInt(valueStr: string, defaulValue: number): number {
-    const val = !valueStr ? defaulValue : parseInt(valueStr, 10);
-    return isNaN(val) ? defaulValue : val;
   }
 }

@@ -68,10 +68,10 @@ export class InfiniteScrollBasicComponent {
   }
 
   private createPhone(): string {
-    const part1 = ('000' + this.randomNumber(1000)).substr(-3);
-    const part2 = ('000' + this.randomNumber(1000)).substr(-3);
-    const part3 = ('000' + this.randomNumber(100)).substr(-2);
-    const part4 = ('000' + this.randomNumber(100)).substr(-2);
+    const part1 = ('000' + this.randomNumber(1000)).slice(-3);
+    const part2 = ('000' + this.randomNumber(1000)).slice(-3);
+    const part3 = ('000' + this.randomNumber(100)).slice(-2);
+    const part4 = ('000' + this.randomNumber(100)).slice(-2);
     return part1 + '-' + part2 + '-' + part3 + '-' + part4;
   }
 

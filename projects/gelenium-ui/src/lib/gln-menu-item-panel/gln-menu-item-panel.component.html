@@ -1,3 +1,4 @@
+<!--
 <ul glnmip-ul
   class="glnmip-ul"
   tabindex="-1"
@@ -10,6 +11,8 @@
     *ngFor="let menuItem of menuItems; trackBy: trackByMenuItem"
     aria-selected="false"
     [attr.data-value]="menuItem.value"
-    [innerHTML]="menuItem.getLabelOrInnerText()">
+    [innerHTML]="menuItem.getTextContent()">
   </li>
 </ul>
+-->
+<ng-content></ng-content>

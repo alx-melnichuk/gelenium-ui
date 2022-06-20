@@ -30,7 +30,7 @@ import { GlnLinkDirective } from './gln-link.directive';
 
 export const GLN_BUTTON_CONFIG = new InjectionToken<GlnButtonConfig>('GLN_BUTTON_CONFIG');
 
-let identifier = 0;
+let uniqueIdCounter = 0;
 
 @Component({
   selector: 'gln-button',
@@ -42,7 +42,7 @@ let identifier = 0;
 })
 export class GlnButtonComponent implements OnChanges, AfterContentInit {
   @Input()
-  public id = 'glnb_' + ++identifier;
+  public id = `glnb-${uniqueIdCounter++}`;
   @Input()
   public config: GlnButtonConfig | null = null;
   @Input()
@@ -70,8 +70,9 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
 
   public defaultFrameSize = GlnFrameSizeUtil.getValue(GlnFrameSize.small) || 0;
   public currConfig: GlnButtonConfig | null = null;
+  public innDisabled: boolean | null = null; // Binding attribute "isDisabled".
+
   public isFocused = false;
-  public isDisabled2: boolean | null = null; // Binding attribute "isDisabled".
   public isNoRipple2: boolean | null = null; // Binding attribute "isNoRipple".
 
   constructor(
@@ -91,8 +92,8 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.isDisabled) {
-      this.isDisabled2 = BooleanUtil.init(this.isDisabled);
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabled2 || false);
+      this.innDisabled = BooleanUtil.init(this.isDisabled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.innDisabled || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
     }
     if (changes.isNoRipple) {
@@ -103,7 +104,9 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
   ngAfterContentInit(): void {
     if (this.linkElement?.templateRef) {
       // Add the required properties for the hyperlink element.
-      this.settingLink(this.linkElement.templateRef);
+      HtmlElemUtil.setAttr(this.renderer, this.linkElement.templateRef, 'linkClear', '');
+      HtmlElemUtil.setClass(this.renderer, this.linkElement.templateRef, 'glnb-label', true);
+      HtmlElemUtil.setClass(this.renderer, this.linkElement.templateRef, 'glnb-pd-hor', true);
     }
   }
 
@@ -134,12 +137,6 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
   }
 
   // ** Private API **
-
-  private settingLink(elem: ElementRef<HTMLElement> | null): void {
-    HtmlElemUtil.setAttr(this.renderer, elem, 'linkClear', '');
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-label', true);
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-pd-hor', true);
-  }
 
   private focusState(renderer: Renderer2, elem: ElementRef<HTMLElement> | null, value: boolean | null): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-focused', value || false);

@@ -78,15 +78,15 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     }
     if (changes.exterior) {
       this.innExterior = GlnFrameExteriorUtil.convert(this.exterior);
-      this.settingExterior(this.hostRef, this.innExterior);
+      this.settingExterior(this.renderer, this.hostRef, this.innExterior);
     }
     if (changes.isLabelShrink || (changes.config && this.isLabelShrink == null)) {
       this.innIsLabelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig?.isLabelShrink;
-      this.settingLabelShrink(this.hostRef, this.innIsLabelShrink);
+      this.settingLabelShrink(this.renderer, this.hostRef, this.innIsLabelShrink);
     }
     if (changes.noLabel || (changes.config && this.noLabel == null)) {
       this.innNoLabel = this.noLabel != null ? this.noLabel : !!this.currConfig?.noLabel;
-      this.settingNoLabel(this.hostRef, this.innNoLabel);
+      this.settingNoLabel(this.renderer, this.hostRef, this.innNoLabel);
     }
     if (changes.isDisabled) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabled || false);
@@ -110,11 +110,11 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   ngOnInit(): void {
     if (this.innIsLabelShrink == null) {
       this.innIsLabelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig?.isLabelShrink;
-      this.settingLabelShrink(this.hostRef, this.innIsLabelShrink);
+      this.settingLabelShrink(this.renderer, this.hostRef, this.innIsLabelShrink);
     }
     if (this.innNoLabel == null) {
       this.innNoLabel = this.noLabel != null ? this.noLabel : !!this.currConfig?.noLabel;
-      this.settingNoLabel(this.hostRef, this.innNoLabel);
+      this.settingNoLabel(this.renderer, this.hostRef, this.innNoLabel);
     }
   }
 
@@ -122,29 +122,29 @@ export class GlnFrameComponent implements OnChanges, OnInit {
 
   // ** Private API **
 
-  private settingExterior(elem: ElementRef<HTMLElement>, exterior: GlnFrameExterior | null): void {
-    HtmlElemUtil.setAttr(this.renderer, elem, 'dcr-br', '');
+  private settingExterior(renderer: Renderer2, elem: ElementRef<HTMLElement>, exterior: GlnFrameExterior | null): void {
+    HtmlElemUtil.setAttr(renderer, elem, 'dcr-br', '');
 
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-outlined', GlnFrameExteriorUtil.isOutlined(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', GlnFrameExteriorUtil.isOutlined(exterior) ? '' : null);
+    HtmlElemUtil.setClass(renderer, elem, 'glnf-outlined', GlnFrameExteriorUtil.isOutlined(exterior));
+    HtmlElemUtil.setAttr(renderer, elem, 'ext-o', GlnFrameExteriorUtil.isOutlined(exterior) ? '' : null);
 
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-underline', GlnFrameExteriorUtil.isUnderline(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-u', GlnFrameExteriorUtil.isUnderline(exterior) ? '' : null);
+    HtmlElemUtil.setClass(renderer, elem, 'glnf-underline', GlnFrameExteriorUtil.isUnderline(exterior));
+    HtmlElemUtil.setAttr(renderer, elem, 'ext-u', GlnFrameExteriorUtil.isUnderline(exterior) ? '' : null);
 
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-standard', GlnFrameExteriorUtil.isStandard(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-s', GlnFrameExteriorUtil.isStandard(exterior) ? '' : null);
+    HtmlElemUtil.setClass(renderer, elem, 'glnf-standard', GlnFrameExteriorUtil.isStandard(exterior));
+    HtmlElemUtil.setAttr(renderer, elem, 'ext-s', GlnFrameExteriorUtil.isStandard(exterior) ? '' : null);
 
     const isBorder = GlnFrameExteriorUtil.isStandard(exterior) || GlnFrameExteriorUtil.isUnderline(exterior);
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-bottom-frame', isBorder);
+    HtmlElemUtil.setClass(renderer, elem, 'glnf-bottom-frame', isBorder);
   }
 
-  private settingLabelShrink(elem: ElementRef<HTMLElement>, isLabelShrink: boolean): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-shrink', isLabelShrink);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'shr', isLabelShrink ? '' : null);
+  private settingLabelShrink(renderer: Renderer2, elem: ElementRef<HTMLElement>, isLabelShrink: boolean): void {
+    HtmlElemUtil.setClass(renderer, elem, 'glnf-shrink', isLabelShrink);
+    HtmlElemUtil.setAttr(renderer, elem, 'shr', isLabelShrink ? '' : null);
   }
 
-  private settingNoLabel(elem: ElementRef<HTMLElement>, noLabel: boolean): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnf-no-label', noLabel);
-    HtmlElemUtil.setAttr(this.renderer, elem, 'no-lb', noLabel ? '' : null);
+  private settingNoLabel(renderer: Renderer2, elem: ElementRef<HTMLElement>, noLabel: boolean): void {
+    HtmlElemUtil.setClass(renderer, elem, 'glnf-no-label', noLabel);
+    HtmlElemUtil.setAttr(renderer, elem, 'no-lb', noLabel ? '' : null);
   }
 }

@@ -57,7 +57,7 @@
         (mousedown)="trigger()"
         (mouseup)="$event.stopPropagation()">
         <div *ngIf="isFilled; else elseBlockFilled"
-          [innerHTML]="selectedMenuItem?.getLabelOrInnerText()">
+          [innerHTML]="selectedMenuItem?.getTextContent()">
         </div>
         <ng-template #elseBlockFilled>
           <div>&ZeroWidthSpace;</div>
@@ -77,10 +77,11 @@
     [attr.no-mouse]="isAnimation ? '': null"
     [ngClass]="['glns-panel', (isFixRight ? 'is-fix-right' : '')]"
     [isFixRight]="getBoolean(isFixRight)"
-    [isMultiple]="getBoolean(isMultiple)"
+    [isMultiple]="innMultiple"
     [menuItemList]="menuItemList"
     [visibleSize]="sizeVisible"
-    (selected)="selectedItemValue($event, multiple)"
+    (selected)="selectedItem($event, !!innMultiple)"
     (closing)="close()">
+    <ng-content select="gln-menu-item"></ng-content>
   </gln-menu-item-panel>
 </div>

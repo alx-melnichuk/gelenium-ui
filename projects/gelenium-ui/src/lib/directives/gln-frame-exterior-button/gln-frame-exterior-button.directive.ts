@@ -35,7 +35,7 @@ export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizeP
       const exterior = GlnButtonExteriorUtil.create(exteriorInp);
       if (this.exterior !== exterior) {
         this.exterior = exterior;
-        this.settingExterior(this.elementRef, exterior);
+        this.settingExterior(this.renderer, this.elementRef, exterior);
       }
       this.glnFrameExteriorButtonChange.emit();
     }
@@ -68,12 +68,12 @@ export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizeP
 
   // ** Private API **
 
-  private settingExterior(elem: ElementRef<HTMLElement>, exterior: GlnButtonExterior): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-text', GlnButtonExteriorUtil.isText(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-t', GlnButtonExteriorUtil.isText(exterior) ? '' : null);
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-contained', GlnButtonExteriorUtil.isContained(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-c', GlnButtonExteriorUtil.isContained(exterior) ? '' : null);
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-outlined', GlnButtonExteriorUtil.isOutlined(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', GlnButtonExteriorUtil.isOutlined(exterior) ? '' : null);
+  private settingExterior(renderer: Renderer2, elem: ElementRef<HTMLElement>, exterior: GlnButtonExterior): void {
+    HtmlElemUtil.setClass(renderer, elem, 'glnb-text', GlnButtonExteriorUtil.isText(exterior));
+    HtmlElemUtil.setAttr(renderer, elem, 'ext-t', GlnButtonExteriorUtil.isText(exterior) ? '' : null);
+    HtmlElemUtil.setClass(renderer, elem, 'glnb-contained', GlnButtonExteriorUtil.isContained(exterior));
+    HtmlElemUtil.setAttr(renderer, elem, 'ext-c', GlnButtonExteriorUtil.isContained(exterior) ? '' : null);
+    HtmlElemUtil.setClass(renderer, elem, 'glnb-outlined', GlnButtonExteriorUtil.isOutlined(exterior));
+    HtmlElemUtil.setAttr(renderer, elem, 'ext-o', GlnButtonExteriorUtil.isOutlined(exterior) ? '' : null);
   }
 }

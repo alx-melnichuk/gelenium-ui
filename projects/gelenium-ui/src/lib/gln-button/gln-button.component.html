@@ -4,7 +4,7 @@
     glnb-clear
     glnb-btn
     type="button"
-    [attr.tabindex]="isDisabled2 ? null : 0"
+    [attr.tabindex]="innDisabled ? null : 0"
     [glnFrameExteriorButton]="exterior || (currConfig?.exterior || null)"
     #glnFrameExteriorButton="glnFrameExteriorButton"
     [glnFrameExteriorButtonElementRef]="hostRef"
@@ -15,7 +15,7 @@
     [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
     [glnFrameSizePrepare]="glnFrameExteriorButton"
     [attr.id]="id + '_button'"
-    [attr.disabled]="isDisabled2 ? '' : null"
+    [attr.disabled]="innDisabled ? '' : null"
     (focus)="doFocus()"
     (blur)="doBlur()">
     <ng-container [ngTemplateOutlet]="templateOrnament">
@@ -23,7 +23,7 @@
     <span class="glnb-label glnb-pd-hor">
       <ng-content></ng-content>
     </span>
-    <gln-touch-ripple *ngIf="!isDisabled2 && !isNoRipple2 && !currConfig?.isNoRipple">
+    <gln-touch-ripple *ngIf="!innDisabled && !isNoRipple2 && !currConfig?.isNoRipple">
     </gln-touch-ripple>
   </button>
 </ng-container>
@@ -44,7 +44,7 @@
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
     <ng-content select="a"></ng-content>
-    <gln-touch-ripple *ngIf="!isDisabled2 && !isNoRipple2 && !currConfig?.isNoRipple"
+    <gln-touch-ripple *ngIf="!innDisabled && !isNoRipple2 && !currConfig?.isNoRipple"
       skip-events>
     </gln-touch-ripple>
   </div>

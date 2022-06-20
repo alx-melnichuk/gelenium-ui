@@ -14,7 +14,7 @@ import {
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 const RIPPLE_CLASS = 'glntr-ripple';
-let identifier = 0;
+let uniqueIdCounter = 0;
 
 @Component({
   selector: 'gln-touch-ripple',
@@ -26,7 +26,7 @@ let identifier = 0;
 })
 export class GlnTouchRippleComponent implements OnChanges, OnInit {
   @Input()
-  public id = 'glntr_' + ++identifier;
+  public id = `glntr-${uniqueIdCounter++}`;
   @Input()
   public isCenter: string | null = null;
   @Input()
