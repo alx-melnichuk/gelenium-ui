@@ -15,14 +15,14 @@
 <input type="text">
 <p></p>
 
-<p>demoPet: {{demoPet}}</p>
+<p>nativeSelect: {{nativeSelect}}</p>
 
 <label for="pet-select">Choose a pet:</label>
 <select name="pets"
   id="pet-select"
   multiple9
   size9="5"
-  [(ngModel)]="demoPet">
+  [(ngModel)]="nativeSelect">
   <option value="">--Please choose an option--</option>
   <option value="dog">Text Dog</option>
   <option value="cat">Text Cat</option>
@@ -52,7 +52,7 @@
   <option>Text Hamster5</option>
 </select>
 
-<p></p>
+<!-- <p *ngFor="let i of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">{{i}}</p> -->
 
 <form [formGroup]="formGroup01"
   novalidate
@@ -62,14 +62,15 @@
 
     <div class="app-elem">
       <gln-select formControlName="input01a"
-        label="demo">
-        <gln-menu-item value=""><em>None</em></gln-menu-item>
-        <gln-menu-item value="item01">context item01</gln-menu-item>
-        <gln-menu-item value="item02">context item02</gln-menu-item>
-        <gln-menu-item value="item03">context item03</gln-menu-item>
-        <gln-menu-item value="item04">context item04</gln-menu-item>
-        <gln-menu-item value="item05">context item05</gln-menu-item>
-        <gln-menu-item value="item06">context item06</gln-menu-item>
+        label="demo"
+        [sizeVisible]="4">
+        <gln-menu-item><em>None</em></gln-menu-item>
+        <gln-menu-item value="item01">context <em>item01</em></gln-menu-item>
+        <gln-menu-item value="item02">context <em>item02</em></gln-menu-item>
+        <gln-menu-item value="item03">context <em>item03</em></gln-menu-item>
+        <gln-menu-item value="item04">context <em>item04</em></gln-menu-item>
+        <gln-menu-item value="item05">context <em>item05</em></gln-menu-item>
+        <gln-menu-item value="item06">context <em>item06</em></gln-menu-item>
       </gln-select>
     </div>
     <!-- <div class="app-elem">

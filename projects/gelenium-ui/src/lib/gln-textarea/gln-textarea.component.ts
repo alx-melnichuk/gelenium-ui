@@ -111,8 +111,8 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
 
   public defaultFrameSize = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public currConfig: GlnFrameConfig | null = null;
-  public innDisabled: boolean | null = null; // Binding attribute "isDisabled".
-  public innRequired: boolean | null = null; // Binding attribute "isRequired".
+  public disabled: boolean | null = null; // Binding attribute "isDisabled".
+  public required: boolean | null = null; // Binding attribute "isRequired".
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public isFocused = false;
@@ -139,14 +139,14 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.isDisabled) {
-      this.innDisabled = BooleanUtil.init(this.isDisabled);
-      this.setDisabledState(!!this.innDisabled);
+      this.disabled = BooleanUtil.init(this.isDisabled);
+      this.setDisabledState(!!this.disabled);
     }
     if (changes.isRequired) {
-      this.innRequired = BooleanUtil.init(this.isRequired);
+      this.required = BooleanUtil.init(this.isRequired);
     }
     if (changes.isRequired || changes.minLength || changes.maxLength) {
-      this.prepareFormGroup(this.innRequired, this.minLength, this.maxLength);
+      this.prepareFormGroup(this.required, this.minLength, this.maxLength);
     }
     if (changes.cntRows || changes.minRows || changes.maxRows) {
       this.currentRows = this.cntRows || this.getCurrentRows(this.getNumberLines(this.formControl.value), this.minRows, this.maxRows);
@@ -183,13 +183,13 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   }
 
   public setDisabledState(isDisabled: boolean): void {
-    if (this.innDisabled !== isDisabled) {
+    if (this.disabled !== isDisabled) {
       if (isDisabled) {
         this.formGroup.disable();
       } else {
         this.formGroup.enable();
       }
-      this.innDisabled = isDisabled;
+      this.disabled = isDisabled;
       this.changeDetectorRef.markForCheck();
     }
   }

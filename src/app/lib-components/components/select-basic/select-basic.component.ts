@@ -21,12 +21,13 @@ export class SelectBasicComponent {
   public labelCss = LABEL_CSS;
 
   public formGroup01: FormGroup = new FormGroup({
-    input01a: new FormControl(null, []),
+    input01a: new FormControl('item03', []),
     input01b: new FormControl('', []),
     input01c: new FormControl('', []),
   });
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
-  public demoPet = '';
+  public nativeSelect = '';
+  public text1 = 't1';
 }

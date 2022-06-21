@@ -15,6 +15,7 @@ import {
 import { GlnMenuItemComponent } from '../gln-menu-item/gln-menu-item.component';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
+import { ScreenUtil } from '../_utils/screen.util';
 
 const GLN_MENU_ITEM_PANEL = 'GLN-MENU-ITEM-PANEL';
 const GLN_MENU_ITEM = 'GLN-MENU-ITEM';
@@ -52,19 +53,21 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set menuItems(value: GlnMenuItemComponent[]) {}
 
-  private innVisibleCount = 0;
+  private visibleCountVal = 0;
   public get visibleCount(): number {
-    return this.innVisibleCount;
+    return this.visibleCountVal;
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set visibleCount(value: number) {}
 
-  private innItemHeight = 0;
+  private itemHeightVal = 0;
   public get itemHeight(): number {
-    return this.innItemHeight;
+    return this.itemHeightVal;
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set itemHeight(value: number) {}
+
+  private indexMarked = -1;
 
   constructor(public hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
@@ -72,10 +75,10 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
 
   public ngAfterContentInit(): void {
     // Determine the height of the menu item by the properties of the "ul" element, it contains the "line height".
-    this.innItemHeight = 24; // this.getItemHeight2(this.hostRef.nativeElement.getElementsByTagName('ul')[0]);
+    this.itemHeightVal = this.getItemHeight(this.hostRef.nativeElement);
     // Determine the number of visible menu items.
-    this.innVisibleCount = this.getVisibleCount(this.menuItems.length, this.visibleSize);
-    this.activate(this.hostRef, this.innItemHeight * this.innVisibleCount, this.isFixRight);
+    this.visibleCountVal = this.visibleSize > 0 && this.visibleSize < this.menuItems.length ? this.visibleSize : this.menuItems.length;
+    this.activate(this.hostRef, this.itemHeightVal * this.visibleCountVal, this.isFixRight);
   }
 
   @HostListener('document:mouseup', ['$event'])
@@ -93,7 +96,7 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
     const menuItem = this.getMenuItemByHtmlElement(this.getHtmlElementByEvent(event.target as HTMLElement), this.menuItems);
     if (!menuItem) {
       this.closing.emit();
-    } else if (!menuItem.innDisabled) {
+    } else if (!menuItem.disabled) {
       this.selected.emit(menuItem);
     }
   }
@@ -104,6 +107,12 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
     switch (event.code) {
       case 'Escape':
         this.closing.emit();
+        break;
+      case 'ArrowDown':
+        this.markRequiredMenuItem(true);
+        break;
+      case 'ArrowUp':
+        this.markRequiredMenuItem(false);
         break;
     }
   }
@@ -132,53 +141,51 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
     return result;
   }
 
-  private getVisibleCount(itemsLength: number, sizeVisible: number): number {
-    return sizeVisible > 0 && sizeVisible < itemsLength ? sizeVisible : itemsLength;
+  private markRequiredMenuItem(isNext: boolean): void {
+    const menuItem = this.indexMarked > -1 ? this.menuItems[this.indexMarked] : null;
+    // Uncheck the old menu item.
+    if (menuItem && menuItem.marked) {
+      menuItem.setMarked(false);
+    }
+    // Get the index for the required menu item.
+    if (isNext) {
+      this.indexMarked = this.indexMarked === this.menuItems.length - 1 ? 0 : this.indexMarked + 1;
+    } else {
+      this.indexMarked = this.indexMarked === 0 ? this.menuItems.length - 1 : this.indexMarked - 1;
+    }
+    // Set the checkbox for the new menu item.
+    this.menuItems[this.indexMarked].setMarked(true);
   }
 
-  private getItemHeight(elem: ElementRef<HTMLElement>): number {
-    const styleDeclaration = getComputedStyle(elem.nativeElement);
-    // Get the css value of the "top indent" variable.
-    const liPaddingTop = Number(styleDeclaration.getPropertyValue('--glnmip-li-pd-tp').replace('px', ''));
-    // Get the css value of the "bottom indent" variable.
-    const liPaddingBottom = Number(styleDeclaration.getPropertyValue('--glnmip-li-pd-bt').replace('px', ''));
-    const elementUl: HTMLElement = elem.nativeElement.getElementsByTagName('ul')[0] as HTMLElement;
-    const d = Number(getComputedStyle(elementUl).getPropertyValue('line-height').replace('px', ''));
-    // Get the line height from the style set.
-    const lineHeight = Number(styleDeclaration.getPropertyValue('line-height').replace('px', ''));
-
-    return liPaddingTop + lineHeight + liPaddingBottom;
-  }
-  private getItemHeight2(elem: HTMLElement): number {
+  private getItemHeight(elem: HTMLElement): number {
     const styleDeclaration = getComputedStyle(elem);
     // Get the css value of the "top indent" variable.
-    const liPaddingTop = Number(styleDeclaration.getPropertyValue('--glnmip-li-pd-tp').replace('px', ''));
+    const liPaddingTop = parseInt(styleDeclaration.getPropertyValue('--glnmi-pd-tp') || '6');
     // Get the css value of the "bottom indent" variable.
-    const liPaddingBottom = Number(styleDeclaration.getPropertyValue('--glnmip-li-pd-bt').replace('px', ''));
+    const liPaddingBottom = parseInt(styleDeclaration.getPropertyValue('--glnmi-pd-bt') || '6');
     // Get the line height from the style set.
-    const lineHeight = Number(styleDeclaration.getPropertyValue('line-height').replace('px', ''));
+    const lineHeight = parseInt(styleDeclaration.getPropertyValue('line-height') || '24');
 
     return liPaddingTop + lineHeight + liPaddingBottom;
   }
 
-  private isDownValue(parent: HTMLElement, itemsLength: number): boolean {
-    const rect = parent.getBoundingClientRect();
-    const value = Math.round(rect.top * 100) / 100 + Math.round(rect.height * 100) / 100 + itemsLength;
-    // const screen = new Screen();
-    return true; // value < screen.height;
+  private isDownValue(hostElement: HTMLElement, itemsLength: number): boolean {
+    const rect = hostElement.getBoundingClientRect();
+    const value = Math.round(rect.top * 100) / 100 + itemsLength;
+    const screenHeight = ScreenUtil.getHeight();
+    return value < screenHeight;
   }
 
   private activate(hostRef: ElementRef<HTMLElement>, height: number, isFixRight: boolean | null): void {
-    const parent = hostRef.nativeElement.parentElement as HTMLElement;
-    const isDown = true; // this.isDownValue(parent, height);
+    // const parent = hostRef.nativeElement.parentElement as HTMLElement;
+    const isDown = this.isDownValue(hostRef.nativeElement, height);
     // const top = isDown ? /*parent.offsetHeight*/ 100 : null;
-    const bottom = isDown ? null : 'calc(var(--glns-frameSize) + 4px)'; // parent.offsetHeight + 2; // ;
-    const left = isFixRight ? null : 0;
-    const right = isFixRight ? 0 : null;
+    const bottom = isDown ? null : 'calc(var(--glns-frameSize) + 0.25em)';
+
     HtmlElemUtil.setProperty(this.hostRef, '--glnmip-ul-height', NumberUtil.str(height)?.concat('px') || null);
     // HtmlElemUtil.setProperty(this.hostRef, '--gmp-top', NumberUtil.str(top)?.concat('%') || null);
     HtmlElemUtil.setProperty(this.hostRef, '--gmp-bottom', bottom);
-    HtmlElemUtil.setProperty(this.hostRef, '--gmp-left', NumberUtil.str(left)?.concat('px') || null);
-    HtmlElemUtil.setProperty(this.hostRef, '--gmp-right', NumberUtil.str(right)?.concat('px') || null);
+    HtmlElemUtil.setProperty(this.hostRef, '--gmp-left', isFixRight ? null : '0');
+    HtmlElemUtil.setProperty(this.hostRef, '--gmp-right', isFixRight ? '0' : null);
   }
 }

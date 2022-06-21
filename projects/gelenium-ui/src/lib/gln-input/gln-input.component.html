@@ -8,10 +8,10 @@
       [config]="currConfig"
       [isLabelShrink]="getBoolean(lbShrink)"
       [noLabel]="getBoolean(noLabel)"
-      [isDisabled]="innDisabled"
+      [isDisabled]="disabled"
       [isFilled]="isFilled"
       [isError]="!!formControl.errors || getBoolean(isError)"
-      [isRequired]="innRequired"
+      [isRequired]="required"
       [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
       #glnFrameSize="glnFrameSize"
       [glnFrameSizeElementRef]="hostRef"
@@ -39,7 +39,7 @@
         [attr.id]="id + '_input'"
         [type]="typeVal"
         class="glni-input glnf-elem"
-        [attr.disabled]="innDisabled ? '': null"
+        [attr.disabled]="disabled ? '': null"
         [attr.autocomplete]="!!autoComplete ? autoComplete : null"
         [attr.readonly]="getBoolean(isReadOnly) ? '': null"
         [attr.min]="min"
@@ -57,5 +57,5 @@
   [text]="helperText"
   [isError]="!!formControl.errors || getBoolean(isError)"
   [isFocused]="isFocused"
-  [isDisabled]="innDisabled">
+  [isDisabled]="disabled">
 </gln-hint-or-error>

@@ -22,7 +22,7 @@
 
       <div class="iso-items"
         *ngFor="let item of elements2; let idx=index;
-        let count=count; trackBy: trackByIdFn">
+        let count=count; trackBy: trackByElement">
         <div class="iso-row">
           <span class="iso-label">serial number</span>
           <span class="iso-value">{{ idx+1 }}/{{ count }} </span>
@@ -66,7 +66,7 @@
 
       &lt;div class="iso-items"
         *ngFor="let item of elements2; let idx=index;
-        let count=count; trackBy: trackByIdFn"&gt;
+        let count=count; trackBy: trackByElement"&gt;
         &lt;div class="iso-row"&gt;
           &lt;span class="iso-label"&gt;serial number&lt;/span&gt;
           &lt;span class="iso-value"&gt;<b>&#123;</b>&#123; idx+1 &#125;&#125;/<b>&#123;</b>&#123; count &#125;&#125; &lt;/span&gt;
@@ -141,7 +141,7 @@ export class InfiniteScrollComponent &#123;
 
   // ** Public API **
 
-  public trackByIdFn(index: number, item: Element): string &#123;
+  public trackByElement(index: number, item: Element): string &#123;
     return item?.name + item?.surname;
   &#125;
 

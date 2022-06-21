@@ -1,13 +1,64 @@
 /*# sourceURL=gln-menu-item.component.scss */
 
+// Css parameters: '--glnmi-pd-tp', '--glnmi-pd-bt' must be defined on the parent component. 
+// This will allow the parent to determine the height of the menu item.
+
 gln-menu-item {
-  display: block;
-  outline: 1px dashed green;
-  padding-top: var(--glnmip-li-pd-tp);
-  padding-bottom: var(--glnmip-li-pd-bt);
-  padding-left: var(--glnmip-li-pd-lf);
-  padding-right: var(--glnmip-li-pd-rg);
+  -webkit-box-align: center;
+  align-items: center;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  box-sizing: border-box;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+
+  outline: 1px dashed green; // TODO del;
+  // outline: 0px;
+  padding-top: var(--glnmi-pd-tp, 6px);
+  padding-bottom: var(--glnmi-pd-bt, 6px);
+  padding-left: var(--glnmi-pd-lf, 16px);
+  padding-right: var(--glnmi-pd-rg, 16px);
+  position: relative;
+  text-decoration: none;
   user-select: none;
-  // vertical-align: middle;
+  // vertical-align: middle; // TODO ignored due to the display. With 'display: block'
   white-space: nowrap;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  /*&:hover:not([dis]), &:focus:not([dis]) {
+    background: rgba(0,0,0,.04);
+  }
+  &[mar]:not([dis]) {
+    background: rgba(0,0,0,.04);
+    color: rgba(0,0,0,.87);
+  }
+  &[sel]:not([dis]) {
+    background: rgba(0,0,0,.04);
+    color: #3f51b5;
+  }
+  &[sel]:not([mul]) {
+    background: rgba(0,0,0,.12);
+  }*/
+  &[dis] {
+    opacity: 0.38;
+    pointer-events: none;
+    cursor: default;
+  }
+  &:hover {
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  &[mar] {
+    background: rgba(0,0,0,.12);
+  }
+  &[sel] {
+    background-color: rgba(25, 118, 210, 0.08)
+  }
 }

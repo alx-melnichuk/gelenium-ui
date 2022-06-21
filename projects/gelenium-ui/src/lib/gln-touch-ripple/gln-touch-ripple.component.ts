@@ -11,6 +11,7 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
+import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 const RIPPLE_CLASS = 'glntr-ripple';
@@ -32,19 +33,19 @@ export class GlnTouchRippleComponent implements OnChanges, OnInit {
   @Input()
   public rippleColor: string | null = null; // '#1976d2', '#1976d280', 'rgba(255, 255, 255, 0.3)'  maxLength(32)
 
-  private innIsCenter = false;
+  private center = false;
   private checkParentSuccessful = false;
 
   constructor(private hostRef: ElementRef<HTMLElement>, @Inject(DOCUMENT) private document: Document) {}
 
   @HostListener('mousedown', ['$event'])
   public doMousedown(event: MouseEvent): void {
-    this.doRipple(event, this.innIsCenter);
+    this.doRipple(event, this.center);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.isCenter) {
-      this.innIsCenter = this.isCenter === '' || this.isCenter === 'true';
+      this.center = !!BooleanUtil.init(this.isCenter);
     }
     if (changes.rippleColor) {
       const color = this.rippleColor && this.rippleColor.length < 33 ? this.rippleColor : null;
@@ -69,7 +70,7 @@ export class GlnTouchRippleComponent implements OnChanges, OnInit {
 
   // ** Public API **
 
-  public touchRipple(event: MouseEvent, isCenter: boolean = this.innIsCenter): void {
+  public touchRipple(event: MouseEvent, isCenter: boolean = this.center): void {
     this.doRipple(event, isCenter);
   }
 

@@ -46,7 +46,7 @@ export class InfiniteScrollOptionalComponent {
 
   // ** Public API **
 
-  public trackByIdFn(index: number, item: Element): string {
+  public trackByElement(index: number, item: Element): string {
     return item?.name + item?.surname;
   }
 

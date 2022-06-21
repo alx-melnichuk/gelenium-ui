@@ -70,10 +70,10 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
 
   public defaultFrameSize = GlnFrameSizeUtil.getValue(GlnFrameSize.small) || 0;
   public currConfig: GlnButtonConfig | null = null;
-  public innDisabled: boolean | null = null; // Binding attribute "isDisabled".
+  public disabled: boolean | null = null; // Binding attribute "isDisabled".
 
   public isFocused = false;
-  public isNoRipple2: boolean | null = null; // Binding attribute "isNoRipple".
+  public noRipple: boolean | null = null; // Binding attribute "isNoRipple".
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -92,12 +92,12 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.isDisabled) {
-      this.innDisabled = BooleanUtil.init(this.isDisabled);
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.innDisabled || false);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
+      this.disabled = BooleanUtil.init(this.isDisabled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled || false);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);
     }
     if (changes.isNoRipple) {
-      this.isNoRipple2 = BooleanUtil.init(this.isNoRipple);
+      this.noRipple = BooleanUtil.init(this.isNoRipple);
     }
   }
 
@@ -113,7 +113,7 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
   // ** Public API **
 
   public doClick(event: MouseEvent): void {
-    if (!!event && !event.cancelBubble && this.linkElement && this.touchRipple && !this.isNoRipple2) {
+    if (!!event && !event.cancelBubble && this.linkElement && this.touchRipple && !this.noRipple) {
       this.touchRipple.touchRipple(event);
     }
   }

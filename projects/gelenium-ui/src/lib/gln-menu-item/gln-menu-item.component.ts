@@ -33,10 +33,11 @@ export class GlnMenuItemComponent implements OnChanges {
   @Input()
   public value: unknown | null = null;
 
-  public innDisabled: boolean | null = null;
+  public disabled: boolean | null = null;
   public formControl: FormControl = new FormControl();
   public formGroup: FormGroup = new FormGroup({ info: this.formControl });
 
+  public marked = false;
   public multiple = false;
   public selected = false;
 
@@ -48,50 +49,61 @@ export class GlnMenuItemComponent implements OnChanges {
   ) {
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'role', 'option');
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', '0');
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', '-1');
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.isDisabled) {
-      this.innDisabled = BooleanUtil.init(this.isDisabled);
-      this.settingDisabled(this.renderer, this.hostRef, !!this.innDisabled);
-    }
-    if (changes.value) {
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'data-value', String(this.value));
+      this.disabled = BooleanUtil.init(this.isDisabled);
+      this.setDisable(this.disabled);
     }
   }
 
   // ** Public API **
 
   public getTextContent(): string {
-    return this.sanitizer.bypassSecurityTrustHtml((this.hostRef.nativeElement.textContent || '').trim()) as string;
+    return (this.hostRef.nativeElement.textContent || '').trim();
   }
 
-  public setDisable(value: boolean): void {
-    if (this.innDisabled !== value) {
-      this.innDisabled = value;
+  public getTrustHtml(): string {
+    return this.sanitizer.bypassSecurityTrustHtml(this.hostRef.nativeElement.innerHTML) as string;
+  }
+
+  public setDisable(value: boolean | null): void {
+    if (this.disabled !== !!value) {
+      this.disabled = !!value;
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);
       this.changeDetectorRef.markForCheck();
     }
   }
 
-  public setMultiple(value: boolean): void {
-    if (this.multiple !== value) {
-      this.multiple = value;
+  public setMarked(value: boolean | null): void {
+    if (this.marked !== !!value) {
+      this.marked = !!value;
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-marked', this.marked);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'mar', this.marked ? '' : null);
       this.changeDetectorRef.markForCheck();
     }
   }
 
-  public setSelected(value: boolean): void {
-    if (this.selected !== value) {
-      this.selected = value;
+  public setMultiple(value: boolean | null): void {
+    if (this.multiple !== !!value) {
+      this.multiple = !!value;
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-multiple', this.marked);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'mul', this.marked ? '' : null);
+      this.changeDetectorRef.markForCheck();
+    }
+  }
+
+  public setSelected(value: boolean | null): void {
+    if (this.selected !== !!value) {
+      this.selected = !!value;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-selected', this.selected);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'sel', this.selected ? '' : null);
       this.changeDetectorRef.markForCheck();
     }
   }
 
-  private settingDisabled(renderer: Renderer2, elem: ElementRef<HTMLElement>, disabled: boolean): void {
-    HtmlElemUtil.setClass(renderer, elem, 'gln-disabled', disabled);
-    HtmlElemUtil.setAttr(renderer, elem, 'dis', disabled ? '' : null);
-  }
+  // ** Private API **
 }

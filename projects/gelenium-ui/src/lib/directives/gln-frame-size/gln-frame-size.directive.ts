@@ -92,8 +92,7 @@ export class GlnFrameSizeDirective implements OnChanges {
     let result = 0;
     if (elem && elem.nativeElement) {
       // Get the line height from the style set.
-      const lineHeightPx = getComputedStyle(elem.nativeElement).getPropertyValue('line-height');
-      result = Number(lineHeightPx.replace('px', ''));
+      result = parseInt(getComputedStyle(elem.nativeElement).getPropertyValue('line-height'));
     }
     return result;
   }

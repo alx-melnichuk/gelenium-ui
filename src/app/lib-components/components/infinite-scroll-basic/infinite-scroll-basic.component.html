@@ -27,7 +27,7 @@
 <div class="isb-item-wrap">
   <div class="isb-items"
     *ngFor="let item of elements0; let idx=index;
-      let count=count; trackBy: trackByIdFn">
+      let count=count; trackBy: trackByElement">
     <div class="isb-row">
       <span class="isb-label">serial number</span>
       <span class="isb-value">{{ idx+1 }}/{{ count }} </span>
@@ -59,7 +59,7 @@
 &lt;div class="isb-item-wrap"&gt;
   &lt;div class="isb-items"
     *ngFor="let item of elements0; let idx=index;
-      let count=count; trackBy: trackByIdFn"&gt;
+      let count=count; trackBy: trackByElement"&gt;
     &lt;div class="isb-row"&gt;
       &lt;span class="isb-label"&gt;serial number&lt;/span&gt;
       &lt;span class="isb-value"&gt;<b>&#123;</b>&#123; idx+1 &#125;&#125;/<b>&#123;</b>&#123; count &#125;&#125; &lt;/span&gt;
@@ -126,7 +126,7 @@ export class InfiniteScrollBasicComponent &#123;
 
   // ** Public API **
 
-  public trackByIdFn(index: number, item: Element): string &#123;
+  public trackByElement(index: number, item: Element): string &#123;
     return item?.name + item?.surname;
   &#125;
 
@@ -242,7 +242,7 @@ this.observer.observe(this.anchor.nativeElement);</pre>
 
     <div class="isb-items"
       *ngFor="let item of elements1; let idx=index; let count=count;
-        trackBy: trackByIdFn">
+        trackBy: trackByElement">
       <div class="isb-row">
         <span class="isb-label">serial number</span>
         <span class="isb-value">{{ idx+1 }}/{{ count }} </span>
@@ -285,7 +285,7 @@ this.observer.observe(this.anchor.nativeElement);</pre>
 
     &lt;div class="isb-items"
       *ngFor="let item of elements1; let idx=index; let count=count;
-        trackBy: trackByIdFn"&gt;
+        trackBy: trackByElement"&gt;
       &lt;div class="isb-row"&gt;
         &lt;span class="isb-label"&gt;serial number&lt;/span&gt;
         &lt;span class="isb-value"&gt;<b>&#123;</b>&#123; idx+1 &#125;&#125;/<b>&#123;</b>&#123; count &#125;&#125; &lt;/span&gt;
@@ -360,7 +360,7 @@ export class InfiniteScrollComponent &#123;
 
   // ** Public API **
 
-  public trackByIdFn(index: number, item: Element): string &#123;
+  public trackByElement(index: number, item: Element): string &#123;
     return item?.name + item?.surname;
   &#125;
 

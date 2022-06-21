@@ -122,24 +122,21 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set menuItems(value: GlnMenuItemComponent[]) {}
 
-  public isOpen = false;
-  public isHide = false;
-  public isAnimation = false;
-
-  public selectedMenuItem: GlnMenuItemComponent | null = null;
-
-  public selectedMenuItems: GlnMenuItemComponent[] = [];
-
   public defaultFrameSize = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public currConfig: GlnFrameConfig | null = null;
-  public innDisabled: boolean | null = null; // Binding attribute "isDisabled".
-  public innRequired: boolean | null = null; // Binding attribute "isRequired".
+  public disabled: boolean | null = null; // Binding attribute "isDisabled".
+  public required: boolean | null = null; // Binding attribute "isRequired".
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public isFocused = false;
   public isFilled = false;
 
-  public innMultiple: boolean | null = null;
+  public multiple: boolean | null = null;
+
+  public isOpen = false;
+  public isHide = false;
+  public isAnimation = false;
+  public selectedMenuItems: GlnMenuItemComponent[] = [];
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -160,14 +157,14 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.isDisabled) {
-      this.innDisabled = BooleanUtil.init(this.isDisabled);
-      this.setDisabledState(!!this.innDisabled);
+      this.disabled = BooleanUtil.init(this.isDisabled);
+      this.setDisabledState(!!this.disabled);
     }
     if (changes.isMultiple) {
-      this.innMultiple = BooleanUtil.init(this.isMultiple);
+      this.multiple = BooleanUtil.init(this.isMultiple);
     }
     if (changes.isRequired) {
-      this.innRequired = BooleanUtil.init(this.isRequired);
+      this.required = BooleanUtil.init(this.isRequired);
     }
   }
 
@@ -180,22 +177,37 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public writeValue(valueInp: any): void {
     console.log('writeValue(); valueInp=', valueInp); // TODO del;
-
     // const isFilledOld = !!this.formControl.value;
     // this.formControl.setValue(valueInp, { emitEvent: false });
     // this.isFilled = this.formControl.value !== '' && this.formControl.value != null;
     // if (isFilledOld !== this.isFilled) {
     //   this.changeDetectorRef.markForCheck();
     // }
-    const menuItem = this.findMeniItemByValue(this.menuItems, valueInp);
-    if (menuItem !== null) {
-      const isArrayValue = Array.isArray(valueInp);
-      if (this.innMultiple && isArrayValue) {
-        this.updateSelectedMenuItems(menuItem);
-      } else if (!this.innMultiple && !isArrayValue) {
-        this.updateSelectedMenuItem(menuItem);
+    this.clear();
+    if (valueInp !== null) {
+      if (!this.multiple && Array.isArray(valueInp)) {
+        throw Error('It is not possible to pass an array of values unless it is in multiple mode.');
+      }
+      const data = this.multiple ? valueInp : [valueInp];
+      for (let idx = 0; idx < data.length; idx++) {
+        const value = data[idx];
+        const menuItem = this.menuItems.find((item) => item.value === value);
+        if (menuItem) {
+          this.selectedMenuItems.push(menuItem);
+          menuItem.setSelected(false);
+        }
       }
     }
+    this.changeDetectorRef.markForCheck();
+    /*const menuItem = this.findMeniItemByValue(this.menuItems, valueInp);
+    if (menuItem !== null) {
+      const isArrayValue = Array.isArray(valueInp);
+      if (this.multiple && isArrayValue) {
+        this.updateSelectedMenuItems(menuItem);
+      } else if (!this.multiple && !isArrayValue) {
+        this.updateSelectedMenuItem(menuItem);
+      }
+    }*/
   }
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public registerOnChange(fn: any): void {
@@ -207,13 +219,13 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   }
 
   public setDisabledState(isDisabled: boolean): void {
-    if (this.innDisabled !== isDisabled) {
+    if (this.disabled !== isDisabled) {
       if (isDisabled) {
         this.formGroup.disable();
       } else {
         this.formGroup.enable();
       }
-      this.innDisabled = isDisabled;
+      this.disabled = isDisabled;
       this.changeDetectorRef.markForCheck();
     }
   }
@@ -224,7 +236,7 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public validate(control: AbstractControl): ValidationErrors | null {
-    return !this.innDisabled && this.innRequired && this.isEmpty() ? { required: true } : null;
+    return !this.disabled && this.required && this.isEmpty() ? { required: true } : null;
   }
 
   // ** Validator - finish **
@@ -254,21 +266,34 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
     return BooleanUtil.init(value);
   }
 
-  public selectedItem(menuItemComp: GlnMenuItemComponent, multiple: boolean): void {
+  public trackByMenuItem(index: number, item: GlnMenuItemComponent): string {
+    return item.id;
+  }
+
+  public selectedMenuElement(menuItem: GlnMenuItemComponent | null, multiple: boolean): void {
+    if (!menuItem) {
+      return;
+    }
     if (multiple) {
-      this.updateSelectedMenuItems(menuItemComp);
-      const newValues: unknown[] = [];
+      this.updateSelectedMenuItems(menuItem);
+
+      const newValues: unknown[] = Array(this.selectedMenuItems.length);
       for (let idx = 0; idx < this.selectedMenuItems.length; idx++) {
-        if (this.selectedMenuItems[idx]) {
-          newValues.push(this.selectedMenuItems[idx]);
-        }
+        newValues[idx] = this.selectedMenuItems[idx].value;
       }
       this.selectedMultiple.emit(newValues);
       this.onChange(newValues);
     } else {
-      if (this.selectedMenuItem?.value !== menuItemComp.value) {
-        this.updateSelectedMenuItem(menuItemComp);
-        const newValue = this.selectedMenuItem?.value || null;
+      const selectMenuItem = this.selectedMenuItems.length ? this.selectedMenuItems[0] : null;
+      if (selectMenuItem !== menuItem) {
+        if (selectMenuItem && selectMenuItem.selected) {
+          selectMenuItem.setSelected(false);
+        }
+        this.updateSelectedMenuItem(menuItem);
+        if (menuItem) {
+          menuItem.setSelected(true);
+        }
+        const newValue = menuItem.value;
         this.selected.emit(newValue);
         this.onChange(newValue);
       }
@@ -277,10 +302,13 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   }
 
   public updateSelectedMenuItem(menuItem: GlnMenuItemComponent): void {
-    this.selectedMenuItem = menuItem.value ? menuItem : null;
+    this.selectedMenuItems.length = 0;
+    if (menuItem.value !== null) {
+      this.selectedMenuItems.push(menuItem);
+    }
     this.isFilled = !this.isEmpty();
-    // console.log(`selectedMenuItem=${this.selectedMenuItem}`); // TODO del;
-    // console.log(`isFilled=${this.isFilled}`); // TODO del;
+    console.log(`selected=${this.selectedMenuItems.length ? this.selectedMenuItems[0].value : 'null'}`); // TODO del;
+    console.log(`isFilled=${this.isFilled}`); // TODO del;
     this.changeDetectorRef.markForCheck();
   }
   public updateSelectedMenuItems(menuItem: GlnMenuItemComponent): void {
@@ -291,9 +319,18 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
       this.selectedMenuItems.splice(idx, 1);
     }
     this.isFilled = !this.isEmpty();
-    // console.log(`selectedValues=${this.selectedMenuItems}`); // TODO del;
-    // console.log(`this.isFilled=${this.isFilled}`); // TODO del;
+    console.log(`selected=${this.selectedMenuItems.map((item) => item.value).join(', ')}`); // TODO del;
+    console.log(`this.isFilled=${this.isFilled}`); // TODO del;
     this.changeDetectorRef.markForCheck();
+  }
+
+  public clear(): void {
+    for (let idx = 0; idx < this.selectedMenuItems.length; idx++) {
+      if (this.selectedMenuItems[idx].selected) {
+        this.selectedMenuItems[idx].setSelected(false);
+      }
+    }
+    this.selectedMenuItems.length = 0;
   }
 
   public doAnimationStart(): void {
@@ -316,7 +353,7 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   }
 
   public isEmpty(): boolean {
-    return this.innMultiple ? this.selectedMenuItems.length === 0 : this.selectedMenuItem === null;
+    return this.selectedMenuItems.length === 0;
   }
 
   public trigger(): void {

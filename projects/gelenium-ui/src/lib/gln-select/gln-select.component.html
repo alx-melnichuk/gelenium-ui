@@ -9,10 +9,10 @@
       [config]="currConfig"
       [isLabelShrink]="getBoolean(lbShrink)"
       [noLabel]="getBoolean(noLabel)"
-      [isDisabled]="innDisabled"
+      [isDisabled]="disabled"
       [isFilled]="isFilled"
       [isError]="!!formControl.errors || getBoolean(isError)"
-      [isRequired]="innRequired"
+      [isRequired]="required"
       [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
       #glnFrameSize="glnFrameSize"
       [glnFrameSizeElementRef]="hostRef"
@@ -46,7 +46,7 @@
         </button>
       </span>
 
-      <div [attr.tabindex]="innDisabled ? null : 0"
+      <div [attr.tabindex]="disabled ? null : 0"
         #mainElementRef
         [attr.id]="id + '_wrap'"
         glnf-pd-ver
@@ -56,12 +56,19 @@
         (blur)="doBlur()"
         (mousedown)="trigger()"
         (mouseup)="$event.stopPropagation()">
-        <div *ngIf="isFilled; else elseBlockFilled"
-          [innerHTML]="selectedMenuItem?.getTextContent()">
-        </div>
+        <!-- <div *ngIf="isFilled; else elseBlockFilled"
+          [innerHTML]="selectedMenuItem?.getTrustHtml()">
+        </div> -->
+        <ng-container *ngIf="isFilled; else elseBlockFilled">
+          <ng-container *ngFor="let item of selectedMenuItems; trackBy: trackByMenuItem;">
+            <span [innerHTML]="item.getTrustHtml()"></span>
+          </ng-container>
+        </ng-container>
         <ng-template #elseBlockFilled>
           <div>&ZeroWidthSpace;</div>
         </ng-template>
+
+        <!-- <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container> -->
       </div>
 
     </gln-frame>
@@ -77,10 +84,10 @@
     [attr.no-mouse]="isAnimation ? '': null"
     [ngClass]="['glns-panel', (isFixRight ? 'is-fix-right' : '')]"
     [isFixRight]="getBoolean(isFixRight)"
-    [isMultiple]="innMultiple"
+    [isMultiple]="multiple"
     [menuItemList]="menuItemList"
     [visibleSize]="sizeVisible"
-    (selected)="selectedItem($event, !!innMultiple)"
+    (selected)="selectedMenuElement($event, !!multiple)"
     (closing)="close()">
     <ng-content select="gln-menu-item"></ng-content>
   </gln-menu-item-panel>

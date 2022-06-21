@@ -11,16 +11,16 @@ export class GlnAutoFocuseDirective implements OnChanges, AfterViewInit {
   @Input()
   public glnAutoFocuse: string | boolean | null = null;
 
-  private innIsAutoFocuse = false;
+  private autoFocuse = false;
   public get isAutoFocuse(): boolean {
-    return this.innIsAutoFocuse;
+    return this.autoFocuse;
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set isAutoFocuse(value: boolean) {}
 
-  private innIsHasOwner = false;
+  private hasOwner = false;
   public get isHasOwner(): boolean {
-    return this.innIsHasOwner;
+    return this.hasOwner;
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set isHasOwner(value: boolean) {}
@@ -29,14 +29,13 @@ export class GlnAutoFocuseDirective implements OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.glnAutoFocuse) {
-      const value = BooleanUtil.init(this.glnAutoFocuse != null ? '' + this.glnAutoFocuse : null);
-      this.innIsAutoFocuse = value === null ? false : value;
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'auto-focuse', this.innIsAutoFocuse ? '' : null);
+      this.autoFocuse = !!BooleanUtil.init(this.glnAutoFocuse != null ? '' + this.glnAutoFocuse : null);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'auto-focuse', this.autoFocuse ? '' : null);
     }
   }
 
   ngAfterViewInit(): void {
-    if (!this.innIsHasOwner && this.innIsAutoFocuse) {
+    if (!this.hasOwner && this.autoFocuse) {
       Promise.resolve().then(() => {
         this.focuseElement();
       });
@@ -53,6 +52,6 @@ export class GlnAutoFocuseDirective implements OnChanges, AfterViewInit {
   }
 
   public setIsHasOwner(isHasOwner: boolean): void {
-    this.innIsHasOwner = isHasOwner;
+    this.hasOwner = isHasOwner;
   }
 }

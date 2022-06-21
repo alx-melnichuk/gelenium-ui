@@ -59,9 +59,9 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   }
 
   public currConfig: GlnFrameConfig | null = null;
-  public innIsLabelShrink: boolean | null = null;
-  public innNoLabel: boolean | null = null;
-  public innExterior: GlnFrameExterior | null = null;
+  public labelShrink: boolean | null = null;
+  public hideLabel: boolean | null = null;
+  public frameExterior: GlnFrameExterior | null = null;
 
   constructor(
     @Optional() @Inject(GLN_FRAME_CONFIG) private rootConfig: GlnFrameConfig | null,
@@ -77,16 +77,16 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.exterior) {
-      this.innExterior = GlnFrameExteriorUtil.convert(this.exterior);
-      this.settingExterior(this.renderer, this.hostRef, this.innExterior);
+      this.frameExterior = GlnFrameExteriorUtil.convert(this.exterior);
+      this.settingExterior(this.renderer, this.hostRef, this.frameExterior);
     }
     if (changes.isLabelShrink || (changes.config && this.isLabelShrink == null)) {
-      this.innIsLabelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig?.isLabelShrink;
-      this.settingLabelShrink(this.renderer, this.hostRef, this.innIsLabelShrink);
+      this.labelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig?.isLabelShrink;
+      this.settingLabelShrink(this.renderer, this.hostRef, this.labelShrink);
     }
     if (changes.noLabel || (changes.config && this.noLabel == null)) {
-      this.innNoLabel = this.noLabel != null ? this.noLabel : !!this.currConfig?.noLabel;
-      this.settingNoLabel(this.renderer, this.hostRef, this.innNoLabel);
+      this.hideLabel = this.noLabel != null ? this.noLabel : !!this.currConfig?.noLabel;
+      this.settingNoLabel(this.renderer, this.hostRef, this.hideLabel);
     }
     if (changes.isDisabled) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabled || false);
@@ -108,13 +108,13 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    if (this.innIsLabelShrink == null) {
-      this.innIsLabelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig?.isLabelShrink;
-      this.settingLabelShrink(this.renderer, this.hostRef, this.innIsLabelShrink);
+    if (this.labelShrink == null) {
+      this.labelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig?.isLabelShrink;
+      this.settingLabelShrink(this.renderer, this.hostRef, this.labelShrink);
     }
-    if (this.innNoLabel == null) {
-      this.innNoLabel = this.noLabel != null ? this.noLabel : !!this.currConfig?.noLabel;
-      this.settingNoLabel(this.renderer, this.hostRef, this.innNoLabel);
+    if (this.hideLabel == null) {
+      this.hideLabel = this.noLabel != null ? this.noLabel : !!this.currConfig?.noLabel;
+      this.settingNoLabel(this.renderer, this.hostRef, this.hideLabel);
     }
   }
 
