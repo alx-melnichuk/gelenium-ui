@@ -16,8 +16,8 @@ gln-menu-item {
   -webkit-box-pack: start;
   justify-content: flex-start;
 
-  outline: 1px dashed green; // TODO del;
-  // outline: 0px;
+  // outline: 1px dashed green; // TODO del;
+  outline: 0px;
   padding-top: var(--glnmi-pd-tp, 6px);
   padding-bottom: var(--glnmi-pd-bt, 6px);
   padding-left: var(--glnmi-pd-lf, 16px);
@@ -59,6 +59,9 @@ gln-menu-item {
     background: rgba(0,0,0,.12);
   }
   &[sel] {
-    background-color: rgba(25, 118, 210, 0.08)
+    background-color: rgba(25, 118, 210, 0.08);
+    &:hover {
+      background-color: rgba(25, 118, 210, 0.12);
+    }
   }
 }

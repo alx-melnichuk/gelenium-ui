@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -59,7 +60,7 @@ export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT
     { provide: GLN_NODE_INTERNAL_VALIDATOR, useExisting: GlnSelectComponent },
   ],
 })
-export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Validator {
+export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlValueAccessor, Validator {
   @Input()
   public id = `glns-${uniqueIdCounter++}`;
   @Input()
@@ -97,6 +98,20 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   @Input()
   public sizeVisible = -1;
 
+  @Input()
+  get value(): unknown | unknown[] | null {
+    return this.valueData;
+  }
+  set value(newValue: unknown | unknown[] | null) {
+    if (newValue !== this.valueData || (this.multiple && Array.isArray(newValue))) {
+      if (this.menuItems.length > 0) {
+        this.setSelectedMenuItemsByValue(newValue);
+      }
+      this.valueData = newValue;
+    }
+  }
+  private valueData: unknown | unknown[] | null;
+
   @Output()
   readonly focused: EventEmitter<void> = new EventEmitter();
   @Output()
@@ -106,9 +121,7 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   @Output()
   readonly closed: EventEmitter<void> = new EventEmitter();
   @Output()
-  readonly selected: EventEmitter<unknown | null> = new EventEmitter();
-  @Output()
-  readonly selectedMultiple: EventEmitter<unknown[]> = new EventEmitter();
+  readonly selected: EventEmitter<{ value: unknown | null; values: unknown[] }> = new EventEmitter();
 
   @ViewChild('mainElementRef', { static: true })
   public mainElementRef: ElementRef<HTMLElement> | null = null;
@@ -137,6 +150,8 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   public isHide = false;
   public isAnimation = false;
   public selectedMenuItems: GlnMenuItemComponent[] = [];
+
+  private isStopPropagation = false;
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -168,6 +183,13 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
     }
   }
 
+  ngAfterContentInit(): void {
+    // Initialization when the value is received via "writeValue()".
+    if (this.value != null && this.selectedMenuItems.length === 0 && this.menuItems.length > 0) {
+      this.setSelectedMenuItemsByValue(this.valueData);
+    }
+  }
+
   // ** ControlValueAccessor - start **
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -176,38 +198,7 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   public onTouched: () => void = () => {};
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public writeValue(valueInp: any): void {
-    console.log('writeValue(); valueInp=', valueInp); // TODO del;
-    // const isFilledOld = !!this.formControl.value;
-    // this.formControl.setValue(valueInp, { emitEvent: false });
-    // this.isFilled = this.formControl.value !== '' && this.formControl.value != null;
-    // if (isFilledOld !== this.isFilled) {
-    //   this.changeDetectorRef.markForCheck();
-    // }
-    this.clear();
-    if (valueInp !== null) {
-      if (!this.multiple && Array.isArray(valueInp)) {
-        throw Error('It is not possible to pass an array of values unless it is in multiple mode.');
-      }
-      const data = this.multiple ? valueInp : [valueInp];
-      for (let idx = 0; idx < data.length; idx++) {
-        const value = data[idx];
-        const menuItem = this.menuItems.find((item) => item.value === value);
-        if (menuItem) {
-          this.selectedMenuItems.push(menuItem);
-          menuItem.setSelected(false);
-        }
-      }
-    }
-    this.changeDetectorRef.markForCheck();
-    /*const menuItem = this.findMeniItemByValue(this.menuItems, valueInp);
-    if (menuItem !== null) {
-      const isArrayValue = Array.isArray(valueInp);
-      if (this.multiple && isArrayValue) {
-        this.updateSelectedMenuItems(menuItem);
-      } else if (!this.multiple && !isArrayValue) {
-        this.updateSelectedMenuItem(menuItem);
-      }
-    }*/
+    this.value = valueInp;
   }
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public registerOnChange(fn: any): void {
@@ -270,69 +261,6 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
     return item.id;
   }
 
-  public selectedMenuElement(menuItem: GlnMenuItemComponent | null, multiple: boolean): void {
-    if (!menuItem) {
-      return;
-    }
-    if (multiple) {
-      this.updateSelectedMenuItems(menuItem);
-
-      const newValues: unknown[] = Array(this.selectedMenuItems.length);
-      for (let idx = 0; idx < this.selectedMenuItems.length; idx++) {
-        newValues[idx] = this.selectedMenuItems[idx].value;
-      }
-      this.selectedMultiple.emit(newValues);
-      this.onChange(newValues);
-    } else {
-      const selectMenuItem = this.selectedMenuItems.length ? this.selectedMenuItems[0] : null;
-      if (selectMenuItem !== menuItem) {
-        if (selectMenuItem && selectMenuItem.selected) {
-          selectMenuItem.setSelected(false);
-        }
-        this.updateSelectedMenuItem(menuItem);
-        if (menuItem) {
-          menuItem.setSelected(true);
-        }
-        const newValue = menuItem.value;
-        this.selected.emit(newValue);
-        this.onChange(newValue);
-      }
-      this.close();
-    }
-  }
-
-  public updateSelectedMenuItem(menuItem: GlnMenuItemComponent): void {
-    this.selectedMenuItems.length = 0;
-    if (menuItem.value !== null) {
-      this.selectedMenuItems.push(menuItem);
-    }
-    this.isFilled = !this.isEmpty();
-    console.log(`selected=${this.selectedMenuItems.length ? this.selectedMenuItems[0].value : 'null'}`); // TODO del;
-    console.log(`isFilled=${this.isFilled}`); // TODO del;
-    this.changeDetectorRef.markForCheck();
-  }
-  public updateSelectedMenuItems(menuItem: GlnMenuItemComponent): void {
-    const idx = this.selectedMenuItems.indexOf(menuItem);
-    if (idx === -1) {
-      this.selectedMenuItems.push(menuItem);
-    } else {
-      this.selectedMenuItems.splice(idx, 1);
-    }
-    this.isFilled = !this.isEmpty();
-    console.log(`selected=${this.selectedMenuItems.map((item) => item.value).join(', ')}`); // TODO del;
-    console.log(`this.isFilled=${this.isFilled}`); // TODO del;
-    this.changeDetectorRef.markForCheck();
-  }
-
-  public clear(): void {
-    for (let idx = 0; idx < this.selectedMenuItems.length; idx++) {
-      if (this.selectedMenuItems[idx].selected) {
-        this.selectedMenuItems[idx].setSelected(false);
-      }
-    }
-    this.selectedMenuItems.length = 0;
-  }
-
   public doAnimationStart(): void {
     this.isAnimation = true;
     this.changeDetectorRef.markForCheck();
@@ -350,10 +278,6 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
   // Determine the value of the css variable "frame size".
   public frameChange(event: GlnFrameSizePaddingVerHorRes): void {
     HtmlElemUtil.setProperty(this.hostRef, '--glns-frameSize', NumberUtil.str(event.frameSizeValue)?.concat('px') || null);
-  }
-
-  public isEmpty(): boolean {
-    return this.selectedMenuItems.length === 0;
   }
 
   public trigger(): void {
@@ -382,6 +306,53 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
     }
   }
 
+  public doMousedown(event: Event): void {
+    if (!this.isAnimation) {
+      if (!this.isOpen) {
+        this.isStopPropagation = true;
+        this.open();
+      }
+    }
+  }
+  public doMouseup(event: Event): void {
+    if (this.isStopPropagation) {
+      event.stopPropagation();
+      this.isStopPropagation = false;
+    }
+  }
+
+  public clearSelectedMenuItems(): void {
+    if (this.selectedMenuItems.length > 0) {
+      for (let idx = 0; idx < this.selectedMenuItems.length; idx++) {
+        this.selectedMenuItems[idx].setSelected(false);
+      }
+      this.selectedMenuItems.length = 0;
+      this.isFilled = !this.isEmpty();
+      this.changeDetectorRef.markForCheck();
+    }
+  }
+
+  public selectedMenuElement(addMenuItems: GlnMenuItemComponent[]): void {
+    if (addMenuItems.length > 0 && this.menuItems.length > 0) {
+      this.updateSelectedMenuByElements(addMenuItems, this.menuItems);
+      if (this.multiple) {
+        const values = this.selectedMenuItems.map((item) => item.value);
+        this.selected.emit({ value: null, values });
+        this.onChange(values);
+      } else {
+        const value = this.selectedMenuItems.length > 0 ? this.selectedMenuItems[0].value : null;
+        this.selected.emit({ value, values: [] });
+        this.onChange(value);
+        console.log(`selectedMenuElement() this.close();`); // TODO del;
+        this.close();
+      }
+    }
+  }
+
+  public isEmpty(): boolean {
+    return this.selectedMenuItems.length === 0;
+  }
+
   // ** Private API **
 
   private focusState(renderer: Renderer2, elem: ElementRef<HTMLElement>, value: boolean): void {
@@ -389,11 +360,70 @@ export class GlnSelectComponent implements OnChanges, ControlValueAccessor, Vali
     HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
   }
 
-  private findMeniItemByValue(menuItems: GlnMenuItemComponent[], value: unknown): GlnMenuItemComponent | null {
-    let result: GlnMenuItemComponent | null = null;
-    for (let i = 0; i < menuItems.length && !result; i++) {
-      const menuItemValue = menuItems[i].value;
-      result = menuItemValue === value ? menuItems[i] : result;
+  private setSelectedMenuItemsByValue(newValue: unknown | unknown[] | null): void {
+    if (this.multiple) {
+      if (!Array.isArray(newValue)) {
+        throw Error('The value must be an array in multi-select mode.');
+      }
+      this.clearSelectedMenuItems();
+      const addMenuItems: GlnMenuItemComponent[] = [];
+      for (let idx = 0; idx < newValue.length; idx++) {
+        const menuItem = this.menuItems.find((item) => item.value === newValue[idx]);
+        if (menuItem) {
+          addMenuItems.push(menuItem);
+        }
+      }
+      this.updateSelectedMenuByElements(addMenuItems, this.menuItems);
+    } else {
+      this.clearSelectedMenuItems();
+      if (newValue) {
+        const menuItem = this.menuItems.find((item) => item.value === newValue);
+        if (menuItem) {
+          const addMenuItems: GlnMenuItemComponent[] = [menuItem];
+          this.updateSelectedMenuByElements(addMenuItems, this.menuItems);
+        }
+      }
+    }
+  }
+
+  private updateSelectedMenuByElements(updateMenuItems: GlnMenuItemComponent[], menuItems: GlnMenuItemComponent[]): void {
+    if (updateMenuItems.length > 0 && menuItems.length > 0) {
+      const nextMenuItems: GlnMenuItemComponent[] = this.selectedMenuItems.slice();
+      if (this.multiple) {
+        for (let idx = 0; idx < updateMenuItems.length; idx++) {
+          const updateMenuItem = updateMenuItems[idx];
+          const index = nextMenuItems.indexOf(updateMenuItem);
+          if (index > -1) {
+            updateMenuItem.setSelected(false);
+            nextMenuItems.splice(index, 1);
+          } else {
+            updateMenuItem.setSelected(true);
+            nextMenuItems.push(updateMenuItem);
+          }
+        }
+      } else {
+        for (let i = 0; i < nextMenuItems.length; i++) {
+          nextMenuItems[i].setSelected(false);
+        }
+        nextMenuItems.length = 0;
+        if (updateMenuItems.length > 0 && updateMenuItems[0].value !== null) {
+          updateMenuItems[0].setSelected(true);
+          nextMenuItems.push(updateMenuItems[0]);
+        }
+      }
+      this.selectedMenuItems = menuItems.filter((item) => nextMenuItems.includes(item));
+      this.isFilled = !this.isEmpty();
+      this.changeDetectorRef.markForCheck();
+    }
+  }
+
+  private equalsBuff(buffA: unknown[], buffB: unknown[]): boolean {
+    let result = false;
+    if (buffA.length > 0 && buffB.length > 0 && buffA.length === buffB.length) {
+      result = true;
+      for (let i = 0; i < buffA.length && result; i++) {
+        result = buffB.indexOf(buffA[i]) > -1;
+      }
     }
     return result;
   }

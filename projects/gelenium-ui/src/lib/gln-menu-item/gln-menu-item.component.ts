@@ -39,7 +39,7 @@ export class GlnMenuItemComponent implements OnChanges {
 
   public marked = false;
   public multiple = false;
-  public selected = false;
+  public selected: boolean | null = null;
 
   constructor(
     public hostRef: ElementRef<HTMLElement>,
@@ -50,6 +50,8 @@ export class GlnMenuItemComponent implements OnChanges {
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'role', 'option');
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', '-1');
+    this.setDisable(!!this.disabled);
+    this.setSelected(!!this.selected);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -74,6 +76,7 @@ export class GlnMenuItemComponent implements OnChanges {
       this.disabled = !!value;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'aria-disabled', '' + this.disabled);
       this.changeDetectorRef.markForCheck();
     }
   }
@@ -101,6 +104,7 @@ export class GlnMenuItemComponent implements OnChanges {
       this.selected = !!value;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-selected', this.selected);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'sel', this.selected ? '' : null);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'aria-selected', '' + this.selected);
       this.changeDetectorRef.markForCheck();
     }
   }

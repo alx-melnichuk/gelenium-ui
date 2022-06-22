@@ -54,12 +54,13 @@
         glns-elem
         (focus)="doFocus()"
         (blur)="doBlur()"
-        (mousedown)="trigger()"
-        (mouseup)="$event.stopPropagation()">
+        (mousedown)="doMousedown($event)"
+        (mouseup)="doMouseup($event)">
         <!-- <div *ngIf="isFilled; else elseBlockFilled"
           [innerHTML]="selectedMenuItem?.getTrustHtml()">
         </div> -->
         <ng-container *ngIf="isFilled; else elseBlockFilled">
+          [{{ selectedMenuItems.length }}]
           <ng-container *ngFor="let item of selectedMenuItems; trackBy: trackByMenuItem;">
             <span [innerHTML]="item.getTrustHtml()"></span>
           </ng-container>
@@ -87,7 +88,7 @@
     [isMultiple]="multiple"
     [menuItemList]="menuItemList"
     [visibleSize]="sizeVisible"
-    (selected)="selectedMenuElement($event, !!multiple)"
+    (selected)="selectedMenuElement([$event])"
     (closing)="close()">
     <ng-content select="gln-menu-item"></ng-content>
   </gln-menu-item-panel>

@@ -63,16 +63,21 @@
     <div class="app-elem">
       <gln-select formControlName="input01a"
         label="demo"
-        [sizeVisible]="4">
+        [sizeVisible]="4"
+        (input)="doInput($event)"
+        (change)="doChange($event)"
+        isMultiple9>
         <gln-menu-item><em>None</em></gln-menu-item>
-        <gln-menu-item value="item01">context <em>item01</em></gln-menu-item>
-        <gln-menu-item value="item02">context <em>item02</em></gln-menu-item>
-        <gln-menu-item value="item03">context <em>item03</em></gln-menu-item>
-        <gln-menu-item value="item04">context <em>item04</em></gln-menu-item>
-        <gln-menu-item value="item05">context <em>item05</em></gln-menu-item>
-        <gln-menu-item value="item06">context <em>item06</em></gln-menu-item>
+        <gln-menu-item value="item01">c <em>item01</em></gln-menu-item>
+        <gln-menu-item value="item02">c <em>item02</em></gln-menu-item>
+        <gln-menu-item value="item03">c <em>item03</em></gln-menu-item>
+        <gln-menu-item value="item04">c <em>item04</em></gln-menu-item>
+        <gln-menu-item value="item05">c <em>item05</em></gln-menu-item>
+        <gln-menu-item value="item06">c <em>item06</em></gln-menu-item>
       </gln-select>
     </div>
+
+    input01a.value={{formGroup01.controls['input01a'].value}}
     <!-- <div class="app-elem">
       <gln-input formControlName="input01a"
         label="Outlined"
