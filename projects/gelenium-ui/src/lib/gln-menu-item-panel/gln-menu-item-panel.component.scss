@@ -37,7 +37,6 @@ gln-menu-item-panel {
   outline: 0px;//+
   padding: 0.375em 0px; // 6px 0px
   position: absolute;
-  z-index: 1;
 
   &[no-mouse] {
     pointer-events: none;

@@ -93,19 +93,21 @@ gln-frame {
 
   // ** Section "Label". **
   label {
-    padding: 0;
-    position: absolute;
     display: block;
-    transform-origin: top left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     left: 0;
+    overflow: hidden;
+    padding: 0;
+    pointer-events: none;
+    position: absolute;
+    user-select: none;
+    text-overflow: ellipsis;
+    text-size-adjust: 100%;
     top: 0;
+    transform-origin: top left;
     -webkit-transition: color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,-webkit-transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,max-width 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,max-width 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    white-space: nowrap;
     z-index: 1;
-    pointer-events: none;
   }
   &[shr], &:focus-within, &[fil] {
     label {
@@ -116,6 +118,7 @@ gln-frame {
         0.75, // $scaleX
         0.75  // $scaleY
       );
+      pointer-events: auto;
     }
   }
   &:not([shr]):not(:focus-within):not([fil]) label {
@@ -188,11 +191,11 @@ gln-frame {
 
   // ** Section "div.glnf-border". **
   &>div {
+    align-items: center;
     box-sizing: border-box;
+    border-radius: inherit;
     @include mxDisplayInlineFlex();
     flex-wrap: nowrap;
-    position: relative;
-    border-radius: inherit;
   }
   &[dis]>div {
     color: var(--glnf-dis-cl); // The color in state is disabled for an input element.

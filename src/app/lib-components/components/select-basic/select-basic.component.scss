@@ -1,5 +1,11 @@
-/*# sourceURL=select.component.scss */
+/*# sourceURL=select-basic.component.scss */
 
-app-select {
+app-select-basic {
   display: block;
+
+  .sb-elem {
+    min-width: 120px;
+    width: 120px;
+    margin: 10px 40px;
+  }
 }

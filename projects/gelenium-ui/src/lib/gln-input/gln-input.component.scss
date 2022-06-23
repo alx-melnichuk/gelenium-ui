@@ -11,9 +11,9 @@ gln-input {
     width: 100%;
     gln-frame {
       width: 100%;
-    }
-    .glni-input {
-      width: 100%;
+      &>div>[glni-elem] {
+        width: 100%;
+      }
     }
   }
 

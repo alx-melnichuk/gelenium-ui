@@ -1,0 +1,138 @@
+<section mr-vr>
+  <h3>Attributes</h3>
+  <p>The following attributes are supported:</p>
+  <ul>
+    <li>"id" - parameter for defining the unique identifier of the field
+      (id="unique_identifier");</li>
+    <li>"isReadOnly" - a sign that the field is read-only (isReadOnly);</li>
+    <li>"isRequired" - a sign that the field is required (isRequired);</li>
+    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
+    <li>"lbShrink" - a sign that the field has a permanent label,
+      without being converted to a placeholder (lbShrink);</li>
+    <li>"noLabel" - a sign that the field has no label at all (noLabel);</li>
+    <li>"helperText" - the parameter is used to provide context for a given
+      field or error message (helperText="A value must be entered.");</li>
+    <li>"isError" - a sign that the field is in error (isError);</li>
+  </ul>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior02">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>State: empty.</em>
+      </small>
+    </div>
+    <gln-select [(ngModel)]="model02a"
+      label="Cool fruit"
+      id="unique_identifier"
+      wdFull
+      [exterior]="exterior02">
+      <gln-menu-item><em>None</em></gln-menu-item>
+      <gln-menu-item *ngFor="let item of fruits"
+        [value]="item">{{ item }}</gln-menu-item>
+    </gln-select>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: isRequired, helperText.</em>
+      </small>
+    </div>
+    <gln-select [(ngModel)]="model02b"
+      label="Required field"
+      wdFull
+      isRequired
+      helperText="A value must be entered."
+      [exterior]="exterior02">
+      <gln-menu-item><em>None</em></gln-menu-item>
+      <gln-menu-item *ngFor="let item of fruits"
+        [value]="item">{{ item }}</gln-menu-item>
+    </gln-select>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isReadOnly.</em>
+      </small>
+    </div>
+    <gln-select [(ngModel)]="model02c"
+      label="Read Only"
+      wdFull
+      isReadOnly
+      helperText="The parameter is read only."
+      [exterior]="exterior02">
+      <gln-menu-item><em>None</em></gln-menu-item>
+      <gln-menu-item *ngFor="let item of fruits"
+        [value]="item">{{ item }}</gln-menu-item>
+    </gln-select>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isDisabled.</em>
+      </small>
+    </div>
+    <gln-select [(ngModel)]="model02d"
+      label="Disabled"
+      wdFull
+      isDisabled
+      helperText="The parameter is disabled."
+      [exterior]="exterior02">
+      <gln-menu-item><em>None</em></gln-menu-item>
+      <gln-menu-item *ngFor="let item of fruits"
+        [value]="item">{{ item }}</gln-menu-item>
+    </gln-select>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: lbShrink.</em>
+      </small>
+    </div>
+    <gln-select [(ngModel)]="model02e"
+      label="Permanent label"
+      wdFull
+      lbShrink
+      helperText="The position of the label is fixed."
+      [exterior]="exterior02">
+      <gln-menu-item><em>None</em></gln-menu-item>
+      <gln-menu-item *ngFor="let item of fruits"
+        [value]="item">{{ item }}</gln-menu-item>
+    </gln-select>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: noLabel.</em>
+      </small>
+    </div>
+    <gln-select [(ngModel)]="model02f"
+      label="noLabel"
+      noLabel
+      wdFull
+      helperText="The label is not displayed."
+      [exterior]="exterior02">
+      <gln-menu-item><em>None</em></gln-menu-item>
+      <gln-menu-item *ngFor="let item of fruits"
+        [value]="item">{{ item }}</gln-menu-item>
+    </gln-select>
+  </div>
+
+</div>

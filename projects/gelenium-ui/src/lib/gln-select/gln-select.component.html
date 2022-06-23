@@ -11,7 +11,7 @@
       [noLabel]="getBoolean(noLabel)"
       [isDisabled]="disabled"
       [isFilled]="isFilled"
-      [isError]="!!formControl.errors || getBoolean(isError)"
+      [isError]="!!errors || getBoolean(isError)"
       [isRequired]="required"
       [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
       #glnFrameSize="glnFrameSize"
@@ -32,18 +32,17 @@
       <span glnf-orn-rg
         class="glns-ornam-rg">
         <ng-content select="[gln-orn-rg]"></ng-content>
-        <button glns-btn
-          class="glns-btn">
-          <svg *ngIf="!getBoolean(noIcon)"
-            ico
-            [attr.opn]="isOpen && !isHide ? 'is-open': null"
-            [ngClass]="['glns-icon', (isOpen ? 'is-open' : '')]"
-            focusable="false"
-            aria-hidden="true"
-            viewBox="0 0 24 24">
-            <path d="M7 10l5 5 5-5z"></path>
-          </svg>
-        </button>
+        <svg *ngIf="!getBoolean(noIcon)"
+          ico
+          [attr.opn]="isOpen && !isHide ? 'is-open': null"
+          [ngClass]="['glns-icon', (isOpen ? 'is-open' : '')]"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          mousedown9="doMousedown()"
+          mouseup9="doMouseup($event)">
+          <path d="M7 10l5 5 5-5z"></path>
+        </svg>
       </span>
 
       <div [attr.tabindex]="disabled ? null : 0"
@@ -54,15 +53,15 @@
         glns-elem
         (focus)="doFocus()"
         (blur)="doBlur()"
-        (mousedown)="doMousedown($event)"
-        (mouseup)="doMouseup($event)">
-        <!-- <div *ngIf="isFilled; else elseBlockFilled"
-          [innerHTML]="selectedMenuItem?.getTrustHtml()">
-        </div> -->
+        mousedown9="doMousedown()"
+        mouseup9="doMouseup($event)"
+        (click)="doClickTriger($event)">
+
         <ng-container *ngIf="isFilled; else elseBlockFilled">
-          [{{ selectedMenuItems.length }}]
-          <ng-container *ngFor="let item of selectedMenuItems; trackBy: trackByMenuItem;">
+          <ng-container
+            *ngFor="let item of selectedItems.items; last as isLast trackBy: trackByMenuItem;">
             <span [innerHTML]="item.getTrustHtml()"></span>
+            <ng-container *ngIf="selectedItems.items.length > 1 && !isLast">, </ng-container>
           </ng-container>
         </ng-container>
         <ng-template #elseBlockFilled>
@@ -76,7 +75,8 @@
   </div>
 </ng-container>
 
-<div [ngClass]="['glns-wrap-items', (isHide ? 'is-hide': (isOpen ? 'is-open': ''))]"
+<div [ngClass]="['glns-wrap-panel', (isHide ? 'is-hide': (isOpen ? 'is-open': ''))]"
+  glns-wrap-panel
   tabindex="-1"
   (animationstart)="doAnimationStart()"
   (animationend)="doAnimationEnd()">
@@ -88,8 +88,15 @@
     [isMultiple]="multiple"
     [menuItemList]="menuItemList"
     [visibleSize]="sizeVisible"
-    (selected)="selectedMenuElement([$event])"
+    (selected)="selectedMenuElement($event)"
     (closing)="close()">
     <ng-content select="gln-menu-item"></ng-content>
   </gln-menu-item-panel>
 </div>
+
+<gln-hint-or-error *ngIf="!!helperText"
+  [text]="helperText"
+  [isError]="!!errors || getBoolean(isError)"
+  [isFocused]="isFocused"
+  [isDisabled]="disabled">
+</gln-hint-or-error>

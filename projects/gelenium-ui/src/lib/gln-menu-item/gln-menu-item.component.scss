@@ -28,10 +28,9 @@ gln-menu-item {
   // vertical-align: middle; // TODO ignored due to the display. With 'display: block'
   white-space: nowrap;
   
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
+  &>[mul]>input {
+    cursor: inherit;
   }
-
   /*&:hover:not([dis]), &:focus:not([dis]) {
     background: rgba(0,0,0,.04);
   }

@@ -11,9 +11,9 @@ gln-textarea {
     width: 100%;
     gln-frame {
       width: 100%;
-    }
-    .glnt-textarea {
-      width: 100%;
+      &>div>[glnt-elem] {
+        width: 100%;
+      }
     }
   }
 

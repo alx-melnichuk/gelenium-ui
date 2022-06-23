@@ -42,6 +42,7 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
 
 import { GlnSelectConfig } from './gln-select-config.interface';
+import { GlnSelectedMenuItems } from './gln-selected-menu-items';
 
 let uniqueIdCounter = 0;
 
@@ -97,6 +98,8 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   public ornamRgAlign: string | null = null; // OrnamAlign
   @Input()
   public sizeVisible = -1;
+  @Input()
+  public wdFull: string | null = null;
 
   @Input()
   get value(): unknown | unknown[] | null {
@@ -104,9 +107,7 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   }
   set value(newValue: unknown | unknown[] | null) {
     if (newValue !== this.valueData || (this.multiple && Array.isArray(newValue))) {
-      if (this.menuItems.length > 0) {
-        this.setSelectedMenuItemsByValue(newValue);
-      }
+      this.setSelectedMenuItemsByValue(!!this.multiple, newValue, this.menuItems);
       this.valueData = newValue;
     }
   }
@@ -143,13 +144,13 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public isFocused = false;
   public isFilled = false;
-
+  public errors: ValidationErrors | null = null;
   public multiple: boolean | null = null;
 
   public isOpen = false;
   public isHide = false;
   public isAnimation = false;
-  public selectedMenuItems: GlnMenuItemComponent[] = [];
+  public selectedItems: GlnSelectedMenuItems = new GlnSelectedMenuItems();
 
   private isStopPropagation = false;
 
@@ -184,9 +185,14 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   }
 
   ngAfterContentInit(): void {
+    // if (this.multiple) {
+    //   for (let i = 0; i < this.menuItems.length; i++) {
+    //     this.menuItems[i].setMultiple(true);
+    //   }
+    // }
     // Initialization when the value is received via "writeValue()".
-    if (this.value != null && this.selectedMenuItems.length === 0 && this.menuItems.length > 0) {
-      this.setSelectedMenuItemsByValue(this.valueData);
+    if (this.valueData != null && this.selectedItems.isEmpty) {
+      this.setSelectedMenuItemsByValue(!!this.multiple, this.valueData, this.menuItems);
     }
   }
 
@@ -197,8 +203,8 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public onTouched: () => void = () => {};
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-  public writeValue(valueInp: any): void {
-    this.value = valueInp;
+  public writeValue(value: any): void {
+    this.value = value;
   }
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public registerOnChange(fn: any): void {
@@ -227,7 +233,8 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public validate(control: AbstractControl): ValidationErrors | null {
-    return !this.disabled && this.required && this.isEmpty() ? { required: true } : null;
+    this.errors = !this.disabled && this.required && this.selectedItems.isEmpty ? { required: true } : null;
+    return this.errors;
   }
 
   // ** Validator - finish **
@@ -235,22 +242,26 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   // ** Public API **
 
   public focus(): void {
-    if (isPlatformBrowser(this.platformId) && !!this.mainElementRef) {
+    if (!this.disabled && isPlatformBrowser(this.platformId) && !!this.mainElementRef) {
       this.mainElementRef.nativeElement.focus();
     }
   }
 
   public doFocus(): void {
-    this.isFocused = true;
-    this.focusState(this.renderer, this.hostRef, this.isFocused);
-    this.focused.emit();
+    if (!this.disabled) {
+      this.isFocused = true;
+      this.focusState(this.renderer, this.hostRef, this.isFocused);
+      this.focused.emit();
+    }
   }
 
   public doBlur(): void {
-    this.isFocused = false;
-    this.focusState(this.renderer, this.hostRef, this.isFocused);
-    this.onTouched();
-    this.blured.emit();
+    if (!this.disabled) {
+      this.isFocused = false;
+      this.focusState(this.renderer, this.hostRef, this.isFocused);
+      this.onTouched();
+      this.blured.emit();
+    }
   }
 
   public getBoolean(value: string | null): boolean | null {
@@ -282,7 +293,7 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
 
   public trigger(): void {
     // There should be no toggles during the animation.
-    if (!this.isAnimation) {
+    if (!this.disabled && !this.isAnimation) {
       if (this.isOpen) {
         this.close();
       } else {
@@ -292,7 +303,7 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   }
   public open(): void {
     // You cannot open the panel during animation.
-    if (!this.isAnimation && !this.isOpen) {
+    if (!this.disabled && !this.isAnimation && !this.isOpen) {
       this.isOpen = true;
       this.isHide = false;
       this.opened.emit();
@@ -300,14 +311,24 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
     }
   }
   public close(): void {
+    if (!this.disabled && this.isStopPropagation) {
+      this.isStopPropagation = false;
+      return;
+    }
     // You cannot close a panel during an animation.
-    if (!this.isAnimation && this.isOpen) {
+    if (!this.disabled && !this.isAnimation && this.isOpen) {
       this.isHide = true;
     }
   }
-
-  public doMousedown(event: Event): void {
-    if (!this.isAnimation) {
+  public doClickTriger(event: Event): void {
+    console.log(`doClickTriger()`); // TODO del;
+    if (!this.disabled) {
+      this.isStopPropagation = true;
+      this.open();
+    }
+  }
+  public doMousedown(): void {
+    if (!this.disabled && !this.isAnimation) {
       if (!this.isOpen) {
         this.isStopPropagation = true;
         this.open();
@@ -315,42 +336,38 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
     }
   }
   public doMouseup(event: Event): void {
-    if (this.isStopPropagation) {
+    if (!this.disabled && this.isStopPropagation) {
       event.stopPropagation();
       this.isStopPropagation = false;
     }
   }
 
   public clearSelectedMenuItems(): void {
-    if (this.selectedMenuItems.length > 0) {
-      for (let idx = 0; idx < this.selectedMenuItems.length; idx++) {
-        this.selectedMenuItems[idx].setSelected(false);
-      }
-      this.selectedMenuItems.length = 0;
-      this.isFilled = !this.isEmpty();
+    if (!this.selectedItems.isEmpty) {
+      this.selectedItems.clear();
+      this.isFilled = !this.selectedItems.isEmpty;
       this.changeDetectorRef.markForCheck();
     }
   }
 
-  public selectedMenuElement(addMenuItems: GlnMenuItemComponent[]): void {
-    if (addMenuItems.length > 0 && this.menuItems.length > 0) {
-      this.updateSelectedMenuByElements(addMenuItems, this.menuItems);
-      if (this.multiple) {
-        const values = this.selectedMenuItems.map((item) => item.value);
-        this.selected.emit({ value: null, values });
-        this.onChange(values);
-      } else {
-        const value = this.selectedMenuItems.length > 0 ? this.selectedMenuItems[0].value : null;
-        this.selected.emit({ value, values: [] });
-        this.onChange(value);
-        console.log(`selectedMenuElement() this.close();`); // TODO del;
+  public selectedMenuElement(addMenuItem: GlnMenuItemComponent | null): void {
+    const addMenuItems = addMenuItem !== null ? [addMenuItem] : [];
+    if (addMenuItems.length > 0 && this.selectedItems.updateByElements(!!this.multiple, addMenuItems, this.menuItems)) {
+      this.isFilled = !this.selectedItems.isEmpty;
+      this.changeDetectorRef.markForCheck();
+
+      const values = this.selectedItems.getValues();
+      const value = values.length > 0 ? values[0] : null;
+      this.selected.emit({ value: !this.multiple ? value : null, values: this.multiple ? values : [] });
+      this.onChange(this.multiple ? values : value);
+      if (!this.multiple) {
         this.close();
       }
     }
   }
 
   public isEmpty(): boolean {
-    return this.selectedMenuItems.length === 0;
+    return this.selectedItems.isEmpty;
   }
 
   // ** Private API **
@@ -360,59 +377,17 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
     HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
   }
 
-  private setSelectedMenuItemsByValue(newValue: unknown | unknown[] | null): void {
-    if (this.multiple) {
-      if (!Array.isArray(newValue)) {
+  private setSelectedMenuItemsByValue(multiple: boolean, newValue: unknown | unknown[] | null, menuItems: GlnMenuItemComponent[]): void {
+    if (menuItems.length > 0) {
+      if (multiple && !Array.isArray(newValue)) {
         throw Error('The value must be an array in multi-select mode.');
       }
-      this.clearSelectedMenuItems();
-      const addMenuItems: GlnMenuItemComponent[] = [];
-      for (let idx = 0; idx < newValue.length; idx++) {
-        const menuItem = this.menuItems.find((item) => item.value === newValue[idx]);
-        if (menuItem) {
-          addMenuItems.push(menuItem);
-        }
-      }
-      this.updateSelectedMenuByElements(addMenuItems, this.menuItems);
-    } else {
-      this.clearSelectedMenuItems();
-      if (newValue) {
-        const menuItem = this.menuItems.find((item) => item.value === newValue);
-        if (menuItem) {
-          const addMenuItems: GlnMenuItemComponent[] = [menuItem];
-          this.updateSelectedMenuByElements(addMenuItems, this.menuItems);
-        }
-      }
-    }
-  }
+      this.selectedItems.clear();
+      const addValues: unknown[] = Array.isArray(newValue) ? newValue : newValue ? [newValue] : [];
+      const addMenuItems = this.selectedItems.findMenuItems(addValues, menuItems);
+      this.selectedItems.updateByElements(!!multiple, addMenuItems, menuItems);
 
-  private updateSelectedMenuByElements(updateMenuItems: GlnMenuItemComponent[], menuItems: GlnMenuItemComponent[]): void {
-    if (updateMenuItems.length > 0 && menuItems.length > 0) {
-      const nextMenuItems: GlnMenuItemComponent[] = this.selectedMenuItems.slice();
-      if (this.multiple) {
-        for (let idx = 0; idx < updateMenuItems.length; idx++) {
-          const updateMenuItem = updateMenuItems[idx];
-          const index = nextMenuItems.indexOf(updateMenuItem);
-          if (index > -1) {
-            updateMenuItem.setSelected(false);
-            nextMenuItems.splice(index, 1);
-          } else {
-            updateMenuItem.setSelected(true);
-            nextMenuItems.push(updateMenuItem);
-          }
-        }
-      } else {
-        for (let i = 0; i < nextMenuItems.length; i++) {
-          nextMenuItems[i].setSelected(false);
-        }
-        nextMenuItems.length = 0;
-        if (updateMenuItems.length > 0 && updateMenuItems[0].value !== null) {
-          updateMenuItems[0].setSelected(true);
-          nextMenuItems.push(updateMenuItems[0]);
-        }
-      }
-      this.selectedMenuItems = menuItems.filter((item) => nextMenuItems.includes(item));
-      this.isFilled = !this.isEmpty();
+      this.isFilled = !this.selectedItems.isEmpty;
       this.changeDetectorRef.markForCheck();
     }
   }

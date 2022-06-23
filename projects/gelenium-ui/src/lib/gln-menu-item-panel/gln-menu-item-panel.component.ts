@@ -81,9 +81,16 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
     this.activate(this.hostRef, this.itemHeightVal * this.visibleCountVal, this.isFixRight);
   }
 
-  @HostListener('document:mouseup', ['$event'])
+  // @HostListener('document:mouseup', ['$event'])
+  // // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // public documentMouseupHandling(event: Event): void {
+  //   // If the mouse click is outside the area of the current element, then send an "outside" event.
+  //   this.closing.emit();
+  // }
+  @HostListener('document:click', ['$event'])
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public documentMouseupHandling(event: Event): void {
+  public documentClickHandling(event: Event): void {
+    console.log(`documentClick()`); // TODO del;
     // If the mouse click is outside the area of the current element, then send an "outside" event.
     this.closing.emit();
   }
