@@ -187,7 +187,7 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
     // const parent = hostRef.nativeElement.parentElement as HTMLElement;
     const isDown = this.isDownValue(hostRef.nativeElement, height);
     // const top = isDown ? /*parent.offsetHeight*/ 100 : null;
-    const bottom = isDown ? null : 'calc(var(--glns-frameSize) + 0.25em)';
+    const bottom = isDown ? null : 'calc(var(--glns-size) + 0.25em)';
 
     HtmlElemUtil.setProperty(this.hostRef, '--glnmip-ul-height', NumberUtil.str(height)?.concat('px') || null);
     // HtmlElemUtil.setProperty(this.hostRef, '--gmp-top', NumberUtil.str(top)?.concat('%') || null);

@@ -30,7 +30,7 @@ gln-select {
   }
 
   gln-frame {
-    &:not([dis]) {
+    &:not([opn]):not([dis]) {
       cursor: pointer;
     }
     &>div>[glnf-orn-rg]>[ico] {

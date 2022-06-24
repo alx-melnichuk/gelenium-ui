@@ -40,6 +40,7 @@ import { GlnMenuItemComponent } from '../gln-menu-item/gln-menu-item.component';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
+import { SchemeUtil } from '../_utils/scheme.util';
 
 import { GlnSelectConfig } from './gln-select-config.interface';
 import { GlnSelectedMenuItems } from './gln-selected-menu-items';
@@ -162,6 +163,7 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
     public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {
+    SchemeUtil.loadingCheck();
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-select', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
@@ -288,7 +290,7 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   }
   // Determine the value of the css variable "frame size".
   public frameChange(event: GlnFrameSizePaddingVerHorRes): void {
-    HtmlElemUtil.setProperty(this.hostRef, '--glns-frameSize', NumberUtil.str(event.frameSizeValue)?.concat('px') || null);
+    HtmlElemUtil.setProperty(this.hostRef, '--glns-size', NumberUtil.str(event.frameSizeValue)?.concat('px') || null);
   }
 
   public trigger(): void {

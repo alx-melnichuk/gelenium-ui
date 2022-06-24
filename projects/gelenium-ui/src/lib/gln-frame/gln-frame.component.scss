@@ -8,41 +8,47 @@
 @import '../_styles/mx-transform-scale-x-y-translate-x-y.scss';
 
 :root {
+  --glnf-default-40: hsl(var(--gln-default-h), var(--gln-default-s), 40%);
+  --glnf-default-55: hsl(var(--gln-default-h), var(--gln-default-s), 55%);
+  --glnf-primary-45: hsl(var(--gln-primary-h), var(--gln-primary-s), 45%);
+  --glnf-danger-50: hsl(var(--gln-danger-h), var(--gln-danger-s), 50%);
+
   // The default color for the label.
-  --glnf-def-cl: rgba(0, 0, 0, 0.6);
+  // #--glnf-def-cl: rgba(0, 0, 0, 0.6);
   // The color of the label and border on mouse hover.
-  --glnf-hov-cl: rgba(0, 0, 0, 0.87);
+  // --glnf-hov-cl: rgba(0, 0, 0, 0.87);
   // The color of the label and border in an error state.
-  --glnf-err-cl: #d32f2f;
-  --glnf-err-cl2: #d32f2fcf;
+  // --glnf-err-cl: #d32f2f;
+  // --glnf-err-cl2: #d32f2fcf;
   // The color of the label and border on mouse hover in an error state.
-  --glnf-hov-err-cl: #ff0000;
+  // --glnf-hov-err-cl: #ff0000;
   // The color of the border and label when getting focus.
-  --glnf-foc-cl: #1976d2;
+  // # --glnf-foc-cl: #1976d2;
   // The color of the label and border in the state is disabled.
-  --glnf-dis-cl: #787878;
+  // --glnf-dis-cl: #787878;
 
   // Background color for "underline" mode.
-  --glnf-def2-cl: rgba(0, 0, 0, 0.06);
+  // --glnf-def2-cl: rgba(0, 0, 0, 0.06);
   // The state without disabled, error, focused and with hover.
-  --glnf-hov2-cl: #1976d20b;
+  // --glnf-hov2-cl: #1976d20b;
+
   // The state without disabled, error and with focused.
-  --glnf-foc2-cl: #1976d20f;
+  // --glnf-foc2-cl: #1976d20f;
   // The state without disabled, hover, focused and error.
-  --glnf-err2-cl: #d32f2f0f;
+  // --glnf-err2-cl: #d32f2f0f;
   // The state without disabled, focused and error, hover.
-  --glnf-hov2-err2-cl: #d32f2f0b;
+  // --glnf-hov2-err2-cl: #d32f2f0b;
   // The state without disabled and error, focused.
-  --glnf-foc2-err2-cl: #ce51512d;
+  // --glnf-foc2-err2-cl: #ce51512d;
   // The state with disabled.
-  --glnf-dis2-cl: #7878783b;
+  // --glnf-dis2-cl: #7878783b;
 
   // Border color for "outlined" mode.
   // The default border color.
-  --glnf-def-cl2: rgba(0, 0, 0, 0.23);
+  // #--glnf-def-cl2: rgba(0, 0, 0, 0.23);
 
   // Border bottom color "div.glnf-border" for "underline" and "standard" mode.
-  --glnf-def-br-bt-cl: #0000006b;
+  // --glnf-def-br-bt-cl: #0000006b;
 }
 
 gln-frame {
@@ -134,56 +140,60 @@ gln-frame {
     );
   }
 
+  &[hfc] {
+    --glnf-hover-focus-color: var(--glnf-primary-45);
+  }
+  
   // Definition of internal variables by element state.
   &:not([dis]) {
     &:not([err]) { // The state without disabled, error, hover, focused.
       &:not(:hover):not(:focus-within) {
-        --glnf-label-cl: var(--glnf-def-lb-cl, var(--glnf-def-cl));
-        --glnf-dcr-br-cl: var(--glnf-def-br-cl, var(--glnf-def-cl2));
-        --glnf-dcr-bg-cl: var(--glnf-def-bg-cl, var(--glnf-def2-cl));
-        --glnf-dcr-bb-cl-bef: var(--glnf-def-brb-bf, var(--glnf-def-br-bt-cl));
+        --glnf-label-cl: var(--glnf-def-lb-cl, var(--glnf-default-40)); // --glnf-def-cl
+        --glnf-dcr-br-cl: var(--glnf-def-br-cl, hsl(var(--gln-default-h), var(--gln-default-s), 75%));  // --glnf-def-cl2
+        --glnf-dcr-bg-cl: var(--glnf-def-bg-cl, hsl(var(--gln-default-h), var(--gln-default-s), 93%)); // --glnf-def2-cl 95%
+        --glnf-dcr-bb-cl-bef: var(--glnf-def-brb-bf, hsl(var(--gln-default-h), var(--gln-default-s), 65%)); // --glnf-def-br-bt-cl
       } // The state without disabled, error, focused and with hover.
       &:hover:not(:focus-within) {
-        --glnf-label-cl: var(--glnf-hov-lb-cl, var(--glnf-hov-cl));
-        --glnf-dcr-br-cl: var(--glnf-hov-br-cl, var(--glnf-hov-cl));
-        --glnf-dcr-bg-cl: var(--glnf-hov-bg-cl, var(--glnf-hov2-cl));
-        --glnf-dcr-bb-cl-bef: var(--glnf-hov-brb-bf, var(--glnf-hov-cl));
+        --glnf-label-cl: var(--glnf-hov-lb-cl, var(--glnf-hover-focus-color, var(--glnf-default-40)));  // --glnf-hov-cl
+        --glnf-dcr-br-cl: var(--glnf-hov-br-cl, var(--glnf-hover-focus-color, hsl(var(--gln-default-h), var(--gln-default-s), 20%)) ); // --glnf-hov-cl
+        --glnf-dcr-bg-cl: var(--glnf-hov-bg-cl, hsl(var(--gln-default-h), var(--gln-default-s), 88%)); // --glnf-hov2-cl 90%
+        --glnf-dcr-bb-cl-bef: var(--glnf-hov-brb-bf, var(--glnf-hover-focus-color, hsl(var(--gln-default-h), var(--gln-default-s), 20%)) ); // --glnf-hov-cl
       } // The state without disabled, error and with focused.
       &:focus-within {
-        --glnf-label-cl: var(--glnf-foc-lb-cl, var(--glnf-foc-cl));
-        --glnf-dcr-br-cl: var(--glnf-foc-br-cl, var(--glnf-foc-cl));
-        --glnf-dcr-bg-cl: var(--glnf-foc-bg-cl, var(--glnf-foc2-cl));
+        --glnf-label-cl: var(--glnf-foc-lb-cl, var(--glnf-primary-45)); // --glnf-foc-cl
+        --glnf-dcr-br-cl: var(--glnf-foc-br-cl, var(--glnf-primary-45)); // --glnf-foc-cl
+        --glnf-dcr-bg-cl: var(--glnf-foc-bg-cl, hsl(var(--gln-primary-h), var(--gln-primary-s), 97%)); // --glnf-foc2-cl
       }
-      --glnf-dcr-bb-cl-aft: var(--glnf-foc-brb-af, var(--glnf-foc-cl));
+      --glnf-dcr-bb-cl-aft: var(--glnf-foc-brb-af, var(--glnf-primary-45)); // --glnf-foc-cl
     }
     &[err] {// The state without disabled, hover, focused and error.
       &:not(:hover):not(:focus-within) {
-        --glnf-label-cl: var(--glnf-err-lb-cl, var(--glnf-err-cl));
-        --glnf-dcr-br-cl: var(--glnf-err-br-cl, var(--glnf-err-cl));
-        --glnf-dcr-bg-cl: var(--glnf-err-bg-cl, var(--glnf-err2-cl));
-        --glnf-dcr-bb-cl-bef: var(--glnf-err-brb-bf, var(--glnf-err-cl));
+        --glnf-label-cl: var(--glnf-err-lb-cl, var(--glnf-danger-50)); // --glnf-err-cl
+        --glnf-dcr-br-cl: var(--glnf-err-br-cl, var(--glnf-danger-50)); // --glnf-err-cl
+        --glnf-dcr-bg-cl: var(--glnf-err-bg-cl, hsl(var(--gln-danger-h), var(--gln-danger-s), 96%)); // --glnf-err2-cl
+        --glnf-dcr-bb-cl-bef: var(--glnf-err-brb-bf, var(--glnf-danger-50)); // --glnf-err-cl
       } // The state without disabled, focused and error, hover.
       &:hover:not(:focus-within) {
-        --glnf-label-cl: var(--glnf-hov-err-lb-cl, var(--glnf-hov-err-cl));
-        --glnf-dcr-br-cl: var(--glnf-hov-err-br-cl, var(--glnf-hov-err-cl));
-        --glnf-dcr-bg-cl: var(--glnf-hov-err-bg-cl, var(--glnf-hov2-err2-cl));
-        --glnf-dcr-bb-cl-bef: var(--glnf-hov-err-brb-bf, var(--glnf-hov-err-cl));
+        --glnf-label-cl: var(--glnf-hov-err-lb-cl, var(--glnf-danger-50)); // --glnf-hov-err-cl
+        --glnf-dcr-br-cl: var(--glnf-hov-err-br-cl, var(--glnf-danger-50)); // --glnf-hov-err-cl
+        --glnf-dcr-bg-cl: var(--glnf-hov-err-bg-cl, hsl(var(--gln-danger-h), var(--gln-danger-s), 98%)); // --glnf-hov2-err2-cl
+        --glnf-dcr-bb-cl-bef: var(--glnf-hov-err-brb-bf, var(--glnf-danger-50)); // --glnf-hov-err-cl
       } // The state without disabled and error, focused.
       &:focus-within {
-        --glnf-label-cl: var(--glnf-foc-err-lb-cl, var(--glnf-err-cl));
-        --glnf-dcr-br-cl: var(--glnf-foc-err-br-cl, var(--glnf-err-cl));
-        --glnf-dcr-bg-cl: var(--glnf-foc-err-bg-cl, var(--glnf-foc2-err2-cl));
+        --glnf-label-cl: var(--glnf-foc-err-lb-cl, var(--glnf-danger-50)); // --glnf-err-cl
+        --glnf-dcr-br-cl: var(--glnf-foc-err-br-cl, var(--glnf-danger-50)); // --glnf-err-cl
+        --glnf-dcr-bg-cl: var(--glnf-foc-err-bg-cl, hsl(var(--gln-danger-h), var(--gln-danger-s), 94%)); // --glnf-foc2-err2-cl
       }
-      --glnf-dcr-bb-cl-aft: var(--glnf-foc-err-brb-af, var(--glnf-err-cl));
+      --glnf-dcr-bb-cl-aft: var(--glnf-foc-err-brb-af, var(--glnf-danger-50)); // --glnf-err-cl
     }
   } // The state with disabled.
   &[dis] {
-    --glnf-label-cl: var(--glnf-dis-lb-cl, var(--glnf-dis-cl));
-    --glnf-dcr-br-cl: var(--glnf-dis-br-cl, var(--glnf-def-cl2));
-    --glnf-dcr-bg-cl: var(--glnf-dis-bg-cl, var(--glnf-dis2-cl));
-    --glnf-dcr-bb-cl-bef: var(--glnf-dis-brb-bf, var(--glnf-dis-cl));
+    --glnf-label-cl: var(--glnf-dis-lb-cl, var(--glnf-default-55)); // --glnf-dis-cl
+    --glnf-dcr-br-cl: var(--glnf-dis-br-cl, hsl(var(--gln-default-h), var(--gln-default-s), 75%)); // --glnf-def-cl2
+    --glnf-dcr-bg-cl: var(--glnf-dis-bg-cl, hsl(var(--gln-default-h), var(--gln-default-s), 84%)); // --glnf-dis2-cl 85%
+    --glnf-dcr-bb-cl-bef: var(--glnf-dis-brb-bf, var(--glnf-default-55)); // --glnf-dis-cl
   }
-  
+
   // ** Section: Color "label". **
   &>label {
     color: var(--glnf-label-cl);
@@ -198,7 +208,7 @@ gln-frame {
     flex-wrap: nowrap;
   }
   &[dis]>div {
-    color: var(--glnf-dis-cl); // The color in state is disabled for an input element.
+    color: var(--glnf-default-55); // var(--glnf-dis-cl); // The color in state is disabled for an input element.
   }
 
   // ** Section: Background-Color "div.glnf-border" for "Underline" mode. **
@@ -241,7 +251,7 @@ gln-frame {
   &[dis]>div[dcr-bb]:before {
     border-bottom-style: dotted;
   }
-  &[ext-s]:not([dis]):hover:not(:focus-within)>div[dcr-bb]:before {
+  &[ext-s]:not([hfc]):not([dis]):hover:not(:focus-within)>div[dcr-bb]:before {
     border-bottom-width: 2px;
   }
   // The effect on gaining input focus is "increase the length of the bottom border from 0 to 100%."
@@ -280,10 +290,14 @@ gln-frame {
     border-width: 2px;
     padding-left: calc(var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf))) - var(--glnf-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
   }
+  // &:not([dis])[err]:hover:not(:focus-within) fieldset {
+  //   border-width: 2px;
+  // }
+
   /* The radius value must be an integer, otherwise the frame in the "dotted" style is poorly drawn.
   // The state with disabled but without error.
   &[dis] fieldset {
-    border-color: var(--glnf-dis-cl);
+    border-color: var(--glnf-default-55); // var(--glnf-dis-cl);
     border-style: dotted;
   }*/
   [dcr-br] {

@@ -37,6 +37,7 @@ import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { SchemeUtil } from '../_utils/scheme.util';
 
 let uniqueIdCounter = 0;
 
@@ -72,6 +73,8 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
   public frameSize: string | null = null; // GlnFrameSizeType
   @Input()
   public helperText: string | null = null;
+  @Input()
+  public hoverColor: string | null = null;
   @Input()
   public isDisabled: string | null = null;
   @Input()
@@ -128,6 +131,7 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {
+    SchemeUtil.loadingCheck();
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-textarea', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);

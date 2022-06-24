@@ -23,15 +23,6 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>label: string;</code>
-    </td>
-    <td>
-      <span>The content of the label.<br />(default = '';)</span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
       <code>config: GlnFrameConfig | null = null;</code>
     </td>
     <td>
@@ -58,20 +49,46 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>frameSize: GlnFrameSize | null = null;</code>
+      <code>hoverColor: boolean | null = null;</code>
     </td>
     <td>
-      <span>Determines the size of the element.<br />
-        It can take the following values:
+      <span>
+        If specified, then when hovering the mouse, the color of the label
+        and frame will be the same as when the focus was received.
+        <br />
+        If not specified, then when you hover the mouse, the color of the
+        label and frame will be the same as the default.
       </span>
-      <ul>
-        <li>"short" - if one line is height: 38px;</li>
-        <li>"small" - if one line is height: 44px;</li>
-        <li>"middle" - if one line is height: 50px (default);</li>
-        <li>"wide" - if one line is height: 56px;</li>
-        <li>"large" - if one line is height: 62px;</li>
-        <li>"huge" - if one line is height: 68px;</li>
-      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>@Input()</code>
+      <code>isDisabled: boolean | null = null;</code>
+    </td>
+    <td>
+      <span>The element is disabled.<br />(default = false;)</span>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>@Input()</code>
+      <code>isError: boolean | null = null;</code>
+    </td>
+    <td>
+      <span>Forces the error status of an item to be displayed.
+        <br />(default = false;)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>@Input()</code>
+      <code>isFilled: boolean | null = null;</code>
+    </td>
+    <td>
+      <span>Indicates that the input element is not empty (filled).
+        <br />(default = false;)</span>
     </td>
   </tr>
   <tr>
@@ -88,46 +105,7 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>noLabel: boolean | null = null;</code>
-    </td>
-    <td>
-      <span>Disables the display of the label.</span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>isDisabled: boolean;</code>
-    </td>
-    <td>
-      <span>The element is disabled.<br />(default = false;)</span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>isFilled: boolean;</code>
-    </td>
-    <td>
-      <span>Indicates that the input element is not empty (filled).
-        <br />(default = false;)</span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>isError: boolean;</code>
-    </td>
-    <td>
-      <span>Forces the error status of an item to be displayed.
-        <br />(default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>isRequired: boolean;</code>
+      <code>isRequired: boolean | null = null;</code>
     </td>
     <td>
       <span>Adds a validation condition: required field.
@@ -137,15 +115,20 @@
   </tr>
   <tr>
     <td>
-      <code>@Output()</code>
-      <code>
-        readonly clickFrame: EventEmitter&lt;Event&gt; = new EventEmitter();
-      </code>
+      <code>@Input()</code>
+      <code>label: string;</code>
     </td>
     <td>
-      <span>
-        Defines a click event on the element's frame
-      </span>
+      <span>The content of the label.<br />(default = '';)</span>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>@Input()</code>
+      <code>noLabel: boolean | null = null;</code>
+    </td>
+    <td>
+      <span>Hide label display.</span>
     </td>
   </tr>
 </table>

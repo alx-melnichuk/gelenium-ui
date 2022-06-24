@@ -23,7 +23,8 @@
       (glnFrameSizeChange)="frameChange($event)"
       glnFrameOrnament
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
-      [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)">
+      [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
+      [attr.opn]="isOpen && !isHide ? '': null">
 
       <span glnf-orn-lf
         class="glns-ornam-lf">
@@ -34,7 +35,7 @@
         <ng-content select="[gln-orn-rg]"></ng-content>
         <svg *ngIf="!getBoolean(noIcon)"
           ico
-          [attr.opn]="isOpen && !isHide ? 'is-open': null"
+          [attr.opn]="isOpen && !isHide ? '': null"
           [ngClass]="['glns-icon', (isOpen ? 'is-open' : '')]"
           focusable="false"
           aria-hidden="true"

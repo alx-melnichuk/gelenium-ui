@@ -39,6 +39,7 @@ import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnInputType, GlnInputTypeUtil } from '../gln-input/gln-input.interface';
+import { SchemeUtil } from '../_utils/scheme.util';
 
 let uniqueIdCounter = 0;
 
@@ -70,6 +71,8 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
   public frameSize: string | null = null; // GlnFrameSizeType
   @Input()
   public helperText: string | null = null;
+  @Input()
+  public hoverColor: string | null = null;
   @Input()
   public isDisabled: string | null = null;
   @Input()
@@ -132,6 +135,7 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
     public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {
+    SchemeUtil.loadingCheck();
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-input', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);

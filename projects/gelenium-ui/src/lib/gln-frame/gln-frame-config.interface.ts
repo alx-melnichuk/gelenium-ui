@@ -6,9 +6,10 @@ export interface GlnFrameConfig {
   exterior?: GlnFrameExterior;
   frameSize?: GlnFrameSize;
   frameSizeValue?: number;
+  hoverColor?: boolean;
   isLabelShrink?: boolean;
-  noLabel?: boolean;
   labelPd?: number; // px
+  noLabel?: boolean;
   ornamLfAlign?: GlnFrameOrnamAlign;
   ornamRgAlign?: GlnFrameOrnamAlign;
 }
