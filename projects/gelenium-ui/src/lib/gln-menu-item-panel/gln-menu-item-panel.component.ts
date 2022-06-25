@@ -167,11 +167,11 @@ export class GlnMenuItemPanelComponent implements AfterContentInit {
   private getItemHeight(elem: HTMLElement): number {
     const styleDeclaration = getComputedStyle(elem);
     // Get the css value of the "top indent" variable.
-    const liPaddingTop = parseInt(styleDeclaration.getPropertyValue('--glnmi-pd-tp') || '6');
+    const liPaddingTop = Number(styleDeclaration.getPropertyValue('--glnmi-pd-tp').replace('px', '') || '6');
     // Get the css value of the "bottom indent" variable.
-    const liPaddingBottom = parseInt(styleDeclaration.getPropertyValue('--glnmi-pd-bt') || '6');
+    const liPaddingBottom = Number(styleDeclaration.getPropertyValue('--glnmi-pd-bt').replace('px', '') || '6');
     // Get the line height from the style set.
-    const lineHeight = parseInt(styleDeclaration.getPropertyValue('line-height') || '24');
+    const lineHeight = Number(styleDeclaration.getPropertyValue('line-height').replace('px', '') || '24');
 
     return liPaddingTop + lineHeight + liPaddingBottom;
   }

@@ -5,6 +5,7 @@ import { SiteMenu, SiteUrl } from 'src/app/lib-core/constants/site-menu';
 import { UrlComponents } from 'src/app/lm-components/constants/url-components.constants';
 
 import { FrameBasicModule } from '../frame-basic/frame-basic.module';
+import { FrameAttributesModule } from '../frame-attributes/frame-attributes.module';
 import { FrameSizeModule } from '../frame-size/frame-size.module';
 import { FrameLabelModule } from '../frame-label/frame-label.module';
 import { FrameHelperTextModule } from '../frame-helper-text/frame-helper-text.module';
@@ -23,6 +24,7 @@ UrlComponents.add('URL_FRAME', 'frame');
 const url = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
 const siteUrls: SiteUrl[] = [
   { label: 'Basic', url, fragment: 'Basic' },
+  { label: 'Attributes', url, fragment: 'Attributes' },
   { label: 'Frame size', url, fragment: 'FrameSize' },
   { label: 'Label', url, fragment: 'Label' },
   { label: 'Helper text', url, fragment: 'HelperText' },
@@ -39,6 +41,7 @@ SiteMenu.addItem('Components', 'Frame', { label: 'Frame', siteUrls });
   imports: [
     CommonModule,
     FrameBasicModule,
+    FrameAttributesModule,
     FrameSizeModule,
     FrameLabelModule,
     FrameHelperTextModule,

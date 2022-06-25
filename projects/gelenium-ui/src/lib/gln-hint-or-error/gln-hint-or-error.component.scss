@@ -18,22 +18,22 @@ gln-hint-or-error {
   &:not([dis]) {
     &:not([err]) { // The state without error, focused and disabled.
       &:not([foc]) {
-        color: var(--glnhe-def-cl, var(--glnf-default-40));
+        color: var(--glnhe-def-cl, hsl(var(--gln-default-h), var(--gln-default-s), 40%));
       } // The state with focused but without error.
       &[foc] {
-        color: var(--glnhe-foc-cl, var(--glnf-default-40));
+        color: var(--glnhe-foc-cl, hsl(var(--gln-default-h), var(--gln-default-s), 40%));
       }
     }
     &[err] { // The state with error.
       &:not([foc]) {
-        color: var(--glnhe-err-cl, var(--glnf-danger-50));
+        color: var(--glnhe-err-cl, hsl(var(--gln-danger-h), var(--gln-danger-s), 50%));
       } // The state with focused but with error.
       &[foc] {
-        color: var(--glnhe-foc-err-cl, var(--glnf-danger-50));
+        color: var(--glnhe-foc-err-cl, hsl(var(--gln-danger-h), var(--gln-danger-s), 50%));
       }
     }
   } // The state with disabled but without error.
   &[dis] {
-    color: var(--glnhe-dis-cl, var(--glnf-default-55));
+    color: var(--glnhe-dis-cl, hsl(var(--gln-default-h), var(--gln-default-s), 55%));
   }
 }

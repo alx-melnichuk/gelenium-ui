@@ -8,11 +8,6 @@
 @import '../_styles/mx-transform-scale-x-y-translate-x-y.scss';
 
 :root {
-  --glnf-default-40: hsl(var(--gln-default-h), var(--gln-default-s), 40%);
-  --glnf-default-55: hsl(var(--gln-default-h), var(--gln-default-s), 55%);
-  --glnf-primary-45: hsl(var(--gln-primary-h), var(--gln-primary-s), 45%);
-  --glnf-danger-50: hsl(var(--gln-danger-h), var(--gln-danger-s), 50%);
-
   // The default color for the label.
   // #--glnf-def-cl: rgba(0, 0, 0, 0.6);
   // The color of the label and border on mouse hover.
@@ -140,6 +135,10 @@ gln-frame {
     );
   }
 
+  --glnf-primary-45: hsl(var(--gln-primary-h), var(--gln-primary-s), 45%);
+  --glnf-danger-50: hsl(var(--gln-danger-h), var(--gln-danger-s), 50%);
+  --glnf-default-55: hsl(var(--gln-default-h), var(--gln-default-s), 55%);
+
   &[hfc] {
     --glnf-hover-focus-color: var(--glnf-primary-45);
   }
@@ -148,13 +147,13 @@ gln-frame {
   &:not([dis]) {
     &:not([err]) { // The state without disabled, error, hover, focused.
       &:not(:hover):not(:focus-within) {
-        --glnf-label-cl: var(--glnf-def-lb-cl, var(--glnf-default-40)); // --glnf-def-cl
+        --glnf-label-cl: var(--glnf-def-lb-cl, hsl(var(--gln-default-h), var(--gln-default-s), 40%)); // --glnf-def-cl
         --glnf-dcr-br-cl: var(--glnf-def-br-cl, hsl(var(--gln-default-h), var(--gln-default-s), 75%));  // --glnf-def-cl2
         --glnf-dcr-bg-cl: var(--glnf-def-bg-cl, hsl(var(--gln-default-h), var(--gln-default-s), 93%)); // --glnf-def2-cl 95%
         --glnf-dcr-bb-cl-bef: var(--glnf-def-brb-bf, hsl(var(--gln-default-h), var(--gln-default-s), 65%)); // --glnf-def-br-bt-cl
       } // The state without disabled, error, focused and with hover.
       &:hover:not(:focus-within) {
-        --glnf-label-cl: var(--glnf-hov-lb-cl, var(--glnf-hover-focus-color, var(--glnf-default-40)));  // --glnf-hov-cl
+        --glnf-label-cl: var(--glnf-hov-lb-cl, var(--glnf-hover-focus-color, hsl(var(--gln-default-h), var(--gln-default-s), 40%)));  // --glnf-hov-cl
         --glnf-dcr-br-cl: var(--glnf-hov-br-cl, var(--glnf-hover-focus-color, hsl(var(--gln-default-h), var(--gln-default-s), 20%)) ); // --glnf-hov-cl
         --glnf-dcr-bg-cl: var(--glnf-hov-bg-cl, hsl(var(--gln-default-h), var(--gln-default-s), 88%)); // --glnf-hov2-cl 90%
         --glnf-dcr-bb-cl-bef: var(--glnf-hov-brb-bf, var(--glnf-hover-focus-color, hsl(var(--gln-default-h), var(--gln-default-s), 20%)) ); // --glnf-hov-cl

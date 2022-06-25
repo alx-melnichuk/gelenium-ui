@@ -30,7 +30,7 @@ export class FrameConfigComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlFrameInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
+  public urlFrame = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
   public formGroup07: FormGroup = new FormGroup({
     input07a: new FormControl('', []),
     input07b: new FormControl('', []),

@@ -1,0 +1,487 @@
+<section mr-vr>
+  <h3>Attributes</h3>
+  <p>The following attributes are supported:</p>
+  <ul>
+    <li>
+      "config" - Defines a configuration object.
+      <a [href]="urlFrame + '#Config'">More details.</a>
+    </li>
+    <li>
+      "exterior" - Determines the appearance of an element.<br />
+      It can take the following values:
+      <ul>
+        <li>"outlined";</li>
+        <li>"underline";</li>
+        <li>"standard";</li>
+      </ul>
+    </li>
+    <li>
+      "hoverColor" - When hovering the mouse, the label and frame
+      will have the same color as when they received focus.
+    </li>
+    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
+    <li>"isError" - a sign that the field is in error status (isError);</li>
+    <li>"isFilled" - Indicates that the input element is not empty (filled).</li>
+    <li>"isLabelShrink" - An indication that the label has moved up and shrunk.</li>
+    <li>"isRequired" - a sign that the field is required (isRequired);</li>
+    <li>"label" - The content of the label.</li>
+    <li>"noLabel" - Hide label display.</li>
+  </ul>
+  <p>
+    For example, we will use the "GlnInput" component, since it contains
+    the "GlnFrame" component.<br />
+    The examples use the "exterior" property, which is passed the current
+    value of the "exterior" variable.
+  </p>
+</section>
+
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior02a">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>State: empty.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="input02a"
+      label="Enter value"
+      [exterior]="exterior02a">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: isRequired.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="input02b"
+      label="Required field"
+      isRequired
+      [exterior]="exterior02a">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: noLabel.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="input02c"
+      label="noLabel"
+      noLabel
+      helperText="The label is not displayed."
+      [exterior]="exterior02a">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isDisabled.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="input02d"
+      label="Disabled"
+      isDisabled
+      helperText="The parameter is disabled."
+      [exterior]="exterior02a">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: lbShrink.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="input02e"
+      label="Permanent label"
+      lbShrink
+      helperText="The position of the label is fixed."
+      [exterior]="exterior02a">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isError.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="input02f"
+      #ctrl02f="ngModel"
+      [label]="!ctrl02f.value
+        ? 'Requires a value':'Parameter value'"
+      [isError]="!ctrl02f.value ? '':null"
+      [helperText]="ctrl02f.value
+      ? 'The field is filled.'
+      : 'The field is not filled.'"
+      [exterior]="exterior02a">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: hoverColor.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="input02g"
+      label="Parameter value"
+      hoverColor
+      helperText="On hover, a frame with the focus color."
+      [exterior]="exterior02a">
+    </gln-input>
+  </div>
+
+</div>
+
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;State: empty.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="input02a"
+      label="Enter value"
+      [exterior]="exterior02a"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: isRequired.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="input02b"
+      label="Required field"
+      isRequired
+      [exterior]="exterior02a"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: noLabel.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="input02c"
+      label="noLabel"
+      noLabel
+      helperText="The label is not displayed."
+      [exterior]="exterior02a"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="input02d"
+      label="Disabled"
+      isDisabled
+      helperText="The parameter is disabled."
+      [exterior]="exterior02a"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: lbShrink.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="input02e"
+      label="Permanent label"
+      lbShrink
+      helperText="The position of the label is fixed."
+      [exterior]="exterior02a"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: isError.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="input02f"
+      #ctrl02f="ngModel"
+      [label]="!ctrl02f.value
+        ? 'Requires a value':'Parameter value'"
+      [isError]="!ctrl02f.value ? '':null"
+      [helperText]="ctrl02f.value
+      ? 'The field is filled.'
+      : 'The field is not filled.'"
+      [exterior]="exterior02a"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: hoverColor.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="input02g"
+      label="Parameter value"
+      hoverColor
+      helperText9="The position of the label is fixed."
+      helperText="On hover, a frame with the focus color."
+      [exterior]="exterior02a"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-frame',
+  templateUrl: './frame.component.html',
+  styleUrls: ['./frame.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameComponent &#123;
+  public exterior02a = 'outlined';
+
+  public input02a = '';
+  public input02b = 'Hello World';
+  public input02c = 'Hello World';
+  public input02d = 'Hello World';
+  public input02e = '';
+  public input02f = '';
+  public input02g = 'Hello World';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr>
+  <h4>Configuration for custom height (57px).</h4>
+  <p>
+    Let's add the definition of the "config" property.
+    Let's create a configuration object specifying the
+    specified height of the component.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior02b">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Huge" height: 57px; font-size: 16px;</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="input02h"
+      label="Required field"
+      isRequired
+      [exterior]="exterior02b"
+      [config]="config02"
+      wdFull>
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Large" height: 57px; font-size: 18px;</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="input02i"
+      class="fa-large"
+      label="Required field"
+      isRequired
+      [exterior]="exterior02b"
+      [config]="config02"
+      wdFull>
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Huge" height: 57px; font-size: 20px;</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="input02j"
+      class="fa-huge"
+      label="Required field"
+      isRequired
+      [exterior]="exterior02b"
+      [config]="config02"
+      wdFull>
+    </gln-input>
+  </div>
+
+</div>
+
+
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Huge" height: 57px; font-size: 16px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="input02h"
+      label="Required field"
+      isRequired
+      [exterior]="exterior02b"
+      [config]="config02"
+      wdFull&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Large" height: 57px; font-size: 18px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="input02i"
+      class="fa-large"
+      label="Required field"
+      isRequired
+      [exterior]="exterior02b"
+      [config]="config02"
+      wdFull&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Huge" height: 57px; font-size: 20px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="input02j"
+      class="fa-huge"
+      label="Required field"
+      isRequired
+      [exterior]="exterior02b"
+      [config]="config02"
+      wdFull&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-frame',
+  templateUrl: './frame.component.html',
+  styleUrls: ['./frame.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameComponent &#123;
+  public exterior02b = 'outlined';
+
+  public input02h = 'Hello World';
+  public input02i = 'Hello World';
+  public input02j = 'Hello World';
+
+  public config02 = &#123;
+    frameSizeValue: 57,
+  &#125;;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+  width: 28ch;
+&#125;
+.fa-large &#123;
+  font-size: 18px;
+&#125;
+.fa-huge &#123;
+  font-size: 20px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

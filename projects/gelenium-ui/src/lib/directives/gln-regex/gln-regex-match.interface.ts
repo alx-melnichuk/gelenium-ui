@@ -52,8 +52,8 @@ export class GlnRegexMatchUtil {
         const data = valueText.substring(start + 1, finish);
         const idx = data.indexOf(',');
         const separator = idx !== -1 ? idx : data.length;
-        const dimension = parseInt(data.substring(0, separator)) || -1;
-        const accuracy = parseInt(data.substring(separator + 1)) || -1;
+        const dimension = Number(data.substring(0, separator)) || -1;
+        const accuracy = Number(data.substring(separator + 1)) || -1;
         result = { dimension, accuracy };
       }
     }

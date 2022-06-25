@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {
   LABEL_CSS,
@@ -14,13 +13,13 @@ import {
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 @Component({
-  selector: 'app-input-attributes',
-  templateUrl: './input-attributes.component.html',
-  styleUrls: ['./input-attributes.component.scss'],
+  selector: 'app-frame-attributes',
+  templateUrl: './frame-attributes.component.html',
+  styleUrls: ['./frame-attributes.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputAttributesComponent {
+export class FrameAttributesComponent {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -38,23 +37,25 @@ export class InputAttributesComponent {
 
   public urlFrame = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
 
-  public formGroup02: FormGroup = new FormGroup({
-    input02a: new FormControl('', []),
-    input02b: new FormControl('Hello World', [Validators.required]),
-    input02c: new FormControl('Hello World', []),
-    input02d: new FormControl('Hello World', []),
-    input02e: new FormControl('', []),
-    input02f: new FormControl('Hello World', []),
-    input02g: new FormControl('', []),
-    input02h: new FormControl('', []),
-    input02i: new FormControl('Hello World', []),
-    input02j: new FormControl('', []),
-    input02k: new FormControl('', []),
-    input02l: new FormControl('#000000', []),
-    input02m: new FormControl('', []),
-    input02n: new FormControl('', []),
-  });
-  public exterior02 = 'outlined';
+  public exterior02a = 'outlined';
+
+  public input02a = '';
+  public input02b = 'Hello World';
+  public input02c = 'Hello World';
+  public input02d = 'Hello World';
+  public input02e = '';
+  public input02f = '';
+  public input02g = 'Hello World';
+
+  public exterior02b = 'outlined';
+
+  public input02h = 'Hello World';
+  public input02i = 'Hello World';
+  public input02j = 'Hello World';
+
+  public config02 = {
+    frameSizeValue: 57,
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
