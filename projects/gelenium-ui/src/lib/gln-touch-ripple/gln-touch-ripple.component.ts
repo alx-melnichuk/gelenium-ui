@@ -30,8 +30,6 @@ export class GlnTouchRippleComponent implements OnChanges, OnInit {
   public id = `glntr-${uniqueIdCounter++}`;
   @Input()
   public isCenter: string | null = null;
-  @Input()
-  public rippleColor: string | null = null; // '#1976d2', '#1976d280', 'rgba(255, 255, 255, 0.3)'  maxLength(32)
 
   private center = false;
   private checkParentSuccessful = false;
@@ -46,10 +44,6 @@ export class GlnTouchRippleComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.isCenter) {
       this.center = !!BooleanUtil.init(this.isCenter);
-    }
-    if (changes.rippleColor) {
-      const color = this.rippleColor && this.rippleColor.length < 33 ? this.rippleColor : null;
-      HtmlElemUtil.setProperty(this.hostRef, '--glntr-ripple-cl', color);
     }
   }
 

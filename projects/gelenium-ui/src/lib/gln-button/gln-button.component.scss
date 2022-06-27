@@ -2,20 +2,6 @@
 
 @import '../_styles/mx-display-flex.scss';
 
-:root {
-  --glnb-def-cl: #1976d2;
-  --glnb-dis-cl: #00000042;
-  --glnb-dis-cl2: #0000001f;
-  --glnb-hov-bg-cl: #1976d20a;
-  // Exterior: "contained"
-  --glnb-def-cl2: #fff;
-  --glnb-hov-bg-cl2: #1565c0;
-  // Exterior: "outlined"
-  --glnb-br-cl: #1976d280;
-  // Ripple color
-  --glnb-ripple-cl: rgba(25, 118, 210, 0.3);
-}
-
 gln-button {
   @include mxDisplayFlex();
   height: max-content;
@@ -23,17 +9,25 @@ gln-button {
   font-size: 0.875em; // 14px
   line-height: 1.75;
   
+  // Ripple color
+  --glnb-c-ripple-cl: rgba(255, 255, 255, 0.3);
+  --glnb-o-ripple-cl: hsla(var(--gln-primary-h), var(--gln-primary-s), 46%, 0.3);
+  --glnb-t-ripple-cl: hsla(var(--gln-primary-h), var(--gln-primary-s), 46%, 0.3);
+
   &[ext-c] {
     --def-lbl-pd-tp: 0.375em; // 6px
     --def-lbl-pd-lf: 1em; // 16px
+    --glntr-ripple-cl:  var(--glnb-c-ripple-cl, );
   }
   &[ext-o] {
     --def-lbl-pd-tp: 0.3125em; // 5px
     --def-lbl-pd-lf: 0.9375em; // 15px
+    --glntr-ripple-cl:  var(--glnb-o-ripple-cl);
   }
   &[ext-t] {
     --def-lbl-pd-tp: 0.375em; // 6px
     --def-lbl-pd-lf: 0.5em; // 8px
+    --glntr-ripple-cl:  var(--glnb-t-ripple-cl);
   }
 
   &>[glnb-clear] {
@@ -93,17 +87,26 @@ gln-button {
   }
 
   // Exterior: "contained"
+  // :not([err]) :not(:hover):not(:focus-within)
+  --glnb--c-def-lb: #fff;
+  --glnb--c-def-bg-prm46: hsl(var(--gln-primary-h), var(--gln-primary-s), 46%);
+  // :not([err]) :hover:not(:focus-within)
+  --glnb--c-hov-bg-prm40: hsl(var(--gln-primary-h), var(--gln-primary-s), 40%);
+  // [dis]
+  --glnb--c-dis-lb-def68: hsl(var(--gln-default-h), var(--gln-default-s), 68%);
+  --glnb--c-dis-bg-def88: hsl(var(--gln-default-h), var(--gln-default-s), 88%);
+
   &[ext-c] {
     &:not([dis])>[glnb-btn] {
-      color: var(--glnb-c-def-cl, var(--glnb-def-cl2));
-      background-color: var(--glnb-c-def-bg-cl, var(--glnb-def-cl));
+      color: var(--glnb-c-def-cl, var(--glnb--c-def-lb));
+      background-color: var(--glnb-c-def-bg-cl, var(--glnb--c-def-bg-prm46));
       &:hover {
-        background-color: var(--glnb-c-hov-bg-cl, var(--glnb-hov-bg-cl2));
+        background-color: var(--glnb-c-hov-bg-cl, var(--glnb--c-hov-bg-prm40));
       }
     }
     &[dis]>[glnb-btn] {
-      color: var(--glnb-c-dis-cl, var(--glnb-dis-cl));
-      background-color: var(--glnb-c-dis-bg-cl, var(--glnb-dis-cl2));
+      color: var(--glnb-c-dis-cl, var(--glnb--c-dis-lb-def68));
+      background-color: var(--glnb-c-dis-bg-cl, var(--glnb--c-dis-bg-def88));
     }
   }
   &[ext-c]:not([dis]):not([noElevation])>[glnb-btn] {
@@ -123,41 +126,52 @@ gln-button {
   }
 
   // Exterior: "outlined"
+  // :not([err]) :not(:hover):not(:focus-within)
+  --glnb--o-def-lb-prm46: hsl(var(--gln-primary-h), var(--gln-primary-s), 46%);
+  --glnb--o-def-br-prm46-50: hsla(var(--gln-primary-h), var(--gln-primary-s), 46%, 0.5);
+  // :not([err]) :hover:not(:focus-within)
+  --glnb--o-hov-bg-prm46-04: hsla(var(--gln-primary-h), var(--gln-primary-s), 46%, 0.04);
+  --glnb--o-hov-br-prm46: hsl(var(--gln-primary-h), var(--gln-primary-s), 46%);
+  // [dis]
+  --glnb--o-dis-lb-def74: hsl(var(--gln-default-h), var(--gln-default-s), 74%);
+  --glnb--o-dis-br-def88: hsl(var(--gln-default-h), var(--gln-default-s), 88%);
+
   &[ext-o]>[glnb-btn] {
     border-width: 1px;
     border-style: solid;
   }
   &[ext-o] {
     &:not([dis])>[glnb-btn] {
-      color: var(--glnb-o-def-cl, var(--glnb-def-cl));
-      border-color: var(--glnb-o-def-br-cl, var(--glnb-br-cl));
+      color: var(--glnb-o-def-cl, var(--glnb--o-def-lb-prm46));
+      border-color: var(--glnb-o-def-br-cl, var(--glnb--o-def-br-prm46-50));
       &:hover {
-        background-color: var(--glnb-o-hov-bg-cl, var(--glnb-hov-bg-cl));
-        border-color: var(--glnb-o-hov-br-cl, var(--glnb-def-cl));
+        background-color: var(--glnb-o-hov-bg-cl, var(--glnb--o-hov-bg-prm46-04));
+        border-color: var(--glnb-o-hov-br-cl, var(--glnb--o-hov-br-prm46));
       }
     }
     &[dis]>[glnb-btn] {
-      color: var(--glnb-o-dis-cl, var(--glnb-dis-cl));
-      border-color: var(--glnb-o-dis-br-cl, var(--glnb-dis-cl2));
+      color: var(--glnb-o-dis-cl, var(--glnb--o-dis-lb-def74));
+      border-color: var(--glnb-o-dis-br-cl, var(--glnb--o-dis-br-def88));
     }
   }
   
   // Exterior: "text"
+  // :not([err]) :not(:hover):not(:focus-within)
+  --glnb--t-def-lb-prm46: hsl(var(--gln-primary-h), var(--gln-primary-s), 46%);
+  // :not([err]) :hover:not(:focus-within)
+  --glnb--t-hov-bg-prm46-04: hsla(var(--gln-primary-h), var(--gln-primary-s), 46%, 0.04);
+  // [dis]
+  --glnb--t-dis-lb-def74: hsl(var(--gln-default-h), var(--gln-default-s), 74%);
+
   &[ext-t] {
     &:not([dis])>[glnb-btn] {
-      color: var(--glnb-t-def-cl, var(--glnb-def-cl));
+      color: var(--glnb-t-def-cl, var(--glnb--t-def-lb-prm46));
       &:hover {
-        background-color: var(--glnb-t-hov-bg-cl, var(--glnb-hov-bg-cl));
+        background-color: var(--glnb-t-hov-bg-cl, var(--glnb--t-hov-bg-prm46-04));
       }
     }
     &[dis]>[glnb-btn] {
-      color: var(--glnb-t-dis-cl, var(--glnb-dis-cl));
-    }
-  }
-
-  &[ext-t]>[glnb-btn], &[ext-o]>[glnb-btn] {
-    .glntr-ripple {
-      background-color: var(--glntr-ripple-cl, var(--glnb-ripple-cl));
+      color: var(--glnb-t-dis-cl, var(--glnb--t-dis-lb-def74));
     }
   }
 
@@ -184,7 +198,6 @@ gln-button {
       padding-left: var(--glnb-lbl-pd-lf, var(--glnfs-pd-lf, var(--def-lbl-pd-lf)));
     }
     &>span[glnb-orn-rg]:empty~.glnb-pd-hor {
-      padding-right: var(--glnb-lbl-pd-rg, var(--glnfs-pd-rg, 0.9375em)); // 15px
       padding-right: var(--glnb-lbl-pd-rg, var(--glnfs-pd-rg, var(--def-lbl-pd-lf)));
     }
   }

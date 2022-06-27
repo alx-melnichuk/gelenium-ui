@@ -24,6 +24,7 @@ import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.co
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { SchemeUtil } from '../_utils/scheme.util';
 
 import { GlnButtonConfig } from './gln-button-config.interface';
 import { GlnLinkDirective } from './gln-link.directive';
@@ -82,6 +83,7 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
     public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {
+    SchemeUtil.loadingCheck();
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-button', true);
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);

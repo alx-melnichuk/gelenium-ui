@@ -7,44 +7,6 @@
 @import '../_styles/mx-transform-translate-x-y-scale-x-y.scss';
 @import '../_styles/mx-transform-scale-x-y-translate-x-y.scss';
 
-:root {
-  // The default color for the label.
-  // #--glnf-def-cl: rgba(0, 0, 0, 0.6);
-  // The color of the label and border on mouse hover.
-  // --glnf-hov-cl: rgba(0, 0, 0, 0.87);
-  // The color of the label and border in an error state.
-  // --glnf-err-cl: #d32f2f;
-  // --glnf-err-cl2: #d32f2fcf;
-  // The color of the label and border on mouse hover in an error state.
-  // --glnf-hov-err-cl: #ff0000;
-  // The color of the border and label when getting focus.
-  // # --glnf-foc-cl: #1976d2;
-  // The color of the label and border in the state is disabled.
-  // --glnf-dis-cl: #787878;
-
-  // Background color for "underline" mode.
-  // --glnf-def2-cl: rgba(0, 0, 0, 0.06);
-  // The state without disabled, error, focused and with hover.
-  // --glnf-hov2-cl: #1976d20b;
-
-  // The state without disabled, error and with focused.
-  // --glnf-foc2-cl: #1976d20f;
-  // The state without disabled, hover, focused and error.
-  // --glnf-err2-cl: #d32f2f0f;
-  // The state without disabled, focused and error, hover.
-  // --glnf-hov2-err2-cl: #d32f2f0b;
-  // The state without disabled and error, focused.
-  // --glnf-foc2-err2-cl: #ce51512d;
-  // The state with disabled.
-  // --glnf-dis2-cl: #7878783b;
-
-  // Border color for "outlined" mode.
-  // The default border color.
-  // #--glnf-def-cl2: rgba(0, 0, 0, 0.23);
-
-  // Border bottom color "div.glnf-border" for "underline" and "standard" mode.
-  // --glnf-def-br-bt-cl: #0000006b;
-}
 
 gln-frame {
   @include mxDisplayInlineFlex();
@@ -134,63 +96,93 @@ gln-frame {
       1   // $scaleY
     );
   }
-
-  --glnf-primary-45: hsl(var(--gln-primary-h), var(--gln-primary-s), 45%);
-  --glnf-danger-50: hsl(var(--gln-danger-h), var(--gln-danger-s), 50%);
+  // :not([err]) :not(:hover):not(:focus-within)
+  --glnf--def-lb-def38: hsl(var(--gln-default-h), var(--gln-default-s), 38%); // (!) hsla(0, 0%, 0%, 0.6);
+  --glnf--def-br-def77: hsl(var(--gln-default-h), var(--gln-default-s), 77%); // (!) hsla(0, 0%, 0%, 0.23);
+  --glnf--def-bg-def94: hsl(var(--gln-default-h), var(--gln-default-s), 94%); // (!) hsla(0, 0%, 0%, 0.06);
+  --glnf--def-bb-def54: hsl(var(--gln-default-h), var(--gln-default-s), 54%); // (!) hsla(0, 0%, 0%, 0.42);
+  // :not([err]) :hover:not(:focus-within)
+  --glnf--hov-br-def17: hsl(var(--gln-default-h), var(--gln-default-s), 17%); // (!) hsla(0, 0%, 0%, 0.87);
+  --glnf--hov-bg-def91: hsl(var(--gln-default-h), var(--gln-default-s), 91%); // (!) hsla(0, 0%, 0%, 0.09);
+  --glnf--hov-bb-def17: hsl(var(--gln-default-h), var(--gln-default-s), 17%); // (!) hsla(0, 0%, 0%, 0.87);
+  // :not([err]) :focus-within
+  --glnf--foc-cl-prm46: hsl(var(--gln-primary-h), var(--gln-primary-s), 46%); // #1976d2;
+  --glnf--foc-bg-prm97: hsl(var(--gln-primary-h), var(--gln-primary-s), 97%); // (+)
+  // [err] :not(:hover):not(:focus-within)
+  --glnf--err-lb-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
+  --glnf--err-br-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
+  --glnf--err-bg-dng96: hsl(var(--gln-danger-h), var(--gln-danger-s), 96%); // (+)
+  --glnf--err-bb-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (+)
+  // [err] :hover:not(:focus-within)
+  --glnf--hov-err-lb-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
+  --glnf--hov-err-br-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
+  --glnf--hov-err-bg-dng98: hsl(var(--gln-danger-h), var(--gln-danger-s), 98%); // (+)
+  --glnf--hov-err-bb-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (+)
+  // [err] :focus-within
+  --glnf--foc-err-lb-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
+  --glnf--foc-err-br-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
+  --glnf--foc-err-bg-dng94: hsl(var(--gln-danger-h), var(--gln-danger-s), 94%); // (+)
+  --glnf--foc-err-bb-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
+  // [dis]
+  --glnf--dis-lb-def55: hsl(var(--gln-default-h), var(--gln-default-s), 55%); // (!) hsla(0, 0%, 0%, 0.42);
+  --glnf--dis-br-def74: hsl(var(--gln-default-h), var(--gln-default-s), 74%); // (!) hsla(0, 0%, 0%, 0.26);
+  --glnf--dis-bg-def88: hsl(var(--gln-default-h), var(--gln-default-s), 88%); // (!) #0000001f; // hsla(0, 0%, 0%, 0.12);
+  --glnf--dis-bb-def55: hsl(var(--gln-default-h), var(--gln-default-s), 55%); // (!) hsla(0, 0%, 0%, 0.42);
+  //
   --glnf-default-55: hsl(var(--gln-default-h), var(--gln-default-s), 55%);
 
   &[hfc] {
-    --glnf-hover-focus-color: var(--glnf-primary-45);
+    --glnf-hover-focus-color: var(--glnf--foc-cl-prm46);
   }
   
   // Definition of internal variables by element state.
   &:not([dis]) {
     &:not([err]) { // The state without disabled, error, hover, focused.
       &:not(:hover):not(:focus-within) {
-        --glnf-label-cl: var(--glnf-def-lb-cl, hsl(var(--gln-default-h), var(--gln-default-s), 40%)); // --glnf-def-cl
-        --glnf-dcr-br-cl: var(--glnf-def-br-cl, hsl(var(--gln-default-h), var(--gln-default-s), 75%));  // --glnf-def-cl2
-        --glnf-dcr-bg-cl: var(--glnf-def-bg-cl, hsl(var(--gln-default-h), var(--gln-default-s), 93%)); // --glnf-def2-cl 95%
-        --glnf-dcr-bb-cl-bef: var(--glnf-def-brb-bf, hsl(var(--gln-default-h), var(--gln-default-s), 65%)); // --glnf-def-br-bt-cl
+        --glnf-label-cl: var(--glnf-def-lb-cl, var(--glnf--def-lb-def38));
+        --glnf-dcr-br-cl: var(--glnf-def-br-cl, var(--glnf--def-br-def77));
+        --glnf-dcr-bg-cl: var(--glnf-def-bg-cl, var(--glnf--def-bg-def94));
+        --glnf-dcr-bb-bef: var(--glnf-def-brb-bf, var(--glnf--def-bb-def54));
       } // The state without disabled, error, focused and with hover.
       &:hover:not(:focus-within) {
-        --glnf-label-cl: var(--glnf-hov-lb-cl, var(--glnf-hover-focus-color, hsl(var(--gln-default-h), var(--gln-default-s), 40%)));  // --glnf-hov-cl
-        --glnf-dcr-br-cl: var(--glnf-hov-br-cl, var(--glnf-hover-focus-color, hsl(var(--gln-default-h), var(--gln-default-s), 20%)) ); // --glnf-hov-cl
-        --glnf-dcr-bg-cl: var(--glnf-hov-bg-cl, hsl(var(--gln-default-h), var(--gln-default-s), 88%)); // --glnf-hov2-cl 90%
-        --glnf-dcr-bb-cl-bef: var(--glnf-hov-brb-bf, var(--glnf-hover-focus-color, hsl(var(--gln-default-h), var(--gln-default-s), 20%)) ); // --glnf-hov-cl
+        --glnf-label-cl: var(--glnf-hov-lb-cl, var(--glnf-hover-focus-color, var(--glnf--def-lb-def38)));
+        --glnf-dcr-br-cl: var(--glnf-hov-br-cl, var(--glnf-hover-focus-color, var(--glnf--hov-br-def17)));
+        --glnf-dcr-bg-cl: var(--glnf-hov-bg-cl, var(--glnf--hov-bg-def91));
+        --glnf-dcr-bb-bef: var(--glnf-hov-brb-bf, var(--glnf-hover-focus-color, var(--glnf--hov-bb-def17)));
       } // The state without disabled, error and with focused.
       &:focus-within {
-        --glnf-label-cl: var(--glnf-foc-lb-cl, var(--glnf-primary-45)); // --glnf-foc-cl
-        --glnf-dcr-br-cl: var(--glnf-foc-br-cl, var(--glnf-primary-45)); // --glnf-foc-cl
-        --glnf-dcr-bg-cl: var(--glnf-foc-bg-cl, hsl(var(--gln-primary-h), var(--gln-primary-s), 97%)); // --glnf-foc2-cl
+        --glnf-label-cl: var(--glnf-foc-lb-cl, var(--glnf--foc-cl-prm46));
+        --glnf-dcr-br-cl: var(--glnf-foc-br-cl, var(--glnf--foc-cl-prm46));
+        --glnf-dcr-bg-cl: var(--glnf-foc-bg-cl, var(--glnf--foc-bg-prm97));
       }
-      --glnf-dcr-bb-cl-aft: var(--glnf-foc-brb-af, var(--glnf-primary-45)); // --glnf-foc-cl
+      --glnf-dcr-bb-aft: var(--glnf-foc-brb-af, var(--glnf--foc-cl-prm46));
     }
     &[err] {// The state without disabled, hover, focused and error.
       &:not(:hover):not(:focus-within) {
-        --glnf-label-cl: var(--glnf-err-lb-cl, var(--glnf-danger-50)); // --glnf-err-cl
-        --glnf-dcr-br-cl: var(--glnf-err-br-cl, var(--glnf-danger-50)); // --glnf-err-cl
-        --glnf-dcr-bg-cl: var(--glnf-err-bg-cl, hsl(var(--gln-danger-h), var(--gln-danger-s), 96%)); // --glnf-err2-cl
-        --glnf-dcr-bb-cl-bef: var(--glnf-err-brb-bf, var(--glnf-danger-50)); // --glnf-err-cl
+        --glnf-label-cl: var(--glnf-err-lb-cl, var(--glnf--err-lb-dng51));
+        --glnf-dcr-br-cl: var(--glnf-err-br-cl, var(--glnf--err-br-dng51));
+        --glnf-dcr-bg-cl: var(--glnf-err-bg-cl, var(--glnf--err-bg-dng96));
+        --glnf-dcr-bb-bef: var(--glnf-err-brb-bf, var(--glnf--err-bb-dng51));
       } // The state without disabled, focused and error, hover.
       &:hover:not(:focus-within) {
-        --glnf-label-cl: var(--glnf-hov-err-lb-cl, var(--glnf-danger-50)); // --glnf-hov-err-cl
-        --glnf-dcr-br-cl: var(--glnf-hov-err-br-cl, var(--glnf-danger-50)); // --glnf-hov-err-cl
-        --glnf-dcr-bg-cl: var(--glnf-hov-err-bg-cl, hsl(var(--gln-danger-h), var(--gln-danger-s), 98%)); // --glnf-hov2-err2-cl
-        --glnf-dcr-bb-cl-bef: var(--glnf-hov-err-brb-bf, var(--glnf-danger-50)); // --glnf-hov-err-cl
+        --glnf-label-cl: var(--glnf-hov-err-lb-cl, var(--glnf--hov-err-lb-dng51));
+        --glnf-dcr-br-cl: var(--glnf-hov-err-br-cl, var(--glnf--hov-err-br-dng51));
+        --glnf-dcr-bg-cl: var(--glnf-hov-err-bg-cl, var(--glnf--hov-err-bg-dng98));
+        --glnf-dcr-bb-bef: var(--glnf-hov-err-brb-bf, var(--glnf--hov-err-bb-dng51));
       } // The state without disabled and error, focused.
       &:focus-within {
-        --glnf-label-cl: var(--glnf-foc-err-lb-cl, var(--glnf-danger-50)); // --glnf-err-cl
-        --glnf-dcr-br-cl: var(--glnf-foc-err-br-cl, var(--glnf-danger-50)); // --glnf-err-cl
-        --glnf-dcr-bg-cl: var(--glnf-foc-err-bg-cl, hsl(var(--gln-danger-h), var(--gln-danger-s), 94%)); // --glnf-foc2-err2-cl
+        --glnf-label-cl: var(--glnf-foc-err-lb-cl, var(--glnf--foc-err-lb-dng51));
+        --glnf-dcr-br-cl: var(--glnf-foc-err-br-cl, var(--glnf--foc-err-br-dng51));
+        --glnf-dcr-bg-cl: var(--glnf-foc-err-bg-cl, var(--glnf--foc-err-bg-dng94));
       }
-      --glnf-dcr-bb-cl-aft: var(--glnf-foc-err-brb-af, var(--glnf-danger-50)); // --glnf-err-cl
+      --glnf-dcr-bb-aft: var(--glnf-foc-err-brb-af, var(--glnf--foc-err-bb-dng51));
     }
   } // The state with disabled.
   &[dis] {
-    --glnf-label-cl: var(--glnf-dis-lb-cl, var(--glnf-default-55)); // --glnf-dis-cl
-    --glnf-dcr-br-cl: var(--glnf-dis-br-cl, hsl(var(--gln-default-h), var(--gln-default-s), 75%)); // --glnf-def-cl2
-    --glnf-dcr-bg-cl: var(--glnf-dis-bg-cl, hsl(var(--gln-default-h), var(--gln-default-s), 84%)); // --glnf-dis2-cl 85%
-    --glnf-dcr-bb-cl-bef: var(--glnf-dis-brb-bf, var(--glnf-default-55)); // --glnf-dis-cl
+    --glnf-label-cl: var(--glnf-dis-lb-cl, var(--glnf--dis-lb-def55));
+    --glnf-dcr-br-cl: var(--glnf-dis-br-cl, var(--glnf--dis-br-def74));
+    --glnf-dcr-bg-cl: var(--glnf-dis-bg-cl, var(--glnf--dis-bg-def88));
+    --glnf-dcr-bb-bef: var(--glnf-dis-brb-bf, var(--glnf--dis-bb-def55));
   }
 
   // ** Section: Color "label". **
@@ -260,10 +252,10 @@ gln-frame {
   }
   // Border-Bottom-Color "div.glnf-border" for "Underline" and "Standard" mode.
   &>[dcr-bb]:before {
-    border-bottom-color: var(--glnf-dcr-bb-cl-bef);
+    border-bottom-color: var(--glnf-dcr-bb-bef);
   }
   &:not([dis])>[dcr-bb]:after {
-    border-bottom-color: var(--glnf-dcr-bb-cl-aft);
+    border-bottom-color: var(--glnf-dcr-bb-aft);
   }
 
   // ** Section "Fieldset" for "Outlined" mode. **
