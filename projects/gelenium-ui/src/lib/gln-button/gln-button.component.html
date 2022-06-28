@@ -4,6 +4,8 @@
     glnb-clear
     glnb-btn
     type="button"
+    [attr.id]="id + '_button'"
+    [attr.disabled]="disabled ? '' : null"
     [attr.tabindex]="disabled ? null : 0"
     [glnFrameExteriorButton]="exterior || (currConfig?.exterior || null)"
     #glnFrameExteriorButton="glnFrameExteriorButton"
@@ -14,13 +16,17 @@
     [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
     [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
     [glnFrameSizePrepare]="glnFrameExteriorButton"
-    [attr.id]="id + '_button'"
-    [attr.disabled]="disabled ? '' : null"
+    glnFrameOrnament
+    [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
+    [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
+    [glnFrameOrnamentAfterContent]="true"
     (focus)="doFocus()"
     (blur)="doBlur()">
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
-    <span class="glnb-label glnb-pd-hor">
+    <span class="glnb-label"
+      glnb-mr-ver
+      glnb-pd-hor>
       <ng-content></ng-content>
     </span>
     <gln-touch-ripple *ngIf="!disabled && !noRipple && !currConfig?.isNoRipple">
@@ -30,6 +36,7 @@
 <ng-template #elseBlockLink>
   <div class="glnb-btn glnb-settings"
     glnb-btn
+    [attr.id]="id + '_link'"
     [glnFrameExteriorButton]="exterior || (currConfig?.exterior || null)"
     #glnFrameExteriorButton="glnFrameExteriorButton"
     [glnFrameExteriorButtonElementRef]="hostRef"
@@ -39,7 +46,10 @@
     [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
     [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
     [glnFrameSizePrepare]="glnFrameExteriorButton"
-    [attr.id]="id + '_link'"
+    glnFrameOrnament
+    [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
+    [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
+    [glnFrameOrnamentAfterContent]="true"
     (click)="doClick($event)">
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
@@ -51,11 +61,11 @@
 </ng-template>
 
 <ng-template #templateOrnament>
-  <span glnb-orn-lf
+  <span glnf-orn-lf
     class="glnb-ornam-lf">
     <ng-content select="[gln-orn-lf]"></ng-content>
   </span>
-  <span glnb-orn-rg
+  <span glnf-orn-rg
     class="glnb-ornam-rg">
     <ng-content select="[gln-orn-rg]"></ng-content>
   </span>

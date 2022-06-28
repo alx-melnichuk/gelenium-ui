@@ -18,6 +18,13 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
   public glnFrameOrnamentRgAlign: string | null = null; // OrnamAlign
   @Input()
   public glnFrameOrnamentElementRef: ElementRef<HTMLElement> | null = null;
+  @Input()
+  /** Path to an element that has children with 'glnf-orn-lf' and 'glnf-orn-rg' attributes. */
+  // Example: "/div{0}" - the first child tag is "div" with index 0.
+  // Example: "/.glnf-border{0}" - first child tag with class "glnf-border" and index 0..
+  public glnFrameOrnamentPath: string | null = null;
+  @Input()
+  public glnFrameOrnamentAfterContent: boolean | null = null;
 
   private isInit = true;
   private ornamentLf: HTMLElement | null = null;
@@ -31,40 +38,65 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.isInit) {
-      const hostElement = this.hostRef.nativeElement?.children.item(0) as HTMLElement;
-      const hostElementRef = HtmlElemUtil.getElementRef(hostElement);
-
-      this.ornamentLf = HtmlElemUtil.getChildByAttribute(hostElementRef, [ATTR_ORN_LF]) as HTMLElement;
-      this.ornamentLfElemRef = HtmlElemUtil.getElementRef(this.ornamentLf);
-
-      this.ornamentRg = HtmlElemUtil.getChildByAttribute(hostElementRef, [ATTR_ORN_RG]) as HTMLElement;
-      this.ornamentRgElemRef = HtmlElemUtil.getElementRef(this.ornamentRg);
-
+      if (!this.glnFrameOrnamentAfterContent) {
+        this.initialSetting(this.hostRef.nativeElement, this.glnFrameOrnamentPath);
+      }
       this.isInit = false;
     }
     if (changes.glnFrameOrnamentLfAlign && this.ornamentLfElemRef) {
-      const ornamLfAlign2 = GlnFrameOrnamAlignUtil.convert(this.glnFrameOrnamentLfAlign || null) || GlnFrameOrnamAlign.default;
-      HtmlElemUtil.setAttr(this.renderer, this.ornamentLfElemRef, ATTR_ORN_LF, ornamLfAlign2.toString());
+      this.settingOrnamentLeft(this.renderer, this.glnFrameOrnamentLfAlign, this.ornamentLfElemRef);
     }
     if (changes.glnFrameOrnamentRgAlign && this.ornamentRgElemRef) {
-      const ornamRgAlign2 = GlnFrameOrnamAlignUtil.convert(this.glnFrameOrnamentRgAlign || null) || GlnFrameOrnamAlign.default;
-      HtmlElemUtil.setAttr(this.renderer, this.ornamentRgElemRef, ATTR_ORN_RG, ornamRgAlign2.toString());
+      this.settingOrnamentRight(this.renderer, this.glnFrameOrnamentRgAlign, this.ornamentRgElemRef);
     }
   }
 
   ngAfterContentInit(): void {
+    if (this.glnFrameOrnamentAfterContent) {
+      this.initialSetting(this.hostRef.nativeElement, this.glnFrameOrnamentPath);
+
+      this.settingOrnamentLeft(this.renderer, this.glnFrameOrnamentLfAlign, this.ornamentLfElemRef);
+      this.settingOrnamentRight(this.renderer, this.glnFrameOrnamentRgAlign, this.ornamentRgElemRef);
+    }
     // Get the width of the ornament block.
     this.ornamentLfWidth = this.ornamentLf?.offsetWidth || 0;
     this.ornamentRgWidth = this.ornamentRg?.offsetWidth || 0;
 
-    // const parentElementRef = HtmlElemUtil.getElementRef(this.hostRef.nativeElement.parentElement);
     const elementRef: ElementRef<HTMLElement> | null = this.glnFrameOrnamentElementRef || this.hostRef;
-
     if (this.ornamentLfWidth > 0) {
       HtmlElemUtil.setProperty(elementRef, '--glnfo-pd-lf', NumberUtil.str(this.ornamentLfWidth)?.concat('px') || null);
     }
     if (this.ornamentRgWidth > 0) {
       HtmlElemUtil.setProperty(elementRef, '--glnfo-pd-rg', NumberUtil.str(this.ornamentRgWidth)?.concat('px') || null);
+    }
+  }
+
+  // ** Private API **
+
+  private initialSetting(htmlElement: HTMLElement, pathElement: string | null): void {
+    const element = HtmlElemUtil.getElementByPathClassOrTag(htmlElement, pathElement);
+    if (element) {
+      const elementRef = HtmlElemUtil.getElementRef(element);
+
+      this.ornamentLf = HtmlElemUtil.getChildByAttribute(elementRef, [ATTR_ORN_LF]) as HTMLElement;
+      this.ornamentLfElemRef = HtmlElemUtil.getElementRef(this.ornamentLf);
+
+      this.ornamentRg = HtmlElemUtil.getChildByAttribute(elementRef, [ATTR_ORN_RG]) as HTMLElement;
+      this.ornamentRgElemRef = HtmlElemUtil.getElementRef(this.ornamentRg);
+    }
+  }
+
+  private settingOrnamentLeft(renderer: Renderer2, ornamentLfAlign: string | null, leftElemRef: ElementRef<HTMLElement> | null): void {
+    if (leftElemRef) {
+      const ornamLfAlign2 = GlnFrameOrnamAlignUtil.convert(ornamentLfAlign || null) || GlnFrameOrnamAlign.default;
+      HtmlElemUtil.setAttr(renderer, leftElemRef, ATTR_ORN_LF, ornamLfAlign2.toString());
+    }
+  }
+
+  private settingOrnamentRight(renderer: Renderer2, ornamentRgAlign: string | null, rightElemRef: ElementRef<HTMLElement> | null): void {
+    if (rightElemRef) {
+      const ornamRgAlign2 = GlnFrameOrnamAlignUtil.convert(ornamentRgAlign || null) || GlnFrameOrnamAlign.default;
+      HtmlElemUtil.setAttr(renderer, rightElemRef, ATTR_ORN_RG, ornamRgAlign2.toString());
     }
   }
 }

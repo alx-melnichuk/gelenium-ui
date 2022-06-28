@@ -54,6 +54,10 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
   public isDisabled: string | null = null;
   @Input()
   public isNoRipple: string | null = null;
+  @Input()
+  public ornamLfAlign: string | null = null; // OrnamAlign
+  @Input()
+  public ornamRgAlign: string | null = null; // OrnamAlign
 
   @Output()
   readonly focused: EventEmitter<void> = new EventEmitter();
@@ -108,7 +112,6 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
       // Add the required properties for the hyperlink element.
       HtmlElemUtil.setAttr(this.renderer, this.linkElement.templateRef, 'linkClear', '');
       HtmlElemUtil.setClass(this.renderer, this.linkElement.templateRef, 'glnb-label', true);
-      HtmlElemUtil.setClass(this.renderer, this.linkElement.templateRef, 'glnb-pd-hor', true);
     }
   }
 

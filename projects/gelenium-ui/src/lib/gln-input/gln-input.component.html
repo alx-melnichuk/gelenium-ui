@@ -22,7 +22,8 @@
       [glnFrameSizeModify]="glnFrameExteriorInput.exterior"
       glnFrameOrnament
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
-      [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)">
+      [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
+      [glnFrameOrnamentPath]="'/div{0}'">
 
       <span glnf-orn-lf
         class="glni-ornam-lf">
@@ -40,7 +41,7 @@
         glni-elem
         [attr.id]="id + '_input'"
         [type]="typeVal"
-        class="glni-input glnf-elem"
+        class="glni-input"
         [attr.disabled]="disabled ? '': null"
         [attr.autocomplete]="!!autoComplete ? autoComplete : null"
         [attr.readonly]="getBoolean(isReadOnly) ? '': null"

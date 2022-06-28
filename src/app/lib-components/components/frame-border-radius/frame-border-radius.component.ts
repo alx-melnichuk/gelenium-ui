@@ -46,8 +46,6 @@ export class FrameBorderRadiusComponent {
   public ratioOutlined = 0.58;
   public ratioUnderline = 0.4;
 
-  public labelPdRatio = 0.58; // TODO del;
-
   public exterior05 = 'outlined';
   public isAddPadding05 = true;
   public isNoLabel05 = false;

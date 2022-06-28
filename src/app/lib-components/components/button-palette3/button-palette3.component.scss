@@ -22,8 +22,8 @@ app-button-palette3 {
     line-height: 1.5;
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
-    --glnb-lbl-pd-lf: 0.75rem;
-    --glnb-lbl-pd-rg: 0.75rem;
+    --glnb-lb-pd-lf: 0.75rem;
+    --glnb-lb-pd-rg: 0.75rem;
   }
   .gln-button.bs-btn:not(.gln-disabled)>.gln-btn {
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;

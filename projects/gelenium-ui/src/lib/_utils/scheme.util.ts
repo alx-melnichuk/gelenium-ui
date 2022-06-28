@@ -20,6 +20,15 @@ export class SchemeUtil {
   public static loading(elementRef: ElementRef<HTMLElement>): boolean {
     let result = false;
     if (elementRef) {
+      // --default background-color: hsl(0deg 0% 100%); #fff;
+      HtmlElemUtil.setProperty(elementRef, '--gln-default-bg-h', '0');
+      HtmlElemUtil.setProperty(elementRef, '--gln-default-bg-s', '0%');
+      HtmlElemUtil.setProperty(elementRef, '--gln-default-bg-l', '100%');
+      HtmlElemUtil.setProperty(
+        elementRef,
+        '--gln-default-bg-cl',
+        'hsl(var(--gln-default-bg-h),var(--gln-default-bg-s),var(--gln-default-bg-l))'
+      );
       // --default: hsl(20, 2%, 5%);
       HtmlElemUtil.setProperty(elementRef, '--gln-default-h', '20');
       HtmlElemUtil.setProperty(elementRef, '--gln-default-s', '2%');
