@@ -24,43 +24,70 @@ gln-select {
     }
   }
 
-  gln-hint-or-error {
-    padding-left: var(--glns-he-pd-lf, var(--glnfs-pd-lf));
-    padding-right: var(--glns-he-pd-rg, var(--glnfs-pd-rg));
+  // Element "ico".
+
+  gln-frame>div>[glnf-orn-rg]>[ico] {
+    color: var(--glnf-label-cl);
+    display: inline-block;
+    fill: currentcolor;
+    font-size: 1.5em;
+    height: 1em;
+    padding: 0px 0.25em; // 6px
+    &[opn] {
+      transform: rotate(180deg);
+    }
+    transition: transform 0.3s linear 0ms;
+    user-select: none;
+    width: 1em;
   }
+
+  // Element "Frame".
 
   gln-frame {
     &:not([opn]):not([dis]) {
       cursor: pointer;
     }
-    &>div>[glnf-orn-rg]>[ico] {
-      color: var(--glnf-label-cl);
-    }
+    cursor: default;
   }
 
-  gln-frame>div>[glnf-orn-rg]>[ico] {
-    // outline: 1px dashed green;
-    user-select: none;
-    width: 1em;
-    height: 1em;
-    display: block;
-    fill: currentcolor;
-    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    font-size: 1.5em;
-    padding: 0px 0.25em; // 6px
-    
-    &[opn] {
-      transform: rotate(180deg);
-    }
-    transition: transform 0.3s linear 0ms;
-  }
+  // Element "Frame > glns-elem".
 
   gln-frame>div>[glns-elem] {
-    min-width: 41px;
     user-select: none;
     &:focus-visible {
       outline: none;
     }
+  // text-overflow: ellipsis;
+  // white-space: nowrap;
+  // overflow: hidden;
+
+    font: inherit;
+    color: currentColor;
+    border: 0;
+    box-sizing: content-box;
+    background: none;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+    min-width: 0;
+    // width: 100%;
+    // animation-name: mui-auto-fill-cancel;
+    // animation-duration: 10ms;
+    // padding: 16.5px 14px;
+  }
+  // @keyframes mui-auto-fill-cancel {  0% { display: block; }  }
+
+
+  gln-hint-or-error {
+    padding-left: var(--glns-he-pd-lf, var(--glnfs-pd-lf));
+    padding-right: var(--glns-he-pd-rg, var(--glnfs-pd-rg));
+  }
+
+  // # OLD
+
+  &>[gmibd-elem] {
+    border-radius: 0.25em; // 4px
+    z-index: 2;
   }
 
   &>[glns-wrap-panel] {

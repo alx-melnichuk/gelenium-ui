@@ -1,8 +1,5 @@
 /*# sourceURL=gln-menu-item.component.scss */
 
-// Css parameters: '--glnmi-pd-tp', '--glnmi-pd-bt' must be defined on the parent component. 
-// This will allow the parent to determine the height of the menu item.
-
 gln-menu-item {
   -webkit-box-align: center;
   align-items: center;
@@ -18,10 +15,10 @@ gln-menu-item {
 
   // outline: 1px dashed green; // TODO del;
   outline: 0px;
-  padding-top: var(--glnmi-pd-tp, 6px);
-  padding-bottom: var(--glnmi-pd-bt, 6px);
-  padding-left: var(--glnmi-pd-lf, 16px);
-  padding-right: var(--glnmi-pd-rg, 16px);
+  padding-bottom: 0.375em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.375em;
   position: relative;
   text-decoration: none;
   user-select: none;

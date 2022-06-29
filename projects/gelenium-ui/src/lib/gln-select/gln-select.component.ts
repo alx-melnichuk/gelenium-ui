@@ -148,6 +148,7 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   public errors: ValidationErrors | null = null;
   public multiple: boolean | null = null;
 
+  public isOpen2 = false;
   public isOpen = false;
   public isHide = false;
   public isAnimation = false;
@@ -293,12 +294,22 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
     HtmlElemUtil.setProperty(this.hostRef, '--glns-size', NumberUtil.str(event.frameSizeValue)?.concat('px') || null);
   }
 
-  public trigger(): void {
+  public trigger2(): void {
+    if (!this.disabled) {
+      this.isOpen2 = !this.isOpen2;
+    }
+  }
+  public trigger(event: Event): void {
+    console.log(`trigger() isAnimation=${this.isAnimation}`); // TODO del;
     // There should be no toggles during the animation.
     if (!this.disabled && !this.isAnimation) {
       if (this.isOpen) {
+        this.isStopPropagation = false;
+        console.log(`trigger() isOpen=${this.isOpen}; this.close();`); // TODO del;
         this.close();
       } else {
+        this.isStopPropagation = true;
+        console.log(`trigger() isOpen=${this.isOpen}; this.open();`); // TODO del;
         this.open();
       }
     }

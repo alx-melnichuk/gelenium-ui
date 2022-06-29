@@ -24,7 +24,7 @@
       glnFrameOrnament
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
       [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
-      [attr.opn]="isOpen && !isHide ? '': null">
+      [attr.opn]="isOpen2 ? '': null">
 
       <span glnf-orn-lf
         class="glns-ornam-lf">
@@ -35,20 +35,18 @@
         <ng-content select="[gln-orn-rg]"></ng-content>
         <svg *ngIf="!getBoolean(noIcon)"
           ico
-          [attr.opn]="isOpen && !isHide ? '': null"
-          [ngClass]="['glns-icon', (isOpen ? 'is-open' : '')]"
+          [attr.opn]="isOpen2 ? '': null"
+          [ngClass]="['glns-icon', (isOpen2 ? 'is-open' : '')]"
           focusable="false"
           aria-hidden="true"
-          viewBox="0 0 24 24"
-          mousedown9="doMousedown()"
-          mouseup9="doMouseup($event)">
+          viewBox="0 0 24 24">
           <path d="M7 10l5 5 5-5z"></path>
         </svg>
       </span>
 
       <div [attr.tabindex]="disabled ? null : 0"
         #mainElementRef
-        [attr.id]="id + '_wrap'"
+        [attr.id]="id + '-elem'"
         glnf-pd-ver
         glnf-pd-hor
         glns-elem
@@ -56,7 +54,7 @@
         (blur)="doBlur()"
         mousedown9="doMousedown()"
         mouseup9="doMouseup($event)"
-        (click)="doClickTriger($event)">
+        (click)="trigger2()">
 
         <ng-container *ngIf="isFilled; else elseBlockFilled">
           <ng-container
@@ -76,12 +74,25 @@
   </div>
 </ng-container>
 
-<div [ngClass]="['glns-wrap-panel', (isHide ? 'is-hide': (isOpen ? 'is-open': ''))]"
+<gln-menu-item-bar-show tabindex="-1"
+  *ngIf="isOpen2"
+  gmibd-elem
+  class="gmibd-elem"
+  [isFixRight]="getBoolean(isFixRight)"
+  [menuItemList]="menuItemList"
+  [visibleSize]="4">
+
+  <ng-content select="gln-menu-item"></ng-content>
+
+</gln-menu-item-bar-show>
+
+<!-- <div [ngClass]="['glns-wrap-panel', (isHide ? 'is-hide': (isOpen ? 'is-open': ''))]"
   glns-wrap-panel
   tabindex="-1"
   (animationstart)="doAnimationStart()"
-  (animationend)="doAnimationEnd()">
-  <gln-menu-item-panel *ngIf="isOpen"
+  (animationend)="doAnimationEnd()"> -->
+
+<!-- <gln-menu-item-panel *ngIf="isOpen"
     tabindex="-1"
     [attr.no-mouse]="isAnimation ? '': null"
     [ngClass]="['glns-panel', (isFixRight ? 'is-fix-right' : '')]"
@@ -92,8 +103,9 @@
     (selected)="selectedMenuElement($event)"
     (closing)="close()">
     <ng-content select="gln-menu-item"></ng-content>
-  </gln-menu-item-panel>
-</div>
+  </gln-menu-item-panel> -->
+
+<!-- </div> -->
 
 <gln-hint-or-error *ngIf="!!helperText"
   [text]="helperText"

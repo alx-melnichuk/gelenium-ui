@@ -108,6 +108,4 @@ export class GlnMenuItemComponent implements OnChanges {
       this.changeDetectorRef.markForCheck();
     }
   }
-
-  // ** Private API **
 }

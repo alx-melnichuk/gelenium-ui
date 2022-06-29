@@ -1,18 +1,39 @@
-/*# sourceURL=gln-menu-item-panel.component */
+/*# sourceURL=gln-menu-item-bar.component */
 
-gln-menu-item-panel {
-  --glnmi-pd-tp: 6px;
-  --glnmi-pd-bt: 6px;
-
+gln-menu-item-bar {
+  background-color: rgb(255, 255, 255);//+
+  border-radius: inherit; // # 4px;//+
+  color: rgba(0, 0, 0, 0.87);
   display: block;
   // # font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: 400;
-  // # font-size: 1rem; // 16px
-  // # height: var(--gmp-height);
-  top: var(--gmp-top, unset);
-  bottom: var(--gmp-bottom, unset);
-  left: var(--gmp-left, unset);
-  right: var(--gmp-right, unset);
+  font-size: 1em; // 16px
+  height: 100%;
+
+  max-height: calc(100vh - 32px);
+  max-width: calc(100vw - 32px);
+  min-height: 16px;
+  min-width: 120px;
+  outline: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &:not([noElevation]) {
+    box-shadow: rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px;
+  }
+
+  &>[glnmib-list] {
+    box-sizing: content-box;
+    height: var(--glnmib-list-height, unset);
+    padding: 0.375em 0px; // 6px 0px
+  }
+
+
+  // # height: var(--gmp- height);
+  // # top: var(--gmp- top, unset);
+  // # bottom: var(--gmp- bottom, unset);
+  // # left: var(--gmp- left, unset);
+  // # right: var(--gmp- right, unset);
   // # line-height: 1.5; // 24px
   // # letter-spacing: 0.00938em;
   @media (max-width: 600px) {
@@ -27,29 +48,14 @@ gln-menu-item-panel {
   // left: 361px;
   // transform-origin: 60px 0px;
 
-  background-color: rgb(255, 255, 255);//+
-  // transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  border-radius: 4px;//+
-  box-shadow: rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px;
-  color: rgba(0, 0, 0, 0.87);
-  max-height: calc(100vh - 32px);
-  max-width: calc(100vw - 32px);
-  outline: 0px;//+
-  padding: 0.375em 0px; // 6px 0px
-  position: absolute;
+  // TODO remove; transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  // box-shadow: rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px;
+  // TODO remove; position: absolute;
 
   &[no-mouse] {
     pointer-events: none;
   }
 
-  &>[glnmip-list] { // (1)
-    height: var(--glnmip-ul-height);
-    min-height: 16px;
-    min-width: 120px;
-    outline: 0px;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
 
   /*&>[glnmip-ul] {
     list-style: none;
