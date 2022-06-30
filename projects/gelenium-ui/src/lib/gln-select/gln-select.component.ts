@@ -74,6 +74,8 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   @Input()
   public helperText: string | null = null;
   @Input()
+  public hoverColor: string | null = null;
+  @Input()
   public isDisabled: string | null = null;
   @Input()
   public isError: string | null = null;
@@ -90,6 +92,8 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   @Input()
   public lbShrink: string | null = null;
   @Input()
+  public noAnimation: string | null = null;
+  @Input()
   public noIcon: string | null = null;
   @Input()
   public noLabel: string | null = null;
@@ -98,7 +102,7 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   @Input()
   public ornamRgAlign: string | null = null; // OrnamAlign
   @Input()
-  public sizeVisible = -1;
+  public visibleSize = -1;
   @Input()
   public wdFull: string | null = null;
 
@@ -148,13 +152,11 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   public errors: ValidationErrors | null = null;
   public multiple: boolean | null = null;
 
-  public isOpen2 = false;
   public isOpen = false;
-  public isHide = false;
-  public isAnimation = false;
-  public selectedItems: GlnSelectedMenuItems = new GlnSelectedMenuItems();
+  public isNoAnimation: boolean | null = null;
+  public hasAnimation = false;
 
-  private isStopPropagation = false;
+  public selectedItems: GlnSelectedMenuItems = new GlnSelectedMenuItems();
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -184,6 +186,9 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
     }
     if (changes.isRequired) {
       this.required = BooleanUtil.init(this.isRequired);
+    }
+    if (changes.noAnimation) {
+      this.isNoAnimation = BooleanUtil.init(this.noAnimation);
     }
   }
 
@@ -244,6 +249,19 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
 
   // ** Public API **
 
+  public getBoolean(value: string | null): boolean | null {
+    return BooleanUtil.init(value);
+  }
+
+  public trackByMenuItem(index: number, item: GlnMenuItemComponent): string {
+    return item.id;
+  }
+
+  // Determine the value of the css variable "frame size".
+  public frameChange(event: GlnFrameSizePaddingVerHorRes): void {
+    HtmlElemUtil.setProperty(this.hostRef, '--glns-size', NumberUtil.str(event.frameSizeValue)?.concat('px') || null);
+  }
+
   public focus(): void {
     if (!this.disabled && isPlatformBrowser(this.platformId) && !!this.mainElementRef) {
       this.mainElementRef.nativeElement.focus();
@@ -264,94 +282,6 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
       this.focusState(this.renderer, this.hostRef, this.isFocused);
       this.onTouched();
       this.blured.emit();
-    }
-  }
-
-  public getBoolean(value: string | null): boolean | null {
-    return BooleanUtil.init(value);
-  }
-
-  public trackByMenuItem(index: number, item: GlnMenuItemComponent): string {
-    return item.id;
-  }
-
-  public doAnimationStart(): void {
-    this.isAnimation = true;
-    this.changeDetectorRef.markForCheck();
-  }
-
-  public doAnimationEnd(): void {
-    this.isAnimation = false;
-    if (this.isOpen && this.isHide) {
-      this.isOpen = false;
-      this.isHide = false;
-      this.closed.emit();
-    }
-    this.changeDetectorRef.markForCheck();
-  }
-  // Determine the value of the css variable "frame size".
-  public frameChange(event: GlnFrameSizePaddingVerHorRes): void {
-    HtmlElemUtil.setProperty(this.hostRef, '--glns-size', NumberUtil.str(event.frameSizeValue)?.concat('px') || null);
-  }
-
-  public trigger2(): void {
-    if (!this.disabled) {
-      this.isOpen2 = !this.isOpen2;
-    }
-  }
-  public trigger(event: Event): void {
-    console.log(`trigger() isAnimation=${this.isAnimation}`); // TODO del;
-    // There should be no toggles during the animation.
-    if (!this.disabled && !this.isAnimation) {
-      if (this.isOpen) {
-        this.isStopPropagation = false;
-        console.log(`trigger() isOpen=${this.isOpen}; this.close();`); // TODO del;
-        this.close();
-      } else {
-        this.isStopPropagation = true;
-        console.log(`trigger() isOpen=${this.isOpen}; this.open();`); // TODO del;
-        this.open();
-      }
-    }
-  }
-  public open(): void {
-    // You cannot open the panel during animation.
-    if (!this.disabled && !this.isAnimation && !this.isOpen) {
-      this.isOpen = true;
-      this.isHide = false;
-      this.opened.emit();
-      this.changeDetectorRef.markForCheck();
-    }
-  }
-  public close(): void {
-    if (!this.disabled && this.isStopPropagation) {
-      this.isStopPropagation = false;
-      return;
-    }
-    // You cannot close a panel during an animation.
-    if (!this.disabled && !this.isAnimation && this.isOpen) {
-      this.isHide = true;
-    }
-  }
-  public doClickTriger(event: Event): void {
-    console.log(`doClickTriger()`); // TODO del;
-    if (!this.disabled) {
-      this.isStopPropagation = true;
-      this.open();
-    }
-  }
-  public doMousedown(): void {
-    if (!this.disabled && !this.isAnimation) {
-      if (!this.isOpen) {
-        this.isStopPropagation = true;
-        this.open();
-      }
-    }
-  }
-  public doMouseup(event: Event): void {
-    if (!this.disabled && this.isStopPropagation) {
-      event.stopPropagation();
-      this.isStopPropagation = false;
     }
   }
 
@@ -382,6 +312,49 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   public isEmpty(): boolean {
     return this.selectedItems.isEmpty;
   }
+
+  // new
+
+  public doTogger(): void {
+    if (!this.disabled) {
+      if (!this.isOpen) {
+        this.open();
+      } else {
+        this.close();
+      }
+    }
+  }
+  public open(): void {
+    console.log(`#open() isOpen=${this.isOpen} hasAnimation=${this.hasAnimation}`); // TODO del;
+    if (!this.disabled && !this.isOpen && !this.hasAnimation) {
+      this.isOpen = true;
+      console.log(`#open() isOpen:=${this.isOpen}`); // TODO del;
+      this.opened.emit();
+      this.changeDetectorRef.markForCheck();
+    }
+  }
+  public close(): void {
+    console.log(`#close() isOpen=${this.isOpen}`); // TODO del;
+    if (!this.disabled && this.isOpen) {
+      if (!this.isNoAnimation) {
+        this.hasAnimation = true;
+        console.log(`#close() hasAnimation:=true`); // TODO del;
+      }
+      this.isOpen = false;
+      console.log(`#close() isOpen:=${this.isOpen}`); // TODO del;
+      this.closed.emit();
+      this.changeDetectorRef.markForCheck();
+    }
+  }
+
+  // public changeAnimation(hasAnimation: boolean): void {
+  //   this.hasAnimation = hasAnimation;
+  //   console.log(`#hasAnimation=${this.hasAnimation}`); // TODO del;
+  //   // if (!this.hasAnimation && !this.isOpen) {
+  //   //   this.close();
+  //   // }
+  //   this.changeDetectorRef.markForCheck();
+  // }
 
   // ** Private API **
 

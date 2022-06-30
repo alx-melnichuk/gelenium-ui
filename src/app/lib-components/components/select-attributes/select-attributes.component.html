@@ -36,9 +36,14 @@
     </div>
     <gln-select [(ngModel)]="model02a"
       label="Cool fruit"
-      id="unique_identifier"
+      id="unique_id_select02a"
       wdFull
       isFixRight9
+      isError9
+      hoverColor9
+      isDisabled9
+      noAnimation
+      [visibleSize]="5"
       [exterior]="exterior02">
       <gln-menu-item><em>None</em></gln-menu-item>
       <gln-menu-item *ngFor="let item of fruits"

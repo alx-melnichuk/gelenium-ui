@@ -24,33 +24,62 @@ gln-select {
     }
   }
 
-  // Element "ico".
-
-  gln-frame>div>[glnf-orn-rg]>[ico] {
-    color: var(--glnf-label-cl);
-    display: inline-block;
-    fill: currentcolor;
-    font-size: 1.5em;
-    height: 1em;
-    padding: 0px 0.25em; // 6px
-    &[opn] {
-      transform: rotate(180deg);
-    }
-    transition: transform 0.3s linear 0ms;
-    user-select: none;
-    width: 1em;
-  }
-
   // Element "Frame".
 
-  gln-frame {
-    &:not([opn]):not([dis]) {
-      cursor: pointer;
-    }
-    cursor: default;
+  gln-frame:not([opn]):not([dis]) {
+    cursor: pointer;
   }
 
-  // Element "Frame > glns-elem".
+  // Element "gln-frame - glns-rhomb".
+
+  --glnsr--def-def54: hsl(var(--gln-default-h), var(--gln-default-s), 54%);
+  --glnsr--foc-prm46: hsl(var(--gln-primary-h), var(--gln-primary-s), 46%);
+
+  gln-frame:not([dis]) {
+    &[hfc] {
+      --glnsr-hover-focus-color: var(--glnsr--foc-prm46);
+    }
+    &:not([err]) { // The state without disabled, error, hover, focused.
+      &:not(:hover):not(:focus-within) {
+        --glns-rhomb-cl: var(--glns-rhomb-def, var(--glnsr--def-def54));
+      } // The state without disabled, error, focused and with hover.
+      &:hover:not(:focus-within) {
+        --glns-rhomb-cl: var(--glns-rhomb-hov, var(--glnsr-hover-focus-color, var(--glnsr--def-def54)));
+      } // The state without disabled, error and with focused.
+      &:focus-within {
+        --glns-rhomb-cl: var(--glns-rhomb-foc, var(--glnsr--foc-prm46));
+      }
+    }
+    &[err] {// The state without disabled, hover, focused and error.
+      --glns-rhomb-cl: var(--glns-rhomb-err, hsl(var(--gln-danger-h), var(--gln-danger-s), 51%));
+    }
+  } // The state with disabled.
+  gln-frame[dis] {
+    --glns-rhomb-cl: var(--glns-rhomb-dis, var(--glnsr--def-def54));
+  }
+
+  gln-frame>div>[glnf-orn-rg]>[glns-rhomb] {
+    align-items: center;
+    color: var(--glns-rhomb-cl);
+    display: flex;
+    height: 1em;
+    padding: 0 0.75em 0 0.5em; // 0 12px 0 8px
+    user-select: none;
+    &::after {
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid;
+      content: ' ';
+      height: 0;
+      transition: transform 0.3s linear 0ms;
+      width: 0;
+    }
+    &[opn]::after {
+      transform: rotate(180deg);
+    }
+  }
+
+  // Element "Frame - glns-elem".
 
   gln-frame>div>[glns-elem] {
     user-select: none;
@@ -78,48 +107,17 @@ gln-select {
   // @keyframes mui-auto-fill-cancel {  0% { display: block; }  }
 
 
-  gln-hint-or-error {
-    padding-left: var(--glns-he-pd-lf, var(--glnfs-pd-lf));
-    padding-right: var(--glns-he-pd-rg, var(--glnfs-pd-rg));
-  }
+  // Element "gln-menu-item-bar-show"
 
-  // # OLD
-
-  &>[gmibd-elem] {
+  &>[gmibs-elem] {
     border-radius: 0.25em; // 4px
     z-index: 2;
   }
 
-  &>[glns-wrap-panel] {
-    z-index: 2;
-    opacity: 0;
-    &.is-open:not(.is-hide) {
-      animation: kf-wrap-panel-show 251ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-      opacity: 1;
-    }
-    &:not(.is-open).is-hide {
-      animation: kf-wrap-panel-hide 251ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-      opacity: 0;
-    }
-  }
-  @keyframes kf-wrap-panel-show {
-    from {
-      opacity: 0;
-      transform: scale(0.1);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-  @keyframes kf-wrap-panel-hide {
-    from {
-      opacity: 1;
-      transform: none;
-    }
-    to {
-      opacity: 0;
-      transform: scale(0.1);
-    }
+  // Element "gln-hint-or-error"
+
+  gln-hint-or-error {
+    padding-left: var(--glns-he-pd-lf, var(--glnfs-pd-lf));
+    padding-right: var(--glns-he-pd-rg, var(--glnfs-pd-rg));
   }
 }

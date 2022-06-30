@@ -3,16 +3,18 @@
     [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
     #glnFrameExteriorInput="glnFrameExteriorInput"
     [glnFrameExteriorInputElementRef]="hostRef">
-
-    <gln-frame [label]="label"
-      [exterior]="glnFrameExteriorInput.exterior"
+    <gln-frame [ngClass]="[(isOpen ? 'is-open': '')]"
+      [attr.opn]="isOpen ? '': null"
       [config]="currConfig"
-      [isLabelShrink]="getBoolean(lbShrink)"
-      [noLabel]="getBoolean(noLabel)"
+      [exterior]="glnFrameExteriorInput.exterior"
+      [hoverColor]="getBoolean(hoverColor)"
       [isDisabled]="disabled"
-      [isFilled]="isFilled"
       [isError]="!!errors || getBoolean(isError)"
+      [isFilled]="isFilled"
+      [isLabelShrink]="getBoolean(lbShrink)"
       [isRequired]="required"
+      [label]="label"
+      [noLabel]="getBoolean(noLabel)"
       [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
       #glnFrameSize="glnFrameSize"
       [glnFrameSizeElementRef]="hostRef"
@@ -24,24 +26,23 @@
       glnFrameOrnament
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
       [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
-      [attr.opn]="isOpen2 ? '': null">
+      (click)="open()">
 
       <span glnf-orn-lf
         class="glns-ornam-lf">
         <ng-content select="[gln-orn-lf]"></ng-content>
       </span>
+
       <span glnf-orn-rg
         class="glns-ornam-rg">
         <ng-content select="[gln-orn-rg]"></ng-content>
-        <svg *ngIf="!getBoolean(noIcon)"
-          ico
-          [attr.opn]="isOpen2 ? '': null"
-          [ngClass]="['glns-icon', (isOpen2 ? 'is-open' : '')]"
+
+        <div glns-rhomb
+          [attr.opn]="isOpen ? '': null"
+          [ngClass]="['glns-rhomb', (isOpen ? 'is-open': '')]"
           focusable="false"
-          aria-hidden="true"
-          viewBox="0 0 24 24">
-          <path d="M7 10l5 5 5-5z"></path>
-        </svg>
+          aria-hidden="true">
+        </div>
       </span>
 
       <div [attr.tabindex]="disabled ? null : 0"
@@ -51,10 +52,7 @@
         glnf-pd-hor
         glns-elem
         (focus)="doFocus()"
-        (blur)="doBlur()"
-        mousedown9="doMousedown()"
-        mouseup9="doMouseup($event)"
-        (click)="trigger2()">
+        (blur)="doBlur()">
 
         <ng-container *ngIf="isFilled; else elseBlockFilled">
           <ng-container
@@ -66,7 +64,6 @@
         <ng-template #elseBlockFilled>
           <div>&ZeroWidthSpace;</div>
         </ng-template>
-
         <!-- <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container> -->
       </div>
 
@@ -74,38 +71,23 @@
   </div>
 </ng-container>
 
-<gln-menu-item-bar-show tabindex="-1"
-  *ngIf="isOpen2"
-  gmibd-elem
-  class="gmibd-elem"
+<gln-menu-item-bar-show *ngIf="isOpen || hasAnimation"
+  tabindex="-1"
+  gmibs-elem
+  class="gmibs-elem"
   [isFixRight]="getBoolean(isFixRight)"
+  [isShow]="isOpen"
   [menuItemList]="menuItemList"
-  [visibleSize]="4">
+  [noAnimation]="isNoAnimation"
+  [visibleSize]="visibleSize"
+  hasAnimation9="changeAnimation($event)"
+  (hasAnimation)="hasAnimation=$event"
+  (closing)="close()"
+  (selected)="selectedMenuElement($event)">
 
   <ng-content select="gln-menu-item"></ng-content>
 
 </gln-menu-item-bar-show>
-
-<!-- <div [ngClass]="['glns-wrap-panel', (isHide ? 'is-hide': (isOpen ? 'is-open': ''))]"
-  glns-wrap-panel
-  tabindex="-1"
-  (animationstart)="doAnimationStart()"
-  (animationend)="doAnimationEnd()"> -->
-
-<!-- <gln-menu-item-panel *ngIf="isOpen"
-    tabindex="-1"
-    [attr.no-mouse]="isAnimation ? '': null"
-    [ngClass]="['glns-panel', (isFixRight ? 'is-fix-right' : '')]"
-    [isFixRight]="getBoolean(isFixRight)"
-    [isMultiple]="multiple"
-    [menuItemList]="menuItemList"
-    [visibleSize]="sizeVisible"
-    (selected)="selectedMenuElement($event)"
-    (closing)="close()">
-    <ng-content select="gln-menu-item"></ng-content>
-  </gln-menu-item-panel> -->
-
-<!-- </div> -->
 
 <gln-hint-or-error *ngIf="!!helperText"
   [text]="helperText"

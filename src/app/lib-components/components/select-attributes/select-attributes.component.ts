@@ -34,7 +34,7 @@ export class SelectAttributesComponent {
   public labelCss = LABEL_CSS;
 
   public exterior02 = 'outlined';
-  public fruits = ['Mango', 'Lemon', 'Orange', 'Kiwi'];
+  public fruits = ['Mango', 'Lemon', 'Orange', 'Kiwi', 'Mango2', 'Lemon2', 'Orange2', 'Kiwi2'];
 
   public model02a = null;
   public model02b = this.fruits[1];

@@ -1,6 +1,7 @@
 <gln-menu-item-bar tabindex="-1"
-  noElevation9
   [menuItemList]="menuItemList"
-  [visibleSize]="visibleSize">
+  [visibleSize]="visibleSize"
+  (closing)="doClosing()"
+  (selected)="selected.emit($event)">
   <ng-content></ng-content>
 </gln-menu-item-bar>

@@ -17,7 +17,7 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
 
 const DEFAULT_HEIGHT = 40;
-const GLN_MENU_ITEM_PANEL = 'GLN-MENU-ITEM-PANEL';
+const GLN_MENU_ITEM_BAR = 'GLN-MENU-ITEM-BAR';
 const GLN_MENU_ITEM = 'GLN-MENU-ITEM';
 
 let uniqueIdCounter = 0;
@@ -51,7 +51,6 @@ export class GlnMenuItemBarComponent implements AfterContentInit {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set menuItems(value: GlnMenuItemComponent[]) {}
 
-  private countVisible = 0;
   private itemHeight = 0;
   private indexMarked = -1;
   private selectedMenuItem: GlnMenuItemComponent | null = null;
@@ -62,38 +61,26 @@ export class GlnMenuItemBarComponent implements AfterContentInit {
 
   public ngAfterContentInit(): void {
     this.itemHeight = this.getMenuItemHeight(this.hostRef.nativeElement.children[0]);
-    this.countVisible = this.getCountVisible((this.menuItemList?.toArray() || []).length, this.visibleSize);
-    this.settingItemListHeight(this.hostRef, this.itemHeight, this.countVisible);
+    const visibleCount = this.getCountVisible((this.menuItemList?.toArray() || []).length, this.visibleSize);
+    this.settingItemListHeight(this.hostRef, this.itemHeight, visibleCount);
   }
 
-  // @HostListener('document:mouseup', ['$event'])
-  // // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // public documentMouseupHandling(event: Event): void {
-  //   // If the mouse click is outside the area of the current element, then send an "outside" event.
-  //   this.closing.emit();
-  // }
   @HostListener('document:mouseup', ['$event'])
   public documentHandling(event: Event): void {
-    let isSelectedElement = false;
-    if (this.selectedMenuItem) {
-      const target = this.getMenuItemFromEvent(event.target as HTMLElement);
-      const selected = this.selectedMenuItem.hostRef.nativeElement;
-      isSelectedElement = selected === target || selected.contains(target);
-    }
-    // const isSelectedElement = htmlElement === this.selectedMenuItem?.hostRef.nativeElement;
-    console.log(`documentHandling() isCurrentElement=${isSelectedElement}`); // TODO del;
+    const target = event.target as HTMLElement;
+    const selected = this.selectedMenuItem?.hostRef.nativeElement || null;
+    const isSelectedElement = !!selected && (selected === target || selected.contains(target));
+    // If the mouse click is outside the area of the current element, then send an "closing" event.
     if (!isSelectedElement) {
-      // If the mouse click is outside the area of the current element, then send an "outside" event.
       this.closing.emit();
     }
   }
 
   @HostListener('mouseup', ['$event'])
   public elementHandling(event: Event): void {
-    console.log(`elementHandling()`); // TODO del;
-    // event.stopPropagation();
+    // Get the menu item as the parent of the clicked item.
     const targetMenuItem = this.getMenuItemFromEvent(event.target as HTMLElement);
-    // If the mouse click is inside the area of the current element, then determine the selected menu item.
+    // Find the menu item component by the selected html element.
     const menuItem = this.getMenuItemByHtmlElement(targetMenuItem, this.menuItems);
     if (!menuItem) {
       this.closing.emit();
@@ -131,30 +118,27 @@ export class GlnMenuItemBarComponent implements AfterContentInit {
     }
     return result;
   }
-
-  // Determine the number of visible menu items.
+  /** Determine the number of visible menu items. */
   private getCountVisible(countItems: number, visibleSize: number): number {
     return visibleSize > 0 && visibleSize < countItems ? visibleSize : countItems;
   }
-
+  /** Set the height value of the list of menu items. */
   private settingItemListHeight(elem: ElementRef<HTMLElement>, height: number, countVisible: number): void {
     const menuItemsHeight = height * countVisible;
     const itemsHeight = menuItemsHeight > 0 ? menuItemsHeight : null;
     HtmlElemUtil.setProperty(elem, '--glnmib-list-height', NumberUtil.str(itemsHeight)?.concat('px') || null);
   }
-
+  /** Get the menu item as the parent of the clicked item. */
   private getMenuItemFromEvent(htmlElement: HTMLElement | null): HTMLElement | null {
     let result: HTMLElement | null = null;
     let elem: HTMLElement | null = htmlElement;
-    while (!!elem && !result && elem.tagName !== GLN_MENU_ITEM_PANEL) {
+    while (!result && !!elem && elem.tagName !== GLN_MENU_ITEM_BAR) {
       result = elem.tagName === GLN_MENU_ITEM ? elem : result;
       elem = elem.parentElement;
     }
     return result;
   }
-
-  // OLD
-
+  /** Find the menu item component by the selected html element. */
   private getMenuItemByHtmlElement(element: HTMLElement | null, menuItems: GlnMenuItemComponent[]): GlnMenuItemComponent | null {
     let result: GlnMenuItemComponent | null = null;
     if (element && menuItems.length > 0) {
@@ -164,7 +148,7 @@ export class GlnMenuItemBarComponent implements AfterContentInit {
     }
     return result;
   }
-
+  /** Mark the menu item as marked with the cursor. */
   private markRequiredMenuItem(isNext: boolean): void {
     const menuItem = this.indexMarked > -1 ? this.menuItems[this.indexMarked] : null;
     // Uncheck the old menu item.
