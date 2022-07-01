@@ -7,10 +7,6 @@ gln-menu-item-bar-show {
   font-size: 1em; // 16px
   position: absolute;
 
-  &[anm] {
-    opacity: 0;
-  }
-
   &[is-open]:not([is-hide]) {
     animation: kf-show 251ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     opacity: 1;
@@ -21,24 +17,23 @@ gln-menu-item-bar-show {
     opacity: 0;
   }
 
-  
   @keyframes kf-show {
-    from {
+    0% {
       opacity: 0;
       transform: translateY(var(--glnmibs-show-hg)) scale(0.1);
     }
-    to {
+    100% {
       opacity: 1;
       transform: none;
     }
   }
 
   @keyframes kf-hide {
-    from {
+    0% {
       opacity: 1;
       transform: none;
     }
-    to {
+    100% {
       opacity: 0;
       transform: translateY(var(--glnmibs-show-hg)) scale(0.1);
     }

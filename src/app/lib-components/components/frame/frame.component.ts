@@ -17,7 +17,7 @@ export class FrameComponent implements AfterViewInit {
     console.time('FrameComponent');
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     // eslint-disable-next-line no-restricted-syntax
     console.timeEnd('FrameComponent');
     Promise.resolve().then(() => {

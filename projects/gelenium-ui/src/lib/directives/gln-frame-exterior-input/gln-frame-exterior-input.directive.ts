@@ -27,7 +27,7 @@ export class GlnFrameExteriorInputDirective implements OnChanges, GlnFrameSizePr
 
   constructor(public hostRef: ElementRef<HTMLElement>) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes.glnFrameExteriorInputElementRef) {
       this.elementRef = this.glnFrameExteriorInputElementRef || this.hostRef;
     }

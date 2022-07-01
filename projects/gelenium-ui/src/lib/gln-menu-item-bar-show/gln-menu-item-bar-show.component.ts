@@ -42,6 +42,8 @@ export class GlnMenuItemBarShowComponent implements OnChanges, OnInit, AfterView
   @Input()
   public isShow: boolean | null = null;
   @Input()
+  public isSkipFirstEvent: boolean | null = null;
+  @Input()
   public menuItemList!: QueryList<GlnMenuItemComponent>;
   @Input()
   public noAnimation: boolean | null = null;
@@ -58,31 +60,9 @@ export class GlnMenuItemBarShowComponent implements OnChanges, OnInit, AfterView
   @ViewChild(GlnMenuItemBarComponent, { static: true })
   public menuItemBar!: GlnMenuItemBarComponent;
 
-  constructor(public hostRef: ElementRef<HTMLElement>, private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) {
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
-  }
+  private isFirstEvent = true;
 
-  @HostListener('animationstart')
-  public animationStartHandling(): void {
-    if (!this.noAnimation) {
-      console.log(`^hasAnimation=true`); // TODO del;
-      this.hasAnimation.emit(true);
-    }
-  }
-  @HostListener('animationend')
-  public animationEndHandling(): void {
-    if (!this.noAnimation) {
-      console.log(`^hasAnimation=false`); // TODO del;
-      this.hasAnimation.emit(false);
-    }
-  }
-  @HostListener('animationcancel')
-  public animationCancelHandling(): void {
-    if (!this.noAnimation) {
-      console.log(`^^hasAnimation=false`); // TODO del;
-      this.hasAnimation.emit(false);
-    }
-  }
+  constructor(public hostRef: ElementRef<HTMLElement>, private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.isFixRight) {
@@ -94,20 +74,60 @@ export class GlnMenuItemBarShowComponent implements OnChanges, OnInit, AfterView
   }
 
   public ngOnInit(): void {
-    if (!this.noAnimation) {
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'anm', '');
-    }
+    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
   }
 
   public ngAfterViewInit(): void {
     const heightItemsBar = Number(getComputedStyle(this.menuItemBar.hostRef.nativeElement).getPropertyValue('height').replace('px', ''));
-    if (!this.noAnimation) {
-      const showHeight = -Math.round((heightItemsBar / 2) * 100) / 100;
-      HtmlElemUtil.setProperty(this.hostRef, '--glnmibs-show-hg', NumberUtil.str(showHeight)?.concat('px') || null);
-    }
     const isDown = this.isDownValue(this.hostRef.nativeElement.parentElement, heightItemsBar);
     this.settingElementPosition(this.hostRef, this.isFixRight, isDown);
+    if (!this.noAnimation) {
+      const showHeight = ((isDown ? -1 : 1) * Math.round((heightItemsBar / 2) * 100)) / 100;
+      HtmlElemUtil.setProperty(this.hostRef, '--glnmibs-show-hg', NumberUtil.str(showHeight)?.concat('px') || null);
+    }
     this.changeDetectorRef.markForCheck();
+  }
+
+  @HostListener('animationstart')
+  public animationStartHandling(): void {
+    if (!this.noAnimation) {
+      this.hasAnimation.emit(true);
+    }
+  }
+  @HostListener('animationend')
+  public animationEndHandling(): void {
+    if (!this.noAnimation) {
+      this.hasAnimation.emit(false);
+    }
+  }
+  @HostListener('animationcancel')
+  public animationCancelHandling(): void {
+    if (!this.noAnimation) {
+      this.hasAnimation.emit(false);
+    }
+  }
+
+  /**
+   * A mouse click outside the element triggers a "close" event.
+   * The element is created at the moment the mouse is clicked, this event is handled by it.
+   * This can cause the "close" event to be erroneously raised.
+   * And to prevent, you need to use "isSkipFirstEvent" to skip the first mouse event.
+   */
+  @HostListener('document:mouseup', ['$event'])
+  public documentHandling(event: Event): void {
+    if (this.isFirstEvent) {
+      this.isFirstEvent = false;
+      if (this.isSkipFirstEvent) {
+        return;
+      }
+    }
+    const target = event.target as HTMLElement;
+    const host = this.hostRef.nativeElement;
+    const isHostElement = host === target || host.contains(target);
+    // If the mouse click is outside the area of the current element, then send an "closing" event.
+    if (!isHostElement) {
+      this.closing.emit();
+    }
   }
 
   // ** Public API **

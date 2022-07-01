@@ -43,11 +43,14 @@ export class FrameAttributesComponent {
   public input02b = 'Hello World';
   public input02c = 'Hello World';
   public input02d = 'Hello World';
+
+  public exterior02b = 'outlined';
+
   public input02e = '';
   public input02f = '';
   public input02g = 'Hello World';
 
-  public exterior02b = 'outlined';
+  public exterior02c = 'outlined';
 
   public input02h = 'Hello World';
   public input02i = 'Hello World';

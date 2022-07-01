@@ -24,6 +24,11 @@ export class HtmlElemUtil {
       }
     }
   }
+  public static updateIfMissing(renderer: Renderer2, elem: ElementRef<HTMLElement> | null, name: string, value: string): void {
+    if (elem && name && !elem.nativeElement.getAttribute(name) && value) {
+      HtmlElemUtil.setAttr(renderer, elem, name, value);
+    }
+  }
   public static getChildByAttribute(elem: ElementRef<HTMLElement> | null, attributeList: string[]): Element | null {
     let result: Element | null = null;
     const element: Element | null = elem?.nativeElement || null;

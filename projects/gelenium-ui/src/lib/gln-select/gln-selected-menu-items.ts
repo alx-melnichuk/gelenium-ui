@@ -55,10 +55,12 @@ export class GlnSelectedMenuItems {
           countDelete++;
         }
         nextMenuItems.length = 0;
-        if (updateMenuItems.length > 0 && updateMenuItems[0].value !== null) {
-          updateMenuItems[0].setSelected(true);
-          nextMenuItems.push(updateMenuItems[0]);
+        for (let i = 0; i < updateMenuItems.length; i++) {
+          updateMenuItems[i].setSelected(true);
           countAdd++;
+          if (updateMenuItems[i].value !== null) {
+            nextMenuItems.push(updateMenuItems[i]);
+          }
         }
       }
       this.items = menuItems.filter((item) => nextMenuItems.includes(item));

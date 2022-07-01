@@ -54,6 +54,12 @@ gln-frame {
   }
   border-radius: var(--glnf-br-rd, var(--glnfs-br-rd, var(--def-br-rd)));
 
+  &:not([noAnm]) {
+    --glnf-trn-drt-200: 200ms;
+    --glnf-trn-drt-100: 100ms;
+    --glnf-trn-drt-50: 50ms;
+  }
+
   // ** Section "Label". **
   label {
     display: block;
@@ -67,10 +73,16 @@ gln-frame {
     text-size-adjust: 100%;
     top: 0;
     transform-origin: top left;
-    -webkit-transition: color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,-webkit-transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,max-width 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    transition: color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,max-width 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    -webkit-transition: color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms,
+      -webkit-transform var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms,
+      max-width var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    transition: color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms,
+      transform var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms,
+      max-width var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     white-space: nowrap;
     z-index: 1;
+  }
+  &:not([noAnm]) label {
   }
   &[shr], &:focus-within, &[fil] {
     label {
@@ -204,8 +216,8 @@ gln-frame {
 
   // ** Section: Background-Color "div.glnf-border" for "Underline" mode. **
   &>[dcr-bg] {
-    -webkit-transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    -webkit-transition: background-color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    transition: background-color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     background-color: var(--glnf-dcr-bg-cl);
   }
 
@@ -220,8 +232,8 @@ gln-frame {
       content: "\00a0";
       position: absolute;
       right: 0;
-      -webkit-transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-      transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      -webkit-transition: border-bottom-color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      transition: border-bottom-color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
       pointer-events: none;
     }
     &:after {
@@ -234,11 +246,12 @@ gln-frame {
       position: absolute;
       right: 0;
       @include mxTransform_ScaleXY(0, 1);
-      -webkit-transition: -webkit-transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-      transition: transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+      -webkit-transition: -webkit-transform var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+      transition: transform var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
       pointer-events: none;
     }
   }
+
   &[dis]>div[dcr-bb]:before {
     border-bottom-style: dotted;
   }
@@ -312,8 +325,8 @@ gln-frame {
   &[shr], &:focus-within, &[fil] {
     legend {
       max-width: 100%;
-      -webkit-transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
-      transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
+      -webkit-transition: max-width var(--glnf-trn-drt-100, 0ms) cubic-bezier(0.0, 0, 0.2, 1) var(--glnf-trn-drt-50, 0ms);
+      transition: max-width var(--glnf-trn-drt-100, 0ms) cubic-bezier(0.0, 0, 0.2, 1) var(--glnf-trn-drt-50, 0ms);
     }
     &[ind] legend {
       padding: 0 calc(var(--glnf-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
@@ -321,8 +334,8 @@ gln-frame {
   }
   &:not([shr]):not([fil]):not(:focus-within) legend {
     max-width: 0.01px;
-    -webkit-transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    -webkit-transition: max-width var(--glnf-trn-drt-50, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    transition: max-width var(--glnf-trn-drt-50, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
   }
   
   // ** Additional settings **

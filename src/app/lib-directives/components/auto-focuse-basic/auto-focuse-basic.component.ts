@@ -48,7 +48,7 @@ export class AutoFocuseBasicComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.mode = this.getPrm(location.href, CN_MODE) || this.mode;
     this.mode1a = this.getPrm(location.href, CN_MODE1A) || this.mode1a;
     this.mode1b = this.getPrm(location.href, CN_MODE1B) || this.mode1b;

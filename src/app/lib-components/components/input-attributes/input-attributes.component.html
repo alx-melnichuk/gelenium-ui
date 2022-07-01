@@ -3,23 +3,43 @@
   <p>The following attributes are supported:</p>
   <ul>
     <li>"id" - parameter for defining the unique identifier of the input field
-      (id="unique_identifier");</li>
-    <li>"isRequired" - a sign that the field is required (isRequired);</li>
+      (id="unique_identifier");
+    </li>
+
+    <li>
+      "config" - Defines a configuration object.
+      <a [href]="urlFrame + '#Config'">More details.</a>
+    </li>
+    <li>
+      "exterior" - Determines the appearance of an element.<br />
+      It can take the following values:
+      <ul>
+        <li>"outlined";</li>
+        <li>"underline";</li>
+        <li>"standard";</li>
+      </ul>
+    </li>
+    <li>"helperText" - the parameter is used to provide context about the input
+      of the field or error message (helperText="Some important text").
+    </li>
+    <li>
+      "hoverColor" - When hovering the mouse, the label and frame
+      will have the same color as when they received focus.
+    </li>
     <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
-    <li>"type" - indicate the type of the input element (type="password");</li>
+    <li>"isError" - a sign that the field is in error status (isError);</li>
+    <li>"isReadOnly" - read-only access flag (isReadOnly);</li>
+    <li>"isRequired" - a sign that the field is required (isRequired);</li>
+    <li>"label" - The content of the label.</li>
+    <li>"lbShrink" - An indication that the label has moved up and shrunk.</li>
+    <li>"noLabel" - Hide label display.</li>
+    <li>"type" - indicate the type of the input element (type="text");</li>
     <li>"autoComplete" - the value of the autocomplete parameter for the input field.
       <br />&nbsp;&nbsp;autoComplete="off" - The browser is not permitted to automatically enter or
       select a value for this field.
       <br />&nbsp;&nbsp;autoComplete="new-password" - A new password.
       <br />&nbsp;&nbsp;autoComplete="current-password" - The user's current password.
     </li>
-    <li>"isReadOnly" - read-only access flag (isReadOnly);</li>
-    <li>"lbShrink" - an attribute, the presence of which leads to permanent display of the label in
-      the field header
-      without transformation into a placeholder (lbShrink);
-    </li>
-    <li>"helperText" - the parameter is used to provide context about the input of the field or
-      error message (helperText="Some important text").</li>
     <li>
       "wdFull" - an attribute sets the width to the width of the parent (width: 100%).
     </li>
@@ -55,246 +75,71 @@
 
 <section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior02">
+  <mat-button-toggle-group [(ngModel)]="exterior02a">
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
     <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
     <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
 
-<form [formGroup]="formGroup02"
-  novalidate
-  autocomplete="off">
+<div class="app-group">
 
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>State: empty.</em>
-        </small>
-      </div>
-      <gln-input formControlName="input02a"
-        id="unique_identifier"
-        label="Enter value"
-        [exterior]="exterior02">
-      </gln-input>
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>State: empty.</em>
+      </small>
     </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attributes: isRequired, helperText.</em>
-        </small>
-      </div>
-      <gln-input formControlName="input02b"
-        label="Required field"
-        isRequired
-        helperText="A value must be entered."
-        [exterior]="exterior02">
-      </gln-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isReadOnly.</em>
-        </small>
-      </div>
-      <gln-input formControlName="input02c"
-        label="Read Only"
-        isReadOnly
-        helperText="The parameter is read only."
-        [exterior]="exterior02">
-      </gln-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isDisabled.</em>
-        </small>
-      </div>
-      <gln-input formControlName="input02d"
-        label="Disabled"
-        isDisabled
-        helperText="The parameter is disabled."
-        [exterior]="exterior02">
-      </gln-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: lbShrink.</em>
-        </small>
-      </div>
-      <gln-input formControlName="input02e"
-        label="Permanent label"
-        lbShrink
-        helperText="The position of the label is fixed."
-        [exterior]="exterior02">
-      </gln-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: noLabel.</em>
-        </small>
-      </div>
-      <gln-input formControlName="input02f"
-        label="noLabel"
-        noLabel
-        helperText="The label is not displayed."
-        [exterior]="exterior02">
-      </gln-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attributes: type="password".</em>
-        </small>
-      </div>
-      <gln-input formControlName="input02g"
-        [label]="!formGroup02.controls.input02g.value
-         ? 'Enter password':'Password'"
-        type="password"
-        autoComplete="current-password"
-        helperText="Enter your password value."
-        [exterior]="exterior02">
-      </gln-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attributes: type="number".</em>
-        </small>
-      </div>
-      <gln-input formControlName="input02h"
-        [label]="!formGroup02.controls.input02h.value
-         ? 'Enter number':'Number'"
-        type="number"
-        helperText="Enter your number value."
-        [exterior]="exterior02">
-      </gln-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attributes: type="search".</em>
-        </small>
-      </div>
-      <gln-input formControlName="input02i"
-        [label]="!formGroup02.controls.input02i.value
-         ? 'Enter search value':'Search value'"
-        type="search"
-        helperText="Enter your search value."
-        [exterior]="exterior02">
-      </gln-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attributes: type="month", lbShrink.</em>
-        </small>
-      </div>
-      <gln-input formControlName="input02j"
-        [label]="!formGroup02.controls.input02j.value
-          ? 'Enter month':'Month'"
-        lbShrink
-        type="month"
-        [helperText]="!formGroup02.controls.input02j.value
-        ?'Enter your month value.'
-        :'Month value is \''
-        + (formGroup02.controls.input02j.value) + '\''"
-        [exterior]="exterior02">
-      </gln-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attributes: type="week", lbShrink.</em>
-        </small>
-      </div>
-      <gln-input formControlName="input02k"
-        [label]="!formGroup02.controls.input02k.value
-          ? 'Enter week':'Week'"
-        lbShrink
-        type="week"
-        [helperText]="!formGroup02.controls.input02k.value
-        ?'Enter your week value.'
-        :'Week value is \''
-        + (formGroup02.controls.input02k.value) + '\''"
-        [exterior]="exterior02">
-      </gln-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attributes: type="color", lbShrink.</em>
-        </small>
-      </div>
-      <gln-input formControlName="input02l"
-        [label]="!formGroup02.controls.input02l.value
-          ? 'Enter color':'Color'"
-        lbShrink
-        type="color"
-        [helperText]="!formGroup02.controls.input02l.value
-        ?'Enter color.'
-        :'\'' + (formGroup02.controls.input02l.value) + '\''"
-        [exterior]="exterior02">
-      </gln-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attributes: type="date", lbShrink.</em>
-        </small>
-      </div>
-      <gln-input formControlName="input02m"
-        [label]="!formGroup02.controls.input02m.value
-          ? 'Enter date':'Date'"
-        lbShrink
-        type="date"
-        [helperText]="!formGroup02.controls.input02m.value
-          ?'Enter your date value.'
-          :'Date value is \''
-          + (formGroup02.controls.input02m.value | date:'mediumDate')
-          + '\''"
-        [exterior]="exterior02">
-      </gln-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attributes: type="time", lbShrink.</em>
-        </small>
-      </div>
-      <gln-input formControlName="input02n"
-        [label]="!formGroup02.controls.input02n.value
-          ? 'Enter time':'Time'"
-        lbShrink
-        type="time"
-        [helperText]="!formGroup02.controls.input02n.value
-          ?'Enter your time value.'
-          :'Time value is \''
-          + (formGroup02.controls.input02n.value) + '\''"
-        [exterior]="exterior02">
-      </gln-input>
-    </div>
-
+    <gln-input [(ngModel)]="model02a"
+      id="unique_id_input02a"
+      label="Enter value"
+      [exterior]="exterior02a">
+    </gln-input>
   </div>
 
-</form>
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: isRequired, helperText.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02b"
+      label="Required field"
+      isRequired
+      helperText="A value must be entered."
+      [exterior]="exterior02a">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: noLabel.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02c"
+      label="noLabel"
+      noLabel
+      helperText="The label is not displayed."
+      [exterior]="exterior02a">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isDisabled.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02d"
+      label="Disabled"
+      isDisabled
+      helperText="The parameter is disabled."
+      [exterior]="exterior02a">
+    </gln-input>
+  </div>
+
+</div>
 
 <section mr-vr>
   <mat-accordion>
@@ -305,248 +150,70 @@
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;form [formGroup]="formGroup02"
-  novalidate
-  autocomplete="off"&gt;
+&lt;div class="app-group"&gt;
 
-  &lt;div class="app-group"&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;State: empty.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="input02a"
-        id="unique_identifier"
-        label="Enter value"
-        [exterior]="exterior02"&gt;
-      &lt;/gln-input&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;State: empty.&lt;/em&gt;
+      &lt;/small&gt;
     &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="input02b"
-        label="Required field"
-        isRequired
-        helperText="A value must be entered."
-        [exterior]="exterior02"&gt;
-      &lt;/gln-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="input02c"
-        label="Read Only"
-        isReadOnly
-        helperText="The parameter is read only."
-        [exterior]="exterior02"&gt;
-      &lt;/gln-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="input02d"
-        label="Disabled"
-        isDisabled
-        helperText="The parameter is disabled."
-        [exterior]="exterior02"&gt;
-      &lt;/gln-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attribute: lbShrink.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="input02e"
-        label="Permanent label"
-        lbShrink
-        helperText="The position of the label is fixed."
-        [exterior]="exterior02"&gt;
-      &lt;/gln-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attribute: noLabel.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="input02f"
-        label="noLabel"
-        noLabel
-        helperText="The label is not displayed."
-        [exterior]="exterior02"&gt;
-      &lt;/gln-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attributes: type="password".&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="input02g"
-        [label]="!formGroup02.controls.input02g.value
-         ? 'Enter password':'Password'"
-        type="password"
-        autoComplete="current-password"
-        helperText="Enter your password value."
-        [exterior]="exterior02"&gt;
-      &lt;/gln-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attributes: type="number".&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="input02h"
-        [label]="!formGroup02.controls.input02h.value
-         ? 'Enter number':'Number'"
-        type="number"
-        helperText="Enter your number value."
-        [exterior]="exterior02"&gt;
-      &lt;/gln-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attributes: type="search".&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="input02i"
-        [label]="!formGroup02.controls.input02i.value
-         ? 'Enter search value':'Search value'"
-        type="search"
-        helperText="Enter your search value."
-        [exterior]="exterior02"&gt;
-      &lt;/gln-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attributes: type="month", lbShrink.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="input02j"
-        [label]="!formGroup02.controls.input02j.value
-          ? 'Enter month':'Month'"
-        lbShrink
-        type="month"
-        [helperText]="!formGroup02.controls.input02j.value
-        ?'Enter your month value.'
-        :'Month value is \''
-        + (formGroup02.controls.input02j.value) + '\''"
-        [exterior]="exterior02"&gt;
-      &lt;/gln-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attributes: type="week", lbShrink.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="input02k"
-        [label]="!formGroup02.controls.input02k.value
-          ? 'Enter week':'Week'"
-        lbShrink
-        type="week"
-        [helperText]="!formGroup02.controls.input02k.value
-        ?'Enter your week value.'
-        :'Week value is \''
-        + (formGroup02.controls.input02k.value) + '\''"
-        [exterior]="exterior02"&gt;
-      &lt;/gln-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attributes: type="color", lbShrink.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="input02l"
-        [label]="!formGroup02.controls.input02l.value
-          ? 'Enter color':'Color'"
-        lbShrink
-        type="color"
-        [helperText]="!formGroup02.controls.input02l.value
-        ?'Enter color.'
-        :'\'' + (formGroup02.controls.input02l.value) + '\''"
-        [exterior]="exterior02"&gt;
-      &lt;/gln-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attributes: type="date", lbShrink.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="input02m"
-        [label]="!formGroup02.controls.input02m.value
-          ? 'Enter date':'Date'"
-        lbShrink
-        type="date"
-        [helperText]="!formGroup02.controls.input02m.value
-          ?'Enter your date value.'
-          :'Date value is \''
-          + (formGroup02.controls.input02m.value | date:'mediumDate')
-          + '\''"
-        [exterior]="exterior02"&gt;
-      &lt;/gln-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attributes: type="time", lbShrink.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="input02n"
-        [label]="!formGroup02.controls.input02n.value
-          ? 'Enter time':'Time'"
-        lbShrink
-        type="time"
-        [helperText]="!formGroup02.controls.input02n.value
-          ?'Enter your time value.'
-          :'Time value is \''
-          + (formGroup02.controls.input02n.value) + '\''"
-        [exterior]="exterior02"&gt;
-      &lt;/gln-input&gt;
-    &lt;/div&gt;
-
+    &lt;gln-input [(ngModel)]="model02a"
+      id="unique_id_model02a"
+      label="Enter value"
+      [exterior]="exterior02a"&gt;
+    &lt;/gln-input&gt;
   &lt;/div&gt;
 
-&lt;/form&gt;</pre></code>
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02b"
+      label="Required field"
+      isRequired
+      helperText="A value must be entered."
+      [exterior]="exterior02a"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: noLabel.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02c"
+      label="noLabel"
+      noLabel
+      helperText="The label is not displayed."
+      [exterior]="exterior02a"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02d"
+      label="Disabled"
+      isDisabled
+      helperText="The parameter is disabled."
+      [exterior]="exterior02a"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
           <code><pre source="ts">
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
-import &#123;
-  FormControl, FormGroup, Validators
-&#125; from '@angular/forms';
 
 @Component(&#123;
   selector: 'app-input',
@@ -555,24 +222,627 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class InputComponent &#123;
-  public formGroup02: FormGroup = new FormGroup(&#123;
-    input02a: new FormControl('', []),
-    input02b: new FormControl('Hello World'
-      , [Validators.required]),
-    input02c: new FormControl('Hello World', []),
-    input02d: new FormControl('Hello World', []),
-    input02e: new FormControl('', []),
-    input02f: new FormControl('Hello World', []),
-    input02g: new FormControl('', []),
-    input02h: new FormControl('', []),
-    input02i: new FormControl('Hello World', []),
-    input02j: new FormControl('', []),
-    input02k: new FormControl('', []),
-    input02l: new FormControl('#000000', []),
-    input02m: new FormControl('', []),
-    input02n: new FormControl('', []),
-  &#125;);
-  public exterior02 = 'outlined';
+  public exterior02a = 'outlined';
+
+  public model02a = '';
+  public model02b = 'Hello World';
+  public model02c = 'Hello World';
+  public model02d = 'Hello World';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior02b">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: lbShrink.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02e"
+      label="Permanent label"
+      lbShrink
+      helperText="The position of the label is fixed."
+      [exterior]="exterior02b">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isError.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02f"
+      #ctrl02f="ngModel"
+      [label]="!ctrl02f.value
+        ? 'Requires a value':'Parameter value'"
+      [isError]="!ctrl02f.value ? '':null"
+      [helperText]="ctrl02f.value
+      ? 'The field is filled.'
+      : 'The field is not filled.'"
+      [exterior]="exterior02b">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: hoverColor.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02g"
+      label="Parameter value"
+      hoverColor
+      helperText="On hover, a frame with the focus color."
+      [exterior]="exterior02b">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isReadOnly.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02h"
+      label="Read Only"
+      isReadOnly
+      helperText="The parameter is read only."
+      [exterior]="exterior02b">
+    </gln-input>
+  </div>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: lbShrink.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02e"
+      label="Permanent label"
+      lbShrink
+      helperText="The position of the label is fixed."
+      [exterior]="exterior02b"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: isError.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02f"
+      #ctrl02f="ngModel"
+      [label]="!ctrl02f.value
+        ? 'Requires a value':'Parameter value'"
+      [isError]="!ctrl02f.value ? '':null"
+      [helperText]="ctrl02f.value
+      ? 'The field is filled.'
+      : 'The field is not filled.'"
+      [exterior]="exterior02b"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: hoverColor.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02g"
+      label="Parameter value"
+      hoverColor
+      helperText="On hover, a frame with the focus color."
+      [exterior]="exterior02b"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02h"
+      label="Read Only"
+      isReadOnly
+      helperText="The parameter is read only."
+      [exterior]="exterior02b"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class InputComponent &#123;
+  public exterior02b = 'outlined';
+
+  public model02e = '';
+  public model02f = '';
+  public model02g = 'Hello World';
+  public model02h = 'Hello World';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior02c">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: autoComplete, type="password".</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02i"
+      #ctrl02i="ngModel"
+      [label]="!ctrl02i.value
+      ? 'Enter password':'Password'"
+      type="password"
+      autoComplete="current-password"
+      helperText="Enter your password value."
+      [exterior]="exterior02c">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: type="number".</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02j"
+      #ctrl02j="ngModel"
+      [label]="!ctrl02j.value
+       ? 'Enter number':'Number'"
+      type="number"
+      helperText="Enter your number value."
+      [exterior]="exterior02c">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: type="search".</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02k"
+      #ctrl02k="ngModel"
+      [label]="!ctrl02k.value
+       ? 'Enter search value':'Search value'"
+      type="search"
+      helperText="Enter your search value."
+      [exterior]="exterior02c">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: type="month", lbShrink.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02l"
+      #ctrl02l="ngModel"
+      [label]="!ctrl02l.value
+        ? 'Enter month':'Month'"
+      lbShrink
+      type="month"
+      [helperText]="!ctrl02l.value
+      ?'Enter your month value.'
+      :'Month value is \''
+      + ctrl02l.value + '\''"
+      [exterior]="exterior02c">
+    </gln-input>
+  </div>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: autoComplete, type="password".&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02i"
+      #ctrl02i="ngModel"
+      [label]="!ctrl02i.value
+      ? 'Enter password':'Password'"
+      type="password"
+      autoComplete="current-password"
+      helperText="Enter your password value."
+      [exterior]="exterior02c"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: type="number".&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02j"
+      #ctrl02j="ngModel"
+      [label]="!ctrl02j.value
+       ? 'Enter number':'Number'"
+      type="number"
+      helperText="Enter your number value."
+      [exterior]="exterior02c"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: type="search".&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02k"
+      #ctrl02k="ngModel"
+      [label]="!ctrl02k.value
+       ? 'Enter search value':'Search value'"
+      type="search"
+      helperText="Enter your search value."
+      [exterior]="exterior02c"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: type="month", lbShrink.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02l"
+      #ctrl02l="ngModel"
+      [label]="!ctrl02l.value
+        ? 'Enter month':'Month'"
+      lbShrink
+      type="month"
+      [helperText]="!ctrl02l.value
+      ?'Enter your month value.'
+      :'Month value is \''
+      + ctrl02l.value + '\''"
+      [exterior]="exterior02c"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class InputComponent &#123;
+  public exterior02c = 'outlined';
+
+  public model02i = '';
+  public model02j = '';
+  public model02k = 'Hello World';
+  public model02l = '';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group [(ngModel)]="exterior02d">
+    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: type="week", lbShrink.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02m"
+      #ctrl02m="ngModel"
+      [label]="!ctrl02m.value
+        ? 'Enter week':'Week'"
+      lbShrink
+      type="week"
+      [helperText]="!ctrl02m.value
+      ?'Enter your week value.'
+      :'Week value is \''
+      + (ctrl02m.value) + '\''"
+      [exterior]="exterior02d">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: type="color", lbShrink.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02n"
+      #ctrl02n="ngModel"
+      [label]="!ctrl02n.value
+        ? 'Enter color':'Color'"
+      lbShrink
+      type="color"
+      [helperText]="!ctrl02n.value
+      ?'Enter color.'
+      :'\'' + ctrl02n.value + '\''"
+      [exterior]="exterior02d">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: type="date", lbShrink.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02o"
+      #ctrl02o="ngModel"
+      [label]="!ctrl02o.value
+        ? 'Enter date':'Date'"
+      lbShrink
+      type="date"
+      [helperText]="!ctrl02o.value
+        ?'Enter your date value.'
+        :'Date value is \''
+        + (ctrl02o.value | date:'mediumDate')
+        + '\''"
+      [exterior]="exterior02d">
+    </gln-input>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: type="time", lbShrink.</em>
+      </small>
+    </div>
+    <gln-input [(ngModel)]="model02p"
+      #ctrl02p="ngModel"
+      [label]="!ctrl02p.value
+        ? 'Enter time':'Time'"
+      lbShrink
+      type="time"
+      [helperText]="!ctrl02p.value
+        ?'Enter your time value.'
+        :'Time value is \''
+        + ctrl02p.value + '\''"
+      [exterior]="exterior02d">
+    </gln-input>
+  </div>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: type="week", lbShrink.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02m"
+      #ctrl02m="ngModel"
+      [label]="!ctrl02m.value
+        ? 'Enter week':'Week'"
+      lbShrink
+      type="week"
+      [helperText]="!ctrl02m.value
+      ?'Enter your week value.'
+      :'Week value is \''
+      + (ctrl02m.value) + '\''"
+      [exterior]="exterior02d"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: type="color", lbShrink.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02n"
+      #ctrl02n="ngModel"
+      [label]="!ctrl02n.value
+        ? 'Enter color':'Color'"
+      lbShrink
+      type="color"
+      [helperText]="!ctrl02n.value
+      ?'Enter color.'
+      :'\'' + ctrl02n.value + '\''"
+      [exterior]="exterior02d"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: type="date", lbShrink.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02o"
+      #ctrl02o="ngModel"
+      [label]="!ctrl02o.value
+        ? 'Enter date':'Date'"
+      lbShrink
+      type="date"
+      [helperText]="!ctrl02o.value
+        ?'Enter your date value.'
+        :'Date value is \''
+        + (ctrl02o.value | date:'mediumDate')
+        + '\''"
+      [exterior]="exterior02d"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: type="time", lbShrink.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-input [(ngModel)]="model02p"
+      #ctrl02p="ngModel"
+      [label]="!ctrl02p.value
+        ? 'Enter time':'Time'"
+      lbShrink
+      type="time"
+      [helperText]="!ctrl02p.value
+        ?'Enter your time value.'
+        :'Time value is \''
+        + ctrl02p.value + '\''"
+      [exterior]="exterior02d"&gt;
+    &lt;/gln-input&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class InputComponent &#123;
+  public exterior02d = 'outlined';
+
+  public model02m = '';
+  public model02n = '#000000';
+  public model02o = '';
+  public model02p = '';
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

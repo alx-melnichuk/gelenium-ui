@@ -33,16 +33,22 @@ export class SelectAttributesComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public exterior02 = 'outlined';
-  public fruits = ['Mango', 'Lemon', 'Orange', 'Kiwi', 'Mango2', 'Lemon2', 'Orange2', 'Kiwi2'];
+  public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
+
+  public exterior02a = 'outlined';
 
   public model02a = null;
   public model02b = this.fruits[1];
   public model02c = this.fruits[1];
   public model02d = this.fruits[1];
+
   public model02e = null;
   public model02f = this.fruits[1];
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
+
+  public capitalizeFirstLetter(value: string): string {
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  }
 }

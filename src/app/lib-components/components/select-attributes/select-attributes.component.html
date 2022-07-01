@@ -18,7 +18,7 @@
 
 <section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior02">
+  <mat-button-toggle-group [(ngModel)]="exterior02a">
     <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
     <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
     <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
@@ -28,7 +28,85 @@
 
 <div class="app-group">
 
+
   <div class="app-elem">
+    <div>
+      <small>
+        <em>State: empty.</em>
+      </small>
+    </div>
+    <gln-select [(ngModel)]="model02a"
+      id="unique_id_select02a"
+      label="Enter value"
+      [exterior]="exterior02a"
+      wdFull>
+      <gln-menu-item><em>None</em></gln-menu-item>
+      <gln-menu-item *ngFor="let item of fruits"
+        [value]="item">{{ capitalizeFirstLetter(item) }}
+      </gln-menu-item>
+    </gln-select>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: isRequired, helperText.</em>
+      </small>
+    </div>
+    <gln-select [(ngModel)]="model02b"
+      label="Required field"
+      isRequired
+      helperText="A value must be entered."
+      [exterior]="exterior02a"
+      wdFull>
+      <gln-menu-item><em>None</em></gln-menu-item>
+      <gln-menu-item *ngFor="let item of fruits"
+        [value]="item">{{ capitalizeFirstLetter(item) }}
+      </gln-menu-item>
+    </gln-select>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: noLabel.</em>
+      </small>
+    </div>
+    <gln-select [(ngModel)]="model02c"
+      label="noLabel"
+      noLabel
+      helperText="The label is not displayed."
+      [exterior]="exterior02a"
+      wdFull>
+      <gln-menu-item><em>None</em></gln-menu-item>
+      <gln-menu-item *ngFor="let item of fruits"
+        [value]="item">{{ capitalizeFirstLetter(item) }}
+      </gln-menu-item>
+    </gln-select>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isDisabled.</em>
+      </small>
+    </div>
+    <gln-select [(ngModel)]="model02d"
+      label="Disabled"
+      isDisabled
+      helperText="The parameter is disabled."
+      [exterior]="exterior02a"
+      wdFull>
+      <gln-menu-item><em>None</em></gln-menu-item>
+      <gln-menu-item *ngFor="let item of fruits"
+        [value]="item">{{ capitalizeFirstLetter(item) }}
+      </gln-menu-item>
+    </gln-select>
+  </div>
+
+</div>
+
+<!-- <div class="app-elem">
     <div>
       <small>
         <em>State: empty.</em>
@@ -42,103 +120,11 @@
       isError9
       hoverColor9
       isDisabled9
-      noAnimation
+      noAnimation9
       [visibleSize]="5"
-      [exterior]="exterior02">
+      [exterior]="exterior02a">
       <gln-menu-item><em>None</em></gln-menu-item>
       <gln-menu-item *ngFor="let item of fruits"
-        [value]="item">{{ item }}</gln-menu-item>
-    </gln-select>
-  </div>
-
-  <!-- <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: isRequired, helperText.</em>
-      </small>
-    </div>
-    <gln-select [(ngModel)]="model02b"
-      label="Required field"
-      wdFull
-      isRequired
-      helperText="A value must be entered."
-      [exterior]="exterior02">
-      <gln-menu-item><em>None</em></gln-menu-item>
-      <gln-menu-item *ngFor="let item of fruits"
-        [value]="item">{{ item }}</gln-menu-item>
-    </gln-select>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: isReadOnly.</em>
-      </small>
-    </div>
-    <gln-select [(ngModel)]="model02c"
-      label="Read Only"
-      wdFull
-      isReadOnly
-      helperText="The parameter is read only."
-      [exterior]="exterior02">
-      <gln-menu-item><em>None</em></gln-menu-item>
-      <gln-menu-item *ngFor="let item of fruits"
-        [value]="item">{{ item }}</gln-menu-item>
-    </gln-select>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: isDisabled.</em>
-      </small>
-    </div>
-    <gln-select [(ngModel)]="model02d"
-      label="Disabled"
-      wdFull
-      isDisabled
-      helperText="The parameter is disabled."
-      [exterior]="exterior02">
-      <gln-menu-item><em>None</em></gln-menu-item>
-      <gln-menu-item *ngFor="let item of fruits"
-        [value]="item">{{ item }}</gln-menu-item>
-    </gln-select>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: lbShrink.</em>
-      </small>
-    </div>
-    <gln-select [(ngModel)]="model02e"
-      label="Permanent label"
-      wdFull
-      lbShrink
-      helperText="The position of the label is fixed."
-      [exterior]="exterior02">
-      <gln-menu-item><em>None</em></gln-menu-item>
-      <gln-menu-item *ngFor="let item of fruits"
-        [value]="item">{{ item }}</gln-menu-item>
-    </gln-select>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: noLabel.</em>
-      </small>
-    </div>
-    <gln-select [(ngModel)]="model02f"
-      label="noLabel"
-      noLabel
-      wdFull
-      helperText="The label is not displayed."
-      [exterior]="exterior02">
-      <gln-menu-item><em>None</em></gln-menu-item>
-      <gln-menu-item *ngFor="let item of fruits"
-        [value]="item">{{ item }}</gln-menu-item>
+        [value]="item">{{ capitalizeFirstLetter(item) }}</gln-menu-item>
     </gln-select>
   </div> -->
-
-</div>

@@ -33,7 +33,7 @@ export class GlnHintOrErrorComponent implements OnChanges {
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-hint-or-error', true);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes.isError) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'ghe-error', !!this.isError);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isError ? '' : null);

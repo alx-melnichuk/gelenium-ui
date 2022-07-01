@@ -6,6 +6,7 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  OnInit,
   Output,
   QueryList,
   Renderer2,
@@ -30,7 +31,7 @@ let uniqueIdCounter = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnMenuItemBarComponent implements AfterContentInit {
+export class GlnMenuItemBarComponent implements OnInit, AfterContentInit {
   @Input()
   public id = `glnmib-${uniqueIdCounter++}`;
   @Input()
@@ -53,27 +54,17 @@ export class GlnMenuItemBarComponent implements AfterContentInit {
 
   private itemHeight = 0;
   private indexMarked = -1;
-  private selectedMenuItem: GlnMenuItemComponent | null = null;
 
-  constructor(public hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
+  constructor(public hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
+
+  public ngOnInit(): void {
+    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
   }
 
   public ngAfterContentInit(): void {
     this.itemHeight = this.getMenuItemHeight(this.hostRef.nativeElement.children[0]);
     const visibleCount = this.getCountVisible((this.menuItemList?.toArray() || []).length, this.visibleSize);
     this.settingItemListHeight(this.hostRef, this.itemHeight, visibleCount);
-  }
-
-  @HostListener('document:mouseup', ['$event'])
-  public documentHandling(event: Event): void {
-    const target = event.target as HTMLElement;
-    const selected = this.selectedMenuItem?.hostRef.nativeElement || null;
-    const isSelectedElement = !!selected && (selected === target || selected.contains(target));
-    // If the mouse click is outside the area of the current element, then send an "closing" event.
-    if (!isSelectedElement) {
-      this.closing.emit();
-    }
   }
 
   @HostListener('mouseup', ['$event'])
@@ -85,7 +76,6 @@ export class GlnMenuItemBarComponent implements AfterContentInit {
     if (!menuItem) {
       this.closing.emit();
     } else if (!menuItem.disabled) {
-      this.selectedMenuItem = menuItem;
       this.selected.emit(menuItem);
     }
   }

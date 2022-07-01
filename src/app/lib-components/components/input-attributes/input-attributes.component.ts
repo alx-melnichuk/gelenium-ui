@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {
   LABEL_CSS,
@@ -38,23 +37,33 @@ export class InputAttributesComponent {
 
   public urlFrame = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
 
-  public formGroup02: FormGroup = new FormGroup({
-    input02a: new FormControl('', []),
-    input02b: new FormControl('Hello World', [Validators.required]),
-    input02c: new FormControl('Hello World', []),
-    input02d: new FormControl('Hello World', []),
-    input02e: new FormControl('', []),
-    input02f: new FormControl('Hello World', []),
-    input02g: new FormControl('', []),
-    input02h: new FormControl('', []),
-    input02i: new FormControl('Hello World', []),
-    input02j: new FormControl('', []),
-    input02k: new FormControl('', []),
-    input02l: new FormControl('#000000', []),
-    input02m: new FormControl('', []),
-    input02n: new FormControl('', []),
-  });
-  public exterior02 = 'outlined';
+  public exterior02a = 'outlined';
+
+  public model02a = '';
+  public model02b = 'Hello World';
+  public model02c = 'Hello World';
+  public model02d = 'Hello World';
+
+  public exterior02b = 'outlined';
+
+  public model02e = '';
+  public model02f = '';
+  public model02g = 'Hello World';
+  public model02h = 'Hello World';
+
+  public exterior02c = 'outlined';
+
+  public model02i = '';
+  public model02j = '';
+  public model02k = 'Hello World';
+  public model02l = '';
+
+  public exterior02d = 'outlined';
+
+  public model02m = '';
+  public model02n = '#000000';
+  public model02o = '';
+  public model02p = '';
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

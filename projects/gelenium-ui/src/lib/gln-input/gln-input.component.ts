@@ -10,6 +10,7 @@ import {
   InjectionToken,
   Input,
   OnChanges,
+  OnInit,
   Optional,
   Output,
   PLATFORM_ID,
@@ -58,7 +59,7 @@ export const GLN_INPUT_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_INPUT_CO
     { provide: GLN_NODE_INTERNAL_VALIDATOR, useExisting: GlnInputComponent },
   ],
 })
-export class GlnInputComponent implements OnChanges, ControlValueAccessor, Validator, GlnNodeInternalValidator {
+export class GlnInputComponent implements OnChanges, OnInit, ControlValueAccessor, Validator, GlnNodeInternalValidator {
   @Input()
   public id = `glni-${uniqueIdCounter++}`;
   @Input()
@@ -139,10 +140,9 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-input', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes.type) {
       this.typeVal = GlnInputTypeUtil.create(this.type) || GlnInputType.text;
     }
@@ -160,6 +160,10 @@ export class GlnInputComponent implements OnChanges, ControlValueAccessor, Valid
     if (changes.isRequired || changes.minLength || changes.maxLength) {
       this.prepareFormGroup(this.required, this.minLength, this.maxLength);
     }
+  }
+
+  public ngOnInit(): void {
+    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
   }
 
   // ** ControlValueAccessor - start **

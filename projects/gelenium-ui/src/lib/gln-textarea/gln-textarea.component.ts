@@ -10,6 +10,7 @@ import {
   InjectionToken,
   Input,
   OnChanges,
+  OnInit,
   Optional,
   Output,
   PLATFORM_ID,
@@ -56,7 +57,7 @@ export const GLN_TEXTAREA_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_TEXTA
     { provide: GLN_NODE_INTERNAL_VALIDATOR, useExisting: GlnTextareaComponent },
   ],
 })
-export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Validator, GlnNodeInternalValidator {
+export class GlnTextareaComponent implements OnChanges, OnInit, ControlValueAccessor, Validator, GlnNodeInternalValidator {
   @Input()
   public id = `glnt-${uniqueIdCounter++}`;
   @Input()
@@ -135,10 +136,9 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-textarea', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
@@ -155,6 +155,10 @@ export class GlnTextareaComponent implements OnChanges, ControlValueAccessor, Va
     if (changes.cntRows || changes.minRows || changes.maxRows) {
       this.currentRows = this.cntRows || this.getCurrentRows(this.getNumberLines(this.formControl.value), this.minRows, this.maxRows);
     }
+  }
+
+  public ngOnInit(): void {
+    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
   }
 
   // ** ControlValueAccessor - start **

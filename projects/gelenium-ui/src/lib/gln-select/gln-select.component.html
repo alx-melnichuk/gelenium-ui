@@ -26,7 +26,7 @@
       glnFrameOrnament
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
       [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
-      (click)="open()">
+      (mouseup)="togger()">
 
       <span glnf-orn-lf
         class="glns-ornam-lf">
@@ -73,14 +73,14 @@
 
 <gln-menu-item-bar-show *ngIf="isOpen || hasAnimation"
   tabindex="-1"
-  gmibs-elem
-  class="gmibs-elem"
+  glnmibs-elem
+  class="glnmibs-elem"
   [isFixRight]="getBoolean(isFixRight)"
   [isShow]="isOpen"
+  [isSkipFirstEvent]="true"
   [menuItemList]="menuItemList"
   [noAnimation]="isNoAnimation"
   [visibleSize]="visibleSize"
-  hasAnimation9="changeAnimation($event)"
   (hasAnimation)="hasAnimation=$event"
   (closing)="close()"
   (selected)="selectedMenuElement($event)">

@@ -36,7 +36,7 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
 
   constructor(public hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (this.isInit) {
       if (!this.glnFrameOrnamentAfterContent) {
         this.initialSetting(this.hostRef.nativeElement, this.glnFrameOrnamentPath);
@@ -51,7 +51,7 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
     }
   }
 
-  ngAfterContentInit(): void {
+  public ngAfterContentInit(): void {
     if (this.glnFrameOrnamentAfterContent) {
       this.initialSetting(this.hostRef.nativeElement, this.glnFrameOrnamentPath);
 

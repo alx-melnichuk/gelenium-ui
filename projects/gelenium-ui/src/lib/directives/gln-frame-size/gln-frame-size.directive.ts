@@ -40,7 +40,7 @@ export class GlnFrameSizeDirective implements OnChanges {
 
   constructor(public hostRef: ElementRef<HTMLElement>) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (this.isBeforeInit) {
       this.isBeforeInit = false;
     }

@@ -12,7 +12,7 @@ import { ScrollAfterRoutingUtil } from 'src/app/lib-core/utils/scroll-after-rout
 export class RegexMatchComponent implements AfterViewInit {
   public showNum = '';
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     Promise.resolve().then(() => {
       ScrollAfterRoutingUtil.scrollByFragmentFromPath();
     });

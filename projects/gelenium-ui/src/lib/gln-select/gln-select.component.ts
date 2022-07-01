@@ -12,6 +12,7 @@ import {
   InjectionToken,
   Input,
   OnChanges,
+  OnInit,
   Optional,
   Output,
   PLATFORM_ID,
@@ -62,7 +63,7 @@ export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT
     { provide: GLN_NODE_INTERNAL_VALIDATOR, useExisting: GlnSelectComponent },
   ],
 })
-export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlValueAccessor, Validator {
+export class GlnSelectComponent implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator {
   @Input()
   public id = `glns-${uniqueIdCounter++}`;
   @Input()
@@ -170,10 +171,9 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-select', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
@@ -192,7 +192,11 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
     }
   }
 
-  ngAfterContentInit(): void {
+  public ngOnInit(): void {
+    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
+  }
+
+  public ngAfterContentInit(): void {
     // if (this.multiple) {
     //   for (let i = 0; i < this.menuItems.length; i++) {
     //     this.menuItems[i].setMultiple(true);
@@ -286,7 +290,7 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
   }
 
   public clearSelectedMenuItems(): void {
-    if (!this.selectedItems.isEmpty) {
+    if (!this.disabled && !this.selectedItems.isEmpty) {
       this.selectedItems.clear();
       this.isFilled = !this.selectedItems.isEmpty;
       this.changeDetectorRef.markForCheck();
@@ -295,7 +299,7 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
 
   public selectedMenuElement(addMenuItem: GlnMenuItemComponent | null): void {
     const addMenuItems = addMenuItem !== null ? [addMenuItem] : [];
-    if (addMenuItems.length > 0 && this.selectedItems.updateByElements(!!this.multiple, addMenuItems, this.menuItems)) {
+    if (!this.disabled && addMenuItems.length > 0 && this.selectedItems.updateByElements(!!this.multiple, addMenuItems, this.menuItems)) {
       this.isFilled = !this.selectedItems.isEmpty;
       this.changeDetectorRef.markForCheck();
 
@@ -313,9 +317,7 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
     return this.selectedItems.isEmpty;
   }
 
-  // new
-
-  public doTogger(): void {
+  public togger(): void {
     if (!this.disabled) {
       if (!this.isOpen) {
         this.open();
@@ -324,37 +326,25 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
       }
     }
   }
+
   public open(): void {
-    console.log(`#open() isOpen=${this.isOpen} hasAnimation=${this.hasAnimation}`); // TODO del;
     if (!this.disabled && !this.isOpen && !this.hasAnimation) {
       this.isOpen = true;
-      console.log(`#open() isOpen:=${this.isOpen}`); // TODO del;
       this.opened.emit();
       this.changeDetectorRef.markForCheck();
     }
   }
+
   public close(): void {
-    console.log(`#close() isOpen=${this.isOpen}`); // TODO del;
     if (!this.disabled && this.isOpen) {
       if (!this.isNoAnimation) {
         this.hasAnimation = true;
-        console.log(`#close() hasAnimation:=true`); // TODO del;
       }
       this.isOpen = false;
-      console.log(`#close() isOpen:=${this.isOpen}`); // TODO del;
       this.closed.emit();
       this.changeDetectorRef.markForCheck();
     }
   }
-
-  // public changeAnimation(hasAnimation: boolean): void {
-  //   this.hasAnimation = hasAnimation;
-  //   console.log(`#hasAnimation=${this.hasAnimation}`); // TODO del;
-  //   // if (!this.hasAnimation && !this.isOpen) {
-  //   //   this.close();
-  //   // }
-  //   this.changeDetectorRef.markForCheck();
-  // }
 
   // ** Private API **
 
@@ -376,16 +366,5 @@ export class GlnSelectComponent implements OnChanges, AfterContentInit, ControlV
       this.isFilled = !this.selectedItems.isEmpty;
       this.changeDetectorRef.markForCheck();
     }
-  }
-
-  private equalsBuff(buffA: unknown[], buffB: unknown[]): boolean {
-    let result = false;
-    if (buffA.length > 0 && buffB.length > 0 && buffA.length === buffB.length) {
-      result = true;
-      for (let i = 0; i < buffA.length && result; i++) {
-        result = buffB.indexOf(buffA[i]) > -1;
-      }
-    }
-    return result;
   }
 }

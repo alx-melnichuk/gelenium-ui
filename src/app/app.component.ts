@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.routerEventsSub = ScrollAfterRoutingUtil.listenForRouterEvents(this.router);
   }
 }

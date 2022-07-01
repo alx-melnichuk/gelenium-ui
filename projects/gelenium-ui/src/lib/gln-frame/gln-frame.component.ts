@@ -75,7 +75,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-frame', true);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
@@ -114,7 +114,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     }
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     if (this.hoverFocus == null) {
       this.hoverFocus = this.hoverColor != null ? this.hoverColor : !!this.currConfig?.hoverColor;
       this.settingHoverFocusColor(this.renderer, this.hostRef, this.hoverFocus);

@@ -5,6 +5,7 @@ import {
   ElementRef,
   Input,
   OnChanges,
+  OnInit,
   Renderer2,
   SimpleChanges,
   ViewEncapsulation,
@@ -25,7 +26,7 @@ let uniqueIdCounter = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnMenuItemComponent implements OnChanges {
+export class GlnMenuItemComponent implements OnChanges, OnInit {
   @Input()
   public id = `glnmi-${uniqueIdCounter++}`;
   @Input()
@@ -47,7 +48,6 @@ export class GlnMenuItemComponent implements OnChanges {
     private changeDetectorRef: ChangeDetectorRef,
     private sanitizer: DomSanitizer
   ) {
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'role', 'option');
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', '-1');
     this.setDisable(!!this.disabled);
@@ -59,6 +59,10 @@ export class GlnMenuItemComponent implements OnChanges {
       this.disabled = BooleanUtil.init(this.isDisabled);
       this.setDisable(this.disabled);
     }
+  }
+
+  public ngOnInit(): void {
+    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
   }
 
   // ** Public API **

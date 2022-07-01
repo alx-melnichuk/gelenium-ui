@@ -34,7 +34,7 @@ export class GlnInfiniteScrollComponent implements AfterViewInit, OnInit, OnDest
 
   constructor(private hostRef: ElementRef) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const options = {
       root: this.isHostScrollable() ? this.hostRef.nativeElement : null,
       ...this.options,
@@ -47,17 +47,19 @@ export class GlnInfiniteScrollComponent implements AfterViewInit, OnInit, OnDest
     }, options);
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     if (this.observer !== null && this.anchor !== null) {
       this.observer.observe(this.anchor.nativeElement);
     }
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     if (this.observer !== null) {
       this.observer.disconnect();
     }
   }
+
+  // ** Private API **
 
   private isHostScrollable(): boolean {
     const style = window.getComputedStyle(this.hostRef.nativeElement);

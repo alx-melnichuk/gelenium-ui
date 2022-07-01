@@ -219,7 +219,7 @@ export class AutoFocuseComponent implements OnInit &#123;
     patronymic01a: new FormControl('patronymic', []),
   &#125;);
 
-  ngOnInit(): void &#123;
+  public ngOnInit(): void &#123;
     this.mode1a = this.getPrm(location.href, CN_MODE1A) || this.mode1a;
   &#125;
 
@@ -457,7 +457,7 @@ export class AutoFocuseComponent implements OnInit &#123;
     patronymic01b: new FormControl('patronymic', []),
   &#125;);
 
-  ngOnInit(): void &#123;
+  public ngOnInit(): void &#123;
     this.mode1b = this.getPrm(location.href, CN_MODE1B) || this.mode1b;
   &#125;
 

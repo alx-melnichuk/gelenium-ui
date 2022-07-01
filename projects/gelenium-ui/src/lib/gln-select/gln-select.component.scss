@@ -63,7 +63,6 @@ gln-select {
     color: var(--glns-rhomb-cl);
     display: flex;
     height: 1em;
-    padding: 0 0.75em 0 0.5em; // 0 12px 0 8px
     user-select: none;
     &::after {
       border-left: 5px solid transparent;
@@ -71,12 +70,16 @@ gln-select {
       border-top: 5px solid;
       content: ' ';
       height: 0;
+      margin: 0 0.375em; // 0 6px
       transition: transform 0.3s linear 0ms;
       width: 0;
     }
     &[opn]::after {
       transform: rotate(180deg);
     }
+  }
+  gln-frame:not([ext-s])>div>[glnf-orn-rg]>[glns-rhomb] {
+    padding-right: 0.375em; // 6px
   }
 
   // Element "Frame - glns-elem".
@@ -109,10 +112,12 @@ gln-select {
 
   // Element "gln-menu-item-bar-show"
 
-  &>[gmibs-elem] {
+  &>[glnmibs-elem] {
     border-radius: 0.25em; // 4px
-    z-index: 2;
+    z-index: var(--glnmibs-z-index, 1000);
   }
+
+
 
   // Element "gln-hint-or-error"
 

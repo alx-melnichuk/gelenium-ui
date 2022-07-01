@@ -20,7 +20,7 @@ export class TextareaComponent implements AfterViewInit {
     console.time('TextareaComponent');
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     // eslint-disable-next-line no-restricted-syntax
     console.timeEnd('TextareaComponent');
     Promise.resolve().then(() => {

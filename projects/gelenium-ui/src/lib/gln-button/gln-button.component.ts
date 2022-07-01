@@ -10,6 +10,7 @@ import {
   InjectionToken,
   Input,
   OnChanges,
+  OnInit,
   Optional,
   Output,
   PLATFORM_ID,
@@ -41,7 +42,7 @@ let uniqueIdCounter = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnButtonComponent implements OnChanges, AfterContentInit {
+export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   @Input()
   public id = `glnb-${uniqueIdCounter++}`;
   @Input()
@@ -90,10 +91,9 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
     SchemeUtil.loadingCheck();
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-button', true);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
@@ -107,7 +107,11 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
     }
   }
 
-  ngAfterContentInit(): void {
+  public ngOnInit(): void {
+    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
+  }
+
+  public ngAfterContentInit(): void {
     if (this.linkElement?.templateRef) {
       // Add the required properties for the hyperlink element.
       HtmlElemUtil.setAttr(this.renderer, this.linkElement.templateRef, 'linkClear', '');

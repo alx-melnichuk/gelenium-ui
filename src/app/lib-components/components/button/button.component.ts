@@ -17,7 +17,7 @@ export class ButtonComponent implements AfterViewInit {
     console.time('ButtonComponent');
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     // eslint-disable-next-line no-restricted-syntax
     console.timeEnd('ButtonComponent');
     Promise.resolve().then(() => {

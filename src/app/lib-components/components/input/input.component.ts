@@ -20,7 +20,7 @@ export class InputComponent implements AfterViewInit {
     console.time('InputComponent');
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     // eslint-disable-next-line no-restricted-syntax
     console.timeEnd('InputComponent');
     Promise.resolve().then(() => {

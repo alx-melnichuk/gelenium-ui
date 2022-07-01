@@ -17,7 +17,7 @@ export class SelectComponent implements AfterViewInit {
     console.time('SelectComponent');
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     // eslint-disable-next-line no-restricted-syntax
     console.timeEnd('SelectComponent');
     Promise.resolve().then(() => {

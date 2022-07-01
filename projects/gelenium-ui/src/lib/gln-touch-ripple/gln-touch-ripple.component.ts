@@ -41,13 +41,13 @@ export class GlnTouchRippleComponent implements OnChanges, OnInit {
     this.doRipple(event, this.center);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes.isCenter) {
       this.center = !!BooleanUtil.init(this.isCenter);
     }
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const parentElement = this.hostRef.nativeElement.parentElement;
     if (parentElement != null) {
       const checkRelative = getComputedStyle(parentElement).getPropertyValue('position') === 'relative';
