@@ -1,4 +1,5 @@
-<section mr-vr>
+<section mr-vr
+  *ngIf="false">
   <h3>Attributes</h3>
   <p>The following attributes are supported:</p>
   <ul>
@@ -48,7 +49,7 @@
         </small>
       </div>
       <gln-textarea formControlName="input02a"
-        id="unique_identifier"
+        id="unique_id_text02a"
         label="Enter value"
         [cntRows]="2"
         [exterior]="exterior02">
@@ -100,7 +101,7 @@
       </gln-textarea>
     </div>
 
-    <div class="app-elem">
+    <!-- <div class="app-elem">
       <div>
         <small>
           <em>Attribute: lbShrink.</em>
@@ -128,7 +129,7 @@
         helperText="The label is not displayed."
         [exterior]="exterior02">
       </gln-textarea>
-    </div>
+    </div> -->
 
   </div>
 

@@ -14,11 +14,12 @@
       [isLabelShrink]="getBoolean(lbShrink)"
       [isRequired]="required"
       [label]="label"
+      [noAnimation]="isNoAnimation || isWriteValueInit"
       [noLabel]="getBoolean(noLabel)"
       [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
       #glnFrameSize="glnFrameSize"
       [glnFrameSizeElementRef]="hostRef"
-      [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
+      [glnFrameSizeValue]="currConfig?.frameSizeValue || frameSizeDefault"
       [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
       [glnFrameSizePrepare]="glnFrameExteriorInput"
       [glnFrameSizeModify]="glnFrameExteriorInput.exterior"
@@ -71,7 +72,7 @@
   </div>
 </ng-container>
 
-<gln-menu-item-bar-show *ngIf="isOpen || hasAnimation"
+<gln-menu-item-bar-show *ngIf="isOpen || isBarShowAnimation"
   tabindex="-1"
   glnmibs-elem
   class="glnmibs-elem"
@@ -81,7 +82,7 @@
   [menuItemList]="menuItemList"
   [noAnimation]="isNoAnimation"
   [visibleSize]="visibleSize"
-  (hasAnimation)="hasAnimation=$event"
+  (hasAnimation)="isBarShowAnimation=$event"
   (closing)="close()"
   (selected)="selectedMenuElement($event)">
 

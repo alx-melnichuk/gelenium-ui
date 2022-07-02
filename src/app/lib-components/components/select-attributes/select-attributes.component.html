@@ -39,6 +39,9 @@
       id="unique_id_select02a"
       label="Enter value"
       [exterior]="exterior02a"
+      isValueInit
+      [noAnimation]="initNoAnim02['model02a']"
+      (writeValueInit)="doWriteValueInit($event, 'model02a');"
       wdFull>
       <gln-menu-item><em>None</em></gln-menu-item>
       <gln-menu-item *ngFor="let item of fruits"
@@ -58,6 +61,9 @@
       isRequired
       helperText="A value must be entered."
       [exterior]="exterior02a"
+      isValueInit
+      [noAnimation]="initNoAnim02['model02b']"
+      (writeValueInit)="doWriteValueInit($event, 'model02b');"
       wdFull>
       <gln-menu-item><em>None</em></gln-menu-item>
       <gln-menu-item *ngFor="let item of fruits"
@@ -77,6 +83,9 @@
       noLabel
       helperText="The label is not displayed."
       [exterior]="exterior02a"
+      isValueInit
+      [noAnimation]="initNoAnim02['model02c']"
+      (writeValueInit)="doWriteValueInit($event, 'model02c');"
       wdFull>
       <gln-menu-item><em>None</em></gln-menu-item>
       <gln-menu-item *ngFor="let item of fruits"
@@ -85,7 +94,7 @@
     </gln-select>
   </div>
 
-  <div class="app-elem">
+  <!-- <div class="app-elem">
     <div>
       <small>
         <em>Attribute: isDisabled.</em>
@@ -96,6 +105,29 @@
       isDisabled
       helperText="The parameter is disabled."
       [exterior]="exterior02a"
+      wdFull>
+      <gln-menu-item><em>None</em></gln-menu-item>
+      <gln-menu-item *ngFor="let item of fruits"
+        [value]="item">{{ capitalizeFirstLetter(item) }}
+      </gln-menu-item>
+    </gln-select>
+  </div> -->
+
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: isRequired, helperText.</em>
+      </small>
+    </div>
+    <gln-select [(ngModel)]="model02r"
+      label="Required field"
+      isRequired
+      helperText="A value must be entered."
+      [exterior]="exterior02a"
+      isValueInit
+      [noAnimation]="initNoAnim02['model02r']"
+      (writeValueInit)="doWriteValueInit($event, 'model02r');"
       wdFull>
       <gln-menu-item><em>None</em></gln-menu-item>
       <gln-menu-item *ngFor="let item of fruits"
@@ -114,7 +146,6 @@
     </div>
     <gln-select [(ngModel)]="model02a"
       label="Cool fruit"
-      id="unique_id_select02a"
       wdFull
       isFixRight9
       isError9

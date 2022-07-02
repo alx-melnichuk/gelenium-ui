@@ -12,7 +12,7 @@ import { UrlComponents } from '../../../lm-components/constants/url-components.c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaComponent implements AfterViewInit {
-  public showNum = '';
+  public showNum = '02';
   public urlFrame = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
 
   constructor() {

@@ -1,4 +1,5 @@
-<section mr-vr>
+<section mr-vr
+  *ngIf="false">
   <h3>Attributes</h3>
   <p>The following attributes are supported:</p>
   <ul>
@@ -82,64 +83,70 @@
   </mat-button-toggle-group>
 </section>
 
-<div class="app-group">
+<form [formGroup]="formGroup02a"
+  novalidate
+  autocomplete="off">
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>State: empty.</em>
-      </small>
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>State: empty.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02a"
+        id="unique_id_input02a"
+        label="Enter value"
+        [exterior]="exterior02a">
+      </gln-input>
     </div>
-    <gln-input [(ngModel)]="model02a"
-      id="unique_id_input02a"
-      label="Enter value"
-      [exterior]="exterior02a">
-    </gln-input>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: isRequired, helperText.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02b"
+        label="Required field"
+        isRequired
+        helperText="A value must be entered."
+        [exterior]="exterior02a">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: noLabel.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02c"
+        label="noLabel"
+        noLabel
+        helperText="The label is not displayed."
+        [exterior]="exterior02a">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isDisabled.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior02a">
+      </gln-input>
+    </div>
+
   </div>
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: isRequired, helperText.</em>
-      </small>
-    </div>
-    <gln-input [(ngModel)]="model02b"
-      label="Required field"
-      isRequired
-      helperText="A value must be entered."
-      [exterior]="exterior02a">
-    </gln-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: noLabel.</em>
-      </small>
-    </div>
-    <gln-input [(ngModel)]="model02c"
-      label="noLabel"
-      noLabel
-      helperText="The label is not displayed."
-      [exterior]="exterior02a">
-    </gln-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: isDisabled.</em>
-      </small>
-    </div>
-    <gln-input [(ngModel)]="model02d"
-      label="Disabled"
-      isDisabled
-      helperText="The parameter is disabled."
-      [exterior]="exterior02a">
-    </gln-input>
-  </div>
-
-</div>
+</form>
 
 <section mr-vr>
   <mat-accordion>
@@ -159,7 +166,7 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-input [(ngModel)]="model02a"
-      id="unique_id_model02a"
+      id="unique_id_input02a"
       label="Enter value"
       [exterior]="exterior02a"&gt;
     &lt;/gln-input&gt;
@@ -269,7 +276,10 @@ export class InputComponent &#123;
       label="Permanent label"
       lbShrink
       helperText="The position of the label is fixed."
-      [exterior]="exterior02b">
+      [exterior]="exterior02b"
+      isValueInit
+      [noAnimation]="initNoAnim02['model02e']"
+      (writeValueInit)="doWriteValueInit($event, 'model02e');">
     </gln-input>
   </div>
 
@@ -287,7 +297,10 @@ export class InputComponent &#123;
       [helperText]="ctrl02f.value
       ? 'The field is filled.'
       : 'The field is not filled.'"
-      [exterior]="exterior02b">
+      [exterior]="exterior02b"
+      isValueInit
+      [noAnimation]="initNoAnim02['model02f']"
+      (writeValueInit)="doWriteValueInit($event, 'model02f');">
     </gln-input>
   </div>
 
@@ -301,7 +314,10 @@ export class InputComponent &#123;
       label="Parameter value"
       hoverColor
       helperText="On hover, a frame with the focus color."
-      [exterior]="exterior02b">
+      [exterior]="exterior02b"
+      isValueInit
+      [noAnimation]="initNoAnim02['model02g']"
+      (writeValueInit)="doWriteValueInit($event, 'model02g');">
     </gln-input>
   </div>
 
@@ -315,7 +331,10 @@ export class InputComponent &#123;
       label="Read Only"
       isReadOnly
       helperText="The parameter is read only."
-      [exterior]="exterior02b">
+      [exterior]="exterior02b"
+      isValueInit
+      [noAnimation]="initNoAnim02['model02h']"
+      (writeValueInit)="doWriteValueInit($event, 'model02h');">
     </gln-input>
   </div>
 
@@ -443,7 +462,8 @@ export class InputComponent &#123;
   </mat-button-toggle-group>
 </section>
 
-<div class="app-group">
+<div class="app-group"
+  *ngIf="false">
 
   <div class="app-elem">
     <div>
@@ -647,7 +667,8 @@ export class InputComponent &#123;
   </mat-button-toggle-group>
 </section>
 
-<div class="app-group">
+<div class="app-group"
+  *ngIf="false">
 
   <div class="app-elem">
     <div>

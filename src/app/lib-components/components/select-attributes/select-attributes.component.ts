@@ -45,10 +45,30 @@ export class SelectAttributesComponent {
   public model02e = null;
   public model02f = this.fruits[1];
 
+  public model02r = this.fruits[1];
+
+  public initNoAnim02: { [key: string]: boolean } = {
+    model02a: true,
+    model02b: true,
+    model02c: true,
+    model02d: true,
+    model02e: true,
+    model02f: true,
+    model02r: true,
+  };
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
   public capitalizeFirstLetter(value: string): string {
     return value ? value[0].toUpperCase() + value.slice(1) : '';
+  }
+
+  public doWriteValueInit(markForCheck: () => void, name: string): void {
+    setTimeout(() => {
+      this.initNoAnim02[name] = false;
+      if (markForCheck) {
+        markForCheck();
+      }
+    }, 0);
   }
 }

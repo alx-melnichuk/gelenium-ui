@@ -48,6 +48,8 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
   public label = '';
   @Input()
+  public noAnimation: boolean | null = null;
+  @Input()
   public noLabel: boolean | null = null;
 
   public get isOutlinedExterior(): boolean {
@@ -90,6 +92,11 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     if (changes.isLabelShrink || (changes.config && this.isLabelShrink == null)) {
       this.labelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig?.isLabelShrink;
       this.settingLabelShrink(this.renderer, this.hostRef, this.labelShrink);
+    }
+    if (changes.noAnimation) {
+      console.log(`OnChanges() noAnimation=${this.noAnimation == null ? 'null' : this.noAnimation}`); // TODO del;
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-animation', this.noAnimation || false);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noAnm', this.noAnimation ? '' : null);
     }
     if (changes.noLabel || (changes.config && this.noLabel == null)) {
       this.hideLabel = this.noLabel != null ? this.noLabel : !!this.currConfig?.noLabel;

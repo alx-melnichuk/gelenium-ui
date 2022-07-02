@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -34,6 +35,7 @@ import {
 } from '@angular/forms';
 
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
+import { GlnBasisFrame } from '../gln-frame/gln-basis-frame.class';
 import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
@@ -57,9 +59,12 @@ export const GLN_TEXTAREA_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_TEXTA
     { provide: GLN_NODE_INTERNAL_VALIDATOR, useExisting: GlnTextareaComponent },
   ],
 })
-export class GlnTextareaComponent implements OnChanges, OnInit, ControlValueAccessor, Validator, GlnNodeInternalValidator {
-  @Input()
-  public id = `glnt-${uniqueIdCounter++}`;
+export class GlnTextareaComponent
+  extends GlnBasisFrame
+  implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
+{
+  // @Input()
+  // #public id = `glnt-${uniqueIdCounter++}`;
   @Input()
   public autoComplete = '';
   @Input()
@@ -76,8 +81,8 @@ export class GlnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
   public helperText: string | null = null;
   @Input()
   public hoverColor: string | null = null;
-  @Input()
-  public isDisabled: string | null = null;
+  // @Input()
+  // #public isDisabled: string | null = null;
   @Input()
   public isError: string | null = null;
   @Input()
@@ -88,6 +93,8 @@ export class GlnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
   public label = '';
   @Input()
   public lbShrink: string | null = null;
+  // @Input()
+  // #public noAnimation: string | boolean | null = null;
   @Input()
   public maxLength: number | null = null;
   @Input()
@@ -113,25 +120,26 @@ export class GlnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
   @ViewChild('textareaElement')
   public textareaElementRef: ElementRef | null = null;
 
-  public defaultFrameSize = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public currConfig: GlnFrameConfig | null = null;
-  public disabled: boolean | null = null; // Binding attribute "isDisabled".
-  public required: boolean | null = null; // Binding attribute "isRequired".
+  public currentRows = 1;
+  // #public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
+  public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public isFocused = false;
   public isFilled = false;
-
-  public currentRows = 1;
+  // #public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation".
+  public required: boolean | null = null; // Binding attribute "isRequired".
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: Object,
-    private changeDetectorRef: ChangeDetectorRef,
+    changeDetectorRef: ChangeDetectorRef,
     @Optional() @Inject(GLN_TEXTAREA_CONFIG) private rootConfig: GlnFrameConfig | null,
-    public hostRef: ElementRef<HTMLElement>,
-    private renderer: Renderer2
+    hostRef: ElementRef<HTMLElement>,
+    renderer: Renderer2
   ) {
+    super(uniqueIdCounter++, 'glnt', hostRef, renderer, changeDetectorRef);
     SchemeUtil.loadingCheck();
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-textarea', true);
@@ -139,12 +147,9 @@ export class GlnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
+    super.ngOnChanges(changes);
     if (changes.config) {
       this.currConfig = { ...this.rootConfig, ...this.config };
-    }
-    if (changes.isDisabled) {
-      this.disabled = BooleanUtil.init(this.isDisabled);
-      this.setDisabledState(!!this.disabled);
     }
     if (changes.isRequired) {
       this.required = BooleanUtil.init(this.isRequired);
@@ -158,17 +163,19 @@ export class GlnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
   }
 
   public ngOnInit(): void {
-    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
+    super.ngOnInit();
+  }
+
+  ngAfterContentInit(): void {
+    super.ngAfterContentInit();
   }
 
   // ** ControlValueAccessor - start **
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public onChange: (val: string) => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public onTouched: () => void = () => {};
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public writeValue(value: any): void {
+    console.log(`writeValue(${this.id}) value=${value == null ? 'null' : value}`); // TODO del;
+
     const isFilledOld = !!this.formControl.value;
     const cntLinesOld = this.getNumberLines(this.formControl.value);
     this.formControl.setValue(value, { emitEvent: false });
@@ -180,14 +187,7 @@ export class GlnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
     if (isFilledOld !== this.isFilled || cntLinesOld != cntLines) {
       this.changeDetectorRef.markForCheck();
     }
-  }
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-  public registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-  public registerOnTouched(fn: any): void {
-    this.onTouched = fn;
+    super.writeValue(value);
   }
 
   public setDisabledState(isDisabled: boolean): void {
@@ -197,8 +197,7 @@ export class GlnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
       } else {
         this.formGroup.enable();
       }
-      this.disabled = isDisabled;
-      this.changeDetectorRef.markForCheck();
+      super.setDisabledState(isDisabled);
     }
   }
 
@@ -258,10 +257,6 @@ export class GlnTextareaComponent implements OnChanges, OnInit, ControlValueAcce
     if (!!event && !event.cancelBubble) {
       this.currentRows = this.cntRows || this.getCurrentRows(this.getNumberLines(this.formControl.value), this.minRows, this.maxRows);
     }
-  }
-
-  public getBoolean(value: string | null): boolean | null {
-    return BooleanUtil.init(value);
   }
 
   // ** Private API **

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {
   LABEL_CSS,
@@ -39,15 +40,21 @@ export class InputAttributesComponent {
 
   public exterior02a = 'outlined';
 
-  public model02a = '';
-  public model02b = 'Hello World';
-  public model02c = 'Hello World';
-  public model02d = 'Hello World';
+  public formGroup02a: FormGroup = new FormGroup({
+    model02a: new FormControl(null, []),
+    model02b: new FormControl('Hello World', [Validators.required]),
+    model02c: new FormControl('Hello World', []),
+    model02d: new FormControl('Hello World', []),
+  });
+  // public model02a = null;
+  // public model02b = 'Hello World';
+  // public model02c = 'Hello World';
+  // public model02d = 'Hello World';
 
   public exterior02b = 'outlined';
 
   public model02e = '';
-  public model02f = '';
+  public model02f = 'Hello World'; // TODO temp; '';
   public model02g = 'Hello World';
   public model02h = 'Hello World';
 
@@ -65,6 +72,26 @@ export class InputAttributesComponent {
   public model02o = '';
   public model02p = '';
 
+  public initNoAnim02: { [key: string]: boolean } = {
+    model02a: true,
+    model02b: true,
+    model02c: true,
+    model02d: true,
+    model02e: true,
+    model02f: true,
+    model02g: true,
+    model02h: true,
+  };
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
+
+  public doWriteValueInit(markForCheck: () => void, name: string): void {
+    setTimeout(() => {
+      this.initNoAnim02[name] = false;
+      if (markForCheck) {
+        markForCheck();
+      }
+    }, 0);
+  }
 }

@@ -32,9 +32,10 @@ import {
   ValidationErrors,
   Validator,
 } from '@angular/forms';
-import { GlnFrameSizePaddingVerHorRes } from '../directives/gln-frame-size/gln-frame-size-prepare.interface';
 
+import { GlnFrameSizePaddingVerHorRes } from '../directives/gln-frame-size/gln-frame-size-prepare.interface';
 import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
+import { GlnBasisFrame } from '../gln-frame/gln-basis-frame.class';
 import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { GlnMenuItemComponent } from '../gln-menu-item/gln-menu-item.component';
@@ -63,9 +64,8 @@ export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT
     { provide: GLN_NODE_INTERNAL_VALIDATOR, useExisting: GlnSelectComponent },
   ],
 })
-export class GlnSelectComponent implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator {
-  @Input()
-  public id = `glns-${uniqueIdCounter++}`;
+export class GlnSelectComponent extends GlnBasisFrame implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator {
+  // @Input() // #public id = `glns-${uniqueIdCounter++}`;
   @Input()
   public config: GlnSelectConfig | null = null;
   @Input()
@@ -76,8 +76,7 @@ export class GlnSelectComponent implements OnChanges, OnInit, AfterContentInit, 
   public helperText: string | null = null;
   @Input()
   public hoverColor: string | null = null;
-  @Input()
-  public isDisabled: string | null = null;
+  // @Input() // #public isDisabled: string | null = null;
   @Input()
   public isError: string | null = null;
   @Input()
@@ -88,12 +87,13 @@ export class GlnSelectComponent implements OnChanges, OnInit, AfterContentInit, 
   public isReadOnly: string | null = null;
   @Input()
   public isRequired: string | null = null;
+  // @Input() // #public isValueInit: string | null = null;
   @Input()
   public label = '';
   @Input()
   public lbShrink: string | null = null;
-  @Input()
-  public noAnimation: string | null = null;
+  // @Input()
+  // #public noAnimation: string | boolean | null = null;
   @Input()
   public noIcon: string | null = null;
   @Input()
@@ -129,6 +129,7 @@ export class GlnSelectComponent implements OnChanges, OnInit, AfterContentInit, 
   readonly closed: EventEmitter<void> = new EventEmitter();
   @Output()
   readonly selected: EventEmitter<{ value: unknown | null; values: unknown[] }> = new EventEmitter();
+  // @Output() // readonly writeValueInit: EventEmitter<() => void> = new EventEmitter();
 
   @ViewChild('mainElementRef', { static: true })
   public mainElementRef: ElementRef<HTMLElement> | null = null;
@@ -142,31 +143,32 @@ export class GlnSelectComponent implements OnChanges, OnInit, AfterContentInit, 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set menuItems(value: GlnMenuItemComponent[]) {}
 
-  public defaultFrameSize = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public currConfig: GlnFrameConfig | null = null;
-  public disabled: boolean | null = null; // Binding attribute "isDisabled".
-  public required: boolean | null = null; // Binding attribute "isRequired".
+  // #public disabled: boolean | null = null; // Binding attribute "isDisabled".
+  public errors: ValidationErrors | null = null;
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
+  public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
+  public isBarShowAnimation = false;
   public isFocused = false;
   public isFilled = false;
-  public errors: ValidationErrors | null = null;
-  public multiple: boolean | null = null;
-
+  // #public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation".
   public isOpen = false;
-  public isNoAnimation: boolean | null = null;
-  public hasAnimation = false;
-
+  // #public isWriteValueInit: boolean | null = null;
+  public multiple: boolean | null = null; // Binding attribute "isMultiple".
+  public required: boolean | null = null; // Binding attribute "isRequired".
   public selectedItems: GlnSelectedMenuItems = new GlnSelectedMenuItems();
+  // #public valueInit: boolean | null = null; // Binding attribute "isValueInit".
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: Object,
-    private changeDetectorRef: ChangeDetectorRef,
+    changeDetectorRef: ChangeDetectorRef,
     @Optional() @Inject(GLN_SELECT_CONFIG) private rootConfig: GlnSelectConfig | null,
-    public hostRef: ElementRef<HTMLElement>,
-    private renderer: Renderer2
+    hostRef: ElementRef<HTMLElement>,
+    renderer: Renderer2
   ) {
+    super(uniqueIdCounter++, 'glns', hostRef, renderer, changeDetectorRef);
     SchemeUtil.loadingCheck();
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-select', true);
@@ -174,12 +176,9 @@ export class GlnSelectComponent implements OnChanges, OnInit, AfterContentInit, 
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
+    super.ngOnChanges(changes);
     if (changes.config) {
       this.currConfig = { ...this.rootConfig, ...this.config };
-    }
-    if (changes.isDisabled) {
-      this.disabled = BooleanUtil.init(this.isDisabled);
-      this.setDisabledState(!!this.disabled);
     }
     if (changes.isMultiple) {
       this.multiple = BooleanUtil.init(this.isMultiple);
@@ -187,16 +186,15 @@ export class GlnSelectComponent implements OnChanges, OnInit, AfterContentInit, 
     if (changes.isRequired) {
       this.required = BooleanUtil.init(this.isRequired);
     }
-    if (changes.noAnimation) {
-      this.isNoAnimation = BooleanUtil.init(this.noAnimation);
-    }
   }
 
   public ngOnInit(): void {
-    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
+    super.ngOnInit();
   }
 
   public ngAfterContentInit(): void {
+    // console.log(`AfterContentInit(${this.id});  menuItems.length=${this.menuItems.length}`); // TODO del;
+
     // if (this.multiple) {
     //   for (let i = 0; i < this.menuItems.length; i++) {
     //     this.menuItems[i].setMultiple(true);
@@ -206,25 +204,18 @@ export class GlnSelectComponent implements OnChanges, OnInit, AfterContentInit, 
     if (this.valueData != null && this.selectedItems.isEmpty) {
       this.setSelectedMenuItemsByValue(!!this.multiple, this.valueData, this.menuItems);
     }
+    super.ngAfterContentInit();
   }
 
   // ** ControlValueAccessor - start **
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public onChange: (val: unknown) => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public onTouched: () => void = () => {};
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public writeValue(value: any): void {
+    console.log(`writeValue(${this.id}) value=${value == null ? 'null' : value}`);
+
     this.value = value;
-  }
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-  public registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-  public registerOnTouched(fn: any): void {
-    this.onTouched = fn;
+
+    super.writeValue(value);
   }
 
   public setDisabledState(isDisabled: boolean): void {
@@ -234,8 +225,7 @@ export class GlnSelectComponent implements OnChanges, OnInit, AfterContentInit, 
       } else {
         this.formGroup.enable();
       }
-      this.disabled = isDisabled;
-      this.changeDetectorRef.markForCheck();
+      super.setDisabledState(isDisabled);
     }
   }
 
@@ -252,19 +242,6 @@ export class GlnSelectComponent implements OnChanges, OnInit, AfterContentInit, 
   // ** Validator - finish **
 
   // ** Public API **
-
-  public getBoolean(value: string | null): boolean | null {
-    return BooleanUtil.init(value);
-  }
-
-  public trackByMenuItem(index: number, item: GlnMenuItemComponent): string {
-    return item.id;
-  }
-
-  // Determine the value of the css variable "frame size".
-  public frameChange(event: GlnFrameSizePaddingVerHorRes): void {
-    HtmlElemUtil.setProperty(this.hostRef, '--glns-size', NumberUtil.str(event.frameSizeValue)?.concat('px') || null);
-  }
 
   public focus(): void {
     if (!this.disabled && isPlatformBrowser(this.platformId) && !!this.mainElementRef) {
@@ -287,6 +264,15 @@ export class GlnSelectComponent implements OnChanges, OnInit, AfterContentInit, 
       this.onTouched();
       this.blured.emit();
     }
+  }
+
+  public trackByMenuItem(index: number, item: GlnMenuItemComponent): string {
+    return item.id;
+  }
+
+  // Determine the value of the css variable "frame size".
+  public frameChange(event: GlnFrameSizePaddingVerHorRes): void {
+    HtmlElemUtil.setProperty(this.hostRef, '--glns-size', NumberUtil.str(event.frameSizeValue)?.concat('px') || null);
   }
 
   public clearSelectedMenuItems(): void {
@@ -328,7 +314,7 @@ export class GlnSelectComponent implements OnChanges, OnInit, AfterContentInit, 
   }
 
   public open(): void {
-    if (!this.disabled && !this.isOpen && !this.hasAnimation) {
+    if (!this.disabled && !this.isOpen && !this.isBarShowAnimation) {
       this.isOpen = true;
       this.opened.emit();
       this.changeDetectorRef.markForCheck();
@@ -338,7 +324,7 @@ export class GlnSelectComponent implements OnChanges, OnInit, AfterContentInit, 
   public close(): void {
     if (!this.disabled && this.isOpen) {
       if (!this.isNoAnimation) {
-        this.hasAnimation = true;
+        this.isBarShowAnimation = true;
       }
       this.isOpen = false;
       this.closed.emit();
