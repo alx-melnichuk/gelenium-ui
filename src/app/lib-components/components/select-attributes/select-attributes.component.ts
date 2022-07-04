@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {
   LABEL_CSS,
@@ -8,7 +9,7 @@ import {
   LABEL_STANDARD,
   LABEL_TS,
   LABEL_UNDERLINE,
-} from 'src/app/lib-core/constants/constants';
+} from '../../../lib-core/constants/constants';
 
 @Component({
   selector: 'app-select-attributes',
@@ -36,39 +37,26 @@ export class SelectAttributesComponent {
   public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
 
   public exterior02a = 'outlined';
+  public formGroup02a: FormGroup = new FormGroup({
+    model02a: new FormControl(null, []),
+    model02b: new FormControl(this.fruits[1], [Validators.required]),
+    model02c: new FormControl(this.fruits[1], []),
+    model02d: new FormControl(this.fruits[1], []),
+  });
 
-  public model02a = null;
-  public model02b = this.fruits[1];
-  public model02c = this.fruits[1];
-  public model02d = this.fruits[1];
-
-  public model02e = null;
-  public model02f = this.fruits[1];
-
-  public model02r = this.fruits[1];
-
-  public initNoAnim02: { [key: string]: boolean } = {
-    model02a: true,
-    model02b: true,
-    model02c: true,
-    model02d: true,
-    model02e: true,
-    model02f: true,
-    model02r: true,
+  public exterior02b = 'outlined';
+  public control02b = {
+    model02e: new FormControl(null, []),
+    model02f: new FormControl(null, [Validators.required]),
+    model02g: new FormControl(this.fruits[1], []),
+    model02h: new FormControl(this.fruits[1], []),
   };
+  public formGroup02b: FormGroup = new FormGroup(this.control02b);
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
   public capitalizeFirstLetter(value: string): string {
     return value ? value[0].toUpperCase() + value.slice(1) : '';
-  }
-
-  public doWriteValueInit(markForCheck: () => void, name: string): void {
-    setTimeout(() => {
-      this.initNoAnim02[name] = false;
-      if (markForCheck) {
-        markForCheck();
-      }
-    }, 0);
   }
 }

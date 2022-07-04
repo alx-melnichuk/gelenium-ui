@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SiteMenu, SiteUrl } from 'src/app/lib-core/constants/site-menu';
-import { UrlComponents } from 'src/app/lm-components/constants/url-components.constants';
-
-import { ButtonComponent } from './button.component';
+import { SiteMenu, SiteUrl } from '../../../lib-core/constants/site-menu';
+import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 import { ButtonBasicModule } from '../button-basic/button-basic.module';
 import { ButtonAttributesModule } from '../button-attributes/button-attributes.module';
@@ -16,6 +14,8 @@ import { ButtonPalette2Module } from '../button-palette2/button-palette2.module'
 import { ButtonPalette3Module } from '../button-palette3/button-palette3.module';
 import { ButtonConfigModule } from '../button-config/button-config.module';
 import { ButtonApiModule } from '../button-api/button-api.module';
+
+import { ButtonComponent } from './button.component';
 
 UrlComponents.add('URL_BUTTON', 'button');
 

@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScrollAfterRoutingUtil } from 'src/app/lib-core/utils/scroll-after-routing.util';
+import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
 
 @Component({
   selector: 'app-regex-remove',

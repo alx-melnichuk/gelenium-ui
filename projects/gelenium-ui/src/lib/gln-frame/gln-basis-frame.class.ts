@@ -63,13 +63,11 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
 
   public ngOnInit(): void {
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
-    // console.log(`OnInit(${this.id}); menuItems.length=${this.menuItemList == null ? 'null' : this.menuItemList.length}`); // TODO del;
   }
 
   public ngAfterContentInit(): void {
     // If 'IsValueInit' is specified and 'FormControlName' is not used, then enable the event on the second call to the 'WriteValue'.
     this.isWriteValueInit = this.valueInit && !this.hostRef.nativeElement.hasAttribute('formcontrolname');
-    console.log(`${this.prefix}  AfterContentInit(${this.id});  isWriteValueInit=${this.isWriteValueInit}`); // TODO del;
   }
 
   // ** ControlValueAccessor - start **
@@ -78,18 +76,17 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
   public onChange: (val: unknown) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public onTouched: () => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
   public writeValue(value: any): void {
-    console.log(`${this.prefix} writeValue(${this.id}) value=${value == null ? 'null' : value}`);
-
     if (this.isWriteValueInit) {
       this.isWriteValueInit = null;
-      console.log(`           ${this.id}  isWriteValueInit=null`); // TODO del;
       this.changeDetectorRef.markForCheck();
-      Promise.resolve().then(() => {
-        console.log(`           ${this.id}  writeValueInit.emit()`); // TODO del;
-        this.writeValueInit.emit(this.markForCheck);
-      });
+      // ValueAccessor.writeValue is being called twice, first time with a phantom null value
+      // https://github.com/angular/angular/issues/14988
+      setTimeout(() => {
+        this.writeValueInit.emit();
+        this.changeDetectorRef.markForCheck();
+      }, 0);
     }
   }
 
@@ -111,10 +108,9 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
 
   // ** Public API **
 
-  public markForCheck = (): void => {
-    console.log(`${this.prefix}      ${this.id} markForCheck()`);
+  public markForCheck(): void {
     this.changeDetectorRef.markForCheck();
-  };
+  }
 
   public getBoolean(value: string | null): boolean | null {
     return BooleanUtil.init(value);

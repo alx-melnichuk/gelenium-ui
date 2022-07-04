@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SiteMenu, SiteUrl } from 'src/app/lib-core/constants/site-menu';
-import { UrlComponents } from 'src/app/lm-components/constants/url-components.constants';
+import { SiteMenu, SiteUrl } from '../../../lib-core/constants/site-menu';
+import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 import { TextareaBasicModule } from '../textarea-basic/textarea-basic.module';
 import { TextareaAttributesModule } from '../textarea-attributes/textarea-attributes.module';

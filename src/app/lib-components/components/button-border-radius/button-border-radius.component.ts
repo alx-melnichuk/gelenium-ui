@@ -11,7 +11,7 @@ import {
   LABEL_HTML,
   LABEL_SHOW_SOURCE,
   LABEL_TS,
-} from 'src/app/lib-core/constants/constants';
+} from '../../../lib-core/constants/constants';
 
 @Component({
   selector: 'app-button-border-radius',

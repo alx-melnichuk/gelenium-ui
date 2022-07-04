@@ -24,7 +24,9 @@ export class ScrollAfterRoutingUtil {
   public static scrollByFragmentFromPath(): void {
     const pathHash = location.hash;
     if (pathHash && pathHash[0] === '#') {
-      const fragment = pathHash.substring(1);
+      const idx = pathHash.indexOf('?');
+      const idxEnd = idx > -1 ? idx : pathHash.length;
+      const fragment = pathHash.substring(1, idxEnd);
       document.getElementById(fragment)?.scrollIntoView();
     }
   }

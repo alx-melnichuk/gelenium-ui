@@ -1,4 +1,4 @@
-import { Url } from 'src/app/lib-core/constants/url';
+import { Url } from '../../lib-core/constants/url';
 
 export class UrlComponents extends Url {}
 

@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 
-import { UrlComponents } from 'src/app/lm-components/constants/url-components.constants';
+import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 @Component({
   selector: 'app-button-api',

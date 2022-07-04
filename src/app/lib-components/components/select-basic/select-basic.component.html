@@ -12,72 +12,87 @@
   </ul>
 </section>
 
-<div class="app-group">
+<form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
 
-  <div class="app-elem">
-    <div mb0>
-      <small><em>Outlined</em></small>
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div mb0>
+        <small><em>Outlined</em></small>
+      </div>
+      <div>
+        <small>
+          <em>
+            Model: {{ control01.model01a.value === null
+            ? 'null' : control01.model01a.value }}
+          </em>
+        </small>
+      </div>
+      <gln-select formControlName="model01a"
+        label="Enter value"
+        exterior="outlined"
+        wdFull>
+        <gln-menu-item><em>None</em></gln-menu-item>
+        <gln-menu-item value="mango">Mango</gln-menu-item>
+        <gln-menu-item value="lemon">Lemon</gln-menu-item>
+        <gln-menu-item value="orange">Orange</gln-menu-item>
+        <gln-menu-item value="kiwi">Kiwi</gln-menu-item>
+      </gln-select>
     </div>
-    <div>
-      <small>
-        <em>Model: {{ model01a === null ? 'null' : model01a }}</em>
-      </small>
+
+    <div class="app-elem">
+      <div mb0>
+        <small><em>Underline</em></small>
+      </div>
+      <div>
+        <small>
+          <em>
+            Model: {{ control01.model01b.value !== null
+            ? control01.model01b.value : 'null' }}
+          </em>
+        </small>
+      </div>
+      <gln-select formControlName="model01b"
+        label="Enter value"
+        exterior="underline"
+        wdFull>
+        <gln-menu-item><em>None</em></gln-menu-item>
+        <gln-menu-item value="mango">Mango</gln-menu-item>
+        <gln-menu-item value="lemon">Lemon</gln-menu-item>
+        <gln-menu-item value="orange">Orange</gln-menu-item>
+        <gln-menu-item value="kiwi">Kiwi</gln-menu-item>
+      </gln-select>
     </div>
-    <gln-select [(ngModel)]="model01a"
-      label="Enter value"
-      exterior="outlined"
-      wdFull>
-      <gln-menu-item><em>None</em></gln-menu-item>
-      <gln-menu-item value="mango">Mango</gln-menu-item>
-      <gln-menu-item value="lemon">Lemon</gln-menu-item>
-      <gln-menu-item value="orange">Orange</gln-menu-item>
-      <gln-menu-item value="kiwi">Kiwi</gln-menu-item>
-    </gln-select>
+
+    <div class="app-elem">
+      <div mb0>
+        <small><em>Standard</em></small>
+      </div>
+      <div>
+        <small>
+          <em>
+            Model: {{ control01.model01c.value !== null
+            ? control01.model01c.value : 'null' }}
+          </em>
+        </small>
+      </div>
+      <gln-select formControlName="model01c"
+        label="Enter value"
+        exterior="standard"
+        wdFull>
+        <gln-menu-item><em>None</em></gln-menu-item>
+        <gln-menu-item value="mango">Mango</gln-menu-item>
+        <gln-menu-item value="lemon">Lemon</gln-menu-item>
+        <gln-menu-item value="orange">Orange</gln-menu-item>
+        <gln-menu-item value="kiwi">Kiwi</gln-menu-item>
+      </gln-select>
+    </div>
+
   </div>
 
-  <div class="app-elem">
-    <div mb0>
-      <small><em>Underline</em></small>
-    </div>
-    <div>
-      <small>
-        <em>Model: {{ model01b !== null ? model01b : 'null' }}</em>
-      </small>
-    </div>
-    <gln-select [(ngModel)]="model01b"
-      label="Enter value"
-      exterior="underline"
-      wdFull>
-      <gln-menu-item><em>None</em></gln-menu-item>
-      <gln-menu-item value="mango">Mango</gln-menu-item>
-      <gln-menu-item value="lemon">Lemon</gln-menu-item>
-      <gln-menu-item value="orange">Orange</gln-menu-item>
-      <gln-menu-item value="kiwi">Kiwi</gln-menu-item>
-    </gln-select>
-  </div>
-
-  <div class="app-elem">
-    <div mb0>
-      <small><em>Standard</em></small>
-    </div>
-    <div>
-      <small>
-        <em>Model: {{ model01c !== null ? model01c : 'null' }}</em>
-      </small>
-    </div>
-    <gln-select [(ngModel)]="model01c"
-      label="Enter value"
-      exterior="standard"
-      wdFull>
-      <gln-menu-item><em>None</em></gln-menu-item>
-      <gln-menu-item value="mango">Mango</gln-menu-item>
-      <gln-menu-item value="lemon">Lemon</gln-menu-item>
-      <gln-menu-item value="orange">Orange</gln-menu-item>
-      <gln-menu-item value="kiwi">Kiwi</gln-menu-item>
-    </gln-select>
-  </div>
-
-</div>
+</form>
 
 <section mr-vr>
   <mat-accordion>
@@ -88,78 +103,96 @@
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;div class="app-group"&gt;
+&lt;form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off"&gt;
 
-  &lt;div class="app-elem"&gt;
-    &lt;div mb0&gt;
-      &lt;small&gt;&lt;em&gt;Outlined&lt;/em&gt;&lt;/small&gt;
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div mb0&gt;
+        &lt;small&gt;&lt;em&gt;Outlined&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;
+            Model: <b>&#123;</b>&#123; control01.model01a.value === null
+            ? 'null' : control01.model01a.value &#125;&#125;
+          &lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model01a"
+        label="Enter value"
+        exterior="outlined"
+        wdFull&gt;
+        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
+        &lt;gln-menu-item value="mango"&gt;Mango&lt;/gln-menu-item&gt;
+        &lt;gln-menu-item value="lemon"&gt;Lemon&lt;/gln-menu-item&gt;
+        &lt;gln-menu-item value="orange"&gt;Orange&lt;/gln-menu-item&gt;
+        &lt;gln-menu-item value="kiwi"&gt;Kiwi&lt;/gln-menu-item&gt;
+      &lt;/gln-select&gt;
     &lt;/div&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Model: <b>&#123;</b>&#123; model01a === null ? 'null' : model01a &#125;&#125;&lt;/em&gt;
-      &lt;/small&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div mb0&gt;
+        &lt;small&gt;&lt;em&gt;Underline&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;
+            Model: <b>&#123;</b>&#123; control01.model01b.value !== null
+            ? control01.model01b.value : 'null' &#125;&#125;
+          &lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model01b"
+        label="Enter value"
+        exterior="underline"
+        wdFull&gt;
+        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
+        &lt;gln-menu-item value="mango"&gt;Mango&lt;/gln-menu-item&gt;
+        &lt;gln-menu-item value="lemon"&gt;Lemon&lt;/gln-menu-item&gt;
+        &lt;gln-menu-item value="orange"&gt;Orange&lt;/gln-menu-item&gt;
+        &lt;gln-menu-item value="kiwi"&gt;Kiwi&lt;/gln-menu-item&gt;
+      &lt;/gln-select&gt;
     &lt;/div&gt;
-    &lt;gln-select [(ngModel)]="model01a"
-      label="Enter value"
-      exterior="outlined"
-      wdFull&gt;
-      &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-      &lt;gln-menu-item value="mango"&gt;Mango&lt;/gln-menu-item&gt;
-      &lt;gln-menu-item value="lemon"&gt;Lemon&lt;/gln-menu-item&gt;
-      &lt;gln-menu-item value="orange"&gt;Orange&lt;/gln-menu-item&gt;
-      &lt;gln-menu-item value="kiwi"&gt;Kiwi&lt;/gln-menu-item&gt;
-    &lt;/gln-select&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div mb0&gt;
+        &lt;small&gt;&lt;em&gt;Standard&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;
+            Model: <b>&#123;</b>&#123; control01.model01c.value !== null
+            ? control01.model01c.value : 'null' &#125;&#125;
+          &lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model01c"
+        label="Enter value"
+        exterior="standard"
+        wdFull&gt;
+        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
+        &lt;gln-menu-item value="mango"&gt;Mango&lt;/gln-menu-item&gt;
+        &lt;gln-menu-item value="lemon"&gt;Lemon&lt;/gln-menu-item&gt;
+        &lt;gln-menu-item value="orange"&gt;Orange&lt;/gln-menu-item&gt;
+        &lt;gln-menu-item value="kiwi"&gt;Kiwi&lt;/gln-menu-item&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+
   &lt;/div&gt;
 
-  &lt;div class="app-elem"&gt;
-    &lt;div mb0&gt;
-      &lt;small&gt;&lt;em&gt;Underline&lt;/em&gt;&lt;/small&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Model: <b>&#123;</b>&#123; model01b !== null ? model01b : 'null' &#125;&#125;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;gln-select [(ngModel)]="model01b"
-      label="Enter value"
-      exterior="underline"
-      wdFull&gt;
-      &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-      &lt;gln-menu-item value="mango"&gt;Mango&lt;/gln-menu-item&gt;
-      &lt;gln-menu-item value="lemon"&gt;Lemon&lt;/gln-menu-item&gt;
-      &lt;gln-menu-item value="orange"&gt;Orange&lt;/gln-menu-item&gt;
-      &lt;gln-menu-item value="kiwi"&gt;Kiwi&lt;/gln-menu-item&gt;
-    &lt;/gln-select&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div mb0&gt;
-      &lt;small&gt;&lt;em&gt;Standard&lt;/em&gt;&lt;/small&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Model: <b>&#123;</b>&#123; model01c !== null ? model01c : 'null' &#125;&#125;&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;gln-select [(ngModel)]="model01c"
-      label="Enter value"
-      exterior="standard"
-      wdFull&gt;
-      &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-      &lt;gln-menu-item value="mango"&gt;Mango&lt;/gln-menu-item&gt;
-      &lt;gln-menu-item value="lemon"&gt;Lemon&lt;/gln-menu-item&gt;
-      &lt;gln-menu-item value="orange"&gt;Orange&lt;/gln-menu-item&gt;
-      &lt;gln-menu-item value="kiwi"&gt;Kiwi&lt;/gln-menu-item&gt;
-    &lt;/gln-select&gt;
-  &lt;/div&gt;
-
-&lt;/div&gt;</pre></code>
+&lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
           <code><pre source="ts">
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
+import &#123;
+  FormGroup, FormControl 
+&#125; from '@angular/forms';
 
 @Component(&#123;
   selector: 'app-select',
@@ -168,9 +201,12 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class SelectComponent &#123;
-  public model01a = null;
-  public model01b = null;
-  public model01c = null;
+  public control01 = &#123;
+    model01a: new FormControl(null, []),
+    model01b: new FormControl(null, []),
+    model01c: new FormControl(null, []),
+  &#125;;
+  public formGroup01: FormGroup = new FormGroup(this.control01);
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

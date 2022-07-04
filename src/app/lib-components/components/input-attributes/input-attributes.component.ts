@@ -9,7 +9,7 @@ import {
   LABEL_STANDARD,
   LABEL_TS,
   LABEL_UNDERLINE,
-} from 'src/app/lib-core/constants/constants';
+} from '../../../lib-core/constants/constants';
 
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
@@ -39,59 +39,40 @@ export class InputAttributesComponent {
   public urlFrame = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
 
   public exterior02a = 'outlined';
-
   public formGroup02a: FormGroup = new FormGroup({
     model02a: new FormControl(null, []),
     model02b: new FormControl('Hello World', [Validators.required]),
     model02c: new FormControl('Hello World', []),
     model02d: new FormControl('Hello World', []),
   });
-  // public model02a = null;
-  // public model02b = 'Hello World';
-  // public model02c = 'Hello World';
-  // public model02d = 'Hello World';
 
   public exterior02b = 'outlined';
-
-  public model02e = '';
-  public model02f = 'Hello World'; // TODO temp; '';
-  public model02g = 'Hello World';
-  public model02h = 'Hello World';
+  public control02b = {
+    model02e: new FormControl(null, []),
+    model02f: new FormControl(null, [Validators.required]),
+    model02g: new FormControl('Hello World', []),
+    model02h: new FormControl('Hello World', []),
+  };
+  public formGroup02b: FormGroup = new FormGroup(this.control02b);
 
   public exterior02c = 'outlined';
-
-  public model02i = '';
-  public model02j = '';
-  public model02k = 'Hello World';
-  public model02l = '';
+  public control02c = {
+    model02i: new FormControl(null, []),
+    model02j: new FormControl(null, []),
+    model02k: new FormControl('Hello World', []),
+    model02l: new FormControl(null, []),
+  };
+  public formGroup02c: FormGroup = new FormGroup(this.control02c);
 
   public exterior02d = 'outlined';
-
-  public model02m = '';
-  public model02n = '#000000';
-  public model02o = '';
-  public model02p = '';
-
-  public initNoAnim02: { [key: string]: boolean } = {
-    model02a: true,
-    model02b: true,
-    model02c: true,
-    model02d: true,
-    model02e: true,
-    model02f: true,
-    model02g: true,
-    model02h: true,
+  public control02d = {
+    model02m: new FormControl(null, []),
+    model02n: new FormControl('#000000'),
+    model02o: new FormControl(null, []),
+    model02p: new FormControl(null, []),
   };
+  public formGroup02d: FormGroup = new FormGroup(this.control02d);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
-
-  public doWriteValueInit(markForCheck: () => void, name: string): void {
-    setTimeout(() => {
-      this.initNoAnim02[name] = false;
-      if (markForCheck) {
-        markForCheck();
-      }
-    }, 0);
-  }
 }

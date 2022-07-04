@@ -184,7 +184,7 @@ export class GlnInputComponent
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public writeValue(value: any): void {
-    console.log(`writeValue(${this.id}) value=${value == null ? 'null' : value}`);
+    // console.log(`writeValue(${this.id}) value=${value == null ? 'null' : value}`);
 
     const isFilledOld = !!this.formControl.value;
     this.formControl.setValue(value, { emitEvent: false });

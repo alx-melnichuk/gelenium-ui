@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { UrlComponents } from 'src/app/lm-components/constants/url-components.constants';
+import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 @Component({
   selector: 'app-input-api',
@@ -10,7 +10,7 @@ import { UrlComponents } from 'src/app/lm-components/constants/url-components.co
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputApiComponent {
-  public urlFrameInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
+  public urlFrame = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

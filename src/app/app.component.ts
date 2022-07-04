@@ -2,8 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { AutoUnsubscribe } from 'src/app//lib-core/decorators/auto-unsubscribe';
-import { ScrollAfterRoutingUtil } from 'src/app/lib-core/utils/scroll-after-routing.util';
+import { AutoUnsubscribe } from './lib-core/decorators/auto-unsubscribe';
+import { ScrollAfterRoutingUtil } from './lib-core/utils/scroll-after-routing.util';
 
 @Component({
   selector: 'app-root',

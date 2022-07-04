@@ -7,11 +7,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { GlnInputModule } from 'gelenium-ui';
 
-import { FrameAttributesComponent } from './frame-attributes.component';
+import { FrameFeatureComponent } from './frame-feature.component';
 
 @NgModule({
-  declarations: [FrameAttributesComponent],
+  declarations: [FrameFeatureComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnInputModule],
-  exports: [FrameAttributesComponent],
+  exports: [FrameFeatureComponent],
 })
-export class FrameAttributesModule {}
+export class FrameFeatureModule {}

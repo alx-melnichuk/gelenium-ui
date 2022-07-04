@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { EXPANDED_HEIGHT } from 'src/app/lib-core/constants/constants';
-import { SiteItem, SiteMenu, SiteUrl } from 'src/app/lib-core/constants/site-menu';
+import { EXPANDED_HEIGHT } from '../lib-core/constants/constants';
+import { SiteItem, SiteMenu, SiteUrl } from '../lib-core/constants/site-menu';
 
 @Component({
   selector: 'app-lm-directives',

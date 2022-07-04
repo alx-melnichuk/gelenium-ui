@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SiteMenu, SiteUrl } from 'src/app/lib-core/constants/site-menu';
-import { UrlComponents } from 'src/app/lm-components/constants/url-components.constants';
+import { SiteMenu, SiteUrl } from '../../../lib-core/constants/site-menu';
+import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 import { FrameBasicModule } from '../frame-basic/frame-basic.module';
 import { FrameAttributesModule } from '../frame-attributes/frame-attributes.module';
@@ -13,8 +13,9 @@ import { FrameBorderRadiusModule } from '../frame-border-radius/frame-border-rad
 import { FramePaletteModule } from '../frame-palette/frame-palette.module';
 import { FramePalette2Module } from '../frame-palette2/frame-palette2.module';
 import { FramePalette3Module } from '../frame-palette3/frame-palette3.module';
-import { FrameConfigModule } from '../frame-config/frame-config.module';
+import { FrameFeatureModule } from '../frame-feature/frame-feature.module';
 import { FrameStructureModule } from '../frame-structure/frame-structure.module';
+import { FrameConfigModule } from '../frame-config/frame-config.module';
 import { FrameApiModule } from '../frame-api/frame-api.module';
 
 import { FrameComponent } from './frame.component';
@@ -30,6 +31,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Helper text', url, fragment: 'HelperText' },
   { label: 'Border radius', url, fragment: 'BorderRadius' },
   { label: 'Palette', url, fragment: 'Palette' },
+  { label: 'Feature', url, fragment: 'Feature' },
   { label: 'Structure', url, fragment: 'Structure' },
   { label: 'Config', url, fragment: 'Config' },
   { label: 'Api', url, fragment: 'Api' },
@@ -49,6 +51,7 @@ SiteMenu.addItem('Components', 'Frame', { label: 'Frame', siteUrls });
     FramePaletteModule,
     FramePalette2Module,
     FramePalette3Module,
+    FrameFeatureModule,
     FrameStructureModule,
     FrameConfigModule,
     FrameApiModule,

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SiteMenu, SiteUrl } from 'src/app/lib-core/constants/site-menu';
-import { UrlComponents } from 'src/app/lm-components/constants/url-components.constants';
+import { SiteMenu, SiteUrl } from '../../../lib-core/constants/site-menu';
+import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 import { InfiniteScrollBasicModule } from '../infinite-scroll-basic/infinite-scroll-basic.module';
 import { InfiniteScrollOptionalModule } from '../infinite-scroll-optional/infinite-scroll-optional.module';

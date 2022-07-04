@@ -94,7 +94,6 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.settingLabelShrink(this.renderer, this.hostRef, this.labelShrink);
     }
     if (changes.noAnimation) {
-      console.log(`OnChanges() noAnimation=${this.noAnimation == null ? 'null' : this.noAnimation}`); // TODO del;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-animation', this.noAnimation || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noAnm', this.noAnimation ? '' : null);
     }

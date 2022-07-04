@@ -1,7 +1,6 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScrollAfterRoutingUtil } from 'src/app/lib-core/utils/scroll-after-routing.util';
-
+import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 @Component({
@@ -12,7 +11,7 @@ import { UrlComponents } from '../../../lm-components/constants/url-components.c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaComponent implements AfterViewInit {
-  public showNum = '02';
+  public showNum = '';
   public urlFrame = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
 
   constructor() {

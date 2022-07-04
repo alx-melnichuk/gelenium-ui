@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SiteMenu, SiteUrl } from 'src/app/lib-core/constants/site-menu';
+import { SiteMenu, SiteUrl } from '../../../lib-core/constants/site-menu';
 import { UrlDirectives } from 'src/app/lm-directives/constants/url-directives.constants';
 
 import { AutoFocuseBasicModule } from '../auto-focuse-basic/auto-focuse-basic.module';

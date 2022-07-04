@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
-import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from 'src/app/lib-core/constants/constants';
+import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants/constants';
 
 @Component({
   selector: 'app-select-basic',
@@ -19,9 +20,12 @@ export class SelectBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public model01a = null;
-  public model01b = null;
-  public model01c = null;
+  public control01 = {
+    model01a: new FormControl(null, []),
+    model01b: new FormControl(null, []),
+    model01c: new FormControl(null, []),
+  };
+  public formGroup01: FormGroup = new FormGroup(this.control01);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

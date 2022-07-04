@@ -12,7 +12,7 @@ import {
   LABEL_STANDARD,
   LABEL_TS,
   LABEL_UNDERLINE,
-} from 'src/app/lib-core/constants/constants';
+} from '../../../lib-core/constants/constants';
 
 import { GlnFrameConfig, GlnFrameSize, GlnFrameSizeUtil } from 'gelenium-ui';
 

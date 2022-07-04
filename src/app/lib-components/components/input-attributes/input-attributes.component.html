@@ -157,70 +157,79 @@
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;div class="app-group"&gt;
+&lt;form [formGroup]="formGroup02a"
+  novalidate
+  autocomplete="off"&gt;
 
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;State: empty.&lt;/em&gt;
-      &lt;/small&gt;
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;State: empty.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02a"
+        id="unique_id_input02a"
+        label="Enter value"
+        [exterior]="exterior02a"&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02a"
-      id="unique_id_input02a"
-      label="Enter value"
-      [exterior]="exterior02a"&gt;
-    &lt;/gln-input&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02b"
+        label="Required field"
+        isRequired
+        helperText="A value must be entered."
+        [exterior]="exterior02a"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: noLabel.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02c"
+        label="noLabel"
+        noLabel
+        helperText="The label is not displayed."
+        [exterior]="exterior02a"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior02a"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
   &lt;/div&gt;
 
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02b"
-      label="Required field"
-      isRequired
-      helperText="A value must be entered."
-      [exterior]="exterior02a"&gt;
-    &lt;/gln-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attribute: noLabel.&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02c"
-      label="noLabel"
-      noLabel
-      helperText="The label is not displayed."
-      [exterior]="exterior02a"&gt;
-    &lt;/gln-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02d"
-      label="Disabled"
-      isDisabled
-      helperText="The parameter is disabled."
-      [exterior]="exterior02a"&gt;
-    &lt;/gln-input&gt;
-  &lt;/div&gt;
-
-&lt;/div&gt;</pre></code>
+&lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
           <code><pre source="ts">
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
 
 @Component(&#123;
   selector: 'app-input',
@@ -231,10 +240,12 @@ import &#123;
 export class InputComponent &#123;
   public exterior02a = 'outlined';
 
-  public model02a = '';
-  public model02b = 'Hello World';
-  public model02c = 'Hello World';
-  public model02d = 'Hello World';
+  public formGroup02a: FormGroup = new FormGroup(&#123;
+    model02a: new FormControl(null, []),
+    model02b: new FormControl('Hello World', [Validators.required]),
+    model02c: new FormControl('Hello World', []),
+    model02d: new FormControl('Hello World', []),
+  &#125;);
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -264,81 +275,74 @@ export class InputComponent &#123;
   </mat-button-toggle-group>
 </section>
 
-<div class="app-group">
+<form [formGroup]="formGroup02b"
+  novalidate
+  autocomplete="off">
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: lbShrink.</em>
-      </small>
-    </div>
-    <gln-input [(ngModel)]="model02e"
-      label="Permanent label"
-      lbShrink
-      helperText="The position of the label is fixed."
-      [exterior]="exterior02b"
-      isValueInit
-      [noAnimation]="initNoAnim02['model02e']"
-      (writeValueInit)="doWriteValueInit($event, 'model02e');">
-    </gln-input>
-  </div>
+  <div class="app-group">
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: isError.</em>
-      </small>
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: lbShrink.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02e"
+        label="Permanent label"
+        lbShrink
+        helperText="The position of the label is fixed."
+        [exterior]="exterior02b">
+      </gln-input>
     </div>
-    <gln-input [(ngModel)]="model02f"
-      #ctrl02f="ngModel"
-      [label]="!ctrl02f.value
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isError.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02f"
+        [label]="!control02b.model02f.value
         ? 'Requires a value':'Parameter value'"
-      [isError]="!ctrl02f.value ? '':null"
-      [helperText]="ctrl02f.value
+        [isError]="!control02b.model02f.value ? '':null"
+        [helperText]="control02b.model02f.value
       ? 'The field is filled.'
       : 'The field is not filled.'"
-      [exterior]="exterior02b"
-      isValueInit
-      [noAnimation]="initNoAnim02['model02f']"
-      (writeValueInit)="doWriteValueInit($event, 'model02f');">
-    </gln-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: hoverColor.</em>
-      </small>
+        [exterior]="exterior02b">
+      </gln-input>
     </div>
-    <gln-input [(ngModel)]="model02g"
-      label="Parameter value"
-      hoverColor
-      helperText="On hover, a frame with the focus color."
-      [exterior]="exterior02b"
-      isValueInit
-      [noAnimation]="initNoAnim02['model02g']"
-      (writeValueInit)="doWriteValueInit($event, 'model02g');">
-    </gln-input>
-  </div>
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: isReadOnly.</em>
-      </small>
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: hoverColor.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02g"
+        label="Parameter value"
+        hoverColor
+        helperText="On hover, a frame with the focus color."
+        [exterior]="exterior02b">
+      </gln-input>
     </div>
-    <gln-input [(ngModel)]="model02h"
-      label="Read Only"
-      isReadOnly
-      helperText="The parameter is read only."
-      [exterior]="exterior02b"
-      isValueInit
-      [noAnimation]="initNoAnim02['model02h']"
-      (writeValueInit)="doWriteValueInit($event, 'model02h');">
-    </gln-input>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isReadOnly.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02h"
+        label="Read Only"
+        isReadOnly
+        helperText="The parameter is read only."
+        [exterior]="exterior02b">
+      </gln-input>
+    </div>
+
   </div>
 
-</div>
+</form>
 
 <section mr-vr>
   <mat-accordion>
@@ -349,75 +353,83 @@ export class InputComponent &#123;
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;div class="app-group"&gt;
+&lt;form [formGroup]="formGroup02b"
+  novalidate
+  autocomplete="off"&gt;
 
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attribute: lbShrink.&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02e"
-      label="Permanent label"
-      lbShrink
-      helperText="The position of the label is fixed."
-      [exterior]="exterior02b"&gt;
-    &lt;/gln-input&gt;
-  &lt;/div&gt;
+  &lt;div class="app-group"&gt;
 
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attribute: isError.&lt;/em&gt;
-      &lt;/small&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: lbShrink.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02e"
+        label="Permanent label"
+        lbShrink
+        helperText="The position of the label is fixed."
+        [exterior]="exterior02b"&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02f"
-      #ctrl02f="ngModel"
-      [label]="!ctrl02f.value
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isError.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02f"
+        [label]="!control02b.model02f.value
         ? 'Requires a value':'Parameter value'"
-      [isError]="!ctrl02f.value ? '':null"
-      [helperText]="ctrl02f.value
+        [isError]="!control02b.model02f.value ? '':null"
+        [helperText]="control02b.model02f.value
       ? 'The field is filled.'
       : 'The field is not filled.'"
-      [exterior]="exterior02b"&gt;
-    &lt;/gln-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attribute: hoverColor.&lt;/em&gt;
-      &lt;/small&gt;
+        [exterior]="exterior02b"&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02g"
-      label="Parameter value"
-      hoverColor
-      helperText="On hover, a frame with the focus color."
-      [exterior]="exterior02b"&gt;
-    &lt;/gln-input&gt;
-  &lt;/div&gt;
 
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
-      &lt;/small&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: hoverColor.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02g"
+        label="Parameter value"
+        hoverColor
+        helperText="On hover, a frame with the focus color."
+        [exterior]="exterior02b"&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02h"
-      label="Read Only"
-      isReadOnly
-      helperText="The parameter is read only."
-      [exterior]="exterior02b"&gt;
-    &lt;/gln-input&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02h"
+        label="Read Only"
+        isReadOnly
+        helperText="The parameter is read only."
+        [exterior]="exterior02b"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
   &lt;/div&gt;
 
-&lt;/div&gt;</pre></code>
+&lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
           <code><pre source="ts">
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
 
 @Component(&#123;
   selector: 'app-input',
@@ -427,11 +439,13 @@ import &#123;
 &#125;)
 export class InputComponent &#123;
   public exterior02b = 'outlined';
-
-  public model02e = '';
-  public model02f = '';
-  public model02g = 'Hello World';
-  public model02h = 'Hello World';
+  public control02b = &#123;
+    model02e: new FormControl(null, []),
+    model02f: new FormControl('Hello World', [Validators.required]),
+    model02g: new FormControl('Hello World', []),
+    model02h: new FormControl('Hello World', []),
+  &#125;;
+  public formGroup02b: FormGroup = new FormGroup(this.control02b);
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -462,79 +476,80 @@ export class InputComponent &#123;
   </mat-button-toggle-group>
 </section>
 
-<div class="app-group"
-  *ngIf="false">
+<form [formGroup]="formGroup02c"
+  novalidate
+  autocomplete="off">
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: autoComplete, type="password".</em>
-      </small>
-    </div>
-    <gln-input [(ngModel)]="model02i"
-      #ctrl02i="ngModel"
-      [label]="!ctrl02i.value
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: autoComplete, type="password".</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02i"
+        [label]="!control02c.model02i.value
       ? 'Enter password':'Password'"
-      type="password"
-      autoComplete="current-password"
-      helperText="Enter your password value."
-      [exterior]="exterior02c">
-    </gln-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: type="number".</em>
-      </small>
+        type="password"
+        autoComplete="current-password"
+        helperText="Enter your password value."
+        [exterior]="exterior02c">
+      </gln-input>
     </div>
-    <gln-input [(ngModel)]="model02j"
-      #ctrl02j="ngModel"
-      [label]="!ctrl02j.value
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: type="number".</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02j"
+        [label]="!control02c.model02j.value
        ? 'Enter number':'Number'"
-      type="number"
-      helperText="Enter your number value."
-      [exterior]="exterior02c">
-    </gln-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: type="search".</em>
-      </small>
+        type="number"
+        helperText="Enter your number value."
+        [exterior]="exterior02c">
+      </gln-input>
     </div>
-    <gln-input [(ngModel)]="model02k"
-      #ctrl02k="ngModel"
-      [label]="!ctrl02k.value
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: type="search".</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02k"
+        [label]="!control02c.model02k.value
        ? 'Enter search value':'Search value'"
-      type="search"
-      helperText="Enter your search value."
-      [exterior]="exterior02c">
-    </gln-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: type="month", lbShrink.</em>
-      </small>
+        type="search"
+        helperText="Enter your search value."
+        [exterior]="exterior02c">
+      </gln-input>
     </div>
-    <gln-input [(ngModel)]="model02l"
-      #ctrl02l="ngModel"
-      [label]="!ctrl02l.value
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: type="month", lbShrink.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02l"
+        [label]="!control02c.model02l.value
         ? 'Enter month':'Month'"
-      lbShrink
-      type="month"
-      [helperText]="!ctrl02l.value
+        lbShrink
+        type="month"
+        [helperText]="!control02c.model02l.value
       ?'Enter your month value.'
       :'Month value is \''
-      + ctrl02l.value + '\''"
-      [exterior]="exterior02c">
-    </gln-input>
+      + control02c.model02l.value + '\''"
+        [exterior]="exterior02c">
+      </gln-input>
+    </div>
+
   </div>
 
-</div>
+</form>
 
 <section mr-vr>
   <mat-accordion>
@@ -545,84 +560,89 @@ export class InputComponent &#123;
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;div class="app-group"&gt;
+&lt;form [formGroup]="formGroup02c"
+  novalidate
+  autocomplete="off"&gt;
 
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attribute: autoComplete, type="password".&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02i"
-      #ctrl02i="ngModel"
-      [label]="!ctrl02i.value
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: autoComplete, type="password".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02i"
+        [label]="!control02c.model02i.value
       ? 'Enter password':'Password'"
-      type="password"
-      autoComplete="current-password"
-      helperText="Enter your password value."
-      [exterior]="exterior02c"&gt;
-    &lt;/gln-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attributes: type="number".&lt;/em&gt;
-      &lt;/small&gt;
+        type="password"
+        autoComplete="current-password"
+        helperText="Enter your password value."
+        [exterior]="exterior02c"&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02j"
-      #ctrl02j="ngModel"
-      [label]="!ctrl02j.value
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: type="number".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02j"
+        [label]="!control02c.model02j.value
        ? 'Enter number':'Number'"
-      type="number"
-      helperText="Enter your number value."
-      [exterior]="exterior02c"&gt;
-    &lt;/gln-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attributes: type="search".&lt;/em&gt;
-      &lt;/small&gt;
+        type="number"
+        helperText="Enter your number value."
+        [exterior]="exterior02c"&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02k"
-      #ctrl02k="ngModel"
-      [label]="!ctrl02k.value
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: type="search".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02k"
+        [label]="!control02c.model02k.value
        ? 'Enter search value':'Search value'"
-      type="search"
-      helperText="Enter your search value."
-      [exterior]="exterior02c"&gt;
-    &lt;/gln-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attributes: type="month", lbShrink.&lt;/em&gt;
-      &lt;/small&gt;
+        type="search"
+        helperText="Enter your search value."
+        [exterior]="exterior02c"&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02l"
-      #ctrl02l="ngModel"
-      [label]="!ctrl02l.value
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: type="month", lbShrink.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02l"
+        [label]="!control02c.model02l.value
         ? 'Enter month':'Month'"
-      lbShrink
-      type="month"
-      [helperText]="!ctrl02l.value
+        lbShrink
+        type="month"
+        [helperText]="!control02c.model02l.value
       ?'Enter your month value.'
       :'Month value is \''
-      + ctrl02l.value + '\''"
-      [exterior]="exterior02c"&gt;
-    &lt;/gln-input&gt;
+      + control02c.model02l.value + '\''"
+        [exterior]="exterior02c"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
   &lt;/div&gt;
 
-&lt;/div&gt;</pre></code>
+&lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
           <code><pre source="ts">
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
 
 @Component(&#123;
   selector: 'app-input',
@@ -632,11 +652,13 @@ import &#123;
 &#125;)
 export class InputComponent &#123;
   public exterior02c = 'outlined';
-
-  public model02i = '';
-  public model02j = '';
-  public model02k = 'Hello World';
-  public model02l = '';
+  public control02c = &#123;
+    model02i: new FormControl(null, []),
+    model02j: new FormControl(null, []),
+    model02k: new FormControl('Hello World', []),
+    model02l: new FormControl(null, []),
+  &#125;;
+  public formGroup02c: FormGroup = new FormGroup(this.control02c);
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -667,90 +689,91 @@ export class InputComponent &#123;
   </mat-button-toggle-group>
 </section>
 
-<div class="app-group"
-  *ngIf="false">
+<form [formGroup]="formGroup02d"
+  novalidate
+  autocomplete="off">
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: type="week", lbShrink.</em>
-      </small>
-    </div>
-    <gln-input [(ngModel)]="model02m"
-      #ctrl02m="ngModel"
-      [label]="!ctrl02m.value
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: type="week", lbShrink.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02m"
+        [label]="!control02d.model02m.value
         ? 'Enter week':'Week'"
-      lbShrink
-      type="week"
-      [helperText]="!ctrl02m.value
+        lbShrink
+        type="week"
+        [helperText]="!control02d.model02m.value
       ?'Enter your week value.'
       :'Week value is \''
-      + (ctrl02m.value) + '\''"
-      [exterior]="exterior02d">
-    </gln-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: type="color", lbShrink.</em>
-      </small>
+      + (control02d.model02m.value) + '\''"
+        [exterior]="exterior02d">
+      </gln-input>
     </div>
-    <gln-input [(ngModel)]="model02n"
-      #ctrl02n="ngModel"
-      [label]="!ctrl02n.value
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: type="color", lbShrink.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02n"
+        [label]="!control02d.model02n.value
         ? 'Enter color':'Color'"
-      lbShrink
-      type="color"
-      [helperText]="!ctrl02n.value
+        lbShrink
+        type="color"
+        [helperText]="!control02d.model02n.value
       ?'Enter color.'
-      :'\'' + ctrl02n.value + '\''"
-      [exterior]="exterior02d">
-    </gln-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: type="date", lbShrink.</em>
-      </small>
+      :'\'' + control02d.model02n.value + '\''"
+        [exterior]="exterior02d">
+      </gln-input>
     </div>
-    <gln-input [(ngModel)]="model02o"
-      #ctrl02o="ngModel"
-      [label]="!ctrl02o.value
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: type="date", lbShrink.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02o"
+        [label]="!control02d.model02o.value
         ? 'Enter date':'Date'"
-      lbShrink
-      type="date"
-      [helperText]="!ctrl02o.value
+        lbShrink
+        type="date"
+        [helperText]="!control02d.model02o.value
         ?'Enter your date value.'
         :'Date value is \''
-        + (ctrl02o.value | date:'mediumDate')
+        + (control02d.model02o.value | date:'mediumDate')
         + '\''"
-      [exterior]="exterior02d">
-    </gln-input>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attributes: type="time", lbShrink.</em>
-      </small>
+        [exterior]="exterior02d">
+      </gln-input>
     </div>
-    <gln-input [(ngModel)]="model02p"
-      #ctrl02p="ngModel"
-      [label]="!ctrl02p.value
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: type="time", lbShrink.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02p"
+        [label]="!control02d.model02p.value
         ? 'Enter time':'Time'"
-      lbShrink
-      type="time"
-      [helperText]="!ctrl02p.value
+        lbShrink
+        type="time"
+        [helperText]="!control02d.model02p.value
         ?'Enter your time value.'
         :'Time value is \''
-        + ctrl02p.value + '\''"
-      [exterior]="exterior02d">
-    </gln-input>
+        + control02d.model02p.value + '\''"
+        [exterior]="exterior02d">
+      </gln-input>
+    </div>
+
   </div>
 
-</div>
+</form>
 
 <section mr-vr>
   <mat-accordion>
@@ -761,95 +784,100 @@ export class InputComponent &#123;
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;div class="app-group"&gt;
+&lt;form [formGroup]="formGroup02d"
+  novalidate
+  autocomplete="off"&gt;
 
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attributes: type="week", lbShrink.&lt;/em&gt;
-      &lt;/small&gt;
-    &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02m"
-      #ctrl02m="ngModel"
-      [label]="!ctrl02m.value
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: type="week", lbShrink.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02m"
+        [label]="!control02d.model02m.value
         ? 'Enter week':'Week'"
-      lbShrink
-      type="week"
-      [helperText]="!ctrl02m.value
+        lbShrink
+        type="week"
+        [helperText]="!control02d.model02m.value
       ?'Enter your week value.'
       :'Week value is \''
-      + (ctrl02m.value) + '\''"
-      [exterior]="exterior02d"&gt;
-    &lt;/gln-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attributes: type="color", lbShrink.&lt;/em&gt;
-      &lt;/small&gt;
+      + (control02d.model02m.value) + '\''"
+        [exterior]="exterior02d"&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02n"
-      #ctrl02n="ngModel"
-      [label]="!ctrl02n.value
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: type="color", lbShrink.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02n"
+        [label]="!control02d.model02n.value
         ? 'Enter color':'Color'"
-      lbShrink
-      type="color"
-      [helperText]="!ctrl02n.value
+        lbShrink
+        type="color"
+        [helperText]="!control02d.model02n.value
       ?'Enter color.'
-      :'\'' + ctrl02n.value + '\''"
-      [exterior]="exterior02d"&gt;
-    &lt;/gln-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attributes: type="date", lbShrink.&lt;/em&gt;
-      &lt;/small&gt;
+      :'\'' + control02d.model02n.value + '\''"
+        [exterior]="exterior02d"&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02o"
-      #ctrl02o="ngModel"
-      [label]="!ctrl02o.value
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: type="date", lbShrink.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02o"
+        [label]="!control02d.model02o.value
         ? 'Enter date':'Date'"
-      lbShrink
-      type="date"
-      [helperText]="!ctrl02o.value
+        lbShrink
+        type="date"
+        [helperText]="!control02d.model02o.value
         ?'Enter your date value.'
         :'Date value is \''
-        + (ctrl02o.value | date:'mediumDate')
+        + (control02d.model02o.value | date:'mediumDate')
         + '\''"
-      [exterior]="exterior02d"&gt;
-    &lt;/gln-input&gt;
-  &lt;/div&gt;
-
-  &lt;div class="app-elem"&gt;
-    &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;Attributes: type="time", lbShrink.&lt;/em&gt;
-      &lt;/small&gt;
+        [exterior]="exterior02d"&gt;
+      &lt;/gln-input&gt;
     &lt;/div&gt;
-    &lt;gln-input [(ngModel)]="model02p"
-      #ctrl02p="ngModel"
-      [label]="!ctrl02p.value
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: type="time", lbShrink.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02p"
+        [label]="!control02d.model02p.value
         ? 'Enter time':'Time'"
-      lbShrink
-      type="time"
-      [helperText]="!ctrl02p.value
+        lbShrink
+        type="time"
+        [helperText]="!control02d.model02p.value
         ?'Enter your time value.'
         :'Time value is \''
-        + ctrl02p.value + '\''"
-      [exterior]="exterior02d"&gt;
-    &lt;/gln-input&gt;
+        + control02d.model02p.value + '\''"
+        [exterior]="exterior02d"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
   &lt;/div&gt;
 
-&lt;/div&gt;</pre></code>
+&lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
           <code><pre source="ts">
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
 
 @Component(&#123;
   selector: 'app-input',
@@ -859,11 +887,13 @@ import &#123;
 &#125;)
 export class InputComponent &#123;
   public exterior02d = 'outlined';
-
-  public model02m = '';
-  public model02n = '#000000';
-  public model02o = '';
-  public model02p = '';
+  public control02d = &#123;
+    model02m: new FormControl(null, []),
+    model02n: new FormControl('#000000'),
+    model02o: new FormControl(null, []),
+    model02p: new FormControl(null, []),
+  &#125;;
+  public formGroup02d: FormGroup = new FormGroup(this.control02d);
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

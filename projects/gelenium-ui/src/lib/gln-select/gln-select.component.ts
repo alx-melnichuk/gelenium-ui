@@ -211,7 +211,7 @@ export class GlnSelectComponent extends GlnBasisFrame implements OnChanges, OnIn
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public writeValue(value: any): void {
-    console.log(`writeValue(${this.id}) value=${value == null ? 'null' : value}`);
+    // console.log(`writeValue(${this.id}) value=${value == null ? 'null' : value}`);
 
     this.value = value;
 
