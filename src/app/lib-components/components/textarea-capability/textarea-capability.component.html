@@ -51,7 +51,7 @@
           <em>Height by number of lines.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input04a"
+      <gln-textarea formControlName="model04a"
         label="Parameter value"
         helperText="Height by number of lines."
         [exterior]="exterior04">
@@ -64,7 +64,7 @@
           <em>Attribute: cntRows=4.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input04b"
+      <gln-textarea formControlName="model04b"
         label="Parameter value"
         [cntRows]="4"
         helperText="Only 4 lines."
@@ -78,7 +78,7 @@
           <em>Attribute: minRows=4.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input04c"
+      <gln-textarea formControlName="model04c"
         label="Parameter value"
         [minRows]="4"
         helperText="Minimum 4 lines."
@@ -92,7 +92,7 @@
           <em>Attribute: maxRows=4.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input04d"
+      <gln-textarea formControlName="model04d"
         label="Parameter value"
         [maxRows]="4"
         helperText="Maximum 4 lines."
@@ -125,7 +125,7 @@
           &lt;em&gt;Height by number of lines.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input04a"
+      &lt;gln-textarea formControlName="model04a"
         label="Parameter value"
         helperText="Height by number of lines."
         [exterior]="exterior04"&gt;
@@ -138,7 +138,7 @@
           &lt;em&gt;Attribute: cntRows=4.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input04b"
+      &lt;gln-textarea formControlName="model04b"
         label="Parameter value"
         [cntRows]="4"
         helperText="Only 4 lines."
@@ -152,7 +152,7 @@
           &lt;em&gt;Attribute: minRows=4.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input04c"
+      &lt;gln-textarea formControlName="model04c"
         label="Parameter value"
         [minRows]="4"
         helperText="Minimum 4 lines."
@@ -166,7 +166,7 @@
           &lt;em&gt;Attribute: maxRows=4.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input04d"
+      &lt;gln-textarea formControlName="model04d"
         label="Parameter value"
         [maxRows]="4"
         helperText="Maximum 4 lines."
@@ -197,10 +197,10 @@ export class TextareaComponent &#123;
   public text1 = 'line 1\nline 2';
   public text2 = this.text1 + '\nline 3\nline 4\nline 5';
   public formGroup04: FormGroup = new FormGroup(&#123;
-    input04a: new FormControl(this.text1, []),
-    input04b: new FormControl(this.text2, []),
-    input04c: new FormControl(this.text1, []),
-    input04d: new FormControl(this.text2, []),
+    model04a: new FormControl(this.text1, []),
+    model04b: new FormControl(this.text2, []),
+    model04c: new FormControl(this.text1, []),
+    model04d: new FormControl(this.text2, []),
   &#125;);
   public exterior04 = 'outlined';
 &#125;</pre></code>

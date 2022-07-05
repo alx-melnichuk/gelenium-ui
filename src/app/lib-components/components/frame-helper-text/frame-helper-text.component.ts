@@ -35,10 +35,10 @@ export class FrameHelperTextComponent {
   public labelCss = LABEL_CSS;
 
   public formGroup04: FormGroup = new FormGroup({
-    input04a: new FormControl('William', []),
-    input04b: new FormControl('Anderson', []),
-    input04c: new FormControl('Charlotte', []),
-    input04d: new FormControl('Robinson', []),
+    model04a: new FormControl('William', []),
+    model04b: new FormControl('Anderson', []),
+    model04c: new FormControl('Charlotte', []),
+    model04d: new FormControl('Robinson', []),
   });
   public exterior04 = 'outlined';
 

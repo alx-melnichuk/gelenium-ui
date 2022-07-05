@@ -21,9 +21,9 @@ export class FrameBasicComponent {
   public labelCss = LABEL_CSS;
 
   public formGroup01: FormGroup = new FormGroup({
-    input01a: new FormControl('', []),
-    input01b: new FormControl('', []),
-    input01c: new FormControl('', []),
+    model01a: new FormControl('', []),
+    model01b: new FormControl('', []),
+    model01c: new FormControl('', []),
   });
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

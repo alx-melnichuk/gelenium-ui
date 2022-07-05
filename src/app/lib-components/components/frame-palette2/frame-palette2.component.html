@@ -24,14 +24,14 @@
         </small>
       </div>
       <gln-input class="fp-bstrap"
-        formControlName="input06g"
+        formControlName="model06g"
         frameSize="short"
         noLabel
         exterior="outlined"
         isRequired
         wdFull
         helperText="{{
-          (controls06b.input06g.errors?.required
+          (controls06b.model06g.errors?.required
             ? 'Required field.': 'Enter value.')
         }}">
       </gln-input>
@@ -45,14 +45,14 @@
         </small>
       </div>
       <gln-input class="fp-bstrap"
-        formControlName="input06h"
+        formControlName="model06h"
         frameSize="short"
         noLabel
         exterior="outlined"
         isRequired
         wdFull
         helperText="{{
-          (controls06b.input06h.errors?.required
+          (controls06b.model06h.errors?.required
             ? 'Required field.': 'Enter value.')
         }}">
       </gln-input>
@@ -64,15 +64,15 @@
           <em>Class: is-success.</em>
         </small>
       </div>
-      <gln-input [ngClass]="['fp-bstrap', (!controls06b.input06i.errors ? 'is-success' : '')]"
-        formControlName="input06i"
+      <gln-input [ngClass]="['fp-bstrap', (!controls06b.model06i.errors ? 'is-success' : '')]"
+        formControlName="model06i"
         frameSize="short"
         noLabel
         exterior="outlined"
         isRequired
         wdFull
         helperText="{{
-          (controls06b.input06i.errors?.required
+          (controls06b.model06i.errors?.required
             ? 'Required field.': 'Enter value.')
         }}">
       </gln-input>
@@ -85,7 +85,7 @@
         </small>
       </div>
       <gln-input class="fp-bstrap"
-        formControlName="input06j"
+        formControlName="model06j"
         frameSize="short"
         noLabel
         exterior="outlined"
@@ -128,14 +128,14 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input class="fp-bstrap"
-        formControlName="input06g"
+        formControlName="model06g"
         frameSize="short"
         noLabel
         exterior="outlined"
         isRequired
         wdFull
         helperText="<b>&#123;</b>&#123;
-          (controls06b.input06g.errors?.required
+          (controls06b.model06g.errors?.required
             ? 'Required field.': 'Enter value.')
         &#125;&#125;"&gt;
       &lt;/gln-input&gt;
@@ -149,14 +149,14 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input class="fp-bstrap"
-        formControlName="input06h"
+        formControlName="model06h"
         frameSize="short"
         noLabel
         exterior="outlined"
         isRequired
         wdFull
         helperText="<b>&#123;</b>&#123;
-          (controls06b.input06h.errors?.required
+          (controls06b.model06h.errors?.required
             ? 'Required field.': 'Enter value.')
         &#125;&#125;"&gt;
       &lt;/gln-input&gt;
@@ -169,7 +169,7 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input class="fp-bstrap"
-        formControlName="input06i"
+        formControlName="model06i"
         frameSize="short"
         noLabel
         exterior="outlined"
@@ -199,9 +199,9 @@ import &#123;
 &#125;)
 export class FrameComponent &#123;
   public controls06b = &#123;
-    input06g: new FormControl('Hello World', [Validators.required]),
-    input06h: new FormControl('', [Validators.required]),
-    input06i: new FormControl('Hello World', []),
+    model06g: new FormControl('Hello World', [Validators.required]),
+    model06h: new FormControl('', [Validators.required]),
+    model06i: new FormControl('Hello World', []),
   &#125;;
   public formGroup06b: FormGroup = new FormGroup(this.controls06b);
 

@@ -48,7 +48,7 @@
           <em>State: empty.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input02a"
+      <gln-textarea formControlName="model02a"
         id="unique_id_text02a"
         label="Enter value"
         [cntRows]="2"
@@ -62,7 +62,7 @@
           <em>Attributes: isRequired, helperText.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input02b"
+      <gln-textarea formControlName="model02b"
         label="Required field"
         [cntRows]="cntRows"
         isRequired
@@ -77,7 +77,7 @@
           <em>Attribute: isReadOnly.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input02c"
+      <gln-textarea formControlName="model02c"
         label="Read Only"
         [cntRows]="cntRows"
         isReadOnly
@@ -92,7 +92,7 @@
           <em>Attribute: isDisabled.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input02d"
+      <gln-textarea formControlName="model02d"
         label="Disabled"
         [cntRows]="cntRows"
         isDisabled
@@ -107,7 +107,7 @@
           <em>Attribute: lbShrink.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input02e"
+      <gln-textarea formControlName="model02e"
         label="Permanent label"
         [cntRows]="cntRows"
         lbShrink
@@ -122,7 +122,7 @@
           <em>Attribute: noLabel.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input02f"
+      <gln-textarea formControlName="model02f"
         label="noLabel"
         noLabel
         [cntRows]="cntRows"
@@ -156,7 +156,7 @@
           &lt;em&gt;State: empty.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input02a"
+      &lt;gln-textarea formControlName="model02a"
         id="unique_identifier"
         label="Enter value"
         [cntRows]="2"
@@ -170,7 +170,7 @@
           &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input02b"
+      &lt;gln-textarea formControlName="model02b"
         label="Required field"
         [cntRows]="cntRows"
         isRequired
@@ -185,7 +185,7 @@
           &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input02c"
+      &lt;gln-textarea formControlName="model02c"
         label="Read Only"
         [cntRows]="cntRows"
         isReadOnly
@@ -200,7 +200,7 @@
           &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input02d"
+      &lt;gln-textarea formControlName="model02d"
         label="Disabled"
         [cntRows]="cntRows"
         isDisabled
@@ -215,7 +215,7 @@
           &lt;em&gt;Attribute: lbShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input02e"
+      &lt;gln-textarea formControlName="model02e"
         label="Permanent label"
         [cntRows]="cntRows"
         lbShrink
@@ -230,7 +230,7 @@
           &lt;em&gt;Attribute: noLabel.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input02f"
+      &lt;gln-textarea formControlName="model02f"
         label="noLabel"
         noLabel
         [cntRows]="cntRows"
@@ -260,13 +260,13 @@ import &#123;
 &#125;)
 export class TextareaComponent &#123;
   public formGroup02: FormGroup = new FormGroup(&#123;
-    input02a: new FormControl('', []),
-    input02b: new FormControl('Hello World'
+    model02a: new FormControl('', []),
+    model02b: new FormControl('Hello World'
       , [Validators.required]),
-    input02c: new FormControl('Hello World', []),
-    input02d: new FormControl('Hello World', []),
-    input02e: new FormControl('', []),
-    input02f: new FormControl('Hello World', []),
+    model02c: new FormControl('Hello World', []),
+    model02d: new FormControl('Hello World', []),
+    model02e: new FormControl('', []),
+    model02f: new FormControl('Hello World', []),
   &#125;);
   public exterior02 = 'outlined';
   public cntRows = 2;

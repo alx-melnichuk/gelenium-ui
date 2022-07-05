@@ -21,8 +21,8 @@ export class HintOrErrorBasicComponent {
   public labelCss = LABEL_CSS;
 
   public controls01 = {
-    input01a: new FormControl('is', []),
-    input01b: new FormControl('demo', []),
+    model01a: new FormControl('is', []),
+    model01b: new FormControl('demo', []),
   };
   public formGroup01: FormGroup = new FormGroup(this.controls01);
   public isDisabled01 = false;

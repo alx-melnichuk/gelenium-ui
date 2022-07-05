@@ -37,10 +37,10 @@ export class TextareaOrnamentsComponent {
   public labelCss = LABEL_CSS;
 
   public controls05 = {
-    input05a: new FormControl('', []),
-    input05b: new FormControl('First line\nSecond line', []),
-    input05c: new FormControl('', []),
-    input05d: new FormControl('', []),
+    model05a: new FormControl('', []),
+    model05b: new FormControl('First line\nSecond line', []),
+    model05c: new FormControl('', []),
+    model05d: new FormControl('', []),
   };
   public formGroup05: FormGroup = new FormGroup(this.controls05);
   public exterior05 = 'outlined';

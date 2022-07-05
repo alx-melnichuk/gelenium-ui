@@ -36,12 +36,12 @@ export class FramePaletteComponent {
 
   public minLength06a = 5;
   public controls06a = {
-    input06a: new FormControl('', []),
-    input06b: new FormControl('Hello World', [Validators.required]),
-    input06c: new FormControl('Hello World', []),
-    input06d: new FormControl('Hello World', []),
-    input06e: new FormControl('demo', [Validators.required, Validators.minLength(this.minLength06a)]),
-    input06f: new FormControl('Hello World', []),
+    model06a: new FormControl('', []),
+    model06b: new FormControl('Hello World', [Validators.required]),
+    model06c: new FormControl('Hello World', []),
+    model06d: new FormControl('Hello World', []),
+    model06e: new FormControl('demo', [Validators.required, Validators.minLength(this.minLength06a)]),
+    model06f: new FormControl('Hello World', []),
   };
   public formGroup06a: FormGroup = new FormGroup(this.controls06a);
   public exterior06a = 'outlined';

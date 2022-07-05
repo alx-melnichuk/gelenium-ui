@@ -21,10 +21,10 @@ export class FramePalette2Component {
   public labelCss = LABEL_CSS;
 
   public controls06b = {
-    input06g: new FormControl('Hello World', [Validators.required]),
-    input06h: new FormControl('', [Validators.required]),
-    input06i: new FormControl('Hello World', []),
-    input06j: new FormControl('Hello World', []),
+    model06g: new FormControl('Hello World', [Validators.required]),
+    model06h: new FormControl('', [Validators.required]),
+    model06i: new FormControl('Hello World', []),
+    model06j: new FormControl('Hello World', []),
   };
   public formGroup06b: FormGroup = new FormGroup(this.controls06b);
 

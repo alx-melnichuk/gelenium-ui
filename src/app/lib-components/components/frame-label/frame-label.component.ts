@@ -36,10 +36,10 @@ export class FrameLabelComponent {
 
   public exterior03 = 'outlined';
   public formGroup03a: FormGroup = new FormGroup({
-    input03a: new FormControl('', []),
+    model03a: new FormControl('', []),
   });
   public formGroup03b: FormGroup = new FormGroup({
-    input03b: new FormControl('Hello World', []),
+    model03b: new FormControl('Hello World', []),
   });
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

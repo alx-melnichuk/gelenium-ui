@@ -35,13 +35,13 @@ export class RegexMatchBasicComponent {
   public labelCss = LABEL_CSS;
 
   public control01 = {
-    input01a: new FormControl('', []),
-    input01b: new FormControl('-1234567890123456.12345', []),
-    input01c: new FormControl('-12345678901234567890', []),
-    input01d: new FormControl('12345678901234567890.12', []),
-    input01e: new FormControl('123456789012.12', []),
-    input01f: new FormControl('123456789012', []),
-    input01g: new FormControl('123456789012.12', []),
+    model01a: new FormControl('', []),
+    model01b: new FormControl('-1234567890123456.12345', []),
+    model01c: new FormControl('-12345678901234567890', []),
+    model01d: new FormControl('12345678901234567890.12', []),
+    model01e: new FormControl('123456789012.12', []),
+    model01f: new FormControl('123456789012', []),
+    model01g: new FormControl('123456789012.12', []),
   };
   public formGroup01: FormGroup = new FormGroup(this.control01);
   public exterior01 = 'outlined';

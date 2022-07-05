@@ -94,7 +94,7 @@
           <em>State: empty.</em>
         </small>
       </div>
-      <gln-input formControlName="input06a"
+      <gln-input formControlName="model06a"
         label="Enter value"
         [exterior]="exterior06a">
       </gln-input>
@@ -106,7 +106,7 @@
           <em>Attributes: isRequired, helperText.</em>
         </small>
       </div>
-      <gln-input formControlName="input06b"
+      <gln-input formControlName="model06b"
         label="Required field"
         isRequired
         helperText="A value must be entered."
@@ -120,7 +120,7 @@
           <em>Attribute: isReadOnly.</em>
         </small>
       </div>
-      <gln-input formControlName="input06c"
+      <gln-input formControlName="model06c"
         label="Read Only"
         isReadOnly
         helperText="The parameter is read only."
@@ -134,7 +134,7 @@
           <em>Attribute: isDisabled.</em>
         </small>
       </div>
-      <gln-input formControlName="input06d"
+      <gln-input formControlName="model06d"
         label="Disabled"
         isDisabled
         helperText="The parameter is disabled."
@@ -148,16 +148,16 @@
           <em>Attribute: isRequired, minLength.</em>
         </small>
       </div>
-      <gln-input formControlName="input06e"
-        [label]="controls06a.input06e.errors ? 'Error':'Value'"
+      <gln-input formControlName="model06e"
+        [label]="controls06a.model06e.errors ? 'Error':'Value'"
         isRequired
         [minLength]="minLength06a"
         helperText="
-        {{(controls06a.input06e.errors?.required ?
+        {{(controls06a.model06e.errors?.required ?
           'Required field.':
-          (controls06a.input06e.errors?.minlength ?
+          (controls06a.model06e.errors?.minlength ?
             'Minimum length '
-            + controls06a.input06e.errors?.minlength.requiredLength
+            + controls06a.model06e.errors?.minlength.requiredLength
             + ' characters.'
             :'Enter value.'
           )
@@ -172,7 +172,7 @@
           <em>Attribute: isError + isDisabled.</em>
         </small>
       </div>
-      <gln-input formControlName="input06f"
+      <gln-input formControlName="model06f"
         label="Error-Disabled"
         isError
         isDisabled
@@ -206,7 +206,7 @@
           &lt;em&gt;State: empty.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input06a"
+      &lt;gln-input formControlName="model06a"
         label="Enter value"
         [exterior]="exterior06a"&gt;
       &lt;/gln-input&gt;
@@ -218,7 +218,7 @@
           &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input06b"
+      &lt;gln-input formControlName="model06b"
         label="Required field"
         isRequired
         helperText="A value must be entered."
@@ -232,7 +232,7 @@
           &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input06c"
+      &lt;gln-input formControlName="model06c"
         label="Read Only"
         isReadOnly
         helperText="The parameter is read only."
@@ -246,7 +246,7 @@
           &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input06d"
+      &lt;gln-input formControlName="model06d"
         label="Disabled"
         isDisabled
         helperText="The parameter is disabled."
@@ -260,16 +260,16 @@
           &lt;em&gt;Attribute: isRequired, minLength.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input06e"
-        [label]="controls06a.input06e.errors ? 'Error':'Value'"
+      &lt;gln-input formControlName="model06e"
+        [label]="controls06a.model06e.errors ? 'Error':'Value'"
         isRequired
         [minLength]="minLength06a"
         helperText="
-      <b>&#123;</b>&#123;(controls06a.input06e.errors?.required ?
+      <b>&#123;</b>&#123;(controls06a.model06e.errors?.required ?
         'Required field.':
-        (controls06a.input06e.errors?.minlength ?
+        (controls06a.model06e.errors?.minlength ?
           'Minimum length '
-          + controls06a.input06e.errors?.minlength.requiredLength
+          + controls06a.model06e.errors?.minlength.requiredLength
           + ' characters.'
           :'Enter value.'
         )
@@ -284,7 +284,7 @@
           &lt;em&gt;Attribute: isError + isDisabled.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input06f"
+      &lt;gln-input formControlName="model06f"
         label="Error-Disabled"
         isError
         isDisabled
@@ -315,14 +315,14 @@ import &#123;
 export class FrameComponent &#123;
   public minLength06a = 5;
   public controls06a = &#123;
-    input06a: new FormControl('', []),
-    input06b: new FormControl('Hello World', [Validators.required]),
-    input06c: new FormControl('Hello World', []),
-    input06d: new FormControl('Hello World', []),
-    input06e: new FormControl('demo', [
+    model06a: new FormControl('', []),
+    model06b: new FormControl('Hello World', [Validators.required]),
+    model06c: new FormControl('Hello World', []),
+    model06d: new FormControl('Hello World', []),
+    model06e: new FormControl('demo', [
       Validators.required, Validators.minLength(this.minLength06a)
     ]),
-    input06f: new FormControl('Hello World', []),
+    model06f: new FormControl('Hello World', []),
   &#125;;
   public formGroup06a: FormGroup = new FormGroup(this.controls06a);
   public exterior06a = 'outlined';

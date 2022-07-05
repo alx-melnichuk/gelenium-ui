@@ -53,31 +53,31 @@
     <div class="app-elem">
       <input class="heb-input"
         type="text"
-        formControlName="input01a"
+        formControlName="model01a"
         required
         minlength="4"
         (focus)="isFocusInput01a=true"
         (blur)="isFocusInput01a=false" />
       <gln-hint-or-error
-        [text]="controls01.input01a.invalid ? 'The value is not correct.' : 'The value is correct.'"
-        [isError]="controls01.input01a.invalid"
+        [text]="controls01.model01a.invalid ? 'The value is not correct.' : 'The value is correct.'"
+        [isError]="controls01.model01a.invalid"
         [isFocused]="isFocusInput01a"
-        [isDisabled]="controls01.input01a.disabled">
+        [isDisabled]="controls01.model01a.disabled">
       </gln-hint-or-error>
     </div>
 
     <div class="app-elem">
       <input class="heb-input"
         type="text"
-        formControlName="input01b"
+        formControlName="model01b"
         required
         (focus)="isFocusInput01b=true"
         (blur)="isFocusInput01b=false" />
       <gln-hint-or-error
-        [text]="controls01.input01b.invalid ? 'The value is not correct.' : 'The value is correct.'"
-        [isError]="controls01.input01b.invalid"
+        [text]="controls01.model01b.invalid ? 'The value is not correct.' : 'The value is correct.'"
+        [isError]="controls01.model01b.invalid"
         [isFocused]="isFocusInput01b"
-        [isDisabled]="controls01.input01b.disabled">
+        [isDisabled]="controls01.model01b.disabled">
       </gln-hint-or-error>
     </div>
   </div>
@@ -102,33 +102,33 @@
     &lt;div class="app-elem"&gt;
       &lt;input class="heb-input"
         type="text"
-        formControlName="input01a"
+        formControlName="model01a"
         required
         minlength="4"
         (focus)="isFocusInput01a=true"
         (blur)="isFocusInput01a=false" /&gt;
       &lt;gln-hint-or-error
-        [text]="controls01.input01a.invalid
+        [text]="controls01.model01a.invalid
           ? 'The value is not correct.' : 'The value is correct.'"
-        [isError]="controls01.input01a.invalid"
+        [isError]="controls01.model01a.invalid"
         [isFocused]="isFocusInput01a"
-        [isDisabled]="controls01.input01a.disabled"&gt;
+        [isDisabled]="controls01.model01a.disabled"&gt;
       &lt;/gln-hint-or-error&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;input class="heb-input"
         type="text"
-        formControlName="input01b"
+        formControlName="model01b"
         required
         (focus)="isFocusInput01b=true"
         (blur)="isFocusInput01b=false" /&gt;
       &lt;gln-hint-or-error
-        [text]="controls01.input01b.invalid
+        [text]="controls01.model01b.invalid
           ? 'The value is not correct.' : 'The value is correct.'"
-        [isError]="controls01.input01b.invalid"
+        [isError]="controls01.model01b.invalid"
         [isFocused]="isFocusInput01b"
-        [isDisabled]="controls01.input01b.disabled"&gt;
+        [isDisabled]="controls01.model01b.disabled"&gt;
       &lt;/gln-hint-or-error&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -152,8 +152,8 @@ import &#123;
 &#125;)
 export class TextareaComponent &#123;
   public controls01 = &#123;
-    input01a: new FormControl('is', []),
-    input01b: new FormControl('demo', []),
+    model01a: new FormControl('is', []),
+    model01b: new FormControl('demo', []),
   &#125;;
   public formGroup01: FormGroup = new FormGroup(this.controls01);
   public isDisabled01 = false;

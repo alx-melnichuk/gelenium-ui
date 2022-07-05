@@ -39,17 +39,17 @@ export class InputOrnamentsComponent {
   public minLength05 = 3;
   public maxLength05 = 15;
   public controls05 = {
-    input05a: new FormControl('', []),
-    input05b: new FormControl('thirty', []),
-    input05c: new FormControl('one', [Validators.required, Validators.minLength(this.minLength05), Validators.maxLength(this.maxLength05)]),
-    input05d: new FormControl('', [Validators.required, Validators.minLength(this.minLength05), Validators.maxLength(this.maxLength05)]),
-    input05e: new FormControl('thirty', [Validators.required]),
-    input05f: new FormControl('thirty', [Validators.required]),
-    input05g: new FormControl('thirty', [Validators.required]),
-    input05h: new FormControl('thirty', [Validators.required]),
-    input05i: new FormControl('', [Validators.required]),
-    input05j: new FormControl('test', []),
-    input05k: new FormControl('test', []),
+    model05a: new FormControl('', []),
+    model05b: new FormControl('thirty', []),
+    model05c: new FormControl('one', [Validators.required, Validators.minLength(this.minLength05), Validators.maxLength(this.maxLength05)]),
+    model05d: new FormControl('', [Validators.required, Validators.minLength(this.minLength05), Validators.maxLength(this.maxLength05)]),
+    model05e: new FormControl('thirty', [Validators.required]),
+    model05f: new FormControl('thirty', [Validators.required]),
+    model05g: new FormControl('thirty', [Validators.required]),
+    model05h: new FormControl('thirty', [Validators.required]),
+    model05i: new FormControl('', [Validators.required]),
+    model05j: new FormControl('test', []),
+    model05k: new FormControl('test', []),
   };
   public formGroup05: FormGroup = new FormGroup(this.controls05);
   public exterior05 = 'outlined';

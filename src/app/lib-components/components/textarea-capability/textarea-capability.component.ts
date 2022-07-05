@@ -37,10 +37,10 @@ export class TextareaCapabilityComponent {
   public text1 = 'line 1\nline 2';
   public text2 = this.text1 + '\nline 3\nline 4\nline 5';
   public formGroup04: FormGroup = new FormGroup({
-    input04a: new FormControl(this.text1, []),
-    input04b: new FormControl(this.text2, []),
-    input04c: new FormControl(this.text1, []),
-    input04d: new FormControl(this.text2, []),
+    model04a: new FormControl(this.text1, []),
+    model04b: new FormControl(this.text2, []),
+    model04c: new FormControl(this.text1, []),
+    model04d: new FormControl(this.text2, []),
   });
   public exterior04 = 'outlined';
 }

@@ -39,12 +39,12 @@
           <em>Attribute: isError.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input03a"
-        [label]="!controls03.input03a.value
+      <gln-textarea formControlName="model03a"
+        [label]="!controls03.model03a.value
           ? 'Requires a value':'Parameter value'"
         [cntRows]="2"
-        [isError]="!controls03.input03a.value ? '':null"
-        [helperText]="!controls03.input03a.value
+        [isError]="!controls03.model03a.value ? '':null"
+        [helperText]="!controls03.model03a.value
           ? 'The field is not filled.'
           : 'The field is filled.'"
         [exterior]="exterior03">
@@ -57,16 +57,16 @@
           <em>Attribute: isRequired, minLength.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input03b"
-        [label]="controls03.input03b.errors ? 'Error':'Value'"
+      <gln-textarea formControlName="model03b"
+        [label]="controls03.model03b.errors ? 'Error':'Value'"
         [cntRows]="2"
         isRequired
         [minLength]="minLength03"
-        [helperText]="controls03.input03b.errors?.required ?
+        [helperText]="controls03.model03b.errors?.required ?
         'Required field.':
-        (controls03.input03b.errors?.minlength
+        (controls03.model03b.errors?.minlength
         ? 'Minimum length '
-         + controls03.input03b.errors?.minlength.requiredLength
+         + controls03.model03b.errors?.minlength.requiredLength
          + ' characters.'
         :'Enter value.')"
         [exterior]="exterior03">
@@ -79,7 +79,7 @@
           <em>Attribute: isError + isDisabled.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input03c"
+      <gln-textarea formControlName="model03c"
         label="Error-Disabled"
         [cntRows]="2"
         isError
@@ -114,12 +114,12 @@
           &lt;em&gt;Attribute: isError.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input03a"
-        [label]="!controls03.input03a.value
+      &lt;gln-textarea formControlName="model03a"
+        [label]="!controls03.model03a.value
           ? 'Requires a value':'Parameter value'"
         [cntRows]="2"
-        [isError]="!controls03.input03a.value ? '':null"
-        [helperText]="!controls03.input03a.value
+        [isError]="!controls03.model03a.value ? '':null"
+        [helperText]="!controls03.model03a.value
           ? 'The field is not filled.'
           : 'The field is filled.'"
         [exterior]="exterior03"&gt;
@@ -132,16 +132,16 @@
           &lt;em&gt;Attribute: isRequired, minLength.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input03b"
-        [label]="controls03.input03b.errors ? 'Error':'Value'"
+      &lt;gln-textarea formControlName="model03b"
+        [label]="controls03.model03b.errors ? 'Error':'Value'"
         [cntRows]="2"
         isRequired
         [minLength]="minLength03"
-        [helperText]="controls03.input03b.errors?.required ?
+        [helperText]="controls03.model03b.errors?.required ?
         'Required field.':
-        (controls03.input03b.errors?.minlength
+        (controls03.model03b.errors?.minlength
         ? 'Minimum length '
-         + controls03.input03b.errors?.minlength.requiredLength
+         + controls03.model03b.errors?.minlength.requiredLength
          + ' characters.'
         :'Enter value.')"
         [exterior]="exterior03"&gt;
@@ -154,7 +154,7 @@
           &lt;em&gt;Attribute: isError + isDisabled.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input03c"
+      &lt;gln-textarea formControlName="model03c"
         label="Error-Disabled"
         [cntRows]="2"
         isError
@@ -186,12 +186,12 @@ import &#123;
 export class TextareaComponent &#123;
   public minLength03 = 4;
   public controls03 = &#123;
-    input03a: new FormControl('', []),
-    input03b: new FormControl('', [
+    model03a: new FormControl('', []),
+    model03b: new FormControl('', [
       Validators.required,
       Validators.minLength(this.minLength03)
     ]),
-    input03c: new FormControl('Hello World', []),
+    model03c: new FormControl('Hello World', []),
   &#125;;
   public formGroup03: FormGroup = new FormGroup(this.controls03);
   public exterior03 = 'outlined';

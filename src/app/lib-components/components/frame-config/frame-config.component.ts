@@ -31,8 +31,8 @@ export class FrameConfigComponent {
 
   public urlFrame = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
   public formGroup07: FormGroup = new FormGroup({
-    input07a: new FormControl('', []),
-    input07b: new FormControl('', []),
+    model07a: new FormControl('', []),
+    model07b: new FormControl('', []),
   });
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

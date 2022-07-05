@@ -60,7 +60,7 @@
           <em>Section: "gln-orn-lf" + text.</em>
         </small>
       </div>
-      <gln-input formControlName="input05a"
+      <gln-input formControlName="model05a"
         label="Enter the mass"
         helperText="The value is greater than zero."
         [exterior]="exterior05">
@@ -75,7 +75,7 @@
           <em>Section: "gln-orn-rg" + text.</em>
         </small>
       </div>
-      <gln-input formControlName="input05b"
+      <gln-input formControlName="model05b"
         label="Enter the height"
         [exterior]="exterior05">
         <span gln-orn-rg
@@ -89,22 +89,22 @@
           <em>Section: "gln-orn-lf" + text.</em>
         </small>
       </div>
-      <gln-input formControlName="input05c"
+      <gln-input formControlName="model05c"
         label="Enter a small number in words"
         isRequired
         [minLength]="minLength05"
         [maxLength]="maxLength05"
         [exterior]="exterior05"
         [helperText]="
-        (controls05.input05c.errors?.required
+        (controls05.model05c.errors?.required
         ? 'Required field.'
-        : (controls05.input05c.errors?.minlength
+        : (controls05.model05c.errors?.minlength
           ? 'Minimum length '
-          + controls05.input05c.errors?.minlength.requiredLength
+          + controls05.model05c.errors?.minlength.requiredLength
           + ' characters.'
-          : (controls05.input05c.errors?.maxlength
+          : (controls05.model05c.errors?.maxlength
             ? 'Maximum length '
-            + controls05.input05c.errors?.maxlength.requiredLength
+            + controls05.model05c.errors?.maxlength.requiredLength
             + ' characters.'
             :'')
           )
@@ -120,22 +120,22 @@
           <em>Section: "gln-orn-rg" + text.</em>
         </small>
       </div>
-      <gln-input formControlName="input05d"
+      <gln-input formControlName="model05d"
         label="Enter a small number in words"
         isRequired
         [minLength]="minLength05"
         [maxLength]="maxLength05"
         [exterior]="exterior05"
         [helperText]="
-        (controls05.input05d.errors?.required
+        (controls05.model05d.errors?.required
         ? 'Required field.'
-        : (controls05.input05d.errors?.minlength
+        : (controls05.model05d.errors?.minlength
           ? 'Minimum length '
-          + controls05.input05d.errors?.minlength.requiredLength
+          + controls05.model05d.errors?.minlength.requiredLength
           + ' characters.'
-          : (controls05.input05d.errors?.maxlength
+          : (controls05.model05d.errors?.maxlength
             ? 'Maximum length '
-            + controls05.input05d.errors?.maxlength.requiredLength
+            + controls05.model05d.errors?.maxlength.requiredLength
             + ' characters.'
             :'')
           )
@@ -151,7 +151,7 @@
           <em>Section: "gln-orn-lf" + icon.</em>
         </small>
       </div>
-      <gln-input formControlName="input05e"
+      <gln-input formControlName="model05e"
         [ngClass]="[(!isBtnEyeCrossed05e ?'io-passwd-big':'')]"
         [type]="isBtnEyeCrossed05e ? 'text':'password'"
         label="Enter a unique password in words"
@@ -159,7 +159,7 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-        controls05.input05e.errors?.required
+        controls05.model05e.errors?.required
         ? 'The password value is required.'
         :'Enter the password value.'">
         <button gln-orn-lf
@@ -178,7 +178,7 @@
           <em>Section: "gln-orn-rg" + icon.</em>
         </small>
       </div>
-      <gln-input formControlName="input05f"
+      <gln-input formControlName="model05f"
         [ngClass]="[(!isBtnEyeCrossed05f ?'io-passwd-big':'')]"
         [type]="isBtnEyeCrossed05f ? 'text':'password'"
         label="Enter a unique password in words"
@@ -186,7 +186,7 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-          controls05.input05f.errors?.required
+          controls05.model05f.errors?.required
           ? 'The password value is required.'
           : 'Enter the password value.'">
         <button gln-orn-rg
@@ -205,14 +205,14 @@
           <em>Section: "gln-orn-lf" + uncode.</em>
         </small>
       </div>
-      <gln-input formControlName="input05g"
+      <gln-input formControlName="model05g"
         class="io-demo"
         [type]="isBtnEyeCrossed05g ? 'text':'password'"
         label="Enter a unique password in words"
         isRequired
         [exterior]="exterior05"
         [helperText]="
-        controls05.input05g.errors?.required
+        controls05.model05g.errors?.required
         ? 'The password value is required.'
         :'Enter the password value.'"
         [ornamLfAlign]="'baseline'">
@@ -230,13 +230,13 @@
           <em>Section: "gln-orn-rg" + uncode.</em>
         </small>
       </div>
-      <gln-input formControlName="input05h"
+      <gln-input formControlName="model05h"
         [type]="isBtnEyeCrossed05h ? 'text':'password'"
         label="Enter a unique password in words"
         isRequired
         [exterior]="exterior05"
         [helperText]="
-        controls05.input05h.errors?.required
+        controls05.model05h.errors?.required
         ? 'The password value is required.'
         :'Enter the password value.'"
         [config]="config05h">
@@ -254,25 +254,25 @@
           <em>regex=/^-?(\d+)$/, uncode</em>
         </small>
       </div>
-      <gln-input formControlName="input05i"
+      <gln-input formControlName="model05i"
         wdFull
-        [label]="controls05.input05i.value === ''
+        [label]="controls05.model05i.value === ''
           ?'Enter number':'Number'"
         glnRegexMatch="/^-?(\d+)$/"
-        [helperText]="controls05.input05i.value === ''
+        [helperText]="controls05.model05i.value === ''
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior05">
         <button gln-orn-lf
           class="io-btn io-uncode2"
-          (click)="controls05.input05i.setValue(
-            (controls05.input05i.value || 0) - 1)">
+          (click)="controls05.model05i.setValue(
+            (controls05.model05i.value || 0) - 1)">
           &#8854;
         </button>
         <button gln-orn-rg
           class="io-btn io-uncode2"
-          (click)="controls05.input05i.setValue(
-            (controls05.input05i.value || 0) + 1)">
+          (click)="controls05.model05i.setValue(
+            (controls05.model05i.value || 0) + 1)">
           &#8853;
         </button>
       </gln-input>
@@ -310,11 +310,11 @@
           <em>Section: "gln-orn-lf" + text.</em>
         </small>
       </div>
-      <gln-input formControlName="input05j"
-        [label]="controls05.input05j.value === ''
+      <gln-input formControlName="model05j"
+        [label]="controls05.model05j.value === ''
           ?'Enter a value':'Value'"
         [exterior]="exterior05"
-        [helperText]="controls05.input05j.value === ''
+        [helperText]="controls05.model05j.value === ''
           ?'Enter your value.'
           :'The value is correct.'"
         [config]="config05">
@@ -329,11 +329,11 @@
           <em>Section: "gln-orn-rg" + text.</em>
         </small>
       </div>
-      <gln-input formControlName="input05k"
-        [label]="controls05.input05k.value === ''
+      <gln-input formControlName="model05k"
+        [label]="controls05.model05k.value === ''
           ?'Enter a value':'Value'"
         [exterior]="exterior05"
-        [helperText]="controls05.input05k.value === ''
+        [helperText]="controls05.model05k.value === ''
           ?'Enter your value.'
           :'The value is correct.'"
         [config]="config05">
@@ -382,7 +382,7 @@
           &lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input05a"
+      &lt;gln-input formControlName="model05a"
         label="Enter the mass"
         helperText="The value is greater than zero."
         [exterior]="exterior05"&gt;
@@ -397,7 +397,7 @@
           &lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input05b"
+      &lt;gln-input formControlName="model05b"
         label="Enter the height"
         [exterior]="exterior05"&gt;
         &lt;span gln-orn-rg
@@ -411,22 +411,22 @@
           &lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input05c"
+      &lt;gln-input formControlName="model05c"
         label="Enter a small number in words"
         isRequired
         [minLength]="minLength05"
         [maxLength]="maxLength05"
         [exterior]="exterior05"
         [helperText]="
-        (controls05.input05c.errors?.required
+        (controls05.model05c.errors?.required
         ? 'Required field.'
-        : (controls05.input05c.errors?.minlength
+        : (controls05.model05c.errors?.minlength
           ? 'Minimum length '
-          + controls05.input05c.errors?.minlength.requiredLength
+          + controls05.model05c.errors?.minlength.requiredLength
           + ' characters.'
-          : (controls05.input05c.errors?.maxlength
+          : (controls05.model05c.errors?.maxlength
             ? 'Maximum length '
-            + controls05.input05c.errors?.maxlength.requiredLength
+            + controls05.model05c.errors?.maxlength.requiredLength
             + ' characters.'
             :'')
           )
@@ -442,22 +442,22 @@
           &lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input05d"
+      &lt;gln-input formControlName="model05d"
         label="Enter a small number in words"
         isRequired
         [minLength]="minLength05"
         [maxLength]="maxLength05"
         [exterior]="exterior05"
         [helperText]="
-        (controls05.input05d.errors?.required
+        (controls05.model05d.errors?.required
         ? 'Required field.'
-        : (controls05.input05d.errors?.minlength
+        : (controls05.model05d.errors?.minlength
           ? 'Minimum length '
-          + controls05.input05d.errors?.minlength.requiredLength
+          + controls05.model05d.errors?.minlength.requiredLength
           + ' characters.'
-          : (controls05.input05d.errors?.maxlength
+          : (controls05.model05d.errors?.maxlength
             ? 'Maximum length '
-            + controls05.input05d.errors?.maxlength.requiredLength
+            + controls05.model05d.errors?.maxlength.requiredLength
             + ' characters.'
             :'')
           )
@@ -473,7 +473,7 @@
           &lt;em&gt;Section: "gln-orn-lf" + icon.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input05e"
+      &lt;gln-input formControlName="model05e"
         [ngClass]="[(!isBtnEyeCrossed05e ?'io-passwd-big':'')]"
         [type]="isBtnEyeCrossed05e ? 'text':'password'"
         label="Enter a unique password in words"
@@ -481,7 +481,7 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-        controls05.input05e.errors?.required
+        controls05.model05e.errors?.required
         ? 'The password value is required.'
         :'Enter the password value.'"&gt;
         &lt;button gln-orn-lf
@@ -500,7 +500,7 @@
           &lt;em&gt;Section: "gln-orn-rg" + icon.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input05f"
+      &lt;gln-input formControlName="model05f"
         [ngClass]="[(!isBtnEyeCrossed05f ?'io-passwd-big':'')]"
         [type]="isBtnEyeCrossed05f ? 'text':'password'"
         label="Enter a unique password in words"
@@ -508,7 +508,7 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-          controls05.input05f.errors?.required
+          controls05.model05f.errors?.required
           ? 'The password value is required.'
           : 'Enter the password value.'"&gt;
         &lt;button gln-orn-rg
@@ -527,14 +527,14 @@
           &lt;em&gt;Section: "gln-orn-lf" + uncode.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input05g"
+      &lt;gln-input formControlName="model05g"
         class="io-demo"
         [type]="isBtnEyeCrossed05g ? 'text':'password'"
         label="Enter a unique password in words"
         isRequired
         [exterior]="exterior05"
         [helperText]="
-        controls05.input05g.errors?.required
+        controls05.model05g.errors?.required
         ? 'The password value is required.'
         :'Enter the password value.'"
         [ornamLfAlign]="'baseline'"&gt;
@@ -552,13 +552,13 @@
           &lt;em&gt;Section: "gln-orn-rg" + uncode.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input05h"
+      &lt;gln-input formControlName="model05h"
         [type]="isBtnEyeCrossed05h ? 'text':'password'"
         label="Enter a unique password in words"
         isRequired
         [exterior]="exterior05"
         [helperText]="
-        controls05.input05h.errors?.required
+        controls05.model05h.errors?.required
         ? 'The password value is required.'
         :'Enter the password value.'"
         [config]="config05h"&gt;
@@ -576,25 +576,25 @@
           &lt;em&gt;regex=/^-?(\d+)$/, uncode&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input05i"
+      &lt;gln-input formControlName="model05i"
         wdFull
-        [label]="controls05.input05i.value === ''
+        [label]="controls05.model05i.value === ''
           ?'Enter number':'Number'"
         glnRegexMatch="/^-?(\d+)$/"
-        [helperText]="controls05.input05i.value === ''
+        [helperText]="controls05.model05i.value === ''
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior05"&gt;
         &lt;button gln-orn-lf
           class="io-btn io-uncode2"
-          (click)="controls05.input05i.setValue(
-            (controls05.input05i.value || 0) - 1)"&gt;
+          (click)="controls05.model05i.setValue(
+            (controls05.model05i.value || 0) - 1)"&gt;
           &amp;#8854;
         &lt;/button&gt;
         &lt;button gln-orn-rg
           class="io-btn io-uncode2"
-          (click)="controls05.input05i.setValue(
-            (controls05.input05i.value || 0) + 1)"&gt;
+          (click)="controls05.model05i.setValue(
+            (controls05.model05i.value || 0) + 1)"&gt;
           &amp;#8853;
         &lt;/button&gt;
       &lt;/gln-input&gt;
@@ -618,11 +618,11 @@
           &lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input05j"
-        [label]="controls05.input05j.value === ''
+      &lt;gln-input formControlName="model05j"
+        [label]="controls05.model05j.value === ''
           ?'Enter a value':'Value'"
         [exterior]="exterior05"
-        [helperText]="controls05.input05j.value === ''
+        [helperText]="controls05.model05j.value === ''
           ?'Enter your value.'
           :'The value is correct.'"
         [config]="config05"&gt;
@@ -637,11 +637,11 @@
           &lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input05k"
-        [label]="controls05.input05k.value === ''
+      &lt;gln-input formControlName="model05k"
+        [label]="controls05.model05k.value === ''
           ?'Enter a value':'Value'"
         [exterior]="exterior05"
-        [helperText]="controls05.input05k.value === ''
+        [helperText]="controls05.model05k.value === ''
           ?'Enter your value.'
           :'The value is correct.'"
         [config]="config05"&gt;
@@ -669,25 +669,25 @@ export class InputComponent &#123;
   public minLength05 = 3;
   public maxLength05 = 15;
   public controls05 = &#123;
-    input05a: new FormControl('', []),
-    input05b: new FormControl('thirty', []),
-    input05c: new FormControl('one', [
+    model05a: new FormControl('', []),
+    model05b: new FormControl('thirty', []),
+    model05c: new FormControl('one', [
       Validators.required,
       Validators.minLength(this.minLength05),
       Validators.maxLength(this.maxLength05)
     ]),
-    input05d: new FormControl('', [
+    model05d: new FormControl('', [
       Validators.required,
       Validators.minLength(this.minLength05),
       Validators.maxLength(this.maxLength05),
     ]),
-    input05e: new FormControl('thirty', [Validators.required]),
-    input05f: new FormControl('thirty', [Validators.required]),
-    input05g: new FormControl('thirty', [Validators.required]),
-    input05h: new FormControl('thirty', [Validators.required]),
-    input05i: new FormControl('', [Validators.required]),
-    input05j: new FormControl('test', []),
-    input05k: new FormControl('test', []),
+    model05e: new FormControl('thirty', [Validators.required]),
+    model05f: new FormControl('thirty', [Validators.required]),
+    model05g: new FormControl('thirty', [Validators.required]),
+    model05h: new FormControl('thirty', [Validators.required]),
+    model05i: new FormControl('', [Validators.required]),
+    model05j: new FormControl('test', []),
+    model05k: new FormControl('test', []),
   &#125;;
   public formGroup05: FormGroup = new FormGroup(this.controls05);
   public exterior05 = 'outlined';

@@ -58,24 +58,24 @@ export class FrameBorderRadiusComponent {
   public sizeHuge = GlnFrameSize.huge;
 
   public formGroup05: FormGroup = new FormGroup({
-    input05a: new FormControl('Demo Size Short', []),
-    input05b: new FormControl('Demo Size Small', []),
-    input05c: new FormControl('Demo Size Middle', []),
-    input05d: new FormControl('Demo Size Wide', []),
-    input05e: new FormControl('Demo Size Large', []),
-    input05f: new FormControl('Demo Size Huge', []),
+    model05a: new FormControl('Demo Size Short', []),
+    model05b: new FormControl('Demo Size Small', []),
+    model05c: new FormControl('Demo Size Middle', []),
+    model05d: new FormControl('Demo Size Wide', []),
+    model05e: new FormControl('Demo Size Large', []),
+    model05f: new FormControl('Demo Size Huge', []),
   });
 
   public isAddPadding06 = true;
   public isNoLabel06 = false;
 
   public formGroup06: FormGroup = new FormGroup({
-    input06a: new FormControl('Demo - A', []),
-    input06b: new FormControl('Demo - B', []),
-    input06c: new FormControl('Demo - C', []),
-    input06d: new FormControl('Demo - D', []),
-    input06e: new FormControl('Demo - E', []),
-    input06f: new FormControl('Demo - F', []),
+    model06a: new FormControl('Demo - A', []),
+    model06b: new FormControl('Demo - B', []),
+    model06c: new FormControl('Demo - C', []),
+    model06d: new FormControl('Demo - D', []),
+    model06e: new FormControl('Demo - E', []),
+    model06f: new FormControl('Demo - F', []),
   });
   public configOutlined: GlnFrameConfig = {
     labelPd: 18.5, // 0.37*FrameSizeValue.middle

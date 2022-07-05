@@ -35,10 +35,10 @@ export class RegexRemoveBasicComponent {
   public labelCss = LABEL_CSS;
 
   public control01 = {
-    input01a: new FormControl('123', []),
-    input01b: new FormControl('Alex', []),
-    input01c: new FormControl('New level 12', []),
-    input01d: new FormControl('Sarah Chauncey Woolsey', []),
+    model01a: new FormControl('123', []),
+    model01b: new FormControl('Alex', []),
+    model01c: new FormControl('New level 12', []),
+    model01d: new FormControl('Sarah Chauncey Woolsey', []),
   };
   public formGroup01: FormGroup = new FormGroup(this.control01);
   public exterior01 = 'outlined';

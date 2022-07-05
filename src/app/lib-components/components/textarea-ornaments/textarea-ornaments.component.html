@@ -37,7 +37,7 @@
           <em>Section: "gln-orn-lf" + text.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input05a"
+      <gln-textarea formControlName="model05a"
         label="Enter the mass"
         [minRows]="2"
         [maxRows]="4"
@@ -55,7 +55,7 @@
           <em>Section: "gln-orn-rg" + text.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input05b"
+      <gln-textarea formControlName="model05b"
         label="Enter the height"
         [minRows]="2"
         [maxRows]="4"
@@ -73,7 +73,7 @@
           <em>Section: "gln-orn-lf" + uncode.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input05c"
+      <gln-textarea formControlName="model05c"
         label="Enter text value"
         [minRows]="2"
         [maxRows]="4"
@@ -94,7 +94,7 @@
           <em>Section: "gln-orn-rg" + uncode.</em>
         </small>
       </div>
-      <gln-textarea formControlName="input05d"
+      <gln-textarea formControlName="model05d"
         label="Enter text value"
         [minRows]="2"
         [maxRows]="4"
@@ -135,7 +135,7 @@
           &lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input05a"
+      &lt;gln-textarea formControlName="model05a"
         label="Enter the mass"
         [minRows]="2"
         [maxRows]="4"
@@ -153,7 +153,7 @@
           &lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input05b"
+      &lt;gln-textarea formControlName="model05b"
         label="Enter the height"
         [minRows]="2"
         [maxRows]="4"
@@ -171,7 +171,7 @@
           &lt;em&gt;Section: "gln-orn-lf" + uncode.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input05c"
+      &lt;gln-textarea formControlName="model05c"
         label="Enter text value"
         [minRows]="2"
         [maxRows]="4"
@@ -192,7 +192,7 @@
           &lt;em&gt;Section: "gln-orn-rg" + uncode.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="input05d"
+      &lt;gln-textarea formControlName="model05d"
         label="Enter text value"
         [minRows]="2"
         [maxRows]="4"
@@ -231,10 +231,10 @@ import &#123;
 &#125;)
 export class TextareaComponent &#123;
   public controls05 = &#123;
-    input05a: new FormControl('', []),
-    input05b: new FormControl('First line\nSecond line', []),
-    input05c: new FormControl('', []),
-    input05d: new FormControl('', []),
+    model05a: new FormControl('', []),
+    model05b: new FormControl('First line\nSecond line', []),
+    model05c: new FormControl('', []),
+    model05d: new FormControl('', []),
   &#125;;
   public formGroup05: FormGroup = new FormGroup(this.controls05);
   public exterior05 = 'outlined';

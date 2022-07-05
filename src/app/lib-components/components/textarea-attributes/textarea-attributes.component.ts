@@ -35,12 +35,12 @@ export class TextareaAttributesComponent {
   public labelCss = LABEL_CSS;
 
   public formGroup02: FormGroup = new FormGroup({
-    input02a: new FormControl('', []),
-    input02b: new FormControl('Hello World', [Validators.required]),
-    input02c: new FormControl('Hello World', []),
-    input02d: new FormControl('Hello World', []),
-    input02e: new FormControl('', []),
-    input02f: new FormControl('Hello World', []),
+    model02a: new FormControl('', []),
+    model02b: new FormControl('Hello World', [Validators.required]),
+    model02c: new FormControl('Hello World', []),
+    model02d: new FormControl('Hello World', []),
+    model02e: new FormControl('', []),
+    model02f: new FormControl('Hello World', []),
   });
   public exterior02 = 'outlined';
   public cntRows = 2;

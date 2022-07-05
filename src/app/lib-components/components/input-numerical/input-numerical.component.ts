@@ -36,13 +36,13 @@ export class InputNumericalComponent {
   public urlRegexMatch = '/' + 'directives' + '/' + 'regex-match';
 
   public formGroup04: FormGroup = new FormGroup({
-    input04a: new FormControl('', []),
-    input04b: new FormControl('', []),
-    input04c: new FormControl('', []),
-    input04d: new FormControl('-12345678901234567890', []),
-    input04e: new FormControl('12345678901234567890.12', []),
-    input04f: new FormControl('123456789012.12', []),
-    input04g: new FormControl('between 3 and 6', []),
+    model04a: new FormControl('', []),
+    model04b: new FormControl('', []),
+    model04c: new FormControl('', []),
+    model04d: new FormControl('-12345678901234567890', []),
+    model04e: new FormControl('12345678901234567890.12', []),
+    model04f: new FormControl('123456789012.12', []),
+    model04g: new FormControl('between 3 and 6', []),
   });
   public exterior04 = 'outlined';
   // eslint-disable-next-line @typescript-eslint/no-empty-function

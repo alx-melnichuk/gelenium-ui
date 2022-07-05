@@ -236,20 +236,20 @@
           <em>2. pattern="[a-zA-Z]", glnRegexCheck="\d".</em>
         </small>
       </div>
-      <gln-input formControlName="input01a"
+      <gln-input formControlName="model01a"
         wdFull
-        [label]="!control01.input01a.value
+        [label]="!control01.model01a.value
           ?'Enter a digit and symbol':'A digit and symbol'"
         pattern="(?=.*[a-zA-Z])[a-zA-Z\d]{1,}"
         glnRegexCheck="(?=.*\d)[a-zA-Z\d]{1,}"
         [helperText]="
-        !control01.input01a.errors
-        ?(!control01.input01a.value
+        !control01.model01a.errors
+        ?(!control01.model01a.value
           ? 'Enter value.':'The value is correct.'
          )
-        :(control01.input01a.errors?.pattern
+        :(control01.model01a.errors?.pattern
           ? 'The field must have characters.'
-          : (control01.input01a.errors?.regexCheck
+          : (control01.model01a.errors?.regexCheck
              ?'The field must have digits.'
              :'The value is not correct.')
          )"
@@ -263,9 +263,9 @@
           <em>3. Check: [a-zA-Z], [\d], [!@#$%^&*].</em>
         </small>
       </div>
-      <gln-input formControlName="input01b"
+      <gln-input formControlName="model01b"
         wdFull
-        [label]="!control01.input01b.value
+        [label]="!control01.model01b.value
           ?'Enter parameter':'Parameter'"
         [glnRegexCheck]="{
           'checkLetters': '^(?=.*[a-zA-Z])[\\w\\W]{1,}$',
@@ -273,15 +273,15 @@
           'checkSymbols': '^(?=.*[!@#$%^&*])[\\w\\W]{1,}$'
         }"
         [helperText]="
-        !control01.input01b.errors
-        ?(!control01.input01b.value
+        !control01.model01b.errors
+        ?(!control01.model01b.value
           ? 'Enter the parameter.':'The value is correct.'
          )
-        :(control01.input01b.errors.checkLetters
+        :(control01.model01b.errors.checkLetters
           ?'Letters must be present'
-          :(control01.input01b.errors.checkDigits
+          :(control01.model01b.errors.checkDigits
              ?'Digits must be present.'
-             :(control01.input01b.errors.checkSymbols
+             :(control01.model01b.errors.checkSymbols
                ?'Must be characters from the set [!@#$%^&*].'
                :'The value is not correct.'
               )
@@ -297,17 +297,17 @@
           <em>4.a. Entering a date value.</em>
         </small>
       </div>
-      <gln-input formControlName="input01c"
+      <gln-input formControlName="model01c"
         wdFull
-        [label]="!control01.input01c.value
+        [label]="!control01.model01c.value
           ?'Enter the date':'Date value.'"
         glnRegexCheck="/^[0-9]{2}[\/][0-9]{2}[\/][0-9]{4}$/i"
         [helperText]="
-        !control01.input01c.errors
-        ?(!control01.input01c.value
+        !control01.model01c.errors
+        ?(!control01.model01c.value
           ? 'Enter a date value.':'The date value is correct.'
          )
-        :(control01.input01c.errors?.regexCheck
+        :(control01.model01c.errors?.regexCheck
           ? 'The value should be \'01/01/2021\'.'
           : 'The value is not correct.'
          )"
@@ -321,17 +321,17 @@
           <em>4.b. Entering a date value.</em>
         </small>
       </div>
-      <gln-input formControlName="input01d"
+      <gln-input formControlName="model01d"
         wdFull
-        [label]="!control01.input01d.value
+        [label]="!control01.model01d.value
           ?'Enter the date':'Date value.'"
         glnRegexCheck="/^([0-9]{0,2}|[0-9]{2}[\/]([0-9]{0,2}|[0-9]{2}[\/][0-9]{0,4}))$/i"
         [helperText]="
-        !control01.input01d.errors
-        ?(!control01.input01d.value
+        !control01.model01d.errors
+        ?(!control01.model01d.value
           ? 'Enter a date value.':'The date value is correct.'
          )
-        :(control01.input01d.errors?.regexCheck
+        :(control01.model01d.errors?.regexCheck
           ? 'The value should be \'01/01/2021\'.'
           : 'The value is not correct.'
          )"
@@ -345,17 +345,17 @@
           <em>5. Entering a phone number.</em>
         </small>
       </div>
-      <gln-input formControlName="input01e"
+      <gln-input formControlName="model01e"
         wdFull
-        [label]="!control01.input01e.value
+        [label]="!control01.model01e.value
           ?'Enter a phone number.':'Phone number.'"
         glnRegexCheck="/^([(][0-9]{0,3}|[(][0-9]{3}[)]([0-9]{0,3}|[0-9]{3}[-][0-9]{0,4}))$/i"
         [helperText]="
-        !control01.input01e.errors
-        ?(!control01.input01e.value
+        !control01.model01e.errors
+        ?(!control01.model01e.value
           ? 'Enter a phone number.':'The phone number is correct.'
          )
-        :(control01.input01e.errors?.regexCheck
+        :(control01.model01e.errors?.regexCheck
           ? 'The phone number should be \'(999)999-9999\'.'
           : 'The phone number is not correct.'
          )"
@@ -388,20 +388,20 @@
           &lt;em&gt;2. pattern="[a-zA-Z]", glnRegexCheck="\d".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input01a"
+      &lt;gln-input formControlName="model01a"
         wdFull
-        [label]="!control01.input01a.value
+        [label]="!control01.model01a.value
           ?'Enter a digit and symbol':'A digit and symbol'"
         pattern="(?=.*[a-zA-Z])[a-zA-Z\d]&#123;1,&#125;"
         glnRegexCheck="(?=.*\d)[a-zA-Z\d]&#123;1,&#125;"
         [helperText]="
-        !control01.input01a.errors
-        ?(!control01.input01a.value
+        !control01.model01a.errors
+        ?(!control01.model01a.value
           ? 'Enter value.':'The value is correct.'
          )
-        :(control01.input01a.errors?.pattern
+        :(control01.model01a.errors?.pattern
           ? 'The field must have characters.'
-          : (control01.input01a.errors?.regexCheck
+          : (control01.model01a.errors?.regexCheck
              ?'The field must have digits.'
              :'The value is not correct.')
          )"
@@ -415,9 +415,9 @@
           &lt;em&gt;3. Check: [a-zA-Z], [\d], [!@#$%^&*].&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input01b"
+      &lt;gln-input formControlName="model01b"
         wdFull
-        [label]="!control01.input01b.value
+        [label]="!control01.model01b.value
           ?'Enter parameter':'Parameter'"
         [glnRegexCheck]="&#123;
           'checkLetters': '^(?=.*[a-zA-Z])[\\w\\W]&#123;1,&#125;$',
@@ -425,15 +425,15 @@
           'checkSymbols': '^(?=.*[!@#$%^&*])[\\w\\W]&#123;1,&#125;$'
         &#125;"
         [helperText]="
-        !control01.input01b.errors
-        ?(!control01.input01b.value
+        !control01.model01b.errors
+        ?(!control01.model01b.value
           ? 'Enter the parameter.':'The value is correct.'
          )
-        :(control01.input01b.errors.checkLetters
+        :(control01.model01b.errors.checkLetters
           ?'Letters must be present'
-          :(control01.input01b.errors.checkDigits
+          :(control01.model01b.errors.checkDigits
              ?'Digits must be present.'
-             :(control01.input01b.errors.checkSymbols
+             :(control01.model01b.errors.checkSymbols
                ?'Must be characters from the set [!@#$%^&*].'
                :'The value is not correct.'
               )
@@ -449,17 +449,17 @@
           &lt;em&gt;4.a. Entering a date value.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input01c"
+      &lt;gln-input formControlName="model01c"
         wdFull
-        [label]="!control01.input01c.value
+        [label]="!control01.model01c.value
           ?'Enter the date':'Date value.'"
         glnRegexCheck="/^[0-9]&#123;2&#125;[\/][0-9]&#123;2&#125;[\/][0-9]&#123;4&#125;$/i"
         [helperText]="
-        !control01.input01c.errors
-        ?(!control01.input01c.value
+        !control01.model01c.errors
+        ?(!control01.model01c.value
           ? 'Enter a date value.':'The date value is correct.'
          )
-        :(control01.input01c.errors?.regexCheck
+        :(control01.model01c.errors?.regexCheck
           ? 'The value should be \'01/01/2021\'.'
           : 'The value is not correct.'
          )"
@@ -473,17 +473,17 @@
           &lt;em&gt;4.b. Entering a date value.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input01d"
+      &lt;gln-input formControlName="model01d"
         wdFull
-        [label]="!control01.input01d.value
+        [label]="!control01.model01d.value
           ?'Enter the date':'Date value.'"
         glnRegexCheck="/^([0-9]&#123;0,2&#125;|[0-9]&#123;2&#125;[\/]([0-9]&#123;0,2&#125;|[0-9]&#123;2&#125;[\/][0-9]&#123;0,4&#125;))$/i"
         [helperText]="
-        !control01.input01d.errors
-        ?(!control01.input01d.value
+        !control01.model01d.errors
+        ?(!control01.model01d.value
           ? 'Enter a date value.':'The date value is correct.'
          )
-        :(control01.input01d.errors?.regexCheck
+        :(control01.model01d.errors?.regexCheck
           ? 'The value should be \'01/01/2021\'.'
           : 'The value is not correct.'
          )"
@@ -497,17 +497,17 @@
           &lt;em&gt;5. Entering a phone number.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="input01e"
+      &lt;gln-input formControlName="model01e"
         wdFull
-        [label]="!control01.input01e.value
+        [label]="!control01.model01e.value
           ?'Enter a phone number.':'Phone number.'"
         glnRegexCheck="/^([(][0-9]&#123;0,3&#125;|[(][0-9]&#123;3&#125;[)]([0-9]&#123;0,3&#125;|[0-9]&#123;3&#125;[-][0-9]&#123;0,4&#125;))$/i"
         [helperText]="
-        !control01.input01e.errors
-        ?(!control01.input01e.value
+        !control01.model01e.errors
+        ?(!control01.model01e.value
           ? 'Enter a phone number.':'The phone number is correct.'
          )
-        :(control01.input01e.errors?.regexCheck
+        :(control01.model01e.errors?.regexCheck
           ? 'The phone number should be \'(999)999-9999\'.'
           : 'The phone number is not correct.'
          )"
@@ -537,11 +537,11 @@ import &#123;
 export class RegexComponent &#123;
   public demo01 = '1';
   public control01 = &#123;
-    input01a: new FormControl('', []),
-    input01b: new FormControl('', []),
-    input01c: new FormControl('01/0', []),
-    input01d: new FormControl('01/0', []),
-    input01e: new FormControl('(99', []),
+    model01a: new FormControl('', []),
+    model01b: new FormControl('', []),
+    model01c: new FormControl('01/0', []),
+    model01d: new FormControl('01/0', []),
+    model01e: new FormControl('(99', []),
   &#125;;
   public formGroup01: FormGroup = new FormGroup(this.control01);
   public exterior01 = 'outlined';

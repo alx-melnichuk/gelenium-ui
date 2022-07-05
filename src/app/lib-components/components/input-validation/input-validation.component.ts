@@ -36,9 +36,9 @@ export class InputValidationComponent {
 
   public minLength03 = 4;
   public controls03 = {
-    input03a: new FormControl('', []),
-    input03b: new FormControl('', [Validators.required, Validators.minLength(this.minLength03)]),
-    input03c: new FormControl('Hello World', []),
+    model03a: new FormControl('', []),
+    model03b: new FormControl('', [Validators.required, Validators.minLength(this.minLength03)]),
+    model03c: new FormControl('Hello World', []),
   };
   public formGroup03: FormGroup = new FormGroup(this.controls03);
   public exterior03 = 'outlined';

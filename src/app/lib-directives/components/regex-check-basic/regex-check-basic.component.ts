@@ -36,11 +36,11 @@ export class RegexCheckBasicComponent {
 
   public demo01 = '1';
   public control01 = {
-    input01a: new FormControl('', []),
-    input01b: new FormControl('', []),
-    input01c: new FormControl('01/0', []),
-    input01d: new FormControl('01/0', []),
-    input01e: new FormControl('(99', []),
+    model01a: new FormControl('', []),
+    model01b: new FormControl('', []),
+    model01c: new FormControl('01/0', []),
+    model01d: new FormControl('01/0', []),
+    model01e: new FormControl('(99', []),
   };
   public formGroup01: FormGroup = new FormGroup(this.control01);
   public exterior01 = 'outlined';
