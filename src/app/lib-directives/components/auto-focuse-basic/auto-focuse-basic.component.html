@@ -79,8 +79,8 @@
     <input type="radio"
       name="mode"
       value="A"
-      [(ngModel)]="mode"
-      (change)="doChangeMode(mode)" /> Section "GlnAutoFocuse" is active.
+      [checked]="mode==='A'"
+      (change)="doChangeMode(mode='A')" /> Section "GlnAutoFocuse" is active.
   </label>
 
   <p>Set autofocus on page load on a field:</p>
@@ -89,22 +89,22 @@
       <input type="radio"
         name="mode1a"
         value="surname"
-        [(ngModel)]="mode1a"
-        (change)="doChangeMode1a(mode1a)" /> surname
+        [checked]="mode1a==='surname'"
+        (change)="doChangeMode1a(mode1a='surname')" /> surname
     </label>
     <label>
       <input type="radio"
         name="mode1a"
         value="name"
-        [(ngModel)]="mode1a"
-        (change)="doChangeMode1a(mode1a)" /> name
+        [checked]="mode1a==='name'"
+        (change)="doChangeMode1a(mode1a='name')" /> name
     </label>
     <label>
       <input type="radio"
         name="mode1a"
         value="patronymic"
-        [(ngModel)]="mode1a"
-        (change)="doChangeMode1a(mode1a)" /> patronymic
+        [checked]="mode1a==='patronymic'"
+        (change)="doChangeMode1a(mode1a='patronymic')" /> patronymic
     </label>
   </fieldset>
 </section>
@@ -315,8 +315,8 @@ export class AutoFocuseComponent implements OnInit &#123;
     <input type="radio"
       name="mode"
       value="B"
-      [(ngModel)]="mode"
-      (change)="doChangeMode(mode)" /> Section "GlnAutoFocuseOwner" is active.
+      [checked]="mode==='B'"
+      (change)="doChangeMode(mode='B')" /> Section "GlnAutoFocuseOwner" is active.
   </label>
 
   <p>Set autofocus on page load on a field:</p>
@@ -325,22 +325,22 @@ export class AutoFocuseComponent implements OnInit &#123;
       <input type="radio"
         name="mode1b"
         value="surname"
-        [(ngModel)]="mode1b"
-        (change)="doChangeMode1b(mode1b)" /> surname
+        [checked]="mode1b==='surname'"
+        (change)="doChangeMode1b(mode1b='surname')" /> surname
     </label>
     <label>
       <input type="radio"
         name="mode1b"
         value="name"
-        [(ngModel)]="mode1b"
-        (change)="doChangeMode1b(mode1b)" /> name
+        [checked]="mode1b==='name'"
+        (change)="doChangeMode1b(mode1b='name')" /> name
     </label>
     <label>
       <input type="radio"
         name="mode1b"
         value="patronymic"
-        [(ngModel)]="mode1b"
-        (change)="doChangeMode1b(mode1b)" /> patronymic
+        [checked]="mode1b==='patronymic'"
+        (change)="doChangeMode1b(mode1b='patronymic')" /> patronymic
     </label>
   </fieldset>
 </section>

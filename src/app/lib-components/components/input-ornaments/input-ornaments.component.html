@@ -40,10 +40,14 @@
 
 <section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior05">
-    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  <mat-button-toggle-group value="exterior05"
+    (change)="exterior05=$event.value">
+    <mat-button-toggle [checked]="exterior05==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior05==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior05==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
 
@@ -290,15 +294,20 @@
 
   <section mr-vr>
     <span>ornamLfAlign: </span>
-    <mat-button-toggle-group [(ngModel)]="ornamLfAlign05"
-      [ngModelOptions]="{ standalone: true }"
-      (change)="changeConfig05(convert(ornamLfAlign05), config05.ornamRgAlign)">
-      <mat-button-toggle value="default">default</mat-button-toggle>
-      <mat-button-toggle value="center">center</mat-button-toggle>
-      <mat-button-toggle value="flex-start">flex-start</mat-button-toggle>
-      <mat-button-toggle value="flex-end">flex-end</mat-button-toggle>
-      <mat-button-toggle value="baseline">baseline</mat-button-toggle>
-      <mat-button-toggle value="stretch">stretch</mat-button-toggle>
+    <mat-button-toggle-group value="ornamLfAlign05"
+      (change)="changeConfig05(convert(ornamLfAlign05=$event.value), config05.ornamRgAlign)">
+      <mat-button-toggle [checked]="ornamLfAlign05==='default'"
+        value="default">default</mat-button-toggle>
+      <mat-button-toggle [checked]="ornamLfAlign05==='center'"
+        value="center">center</mat-button-toggle>
+      <mat-button-toggle [checked]="ornamLfAlign05==='flex-start'"
+        value="flex-start">flex-start</mat-button-toggle>
+      <mat-button-toggle [checked]="ornamLfAlign05==='flex-end'"
+        value="flex-end">flex-end</mat-button-toggle>
+      <mat-button-toggle [checked]="ornamLfAlign05==='baseline'"
+        value="baseline">baseline</mat-button-toggle>
+      <mat-button-toggle [checked]="ornamLfAlign05==='stretch'"
+        value="stretch">stretch</mat-button-toggle>
     </mat-button-toggle-group>
   </section>
 
@@ -346,15 +355,20 @@
 
   <section mr-vr>
     <span>ornamRgAlign: </span>
-    <mat-button-toggle-group [(ngModel)]="ornamRgAlign05"
-      [ngModelOptions]="{ standalone: true }"
-      (change)="changeConfig05(config05.ornamLfAlign, convert(ornamRgAlign05))">
-      <mat-button-toggle value="default">default</mat-button-toggle>
-      <mat-button-toggle value="center">center</mat-button-toggle>
-      <mat-button-toggle value="flex-start">flex-start</mat-button-toggle>
-      <mat-button-toggle value="flex-end">flex-end</mat-button-toggle>
-      <mat-button-toggle value="baseline">baseline</mat-button-toggle>
-      <mat-button-toggle value="stretch">stretch</mat-button-toggle>
+    <mat-button-toggle-group value="ornamRgAlign05"
+      (change)="changeConfig05(config05.ornamLfAlign, convert(ornamRgAlign05=$event.value))">
+      <mat-button-toggle [checked]="ornamRgAlign05==='default'"
+        value="default">default</mat-button-toggle>
+      <mat-button-toggle [checked]="ornamRgAlign05==='center'"
+        value="center">center</mat-button-toggle>
+      <mat-button-toggle [checked]="ornamRgAlign05==='flex-start'"
+        value="flex-start">flex-start</mat-button-toggle>
+      <mat-button-toggle [checked]="ornamRgAlign05==='flex-end'"
+        value="flex-end">flex-end</mat-button-toggle>
+      <mat-button-toggle [checked]="ornamRgAlign05==='baseline'"
+        value="baseline">baseline</mat-button-toggle>
+      <mat-button-toggle [checked]="ornamRgAlign05==='stretch'"
+        value="stretch">stretch</mat-button-toggle>
     </mat-button-toggle-group>
   </section>
 

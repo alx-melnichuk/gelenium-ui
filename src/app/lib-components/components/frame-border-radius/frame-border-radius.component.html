@@ -54,9 +54,12 @@
 
 <section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior05">
-    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
+  <mat-button-toggle-group value="exterior05"
+    (change)="exterior05=$event.value">
+    <mat-button-toggle [checked]="exterior05==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior05==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
 
@@ -92,7 +95,8 @@
 <section mr-vr>
   <label>
     <input type="checkbox"
-      [(ngModel)]="isAddPadding05" />
+      (change)="isAddPadding05=!isAddPadding05"
+      [checked]="isAddPadding05" />
     Add padding ( BaseSize * {{ getRatio(exterior05) }})
   </label>
 </section>
@@ -100,7 +104,7 @@
 <section mr-vr>
   <label>
     <input type="checkbox"
-      [(ngModel)]="isNoLabel05" />
+      (change)="isNoLabel05=!isNoLabel05" />
     is no Label
   </label>
 </section>
@@ -829,7 +833,8 @@ export class ButtonComponent &#123;
 <section mr-vr>
   <label>
     <input type="checkbox"
-      [(ngModel)]="isAddPadding06" />
+      (change)="isAddPadding06=!isAddPadding06"
+      [checked]="isAddPadding06" />
     Add padding ( BaseSize * {{ getRatio(exterior05) }})
   </label>
 </section>
@@ -837,7 +842,7 @@ export class ButtonComponent &#123;
 <section mr-vr>
   <label>
     <input type="checkbox"
-      [(ngModel)]="isNoLabel06" />
+      (change)="isNoLabel06=!isNoLabel06" />
     is no Label
   </label>
 </section>

@@ -20,11 +20,14 @@
 
 <section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior08a"
-    (change)="doChangeExterior(exterior08a)">
-    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  <mat-button-toggle-group value="exterior08a"
+    (change)="exterior08a=$event.value">
+    <mat-button-toggle [checked]="exterior08a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior08a==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior08a==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
 

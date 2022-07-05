@@ -15,7 +15,7 @@ app-button-palette {
   }
 
   // Exterior: "contained"
-  .bp-specific .gln-button.glnb-contained>.gln-btn {
+  .bp-specific .gln-button.glnb-contained>.glnb-btn {
     --glntr-ripple-cl: #686aec5d;
     --glnb-c-def-cl: #00acc1;
     --glnb-c-def-bg-cl: #b2ebf299;
@@ -25,7 +25,7 @@ app-button-palette {
   }
 
   // Exterior: "outlined"
-  .bp-specific .gln-button.glnb-outlined>.gln-btn {
+  .bp-specific .gln-button.glnb-outlined>.glnb-btn {
     --glntr-ripple-cl: #19d2944d;
     --glnb-o-def-cl: #00acc1;
     --glnb-o-def-br-cl: #00acc1a0;
@@ -36,7 +36,7 @@ app-button-palette {
    }
     
   // Exterior: "text"
-  .bp-specific .gln-button.glnb-text>.gln-btn {
+  .bp-specific .gln-button.glnb-text>.glnb-btn {
     --glntr-ripple-cl: #19d2944d;
     --glnb-t-def-cl: #00acc1;
     --glnb-t-hov-bg-cl: #b2ebf299;

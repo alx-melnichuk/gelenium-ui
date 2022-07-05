@@ -25,35 +25,35 @@ app-button-palette3 {
     --glnb-lb-pd-lf: 0.75rem;
     --glnb-lb-pd-rg: 0.75rem;
   }
-  .gln-button.bs-btn:not(.gln-disabled)>.gln-btn {
+  .gln-button.bs-btn:not(.gln-disabled)>.glnb-btn {
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   }
-  .gln-button.bs-btn.gln-disabled>.gln-btn {
+  .gln-button.bs-btn.gln-disabled>.glnb-btn {
     opacity: .65;
   }
-  .gln-button.bs-btn:not(.gln-disabled)>.gln-btn:active,
-  .gln-button.bs-btn:not(.gln-disabled).active>.gln-btn {
+  .gln-button.bs-btn:not(.gln-disabled)>.glnb-btn:active,
+  .gln-button.bs-btn:not(.gln-disabled).active>.glnb-btn {
     background-color: var(--bs-act-bg-cl);
   }
-  .gln-button.bs-btn:not(.gln-disabled)>.gln-btn:focus-within,
-  .gln-button.bs-btn:not(.gln-disabled).focus>.gln-btn {
+  .gln-button.bs-btn:not(.gln-disabled)>.glnb-btn:focus-within,
+  .gln-button.bs-btn:not(.gln-disabled).focus>.glnb-btn {
     box-shadow: 0 0 0 0.2rem var(--bs-foc-bs-cl);
   }
 
   // ** Style: bstrap "bs-btn-contained" **
 
-  .gln-button.bs-btn-contained:not(.gln-disabled)>.gln-btn:focus-within,
-  .gln-button.bs-btn-contained:not(.gln-disabled).focus>.gln-btn {
+  .gln-button.bs-btn-contained:not(.gln-disabled)>.glnb-btn:focus-within,
+  .gln-button.bs-btn-contained:not(.gln-disabled).focus>.glnb-btn {
     background-color: var(--bs-c-foc-bg-cl);
   }
 
   // ** Style: bstrap "bs-btn-outline" **
 
-  .gln-button.bs-btn-outline:not(.gln-disabled)>.gln-btn:hover {
+  .gln-button.bs-btn-outline:not(.gln-disabled)>.glnb-btn:hover {
     color: var(--bs-o-hov-cl);
   }
-  .gln-button.bs-btn-outline:not(.gln-disabled)>.gln-btn:active,
-  .gln-button.bs-btn-outline:not(.gln-disabled).active>.gln-btn {
+  .gln-button.bs-btn-outline:not(.gln-disabled)>.glnb-btn:active,
+  .gln-button.bs-btn-outline:not(.gln-disabled).active>.glnb-btn {
     color: var(--bs-o-act-cl);
   }
 
@@ -203,12 +203,12 @@ app-button-palette3 {
 
   // ** Style: bstrap "bs-link" **
 
-  .gln-button.bs-link:not(.gln-disabled)>.gln-btn:hover {
+  .gln-button.bs-link:not(.gln-disabled)>.glnb-btn:hover {
     color: var(--bs-hov-cl);
     text-decoration: underline;
   }
-  .gln-button.bs-link:not(.gln-disabled)>.gln-btn:focus-within,
-  .gln-button.bs-link:not(.gln-disabled).focus>.gln-btn {
+  .gln-button.bs-link:not(.gln-disabled)>.glnb-btn:focus-within,
+  .gln-button.bs-link:not(.gln-disabled).focus>.glnb-btn {
     text-decoration: underline;
   }
 

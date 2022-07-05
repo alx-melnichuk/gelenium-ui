@@ -34,16 +34,20 @@ export class RegexCheckBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public demo01 = '1';
-  public control01 = {
-    model01a: new FormControl('', []),
-    model01b: new FormControl('', []),
-    model01c: new FormControl('01/0', []),
-    model01d: new FormControl('01/0', []),
-    model01e: new FormControl('(99', []),
+  public control01a = {
+    model01a: new FormControl('1', []),
   };
-  public formGroup01: FormGroup = new FormGroup(this.control01);
-  public exterior01 = 'outlined';
+  public formGroup01a: FormGroup = new FormGroup(this.control01a);
+
+  public exterior01b = 'outlined';
+  public control01b = {
+    model01b: new FormControl('', []),
+    model01c: new FormControl('', []),
+    model01d: new FormControl('01/0', []),
+    model01e: new FormControl('01/0', []),
+    model01f: new FormControl('(99', []),
+  };
+  public formGroup01b: FormGroup = new FormGroup(this.control01b);
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }

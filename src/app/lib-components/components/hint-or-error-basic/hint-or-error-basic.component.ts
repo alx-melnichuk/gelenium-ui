@@ -31,11 +31,12 @@ export class HintOrErrorBasicComponent {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
-  public changeIsDisabled(): void {
-    if (this.isDisabled01) {
+  public changeIsDisabled(isDisabled01: boolean): boolean {
+    if (isDisabled01) {
       this.formGroup01.disable();
     } else {
       this.formGroup01.enable();
     }
+    return isDisabled01;
   }
 }

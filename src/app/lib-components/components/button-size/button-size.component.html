@@ -34,10 +34,14 @@
 
 <section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior03a">
-    <mat-button-toggle value="contained">{{ labelContained }}</mat-button-toggle>
-    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle value="text">{{ labelText }}</mat-button-toggle>
+  <mat-button-toggle-group value="exterior03a"
+    (change)="exterior03a=$event.value">
+    <mat-button-toggle [checked]="exterior03a==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
 
@@ -607,18 +611,20 @@ export class ButtonComponent &#123;
 
 <hr br-nn />
 
-
 <h4>Configuration for custom height (57px).</h4>
 
 <section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior03b">
-    <mat-button-toggle value="contained">{{ labelContained }}</mat-button-toggle>
-    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle value="text">{{ labelText }}</mat-button-toggle>
+  <mat-button-toggle-group value="exterior03b"
+    (change)="exterior03b=$event.value">
+    <mat-button-toggle [checked]="exterior03b==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03b==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03b==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
-
 
 <div class="app-group">
   <div [attr.id]="fragment03g">

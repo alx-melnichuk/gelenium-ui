@@ -38,8 +38,7 @@
 <section mr-vr>
   <label>
     <input type="checkbox"
-      [(ngModel)]="isDisabled01"
-      (change)="changeIsDisabled()" />
+      (change)="isDisabled01=changeIsDisabled(!isDisabled01)" />
     Is disabled
   </label>
 </section>
@@ -160,12 +159,13 @@ export class TextareaComponent &#123;
   public isFocusInput01a = false;
   public isFocusInput01b = false;
 
-  public changeIsDisabled(): void &#123;
-    if (this.isDisabled01) &#123;
+  public changeIsDisabled(isDisabled01: boolean): boolean): void &#123;
+    if (isDisabled01) &#123;
       this.formGroup01.disable();
     &#125; else &#123;
       this.formGroup01.enable();
     &#125;
+    return isDisabled01;
   &#125;
 
 &#125;</pre></code>

@@ -16,10 +16,14 @@
 
 <section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior04a">
-    <mat-button-toggle value="contained">{{ labelContained }}</mat-button-toggle>
-    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle value="text">{{ labelText }}</mat-button-toggle>
+  <mat-button-toggle-group value="exterior04a"
+    (change)="exterior04a=$event.value">
+    <mat-button-toggle [checked]="exterior04a==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior04a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior04a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
 
@@ -55,7 +59,8 @@
 <section mr-vr>
   <label>
     <input type="checkbox"
-      [(ngModel)]="isAddPadding04a" />
+      (change)="isAddPadding04a=!isAddPadding04a"
+      [checked]="isAddPadding04a" />
     Add padding ( BaseSize * {{ labelPdRatio }})
   </label>
 </section>
@@ -825,7 +830,6 @@ export class ButtonComponent &#123;
 </section>
 
 
-
 <section mr-vr>
   <p>
     Below are other possible values for "border-radius".
@@ -834,17 +838,22 @@ export class ButtonComponent &#123;
 
 <section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior04b">
-    <mat-button-toggle value="contained">{{ labelContained }}</mat-button-toggle>
-    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle value="text">{{ labelText }}</mat-button-toggle>
+  <mat-button-toggle-group value="exterior04b"
+    (change)="exterior04b=$event.value">
+    <mat-button-toggle [checked]="exterior04b==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior04b==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior04b==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
 
 <section mr-vr>
   <label>
     <input type="checkbox"
-      [(ngModel)]="isAddPadding04b" />
+      (change)="isAddPadding04b=!isAddPadding04b"
+      [checked]="isAddPadding04b" />
     Add padding ( BaseSize * {{ labelPdRatio }})
   </label>
 </section>

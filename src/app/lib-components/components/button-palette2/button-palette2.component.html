@@ -9,7 +9,7 @@
 <section mr-vr>
   <label>
     <input type="checkbox"
-      [(ngModel)]="isDisabledPrimary" />
+      (change)="isDisabledPrimary=!isDisabledPrimary" />
     Is disabled
   </label>
 </section>
@@ -161,35 +161,35 @@ export class ButtonComponent &#123;
   --glnb-lb-pd-lf: 0.75rem;
   --glnb-lb-pd-rg: 0.75rem;
 &#125;
-.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn &#123;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.glnb-btn &#123;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 &#125;
-.gln-button.bs-btn.gln-disabled&gt;.gln-btn &#123;
+.gln-button.bs-btn.gln-disabled&gt;.glnb-btn &#123;
   opacity: .65;
 &#125;
-.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:active,
-.gln-button.bs-btn:not(.gln-disabled).active&gt;.gln-btn &#123;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.glnb-btn:active,
+.gln-button.bs-btn:not(.gln-disabled).active&gt;.glnb-btn &#123;
   background-color: var(--bs-act-bg-cl);
 &#125;
-.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:focus-within,
-.gln-button.bs-btn:not(.gln-disabled).focus&gt;.gln-btn &#123;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.glnb-btn:focus-within,
+.gln-button.bs-btn:not(.gln-disabled).focus&gt;.glnb-btn &#123;
   box-shadow: 0 0 0 0.2rem var(--bs-foc-bs-cl);
 &#125;
 
 // ** Style: bstrap "bs-btn-contained" **
 
-.gln-button.bs-btn-contained:not(.gln-disabled)&gt;.gln-btn:focus-within,
-.gln-button.bs-btn-contained:not(.gln-disabled).focus&gt;.gln-btn &#123;
+.gln-button.bs-btn-contained:not(.gln-disabled)&gt;.glnb-btn:focus-within,
+.gln-button.bs-btn-contained:not(.gln-disabled).focus&gt;.glnb-btn &#123;
   background-color: var(--bs-c-foc-bg-cl);
 &#125;
 
 // ** Style: bstrap "bs-btn-outline" **
 
-.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:hover &#123;
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.glnb-btn:hover &#123;
   color: var(--bs-o-hov-cl);
 &#125;
-.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:active,
-.gln-button.bs-btn-outline:not(.gln-disabled).active&gt;.gln-btn &#123;
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.glnb-btn:active,
+.gln-button.bs-btn-outline:not(.gln-disabled).active&gt;.glnb-btn &#123;
   color: var(--bs-o-act-cl);
 &#125;
 
@@ -244,7 +244,8 @@ export class ButtonComponent &#123;
 <section mr-vr>
   <label>
     <input type="checkbox"
-      [(ngModel)]="isDisabledSecondary" />
+      (change)="isDisabledSecondary=!isDisabledSecondary" />
+
     Is disabled
   </label>
 </section>
@@ -396,35 +397,35 @@ export class ButtonComponent &#123;
   --glnb-lb-pd-lf: 0.75rem;
   --glnb-lb-pd-rg: 0.75rem;
 &#125;
-.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn &#123;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.glnb-btn &#123;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 &#125;
-.gln-button.bs-btn.gln-disabled&gt;.gln-btn &#123;
+.gln-button.bs-btn.gln-disabled&gt;.glnb-btn &#123;
   opacity: .65;
 &#125;
-.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:active,
-.gln-button.bs-btn:not(.gln-disabled).active&gt;.gln-btn &#123;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.glnb-btn:active,
+.gln-button.bs-btn:not(.gln-disabled).active&gt;.glnb-btn &#123;
   background-color: var(--bs-act-bg-cl);
 &#125;
-.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:focus-within,
-.gln-button.bs-btn:not(.gln-disabled).focus&gt;.gln-btn &#123;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.glnb-btn:focus-within,
+.gln-button.bs-btn:not(.gln-disabled).focus&gt;.glnb-btn &#123;
   box-shadow: 0 0 0 0.2rem var(--bs-foc-bs-cl);
 &#125;
 
 // ** Style: bstrap "bs-btn-contained" **
 
-.gln-button.bs-btn-contained:not(.gln-disabled)&gt;.gln-btn:focus-within,
-.gln-button.bs-btn-contained:not(.gln-disabled).focus&gt;.gln-btn &#123;
+.gln-button.bs-btn-contained:not(.gln-disabled)&gt;.glnb-btn:focus-within,
+.gln-button.bs-btn-contained:not(.gln-disabled).focus&gt;.glnb-btn &#123;
   background-color: var(--bs-c-foc-bg-cl);
 &#125;
 
 // ** Style: bstrap "bs-btn-outline" **
 
-.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:hover &#123;
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.glnb-btn:hover &#123;
   color: var(--bs-o-hov-cl);
 &#125;
-.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:active,
-.gln-button.bs-btn-outline:not(.gln-disabled).active&gt;.gln-btn &#123;
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.glnb-btn:active,
+.gln-button.bs-btn-outline:not(.gln-disabled).active&gt;.glnb-btn &#123;
   color: var(--bs-o-act-cl);
 &#125;
 
@@ -480,7 +481,7 @@ export class ButtonComponent &#123;
 <section mr-vr>
   <label>
     <input type="checkbox"
-      [(ngModel)]="isDisabledSuccess" />
+      (change)="isDisabledSuccess=!isDisabledSuccess" />
     Is disabled
   </label>
 </section>
@@ -632,35 +633,35 @@ export class ButtonComponent &#123;
   --glnb-lb-pd-lf: 0.75rem;
   --glnb-lb-pd-rg: 0.75rem;
 &#125;
-.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn &#123;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.glnb-btn &#123;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 &#125;
-.gln-button.bs-btn.gln-disabled&gt;.gln-btn &#123;
+.gln-button.bs-btn.gln-disabled&gt;.glnb-btn &#123;
   opacity: .65;
 &#125;
-.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:active,
-.gln-button.bs-btn:not(.gln-disabled).active&gt;.gln-btn &#123;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.glnb-btn:active,
+.gln-button.bs-btn:not(.gln-disabled).active&gt;.glnb-btn &#123;
   background-color: var(--bs-act-bg-cl);
 &#125;
-.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:focus-within,
-.gln-button.bs-btn:not(.gln-disabled).focus&gt;.gln-btn &#123;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.glnb-btn:focus-within,
+.gln-button.bs-btn:not(.gln-disabled).focus&gt;.glnb-btn &#123;
   box-shadow: 0 0 0 0.2rem var(--bs-foc-bs-cl);
 &#125;
 
 // ** Style: bstrap "bs-btn-contained" **
 
-.gln-button.bs-btn-contained:not(.gln-disabled)&gt;.gln-btn:focus-within,
-.gln-button.bs-btn-contained:not(.gln-disabled).focus&gt;.gln-btn &#123;
+.gln-button.bs-btn-contained:not(.gln-disabled)&gt;.glnb-btn:focus-within,
+.gln-button.bs-btn-contained:not(.gln-disabled).focus&gt;.glnb-btn &#123;
   background-color: var(--bs-c-foc-bg-cl);
 &#125;
 
 // ** Style: bstrap "bs-btn-outline" **
 
-.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:hover &#123;
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.glnb-btn:hover &#123;
   color: var(--bs-o-hov-cl);
 &#125;
-.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:active,
-.gln-button.bs-btn-outline:not(.gln-disabled).active&gt;.gln-btn &#123;
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.glnb-btn:active,
+.gln-button.bs-btn-outline:not(.gln-disabled).active&gt;.glnb-btn &#123;
   color: var(--bs-o-act-cl);
 &#125;
 
@@ -716,7 +717,7 @@ export class ButtonComponent &#123;
 <section mr-vr>
   <label>
     <input type="checkbox"
-      [(ngModel)]="isDisabledDanger" />
+      (change)="isDisabledDanger=!isDisabledDanger" />
     Is disabled
   </label>
 </section>
@@ -868,35 +869,35 @@ export class ButtonComponent &#123;
   --glnb-lb-pd-lf: 0.75rem;
   --glnb-lb-pd-rg: 0.75rem;
 &#125;
-.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn &#123;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.glnb-btn &#123;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 &#125;
-.gln-button.bs-btn.gln-disabled&gt;.gln-btn &#123;
+.gln-button.bs-btn.gln-disabled&gt;.glnb-btn &#123;
   opacity: .65;
 &#125;
-.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:active,
-.gln-button.bs-btn:not(.gln-disabled).active&gt;.gln-btn &#123;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.glnb-btn:active,
+.gln-button.bs-btn:not(.gln-disabled).active&gt;.glnb-btn &#123;
   background-color: var(--bs-act-bg-cl);
 &#125;
-.gln-button.bs-btn:not(.gln-disabled)&gt;.gln-btn:focus-within,
-.gln-button.bs-btn:not(.gln-disabled).focus&gt;.gln-btn &#123;
+.gln-button.bs-btn:not(.gln-disabled)&gt;.glnb-btn:focus-within,
+.gln-button.bs-btn:not(.gln-disabled).focus&gt;.glnb-btn &#123;
   box-shadow: 0 0 0 0.2rem var(--bs-foc-bs-cl);
 &#125;
 
 // ** Style: bstrap "bs-btn-contained" **
 
-.gln-button.bs-btn-contained:not(.gln-disabled)&gt;.gln-btn:focus-within,
-.gln-button.bs-btn-contained:not(.gln-disabled).focus&gt;.gln-btn &#123;
+.gln-button.bs-btn-contained:not(.gln-disabled)&gt;.glnb-btn:focus-within,
+.gln-button.bs-btn-contained:not(.gln-disabled).focus&gt;.glnb-btn &#123;
   background-color: var(--bs-c-foc-bg-cl);
 &#125;
 
 // ** Style: bstrap "bs-btn-outline" **
 
-.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:hover &#123;
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.glnb-btn:hover &#123;
   color: var(--bs-o-hov-cl);
 &#125;
-.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.gln-btn:active,
-.gln-button.bs-btn-outline:not(.gln-disabled).active&gt;.gln-btn &#123;
+.gln-button.bs-btn-outline:not(.gln-disabled)&gt;.glnb-btn:active,
+.gln-button.bs-btn-outline:not(.gln-disabled).active&gt;.glnb-btn &#123;
   color: var(--bs-o-act-cl);
 &#125;
 

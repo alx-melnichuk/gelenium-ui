@@ -38,10 +38,14 @@
 
 <section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior02a">
-    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  <mat-button-toggle-group value="exterior02a"
+    (change)="exterior02a=$event.value">
+    <mat-button-toggle [checked]="exterior02a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02a==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02a==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
 
@@ -226,10 +230,14 @@ export class FrameComponent &#123;
 
 <section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior02b">
-    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  <mat-button-toggle-group value="exterior02b"
+    (change)="exterior02b=$event.value">
+    <mat-button-toggle [checked]="exterior02b==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02b==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02b==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
 
@@ -407,10 +415,14 @@ export class FrameComponent &#123;
 
 <section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior02c">
-    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle value="standard">{{ labelStandard }}</mat-button-toggle>
+  <mat-button-toggle-group value="exterior02c"
+    (change)="exterior02c=$event.value">
+    <mat-button-toggle [checked]="exterior02c==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02c==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02c==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
 

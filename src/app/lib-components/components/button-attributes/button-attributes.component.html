@@ -19,10 +19,14 @@
 <section mr-vr
   [attr.id]="fragment02a">
   <span>exterior: </span>
-  <mat-button-toggle-group [(ngModel)]="exterior02a">
-    <mat-button-toggle value="contained">{{ labelContained }}</mat-button-toggle>
-    <mat-button-toggle value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle value="text">{{ labelText }}</mat-button-toggle>
+  <mat-button-toggle-group value="exterior02a"
+    (change)="exterior02a=$event.value">
+    <mat-button-toggle [checked]="exterior02a==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
 

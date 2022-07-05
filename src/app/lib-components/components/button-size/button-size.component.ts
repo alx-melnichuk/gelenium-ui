@@ -35,6 +35,7 @@ export class ButtonSizeComponent {
 
   public exterior03a = 'outlined';
   public exterior03b = 'outlined';
+
   public routerLink = '/components/button';
   public fragment03a = 'size-link3a';
   public fragment03b = 'size-link3b';
@@ -49,6 +50,10 @@ export class ButtonSizeComponent {
   public config03 = {
     frameSizeValue: 57,
   };
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  constructor() {}
+
   public getLabel(exterior: string): string {
     return exterior ? exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   }

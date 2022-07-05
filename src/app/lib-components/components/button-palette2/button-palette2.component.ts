@@ -25,21 +25,11 @@ export class ButtonPalette2Component {
   public fragment5 = 'palette5';
   public fragment6 = 'palette6';
   public fragment7 = 'palette7';
-  // public fragment8 = 'palette8';
-  // public fragment9 = 'palette9';
-  // public fragment10 = 'palette10';
-  // public fragment11 = 'palette11';
-  // public fragment12 = 'palette12';
 
   public isDisabledPrimary = false;
   public isDisabledSecondary = false;
   public isDisabledSuccess = false;
   public isDisabledDanger = false;
-  // public isDisabledWarning = false;
-  // public isDisabledInfo = false;
-  // public isDisabledLight = false;
-  // public isDisabledDark = false;
-  // public isDisabledReference = false;
 
   public cfgContained: GlnButtonConfig = {
     exterior: GlnButtonExterior.contained,
