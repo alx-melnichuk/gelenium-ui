@@ -71,6 +71,10 @@
     </gln-frame>
   </div>
 </ng-container>
+<pre>
+value={{ value === null ? 'null' : value }}
+errors0={{errors | json }}
+</pre>
 
 <gln-menu-item-bar-show *ngIf="isOpen || isBarShowAnimation"
   tabindex="-1"
@@ -84,7 +88,7 @@
   [visibleSize]="visibleSize"
   (hasAnimation)="isBarShowAnimation=$event"
   (closing)="close()"
-  (selected)="selectedMenuElement($event)">
+  (selected)="selectionMenuElement($event)">
 
   <ng-content select="gln-menu-item"></ng-content>
 

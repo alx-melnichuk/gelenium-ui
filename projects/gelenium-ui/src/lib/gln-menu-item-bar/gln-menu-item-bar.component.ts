@@ -73,9 +73,7 @@ export class GlnMenuItemBarComponent implements OnInit, AfterContentInit {
     const targetMenuItem = this.getMenuItemFromEvent(event.target as HTMLElement);
     // Find the menu item component by the selected html element.
     const menuItem = this.getMenuItemByHtmlElement(targetMenuItem, this.menuItems);
-    if (!menuItem) {
-      this.closing.emit();
-    } else if (!menuItem.disabled) {
+    if (menuItem && !menuItem.disabled) {
       this.selected.emit(menuItem);
     }
   }

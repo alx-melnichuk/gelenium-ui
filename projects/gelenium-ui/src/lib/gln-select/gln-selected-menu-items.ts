@@ -4,11 +4,11 @@ import { GlnMenuItemComponent } from '../gln-menu-item/gln-menu-item.component';
 export class GlnSelectedMenuItems {
   /** List of selected menu items. */
   public items: GlnMenuItemComponent[] = [];
-  /** Indicates that the list of selected menu items is empty. */
+
   get isEmpty(): boolean {
     return this.items.length === 0;
   }
-  /** The number of items in the list of selected menu items. */
+
   get length(): number {
     return this.items.length;
   }
@@ -29,55 +29,67 @@ export class GlnSelectedMenuItems {
     }
     return result;
   }
-  /** Update the list of selected menu items according to the specified items. */
-  public updateByElements(multiple: boolean, updateMenuItems: GlnMenuItemComponent[], menuItems: GlnMenuItemComponent[]): boolean {
-    let countAdd = 0;
-    let countDelete = 0;
-    if (updateMenuItems.length > 0 && menuItems.length > 0) {
-      const nextMenuItems: GlnMenuItemComponent[] = this.items.slice();
+  /** Get the menu item by the specified value. */
+  public findMenuItemByValue(value: unknown | null, menuList: GlnMenuItemComponent[]): GlnMenuItemComponent | null {
+    let result: GlnMenuItemComponent | null = null;
+    for (let idx = 0; idx < menuList.length && !result; idx++) {
+      result = menuList[idx].value === value ? menuList[idx] : result;
+    }
+    return result;
+  }
+
+  public mergeMenuItems(multiple: boolean, addItems: GlnMenuItemComponent[], menuList: GlnMenuItemComponent[]): GlnMenuItemComponent[] {
+    const result: GlnMenuItemComponent[] = [];
+    if (addItems.length > 0 && menuList.length > 0) {
+      const nextMenuItems: GlnMenuItemComponent[] = multiple ? this.items.slice() : [];
       if (multiple) {
-        for (let idx = 0; idx < updateMenuItems.length; idx++) {
-          const updateMenuItem = updateMenuItems[idx];
-          const index = nextMenuItems.indexOf(updateMenuItem);
+        for (let idx = 0; idx < addItems.length; idx++) {
+          const addItem = addItems[idx];
+          const index = nextMenuItems.indexOf(addItem);
           if (index > -1) {
-            updateMenuItem.setSelected(false);
             nextMenuItems.splice(index, 1);
-            countAdd++;
           } else {
-            updateMenuItem.setSelected(true);
-            nextMenuItems.push(updateMenuItem);
-            countDelete++;
+            nextMenuItems.push(addItem);
           }
         }
       } else {
-        for (let i = 0; i < nextMenuItems.length; i++) {
-          nextMenuItems[i].setSelected(false);
-          countDelete++;
-        }
-        nextMenuItems.length = 0;
-        for (let i = 0; i < updateMenuItems.length; i++) {
-          updateMenuItems[i].setSelected(true);
-          countAdd++;
-          if (updateMenuItems[i].value !== null) {
-            nextMenuItems.push(updateMenuItems[i]);
-          }
+        for (let i = 0; i < addItems.length; i++) {
+          nextMenuItems.push(addItems[i]);
         }
       }
-      this.items = menuItems.filter((item) => nextMenuItems.includes(item));
+      result.push(...menuList.filter((item) => nextMenuItems.includes(item)));
     }
-    return countAdd > 0 || countDelete > 0;
+    return result;
   }
   /** Get a list of menu items according to an array of values. */
-  public findMenuItems(values: unknown[], list: GlnMenuItemComponent[]): GlnMenuItemComponent[] {
+  public getMenuItemsByValues(newValue: unknown | unknown[] | null, menuList: GlnMenuItemComponent[]): GlnMenuItemComponent[] {
     const result: GlnMenuItemComponent[] = [];
+    const values: unknown[] = Array.isArray(newValue) ? newValue : [newValue];
     const buff = values.slice();
-    for (let idx = 0; idx < list.length && buff.length > 0; idx++) {
-      const index = buff.indexOf(list[idx].value);
+    for (let idx = 0; idx < menuList.length && buff.length > 0; idx++) {
+      const index = buff.indexOf(menuList[idx].value);
       if (index > -1) {
-        result.push(list[idx]);
+        result.push(menuList[idx]);
         buff.splice(index, 1);
       }
     }
     return result;
+  }
+  /** Set the selected menu items to the new list of items. */
+  public setSelectionMenuItems(newItems: GlnMenuItemComponent[], menuList: GlnMenuItemComponent[]): void {
+    const currentItems: GlnMenuItemComponent[] = this.items.slice();
+    for (let idx = 0; idx < newItems.length; idx++) {
+      const newItem = newItems[idx];
+      const index = currentItems.indexOf(newItem);
+      if (index > -1) {
+        currentItems.splice(index, 1);
+      } else {
+        newItem.setSelected(true);
+      }
+    }
+    for (let i = 0; i < currentItems.length; i++) {
+      currentItems[i].setSelected(false);
+    }
+    this.items = menuList.filter((menu) => newItems.includes(menu));
   }
 }

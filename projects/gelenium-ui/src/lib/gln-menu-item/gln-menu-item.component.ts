@@ -3,9 +3,12 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  HostBinding,
+  Inject,
   Input,
   OnChanges,
   OnInit,
+  Optional,
   Renderer2,
   SimpleChanges,
   ViewEncapsulation,
@@ -15,6 +18,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { GlnMenuItemParent, GLN_MENU_ITEM_PARENT } from './gln-menu-item-parent.interface';
 
 let uniqueIdCounter = 0;
 
@@ -34,6 +38,16 @@ export class GlnMenuItemComponent implements OnChanges, OnInit {
   @Input()
   public value: unknown | null = null;
 
+  @HostBinding('attr.mul')
+  get attrMultiple(): string | null {
+    return this.multiple ? '' : null;
+  }
+
+  @HostBinding('class.gln-multiple')
+  get classMultiple(): string | null {
+    return this.multiple ? '' : null;
+  }
+
   public disabled: boolean | null = null;
   public formControl: FormControl = new FormControl();
   public formGroup: FormGroup = new FormGroup({ info: this.formControl });
@@ -46,7 +60,8 @@ export class GlnMenuItemComponent implements OnChanges, OnInit {
     public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
     private changeDetectorRef: ChangeDetectorRef,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    @Optional() @Inject(GLN_MENU_ITEM_PARENT) private parent: GlnMenuItemParent
   ) {
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'role', 'option');
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', '-1');
@@ -56,13 +71,16 @@ export class GlnMenuItemComponent implements OnChanges, OnInit {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.isDisabled) {
-      this.disabled = BooleanUtil.init(this.isDisabled);
-      this.setDisable(this.disabled);
+      const disabled = BooleanUtil.init(this.isDisabled);
+      this.setDisable(disabled);
     }
   }
 
   public ngOnInit(): void {
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
+    if (this.parent && this.parent.multiple && !this.parent.noCheckmark) {
+      this.multiple = true;
+    }
   }
 
   // ** Public API **
@@ -94,14 +112,14 @@ export class GlnMenuItemComponent implements OnChanges, OnInit {
     }
   }
 
-  public setMultiple(value: boolean | null): void {
-    if (this.multiple !== !!value) {
-      this.multiple = !!value;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-multiple', this.marked);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'mul', this.marked ? '' : null);
-      this.changeDetectorRef.markForCheck();
-    }
-  }
+  // #public setMultiple(value: boolean | null): void {
+  //   if (this.multiple !== !!value) {
+  //     this.multiple = !!value;
+  //     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-multiple', this.marked);
+  //     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'mul', this.marked ? '' : null);
+  //     this.changeDetectorRef.markForCheck();
+  //   }
+  // #}
 
   public setSelected(value: boolean | null): void {
     if (this.selected !== !!value) {

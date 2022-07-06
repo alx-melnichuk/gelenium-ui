@@ -35,7 +35,7 @@
 
   <div class="app-group">
 
-    <div class="app-elem">
+    <!-- <div class="app-elem">
       <div>
         <small>
           <em>State: empty.</em>
@@ -51,7 +51,7 @@
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-menu-item>
       </gln-select>
-    </div>
+    </div> -->
 
     <div class="app-elem">
       <div>
@@ -64,15 +64,23 @@
         isRequired
         helperText="A value must be entered."
         [exterior]="exterior02a"
+        isMultiple
+        isNoCheckmark
         wdFull>
         <gln-menu-item><em>None</em></gln-menu-item>
+        <gln-menu-item value="demo01"
+          isDisabled>Demo01 (dis)</gln-menu-item>
         <gln-menu-item *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-menu-item>
       </gln-select>
+      <!-- <pre>
+value={{formGroup02a.controls.model02b.value === null ? 'null' : formGroup02a.controls.model02b.value}}
+errors={{formGroup02a.controls.model02b.errors | json }}
+      </pre> -->
     </div>
 
-    <div class="app-elem">
+    <!-- <div class="app-elem">
       <div>
         <small>
           <em>Attribute: noLabel.</em>
@@ -108,7 +116,7 @@
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-menu-item>
       </gln-select>
-    </div>
+    </div> -->
 
   </div>
 
@@ -271,7 +279,7 @@ export class SelectComponent &#123;
   </mat-button-toggle-group>
 </section>
 
-<form [formGroup]="formGroup02b"
+<!-- <form [formGroup]="formGroup02b"
   novalidate
   autocomplete="off">
 
@@ -358,7 +366,7 @@ export class SelectComponent &#123;
 
   </div>
 
-</form>
+</form> -->
 
 <section mr-vr>
   <mat-accordion>

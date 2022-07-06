@@ -38,6 +38,7 @@ import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-in
 import { GlnBasisFrame } from '../gln-frame/gln-basis-frame.class';
 import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
+import { GlnMenuItemParent, GLN_MENU_ITEM_PARENT } from '../gln-menu-item/gln-menu-item-parent.interface';
 import { GlnMenuItemComponent } from '../gln-menu-item/gln-menu-item.component';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
@@ -62,9 +63,13 @@ export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => GlnSelectComponent), multi: true },
     { provide: NG_VALIDATORS, useExisting: forwardRef(() => GlnSelectComponent), multi: true },
     { provide: GLN_NODE_INTERNAL_VALIDATOR, useExisting: GlnSelectComponent },
+    { provide: GLN_MENU_ITEM_PARENT, useExisting: GlnSelectComponent },
   ],
 })
-export class GlnSelectComponent extends GlnBasisFrame implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator {
+export class GlnSelectComponent
+  extends GlnBasisFrame
+  implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnMenuItemParent
+{
   // @Input() // #public id = `glns-${uniqueIdCounter++}`;
   @Input()
   public config: GlnSelectConfig | null = null;
@@ -83,6 +88,10 @@ export class GlnSelectComponent extends GlnBasisFrame implements OnChanges, OnIn
   public isFixRight: string | null = null;
   @Input()
   public isMultiple: string | null = null;
+  @Input()
+  public isNoCheckmark: string | null = null;
+  @Input()
+  public isNoRipple: string | null = null;
   @Input()
   public isReadOnly: string | null = null;
   @Input()
@@ -112,9 +121,17 @@ export class GlnSelectComponent extends GlnBasisFrame implements OnChanges, OnIn
     return this.valueData;
   }
   set value(newValue: unknown | unknown[] | null) {
+    // console.log(`set value(${newValue});`); // TODO del;
+    if (this.multiple && !Array.isArray(newValue)) {
+      throw Error('The value must be an array in multi-select mode.');
+    }
     if (newValue !== this.valueData || (this.multiple && Array.isArray(newValue))) {
-      this.setSelectedMenuItemsByValue(!!this.multiple, newValue, this.menuItems);
-      this.valueData = newValue;
+      // Get a list of menu items according to an array of values.
+      const newMenuItems = this.selectedItems.getMenuItemsByValues(newValue, this.menuItems);
+      // Set the selected menu items to the new list of items.
+      this.selectedItems.setSelectionMenuItems(newMenuItems, this.menuItems);
+      this.updateValueDataAndIsFilledAndValidity(newValue);
+      this.changeDetectorRef.markForCheck();
     }
   }
   private valueData: unknown | unknown[] | null;
@@ -155,10 +172,12 @@ export class GlnSelectComponent extends GlnBasisFrame implements OnChanges, OnIn
   // #public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation".
   public isOpen = false;
   // #public isWriteValueInit: boolean | null = null;
-  public multiple: boolean | null = null; // Binding attribute "isMultiple".
+  public multiple: boolean | null = null; // Binding attribute "isMultiple". // GlnMenuItemParent
   public required: boolean | null = null; // Binding attribute "isRequired".
   public selectedItems: GlnSelectedMenuItems = new GlnSelectedMenuItems();
   // #public valueInit: boolean | null = null; // Binding attribute "isValueInit".
+  public noCheckmark: boolean | null = null; // Binding attribute "isNoCheckmark". // GlnMenuItemParent
+  public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // GlnMenuItemParent
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -183,6 +202,12 @@ export class GlnSelectComponent extends GlnBasisFrame implements OnChanges, OnIn
     if (changes.isMultiple) {
       this.multiple = BooleanUtil.init(this.isMultiple);
     }
+    if (changes.isNoCheckmark) {
+      this.noCheckmark = BooleanUtil.init(this.isNoCheckmark);
+    }
+    if (changes.isNoRipple) {
+      this.noRipple = BooleanUtil.init(this.isNoRipple);
+    }
     if (changes.isRequired) {
       this.required = BooleanUtil.init(this.isRequired);
     }
@@ -193,16 +218,12 @@ export class GlnSelectComponent extends GlnBasisFrame implements OnChanges, OnIn
   }
 
   public ngAfterContentInit(): void {
-    // console.log(`AfterContentInit(${this.id});  menuItems.length=${this.menuItems.length}`); // TODO del;
-
-    // if (this.multiple) {
-    //   for (let i = 0; i < this.menuItems.length; i++) {
-    //     this.menuItems[i].setMultiple(true);
-    //   }
-    // }
-    // Initialization when the value is received via "writeValue()".
-    if (this.valueData != null && this.selectedItems.isEmpty) {
-      this.setSelectedMenuItemsByValue(!!this.multiple, this.valueData, this.menuItems);
+    // console.log(`AfterContentInit(${this.id});  menuItems.length=${this.menuItems.length} this.valueData=`, this.valueData); // TODO del;
+    // Initialized when the value is received via "writeValue()" but the list of menu items is just now.
+    if (this.selectedItems.isEmpty && this.menuItems.length > 0) {
+      const newValue = this.valueData;
+      this.valueData = undefined;
+      this.value = newValue;
     }
     super.ngAfterContentInit();
   }
@@ -211,10 +232,9 @@ export class GlnSelectComponent extends GlnBasisFrame implements OnChanges, OnIn
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public writeValue(value: any): void {
-    // console.log(`writeValue(${this.id}) value=${value == null ? 'null' : value}`);
-
+    // console.log(`writeValue(${this.id}) value=`, value == null ? 'null' : value); // TODO del;
     this.value = value;
-
+    // Execute the base class method.
     super.writeValue(value);
   }
 
@@ -235,8 +255,7 @@ export class GlnSelectComponent extends GlnBasisFrame implements OnChanges, OnIn
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public validate(control: AbstractControl): ValidationErrors | null {
-    this.errors = !this.disabled && this.required && this.selectedItems.isEmpty ? { required: true } : null;
-    return this.errors;
+    return (this.errors = !this.disabled && this.required && this.isEmpty() ? { required: true } : null);
   }
 
   // ** Validator - finish **
@@ -275,32 +294,43 @@ export class GlnSelectComponent extends GlnBasisFrame implements OnChanges, OnIn
     HtmlElemUtil.setProperty(this.hostRef, '--glns-size', NumberUtil.str(event.frameSizeValue)?.concat('px') || null);
   }
 
-  public clearSelectedMenuItems(): void {
-    if (!this.disabled && !this.selectedItems.isEmpty) {
+  public isEmpty(): boolean {
+    return Array.isArray(this.valueData) ? this.valueData.length === 0 : this.valueData == null;
+  }
+
+  public clear(): void {
+    if (!this.disabled && !this.isEmpty()) {
       this.selectedItems.clear();
-      this.isFilled = !this.selectedItems.isEmpty;
+      // Select the first menu item with the value null.
+      const itemNull = !this.multiple ? this.selectedItems.findMenuItemByValue(null, this.menuItems) : null;
+      if (itemNull) {
+        // Set the selected menu items to the new list of items.
+        this.selectedItems.setSelectionMenuItems([itemNull], this.menuItems);
+      }
+      this.updateValueDataAndIsFilledAndValidity(this.multiple ? [] : null);
       this.changeDetectorRef.markForCheck();
     }
   }
-
-  public selectedMenuElement(addMenuItem: GlnMenuItemComponent | null): void {
+  /** Processing a user-selected menu item. */
+  public selectionMenuElement(addMenuItem: GlnMenuItemComponent | null): void {
     const addMenuItems = addMenuItem !== null ? [addMenuItem] : [];
-    if (!this.disabled && addMenuItems.length > 0 && this.selectedItems.updateByElements(!!this.multiple, addMenuItems, this.menuItems)) {
-      this.isFilled = !this.selectedItems.isEmpty;
-      this.changeDetectorRef.markForCheck();
+    if (!this.disabled && addMenuItems.length > 0) {
+      // Get a new list of menu items.
+      const mergeMenuItems: GlnMenuItemComponent[] = this.selectedItems.mergeMenuItems(!!this.multiple, addMenuItems, this.menuItems);
+      // Set the selected menu items to the new list of items.
+      this.selectedItems.setSelectionMenuItems(mergeMenuItems, this.menuItems);
 
       const values = this.selectedItems.getValues();
       const value = values.length > 0 ? values[0] : null;
+      this.updateValueDataAndIsFilledAndValidity(this.multiple ? values : value); // TODO del; => this.onChange(this.valueData);
+      this.changeDetectorRef.markForCheck();
+
       this.selected.emit({ value: !this.multiple ? value : null, values: this.multiple ? values : [] });
-      this.onChange(this.multiple ? values : value);
+
       if (!this.multiple) {
         this.close();
       }
     }
-  }
-
-  public isEmpty(): boolean {
-    return this.selectedItems.isEmpty;
   }
 
   public togger(): void {
@@ -339,18 +369,10 @@ export class GlnSelectComponent extends GlnBasisFrame implements OnChanges, OnIn
     HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
   }
 
-  private setSelectedMenuItemsByValue(multiple: boolean, newValue: unknown | unknown[] | null, menuItems: GlnMenuItemComponent[]): void {
-    if (menuItems.length > 0) {
-      if (multiple && !Array.isArray(newValue)) {
-        throw Error('The value must be an array in multi-select mode.');
-      }
-      this.selectedItems.clear();
-      const addValues: unknown[] = Array.isArray(newValue) ? newValue : newValue ? [newValue] : [];
-      const addMenuItems = this.selectedItems.findMenuItems(addValues, menuItems);
-      this.selectedItems.updateByElements(!!multiple, addMenuItems, menuItems);
-
-      this.isFilled = !this.selectedItems.isEmpty;
-      this.changeDetectorRef.markForCheck();
-    }
+  private updateValueDataAndIsFilledAndValidity(newValueData: unknown | unknown[] | null): void {
+    this.valueData = newValueData;
+    this.isFilled = !this.isEmpty();
+    // Calling the validation method for the new value.
+    this.onChange(this.valueData);
   }
 }

@@ -39,7 +39,7 @@ export class SelectAttributesComponent {
   public exterior02a = 'outlined';
   public formGroup02a: FormGroup = new FormGroup({
     model02a: new FormControl(null, []),
-    model02b: new FormControl(this.fruits[1], [Validators.required]),
+    model02b: new FormControl([] /*null*/ /*this.fruits[1]*/, [Validators.required]),
     model02c: new FormControl(this.fruits[1], []),
     model02d: new FormControl(this.fruits[1], []),
   });

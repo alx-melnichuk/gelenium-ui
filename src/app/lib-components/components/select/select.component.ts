@@ -10,7 +10,7 @@ import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-rou
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent implements AfterViewInit {
-  public showNum = '';
+  public showNum = '02';
 
   constructor() {
     // eslint-disable-next-line no-restricted-syntax

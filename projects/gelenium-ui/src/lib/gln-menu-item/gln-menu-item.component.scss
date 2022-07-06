@@ -59,4 +59,10 @@ gln-menu-item {
       background-color: rgba(25, 118, 210, 0.12);
     }
   }
+  &>[cbar] {
+    margin-right: 9px;
+    &>input {
+      cursor: inherit;
+    }
+  }
 }
