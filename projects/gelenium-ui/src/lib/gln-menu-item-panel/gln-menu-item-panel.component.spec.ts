@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GlnMenuItemBarComponent } from './gln-menu-item-bar.component';
+import { GlnMenuItemPanelComponent } from './gln-menu-item-panel.component';
 
-describe('GlnMenuItemBarComponent', () => {
-  let component: GlnMenuItemBarComponent;
-  let fixture: ComponentFixture<GlnMenuItemBarComponent>;
+describe('GlnMenuItemPanelComponent', () => {
+  let component: GlnMenuItemPanelComponent;
+  let fixture: ComponentFixture<GlnMenuItemPanelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GlnMenuItemBarComponent],
+      declarations: [GlnMenuItemPanelComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GlnMenuItemBarComponent);
+    fixture = TestBed.createComponent(GlnMenuItemPanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,6 +1,6 @@
-/*# sourceURL=gln-menu-item-bar.component */
+/*# sourceURL=gln-menu-item-panel.component.scss */
 
-gln-menu-item-bar {
+gln-menu-item-panel {
   background-color: rgb(255, 255, 255);//+
   border-radius: inherit; // # 4px;//+
   color: rgba(0, 0, 0, 0.87);
@@ -22,9 +22,9 @@ gln-menu-item-bar {
     box-shadow: rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px;
   }
 
-  &>[glnmib-list] {
+  &>[glnmip-list] {
     box-sizing: content-box;
-    height: var(--glnmib-list-height, unset);
+    height: var(--glnmip-list-height, unset);
     padding: 0.375em 0px; // 6px 0px
   }
 

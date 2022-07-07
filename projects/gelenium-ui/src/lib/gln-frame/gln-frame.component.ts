@@ -63,10 +63,10 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   }
 
   public currConfig: GlnFrameConfig | null = null;
+  public frameExterior: GlnFrameExterior | null = null;
+  public hideLabel: boolean | null = null;
   public hoverFocus: boolean | null = null;
   public labelShrink: boolean | null = null;
-  public hideLabel: boolean | null = null;
-  public frameExterior: GlnFrameExterior | null = null;
 
   constructor(
     @Optional() @Inject(GLN_FRAME_CONFIG) private rootConfig: GlnFrameConfig | null,
@@ -94,7 +94,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.settingLabelShrink(this.renderer, this.hostRef, this.labelShrink);
     }
     if (changes.noAnimation) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-animation', this.noAnimation || false);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-animation', !!this.noAnimation);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noAnm', this.noAnimation ? '' : null);
     }
     if (changes.noLabel || (changes.config && this.noLabel == null)) {
@@ -102,7 +102,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.settingNoLabel(this.renderer, this.hostRef, this.hideLabel);
     }
     if (changes.isDisabled) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabled || false);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', !!this.isDisabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
     }
     if (changes.isFilled) {
@@ -110,12 +110,12 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);
     }
     if (changes.isError) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-error', this.isError || false);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-error', !!this.isError);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isError ? '' : null);
     }
     if (changes.label || changes.isRequired) {
       const isIndent = !!this.label || this.isRequired;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnf-lgn-indent', isIndent || false);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnf-lgn-indent', !!isIndent);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ind', isIndent ? '' : null);
     }
   }

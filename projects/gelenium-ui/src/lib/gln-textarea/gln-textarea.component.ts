@@ -110,6 +110,8 @@ export class GlnTextareaComponent
   @Input()
   public ornamRgAlign: string | null = null; // OrnamAlign
   @Input()
+  public tabIndex = 0;
+  @Input()
   public wdFull: string | null = null;
 
   @Output()

@@ -7,7 +7,6 @@ gln-select {
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
   min-width: 100px;
-  position: relative;
   // # font-family: Roboto, Helvetica, Arial, sans-serif;
   // # font-weight: 400;
   // # font-size: 1rem; // 16px
@@ -25,13 +24,11 @@ gln-select {
   }
 
   // Element "Frame".
-
   gln-frame:not([opn]):not([dis]) {
     cursor: pointer;
   }
 
   // Element "gln-frame - glns-rhomb".
-
   --glnsr--def-def54: hsl(var(--gln-default-h), var(--gln-default-s), 54%);
   --glnsr--foc-prm46: hsl(var(--gln-primary-h), var(--gln-primary-s), 46%);
 
@@ -83,7 +80,6 @@ gln-select {
   }
 
   // Element "Frame - glns-elem".
-
   gln-frame>div>[glns-elem] {
     user-select: none;
     &:focus-visible {
@@ -110,17 +106,19 @@ gln-select {
   // @keyframes mui-auto-fill-cancel {  0% { display: block; }  }
 
 
-  // Element "gln-menu-item-bar-show"
+  // Element "div glns-wrap".
+  &>[glns-wrap] {
+    position: relative;
+  }
 
-  &>[glnmibs-elem] {
+  // Element "gln-menu-item-bar-show"
+  &>[glns-wrap]>[glnmibs-elem] {
     border-radius: 0.25em; // 4px
     z-index: var(--glnmibs-z-index, 1000);
   }
 
 
-
   // Element "gln-hint-or-error"
-
   gln-hint-or-error {
     padding-left: var(--glns-he-pd-lf, var(--glnfs-pd-lf));
     padding-right: var(--glns-he-pd-rg, var(--glnfs-pd-rg));

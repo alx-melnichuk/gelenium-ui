@@ -8,6 +8,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostListener,
   Inject,
   InjectionToken,
   Input,
@@ -114,6 +115,8 @@ export class GlnSelectComponent
   @Input()
   public visibleSize = -1;
   @Input()
+  public tabIndex = 0;
+  @Input()
   public wdFull: string | null = null;
 
   @Input()
@@ -170,7 +173,7 @@ export class GlnSelectComponent
   public isFocused = false;
   public isFilled = false;
   // #public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation".
-  public isOpen = false;
+  public isOpenPanel = false;
   // #public isWriteValueInit: boolean | null = null;
   public multiple: boolean | null = null; // Binding attribute "isMultiple". // GlnMenuItemParent
   public required: boolean | null = null; // Binding attribute "isRequired".
@@ -268,21 +271,47 @@ export class GlnSelectComponent
     }
   }
 
-  public doFocus(): void {
-    if (!this.disabled) {
+  public getFocusMainElem(event: any): void {
+    console.log(`getFocusMainElem()`); //, ' target=', event.target, ' relatedTarget=', event.relatedTarget, ' event=', event); // TODO del;
+    if (!this.disabled && !this.isFocused) {
+      console.log(`getFocusMainElem() isFocused = true;`); //
       this.isFocused = true;
       this.focusState(this.renderer, this.hostRef, this.isFocused);
       this.focused.emit();
     }
   }
 
-  public doBlur(): void {
-    if (!this.disabled) {
-      this.isFocused = false;
-      this.focusState(this.renderer, this.hostRef, this.isFocused);
-      this.onTouched();
-      this.blured.emit();
+  public lossFocusMainElem(event: any): void {
+    console.log(`lossFocusMainElem()`); //, ' target=', event.target, ' relatedTarget=', event.relatedTarget, ' event=', event); // TODO del;
+    if (!this.disabled && this.isFocused) {
+      if (this.isOpenPanel) {
+        console.log(`lossFocusMainElem() this.focus();`, ' relatedTarget=', event.relatedTarget, ' event=', event); // TODO del;
+        if (event.relatedTarget && event.relatedTarget.tagName === 'SELECT') {
+          setTimeout(() => {
+            console.log(`lossFocusMainElem(); elem.blur();`);
+            event.relatedTarget.blur();
+            this.focus();
+          }, 0);
+        } else {
+          this.focus();
+        }
+      } else {
+        console.log(`lossFocusMainElem() isFocused = false;`); // TODO del;
+        this.isFocused = false;
+        this.focusState(this.renderer, this.hostRef, this.isFocused);
+        this.onTouched();
+        this.blured.emit();
+      }
     }
+  }
+
+  @HostListener('mousedown', ['$event'])
+  public mousedownHandling(event: Event): void {
+    console.log(`mousedownSelect() isMousedown = true;`);
+  }
+  @HostListener('mouseup', ['$event'])
+  public mouseupHandling(event: Event): void {
+    console.log(`mouseupSelect() isMousedown = false`);
   }
 
   public trackByMenuItem(index: number, item: GlnMenuItemComponent): string {
@@ -335,7 +364,7 @@ export class GlnSelectComponent
 
   public togger(): void {
     if (!this.disabled) {
-      if (!this.isOpen) {
+      if (!this.isOpenPanel) {
         this.open();
       } else {
         this.close();
@@ -344,19 +373,19 @@ export class GlnSelectComponent
   }
 
   public open(): void {
-    if (!this.disabled && !this.isOpen && !this.isBarShowAnimation) {
-      this.isOpen = true;
+    if (!this.disabled && !this.isOpenPanel && !this.isBarShowAnimation) {
+      this.isOpenPanel = true;
       this.opened.emit();
       this.changeDetectorRef.markForCheck();
     }
   }
 
   public close(): void {
-    if (!this.disabled && this.isOpen) {
+    if (!this.disabled && this.isOpenPanel) {
       if (!this.isNoAnimation) {
         this.isBarShowAnimation = true;
       }
-      this.isOpen = false;
+      this.isOpenPanel = false;
       this.closed.emit();
       this.changeDetectorRef.markForCheck();
     }

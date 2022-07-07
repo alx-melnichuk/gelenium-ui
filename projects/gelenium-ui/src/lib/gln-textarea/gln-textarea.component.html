@@ -46,6 +46,7 @@
         [attr.disabled]="disabled ? '': null"
         [attr.autocomplete]="!!autoComplete ? autoComplete : null"
         [attr.readonly]="getBoolean(isReadOnly) ? '': null"
+        [attr.tabindex]="disabled ? '-1': tabIndex"
         [cols]="cntCols"
         (focus)="doFocus()"
         (blur)="doBlur()"

@@ -49,6 +49,7 @@
         [attr.min]="min"
         [attr.max]="max"
         [attr.step]="step"
+        [attr.tabindex]="disabled ? '-1': tabIndex"
         [pattern]="pattern"
         (focus)="doFocus()"
         (blur)="doBlur()"

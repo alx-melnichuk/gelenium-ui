@@ -1,7 +1,7 @@
-<gln-menu-item-bar tabindex="-1"
+<gln-menu-item-panel tabindex="-1"
   [menuItemList]="menuItemList"
   [visibleSize]="visibleSize"
   (closing)="doClosing()"
   (selected)="selected.emit($event)">
   <ng-content></ng-content>
-</gln-menu-item-bar>
+</gln-menu-item-panel>

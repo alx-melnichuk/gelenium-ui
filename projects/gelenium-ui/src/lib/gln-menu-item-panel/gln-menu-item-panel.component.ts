@@ -18,20 +18,20 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
 
 const DEFAULT_HEIGHT = 40;
-const GLN_MENU_ITEM_BAR = 'GLN-MENU-ITEM-BAR';
+const GLN_MENU_ITEM_PANEL = 'GLN-MENU-ITEM-PANEL';
 const GLN_MENU_ITEM = 'GLN-MENU-ITEM';
 
 let uniqueIdCounter = 0;
 
 @Component({
-  selector: 'gln-menu-item-bar',
-  exportAs: 'glnMenuItemBar',
-  templateUrl: './gln-menu-item-bar.component.html',
-  styleUrls: ['./gln-menu-item-bar.component.scss'],
+  selector: 'gln-menu-item-panel',
+  exportAs: 'glnMenuItemPanel',
+  templateUrl: './gln-menu-item-panel.component.html',
+  styleUrls: ['./gln-menu-item-panel.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnMenuItemBarComponent implements OnInit, AfterContentInit {
+export class GlnMenuItemPanelComponent implements OnInit, AfterContentInit {
   @Input()
   public id = `glnmib-${uniqueIdCounter++}`;
   @Input()
@@ -114,13 +114,13 @@ export class GlnMenuItemBarComponent implements OnInit, AfterContentInit {
   private settingItemListHeight(elem: ElementRef<HTMLElement>, height: number, countVisible: number): void {
     const menuItemsHeight = height * countVisible;
     const itemsHeight = menuItemsHeight > 0 ? menuItemsHeight : null;
-    HtmlElemUtil.setProperty(elem, '--glnmib-list-height', NumberUtil.str(itemsHeight)?.concat('px') || null);
+    HtmlElemUtil.setProperty(elem, '--glnmip-list-height', NumberUtil.str(itemsHeight)?.concat('px') || null);
   }
   /** Get the menu item as the parent of the clicked item. */
   private getMenuItemFromEvent(htmlElement: HTMLElement | null): HTMLElement | null {
     let result: HTMLElement | null = null;
     let elem: HTMLElement | null = htmlElement;
-    while (!result && !!elem && elem.tagName !== GLN_MENU_ITEM_BAR) {
+    while (!result && !!elem && elem.tagName !== GLN_MENU_ITEM_PANEL) {
       result = elem.tagName === GLN_MENU_ITEM ? elem : result;
       elem = elem.parentElement;
     }

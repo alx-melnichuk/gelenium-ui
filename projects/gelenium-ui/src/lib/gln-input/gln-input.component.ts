@@ -113,6 +113,8 @@ export class GlnInputComponent
   @Input()
   public step: number | null = null;
   @Input()
+  public tabIndex = 0;
+  @Input()
   public type: string = GlnInputType.text.valueOf();
   @Input()
   public wdFull: string | null = null;

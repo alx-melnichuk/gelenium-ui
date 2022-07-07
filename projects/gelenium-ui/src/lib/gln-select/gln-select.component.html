@@ -1,10 +1,11 @@
 <ng-container [formGroup]="formGroup">
-  <div class="glns-wrap"
+  <div glns-wrap
+    class="glns-wrap"
     [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
     #glnFrameExteriorInput="glnFrameExteriorInput"
     [glnFrameExteriorInputElementRef]="hostRef">
-    <gln-frame [ngClass]="[(isOpen ? 'is-open': '')]"
-      [attr.opn]="isOpen ? '': null"
+    <gln-frame [ngClass]="[(isOpenPanel ? 'is-open': '')]"
+      [attr.opn]="isOpenPanel ? '': null"
       [config]="currConfig"
       [exterior]="glnFrameExteriorInput.exterior"
       [hoverColor]="getBoolean(hoverColor)"
@@ -38,22 +39,23 @@
         class="glns-ornam-rg">
         <ng-content select="[gln-orn-rg]"></ng-content>
 
-        <div glns-rhomb
-          [attr.opn]="isOpen ? '': null"
-          [ngClass]="['glns-rhomb', (isOpen ? 'is-open': '')]"
+        <div *ngIf="!getBoolean(noIcon)"
+          glns-rhomb
+          [attr.opn]="isOpenPanel ? '': null"
+          [ngClass]="['glns-rhomb', (isOpenPanel ? 'is-open': '')]"
           focusable="false"
           aria-hidden="true">
         </div>
       </span>
 
-      <div [attr.tabindex]="disabled ? null : 0"
-        #mainElementRef
-        [attr.id]="id + '-elem'"
+      <div #mainElementRef
         glnf-pd-ver
         glnf-pd-hor
         glns-elem
-        (focus)="doFocus()"
-        (blur)="doBlur()">
+        [attr.id]="id + '-elem'"
+        [attr.tabindex]="disabled ? '-1': tabIndex"
+        (focus)="getFocusMainElem($event)"
+        (blur)="lossFocusMainElem($event)">
 
         <ng-container *ngIf="isFilled; else elseBlockFilled">
           <ng-container
@@ -69,30 +71,32 @@
       </div>
 
     </gln-frame>
+
+    <gln-menu-item-panel-show *ngIf="isOpenPanel || isBarShowAnimation"
+      tabindex="-1"
+      glnmibs-elem
+      class="glnmibs-elem"
+      [isFixRight]="getBoolean(isFixRight)"
+      [isShow]="isOpenPanel"
+      [isSkipFirstEvent]="true"
+      [menuItemList]="menuItemList"
+      [noAnimation]="isNoAnimation"
+      [visibleSize]="visibleSize"
+      (hasAnimation)="isBarShowAnimation=$event"
+      (closing)="close()"
+      (selected)="selectionMenuElement($event)">
+
+      <ng-content select="gln-menu-item"></ng-content>
+
+    </gln-menu-item-panel-show>
+
   </div>
 </ng-container>
-<pre>
+<!-- <pre>
 value={{ value === null ? 'null' : value }}
 errors0={{errors | json }}
-</pre>
+</pre> -->
 
-<gln-menu-item-bar-show *ngIf="isOpen || isBarShowAnimation"
-  tabindex="-1"
-  glnmibs-elem
-  class="glnmibs-elem"
-  [isFixRight]="getBoolean(isFixRight)"
-  [isShow]="isOpen"
-  [isSkipFirstEvent]="true"
-  [menuItemList]="menuItemList"
-  [noAnimation]="isNoAnimation"
-  [visibleSize]="visibleSize"
-  (hasAnimation)="isBarShowAnimation=$event"
-  (closing)="close()"
-  (selected)="selectionMenuElement($event)">
-
-  <ng-content select="gln-menu-item"></ng-content>
-
-</gln-menu-item-bar-show>
 
 <gln-hint-or-error *ngIf="!!helperText"
   [text]="helperText"

@@ -16,7 +16,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { GlnMenuItemBarComponent } from '../gln-menu-item-bar/gln-menu-item-bar.component';
+import { GlnMenuItemPanelComponent } from '../gln-menu-item-panel/gln-menu-item-panel.component';
 
 import { GlnMenuItemComponent } from '../gln-menu-item/gln-menu-item.component';
 
@@ -27,14 +27,14 @@ import { ScreenUtil } from '../_utils/screen.util';
 let uniqueIdCounter = 0;
 
 @Component({
-  selector: 'gln-menu-item-bar-show',
-  exportAs: 'glnMenuItemBarShow',
-  templateUrl: './gln-menu-item-bar-show.component.html',
-  styleUrls: ['./gln-menu-item-bar-show.component.scss'],
+  selector: 'gln-menu-item-panel-show',
+  exportAs: 'glnMenuItemPanelShow',
+  templateUrl: './gln-menu-item-panel-show.component.html',
+  styleUrls: ['./gln-menu-item-panel-show.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnMenuItemBarShowComponent implements OnChanges, OnInit, AfterViewInit {
+export class GlnMenuItemPanelShowComponent implements OnChanges, OnInit, AfterViewInit {
   @Input()
   public id = `glnmibs-${uniqueIdCounter++}`;
   @Input()
@@ -57,8 +57,8 @@ export class GlnMenuItemBarShowComponent implements OnChanges, OnInit, AfterView
   @Output()
   readonly selected: EventEmitter<GlnMenuItemComponent> = new EventEmitter();
 
-  @ViewChild(GlnMenuItemBarComponent, { static: true })
-  public menuItemBar!: GlnMenuItemBarComponent;
+  @ViewChild(GlnMenuItemPanelComponent, { static: true })
+  public menuItemPanel!: GlnMenuItemPanelComponent;
 
   private isFirstEvent = true;
 
@@ -78,7 +78,7 @@ export class GlnMenuItemBarShowComponent implements OnChanges, OnInit, AfterView
   }
 
   public ngAfterViewInit(): void {
-    const heightItemsBar = Number(getComputedStyle(this.menuItemBar.hostRef.nativeElement).getPropertyValue('height').replace('px', ''));
+    const heightItemsBar = Number(getComputedStyle(this.menuItemPanel.hostRef.nativeElement).getPropertyValue('height').replace('px', ''));
     const isDown = this.isDownValue(this.hostRef.nativeElement.parentElement, heightItemsBar);
     this.settingElementPosition(this.hostRef, this.isFixRight, isDown);
     if (!this.noAnimation) {

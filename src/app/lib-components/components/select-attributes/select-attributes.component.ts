@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {
@@ -10,6 +10,7 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../../lib-core/constants/constants';
+import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 @Component({
   selector: 'app-select-attributes',
@@ -34,24 +35,41 @@ export class SelectAttributesComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
+  public urlSelect = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_SELECT');
+
   public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
 
   public exterior02a = 'outlined';
   public formGroup02a: FormGroup = new FormGroup({
     model02a: new FormControl(null, []),
-    model02b: new FormControl([] /*null*/ /*this.fruits[1]*/, [Validators.required]),
-    model02c: new FormControl(this.fruits[1], []),
-    model02d: new FormControl(this.fruits[1], []),
+    model02b: new FormControl(this.fruits[0], [Validators.required]),
+    model02c: new FormControl(this.fruits[0], []),
+    model02d: new FormControl(this.fruits[0], []),
   });
 
   public exterior02b = 'outlined';
   public control02b = {
     model02e: new FormControl(null, []),
     model02f: new FormControl(null, [Validators.required]),
-    model02g: new FormControl(this.fruits[1], []),
-    model02h: new FormControl(this.fruits[1], []),
+    model02g: new FormControl(this.fruits[0], []),
+    model02h: new FormControl(this.fruits[0], []),
   };
   public formGroup02b: FormGroup = new FormGroup(this.control02b);
+
+  public exterior02c = 'outlined';
+  public control02c = {
+    model02i: new FormControl(this.fruits[0], []),
+    model02j: new FormControl(this.fruits[0], []),
+    model02k: new FormControl([this.fruits[0], this.fruits[1]], []),
+    model02l: new FormControl([this.fruits[0], this.fruits[1]], []),
+  };
+  public formGroup02c: FormGroup = new FormGroup(this.control02c);
+
+  public exterior02z = 'outlined';
+  public control02z = {
+    model02z: new FormControl(this.fruits[0], []),
+  };
+  public formGroup02z: FormGroup = new FormGroup(this.control02z);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
@@ -59,4 +77,17 @@ export class SelectAttributesComponent {
   public capitalizeFirstLetter(value: string): string {
     return value ? value[0].toUpperCase() + value.slice(1) : '';
   }
+
+  doLog(name: string, event: any): void {
+    console.log(`${name}() `); // , ' target=', event.target, ' relatedTarget=', event.relatedTarget, ' event=', event);
+  }
+
+  // @HostListener('mousedown', ['$event'])
+  // public mousedownHandling(event: Event): void {
+  //   console.log(`mousedownHost() event=`, event);
+  // }
+  // @HostListener('mouseup', ['$event'])
+  // public mouseupHandling(event: Event): void {
+  //   console.log(`mouseupHost() event=`, event);
+  // }
 }
