@@ -1,19 +1,28 @@
 {
-  "name": "gelenium-ui",
-  "version": "0.1.0",
   "description": "Library of visual components in the style of \"Material UI\".",
-  "homepage": "https://alx-melnichuk.github.io/gelenium-ui/",
-  "keywords": [ "gelenium", "gelenium-ui", "material-ui", "angular", "angular-material", "material-design", "angular v12" ],
-  "license": "GNU v.2",
-  "peerDependencies": {
-    "@angular/common": "^12.2.0",
-    "@angular/core": "^12.2.0"
-  },
   "dependencies": {
     "tslib": "^2.3.0"
+  },
+  "homepage": "https://alx-melnichuk.github.io/gelenium-ui/",
+  "keywords": [
+    "gelenium",
+    "gelenium-ui",
+    "material-ui",
+    "angular",
+    "angular-material",
+    "material-design",
+    "angular-ui-component",
+    "angular12"
+  ],
+  "license": "GNU v.2",
+  "name": "gelenium-ui",
+  "peerDependencies": {
+    "@angular/common": "^12.2.16",
+    "@angular/core": "^12.2.16"
   },
   "repository": {
     "type" : "git",
     "url" : "https://github.com/alx-melnichuk/gelenium-ui.git"
-  }
+  },
+  "version": "0.1.0"
 }
