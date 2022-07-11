@@ -8,6 +8,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { GlnMenuItemModule, GlnSelectModule } from 'gelenium-ui';
 
 import { SelectAttributesComponent } from './select-attributes.component';
+import { GlnSelect3Module } from 'projects/gelenium-ui/src/lib/gln-select3/gln-select3.module';
 
 @NgModule({
   declarations: [SelectAttributesComponent],
@@ -19,6 +20,7 @@ import { SelectAttributesComponent } from './select-attributes.component';
     MatTabsModule,
     GlnSelectModule,
     GlnMenuItemModule,
+    GlnSelect3Module,
   ],
   exports: [SelectAttributesComponent],
 })

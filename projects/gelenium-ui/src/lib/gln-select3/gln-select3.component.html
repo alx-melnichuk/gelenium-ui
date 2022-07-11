@@ -1,0 +1,60 @@
+<div class="input-wrapper"
+  glnOverlayOrigin
+  #origin="glnOverlayOrigin"
+  #trigger>
+  <div class="input"
+    [class.required]="required"
+    #dropreference>
+    <label class="label-text">{{label}}</label>
+    <input #input
+      placeholder={{placeholder}}
+      [disabled]="disabled"
+      readonly
+      (click)="toggle()"
+      autocomplete="off">
+    <span class="dropdown-arrow">🔽</span>
+  </div>
+</div>
+<!--
+  cdkConnectedOverlayLockPosition   - The overlay should be locked when scrolling.
+  cdkConnectedOverlayHasBackdrop    - The overlay should attach a backdrop.
+  cdkConnectedOverlayBackdropClass  - The custom class to be set on the backdrop element.
+  cdkConnectedOverlayPanelClass     - The custom class to add to the overlay pane element.
+  cdkConnectedOverlayScrollStrategy - Strategy to be used when handling scroll events while the overlay is open.
+  cdkConnectedOverlayPositions      - Registered connected position pairs.
+  cdkConnectedOverlayMinWidth       - The min width of the overlay panel.
+  cdkConnectedOverlayOffsetY        - The offset in pixels for the overlay connection point on the y-axis
+-->
+<ng-template cdk-connected-overlay
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayLockPosition
+  cdkConnectedOverlayMinWidth9="triggerRect?.width!"
+  [cdkConnectedOverlayOffsetY]="offsetY"
+  [cdkConnectedOverlayOpen]="isPanelOpen || hasPanelAnimation"
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayPanelClass]="overlayPanelClass"
+  [cdkConnectedOverlayPositions]="positions"
+  [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+  (backdropClick)="close()"
+  (attach)="doAttached()"
+  (detach)="close()">
+  <div [ngClass]="['gln-select-panel-wrap']"
+    [attr.noElevation]="getBoolean(noElevation) ? '' : null"
+    [attr.noAnimation]="isNoAnimation ? '' : null"
+    [attr.is-open]="isPanelOpen ? '' : null"
+    [attr.is-hide]="!isPanelOpen ? '' : null"
+    (animationend)="setHasPanelAnimation(isPanelOpen)"
+    (animationcancel)="setHasPanelAnimation(isPanelOpen)">
+    <div [ngClass]="['gln-select-panel', panelClass]"
+      #panel
+      role="listbox"
+      tabindex="-1"
+      [attr.id]="id + '-panel'"
+      attr.aria-multiselectable="multiple"
+      attr.aria-label="ariaLabel || null"
+      attr.aria-labelledby="_getPanelAriaLabelledby()">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</ng-template>
