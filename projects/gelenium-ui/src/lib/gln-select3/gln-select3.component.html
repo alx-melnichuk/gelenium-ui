@@ -1,10 +1,9 @@
 <div class="input-wrapper"
-  glnOverlayOrigin
-  #origin="glnOverlayOrigin"
+  cdkOverlayOrigin
+  #origin="cdkOverlayOrigin"
   #trigger>
   <div class="input"
-    [class.required]="required"
-    #dropreference>
+    [class.required]="required">
     <label class="label-text">{{label}}</label>
     <input #input
       placeholder={{placeholder}}
@@ -25,35 +24,38 @@
   cdkConnectedOverlayMinWidth       - The min width of the overlay panel.
   cdkConnectedOverlayOffsetY        - The offset in pixels for the overlay connection point on the y-axis
 -->
-<ng-template cdk-connected-overlay
+<ng-template cdkConnectedOverlay
   cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
   cdkConnectedOverlayHasBackdrop
   cdkConnectedOverlayLockPosition
   cdkConnectedOverlayMinWidth9="triggerRect?.width!"
-  [cdkConnectedOverlayOffsetY]="offsetY"
+  cdkConnectedOverlayOffsetY9="offsetY"
   [cdkConnectedOverlayOpen]="isPanelOpen || hasPanelAnimation"
   [cdkConnectedOverlayOrigin]="origin"
   [cdkConnectedOverlayPanelClass]="overlayPanelClass"
   [cdkConnectedOverlayPositions]="positions"
   [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+  cdkConnectedOverlayTransformOriginOn="transformOriginOn"
   (backdropClick)="close()"
-  (attach)="doAttached()"
+  (attach)="attach()"
   (detach)="close()">
   <div [ngClass]="['gln-select-panel-wrap']"
+    glnsp-wrap
     [attr.noElevation]="getBoolean(noElevation) ? '' : null"
-    [attr.noAnimation]="isNoAnimation ? '' : null"
-    [attr.is-open]="isPanelOpen ? '' : null"
-    [attr.is-hide]="!isPanelOpen ? '' : null"
-    (animationend)="setHasPanelAnimation(isPanelOpen)"
-    (animationcancel)="setHasPanelAnimation(isPanelOpen)">
+    [attr.noAnimation]="noAnimations ? '' : null"
+    [attr.is-open]="!noAnimations && isPanelOpen ? '' : null"
+    [attr.is-hide]="!noAnimations && !isPanelOpen ? '' : null"
+    (animationend)="setHasPanelAnimation()"
+    (animationcancel)="setHasPanelAnimation()">
     <div [ngClass]="['gln-select-panel', panelClass]"
-      #panel
+      glns-panel
       role="listbox"
       tabindex="-1"
       [attr.id]="id + '-panel'"
       attr.aria-multiselectable="multiple"
       attr.aria-label="ariaLabel || null"
-      attr.aria-labelledby="_getPanelAriaLabelledby()">
+      attr.aria-labelledby="_getPanelAriaLabelledby()"
+      [style.font-size.px]="triggerFontSize">
       <ng-content></ng-content>
     </div>
   </div>

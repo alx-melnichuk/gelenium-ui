@@ -3,9 +3,13 @@
     class="glns-wrap"
     [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
     #glnFrameExteriorInput="glnFrameExteriorInput"
-    [glnFrameExteriorInputElementRef]="hostRef">
-    <gln-frame [ngClass]="[(isOpenPanel ? 'is-open': '')]"
-      [attr.opn]="isOpenPanel ? '': null"
+    [glnFrameExteriorInputElementRef]="hostRef"
+    cdkOverlayOrigin
+    #origin="cdkOverlayOrigin"
+    #trigger
+    (click)="toggle()">
+    <gln-frame [ngClass]="[(isPanelOpen ? 'is-open': '')]"
+      [attr.opn]="isPanelOpen ? '': null"
       [config]="currConfig"
       [exterior]="glnFrameExteriorInput.exterior"
       [hoverColor]="getBoolean(hoverColor)"
@@ -28,7 +32,7 @@
       glnFrameOrnament
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
       [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
-      (mouseup)="togger()">
+      mouseup9="togger()">
 
       <span glnf-orn-lf
         class="glns-ornam-lf">
@@ -41,8 +45,8 @@
 
         <div *ngIf="!getBoolean(noIcon)"
           glns-rhomb
-          [attr.opn]="isOpenPanel ? '': null"
-          [ngClass]="['glns-rhomb', (isOpenPanel ? 'is-open': '')]"
+          [attr.opn]="isPanelOpen ? '': null"
+          [ngClass]="['glns-rhomb', (isPanelOpen ? 'is-open': '')]"
           focusable="false"
           aria-hidden="true">
         </div>
@@ -54,8 +58,8 @@
         glns-elem
         [attr.id]="id + '-elem'"
         [attr.tabindex]="disabled ? '-1': tabIndex"
-        (focus)="getFocusMainElem($event)"
-        (blur)="lossFocusMainElem($event)">
+        focus9="getFocusMainElem($event)"
+        blur9="lossFocusMainElem($event)">
 
         <ng-container *ngIf="isFilled; else elseBlockFilled">
           <ng-container
@@ -72,7 +76,7 @@
 
     </gln-frame>
 
-    <gln-menu-item-panel-show *ngIf="isOpenPanel || isBarShowAnimation"
+    <!-- <gln-menu-item-panel-show *ngIf="isOpenPanel || isBarShowAnimation"
       tabindex="-1"
       glnmibs-elem
       class="glnmibs-elem"
@@ -88,7 +92,7 @@
 
       <ng-content select="gln-menu-item"></ng-content>
 
-    </gln-menu-item-panel-show>
+    </gln-menu-item-panel-show> -->
 
   </div>
 </ng-container>
@@ -97,10 +101,46 @@ value={{ value === null ? 'null' : value }}
 errors0={{errors | json }}
 </pre> -->
 
-
 <gln-hint-or-error *ngIf="!!helperText"
   [text]="helperText"
   [isError]="!!errors || getBoolean(isError)"
   [isFocused]="isFocused"
   [isDisabled]="disabled">
 </gln-hint-or-error>
+
+<ng-template cdkConnectedOverlay
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayLockPosition
+  cdkConnectedOverlayMinWidth9="triggerRect?.width!"
+  cdkConnectedOverlayOffsetY9="offsetY"
+  [cdkConnectedOverlayOpen]="isPanelOpen || hasPanelAnimation"
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayPanelClass]="overlayPanelClass"
+  [cdkConnectedOverlayPositions]="positions"
+  [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+  cdkConnectedOverlayTransformOriginOn="transformOriginOn"
+  (backdropClick)="close()"
+  (attach)="attach()"
+  (detach)="close()">
+  <div [ngClass]="['gln-select-panel-wrap']"
+    glnsp-wrap
+    [attr.noElevation]="getBoolean(noElevation) ? '' : null"
+    [attr.noAnimation]="isNoAnimation ? '' : null"
+    [attr.is-open]="!isNoAnimation && isPanelOpen ? '' : null"
+    [attr.is-hide]="!isNoAnimation && !isPanelOpen ? '' : null"
+    (animationend)="setHasPanelAnimation()"
+    (animationcancel)="setHasPanelAnimation()">
+    <div [ngClass]="['gln-select-panel', panelClass]"
+      glns-panel
+      role="listbox"
+      tabindex="-1"
+      [attr.id]="id + '-panel'"
+      attr.aria-multiselectable="multiple"
+      attr.aria-label="ariaLabel || null"
+      attr.aria-labelledby="_getPanelAriaLabelledby()"
+      [style.font-size.px]="triggerFontSize">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</ng-template>

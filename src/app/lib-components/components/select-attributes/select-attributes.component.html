@@ -909,8 +909,7 @@ export class SelectComponent &#123;
   </mat-button-toggle-group>
 </section> -->
 
-<form *ngIf="false"
-  [formGroup]="formGroup02z"
+<form [formGroup]="formGroup02z"
   novalidate
   autocomplete="off">
 
@@ -940,7 +939,8 @@ export class SelectComponent &#123;
   </div>
 </form>
 
-<div class="app-group">
+<div class="app-group"
+  *ngIf="false">
 
   <div class="app-elem">
     <div>

@@ -8,7 +8,6 @@ import {
   Inject,
   Input,
   OnChanges,
-  OnInit,
   Optional,
   QueryList,
   Renderer2,
@@ -16,28 +15,14 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { take, takeUntil } from 'rxjs/operators';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { NumberUtil } from '../_utils/number.util';
+import { ScreenUtil } from '../_utils/screen.util';
 import { GlnOption3Component } from './gln-option3.component';
 import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select3.providers';
 
-/** Object that can be used to configure the default options for the select module. */
-// export interface MatSelectConfig {
-//   /** Whether option centering should be disabled. */
-//   disableOptionCentering?: boolean;
-//   /** Time to wait in milliseconds after the last keystroke before moving focus to an item. */
-//   typeaheadDebounceInterval?: number;
-//   /** Class or list of classes to be applied to the menu's overlay panel. */
-//   overlayPanelClass?: string | string[];
-// }
-
 let uniqueIdCounter = 0;
-
-const defaultPositions: ConnectedPosition[] = [
-  { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top' },
-  { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'bottom' },
-];
 
 @Component({
   selector: 'gln-select3',
@@ -46,7 +31,7 @@ const defaultPositions: ConnectedPosition[] = [
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnSelect3Component implements OnInit, OnChanges {
+export class GlnSelect3Component implements OnChanges {
   // ** abstract class GlnBasisFrame -v **
   @Input()
   public id = `glns-${uniqueIdCounter++}`;
@@ -60,7 +45,9 @@ export class GlnSelect3Component implements OnInit, OnChanges {
   public noAnimation: string | boolean | null = null;
   // ** abstract class GlnBasisFrame -^ **
   @Input()
-  public isFixRight: string | boolean | null = null;
+  public isFixRight: string | boolean | null | undefined;
+  @Input()
+  public isMultiple: string | null = null;
 
   @Input()
   public label: string | undefined;
@@ -85,21 +72,18 @@ export class GlnSelect3Component implements OnInit, OnChanges {
 
   @ViewChild('input')
   public input: ElementRef | undefined;
-  /** Trigger that opens the select. */
+  /** The trigger on which the selection opens. */
   @ViewChild('trigger', { static: true })
   public trigger!: ElementRef<HTMLElement>;
-  /** Overlay pane containing the options. */
+  /** Overlay panel with its own parameters. */
   @ViewChild(CdkConnectedOverlay)
   protected connectedOverlay!: CdkConnectedOverlay;
 
-  /** Panel containing the select options. */
-  @ViewChild('panel')
-  public panel: ElementRef<HTMLElement> | null = null;
-
   // ** abstract class GlnBasisFrame -v **
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
-  public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation".
   public isWriteValueInit: boolean | null = null;
+  public multiple: boolean | null = null; // Binding attribute "isMultiple".
+  public noAnimations: boolean | null = null; // Binding attribute "noAnimation".
   public required: boolean | null = null; // Binding attribute "isRequired".
   public valueInit: boolean | null = null; // Binding attribute "isValueInit".
   // ** abstract class GlnBasisFrame -^ **
@@ -112,14 +96,17 @@ export class GlnSelect3Component implements OnInit, OnChanges {
    * This needs to be adjusted to align the selected option text above the trigger text.
    * When opening the panel, will vary depending on the position of the selected option along the Y axis.
    */
-  public offsetY = 0;
+  // TODO ?? public offsetY = 0;
   public overlayPanelClass: string | string[] = /*this._defaultOptions?.overlayPanelClass ||*/ '';
-  public positions: ConnectedPosition[] = [...defaultPositions];
-  /** Strategy that will be used to handle scrolling while the select panel is open. */
+  public positions: ConnectedPosition[] = [
+    { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top' },
+    { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'bottom' },
+  ];
+  /** Strategy for handling scrolling when the selection panel is open. */
   public scrollStrategy: ScrollStrategy;
-  // /** The value of the select panel's transform-origin property. */
-  // public transformOrigin = 'top';
-  /** The last measured value for the trigger's client bounding rect. */
+  /** Preserve the font size of the trigger element. */
+  public triggerFontSize = 0;
+  /** The position and dimensions for the trigger's bounding box. */
   public triggerRect: DOMRect; // TODO del; ClientRect;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -141,24 +128,26 @@ export class GlnSelect3Component implements OnInit, OnChanges {
       this.disabled = BooleanUtil.init(this.isDisabled);
       // this.setDisabledState(!!this.disabled);
     }
+    // ** abstract class GlnBasisFrame -^ **
+    if (changes.isMultiple) {
+      this.multiple = BooleanUtil.init(this.isMultiple);
+    }
     if (changes.isRequired) {
       this.required = BooleanUtil.init(this.isRequired);
     }
+    // ** abstract class GlnBasisFrame -v **
     if (changes.isValueInit) {
       this.valueInit = BooleanUtil.init(this.isValueInit);
     }
-    if (changes.noAnimation) {
-      this.isNoAnimation = BooleanUtil.init(this.noAnimation != null ? '' + this.noAnimation : null);
-    }
     // ** abstract class GlnBasisFrame -^ **
+    if (changes.noAnimation) {
+      this.noAnimations = BooleanUtil.init(this.noAnimation != null ? '' + this.noAnimation : null);
+    }
     if (changes.isFixRight) {
       this.fixRight = !!BooleanUtil.init(this.isFixRight != null ? '' + this.isFixRight : null);
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'is-fix-right', !!this.isFixRight);
     }
   }
-
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method, @typescript-eslint/no-empty-function
-  ngOnInit(): void {}
 
   // ** Public methods **
 
@@ -168,33 +157,37 @@ export class GlnSelect3Component implements OnInit, OnChanges {
   }
   // ** abstract class GlnBasisFrame -^ **
 
-  public setHasPanelAnimation(isPanelOpen: boolean): void {
-    this.hasPanelAnimation = !this.isNoAnimation && !isPanelOpen && this.hasPanelAnimation ? false : this.hasPanelAnimation;
-    console.log(`setHasPanelAnimation() hasPanelAnimation=${this.hasPanelAnimation} panel!=null-${this.panel != null}`); // TODO del;
+  public setHasPanelAnimation(): void {
+    this.hasPanelAnimation = !this.noAnimations && !this.isPanelOpen && this.hasPanelAnimation ? false : this.hasPanelAnimation;
+    // this.connectedOverlay.connectionPair;
   }
-  /** Toggles the overlay panel open or closed. */
+  /** Open or close the overlay panel. */
   public toggle(): void {
     this.isPanelOpen ? this.close() : this.open();
   }
-  /** Opens the overlay panel. */
+  /** Open overlay panel. */
   public open(): void {
     if (this.isCanOpen()) {
       this.isPanelOpen = true;
-      this.hasPanelAnimation = !this.isNoAnimation ? true : this.hasPanelAnimation;
+      this.hasPanelAnimation = !this.noAnimations ? true : this.hasPanelAnimation;
       console.log('hasPanelAnimation=', this.hasPanelAnimation); // TODO del;
       this.triggerRect = this.trigger.nativeElement.getBoundingClientRect();
       this.settingPosition(this.fixRight);
+      this.triggerFontSize = Number((getComputedStyle(this.trigger.nativeElement).fontSize || '0').replace('px', ''));
       // this._keyManager.withHorizontalOrientation(null);
       // this._highlightCorrectOption();
-      console.log(`open() panel!=null-${this.panel != null}`); // TODO del;
       this.changeDetectorRef.markForCheck();
     }
   }
 
-  /** Closes the overlay panel and focuses the host element. */
+  /** Closes the overlay panel and focuses the main element. */
   public close(): void {
+    console.log(`close() isPanelOpen=${this.isPanelOpen}`);
     if (this.isPanelOpen) {
-      console.log(`close() panel!=null-${this.panel != null}`); // TODO del;
+      if (!this.noAnimation) {
+        const panelWrap = this.connectedOverlay.overlayRef.hostElement.children[0]?.children[0] as HTMLElement;
+        this.setPropertiesForTranslate(panelWrap, this.triggerRect, ScreenUtil.getHeight());
+      }
       this.isPanelOpen = false;
       // this._keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
       this.changeDetectorRef.markForCheck();
@@ -221,17 +214,15 @@ export class GlnSelect3Component implements OnInit, OnChanges {
     }
   }
 
-  /** The callback that is called when the overlay panel is attached. */
-  public doAttached(): void {
-    this.connectedOverlay.positionChange.pipe(take(1)).subscribe(() => {
-      let panelHeight = -1;
-      if (this.panel) {
-        panelHeight = this.getHeight(this.panel);
-      }
-      console.log(`panelHeight=${panelHeight}`); // TODO del;
-      // this.changeDetectorRef.detectChanges();
-      // this._positioningSettled();
-    });
+  /** Callback when the overlay panel is attached. */
+  public attach(): void {
+    if (this.triggerFontSize && !!this.connectedOverlay?.overlayRef?.overlayElement) {
+      this.connectedOverlay.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
+    }
+    if (!this.noAnimation && !!this.connectedOverlay?.overlayRef?.overlayElement?.children[0]) {
+      const panelWrap = this.connectedOverlay.overlayRef.overlayElement.children[0] as HTMLElement;
+      this.setPropertiesForTranslate(panelWrap, this.triggerRect, ScreenUtil.getHeight());
+    }
   }
 
   // ** Proteced methods **
@@ -256,5 +247,25 @@ export class GlnSelect3Component implements OnInit, OnChanges {
       { originX: horizontalAlignment, originY: 'bottom', overlayX: horizontalAlignment, overlayY: 'bottom' },
     ];
     this.positions = [...positionPanelDown, ...positionPanelUp];
+  }
+
+  protected isPanelOpensDown(elemRect: DOMRect, panelHeight: number, screenHeight: number): boolean {
+    let result = true;
+    if (elemRect.top > -1 && elemRect.height > -1 && panelHeight > -1 && screenHeight > -1) {
+      const value = NumberUtil.roundTo100(elemRect.top) + NumberUtil.roundTo100(elemRect.height) + panelHeight;
+      result = value < screenHeight;
+    }
+    return result;
+  }
+
+  protected setPropertiesForTranslate(panelWrap: HTMLElement | null, elemRect: DOMRect, screenHeight: number): void {
+    let translateY: string | null = null;
+    if (!!panelWrap && elemRect.top > 0 && elemRect.height > 0) {
+      const panel = panelWrap.children[0];
+      const panelHeight = panel ? Number(getComputedStyle(panel).getPropertyValue('height').replace('px', '')) : 0;
+      const isOpensDown = this.isPanelOpensDown(this.triggerRect, panelHeight, screenHeight);
+      translateY = isOpensDown ? '-50%' : '50%';
+      HtmlElemUtil.setProperty(HtmlElemUtil.getElementRef(panelWrap), '--glnspw-translate-y', translateY);
+    }
   }
 }
