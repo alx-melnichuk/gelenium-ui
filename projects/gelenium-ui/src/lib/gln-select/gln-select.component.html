@@ -55,7 +55,7 @@
       <div #mainElementRef
         glnf-pd-ver
         glnf-pd-hor
-        glns-elem
+        glnf-elem
         [attr.id]="id + '-elem'"
         [attr.tabindex]="disabled ? '-1': tabIndex"
         focus9="getFocusMainElem($event)"
@@ -112,7 +112,7 @@ errors0={{errors | json }}
   cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
   cdkConnectedOverlayHasBackdrop
   cdkConnectedOverlayLockPosition
-  cdkConnectedOverlayMinWidth9="triggerRect?.width!"
+  [cdkConnectedOverlayMinWidth]="triggerRect?.width!"
   cdkConnectedOverlayOffsetY9="offsetY"
   [cdkConnectedOverlayOpen]="isPanelOpen || hasPanelAnimation"
   [cdkConnectedOverlayOrigin]="origin"
@@ -123,23 +123,21 @@ errors0={{errors | json }}
   (backdropClick)="close()"
   (attach)="attach()"
   (detach)="close()">
-  <div [ngClass]="['gln-select-panel-wrap']"
-    glnsp-wrap
-    [attr.noElevation]="getBoolean(noElevation) ? '' : null"
+  <div glnsp-wrap
+    [ngClass]="['gln-select-panel-wrap', (isNoAnimation ? 'gln-no-animation': ''), (isNoAnimation ? 'gln-no-elevation': '')]"
     [attr.noAnimation]="isNoAnimation ? '' : null"
     [attr.is-open]="!isNoAnimation && isPanelOpen ? '' : null"
     [attr.is-hide]="!isNoAnimation && !isPanelOpen ? '' : null"
     (animationend)="setHasPanelAnimation()"
     (animationcancel)="setHasPanelAnimation()">
-    <div [ngClass]="['gln-select-panel', panelClass]"
-      glns-panel
+    <div glns-panel
+      [ngClass]="['gln-select-panel', panelClass]"
       role="listbox"
       tabindex="-1"
       [attr.id]="id + '-panel'"
-      attr.aria-multiselectable="multiple"
-      attr.aria-label="ariaLabel || null"
-      attr.aria-labelledby="_getPanelAriaLabelledby()"
-      [style.font-size.px]="triggerFontSize">
+      [attr.aria-multiselectable]="multiple"
+      [attr.noElevation]="getBoolean(noElevation) ? '' : null"
+      keydown9evn="_handleKeydown($event)">
       <ng-content></ng-content>
     </div>
   </div>

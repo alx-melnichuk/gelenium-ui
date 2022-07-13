@@ -6,6 +6,7 @@ import { UrlComponents } from '../../../lm-components/constants/url-components.c
 
 import { SelectBasicModule } from '../select-basic/select-basic.module';
 import { SelectAttributesModule } from '../select-attributes/select-attributes.module';
+import { SelectApiModule } from '../select-api/select-api.module';
 
 import { SelectComponent } from './select.component';
 
@@ -22,7 +23,7 @@ const siteUrls: SiteUrl[] = [
   // { label: 'Helper text', url, fragment: 'HelperText' },
   // { label: 'Border radius', url, fragment: 'BorderRadius' },
   // { label: 'Palette', url, fragment: 'Palette' },
-  // { label: 'Api', url, fragment: 'Api' },
+  { label: 'Api', url, fragment: 'Api' },
 ];
 SiteMenu.addItem('Components', 'Select', { label: 'Select', siteUrls });
 
@@ -35,7 +36,7 @@ SiteMenu.addItem('Components', 'Select', { label: 'Select', siteUrls });
     // InputValidationModule,
     // InputNumericalModule,
     // InputOrnamentsModule,
-    // InputApiModule,
+    SelectApiModule,
   ],
   exports: [SelectComponent],
 })

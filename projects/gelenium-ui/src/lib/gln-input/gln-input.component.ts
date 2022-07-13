@@ -41,7 +41,6 @@ import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.inte
 import { GlnInputType, GlnInputTypeUtil } from '../gln-input/gln-input.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { SchemeUtil } from '../_utils/scheme.util';
 
 let uniqueIdCounter = 0;
 
@@ -151,7 +150,6 @@ export class GlnInputComponent
     renderer: Renderer2
   ) {
     super(uniqueIdCounter++, 'glni', hostRef, renderer, changeDetectorRef);
-    SchemeUtil.loadingCheck();
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-input', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);

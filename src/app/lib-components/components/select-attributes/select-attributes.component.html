@@ -922,11 +922,16 @@ export class SelectComponent &#123;
         </small>
       </div>
       <gln-select formControlName="model02z"
-        label="Parameter value 1"
+        isRequired
+        noElevation99
+        noAnimation99
+        isFixRight9
+        label="Parameter val"
+        label9="Parameter value 1"
         [visibleSize]="4"
-        helperText="Field for parameter 1."
+        helperText9="Field for parameter 1."
         [exterior]="exterior02z"
-        wdFull
+        wdFull9
         (focus)="doLog('focusModel02z', $event)"
         (blur)="doLog('blurModel02z', $event)">
         <gln-menu-item><em>None</em></gln-menu-item>
@@ -938,38 +943,6 @@ export class SelectComponent &#123;
 
   </div>
 </form>
-
-<div class="app-group"
-  *ngIf="false">
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Attribute: isFixRight, visibleSize.</em>
-      </small>
-    </div>
-    <gln-select3 class="demo1"
-      isRequired
-      noElevation9
-      noAnimation9
-      isFixRight9
-      label="Destination"
-      placeholder="Pick Your Holiday Destination">
-      <gln-option3 key="1"
-        value="Paris"></gln-option3>
-      <gln-option3 key="2"
-        value="Mauritius"></gln-option3>
-      <gln-option3 key="3"
-        value="Singapore"></gln-option3>
-      <gln-option3 key="4"
-        value="Malaysia"></gln-option3>
-      <gln-option3 key="5"
-        value="Goa"></gln-option3>
-      <gln-option3 key="6"
-        value="Thailand"></gln-option3>
-    </gln-select3>
-  </div>
-</div>
 
 <!--
 @Input() public config: GlnSelectConfig | null = null;

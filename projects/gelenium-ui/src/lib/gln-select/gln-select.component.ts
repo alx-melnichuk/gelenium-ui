@@ -9,7 +9,6 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
-  HostListener,
   Inject,
   InjectionToken,
   Input,
@@ -45,7 +44,6 @@ import { GlnMenuItemComponent } from '../gln-menu-item/gln-menu-item.component';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
-import { SchemeUtil } from '../_utils/scheme.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
 import { GlnSelectConfig } from './gln-select-config.interface';
@@ -132,7 +130,6 @@ export class GlnSelectComponent
     return this.valueData;
   }
   set value(newValue: unknown | unknown[] | null) {
-    // console.log(`set value(${newValue});`); // TODO del;
     if (this.multiple && !Array.isArray(newValue)) {
       throw Error('The value must be an array in multi-select mode.');
     }
@@ -183,7 +180,6 @@ export class GlnSelectComponent
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
-  // ##public isBarShowAnimation = false;
   public isFocused = false;
   public isFilled = false;
   // #public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation".
@@ -206,7 +202,9 @@ export class GlnSelectComponent
   ];
   /** Strategy for handling scrolling when the selection panel is open. */
   public scrollStrategy: ScrollStrategy;
-  /** Preserve the font size of the trigger element. */
+  /** Saving the frame size of the trigger element. */
+  public triggerFrameSize = 0; // BorderRadius = -1;
+  /** Saving the font size of the trigger element. */
   public triggerFontSize = 0;
   /** The position and dimensions for the trigger's bounding box. */
   public triggerRect: DOMRect | null = null;
@@ -222,7 +220,6 @@ export class GlnSelectComponent
     @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any
   ) {
     super(uniqueIdCounter++, 'glns', hostRef, renderer, changeDetectorRef);
-    SchemeUtil.loadingCheck();
     this.currConfig = this.rootConfig;
     const overlayScrollStrategyFactory = this.scrollStrategyFactory;
     this.scrollStrategy = overlayScrollStrategyFactory();
@@ -272,7 +269,6 @@ export class GlnSelectComponent
   }
 
   public ngAfterContentInit(): void {
-    // console.log(`AfterContentInit(${this.id});  menuItems.length=${this.menuItems.length} this.valueData=`, this.valueData); // TODO del;
     // Initialized when the value is received via "writeValue()" but the list of menu items is just now.
     if (this.selectedItems.isEmpty && this.menuItems.length > 0) {
       const newValue = this.valueData;
@@ -286,7 +282,6 @@ export class GlnSelectComponent
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public writeValue(value: any): void {
-    // console.log(`writeValue(${this.id}) value=`, value == null ? 'null' : value); // TODO del;
     this.value = value;
     // Execute the base class method.
     super.writeValue(value);
@@ -329,49 +324,48 @@ export class GlnSelectComponent
     if (this.isCanOpen()) {
       this.isPanelOpen = true;
       this.hasPanelAnimation = !this.isNoAnimation ? true : this.hasPanelAnimation;
-      console.log('hasPanelAnimation=', this.hasPanelAnimation); // TODO del;
       this.triggerRect = this.trigger.nativeElement.getBoundingClientRect();
       this.settingPosition(this.fixRight);
       this.triggerFontSize = Number((getComputedStyle(this.trigger.nativeElement).fontSize || '0').replace('px', ''));
       // this._keyManager.withHorizontalOrientation(null);
       // this._highlightCorrectOption();
       this.changeDetectorRef.markForCheck();
+      this.opened.emit();
     }
   }
 
   /** Closes the overlay panel and focuses the main element. */
   public close(): void {
-    console.log(`close() isPanelOpen=${this.isPanelOpen}`);
     if (this.isPanelOpen) {
-      if (!this.noAnimation && !!this.triggerRect) {
-        const panelWrap = this.connectedOverlay.overlayRef.hostElement.children[0]?.children[0] as HTMLElement;
-        this.setPropertiesForTranslate(panelWrap, this.triggerRect, ScreenUtil.getHeight());
-      }
+      const overlayElement = this.connectedOverlay?.overlayRef?.overlayElement;
+      // Define the "TranslateY" parameter.
+      this.setTranslateY(overlayElement, !!this.isNoAnimation, this.triggerRect);
       this.isPanelOpen = false;
       // this._keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
       this.changeDetectorRef.markForCheck();
-      // this._onTouched();
+      this.onTouched();
+      this.closed.emit();
     }
   }
 
-  // public open(): void {
-  //   if (!this.disabled && !this.isOpenPanel && !this.isBarShowAnimation) {
-  //     this.isOpenPanel = true;
-  //     this.opened.emit();
-  //     this.changeDetectorRef.markForCheck();
-  //   }
-  // }
-
-  // public close(): void {
-  //   if (!this.disabled && this.isOpenPanel) {
-  //     if (!this.isNoAnimation) {
-  //       this.isBarShowAnimation = true;
-  //     }
-  //     this.isOpenPanel = false;
-  //     this.closed.emit();
-  //     this.changeDetectorRef.markForCheck();
-  //   }
-  // }
+  /** Callback when the overlay panel is attached. */
+  public attach(): void {
+    const overlayElement = this.connectedOverlay?.overlayRef?.overlayElement;
+    if (!overlayElement) {
+      return;
+    }
+    const overlayElementRef = HtmlElemUtil.getElementRef(overlayElement);
+    HtmlElemUtil.setAttr(this.renderer, overlayElementRef, 'glnsp-overlay', '');
+    if (this.triggerFrameSize > 0) {
+      const borderRadius = NumberUtil.roundTo100(this.triggerFrameSize / 10);
+      HtmlElemUtil.setProperty(overlayElementRef, '--glnspo-border-radius', NumberUtil.str(borderRadius)?.concat('px') || null);
+    }
+    // Define the "TranslateY" parameter.
+    this.setTranslateY(overlayElement, !!this.isNoAnimation, this.triggerRect);
+    if (this.triggerFontSize > 0) {
+      overlayElement.style.fontSize = `${this.triggerFontSize}px`;
+    }
+  }
 
   public focus(): void {
     if (!this.disabled && isPlatformBrowser(this.platformId) && !!this.mainElementRef) {
@@ -382,7 +376,6 @@ export class GlnSelectComponent
   public doFocus(): void {
     if (!this.disabled) {
       this.isFocused = true;
-      // this.stateChanges.next();
     }
   }
   /** Calls the touch callback only when the panel is closed.
@@ -390,11 +383,10 @@ export class GlnSelectComponent
    */
   public doBlur(): void {
     this.isFocused = false;
-
     if (!this.disabled && !this.isPanelOpen) {
-      // this._onTouched();
       this.changeDetectorRef.markForCheck();
-      // this.stateChanges.next();
+      this.onTouched();
+      this.blured.emit();
     }
   }
 
@@ -432,33 +424,14 @@ export class GlnSelectComponent
   //   }
   // }
 
-  // @HostListener('mousedown', ['$event'])
-  // public mousedownHandling(event: Event): void {
-  //   console.log(`mousedownSelect() isMousedown = true;`);
-  // }
-  // @HostListener('mouseup', ['$event'])
-  // public mouseupHandling(event: Event): void {
-  //   console.log(`mouseupSelect() isMousedown = false`);
-  // }
-
-  /** Callback when the overlay panel is attached. */
-  public attach(): void {
-    if (this.triggerFontSize && !!this.connectedOverlay?.overlayRef?.overlayElement) {
-      this.connectedOverlay.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
-    }
-    if (!this.noAnimation && !!this.connectedOverlay?.overlayRef?.overlayElement?.children[0] && !!this.triggerRect) {
-      const panelWrap = this.connectedOverlay.overlayRef.overlayElement.children[0] as HTMLElement;
-      this.setPropertiesForTranslate(panelWrap, this.triggerRect, ScreenUtil.getHeight());
-    }
-  }
-
   public trackByMenuItem(index: number, item: GlnMenuItemComponent): string {
     return item.id;
   }
 
   // Determine the value of the css variable "frame size".
   public frameChange(event: GlnFrameSizePaddingVerHorRes): void {
-    HtmlElemUtil.setProperty(this.hostRef, '--glns-size', NumberUtil.str(event.frameSizeValue)?.concat('px') || null);
+    this.triggerFrameSize = event.frameSizeValue || 0;
+    // HtmlElemUtil.setProperty(this.hostRef, '--glns-size', NumberUtil.str(event.frameSizeValue)?.concat('px') || null);
   }
 
   public isEmpty(): boolean {
@@ -500,16 +473,6 @@ export class GlnSelectComponent
     }
   }
 
-  // public togger(): void {
-  //   if (!this.disabled) {
-  //     if (!this.isOpenPanel) {
-  //       this.open();
-  //     } else {
-  //       this.close();
-  //     }
-  //   }
-  // }
-
   // ** Proteced methods **
 
   /** Is it possible to open the panel. */
@@ -534,23 +497,17 @@ export class GlnSelectComponent
     this.positions = [...positionPanelDown, ...positionPanelUp];
   }
 
-  protected isPanelOpensDown(elemRect: DOMRect, panelHeight: number, screenHeight: number): boolean {
-    let result = true;
-    if (elemRect.top > -1 && elemRect.height > -1 && panelHeight > -1 && screenHeight > -1) {
-      const value = NumberUtil.roundTo100(elemRect.top) + NumberUtil.roundTo100(elemRect.height) + panelHeight;
-      result = value < screenHeight;
-    }
-    return result;
-  }
-
-  protected setPropertiesForTranslate(panelWrap: HTMLElement | null, elemRect: DOMRect, screenHeight: number): void {
-    let translateY: string | null = null;
-    if (!!panelWrap && elemRect.top > 0 && elemRect.height > 0 && !!this.triggerRect) {
-      const panel = panelWrap.children[0];
-      const panelHeight = panel ? Number(getComputedStyle(panel).getPropertyValue('height').replace('px', '')) : 0;
-      const isOpensDown = this.isPanelOpensDown(this.triggerRect, panelHeight, screenHeight);
-      translateY = isOpensDown ? '-50%' : '50%';
-      HtmlElemUtil.setProperty(HtmlElemUtil.getElementRef(panelWrap), '--glnspw-translate-y', translateY);
+  protected setTranslateY(overlayElement: HTMLElement | null, isNoAnimation: boolean, triggerRect: DOMRect | null): void {
+    const panelElement = overlayElement?.children[0]?.children[0] as HTMLElement;
+    if (!isNoAnimation && !!panelElement && !!triggerRect) {
+      const panelHeight = Number(getComputedStyle(panelElement).getPropertyValue('height').replace('px', '') || '0');
+      let translateY: string | null = null;
+      if (panelHeight > 0 && triggerRect.top > 0 && triggerRect.height > 0) {
+        const value = NumberUtil.roundTo100(triggerRect.top) + NumberUtil.roundTo100(triggerRect.height) + panelHeight;
+        const isOpensDown = value < ScreenUtil.getHeight();
+        translateY = isOpensDown ? '-50%' : '50%';
+      }
+      HtmlElemUtil.setProperty(HtmlElemUtil.getElementRef(overlayElement), '--glnspo-translate-y', translateY);
     }
   }
 

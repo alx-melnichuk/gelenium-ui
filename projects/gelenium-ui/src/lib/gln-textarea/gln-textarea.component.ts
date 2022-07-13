@@ -40,7 +40,6 @@ import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { SchemeUtil } from '../_utils/scheme.util';
 
 let uniqueIdCounter = 0;
 
@@ -142,7 +141,6 @@ export class GlnTextareaComponent
     renderer: Renderer2
   ) {
     super(uniqueIdCounter++, 'glnt', hostRef, renderer, changeDetectorRef);
-    SchemeUtil.loadingCheck();
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-textarea', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);

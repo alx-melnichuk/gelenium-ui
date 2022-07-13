@@ -1,6 +1,10 @@
 <label *ngIf="!hideLabel"
-  class="glnf-label">
-  {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
+  class="glnf-label"
+  style="display: flex;">
+  <span lbl>
+    <span>{{ label }}</span>
+  </span>
+  <span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
 </label>
 <div class="glnf-border"
   [attr.dcr-bg]="isUnderlineExterior ? '' : null"

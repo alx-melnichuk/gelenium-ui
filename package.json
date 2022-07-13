@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "format": "prettier --write 'src/**/*.{ts,js}'"
+    "format": "prettier --write 'src/**/*.{ts,js}'",
+    "sass-lib": "sass --no-source-map --style=compressed projects/gelenium-ui/styles.scss projects/gelenium-ui/styles.css"
   },
   "private": true,
   "dependencies": {
@@ -23,7 +24,6 @@
     "@angular/platform-browser-dynamic": "~12.2.16",
     "@angular/router": "~12.2.16",
     "rxjs": "~6.6.0",
-    "scss-compile": "^0.1.7",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

@@ -1,12 +1,12 @@
 <section mr-vr>
-  <h3>API: GlnInput</h3>
+  <h3>API: GlnSelect</h3>
   <p>
     Selector:
-    <span fw500>gln-input</span>
+    <span fw500>gln-select</span>
   </p>
   <p>
     Exported as:
-    <span fw500>glnInput</span>
+    <span fw500>glnSelect</span>
   </p>
 </section>
 
@@ -28,22 +28,12 @@
       </td>
       <td>
         <span>
-          ID of the native input element.<br />(default = `glni-$&#123;uniqueIdCounter++&#125;`;)
+          ID of the native input element.<br />(default = `glns-$&#123;uniqueIdCounter++&#125;`;)
         </span>
       </td>
     </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>autoComplete: string;</code>
-      </td>
-      <td>
-        <span>Defines permissions for autocomplete native input.
-          <br />(default = '';)
-        </span>
-      </td>
-    </tr>
-    <tr>
+
+    <!-- <tr>
       <td>
         <code>@Input()</code>
         <code>config: GlnFrameConfig | null = null;</code>
@@ -52,7 +42,8 @@
         <span>Defines a configuration object.</span><br />
         <a [href]="urlFrame + '#Config'">More details.</a>
       </td>
-    </tr>
+    </tr> -->
+
     <tr>
       <td>
         <code>@Input()</code>
@@ -116,6 +107,7 @@
         </span>
       </td>
     </tr>
+
     <tr>
       <td>
         <code>@Input()</code>
@@ -136,6 +128,15 @@
         </span>
       </td>
     </tr>
+    <!-- @Input()
+    public isFixRight: string | boolean | null | undefined;
+    @Input()
+    public isMultiple: string | boolean | null | undefined;
+    @Input()
+    public isNoCheckmark: string | null = null;
+    @Input()
+    public isNoRipple: string | null = null; -->
+
     <tr>
       <td>
         <code>@Input()</code>
@@ -156,8 +157,9 @@
         </span>
       </td>
     </tr>
-    <!-- // @Input()
-    // #public isValueInit: string | null = null; // From GlnBasisByFrame -->
+
+    <!-- // @Input() // #public isValueInit: string | null = null; -->
+
     <tr>
       <td>
         <code>@Input()</code>
@@ -179,49 +181,39 @@
         </span>
       </td>
     </tr>
-    <!-- // @Input()
-    // #public noAnimation: string | boolean | null = null; -->
     <tr>
       <td>
         <code>@Input()</code>
-        <code>max: number;</code>
+        <code>noAnimation: string | null;</code>
       </td>
       <td>
-        <span>Determines the maximum value that is acceptable for an input element.
-          <br />(default = null;)
+        <span>
+          Disable animation display.
+          <br />Attribute (no content).
         </span>
       </td>
     </tr>
     <tr>
       <td>
         <code>@Input()</code>
-        <code>maxLength: number;</code>
+        <code>noElevation: string | null;</code>
       </td>
       <td>
-        <span>Defines the maximum number of characters for an input element.
-          <br />(default = null;)
+        <span>
+          Disable 3d shadow display.
+          <br />Attribute (no content).
         </span>
       </td>
     </tr>
     <tr>
       <td>
         <code>@Input()</code>
-        <code>min: number;</code>
+        <code>noIcon: string | null;</code>
       </td>
       <td>
-        <span>Determines the minimum value that is acceptable for an input element.
-          <br />(default = null;)
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>minLength: number;</code>
-      </td>
-      <td>
-        <span>Defines the minimum number of characters for an input element.
-          <br />(default = null;)
+        <span>
+          Disable the display of the icon - the status of the state of the open list.
+          <br />Attribute (no content).
         </span>
       </td>
     </tr>
@@ -279,28 +271,18 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>pattern: string;</code>
+        <code>panelClass: string | string[] | Set&lt;string&gt; | &#123; [key: string]: any &#125; = ''</code>
       </td>
       <td>
         <span>
-          The attribute defines a regular expression that is passed to the native input element
-          to validate the input value.
-          Applies to an input element of type: text, tel, email, url, password, and search.
-          <br />(default = '';)
+          Classes to be passed to the select panel. Supports the same syntax as `ngClass`.
         </span>
       </td>
     </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>step: number;</code>
-      </td>
-      <td>
-        <span>The step value for increasing/decreasing the value of the input element.
-          <br />(default = null;)
-        </span>
-      </td>
-    </tr>
+
+    <!-- @Input()
+    public visibleSize = -1; // TODO ?? -->
+
     <tr>
       <td>
         <code>@Input()</code>
@@ -312,28 +294,14 @@
         </span>
       </td>
     </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>type: string;</code>
-      </td>
-      <td>
-        <span>The type of the native input element.<br />(default =
-          GlnInputType.text.valueOf();)</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>wdFull: string;</code>
-      </td>
-      <td>
-        <span>
-          Sets the width to the parent's width (width: 100%;).
-          <br />Attribute (no content).
-        </span>
-      </td>
-    </tr>
+    <!-- 
+    @Input()
+    public wdFull: string | null = null;
+  -->
+    <!--   
+    @Input()
+    get value(): unknown | unknown[] | null {
+  -->
 
     <tr>
       <td>
@@ -353,59 +321,25 @@
         <span>Fires when an element loses input focus.</span>
       </td>
     </tr>
+
     <tr>
       <td>
         <code>@Output()</code>
-        <code>input: EventEmitter&lt;Event&gt;;</code>
+        <code>opened: EventEmitter&lt;void&gt;;</code>
       </td>
       <td>
-        <span>The event is called when the user changes the value of an element.</span>
+        <span>Fires when the selection panel opens.</span>
       </td>
     </tr>
     <tr>
       <td>
         <code>@Output()</code>
-        <code>change: EventEmitter&lt;Event&gt;;</code>
+        <code>closed: EventEmitter&lt;void&gt;;</code>
       </td>
       <td>
-        <span>The event is called when the user has finished changing the value
-          of an element.</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Output()</code>
-        <code>keydownData: EventEmitter&lt;KeyboardEvent&gt;;</code>
-      </td>
-      <td>
-        <span>The event is called when any button moves down.</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Output()</code>
-        <code>keypressData: EventEmitter&lt;KeyboardEvent&gt;;</code>
-      </td>
-      <td>
-        <span>The event is called when a button that has a printable character is pressed.</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Output()</code>
-        <code>keyupData: EventEmitter&lt;KeyboardEvent&gt;;</code>
-      </td>
-      <td>
-        <span>The event is called when any button moves up.</span>
+        <span>Fires when the selection panel closes.</span>
       </td>
     </tr>
 
   </tbody>
 </table>
-
-<section mr-vr>
-  <p>
-    We recommend using "formControlName" and NOT using "[(ngModel)]".
-    <a [href]="urlFrame + '#Feature'">More details.</a>
-  </p>
-</section>

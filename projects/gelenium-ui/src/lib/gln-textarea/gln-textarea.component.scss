@@ -9,11 +9,8 @@ gln-textarea {
 
   &[wdFull] {
     width: 100%;
-    gln-frame {
+    gln-frame>div>[glnf-elem] {
       width: 100%;
-      &>div>[glnt-elem] {
-        width: 100%;
-      }
     }
   }
 
@@ -38,11 +35,6 @@ gln-textarea {
     background: none;
     margin: 0;
     padding: 0;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-animation-name: mui-auto-fill-cancel;
-    animation-name: mui-auto-fill-cancel;
-    -webkit-animation-duration: 10ms;
-    animation-duration: 10ms;
     resize: none;
 
     &:focus {
