@@ -8,8 +8,7 @@ import { GlnFrameModule } from '../gln-frame/gln-frame.module';
 import { GlnFrameOrnamentModule } from '../directives/gln-frame-ornament/gln-frame-ornament.module';
 import { GlnFrameSizeModule } from '../directives/gln-frame-size/gln-frame-size.module';
 import { GlnHintOrErrorModule } from '../gln-hint-or-error/gln-hint-or-error.module';
-import { GlnMenuItemModule } from '../gln-menu-item/gln-menu-item.module';
-import { GlnMenuItemPanelShowModule } from '../gln-menu-item-panel-show/gln-menu-item-panel-show.module';
+import { GlnOptionModule } from '../gln-option/gln-option.module';
 
 import { GlnSelectComponent } from './gln-select.component';
 import { GLN_SELECT_SCROLL_STRATEGY_PROVIDER } from './gln-select.providers';
@@ -25,8 +24,7 @@ import { GLN_SELECT_SCROLL_STRATEGY_PROVIDER } from './gln-select.providers';
     GlnFrameOrnamentModule,
     GlnFrameSizeModule,
     GlnHintOrErrorModule,
-    GlnMenuItemModule,
-    GlnMenuItemPanelShowModule,
+    GlnOptionModule,
   ],
   exports: [GlnSelectComponent],
   providers: [GLN_SELECT_SCROLL_STRATEGY_PROVIDER],

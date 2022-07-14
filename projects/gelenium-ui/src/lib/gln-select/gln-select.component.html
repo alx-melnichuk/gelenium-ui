@@ -61,38 +61,21 @@
         focus9="getFocusMainElem($event)"
         blur9="lossFocusMainElem($event)">
 
-        <ng-container *ngIf="isFilled; else elseBlockFilled">
-          <ng-container
-            *ngFor="let item of selectedItems.items; last as isLast trackBy: trackByMenuItem;">
-            <span [innerHTML]="item.getTrustHtml()"></span>
-            <ng-container *ngIf="selectedItems.items.length > 1 && !isLast">, </ng-container>
+        <ng-container [ngSwitch]="isFilled">
+          <ng-container *ngSwitchCase="true">
+            <ng-container
+              *ngFor="let item of selectedOptions.items; count as countVal; last as isLast; trackBy: trackByOption;">
+              <span [innerHTML]="item.getTrustHtml()"></span>
+              <span *ngIf="countVal > 1 && !isLast">, </span>
+            </ng-container>
           </ng-container>
+          <div *ngSwitchCase="false">&ZeroWidthSpace;</div>
         </ng-container>
-        <ng-template #elseBlockFilled>
-          <div>&ZeroWidthSpace;</div>
-        </ng-template>
+
         <!-- <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container> -->
       </div>
 
     </gln-frame>
-
-    <!-- <gln-menu-item-panel-show *ngIf="isOpenPanel || isBarShowAnimation"
-      tabindex="-1"
-      glnmibs-elem
-      class="glnmibs-elem"
-      [isFixRight]="getBoolean(isFixRight)"
-      [isShow]="isOpenPanel"
-      [isSkipFirstEvent]="true"
-      [menuItemList]="menuItemList"
-      [noAnimation]="isNoAnimation"
-      [visibleSize]="visibleSize"
-      (hasAnimation)="isBarShowAnimation=$event"
-      (closing)="close()"
-      (selected)="selectionMenuElement($event)">
-
-      <ng-content select="gln-menu-item"></ng-content>
-
-    </gln-menu-item-panel-show> -->
 
   </div>
 </ng-container>

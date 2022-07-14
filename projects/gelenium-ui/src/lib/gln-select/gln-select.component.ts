@@ -39,8 +39,8 @@ import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-in
 import { GlnBasisFrame } from '../gln-frame/gln-basis-frame.class';
 import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
-import { GlnMenuItemParent, GLN_MENU_ITEM_PARENT } from '../gln-menu-item/gln-menu-item-parent.interface';
-import { GlnMenuItemComponent } from '../gln-menu-item/gln-menu-item.component';
+import { GlnOptionItem, GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
+import { GlnOptionComponent } from '../gln-option/gln-option.component';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
@@ -48,7 +48,7 @@ import { ScreenUtil } from '../_utils/screen.util';
 
 import { GlnSelectConfig } from './gln-select-config.interface';
 import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
-import { GlnSelectedMenuItems } from './gln-selected-menu-items';
+import { GlnSelectedOptions } from './gln-selected-options';
 
 let uniqueIdCounter = 0;
 
@@ -65,12 +65,12 @@ export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => GlnSelectComponent), multi: true },
     { provide: NG_VALIDATORS, useExisting: forwardRef(() => GlnSelectComponent), multi: true },
     { provide: GLN_NODE_INTERNAL_VALIDATOR, useExisting: GlnSelectComponent },
-    { provide: GLN_MENU_ITEM_PARENT, useExisting: GlnSelectComponent },
+    { provide: GLN_OPTION_PARENT, useExisting: GlnSelectComponent },
   ],
 })
 export class GlnSelectComponent
   extends GlnBasisFrame
-  implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnMenuItemParent
+  implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnOptionParent
 {
   // @Input() // #public id = `glns-${uniqueIdCounter++}`;
   @Input()
@@ -135,9 +135,9 @@ export class GlnSelectComponent
     }
     if (newValue !== this.valueData || (this.multiple && Array.isArray(newValue))) {
       // Get a list of menu items according to an array of values.
-      const newMenuItems = this.selectedItems.getMenuItemsByValues(newValue, this.menuItems);
+      const newOptions = this.selectedOptions.getOptionsByValues(newValue, this.options);
       // Set the selected menu items to the new list of items.
-      this.selectedItems.setSelectionMenuItems(newMenuItems, this.menuItems);
+      this.selectedOptions.setSelectionOptions(newOptions, this.options);
       this.updateValueDataAndIsFilledAndValidity(newValue);
       this.changeDetectorRef.markForCheck();
     }
@@ -165,14 +165,14 @@ export class GlnSelectComponent
   @ViewChild('mainElementRef', { static: true })
   public mainElementRef: ElementRef<HTMLElement> | null = null;
 
-  @ContentChildren(GlnMenuItemComponent)
-  public menuItemList!: QueryList<GlnMenuItemComponent>;
+  @ContentChildren(GlnOptionComponent)
+  public optionList!: QueryList<GlnOptionComponent>;
 
-  public get menuItems(): GlnMenuItemComponent[] {
-    return this.menuItemList?.toArray() || [];
+  public get options(): GlnOptionComponent[] {
+    return this.optionList?.toArray() || [];
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public set menuItems(value: GlnMenuItemComponent[]) {}
+  public set options(value: GlnOptionComponent[]) {}
 
   public currConfig: GlnFrameConfig | null = null;
   // #public disabled: boolean | null = null; // Binding attribute "isDisabled".
@@ -185,12 +185,12 @@ export class GlnSelectComponent
   // #public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation".
   // ##public isOpenPanel = false;
   // #public isWriteValueInit: boolean | null = null;
-  public multiple: boolean | null = null; // Binding attribute "isMultiple". // GlnMenuItemParent
+  public multiple: boolean | null = null; // Binding attribute "isMultiple". // interface GlnOptionParent
   public required: boolean | null = null; // Binding attribute "isRequired".
-  public selectedItems: GlnSelectedMenuItems = new GlnSelectedMenuItems();
+  public selectedOptions: GlnSelectedOptions = new GlnSelectedOptions();
   // #public valueInit: boolean | null = null; // Binding attribute "isValueInit".
-  public noCheckmark: boolean | null = null; // Binding attribute "isNoCheckmark". // GlnMenuItemParent
-  public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // GlnMenuItemParent
+  public noCheckmark: boolean | null = null; // Binding attribute "isNoCheckmark". // interfaceGlnOptionParent
+  public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
 
   public hasPanelAnimation = false;
   public fixRight = false;
@@ -270,7 +270,7 @@ export class GlnSelectComponent
 
   public ngAfterContentInit(): void {
     // Initialized when the value is received via "writeValue()" but the list of menu items is just now.
-    if (this.selectedItems.isEmpty && this.menuItems.length > 0) {
+    if (this.selectedOptions.isEmpty && this.options.length > 0) {
       const newValue = this.valueData;
       this.valueData = undefined;
       this.value = newValue;
@@ -278,7 +278,7 @@ export class GlnSelectComponent
     super.ngAfterContentInit();
   }
 
-  // ** ControlValueAccessor - start **
+  // ** interface ControlValueAccessor - start **
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public writeValue(value: any): void {
@@ -298,16 +298,27 @@ export class GlnSelectComponent
     }
   }
 
-  // ** ControlValueAccessor - finish **
+  // ** interface ControlValueAccessor - finish **
 
-  // ** Validator - start **
+  // ** interface Validator - start **
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public validate(control: AbstractControl): ValidationErrors | null {
     return (this.errors = !this.disabled && this.required && this.isEmpty() ? { required: true } : null);
   }
 
-  // ** Validator - finish **
+  // ** interface Validator - finish **
+
+  // ** interface GlnOptionParent - start **
+
+  public optionSelection(optionItem: GlnOptionItem): void {
+    const addOption = optionItem as GlnOptionComponent;
+    Promise.resolve().then(() => {
+      this.selectionOptionElement(addOption);
+    });
+  }
+
+  // ** interface GlnOptionParent - finish **
 
   // ** Public methods **
 
@@ -424,7 +435,7 @@ export class GlnSelectComponent
   //   }
   // }
 
-  public trackByMenuItem(index: number, item: GlnMenuItemComponent): string {
+  public trackByOption(index: number, item: GlnOptionComponent): string {
     return item.id;
   }
 
@@ -440,27 +451,27 @@ export class GlnSelectComponent
 
   public clear(): void {
     if (!this.disabled && !this.isEmpty()) {
-      this.selectedItems.clear();
-      // Select the first menu item with the value null.
-      const itemNull = !this.multiple ? this.selectedItems.findMenuItemByValue(null, this.menuItems) : null;
+      this.selectedOptions.clear();
+      // Select the first option with the value null.
+      const itemNull = !this.multiple ? this.selectedOptions.findOptionByValue(null, this.options) : null;
       if (itemNull) {
-        // Set the selected menu items to the new list of items.
-        this.selectedItems.setSelectionMenuItems([itemNull], this.menuItems);
+        // Set the selected options to the new list of items.
+        this.selectedOptions.setSelectionOptions([itemNull], this.options);
       }
       this.updateValueDataAndIsFilledAndValidity(this.multiple ? [] : null);
       this.changeDetectorRef.markForCheck();
     }
   }
-  /** Processing a user-selected menu item. */
-  public selectionMenuElement(addMenuItem: GlnMenuItemComponent | null): void {
-    const addMenuItems = addMenuItem !== null ? [addMenuItem] : [];
-    if (!this.disabled && addMenuItems.length > 0) {
-      // Get a new list of menu items.
-      const mergeMenuItems: GlnMenuItemComponent[] = this.selectedItems.mergeMenuItems(!!this.multiple, addMenuItems, this.menuItems);
-      // Set the selected menu items to the new list of items.
-      this.selectedItems.setSelectionMenuItems(mergeMenuItems, this.menuItems);
+  /** Processing the option selected by the user. */
+  public selectionOptionElement(addOption: GlnOptionComponent | null): void {
+    const addOptions = addOption !== null ? [addOption] : [];
+    if (!this.disabled && addOptions.length > 0) {
+      // Get a new list of options.
+      const mergeOptions: GlnOptionComponent[] = this.selectedOptions.mergeOptions(!!this.multiple, addOptions, this.options);
+      // Set the selected options to the new list of items.
+      this.selectedOptions.setSelectionOptions(mergeOptions, this.options);
 
-      const values = this.selectedItems.getValues();
+      const values = this.selectedOptions.getValues();
       const value = values.length > 0 ? values[0] : null;
       this.updateValueDataAndIsFilledAndValidity(this.multiple ? values : value); // TODO del; => this.onChange(this.valueData);
       this.changeDetectorRef.markForCheck();
@@ -477,7 +488,7 @@ export class GlnSelectComponent
 
   /** Is it possible to open the panel. */
   protected isCanOpen(): boolean {
-    return !this.isPanelOpen && !this.disabled && this.menuItems.length > 0;
+    return !this.isPanelOpen && !this.disabled && this.options.length > 0;
   }
 
   protected getHeight(value: ElementRef<HTMLElement> | null): number {
@@ -520,7 +531,7 @@ export class GlnSelectComponent
 
   private updateValueDataAndIsFilledAndValidity(newValueData: unknown | unknown[] | null): void {
     this.valueData = newValueData;
-    this.isFilled = !this.isEmpty();
+    this.isFilled = !this.isEmpty() && this.selectedOptions.items.length > 0;
     // Calling the validation method for the new value.
     this.onChange(this.valueData);
   }

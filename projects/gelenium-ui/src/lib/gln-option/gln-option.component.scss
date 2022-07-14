@@ -1,0 +1,68 @@
+/*# sourceURL=gln-option.component.scss */
+
+gln-option {
+  -webkit-box-align: center;
+  align-items: center;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  box-sizing: border-box;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+
+  outline: 0px;
+  padding-bottom: 0.375em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.375em;
+  position: relative;
+  text-decoration: none;
+  user-select: none;
+  // vertical-align: middle; // TODO ignored due to the display. With 'display: block'
+  white-space: nowrap;
+  
+  &>[mul]>input {
+    cursor: inherit;
+  }
+  /*&:hover:not([dis]), &:focus:not([dis]) {
+    background: rgba(0,0,0,.04);
+  }
+  &[mar]:not([dis]) {
+    background: rgba(0,0,0,.04);
+    color: rgba(0,0,0,.87);
+  }
+  &[sel]:not([dis]) {
+    background: rgba(0,0,0,.04);
+    color: #3f51b5;
+  }
+  &[sel]:not([mul]) {
+    background: rgba(0,0,0,.12);
+  }*/
+  &[dis] {
+    opacity: 0.38;
+    pointer-events: none;
+    cursor: default;
+  }
+  &:hover {
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  &[mar] {
+    background: rgba(0,0,0,.12);
+  }
+  &[sel] {
+    background-color: rgba(25, 118, 210, 0.08);
+    &:hover {
+      background-color: rgba(25, 118, 210, 0.12);
+    }
+  }
+  &>[cbar] {
+    margin-right: 9px;
+    &>input {
+      cursor: inherit;
+    }
+  }
+}

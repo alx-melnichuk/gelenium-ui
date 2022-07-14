@@ -79,6 +79,16 @@ gln-select {
 
   // Element "Frame - glnf-elem".
   gln-frame>div>[glnf-elem] {
+    background: none;
+    border: 0;
+    box-sizing: content-box;
+    color: currentColor;
+    display: block;
+    font: inherit;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    min-width: 0;
+
     user-select: none;
     &:focus-visible {
       outline: none;
@@ -87,15 +97,6 @@ gln-select {
   // white-space: nowrap;
   // overflow: hidden;
 
-    font: inherit;
-    color: currentColor;
-    border: 0;
-    box-sizing: content-box;
-    background: none;
-    margin: 0;
-    -webkit-tap-highlight-color: transparent;
-    display: block;
-    min-width: 0;
     // width: 100%;
     // animation-name: mui-auto-fill-cancel;
     // animation-duration: 10ms;

@@ -66,10 +66,10 @@
         label="Enter value"
         [exterior]="exterior02a"
         wdFull>
-        <gln-menu-item><em>None</em></gln-menu-item>
-        <gln-menu-item *ngFor="let item of fruits"
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-menu-item>
+        </gln-option>
       </gln-select>
     </div>
 
@@ -85,10 +85,10 @@
         helperText="A value must be entered."
         [exterior]="exterior02a"
         wdFull>
-        <gln-menu-item><em>None</em></gln-menu-item>
-        <gln-menu-item *ngFor="let item of fruits"
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-menu-item>
+        </gln-option>
       </gln-select>
     </div>
 
@@ -104,10 +104,10 @@
         helperText="The label is not displayed."
         [exterior]="exterior02a"
         wdFull>
-        <gln-menu-item><em>None</em></gln-menu-item>
-        <gln-menu-item *ngFor="let item of fruits"
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-menu-item>
+        </gln-option>
       </gln-select>
     </div>
 
@@ -123,10 +123,10 @@
         helperText="The parameter is disabled."
         [exterior]="exterior02a"
         wdFull>
-        <gln-menu-item><em>None</em></gln-menu-item>
-        <gln-menu-item *ngFor="let item of fruits"
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-menu-item>
+        </gln-option>
       </gln-select>
     </div>
 
@@ -161,10 +161,10 @@
         label="Enter value"
         [exterior]="exterior02a"
         wdFull&gt;
-        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-        &lt;gln-menu-item *ngFor="let item of fruits"
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-menu-item&gt;
+        &lt;/gln-option&gt;
       &lt;/gln-select&gt;
     &lt;/div&gt;
 
@@ -180,10 +180,10 @@
         helperText="A value must be entered."
         [exterior]="exterior02a"
         wdFull&gt;
-        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-        &lt;gln-menu-item *ngFor="let item of fruits"
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-menu-item&gt;
+        &lt;/gln-option&gt;
       &lt;/gln-select&gt;
     &lt;/div&gt;
 
@@ -199,10 +199,10 @@
         helperText="The label is not displayed."
         [exterior]="exterior02a"
         wdFull&gt;
-        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-        &lt;gln-menu-item *ngFor="let item of fruits"
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-menu-item&gt;
+        &lt;/gln-option&gt;
       &lt;/gln-select&gt;
     &lt;/div&gt;
 
@@ -218,10 +218,10 @@
         helperText="The parameter is disabled."
         [exterior]="exterior02a"
         wdFull&gt;
-        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-        &lt;gln-menu-item *ngFor="let item of fruits"
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-menu-item&gt;
+        &lt;/gln-option&gt;
       &lt;/gln-select&gt;
     &lt;/div&gt;
 
@@ -334,10 +334,10 @@ export class SelectComponent &#123;
         helperText="The position of the label is fixed."
         [exterior]="exterior02b"
         wdFull>
-        <gln-menu-item><em>None</em></gln-menu-item>
-        <gln-menu-item *ngFor="let item of fruits"
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-menu-item>
+        </gln-option>
       </gln-select>
     </div>
 
@@ -356,10 +356,10 @@ export class SelectComponent &#123;
       : 'The field is not filled.'"
         [exterior]="exterior02b"
         wdFull>
-        <gln-menu-item><em>None</em></gln-menu-item>
-        <gln-menu-item *ngFor="let item of fruits"
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-menu-item>
+        </gln-option>
       </gln-select>
     </div>
 
@@ -375,10 +375,10 @@ export class SelectComponent &#123;
         helperText="On hover, a frame with the focus color."
         [exterior]="exterior02b"
         wdFull>
-        <gln-menu-item><em>None</em></gln-menu-item>
-        <gln-menu-item *ngFor="let item of fruits"
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-menu-item>
+        </gln-option>
       </gln-select>
     </div>
 
@@ -394,10 +394,10 @@ export class SelectComponent &#123;
         helperText="The parameter is read only."
         [exterior]="exterior02b"
         wdFull>
-        <gln-menu-item><em>None</em></gln-menu-item>
-        <gln-menu-item *ngFor="let item of fruits"
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-menu-item>
+        </gln-option>
       </gln-select>
     </div>
 
@@ -433,10 +433,10 @@ export class SelectComponent &#123;
         helperText="The position of the label is fixed."
         [exterior]="exterior02b"
         wdFull&gt;
-        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-        &lt;gln-menu-item *ngFor="let item of fruits"
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-menu-item&gt;
+        &lt;/gln-option&gt;
       &lt;/gln-select&gt;
     &lt;/div&gt;
 
@@ -455,10 +455,10 @@ export class SelectComponent &#123;
       : 'The field is not filled.'"
         [exterior]="exterior02b"
         wdFull&gt;
-        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-        &lt;gln-menu-item *ngFor="let item of fruits"
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-menu-item&gt;
+        &lt;/gln-option&gt;
       &lt;/gln-select&gt;
     &lt;/div&gt;
 
@@ -474,10 +474,10 @@ export class SelectComponent &#123;
         helperText="On hover, a frame with the focus color."
         [exterior]="exterior02b"
         wdFull&gt;
-        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-        &lt;gln-menu-item *ngFor="let item of fruits"
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-menu-item&gt;
+        &lt;/gln-option&gt;
       &lt;/gln-select&gt;
     &lt;/div&gt;
 
@@ -493,10 +493,10 @@ export class SelectComponent &#123;
         helperText="The parameter is read only."
         [exterior]="exterior02b"
         wdFull&gt;
-        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-        &lt;gln-menu-item *ngFor="let item of fruits"
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-menu-item&gt;
+        &lt;/gln-option&gt;
       &lt;/gln-select&gt;
     &lt;/div&gt;
 
@@ -618,10 +618,10 @@ export class SelectComponent &#123;
         helperText="Field for parameter 1."
         [exterior]="exterior02c"
         wdFull>
-        <gln-menu-item><em>None</em></gln-menu-item>
-        <gln-menu-item *ngFor="let item of fruits"
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-menu-item>
+        </gln-option>
       </gln-select>
     </div>
 
@@ -638,10 +638,10 @@ export class SelectComponent &#123;
         helperText="Field for parameter 2."
         [exterior]="exterior02c"
         wdFull>
-        <gln-menu-item><em>None</em></gln-menu-item>
-        <gln-menu-item *ngFor="let item of fruits"
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-menu-item>
+        </gln-option>
       </gln-select>
     </div>
 
@@ -657,10 +657,10 @@ export class SelectComponent &#123;
         helperText="Field for parameter 3."
         [exterior]="exterior02c"
         wdFull>
-        <gln-menu-item><em>None</em></gln-menu-item>
-        <gln-menu-item *ngFor="let item of fruits"
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-menu-item>
+        </gln-option>
       </gln-select>
     </div>
 
@@ -677,10 +677,10 @@ export class SelectComponent &#123;
         helperText="Field for parameter 4."
         [exterior]="exterior02c"
         wdFull>
-        <gln-menu-item><em>None</em></gln-menu-item>
-        <gln-menu-item *ngFor="let item of fruits"
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-menu-item>
+        </gln-option>
       </gln-select>
     </div>
 
@@ -717,10 +717,10 @@ export class SelectComponent &#123;
         helperText="Field for parameter 1."
         [exterior]="exterior02c"
         wdFull&gt;
-        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-        &lt;gln-menu-item *ngFor="let item of fruits"
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-menu-item&gt;
+        &lt;/gln-option&gt;
       &lt;/gln-select&gt;
     &lt;/div&gt;
 
@@ -737,10 +737,10 @@ export class SelectComponent &#123;
         helperText="Field for parameter 2."
         [exterior]="exterior02c"
         wdFull&gt;
-        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-        &lt;gln-menu-item *ngFor="let item of fruits"
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-menu-item&gt;
+        &lt;/gln-option&gt;
       &lt;/gln-select&gt;
     &lt;/div&gt;
 
@@ -756,10 +756,10 @@ export class SelectComponent &#123;
         helperText="Field for parameter 3."
         [exterior]="exterior02c"
         wdFull&gt;
-        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-        &lt;gln-menu-item *ngFor="let item of fruits"
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-menu-item&gt;
+        &lt;/gln-option&gt;
       &lt;/gln-select&gt;
     &lt;/div&gt;
 
@@ -776,10 +776,10 @@ export class SelectComponent &#123;
         helperText="Field for parameter 4."
         [exterior]="exterior02c"
         wdFull&gt;
-        &lt;gln-menu-item&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-menu-item&gt;
-        &lt;gln-menu-item *ngFor="let item of fruits"
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-menu-item&gt;
+        &lt;/gln-option&gt;
       &lt;/gln-select&gt;
     &lt;/div&gt;
 
@@ -838,7 +838,7 @@ export class SelectComponent &#123;
 <hr br-nn />
 
 <div demo
-  *ngIf="false">
+  *ngIf="true">
 
   <p></p>
   <div>
@@ -856,6 +856,7 @@ export class SelectComponent &#123;
     <label>Flavor:
       <select id="flavor"
         name="flavor">
+        <option></option>
         <option>Cherry</option>
         <option>Green Tea</option>
         <option>Moose Tracks</option>
@@ -926,18 +927,18 @@ export class SelectComponent &#123;
         noElevation99
         noAnimation99
         isFixRight9
-        label="Parameter val"
+        label="Fruit"
         label9="Parameter value 1"
         [visibleSize]="4"
-        helperText9="Field for parameter 1."
+        helperText="Field for parameter 1."
         [exterior]="exterior02z"
         wdFull9
         (focus)="doLog('focusModel02z', $event)"
         (blur)="doLog('blurModel02z', $event)">
-        <gln-menu-item><em>None</em></gln-menu-item>
-        <gln-menu-item *ngFor="let item of fruits"
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-menu-item>
+        </gln-option>
       </gln-select>
     </div>
 
@@ -964,12 +965,12 @@ helperText="A value must be entered."
 isMultiple9
 isNoCheckmark9
 wdFull>
-<gln-menu-item><em>None</em></gln-menu-item>
-<gln-menu-item value="demo01"
-  isDisabled>Demo01 (dis)</gln-menu-item>
-<gln-menu-item *ngFor="let item of fruits"
+<gln-option><em>None</em></gln-option>
+<gln-option value="demo01"
+  isDisabled>Demo01 (dis)</gln-option>
+<gln-option *ngFor="let item of fruits"
   [value]="item">{{ capitalizeFirstLetter(item) }}
-</gln-menu-item>
+</gln-option>
 </gln-select>
 <pre>
 value={{formGroup02a.controls.model02b.value === null ? 'null' : formGroup02a.controls.model02b.value}}

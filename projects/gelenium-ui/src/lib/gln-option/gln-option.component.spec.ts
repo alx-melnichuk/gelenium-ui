@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GlnSelect3Component } from './gln-select3.component';
+import { GlnOptionComponent } from './gln-option.component';
 
-describe('GlnSelect3Component', () => {
-  let component: GlnSelect3Component;
-  let fixture: ComponentFixture<GlnSelect3Component>;
+describe('GlnOptionComponent', () => {
+  let component: GlnOptionComponent;
+  let fixture: ComponentFixture<GlnOptionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GlnSelect3Component],
+      declarations: [GlnOptionComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GlnSelect3Component);
+    fixture = TestBed.createComponent(GlnOptionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
