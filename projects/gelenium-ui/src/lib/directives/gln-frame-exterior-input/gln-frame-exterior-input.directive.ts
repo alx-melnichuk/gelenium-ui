@@ -49,7 +49,7 @@ export class GlnFrameExteriorInputDirective implements OnChanges, GlnFrameSizePr
     let result: string | null = null;
     const radius =
       frameSizeValue > 0 && (this.exterior === GlnFrameExterior.outlined || this.exterior === GlnFrameExterior.underline)
-        ? Math.round((frameSizeValue / 10) * 100) / 100 + 'px'
+        ? NumberUtil.roundTo100(frameSizeValue / 10) + 'px'
         : null;
     if (this.exterior === GlnFrameExterior.outlined) {
       result = radius;
@@ -64,16 +64,16 @@ export class GlnFrameExteriorInputDirective implements OnChanges, GlnFrameSizePr
   public getPaddingHor = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddingHorRes | null => {
     let value: number | null = null;
     if (this.exterior === GlnFrameExterior.outlined) {
-      value = Math.round(0.25 * frameSizeValue * 100) / 100;
+      value = NumberUtil.roundTo100(0.25 * frameSizeValue);
     } else if (this.exterior === GlnFrameExterior.underline) {
-      value = Math.round(0.21428 * frameSizeValue * 100) / 100;
+      value = NumberUtil.roundTo100(0.21428 * frameSizeValue);
     } else if (this.exterior === GlnFrameExterior.standard) {
       value = 0;
     }
     if (value !== null) {
       // paddingHor
-      const pdLfRgWd = Math.round(1.66 * (2 * value) * 100) / 100;
-      HtmlElemUtil.setProperty(this.elementRef, '--glnfe-mx-wd', NumberUtil.str(pdLfRgWd)?.concat('px') || null);
+      const pdLfRgShr = NumberUtil.roundTo100(2 * value * 1.33);
+      HtmlElemUtil.setProperty(this.elementRef, '--glnfe-pd-shr', NumberUtil.str(pdLfRgShr)?.concat('px') || null);
     }
     return value !== null ? { left: value, right: value } : null;
   };
@@ -108,13 +108,13 @@ export class GlnFrameExteriorInputDirective implements OnChanges, GlnFrameSizePr
   public translateY(exterior: GlnFrameExterior | null, frameSizeValue: number, lineHeight: number | null): number | null {
     let result: number | null = null;
     if (exterior != null && frameSizeValue > 0 && lineHeight != null) {
-      result = Math.round(lineHeight * 0.25 * 100) / 100;
+      result = NumberUtil.roundTo100(lineHeight * 0.25);
       if (exterior === GlnFrameExterior.standard) {
-        result = Math.round((frameSizeValue * 0.75 - lineHeight * 1.27) * 0.4 * 100) / 100;
+        result = NumberUtil.roundTo100((frameSizeValue * 0.75 - lineHeight * 1.27) * 0.4);
       } else if (exterior === GlnFrameExterior.outlined) {
-        result = Math.round(((-0.75 * lineHeight) / 2) * 100) / 100;
+        result = NumberUtil.roundTo100((-0.75 * lineHeight) / 2);
       } else if (exterior === GlnFrameExterior.underline) {
-        result = Math.round((frameSizeValue * 0.757 - lineHeight * 1.257) * 0.45 * 100) / 100;
+        result = NumberUtil.roundTo100((frameSizeValue * 0.757 - lineHeight * 1.257) * 0.45);
       }
     }
     return result;
@@ -123,7 +123,7 @@ export class GlnFrameExteriorInputDirective implements OnChanges, GlnFrameSizePr
   public translate2Y(exterior: GlnFrameExterior | null, frameSizeValue: number, lineHeight: number | null): number | null {
     let result: number | null = null;
     if (exterior != null && frameSizeValue > 0 && lineHeight != null) {
-      result = Math.round((frameSizeValue - lineHeight) * (GlnFrameExterior.standard === exterior ? 0.75 : 0.5) * 100) / 100;
+      result = NumberUtil.roundTo100((frameSizeValue - lineHeight) * (GlnFrameExterior.standard === exterior ? 0.75 : 0.5));
     }
     return result;
   }

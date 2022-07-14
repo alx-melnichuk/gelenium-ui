@@ -1,10 +1,7 @@
 <label *ngIf="!hideLabel"
-  class="glnf-label"
-  style="display: flex;">
-  <span lbl>
-    <span>{{ label }}</span>
+  class="glnf-label">
+  <span lbl>{{ label }}</span><span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}
   </span>
-  <span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
 </label>
 <div class="glnf-border"
   [attr.dcr-bg]="isUnderlineExterior ? '' : null"
@@ -17,8 +14,7 @@
     aria-hidden="true">
     <legend *ngIf="!hideLabel"
       class="glnf-legend">
-      <span>
-        {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
+      <span lgn>{{ label }}</span><span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}
       </span>
     </legend>
   </fieldset>

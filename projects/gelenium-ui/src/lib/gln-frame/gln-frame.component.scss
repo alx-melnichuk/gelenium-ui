@@ -73,25 +73,22 @@ gln-frame {
     text-size-adjust: 100%;
     top: 0;
     transform-origin: top left;
-    -webkit-transition: color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms,
-      -webkit-transform var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms,
-      max-width var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    transition: color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms,
-      transform var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms,
-      max-width var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    -webkit-transition: color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
+      , -webkit-transform var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
+      , max-width var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    transition: color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
+      , transform var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
+      , max-width var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     white-space: nowrap;
     z-index: 1;
     &>span[lbl] {
-      max-width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
     }
   }
-  &:not([noAnm]) label {
-  }
   &[shr], &:focus-within, &[fil] {
     label {
-      max-width: calc(133% - var(--glnf-lb-mx-wd, var(--glnfe-mx-wd, var(--def-lb-mx-wd))));
+      max-width: calc(133% - var(--glnf-lb-pd-shr, var(--glnfe-pd-shr, var(--def-lb-mx-wd))));
       @include mxTransform_TranslateXY_ScaleXY(
         var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf))), // $translateX
         var(--glnf-lb-trn-y, var(--glnfe-trn-y, var(--def-lb-trn-y))), // $translateY
@@ -123,7 +120,7 @@ gln-frame {
   --glnf--hov-bg-def91: hsl(var(--gln-default-h), var(--gln-default-s), 91%); // (!) hsla(0, 0%, 0%, 0.09);
   --glnf--hov-bb-def17: hsl(var(--gln-default-h), var(--gln-default-s), 17%); // (!) hsla(0, 0%, 0%, 0.87);
   // :not([err]) :focus-within
-  --glnf--foc-cl-prm46: hsl(var(--gln-primary-h), var(--gln-primary-s), 46%); // #1976d2;
+  --glnf--foc-cl-prm46: hsl(var(--gln-primary-h), var(--gln-primary-s), 46%); //  #1976d2;
   --glnf--foc-bg-prm97: hsl(var(--gln-primary-h), var(--gln-primary-s), 97%); // (+)
   // [err] :not(:hover):not(:focus-within)
   --glnf--err-lb-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
@@ -319,19 +316,20 @@ gln-frame {
   
   // ** Section "Legend" on "Fieldset" for "Outlined" mode. **
   legend {
-    float: unset;
-    display: block;
-    width: auto;
+    box-sizing: border-box;
+    display: flex;
     height: 1px;
-    visibility: hidden;
     padding: 0;
-    // height: 13px; // #
-    // color: blueviolet;
-    // outline: 1px dashed green;
+    visibility: hidden;
+    white-space: nowrap;
+    width: auto;
     &>span {
-      display: inline-block;
       height: inherit;
       font-size: 0.75em;
+    }
+    &>span[lgn] {
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   &[shr], &:focus-within, &[fil] {

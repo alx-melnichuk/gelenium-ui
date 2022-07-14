@@ -93,7 +93,7 @@
     <li>"--glnfs-pd-rg" - right indent to frame;</li>
     <li>"--glnfs-pd-tp" - top indent to frame;</li>
     <li>"--glnfs-pd-bt" - bottom indent to frame;</li>
-    <li>"--glnfe-mx-wd" - label length in compressed state;</li>
+    <li>"--glnfe-pd-shr" - indents for the label in the shrink position;</li>
     <li>"--glnfe-trn-y" - transformation value for the label in compressed state;</li>
     <li>"--glnfe-trn2-y" - transformation value for label in free state;</li>
   </ul>
@@ -115,7 +115,7 @@
   <ul>
     <li>"--glnfe-trn-y" - transformation value for the label in compressed state;</li>
     <li>"--glnfe-trn2-y" - transformation value for label in free state;</li>
-    <li>"--glnfe-mx-wd" - label length in compressed state;</li>
+    <li>"--glnfe-pd-shr" - indents for the label in the shrink position;</li>
     <li>"--glnfs-pd-lf" - left indent for hint line;</li>
     <li>"--glnfs-pd-rg" - right indent for the hint line;</li>
   </ul>
@@ -153,7 +153,7 @@ getPaddingHor = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
     value of css-parameters:
   </p>
   <ul>
-    <li>"--glnfe-mx-wd" - label length in compressed state;</li>
+    <li>"--glnfe-pd-shr" - indents for the label in the shrink position;</li>
     <li>"--glnfs-pd-lf" - left indent for hint line;</li>
     <li>"--glnfs-pd-rg" - right indent for the hint line;</li>
   </ul>
@@ -275,7 +275,7 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
   // parameter value "exterior"
   // css-parameter: "--glnfe-trn-y"
   // css-parameter: "--glnfe-trn2-y"
-  // css-parameter: "--glnfe-mx-wd"
+  // css-parameter: "--glnfe-pd-shr"
 &gt;
   &lt;gln-frame #glnFrame
     [label]="label"
