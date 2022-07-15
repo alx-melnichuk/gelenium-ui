@@ -7,6 +7,7 @@ import {
   GlnFrameSizePrepare,
 } from '../gln-frame-size/gln-frame-size-prepare.interface';
 import { HtmlElemUtil } from '../../_utils/html-elem.util';
+import { NumberUtil } from '../../_utils/number.util';
 
 @Directive({
   selector: '[glnFrameExteriorButton]',
@@ -49,12 +50,12 @@ export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizeP
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getBorderRadius = (frameSizeValue: number, lineHeight: number): string | null => {
     const borderRadiusRatio = 0.1;
-    return (frameSizeValue > 0 ? Math.round(borderRadiusRatio * frameSizeValue * 100) / 100 : 0) + 'px';
+    return (frameSizeValue > 0 ? NumberUtil.roundTo100(borderRadiusRatio * frameSizeValue) : 0) + 'px';
   };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getPaddingHor = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddingHorRes | null => {
     const ratio = this.exterior === GlnButtonExterior.contained ? 0.3636 : this.exterior === GlnButtonExterior.outlined ? 0.3409 : 0.2045;
-    const value = frameSizeValue > 0 ? Math.round(ratio * frameSizeValue * 100) / 100 : null;
+    const value = frameSizeValue > 0 ? NumberUtil.roundTo100(ratio * frameSizeValue) : null;
     return value !== null ? { left: value, right: value } : null;
   };
 

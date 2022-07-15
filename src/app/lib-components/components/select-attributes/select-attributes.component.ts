@@ -67,7 +67,7 @@ export class SelectAttributesComponent {
 
   public exterior02z = 'outlined';
   public control02z = {
-    model02z: new FormControl(this.fruits[0], []),
+    model02z: new FormControl(null /* this.fruits[0] */, []),
   };
   public formGroup02z: FormGroup = new FormGroup(this.control02z);
 
@@ -78,7 +78,7 @@ export class SelectAttributesComponent {
     return value ? value[0].toUpperCase() + value.slice(1) : '';
   }
 
-  doLog(name: string, event: any): void {
+  log(name: string, event: any): void {
     console.log(`${name}() `); // , ' target=', event.target, ' relatedTarget=', event.relatedTarget, ' event=', event);
   }
 

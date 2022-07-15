@@ -34,7 +34,7 @@ let uniqueIdCounter = 0;
 })
 export class GlnOptionComponent implements GlnOptionItem, OnChanges, OnInit {
   @Input()
-  public id = `glnmi-${uniqueIdCounter++}`;
+  public id = `glno-${uniqueIdCounter++}`;
   @Input()
   public isDisabled: string | null = null;
   @Input()
@@ -63,7 +63,7 @@ export class GlnOptionComponent implements GlnOptionItem, OnChanges, OnInit {
     private renderer: Renderer2,
     private changeDetectorRef: ChangeDetectorRef,
     private sanitizer: DomSanitizer,
-    @Optional() @Inject(GLN_OPTION_PARENT) private parent: GlnOptionParent
+    @Optional() @Inject(GLN_OPTION_PARENT) public parent: GlnOptionParent
   ) {
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'role', 'option');
     // HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', '-1'); // TODO redo again
@@ -87,7 +87,7 @@ export class GlnOptionComponent implements GlnOptionItem, OnChanges, OnInit {
 
   public ngOnInit(): void {
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
-    if (this.parent && this.parent.multiple && !this.parent.noCheckmark) {
+    if (this.parent && this.parent.multiple) {
       this.multiple = true;
     }
   }

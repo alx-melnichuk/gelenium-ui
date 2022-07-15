@@ -122,9 +122,14 @@
   <p>Example:</p>
   <code><pre source="html">
 [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
-[glnFrameExteriorInputElementRef]="hostRef"</pre></code>
+[glnFrameExteriorInputElementRef]="hostRef"
+(glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()"</pre></code>
   <p>
     "ElementRef" defines the DOM element to which these css parameters are added.
+    <br />
+    The "glnFrameExteriorInputChange" event occurs when the value of "exterior" changes.
+    And at the same time, it is required to update all internal parameters for the
+    "glnFrameSize" directive.
   </p>
   <p>
     The directive implements the GlnFrameSizePrepare interface, which has callback functions:
@@ -272,6 +277,7 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
 &lt;div #glnFrameExteriorInput="glnFrameExteriorInput"
   [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
   [glnFrameExteriorInputElementRef]="hostRef"
+  (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()"
   // parameter value "exterior"
   // css-parameter: "--glnfe-trn-y"
   // css-parameter: "--glnfe-trn2-y"
@@ -291,7 +297,6 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
     [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
     [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
     [glnFrameSizePrepare]="glnFrameExteriorInput"
-    [glnFrameSizeModify]="glnFrameExteriorInput.exterior"
     // parameter value "frameSizeValue";
     // css-parameter: "--glnfs-br-rd",
     // css-parameter: "--glnfs-pd-lf",

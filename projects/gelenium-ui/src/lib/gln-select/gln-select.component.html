@@ -4,12 +4,14 @@
     [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
     #glnFrameExteriorInput="glnFrameExteriorInput"
     [glnFrameExteriorInputElementRef]="hostRef"
+    (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()"
     cdkOverlayOrigin
     #origin="cdkOverlayOrigin"
-    #trigger
+    #triggerRef
     (click)="toggle()">
-    <gln-frame [ngClass]="[(isPanelOpen ? 'is-open': '')]"
-      [attr.opn]="isPanelOpen ? '': null"
+    <gln-frame #frameRef
+      [ngClass]="[(isPanelOpen ? 'is-open' : '')]"
+      [attr.opn]="isPanelOpen ? '' : null"
       [config]="currConfig"
       [exterior]="glnFrameExteriorInput.exterior"
       [hoverColor]="getBoolean(hoverColor)"
@@ -27,12 +29,10 @@
       [glnFrameSizeValue]="currConfig?.frameSizeValue || frameSizeDefault"
       [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
       [glnFrameSizePrepare]="glnFrameExteriorInput"
-      [glnFrameSizeModify]="glnFrameExteriorInput.exterior"
-      (glnFrameSizeChange)="frameChange($event)"
+      (glnFrameSizeChange)="frameSizeChange($event)"
       glnFrameOrnament
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
-      [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
-      mouseup9="togger()">
+      [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)">
 
       <span glnf-orn-lf
         class="glns-ornam-lf">
@@ -45,21 +45,21 @@
 
         <div *ngIf="!getBoolean(noIcon)"
           glns-rhomb
-          [attr.opn]="isPanelOpen ? '': null"
-          [ngClass]="['glns-rhomb', (isPanelOpen ? 'is-open': '')]"
+          [attr.opn]="isPanelOpen ? '' : null"
+          [ngClass]="['glns-rhomb', (isPanelOpen ? 'is-open' : '')]"
           focusable="false"
           aria-hidden="true">
         </div>
       </span>
 
-      <div #mainElementRef
+      <div #scoreboardRef
         glnf-pd-ver
         glnf-pd-hor
         glnf-elem
         [attr.id]="id + '-elem'"
-        [attr.tabindex]="disabled ? '-1': tabIndex"
-        focus9="getFocusMainElem($event)"
-        blur9="lossFocusMainElem($event)">
+        [attr.tabindex]="disabled ? '-1' : tabIndex"
+        (focus)="doFocus()"
+        (blur)="doBlur()">
 
         <ng-container [ngSwitch]="isFilled">
           <ng-container *ngSwitchCase="true">
@@ -79,10 +79,6 @@
 
   </div>
 </ng-container>
-<!-- <pre>
-value={{ value === null ? 'null' : value }}
-errors0={{errors | json }}
-</pre> -->
 
 <gln-hint-or-error *ngIf="!!helperText"
   [text]="helperText"
@@ -102,26 +98,29 @@ errors0={{errors | json }}
   [cdkConnectedOverlayPanelClass]="overlayPanelClass"
   [cdkConnectedOverlayPositions]="positions"
   [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
-  cdkConnectedOverlayTransformOriginOn="transformOriginOn"
-  (backdropClick)="close()"
+  (overlayOutsideClick)="overlayOutsideClick($event)"
   (attach)="attach()"
-  (detach)="close()">
+  (detach)="detach()">
+
   <div glnsp-wrap
-    [ngClass]="['gln-select-panel-wrap', (isNoAnimation ? 'gln-no-animation': ''), (isNoAnimation ? 'gln-no-elevation': '')]"
+    [ngClass]="['gln-select-panel-wrap', (isNoAnimation ? 'gln-no-animation' : ''), (isNoAnimation ? 'gln-no-elevation' : '')]"
     [attr.noAnimation]="isNoAnimation ? '' : null"
     [attr.is-open]="!isNoAnimation && isPanelOpen ? '' : null"
     [attr.is-hide]="!isNoAnimation && !isPanelOpen ? '' : null"
     (animationend)="setHasPanelAnimation()"
     (animationcancel)="setHasPanelAnimation()">
-    <div glns-panel
+    <div #panelRef
+      glns-panel
       [ngClass]="['gln-select-panel', panelClass]"
       role="listbox"
       tabindex="-1"
       [attr.id]="id + '-panel'"
       [attr.aria-multiselectable]="multiple"
       [attr.noElevation]="getBoolean(noElevation) ? '' : null"
+      (focus)="doFocusOnPanel()"
       keydown9evn="_handleKeydown($event)">
       <ng-content></ng-content>
     </div>
   </div>
+
 </ng-template>

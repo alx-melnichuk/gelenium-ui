@@ -561,22 +561,23 @@ export class SelectComponent &#123;
   <p>Attributes are also supported: <a [href]="urlSelect + '#Attributes03'">#</a></p>
   <ul>
     <li>
-      "isFixRight" - Align dropdown menu to the right.
+      "isFixRight" - Align dropdown list of options to the right.
     </li>
     <li>
-      "visibleSize" - The maximum number of visible menu items.
+      "visibleSize" - The maximum number of visible options.
     </li>
     <li>
-      "noIcon" - Hide the display of the menu expand status icon.
+      "noIcon" - Hide the display of the status icon of the dropdown list of options.
     </li>
     <li>
-      "noAnimation" - Hide the display of the animation when the menu is expanded.
+      "noAnimation" - Hide the display of the animation when the dropdown list of
+      options is expanded.
     </li>
     <li>
-      "isMultiple" - Use multiple selection menu items.
+      "isMultiple" - Use multiple selection options.
     </li>
     <li>
-      "isNoCheckmark" - With multiple selection, hide the checkbox for menu items.
+      "isCheckmark" - Display a checkbox for options when multiple selections are made.
     </li>
   </ul>
 </section>
@@ -667,13 +668,13 @@ export class SelectComponent &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: isMultiple, isNoCheckmark.</em>
+          <em>Attribute: isMultiple, isCheckmark.</em>
         </small>
       </div>
       <gln-select formControlName="model02l"
         label="Parameter value 4"
         isMultiple
-        isNoCheckmark
+        isCheckmark
         helperText="Field for parameter 4."
         [exterior]="exterior02c"
         wdFull>
@@ -766,13 +767,13 @@ export class SelectComponent &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: isMultiple, isNoCheckmark.&lt;/em&gt;
+          &lt;em&gt;Attribute: isMultiple, isCheckmark.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-select formControlName="model02l"
         label="Parameter value 4"
         isMultiple
-        isNoCheckmark
+        isCheckmark
         helperText="Field for parameter 4."
         [exterior]="exterior02c"
         wdFull&gt;
@@ -846,8 +847,8 @@ export class SelectComponent &#123;
       <input id="demo1"
         name="demo1"
         type="text"
-        (focus)="doLog('focusDemo1', $event)"
-        (blur)="doLog('blurDemo1', $event)" />
+        (focus)="log('focusDemo1', $event)"
+        (blur)="log('blurDemo1', $event)" />
     </label>
   </div>
 
@@ -871,8 +872,8 @@ export class SelectComponent &#123;
       <input id="demo2"
         name="demo2"
         type="text"
-        (focus)="doLog('focusDemo2', $event)"
-        (blur)="doLog('blurDemo2', $event)" />
+        (focus)="log('focusDemo2', $event)"
+        (blur)="log('blurDemo2', $event)" />
     </label>
   </div>
 
@@ -881,10 +882,10 @@ export class SelectComponent &#123;
     <label for="pet-select">Choose a pet:</label>
     <select name="demo3"
       id="demo3"
-      (focus)="doLog('focusDemo3', $event)"
-      (blur)="doLog('blurDemo3', $event)"
-      (mousedown)="doLog('mousedownDemo3', $event)"
-      (mouseup)="doLog('mouseupDemo3', $event)">
+      (focus)="log('focusDemo3', $event)"
+      (blur)="log('blurDemo3', $event)"
+      (mousedown)="log('mousedownDemo3', $event)"
+      (mouseup)="log('mouseupDemo3', $event)">
       <option value="">--Please choose an option--</option>
       <option value="dog">Dog</option>
       <option value="cat">Cat</option>
@@ -923,18 +924,21 @@ export class SelectComponent &#123;
         </small>
       </div>
       <gln-select formControlName="model02z"
-        isRequired
+        isRequired9
         noElevation99
         noAnimation99
         isFixRight9
         label="Fruit"
         label9="Parameter value 1"
         [visibleSize]="4"
-        helperText="Field for parameter 1."
+        helperText="Field 1"
+        helperText9="Field for parameter 1."
         [exterior]="exterior02z"
         wdFull9
-        (focus)="doLog('focusModel02z', $event)"
-        (blur)="doLog('blurModel02z', $event)">
+        (focused)="log('focusedModel02z', $event)"
+        (blured)="log('bluredModel02z', $event)"
+        (focus)="log('focusModel02z', $event)"
+        (blur)="log('blurModel02z', $event)">
         <gln-option><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
@@ -949,7 +953,7 @@ export class SelectComponent &#123;
 @Input() public config: GlnSelectConfig | null = null;
 @Input() public frameSize: string | null = null; // GlnFrameSizeType
 @Input() public isMultiple: string | null = null;
-@Input() public isNoCheckmark: string | null = null;
+@Input() public isCheckmark: string | null = null;
 @Input() public isNoRipple: string | null = null;
 // @Input() // #public isValueInit: string | null = null;
 
@@ -963,7 +967,7 @@ isRequired
 helperText="A value must be entered."
 [exterior]="exterior02a"
 isMultiple9
-isNoCheckmark9
+isCheckmark9
 wdFull>
 <gln-option><em>None</em></gln-option>
 <gln-option value="demo01"

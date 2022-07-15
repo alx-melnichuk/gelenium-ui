@@ -5,7 +5,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GlnMenuItemModule, GlnSelectModule } from 'gelenium-ui';
+import { GlnOptionModule, GlnSelectModule } from 'gelenium-ui';
 
 import { SelectBasicComponent } from './select-basic.component';
 
@@ -19,7 +19,7 @@ import { SelectBasicComponent } from './select-basic.component';
     MatExpansionModule,
     MatTabsModule,
     GlnSelectModule,
-    GlnMenuItemModule,
+    GlnOptionModule,
   ],
   exports: [SelectBasicComponent],
 })

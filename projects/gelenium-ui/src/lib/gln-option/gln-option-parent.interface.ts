@@ -11,9 +11,9 @@ export interface GlnOptionItem {
  * Contains properties that can be used by options.
  */
 export interface GlnOptionParent {
-  noRipple?: boolean | null;
+  checkmark?: boolean | null; // Only for multiple=true
   multiple?: boolean | null;
-  noCheckmark?: boolean | null; // Only for multiple=true
+  noRipple?: boolean | null;
   optionSelection(option: GlnOptionItem): void;
 }
 

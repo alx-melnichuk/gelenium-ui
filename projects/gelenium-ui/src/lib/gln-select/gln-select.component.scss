@@ -35,13 +35,13 @@ gln-select {
       --glnsr-hover-focus-color: var(--glnsr--foc-prm46);
     }
     &:not([err]) { // The state without disabled, error, hover, focused.
-      &:not(:hover):not(:focus-within) {
+      &:not(:hover):not(:focus-within):not([foc]) {
         --glns-rhomb-cl: var(--glns-rhomb-def, var(--glnsr--def-def54));
       } // The state without disabled, error, focused and with hover.
-      &:hover:not(:focus-within) {
+      &:hover:not(:focus-within):not([foc]) {
         --glns-rhomb-cl: var(--glns-rhomb-hov, var(--glnsr-hover-focus-color, var(--glnsr--def-def54)));
       } // The state without disabled, error and with focused.
-      &:focus-within {
+      &:focus-within, &[foc] {
         --glns-rhomb-cl: var(--glns-rhomb-foc, var(--glnsr--foc-prm46));
       }
     }

@@ -2,7 +2,8 @@
   <div class="glnt-wrap"
     [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
     #glnFrameExteriorInput="glnFrameExteriorInput"
-    [glnFrameExteriorInputElementRef]="hostRef">
+    [glnFrameExteriorInputElementRef]="hostRef"
+    (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()">
     <gln-frame [config]="config"
       [exterior]="glnFrameExteriorInput.exterior"
       [hoverColor]="getBoolean(hoverColor)"
@@ -20,7 +21,6 @@
       [glnFrameSizeValue]="currConfig?.frameSizeValue || frameSizeDefault"
       [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
       [glnFrameSizePrepare]="glnFrameExteriorInput"
-      [glnFrameSizeModify]="glnFrameExteriorInput.exterior"
       glnFrameOrnament
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
       [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"

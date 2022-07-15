@@ -86,7 +86,7 @@ gln-frame {
       text-overflow: ellipsis;
     }
   }
-  &[shr], &:focus-within, &[fil] {
+  &[shr], &:focus-within, &[foc], &[fil] {
     label {
       max-width: calc(133% - var(--glnf-lb-pd-shr, var(--glnfe-pd-shr, var(--def-lb-mx-wd))));
       @include mxTransform_TranslateXY_ScaleXY(
@@ -98,7 +98,7 @@ gln-frame {
       pointer-events: auto;
     }
   }
-  &:not([shr]):not(:focus-within):not([fil]) label {
+  &:not([shr]):not(:focus-within):not([foc]):not([fil]) label {
     max-width: calc(100%
     - var(--glnfo-pd-lf, var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf))))
     - var(--glnfo-pd-rg, var(--glnf-lb-pd-rg, var(--glnfs-pd-rg, var(--def-lb-pd-rg))))
@@ -152,19 +152,19 @@ gln-frame {
   // Definition of internal variables by element state.
   &:not([dis]) {
     &:not([err]) { // The state without disabled, error, hover, focused.
-      &:not(:hover):not(:focus-within) {
+      &:not(:hover):not(:focus-within):not([foc]) {
         --glnf-label-cl: var(--glnf-def-lb-cl, var(--glnf--def-lb-def38));
         --glnf-dcr-br-cl: var(--glnf-def-br-cl, var(--glnf--def-br-def77));
         --glnf-dcr-bg-cl: var(--glnf-def-bg-cl, var(--glnf--def-bg-def94));
         --glnf-dcr-bb-bef: var(--glnf-def-brb-bf, var(--glnf--def-bb-def54));
       } // The state without disabled, error, focused and with hover.
-      &:hover:not(:focus-within) {
+      &:hover:not(:focus-within):not([foc]) {
         --glnf-label-cl: var(--glnf-hov-lb-cl, var(--glnf-hover-focus-color, var(--glnf--def-lb-def38)));
         --glnf-dcr-br-cl: var(--glnf-hov-br-cl, var(--glnf-hover-focus-color, var(--glnf--hov-br-def17)));
         --glnf-dcr-bg-cl: var(--glnf-hov-bg-cl, var(--glnf--hov-bg-def91));
         --glnf-dcr-bb-bef: var(--glnf-hov-brb-bf, var(--glnf-hover-focus-color, var(--glnf--hov-bb-def17)));
       } // The state without disabled, error and with focused.
-      &:focus-within {
+      &:focus-within, &[foc] {
         --glnf-label-cl: var(--glnf-foc-lb-cl, var(--glnf--foc-cl-prm46));
         --glnf-dcr-br-cl: var(--glnf-foc-br-cl, var(--glnf--foc-cl-prm46));
         --glnf-dcr-bg-cl: var(--glnf-foc-bg-cl, var(--glnf--foc-bg-prm97));
@@ -172,19 +172,19 @@ gln-frame {
       --glnf-dcr-bb-aft: var(--glnf-foc-brb-af, var(--glnf--foc-cl-prm46));
     }
     &[err] {// The state without disabled, hover, focused and error.
-      &:not(:hover):not(:focus-within) {
+      &:not(:hover):not(:focus-within):not([foc]) {
         --glnf-label-cl: var(--glnf-err-lb-cl, var(--glnf--err-lb-dng51));
         --glnf-dcr-br-cl: var(--glnf-err-br-cl, var(--glnf--err-br-dng51));
         --glnf-dcr-bg-cl: var(--glnf-err-bg-cl, var(--glnf--err-bg-dng96));
         --glnf-dcr-bb-bef: var(--glnf-err-brb-bf, var(--glnf--err-bb-dng51));
       } // The state without disabled, focused and error, hover.
-      &:hover:not(:focus-within) {
+      &:hover:not(:focus-within):not([foc]) {
         --glnf-label-cl: var(--glnf-hov-err-lb-cl, var(--glnf--hov-err-lb-dng51));
         --glnf-dcr-br-cl: var(--glnf-hov-err-br-cl, var(--glnf--hov-err-br-dng51));
         --glnf-dcr-bg-cl: var(--glnf-hov-err-bg-cl, var(--glnf--hov-err-bg-dng98));
         --glnf-dcr-bb-bef: var(--glnf-hov-err-brb-bf, var(--glnf--hov-err-bb-dng51));
       } // The state without disabled and error, focused.
-      &:focus-within {
+      &:focus-within, &[foc] {
         --glnf-label-cl: var(--glnf-foc-err-lb-cl, var(--glnf--foc-err-lb-dng51));
         --glnf-dcr-br-cl: var(--glnf-foc-err-br-cl, var(--glnf--foc-err-br-dng51));
         --glnf-dcr-bg-cl: var(--glnf-foc-err-bg-cl, var(--glnf--foc-err-bg-dng94));
@@ -261,13 +261,17 @@ gln-frame {
   &[dis]>div[dcr-bb]:before {
     border-bottom-style: dotted;
   }
-  &[ext-s]:not([hfc]):not([dis]):hover:not(:focus-within)>div[dcr-bb]:before {
+  &[ext-s]:not([hfc]):not([dis]):hover:not(:focus-within):not([foc])>div[dcr-bb]:before {
     border-bottom-width: 2px;
   }
   // The effect on gaining input focus is "increase the length of the bottom border from 0 to 100%."
   // Effect on loss of input focus "reducing the length of the lower border from 100% to 0".
-  &:not([dis]):focus-within>div[dcr-bb]:after {
-    @include mxTransform_ScaleXY_TranslateXY(1, 1, 0, 0); // ($scaleX, $scaleY, $translateX, $translateY)
+  &:not([dis]) {
+    &:focus-within, &[foc] {
+      &>div[dcr-bb]:after {
+        @include mxTransform_ScaleXY_TranslateXY(1, 1, 0, 0); // ($scaleX, $scaleY, $translateX, $translateY)
+      }
+    }
   }
   // Border-Bottom-Color "div.glnf-border" for "Underline" and "Standard" mode.
   &>[dcr-bb]:before {
@@ -296,11 +300,15 @@ gln-frame {
     box-sizing: inherit;
   }
   // For "outlined" mode. With input focus, increase the frame to 2 pixels.
-  &:not([dis]):focus-within fieldset {
-    border-width: 2px;
-    padding-left: calc(var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf))) - var(--glnf-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
-  }
-  // &:not([dis])[err]:hover:not(:focus-within) fieldset {
+  &:not([dis]) {
+    &:focus-within, &[foc] {
+      fieldset {
+        border-width: 2px;
+        padding-left: calc(var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf))) - var(--glnf-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
+      }
+    } 
+  } 
+  // &:not([dis])[err]:hover:not(:focus-within):not([foc]) fieldset {
   //   border-width: 2px;
   // }
 
@@ -332,7 +340,7 @@ gln-frame {
       text-overflow: ellipsis;
     }
   }
-  &[shr], &:focus-within, &[fil] {
+  &[shr], &:focus-within, &[foc], &[fil] {
     legend {
       max-width: 100%;
       -webkit-transition: max-width var(--glnf-trn-drt-100, 0ms) cubic-bezier(0.0, 0, 0.2, 1) var(--glnf-trn-drt-50, 0ms);
@@ -342,7 +350,7 @@ gln-frame {
       padding: 0 calc(var(--glnf-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
     }
   }
-  &:not([shr]):not([fil]):not(:focus-within) legend {
+  &:not([shr]):not([fil]):not(:focus-within):not([foc]) legend {
     max-width: 0.01px;
     -webkit-transition: max-width var(--glnf-trn-drt-50, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: max-width var(--glnf-trn-drt-50, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
