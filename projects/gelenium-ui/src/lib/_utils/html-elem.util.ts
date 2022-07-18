@@ -1,7 +1,7 @@
 import { ElementRef, Renderer2 } from '@angular/core';
 
 export class HtmlElemUtil {
-  public static setProperty(element: ElementRef<HTMLElement> | null, name: string, value: string | null): void {
+  public static setProperty(element: ElementRef<HTMLElement> | null, name: string, value: string | null | undefined): void {
     if (element && element.nativeElement && name) {
       (element.nativeElement as HTMLElement).style.setProperty(name, value || null);
     }
@@ -15,7 +15,7 @@ export class HtmlElemUtil {
       }
     }
   }
-  public static setAttr(renderer: Renderer2, elem: ElementRef<HTMLElement> | null, name: string, value: string | null): void {
+  public static setAttr(renderer: Renderer2, elem: ElementRef<HTMLElement> | null, name: string, value: string | null | undefined): void {
     if (renderer && elem && elem.nativeElement && name) {
       if (value != null) {
         renderer.setAttribute(elem.nativeElement, name, value);

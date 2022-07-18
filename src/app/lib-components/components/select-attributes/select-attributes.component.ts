@@ -37,7 +37,7 @@ export class SelectAttributesComponent {
 
   public urlSelect = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_SELECT');
 
-  public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
+  public fruits = ['mango', 'lemon', 'orange', 'kiwi']; // , 'mango2', 'lemon2', 'orange2', 'kiwi2'];
 
   public exterior02a = 'outlined';
   public formGroup02a: FormGroup = new FormGroup({
@@ -78,7 +78,7 @@ export class SelectAttributesComponent {
     return value ? value[0].toUpperCase() + value.slice(1) : '';
   }
 
-  log(name: string, event: any): void {
+  log(name: string): void {
     console.log(`${name}() `); // , ' target=', event.target, ' relatedTarget=', event.relatedTarget, ' event=', event);
   }
 

@@ -116,9 +116,9 @@ export class GlnFrameSizeDirective implements OnChanges {
       }
     }
     const left = paddingHorRes && paddingHorRes.left !== null ? paddingHorRes.left : null;
-    HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-lf', NumberUtil.str(left)?.concat('px') || null);
+    HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-lf', NumberUtil.str(left)?.concat('px'));
     const right = paddingHorRes && paddingHorRes.right !== null ? paddingHorRes.right : null;
-    HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-rg', NumberUtil.str(right)?.concat('px') || null);
+    HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-rg', NumberUtil.str(right)?.concat('px'));
 
     return paddingHorRes;
   }
@@ -128,9 +128,9 @@ export class GlnFrameSizeDirective implements OnChanges {
     if (this.frameSizeValue > 0 && this.lineHeight > 0) {
       paddingVerRes = this.glnFrameSizePrepare?.getPaddingVer(this.frameSizeValue, this.lineHeight) || null;
       const top = paddingVerRes && paddingVerRes.top !== null ? paddingVerRes.top : null;
-      HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-tp', NumberUtil.str(top)?.concat('px') || null);
+      HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-tp', NumberUtil.str(top)?.concat('px'));
       const bottom = paddingVerRes && paddingVerRes?.bottom !== null ? paddingVerRes.bottom : null;
-      HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-bt', NumberUtil.str(bottom)?.concat('px') || null);
+      HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-bt', NumberUtil.str(bottom)?.concat('px'));
     }
     return paddingVerRes;
   }

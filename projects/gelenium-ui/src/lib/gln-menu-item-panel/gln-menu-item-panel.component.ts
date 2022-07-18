@@ -114,7 +114,7 @@ export class GlnMenuItemPanelComponent implements OnInit, AfterContentInit {
   private settingItemListHeight(elem: ElementRef<HTMLElement>, height: number, countVisible: number): void {
     const menuItemsHeight = height * countVisible;
     const itemsHeight = menuItemsHeight > 0 ? menuItemsHeight : null;
-    HtmlElemUtil.setProperty(elem, '--glnmip-list-height', NumberUtil.str(itemsHeight)?.concat('px') || null);
+    HtmlElemUtil.setProperty(elem, '--glnmip-list-height', NumberUtil.str(itemsHeight)?.concat('px'));
   }
   /** Get the menu item as the parent of the clicked item. */
   private getMenuItemFromEvent(htmlElement: HTMLElement | null): HTMLElement | null {

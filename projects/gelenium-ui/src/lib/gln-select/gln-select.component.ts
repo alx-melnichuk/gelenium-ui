@@ -54,6 +54,12 @@ let uniqueIdCounter = 0;
 
 export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT_CONFIG');
 
+const CSS_CLASS_OVERLAY = 'glnsp-overlay';
+const CSS_CLASS_OVERLAY_EVENTS_AUTO = 'gln-overlay-events-auto';
+const CSS_ATTR_FOR_FRAME_FOCUS = 'foc';
+const CSS_PROP_TRANSLATE_Y = '--glnspo-translate-y';
+const CSS_PROP_BORDER_RADIUS = '--glnspo-border-radius';
+
 @Component({
   selector: 'gln-select',
   exportAs: 'glnSelect',
@@ -161,9 +167,6 @@ export class GlnSelectComponent
   protected connectedOverlay!: CdkConnectedOverlay;
   @ViewChild('frameRef', { read: ElementRef, static: true })
   public frameRef!: ElementRef<HTMLElement>;
-  /** Panel containing the select options. */
-  @ViewChild('panelRef')
-  public panelRef: ElementRef<HTMLElement> | null | undefined;
   /** A scoreboard that displays the selected options. */
   @ViewChild('scoreboardRef', { static: true })
   public scoreboardRef!: ElementRef<HTMLElement>;
@@ -184,13 +187,10 @@ export class GlnSelectComponent
   public currConfig: GlnFrameConfig | null = null;
   // #public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public errors: ValidationErrors | null = null;
-  public fixRight = false;
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public hasPanelAnimation = false;
-
-  public isBluredEmit = false;
   public isFocused = false;
   public isFilled = false;
   // #public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation".
@@ -201,20 +201,24 @@ export class GlnSelectComponent
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public overlayPanelClass: string | string[] = /*this._defaultOptions?.overlayPanelClass ||*/ '';
   public positions: ConnectedPosition[] = [
-    { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top' },
-    { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'bottom' },
+    { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top' },
+    { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom' },
   ];
   public required: boolean | null = null; // Binding attribute "isRequired".
   public selectedOptions: GlnSelectedOptions = new GlnSelectedOptions();
   // #public valueInit: boolean | null = null; // Binding attribute "isValueInit".
   /** Strategy for handling scrolling when the selection panel is open. */
   public scrollStrategy: ScrollStrategy;
-  /** Saving the frame size of the trigger element. */
-  public triggerFrameSize = 0; // BorderRadius = -1;
-  /** Saving the font size of the trigger element. */
-  public triggerFontSize = 0;
   /** The position and dimensions for the trigger's bounding box. */
   public triggerRect: DOMRect | null = null;
+
+  private fixRight = false;
+  private isFocusAttrOnFrame = false;
+  private markedOption: GlnOptionComponent | null = null;
+  /** Saving the font size of the trigger element. */
+  private triggerFontSize = 0;
+  /** Saving the frame size of the trigger element. */
+  private triggerFrameSize = 0; // BorderRadius = -1;
 
   constructor(
     hostRef: ElementRef<HTMLElement>,
@@ -281,6 +285,13 @@ export class GlnSelectComponent
       this.value = newValue;
     }
     super.ngAfterContentInit();
+
+    const horizontalAlignment: HorizontalConnectionPos = !this.fixRight ? 'start' : 'end';
+    this.positions = [
+      { originX: horizontalAlignment, originY: 'bottom', overlayX: horizontalAlignment, overlayY: 'top' },
+      { originX: horizontalAlignment, originY: 'top', overlayX: horizontalAlignment, overlayY: 'bottom', offsetY: -5 },
+    ];
+    this.triggerFontSize = Number((getComputedStyle(this.triggerRef.nativeElement).fontSize || '0').replace('px', ''));
   }
 
   // ** interface ControlValueAccessor - start **
@@ -317,20 +328,18 @@ export class GlnSelectComponent
   // ** interface GlnOptionParent - start **
 
   public optionSelection(optionItem: GlnOptionItem): void {
-    // console.log(`optionSelection() optionItem.value=${optionItem.value}`); // TODO del;
     const addOption = optionItem as GlnOptionComponent;
     Promise.resolve().then(() => {
       this.selectionOptionElement(addOption);
+      if (!this.multiple) {
+        this.close();
+      }
     });
   }
 
   // ** interface GlnOptionParent - finish **
 
   // ** Public methods **
-
-  public setHasPanelAnimation(): void {
-    this.hasPanelAnimation = !this.isNoAnimation && !this.isPanelOpen && this.hasPanelAnimation ? false : this.hasPanelAnimation;
-  }
 
   public trackByOption(index: number, item: GlnOptionComponent): string {
     return item.id;
@@ -359,108 +368,180 @@ export class GlnSelectComponent
       }
     }
   }
+  // The selection panel cease working in the following cases:
+  // (Cases-B1) Panel is close and on the trigger, click the Tab key.
+  // (Cases-B2) Panel is open and mouse click within the panel.
+  // (Cases-B3) Panel is open and mouse click outside of panel and trigger.
+  // (Cases-B4) Panel is open and mouse click outside of panel but on trigger.
+  // (Cases-B5) Panel is open and click the Escape key.
+  // (Cases-B6) Panel is open and click the Tab key.
+  // (Cases-B7) Panel is open and click the Enter key.
+
   /** Calls the touch callback only when the panel is closed.
    * Otherwise, it will cause a false positive, "blur" on the panel when it is opened.
    */
   public doBlur(): void {
     if (!this.disabled) {
-      this.isBluredEmit = false;
+      // console.log(``); // TODO del;
+      // console.log(`    doBlur() isFocused:=false;`); // TODO del;
+      this.isFocused = false;
       if (!this.isPanelOpen) {
-        this.isFocused = false;
+        // (Cases-B1) Panel is open and on the trigger, click the Tab key.
         this.blured.emit();
       } else {
-        HtmlElemUtil.setAttr(this.renderer, this.frameRef, 'foc', '');
+        // (Cases-B2) Panel is open and mouse click within the panel.
+        // (Cases-B3) Panel is open and mouse click outside of panel and trigger.
+        // (Cases-B4) Panel is open and mouse click outside of panel but on trigger.
+        // For case Cases-B3,B4, let's add the "foc" attribute to force the display of focus.
+        this.isFocusAttrOnFrame = true;
+        HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, '');
       }
     }
   }
   /** Occurs when mouse click events are outside the overlay. */
-  public overlayOutsideClick(event: MouseEvent): void {
-    HtmlElemUtil.setAttr(this.renderer, this.frameRef, 'foc', null);
-    const rect = this.scoreboardRef.nativeElement.getBoundingClientRect();
-    const isScoreboardHor = rect.left <= event.pageX && event.pageX <= rect.left + rect.width;
-    const isScoreboardVer = rect.top <= event.pageY && event.pageY <= rect.top + rect.height;
-    if (isScoreboardHor && isScoreboardVer) {
+  public overlayOutsideClick(): void {
+    // console.log(``); // TODO del;
+    // console.log(`    OutsideClick()`); // TODO del;
+    if (!this.disabled) {
+      // (Cases-B3) Panel is open and mouse click outside of panel and trigger.
+      // (Cases-B4) Panel is open and mouse click outside of panel but on trigger.
+      this.isFocused = true;
       this.focus();
-    } else {
-      this.isBluredEmit = true;
+      this.close();
     }
-    this.close();
   }
   /** Occurs when the panel receives input focus. */
   public doFocusOnPanel(): void {
     if (!this.disabled) {
+      // (Cases-B2) Panel is open and mouse click within the panel.
+      this.isFocused = true;
       this.focus();
     }
   }
   /** Open or close the overlay panel. */
   public toggle(): void {
     if (!this.disabled) {
-      if (!this.isPanelOpen) {
+      if (this.isPanelOpen) {
+        this.close();
+      } else {
         if (!this.isFocused) {
           this.focus();
         }
         this.open();
-      } else {
-        this.close();
       }
     }
   }
   /** Open overlay panel. */
   public open(): void {
-    // console.log(`open() ${this.isPanelOpen ? '' : '!'}isPanelOpen`); // TODO del;
+    // console.log(``); // TODO del;
+    // console.log(`    open() ${this.isPanelOpen ? '' : '!'}isPanelOpen`); // TODO del;
     if (!this.disabled && this.isCanOpen()) {
+      // Open a panel with a selection list.
       this.isPanelOpen = true;
-      // console.log(`open() isPanelOpen:=true;`); // TODO del;
-      this.hasPanelAnimation = !this.isNoAnimation ? true : this.hasPanelAnimation;
-      this.triggerRect = this.triggerRef.nativeElement.getBoundingClientRect();
-      this.settingPosition(this.fixRight);
-      this.triggerFontSize = Number((getComputedStyle(this.triggerRef.nativeElement).fontSize || '0').replace('px', ''));
-      // this._keyManager.withHorizontalOrientation(null);
-      // this._highlightCorrectOption();
+      this.hasPanelAnimation = !this.isNoAnimation;
+      this.markedOption = this.selectedOptions.length > 0 ? this.selectedOptions.items[this.selectedOptions.length - 1] : null;
       this.changeDetectorRef.markForCheck();
+      if (this.triggerRect === null) {
+        this.triggerRect = this.triggerRef.nativeElement.getBoundingClientRect();
+      }
+      this.isFocusAttrOnFrame = false;
       this.opened.emit();
-    }
-  }
-  /** Callback when the overlay panel is attached. */
-  public attach(): void {
-    const overlayElement = this.connectedOverlay?.overlayRef?.overlayElement;
-    if (!overlayElement) {
-      return;
-    }
-    const overlayElementRef = HtmlElemUtil.getElementRef(overlayElement);
-    HtmlElemUtil.setAttr(this.renderer, overlayElementRef, 'glnsp-overlay', '');
-    if (this.triggerFrameSize > 0) {
-      const borderRadius = NumberUtil.roundTo100(this.triggerFrameSize / 10);
-      HtmlElemUtil.setProperty(overlayElementRef, '--glnspo-border-radius', NumberUtil.str(borderRadius)?.concat('px') || null);
-    }
-    // Define the "TranslateY" parameter.
-    this.setTranslateY(overlayElement, !!this.isNoAnimation, this.triggerRect);
-    if (this.triggerFontSize > 0) {
-      overlayElement.style.fontSize = `${this.triggerFontSize}px`;
-    }
-  }
-  /** Callback when the overlay panel is detached. */
-  public detach(): void {
-    if (this.isBluredEmit) {
-      this.onTouched();
-      this.blured.emit();
     }
   }
   /** Closes the overlay panel and focuses the main element. */
   public close(): void {
-    // console.log(`close() ${this.isPanelOpen ? '' : '!'}isPanelOpen`); // TODO del;
-    if (!this.disabled && this.isPanelOpen) {
-      const overlayElement = this.connectedOverlay?.overlayRef?.overlayElement;
-      // Define the "TranslateY" parameter.
-      this.setTranslateY(overlayElement, !!this.isNoAnimation, this.triggerRect);
-      this.isPanelOpen = false;
-      // console.log(`close() isPanelOpen:=false;`); // TODO del;
-      // this._keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
-      this.changeDetectorRef.markForCheck();
-      this.closed.emit();
+    // console.log(``); // TODO del;
+    // console.log(`    close() ${this.isPanelOpen ? '' : '!'}isPanelOpen ${this.isFocusAttrOnFrame ? '' : '!'}isFocusAttrOnFrame`); // TODO
+    if (this.disabled || !this.isPanelOpen) {
+      return;
+    }
+    if (this.isFocusAttrOnFrame) {
+      HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, null);
+    }
+    // Close the panel with the selection list.
+    this.isPanelOpen = false;
+    this.changeDetectorRef.markForCheck();
+    this.onTouched();
+    this.markedOption?.setMarked(false);
+    this.markedOption = null;
+
+    const overlay = this.connectedOverlay?.overlayRef?.overlayElement;
+    const overlayRef = HtmlElemUtil.getElementRef(overlay);
+    const panelHeight = this.getHeight(HtmlElemUtil.getElementRef(overlay?.children[0]?.children[0] as HTMLElement));
+    if (!this.isNoAnimation && overlay && panelHeight > 0) {
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
+    }
+    this.closed.emit();
+  }
+  /** Callback when the overlay panel is attached. */
+  public attach(): void {
+    const overlay = this.connectedOverlay?.overlayRef?.overlayElement;
+    if (!overlay) {
+      return;
+    }
+    // Adding a class to not skip mouse events (pointer-events: auto;).
+    const hostElementRef = HtmlElemUtil.getElementRef(this.connectedOverlay.overlayRef.hostElement);
+    HtmlElemUtil.setClass(this.renderer, hostElementRef, CSS_CLASS_OVERLAY_EVENTS_AUTO, true);
+    // Adding a class so that custom styles can be applied.
+    const overlayRef = HtmlElemUtil.getElementRef(overlay);
+    HtmlElemUtil.setAttr(this.renderer, overlayRef, CSS_CLASS_OVERLAY, '');
+
+    if (this.triggerFrameSize > 0) {
+      const borderRadius = NumberUtil.roundTo100(this.triggerFrameSize / 10);
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(borderRadius)?.concat('px'));
+    }
+    const panelHeight = this.getHeight(HtmlElemUtil.getElementRef(overlay?.children[0]?.children[0] as HTMLElement));
+    if (!this.isNoAnimation && panelHeight > 0) {
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
+    }
+    // Set the font size for the overlay.
+    if (this.triggerFontSize > 0) {
+      overlay.style.fontSize = `${this.triggerFontSize}px`;
     }
   }
-
+  /** Handles all keypress events for the component's panel. */
+  public scoreboardKeydown(event: KeyboardEvent): void {
+    if (!this.disabled) {
+      // // console.log(`    scoreboardKeydown()`, event); // TODO del;
+      if (!this.isPanelOpen) {
+        // Open the selection panel by pressing the keys: 'up arrow', 'down arrow', 'space' and 'enter'.
+        if (['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(event.key)) {
+          event.preventDefault(); // prevents the page from scrolling down when pressing space
+          this.open();
+        }
+      } else {
+        if (['ArrowDown', 'ArrowUp', ' ', 'Tab'].includes(event.key)) {
+          // Prevents the page from scrolling down when pressing: 'up arrow', 'down arrow', 'space' and 'tab'.
+          event.preventDefault();
+        }
+        switch (event.key) {
+          // (Cases-B5) Panel is open and click the Escape key.
+          // (Cases-B6) Panel is open and click the Tab key.
+          case 'Escape':
+          case 'Tab':
+            this.close();
+            break;
+          case 'ArrowDown':
+          case 'ArrowUp':
+            // Moving the cursor marker.
+            this.markedOption = this.movingMarkedOption(event.key === 'ArrowDown', this.markedOption);
+            this.changeDetectorRef.markForCheck();
+            break;
+          // (Cases-B7) Panel is open and click the Enter key.
+          case 'Enter':
+            if (this.markedOption != null) {
+              // Selects the element of the current marker.
+              this.selectionOptionElement(this.markedOption);
+              // And if not multiple, then closing the panel.
+              if (!this.multiple) {
+                this.close();
+              }
+            }
+            break;
+        }
+      }
+    }
+  }
   public clear(): void {
     if (!this.disabled && !this.isEmpty()) {
       this.selectedOptions.clear();
@@ -477,7 +558,6 @@ export class GlnSelectComponent
   /** Processing the option selected by the user. */
   public selectionOptionElement(addOption: GlnOptionComponent | null): void {
     const addOptions = addOption !== null ? [addOption] : [];
-    // console.log(`selectionOptionElement() addOption.value=${addOption?.value}`); // TODO del;
     if (!this.disabled && addOptions.length > 0) {
       // Get a new list of options.
       const mergeOptions: GlnOptionComponent[] = this.selectedOptions.mergeOptions(!!this.multiple, addOptions, this.options);
@@ -490,13 +570,11 @@ export class GlnSelectComponent
       this.changeDetectorRef.markForCheck();
 
       this.selected.emit({ value: !this.multiple ? value : null, values: this.multiple ? values : [] });
-
-      if (!this.multiple) {
-        this.close();
-      }
     }
   }
-
+  public log(text: string): void {
+    // console.log(text); // TODO del;
+  }
   // ** Proteced methods **
 
   /** Is it possible to open the panel. */
@@ -507,32 +585,16 @@ export class GlnSelectComponent
   protected getHeight(value: ElementRef<HTMLElement> | null): number {
     return value ? Number(getComputedStyle(value.nativeElement).getPropertyValue('height').replace('px', '')) : 0;
   }
-
-  protected settingPosition(fixRight: boolean): void {
-    const horizontalAlignment: HorizontalConnectionPos = !fixRight ? 'start' : 'end';
-    const positionPanelDown: ConnectedPosition[] = [
-      { originX: horizontalAlignment, originY: 'bottom', overlayX: horizontalAlignment, overlayY: 'top' },
-      { originX: horizontalAlignment, originY: 'top', overlayX: horizontalAlignment, overlayY: 'top' },
-    ];
-    const positionPanelUp: ConnectedPosition[] = [
-      { originX: horizontalAlignment, originY: 'top', overlayX: horizontalAlignment, overlayY: 'bottom' },
-      { originX: horizontalAlignment, originY: 'bottom', overlayX: horizontalAlignment, overlayY: 'bottom' },
-    ];
-    this.positions = [...positionPanelDown, ...positionPanelUp];
-  }
-
-  protected setTranslateY(overlayElement: HTMLElement | null, isNoAnimation: boolean, triggerRect: DOMRect | null): void {
-    const panelElement = overlayElement?.children[0]?.children[0] as HTMLElement;
-    if (!isNoAnimation && !!panelElement && !!triggerRect) {
-      const panelHeight = Number(getComputedStyle(panelElement).getPropertyValue('height').replace('px', '') || '0');
-      let translateY: string | null = null;
-      if (panelHeight > 0 && triggerRect.top > 0 && triggerRect.height > 0) {
-        const value = NumberUtil.roundTo100(triggerRect.top) + NumberUtil.roundTo100(triggerRect.height) + panelHeight;
-        const isOpensDown = value < ScreenUtil.getHeight();
-        translateY = isOpensDown ? '-50%' : '50%';
-      }
-      HtmlElemUtil.setProperty(HtmlElemUtil.getElementRef(overlayElement), '--glnspo-translate-y', translateY);
+  /** Define the "TranslateY" parameter to correctly open or close. */
+  protected getTranslateY(triggerRect: DOMRect | null, panelHeight: number, screenHeight: number): string | null {
+    let result: string | null = null;
+    if (panelHeight > 0 && !!triggerRect && triggerRect.top > 0 && triggerRect.height > 0 && screenHeight > 0) {
+      const value = triggerRect.top + triggerRect.height + panelHeight;
+      const delta = String(NumberUtil.roundTo100((panelHeight - 0.6 * panelHeight) / 2)).concat('px');
+      // console.log(`     delta=${delta}`); // TODO del;
+      result = (value < screenHeight ? '-' : '') + delta;
     }
+    return result;
   }
 
   // ** Private API **
@@ -542,5 +604,21 @@ export class GlnSelectComponent
     this.isFilled = !this.isEmpty() && this.selectedOptions.items.length > 0;
     // Calling the validation method for the new value.
     this.onChange(this.valueData);
+  }
+
+  private movingMarkedOption(isNext: boolean, markedOption: GlnOptionComponent | null): GlnOptionComponent | null {
+    let result: GlnOptionComponent | null = null;
+    if (this.options.length > 0) {
+      let indexOld = -1;
+      if (markedOption != null) {
+        indexOld = this.options.indexOf(markedOption);
+        markedOption.setMarked(false);
+      }
+      const maxIndex = this.options.length - 1;
+      const index = isNext ? (indexOld < maxIndex ? indexOld + 1 : 0) : indexOld > 0 ? indexOld - 1 : maxIndex;
+      result = this.options[index];
+      result.setMarked(true);
+    }
+    return result;
   }
 }

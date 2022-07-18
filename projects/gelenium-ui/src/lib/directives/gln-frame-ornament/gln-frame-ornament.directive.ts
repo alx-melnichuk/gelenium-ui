@@ -64,10 +64,10 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
 
     const elementRef: ElementRef<HTMLElement> | null = this.glnFrameOrnamentElementRef || this.hostRef;
     if (this.ornamentLfWidth > 0) {
-      HtmlElemUtil.setProperty(elementRef, '--glnfo-pd-lf', NumberUtil.str(this.ornamentLfWidth)?.concat('px') || null);
+      HtmlElemUtil.setProperty(elementRef, '--glnfo-pd-lf', NumberUtil.str(this.ornamentLfWidth)?.concat('px'));
     }
     if (this.ornamentRgWidth > 0) {
-      HtmlElemUtil.setProperty(elementRef, '--glnfo-pd-rg', NumberUtil.str(this.ornamentRgWidth)?.concat('px') || null);
+      HtmlElemUtil.setProperty(elementRef, '--glnfo-pd-rg', NumberUtil.str(this.ornamentRgWidth)?.concat('px'));
     }
   }
 

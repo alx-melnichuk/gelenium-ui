@@ -83,7 +83,7 @@ export class GlnMenuItemPanelShowComponent implements OnChanges, OnInit, AfterVi
     this.settingElementPosition(this.hostRef, this.isFixRight, isDown);
     if (!this.noAnimation) {
       const showHeight = ((isDown ? -1 : 1) * Math.round((heightItemsBar / 2) * 100)) / 100;
-      HtmlElemUtil.setProperty(this.hostRef, '--glnmibs-show-hg', NumberUtil.str(showHeight)?.concat('px') || null);
+      HtmlElemUtil.setProperty(this.hostRef, '--glnmibs-show-hg', NumberUtil.str(showHeight)?.concat('px'));
     }
     this.changeDetectorRef.markForCheck();
   }

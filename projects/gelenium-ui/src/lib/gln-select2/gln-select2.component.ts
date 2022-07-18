@@ -98,13 +98,13 @@ export class GlnSelect2Component implements OnInit, AfterViewInit {
     // root button.
     this.isShowingMenu = true;
     // this.menuRef.nativeElement.style.left = `${rootRect.left}px`;
-    HtmlElemUtil.setProperty(this.menuRef, 'left', NumberUtil.str(rootRect.left)?.concat('px') || null);
+    HtmlElemUtil.setProperty(this.menuRef, 'left', NumberUtil.str(rootRect.left)?.concat('px'));
     // this.menuRef.nativeElement.style.top = `${rootRect.top}px`;
-    HtmlElemUtil.setProperty(this.menuRef, 'top', NumberUtil.str(rootRect.top)?.concat('px') || null);
+    HtmlElemUtil.setProperty(this.menuRef, 'top', NumberUtil.str(rootRect.top)?.concat('px'));
     // this.menuRef.nativeElement.style.width = null;
     HtmlElemUtil.setProperty(this.menuRef, 'width', null);
     // this.menuRef.nativeElement.style.minWidth = `${rootRect.width}px`;
-    HtmlElemUtil.setProperty(this.menuRef, 'minWidth', NumberUtil.str(rootRect.width)?.concat('px') || null);
+    HtmlElemUtil.setProperty(this.menuRef, 'minWidth', NumberUtil.str(rootRect.width)?.concat('px'));
     // this.menuRef.nativeElement.style.height = null;
     HtmlElemUtil.setProperty(this.menuRef, 'height', null);
 

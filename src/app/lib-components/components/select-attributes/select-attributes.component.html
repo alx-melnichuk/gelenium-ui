@@ -847,8 +847,8 @@ export class SelectComponent &#123;
       <input id="demo1"
         name="demo1"
         type="text"
-        (focus)="log('focusDemo1', $event)"
-        (blur)="log('blurDemo1', $event)" />
+        (focus)="log('focusDemo1')"
+        (blur)="log('blurDemo1')" />
     </label>
   </div>
 
@@ -872,8 +872,8 @@ export class SelectComponent &#123;
       <input id="demo2"
         name="demo2"
         type="text"
-        (focus)="log('focusDemo2', $event)"
-        (blur)="log('blurDemo2', $event)" />
+        (focus)="log('focusDemo2')"
+        (blur)="log('blurDemo2')" />
     </label>
   </div>
 
@@ -882,10 +882,10 @@ export class SelectComponent &#123;
     <label for="pet-select">Choose a pet:</label>
     <select name="demo3"
       id="demo3"
-      (focus)="log('focusDemo3', $event)"
-      (blur)="log('blurDemo3', $event)"
-      (mousedown)="log('mousedownDemo3', $event)"
-      (mouseup)="log('mouseupDemo3', $event)">
+      (focus)="log('focusDemo3')"
+      (blur)="log('blurDemo3')"
+      mousedown9="log('mousedownDemo3')"
+      mouseup9="log('mouseupDemo3')">
       <option value="">--Please choose an option--</option>
       <option value="dog">Dog</option>
       <option value="cat">Cat</option>
@@ -924,6 +924,7 @@ export class SelectComponent &#123;
         </small>
       </div>
       <gln-select formControlName="model02z"
+        style="min-width: 200px;"
         isRequired9
         noElevation99
         noAnimation99
@@ -935,11 +936,13 @@ export class SelectComponent &#123;
         helperText9="Field for parameter 1."
         [exterior]="exterior02z"
         wdFull9
-        (focused)="log('focusedModel02z', $event)"
-        (blured)="log('bluredModel02z', $event)"
-        (focus)="log('focusModel02z', $event)"
-        (blur)="log('blurModel02z', $event)">
-        <gln-option><em>None</em></gln-option>
+        (focused)="log('focusedModel02z')"
+        (blured)="log('bluredModel02z')"
+        (opened)="log('openedModel02z')"
+        (closed)="log('closedModel02z')"
+        (focus)="log('focusModel02z')"
+        (blur)="log('blurModel02z')">
+        <!-- <gln-option><em>None</em></gln-option> -->
         <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>

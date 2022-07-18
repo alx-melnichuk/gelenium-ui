@@ -59,7 +59,8 @@
         [attr.id]="id + '-elem'"
         [attr.tabindex]="disabled ? '-1' : tabIndex"
         (focus)="doFocus()"
-        (blur)="doBlur()">
+        (blur)="doBlur()"
+        (keydown)="scoreboardKeydown($event)">
 
         <ng-container [ngSwitch]="isFilled">
           <ng-container *ngSwitchCase="true">
@@ -88,27 +89,25 @@
 </gln-hint-or-error>
 
 <ng-template cdkConnectedOverlay
-  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
-  cdkConnectedOverlayHasBackdrop
+  [cdkConnectedOverlayDisableClose]="true"
   cdkConnectedOverlayLockPosition
   [cdkConnectedOverlayMinWidth]="triggerRect?.width!"
-  cdkConnectedOverlayOffsetY9="offsetY"
   [cdkConnectedOverlayOpen]="isPanelOpen || hasPanelAnimation"
   [cdkConnectedOverlayOrigin]="origin"
-  [cdkConnectedOverlayPanelClass]="overlayPanelClass"
+  [cdkConnectedOverlayPanelClass]="'overlayPanelClass'"
   [cdkConnectedOverlayPositions]="positions"
   [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
-  (overlayOutsideClick)="overlayOutsideClick($event)"
+  (overlayOutsideClick)="overlayOutsideClick()"
   (attach)="attach()"
-  (detach)="detach()">
+  (detach)="isPanelOpen ? close() : null">
 
   <div glnsp-wrap
     [ngClass]="['gln-select-panel-wrap', (isNoAnimation ? 'gln-no-animation' : ''), (isNoAnimation ? 'gln-no-elevation' : '')]"
     [attr.noAnimation]="isNoAnimation ? '' : null"
     [attr.is-open]="!isNoAnimation && isPanelOpen ? '' : null"
     [attr.is-hide]="!isNoAnimation && !isPanelOpen ? '' : null"
-    (animationend)="setHasPanelAnimation()"
-    (animationcancel)="setHasPanelAnimation()">
+    (animationend)="hasPanelAnimation = isPanelOpen"
+    (animationcancel)="hasPanelAnimation = isPanelOpen">
     <div #panelRef
       glns-panel
       [ngClass]="['gln-select-panel', panelClass]"
@@ -117,8 +116,7 @@
       [attr.id]="id + '-panel'"
       [attr.aria-multiselectable]="multiple"
       [attr.noElevation]="getBoolean(noElevation) ? '' : null"
-      (focus)="doFocusOnPanel()"
-      keydown9evn="_handleKeydown($event)">
+      (focus)="doFocusOnPanel()">
       <ng-content></ng-content>
     </div>
   </div>
