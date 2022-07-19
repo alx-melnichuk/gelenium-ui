@@ -102,14 +102,11 @@
   (detach)="isPanelOpen ? close() : null">
 
   <div glnsp-wrap
-    [ngClass]="['gln-select-panel-wrap', (isNoAnimation ? 'gln-no-animation' : ''), (isNoAnimation ? 'gln-no-elevation' : '')]"
+    [ngClass]="['gln-select-panel-wrap', (isNoAnimation ? 'gln-no-animation' : ''), (getBoolean(noElevation) ? 'gln-no-elevation' : '')]"
     [attr.noAnimation]="isNoAnimation ? '' : null"
-    [attr.is-open]="!isNoAnimation && isPanelOpen ? '' : null"
-    [attr.is-hide]="!isNoAnimation && !isPanelOpen ? '' : null"
     (animationend)="hasPanelAnimation = isPanelOpen"
     (animationcancel)="hasPanelAnimation = isPanelOpen">
-    <div #panelRef
-      glns-panel
+    <div glns-panel
       [ngClass]="['gln-select-panel', panelClass]"
       role="listbox"
       tabindex="-1"

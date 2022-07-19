@@ -37,7 +37,7 @@ export class SelectAttributesComponent {
 
   public urlSelect = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_SELECT');
 
-  public fruits = ['mango', 'lemon', 'orange', 'kiwi']; // , 'mango2', 'lemon2', 'orange2', 'kiwi2'];
+  public fruits = ['mango', 'lemon', 'orange', 'kiwi']; // , 'mango2', 'lemon2', 'orange2', 'kiwi2', 'mango3', 'lemon3', 'orange3', 'kiwi3'];
 
   public exterior02a = 'outlined';
   public formGroup02a: FormGroup = new FormGroup({

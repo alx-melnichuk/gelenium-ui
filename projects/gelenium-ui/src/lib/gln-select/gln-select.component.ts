@@ -57,6 +57,8 @@ export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT
 const CSS_CLASS_OVERLAY = 'glnsp-overlay';
 const CSS_CLASS_OVERLAY_EVENTS_AUTO = 'gln-overlay-events-auto';
 const CSS_ATTR_FOR_FRAME_FOCUS = 'foc';
+const CSS_ATTR_FOR_PANEL_OPENING_ANIMATION = 'is-open';
+const CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION = 'is-hide';
 const CSS_PROP_TRANSLATE_Y = '--glnspo-translate-y';
 const CSS_PROP_BORDER_RADIUS = '--glnspo-border-radius';
 
@@ -216,8 +218,8 @@ export class GlnSelectComponent
   private markedOption: GlnOptionComponent | null = null;
   /** Saving the font size of the trigger element. */
   private triggerFontSize = 0;
-  /** Saving the frame size of the trigger element. */
-  private triggerFrameSize = 0; // BorderRadius = -1;
+  /** Saving the frame size of the trigger element. Defines BorderRadius. */
+  private triggerFrameSize = 0;
 
   constructor(
     hostRef: ElementRef<HTMLElement>,
@@ -385,8 +387,7 @@ export class GlnSelectComponent
   }
   /** Occurs when mouse click events are outside the overlay. */
   public overlayOutsideClick(): void {
-    // console.log(``); // TODO del;
-    // console.log(`    OutsideClick()`); // TODO del;
+    // console.log(``); // TODO del;    // console.log(`    OutsideClick()`); // TODO del;
     if (!this.disabled) {
       // (Cases-B3) Panel is open and mouse click outside of panel and trigger.
       // (Cases-B4) Panel is open and mouse click outside of panel but on trigger.
@@ -419,7 +420,8 @@ export class GlnSelectComponent
   /** Open overlay panel. */
 
   public open(): void {
-    // console.log(``); // TODO del;    // console.log(`    open() ${this.isPanelOpen ? '' : '!'}isPanelOpen`); // TODO del;
+    console.log(``);
+    console.log(`    open() ${this.isPanelOpen ? '' : '!'}isPanelOpen`); // TODO del;
     if (!this.disabled && !this.isPanelOpen && this.options.length > 0) {
       this.isPanelOpen = true;
       this.hasPanelAnimation = !this.isNoAnimation;
@@ -441,17 +443,22 @@ export class GlnSelectComponent
     if (this.isFocusAttrOnFrame) {
       HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, null);
     }
+    const overlay = this.connectedOverlay?.overlayRef?.overlayElement;
+    const overlayRef = HtmlElemUtil.getElementRef(overlay);
     this.isPanelOpen = false;
     this.changeDetectorRef.markForCheck();
     this.onTouched();
     this.markedOption?.setMarked(false);
     this.markedOption = null;
 
-    const overlay = this.connectedOverlay?.overlayRef?.overlayElement;
-    const overlayRef = HtmlElemUtil.getElementRef(overlay);
     const panelHeight = this.getHeight(HtmlElemUtil.getElementRef(overlay?.children[0]?.children[0] as HTMLElement));
-    if (!this.isNoAnimation && overlay && panelHeight > 0) {
+    if (overlay && panelHeight > 0) {
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
+    }
+    if (!this.isNoAnimation) {
+      const panelWrapRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(overlay?.children[0] as HTMLElement);
+      HtmlElemUtil.setAttr(this.renderer, panelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, null);
+      HtmlElemUtil.setAttr(this.renderer, panelWrapRef, CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION, '');
     }
     this.closed.emit();
   }
@@ -468,17 +475,35 @@ export class GlnSelectComponent
     const overlayRef = HtmlElemUtil.getElementRef(overlay);
     HtmlElemUtil.setAttr(this.renderer, overlayRef, CSS_CLASS_OVERLAY, '');
 
-    if (this.triggerFrameSize > 0) {
-      const borderRadius = NumberUtil.roundTo100(this.triggerFrameSize / 10);
-      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(borderRadius)?.concat('px'));
-    }
-    const panelHeight = this.getHeight(HtmlElemUtil.getElementRef(overlay?.children[0]?.children[0] as HTMLElement));
+    const panelRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(overlay?.children[0]?.children[0] as HTMLElement);
+    const panelHeight = this.getHeight(panelRef);
     if (!this.isNoAnimation && panelHeight > 0) {
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
+    }
+    // We cannot get the actual sizes and positions of elements if they are affected by a transformation.
+    // Therefore, we first get all the data, and then add attributes for animation and transformation.
+    if (this.markedOption !== null && panelRef !== null && panelHeight > 0) {
+      const optionRect = this.markedOption.hostRef.nativeElement.getBoundingClientRect();
+      const optionHeight = this.getHeight(this.markedOption.hostRef);
+      const optionHeightDelta = optionHeight > 0 ? NumberUtil.roundTo100(optionHeight / 2) : 0;
+      const panelRect = panelRef.nativeElement.getBoundingClientRect();
+      const positionY = optionRect.top - panelRect.top - NumberUtil.roundTo100(panelHeight / 2) + optionHeightDelta;
+      if (positionY > 0) {
+        panelRef.nativeElement.scrollTo(0, positionY);
+      }
+    }
+    if (!this.isNoAnimation) {
+      const panelWrapRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(overlay?.children[0] as HTMLElement);
+      // Add an attribute for animation and transformation.
+      HtmlElemUtil.setAttr(this.renderer, panelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, '');
     }
     // Set the font size for the overlay.
     if (this.triggerFontSize > 0) {
       overlay.style.fontSize = `${this.triggerFontSize}px`;
+    }
+    if (this.triggerFrameSize > 0) {
+      const borderRadius = NumberUtil.roundTo100(this.triggerFrameSize / 10);
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(borderRadius)?.concat('px'));
     }
   }
   /** Handles all keypress events for the component's panel. */
