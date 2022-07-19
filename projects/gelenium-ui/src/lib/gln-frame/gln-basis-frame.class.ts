@@ -23,6 +23,8 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
   @Input()
   public isDisabled: string | null = null;
   @Input()
+  public isRequired: string | null = null; // Is in GlnBasisFrame.
+  @Input()
   public isValueInit: string | null = null;
   @Input()
   public noAnimation: string | boolean | null = null;
@@ -33,6 +35,7 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation".
   public isWriteValueInit: boolean | null = null;
+  public required: boolean | null = null; // Binding attribute "isRequired".
   public valueInit: boolean | null = null; // Binding attribute "isValueInit".
 
   constructor(
@@ -52,6 +55,9 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
     if (changes.isDisabled) {
       this.disabled = BooleanUtil.init(this.isDisabled);
       this.setDisabledState(!!this.disabled);
+    }
+    if (changes.isRequired) {
+      this.required = BooleanUtil.init(this.isRequired);
     }
     if (changes.isValueInit) {
       this.valueInit = BooleanUtil.init(this.isValueInit);

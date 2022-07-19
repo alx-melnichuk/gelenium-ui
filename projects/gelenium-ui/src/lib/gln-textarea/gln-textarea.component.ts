@@ -38,7 +38,6 @@ import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../direct
 import { GlnBasisFrame } from '../gln-frame/gln-basis-frame.class';
 import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
-import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 let uniqueIdCounter = 0;
@@ -63,7 +62,7 @@ export class GlnTextareaComponent
   implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
 {
   // @Input()
-  // #public id = `glnt-${uniqueIdCounter++}`;
+  // public id = `glnt-${uniqueIdCounter++}`; // Is in GlnBasisFrame.
   @Input()
   public autoComplete = '';
   @Input()
@@ -81,19 +80,21 @@ export class GlnTextareaComponent
   @Input()
   public hoverColor: string | null = null;
   // @Input()
-  // #public isDisabled: string | null = null;
+  // public isDisabled: string | null = null; // Is in GlnBasisFrame.
   @Input()
   public isError: string | null = null;
   @Input()
   public isReadOnly: string | null = null;
-  @Input()
-  public isRequired: string | null = null;
+  // @Input()
+  // public isRequired: string | null = null;// Is in GlnBasisFrame.
+  // @Input()
+  // public isValueInit: string | null = null; // Is in GlnBasisFrame.
   @Input()
   public label = '';
   @Input()
   public lbShrink: string | null = null;
   // @Input()
-  // #public noAnimation: string | boolean | null = null;
+  // public noAnimation: string | boolean | null = null; // Is in GlnBasisFrame.
   @Input()
   public maxLength: number | null = null;
   @Input()
@@ -123,14 +124,16 @@ export class GlnTextareaComponent
 
   public currConfig: GlnFrameConfig | null = null;
   public currentRows = 1;
-  // #public disabled: boolean | null = null; // Binding attribute "isDisabled".
+  // public disabled: boolean | null = null; // Binding attribute "isDisabled". // Is in GlnBasisFrame.
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public isFocused = false;
   public isFilled = false;
-  // #public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation".
-  public required: boolean | null = null; // Binding attribute "isRequired".
+  // public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation". // Is in GlnBasisFrame.
+  // public isWriteValueInit: boolean | null = null; // Is in GlnBasisFrame.
+  // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisFrame.
+  // public valueInit: boolean | null = null; // Binding attribute "isValueInit". // Is in GlnBasisFrame.
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -146,13 +149,16 @@ export class GlnTextareaComponent
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
+  public override ngOnChanges(changes: SimpleChanges): void {
+    // In the GlnBasisFrame.ngOnChanges(), the definition is made:
+    // -  this.disabled = BooleanUtil.init(this.isDisabled);
+    // -  this.setDisabledState(!!this.disabled);
+    // -  this.required = BooleanUtil.init(this.isRequired);
+    // -  this.valueInit = BooleanUtil.init(this.isValueInit);
+    // -  this.isNoAnimation = BooleanUtil.init(this.noAnimation != null ? '' + this.noAnimation : null);
     super.ngOnChanges(changes);
     if (changes.config) {
       this.currConfig = { ...this.rootConfig, ...this.config };
-    }
-    if (changes.isRequired) {
-      this.required = BooleanUtil.init(this.isRequired);
     }
     if (changes.isRequired || changes.minLength || changes.maxLength) {
       this.prepareFormGroup(this.required, this.minLength, this.maxLength);
@@ -162,20 +168,18 @@ export class GlnTextareaComponent
     }
   }
 
-  public ngOnInit(): void {
+  public override ngOnInit(): void {
     super.ngOnInit();
   }
 
-  ngAfterContentInit(): void {
+  public override ngAfterContentInit(): void {
     super.ngAfterContentInit();
   }
 
   // ** ControlValueAccessor - start **
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-  public writeValue(value: any): void {
-    console.log(`writeValue(${this.id}) value=${value == null ? 'null' : value}`); // TODO del;
-
+  public override writeValue(value: any): void {
     const isFilledOld = !!this.formControl.value;
     const cntLinesOld = this.getNumberLines(this.formControl.value);
     this.formControl.setValue(value, { emitEvent: false });
@@ -190,13 +194,9 @@ export class GlnTextareaComponent
     super.writeValue(value);
   }
 
-  public setDisabledState(isDisabled: boolean): void {
+  public override setDisabledState(isDisabled: boolean): void {
     if (this.disabled !== isDisabled) {
-      if (isDisabled) {
-        this.formGroup.disable();
-      } else {
-        this.formGroup.enable();
-      }
+      isDisabled ? this.formGroup.disable() : this.formGroup.enable();
       super.setDisabledState(isDisabled);
     }
   }

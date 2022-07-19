@@ -78,7 +78,8 @@ export class GlnSelectComponent
   extends GlnBasisFrame
   implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnOptionParent
 {
-  // @Input() // #public id = `glns-${uniqueIdCounter++}`;
+  // @Input()
+  // public id = `glns-${uniqueIdCounter++}`; // Is in GlnBasisFrame.
   @Input()
   public config: GlnSelectConfig | null = null;
   @Input()
@@ -89,7 +90,8 @@ export class GlnSelectComponent
   public helperText: string | null = null;
   @Input()
   public hoverColor: string | null = null;
-  // @Input() // #public isDisabled: string | null = null;
+  // @Input()
+  // public isDisabled: string | null = null; // Is in GlnBasisFrame.
   @Input()
   public isError: string | null = null;
   @Input()
@@ -102,15 +104,16 @@ export class GlnSelectComponent
   public isNoRipple: string | null = null;
   @Input()
   public isReadOnly: string | null = null;
-  @Input()
-  public isRequired: string | null = null;
-  // @Input() // #public isValueInit: string | null = null;
+  // @Input()
+  // public isRequired: string | null = null; // Is in GlnBasisFrame.
+  // @Input()
+  // public isValueInit: string | null = null; // Is in GlnBasisFrame.
   @Input()
   public label = '';
   @Input()
   public lbShrink: string | null = null;
   // @Input()
-  // #public noAnimation: string | boolean | null = null;
+  // public noAnimation: string | boolean | null = null; // Is in GlnBasisFrame.
   @Input()
   public noElevation: string | null = null;
   @Input()
@@ -185,7 +188,7 @@ export class GlnSelectComponent
 
   public checkmark: boolean | null = null; // Binding attribute "isCheckmark". // interface GlnOptionParent
   public currConfig: GlnFrameConfig | null = null;
-  // #public disabled: boolean | null = null; // Binding attribute "isDisabled".
+  // public disabled: boolean | null = null; // Binding attribute "isDisabled". // Is in GlnBasisFrame.
   public errors: ValidationErrors | null = null;
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
@@ -193,20 +196,16 @@ export class GlnSelectComponent
   public hasPanelAnimation = false;
   public isFocused = false;
   public isFilled = false;
-  // #public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation".
-  // ##public isOpenPanel = false;
+  // public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation". // Is in GlnBasisFrame.
   public isPanelOpen = false;
-  // #public isWriteValueInit: boolean | null = null;
+  // public isWriteValueInit: boolean | null = null; // Is in GlnBasisFrame.
   public multiple: boolean | null = null; // Binding attribute "isMultiple". // interface GlnOptionParent
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public overlayPanelClass: string | string[] = /*this._defaultOptions?.overlayPanelClass ||*/ '';
-  public positions: ConnectedPosition[] = [
-    { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top' },
-    { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom' },
-  ];
-  public required: boolean | null = null; // Binding attribute "isRequired".
+  public positions: ConnectedPosition[] = [];
+  // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisFrame.
   public selectedOptions: GlnSelectedOptions = new GlnSelectedOptions();
-  // #public valueInit: boolean | null = null; // Binding attribute "isValueInit".
+  // public valueInit: boolean | null = null; // Binding attribute "isValueInit". // Is in GlnBasisFrame.
   /** Strategy for handling scrolling when the selection panel is open. */
   public scrollStrategy: ScrollStrategy;
   /** The position and dimensions for the trigger's bounding box. */
@@ -237,20 +236,14 @@ export class GlnSelectComponent
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
+  public override ngOnChanges(changes: SimpleChanges): void {
+    // In the GlnBasisFrame.ngOnChanges(), the definition is made:
+    // -  this.disabled = BooleanUtil.init(this.isDisabled);
+    // -  this.setDisabledState(!!this.disabled);
+    // -  this.required = BooleanUtil.init(this.isRequired);
+    // -  this.valueInit = BooleanUtil.init(this.isValueInit);
+    // -  this.isNoAnimation = BooleanUtil.init(this.noAnimation != null ? '' + this.noAnimation : null);
     super.ngOnChanges(changes);
-    // ** abstract class GlnBasisFrame -v **
-    // if (changes.isDisabled) {
-    //   this.disabled = BooleanUtil.init(this.isDisabled);
-    //   this.setDisabledState(!!this.disabled);
-    // }
-    // if (changes.isValueInit) {
-    //   this.valueInit = BooleanUtil.init(this.isValueInit);
-    // }
-    // if (changes.noAnimation) {
-    //   this.isNoAnimation = BooleanUtil.init(this.noAnimation != null ? '' + this.noAnimation : null);
-    // }
-    // ** abstract class GlnBasisFrame -^ **
 
     if (changes.config) {
       this.currConfig = { ...this.rootConfig, ...this.config };
@@ -268,16 +261,13 @@ export class GlnSelectComponent
     if (changes.isNoRipple) {
       this.noRipple = BooleanUtil.init(this.isNoRipple);
     }
-    if (changes.isRequired) {
-      this.required = BooleanUtil.init(this.isRequired);
-    }
   }
 
-  public ngOnInit(): void {
+  public override ngOnInit(): void {
     super.ngOnInit();
   }
 
-  public ngAfterContentInit(): void {
+  public override ngAfterContentInit(): void {
     // Initialized when the value is received via "writeValue()" but the list of menu items is just now.
     if (this.selectedOptions.isEmpty && this.options.length > 0) {
       const newValue = this.valueData;
@@ -297,19 +287,15 @@ export class GlnSelectComponent
   // ** interface ControlValueAccessor - start **
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-  public writeValue(value: any): void {
+  public override writeValue(value: any): void {
     this.value = value;
     // Execute the base class method.
     super.writeValue(value);
   }
 
-  public setDisabledState(isDisabled: boolean): void {
+  public override setDisabledState(isDisabled: boolean): void {
     if (this.disabled !== isDisabled) {
-      if (isDisabled) {
-        this.formGroup.disable();
-      } else {
-        this.formGroup.enable();
-      }
+      isDisabled ? this.formGroup.disable() : this.formGroup.enable();
       super.setDisabledState(isDisabled);
     }
   }
@@ -382,8 +368,7 @@ export class GlnSelectComponent
    */
   public doBlur(): void {
     if (!this.disabled) {
-      // console.log(``); // TODO del;
-      // console.log(`    doBlur() isFocused:=false;`); // TODO del;
+      // console.log(``); // TODO del; // console.log(`    doBlur() isFocused:=false;`); // TODO del;
       this.isFocused = false;
       if (!this.isPanelOpen) {
         // (Cases-B1) Panel is open and on the trigger, click the Tab key.
@@ -432,11 +417,10 @@ export class GlnSelectComponent
     }
   }
   /** Open overlay panel. */
+
   public open(): void {
-    // console.log(``); // TODO del;
-    // console.log(`    open() ${this.isPanelOpen ? '' : '!'}isPanelOpen`); // TODO del;
-    if (!this.disabled && this.isCanOpen()) {
-      // Open a panel with a selection list.
+    // console.log(``); // TODO del;    // console.log(`    open() ${this.isPanelOpen ? '' : '!'}isPanelOpen`); // TODO del;
+    if (!this.disabled && !this.isPanelOpen && this.options.length > 0) {
       this.isPanelOpen = true;
       this.hasPanelAnimation = !this.isNoAnimation;
       this.markedOption = this.selectedOptions.length > 0 ? this.selectedOptions.items[this.selectedOptions.length - 1] : null;
@@ -450,15 +434,13 @@ export class GlnSelectComponent
   }
   /** Closes the overlay panel and focuses the main element. */
   public close(): void {
-    // console.log(``); // TODO del;
-    // console.log(`    close() ${this.isPanelOpen ? '' : '!'}isPanelOpen ${this.isFocusAttrOnFrame ? '' : '!'}isFocusAttrOnFrame`); // TODO
+    // console.log(``); // TODO del; // console.log(`    close() ${this.isPanelOpen ? '' : '!'}isPanelOpen`); // TODO del;
     if (this.disabled || !this.isPanelOpen) {
       return;
     }
     if (this.isFocusAttrOnFrame) {
       HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, null);
     }
-    // Close the panel with the selection list.
     this.isPanelOpen = false;
     this.changeDetectorRef.markForCheck();
     this.onTouched();
@@ -577,11 +559,6 @@ export class GlnSelectComponent
   }
   // ** Proteced methods **
 
-  /** Is it possible to open the panel. */
-  protected isCanOpen(): boolean {
-    return !this.disabled && !this.isPanelOpen && this.options.length > 0;
-  }
-
   protected getHeight(value: ElementRef<HTMLElement> | null): number {
     return value ? Number(getComputedStyle(value.nativeElement).getPropertyValue('height').replace('px', '')) : 0;
   }
@@ -591,7 +568,6 @@ export class GlnSelectComponent
     if (panelHeight > 0 && !!triggerRect && triggerRect.top > 0 && triggerRect.height > 0 && screenHeight > 0) {
       const value = triggerRect.top + triggerRect.height + panelHeight;
       const delta = String(NumberUtil.roundTo100((panelHeight - 0.6 * panelHeight) / 2)).concat('px');
-      // console.log(`     delta=${delta}`); // TODO del;
       result = (value < screenHeight ? '-' : '') + delta;
     }
     return result;
