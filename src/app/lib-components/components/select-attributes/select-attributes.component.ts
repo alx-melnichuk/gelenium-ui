@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { GlnSelectConfig } from 'gelenium-ui';
 
 import {
   LABEL_CSS,
@@ -67,12 +69,24 @@ export class SelectAttributesComponent {
 
   public exterior02z = 'outlined';
   public control02z = {
-    model02z: new FormControl(null /* this.fruits[0] */, []),
+    model02z: new FormControl([] /* this.fruits[0] */, []),
   };
   public formGroup02z: FormGroup = new FormGroup(this.control02z);
 
+  priz = false;
+  config: GlnSelectConfig = {
+    // noLabel: true,
+    // noAnimation: true,
+    isNoRipple: true,
+  };
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor(private changeDetectorRef: ChangeDetectorRef) {
+    // setTimeout(() => {
+    //   console.log(`priz = true;`);
+    //   this.priz = true;
+    //   this.changeDetectorRef.markForCheck();
+    // }, 4000);
+  }
 
   public capitalizeFirstLetter(value: string): string {
     return value ? value[0].toUpperCase() + value.slice(1) : '';

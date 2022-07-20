@@ -35,7 +35,7 @@ import {
 } from '@angular/forms';
 
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
-import { GlnBasisFrame } from '../gln-frame/gln-basis-frame.class';
+import { GlnBasisControl } from '../_classes/gln-basis-control.class';
 import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { GlnInputType, GlnInputTypeUtil } from '../gln-input/gln-input.interface';
@@ -59,11 +59,11 @@ export const GLN_INPUT_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_INPUT_CO
   ],
 })
 export class GlnInputComponent
-  extends GlnBasisFrame
+  extends GlnBasisControl
   implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
 {
   // @Input()
-  // public id = `glni-${uniqueIdCounter++}`; // Is in GlnBasisFrame.
+  // public id = `glni-${uniqueIdCounter++}`; // Is in GlnBasisControl.
   @Input()
   public autoComplete = '';
   @Input()
@@ -77,21 +77,21 @@ export class GlnInputComponent
   @Input()
   public hoverColor: string | null = null;
   // @Input()
-  //#public isDisabled: string | null = null; // Is in GlnBasisFrame.
+  // public isDisabled: string | null = null; // Is in GlnBasisControl.
   @Input()
   public isError: string | null = null;
+  // @Input()
+  // public isNoAnimation: string | boolean | null = null; // Is in GlnBasisControl.
   @Input()
   public isReadOnly: string | null = null;
   // @Input()
-  // public isRequired: string | null = null; // Is in GlnBasisFrame.
+  // public isRequired: string | null = null; // Is in GlnBasisControl.
   // @Input()
-  // public isValueInit: string | null = null; // Is in GlnBasisFrame.
+  // public isValueInit: string | null = null; // Is in GlnBasisControl.
   @Input()
   public label = '';
   @Input()
   public lbShrink: string | null = null;
-  // @Input()
-  // public noAnimation: string | boolean | null = null; // Is in GlnBasisFrame.
   @Input()
   public max: number | null = null;
   @Input()
@@ -122,23 +122,23 @@ export class GlnInputComponent
   @Output()
   readonly blured: EventEmitter<void> = new EventEmitter();
   // @Output()
-  // #readonly writeValueInit: EventEmitter<() => void> = new EventEmitter(); // From GlnBasisByFrame
+  // readonly writeValueInit: EventEmitter<() => void> = new EventEmitter(); // From GlnBasisByFrame
 
   @ViewChild('inputElement')
   public inputElementRef: ElementRef<HTMLElement> | null = null;
 
   public currConfig: GlnFrameConfig | null = null;
-  // public disabled: boolean | null = null; // Binding attribute "isDisabled". // Is in GlnBasisFrame.
+  // public disabled: boolean | null = null; // Binding attribute "isDisabled". // Is in GlnBasisControl.
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public isFocused = false;
   public isFilled = false;
-  // public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation". // Is in GlnBasisFrame.
-  // public isWriteValueInit: boolean | null = null; // Is in GlnBasisFrame.
-  // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisFrame.
+  // public isWriteValueInit: boolean | null = null;                            // Is in GlnBasisControl.
+  // public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // Is in GlnBasisControl.
+  // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisControl.
   public typeVal: GlnInputType = GlnInputType.text;
-  // public valueInit: boolean | null = null; // Binding attribute "isValueInit". // Is in GlnBasisFrame.
+  // public valueInit: boolean | null = null; // Binding attribute "isValueInit". // Is in GlnBasisControl.
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -155,20 +155,19 @@ export class GlnInputComponent
   }
 
   public override ngOnChanges(changes: SimpleChanges): void {
-    // In the GlnBasisFrame.ngOnChanges(), the definition is made:
+    // In the GlnBasisControl.ngOnChanges(), the definition is made:
     // -  this.disabled = BooleanUtil.init(this.isDisabled);
     // -  this.setDisabledState(!!this.disabled);
     // -  this.required = BooleanUtil.init(this.isRequired);
     // -  this.valueInit = BooleanUtil.init(this.isValueInit);
-    // -  this.isNoAnimation = BooleanUtil.init(this.noAnimation != null ? '' + this.noAnimation : null);
+    // -  this.noAnimation = BooleanUtil.init(this.isNoAnimation != null ? '' + this.isNoAnimation : null);
     super.ngOnChanges(changes);
     if (changes.type) {
       this.typeVal = GlnInputTypeUtil.create(this.type) || GlnInputType.text;
     }
-    if (changes.config) {
+    if (changes.config && this.config) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
-
     if (changes.isRequired || changes.minLength || changes.maxLength) {
       this.prepareFormGroup(this.required, this.minLength, this.maxLength);
     }

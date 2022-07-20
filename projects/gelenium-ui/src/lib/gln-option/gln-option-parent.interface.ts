@@ -4,6 +4,7 @@ import { InjectionToken } from '@angular/core';
 export interface GlnOptionItem {
   value: unknown | null;
   selected: boolean | null;
+  setSelected(value: boolean | null): void;
 }
 
 /**
@@ -11,9 +12,9 @@ export interface GlnOptionItem {
  * Contains properties that can be used by options.
  */
 export interface GlnOptionParent {
-  checkmark?: boolean | null; // Only for multiple=true
-  multiple?: boolean | null;
-  noRipple?: boolean | null;
+  checkmark?: boolean | null | undefined; // Only for multiple=true
+  multiple?: boolean | null | undefined;
+  noRipple?: boolean | null | undefined;
   optionSelection(option: GlnOptionItem): void;
 }
 

@@ -128,7 +128,7 @@ export class FeatureComponent implements OnInit &#123;
     But if for some reason you use [(ngModel)], then it is possible to change the
     rendering algorithm when the component is initialized.
     <br />
-    This requires adding parameters: isValueInit, noAnimation, writeValueInit.
+    This requires adding parameters: isValueInit, isNoAnimation, writeValueInit.
   </p>
 </section>
 
@@ -142,7 +142,7 @@ export class FeatureComponent implements OnInit &#123;
       [isError]="!ctrl08c.value ? '':null"
       [exterior]="exterior08a"
       isValueInit
-      [noAnimation]="noAnm08c"
+      [isNoAnimation]="noAnm08c"
       (writeValueInit)="noAnm08c=false">
     </gln-input>
   </div>
@@ -155,7 +155,7 @@ export class FeatureComponent implements OnInit &#123;
       [isError]="!ctrl08d.value ? '':null"
       [exterior]="exterior08a"
       isValueInit
-      [noAnimation]="noAnm08d"
+      [isNoAnimation]="noAnm08d"
       (writeValueInit)="noAnm08d=false">
     </gln-input>
   </div>
@@ -181,7 +181,7 @@ export class FeatureComponent implements OnInit &#123;
       [isError]="!ctrl08c.value ? '':null"
       [exterior]="exterior08a"
       isValueInit
-      [noAnimation]="noAnm08c"
+      [isNoAnimation]="noAnm08c"
       (writeValueInit)="noAnm08c=false"&gt;
     &lt;/gln-input&gt;
   &lt;/div&gt;
@@ -194,7 +194,7 @@ export class FeatureComponent implements OnInit &#123;
       [isError]="!ctrl08d.value ? '':null"
       [exterior]="exterior08a"
       isValueInit
-      [noAnimation]="noAnm08d"
+      [isNoAnimation]="noAnm08d"
       (writeValueInit)="noAnm08d=false"&gt;
     &lt;/gln-input&gt;
   &lt;/div&gt;

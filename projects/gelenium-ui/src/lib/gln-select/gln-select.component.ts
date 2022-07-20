@@ -36,8 +36,7 @@ import {
 
 import { GlnFrameSizePaddingVerHorRes } from '../directives/gln-frame-size/gln-frame-size-prepare.interface';
 import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
-import { GlnBasisFrame } from '../gln-frame/gln-basis-frame.class';
-import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
+import { GlnBasisControl } from '../_classes/gln-basis-control.class';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { GlnOptionItem, GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
@@ -54,8 +53,6 @@ let uniqueIdCounter = 0;
 
 export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT_CONFIG');
 
-const CSS_CLASS_OVERLAY = 'glnsp-overlay';
-const CSS_CLASS_OVERLAY_EVENTS_AUTO = 'gln-overlay-events-auto';
 const CSS_ATTR_FOR_FRAME_FOCUS = 'foc';
 const CSS_ATTR_FOR_PANEL_OPENING_ANIMATION = 'is-open';
 const CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION = 'is-hide';
@@ -77,11 +74,11 @@ const CSS_PROP_BORDER_RADIUS = '--glnspo-border-radius';
   ],
 })
 export class GlnSelectComponent
-  extends GlnBasisFrame
+  extends GlnBasisControl
   implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnOptionParent
 {
   // @Input()
-  // public id = `glns-${uniqueIdCounter++}`; // Is in GlnBasisFrame.
+  // public id = `glns-${uniqueIdCounter++}`; // Is in GlnBasisControl.
   @Input()
   public config: GlnSelectConfig | null = null;
   @Input()
@@ -92,30 +89,30 @@ export class GlnSelectComponent
   public helperText: string | null = null;
   @Input()
   public hoverColor: string | null = null;
+  @Input()
+  public isCheckmark: string | boolean | null | undefined;
   // @Input()
-  // public isDisabled: string | null = null; // Is in GlnBasisFrame.
+  // public isDisabled: string | null = null; // Is in GlnBasisControl.
   @Input()
   public isError: string | null = null;
   @Input()
   public isFixRight: string | boolean | null | undefined;
   @Input()
   public isMultiple: string | boolean | null | undefined;
+  // @Input()
+  // public isNoAnimation: string | boolean | null = null; // Is in GlnBasisControl.
   @Input()
-  public isCheckmark: string | null = null;
-  @Input()
-  public isNoRipple: string | null = null;
+  public isNoRipple: string | boolean | null | undefined;
   @Input()
   public isReadOnly: string | null = null;
   // @Input()
-  // public isRequired: string | null = null; // Is in GlnBasisFrame.
+  // public isRequired: string | null = null; // Is in GlnBasisControl.
   // @Input()
-  // public isValueInit: string | null = null; // Is in GlnBasisFrame.
+  // public isValueInit: string | null = null; // Is in GlnBasisControl.
   @Input()
   public label = '';
   @Input()
   public lbShrink: string | null = null;
-  // @Input()
-  // public noAnimation: string | boolean | null = null; // Is in GlnBasisFrame.
   @Input()
   public noElevation: string | null = null;
   @Input()
@@ -146,9 +143,9 @@ export class GlnSelectComponent
     }
     if (newValue !== this.valueData || (this.multiple && Array.isArray(newValue))) {
       // Get a list of menu items according to an array of values.
-      const newOptions = this.selectedOptions.getOptionsByValues(newValue, this.options);
+      const newOptions = this.selectedOptionItems.getOptionsByValues(newValue, this.options);
       // Set the selected menu items to the new list of items.
-      this.selectedOptions.setSelectionOptions(newOptions, this.options);
+      this.selectedOptionItems.setSelectionOptions(newOptions, this.options);
       this.updateValueDataAndIsFilledAndValidity(newValue);
       this.changeDetectorRef.markForCheck();
     }
@@ -189,8 +186,8 @@ export class GlnSelectComponent
   public set options(value: GlnOptionComponent[]) {}
 
   public checkmark: boolean | null = null; // Binding attribute "isCheckmark". // interface GlnOptionParent
-  public currConfig: GlnFrameConfig | null = null;
-  // public disabled: boolean | null = null; // Binding attribute "isDisabled". // Is in GlnBasisFrame.
+  public currConfig: GlnSelectConfig | null = null;
+  // public disabled: boolean | null = null; // Binding attribute "isDisabled". // Is in GlnBasisControl.
   public errors: ValidationErrors | null = null;
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
@@ -198,24 +195,27 @@ export class GlnSelectComponent
   public hasPanelAnimation = false;
   public isFocused = false;
   public isFilled = false;
-  // public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation". // Is in GlnBasisFrame.
   public isPanelOpen = false;
-  // public isWriteValueInit: boolean | null = null; // Is in GlnBasisFrame.
+  // public isWriteValueInit: boolean | null = null;                         // Is in GlnBasisControl.
   public multiple: boolean | null = null; // Binding attribute "isMultiple". // interface GlnOptionParent
+  // public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // Is in GlnBasisControl.
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public overlayPanelClass: string | string[] = /*this._defaultOptions?.overlayPanelClass ||*/ '';
   public positions: ConnectedPosition[] = [];
-  // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisFrame.
-  public selectedOptions: GlnSelectedOptions = new GlnSelectedOptions();
-  // public valueInit: boolean | null = null; // Binding attribute "isValueInit". // Is in GlnBasisFrame.
+  // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisControl.
+  get selectedOptions(): GlnOptionComponent[] {
+    return this.selectedOptionItems.items as GlnOptionComponent[];
+  }
+  // public valueInit: boolean | null = null; // Binding attribute "isValueInit". // Is in GlnBasisControl.
   /** Strategy for handling scrolling when the selection panel is open. */
   public scrollStrategy: ScrollStrategy;
   /** The position and dimensions for the trigger's bounding box. */
   public triggerRect: DOMRect | null = null;
 
-  private fixRight = false;
+  private fixRight: boolean | null = null;
   private isFocusAttrOnFrame = false;
   private markedOption: GlnOptionComponent | null = null;
+  private selectedOptionItems: GlnSelectedOptions = new GlnSelectedOptions();
   /** Saving the font size of the trigger element. */
   private triggerFontSize = 0;
   /** Saving the frame size of the trigger element. Defines BorderRadius. */
@@ -239,39 +239,62 @@ export class GlnSelectComponent
   }
 
   public override ngOnChanges(changes: SimpleChanges): void {
-    // In the GlnBasisFrame.ngOnChanges(), the definition is made:
+    // In the GlnBasisControl.ngOnChanges(), the definition is made:
     // -  this.disabled = BooleanUtil.init(this.isDisabled);
     // -  this.setDisabledState(!!this.disabled);
     // -  this.required = BooleanUtil.init(this.isRequired);
     // -  this.valueInit = BooleanUtil.init(this.isValueInit);
-    // -  this.isNoAnimation = BooleanUtil.init(this.noAnimation != null ? '' + this.noAnimation : null);
+    // -  this.noAnimation = BooleanUtil.init(this.isNoAnimation != null ? '' + this.isNoAnimation : null);
     super.ngOnChanges(changes);
 
-    if (changes.config) {
+    if (changes.config && this.config) {
       this.currConfig = { ...this.rootConfig, ...this.config };
+
+      if (this.noAnimation == null) {
+        this.noAnimation = this.currConfig?.isNoAnimation || null;
+      }
     }
-    if (changes.isFixRight) {
-      this.fixRight = !!BooleanUtil.init(this.isFixRight != null ? '' + this.isFixRight : null);
+    if (changes.isCheckmark || (changes.config && this.isCheckmark == null)) {
+      const isCheckmark = this.isCheckmark != null ? '' + this.isCheckmark : null;
+      this.checkmark = BooleanUtil.init(isCheckmark) || this.currConfig?.isCheckmark || null;
+    }
+    if (changes.isFixRight || (changes.config && this.isFixRight == null)) {
+      const isFixRight = this.isFixRight != null ? '' + this.isFixRight : null;
+      this.fixRight = BooleanUtil.init(isFixRight) || this.currConfig?.isFixRight || null;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'is-fix-right', !!this.isFixRight);
     }
-    if (changes.isMultiple) {
-      this.multiple = BooleanUtil.init(this.isMultiple != null ? '' + this.isMultiple : null);
+    if (changes.isMultiple || (changes.config && this.isMultiple == null)) {
+      const isMultiple = this.isMultiple != null ? '' + this.isMultiple : null;
+      this.multiple = BooleanUtil.init(isMultiple) || this.currConfig?.isMultiple || null;
     }
-    if (changes.isCheckmark) {
-      this.checkmark = BooleanUtil.init(this.isCheckmark);
-    }
-    if (changes.isNoRipple) {
-      this.noRipple = BooleanUtil.init(this.isNoRipple);
+    if (changes.isNoRipple || (changes.config && this.isNoRipple == null)) {
+      const isNoRipple = this.isNoRipple != null ? '' + this.isNoRipple : null;
+      this.noRipple = BooleanUtil.init(isNoRipple) || this.currConfig?.isNoRipple || null;
     }
   }
 
   public override ngOnInit(): void {
     super.ngOnInit();
+    if (this.checkmark == null) {
+      this.checkmark = this.currConfig?.isCheckmark || null;
+    }
+    if (this.fixRight == null) {
+      this.fixRight = this.currConfig?.isFixRight || null;
+    }
+    if (this.multiple == null) {
+      this.multiple = this.currConfig?.isMultiple || null;
+    }
+    if (this.noAnimation == null) {
+      this.noAnimation = this.currConfig?.isNoAnimation || null;
+    }
+    if (this.noRipple == null) {
+      this.noRipple = this.currConfig?.isNoRipple || null;
+    }
   }
 
   public override ngAfterContentInit(): void {
     // Initialized when the value is received via "writeValue()" but the list of menu items is just now.
-    if (this.selectedOptions.isEmpty && this.options.length > 0) {
+    if (this.selectedOptionItems.isEmpty && this.options.length > 0) {
       const newValue = this.valueData;
       this.valueData = undefined;
       this.value = newValue;
@@ -319,6 +342,10 @@ export class GlnSelectComponent
     const addOption = optionItem as GlnOptionComponent;
     Promise.resolve().then(() => {
       this.selectionOptionElement(addOption);
+      if (this.isPanelOpen && !this.isFocused) {
+        this.isFocused = true;
+        this.focus();
+      }
       if (!this.multiple) {
         this.close();
       }
@@ -370,7 +397,7 @@ export class GlnSelectComponent
    */
   public doBlur(): void {
     if (!this.disabled) {
-      // console.log(``); // TODO del; // console.log(`    doBlur() isFocused:=false;`); // TODO del;
+      // console.log(``);      console.log(`    doBlur() isFocused:=false;`); // TODO del;
       this.isFocused = false;
       if (!this.isPanelOpen) {
         // (Cases-B1) Panel is open and on the trigger, click the Tab key.
@@ -387,7 +414,6 @@ export class GlnSelectComponent
   }
   /** Occurs when mouse click events are outside the overlay. */
   public overlayOutsideClick(): void {
-    // console.log(``); // TODO del;    // console.log(`    OutsideClick()`); // TODO del;
     if (!this.disabled) {
       // (Cases-B3) Panel is open and mouse click outside of panel and trigger.
       // (Cases-B4) Panel is open and mouse click outside of panel but on trigger.
@@ -420,12 +446,11 @@ export class GlnSelectComponent
   /** Open overlay panel. */
 
   public open(): void {
-    console.log(``);
-    console.log(`    open() ${this.isPanelOpen ? '' : '!'}isPanelOpen`); // TODO del;
+    // console.log(``);    console.log(`    open() ${this.isPanelOpen ? '' : '!'}isPanelOpen`); // TODO del;
     if (!this.disabled && !this.isPanelOpen && this.options.length > 0) {
       this.isPanelOpen = true;
-      this.hasPanelAnimation = !this.isNoAnimation;
-      this.markedOption = this.selectedOptions.length > 0 ? this.selectedOptions.items[this.selectedOptions.length - 1] : null;
+      this.hasPanelAnimation = !this.noAnimation;
+      this.markedOption = this.selectedOptions.length > 0 ? this.selectedOptions[this.selectedOptions.length - 1] : null;
       this.changeDetectorRef.markForCheck();
       if (this.triggerRect === null) {
         this.triggerRect = this.triggerRef.nativeElement.getBoundingClientRect();
@@ -436,7 +461,7 @@ export class GlnSelectComponent
   }
   /** Closes the overlay panel and focuses the main element. */
   public close(): void {
-    // console.log(``); // TODO del; // console.log(`    close() ${this.isPanelOpen ? '' : '!'}isPanelOpen`); // TODO del;
+    // console.log(``);    console.log(`    close() ${this.isPanelOpen ? '' : '!'}isPanelOpen`); // TODO del;
     if (this.disabled || !this.isPanelOpen) {
       return;
     }
@@ -455,7 +480,7 @@ export class GlnSelectComponent
     if (overlay && panelHeight > 0) {
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
     }
-    if (!this.isNoAnimation) {
+    if (!this.noAnimation) {
       const panelWrapRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(overlay?.children[0] as HTMLElement);
       HtmlElemUtil.setAttr(this.renderer, panelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, null);
       HtmlElemUtil.setAttr(this.renderer, panelWrapRef, CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION, '');
@@ -470,14 +495,14 @@ export class GlnSelectComponent
     }
     // Adding a class to not skip mouse events (pointer-events: auto;).
     const hostElementRef = HtmlElemUtil.getElementRef(this.connectedOverlay.overlayRef.hostElement);
-    HtmlElemUtil.setClass(this.renderer, hostElementRef, CSS_CLASS_OVERLAY_EVENTS_AUTO, true);
+    HtmlElemUtil.setClass(this.renderer, hostElementRef, 'gln-overlay-events-auto', true);
     // Adding a class so that custom styles can be applied.
     const overlayRef = HtmlElemUtil.getElementRef(overlay);
-    HtmlElemUtil.setAttr(this.renderer, overlayRef, CSS_CLASS_OVERLAY, '');
+    HtmlElemUtil.setAttr(this.renderer, overlayRef, 'glnsp-overlay', '');
 
     const panelRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(overlay?.children[0]?.children[0] as HTMLElement);
     const panelHeight = this.getHeight(panelRef);
-    if (!this.isNoAnimation && panelHeight > 0) {
+    if (!this.noAnimation && panelHeight > 0) {
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
     }
     // We cannot get the actual sizes and positions of elements if they are affected by a transformation.
@@ -492,11 +517,15 @@ export class GlnSelectComponent
         panelRef.nativeElement.scrollTo(0, positionY);
       }
     }
-    if (!this.isNoAnimation) {
-      const panelWrapRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(overlay?.children[0] as HTMLElement);
+    const panelWrapRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(overlay?.children[0] as HTMLElement);
+    if (this.noAnimation) {
+      HtmlElemUtil.setClass(this.renderer, panelWrapRef, 'gln-no-animation', true);
+      HtmlElemUtil.setAttr(this.renderer, panelWrapRef, 'noAnm', '');
+    } else {
       // Add an attribute for animation and transformation.
       HtmlElemUtil.setAttr(this.renderer, panelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, '');
     }
+
     // Set the font size for the overlay.
     if (this.triggerFontSize > 0) {
       overlay.style.fontSize = `${this.triggerFontSize}px`;
@@ -509,7 +538,7 @@ export class GlnSelectComponent
   /** Handles all keypress events for the component's panel. */
   public scoreboardKeydown(event: KeyboardEvent): void {
     if (!this.disabled) {
-      // // console.log(`    scoreboardKeydown()`, event); // TODO del;
+      // console.log(`    scoreboardKeydown()`, event); // TODO del;
       if (!this.isPanelOpen) {
         // Open the selection panel by pressing the keys: 'up arrow', 'down arrow', 'space' and 'enter'.
         if (['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(event.key)) {
@@ -551,12 +580,12 @@ export class GlnSelectComponent
   }
   public clear(): void {
     if (!this.disabled && !this.isEmpty()) {
-      this.selectedOptions.clear();
+      this.selectedOptionItems.clear();
       // Select the first option with the value null.
-      const optionWithValueNull = !this.multiple ? this.selectedOptions.findOptionByValue(null, this.options) : null;
+      const optionWithValueNull = !this.multiple ? this.selectedOptionItems.findOptionByValue(null, this.options) : null;
       if (optionWithValueNull) {
         // Set the selected options to the new list of options.
-        this.selectedOptions.setSelectionOptions([optionWithValueNull], this.options);
+        this.selectedOptionItems.setSelectionOptions([optionWithValueNull], this.options);
       }
       this.updateValueDataAndIsFilledAndValidity(this.multiple ? [] : null);
       this.changeDetectorRef.markForCheck();
@@ -567,11 +596,11 @@ export class GlnSelectComponent
     const addOptions = addOption !== null ? [addOption] : [];
     if (!this.disabled && addOptions.length > 0) {
       // Get a new list of options.
-      const mergeOptions: GlnOptionComponent[] = this.selectedOptions.mergeOptions(!!this.multiple, addOptions, this.options);
+      const mergeOptions = this.selectedOptionItems.mergeOptions(!!this.multiple, addOptions, this.options) as GlnOptionComponent[];
       // Set the selected options to the new list of items.
-      this.selectedOptions.setSelectionOptions(mergeOptions, this.options);
+      this.selectedOptionItems.setSelectionOptions(mergeOptions, this.options);
 
-      const values = this.selectedOptions.getValues();
+      const values = this.selectedOptionItems.getValues();
       const value = values.length > 0 ? values[0] : null;
       this.updateValueDataAndIsFilledAndValidity(this.multiple ? values : value); // TODO del; => this.onChange(this.valueData);
       this.changeDetectorRef.markForCheck();
@@ -580,7 +609,7 @@ export class GlnSelectComponent
     }
   }
   public log(text: string): void {
-    // console.log(text); // TODO del;
+    console.log(text); // TODO del;
   }
   // ** Proteced methods **
 
@@ -602,7 +631,7 @@ export class GlnSelectComponent
 
   private updateValueDataAndIsFilledAndValidity(newValueData: unknown | unknown[] | null): void {
     this.valueData = newValueData;
-    this.isFilled = !this.isEmpty() && this.selectedOptions.items.length > 0;
+    this.isFilled = !this.isEmpty() && this.selectedOptions.length > 0;
     // Calling the validation method for the new value.
     this.onChange(this.valueData);
   }

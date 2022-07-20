@@ -1,16 +1,18 @@
-<span *ngIf="multiple"
+<span *ngIf="checkmark"
   cbar
   class="gln-checkbar"
   [formGroup]="formGroup">
   <input type="checkbox"
     cbox
     class="gln-checkbox"
-    [formControl]="formControl" />
+    formControlName="checkinfo" />
 </span>
-<ng-content></ng-content>
+<div #contentRef>
+  <ng-content></ng-content>
+</div>
 
-<!-- <gln-touch-ripple *ngIf="!disabled && !parent?.noRipple">
-</gln-touch-ripple> -->
+<gln-touch-ripple *ngIf="!disabled && !parent?.noRipple">
+</gln-touch-ripple>
 
 <!--
 <mat-pseudo-checkbox *ngIf="multiple" class="mat-option-pseudo-checkbox"

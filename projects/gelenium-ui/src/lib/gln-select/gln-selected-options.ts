@@ -1,9 +1,9 @@
-import { GlnOptionComponent } from '../gln-option/gln-option.component';
+import { GlnOptionItem } from '../gln-option/gln-option-parent.interface';
 
 /** Class for working with selected options. */
 export class GlnSelectedOptions {
   /** List of selected options. */
-  public items: GlnOptionComponent[] = [];
+  public items: GlnOptionItem[] = [];
 
   get isEmpty(): boolean {
     return this.items.length === 0;
@@ -30,18 +30,18 @@ export class GlnSelectedOptions {
     return result;
   }
   /** Get the option by the specified value. */
-  public findOptionByValue(value: unknown | null, options: GlnOptionComponent[]): GlnOptionComponent | null {
-    let result: GlnOptionComponent | null = null;
+  public findOptionByValue(value: unknown | null, options: GlnOptionItem[]): GlnOptionItem | null {
+    let result: GlnOptionItem | null = null;
     for (let idx = 0; idx < options.length && !result; idx++) {
       result = options[idx].value === value ? options[idx] : result;
     }
     return result;
   }
 
-  public mergeOptions(multiple: boolean, addItems: GlnOptionComponent[], options: GlnOptionComponent[]): GlnOptionComponent[] {
-    const result: GlnOptionComponent[] = [];
+  public mergeOptions(multiple: boolean, addItems: GlnOptionItem[], options: GlnOptionItem[]): GlnOptionItem[] {
+    const result: GlnOptionItem[] = [];
     if (addItems.length > 0 && options.length > 0) {
-      const nextOptions: GlnOptionComponent[] = multiple ? this.items.slice() : [];
+      const nextOptions: GlnOptionItem[] = multiple ? this.items.slice() : [];
       if (multiple) {
         for (let idx = 0; idx < addItems.length; idx++) {
           const addItem = addItems[idx];
@@ -62,8 +62,8 @@ export class GlnSelectedOptions {
     return result;
   }
   /** Get a list of options according to an array of values. */
-  public getOptionsByValues(newValue: unknown | unknown[] | null, options: GlnOptionComponent[]): GlnOptionComponent[] {
-    const result: GlnOptionComponent[] = [];
+  public getOptionsByValues(newValue: unknown | unknown[] | null, options: GlnOptionItem[]): GlnOptionItem[] {
+    const result: GlnOptionItem[] = [];
     const values: unknown[] = Array.isArray(newValue) ? newValue : [newValue];
     const buff = values.slice();
     for (let idx = 0; idx < options.length && buff.length > 0; idx++) {
@@ -76,8 +76,8 @@ export class GlnSelectedOptions {
     return result;
   }
   /** Set the selected options to the new list of items. */
-  public setSelectionOptions(newItems: GlnOptionComponent[], options: GlnOptionComponent[]): void {
-    const currentItems: GlnOptionComponent[] = this.items.slice();
+  public setSelectionOptions(newItems: GlnOptionItem[], options: GlnOptionItem[]): void {
+    const currentItems: GlnOptionItem[] = this.items.slice();
     for (let idx = 0; idx < newItems.length; idx++) {
       const newItem = newItems[idx];
       const index = currentItems.indexOf(newItem);

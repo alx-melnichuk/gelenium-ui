@@ -570,7 +570,7 @@ export class SelectComponent &#123;
       "noIcon" - Hide the display of the status icon of the dropdown list of options.
     </li>
     <li>
-      "noAnimation" - Hide the display of the animation when the dropdown list of
+      "isNoAnimation" - Hide the display of the animation when the dropdown list of
       options is expanded.
     </li>
     <li>
@@ -629,13 +629,13 @@ export class SelectComponent &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: noIcon, noAnimation.</em>
+          <em>Attribute: noIcon, isNoAnimation.</em>
         </small>
       </div>
       <gln-select formControlName="model02j"
         label="Parameter value 2"
         noIcon
-        noAnimation
+        isNoAnimation
         helperText="Field for parameter 2."
         [exterior]="exterior02c"
         wdFull>
@@ -929,6 +929,10 @@ export class SelectComponent &#123;
         noElevation99
         noAnimation99
         isFixRight9
+        isMultiple
+        isCheckmark
+        isNoRipple99
+        config9="config"
         label="Fruit"
         label9="Parameter value 1"
         [visibleSize]="4"
@@ -942,7 +946,12 @@ export class SelectComponent &#123;
         (closed)="log('closedModel02z')"
         (focus)="log('focusModel02z')"
         (blur)="log('blurModel02z')">
-        <!-- <gln-option><em>None</em></gln-option> -->
+        <gln-option>
+          <em>
+            <script>alert('Privet')</script>
+            None
+          </em>
+        </gln-option>
         <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>

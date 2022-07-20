@@ -1,15 +1,23 @@
-import { GlnFrameSize } from '../gln-frame/gln-frame-size.interface';
-// import { GlnFrameOrnamAlign } from '../directives/gln-frame-ornament/gln-frame-ornam-align.interface';
-import { GlnFrameExterior } from '../gln-frame/gln-frame-exterior.interface';
+import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 
-// Remove to GlnFrameConfig
-export interface GlnSelectConfig {
-  exterior?: GlnFrameExterior;
-  frameSize?: GlnFrameSize;
-  frameSizeValue?: number;
-  isLabelShrink?: boolean;
-  noLabel?: boolean;
-  labelPd?: number; // px
-  // ornamLfAlign?: GlnFrameOrnamAlign;
-  // ornamRgAlign?: GlnFrameOrnamAlign;
+export interface GlnSelectConfig extends GlnFrameConfig {
+  // exterior?: GlnFrameExterior | undefined;
+  // frameSize?: GlnFrameSize | undefined;
+  // frameSizeValue?: number | undefined;
+  // hoverColor?: boolean | undefined;
+  // isLabelShrink?: boolean | undefined;
+  // labelPd?: number | undefined; // px
+  // isNoAnimation?: boolean | undefined;
+  // noLabel?: boolean | undefined;
+  // ornamLfAlign?: GlnFrameOrnamAlign | undefined;
+  // ornamRgAlign?: GlnFrameOrnamAlign | undefined;
+
+  isCheckmark?: boolean | undefined;
+  isFixRight?: boolean | undefined;
+  isMultiple?: boolean | undefined;
+  isNoRipple?: boolean | undefined;
+  noElevation?: boolean | undefined; // ?
+  noIcon?: boolean | undefined;
+  panelClass?: string | string[] | Set<string> | { [key: string]: any } | undefined;
+  // visibleSize = -1; // TODO ??
 }

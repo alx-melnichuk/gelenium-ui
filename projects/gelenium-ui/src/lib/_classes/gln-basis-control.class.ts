@@ -17,24 +17,24 @@ import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 @Directive()
-export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor {
+export abstract class GlnBasisControl implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor {
   @Input()
   public id = '';
   @Input()
   public isDisabled: string | null = null;
   @Input()
-  public isRequired: string | null = null; // Is in GlnBasisFrame.
+  public isNoAnimation: string | boolean | null = null;
+  @Input()
+  public isRequired: string | null = null;
   @Input()
   public isValueInit: string | null = null;
-  @Input()
-  public noAnimation: string | boolean | null = null;
 
   @Output()
   readonly writeValueInit: EventEmitter<() => void> = new EventEmitter();
 
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
-  public isNoAnimation: boolean | null = null; // Binding attribute "noAnimation".
   public isWriteValueInit: boolean | null = null;
+  public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
   public required: boolean | null = null; // Binding attribute "isRequired".
   public valueInit: boolean | null = null; // Binding attribute "isValueInit".
 
@@ -62,8 +62,8 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
     if (changes.isValueInit) {
       this.valueInit = BooleanUtil.init(this.isValueInit);
     }
-    if (changes.noAnimation) {
-      this.isNoAnimation = BooleanUtil.init(this.noAnimation != null ? '' + this.noAnimation : null);
+    if (changes.isNoAnimation) {
+      this.noAnimation = BooleanUtil.init(this.isNoAnimation != null ? '' + this.isNoAnimation : null);
     }
   }
 

@@ -7,13 +7,16 @@ import {
   Inject,
   Input,
   OnChanges,
-  OnInit,
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import { BooleanUtil } from '../_utils/boolean.util';
-import { HtmlElemUtil } from '../_utils/html-elem.util';
 
+/**
+ * The parent element must have css styles:
+ * - position: relative;
+ * - overflow: hidden;
+ */
 const RIPPLE_CLASS = 'glntr-ripple';
 let uniqueIdCounter = 0;
 
@@ -25,14 +28,13 @@ let uniqueIdCounter = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnTouchRippleComponent implements OnChanges, OnInit {
+export class GlnTouchRippleComponent implements OnChanges {
   @Input()
   public id = `glntr-${uniqueIdCounter++}`;
   @Input()
   public isCenter: string | null = null;
 
   private center = false;
-  private checkParentSuccessful = false;
 
   constructor(private hostRef: ElementRef<HTMLElement>, @Inject(DOCUMENT) private document: Document) {}
 
@@ -47,21 +49,6 @@ export class GlnTouchRippleComponent implements OnChanges, OnInit {
     }
   }
 
-  public ngOnInit(): void {
-    const parentElement = this.hostRef.nativeElement.parentElement;
-    if (parentElement != null) {
-      const checkRelative = getComputedStyle(parentElement).getPropertyValue('position') === 'relative';
-      const checkOverflow = getComputedStyle(parentElement).getPropertyValue('overflow') === 'hidden';
-      if (!checkRelative) {
-        throw new Error(`The parent element must have "position: relative".`);
-      }
-      if (!checkOverflow) {
-        throw new Error(`The parent element must have "overflow: hidden".`);
-      }
-      this.checkParentSuccessful = checkRelative && checkOverflow;
-    }
-  }
-
   // ** Public API **
 
   public touchRipple(event: MouseEvent, isCenter: boolean = this.center): void {
@@ -72,12 +59,12 @@ export class GlnTouchRippleComponent implements OnChanges, OnInit {
 
   private doRipple(event: MouseEvent, isCenter: boolean): void {
     const parentElement = this.hostRef.nativeElement.parentElement;
-    if (!this.checkParentSuccessful || !parentElement) {
+    if (!parentElement) {
       return;
     }
     const clientHeight = parentElement.clientHeight;
     const clientWidth = parentElement.clientWidth;
-    if (this.checkParentSuccessful && clientHeight && clientWidth && event.currentTarget) {
+    if (clientHeight && clientWidth && event.currentTarget) {
       const radius = Math.min(clientWidth, clientHeight) / 2;
       const rect = (event.currentTarget as HTMLElement).getBoundingClientRect() || { left: 0, top: 0 };
       let offsetX = Math.round(event.clientX - rect.left);
@@ -120,13 +107,6 @@ export class GlnTouchRippleComponent implements OnChanges, OnInit {
         { once: true }
       );
       this.hostRef.nativeElement.appendChild(circle);
-
-      // const startTimer = set Timeout(() => {
-      //   clear Timeout(startTimer);
-      //   if (this.hostRef.nativeElement.children.length > 0) {
-      //     this.hostRef.nativeElement.children.item(0)?.remove();
-      //   }
-      // }, 1000);
     }
   }
 }

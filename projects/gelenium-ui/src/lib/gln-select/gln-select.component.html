@@ -19,9 +19,9 @@
       [isError]="!!errors || getBoolean(isError)"
       [isFilled]="isFilled"
       [isLabelShrink]="getBoolean(lbShrink)"
+      [isNoAnimation]="noAnimation || isWriteValueInit"
       [isRequired]="required"
       [label]="label"
-      [noAnimation]="isNoAnimation || isWriteValueInit"
       [noLabel]="getBoolean(noLabel)"
       [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
       #glnFrameSize="glnFrameSize"
@@ -65,8 +65,8 @@
         <ng-container [ngSwitch]="isFilled">
           <ng-container *ngSwitchCase="true">
             <ng-container
-              *ngFor="let item of selectedOptions.items; count as countVal; last as isLast; trackBy: trackByOption;">
-              <span [innerHTML]="item.getTrustHtml()"></span>
+              *ngFor="let option of selectedOptions; count as countVal; last as isLast; trackBy: trackByOption;">
+              <span [innerHTML]="option.getTrustHtml()"></span>
               <span *ngIf="countVal > 1 && !isLast">, </span>
             </ng-container>
           </ng-container>
@@ -102,8 +102,8 @@
   (detach)="isPanelOpen ? close() : null">
 
   <div glnsp-wrap
-    [ngClass]="['gln-select-panel-wrap', (isNoAnimation ? 'gln-no-animation' : ''), (getBoolean(noElevation) ? 'gln-no-elevation' : '')]"
-    [attr.noAnimation]="isNoAnimation ? '' : null"
+    [ngClass]="['gln-select-panel-wrap', (noAnimation ? 'gln-no-animation' : ''), (getBoolean(noElevation) ? 'gln-no-elevation' : '')]"
+    [attr.noAnimation]="noAnimation ? '' : null"
     (animationend)="hasPanelAnimation = isPanelOpen"
     (animationcancel)="hasPanelAnimation = isPanelOpen">
     <div glns-panel

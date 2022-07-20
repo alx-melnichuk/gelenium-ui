@@ -48,7 +48,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
   public label = '';
   @Input()
-  public noAnimation: boolean | null = null;
+  public isNoAnimation: boolean | null = null;
   @Input()
   public noLabel: boolean | null = null;
 
@@ -67,6 +67,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public hideLabel: boolean | null = null;
   public hoverFocus: boolean | null = null;
   public labelShrink: boolean | null = null;
+  public noAnimation: boolean | null = null;
 
   constructor(
     @Optional() @Inject(GLN_FRAME_CONFIG) private rootConfig: GlnFrameConfig | null,
@@ -93,9 +94,9 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.labelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig?.isLabelShrink;
       this.settingLabelShrink(this.renderer, this.hostRef, this.labelShrink);
     }
-    if (changes.noAnimation) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-animation', !!this.noAnimation);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noAnm', this.noAnimation ? '' : null);
+    if (changes.isNoAnimation || (changes.config && this.isNoAnimation == null)) {
+      this.noAnimation = this.isNoAnimation != null ? this.isNoAnimation : !!this.currConfig?.isNoAnimation;
+      this.settingNoAnimation(this.renderer, this.hostRef, this.noAnimation);
     }
     if (changes.noLabel || (changes.config && this.noLabel == null)) {
       this.hideLabel = this.noLabel != null ? this.noLabel : !!this.currConfig?.noLabel;
@@ -128,6 +129,10 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     if (this.labelShrink == null) {
       this.labelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig?.isLabelShrink;
       this.settingLabelShrink(this.renderer, this.hostRef, this.labelShrink);
+    }
+    if (this.noAnimation == null) {
+      this.noAnimation = this.isNoAnimation != null ? this.isNoAnimation : !!this.currConfig?.isNoAnimation;
+      this.settingNoAnimation(this.renderer, this.hostRef, this.noAnimation);
     }
     if (this.hideLabel == null) {
       this.hideLabel = this.noLabel != null ? this.noLabel : !!this.currConfig?.noLabel;
@@ -163,6 +168,11 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   private settingLabelShrink(renderer: Renderer2, elem: ElementRef<HTMLElement>, isLabelShrink: boolean): void {
     HtmlElemUtil.setClass(renderer, elem, 'glnf-shrink', isLabelShrink);
     HtmlElemUtil.setAttr(renderer, elem, 'shr', isLabelShrink ? '' : null);
+  }
+
+  private settingNoAnimation(renderer: Renderer2, elem: ElementRef<HTMLElement>, isNoAnimation: boolean): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-animation', isNoAnimation);
+    HtmlElemUtil.setAttr(renderer, elem, 'noAnm', isNoAnimation ? '' : null);
   }
 
   private settingNoLabel(renderer: Renderer2, elem: ElementRef<HTMLElement>, noLabel: boolean): void {
