@@ -288,7 +288,7 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
     [exterior]="glnFrameExteriorInput.exterior"
     [config]="currConfig"
     [isLabelShrink]="getBoolean(lbShrink)"
-    [noLabel]="getBoolean(noLabel)"
+    [isNoLabel]="getBoolean(isNoLabel)"
     [isError]="!!formControl.errors || getBoolean(isError)"
 
     #glnFrameSize="glnFrameSize"

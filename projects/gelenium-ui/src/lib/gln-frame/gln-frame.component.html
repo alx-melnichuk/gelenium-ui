@@ -1,4 +1,4 @@
-<label *ngIf="!hideLabel"
+<label *ngIf="!noLabel"
   class="glnf-label">
   <span lbl>{{ label }}</span><span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}
   </span>
@@ -12,7 +12,7 @@
     dcr-br
     class="glnf-fieldset"
     aria-hidden="true">
-    <legend *ngIf="!hideLabel"
+    <legend *ngIf="!noLabel"
       class="glnf-legend">
       <span lgn>{{ label }}</span><span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}
       </span>

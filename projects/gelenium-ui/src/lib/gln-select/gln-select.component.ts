@@ -102,6 +102,8 @@ export class GlnSelectComponent
   // @Input()
   // public isNoAnimation: string | boolean | null = null; // Is in GlnBasisControl.
   @Input()
+  public isNoLabel: string | null = null;
+  @Input()
   public isNoRipple: string | boolean | null | undefined;
   @Input()
   public isReadOnly: string | null = null;
@@ -117,8 +119,6 @@ export class GlnSelectComponent
   public noElevation: string | null = null;
   @Input()
   public noIcon: string | null = null;
-  @Input()
-  public noLabel: string | null = null;
   @Input()
   public ornamLfAlign: string | null = null; // OrnamAlign
   @Input()

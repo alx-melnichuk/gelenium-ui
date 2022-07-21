@@ -44,13 +44,13 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
   public isLabelShrink: boolean | null = null;
   @Input()
+  public isNoAnimation: boolean | null = null;
+  @Input()
+  public isNoLabel: boolean | null = null;
+  @Input()
   public isRequired: boolean | null = null;
   @Input()
   public label = '';
-  @Input()
-  public isNoAnimation: boolean | null = null;
-  @Input()
-  public noLabel: boolean | null = null;
 
   public get isOutlinedExterior(): boolean {
     return GlnFrameExterior.outlined === this.exterior;
@@ -64,7 +64,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
 
   public currConfig: GlnFrameConfig | null = null;
   public frameExterior: GlnFrameExterior | null = null;
-  public hideLabel: boolean | null = null;
+  public noLabel: boolean | null = null;
   public hoverFocus: boolean | null = null;
   public labelShrink: boolean | null = null;
   public noAnimation: boolean | null = null;
@@ -98,9 +98,9 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.noAnimation = this.isNoAnimation != null ? this.isNoAnimation : !!this.currConfig?.isNoAnimation;
       this.settingNoAnimation(this.renderer, this.hostRef, this.noAnimation);
     }
-    if (changes.noLabel || (changes.config && this.noLabel == null)) {
-      this.hideLabel = this.noLabel != null ? this.noLabel : !!this.currConfig?.noLabel;
-      this.settingNoLabel(this.renderer, this.hostRef, this.hideLabel);
+    if (changes.isNoLabel || (changes.config && this.isNoLabel == null)) {
+      this.noLabel = this.isNoLabel != null ? this.isNoLabel : !!this.currConfig?.isNoLabel;
+      this.settingNoLabel(this.renderer, this.hostRef, this.noLabel);
     }
     if (changes.isDisabled) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', !!this.isDisabled);
@@ -134,9 +134,9 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.noAnimation = this.isNoAnimation != null ? this.isNoAnimation : !!this.currConfig?.isNoAnimation;
       this.settingNoAnimation(this.renderer, this.hostRef, this.noAnimation);
     }
-    if (this.hideLabel == null) {
-      this.hideLabel = this.noLabel != null ? this.noLabel : !!this.currConfig?.noLabel;
-      this.settingNoLabel(this.renderer, this.hostRef, this.hideLabel);
+    if (this.noLabel == null) {
+      this.noLabel = this.isNoLabel != null ? this.isNoLabel : !!this.currConfig?.isNoLabel;
+      this.settingNoLabel(this.renderer, this.hostRef, this.noLabel);
     }
   }
 

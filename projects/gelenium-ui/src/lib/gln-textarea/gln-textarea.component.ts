@@ -86,6 +86,8 @@ export class GlnTextareaComponent
   // @Input()
   // public isNoAnimation: string | boolean | null = null; // Is in GlnBasisControl.
   @Input()
+  public isNoLabel: string | null = null;
+  @Input()
   public isReadOnly: string | null = null;
   // @Input()
   // public isRequired: string | null = null;// Is in GlnBasisControl.
@@ -103,8 +105,6 @@ export class GlnTextareaComponent
   public minLength: number | null = null;
   @Input()
   public minRows: number | null = null;
-  @Input()
-  public noLabel: string | null = null;
   @Input()
   public ornamLfAlign: string | null = null; // OrnamAlign
   @Input()

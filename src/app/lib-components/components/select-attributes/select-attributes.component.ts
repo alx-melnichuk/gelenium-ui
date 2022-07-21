@@ -75,7 +75,7 @@ export class SelectAttributesComponent {
 
   priz = false;
   config: GlnSelectConfig = {
-    // noLabel: true,
+    // isNoLabel: true,
     // noAnimation: true,
     isNoRipple: true,
   };

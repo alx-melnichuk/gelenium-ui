@@ -23,9 +23,9 @@
     <li>"isError" - a sign that the field is in error status (isError);</li>
     <li>"isFilled" - Indicates that the input element is not empty (filled).</li>
     <li>"isLabelShrink" - An indication that the label has moved up and shrunk.</li>
+    <li>"isNoLabel" - Hide label display.</li>
     <li>"isRequired" - a sign that the field is required (isRequired);</li>
     <li>"label" - The content of the label.</li>
-    <li>"noLabel" - Hide label display.</li>
   </ul>
   <p>
     For example, we will use the "GlnInput" component, since it contains
@@ -83,12 +83,12 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: noLabel.</em>
+          <em>Attribute: isNoLabel.</em>
         </small>
       </div>
       <gln-input formControlName="model02c"
-        label="noLabel"
-        noLabel
+        label="isNoLabel"
+        isNoLabel
         helperText="The label is not displayed."
         [exterior]="exterior02a">
       </gln-input>
@@ -155,12 +155,12 @@
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: noLabel.&lt;/em&gt;
+          &lt;em&gt;Attribute: isNoLabel.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02c"
-        label="noLabel"
-        noLabel
+        label="isNoLabel"
+        isNoLabel
         helperText="The label is not displayed."
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;

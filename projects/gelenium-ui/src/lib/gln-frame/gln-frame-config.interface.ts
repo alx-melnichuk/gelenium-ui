@@ -11,7 +11,7 @@ export interface GlnFrameConfig {
   isLabelShrink?: boolean | undefined;
   labelPd?: number | undefined; // px
   isNoAnimation?: boolean | undefined;
-  noLabel?: boolean | undefined;
+  isNoLabel?: boolean | undefined;
   ornamLfAlign?: GlnFrameOrnamAlign | undefined;
   ornamRgAlign?: GlnFrameOrnamAlign | undefined;
 }
