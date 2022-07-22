@@ -1,10 +1,10 @@
 import { InjectionToken } from '@angular/core';
 
 /** Describes the interface of a option element. */
-export interface GlnOptionItem {
-  value: unknown | null;
-  selected: boolean | null;
-  setSelected(value: boolean | null): void;
+export abstract class GlnOptionItem {
+  public abstract value: unknown | null;
+  public abstract selected: boolean | null;
+  public abstract setSelected(value: boolean | null): void;
 }
 
 /**

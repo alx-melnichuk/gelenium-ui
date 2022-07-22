@@ -939,11 +939,13 @@ export class SelectComponent &#123;
         helperText="Field 1"
         helperText9="Field for parameter 1."
         [exterior]="exterior02z"
+        panelClass9="panelClass1"
         wdFull9
         (focused)="log('focusedModel02z')"
         (blured)="log('bluredModel02z')"
         (opened)="log('openedModel02z')"
         (closed)="log('closedModel02z')"
+        selected9="selected($event)"
         (focus)="log('focusModel02z')"
         (blur)="log('blurModel02z')">
         <gln-option>

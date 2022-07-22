@@ -1,9 +1,9 @@
 import { GlnOptionItem } from '../gln-option/gln-option-parent.interface';
 
 /** Class for working with selected options. */
-export class GlnSelectedOptions {
+export class GlnSelectedOptionItems<T extends GlnOptionItem> {
   /** List of selected options. */
-  public items: GlnOptionItem[] = [];
+  public items: T[] = [];
 
   get isEmpty(): boolean {
     return this.items.length === 0;
@@ -30,40 +30,42 @@ export class GlnSelectedOptions {
     return result;
   }
   /** Get the option by the specified value. */
-  public findOptionByValue(value: unknown | null, options: GlnOptionItem[]): GlnOptionItem | null {
-    let result: GlnOptionItem | null = null;
+  public findOptionByValue(value: unknown | null, options: T[]): T | null {
+    let result: T | null = null;
     for (let idx = 0; idx < options.length && !result; idx++) {
       result = options[idx].value === value ? options[idx] : result;
     }
     return result;
   }
 
-  public mergeOptions(multiple: boolean, addItems: GlnOptionItem[], options: GlnOptionItem[]): GlnOptionItem[] {
-    const result: GlnOptionItem[] = [];
-    if (addItems.length > 0 && options.length > 0) {
-      const nextOptions: GlnOptionItem[] = multiple ? this.items.slice() : [];
+  public mergeOptions(multiple: boolean, addItems: T[]): { added: T[]; deleted: T[]; current: T[] } {
+    const added: T[] = [];
+    const deleted: T[] = [];
+    const current: T[] = multiple ? this.items.slice() : [];
+    if (addItems.length > 0) {
       if (multiple) {
         for (let idx = 0; idx < addItems.length; idx++) {
           const addItem = addItems[idx];
-          const index = nextOptions.indexOf(addItem);
+          const index = current.indexOf(addItem);
           if (index > -1) {
-            nextOptions.splice(index, 1);
+            deleted.push(...current.splice(index, 1));
           } else {
-            nextOptions.push(addItem);
+            current.push(addItem);
+            added.push(addItem);
           }
         }
       } else {
         for (let i = 0; i < addItems.length; i++) {
-          nextOptions.push(addItems[i]);
+          current.push(addItems[i]);
+          added.push(addItems[i]);
         }
       }
-      result.push(...options.filter((item) => nextOptions.includes(item)));
     }
-    return result;
+    return { added, deleted, current };
   }
   /** Get a list of options according to an array of values. */
-  public getOptionsByValues(newValue: unknown | unknown[] | null, options: GlnOptionItem[]): GlnOptionItem[] {
-    const result: GlnOptionItem[] = [];
+  public getOptionsByValues(newValue: unknown | unknown[] | null, options: T[]): T[] {
+    const result: T[] = [];
     const values: unknown[] = Array.isArray(newValue) ? newValue : [newValue];
     const buff = values.slice();
     for (let idx = 0; idx < options.length && buff.length > 0; idx++) {
@@ -76,8 +78,8 @@ export class GlnSelectedOptions {
     return result;
   }
   /** Set the selected options to the new list of items. */
-  public setSelectionOptions(newItems: GlnOptionItem[], options: GlnOptionItem[]): void {
-    const currentItems: GlnOptionItem[] = this.items.slice();
+  public setSelectionOptions(newItems: T[], options: T[]): void {
+    const currentItems: T[] = this.items.slice();
     for (let idx = 0; idx < newItems.length; idx++) {
       const newItem = newItems[idx];
       const index = currentItems.indexOf(newItem);

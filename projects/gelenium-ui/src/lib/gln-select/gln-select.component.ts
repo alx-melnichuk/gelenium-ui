@@ -47,7 +47,8 @@ import { ScreenUtil } from '../_utils/screen.util';
 
 import { GlnSelectConfig } from './gln-select-config.interface';
 import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
-import { GlnSelectedOptions } from './gln-selected-options';
+import { GlnSelectedOptionItems } from './gln-selected-option-items';
+import { GlnSelectionChange } from './gln-selection-change.interface';
 
 let uniqueIdCounter = 0;
 
@@ -56,8 +57,9 @@ export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT
 const CSS_ATTR_FOR_FRAME_FOCUS = 'foc';
 const CSS_ATTR_FOR_PANEL_OPENING_ANIMATION = 'is-open';
 const CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION = 'is-hide';
-const CSS_PROP_TRANSLATE_Y = '--glnspo-translate-y';
 const CSS_PROP_BORDER_RADIUS = '--glnspo-border-radius';
+const CSS_PROP_MAX_HEIGHT = '--glnspo-max-height';
+const CSS_PROP_TRANSLATE_Y = '--glnspo-translate-y';
 
 @Component({
   selector: 'gln-select',
@@ -160,9 +162,11 @@ export class GlnSelectComponent
   readonly opened: EventEmitter<void> = new EventEmitter();
   @Output()
   readonly closed: EventEmitter<void> = new EventEmitter();
+  // @Output()
+  //readonly writeValueInit: EventEmitter<() => void> = new EventEmitter();
   @Output()
-  readonly selected: EventEmitter<{ value: unknown | null; values: unknown[] }> = new EventEmitter();
-  // @Output() // readonly writeValueInit: EventEmitter<() => void> = new EventEmitter();
+  readonly selected: EventEmitter<{ value: unknown | null; values: unknown[]; change: GlnSelectionChange<GlnOptionComponent> }> =
+    new EventEmitter();
 
   /** Overlay panel with its own parameters. */
   @ViewChild(CdkConnectedOverlay)
@@ -215,7 +219,7 @@ export class GlnSelectComponent
   private fixRight: boolean | null = null;
   private isFocusAttrOnFrame = false;
   private markedOption: GlnOptionComponent | null = null;
-  private selectedOptionItems: GlnSelectedOptions = new GlnSelectedOptions();
+  private selectedOptionItems: GlnSelectedOptionItems<GlnOptionComponent> = new GlnSelectedOptionItems();
   /** Saving the font size of the trigger element. */
   private triggerFontSize = 0;
   /** Saving the frame size of the trigger element. Defines BorderRadius. */
@@ -498,7 +502,7 @@ export class GlnSelectComponent
     HtmlElemUtil.setClass(this.renderer, hostElementRef, 'gln-overlay-events-auto', true);
     // Adding a class so that custom styles can be applied.
     const overlayRef = HtmlElemUtil.getElementRef(overlay);
-    HtmlElemUtil.setAttr(this.renderer, overlayRef, 'glnsp-overlay', '');
+    HtmlElemUtil.setAttr(this.renderer, overlayRef, 'glnspo-select', '');
 
     const panelRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(overlay?.children[0]?.children[0] as HTMLElement);
     const panelHeight = this.getHeight(panelRef);
@@ -533,6 +537,10 @@ export class GlnSelectComponent
     if (this.triggerFrameSize > 0) {
       const borderRadius = NumberUtil.roundTo100(this.triggerFrameSize / 10);
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(borderRadius)?.concat('px'));
+    }
+    const optionHeigth = this.visibleSize > 0 ? this.getOptionHeigth(this.options) : 0;
+    if (optionHeigth > 0) {
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_HEIGHT, NumberUtil.str(optionHeigth * this.visibleSize)?.concat('px'));
     }
   }
   /** Handles all keypress events for the component's panel. */
@@ -578,6 +586,7 @@ export class GlnSelectComponent
       }
     }
   }
+
   public clear(): void {
     if (!this.disabled && !this.isEmpty()) {
       this.selectedOptionItems.clear();
@@ -596,16 +605,16 @@ export class GlnSelectComponent
     const addOptions = addOption !== null ? [addOption] : [];
     if (!this.disabled && addOptions.length > 0) {
       // Get a new list of options.
-      const mergeOptions = this.selectedOptionItems.mergeOptions(!!this.multiple, addOptions, this.options) as GlnOptionComponent[];
+      const deltaOptions = this.selectedOptionItems.mergeOptions(!!this.multiple, addOptions /*, this.options*/);
       // Set the selected options to the new list of items.
-      this.selectedOptionItems.setSelectionOptions(mergeOptions, this.options);
-
+      this.selectedOptionItems.setSelectionOptions(deltaOptions.current, this.options);
+      const change: GlnSelectionChange<GlnOptionComponent> = { added: deltaOptions.added, removed: deltaOptions.deleted };
       const values = this.selectedOptionItems.getValues();
       const value = values.length > 0 ? values[0] : null;
-      this.updateValueDataAndIsFilledAndValidity(this.multiple ? values : value); // TODO del; => this.onChange(this.valueData);
+      this.updateValueDataAndIsFilledAndValidity(this.multiple ? values : value);
       this.changeDetectorRef.markForCheck();
 
-      this.selected.emit({ value: !this.multiple ? value : null, values: this.multiple ? values : [] });
+      this.selected.emit({ value: !this.multiple ? value : null, values: this.multiple ? values : [], change });
     }
   }
   public log(text: string): void {
@@ -650,5 +659,28 @@ export class GlnSelectComponent
       result.setMarked(true);
     }
     return result;
+  }
+
+  private getOptionHeigth(options: GlnOptionComponent[]): number {
+    const value: number[] = [];
+    const count: number[] = [];
+    let countByIndex = -1;
+    let resultIndex = -1;
+    for (let i = 0; i < options.length && countByIndex < 4; i++) {
+      const height = this.getHeight(options[i].hostRef);
+      let index = value.indexOf(height);
+      if (index === -1) {
+        value.push(height);
+        count.push(1);
+        index = value.length - 1;
+      } else {
+        count[index]++;
+      }
+      if (count[index] > countByIndex) {
+        countByIndex = count[index];
+        resultIndex = index;
+      }
+    }
+    return resultIndex > -1 ? value[resultIndex] : 0;
   }
 }

@@ -107,7 +107,8 @@
     (animationend)="hasPanelAnimation = isPanelOpen"
     (animationcancel)="hasPanelAnimation = isPanelOpen">
     <div glns-panel
-      [ngClass]="['gln-select-panel', panelClass]"
+      class="gln-select-panel"
+      [ngClass]="panelClass"
       role="listbox"
       tabindex="-1"
       [attr.id]="id + '-panel'"

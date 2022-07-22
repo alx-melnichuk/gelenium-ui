@@ -32,7 +32,7 @@ let uniqueIdCounter = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnOptionComponent implements GlnOptionItem, OnChanges, OnInit {
+export class GlnOptionComponent extends GlnOptionItem implements OnChanges, OnInit {
   @Input()
   public id = `glno-${uniqueIdCounter++}`;
   @Input()
@@ -58,6 +58,7 @@ export class GlnOptionComponent implements GlnOptionItem, OnChanges, OnInit {
     private sanitizer: DomSanitizer,
     @Optional() @Inject(GLN_OPTION_PARENT) public parent: GlnOptionParent
   ) {
+    super();
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'role', 'option');
   }
 

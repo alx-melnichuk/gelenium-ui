@@ -39,7 +39,7 @@ export class SelectAttributesComponent {
 
   public urlSelect = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_SELECT');
 
-  public fruits = ['mango', 'lemon', 'orange', 'kiwi']; // , 'mango2', 'lemon2', 'orange2', 'kiwi2', 'mango3', 'lemon3', 'orange3', 'kiwi3'];
+  public fruits = ['mango', 'lemon', 'orange', 'kiwi', 'mango2', 'lemon2', 'orange2', 'kiwi2', 'mango3', 'lemon3', 'orange3', 'kiwi3'];
 
   public exterior02a = 'outlined';
   public formGroup02a: FormGroup = new FormGroup({
@@ -79,6 +79,8 @@ export class SelectAttributesComponent {
     // noAnimation: true,
     isNoRipple: true,
   };
+  panelClass1 = 'panelClass1';
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private changeDetectorRef: ChangeDetectorRef) {
     // setTimeout(() => {
@@ -104,4 +106,8 @@ export class SelectAttributesComponent {
   // public mouseupHandling(event: Event): void {
   //   console.log(`mouseupHost() event=`, event);
   // }
+
+  selected(event: any): void {
+    console.log('selected() ', event);
+  }
 }
