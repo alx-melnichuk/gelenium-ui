@@ -47,8 +47,9 @@ import { ScreenUtil } from '../_utils/screen.util';
 
 import { GlnSelectConfig } from './gln-select-config.interface';
 import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
-import { GlnSelectedOptionItems } from './gln-selected-option-items';
 import { GlnSelectionChange } from './gln-selection-change.interface';
+import { GlnOptionUtil } from '../gln-option/gln-option.util';
+import { ArrayUtil } from '../_utils/array.util';
 
 let uniqueIdCounter = 0;
 
@@ -143,11 +144,22 @@ export class GlnSelectComponent
     if (this.multiple && !Array.isArray(newValue)) {
       throw Error('The value must be an array in multi-select mode.');
     }
+    if (!this.multiple && Array.isArray(newValue)) {
+      throw Error('The value must not be an array in single select mode.');
+    }
     if (newValue !== this.valueData || (this.multiple && Array.isArray(newValue))) {
       // Get a list of menu items according to an array of values.
-      const newOptions = this.selectedOptionItems.getOptionsByValues(newValue, this.options);
-      // Set the selected menu items to the new list of items.
-      this.selectedOptionItems.setSelectionOptions(newOptions, this.options);
+      const newOptions = GlnOptionUtil.getOptionsByValues(newValue, this.options);
+      // Which elements of array "this.selectedOptions" are not included in array "newOptions".
+      const removed = ArrayUtil.uninclude<GlnOptionComponent>(this.selectedOptions, newOptions);
+      GlnOptionUtil.setSelected(removed, false);
+      const currentOptions = ArrayUtil.delete<GlnOptionComponent>(this.selectedOptions, removed);
+      // Which elements of array "newOptions" are not included in array "this.selectedOptions".
+      const added = ArrayUtil.uninclude<GlnOptionComponent>(newOptions, this.selectedOptions);
+      GlnOptionUtil.setSelected(added, true);
+      const resultOptions = currentOptions.concat(added);
+      this.selectedOptions = this.options.filter((option) => resultOptions.includes(option));
+
       this.updateValueDataAndIsFilledAndValidity(newValue);
       this.changeDetectorRef.markForCheck();
     }
@@ -207,9 +219,7 @@ export class GlnSelectComponent
   public overlayPanelClass: string | string[] = /*this._defaultOptions?.overlayPanelClass ||*/ '';
   public positions: ConnectedPosition[] = [];
   // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisControl.
-  get selectedOptions(): GlnOptionComponent[] {
-    return this.selectedOptionItems.items as GlnOptionComponent[];
-  }
+  public selectedOptions: GlnOptionComponent[] = [];
   // public valueInit: boolean | null = null; // Binding attribute "isValueInit". // Is in GlnBasisControl.
   /** Strategy for handling scrolling when the selection panel is open. */
   public scrollStrategy: ScrollStrategy;
@@ -219,7 +229,6 @@ export class GlnSelectComponent
   private fixRight: boolean | null = null;
   private isFocusAttrOnFrame = false;
   private markedOption: GlnOptionComponent | null = null;
-  private selectedOptionItems: GlnSelectedOptionItems<GlnOptionComponent> = new GlnSelectedOptionItems();
   /** Saving the font size of the trigger element. */
   private triggerFontSize = 0;
   /** Saving the frame size of the trigger element. Defines BorderRadius. */
@@ -298,7 +307,7 @@ export class GlnSelectComponent
 
   public override ngAfterContentInit(): void {
     // Initialized when the value is received via "writeValue()" but the list of menu items is just now.
-    if (this.selectedOptionItems.isEmpty && this.options.length > 0) {
+    if (this.selectedOptions.length === 0 && this.options.length > 0) {
       const newValue = this.valueData;
       this.valueData = undefined;
       this.value = newValue;
@@ -589,12 +598,13 @@ export class GlnSelectComponent
 
   public clear(): void {
     if (!this.disabled && !this.isEmpty()) {
-      this.selectedOptionItems.clear();
+      GlnOptionUtil.setSelected(this.selectedOptions, false);
+      this.selectedOptions.length = 0;
       // Select the first option with the value null.
-      const optionWithValueNull = !this.multiple ? this.selectedOptionItems.findOptionByValue(null, this.options) : null;
-      if (optionWithValueNull) {
-        // Set the selected options to the new list of options.
-        this.selectedOptionItems.setSelectionOptions([optionWithValueNull], this.options);
+      const optionWithValueNull = !this.multiple ? GlnOptionUtil.findByValue(this.selectedOptions, null) : null;
+      if (optionWithValueNull !== null) {
+        this.selectedOptions = [optionWithValueNull];
+        GlnOptionUtil.setSelected(this.selectedOptions, true);
       }
       this.updateValueDataAndIsFilledAndValidity(this.multiple ? [] : null);
       this.changeDetectorRef.markForCheck();
@@ -604,17 +614,29 @@ export class GlnSelectComponent
   public selectionOptionElement(addOption: GlnOptionComponent | null): void {
     const addOptions = addOption !== null ? [addOption] : [];
     if (!this.disabled && addOptions.length > 0) {
-      // Get a new list of options.
-      const deltaOptions = this.selectedOptionItems.mergeOptions(!!this.multiple, addOptions /*, this.options*/);
-      // Set the selected options to the new list of items.
-      this.selectedOptionItems.setSelectionOptions(deltaOptions.current, this.options);
-      const change: GlnSelectionChange<GlnOptionComponent> = { added: deltaOptions.added, removed: deltaOptions.deleted };
-      const values = this.selectedOptionItems.getValues();
+      const added: GlnOptionComponent[] = [];
+      const removed: GlnOptionComponent[] = [];
+      const currentOptions: GlnOptionComponent[] = [];
+      if (this.multiple) {
+        // Which elements of array "this.selectedOptions" are included in array "addOptions".
+        removed.push(...ArrayUtil.include<GlnOptionComponent>(this.selectedOptions, addOptions));
+      } else {
+        // Which elements of array "this.selectedOptions" are not included in array "addOptions".
+        removed.push(...ArrayUtil.uninclude<GlnOptionComponent>(this.selectedOptions, addOptions));
+      }
+      GlnOptionUtil.setSelected(removed, false);
+      currentOptions.push(...ArrayUtil.delete<GlnOptionComponent>(this.selectedOptions, removed));
+      // Which elements of array "addOptions" are not included in array "this.selectedOptions".
+      added.push(...ArrayUtil.uninclude<GlnOptionComponent>(addOptions, this.selectedOptions));
+      GlnOptionUtil.setSelected(added, true);
+      this.selectedOptions = currentOptions.concat(added);
+
+      const values = GlnOptionUtil.getValues(this.selectedOptions);
       const value = values.length > 0 ? values[0] : null;
       this.updateValueDataAndIsFilledAndValidity(this.multiple ? values : value);
       this.changeDetectorRef.markForCheck();
 
-      this.selected.emit({ value: !this.multiple ? value : null, values: this.multiple ? values : [], change });
+      this.selected.emit({ value: !this.multiple ? value : null, values: this.multiple ? values : [], change: { added, removed } });
     }
   }
   public log(text: string): void {
