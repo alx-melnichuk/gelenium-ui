@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 import { GlnButtonConfig, GlnFrameSize, GlnFrameSizeUtil } from 'gelenium-ui';
 
@@ -66,17 +65,12 @@ export class ButtonBorderRadiusComponent {
   public sizeLarge = GlnFrameSize.large;
   public sizeHuge = GlnFrameSize.huge;
 
-  constructor(private sanitizer: DomSanitizer) {}
-
   public getLabel(exterior: string): string {
     return exterior ? exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   }
 
   public getValue(value: GlnFrameSize): number {
     return GlnFrameSizeUtil.getValue(value) || 0;
-  }
-  public safeStyle(style: string): SafeStyle {
-    return this.sanitizer.bypassSecurityTrustStyle(style);
   }
   public round(value: number): number {
     return Math.round(value * 100) / 100;

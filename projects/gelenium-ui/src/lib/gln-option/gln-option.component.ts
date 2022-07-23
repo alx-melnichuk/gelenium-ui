@@ -15,7 +15,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
 
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
@@ -55,7 +54,6 @@ export class GlnOptionComponent extends GlnOptionItem implements OnChanges, OnIn
     public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
     private changeDetectorRef: ChangeDetectorRef,
-    private sanitizer: DomSanitizer,
     @Optional() @Inject(GLN_OPTION_PARENT) public parent: GlnOptionParent
   ) {
     super();
@@ -93,7 +91,6 @@ export class GlnOptionComponent extends GlnOptionItem implements OnChanges, OnIn
   }
 
   public getTrustHtml(): string {
-    // return this.sanitizer.bypassSecurityTrustHtml((this.contentRef.nativeElement.innerHTML || '').trim()) as string;
     return (this.contentRef.nativeElement.innerHTML || '').trim();
   }
   /** Set or uncheck "checkmark". */

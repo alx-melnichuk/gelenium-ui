@@ -73,8 +73,8 @@
 </div>
 
 <div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeShort) * borderRadius / 100) + 'px')">
+  [attr.style]="propRadius + ':'
+    + round(getValue(sizeShort) * borderRadius / 100) + 'px'">
   <div class="app-elem">
     <gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
@@ -107,8 +107,8 @@
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeShort) * borderRadius / 100) + 'px')"&gt;
+  [attr.style]="propRadius + ':'
+    + round(getValue(sizeShort) * borderRadius / 100) + 'px'"&gt;
   &lt;div class="app-elem"&gt;
     &lt;gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
@@ -154,17 +154,12 @@ export class ButtonComponent &#123;
 
   public sizeShort = GlnFrameSize.short;
 
-  constructor(private sanitizer: DomSanitizer) &#123;&#125;
-
   public getLabel(exterior: string): string &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
   public getValue(value: GlnFrameSize): number &#123;
     return GlnFrameSizeUtil.getValue(value) || 0;
-  &#125;
-  public safeStyle(style: string): SafeStyle &#123;
-    return this.sanitizer.bypassSecurityTrustStyle(style);
   &#125;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
@@ -198,8 +193,8 @@ export class ButtonComponent &#123;
 </div>
 
 <div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeSmall) * borderRadius / 100) + 'px')">
+  [attr.style]="propRadius + ':'
+    + round(getValue(sizeSmall) * borderRadius / 100) + 'px'">
   <div class="app-elem">
     <gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
@@ -232,8 +227,8 @@ export class ButtonComponent &#123;
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeSmall) * borderRadius / 100) + 'px')"&gt;
+  [attr.style]="propRadius + ':'
+    + round(getValue(sizeSmall) * borderRadius / 100) + 'px'"&gt;
   &lt;div class="app-elem"&gt;
     &lt;gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
@@ -279,17 +274,12 @@ export class ButtonComponent &#123;
 
   public sizeSmall = GlnFrameSize.small;
 
-  constructor(private sanitizer: DomSanitizer) &#123;&#125;
-
   public getLabel(exterior: string): string &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
   public getValue(value: GlnFrameSize): number &#123;
     return GlnFrameSizeUtil.getValue(value) || 0;
-  &#125;
-  public safeStyle(style: string): SafeStyle &#123;
-    return this.sanitizer.bypassSecurityTrustStyle(style);
   &#125;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
@@ -323,8 +313,8 @@ export class ButtonComponent &#123;
 </div>
 
 <div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeMiddle) * borderRadius / 100) + 'px')">
+  [attr.style]="propRadius + ':'
+    + round(getValue(sizeMiddle) * borderRadius / 100) + 'px'">
   <div class="app-elem">
     <gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
@@ -357,8 +347,8 @@ export class ButtonComponent &#123;
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeMiddle) * borderRadius / 100) + 'px')"&gt;
+  [attr.style]="propRadius + ':'
+    + round(getValue(sizeMiddle) * borderRadius / 100) + 'px'"&gt;
   &lt;div class="app-elem"&gt;
     &lt;gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
@@ -404,17 +394,12 @@ export class ButtonComponent &#123;
 
   public sizeMiddle = GlnFrameSize.middle;
 
-  constructor(private sanitizer: DomSanitizer) &#123;&#125;
-
   public getLabel(exterior: string): string &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
   public getValue(value: GlnFrameSize): number &#123;
     return GlnFrameSizeUtil.getValue(value) || 0;
-  &#125;
-  public safeStyle(style: string): SafeStyle &#123;
-    return this.sanitizer.bypassSecurityTrustStyle(style);
   &#125;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
@@ -448,8 +433,8 @@ export class ButtonComponent &#123;
 </div>
 
 <div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeWide) * borderRadius / 100) + 'px')">
+  [attr.style]="propRadius + ':'
+    + round(getValue(sizeWide) * borderRadius / 100) + 'px'">
   <div class="app-elem">
     <gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
@@ -482,8 +467,8 @@ export class ButtonComponent &#123;
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeWide) * borderRadius / 100) + 'px')"&gt;
+  [attr.style]="propRadius + ':'
+    + round(getValue(sizeWide) * borderRadius / 100) + 'px'"&gt;
   &lt;div class="app-elem"&gt;
     &lt;gln-button [exterior]="exterior04a"
       [config]="isAddPadding04a
@@ -529,17 +514,12 @@ export class ButtonComponent &#123;
 
   public sizeWide = GlnFrameSize.wide;
 
-  constructor(private sanitizer: DomSanitizer) &#123;&#125;
-
   public getLabel(exterior: string): string &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
   public getValue(value: GlnFrameSize): number &#123;
     return GlnFrameSizeUtil.getValue(value) || 0;
-  &#125;
-  public safeStyle(style: string): SafeStyle &#123;
-    return this.sanitizer.bypassSecurityTrustStyle(style);
   &#125;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
@@ -573,8 +553,8 @@ export class ButtonComponent &#123;
 </div>
 
 <div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-   + round(getValue(sizeLarge) * borderRadius / 100) + 'px')">
+  [attr.style]="propRadius + ':'
+   + round(getValue(sizeLarge) * borderRadius / 100) + 'px'">
   <div class="app-elem">
     <gln-button class="bbr-large"
       [exterior]="exterior04a"
@@ -609,8 +589,8 @@ export class ButtonComponent &#123;
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-   + round(getValue(sizeLarge) * borderRadius / 100) + 'px')"&gt;
+  [attr.style]="propRadius + ':'
+   + round(getValue(sizeLarge) * borderRadius / 100) + 'px'"&gt;
   &lt;div class="app-elem"&gt;
     &lt;gln-button class="bbr-large"
       [exterior]="exterior04a"
@@ -658,17 +638,12 @@ export class ButtonComponent &#123;
 
   public sizeLarge = GlnFrameSize.large;
 
-  constructor(private sanitizer: DomSanitizer) &#123;&#125;
-
   public getLabel(exterior: string): string &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
   public getValue(value: GlnFrameSize): number &#123;
     return GlnFrameSizeUtil.getValue(value) || 0;
-  &#125;
-  public safeStyle(style: string): SafeStyle &#123;
-    return this.sanitizer.bypassSecurityTrustStyle(style);
   &#125;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
@@ -705,8 +680,8 @@ export class ButtonComponent &#123;
 </div>
 
 <div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeHuge) * borderRadius / 100) + 'px')">
+  [attr.style]="propRadius + ':'
+    + round(getValue(sizeHuge) * borderRadius / 100) + 'px'">
   <div class="app-elem">
     <gln-button class="bbr-huge"
       [exterior]="exterior04a"
@@ -741,8 +716,8 @@ export class ButtonComponent &#123;
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
-    + round(getValue(sizeHuge) * borderRadius / 100) + 'px')"&gt;
+  [attr.style]="propRadius + ':'
+    + round(getValue(sizeHuge) * borderRadius / 100) + 'px'"&gt;
   &lt;div class="app-elem"&gt;
     &lt;gln-button class="bbr-huge"
       [exterior]="exterior04a"
@@ -790,17 +765,12 @@ export class ButtonComponent &#123;
 
   public sizeHuge = GlnFrameSize.huge;
 
-  constructor(private sanitizer: DomSanitizer) &#123;&#125;
-
   public getLabel(exterior: string): string &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
   public getValue(value: GlnFrameSize): number &#123;
     return GlnFrameSizeUtil.getValue(value) || 0;
-  &#125;
-  public safeStyle(style: string): SafeStyle &#123;
-    return this.sanitizer.bypassSecurityTrustStyle(style);
   &#125;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
@@ -872,9 +842,9 @@ export class ButtonComponent &#123;
 </div>
 
 <div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
+  [attr.style]="propRadius + ':'
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 0 '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px')">
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px'">
   <div class="app-elem">
     <gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
@@ -907,9 +877,9 @@ export class ButtonComponent &#123;
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ':'
+  [attr.style]="propRadius + ':'
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 0 '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px')"&gt;
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px'"&gt;
   &lt;div class="app-elem"&gt;
     &lt;gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
@@ -953,17 +923,12 @@ export class ButtonComponent &#123;
   public radiusRatio = 0.3;
   public sizeMiddle = GlnFrameSize.middle;
 
-  constructor(private sanitizer: DomSanitizer) &#123;&#125;
-
   public getLabel(exterior: string): string &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
   public getValue(value: GlnFrameSize): number &#123;
     return GlnFrameSizeUtil.getValue(value) || 0;
-  &#125;
-  public safeStyle(style: string): SafeStyle &#123;
-    return this.sanitizer.bypassSecurityTrustStyle(style);
   &#125;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
@@ -997,9 +962,9 @@ export class ButtonComponent &#123;
 </div>
 
 <div class="app-group"
-  [attr.style]="safeStyle(propRadius + ': 0 '
+  [attr.style]="propRadius + ': 0 '
     + round(getValue(sizeMiddle) * radiusRatio) + 'px '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0')">
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0'">
   <div class="app-elem">
     <gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
@@ -1032,9 +997,9 @@ export class ButtonComponent &#123;
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ': 0 '
+  [attr.style]="propRadius + ': 0 '
     + round(getValue(sizeMiddle) * radiusRatio) + 'px '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0')"&gt;
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0'"&gt;
   &lt;div class="app-elem"&gt;
     &lt;gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
@@ -1078,17 +1043,12 @@ export class ButtonComponent &#123;
   public radiusRatio = 0.3;
   public sizeMiddle = GlnFrameSize.middle;
 
-  constructor(private sanitizer: DomSanitizer) &#123;&#125;
-
   public getLabel(exterior: string): string &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
   public getValue(value: GlnFrameSize): number &#123;
     return GlnFrameSizeUtil.getValue(value) || 0;
-  &#125;
-  public safeStyle(style: string): SafeStyle &#123;
-    return this.sanitizer.bypassSecurityTrustStyle(style);
   &#125;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
@@ -1122,9 +1082,9 @@ export class ButtonComponent &#123;
 </div>
 
 <div class="app-group"
-  [attr.style]="safeStyle(propRadius + ': '
+  [attr.style]="propRadius + ': '
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0')">
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0'">
   <div class="app-elem">
     <gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
@@ -1157,9 +1117,9 @@ export class ButtonComponent &#123;
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ': '
+  [attr.style]="propRadius + ': '
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0')"&gt;
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px 0'"&gt;
   &lt;div class="app-elem"&gt;
     &lt;gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
@@ -1203,17 +1163,12 @@ export class ButtonComponent &#123;
   public radiusRatio = 0.3;
   public sizeMiddle = GlnFrameSize.middle;
 
-  constructor(private sanitizer: DomSanitizer) &#123;&#125;
-
   public getLabel(exterior: string): string &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
   public getValue(value: GlnFrameSize): number &#123;
     return GlnFrameSizeUtil.getValue(value) || 0;
-  &#125;
-  public safeStyle(style: string): SafeStyle &#123;
-    return this.sanitizer.bypassSecurityTrustStyle(style);
   &#125;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
@@ -1247,9 +1202,9 @@ export class ButtonComponent &#123;
 </div>
 
 <div class="app-group"
-  [attr.style]="safeStyle(propRadius + ': 0 '
+  [attr.style]="propRadius + ': 0 '
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px')">
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px'">
   <div class="app-elem">
     <gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
@@ -1282,9 +1237,9 @@ export class ButtonComponent &#123;
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"
-  [attr.style]="safeStyle(propRadius + ': 0 '
+  [attr.style]="propRadius + ': 0 '
     + round(getValue(sizeMiddle) * radiusRatio) + 'px 0 '
-    + round(getValue(sizeMiddle) * radiusRatio) + 'px')"&gt;
+    + round(getValue(sizeMiddle) * radiusRatio) + 'px'"&gt;
   &lt;div class="app-elem"&gt;
     &lt;gln-button [exterior]="exterior04b"
       [config]="isAddPadding04b
@@ -1328,17 +1283,12 @@ export class ButtonComponent &#123;
   public radiusRatio = 0.3;
   public sizeMiddle = GlnFrameSize.middle;
 
-  constructor(private sanitizer: DomSanitizer) &#123;&#125;
-
   public getLabel(exterior: string): string &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
   public getValue(value: GlnFrameSize): number &#123;
     return GlnFrameSizeUtil.getValue(value) || 0;
-  &#125;
-  public safeStyle(style: string): SafeStyle &#123;
-    return this.sanitizer.bypassSecurityTrustStyle(style);
   &#125;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;
@@ -1447,17 +1397,12 @@ export class ButtonComponent &#123;
   public radiusRatio = 0.3;
   public sizeMiddle = GlnFrameSize.middle;
 
-  constructor(private sanitizer: DomSanitizer) &#123;&#125;
-
   public getLabel(exterior: string): string &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
   public getValue(value: GlnFrameSize): number &#123;
     return GlnFrameSizeUtil.getValue(value) || 0;
-  &#125;
-  public safeStyle(style: string): SafeStyle &#123;
-    return this.sanitizer.bypassSecurityTrustStyle(style);
   &#125;
   public round(value: number): number &#123;
     return Math.round(100 * value) / 100;

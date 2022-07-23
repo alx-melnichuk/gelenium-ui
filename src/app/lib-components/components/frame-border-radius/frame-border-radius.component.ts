@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
@@ -84,11 +83,6 @@ export class FrameBorderRadiusComponent {
     labelPd: 18.5, // 0.37*FrameSizeValue.middle
   };
 
-  constructor(private sanitizer: DomSanitizer) {}
-
-  public safeStyle(style: string): SafeStyle {
-    return this.sanitizer.bypassSecurityTrustStyle(style);
-  }
   public getValue(value: GlnFrameSize): number {
     return GlnFrameSizeUtil.getValue(value) || 0;
   }
