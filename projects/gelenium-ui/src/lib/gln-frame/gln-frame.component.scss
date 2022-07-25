@@ -215,6 +215,9 @@ gln-frame {
     &>[glnf-elem] {
       flex-grow: 1;
     }
+    &>[glnf-orn-lf], &>[glnf-orn-rg] {
+      flex-shrink: 0;
+    }
   }
   &[dis]>div {
     color: var(--glnf-default-55); // var(--glnf-dis-cl); // The color in state is disabled for an input element.

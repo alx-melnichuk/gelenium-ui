@@ -35,10 +35,36 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>label: string;</code>
+        <code>autoComplete: string;</code>
       </td>
       <td>
-        <span>The content of the label.<br />(default = '';)</span>
+        <span>Defines permissions for autocomplete native textarea.
+          <br />(default = '';)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>cntCols: number;</code>
+      </td>
+      <td>
+        <span>Determines the number of columns.
+          <br />(default = null;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>cntRows: number;</code>
+      </td>
+      <td>
+        <span>Defines the number of visible rows.
+          The height of the text area is calculated as "cntRows"
+          multiplied by to the line height.
+          <br />(default = null;)
+        </span>
       </td>
     </tr>
     <tr>
@@ -47,7 +73,8 @@
         <code>config: GlnFrameConfig | null = null;</code>
       </td>
       <td>
-        <span>Defines a configuration object.</span>
+        <span>Defines a configuration object.</span><br />
+        <a [href]="urlFrame + '#Config'">More details.</a>
       </td>
     </tr>
     <tr>
@@ -89,32 +116,11 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>lbShrink: string | null;</code>
+        <code>helperText: string;</code>
       </td>
       <td>
-        <span>Disable label animation. The label is always static, at the top.
-          <br />Attribute (no content).
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>isNoAnimation: string | boolean | null = null;</code>
-      </td>
-      <td>
-        <span>Disable animation execution.</span>
-      </td>
-    </tr>
-    <tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>isNoLabel: string | null;</code>
-      </td>
-      <td>
-        <span>Disables the display of the label.
-          <br />Attribute (no content).
+        <span>Specifies the text for additional clarification or error.
+          <br />(default = null;)
         </span>
       </td>
     </tr>
@@ -141,22 +147,35 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isRequired: string | null;</code>
+        <code>isHoverColor: string | boolean | null | undefined;</code>
       </td>
       <td>
-        <span>Adds a validation condition: required field.
-          <br />Attribute (no content).
+        <span>
+          If specified, then when hovering the mouse, the color of the label
+          and frame will be the same as when the focus was received.
+          <br />
+          If not specified, then when you hover the mouse, the color of the
+          label and frame will be the same as the default.
         </span>
       </td>
     </tr>
     <tr>
       <td>
         <code>@Input()</code>
-        <code>helperText: string;</code>
+        <code>isNoAnimation: string | boolean | null | undefined;</code>
       </td>
       <td>
-        <span>Specifies the text for additional clarification or error.
-          <br />(default = null;)
+        <span>Disable animation execution.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoLabel: string | null;</code>
+      </td>
+      <td>
+        <span>Disables the display of the label.
+          <br />Attribute (no content).
         </span>
       </td>
     </tr>
@@ -172,22 +191,30 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>autoComplete: string;</code>
+        <code>isRequired: string | null;</code>
       </td>
       <td>
-        <span>Defines permissions for autocomplete native textarea.
-          <br />(default = '';)
+        <span>Adds a validation condition: required field.
+          <br />Attribute (no content).
         </span>
       </td>
     </tr>
     <tr>
       <td>
         <code>@Input()</code>
-        <code>wdFull: string;</code>
+        <code>label: string;</code>
       </td>
       <td>
-        <span>
-          Sets the width to the parent's width (width: 100%;).
+        <span>The content of the label.<br />(default = '';)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>lbShrink: string | null;</code>
+      </td>
+      <td>
+        <span>Disable label animation. The label is always static, at the top.
           <br />Attribute (no content).
         </span>
       </td>
@@ -230,36 +257,12 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>cntRows: number;</code>
-      </td>
-      <td>
-        <span>Defines the number of visible rows.
-          The height of the text area is calculated as "cntRows"
-          multiplied by to the line height.
-          <br />(default = null;)
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
         <code>maxRows: number;</code>
       </td>
       <td>
         <span>Defines the maximum number of visible rows.
           The maximum height of the text area is calculated as "maxRows"
           multiplied by to the line height. Active if "cntRows" is not specified.
-          <br />(default = null;)
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>cntCols: number;</code>
-      </td>
-      <td>
-        <span>Determines the number of columns.
           <br />(default = null;)
         </span>
       </td>
@@ -312,6 +315,18 @@
       <td>
         <span>Indicates that its element can be focused.
           <br />(default = 0;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>wdFull: string;</code>
+      </td>
+      <td>
+        <span>
+          Sets the width to the parent's width (width: 100%;).
+          <br />Attribute (no content).
         </span>
       </td>
     </tr>

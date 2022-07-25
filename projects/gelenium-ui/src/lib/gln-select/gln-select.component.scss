@@ -6,7 +6,7 @@
 gln-select {
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
-  min-width: 120px;
+  min-width: var(--glns-min-width, var(--glns-fs-min-width, 50px));
   // outline: 1px dashed green;
   // # font-family: Roboto, Helvetica, Arial, sans-serif;
   // # font-weight: 400;
@@ -22,37 +22,40 @@ gln-select {
   }
 
   // Element "Frame".
-  gln-frame:not([opn]):not([dis]) {
-    cursor: pointer;
-  }
-
-  // Element "gln-frame - glns-rhomb".
-  --glnsr--def-def54: hsl(var(--gln-default-h), var(--gln-default-s), 54%);
-  --glnsr--foc-prm46: hsl(var(--gln-primary-h), var(--gln-primary-s), 46%);
-
-  gln-frame:not([dis]) {
-    &[hfc] {
-      --glnsr-hover-focus-color: var(--glnsr--foc-prm46);
+  gln-frame {
+    &:focus-visible {
+      outline: none;
     }
-    &:not([err]) { // The state without disabled, error, hover, focused.
-      &:not(:hover):not(:focus-within):not([foc]) {
-        --glns-rhomb-cl: var(--glns-rhomb-def, var(--glnsr--def-def54));
-      } // The state without disabled, error, focused and with hover.
-      &:hover:not(:focus-within):not([foc]) {
-        --glns-rhomb-cl: var(--glns-rhomb-hov, var(--glnsr-hover-focus-color, var(--glnsr--def-def54)));
-      } // The state without disabled, error and with focused.
-      &:focus-within, &[foc] {
-        --glns-rhomb-cl: var(--glns-rhomb-foc, var(--glnsr--foc-prm46));
+    &:not([opn]):not([dis]) {
+      cursor: pointer;
+    }
+    // Element "gln-frame - glns-rhomb".
+    --glnsr--def-def54: hsl(var(--gln-default-h), var(--gln-default-s), 54%);
+    --glnsr--foc-prm46: hsl(var(--gln-primary-h), var(--gln-primary-s), 46%);
+    &:not([dis]) {
+      &[hfc] {
+        --glnsr-hover-focus-color: var(--glnsr--foc-prm46);
       }
+      &:not([err]) { // The state without disabled, error, hover, focused.
+        &:not(:hover):not(:focus-within):not([foc]) {
+          --glns-rhomb-cl: var(--glns-rhomb-def, var(--glnsr--def-def54));
+        } // The state without disabled, error, focused and with hover.
+        &:hover:not(:focus-within):not([foc]) {
+          --glns-rhomb-cl: var(--glns-rhomb-hov, var(--glnsr-hover-focus-color, var(--glnsr--def-def54)));
+        } // The state without disabled, error and with focused.
+        &:focus-within, &[foc] {
+          --glns-rhomb-cl: var(--glns-rhomb-foc, var(--glnsr--foc-prm46));
+        }
+      }
+      &[err] {// The state without disabled, hover, focused and error.
+        --glns-rhomb-cl: var(--glns-rhomb-err, hsl(var(--gln-danger-h), var(--gln-danger-s), 51%));
+      }
+    } // The state with disabled.
+    &[dis] {
+      --glns-rhomb-cl: var(--glns-rhomb-dis, var(--glnsr--def-def54));
     }
-    &[err] {// The state without disabled, hover, focused and error.
-      --glns-rhomb-cl: var(--glns-rhomb-err, hsl(var(--gln-danger-h), var(--gln-danger-s), 51%));
-    }
-  } // The state with disabled.
-  gln-frame[dis] {
-    --glns-rhomb-cl: var(--glns-rhomb-dis, var(--glnsr--def-def54));
   }
-
+  
   gln-frame>div>[glnf-orn-rg]>[glns-rhomb] {
     align-items: center;
     color: var(--glns-rhomb-cl);
@@ -88,20 +91,17 @@ gln-select {
     margin: 0;
     -webkit-tap-highlight-color: transparent;
     min-width: 0;
-
+    overflow: hidden;
+    text-overflow: ellipsis;
     user-select: none;
-    &:focus-visible {
-      outline: none;
-    }
-  //  --glntr-ripple-cl: red;
-  // text-overflow: ellipsis;
-  // white-space: nowrap;
-  // overflow: hidden;
+    white-space: nowrap;
   }
+
   // Element "div glns-wrap".
   &>[glns-wrap] {
     position: relative;
   }
+
   // Element "gln-hint-or-error"
   gln-hint-or-error {
     padding-left: var(--glns-he-pd-lf, var(--glnfs-pd-lf));

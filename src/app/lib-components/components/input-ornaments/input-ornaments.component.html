@@ -58,7 +58,7 @@
 
   <div class="app-group">
 
-    <div class="app-elem io-elem">
+    <div class="app-elem">
       <div>
         <small>
           <em>Section: "gln-orn-lf" + text.</em>
@@ -73,7 +73,7 @@
       </gln-input>
     </div>
 
-    <div class="app-elem io-elem">
+    <div class="app-elem">
       <div>
         <small>
           <em>Section: "gln-orn-rg" + text.</em>
@@ -87,7 +87,7 @@
       </gln-input>
     </div>
 
-    <div class="app-elem io-elem">
+    <div class="app-elem">
       <div>
         <small>
           <em>Section: "gln-orn-lf" + text.</em>
@@ -100,25 +100,25 @@
         [maxLength]="maxLength05"
         [exterior]="exterior05"
         [helperText]="
-        (controls05.model05c.errors?.required
-        ? 'Required field.'
-        : (controls05.model05c.errors?.minlength
-          ? 'Minimum length '
-          + controls05.model05c.errors?.minlength.requiredLength
-          + ' characters.'
-          : (controls05.model05c.errors?.maxlength
-            ? 'Maximum length '
-            + controls05.model05c.errors?.maxlength.requiredLength
+          (controls05.model05c.errors?.required
+          ? 'Required field.'
+          : (controls05.model05c.errors?.minlength
+            ? 'Minimum length '
+            + controls05.model05c.errors?.minlength.requiredLength
             + ' characters.'
-            :'')
-          )
-        )">
+            : (controls05.model05c.errors?.maxlength
+              ? 'Maximum length '
+              + controls05.model05c.errors?.maxlength.requiredLength
+              + ' characters.'
+              :'')
+            )
+          )">
         <span gln-orn-lf
           class="io-pd-hor">$</span>
       </gln-input>
     </div>
 
-    <div class="app-elem io-elem">
+    <div class="app-elem">
       <div>
         <small>
           <em>Section: "gln-orn-rg" + text.</em>
@@ -131,19 +131,19 @@
         [maxLength]="maxLength05"
         [exterior]="exterior05"
         [helperText]="
-        (controls05.model05d.errors?.required
-        ? 'Required field.'
-        : (controls05.model05d.errors?.minlength
-          ? 'Minimum length '
-          + controls05.model05d.errors?.minlength.requiredLength
-          + ' characters.'
-          : (controls05.model05d.errors?.maxlength
-            ? 'Maximum length '
-            + controls05.model05d.errors?.maxlength.requiredLength
+          (controls05.model05d.errors?.required
+          ? 'Required field.'
+          : (controls05.model05d.errors?.minlength
+            ? 'Minimum length '
+            + controls05.model05d.errors?.minlength.requiredLength
             + ' characters.'
-            :'')
-          )
-        )">
+            : (controls05.model05d.errors?.maxlength
+              ? 'Maximum length '
+              + controls05.model05d.errors?.maxlength.requiredLength
+              + ' characters.'
+              :'')
+            )
+          )">
         <span gln-orn-rg
           class="io-pd-hor">$</span>
       </gln-input>
@@ -163,9 +163,9 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-        controls05.model05e.errors?.required
-        ? 'The password value is required.'
-        :'Enter the password value.'">
+          controls05.model05e.errors?.required
+          ? 'The password value is required.'
+          :'Enter the password value.'">
         <button gln-orn-lf
           class="io-btn io-btn-eye"
           (click)="isBtnEyeCrossed05e=!isBtnEyeCrossed05e">
@@ -203,7 +203,7 @@
       </gln-input>
     </div>
 
-    <div class="app-elem io-elem">
+    <div class="app-elem">
       <div>
         <small>
           <em>Section: "gln-orn-lf" + uncode.</em>
@@ -216,9 +216,9 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-        controls05.model05g.errors?.required
-        ? 'The password value is required.'
-        :'Enter the password value.'"
+          controls05.model05g.errors?.required
+          ? 'The password value is required.'
+          :'Enter the password value.'"
         [ornamLfAlign]="'baseline'">
         <button gln-orn-lf
           class="io-btn io-uncode"
@@ -228,7 +228,7 @@
       </gln-input>
     </div>
 
-    <div class="app-elem io-elem">
+    <div class="app-elem">
       <div>
         <small>
           <em>Section: "gln-orn-rg" + uncode.</em>
@@ -240,9 +240,9 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-        controls05.model05h.errors?.required
-        ? 'The password value is required.'
-        :'Enter the password value.'"
+          controls05.model05h.errors?.required
+          ? 'The password value is required.'
+          :'Enter the password value.'"
         [config]="config05h">
         <button gln-orn-rg
           class="io-btn io-uncode"
@@ -313,7 +313,7 @@
 
   <div class="app-group">
 
-    <div class="app-elem io-elem">
+    <div class="app-elem">
       <div>
         <small>
           <em>Section: "gln-orn-lf" + text.</em>
@@ -332,7 +332,7 @@
       </gln-input>
     </div>
 
-    <div class="app-elem io-elem">
+    <div class="app-elem">
       <div>
         <small>
           <em>Section: "gln-orn-rg" + text.</em>
@@ -390,7 +390,7 @@
 
   &lt;div class="app-group"&gt;
 
-    &lt;div class="app-elem io-elem"&gt;
+    &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;
@@ -405,7 +405,7 @@
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem io-elem"&gt;
+    &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;
@@ -419,7 +419,7 @@
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem io-elem"&gt;
+    &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;
@@ -432,25 +432,25 @@
         [maxLength]="maxLength05"
         [exterior]="exterior05"
         [helperText]="
-        (controls05.model05c.errors?.required
-        ? 'Required field.'
-        : (controls05.model05c.errors?.minlength
-          ? 'Minimum length '
-          + controls05.model05c.errors?.minlength.requiredLength
-          + ' characters.'
-          : (controls05.model05c.errors?.maxlength
-            ? 'Maximum length '
-            + controls05.model05c.errors?.maxlength.requiredLength
+          (controls05.model05c.errors?.required
+          ? 'Required field.'
+          : (controls05.model05c.errors?.minlength
+            ? 'Minimum length '
+            + controls05.model05c.errors?.minlength.requiredLength
             + ' characters.'
-            :'')
-          )
-        )"&gt;
+            : (controls05.model05c.errors?.maxlength
+              ? 'Maximum length '
+              + controls05.model05c.errors?.maxlength.requiredLength
+              + ' characters.'
+              :'')
+            )
+          )"&gt;
         &lt;span gln-orn-lf
           class="io-pd-hor"&gt;$&lt;/span&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem io-elem"&gt;
+    &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;
@@ -463,19 +463,19 @@
         [maxLength]="maxLength05"
         [exterior]="exterior05"
         [helperText]="
-        (controls05.model05d.errors?.required
-        ? 'Required field.'
-        : (controls05.model05d.errors?.minlength
-          ? 'Minimum length '
-          + controls05.model05d.errors?.minlength.requiredLength
-          + ' characters.'
-          : (controls05.model05d.errors?.maxlength
-            ? 'Maximum length '
-            + controls05.model05d.errors?.maxlength.requiredLength
+          (controls05.model05d.errors?.required
+          ? 'Required field.'
+          : (controls05.model05d.errors?.minlength
+            ? 'Minimum length '
+            + controls05.model05d.errors?.minlength.requiredLength
             + ' characters.'
-            :'')
-          )
-        )"&gt;
+            : (controls05.model05d.errors?.maxlength
+              ? 'Maximum length '
+              + controls05.model05d.errors?.maxlength.requiredLength
+              + ' characters.'
+              :'')
+            )
+          )"&gt;
         &lt;span gln-orn-rg
           class="io-pd-hor"&gt;$&lt;/span&gt;
       &lt;/gln-input&gt;
@@ -495,9 +495,9 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-        controls05.model05e.errors?.required
-        ? 'The password value is required.'
-        :'Enter the password value.'"&gt;
+          controls05.model05e.errors?.required
+          ? 'The password value is required.'
+          :'Enter the password value.'"&gt;
         &lt;button gln-orn-lf
           class="io-btn io-btn-eye"
           (click)="isBtnEyeCrossed05e=!isBtnEyeCrossed05e"&gt;
@@ -535,7 +535,7 @@
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem io-elem"&gt;
+    &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Section: "gln-orn-lf" + uncode.&lt;/em&gt;
@@ -548,10 +548,10 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-        controls05.model05g.errors?.required
-        ? 'The password value is required.'
-        :'Enter the password value.'"
-        [ornamLfAlign]="'baseline'"&gt;
+          controls05.model05g.errors?.required
+          ? 'The password value is required.'
+          :'Enter the password value.'"
+          [ornamLfAlign]="'baseline'"&gt;
         &lt;button gln-orn-lf
           class="io-btn io-uncode"
           (click)="isBtnEyeCrossed05g=!isBtnEyeCrossed05g"&gt;
@@ -560,7 +560,7 @@
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem io-elem"&gt;
+    &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Section: "gln-orn-rg" + uncode.&lt;/em&gt;
@@ -572,10 +572,10 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-        controls05.model05h.errors?.required
-        ? 'The password value is required.'
-        :'Enter the password value.'"
-        [config]="config05h"&gt;
+          controls05.model05h.errors?.required
+          ? 'The password value is required.'
+          :'Enter the password value.'"
+          [config]="config05h"&gt;
         &lt;button gln-orn-rg
           class="io-btn io-uncode"
           (click)="isBtnEyeCrossed05h=!isBtnEyeCrossed05h"&gt;
@@ -626,7 +626,7 @@
 
   &lt;div class="app-group"&gt;
 
-    &lt;div class="app-elem io-elem"&gt;
+    &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;
@@ -645,7 +645,7 @@
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem io-elem"&gt;
+    &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;

@@ -34,13 +34,13 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
   public exterior: string | null = null; // GlnFrameExteriorType
   @Input()
-  public hoverColor: boolean | null = null;
-  @Input()
   public isDisabled: boolean | null = null;
   @Input()
   public isError: boolean | null = null;
   @Input()
   public isFilled = false;
+  @Input()
+  public isHoverColor: boolean | null = null;
   @Input()
   public isLabelShrink: boolean | null = null;
   @Input()
@@ -64,10 +64,10 @@ export class GlnFrameComponent implements OnChanges, OnInit {
 
   public currConfig: GlnFrameConfig | null = null;
   public frameExterior: GlnFrameExterior | null = null;
-  public noLabel: boolean | null = null;
-  public hoverFocus: boolean | null = null;
+  public hoverColor: boolean | null = null;
   public labelShrink: boolean | null = null;
   public noAnimation: boolean | null = null;
+  public noLabel: boolean | null = null;
 
   constructor(
     @Optional() @Inject(GLN_FRAME_CONFIG) private rootConfig: GlnFrameConfig | null,
@@ -86,9 +86,9 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.frameExterior = GlnFrameExteriorUtil.convert(this.exterior);
       this.settingExterior(this.renderer, this.hostRef, this.frameExterior);
     }
-    if (changes.hoverColor || (changes.config && this.hoverColor == null)) {
-      this.hoverFocus = this.hoverColor != null ? this.hoverColor : !!this.currConfig?.hoverColor;
-      this.settingHoverFocusColor(this.renderer, this.hostRef, this.hoverFocus);
+    if (changes.isHoverColor || (changes.config && this.isHoverColor == null)) {
+      this.hoverColor = this.isHoverColor != null ? this.isHoverColor : !!this.currConfig?.isHoverColor;
+      this.settingHoverColor(this.renderer, this.hostRef, this.hoverColor);
     }
     if (changes.isLabelShrink || (changes.config && this.isLabelShrink == null)) {
       this.labelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig?.isLabelShrink;
@@ -122,9 +122,9 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   }
 
   public ngOnInit(): void {
-    if (this.hoverFocus == null) {
-      this.hoverFocus = this.hoverColor != null ? this.hoverColor : !!this.currConfig?.hoverColor;
-      this.settingHoverFocusColor(this.renderer, this.hostRef, this.hoverFocus);
+    if (this.hoverColor == null) {
+      this.hoverColor = this.isHoverColor != null ? this.isHoverColor : !!this.currConfig?.isHoverColor;
+      this.settingHoverColor(this.renderer, this.hostRef, this.hoverColor);
     }
     if (this.labelShrink == null) {
       this.labelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig?.isLabelShrink;
@@ -160,9 +160,9 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     HtmlElemUtil.setClass(renderer, elem, 'glnf-bottom-frame', isBorder);
   }
 
-  private settingHoverFocusColor(renderer: Renderer2, elem: ElementRef<HTMLElement>, hoverColor: boolean): void {
-    HtmlElemUtil.setClass(renderer, elem, 'glnf-hover-color', hoverColor);
-    HtmlElemUtil.setAttr(renderer, elem, 'hfc', hoverColor ? '' : null);
+  private settingHoverColor(renderer: Renderer2, elem: ElementRef<HTMLElement>, isHoverColor: boolean): void {
+    HtmlElemUtil.setClass(renderer, elem, 'glnf-hover-color', isHoverColor);
+    HtmlElemUtil.setAttr(renderer, elem, 'hfc', isHoverColor ? '' : null);
   }
 
   private settingLabelShrink(renderer: Renderer2, elem: ElementRef<HTMLElement>, isLabelShrink: boolean): void {

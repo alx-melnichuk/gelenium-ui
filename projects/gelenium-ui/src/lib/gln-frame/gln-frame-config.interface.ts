@@ -7,11 +7,11 @@ export interface GlnFrameConfig {
   exterior?: GlnFrameExterior | undefined;
   frameSize?: GlnFrameSize | undefined;
   frameSizeValue?: number | undefined;
-  hoverColor?: boolean | undefined;
+  isHoverColor?: boolean | undefined;
   isLabelShrink?: boolean | undefined;
-  labelPd?: number | undefined; // px
   isNoAnimation?: boolean | undefined;
   isNoLabel?: boolean | undefined;
+  labelPd?: number | undefined; // px
   ornamLfAlign?: GlnFrameOrnamAlign | undefined;
   ornamRgAlign?: GlnFrameOrnamAlign | undefined;
 }

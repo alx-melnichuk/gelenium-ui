@@ -51,14 +51,15 @@ export class FrameAttributesComponent {
     model02e: new FormControl(null, []),
     model02f: new FormControl(null, []),
     model02g: new FormControl('Hello World', []),
+    model02h: new FormControl('Hello World', []),
   };
   public formGroup02b: FormGroup = new FormGroup(this.control02b);
 
   public exterior02c = 'outlined';
   public formGroup02c: FormGroup = new FormGroup({
-    model02h: new FormControl('Hello World', []),
     model02i: new FormControl('Hello World', []),
     model02j: new FormControl('Hello World', []),
+    model02k: new FormControl('Hello World', []),
   });
 
   public config02 = {

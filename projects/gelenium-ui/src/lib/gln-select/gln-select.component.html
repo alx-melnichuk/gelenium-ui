@@ -8,16 +8,15 @@
     cdkOverlayOrigin
     #origin="cdkOverlayOrigin"
     #triggerRef
-    (click)="toggle()">
+    (click)="!disabled ? toggle() : null">
     <gln-frame #frameRef
       [ngClass]="[(isPanelOpen ? 'is-open' : '')]"
-      [attr.opn]="isPanelOpen ? '' : null"
       [config]="currConfig"
       [exterior]="glnFrameExteriorInput.exterior"
-      [hoverColor]="getBoolean(hoverColor)"
       [isDisabled]="disabled"
       [isError]="!!errors || getBoolean(isError)"
       [isFilled]="isFilled"
+      [isHoverColor]="hoverColor"
       [isLabelShrink]="getBoolean(lbShrink)"
       [isNoAnimation]="noAnimation || isWriteValueInit"
       [isNoLabel]="getBoolean(isNoLabel)"
@@ -32,7 +31,12 @@
       (glnFrameSizeChange)="frameSizeChange($event)"
       glnFrameOrnament
       [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
-      [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)">
+      [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
+      [attr.opn]="isPanelOpen ? '' : null"
+      [attr.tabindex]="!disabled ? tabIndex : null"
+      (focus)="doFocus()"
+      (blur)="doBlur()"
+      (keydown)="frameKeydown($event)">
 
       <span glnf-orn-lf
         class="glns-ornam-lf">
@@ -52,15 +56,11 @@
         </div>
       </span>
 
-      <div #scoreboardRef
+      <div [ngClass]="[(readOnly ? 'gln-readonly' : '')]"
         glnf-pd-ver
         glnf-pd-hor
         glnf-elem
-        [attr.id]="id + '-elem'"
-        [attr.tabindex]="disabled ? '-1' : tabIndex"
-        (focus)="doFocus()"
-        (blur)="doBlur()"
-        (keydown)="scoreboardKeydown($event)">
+        [attr.id]="id + '-elem'">
 
         <ng-container [ngSwitch]="isFilled">
           <ng-container *ngSwitchCase="true">

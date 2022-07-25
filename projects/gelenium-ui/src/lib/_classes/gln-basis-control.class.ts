@@ -23,7 +23,11 @@ export abstract class GlnBasisControl implements OnChanges, OnInit, AfterContent
   @Input()
   public isDisabled: string | null = null;
   @Input()
-  public isNoAnimation: string | boolean | null = null;
+  public isHoverColor: string | boolean | null | undefined;
+  @Input()
+  public isNoAnimation: string | boolean | null | undefined;
+  @Input()
+  public isReadOnly: string | boolean | null | undefined;
   @Input()
   public isRequired: string | null = null;
   @Input()
@@ -33,8 +37,10 @@ export abstract class GlnBasisControl implements OnChanges, OnInit, AfterContent
   readonly writeValueInit: EventEmitter<() => void> = new EventEmitter();
 
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
+  public hoverColor: boolean | null = null; // Binding attribute "isHoverColor".
   public isWriteValueInit: boolean | null = null;
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
+  public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
   public required: boolean | null = null; // Binding attribute "isRequired".
   public valueInit: boolean | null = null; // Binding attribute "isValueInit".
 
@@ -56,14 +62,20 @@ export abstract class GlnBasisControl implements OnChanges, OnInit, AfterContent
       this.disabled = BooleanUtil.init(this.isDisabled);
       this.setDisabledState(!!this.disabled);
     }
+    if (changes.isHoverColor) {
+      this.hoverColor = BooleanUtil.init(this.isHoverColor);
+    }
+    if (changes.isNoAnimation) {
+      this.noAnimation = BooleanUtil.init(this.isNoAnimation);
+    }
+    if (changes.isReadOnly) {
+      this.readOnly = BooleanUtil.init(this.isReadOnly);
+    }
     if (changes.isRequired) {
       this.required = BooleanUtil.init(this.isRequired);
     }
     if (changes.isValueInit) {
       this.valueInit = BooleanUtil.init(this.isValueInit);
-    }
-    if (changes.isNoAnimation) {
-      this.noAnimation = BooleanUtil.init(this.isNoAnimation != null ? '' + this.isNoAnimation : null);
     }
   }
 
@@ -118,7 +130,7 @@ export abstract class GlnBasisControl implements OnChanges, OnInit, AfterContent
     this.changeDetectorRef.markForCheck();
   }
 
-  public getBoolean(value: string | null): boolean | null {
+  public getBoolean(value: string | boolean | null | undefined): boolean | null {
     return BooleanUtil.init(value);
   }
 

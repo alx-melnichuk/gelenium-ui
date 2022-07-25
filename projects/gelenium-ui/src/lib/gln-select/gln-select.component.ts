@@ -40,6 +40,8 @@ import { GlnBasisControl } from '../_classes/gln-basis-control.class';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { GlnOptionItem, GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
+import { GlnOptionUtil } from '../gln-option/gln-option.util';
+import { ArrayUtil } from '../_utils/array.util';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
@@ -48,8 +50,6 @@ import { ScreenUtil } from '../_utils/screen.util';
 import { GlnSelectConfig } from './gln-select-config.interface';
 import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
 import { GlnSelectionChange } from './gln-selection-change.interface';
-import { GlnOptionUtil } from '../gln-option/gln-option.util';
-import { ArrayUtil } from '../_utils/array.util';
 
 let uniqueIdCounter = 0;
 
@@ -60,6 +60,7 @@ const CSS_ATTR_FOR_PANEL_OPENING_ANIMATION = 'is-open';
 const CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION = 'is-hide';
 const CSS_PROP_BORDER_RADIUS = '--glnspo-border-radius';
 const CSS_PROP_MAX_HEIGHT = '--glnspo-max-height';
+const CSS_PROP_FS_MIN_WIDTH = '--glns-fs-min-width';
 const CSS_PROP_TRANSLATE_Y = '--glnspo-translate-y';
 
 @Component({
@@ -91,8 +92,6 @@ export class GlnSelectComponent
   @Input()
   public helperText: string | null = null;
   @Input()
-  public hoverColor: string | null = null;
-  @Input()
   public isCheckmark: string | boolean | null | undefined;
   // @Input()
   // public isDisabled: string | null = null; // Is in GlnBasisControl.
@@ -100,16 +99,18 @@ export class GlnSelectComponent
   public isError: string | null = null;
   @Input()
   public isFixRight: string | boolean | null | undefined;
+  // @Input()
+  // public isHoverColor: string | boolean | null | undefined; // Is in GlnBasisControl.
   @Input()
   public isMultiple: string | boolean | null | undefined;
   // @Input()
-  // public isNoAnimation: string | boolean | null = null; // Is in GlnBasisControl.
+  // public isNoAnimation: string | boolean | null | undefined; // Is in GlnBasisControl.
   @Input()
   public isNoLabel: string | null = null;
   @Input()
   public isNoRipple: string | boolean | null | undefined;
-  @Input()
-  public isReadOnly: string | null = null;
+  // @Input()
+  // public isReadOnly: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
   // public isRequired: string | null = null; // Is in GlnBasisControl.
   // @Input()
@@ -128,9 +129,11 @@ export class GlnSelectComponent
   public ornamRgAlign: string | null = null; // OrnamAlign
   /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
   @Input()
-  public panelClass: string | string[] | Set<string> | { [key: string]: any } = '';
+  public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = '';
   @Input()
-  public visibleSize = -1; // TODO ??
+  public position: string | null = null; // Horizontal position = 'start' | 'center' | 'end';
+  @Input()
+  public visibleSize = -1;
   @Input()
   public tabIndex = 0;
   @Input()
@@ -185,9 +188,6 @@ export class GlnSelectComponent
   protected connectedOverlay!: CdkConnectedOverlay;
   @ViewChild('frameRef', { read: ElementRef, static: true })
   public frameRef!: ElementRef<HTMLElement>;
-  /** A scoreboard that displays the selected options. */
-  @ViewChild('scoreboardRef', { static: true })
-  public scoreboardRef!: ElementRef<HTMLElement>;
   /** A trigger that opens a dropdown list of options. */
   @ViewChild('triggerRef', { static: true })
   public triggerRef!: ElementRef<HTMLElement>;
@@ -209,6 +209,7 @@ export class GlnSelectComponent
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public hasPanelAnimation = false;
+  // public hoverColor: boolean | null = null; // Binding attribute "isHoverColor". // Is in GlnBasisControl.
   public isFocused = false;
   public isFilled = false;
   public isPanelOpen = false;
@@ -218,6 +219,7 @@ export class GlnSelectComponent
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public overlayPanelClass: string | string[] = /*this._defaultOptions?.overlayPanelClass ||*/ '';
   public positions: ConnectedPosition[] = [];
+  // public readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Is in GlnBasisControl.
   // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisControl.
   public selectedOptions: GlnOptionComponent[] = [];
   // public valueInit: boolean | null = null; // Binding attribute "isValueInit". // Is in GlnBasisControl.
@@ -253,13 +255,14 @@ export class GlnSelectComponent
 
   public override ngOnChanges(changes: SimpleChanges): void {
     // In the GlnBasisControl.ngOnChanges(), the definition is made:
-    // -  this.disabled = BooleanUtil.init(this.isDisabled);
-    // -  this.setDisabledState(!!this.disabled);
-    // -  this.required = BooleanUtil.init(this.isRequired);
-    // -  this.valueInit = BooleanUtil.init(this.isValueInit);
-    // -  this.noAnimation = BooleanUtil.init(this.isNoAnimation != null ? '' + this.isNoAnimation : null);
+    // - this.disabled = BooleanUtil.init(this.isDisabled);
+    // - this.setDisabledState(!!this.disabled);
+    // - this.hoverColor = BooleanUtil.init(this.isHoverColor);
+    // - this.noAnimation = BooleanUtil.init(this.isNoAnimation);
+    // - this.readOnly = BooleanUtil.init(this.isReadOnly);
+    // - this.required = BooleanUtil.init(this.isRequired);
+    // - this.valueInit = BooleanUtil.init(this.isValueInit);
     super.ngOnChanges(changes);
-
     if (changes.config && this.config) {
       this.currConfig = { ...this.rootConfig, ...this.config };
 
@@ -313,13 +316,6 @@ export class GlnSelectComponent
       this.value = newValue;
     }
     super.ngAfterContentInit();
-
-    const horizontalAlignment: HorizontalConnectionPos = !this.fixRight ? 'start' : 'end';
-    this.positions = [
-      { originX: horizontalAlignment, originY: 'bottom', overlayX: horizontalAlignment, overlayY: 'top' },
-      { originX: horizontalAlignment, originY: 'top', overlayX: horizontalAlignment, overlayY: 'bottom', offsetY: -5 },
-    ];
-    this.triggerFontSize = Number((getComputedStyle(this.triggerRef.nativeElement).fontSize || '0').replace('px', ''));
   }
 
   // ** interface ControlValueAccessor - start **
@@ -375,6 +371,8 @@ export class GlnSelectComponent
   /** Determine the value of the css variable "frame size". */
   public frameSizeChange(event: GlnFrameSizePaddingVerHorRes): void {
     this.triggerFrameSize = event.frameSizeValue || 0;
+    const minWidth = NumberUtil.roundTo100(this.triggerFrameSize * 1.1);
+    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_FS_MIN_WIDTH, NumberUtil.str(minWidth)?.concat('px'));
   }
 
   public isEmpty(): boolean {
@@ -383,7 +381,7 @@ export class GlnSelectComponent
 
   public focus(): void {
     if (!this.disabled && isPlatformBrowser(this.platformId)) {
-      this.scoreboardRef.nativeElement.focus();
+      this.frameRef.nativeElement.focus();
     }
   }
 
@@ -410,7 +408,6 @@ export class GlnSelectComponent
    */
   public doBlur(): void {
     if (!this.disabled) {
-      // console.log(``);      console.log(`    doBlur() isFocused:=false;`); // TODO del;
       this.isFocused = false;
       if (!this.isPanelOpen) {
         // (Cases-B1) Panel is open and on the trigger, click the Tab key.
@@ -459,22 +456,24 @@ export class GlnSelectComponent
   /** Open overlay panel. */
 
   public open(): void {
-    // console.log(``);    console.log(`    open() ${this.isPanelOpen ? '' : '!'}isPanelOpen`); // TODO del;
-    if (!this.disabled && !this.isPanelOpen && this.options.length > 0) {
+    if (!this.disabled && !this.readOnly && !this.isPanelOpen && this.options.length > 0) {
       this.isPanelOpen = true;
       this.hasPanelAnimation = !this.noAnimation;
       this.markedOption = this.selectedOptions.length > 0 ? this.selectedOptions[this.selectedOptions.length - 1] : null;
-      this.changeDetectorRef.markForCheck();
-      if (this.triggerRect === null) {
-        this.triggerRect = this.triggerRef.nativeElement.getBoundingClientRect();
-      }
+      this.triggerRect = this.triggerRef.nativeElement.getBoundingClientRect();
       this.isFocusAttrOnFrame = false;
+      const horizontalAlignment: HorizontalConnectionPos = this.getPosition(this.position);
+      this.positions = [
+        { originX: horizontalAlignment, originY: 'bottom', overlayX: horizontalAlignment, overlayY: 'top' },
+        { originX: horizontalAlignment, originY: 'top', overlayX: horizontalAlignment, overlayY: 'bottom', offsetY: -5 },
+      ];
+      this.triggerFontSize = Number((getComputedStyle(this.triggerRef.nativeElement).fontSize || '0').replace('px', ''));
+      this.changeDetectorRef.markForCheck();
       this.opened.emit();
     }
   }
   /** Closes the overlay panel and focuses the main element. */
   public close(): void {
-    // console.log(``);    console.log(`    close() ${this.isPanelOpen ? '' : '!'}isPanelOpen`); // TODO del;
     if (this.disabled || !this.isPanelOpen) {
       return;
     }
@@ -553,9 +552,8 @@ export class GlnSelectComponent
     }
   }
   /** Handles all keypress events for the component's panel. */
-  public scoreboardKeydown(event: KeyboardEvent): void {
+  public frameKeydown(event: KeyboardEvent): void {
     if (!this.disabled) {
-      // console.log(`    scoreboardKeydown()`, event); // TODO del;
       if (!this.isPanelOpen) {
         // Open the selection panel by pressing the keys: 'up arrow', 'down arrow', 'space' and 'enter'.
         if (['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(event.key)) {
@@ -593,21 +591,6 @@ export class GlnSelectComponent
             break;
         }
       }
-    }
-  }
-
-  public clear(): void {
-    if (!this.disabled && !this.isEmpty()) {
-      GlnOptionUtil.setSelected(this.selectedOptions, false);
-      this.selectedOptions.length = 0;
-      // Select the first option with the value null.
-      const optionWithValueNull = !this.multiple ? GlnOptionUtil.findByValue(this.selectedOptions, null) : null;
-      if (optionWithValueNull !== null) {
-        this.selectedOptions = [optionWithValueNull];
-        GlnOptionUtil.setSelected(this.selectedOptions, true);
-      }
-      this.updateValueDataAndIsFilledAndValidity(this.multiple ? [] : null);
-      this.changeDetectorRef.markForCheck();
     }
   }
   /** Processing the option selected by the user. */
@@ -704,5 +687,9 @@ export class GlnSelectComponent
       }
     }
     return resultIndex > -1 ? value[resultIndex] : 0;
+  }
+
+  private getPosition(value: string | null): HorizontalConnectionPos {
+    return (value && ['start', 'center', 'end'].indexOf(value) > -1 ? value : 'start') as HorizontalConnectionPos;
   }
 }

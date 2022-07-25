@@ -74,18 +74,18 @@ export class GlnInputComponent
   public frameSize: string | null = null; // GlnFrameSizeType
   @Input()
   public helperText: string | null = null;
-  @Input()
-  public hoverColor: string | null = null;
   // @Input()
   // public isDisabled: string | null = null; // Is in GlnBasisControl.
   @Input()
   public isError: string | null = null;
   // @Input()
-  // public isNoAnimation: string | boolean | null = null; // Is in GlnBasisControl.
+  // public isHoverColor: string | boolean | null | undefined; // Is in GlnBasisControl.
+  // @Input()
+  // public isNoAnimation: string | boolean | null | undefined; // Is in GlnBasisControl.
   @Input()
   public isNoLabel: string | null = null;
-  @Input()
-  public isReadOnly: string | null = null;
+  // @Input()
+  // public isReadOnly: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
   // public isRequired: string | null = null; // Is in GlnBasisControl.
   // @Input()
@@ -132,10 +132,12 @@ export class GlnInputComponent
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
+  // public hoverColor: boolean | null = null; // Binding attribute "isHoverColor". // Is in GlnBasisControl.
   public isFocused = false;
   public isFilled = false;
   // public isWriteValueInit: boolean | null = null;                            // Is in GlnBasisControl.
   // public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // Is in GlnBasisControl.
+  // public readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Is in GlnBasisControl.
   // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisControl.
   public typeVal: GlnInputType = GlnInputType.text;
   // public valueInit: boolean | null = null; // Binding attribute "isValueInit". // Is in GlnBasisControl.
@@ -156,11 +158,13 @@ export class GlnInputComponent
 
   public override ngOnChanges(changes: SimpleChanges): void {
     // In the GlnBasisControl.ngOnChanges(), the definition is made:
-    // -  this.disabled = BooleanUtil.init(this.isDisabled);
-    // -  this.setDisabledState(!!this.disabled);
-    // -  this.required = BooleanUtil.init(this.isRequired);
-    // -  this.valueInit = BooleanUtil.init(this.isValueInit);
-    // -  this.noAnimation = BooleanUtil.init(this.isNoAnimation != null ? '' + this.isNoAnimation : null);
+    // - this.disabled = BooleanUtil.init(this.isDisabled);
+    // - this.setDisabledState(!!this.disabled);
+    // - this.hoverColor = BooleanUtil.init(this.isHoverColor);
+    // - this.noAnimation = BooleanUtil.init(this.isNoAnimation);
+    // - this.readOnly = BooleanUtil.init(this.isReadOnly);
+    // - this.required = BooleanUtil.init(this.isRequired);
+    // - this.valueInit = BooleanUtil.init(this.isValueInit);
     super.ngOnChanges(changes);
     if (changes.type) {
       this.typeVal = GlnInputTypeUtil.create(this.type) || GlnInputType.text;

@@ -39,7 +39,7 @@ export class SelectAttributesComponent {
 
   public urlSelect = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_SELECT');
 
-  public fruits = ['mango', 'lemon', 'orange', 'kiwi', 'mango2', 'lemon2', 'orange2', 'kiwi2', 'mango3', 'lemon3', 'orange3', 'kiwi3'];
+  public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
 
   public exterior02a = 'outlined';
   public formGroup02a: FormGroup = new FormGroup({
@@ -58,21 +58,34 @@ export class SelectAttributesComponent {
   };
   public formGroup02b: FormGroup = new FormGroup(this.control02b);
 
+  public fruitsC = ['mango', 'ripe lemon', 'gorgeous orange', 'succulent watermelon'];
   public exterior02c = 'outlined';
   public control02c = {
-    model02i: new FormControl(this.fruits[0], []),
-    model02j: new FormControl(this.fruits[0], []),
-    model02k: new FormControl([this.fruits[0], this.fruits[1]], []),
-    model02l: new FormControl([this.fruits[0], this.fruits[1]], []),
+    model02i: new FormControl(null, []),
+    model02j: new FormControl(null, []),
   };
   public formGroup02c: FormGroup = new FormGroup(this.control02c);
 
+  public exterior02d = 'outlined';
+  public control02d = {
+    // model02k: new FormControl([this.fruits[0], this.fruits[1]], []),
+    // model02l: new FormControl([this.fruits[0], this.fruits[1]], []),
+    // model02m: new FormControl([this.fruits[0], this.fruits[1]], []),
+    // model02m: new FormControl(this.fruits[0], []),
+    // model02n: new FormControl(this.fruits[0], []),
+    // model02o: new FormControl([this.fruits[0], this.fruits[1]], []),
+    // model02p: new FormControl([this.fruits[0], this.fruits[1]], []),
+  };
+  public formGroup02d: FormGroup = new FormGroup(this.control02d);
+
+  //
   public exterior02z = 'outlined';
   public control02z = {
     model02z: new FormControl([] /* this.fruits[0] */, []),
   };
   public formGroup02z: FormGroup = new FormGroup(this.control02z);
 
+  public fruitList = ['mango', 'lemon', 'orange', 'kiwi', 'mango2', 'lemon2', 'orange2', 'kiwi2', 'mango3', 'lemon3', 'orange3', 'kiwi3'];
   priz = false;
   config: GlnSelectConfig = {
     // isNoLabel: true,

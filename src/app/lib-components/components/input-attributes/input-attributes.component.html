@@ -23,7 +23,7 @@
       of the field or error message (helperText="Some important text").
     </li>
     <li>
-      "hoverColor" - When hovering the mouse, the label and frame
+      "isHoverColor" - When hovering the mouse, the label and frame
       will have the same color as when they received focus.
     </li>
     <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
@@ -42,6 +42,11 @@
     </li>
     <li>
       "wdFull" - an attribute sets the width to the width of the parent (width: 100%).
+      <br />
+      In this case, the width must be defined at the parent or at the current level.
+      <br />
+      Without this parameter, the width is determined by the content and may change
+      when the font size is changed.
     </li>
   </ul>
   <p>
@@ -322,12 +327,12 @@ export class InputComponent &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: hoverColor.</em>
+          <em>Attribute: isHoverColor.</em>
         </small>
       </div>
       <gln-input formControlName="model02g"
         label="Parameter value"
-        hoverColor
+        isHoverColor
         helperText="On hover, a frame with the focus color."
         [exterior]="exterior02b">
       </gln-input>
@@ -400,12 +405,12 @@ export class InputComponent &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: hoverColor.&lt;/em&gt;
+          &lt;em&gt;Attribute: isHoverColor.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02g"
         label="Parameter value"
-        hoverColor
+        isHoverColor
         helperText="On hover, a frame with the focus color."
         [exterior]="exterior02b"&gt;
       &lt;/gln-input&gt;
