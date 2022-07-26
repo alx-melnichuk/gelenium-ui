@@ -35,7 +35,7 @@ import {
 } from '@angular/forms';
 
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
-import { GlnBasisControl } from '../_classes/gln-basis-control.class';
+import { GlnBasisFrame } from '../_classes/gln-basis-frame.class';
 import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { GlnInputType, GlnInputTypeUtil } from '../gln-input/gln-input.interface';
@@ -59,7 +59,7 @@ export const GLN_INPUT_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_INPUT_CO
   ],
 })
 export class GlnInputComponent
-  extends GlnBasisControl
+  extends GlnBasisFrame
   implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
 {
   // @Input()
@@ -75,15 +75,17 @@ export class GlnInputComponent
   @Input()
   public helperText: string | null = null;
   // @Input()
-  // public isDisabled: string | null = null; // Is in GlnBasisControl.
-  @Input()
-  public isError: string | null = null;
+  // public isDisabled: string | boolean | null | undefined; // Is in GlnBasisControl.
+  // @Input()
+  // public isError: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
   // public isHoverColor: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
+  // public isLabelShrink: string | boolean | null | undefined; // Is in GlnBasisControl.
+  // @Input()
   // public isNoAnimation: string | boolean | null | undefined; // Is in GlnBasisControl.
-  @Input()
-  public isNoLabel: string | null = null;
+  // @Input()
+  // public isNoLabel: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
   // public isReadOnly: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
@@ -92,8 +94,6 @@ export class GlnInputComponent
   // public isValueInit: string | null = null; // Is in GlnBasisControl.
   @Input()
   public label = '';
-  @Input()
-  public lbShrink: string | null = null;
   @Input()
   public max: number | null = null;
   @Input()
@@ -129,6 +129,7 @@ export class GlnInputComponent
 
   public currConfig: GlnFrameConfig | null = null;
   // public disabled: boolean | null = null; // Binding attribute "isDisabled". // Is in GlnBasisControl.
+  public error: boolean | null = null; // Binding attribute "isError". // Is in GlnBasisControl.
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
@@ -136,7 +137,9 @@ export class GlnInputComponent
   public isFocused = false;
   public isFilled = false;
   // public isWriteValueInit: boolean | null = null;                            // Is in GlnBasisControl.
+  // public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink". // Is in GlnBasisControl.
   // public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // Is in GlnBasisControl.
+  // public noLabel: boolean | null = null; // Binding attribute "isNoLabel". // Is in GlnBasisControl.
   // public readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Is in GlnBasisControl.
   // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisControl.
   public typeVal: GlnInputType = GlnInputType.text;
@@ -159,9 +162,11 @@ export class GlnInputComponent
   public override ngOnChanges(changes: SimpleChanges): void {
     // In the GlnBasisControl.ngOnChanges(), the definition is made:
     // - this.disabled = BooleanUtil.init(this.isDisabled);
-    // - this.setDisabledState(!!this.disabled);
+    // - this.error = BooleanUtil.init(this.isError);
     // - this.hoverColor = BooleanUtil.init(this.isHoverColor);
+    // - this.labelShrink = BooleanUtil.init(this.isLabelShrink);
     // - this.noAnimation = BooleanUtil.init(this.isNoAnimation);
+    // - this.noLabel = BooleanUtil.init(this.isNoLabel);
     // - this.readOnly = BooleanUtil.init(this.isReadOnly);
     // - this.required = BooleanUtil.init(this.isRequired);
     // - this.valueInit = BooleanUtil.init(this.isValueInit);

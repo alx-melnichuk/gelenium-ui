@@ -117,9 +117,18 @@
     @Input()
     public isMultiple: string | boolean | null | undefined;
     @Input()
-    public isCheckmark: string | null = null;
-    @Input()
-    public isNoRipple: string | null = null; -->
+    public isCheckmark: string | null = null; -->
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoRipple: string | boolean | null | undefined;</code>
+      </td>
+      <td>
+        <span>
+          This property to turn off the ripple effect.<br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
     <tr>
       <td>
         <code>@Input()</code>
@@ -132,6 +141,18 @@
           <br />
           If not specified, then when you hover the mouse, the color of the
           label and frame will be the same as the default.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isLabelShrink: string | boolean | null | undefined;</code>
+      </td>
+      <td>
+        <span>
+          Disable label animation. The label is always static, at the top.<br />
+          Attribute (no content).
         </span>
       </td>
     </tr>
@@ -194,18 +215,6 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>lbShrink: string | null;</code>
-      </td>
-      <td>
-        <span>
-          Disable label animation. The label is always static, at the top.<br />
-          Attribute (no content).
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
         <code>noElevation: string | null;</code>
       </td>
       <td>
@@ -218,7 +227,7 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>noIcon: string | null;</code>
+        <code>isNoIcon: string | boolean | null | undefined</code>
       </td>
       <td>
         <span>

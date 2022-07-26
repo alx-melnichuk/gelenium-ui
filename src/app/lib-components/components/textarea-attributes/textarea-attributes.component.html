@@ -7,8 +7,8 @@
     <li>"isReadOnly" - a sign that the field is read-only (isReadOnly);</li>
     <li>"isRequired" - a sign that the field is required (isRequired);</li>
     <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
-    <li>"lbShrink" - a sign that the field has a permanent label,
-      without being converted to a placeholder (lbShrink);</li>
+    <li>"isLabelShrink" - a sign that the field has a permanent label,
+      without being converted to a placeholder (isLabelShrink);</li>
     <li>"isNoLabel" - a sign that the field has no label at all (isNoLabel);</li>
     <li>"helperText" - the parameter is used to provide context for a given
       field or error message (helperText="A value must be entered.");</li>
@@ -104,16 +104,16 @@
       </gln-textarea>
     </div>
 
-    <!-- <div class="app-elem">
+    <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: lbShrink.</em>
+          <em>Attribute: isLabelShrink.</em>
         </small>
       </div>
       <gln-textarea formControlName="model02e"
         label="Permanent label"
         [cntRows]="cntRows"
-        lbShrink
+        isLabelShrink
         helperText="The position of the label is fixed."
         [exterior]="exterior02">
       </gln-textarea>
@@ -132,7 +132,7 @@
         helperText="The label is not displayed."
         [exterior]="exterior02">
       </gln-textarea>
-    </div> -->
+    </div>
 
   </div>
 
@@ -215,13 +215,13 @@
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: lbShrink.&lt;/em&gt;
+          &lt;em&gt;Attribute: isLabelShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-textarea formControlName="model02e"
         label="Permanent label"
         [cntRows]="cntRows"
-        lbShrink
+        isLabelShrink
         helperText="The position of the label is fixed."
         [exterior]="exterior02"&gt;
       &lt;/gln-textarea&gt;

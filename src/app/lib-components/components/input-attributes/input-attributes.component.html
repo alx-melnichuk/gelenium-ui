@@ -32,7 +32,7 @@
     <li>"isReadOnly" - read-only access flag (isReadOnly);</li>
     <li>"isRequired" - a sign that the field is required (isRequired);</li>
     <li>"label" - The content of the label.</li>
-    <li>"lbShrink" - An indication that the label has moved up and shrunk.</li>
+    <li>"isLabelShrink" - An indication that the label has moved up and shrunk.</li>
     <li>"type" - indicate the type of the input element (type="text");</li>
     <li>"autoComplete" - the value of the autocomplete parameter for the input field.
       <br />&nbsp;&nbsp;autoComplete="off" - The browser is not permitted to automatically enter or
@@ -296,12 +296,12 @@ export class InputComponent &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: lbShrink.</em>
+          <em>Attribute: isLabelShrink.</em>
         </small>
       </div>
       <gln-input formControlName="model02e"
         label="Permanent label"
-        lbShrink
+        isLabelShrink
         helperText="The position of the label is fixed."
         [exterior]="exterior02b">
       </gln-input>
@@ -374,12 +374,12 @@ export class InputComponent &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: lbShrink.&lt;/em&gt;
+          &lt;em&gt;Attribute: isLabelShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02e"
         label="Permanent label"
-        lbShrink
+        isLabelShrink
         helperText="The position of the label is fixed."
         [exterior]="exterior02b"&gt;
       &lt;/gln-input&gt;
@@ -547,13 +547,13 @@ export class InputComponent &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attributes: type="month", lbShrink.</em>
+          <em>Attributes: type="month", isLabelShrink.</em>
         </small>
       </div>
       <gln-input formControlName="model02l"
         [label]="!control02c.model02l.value
         ? 'Enter month':'Month'"
-        lbShrink
+        isLabelShrink
         type="month"
         [helperText]="!control02c.model02l.value
       ?'Enter your month value.'
@@ -631,13 +631,13 @@ export class InputComponent &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attributes: type="month", lbShrink.&lt;/em&gt;
+          &lt;em&gt;Attributes: type="month", isLabelShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02l"
         [label]="!control02c.model02l.value
         ? 'Enter month':'Month'"
-        lbShrink
+        isLabelShrink
         type="month"
         [helperText]="!control02c.model02l.value
       ?'Enter your month value.'
@@ -718,13 +718,13 @@ export class InputComponent &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attributes: type="week", lbShrink.</em>
+          <em>Attributes: type="week", isLabelShrink.</em>
         </small>
       </div>
       <gln-input formControlName="model02m"
         [label]="!control02d.model02m.value
         ? 'Enter week':'Week'"
-        lbShrink
+        isLabelShrink
         type="week"
         [helperText]="!control02d.model02m.value
       ?'Enter your week value.'
@@ -737,13 +737,13 @@ export class InputComponent &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attributes: type="color", lbShrink.</em>
+          <em>Attributes: type="color", isLabelShrink.</em>
         </small>
       </div>
       <gln-input formControlName="model02n"
         [label]="!control02d.model02n.value
         ? 'Enter color':'Color'"
-        lbShrink
+        isLabelShrink
         type="color"
         [helperText]="!control02d.model02n.value
       ?'Enter color.'
@@ -755,13 +755,13 @@ export class InputComponent &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attributes: type="date", lbShrink.</em>
+          <em>Attributes: type="date", isLabelShrink.</em>
         </small>
       </div>
       <gln-input formControlName="model02o"
         [label]="!control02d.model02o.value
         ? 'Enter date':'Date'"
-        lbShrink
+        isLabelShrink
         type="date"
         [helperText]="!control02d.model02o.value
         ?'Enter your date value.'
@@ -775,13 +775,13 @@ export class InputComponent &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attributes: type="time", lbShrink.</em>
+          <em>Attributes: type="time", isLabelShrink.</em>
         </small>
       </div>
       <gln-input formControlName="model02p"
         [label]="!control02d.model02p.value
         ? 'Enter time':'Time'"
-        lbShrink
+        isLabelShrink
         type="time"
         [helperText]="!control02d.model02p.value
         ?'Enter your time value.'
@@ -813,13 +813,13 @@ export class InputComponent &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attributes: type="week", lbShrink.&lt;/em&gt;
+          &lt;em&gt;Attributes: type="week", isLabelShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02m"
         [label]="!control02d.model02m.value
         ? 'Enter week':'Week'"
-        lbShrink
+        isLabelShrink
         type="week"
         [helperText]="!control02d.model02m.value
       ?'Enter your week value.'
@@ -832,13 +832,13 @@ export class InputComponent &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attributes: type="color", lbShrink.&lt;/em&gt;
+          &lt;em&gt;Attributes: type="color", isLabelShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02n"
         [label]="!control02d.model02n.value
         ? 'Enter color':'Color'"
-        lbShrink
+        isLabelShrink
         type="color"
         [helperText]="!control02d.model02n.value
       ?'Enter color.'
@@ -850,13 +850,13 @@ export class InputComponent &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attributes: type="date", lbShrink.&lt;/em&gt;
+          &lt;em&gt;Attributes: type="date", isLabelShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02o"
         [label]="!control02d.model02o.value
         ? 'Enter date':'Date'"
-        lbShrink
+        isLabelShrink
         type="date"
         [helperText]="!control02d.model02o.value
         ?'Enter your date value.'
@@ -870,13 +870,13 @@ export class InputComponent &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attributes: type="time", lbShrink.&lt;/em&gt;
+          &lt;em&gt;Attributes: type="time", isLabelShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02p"
         [label]="!control02d.model02p.value
         ? 'Enter time':'Time'"
-        lbShrink
+        isLabelShrink
         type="time"
         [helperText]="!control02d.model02p.value
         ?'Enter your time value.'

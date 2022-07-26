@@ -279,8 +279,8 @@ export class SelectComponent &#123;
   <p>Attributes are also supported: <a [href]="urlSelect + '#Attributes02'">#</a></p>
   <ul>
     <li>
-      "lbShrink" - a sign that the field has a permanent label,
-      without being converted to a placeholder (lbShrink);
+      "isLabelShrink" - a sign that the field has a permanent label,
+      without being converted to a placeholder (isLabelShrink);
     </li>
     <li>
       "isError" - a sign that the field is in error (isError);
@@ -318,12 +318,12 @@ export class SelectComponent &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: lbShrink.</em>
+          <em>Attribute: isLabelShrink.</em>
         </small>
       </div>
       <gln-select formControlName="model02e"
         label="Permanent label"
-        lbShrink
+        isLabelShrink
         helperText="The position of the label is fixed."
         [exterior]="exterior02b"
         wdFull>
@@ -416,12 +416,12 @@ export class SelectComponent &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: lbShrink.&lt;/em&gt;
+          &lt;em&gt;Attribute: isLabelShrink.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-select formControlName="model02e"
         label="Permanent label"
-        lbShrink
+        isLabelShrink
         helperText="The position of the label is fixed."
         [exterior]="exterior02b"
         wdFull&gt;
@@ -563,6 +563,25 @@ export class SelectComponent &#123;
       The value of the minimum width can be specified by the css citile or by setting
       the css variable "--glns-min-width".
     </li>
+    <li>
+      "position" - Defines horizontal positioning.
+      It can take the following values:
+      <ul>
+        <li>"start" - positioned at the left edge;</li>
+        <li>"center" - positioned in the middle;</li>
+        <li>"end" - positioned on the right edge;</li>
+      </ul>
+    </li>
+    <li>
+      "visibleSize" - The maximum number of visible options.
+    </li>
+    <li>
+      "isNoIcon" - Hide the display of the status icon of the dropdown list of options.
+    </li>
+    <li>
+      "isNoAnimation" - Hide the display of the animation when the dropdown list of
+      options is expanded.
+    </li>
   </ul>
 </section>
 
@@ -595,7 +614,7 @@ export class SelectComponent &#123;
       </div>
       <gln-select formControlName="model02i"
         class="sa-mini"
-        label="Fruit 1"
+        label="Fruit"
         position="center"
         [exterior]="exterior02c">
         <gln-option><em>None</em></gln-option>
@@ -613,7 +632,7 @@ export class SelectComponent &#123;
       </div>
       <gln-select formControlName="model02j"
         class="sa-mini"
-        label="Fruit 2"
+        label="Fruit"
         position="end"
         [exterior]="exterior02c">
         <gln-option><em>None</em></gln-option>
@@ -623,8 +642,46 @@ export class SelectComponent &#123;
       </gln-select>
     </div>
 
-  </div>
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isNoIcon, visibleSize=4.</em>
+        </small>
+      </div>
+      <gln-select formControlName="model02k"
+        label="Fruit"
+        isNoIcon
+        [visibleSize]="4"
+        [exterior]="exterior02c"
+        helperText="The 'isNoIcon', 'visibleSize' are used."
+        wdFull>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
 
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isNoAnimation.</em>
+        </small>
+      </div>
+      <gln-select formControlName="model02l"
+        label="Fruit"
+        isNoAnimation
+        [exterior]="exterior02c"
+        helperText="The 'isNoAnimation' are used."
+        wdFull>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+
+  </div>
 
 </form>
 
@@ -643,16 +700,76 @@ export class SelectComponent &#123;
 
   &lt;div class="app-group"&gt;
 
-    &lt;div class="app-elem"&gt;
+    &lt;div class="app-elem sa-text-center"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: without wdFull.&lt;/em&gt;
+          &lt;em&gt;Attribute: without wdFull, position='center'.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-select formControlName="model02i"
+        class="sa-mini"
+        label="Fruit 1"
+        position="center"
         [exterior]="exterior02c"&gt;
         &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
-        &lt;gln-option *ngFor="let item of fruitsB"
+        &lt;gln-option *ngFor="let item of fruitsC"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: position='end'.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model02j"
+        class="sa-mini"
+        label="Fruit 2"
+        position="end"
+        [exterior]="exterior02c"&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruitsC"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isNoIcon, visibleSize=4.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model02k"
+        label="Fruit 3"
+        isNoIcon
+        [visibleSize]="4"
+        [exterior]="exterior02c"
+        helperText="The 'isNoIcon', 'visibleSize' are used."
+        wdFull&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isNoAnimation.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model02l"
+        label="Fruit 4"
+        isNoAnimation
+        [exterior]="exterior02c"
+        helperText="The 'isNoAnimation' are used."
+        wdFull&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
       &lt;/gln-select&gt;
@@ -678,13 +795,18 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class SelectComponent &#123;
-  public fruitsB = [
-    'mango', 'ripe lemon', 'gorgeous orange', 'very succulent kiwi'
+  public fruits = ['mango', 'lemon', 'orange', 'kiwi'];;
+
+  public fruitsC = [
+    'mango', 'ripe lemon', 'gorgeous orange', 'succulent watermelon'
   ];
 
   public exterior02c = 'outlined';
   public control02c = &#123;
     model02i: new FormControl(null, []),
+    model02j: new FormControl(null, []),
+    model02k: new FormControl(null, []),
+    model02l: new FormControl(null, []),
   &#125;;
   public formGroup02c: FormGroup = new FormGroup(this.control02c);
 
@@ -702,6 +824,12 @@ export class SelectComponent &#123;
 .app-elem &#123;
   min-width: 26ch;
   margin: 10px 10px;
+&#125;
+.sa-text-center &#123;
+  text-align: center;
+&#125;
+.sa-mini &#123;
+  min-width: 90px;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -710,6 +838,20 @@ export class SelectComponent &#123;
 </section>
 
 <hr br-nn />
+
+
+<section mr-vr
+  id="Attributes04">
+  <p>Attributes are also supported: <a [href]="urlSelect + '#Attributes04'">#</a></p>
+  <ul>
+    <li>
+      "isMultiple" - Use multiple selection options.
+    </li>
+    <li>
+      "isCheckmark" - Display a checkbox for options when multiple selections are made.
+    </li>
+  </ul>
+</section>
 
 <section mr-vr>
   <span>exterior: </span>
@@ -724,123 +866,59 @@ export class SelectComponent &#123;
   </mat-button-toggle-group>
 </section>
 
-<section mr-vr
-  id="Attributes04">
-  <p>Attributes are also supported: <a [href]="urlSelect + '#Attributes04'">#</a></p>
-  <ul>
-    <li>
-      "isFixRight" - Align dropdown list of options to the right.
-    </li>
-    <li>
-      "visibleSize" - The maximum number of visible options.
-    </li>
-    <li>
-      "noIcon" - Hide the display of the status icon of the dropdown list of options.
-    </li>
-    <li>
-      "isNoAnimation" - Hide the display of the animation when the dropdown list of
-      options is expanded.
-    </li>
-    <li>
-      "isMultiple" - Use multiple selection options.
-    </li>
-    <li>
-      "isCheckmark" - Display a checkbox for options when multiple selections are made.
-    </li>
-  </ul>
-</section>
-
-<!-- -->
 <form [formGroup]="formGroup02d"
   novalidate
-  autocomplete="off"
-  *ngIf="false">
+  autocomplete="off">
 
-  <div class="app-group"
-    *ngIf="false">
+  <div class="app-group">
 
-    <!-- <div class="app-elem">
+    <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: isFixRight, visibleSize.</em>
+          <em>Attribute: isMultiple, visibleSize.</em>
         </small>
       </div>
-      <gln-select formControlName="model02j"
-        label="Parameter value 1"
-        isFixRight
-        [visibleSize]="4"
-        helperText="Field for parameter 1."
-        [exterior]="exterior02c"
-        wdFull>
-        <gln-option><em>None</em></gln-option>
-        <gln-option *ngFor="let item of fruits"
-          [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-select>
-    </div> -->
-
-    <!-- <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: noIcon, isNoAnimation.</em>
-        </small>
-      </div>
-      <gln-select formControlName="model02k"
-        label="Parameter value 2"
-        noIcon
-        isNoAnimation
-        helperText="Field for parameter 2."
-        [exterior]="exterior02c"
-        wdFull>
-        <gln-option><em>None</em></gln-option>
-        <gln-option *ngFor="let item of fruits"
-          [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-select>
-    </div> -->
-
-    <!-- <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isMultiple.</em>
-        </small>
-      </div>
-      <gln-select formControlName="model02l"
-        label="Parameter value 3"
+      <gln-select formControlName="model02m"
+        class="sa-elem"
+        label="Flower"
         isMultiple
-        helperText="Field for parameter 3."
-        [exterior]="exterior02c"
-        wdFull>
+        [visibleSize]="8"
+        helperText="The 'isMultiple', 'visibleSize' are used."
+        [exterior]="exterior02d">
         <gln-option><em>None</em></gln-option>
-        <gln-option *ngFor="let item of fruits"
+        <gln-option *ngFor="let item of flowers"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
       </gln-select>
-    </div> -->
+    </div>
 
-    <!-- <div class="app-elem">
+    <div class="app-elem sa-elem">
       <div>
         <small>
           <em>Attribute: isMultiple, isCheckmark.</em>
         </small>
       </div>
-      <gln-select formControlName="model02m"
-        label="Parameter value 4"
+      <gln-select formControlName="model02n"
+        label="Flower"
         isMultiple
+        [visibleSize]="8"
         isCheckmark
-        helperText="Field for parameter 4."
-        [exterior]="exterior02c"
+        helperText="The 'isMultiple', 'isCheckmark' are used."
+        [exterior]="exterior02d"
         wdFull>
         <gln-option><em>None</em></gln-option>
-        <gln-option *ngFor="let item of fruits"
+        <gln-option *ngFor="let item of flowers"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
       </gln-select>
-    </div> -->
+    </div>
+
 
   </div>
 
 </form>
+
+<!-- -->
 
 <section mr-vr>
   <mat-accordion>
@@ -1006,7 +1084,7 @@ export class SelectComponent &#123;
         isFixRight9
         isMultiple
         isCheckmark
-        isNoRipple99
+        isNoRippl_e99
         config9="config"
         label="Fruit"
         label9="Parameter value 1"
@@ -1043,7 +1121,6 @@ export class SelectComponent &#123;
 @Input() public frameSize: string | null = null; // GlnFrameSizeType
 @Input() public isMultiple: string | null = null;
 @Input() public isCheckmark: string | null = null;
-@Input() public isNoRipple: string | null = null;
 // @Input() // #public isValueInit: string | null = null;
 
 @Input() public ornamLfAlign: string | null = null; // OrnamAlign

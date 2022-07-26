@@ -7,12 +7,12 @@
     <gln-frame [config]="currConfig"
       [exterior]="glnFrameExteriorInput.exterior"
       [isDisabled]="disabled"
-      [isError]="!!formControl.errors || getBoolean(isError)"
+      [isError]="!!formControl.errors || error"
       [isFilled]="isFilled"
-      [isHoverColor]="hoverColor"
-      [isLabelShrink]="getBoolean(lbShrink)"
-      [isNoAnimation]="noAnimation || isWriteValueInit"
-      [isNoLabel]="getBoolean(isNoLabel)"
+      [isHoverColor]="hoverColor || (currConfig?.isHoverColor || null)"
+      [isLabelShrink]="labelShrink || (currConfig?.isLabelShrink || null)"
+      [isNoAnimation]="noAnimation || (currConfig?.isNoAnimation || null) || isWriteValueInit"
+      [isNoLabel]="noLabel || (currConfig?.isNoLabel || null)"
       [isRequired]="required"
       [label]="label"
       [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
@@ -60,7 +60,7 @@
 </ng-container>
 <gln-hint-or-error *ngIf="!!helperText"
   [text]="helperText"
-  [isError]="!!formControl.errors || getBoolean(isError)"
+  [isError]="!!formControl.errors || error"
   [isFocused]="isFocused"
   [isDisabled]="disabled">
 </gln-hint-or-error>

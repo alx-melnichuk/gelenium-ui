@@ -17,15 +17,21 @@ import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 @Directive()
-export abstract class GlnBasisControl implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor {
+export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor {
   @Input()
   public id = '';
   @Input()
-  public isDisabled: string | null = null;
+  public isDisabled: string | boolean | null | undefined;
+  @Input()
+  public isError: string | boolean | null | undefined;
   @Input()
   public isHoverColor: string | boolean | null | undefined;
   @Input()
+  public isLabelShrink: string | boolean | null | undefined;
+  @Input()
   public isNoAnimation: string | boolean | null | undefined;
+  @Input()
+  public isNoLabel: string | boolean | null | undefined;
   @Input()
   public isReadOnly: string | boolean | null | undefined;
   @Input()
@@ -37,9 +43,12 @@ export abstract class GlnBasisControl implements OnChanges, OnInit, AfterContent
   readonly writeValueInit: EventEmitter<() => void> = new EventEmitter();
 
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
+  public error: boolean | null = null; // Binding attribute "isError".
   public hoverColor: boolean | null = null; // Binding attribute "isHoverColor".
   public isWriteValueInit: boolean | null = null;
+  public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink".
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
+  public noLabel: boolean | null = null; // Binding attribute "isNoLabel".
   public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
   public required: boolean | null = null; // Binding attribute "isRequired".
   public valueInit: boolean | null = null; // Binding attribute "isValueInit".
@@ -62,11 +71,20 @@ export abstract class GlnBasisControl implements OnChanges, OnInit, AfterContent
       this.disabled = BooleanUtil.init(this.isDisabled);
       this.setDisabledState(!!this.disabled);
     }
+    if (changes.isError) {
+      this.error = BooleanUtil.init(this.isError);
+    }
     if (changes.isHoverColor) {
       this.hoverColor = BooleanUtil.init(this.isHoverColor);
     }
+    if (changes.isLabelShrink) {
+      this.labelShrink = BooleanUtil.init(this.isLabelShrink);
+    }
     if (changes.isNoAnimation) {
       this.noAnimation = BooleanUtil.init(this.isNoAnimation);
+    }
+    if (changes.isNoLabel) {
+      this.noLabel = BooleanUtil.init(this.isNoLabel);
     }
     if (changes.isReadOnly) {
       this.readOnly = BooleanUtil.init(this.isReadOnly);

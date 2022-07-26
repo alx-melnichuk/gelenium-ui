@@ -63,16 +63,29 @@ export class SelectAttributesComponent {
   public control02c = {
     model02i: new FormControl(null, []),
     model02j: new FormControl(null, []),
+    model02k: new FormControl(null, []),
+    model02l: new FormControl(null, []),
   };
   public formGroup02c: FormGroup = new FormGroup(this.control02c);
 
+  public flowers = [
+    'rose',
+    'carnation',
+    'tulip',
+    'chamomile',
+    'daffodil',
+    'gerbera',
+    'orchid',
+    'lilac',
+    'gardenia',
+    'jasmine',
+    'magnolia',
+    'hyacinth',
+  ];
   public exterior02d = 'outlined';
   public control02d = {
-    // model02k: new FormControl([this.fruits[0], this.fruits[1]], []),
-    // model02l: new FormControl([this.fruits[0], this.fruits[1]], []),
-    // model02m: new FormControl([this.fruits[0], this.fruits[1]], []),
-    // model02m: new FormControl(this.fruits[0], []),
-    // model02n: new FormControl(this.fruits[0], []),
+    model02m: new FormControl([], []),
+    model02n: new FormControl([], []),
     // model02o: new FormControl([this.fruits[0], this.fruits[1]], []),
     // model02p: new FormControl([this.fruits[0], this.fruits[1]], []),
   };
@@ -90,7 +103,7 @@ export class SelectAttributesComponent {
   config: GlnSelectConfig = {
     // isNoLabel: true,
     // noAnimation: true,
-    isNoRipple: true,
+    // isNoRippl_e: true,
   };
   panelClass1 = 'panelClass1';
 

@@ -13,11 +13,11 @@ export interface GlnSelectConfig extends GlnFrameConfig {
   // ornamRgAlign?: GlnFrameOrnamAlign | undefined;
 
   isCheckmark?: boolean | undefined;
-  isFixRight?: boolean | undefined;
   isMultiple?: boolean | undefined;
+  isNoIcon?: boolean | undefined;
   isNoRipple?: boolean | undefined;
   noElevation?: boolean | undefined; // ?
-  noIcon?: boolean | undefined;
   panelClass?: string | string[] | Set<string> | { [key: string]: any } | undefined;
+  position?: string | undefined; // Horizontal position = 'start' | 'center' | 'end';
   // visibleSize = -1; // TODO ??
 }

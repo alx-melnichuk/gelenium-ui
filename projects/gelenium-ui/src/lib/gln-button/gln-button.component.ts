@@ -53,7 +53,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   @Input()
   public isDisabled: string | null = null;
   @Input()
-  public isNoRipple: string | null = null;
+  public isNoRipple: string | boolean | null | undefined;
   @Input()
   public ornamLfAlign: string | null = null; // OrnamAlign
   @Input()
@@ -78,7 +78,6 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
 
   public isFocused = false;
-  public noRipple: boolean | null = null; // Binding attribute "isNoRipple".
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -100,9 +99,6 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);
     }
-    if (changes.isNoRipple) {
-      this.noRipple = BooleanUtil.init(this.isNoRipple);
-    }
   }
 
   public ngOnInit(): void {
@@ -120,7 +116,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   // ** Public API **
 
   public doClick(event: MouseEvent): void {
-    if (!!event && !event.cancelBubble && this.linkElement && this.touchRipple && !this.noRipple) {
+    if (!!event && !event.cancelBubble && this.linkElement && this.touchRipple) {
       this.touchRipple.touchRipple(event);
     }
   }
@@ -141,6 +137,10 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     this.isFocused = false;
     this.focusState(this.renderer, this.hostRef, this.isFocused);
     this.blured.emit();
+  }
+
+  public getBoolean(value: string | boolean | null | undefined): boolean | null {
+    return BooleanUtil.init(value);
   }
 
   // ** Private API **

@@ -29,7 +29,7 @@
       glnb-pd-hor>
       <ng-content></ng-content>
     </span>
-    <gln-touch-ripple *ngIf="!disabled && !noRipple && !currConfig?.isNoRipple">
+    <gln-touch-ripple *ngIf="!disabled && !getBoolean(isNoRipple) && !currConfig?.isNoRipple">
     </gln-touch-ripple>
   </button>
 </ng-container>
@@ -54,7 +54,7 @@
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
     <ng-content select="a"></ng-content>
-    <gln-touch-ripple *ngIf="!disabled && !noRipple && !currConfig?.isNoRipple"
+    <gln-touch-ripple *ngIf="!disabled && !getBoolean(isNoRipple) && !currConfig?.isNoRipple"
       skip-events>
     </gln-touch-ripple>
   </div>

@@ -69,8 +69,10 @@ gln-select {
       content: ' ';
       height: 0;
       margin: 0 0.375em; // 0 6px
-      transition: transform 0.3s linear 0ms;
       width: 0;
+    }
+    &:not([noAnm])::after {
+      transition: transform 0.3s linear 0ms;
     }
     &[opn]::after {
       transform: rotate(180deg);
@@ -156,10 +158,10 @@ gln-select {
   // Element "gln-select-panel"
   .gln-select-panel {
     border-radius: var(--glnspo-border-radius, unset);
-    max-height: var(--glnspo-max-height, 280px);
-    max-width: 280px;
-    min-width: 112px;
-    // min-width: 100%;
+    max-height: var(--glnspo-max-height, calc(100% - 20px));
+    max-width: 100%;
+    min-height: 16px;
+    min-width: 16px;
     overflow: auto;
     outline: 0;
     -webkit-overflow-scrolling: touch;
