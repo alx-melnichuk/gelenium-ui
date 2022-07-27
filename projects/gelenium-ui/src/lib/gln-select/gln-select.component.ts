@@ -120,6 +120,10 @@ export class GlnSelectComponent
   @Input()
   public label = '';
   @Input()
+  public minLength: number | null | undefined;
+  @Input()
+  public maxLength: number | null | undefined;
+  @Input()
   public noElevation: string | null = null; // -
   @Input()
   public ornamLfAlign: string | null = null; // OrnamAlign // -
@@ -334,7 +338,20 @@ export class GlnSelectComponent
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public validate(control: AbstractControl): ValidationErrors | null {
-    return (this.errors = !this.disabled && this.required && this.isEmpty() ? { required: true } : null);
+    let result: ValidationErrors | null = null;
+    if (this.options.length > 0) {
+      if (this.required && this.isEmpty()) {
+        result = { ...(result || {}), ...{ required: true } };
+      }
+      const actualLength = this.selectedOptions.length;
+      if (this.multiple && !!this.minLength && this.minLength > 0 && actualLength < this.minLength) {
+        result = { ...(result || {}), ...{ minlength: { requiredLength: this.minLength, actualLength } } };
+      }
+      if (this.multiple && !!this.maxLength && this.maxLength > 0 && actualLength > this.maxLength) {
+        result = { ...(result || {}), ...{ maxlength: { requiredLength: this.maxLength, actualLength } } };
+      }
+    }
+    return (this.errors = result);
   }
 
   // ** interface Validator - finish **

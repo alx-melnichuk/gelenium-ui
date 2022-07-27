@@ -7,11 +7,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { GlnOptionModule, GlnSelectModule } from 'gelenium-ui';
 
-import { SelectAttributesComponent } from './select-attributes.component';
+import { SelectValidationComponent } from './select-validation.component';
 
 @NgModule({
-  declarations: [SelectAttributesComponent],
+  declarations: [SelectValidationComponent],
   imports: [CommonModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnOptionModule, GlnSelectModule],
-  exports: [SelectAttributesComponent],
+  exports: [SelectValidationComponent],
 })
-export class SelectAttributesModule {}
+export class SelectValidationModule {}

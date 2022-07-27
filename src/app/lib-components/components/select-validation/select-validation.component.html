@@ -1,0 +1,111 @@
+<section mr-vr>
+  <h3>Validation</h3>
+  <p>
+    The "isError" parameter sets the field to the error display state.
+    The "helperText" parameter can be used to display an error message.
+  </p>
+  <p>In case the field is in error:</p>
+  <ul>
+    <li>displays a red box for "outlined";</li>
+    <li>red underline is displayed for "underline" or "standard";</li>
+    <li>the content of "label" is displayed in red;</li>
+    <li>the content of "helperText" is displayed in red;</li>
+    <li>the specified elements are displayed in red even if the field is disabled (isDisabled);</li>
+  </ul>
+  <p>
+    An error condition also occurs when the constraints set by the reactive form and attributes are
+    violated.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior03a"
+    (change)="exterior03a=$event.value">
+    <mat-button-toggle [checked]="exterior03a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03a==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03a==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup03a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isError.</em>
+        </small>
+      </div>
+      <gln-select formControlName="model03a"
+        [label]="!controls03.model03a.value
+          ? 'Requires a value':'Parameter value'"
+        [isError]="!controls03.model03a.value ? '':null"
+        [helperText]="controls03.model03a.value
+        ? 'The field is filled.'
+        : 'The field is not filled.'"
+        [exterior]="exterior03a"
+        wdFull>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+    <!-- errors={{ controls03.model03a.errors | json }} -->
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isRequired, minLength=2, maxLength=3.</em>
+        </small>
+      </div>
+      <gln-select formControlName="model03b"
+        [label]="controls03.model03b.errors ? 'Error':'Value'"
+        isMultiple
+        isRequired
+        [minLength]="minLength03b"
+        [maxLength]="maxLength03b"
+        [helperText]="controls03.model03b.errors?.required
+        ?'Required field.'
+        :(controls03.model03b.errors?.minlength
+          ?'The minimum number of options is '
+          + controls03.model03b.errors?.minlength.requiredLength + '.'
+          : (controls03.model03b.errors?.maxlength
+            ? 'The maximum number of options is '
+            + controls03.model03b.errors?.maxlength.requiredLength + '.'
+            :  'Enter value.'))"
+        [exterior]="exterior03a"
+        wdFull>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+    <!-- errors={{ controls03.model03b.errors | json }} -->
+
+    <!-- <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isError + isDisabled.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model03c"
+        label="Error-Disabled"
+        isError
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior03a">
+      </gln-input>
+    </div> -->
+
+  </div>
+
+</form>
