@@ -477,61 +477,59 @@ export class GlnSelectComponent
     this.markedOption?.setMarked(false);
     this.markedOption = null;
 
-    const overlay = this.connectedOverlay?.overlayRef?.overlayElement;
-    const overlayRef = HtmlElemUtil.getElementRef(overlay);
-    const panelHeight = this.getHeight(HtmlElemUtil.getElementRef(overlay?.children[0]?.children[0] as HTMLElement));
-    if (overlay && panelHeight > 0) {
+    const overlayElement: HTMLElement = this.connectedOverlay.overlayRef.overlayElement;
+    const selectPanelRef = HtmlElemUtil.getElementRef(overlayElement.children[0]?.children[0] as HTMLElement);
+    const panelHeight = this.getHeight(selectPanelRef);
+    if (panelHeight > 0) {
+      const overlayRef = HtmlElemUtil.getElementRef(overlayElement);
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
     }
     if (!this.noAnimation) {
-      const panelWrapRef = this.getPanelWrapRef(this.connectedOverlay);
+      const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement.children[0] as HTMLElement);
       // Add an attribute for animation and transformation.
-      HtmlElemUtil.setAttr(this.renderer, panelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, null);
-      HtmlElemUtil.setAttr(this.renderer, panelWrapRef, CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION, '');
+      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, null);
+      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION, '');
     }
     this.closed.emit();
   }
   /** Callback when the overlay panel is attached. */
   public attach(): void {
-    const overlay = this.connectedOverlay?.overlayRef?.overlayElement;
-    if (!overlay) {
-      return;
-    }
     // Add a class to not skip mouse events.
     const hostElementRef = HtmlElemUtil.getElementRef(this.connectedOverlay.overlayRef.hostElement);
     HtmlElemUtil.setClass(this.renderer, hostElementRef, 'gln-overlay-events-auto', true);
-    // Adding a class so that custom styles can be applied.
-    const overlayRef = HtmlElemUtil.getElementRef(overlay);
-    HtmlElemUtil.setAttr(this.renderer, overlayRef, 'glnspo-select', '');
 
-    const panelRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(overlay?.children[0]?.children[0] as HTMLElement);
-    const panelHeight = this.getHeight(panelRef);
+    const overlayElement: HTMLElement = this.connectedOverlay.overlayRef.overlayElement;
+    // Adding a class so that custom styles can be applied.
+    const overlayRef = HtmlElemUtil.getElementRef(overlayElement);
+    HtmlElemUtil.setAttr(this.renderer, overlayRef, 'glnspo-select', '');
+    const selectPanelRef = HtmlElemUtil.getElementRef(overlayElement.children[0]?.children[0] as HTMLElement);
+    const panelHeight = this.getHeight(selectPanelRef);
     if (!this.noAnimation && panelHeight > 0) {
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
     }
     // We cannot get the actual sizes and positions of elements if they are affected by a transformation.
     // Therefore, we first get all the data, and then add attributes for animation and transformation.
-    if (this.markedOption !== null && panelRef !== null && panelHeight > 0) {
+    if (this.markedOption !== null && selectPanelRef !== null && panelHeight > 0) {
       const optionRect = this.markedOption.hostRef.nativeElement.getBoundingClientRect();
       const optionHeight = this.getHeight(this.markedOption.hostRef);
       const optionHeightDelta = optionHeight > 0 ? NumberUtil.roundTo100(optionHeight / 2) : 0;
-      const panelRect = panelRef.nativeElement.getBoundingClientRect();
+      const panelRect = selectPanelRef.nativeElement.getBoundingClientRect();
       const positionY = optionRect.top - panelRect.top - NumberUtil.roundTo100(panelHeight / 2) + optionHeightDelta;
       if (positionY > 0) {
-        panelRef.nativeElement.scrollTo(0, positionY);
+        selectPanelRef.nativeElement.scrollTo(0, positionY);
       }
     }
-    const panelWrapRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(overlay?.children[0] as HTMLElement);
+    const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement?.children[0] as HTMLElement);
     if (this.noAnimation) {
-      HtmlElemUtil.setAttr(this.renderer, panelWrapRef, 'noAnm', '');
-      HtmlElemUtil.setClass(this.renderer, panelWrapRef, 'gln-no-animation', true);
+      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, 'noAnm', '');
+      HtmlElemUtil.setClass(this.renderer, selectPanelWrapRef, 'gln-no-animation', true);
     } else {
       // Add an attribute for animation and transformation.
-      HtmlElemUtil.setAttr(this.renderer, panelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, '');
+      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, '');
     }
     // Set the font size for the overlay.
     if (this.triggerFontSize > 0) {
-      overlay.style.fontSize = `${this.triggerFontSize}px`;
+      overlayElement.style.fontSize = `${this.triggerFontSize}px`;
     }
     if (this.triggerFrameSize > 0) {
       const borderRadius = NumberUtil.roundTo100(this.triggerFrameSize / 10);
@@ -629,10 +627,6 @@ export class GlnSelectComponent
       result = (value < screenHeight ? '-' : '') + delta;
     }
     return result;
-  }
-  /** Get panel 'gln-select-panel-wrap' html-element. */
-  private getPanelWrapRef(connectedOverlay: CdkConnectedOverlay | undefined): ElementRef<HTMLElement> | null {
-    return HtmlElemUtil.getElementRef((connectedOverlay?.overlayRef?.overlayElement?.children[0] || null) as HTMLElement);
   }
   /** Update the data value, the sign of fullness and perform validation. */
   private updateValueDataAndIsFilledAndValidity(newValueData: unknown | unknown[] | null): void {

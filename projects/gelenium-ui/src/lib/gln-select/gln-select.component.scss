@@ -158,7 +158,7 @@ gln-select {
   // Element "gln-select-panel"
   .gln-select-panel {
     border-radius: var(--glnspo-border-radius, unset);
-    max-height: var(--glnspo-max-height, calc(100% - 20px));
+    max-height: var(--glnspo-max-height, 100%);
     max-width: 100%;
     min-height: 16px;
     min-width: 16px;
