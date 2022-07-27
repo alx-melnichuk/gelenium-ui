@@ -852,6 +852,9 @@ export class SelectComponent &#123;
     <li>
       "isCheckmark" - Display a checkbox for options when multiple selections are made.
     </li>
+    <li>
+      "isNoRipple" - Disables the ripple effect.
+    </li>
   </ul>
 </section>
 
@@ -915,6 +918,26 @@ export class SelectComponent &#123;
       </gln-select>
     </div>
 
+    <div class="app-elem sa-elem">
+      <div>
+        <small>
+          <em>Attribute: isNoRipple.</em>
+        </small>
+      </div>
+      <gln-select formControlName="model02o"
+        label="Flower"
+        isNoRipple
+        isMultiple
+        [visibleSize]="8"
+        helperText="The 'isNoRipple' are used."
+        [exterior]="exterior02d"
+        wdFull>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of flowers"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
 
   </div>
 

@@ -38,7 +38,7 @@ import { GlnFrameSizePaddingVerHorRes } from '../directives/gln-frame-size/gln-f
 import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnBasisFrame } from '../_classes/gln-basis-frame.class';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
-import { GlnOptionItem, GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
+import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
 import { GlnOptionUtil } from '../gln-option/gln-option.util';
 import { ArrayUtil } from '../_utils/array.util';
@@ -153,13 +153,10 @@ export class GlnSelectComponent
       const newOptions = GlnOptionUtil.getOptionsByValues(newValue, this.options);
       // Which elements of array "this.selectedOptions" are not included in array "newOptions".
       const removed = ArrayUtil.uninclude<GlnOptionComponent>(this.selectedOptions, newOptions);
-      GlnOptionUtil.setSelected(removed, false);
-      const currentOptions = ArrayUtil.delete<GlnOptionComponent>(this.selectedOptions, removed);
       // Which elements of array "newOptions" are not included in array "this.selectedOptions".
       const added = ArrayUtil.uninclude<GlnOptionComponent>(newOptions, this.selectedOptions);
-      GlnOptionUtil.setSelected(added, true);
-      const resultOptions = currentOptions.concat(added);
-      this.selectedOptions = this.options.filter((option) => resultOptions.includes(option));
+      this.selectedOptions = this.mergeOptions(this.selectedOptions, added, removed);
+
       this.updateValueDataAndIsFilledAndValidity(newValue);
       this.changeDetectorRef.markForCheck();
     }
@@ -344,10 +341,9 @@ export class GlnSelectComponent
 
   // ** interface GlnOptionParent - start **
 
-  public optionSelection(optionItem: GlnOptionItem): void {
-    const addOption = optionItem as GlnOptionComponent;
+  public optionSelection(optionItem: GlnOptionComponent): void {
     Promise.resolve().then(() => {
-      this.selectionOptionElement(addOption);
+      this.selectionOptionElement(optionItem);
       if (this.isPanelOpen && !this.isFocused) {
         this.isFocused = true;
         this.focus();
@@ -507,26 +503,6 @@ export class GlnSelectComponent
     if (!this.noAnimation && panelHeight > 0) {
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
     }
-    // We cannot get the actual sizes and positions of elements if they are affected by a transformation.
-    // Therefore, we first get all the data, and then add attributes for animation and transformation.
-    if (this.markedOption !== null && selectPanelRef !== null && panelHeight > 0) {
-      const optionRect = this.markedOption.hostRef.nativeElement.getBoundingClientRect();
-      const optionHeight = this.getHeight(this.markedOption.hostRef);
-      const optionHeightDelta = optionHeight > 0 ? NumberUtil.roundTo100(optionHeight / 2) : 0;
-      const panelRect = selectPanelRef.nativeElement.getBoundingClientRect();
-      const positionY = optionRect.top - panelRect.top - NumberUtil.roundTo100(panelHeight / 2) + optionHeightDelta;
-      if (positionY > 0) {
-        selectPanelRef.nativeElement.scrollTo(0, positionY);
-      }
-    }
-    const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement?.children[0] as HTMLElement);
-    if (this.noAnimation) {
-      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, 'noAnm', '');
-      HtmlElemUtil.setClass(this.renderer, selectPanelWrapRef, 'gln-no-animation', true);
-    } else {
-      // Add an attribute for animation and transformation.
-      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, '');
-    }
     // Set the font size for the overlay.
     if (this.triggerFontSize > 0) {
       overlayElement.style.fontSize = `${this.triggerFontSize}px`;
@@ -536,8 +512,26 @@ export class GlnSelectComponent
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(borderRadius)?.concat('px'));
     }
     const optionHeigth = this.visibleSize > 0 ? this.getOptionHeigth(this.options) : 0;
-    if (optionHeigth > 0) {
-      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_HEIGHT, NumberUtil.str(optionHeigth * this.visibleSize)?.concat('px'));
+    const maxHeigthSelectPanel = optionHeigth * this.visibleSize;
+    if (maxHeigthSelectPanel > 0) {
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_HEIGHT, NumberUtil.str(maxHeigthSelectPanel)?.concat('px'));
+    }
+    // We cannot get the actual sizes and positions of elements if they are affected by a transformation.
+    // Therefore, we first get all the data, and then add attributes for animation and transformation.
+    if (this.markedOption !== null && selectPanelRef !== null && maxHeigthSelectPanel > 0) {
+      const delta = NumberUtil.roundTo100(maxHeigthSelectPanel / 2) - NumberUtil.roundTo100(this.getHeight(this.markedOption.hostRef) / 2);
+      const optionRect = this.markedOption.hostRef.nativeElement.getBoundingClientRect();
+      const panelRect = selectPanelRef.nativeElement.getBoundingClientRect();
+      selectPanelRef.nativeElement.scrollTo(0, optionRect.top - panelRect.top - delta);
+    }
+    // Important! These operations should be the last, they include animation and the dimensions of the panel are distorted.
+    const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement?.children[0] as HTMLElement);
+    if (this.noAnimation) {
+      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, 'noAnm', '');
+      HtmlElemUtil.setClass(this.renderer, selectPanelWrapRef, 'gln-no-animation', true);
+    } else {
+      // Add an attribute for animation and transformation.
+      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, '');
     }
   }
   /** Handles all keypress events for the component's panel. */
@@ -585,24 +579,19 @@ export class GlnSelectComponent
   }
   /** Processing the option selected by the user. */
   public selectionOptionElement(addOption: GlnOptionComponent | null): void {
-    const addOptions = addOption !== null ? [addOption] : [];
-    if (!this.disabled && addOptions.length > 0) {
-      const added: GlnOptionComponent[] = [];
+    const newOptions = addOption !== null ? [addOption] : [];
+    if (!this.disabled && newOptions.length > 0) {
       const removed: GlnOptionComponent[] = [];
-      const currentOptions: GlnOptionComponent[] = [];
       if (this.multiple) {
         // Which elements of array "this.selectedOptions" are included in array "addOptions".
-        removed.push(...ArrayUtil.include<GlnOptionComponent>(this.selectedOptions, addOptions));
+        removed.push(...ArrayUtil.include<GlnOptionComponent>(this.selectedOptions, newOptions));
       } else {
         // Which elements of array "this.selectedOptions" are not included in array "addOptions".
-        removed.push(...ArrayUtil.uninclude<GlnOptionComponent>(this.selectedOptions, addOptions));
+        removed.push(...ArrayUtil.uninclude<GlnOptionComponent>(this.selectedOptions, newOptions));
       }
-      GlnOptionUtil.setSelected(removed, false);
-      currentOptions.push(...ArrayUtil.delete<GlnOptionComponent>(this.selectedOptions, removed));
       // Which elements of array "addOptions" are not included in array "this.selectedOptions".
-      added.push(...ArrayUtil.uninclude<GlnOptionComponent>(addOptions, this.selectedOptions));
-      GlnOptionUtil.setSelected(added, true);
-      this.selectedOptions = currentOptions.concat(added);
+      const added = ArrayUtil.uninclude<GlnOptionComponent>(newOptions, this.selectedOptions); // +
+      this.selectedOptions = this.mergeOptions(this.selectedOptions, added, removed);
 
       const values = GlnOptionUtil.getValues(this.selectedOptions);
       const value = values.length > 0 ? values[0] : null;
@@ -612,8 +601,15 @@ export class GlnSelectComponent
       this.selected.emit({ value: !this.multiple ? value : null, values: this.multiple ? values : [], change: { added, removed } });
     }
   }
-
   // ** Private API **
+
+  private mergeOptions(selected: GlnOptionComponent[], added: GlnOptionComponent[], removed: GlnOptionComponent[]): GlnOptionComponent[] {
+    GlnOptionUtil.setSelected(removed, false);
+    const currentOptions = ArrayUtil.delete<GlnOptionComponent>(selected, removed);
+    GlnOptionUtil.setSelected(added, true);
+    const resultOptions = currentOptions.concat(added);
+    return this.options.filter((option) => resultOptions.includes(option));
+  }
 
   private getHeight(value: ElementRef<HTMLElement> | null): number {
     return value ? Number(getComputedStyle(value.nativeElement).getPropertyValue('height').replace('px', '')) : 0;

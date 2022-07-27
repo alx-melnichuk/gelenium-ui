@@ -19,7 +19,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
-import { GlnOptionItem, GlnOptionParent, GLN_OPTION_PARENT } from './gln-option-parent.interface';
+import { GlnOptionParent, GLN_OPTION_PARENT } from './gln-option-parent.interface';
 
 let uniqueIdCounter = 0;
 
@@ -31,13 +31,13 @@ let uniqueIdCounter = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnOptionComponent extends GlnOptionItem implements OnChanges, OnInit {
+export class GlnOptionComponent implements OnChanges, OnInit {
   @Input()
   public id = `glno-${uniqueIdCounter++}`;
   @Input()
   public isDisabled: string | null = null;
   @Input()
-  public value: unknown | null = null; // interface GlnOptionItem
+  public value: unknown | null = null;
 
   @ViewChild('contentRef', { static: true })
   public contentRef!: ElementRef<HTMLElement>;
@@ -48,7 +48,7 @@ export class GlnOptionComponent extends GlnOptionItem implements OnChanges, OnIn
   public formGroup: FormGroup = new FormGroup({ checkinfo: this.formControl });
   public marked = false;
   public multiple = false;
-  public selected: boolean | null = null; // interface GlnOptionItem
+  public selected: boolean | null = null;
 
   constructor(
     public hostRef: ElementRef<HTMLElement>,
@@ -56,7 +56,6 @@ export class GlnOptionComponent extends GlnOptionItem implements OnChanges, OnIn
     private changeDetectorRef: ChangeDetectorRef,
     @Optional() @Inject(GLN_OPTION_PARENT) public parent: GlnOptionParent
   ) {
-    super();
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'role', 'option');
   }
 
@@ -109,7 +108,8 @@ export class GlnOptionComponent extends GlnOptionItem implements OnChanges, OnIn
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', !!value);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', value ? '' : null);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'aria-disabled', '' + !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', value ? '-1' : '0');
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', value ? null : '0');
+
       this.changeDetectorRef.markForCheck();
     }
   }

@@ -1,12 +1,5 @@
 import { InjectionToken } from '@angular/core';
 
-/** Describes the interface of a option element. */
-export abstract class GlnOptionItem {
-  public abstract value: unknown | null;
-  public abstract selected: boolean | null;
-  public abstract setSelected(value: boolean | null): void;
-}
-
 /**
  * Describes the interface of a parent element that contains a list of options.
  * Contains properties that can be used by options.
@@ -15,7 +8,7 @@ export interface GlnOptionParent {
   checkmark?: boolean | null | undefined; // Only for multiple=true
   multiple?: boolean | null | undefined;
   noRipple?: boolean | null | undefined;
-  optionSelection(option: GlnOptionItem): void;
+  optionSelection(option: unknown): void;
 }
 
 /**
