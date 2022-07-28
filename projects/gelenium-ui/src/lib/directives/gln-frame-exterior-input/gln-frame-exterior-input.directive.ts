@@ -15,9 +15,9 @@ import { NumberUtil } from '../../_utils/number.util';
 })
 export class GlnFrameExteriorInputDirective implements OnChanges, GlnFrameSizePrepare {
   @Input()
-  public glnFrameExteriorInput: string | null = null; // GlnFrameExteriorType
+  public glnFrameExteriorInput: string | null | undefined; // GlnFrameExteriorType
   @Input()
-  public glnFrameExteriorInputElementRef: ElementRef<HTMLElement> | null = null;
+  public glnFrameExteriorInputElementRef: ElementRef<HTMLElement> | null | undefined;
 
   @Output()
   readonly glnFrameExteriorInputChange: EventEmitter<void> = new EventEmitter();
@@ -32,7 +32,7 @@ export class GlnFrameExteriorInputDirective implements OnChanges, GlnFrameSizePr
       this.elementRef = this.glnFrameExteriorInputElementRef || this.hostRef;
     }
     if (changes.glnFrameExteriorInput) {
-      const exteriorInp = GlnFrameExteriorUtil.convert(this.glnFrameExteriorInput);
+      const exteriorInp = GlnFrameExteriorUtil.convert(this.glnFrameExteriorInput || null);
       const exterior = GlnFrameExteriorUtil.create(exteriorInp);
       this.exterior = exterior;
       this.glnFrameExteriorInputChange.emit();

@@ -1140,35 +1140,3 @@ export class SelectComponent &#123;
 
   </div>
 </form>
-
-<!--
-@Input() public config: GlnSelectConfig | null = null;
-@Input() public frameSize: string | null = null; // GlnFrameSizeType
-@Input() public isMultiple: string | null = null;
-@Input() public isCheckmark: string | null = null;
-// @Input() // #public isValueInit: string | null = null;
-
-@Input() public ornamLfAlign: string | null = null; // OrnamAlign
-@Input() public ornamRgAlign: string | null = null; // OrnamAlign
--->
-
-<!-- <gln-select formControlName="model02b"
-label="Required field"
-isRequired
-helperText="A value must be entered."
-[exterior]="exterior02a"
-isMultiple9
-isCheckmark9
-wdFull>
-<gln-option><em>None</em></gln-option>
-<gln-option value="demo01"
-  isDisabled>Demo01 (dis)</gln-option>
-<gln-option *ngFor="let item of fruits"
-  [value]="item">{{ capitalizeFirstLetter(item) }}
-</gln-option>
-</gln-select>
-<pre>
-value={{formGroup02a.controls.model02b.value === null ? 'null' : formGroup02a.controls.model02b.value}}
-errors={{formGroup02a.controls.model02b.errors | json }}
-</pre>
-</div> -->

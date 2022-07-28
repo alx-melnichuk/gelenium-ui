@@ -67,13 +67,13 @@ export class GlnInputComponent
   @Input()
   public autoComplete = '';
   @Input()
-  public config: GlnFrameConfig | null = null;
+  public config: GlnFrameConfig | null | undefined;
   @Input()
-  public exterior: string | null = null; // GlnFrameExteriorType
+  public exterior: string | null | undefined; // GlnFrameExteriorType
   @Input()
-  public frameSize: string | null = null; // GlnFrameSizeType
+  public frameSize: string | null | undefined; // GlnFrameSizeType
   @Input()
-  public helperText: string | null = null;
+  public helperText: string | null | undefined;
   // @Input()
   // public isDisabled: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
@@ -89,9 +89,9 @@ export class GlnInputComponent
   // @Input()
   // public isReadOnly: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
-  // public isRequired: string | null = null; // Is in GlnBasisControl.
+  // public isRequired: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
-  // public isValueInit: string | null = null; // Is in GlnBasisControl.
+  // public isValueInit: string | boolean | null | undefined; // Is in GlnBasisControl.
   @Input()
   public label = '';
   @Input()
@@ -103,9 +103,9 @@ export class GlnInputComponent
   @Input()
   public minLength: number | null = null;
   @Input()
-  public ornamLfAlign: string | null = null; // OrnamAlign
+  public ornamLfAlign: string | null | undefined; // OrnamAlign
   @Input()
-  public ornamRgAlign: string | null = null; // OrnamAlign
+  public ornamRgAlign: string | null | undefined; // OrnamAlign
   @Input()
   public pattern = '';
   @Input()

@@ -1,6 +1,6 @@
 <ng-container [formGroup]="formGroup">
   <div class="glni-wrap"
-    [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
+    [glnFrameExteriorInput]="exterior || currConfig?.exterior"
     #glnFrameExteriorInput="glnFrameExteriorInput"
     [glnFrameExteriorInputElementRef]="hostRef"
     (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()">
@@ -9,21 +9,21 @@
       [isDisabled]="disabled"
       [isError]="!!formControl.errors || error"
       [isFilled]="isFilled"
-      [isHoverColor]="hoverColor || (currConfig?.isHoverColor || null)"
-      [isLabelShrink]="labelShrink || (currConfig?.isLabelShrink || null)"
-      [isNoAnimation]="noAnimation || (currConfig?.isNoAnimation || null) || isWriteValueInit"
-      [isNoLabel]="noLabel || (currConfig?.isNoLabel || null)"
+      [isHoverColor]="hoverColor || currConfig?.isHoverColor"
+      [isLabelShrink]="labelShrink || currConfig?.isLabelShrink"
+      [isNoAnimation]="noAnimation || currConfig?.isNoAnimation || isWriteValueInit"
+      [isNoLabel]="noLabel || currConfig?.isNoLabel"
       [isRequired]="required"
       [label]="label"
-      [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
+      [glnFrameSize]="frameSize || currConfig?.frameSize"
       #glnFrameSize="glnFrameSize"
       [glnFrameSizeElementRef]="hostRef"
       [glnFrameSizeValue]="currConfig?.frameSizeValue || frameSizeDefault"
-      [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
+      [glnFrameSizeLabelPd]="currConfig?.labelPd"
       [glnFrameSizePrepare]="glnFrameExteriorInput"
       glnFrameOrnament
-      [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
-      [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
+      [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
+      [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
       [glnFrameOrnamentPath]="'/div{0}'">
 
       <span glnf-orn-lf

@@ -46,7 +46,7 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>config: GlnFrameConfig | null = null;</code>
+        <code>config: GlnFrameConfig | null | undefined;</code>
       </td>
       <td>
         <span>Defines a configuration object.</span><br />
@@ -56,7 +56,7 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>exterior: string | null;</code>
+        <code>exterior: string | null | undefined;</code>
       </td>
       <td>
         <span>
@@ -92,19 +92,19 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>helperText: string;</code>
+        <code>helperText: string | null | undefined;</code>
       </td>
       <td>
         <span>
           Specifies the text for additional clarification or error.
-          <br />(default = null;)
+          <br />(default = undefined;)
         </span>
       </td>
     </tr>
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isDisabled: string | null;</code>
+        <code>isDisabled: string | boolean | null | undefined;</code>
       </td>
       <td>
         <span>The element is disabled.<br />Attribute (no content).</span>
@@ -113,7 +113,7 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isError: string | null;</code>
+        <code>isError: string | boolean | null | undefined;</code>
       </td>
       <td>
         <span>
@@ -160,7 +160,7 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isNoLabel: string | null;</code>
+        <code>isNoLabel: string | boolean | null | undefined;</code>
       </td>
       <td>
         <span>
@@ -171,7 +171,7 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isReadOnly: string | null;</code>
+        <code>isReadOnly: string | boolean | null | undefined;</code>
       </td>
       <td>
         <span>Whether the element is readonly.<br />Attribute (no content).</span>
@@ -180,7 +180,7 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isRequired: string | null;</code>
+        <code>isRequired: string | boolean | null | undefined;</code>
       </td>
       <td>
         <span>

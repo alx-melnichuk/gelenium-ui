@@ -66,17 +66,17 @@ export class GlnTextareaComponent
   @Input()
   public autoComplete = '';
   @Input()
-  public cntCols: number | null = null;
+  public cntCols: number | null | undefined;
   @Input()
-  public cntRows: number | null = null;
+  public cntRows: number | null | undefined;
   @Input()
-  public config: GlnFrameConfig | null = null;
+  public config: GlnFrameConfig | null | undefined;
   @Input()
-  public exterior: string | null = null; // GlnFrameExteriorType
+  public exterior: string | null | undefined; // GlnFrameExteriorType
   @Input()
-  public frameSize: string | null = null; // GlnFrameSizeType
+  public frameSize: string | null | undefined; // GlnFrameSizeType
   @Input()
-  public helperText: string | null = null;
+  public helperText: string | null | undefined;
   // @Input()
   // public isDisabled: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
@@ -92,27 +92,27 @@ export class GlnTextareaComponent
   // @Input()
   // public isReadOnly: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
-  // public isRequired: string | null = null;// Is in GlnBasisControl.
+  // public isRequired: string | boolean | null | undefined;// Is in GlnBasisControl.
   // @Input()
-  // public isValueInit: string | null = null; // Is in GlnBasisControl.
+  // public isValueInit: string | boolean | null | undefined; // Is in GlnBasisControl.
   @Input()
   public label = '';
   @Input()
-  public maxLength: number | null = null;
+  public maxLength: number | null | undefined;
   @Input()
-  public maxRows: number | null = null;
+  public maxRows: number | null | undefined;
   @Input()
-  public minLength: number | null = null;
+  public minLength: number | null | undefined;
   @Input()
-  public minRows: number | null = null;
+  public minRows: number | null | undefined;
   @Input()
-  public ornamLfAlign: string | null = null; // OrnamAlign
+  public ornamLfAlign: string | null | undefined; // OrnamAlign
   @Input()
-  public ornamRgAlign: string | null = null; // OrnamAlign
+  public ornamRgAlign: string | null | undefined; // OrnamAlign
   @Input()
   public tabIndex = 0;
   @Input()
-  public wdFull: string | null = null;
+  public wdFull: string | null | undefined;
 
   @Output()
   readonly focused: EventEmitter<void> = new EventEmitter();
@@ -170,7 +170,7 @@ export class GlnTextareaComponent
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.isRequired || changes.minLength || changes.maxLength) {
-      this.prepareFormGroup(this.required, this.minLength, this.maxLength);
+      this.prepareFormGroup(this.required, this.minLength || null, this.maxLength || null);
     }
     if (changes.cntRows || changes.minRows || changes.maxRows) {
       this.currentRows = this.cntRows || this.getCurrentRows(this.getNumberLines(this.formControl.value), this.minRows, this.maxRows);
@@ -291,7 +291,7 @@ export class GlnTextareaComponent
     HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
   }
 
-  private getCurrentRows(numberOfLines: number, minRows: number | null, maxRows: number | null): number {
+  private getCurrentRows(numberOfLines: number, minRows: number | null | undefined, maxRows: number | null | undefined): number {
     let result = numberOfLines > 0 ? numberOfLines : 1;
     if (!!minRows && minRows > 0 && minRows > result) {
       result = minRows;

@@ -84,13 +84,13 @@ export class GlnSelectComponent
   // @Input()
   // public id = `glns-${uniqueIdCounter++}`; // Is in GlnBasisControl.
   @Input()
-  public config: GlnSelectConfig | null = null; // -
+  public config: GlnSelectConfig | null | undefined; // -
   @Input()
-  public exterior: string | null = null; // GlnFrameExteriorType
+  public exterior: string | null | undefined; // GlnFrameExteriorType
   @Input()
-  public frameSize: string | null = null; // GlnFrameSizeType // -
+  public frameSize: string | null | undefined; // GlnFrameSizeType // -
   @Input()
-  public helperText: string | null = null;
+  public helperText: string | null | undefined;
   @Input()
   public isCheckmark: string | boolean | null | undefined;
   // @Input()
@@ -114,9 +114,9 @@ export class GlnSelectComponent
   // @Input()
   // public isReadOnly: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
-  // public isRequired: string | null = null; // Is in GlnBasisControl.
+  // public isRequired: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
-  // public isValueInit: string | null = null; // Is in GlnBasisControl. //~
+  // public isValueInit: string | boolean | null | undefined; // Is in GlnBasisControl. //~
   @Input()
   public label = '';
   @Input()
@@ -126,9 +126,9 @@ export class GlnSelectComponent
   @Input()
   public noElevation: string | null = null; // -
   @Input()
-  public ornamLfAlign: string | null = null; // OrnamAlign // -
+  public ornamLfAlign: string | null | undefined; // OrnamAlign // -
   @Input()
-  public ornamRgAlign: string | null = null; // OrnamAlign // -
+  public ornamRgAlign: string | null | undefined; // OrnamAlign // -
   /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
   @Input()
   public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = ''; // -

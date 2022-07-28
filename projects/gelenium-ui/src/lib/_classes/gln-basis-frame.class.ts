@@ -35,9 +35,9 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
   @Input()
   public isReadOnly: string | boolean | null | undefined;
   @Input()
-  public isRequired: string | null = null;
+  public isRequired: string | boolean | null | undefined;
   @Input()
-  public isValueInit: string | null = null;
+  public isValueInit: string | boolean | null | undefined;
 
   @Output()
   readonly writeValueInit: EventEmitter<() => void> = new EventEmitter();

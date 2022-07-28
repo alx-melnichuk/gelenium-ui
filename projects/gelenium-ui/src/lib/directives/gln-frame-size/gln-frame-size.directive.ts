@@ -16,17 +16,17 @@ import { NumberUtil } from '../../_utils/number.util';
 })
 export class GlnFrameSizeDirective implements OnChanges {
   @Input()
-  public glnFrameSize: string | null = null;
+  public glnFrameSize: string | null | undefined;
   @Input()
-  public glnFrameSizeValue: number | null = null;
+  public glnFrameSizeValue: number | null | undefined;
   @Input()
-  public glnFrameSizeLabelPd: number | null = null;
+  public glnFrameSizeLabelPd: number | null | undefined;
   @Input()
-  public glnFrameSizeElementRef: ElementRef<HTMLElement> | null = null;
+  public glnFrameSizeElementRef: ElementRef<HTMLElement> | null | undefined;
   @Input()
-  public glnFrameSizePrepare: GlnFrameSizePrepare | null = null;
+  public glnFrameSizePrepare: GlnFrameSizePrepare | null | undefined;
   @Input()
-  public glnFrameSizeModify: string | null = null;
+  public glnFrameSizeModify: string | null | undefined;
 
   @Output()
   readonly glnFrameSizeChange: EventEmitter<GlnFrameSizePaddingVerHorRes> = new EventEmitter();
@@ -53,7 +53,7 @@ export class GlnFrameSizeDirective implements OnChanges {
     let isModify = !!changes.glnFrameSizeLabelPd || !!changes.glnFrameSizeModify;
     if (changes.glnFrameSize || changes.glnFrameSizeValue) {
       const frameSizeValueOld = this.frameSizeValue;
-      const frameSize = GlnFrameSizeUtil.convert(this.glnFrameSize);
+      const frameSize = GlnFrameSizeUtil.convert(this.glnFrameSize || null);
       this.frameSizeValue = GlnFrameSizeUtil.getValue(frameSize) || this.glnFrameSizeValue || 0;
       const isModifySize = this.frameSizeValue !== frameSizeValueOld;
       isModify = !isModify && isModifySize ? isModifySize : isModify;

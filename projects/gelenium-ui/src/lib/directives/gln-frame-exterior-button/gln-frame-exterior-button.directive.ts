@@ -15,9 +15,9 @@ import { NumberUtil } from '../../_utils/number.util';
 })
 export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizePrepare {
   @Input()
-  public glnFrameExteriorButton: string | null = null; // GlnButtonExteriorType
+  public glnFrameExteriorButton: string | null | undefined; // GlnButtonExteriorType
   @Input()
-  public glnFrameExteriorButtonElementRef: ElementRef<HTMLElement> | null = null;
+  public glnFrameExteriorButtonElementRef: ElementRef<HTMLElement> | null | undefined;
 
   @Output()
   readonly glnFrameExteriorButtonChange: EventEmitter<void> = new EventEmitter();
@@ -32,7 +32,7 @@ export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizeP
       this.elementRef = this.glnFrameExteriorButtonElementRef || this.hostRef;
     }
     if (changes.glnFrameExteriorButton) {
-      const exteriorInp = GlnButtonExteriorUtil.convert(this.glnFrameExteriorButton);
+      const exteriorInp = GlnButtonExteriorUtil.convert(this.glnFrameExteriorButton || null);
       const exterior = GlnButtonExteriorUtil.create(exteriorInp);
       if (this.exterior !== exterior) {
         this.exterior = exterior;
@@ -45,7 +45,7 @@ export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizeP
   // ** Implementation of the GlnSizePrepareData interface. (start) **
 
   public getExterior = (): string | null => {
-    return this.glnFrameExteriorButton;
+    return this.glnFrameExteriorButton || null;
   };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getBorderRadius = (frameSizeValue: number, lineHeight: number): string | null => {

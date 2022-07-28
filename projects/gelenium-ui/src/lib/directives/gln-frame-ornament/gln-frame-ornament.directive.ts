@@ -13,18 +13,18 @@ export const ATTR_ORN_RG = 'glnf-orn-rg';
 })
 export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
   @Input()
-  public glnFrameOrnamentLfAlign: string | null = null; // OrnamAlign
+  public glnFrameOrnamentLfAlign: string | null | undefined; // OrnamAlign
   @Input()
-  public glnFrameOrnamentRgAlign: string | null = null; // OrnamAlign
+  public glnFrameOrnamentRgAlign: string | null | undefined; // OrnamAlign
   @Input()
-  public glnFrameOrnamentElementRef: ElementRef<HTMLElement> | null = null;
+  public glnFrameOrnamentElementRef: ElementRef<HTMLElement> | null | undefined;
   @Input()
   /** Path to an element that has children with 'glnf-orn-lf' and 'glnf-orn-rg' attributes. */
   // Example: "/div{0}" - the first child tag is "div" with index 0.
   // Example: "/.glnf-border{0}" - first child tag with class "glnf-border" and index 0..
-  public glnFrameOrnamentPath: string | null = null;
+  public glnFrameOrnamentPath: string | null | undefined;
   @Input()
-  public glnFrameOrnamentAfterContent: boolean | null = null;
+  public glnFrameOrnamentAfterContent: boolean | null | undefined;
 
   private isInit = true;
   private ornamentLf: HTMLElement | null = null;
@@ -39,24 +39,24 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
   public ngOnChanges(changes: SimpleChanges): void {
     if (this.isInit) {
       if (!this.glnFrameOrnamentAfterContent) {
-        this.initialSetting(this.hostRef.nativeElement, this.glnFrameOrnamentPath);
+        this.initialSetting(this.hostRef.nativeElement, this.glnFrameOrnamentPath || null);
       }
       this.isInit = false;
     }
     if (changes.glnFrameOrnamentLfAlign && this.ornamentLfElemRef) {
-      this.settingOrnamentLeft(this.renderer, this.glnFrameOrnamentLfAlign, this.ornamentLfElemRef);
+      this.settingOrnamentLeft(this.renderer, this.glnFrameOrnamentLfAlign || null, this.ornamentLfElemRef);
     }
     if (changes.glnFrameOrnamentRgAlign && this.ornamentRgElemRef) {
-      this.settingOrnamentRight(this.renderer, this.glnFrameOrnamentRgAlign, this.ornamentRgElemRef);
+      this.settingOrnamentRight(this.renderer, this.glnFrameOrnamentRgAlign || null, this.ornamentRgElemRef);
     }
   }
 
   public ngAfterContentInit(): void {
     if (this.glnFrameOrnamentAfterContent) {
-      this.initialSetting(this.hostRef.nativeElement, this.glnFrameOrnamentPath);
+      this.initialSetting(this.hostRef.nativeElement, this.glnFrameOrnamentPath || null);
 
-      this.settingOrnamentLeft(this.renderer, this.glnFrameOrnamentLfAlign, this.ornamentLfElemRef);
-      this.settingOrnamentRight(this.renderer, this.glnFrameOrnamentRgAlign, this.ornamentRgElemRef);
+      this.settingOrnamentLeft(this.renderer, this.glnFrameOrnamentLfAlign || null, this.ornamentLfElemRef);
+      this.settingOrnamentRight(this.renderer, this.glnFrameOrnamentRgAlign || null, this.ornamentRgElemRef);
     }
     // Get the width of the ornament block.
     this.ornamentLfWidth = this.ornamentLf?.offsetWidth || 0;

@@ -121,7 +121,7 @@
   </ul>
   <p>Example:</p>
   <code><pre source="html">
-[glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
+[glnFrameExteriorInput]="exterior || currConfig?.exterior"
 [glnFrameExteriorInputElementRef]="hostRef"
 (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()"</pre></code>
   <p>
@@ -202,7 +202,7 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
   <code><pre source="html">
 [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
 [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
-[glnFrameSizeLabelPd]="currConfig?.labelPd || null"
+[glnFrameSizeLabelPd]="currConfig?.labelPd"
 [glnFrameSizePrepare]="glnFrameExteriorInput"</pre></code>
   <p>
     There is an input parameter with interface GlnFrameSizePrepare.
@@ -275,7 +275,7 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
   <p>File "gln-input.component.html"</p>
   <code><pre source="html">
 &lt;div #glnFrameExteriorInput="glnFrameExteriorInput"
-  [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
+  [glnFrameExteriorInput]="exterior || currConfig?.exterior"
   [glnFrameExteriorInputElementRef]="hostRef"
   (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()"
   // parameter value "exterior"
@@ -292,10 +292,10 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
     [isError]="!!formControl.errors || getBoolean(isError)"
 
     #glnFrameSize="glnFrameSize"
-    [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
+    [glnFrameSize]="frameSize || currConfig?.frameSize"
     [glnFrameSizeElementRef]="hostRef"
     [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
-    [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
+    [glnFrameSizeLabelPd]="currConfig?.labelPd"
     [glnFrameSizePrepare]="glnFrameExteriorInput"
     // parameter value "frameSizeValue";
     // css-parameter: "--glnfs-br-rd",
@@ -305,8 +305,8 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
     // css-parameter: "--glnfs-pd-bt"
 
     glnFrameOrnament
-    [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
-    [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)"
+    [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
+    [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
     // indents for ornaments (images) on the left and right;
     // alignment of ornaments vertically;
     // css-parameter: "--glnfo-pd-lf",

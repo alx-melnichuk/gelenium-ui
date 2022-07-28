@@ -45,19 +45,19 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   @Input()
   public id = `glnb-${uniqueIdCounter++}`;
   @Input()
-  public config: GlnButtonConfig | null = null;
+  public config: GlnButtonConfig | null | undefined;
   @Input()
-  public exterior: string | null = null; // GlnButtonExteriorType
+  public exterior: string | null | undefined; // GlnButtonExteriorType
   @Input()
-  public frameSize: string | null = null; // GlnFrameSizeType
+  public frameSize: string | null | undefined; // GlnFrameSizeType
   @Input()
-  public isDisabled: string | null = null;
+  public isDisabled: string | boolean | null | undefined;
   @Input()
   public isNoRipple: string | boolean | null | undefined;
   @Input()
-  public ornamLfAlign: string | null = null; // OrnamAlign
+  public ornamLfAlign: string | null | undefined; // OrnamAlign
   @Input()
-  public ornamRgAlign: string | null = null; // OrnamAlign
+  public ornamRgAlign: string | null | undefined; // OrnamAlign
 
   @Output()
   readonly focused: EventEmitter<void> = new EventEmitter();

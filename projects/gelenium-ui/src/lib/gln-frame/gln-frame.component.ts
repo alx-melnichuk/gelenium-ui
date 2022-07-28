@@ -30,25 +30,25 @@ export const GLN_FRAME_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_FRAME_CO
 })
 export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
-  public config: GlnFrameConfig | null = null;
+  public config: GlnFrameConfig | null | undefined;
   @Input()
-  public exterior: string | null = null; // GlnFrameExteriorType
+  public exterior: string | null | undefined; // GlnFrameExteriorType
   @Input()
-  public isDisabled: boolean | null = null;
+  public isDisabled: boolean | null | undefined;
   @Input()
-  public isError: boolean | null = null;
+  public isError: boolean | null | undefined;
   @Input()
   public isFilled = false;
   @Input()
-  public isHoverColor: boolean | null = null;
+  public isHoverColor: boolean | null | undefined;
   @Input()
-  public isLabelShrink: boolean | null = null;
+  public isLabelShrink: boolean | null | undefined;
   @Input()
-  public isNoAnimation: boolean | null = null;
+  public isNoAnimation: boolean | null | undefined;
   @Input()
-  public isNoLabel: boolean | null = null;
+  public isNoLabel: boolean | null | undefined;
   @Input()
-  public isRequired: boolean | null = null;
+  public isRequired: boolean | null | undefined;
   @Input()
   public label = '';
 
@@ -83,7 +83,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.exterior) {
-      this.frameExterior = GlnFrameExteriorUtil.convert(this.exterior);
+      this.frameExterior = GlnFrameExteriorUtil.convert(this.exterior || null);
       this.settingExterior(this.renderer, this.hostRef, this.frameExterior);
     }
     if (changes.isHoverColor || (changes.config && this.isHoverColor == null)) {
