@@ -110,7 +110,7 @@
         isRequired
         [minLength]="minLength06c"
         helperText="
-        {{(controls06c.model06o.errors?.required ?
+        {{(!controls06c.model06o.value ?
           'Required field.':
           (controls06c.model06o.errors?.minlength ?
             'Minimum length '
@@ -222,7 +222,7 @@
         isRequired
         [minLength]="minLength06c"
         helperText="
-        <b>&#123;</b>&#123;(controls06c.model06o.errors?.required ?
+        <b>&#123;</b>&#123;(!controls06c.model06o.value ?
           'Required field.':
           (controls06c.model06o.errors?.minlength ?
             'Minimum length '

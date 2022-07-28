@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants/constants';
 
@@ -21,8 +21,8 @@ export class FramePalette2Component {
   public labelCss = LABEL_CSS;
 
   public controls06b = {
-    model06g: new FormControl('Hello World', [Validators.required]),
-    model06h: new FormControl('', [Validators.required]),
+    model06g: new FormControl('Hello World', []),
+    model06h: new FormControl('', []),
     model06i: new FormControl('Hello World', []),
     model06j: new FormControl('Hello World', []),
   };

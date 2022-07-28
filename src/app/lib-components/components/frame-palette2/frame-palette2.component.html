@@ -31,8 +31,8 @@
         isRequired
         wdFull
         helperText="{{
-          (controls06b.model06g.errors?.required
-            ? 'Required field.': 'Enter value.')
+          !controls06b.model06g.value
+            ? 'Required field.': 'Enter value.'
         }}">
       </gln-input>
     </div>
@@ -52,8 +52,8 @@
         isRequired
         wdFull
         helperText="{{
-          (controls06b.model06h.errors?.required
-            ? 'Required field.': 'Enter value.')
+          !controls06b.model06h.value
+            ? 'Required field.': 'Enter value.'
         }}">
       </gln-input>
     </div>
@@ -64,16 +64,16 @@
           <em>Class: is-success.</em>
         </small>
       </div>
-      <gln-input [ngClass]="['fp-bstrap', (!controls06b.model06i.errors ? 'is-success' : '')]"
-        formControlName="model06i"
+      <gln-input formControlName="model06i"
+        [ngClass]="['fp-bstrap', (!controls06b.model06i.errors ? 'is-success' : '')]"
         frameSize="short"
         isNoLabel
         exterior="outlined"
         isRequired
         wdFull
         helperText="{{
-          (controls06b.model06i.errors?.required
-            ? 'Required field.': 'Enter value.')
+          !controls06b.model06i.value
+            ? 'Required field.': 'Enter value.'
         }}">
       </gln-input>
     </div>
@@ -135,8 +135,8 @@
         isRequired
         wdFull
         helperText="<b>&#123;</b>&#123;
-          (controls06b.model06g.errors?.required
-            ? 'Required field.': 'Enter value.')
+          !controls06b.model06g.value
+            ? 'Required field.': 'Enter value.'
         &#125;&#125;"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -156,7 +156,27 @@
         isRequired
         wdFull
         helperText="<b>&#123;</b>&#123;
-          (controls06b.model06h.errors?.required
+          !controls06b.model06h.value
+            ? 'Required field.': 'Enter value.'
+        &#125;&#125;"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Class: is-success.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model06i"
+        [ngClass]="['fp-bstrap', (!controls06b.model06i.errors ? 'is-success' : '')]"
+        frameSize="short"
+        isNoLabel
+        exterior="outlined"
+        isRequired
+        wdFull
+        helperText="<b>&#123;</b>&#123;
+          (!controls06b.model06i.value
             ? 'Required field.': 'Enter value.')
         &#125;&#125;"&gt;
       &lt;/gln-input&gt;
@@ -169,11 +189,12 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input class="fp-bstrap"
-        formControlName="model06i"
+        formControlName="model06j"
         frameSize="short"
         isNoLabel
         exterior="outlined"
         isDisabled
+        wdFull
         helperText="The parameter is disabled."&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -188,7 +209,7 @@ import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
 import &#123;
-  FormControl, FormGroup, Validators
+  FormControl, FormGroup
 &#125; from '@angular/forms';
 
 @Component(&#123;
@@ -199,8 +220,8 @@ import &#123;
 &#125;)
 export class FrameComponent &#123;
   public controls06b = &#123;
-    model06g: new FormControl('Hello World', [Validators.required]),
-    model06h: new FormControl('', [Validators.required]),
+    model06g: new FormControl('Hello World', []),
+    model06h: new FormControl('', []),
     model06i: new FormControl('Hello World', []),
   &#125;;
   public formGroup06b: FormGroup = new FormGroup(this.controls06b);
@@ -218,7 +239,6 @@ export class FrameComponent &#123;
   margin: 10px 10px;
 &#125;
 
-// BootStrap
 // BootStrap
 .fp-bstrap &#123;
   color: #495057;

@@ -100,7 +100,7 @@
         [maxLength]="maxLength05"
         [exterior]="exterior05"
         [helperText]="
-          (controls05.model05c.errors?.required
+          (!controls05.model05c.value
           ? 'Required field.'
           : (controls05.model05c.errors?.minlength
             ? 'Minimum length '
@@ -131,7 +131,7 @@
         [maxLength]="maxLength05"
         [exterior]="exterior05"
         [helperText]="
-          (controls05.model05d.errors?.required
+          (!controls05.model05d.value
           ? 'Required field.'
           : (controls05.model05d.errors?.minlength
             ? 'Minimum length '
@@ -163,7 +163,7 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-          controls05.model05e.errors?.required
+          !controls05.model05e.value
           ? 'The password value is required.'
           :'Enter the password value.'">
         <button gln-orn-lf
@@ -190,7 +190,7 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-          controls05.model05f.errors?.required
+          !controls05.model05f.value
           ? 'The password value is required.'
           : 'Enter the password value.'">
         <button gln-orn-rg
@@ -216,7 +216,7 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-          controls05.model05g.errors?.required
+          !controls05.model05g.value
           ? 'The password value is required.'
           :'Enter the password value.'"
         [ornamLfAlign]="'baseline'">
@@ -240,7 +240,7 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-          controls05.model05h.errors?.required
+          !controls05.model05h.value
           ? 'The password value is required.'
           :'Enter the password value.'"
         [config]="config05h">
@@ -432,7 +432,7 @@
         [maxLength]="maxLength05"
         [exterior]="exterior05"
         [helperText]="
-          (controls05.model05c.errors?.required
+          (!controls05.model05c.value
           ? 'Required field.'
           : (controls05.model05c.errors?.minlength
             ? 'Minimum length '
@@ -463,7 +463,7 @@
         [maxLength]="maxLength05"
         [exterior]="exterior05"
         [helperText]="
-          (controls05.model05d.errors?.required
+          (!controls05.model05d.value
           ? 'Required field.'
           : (controls05.model05d.errors?.minlength
             ? 'Minimum length '
@@ -495,7 +495,7 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-          controls05.model05e.errors?.required
+          !controls05.model05e.value
           ? 'The password value is required.'
           :'Enter the password value.'"&gt;
         &lt;button gln-orn-lf
@@ -522,7 +522,7 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-          controls05.model05f.errors?.required
+          !controls05.model05f.value
           ? 'The password value is required.'
           : 'Enter the password value.'"&gt;
         &lt;button gln-orn-rg
@@ -548,7 +548,7 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-          controls05.model05g.errors?.required
+          !controls05.model05g.value
           ? 'The password value is required.'
           :'Enter the password value.'"
           [ornamLfAlign]="'baseline'"&gt;
@@ -572,7 +572,7 @@
         isRequired
         [exterior]="exterior05"
         [helperText]="
-          controls05.model05h.errors?.required
+          !controls05.model05h.value
           ? 'The password value is required.'
           :'Enter the password value.'"
           [config]="config05h"&gt;

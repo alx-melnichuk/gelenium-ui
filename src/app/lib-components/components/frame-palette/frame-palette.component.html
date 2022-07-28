@@ -157,7 +157,7 @@
         isRequired
         [minLength]="minLength06a"
         helperText="
-        {{(controls06a.model06e.errors?.required ?
+        {{(!controls06a.model06e.value ?
           'Required field.':
           (controls06a.model06e.errors?.minlength ?
             'Minimum length '
@@ -269,14 +269,14 @@
         isRequired
         [minLength]="minLength06a"
         helperText="
-      <b>&#123;</b>&#123;(controls06a.model06e.errors?.required ?
-        'Required field.':
-        (controls06a.model06e.errors?.minlength ?
-          'Minimum length '
-          + controls06a.model06e.errors?.minlength.requiredLength
-          + ' characters.'
-          :'Enter value.'
-        )
+      <b>&#123;</b>&#123;(!controls06a.model06e.value ?
+          'Required field.':
+          (controls06a.model06e.errors?.minlength ?
+            'Minimum length '
+            + controls06a.model06e.errors?.minlength.requiredLength
+            + ' characters.'
+            :'Enter value.'
+          )
       )&#125;&#125;"
         [exterior]="exterior06a"&gt;
       &lt;/gln-input&gt;
