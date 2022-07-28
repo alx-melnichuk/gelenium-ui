@@ -264,6 +264,7 @@ export class GlnTextareaComponent
     // https://github.com/angular/angular/issues/9587 "event.stopImmediatePropagation() called from listeners not working"
     // Added Event.cancelBubble check to make sure there was no call to event.stopImmediatePropagation() in previous handlers.
     if (!!event && !event.cancelBubble) {
+      this.onChange(this.formControl.value);
       this.currentRows = this.cntRows || this.getCurrentRows(this.getNumberLines(this.formControl.value), this.minRows, this.maxRows);
     }
   }

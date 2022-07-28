@@ -339,15 +339,15 @@ export class GlnSelectComponent
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public validate(control: AbstractControl): ValidationErrors | null {
     let result: ValidationErrors | null = null;
-    if (this.options.length > 0) {
-      if (this.required && this.isEmpty()) {
+    if (this.isEmpty()) {
+      if (this.required) {
         result = { ...(result || {}), ...{ required: true } };
       }
-      const actualLength = this.selectedOptions.length;
-      if (this.multiple && !!this.minLength && this.minLength > 0 && actualLength < this.minLength) {
+    } else if (this.multiple) {
+      const actualLength = Array.isArray(this.valueData) ? this.valueData.length : 0;
+      if (!!this.minLength && 0 < this.minLength && actualLength < this.minLength) {
         result = { ...(result || {}), ...{ minlength: { requiredLength: this.minLength, actualLength } } };
-      }
-      if (this.multiple && !!this.maxLength && this.maxLength > 0 && actualLength > this.maxLength) {
+      } else if (!!this.maxLength && 0 < this.maxLength && actualLength > this.maxLength) {
         result = { ...(result || {}), ...{ maxlength: { requiredLength: this.maxLength, actualLength } } };
       }
     }

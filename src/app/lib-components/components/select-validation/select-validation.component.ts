@@ -37,7 +37,6 @@ export class SelectValidationComponent {
   public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
 
   public minLength03b = 2;
-  public maxLength03b = 3;
   public controls03 = {
     model03a: new FormControl(null, []),
     model03b: new FormControl([], []),

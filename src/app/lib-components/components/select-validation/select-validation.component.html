@@ -48,8 +48,8 @@
           ? 'Requires a value':'Parameter value'"
         [isError]="!controls03.model03a.value ? '':null"
         [helperText]="controls03.model03a.value
-        ? 'The field is filled.'
-        : 'The field is not filled.'"
+          ? 'The field is filled.'
+          : 'The field is not filled.'"
         [exterior]="exterior03a"
         wdFull>
         <gln-option><em>None</em></gln-option>
@@ -58,53 +58,52 @@
         </gln-option>
       </gln-select>
     </div>
-    <!-- errors={{ controls03.model03a.errors | json }} -->
 
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: isRequired, minLength=2, maxLength=3.</em>
+          <em>Attribute: isRequired, minLength={{minLength03b}}.</em>
         </small>
       </div>
       <gln-select formControlName="model03b"
-        [label]="controls03.model03b.errors ? 'Error':'Value'"
+        [label]="controls03.model03b.value?.length >= minLength03b
+          ? 'Value' : 'Error'"
         isMultiple
         isRequired
         [minLength]="minLength03b"
-        [maxLength]="maxLength03b"
-        [helperText]="controls03.model03b.errors?.required
-        ?'Required field.'
-        :(controls03.model03b.errors?.minlength
-          ?'The minimum number of options is '
-          + controls03.model03b.errors?.minlength.requiredLength + '.'
-          : (controls03.model03b.errors?.maxlength
-            ? 'The maximum number of options is '
-            + controls03.model03b.errors?.maxlength.requiredLength + '.'
-            :  'Enter value.'))"
+        [helperText]="!controls03.model03b.value
+          ?'Required field.'
+          :(controls03.model03b.errors?.minlength
+            ?'Minimum length '
+            + controls03.model03b.errors?.minlength.requiredLength
+            + ' characters.'
+            :'Enter value.')"
         [exterior]="exterior03a"
         wdFull>
-        <gln-option><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
       </gln-select>
     </div>
-    <!-- errors={{ controls03.model03b.errors | json }} -->
 
-    <!-- <div class="app-elem">
+    <div class="app-elem">
       <div>
         <small>
           <em>Attribute: isError + isDisabled.</em>
         </small>
       </div>
-      <gln-input formControlName="model03c"
+      <gln-select formControlName="model03c"
         label="Error-Disabled"
         isError
         isDisabled
         helperText="The parameter is disabled."
-        [exterior]="exterior03a">
-      </gln-input>
-    </div> -->
+        [exterior]="exterior03a"
+        wdFull>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
 
   </div>
 

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import {
   LABEL_CSS,
@@ -34,10 +34,10 @@ export class TextareaValidationComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public minLength03 = 4;
+  public minLength03b = 3;
   public controls03 = {
-    model03a: new FormControl('', []),
-    model03b: new FormControl('', [Validators.required, Validators.minLength(this.minLength03)]),
+    model03a: new FormControl(null, []),
+    model03b: new FormControl(null, []),
     model03c: new FormControl('Hello World', []),
   };
   public formGroup03: FormGroup = new FormGroup(this.controls03);
