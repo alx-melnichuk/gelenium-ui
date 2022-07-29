@@ -71,12 +71,12 @@
         isMultiple
         isRequired
         [minLength]="minLength03b"
-        [helperText]="!controls03.model03b.value
+        [helperText]="!controls03.model03b.value.length
           ?'Required field.'
           :(controls03.model03b.errors?.minlength
-            ?'Minimum length '
+            ?'The minimum number of options is '
             + controls03.model03b.errors?.minlength.requiredLength
-            + ' characters.'
+            + '.'
             :'Enter value.')"
         [exterior]="exterior03a"
         wdFull>
@@ -158,12 +158,12 @@
         isMultiple
         isRequired
         [minLength]="minLength03b"
-        [helperText]="!controls03.model03b.value
+        [helperText]="!controls03.model03b.value.length
           ?'Required field.'
           :(controls03.model03b.errors?.minlength
-            ?'Minimum length '
+            ?'The minimum number of options is '
             + controls03.model03b.errors?.minlength.requiredLength
-            + ' characters.'
+            + '.'
             :'Enter value.')"
         [exterior]="exterior03a"
         wdFull&gt;
