@@ -26,6 +26,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Helper text', url, fragment: 'HelperText' },
   { label: 'Border radius', url, fragment: 'BorderRadius' },
   { label: 'Palette', url, fragment: 'Palette' },
+  { label: 'Config', url, fragment: 'Config' },
   { label: 'Api', url, fragment: 'Api' },
 ];
 SiteMenu.addItem('Components', 'Input', { label: 'Input', siteUrls });

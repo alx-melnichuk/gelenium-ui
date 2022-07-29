@@ -47,7 +47,9 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>exterior: string | null | undefined;</code>
+        <code>exterior: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>
@@ -64,7 +66,9 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>frameSize: string | null;</code>
+        <code>frameSize: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Determines the size of the element.<br />
@@ -83,19 +87,40 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>helperText: string | null | undefined;</code>
+        <code>helperText: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>
           Specifies the text for additional clarification or error.
-          <br />(default = undefined;)
         </span>
       </td>
     </tr>
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isDisabled: string | boolean | null | undefined;</code>
+        <code>isCheckmark: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Checkbox display flag for each option.<br />
+          It is used in conjunction with the "isMultiple" sign.<br />
+          Attribute (no content).
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isDisabled: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>The element is disabled.<br />Attribute (no content).</span>
@@ -104,7 +129,10 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isError: string | boolean | null | undefined;</code>
+        <code>isError: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>
@@ -112,26 +140,13 @@
         </span>
       </td>
     </tr>
-    <!--
-    @Input()
-    public isMultiple: string | boolean | null | undefined;
-    @Input()
-    public isCheckmark: string | null = null; -->
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isNoRipple: string | boolean | null | undefined;</code>
-      </td>
-      <td>
-        <span>
-          This property to turn off the ripple effect.<br />Attribute (no content).
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>isHoverColor: string | boolean | null | undefined;</code>
+        <code>isHoverColor: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>
@@ -146,7 +161,10 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isLabelShrink: string | boolean | null | undefined;</code>
+        <code>isLabelShrink: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>
@@ -158,7 +176,25 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isNoAnimation: string | boolean | null | undefined;</code>
+        <code>isMultiple: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Sign of multiple choice of options.
+          <br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoAnimation: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>
@@ -170,7 +206,25 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isNoLabel: string | boolean | null | undefined;</code>
+        <code>isNoIcon: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Disable the display of the icon - the status of the state of the open list.
+          <br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoLabel: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>
@@ -178,11 +232,27 @@
         </span>
       </td>
     </tr>
-
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isReadOnly: string | boolean | null | undefined;</code>
+        <code>isNoRipple: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          This property to turn off the ripple effect.<br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isReadOnly: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Whether the element is readonly.<br />Attribute (no content).</span>
@@ -191,7 +261,10 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isRequired: string | boolean | null | undefined;</code>
+        <code>isRequired: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>
@@ -199,9 +272,24 @@
         </span>
       </td>
     </tr>
-
-    <!-- // @Input() // #public isValueInit: string | boolean | null | undefined; -->
-
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isValueInit: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Sign of calling the event "writeValueInit" after the second "writeValue()"
+          with real data.
+          <br />
+          This should use "[(ngModel)]".
+          <a [href]="urlFrame + '#Feature'">More details.</a>
+        </span>
+      </td>
+    </tr>
     <tr>
       <td>
         <code>@Input()</code>
@@ -214,7 +302,34 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>noElevation: string | null;</code>
+        <code>maxLength: number<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Defines the maximum number of characters for an input element.
+          <br />
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>minLength: number<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Defines the minimum number of characters for an input element.
+          <br />
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>noElevation: string<br/>
+          &nbsp;&nbsp;| null;</code>
       </td>
       <td>
         <span>
@@ -226,19 +341,9 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isNoIcon: string | boolean | null | undefined</code>
-      </td>
-      <td>
-        <span>
-          Disable the display of the icon - the status of the state of the open list.
-          <br />Attribute (no content).
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>ornamLfAlign: string | null = null;</code>
+        <code>ornamLfAlign: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Specifies the height justification for the left ornament.
@@ -258,7 +363,9 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>ornamRgAlign: string | null = null;</code>
+        <code>ornamRgAlign: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Specifies the height justification for the right ornament.
@@ -278,12 +385,34 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>panelClass: string | string[] | Set&lt;string&gt; | &#123; [key: string]: any &#125; = ''</code>
+        <code>panelClass: string<br/>
+          &nbsp;&nbsp;| string[]<br/>
+          &nbsp;&nbsp;| Set&lt;string&gt;<br/>
+          &nbsp;&nbsp;| &#123; [key: string]: any &#125;<br/>
+          = ''</code>
       </td>
       <td>
         <span>
           Classes to be passed to the select panel. Supports the same syntax as `ngClass`.
         </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>position: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies how to horizontally align the options list panel.
+        </span>
+        <ul>
+          <li>'start' - align to the left of the main element; (default)</li>
+          <li>'center' - align to the center of the main element;</li>
+          <li>'end' - align to the right side of the main element;</li>
+        </ul>
       </td>
     </tr>
     <tr>
@@ -314,14 +443,33 @@
         </span>
       </td>
     </tr>
-    <!-- 
-    @Input()
-    public wdFull: string | null = null;
-  -->
-    <!--   
-    @Input()
-    get value(): unknown | unknown[] | null {
-  -->
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>wdFull: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Sets the width to the parent's width (width: 100%;).
+          <br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>value: unknown<br/>
+          &nbsp;&nbsp;| unknown[]<br/>
+          &nbsp;&nbsp;| null;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the value of an element.
+        </span>
+      </td>
+    </tr>
 
     <tr>
       <td>
@@ -360,6 +508,43 @@
         <span>Fires when the selection panel closes.</span>
       </td>
     </tr>
-
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>writeValueInit:<br/> EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>
+          Fires after the second call to "writeValue()" with real data.
+          <br />
+          This should use "[(ngModel)]".
+          <br />
+          "writeValueInit" must be set.
+          <a [href]="urlFrame + '#Feature'">More details.</a>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>selected: EventEmitter&lt;&#123;<br/>
+          &nbsp;&nbsp;value: unknown | null;<br/>
+          &nbsp;&nbsp;values: unknown[];<br/>
+          &nbsp;&nbsp;change: GlnSelectionChange<br/>
+          &nbsp;&nbsp;&lt;GlnOptionComponent&gt;<br/>
+          &#125;&gt;;
+        </code>
+      </td>
+      <td>
+        <span>
+          Fires when an option is selected/deselected.<br />
+          For single mode, the currently selected option
+          is the "value" parameter.<br />
+          For multiple mode, the currently selected options are
+          the "values" parameter.<br />
+          The "change" parameter contains a list of added and removed options.
+        </span>
+      </td>
+    </tr>
   </tbody>
 </table>

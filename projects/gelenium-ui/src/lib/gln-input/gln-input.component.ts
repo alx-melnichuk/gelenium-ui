@@ -95,13 +95,13 @@ export class GlnInputComponent
   @Input()
   public label = '';
   @Input()
-  public max: number | null = null;
+  public max: number | null | undefined;
   @Input()
-  public maxLength: number | null = null;
+  public maxLength: number | null | undefined;
   @Input()
-  public min: number | null = null;
+  public min: number | null | undefined;
   @Input()
-  public minLength: number | null = null;
+  public minLength: number | null | undefined;
   @Input()
   public ornamLfAlign: string | null | undefined; // OrnamAlign
   @Input()
@@ -109,13 +109,13 @@ export class GlnInputComponent
   @Input()
   public pattern = '';
   @Input()
-  public step: number | null = null;
+  public step: number | null | undefined;
   @Input()
   public tabIndex = 0;
   @Input()
   public type: string = GlnInputType.text.valueOf();
   @Input()
-  public wdFull: string | null = null;
+  public wdFull: string | null | undefined;
 
   @Output()
   readonly focused: EventEmitter<void> = new EventEmitter();
@@ -270,7 +270,7 @@ export class GlnInputComponent
 
   // ** Private API **
 
-  private prepareFormGroup(isRequired: boolean | null, minLength: number | null, maxLength: number | null): void {
+  private prepareFormGroup(isRequired: boolean | null, minLength: number | null | undefined, maxLength: number | null | undefined): void {
     this.formControl.clearValidators();
     const newValidator: ValidatorFn[] = [];
     if (isRequired) {

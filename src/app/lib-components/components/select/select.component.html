@@ -20,6 +20,17 @@
 
 <!-- demo -->
 
+<div mr-vr
+  *ngIf="!showNum"
+  id="Config">
+  <h3>Config</h3>
+  <p>
+    The <a [href]="urlFrame + '#Config'">"GlnFrame#Config"</a>
+    page shows how to prepare and use the element configuration.
+  </p>
+  <hr br-tp>
+</div>
+
 <div *ngIf="!showNum || showNum==='06'"
   id="Api">
   <app-select-api></app-select-api>

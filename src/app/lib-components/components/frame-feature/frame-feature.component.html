@@ -240,6 +240,16 @@ export class FeatureComponent implements OnInit &#123;
 </section>
 
 <section mr-vr>
+  <span>Let's add a sign to disable the animation.</span>
+  <code><pre source="ts">
+public noAnm08c = true;</pre></code>
+  <span>Let's add event handling after the second call to "writeValue".</span>
+  <code><pre source="html">
+&lt;gln-input [(ngModel)]="model08c"
+  isValueInit
+  [isNoAnimation]="noAnm08c"
+  (writeValueInit)="noAnm08c=false"&gt;
+&lt;/gln-input&gt;</pre></code>
   <p>
     In this case, when the component is created, the flag for disabling animation is set.
     And only after the second call to writeValue and when using setTimeout,

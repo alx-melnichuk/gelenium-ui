@@ -120,9 +120,9 @@ export class GlnSelectComponent
   @Input()
   public label = '';
   @Input()
-  public minLength: number | null | undefined;
-  @Input()
   public maxLength: number | null | undefined;
+  @Input()
+  public minLength: number | null | undefined;
   @Input()
   public noElevation: string | null = null; // -
   @Input()
@@ -133,13 +133,13 @@ export class GlnSelectComponent
   @Input()
   public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = ''; // -
   @Input()
-  public position: string | null = null; // Horizontal position = 'start' | 'center' | 'end';
+  public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
   @Input()
   public visibleSize = -1;
   @Input()
   public tabIndex = 0; // ~
   @Input()
-  public wdFull: string | null = null;
+  public wdFull: string | null | undefined;
 
   @Input()
   get value(): unknown | unknown[] | null {

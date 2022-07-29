@@ -118,6 +118,8 @@ export class GlnTextareaComponent
   readonly focused: EventEmitter<void> = new EventEmitter();
   @Output()
   readonly blured: EventEmitter<void> = new EventEmitter();
+  // @Output()
+  // readonly writeValueInit: EventEmitter<() => void> = new EventEmitter(); // From GlnBasisByFrame
 
   @ViewChild('textareaElement')
   public textareaElementRef: ElementRef | null = null;

@@ -46,7 +46,9 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>cntCols: number;</code>
+        <code>cntCols: number<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Determines the number of columns.
@@ -57,7 +59,9 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>cntRows: number;</code>
+        <code>cntRows: number<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Defines the number of visible rows.
@@ -70,7 +74,9 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>config: GlnFrameConfig | null | undefined;</code>
+        <code>config: GlnFrameConfig<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Defines a configuration object.</span><br />
@@ -80,7 +86,9 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>exterior: string | null | undefined;</code>
+        <code>exterior: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>
@@ -97,7 +105,9 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>frameSize: string | null | undefined;</code>
+        <code>frameSize: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Determines the size of the element.<br />
@@ -116,18 +126,22 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>helperText: string | null | undefined;</code>
+        <code>helperText: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Specifies the text for additional clarification or error.
-          <br />(default = undefined;)
         </span>
       </td>
     </tr>
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isDisabled: string | boolean | null | undefined;</code>
+        <code>isDisabled: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>The element is disabled.<br />Attribute (no content).</span>
@@ -136,7 +150,10 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isError: string | boolean | null | undefined;</code>
+        <code>isError: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Forces the error status of an item to be displayed.
@@ -147,7 +164,10 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isHoverColor: string | boolean | null | undefined;</code>
+        <code>isHoverColor: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>
@@ -162,7 +182,10 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isLabelShrink: string | boolean | null | undefined;</code>
+        <code>isLabelShrink: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Disable label animation. The label is always static, at the top.
@@ -173,7 +196,10 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isNoAnimation: string | boolean | null | undefined;</code>
+        <code>isNoAnimation: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Disable animation execution.</span>
@@ -182,7 +208,10 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isNoLabel: string | boolean | null | undefined;</code>
+        <code>isNoLabel: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Disables the display of the label.
@@ -193,7 +222,10 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isReadOnly: string | boolean | null | undefined;</code>
+        <code>isReadOnly: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Whether the element is readonly.<br />Attribute (no content).</span>
@@ -202,7 +234,10 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isRequired: string | boolean | null | undefined;</code>
+        <code>isRequired: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Adds a validation condition: required field.
@@ -210,7 +245,24 @@
         </span>
       </td>
     </tr>
-    <!-- isValueInit: string | boolean | null | undefined; -->
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isValueInit: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Sign of calling the event "writeValueInit" after the second "writeValue()"
+          with real data.
+          <br />
+          This should use "[(ngModel)]".
+          <a [href]="urlFrame + '#Feature'">More details.</a>
+        </span>
+      </td>
+    </tr>
     <tr>
       <td>
         <code>@Input()</code>
@@ -223,18 +275,9 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>minLength: number;</code>
-      </td>
-      <td>
-        <span>Defines the minimum number of characters for an textarea element.
-          <br />(default = null;)
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>maxLength: number;</code>
+        <code>maxLength: number<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Defines the maximum number of characters for an textarea element.
@@ -245,20 +288,9 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>minRows: number;</code>
-      </td>
-      <td>
-        <span>Defines the minimum number of visible rows.
-          The minimum height of the text area is calculated as "minRows"
-          multiplied by to the line height. Active if "cntRows" is not specified.
-          <br />(default = null;)
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>maxRows: number;</code>
+        <code>maxRows: number<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Defines the maximum number of visible rows.
@@ -271,7 +303,37 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>ornamLfAlign: string | null = null;</code>
+        <code>minLength: number<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Defines the minimum number of characters for an textarea element.
+          <br />(default = null;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>minRows: number<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Defines the minimum number of visible rows.
+          The minimum height of the text area is calculated as "minRows"
+          multiplied by to the line height. Active if "cntRows" is not specified.
+          <br />(default = null;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>ornamLfAlign: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Specifies the height justification for the left ornament.
@@ -291,7 +353,9 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>ornamRgAlign: string | null = null;</code>
+        <code>ornamRgAlign: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Specifies the height justification for the right ornament.
@@ -322,7 +386,9 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>wdFull: string;</code>
+        <code>wdFull: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>
@@ -335,7 +401,41 @@
     <tr>
       <td>
         <code>@Output()</code>
-        <code>inputData: EventEmitter&lt;Event&gt;;</code>
+        <code>focused: EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>Fires when the element receives input focus.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>blured: EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>Fires when an element loses input focus.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>writeValueInit:<br/> EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>
+          Fires after the second call to "writeValue()" with real data.
+          <br />
+          This should use "[(ngModel)]".
+          <br />
+          "writeValueInit" must be set.
+          <a [href]="urlFrame + '#Feature'">More details.</a>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>input: EventEmitter&lt;Event&gt;;</code>
       </td>
       <td>
         <span>The event is called when the user changes the value of an element.</span>
@@ -344,13 +444,14 @@
     <tr>
       <td>
         <code>@Output()</code>
-        <code>changeData: EventEmitter&lt;Event&gt;;</code>
+        <code>change: EventEmitter&lt;Event&gt;;</code>
       </td>
       <td>
         <span>The event is called when the user has finished changing the value
           of an element.</span>
       </td>
     </tr>
+    <tr>
     <tr>
       <td>
         <code>@Output()</code>
