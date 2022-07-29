@@ -96,7 +96,7 @@ export class GlnTextareaComponent
   // @Input()
   // public isValueInit: string | boolean | null | undefined; // Is in GlnBasisControl.
   @Input()
-  public label = '';
+  public label: string | null | undefined;
   @Input()
   public maxLength: number | null | undefined;
   @Input()

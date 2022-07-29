@@ -19,7 +19,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
-import { GlnOptionParent, GLN_OPTION_PARENT } from './gln-option-parent.interface';
+import { GLN_OPTION_GROUP, GlnOptionGroup } from './gln-option-group.interface';
+import { GLN_OPTION_PARENT, GlnOptionParent } from './gln-option-parent.interface';
 
 let uniqueIdCounter = 0;
 
@@ -35,41 +36,41 @@ export class GlnOptionComponent implements OnChanges, OnInit {
   @Input()
   public id = `glno-${uniqueIdCounter++}`;
   @Input()
-  public isDisabled: string | null = null;
+  public isDisabled: string | boolean | null | undefined;
   @Input()
-  public value: unknown | null = null;
+  public value: unknown | null | undefined;
 
   @ViewChild('contentRef', { static: true })
   public contentRef!: ElementRef<HTMLElement>;
 
   public checkmark = false;
-  public disabled: boolean | null = null;
+  public disabled: boolean | null | undefined;
   public formControl: FormControl = new FormControl();
   public formGroup: FormGroup = new FormGroup({ checkinfo: this.formControl });
   public marked = false;
   public multiple = false;
-  public selected: boolean | null = null;
+  public selected: boolean | null | undefined;
 
   constructor(
     public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
     private changeDetectorRef: ChangeDetectorRef,
-    @Optional() @Inject(GLN_OPTION_PARENT) public parent: GlnOptionParent
+    @Optional() @Inject(GLN_OPTION_PARENT) public parent: GlnOptionParent,
+    @Optional() @Inject(GLN_OPTION_GROUP) public group: GlnOptionGroup
   ) {
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'role', 'option');
   }
 
   @HostListener('click')
   public doClick(): void {
-    if (this.parent) {
+    if (this.parent && !this.disabled) {
       this.parent.optionSelection(this);
     }
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.isDisabled) {
-      const disabled = BooleanUtil.init(this.isDisabled);
-      this.setDisabled(disabled);
+      this.setDisabled(BooleanUtil.init(this.isDisabled));
     }
   }
 
@@ -92,7 +93,7 @@ export class GlnOptionComponent implements OnChanges, OnInit {
   public getTrustHtml(): string {
     return (this.contentRef.nativeElement.innerHTML || '').trim();
   }
-  /** Set or uncheck "checkmark". */
+  /** Check or uncheck "checkmark". */
   public setCheckmark(value: boolean | null): void {
     if (this.checkmark !== !!value && (!!value === false || this.multiple)) {
       this.checkmark = !!value;
@@ -101,7 +102,7 @@ export class GlnOptionComponent implements OnChanges, OnInit {
       this.changeDetectorRef.markForCheck();
     }
   }
-  /** Set or uncheck disabled. */
+  /** Check or uncheck disabled. */
   public setDisabled(value: boolean | null): void {
     if (this.disabled !== !!value) {
       this.disabled = !!value;
@@ -109,11 +110,10 @@ export class GlnOptionComponent implements OnChanges, OnInit {
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', value ? '' : null);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'aria-disabled', '' + !!value);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', value ? null : '0');
-
       this.changeDetectorRef.markForCheck();
     }
   }
-  /** Set or uncheck marking. */
+  /** Check or uncheck marking. */
   public setMarked(value: boolean | null): void {
     if (this.marked !== !!value) {
       this.marked = !!value;

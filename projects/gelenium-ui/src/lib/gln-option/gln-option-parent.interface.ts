@@ -12,6 +12,6 @@ export interface GlnOptionParent {
 }
 
 /**
- * The injection token that is used to access the parent element from the menu item.
+ * The injection token that is used to access the parent element for the option.
  */
 export const GLN_OPTION_PARENT = new InjectionToken<GlnOptionParent>('GLN_OPTION_PARENT');

@@ -240,10 +240,12 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>label: string;</code>
+        <code>label: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>The content of the label.<br />(default = '';)</span>
+        <span>The content of the label.</span>
       </td>
     </tr>
     <tr>
@@ -345,7 +347,8 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>pattern: string;</code>
+        <code>pattern: string<br/>
+          &nbsp;&nbsp;| RegExp = '';</code>
       </td>
       <td>
         <span>

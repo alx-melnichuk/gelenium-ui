@@ -93,7 +93,7 @@ export class GlnInputComponent
   // @Input()
   // public isValueInit: string | boolean | null | undefined; // Is in GlnBasisControl.
   @Input()
-  public label = '';
+  public label: string | null | undefined;
   @Input()
   public max: number | null | undefined;
   @Input()
@@ -107,7 +107,7 @@ export class GlnInputComponent
   @Input()
   public ornamRgAlign: string | null | undefined; // OrnamAlign
   @Input()
-  public pattern = '';
+  public pattern: string | RegExp = '';
   @Input()
   public step: number | null | undefined;
   @Input()

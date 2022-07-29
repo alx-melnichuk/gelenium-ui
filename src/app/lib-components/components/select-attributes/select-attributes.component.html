@@ -1015,78 +1015,7 @@ export class SelectComponent &#123;
 
 <hr br-nn />
 
-<div demo
-  *ngIf="true">
 
-  <p></p>
-  <div>
-    <label>Demo1:
-      <input id="demo1"
-        name="demo1"
-        type="text"
-        (focus)="log('focusDemo1')"
-        (blur)="log('blurDemo1')" />
-    </label>
-  </div>
-
-  <p></p>
-  <div>
-    <label>Flavor:
-      <select id="flavor"
-        name="flavor">
-        <option></option>
-        <option>Cherry</option>
-        <option>Green Tea</option>
-        <option>Moose Tracks</option>
-        <option>Mint Chip</option>
-      </select>
-    </label>
-  </div>
-
-  <p></p>
-  <div>
-    <label>Demo2:
-      <input id="demo2"
-        name="demo2"
-        type="text"
-        (focus)="log('focusDemo2')"
-        (blur)="log('blurDemo2')" />
-    </label>
-  </div>
-
-  <p></p>
-  <div class="output">
-    <label for="pet-select">Choose a pet:</label>
-    <select name="demo3"
-      id="demo3"
-      (focus)="log('focusDemo3')"
-      (blur)="log('blurDemo3')"
-      mousedown9="log('mousedownDemo3')"
-      mouseup9="log('mouseupDemo3')">
-      <option value="">--Please choose an option--</option>
-      <option value="dog">Dog</option>
-      <option value="cat">Cat</option>
-      <option value="hamster">Hamster</option>
-      <option value="parrot">Parrot</option>
-      <option value="spider">Spider</option>
-      <option value="goldfish">Goldfish</option>
-    </select>
-  </div>
-
-</div>
-
-<!-- <section mr-vr>
-  <span>exterior: </span>
-  <mat-button-toggle-group value="exterior02z"
-    (change)="exterior02z=$event.value">
-    <mat-button-toggle [checked]="exterior02z==='outlined'"
-      value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02z==='underline'"
-      value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02z==='standard'"
-      value="standard">{{ labelStandard }}</mat-button-toggle>
-  </mat-button-toggle-group>
-</section> -->
 
 <form [formGroup]="formGroup02z"
   novalidate
@@ -1108,14 +1037,13 @@ export class SelectComponent &#123;
         noAnimation99
         isFixRight9
         isMultiple
-        isCheckmark
+        isCheckmark99
         isNoRippl_e99
         config9="config"
         label="Fruit"
         label9="Parameter value 1"
         [visibleSize]="4"
         helperText="Field 1"
-        helperText9="Field for parameter 1."
         [exterior]="exterior02z"
         panelClass9="panelClass1"
         wdFull
@@ -1126,12 +1054,13 @@ export class SelectComponent &#123;
         selected9="selected($event)"
         (focus)="log('focusModel02z')"
         (blur)="log('blurModel02z')">
-        <gln-option>
-          <em>
-            <script>alert('Privet')</script>
-            None
-          </em>
-        </gln-option>
+        <gln-option><em>None</em></gln-option>
+        <gln-option-group label="group0">
+          <gln-option value="fruit01">{{ capitalizeFirstLetter('fruit01') }}
+          </gln-option>
+          <gln-option value="fruit02">{{ capitalizeFirstLetter('fruit02') }}
+          </gln-option>
+        </gln-option-group>
         <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>

@@ -50,7 +50,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
   public isRequired: boolean | null | undefined;
   @Input()
-  public label = '';
+  public label: string | null | undefined;
 
   public get isOutlinedExterior(): boolean {
     return GlnFrameExterior.outlined === this.exterior;

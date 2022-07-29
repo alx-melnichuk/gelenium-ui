@@ -11,7 +11,7 @@
   <ng-content></ng-content>
 </div>
 
-<gln-touch-ripple *ngIf="!disabled && !parent?.noRipple">
+<gln-touch-ripple *ngIf="!disabled && !group?.disabled && !parent?.noRipple">
 </gln-touch-ripple>
 
 <!--

@@ -7,20 +7,20 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { GlnOptionGroupModule, GlnOptionModule, GlnSelectModule } from 'gelenium-ui';
 
-import { SelectAttributesComponent } from './select-attributes.component';
+import { SelectGroupComponent } from './select-group.component';
 
 @NgModule({
-  declarations: [SelectAttributesComponent],
+  declarations: [SelectGroupComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MatButtonToggleModule,
     MatExpansionModule,
     MatTabsModule,
+    GlnOptionGroupModule,
     GlnOptionModule,
     GlnSelectModule,
-    GlnOptionGroupModule,
   ],
-  exports: [SelectAttributesComponent],
+  exports: [SelectGroupComponent],
 })
-export class SelectAttributesModule {}
+export class SelectGroupModule {}

@@ -118,7 +118,7 @@ export class GlnSelectComponent
   // @Input()
   // public isValueInit: string | boolean | null | undefined; // Is in GlnBasisControl. //~
   @Input()
-  public label = '';
+  public label: string | null | undefined;
   @Input()
   public maxLength: number | null | undefined;
   @Input()
@@ -190,7 +190,7 @@ export class GlnSelectComponent
   @ViewChild('triggerRef', { static: true })
   public triggerRef!: ElementRef<HTMLElement>;
   /** List of possible options. */
-  @ContentChildren(GlnOptionComponent)
+  @ContentChildren(GlnOptionComponent, { descendants: true })
   public optionList!: QueryList<GlnOptionComponent>;
 
   public get options(): GlnOptionComponent[] {

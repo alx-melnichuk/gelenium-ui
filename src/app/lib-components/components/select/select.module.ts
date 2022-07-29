@@ -7,6 +7,7 @@ import { UrlComponents } from '../../../lm-components/constants/url-components.c
 import { SelectBasicModule } from '../select-basic/select-basic.module';
 import { SelectAttributesModule } from '../select-attributes/select-attributes.module';
 import { SelectValidationModule } from '../select-validation/select-validation.module';
+import { SelectGroupModule } from '../select-group/select-group.module';
 import { SelectApiModule } from '../select-api/select-api.module';
 
 import { SelectComponent } from './select.component';
@@ -18,6 +19,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Basic', url, fragment: 'Basic' },
   { label: 'Attributes', url, fragment: 'Attributes' },
   { label: 'Validation', url, fragment: 'Validation' },
+  { label: 'Group', url, fragment: 'Group' },
   // { label: 'Numerical value', url, fragment: 'NumericalValue' },
   // { label: 'Ornaments', url, fragment: 'Ornaments' },
   // { label: 'Item size', url, fragment: 'ItemSize' },
@@ -36,6 +38,7 @@ SiteMenu.addItem('Components', 'Select', { label: 'Select', siteUrls });
     SelectBasicModule,
     SelectAttributesModule,
     SelectValidationModule,
+    SelectGroupModule,
     // InputNumericalModule,
     // InputOrnamentsModule,
     SelectApiModule,
