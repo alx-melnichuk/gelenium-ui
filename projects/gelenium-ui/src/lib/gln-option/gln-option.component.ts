@@ -70,7 +70,8 @@ export class GlnOptionComponent implements OnChanges, OnInit {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.isDisabled) {
-      this.setDisabled(BooleanUtil.init(this.isDisabled));
+      this.disabled = BooleanUtil.init(this.isDisabled);
+      this.setDisabled(this.disabled ?? this.group?.disabled);
     }
   }
 
@@ -78,8 +79,8 @@ export class GlnOptionComponent implements OnChanges, OnInit {
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
     this.setMultiple(this.parent?.multiple || null);
     this.setCheckmark(this.parent?.checkmark || null);
-    if (this.disabled === null) {
-      this.setDisabled(!!this.disabled);
+    if (this.disabled === undefined) {
+      this.setDisabled(this.group?.disabled);
     }
     this.setSelected(!!this.selected);
   }
@@ -103,7 +104,7 @@ export class GlnOptionComponent implements OnChanges, OnInit {
     }
   }
   /** Check or uncheck disabled. */
-  public setDisabled(value: boolean | null): void {
+  public setDisabled(value: boolean | null | undefined): void {
     if (this.disabled !== !!value) {
       this.disabled = !!value;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', !!value);

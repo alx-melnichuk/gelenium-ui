@@ -12,17 +12,12 @@ gln-option {
   display: flex;
   -webkit-box-pack: start;
   justify-content: flex-start;
-
   outline: 0px;
-  padding-bottom: 0.375em;
-  padding-left: 1em;
-  padding-right: 1em;
   padding-top: 0.375em;
+  padding-bottom: 0.375em;
   position: relative;
   text-decoration: none;
   user-select: none;
-  white-space: nowrap;
-  overflow: hidden;
 
   &>[mul]>input {
     cursor: inherit;
@@ -58,11 +53,17 @@ gln-option {
     }
   }
 
-  &>[cbar] {
+  &>[glno-chbox-wrap] {
     margin-right: 9px;
     &>input {
       cursor: inherit;
     }
+  }
+
+  &>[glno-label] {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
  --glntr-ripple-cl: hsla(var(--gln-default-h), var(--gln-default-s), var(--gln-default-l), 0.1);

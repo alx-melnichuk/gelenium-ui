@@ -2,6 +2,7 @@ import { CdkConnectedOverlay, ConnectedPosition, HorizontalConnectionPos, Scroll
 import { isPlatformBrowser } from '@angular/common';
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -79,7 +80,7 @@ const CSS_PROP_TRANSLATE_Y = '--glnspo-translate-y';
 })
 export class GlnSelectComponent
   extends GlnBasisFrame
-  implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnOptionParent
+  implements OnChanges, OnInit, AfterContentInit, AfterViewInit, ControlValueAccessor, Validator, GlnOptionParent
 {
   // @Input()
   // public id = `glns-${uniqueIdCounter++}`; // Is in GlnBasisControl.
@@ -213,8 +214,8 @@ export class GlnSelectComponent
   public isFilled = false;
   public isPanelOpen = false;
   // public isWriteValueInit: boolean | null = null;                         // Is in GlnBasisControl.
-  public multiple: boolean | null = null; // Binding attribute "isMultiple". // interface GlnOptionParent
   // public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink". // Is in GlnBasisControl.
+  public multiple: boolean | null = null; // Binding attribute "isMultiple". // interface GlnOptionParent
   // public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // Is in GlnBasisControl.
   // public noLabel: boolean | null = null; // Binding attribute "isNoLabel". // Is in GlnBasisControl.
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
@@ -223,14 +224,15 @@ export class GlnSelectComponent
   // public readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Is in GlnBasisControl.
   // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisControl.
   public selectedOptions: GlnOptionComponent[] = [];
-  // public valueInit: boolean | null = null; // Binding attribute "isValueInit". // Is in GlnBasisControl.
   /** Strategy for handling scrolling when the selection panel is open. */
   public scrollStrategy: ScrollStrategy;
   /** The position and dimensions for the trigger's bounding box. */
   public triggerRect: DOMRect | null = null;
+  // public valueInit: boolean | null = null; // Binding attribute "isValueInit". // Is in GlnBasisControl.
 
   private isFocusAttrOnFrame = false;
   private markedOption: GlnOptionComponent | null = null;
+  private maxWidth = 0;
   /** Saving the font size of the trigger element. */
   private triggerFontSize = 0;
   /** Saving the frame size of the trigger element. Defines BorderRadius. */
@@ -315,6 +317,15 @@ export class GlnSelectComponent
       this.value = newValue;
     }
     super.ngAfterContentInit();
+  }
+
+  public ngAfterViewInit(): void {
+    let maxWidth = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('max-width').replace('px', ''));
+    this.maxWidth = !isNaN(maxWidth) ? maxWidth : 0;
+    if (this.maxWidth === 0 && BooleanUtil.init(this.wdFull)) {
+      maxWidth = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('width').replace('px', ''));
+      this.maxWidth = !isNaN(maxWidth) ? maxWidth : 0;
+    }
   }
 
   // ** interface ControlValueAccessor - start **
@@ -523,6 +534,9 @@ export class GlnSelectComponent
     // Set the font size for the overlay.
     if (this.triggerFontSize > 0) {
       overlayElement.style.fontSize = `${this.triggerFontSize}px`;
+    }
+    if (this.maxWidth > 0) {
+      overlayElement.style.maxWidth = `${this.maxWidth}px`;
     }
     if (this.triggerFrameSize > 0) {
       const borderRadius = NumberUtil.roundTo100(this.triggerFrameSize / 10);

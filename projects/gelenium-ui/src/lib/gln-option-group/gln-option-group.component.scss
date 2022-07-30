@@ -1,5 +1,36 @@
 /*# sourceURL=gln-option-group.component.scss */
 
 gln-option-group {
-  display: block;
+  background-color: transparent;
+  // background-color: rgb(255, 255, 255);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  outline: 0px;
+
+  &[dis] {
+    cursor: default;
+    &>[glnog-label] {
+      opacity: .38;
+    }
+  }
+
+  &>[glnog-label] {
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 500;
+    max-width: 100%;
+    overflow: hidden;
+    padding-top: 0.375em;
+    padding-bottom: 0.375em;
+    text-align: left;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  &>gln-option {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
 }

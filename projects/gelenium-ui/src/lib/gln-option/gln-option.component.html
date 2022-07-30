@@ -1,13 +1,15 @@
 <span *ngIf="checkmark"
-  cbar
-  class="gln-checkbar"
+  glno-chbox-wrap
+  class="gln-checkbox-wrap"
   [formGroup]="formGroup">
   <input type="checkbox"
-    cbox
+    glno-chbox
     class="gln-checkbox"
     formControlName="checkinfo" />
 </span>
-<div #contentRef>
+<div #contentRef
+  glno-label
+  class="gln-option-label">
   <ng-content></ng-content>
 </div>
 

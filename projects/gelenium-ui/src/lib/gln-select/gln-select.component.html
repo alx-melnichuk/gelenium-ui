@@ -103,7 +103,8 @@
   (detach)="isPanelOpen ? close() : null">
 
   <div glnsp-wrap
-    [ngClass]="['gln-select-panel-wrap', (noAnimation ? 'gln-no-animation' : ''), (getBoolean(noElevation) ? 'gln-no-elevation' : '')]"
+    class="gln-select-panel-wrap"
+    [ngClass]="[(noAnimation ? 'gln-no-animation' : ''), (getBoolean(noElevation) ? 'gln-no-elevation' : '')]"
     [attr.noAnm]="noAnimation ? '' : null"
     (animationend)="hasPanelAnimation = isPanelOpen"
     (animationcancel)="hasPanelAnimation = isPanelOpen">
@@ -111,7 +112,6 @@
       class="gln-select-panel"
       [ngClass]="panelClass"
       role="listbox"
-      tabindex="-1"
       [attr.id]="id + '-panel'"
       [attr.aria-multiselectable]="multiple"
       [attr.noElevation]="getBoolean(noElevation) ? '' : null"
