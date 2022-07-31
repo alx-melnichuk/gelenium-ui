@@ -2,4 +2,9 @@
 
 app-select-group {
   display: block;
+
+  .sg-elem {
+    min-width: 20ch;
+    width: 20ch;
+  }
 }

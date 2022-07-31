@@ -35,11 +35,7 @@ export class GlnOptionGroupComponent implements OnChanges, OnInit, GlnOptionGrou
 
   public disabled: boolean | null | undefined;
 
-  constructor(
-    public hostRef: ElementRef<HTMLElement>,
-    private renderer: Renderer2,
-    private changeDetectorRef: ChangeDetectorRef // @Optional() @Inject(GLN_OPTION_PARENT) public parent: GlnOptionParent
-  ) {
+  constructor(public hostRef: ElementRef<HTMLElement>, private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) {
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'role', 'group');
   }
 

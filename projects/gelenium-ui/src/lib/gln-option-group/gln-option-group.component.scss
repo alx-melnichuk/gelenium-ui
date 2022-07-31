@@ -17,8 +17,8 @@ gln-option-group {
 
   &>[glnog-label] {
     color: rgba(0, 0, 0, 0.6);
+    flex-grow: 1;
     font-weight: 500;
-    max-width: 100%;
     overflow: hidden;
     padding-top: 0.375em;
     padding-bottom: 0.375em;
@@ -31,6 +31,5 @@ gln-option-group {
 
   &>gln-option {
     padding-left: 1em;
-    padding-right: 1em;
   }
 }

@@ -1,7 +1,7 @@
 <section mr-vr>
   <h3>Basic</h3>
   <p>
-    The GlnSelect component is a form control. It includes: label, input and help text.
+    The GlnSelect component is a form control. It includes: label, option list and help text.
     <br />
     It comes in three versions:
   </p>
@@ -10,6 +10,17 @@
     <li>with a fill (exterior="underline")</li>
     <li>standard (exterior="standard")</li>
   </ul>
+  <span>For example:</span>
+  <code><pre source="html">
+&lt;gln-select formControlName="model01a"
+  label="Enter value"
+  wdFull&gt;
+  &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+  &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
+  &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
+  &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
+  &lt;gln-option value="kiwi"&gt;Kiwi&lt;/gln-option&gt;
+&lt;/gln-select&gt;</pre></code>
 </section>
 
 <form [formGroup]="formGroup01"

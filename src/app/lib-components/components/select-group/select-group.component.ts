@@ -36,13 +36,12 @@ export class SelectGroupComponent {
 
   public exterior04a = 'outlined';
 
-  public tubers = ['potato', 'sweet potato', 'cassava', 'artichoke'];
-  public roots = ['beet', 'carrot', 'turnip', 'radish'];
-  public cabbage = ['white cabbage', 'kohlrabi', 'broccoli'];
-  public salad = ['salad', 'leaf parsley', 'sorrel', 'spinach'];
+  public tubers = ['potato', 'jerusalem artichoke;', 'sweet potato', 'cassava', 'tuberous nasturtium'];
+  public cabbage = ['white cabbage', 'portuguese cabbage', 'japanese cabbage', 'kohlrabi', 'broccoli'];
+  public salad = ['leaf parsley', 'mustard leaf', 'spinach', 'chard (leaf beet)', 'vegetable fennel'];
 
   public control04a = {
-    model04a: new FormControl(null, []),
+    model04a: new FormControl(this.tubers[1], []),
   };
   public formGroup04a: FormGroup = new FormGroup(this.control04a);
 
