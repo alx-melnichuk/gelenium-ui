@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ReactiveFormsModule } from '@angular/forms'; // Required for the "formGroup" form attribute.
 
+import { GlnColorModule } from '../directives/gln-color/gln-color.module';
 import { GlnFrameExteriorInputModule } from '../directives/gln-frame-exterior-input/gln-frame-exterior-input.module';
 import { GlnFrameModule } from '../gln-frame/gln-frame.module';
 import { GlnFrameOrnamentModule } from '../directives/gln-frame-ornament/gln-frame-ornament.module';
@@ -19,6 +20,7 @@ import { GLN_SELECT_SCROLL_STRATEGY_PROVIDER } from './gln-select.providers';
     CommonModule,
     OverlayModule,
     ReactiveFormsModule,
+    GlnColorModule,
     GlnFrameExteriorInputModule,
     GlnFrameModule,
     GlnFrameOrnamentModule,

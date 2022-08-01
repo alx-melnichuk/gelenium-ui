@@ -5,6 +5,7 @@ export * from './_decorators/public-api';
 export * from './_utils/public-api';
 
 export * from './directives/gln-auto-focuse/public-api';
+export * from './directives/gln-color/public-api';
 export * from './directives/gln-frame-exterior-button/public-api';
 export * from './directives/gln-frame-exterior-input/public-api';
 export * from './directives/gln-frame-ornament/public-api';

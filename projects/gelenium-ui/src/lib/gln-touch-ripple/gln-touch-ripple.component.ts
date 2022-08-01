@@ -85,7 +85,6 @@ export class GlnTouchRippleComponent implements OnChanges {
       circle.addEventListener(
         'animationend',
         () => {
-          // console.log(`doRipple() animationend`); // TODO del;
           if (this.hostRef.nativeElement.children.length > 0) {
             this.hostRef.nativeElement.children.item(0)?.remove();
           }
@@ -98,7 +97,6 @@ export class GlnTouchRippleComponent implements OnChanges {
       circle.addEventListener(
         'animationcancel',
         () => {
-          // console.log(`doRipple() animationcancel`); // TODO del;
           if (this.hostRef.nativeElement.children.length > 0) {
             this.hostRef.nativeElement.children.item(0)?.remove();
           }
