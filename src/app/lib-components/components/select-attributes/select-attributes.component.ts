@@ -1,7 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
-import { GlnSelectConfig } from 'gelenium-ui';
 
 import {
   LABEL_CSS,
@@ -87,53 +85,13 @@ export class SelectAttributesComponent {
     model02m: new FormControl([this.flowers[1], this.flowers[3], this.flowers[4]], []),
     model02n: new FormControl([], []),
     model02o: new FormControl([], []),
-    // model02p: new FormControl([this.fruits[0], this.fruits[1]], []),
   };
   public formGroup02d: FormGroup = new FormGroup(this.control02d);
 
-  //
-  public exterior02z = 'outlined';
-  public control02z = {
-    model02z: new FormControl([] /* this.fruits[0] */, []),
-  };
-  public formGroup02z: FormGroup = new FormGroup(this.control02z);
-
-  public fruitList = ['mango', 'lemon', 'orange', 'kiwi', 'mango2', 'lemon2', 'orange2', 'kiwi2', 'mango3', 'lemon3', 'orange3', 'kiwi3'];
-  priz = false;
-  config: GlnSelectConfig = {
-    // isNoLabel: true,
-    // noAnimation: true,
-    // isNoRippl_e: true,
-  };
-  panelClass1 = 'panelClass1';
-
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
-    // setTimeout(() => {
-    //   console.log(`priz = true;`);
-    //   this.priz = true;
-    //   this.changeDetectorRef.markForCheck();
-    // }, 4000);
-  }
+  constructor() {}
 
   public capitalizeFirstLetter(value: string): string {
     return value ? value[0].toUpperCase() + value.slice(1) : '';
-  }
-
-  log(name: string): void {
-    console.log(`${name}() `); // , ' target=', event.target, ' relatedTarget=', event.relatedTarget, ' event=', event);
-  }
-
-  // @HostListener('mousedown', ['$event'])
-  // public mousedownHandling(event: Event): void {
-  //   console.log(`mousedownHost() event=`, event);
-  // }
-  // @HostListener('mouseup', ['$event'])
-  // public mouseupHandling(event: Event): void {
-  //   console.log(`mouseupHost() event=`, event);
-  // }
-
-  selected(event: any): void {
-    console.log('selected() ', event);
   }
 }
