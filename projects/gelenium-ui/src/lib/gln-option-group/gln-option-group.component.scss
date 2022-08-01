@@ -15,8 +15,10 @@ gln-option-group {
     }
   }
 
+  --glnog--def-lb-def38: hsl(var(--gln-default-h), var(--gln-default-s), 38%); // (!) hsla(0, 0%, 0%, 0.6);
+
   &>[glnog-label] {
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--glnog--def-lb-def38);
     flex-grow: 1;
     font-weight: 500;
     overflow: hidden;
