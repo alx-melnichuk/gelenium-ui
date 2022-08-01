@@ -8,35 +8,44 @@ gln-button {
   font-weight: 500;
   font-size: 0.875em; // 14px
   line-height: 1.75;
-  
+
+  --glnbt--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnbt--default-s: var(--glncl-default-s, var(--gln-default-s));
+
+  --glnbt--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
+  --glnbt--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
+
+  --glnbt--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
+  --glnbt--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
+
   &[ext-c] {
     --def-lb-pd-tp: 0.375em; // 6px
     --def-lb-pd-lf: 1em; // 16px
-    --glntr-ripple-cl:  hsla(var(--gln-default-bg-h), var(--gln-default-bg-s), 100%, 0.3);
+    --glntr-ripple-cl:  hsla(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%, 0.3);
   }
   &[ext-o] {
     --def-lb-pd-tp: 0.3125em; // 5px
     --def-lb-pd-lf: 0.9375em; // 15px
-    --glntr-ripple-cl:  hsla(var(--gln-primary-h), var(--gln-primary-s), 46%, 0.3);
+    --glntr-ripple-cl:  hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3);
   }
   &[ext-t] {
     --def-lb-pd-tp: 0.375em; // 6px
     --def-lb-pd-lf: 0.5em; // 8px
-    --glntr-ripple-cl:  hsla(var(--gln-primary-h), var(--gln-primary-s), 46%, 0.3);
+    --glntr-ripple-cl:  hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3);
   }
 
-  &>[glnb-clear] {
+  &>[glnbt-clear] {
     appearance: none;
     margin: 0;
     padding: 0;
     border: none;
     outline: none;
   }
-  &>[glnb-btn] {
+  &>[glnbt-btn] {
     -webkit-tap-highlight-color: transparent;
     align-items: center;
     background-color: transparent;
-    border-radius: var(--glnb-br-rd, var(--glnfs-br-rd, 0.25em)); // 4px
+    border-radius: var(--glnbt-br-rd, var(--glnfs-br-rd, 0.25em)); // 4px
     box-sizing: border-box;
     cursor: pointer;
     display: inline-flex;
@@ -56,14 +65,14 @@ gln-button {
     vertical-align: middle;
     width: inherit;
   }
-  &:not([dis])>[glnb-btn] {
+  &:not([dis])>[glnbt-btn] {
     transition:
       background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
       box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
       border-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
       color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
-  &[dis]>[glnb-btn] {
+  &[dis]>[glnbt-btn] {
     cursor: default;
     a {
       pointer-events: none;
@@ -77,21 +86,20 @@ gln-button {
   }
 
   // Exterior: "contained"
-
   &[ext-c] {
-    &:not([dis])>[glnb-btn] {
-      color: var(--glnb-c-def-cl, hsl(var(--gln-default-bg-h), var(--gln-default-bg-s), 100%));
-      background-color: var(--glnb-c-def-bg-cl, hsl(var(--gln-primary-h), var(--gln-primary-s), 46%));
+    &:not([dis])>[glnbt-btn] {
+      color: var(--glnbt-c-def-cl, hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%));
+      background-color: var(--glnbt-c-def-bg-cl, hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%));
       &:hover {
-        background-color: var(--glnb-c-hov-bg-cl, hsl(var(--gln-primary-h), var(--gln-primary-s), 40%));
+        background-color: var(--glnbt-c-hov-bg-cl, hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 40%));
       }
     }
-    &[dis]>[glnb-btn] {
-      color: var(--glnb-c-dis-cl, hsl(var(--gln-default-h), var(--gln-default-s), 68%));
-      background-color: var(--glnb-c-dis-bg-cl, hsl(var(--gln-default-h), var(--gln-default-s), 88%));
+    &[dis]>[glnbt-btn] {
+      color: var(--glnbt-c-dis-cl, hsl(var(--glnbt--default-h), var(--glnbt--default-s), 68%));
+      background-color: var(--glnbt-c-dis-bg-cl, hsl(var(--glnbt--default-h), var(--glnbt--default-s), 88%));
     }
   }
-  &[ext-c]:not([dis]):not([noElevation])>[glnb-btn] {
+  &[ext-c]:not([dis]):not([noElevation])>[glnbt-btn] {
     box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
       0px 2px 2px 0px rgb(0 0 0 / 14%),
       0px 1px 5px 0px rgb(0 0 0 / 12%);
@@ -109,40 +117,40 @@ gln-button {
 
   // Exterior: "outlined"
 
-  &[ext-o]>[glnb-btn] {
+  &[ext-o]>[glnbt-btn] {
     border-width: 1px;
     border-style: solid;
   }
   &[ext-o] {
-    &:not([dis])>[glnb-btn] {
-      color: var(--glnb-o-def-cl, hsl(var(--gln-primary-h), var(--gln-primary-s), 46%));
-      border-color: var(--glnb-o-def-br-cl, hsla(var(--gln-primary-h), var(--gln-primary-s), 46%, 0.5));
+    &:not([dis])>[glnbt-btn] {
+      color: var(--glnbt-o-def-cl, hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%));
+      border-color: var(--glnbt-o-def-br-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.5));
       &:hover {
-        background-color: var(--glnb-o-hov-bg-cl, hsla(var(--gln-primary-h), var(--gln-primary-s), 46%, 0.04));
-        border-color: var(--glnb-o-hov-br-cl, hsl(var(--gln-primary-h), var(--gln-primary-s), 46%));
+        background-color: var(--glnbt-o-hov-bg-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.04));
+        border-color: var(--glnbt-o-hov-br-cl, hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%));
       }
     }
-    &[dis]>[glnb-btn] {
-      color: var(--glnb-o-dis-cl, hsl(var(--gln-default-h), var(--gln-default-s), 74%));
-      border-color: var(--glnb-o-dis-br-cl, hsl(var(--gln-default-h), var(--gln-default-s), 88%));
+    &[dis]>[glnbt-btn] {
+      color: var(--glnbt-o-dis-cl, hsl(var(--glnbt--default-h), var(--glnbt--default-s), 74%));
+      border-color: var(--glnbt-o-dis-br-cl, hsl(var(--glnbt--default-h), var(--glnbt--default-s), 88%));
     }
   }
   
   // Exterior: "text"
 
   &[ext-t] {
-    &:not([dis])>[glnb-btn] {
-      color: var(--glnb-t-def-cl, hsl(var(--gln-primary-h), var(--gln-primary-s), 46%));
+    &:not([dis])>[glnbt-btn] {
+      color: var(--glnbt-t-def-cl, hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%));
       &:hover {
-        background-color: var(--glnb-t-hov-bg-cl, hsla(var(--gln-primary-h), var(--gln-primary-s), 46%, 0.04));
+        background-color: var(--glnbt-t-hov-bg-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.04));
       }
     }
-    &[dis]>[glnb-btn] {
-      color: var(--glnb-t-dis-cl, hsl(var(--gln-default-h), var(--gln-default-s), 74%));
+    &[dis]>[glnbt-btn] {
+      color: var(--glnbt-t-dis-cl, hsl(var(--glnbt--default-h), var(--glnbt--default-s), 74%));
     }
   }
 
-  &:not([noUppercase])>[glnb-btn] {
+  &:not([noUppercase])>[glnbt-btn] {
     &>span, &>a {
       text-transform: uppercase;
     }
@@ -154,23 +162,23 @@ gln-button {
   // ** Additional settings **
 
   // Vertical offset.
-  &>[glnb-btn] {
+  &>[glnbt-btn] {
     &>a {
       line-height: inherit;
       align-self: center;
-      padding-top: var(--glnb-lb-pd-tp, var(--glnfs-pd-tp, var(--def-lb-pd-tp)));
-      padding-bottom: var(--glnb-lb-pd-bt, var(--glnfs-pd-bt, var(--def-lb-pd-tp)));
+      padding-top: var(--glnbt-lb-pd-tp, var(--glnfs-pd-tp, var(--def-lb-pd-tp)));
+      padding-bottom: var(--glnbt-lb-pd-bt, var(--glnfs-pd-bt, var(--def-lb-pd-tp)));
     }
-    &>[glnb-mr-ver] {
+    &>[glnbt-mr-ver] {
       line-height: inherit;
       align-self: center;
-      margin-top: var(--glnb-lb-pd-tp, var(--glnfs-pd-tp, var(--def-lb-pd-tp)));
-      margin-bottom: var(--glnb-lb-pd-bt, var(--glnfs-pd-bt, var(--def-lb-pd-tp)));
+      margin-top: var(--glnbt-lb-pd-tp, var(--glnfs-pd-tp, var(--def-lb-pd-tp)));
+      margin-bottom: var(--glnbt-lb-pd-bt, var(--glnfs-pd-bt, var(--def-lb-pd-tp)));
     }
   }
 
   // Ornament "padding".
-  &>[glnb-btn] {
+  &>[glnbt-btn] {
     &>span[glnf-orn-lf], &>span[glnf-orn-rg] {
       max-height: inherit;
       display: inline-flex;
@@ -178,18 +186,18 @@ gln-button {
     &>span[glnf-orn-rg] {
       order: 1;
     }
-    &>span[glnf-orn-lf]:empty~[glnb-pd-hor],
+    &>span[glnf-orn-lf]:empty~[glnbt-pd-hor],
     &>span[glnf-orn-lf]:empty~a {
-      padding-left: var(--glnb-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf)));
+      padding-left: var(--glnbt-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf)));
     }
-    &>span[glnf-orn-rg]:empty~[glnb-pd-hor],
+    &>span[glnf-orn-rg]:empty~[glnbt-pd-hor],
     &>span[glnf-orn-rg]:empty~a {
-      padding-right: var(--glnb-lb-pd-rg, var(--glnfs-pd-rg, var(--def-lb-pd-lf)));
+      padding-right: var(--glnbt-lb-pd-rg, var(--glnfs-pd-rg, var(--def-lb-pd-lf)));
     }
   }
 
   // Ornament "alignment".
-  &>[glnb-btn] {
+  &>[glnbt-btn] {
     &>span[glnf-orn-lf="center"], &>span[glnf-orn-rg="center"] {
       align-self: center;
     }

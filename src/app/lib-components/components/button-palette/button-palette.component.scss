@@ -15,31 +15,31 @@ app-button-palette {
   }
 
   // Exterior: "contained"
-  .bp-specific .gln-button.glnb-contained>.glnb-btn {
+  .bp-specific .gln-button.glnbt-contained>.glnbt-btn {
     --glntr-ripple-cl: #686aec5d;
-    --glnb-c-def-cl: #00acc1;
-    --glnb-c-def-bg-cl: #b2ebf299;
-    --glnb-c-hov-bg-cl: #acebec4d;
-    --glnb-c-dis-cl: #76b0b7;
-    --glnb-c-dis-bg-cl: #b2ebf233;
+    --glnbt-c-def-cl: #00acc1;
+    --glnbt-c-def-bg-cl: #b2ebf299;
+    --glnbt-c-hov-bg-cl: #acebec4d;
+    --glnbt-c-dis-cl: #76b0b7;
+    --glnbt-c-dis-bg-cl: #b2ebf233;
   }
 
   // Exterior: "outlined"
-  .bp-specific .gln-button.glnb-outlined>.glnb-btn {
+  .bp-specific .gln-button.glnbt-outlined>.glnbt-btn {
     --glntr-ripple-cl: #19d2944d;
-    --glnb-o-def-cl: #00acc1;
-    --glnb-o-def-br-cl: #00acc1a0;
-    --glnb-o-hov-bg-cl: #b2ebf299;
-    --glnb-o-hov-br-cl: #00acc1;
-    --glnb-o-dis-cl: #76b0b7;
-    --glnb-o-dis-br-cl: #76b0b77a;
+    --glnbt-o-def-cl: #00acc1;
+    --glnbt-o-def-br-cl: #00acc1a0;
+    --glnbt-o-hov-bg-cl: #b2ebf299;
+    --glnbt-o-hov-br-cl: #00acc1;
+    --glnbt-o-dis-cl: #76b0b7;
+    --glnbt-o-dis-br-cl: #76b0b77a;
    }
     
   // Exterior: "text"
-  .bp-specific .gln-button.glnb-text>.glnb-btn {
+  .bp-specific .gln-button.glnbt-text>.glnbt-btn {
     --glntr-ripple-cl: #19d2944d;
-    --glnb-t-def-cl: #00acc1;
-    --glnb-t-hov-bg-cl: #b2ebf299;
-    --glnb-t-dis-cl: #76b0b7;
+    --glnbt-t-def-cl: #00acc1;
+    --glnbt-t-hov-bg-cl: #b2ebf299;
+    --glnbt-t-dis-cl: #76b0b7;
   }
 }

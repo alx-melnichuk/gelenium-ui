@@ -43,7 +43,7 @@ let uniqueIdCounter = 0;
 })
 export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   @Input()
-  public id = `glnb-${uniqueIdCounter++}`;
+  public id = `glnbt-${uniqueIdCounter++}`;
   @Input()
   public config: GlnButtonConfig | null | undefined;
   @Input()
@@ -109,7 +109,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     if (this.linkElement?.templateRef) {
       // Add the required properties for the hyperlink element.
       HtmlElemUtil.setAttr(this.renderer, this.linkElement.templateRef, 'linkClear', '');
-      HtmlElemUtil.setClass(this.renderer, this.linkElement.templateRef, 'glnb-label', true);
+      HtmlElemUtil.setClass(this.renderer, this.linkElement.templateRef, 'glnbt-label', true);
     }
   }
 

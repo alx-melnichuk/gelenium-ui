@@ -29,8 +29,8 @@ gln-select {
     &:not([opn]):not([dis]) {
       cursor: pointer;
     }
-    --glnsr--def-h: var(--glnc-default-h, var(--gln-default-h));
-    --glnsr--def-s: var(--glnc-default-s, var(--gln-default-s));
+    --glnsr--def-h: var(--glncl-default-h, var(--gln-default-h));
+    --glnsr--def-s: var(--glncl-default-s, var(--gln-default-s));
 
     // Element "gln-frame - glns-rhomb".
     --glnsr--def-def54: hsl(var(--glnsr--def-h), var(--glnsr--def-s), 54%);
@@ -117,8 +117,8 @@ gln-select {
 
 // Element "gln-select-panel-wrap"
 .gln-select-panel-wrap {
-  --glnspw--def-h: var(--glnc-default-h, var(--gln-default-h));
-  --glnspw--def-s: var(--glnc-default-s, var(--gln-default-s));
+  --glnspw--def-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnspw--def-s: var(--glncl-default-s, var(--gln-default-s));
 
   background-color: var(--glnspw-def-bg-cl, var(--gln-default-bg-cl));
   color: var(--glnspw-def-cl, hsl(var(--glnspw--def-h), var(--glnspw--def-s), 17%)); // (!) hsla(0, 0%, 0%, 0.87);
