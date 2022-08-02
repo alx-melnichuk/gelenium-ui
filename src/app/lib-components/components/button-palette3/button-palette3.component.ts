@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants/constants';
-import { GlnButtonConfig, GlnButtonExterior, GlnFrameSize } from 'gelenium-ui';
 
 @Component({
   selector: 'app-button-palette3',
@@ -32,24 +31,6 @@ export class ButtonPalette3Component {
   public isDisabledLight = false;
   public isDisabledDark = false;
   public isDisabledReference = false;
-
-  public cfgContained: GlnButtonConfig = {
-    exterior: GlnButtonExterior.contained,
-    frameSize: GlnFrameSize.short,
-    isNoRipple: true,
-  };
-
-  public cfgOutlined: GlnButtonConfig = {
-    exterior: GlnButtonExterior.outlined,
-    frameSize: GlnFrameSize.short,
-    isNoRipple: true,
-  };
-
-  public cfgText: GlnButtonConfig = {
-    exterior: GlnButtonExterior.text,
-    frameSize: GlnFrameSize.short,
-    isNoRipple: true,
-  };
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

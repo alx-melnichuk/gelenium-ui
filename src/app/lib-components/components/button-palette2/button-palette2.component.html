@@ -168,9 +168,6 @@ export class ButtonComponent &#123;
   --glnbt-lb-pd-lf: 0.75rem;
   --glnbt-lb-pd-rg: 0.75rem;
 &#125;
-.bstr-btn.gln-button:not(.gln-disabled)&gt;.glnbt-btn &#123;
-  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-&#125;
 .bstr-btn.gln-button.gln-disabled&gt;.glnbt-btn &#123;
   opacity: .65;
 &#125;
@@ -180,25 +177,20 @@ export class ButtonComponent &#123;
 &#125;
 
 // ** Style: bstrap "bs-btn-contained" **
-.bstr-btn.gln-button.glnbt-contained:not(.gln-disabled)&gt;.glnbt-btn:focus-within,
-.bstr-btn.gln-button.glnbt-contained:not(.gln-disabled).focus&gt;.glnbt-btn &#123;
-  background-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 40%);
-&#125;
-.bstr-btn.gln-button.glnbt-contained.gln-disabled&gt;.glnbt-btn &#123;
-  background-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
-  color: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%);
+.bstr-btn.glnbt-contained&gt;.glnbt-btn &#123;
+  --glnbt-c-foc-bg-cl: var(--glnbt--hov-bg-cl);
+  --glnbt-c-dis-cl: var(--glnbt--def-cl);
+  --glnbt-c-dis-bg-cl:  var(--glnbt--def-bg-cl);
+  --glnbt-c-dis-br-cl:  var(--glnbt--def-bg-cl);
 &#125;
 
 // ** Style: bstrap "bs-btn-outline" **
-.bstr-btn.gln-button.glnbt-outlined&gt;.glnbt-btn &#123;
-  border-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
-&#125;
-.bstr-btn.gln-button.glnbt-outlined:not(.gln-disabled)&gt;.glnbt-btn:hover &#123;
-  background-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
-  color: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%); // #fff
-&#125;
-.bstr-btn.gln-button.glnbt-outlined.gln-disabled&gt;.glnbt-btn &#123;
-  color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
+.bstr-btn.gln-button.glnbt-outlined &#123;
+  --glnbt-o-def-br-cl: var(--glnbt--def-cl);
+  --glnbt-o-hov-cl: var(--bs-o-hov-cl,  hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%)); // #fff
+  --glnbt--hov-bg-cl: var(--glnbt-o-def-cl);
+  --glnbt-o-dis-cl:  var(--glnbt--def-cl);
+  --glnbt-o-dis-br-cl:  var(--glnbt--def-cl);
 &#125;
 
 // ** Style: bstrap "Primary" **
@@ -207,6 +199,12 @@ export class ButtonComponent &#123;
   --gln-bs-primary-h: 211;
   --gln-bs-primary-s: 100%;
   --gln-bs-primary-l: 50%;
+    // #007bff = hsl(211deg 100% 50%);
+  --glnbt-c-def-bg-cl: #007bff;
+  --glnbt-c-def-br-cl: #007bff;
+  --glnbt-c-hov-bg-cl: #0069d9;
+  --glnbt-c-hov-br-cl: #0062cc;
+  --glnbt-o-def-cl: #007bff;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -383,9 +381,6 @@ export class ButtonComponent &#123;
   --glnbt-lb-pd-lf: 0.75rem;
   --glnbt-lb-pd-rg: 0.75rem;
 &#125;
-.bstr-btn.gln-button:not(.gln-disabled)&gt;.glnbt-btn &#123;
-  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-&#125;
 .bstr-btn.gln-button.gln-disabled&gt;.glnbt-btn &#123;
   opacity: .65;
 &#125;
@@ -395,33 +390,34 @@ export class ButtonComponent &#123;
 &#125;
 
 // ** Style: bstrap "bs-btn-contained" **
-.bstr-btn.gln-button.glnbt-contained:not(.gln-disabled)&gt;.glnbt-btn:focus-within,
-.bstr-btn.gln-button.glnbt-contained:not(.gln-disabled).focus&gt;.glnbt-btn &#123;
-  background-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 40%);
-&#125;
-.bstr-btn.gln-button.glnbt-contained.gln-disabled&gt;.glnbt-btn &#123;
-  background-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
-  color: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%);
+.bstr-btn.glnbt-contained&gt;.glnbt-btn &#123;
+  --glnbt-c-foc-bg-cl: var(--glnbt--hov-bg-cl);
+  --glnbt-c-dis-cl: var(--glnbt--def-cl);
+  --glnbt-c-dis-bg-cl:  var(--glnbt--def-bg-cl);
+  --glnbt-c-dis-br-cl:  var(--glnbt--def-bg-cl);
 &#125;
 
 // ** Style: bstrap "bs-btn-outline" **
-.bstr-btn.gln-button.glnbt-outlined&gt;.glnbt-btn &#123;
-  border-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
-&#125;
-.bstr-btn.gln-button.glnbt-outlined:not(.gln-disabled)&gt;.glnbt-btn:hover &#123;
-  background-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
-  color: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%); // #fff
-&#125;
-.bstr-btn.gln-button.glnbt-outlined.gln-disabled&gt;.glnbt-btn &#123;
-  color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
+.bstr-btn.gln-button.glnbt-outlined &#123;
+  --glnbt-o-def-br-cl: var(--glnbt--def-cl);
+  --glnbt-o-hov-cl: var(--bs-o-hov-cl,  hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%)); // #fff
+  --glnbt--hov-bg-cl: var(--glnbt-o-def-cl);
+  --glnbt-o-dis-cl:  var(--glnbt--def-cl);
+  --glnbt-o-dis-br-cl:  var(--glnbt--def-cl);
 &#125;
 
 // ** Style: bstrap "Secondary" **
 
 .bstr-secondary &#123;
---gln-bs-secondary-h: 208;
---gln-bs-secondary-s: 7%;
---gln-bs-secondary-l: 46%;
+  --gln-bs-secondary-h: 208;
+  --gln-bs-secondary-s: 7%;
+  --gln-bs-secondary-l: 46%;
+  // #6c757d = hsl(208deg 7% 46%);
+  --glnbt-c-def-bg-cl: #6c757d;
+  --glnbt-c-def-br-cl: #6c757d;
+  --glnbt-c-hov-bg-cl: #5a6268;
+  --glnbt-c-hov-br-cl: #545b62;
+  --glnbt-o-def-cl: #6c757d;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -599,9 +595,6 @@ export class ButtonComponent &#123;
   --glnbt-lb-pd-lf: 0.75rem;
   --glnbt-lb-pd-rg: 0.75rem;
 &#125;
-.bstr-btn.gln-button:not(.gln-disabled)&gt;.glnbt-btn &#123;
-  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-&#125;
 .bstr-btn.gln-button.gln-disabled&gt;.glnbt-btn &#123;
   opacity: .65;
 &#125;
@@ -611,25 +604,20 @@ export class ButtonComponent &#123;
 &#125;
 
 // ** Style: bstrap "bs-btn-contained" **
-.bstr-btn.gln-button.glnbt-contained:not(.gln-disabled)&gt;.glnbt-btn:focus-within,
-.bstr-btn.gln-button.glnbt-contained:not(.gln-disabled).focus&gt;.glnbt-btn &#123;
-  background-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 40%);
-&#125;
-.bstr-btn.gln-button.glnbt-contained.gln-disabled&gt;.glnbt-btn &#123;
-  background-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
-  color: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%);
+.bstr-btn.glnbt-contained&gt;.glnbt-btn &#123;
+  --glnbt-c-foc-bg-cl: var(--glnbt--hov-bg-cl);
+  --glnbt-c-dis-cl: var(--glnbt--def-cl);
+  --glnbt-c-dis-bg-cl:  var(--glnbt--def-bg-cl);
+  --glnbt-c-dis-br-cl:  var(--glnbt--def-bg-cl);
 &#125;
 
 // ** Style: bstrap "bs-btn-outline" **
-.bstr-btn.gln-button.glnbt-outlined&gt;.glnbt-btn &#123;
-  border-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
-&#125;
-.bstr-btn.gln-button.glnbt-outlined:not(.gln-disabled)&gt;.glnbt-btn:hover &#123;
-  background-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
-  color: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%); // #fff
-&#125;
-.bstr-btn.gln-button.glnbt-outlined.gln-disabled&gt;.glnbt-btn &#123;
-  color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
+.bstr-btn.gln-button.glnbt-outlined &#123;
+  --glnbt-o-def-br-cl: var(--glnbt--def-cl);
+  --glnbt-o-hov-cl: var(--bs-o-hov-cl,  hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%)); // #fff
+  --glnbt--hov-bg-cl: var(--glnbt-o-def-cl);
+  --glnbt-o-dis-cl:  var(--glnbt--def-cl);
+  --glnbt-o-dis-br-cl:  var(--glnbt--def-cl);
 &#125;
 
 // ** Style: bstrap "Success" **
@@ -638,6 +626,12 @@ export class ButtonComponent &#123;
   --gln-bs-success-h: 134;
   --gln-bs-success-s: 61%;
   --gln-bs-success-l: 41%;
+  // #28a745 = hsl(134deg 61% 41%);
+  --glnbt-c-def-bg-cl: #28a745;
+  --glnbt-c-def-br-cl: #28a745;
+  --glnbt-c-hov-bg-cl: #218838;
+  --glnbt-c-hov-br-cl: #1e7e34;
+  --glnbt-o-def-cl: #28a745;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -722,8 +716,55 @@ export class ButtonComponent &#123;
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;div class="bp-items"&gt;
+&lt;div class="bp-items bstr-danger"&gt;
 
+  &lt;gln-button class=" bstr-btn"
+    noElevation
+    noUppercase
+    [glnColor]="&#123; primary: 'bs-danger' &#125;"
+    exterior="contained"
+    frameSize="short"
+    isNoRipple
+    [isDisabled]="isDisabledDanger ? '': null"&gt;
+    &lt;span&gt;Danger 1&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn"
+    noElevation
+    noUppercase
+    [glnColor]="&#123; primary: 'bs-danger' &#125;"
+    exterior="contained"
+    frameSize="short"
+    isNoRipple
+    [isDisabled]="isDisabledDanger ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment7"&gt;
+      Danger 1 Link
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn"
+    noUppercase
+    [glnColor]="&#123; primary: 'bs-danger' &#125;"
+    exterior="outlined"
+    frameSize="short"
+    isNoRipple
+    [isDisabled]="isDisabledDanger ? '': null"&gt;
+    &lt;span&gt;Danger 2&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn"
+    noUppercase
+    [glnColor]="&#123; primary: 'bs-danger' &#125;"
+    exterior="outlined"
+    frameSize="short"
+    isNoRipple
+    [isDisabled]="isDisabledDanger ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      [fragment]="fragment7"&gt;
+      Danger 2 Link
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
 
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -768,9 +809,6 @@ export class ButtonComponent &#123;
   --glnbt-lb-pd-lf: 0.75rem;
   --glnbt-lb-pd-rg: 0.75rem;
 &#125;
-.bstr-btn.gln-button:not(.gln-disabled)&gt;.glnbt-btn &#123;
-  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-&#125;
 .bstr-btn.gln-button.gln-disabled&gt;.glnbt-btn &#123;
   opacity: .65;
 &#125;
@@ -780,25 +818,20 @@ export class ButtonComponent &#123;
 &#125;
 
 // ** Style: bstrap "bs-btn-contained" **
-.bstr-btn.gln-button.glnbt-contained:not(.gln-disabled)&gt;.glnbt-btn:focus-within,
-.bstr-btn.gln-button.glnbt-contained:not(.gln-disabled).focus&gt;.glnbt-btn &#123;
-  background-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 40%);
-&#125;
-.bstr-btn.gln-button.glnbt-contained.gln-disabled&gt;.glnbt-btn &#123;
-  background-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
-  color: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%);
+.bstr-btn.glnbt-contained&gt;.glnbt-btn &#123;
+  --glnbt-c-foc-bg-cl: var(--glnbt--hov-bg-cl);
+  --glnbt-c-dis-cl: var(--glnbt--def-cl);
+  --glnbt-c-dis-bg-cl:  var(--glnbt--def-bg-cl);
+  --glnbt-c-dis-br-cl:  var(--glnbt--def-bg-cl);
 &#125;
 
 // ** Style: bstrap "bs-btn-outline" **
-.bstr-btn.gln-button.glnbt-outlined&gt;.glnbt-btn &#123;
-  border-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
-&#125;
-.bstr-btn.gln-button.glnbt-outlined:not(.gln-disabled)&gt;.glnbt-btn:hover &#123;
-  background-color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
-  color: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%); // #fff
-&#125;
-.bstr-btn.gln-button.glnbt-outlined.gln-disabled&gt;.glnbt-btn &#123;
-  color: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%);
+.bstr-btn.gln-button.glnbt-outlined &#123;
+  --glnbt-o-def-br-cl: var(--glnbt--def-cl);
+  --glnbt-o-hov-cl: var(--bs-o-hov-cl,  hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%)); // #fff
+  --glnbt--hov-bg-cl: var(--glnbt-o-def-cl);
+  --glnbt-o-dis-cl:  var(--glnbt--def-cl);
+  --glnbt-o-dis-br-cl:  var(--glnbt--def-cl);
 &#125;
 
 // ** Style: bstrap "Danger" **
@@ -807,6 +840,12 @@ export class ButtonComponent &#123;
   --gln-bs-danger-h: 354;
   --gln-bs-danger-s: 70%;
   --gln-bs-danger-l: 54%;
+  // #dc3545 = hsl(354deg 70% 54%);
+  --glnbt-c-def-bg-cl: #dc3545;
+  --glnbt-c-def-br-cl: #dc3545;
+  --glnbt-c-hov-bg-cl: #c82333;
+  --glnbt-c-hov-br-cl: #bd2130;
+  --glnbt-o-def-cl: #dc3545;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
