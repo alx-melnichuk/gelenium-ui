@@ -107,7 +107,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
     }
     if (changes.isFilled) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnf-filled', this.isFilled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-filled', this.isFilled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);
     }
     if (changes.isError) {
@@ -116,7 +116,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     }
     if (changes.label || changes.isRequired) {
       const isIndent = !!this.label || this.isRequired;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnf-lgn-indent', !!isIndent);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-lgn-indent', !!isIndent);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ind', isIndent ? '' : null);
     }
   }
@@ -145,28 +145,26 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   // ** Private API **
 
   private settingExterior(renderer: Renderer2, elem: ElementRef<HTMLElement>, exterior: GlnFrameExterior | null): void {
-    HtmlElemUtil.setAttr(renderer, elem, 'dcr-br', '');
-
-    HtmlElemUtil.setClass(renderer, elem, 'glnf-outlined', GlnFrameExteriorUtil.isOutlined(exterior));
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-outlined', GlnFrameExteriorUtil.isOutlined(exterior));
     HtmlElemUtil.setAttr(renderer, elem, 'ext-o', GlnFrameExteriorUtil.isOutlined(exterior) ? '' : null);
 
-    HtmlElemUtil.setClass(renderer, elem, 'glnf-underline', GlnFrameExteriorUtil.isUnderline(exterior));
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-underline', GlnFrameExteriorUtil.isUnderline(exterior));
     HtmlElemUtil.setAttr(renderer, elem, 'ext-u', GlnFrameExteriorUtil.isUnderline(exterior) ? '' : null);
 
-    HtmlElemUtil.setClass(renderer, elem, 'glnf-standard', GlnFrameExteriorUtil.isStandard(exterior));
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-standard', GlnFrameExteriorUtil.isStandard(exterior));
     HtmlElemUtil.setAttr(renderer, elem, 'ext-s', GlnFrameExteriorUtil.isStandard(exterior) ? '' : null);
 
     const isBorder = GlnFrameExteriorUtil.isStandard(exterior) || GlnFrameExteriorUtil.isUnderline(exterior);
-    HtmlElemUtil.setClass(renderer, elem, 'glnf-bottom-frame', isBorder);
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-bottom-frame', isBorder);
   }
 
   private settingHoverColor(renderer: Renderer2, elem: ElementRef<HTMLElement>, isHoverColor: boolean): void {
-    HtmlElemUtil.setClass(renderer, elem, 'glnf-hover-color', isHoverColor);
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-hover-color', isHoverColor);
     HtmlElemUtil.setAttr(renderer, elem, 'hfc', isHoverColor ? '' : null);
   }
 
   private settingLabelShrink(renderer: Renderer2, elem: ElementRef<HTMLElement>, isLabelShrink: boolean): void {
-    HtmlElemUtil.setClass(renderer, elem, 'glnf-shrink', isLabelShrink);
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-shrink', isLabelShrink);
     HtmlElemUtil.setAttr(renderer, elem, 'shr', isLabelShrink ? '' : null);
   }
 
@@ -176,7 +174,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   }
 
   private settingNoLabel(renderer: Renderer2, elem: ElementRef<HTMLElement>, noLabel: boolean): void {
-    HtmlElemUtil.setClass(renderer, elem, 'glnf-no-label', noLabel);
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-no-label', noLabel);
     HtmlElemUtil.setAttr(renderer, elem, 'no-lb', noLabel ? '' : null);
   }
 }

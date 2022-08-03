@@ -109,8 +109,8 @@ gln-select {
 
   // Element "gln-hint-or-error"
   gln-hint-or-error {
-    padding-left: var(--glns-he-pd-lf, var(--glnfs-pd-lf));
-    padding-right: var(--glns-he-pd-rg, var(--glnfs-pd-rg));
+    padding-left: var(--glns-he-pd-lf, var(--glnfrs-pd-lf));
+    padding-right: var(--glns-he-pd-rg, var(--glnfrs-pd-rg));
   }
 }
 

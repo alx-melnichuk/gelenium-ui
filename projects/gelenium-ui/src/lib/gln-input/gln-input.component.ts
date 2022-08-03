@@ -174,7 +174,7 @@ export class GlnInputComponent
     if (changes.type) {
       this.typeVal = GlnInputTypeUtil.create(this.type) || GlnInputType.text;
     }
-    if (changes.config && this.config) {
+    if (changes.config) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.isRequired || changes.minLength || changes.maxLength) {

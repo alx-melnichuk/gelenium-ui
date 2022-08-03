@@ -49,7 +49,7 @@ gln-button {
     -webkit-tap-highlight-color: transparent;
     align-items: center;
     background-color: transparent;
-    border-radius: var(--glnbt-br-rd, var(--glnfs-br-rd, 0.25em)); // 4px
+    border-radius: var(--glnbt-br-rd, var(--glnfrs-br-rd, 0.25em)); // 4px
     box-sizing: border-box;
     cursor: pointer;
     display: inline-flex;
@@ -227,14 +227,14 @@ gln-button {
     &>a {
       line-height: inherit;
       align-self: center;
-      padding-top: var(--glnbt-lb-pd-tp, var(--glnfs-pd-tp, var(--def-lb-pd-tp)));
-      padding-bottom: var(--glnbt-lb-pd-bt, var(--glnfs-pd-bt, var(--def-lb-pd-tp)));
+      padding-top: var(--glnbt-lb-pd-tp, var(--glnfrs-pd-tp, var(--def-lb-pd-tp)));
+      padding-bottom: var(--glnbt-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-tp)));
     }
     &>[glnbt-mr-ver] {
       line-height: inherit;
       align-self: center;
-      margin-top: var(--glnbt-lb-pd-tp, var(--glnfs-pd-tp, var(--def-lb-pd-tp)));
-      margin-bottom: var(--glnbt-lb-pd-bt, var(--glnfs-pd-bt, var(--def-lb-pd-tp)));
+      margin-top: var(--glnbt-lb-pd-tp, var(--glnfrs-pd-tp, var(--def-lb-pd-tp)));
+      margin-bottom: var(--glnbt-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-tp)));
     }
   }
 
@@ -249,11 +249,11 @@ gln-button {
     }
     &>span[glnf-orn-lf]:empty~[glnbt-pd-hor],
     &>span[glnf-orn-lf]:empty~a {
-      padding-left: var(--glnbt-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf)));
+      padding-left: var(--glnbt-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf)));
     }
     &>span[glnf-orn-rg]:empty~[glnbt-pd-hor],
     &>span[glnf-orn-rg]:empty~a {
-      padding-right: var(--glnbt-lb-pd-rg, var(--glnfs-pd-rg, var(--def-lb-pd-lf)));
+      padding-right: var(--glnbt-lb-pd-rg, var(--glnfrs-pd-rg, var(--def-lb-pd-lf)));
     }
   }
 

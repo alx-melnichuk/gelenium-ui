@@ -41,7 +41,7 @@ export class FrameBorderRadiusComponent {
   public urlFrameInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
 
   public borderRadius = 50;
-  public propRadius = '--glnf-br-rd';
+  public propRadius = '--glnfr-br-rd';
   public ratioOutlined = 0.58;
   public ratioUnderline = 0.4;
 

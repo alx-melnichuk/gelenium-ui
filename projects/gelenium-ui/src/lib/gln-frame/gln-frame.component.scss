@@ -8,7 +8,15 @@
 @import '../_styles/mx-transform-scale-x-y-translate-x-y.scss';
 
 gln-frame {
-  color: hsl(var(--gln-default-h), var(--gln-default-s), 17%); // hsla(0, 0%, 0%, 0.87);
+  --glnfr--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnfr--default-s: var(--glncl-default-s, var(--gln-default-s));
+
+  --glnfr--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
+  --glnfr--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
+
+  --glnfr--danger-h: var(--glncl-danger-h, var(--gln-danger-h));
+  --glnfr--danger-s: var(--glncl-danger-s, var(--gln-danger-s));
+
   background-color: transparent;
   border: 0;
   display: flex;
@@ -51,12 +59,12 @@ gln-frame {
     --def-lb-trn-y: 0.32em; // 5.12px
     --def-lb-trn2-y: 1.546875em; // 24.75px
   }
-  border-radius: var(--glnf-br-rd, var(--glnfs-br-rd, var(--def-br-rd)));
+  border-radius: var(--glnfr-br-rd, var(--glnfrs-br-rd, var(--def-br-rd)));
 
   &:not([noAnm]) {
-    --glnf-trn-drt-200: 200ms;
-    --glnf-trn-drt-100: 100ms;
-    --glnf-trn-drt-50: 50ms;
+    --glnfr-trn-drt-200: 200ms;
+    --glnfr-trn-drt-100: 100ms;
+    --glnfr-trn-drt-50: 50ms;
   }
 
   // ** Section "Label". **
@@ -73,12 +81,12 @@ gln-frame {
     text-size-adjust: 100%;
     top: 0;
     transform-origin: top left;
-    -webkit-transition: color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
-      , -webkit-transform var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
-      , max-width var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    transition: color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
-      , transform var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
-      , max-width var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    -webkit-transition: color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
+      , -webkit-transform var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
+      , max-width var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    transition: color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
+      , transform var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
+      , max-width var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     white-space: nowrap;
     z-index: 1;
     &>span[lbl] {
@@ -88,10 +96,10 @@ gln-frame {
   }
   &[shr], &:focus-within, &[foc], &[fil] {
     label {
-      max-width: calc(133% - var(--glnf-lb-pd-shr, var(--glnfe-pd-shr, var(--def-lb-mx-wd))));
+      max-width: calc(133% - var(--glnfr-lb-pd-shr, var(--glnfre-pd-shr, var(--def-lb-mx-wd))));
       @include mxTransform_TranslateXY_ScaleXY(
-        var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf))), // $translateX
-        var(--glnf-lb-trn-y, var(--glnfe-trn-y, var(--def-lb-trn-y))), // $translateY
+        var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf))), // $translateX
+        var(--glnfr-lb-trn-y, var(--glnfre-trn-y, var(--def-lb-trn-y))), // $translateY
         0.75, // $scaleX
         0.75  // $scaleY
       );
@@ -100,108 +108,93 @@ gln-frame {
   }
   &:not([shr]):not(:focus-within):not([foc]):not([fil]) label {
     max-width: calc(100%
-    - var(--glnfo-pd-lf, var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf))))
-    - var(--glnfo-pd-rg, var(--glnf-lb-pd-rg, var(--glnfs-pd-rg, var(--def-lb-pd-rg))))
+    - var(--glnfro-pd-lf, var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf))))
+    - var(--glnfro-pd-rg, var(--glnfr-lb-pd-rg, var(--glnfrs-pd-rg, var(--def-lb-pd-rg))))
     );
     @include mxTransform_TranslateXY_ScaleXY(
-      var(--glnfo-pd-lf, var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf)))), // $translateX
-      var(--glnf-lb-trn2-y, var(--glnfe-trn2-y, var(--def-lb-trn2-y))), // $translateY
+      var(--glnfro-pd-lf, var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf)))), // $translateX
+      var(--glnfr-lb-trn2-y, var(--glnfre-trn2-y, var(--def-lb-trn2-y))), // $translateY
       1,  // $scaleX
       1   // $scaleY
     );
   }
-  // :not([err]) :not(:hover):not(:focus-within)
-  --glnf--def-lb-def38: hsl(var(--gln-default-h), var(--gln-default-s), 38%); // (!) hsla(0, 0%, 0%, 0.6);
-  --glnf--def-br-def77: hsl(var(--gln-default-h), var(--gln-default-s), 77%); // (!) hsla(0, 0%, 0%, 0.23);
-  --glnf--def-bg-def94: hsl(var(--gln-default-h), var(--gln-default-s), 94%); // (!) hsla(0, 0%, 0%, 0.06);
-  --glnf--def-bb-def54: hsl(var(--gln-default-h), var(--gln-default-s), 54%); // (!) hsla(0, 0%, 0%, 0.42);
-  // :not([err]) :hover:not(:focus-within)
-  --glnf--hov-br-def17: hsl(var(--gln-default-h), var(--gln-default-s), 17%); // (!) hsla(0, 0%, 0%, 0.87);
-  --glnf--hov-bg-def91: hsl(var(--gln-default-h), var(--gln-default-s), 91%); // (!) hsla(0, 0%, 0%, 0.09);
-  --glnf--hov-bb-def17: hsl(var(--gln-default-h), var(--gln-default-s), 17%); // (!) hsla(0, 0%, 0%, 0.87);
-  // :not([err]) :focus-within
-  --glnf--foc-cl-prm46: hsl(var(--gln-primary-h), var(--gln-primary-s), 46%); //  #1976d2;
-  --glnf--foc-bg-prm97: hsl(var(--gln-primary-h), var(--gln-primary-s), 97%); // (+)
-  // [err] :not(:hover):not(:focus-within)
-  --glnf--err-lb-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
-  --glnf--err-br-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
-  --glnf--err-bg-dng96: hsl(var(--gln-danger-h), var(--gln-danger-s), 96%); // (+)
-  --glnf--err-bb-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (+)
-  // [err] :hover:not(:focus-within)
-  --glnf--hov-err-lb-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
-  --glnf--hov-err-br-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
-  --glnf--hov-err-bg-dng98: hsl(var(--gln-danger-h), var(--gln-danger-s), 98%); // (+)
-  --glnf--hov-err-bb-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (+)
-  // [err] :focus-within
-  --glnf--foc-err-lb-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
-  --glnf--foc-err-br-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
-  --glnf--foc-err-bg-dng94: hsl(var(--gln-danger-h), var(--gln-danger-s), 94%); // (+)
-  --glnf--foc-err-bb-dng51: hsl(var(--gln-danger-h), var(--gln-danger-s), 51%); // (!) hsla(0, 65%, 51%, 1);
-  // [dis]
-  --glnf--dis-lb-def55: hsl(var(--gln-default-h), var(--gln-default-s), 55%); // (!) hsla(0, 0%, 0%, 0.42);
-  --glnf--dis-br-def74: hsl(var(--gln-default-h), var(--gln-default-s), 74%); // (!) hsla(0, 0%, 0%, 0.26);
-  --glnf--dis-bg-def88: hsl(var(--gln-default-h), var(--gln-default-s), 88%); // (!) #0000001f; // hsla(0, 0%, 0%, 0.12);
-  --glnf--dis-bb-def55: hsl(var(--gln-default-h), var(--gln-default-s), 55%); // (!) hsla(0, 0%, 0%, 0.42);
-  //
-  --glnf-default-55: hsl(var(--gln-default-h), var(--gln-default-s), 55%);
+
+  --glnfr--default17: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 17%); // hsla(0, 0%, 0%, 0.87);
+  --glnfr--default38: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 38%); // hsla(0, 0%, 0%, 0.6);  rgba(0, 0, 0, 0.6);
+  --glnfr--default55: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 55%); // hsla(0, 0%, 0%, 0.42); rgba(0, 0, 0, 0.42);
+  --glnfr--default74: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 74%); // hsla(0, 0%, 0%, 0.26);
+  --glnfr--default77: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 77%); // hsla(0, 0%, 0%, 0.23); rgba(0, 0, 0, 0.23);
+  --glnfr--default88: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 88%); // hsla(0, 0%, 0%, 0.12); #e0e0e0;
+  --glnfr--default91: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 91%); // hsla(0, 0%, 0%, 0.09);
+  --glnfr--default94: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 94%); // hsla(0, 0%, 0%, 0.06); rgba(0, 0, 0, 0.06);
+
+  --glnfr--primary46: hsl(var(--glnfr--primary-h), var(--glnfr--primary-s), 46%); //  #1976d2;
+  --glnfr--primary97: hsl(var(--glnfr--primary-h), var(--glnfr--primary-s), 97%); // 
+
+  --glnfr--danger51: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 51%); // hsl(0, 65%, 51%); #d32f2f; rgb(211, 47, 47)
+  --glnfr--danger94: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 94%); // hsl(0, 65%, 94%);~#fae6e6; rgb(250, 230, 230);
+  --glnfr--danger96: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 96%); // hsl(0, 65%, 96%);~#fbeeee; rgb(251, 238, 238);
+  --glnfr--danger98: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 98%); // hsl(0, 65%, 98%); #d32f2f0b;
+
+  color: var(--glnfr--default17); // hsla(0, 0%, 0%, 0.87);
 
   &[hfc] {
-    --glnf-hover-focus-color: var(--glnf--foc-cl-prm46);
+    --glnfr-hover-focus-color: var(--glnfr--primary46);
   }
   
   // Definition of internal variables by element state.
   &:not([dis]) {
     &:not([err]) { // The state without disabled, error, hover, focused.
       &:not(:hover):not(:focus-within):not([foc]) {
-        --glnf-label-cl: var(--glnf-def-lb-cl, var(--glnf--def-lb-def38));
-        --glnf-dcr-br-cl: var(--glnf-def-br-cl, var(--glnf--def-br-def77));
-        --glnf-dcr-bg-cl: var(--glnf-def-bg-cl, var(--glnf--def-bg-def94));
-        --glnf-dcr-bb-bef: var(--glnf-def-brb-bf, var(--glnf--def-bb-def54));
+        --glnfr--label-cl: var(--glnfr-def-lb-cl, var(--glnfr--default38));
+        --glnfr--dcr-br-cl: var(--glnfr-def-br-cl, var(--glnfr--default77));
+        --glnfr--dcr-bg-cl: var(--glnfr-def-bg-cl, var(--glnfr--default94));
+        --glnfr--dcr-bb-bef: var(--glnfr-def-brb-bf, var(--glnfr--default55));
       } // The state without disabled, error, focused and with hover.
       &:hover:not(:focus-within):not([foc]) {
-        --glnf-label-cl: var(--glnf-hov-lb-cl, var(--glnf-hover-focus-color, var(--glnf--def-lb-def38)));
-        --glnf-dcr-br-cl: var(--glnf-hov-br-cl, var(--glnf-hover-focus-color, var(--glnf--hov-br-def17)));
-        --glnf-dcr-bg-cl: var(--glnf-hov-bg-cl, var(--glnf--hov-bg-def91));
-        --glnf-dcr-bb-bef: var(--glnf-hov-brb-bf, var(--glnf-hover-focus-color, var(--glnf--hov-bb-def17)));
+        --glnfr--label-cl: var(--glnfr-hov-lb-cl, var(--glnfr-hover-focus-color, var(--glnfr--default38)));
+        --glnfr--dcr-br-cl: var(--glnfr-hov-br-cl, var(--glnfr-hover-focus-color, var(--glnfr--default17)));
+        --glnfr--dcr-bg-cl: var(--glnfr-hov-bg-cl, var(--glnfr--default91));
+        --glnfr--dcr-bb-bef: var(--glnfr-hov-brb-bf, var(--glnfr-hover-focus-color, var(--glnfr--default17)));
       } // The state without disabled, error and with focused.
       &:focus-within, &[foc] {
-        --glnf-label-cl: var(--glnf-foc-lb-cl, var(--glnf--foc-cl-prm46));
-        --glnf-dcr-br-cl: var(--glnf-foc-br-cl, var(--glnf--foc-cl-prm46));
-        --glnf-dcr-bg-cl: var(--glnf-foc-bg-cl, var(--glnf--foc-bg-prm97));
+        --glnfr--label-cl: var(--glnfr-foc-lb-cl, var(--glnfr--primary46));
+        --glnfr--dcr-br-cl: var(--glnfr-foc-br-cl, var(--glnfr--primary46));
+        --glnfr--dcr-bg-cl: var(--glnfr-foc-bg-cl, var(--glnfr--primary97));
       }
-      --glnf-dcr-bb-aft: var(--glnf-foc-brb-af, var(--glnf--foc-cl-prm46));
+      --glnfr--dcr-bb-aft: var(--glnfr-foc-brb-af, var(--glnfr--primary46));
     }
     &[err] {// The state without disabled, hover, focused and error.
       &:not(:hover):not(:focus-within):not([foc]) {
-        --glnf-label-cl: var(--glnf-err-lb-cl, var(--glnf--err-lb-dng51));
-        --glnf-dcr-br-cl: var(--glnf-err-br-cl, var(--glnf--err-br-dng51));
-        --glnf-dcr-bg-cl: var(--glnf-err-bg-cl, var(--glnf--err-bg-dng96));
-        --glnf-dcr-bb-bef: var(--glnf-err-brb-bf, var(--glnf--err-bb-dng51));
+        --glnfr--label-cl: var(--glnfr-err-lb-cl, var(--glnfr--danger51));
+        --glnfr--dcr-br-cl: var(--glnfr-err-br-cl, var(--glnfr--danger51));
+        --glnfr--dcr-bg-cl: var(--glnfr-err-bg-cl, var(--glnfr--danger96));
+        --glnfr--dcr-bb-bef: var(--glnfr-err-brb-bf, var(--glnfr--danger51));
       } // The state without disabled, focused and error, hover.
       &:hover:not(:focus-within):not([foc]) {
-        --glnf-label-cl: var(--glnf-hov-err-lb-cl, var(--glnf--hov-err-lb-dng51));
-        --glnf-dcr-br-cl: var(--glnf-hov-err-br-cl, var(--glnf--hov-err-br-dng51));
-        --glnf-dcr-bg-cl: var(--glnf-hov-err-bg-cl, var(--glnf--hov-err-bg-dng98));
-        --glnf-dcr-bb-bef: var(--glnf-hov-err-brb-bf, var(--glnf--hov-err-bb-dng51));
+        --glnfr--label-cl: var(--glnfr-hov-err-lb-cl, var(--glnfr--danger51));
+        --glnfr--dcr-br-cl: var(--glnfr-hov-err-br-cl, var(--glnfr--danger51));
+        --glnfr--dcr-bg-cl: var(--glnfr-hov-err-bg-cl, var(--glnfr--danger98));
+        --glnfr--dcr-bb-bef: var(--glnfr-hov-err-brb-bf, var(--glnfr--danger51));
       } // The state without disabled and error, focused.
       &:focus-within, &[foc] {
-        --glnf-label-cl: var(--glnf-foc-err-lb-cl, var(--glnf--foc-err-lb-dng51));
-        --glnf-dcr-br-cl: var(--glnf-foc-err-br-cl, var(--glnf--foc-err-br-dng51));
-        --glnf-dcr-bg-cl: var(--glnf-foc-err-bg-cl, var(--glnf--foc-err-bg-dng94));
+        --glnfr--label-cl: var(--glnfr-foc-err-lb-cl, var(--glnfr--danger51));
+        --glnfr--dcr-br-cl: var(--glnfr-foc-err-br-cl, var(--glnfr--danger51));
+        --glnfr--dcr-bg-cl: var(--glnfr-foc-err-bg-cl, var(--glnfr--danger94));
       }
-      --glnf-dcr-bb-aft: var(--glnf-foc-err-brb-af, var(--glnf--foc-err-bb-dng51));
+      --glnfr--dcr-bb-aft: var(--glnfr-foc-err-brb-af, var(--glnfr--danger51));
     }
   } // The state with disabled.
   &[dis] {
-    --glnf-label-cl: var(--glnf-dis-lb-cl, var(--glnf--dis-lb-def55));
-    --glnf-dcr-br-cl: var(--glnf-dis-br-cl, var(--glnf--dis-br-def74));
-    --glnf-dcr-bg-cl: var(--glnf-dis-bg-cl, var(--glnf--dis-bg-def88));
-    --glnf-dcr-bb-bef: var(--glnf-dis-brb-bf, var(--glnf--dis-bb-def55));
+    --glnfr--label-cl: var(--glnfr-dis-lb-cl, var(--glnfr--default55));
+    --glnfr--dcr-br-cl: var(--glnfr-dis-br-cl, var(--glnfr--default74));
+    --glnfr--dcr-bg-cl: var(--glnfr-dis-bg-cl, var(--glnfr--default88));
+    --glnfr--dcr-bb-bef: var(--glnfr-dis-brb-bf, var(--glnfr--default55));
   }
 
   // ** Section: Color "label". **
   &>label {
-    color: var(--glnf-label-cl);
+    color: var(--glnfr--label-cl);
   }
 
   // ** Section "div.glnf-border". **
@@ -220,14 +213,14 @@ gln-frame {
     }
   }
   &[dis]>div {
-    color: var(--glnf-default-55); // var(--glnf-dis-cl); // The color in state is disabled for an input element.
+    color: var(--glnfr--label-cl); // The color in state is disabled for an input element.
   }
 
   // ** Section: Background-Color "div.glnf-border" for "Underline" mode. **
   &>[dcr-bg] {
-    -webkit-transition: background-color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    transition: background-color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    background-color: var(--glnf-dcr-bg-cl);
+    -webkit-transition: background-color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    transition: background-color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    background-color: var(--glnfr--dcr-bg-cl);
   }
 
   // ** Section "div.glnf-border" for "Outlined" and "Standard" mode. **
@@ -241,8 +234,8 @@ gln-frame {
       content: "\00a0";
       position: absolute;
       right: 0;
-      -webkit-transition: border-bottom-color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-      transition: border-bottom-color var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      -webkit-transition: border-bottom-color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      transition: border-bottom-color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
       pointer-events: none;
     }
     &:after {
@@ -255,8 +248,8 @@ gln-frame {
       position: absolute;
       right: 0;
       @include mxTransform_ScaleXY(0, 1);
-      -webkit-transition: -webkit-transform var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-      transition: transform var(--glnf-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+      -webkit-transition: -webkit-transform var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+      transition: transform var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
       pointer-events: none;
     }
   }
@@ -278,10 +271,10 @@ gln-frame {
   }
   // Border-Bottom-Color "div.glnf-border" for "Underline" and "Standard" mode.
   &>[dcr-bb]:before {
-    border-bottom-color: var(--glnf-dcr-bb-bef);
+    border-bottom-color: var(--glnfr--dcr-bb-bef);
   }
   &:not([dis])>[dcr-bb]:after {
-    border-bottom-color: var(--glnf-dcr-bb-aft);
+    border-bottom-color: var(--glnfr--dcr-bb-aft);
   }
 
   // ** Section "Fieldset" for "Outlined" mode. **
@@ -293,7 +286,7 @@ gln-frame {
     top: 0;
     left: 0;
     margin: 0;
-    padding: 0px calc(var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf))) - var(--glnf-o-lgn-pd, var(--def-o-lgn-pd)));
+    padding: 0px calc(var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf))) - var(--glnfr-o-lgn-pd, var(--def-o-lgn-pd)));
     pointer-events: none;
     border-radius: inherit;
     border-width: 1px;
@@ -307,7 +300,7 @@ gln-frame {
     &:focus-within, &[foc] {
       fieldset {
         border-width: 2px;
-        padding-left: calc(var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf))) - var(--glnf-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
+        padding-left: calc(var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf))) - var(--glnfr-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
       }
     } 
   } 
@@ -318,11 +311,11 @@ gln-frame {
   /* The radius value must be an integer, otherwise the frame in the "dotted" style is poorly drawn.
   // The state with disabled but without error.
   &[dis] fieldset {
-    border-color: var(--glnf-default-55); // var(--glnf-dis-cl);
+    border-color: var(--glnfr--label-cl);
     border-style: dotted;
   }*/
   [dcr-br] {
-    border-color: var(--glnf-dcr-br-cl);
+    border-color: var(--glnfr--dcr-br-cl);
   }
   
   // ** Section "Legend" on "Fieldset" for "Outlined" mode. **
@@ -346,17 +339,17 @@ gln-frame {
   &[shr], &:focus-within, &[foc], &[fil] {
     legend {
       max-width: 100%;
-      -webkit-transition: max-width var(--glnf-trn-drt-100, 0ms) cubic-bezier(0.0, 0, 0.2, 1) var(--glnf-trn-drt-50, 0ms);
-      transition: max-width var(--glnf-trn-drt-100, 0ms) cubic-bezier(0.0, 0, 0.2, 1) var(--glnf-trn-drt-50, 0ms);
+      -webkit-transition: max-width var(--glnfr-trn-drt-100, 0ms) cubic-bezier(0.0, 0, 0.2, 1) var(--glnfr-trn-drt-50, 0ms);
+      transition: max-width var(--glnfr-trn-drt-100, 0ms) cubic-bezier(0.0, 0, 0.2, 1) var(--glnfr-trn-drt-50, 0ms);
     }
     &[ind] legend {
-      padding: 0 calc(var(--glnf-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
+      padding: 0 calc(var(--glnfr-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
     }
   }
   &:not([shr]):not([fil]):not(:focus-within):not([foc]) legend {
     max-width: 0.01px;
-    -webkit-transition: max-width var(--glnf-trn-drt-50, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    transition: max-width var(--glnf-trn-drt-50, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    -webkit-transition: max-width var(--glnfr-trn-drt-50, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    transition: max-width var(--glnfr-trn-drt-50, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
   }
   
   // ** Additional settings **
@@ -369,12 +362,12 @@ gln-frame {
       align-self: baseline;
     }
     &>[glnf-pd-ver] {
-      padding-top: var(--glnf-lb-pd-tp, var(--glnfs-pd-tp, var(--def-lb-pd-tp)));
-      padding-bottom: var(--glnf-lb-pd-bt, var(--glnfs-pd-bt, var(--def-lb-pd-bt)));
+      padding-top: var(--glnfr-lb-pd-tp, var(--glnfrs-pd-tp, var(--def-lb-pd-tp)));
+      padding-bottom: var(--glnfr-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-bt)));
     }
     &>[glnf-mr-ver] {
-      margin-top: var(--glnf-lb-pd-tp, var(--glnfs-pd-tp, var(--def-lb-pd-tp)));
-      margin-bottom: var(--glnf-lb-pd-bt, var(--glnfs-pd-bt, var(--def-lb-pd-bt)));
+      margin-top: var(--glnfr-lb-pd-tp, var(--glnfrs-pd-tp, var(--def-lb-pd-tp)));
+      margin-bottom: var(--glnfr-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-bt)));
     }
 
     &>span[glnf-orn-lf], &>span[glnf-orn-rg] {
@@ -386,10 +379,10 @@ gln-frame {
     }
 
     &>span[glnf-orn-lf]:empty~[glnf-pd-hor] {
-      padding-left: var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf)));
+      padding-left: var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf)));
     }
     &>span[glnf-orn-rg]:empty~[glnf-pd-hor] {
-      padding-right: var(--glnf-lb-pd-rg, var(--glnfs-pd-rg, var(--def-lb-pd-rg)));
+      padding-right: var(--glnfr-lb-pd-rg, var(--glnfrs-pd-rg, var(--def-lb-pd-rg)));
     }
   }
 
@@ -430,7 +423,7 @@ gln-frame {
   &[ext-s]>div>span[glnf-orn-rg] {
     &>.glnf-ornam {
       display: inline-block;
-      margin-bottom: var(--glnf-lb-pd-bt, var(--glnfs-pd-bt, var(--def-lb-pd-bt)));
+      margin-bottom: var(--glnfr-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-bt)));
     }
   }
 }

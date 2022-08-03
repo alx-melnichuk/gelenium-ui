@@ -144,9 +144,11 @@
   </tr>
 </table>
 
-<section mr-vr>
-  <h4>Css variables at the ":root" level.</h4>
+<section mr-vr
+  id="css-variables">
+  <h4>CSS variables at the component level. <a [href]="urlFrame + '#css-variables'">#</a></h4>
 </section>
+
 <table class="app-tab">
   <tr>
     <th>Name</th>
@@ -154,49 +156,90 @@
   </tr>
 
   <tr>
-    <td><code>--glnf-def-cl: rgba(0, 0, 0, 0.6);</code></td>
     <td>
-      <span>The default color for the label.</span>
+      <code>--glnfr--default-h:<br/>
+      &nbsp;var(--glncl-default-h,<br/>
+      &nbsp;&nbsp;var(--gln-default-h)<br/>
+      &nbsp;);</code>
+    </td>
+    <td>
+      Sets the color of the label, border, and background.<br />
+      Applied in state: default and disabled.<br />
+      Defined by the <code ubr>--gln-default-h</code> system css variable.<br />
+      Or the css-variable of the GlnColor directive.<br />
+      The hue value for the "hsl()" css function.
     </td>
   </tr>
   <tr>
-    <td><code>--glnf-hov-cl: rgba(0, 0, 0, 0.87);</code></td>
     <td>
-      <span>The color of the label and border on mouse hover.</span>
+      <code>--glnfr--default-s:<br/>
+      &nbsp;var(--glncl-default-s,<br/>
+      &nbsp;&nbsp;var(--gln-default-s)<br/>
+      &nbsp;);</code>
     </td>
-  </tr>
-  <tr>
-    <td><code>--glnf-foc-cl: #1976d2;</code></td>
     <td>
-      <span>The color of the border and label when getting focus.</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>--glnf-err-cl: #d32f2f;</code></td>
-    <td>
-      <span>The color of the label and border in an error state.</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>--glnf-hov-err-cl: #ff0000;</code></td>
-    <td>
-      <span>The color of the label and border on mouse hover in an error state.</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>--glnf-dis-cl: #787878;</code></td>
-    <td>
-      <span>The color of the label and border in the state is disabled.</span>
+      As well as the previous parameter <code ubr>--glnfr--default-h</code>.<br />
+      The saturation value for the "hsl()" css function.
     </td>
   </tr>
 
+  <tr>
+    <td><code>--glnfr--primary-h:<br/>
+      &nbsp;var(--glncl-primary-h,<br/>
+      &nbsp;&nbsp;var(--gln-primary-h)<br/>
+      &nbsp;);</code>
+    </td>
+    <td>
+      Sets the color of the label, border, and background.<br />
+      Applied in state: Input focus received.<br />
+      Defined by the <code ubr>--gln-primary-h</code> system css variable.<br />
+      Or the css-variable of the GlnColor directive.<br />
+      The hue value for the "hsl()" css function.
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnfr--primary-s:<br/>
+      &nbsp;var(--glncl-primary-s,<br/>
+      &nbsp;&nbsp;var(--gln-primary-s)<br/>
+      &nbsp;);</code>
+    </td>
+    <td>
+      As well as the previous parameter <code ubr>--glnfr--primary-h</code>.<br />
+      The saturation value for the "hsl()" css function.
+    </td>
+  </tr>
 
-
-
+  <tr>
+    <td><code>--glnfr--danger-h:<br/>
+      &nbsp;var(--glncl-danger-h,<br/>
+      &nbsp;&nbsp;var(--gln-danger-h)<br/>
+      &nbsp;);</code>
+    </td>
+    <td>
+      Sets the color of the label, border, and background.<br />
+      Applies in all states when an error occurs.<br />
+      Defined by the <code ubr>--gln-danger-h</code> system css variable.<br />
+      Or the css-variable of the GlnColor directive.<br />
+      The hue value for the "hsl()" css function.
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnfr--danger-s:<br/>
+      &nbsp;var(--glncl-danger-s,<br/>
+      &nbsp;&nbsp;var(--gln-danger-s)<br/>
+      &nbsp;);</code>
+    </td>
+    <td>
+      As well as the previous parameter <code ubr>--glnfr--danger-h</code>.<br />
+      The saturation value for the "hsl()" css function.
+    </td>
+  </tr>
 </table>
 
-<section mr-vr>
-  <h4>Css variables, optional. You can override the default values. Background for "underline" mode.
+<section mr-vr
+  id="css-variables01">
+  <h4>Css variables, optional. You can override the default values.
+    <a [href]="urlFrame + '#css-variables01'">#</a>
   </h4>
 </section>
 <table class="app-tab">
@@ -207,213 +250,512 @@
     </tr>
 
     <tr>
-      <td><code>--glnf-def-bg-cl: rgba(0, 0, 0, 0.06);</code></td>
-      <td><span>The default background color for "underline" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-hov-bg-cl: #1976d20b;</code></td>
-      <td><span>The background color on mouse hover for the "underline" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-foc-bg-cl: #1976d20f;</code></td>
-      <td><span>The background color when getting focus for "underline" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-err-bg-cl: #d32f2f0f;</code></td>
-      <td><span>The background color in an error state for "underline" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-hov-err-bg-cl: #d32f2f0b;</code></td>
-      <td><span>The background color on mouse hover in an error state for "underline" mode.</span>
+      <td><code>--glnfr-br-rd:<br/>
+        &nbsp;0.35em;<br/>
+        &nbsp;0.35em 0.35em 0 0;</code>
+      </td>
+      <td>
+        <span>The value of the border radius.</span>
+        <ul>
+          <li>"outlined" : 0.35em; // 5.6px;</li>
+          <li>"underline" : 0.35em 0.35em 0px 0px;</li>
+        </ul>
       </td>
     </tr>
     <tr>
-      <td><code>--glnf-foc-err-bg-cl: #ce51512d;</code></td>
-      <td><span>The background color when getting focus in an error state for "underline"
-          mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-dis-bg-cl: #7878783b;</code></td>
-      <td><span>The background color in the state is disabled for the "underline" mode.</span></td>
-    </tr>
-  </tbody>
-</table>
-
-<section mr-vr>
-  <h4>Css variables, optional. You can override the default values. Border bottom for "underline"
-    and "standard"
-    modes.</h4>
-</section>
-<table class="app-tab">
-  <tbody>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-
-    <tr>
-      <td><code>--glnf-def-brb-bf: #0000006b;</code></td>
-      <td><span>Default bottom border color for "underline" and "standard" modes (for
-          ":before").</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-hov-brb-bf: rgba(0, 0, 0, 0.87);</code></td>
-      <td><span>The border bottom color on mouse hover for "underline" and "standard" modes (for
-          ":before").</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-err-brb-bf: #d32f2f;</code></td>
-      <td><span>The border bottom color in an error state for "underline" and "standard" modes (for
-          ":before").</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-hov-err-brb-bf: #ff0000;</code></td>
-      <td><span>The border bottom color on mouse hover in an error state for "underline" and
-          "standard" modes (for ":before").</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-foc-brb-af: #1976d2;</code></td>
-      <td><span>The border bottom color when getting focus for "underline" and "standard" modes (for
-          ":after").</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-foc-err-brb-af: #d32f2f;</code></td>
-      <td><span>The border bottom color when getting focus in an error state for "underline" and
-          "standard" modes (for ":after").</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-dis-brb-bf: #787878;</code></td>
-      <td><span>The border bottom color in the state is disabled for the "underline" and "standard"
-          modes.</span></td>
-    </tr>
-
-  </tbody>
-</table>
-
-<section mr-vr>
-  <h4>Css variables, optional. You can override the default values. Border for "underline" mode.
-  </h4>
-</section>
-<table class="app-tab">
-  <tbody>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-
-    <tr>
-      <td><code>--glnf-def-br-cl: rgba(0, 0, 0, 0.23);</code></td>
-      <td><span>The default border color for "underline" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-hov-br-cl: rgba(0, 0, 0, 0.87);</code></td>
-      <td><span>The border color on mouse hover for the "underline" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-foc-br-cl: #1976d2;</code></td>
-      <td><span>The border color when getting focus for "underline" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-err-br-cl: #d32f2f;</code></td>
-      <td><span>The border color in an error state for "underline" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-hov-err-br-cl: #ff0000;</code></td>
-      <td><span>The border color on mouse hover in an error state for "underline" mode.</span>
+      <td><code>--glnfr-lb-pd-tp:<br/>
+        &nbsp;1.03125em;<br/>
+        &nbsp;1.546875em;<br/>
+        &nbsp;1.546875em;</code>
+      </td>
+      <td>
+        <span>
+          The value of the "padding-top" property for the button label.
+        </span>
+        <ul>
+          <li>"outlined" : 1.03125em; // 16.5px</li>
+          <li>"underline" : 1.546875em; // 24.75px</li>
+          <li>"standard" : 1.546875em; // 24.75px</li>
+        </ul>
       </td>
     </tr>
     <tr>
-      <td><code>--glnf-foc-err-br-cl: #d32f2f;</code></td>
-      <td><span>The border color when getting focus in an error state for "underline"
-          mode.</span></td>
+      <td><code>--glnfr-lb-pd-bt:<br/>
+        &nbsp;1.03125em;<br/>
+        &nbsp;1.546875em;<br/>
+        &nbsp;1.546875em;</code>
+      </td>
+      <td>
+        <span>
+          The value of the "padding-bottom" property for the button label.
+        </span>
+        <ul>
+          <li>"outlined" : 1.03125em; // 16.5px</li>
+          <li>"underline" : 1.546875em; // 24.75px</li>
+          <li>"standard" : 1.546875em; // 24.75px</li>
+        </ul>
+      </td>
     </tr>
     <tr>
-      <td><code>--glnf-dis-br-cl: rgba(0, 0, 0, 0.23);</code></td>
-      <td><span>The border color in the state is disabled for the "underline" mode.</span></td>
+      <td><code>--glnfr-lb-pd-lf:<br/>
+        &nbsp;0.875em;<br/>
+        &nbsp;0.75em;<br/>
+        &nbsp;0;</code>
+      </td>
+      <td>
+        <span>
+          The value of the "padding-left" property for the button label.
+        </span>
+        <ul>
+          <li>"outlined" : 0.875em; // 14px</li>
+          <li>"underline" : 0.75em; // 12px</li>
+          <li>"standard" : 0</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-lb-pd-rg:<br/>
+        &nbsp;0.875em;<br/>
+        &nbsp;0.75em;<br/>
+        &nbsp;0;</code>
+      </td>
+      <td>
+        <span>
+          The value of the "padding-right" property for the button label.
+        </span>
+        <ul>
+          <li>"outlined" : 0.875em; // 14px</li>
+          <li>"underline" : 0.75em; // 12px</li>
+          <li>"standard" : 0;</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-lb-pd-shr:<br/>
+        &nbsp;2.905em;<br/>
+        &nbsp;2.49em;<br/>
+        &nbsp;0;</code>
+      </td>
+      <td>
+        <span>
+          The value of the "max-width" property for the label in the shrink position.
+        </span>
+        <ul>
+          <li>"outlined" : 2.905em; // calc(133% - [1.66 * 2 * 0.875em])</li>
+          <li>"underline" : 2.49em; // calc(133% - [1.66 * 2 * 0.75em])</li>
+          <li>"standard" : 0; // calc(133% - [1.66 * 2 * 0])</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-lb-trn-y:<br/>
+        &nbsp;-0.53875em;<br/>
+        &nbsp;0.379375em;<br/>
+        &nbsp;0.32em;</code>
+      </td>
+      <td>
+        <span>
+          For a label in a shrink position, the Y offset value.
+        </span>
+        <ul>
+          <li>"outlined" : -0.53875em; // -8.62px</li>
+          <li>"underline" : 0.379375em; // 6.07px</li>
+          <li>"standard" : 0.32em; // 5.12px</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfre-trn2-y:<br/>
+        &nbsp;1.03125em;<br/>
+        &nbsp;1.03125em;<br/>
+        &nbsp;1.546875em;</code>
+      </td>
+      <td>
+        <span>
+          For a label in the unshrink position, the y-offset value.
+        </span>
+        <ul>
+          <li>"outlined" : 1.03125em; // 16.5px</li>
+          <li>"underline" : 1.03125em; // 16.5px</li>
+          <li>"standard" : 1.546875em; // 24.75px</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-trn-drt-200:<br/>
+        &nbsp;200ms;</code>
+      </td>
+      <td>
+        <span>
+          The duration of the animation for moving the label.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-trn-drt-100:<br/>
+        &nbsp;100ms;</code>
+      </td>
+      <td>
+        <span>
+          The duration of the animation when the legend is shrink in the fieldset.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-trn-drt-50:<br/>
+        &nbsp;50ms;</code>
+      </td>
+      <td>
+        <span>
+          The duration of the animation when the legend expands in the fieldset.
+        </span>
+      </td>
     </tr>
 
-  </tbody>
-</table>
-
-<section mr-vr>
-  <h4>Css variables, optional. You can override the default values. Label for "outlined"/
-    "underline"/
-    "standard" mode.</h4>
-</section>
-<table class="app-tab">
-  <tbody>
     <tr>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-
-    <tr>
-      <td><code>--glnf-o-lgn-pd: 0.3em;</code></td>
+      <td><code>--glnfr-o-lgn-pd:<br/>
+        &nbsp;0.3em;</code>
+      </td>
       <td><span>Small indentation of the legend from the border for "outlined" mode.</span></td>
     </tr>
 
     <tr>
-      <td><code>--glnf-br-rd: 0.35em/ 0.35em/ -;</code></td>
-      <td><span>The value of the border radius.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-lb-pd-lf: 0.875em/ 0.75em/ 0</code></td>
-      <td><span>Left margin from frame to label.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-lb-pd-rg: 0.875em/ 0.75em/ 0</code></td>
-      <td><span>Right margin from frame to label.</span></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnf-lb-pd-tp: 1.03125em/ 1.546875em/ 1.546875em;</code></td>
-      <td><span>The value of the indent from the top to the border.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-lb-pd-bt: 1.03125em/ 0.515625em/ 0.515625em;</code></td>
-      <td><span>The value of the indent from the bottom to the border.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-lb-mx-wd: 2.905em/ 2.49em/ 0;</code></td>
-      <td><span>The maximum label length when compressed.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-lb-trn-y: -0.53875em/ 0.379375em/ 0.32em</code></td>
-      <td><span>Transformation value for the label in compressed state.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-lb-trn2-y: 1.03125em/ 1.03125em/ 1.546875em</code></td>
-      <td><span>Transformation value for label in free state.</span></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnf-def-lb-cl: rgba(0, 0, 0, 0.6);</code></td>
-      <td><span>The default label color.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-hov-lb-cl: rgba(0, 0, 0, 0.87);</code></td>
-      <td><span>The label color on mouse hover.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-foc-lb-cl: #1976d2;</code></td>
-      <td><span>The label color when getting focus.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-err-lb-cl: #d32f2f;</code></td>
-      <td><span>The label color in an error state.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnf-hov-err-lb-cl: #ff0000;</code></td>
-      <td><span>The label color on mouse hover in an error state.</span>
+      <td><code>--glnfr-def-lb-cl:<br/>
+        hsl(--glnfr--default-[h,s], 38%);</code>
+      </td>
+      <td>
+        <span>
+          The default label color.<br />
+          (rgba(0, 0, 0, 0.6);)
+        </span>
       </td>
     </tr>
     <tr>
-      <td><code>--glnf-foc-err-lb-cl: #d32f2f;</code></td>
-      <td><span>The label color when getting focus in an error state.</span></td>
+      <td><code>--glnfr-def-br-cl:<br/>
+        hsl(--glnfr--default-[h,s], 77%);</code>
+      </td>
+      <td>
+        <span>
+          The default border color for "outlined" mode.<br />
+          (rgba(0, 0, 0, 0.23);)
+        </span>
+      </td>
     </tr>
     <tr>
-      <td><code>--glnf-dis-lb-cl: #787878;</code></td>
-      <td><span>The label color in the state is disabled.</span></td>
+      <td><code>--glnfr-def-bg-cl:<br/>
+        hsl(--glnfr--default-[h,s], 94%);</code>
+      </td>
+      <td>
+        <span>
+          The default background color for "underline" mode.<br />
+          (rgba(0, 0, 0, 0.06);)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-def-brb-bf:<br/>
+        hsl(--glnfr--default-[h,s], 55%);</code>
+      </td>
+      <td>
+        <span>
+          The default bottom border color for "underline" and "standard"
+          modes (for ":before").<br />
+          (rgba(0, 0, 0, 0.42);)
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td><code>--glnfr-hov-lb-cl:<br/>
+        hsl(--glnfr--default-[h,s], 38%);</code>
+      </td>
+      <td>
+        <span>
+          The label color on mouse hover.<br />
+          (hsla(0, 0%, 0%, 0.6);)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-hov-br-cl:<br/>
+        hsl(--glnfr--default-[h,s], 17%);</code>
+      </td>
+      <td>
+        <span>
+          The border color on mouse hover for the "underline" mode.<br />
+          (hsla(0, 0%, 0%, 0.87);)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-hov-bg-cl:<br/>
+        hsl(--glnfr--default-[h,s], 91%);</code>
+      </td>
+      <td>
+        <span>
+          The background color on mouse hover for the "underline" mode.<br />
+          (hsla(0, 0%, 0%, 0.09);)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-hov-brb-bf:<br/>
+        hsl(--glnfr--default-[h,s], 17%);</code>
+      </td>
+      <td>
+        <span>
+          The border bottom color on mouse hover for "underline" and "standard" modes
+          (for ":before").<br />
+          (hsla(0, 0%, 0%, 0.87);)
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td><code>--glnfr-foc-lb-cl:<br/>
+        hsl(--glnfr--primary-[h,s], 46%);</code>
+      </td>
+      <td>
+        <span>
+          The label color when getting focus.<br />
+          (#1976d2;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-foc-br-cl:<br/>
+        hsl(--glnfr--primary-[h,s], 46%);</code>
+      </td>
+      <td>
+        <span>
+          The border color when getting focus for "underline" mode.<br />
+          (#1976d2;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-foc-bg-cl:<br/>
+        hsl(--glnfr--primary-[h,s], 97%);</code>
+      </td>
+      <td>
+        <span>
+          The background color when getting focus for "underline" mode.<br />
+          (#1976d20f;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-foc-brb-af:<br/>
+        hsl(--glnfr--primary-[h,s], 46%);</code>
+      </td>
+      <td>
+        <span>
+          The border bottom color when getting focus for "underline"
+          and "standard" modes (for ":after").<br />
+          (#1976d2;)
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td><code>--glnfr-err-lb-cl:<br/>
+        hsl(--glnfr--danger-[h,s], 51%);</code>
+      </td>
+      <td>
+        <span>
+          The label color in an error state.<br />
+          (#d32f2f;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-err-br-cl:<br/>
+        hsl(--glnfr--danger-[h,s], 51%);</code>
+      </td>
+      <td>
+        <span>
+          The border color in an error state for "underline" mode.<br />
+          (#d32f2f;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-err-bg-cl:<br/>
+        hsl(--glnfr--danger-[h,s], 96%);</code>
+      </td>
+      <td>
+        <span>
+          The background color in an error state for "underline" mode.<br />
+          (rgb(251, 238, 238);)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-err-brb-bf:<br/>
+        hsl(--glnfr--danger-[h,s], 51%);</code>
+      </td>
+      <td>
+        <span>
+          The border bottom color in an error state for "underline"
+          and "standard" modes (for ":before").<br />
+          (#d32f2f;)
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td><code>--glnfr-hov-err-lb-cl:<br/>
+        hsl(--glnfr--danger-[h,s], 51%);</code>
+      </td>
+      <td>
+        <span>
+          The label color on mouse hover in an error state.<br />
+          (#d32f2f;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-err-br-cl:<br/>
+        hsl(--glnfr--danger-[h,s], 51%);</code>
+      </td>
+      <td>
+        <span>
+          The border color in an error state for "underline" mode.<br />
+          (#d32f2f;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-hov-err-br-cl:<br/>
+        hsl(--glnfr--danger-[h,s], 51%);</code>
+      </td>
+      <td>
+        <span>
+          The border color on mouse hover in an error state for "underline" mode.<br />
+          (#d32f2f;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-hov-err-bg-cl:<br/>
+        hsl(--glnfr--danger-[h,s], 98%);</code>
+      </td>
+      <td>
+        <span>
+          The background color on mouse hover in an error state
+          for "underline" mode.
+          <br />
+          (#d32f2f0b;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-hov-err-brb-bf:<br/>
+        hsl(--glnfr--danger-[h,s], 51%);</code>
+      </td>
+      <td>
+        <span>
+          The border bottom color on mouse hover in an error state
+          for "underline" and "standard" modes (for ":before").
+          <br />
+          (#d32f2f;)
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td><code>--glnfr-foc-err-lb-cl:<br/>
+        hsl(--glnfr--danger-[h,s], 51%);</code>
+      </td>
+      <td>
+        <span>
+          The label color when getting focus in an error state.<br />
+          (#d32f2f;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-foc-err-br-cl:<br/>
+        hsl(--glnfr--danger-[h,s], 51%);</code>
+      </td>
+      <td>
+        <span>
+          The border color when getting focus in an error state
+          for "underline" mode.<br />
+          (#d32f2f;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-foc-err-bg-cl:<br/>
+        hsl(--glnfr--danger-[h,s], 94%);</code>
+      </td>
+      <td>
+        <span>
+          The background color when getting focus in an error state
+          for "underline" mode.<br />
+          (rgb(250, 230, 230);)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-foc-err-brb-af:<br/>
+        hsl(--glnfr--danger-[h,s], 51%);</code>
+      </td>
+      <td>
+        <span>
+          The border bottom color when getting focus in an error
+          state for "underline" and "standard" modes (for ":after").<br />
+          (#d32f2f;)
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td><code>--glnfr-dis-lb-cl:<br/>
+        hsl(--glnfr--default-[h,s], 55%);</code>
+      </td>
+      <td>
+        <span>
+          The label color in the state is disabled.<br />
+          (rgba(0, 0, 0, 0.42);)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-dis-br-cl:<br/>
+        hsl(--glnfr--default-[h,s], 74%);</code>
+      </td>
+      <td>
+        <span>
+          The border color in the state is disabled for
+          the "underline" mode.<br />
+          (rgba(0, 0, 0, 0.23);)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-dis-bg-cl:<br/>
+        hsl(--glnfr--default-[h,s], 88%);</code>
+      </td>
+      <td>
+        <span>
+          The background color in the state is disabled for the "underline" mode.<br />
+          (#e0e0e0;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnfr-dis-brb-bf:<br/>
+        hsl(--glnfr--default-[h,s], 55%);</code>
+      </td>
+      <td>
+        <span>
+          The border bottom color in the state is disabled for the
+          "underline" and "standard" modes.<br />
+          (rgba(0, 0, 0, 0.42);)
+        </span>
+      </td>
     </tr>
 
   </tbody>

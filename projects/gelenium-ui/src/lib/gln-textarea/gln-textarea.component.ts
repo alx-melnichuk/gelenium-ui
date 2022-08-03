@@ -168,7 +168,7 @@ export class GlnTextareaComponent
     // - this.required = BooleanUtil.init(this.isRequired);
     // - this.valueInit = BooleanUtil.init(this.isValueInit);
     super.ngOnChanges(changes);
-    if (changes.config && this.config) {
+    if (changes.config) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes.isRequired || changes.minLength || changes.maxLength) {

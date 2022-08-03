@@ -73,7 +73,7 @@ export class GlnFrameExteriorInputDirective implements OnChanges, GlnFrameSizePr
     if (value !== null) {
       // paddingHor
       const pdLfRgShr = NumberUtil.roundTo100(2 * value * 1.33);
-      HtmlElemUtil.setProperty(this.elementRef, '--glnfe-pd-shr', NumberUtil.str(pdLfRgShr)?.concat('px'));
+      HtmlElemUtil.setProperty(this.elementRef, '--glnfre-pd-shr', NumberUtil.str(pdLfRgShr)?.concat('px'));
     }
     return value !== null ? { left: value, right: value } : null;
   };
@@ -92,10 +92,10 @@ export class GlnFrameExteriorInputDirective implements OnChanges, GlnFrameSizePr
     if (result !== null) {
       // paddingVer
       const translateY = this.translateY(this.exterior, frameSizeValue, lineHeight);
-      HtmlElemUtil.setProperty(this.elementRef, '--glnfe-trn-y', NumberUtil.str(translateY)?.concat('px'));
+      HtmlElemUtil.setProperty(this.elementRef, '--glnfre-trn-y', NumberUtil.str(translateY)?.concat('px'));
 
       const translateY2 = this.translate2Y(this.exterior, frameSizeValue, lineHeight);
-      HtmlElemUtil.setProperty(this.elementRef, '--glnfe-trn2-y', NumberUtil.str(translateY2)?.concat('px'));
+      HtmlElemUtil.setProperty(this.elementRef, '--glnfre-trn2-y', NumberUtil.str(translateY2)?.concat('px'));
     }
     return result;
   };
