@@ -25,17 +25,17 @@ gln-button {
   &[ext-c] {
     --def-lb-pd-tp: 0.375em; // 6px
     --def-lb-pd-lf: 1em; // 16px
-    --glntr-ripple-cl:  hsla(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%, 0.3);
+    --glntr-ripple-cl:  var(--glnbt-c-ripple-cl, hsla(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%, 0.3));
   }
   &[ext-o] {
     --def-lb-pd-tp: 0.3125em; // 5px
     --def-lb-pd-lf: 0.9375em; // 15px
-    --glntr-ripple-cl:  hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3);
+    --glntr-ripple-cl:  var(--glnbt-o-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
   }
   &[ext-t] {
     --def-lb-pd-tp: 0.375em; // 6px
     --def-lb-pd-lf: 0.5em; // 8px
-    --glntr-ripple-cl:  hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3);
+    --glntr-ripple-cl:  var(--glnbt-t-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
   }
 
   &>[glnbt-clear] {
@@ -93,10 +93,10 @@ gln-button {
   &[ext-c] {
     --glnbt--def-cl: var(--glnbt-c-def-cl, hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%));
     --glnbt--def-bg-cl: var(--glnbt-c-def-bg-cl, hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%));
-    --glnbt--def-br-cl: var(--glnbt-c-def-br-cl, unset);
+    --glnbt--def-br-cl: var(--glnbt-c-def-br-cl);
     --glnbt--hov-cl: var(--glnbt-c-hov-cl);
     --glnbt--hov-bg-cl: var(--glnbt-c-hov-bg-cl, hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 40%));
-    --glnbt--hov-br-cl: var(--glnbt-c-hov-br-cl);
+    --glnbt--hov-br-cl: var(--glnbt-c-hov-br-cl); // currentColor
 
     &:not([dis])>[glnbt-btn] {
       &:not(:hover):not(:focus):not(:focus-within) {
@@ -140,11 +140,11 @@ gln-button {
   // Exterior: "outlined"
   &[ext-o] {
     --glnbt--def-cl: var(--glnbt-o-def-cl, hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%));
-    --glnbt--def-bg-cl: var(--glnbt-o-def-bg-cl, unset);
+    --glnbt--def-bg-cl: var(--glnbt-o-def-bg-cl);
     --glnbt--def-br-cl: var(--glnbt-o-def-br-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.5));
     --glnbt--hov-cl: var(--glnbt-o-hov-cl);
     --glnbt--hov-bg-cl: var(--glnbt-o-hov-bg-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.04));
-    --glnbt--hov-br-cl: var(--glnbt-o-hov-br-cl);
+    --glnbt--hov-br-cl: var(--glnbt-o-hov-br-cl); // --glnbt--def-cl
 
     &:not([dis])>[glnbt-btn] {
       &:not(:hover):not(:focus):not(:focus-within) {
@@ -177,11 +177,11 @@ gln-button {
   // Exterior: "text"
   &[ext-t] {
     --glnbt--def-cl: var(--glnbt-t-def-cl, hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%));
-    --glnbt--def-bg-cl: var(--glnbt-t-def-bg-cl, unset);
-    --glnbt--def-br-cl: var(--glnbt-t-def-br-cl, unset);
+    --glnbt--def-bg-cl: var(--glnbt-t-def-bg-cl);
+    --glnbt--def-br-cl: var(--glnbt-t-def-br-cl);
     --glnbt--hov-cl: var(--glnbt-t-hov-cl);
     --glnbt--hov-bg-cl: var(--glnbt-t-hov-bg-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.04));
-    --glnbt--hov-br-cl: var(--glnbt-t-hov-br-cl);
+    --glnbt--hov-br-cl: var(--glnbt-t-hov-br-cl); // currentColor
 
     &:not([dis])>[glnbt-btn] {
       &:not(:hover):not(:focus):not(:focus-within) {
@@ -209,7 +209,7 @@ gln-button {
 
   // Define styles for all exteriors.
   &>[glnbt-btn] {
-    color: var(--glnbt--cl   , var(--glnbt--def-cl));
+    color: var(--glnbt--cl, var(--glnbt--def-cl));
     background-color: var(--glnbt--bg-cl, var(--glnbt--def-bg-cl));
     border-color: var(--glnbt--br-cl, var(--glnbt--def-br-cl));
   }

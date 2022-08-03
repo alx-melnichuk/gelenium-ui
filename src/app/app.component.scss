@@ -79,7 +79,7 @@ app-root {
     }
     th, td {
       padding: 8px 16px;
-      code {
+      code:not([ubr]) {
         display: block;
       }
     }

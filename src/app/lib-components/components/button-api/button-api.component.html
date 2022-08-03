@@ -162,71 +162,155 @@
   </tbody>
 </table>
 
-<section mr-vr>
-  <h4>Css variables at the ":root" level.</h4>
+<section mr-vr
+  id="css-variables">
+  <h4>CSS variables at the component level. <a [href]="urlButton + '#css-variables'">#</a></h4>
 </section>
+
 <table class="app-tab">
   <tbody>
     <tr>
       <th>Name</th>
       <th>Description</th>
     </tr>
+    <!--  The hue, saturation and lightness value for the "hsl()" css function.<br/> -->
 
     <tr>
-      <td><code>--glnbt-def-cl: #1976d2;</code></td>
+      <td><code>--glnbt--default-h:<br/>
+        &nbsp;var(--glncl-default-h,<br/>
+        &nbsp;&nbsp;var(--gln-default-h)<br/>
+        &nbsp;);</code></td>
       <td>
         <span>
-          Text color for mode: "outlined" and "text". Background color for mode: "contained".
+          In the "disabled" state defines:
+        </span>
+        <ul>
+          <li>text and background color for exterior "contained";</li>
+          <li>the color of the text and frame for the exterior "outland";</li>
+          <li>text color for exterior "text";</li>
+        </ul>
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-default-h</code>.<br />
+          Or the css-variable of the GlnColor directive.<br />
+          The hue value for the "hsl()" css function.
         </span>
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-dis-cl: #00000042;</code></td>
-      <td>
-        <span>Text color in disabled state.</span>
-      </td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-dis-cl2: #0000001f;</code></td>
+      <td><code>--glnbt--default-s:<br/>
+        &nbsp;var(--glncl-default-s,<br/>
+        &nbsp;&nbsp;var(--gln-default-s)<br/>
+        &nbsp;);</code></td>
       <td>
         <span>
-          Background color in disabled state for "contained" mode.
-          Border color in disabled state for "outlined" mode.
+          Similar to the previous parameter <code ubr>--glnbt--default-h</code>.<br />
+          The saturation value for the "hsl()" css function.
         </span>
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-hov-bg-cl: #1976d20a;</code></td>
+      <td><code>--glnbt--default-bg-h:<br/>
+        &nbsp;var(--glncl-default-bg-h,<br/>
+        &nbsp;&nbsp;var(--gln-default-bg-h)<br/>
+        &nbsp;);</code>
+      </td>
       <td>
         <span>
-          Background color when hovering the mouse for modes: "outlined" and "text".
+          This setting defines:
+        </span>
+        <ul>
+          <li>
+            text color and ripple effect for exterior "contained";
+          </li>
+        </ul>
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-default-bg-h</code>.<br />
+          Or the css-variable of the GlnColor directive.<br />
+          The hue value for the "hsl()" css function.
         </span>
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-def-cl2: #fff;</code></td>
+      <td><code>--glnbt--default-bg-s:<br/>
+        &nbsp;var(--glncl-default-bg-s,<br/>
+        &nbsp;&nbsp;var(--gln-default-bg-s)<br/>
+        &nbsp;);</code>
+      </td>
       <td>
-        <span>Text color for "contained" mode.</span>
+        <span>
+          Similar to the previous parameter <code ubr>--glnbt--default-bg-h</code>.<br />
+          The saturation value for the "hsl()" css function.<br />
+        </span>
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-hov-bg-cl2: #1565c0;</code></td>
+      <td><code>--glnbt--primary-h:<br/>
+        &nbsp;var(--glncl-primary-h,<br/>
+        &nbsp;&nbsp;var(--gln-primary-h)<br/>
+        &nbsp;);</code>
+      </td>
       <td>
-        <span>Background color when hovering the mouse for "contained" mode.</span>
+        <span>
+          This parameter for the exterior "contained" defines:
+        </span>
+        <ul>
+          <li>
+            background color by default and on mouse hover;
+          </li>
+        </ul>
+        <span>
+          This parameter for the exterior "outlined" defines:
+        </span>
+        <ul>
+          <li>
+            ripple effect color;
+          </li>
+          <li>
+            text color, border color, mouse hover background color
+          </li>
+        </ul>
+        <span>
+          This parameter for the exterior "text" defines:
+        </span>
+        <ul>
+          <li>
+            ripple effect color;
+          </li>
+          <li>
+            text color, mouse hover background color
+          </li>
+        </ul>
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-primary-h</code>.<br />
+          Or the css-variable of the GlnColor directive.<br />
+          The hue value for the "hsl()" css function.
+        </span>
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-br-cl: #1976d280;</code></td>
+      <td><code>--glnbt--primary-s:<br/>
+        &nbsp;var(--glncl-primary-s,<br/>
+        &nbsp;&nbsp;var(--gln-primary-s)<br/>
+        &nbsp;);</code>
+      </td>
       <td>
-        <span>Border color for "outlined" mode.</span>
+        <span>
+          Similar to the previous parameter <code ubr>--glnbt--primary-h</code>.<br />
+          The saturation value for the "hsl()" css function.<br />
+        </span>
       </td>
     </tr>
   </tbody>
 </table>
 
 
-<section mr-vr>
-  <h4>Css variables, optional. Override default values.</h4>
+<section mr-vr
+  id="css-variables-option">
+  <h4>Css variables, optional. You can override the default values. <a
+      [href]="urlButton + '#css-variables-option'">#</a></h4>
 </section>
 <table class="app-tab">
   <tbody>
@@ -242,7 +326,11 @@
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-lb-pd-tp: 0.375em;</code></td>
+      <td><code>--glnbt-lb-pd-tp:<br/>
+        &nbsp;0.375em; // 6px "contained";<br/>
+        &nbsp;0.3125em; // 5px "outlined";<br/>
+        &nbsp;0.375em; // 6px "text";
+      </code></td>
       <td>
         <span>
           The value of the "padding-top" property for the button label.
@@ -250,7 +338,11 @@
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-lb-pd-bt: 0.375em;</code></td>
+      <td><code>--glnbt-lb-pd-bt:<br/>
+        &nbsp;0.375em; // 6px "contained";<br/>
+        &nbsp;0.3125em; // 5px "outlined";<br/>
+        &nbsp;0.375em; // 6px "text";
+      </code></td>
       <td>
         <span>
           The value of the "padding-bottom" property for the button label.
@@ -258,7 +350,11 @@
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-lb-pd-lf: 1em;</code></td>
+      <td><code>--glnbt-lb-pd-lf:<br/>
+        &nbsp;1em; // 16px "contained";<br/>
+        &nbsp;0.9375em; // 15px "outlined";<br/>
+        &nbsp;0.5em; // 8px "text";
+      </code></td>
       <td>
         <span>
           The value of the "padding-left" property for the button label.
@@ -266,103 +362,248 @@
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-lb-pd-rg: 1em;</code></td>
+      <td><code>--glnbt-lb-pd-rg:<br/>
+        &nbsp;1em; // 16px "contained";<br/>
+        &nbsp;0.9375em; // 15px "outlined";<br/>
+        &nbsp;0.5em; // 8px "text";
+      </code></td>
       <td>
         <span>
           The value of the "padding-right" property for the button label.
         </span>
       </td>
     </tr>
+
+    <!-- "contained" mode -->
     <tr>
-      <td><code>--glnbt-c-def-cl: #00acc1;</code></td>
-      <td>
-        <span>Text color for "contained" mode.</span>
+      <td><em>"contained" mode</em></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-c-def-cl:<br/>
+        &nbsp;hsl(--glnbt--default-bg-[h,s],100%);</code></td>
+      <td><span>Text color for "contained" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-c-def-bg-cl:<br/>
+        &nbsp;hsl(--glnbt--primary-[h,s],46%));</code></td>
+      <td><span>Background color for "contained" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-c-def-br-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Border color for "contained" mode.</span></td>
+    </tr>
+
+    <tr>
+      <td><code>--glnbt-c-hov-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td>Text color when hovering the mouse for "contained" mode.</td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-c-hov-bg-cl:<br/>
+        &nbsp;hsl(--glnbt--primary-[h,s],40%);</code></td>
+      <td><span>Background color when hovering the mouse for "contained" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-c-hov-br-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Border color when hovering the mouse for "contained" mode.</span></td>
+    </tr>
+
+    <tr>
+      <td><code>--glnbt-c-foc-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td>Text color on focus for "content" mode.</td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-c-foc-bg-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Background color on focus for "contained" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-c-foc-br-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Border color on focus for "contained" mode.</span></td>
+    </tr>
+
+    <tr>
+      <td><code>--glnbt-c-dis-cl:<br/>
+        &nbsp;hsl(--glnbt--default-[h,s],68%);</code></td>
+      <td><span>Text color in disabled state for "contained" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-c-dis-bg-cl:<br/>
+        &nbsp;hsl(--glnbt--default-[h,s],88%);</code></td>
+      <td><span>Background color in disabled state for "contained" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-c-dis-br-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Border color in disabled state for "contained" mode.</span></td>
+    </tr>
+
+    <tr>
+      <td><code>--glnbt-c-ripple-cl:<br/>
+        &nbsp;hsla(--glnbt--default-bg-[h,s],100%,0.3);</code></td>
+      <td><span>The color of the ripple effect for the "contained" mode.</span></td>
+    </tr>
+
+    <!-- "outlined" mode -->
+    <tr>
+      <td><em>"outlined" mode</em></td>
+    </tr>
+
+    <tr>
+      <td><code>--glnbt-o-def-cl:<br/>
+        &nbsp;hsl(--glnbt--primary-[h,s],46%);</code></td>
+      <td><span>Text color for "outlined" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-o-def-bg-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Background color for "outlined" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-o-def-br-cl:<br/>
+        &nbsp;hsla(--glnbt--primary-[h,s],46%,0.5);</code></td>
+      <td><span>Border color for "outlined" mode.</span></td>
+    </tr>
+
+    <tr>
+      <td><code>--glnbt-o-hov-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Text color when hovering the mouse for "outlined" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-o-hov-bg-cl:<br/>
+        &nbsp;hsla(--glnbt--primary-[h,s],46%,0.04);</code></td>
+      <td><span>Background color when hovering the mouse for "outlined" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-o-hov-br-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Border color when hovering the mouse for "outlined" mode.</span></td>
+    </tr>
+
+    <tr>
+      <td><code>--glnbt-o-foc-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td>Text color on focus for "outlined" mode.</td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-o-foc-bg-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Background color on focus for "outlined" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-o-foc-br-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Border color on focus for "outlined" mode.</span></td>
+    </tr>
+
+    <tr>
+      <td><code>--glnbt-o-dis-cl:<br/>
+        &nbsp;hsl(--glnbt--default-[h,s],74%);</code></td>
+      <td><span>Text color in disabled state for "outlined" mode.</span>
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-c-def-bg-cl: #b2ebf299;</code></td>
+      <td><code>--glnbt-o-dis-bg-cl:<br/>
+        &nbsp;undefined;</code></td>
       <td>
-        <span>Background color for mode: "contained".</span>
+        <span>Background color in disabled state for "outlined" mode.</span>
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-c-hov-bg-cl: #0069d9;</code></td>
-      <td>
-        <span>Background color when hovering the mouse for "contained" mode.</span>
+      <td><code>--glnbt-o-dis-br-cl:<br/>
+        &nbsp;hsl(--glnbt--default-[h,s],88%);</code></td>
+      <td><span>Border color in disabled state for "outlined" mode.</span></td>
+    </tr>
+
+    <tr>
+      <td><code>--glnbt-o-ripple-cl:<br/>
+        &nbsp;hsla(--glnbt--primary-[h,s],46%,0.3);</code></td>
+      <td><span>The color of the ripple effect for the "outlined" mode.</span></td>
+    </tr>
+
+    <!-- "text" mode -->
+    <tr>
+      <td><em>"text" mode</em></td>
+    </tr>
+
+    <tr>
+      <td><code>--glnbt-t-def-cl:<br/>
+        &nbsp;hsl(--glnbt--primary-[h,s],46%);</code></td>
+      <td><span>Text color for "text" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-t-def-bg-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Background color for "text" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-t-def-br-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Border color for "text" mode.</span></td>
+    </tr>
+
+    <tr>
+      <td><code>--glnbt-t-hov-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Text color when hovering the mouse for "text" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-t-hov-bg-cl:<br/>
+        &nbsp;hsla(--glnbt--primary-[h,s],46%,0.04);</code></td>
+      <td><span>Background color when hovering the mouse for "text" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-t-hov-br-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Border color when hovering the mouse for "text" mode.</span></td>
+    </tr>
+
+    <tr>
+      <td><code>--glnbt-t-foc-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td>Text color on focus for "text" mode.</td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-t-foc-bg-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Background color on focus for "text" mode.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-t-foc-br-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Border color on focus for "text" mode.</span></td>
+    </tr>
+
+    <tr>
+      <td><code>--glnbt-t-dis-cl:<br/>
+        &nbsp;hsl(--glnbt--default-[h,s],74%);</code></td>
+      <td><span>Text color in disabled state for "text" mode.</span>
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-c-dis-cl: #76b0b7;</code></td>
+      <td><code>--glnbt-t-dis-bg-cl:<br/>
+        &nbsp;undefined;</code></td>
       <td>
-        <span>Text color in disabled state for "contained" mode.</span>
+        <span>Background color in disabled state for "text" mode.</span>
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-c-dis-bg-cl: #b2ebf233;</code></td>
-      <td>
-        <span>Background color in disabled state for "contained" mode.</span>
-      </td>
+      <td><code>--glnbt-t-dis-br-cl:<br/>
+        &nbsp;undefined;</code></td>
+      <td><span>Border color in disabled state for "text" mode.</span></td>
     </tr>
+
     <tr>
-      <td><code>--glnbt-o-def-cl: #00acc1;</code></td>
-      <td>
-        <span>Text color for "outlined" mode.</span>
-      </td>
+      <td><code>--glnbt-t-ripple-cl:<br/>
+        &nbsp;hsla(--glnbt--primary-[h,s],46%,0.3);</code></td>
+      <td><span>The color of the ripple effect for the "text" mode.</span></td>
     </tr>
-    <tr>
-      <td><code>--glnbt-o-def-br-cl: #00acc1a0;</code></td>
-      <td>
-        <span>Border color for "outlined" mode.</span>
-      </td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-o-hov-bg-cl: #b2ebf299;</code></td>
-      <td>
-        <span>Background color when hovering the mouse for "outlined" mode.</span>
-      </td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-o-hov-br-cl: #00acc1;</code></td>
-      <td>
-        <span>Border color when hovering the mouse for "outlined" mode.</span>
-      </td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-o-dis-cl: #76b0b7;</code></td>
-      <td>
-        <span>Text color in disabled state for "outlined" mode.</span>
-      </td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-o-dis-br-cl: #76b0b77a;</code></td>
-      <td>
-        <span>Border color in disabled state for "outlined" mode.</span>
-      </td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-t-def-cl: #00acc1;</code></td>
-      <td>
-        <span>Text color for "text" mode.</span>
-      </td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-t-hov-bg-cl: #b2ebf299;</code></td>
-      <td>
-        <span>Background color when hovering the mouse for "text" mode.</span>
-      </td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-t-dis-cl: #76b0b7;</code></td>
-      <td>
-        <span>Text color in disabled state for "text" mode.</span>
-      </td>
-    </tr>
-    <tr>
-      <td><code>--glntr-ripple-cl: #686aec5d;</code></td>
-      <td>
-        <span>The color of the touch pulse when the mouse is clicked.</span>
-      </td>
-    </tr>
+
   </tbody>
 </table>
 
