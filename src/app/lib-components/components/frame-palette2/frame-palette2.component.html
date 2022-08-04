@@ -1,6 +1,7 @@
-<section mr-vr>
-  <p>
-    The css-style "fp-bstrap" implements a bootstrap-style color palette.
+<section mr-vr
+  id="palette-bstrap">
+  <p>The css-style "fp-bstrap" implements a bootstrap-style color palette.
+    <a [href]="urlFrame + '#palette-bstrap'">#</a>
   </p>
 </section>
 
@@ -14,16 +15,15 @@
     </small>
   </div>
 
-  <div class="app-group">
+  <div class="app-group fp-bstr2">
 
-    <div class="app-elem"
-      style="width: 15em;">
+    <div class="app-elem ">
       <div>
         <small>
           <em>Attributes: isRequired, helperText.</em>
         </small>
       </div>
-      <gln-input class="fp-bstrap"
+      <gln-input class="bs2-primary"
         formControlName="model06g"
         frameSize="short"
         isNoLabel
@@ -37,14 +37,13 @@
       </gln-input>
     </div>
 
-    <div class="app-elem"
-      style="width: 15em;">
+    <div class="app-elem">
       <div>
         <small>
           <em>Attributes: isRequired, helperText.</em>
         </small>
       </div>
-      <gln-input class="fp-bstrap"
+      <gln-input class="bs2-primary"
         formControlName="model06h"
         frameSize="short"
         isNoLabel
@@ -61,11 +60,12 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>Class: is-success.</em>
+          <em>Class: after editing "success".</em>
         </small>
       </div>
       <gln-input formControlName="model06i"
-        [ngClass]="['fp-bstrap', (!controls06b.model06i.errors ? 'is-success' : '')]"
+        [ngClass]="[(controls06b.model06i.dirty
+          ? 'bs2-success' : 'bs2-primary')]"
         frameSize="short"
         isNoLabel
         exterior="outlined"
@@ -84,7 +84,7 @@
           <em>Attributes: isDisabled.</em>
         </small>
       </div>
-      <gln-input class="fp-bstrap"
+      <gln-input class="bs2-primary"
         formControlName="model06j"
         frameSize="short"
         isNoLabel
@@ -118,16 +118,15 @@
     &lt;/small&gt;
   &lt;/div&gt;
 
-  &lt;div class="app-group"&gt;
+  &lt;div class="app-group fp-bstr2"&gt;
 
-    &lt;div class="app-elem"
-      style="width: 15em;"&gt;
+    &lt;div class="app-elem "&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input class="fp-bstrap"
+      &lt;gln-input class="bs2-primary"
         formControlName="model06g"
         frameSize="short"
         isNoLabel
@@ -141,14 +140,13 @@
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem"
-      style="width: 15em;"&gt;
+    &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input class="fp-bstrap"
+      &lt;gln-input class="bs2-primary"
         formControlName="model06h"
         frameSize="short"
         isNoLabel
@@ -165,19 +163,20 @@
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Class: is-success.&lt;/em&gt;
+          &lt;em&gt;Class: after editing "success".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model06i"
-        [ngClass]="['fp-bstrap', (!controls06b.model06i.errors ? 'is-success' : '')]"
+        [ngClass]="[(controls06b.model06i.dirty
+          ? 'bs2-success' : 'bs2-primary')]"
         frameSize="short"
         isNoLabel
         exterior="outlined"
         isRequired
         wdFull
         helperText="<b>&#123;</b>&#123;
-          (!controls06b.model06i.value
-            ? 'Required field.': 'Enter value.')
+          !controls06b.model06i.value
+            ? 'Required field.': 'Enter value.'
         &#125;&#125;"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -188,7 +187,7 @@
           &lt;em&gt;Attributes: isDisabled.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input class="fp-bstrap"
+      &lt;gln-input class="bs2-primary"
         formControlName="model06j"
         frameSize="short"
         isNoLabel
@@ -225,7 +224,6 @@ export class FrameComponent &#123;
     model06i: new FormControl('Hello World', []),
   &#125;;
   public formGroup06b: FormGroup = new FormGroup(this.controls06b);
-
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -240,55 +238,12 @@ export class FrameComponent &#123;
 &#125;
 
 // BootStrap
-.fp-bstrap &#123;
+.fp-bstr2 &#123;
   color: #495057;
-  --bs-err-cl: #dc3545;
-  --bs-hov-err-cl: #dc3545;
-  --bs-foc-cl: #80bdff;
   --bs-def-br-cl: #ced4da;
   --bs-dis-bgr-cl: #e9ecef;
 &#125;
-.fp-bstrap .gln-frame &#123;
-  line-height: 1.5;
-&#125;
-.fp-bstrap .gln-frame:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within) .glnf-fieldset &#123;
-  border-color: var(--bs-def-br-cl);
-&#125;
-.fp-bstrap .gln-frame:not(.gln-disabled):not(.gln-error):hover:not(:focus-within) .glnf-fieldset &#123;
-  border-color: var(--bs-def-br-cl);
-&#125;
-.fp-bstrap .gln-frame:not(.gln-disabled):not(.gln-error):focus-within .glnf-fieldset &#123;
-  border-color: var(--bs-foc-cl);
-&#125;
-.fp-bstrap .gln-frame:not(.gln-disabled).gln-error:not(:hover):not(:focus-within) .glnf-fieldset &#123;
-  border-color: var(--bs-err-cl);
-&#125;
-.fp-bstrap .gln-frame:not(.gln-disabled).gln-error:hover:not(:focus-within) .glnf-fieldset &#123;
-  border-color: var(--bs-hov-err-cl);
-&#125;
-.fp-bstrap .gln-frame.gln-disabled .glnf-fieldset &#123;
-  border-color: var(--bs-def-br-cl);
-&#125;
-.fp-bstrap .gln-frame.gln-disabled &#123;
-  background-color: var(--bs-dis-bgr-cl);
-  opacity: 1;
-&#125;
-.fp-bstrap gln-hint-or-error.ghe-error &#123;
-  color: var(--bs-err-cl);
-&#125;
-.fp-bstrap .gln-frame.gln-disabled .glnf-fieldset &#123;
-  border-style: solid;
-&#125;
-.fp-bstrap .gln-frame:focus-within .glnf-fieldset &#123;
-  border-width: 1px;
-&#125;
-.fp-bstrap .gln-frame:focus-within.gln-error .glnf-fieldset &#123;
-  box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
-&#125;
-.fp-bstrap .gln-frame:focus-within:not(.gln-error) .glnf-fieldset &#123;
-  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
-&#125;
-.fp-bstrap .gln-frame.gln-error .glni-input &#123;
+.fp-bstr2 .gln-frame.gln-error .glni-input &#123;
   padding-right: 1.4em;
   background-image: url("data:image/svg+xml,"
   + "&lt;svg xmlns='http://www.w3.org/2000/svg' width='12' "
@@ -301,6 +256,31 @@ export class FrameComponent &#123;
   background-position: right center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
   margin-right: 5px;
+&#125;
+.fp-bstr2 .gln-frame &#123;
+  line-height: 1.5;
+  --glnfr-def-br-cl: var(--bs-def-br-cl);
+  --glnfr-hov-br-cl: var(--bs-def-br-cl);
+  --glnfr-dis-br-cl: var(--bs-def-br-cl);
+&#125;
+.fp-bstr2 .gln-frame:focus-within .glnf-fieldset &#123;
+  border-width: 1px;
+&#125;
+.fp-bstr2 .gln-frame.gln-disabled &#123;
+  background-color: var(--bs-dis-bgr-cl);
+  opacity: 1;
+&#125;
+
+.fp-bstr2 .bs2-primary  .gln-frame:focus-within:not(.gln-error) &#123;
+  --glnfr-foc-br-cl: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+&#125;
+.fp-bstr2 .bs2-success .gln-frame:focus-within:not(.gln-error) &#123;
+  --glnfr-foc-br-cl: #28a745;
+  box-shadow: 0 0 0 0.2rem rgb(40 167 69 / 25%);
+&#125;
+.fp-bstr2 .gln-frame:focus-within.gln-error &#123;
+  box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

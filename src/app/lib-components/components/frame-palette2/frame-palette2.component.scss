@@ -4,55 +4,12 @@ app-frame-palette2 {
   display: block;
 
   // BootStrap
-  .fp-bstrap {
+  .fp-bstr2 {
     color: #495057;
-    --bs-err-cl: #dc3545;
-    --bs-hov-err-cl: #dc3545;
-    --bs-foc-cl: #80bdff;
     --bs-def-br-cl: #ced4da;
     --bs-dis-bgr-cl: #e9ecef;
   }
-  .fp-bstrap .gln-frame {
-    line-height: 1.5;
-  }
-  .fp-bstrap .gln-frame:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within) .glnf-fieldset {
-    border-color: var(--bs-def-br-cl);
-  }
-  .fp-bstrap .gln-frame:not(.gln-disabled):not(.gln-error):hover:not(:focus-within) .glnf-fieldset {
-    border-color: var(--bs-def-br-cl);
-  }
-  .fp-bstrap .gln-frame:not(.gln-disabled):not(.gln-error):focus-within .glnf-fieldset {
-    border-color: var(--bs-foc-cl);
-  }
-  .fp-bstrap .gln-frame:not(.gln-disabled).gln-error:not(:hover):not(:focus-within) .glnf-fieldset {
-    border-color: var(--bs-err-cl);
-  }
-  .fp-bstrap .gln-frame:not(.gln-disabled).gln-error:hover:not(:focus-within) .glnf-fieldset {
-    border-color: var(--bs-hov-err-cl);
-  }
-  .fp-bstrap .gln-frame.gln-disabled .glnf-fieldset {
-    border-color: var(--bs-def-br-cl);
-  }
-  .fp-bstrap .gln-frame.gln-disabled {
-    background-color: var(--bs-dis-bgr-cl);
-    opacity: 1;
-  }
-  .fp-bstrap gln-hint-or-error.ghe-error {
-    color: var(--bs-err-cl);
-  }
-  .fp-bstrap .gln-frame.gln-disabled .glnf-fieldset {
-    border-style: solid;
-  }
-  .fp-bstrap .gln-frame:focus-within .glnf-fieldset {
-    border-width: 1px;
-  }
-  .fp-bstrap .gln-frame:focus-within.gln-error .glnf-fieldset {
-    box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
-  }
-  .fp-bstrap:not(.is-success) .gln-frame:focus-within:not(.gln-error) .glnf-fieldset {
-    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
-  }
-  .fp-bstrap .gln-frame.gln-error .glni-input {
+  .fp-bstr2 .gln-frame.gln-error .glni-input {
     padding-right: 1.4em;
     background-image: url("data:image/svg+xml,"
     + "<svg xmlns='http://www.w3.org/2000/svg' width='12' "
@@ -66,10 +23,29 @@ app-frame-palette2 {
     background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
     margin-right: 5px;
   }
-  
-  .fp-bstrap.is-success .gln-frame:focus-within:not(.gln-error) .glnf-fieldset {
-    border-color: #28a745;
-    box-shadow: 0 0 0 0.2rem rgb(40 167 69 / 25%); 
+  .fp-bstr2 .gln-frame {
+    line-height: 1.5;
+    --glnfr-def-br-cl: var(--bs-def-br-cl);
+    --glnfr-hov-br-cl: var(--bs-def-br-cl);
+    --glnfr-dis-br-cl: var(--bs-def-br-cl);
+  }
+  .fp-bstr2 .gln-frame:focus-within .glnf-fieldset {
+    border-width: 1px;
+  }
+  .fp-bstr2 .gln-frame.gln-disabled {
+    background-color: var(--bs-dis-bgr-cl);
+    opacity: 1;
   }
 
+  .fp-bstr2 .bs2-primary  .gln-frame:focus-within:not(.gln-error) {
+    --glnfr-foc-br-cl: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+  }
+  .fp-bstr2 .bs2-success .gln-frame:focus-within:not(.gln-error) {
+    --glnfr-foc-br-cl: #28a745;
+    box-shadow: 0 0 0 0.2rem rgb(40 167 69 / 25%); 
+  }
+  .fp-bstr2 .gln-frame:focus-within.gln-error {
+    box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
+  }
 }
