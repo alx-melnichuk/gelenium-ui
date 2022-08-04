@@ -16,7 +16,7 @@ gln-select {
 
   &[wdFull] {
     width: 100%;
-    gln-frame>div>[glnf-elem] {
+    gln-frame>div>[glnfr-elem] {
       width: 100%;
     }
   }
@@ -59,7 +59,7 @@ gln-select {
     }
   }
   
-  gln-frame>div>[glnf-orn-rg]>[glns-rhomb] {
+  gln-frame>div>[glnfr-orn-rg]>[glns-rhomb] {
     align-items: center;
     color: var(--glns-rhomb-cl);
     display: flex;
@@ -81,12 +81,12 @@ gln-select {
       transform: rotate(180deg);
     }
   }
-  gln-frame:not([ext-s])>div>[glnf-orn-rg]>[glns-rhomb] {
+  gln-frame:not([ext-s])>div>[glnfr-orn-rg]>[glns-rhomb] {
     padding-right: 0.375em; // 6px
   }
 
-  // Element "Frame - glnf-elem".
-  gln-frame>div>[glnf-elem] {
+  // Element "Frame - glnfr-elem".
+  gln-frame>div>[glnfr-elem] {
     background: none;
     border: 0;
     box-sizing: content-box;

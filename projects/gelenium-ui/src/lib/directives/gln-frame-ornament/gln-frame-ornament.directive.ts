@@ -4,8 +4,8 @@ import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from './gln-frame-ornam-al
 import { HtmlElemUtil } from '../../_utils/html-elem.util';
 import { NumberUtil } from '../../_utils/number.util';
 
-export const ATTR_ORN_LF = 'glnf-orn-lf';
-export const ATTR_ORN_RG = 'glnf-orn-rg';
+export const ATTR_ORN_LF = 'glnfr-orn-lf';
+export const ATTR_ORN_RG = 'glnfr-orn-rg';
 
 @Directive({
   selector: '[glnFrameOrnament]',
@@ -19,9 +19,9 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
   @Input()
   public glnFrameOrnamentElementRef: ElementRef<HTMLElement> | null | undefined;
   @Input()
-  /** Path to an element that has children with 'glnf-orn-lf' and 'glnf-orn-rg' attributes. */
+  /** Path to an element that has children with 'glnfr-orn-lf' and 'glnfr-orn-rg' attributes. */
   // Example: "/div{0}" - the first child tag is "div" with index 0.
-  // Example: "/.glnf-border{0}" - first child tag with class "glnf-border" and index 0..
+  // Example: "/.glnfr-border{0}" - first child tag with class "glnfr-border" and index 0..
   public glnFrameOrnamentPath: string | null | undefined;
   @Input()
   public glnFrameOrnamentAfterContent: boolean | null | undefined;

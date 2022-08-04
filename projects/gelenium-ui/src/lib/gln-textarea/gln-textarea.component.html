@@ -26,20 +26,20 @@
       [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
       [glnFrameOrnamentPath]="'/div{0}'">
 
-      <span glnf-orn-lf
+      <span glnfr-orn-lf
         class="glnt-ornam-lf">
         <ng-content select="[gln-orn-lf]"></ng-content>
       </span>
-      <span glnf-orn-rg
+      <span glnfr-orn-rg
         class="glnt-ornam-rg">
         <ng-content select="[gln-orn-rg]"></ng-content>
       </span>
 
       <textarea #textareaElement
         formControlName="textData"
-        glnf-mr-ver
-        glnf-pd-hor
-        glnf-elem
+        glnfr-mr-ver
+        glnfr-pd-hor
+        glnfr-elem
         [attr.id]="id + '_textarea'"
         [rows]="currentRows"
         [ngClass]="['glnt-textarea', (readOnly ? 'gln-readonly' : '')]"

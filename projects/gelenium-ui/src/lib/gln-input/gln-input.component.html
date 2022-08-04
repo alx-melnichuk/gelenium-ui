@@ -26,20 +26,20 @@
       [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
       [glnFrameOrnamentPath]="'/div{0}'">
 
-      <span glnf-orn-lf
+      <span glnfr-orn-lf
         class="glni-ornam-lf">
         <ng-content select="[gln-orn-lf]"></ng-content>
       </span>
-      <span glnf-orn-rg
+      <span glnfr-orn-rg
         class="glni-ornam-rg">
         <ng-content select="[gln-orn-rg]"></ng-content>
       </span>
 
       <input #inputElement
         formControlName="textData"
-        glnf-pd-ver
-        glnf-pd-hor
-        glnf-elem
+        glnfr-pd-ver
+        glnfr-pd-hor
+        glnfr-elem
         [attr.id]="id + '_input'"
         [type]="typeVal"
         [ngClass]="['glni-input', (readOnly ? 'gln-readonly' : '')]"

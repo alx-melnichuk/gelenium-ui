@@ -38,12 +38,12 @@
       (blur)="doBlur()"
       (keydown)="frameKeydown($event)">
 
-      <span glnf-orn-lf
+      <span glnfr-orn-lf
         class="glns-ornam-lf">
         <ng-content select="[gln-orn-lf]"></ng-content>
       </span>
 
-      <span glnf-orn-rg
+      <span glnfr-orn-rg
         class="glns-ornam-rg">
         <ng-content select="[gln-orn-rg]"></ng-content>
 
@@ -58,9 +58,9 @@
       </span>
 
       <div [ngClass]="[(readOnly ? 'gln-readonly' : '')]"
-        glnf-pd-ver
-        glnf-pd-hor
-        glnf-elem
+        glnfr-pd-ver
+        glnfr-pd-hor
+        glnfr-elem
         [attr.id]="id + '-elem'">
 
         <ng-container [ngSwitch]="isFilled">

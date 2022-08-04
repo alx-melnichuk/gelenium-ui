@@ -198,7 +198,7 @@ gln-frame {
     color: var(--glnfr--label-cl);
   }
 
-  // ** Section "div.glnf-border". **
+  // ** Section "div.glnfr-border". **
   &>div {
     align-items: center;
     box-sizing: border-box;
@@ -206,10 +206,10 @@ gln-frame {
     display: flex;
     flex-wrap: nowrap;
     width: 100%;
-    &>[glnf-elem] {
+    &>[glnfr-elem] {
       flex-grow: 1;
     }
-    &>[glnf-orn-lf], &>[glnf-orn-rg] {
+    &>[glnfr-orn-lf], &>[glnfr-orn-rg] {
       flex-shrink: 0;
     }
   }
@@ -217,14 +217,14 @@ gln-frame {
     color: var(--glnfr--label-cl); // The color in state is disabled for an input element.
   }
 
-  // ** Section: Background-Color "div.glnf-border" for "Underline" mode. **
+  // ** Section: Background-Color "div.glnfr-border" for "Underline" mode. **
   &>[dcr-bg] {
     -webkit-transition: background-color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: background-color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     background-color: var(--glnfr--dcr-bg-cl);
   }
 
-  // ** Section "div.glnf-border" for "Outlined" and "Standard" mode. **
+  // ** Section "div.glnfr-border" for "Outlined" and "Standard" mode. **
   &>[dcr-bb] {
     &:before {
       border-bottom-width: 1px;
@@ -270,7 +270,7 @@ gln-frame {
       }
     }
   }
-  // Border-Bottom-Color "div.glnf-border" for "Underline" and "Standard" mode.
+  // Border-Bottom-Color "div.glnfr-border" for "Underline" and "Standard" mode.
   &>[dcr-bb]:before {
     border-bottom-color: var(--glnfr--dcr-bb-bef);
   }
@@ -357,72 +357,72 @@ gln-frame {
 
   // Ornament "padding".
   &>div {
-    &>[glnf-pd-ver],
-    &>[glnf-mr-ver] {
+    &>[glnfr-pd-ver],
+    &>[glnfr-mr-ver] {
       line-height: inherit; // Stores the line height for the end element.
       align-self: baseline;
     }
-    &>[glnf-pd-ver] {
+    &>[glnfr-pd-ver] {
       padding-top: var(--glnfr-lb-pd-tp, var(--glnfrs-pd-tp, var(--def-lb-pd-tp)));
       padding-bottom: var(--glnfr-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-bt)));
     }
-    &>[glnf-mr-ver] {
+    &>[glnfr-mr-ver] {
       margin-top: var(--glnfr-lb-pd-tp, var(--glnfrs-pd-tp, var(--def-lb-pd-tp)));
       margin-bottom: var(--glnfr-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-bt)));
     }
 
-    &>span[glnf-orn-lf], &>span[glnf-orn-rg] {
+    &>span[glnfr-orn-lf], &>span[glnfr-orn-rg] {
       max-height: inherit;
       display: inline-flex;
     }
-    &>span[glnf-orn-rg] {
+    &>span[glnfr-orn-rg] {
       order: 1;
     }
 
-    &>span[glnf-orn-lf]:empty~[glnf-pd-hor] {
+    &>span[glnfr-orn-lf]:empty~[glnfr-pd-hor] {
       padding-left: var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf)));
     }
-    &>span[glnf-orn-rg]:empty~[glnf-pd-hor] {
+    &>span[glnfr-orn-rg]:empty~[glnfr-pd-hor] {
       padding-right: var(--glnfr-lb-pd-rg, var(--glnfrs-pd-rg, var(--def-lb-pd-rg)));
     }
   }
 
   // Ornament "alignment".
 
-  span[glnf-orn-lf="center"], span[glnf-orn-rg="center"] {
+  span[glnfr-orn-lf="center"], span[glnfr-orn-rg="center"] {
     align-self: center;
   }
-  span[glnf-orn-lf="flex-start"], span[glnf-orn-rg="flex-start"] {
+  span[glnfr-orn-lf="flex-start"], span[glnfr-orn-rg="flex-start"] {
     align-self: flex-start;
   }
-  span[glnf-orn-lf="flex-end"], span[glnf-orn-rg="flex-end"] {
+  span[glnfr-orn-lf="flex-end"], span[glnfr-orn-rg="flex-end"] {
     align-self: flex-end;
   }
-  span[glnf-orn-lf="baseline"], span[glnf-orn-rg="baseline"] {
+  span[glnfr-orn-lf="baseline"], span[glnfr-orn-rg="baseline"] {
     align-self: baseline;
   }
-  span[glnf-orn-lf="stretch"], span[glnf-orn-rg="stretch"] {
+  span[glnfr-orn-lf="stretch"], span[glnfr-orn-rg="stretch"] {
     align-self: stretch;
   }
 
-  &[ext-o]>div>span[glnf-orn-lf="default"],
-  &[ext-o]>div>span[glnf-orn-rg="default"] {
+  &[ext-o]>div>span[glnfr-orn-lf="default"],
+  &[ext-o]>div>span[glnfr-orn-rg="default"] {
     align-self: center;
   }
-  &[ext-u]>div>span[glnf-orn-lf="default"] {
+  &[ext-u]>div>span[glnfr-orn-lf="default"] {
     align-self: baseline;
   }
-  &[ext-u]>div>span[glnf-orn-rg="default"] {
+  &[ext-u]>div>span[glnfr-orn-rg="default"] {
     align-self: center;
   }
-  &[ext-s]>div>span[glnf-orn-lf="default"],
-  &[ext-s]>div>span[glnf-orn-rg="default"] {
+  &[ext-s]>div>span[glnfr-orn-lf="default"],
+  &[ext-s]>div>span[glnfr-orn-rg="default"] {
     align-self: baseline;
   }
-  &[ext-u]>div>span[glnf-orn-lf],
-  &[ext-s]>div>span[glnf-orn-lf], 
-  &[ext-s]>div>span[glnf-orn-rg] {
-    &>.glnf-ornam {
+  &[ext-u]>div>span[glnfr-orn-lf],
+  &[ext-s]>div>span[glnfr-orn-lf], 
+  &[ext-s]>div>span[glnfr-orn-rg] {
+    &>.glnfr-ornam {
       display: inline-block;
       margin-bottom: var(--glnfr-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-bt)));
     }

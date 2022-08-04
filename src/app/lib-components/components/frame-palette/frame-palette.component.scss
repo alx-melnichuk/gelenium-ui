@@ -28,97 +28,97 @@ app-frame-palette {
 
   // Color for "label".
   // The state without: disabled, error, mouse hover, focused.
-  .fp-spec .gln-frame:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within)>.glnf-label {
+  .fp-spec .gln-frame:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within)>.glnfr-label {
     color: var(--fp-label-default-cl);
   } // The state without: disabled, error, focused and with mouse hover.
-  .fp-spec .gln-frame:not(.gln-disabled):not(.gln-error):hover:not(:focus-within)>.glnf-label {
+  .fp-spec .gln-frame:not(.gln-disabled):not(.gln-error):hover:not(:focus-within)>.glnfr-label {
     color: var(--fp-hover-cl);
   } // The state without: disabled, error and with focused.
-  .fp-spec .gln-frame:not(.gln-disabled):not(.gln-error):focus-within>.glnf-label {
+  .fp-spec .gln-frame:not(.gln-disabled):not(.gln-error):focus-within>.glnfr-label {
     color: var(--fp-focus-cl);
   } // The state without: disabled, mouse hover, focused and with error.
-  .fp-spec .gln-frame:not(.gln-disabled).gln-error:not(:hover):not(:focus-within)>.glnf-label {
+  .fp-spec .gln-frame:not(.gln-disabled).gln-error:not(:hover):not(:focus-within)>.glnfr-label {
     color: var(--fp-error-cl);
   } // The state without: disabled, focused and with error, mouse hover.
-  .fp-spec .gln-frame:not(.gln-disabled).gln-error:hover:not(:focus-within)>.glnf-label {
+  .fp-spec .gln-frame:not(.gln-disabled).gln-error:hover:not(:focus-within)>.glnfr-label {
     color: var(--fp-hover-err-cl);
   } // The state without: disabled and with error, focused.
-  .fp-spec .gln-frame:not(.gln-disabled).gln-error:focus-within>.glnf-label {
+  .fp-spec .gln-frame:not(.gln-disabled).gln-error:focus-within>.glnfr-label {
     color: var(--fp-error-cl);
   } // The state with disabled.
-  .fp-spec .gln-frame.gln-disabled>.glnf-label {
+  .fp-spec .gln-frame.gln-disabled>.glnfr-label {
     color: var(--fp-disab-cl);
   }
 
   // Border-color for "outlined" mode.
   // The state without: disabled, error, mouse hover, focused.
-  .fp-spec .gln-frame:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within) .glnf-fieldset {
+  .fp-spec .gln-frame:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within) .glnfr-fieldset {
     border-color: var(--fp-o-default-brd-cl);
   } // The state without: disabled, error, focused and with mouse hover.
-  .fp-spec .gln-frame:not(.gln-disabled):not(.gln-error):hover:not(:focus-within) .glnf-fieldset {
+  .fp-spec .gln-frame:not(.gln-disabled):not(.gln-error):hover:not(:focus-within) .glnfr-fieldset {
     border-color: var(--fp-hover-cl);
   } // The state without: disabled, error and with focused.
-  .fp-spec .gln-frame:not(.gln-disabled):not(.gln-error):focus-within .glnf-fieldset {
+  .fp-spec .gln-frame:not(.gln-disabled):not(.gln-error):focus-within .glnfr-fieldset {
     border-color: var(--fp-focus-cl);
   } // The state without: disabled, mouse hover, focused and with error.
-  .fp-spec .gln-frame:not(.gln-disabled).gln-error:not(:hover):not(:focus-within) .glnf-fieldset {
+  .fp-spec .gln-frame:not(.gln-disabled).gln-error:not(:hover):not(:focus-within) .glnfr-fieldset {
     border-color: var(--fp-error-cl);
   } // The state without: disabled, focused and with error, mouse hover.
-  .fp-spec .gln-frame:not(.gln-disabled).gln-error:hover:not(:focus-within) .glnf-fieldset {
+  .fp-spec .gln-frame:not(.gln-disabled).gln-error:hover:not(:focus-within) .glnfr-fieldset {
     border-color: var(--fp-hover-err-cl);
   } // The state without: disabled and with error, focused.
-  .fp-spec .gln-frame:not(.gln-disabled).gln-error:focus-within .glnf-fieldset {
+  .fp-spec .gln-frame:not(.gln-disabled).gln-error:focus-within .glnfr-fieldset {
     border-color: var(--fp-error-cl);
   } // The state with disabled.
-  .fp-spec .gln-frame.gln-disabled .glnf-fieldset {
+  .fp-spec .gln-frame.gln-disabled .glnfr-fieldset {
     border-color: var(--fp-disab-cl);
   }
   
   // Background-color for "underline" mode.
   // The state without: disabled, error, mouse hover, focused.
-  .fp-spec .glnfr-underline:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within)>.glnf-border {
+  .fp-spec .glnfr-underline:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within)>.glnfr-border {
     background-color: var(--fp-u-default-bg-cl);
   } // The state without: disabled, error, focused and with mouse hover.
-  .fp-spec .glnfr-underline:not(.gln-disabled):not(.gln-error):hover:not(:focus-within)>.glnf-border {
+  .fp-spec .glnfr-underline:not(.gln-disabled):not(.gln-error):hover:not(:focus-within)>.glnfr-border {
     background-color: var(--fp-u-hover-bg-cl);
   } // The state without: disabled, error and with focused.
-  .fp-spec .glnfr-underline:not(.gln-disabled):not(.gln-error):focus-within>.glnf-border {
+  .fp-spec .glnfr-underline:not(.gln-disabled):not(.gln-error):focus-within>.glnfr-border {
     background-color: var(--fp-u-focus-bg-cl);
   } // The state without: disabled, mouse hover, focused and with error.
-  .fp-spec .glnfr-underline:not(.gln-disabled).gln-error:not(:hover):not(:focus-within)>.glnf-border {
+  .fp-spec .glnfr-underline:not(.gln-disabled).gln-error:not(:hover):not(:focus-within)>.glnfr-border {
     background-color: var(--fp-u-error-bg-cl);
   } // The state without: disabled, focused and with error, mouse hover.
-  .fp-spec .glnfr-underline:not(.gln-disabled).gln-error:hover:not(:focus-within)>.glnf-border {
+  .fp-spec .glnfr-underline:not(.gln-disabled).gln-error:hover:not(:focus-within)>.glnfr-border {
     background-color: var(--fp-u-hover-err-bg-cl);
   } // The state without: disabled and with error, focused.
-  .fp-spec .glnfr-underline:not(.gln-disabled).gln-error:focus-within>.glnf-border {
+  .fp-spec .glnfr-underline:not(.gln-disabled).gln-error:focus-within>.glnfr-border {
     background-color: var(--fp-u-focus-err-bg-cl);
   } // The state with disabled.
-  .fp-spec .glnfr-underline.gln-disabled>.glnf-border {
+  .fp-spec .glnfr-underline.gln-disabled>.glnfr-border {
     background-color: var(--fp-u-disab-bg-cl);
   }
 
   // Border-bottom-color for "underline" and "standard" mode.
   // The state without: disabled, error, mouse hover, focused.
-  .fp-spec .glnfr-bottom-frame:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within)>.glnf-border:before {
+  .fp-spec .glnfr-bottom-frame:not(.gln-disabled):not(.gln-error):not(:hover):not(:focus-within)>.glnfr-border:before {
     border-bottom-color: var(--fp-su-default-brd-cl);
   } // The state without: disabled, error, focused and with mouse hover.
-  .fp-spec .glnfr-bottom-frame:not(.gln-disabled):not(.gln-error):hover:not(:focus-within)>.glnf-border:before {
+  .fp-spec .glnfr-bottom-frame:not(.gln-disabled):not(.gln-error):hover:not(:focus-within)>.glnfr-border:before {
     border-bottom-color: var(--fp-hover-cl);
   } // The state without: disabled, mouse hover, focused and with error.
-  .fp-spec .glnfr-bottom-frame:not(.gln-disabled).gln-error:not(:hover):not(:focus-within)>.glnf-border:before {
+  .fp-spec .glnfr-bottom-frame:not(.gln-disabled).gln-error:not(:hover):not(:focus-within)>.glnfr-border:before {
     border-bottom-color: var(--fp-error-cl);
   } // The state without: disabled, focused and with error, mouse hover.
-  .fp-spec .glnfr-bottom-frame:not(.gln-disabled).gln-error:hover:not(:focus-within)>.glnf-border:before {
+  .fp-spec .glnfr-bottom-frame:not(.gln-disabled).gln-error:hover:not(:focus-within)>.glnfr-border:before {
     border-bottom-color: var(--fp-hover-err-cl);
   } // The state without: disabled, error.
-  .fp-spec .glnfr-bottom-frame:not(.gln-disabled):not(.gln-error)>.glnf-border:after {
+  .fp-spec .glnfr-bottom-frame:not(.gln-disabled):not(.gln-error)>.glnfr-border:after {
     border-bottom-color: var(--fp-focus-cl);
   } // The state without: disabled and with error.
-  .fp-spec .glnfr-bottom-frame:not(.gln-disabled).gln-error>.glnf-border:after {
+  .fp-spec .glnfr-bottom-frame:not(.gln-disabled).gln-error>.glnfr-border:after {
     border-bottom-color: var(--fp-error-cl);
   } // The state with disabled.
-  .fp-spec .glnfr-bottom-frame.gln-disabled>.glnf-border:before {
+  .fp-spec .glnfr-bottom-frame.gln-disabled>.glnfr-border:before {
     border-bottom-color: var(--fp-disab-cl);
   }
 

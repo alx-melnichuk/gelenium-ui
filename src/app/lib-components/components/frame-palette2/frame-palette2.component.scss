@@ -29,7 +29,7 @@ app-frame-palette2 {
     --glnfr-hov-br-cl: var(--bs-def-br-cl);
     --glnfr-dis-br-cl: var(--bs-def-br-cl);
   }
-  .fp-bstr2 .gln-frame:focus-within .glnf-fieldset {
+  .fp-bstr2 .gln-frame:focus-within .glnfr-fieldset {
     border-width: 1px;
   }
   .fp-bstr2 .gln-frame.gln-disabled {

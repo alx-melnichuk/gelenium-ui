@@ -240,41 +240,41 @@ gln-button {
 
   // Ornament "padding".
   &>[glnbt-btn] {
-    &>span[glnf-orn-lf], &>span[glnf-orn-rg] {
+    &>span[glnfr-orn-lf], &>span[glnfr-orn-rg] {
       max-height: inherit;
       display: inline-flex;
     }
-    &>span[glnf-orn-rg] {
+    &>span[glnfr-orn-rg] {
       order: 1;
     }
-    &>span[glnf-orn-lf]:empty~[glnbt-pd-hor],
-    &>span[glnf-orn-lf]:empty~a {
+    &>span[glnfr-orn-lf]:empty~[glnbt-pd-hor],
+    &>span[glnfr-orn-lf]:empty~a {
       padding-left: var(--glnbt-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf)));
     }
-    &>span[glnf-orn-rg]:empty~[glnbt-pd-hor],
-    &>span[glnf-orn-rg]:empty~a {
+    &>span[glnfr-orn-rg]:empty~[glnbt-pd-hor],
+    &>span[glnfr-orn-rg]:empty~a {
       padding-right: var(--glnbt-lb-pd-rg, var(--glnfrs-pd-rg, var(--def-lb-pd-lf)));
     }
   }
 
   // Ornament "alignment".
   &>[glnbt-btn] {
-    &>span[glnf-orn-lf="center"], &>span[glnf-orn-rg="center"] {
+    &>span[glnfr-orn-lf="center"], &>span[glnfr-orn-rg="center"] {
       align-self: center;
     }
-    &>span[glnf-orn-lf="flex-start"], &>span[glnf-orn-rg="flex-start"] {
+    &>span[glnfr-orn-lf="flex-start"], &>span[glnfr-orn-rg="flex-start"] {
       align-self: flex-start;
     }
-    &>span[glnf-orn-lf="flex-end"], &>span[glnf-orn-rg="flex-end"] {
+    &>span[glnfr-orn-lf="flex-end"], &>span[glnfr-orn-rg="flex-end"] {
       align-self: flex-end;
     }
-    &>span[glnf-orn-lf="baseline"], &>span[glnf-orn-rg="baseline"] {
+    &>span[glnfr-orn-lf="baseline"], &>span[glnfr-orn-rg="baseline"] {
       align-self: baseline;
     }
-    &>span[glnf-orn-lf="stretch"], &>span[glnf-orn-rg="stretch"] {
+    &>span[glnfr-orn-lf="stretch"], &>span[glnfr-orn-rg="stretch"] {
       align-self: stretch;
     }
-    &>span[glnf-orn-lf="default"], &>span[glnf-orn-rg="default"] {
+    &>span[glnfr-orn-lf="default"], &>span[glnfr-orn-rg="default"] {
       align-self: center;
     }
   }
