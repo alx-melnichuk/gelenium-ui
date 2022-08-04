@@ -23,7 +23,7 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>text: string | null = null;</code>
+        <code>text: string | null | undefined;</code>
       </td>
       <td>
         <span>
@@ -34,7 +34,7 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isError: boolean | null = null;</code>
+        <code>isError: boolean | null | undefined;</code>
       </td>
       <td>
         <span>
@@ -45,7 +45,7 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isFocused: boolean | null = null;</code>
+        <code>isFocused: boolean | null | undefined;</code>
       </td>
       <td>
         <span>
@@ -56,7 +56,7 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isDisabled: boolean | null = null;</code>
+        <code>isDisabled: boolean | null | undefined;</code>
       </td>
       <td>
         <span>
@@ -68,8 +68,78 @@
 </table>
 
 
-<section mr-vr>
-  <h4>Css variables, optional. You can override the default values.</h4>
+<section mr-vr
+  id="css-variables">
+  <h4>CSS variables at the component level. <a [href]="urlHintOrError + '#css-variables'">#</a></h4>
+</section>
+
+<table class="app-tab">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <td>
+      <code>--glnhe--default-h:<br/>
+      &nbsp;var(--glncl-default-h,<br/>
+      &nbsp;&nbsp;var(--gln-default-h)<br/>
+      &nbsp;);</code>
+    </td>
+    <td>
+      Sets the color of the label.<br />
+      Applied in state: default and disabled.<br />
+      Defined by the <code ubr>--gln-default-h</code> system css variable.<br />
+      Or the css-variable of the GlnColor directive.<br />
+      The hue value for the "hsl()" css function.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>--glnhe--default-s:<br/>
+      &nbsp;var(--glncl-default-s,<br/>
+      &nbsp;&nbsp;var(--gln-default-s)<br/>
+      &nbsp;);</code>
+    </td>
+    <td>
+      As well as the previous parameter <code ubr>--glnhe--default-h</code>.<br />
+      The saturation value for the "hsl()" css function.
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>--glnhe--danger-h:<br/>
+      &nbsp;var(--glncl-danger-h,<br/>
+      &nbsp;&nbsp;var(--gln-danger-h)<br/>
+      &nbsp;);</code>
+    </td>
+    <td>
+      Sets the color of the label.<br />
+      Applies in all states when an error occurs.<br />
+      Defined by the <code ubr>--gln-danger-h</code> system css variable.<br />
+      Or the css-variable of the GlnColor directive.<br />
+      The hue value for the "hsl()" css function.
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnhe--danger-s:<br/>
+      &nbsp;var(--glncl-danger-s,<br/>
+      &nbsp;&nbsp;var(--gln-danger-s)<br/>
+      &nbsp;);</code>
+    </td>
+    <td>
+      As well as the previous parameter <code ubr>--glnhe--danger-h</code>.<br />
+      The saturation value for the "hsl()" css function.
+    </td>
+  </tr>
+</table>
+
+
+<section mr-vr
+  id="css-variables01">
+  <h4>Css variables, optional. You can override the default values.
+    <a [href]="urlHintOrError + '#css-variables01'">#</a>
+  </h4>
 </section>
 <table class="app-tab">
   <tbody>
@@ -79,25 +149,48 @@
     </tr>
 
     <tr>
-      <td><code>--glnhe-def-cl: rgba(0, 0, 0, 0.6);</code></td>
-      <td><span>The default color for the label.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnhe-foc-cl: rgba(0, 0, 0, 0.87);</code></td>
-      <td><span>The color of the label when getting focus.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnhe-err-cl: #d32f2fcf;</code></td>
-      <td><span>The color of the label in an error state.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnhe-foc-err-cl: #d32f2f;</code></td>
-      <td><span>The color of the label when getting focus in an error state.</span>
+      <td><code>--glnhe-def-cl:<br/>
+        hsl(--glnhe--default-[h,s], 38%);</code>
+      </td>
+      <td>
+        <span>The default color for the label.<br />
+          (hsl(20, 2%, 38%);)</span>
       </td>
     </tr>
     <tr>
-      <td><code>--glnhe-dis-cl: #787878;</code></td>
-      <td><span>The color of the label in the state is disabled.</span></td>
+      <td><code>--glnhe-foc-cl:<br/>
+        hsl(--glnhe--default-[h,s], 38%);</code>
+      </td>
+      <td>
+        <span>The color of the label when getting focus.<br />
+          (hsl(20, 2%, 38%);)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnhe-err-cl:<br/>
+        hsl(--glnhe--danger-[h,s], 51%);</code>
+      </td>
+      <td>
+        <span>The color of the label in an error state.<br />
+          (hsl(0, 65%, 51%);)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnhe-foc-err-cl::<br/>
+        hsl(--glnhe--danger-[h,s], 51%);</code>
+      </td>
+      <td>
+        <span>The color of the label when getting focus in an error state.<br />
+          (hsl(0, 65%, 51%);)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnhe-dis-cl: <br/>
+        hsl(--glnhe--default-[h,s], 55%);</code></td>
+      <td>
+        <span>The color of the label in the state is disabled.<br />
+          (hsl(20, 2%, 55%);)</span>
+      </td>
     </tr>
   </tbody>
 </table>

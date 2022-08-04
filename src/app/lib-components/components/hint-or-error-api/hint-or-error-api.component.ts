@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
+
 @Component({
   selector: 'app-hint-or-error-api',
   templateUrl: './hint-or-error-api.component.html',
@@ -8,6 +10,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HintOrErrorApiComponent {
+  public urlHintOrError = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_HINT_OR_ERROR');
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }

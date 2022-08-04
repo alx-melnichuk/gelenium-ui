@@ -1,6 +1,12 @@
 /*# sourceURL=gln-hint-or-error.component.scss */
 
 gln-hint-or-error {
+  --glnhe--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnhe--default-s: var(--glncl-default-s, var(--gln-default-s));
+
+  --glnhe--danger-h: var(--glncl-danger-h, var(--gln-danger-h));
+  --glnhe--danger-s: var(--glncl-danger-s, var(--gln-danger-s));
+
   box-sizing: border-box;
   cursor: text;
   display: block;
@@ -15,25 +21,29 @@ gln-hint-or-error {
   text-overflow: ellipsis;
   white-space: nowrap;
 
+  --glnhe--default38: hsl(var(--glnhe--default-h), var(--glnhe--default-s), 38%); // hsl(20, 2%, 38%); rgba(0, 0, 0, 0.6);
+  --glnhe--default55: hsl(var(--glnhe--default-h), var(--glnhe--default-s), 55%); // hsl(20, 2%, 55%); rgba(0, 0, 0, 0.42);
+  --glnhe--danger51 : hsl(var(--glnhe--danger-h), var(--glnhe--danger-s), 51%);   // hsl(0, 65%, 51%); #d32f2f;
+
   &:not([dis]) {
     &:not([err]) { // The state without error, focused and disabled.
       &:not([foc]) {
-        color: var(--glnhe-def-cl, hsl(var(--gln-default-h), var(--gln-default-s), 40%));
+        color: var(--glnhe-def-cl, var(--glnhe--default38));
       } // The state with focused but without error.
       &[foc] {
-        color: var(--glnhe-foc-cl, hsl(var(--gln-default-h), var(--gln-default-s), 40%));
+        color: var(--glnhe-foc-cl, var(--glnhe--default38));
       }
     }
     &[err] { // The state with error.
       &:not([foc]) {
-        color: var(--glnhe-err-cl, hsl(var(--gln-danger-h), var(--gln-danger-s), 50%));
+        color: var(--glnhe-err-cl, var(--glnhe--danger51));
       } // The state with focused but with error.
       &[foc] {
-        color: var(--glnhe-foc-err-cl, hsl(var(--gln-danger-h), var(--gln-danger-s), 50%));
+        color: var(--glnhe-foc-err-cl, var(--glnhe--danger51));
       }
     }
   } // The state with disabled but without error.
   &[dis] {
-    color: var(--glnhe-dis-cl, hsl(var(--gln-default-h), var(--gln-default-s), 55%));
+    color: var(--glnhe-dis-cl, var(--glnhe--default55));
   }
 }

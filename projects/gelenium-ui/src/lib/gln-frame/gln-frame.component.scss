@@ -119,22 +119,23 @@ gln-frame {
     );
   }
 
-  --glnfr--default17: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 17%); // hsla(0, 0%, 0%, 0.87);
-  --glnfr--default38: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 38%); // hsla(0, 0%, 0%, 0.6);  rgba(0, 0, 0, 0.6);
-  --glnfr--default55: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 55%); // hsla(0, 0%, 0%, 0.42); rgba(0, 0, 0, 0.42);
-  --glnfr--default74: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 74%); // hsla(0, 0%, 0%, 0.26);
-  --glnfr--default77: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 77%); // hsla(0, 0%, 0%, 0.23); rgba(0, 0, 0, 0.23);
-  --glnfr--default88: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 88%); // hsla(0, 0%, 0%, 0.12); #e0e0e0;
-  --glnfr--default91: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 91%); // hsla(0, 0%, 0%, 0.09);
-  --glnfr--default94: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 94%); // hsla(0, 0%, 0%, 0.06); rgba(0, 0, 0, 0.06);
+  --glnfr--default17: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 17%); // hsl(20, 2%, 17%); rgba(0, 0, 0, 0.87);
+  --glnfr--default38: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 38%); // hsl(20, 2%, 38%); rgba(0, 0, 0, 0.6);
+  --glnfr--default55: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 55%); // hsl(20, 2%, 55%); rgba(0, 0, 0, 0.42); #787878;
+  // "--glnfr--default55" is a replacement for "rgba(0, 0, 0, 0.38)" (slightly darker).
+  --glnfr--default74: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 74%); // hsl(20, 2%, 74%); rgba(0, 0, 0, 0.26);
+  --glnfr--default77: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 77%); // hsl(20, 2%, 77%); rgba(0, 0, 0, 0.23);
+  --glnfr--default88: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 88%); // hsl(20, 2%, 88%); rgba(0, 0, 0, 0.12);
+  --glnfr--default91: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 91%); // hsl(20, 2%, 91%); rgba(0, 0, 0, 0.09);
+  --glnfr--default94: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 94%); // hsl(20, 2%, 94%); rgba(0, 0, 0, 0.06);
 
   --glnfr--primary46: hsl(var(--glnfr--primary-h), var(--glnfr--primary-s), 46%); //  #1976d2;
   --glnfr--primary97: hsl(var(--glnfr--primary-h), var(--glnfr--primary-s), 97%); // 
 
   --glnfr--danger51: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 51%); // hsl(0, 65%, 51%); #d32f2f; rgb(211, 47, 47)
-  --glnfr--danger94: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 94%); // hsl(0, 65%, 94%);~#fae6e6; rgb(250, 230, 230);
-  --glnfr--danger96: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 96%); // hsl(0, 65%, 96%);~#fbeeee; rgb(251, 238, 238);
-  --glnfr--danger98: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 98%); // hsl(0, 65%, 98%); #d32f2f0b;
+  --glnfr--danger94: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 94%); // hsl(0, 65%, 94%); #d32f2fcf;
+  --glnfr--danger96: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 96%); // hsl(0, 65%, 96%);
+  --glnfr--danger98: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 98%); // hsl(0, 65%, 98%);
 
   color: var(--glnfr--default17); // hsla(0, 0%, 0%, 0.87);
 

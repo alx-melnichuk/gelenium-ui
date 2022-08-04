@@ -21,13 +21,13 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 })
 export class GlnHintOrErrorComponent implements OnChanges {
   @Input()
-  public text: string | null = null;
+  public text: string | null | undefined;
   @Input()
-  public isError: boolean | null = null;
+  public isError: boolean | null | undefined;
   @Input()
-  public isFocused: boolean | null = null;
+  public isFocused: boolean | null | undefined;
   @Input()
-  public isDisabled: boolean | null = null;
+  public isDisabled: boolean | null | undefined;
 
   constructor(private renderer: Renderer2, private hostRef: ElementRef<HTMLElement>) {
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-hint-or-error', true);
