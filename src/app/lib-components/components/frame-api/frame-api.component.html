@@ -23,7 +23,9 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>config: GlnFrameConfig | null = null;</code>
+      <code>config: GlnFrameConfig<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
     </td>
     <td>
       <span>Defines a configuration object.</span>
@@ -32,7 +34,9 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>exterior: Exterior | null = null;</code>
+      <code>exterior: string<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
     </td>
     <td>
       <span>
@@ -49,7 +53,9 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>isDisabled: boolean | null = null;</code>
+      <code>isDisabled: boolean<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
     </td>
     <td>
       <span>The element is disabled.<br />(default = false;)</span>
@@ -58,18 +64,19 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>isError: boolean | null = null;</code>
+      <code>isError: boolean<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
     </td>
     <td>
       <span>Forces the error status of an item to be displayed.
-        <br />(default = false;)
       </span>
     </td>
   </tr>
   <tr>
     <td>
       <code>@Input()</code>
-      <code>isFilled: boolean | null = null;</code>
+      <code>isFilled: boolean = false;</code>
     </td>
     <td>
       <span>Indicates that the input element is not empty (filled).
@@ -79,7 +86,9 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>isHoverColor: boolean | null = null;</code>
+      <code>isHoverColor: boolean<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
     </td>
     <td>
       <span>
@@ -94,7 +103,9 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>isLabelShrink: string | boolean | null | undefined;</code>
+      <code>isLabelShrink: string<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
     </td>
     <td>
       <span>
@@ -105,7 +116,9 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>isNoAnimation: boolean | null = null;</code>
+      <code>isNoAnimation: boolean<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
     </td>
     <td>
       <span>Disable animation execution.</span>
@@ -114,7 +127,9 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>isNoLabel: boolean | null = null;</code>
+      <code>isNoLabel: boolean<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
     </td>
     <td>
       <span>Hide label display.</span>
@@ -123,11 +138,12 @@
   <tr>
     <td>
       <code>@Input()</code>
-      <code>isRequired: boolean | null = null;</code>
+      <code>isRequired: boolean<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
     </td>
     <td>
       <span>Adds a validation condition: required field.
-        <br />(default = false;)
       </span>
     </td>
   </tr>
