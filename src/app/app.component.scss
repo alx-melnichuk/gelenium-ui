@@ -90,4 +90,12 @@ app-root {
     }
   }
 
+  .app-hover-link {
+    &:not(:hover) a {
+      color: transparent;
+    }
+    a {
+      padding: 0 0.5em;
+    }
+  }
 }
