@@ -217,9 +217,11 @@ export class GlnSelectComponent
   // public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink". // Is in GlnBasisControl.
   public multiple: boolean | null = null; // Binding attribute "isMultiple". // interface GlnOptionParent
   // public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // Is in GlnBasisControl.
+  public noIcon: boolean | null = null; // Binding attribute "isNoIcon",
   // public noLabel: boolean | null = null; // Binding attribute "isNoLabel". // Is in GlnBasisControl.
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
-  public overlayPanelClass: string | string[] = /*this._defaultOptions?.overlayPanelClass ||*/ '';
+  public overlayPanelClass: string | string[] = '';
+  public panelClassList: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
   public positionList: ConnectedPosition[] = [];
   // public readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Is in GlnBasisControl.
   // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisControl.
@@ -281,9 +283,16 @@ export class GlnSelectComponent
       const isMultiple = this.isMultiple != null ? '' + this.isMultiple : null;
       this.multiple = BooleanUtil.init(isMultiple) || this.currConfig?.isMultiple || null;
     }
+    if (changes.isNoIcon || (changes.config && this.isNoIcon == null)) {
+      const isNoIcon = this.isNoIcon != null ? '' + this.isNoIcon : null;
+      this.noIcon = BooleanUtil.init(isNoIcon) || this.currConfig?.isNoIcon || null;
+    }
     if (changes.isNoRipple || (changes.config && this.isNoRipple == null)) {
       const isNoRipple = this.isNoRipple != null ? '' + this.isNoRipple : null;
       this.noRipple = BooleanUtil.init(isNoRipple) || this.currConfig?.isNoRipple || null;
+    }
+    if (changes.panelClass || (changes.config && this.panelClass == null)) {
+      this.panelClassList = this.panelClass || this.currConfig?.panelClass;
     }
     if (changes.position || (changes.config && this.position == null)) {
       this.positionList = this.getPositionList(this.position || this.currConfig?.position);
@@ -301,8 +310,17 @@ export class GlnSelectComponent
     if (this.noAnimation == null) {
       this.noAnimation = this.currConfig?.isNoAnimation || null;
     }
+    if (this.noIcon == null) {
+      this.noIcon = this.currConfig?.isNoIcon || null;
+    }
     if (this.noRipple == null) {
       this.noRipple = this.currConfig?.isNoRipple || null;
+    }
+    if (this.currConfig?.overlayPanelClass) {
+      this.overlayPanelClass = this.currConfig.overlayPanelClass;
+    }
+    if (this.panelClassList == null) {
+      this.panelClassList = this.currConfig?.panelClass;
     }
     if (this.positionList.length === 0) {
       this.positionList = this.getPositionList(this.currConfig?.position);
