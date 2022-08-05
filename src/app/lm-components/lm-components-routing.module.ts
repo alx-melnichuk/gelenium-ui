@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { UrlComponents } from './constants/url-components.constants';
 import { LmComponentsComponent } from './lm-components.component';
-import { ButtonComponent } from '../lib-components/components/button/button.component';
+import { Button1Component } from '../lib-components/components/button1/button1.component';
+import { Button2Component } from '../lib-components/components/button2/button2.component';
 import { FrameComponent } from '../lib-components/components/frame/frame.component';
 import { HintOrErrorComponent } from '../lib-components/components/hint-or-error/hint-or-error.component';
 import { InfiniteScrollComponent } from '../lib-components/components/infinite-scroll/infinite-scroll.component';
@@ -11,7 +12,8 @@ import { InputComponent } from '../lib-components/components/input/input.compone
 import { SelectComponent } from '../lib-components/components/select/select.component';
 import { TextareaComponent } from '../lib-components/components/textarea/textarea.component';
 
-const URL_BUTTON = UrlComponents.get('URL_BUTTON');
+const URL_BUTTON1 = UrlComponents.get('URL_BUTTON1');
+const URL_BUTTON2 = UrlComponents.get('URL_BUTTON2');
 const URL_FRAME = UrlComponents.get('URL_FRAME');
 const URL_HINT_OR_ERROR = UrlComponents.get('URL_HINT_OR_ERROR');
 const URL_INFINITE_SCROLL = UrlComponents.get('URL_INFINITE_SCROLL');
@@ -24,7 +26,8 @@ const routes: Routes = [
     path: '',
     component: LmComponentsComponent,
     children: [
-      { path: URL_BUTTON, component: ButtonComponent },
+      { path: URL_BUTTON1, component: Button1Component },
+      { path: URL_BUTTON2, component: Button2Component },
       { path: URL_FRAME, component: FrameComponent },
       { path: URL_HINT_OR_ERROR, component: HintOrErrorComponent },
       { path: URL_INFINITE_SCROLL, component: InfiniteScrollComponent },

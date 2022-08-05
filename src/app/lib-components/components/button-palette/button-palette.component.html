@@ -15,7 +15,10 @@
 
 <section mr-vr
   [attr.id]="fragment1">
-  <h4>Button with "contained" exterior.</h4>
+  <h4 class="app-hover-link">
+    Button with "contained" exterior.
+    <a [href]="urlButton2 + '#' + fragment1">#</a>
+  </h4>
   <p>
     An example of defining css variables for buttons with a "contained" appearance.
   </p>
@@ -99,7 +102,7 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class ButtonComponent &#123;
-  public routerLink = '/components/button';
+  public routerLink = '/components/button2';
   public fragment1 = 'palette1';
 &#125;</pre></code>
         </mat-tab>
@@ -136,7 +139,10 @@ export class ButtonComponent &#123;
 
 <section mr-vr
   [attr.id]="fragment2">
-  <h4>Button with "outlined" exterior.</h4>
+  <h4 class="app-hover-link">
+    Button with "outlined" exterior.
+    <a [href]="urlButton2 + '#' + fragment2">#</a>
+  </h4>
   <p>
     An example of defining css variables for buttons with a "outlined" appearance.
   </p>
@@ -220,7 +226,7 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class ButtonComponent &#123;
-  public routerLink = '/components/button';
+  public routerLink = '/components/button2';
   public fragment2 = 'palette2';
 &#125;</pre></code>
         </mat-tab>
@@ -259,7 +265,10 @@ export class ButtonComponent &#123;
 <section mr-vr
   [attr.id]="fragment3">
   <div>
-    <h4>Button with "text" exterior.</h4>
+    <h4 class="app-hover-link">
+      Button with "text" exterior.
+      <a [href]="urlButton2 + '#' + fragment3">#</a>
+    </h4>
     <p>
       An example of defining css variables for buttons with a "text" appearance.
     </p>
@@ -344,7 +353,7 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class ButtonComponent &#123;
-  public routerLink = '/components/button';
+  public routerLink = '/components/button2';
   public fragment3 = 'palette3';
 &#125;</pre></code>
         </mat-tab>

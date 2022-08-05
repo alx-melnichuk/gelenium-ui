@@ -9,6 +9,7 @@ import {
   LABEL_SHOW_SOURCE,
   LABEL_TS,
 } from '../../../lib-core/constants/constants';
+import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 @Component({
   selector: 'app-button-attributes',
@@ -33,8 +34,10 @@ export class ButtonAttributesComponent {
   @Input()
   public labelText = BTN_TEXT;
 
+  public urlButton1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_BUTTON1');
+
+  public routerLink = this.urlButton1;
   public exterior02a = 'outlined';
-  public routerLink = '/components/button';
   public fragment02a = 'attribute-link02a';
   public fragment02b = 'attribute-link02b';
   public fragment02c = 'attribute-link02c';

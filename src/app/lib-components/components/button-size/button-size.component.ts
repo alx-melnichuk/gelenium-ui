@@ -9,6 +9,7 @@ import {
   LABEL_SHOW_SOURCE,
   LABEL_TS,
 } from '../../../lib-core/constants/constants';
+import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 @Component({
   selector: 'app-button-size',
@@ -36,7 +37,9 @@ export class ButtonSizeComponent {
   public exterior03a = 'outlined';
   public exterior03b = 'outlined';
 
-  public routerLink = '/components/button';
+  public urlButton1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_BUTTON1');
+
+  public routerLink = this.urlButton1;
   public fragment03a = 'size-link3a';
   public fragment03b = 'size-link3b';
   public fragment03c = 'size-link3c';

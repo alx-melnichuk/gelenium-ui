@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants/constants';
+import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 @Component({
   selector: 'app-button-palette',
@@ -19,7 +20,9 @@ export class ButtonPaletteComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public routerLink = '/components/button';
+  public urlButton2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_BUTTON2');
+
+  public routerLink = this.urlButton2;
   public fragment1 = 'palette1';
   public fragment2 = 'palette2';
   public fragment3 = 'palette3';

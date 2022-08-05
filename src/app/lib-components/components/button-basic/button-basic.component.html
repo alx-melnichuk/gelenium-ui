@@ -101,7 +101,10 @@ export class ButtonComponent &#123;
 
 <section mr-vr
   [attr.id]="fragment1">
-  <h4>Button with "contained" exterior.</h4>
+  <h4 class="app-hover-link">
+    Button with "contained" exterior.
+    <a [href]="urlButton1 + '#' + fragment1">#</a>
+  </h4>
   <p>
     Buttons with the "contained" exterior are for important primary actions.
   </p>
@@ -185,7 +188,7 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class ButtonComponent &#123;
-  public routerLink = '/components/button';
+  public routerLink = '/components/button1';
   public fragment1 = 'basic1';
 &#125;</pre></code>
         </mat-tab>
@@ -210,7 +213,10 @@ export class ButtonComponent &#123;
 
 <section mr-vr
   [attr.id]="fragment2">
-  <h4>Button with "outlined" exterior.</h4>
+  <h4 class="app-hover-link">
+    Button with "outlined" exterior.
+    <a [href]="urlButton1 + '#' + fragment2">#</a>
+  </h4>
   <p>
     Buttons with the "outlined" exterior are for important secondary actions.
   </p>
@@ -294,7 +300,7 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class ButtonComponent &#123;
-  public routerLink = '/components/button';
+  public routerLink = '/components/button1';
   public fragment2 = 'basic2';
 &#125;</pre></code>
         </mat-tab>
@@ -320,7 +326,10 @@ export class ButtonComponent &#123;
 <section mr-vr
   [attr.id]="fragment3">
   <div>
-    <h4>Button with "text" exterior.</h4>
+    <h4 class="app-hover-link">
+      Button with "text" exterior.
+      <a [href]="urlButton1 + '#' + fragment3">#</a>
+    </h4>
     <p>
       Buttons with the "text" exterior are for less important actions.
     </p>
@@ -406,7 +415,7 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class ButtonComponent &#123;
-  public routerLink = '/components/button';
+  public routerLink = '/components/button1';
   public fragment3 = 'basic3';
 &#125;</pre></code>
         </mat-tab>

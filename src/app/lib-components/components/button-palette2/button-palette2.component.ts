@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@a
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants/constants';
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
+
 import { GlnButtonConfig, GlnButtonExterior, GlnFrameSize } from 'gelenium-ui';
 
 @Component({
@@ -21,9 +22,9 @@ export class ButtonPalette2Component {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlButton = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_BUTTON');
+  public urlButton2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_BUTTON2');
 
-  public routerLink = '/components/button';
+  public routerLink = this.urlButton2;
   public fragment4 = 'palette4';
   public fragment5 = 'palette5';
   public fragment6 = 'palette6';

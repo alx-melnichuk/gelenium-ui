@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants/constants';
+import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 @Component({
   selector: 'app-button-basic',
@@ -19,7 +20,9 @@ export class ButtonBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public routerLink = '/components/button';
+  public urlButton1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_BUTTON1');
+
+  public routerLink = this.urlButton1;
   public fragment1 = 'basic1';
   public fragment2 = 'basic2';
   public fragment3 = 'basic3';

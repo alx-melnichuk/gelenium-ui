@@ -1,5 +1,8 @@
 <section mr-vr>
-  <h3>Button Size</h3>
+  <h3 class="app-hover-link">
+    Button Size
+    <a [href]="urlButton1 + '#Size'">#</a>
+  </h3>
   <p>
     The "size" property determines the size of the element (its height).
   </p>
@@ -112,7 +115,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public exterior03a = 'outlined';
-  public routerLink = '/components/button';
+  public routerLink = '/components/button1';
   public fragment03a = 'size-link03a';
   public getLabel(exterior: string): string &#123;
     return exterior ?
@@ -204,7 +207,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public exterior03a = 'outlined';
-  public routerLink = '/components/button';
+  public routerLink = '/components/button1';
   public fragment03b = 'size-link03b';
   public getLabel(exterior: string): string &#123;
     return exterior ?
@@ -296,7 +299,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public exterior03a = 'outlined';
-  public routerLink = '/components/button';
+  public routerLink = '/components/button1';
   public fragment03c = 'size-link03c';
   public getLabel(exterior: string): string &#123;
     return exterior ?
@@ -388,7 +391,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public exterior03a = 'outlined';
-  public routerLink = '/components/button';
+  public routerLink = '/components/button1';
   public fragment03d = 'size-link03d';
   public getLabel(exterior: string): string &#123;
     return exterior ?
@@ -484,7 +487,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public exterior03a = 'outlined';
-  public routerLink = '/components/button';
+  public routerLink = '/components/button1';
   public fragment03e = 'size-link03e';
   public getLabel(exterior: string): string &#123;
     return exterior ?
@@ -582,7 +585,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public exterior03a = 'outlined';
-  public routerLink = '/components/button';
+  public routerLink = '/components/button1';
   public fragment03f = 'size-link03f';
   public getLabel(exterior: string): string &#123;
     return exterior ?
@@ -611,7 +614,11 @@ export class ButtonComponent &#123;
 
 <hr br-nn />
 
-<h4>Configuration for custom height (57px).</h4>
+<h4 class="app-hover-link"
+  id="size-config">
+  Configuration for custom height (57px).
+  <a [href]="urlButton1 + '#size-config'">#</a>
+</h4>
 
 <section mr-vr>
   <span>exterior: </span>
@@ -693,7 +700,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public exterior03b = 'outlined';
-  public routerLink = '/components/button';
+  public routerLink = '/components/button1';
   public fragment03g = 'size-link03g';
   // GlnButtonConfig
   public config03 = &#123;
@@ -793,7 +800,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public exterior03b = 'outlined';
-  public routerLink = '/components/button';
+  public routerLink = '/components/button1';
   public fragment03h = 'size-link03h';
   // GlnButtonConfig
   public config03 = &#123;
@@ -896,7 +903,7 @@ import &#123;
 &#125;)
 export class ButtonComponent &#123;
   public exterior03b = 'outlined';
-  public routerLink = '/components/button';
+  public routerLink = '/components/button1';
   public fragment03i = 'size-link03i';
   // GlnButtonConfig
   public config03 = &#123;
