@@ -550,3 +550,144 @@
     </tr>
   </tbody>
 </table>
+
+
+<section mr-vr
+  id="css-variables01">
+  <h4 class="app-hover-link">
+    Css variables, optional. You can override the default values.
+    <a [href]="urlSelect + '#css-variables01'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <td><code>--glnsl-min-width:<br/>
+      &nbsp;var(--glnsl-fs-min-width, 50px);</code>
+    </td>
+    <td>
+      <span>
+        The value of the "min-width" property.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-rhomb-def:<br/>
+      hsl(--glnfr--default-[h,s], 46%);</code>
+    </td>
+    <td>
+      <span>
+        The color of the triangle is the state of the list (open/closed) by default.
+        <br />
+        (hsl(20, 2%, 46%);)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-rhomb-hov:<br/>
+      hsl(--glnfr--default-[h,s], 46%);</code>
+    </td>
+    <td>
+      <span>
+        The color of the triangle is the state of the list (open/closed)
+        when hovering over with the mouse.
+        <br />
+        (hsl(20, 2%, 46%);)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-rhomb-foc:<br/>
+      hsl(--glnfr--primary-[h,s], 46%);</code>
+    </td>
+    <td>
+      <span>
+        The color of the triangle is the state of the list (open/closed)
+        when focus is received.
+        <br />
+        (hsl(210, 79%, 46%); #1976d2;)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-rhomb-err:<br/>
+      hsl(--glnfr--danger-[h,s], 51%);</code>
+    </td>
+    <td>
+      <span>
+        The color of the triangle is the state of the list (open/closed)
+        in case of an error.
+        <br />
+        (hsl(0, 65%, 51%); = #d32f2f;)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-rhomb-dis:<br/>
+      hsl(--glnfr--default-[h,s], 74%);</code>
+    </td>
+    <td>
+      <span>
+        The color of the triangle is the state of the list (open/closed)
+        when disabled.
+        <br />
+        (hsl(20, 2%, 74%);)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-he-pd-lf:<br/>
+      &nbsp;var(--glnfrs-pd-lf);</code>
+    </td>
+    <td>
+      <span>
+        The value of the "padding-left" property for the GlnHintOrError component.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-he-pd-rg:<br/>
+      &nbsp;var(--glnfrs-pd-rg);</code>
+    </td>
+    <td>
+      <span>
+        The value of the "padding-right" property for the GlnHintOrError component.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnslpw-def-bg-cl:<br/>
+      var(--gln-default-bg-cl);</code>
+    </td>
+    <td>
+      <span>
+        The value of the "background-color" property for the
+        "gln-select-panel-wrap" element.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnslpw-def-cl:<br/>
+      hsl(--gln-default-[h,s], 17%);</code>
+    </td>
+    <td>
+      <span>
+        The value of the "color" property for the "gln-select-panel-wrap" element.
+      </span>
+    </td>
+  </tr>
+
+</table>
+
+
+<section mr-vr>
+  <p>
+    We recommend using "formControlName" and NOT using "[(ngModel)]".
+    <a [href]="urlFrame + '#Feature'">More details.</a>
+  </p>
+</section>

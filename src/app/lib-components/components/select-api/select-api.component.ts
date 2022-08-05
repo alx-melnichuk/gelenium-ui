@@ -11,6 +11,7 @@ import { UrlComponents } from '../../../lm-components/constants/url-components.c
 })
 export class SelectApiComponent {
   public urlFrame = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
+  public urlSelect = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_SELECT');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

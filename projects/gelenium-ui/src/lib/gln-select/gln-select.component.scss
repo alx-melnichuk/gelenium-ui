@@ -4,9 +4,12 @@
 @import '../_styles/mx-flex-direction.scss';
 
 gln-select {
+  --glnsl--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnsl--default-s: var(--glncl-default-s, var(--gln-default-s));
+
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
-  min-width: var(--glns-min-width, var(--glns-fs-min-width, 50px));
+  min-width: var(--glnsl-min-width, var(--glnsl-fs-min-width, 50px));
   // outline: 1px dashed green;
   // # font-family: Roboto, Helvetica, Arial, sans-serif;
   // # font-weight: 400;
@@ -29,39 +32,40 @@ gln-select {
     &:not([opn]):not([dis]) {
       cursor: pointer;
     }
-    --glnsr--def-h: var(--glncl-default-h, var(--gln-default-h));
-    --glnsr--def-s: var(--glncl-default-s, var(--gln-default-s));
 
     // Element "gln-frame - glns-rhomb".
-    --glnsr--def-def54: hsl(var(--glnsr--def-h), var(--glnsr--def-s), 54%);
-    --glnsr--foc-prm46: hsl(var(--gln-primary-h), var(--gln-primary-s), 46%);
+    --glnsl--default46: hsl(var(--glnsl--default-h), var(--glnsl--default-s), 46%); // hsl(20, 2%, 46%); rgba(0, 0, 0, 0.54); // +
+    --glnsl--primary46: hsl(var(--glnsl--primary-h), var(--glnsl--primary-s), 46%); //  #1976d2;
+    --glnsl--danger51: hsl(var(--glnsl--danger-h), var(--glnsl--danger-s), 51%); // hsl(0, 65%, 51%); #d32f2f; rgb(211, 47, 47)
+    --glnsl--default74: hsl(var(--glnsl--default-h), var(--glnsl--default-s), 74%); // hsl(20, 2%, 74%); rgba(0, 0, 0, 0.26); // +
+
     &:not([dis]) {
       &[hfc] {
-        --glnsr-hover-focus-color: var(--glnsr--foc-prm46);
+        --glnslr-hover-focus-color: var(--glnsl--primary46);
       }
       &:not([err]) { // The state without disabled, error, hover, focused.
         &:not(:hover):not(:focus-within):not([foc]) {
-          --glns-rhomb-cl: var(--glns-rhomb-def, var(--glnsr--def-def54));
+          --glnsl-rhomb-cl: var(--glnsl-rhomb-def, var(--glnsl--default46));
         } // The state without disabled, error, focused and with hover.
         &:hover:not(:focus-within):not([foc]) {
-          --glns-rhomb-cl: var(--glns-rhomb-hov, var(--glnsr-hover-focus-color, var(--glnsr--def-def54)));
+          --glnsl-rhomb-cl: var(--glnsl-rhomb-hov, var(--glnslr-hover-focus-color, var(--glnsl--default46)));
         } // The state without disabled, error and with focused.
         &:focus-within, &[foc] {
-          --glns-rhomb-cl: var(--glns-rhomb-foc, var(--glnsr--foc-prm46));
+          --glnsl-rhomb-cl: var(--glnsl-rhomb-foc, var(--glnsl--primary46));
         }
       }
       &[err] {// The state without disabled, hover, focused and error.
-        --glns-rhomb-cl: var(--glns-rhomb-err, hsl(var(--gln-danger-h), var(--gln-danger-s), 51%));
+        --glnsl-rhomb-cl: var(--glnsl-rhomb-err, var(--glnsl--danger51));
       }
     } // The state with disabled.
     &[dis] {
-      --glns-rhomb-cl: var(--glns-rhomb-dis, var(--glnsr--def-def54));
+      --glnsl-rhomb-cl: var(--glnsl-rhomb-dis, var(--glnsl--default74));
     }
   }
   
   gln-frame>div>[glnfr-orn-rg]>[glns-rhomb] {
     align-items: center;
-    color: var(--glns-rhomb-cl);
+    color: var(--glnsl-rhomb-cl);
     display: flex;
     height: 1em;
     user-select: none;
@@ -109,19 +113,16 @@ gln-select {
 
   // Element "gln-hint-or-error"
   gln-hint-or-error {
-    padding-left: var(--glns-he-pd-lf, var(--glnfrs-pd-lf));
-    padding-right: var(--glns-he-pd-rg, var(--glnfrs-pd-rg));
+    padding-left: var(--glnsl-he-pd-lf, var(--glnfrs-pd-lf));
+    padding-right: var(--glnsl-he-pd-rg, var(--glnfrs-pd-rg));
   }
 }
 
 
 // Element "gln-select-panel-wrap"
 .gln-select-panel-wrap {
-  --glnspw--def-h: var(--glncl-default-h, var(--gln-default-h));
-  --glnspw--def-s: var(--glncl-default-s, var(--gln-default-s));
-
-  background-color: var(--glnspw-def-bg-cl, var(--gln-default-bg-cl));
-  color: var(--glnspw-def-cl, hsl(var(--glnspw--def-h), var(--glnspw--def-s), 17%)); // (!) hsla(0, 0%, 0%, 0.87);
+  background-color: var(--glnslpw-def-bg-cl, var(--gln-default-bg-cl));
+  color: var(--glnslpw-def-cl, hsl(var(--gln-default-h), var(--gln-default-s), 17%)); // (!) hsla(0, 0%, 0%, 0.87);
   flex-basis: 100%;
   font-size: inherit; // 16px
   max-width: inherit;
@@ -141,7 +142,7 @@ gln-select {
   @keyframes kf-open-panel {
     0% {
       opacity: 0;
-      transform: translateY(var(--glnspo-translate-y, 0px)) scale(0.6);
+      transform: translateY(var(--glnslpo-translate-y, 0px)) scale(0.6);
     }
     100% {
       opacity: 1;
@@ -156,22 +157,21 @@ gln-select {
     }
     100% {
       opacity: 0;
-      transform: translateY(var(--glnspo-translate-y, 0px)) scale(0.6);
+      transform: translateY(var(--glnslpo-translate-y, 0px)) scale(0.6);
     }
   }
 }
 
 // Element "gln-select-panel"
 .gln-select-panel {
-  border-radius: var(--glnspo-border-radius, unset);
+  border-radius: var(--glnslpo-border-radius, unset);
   box-sizing: border-box;
-  max-height: var(--glnspo-max-height, 100%);
+  max-height: var(--glnslpo-max-height, 100%);
   min-height: 16px;
   min-width: 16px;
   overflow: auto;
   outline: 0;
   -webkit-overflow-scrolling: touch;
-  padding: 0 1em;
 
   &:not([noElevation]) {
     box-shadow: rgb(0 0 0 / 20%) 0px 5px 5px -3px

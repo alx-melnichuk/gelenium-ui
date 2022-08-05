@@ -47,6 +47,8 @@ export class GlnColorDirective implements OnChanges {
       HtmlElemUtil.setProperty(this.elementRef, '--glncl-' + key + '-s', valueS.trim());
       const valueL = getComputedStyle(this.hostRef.nativeElement).getPropertyValue('--gln-' + value + '-l');
       HtmlElemUtil.setProperty(this.elementRef, '--glncl-' + key + '-l', valueL.trim());
+      const valueCL = getComputedStyle(this.hostRef.nativeElement).getPropertyValue('--gln-' + value + '-cl');
+      HtmlElemUtil.setProperty(this.elementRef, '--glncl-' + key + '-cl', valueCL.trim());
     }
   }
 }

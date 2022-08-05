@@ -59,10 +59,10 @@ export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT
 const CSS_ATTR_FOR_FRAME_FOCUS = 'foc';
 const CSS_ATTR_FOR_PANEL_OPENING_ANIMATION = 'is-open';
 const CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION = 'is-hide';
-const CSS_PROP_BORDER_RADIUS = '--glnspo-border-radius';
-const CSS_PROP_MAX_HEIGHT = '--glnspo-max-height';
-const CSS_PROP_FS_MIN_WIDTH = '--glns-fs-min-width';
-const CSS_PROP_TRANSLATE_Y = '--glnspo-translate-y';
+const CSS_PROP_BORDER_RADIUS = '--glnslpo-border-radius';
+const CSS_PROP_MAX_HEIGHT = '--glnslpo-max-height';
+const CSS_PROP_FS_MIN_WIDTH = '--glnsl-fs-min-width';
+const CSS_PROP_TRANSLATE_Y = '--glnslpo-translate-y';
 
 @Component({
   selector: 'gln-select',

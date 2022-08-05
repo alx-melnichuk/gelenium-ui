@@ -120,9 +120,10 @@ gln-frame {
   }
 
   --glnfr--default17: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 17%); // hsl(20, 2%, 17%); rgba(0, 0, 0, 0.87);
-  --glnfr--default38: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 38%); // hsl(20, 2%, 38%); rgba(0, 0, 0, 0.6);
-  --glnfr--default55: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 55%); // hsl(20, 2%, 55%); rgba(0, 0, 0, 0.42); #787878;
-  // "--glnfr--default55" is a replacement for "rgba(0, 0, 0, 0.38)" (slightly darker).
+  --glnfr--default38: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 38%); // hsl(20, 2%, 38%); rgba(0, 0, 0, 0.60);
+   // hsl(20, 2%, 46%); rgba(0, 0, 0, 0.54);
+  --glnfr--default55: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 55%); // hsl(20, 2%, 55%); rgba(0, 0, 0, 0.42);
+  --glnfr--default58: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 58%); // hsl(20, 2%, 58%); rgba(0, 0, 0, 0.38);
   --glnfr--default74: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 74%); // hsl(20, 2%, 74%); rgba(0, 0, 0, 0.26);
   --glnfr--default77: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 77%); // hsl(20, 2%, 77%); rgba(0, 0, 0, 0.23);
   --glnfr--default88: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 88%); // hsl(20, 2%, 88%); rgba(0, 0, 0, 0.12);
@@ -187,7 +188,7 @@ gln-frame {
     }
   } // The state with disabled.
   &[dis] {
-    --glnfr--label-cl: var(--glnfr-dis-lb-cl, var(--glnfr--default55));
+    --glnfr--label-cl: var(--glnfr-dis-lb-cl, var(--glnfr--default58));
     --glnfr--dcr-br-cl: var(--glnfr-dis-br-cl, var(--glnfr--default74));
     --glnfr--dcr-bg-cl: var(--glnfr-dis-bg-cl, var(--glnfr--default88));
     --glnfr--dcr-bb-bef: var(--glnfr-dis-brb-bf, var(--glnfr--default55));
