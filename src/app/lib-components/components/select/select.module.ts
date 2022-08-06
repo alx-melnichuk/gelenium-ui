@@ -8,6 +8,7 @@ import { SelectBasicModule } from '../select-basic/select-basic.module';
 import { SelectAttributesModule } from '../select-attributes/select-attributes.module';
 import { SelectValidationModule } from '../select-validation/select-validation.module';
 import { SelectGroupModule } from '../select-group/select-group.module';
+import { SelectTriggerModule } from '../select-trigger/select-trigger.module';
 import { SelectApiModule } from '../select-api/select-api.module';
 
 import { SelectComponent } from './select.component';
@@ -20,7 +21,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Attributes', url, fragment: 'Attributes' },
   { label: 'Validation', url, fragment: 'Validation' },
   { label: 'Group', url, fragment: 'Group' },
-  // { label: 'Numerical value', url, fragment: 'NumericalValue' },
+  { label: 'Trigger', url, fragment: 'Trigger' },
   // { label: 'Ornaments', url, fragment: 'Ornaments' },
   // { label: 'Item size', url, fragment: 'ItemSize' },
   // { label: 'Helper text', url, fragment: 'HelperText' },
@@ -39,7 +40,7 @@ SiteMenu.addItem('Components', 'Select', { label: 'Select', siteUrls });
     SelectAttributesModule,
     SelectValidationModule,
     SelectGroupModule,
-    // InputNumericalModule,
+    SelectTriggerModule,
     // InputOrnamentsModule,
     SelectApiModule,
   ],

@@ -6,6 +6,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChild,
   ContentChildren,
   ElementRef,
   EventEmitter,
@@ -51,6 +52,7 @@ import { ScreenUtil } from '../_utils/screen.util';
 import { GlnSelectConfig } from './gln-select-config.interface';
 import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
 import { GlnSelectionChange } from './gln-selection-change.interface';
+import { GlnSelectTriggerDirective, GLN_SELECT_TRIGGER } from './gln-select-trigger.directive';
 
 let uniqueIdCounter = 0;
 
@@ -160,8 +162,8 @@ export class GlnSelectComponent
       const removed = ArrayUtil.uninclude<GlnOptionComponent>(this.selectedOptions, newOptions);
       // Which elements of array "newOptions" are not included in array "this.selectedOptions".
       const added = ArrayUtil.uninclude<GlnOptionComponent>(newOptions, this.selectedOptions);
-      this.selectedOptions = this.mergeOptions(this.selectedOptions, added, removed);
 
+      this.selectedOptions = this.mergeOptions(this.selectedOptions, added, removed);
       this.updateValueDataAndIsFilledAndValidity(newValue);
       this.changeDetectorRef.markForCheck();
     }
@@ -185,6 +187,8 @@ export class GlnSelectComponent
   /** Overlay panel with its own parameters. */
   @ViewChild(CdkConnectedOverlay)
   protected connectedOverlay!: CdkConnectedOverlay;
+  @ContentChild(GLN_SELECT_TRIGGER)
+  public customTrigger: GlnSelectTriggerDirective | undefined;
   @ViewChild('frameRef', { read: ElementRef, static: true })
   public frameRef!: ElementRef<HTMLElement>;
   /** A trigger that opens a dropdown list of options. */
@@ -639,18 +643,37 @@ export class GlnSelectComponent
         removed.push(...ArrayUtil.uninclude<GlnOptionComponent>(this.selectedOptions, newOptions));
       }
       // Which elements of array "addOptions" are not included in array "this.selectedOptions".
-      const added = ArrayUtil.uninclude<GlnOptionComponent>(newOptions, this.selectedOptions); // +
-      this.selectedOptions = this.mergeOptions(this.selectedOptions, added, removed);
-
-      const values = GlnOptionUtil.getValues(this.selectedOptions);
-      const value = values.length > 0 ? values[0] : null;
-      this.updateValueDataAndIsFilledAndValidity(this.multiple ? values : value);
-      this.changeDetectorRef.markForCheck();
-
-      this.selected.emit({ value: !this.multiple ? value : null, values: this.multiple ? values : [], change: { added, removed } });
+      const added = ArrayUtil.uninclude<GlnOptionComponent>(newOptions, this.selectedOptions);
+      this.updateSelectedOptions(added, removed, true);
     }
   }
+
+  public addOption(option: GlnOptionComponent | null): void {
+    if (option && this.selectedOptions.indexOf(option) === -1) {
+      this.updateSelectedOptions([option], [], true);
+    }
+  }
+
+  public deleteOption(option: GlnOptionComponent | null): void {
+    if (option && this.selectedOptions.indexOf(option) > -1) {
+      this.updateSelectedOptions([], [option], true);
+    }
+  }
+
   // ** Private API **
+
+  private updateSelectedOptions(added: GlnOptionComponent[], removed: GlnOptionComponent[], isEmit: boolean): unknown[] {
+    this.selectedOptions = this.mergeOptions(this.selectedOptions, added, removed);
+
+    const values = GlnOptionUtil.getValues(this.selectedOptions);
+    const value = values.length > 0 ? values[0] : null;
+    this.updateValueDataAndIsFilledAndValidity(this.multiple ? values : value);
+    this.changeDetectorRef.markForCheck();
+    if (isEmit) {
+      this.selected.emit({ value: !this.multiple ? value : null, values: this.multiple ? values : [], change: { added, removed } });
+    }
+    return values;
+  }
 
   private mergeOptions(selected: GlnOptionComponent[], added: GlnOptionComponent[], removed: GlnOptionComponent[]): GlnOptionComponent[] {
     GlnOptionUtil.setSelected(removed, false);

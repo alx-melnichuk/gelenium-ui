@@ -12,10 +12,11 @@ import { GlnHintOrErrorModule } from '../gln-hint-or-error/gln-hint-or-error.mod
 import { GlnOptionModule } from '../gln-option/gln-option.module';
 
 import { GlnSelectComponent } from './gln-select.component';
-import { GLN_SELECT_SCROLL_STRATEGY_PROVIDER } from './gln-select.providers';
+import { GLN_SELECT_SCROLL_STRATEGY_PROVIDER_REPOSITION } from './gln-select.providers';
+import { GlnSelectTriggerDirective } from './gln-select-trigger.directive';
 
 @NgModule({
-  declarations: [GlnSelectComponent],
+  declarations: [GlnSelectComponent, GlnSelectTriggerDirective],
   imports: [
     CommonModule,
     OverlayModule,
@@ -28,7 +29,7 @@ import { GLN_SELECT_SCROLL_STRATEGY_PROVIDER } from './gln-select.providers';
     GlnHintOrErrorModule,
     GlnOptionModule,
   ],
-  exports: [GlnSelectComponent],
-  providers: [GLN_SELECT_SCROLL_STRATEGY_PROVIDER],
+  exports: [GlnSelectComponent, GlnSelectTriggerDirective],
+  providers: [GLN_SELECT_SCROLL_STRATEGY_PROVIDER_REPOSITION],
 })
 export class GlnSelectModule {}

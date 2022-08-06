@@ -13,13 +13,13 @@ import {
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 @Component({
-  selector: 'app-select-group',
-  templateUrl: './select-group.component.html',
-  styleUrls: ['./select-group.component.scss'],
+  selector: 'app-select-trigger',
+  templateUrl: './select-trigger.component.html',
+  styleUrls: ['./select-trigger.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectGroupComponent {
+export class SelectTriggerComponent {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -37,16 +37,27 @@ export class SelectGroupComponent {
 
   public urlSelect = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_SELECT');
 
-  public exterior04a = 'outlined';
+  public exterior05a = 'outlined';
 
-  public tubers = ['potato', 'jerusalem artichoke', 'sweet potato', 'cassava', 'tuberous nasturtium'];
-  public cabbage = ['white cabbage', 'portuguese cabbage', 'japanese cabbage', 'kohlrabi', 'broccoli'];
-  public salad = ['leaf parsley', 'mustard leaf', 'spinach', 'chard (leaf beet)', 'vegetable fennel'];
+  public salad = [
+    'lettuce (lettuce)',
+    'leaf parsley',
+    'mustard leaf',
+    'swans',
+    'sorrel',
+    'spinach',
+    'purslane',
+    'chard (leaf beet)',
+    'vegetable fennel',
+    'arugula',
+    'cucumber grass',
+    'nettles',
+  ];
 
-  public control04a = {
-    model04a: new FormControl(this.tubers[1], []),
+  public control05a = {
+    model05a: new FormControl([this.salad[0], this.salad[1]], []),
   };
-  public formGroup04a: FormGroup = new FormGroup(this.control04a);
+  public formGroup05a: FormGroup = new FormGroup(this.control05a);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

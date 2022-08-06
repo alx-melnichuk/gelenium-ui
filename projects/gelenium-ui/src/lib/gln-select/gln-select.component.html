@@ -64,21 +64,28 @@
         [attr.id]="id + '-elem'">
 
         <ng-container [ngSwitch]="isFilled">
-          <ng-container *ngSwitchCase="true">
-            <ng-container
-              *ngFor="let option of selectedOptions; count as countVal; last as isLast; trackBy: trackByOption;">
-              <span [innerHTML]="option.getTrustHtml()"></span>
-              <span *ngIf="countVal > 1 && !isLast">, </span>
-            </ng-container>
-          </ng-container>
           <div *ngSwitchCase="false">&ZeroWidthSpace;</div>
-        </ng-container>
 
-        <!-- <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container> -->
+          <ng-container *ngSwitchCase="true"
+            [ngSwitch]="!!customTrigger">
+
+            <ng-content *ngSwitchCase="true"
+              select="gln-select-trigger">
+            </ng-content>
+
+            <ng-container *ngSwitchCase="false">
+              <ng-container
+                *ngFor="let option of selectedOptions; count as countVal; last as isLast; trackBy: trackByOption;">
+                <span [innerHTML]="option.getTrustHtml()"></span>
+                <span *ngIf="countVal > 1 && !isLast">, </span>
+              </ng-container>
+            </ng-container>
+
+          </ng-container>
+        </ng-container>
       </div>
 
     </gln-frame>
-
   </div>
 </ng-container>
 
@@ -116,7 +123,7 @@
       [attr.aria-multiselectable]="multiple"
       [attr.noElevation]="getBoolean(noElevation) ? '' : null"
       (focus)="doFocusOnPanel()">
-      <ng-content></ng-content>
+      <ng-content select=":not(gln-select-trigger)"></ng-content>
     </div>
   </div>
 

@@ -17,7 +17,7 @@ export function GLN_SELECT_SCROLL_STRATEGY_PROVIDER_REPOSITION_FACTORY(overlay: 
   return () => overlay.scrollStrategies.reposition();
 }
 
-export const GLN_SELECT_SCROLL_STRATEGY_PROVIDER = {
+export const GLN_SELECT_SCROLL_STRATEGY_PROVIDER_REPOSITION = {
   provide: GLN_SELECT_SCROLL_STRATEGY,
   deps: [Overlay],
   useFactory: GLN_SELECT_SCROLL_STRATEGY_PROVIDER_REPOSITION_FACTORY,
