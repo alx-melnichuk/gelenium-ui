@@ -1,6 +1,9 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsulation } from '@angular/core';
+import { take } from 'rxjs/operators';
 
 import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
+
+const logLabel = 'Button1Component';
 
 @Component({
   selector: 'app-button1',
@@ -12,16 +15,19 @@ import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-rou
 export class Button1Component implements AfterViewInit {
   public showNum = '';
 
-  constructor() {
+  constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax
-    console.time('Button1Component');
+    console.time(logLabel);
   }
 
   public ngAfterViewInit(): void {
-    // eslint-disable-next-line no-restricted-syntax
-    console.timeEnd('Button1Component');
     Promise.resolve().then(() => {
       ScrollAfterRoutingUtil.scrollByFragmentFromPath();
+    });
+    // The zone will become stable when all components have fully rendered.
+    this.ngZone.onStable.pipe(take(1)).subscribe(() => {
+      // eslint-disable-next-line no-restricted-syntax
+      console.timeEnd(logLabel);
     });
   }
 }
