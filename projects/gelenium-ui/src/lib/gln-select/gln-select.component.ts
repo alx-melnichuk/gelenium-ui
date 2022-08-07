@@ -14,6 +14,7 @@ import {
   Inject,
   InjectionToken,
   Input,
+  NgZone,
   OnChanges,
   OnInit,
   Optional,
@@ -35,6 +36,7 @@ import {
   ValidationErrors,
   Validator,
 } from '@angular/forms';
+import { take } from 'rxjs/operators';
 
 import { GlnFrameSizePaddingVerHorRes } from '../directives/gln-frame-size/gln-frame-size-prepare.interface';
 import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
@@ -252,7 +254,8 @@ export class GlnSelectComponent
     @Inject(PLATFORM_ID) private platformId: Object,
     @Optional() @Inject(GLN_SELECT_CONFIG) private rootConfig: GlnSelectConfig | null,
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-    @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any
+    @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any,
+    private ngZone: NgZone
   ) {
     super(uniqueIdCounter++, 'glns', hostRef, renderer, changeDetectorRef);
     this.currConfig = this.rootConfig;
@@ -672,6 +675,10 @@ export class GlnSelectComponent
     if (isEmit) {
       this.selected.emit({ value: !this.multiple ? value : null, values: this.multiple ? values : [], change: { added, removed } });
     }
+    // Update the position once the zone is stable so that the overlay will be fully rendered.
+    this.ngZone.onStable.pipe(take(1)).subscribe(() => {
+      this.connectedOverlay.overlayRef.updatePosition();
+    });
     return values;
   }
 
