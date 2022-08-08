@@ -97,6 +97,8 @@
 </gln-hint-or-error>
 
 <ng-template cdkConnectedOverlay
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  cdkConnectedOverlayHasBackdrop
   [cdkConnectedOverlayDisableClose]="true"
   cdkConnectedOverlayLockPosition
   [cdkConnectedOverlayMinWidth]="triggerRect?.width!"
@@ -105,7 +107,7 @@
   [cdkConnectedOverlayPanelClass]="overlayPanelClass"
   [cdkConnectedOverlayPositions]="positionList"
   [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
-  (overlayOutsideClick)="overlayOutsideClick()"
+  (backdropClick)="backdropClick()"
   (attach)="attach()"
   (detach)="isPanelOpen ? close() : null">
 

@@ -227,7 +227,7 @@ export class GlnSelectComponent
   // public noLabel: boolean | null = null; // Binding attribute "isNoLabel". // Is in GlnBasisControl.
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public overlayPanelClass: string | string[] = '';
-  public panelClassList: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
+  public panelClassList: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
   public positionList: ConnectedPosition[] = [];
   // public readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Is in GlnBasisControl.
   // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisControl.
@@ -468,8 +468,8 @@ export class GlnSelectComponent
       }
     }
   }
-  /** Occurs when mouse click events are outside the overlay. */
-  public overlayOutsideClick(): void {
+  /** Occurs when a mouse click event occurs outside of the options list pane. */
+  public backdropClick(): void {
     if (!this.disabled) {
       // (Cases-B3) Panel is open and mouse click outside of panel and trigger.
       // (Cases-B4) Panel is open and mouse click outside of panel but on trigger.
@@ -543,10 +543,6 @@ export class GlnSelectComponent
   }
   /** Callback when the overlay panel is attached. */
   public attach(): void {
-    // Add a class to not skip mouse events.
-    const hostElementRef = HtmlElemUtil.getElementRef(this.connectedOverlay.overlayRef.hostElement);
-    HtmlElemUtil.setClass(this.renderer, hostElementRef, 'gln-overlay-events-auto', true);
-
     const overlayElement: HTMLElement = this.connectedOverlay.overlayRef.overlayElement;
     // Adding a class so that custom styles can be applied.
     const overlayRef = HtmlElemUtil.getElementRef(overlayElement);
