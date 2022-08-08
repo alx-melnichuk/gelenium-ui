@@ -375,6 +375,7 @@ gln-frame {
     &>span[glnfr-orn-lf], &>span[glnfr-orn-rg] {
       max-height: inherit;
       display: inline-flex;
+      align-items: center;
     }
     &>span[glnfr-orn-rg] {
       order: 1;

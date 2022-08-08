@@ -1,19 +1,40 @@
 <section mr-vr>
-  <h3>Ornaments for the "textarea" element.</h3>
+  <h3 class="app-hover-link">
+    Ornaments for the "textarea" element.
+    <a [href]="urlTextarea + '#Ornaments'">#</a>
+  </h3>
   <p>
-    It is possible to add a different ornament (picture or text) for the input line.
-    It will appear as a prefix or suffix for the input string.
-    You can define the reaction to pressing an element of the ornament.
-    <br />To add a prefix, you need to add a tag with the "gln-orn-lf" attribute inside the
-    "gln-textarea" tag. (&lt;span gln-orn-lf&gt;kg&lt;/span&gt;)
-    <br />To add a suffix, you need to add a tag with the "gln-orn-rg" attribute inside the
-    "gln-textarea" tag.
-    (&lt;span gln-orn-rg&gt;cm&lt;/span&gt;)
+    For the GlnTextarea component, it is possible to display an ornament
+    (picture or text).
     <br />
-    Adding a prefix or suffix does not disable legend animation for that input field.
+    To display the ornament on the left, you need to add the "gln-orn-lf"
+    attribute to the element inside the "gln-textarea" content.
+    <br />
+    To display the ornament on the right, you need to add the "gln-orn-rg"
+    attribute to the element inside the "gln-textarea" content.
   </p>
-
+  <span>
+    Example:
+  </span>
+  <code><pre source="html">
+&lt;gln-textarea formControlName="model01a"
+  label="Enter value"&gt;
+  &lt;div gln-orn-lf&gt;
+    &lt;span&gt;left&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div gln-orn-rg&gt;
+    &lt;span&gt;right&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/gln-textarea&gt;</pre></code>
+  <p>
+    Adding a prefix or suffix does not disable legend animation for that element.
+    <br />
+    For blocks: "&lt;span&gt;left&lt;/span&gt;" and "&lt;span&gt;right&lt;/span&gt;"
+    you need to specify the value of horizontal indents.
+  </p>
 </section>
+
+<hr br-nn />
 
 <section mr-vr>
   <span>exterior: </span>

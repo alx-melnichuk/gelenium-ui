@@ -9,6 +9,7 @@ import {
   LABEL_SHOW_SOURCE,
   LABEL_TS,
 } from '../../../lib-core/constants/constants';
+import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 @Component({
   selector: 'app-button-ornaments',
@@ -32,6 +33,8 @@ export class ButtonOrnamentsComponent {
   public labelOutlined = BTN_OUTLINED;
   @Input()
   public labelText = BTN_TEXT;
+
+  public urlButton2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_BUTTON2');
 
   public exterior05a = 'outlined';
   public exterior05b = 'outlined';

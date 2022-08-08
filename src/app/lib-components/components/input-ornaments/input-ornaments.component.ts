@@ -12,6 +12,7 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../../lib-core/constants/constants';
+import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 @Component({
   selector: 'app-input-ornaments',
@@ -35,6 +36,8 @@ export class InputOrnamentsComponent {
   public labelTs = LABEL_TS;
   @Input()
   public labelCss = LABEL_CSS;
+
+  public urlInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_INPUT');
 
   public minLength05 = 3;
   public maxLength05 = 15;

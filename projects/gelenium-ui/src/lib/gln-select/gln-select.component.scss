@@ -9,13 +9,7 @@ gln-select {
 
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
-  min-width: var(--glnsl-min-width, var(--glnsl-fs-min-width, 50px));
-  // outline: 1px dashed green;
-  // # font-family: Roboto, Helvetica, Arial, sans-serif;
-  // # font-weight: 400;
-  // # font-size: 1rem; // 16px
-  // # line-height: 1.5; // 24px
-  // # letter-spacing: 0.00938em;
+  min-width: var(--glnsl-min-width, var(--glnsl-el-min-width, 50px));
 
   &[wdFull] {
     width: 100%;
@@ -93,11 +87,12 @@ gln-select {
   gln-frame>div>[glnfr-elem] {
     background: none;
     border: 0;
-    box-sizing: content-box;
+    box-sizing: border-box;
     color: currentColor;
     display: block;
     font: inherit;
     margin: 0;
+    min-height: var(--glnsl-el-min-height, unset);
     -webkit-tap-highlight-color: transparent;
     min-width: 0;
     overflow: hidden;

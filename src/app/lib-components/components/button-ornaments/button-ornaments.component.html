@@ -1,12 +1,16 @@
-<section mr-vr
-  id="Ornaments">
-  <h3>Ornament for GlnButton in "button" element mode.</h3>
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Ornament for GlnButton in "button" element mode.
+    <a [href]="urlButton2 + '#Ornaments'">#</a>
+  </h3>
   <p>
     For the GlnButton component, it is possible to display an ornament
     (picture or text).
-  </p>
-  <p>
+    <br />
     To display the ornament on the left, you need to add the "gln-orn-lf"
+    attribute to the element inside the "gln-button" content.
+    <br />
+    To display the ornament on the right, you need to add the "gln-orn-rg"
     attribute to the element inside the "gln-button" content.
   </p>
   <span>
@@ -17,23 +21,14 @@
   &lt;div gln-orn-lf&gt;
     &lt;span&gt;left&lt;/span&gt;
   &lt;/div&gt;
-  Ornament on the left
-&lt;/gln-button&gt;</pre></code>
-  <p>
-    To display the ornament on the right, you need to add the "gln-orn-rg"
-    attribute to the element inside the "gln-button" content.
-  </p>
-  <span>
-    Example:
-  </span>
-  <code><pre source="html">
-&lt;gln-button&gt;
-  Ornament on the right
+  text
   &lt;div gln-orn-rg&gt;
     &lt;span&gt;right&lt;/span&gt;
   &lt;/div&gt;
 &lt;/gln-button&gt;</pre></code>
   <p>
+    Adding a prefix or suffix does not disable legend animation for that element.
+    <br />
     For blocks: "&lt;span&gt;left&lt;/span&gt;" and "&lt;span&gt;right&lt;/span&gt;"
     you need to specify the value of horizontal indents.
   </p>

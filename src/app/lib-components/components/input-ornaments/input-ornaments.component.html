@@ -1,23 +1,37 @@
 <section mr-vr>
-  <h3>Ornaments for the "input line" element.</h3>
+  <h3 class="app-hover-link">
+    Ornaments for the "input line" element.
+    <a [href]="urlInput + '#Ornaments'">#</a>
+  </h3>
   <p>
-    It is possible to add a different ornament (picture or text) for the input line.
-    It will appear as a prefix or suffix for the input string.
-    You can define the reaction to pressing an element of the ornament.
-    <br />To add a prefix, you need to add a tag with the "gln-orn-lf" attribute inside the
-    "gln-input" tag. (&lt;span gln-orn-lf&gt;kg&lt;/span&gt;)
-    <br />To add a suffix, you need to add a tag with the "gln-orn-rg" attribute inside the
-    "gln-input" tag.
-    (&lt;span gln-orn-rg&gt;cm&lt;/span&gt;)
+    For the GlnInput component, it is possible to display an ornament
+    (picture or text).
     <br />
-    Adding a prefix or suffix does not disable legend animation for that input field.
+    To display the ornament on the left, you need to add the "gln-orn-lf"
+    attribute to the element inside the "gln-input" content.
+    <br />
+    To display the ornament on the right, you need to add the "gln-orn-rg"
+    attribute to the element inside the "gln-input" content.
   </p>
-  <p>For example:</p>
-  <ul>
-    <li>you can use the prefix "kg" to enter the weight value;</li>
-    <li>you can use the "cm" suffix to enter the height value;</li>
-    <li>you can use the button with the icon to display the password;</li>
-  </ul>
+  <span>
+    Example:
+  </span>
+  <code><pre source="html">
+&lt;gln-input formControlName="model01a"
+  label="Enter value"&gt;
+  &lt;div gln-orn-lf&gt;
+    &lt;span&gt;left&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div gln-orn-rg&gt;
+    &lt;span&gt;right&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/gln-input&gt;</pre></code>
+  <p>
+    Adding a prefix or suffix does not disable legend animation for that element.
+    <br />
+    For blocks: "&lt;span&gt;left&lt;/span&gt;" and "&lt;span&gt;right&lt;/span&gt;"
+    you need to specify the value of horizontal indents.
+  </p>
   <p>
     You can increase/decrease the font size for an input element.
     For example, when entering a password, you can increase the font size to display

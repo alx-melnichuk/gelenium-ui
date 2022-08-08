@@ -1,0 +1,32 @@
+/*# sourceURL=select-ornaments.component.scss */
+
+app-select-ornaments {
+  display: block;
+
+  .so-elem {
+    width: 200px;
+    min-width: unset;
+  }
+  .io-pd-hor {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .so-btn {
+    outline: 0;
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 50%;
+    background-color: transparent;
+  }
+  .so-btn:hover {
+    background-color: hsla(0, 6%, 16%, 15%);
+  }
+  .so-uncode {
+    font-size: 27px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+}

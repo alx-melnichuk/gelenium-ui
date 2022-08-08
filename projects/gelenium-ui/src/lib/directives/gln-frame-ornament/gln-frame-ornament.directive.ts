@@ -21,7 +21,7 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
   @Input()
   /** Path to an element that has children with 'glnfr-orn-lf' and 'glnfr-orn-rg' attributes. */
   // Example: "/div{0}" - the first child tag is "div" with index 0.
-  // Example: "/.glnfr-border{0}" - first child tag with class "glnfr-border" and index 0..
+  // Example: "/.glnfr-border{0}" - first child tag with class "glnfr-border" and index 0.
   public glnFrameOrnamentPath: string | null | undefined;
   @Input()
   public glnFrameOrnamentAfterContent: boolean | null | undefined;

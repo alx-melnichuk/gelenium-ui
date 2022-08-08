@@ -65,7 +65,8 @@ const CSS_ATTR_FOR_PANEL_OPENING_ANIMATION = 'is-open';
 const CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION = 'is-hide';
 const CSS_PROP_BORDER_RADIUS = '--glnslpo-border-radius';
 const CSS_PROP_MAX_HEIGHT = '--glnslpo-max-height';
-const CSS_PROP_FS_MIN_WIDTH = '--glnsl-fs-min-width';
+const CSS_PROP_EL_MIN_WIDTH = '--glnsl-el-min-width';
+const CSS_PROP_EL_MIN_HEIGHT = '--glnsl-el-min-height';
 const CSS_PROP_TRANSLATE_Y = '--glnslpo-translate-y';
 
 @Component({
@@ -340,6 +341,11 @@ export class GlnSelectComponent
       const newValue = this.valueData;
       this.valueData = undefined;
       this.value = newValue;
+      // If the template is already rendered at the moment, then it is possible that these changes will not be displayed.
+      // To solve this problem, we call a redraw via Promise.
+      Promise.resolve().then(() => {
+        this.changeDetectorRef.markForCheck();
+      });
     }
     super.ngAfterContentInit();
   }
@@ -418,7 +424,8 @@ export class GlnSelectComponent
   public frameSizeChange(event: GlnFrameSizePaddingVerHorRes): void {
     this.triggerFrameSize = event.frameSizeValue || 0;
     const minWidth = NumberUtil.roundTo100(this.triggerFrameSize * 1.1);
-    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_FS_MIN_WIDTH, NumberUtil.str(minWidth)?.concat('px'));
+    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_EL_MIN_WIDTH, NumberUtil.str(minWidth)?.concat('px'));
+    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_EL_MIN_HEIGHT, NumberUtil.str(this.triggerFrameSize)?.concat('px'));
   }
 
   public isEmpty(): boolean {

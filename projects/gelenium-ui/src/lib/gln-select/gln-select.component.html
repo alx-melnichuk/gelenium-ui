@@ -32,6 +32,7 @@
       glnFrameOrnament
       [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
       [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
+      [glnFrameOrnamentPath]="'/div{0}'"
       [attr.opn]="isPanelOpen ? '' : null"
       [attr.tabindex]="!disabled ? tabIndex : null"
       (focus)="doFocus()"
@@ -39,12 +40,12 @@
       (keydown)="frameKeydown($event)">
 
       <span glnfr-orn-lf
-        class="glns-ornam-lf">
+        class="gln-ornam-lf">
         <ng-content select="[gln-orn-lf]"></ng-content>
       </span>
 
       <span glnfr-orn-rg
-        class="glns-ornam-rg">
+        class="gln-ornam-rg">
         <ng-content select="[gln-orn-rg]"></ng-content>
 
         <div *ngIf="!getBoolean(isNoIcon) && !currConfig?.isNoIcon"
