@@ -135,8 +135,8 @@ export class GlnSelectComponent
   public ornamLfAlign: string | null | undefined; // OrnamAlign // -
   @Input()
   public ornamRgAlign: string | null | undefined; // OrnamAlign // -
-  /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
   @Input()
+  /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
   public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = ''; // -
   @Input()
   public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';

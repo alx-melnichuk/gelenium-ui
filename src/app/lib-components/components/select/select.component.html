@@ -45,21 +45,13 @@
   <hr br-tp>
 </div> -->
 
-
-<!-- demo -->
-
-<div mr-vr
-  *ngIf="!showNum"
+<div *ngIf="!showNum || showNum==='08'"
   id="Config">
-  <h3>Config</h3>
-  <p>
-    The <a [href]="urlFrame2 + '#Config'">"GlnFrame#Config"</a>
-    page shows how to prepare and use the element configuration.
-  </p>
+  <app-select-config></app-select-config>
   <hr br-tp>
 </div>
 
-<div *ngIf="!showNum || showNum==='07'"
+<div *ngIf="!showNum || showNum==='09'"
   id="Api">
   <app-select-api></app-select-api>
   <hr br-tp>

@@ -10,6 +10,7 @@ import { SelectValidationModule } from '../select-validation/select-validation.m
 import { SelectGroupModule } from '../select-group/select-group.module';
 import { SelectTriggerModule } from '../select-trigger/select-trigger.module';
 import { SelectOrnamentsModule } from '../select-ornaments/select-ornaments.module';
+import { SelectConfigModule } from '../select-config/select-config.module';
 import { SelectApiModule } from '../select-api/select-api.module';
 
 import { SelectComponent } from './select.component';
@@ -43,6 +44,7 @@ SiteMenu.addItem('Components', 'Select', { label: 'Select', siteUrls });
     SelectGroupModule,
     SelectTriggerModule,
     SelectOrnamentsModule,
+    SelectConfigModule,
     SelectApiModule,
   ],
   exports: [SelectComponent],

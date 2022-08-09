@@ -4,7 +4,7 @@
     <a [href]="urlFrame2 + '#Config'">#</a>
   </h3>
   <p>
-    If your application will have a single style for input elements, then you can set a single
+    If your application will have a single style for GlnInput elements, then you can set a single
     configuration.
     To do this, you need to create an object with the GlnFrameConfig interface and define the
     required values.
@@ -21,12 +21,8 @@ const glnFrameConfigDefault: GlnFrameConfig = &#123;
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  encapsulation: ViewEncapsulation.None,
   providers: [
-    &#123;
-      provide: GLN_FRAME_CONFIG,
-      useValue: glnFrameConfigDefault
-    &#125;
+    &#123; provide: GLN_FRAME_CONFIG, useValue: glnFrameConfigDefault &#125;
   ],
 &#125;)
 export class AppComponent &#123;
@@ -234,8 +230,7 @@ isNoLabel=false</pre></code>
   </ul>
 </section>
 
-<form class="io-ornament"
-  [formGroup]="formGroup07"
+<form [formGroup]="formGroup07"
   novalidate
   autocomplete="off">
 
@@ -280,8 +275,7 @@ isNoLabel=false</pre></code>
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;form class="io-ornament"
-  [formGroup]="formGroup07"
+&lt;form [formGroup]="formGroup07"
   novalidate
   autocomplete="off"&gt;
 
@@ -319,14 +313,24 @@ isNoLabel=false</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
           <code><pre source="ts">
-import &#123; Component, ViewEncapsulation &#125; from '@angular/core';
-import &#123; FormControl, FormGroup &#125; from '@angular/forms';
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+const glnFrameConfigDefault: GlnFrameConfig = &#123;
+  exterior: GlnFrameExterior.outlined,
+  frameSize: GlnFrameSize.small,
+&#125;;
 
 @Component(&#123;
   selector: 'app-frame-input',
   templateUrl: './frame-input.component.html',
   styleUrls: ['./frame-input.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  providers: [&#123; provide: GLN_FRAME_CONFIG, useValue: glnFrameConfigDefault &#125;],
 &#125;)
 export class FrameComponent &#123;
   public formGroup07: FormGroup = new FormGroup(&#123;

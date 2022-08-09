@@ -1,0 +1,202 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Config
+    <a [href]="urlSelect + '#Config'">#</a>
+  </h3>
+  <p>
+    If your application will have a single style for GlnSelect elements, then you can set a single
+    configuration.
+    To do this, you need to create an object with the GlnSelectConfig interface and define the
+    required values.
+    Next, specify the resulting object in the list of providers for the entire application (at the
+    level of the AppComponent).
+  </p>
+  <code><pre source="ts">
+const glnSelectConfigDefault: GlnSelectConfig = &#123;
+  exterior: GlnFrameExterior.outlined,
+  frameSize: GlnFrameSize.small,
+&#125;;
+
+@Component(&#123;
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  providers: [
+    &#123; provide: GLN_SELECT_CONFIG, useValue: glnSelectConfigDefault &#125;
+  ],
+&#125;)
+export class AppComponent &#123;
+  title = 'demo';
+&#125;</pre></code>
+  <p>
+    After that, all "GlnSelect" components will have the same configuration.
+  </p>
+</section>
+
+<section mr-vr
+  id="config-interface">
+  <h4 class="app-hover-link">
+    GlnSelectConfig interface.
+    <a [href]="urlSelect + '#config-interface'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      The list of properties that are inherited from "GlnFrameConfig" can be viewed
+      at the <a [href]="urlFrame2 + '#config-interface'">"GlnFrame#config-interface" link</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>isCheckmark?:<br/>
+      &nbsp;&nbsp;boolean<br/>
+      &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        Checkbox display flag for each option.<br />
+        It is used in conjunction with the "isMultiple" sign.<br />
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>isMultiple?:<br/>
+        &nbsp;&nbsp;boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        Sign of multiple choice of options.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>isNoIcon?:<br/>
+        &nbsp;&nbsp;boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        Disable the display of the icon - the status of the state of the open list.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>isNoRipple?:<br/>
+        &nbsp;&nbsp;boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        This property to turn off the ripple effect.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>noElevation?:<br/>
+        &nbsp;&nbsp;boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>Disable 3d shadow display.</span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>overlayPanelClass?:<br/>
+        &nbsp;&nbsp;string<br/>
+        &nbsp;&nbsp;| string[]<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        A custom class to add to the overlay panel element.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>panelClass?:<br/>
+        &nbsp;&nbsp;string<br/>
+        &nbsp;&nbsp;| string[]<br/>
+        &nbsp;&nbsp;| Set&lt;string&gt;<br/>
+        &nbsp;&nbsp;| &#123; [key: string]: unknown &#125;<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        Classes to be passed to the select panel. Supports the same syntax as `ngClass`.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>position?:<br/>
+        &nbsp;&nbsp;string<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        Specifies how to horizontally align the options list panel.
+      </span>
+      <ul>
+        <li>'start' - align to the left of the main element; (default)</li>
+        <li>'center' - align to the center of the main element;</li>
+        <li>'end' - align to the right side of the main element;</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><code>visibleSize?:<br/>
+        &nbsp;&nbsp;number<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        Specifies the maximum number of visible option elements.
+        This value is multiplied by the height of the option and defines the
+        maximum height of the options panel.
+        <br />
+        If multiple option elements have the smallest height, then that will be the
+        height of the option element.
+      </span>
+    </td>
+  </tr>
+</table>
+
+<section mr-vr
+  id="config-with-underline-wide">
+  <h4 class="app-hover-link">
+    Configuration with "underline" and "wide".
+    <a [href]="urlSelect + '#config-with-underline-wide'">#</a>
+  </h4>
+  <p>
+    For example, let's specify the following parameters:
+  </p>
+  <code><pre source="ts">
+frameSize="wide"
+exterior="underline"</pre></code>
+</section>
+
+<form [formGroup]="formGroup08a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem  sc-elem">
+      <div>
+        <small>
+          <em>Default config: "underline", "medium".</em>
+        </small>
+      </div>
+      <gln-select formControlName="model08a"
+        label="Vegetarian salad"
+        isMultiple
+        [visibleSize]="8"
+        helperText="Choose from a list of values."
+        wdFull>
+        <gln-option *ngFor="let item of salad"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+
+  </div>
+
+</form>

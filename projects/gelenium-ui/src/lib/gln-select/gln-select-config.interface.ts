@@ -6,19 +6,19 @@ export interface GlnSelectConfig extends GlnFrameConfig {
   // frameSizeValue?: number | undefined;
   // isHoverColor?: boolean | undefined;
   // isLabelShrink?: boolean | undefined;
-  //+ isNoAnimation?: boolean | undefined;
+  // isNoAnimation?: boolean | undefined;
   // isNoLabel?: boolean | undefined;
   // labelPd?: number | undefined; // px
   // ornamLfAlign?: GlnFrameOrnamAlign | undefined;
   // ornamRgAlign?: GlnFrameOrnamAlign | undefined;
 
-  isCheckmark?: boolean | undefined; //+
-  isMultiple?: boolean | undefined; //+
-  isNoIcon?: boolean | undefined; //+
-  isNoRipple?: boolean | undefined; //+
+  isCheckmark?: boolean | undefined;
+  isMultiple?: boolean | undefined;
+  isNoIcon?: boolean | undefined;
+  isNoRipple?: boolean | undefined;
   noElevation?: boolean | undefined;
-  overlayPanelClass?: string | string[] | undefined; //+
-  panelClass?: string | string[] | Set<string> | { [key: string]: any } | undefined; //+
-  position?: string | undefined; //+ Horizontal position = 'start' | 'center' | 'end';
+  overlayPanelClass?: string | string[] | undefined;
+  panelClass?: string | string[] | Set<string> | { [key: string]: unknown } | undefined;
+  position?: string | undefined; // Horizontal position = 'start' | 'center' | 'end';
   visibleSize?: number | undefined;
 }
