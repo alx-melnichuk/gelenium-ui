@@ -10,6 +10,7 @@ import {
   Inject,
   InjectionToken,
   Input,
+  NgZone,
   OnChanges,
   OnInit,
   Optional,
@@ -148,9 +149,10 @@ export class GlnTextareaComponent
     changeDetectorRef: ChangeDetectorRef,
     @Optional() @Inject(GLN_TEXTAREA_CONFIG) private rootConfig: GlnFrameConfig | null,
     hostRef: ElementRef<HTMLElement>,
-    renderer: Renderer2
+    renderer: Renderer2,
+    ngZone: NgZone
   ) {
-    super(uniqueIdCounter++, 'glnt', hostRef, renderer, changeDetectorRef);
+    super(uniqueIdCounter++, 'glnt', hostRef, renderer, changeDetectorRef, ngZone);
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-textarea', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);

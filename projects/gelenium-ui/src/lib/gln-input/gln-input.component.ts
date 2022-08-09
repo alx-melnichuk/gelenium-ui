@@ -10,6 +10,7 @@ import {
   Inject,
   InjectionToken,
   Input,
+  NgZone,
   OnChanges,
   OnInit,
   Optional,
@@ -151,9 +152,10 @@ export class GlnInputComponent
     changeDetectorRef: ChangeDetectorRef,
     @Optional() @Inject(GLN_INPUT_CONFIG) private rootConfig: GlnFrameConfig | null,
     hostRef: ElementRef<HTMLElement>,
-    renderer: Renderer2
+    renderer: Renderer2,
+    ngZone: NgZone
   ) {
-    super(uniqueIdCounter++, 'glni', hostRef, renderer, changeDetectorRef);
+    super(uniqueIdCounter++, 'glni', hostRef, renderer, changeDetectorRef, ngZone);
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-input', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);

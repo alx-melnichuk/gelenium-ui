@@ -256,9 +256,9 @@ export class GlnSelectComponent
     @Optional() @Inject(GLN_SELECT_CONFIG) private rootConfig: GlnSelectConfig | null,
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
     @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any,
-    private ngZone: NgZone
+    ngZone: NgZone
   ) {
-    super(uniqueIdCounter++, 'glns', hostRef, renderer, changeDetectorRef);
+    super(uniqueIdCounter++, 'glns', hostRef, renderer, changeDetectorRef, ngZone);
     this.currConfig = this.rootConfig;
     this.scrollStrategy = this.scrollStrategyFactory();
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-select', true);

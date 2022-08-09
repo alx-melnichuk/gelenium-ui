@@ -1,3 +1,4 @@
+import { take } from 'rxjs/operators';
 import {
   AfterContentInit,
   ChangeDetectorRef,
@@ -5,6 +6,7 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  NgZone,
   OnChanges,
   OnInit,
   Output,
@@ -58,7 +60,8 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
     public prefix: string,
     public hostRef: ElementRef<HTMLElement>,
     protected renderer: Renderer2,
-    protected changeDetectorRef: ChangeDetectorRef
+    protected changeDetectorRef: ChangeDetectorRef,
+    protected ngZone: NgZone
   ) {
     this.id = `${prefix}-${uniqueIdCounter}`;
     if (!prefix) {
@@ -119,10 +122,12 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
       this.changeDetectorRef.markForCheck();
       // ValueAccessor.writeValue is being called twice, first time with a phantom null value
       // https://github.com/angular/angular/issues/14988
-      setTimeout(() => {
+      // The zone will become stable when the component finishes rendering. And only after that execute the callback.
+      // This helps to avoid animation spurious effects.
+      this.ngZone.onStable.pipe(take(1)).subscribe(() => {
         this.writeValueInit.emit();
         this.changeDetectorRef.markForCheck();
-      }, 0);
+      });
     }
   }
 
