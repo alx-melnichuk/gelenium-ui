@@ -1,8 +1,12 @@
 <section mr-vr>
-  <h3>Attributes</h3>
-  <p class="app-hover-link">
-    The following attributes are supported:
+  <h3 class="app-hover-link">
+    Attributes.
     <a [href]="urlSelect + '#Attributes'">#</a>
+  </h3>
+  <p class="app-hover-link"
+    id="attributes-supported01">
+    The following attributes are supported:
+    <a [href]="urlSelect + '#attributes-supported01'">#</a>
   </p>
   <ul>
     <li>
@@ -278,10 +282,10 @@ export class SelectComponent &#123;
 <hr br-nn />
 
 <section mr-vr
-  id="Attributes02">
+  id="attributes-supported02">
   <p class="app-hover-link">
     Attributes are also supported:
-    <a [href]="urlSelect + '#Attributes02'">#</a>
+    <a [href]="urlSelect + '#attributes-supported02'">#</a>
   </p>
   <ul>
     <li>
@@ -554,10 +558,10 @@ export class SelectComponent &#123;
 
 
 <section mr-vr
-  id="Attributes03">
+  id="attributes-supported03">
   <p class="app-hover-link">
     Attributes are also supported:
-    <a [href]="urlSelect + '#Attributes03'">#</a>
+    <a [href]="urlSelect + '#attributes-supported03'">#</a>
   </p>
   <ul>
     <li>
@@ -852,10 +856,10 @@ export class SelectComponent &#123;
 
 
 <section mr-vr
-  id="Attributes04">
+  id="attributes-supported04">
   <p class="app-hover-link">
     Attributes are also supported:
-    <a [href]="urlSelect + '#Attributes04'">#</a>
+    <a [href]="urlSelect + '#attributes-supported04'">#</a>
   </p>
   <ul>
     <li>
@@ -902,7 +906,6 @@ export class SelectComponent &#123;
         [visibleSize]="8"
         helperText="The 'isMultiple', 'visibleSize' are used."
         [exterior]="exterior02d">
-        <gln-option><em>None</em></gln-option>
         <gln-option *ngFor="let item of flowers"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -923,7 +926,6 @@ export class SelectComponent &#123;
         helperText="The 'isMultiple', 'isCheckmark' are used."
         [exterior]="exterior02d"
         wdFull>
-        <gln-option><em>None</em></gln-option>
         <gln-option *ngFor="let item of flowers"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -944,7 +946,6 @@ export class SelectComponent &#123;
         helperText="The 'isNoRipple' are used."
         [exterior]="exterior02d"
         wdFull>
-        <gln-option><em>None</em></gln-option>
         <gln-option *ngFor="let item of flowers"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -983,7 +984,6 @@ export class SelectComponent &#123;
         [visibleSize]="8"
         helperText="The 'isMultiple', 'visibleSize' are used."
         [exterior]="exterior02d"&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of flowers"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -1004,7 +1004,6 @@ export class SelectComponent &#123;
         helperText="The 'isMultiple', 'isCheckmark' are used."
         [exterior]="exterior02d"
         wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of flowers"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -1025,7 +1024,6 @@ export class SelectComponent &#123;
         helperText="The 'isNoRipple' are used."
         [exterior]="exterior02d"
         wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of flowers"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -1098,5 +1096,417 @@ export class SelectComponent &#123;
     </mat-expansion-panel>
   </mat-accordion>
 </section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="attributes-config">
+  <p class="app-hover-link">
+    Configuration for custom height (57px).
+    <a [href]="urlSelect + '#attributes-config'">#</a>
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior02e"
+    (change)="exterior02e=$event.value">
+    <mat-button-toggle [checked]="exterior02e==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02e==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02e==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isNoLabel02e=!isNoLabel02e" />
+    is no label
+  </label>
+</section>
+
+<form [formGroup]="formGroup02e"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Config" height: 57px; font-size: 16px;</em></small>
+      </div>
+      <gln-select formControlName="model02p"
+        class="sa-elem"
+        label="Flower"
+        isMultiple
+        [visibleSize]="8"
+        [isNoLabel]="isNoLabel02e ? '': null"
+        helperText="Custom height settings 57px."
+        [config]="config02p"
+        [exterior]="exterior02e">
+        <gln-option *ngFor="let item of flowers"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup02e"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;"Config" height: 57px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model02p"
+        class="sa-elem"
+        label="Flower"
+        isMultiple
+        [visibleSize]="8"
+        [isNoLabel]="isNoLabel02e ? '': null"
+        helperText="Custom height settings 57px."
+        [config]="config02p"
+        [exterior]="exterior02e"&gt;
+        &lt;gln-option *ngFor="let item of flowers"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SelectComponent &#123;
+  public flowers = [
+    'rose',
+    'carnation',
+    'tulip',
+    'chamomile',
+    'daffodil',
+    'gerbera',
+    'orchid',
+    'lilac',
+    'gardenia',
+    'jasmine',
+    'magnolia',
+    'hyacinth',
+  ];
+  public exterior02e = 'outlined';
+  public isNoLabel02e = false;
+  public control02e = &#123;
+    model02p: new FormControl(
+      [this.flowers[1], this.flowers[3], this.flowers[4]], []
+    )
+  &#125;;
+  public formGroup02e: FormGroup = new FormGroup(this.control02e);
+  // GlnFrameConfig
+  public config02p = &#123; frameSizeValue: 57 &#125;;
+
+  public capitalizeFirstLetter(value: string): string &#123;
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  &#125;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.sa-elem &#123;
+  width: 28ch;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Config" height: 57px; font-size: 18px;</em></small>
+      </div>
+      <gln-select formControlName="model02q"
+        class="sa-elem sa-large"
+        label="Flower"
+        isMultiple
+        [visibleSize]="8"
+        [isNoLabel]="isNoLabel02e ? '': null"
+        helperText="Custom height settings 57px."
+        [config]="config02p"
+        [exterior]="exterior02e">
+        <gln-option *ngFor="let item of flowers"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup02e"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;"Config" height: 57px; font-size: 18px;&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model02q"
+        class="sa-elem sa-large"
+        label="Flower"
+        isMultiple
+        [visibleSize]="8"
+        [isNoLabel]="isNoLabel02e ? '': null"
+        helperText="Custom height settings 57px."
+        [config]="config02p"
+        [exterior]="exterior02e"&gt;
+        &lt;gln-option *ngFor="let item of flowers"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SelectComponent &#123;
+  public flowers = [
+    'rose',
+    'carnation',
+    'tulip',
+    'chamomile',
+    'daffodil',
+    'gerbera',
+    'orchid',
+    'lilac',
+    'gardenia',
+    'jasmine',
+    'magnolia',
+    'hyacinth',
+  ];
+  public exterior02e = 'outlined';
+  public isNoLabel02e = false;
+  public control02e = &#123;
+    model02q: new FormControl(
+      [this.flowers[1], this.flowers[3], this.flowers[4]], []
+    )
+  &#125;;
+  public formGroup02e: FormGroup = new FormGroup(this.control02e);
+  // GlnFrameConfig
+  public config02p = &#123; frameSizeValue: 57 &#125;;
+
+  public capitalizeFirstLetter(value: string): string &#123;
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  &#125;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.sa-elem &#123;
+  width: 28ch;
+&#125;
+.sa-large &#123;
+  font-size: 18px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Config" height: 57px; font-size: 20px;</em></small>
+      </div>
+      <gln-select formControlName="model02r"
+        class="sa-elem sa-huge"
+        label="Flower"
+        isMultiple
+        [visibleSize]="8"
+        [isNoLabel]="isNoLabel02e ? '': null"
+        helperText="Custom height settings 57px."
+        [config]="config02p"
+        [exterior]="exterior02e">
+        <gln-option *ngFor="let item of flowers"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+  </div>
+
+  <section mr-vr2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab [label]="labelHtml">
+            <code><pre source="html">
+&lt;form [formGroup]="formGroup02e"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;"Config" height: 57px; font-size: 20px;&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model02r"
+        class="sa-elem sa-huge"
+        label="Flower"
+        isMultiple
+        [visibleSize]="8"
+        [isNoLabel]="isNoLabel02e ? '': null"
+        helperText="Custom height settings 57px."
+        [config]="config02p"
+        [exterior]="exterior02e"&gt;
+        &lt;gln-option *ngFor="let item of flowers"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelTs">
+            <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame-input',
+  templateUrl: './frame-input.component.html',
+  styleUrls: ['./frame-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SelectComponent &#123;
+  public flowers = [
+    'rose',
+    'carnation',
+    'tulip',
+    'chamomile',
+    'daffodil',
+    'gerbera',
+    'orchid',
+    'lilac',
+    'gardenia',
+    'jasmine',
+    'magnolia',
+    'hyacinth',
+  ];
+  public exterior02e = 'outlined';
+  public isNoLabel02e = false;
+  public control02e = &#123;
+    model02r: new FormControl(
+      [this.flowers[1], this.flowers[3], this.flowers[4]], []
+    )
+  &#125;;
+  public formGroup02e: FormGroup = new FormGroup(this.control02e);
+  // GlnFrameConfig
+  public config02p = &#123; frameSizeValue: 57 &#125;;
+
+  public capitalizeFirstLetter(value: string): string &#123;
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  &#125;
+&#125;</pre></code>
+          </mat-tab>
+          <mat-tab [label]="labelCss">
+            <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.sa-elem &#123;
+  width: 28ch;
+&#125;
+.sa-huge &#123;
+  font-size: 20px;
+&#125;</pre></code>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+</form>
 
 <hr br-nn />

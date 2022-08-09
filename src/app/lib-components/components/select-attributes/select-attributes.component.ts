@@ -88,6 +88,17 @@ export class SelectAttributesComponent {
   };
   public formGroup02d: FormGroup = new FormGroup(this.control02d);
 
+  public exterior02e = 'outlined';
+  public isNoLabel02e = false;
+  public control02e = {
+    model02p: new FormControl([this.flowers[1], this.flowers[3], this.flowers[4]], []),
+    model02q: new FormControl([this.flowers[1], this.flowers[3], this.flowers[4]], []),
+    model02r: new FormControl([this.flowers[1], this.flowers[3], this.flowers[4]], []),
+  };
+  public formGroup02e: FormGroup = new FormGroup(this.control02e);
+  // GlnFrameConfig
+  public config02p = { frameSizeValue: 57 };
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
