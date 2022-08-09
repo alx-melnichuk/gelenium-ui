@@ -11,7 +11,7 @@ import { UrlComponents } from '../../../lm-components/constants/url-components.c
 })
 export class ButtonApiComponent {
   public urlButton2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_BUTTON2');
-  public urlFrame = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
+  public urlFrame1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME1');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

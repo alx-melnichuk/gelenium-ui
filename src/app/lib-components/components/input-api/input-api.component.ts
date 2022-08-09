@@ -10,7 +10,8 @@ import { UrlComponents } from '../../../lm-components/constants/url-components.c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputApiComponent {
-  public urlFrame = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
+  public urlInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_INPUT');
+  public urlFrame2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME2');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

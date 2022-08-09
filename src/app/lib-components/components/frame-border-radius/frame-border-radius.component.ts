@@ -38,7 +38,7 @@ export class FrameBorderRadiusComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlFrameInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
+  public urlFrame1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME1');
 
   public borderRadius = 50;
   public propRadius = '--glnfr-br-rd';

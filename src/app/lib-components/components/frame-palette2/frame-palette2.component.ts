@@ -22,7 +22,7 @@ export class FramePalette2Component {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlFrame = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
+  public urlFrame2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME2');
 
   public controls06b = {
     model06g: new FormControl('Hello World', []),

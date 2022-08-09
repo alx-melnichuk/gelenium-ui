@@ -10,7 +10,6 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../../lib-core/constants/constants';
-
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 @Component({
@@ -36,7 +35,7 @@ export class FrameAttributesComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlFrame = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
+  public urlFrame1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME1');
 
   public exterior02a = 'outlined';
   public formGroup02a: FormGroup = new FormGroup({
@@ -54,17 +53,6 @@ export class FrameAttributesComponent {
     model02h: new FormControl('Hello World', []),
   };
   public formGroup02b: FormGroup = new FormGroup(this.control02b);
-
-  public exterior02c = 'outlined';
-  public formGroup02c: FormGroup = new FormGroup({
-    model02i: new FormControl('Hello World', []),
-    model02j: new FormControl('Hello World', []),
-    model02k: new FormControl('Hello World', []),
-  });
-
-  public config02 = {
-    frameSizeValue: 57,
-  };
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

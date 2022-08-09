@@ -16,7 +16,8 @@ const logLabel = 'InputComponent';
 export class InputComponent implements AfterViewInit {
   public showNum = '';
 
-  public urlFrame = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
+  public urlFrame1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME1');
+  public urlFrame2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME2');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax
