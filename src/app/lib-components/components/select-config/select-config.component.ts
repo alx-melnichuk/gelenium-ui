@@ -9,8 +9,11 @@ import { UrlComponents } from '../../../lm-components/constants/url-components.c
 const glnSelectConfigDefault: GlnSelectConfig = {
   exterior: GlnFrameExterior.underline,
   frameSize: GlnFrameSize.wide,
-  panelClass: 'sc-panel',
-  visibleSize: 7,
+  backdropClass: 'sc-backdrop',
+  isMultiple: true,
+  overlayPanelClass: ['sc-overlay-panel'],
+  panelClass: ['sc-panel'],
+  visibleSize: 6,
 };
 
 @Component({

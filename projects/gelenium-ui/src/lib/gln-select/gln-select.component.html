@@ -98,7 +98,7 @@
 </gln-hint-or-error>
 
 <ng-template cdkConnectedOverlay
-  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayBackdropClass]="backdropClassVal || 'cdk-overlay-transparent-backdrop'"
   cdkConnectedOverlayHasBackdrop
   [cdkConnectedOverlayDisableClose]="true"
   cdkConnectedOverlayLockPosition
@@ -114,17 +114,17 @@
 
   <div glnsp-wrap
     class="gln-select-panel-wrap"
-    [ngClass]="[(noAnimation ? 'gln-no-animation' : ''), (getBoolean(noElevation) ? 'gln-no-elevation' : '')]"
+    [ngClass]="[(noAnimation ? 'gln-no-animation' : ''), (getBoolean(noElevationVal) ? 'gln-no-elevation' : '')]"
     [attr.noAnm]="noAnimation ? '' : null"
     (animationend)="hasPanelAnimation = isPanelOpen"
     (animationcancel)="hasPanelAnimation = isPanelOpen">
     <div glns-panel
       class="gln-select-panel"
-      [ngClass]="panelClass"
+      [ngClass]="getPanelClass(panelClassList)"
       role="listbox"
       [attr.id]="id + '-panel'"
       [attr.aria-multiselectable]="multiple"
-      [attr.noElevation]="getBoolean(noElevation) ? '' : null"
+      [attr.noElevation]="getBoolean(noElevationVal) ? '' : null"
       (focus)="doFocusOnPanel()">
       <ng-content select=":not(gln-select-trigger)"></ng-content>
     </div>

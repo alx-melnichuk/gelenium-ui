@@ -11,14 +11,14 @@ export interface GlnSelectConfig extends GlnFrameConfig {
   // labelPd?: number | undefined; // px
   // ornamLfAlign?: GlnFrameOrnamAlign | undefined;
   // ornamRgAlign?: GlnFrameOrnamAlign | undefined;
-
+  backdropClass?: string | undefined; // default 'cdk-overlay-transparent-backdrop'
   isCheckmark?: boolean | undefined;
   isMultiple?: boolean | undefined;
   isNoIcon?: boolean | undefined;
   isNoRipple?: boolean | undefined;
   noElevation?: boolean | undefined;
   overlayPanelClass?: string | string[] | undefined;
-  panelClass?: string | string[] | Set<string> | { [key: string]: unknown } | undefined;
+  panelClass?: string | string[] | Set<string> | { [key: string]: any } | undefined;
   position?: string | undefined; // Horizontal position = 'start' | 'center' | 'end';
-  visibleSize?: number | undefined;
+  visibleSize?: number | undefined; // default 0
 }

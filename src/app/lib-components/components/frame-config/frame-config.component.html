@@ -171,10 +171,10 @@ export class AppComponent &#123;
 </table>
 
 <section mr-vr
-  id="config-with-outlined-small">
+  id="config-frame-provide">
   <h4 class="app-hover-link">
     1. Configuration with "outlined" and "small".
-    <a [href]="urlFrame2 + '#config-with-outlined-small'">#</a>
+    <a [href]="urlFrame2 + '#config-frame-provide'">#</a>
   </h4>
   <p>
     For example, let's prepare a configuration in which:
@@ -191,10 +191,10 @@ const glnFrameConfigDefault: GlnFrameConfig = &#123;
 </section>
 
 <section mr-vr
-  id="config-with-underline-wide">
+  id="config-frame-params">
   <h4 class="app-hover-link">
     2. Configuration with "underline" and "wide".
-    <a [href]="urlFrame2 + '#config-with-underline-wide'">#</a>
+    <a [href]="urlFrame2 + '#config-frame-params'">#</a>
   </h4>
   <p>
     Suppose we have a provider in our application with "GlnFrameConfig" and all input elements
@@ -319,6 +319,9 @@ import &#123;
 import &#123;
   FormControl, FormGroup
 &#125; from '@angular/forms';
+import &#123;
+  GlnFrameExterior, GlnFrameSize, GlnFrameConfig, GLN_FRAME_CONFIG
+&#125; from 'gelenium-ui';
 
 const glnFrameConfigDefault: GlnFrameConfig = &#123;
   exterior: GlnFrameExterior.outlined,
@@ -326,9 +329,9 @@ const glnFrameConfigDefault: GlnFrameConfig = &#123;
 &#125;;
 
 @Component(&#123;
-  selector: 'app-frame-input',
-  templateUrl: './frame-input.component.html',
-  styleUrls: ['./frame-input.component.scss'],
+  selector: 'app-frame',
+  templateUrl: './frame.component.html',
+  styleUrls: ['./frame.component.scss'],
   encapsulation: ViewEncapsulation.None,
   providers: [&#123; provide: GLN_FRAME_CONFIG, useValue: glnFrameConfigDefault &#125;],
 &#125;)

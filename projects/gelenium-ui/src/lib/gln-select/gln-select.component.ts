@@ -130,18 +130,18 @@ export class GlnSelectComponent
   @Input()
   public minLength: number | null | undefined;
   @Input()
-  public noElevation: string | null = null; // -
+  public noElevation: string | null = null;
   @Input()
-  public ornamLfAlign: string | null | undefined; // OrnamAlign // -
+  public ornamLfAlign: string | null | undefined; // OrnamAlign // +
   @Input()
-  public ornamRgAlign: string | null | undefined; // OrnamAlign // -
+  public ornamRgAlign: string | null | undefined; // OrnamAlign // +
   @Input()
   /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
   public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = ''; // -
   @Input()
   public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
   @Input()
-  public visibleSize = -1;
+  public visibleSize = 0;
   @Input()
   public tabIndex = 0; // ~
   @Input()
@@ -207,6 +207,7 @@ export class GlnSelectComponent
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set options(value: GlnOptionComponent[]) {}
 
+  public backdropClassVal: string | null = null;
   public checkmark: boolean | null = null; // Binding attribute "isCheckmark". // interface GlnOptionParent
   public currConfig: GlnSelectConfig | null = null;
   // public disabled: boolean | null = null; // Binding attribute "isDisabled". // Is in GlnBasisControl.
@@ -227,8 +228,9 @@ export class GlnSelectComponent
   public noIcon: boolean | null = null; // Binding attribute "isNoIcon",
   // public noLabel: boolean | null = null; // Binding attribute "isNoLabel". // Is in GlnBasisControl.
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
+  public noElevationVal: boolean | null = null; // Binding attribute "noElevation".
   public overlayPanelClass: string | string[] = '';
-  public panelClassList: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
+  public panelClassList: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
   public positionList: ConnectedPosition[] = [];
   // public readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Is in GlnBasisControl.
   // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisControl.
@@ -238,6 +240,7 @@ export class GlnSelectComponent
   /** The position and dimensions for the trigger's bounding box. */
   public triggerRect: DOMRect | null = null;
   // public valueInit: boolean | null = null; // Binding attribute "isValueInit". // Is in GlnBasisControl.
+  public visibleSizeVal: number | null = null; // Binding attribute "visibleSize".
 
   private isFocusAttrOnFrame = false;
   private markedOption: GlnOptionComponent | null = null;
@@ -284,20 +287,19 @@ export class GlnSelectComponent
       }
     }
     if (changes.isCheckmark || (changes.config && this.isCheckmark == null)) {
-      const isCheckmark = this.isCheckmark != null ? '' + this.isCheckmark : null;
-      this.checkmark = BooleanUtil.init(isCheckmark) || this.currConfig?.isCheckmark || null;
+      this.checkmark = BooleanUtil.init(this.isCheckmark) || this.currConfig?.isCheckmark || null;
     }
     if (changes.isMultiple || (changes.config && this.isMultiple == null)) {
-      const isMultiple = this.isMultiple != null ? '' + this.isMultiple : null;
-      this.multiple = BooleanUtil.init(isMultiple) || this.currConfig?.isMultiple || null;
+      this.multiple = BooleanUtil.init(this.isMultiple) || this.currConfig?.isMultiple || null;
     }
     if (changes.isNoIcon || (changes.config && this.isNoIcon == null)) {
-      const isNoIcon = this.isNoIcon != null ? '' + this.isNoIcon : null;
-      this.noIcon = BooleanUtil.init(isNoIcon) || this.currConfig?.isNoIcon || null;
+      this.noIcon = BooleanUtil.init(this.isNoIcon) || this.currConfig?.isNoIcon || null;
     }
     if (changes.isNoRipple || (changes.config && this.isNoRipple == null)) {
-      const isNoRipple = this.isNoRipple != null ? '' + this.isNoRipple : null;
-      this.noRipple = BooleanUtil.init(isNoRipple) || this.currConfig?.isNoRipple || null;
+      this.noRipple = BooleanUtil.init(this.isNoRipple) || this.currConfig?.isNoRipple || null;
+    }
+    if (changes.noElevation || (changes.config && this.noElevation == null)) {
+      this.noElevationVal = BooleanUtil.init(this.noElevation) || this.currConfig?.isNoRipple || null;
     }
     if (changes.panelClass || (changes.config && this.panelClass == null)) {
       this.panelClassList = this.panelClass || this.currConfig?.panelClass;
@@ -305,10 +307,16 @@ export class GlnSelectComponent
     if (changes.position || (changes.config && this.position == null)) {
       this.positionList = this.getPositionList(this.position || this.currConfig?.position);
     }
+    if (changes.visibleSize || (changes.config && this.visibleSize == null)) {
+      this.visibleSizeVal = this.visibleSize || this.currConfig?.visibleSize || null;
+    }
   }
 
   public override ngOnInit(): void {
     super.ngOnInit();
+    if (this.backdropClassVal == null) {
+      this.backdropClassVal = this.currConfig?.backdropClass || null;
+    }
     if (this.checkmark == null) {
       this.checkmark = this.currConfig?.isCheckmark || null;
     }
@@ -324,6 +332,9 @@ export class GlnSelectComponent
     if (this.noRipple == null) {
       this.noRipple = this.currConfig?.isNoRipple || null;
     }
+    if (this.noElevationVal == null) {
+      this.noElevationVal = this.currConfig?.noElevation || null;
+    }
     if (this.currConfig?.overlayPanelClass) {
       this.overlayPanelClass = this.currConfig.overlayPanelClass;
     }
@@ -332,6 +343,9 @@ export class GlnSelectComponent
     }
     if (this.positionList.length === 0) {
       this.positionList = this.getPositionList(this.currConfig?.position);
+    }
+    if (this.visibleSizeVal == null) {
+      this.visibleSizeVal = this.currConfig?.visibleSize || null;
     }
   }
 
@@ -428,6 +442,11 @@ export class GlnSelectComponent
     HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_EL_MIN_HEIGHT, NumberUtil.str(this.triggerFrameSize)?.concat('px'));
   }
 
+  public getPanelClass(
+    list: string | string[] | Set<string> | { [key: string]: any } | undefined
+  ): string | string[] | Set<string> | { [key: string]: any } {
+    return list ?? '';
+  }
   public isEmpty(): boolean {
     return Array.isArray(this.valueData) ? this.valueData.length === 0 : this.valueData == null;
   }
@@ -570,8 +589,8 @@ export class GlnSelectComponent
       const borderRadius = NumberUtil.roundTo100(this.triggerFrameSize / 10);
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(borderRadius)?.concat('px'));
     }
-    const optionHeigth = this.visibleSize > 0 ? this.getOptionHeigth(this.options) : 0;
-    const maxHeigthSelectPanel = optionHeigth * this.visibleSize;
+    const visibleSize = this.visibleSizeVal ?? 0;
+    const maxHeigthSelectPanel = visibleSize > 0 ? this.getOptionHeigth(this.options) * visibleSize : 0;
     if (maxHeigthSelectPanel > 0) {
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_HEIGHT, NumberUtil.str(maxHeigthSelectPanel)?.concat('px'));
     }
