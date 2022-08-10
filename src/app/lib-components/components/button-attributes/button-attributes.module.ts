@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router'; // routerLink
 
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -13,16 +13,7 @@ import { ButtonAttributesComponent } from './button-attributes.component';
 
 @NgModule({
   declarations: [ButtonAttributesComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-    MatButtonToggleModule,
-    MatExpansionModule,
-    MatTabsModule,
-    GlnButtonModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnButtonModule],
   exports: [ButtonAttributesComponent],
 })
 export class ButtonAttributesModule {}

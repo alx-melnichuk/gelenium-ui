@@ -36,14 +36,44 @@
   <hr br-tp>
 </div>
 
-
-<!-- <div *ngIf="!showNum || showNum==='07'"
-  id="Palette">
-  <app-frame-palette></app-frame-palette>
-  <app-frame-palette2></app-frame-palette2>
-  <app-frame-palette3></app-frame-palette3>
+<section mr-vr
+  *ngIf="!showNum"
+  id="ItemSize">
+  <h3>Item Size</h3>
+  <p>
+    The <a [href]="urlFrame1 + '#FrameSize'">"GlnFrame#FrameSize"</a>
+    page shows you how to resize an element.
+  </p>
   <hr br-tp>
-</div> -->
+</section>
+
+<section mr-vr
+  *ngIf="!showNum"
+  id="HelperText">
+  <h3>Helper text</h3>
+  <p>
+    The <a [href]="urlFrame1 + '#HelperText'">"GlnFrame#HelperText"</a>
+    page shows you how to effectively use the helperText property.
+  </p>
+  <hr br-tp>
+</section>
+
+<section mr-vr
+  *ngIf="!showNum"
+  id="BorderRadius">
+  <h3>Border Radius</h3>
+  <p>
+    The <a [href]="urlFrame1 + '#BorderRadius'">"GlnFrame#BorderRadius"</a>
+    page shows you how to change the rounding radius of an element.
+  </p>
+  <hr br-tp>
+</section>
+
+<div *ngIf="!showNum || showNum==='07'"
+  id="Palette">
+  <app-select-palette></app-select-palette>
+  <hr br-tp>
+</div>
 
 <div *ngIf="!showNum || showNum==='08'"
   id="Config">

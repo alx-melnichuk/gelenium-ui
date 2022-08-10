@@ -4,7 +4,7 @@ import { take } from 'rxjs/operators';
 import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
-const logLabel = 'TextareaComponent';
+const logLabel = 'Textarea';
 
 @Component({
   selector: 'app-textarea',

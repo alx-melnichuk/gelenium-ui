@@ -3,7 +3,7 @@ import { take } from 'rxjs/operators';
 
 import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
 
-const logLabel = 'Button1Component';
+const logLabel = 'Button1';
 
 @Component({
   selector: 'app-button1',

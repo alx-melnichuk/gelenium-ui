@@ -49,51 +49,6 @@ app-button-palette3 {
     --glnbt-o-dis-br-cl:  var(--glnbt--def-cl);
   }
 
-  // OLD =V
-  // ** Style: bstrap "bs-btn" **
-/*
-  .gln-button.bs-btn {
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
-    --glnbt-lb-pd-lf: 0.75rem;
-    --glnbt-lb-pd-rg: 0.75rem;
-  }
-  .gln-button.bs-btn:not(.gln-disabled)>.glnbt-btn {
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-  }
-  .gln-button.bs-btn.gln-disabled>.glnbt-btn {
-    opacity: .65;
-  }
-  .gln-button.bs-btn:not(.gln-disabled)>.glnbt-btn:active,
-  .gln-button.bs-btn:not(.gln-disabled).active>.glnbt-btn {
-    background-color: var(--bs-act-bg-cl);
-  }
-  .gln-button.bs-btn:not(.gln-disabled)>.glnbt-btn:focus-within,
-  .gln-button.bs-btn:not(.gln-disabled).focus>.glnbt-btn {
-    box-shadow: 0 0 0 0.2rem var(--bs-foc-bs-cl);
-  }
-
-  // ** Style: bstrap "bs-btn-contained" **
-
-  .gln-button.bs-btn-contained:not(.gln-disabled)>.glnbt-btn:focus-within,
-  .gln-button.bs-btn-contained:not(.gln-disabled).focus>.glnbt-btn {
-    background-color: var(--bs-c-foc-bg-cl);
-  }
-
-  // ** Style: bstrap "bs-btn-outline" **
-
-  .gln-button.bs-btn-outline:not(.gln-disabled)>.glnbt-btn:hover {
-    color: var(--bs-o-hov-cl);
-  }
-  .gln-button.bs-btn-outline:not(.gln-disabled)>.glnbt-btn:active,
-  .gln-button.bs-btn-outline:not(.gln-disabled).active>.glnbt-btn {
-    color: var(--bs-o-act-cl);
-  }
-  // OLD =^
-*/
   // ** Style: bstrap "Warning" **
 
   .bstr-warning {
@@ -130,7 +85,7 @@ app-button-palette3 {
     --gln-bs-light-h: 210;
     --gln-bs-light-s: 17%;
     --gln-bs-light-l: 98%;
-    // #f8f9fa = hsl(210, 17%, 98%) = RGB(248, 249, 250)
+    // #f8f9fa = hsl(210, 17%, 98%);
     --glnbt-c-def-cl   : #212529;
     --glnbt-c-def-bg-cl: #f8f9fa;
     --glnbt-c-def-br-cl: #f8f9fa;

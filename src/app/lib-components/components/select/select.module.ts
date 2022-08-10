@@ -11,6 +11,7 @@ import { SelectGroupModule } from '../select-group/select-group.module';
 import { SelectTriggerModule } from '../select-trigger/select-trigger.module';
 import { SelectOrnamentsModule } from '../select-ornaments/select-ornaments.module';
 import { SelectConfigModule } from '../select-config/select-config.module';
+import { SelectPaletteModule } from '../select-palette/select-palette.module';
 import { SelectApiModule } from '../select-api/select-api.module';
 
 import { SelectComponent } from './select.component';
@@ -25,10 +26,10 @@ const siteUrls: SiteUrl[] = [
   { label: 'Group', url, fragment: 'Group' },
   { label: 'Trigger', url, fragment: 'Trigger' },
   { label: 'Ornaments', url, fragment: 'Ornaments' },
-  // { label: 'Item size', url, fragment: 'ItemSize' },
-  // { label: 'Helper text', url, fragment: 'HelperText' },
-  // { label: 'Border radius', url, fragment: 'BorderRadius' },
-  // { label: 'Palette', url, fragment: 'Palette' },
+  { label: 'Item size', url, fragment: 'ItemSize' },
+  { label: 'Helper text', url, fragment: 'HelperText' },
+  { label: 'Border radius', url, fragment: 'BorderRadius' },
+  { label: 'Palette', url, fragment: 'Palette' },
   { label: 'Config', url, fragment: 'Config' },
   { label: 'Api', url, fragment: 'Api' },
 ];
@@ -44,6 +45,7 @@ SiteMenu.addItem('Components', 'Select', { label: 'Select', siteUrls });
     SelectGroupModule,
     SelectTriggerModule,
     SelectOrnamentsModule,
+    SelectPaletteModule,
     SelectConfigModule,
     SelectApiModule,
   ],

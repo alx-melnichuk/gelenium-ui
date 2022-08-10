@@ -3,7 +3,7 @@ import { take } from 'rxjs/operators';
 
 import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
 
-const logLabel = 'RegexMatchComponent';
+const logLabel = 'RegexMatch';
 
 @Component({
   selector: 'app-regex-match',

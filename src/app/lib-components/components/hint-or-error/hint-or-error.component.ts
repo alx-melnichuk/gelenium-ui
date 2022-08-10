@@ -3,7 +3,7 @@ import { take } from 'rxjs/operators';
 
 import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
 
-const logLabel = 'HintOrErrorComponent';
+const logLabel = 'HintOrError';
 
 @Component({
   selector: 'app-hint-or-error',
