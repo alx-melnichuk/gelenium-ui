@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { UrlParamUtil } from 'gelenium-ui';
-import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
+import { UrlComponents } from '../../../lib-components/lib-components.constants';
 
 import {
   LABEL_CSS,
@@ -38,7 +38,7 @@ export class FrameFeatureComponent implements OnInit {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlFrame2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME2');
+  public urlFrame2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
 
   public exterior08a = 'outlined';
 

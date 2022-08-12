@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { GlnFrameExterior, GlnFrameSize, GlnSelectConfig, GLN_SELECT_CONFIG } from 'gelenium-ui';
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants';
-import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
+import { UrlComponents } from '../../../lib-components/lib-components.constants';
 
 const glnSelectConfigDefault: GlnSelectConfig = {
   exterior: GlnFrameExterior.underline,
@@ -35,7 +35,7 @@ export class SelectConfigComponent {
   public labelCss = LABEL_CSS;
 
   public urlSelect = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_SELECT');
-  public urlFrame2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME2');
+  public urlFrame2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
 
   public salad = [
     'lettuce (lettuce)',

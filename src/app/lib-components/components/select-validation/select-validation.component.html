@@ -73,7 +73,7 @@
         [minLength]="minLength03b"
         [helperText]="!controls03.model03b.value
           ?'Required field.'
-          :(controls03.model03b.errors!['minlength']
+          :((controls03.model03b.errors || {})['minlength']
             ?'The minimum number of options is '
             + controls03.model03b.errors!['minlength'].requiredLength
             + '.'
@@ -160,7 +160,7 @@
         [minLength]="minLength03b"
         [helperText]="!controls03.model03b.value
           ?'Required field.'
-          :(controls03.model03b.errors!['minlength']
+          :((controls03.model03b.errors || &#123;&#125;)['minlength']
             ?'The minimum number of options is '
             + controls03.model03b.errors!['minlength'].requiredLength
             + '.'

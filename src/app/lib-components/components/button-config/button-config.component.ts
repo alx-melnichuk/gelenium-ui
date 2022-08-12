@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@a
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants';
 
-import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
+import { UrlComponents } from '../../../lib-components/lib-components.constants';
 
 @Component({
   selector: 'app-button-config',
@@ -21,7 +21,7 @@ export class ButtonConfigComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlFrame1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME1');
+  public urlFrame1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

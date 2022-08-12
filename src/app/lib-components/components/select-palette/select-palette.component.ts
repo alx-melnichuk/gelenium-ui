@@ -10,7 +10,7 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../../lib-core/constants';
-import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
+import { UrlComponents } from '../../../lib-components/lib-components.constants';
 
 @Component({
   selector: 'app-select-palette',

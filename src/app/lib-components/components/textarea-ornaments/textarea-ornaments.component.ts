@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { GlnFrameConfig, GlnFrameOrnamAlign } from 'gelenium-ui';
-import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
+import { UrlComponents } from '../../../lib-components/lib-components.constants';
 
 import {
   LABEL_CSS,

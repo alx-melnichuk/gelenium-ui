@@ -69,7 +69,7 @@
         [minLength]="minLength03b"
         [helperText]="!controls03.model03b.value
           ?'Required field.'
-          :(controls03.model03b.errors!['minlength']
+          :((controls03.model03b.errors || {})['minlength']
             ?'Minimum length '
             + controls03.model03b.errors!['minlength'].requiredLength
             + ' characters.'
@@ -145,7 +145,7 @@
         [minLength]="minLength03b"
         [helperText]="!controls03.model03b.value
           ?'Required field.'
-          :(controls03.model03b.errors!['minlength']
+          :((controls03.model03b.errors || &#123;&#125;)['minlength']
             ?'Minimum length '
             + controls03.model03b.errors!['minlength'].requiredLength
             + ' characters.'

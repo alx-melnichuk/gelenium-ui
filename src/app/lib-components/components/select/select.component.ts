@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsul
 import { take } from 'rxjs/operators';
 
 import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
-import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
+import { UrlComponents } from '../../../lib-components/lib-components.constants';
 
 const logLabel = 'Select';
 
@@ -16,7 +16,7 @@ const logLabel = 'Select';
 export class SelectComponent implements AfterViewInit {
   public showNum = '';
 
-  public urlFrame1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME1');
+  public urlFrame1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

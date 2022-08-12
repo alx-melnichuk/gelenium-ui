@@ -1,12 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AutoFocuseComponent } from '../lib-directives/components/auto-focuse/auto-focuse.component';
-import { RegexCheckComponent } from '../lib-directives/components/regex-check/regex-check.component';
-import { RegexMatchComponent } from '../lib-directives/components/regex-match/regex-match.component';
-import { RegexRemoveComponent } from '../lib-directives/components/regex-remove/regex-remove.component';
+import { UrlDirectives } from '../lib-directives/lib-directives.constants';
 
-import { UrlDirectives } from './constants/url-directives.constants';
 import { LmDirectivesComponent } from './lm-directives.component';
 
 const URL_AUTO_FOCUSE = UrlDirectives.get('URL_AUTO_FOCUSE');
@@ -19,10 +15,22 @@ const routes: Routes = [
     path: '',
     component: LmDirectivesComponent,
     children: [
-      { path: URL_AUTO_FOCUSE, component: AutoFocuseComponent },
-      { path: URL_REGEX_CHECK, component: RegexCheckComponent },
-      { path: URL_REGEX_MATCH, component: RegexMatchComponent },
-      { path: URL_REGEX_REMOVE, component: RegexRemoveComponent },
+      {
+        path: URL_AUTO_FOCUSE,
+        loadChildren: () => import('../lib-directives/components/auto-focuse/auto-focuse.module').then((m) => m.AutoFocuseModule),
+      },
+      {
+        path: URL_REGEX_CHECK,
+        loadChildren: () => import('../lib-directives/components/regex-check/regex-check.module').then((m) => m.RegexCheckModule),
+      },
+      {
+        path: URL_REGEX_MATCH,
+        loadChildren: () => import('../lib-directives/components/regex-match/regex-match.module').then((m) => m.RegexMatchModule),
+      },
+      {
+        path: URL_REGEX_REMOVE,
+        loadChildren: () => import('../lib-directives/components/regex-remove/regex-remove.module').then((m) => m.RegexRemoveModule),
+      },
       { path: '**', redirectTo: URL_REGEX_CHECK },
     ],
   },

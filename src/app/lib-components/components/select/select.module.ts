@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SiteMenuUtil, SiteUrl } from '../../../lib-core/utils/site-menu.util';
-import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
-
 import { SelectBasicModule } from '../select-basic/select-basic.module';
 import { SelectAttributesModule } from '../select-attributes/select-attributes.module';
 import { SelectValidationModule } from '../select-validation/select-validation.module';
@@ -15,25 +12,7 @@ import { SelectPaletteModule } from '../select-palette/select-palette.module';
 import { SelectApiModule } from '../select-api/select-api.module';
 
 import { SelectComponent } from './select.component';
-
-UrlComponents.add('URL_SELECT', 'select');
-
-const url = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_SELECT');
-const siteUrls: SiteUrl[] = [
-  { label: 'Basic', url, fragment: 'Basic' },
-  { label: 'Attributes', url, fragment: 'Attributes' },
-  { label: 'Validation', url, fragment: 'Validation' },
-  { label: 'Group', url, fragment: 'Group' },
-  { label: 'Trigger', url, fragment: 'Trigger' },
-  { label: 'Ornaments', url, fragment: 'Ornaments' },
-  { label: 'Item size', url, fragment: 'ItemSize' },
-  { label: 'Helper text', url, fragment: 'HelperText' },
-  { label: 'Border radius', url, fragment: 'BorderRadius' },
-  { label: 'Palette', url, fragment: 'Palette' },
-  { label: 'Config', url, fragment: 'Config' },
-  { label: 'Api', url, fragment: 'Api' },
-];
-SiteMenuUtil.addItem('Components', 'Select', { label: 'Select', siteUrls });
+import { SelectRoutingModule } from './select-routing.module';
 
 @NgModule({
   declarations: [SelectComponent],
@@ -48,6 +27,7 @@ SiteMenuUtil.addItem('Components', 'Select', { label: 'Select', siteUrls });
     SelectPaletteModule,
     SelectConfigModule,
     SelectApiModule,
+    SelectRoutingModule,
   ],
   exports: [SelectComponent],
 })

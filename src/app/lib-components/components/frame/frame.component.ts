@@ -3,16 +3,16 @@ import { take } from 'rxjs/operators';
 
 import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
 
-const logLabel = 'Button2';
+const logLabel = 'Frame';
 
 @Component({
-  selector: 'app-button2',
-  templateUrl: './button2.component.html',
-  styleUrls: ['./button2.component.scss'],
+  selector: 'app-frame',
+  templateUrl: './frame.component.html',
+  styleUrls: ['./frame.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Button2Component implements AfterViewInit {
+export class FrameComponent implements AfterViewInit {
   public showNum = '';
 
   constructor(private ngZone: NgZone) {
