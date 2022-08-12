@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { GlnFrameExterior, GlnFrameSize, GlnSelectConfig, GLN_SELECT_CONFIG } from 'gelenium-ui';
 
-import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants/constants';
+import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants';
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 const glnSelectConfigDefault: GlnSelectConfig = {

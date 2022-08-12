@@ -9,7 +9,7 @@ import {
   LABEL_STANDARD,
   LABEL_TS,
   LABEL_UNDERLINE,
-} from '../../../lib-core/constants/constants';
+} from '../../../lib-core/constants';
 
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 

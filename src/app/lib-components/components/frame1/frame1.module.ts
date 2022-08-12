@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SiteMenu, SiteUrl } from '../../../lib-core/constants/site-menu';
+import { SiteMenuUtil, SiteUrl } from '../../../lib-core/utils/site-menu.util';
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 import { FrameBasicModule } from '../frame-basic/frame-basic.module';
@@ -24,7 +24,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Helper text', url, fragment: 'HelperText' },
   { label: 'Border radius', url, fragment: 'BorderRadius' },
 ];
-SiteMenu.addItem('Components', 'Frame part 1', { label: 'Frame part 1', siteUrls });
+SiteMenuUtil.addItem('Components', 'Frame part 1', { label: 'Frame part 1', siteUrls });
 
 @NgModule({
   declarations: [Frame1Component],

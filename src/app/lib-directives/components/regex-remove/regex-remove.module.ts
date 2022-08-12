@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SiteMenu, SiteUrl } from '../../../lib-core/constants/site-menu';
+import { SiteMenuUtil, SiteUrl } from '../../../lib-core/utils/site-menu.util';
 import { UrlDirectives } from 'src/app/lm-directives/constants/url-directives.constants';
 
 import { RegexRemoveBasicModule } from '../regex-remove-basic/regex-remove-basic.module';
@@ -16,7 +16,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Basic', url, fragment: 'Basic' },
   { label: 'Api', url, fragment: 'Api' },
 ];
-SiteMenu.addItem('Directives', 'RegexRemove', { label: 'RegexRemove', siteUrls });
+SiteMenuUtil.addItem('Directives', 'RegexRemove', { label: 'RegexRemove', siteUrls });
 
 @NgModule({
   declarations: [RegexRemoveComponent],

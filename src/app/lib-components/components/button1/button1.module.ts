@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SiteMenu, SiteUrl } from '../../../lib-core/constants/site-menu';
+import { SiteMenuUtil, SiteUrl } from '../../../lib-core/utils/site-menu.util';
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 import { ButtonBasicModule } from '../button-basic/button-basic.module';
@@ -20,7 +20,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Size', url, fragment: 'Size' },
   { label: 'Border Radius', url, fragment: 'BorderRadius' },
 ];
-SiteMenu.addItem('Components', 'Button part 1', { label: 'Button part 1', siteUrls });
+SiteMenuUtil.addItem('Components', 'Button part 1', { label: 'Button part 1', siteUrls });
 
 @NgModule({
   declarations: [Button1Component],

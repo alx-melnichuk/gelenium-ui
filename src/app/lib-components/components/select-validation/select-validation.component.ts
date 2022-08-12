@@ -9,7 +9,7 @@ import {
   LABEL_STANDARD,
   LABEL_TS,
   LABEL_UNDERLINE,
-} from '../../../lib-core/constants/constants';
+} from '../../../lib-core/constants';
 
 @Component({
   selector: 'app-select-validation',

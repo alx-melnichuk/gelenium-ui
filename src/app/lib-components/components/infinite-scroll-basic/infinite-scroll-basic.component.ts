@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { LABEL_SHOW_SOURCE, LABEL_HTML, LABEL_TS, LABEL_CSS } from '../../../lib-core/constants/constants';
+import { LABEL_SHOW_SOURCE, LABEL_HTML, LABEL_TS, LABEL_CSS } from '../../../lib-core/constants';
 
 export interface Element {
   name: string;

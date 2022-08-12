@@ -4,15 +4,7 @@ import { UrlComponents } from '../../../lm-components/constants/url-components.c
 
 import { GlnButtonConfig, GlnFrameSize, GlnFrameSizeUtil } from 'gelenium-ui';
 
-import {
-  BTN_CONTAINED,
-  BTN_OUTLINED,
-  BTN_TEXT,
-  LABEL_CSS,
-  LABEL_HTML,
-  LABEL_SHOW_SOURCE,
-  LABEL_TS,
-} from '../../../lib-core/constants/constants';
+import { BTN_CONTAINED, BTN_OUTLINED, BTN_TEXT, LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants';
 
 @Component({
   selector: 'app-button-border-radius',

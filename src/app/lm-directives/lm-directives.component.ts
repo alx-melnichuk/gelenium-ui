@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { EXPANDED_HEIGHT } from '../lib-core/constants/constants';
-import { SiteItem, SiteMenu, SiteUrl } from '../lib-core/constants/site-menu';
+import { EXPANDED_HEIGHT } from '../lib-core/constants';
+import { SiteItem, SiteMenuUtil, SiteUrl } from '../lib-core/utils/site-menu.util';
 
 @Component({
   selector: 'app-lm-directives',
@@ -11,13 +11,13 @@ import { SiteItem, SiteMenu, SiteUrl } from '../lib-core/constants/site-menu';
 })
 export class LmDirectivesComponent {
   public expandedHeight = EXPANDED_HEIGHT;
-  public itemDataList: SiteItem[] = SiteMenu.getItems('Directives');
+  public itemDataList: SiteItem[] = SiteMenuUtil.getItems('Directives');
 
   constructor() {
     for (let idx = 0; idx < this.itemDataList.length; idx++) {
       this.itemDataList[idx].expanded = false;
     }
-    const siteItem: SiteItem | null = SiteMenu.findSiteItemByUrl(this.itemDataList, location.pathname);
+    const siteItem: SiteItem | null = SiteMenuUtil.findSiteItemByUrl(this.itemDataList, location.pathname);
     if (siteItem) {
       siteItem.expanded = true;
     }

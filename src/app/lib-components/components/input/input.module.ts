@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SiteMenu, SiteUrl } from '../../../lib-core/constants/site-menu';
+import { SiteMenuUtil, SiteUrl } from '../../../lib-core/utils/site-menu.util';
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 import { InputBasicModule } from '../input-basic/input-basic.module';
@@ -29,7 +29,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Config', url, fragment: 'Config' },
   { label: 'Api', url, fragment: 'Api' },
 ];
-SiteMenu.addItem('Components', 'Input', { label: 'Input', siteUrls });
+SiteMenuUtil.addItem('Components', 'Input', { label: 'Input', siteUrls });
 
 @NgModule({
   declarations: [InputComponent],

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SiteMenu, SiteUrl } from '../../../lib-core/constants/site-menu';
+import { SiteMenuUtil, SiteUrl } from '../../../lib-core/utils/site-menu.util';
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 import { InfiniteScrollBasicModule } from '../infinite-scroll-basic/infinite-scroll-basic.module';
@@ -18,7 +18,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Optional', url, fragment: 'Optional' },
   { label: 'Api', url, fragment: 'Api' },
 ];
-SiteMenu.addItem('Components', 'InfiniteScroll', { label: 'InfiniteScroll', siteUrls });
+SiteMenuUtil.addItem('Components', 'InfiniteScroll', { label: 'InfiniteScroll', siteUrls });
 
 @NgModule({
   declarations: [InfiniteScrollComponent],

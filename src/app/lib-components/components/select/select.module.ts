@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SiteMenu, SiteUrl } from '../../../lib-core/constants/site-menu';
+import { SiteMenuUtil, SiteUrl } from '../../../lib-core/utils/site-menu.util';
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 import { SelectBasicModule } from '../select-basic/select-basic.module';
@@ -33,7 +33,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Config', url, fragment: 'Config' },
   { label: 'Api', url, fragment: 'Api' },
 ];
-SiteMenu.addItem('Components', 'Select', { label: 'Select', siteUrls });
+SiteMenuUtil.addItem('Components', 'Select', { label: 'Select', siteUrls });
 
 @NgModule({
   declarations: [SelectComponent],

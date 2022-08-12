@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SiteMenu, SiteUrl } from '../../../lib-core/constants/site-menu';
+import { SiteMenuUtil, SiteUrl } from '../../../lib-core/utils/site-menu.util';
 import { UrlComponents } from '../../../lm-components/constants/url-components.constants';
 
 import { FramePaletteModule } from '../frame-palette/frame-palette.module';
@@ -24,7 +24,7 @@ const siteUrls: SiteUrl[] = [
   { label: 'Config', url, fragment: 'Config' },
   { label: 'Api', url, fragment: 'Api' },
 ];
-SiteMenu.addItem('Components', 'Frame part 2', { label: 'Frame part 2', siteUrls });
+SiteMenuUtil.addItem('Components', 'Frame part 2', { label: 'Frame part 2', siteUrls });
 
 @NgModule({
   declarations: [Frame2Component],
