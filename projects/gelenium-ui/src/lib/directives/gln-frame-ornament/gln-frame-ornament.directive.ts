@@ -43,10 +43,10 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
       }
       this.isInit = false;
     }
-    if (changes.glnFrameOrnamentLfAlign && this.ornamentLfElemRef) {
+    if (changes['glnFrameOrnamentLfAlign'] && this.ornamentLfElemRef) {
       this.settingOrnamentLeft(this.renderer, this.glnFrameOrnamentLfAlign || null, this.ornamentLfElemRef);
     }
-    if (changes.glnFrameOrnamentRgAlign && this.ornamentRgElemRef) {
+    if (changes['glnFrameOrnamentRgAlign'] && this.ornamentRgElemRef) {
       this.settingOrnamentRight(this.renderer, this.glnFrameOrnamentRgAlign || null, this.ornamentRgElemRef);
     }
   }

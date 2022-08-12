@@ -162,9 +162,9 @@
         helperText="
         {{(!controls06a.model06e.value ?
           'Required field.':
-          (controls06a.model06e.errors?.minlength ?
+          (controls06a.model06e.errors!['minlength'] ?
             'Minimum length '
-            + controls06a.model06e.errors?.minlength.requiredLength
+            + controls06a.model06e.errors!['minlength'].requiredLength
             + ' characters.'
             :'Enter value.'
           )
@@ -274,9 +274,9 @@
         helperText="
       <b>&#123;</b>&#123;(!controls06a.model06e.value ?
           'Required field.':
-          (controls06a.model06e.errors?.minlength ?
+          (controls06a.model06e.errors!['minlength'] ?
             'Minimum length '
-            + controls06a.model06e.errors?.minlength.requiredLength
+            + controls06a.model06e.errors!['minlength'].requiredLength
             + ' characters.'
             :'Enter value.'
           )

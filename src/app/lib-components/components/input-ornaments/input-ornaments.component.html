@@ -116,13 +116,13 @@
         [helperText]="
           (!controls05.model05c.value
           ? 'Required field.'
-          : (controls05.model05c.errors?.minlength
+          : ((controls05.model05c.errors || {})['minlength']
             ? 'Minimum length '
-            + controls05.model05c.errors?.minlength.requiredLength
+            + controls05.model05c.errors!['minlength'].requiredLength
             + ' characters.'
-            : (controls05.model05c.errors?.maxlength
+            : ((controls05.model05c.errors || {})['maxlength']
               ? 'Maximum length '
-              + controls05.model05c.errors?.maxlength.requiredLength
+              + controls05.model05c.errors!['maxlength'].requiredLength
               + ' characters.'
               :'')
             )
@@ -147,13 +147,13 @@
         [helperText]="
           (!controls05.model05d.value
           ? 'Required field.'
-          : (controls05.model05d.errors?.minlength
+          : (controls05.model05d.errors!['minlength']
             ? 'Minimum length '
-            + controls05.model05d.errors?.minlength.requiredLength
+            + controls05.model05d.errors!['minlength'].requiredLength
             + ' characters.'
-            : (controls05.model05d.errors?.maxlength
+            : (controls05.model05d.errors!['maxlength']
               ? 'Maximum length '
-              + controls05.model05d.errors?.maxlength.requiredLength
+              + controls05.model05d.errors!['maxlength'].requiredLength
               + ' characters.'
               :'')
             )
@@ -284,13 +284,13 @@
         <button gln-orn-lf
           class="io-btn io-uncode2"
           (click)="controls05.model05i.setValue(
-            (controls05.model05i.value || 0) - 1)">
+            toStr(toNum(controls05.model05i.value || 0) - 1))">
           &#8854;
         </button>
         <button gln-orn-rg
           class="io-btn io-uncode2"
           (click)="controls05.model05i.setValue(
-            (controls05.model05i.value || 0) + 1)">
+            toStr(toNum(controls05.model05i.value || 0) + 1))">
           &#8853;
         </button>
       </gln-input>
@@ -448,13 +448,13 @@
         [helperText]="
           (!controls05.model05c.value
           ? 'Required field.'
-          : (controls05.model05c.errors?.minlength
+          : ((controls05.model05c.errors || &#123;&#125;)['minlength']
             ? 'Minimum length '
-            + controls05.model05c.errors?.minlength.requiredLength
+            + controls05.model05c.errors!['minlength'].requiredLength
             + ' characters.'
-            : (controls05.model05c.errors?.maxlength
+            : ((controls05.model05c.errors || &#123;&#125;)['maxlength']
               ? 'Maximum length '
-              + controls05.model05c.errors?.maxlength.requiredLength
+              + controls05.model05c.errors!['maxlength'].requiredLength
               + ' characters.'
               :'')
             )
@@ -479,13 +479,13 @@
         [helperText]="
           (!controls05.model05d.value
           ? 'Required field.'
-          : (controls05.model05d.errors?.minlength
+          : (controls05.model05d.errors!['minlength']
             ? 'Minimum length '
-            + controls05.model05d.errors?.minlength.requiredLength
+            + controls05.model05d.errors!['minlength'].requiredLength
             + ' characters.'
-            : (controls05.model05d.errors?.maxlength
+            : (controls05.model05d.errors!['maxlength']
               ? 'Maximum length '
-              + controls05.model05d.errors?.maxlength.requiredLength
+              + controls05.model05d.errors!['maxlength'].requiredLength
               + ' characters.'
               :'')
             )
@@ -616,13 +616,13 @@
         &lt;button gln-orn-lf
           class="io-btn io-uncode2"
           (click)="controls05.model05i.setValue(
-            (controls05.model05i.value || 0) - 1)"&gt;
+            toStr(toNum(controls05.model05i.value || 0) - 1))"&gt;
           &amp;#8854;
         &lt;/button&gt;
         &lt;button gln-orn-rg
           class="io-btn io-uncode2"
           (click)="controls05.model05i.setValue(
-            (controls05.model05i.value || 0) + 1)"&gt;
+            toStr(toNum(controls05.model05i.value || 0) + 1))"&gt;
           &amp;#8853;
         &lt;/button&gt;
       &lt;/gln-input&gt;
@@ -747,6 +747,13 @@ export class InputComponent &#123;
     ornamRgAlign: OrnamAlign | undefined
   ): void &#123;
     this.config05 = &#123; ornamLfAlign, ornamRgAlign &#125;;
+  &#125;
+
+  public toStr(value: number): string &#123;
+    return String(value);
+  &#125;
+  public toNum(value: any): number &#123;
+    return Number(value);
   &#125;
 &#125;</pre></code>
         </mat-tab>

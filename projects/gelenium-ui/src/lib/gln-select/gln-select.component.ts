@@ -211,7 +211,7 @@ export class GlnSelectComponent
   public checkmark: boolean | null = null; // Binding attribute "isCheckmark". // interface GlnOptionParent
   public currConfig: GlnSelectConfig | null = null;
   // public disabled: boolean | null = null; // Binding attribute "isDisabled". // Is in GlnBasisControl.
-  public error: boolean | null = null; // Binding attribute "isError". // Is in GlnBasisControl.
+  // public error: boolean | null = null; // Binding attribute "isError". // Is in GlnBasisControl.
   public errors: ValidationErrors | null = null;
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
@@ -280,34 +280,34 @@ export class GlnSelectComponent
     // - this.required = BooleanUtil.init(this.isRequired);
     // - this.valueInit = BooleanUtil.init(this.isValueInit);
     super.ngOnChanges(changes);
-    if (changes.config) {
+    if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
       if (this.noAnimation == null) {
         this.noAnimation = this.currConfig?.isNoAnimation || null;
       }
     }
-    if (changes.isCheckmark || (changes.config && this.isCheckmark == null)) {
+    if (changes['isCheckmark'] || (changes['config'] && this.isCheckmark == null)) {
       this.checkmark = BooleanUtil.init(this.isCheckmark) || this.currConfig?.isCheckmark || null;
     }
-    if (changes.isMultiple || (changes.config && this.isMultiple == null)) {
+    if (changes['isMultiple'] || (changes['config'] && this.isMultiple == null)) {
       this.multiple = BooleanUtil.init(this.isMultiple) || this.currConfig?.isMultiple || null;
     }
-    if (changes.isNoIcon || (changes.config && this.isNoIcon == null)) {
+    if (changes['isNoIcon'] || (changes['config'] && this.isNoIcon == null)) {
       this.noIcon = BooleanUtil.init(this.isNoIcon) || this.currConfig?.isNoIcon || null;
     }
-    if (changes.isNoRipple || (changes.config && this.isNoRipple == null)) {
+    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null)) {
       this.noRipple = BooleanUtil.init(this.isNoRipple) || this.currConfig?.isNoRipple || null;
     }
-    if (changes.noElevation || (changes.config && this.noElevation == null)) {
+    if (changes['noElevation'] || (changes['config'] && this.noElevation == null)) {
       this.noElevationVal = BooleanUtil.init(this.noElevation) || this.currConfig?.isNoRipple || null;
     }
-    if (changes.panelClass || (changes.config && this.panelClass == null)) {
+    if (changes['panelClass'] || (changes['config'] && this.panelClass == null)) {
       this.panelClassList = this.panelClass || this.currConfig?.panelClass;
     }
-    if (changes.position || (changes.config && this.position == null)) {
+    if (changes['position'] || (changes['config'] && this.position == null)) {
       this.positionList = this.getPositionList(this.position || this.currConfig?.position);
     }
-    if (changes.visibleSize || (changes.config && this.visibleSize == null)) {
+    if (changes['visibleSize'] || (changes['config'] && this.visibleSize == null)) {
       this.visibleSizeVal = this.visibleSize || this.currConfig?.visibleSize || null;
     }
   }

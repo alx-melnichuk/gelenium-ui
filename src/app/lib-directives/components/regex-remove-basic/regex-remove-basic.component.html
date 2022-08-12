@@ -161,7 +161,7 @@
           ? 'Enter value.':'The value is correct.')
         :'The value is not correct.'"
         (change)="control01.model01d.setValue(
-          control01.model01d.value?.trim())"
+          control01.model01d.value!.trim())"
         [exterior]="exterior01">
       </gln-input>
     </div>

@@ -8,12 +8,9 @@ describe('SiteSchemeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SiteSchemeComponent ]
-    })
-    .compileComponents();
-  });
+      declarations: [SiteSchemeComponent],
+    }).compileComponents();
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(SiteSchemeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

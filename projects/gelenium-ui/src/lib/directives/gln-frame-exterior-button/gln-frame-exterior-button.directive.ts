@@ -28,10 +28,10 @@ export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizeP
   constructor(private hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.glnFrameExteriorButtonElementRef) {
+    if (changes['glnFrameExteriorButtonElementRef']) {
       this.elementRef = this.glnFrameExteriorButtonElementRef || this.hostRef;
     }
-    if (changes.glnFrameExteriorButton) {
+    if (changes['glnFrameExteriorButton']) {
       const exteriorInp = GlnButtonExteriorUtil.convert(this.glnFrameExteriorButton || null);
       const exterior = GlnButtonExteriorUtil.create(exteriorInp);
       if (this.exterior !== exterior) {

@@ -66,16 +66,16 @@
         </small>
       </div>
       <gln-select formControlName="model03b"
-        [label]="controls03.model03b.value?.length >= minLength03b
+        [label]="(controls03.model03b.value || '')['length'] >= minLength03b
           ? 'Value' : 'Error'"
         isMultiple
         isRequired
         [minLength]="minLength03b"
-        [helperText]="!controls03.model03b.value.length
+        [helperText]="!controls03.model03b.value
           ?'Required field.'
-          :(controls03.model03b.errors?.minlength
+          :(controls03.model03b.errors!['minlength']
             ?'The minimum number of options is '
-            + controls03.model03b.errors?.minlength.requiredLength
+            + controls03.model03b.errors!['minlength'].requiredLength
             + '.'
             :'Enter value.')"
         [exterior]="exterior03a"
@@ -153,16 +153,16 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-select formControlName="model03b"
-        [label]="controls03.model03b.value?.length &gt;= minLength03b
+        [label]="(controls03.model03b.value || '')['length'] &gt;= minLength03b
           ? 'Value' : 'Error'"
         isMultiple
         isRequired
         [minLength]="minLength03b"
-        [helperText]="!controls03.model03b.value.length
+        [helperText]="!controls03.model03b.value
           ?'Required field.'
-          :(controls03.model03b.errors?.minlength
+          :(controls03.model03b.errors!['minlength']
             ?'The minimum number of options is '
-            + controls03.model03b.errors?.minlength.requiredLength
+            + controls03.model03b.errors!['minlength'].requiredLength
             + '.'
             :'Enter value.')"
         [exterior]="exterior03a"

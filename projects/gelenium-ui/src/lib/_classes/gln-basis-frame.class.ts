@@ -70,32 +70,32 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.isDisabled) {
+    if (changes['isDisabled']) {
       this.disabled = BooleanUtil.init(this.isDisabled);
       this.setDisabledState(!!this.disabled);
     }
-    if (changes.isError) {
+    if (changes['isError']) {
       this.error = BooleanUtil.init(this.isError);
     }
-    if (changes.isHoverColor) {
+    if (changes['isHoverColor']) {
       this.hoverColor = BooleanUtil.init(this.isHoverColor);
     }
-    if (changes.isLabelShrink) {
+    if (changes['isLabelShrink']) {
       this.labelShrink = BooleanUtil.init(this.isLabelShrink);
     }
-    if (changes.isNoAnimation) {
+    if (changes['isNoAnimation']) {
       this.noAnimation = BooleanUtil.init(this.isNoAnimation);
     }
-    if (changes.isNoLabel) {
+    if (changes['isNoLabel']) {
       this.noLabel = BooleanUtil.init(this.isNoLabel);
     }
-    if (changes.isReadOnly) {
+    if (changes['isReadOnly']) {
       this.readOnly = BooleanUtil.init(this.isReadOnly);
     }
-    if (changes.isRequired) {
+    if (changes['isRequired']) {
       this.required = BooleanUtil.init(this.isRequired);
     }
-    if (changes.isValueInit) {
+    if (changes['isValueInit']) {
       this.valueInit = BooleanUtil.init(this.isValueInit);
     }
   }

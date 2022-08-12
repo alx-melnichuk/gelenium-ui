@@ -1,5 +1,5 @@
-export * from './lib-geranium.service';
-export * from './lib-geranium.module';
+export * from './gelenium-ui.service';
+export * from './gelenium-ui.module';
 
 export * from './_decorators/public-api';
 export * from './_utils/public-api';

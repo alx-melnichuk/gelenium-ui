@@ -42,7 +42,7 @@ export class GlnRegexRemoveDirective implements OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.glnRegexRemove) {
+    if (changes['glnRegexRemove']) {
       this.regex = RegexUtil.create(this.glnRegexRemove);
     }
   }

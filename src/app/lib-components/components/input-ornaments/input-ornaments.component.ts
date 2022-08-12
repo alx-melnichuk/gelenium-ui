@@ -79,4 +79,11 @@ export class InputOrnamentsComponent {
   public changeConfig05(ornamLfAlign: GlnFrameOrnamAlign | undefined, ornamRgAlign: GlnFrameOrnamAlign | undefined): void {
     this.config05 = { ornamLfAlign, ornamRgAlign };
   }
+
+  public toStr(value: number): string {
+    return String(value);
+  }
+  public toNum(value: any): number {
+    return Number(value);
+  }
 }

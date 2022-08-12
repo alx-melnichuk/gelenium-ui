@@ -130,7 +130,7 @@ export class GlnInputComponent
 
   public currConfig: GlnFrameConfig | null = null;
   // public disabled: boolean | null = null; // Binding attribute "isDisabled". // Is in GlnBasisControl.
-  public error: boolean | null = null; // Binding attribute "isError". // Is in GlnBasisControl.
+  // public error: boolean | null = null; // Binding attribute "isError". // Is in GlnBasisControl.
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
@@ -173,13 +173,13 @@ export class GlnInputComponent
     // - this.required = BooleanUtil.init(this.isRequired);
     // - this.valueInit = BooleanUtil.init(this.isValueInit);
     super.ngOnChanges(changes);
-    if (changes.type) {
+    if (changes['type']) {
       this.typeVal = GlnInputTypeUtil.create(this.type) || GlnInputType.text;
     }
-    if (changes.config) {
+    if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
-    if (changes.isRequired || changes.minLength || changes.maxLength) {
+    if (changes['isRequired'] || changes['minLength'] || changes['maxLength']) {
       this.prepareFormGroup(this.required, this.minLength, this.maxLength);
     }
   }

@@ -10,9 +10,7 @@ describe('InputBasicComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [InputBasicComponent],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(InputBasicComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

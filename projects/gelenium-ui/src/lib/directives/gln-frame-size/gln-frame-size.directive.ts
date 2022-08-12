@@ -44,14 +44,14 @@ export class GlnFrameSizeDirective implements OnChanges {
     if (this.isBeforeInit) {
       this.isBeforeInit = false;
     }
-    if (changes.glnFrameSizeElementRef) {
+    if (changes['glnFrameSizeElementRef']) {
       this.elementRef = this.glnFrameSizeElementRef || this.hostRef;
     }
     if (this.lineHeight === 0) {
       this.lineHeight = this.getLineHeight(this.hostRef);
     }
-    let isModify = !!changes.glnFrameSizeLabelPd || !!changes.glnFrameSizeModify;
-    if (changes.glnFrameSize || changes.glnFrameSizeValue) {
+    let isModify = !!changes['glnFrameSizeLabelPd'] || !!changes['glnFrameSizeModify'];
+    if (changes['glnFrameSize'] || changes['glnFrameSizeValue']) {
       const frameSizeValueOld = this.frameSizeValue;
       const frameSize = GlnFrameSizeUtil.convert(this.glnFrameSize || null);
       this.frameSizeValue = GlnFrameSizeUtil.getValue(frameSize) || this.glnFrameSizeValue || 0;

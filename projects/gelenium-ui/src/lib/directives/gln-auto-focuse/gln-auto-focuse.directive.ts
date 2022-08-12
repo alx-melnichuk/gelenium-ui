@@ -28,7 +28,7 @@ export class GlnAutoFocuseDirective implements OnChanges, AfterViewInit {
   constructor(public hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.glnAutoFocuse) {
+    if (changes['glnAutoFocuse']) {
       this.autoFocuse = !!BooleanUtil.init(this.glnAutoFocuse != null ? '' + this.glnAutoFocuse : null);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'auto-focuse', this.autoFocuse ? '' : null);
     }

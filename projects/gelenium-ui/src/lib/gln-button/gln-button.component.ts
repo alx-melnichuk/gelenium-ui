@@ -91,10 +91,10 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.config) {
+    if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
-    if (changes.isDisabled) {
+    if (changes['isDisabled']) {
       this.disabled = BooleanUtil.init(this.isDisabled);
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);

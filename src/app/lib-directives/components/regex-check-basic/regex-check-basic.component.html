@@ -268,9 +268,9 @@
         ?(!control01b.model01b.value
           ? 'Enter value.':'The value is correct.'
          )
-        :(control01b.model01b.errors?.pattern
+        :(control01b.model01b.errors!['pattern']
           ? 'The field must have characters.'
-          : (control01b.model01b.errors?.regexCheck
+          : (control01b.model01b.errors!['regexCheck']
              ?'The field must have digits.'
              :'The value is not correct.')
          )"
@@ -298,11 +298,11 @@
         ?(!control01b.model01c.value
           ? 'Enter the parameter.':'The value is correct.'
          )
-        :(control01b.model01c.errors.checkLetters
+        :(control01b.model01c.errors['checkLetters']
           ?'Letters must be present'
-          :(control01b.model01c.errors.checkDigits
+          :(control01b.model01c.errors['checkDigits']
              ?'Digits must be present.'
-             :(control01b.model01c.errors.checkSymbols
+             :(control01b.model01c.errors['checkSymbols']
                ?'Must be characters from the set [!@#$%^&*].'
                :'The value is not correct.'
               )
@@ -328,7 +328,7 @@
         ?(!control01b.model01d.value
           ? 'Enter a date value.':'The date value is correct.'
          )
-        :(control01b.model01d.errors?.regexCheck
+        :(control01b.model01d.errors!['regexCheck']
           ? 'The value should be \'01/01/2021\'.'
           : 'The value is not correct.'
          )"
@@ -352,7 +352,7 @@
         ?(!control01b.model01e.value
           ? 'Enter a date value.':'The date value is correct.'
          )
-        :(control01b.model01e.errors?.regexCheck
+        :(control01b.model01e.errors!['regexCheck']
           ? 'The value should be \'01/01/2021\'.'
           : 'The value is not correct.'
          )"
@@ -376,7 +376,7 @@
         ?(!control01b.model01f.value
           ? 'Enter a phone number.':'The phone number is correct.'
          )
-        :(control01b.model01f.errors?.regexCheck
+        :(control01b.model01f.errors!['regexCheck']
           ? 'The phone number should be \'(999)999-9999\'.'
           : 'The phone number is not correct.'
          )"
@@ -420,9 +420,9 @@
         ?(!control01b.model01b.value
           ? 'Enter value.':'The value is correct.'
          )
-        :(control01b.model01b.errors?.pattern
+        :(control01b.model01b.errors!['pattern']
           ? 'The field must have characters.'
-          : (control01b.model01b.errors?.regexCheck
+          : (control01b.model01b.errors!['regexCheck']
              ?'The field must have digits.'
              :'The value is not correct.')
          )"
@@ -450,11 +450,11 @@
         ?(!control01b.model01c.value
           ? 'Enter the parameter.':'The value is correct.'
          )
-        :(control01b.model01c.errors.checkLetters
+        :(control01b.model01c.errors['checkLetters']
           ?'Letters must be present'
-          :(control01b.model01c.errors.checkDigits
+          :(control01b.model01c.errors['checkDigits']
              ?'Digits must be present.'
-             :(control01b.model01c.errors.checkSymbols
+             :(control01b.model01c.errors['checkSymbols']
                ?'Must be characters from the set [!@#$%^&*].'
                :'The value is not correct.'
               )
@@ -480,7 +480,7 @@
         ?(!control01b.model01d.value
           ? 'Enter a date value.':'The date value is correct.'
          )
-        :(control01b.model01d.errors?.regexCheck
+        :(control01b.model01d.errors!['regexCheck']
           ? 'The value should be \'01/01/2021\'.'
           : 'The value is not correct.'
          )"
@@ -504,7 +504,7 @@
         ?(!control01b.model01e.value
           ? 'Enter a date value.':'The date value is correct.'
          )
-        :(control01b.model01e.errors?.regexCheck
+        :(control01b.model01e.errors!['regexCheck']
           ? 'The value should be \'01/01/2021\'.'
           : 'The value is not correct.'
          )"
@@ -528,7 +528,7 @@
         ?(!control01b.model01f.value
           ? 'Enter a phone number.':'The phone number is correct.'
          )
-        :(control01b.model01f.errors?.regexCheck
+        :(control01b.model01f.errors!['regexCheck']
           ? 'The phone number should be \'(999)999-9999\'.'
           : 'The phone number is not correct.'
          )"

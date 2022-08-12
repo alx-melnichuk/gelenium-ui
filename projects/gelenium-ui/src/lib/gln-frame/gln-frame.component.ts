@@ -79,42 +79,42 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.config) {
+    if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
-    if (changes.exterior) {
+    if (changes['exterior']) {
       this.frameExterior = GlnFrameExteriorUtil.convert(this.exterior || null);
       this.settingExterior(this.renderer, this.hostRef, this.frameExterior);
     }
-    if (changes.isHoverColor || (changes.config && this.isHoverColor == null)) {
+    if (changes['isHoverColor'] || (changes['config'] && this.isHoverColor == null)) {
       this.hoverColor = this.isHoverColor != null ? this.isHoverColor : !!this.currConfig?.isHoverColor;
       this.settingHoverColor(this.renderer, this.hostRef, this.hoverColor);
     }
-    if (changes.isLabelShrink || (changes.config && this.isLabelShrink == null)) {
+    if (changes['isLabelShrink'] || (changes['config'] && this.isLabelShrink == null)) {
       this.labelShrink = this.isLabelShrink != null ? this.isLabelShrink : !!this.currConfig?.isLabelShrink;
       this.settingLabelShrink(this.renderer, this.hostRef, this.labelShrink);
     }
-    if (changes.isNoAnimation || (changes.config && this.isNoAnimation == null)) {
+    if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null)) {
       this.noAnimation = this.isNoAnimation != null ? this.isNoAnimation : !!this.currConfig?.isNoAnimation;
       this.settingNoAnimation(this.renderer, this.hostRef, this.noAnimation);
     }
-    if (changes.isNoLabel || (changes.config && this.isNoLabel == null)) {
+    if (changes['isNoLabel'] || (changes['config'] && this.isNoLabel == null)) {
       this.noLabel = this.isNoLabel != null ? this.isNoLabel : !!this.currConfig?.isNoLabel;
       this.settingNoLabel(this.renderer, this.hostRef, this.noLabel);
     }
-    if (changes.isDisabled) {
+    if (changes['isDisabled']) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', !!this.isDisabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
     }
-    if (changes.isFilled) {
+    if (changes['isFilled']) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-filled', this.isFilled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);
     }
-    if (changes.isError) {
+    if (changes['isError']) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-error', !!this.isError);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isError ? '' : null);
     }
-    if (changes.label || changes.isRequired) {
+    if (changes['label'] || changes['isRequired']) {
       const isIndent = !!this.label || this.isRequired;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-lgn-indent', !!isIndent);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ind', isIndent ? '' : null);

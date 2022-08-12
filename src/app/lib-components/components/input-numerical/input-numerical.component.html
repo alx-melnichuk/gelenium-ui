@@ -66,13 +66,13 @@
       </div>
       <gln-input formControlName="model04a"
         wdFull
-        [label]="!formGroup04.controls.model04a.value
+        [label]="!formGroup04.controls['model04a']['value']
           ?'Enter number':'Number'"
         type="number"
         [step]="5"
         [min]="0"
         [max]="50"
-        [helperText]="!formGroup04.controls.model04a.value
+        [helperText]="!formGroup04.controls['model04a']['value']
           ?'Enter your number value.'
           :'The value is entered.'"
         [exterior]="exterior04">
@@ -87,15 +87,15 @@
       </div>
       <gln-input formControlName="model04b"
         wdFull
-        [label]="formGroup04.controls.model04b.errors
-          ?'Error'
-          :(!formGroup04.controls.model04b.value
-            ?'Enter number':'Number')"
+        [label]="formGroup04.controls['model04b']['errors'] != null
+          ? 'Error'
+          : (!formGroup04.controls['model04b']['value']
+            ? 'Enter number' : 'Number')"
         type="text"
         pattern="^[0-9]+$"
-        [helperText]="formGroup04.controls.model04b.errors
+        [helperText]="formGroup04.controls['model04b']['errors']
           ?'The value is not correct.'
-          :(!formGroup04.controls.model04b.value
+          :(!formGroup04.controls['model04b']['value']
             ?'Enter your number value.'
             :'The value is correct.')"
         [exterior]="exterior04">
@@ -110,10 +110,10 @@
       </div>
       <gln-input formControlName="model04c"
         wdFull
-        [label]="!formGroup04.controls.model04c.value
+        [label]="!formGroup04.controls['model04c']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="/^-?(\d+)$/"
-        [helperText]="!formGroup04.controls.model04c.value
+        [helperText]="!formGroup04.controls['model04c']['value']
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04">
@@ -128,10 +128,10 @@
       </div>
       <gln-input formControlName="model04d"
         wdFull
-        [label]="!formGroup04.controls.model04d.value
+        [label]="!formGroup04.controls['model04d']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric"
-        [helperText]="!formGroup04.controls.model04d.value
+        [helperText]="!formGroup04.controls['model04d']['value']
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04">
@@ -146,10 +146,10 @@
       </div>
       <gln-input formControlName="model04e"
         wdFull
-        [label]="!formGroup04.controls.model04e.value
+        [label]="!formGroup04.controls['model04e']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric(,2)"
-        [helperText]="!formGroup04.controls.model04e.value
+        [helperText]="!formGroup04.controls['model04e']['value']
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04">
@@ -164,10 +164,10 @@
       </div>
       <gln-input formControlName="model04f"
         wdFull
-        [label]="!formGroup04.controls.model04f.value
+        [label]="!formGroup04.controls['model04f']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric(12,2)"
-        [helperText]="!formGroup04.controls.model04f.value
+        [helperText]="!formGroup04.controls['model04f']['value']
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04">
@@ -182,10 +182,10 @@
       </div>
       <gln-input formControlName="model04g"
         wdFull
-        [label]="!formGroup04.controls.model04g.value
+        [label]="!formGroup04.controls['model04g']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="^[\ ,\d,a-z]+$"
-        [helperText]="!formGroup04.controls.model04g.value
+        [helperText]="!formGroup04.controls['model04g']['value']
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04">
@@ -219,13 +219,13 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model04a"
         wdFull
-        [label]="!formGroup04.controls.model04a.value
+        [label]="!formGroup04.controls['model04a']['value']
           ?'Enter number':'Number'"
         type="number"
         [step]="5"
         [min]="0"
         [max]="50"
-        [helperText]="!formGroup04.controls.model04a.value
+        [helperText]="!formGroup04.controls['model04a']['value']
           ?'Enter your number value.'
           :'The value is entered.'"
         [exterior]="exterior04"&gt;
@@ -240,15 +240,15 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model04b"
         wdFull
-        [label]="formGroup04.controls.model04b.errors
+        [label]="formGroup04.controls['model04b']['errors']
           ?'Error'
-          :(!formGroup04.controls.model04b.value
+          :(!formGroup04.controls['model04b']['value']
             ?'Enter number':'Number')"
         type="text"
         pattern="^[0-9]+$"
-        [helperText]="formGroup04.controls.model04b.errors
+        [helperText]="formGroup04.controls['model04b']['errors']
           ?'The value is not correct.'
-          :(!formGroup04.controls.model04b.value
+          :(!formGroup04.controls['model04b']['value']
             ?'Enter your number value.'
             :'The value is correct.')"
         [exterior]="exterior04"&gt;
@@ -263,10 +263,10 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model04c"
         wdFull
-        [label]="!formGroup04.controls.model04c.value
+        [label]="!formGroup04.controls['model04c']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="/^-?(\d+)$/"
-        [helperText]="!formGroup04.controls.model04c.value
+        [helperText]="!formGroup04.controls['model04c']['value']
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04"&gt;
@@ -281,10 +281,10 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model04d"
         wdFull
-        [label]="!formGroup04.controls.model04d.value
+        [label]="!formGroup04.controls['model04d']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric"
-        [helperText]="!formGroup04.controls.model04d.value
+        [helperText]="!formGroup04.controls['model04d']['value']
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04"&gt;
@@ -299,10 +299,10 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model04e"
         wdFull
-        [label]="!formGroup04.controls.model04e.value
+        [label]="!formGroup04.controls['model04e']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric(,2)"
-        [helperText]="!formGroup04.controls.model04e.value
+        [helperText]="!formGroup04.controls['model04e']['value']
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04"&gt;
@@ -317,10 +317,10 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model04f"
         wdFull
-        [label]="!formGroup04.controls.model04f.value
+        [label]="!formGroup04.controls['model04f']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric(12,2)"
-        [helperText]="!formGroup04.controls.model04f.value
+        [helperText]="!formGroup04.controls['model04f']['value']
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04"&gt;
@@ -335,10 +335,10 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model04g"
         wdFull
-        [label]="!formGroup04.controls.model04g.value
+        [label]="!formGroup04.controls['model04g']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="^[\ ,\d,a-z]+$"
-        [helperText]="!formGroup04.controls.model04g.value
+        [helperText]="!formGroup04.controls['model04g']['value']
           ?'Enter your number value.'
           :'The value is correct.'"
         [exterior]="exterior04"&gt;

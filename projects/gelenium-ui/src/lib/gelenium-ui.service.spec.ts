@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LibGeraniumService } from './lib-geranium.service';
+import { GeleniumUiService } from './gelenium-ui.service';
 
-describe('LibGeraniumService', () => {
-  let service: LibGeraniumService;
+describe('GeleniumUiService', () => {
+  let service: GeleniumUiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(LibGeraniumService);
+    service = TestBed.inject(GeleniumUiService);
   });
 
   it('should be created', () => {

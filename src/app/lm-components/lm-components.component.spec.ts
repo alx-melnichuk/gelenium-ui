@@ -10,9 +10,7 @@ describe('LmComponentsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [LmComponentsComponent],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(LmComponentsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

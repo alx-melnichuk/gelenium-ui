@@ -34,15 +34,15 @@ export class GlnHintOrErrorComponent implements OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.isError) {
+    if (changes['isError']) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'ghe-error', !!this.isError);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isError ? '' : null);
     }
-    if (changes.isFocused) {
+    if (changes['isFocused']) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'ghe-focused', !!this.isFocused);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'foc', this.isFocused ? '' : null);
     }
-    if (changes.isDisabled) {
+    if (changes['isDisabled']) {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'ghe-disabled', !!this.isDisabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
     }

@@ -17,10 +17,10 @@ export class GlnColorDirective implements OnChanges {
   constructor(private hostRef: ElementRef<HTMLElement>) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.glnColorElementRef) {
+    if (changes['glnColorElementRef']) {
       this.elementRef = this.glnColorElementRef || this.hostRef;
     }
-    if (changes.glnColor && this.glnColor != null) {
+    if (changes['glnColor'] && this.glnColor != null) {
       const typeColor = typeof this.glnColor;
       const maps: Map<string, string> = new Map();
       if (typeColor === 'string') {

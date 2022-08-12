@@ -61,15 +61,15 @@
         </small>
       </div>
       <gln-input formControlName="model03b"
-        [label]="controls03.model03b.value?.length >= minLength03b
+        [label]="(controls03.model03b.value || '')['length'] >= minLength03b
           ? 'Value' : 'Error'"
         isRequired
         [minLength]="minLength03b"
         [helperText]="!controls03.model03b.value
           ?'Required field.'
-          :(controls03.model03b.errors?.minlength
+          :(controls03.model03b.errors!['minlength']
             ?'Minimum length '
-            + controls03.model03b.errors?.minlength.requiredLength
+            + controls03.model03b.errors!['minlength'].requiredLength
             + ' characters.'
             :'Enter value.')"
         [exterior]="exterior03">
@@ -134,15 +134,15 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model03b"
-        [label]="controls03.model03b.value?.length &gt;= minLength03b
+        [label]="(controls03.model03b.value || '')['length'] &gt;= minLength03b
           ? 'Value' : 'Error'"
         isRequired
         [minLength]="minLength03b"
         [helperText]="!controls03.model03b.value
           ?'Required field.'
-          :(controls03.model03b.errors?.minlength
+          :(controls03.model03b.errors!['minlength']
             ?'Minimum length '
-            + controls03.model03b.errors?.minlength.requiredLength
+            + controls03.model03b.errors!['minlength'].requiredLength
             + ' characters.'
             :'Enter value.')"
         [exterior]="exterior03"&gt;

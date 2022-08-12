@@ -135,7 +135,7 @@
       </div>
       <gln-input formControlName="model01c"
         wdFull
-        [label]="!formGroup01.controls.model01c.value
+        [label]="!formGroup01.controls['model01c']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric"
         [helperText]="!control01.model01c.errors
@@ -154,7 +154,7 @@
       </div>
       <gln-input formControlName="model01d"
         wdFull
-        [label]="!formGroup01.controls.model01d.value
+        [label]="!formGroup01.controls['model01d']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric(,2)"
         [helperText]="!control01.model01d.errors
@@ -173,7 +173,7 @@
       </div>
       <gln-input formControlName="model01e"
         wdFull
-        [label]="!formGroup01.controls.model01e.value
+        [label]="!formGroup01.controls['model01e']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric(12,2)"
         [helperText]="!control01.model01e.errors
@@ -192,7 +192,7 @@
       </div>
       <gln-input formControlName="model01f"
         wdFull
-        [label]="!formGroup01.controls.model01f.value
+        [label]="!formGroup01.controls['model01f']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric(12)"
         [helperText]="!control01.model01f.errors
@@ -211,7 +211,7 @@
       </div>
       <gln-input formControlName="model01g"
         wdFull
-        [label]="!formGroup01.controls.model01g.value
+        [label]="!formGroup01.controls['model01g']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric12_2"
         [helperText]="!control01.model01g.errors
@@ -287,7 +287,7 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model01c"
         wdFull
-        [label]="!formGroup01.controls.model01c.value
+        [label]="!formGroup01.controls['model01c']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric"
         [helperText]="!control01.model01c.errors
@@ -306,7 +306,7 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model01d"
         wdFull
-        [label]="!formGroup01.controls.model01d.value
+        [label]="!formGroup01.controls['model01d']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric(,2)"
         [helperText]="!control01.model01d.errors
@@ -325,7 +325,7 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model01e"
         wdFull
-        [label]="!formGroup01.controls.model01e.value
+        [label]="!formGroup01.controls['model01e']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric(12,2)"
         [helperText]="!control01.model01e.errors
@@ -344,7 +344,7 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model01f"
         wdFull
-        [label]="!formGroup01.controls.model01f.value
+        [label]="!formGroup01.controls['model01f']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric(12)"
         [helperText]="!control01.model01f.errors
@@ -363,7 +363,7 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model01g"
         wdFull
-        [label]="!formGroup01.controls.model01g.value
+        [label]="!formGroup01.controls['model01g']['value']
           ?'Enter number':'Number'"
         glnRegexMatch="#numeric12_2"
         [helperText]="!control01.model01g.errors
