@@ -10,6 +10,10 @@ const routes: Routes = [
     path: 'directives',
     loadChildren: () => import('./lm-directives/lm-directives.module').then((m) => m.LmDirectivesModule),
   },
+  {
+    path: 'palette',
+    loadChildren: () => import('./lm-palette/lm-palette.module').then((m) => m.LmPaletteModule),
+  },
   { path: '**', redirectTo: 'components' },
 ];
 
