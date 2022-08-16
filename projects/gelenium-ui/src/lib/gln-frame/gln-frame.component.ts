@@ -68,6 +68,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public labelShrink: boolean | null = null;
   public noAnimation: boolean | null = null;
   public noLabel: boolean | null = null;
+  public noWideBorder: boolean | null = null;
 
   constructor(
     @Optional() @Inject(GLN_FRAME_CONFIG) private rootConfig: GlnFrameConfig | null,
@@ -86,6 +87,18 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.frameExterior = GlnFrameExteriorUtil.convert(this.exterior || null);
       this.settingExterior(this.renderer, this.hostRef, this.frameExterior);
     }
+    if (changes['isDisabled']) {
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', !!this.isDisabled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
+    }
+    if (changes['isError']) {
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-error', !!this.isError);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isError ? '' : null);
+    }
+    if (changes['isFilled']) {
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-filled', this.isFilled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);
+    }
     if (changes['isHoverColor'] || (changes['config'] && this.isHoverColor == null)) {
       this.hoverColor = this.isHoverColor != null ? this.isHoverColor : !!this.currConfig?.isHoverColor;
       this.settingHoverColor(this.renderer, this.hostRef, this.hoverColor);
@@ -102,17 +115,9 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.noLabel = this.isNoLabel != null ? this.isNoLabel : !!this.currConfig?.isNoLabel;
       this.settingNoLabel(this.renderer, this.hostRef, this.noLabel);
     }
-    if (changes['isDisabled']) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', !!this.isDisabled);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
-    }
-    if (changes['isFilled']) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-filled', this.isFilled);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);
-    }
-    if (changes['isError']) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-error', !!this.isError);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isError ? '' : null);
+    if (changes['config'] && this.currConfig?.isNoWideBorder != null) {
+      this.noWideBorder = this.currConfig.isNoWideBorder;
+      this.settingNoWideBorder(this.renderer, this.hostRef, this.noWideBorder);
     }
     if (changes['label'] || changes['isRequired']) {
       const isIndent = !!this.label || this.isRequired;
@@ -137,6 +142,10 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     if (this.noLabel == null) {
       this.noLabel = this.isNoLabel != null ? this.isNoLabel : !!this.currConfig?.isNoLabel;
       this.settingNoLabel(this.renderer, this.hostRef, this.noLabel);
+    }
+    if (this.noWideBorder == null && this.currConfig?.isNoWideBorder != null) {
+      this.noWideBorder = !!this.currConfig?.isNoWideBorder;
+      this.settingNoWideBorder(this.renderer, this.hostRef, this.noWideBorder);
     }
   }
 
@@ -176,5 +185,10 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   private settingNoLabel(renderer: Renderer2, elem: ElementRef<HTMLElement>, noLabel: boolean): void {
     HtmlElemUtil.setClass(renderer, elem, 'glnfr-no-label', noLabel);
     HtmlElemUtil.setAttr(renderer, elem, 'no-lb', noLabel ? '' : null);
+  }
+
+  private settingNoWideBorder(renderer: Renderer2, elem: ElementRef<HTMLElement>, noWideBorder: boolean): void {
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-no-wd-br', noWideBorder);
+    HtmlElemUtil.setAttr(renderer, elem, 'no-wd-br', noWideBorder ? '' : null);
   }
 }

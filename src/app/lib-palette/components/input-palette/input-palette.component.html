@@ -1,15 +1,16 @@
 <section mr-vr>
-  <h3 class="app-hover-link">
-    Demo.
-    <!-- <a [href]="urlInput + '#Attributes'">#</a> -->
-  </h3>
-  <p>The following attributes are supported:</p>
+  <h4 class="app-hover-link"
+    id="default-palette">
+    The default palette.
+    <a [href]="urlPlInput + '#default-palette'">#</a>
+  </h4>
+  <p>
+    GlnInput is based on the GlnFrame component, which has its own palette by default.
+  </p>
 </section>
 
 <section mr-vr>
-  <span id="demo01">exterior:
-    <!-- <a [href]="urlInput + '#demo01'">#</a> -->
-  </span>
+  <span>exterior:</span>
   <mat-button-toggle-group value="exterior02a"
     (change)="exterior02a=$event.value">
     <mat-button-toggle [checked]="exterior02a==='outlined'"
@@ -25,25 +26,23 @@
   novalidate
   autocomplete="off">
 
-  <div class="app-group demo-bstrap">
+  <div class="app-group">
 
-    <div class="app-elem">
+    <div class="app-elem ip-elem">
       <div>
         <small>
           <em>State: empty.</em>
         </small>
       </div>
       <gln-input formControlName="model02a"
-        id="unique_id_input02a"
-        frameSize="short"
-        isNoLabel9
-        isCustom
         label="Enter value"
-        [exterior]="exterior02a">
+        helperText="Enter a value for the parameter."
+        [exterior]="exterior02a"
+        wdFull>
       </gln-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem ip-elem">
       <div>
         <small>
           <em>Attributes: isRequired, helperText.</em>
@@ -51,16 +50,14 @@
       </div>
       <gln-input formControlName="model02b"
         label="Required field"
-        frameSize="short"
-        isNoLabel9
-        isCustom9
         isRequired
         helperText="A value must be entered."
-        [exterior]="exterior02a">
+        [exterior]="exterior02a"
+        wdFull>
       </gln-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem ip-elem">
       <div>
         <small>
           <em>Attribute: isNoLabel.</em>
@@ -68,15 +65,13 @@
       </div>
       <gln-input formControlName="model02c"
         label="Enter value"
-        frameSize="short"
-        isNoLabel9
-        isCustom9
         helperText="The label is not displayed."
-        [exterior]="exterior02a">
+        [exterior]="exterior02a"
+        wdFull>
       </gln-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem ip-elem">
       <div>
         <small>
           <em>Attribute: isDisabled.</em>
@@ -84,15 +79,237 @@
       </div>
       <gln-input formControlName="model02d"
         label="Disabled"
-        frameSize="short"
-        isNoLabel9
-        isCustom9
         isDisabled
         helperText="The parameter is disabled."
-        [exterior]="exterior02a">
+        [exterior]="exterior02a"
+        wdFull>
       </gln-input>
     </div>
 
   </div>
 
 </form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup01"
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-textarea',
+  templateUrl: './textarea.component.html',
+  styleUrls: ['./textarea.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class TextareaComponent &#123;
+  public formGroup01: FormGroup = new FormGroup(&#123;
+    model01a: new FormControl('', []),
+    model01b: new FormControl('', []),
+    model01c: new FormControl('', []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="bootstrap-palette">
+    Palette like Bootstrap.
+    <a [href]="urlPlInput + '#bootstrap-palette'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnInput in style as bootstrap.
+    <br />
+    To do this, you need to specify the following configuration:
+  </p>
+  <code><pre source="ts">
+public config02b: GlnFrameConfig = &#123;
+  exterior: GlnFrameExterior.outlined,
+  frameSize: GlnFrameSize.short,
+  isNoLabel: true,
+  isNoWideBorder: true,
+&#125;;</pre></code>
+  <span>
+    And also define some css-styles.
+  </span>
+</section>
+
+<form [formGroup]="formGroup02b"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group ip-bstrap">
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>State: empty.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02e"
+        helperText="Enter a value for the parameter."
+        [config]="config02b"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Attributes: isRequired.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02f"
+        isRequired
+        helperText="A value must be entered."
+        [config]="config02b"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Attribute: success.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02g"
+        [ngClass]="[control02b['model02g'].value ? 'ip-success' : '']"
+        helperText="Enter a value for the parameter."
+        [config]="config02b"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Attribute: isDisabled.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02h"
+        isDisabled
+        helperText="The parameter is disabled."
+        [config]="config02b"
+        wdFull>
+      </gln-input>
+    </div>
+
+  </div>
+
+</form>
+
+<hr br-nn />
+
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="material-ui-palette">
+    Palette like Material-UI.
+    <a [href]="urlPlInput + '#material-ui-palette'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnInput in style as Material-UI.
+    <br />
+  </p>
+</section>
+
+<form [formGroup]="formGroup02c"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group ip-bstrap">
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>State: empty.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02i"
+        helperText="Enter a value for the parameter."
+        [config]="config02c"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Attributes: isRequired.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02j"
+        isRequired
+        helperText="A value must be entered."
+        [config]="config02c"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Attribute: success.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02k"
+        [ngClass]="[control02c['model02k'].value ? 'ip-success' : '']"
+        helperText="Enter a value for the parameter."
+        [config]="config02c"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Attribute: isDisabled.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02l"
+        isDisabled
+        helperText="The parameter is disabled."
+        [config]="config02c"
+        wdFull>
+      </gln-input>
+    </div>
+
+  </div>
+
+</form>
+
+<hr br-nn />

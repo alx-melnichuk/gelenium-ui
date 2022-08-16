@@ -64,7 +64,7 @@ export class GlnInputComponent
   implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
 {
   // @Input()
-  // public id = `glni-${uniqueIdCounter++}`; // Is in GlnBasisControl.
+  // public id = `glnin-${uniqueIdCounter++}`; // Is in GlnBasisControl.
   @Input()
   public autoComplete = '';
   @Input()
@@ -155,7 +155,7 @@ export class GlnInputComponent
     renderer: Renderer2,
     ngZone: NgZone
   ) {
-    super(uniqueIdCounter++, 'glni', hostRef, renderer, changeDetectorRef, ngZone);
+    super(uniqueIdCounter++, 'glnin', hostRef, renderer, changeDetectorRef, ngZone);
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-input', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);

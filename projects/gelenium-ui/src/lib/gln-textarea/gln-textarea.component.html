@@ -1,5 +1,5 @@
 <ng-container [formGroup]="formGroup">
-  <div class="glnt-wrap"
+  <div class="glntx-wrap"
     [glnFrameExteriorInput]="exterior || currConfig?.exterior"
     #glnFrameExteriorInput="glnFrameExteriorInput"
     [glnFrameExteriorInputElementRef]="hostRef"
@@ -42,7 +42,7 @@
         glnfr-elem
         [attr.id]="id + '_textarea'"
         [rows]="currentRows"
-        [ngClass]="['glnt-textarea', (readOnly ? 'gln-readonly' : '')]"
+        [ngClass]="['glntx-textarea', (readOnly ? 'gln-readonly' : '')]"
         [attr.disabled]="disabled ? '': null"
         [attr.autocomplete]="!!autoComplete ? autoComplete : null"
         [attr.readonly]="readOnly ? '': null"

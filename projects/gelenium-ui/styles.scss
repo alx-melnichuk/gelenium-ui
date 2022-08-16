@@ -9,20 +9,33 @@
   --gln-default-bg-s: 0%;
   --gln-default-bg-l: 100%;
   --gln-default-bg-cl: hsl(var(--gln-default-bg-h),var(--gln-default-bg-s),var(--gln-default-bg-l));
-  // "default" color: hsl(20, 2%, 5%);
-  --gln-default-h: 20;
-  --gln-default-s: 2%;
-  --gln-default-l: 5%;
+  // "default" color: hsl(20, 2%, 5%); OLD
+  // --gln-default-h: 20;
+  // --gln-default-s: 2%;
+  // --gln-default-l: 5%;
+  // "default" color: hsl(250, 2%, 5%);
+  --demo1: hsl(250, 5%, 20%);
+  --gln-default-h: 250;
+  --gln-default-s: 5%;
+  --gln-default-l: 20%;
   --gln-default-cl: hsl(var(--gln-default-h),var(--gln-default-s),var(--gln-default-l));
-  // "primary" color: hsl(210, 79%, 46%);
+  // "primary" color: hsl(210, 79%, 46%); OLD
+  // --gln-primary-h: 210;
+  // --gln-primary-s: 79%;
+  // --gln-primary-l: 46%;
+  // "primary" color: hsl(210, 100%, 50%);
   --gln-primary-h: 210;
-  --gln-primary-s: 79%;
-  --gln-primary-l: 46%;
+  --gln-primary-s: 100%;
+  --gln-primary-l: 50%;
   --gln-primary-cl: hsl(var(--gln-primary-h),var(--gln-primary-s),var(--gln-primary-l));
-  // "danger" color: hsl(0, 65%, 51%);
-  --gln-danger-h: 0;
-  --gln-danger-s: 65%;
-  --gln-danger-l: 51%;
+  // "danger" color: hsl(0, 65%, 51%); OLD
+  // --gln-danger-h: 0;
+  // --gln-danger-s: 65%;
+  // --gln-danger-l: 51%;
+  // "danger" color: hsl(5, 85%, 50%);
+  --gln-danger-h: 5;
+  --gln-danger-s: 90%;
+  --gln-danger-l: 50%;
   --gln-danger-cl: hsl(var(--gln-danger-h),var(--gln-danger-s),var(--gln-danger-l));
   // "success" color: hsl(152, 69%, 31%); #198754
   --gln-success-h: 152;

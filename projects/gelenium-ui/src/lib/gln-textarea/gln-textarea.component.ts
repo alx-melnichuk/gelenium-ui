@@ -63,7 +63,7 @@ export class GlnTextareaComponent
   implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
 {
   // @Input()
-  // public id = `glnt-${uniqueIdCounter++}`; // Is in GlnBasisControl.
+  // public id = `glntx-${uniqueIdCounter++}`; // Is in GlnBasisControl.
   @Input()
   public autoComplete = '';
   @Input()
@@ -152,7 +152,7 @@ export class GlnTextareaComponent
     renderer: Renderer2,
     ngZone: NgZone
   ) {
-    super(uniqueIdCounter++, 'glnt', hostRef, renderer, changeDetectorRef, ngZone);
+    super(uniqueIdCounter++, 'glntx', hostRef, renderer, changeDetectorRef, ngZone);
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-textarea', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
