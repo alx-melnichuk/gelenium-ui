@@ -4,7 +4,6 @@ export interface GlnSelectConfig extends GlnFrameConfig {
   // exterior?: GlnFrameExterior | undefined;
   // frameSize?: GlnFrameSize | undefined;
   // frameSizeValue?: number | undefined;
-  // isHoverColor?: boolean | undefined;
   // isLabelShrink?: boolean | undefined;
   // isNoAnimation?: boolean | undefined;
   // isNoLabel?: boolean | undefined;

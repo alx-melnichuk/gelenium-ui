@@ -99,7 +99,72 @@
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;form [formGroup]="formGroup01"
+&lt;form [formGroup]="formGroup02a"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;State: empty.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02a"
+        label="Enter value"
+        helperText="Enter a value for the parameter."
+        [exterior]="exterior02a"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: isRequired, helperText.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02b"
+        label="Required field"
+        isRequired
+        helperText="A value must be entered."
+        [exterior]="exterior02a"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isNoLabel.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02c"
+        label="Enter value"
+        helperText="The label is not displayed."
+        [exterior]="exterior02a"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior02a"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
 &lt;/form&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
@@ -112,17 +177,20 @@ import &#123;
 &#125; from '@angular/forms';
 
 @Component(&#123;
-  selector: 'app-textarea',
-  templateUrl: './textarea.component.html',
-  styleUrls: ['./textarea.component.scss'],
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
-export class TextareaComponent &#123;
-  public formGroup01: FormGroup = new FormGroup(&#123;
-    model01a: new FormControl('', []),
-    model01b: new FormControl('', []),
-    model01c: new FormControl('', []),
-  &#125;);
+export class InputComponent &#123;
+  public exterior02a = 'outlined';
+  public control02a = &#123;
+    model02a: new FormControl(null, []),
+    model02b: new FormControl(null, []),
+    model02c: new FormControl('Hello World', []),
+    model02d: new FormControl('Hello World', []),
+  &#125;;
+  public formGroup02a: FormGroup = new FormGroup(this.control02a);
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -134,6 +202,9 @@ export class TextareaComponent &#123;
 .app-elem &#123;
   min-width: 26ch;
   margin: 10px 10px;
+&#125;
+.ip-elem &#123;
+  width: 28ch;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -151,7 +222,7 @@ export class TextareaComponent &#123;
     <a [href]="urlPlInput + '#bootstrap-palette'">#</a>
   </h4>
   <p>
-    It is possible to display GlnInput in style as bootstrap.
+    It is possible to display GlnInput in style as "Bootstrap".
     <br />
     To do this, you need to specify the following configuration:
   </p>
@@ -160,7 +231,6 @@ public config02b: GlnFrameConfig = &#123;
   exterior: GlnFrameExterior.outlined,
   frameSize: GlnFrameSize.short,
   isNoLabel: true,
-  isNoWideBorder: true,
 &#125;;</pre></code>
   <span>
     And also define some css-styles.
@@ -247,11 +317,25 @@ public config02b: GlnFrameConfig = &#123;
   </p>
 </section>
 
+<section mr-vr>
+  <span>exterior:</span>
+  <mat-button-toggle-group value="exterior02c"
+    (change)="exterior02c=$event.value">
+    <mat-button-toggle [checked]="exterior02c==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02c==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02c==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
 <form [formGroup]="formGroup02c"
   novalidate
   autocomplete="off">
 
-  <div class="app-group ip-bstrap">
+  <div class="app-group ip-material-ui">
 
     <div class="app-elem ip-elem">
       <div>
@@ -260,8 +344,9 @@ public config02b: GlnFrameConfig = &#123;
         </small>
       </div>
       <gln-input formControlName="model02i"
+        label="Enter value"
         helperText="Enter a value for the parameter."
-        [config]="config02c"
+        [exterior]="exterior02c"
         wdFull>
       </gln-input>
     </div>
@@ -273,9 +358,10 @@ public config02b: GlnFrameConfig = &#123;
         </small>
       </div>
       <gln-input formControlName="model02j"
+        label="Required field"
         isRequired
         helperText="A value must be entered."
-        [config]="config02c"
+        [exterior]="exterior02c"
         wdFull>
       </gln-input>
     </div>
@@ -288,8 +374,9 @@ public config02b: GlnFrameConfig = &#123;
       </div>
       <gln-input formControlName="model02k"
         [ngClass]="[control02c['model02k'].value ? 'ip-success' : '']"
+        label="Enter value"
         helperText="Enter a value for the parameter."
-        [config]="config02c"
+        [exterior]="exterior02c"
         wdFull>
       </gln-input>
     </div>
@@ -301,9 +388,10 @@ public config02b: GlnFrameConfig = &#123;
         </small>
       </div>
       <gln-input formControlName="model02l"
+        label="Disabled"
         isDisabled
         helperText="The parameter is disabled."
-        [config]="config02c"
+        [exterior]="exterior02c"
         wdFull>
       </gln-input>
     </div>

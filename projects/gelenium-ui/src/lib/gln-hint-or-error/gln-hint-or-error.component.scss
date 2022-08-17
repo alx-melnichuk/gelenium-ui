@@ -73,12 +73,11 @@ gln-hint-or-error {
   --glnhe--lb-cl-dis: hsl(var(--glnhe---dis-h), var(--glnhe---dis-s), 50%);
 
   &:not([dis]) {
+    // The state without disabled, focused, hover.
     &:not(:focus-within):not([foc]) {
       --glnhe--label-cl  : var(--glnhe-def-lb-cl, var(--glnhe--lb-cl-def));
-    } // The state without disabled, error, focused and with hover.
-    // &:hover:not(:focus-within):not([foc]) {
-    //   --glnhe--label-cl  : var(--glnhe-hov-lb-cl, var(--glnhe--lb-cl-hov));
-    // } // The state without disabled, error and with focused.
+    }
+    // The state without disabled, error and with focused.
     &:focus-within, &[foc] {
       --glnhe--label-cl  : var(--glnhe-foc-lb-cl, var(--glnhe--lb-cl-foc));
     }

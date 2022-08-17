@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { GlnFrameConfig, GlnFrameExterior, GlnFrameSize } from 'gelenium-ui';
 
@@ -43,7 +43,7 @@ export class InputPaletteComponent {
   public exterior02a = 'outlined';
   public control02a = {
     model02a: new FormControl(null, []),
-    model02b: new FormControl(null /*'Hello World'*/, [Validators.required]),
+    model02b: new FormControl(null, []),
     model02c: new FormControl('Hello World', []),
     model02d: new FormControl('Hello World', []),
   };
@@ -52,43 +52,27 @@ export class InputPaletteComponent {
   // Palette like Bootstrap.
   public control02b = {
     model02e: new FormControl(null, []),
-    model02f: new FormControl(null /*'Hello World'*/, [Validators.required]),
+    model02f: new FormControl(null, []),
     model02g: new FormControl('Hello World', []),
     model02h: new FormControl('Hello World', []),
   };
   public formGroup02b: FormGroup = new FormGroup(this.control02b);
   public config02b: GlnFrameConfig = {
-    // exterior?: GlnFrameExterior | undefined;
     exterior: GlnFrameExterior.outlined,
     frameSize: GlnFrameSize.short,
-    // isHoverColor?: boolean | undefined;
-    // isLabelShrink?: boolean | undefined;
-    // isNoAnimation?: boolean | undefined;
     isNoLabel: true,
-    isNoWideBorder: true,
-    // labelPd?: number | undefined; // px
   };
 
   // Palette like Material-UI.
   public exterior02c = 'outlined';
   public control02c = {
     model02i: new FormControl(null, []),
-    model02j: new FormControl(null /*'Hello World'*/, [Validators.required]),
+    model02j: new FormControl(null, []),
     model02k: new FormControl('Hello World', []),
     model02l: new FormControl('Hello World', []),
   };
   public formGroup02c: FormGroup = new FormGroup(this.control02c);
-  public config02c: GlnFrameConfig = {
-    // exterior?: GlnFrameExterior | undefined;
-    exterior: GlnFrameExterior.outlined,
-    frameSize: GlnFrameSize.short,
-    // isHoverColor?: boolean | undefined;
-    // isLabelShrink?: boolean | undefined;
-    // isNoAnimation?: boolean | undefined;
-    isNoLabel: true,
-    isNoWideBorder: true,
-    // labelPd?: number | undefined; // px
-  };
+  public config02c: GlnFrameConfig = {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }

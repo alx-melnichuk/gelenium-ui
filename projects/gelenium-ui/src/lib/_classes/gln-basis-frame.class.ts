@@ -27,8 +27,6 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
   @Input()
   public isError: string | boolean | null | undefined;
   @Input()
-  public isHoverColor: string | boolean | null | undefined;
-  @Input()
   public isLabelShrink: string | boolean | null | undefined;
   @Input()
   public isNoAnimation: string | boolean | null | undefined;
@@ -46,7 +44,6 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
 
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public error: boolean | null = null; // Binding attribute "isError".
-  public hoverColor: boolean | null = null; // Binding attribute "isHoverColor".
   public isWriteValueInit: boolean | null = null;
   public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink".
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
@@ -76,9 +73,6 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
     }
     if (changes['isError']) {
       this.error = BooleanUtil.init(this.isError);
-    }
-    if (changes['isHoverColor']) {
-      this.hoverColor = BooleanUtil.init(this.isHoverColor);
     }
     if (changes['isLabelShrink']) {
       this.labelShrink = BooleanUtil.init(this.isLabelShrink);

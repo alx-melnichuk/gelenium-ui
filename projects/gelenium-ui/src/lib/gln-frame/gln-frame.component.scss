@@ -119,26 +119,29 @@ gln-frame {
     );
   }
 
-  &:not([dis]):not([err]) {
-  --glnfr---def-h: var(--glnfr--primary-h);
-  --glnfr---def-s: var(--glnfr--primary-s);
-  --glnfr---hov-h: var(--glnfr--primary-h);
-  --glnfr---hov-s: var(--glnfr--primary-s);
-  --glnfr---foc-h: var(--glnfr--primary-h);
-  --glnfr---foc-s: var(--glnfr--primary-s);
-  }
-  &:not([dis])[err] {
-  --glnfr---def-h: var(--glnfr--danger-h);
-  --glnfr---def-s: var(--glnfr--danger-s);
-  --glnfr---hov-h: var(--glnfr--danger-h);
-  --glnfr---hov-s: var(--glnfr--danger-s);
-  --glnfr---foc-h: var(--glnfr--danger-h);
-  --glnfr---foc-s: var(--glnfr--danger-s);
+  &:not([dis]) {
+    &:not([err]) {
+      --glnfr---def-h: var(--glnfr--primary-h);
+      --glnfr---def-s: var(--glnfr--primary-s);
+      --glnfr---hov-h: var(--glnfr--primary-h);
+      --glnfr---hov-s: var(--glnfr--primary-s);
+      --glnfr---foc-h: var(--glnfr--primary-h);
+      --glnfr---foc-s: var(--glnfr--primary-s);
+    }
+    &[err] {
+      --glnfr---def-h: var(--glnfr--danger-h);
+      --glnfr---def-s: var(--glnfr--danger-s);
+      --glnfr---hov-h: var(--glnfr--danger-h);
+      --glnfr---hov-s: var(--glnfr--danger-s);
+      --glnfr---foc-h: var(--glnfr--danger-h);
+      --glnfr---foc-s: var(--glnfr--danger-s);
+    }
   }
   &[dis] {
     --glnfr---dis-h: var(--glnfr--default-h);
     --glnfr---dis-s: var(--glnfr--default-s);
   }
+
   --glnfr--lb-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 40%/*38%*/);
   --glnfr--br-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 45%/*80%*/);
   --glnfr--bg-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 97%/*94%*/);
@@ -152,6 +155,7 @@ gln-frame {
   --glnfr--lb-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 45%/*46%*/);
   --glnfr--br-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 50%/*75%*/);
   --glnfr--bg-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 95%/*97%*/);
+  --glnfr--bf-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 40%/*17%*/);
   --glnfr--af-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 50%/*46%*/);
 
   --glnfr--lb-cl-dis: hsl(var(--glnfr---dis-h), var(--glnfr---dis-s), 50%/*58%*/);
@@ -161,107 +165,34 @@ gln-frame {
 
   // Definition of internal variables by element state.
   &:not([dis]) {
-    // &:not([err]) { // The state without disabled, error, hover, focused.
-      &:not(:hover):not(:focus-within):not([foc]) {
-        --glnfr--label-cl  : var(--glnfr-def-lb-cl, var(--glnfr--lb-cl-def));
-        --glnfr--dcr-br-cl : var(--glnfr-def-br-cl, var(--glnfr--br-cl-def));
-        --glnfr--dcr-bg-cl : var(--glnfr-def-bg-cl, var(--glnfr--bg-cl-def));
-        --glnfr--dcr-bb-bef: var(--glnfr-def-bf-cl, var(--glnfr--bf-cl-def));
-      } // The state without disabled, error, focused and with hover.
-      &:hover:not(:focus-within):not([foc]) {
-        --glnfr--label-cl  : var(--glnfr-hov-lb-cl, var(--glnfr--lb-cl-hov));
-        --glnfr--dcr-br-cl : var(--glnfr-hov-br-cl, var(--glnfr--br-cl-hov));
-        --glnfr--dcr-bg-cl : var(--glnfr-hov-bg-cl, var(--glnfr--bg-cl-hov));
-        --glnfr--dcr-bb-bef: var(--glnfr-hov-bf-cl, var(--glnfr--bf-cl-hov));
-      } // The state without disabled, error and with focused.
-      &:focus-within, &[foc] {
-        --glnfr--label-cl  : var(--glnfr-foc-lb-cl, var(--glnfr--lb-cl-foc));
-        --glnfr--dcr-br-cl : var(--glnfr-foc-br-cl, var(--glnfr--br-cl-foc));
-        --glnfr--dcr-bg-cl : var(--glnfr-foc-bg-cl, var(--glnfr--bg-cl-foc));
-      }
-      --glnfr--dcr-bb-aft  : var(--glnfr-foc-af-cl, var(--glnfr--af-cl-foc));
-    // }
+    // The state without disabled, hover, focused.
+    &:not(:hover):not(:focus-within):not([foc]) {
+      --glnfr--label-cl : var(--glnfr-def-lb-cl, var(--glnfr--lb-cl-def));
+      --glnfr--dcr-br-cl: var(--glnfr-def-br-cl, var(--glnfr--br-cl-def));
+      --glnfr--dcr-bg-cl: var(--glnfr-def-bg-cl, var(--glnfr--bg-cl-def));
+      --glnfr--dcr-bb-bef-cl: var(--glnfr-def-bf-cl, var(--glnfr--bf-cl-def));
+    } // The state without disabled, focused and with hover.
+    &:hover:not(:focus-within):not([foc]) {
+      --glnfr--label-cl : var(--glnfr-hov-lb-cl, var(--glnfr--lb-cl-hov));
+      --glnfr--dcr-br-cl: var(--glnfr-hov-br-cl, var(--glnfr--br-cl-hov));
+      --glnfr--dcr-bg-cl: var(--glnfr-hov-bg-cl, var(--glnfr--bg-cl-hov));
+      --glnfr--dcr-bb-bef-cl: var(--glnfr-hov-bf-cl, var(--glnfr--bf-cl-hov));
+    } // The state without disabled and with focused.
+    &:focus-within, &[foc] {
+      --glnfr--label-cl : var(--glnfr-foc-lb-cl, var(--glnfr--lb-cl-foc));
+      --glnfr--dcr-br-cl: var(--glnfr-foc-br-cl, var(--glnfr--br-cl-foc));
+      --glnfr--dcr-bg-cl: var(--glnfr-foc-bg-cl, var(--glnfr--bg-cl-foc));
+      --glnfr--dcr-bb-bef-cl: var(--glnfr-foc-bf-cl, var(--glnfr--bf-cl-foc));
+    }
+    --glnfr--dcr-bb-aft-cl  : var(--glnfr-foc-af-cl, var(--glnfr--af-cl-foc));
   } // The state with disabled.
   &[dis] {
-    --glnfr--label-cl  : var(--glnfr-dis-lb-cl, var(--glnfr--lb-cl-dis));
-    --glnfr--dcr-br-cl : var(--glnfr-dis-br-cl, var(--glnfr--br-cl-dis));
-    --glnfr--dcr-bg-cl : var(--glnfr-dis-bg-cl, var(--glnfr--bg-cl-dis));
-    --glnfr--dcr-bb-bef: var(--glnfr-dis-bf-cl, var(--glnfr--bf-cl-dis));
+    --glnfr--label-cl : var(--glnfr-dis-lb-cl, var(--glnfr--lb-cl-dis));
+    --glnfr--dcr-br-cl: var(--glnfr-dis-br-cl, var(--glnfr--br-cl-dis));
+    --glnfr--dcr-bg-cl: var(--glnfr-dis-bg-cl, var(--glnfr--bg-cl-dis));
+    --glnfr--dcr-bb-bef-cl: var(--glnfr-dis-bf-cl, var(--glnfr--bf-cl-dis));
   }
-  /*
-  --glnfr--default17: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 17%); // hsl(20, 2%, 17%); rgba(0, 0, 0, 0.87);
-  --glnfr--default38: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 38%); // hsl(20, 2%, 38%); rgba(0, 0, 0, 0.60);
-  // hsl(20, 2%, 46%); rgba(0, 0, 0, 0.54);
-  --glnfr--default55: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 55%); // hsl(20, 2%, 55%); rgba(0, 0, 0, 0.42);
-  --glnfr--default58: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 58%); // hsl(20, 2%, 58%); rgba(0, 0, 0, 0.38);
-  --glnfr--default74: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 74%); // hsl(20, 2%, 74%); rgba(0, 0, 0, 0.26);
-  --glnfr--default77: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 77%); // hsl(20, 2%, 77%); rgba(0, 0, 0, 0.23);
-  --glnfr--default88: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 88%); // hsl(20, 2%, 88%); rgba(0, 0, 0, 0.12);
-  --glnfr--default91: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 91%); // hsl(20, 2%, 91%); rgba(0, 0, 0, 0.09);
-  --glnfr--default94: hsl(var(--glnfr--default-h), var(--glnfr--default-s), 94%); // hsl(20, 2%, 94%); rgba(0, 0, 0, 0.06);
 
-  --glnfr--primary46: hsl(var(--glnfr--primary-h), var(--glnfr--primary-s), 46%); //  #1976d2;
-  --glnfr--primary97: hsl(var(--glnfr--primary-h), var(--glnfr--primary-s), 97%); // 
-
-  --glnfr--danger51: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 51%); // hsl(0, 65%, 51%); #d32f2f; rgb(211, 47, 47)
-  --glnfr--danger94: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 94%); // hsl(0, 65%, 94%); #d32f2fcf;
-  --glnfr--danger96: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 96%); // hsl(0, 65%, 96%);
-  --glnfr--danger98: hsl(var(--glnfr--danger-h), var(--glnfr--danger-s), 98%); // hsl(0, 65%, 98%);
-
-  &[hfc] {
-    --glnfr-hover-focus-color: var(--glnfr--primary46);
-  }
-  
-  // Definition of internal variables by element state.
-  &:not([dis]) {
-    &:not([err]) { // The state without disabled, error, hover, focused.
-      &:not(:hover):not(:focus-within):not([foc]) {
-        --glnfr--label-cl: var(--glnfr-def-lb-cl, var(--glnfr--default38));
-        --glnfr--dcr-br-cl: var(--glnfr-def-br-cl, var(--glnfr--default77));
-        --glnfr--dcr-bg-cl: var(--glnfr-def-bg-cl, var(--glnfr--default94));
-        --glnfr--dcr-bb-bef: var(--glnfr-def-brb-bf, var(--glnfr--default55));
-      } // The state without disabled, error, focused and with hover.
-      &:hover:not(:focus-within):not([foc]) {
-        --glnfr--label-cl: var(--glnfr-hov-lb-cl, var(--glnfr-hover-focus-color, var(--glnfr--default38)));
-        --glnfr--dcr-br-cl: var(--glnfr-hov-br-cl, var(--glnfr-hover-focus-color, var(--glnfr--default17)));
-        --glnfr--dcr-bg-cl: var(--glnfr-hov-bg-cl, var(--glnfr--default91));
-        --glnfr--dcr-bb-bef: var(--glnfr-hov-brb-bf, var(--glnfr-hover-focus-color, var(--glnfr--default17)));
-      } // The state without disabled, error and with focused.
-      &:focus-within, &[foc] {
-        --glnfr--label-cl: var(--glnfr-foc-lb-cl, var(--glnfr--primary46));
-        --glnfr--dcr-br-cl: var(--glnfr-foc-br-cl, var(--glnfr--primary46));
-        --glnfr--dcr-bg-cl: var(--glnfr-foc-bg-cl, var(--glnfr--primary97));
-      }
-      --glnfr--dcr-bb-aft: var(--glnfr-foc-brb-af, var(--glnfr--primary46));
-    }
-    &[err] {// The state without disabled, hover, focused and error.
-      &:not(:hover):not(:focus-within):not([foc]) {
-        --glnfr--label-cl: var(--glnfr-err-lb-cl, var(--glnfr--danger51));
-        --glnfr--dcr-br-cl: var(--glnfr-err-br-cl, var(--glnfr--danger51));
-        --glnfr--dcr-bg-cl: var(--glnfr-err-bg-cl, var(--glnfr--danger96));
-        --glnfr--dcr-bb-bef: var(--glnfr-err-brb-bf, var(--glnfr--danger51));
-      } // The state without disabled, focused and error, hover.
-      &:hover:not(:focus-within):not([foc]) {
-        --glnfr--label-cl: var(--glnfr-hov-err-lb-cl, var(--glnfr--danger51));
-        --glnfr--dcr-br-cl: var(--glnfr-hov-err-br-cl, var(--glnfr--danger51));
-        --glnfr--dcr-bg-cl: var(--glnfr-hov-err-bg-cl, var(--glnfr--danger98));
-        --glnfr--dcr-bb-bef: var(--glnfr-hov-err-brb-bf, var(--glnfr--danger51));
-      } // The state without disabled and error, focused.
-      &:focus-within, &[foc] {
-        --glnfr--label-cl: var(--glnfr-foc-err-lb-cl, var(--glnfr--danger51));
-        --glnfr--dcr-br-cl: var(--glnfr-foc-err-br-cl, var(--glnfr--danger51));
-        --glnfr--dcr-bg-cl: var(--glnfr-foc-err-bg-cl, var(--glnfr--danger94));
-      }
-      --glnfr--dcr-bb-aft: var(--glnfr-foc-err-brb-af, var(--glnfr--danger51));
-    }
-  } // The state with disabled.
-  &[dis] {
-    --glnfr--label-cl: var(--glnfr-dis-lb-cl, var(--glnfr--default58));
-    --glnfr--dcr-br-cl: var(--glnfr-dis-br-cl, var(--glnfr--default74));
-    --glnfr--dcr-bg-cl: var(--glnfr-dis-bg-cl, var(--glnfr--default88));
-    --glnfr--dcr-bb-bef: var(--glnfr-dis-brb-bf, var(--glnfr--default55));
-  }
-  */
   // ** Section: Color "label". **
   &>label {
     color: var(--glnfr--label-cl);
@@ -293,9 +224,19 @@ gln-frame {
     background-color: var(--glnfr--dcr-bg-cl);
   }
 
-  // ** Section "div.glnfr-border" for "Outlined" and "Standard" mode. **
+  // ** Section "div.glnfr-border" for "Underline" and "Standard" mode. **
+
+  // The size of the bottom frame when receiving focus for "Underline" and "Standard" mode.
+  // To block, you need to specify "unset".
+  --glnfr-dcr-bb-aft-wd: 2px;
+  // The size of the bottom frame when hovering the mouse for the "Standard" mode.
+  // To block, you need to specify "unset".
+  --glnfr-dcr-bb-bef-wd: 2px;
+
   &>[dcr-bb] {
     &:before {
+      border-bottom-color: var(--glnfr--dcr-bb-bef-cl);
+      border-bottom-width: 1px;
       border-bottom-width: 1px;
       border-bottom-style: solid;
       border-bottom-left-radius: inherit;
@@ -310,7 +251,8 @@ gln-frame {
       pointer-events: none;
     }
     &:after {
-      border-bottom-width: var(--glnfr--no-cst-br-bt-wd, 1px);
+      border-bottom-color: var(--glnfr--dcr-bb-aft-cl);
+      border-bottom-width: var(--glnfr-dcr-bb-aft-wd, 1px);
       border-bottom-style: solid;
       border-bottom-left-radius: inherit;
       border-bottom-right-radius: inherit;
@@ -325,17 +267,14 @@ gln-frame {
       pointer-events: none;
     }
   }
-  &:not([no-wd-br])>[dcr-bb]:after {
-    --glnfr--no-cst-br-bt-wd: 2px;
-  }
 
   &[dis]>div[dcr-bb]:before {
     border-bottom-style: dotted;
   }
-
-  &[ext-s]:not([no-wd-br]):not([hfc]):not([dis]):hover:not(:focus-within):not([foc])>div[dcr-bb]:before {
-    border-bottom-width: 2px;
+  &[ext-s]:not([dis]):hover:not(:focus-within):not([foc])>div[dcr-bb]:before {
+    border-bottom-width: var(--glnfr-dcr-bb-bef-wd, 1px);
   }
+
   // The effect on gaining input focus is "increase the length of the bottom border from 0 to 100%."
   // Effect on loss of input focus "reducing the length of the lower border from 100% to 0".
   &:not([dis]) {
@@ -344,13 +283,6 @@ gln-frame {
         @include mxTransform_ScaleXY_TranslateXY(1, 1, 0, 0); // ($scaleX, $scaleY, $translateX, $translateY)
       }
     }
-  }
-  // Border-Bottom-Color "div.glnfr-border" for "Underline" and "Standard" mode.
-  &>[dcr-bb]:before {
-    border-bottom-color: var(--glnfr--dcr-bb-bef);
-  }
-  &:not([dis])>[dcr-bb]:after {
-    border-bottom-color: var(--glnfr--dcr-bb-aft);
   }
 
   // ** Section "Fieldset" for "Outlined" mode. **
@@ -362,10 +294,9 @@ gln-frame {
     top: 0;
     left: 0;
     margin: 0;
-    // padding: 0px calc(var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf))) - var(--glnfr-o-lgn-pd, var(--def-o-lgn-pd)));
     padding-bottom: 0px;
-    padding-right: calc(var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf))) - var(--glnfr-o-lgn-pd, var(--def-o-lgn-pd)));
     padding-left: calc(var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf))) - var(--glnfr-o-lgn-pd, var(--def-o-lgn-pd)) - var(--glnfr--pg-lf-delta, 0px));
+    padding-right: calc(var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf))) - var(--glnfr-o-lgn-pd, var(--def-o-lgn-pd)));
     padding-top: 0px;
     pointer-events: none;
     border-radius: inherit;
@@ -375,12 +306,28 @@ gln-frame {
     min-width: 0%;
     box-sizing: inherit;
   }
-  // For "outlined" mode. With input focus, increase the frame to 2 pixels.
-  &:not([no-wd-br]):not([dis]) {
-    &:focus-within, &[foc], &:hover {
+
+  // The size of the frame when hovering the mouse for "Outlined" mode.
+  // To block, you need to specify "unset".
+  --glnfr-hov-dcr-br-wd: 2px;
+  &:not([dis]) {
+    &:hover:not(:focus-within):not([foc]) {
       fieldset {
-        border-width: 2px;
-        --glnfr--pg-lf-delta: 1px;
+        border-width: var(--glnfr-hov-dcr-br-wd, 1px);
+        --glnfr--pg-lf-delta: calc(var(--glnfr-hov-dcr-br-wd, 1px) - 1px);
+      }
+    } 
+  }
+
+  // The size of the frame when receiving focus for "Outlined" mode.
+  // To block, you need to specify "unset".
+  --glnfr-foc-dcr-br-wd: 2px;
+  // For "outlined" mode. With input focus, increase the frame to 2 pixels.
+  &:not([dis]) {
+    &:focus-within, &[foc] {
+      fieldset {
+        border-width: var(--glnfr-foc-dcr-br-wd, 1px);
+        --glnfr--pg-lf-delta: calc(var(--glnfr-foc-dcr-br-wd, 1px) - 1px);
       }
     } 
   }

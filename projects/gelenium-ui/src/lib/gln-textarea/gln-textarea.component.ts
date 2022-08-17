@@ -83,8 +83,6 @@ export class GlnTextareaComponent
   // @Input()
   // public isError: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
-  // public isHoverColor: string | boolean | null | undefined; // Is in GlnBasisControl.
-  // @Input()
   // public isLabelShrink: string | boolean | null | undefined; // Is in GlnBasisControl.
   // @Input()
   // public isNoAnimation: string | boolean | null | undefined; // Is in GlnBasisControl.
@@ -132,7 +130,6 @@ export class GlnTextareaComponent
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
-  // public hoverColor: boolean | null = null; // Binding attribute "isHoverColor". // Is in GlnBasisControl.
   public isFocused = false;
   public isFilled = false;
   // public isWriteValueInit: boolean | null = null;                            // Is in GlnBasisControl.
@@ -162,7 +159,6 @@ export class GlnTextareaComponent
     // In the GlnBasisControl.ngOnChanges(), the definition is made:
     // - this.disabled = BooleanUtil.init(this.isDisabled);
     // - this.error = BooleanUtil.init(this.isError);
-    // - this.hoverColor = BooleanUtil.init(this.isHoverColor);
     // - this.labelShrink = BooleanUtil.init(this.isLabelShrink);
     // - this.noAnimation = BooleanUtil.init(this.isNoAnimation);
     // - this.noLabel = BooleanUtil.init(this.isNoLabel);
