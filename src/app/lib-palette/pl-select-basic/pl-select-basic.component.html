@@ -1,10 +1,10 @@
 <section mr-vr>
   <h4 class="app-hover-link">
     Basic.
-    <a [href]="urlPlTextarea + '#Basic'">#</a>
+    <a [href]="urlPlSelect + '#Basic'">#</a>
   </h4>
   <p>
-    GlnTextarea is based on the GlnFrame component, which has its own palette by default.
+    GlnSelect is based on the GlnFrame component, which has its own palette by default.
   </p>
 </section>
 
@@ -34,14 +34,16 @@
           <em>State: empty.</em>
         </small>
       </div>
-      <gln-textarea formControlName="model01a"
+      <gln-select formControlName="model01a"
         label="Enter value"
         helperText="Enter a value for the parameter."
         [exterior]="exterior01a"
-        [minRows]="2"
-        [maxRows]="4"
         wdFull>
-      </gln-textarea>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
     </div>
 
     <div class="app-elem ip-elem">
@@ -50,7 +52,7 @@
           <em>Attributes: isRequired.</em>
         </small>
       </div>
-      <gln-textarea formControlName="model01b"
+      <gln-select formControlName="model01b"
         isRequired
         [label]="!control01a.model01b.value
           ? 'Requires a value':'Parameter value'"
@@ -58,10 +60,12 @@
           ? 'The field is filled.'
           : 'The field is not filled.'"
         [exterior]="exterior01a"
-        [minRows]="2"
-        [maxRows]="4"
         wdFull>
-      </gln-textarea>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
     </div>
 
     <div class="app-elem ip-elem">
@@ -70,7 +74,7 @@
           <em>Color: primary or success.</em>
         </small>
       </div>
-      <gln-textarea formControlName="model01c"
+      <gln-select formControlName="model01c"
         [label]="!control01a.model01c.value
           ? 'Enter a parameter':'Parameter specified'"
         [helperText]="control01a.model01c.value
@@ -79,10 +83,12 @@
         [glnColor]="control01a.model01c.value
           ? { primary: 'success' } : {}"
         [exterior]="exterior01a"
-        [minRows]="2"
-        [maxRows]="4"
         wdFull>
-      </gln-textarea>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
     </div>
 
     <div class="app-elem ip-elem">
@@ -91,15 +97,17 @@
           <em>Attribute: isDisabled.</em>
         </small>
       </div>
-      <gln-textarea formControlName="model01d"
+      <gln-select formControlName="model01d"
         label="Disabled"
         isDisabled
         helperText="The parameter is disabled."
         [exterior]="exterior01a"
-        [minRows]="2"
-        [maxRows]="4"
         wdFull>
-      </gln-textarea>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
     </div>
 
   </div>
@@ -128,14 +136,16 @@
           &lt;em&gt;State: empty.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="model01a"
+      &lt;gln-select formControlName="model01a"
         label="Enter value"
         helperText="Enter a value for the parameter."
         [exterior]="exterior01a"
-        [minRows]="2"
-        [maxRows]="4"
         wdFull&gt;
-      &lt;/gln-textarea&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem ip-elem"&gt;
@@ -144,7 +154,7 @@
           &lt;em&gt;Attributes: isRequired.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="model01b"
+      &lt;gln-select formControlName="model01b"
         isRequired
         [label]="!control01a.model01b.value
           ? 'Requires a value':'Parameter value'"
@@ -152,10 +162,12 @@
           ? 'The field is filled.'
           : 'The field is not filled.'"
         [exterior]="exterior01a"
-        [minRows]="2"
-        [maxRows]="4"
         wdFull&gt;
-      &lt;/gln-textarea&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem ip-elem"&gt;
@@ -164,7 +176,7 @@
           &lt;em&gt;Color: primary or success.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="model01c"
+      &lt;gln-select formControlName="model01c"
         [label]="!control01a.model01c.value
           ? 'Enter a parameter':'Parameter specified'"
         [helperText]="control01a.model01c.value
@@ -173,10 +185,12 @@
         [glnColor]="control01a.model01c.value
           ? &#123; primary: 'success' &#125; : &#123;&#125;"
         [exterior]="exterior01a"
-        [minRows]="2"
-        [maxRows]="4"
         wdFull&gt;
-      &lt;/gln-textarea&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem ip-elem"&gt;
@@ -185,15 +199,17 @@
           &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-textarea formControlName="model01d"
+      &lt;gln-select formControlName="model01d"
         label="Disabled"
         isDisabled
         helperText="The parameter is disabled."
         [exterior]="exterior01a"
-        [minRows]="2"
-        [maxRows]="4"
         wdFull&gt;
-      &lt;/gln-textarea&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;
@@ -210,12 +226,13 @@ import &#123;
 &#125; from '@angular/forms';
 
 @Component(&#123;
-  selector: 'app-textarea',
-  templateUrl: './textarea.component.html',
-  styleUrls: ['./textarea.component.scss'],
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
-export class TextareaComponent &#123;
+export class SelectComponent &#123;
+  public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
   public exterior01a = 'outlined';
   public control01a = &#123;
     model01a: new FormControl(null, []),
@@ -224,6 +241,10 @@ export class TextareaComponent &#123;
     model01d: new FormControl('Hello World', []),
   &#125;;
   public formGroup01a: FormGroup = new FormGroup(this.control01a);
+
+  public capitalizeFirstLetter(value: string): string &#123;
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  &#125;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

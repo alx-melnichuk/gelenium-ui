@@ -1,10 +1,10 @@
 <section mr-vr>
   <h4 class="app-hover-link">
     Like a Bootstrap.
-    <a [href]="urlPlInput + '#Bootstrap'">#</a>
+    <a [href]="urlPlSelect + '#Bootstrap'">#</a>
   </h4>
   <p>
-    It is possible to display GlnInput in style as "Bootstrap".
+    It is possible to display GlnSelect in style as "Bootstrap".
     <br />
     To do this, you need to specify the following configuration:
   </p>
@@ -32,12 +32,16 @@ public config02b: GlnFrameConfig = &#123;
           <em>State: empty.</em>
         </small>
       </div>
-      <gln-input formControlName="model02a"
+      <gln-select formControlName="model02a"
         label="Enter value"
         helperText="Enter a value for the parameter."
         [config]="config02a"
         wdFull>
-      </gln-input>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
     </div>
 
     <div class="app-elem ip-elem">
@@ -46,7 +50,7 @@ public config02b: GlnFrameConfig = &#123;
           <em>Attributes: isRequired.</em>
         </small>
       </div>
-      <gln-input formControlName="model02b"
+      <gln-select formControlName="model02b"
         isRequired
         [label]="!control02a.model02b.value
           ? 'Requires a value':'Parameter value'"
@@ -55,7 +59,11 @@ public config02b: GlnFrameConfig = &#123;
           : 'The field is not filled.'"
         [config]="config02a"
         wdFull>
-      </gln-input>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
     </div>
 
     <div class="app-elem ip-elem">
@@ -64,7 +72,7 @@ public config02b: GlnFrameConfig = &#123;
           <em>Color: primary or success.</em>
         </small>
       </div>
-      <gln-input formControlName="model02c"
+      <gln-select formControlName="model02c"
         [ngClass]="[control02a['model02c'].value ? 'ip-success' : '']"
         [label]="!control02a.model02c.value
           ? 'Enter a parameter':'Parameter specified'"
@@ -73,7 +81,11 @@ public config02b: GlnFrameConfig = &#123;
           : 'The parameter was not specified. (primary)'"
         [config]="config02a"
         wdFull>
-      </gln-input>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
     </div>
 
     <div class="app-elem ip-elem">
@@ -82,13 +94,17 @@ public config02b: GlnFrameConfig = &#123;
           <em>Attribute: isDisabled.</em>
         </small>
       </div>
-      <gln-input formControlName="model02d"
+      <gln-select formControlName="model02d"
         label="Disabled"
         isDisabled
         helperText="The parameter is disabled."
         [config]="config02a"
         wdFull>
-      </gln-input>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
     </div>
 
   </div>
@@ -117,12 +133,16 @@ public config02b: GlnFrameConfig = &#123;
           &lt;em&gt;State: empty.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="model02a"
+      &lt;gln-select formControlName="model02a"
         label="Enter value"
         helperText="Enter a value for the parameter."
         [config]="config02a"
         wdFull&gt;
-      &lt;/gln-input&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem ip-elem"&gt;
@@ -131,7 +151,7 @@ public config02b: GlnFrameConfig = &#123;
           &lt;em&gt;Attributes: isRequired.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="model02b"
+      &lt;gln-select formControlName="model02b"
         isRequired
         [label]="!control02a.model02b.value
           ? 'Requires a value':'Parameter value'"
@@ -140,7 +160,11 @@ public config02b: GlnFrameConfig = &#123;
           : 'The field is not filled.'"
         [config]="config02a"
         wdFull&gt;
-      &lt;/gln-input&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem ip-elem"&gt;
@@ -149,7 +173,7 @@ public config02b: GlnFrameConfig = &#123;
           &lt;em&gt;Color: primary or success.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="model02c"
+      &lt;gln-select formControlName="model02c"
         [ngClass]="[control02a['model02c'].value ? 'ip-success' : '']"
         [label]="!control02a.model02c.value
           ? 'Enter a parameter':'Parameter specified'"
@@ -158,7 +182,11 @@ public config02b: GlnFrameConfig = &#123;
           : 'The parameter was not specified. (primary)'"
         [config]="config02a"
         wdFull&gt;
-      &lt;/gln-input&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem ip-elem"&gt;
@@ -167,13 +195,17 @@ public config02b: GlnFrameConfig = &#123;
           &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="model02d"
+      &lt;gln-select formControlName="model02d"
         label="Disabled"
         isDisabled
         helperText="The parameter is disabled."
         [config]="config02a"
         wdFull&gt;
-      &lt;/gln-input&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;
@@ -193,12 +225,13 @@ import &#123;
 &#125; from 'gelenium-ui';
 
 @Component(&#123;
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
-export class InputComponent &#123;
+export class SelectComponent &#123;
+  public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
   public control02a = &#123;
     model02a: new FormControl(null, []),
     model02b: new FormControl(null, []),
@@ -212,6 +245,9 @@ export class InputComponent &#123;
     isNoLabel: true,
   &#125;;
 
+  public capitalizeFirstLetter(value: string): string &#123;
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  &#125;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

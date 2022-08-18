@@ -18,6 +18,19 @@ const siteUrlsInput: SiteUrl[] = [
 
 SiteMenuUtil.addItem('Palette', 'Input', { label: 'Input', siteUrls: siteUrlsInput });
 
+// ** Menu for "Select". **
+
+UrlPalette.add('URL_SELECT', 'select');
+const urlPlSelect = '/' + UrlPalette.get('URL_PALETTE') + '/' + UrlPalette.get('URL_SELECT');
+
+const siteUrlsSelect: SiteUrl[] = [
+  { label: 'Basic', url: urlPlSelect, fragment: 'Basic' },
+  { label: 'Like a Bootstrap', url: urlPlSelect, fragment: 'Bootstrap' },
+  { label: 'Like a Material-UI', url: urlPlSelect, fragment: 'MaterialUI' },
+];
+
+SiteMenuUtil.addItem('Palette', 'Select', { label: 'Select', siteUrls: siteUrlsSelect });
+
 // ** Menu for "Textarea". **
 
 UrlPalette.add('URL_TEXTAREA', 'textarea');

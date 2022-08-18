@@ -42,7 +42,7 @@ app-pl-input-bootstrap {
     box-shadow: 0 0 0 0.25rem rgb(25 135 84 / 25%);
   }
   // Definition of svg to represent "error".
-  .ip-bootstrap .gln-frame.gln-error .glnin-input {
+  .ip-bootstrap .gln-frame.gln-error>div>[glnfr-elem] {
     padding-right: 1.4em;
     background-image: url("data:image/svg+xml,"
     + "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'"
@@ -57,7 +57,7 @@ app-pl-input-bootstrap {
     margin-right: 0.5em;
   }
   // Definition of svg to represent "error".
-  .ip-bootstrap .ip-success .gln-frame:not(.gln-error) .glnin-input {
+  .ip-bootstrap .ip-success .gln-frame:not(.gln-error)>div>[glnfr-elem] {
     padding-right: 1.4em;
     background-image: url("data:image/svg+xml,"
     + "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'>"
