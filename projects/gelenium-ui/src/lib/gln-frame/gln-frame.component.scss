@@ -142,26 +142,26 @@ gln-frame {
     --glnfr---dis-s: var(--glnfr--default-s);
   }
 
-  --glnfr--lb-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 40%/*38%*/);
-  --glnfr--br-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 45%/*80%*/);
-  --glnfr--bg-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 97%/*94%*/);
-  --glnfr--bf-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 45%/*55%*/);
+  --glnfr--lb-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 40%);
+  --glnfr--br-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 45%);
+  --glnfr--bg-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 97%);
+  --glnfr--bf-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 45%);
 
-  --glnfr--lb-cl-hov: hsl(var(--glnfr---hov-h), var(--glnfr---hov-s), 35%/*38%*/);
-  --glnfr--br-cl-hov: hsl(var(--glnfr---hov-h), var(--glnfr---hov-s), 40%/*17%*/);
-  --glnfr--bg-cl-hov: hsl(var(--glnfr---hov-h), var(--glnfr---hov-s), 93%/*91%*/);
-  --glnfr--bf-cl-hov: hsl(var(--glnfr---hov-h), var(--glnfr---hov-s), 40%/*17%*/);
+  --glnfr--lb-cl-hov: hsl(var(--glnfr---hov-h), var(--glnfr---hov-s), 35%);
+  --glnfr--br-cl-hov: hsl(var(--glnfr---hov-h), var(--glnfr---hov-s), 40%);
+  --glnfr--bg-cl-hov: hsl(var(--glnfr---hov-h), var(--glnfr---hov-s), 93%);
+  --glnfr--bf-cl-hov: hsl(var(--glnfr---hov-h), var(--glnfr---hov-s), 40%);
 
-  --glnfr--lb-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 45%/*46%*/);
-  --glnfr--br-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 50%/*75%*/);
-  --glnfr--bg-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 95%/*97%*/);
-  --glnfr--bf-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 40%/*17%*/);
-  --glnfr--af-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 50%/*46%*/);
+  --glnfr--lb-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 45%);
+  --glnfr--br-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 50%);
+  --glnfr--bg-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 95%);
+  --glnfr--bf-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 40%);
+  --glnfr--af-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 50%);
 
-  --glnfr--lb-cl-dis: hsl(var(--glnfr---dis-h), var(--glnfr---dis-s), 50%/*58%*/);
-  --glnfr--br-cl-dis: hsl(var(--glnfr---dis-h), var(--glnfr---dis-s), 60%/*74%*/);
-  --glnfr--bg-cl-dis: hsl(var(--glnfr---dis-h), var(--glnfr---dis-s), 92%/*88%*/);
-  --glnfr--bf-cl-dis: hsl(var(--glnfr---dis-h), var(--glnfr---dis-s), 60%/*55%*/);
+  --glnfr--lb-cl-dis: hsl(var(--glnfr---dis-h), var(--glnfr---dis-s), 50%);
+  --glnfr--br-cl-dis: hsl(var(--glnfr---dis-h), var(--glnfr---dis-s), 60%);
+  --glnfr--bg-cl-dis: hsl(var(--glnfr---dis-h), var(--glnfr---dis-s), 92%);
+  --glnfr--bf-cl-dis: hsl(var(--glnfr---dis-h), var(--glnfr---dis-s), 60%);
 
   // Definition of internal variables by element state.
   &:not([dis]) {

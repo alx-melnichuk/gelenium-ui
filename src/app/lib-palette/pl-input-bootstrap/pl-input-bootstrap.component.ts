@@ -11,17 +11,17 @@ import {
   LABEL_STANDARD,
   LABEL_TS,
   LABEL_UNDERLINE,
-} from '../../../lib-core/constants';
-import { UrlPalette } from '../../../lib-palette/lib-palette.constants';
+} from '../../lib-core/constants';
+import { UrlPalette } from '../../lib-palette/lib-palette.constants';
 
 @Component({
-  selector: 'app-input-palette',
-  templateUrl: './input-palette.component.html',
-  styleUrls: ['./input-palette.component.scss'],
+  selector: 'app-pl-input-bootstrap',
+  templateUrl: './pl-input-bootstrap.component.html',
+  styleUrls: ['./pl-input-bootstrap.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputPaletteComponent {
+export class PlInputBootstrapComponent {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -39,8 +39,6 @@ export class InputPaletteComponent {
 
   public urlPlInput = '/' + UrlPalette.get('URL_PALETTE') + '/' + UrlPalette.get('URL_INPUT');
 
-  // The default palette.
-  public exterior02a = 'outlined';
   public control02a = {
     model02a: new FormControl(null, []),
     model02b: new FormControl(null, []),
@@ -49,30 +47,12 @@ export class InputPaletteComponent {
   };
   public formGroup02a: FormGroup = new FormGroup(this.control02a);
 
-  // Palette like Bootstrap.
-  public control02b = {
-    model02e: new FormControl(null, []),
-    model02f: new FormControl(null, []),
-    model02g: new FormControl('Hello World', []),
-    model02h: new FormControl('Hello World', []),
-  };
-  public formGroup02b: FormGroup = new FormGroup(this.control02b);
-  public config02b: GlnFrameConfig = {
+  public config02a: GlnFrameConfig = {
     exterior: GlnFrameExterior.outlined,
     frameSize: GlnFrameSize.short,
     isNoLabel: true,
   };
 
-  // Palette like Material-UI.
-  public exterior02c = 'outlined';
-  public control02c = {
-    model02i: new FormControl(null, []),
-    model02j: new FormControl(null, []),
-    model02k: new FormControl('Hello World', []),
-    model02l: new FormControl('Hello World', []),
-  };
-  public formGroup02c: FormGroup = new FormGroup(this.control02c);
-  public config02c: GlnFrameConfig = {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }

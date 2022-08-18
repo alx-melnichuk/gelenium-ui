@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputPaletteComponent } from './input-palette.component';
+import { PlInputComponent } from './pl-input.component';
 
-describe('InputPaletteComponent', () => {
-  let component: InputPaletteComponent;
-  let fixture: ComponentFixture<InputPaletteComponent>;
+describe('PlInputComponent', () => {
+  let component: PlInputComponent;
+  let fixture: ComponentFixture<PlInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InputPaletteComponent ]
+      declarations: [ PlInputComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(InputPaletteComponent);
+    fixture = TestBed.createComponent(PlInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

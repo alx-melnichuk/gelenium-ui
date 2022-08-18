@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { InputComponent } from './input.component';
+import { PlInputComponent } from './pl-input.component';
 
-const routes: Routes = [{ path: '', component: InputComponent }];
+const routes: Routes = [{ path: '', component: PlInputComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class InputRoutingModule {}
+export class PlInputRoutingModule {}

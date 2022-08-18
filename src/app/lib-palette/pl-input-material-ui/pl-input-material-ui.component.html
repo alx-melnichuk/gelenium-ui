@@ -1,0 +1,326 @@
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Like a Material-UI.
+    <a [href]="urlPlInput + '#MaterialUI'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnInput in style as "Material-UI".
+  </p>
+  <span>
+    This requires some css-styles to be defined.
+  </span>
+</section>
+
+<section mr-vr>
+  <span>exterior: &nbsp;</span>
+  <mat-button-toggle-group value="exterior03a"
+    (change)="exterior03a=$event.value">
+    <mat-button-toggle [checked]="exterior03a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03a==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03a==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<form [formGroup]="formGroup03a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group ip-material-ui">
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>State: empty.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model03a"
+        label="Enter value"
+        helperText="Enter a value for the parameter."
+        frameSize="wide"
+        [exterior]="exterior03a"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Attributes: isRequired.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model03b"
+        isRequired
+        [label]="!control03a.model03b.value
+          ? 'Requires a value':'Parameter value'"
+        [helperText]="control03a.model03b.value
+          ? 'The field is filled.'
+          : 'The field is not filled.'"
+        frameSize="wide"
+        [exterior]="exterior03a"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Color: primary or success.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model03c"
+        [ngClass]="[control03a['model03c'].value ? 'ip-success' : '']"
+        [label]="!control03a.model03c.value
+          ? 'Enter a parameter':'Parameter specified'"
+        [helperText]="control03a.model03c.value
+          ? 'The parameter was specified. (success)'
+          : 'The parameter was not specified. (primary)'"
+        frameSize="wide"
+        [exterior]="exterior03a"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Attribute: isDisabled.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model03d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        frameSize="wide"
+        [exterior]="exterior03a"
+        wdFull>
+      </gln-input>
+    </div>
+
+  </div>
+
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup03a"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group ip-material-ui"&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;State: empty.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model03a"
+        label="Enter value"
+        helperText="Enter a value for the parameter."
+        frameSize="wide"
+        [exterior]="exterior03a"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: isRequired.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model03b"
+        isRequired
+        [label]="!control03a.model03b.value
+          ? 'Requires a value':'Parameter value'"
+        [helperText]="control03a.model03b.value
+          ? 'The field is filled.'
+          : 'The field is not filled.'"
+        frameSize="wide"
+        [exterior]="exterior03a"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Color: primary or success.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model03c"
+        [ngClass]="[control03a['model03c'].value ? 'ip-success' : '']"
+        [label]="!control03a.model03c.value
+          ? 'Enter a parameter':'Parameter specified'"
+        [helperText]="control03a.model03c.value
+          ? 'The parameter was specified. (success)'
+          : 'The parameter was not specified. (primary)'"
+        frameSize="wide"
+        [exterior]="exterior03a"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model03d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        frameSize="wide"
+        [exterior]="exterior03a"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class InputComponent &#123;
+  public exterior03a = 'outlined';
+  public control03a = &#123;
+    model03a: new FormControl(null, []),
+    model03b: new FormControl(null, []),
+    model03c: new FormControl('Hello World', []),
+    model03d: new FormControl('Hello World', []),
+    &#125;;
+  public formGroup03a: FormGroup = new FormGroup(this.control03a);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.ip-elem &#123;
+  width: 29ch;
+&#125;
+
+// ** Palette like Material-UI. **
+
+.ip-material-ui &#123;
+  // "default"
+  --mui-default: rgba(0, 0, 0, 0.6);
+  --mui-default-dis: rgba(0, 0, 0, 0.38);
+  --mui-default-hov: rgba(0, 0, 0, 0.87);
+  --glncl-default-h: 20;
+  --glncl-default-s: 2%;
+  // "primary"
+  --mui-primary: #1976d2;
+  --glncl-primary-h: 210;
+  --glncl-primary-s: 79%;
+  // "danger"
+  --mui-danger: #d32f2f;
+  --glncl-danger-h: 0;
+  --glncl-danger-s: 65%;
+  // scheme "success"
+  // #--sh-success: hsl(135, 40%, 50%);
+  --gln-sh-success-h: 135;
+  --gln-sh-success-s: 40%;
+&#125;
+
+// gln-frame
+.ip-material-ui .gln-frame:not([dis]):not([err]) &#123;
+  --glnfr-def-lb-cl: var(--mui-default);
+  --glnfr-def-br-cl: rgba(0, 0, 0, 0.23);
+  --glnfr-def-bf-cl: rgba(0, 0, 0, 0.42);
+
+  --glnfr-hov-lb-cl: var(--mui-default);
+  --glnfr-hov-br-cl: var(--mui-default-hov);
+  --glnfr-hov-bf-cl: var(--mui-default-hov);
+
+  --glnfr-foc-lb-cl: var(--mui-primary);
+  --glnfr-foc-br-cl: var(--mui-primary);
+  --glnfr-foc-bf-cl: var(--mui-default-hov);
+  --glnfr-foc-af-cl: var(--mui-primary);
+&#125;
+.ip-material-ui .gln-frame:not([dis])[err] &#123;
+  --glnfr-def-lb-cl: var(--mui-danger);
+  --glnfr-def-br-cl: var(--mui-danger);
+  --glnfr-def-bf-cl: var(--mui-danger);
+
+  --glnfr-hov-lb-cl: var(--mui-danger);
+  --glnfr-hov-br-cl: var(--mui-danger);
+  --glnfr-hov-bf-cl: var(--mui-danger);
+
+  --glnfr-foc-lb-cl: var(--mui-danger);
+  --glnfr-foc-br-cl: var(--mui-danger);
+  --glnfr-foc-bf-cl: var(--mui-danger);
+  --glnfr-foc-af-cl: var(--mui-danger);
+&#125;
+.ip-material-ui .gln-frame[dis] &#123;
+  --glnfr-dis-lb-cl: var(--mui-default-dis);
+  --glnfr-dis-br-cl: rgba(0, 0, 0, 0.26);
+  --glnfr-dis-bg-cl: rgba(0, 0, 0, 0.12);
+  --glnfr-dis-bf-cl: rgba(0, 0, 0, 0.42);
+&#125;
+.ip-material-ui .gln-frame &#123;
+  --glnfr-def-bg-cl: rgba(0, 0, 0, 0.06);
+  --glnfr-hov-bg-cl: rgba(0, 0, 0, 0.09);
+  --glnfr-foc-bg-cl: rgba(0, 0, 0, 0.05);
+  // Blocking frame resizing when hovering the mouse for "Outlined" mode.
+  --glnfr-hov-dcr-br-wd: unset;
+&#125;
+.ip-material-ui .ip-success .gln-frame:not([dis]):not([err]) &#123;
+  --glnfr-foc-lb-cl: hsl(var(--gln-sh-success-h), var(--gln-sh-success-s), 45%);
+  --glnfr-foc-br-cl: hsl(var(--gln-sh-success-h), var(--gln-sh-success-s), 50%);
+  --glnfr-foc-bf-cl: hsl(var(--gln-sh-success-h), var(--gln-sh-success-s), 40%);
+  --glnfr-foc-af-cl: hsl(var(--gln-sh-success-h), var(--gln-sh-success-s), 50%);
+&#125;
+
+// gln-hint-or-error
+.ip-material-ui .gln-hint-or-error:not([dis]):not([err]) &#123;
+  --glnhe-def-lb-cl: var(--mui-default);
+  --glnhe-foc-lb-cl: var(--mui-default);
+&#125;
+.ip-material-ui .gln-hint-or-error:not([dis])[err] &#123;
+  --glnhe-def-lb-cl: var(--mui-danger);
+  --glnhe-foc-lb-cl: var(--mui-danger);
+&#125;
+.ip-material-ui .gln-hint-or-error[dis] &#123;
+  --glnhe-dis-lb-cl: var(--mui-default-dis);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       {
         path: URL_INPUT,
-        loadChildren: () => import('../lib-palette/components/input/input.module').then((m) => m.InputModule),
+        loadChildren: () => import('../lib-palette/pl-input/pl-input.module').then((m) => m.PlInputModule),
       },
     ],
   },
@@ -24,8 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class LmPaletteRoutingModule {
-  constructor() {
-    console.log(`LmPaletteRoutingModule();`);
-  }
-}
+export class LmPaletteRoutingModule {}

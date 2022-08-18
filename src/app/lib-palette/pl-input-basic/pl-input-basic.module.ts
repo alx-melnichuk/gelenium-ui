@@ -7,11 +7,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { GlnColorModule, GlnInputModule } from 'gelenium-ui';
 
-import { InputPaletteComponent } from './input-palette.component';
+import { PlInputBasicComponent } from './pl-input-basic.component';
 
 @NgModule({
-  declarations: [InputPaletteComponent],
+  declarations: [PlInputBasicComponent],
   imports: [CommonModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnColorModule, GlnInputModule],
-  exports: [InputPaletteComponent],
+  exports: [PlInputBasicComponent],
 })
-export class InputPaletteModule {}
+export class PlInputBasicModule {}
