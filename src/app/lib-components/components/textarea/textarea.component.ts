@@ -3,6 +3,7 @@ import { take } from 'rxjs/operators';
 
 import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
 import { UrlComponents } from '../../../lib-components/lib-components.constants';
+import { UrlPalette } from '../../../lib-palette/lib-palette.constants';
 
 const logLabel = 'Textarea';
 
@@ -15,8 +16,10 @@ const logLabel = 'Textarea';
 })
 export class TextareaComponent implements AfterViewInit {
   public showNum = '';
+
   public urlFrame1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
   public urlFrame2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
+  public urlPlTextarea = '/' + UrlPalette.get('URL_PALETTE') + '/' + UrlPalette.get('URL_TEXTAREA');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

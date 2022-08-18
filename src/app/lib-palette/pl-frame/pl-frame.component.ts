@@ -1,24 +1,18 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsulation } from '@angular/core';
 import { take } from 'rxjs/operators';
 
-import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
-import { UrlComponents } from '../../../lib-components/lib-components.constants';
-import { UrlPalette } from '../../../lib-palette/lib-palette.constants';
+import { ScrollAfterRoutingUtil } from '../../lib-core/utils/scroll-after-routing.util';
 
-const logLabel = 'Select';
-
+const logLabel = 'PaletteFrame';
 @Component({
-  selector: 'app-select',
-  templateUrl: './select.component.html',
-  styleUrls: ['./select.component.scss'],
+  selector: 'app-pl-frame',
+  templateUrl: './pl-frame.component.html',
+  styleUrls: ['./pl-frame.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectComponent implements AfterViewInit {
+export class PlFrameComponent implements AfterViewInit {
   public showNum = '';
-
-  public urlFrame1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
-  public urlPlSelect = '/' + UrlPalette.get('URL_PALETTE') + '/' + UrlPalette.get('URL_SELECT');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

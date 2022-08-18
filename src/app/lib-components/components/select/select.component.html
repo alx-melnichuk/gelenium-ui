@@ -69,11 +69,16 @@
   <hr br-tp>
 </section>
 
-<div *ngIf="!showNum || showNum==='07'"
+<section mr-vr
+  *ngIf="!showNum || showNum==='07'"
   id="Palette">
-  <app-select-palette></app-select-palette>
+  <h3>Palette</h3>
+  <p>
+    The <a [href]="urlPlSelect + '#Basic'">"Palette GlnSelect#Basic"</a>
+    page shows you how to change the color palette of an element.
+  </p>
   <hr br-tp>
-</div>
+</section>
 
 <div *ngIf="!showNum || showNum==='08'"
   id="Config">

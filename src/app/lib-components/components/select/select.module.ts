@@ -8,7 +8,6 @@ import { SelectGroupModule } from '../select-group/select-group.module';
 import { SelectTriggerModule } from '../select-trigger/select-trigger.module';
 import { SelectOrnamentsModule } from '../select-ornaments/select-ornaments.module';
 import { SelectConfigModule } from '../select-config/select-config.module';
-import { SelectPaletteModule } from '../select-palette/select-palette.module';
 import { SelectApiModule } from '../select-api/select-api.module';
 
 import { SelectComponent } from './select.component';
@@ -24,7 +23,6 @@ import { SelectRoutingModule } from './select-routing.module';
     SelectGroupModule,
     SelectTriggerModule,
     SelectOrnamentsModule,
-    SelectPaletteModule,
     SelectConfigModule,
     SelectApiModule,
     SelectRoutingModule,

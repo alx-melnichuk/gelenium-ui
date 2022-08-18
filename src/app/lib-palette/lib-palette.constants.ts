@@ -5,6 +5,15 @@ export class UrlPalette extends UrlUtil {}
 
 UrlPalette.add('URL_PALETTE', 'palette');
 
+// ** Menu for "Frame". **
+
+UrlPalette.add('URL_FRAME', 'frame');
+const urlPlFrame = '/' + UrlPalette.get('URL_PALETTE') + '/' + UrlPalette.get('URL_FRAME');
+
+const siteUrlsFrame: SiteUrl[] = [{ label: 'Customer', url: urlPlFrame, fragment: 'Customer' }];
+
+SiteMenuUtil.addItem('Palette', 'Frame', { label: 'Frame', siteUrls: siteUrlsFrame });
+
 // ** Menu for "Input". **
 
 UrlPalette.add('URL_INPUT', 'input');
