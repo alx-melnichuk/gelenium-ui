@@ -5,7 +5,7 @@ export class UrlPalette extends UrlUtil {}
 
 UrlPalette.add('URL_PALETTE', 'palette');
 
-// ** Palette Input **
+// ** Menu for "Input". **
 
 UrlPalette.add('URL_INPUT', 'input');
 const urlPlInput = '/' + UrlPalette.get('URL_PALETTE') + '/' + UrlPalette.get('URL_INPUT');
@@ -17,5 +17,18 @@ const siteUrlsInput: SiteUrl[] = [
 ];
 
 SiteMenuUtil.addItem('Palette', 'Input', { label: 'Input', siteUrls: siteUrlsInput });
+
+// ** Menu for "Textarea". **
+
+UrlPalette.add('URL_TEXTAREA', 'textarea');
+const urlPlTextarea = '/' + UrlPalette.get('URL_PALETTE') + '/' + UrlPalette.get('URL_TEXTAREA');
+
+const siteUrlsTextarea: SiteUrl[] = [
+  { label: 'Basic', url: urlPlTextarea, fragment: 'Basic' },
+  { label: 'Like a Bootstrap', url: urlPlTextarea, fragment: 'Bootstrap' },
+  { label: 'Like a Material-UI', url: urlPlTextarea, fragment: 'MaterialUI' },
+];
+
+SiteMenuUtil.addItem('Palette', 'Textarea', { label: 'Textarea', siteUrls: siteUrlsTextarea });
 
 // ** **
