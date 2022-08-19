@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants';
-import { UrlComponents } from '../../../lib-components/lib-components.constants';
+import { UrlUtil } from '../../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-select-basic',
@@ -21,7 +21,7 @@ export class SelectBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlSelect = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_SELECT');
+  public urlSelect = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_SELECT');
 
   public control01 = {
     model01a: new FormControl(null, []),

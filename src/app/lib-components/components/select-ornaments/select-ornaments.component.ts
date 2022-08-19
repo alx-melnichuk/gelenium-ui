@@ -10,7 +10,7 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../../lib-core/constants';
-import { UrlComponents } from '../../../lib-components/lib-components.constants';
+import { UrlUtil } from '../../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-select-ornaments',
@@ -35,7 +35,7 @@ export class SelectOrnamentsComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlSelect = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_SELECT');
+  public urlSelect = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_SELECT');
 
   public exterior06a = 'outlined';
 

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants';
-import { UrlComponents } from '../../../lib-components/lib-components.constants';
+import { UrlUtil } from '../../../lib-core/utils/url.util';
 
 import { GlnFrameSize, GlnFrameConfig, GlnFrameExterior, GLN_FRAME_CONFIG } from 'gelenium-ui';
 
@@ -29,8 +29,8 @@ export class FrameConfigComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlFrame1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
-  public urlFrame2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
+  public urlFrame1 = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
+  public urlFrame2 = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
 
   public formGroup07: FormGroup = new FormGroup({
     model07a: new FormControl('', []),

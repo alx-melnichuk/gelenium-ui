@@ -10,7 +10,7 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../../lib-core/constants';
-import { UrlComponents } from '../../../lib-components/lib-components.constants';
+import { UrlUtil } from '../../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-frame-palette',
@@ -35,7 +35,7 @@ export class FramePaletteComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlFrame2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
+  public urlFrame2 = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
 
   public minLength06a = 5;
   public controls06a = {

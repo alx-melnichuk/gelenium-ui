@@ -11,7 +11,7 @@ import {
   LABEL_UNDERLINE,
 } from '../../../lib-core/constants';
 
-import { UrlComponents } from '../../../lib-components/lib-components.constants';
+import { UrlUtil } from '../../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-input-attributes',
@@ -36,9 +36,9 @@ export class InputAttributesComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlInput = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_INPUT');
-  public urlFrame1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
-  public urlFrame2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
+  public urlInput = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_INPUT');
+  public urlFrame1 = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
+  public urlFrame2 = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
 
   public exterior02a = 'outlined';
   public formGroup02a: FormGroup = new FormGroup({

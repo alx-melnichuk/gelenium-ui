@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsul
 import { take } from 'rxjs/operators';
 
 import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
-import { UrlComponents } from '../../../lib-components/lib-components.constants';
+import { UrlUtil } from '../../../lib-core/utils/url.util';
 import { UrlPalette } from '../../../lib-palette/lib-palette.constants';
 
 const logLabel = 'Textarea';
@@ -17,8 +17,8 @@ const logLabel = 'Textarea';
 export class TextareaComponent implements AfterViewInit {
   public showNum = '';
 
-  public urlFrame1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
-  public urlFrame2 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_FRAME');
+  public urlFrame1 = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
+  public urlFrame2 = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
   public urlPlTextarea = '/' + UrlPalette.get('URL_PALETTE') + '/' + UrlPalette.get('URL_TEXTAREA');
 
   constructor(private ngZone: NgZone) {

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { GlnFrameConfig, GlnFrameOrnamAlign } from 'gelenium-ui';
-import { UrlComponents } from '../../../lib-components/lib-components.constants';
+import { UrlUtil } from '../../../lib-core/utils/url.util';
 
 import {
   LABEL_CSS,
@@ -37,7 +37,7 @@ export class TextareaOrnamentsComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlTextarea = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_TEXTAREA');
+  public urlTextarea = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_TEXTAREA');
 
   public controls05 = {
     model05a: new FormControl('', []),

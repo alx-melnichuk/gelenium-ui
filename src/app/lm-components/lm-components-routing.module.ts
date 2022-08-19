@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { UrlComponents } from '../lib-components/lib-components.constants';
+import { UrlUtil } from '../lib-core/utils/url.util';
 import { LmComponentsComponent } from './lm-components.component';
 
-const URL_BUTTON = UrlComponents.get('URL_BUTTON');
-const URL_FRAME = UrlComponents.get('URL_FRAME');
-const URL_HINT_OR_ERROR = UrlComponents.get('URL_HINT_OR_ERROR');
-const URL_INFINITE_SCROLL = UrlComponents.get('URL_INFINITE_SCROLL');
-const URL_INPUT = UrlComponents.get('URL_INPUT');
-const URL_SELECT = UrlComponents.get('URL_SELECT');
-const URL_TEXTAREA = UrlComponents.get('URL_TEXTAREA');
+const URL_BUTTON = UrlUtil.get('URL_BUTTON');
+const URL_FRAME = UrlUtil.get('URL_FRAME');
+const URL_HINT_OR_ERROR = UrlUtil.get('URL_HINT_OR_ERROR');
+const URL_INFINITE_SCROLL = UrlUtil.get('URL_INFINITE_SCROLL');
+const URL_INPUT = UrlUtil.get('URL_INPUT');
+const URL_SELECT = UrlUtil.get('URL_SELECT');
+const URL_TEXTAREA = UrlUtil.get('URL_TEXTAREA');
 
 const routes: Routes = [
   {

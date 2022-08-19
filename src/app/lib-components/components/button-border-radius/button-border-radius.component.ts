@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { UrlComponents } from '../../../lib-components/lib-components.constants';
+import { UrlUtil } from '../../../lib-core/utils/url.util';
 
 import { GlnButtonConfig, GlnFrameSize, GlnFrameSizeUtil } from 'gelenium-ui';
 
@@ -29,7 +29,7 @@ export class ButtonBorderRadiusComponent {
   @Input()
   public labelText = BTN_TEXT;
 
-  public urlButton1 = '/' + UrlComponents.get('URL_COMPONENTS') + '/' + UrlComponents.get('URL_BUTTON');
+  public urlButton1 = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_BUTTON');
 
   public routerLink = this.urlButton1;
   public exterior04a = 'outlined';
