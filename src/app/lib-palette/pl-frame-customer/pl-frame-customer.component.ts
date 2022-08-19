@@ -10,7 +10,7 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
-import { UrlPalette } from '../../lib-palette/lib-palette.constants';
+import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-pl-frame-customer',
@@ -35,7 +35,7 @@ export class PlFrameCustomerComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlPlFrame = '/' + UrlPalette.get('URL_PALETTE') + '/' + UrlPalette.get('URL_FRAME');
+  public urlPlFrame = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_FRAME');
 
   public exterior01a = 'outlined';
   public control01a = {

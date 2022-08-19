@@ -10,7 +10,7 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
-import { UrlPalette } from '../../lib-palette/lib-palette.constants';
+import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-pl-input-material-ui',
@@ -35,7 +35,7 @@ export class PlInputMaterialUiComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlPlInput = '/' + UrlPalette.get('URL_PALETTE') + '/' + UrlPalette.get('URL_INPUT');
+  public urlPlInput = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_INPUT');
 
   public exterior03a = 'outlined';
   public control03a = {

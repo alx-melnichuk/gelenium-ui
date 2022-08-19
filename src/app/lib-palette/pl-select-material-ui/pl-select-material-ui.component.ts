@@ -10,7 +10,7 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
-import { UrlPalette } from '../../lib-palette/lib-palette.constants';
+import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-pl-select-material-ui',
@@ -35,7 +35,7 @@ export class PlSelectMaterialUiComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlPlSelect = '/' + UrlPalette.get('URL_PALETTE') + '/' + UrlPalette.get('URL_SELECT');
+  public urlPlSelect = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_SELECT');
 
   public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
   public exterior03a = 'outlined';

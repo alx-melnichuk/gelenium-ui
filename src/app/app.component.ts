@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {
     this.initMenuComponents();
     this.initMenuDirectives();
+    this.initMenuPalette();
   }
 
   public ngOnInit(): void {
@@ -167,5 +168,59 @@ export class AppComponent implements OnInit {
       { label: 'Api', url: urlRegexRemove, fragment: 'Api' },
     ];
     SiteMenuUtil.addItem('Directives', 'RegexRemove', { label: 'RegexRemove', siteUrls: siteUrlsRegexRemove });
+  }
+
+  public initMenuPalette(): void {
+    UrlUtil.add('URL_PALETTE', 'palette');
+
+    // ** Menu for "Frame". **
+
+    UrlUtil.add('URL_FRAME', 'frame');
+    const urlPlFrame = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_FRAME');
+
+    const siteUrlsFrame: SiteUrl[] = [{ label: 'Customer', url: urlPlFrame, fragment: 'Customer' }];
+
+    SiteMenuUtil.addItem('Palette', 'Frame', { label: 'Frame', siteUrls: siteUrlsFrame });
+
+    // ** Menu for "Input". **
+
+    UrlUtil.add('URL_INPUT', 'input');
+    const urlPlInput = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_INPUT');
+
+    const siteUrlsInput: SiteUrl[] = [
+      { label: 'Basic', url: urlPlInput, fragment: 'Basic' },
+      { label: 'Like a Bootstrap', url: urlPlInput, fragment: 'Bootstrap' },
+      { label: 'Like a Material-UI', url: urlPlInput, fragment: 'MaterialUI' },
+    ];
+
+    SiteMenuUtil.addItem('Palette', 'Input', { label: 'Input', siteUrls: siteUrlsInput });
+
+    // ** Menu for "Select". **
+
+    UrlUtil.add('URL_SELECT', 'select');
+    const urlPlSelect = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_SELECT');
+
+    const siteUrlsSelect: SiteUrl[] = [
+      { label: 'Basic', url: urlPlSelect, fragment: 'Basic' },
+      { label: 'Like a Bootstrap', url: urlPlSelect, fragment: 'Bootstrap' },
+      { label: 'Like a Material-UI', url: urlPlSelect, fragment: 'MaterialUI' },
+    ];
+
+    SiteMenuUtil.addItem('Palette', 'Select', { label: 'Select', siteUrls: siteUrlsSelect });
+
+    // ** Menu for "Textarea". **
+
+    UrlUtil.add('URL_TEXTAREA', 'textarea');
+    const urlPlTextarea = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_TEXTAREA');
+
+    const siteUrlsTextarea: SiteUrl[] = [
+      { label: 'Basic', url: urlPlTextarea, fragment: 'Basic' },
+      { label: 'Like a Bootstrap', url: urlPlTextarea, fragment: 'Bootstrap' },
+      { label: 'Like a Material-UI', url: urlPlTextarea, fragment: 'MaterialUI' },
+    ];
+
+    SiteMenuUtil.addItem('Palette', 'Textarea', { label: 'Textarea', siteUrls: siteUrlsTextarea });
+
+    // ** **
   }
 }

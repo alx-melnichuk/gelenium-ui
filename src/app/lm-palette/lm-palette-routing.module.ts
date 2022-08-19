@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { UrlPalette } from '../lib-palette/lib-palette.constants';
+import { UrlUtil } from '../lib-core/utils/url.util';
 
 import { LmPaletteComponent } from './lm-palette.component';
 
-const URL_FRAME = UrlPalette.get('URL_FRAME');
-const URL_INPUT = UrlPalette.get('URL_INPUT');
-const URL_SELECT = UrlPalette.get('URL_SELECT');
-const URL_TEXTAREA = UrlPalette.get('URL_TEXTAREA');
+const URL_FRAME = UrlUtil.get('URL_FRAME');
+const URL_INPUT = UrlUtil.get('URL_INPUT');
+const URL_SELECT = UrlUtil.get('URL_SELECT');
+const URL_TEXTAREA = UrlUtil.get('URL_TEXTAREA');
 
 const routes: Routes = [
   {
