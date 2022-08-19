@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { UrlDirectives } from '../lib-directives/lib-directives.constants';
+import { UrlUtil } from '../lib-core/utils/url.util';
 
 import { LmDirectivesComponent } from './lm-directives.component';
 
-const URL_AUTO_FOCUSE = UrlDirectives.get('URL_AUTO_FOCUSE');
-const URL_REGEX_CHECK = UrlDirectives.get('URL_REGEX_CHECK');
-const URL_REGEX_MATCH = UrlDirectives.get('URL_REGEX_MATCH');
-const URL_REGEX_REMOVE = UrlDirectives.get('URL_REGEX_REMOVE');
+const URL_AUTO_FOCUSE = UrlUtil.get('URL_AUTO_FOCUSE');
+const URL_REGEX_CHECK = UrlUtil.get('URL_REGEX_CHECK');
+const URL_REGEX_MATCH = UrlUtil.get('URL_REGEX_MATCH');
+const URL_REGEX_REMOVE = UrlUtil.get('URL_REGEX_REMOVE');
 
 const routes: Routes = [
   {

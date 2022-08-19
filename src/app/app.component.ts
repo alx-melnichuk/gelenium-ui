@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
 
   constructor(private router: Router) {
     this.initMenuComponents();
+    this.initMenuDirectives();
   }
 
   public ngOnInit(): void {
@@ -129,5 +130,42 @@ export class AppComponent implements OnInit {
       { label: 'Api', url: urlTextarea, fragment: 'Api' },
     ];
     SiteMenuUtil.addItem('Components', 'Textarea', { label: 'Textarea', siteUrls: siteUrlsTextarea });
+  }
+
+  public initMenuDirectives(): void {
+    UrlUtil.add('URL_DIRECTIVES', 'directives');
+
+    UrlUtil.add('URL_AUTO_FOCUSE', 'auto-focuse');
+
+    const urlAutoFocuse = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_AUTO_FOCUSE');
+    const siteUrlsAutoFocuse: SiteUrl[] = [
+      { label: 'Basic', url: urlAutoFocuse, fragment: 'Basic' },
+      { label: 'Api', url: urlAutoFocuse, fragment: 'Api' },
+    ];
+    SiteMenuUtil.addItem('Directives', 'AutoFocuse', { label: 'AutoFocuse', siteUrls: siteUrlsAutoFocuse });
+
+    UrlUtil.add('URL_REGEX_CHECK', 'regex-check');
+    const urlRegexCheck = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_REGEX_CHECK');
+    const siteUrlsRegexCheck: SiteUrl[] = [
+      { label: 'Basic', url: urlRegexCheck, fragment: 'Basic' },
+      { label: 'Api', url: urlRegexCheck, fragment: 'Api' },
+    ];
+    SiteMenuUtil.addItem('Directives', 'RegexCheck', { label: 'RegexCheck', siteUrls: siteUrlsRegexCheck });
+
+    UrlUtil.add('URL_REGEX_MATCH', 'regex-match');
+    const urlRegexMatch = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_REGEX_MATCH');
+    const siteUrlsRegexMatch: SiteUrl[] = [
+      { label: 'Basic', url: urlRegexMatch, fragment: 'Basic' },
+      { label: 'Api', url: urlRegexMatch, fragment: 'Api' },
+    ];
+    SiteMenuUtil.addItem('Directives', 'RegexMatch', { label: 'RegexMatch', siteUrls: siteUrlsRegexMatch });
+
+    UrlUtil.add('URL_REGEX_REMOVE', 'regex-remove');
+    const urlRegexRemove = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_REGEX_REMOVE');
+    const siteUrlsRegexRemove: SiteUrl[] = [
+      { label: 'Basic', url: urlRegexRemove, fragment: 'Basic' },
+      { label: 'Api', url: urlRegexRemove, fragment: 'Api' },
+    ];
+    SiteMenuUtil.addItem('Directives', 'RegexRemove', { label: 'RegexRemove', siteUrls: siteUrlsRegexRemove });
   }
 }
