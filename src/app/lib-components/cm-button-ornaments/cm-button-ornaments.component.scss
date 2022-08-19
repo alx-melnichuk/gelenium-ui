@@ -1,0 +1,32 @@
+/*# sourceURL=cm-button-ornaments.component.scss */
+
+app-cm-button-ornaments {
+  display: block;
+
+  .bo-font-large {
+    font-size: 20px;
+  }
+  .bo-text {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  .bo-label {
+    font-weight: 500;
+    font-size: 14px;
+  }
+  .bo-uncode {
+    margin-right: 7px;
+    margin-left: 7px;
+  }
+  .bo-svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 7px;
+    margin-left: 7px;
+  }
+  .bo-svg>svg {
+    fill: currentColor;
+    width: inherit;
+    height: inherit;
+  }
+}

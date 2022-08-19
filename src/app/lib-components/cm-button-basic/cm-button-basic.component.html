@@ -1,0 +1,108 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmButton + '#Basic'">#</a>
+  </h3>
+  <p>
+    The GlnButton component is a styled button.
+    <br />
+    It comes in three versions:
+  </p>
+  <ul>
+    <li>as a container (exterior="contained")</li>
+    <li>as an outline (exterior="outlined")</li>
+    <li>as text (exterior="text" - default)</li>
+  </ul>
+  <p>
+    The content of the glnButton component is determined by the content
+    between its opening and closing tags.
+    This can be a fragment of html elements that will be displayed as
+    the content of the button.
+    <br />
+    Another option, the content of the hyperlink - in this case, the
+    hyperlink will remain.
+    In practice, there are often situations when a button is displayed
+    on the design, but in terms of functionality it is a hyperlink.
+    The second option is designed for such situations.
+    <br />
+    Buttons with the "contained" exterior are for important primary actions.
+    <br />
+    Buttons with the "outlined" exterior are for important secondary actions.
+    <br />
+    Buttons with the "text" exterior are for less important actions.
+  </p>
+</section>
+
+<div class="b-items">
+
+  <gln-button exterior="contained">
+    Contained
+  </gln-button>
+
+  <gln-button exterior="outlined">
+    Outlined
+  </gln-button>
+
+  <gln-button exterior="text">
+    Text
+  </gln-button>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="b-items"&gt;
+
+  &lt;gln-button exterior="contained"&gt;
+    Contained
+  &lt;/gln-button&gt;
+
+  &lt;gln-button exterior="outlined"&gt;
+    Outlined
+  &lt;/gln-button&gt;
+
+  &lt;gln-button exterior="text"&gt;
+    Text
+  &lt;/gln-button&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.b-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+  &amp;&gt;:first-child &#123;
+    margin-left: 3%;
+  &#125;
+  &amp;&gt;:not(first-child) &#123;
+    margin-left: 7%;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

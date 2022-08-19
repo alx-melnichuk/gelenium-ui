@@ -1,0 +1,781 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Ornaments.
+    <a [href]="urlCmButton + '#Ornaments'">#</a>
+  </h3>
+  <p>
+    For the GlnButton component, it is possible to display an ornament
+    (picture or text).
+    <br />
+    To display the ornament on the left, you need to add a block with the
+    "gln-orn-lf" attribute inside the "gln-button".
+    <br />
+    To display the ornament on the right, you need to add a block with the
+    "gln-orn-rg" attribute inside the "gln-button".
+  </p>
+  <span>
+    Example:
+  </span>
+  <code><pre source="html">
+&lt;gln-button&gt;
+  <strong>&lt;div <i>gln-orn-lf</i>&gt;left&lt;/div&gt;</strong>
+  text
+  <strong>&lt;div <i>gln-orn-rg</i>&gt;right&lt;/div&gt;</strong>
+&lt;/gln-button&gt;</pre></code>
+  <p>
+    For blocks: "&lt;span&gt;left&lt;/span&gt;" and "&lt;span&gt;right&lt;/span&gt;"
+    you need to specify the value of horizontal indents.
+  </p>
+</section>
+
+<section>
+  <h4>
+    Button contains a link.
+  </h4>
+  <p>
+    When a GlnButton is in "link" mode, its content is only determined by
+    the content of the "a" html tag.
+    <br />
+    This means that the ornament can be rendered as an inner element of the html "a" tag.
+    <br />
+    For example, inside the "a" tag, there are two consecutive span elements.
+    The first span element contains the name of the element ("Next link").
+    The second span element contains an ornament - text or picture.
+  </p>
+  <span>
+    Example, ornament on the right:
+  </span>
+  <code><pre source="html">
+&lt;gln-button&gt;
+  &lt;a href="#"&gt;
+    &lt;span&gt;Next link&lt;/span&gt;
+    <strong>&lt;span class="bo-text"&gt;&nbsp;&nbsp;&amp;gt;&nbsp;&nbsp;&lt;/span&gt;</strong>
+  &lt;/a&gt;
+  &lt;i <strong><i>gln-orn-rg</i></strong>&gt;&lt;/i&gt;
+&lt;/gln-button&gt;</pre></code>
+  <span>
+    Example, ornament on the left:
+  </span>
+  <code><pre source="html">
+&lt;gln-button&gt;
+  &lt;a href="#"&gt;
+    <strong>&lt;span class="bo-text"&gt;&nbsp;&nbsp;&amp;lt;&nbsp;&nbsp;&lt;/span&gt;</strong>
+    &lt;span&gt;Previous link&lt;/span&gt;
+  &lt;/a&gt;
+  &lt;i <strong><i>gln-orn-lf</i></strong>&gt;&lt;/i&gt;
+&lt;/gln-button&gt;</pre></code>
+</section>
+
+
+<section mr-vr
+  id="ornament-text">
+  <h4 class="app-hover-link">
+    Ornament - text.
+    <a [href]="urlCmButton + '#ornament-text'">#</a>
+  </h4>
+  <p>
+    The css class "bo-text" defines the horizontal padding.
+    The css class "bo-font-large" defines the font size as 20px.
+    <br />
+    The "&lt;i gln-orn-rg&gt;&lt;/i&gt;" fragment removes the right padding for the GlnButton.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior05a"
+    (change)="exterior05a=$event.value">
+    <mat-button-toggle [checked]="exterior05a==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior05a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior05a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Section: "gln-orn-lf" + text.</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior05a"
+      noUppercase>
+      <div gln-orn-lf
+        class="bo-text bo-font-large">
+        <span>&lt;</span>
+      </div>
+      <span>Previous value (text)</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Section: "gln-orn-rg" + text.</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior05a"
+      noUppercase>
+      <span>Next value (text)</span>
+      <div gln-orn-rg
+        class="bo-text bo-font-large">
+        <span>&gt;</span>
+      </div>
+    </gln-button>
+  </div>
+</div>
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Section: "gln-orn-lf" + text (Link).</em>
+      </small>
+    </div>
+    <gln-button class="bo-font-large"
+      [exterior]="exterior05a"
+      noUppercase>
+      <a [routerLink]="[routerLink]"
+        fragment="ornament-text">
+        <span class="bo-text">&lt;</span>
+        <span class="bo-label">Previous link (text)</span>
+      </a>
+      <i gln-orn-lf></i>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Section: "gln-orn-rg" + text (Link).</em>
+      </small>
+    </div>
+    <gln-button class="bo-font-large"
+      [exterior]="exterior05a"
+      noUppercase>
+      <a [routerLink]="[routerLink]"
+        fragment="ornament-text">
+        <span class="bo-label">Next link (text)</span>
+        <span class="bo-text">&gt;</span>
+      </a>
+      <i gln-orn-rg></i>
+    </gln-button>
+  </div>
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior05a"
+      noUppercase&gt;
+      &lt;div gln-orn-lf
+        class="bo-text bo-font-large"&gt;
+        &lt;span&gt;&lt;&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;span&gt;Previous value (text)&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior05a"
+      noUppercase&gt;
+      &lt;span&gt;Next value (text)&lt;/span&gt;
+      &lt;div gln-orn-rg
+        class="bo-text bo-font-large"&gt;
+        &lt;span&gt;&gt;&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Section: "gln-orn-lf" + text (Link).&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button class="bo-font-large"
+      [exterior]="exterior05a"
+      noUppercase&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="ornament-text"&gt;
+        &lt;span class="bo-text"&gt;&lt;&lt;/span&gt;
+        &lt;span class="bo-label"&gt;Previous link (text)&lt;/span&gt;
+      &lt;/a&gt;
+      &lt;i gln-orn-lf&gt;&lt;/i&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Section: "gln-orn-rg" + text (Link).&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button class="bo-font-large"
+      [exterior]="exterior05a"
+      noUppercase&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="ornament-text"&gt;
+        &lt;span class="bo-label"&gt;Next link (text)&lt;/span&gt;
+        &lt;span class="bo-text"&gt;&gt;&lt;/span&gt;
+      &lt;/a&gt;
+      &lt;i gln-orn-rg&gt;&lt;/i&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public exterior05a = 'outlined';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.bo-font-large &#123;
+  font-size: 20px;
+ &#125;
+.bo-text &#123;
+  margin-right: 10px;
+  margin-left: 10px;
+&#125;
+.bo-label &#123;
+  font-weight: 500;
+  font-size: 14px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="ornament-uncode">
+  <h4 class="app-hover-link">
+    Ornament - uncode.
+    <a [href]="urlCmButton + '#ornament-uncode'">#</a>
+  </h4>
+  <p>
+    A unicode character can be used as an ornament.
+    <br />
+    In this example, the css class "bo-uncode" defines the horizontal padding.
+    The css class "bo-font-large" defines the font size as 20px.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior05b"
+    (change)="exterior05b=$event.value">
+    <mat-button-toggle [checked]="exterior05b==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior05b==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior05b==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Section: "gln-orn-lf" + uncode.</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior05b"
+      noUppercase>
+      <div gln-orn-lf
+        class="bo-uncode bo-font-large">
+        &#9668;
+      </div>
+      <span>Previous value (uncode)</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Section: "gln-orn-rg" + uncode.</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior05b"
+      noUppercase>
+      <span>Next value (uncode)</span>
+      <div gln-orn-rg
+        class="bo-uncode bo-font-large">
+        &#9658;
+      </div>
+    </gln-button>
+  </div>
+</div>
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Section: "gln-orn-lf" + uncode (Link).</em>
+      </small>
+    </div>
+    <gln-button class="bo-font-large"
+      [exterior]="exterior05b"
+      noUppercase>
+      <a [routerLink]="[routerLink]"
+        fragment="ornament-uncode">
+        <span class="bo-uncode">&#9668;</span>
+        <span class="bo-label">Previous link (uncode)</span>
+      </a>
+      <i gln-orn-lf></i>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Section: "gln-orn-rg" + uncode (Link).</em>
+      </small>
+    </div>
+    <gln-button class="bo-font-large"
+      [exterior]="exterior05b"
+      noUppercase>
+      <a [routerLink]="[routerLink]"
+        fragment="ornament-uncode">
+        <span class="bo-label">Next link (uncode)</span>
+        <span class="bo-uncode">&#9658;</span>
+      </a>
+      <i gln-orn-rg></i>
+    </gln-button>
+  </div>
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Section: "gln-orn-lf" + uncode.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior05b"
+      noUppercase&gt;
+      &lt;div gln-orn-lf
+        class="bo-uncode bo-font-large"&gt;
+        &amp;#9668;
+      &lt;/div&gt;
+      &lt;span&gt;Previous value (uncode)&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Section: "gln-orn-rg" + uncode.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior05b"
+      noUppercase&gt;
+      &lt;span&gt;Next value (uncode)&lt;/span&gt;
+      &lt;div gln-orn-rg
+        class="bo-uncode bo-font-large"&gt;
+        &amp;#9658;
+      &lt;/div&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Section: "gln-orn-lf" + uncode (Link).&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button class="bo-font-large"
+      [exterior]="exterior05b"
+      noUppercase&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="ornament-uncode"&gt;
+        &lt;span class="bo-uncode"&gt;&amp;#9668;&lt;/span&gt;
+        &lt;span class="bo-label"&gt;Previous link (uncode)&lt;/span&gt;
+      &lt;/a&gt;
+      &lt;i gln-orn-lf&gt;&lt;/i&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Section: "gln-orn-rg" + uncode (Link).&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button class="bo-font-large"
+      [exterior]="exterior05b"
+      noUppercase&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="ornament-uncode"&gt;
+        &lt;span class="bo-label"&gt;Next link (uncode)&lt;/span&gt;
+        &lt;span class="bo-uncode"&gt;&amp;#9658;&lt;/span&gt;
+      &lt;/a&gt;
+      &lt;i gln-orn-rg&gt;&lt;/i&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public exterior05b = 'outlined';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.bo-font-large &#123;
+  font-size: 20px;
+ &#125;
+.bo-text &#123;
+  margin-right: 10px;
+  margin-left: 10px;
+&#125;
+.bo-label &#123;
+  font-weight: 500;
+  font-size: 14px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="ornament-svg">
+  <h4 class="app-hover-link">
+    Ornament - svg.
+    <a [href]="urlCmButton + '#ornament-svg'">#</a>
+  </h4>
+  <p>
+    A svg images can be used as an ornament.
+    <br />
+    In this example, the "bo-svg" css class defines the horizontal padding
+    and dimensions.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior05c"
+    (change)="exterior05c=$event.value">
+    <mat-button-toggle [checked]="exterior05c==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior05c==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior05c==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-lf" + svg.</em></small>
+    </div>
+    <gln-button [exterior]="exterior05c"
+      noUppercase>
+      <div gln-orn-lf
+        class="bo-svg">
+        <svg>
+          <use
+            href="assets/icons/lib-components/button-ornaments/icon-circle-left.svg#arrow-circle-down"
+            height="24"
+            width="24"></use>
+        </svg>
+      </div>
+      <span>Previous value (svg)</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-rg" + svg.</em></small>
+    </div>
+    <gln-button [exterior]="exterior05c"
+      noUppercase>
+      <span>Next value (svg)</span>
+      <div gln-orn-rg
+        class="bo-svg">
+        <svg>
+          <use
+            href="assets/icons/lib-components/button-ornaments/icon-circle-right.svg#arrow-circle-down"
+            height="24"
+            width="24"></use>
+        </svg>
+      </div>
+    </gln-button>
+  </div>
+</div>
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-lf" + svg (Link).</em></small>
+    </div>
+    <gln-button [exterior]="exterior05c"
+      noUppercase>
+      <a [routerLink]="[routerLink]"
+        fragment="ornament-svg">
+        <span class="bo-svg">
+          <svg>
+            <use
+              href="assets/icons/lib-components/button-ornaments/icon-circle-left.svg#arrow-circle-down"
+              height="24"
+              width="24"></use>
+          </svg>
+        </span>
+        <span>Previous link (svg)</span>
+      </a>
+      <i gln-orn-lf></i>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-rg" + svg (Link).</em></small>
+    </div>
+    <gln-button [exterior]="exterior05c"
+      noUppercase>
+      <a [routerLink]="[routerLink]"
+        fragment="ornament-svg">
+        <span>Next link (svg)</span>
+        <span class="bo-svg">
+          <svg>
+            <use
+              href="assets/icons/lib-components/button-ornaments/icon-circle-right.svg#arrow-circle-down"
+              height="24"
+              width="24"></use>
+          </svg>
+        </span>
+      </a>
+      <i gln-orn-rg></i>
+    </gln-button>
+  </div>
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-lf" + svg.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior05c"
+      noUppercase&gt;
+      &lt;div gln-orn-lf
+        class="bo-svg"&gt;
+        &lt;svg&gt;
+          &lt;use
+            href="assets/icons/lib-components/button-ornaments/icon-circle-left.svg#arrow-circle-down"
+            height="24"
+            width="24"&gt;&lt;/use&gt;
+        &lt;/svg&gt;
+      &lt;/div&gt;
+      &lt;span&gt;Previous value (svg)&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-rg" + svg.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior05c"
+      noUppercase&gt;
+      &lt;span&gt;Next value (svg)&lt;/span&gt;
+      &lt;div gln-orn-rg
+        class="bo-svg"&gt;
+        &lt;svg&gt;
+          &lt;use
+            href="assets/icons/lib-components/button-ornaments/icon-circle-right.svg#arrow-circle-down"
+            height="24"
+            width="24"&gt;&lt;/use&gt;
+        &lt;/svg&gt;
+      &lt;/div&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-lf" + svg (Link).&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior05c"
+      noUppercase&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="ornament-svg"&gt;
+        &lt;span class="bo-svg"&gt;
+          &lt;svg&gt;
+            &lt;use
+              href="assets/icons/lib-components/button-ornaments/icon-circle-left.svg#arrow-circle-down"
+              height="24"
+              width="24"&gt;&lt;/use&gt;
+          &lt;/svg&gt;
+        &lt;/span&gt;
+        &lt;span&gt;Previous link (svg)&lt;/span&gt;
+      &lt;/a&gt;
+      &lt;i gln-orn-lf&gt;&lt;/i&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-rg" + svg (Link).&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior05c"
+      noUppercase&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="ornament-svg"&gt;
+        &lt;span&gt;Next link (svg)&lt;/span&gt;
+        &lt;span class="bo-svg"&gt;
+          &lt;svg&gt;
+            &lt;use
+              href="assets/icons/lib-components/button-ornaments/icon-circle-right.svg#arrow-circle-down"
+              height="24"
+              width="24"&gt;&lt;/use&gt;
+          &lt;/svg&gt;
+        &lt;/span&gt;
+      &lt;/a&gt;
+      &lt;i gln-orn-rg&gt;&lt;/i&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+  public exterior05c = 'outlined';
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.bo-svg &#123;
+  width: 24px;
+  height: 24px;
+  margin-right: 7px;
+  margin-left: 7px;
+&#125;
+.bo-svg>svg &#123;
+  fill: currentColor;
+  width: inherit;
+  height: inherit;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

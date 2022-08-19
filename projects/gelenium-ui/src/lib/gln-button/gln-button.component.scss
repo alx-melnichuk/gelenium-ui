@@ -224,15 +224,17 @@ gln-button {
 
   // Vertical offset.
   &>[glnbt-btn] {
-    &>a {
+    &>a:not([glnbt-mr-ver]) {
       line-height: inherit;
-      align-self: center;
+      display: flex;
+      align-items: center;
       padding-top: var(--glnbt-lb-pd-tp, var(--glnfrs-pd-tp, var(--def-lb-pd-tp)));
       padding-bottom: var(--glnbt-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-tp)));
     }
     &>[glnbt-mr-ver] {
       line-height: inherit;
-      align-self: center;
+      display: flex;
+      align-items: center;
       margin-top: var(--glnbt-lb-pd-tp, var(--glnfrs-pd-tp, var(--def-lb-pd-tp)));
       margin-bottom: var(--glnbt-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-tp)));
     }

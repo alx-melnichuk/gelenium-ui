@@ -19,9 +19,12 @@ const routes: Routes = [
     children: [
       {
         path: URL_BUTTON,
-        loadChildren: () => import('../lib-components/components/button/button.module').then((m) => m.ButtonModule),
+        loadChildren: () => import('../lib-components/cm-button/cm-button.module').then((m) => m.CmButtonModule),
       },
-      { path: URL_FRAME, loadChildren: () => import('../lib-components/components/frame/frame.module').then((m) => m.FrameModule) },
+      {
+        path: URL_FRAME,
+        loadChildren: () => import('../lib-components/components/frame/frame.module').then((m) => m.FrameModule),
+      },
       {
         path: URL_HINT_OR_ERROR,
         loadChildren: () => import('../lib-components/components/hint-or-error/hint-or-error.module').then((m) => m.HintOrErrorModule),
