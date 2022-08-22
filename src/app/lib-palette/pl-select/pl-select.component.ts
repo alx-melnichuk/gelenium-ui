@@ -27,7 +27,7 @@ export class PlSelectComponent implements AfterViewInit {
     // The zone will become stable when all components have fully rendered.
     this.ngZone.onStable.pipe(take(1)).subscribe(() => {
       // eslint-disable-next-line no-restricted-syntax
-      console.timeEnd(logLabel);
+      console.timeEnd(logLabel); // 180ms
     });
   }
 }

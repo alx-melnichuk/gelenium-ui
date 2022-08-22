@@ -3,6 +3,9 @@
 app-cm-button-ornaments {
   display: block;
 
+  .bo-no-uppercase {
+    --glnbt-uppercase: none;
+  }
   .bo-font-large {
     font-size: 20px;
   }

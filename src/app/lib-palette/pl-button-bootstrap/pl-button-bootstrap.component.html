@@ -1,0 +1,1213 @@
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Like a Bootstrap.
+    <a [href]="urlPlButton + '#Bootstrap'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnButton in style as "Bootstrap".
+    <br />
+    To do this, you need to specify the following configuration:
+  </p>
+  <code><pre source="ts">
+public cfgContained: GlnButtonConfig = &#123;
+  exterior: GlnButtonExterior.contained,
+  frameSize: GlnFrameSize.short,
+  isNoRipple: true,
+&#125;;
+public cfgOutlined: GlnButtonConfig = &#123;
+  exterior: GlnButtonExterior.outlined,
+  frameSize: GlnFrameSize.short,
+  isNoRipple: true,
+&#125;;
+public cfgText: GlnButtonConfig = &#123;
+  exterior: GlnButtonExterior.text,
+  frameSize: GlnFrameSize.short,
+  isNoRipple: true,
+&#125;;</pre></code>
+  <span>
+    And also define some css-styles.
+  </span>
+</section>
+
+
+<section mr-vr
+  id="bootstrap-primary">
+  <div>
+    <h4>Bootstrap style buttons.</h4>
+  </div>
+  <p class="app-hover-link">
+    Button style in "Primary" mode.
+    <a [href]="urlPlButton + '#bootstrap-primary'">#</a>
+  </p>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabledPrimary=!isDisabledPrimary" />
+    Is disabled
+  </label>
+</section>
+
+<hr br-nn />
+
+<div class="bb-items">
+  <gln-button class="bstr-btn bstr-primary contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledPrimary ? '': null">
+    <span>Primary 1</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-primary contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledPrimary ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-primary">
+      <span>Primary 1 Link</span>
+    </a>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-primary outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledPrimary ? '': null">
+    <span>Primary 2</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-primary outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledPrimary ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-primary">
+      <span>Primary 2 Link</span>
+    </a>
+  </gln-button>
+</div>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="bootstrap-secondary">
+  <p class="app-hover-link">
+    Button style in "Secondary" mode.
+    <a [href]="urlPlButton + '#bootstrap-secondary'">#</a>
+  </p>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabledSecondary=!isDisabledSecondary" />
+    Is disabled
+  </label>
+</section>
+
+<hr br-nn />
+
+<div class="bb-items">
+  <gln-button class="bstr-btn bstr-secondary contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledSecondary ? '': null">
+    <span>Secondary 1</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-secondary contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledSecondary ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-secondary">
+      <span>Secondary 1 Link</span>
+    </a>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-secondary outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledSecondary ? '': null">
+    <span>Secondary 2</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-secondary outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledSecondary ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-secondary">
+      <span>Secondary 2 Link</span>
+    </a>
+  </gln-button>
+</div>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="bootstrap-success">
+  <p class="app-hover-link">
+    Button style in "Success" mode.
+    <a [href]="urlPlButton + '#bootstrap-success'">#</a>
+  </p>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabledSuccess=!isDisabledSuccess" />
+    Is disabled
+  </label>
+</section>
+
+<hr br-nn />
+
+<div class="bb-items">
+  <gln-button class="bstr-btn bstr-success contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledSuccess ? '': null">
+    <span>Success 1</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-success contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledSuccess ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-success">
+      <span>Success 1 Link</span>
+    </a>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-success outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledSuccess ? '': null">
+    <span>Success 2</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-success outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledSuccess ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-success">
+      <span>Success 2 Link</span>
+    </a>
+  </gln-button>
+</div>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="bootstrap-danger">
+  <p class="app-hover-link">
+    Button style in "Danger" mode.
+    <a [href]="urlPlButton + '#bootstrap-danger'">#</a>
+  </p>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabledDanger=!isDisabledDanger" />
+    Is disabled
+  </label>
+</section>
+
+<hr br-nn />
+
+<div class="bb-items">
+  <gln-button class="bstr-btn bstr-danger contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledDanger ? '': null">
+    <span>Danger 1</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-danger contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledDanger ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-danger">
+      <span>Danger 1 Link</span>
+    </a>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-danger outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledDanger ? '': null">
+    <span>Danger 2</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-danger outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledDanger ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-danger">
+      <span>Danger 2 Link</span>
+    </a>
+  </gln-button>
+</div>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="bootstrap-warning">
+  <p class="app-hover-link">
+    Button style in "Warning" mode.
+    <a [href]="urlPlButton + '#bootstrap-warning'">#</a>
+  </p>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabledWarning=!isDisabledWarning" />
+    Is disabled
+  </label>
+</section>
+
+<hr br-nn />
+
+<div class="bb-items">
+  <gln-button class="bstr-btn bstr-warning contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledWarning ? '': null">
+    <span>Warning 1</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-warning contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledWarning ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-warning">
+      <span>Warning 1 Link</span>
+    </a>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-warning outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledWarning ? '': null">
+    <span>Warning 2</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-warning outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledWarning ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-warning">
+      <span>Warning 2 Link</span>
+    </a>
+  </gln-button>
+</div>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="bootstrap-info">
+  <p class="app-hover-link">
+    Button style in "Info" mode.
+    <a [href]="urlPlButton + '#bootstrap-info'">#</a>
+  </p>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabledInfo=!isDisabledInfo" />
+    Is disabled
+  </label>
+</section>
+
+<hr br-nn />
+
+<div class="bb-items">
+  <gln-button class="bstr-btn bstr-info contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledInfo ? '': null">
+    <span>Info 1</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-info contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledInfo ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-info">
+      <span>Info 1 Link</span>
+    </a>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-info outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledInfo ? '': null">
+    <span>Info 2</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-info outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledInfo ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-info">
+      <span>Info 2 Link</span>
+    </a>
+  </gln-button>
+</div>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="bootstrap-light">
+  <p class="app-hover-link">
+    Button style in "Light" mode.
+    <a [href]="urlPlButton + '#bootstrap-light'">#</a>
+  </p>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabledLight=!isDisabledLight" />
+    Is disabled
+  </label>
+</section>
+
+<hr br-nn />
+
+<div class="bb-items">
+  <gln-button class="bstr-btn bstr-light contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledLight ? '': null">
+    <span>Light 1</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-light contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledLight ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-light">
+      <span>Light 1 Link</span>
+    </a>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-light outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledLight ? '': null">
+    <span>Light 2</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-light outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledLight ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-light">
+      <span>Light 2 Link</span>
+    </a>
+  </gln-button>
+</div>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="bootstrap-dark">
+  <p class="app-hover-link">
+    Button style in "Dark" mode.
+    <a [href]="urlPlButton + '#bootstrap-dark'">#</a>
+  </p>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabledDark=!isDisabledDark" />
+    Is disabled
+  </label>
+</section>
+
+<hr br-nn />
+
+<div class="bb-items">
+  <gln-button class="bstr-btn bstr-dark contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledDark ? '': null">
+    <span>Dark 1</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-dark contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledDark ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-dark">
+      <span>Dark 1 Link</span>
+    </a>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-dark outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledDark ? '': null">
+    <span>Dark 2</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-dark outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledDark ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-dark">
+      <span>Dark 2 Link</span>
+    </a>
+  </gln-button>
+</div>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="bootstrap-link">
+  <p class="app-hover-link">
+    Button style in "Reference" mode.
+    <a [href]="urlPlButton + '#bootstrap-link'">#</a>
+  </p>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabledReference=!isDisabledReference" />
+    Is disabled
+  </label>
+</section>
+
+<hr br-nn />
+
+<div class="bb-items">
+  <gln-button class="bstr-btn bstr-link"
+    [config]="cfgText"
+    [isDisabled]="isDisabledReference ? '': null">
+    <span>Reference 1</span>
+  </gln-button>
+
+  <gln-button class="bstr-btn bstr-link"
+    [config]="cfgText"
+    [isDisabled]="isDisabledReference ? '': null">
+    <a [routerLink]="[routerLink]"
+      fragment="bootstrap-link">
+      <span>Reference 1 Link</span>
+    </a>
+  </gln-button>
+</div>
+
+
+<hr br-nn />
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;section mr-vr&gt;
+  &lt;label&gt;
+    &lt;input type="checkbox"
+      (change)="isDisabledPrimary=!isDisabledPrimary" /&gt;
+    Is disabled
+  &lt;/label&gt;
+&lt;/section&gt;
+
+&lt;hr br-nn /&gt;
+
+&lt;div class="bb-items"&gt;
+  &lt;gln-button class="bstr-btn bstr-primary contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledPrimary ? '': null"&gt;
+    &lt;span&gt;Primary 1&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-primary contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledPrimary ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-primary"&gt;
+      &lt;span&gt;Primary 1 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-primary outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledPrimary ? '': null"&gt;
+    &lt;span&gt;Primary 2&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-primary outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledPrimary ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-primary"&gt;
+      &lt;span&gt;Primary 2 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+&lt;/div&gt;
+
+&lt;hr br-nn /&gt;
+
+
+&lt;section mr-vr&gt;
+  &lt;label&gt;
+    &lt;input type="checkbox"
+      (change)="isDisabledSecondary=!isDisabledSecondary" /&gt;
+    Is disabled
+  &lt;/label&gt;
+&lt;/section&gt;
+
+&lt;hr br-nn /&gt;
+
+&lt;div class="bb-items"&gt;
+  &lt;gln-button class="bstr-btn bstr-secondary contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledSecondary ? '': null"&gt;
+    &lt;span&gt;Secondary 1&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-secondary contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledSecondary ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-secondary"&gt;
+      &lt;span&gt;Secondary 1 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-secondary outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledSecondary ? '': null"&gt;
+    &lt;span&gt;Secondary 2&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-secondary outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledSecondary ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-secondary"&gt;
+      &lt;span&gt;Secondary 2 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+&lt;/div&gt;
+
+&lt;hr br-nn /&gt;
+
+
+&lt;section mr-vr&gt;
+  &lt;label&gt;
+    &lt;input type="checkbox"
+      (change)="isDisabledSuccess=!isDisabledSuccess" /&gt;
+    Is disabled
+  &lt;/label&gt;
+&lt;/section&gt;
+
+&lt;hr br-nn /&gt;
+
+&lt;div class="bb-items"&gt;
+  &lt;gln-button class="bstr-btn bstr-success contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledSuccess ? '': null"&gt;
+    &lt;span&gt;Success 1&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-success contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledSuccess ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-success"&gt;
+      &lt;span&gt;Success 1 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-success outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledSuccess ? '': null"&gt;
+    &lt;span&gt;Success 2&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-success outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledSuccess ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-success"&gt;
+      &lt;span&gt;Success 2 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+&lt;/div&gt;
+
+&lt;hr br-nn /&gt;
+
+
+&lt;section mr-vr&gt;
+  &lt;label&gt;
+    &lt;input type="checkbox"
+      (change)="isDisabledDanger=!isDisabledDanger" /&gt;
+    Is disabled
+  &lt;/label&gt;
+&lt;/section&gt;
+
+&lt;hr br-nn /&gt;
+
+&lt;div class="bb-items"&gt;
+  &lt;gln-button class="bstr-btn bstr-danger contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledDanger ? '': null"&gt;
+    &lt;span&gt;Danger 1&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-danger contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledDanger ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-danger"&gt;
+      &lt;span&gt;Danger 1 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-danger outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledDanger ? '': null"&gt;
+    &lt;span&gt;Danger 2&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-danger outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledDanger ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-danger"&gt;
+      &lt;span&gt;Danger 2 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+&lt;/div&gt;
+
+&lt;hr br-nn /&gt;
+
+
+&lt;section mr-vr&gt;
+  &lt;label&gt;
+    &lt;input type="checkbox"
+      (change)="isDisabledWarning=!isDisabledWarning" /&gt;
+    Is disabled
+  &lt;/label&gt;
+&lt;/section&gt;
+
+&lt;hr br-nn /&gt;
+
+&lt;div class="bb-items"&gt;
+  &lt;gln-button class="bstr-btn bstr-warning contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledWarning ? '': null"&gt;
+    &lt;span&gt;Warning 1&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-warning contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledWarning ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-warning"&gt;
+      &lt;span&gt;Warning 1 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-warning outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledWarning ? '': null"&gt;
+    &lt;span&gt;Warning 2&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-warning outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledWarning ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-warning"&gt;
+      &lt;span&gt;Warning 2 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+&lt;/div&gt;
+
+&lt;hr br-nn /&gt;
+
+
+&lt;section mr-vr&gt;
+  &lt;label&gt;
+    &lt;input type="checkbox"
+      (change)="isDisabledInfo=!isDisabledInfo" /&gt;
+    Is disabled
+  &lt;/label&gt;
+&lt;/section&gt;
+
+&lt;hr br-nn /&gt;
+
+&lt;div class="bb-items"&gt;
+  &lt;gln-button class="bstr-btn bstr-info contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledInfo ? '': null"&gt;
+    &lt;span&gt;Info 1&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-info contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledInfo ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-info"&gt;
+      &lt;span&gt;Info 1 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-info outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledInfo ? '': null"&gt;
+    &lt;span&gt;Info 2&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-info outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledInfo ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-info"&gt;
+      &lt;span&gt;Info 2 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+&lt;/div&gt;
+
+&lt;hr br-nn /&gt;
+
+
+&lt;section mr-vr&gt;
+  &lt;label&gt;
+    &lt;input type="checkbox"
+      (change)="isDisabledLight=!isDisabledLight" /&gt;
+    Is disabled
+  &lt;/label&gt;
+&lt;/section&gt;
+
+&lt;hr br-nn /&gt;
+
+&lt;div class="bb-items"&gt;
+  &lt;gln-button class="bstr-btn bstr-light contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledLight ? '': null"&gt;
+    &lt;span&gt;Light 1&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-light contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledLight ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-light"&gt;
+      &lt;span&gt;Light 1 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-light outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledLight ? '': null"&gt;
+    &lt;span&gt;Light 2&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-light outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledLight ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-light"&gt;
+      &lt;span&gt;Light 2 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+&lt;/div&gt;
+
+&lt;hr br-nn /&gt;
+
+
+&lt;section mr-vr&gt;
+  &lt;label&gt;
+    &lt;input type="checkbox"
+      (change)="isDisabledDark=!isDisabledDark" /&gt;
+    Is disabled
+  &lt;/label&gt;
+&lt;/section&gt;
+
+&lt;hr br-nn /&gt;
+
+&lt;div class="bb-items"&gt;
+  &lt;gln-button class="bstr-btn bstr-dark contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledDark ? '': null"&gt;
+    &lt;span&gt;Dark 1&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-dark contained"
+    [config]="cfgContained"
+    [isDisabled]="isDisabledDark ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-dark"&gt;
+      &lt;span&gt;Dark 1 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-dark outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledDark ? '': null"&gt;
+    &lt;span&gt;Dark 2&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-dark outline"
+    [config]="cfgOutlined"
+    [isDisabled]="isDisabledDark ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-dark"&gt;
+      &lt;span&gt;Dark 2 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+&lt;/div&gt;
+
+&lt;hr br-nn /&gt;
+
+
+&lt;section mr-vr&gt;
+  &lt;label&gt;
+    &lt;input type="checkbox"
+      (change)="isDisabledReference=!isDisabledReference" /&gt;
+    Is disabled
+  &lt;/label&gt;
+&lt;/section&gt;
+
+&lt;hr br-nn /&gt;
+
+&lt;div class="bb-items"&gt;
+  &lt;gln-button class="bstr-btn bstr-link"
+    [config]="cfgText"
+    [isDisabled]="isDisabledReference ? '': null"&gt;
+    &lt;span&gt;Reference 1&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bstr-btn bstr-link"
+    [config]="cfgText"
+    [isDisabled]="isDisabledReference ? '': null"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="bootstrap-link"&gt;
+      &lt;span&gt;Reference 1 Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+&lt;/div&gt;
+
+&lt;hr br-nn /&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button';
+
+  public isDisabledPrimary = false;
+  public isDisabledSecondary = false;
+  public isDisabledSuccess = false;
+  public isDisabledDanger = false;
+  public isDisabledWarning = false;
+  public isDisabledInfo = false;
+  public isDisabledLight = false;
+  public isDisabledDark = false;
+  public isDisabledReference = false;
+
+  public cfgContained: GlnButtonConfig = &#123;
+    exterior: GlnButtonExterior.contained,
+    frameSize: GlnFrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+  public cfgOutlined: GlnButtonConfig = &#123;
+    exterior: GlnButtonExterior.outlined,
+    frameSize: GlnFrameSize.short,
+    isNoRipple: true,
+  &#125;;
+
+  public cfgText: GlnButtonConfig = &#123;
+    exterior: GlnButtonExterior.text,
+    frameSize: GlnFrameSize.short,
+    isNoRipple: true,
+  &#125;;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.bb-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bb-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bb-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: bstrap "bs-btn" **
+.bstr-btn.gln-button &#123;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  --glnbt-lb-pd-lf: 0.75rem;
+  --glnbt-lb-pd-rg: 0.75rem;
+  --glnbt-uppercase: none;
+  --glnbt-dis-lb-cl: var(--glnbt-def-lb-cl);
+  --glnbt-dis-br-cl: var(--glnbt-def-br-cl);
+  --glnbt-dis-bg-cl: var(--glnbt-def-bg-cl);
+&#125;
+
+.bstr-btn.gln-button.gln-disabled&gt;.glnbt-btn &#123;
+  opacity: .65;
+  pointer-events: none;
+&#125;
+.bstr-btn.gln-button:not(.gln-disabled)&gt;.glnbt-btn:focus-within,
+.bstr-btn.gln-button:not(.gln-disabled).focus&gt;.glnbt-btn &#123;
+  box-shadow: 0 0 0 0.25rem var(--bstr--sh-focus);
+&#125;
+
+// ** Style: bstrap "contained" **
+.bstr-btn.glnbt-contained&gt;.glnbt-btn &#123;
+  --glnbt-elevation: none;
+  --glnbt-foc-lb-cl: var(--glnbt-hov-lb-cl);
+  --glnbt-foc-br-cl: var(--glnbt-hov-br-cl);
+  --glnbt-foc-bg-cl: var(--glnbt-hov-bg-cl);
+&#125;
+
+// ** Style: bstrap "outline" **
+.bstr-btn.glnbt-outlined&gt;.glnbt-btn &#123;
+  --glnbt-foc-lb-cl: var(--glnbt-def-lb-cl);
+  --glnbt-foc-lb-cl: var(--glnbt-def-lb-cl);
+  --glnbt-foc-br-cl: var(--glnbt-def-br-cl);
+&#125;
+
+// ** Style: bstrap state "active" **
+.bstr-btn.gln-button:not(.gln-disabled)&gt;.glnbt-btn:active &#123;
+  --glnbt-foc-lb-cl: var(--glnbt-hov-lb-cl);
+  --glnbt-foc-br-cl: var(--glnbt-hov-br-cl);
+  --glnbt-foc-bg-cl: var(--glnbt-hov-bg-cl);
+&#125;
+
+// ** Style: bstrap "Primary" **
+
+.bstr-primary.contained &#123;
+  --bstr--sh-focus: rgb(49 132 253 / 50%);
+
+  --glnbt-def-lb-cl: #fff;
+  --glnbt-def-br-cl: #0d6efd;
+  --glnbt-def-bg-cl: #0d6efd;
+
+  --glnbt-hov-lb-cl: #fff;
+  --glnbt-hov-br-cl: #0a58ca;
+  --glnbt-hov-bg-cl: #0b5ed7;
+&#125;
+.bstr-primary.outline &#123;
+  --bstr--sh-focus: rgb(13 110 253 / 50%);
+
+  --glnbt-def-lb-cl: #0d6efd;
+  --glnbt-def-br-cl: #0d6efd;
+
+  --glnbt-hov-lb-cl: #fff;
+  --glnbt-hov-br-cl: #0d6efd;
+  --glnbt-hov-bg-cl: #0d6efd;
+&#125;
+
+// ** Style: bstrap "Secondary" **
+
+.bstr-secondary.contained &#123;
+  --bstr--sh-focus: rgb(130 138 145 / 50%);
+
+  --glnbt-def-lb-cl: #fff;
+  --glnbt-def-br-cl: #6c757d;
+  --glnbt-def-bg-cl: #6c757d;
+
+  --glnbt-hov-lb-cl: #fff;
+  --glnbt-hov-br-cl: #565e64;
+  --glnbt-hov-bg-cl: #5c636a;
+&#125;
+.bstr-secondary.outline &#123;
+  --bstr--sh-focus: rgb(108 117 125 / 50%);
+
+  --glnbt-def-lb-cl: #6c757d;
+  --glnbt-def-br-cl: #6c757d;
+
+  --glnbt-hov-lb-cl: #fff;
+  --glnbt-hov-br-cl: #6c757d;
+  --glnbt-hov-bg-cl: #6c757d;
+&#125;
+
+// ** Style: bstrap "Success" **
+
+.bstr-success.contained &#123;
+  --bstr--sh-focus: rgb(60 153 110 / 50%);
+
+  --glnbt-def-lb-cl: #fff;
+  --glnbt-def-br-cl: #198754;
+  --glnbt-def-bg-cl: #198754;
+
+  --glnbt-hov-lb-cl: #fff;
+  --glnbt-hov-br-cl: #146c43;
+  --glnbt-hov-bg-cl: #157347;
+&#125;
+.bstr-success.outline &#123;
+  --bstr--sh-focus: rgb(25 135 84 / 50%);
+
+  --glnbt-def-lb-cl: #198754;
+  --glnbt-def-br-cl: #198754;
+
+  --glnbt-hov-lb-cl: #fff;
+  --glnbt-hov-br-cl: #198754;
+  --glnbt-hov-bg-cl: #198754;
+&#125;
+
+// ** Style: bstrap "Danger" **
+
+.bstr-danger.contained &#123;
+  --bstr--sh-focus: rgb(225 83 97 / 50%);
+
+  --glnbt-def-lb-cl: #fff;
+  --glnbt-def-br-cl: #dc3545;
+  --glnbt-def-bg-cl: #dc3545;
+
+  --glnbt-hov-lb-cl: #fff;
+  --glnbt-hov-br-cl: #b02a37;
+  --glnbt-hov-bg-cl: #bb2d3b;
+&#125;
+.bstr-danger.outline &#123;
+  --bstr--sh-focus: rgb(220 53 69 / 50%);
+
+  --glnbt-def-lb-cl: #dc3545;
+  --glnbt-def-br-cl: #dc3545;
+
+  --glnbt-hov-lb-cl: #fff;
+  --glnbt-hov-br-cl: #dc3545;
+  --glnbt-hov-bg-cl: #dc3545;
+&#125;
+
+// ** Style: bstrap "Warning" **
+
+.bstr-warning.contained &#123;
+  --bstr--sh-focus: rgb(217 164 6 / 50%);
+
+  --glnbt-def-lb-cl: #000;
+  --glnbt-def-br-cl: #ffc107;
+  --glnbt-def-bg-cl: #ffc107;
+
+  --glnbt-hov-lb-cl: #000;
+  --glnbt-hov-br-cl: #ffc720;
+  --glnbt-hov-bg-cl: #ffca2c;
+&#125;
+.bstr-warning.outline &#123;
+  --bstr--sh-focus: rgb(255 193 7 / 50%);
+
+  --glnbt-def-lb-cl: #ffc107;
+  --glnbt-def-br-cl: #ffc107;
+
+  --glnbt-hov-lb-cl: #000;
+  --glnbt-hov-br-cl: #ffc107;
+  --glnbt-hov-bg-cl: #ffc107;
+&#125;
+
+// ** Style: bstrap "Info" **
+
+.bstr-info.contained &#123;
+  --bstr--sh-focus: rgb(11 172 204 / 50%);
+
+  --glnbt-def-lb-cl: #000;
+  --glnbt-def-br-cl: #0dcaf0;
+  --glnbt-def-bg-cl: #0dcaf0;
+
+  --glnbt-hov-lb-cl: #000;
+  --glnbt-hov-br-cl: #25cff2;
+  --glnbt-hov-bg-cl: #31d2f2;
+&#125;
+.bstr-info.outline &#123;
+  --bstr--sh-focus: rgb(13 202 240 / 50%);
+
+  --glnbt-def-lb-cl: #0dcaf0;
+  --glnbt-def-br-cl: #0dcaf0;
+
+  --glnbt-hov-lb-cl: #000;
+  --glnbt-hov-br-cl: #0dcaf0;
+  --glnbt-hov-bg-cl: #0dcaf0;
+&#125;
+
+// ** Style: bstrap "Light" **
+
+.bstr-light.contained &#123;
+  --bstr--sh-focus: rgb(211 212 213 / 50%);
+
+  --glnbt-def-lb-cl: #000;
+  --glnbt-def-br-cl: #f8f9fa;
+  --glnbt-def-bg-cl: #f8f9fa;
+
+  --glnbt-hov-lb-cl: #000;
+  --glnbt-hov-br-cl: #f9fafb;
+  --glnbt-hov-bg-cl: #f9fafb;
+&#125;
+.bstr-light.outline &#123;
+  --bstr--sh-focus: rgb(248 249 250 / 50%);
+
+  --glnbt-def-lb-cl: #f8f9fa;
+  --glnbt-def-br-cl: #f8f9fa;
+
+  --glnbt-hov-lb-cl: #000;
+  --glnbt-hov-br-cl: #f8f9fa;
+  --glnbt-hov-bg-cl: #f8f9fa;
+&#125;
+
+// ** Style: bstrap "Dark" **
+
+.bstr-dark.contained &#123;
+  --bstr--sh-focus: rgb(66 70 73 / 50%);
+
+  --glnbt-def-lb-cl: #fff;
+  --glnbt-def-br-cl: #212529;
+  --glnbt-def-bg-cl: #212529;
+
+  --glnbt-hov-lb-cl: #fff;
+  --glnbt-hov-br-cl: #1a1e21;
+  --glnbt-hov-bg-cl: #1c1f23;
+&#125;
+.bstr-dark.outline &#123;
+  --bstr--sh-focus: rgb(33 37 41 / 50%);
+
+  --glnbt-def-lb-cl: #212529;
+  --glnbt-def-br-cl: #212529;
+
+  --glnbt-hov-lb-cl: #fff;
+  --glnbt-hov-br-cl: #212529;
+  --glnbt-hov-bg-cl: #212529;
+&#125;
+
+// ** Style: bstrap "Reference" **
+
+.bstr-link &#123;
+  --bstr--sh-focus: rgb(13 110 253 / 25%);
+
+  --glnbt-def-lb-cl: #0d6efd;
+  --glnbt-def-bg-cl: transparent;
+
+  --glnbt-hov-lb-cl: #0a58ca;
+  --glnbt-hov-bg-cl: transparent;
+&#125;
+.bstr-link.gln-button&gt;.glnbt-btn &#123;
+  text-decoration: underline;
+&#125;
+.bstr-link.gln-button.gln-disabled&gt;.glnbt-btn &#123;
+  --glnbt-dis-lb-cl: #6c757d;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

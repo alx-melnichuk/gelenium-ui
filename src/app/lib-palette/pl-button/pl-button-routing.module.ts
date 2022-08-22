@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ButtonComponent } from './button.component';
+import { PlButtonComponent } from './pl-button.component';
 
-const routes: Routes = [{ path: '', component: ButtonComponent }];
+const routes: Routes = [{ path: '', component: PlButtonComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ButtonRoutingModule {}
+export class PlButtonRoutingModule {}

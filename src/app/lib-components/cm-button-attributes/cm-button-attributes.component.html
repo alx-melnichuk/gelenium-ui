@@ -6,16 +6,21 @@
   <p>The following attributes are supported:</p>
   <ul>
     <li>
-      "noUppercase" is an attribute that cancels the display of text in uppercase;
-    </li>
-    <li>
       "isDisabled" - a sign that the field is disabled (isDisabled);
     </li>
     <li>
       "wdFull" is an attribute sets the width to the width of the parent (width: 100%);
     </li>
+  </ul>
+  <p>The following css-properties are supported:</p>
+  <ul>
     <li>
-      "noElevation" is an attribute to remove button elevation (only for "contained");
+      "--glnbt-uppercase: none;" - the property blocks the translation of the button name to
+      uppercase;
+    </li>
+    <li>
+      "--glnbt-elevation: none;" - the property to remove the height of the button
+      (only for "contained");
     </li>
   </ul>
 </section>
@@ -39,11 +44,11 @@
   <div class="app-elem">
     <div>
       <small>
-        <em>Attribute: noUppercase (Button).</em>
+        <em>css: "--glnbt-uppercase" (Button).</em>
       </small>
     </div>
     <gln-button [exterior]="exterior02a"
-      noUppercase>
+      style="--glnbt-uppercase: none;">
       <span>{{ getLabel(exterior02a) }}</span>
     </gln-button>
   </div>
@@ -51,11 +56,11 @@
   <div class="app-elem">
     <div>
       <small>
-        <em>Attribute: noUppercase (Link).</em>
+        <em>css: "--glnbt-uppercase" (Link).</em>
       </small>
     </div>
     <gln-button [exterior]="exterior02a"
-      noUppercase>
+      style="--glnbt-uppercase: none;">
       <a [routerLink]="[routerLink]"
         fragment="attributes1">
         <span>{{ getLabel(exterior02a) }} Link</span>
@@ -132,11 +137,11 @@
   <div class="app-elem">
     <div>
       <small>
-        <em>Attribute: noElevation (for "contained").</em>
+        <em>css: "--glnbt-elevation" (for "contained").</em>
       </small>
     </div>
     <gln-button [exterior]="exterior02a"
-      noElevation>
+      style="--glnbt-elevation: none;">
       <span>{{ getLabel(exterior02a) }}</span>
     </gln-button>
   </div>
@@ -144,11 +149,11 @@
   <div class="app-elem">
     <div>
       <small>
-        <em>Attribute: noElevation (for "contained").</em>
+        <em>css: "--glnbt-elevation" (for "contained").</em>
       </small>
     </div>
     <gln-button [exterior]="exterior02a"
-      noElevation>
+      style="--glnbt-elevation: none;">
       <a [routerLink]="[routerLink]"
         fragment="attributes1">
         <span>{{ getLabel(exterior02a) }} Link</span>
@@ -171,11 +176,11 @@
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
-        &lt;em&gt;Attribute: noUppercase (Button).&lt;/em&gt;
+        &lt;em&gt;css: "--glnbt-uppercase" (Button).&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior02a"
-      noUppercase&gt;
+      style="--glnbt-uppercase: none;"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
   &lt;/div&gt;
@@ -183,11 +188,11 @@
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
-        &lt;em&gt;Attribute: noUppercase (Link).&lt;/em&gt;
+        &lt;em&gt;css: "--glnbt-uppercase" (Link).&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior02a"
-      noUppercase&gt;
+      style="--glnbt-uppercase: none;"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="attributes1"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125; Link&lt;/span&gt;
@@ -264,11 +269,11 @@
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
-        &lt;em&gt;Attribute: noElevation (for "contained").&lt;/em&gt;
+        &lt;em&gt;css: "--glnbt-elevation" (for "contained").&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior02a"
-      noElevation&gt;
+      style="--glnbt-elevation: none;"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
   &lt;/div&gt;
@@ -276,11 +281,11 @@
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
-        &lt;em&gt;Attribute: noElevation (for "contained").&lt;/em&gt;
+        &lt;em&gt;css: "--glnbt-elevation" (for "contained").&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior02a"
-      noElevation&gt;
+      style="--glnbt-elevation: none;"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="attributes1"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125; Link&lt;/span&gt;

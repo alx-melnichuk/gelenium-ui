@@ -1,0 +1,16 @@
+/*# sourceURL=pl-button-basic.component.scss */
+
+app-pl-button-basic {
+  display: block;
+
+  .bb-items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .bb-items > :first-child {
+    margin-left: 1%;
+  }
+  .bb-items > :not(first-child) {
+    margin-left: 5%;
+  }
+}

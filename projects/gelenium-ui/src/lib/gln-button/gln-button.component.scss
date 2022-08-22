@@ -8,6 +8,7 @@ gln-button {
   font-weight: 500;
   font-size: 0.875em; // 14px
   line-height: 1.75;
+  outline: none;
 
   &[wdFull] {
     width: 100%;
@@ -89,136 +90,104 @@ gln-button {
     cursor: inherit;
   }
 
-  // Exterior: "contained"
-  &[ext-c] {
-    --glnbt--def-cl: var(--glnbt-c-def-cl, hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%));
-    --glnbt--def-bg-cl: var(--glnbt-c-def-bg-cl, hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%));
-    --glnbt--def-br-cl: var(--glnbt-c-def-br-cl);
-    --glnbt--hov-cl: var(--glnbt-c-hov-cl);
-    --glnbt--hov-bg-cl: var(--glnbt-c-hov-bg-cl, hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 40%));
-    --glnbt--hov-br-cl: var(--glnbt-c-hov-br-cl); // currentColor
+  --glnbt---def-h: var(--glnbt--primary-h);
+  --glnbt---def-s: var(--glnbt--primary-s);
+  --glnbt---hov-h: var(--glnbt--primary-h);
+  --glnbt---hov-s: var(--glnbt--primary-s);
+  --glnbt---dis-h: var(--glnbt--default-h);
+  --glnbt---dis-s: var(--glnbt--default-s);
 
-    &:not([dis])>[glnbt-btn] {
-      &:not(:hover):not(:focus):not(:focus-within) {
-        --glnbt--cl: var(--glnbt--def-cl);
-        --glnbt--bg-cl: var(--glnbt--def-bg-cl);
-        --glnbt--br-cl: var(--glnbt--def-br-cl);
-      }
-      &:hover, &:hover:focus, &:hover:focus-within {
-        --glnbt--cl: var(--glnbt--hov-cl);
-        --glnbt--bg-cl: var(--glnbt--hov-bg-cl);
-        --glnbt--br-cl: var(--glnbt--hov-br-cl);
-      }
-      &:focus, &:focus-within {
-        --glnbt--cl: var(--glnbt-c-foc-cl);
-        --glnbt--bg-cl: var(--glnbt-c-foc-bg-cl);
-        --glnbt--br-cl: var(--glnbt-c-foc-br-cl);
-      }
+  // Exterior: "contained"
+  // To block the display of a shadow for a button in the "Contained" mode, you must specify "--glnbt-elevation: none;".
+  &[ext-c]:not([dis])>[glnbt-btn] {
+    &:not(:hover):not(:active) {
+      box-shadow: var(--glnbt-elevation, 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%));
     }
-    &[dis]>[glnbt-btn] {
-      --glnbt--cl: var(--glnbt-c-dis-cl, hsl(var(--glnbt--default-h), var(--glnbt--default-s), 68%));
-      --glnbt--bg-cl: var(--glnbt-c-dis-bg-cl, hsl(var(--glnbt--default-h), var(--glnbt--default-s), 88%));
-      --glnbt--br-cl: var(--glnbt-c-dis-br-cl);
-    }
-  }
-  &[ext-c]:not([dis]):not([noElevation])>[glnbt-btn] {
-    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
-      0px 2px 2px 0px rgb(0 0 0 / 14%),
-      0px 1px 5px 0px rgb(0 0 0 / 12%);
     &:hover {
-      box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
-        0px 4px 5px 0px rgb(0 0 0 / 14%),
-        0px 1px 10px 0px rgb(0 0 0 / 12%);
+      box-shadow: var(--glnbt-elevation, 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%));
     }
     &:active {
-      box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
-        0px 8px 10px 1px rgb(0 0 0 / 14%),
-        0px 3px 14px 2px rgb(0 0 0 / 12%);
+      box-shadow: var(--glnbt-elevation, 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%));
     }
+  }
+
+  &[ext-c] {
+    --glnbt--lb-cl-def: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%);
+    --glnbt--bg-cl-def: hsl(var(--glnbt---def-h), var(--glnbt---def-s), 50%);
+
+    --glnbt--lb-cl-hov: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%);
+    --glnbt--bg-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 40%);
+  
+    --glnbt--lb-cl-dis: hsl(var(--glnbt---dis-h), var(--glnbt---dis-s), 65%);
+    --glnbt--bg-cl-dis: hsl(var(--glnbt---dis-h), var(--glnbt---dis-s), 90%);
   }
 
   // Exterior: "outlined"
-  &[ext-o] {
-    --glnbt--def-cl: var(--glnbt-o-def-cl, hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%));
-    --glnbt--def-bg-cl: var(--glnbt-o-def-bg-cl);
-    --glnbt--def-br-cl: var(--glnbt-o-def-br-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.5));
-    --glnbt--hov-cl: var(--glnbt-o-hov-cl);
-    --glnbt--hov-bg-cl: var(--glnbt-o-hov-bg-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.04));
-    --glnbt--hov-br-cl: var(--glnbt-o-hov-br-cl); // --glnbt--def-cl
-
-    &:not([dis])>[glnbt-btn] {
-      &:not(:hover):not(:focus):not(:focus-within) {
-        --glnbt--cl: var(--glnbt--def-cl);
-        --glnbt--bg-cl: var(--glnbt--def-bg-cl);
-        --glnbt--br-cl: var(--glnbt--def-br-cl);
-      }
-      &:hover, &:hover:focus, &:hover:focus-within {
-        --glnbt--cl: var(--glnbt--hov-cl);
-        --glnbt--bg-cl: var(--glnbt--hov-bg-cl);
-        --glnbt--br-cl: var(--glnbt--hov-br-cl, var(--glnbt--def-cl));
-      }
-      &:focus, &:focus-within {
-        --glnbt--cl: var(--glnbt-o-foc-cl);
-        --glnbt--bg-cl: var(--glnbt-o-foc-bg-cl);
-        --glnbt--br-cl: var(--glnbt-o-foc-br-cl);
-      }
-    }
-    &[dis]>[glnbt-btn] {
-      --glnbt--cl: var(--glnbt-o-dis-cl, hsl(var(--glnbt--default-h), var(--glnbt--default-s), 74%));
-      --glnbt--bg-cl: var(--glnbt-o-dis-bg-cl);
-      --glnbt--br-cl: var(--glnbt-o-dis-br-cl, hsl(var(--glnbt--default-h), var(--glnbt--default-s), 88%));
-    }
-  }
   &[ext-o]>[glnbt-btn] {
     border-width: 1px;
     border-style: solid;
   }
 
+  &[ext-o] {
+    --glnbt--lb-cl-def: hsl(var(--glnbt---def-h), var(--glnbt---def-s), 50%);
+    --glnbt--br-cl-def: hsl(var(--glnbt---def-h), var(--glnbt---def-s), 70%);
+
+    --glnbt--lb-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 50%);
+    --glnbt--br-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 50%);
+    --glnbt--bg-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 95%);
+  
+    --glnbt--lb-cl-dis: hsl(var(--glnbt---dis-h), var(--glnbt---dis-s), 65%);
+    --glnbt--br-cl-dis: hsl(var(--glnbt---dis-h), var(--glnbt---dis-s), 75%);
+  }
+
   // Exterior: "text"
   &[ext-t] {
-    --glnbt--def-cl: var(--glnbt-t-def-cl, hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%));
-    --glnbt--def-bg-cl: var(--glnbt-t-def-bg-cl);
-    --glnbt--def-br-cl: var(--glnbt-t-def-br-cl);
-    --glnbt--hov-cl: var(--glnbt-t-hov-cl);
-    --glnbt--hov-bg-cl: var(--glnbt-t-hov-bg-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.04));
-    --glnbt--hov-br-cl: var(--glnbt-t-hov-br-cl); // currentColor
+    --glnbt--lb-cl-def: hsl(var(--glnbt---def-h), var(--glnbt---def-s), 50%);
+    
+    --glnbt--lb-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 50%);
+    --glnbt--bg-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 95%);
 
-    &:not([dis])>[glnbt-btn] {
-      &:not(:hover):not(:focus):not(:focus-within) {
-        --glnbt--cl: var(--glnbt--def-cl);
-        --glnbt--bg-cl: var(--glnbt--def-bg-cl);
-        --glnbt--br-cl: var(--glnbt--def-br-cl);
-      }
-      &:hover, &:hover:focus, &:hover:focus-within {
-        --glnbt--cl: var(--glnbt--hov-cl);
-        --glnbt--bg-cl: var(--glnbt--hov-bg-cl);
-        --glnbt--br-cl: var(--glnbt--hov-br-cl);
-      }
-      &:focus, &:focus-within {
-        --glnbt--cl: var(--glnbt-t-foc-cl);
-        --glnbt--bg-cl: var(--glnbt-t-foc-bg-cl);
-        --glnbt--br-cl: var(--glnbt-t-foc-br-cl);
-      }
+    --glnbt--lb-cl-dis: hsl(var(--glnbt---dis-h), var(--glnbt---dis-s), 65%);
+  }
+
+  // Definition of internal variables by element state.
+  &:not([dis])>[glnbt-btn] {
+    // The state without disabled, hover, focused.
+    &:not(:hover):not(:focus):not(:focus-within):not([foc]) {
+      --glnbt--label-cl: var(--glnbt-def-lb-cl, var(--glnbt--lb-cl-def));
+      --glnbt--border-cl: var(--glnbt-def-br-cl, var(--glnbt--br-cl-def));
+      --glnbt--bground-cl: var(--glnbt-def-bg-cl, var(--glnbt--bg-cl-def));
+    } // The state without disabled and with hover or with hover, focused.
+    &:hover, &:hover:focus, &:hover:focus-within, &:hover[foc] {
+      --glnbt--label-cl: var(--glnbt-hov-lb-cl, var(--glnbt--lb-cl-hov));
+      --glnbt--border-cl: var(--glnbt-hov-br-cl, var(--glnbt--br-cl-hov));
+      --glnbt--bground-cl: var(--glnbt-hov-bg-cl, var(--glnbt--bg-cl-hov));
     }
-    &[dis]>[glnbt-btn] {
-      --glnbt--cl: var(--glnbt-t-dis-cl, hsl(var(--glnbt--default-h), var(--glnbt--default-s), 74%));
-      --glnbt--bg-cl: var(--glnbt-t-dis-bg-cl);
-      --glnbt--br-cl: var(--glnbt-t-dis-br-cl);
+    &:focus, &:focus-within, &[foc] {
+      --glnbt--label-cl: var(--glnbt-foc-lb-cl, var(--glnbt-def-lb-cl, var(--glnbt--lb-cl-def)));
+      --glnbt--border-cl: var(--glnbt-foc-br-cl, var(--glnbt-def-br-cl, var(--glnbt--br-cl-def)));
+      --glnbt--bground-cl: var(--glnbt-foc-bg-cl, var(--glnbt-def-bg-cl, var(--glnbt--bg-cl-def)));
     }
+  } // The state with disabled.
+  &[dis]>[glnbt-btn] {
+    --glnbt--label-cl: var(--glnbt-dis-lb-cl, var(--glnbt--lb-cl-dis));
+    --glnbt--border-cl: var(--glnbt-dis-br-cl, var(--glnbt--br-cl-dis));
+    --glnbt--bground-cl: var(--glnbt-dis-bg-cl, var(--glnbt--bg-cl-dis));
   }
 
   // Define styles for all exteriors.
   &>[glnbt-btn] {
-    color: var(--glnbt--cl, var(--glnbt--def-cl));
-    background-color: var(--glnbt--bg-cl, var(--glnbt--def-bg-cl));
-    border-color: var(--glnbt--br-cl, var(--glnbt--def-br-cl));
+    color           : var(--glnbt--label-cl);
+    border-color    : var(--glnbt--border-cl);
+    background-color: var(--glnbt--bground-cl);
   }
 
   // ** Additional settings **
 
-  &:not([noUppercase])>[glnbt-btn] {
+  // To block the display of the button name in uppercase, you must specify "--glnbt-uppercase: none;".
+  &>[glnbt-btn] {
     &>span, &>a {
-      text-transform: uppercase;
+      text-transform: var(--glnbt-uppercase, uppercase);
     }
   }
 

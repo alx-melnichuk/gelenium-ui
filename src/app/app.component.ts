@@ -173,6 +173,19 @@ export class AppComponent implements OnInit {
   public initMenuPalette(): void {
     UrlUtil.add('URL_PALETTE', 'palette');
 
+    // ** Menu for "Button". **
+
+    UrlUtil.add('URL_BUTTON', 'button');
+    const urlPlButton = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_BUTTON');
+
+    const siteUrlsButton: SiteUrl[] = [
+      { label: 'Basic', url: urlPlButton, fragment: 'Basic' },
+      { label: 'Like a Bootstrap', url: urlPlButton, fragment: 'Bootstrap' },
+      { label: 'Like a Material-UI', url: urlPlButton, fragment: 'MaterialUI' },
+    ];
+
+    SiteMenuUtil.addItem('Palette', 'Button', { label: 'Button', siteUrls: siteUrlsButton });
+
     // ** Menu for "Frame". **
 
     UrlUtil.add('URL_FRAME', 'frame');

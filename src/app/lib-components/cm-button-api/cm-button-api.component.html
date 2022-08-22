@@ -201,7 +201,8 @@
         <span>
           The value is determined by the system css-variable
           <code ubr>--gln-default-h</code>.<br />
-          Or the css-variable of the GlnColor directive.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-default-h</code>.<br />
           The hue value for the "hsl()" css function.
         </span>
       </td>
@@ -213,7 +214,10 @@
         &nbsp;);</code></td>
       <td>
         <span>
-          Similar to the previous parameter <code ubr>--glnbt--default-h</code>.<br />
+          The value is determined by the system css-variable
+          <code ubr>--gln-default-s</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-default-s</code>.<br />
           The saturation value for the "hsl()" css function.
         </span>
       </td>
@@ -236,7 +240,8 @@
         <span>
           The value is determined by the system css-variable
           <code ubr>--gln-default-bg-h</code>.<br />
-          Or the css-variable of the GlnColor directive.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-default-bg-h</code>.<br />
           The hue value for the "hsl()" css function.
         </span>
       </td>
@@ -249,8 +254,11 @@
       </td>
       <td>
         <span>
-          Similar to the previous parameter <code ubr>--glnbt--default-bg-h</code>.<br />
-          The saturation value for the "hsl()" css function.<br />
+          The value is determined by the system css-variable
+          <code ubr>--gln-default-bg-s</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-default-bg-s</code>.<br />
+          The saturation value for the "hsl()" css function.
         </span>
       </td>
     </tr>
@@ -265,36 +273,27 @@
           This parameter for the exterior "contained" defines:
         </span>
         <ul>
-          <li>
-            background color by default and on mouse hover;
-          </li>
+          <li>background color by default and on mouse hover;</li>
         </ul>
         <span>
           This parameter for the exterior "outlined" defines:
         </span>
         <ul>
-          <li>
-            ripple effect color;
-          </li>
-          <li>
-            text color, border color, mouse hover background color
-          </li>
+          <li>ripple effect color;</li>
+          <li>text color, border color, mouse hover background color;</li>
         </ul>
         <span>
           This parameter for the exterior "text" defines:
         </span>
         <ul>
-          <li>
-            ripple effect color;
-          </li>
-          <li>
-            text color, mouse hover background color
-          </li>
+          <li>ripple effect color;</li>
+          <li>text color, mouse hover background color;</li>
         </ul>
         <span>
           The value is determined by the system css-variable
           <code ubr>--gln-primary-h</code>.<br />
-          Or the css-variable of the GlnColor directive.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-primary-h</code>.<br />
           The hue value for the "hsl()" css function.
         </span>
       </td>
@@ -307,7 +306,10 @@
       </td>
       <td>
         <span>
-          Similar to the previous parameter <code ubr>--glnbt--primary-h</code>.<br />
+          The value is determined by the system css-variable
+          <code ubr>--gln-primary-s</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-primary-s</code>.<br />
           The saturation value for the "hsl()" css function.<br />
         </span>
       </td>
@@ -331,6 +333,26 @@
       <th>Description</th>
     </tr>
 
+    <tr>
+      <td><code>--glnbt-uppercase:<br/>
+        &nbsp; none;</code>
+      </td>
+      <td>
+        <span>
+          The property blocks the translation of the button name to uppercase.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-elevation:<br/>
+        &nbsp; none;</code>
+      </td>
+      <td>
+        <span>
+          The property to remove the height of the button (only for "contained").
+        </span>
+      </td>
+    </tr>
     <tr>
       <td><code>--glnbt-br-rd: 0.25em;</code></td>
       <td>
