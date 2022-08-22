@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { LABEL_SHOW_SOURCE, LABEL_HTML, LABEL_TS, LABEL_CSS } from '../../../lib-core/constants';
+import { LABEL_SHOW_SOURCE, LABEL_HTML, LABEL_TS, LABEL_CSS } from '../../lib-core/constants';
+import { UrlUtil } from '../../lib-core/utils/url.util';
 
 export interface Element {
   name: string;
@@ -18,13 +19,13 @@ const CN_SURNAME2 = ['Hernandez', 'Lopez', 'Gonzales', 'Wilson', 'Anderson', 'Th
 const CN_SURNAME3 = ['Perez', 'Thompson', 'White', 'Harris', 'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson', 'Walker'];
 
 @Component({
-  selector: 'app-infinite-scroll-basic',
-  templateUrl: './infinite-scroll-basic.component.html',
-  styleUrls: ['./infinite-scroll-basic.component.scss'],
+  selector: 'app-cm-infinite-scroll-optional',
+  templateUrl: './cm-infinite-scroll-optional.component.html',
+  styleUrls: ['./cm-infinite-scroll-optional.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InfiniteScrollBasicComponent {
+export class CmInfiniteScrollOptionalComponent {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -34,16 +35,16 @@ export class InfiniteScrollBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public elements0: Element[] = [];
-  public elements1: Element[] = [];
+  public urlCmInfiniteScroll = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_INFINITE_SCROLL');
+
+  public elements2: Element[] = [];
   public isLoading = false;
 
   private names: string[] = [...CN_NAME1, ...CN_NAME2, ...CN_NAME3];
   private surnames: string[] = [...CN_SURNAME1, ...CN_SURNAME2, ...CN_SURNAME3];
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {
-    this.elements0 = this.createElementList(CN_CNT);
-    this.elements1 = this.createElementList(CN_CNT);
+    this.elements2 = this.createElementList(CN_CNT);
   }
 
   // ** Public API **
@@ -55,7 +56,7 @@ export class InfiniteScrollBasicComponent {
   public doScroll(): void {
     this.isLoading = true;
     setTimeout(() => {
-      this.elements1.push(...this.createElementList(CN_CNT));
+      this.elements2.push(...this.createElementList(CN_CNT));
       this.isLoading = false;
       this.changeDetectorRef.markForCheck();
     }, 1000);

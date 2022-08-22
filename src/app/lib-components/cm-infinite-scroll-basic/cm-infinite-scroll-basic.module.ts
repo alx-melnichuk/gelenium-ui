@@ -6,11 +6,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { GlnInfiniteScrollModule } from 'gelenium-ui';
 
-import { InfiniteScrollBasicComponent } from './infinite-scroll-basic.component';
+import { CmInfiniteScrollBasicComponent } from './cm-infinite-scroll-basic.component';
 
 @NgModule({
-  declarations: [InfiniteScrollBasicComponent],
+  declarations: [CmInfiniteScrollBasicComponent],
   imports: [CommonModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnInfiniteScrollModule],
-  exports: [InfiniteScrollBasicComponent],
+  exports: [CmInfiniteScrollBasicComponent],
 })
-export class InfiniteScrollBasicModule {}
+export class CmInfiniteScrollBasicModule {}

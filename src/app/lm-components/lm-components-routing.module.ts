@@ -31,8 +31,7 @@ const routes: Routes = [
       },
       {
         path: URL_INFINITE_SCROLL,
-        loadChildren: () =>
-          import('../lib-components/components/infinite-scroll/infinite-scroll.module').then((m) => m.InfiniteScrollModule),
+        loadChildren: () => import('../lib-components/cm-infinite-scroll/cm-infinite-scroll.module').then((m) => m.CmInfiniteScrollModule),
       },
       {
         path: URL_INPUT,

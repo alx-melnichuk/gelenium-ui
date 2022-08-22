@@ -1,18 +1,18 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsulation } from '@angular/core';
 import { take } from 'rxjs/operators';
 
-import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
+import { ScrollAfterRoutingUtil } from '../../lib-core/utils/scroll-after-routing.util';
 
-const logLabel = 'InfiniteScroll';
+const logLabel = 'ComponentsInfiniteScroll';
 
 @Component({
-  selector: 'app-infinite-scroll',
-  templateUrl: './infinite-scroll.component.html',
-  styleUrls: ['./infinite-scroll.component.scss'],
+  selector: 'app-cm-infinite-scroll',
+  templateUrl: './cm-infinite-scroll.component.html',
+  styleUrls: ['./cm-infinite-scroll.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InfiniteScrollComponent implements AfterViewInit {
+export class CmInfiniteScrollComponent implements AfterViewInit {
   public showNum = '';
 
   constructor(private ngZone: NgZone) {
