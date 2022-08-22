@@ -408,234 +408,162 @@
       </td>
     </tr>
 
-    <!-- "contained" mode -->
     <tr>
-      <td colspan="2"><em>"contained" mode</em></td>
+      <td colspan="2"><em>Default values.</em></td>
     </tr>
     <tr>
-      <td><code>--glnbt-c-def-cl:<br/>
-        &nbsp;hsl(--glnbt--default-bg-[h,s],100%);</code></td>
-      <td><span>Text color for "contained" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-c-def-bg-cl:<br/>
-        &nbsp;hsl(--glnbt--primary-[h,s],46%));</code></td>
-      <td><span>Background color for "contained" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-c-def-br-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Border color for "contained" mode.</span></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnbt-c-hov-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td>Text color when hovering the mouse for "contained" mode.</td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-c-hov-bg-cl:<br/>
-        &nbsp;hsl(--glnbt--primary-[h,s],40%);</code></td>
-      <td><span>Background color when hovering the mouse for "contained" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-c-hov-br-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Border color when hovering the mouse for "contained" mode.</span></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnbt-c-foc-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td>Text color on focus for "content" mode.</td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-c-foc-bg-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Background color on focus for "contained" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-c-foc-br-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Border color on focus for "contained" mode.</span></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnbt-c-dis-cl:<br/>
-        &nbsp;hsl(--glnbt--default-[h,s],68%);</code></td>
-      <td><span>Text color in disabled state for "contained" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-c-dis-bg-cl:<br/>
-        &nbsp;hsl(--glnbt--default-[h,s],88%);</code></td>
-      <td><span>Background color in disabled state for "contained" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-c-dis-br-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Border color in disabled state for "contained" mode.</span></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnbt-c-ripple-cl:<br/>
-        &nbsp;hsla(--glnbt--default-bg-[h,s],100%,0.3);</code></td>
-      <td><span>The color of the ripple effect for the "contained" mode.</span></td>
-    </tr>
-
-    <!-- "outlined" mode -->
-    <tr>
-      <td colspan="2"><em>"outlined" mode</em></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnbt-o-def-cl:<br/>
-        &nbsp;hsl(--glnbt--primary-[h,s],46%);</code></td>
-      <td><span>Text color for "outlined" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-o-def-bg-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Background color for "outlined" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-o-def-br-cl:<br/>
-        &nbsp;hsla(--glnbt--primary-[h,s],46%,0.5);</code></td>
-      <td><span>Border color for "outlined" mode.</span></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnbt-o-hov-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Text color when hovering the mouse for "outlined" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-o-hov-bg-cl:<br/>
-        &nbsp;hsla(--glnbt--primary-[h,s],46%,0.04);</code></td>
-      <td><span>Background color when hovering the mouse for "outlined" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-o-hov-br-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Border color when hovering the mouse for "outlined" mode.</span></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnbt-o-foc-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td>Text color on focus for "outlined" mode.</td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-o-foc-bg-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Background color on focus for "outlined" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-o-foc-br-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Border color on focus for "outlined" mode.</span></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnbt-o-dis-cl:<br/>
-        &nbsp;hsl(--glnbt--default-[h,s],74%);</code></td>
-      <td><span>Text color in disabled state for "outlined" mode.</span>
+      <td><code>--glnbt-def-lb-cl:<br/>
+        &nbsp;hsl(--glnbt--default-bg-[h,s],100%); // "contained"<br/>
+        &nbsp;hsl(--glnbt--primary-[h,s],50%); // "outlined", "text"</code>
       </td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-o-dis-bg-cl:<br/>
-        &nbsp;undefined;</code></td>
       <td>
-        <span>Background color in disabled state for "outlined" mode.</span>
+        <span>Text color.</span>
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-o-dis-br-cl:<br/>
-        &nbsp;hsl(--glnbt--default-[h,s],88%);</code></td>
-      <td><span>Border color in disabled state for "outlined" mode.</span></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnbt-o-ripple-cl:<br/>
-        &nbsp;hsla(--glnbt--primary-[h,s],46%,0.3);</code></td>
-      <td><span>The color of the ripple effect for the "outlined" mode.</span></td>
-    </tr>
-
-    <!-- "text" mode -->
-    <tr>
-      <td colspan="2"><em>"text" mode</em></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnbt-t-def-cl:<br/>
-        &nbsp;hsl(--glnbt--primary-[h,s],46%);</code></td>
-      <td><span>Text color for "text" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-t-def-bg-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Background color for "text" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-t-def-br-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Border color for "text" mode.</span></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnbt-t-hov-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Text color when hovering the mouse for "text" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-t-hov-bg-cl:<br/>
-        &nbsp;hsla(--glnbt--primary-[h,s],46%,0.04);</code></td>
-      <td><span>Background color when hovering the mouse for "text" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-t-hov-br-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Border color when hovering the mouse for "text" mode.</span></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnbt-t-foc-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td>Text color on focus for "text" mode.</td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-t-foc-bg-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Background color on focus for "text" mode.</span></td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-t-foc-br-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Border color on focus for "text" mode.</span></td>
-    </tr>
-
-    <tr>
-      <td><code>--glnbt-t-dis-cl:<br/>
-        &nbsp;hsl(--glnbt--default-[h,s],74%);</code></td>
-      <td><span>Text color in disabled state for "text" mode.</span>
+      <td><code>--glnbt-def-br-cl:<br/>
+        &nbsp;hsl(--glnbt--primary-[h,s],70%); // "outlined"</code>
       </td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-t-dis-bg-cl:<br/>
-        &nbsp;undefined;</code></td>
       <td>
-        <span>Background color in disabled state for "text" mode.</span>
+        <span>
+          Border color.<br />
+          The value is defined only for the "outlined" mode.
+        </span>
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-t-dis-br-cl:<br/>
-        &nbsp;undefined;</code></td>
-      <td><span>Border color in disabled state for "text" mode.</span></td>
+      <td><code>--glnbt-def-bg-cl:<br/>
+        &nbsp;hsl(--glnbt--primary-[h,s],50%); // "contained"</code>
+      </td>
+      <td>
+        <span>
+          Background color.<br />
+          The value is defined only for the "contained" mode.
+        </span>
+      </td>
     </tr>
 
     <tr>
-      <td><code>--glnbt-t-ripple-cl:<br/>
-        &nbsp;hsla(--glnbt--primary-[h,s],46%,0.3);</code></td>
-      <td><span>The color of the ripple effect for the "text" mode.</span></td>
+      <td colspan="2"><em>Values on mouseover.</em></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-hov-lb-cl:<br/>
+        &nbsp;hsl(--glnbt--default-bg-[h,s],100%); // "contained"<br/>
+        &nbsp;hsl(--glnbt--primary-[h,s],50%); // "outlined", "text"</code>
+      </td>
+      <td>
+        <span>Text color when hovering the mouse.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-hov-br-cl:<br/>
+        &nbsp;hsl(--glnbt--primary-[h,s],50%); // "outlined"</code>
+      </td>
+      <td>
+        <span>
+          Border color when hovering the mouse.<br />
+          The value is defined only for the "outlined" mode.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-hov-bg-cl:<br/>
+        &nbsp;hsl(--glnbt--primary-[h,s],40%); // "contained"<br/>
+        &nbsp;hsl(--glnbt--primary-[h,s],95%); // "outlined", "text"</code>
+      </td>
+      <td>
+        <span>
+          Background color when hovering the mouse.
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><em>Values when focus is received.</em></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-foc-lb-cl:<br/>
+        &nbsp;var(--glnbt-def-lb-cl);</code>
+      </td>
+      <td>
+        <span>
+          Text color when it receives focus.<br />
+          Corresponds to the default value.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-foc-br-cl:<br/>
+        &nbsp;var(--glnbt-def-br-cl);</code>
+      </td>
+      <td>
+        <span>
+          Border color when it receives focus.<br />
+          Corresponds to the default value.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-foc-bg-cl:<br/>
+        &nbsp;var(--glnbt-def-bg-cl);</code>
+      </td>
+      <td>
+        <span>
+          Background color when it receives focus.<br />
+          Corresponds to the default value.
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><em>Values when status: "disabled".</em></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-dis-lb-cl:<br/>
+        &nbsp;hsl(--glnbt--default-[h,s],65%);<br/>
+        &nbsp;// "contained", "outlined", "text"</code>
+      </td>
+      <td>
+        <span>Text color in disabled state.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-dis-br-cl:<br/>
+        &nbsp;hsl(--glnbt--default-[h,s],75%); // "outlined"</code>
+      </td>
+      <td>
+        <span>
+          Border color in disabled state.<br />
+          The value is defined only for the "outlined" mode.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-dis-bg-cl:<br/>
+        &nbsp;hsl(--glnbt--default-[h,s],90%); // "contained"</code>
+      </td>
+      <td>
+        <span>
+          Background color in disabled state.<br />
+          The value is defined only for the "contained" mode.
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td><code>--glnbt-ripple-cl:<br/>
+        &nbsp;hsla(--glnbt--default-bg-[h,s],100%,0.3); // "contained"<br/>
+        &nbsp;hsla(--glnbt--primary-[h,s],46%,0.3); // "outlined", "text"
+      </code>
+      </td>
+      <td>
+        <span>
+          The color of the ripple effect.
+        </span>
+      </td>
     </tr>
 
   </tbody>

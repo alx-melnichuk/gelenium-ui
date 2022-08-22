@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsul
 import { take } from 'rxjs/operators';
 
 import { ScrollAfterRoutingUtil } from '../../lib-core/utils/scroll-after-routing.util';
+import { UrlUtil } from '../../lib-core/utils/url.util';
 
 const logLabel = 'ComponentsButton';
 
@@ -14,6 +15,8 @@ const logLabel = 'ComponentsButton';
 })
 export class CmButtonComponent implements AfterViewInit {
   public showNum = '';
+
+  public urlPlButton = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_BUTTON');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

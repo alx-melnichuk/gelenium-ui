@@ -26,18 +26,19 @@ gln-button {
   &[ext-c] {
     --def-lb-pd-tp: 0.375em; // 6px
     --def-lb-pd-lf: 1em; // 16px
-    --glntr-ripple-cl:  var(--glnbt-c-ripple-cl, hsla(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%, 0.3));
+    --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%, 0.3));
   }
   &[ext-o] {
     --def-lb-pd-tp: 0.3125em; // 5px
     --def-lb-pd-lf: 0.9375em; // 15px
-    --glntr-ripple-cl:  var(--glnbt-o-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
+    --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
   }
   &[ext-t] {
     --def-lb-pd-tp: 0.375em; // 6px
     --def-lb-pd-lf: 0.5em; // 8px
-    --glntr-ripple-cl:  var(--glnbt-t-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
+    --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
   }
+  --glntr-ripple-cl: var(--glntr--cl-ripple);
 
   &>[glnbt-clear] {
     appearance: none;
