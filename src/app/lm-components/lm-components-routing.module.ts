@@ -35,7 +35,7 @@ const routes: Routes = [
       },
       {
         path: URL_INPUT,
-        loadChildren: () => import('../lib-components/components/input/input.module').then((m) => m.InputModule),
+        loadChildren: () => import('../lib-components/cm-input/cm-input.module').then((m) => m.CmInputModule),
       },
       {
         path: URL_SELECT,
