@@ -1,16 +1,17 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants';
+import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
+import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
-  selector: 'app-hint-or-error-basic',
-  templateUrl: './hint-or-error-basic.component.html',
-  styleUrls: ['./hint-or-error-basic.component.scss'],
+  selector: 'app-cm-hint-or-error-basic',
+  templateUrl: './cm-hint-or-error-basic.component.html',
+  styleUrls: ['./cm-hint-or-error-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HintOrErrorBasicComponent {
+export class CmHintOrErrorBasicComponent {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -19,6 +20,8 @@ export class HintOrErrorBasicComponent {
   public labelTs = LABEL_TS;
   @Input()
   public labelCss = LABEL_CSS;
+
+  public urlCmHintOrError = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_HINT_OR_ERROR');
 
   public controls01 = {
     model01a: new FormControl('is', []),

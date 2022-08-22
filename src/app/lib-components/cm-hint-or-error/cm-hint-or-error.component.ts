@@ -1,18 +1,18 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsulation } from '@angular/core';
 import { take } from 'rxjs/operators';
 
-import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
+import { ScrollAfterRoutingUtil } from '../../lib-core/utils/scroll-after-routing.util';
 
-const logLabel = 'HintOrError';
+const logLabel = 'ComponentsHintOrError';
 
 @Component({
-  selector: 'app-hint-or-error',
-  templateUrl: './hint-or-error.component.html',
-  styleUrls: ['./hint-or-error.component.scss'],
+  selector: 'app-cm-hint-or-error',
+  templateUrl: './cm-hint-or-error.component.html',
+  styleUrls: ['./cm-hint-or-error.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HintOrErrorComponent implements AfterViewInit {
+export class CmHintOrErrorComponent implements AfterViewInit {
   public showNum = '';
 
   constructor(private ngZone: NgZone) {

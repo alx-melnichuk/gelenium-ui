@@ -6,11 +6,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { GlnHintOrErrorModule } from 'gelenium-ui';
 
-import { HintOrErrorBasicComponent } from './hint-or-error-basic.component';
+import { CmHintOrErrorBasicComponent } from './cm-hint-or-error-basic.component';
 
 @NgModule({
-  declarations: [HintOrErrorBasicComponent],
+  declarations: [CmHintOrErrorBasicComponent],
   imports: [CommonModule, ReactiveFormsModule, MatExpansionModule, MatTabsModule, GlnHintOrErrorModule],
-  exports: [HintOrErrorBasicComponent],
+  exports: [CmHintOrErrorBasicComponent],
 })
-export class HintOrErrorBasicModule {}
+export class CmHintOrErrorBasicModule {}

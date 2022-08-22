@@ -27,7 +27,7 @@ const routes: Routes = [
       },
       {
         path: URL_HINT_OR_ERROR,
-        loadChildren: () => import('../lib-components/components/hint-or-error/hint-or-error.module').then((m) => m.HintOrErrorModule),
+        loadChildren: () => import('../lib-components/cm-hint-or-error/cm-hint-or-error.module').then((m) => m.CmHintOrErrorModule),
       },
       {
         path: URL_INFINITE_SCROLL,
