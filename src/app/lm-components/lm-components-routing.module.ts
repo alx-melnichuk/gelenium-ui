@@ -43,7 +43,7 @@ const routes: Routes = [
       },
       {
         path: URL_TEXTAREA,
-        loadChildren: () => import('../lib-components/components/textarea/textarea.module').then((m) => m.TextareaModule),
+        loadChildren: () => import('../lib-components/cm-textarea/cm-textarea.module').then((m) => m.CmTextareaModule),
       },
       { path: '**', redirectTo: URL_INPUT },
     ],

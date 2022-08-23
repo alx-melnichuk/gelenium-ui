@@ -1,6 +1,6 @@
 <section mr-vr>
   <h3 class="app-hover-link">
-    Ornaments
+    Ornaments.
     <a [href]="urlSelect + '#Ornaments'">#</a>
   </h3>
   <p>
@@ -19,12 +19,8 @@
   <code><pre source="html">
 &lt;gln-select formControlName="model01a"
   label="Enter value"&gt;
-  &lt;div gln-orn-lf&gt;
-    &lt;span&gt;left&lt;/span&gt;
-  &lt;/div&gt;
-  &lt;div gln-orn-rg&gt;
-    &lt;span&gt;right&lt;/span&gt;
-  &lt;/div&gt;
+  <i>&lt;div <strong>gln-orn-lf</strong>&gt;&lt;span&gt;left&lt;/span&gt;&lt;/div&gt;</i>
+  <i>&lt;div <strong>gln-orn-rg</strong>&gt;&lt;span&gt;right&lt;/span&gt;&lt;/div&gt;</i>
   &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
   &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
   &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
@@ -34,7 +30,8 @@
   <p>
     Adding a prefix or suffix does not disable legend animation for that element.
     <br />
-    For blocks: "&lt;span&gt;left&lt;/span&gt;" and "&lt;span&gt;right&lt;/span&gt;"
+    For blocks: <code><i>&lt;span&gt;left&lt;/span&gt;</i></code> and
+    <code><i>&lt;span&gt;right&lt;/span&gt;</i></code>
     you need to specify the value of horizontal indents.
   </p>
 </section>
