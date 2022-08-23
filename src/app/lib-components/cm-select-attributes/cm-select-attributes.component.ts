@@ -52,7 +52,6 @@ export class CmSelectAttributesComponent {
     model02e: new FormControl(null, []),
     model02f: new FormControl(null, [Validators.required]),
     model02g: new FormControl(this.fruits[0], []),
-    model02h: new FormControl(this.fruits[0], []),
   };
   public formGroup02b: FormGroup = new FormGroup(this.control02b);
 

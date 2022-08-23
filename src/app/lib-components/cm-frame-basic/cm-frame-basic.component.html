@@ -1,0 +1,145 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic
+    <a [href]="urlCmFrame + '#Basic'">#</a>
+  </h3>
+  <p>
+    By appearance and behavior, a group of components can be distinguished: GlnInput, GlnTextarea.
+  </p>
+  <p>They have the same functionality:</p>
+  <ul>
+    <li>display of the frame of the appearance;</li>
+    <li>the size of the indents;</li>
+    <li>animation (shrink) of the label;</li>
+  </ul>
+  <p>The implementation of these functions has been moved into a separate auxiliary
+    component "GlnFrame".
+    This made it possible to: eliminate code duplication and reduce development time.
+  </p>
+  <p>
+    Let's consider the capabilities of the "GlnFrame" component using the
+    "GlnInput" example. Some properties of "GlnInput" are passed directly to its
+    internal component "GlnFrame".
+  </p>
+  <p>
+    The "exterior" property determines the appearance of the component.
+  </p>
+  <p>
+    It takes the following values:
+  </p>
+  <ul>
+    <li>"outlined" - a border in the form of an rectangular frame and horizontal indents;</li>
+    <li>"underline" - a border in the form of an underline frame and horizontal indents;</li>
+    <li>"standard" - a border in the form of an underline and without horizontal indents;</li>
+  </ul>
+</section>
+
+<form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <gln-input formControlName="model01a"
+        label="Outlined"
+        exterior="outlined">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <gln-input formControlName="model01b"
+        label="Underline"
+        exterior="underline">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <gln-input formControlName="model01c"
+        label="Standard"
+        exterior="standard">
+      </gln-input>
+    </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;gln-input formControlName="model01a"
+        label="Outlined"
+        exterior="outlined"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;gln-input formControlName="model01b"
+        label="Underline"
+        exterior="underline"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;gln-input formControlName="model01c"
+        label="Standard"
+        exterior="standard"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame',
+  templateUrl: './frame.component.html',
+  styleUrls: ['./frame.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameComponent &#123;
+  public formGroup01: FormGroup = new FormGroup(&#123;
+    model01a: new FormControl('', []),
+    model01b: new FormControl('', []),
+    model01c: new FormControl('', []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

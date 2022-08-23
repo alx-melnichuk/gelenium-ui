@@ -365,29 +365,10 @@ export class SelectComponent &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: isHoverColor99.</em>
-        </small>
-      </div>
-      <gln-select formControlName="model02g"
-        label="Parameter value"
-        isHoverColor99
-        helperText="On hover, a frame with the focus color."
-        [exterior]="exterior02b"
-        wdFull>
-        <gln-option><em>None</em></gln-option>
-        <gln-option *ngFor="let item of fruits"
-          [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-select>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
           <em>Attribute: isReadOnly.</em>
         </small>
       </div>
-      <gln-select formControlName="model02h"
+      <gln-select formControlName="model02g"
         label="Read Only"
         isReadOnly
         helperText="The parameter is read only."
@@ -463,29 +444,10 @@ export class SelectComponent &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: isHoverColor99.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-select formControlName="model02g"
-        label="Parameter value"
-        isHoverColor99
-        helperText="On hover, a frame with the focus color."
-        [exterior]="exterior02b"
-        wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
-        &lt;gln-option *ngFor="let item of fruits"
-          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-option&gt;
-      &lt;/gln-select&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
           &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-select formControlName="model02h"
+      &lt;gln-select formControlName="model02g"
         label="Read Only"
         isReadOnly
         helperText="The parameter is read only."
@@ -525,7 +487,6 @@ export class SelectComponent &#123;
     model02e: new FormControl(null, []),
     model02f: new FormControl(null, [Validators.required]),
     model02g: new FormControl(this.fruits[1], []),
-    model02h: new FormControl(this.fruits[1], []),
 &#125;;
   public formGroup02b: FormGroup = new FormGroup(this.control02b);
 

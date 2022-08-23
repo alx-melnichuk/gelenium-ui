@@ -314,19 +314,6 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>noElevation: string<br/>
-          &nbsp;&nbsp;| null;</code>
-      </td>
-      <td>
-        <span>
-          Disable 3d shadow display.
-          <br />Attribute (no content).
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
         <code>ornamLfAlign: string<br/>
           &nbsp;&nbsp;| null<br/>
           &nbsp;&nbsp;| undefined;</code>
@@ -663,6 +650,30 @@
       <span>
         The value of the "color" property for the "gln-select-panel-wrap" element.
       </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnslpo-elevation: undefined;</code>
+    </td>
+    <td>
+      <span>
+        To block the display of a shadow, you must specify "--glnslpo-elevation: none;".
+      </span><br />
+      <span>Example:</span>
+      <code><pre source="html">
+&lt;gln-select formControlName="model01a"
+  <strong>panelClass="no-elevation"</strong>
+  label="Enter value"&gt;
+  &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+  &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
+  &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
+  &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
+  &lt;gln-option value="kiwi"&gt;Kiwi&lt;/gln-option&gt;
+&lt;/gln-select&gt;</pre></code>
+      <code><pre source="css">
+.gln-select-panel<strong>.no-elevation</strong> &#123;
+  --glnslpo-elevation: none;
+&#125;</pre></code>
     </td>
   </tr>
 

@@ -128,8 +128,6 @@ export class GlnSelectComponent
   @Input()
   public minLength: number | null | undefined;
   @Input()
-  public noElevation: string | null = null;
-  @Input()
   public ornamLfAlign: string | null | undefined; // OrnamAlign // +
   @Input()
   public ornamRgAlign: string | null | undefined; // OrnamAlign // +
@@ -225,7 +223,6 @@ export class GlnSelectComponent
   public noIcon: boolean | null = null; // Binding attribute "isNoIcon",
   // public noLabel: boolean | null = null; // Binding attribute "isNoLabel". // Is in GlnBasisControl.
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
-  public noElevationVal: boolean | null = null; // Binding attribute "noElevation".
   public overlayPanelClass: string | string[] = '';
   public panelClassList: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
   public positionList: ConnectedPosition[] = [];
@@ -294,9 +291,6 @@ export class GlnSelectComponent
     if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null)) {
       this.noRipple = BooleanUtil.init(this.isNoRipple) || this.currConfig?.isNoRipple || null;
     }
-    if (changes['noElevation'] || (changes['config'] && this.noElevation == null)) {
-      this.noElevationVal = BooleanUtil.init(this.noElevation) || this.currConfig?.isNoRipple || null;
-    }
     if (changes['panelClass'] || (changes['config'] && this.panelClass == null)) {
       this.panelClassList = this.panelClass || this.currConfig?.panelClass;
     }
@@ -327,9 +321,6 @@ export class GlnSelectComponent
     }
     if (this.noRipple == null) {
       this.noRipple = this.currConfig?.isNoRipple || null;
-    }
-    if (this.noElevationVal == null) {
-      this.noElevationVal = this.currConfig?.noElevation || null;
     }
     if (this.currConfig?.overlayPanelClass) {
       this.overlayPanelClass = this.currConfig.overlayPanelClass;

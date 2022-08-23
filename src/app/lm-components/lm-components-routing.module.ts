@@ -23,6 +23,10 @@ const routes: Routes = [
       },
       {
         path: URL_FRAME,
+        loadChildren: () => import('../lib-components/cm-frame/cm-frame.module').then((m) => m.CmFrameModule),
+      },
+      {
+        path: URL_FRAME + '1',
         loadChildren: () => import('../lib-components/components/frame/frame.module').then((m) => m.FrameModule),
       },
       {

@@ -113,7 +113,7 @@
 
   <div glnsp-wrap
     class="gln-select-panel-wrap"
-    [ngClass]="[(noAnimation ? 'gln-no-animation' : ''), (getBoolean(noElevationVal) ? 'gln-no-elevation' : '')]"
+    [ngClass]="[(noAnimation ? 'gln-no-animation' : '')]"
     [attr.noAnm]="noAnimation ? '' : null"
     (animationend)="hasPanelAnimation = isPanelOpen"
     (animationcancel)="hasPanelAnimation = isPanelOpen">
@@ -123,7 +123,6 @@
       role="listbox"
       [attr.id]="id + '-panel'"
       [attr.aria-multiselectable]="multiple"
-      [attr.noElevation]="getBoolean(noElevationVal) ? '' : null"
       (focus)="doFocusOnPanel()">
       <ng-content select=":not(gln-select-trigger)"></ng-content>
     </div>

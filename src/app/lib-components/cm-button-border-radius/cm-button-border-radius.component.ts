@@ -41,6 +41,9 @@ export class CmButtonBorderRadiusComponent {
   public isAddPadding04b = true;
   public radiusRatio = 0.3;
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  constructor() {}
+
   public getLabel(exterior: string): string {
     return exterior ? exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   }

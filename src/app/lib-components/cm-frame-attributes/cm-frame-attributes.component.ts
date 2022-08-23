@@ -10,17 +10,16 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
-
 import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
-  selector: 'app-cm-input-attributes',
-  templateUrl: './cm-input-attributes.component.html',
-  styleUrls: ['./cm-input-attributes.component.scss'],
+  selector: 'app-cm-frame-attributes',
+  templateUrl: './cm-frame-attributes.component.html',
+  styleUrls: ['./cm-frame-attributes.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CmInputAttributesComponent {
+export class CmFrameAttributesComponent {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -36,7 +35,6 @@ export class CmInputAttributesComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmInput = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_INPUT');
   public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
 
   public exterior02a = 'outlined';
@@ -50,28 +48,10 @@ export class CmInputAttributesComponent {
   public exterior02b = 'outlined';
   public control02b = {
     model02e: new FormControl(null, []),
-    model02f: new FormControl(null, [Validators.required]),
+    model02f: new FormControl(null, []),
     model02g: new FormControl('Hello World', []),
   };
   public formGroup02b: FormGroup = new FormGroup(this.control02b);
-
-  public exterior02c = 'outlined';
-  public control02c = {
-    model02i: new FormControl(null, []),
-    model02j: new FormControl(null, []),
-    model02k: new FormControl('Hello World', []),
-    model02l: new FormControl(null, []),
-  };
-  public formGroup02c: FormGroup = new FormGroup(this.control02c);
-
-  public exterior02d = 'outlined';
-  public control02d = {
-    model02m: new FormControl(null, []),
-    model02n: new FormControl('#000000'),
-    model02o: new FormControl(null, []),
-    model02p: new FormControl(null, []),
-  };
-  public formGroup02d: FormGroup = new FormGroup(this.control02d);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
