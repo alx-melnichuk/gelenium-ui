@@ -1,0 +1,342 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Config
+    <a [href]="urlCmSelect + '#Config'">#</a>
+  </h3>
+  <p>
+    If your application will have a single style for GlnSelect elements, then you can set a single
+    configuration.
+    To do this, you need to create an object with the GlnSelectConfig interface and define the
+    required values.
+    Next, specify the resulting object in the list of providers for the entire application (at the
+    level of the AppComponent).
+  </p>
+  <code><pre source="ts">
+const glnSelectConfigDefault: GlnSelectConfig = &#123;
+  exterior: GlnFrameExterior.outlined,
+  frameSize: GlnFrameSize.small,
+&#125;;
+
+@Component(&#123;
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  providers: [
+    &#123; provide: GLN_SELECT_CONFIG, useValue: glnSelectConfigDefault &#125;
+  ],
+&#125;)
+export class AppComponent &#123;
+  title = 'demo';
+&#125;</pre></code>
+  <p>
+    After that, all "GlnSelect" components will have the same configuration.
+  </p>
+</section>
+
+<section mr-vr
+  id="config-interface">
+  <h4 class="app-hover-link">
+    GlnSelectConfig interface.
+    <a [href]="urlCmSelect + '#config-interface'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      The list of properties that are inherited from "GlnFrameConfig" can be viewed
+      at the <a [href]="urlCmFrame + '#config-interface'">"GlnFrame#config-interface" link</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>backdropClass?:<br/>
+      &nbsp;&nbsp;string<br/>
+      &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        The custom class to be set on the backdrop element.<br />
+        If not specified, the default is "cdk-overlay-transparent-backdrop".<br />
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>isCheckmark?:<br/>
+      &nbsp;&nbsp;boolean<br/>
+      &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        Checkbox display flag for each option.<br />
+        It is used in conjunction with the "isMultiple" sign.<br />
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>isMultiple?:<br/>
+        &nbsp;&nbsp;boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        Sign of multiple choice of options.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>isNoIcon?:<br/>
+        &nbsp;&nbsp;boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        Disable the display of the icon - the status of the state of the open list.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>isNoRipple?:<br/>
+        &nbsp;&nbsp;boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        This property to turn off the ripple effect.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>noElevation?:<br/>
+        &nbsp;&nbsp;boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>Disable 3d shadow display.</span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>overlayPanelClass?:<br/>
+        &nbsp;&nbsp;string<br/>
+        &nbsp;&nbsp;| string[]<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        A custom class to add to the overlay panel element.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>panelClass?:<br/>
+        &nbsp;&nbsp;string<br/>
+        &nbsp;&nbsp;| string[]<br/>
+        &nbsp;&nbsp;| Set&lt;string&gt;<br/>
+        &nbsp;&nbsp;| &#123; [key: string]: unknown &#125;<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        Classes to be passed to the select panel. Supports the same syntax as `ngClass`.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>position?:<br/>
+        &nbsp;&nbsp;string<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        Specifies how to horizontally align the options list panel.
+      </span>
+      <ul>
+        <li>'start' - align to the left of the main element; (default)</li>
+        <li>'center' - align to the center of the main element;</li>
+        <li>'end' - align to the right side of the main element;</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><code>visibleSize?:<br/>
+        &nbsp;&nbsp;number<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        Specifies the maximum number of visible option elements.
+        This value is multiplied by the height of the option and defines the
+        maximum height of the options panel.
+        <br />
+        If multiple option elements have the smallest height, then that will be the
+        height of the option element.
+      </span>
+    </td>
+  </tr>
+</table>
+
+<section mr-vr
+  id="config-select-params">
+  <h4 class="app-hover-link">
+    Configuration with "underline" and "wide".
+    <a [href]="urlCmSelect + '#config-select-params'">#</a>
+  </h4>
+  <p>
+    An example of using a configuration provider for frame parameters can be viewed at
+    the link "<a [href]="urlCmFrame + '#config-frame-provide'">Frame#config-frame-provide</a>".
+  </p>
+  <p>
+    For example, let's specify the following parameters:
+  </p>
+  <code><pre source="ts">
+exterior: GlnFrameExterior.underline,
+frameSize: GlnFrameSize.wide,
+backdropClass: 'sc-backdrop',
+isMultiple: true,
+overlayPanelClass: ['sc-overlay-panel'],
+panelClass: ['sc-panel'],
+visibleSize: 6,
+</pre></code>
+</section>
+
+<form [formGroup]="formGroup08a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem  sc-elem">
+      <div>
+        <small>
+          <em>Default config: "underline", "medium".</em>
+        </small>
+      </div>
+      <gln-select formControlName="model08a"
+        label="Vegetarian salad"
+        helperText="Choose from a list of values."
+        wdFull>
+        <gln-option *ngFor="let item of salad"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup08a"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem  sc-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Default config: "underline", "medium".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model08a"
+        label="Vegetarian salad"
+        helperText="Choose from a list of values."
+        wdFull&gt;
+        &lt;gln-option *ngFor="let item of salad"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+import &#123;
+  GlnFrameExterior, GlnFrameSize, GlnSelectConfig, GLN_SELECT_CONFIG
+&#125; from 'gelenium-ui';
+
+const glnSelectConfigDefault: GlnSelectConfig = &#123;
+  exterior: GlnFrameExterior.underline,
+  frameSize: GlnFrameSize.wide,
+  backdropClass: 'sc-backdrop',
+  isMultiple: true,
+  overlayPanelClass: ['sc-overlay-panel'],
+  panelClass: ['sc-panel'],
+  visibleSize: 6,
+&#125;;
+
+@Component(&#123;
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [&#123; provide: GLN_SELECT_CONFIG, useValue: glnSelectConfigDefault &#125;],
+&#125;)
+export class SelectComponent &#123;
+  public salad = [
+    'lettuce (lettuce)',
+    'leaf parsley',
+    'mustard leaf',
+    'swans',
+    'sorrel',
+    'spinach',
+    'purslane',
+    'chard (leaf beet)',
+    'vegetable fennel',
+    'arugula',
+    'cucumber grass',
+    'nettles',
+  ];
+  public control08a = &#123;
+    model08a: new FormControl([], []),
+    &#125;;
+  public formGroup08a: FormGroup = new FormGroup(this.control08a);
+
+  public capitalizeFirstLetter(value: string): string &#123;
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.sc-elem &#123;
+  width: 28ch;
+&#125;
+
+.cdk-overlay-container .sc-backdrop &#123;
+  background-color: hsla(240, 72%, 94%, 30%);
+&#125;
+.cdk-overlay-container .sc-overlay-panel>.gln-select-panel-wrap &#123;
+  --glnslpo-border-radius: 10px;
+&#125;
+.cdk-overlay-container .gln-select-panel.sc-panel &#123;
+  background-color: hsla(160, 100%, 75%, 4%);
+  box-shadow: #276566de 0 5px 5px -3px
+    , #27656694 0 8px 10px 1px
+    , #27656694 0 5px 14px 2px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

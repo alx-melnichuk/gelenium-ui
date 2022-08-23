@@ -39,7 +39,7 @@ const routes: Routes = [
       },
       {
         path: URL_SELECT,
-        loadChildren: () => import('../lib-components/components/select/select.module').then((m) => m.SelectModule),
+        loadChildren: () => import('../lib-components/cm-select/cm-select.module').then((m) => m.CmSelectModule),
       },
       {
         path: URL_TEXTAREA,
