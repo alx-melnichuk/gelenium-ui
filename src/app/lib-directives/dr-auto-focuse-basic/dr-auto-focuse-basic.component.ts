@@ -3,7 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { UrlParamUtil } from 'gelenium-ui';
 
-import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../../lib-core/constants';
+import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
+import { UrlUtil } from '../../lib-core/utils/url.util';
 
 const MODE_A = 'A';
 const MODE_B = 'B';
@@ -13,13 +14,13 @@ const CN_MODE1A = 'mode1a';
 const CN_MODE1B = 'mode1b';
 
 @Component({
-  selector: 'app-auto-focuse-basic',
-  templateUrl: './auto-focuse-basic.component.html',
-  styleUrls: ['./auto-focuse-basic.component.scss'],
+  selector: 'app-dr-auto-focuse-basic',
+  templateUrl: './dr-auto-focuse-basic.component.html',
+  styleUrls: ['./dr-auto-focuse-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AutoFocuseBasicComponent implements OnInit {
+export class DrAutoFocuseBasicComponent implements OnInit {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -28,6 +29,8 @@ export class AutoFocuseBasicComponent implements OnInit {
   public labelTs = LABEL_TS;
   @Input()
   public labelCss = LABEL_CSS;
+
+  public urlDrAutoFocuse = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_AUTO_FOCUSE');
 
   public mode = MODE_A;
 

@@ -17,7 +17,7 @@ const routes: Routes = [
     children: [
       {
         path: URL_AUTO_FOCUSE,
-        loadChildren: () => import('../lib-directives/components/auto-focuse/auto-focuse.module').then((m) => m.AutoFocuseModule),
+        loadChildren: () => import('../lib-directives/dr-auto-focuse/dr-auto-focuse.module').then((m) => m.DrAutoFocuseModule),
       },
       {
         path: URL_REGEX_CHECK,

@@ -1,20 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AutoFocuseComponent } from './auto-focuse.component';
+import { DrAutoFocuseComponent } from './dr-auto-focuse.component';
 
-describe('AutoFocuseComponent', () => {
-  let component: AutoFocuseComponent;
-  let fixture: ComponentFixture<AutoFocuseComponent>;
+describe('DrAutoFocuseComponent', () => {
+  let component: DrAutoFocuseComponent;
+  let fixture: ComponentFixture<DrAutoFocuseComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AutoFocuseComponent ]
+      declarations: [ DrAutoFocuseComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AutoFocuseComponent);
+    fixture = TestBed.createComponent(DrAutoFocuseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

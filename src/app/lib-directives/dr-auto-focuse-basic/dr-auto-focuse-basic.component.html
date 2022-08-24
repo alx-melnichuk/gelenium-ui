@@ -1,10 +1,19 @@
 <section mr-vr>
-  <h3>Basic</h3>
-  <h4>Introduction</h4>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlDrAutoFocuse + '#Basic'">#</a>
+  </h3>
+  <h4 class="app-hover-link"
+    id="introduction">
+    Introduction.
+    <a [href]="urlDrAutoFocuse + '#introduction'">#</a>
+  </h4>
   <p>
     Sometimes a situation arises when, after rendering the page layout, you need to pass
     focus to a specific input element.
-    To do this, you can use the standard HTML attribute "auto focus".
+    To do this, you can use the standard HTML attribute
+    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autofocus">
+      "autofocus"</a>.
   </p>
   <span>
     For example:
@@ -12,10 +21,12 @@
   <pre source="html">
 &lt;form novalidation&gt;
   &lt;label&gt;
-    &lt;input type="text" ([ngModel])="modelLogin" name="login" autofocuse /&gt; Login
+    &lt;input type="text" ([ngModel])="modelLogin"
+      name="login" <strong>autofocuse</strong> /&gt; Login
   &lt;/label&gt;
   &lt;label&gt;
-    &lt;input type="password" ([ngModel])="modelPassword" name="password" /&gt; Password
+    &lt;input type="password" ([ngModel])="modelPassword"
+      name="password" /&gt; Password
   &lt;/label&gt;
 &lt;/form&gt;</pre>
   <p>
@@ -26,7 +37,11 @@
     In such cases, you can use the GlnAutoFocuse directive.
   </p>
 
-  <h4>A simple example.</h4>
+  <h4 class="app-hover-link"
+    id="simple-example">
+    A simple example.
+    <a [href]="urlDrAutoFocuse + '#simple-example'">#</a>
+  </h4>
   <p>
     If the page layout has a relatively simple structure, then GlnAutoFocuse can be applied.
     This directive transfers input focus at the moment when the current element is already rendered.
@@ -38,10 +53,12 @@
   <pre source="html">
 &lt;form novalidation&gt;
   &lt;label&gt;
-    &lt;input type="text" ([ngModel])="modelLogin" name="login" glnAutoFocuse /&gt; Login
+    &lt;input type="text" ([ngModel])="modelLogin"
+      name="login" <strong>glnAutoFocuse</strong> /&gt; Login
   &lt;/label&gt;
   &lt;label&gt;
-    &lt;input type="password" ([ngModel])="modelPassword" name="password" /&gt; Password
+    &lt;input type="password" ([ngModel])="modelPassword"
+      name="password" /&gt; Password
   &lt;/label&gt;
 &lt;/form&gt;</pre>
   <p>
@@ -73,6 +90,12 @@
     Otherwise, the input focus will be given to the "Password" input element.
   </p>
 </section>
+
+<h4 class="app-hover-link"
+  id="example1">
+  Example:
+  <a [href]="urlDrAutoFocuse + '#example1'">#</a>
+</h4>
 
 <section mr-vr>
   <label class="afb-focuse-owner">
@@ -259,9 +282,12 @@ export class AutoFocuseComponent implements OnInit &#123;
   </mat-accordion>
 </section>
 
-
 <section mr-vr>
-  <h4>Complex example.</h4>
+  <h4 class="app-hover-link"
+    id="complex-example">
+    Complex example.
+    <a [href]="urlDrAutoFocuse + '#complex-example'">#</a>
+  </h4>
   <p>
     If using GlnAutoFocuse does not give the desired result, then you can additionally
     use GlnAutoFocuseOwner.
@@ -309,6 +335,12 @@ export class AutoFocuseComponent implements OnInit &#123;
     &lt;/div&gt;
   &lt;/form&gt;</pre>
 </section>
+
+<h4 class="app-hover-link"
+  id="example2">
+  Example:
+  <a [href]="urlDrAutoFocuse + '#example2'">#</a>
+</h4>
 
 <section mr-vr>
   <label class="afb-focuse-owner">
