@@ -29,7 +29,7 @@ const routes: Routes = [
       },
       {
         path: URL_REGEX_REMOVE,
-        loadChildren: () => import('../lib-directives/components/regex-remove/regex-remove.module').then((m) => m.RegexRemoveModule),
+        loadChildren: () => import('../lib-directives/dr-regex-remove/dr-regex-remove.module').then((m) => m.DrRegexRemoveModule),
       },
       { path: '**', redirectTo: URL_REGEX_CHECK },
     ],

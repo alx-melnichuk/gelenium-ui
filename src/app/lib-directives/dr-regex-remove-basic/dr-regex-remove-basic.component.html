@@ -1,5 +1,8 @@
 <section mr-vr>
-  <h3>Basic</h3>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlDrRegexRemove + '#Basic'">#</a>
+  </h3>
   <p>
     When changing the value, the GlnRegexRemove directive deletes the data that matches the
     specified regular expression.
@@ -12,7 +15,11 @@
 </section>
 
 <section mr-vr>
-  <h4>1. Allow: digits only.</h4>
+  <h4 class="app-hover-link"
+    id="allow-digits-only">
+    1. Allow: digits only.
+    <a [href]="urlDrRegexRemove + '#allow-digits-only'">#</a>
+  </h4>
   <p>
     For example, you want to allow only numbers to be entered.<br />
     To do this, we will use the following regular expression:
@@ -22,7 +29,11 @@
 </section>
 
 <section mr-vr>
-  <h4>2. Allow: letters only.</h4>
+  <h4 class="app-hover-link"
+    id="allow-letters-only">
+    2. Allow: letters only.
+    <a [href]="urlDrRegexRemove + '#allow-letters-only'">#</a>
+  </h4>
   <p>
     For example, you want to allow only letters to be entered.<br />
     To do this, we will use the following regular expression:
@@ -32,17 +43,26 @@
 </section>
 
 <section mr-vr>
-  <h4>3. Allow: letters, digits and space.</h4>
+  <h4 class="app-hover-link"
+    id="allow-letters-digits">
+    3. Allow: letters, digits and space.
+    <a [href]="urlDrRegexRemove + '#allow-letters-digits'">#</a>
+  </h4>
   <p>
     For example, you want to allow only letters, digits and space to be entered.<br />
-    To do this, we will use the following regular expression:
+    To do this, we will use the following regular expression:<br />
     <code>/[^\ \dA-Za-z]/gm</code><br />
     All other values will be removed for this expression.
   </p>
 </section>
 
 <section mr-vr>
-  <h4>4. Allow: Single spaces only.</h4>
+  <h4 class="app-hover-link"
+    id="allow-single-spaces-only">
+    4. Allow: Single spaces only.
+    <a [href]="urlDrRegexRemove + '#allow-single-spaces-only'">#</a>
+  </h4>
+
   <p>
     For example, suppose you want to prevent a second consecutive space from being entered.
     And also prohibit leading spaces.

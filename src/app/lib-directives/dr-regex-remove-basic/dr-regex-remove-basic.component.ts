@@ -9,16 +9,17 @@ import {
   LABEL_STANDARD,
   LABEL_TS,
   LABEL_UNDERLINE,
-} from '../../../lib-core/constants';
+} from '../../lib-core/constants';
+import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
-  selector: 'app-regex-remove-basic',
-  templateUrl: './regex-remove-basic.component.html',
-  styleUrls: ['./regex-remove-basic.component.scss'],
+  selector: 'app-dr-regex-remove-basic',
+  templateUrl: './dr-regex-remove-basic.component.html',
+  styleUrls: ['./dr-regex-remove-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegexRemoveBasicComponent {
+export class DrRegexRemoveBasicComponent {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -33,6 +34,8 @@ export class RegexRemoveBasicComponent {
   public labelTs = LABEL_TS;
   @Input()
   public labelCss = LABEL_CSS;
+
+  public urlDrRegexRemove = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_REGEX_REMOVE');
 
   public control01 = {
     model01a: new FormControl('123', []),

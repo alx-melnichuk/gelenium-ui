@@ -1,18 +1,18 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsulation } from '@angular/core';
 import { take } from 'rxjs/operators';
 
-import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
+import { ScrollAfterRoutingUtil } from '../../lib-core/utils/scroll-after-routing.util';
 
-const logLabel = 'RegexRemove';
+const logLabel = 'DirectivesRegexRemove';
 
 @Component({
-  selector: 'app-regex-remove',
-  templateUrl: './regex-remove.component.html',
-  styleUrls: ['./regex-remove.component.scss'],
+  selector: 'app-dr-regex-remove',
+  templateUrl: './dr-regex-remove.component.html',
+  styleUrls: ['./dr-regex-remove.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegexRemoveComponent implements AfterViewInit {
+export class DrRegexRemoveComponent implements AfterViewInit {
   public showNum = '';
 
   constructor(private ngZone: NgZone) {
