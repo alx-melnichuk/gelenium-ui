@@ -26,10 +26,6 @@ const routes: Routes = [
         loadChildren: () => import('../lib-components/cm-frame/cm-frame.module').then((m) => m.CmFrameModule),
       },
       {
-        path: URL_FRAME + '1',
-        loadChildren: () => import('../lib-components/components/frame/frame.module').then((m) => m.FrameModule),
-      },
-      {
         path: URL_HINT_OR_ERROR,
         loadChildren: () => import('../lib-components/cm-hint-or-error/cm-hint-or-error.module').then((m) => m.CmHintOrErrorModule),
       },
