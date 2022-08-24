@@ -1,5 +1,8 @@
 <section mr-vr>
-  <h3>API: GlnRegexMatch</h3>
+  <h3 class="app-hover-link">
+    API: GlnRegexMatch.
+    <a [href]="urlDrRegexMatch + '#Api'">#</a>
+  </h3>
   <p>
     Selector:
     <span fw500>[glnRegexMatch]</span>
@@ -14,7 +17,11 @@
 </section>
 
 <section mr-vr>
-  <h4>Properties</h4>
+  <h4 class="app-hover-link"
+    id="properties">
+    Properties.
+    <a [href]="urlDrRegexMatch + '#properties'">#</a>
+  </h4>
 </section>
 
 <table class="app-tab">
@@ -87,7 +94,11 @@
 </table>
 
 <section mr-vr>
-  <h4>Additionally.</h4>
+  <h4 class="app-hover-link"
+    id="additionally">
+    Additionally.
+    <a [href]="urlDrRegexMatch + '#additionally'">#</a>
+  </h4>
   <p>
     In angular, directives are created in the order of their description, and for this reason, it is
     advisable to specify the first GlnRegexMatch directive.
@@ -107,7 +118,7 @@
     This check will help prevent further processing in cases where the GlnRegexMatch directive
     canceled changes.
   </p>
-  <pre source="ts">
+  <code><pre source="ts">
 @HostListener('input', ['$event'])
 public doInput(event: Event): void &#123;
   // https://github.com/angular/angular/issues/9587
@@ -117,8 +128,7 @@ public doInput(event: Event): void &#123;
   if (!!event && !event.cancelBubble) &#123;
     // Further processing.
   &#125;
-&#125;
-  </pre>
+&#125;</pre></code>
   <p>
     Important! Remember that a regular expression must allow you to enter data sequentially.
   </p>

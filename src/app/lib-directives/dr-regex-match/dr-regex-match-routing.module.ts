@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { RegexMatchComponent } from './regex-match.component';
+import { DrRegexMatchComponent } from './dr-regex-match.component';
 
-const routes: Routes = [{ path: '', component: RegexMatchComponent }];
+const routes: Routes = [{ path: '', component: DrRegexMatchComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class RegexMatchRoutingModule {}
+export class DrRegexMatchRoutingModule {}

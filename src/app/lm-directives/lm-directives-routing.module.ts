@@ -25,7 +25,7 @@ const routes: Routes = [
       },
       {
         path: URL_REGEX_MATCH,
-        loadChildren: () => import('../lib-directives/components/regex-match/regex-match.module').then((m) => m.RegexMatchModule),
+        loadChildren: () => import('../lib-directives/dr-regex-match/dr-regex-match.module').then((m) => m.DrRegexMatchModule),
       },
       {
         path: URL_REGEX_REMOVE,

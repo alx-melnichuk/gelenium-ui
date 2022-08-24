@@ -9,16 +9,17 @@ import {
   LABEL_STANDARD,
   LABEL_TS,
   LABEL_UNDERLINE,
-} from '../../../lib-core/constants';
+} from '../../lib-core/constants';
+import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
-  selector: 'app-regex-match-basic',
-  templateUrl: './regex-match-basic.component.html',
-  styleUrls: ['./regex-match-basic.component.scss'],
+  selector: 'app-dr-regex-match-basic',
+  templateUrl: './dr-regex-match-basic.component.html',
+  styleUrls: ['./dr-regex-match-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegexMatchBasicComponent {
+export class DrRegexMatchBasicComponent {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -33,6 +34,8 @@ export class RegexMatchBasicComponent {
   public labelTs = LABEL_TS;
   @Input()
   public labelCss = LABEL_CSS;
+
+  public urlDrRegexMatch = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_REGEX_MATCH');
 
   public control01 = {
     model01a: new FormControl('', []),

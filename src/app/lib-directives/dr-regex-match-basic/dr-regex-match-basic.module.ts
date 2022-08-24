@@ -7,11 +7,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { GlnInputModule, GlnRegexModule } from 'gelenium-ui';
 
-import { RegexMatchBasicComponent } from './regex-match-basic.component';
+import { DrRegexMatchBasicComponent } from './dr-regex-match-basic.component';
 
 @NgModule({
-  declarations: [RegexMatchBasicComponent],
+  declarations: [DrRegexMatchBasicComponent],
   imports: [CommonModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnInputModule, GlnRegexModule],
-  exports: [RegexMatchBasicComponent],
+  exports: [DrRegexMatchBasicComponent],
 })
-export class RegexMatchBasicModule {}
+export class DrRegexMatchBasicModule {}

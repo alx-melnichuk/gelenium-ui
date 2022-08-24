@@ -1,5 +1,8 @@
 <section mr-vr>
-  <h3>Basic</h3>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlDrRegexMatch + '#Basic'">#</a>
+  </h3>
   <p>
     The "GlnRegexMatch" directive allows you to enter only those values that match the specified
     regular expression.
@@ -9,7 +12,11 @@
 </section>
 
 <section mr-vr>
-  <h4>1. Allow: digits only.</h4>
+  <h4 class="app-hover-link"
+    id="allow-digits">
+    1. Allow: digits only.
+    <a [href]="urlDrRegexMatch + '#allow-digits'">#</a>
+  </h4>
   <p>
     For example, you want to allow only numbers to be entered.<br />
     To do this, we will use the following regular expression:<br />
@@ -27,7 +34,11 @@
 </section>
 
 <section mr-vr>
-  <h4>2. Allow: real number.</h4>
+  <h4 class="app-hover-link"
+    id="allow-real-number">
+    2. Allow: real number.
+    <a [href]="urlDrRegexMatch + '#allow-real-number'">#</a>
+  </h4>
   <p>
     Suppose you want to allow only a real number to be entered without using an exponent.
     To do this, we will use the following regular expression:<br />
@@ -36,7 +47,11 @@
 </section>
 
 <section mr-vr>
-  <h4>3. Allow: '#numeric'.</h4>
+  <h4 class="app-hover-link"
+    id="allow-numeric">
+    3. Allow: '#numeric'.
+    <a [href]="urlDrRegexMatch + '#allow-numeric'">#</a>
+  </h4>
   <p>
     The GlnRegexMatch directive has its own patterns, each of which matches a special regular
     expression.
