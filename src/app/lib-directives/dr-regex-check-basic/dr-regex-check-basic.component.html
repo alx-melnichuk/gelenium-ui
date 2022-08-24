@@ -1,5 +1,8 @@
 <section mr-vr>
-  <h3>Basic</h3>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlDrRegexCheck + '#Basic'">#</a>
+  </h3>
   <p>
     The GlnRegexCheck directive implements checking the value of an element against
     a regular expression.
@@ -11,7 +14,7 @@
   <p>
     For example, an input field can contain up to three letters.
   </p>
-  <pre source="html">
+  <code><pre source="html">
 &lt;style&gt;
   input.rcb-input.ng-invalid &#123;
     border: red solid 2px;
@@ -42,7 +45,7 @@
     &lt;/div&gt;
   &lt;/div&gt;
 
-&lt;/form&gt;</pre>
+&lt;/form&gt;</pre></code>
 </section>
 
 <style>
@@ -78,7 +81,11 @@
 </form>
 
 <section mr-vr>
-  <h4>2. Use a "pattern" with RegExp and GlnRegexCheck.</h4>
+  <h4 class="app-hover-link"
+    id="gln-regex-check1">
+    2. Use a "pattern" with RegExp and GlnRegexCheck.
+    <a [href]="urlDrRegexCheck + '#gln-regex-check1'">#</a>
+  </h4>
   <p>
     But there are situations when you need to apply several restrictions and display
     a separate error for each. In such cases, you can use the "GlnRegexCheck" directive.
@@ -131,7 +138,11 @@
 </section>
 
 <section mr-vr>
-  <h4>3. GlnRegexCheck configuration</h4>
+  <h4 class="app-hover-link"
+    id="gln-regex-check2">
+    3. GlnRegexCheck configuration.
+    <a [href]="urlDrRegexCheck + '#gln-regex-check2'">#</a>
+  </h4>
   <p>
     Suppose we need to define a new secret key (or password).
     The field value can contain various characters.
@@ -173,16 +184,20 @@
   <p>
     Thus, the application of the directive is as follows:
   </p>
-  <pre source="html">
+  <code><pre source="html">
     [glnRegexCheck]="&#123;
       'checkLetters': '^(?=.*[a-zA-Z])[\\w\\W]&#123;1,&#125;$',
       'checkDigits': '^(?=.*\\d)[\\w\\W]&#123;1,&#125;$',
       'checkSymbols': '^(?=.*[!@#$%^&*])[\\w\\W]&#123;1,&#125;$'
-    &#125;"</pre>
+    &#125;"</pre></code>
 </section>
 
 <section mr-vr>
-  <h4>4. "GlnRegexCheck" and date input.</h4>
+  <h4 class="app-hover-link"
+    id="gln-regex-check3">
+    4. "GlnRegexCheck" and date input.
+    <a [href]="urlDrRegexCheck + '#gln-regex-check3'">#</a>
+  </h4>
   <p>
     Let's say we need to implement an initial check for entering a date value.
     Let's prepare a regular expression:<br />
@@ -220,10 +235,14 @@
 </section>
 
 <section mr-vr>
-  <h4>5. Entering a phone number.</h4>
+  <h4 class="app-hover-link"
+    id="gln-regex-check4">
+    5. Entering a phone number.
+    <a [href]="urlDrRegexCheck + '#gln-regex-check4'">#</a>
+  </h4>
   <p>
     Let's say we need to implement validation of entering a phone number value in the
-    format "(999)999-9999".
+    format "<code>(999)999-9999</code>".
     The regular expression that checks this format is:<br />
     <code>^[(][0-9]&#123;3&#125;[)][0-9]&#123;3&#125;[-][0-9]&#123;4&#125;$</code><br />
     And here is a regular expression that allows you to enter this format sequentially:<br />

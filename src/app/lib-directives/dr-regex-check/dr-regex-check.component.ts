@@ -1,18 +1,18 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsulation } from '@angular/core';
 import { take } from 'rxjs/operators';
 
-import { ScrollAfterRoutingUtil } from '../../../lib-core/utils/scroll-after-routing.util';
+import { ScrollAfterRoutingUtil } from '../../lib-core/utils/scroll-after-routing.util';
 
-const logLabel = 'RegexCheck';
+const logLabel = 'DirectivesRegexCheck';
 
 @Component({
-  selector: 'app-regex-check',
-  templateUrl: './regex-check.component.html',
-  styleUrls: ['./regex-check.component.scss'],
+  selector: 'app-dr-regex-check',
+  templateUrl: './dr-regex-check.component.html',
+  styleUrls: ['./dr-regex-check.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegexCheckComponent implements AfterViewInit {
+export class DrRegexCheckComponent implements AfterViewInit {
   public showNum = '';
 
   constructor(private ngZone: NgZone) {

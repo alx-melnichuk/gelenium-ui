@@ -9,16 +9,17 @@ import {
   LABEL_STANDARD,
   LABEL_TS,
   LABEL_UNDERLINE,
-} from '../../../lib-core/constants';
+} from '../../lib-core/constants';
+import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
-  selector: 'app-regex-check-basic',
-  templateUrl: './regex-check-basic.component.html',
-  styleUrls: ['./regex-check-basic.component.scss'],
+  selector: 'app-dr-regex-check-basic',
+  templateUrl: './dr-regex-check-basic.component.html',
+  styleUrls: ['./dr-regex-check-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegexCheckBasicComponent {
+export class DrRegexCheckBasicComponent {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -33,6 +34,8 @@ export class RegexCheckBasicComponent {
   public labelTs = LABEL_TS;
   @Input()
   public labelCss = LABEL_CSS;
+
+  public urlDrRegexCheck = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_REGEX_CHECK');
 
   public control01a = {
     model01a: new FormControl('1', []),

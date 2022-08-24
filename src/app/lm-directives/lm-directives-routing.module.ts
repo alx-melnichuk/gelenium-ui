@@ -21,7 +21,7 @@ const routes: Routes = [
       },
       {
         path: URL_REGEX_CHECK,
-        loadChildren: () => import('../lib-directives/components/regex-check/regex-check.module').then((m) => m.RegexCheckModule),
+        loadChildren: () => import('../lib-directives/dr-regex-check/dr-regex-check.module').then((m) => m.DrRegexCheckModule),
       },
       {
         path: URL_REGEX_MATCH,
