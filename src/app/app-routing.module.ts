@@ -3,6 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: 'guides',
+    loadChildren: () => import('./lm-guides/lm-guides.module').then((m) => m.LmGuidesModule),
+  },
+  {
     path: 'components',
     loadChildren: () => import('./lm-components/lm-components.module').then((m) => m.LmComponentsModule),
   },

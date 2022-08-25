@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   private routerEventsSub: Subscription | null = null;
 
   constructor(private router: Router) {
+    this.initGuides();
     this.initMenuComponents();
     this.initMenuDirectives();
     this.initMenuPalette();
@@ -28,8 +29,25 @@ export class AppComponent implements OnInit {
     this.routerEventsSub = ScrollAfterRoutingUtil.listenForRouterEvents(this.router);
   }
 
+  public initGuides(): void {
+    UrlUtil.add('URL_GUIDES', 'guides');
+
+    // ** Menu for "Guides - Start". **
+
+    UrlUtil.add('URL_START', 'start');
+    const urlGtStStart = '/' + UrlUtil.get('URL_GUIDES') + '/' + UrlUtil.get('URL_START');
+    const siteUrlsGtStStart: SiteUrl[] = [{ label: 'Getting Started', url: urlGtStStart, fragment: 'GettingStarted' }];
+    SiteMenuUtil.addItem('Guides', 'Start', { label: 'Start', siteUrls: siteUrlsGtStStart, order: 1 });
+
+    // ** Menu for "Guides - Description". **
+
+    UrlUtil.add('URL_DESCRIPTION', 'description');
+    const urlGtStDescription = '/' + UrlUtil.get('URL_GUIDES') + '/' + UrlUtil.get('URL_DESCRIPTION');
+    const siteUrlsGtStDescription: SiteUrl[] = [{ label: 'About library', url: urlGtStDescription, fragment: 'AboutLibrary' }];
+    SiteMenuUtil.addItem('Guides', 'Description', { label: 'Description', siteUrls: siteUrlsGtStDescription, order: 2 });
+  }
+
   public initMenuComponents(): void {
-    UrlUtil.add;
     UrlUtil.add('URL_COMPONENTS', 'components');
 
     UrlUtil.add('URL_BUTTON', 'button');

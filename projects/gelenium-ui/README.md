@@ -1,12 +1,12 @@
 # Gelenium-UI
 
-Library of visual components in the style of "Material UI".
-But it is also more flexible.
+A library of visual components in a style similar to "Material UI".
+But the components of this library are more flexible.
 
 Demo site: [gelenium-ui](https://alx-melnichuk.github.io/gelenium-ui/).
 This site also has examples of use.
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
+This library was generated with [Angular CLI](https://v14.angular.io/cli) version 14.1.2.
 
 ## Installation
 
@@ -28,21 +28,21 @@ It comes in three versions:
 - with a fill (exterior="underline")
 - standard (exterior="standard")
 
-![input1a.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/imgs-for-readme/input1a.png)
+![input1a.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/src/assets/read-me/input1a.png)
 
                 
 The element's label has an animation and smoothly transitions into a placeholder.
 
 This component changes the display color when it is in an error state.
 
-![input1b_error.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/imgs-for-readme/input1b_error.png)
+![input1b_error.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/src/assets/read-me/input1b_error.png)
 
 
 ### Ornament
 
 An ornament (text or picture) can be placed at the beginning or at the end of an element.
 
-![input2a_ornam.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/imgs-for-readme/input2a_ornam.png)
+![input2a_ornam.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/src/assets/read-me/input2a_ornam.png)
 
 
 ### Frame Size
@@ -67,10 +67,10 @@ The height of the element remains the same even when the font size is changed (f
 It is possible to specify the height of an element. To do this, in the "config.frameSizeValue" property, we define the required height in pixels.
 
 An element with an "outlined" appearance.
-![input3a_size.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/imgs-for-readme/input3a_size.png)
+![input3a_size.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/src/assets/read-me/input3a_size.png)
 
 An element with an "underline" appearance.
-![input3b_size.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/imgs-for-readme/input3b_size.png)
+![input3b_size.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/src/assets/read-me/input3b_size.png)
 
 
 ### Border radius
@@ -78,9 +78,9 @@ An element with an "underline" appearance.
 For these components, you can change the border radius.
 
 An element with an "outlined" appearance.
-![input4a_border.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/imgs-for-readme/input4a_border.png)
+![input4a_border.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/src/assets/read-me/input4a_border.png)
 
 An element with an "underline" appearance.
-![input4b_border.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/imgs-for-readme/input4b_border.png)
+![input4b_border.png](https://github.com/alx-melnichuk/gelenium-ui/raw/master/src/assets/read-me/input4b_border.png)
 
 There are also other features of these components that can be seen on the demo site.
