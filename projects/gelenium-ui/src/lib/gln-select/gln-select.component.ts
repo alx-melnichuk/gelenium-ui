@@ -434,6 +434,7 @@ export class GlnSelectComponent
   ): string | string[] | Set<string> | { [key: string]: any } {
     return list ?? '';
   }
+
   public isEmpty(): boolean {
     return Array.isArray(this.valueData) ? this.valueData.length === 0 : this.valueData == null;
   }

@@ -13,8 +13,13 @@
   </p>
 </section>
 
-<section mr-vr>
-  <h4>Properties</h4>
+
+<section mr-vr
+  id="api-properties">
+  <h4 class="app-hover-link">
+    Properties.
+    <a [href]="urlCmSelect + '#api-properties'">#</a>
+  </h4>
 </section>
 
 <table class="app-tab">
@@ -524,10 +529,159 @@
 
 
 <section mr-vr
-  id="css-variables1">
+  id="api-methods">
+  <h4 class="app-hover-link">
+    Methods
+    <a [href]="urlCmSelect + '#api-methods'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>focus(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        This element is given input focus.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>toggle(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Closes an open overlay panel and opens a closed one.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>open(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Opens the overlay panel.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>close(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Closes the overlay panel.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>addOption(option: GlnOptionComponent | null): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Add the GlnOptionComponent element to the selection list.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      Parameters
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>option:<br/>
+          &nbsp;&nbsp;GlnOptionComponent<br/>
+          &nbsp;&nbsp;| null;</code>
+      </td>
+      <td>
+        The GlnOptionComponent element.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>deleteOption(option: GlnOptionComponent | null): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Remove the GlnOptionComponent element from the selected list.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      Parameters
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>option:<br/>
+          &nbsp;&nbsp;GlnOptionComponent<br/>
+          &nbsp;&nbsp;| null;</code>
+      </td>
+      <td>
+        The GlnOptionComponent element.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="api-css-variables1">
   <h4 class="app-hover-link">
     Css variables, optional. You can override the default values.
-    <a [href]="urlCmSelect + '#css-variables1'">#</a>
+    <a [href]="urlCmSelect + '#api-css-variables1'">#</a>
   </h4>
 </section>
 
