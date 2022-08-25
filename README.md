@@ -1,12 +1,12 @@
 # Gelenium-UI
 
-Library of visual components in the style of "Material UI".
-But it is also more flexible.
+A library of visual components in a style similar to "Material UI".
+But the components of this library are more flexible.
 
 Demo site: [gelenium-ui](https://alx-melnichuk.github.io/gelenium-ui/).
 This site also has examples of use.
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
+This library was generated with [Angular CLI](https://v14.angular.io/cli) version 14.1.2.
 
 ## Installation
 
