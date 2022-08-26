@@ -4,7 +4,9 @@
     <a [href]="urlCmFrame + '#Basic'">#</a>
   </h3>
   <p>
-    By appearance and behavior, a group of components can be distinguished: GlnInput, GlnTextarea.
+
+    By appearance and behavior, a group of components can be distinguished: GlnInput,
+    GlnTextarea, GlnSelect.
   </p>
   <p>They have the same functionality:</p>
   <ul>
@@ -13,13 +15,18 @@
     <li>animation (shrink) of the label;</li>
   </ul>
   <p>The implementation of these functions has been moved into a separate auxiliary
-    component "GlnFrame".
+    component GlnFrame.
     This made it possible to: eliminate code duplication and reduce development time.
   </p>
   <p>
-    Let's consider the capabilities of the "GlnFrame" component using the
-    "GlnInput" example. Some properties of "GlnInput" are passed directly to its
-    internal component "GlnFrame".
+    <i>Note!<br />
+      This component is presented not for use, but for understanding what functionality it
+      provides to other components.</i>
+  </p>
+  <p>
+    Let's consider the capabilities of the GlnFrame component using the
+    GlnInput example. Some properties of GlnInput are passed directly to its
+    internal component GlnFrame.
   </p>
   <p>
     The "exterior" property determines the appearance of the component.

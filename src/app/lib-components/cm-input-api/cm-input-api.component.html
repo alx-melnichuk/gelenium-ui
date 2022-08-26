@@ -543,3 +543,30 @@
   </tr>
 
 </table>
+
+<hr br-nn />
+
+<section mr-vr
+  id="api-css-variables-gln-frame">
+  <h4 class="app-hover-link">
+    Css variables from GlnFrame.
+    <a [href]="urlCmInput + '#api-css-variables-gln-frame'">#</a>
+  </h4>
+  <p>
+    You can also use CSS variables at the
+    GlnFrame component level
+    <a [href]="urlCmFrame + '#api-css-variables-optional'">GlnFrame#api-css-variables-optional</a>.
+    But remember that new css variables must be defined at the GlnFrame level.
+  </p>
+  <span>For example:</span>
+  <pre source="css">
+.ip-bootstrap <strong>.gln-frame</strong> &#123;
+  // Hover styles match the default styles.
+  --glnfr-hov-lb-cl: var(--glnfr--lb-cl-def);
+  --glnfr-hov-br-cl: var(--glnfr--br-cl-def);
+  // Blocking frame resizing when hovering the mouse for "Outlined" mode.
+  --glnfr-hov-dcr-br-wd: unset;
+  // Blocking frame resizing when receiving focus for "Outlined" mode.
+  --glnfr-foc-dcr-br-wd: unset;
+&#125;</pre>
+</section>

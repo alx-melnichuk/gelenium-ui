@@ -34,7 +34,7 @@ let uniqueIdCounter = 0;
 })
 export class GlnOptionComponent implements OnChanges, OnInit {
   @Input()
-  public id = `glno-${uniqueIdCounter++}`;
+  public id = `glnop-${uniqueIdCounter++}`;
   @Input()
   public isDisabled: string | boolean | null | undefined;
   @Input()

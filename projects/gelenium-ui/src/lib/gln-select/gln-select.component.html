@@ -1,6 +1,6 @@
 <ng-container [formGroup]="formGroup">
-  <div glns-wrap
-    class="glns-wrap"
+  <div glnsl-wrap
+    class="glnsl-wrap"
     [glnFrameExteriorInput]="exterior || currConfig?.exterior"
     #glnFrameExteriorInput="glnFrameExteriorInput"
     [glnFrameExteriorInputElementRef]="hostRef"
@@ -48,10 +48,10 @@
         <ng-content select="[gln-orn-rg]"></ng-content>
 
         <div *ngIf="!getBoolean(isNoIcon) && !currConfig?.isNoIcon"
-          glns-rhomb
+          glnsl-rhomb
           [attr.opn]="isPanelOpen ? '' : null"
           [attr.noAnm]="noAnimation ? '' : null"
-          [ngClass]="['glns-rhomb', (isPanelOpen ? 'is-open' : '')]"
+          [ngClass]="['glnsl-rhomb', (isPanelOpen ? 'is-open' : '')]"
           focusable="false"
           aria-hidden="true">
         </div>
@@ -111,13 +111,13 @@
   (attach)="attach()"
   (detach)="isPanelOpen ? close() : null">
 
-  <div glnsp-wrap
+  <div glnslp-wrap
     class="gln-select-panel-wrap"
     [ngClass]="[(noAnimation ? 'gln-no-animation' : '')]"
     [attr.noAnm]="noAnimation ? '' : null"
     (animationend)="hasPanelAnimation = isPanelOpen"
     (animationcancel)="hasPanelAnimation = isPanelOpen">
-    <div glns-panel
+    <div glnsl-panel
       class="gln-select-panel"
       [ngClass]="getPanelClass(panelClassList)"
       role="listbox"

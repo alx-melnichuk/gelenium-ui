@@ -27,7 +27,7 @@ gln-select {
       cursor: pointer;
     }
 
-    // Element "gln-frame - glns-rhomb".
+    // Element "gln-frame - glnsl-rhomb".
     --glnsl--default46: hsl(var(--glnsl--default-h), var(--glnsl--default-s), 46%); // hsl(20, 2%, 46%); rgba(0, 0, 0, 0.54); // +
     --glnsl--primary46: hsl(var(--glnsl--primary-h), var(--glnsl--primary-s), 46%); //  #1976d2;
     --glnsl--danger51: hsl(var(--glnsl--danger-h), var(--glnsl--danger-s), 51%); // hsl(0, 65%, 51%); #d32f2f; rgb(211, 47, 47)
@@ -57,7 +57,7 @@ gln-select {
     }
   }
   
-  gln-frame>div>[glnfr-orn-rg]>[glns-rhomb] {
+  gln-frame>div>[glnfr-orn-rg]>[glnsl-rhomb] {
     align-items: center;
     color: var(--glnsl-rhomb-cl);
     display: flex;
@@ -79,7 +79,7 @@ gln-select {
       transform: rotate(180deg);
     }
   }
-  gln-frame:not([ext-s])>div>[glnfr-orn-rg]>[glns-rhomb] {
+  gln-frame:not([ext-s])>div>[glnfr-orn-rg]>[glnsl-rhomb] {
     padding-right: 0.375em; // 6px
   }
 
@@ -101,8 +101,8 @@ gln-select {
     white-space: nowrap;
   }
 
-  // Element "div glns-wrap".
-  &>[glns-wrap] {
+  // Element "div glnsl-wrap".
+  &>[glnsl-wrap] {
     position: relative;
   }
 

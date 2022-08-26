@@ -88,7 +88,7 @@ export class GlnSelectComponent
   implements OnChanges, OnInit, AfterContentInit, AfterViewInit, ControlValueAccessor, Validator, GlnOptionParent
 {
   // @Input()
-  // public id = `glns-${uniqueIdCounter++}`; // Is in GlnBasisControl.
+  // public id = `glnsl-${uniqueIdCounter++}`; // Is in GlnBasisControl.
   @Input()
   public config: GlnSelectConfig | null | undefined; // -
   @Input()
@@ -255,7 +255,7 @@ export class GlnSelectComponent
     @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any,
     ngZone: NgZone
   ) {
-    super(uniqueIdCounter++, 'glns', hostRef, renderer, changeDetectorRef, ngZone);
+    super(uniqueIdCounter++, 'glnsl', hostRef, renderer, changeDetectorRef, ngZone);
     this.currConfig = this.rootConfig;
     this.scrollStrategy = this.scrollStrategyFactory();
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-select', true);

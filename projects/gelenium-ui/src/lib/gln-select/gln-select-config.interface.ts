@@ -15,7 +15,6 @@ export interface GlnSelectConfig extends GlnFrameConfig {
   isMultiple?: boolean | undefined;
   isNoIcon?: boolean | undefined;
   isNoRipple?: boolean | undefined;
-  noElevation?: boolean | undefined;
   overlayPanelClass?: string | string[] | undefined;
   panelClass?: string | string[] | Set<string> | { [key: string]: any } | undefined;
   position?: string | undefined; // Horizontal position = 'start' | 'center' | 'end';
