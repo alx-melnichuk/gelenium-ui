@@ -25,8 +25,8 @@ export class GlnRegexCheckDirective implements OnChanges {
     @Optional() @Inject(GLN_NODE_INTERNAL_VALIDATOR) private nodeInternalValidator: GlnNodeInternalValidator | null
   ) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.glnRegexCheck && this.control && this.control.control) {
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['glnRegexCheck'] && this.control && this.control.control) {
       const regexCheck: GlnRegexCheck = GlnRegexCheckUtil.create(this.glnRegexCheck) || {};
       const list = Object.keys(regexCheck);
       for (const name of list) {

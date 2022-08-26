@@ -1,0 +1,309 @@
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Like a Bootstrap.
+    <a [href]="urlPlInput + '#Bootstrap'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnInput in style as "Bootstrap".
+    <br />
+    To do this, you need to specify the following configuration:
+  </p>
+  <code><pre source="ts">
+public config02b: GlnFrameConfig = &#123;
+  exterior: GlnFrameExterior.outlined,
+  frameSize: GlnFrameSize.short,
+  isNoLabel: true,
+&#125;;</pre></code>
+  <span>
+    And also define some css-styles.
+  </span>
+</section>
+
+
+<form [formGroup]="formGroup02a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group ip-bootstrap">
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>State: empty.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02a"
+        label="Enter value"
+        helperText="Enter a value for the parameter."
+        [config]="config02a"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Attributes: isRequired.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02b"
+        isRequired
+        [label]="!control02a.model02b.value
+          ? 'Requires a value':'Parameter value'"
+        [helperText]="control02a.model02b.value
+          ? 'The field is filled.'
+          : 'The field is not filled.'"
+        [config]="config02a"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Color: primary or success.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02c"
+        [ngClass]="[control02a['model02c'].value ? 'ip-success' : '']"
+        [label]="!control02a.model02c.value
+          ? 'Enter a parameter':'Parameter specified'"
+        [helperText]="control02a.model02c.value
+          ? 'The parameter was specified. (success)'
+          : 'The parameter was not specified. (primary)'"
+        [config]="config02a"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Attribute: isDisabled.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        [config]="config02a"
+        wdFull>
+      </gln-input>
+    </div>
+
+  </div>
+
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup02a"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group ip-bootstrap"&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;State: empty.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02a"
+        label="Enter value"
+        helperText="Enter a value for the parameter."
+        [config]="config02a"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: isRequired.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02b"
+        isRequired
+        [label]="!control02a.model02b.value
+          ? 'Requires a value':'Parameter value'"
+        [helperText]="control02a.model02b.value
+          ? 'The field is filled.'
+          : 'The field is not filled.'"
+        [config]="config02a"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Color: primary or success.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02c"
+        [ngClass]="[control02a['model02c'].value ? 'ip-success' : '']"
+        [label]="!control02a.model02c.value
+          ? 'Enter a parameter':'Parameter specified'"
+        [helperText]="control02a.model02c.value
+          ? 'The parameter was specified. (success)'
+          : 'The parameter was not specified. (primary)'"
+        [config]="config02a"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        [config]="config02a"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+import &#123;
+  GlnFrameConfig, GlnFrameExterior, GlnFrameSize
+&#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class InputComponent &#123;
+  public control02a = &#123;
+    model02a: new FormControl(null, []),
+    model02b: new FormControl(null, []),
+    model02c: new FormControl('Hello World', []),
+    model02d: new FormControl('Hello World', []),
+  &#125;;
+  public formGroup02a: FormGroup = new FormGroup(this.control02a);
+  public config02a: GlnFrameConfig = &#123;
+    exterior: GlnFrameExterior.outlined,
+    frameSize: GlnFrameSize.short,
+    isNoLabel: true,
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.ip-elem &#123;
+  width: 29ch;
+&#125;
+
+// ** Palette like Bootstrap. **
+
+.ip-bootstrap &#123;
+  // Primary hsl(200, 100%, 50%);
+  --glncl-primary-h: 200;
+  --glncl-primary-s: 100%;
+  // Danger hsl(355, 70%, 50%);
+  --glncl-danger-h: 355;
+  --glncl-danger-s: 70%;
+&#125;
+.ip-bootstrap .gln-frame &#123;
+  line-height: 1.5;
+  // Hover styles match the default styles.
+  --glnfr-hov-lb-cl: var(--glnfr--lb-cl-def);
+  --glnfr-hov-br-cl: var(--glnfr--br-cl-def);
+  // Blocking frame resizing when hovering the mouse for "Outlined" mode.
+  --glnfr-hov-dcr-br-wd: unset;
+  // Blocking frame resizing when receiving focus for "Outlined" mode.
+  --glnfr-foc-dcr-br-wd: unset;
+&#125;
+.ip-bootstrap .gln-frame:focus-within:not(.gln-error) &#123;
+  box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+&#125;
+.ip-bootstrap .gln-frame:focus-within.gln-error &#123;
+  box-shadow: 0 0 0 0.25rem rgb(220 53 69 / 25%);
+&#125;
+// Definition a color to represent "success".
+.ip-bootstrap .ip-success .gln-frame &#123;
+  --glncl-primary-h: 135;
+  --glncl-primary-s: 40%;
+&#125;
+.ip-bootstrap .ip-success .gln-frame:focus-within:not(.gln-error) &#123;
+  box-shadow: 0 0 0 0.25rem rgb(25 135 84 / 25%);
+&#125;
+// Definition of svg to represent "error".
+.ip-bootstrap .gln-frame.gln-error&gt;div&gt;[glnfr-elem] &#123;
+  padding-right: 1.4em;
+  background-image: url("data:image/svg+xml,"
+  + "&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'"
+  + " width='12' height='12' fill='none' stroke='%23dc3545'&gt;"
+  + "&lt;circle cx='6' cy='6' r='4.5'/&gt;"
+  + "&lt;path stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/&gt;"
+  + "&lt;circle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/&gt;"
+  + "&lt;/svg&gt;");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+  margin-right: 0.5em;
+&#125;
+// Definition of svg to represent "error".
+.ip-bootstrap .ip-success .gln-frame:not(.gln-error)&gt;div&gt;[glnfr-elem] &#123;
+  padding-right: 1.4em;
+  background-image: url("data:image/svg+xml,"
+  + "&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'&gt;"
+  + "&lt;path fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-."
+  + "8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/&gt;"
+  + "&lt;/svg&gt;");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+  margin-right: 0.5em;
+&#125;
+.ip-bootstrap .gln-frame.gln-disabled &#123;
+  --glnfr-dis-br-cl: #ced4da;
+  background-color: #e9ecef;
+&#125;
+
+// gln-hint-or-error
+// On focus, the style matches the default style.
+.ip-bootstrap .gln-hint-or-error &#123;
+  --glnhe-foc-lb-cl: var(--glnhe--lb-cl-def);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

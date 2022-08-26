@@ -1,0 +1,17 @@
+<span *ngIf="checkmark"
+  glno-chbox-wrap
+  class="gln-checkbox-wrap"
+  [formGroup]="formGroup">
+  <input type="checkbox"
+    glno-chbox
+    class="gln-checkbox"
+    formControlName="checkinfo" />
+</span>
+<div #contentRef
+  glno-label
+  class="gln-option-label">
+  <ng-content></ng-content>
+</div>
+
+<gln-touch-ripple *ngIf="!disabled && !group?.disabled && !parent?.noRipple">
+</gln-touch-ripple>

@@ -1,0 +1,39 @@
+/*# sourceURL=gln-option-group.component.scss */
+
+gln-option-group {
+  background-color: transparent;
+  // background-color: rgb(255, 255, 255);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  outline: 0px;
+
+  &[dis] {
+    cursor: default;
+    &>[glnog-label] {
+      opacity: .38;
+    }
+  }
+
+  --glnog--def-lb-def38: hsl(var(--gln-default-h), var(--gln-default-s), 38%); // (!) hsla(0, 0%, 0%, 0.6);
+
+  &>[glnog-label] {
+    color: var(--glnog--def-lb-def38);
+    flex-grow: 1;
+    font-weight: 500;
+    overflow: hidden;
+    padding-bottom: 0.375em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.375em;
+    text-align: left;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  &>gln-option {
+    padding-left: 2em;
+  }
+}

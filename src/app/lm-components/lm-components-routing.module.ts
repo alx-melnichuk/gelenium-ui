@@ -1,33 +1,50 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { UrlComponents } from './constants/url-components.constants';
+import { UrlUtil } from '../lib-core/utils/url.util';
 import { LmComponentsComponent } from './lm-components.component';
-import { ButtonComponent } from '../lib-components/components/button/button.component';
-import { FrameComponent } from '../lib-components/components/frame/frame.component';
-import { HintOrErrorComponent } from '../lib-components/components/hint-or-error/hint-or-error.component';
-import { InfiniteScrollComponent } from '../lib-components/components/infinite-scroll/infinite-scroll.component';
-import { InputComponent } from '../lib-components/components/input/input.component';
-import { TextareaComponent } from '../lib-components/components/textarea/textarea.component';
 
-const URL_BUTTON = UrlComponents.get('URL_BUTTON');
-const URL_FRAME = UrlComponents.get('URL_FRAME');
-const URL_HINT_OR_ERROR = UrlComponents.get('URL_HINT_OR_ERROR');
-const URL_INFINITE_SCROLL = UrlComponents.get('URL_INFINITE_SCROLL');
-const URL_INPUT = UrlComponents.get('URL_INPUT');
-const URL_TEXTAREA = UrlComponents.get('URL_TEXTAREA');
+const URL_BUTTON = UrlUtil.get('URL_BUTTON');
+const URL_FRAME = UrlUtil.get('URL_FRAME');
+const URL_HINT_OR_ERROR = UrlUtil.get('URL_HINT_OR_ERROR');
+const URL_INFINITE_SCROLL = UrlUtil.get('URL_INFINITE_SCROLL');
+const URL_INPUT = UrlUtil.get('URL_INPUT');
+const URL_SELECT = UrlUtil.get('URL_SELECT');
+const URL_TEXTAREA = UrlUtil.get('URL_TEXTAREA');
 
 const routes: Routes = [
   {
     path: '',
     component: LmComponentsComponent,
     children: [
-      { path: URL_BUTTON, component: ButtonComponent },
-      { path: URL_FRAME, component: FrameComponent },
-      { path: URL_HINT_OR_ERROR, component: HintOrErrorComponent },
-      { path: URL_INFINITE_SCROLL, component: InfiniteScrollComponent },
-      { path: URL_INPUT, component: InputComponent },
-      { path: URL_TEXTAREA, component: TextareaComponent },
+      {
+        path: URL_BUTTON,
+        loadChildren: () => import('../lib-components/cm-button/cm-button.module').then((m) => m.CmButtonModule),
+      },
+      {
+        path: URL_FRAME,
+        loadChildren: () => import('../lib-components/cm-frame/cm-frame.module').then((m) => m.CmFrameModule),
+      },
+      {
+        path: URL_HINT_OR_ERROR,
+        loadChildren: () => import('../lib-components/cm-hint-or-error/cm-hint-or-error.module').then((m) => m.CmHintOrErrorModule),
+      },
+      {
+        path: URL_INFINITE_SCROLL,
+        loadChildren: () => import('../lib-components/cm-infinite-scroll/cm-infinite-scroll.module').then((m) => m.CmInfiniteScrollModule),
+      },
+      {
+        path: URL_INPUT,
+        loadChildren: () => import('../lib-components/cm-input/cm-input.module').then((m) => m.CmInputModule),
+      },
+      {
+        path: URL_SELECT,
+        loadChildren: () => import('../lib-components/cm-select/cm-select.module').then((m) => m.CmSelectModule),
+      },
+      {
+        path: URL_TEXTAREA,
+        loadChildren: () => import('../lib-components/cm-textarea/cm-textarea.module').then((m) => m.CmTextareaModule),
+      },
       { path: '**', redirectTo: URL_INPUT },
     ],
   },

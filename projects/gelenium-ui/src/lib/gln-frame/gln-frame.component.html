@@ -1,20 +1,20 @@
-<label *ngIf="!innHiddenLabel"
-  class="glnf-label">
-  {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
+<label *ngIf="!noLabel"
+  class="glnfr-label">
+  <span lbl>{{ label }}</span><span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}
+  </span>
 </label>
-<div class="glnf-border"
+<div class="glnfr-border"
   [attr.dcr-bg]="isUnderlineExterior ? '' : null"
   [attr.dcr-bb]="isUnderlineExterior || isStandardExterior? '': null"
   decor-brb>
   <ng-content></ng-content>
   <fieldset *ngIf="isOutlinedExterior"
     dcr-br
-    class="glnf-fieldset"
+    class="glnfr-fieldset"
     aria-hidden="true">
-    <legend *ngIf="!innHiddenLabel"
-      class="glnf-legend">
-      <span>
-        {{ label }}<span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}</span>
+    <legend *ngIf="!noLabel"
+      class="glnfr-legend">
+      <span lgn>{{ label }}</span><span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}
       </span>
     </legend>
   </fieldset>

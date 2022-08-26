@@ -5,11 +5,14 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  EventEmitter,
   Inject,
   InjectionToken,
   Input,
   OnChanges,
+  OnInit,
   Optional,
+  Output,
   PLATFORM_ID,
   Renderer2,
   SimpleChanges,
@@ -19,7 +22,7 @@ import {
 
 import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
 
-import { GlnFrameSize, GlnFrameSizeUtil } from '../_interfaces/gln-frame-size.interface';
+import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
@@ -28,7 +31,7 @@ import { GlnLinkDirective } from './gln-link.directive';
 
 export const GLN_BUTTON_CONFIG = new InjectionToken<GlnButtonConfig>('GLN_BUTTON_CONFIG');
 
-let identifier = 0;
+let uniqueIdCounter = 0;
 
 @Component({
   selector: 'gln-button',
@@ -38,19 +41,28 @@ let identifier = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnButtonComponent implements OnChanges, AfterContentInit {
+export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   @Input()
-  public id = 'glnb_' + ++identifier;
+  public id = `glnbt-${uniqueIdCounter++}`;
   @Input()
-  public config: GlnButtonConfig | null = null;
+  public config: GlnButtonConfig | null | undefined;
   @Input()
-  public exterior: string | null = null; // GlnButtonExteriorType
+  public exterior: string | null | undefined; // GlnButtonExteriorType
   @Input()
-  public frameSize: string | null = null; // GlnFrameSizeType
+  public frameSize: string | null | undefined; // GlnFrameSizeType
   @Input()
-  public isDisabled: string | null = null;
+  public isDisabled: string | boolean | null | undefined;
   @Input()
-  public isNoRipple: string | null = null;
+  public isNoRipple: string | boolean | null | undefined;
+  @Input()
+  public ornamLfAlign: string | null | undefined; // OrnamAlign
+  @Input()
+  public ornamRgAlign: string | null | undefined; // OrnamAlign
+
+  @Output()
+  readonly focused: EventEmitter<void> = new EventEmitter();
+  @Output()
+  readonly blured: EventEmitter<void> = new EventEmitter();
 
   @ViewChild('buttonElement', { static: true })
   public buttonElementRef: ElementRef<HTMLElement> | null = null;
@@ -63,9 +75,9 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
 
   public defaultFrameSize = GlnFrameSizeUtil.getValue(GlnFrameSize.small) || 0;
   public currConfig: GlnButtonConfig | null = null;
+  public disabled: boolean | null = null; // Binding attribute "isDisabled".
+
   public isFocused = false;
-  public isDisabled2: boolean | null = null; // Binding attribute "isDisabled".
-  public isNoRipple2: boolean | null = null; // Binding attribute "isNoRipple".
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -76,34 +88,35 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
   ) {
     this.currConfig = this.rootConfig;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-button', true);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'id', this.id);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.config) {
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
-    if (changes.isDisabled) {
-      this.isDisabled2 = BooleanUtil.init(this.isDisabled);
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabled2 || false);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
-    }
-    if (changes.isNoRipple) {
-      this.isNoRipple2 = BooleanUtil.init(this.isNoRipple);
+    if (changes['isDisabled']) {
+      this.disabled = BooleanUtil.init(this.isDisabled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled || false);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);
     }
   }
 
-  ngAfterContentInit(): void {
+  public ngOnInit(): void {
+    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
+  }
+
+  public ngAfterContentInit(): void {
     if (this.linkElement?.templateRef) {
       // Add the required properties for the hyperlink element.
-      this.settingLink(this.linkElement.templateRef);
+      HtmlElemUtil.setAttr(this.renderer, this.linkElement.templateRef, 'linkClear', '');
+      HtmlElemUtil.setClass(this.renderer, this.linkElement.templateRef, 'glnbt-label', true);
     }
   }
 
   // ** Public API **
 
   public doClick(event: MouseEvent): void {
-    if (!!event && !event.cancelBubble && this.linkElement && this.touchRipple && !this.isNoRipple2) {
+    if (!!event && !event.cancelBubble && this.linkElement && this.touchRipple) {
       this.touchRipple.touchRipple(event);
     }
   }
@@ -116,23 +129,23 @@ export class GlnButtonComponent implements OnChanges, AfterContentInit {
 
   public doFocus(): void {
     this.isFocused = true;
-    this.focused(this.renderer, this.hostRef, this.isFocused);
+    this.focusState(this.renderer, this.hostRef, this.isFocused);
+    this.focused.emit();
   }
 
   public doBlur(): void {
     this.isFocused = false;
-    this.focused(this.renderer, this.hostRef, this.isFocused);
+    this.focusState(this.renderer, this.hostRef, this.isFocused);
+    this.blured.emit();
+  }
+
+  public getBoolean(value: string | boolean | null | undefined): boolean | null {
+    return BooleanUtil.init(value);
   }
 
   // ** Private API **
 
-  private settingLink(elem: ElementRef<HTMLElement> | null): void {
-    HtmlElemUtil.setAttr(this.renderer, elem, 'linkClear', '');
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-label', true);
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-elem-pd-hor', true);
-  }
-
-  private focused(renderer: Renderer2, elem: ElementRef<HTMLElement> | null, value: boolean | null): void {
+  private focusState(renderer: Renderer2, elem: ElementRef<HTMLElement> | null, value: boolean | null): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-focused', value || false);
     HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
   }

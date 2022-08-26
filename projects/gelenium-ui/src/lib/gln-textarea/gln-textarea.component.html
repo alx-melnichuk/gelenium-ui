@@ -1,47 +1,51 @@
 <ng-container [formGroup]="formGroup">
-  <div #prepareData="glnFrameExteriorInput"
-    [glnFrameExteriorInput]="exterior || (currConfig?.exterior || null)"
-    [glnFrameExteriorInputElementRef]="hostRef">
-    <gln-frame [attr.wdFull]="wdFull"
-      [label]="label"
-      [exterior]="prepareData.exterior"
-      [config]="config"
-      [isLabelShrink]="getBoolean(lbShrink)"
-      [hiddenLabel]="getBoolean(hiddenLabel)"
-      [isDisabled]="isDisabled2"
+  <div class="glntx-wrap"
+    [glnFrameExteriorInput]="exterior || currConfig?.exterior"
+    #glnFrameExteriorInput="glnFrameExteriorInput"
+    [glnFrameExteriorInputElementRef]="hostRef"
+    (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()">
+    <gln-frame [config]="config"
+      [exterior]="glnFrameExteriorInput.exterior"
+      [isDisabled]="disabled"
+      [isError]="!!formControl.errors || error"
       [isFilled]="isFilled"
-      [isError]="!!formControl.errors || getBoolean(isError)"
-      [isRequired]="isRequired2"
+      [isLabelShrink]="labelShrink || currConfig?.isLabelShrink"
+      [isNoAnimation]="noAnimation || currConfig?.isNoAnimation || isWriteValueInit"
+      [isNoLabel]="noLabel || currConfig?.isNoLabel"
+      [isRequired]="required"
+      [label]="label"
+      [glnFrameSize]="frameSize || currConfig?.frameSize"
       #glnFrameSize="glnFrameSize"
-      [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
       [glnFrameSizeElementRef]="hostRef"
-      [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
-      [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
-      [glnFrameSizePrepareData]="prepareData"
-      [glnFrameSizeModify]="prepareData.exterior"
+      [glnFrameSizeValue]="currConfig?.frameSizeValue || frameSizeDefault"
+      [glnFrameSizeLabelPd]="currConfig?.labelPd"
+      [glnFrameSizePrepare]="glnFrameExteriorInput"
       glnFrameOrnament
-      [glnFrameOrnamentLfAlign]="ornamLfAlign || (currConfig?.ornamLfAlign || null)"
-      [glnFrameOrnamentRgAlign]="ornamRgAlign || (currConfig?.ornamRgAlign || null)">
+      [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
+      [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
+      [glnFrameOrnamentPath]="'/div{0}'">
 
-      <span orn-lf
-        class="glnt-ornam-lf">
+      <span glnfr-orn-lf
+        class="gln-ornam-lf">
         <ng-content select="[gln-orn-lf]"></ng-content>
       </span>
-      <span orn-rg
-        class="glnt-ornam-rg">
+      <span glnfr-orn-rg
+        class="gln-ornam-rg">
         <ng-content select="[gln-orn-rg]"></ng-content>
       </span>
 
       <textarea #textareaElement
         formControlName="textData"
-        elem-mr-ver
-        elem-pd-hor
+        glnfr-mr-ver
+        glnfr-pd-hor
+        glnfr-elem
         [attr.id]="id + '_textarea'"
         [rows]="currentRows"
-        class="gt-textarea glnf-elem"
-        [attr.disabled]="isDisabled2 ? '': null"
+        [ngClass]="['glntx-textarea', (readOnly ? 'gln-readonly' : '')]"
+        [attr.disabled]="disabled ? '': null"
         [attr.autocomplete]="!!autoComplete ? autoComplete : null"
-        [attr.readonly]="isReadOnly2 ? '': null"
+        [attr.readonly]="readOnly ? '': null"
+        [attr.tabindex]="!disabled ? tabIndex : null"
         [cols]="cntCols"
         (focus)="doFocus()"
         (blur)="doBlur()"
@@ -54,7 +58,7 @@
 </ng-container>
 <gln-hint-or-error *ngIf="!!helperText"
   [text]="helperText"
-  [isError]="!!formControl.errors || getBoolean(isError)"
+  [isError]="!!formControl.errors || error"
   [isFocused]="isFocused"
-  [isDisabled]="isDisabled2">
+  [isDisabled]="disabled">
 </gln-hint-or-error>

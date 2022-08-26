@@ -1,0 +1,870 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    API: GlnSelect.
+    <a [href]="urlCmSelect + '#Api'">#</a>
+  </h3>
+  <p>
+    Selector:
+    <span fw500>gln-select</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>glnSelect</span>
+  </p>
+</section>
+
+
+<section mr-vr
+  id="api-properties">
+  <h4 class="app-hover-link">
+    Properties.
+    <a [href]="urlCmSelect + '#api-properties'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <tbody>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>id: string;</code>
+      </td>
+      <td>
+        <span>
+          ID of the native input element.<br />(default = `glnsl-$&#123;uniqueIdCounter++&#125;`;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>config: GlnFrameConfig<br/>
+          &nbsp;&nbsp;| null = null;</code>
+      </td>
+      <td>
+        <span>Defines a configuration object.</span><br />
+        <a [href]="urlCmSelect + '#config-interface'">More details.</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>exterior: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Determines the appearance of an element.<br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"outlined" (default);</li>
+          <li>"underline";</li>
+          <li>"standard";</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>frameSize: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Determines the size of the element.<br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"short" - height: 38px;</li>
+          <li>"small" - height: 44px;</li>
+          <li>"middle" - height: 50px (default);</li>
+          <li>"wide" - height: 56px;</li>
+          <li>"large" - height: 62px;</li>
+          <li>"huge" - height: 68px;</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>helperText: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text for additional clarification or error.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isCheckmark: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Checkbox display flag for each option.<br />
+          It is used in conjunction with the "isMultiple" sign.<br />
+          Attribute (no content).
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isDisabled: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>The element is disabled.<br />Attribute (no content).</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isError: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Forces the error status of an item to be displayed.<br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isLabelShrink: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Disable label animation. The label is always static, at the top.<br />
+          Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isMultiple: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Sign of multiple choice of options.
+          <br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoAnimation: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Disable animation display.
+          <br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoIcon: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Disable the display of the icon - the status of the state of the open list.
+          <br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoLabel: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Disables the display of the label.<br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoRipple: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          This property to turn off the ripple effect.<br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isReadOnly: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Whether the element is readonly.<br />Attribute (no content).</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isRequired: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Adds a validation condition: required field.<br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isValueInit: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Sign of calling the event "writeValueInit" after the second "writeValue()"
+          with real data.
+          <br />
+          This should use "[(ngModel)]".
+          <a [href]="urlCmFrame + '#Feature'">More details.</a>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>label: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>The content of the label.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>maxLength: number<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Defines the maximum number of characters for an input element.
+          <br />
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>minLength: number<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Defines the minimum number of characters for an input element.
+          <br />
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>ornamLfAlign: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Specifies the height justification for the left ornament.
+          <br />(default = 'default';)
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"default" - depending on frame type</li>
+          <li>"center" - in the center</li>
+          <li>"flex-start" - at the top</li>
+          <li>"flex-end" - at the bottom</li>
+          <li>"baseline" - along the baseline</li>
+          <li>"stretch" - at the top</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>ornamRgAlign: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Specifies the height justification for the right ornament.
+          <br />(default = 'default';)
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"default" - depending on frame type</li>
+          <li>"center" - in the center</li>
+          <li>"flex-start" - at the top</li>
+          <li>"flex-end" - at the bottom</li>
+          <li>"baseline" - along the baseline</li>
+          <li>"stretch" - at the top</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>panelClass: string<br/>
+          &nbsp;&nbsp;| string[]<br/>
+          &nbsp;&nbsp;| Set&lt;string&gt;<br/>
+          &nbsp;&nbsp;| &#123; [key: string]: any &#125;<br/>
+          = ''</code>
+      </td>
+      <td>
+        <span>
+          Classes to be passed to the select panel. Supports the same syntax as `ngClass`.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>position: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies how to horizontally align the options list panel.
+        </span>
+        <ul>
+          <li>'start' - align to the left of the main element; (default)</li>
+          <li>'center' - align to the center of the main element;</li>
+          <li>'end' - align to the right side of the main element;</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>visibleSize: number;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the maximum number of visible option elements.
+          This value is multiplied by the height of the option and defines the
+          maximum height of the options panel.
+          <br />
+          If multiple option elements have the smallest height, then that will be the
+          height of the option element.
+          <br />(default = -1;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>tabIndex: number;</code>
+      </td>
+      <td>
+        <span>Indicates that its element can be focused.
+          <br />(default = 0;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>wdFull: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Sets the width to the parent's width (width: 100%;).
+          <br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>value: unknown<br/>
+          &nbsp;&nbsp;| unknown[]<br/>
+          &nbsp;&nbsp;| null;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the value of an element.
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>focused: EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>Fires when the element receives input focus.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>blured: EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>Fires when an element loses input focus.</span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>opened: EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>Fires when the selection panel opens.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>closed: EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>Fires when the selection panel closes.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>writeValueInit:<br/> EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>
+          Fires after the second call to "writeValue()" with real data.
+          <br />
+          This should use "[(ngModel)]".
+          <br />
+          "writeValueInit" must be set.
+          <a [href]="urlCmFrame + '#Feature'">More details.</a>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>selected: EventEmitter&lt;&#123;<br/>
+          &nbsp;value: unknown | null;<br/>
+          &nbsp;values: unknown[];<br/>
+          &nbsp;change: GlnSelectionChange<br/>
+          &nbsp;&lt;GlnOptionComponent&gt;<br/>
+          &#125;&gt;;
+        </code>
+      </td>
+      <td>
+        <span>
+          Fires when an option is selected/deselected.<br />
+          For single mode, the currently selected option
+          is the "value" parameter.<br />
+          For multiple mode, the currently selected options are
+          the "values" parameter.<br />
+          The "change" parameter contains a list of added and removed options.
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<section mr-vr
+  id="api-methods">
+  <h4 class="app-hover-link">
+    Methods
+    <a [href]="urlCmSelect + '#api-methods'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>focus(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        This element is given input focus.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>toggle(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Closes an open overlay panel and opens a closed one.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>open(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Opens the overlay panel.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>close(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Closes the overlay panel.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>addOption(option: GlnOptionComponent | null): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Add the GlnOptionComponent element to the selection list.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      Parameters
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>option:<br/>
+          &nbsp;&nbsp;GlnOptionComponent<br/>
+          &nbsp;&nbsp;| null;</code>
+      </td>
+      <td>
+        The GlnOptionComponent element.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>deleteOption(option: GlnOptionComponent | null): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Remove the GlnOptionComponent element from the selected list.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      Parameters
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>option:<br/>
+          &nbsp;&nbsp;GlnOptionComponent<br/>
+          &nbsp;&nbsp;| null;</code>
+      </td>
+      <td>
+        The GlnOptionComponent element.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="api-css-variables-optional">
+  <h4 class="app-hover-link">
+    Css variables, optional. You can override the default values.
+    <a [href]="urlCmSelect + '#api-css-variables-optional'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <td><code>--glnsl-min-width:<br/>
+      &nbsp;var(--glnsl-el-min-width, 50px);</code>
+    </td>
+    <td>
+      <span>
+        The value of the "min-width" property.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-rhomb-def:<br/>
+      hsl(--glnfr--default-[h,s], 46%);</code>
+    </td>
+    <td>
+      <span>
+        The color of the triangle is the state of the list (open/closed) by default.
+        <br />
+        (hsl(20, 2%, 46%);)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-rhomb-hov:<br/>
+      hsl(--glnfr--default-[h,s], 46%);</code>
+    </td>
+    <td>
+      <span>
+        The color of the triangle is the state of the list (open/closed)
+        when hovering over with the mouse.
+        <br />
+        (hsl(20, 2%, 46%);)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-rhomb-foc:<br/>
+      hsl(--glnfr--primary-[h,s], 46%);</code>
+    </td>
+    <td>
+      <span>
+        The color of the triangle is the state of the list (open/closed)
+        when focus is received.
+        <br />
+        (hsl(210, 79%, 46%); #1976d2;)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-rhomb-err:<br/>
+      hsl(--glnfr--danger-[h,s], 51%);</code>
+    </td>
+    <td>
+      <span>
+        The color of the triangle is the state of the list (open/closed)
+        in case of an error.
+        <br />
+        (hsl(0, 65%, 51%); = #d32f2f;)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-rhomb-dis:<br/>
+      hsl(--glnfr--default-[h,s], 74%);</code>
+    </td>
+    <td>
+      <span>
+        The color of the triangle is the state of the list (open/closed)
+        when disabled.
+        <br />
+        (hsl(20, 2%, 74%);)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-he-pd-lf:<br/>
+      &nbsp;var(--glnfrs-pd-lf);</code>
+    </td>
+    <td>
+      <span>
+        The value of the "padding-left" property for the GlnHintOrError component.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-he-pd-rg:<br/>
+      &nbsp;var(--glnfrs-pd-rg);</code>
+    </td>
+    <td>
+      <span>
+        The value of the "padding-right" property for the GlnHintOrError component.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnslpw-def-bg-cl:<br/>
+      var(--gln-default-bg-cl);</code>
+    </td>
+    <td>
+      <span>
+        The value of the "background-color" property for the
+        "gln-select-panel-wrap" element.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnslpw-def-cl:<br/>
+      hsl(--gln-default-[h,s], 17%);</code>
+    </td>
+    <td>
+      <span>
+        The value of the "color" property for the "gln-select-panel-wrap" element.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnslpo-elevation: undefined;</code>
+    </td>
+    <td>
+      <span>
+        To block the display of a shadow, you must specify "--glnslpo-elevation: none;".
+      </span><br />
+      <span>Example:</span>
+      <code><pre source="html">
+&lt;gln-select formControlName="model01a"
+  <strong>panelClass="no-elevation"</strong>
+  label="Enter value"&gt;
+  &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+  &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
+  &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
+  &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
+  &lt;gln-option value="kiwi"&gt;Kiwi&lt;/gln-option&gt;
+&lt;/gln-select&gt;</pre></code>
+      <code><pre source="css">
+.gln-select-panel<strong>.no-elevation</strong> &#123;
+  --glnslpo-elevation: none;
+&#125;</pre></code>
+    </td>
+  </tr>
+
+</table>
+
+
+<hr br-nn />
+
+<section mr-vr
+  id="api-css-variables-gln-frame">
+  <h4 class="app-hover-link">
+    Css variables from GlnFrame.
+    <a [href]="urlCmSelect + '#api-css-variables-gln-frame'">#</a>
+  </h4>
+  <p>
+    You can also use CSS variables at the
+    GlnFrame component level
+    <a [href]="urlCmFrame + '#api-css-variables-optional'">GlnFrame#api-css-variables-optional</a>.
+    But remember that new css variables must be defined at the GlnFrame level.
+  </p>
+  <span>For example:</span>
+  <pre source="css">
+.ip-bootstrap <strong>.gln-frame</strong> &#123;
+  // Hover styles match the default styles.
+  --glnfr-hov-lb-cl: var(--glnfr--lb-cl-def);
+  --glnfr-hov-br-cl: var(--glnfr--br-cl-def);
+  // Blocking frame resizing when hovering the mouse for "Outlined" mode.
+  --glnfr-hov-dcr-br-wd: unset;
+  // Blocking frame resizing when receiving focus for "Outlined" mode.
+  --glnfr-foc-dcr-br-wd: unset;
+&#125;</pre>
+</section>
+
+
+<section mr-vr>
+  <p>
+    We recommend using "formControlName" and NOT using "[(ngModel)]".
+    <a [href]="urlCmFrame + '#Feature'">More details.</a>
+  </p>
+</section>

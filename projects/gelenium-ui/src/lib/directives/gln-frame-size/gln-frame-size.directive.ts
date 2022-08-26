@@ -1,12 +1,12 @@
 import { Directive, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
-import { GlnFrameSizeUtil } from '../../_interfaces/gln-frame-size.interface';
+import { GlnFrameSizeUtil } from '../../gln-frame/gln-frame-size.interface';
 import {
   GlnFrameSizePaddingHorRes,
   GlnFrameSizePaddingVerHorRes,
   GlnFrameSizePaddingVerRes,
-  GlnFrameSizePrepareData,
-} from '../../_interfaces/gln-frame-size-prepare-data.interface';
+  GlnFrameSizePrepare,
+} from './gln-frame-size-prepare.interface';
 import { HtmlElemUtil } from '../../_utils/html-elem.util';
 import { NumberUtil } from '../../_utils/number.util';
 
@@ -16,17 +16,17 @@ import { NumberUtil } from '../../_utils/number.util';
 })
 export class GlnFrameSizeDirective implements OnChanges {
   @Input()
-  public glnFrameSize: string | null = null;
+  public glnFrameSize: string | null | undefined;
   @Input()
-  public glnFrameSizeValue: number | null = null;
+  public glnFrameSizeValue: number | null | undefined;
   @Input()
-  public glnFrameSizeLabelPd: number | null = null;
+  public glnFrameSizeLabelPd: number | null | undefined;
   @Input()
-  public glnFrameSizeElementRef: ElementRef<HTMLElement> | null = null;
+  public glnFrameSizeElementRef: ElementRef<HTMLElement> | null | undefined;
   @Input()
-  public glnFrameSizePrepareData: GlnFrameSizePrepareData | null = null;
+  public glnFrameSizePrepare: GlnFrameSizePrepare | null | undefined;
   @Input()
-  public glnFrameSizeModify: string | null = null;
+  public glnFrameSizeModify: string | null | undefined;
 
   @Output()
   readonly glnFrameSizeChange: EventEmitter<GlnFrameSizePaddingVerHorRes> = new EventEmitter();
@@ -36,19 +36,24 @@ export class GlnFrameSizeDirective implements OnChanges {
   public elementRef: ElementRef<HTMLElement> = this.hostRef;
   public paddingVerHorRes: GlnFrameSizePaddingVerHorRes | null = null;
 
+  private isBeforeInit = true;
+
   constructor(public hostRef: ElementRef<HTMLElement>) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.glnFrameSizeElementRef) {
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (this.isBeforeInit) {
+      this.isBeforeInit = false;
+    }
+    if (changes['glnFrameSizeElementRef']) {
       this.elementRef = this.glnFrameSizeElementRef || this.hostRef;
     }
     if (this.lineHeight === 0) {
       this.lineHeight = this.getLineHeight(this.hostRef);
     }
-    let isModify = !!changes.glnFrameSizeLabelPd || !!changes.glnFrameSizeModify;
-    if (changes.glnFrameSize || changes.glnFrameSizeValue) {
+    let isModify = !!changes['glnFrameSizeLabelPd'] || !!changes['glnFrameSizeModify'];
+    if (changes['glnFrameSize'] || changes['glnFrameSizeValue']) {
       const frameSizeValueOld = this.frameSizeValue;
-      const frameSize = GlnFrameSizeUtil.convert(this.glnFrameSize);
+      const frameSize = GlnFrameSizeUtil.convert(this.glnFrameSize || null);
       this.frameSizeValue = GlnFrameSizeUtil.getValue(frameSize) || this.glnFrameSizeValue || 0;
       const isModifySize = this.frameSizeValue !== frameSizeValueOld;
       isModify = !isModify && isModifySize ? isModifySize : isModify;
@@ -61,6 +66,9 @@ export class GlnFrameSizeDirective implements OnChanges {
   // ** Public API **
 
   public updatePaddingVerAndHor(): void {
+    if (this.isBeforeInit) {
+      return;
+    }
     this.modifyBorderRadius();
     const paddingHor: GlnFrameSizePaddingHorRes | null = this.modifyHorizontalPadding();
     const paddingVer: GlnFrameSizePaddingVerRes | null = this.modifyverticalPadding();
@@ -71,7 +79,7 @@ export class GlnFrameSizeDirective implements OnChanges {
         ...{
           frameSizeValue: this.frameSizeValue,
           lineHeight: this.lineHeight,
-          exterior: this.glnFrameSizePrepareData?.getExterior() || '',
+          exterior: this.glnFrameSizePrepare?.getExterior() || '',
         },
       };
       this.glnFrameSizeChange.emit(this.paddingVerHorRes);
@@ -93,9 +101,9 @@ export class GlnFrameSizeDirective implements OnChanges {
   private modifyBorderRadius(): void {
     let borderRadius: string | null = null;
     if (this.frameSizeValue > 0 && this.lineHeight > 0) {
-      borderRadius = this.glnFrameSizePrepareData?.getBorderRadius(this.frameSizeValue, this.lineHeight) || null;
+      borderRadius = this.glnFrameSizePrepare?.getBorderRadius(this.frameSizeValue, this.lineHeight) || null;
     }
-    HtmlElemUtil.setProperty(this.elementRef, '--glnfs-br-rd', borderRadius);
+    HtmlElemUtil.setProperty(this.elementRef, '--glnfrs-br-rd', borderRadius);
   }
 
   private modifyHorizontalPadding(): GlnFrameSizePaddingHorRes | null {
@@ -104,13 +112,13 @@ export class GlnFrameSizeDirective implements OnChanges {
       if (this.glnFrameSizeLabelPd) {
         paddingHorRes = { left: this.glnFrameSizeLabelPd, right: this.glnFrameSizeLabelPd };
       } else {
-        paddingHorRes = this.glnFrameSizePrepareData?.getPaddingHor(this.frameSizeValue, this.lineHeight) || null;
+        paddingHorRes = this.glnFrameSizePrepare?.getPaddingHor(this.frameSizeValue, this.lineHeight) || null;
       }
     }
     const left = paddingHorRes && paddingHorRes.left !== null ? paddingHorRes.left : null;
-    HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-lf', NumberUtil.str(left)?.concat('px') || null);
+    HtmlElemUtil.setProperty(this.elementRef, '--glnfrs-pd-lf', NumberUtil.str(left)?.concat('px'));
     const right = paddingHorRes && paddingHorRes.right !== null ? paddingHorRes.right : null;
-    HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-rg', NumberUtil.str(right)?.concat('px') || null);
+    HtmlElemUtil.setProperty(this.elementRef, '--glnfrs-pd-rg', NumberUtil.str(right)?.concat('px'));
 
     return paddingHorRes;
   }
@@ -118,11 +126,11 @@ export class GlnFrameSizeDirective implements OnChanges {
   private modifyverticalPadding(): GlnFrameSizePaddingVerRes | null {
     let paddingVerRes: GlnFrameSizePaddingVerRes | null = null;
     if (this.frameSizeValue > 0 && this.lineHeight > 0) {
-      paddingVerRes = this.glnFrameSizePrepareData?.getPaddingVer(this.frameSizeValue, this.lineHeight) || null;
+      paddingVerRes = this.glnFrameSizePrepare?.getPaddingVer(this.frameSizeValue, this.lineHeight) || null;
       const top = paddingVerRes && paddingVerRes.top !== null ? paddingVerRes.top : null;
-      HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-tp', NumberUtil.str(top)?.concat('px') || null);
+      HtmlElemUtil.setProperty(this.elementRef, '--glnfrs-pd-tp', NumberUtil.str(top)?.concat('px'));
       const bottom = paddingVerRes && paddingVerRes?.bottom !== null ? paddingVerRes.bottom : null;
-      HtmlElemUtil.setProperty(this.elementRef, '--glnfs-pd-bt', NumberUtil.str(bottom)?.concat('px') || null);
+      HtmlElemUtil.setProperty(this.elementRef, '--glnfrs-pd-bt', NumberUtil.str(bottom)?.concat('px'));
     }
     return paddingVerRes;
   }

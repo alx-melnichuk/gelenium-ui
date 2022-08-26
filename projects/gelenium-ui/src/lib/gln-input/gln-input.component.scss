@@ -6,17 +6,10 @@
 gln-input {
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
-  position: relative;
-  padding: 0;
-  vertical-align: top;
-
-  &>div[ext] {
-    width: 100%;
-  }
 
   &[wdFull] {
     width: 100%;
-    .glni-input {
+    gln-frame>div>[glnfr-elem] {
       width: 100%;
     }
   }
@@ -30,9 +23,9 @@ gln-input {
   }
 
   // Input
-  // The 'glnf-elem' style sets the line height: 1.4375em;
+  // The style sets the line height: 1.4375em;
   // This allows you to automatically change the padding when the font size changes.
-  .glni-input {
+  .glnin-input {
     font-size: inherit;
     font-family: inherit;
     letter-spacing: inherit;
@@ -42,11 +35,6 @@ gln-input {
     background: none;
     margin: 0;
     padding: 0;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-animation-name: mui-auto-fill-cancel;
-    animation-name: mui-auto-fill-cancel;
-    -webkit-animation-duration: 10ms;
-    animation-duration: 10ms;
 
     &:focus {
       outline: 0;
@@ -54,7 +42,7 @@ gln-input {
   }
 
   gln-hint-or-error {
-    padding-left: var(--glni-he-pd-lf, var(--glnfs-pd-lf));
-    padding-right: var(--glni-he-pd-rg, var(--glnfs-pd-rg));
+    padding-left: var(--glnin-he-pd-lf, var(--glnfrs-pd-lf));
+    padding-right: var(--glnin-he-pd-rg, var(--glnfrs-pd-rg));
   }
 }

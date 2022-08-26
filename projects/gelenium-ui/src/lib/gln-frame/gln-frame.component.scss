@@ -7,52 +7,25 @@
 @import '../_styles/mx-transform-translate-x-y-scale-x-y.scss';
 @import '../_styles/mx-transform-scale-x-y-translate-x-y.scss';
 
-:root {
-  // The default color for the label.
-  --glnf-def-cl: rgba(0, 0, 0, 0.6);
-  // The color of the label and border on mouse hover.
-  --glnf-hov-cl: rgba(0, 0, 0, 0.87);
-  // The color of the label and border in an error state.
-  --glnf-err-cl: #d32f2f;
-  --glnf-err-cl2: #d32f2fcf;
-  // The color of the label and border on mouse hover in an error state.
-  --glnf-hov-err-cl: #ff0000;
-  // The color of the border and label when getting focus.
-  --glnf-foc-cl: #1976d2;
-  // The color of the label and border in the state is disabled.
-  --glnf-dis-cl: #787878;
-
-  // Background color for "underline" mode.
-  --glnf-def2-cl: rgba(0, 0, 0, 0.06);
-  // The state without disabled, error, focused and with hover.
-  --glnf-hov2-cl: #1976d20b;
-  // The state without disabled, error and with focused.
-  --glnf-foc2-cl: #1976d20f;
-  // The state without disabled, hover, focused and error.
-  --glnf-err2-cl: #d32f2f0f;
-  // The state without disabled, focused and error, hover.
-  --glnf-hov2-err2-cl: #d32f2f0b;
-  // The state without disabled and error, focused.
-  --glnf-foc2-err2-cl: #ce51512d;
-  // The state with disabled.
-  --glnf-dis2-cl: #7878783b;
-
-  // For "frame" - outlined
-  // The default border color for "outlined" mode.
-  --glnf-def-cl2: rgba(0, 0, 0, 0.23);
-}
-
-
 gln-frame {
-  @include mxDisplayInlineFlex();
-  @include mxFlexDirection(column);
-  line-height: 1.4375em; // The value of the "line height" for the input element. (23px for font-size: 16px)
-  min-width: 0;
-  padding: 0;
-  margin: 0;
+  --glnfr--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnfr--default-s: var(--glncl-default-s, var(--gln-default-s));
+
+  --glnfr--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
+  --glnfr--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
+
+  --glnfr--danger-h: var(--glncl-danger-h, var(--gln-danger-h));
+  --glnfr--danger-s: var(--glncl-danger-s, var(--gln-danger-s));
+
+  background-color: transparent;
   border: 0;
+  display: flex;
+  line-height: 1.4375em; // The value of the "line height" for the input element. (23px for font-size: 16px)
+  margin: 0;
+  min-width: 0;
+  padding: 0px;
+  position: relative;
   vertical-align: top;
-  width: 100%;
 
   // Small indentation of the legend from the border for "outlined" mode.
   --def-o-lgn-pd: 0.3em;
@@ -86,200 +59,230 @@ gln-frame {
     --def-lb-trn-y: 0.32em; // 5.12px
     --def-lb-trn2-y: 1.546875em; // 24.75px
   }
+  border-radius: var(--glnfr-br-rd, var(--glnfrs-br-rd, var(--def-br-rd)));
 
-  border-radius: var(--glnf-br-rd, var(--glnfs-br-rd, var(--def-br-rd)));
+  &:not([noAnm]) {
+    --glnfr-trn-drt-200: 200ms;
+    --glnfr-trn-drt-100: 100ms;
+    --glnfr-trn-drt-50: 50ms;
+  }
 
   // ** Section "Label". **
   label {
-    padding: 0;
-    position: absolute;
-    display: block;
-    transform-origin: top left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    // display: block;
+    display: flex;
     left: 0;
-    top: 0;
-    -webkit-transition: color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,-webkit-transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,max-width 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    transition: color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,max-width 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    z-index: 1;
+    overflow: hidden;
+    padding: 0;
     pointer-events: none;
+    position: absolute;
+    user-select: none;
+    text-overflow: ellipsis;
+    text-size-adjust: 100%;
+    top: 0;
+    transform-origin: top left;
+    -webkit-transition: color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
+      , -webkit-transform var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
+      , max-width var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    transition: color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
+      , transform var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
+      , max-width var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    white-space: nowrap;
+    z-index: 1;
+    &>span[lbl] {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
-  &[shr], &:focus-within, &[fil] {
+  &[shr], &:focus-within, &[foc], &[fil] {
     label {
-      max-width: calc(133% - var(--glnf-lb-mx-wd, var(--glnfe-mx-wd, var(--def-lb-mx-wd))));
+      max-width: calc(133% - var(--glnfr-lb-pd-shr, var(--glnfre-pd-shr, var(--def-lb-mx-wd))));
       @include mxTransform_TranslateXY_ScaleXY(
-        var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf))), // $translateX
-        var(--glnf-lb-trn-y, var(--glnfe-trn-y, var(--def-lb-trn-y))), // $translateY
+        var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf))), // $translateX
+        var(--glnfr-lb-trn-y, var(--glnfre-trn-y, var(--def-lb-trn-y))), // $translateY
         0.75, // $scaleX
         0.75  // $scaleY
       );
+      pointer-events: auto;
     }
   }
-  &:not([shr]):not(:focus-within):not([fil]) label {
+  &:not([shr]):not(:focus-within):not([foc]):not([fil]) label {
     max-width: calc(100%
-    - var(--glnfo-pd-lf, var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf))))
-    - var(--glnfo-pd-rg, var(--glnf-lb-pd-rg, var(--glnfs-pd-rg, var(--def-lb-pd-rg))))
+    - var(--glnfro-pd-lf, var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf))))
+    - var(--glnfro-pd-rg, var(--glnfr-lb-pd-rg, var(--glnfrs-pd-rg, var(--def-lb-pd-rg))))
     );
     @include mxTransform_TranslateXY_ScaleXY(
-      var(--glnfo-pd-lf, var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf)))), // $translateX
-      var(--glnf-lb-trn2-y, var(--glnfe-trn2-y, var(--def-lb-trn2-y))), // $translateY
+      var(--glnfro-pd-lf, var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf)))), // $translateX
+      var(--glnfr-lb-trn2-y, var(--glnfre-trn2-y, var(--def-lb-trn2-y))), // $translateY
       1,  // $scaleX
       1   // $scaleY
     );
   }
-  // ** Section: Color "label". **
+
   &:not([dis]) {
     &:not([err]) {
-      // The state without disabled, error, hover, focused.
-      &:not(:hover):not(:focus-within)>label {
-        color: var(--glnf-def-lb-cl, var(--glnf-def-cl));
-      } // The state without disabled, error, focused and with hover.
-      &:hover:not(:focus-within)>label {
-        color: var(--glnf-hov-lb-cl, var(--glnf-hov-cl));
-      } // The state without disabled, error and with focused.
-      &:focus-within>label {
-        color: var(--glnf-foc-lb-cl, var(--glnf-foc-cl));
-      }
+      --glnfr---def-h: var(--glnfr--primary-h);
+      --glnfr---def-s: var(--glnfr--primary-s);
+      --glnfr---hov-h: var(--glnfr--primary-h);
+      --glnfr---hov-s: var(--glnfr--primary-s);
+      --glnfr---foc-h: var(--glnfr--primary-h);
+      --glnfr---foc-s: var(--glnfr--primary-s);
     }
     &[err] {
-      // The state without disabled, hover, focused and error.
-      &:not(:hover):not(:focus-within)>label {
-        color: var(--glnf-err-lb-cl, var(--glnf-err-cl));
-      } // The state without disabled, focused and error, hover.
-      &:hover:not(:focus-within)>label {
-        color: var(--glnf-hov-err-lb-cl, var(--glnf-hov-err-cl));
-      } // The state without disabled and error, focused.
-      &:focus-within>label {
-        color: var(--glnf-foc-err-lb-cl, var(--glnf-err-cl));
-      }
+      --glnfr---def-h: var(--glnfr--danger-h);
+      --glnfr---def-s: var(--glnfr--danger-s);
+      --glnfr---hov-h: var(--glnfr--danger-h);
+      --glnfr---hov-s: var(--glnfr--danger-s);
+      --glnfr---foc-h: var(--glnfr--danger-h);
+      --glnfr---foc-s: var(--glnfr--danger-s);
     }
   }
-  // The state with disabled.
-  &[dis]>label {
-    color: var(--glnf-dis-lb-cl, var(--glnf-dis-cl));
+  &[dis] {
+    --glnfr---dis-h: var(--glnfr--default-h);
+    --glnfr---dis-s: var(--glnfr--default-s);
   }
 
-  // ** Section "div.glnf-border". **
+  --glnfr--lb-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 40%);
+  --glnfr--br-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 45%);
+  --glnfr--bg-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 97%);
+  --glnfr--bf-cl-def: hsl(var(--glnfr---def-h), var(--glnfr---def-s), 45%);
+
+  --glnfr--lb-cl-hov: hsl(var(--glnfr---hov-h), var(--glnfr---hov-s), 35%);
+  --glnfr--br-cl-hov: hsl(var(--glnfr---hov-h), var(--glnfr---hov-s), 40%);
+  --glnfr--bg-cl-hov: hsl(var(--glnfr---hov-h), var(--glnfr---hov-s), 93%);
+  --glnfr--bf-cl-hov: hsl(var(--glnfr---hov-h), var(--glnfr---hov-s), 40%);
+
+  --glnfr--lb-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 45%);
+  --glnfr--br-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 50%);
+  --glnfr--bg-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 95%);
+  --glnfr--bf-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 40%);
+  --glnfr--af-cl-foc: hsl(var(--glnfr---foc-h), var(--glnfr---foc-s), 50%);
+
+  --glnfr--lb-cl-dis: hsl(var(--glnfr---dis-h), var(--glnfr---dis-s), 50%);
+  --glnfr--br-cl-dis: hsl(var(--glnfr---dis-h), var(--glnfr---dis-s), 60%);
+  --glnfr--bg-cl-dis: hsl(var(--glnfr---dis-h), var(--glnfr---dis-s), 92%);
+  --glnfr--bf-cl-dis: hsl(var(--glnfr---dis-h), var(--glnfr---dis-s), 60%);
+
+  // Definition of internal variables by element state.
+  &:not([dis]) {
+    // The state without disabled, hover, focused.
+    &:not(:hover):not(:focus-within):not([foc]) {
+      --glnfr--label-cl : var(--glnfr-def-lb-cl, var(--glnfr--lb-cl-def));
+      --glnfr--dcr-br-cl: var(--glnfr-def-br-cl, var(--glnfr--br-cl-def));
+      --glnfr--dcr-bg-cl: var(--glnfr-def-bg-cl, var(--glnfr--bg-cl-def));
+      --glnfr--dcr-bb-bef-cl: var(--glnfr-def-bf-cl, var(--glnfr--bf-cl-def));
+    } // The state without disabled, focused and with hover.
+    &:hover:not(:focus-within):not([foc]) {
+      --glnfr--label-cl : var(--glnfr-hov-lb-cl, var(--glnfr--lb-cl-hov));
+      --glnfr--dcr-br-cl: var(--glnfr-hov-br-cl, var(--glnfr--br-cl-hov));
+      --glnfr--dcr-bg-cl: var(--glnfr-hov-bg-cl, var(--glnfr--bg-cl-hov));
+      --glnfr--dcr-bb-bef-cl: var(--glnfr-hov-bf-cl, var(--glnfr--bf-cl-hov));
+    } // The state without disabled and with focused.
+    &:focus-within, &[foc] {
+      --glnfr--label-cl : var(--glnfr-foc-lb-cl, var(--glnfr--lb-cl-foc));
+      --glnfr--dcr-br-cl: var(--glnfr-foc-br-cl, var(--glnfr--br-cl-foc));
+      --glnfr--dcr-bg-cl: var(--glnfr-foc-bg-cl, var(--glnfr--bg-cl-foc));
+      --glnfr--dcr-bb-bef-cl: var(--glnfr-foc-bf-cl, var(--glnfr--bf-cl-foc));
+    }
+    --glnfr--dcr-bb-aft-cl  : var(--glnfr-foc-af-cl, var(--glnfr--af-cl-foc));
+  } // The state with disabled.
+  &[dis] {
+    --glnfr--label-cl : var(--glnfr-dis-lb-cl, var(--glnfr--lb-cl-dis));
+    --glnfr--dcr-br-cl: var(--glnfr-dis-br-cl, var(--glnfr--br-cl-dis));
+    --glnfr--dcr-bg-cl: var(--glnfr-dis-bg-cl, var(--glnfr--bg-cl-dis));
+    --glnfr--dcr-bb-bef-cl: var(--glnfr-dis-bf-cl, var(--glnfr--bf-cl-dis));
+  }
+
+  // ** Section: Color "label". **
+  &>label {
+    color: var(--glnfr--label-cl);
+  }
+
+  // ** Section "div.glnfr-border". **
   &>div {
+    align-items: center;
     box-sizing: border-box;
-    @include mxDisplayInlineFlex();
-    flex-wrap: nowrap;
-    position: relative;
     border-radius: inherit;
+    display: flex;
+    flex-wrap: nowrap;
     width: 100%;
+    &>[glnfr-elem] {
+      flex-grow: 1;
+    }
+    &>[glnfr-orn-lf], &>[glnfr-orn-rg] {
+      flex-shrink: 0;
+    }
   }
   &[dis]>div {
-    color: var(--glnf-dis-cl); // The color in state is disabled for an input element.
+    color: var(--glnfr--label-cl); // The color in state is disabled for an input element.
   }
 
-  // ** Section: Background-Color "div.glnf-border" for "Underline" mode. **
+  // ** Section: Background-Color "div.glnfr-border" for "Underline" mode. **
   &>[dcr-bg] {
-    -webkit-transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-  }
-  &:not([dis]) {
-    &:not([err]) {
-      // The state without disabled, error, hover, focused.
-      &:not(:hover):not(:focus-within)>[dcr-bg] {
-        background-color: var(--glnf-def-bg-cl, var(--glnf-def2-cl));
-      } // The state without disabled, error, focused and with hover.
-      &:hover:not(:focus-within)>[dcr-bg] {
-        background-color: var(--glnf-hov-bg-cl, var(--glnf-hov2-cl));
-      } // The state without disabled, error and with focused.
-      &:focus-within>[dcr-bg] {
-        background-color: var(--glnf-foc-bg-cl, var(--glnf-foc2-cl));
-      }
-    }
-    &[err] {
-      // The state without disabled, hover, focused and error.
-      &:not(:hover):not(:focus-within)>[dcr-bg] {
-        background-color: var(--glnf-err-bg-cl, var(--glnf-err2-cl));
-      } // The state without disabled, focused and error, hover.
-      &:hover:not(:focus-within)>[dcr-bg] {
-        background-color: var(--glnf-hov-err-bg-cl, var(--glnf-hov2-err2-cl));
-      } // The state without disabled and error, focused.
-      &:focus-within>[dcr-bg] {
-        background-color: var(--glnf-foc-err-bg-cl, var(--glnf-foc2-err2-cl));
-      }
-    }
-  }
-  // The state with disabled.
-  &[dis]>[dcr-bg] {
-    background-color: var(--glnf-dis-bg-cl, var(--glnf-dis2-cl));
+    -webkit-transition: background-color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    transition: background-color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    background-color: var(--glnfr--dcr-bg-cl);
   }
 
-  // ** Section "div.glnf-border" for "Outlined" and "Standard" mode. **
+  // ** Section "div.glnfr-border" for "Underline" and "Standard" mode. **
+
+  // The size of the bottom frame when receiving focus for "Underline" and "Standard" mode.
+  // To block, you need to specify "unset".
+  --glnfr-dcr-bb-aft-wd: 2px;
+  // The size of the bottom frame when hovering the mouse for the "Standard" mode.
+  // To block, you need to specify "unset".
+  --glnfr-dcr-bb-bef-wd: 2px;
+
   &>[dcr-bb] {
     &:before {
+      border-bottom-color: var(--glnfr--dcr-bb-bef-cl);
+      border-bottom-width: 1px;
       border-bottom-width: 1px;
       border-bottom-style: solid;
-      border-radius: inherit;
+      border-bottom-left-radius: inherit;
+      border-bottom-right-radius: inherit;
       left: 0;
       bottom: 0;
       content: "\00a0";
       position: absolute;
       right: 0;
-      -webkit-transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-      transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      -webkit-transition: border-bottom-color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      transition: border-bottom-color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
       pointer-events: none;
     }
     &:after {
-      border-bottom-width: 2px;
+      border-bottom-color: var(--glnfr--dcr-bb-aft-cl);
+      border-bottom-width: var(--glnfr-dcr-bb-aft-wd, 1px);
       border-bottom-style: solid;
-      border-radius: inherit;
+      border-bottom-left-radius: inherit;
+      border-bottom-right-radius: inherit;
       left: 0;
       bottom: 0;
       content: "";
       position: absolute;
       right: 0;
       @include mxTransform_ScaleXY(0, 1);
-      -webkit-transition: -webkit-transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-      transition: transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+      -webkit-transition: -webkit-transform var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+      transition: transform var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
       pointer-events: none;
     }
   }
+
   &[dis]>div[dcr-bb]:before {
     border-bottom-style: dotted;
   }
-  &[ext-s]:not([dis]):hover:not(:focus-within)>div[dcr-bb]:before {
-    border-bottom-width: 2px;
+  &[ext-s]:not([dis]):hover:not(:focus-within):not([foc])>div[dcr-bb]:before {
+    border-bottom-width: var(--glnfr-dcr-bb-bef-wd, 1px);
   }
+
   // The effect on gaining input focus is "increase the length of the bottom border from 0 to 100%."
   // Effect on loss of input focus "reducing the length of the lower border from 100% to 0".
-  &:not([dis]):focus-within>div[dcr-bb]:after {
-    @include mxTransform_ScaleXY_TranslateXY(1, 1, 0, 0); // ($scaleX, $scaleY, $translateX, $translateY)
-  }
-  // Border-Bottom-Color "div.glnf-border" for "Underline" and "Standard" mode.
   &:not([dis]) {
-    &:not([err]) {
-      // The state without disabled, error, hover, focused.
-      &:not(:hover):not(:focus-within)>[dcr-bb]:before {
-        border-bottom-color: var(--glnf-def-brb-bf, #0000006b);
-      } // The state without disabled, error and with hover.
-      &:hover>[dcr-bb]:before {
-        border-bottom-color: var(--glnf-hov-brb-bf, var(--glnf-hov-cl));
+    &:focus-within, &[foc] {
+      &>div[dcr-bb]:after {
+        @include mxTransform_ScaleXY_TranslateXY(1, 1, 0, 0); // ($scaleX, $scaleY, $translateX, $translateY)
       }
     }
-    &[err] {
-      // The state without disabled, hover, focused and error.
-      &:not(:hover):not(:focus-within)>[dcr-bb]:before {
-        border-bottom-color: var(--glnf-err-brb-bf, var(--glnf-err-cl));
-      } // The state without disabled, focused and error, hover.
-      &:hover:not(:focus-within)>[dcr-bb]:before {
-        border-bottom-color: var(--glnf-hov-err-brb-bf, var(--glnf-hov-err-cl));
-      }
-    }
-    // The state without disabled, error and focused.
-    &:not([err])>[dcr-bb]:after {
-      border-bottom-color: var(--glnf-foc-brb-af, var(--glnf-foc-cl));
-    } // The state without disabled and error, focused.
-    &[err]>[dcr-bb]:after {
-      border-bottom-color: var(--glnf-foc-err-brb-af, var(--glnf-err-cl));
-    }
-  } // The state with disabled.
-  &[dis]>[dcr-bb]:before {
-    border-bottom-color: var(--glnf-dis-brb-bf, var(--glnf-dis-cl));
   }
 
   // ** Section "Fieldset" for "Outlined" mode. **
@@ -291,7 +294,10 @@ gln-frame {
     top: 0;
     left: 0;
     margin: 0;
-    padding: 0px calc(var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf))) - var(--glnf-o-lgn-pd, var(--def-o-lgn-pd)));
+    padding-bottom: 0px;
+    padding-left: calc(var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf))) - var(--glnfr-o-lgn-pd, var(--def-o-lgn-pd)) - var(--glnfr--pg-lf-delta, 0px));
+    padding-right: calc(var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf))) - var(--glnfr-o-lgn-pd, var(--def-o-lgn-pd)));
+    padding-top: 0px;
     pointer-events: none;
     border-radius: inherit;
     border-width: 1px;
@@ -300,151 +306,149 @@ gln-frame {
     min-width: 0%;
     box-sizing: inherit;
   }
-  // For "outlined" mode. With input focus, increase the frame to 2 pixels.
-  &:not([dis]):focus-within fieldset {
-    border-width: 2px;
-    padding-left: calc(var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf))) - var(--glnf-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
+
+  // The size of the frame when hovering the mouse for "Outlined" mode.
+  // To block, you need to specify "unset".
+  --glnfr-hov-dcr-br-wd: 2px;
+  &:not([dis]) {
+    &:hover:not(:focus-within):not([foc]) {
+      fieldset {
+        border-width: var(--glnfr-hov-dcr-br-wd, 1px);
+        --glnfr--pg-lf-delta: calc(var(--glnfr-hov-dcr-br-wd, 1px) - 1px);
+      }
+    } 
   }
+
+  // The size of the frame when receiving focus for "Outlined" mode.
+  // To block, you need to specify "unset".
+  --glnfr-foc-dcr-br-wd: 2px;
+  // For "outlined" mode. With input focus, increase the frame to 2 pixels.
+  &:not([dis]) {
+    &:focus-within, &[foc] {
+      fieldset {
+        border-width: var(--glnfr-foc-dcr-br-wd, 1px);
+        --glnfr--pg-lf-delta: calc(var(--glnfr-foc-dcr-br-wd, 1px) - 1px);
+      }
+    } 
+  }
+
   /* The radius value must be an integer, otherwise the frame in the "dotted" style is poorly drawn.
   // The state with disabled but without error.
   &[dis] fieldset {
-    border-color: var(--glnf-dis-cl);
+    border-color: var(--glnfr--label-cl);
     border-style: dotted;
   }*/
-  // ** Section: Border-Color "div.glnf-border fieldset" for "Outlined" mode. **
-  &:not([dis]) {
-    &:not([err]) {
-      // The state without disabled, error, hover, focused.
-      &:not(:hover):not(:focus-within) [dcr-br] {
-        border-color: var(--glnf-def-br-cl, var(--glnf-def-cl2));
-      } // The state without disabled, error, focused and with hover.
-      &:hover:not(:focus-within) [dcr-br] {
-        border-color: var(--glnf-hov-br-cl, var(--glnf-hov-cl));
-      } // The state without disabled, error and with focused.
-      &:focus-within [dcr-br] {
-        border-color: var(--glnf-foc-br-cl, var(--glnf-foc-cl));
-      }
-    }
-    &[err] {
-      // The state without disabled, hover, focused and error.
-      &:not(:hover):not(:focus-within) [dcr-br] {
-        border-color: var(--glnf-err-br-cl, var(--glnf-err-cl));
-      } // The state without disabled, focused and error, hover.
-      &:hover:not(:focus-within) [dcr-br] {
-        border-color: var(--glnf-hov-err-br-cl, var(--glnf-hov-err-cl));
-      } // The state without disabled and error, focused.
-      &:focus-within [dcr-br] {
-        border-color: var(--glnf-foc-err-br-cl, var(--glnf-err-cl));
-      }
-    }
-  } // The state with disabled.
-  &[dis] [dcr-br] {
-    border-color: var(--glnf-dis-br-cl, var(--glnf-def-cl2));
+  [dcr-br] {
+    border-color: var(--glnfr--dcr-br-cl);
   }
-
   
-  // ** Section "Legend". **
+  // ** Section "Legend" on "Fieldset" for "Outlined" mode. **
   legend {
-    float: unset;
-    display: block;
-    width: auto;
+    box-sizing: border-box;
+    display: flex;
     height: 1px;
-    visibility: hidden;
     padding: 0;
+    visibility: hidden;
+    white-space: nowrap;
+    width: auto;
     &>span {
-      display: inline-block;
       height: inherit;
       font-size: 0.75em;
     }
+    &>span[lgn] {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
-  &[shr], &:focus-within, &[fil] {
+  &[shr], &:focus-within, &[foc], &[fil] {
     legend {
       max-width: 100%;
-      -webkit-transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
-      transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
+      -webkit-transition: max-width var(--glnfr-trn-drt-100, 0ms) cubic-bezier(0.0, 0, 0.2, 1) var(--glnfr-trn-drt-50, 0ms);
+      transition: max-width var(--glnfr-trn-drt-100, 0ms) cubic-bezier(0.0, 0, 0.2, 1) var(--glnfr-trn-drt-50, 0ms);
     }
     &[ind] legend {
-      padding: 0 calc(var(--glnf-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
+      padding: 0 calc(var(--glnfr-o-lgn-pd, var(--def-o-lgn-pd)) - 1px);
     }
   }
-  &:not([shr]):not([fil]):not(:focus-within) legend {
+  &:not([shr]):not([fil]):not(:focus-within):not([foc]) legend {
     max-width: 0.01px;
-    -webkit-transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    -webkit-transition: max-width var(--glnfr-trn-drt-50, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    transition: max-width var(--glnfr-trn-drt-50, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
   }
   
   // ** Additional settings **
 
   // Ornament "padding".
   &>div {
-    &>[elem-pd-ver],
-    &>[elem-mr-ver] {
-      line-height: inherit;
+    &>[glnfr-pd-ver],
+    &>[glnfr-mr-ver] {
+      line-height: inherit; // Stores the line height for the end element.
       align-self: baseline;
     }
-    &>[elem-pd-ver] {
-      padding-top: var(--glnf-lb-pd-tp, var(--glnfs-pd-tp, var(--def-lb-pd-tp)));
-      padding-bottom: var(--glnf-lb-pd-bt, var(--glnfs-pd-bt, var(--def-lb-pd-bt)));
+    &>[glnfr-pd-ver] {
+      padding-top: var(--glnfr-lb-pd-tp, var(--glnfrs-pd-tp, var(--def-lb-pd-tp)));
+      padding-bottom: var(--glnfr-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-bt)));
     }
-    &>[elem-mr-ver] {
-      margin-top: var(--glnf-lb-pd-tp, var(--glnfs-pd-tp, var(--def-lb-pd-tp)));
-      margin-bottom: var(--glnf-lb-pd-bt, var(--glnfs-pd-bt, var(--def-lb-pd-bt)));
+    &>[glnfr-mr-ver] {
+      margin-top: var(--glnfr-lb-pd-tp, var(--glnfrs-pd-tp, var(--def-lb-pd-tp)));
+      margin-bottom: var(--glnfr-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-bt)));
     }
-    &>span[orn-lf] {
+
+    &>span[glnfr-orn-lf], &>span[glnfr-orn-rg] {
       max-height: inherit;
+      display: inline-flex;
+      align-items: center;
     }
-    &>span[orn-lf]:empty~[elem-pd-hor] {
-      padding-left: var(--glnf-lb-pd-lf, var(--glnfs-pd-lf, var(--def-lb-pd-lf)));
-    }
-    &>span[orn-rg] {
-      max-height: inherit;
+    &>span[glnfr-orn-rg] {
       order: 1;
     }
-    &>span[orn-rg]:empty~[elem-pd-hor] {
-      padding-right: var(--glnf-lb-pd-rg, var(--glnfs-pd-rg, var(--def-lb-pd-rg)));
+
+    &>span[glnfr-orn-lf]:empty~[glnfr-pd-hor] {
+      padding-left: var(--glnfr-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf)));
+    }
+    &>span[glnfr-orn-rg]:empty~[glnfr-pd-hor] {
+      padding-right: var(--glnfr-lb-pd-rg, var(--glnfrs-pd-rg, var(--def-lb-pd-rg)));
     }
   }
 
   // Ornament "alignment".
 
-  span[orn-lf="center"], span[orn-rg="center"] {
+  span[glnfr-orn-lf="center"], span[glnfr-orn-rg="center"] {
     align-self: center;
   }
-  span[orn-lf="flex-start"], span[orn-rg="flex-start"] {
+  span[glnfr-orn-lf="flex-start"], span[glnfr-orn-rg="flex-start"] {
     align-self: flex-start;
   }
-  span[orn-lf="flex-end"], span[orn-rg="flex-end"] {
+  span[glnfr-orn-lf="flex-end"], span[glnfr-orn-rg="flex-end"] {
     align-self: flex-end;
   }
-  span[orn-lf="baseline"], span[orn-rg="baseline"] {
+  span[glnfr-orn-lf="baseline"], span[glnfr-orn-rg="baseline"] {
     align-self: baseline;
   }
-  span[orn-lf="stretch"], span[orn-rg="stretch"] {
+  span[glnfr-orn-lf="stretch"], span[glnfr-orn-rg="stretch"] {
     align-self: stretch;
   }
 
-  &[ext-o]>div>span[orn-lf="default"],
-  &[ext-o]>div>span[orn-rg="default"] {
+  &[ext-o]>div>span[glnfr-orn-lf="default"],
+  &[ext-o]>div>span[glnfr-orn-rg="default"] {
     align-self: center;
   }
-  &[ext-u]>div>span[orn-lf="default"] {
+  &[ext-u]>div>span[glnfr-orn-lf="default"] {
     align-self: baseline;
   }
-  &[ext-u]>div>span[orn-rg="default"] {
+  &[ext-u]>div>span[glnfr-orn-rg="default"] {
     align-self: center;
   }
-  &[ext-s]>div>span[orn-lf="default"],
-  &[ext-s]>div>span[orn-rg="default"] {
+  &[ext-s]>div>span[glnfr-orn-lf="default"],
+  &[ext-s]>div>span[glnfr-orn-rg="default"] {
     align-self: baseline;
   }
-
-  &[ext-u]>div>span[orn-lf],
-  &[ext-s]>div>span[orn-lf], 
-  &[ext-s]>div>span[orn-rg] {
-    &>.glnf-ornam {
+  &[ext-u]>div>span[glnfr-orn-lf],
+  &[ext-s]>div>span[glnfr-orn-lf], 
+  &[ext-s]>div>span[glnfr-orn-rg] {
+    &>.glnfr-ornam {
       display: inline-block;
-      margin-bottom: var(--glnf-lb-pd-bt, var(--glnfs-pd-bt, var(--def-lb-pd-bt)));
+      margin-bottom: var(--glnfr-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-bt)));
     }
   }
-  // ** **
 }

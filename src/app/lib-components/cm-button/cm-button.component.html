@@ -1,0 +1,57 @@
+<h3>Component: "GlnButton"</h3>
+
+<div *ngIf="!showNum || showNum==='01'"
+  id="Basic">
+  <app-cm-button-basic></app-cm-button-basic>
+  <hr br-tp>
+</div>
+
+<div *ngIf="!showNum || showNum==='02'"
+  id="Attributes">
+  <app-cm-button-attributes></app-cm-button-attributes>
+  <hr br-tp>
+</div>
+
+<div *ngIf="!showNum || showNum==='03'"
+  id="Size">
+  <app-cm-button-size></app-cm-button-size>
+  <hr br-tp>
+</div>
+
+<div *ngIf="!showNum || showNum==='04'"
+  id="BorderRadius">
+  <app-cm-button-border-radius></app-cm-button-border-radius>
+  <hr br-tp>
+</div>
+
+<div *ngIf="!showNum || showNum==='05'"
+  id="Ornaments">
+  <app-cm-button-ornaments></app-cm-button-ornaments>
+  <hr br-tp>
+</div>
+
+<section mr-vr
+  *ngIf="!showNum"
+  id="Palette">
+  <h3>Palette</h3>
+  <p>
+    The <a [href]="urlPlButton + '#Basic'">"Palette GlnButton#Basic"</a>
+    page shows you how to change the color palette of an element.
+  </p>
+  <hr br-tp>
+</section>
+
+<div *ngIf="!showNum || showNum==='07'"
+  id="Config">
+  <app-cm-button-config></app-cm-button-config>
+  <hr br-tp>
+</div>
+
+<div *ngIf="!showNum || showNum==='08'"
+  id="Api">
+  <app-cm-button-api></app-cm-button-api>
+  <hr br-tp>
+</div>
+
+<br />
+<br />

@@ -1,60 +1,72 @@
 <ng-container *ngIf="!linkElement; else elseBlockLink">
   <button #buttonElement
-    class="gln-btn glnb-settings"
-    gln-clear
-    gln-btn
+    class="glnbt-btn glnbt-settings"
+    glnbt-clear
+    glnbt-btn
     type="button"
-    [attr.tabindex]="isDisabled2 ? null : 0"
-    [glnFrameExteriorButton]="exterior || currConfig?.exterior || null"
-    [glnFrameExteriorButtonElementRef]="hostRef"
+    [attr.id]="id + '_button'"
+    [attr.disabled]="disabled ? '' : null"
+    [attr.tabindex]="disabled ? null : 0"
+    [glnFrameExteriorButton]="exterior || currConfig?.exterior"
     #glnFrameExteriorButton="glnFrameExteriorButton"
+    [glnFrameExteriorButtonElementRef]="hostRef"
     (glnFrameExteriorButtonChange)="glnFrameSize.updatePaddingVerAndHor()"
-    [glnFrameSize]="frameSize || currConfig?.frameSize || null"
+    [glnFrameSize]="frameSize || currConfig?.frameSize"
     #glnFrameSize="glnFrameSize"
     [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
-    [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
-    [glnFrameSizePrepareData]="glnFrameExteriorButton"
-    [attr.id]="id + '_button'"
-    [attr.disabled]="isDisabled2 ? '' : null"
+    [glnFrameSizeLabelPd]="currConfig?.labelPd"
+    [glnFrameSizePrepare]="glnFrameExteriorButton"
+    glnFrameOrnament
+    [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
+    [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
+    [glnFrameOrnamentAfterContent]="true"
     (focus)="doFocus()"
     (blur)="doBlur()">
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
-    <span class="glnb-label glnb-elem-pd-hor">
+    <span class="glnbt-label"
+      glnbt-mr-ver
+      glnbt-pd-hor>
       <ng-content></ng-content>
     </span>
-    <gln-touch-ripple *ngIf="!isDisabled2 && !isNoRipple2 && !currConfig?.isNoRipple">
+    <gln-touch-ripple *ngIf="!disabled && !getBoolean(isNoRipple) && !currConfig?.isNoRipple">
     </gln-touch-ripple>
   </button>
 </ng-container>
 <ng-template #elseBlockLink>
-  <div class="gln-btn glnb-settings"
-    gln-btn
-    [glnFrameExteriorButton]="exterior || currConfig?.exterior || null"
-    [glnFrameExteriorButtonElementRef]="hostRef"
+  <div class="glnbt-btn glnbt-settings"
+    glnbt-btn
+    [attr.id]="id + '_link'"
+    [glnFrameExteriorButton]="exterior || currConfig?.exterior"
     #glnFrameExteriorButton="glnFrameExteriorButton"
+    [glnFrameExteriorButtonElementRef]="hostRef"
     (glnFrameExteriorButtonChange)="glnFrameSize.updatePaddingVerAndHor()"
     [glnFrameSize]="frameSize || currConfig?.frameSize || null"
     #glnFrameSize="glnFrameSize"
     [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
-    [glnFrameSizeLabelPd]="currConfig?.labelPd || null"
-    [glnFrameSizePrepareData]="glnFrameExteriorButton"
-    [attr.id]="id + '_link'"
+    [glnFrameSizeLabelPd]="currConfig?.labelPd"
+    [glnFrameSizePrepare]="glnFrameExteriorButton"
+    glnFrameOrnament
+    [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
+    [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
+    [glnFrameOrnamentAfterContent]="true"
     (click)="doClick($event)">
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
     <ng-content select="a"></ng-content>
-    <gln-touch-ripple *ngIf="!isDisabled2 && !isNoRipple2 && !currConfig?.isNoRipple"
+    <gln-touch-ripple *ngIf="!disabled && !getBoolean(isNoRipple) && !currConfig?.isNoRipple"
       skip-events>
     </gln-touch-ripple>
   </div>
 </ng-template>
 
 <ng-template #templateOrnament>
-  <span orn-lf>
+  <span glnfr-orn-lf
+    class="gln-ornam-lf">
     <ng-content select="[gln-orn-lf]"></ng-content>
   </span>
-  <span orn-rg>
+  <span glnfr-orn-rg
+    class="gln-ornam-rg">
     <ng-content select="[gln-orn-rg]"></ng-content>
   </span>
 </ng-template>

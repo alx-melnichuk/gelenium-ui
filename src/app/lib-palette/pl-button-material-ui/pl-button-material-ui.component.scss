@@ -1,0 +1,58 @@
+/*# sourceURL=pl-button-material-ui.component.scss */
+
+app-pl-button-material-ui {
+  display: block;
+
+  .bm-items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .bm-items > :first-child {
+    margin-left: 1%;
+  }
+  .bm-items > :not(first-child) {
+    margin-left: 5%;
+  }
+
+  // ** Style: "Material-UI" **
+
+  // "Material-UI - contained"
+
+  .bm-mui.glnbt-contained {
+    --glnbt-def-lb-cl: #fff;
+    --glnbt-def-bg-cl: #1976d2;
+
+    --glnbt-hov-lb-cl: #fff;
+    --glnbt-hov-bg-cl: #1565c0;
+
+    --glnbt-dis-lb-cl: rgba(0, 0, 0, 0.26);
+    --glnbt-dis-bg-cl: rgba(0, 0, 0, 0.12);
+  }
+
+  // "Material-UI - outlined"
+
+  .bm-mui.glnbt-outlined {
+    --glnbt-def-lb-cl: #1976d2;
+    --glnbt-def-br-cl: rgba(25, 118, 210, 0.5);
+
+    --glnbt-hov-lb-cl: #1976d2;
+    --glnbt-hov-br-cl: #1976d2;
+    --glnbt-hov-bg-cl: rgba(25, 118, 210, 0.04);
+
+    --glnbt-dis-lb-cl: rgba(0, 0, 0, 0.26);
+    --glnbt-dis-br-cl: rgba(0, 0, 0, 0.12);
+  }
+
+  // "Material-UI - text"
+
+  .bm-mui.glnbt-text {
+    --glnbt-def-lb-cl: #1976d2;
+
+    --glnbt-hov-lb-cl: #1976d2;
+    --glnbt-hov-bg-cl: rgba(25, 118, 210, 0.04);
+
+    --glnbt-dis-lb-cl: rgba(0, 0, 0, 0.26);
+  }
+}
+
+

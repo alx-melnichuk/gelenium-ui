@@ -1,0 +1,133 @@
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Basic.
+    <a [href]="urlPlButton + '#Basic'">#</a>
+  </h4>
+  <p>
+    The GlnButton component has a default palette.
+  </p>
+</section>
+
+<section mr-vr
+  id="basic1">
+  <span>exterior: &nbsp;</span>
+  <mat-button-toggle-group value="exterior01a"
+    (change)="exterior01a=$event.value">
+    <mat-button-toggle [checked]="exterior01a==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior01a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior01a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<hr br-nn />
+
+<div class="bb-items">
+  <gln-button [exterior]="exterior01a">
+    <span>{{ getLabel(exterior01a) }}</span>
+  </gln-button>
+
+  <gln-button [exterior]="exterior01a"
+    isDisabled>
+    <span>{{ getLabel(exterior01a) }}</span>
+  </gln-button>
+
+  <gln-button [exterior]="exterior01a">
+    <a [routerLink]="[routerLink]"
+      fragment="basic1">
+      <span>{{ getLabel(exterior01a) }} Link</span>
+    </a>
+  </gln-button>
+
+  <gln-button [exterior]="exterior01a"
+    isDisabled>
+    <a [routerLink]="[routerLink]"
+      fragment="basic1">
+      <span>{{ getLabel(exterior01a) }} Link</span>
+    </a>
+  </gln-button>
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bb-items"&gt;
+  &lt;gln-button [exterior]="exterior01a"&gt;
+    &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior01a) &#125;&#125;&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button [exterior]="exterior01a"
+    isDisabled&gt;
+    &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior01a) &#125;&#125;&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button [exterior]="exterior01a"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="basic1"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior01a) &#125;&#125; Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button [exterior]="exterior01a"
+    isDisabled&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="basic1"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior01a) &#125;&#125; Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/palette/button';
+  public exterior01a = 'outlined';
+
+  public getLabel(exterior: string): string &#123;
+    return exterior ? exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bb-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bb-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bb-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<hr br-nn />

@@ -1,0 +1,183 @@
+<p>pl-button-material-ui works!</p>
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Like a Material-UI.
+    <a [href]="urlPlButton + '#MaterialUI'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnButton in style as "Material-UI".
+  </p>
+</section>
+
+<section mr-vr
+  id="material-ui1">
+  <span>exterior: &nbsp;</span>
+  <mat-button-toggle-group value="exterior03a"
+    (change)="exterior03a=$event.value">
+    <mat-button-toggle [checked]="exterior03a==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<hr br-nn />
+
+<div class="bm-items">
+  <gln-button class="bm-mui"
+    [exterior]="exterior03a">
+    <span>{{ getLabel(exterior03a) }}</span>
+  </gln-button>
+
+  <gln-button class="bm-mui"
+    [exterior]="exterior03a"
+    isDisabled>
+    <span>{{ getLabel(exterior03a) }}</span>
+  </gln-button>
+
+  <gln-button class="bm-mui"
+    [exterior]="exterior03a">
+    <a [routerLink]="[routerLink]"
+      fragment="material-ui1">
+      <span>{{ getLabel(exterior03a) }} Link</span>
+    </a>
+  </gln-button>
+
+  <gln-button class="bm-mui"
+    [exterior]="exterior03a"
+    isDisabled>
+    <a [routerLink]="[routerLink]"
+      fragment="material-ui1">
+      <span>{{ getLabel(exterior03a) }} Link</span>
+    </a>
+  </gln-button>
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bm-items"&gt;
+  &lt;gln-button class="bm-mui"
+    [exterior]="exterior03a"&gt;
+    &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125;&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bm-mui"
+    [exterior]="exterior03a"
+    isDisabled&gt;
+    &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125;&lt;/span&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bm-mui"
+    [exterior]="exterior03a"&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="material-ui1"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125; Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+
+  &lt;gln-button class="bm-mui"
+    [exterior]="exterior03a"
+    isDisabled&gt;
+    &lt;a [routerLink]="[routerLink]"
+      fragment="material-ui1"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125; Link&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/gln-button&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/palette/button';
+  public exterior03a = 'outlined';
+
+  public getLabel(exterior: string): string &#123;
+    return exterior ? 
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bm-items &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.bm-items &gt; :first-child &#123;
+  margin-left: 1%;
+&#125;
+.bm-items &gt; :not(first-child) &#123;
+  margin-left: 5%;
+&#125;
+
+// ** Style: "Material-UI" **
+
+// "Material-UI - contained"
+
+.bm-mui.glnbt-contained &#123;
+  --glnbt-def-lb-cl: #fff;
+  --glnbt-def-bg-cl: #1976d2;
+
+  --glnbt-hov-lb-cl: #fff;
+  --glnbt-hov-bg-cl: #1565c0;
+
+  --glnbt-dis-lb-cl: rgba(0, 0, 0, 0.26);
+  --glnbt-dis-bg-cl: rgba(0, 0, 0, 0.12);
+&#125;
+
+// "Material-UI - outlined"
+
+.bm-mui.glnbt-outlined &#123;
+  --glnbt-def-lb-cl: #1976d2;
+  --glnbt-def-br-cl: rgba(25, 118, 210, 0.5);
+
+  --glnbt-hov-lb-cl: #1976d2;
+  --glnbt-hov-br-cl: #1976d2;
+  --glnbt-hov-bg-cl: rgba(25, 118, 210, 0.04);
+
+  --glnbt-dis-lb-cl: rgba(0, 0, 0, 0.26);
+  --glnbt-dis-br-cl: rgba(0, 0, 0, 0.12);
+&#125;
+
+// "Material-UI - text"
+
+.bm-mui.glnbt-text &#123;
+  --glnbt-def-lb-cl: #1976d2;
+
+  --glnbt-hov-lb-cl: #1976d2;
+  --glnbt-hov-bg-cl: rgba(25, 118, 210, 0.04);
+
+  --glnbt-dis-lb-cl: rgba(0, 0, 0, 0.26);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<hr br-nn />

@@ -1,0 +1,29 @@
+<app-site-scheme>
+  <div sideLeftPanel>
+
+    <div class="ss-item">Guides</div>
+
+    <mat-accordion displayMode="flat">
+
+      <mat-expansion-panel [expanded]="itemData.expanded"
+        *ngFor="let itemData of itemDataList; trackBy: trackByItemData">
+
+        <mat-expansion-panel-header [expandedHeight]="expandedHeight">
+          <mat-panel-title>{{ itemData.label }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul class="ss-ul">
+          <li *ngFor="let urlItem of itemData.siteUrls; trackBy: trackByUrlItem">
+            <a [routerLink]="[urlItem.url]"
+              [fragment]="urlItem.fragment">{{ urlItem.label }}</a>
+          </li>
+        </ul>
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+  </div>
+  <div sideMainPanel>
+    <router-outlet></router-outlet>
+  </div>
+</app-site-scheme>

@@ -1,0 +1,309 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Ornaments.
+    <a [href]="urlCmTextarea + '#Ornaments'">#</a>
+  </h3>
+  <p>
+    For the GlnTextarea component, it is possible to display an ornament
+    (picture or text).
+    <br />
+    To display the ornament on the left, you need to add the "gln-orn-lf"
+    attribute to the element inside the "gln-textarea" content.
+    <br />
+    To display the ornament on the right, you need to add the "gln-orn-rg"
+    attribute to the element inside the "gln-textarea" content.
+  </p>
+  <span>
+    Example:
+  </span>
+  <code><pre source="html">
+&lt;gln-textarea formControlName="model01a"
+  label="Enter value"&gt;
+  <i>&lt;div <strong>gln-orn-lf</strong>&gt;&lt;span&gt;left&lt;/span&gt;&lt;/div&gt;</i>
+  <i>&lt;div <strong>gln-orn-rg</strong>&gt;&lt;span&gt;right&lt;/span&gt;&lt;/div&gt;</i>
+&lt;/gln-textarea&gt;</pre></code>
+  <p>
+    Adding a prefix or suffix does not disable legend animation for that element.
+    <br />
+    For blocks: <code><i>&lt;span&gt;left&lt;/span&gt;</i></code> and
+    <code><i>&lt;span&gt;right&lt;/span&gt;</i></code>
+    you need to specify the value of horizontal indents.
+  </p>
+</section>
+
+<hr br-nn />
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior05"
+    (change)="exterior05=$event.value">
+    <mat-button-toggle [checked]="exterior05==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior05==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior05==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form class="io-ornament"
+  [formGroup]="formGroup05"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem to-elem">
+      <div>
+        <small>
+          <em>Section: "gln-orn-lf" + text.</em>
+        </small>
+      </div>
+      <gln-textarea formControlName="model05a"
+        label="Enter the mass"
+        [minRows]="2"
+        [maxRows]="4"
+        helperText="The field must have a value."
+        [exterior]="exterior05"
+        [ornamLfAlign]="'baseline'">
+        <span gln-orn-lf
+          class="to-pd-hor">kg</span>
+      </gln-textarea>
+    </div>
+
+    <div class="app-elem to-elem">
+      <div>
+        <small>
+          <em>Section: "gln-orn-rg" + text.</em>
+        </small>
+      </div>
+      <gln-textarea formControlName="model05b"
+        label="Enter the height"
+        [minRows]="2"
+        [maxRows]="4"
+        helperText="The field must have a value."
+        [exterior]="exterior05"
+        [config]="configBaseline">
+        <span gln-orn-rg
+          class="to-pd-hor">cm</span>
+      </gln-textarea>
+    </div>
+
+    <div class="app-elem to-elem">
+      <div>
+        <small>
+          <em>Section: "gln-orn-lf" + uncode.</em>
+        </small>
+      </div>
+      <gln-textarea formControlName="model05c"
+        label="Enter text value"
+        [minRows]="2"
+        [maxRows]="4"
+        helperText="The field must have a value."
+        [exterior]="exterior05"
+        [ornamLfAlign]="'baseline'">
+        <button gln-orn-lf
+          class="to-btn to-uncode"
+          (click)="isBtnEye05c=!isBtnEye05c">
+          <span>{{ isBtnEye05c ? '&#128153;': '&#128154;' }}</span>
+        </button>
+      </gln-textarea>
+    </div>
+
+    <div class="app-elem to-elem">
+      <div>
+        <small>
+          <em>Section: "gln-orn-rg" + uncode.</em>
+        </small>
+      </div>
+      <gln-textarea formControlName="model05d"
+        label="Enter text value"
+        [minRows]="2"
+        [maxRows]="4"
+        helperText="The field must have a value."
+        [exterior]="exterior05"
+        [config]="configBaseline">
+        <button gln-orn-rg
+          class="to-btn to-uncode"
+          (click)="isBtnEye05d=!isBtnEye05d">
+          <span>{{ isBtnEye05d ? '&#129505;': '&#128156;' }}</span>
+        </button>
+      </gln-textarea>
+    </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form class="io-ornament"
+  [formGroup]="formGroup05"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem to-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-textarea formControlName="model05a"
+        label="Enter the mass"
+        [minRows]="2"
+        [maxRows]="4"
+        helperText="The field must have a value."
+        [exterior]="exterior05"
+        [ornamLfAlign]="'baseline'"&gt;
+        &lt;span gln-orn-lf
+          class="to-pd-hor"&gt;kg&lt;/span&gt;
+      &lt;/gln-textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem to-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-textarea formControlName="model05b"
+        label="Enter the height"
+        [minRows]="2"
+        [maxRows]="4"
+        helperText="The field must have a value."
+        [exterior]="exterior05"
+        [config]="configBaseline"&gt;
+        &lt;span gln-orn-rg
+          class="to-pd-hor"&gt;cm&lt;/span&gt;
+      &lt;/gln-textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem to-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "gln-orn-lf" + uncode.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-textarea formControlName="model05c"
+        label="Enter text value"
+        [minRows]="2"
+        [maxRows]="4"
+        helperText="The field must have a value."
+        [exterior]="exterior05"
+        [ornamLfAlign]="'baseline'"&gt;
+        &lt;button gln-orn-lf
+          class="to-btn to-uncode"
+          (click)="isBtnEye05c=!isBtnEye05c"&gt;
+          &lt;span&gt;<b>&#123;</b>&#123; isBtnEye05c ? '&amp;#128153;': '&amp;#128154;' &#125;&#125;&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/gln-textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem to-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "gln-orn-rg" + uncode.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-textarea formControlName="model05d"
+        label="Enter text value"
+        [minRows]="2"
+        [maxRows]="4"
+        helperText="The field must have a value."
+        [exterior]="exterior05"
+        [config]="configBaseline"&gt;
+        &lt;button gln-orn-rg
+          class="to-btn to-uncode"
+          (click)="isBtnEye05d=!isBtnEye05d"&gt;
+          &lt;span&gt;<b>&#123;</b>&#123; isBtnEye05d ? '&amp;#129505;': '&amp;#128156;' &#125;&#125;&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/gln-textarea&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+ ChangeDetectionStrategy, Component, Input, ViewEncapsulation
+ &#125; from '@angular/core';
+import &#123;
+ FormControl, FormGroup
+ &#125; from '@angular/forms';
+import &#123;
+ GlnFrameConfig, OrnamAlign
+ &#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class TextareaComponent &#123;
+  public controls05 = &#123;
+    model05a: new FormControl('', []),
+    model05b: new FormControl('First line\nSecond line', []),
+    model05c: new FormControl('', []),
+    model05d: new FormControl('', []),
+  &#125;;
+  public formGroup05: FormGroup = new FormGroup(this.controls05);
+  public exterior05 = 'outlined';
+  public isBtnEye05c = false;
+  public isBtnEye05d = false;
+  // GlnFrameConfig
+  public configBaseline: any = &#123;
+    ornamRgAlign: 'baseline',
+  &#125;;
+
+  constructor() &#123;&#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.to-elem &#123;
+  width: 26ch;
+&#125;
+.to-pd-hor &#123;
+  padding-left: 8px;
+  padding-right: 8px;
+&#125;
+.to-btn &#123;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 50%;
+  background-color: transparent;
+&#125;
+.to-uncode &#123;
+  font-size: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

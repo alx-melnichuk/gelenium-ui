@@ -1,0 +1,269 @@
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Basic.
+    <a [href]="urlPlSelect + '#Basic'">#</a>
+  </h4>
+  <p>
+    GlnSelect is based on the GlnFrame component, which has its own palette by default.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: &nbsp;</span>
+  <mat-button-toggle-group value="exterior01a"
+    (change)="exterior01a=$event.value">
+    <mat-button-toggle [checked]="exterior01a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior01a==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior01a==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<form [formGroup]="formGroup01a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>State: empty.</em>
+        </small>
+      </div>
+      <gln-select formControlName="model01a"
+        label="Enter value"
+        helperText="Enter a value for the parameter."
+        [exterior]="exterior01a"
+        wdFull>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Attributes: isRequired.</em>
+        </small>
+      </div>
+      <gln-select formControlName="model01b"
+        isRequired
+        [label]="!control01a.model01b.value
+          ? 'Requires a value':'Parameter value'"
+        [helperText]="control01a.model01b.value
+          ? 'The field is filled.'
+          : 'The field is not filled.'"
+        [exterior]="exterior01a"
+        wdFull>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Color: primary or success.</em>
+        </small>
+      </div>
+      <gln-select formControlName="model01c"
+        [label]="!control01a.model01c.value
+          ? 'Enter a parameter':'Parameter specified'"
+        [helperText]="control01a.model01c.value
+          ? 'The parameter was specified. (success)'
+          : 'The parameter was not specified. (primary)'"
+        [glnColor]="control01a.model01c.value
+          ? { primary: 'success' } : {}"
+        [exterior]="exterior01a"
+        wdFull>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Attribute: isDisabled.</em>
+        </small>
+      </div>
+      <gln-select formControlName="model01d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior01a"
+        wdFull>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+
+  </div>
+
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup01a"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;State: empty.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model01a"
+        label="Enter value"
+        helperText="Enter a value for the parameter."
+        [exterior]="exterior01a"
+        wdFull&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: isRequired.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model01b"
+        isRequired
+        [label]="!control01a.model01b.value
+          ? 'Requires a value':'Parameter value'"
+        [helperText]="control01a.model01b.value
+          ? 'The field is filled.'
+          : 'The field is not filled.'"
+        [exterior]="exterior01a"
+        wdFull&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Color: primary or success.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model01c"
+        [label]="!control01a.model01c.value
+          ? 'Enter a parameter':'Parameter specified'"
+        [helperText]="control01a.model01c.value
+          ? 'The parameter was specified. (success)'
+          : 'The parameter was not specified. (primary)'"
+        [glnColor]="control01a.model01c.value
+          ? &#123; primary: 'success' &#125; : &#123;&#125;"
+        [exterior]="exterior01a"
+        wdFull&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model01d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior01a"
+        wdFull&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SelectComponent &#123;
+  public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
+  public exterior01a = 'outlined';
+  public control01a = &#123;
+    model01a: new FormControl(null, []),
+    model01b: new FormControl(null, []),
+    model01c: new FormControl('Hello World', []),
+    model01d: new FormControl('Hello World', []),
+  &#125;;
+  public formGroup01a: FormGroup = new FormGroup(this.control01a);
+
+  public capitalizeFirstLetter(value: string): string &#123;
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.ip-elem &#123;
+  width: 29ch;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

@@ -12,14 +12,14 @@ export class GlnAutoFocuseOwnerDirective implements AfterContentInit, AfterViewI
 
   constructor(public hostRef: ElementRef<HTMLElement>) {}
 
-  ngAfterContentInit(): void {
+  public ngAfterContentInit(): void {
     const elem: GlnAutoFocuseDirective[] = this.list.toArray();
     for (let i = 0; i < elem.length; i++) {
       elem[i]?.setIsHasOwner(true);
     }
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     const elem: GlnAutoFocuseDirective[] = this.list.toArray();
     let elemAutoFocuse: GlnAutoFocuseDirective | null = null;
     for (let i = 0; i < elem.length && !elemAutoFocuse; i++) {

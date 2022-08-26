@@ -1,39 +1,92 @@
 /*# sourceURL=gln-hint-or-error.component.scss */
 
 gln-hint-or-error {
+  --glnhe--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnhe--default-s: var(--glncl-default-s, var(--gln-default-s));
+
+  --glnhe--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
+  --glnhe--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
+
+  --glnhe--danger-h: var(--glncl-danger-h, var(--gln-danger-h));
+  --glnhe--danger-s: var(--glncl-danger-s, var(--gln-danger-s));
+
+  box-sizing: border-box;
+  cursor: text;
   display: block;
   font-size: 0.75em;
-  text-align: left;
-  min-height: 1.1875em;
-  line-height: 1.66;
   height: 1.66em;
-  margin-top: 3px;
+  line-height: 1.66;
   margin-bottom: 0;
-  max-width: 100%;
-  white-space: nowrap;
+  margin-top: 3px;
+  min-height: 1.1875em;
   overflow: hidden;
+  text-align: left;
   text-overflow: ellipsis;
-  box-sizing: border-box;
+  white-space: nowrap;
+/*
+  --glnhe--default38: hsl(var(--glnhe--default-h), var(--glnhe--default-s), 38%); // hsl(20, 2%, 38%); rgba(0, 0, 0, 0.6);
+  --glnhe--default55: hsl(var(--glnhe--default-h), var(--glnhe--default-s), 55%); // hsl(20, 2%, 55%); rgba(0, 0, 0, 0.42);
+  --glnhe--danger51 : hsl(var(--glnhe--danger-h), var(--glnhe--danger-s), 51%);   // hsl(0, 65%, 51%); #d32f2f;
 
   &:not([dis]) {
     &:not([err]) { // The state without error, focused and disabled.
       &:not([foc]) {
-        color: var(--glnhe-def-cl, var(--glnf-def-cl));
+        --glnhe--text-cl: var(--glnhe-def-cl, var(--glnhe--default38));
       } // The state with focused but without error.
       &[foc] {
-        color: var(--glnhe-foc-cl, var(--glnf-hov-cl));
+        --glnhe--text-cl: var(--glnhe-foc-cl, var(--glnhe--default38));
       }
     }
     &[err] { // The state with error.
       &:not([foc]) {
-        color: var(--glnhe-err-cl, var(--glnf-err-cl2));
+        --glnhe--text-cl: var(--glnhe-err-cl, var(--glnhe--danger51));
       } // The state with focused but with error.
       &[foc] {
-        color: var(--glnhe-foc-err-cl, var(--glnf-err-cl));
+        --glnhe--text-cl: var(--glnhe-foc-err-cl, var(--glnhe--danger51));
       }
     }
   } // The state with disabled but without error.
   &[dis] {
-    color: var(--glnhe-dis-cl, var(--glnf-dis-cl));
+    --glnhe--text-cl: var(--glnhe-dis-cl, var(--glnhe--default55));
+  }
+*/
+
+  &:not([dis]):not([err]) {
+  --glnhe---def-h: var(--glnhe--default-h);
+  --glnhe---def-s: var(--glnhe--default-s);
+  --glnhe---foc-h: var(--glnhe--primary-h);
+  --glnhe---foc-s: var(--glnhe--primary-s);
+  }
+  &:not([dis])[err] {
+  --glnhe---def-h: var(--glnhe--danger-h);
+  --glnhe---def-s: var(--glnhe--danger-s);
+  --glnhe---foc-h: var(--glnhe--danger-h);
+  --glnhe---foc-s: var(--glnhe--danger-s);
+  }
+  &[dis] {
+    --glnhe---dis-h: var(--glnhe--default-h);
+    --glnhe---dis-s: var(--glnhe--default-s);
+  }
+
+  --glnhe--lb-cl-def: hsl(var(--glnhe---def-h), var(--glnhe---def-s), 40%);
+  --glnhe--lb-cl-foc: hsl(var(--glnhe---foc-h), var(--glnhe---foc-s), 45%);
+  --glnhe--lb-cl-dis: hsl(var(--glnhe---dis-h), var(--glnhe---dis-s), 50%);
+
+  &:not([dis]) {
+    // The state without disabled, focused, hover.
+    &:not(:focus-within):not([foc]) {
+      --glnhe--label-cl  : var(--glnhe-def-lb-cl, var(--glnhe--lb-cl-def));
+    }
+    // The state without disabled, error and with focused.
+    &:focus-within, &[foc] {
+      --glnhe--label-cl  : var(--glnhe-foc-lb-cl, var(--glnhe--lb-cl-foc));
+    }
+  } // The state with disabled.
+  &[dis] {
+    --glnhe--label-cl  : var(--glnhe-dis-lb-cl, var(--glnhe--lb-cl-dis));
+  }
+
+  &>span {
+    color: var(--glnhe--label-cl);
   }
 }

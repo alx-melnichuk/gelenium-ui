@@ -4,19 +4,20 @@ import { GlnButtonExterior, GlnButtonExteriorUtil } from '../../gln-button/gln-b
 import {
   GlnFrameSizePaddingHorRes,
   GlnFrameSizePaddingVerRes,
-  GlnFrameSizePrepareData,
-} from '../../_interfaces/gln-frame-size-prepare-data.interface';
+  GlnFrameSizePrepare,
+} from '../gln-frame-size/gln-frame-size-prepare.interface';
 import { HtmlElemUtil } from '../../_utils/html-elem.util';
+import { NumberUtil } from '../../_utils/number.util';
 
 @Directive({
   selector: '[glnFrameExteriorButton]',
   exportAs: 'glnFrameExteriorButton',
 })
-export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizePrepareData {
+export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizePrepare {
   @Input()
-  public glnFrameExteriorButton: string | null = null; // GlnButtonExteriorType
+  public glnFrameExteriorButton: string | null | undefined; // GlnButtonExteriorType
   @Input()
-  public glnFrameExteriorButtonElementRef: ElementRef<HTMLElement> | null = null;
+  public glnFrameExteriorButtonElementRef: ElementRef<HTMLElement> | null | undefined;
 
   @Output()
   readonly glnFrameExteriorButtonChange: EventEmitter<void> = new EventEmitter();
@@ -26,35 +27,35 @@ export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizeP
 
   constructor(private hostRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.glnFrameExteriorButtonElementRef) {
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['glnFrameExteriorButtonElementRef']) {
       this.elementRef = this.glnFrameExteriorButtonElementRef || this.hostRef;
     }
-    if (changes.glnFrameExteriorButton) {
-      const exteriorInp = GlnButtonExteriorUtil.convert(this.glnFrameExteriorButton);
+    if (changes['glnFrameExteriorButton']) {
+      const exteriorInp = GlnButtonExteriorUtil.convert(this.glnFrameExteriorButton || null);
       const exterior = GlnButtonExteriorUtil.create(exteriorInp);
       if (this.exterior !== exterior) {
         this.exterior = exterior;
-        this.settingExterior(this.elementRef, exterior);
+        this.settingExterior(this.renderer, this.elementRef, exterior);
       }
       this.glnFrameExteriorButtonChange.emit();
     }
   }
 
-  // ** Implementation of the GrnSizePrepareData interface. (start) **
+  // ** Implementation of the GlnSizePrepareData interface. (start) **
 
   public getExterior = (): string | null => {
-    return this.glnFrameExteriorButton;
+    return this.glnFrameExteriorButton || null;
   };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getBorderRadius = (frameSizeValue: number, lineHeight: number): string | null => {
     const borderRadiusRatio = 0.1;
-    return (frameSizeValue > 0 ? Math.round(borderRadiusRatio * frameSizeValue * 100) / 100 : 0) + 'px';
+    return (frameSizeValue > 0 ? NumberUtil.roundTo100(borderRadiusRatio * frameSizeValue) : 0) + 'px';
   };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getPaddingHor = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddingHorRes | null => {
     const ratio = this.exterior === GlnButtonExterior.contained ? 0.3636 : this.exterior === GlnButtonExterior.outlined ? 0.3409 : 0.2045;
-    const value = frameSizeValue > 0 ? Math.round(ratio * frameSizeValue * 100) / 100 : null;
+    const value = frameSizeValue > 0 ? NumberUtil.roundTo100(ratio * frameSizeValue) : null;
     return value !== null ? { left: value, right: value } : null;
   };
 
@@ -64,16 +65,16 @@ export class GlnFrameExteriorButtonDirective implements OnChanges, GlnFrameSizeP
     return value !== null ? { top: value, bottom: value } : null;
   };
 
-  // ** Implementation of the GrnSizePrepareData interface. (finish) **
+  // ** Implementation of the GlnSizePrepareData interface. (finish) **
 
   // ** Private API **
 
-  private settingExterior(elem: ElementRef<HTMLElement>, exterior: GlnButtonExterior): void {
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-text', GlnButtonExteriorUtil.isText(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-t', GlnButtonExteriorUtil.isText(exterior) ? '' : null);
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-contained', GlnButtonExteriorUtil.isContained(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-c', GlnButtonExteriorUtil.isContained(exterior) ? '' : null);
-    HtmlElemUtil.setClass(this.renderer, elem, 'glnb-outlined', GlnButtonExteriorUtil.isOutlined(exterior));
-    HtmlElemUtil.setAttr(this.renderer, elem, 'ext-o', GlnButtonExteriorUtil.isOutlined(exterior) ? '' : null);
+  private settingExterior(renderer: Renderer2, elem: ElementRef<HTMLElement>, exterior: GlnButtonExterior): void {
+    HtmlElemUtil.setClass(renderer, elem, 'glnbt-text', GlnButtonExteriorUtil.isText(exterior));
+    HtmlElemUtil.setAttr(renderer, elem, 'ext-t', GlnButtonExteriorUtil.isText(exterior) ? '' : null);
+    HtmlElemUtil.setClass(renderer, elem, 'glnbt-contained', GlnButtonExteriorUtil.isContained(exterior));
+    HtmlElemUtil.setAttr(renderer, elem, 'ext-c', GlnButtonExteriorUtil.isContained(exterior) ? '' : null);
+    HtmlElemUtil.setClass(renderer, elem, 'glnbt-outlined', GlnButtonExteriorUtil.isOutlined(exterior));
+    HtmlElemUtil.setAttr(renderer, elem, 'ext-o', GlnButtonExteriorUtil.isOutlined(exterior) ? '' : null);
   }
 }

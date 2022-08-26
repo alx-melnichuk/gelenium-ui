@@ -1,0 +1,439 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlDrRegexMatch + '#Basic'">#</a>
+  </h3>
+  <p>
+    The "GlnRegexMatch" directive allows you to enter only those values that match the specified
+    regular expression.
+    If the new value does not match the regular expression, then it is not accepted.
+    This allows the required business logic to be implemented without displaying an error.
+  </p>
+</section>
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="allow-digits">
+    1. Allow: digits only.
+    <a [href]="urlDrRegexMatch + '#allow-digits'">#</a>
+  </h4>
+  <p>
+    For example, you want to allow only numbers to be entered.<br />
+    To do this, we will use the following regular expression:<br />
+    <code>/^-?(\d+)$/</code>
+  </p>
+  <p>
+    The "GlnRegexMatch" directive supports the following forms for describing regular expressions:
+  </p>
+  <ul>
+    <li><code>glnRegexMatch="^-?(\d+)$"</code></li>
+    <li><code>[glnRegexMatch]="'^-?(\\d+)$'"</code></li>
+    <li><code>glnRegexMatch="/^-?(\d+)$/i"</code></li>
+    <li><code>[glnRegexMatch]="'/^-?(\\d+)$/i'"</code></li>
+  </ul>
+</section>
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="allow-real-number">
+    2. Allow: real number.
+    <a [href]="urlDrRegexMatch + '#allow-real-number'">#</a>
+  </h4>
+  <p>
+    Suppose you want to allow only a real number to be entered without using an exponent.
+    To do this, we will use the following regular expression:<br />
+    <code>/^-?(\d+(\.\d*)?|\.\d+)$/</code>
+  </p>
+</section>
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="allow-numeric">
+    3. Allow: '#numeric'.
+    <a [href]="urlDrRegexMatch + '#allow-numeric'">#</a>
+  </h4>
+  <p>
+    The GlnRegexMatch directive has its own patterns, each of which matches a special regular
+    expression.
+    By using these patterns, you can reduce the time you spend developing and testing your regular
+    expressions.
+  </p>
+  <p>
+    Sample templates:
+  </p>
+  <table class="app-tab">
+    <tr>
+      <th>Template</th>
+      <th>Regular expression</th>
+    </tr>
+    <tr>
+      <td><code>'#numeric'</code></td>
+      <td><code>'^-?(\\d+)$'</code></td>
+    </tr>
+    <tr>
+      <td><code>'#numeric()'</code></td>
+      <td><code>'^-?(\\d+(\\.\\d*)?|\\.\\d*)$'</code></td>
+    </tr>
+  </table>
+  <p>
+    The GlnRegexMatch directive fires only when the element's value has changed.
+    In other words, the directive listens for
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event"
+      target="_blank">input</a> event.
+    And for this reason, the directive cannot perform its actions when the value of the input
+    element is initially incorrect.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior01"
+    (change)="exterior01=$event.value">
+    <mat-button-toggle [checked]="exterior01==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior01==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior01==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>1. Digits only. Regex="/^-?(\d+)$/"</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01a"
+        wdFull
+        [label]="!control01.model01a.value
+          ?'Enter a digits':'A digits'"
+        glnRegexMatch="/^-?(\d+)$/"
+        [helperText]="!control01.model01a.errors
+        ?(!control01.model01a.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>2. Real number. Regex="/^-?(\d+)$/"</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01b"
+        wdFull
+        [label]="!control01.model01b.value
+          ?'Enter a real number':'A real number'"
+        [glnRegexMatch]="'/^-?(\\d+(\\.\\d*)?|\\.\\d+)$/'"
+        [helperText]="!control01.model01b.errors
+        ?(!control01.model01b.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>3. glnRegexMatch="#numeric".</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01c"
+        wdFull
+        [label]="!formGroup01.controls['model01c']['value']
+          ?'Enter number':'Number'"
+        glnRegexMatch="#numeric"
+        [helperText]="!control01.model01c.errors
+        ?(!control01.model01c.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>3. glnRegexMatch="#numeric(,2)".</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01d"
+        wdFull
+        [label]="!formGroup01.controls['model01d']['value']
+          ?'Enter number':'Number'"
+        glnRegexMatch="#numeric(,2)"
+        [helperText]="!control01.model01d.errors
+        ?(!control01.model01d.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>3. glnRegexMatch="#numeric(12,2)".</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01e"
+        wdFull
+        [label]="!formGroup01.controls['model01e']['value']
+          ?'Enter number':'Number'"
+        glnRegexMatch="#numeric(12,2)"
+        [helperText]="!control01.model01e.errors
+        ?(!control01.model01e.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>3. glnRegexMatch="#numeric(12)".</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01f"
+        wdFull
+        [label]="!formGroup01.controls['model01f']['value']
+          ?'Enter number':'Number'"
+        glnRegexMatch="#numeric(12)"
+        [helperText]="!control01.model01f.errors
+        ?(!control01.model01f.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>3. glnRegexMatch="#numeric12_2".</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01g"
+        wdFull
+        [label]="!formGroup01.controls['model01g']['value']
+          ?'Enter number':'Number'"
+        glnRegexMatch="#numeric12_2"
+        [helperText]="!control01.model01g.errors
+        ?(!control01.model01g.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01">
+      </gln-input>
+    </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <pre source="html">
+&lt;form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;1. Digits only. Regex="/^-?(\d+)$/"&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01a"
+        wdFull
+        [label]="!control01.model01a.value
+          ?'Enter a digits':'A digits'"
+        glnRegexMatch="/^-?(\d+)$/"
+        [helperText]="!control01.model01a.errors
+        ?(!control01.model01a.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;2. Real number. Regex="/^-?(\d+)$/"&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01b"
+        wdFull
+        [label]="!control01.model01b.value
+          ?'Enter a real number':'A real number'"
+        [glnRegexMatch]="'/^-?(\\d+(\\.\\d*)?|\\.\\d+)$/'"
+        [helperText]="!control01.model01b.errors
+        ?(!control01.model01b.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;3. glnRegexMatch="#numeric".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01c"
+        wdFull
+        [label]="!formGroup01.controls['model01c']['value']
+          ?'Enter number':'Number'"
+        glnRegexMatch="#numeric"
+        [helperText]="!control01.model01c.errors
+        ?(!control01.model01c.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;3. glnRegexMatch="#numeric(,2)".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01d"
+        wdFull
+        [label]="!formGroup01.controls['model01d']['value']
+          ?'Enter number':'Number'"
+        glnRegexMatch="#numeric(,2)"
+        [helperText]="!control01.model01d.errors
+        ?(!control01.model01d.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;3. glnRegexMatch="#numeric(12,2)".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01e"
+        wdFull
+        [label]="!formGroup01.controls['model01e']['value']
+          ?'Enter number':'Number'"
+        glnRegexMatch="#numeric(12,2)"
+        [helperText]="!control01.model01e.errors
+        ?(!control01.model01e.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;3. glnRegexMatch="#numeric(12)".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01f"
+        wdFull
+        [label]="!formGroup01.controls['model01f']['value']
+          ?'Enter number':'Number'"
+        glnRegexMatch="#numeric(12)"
+        [helperText]="!control01.model01f.errors
+        ?(!control01.model01f.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;3. glnRegexMatch="#numeric12_2".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01g"
+        wdFull
+        [label]="!formGroup01.controls['model01g']['value']
+          ?'Enter number':'Number'"
+        glnRegexMatch="#numeric12_2"
+        [helperText]="!control01.model01g.errors
+        ?(!control01.model01g.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-regex',
+  templateUrl: './regex.component.html',
+  styleUrls: ['./regex.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RegexComponent &#123;
+  public control01 = &#123;
+    model01a: new FormControl('', []),
+    model01b: new FormControl('-1234567890123456.12345', []),
+    model01c: new FormControl('-12345678901234567890', []),
+    model01d: new FormControl('12345678901234567890.12', []),
+    model01e: new FormControl('123456789012.12', []),
+    model01f: new FormControl('123456789012', []),
+    model01g: new FormControl('123456789012.12', []),
+  &#125;;
+  public formGroup01: FormGroup = new FormGroup(this.control01);
+  public exterior01 = 'outlined';
+&#125;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

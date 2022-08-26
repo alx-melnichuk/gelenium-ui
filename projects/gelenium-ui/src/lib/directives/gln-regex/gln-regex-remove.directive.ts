@@ -41,8 +41,8 @@ export class GlnRegexRemoveDirective implements OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.glnRegexRemove) {
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['glnRegexRemove']) {
       this.regex = RegexUtil.create(this.glnRegexRemove);
     }
   }

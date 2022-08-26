@@ -1,0 +1,1045 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Border radius.
+    <a [href]="urlCmButton + '#BorderRadius'">#</a>
+  </h3>
+  <p>
+    The GlnButton component has the ability to change the "border-radius" css property.
+    This requires creating a css variable "--glnbt-br-rd" at the level of the component
+    or any parent element.
+    The value of this css variable can be any valid (as described by
+    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">
+      "border-radius"
+    </a>) value.
+  </p>
+  <p>
+    You can also change the value of the left / right indents, for a more convenient perception.
+  </p>
+</section>
+
+<section mr-vr
+  id="border-radius1">
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior04a"
+    (change)="exterior04a=$event.value">
+    <mat-button-toggle [checked]="exterior04a==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior04a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior04a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<section mr-vr
+  class="bbr-slider-box">
+  <p>
+    <span>
+      border-radius = ( BaseSize * <b class="bbr-slider-value">{{ borderRadius }}</b>/100)
+    </span>
+  </p>
+  <input type="range"
+    class="bbr-border-radius-marks"
+    min="0"
+    max="50"
+    step="5"
+    list="border-radius-marks"
+    [(ngModel)]="borderRadius" />
+  <datalist id="border-radius-marks">
+    <option value="0"></option>
+    <option value="5"></option>
+    <option value="10"></option>
+    <option value="15"></option>
+    <option value="20"></option>
+    <option value="25"></option>
+    <option value="30"></option>
+    <option value="35"></option>
+    <option value="40"></option>
+    <option value="45"></option>
+    <option value="50"></option>
+  </datalist>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isAddPadding04a=!isAddPadding04a"
+      [checked]="isAddPadding04a" />
+    Add padding ( BaseSize * {{ labelPdRatio }})
+  </label>
+</section>
+
+
+<div class="app-group"
+  [attr.style]="'--glnbt-br-rd :'
+    + getRadius('short', borderRadius / 100) + 'px;'">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Short" - 38px; font: 16px; (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? { labelPd: (getSize('short') * labelPdRatio) } : null"
+      frameSize="short">
+      <span>{{ getLabel(exterior04a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Short" - 38px; font: 16px; (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? { labelPd: (getSize('short') * labelPdRatio) } : null"
+      frameSize="short">
+      <a [routerLink]="[routerLink]"
+        fragment="border-radius1">
+        <span>{{ getLabel(exterior04a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group"
+  [attr.style]="'--glnbt-br-rd :'
+    + getRadius('small', borderRadius / 100) + 'px;'">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Small" - 44px; font: 16px; (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? { labelPd: (getSize('small') * labelPdRatio) } : null"
+      frameSize="small">
+      <span>{{ getLabel(exterior04a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Small" - 44px; font: 16px; (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? { labelPd: (getSize('small') * labelPdRatio) } : null"
+      frameSize="small">
+      <a [routerLink]="[routerLink]"
+        fragment="border-radius1">
+        <span>{{ getLabel(exterior04a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group"
+  [attr.style]="'--glnbt-br-rd :' + getRadius('middle', borderRadius / 100) + 'px;'">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Middle" - 50px; font: 16px; (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
+      frameSize="middle">
+      <span>{{ getLabel(exterior04a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Middle" - 50px; font: 16px; (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
+      frameSize="middle">
+      <a [routerLink]="[routerLink]"
+        fragment="border-radius1">
+        <span>{{ getLabel(exterior04a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group"
+  [attr.style]="'--glnbt-br-rd :' + getRadius('wide', borderRadius / 100) + 'px;'">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Wide" - 56px; font: 16px; (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? { labelPd: (getSize('wide') * labelPdRatio) } : null"
+      frameSize="wide">
+      <span>{{ getLabel(exterior04a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Wide" - 56px; font: 16px; (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? { labelPd: (getSize('wide') * labelPdRatio) } : null"
+      frameSize="wide">
+      <a [routerLink]="[routerLink]"
+        fragment="border-radius1">
+        <span>{{ getLabel(exterior04a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group"
+  [attr.style]="'--glnbt-br-rd :' + getRadius('large', borderRadius / 100) + 'px;'">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Large" - 62px; font: 18px; (Button)</em>
+      </small>
+    </div>
+    <gln-button class="bbr-large"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? { labelPd: (getSize('large') * labelPdRatio) } : null"
+      frameSize="large">
+      <span>{{ getLabel(exterior04a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Large" - 62px; font: 18px; (Link)</em>
+      </small>
+    </div>
+    <gln-button class="bbr-large"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? { labelPd: (getSize('large') * labelPdRatio) } : null"
+      frameSize="large">
+      <a [routerLink]="[routerLink]"
+        fragment="border-radius1">
+        <span>{{ getLabel(exterior04a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group"
+  [attr.style]="'--glnbt-br-rd :' + getRadius('huge', borderRadius / 100) + 'px;'">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Huge" - 68px; font: 20px; (Button)</em>
+      </small>
+    </div>
+    <gln-button class="bbr-huge"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? { labelPd: (getSize('huge') * labelPdRatio) } : null"
+      frameSize="huge">
+      <span>{{ getLabel(exterior04a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Huge" - 68px; font: 20px; (Link)</em>
+      </small>
+    </div>
+    <gln-button class="bbr-huge"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? { labelPd: (getSize('huge') * labelPdRatio) } : null"
+      frameSize="huge">
+      <a [routerLink]="[routerLink]"
+        fragment="border-radius1">
+        <span>{{ getLabel(exterior04a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="'--glnbt-br-rd :'
+    + getRadius('short', borderRadius / 100) + 'px;'"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Short" - 38px; font: 16px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? &#123; labelPd: (getSize('short') * labelPdRatio) &#125; : null"
+      frameSize="short"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Short" - 38px; font: 16px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? &#123; labelPd: (getSize('short') * labelPdRatio) &#125; : null"
+      frameSize="short"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="border-radius1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"
+  [attr.style]="'--glnbt-br-rd :'
+    + getRadius('small', borderRadius / 100) + 'px;'"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Small" - 44px; font: 16px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? &#123; labelPd: (getSize('small') * labelPdRatio) &#125; : null"
+      frameSize="small"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Small" - 44px; font: 16px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? &#123; labelPd: (getSize('small') * labelPdRatio) &#125; : null"
+      frameSize="small"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="border-radius1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"
+  [attr.style]="'--glnbt-br-rd :' + getRadius('middle', borderRadius / 100) + 'px;'"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Middle" - 50px; font: 16px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
+      frameSize="middle"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Middle" - 50px; font: 16px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
+      frameSize="middle"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="border-radius1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"
+  [attr.style]="'--glnbt-br-rd :' + getRadius('wide', borderRadius / 100) + 'px;'"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Wide" - 56px; font: 16px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? &#123; labelPd: (getSize('wide') * labelPdRatio) &#125; : null"
+      frameSize="wide"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Wide" - 56px; font: 16px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? &#123; labelPd: (getSize('wide') * labelPdRatio) &#125; : null"
+      frameSize="wide"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="border-radius1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"
+  [attr.style]="'--glnbt-br-rd :' + getRadius('large', borderRadius / 100) + 'px;'"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Large" - 62px; font: 18px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button class="bbr-large"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? &#123; labelPd: (getSize('large') * labelPdRatio) &#125; : null"
+      frameSize="large"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Large" - 62px; font: 18px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button class="bbr-large"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? &#123; labelPd: (getSize('large') * labelPdRatio) &#125; : null"
+      frameSize="large"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="border-radius1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"
+  [attr.style]="'--glnbt-br-rd :' + getRadius('huge', borderRadius / 100) + 'px;'"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Huge" - 68px; font: 20px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button class="bbr-huge"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? &#123; labelPd: (getSize('huge') * labelPdRatio) &#125; : null"
+      frameSize="huge"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Huge" - 68px; font: 20px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button class="bbr-huge"
+      [exterior]="exterior04a"
+      [config]="isAddPadding04a
+        ? &#123; labelPd: (getSize('huge') * labelPdRatio) &#125; : null"
+      frameSize="huge"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="border-radius1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  GlnFrameSizeUtil
+&#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button1';
+  public exterior04a = 'outlined';
+  public borderRadius = 50;
+  public isAddPadding04a = true;
+  public labelPdRatio = 0.4;
+
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+  public getSize(frameSize: string | null): number &#123;
+    return GlnFrameSizeUtil.getValue(
+      GlnFrameSizeUtil.convert(frameSize)) ?? 0;
+  &#125;
+  public getRadius(frameSize: string | null, radiusRatio: number): number &#123;
+    return Math.round(
+      (this.getSize(frameSize) * radiusRatio * 100) / 100);
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.bbr-large &#123;
+  font-size: 18px;
+&#125;
+.bbr-huge &#123;
+  font-size: 20px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="border-radius2">
+  <h4 class="app-hover-link">
+    Below are other possible values for "border-radius".
+    <a [href]="urlCmButton + '#border-radius2'">#</a>
+  </h4>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior04b"
+    (change)="exterior04b=$event.value">
+    <mat-button-toggle [checked]="exterior04b==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior04b==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior04b==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isAddPadding04b=!isAddPadding04b"
+      [checked]="isAddPadding04b" />
+    Add padding ( BaseSize * {{ labelPdRatio }})
+  </label>
+</section>
+
+
+<div class="app-group">
+  <div>
+    <small><em>"Middle" height: 50px; font-size: 16px;</em></small>
+  </div>
+</div>
+
+<hr br-nn />
+
+<div class="app-group"
+  [attr.style]="'--glnbt-br-rd :'
+    + getRadius('middle', radiusRatio) + 'px 0 0 '
+    + getRadius('middle', radiusRatio) + 'px'">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Demo - A (top-left, bottom-left) (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
+      frameSize="middle">
+      <span>{{ 'A - ' + getLabel(exterior04b) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Demo - A (top-left, bottom-left) (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
+      frameSize="middle">
+      <a [routerLink]="[routerLink]"
+        fragment="border-radius2">
+        <span>{{ 'A - ' + getLabel(exterior04b) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group"
+  [attr.style]="'--glnbt-br-rd : 0 '
+    + getRadius('middle', radiusRatio) + 'px '
+    + getRadius('middle', radiusRatio) + 'px 0'">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Demo - B (top-right, bottom-right) (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
+      frameSize="middle">
+      <span>{{ 'B - ' + getLabel(exterior04b) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Demo - B (top-right, bottom-right) (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
+      frameSize="middle">
+      <a [routerLink]="[routerLink]"
+        fragment="border-radius2">
+        <span>{{ 'B - ' + getLabel(exterior04b) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group"
+  [attr.style]="'--glnbt-br-rd : '
+    + getRadius('middle', radiusRatio) + 'px 0 '
+    + getRadius('middle', radiusRatio) + 'px 0'">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Demo - C (top-left, bottom-right) (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
+      frameSize="middle">
+      <span>{{ 'C - ' + getLabel(exterior04b) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Demo - C (top-left, bottom-right) (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
+      frameSize="middle">
+      <a [routerLink]="[routerLink]"
+        fragment="border-radius2">
+        <span>{{ 'C - ' + getLabel(exterior04b) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group"
+  [attr.style]="'--glnbt-br-rd : 0 '
+    + getRadius('middle', radiusRatio) + 'px 0 '
+    + getRadius('middle', radiusRatio) + 'px'">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Demo - D (bottom-right, top-left) (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
+      frameSize="middle">
+      <span>{{ 'D - ' + getLabel(exterior04b) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Demo - D (bottom-right, top-left) (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
+      frameSize="middle">
+      <a [routerLink]="[routerLink]"
+        fragment="border-radius2">
+        <span>{{ 'D - ' + getLabel(exterior04b) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group"
+  [attr.style]="'--glnbt-br-rd: 8%/50%;'">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Demo - E (border-radius: 8%/50%) (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
+      frameSize="middle">
+      <span>{{ 'E - ' + getLabel(exterior04b) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Demo - E (border-radius: 8%/50%) (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
+      frameSize="middle">
+      <a [routerLink]="[routerLink]"
+        fragment="border-radius2">
+        <span>{{ 'E - ' + getLabel(exterior04b) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"
+  [attr.style]="'--glnbt-br-rd :'
+    + getRadius('middle', radiusRatio) + 'px 0 0 '
+    + getRadius('middle', radiusRatio) + 'px'"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Demo - A (top-left, bottom-left) (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
+      frameSize="middle"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; 'A - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Demo - A (top-left, bottom-left) (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
+      frameSize="middle"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="border-radius2"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; 'A - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"
+  [attr.style]="'--glnbt-br-rd : 0 '
+    + getRadius('middle', radiusRatio) + 'px '
+    + getRadius('middle', radiusRatio) + 'px 0'"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Demo - B (top-right, bottom-right) (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
+      frameSize="middle"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; 'B - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Demo - B (top-right, bottom-right) (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
+      frameSize="middle"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="border-radius2"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; 'B - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"
+  [attr.style]="'--glnbt-br-rd : '
+    + getRadius('middle', radiusRatio) + 'px 0 '
+    + getRadius('middle', radiusRatio) + 'px 0'"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Demo - C (top-left, bottom-right) (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
+      frameSize="middle"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; 'C - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Demo - C (top-left, bottom-right) (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
+      frameSize="middle"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="border-radius2"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; 'C - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"
+  [attr.style]="'--glnbt-br-rd : 0 '
+    + getRadius('middle', radiusRatio) + 'px 0 '
+    + getRadius('middle', radiusRatio) + 'px'"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Demo - D (bottom-right, top-left) (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
+      frameSize="middle"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; 'D - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Demo - D (bottom-right, top-left) (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
+      frameSize="middle"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="border-radius2"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; 'D - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"
+  [attr.style]="'--glnbt-br-rd: 8%/50%;'"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Demo - E (border-radius: 8%/50%) (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
+      frameSize="middle"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; 'E - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Demo - E (border-radius: 8%/50%) (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior04b"
+      [config]="isAddPadding04b
+        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
+      frameSize="middle"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="border-radius2"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; 'E - ' + getLabel(exterior04b) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  GlnFrameSizeUtil
+&#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/components/button1';
+  public exterior04b = 'outlined';
+  public isAddPadding04b = true;
+  public radiusRatio = 0.3;
+  public labelPdRatio = 0.4;
+
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+  public getSize(frameSize: string | null): number &#123;
+    return GlnFrameSizeUtil.getValue(
+      GlnFrameSizeUtil.convert(frameSize)) ?? 0;
+  &#125;
+  public getRadius(frameSize: string | null, radiusRatio: number): number &#123;
+    return Math.round(
+      (this.getSize(frameSize) * radiusRatio * 100) / 100);
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.bbr-large &#123;
+  font-size: 18px;
+&#125;
+.bbr-huge &#123;
+  font-size: 20px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+<hr br-nn />

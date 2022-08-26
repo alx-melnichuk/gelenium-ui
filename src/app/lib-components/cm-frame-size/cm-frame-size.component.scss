@@ -1,0 +1,15 @@
+/*# sourceURL=cm-frame-size.component.scss */
+
+app-cm-frame-size {
+  display: block;
+
+  .fs-indent {
+    margin-top: 15px;
+  }
+  .fs-large {
+    font-size: 18px;
+  }
+  .fs-huge {
+    font-size: 20px;
+  }
+}

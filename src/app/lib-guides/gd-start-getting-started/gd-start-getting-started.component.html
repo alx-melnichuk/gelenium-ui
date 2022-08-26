@@ -1,0 +1,87 @@
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="getting-started-installation-angular-cli">
+    Installation: Angular CLI way.
+    <a [href]="urlGdStart + '#getting-started-installation-angular-cli'">#</a>
+  </h4>
+  <p>
+    Use the Angular CLI ng add command for updating your Angular project.
+  </p>
+  <pre source
+    class="sgs-highlight">
+$ ng add gelenium-ui
+</pre>
+</section>
+
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="getting-started-installation-manual">
+    Installation: Manual way.
+    <a [href]="urlGdStart + '#getting-started-installation-manual'">#</a>
+  </h4>
+  <p>
+    Install Gelenium-UI from npm.
+  </p>
+  <pre source
+    class="sgs-highlight">
+$ npm install gelenium-ui --save</pre>
+</section>
+
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="getting-started-append-css">
+    Append: CSS.
+    <a [href]="urlGdStart + '#getting-started-append-css'">#</a>
+  </h4>
+  <p>
+    You need to add Gelenium-UI CSS to your application.
+  </p>
+  <p>
+    For example you could install Gelenium-UI from npm
+  </p>
+  <pre source
+    class="sgs-highlight">
+$ npm install gelenium-ui</pre>
+  <span>
+    and add Gelenium-UI CSS to your project.
+  </span>
+  <p>
+    You just need to add Gelenium-UI styles to your angular.json configuration:
+  </p>
+  <pre source
+    class="sgs-highlight">
+"yourApp": &#123;
+  "architect": &#123;
+    "build": &#123;
+      "options": &#123;
+        "styles": [
+          "node_modules/gelenium-ui/styles.css"
+        ]
+      &#125;
+    &#125;
+  &#125;
+&#125;</pre>
+</section>
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="getting-started-import-modules">
+    Import Gelenium-UI modules.
+    <a [href]="urlGdStart + '#getting-started-import-modules'">#</a>
+  </h4>
+  <p>
+    Further, for all modules (whose components use elements of libraries),
+    it is required to import the used library modules.
+  </p>
+  <pre source
+    class="sgs-highlight">
+<span class="sgs-blue">import</span> &#123; <strong>GlnInputModule</strong> &#125; <span class="sgs-blue">from</span> <span class="sgs-green"><strong>'gelenium-ui'</strong></span>;
+
+@NgModule(&#123;
+  imports: [ <strong>GlnInputModule</strong> ],
+&#125;)
+<span class="sgs-blue">export class</span> YourAppModule &#123;
+&#125;</pre>
+</section>

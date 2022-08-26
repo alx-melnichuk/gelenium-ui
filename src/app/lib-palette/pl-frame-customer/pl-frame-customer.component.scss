@@ -1,0 +1,37 @@
+/*# sourceURL=pl-frame-customer.component.scss */
+
+app-pl-frame-customer {
+  display: block;
+
+  .ip-elem {
+    width: 29ch;
+  }
+
+  .fc-other-palette {
+
+    // "default" color;
+    --gln-other-default-h: 231;
+    --gln-other-default-s: 23%;
+    --gln-other-default-l: 50%;
+    --gln-other-default-cl: hsl(var(--gln-other-default-h), var(--gln-other-default-s), var(--gln-other-default-l));
+
+    // "primary" color;
+    --gln-other-primary-h: 186;
+    --gln-other-primary-s: 51%;
+    --gln-other-primary-l: 50%;
+    --gln-other-primary-cl: hsl(var(--gln-other-primary-h), var(--gln-other-primary-s), var(--gln-other-primary-l));
+
+    // "danger" color;
+    --gln-other-danger-h: 330;
+    --gln-other-danger-s: 70%;
+    --gln-other-danger-l: 50%;
+    --gln-other-danger-cl: hsl(var(--gln-other-danger-h), var(--gln-other-danger-s), var(--gln-other-danger-l));
+
+    // "success" color;
+    --gln-other-success-h: 290;
+    --gln-other-success-s: 70%;
+    --gln-other-success-l: 50%;
+    --gln-other-success-cl: hsl(var(--gln-other-success-h), var(--gln-other-success-s), var(--gln-other-success-l));
+  }
+
+}

@@ -1,0 +1,335 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Structure.
+    <a [href]="urlCmFrame + '#Structure'">#</a>
+  </h3>
+  <p>
+    When developing the GlnInput component, it was necessary to implement the following tasks:
+  </p>
+  <ul>
+    <li>
+      drawing the frame view:
+      <ul>
+        <li>
+          "outlined" - border around the perimeter of the element (different colors: default,
+          focus, error, and disable);
+        </li>
+        <li>
+          "underline" - bottom frame and gray background (different colors: default, focus, error,
+          and disable);
+        </li>
+        <li>
+          "standard" - border just below (different colors: default, focus, error, and disable);
+        </li>
+      </ul>
+    </li>
+    <li>if the value is missing, the label is displayed as a "placeholder";</li>
+    <li>when focus is received, the label moves with a smooth animation from the "placeholder" place
+      to the place of the legend;</li>
+    <li>rendering the element for different height sizes (from 38px to 68px) taking into account the
+      text font size;</li>
+    <li>the value of the main parameters can be passed through a configuration parameter or a global
+      provider;</li>
+  </ul>
+</section>
+
+<section mr-vr>
+  <p>
+    If you implement all the specified functionality in one current component,
+    then it should be duplicated for other similar components (for example, GlnTextarea).
+    Therefore, the GlnFrame component was created for the specified functionality.
+  </p>
+  <p>
+    If the value of the "exterior" parameter can be passed both as an input parameter and
+    as a parameter in the configuration object, then this greatly complicates the logic inside
+    the component.
+    The "OnChanges" hook requires processing the "exterior" input parameter, as well as processing
+    this parameter in the configuration object.
+    You also need to make some settings in the "OnInit" hook if the configuration object is set
+    through the global provider.
+  </p>
+  <p>
+    Next, you need to build an element of a given height.
+    The height of an element is defined as the sum of the top padding size, the "line-height"
+    size, and the bottom padding size.
+    That is, knowing the given height and the value of "line height" can be calculated in the
+    size of the upper and lower indents.
+    In the "ngAfterContentInit" hook, you can define the "line height" value and then calculate the
+    size of the top and bottom padding.
+  </p>
+  <p>
+    In order not to overload the component, let's perform decomposition.
+    That is, we divide the required functionality into separate subtasks and put them into
+    separate elements.
+  </p>
+  <p>
+    In order not to describe the complex logic of processing the input parameter and its value in
+    the configuration parameter, we will use the ability of angular to respond to changes in the
+    input parameter.
+    As an input parameter, we specify the value of the input parameter and its value in the
+    configuration parameter.
+  </p>
+  <span>Example:</span>
+  <code><pre source="html">
+[exterior]="exterior || currConfig.exterior"</pre></code>
+  <p>
+    The value of the input parameter "exterior" is taken first.
+    If it is not specified, then the same parameter is taken from the configuration.
+    This scheme allows you to correctly process all possible combinations of this parameter.
+    At the same time, our component gets rid of complex logic and becomes much simpler.
+  </p>
+</section>
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="gln-frame-component">
+    GlnFrame component.
+    <a [href]="urlCmFrame + '#gln-frame-component'">#</a>
+  </h4>
+  <p>
+    Drawing of three types of frame and animation of the label (legend) is performed by the
+    GlnFrame component.
+    That is, the GlnFrame component only performs rendering based on input data.
+    And it does not contain any additional logic for processing parameters from the configuration,
+    offset calculation and so on.
+  </p>
+  <span>Componet uses css parameters for its work:</span>
+  <ul>
+    <li>"--glnfrs-br-rd" - frame radius;</li>
+    <li>"--glnfrs-pd-lf" - left margin to the frame;</li>
+    <li>"--glnfrs-pd-rg" - right indent to frame;</li>
+    <li>"--glnfrs-pd-tp" - top indent to frame;</li>
+    <li>"--glnfrs-pd-bt" - bottom indent to frame;</li>
+    <li>"--glnfre-pd-shr" - indents for the label in the shrink position;</li>
+    <li>"--glnfre-trn-y" - transformation value for the label in compressed state;</li>
+    <li>"--glnfre-trn2-y" - transformation value for label in free state;</li>
+  </ul>
+  <p>
+    If you want to change the values of these parameters for all elements at once, then you need
+    to specify these css parameters at the root level (or at the body level).
+  </p>
+</section>
+
+<hr br-nn>
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="gln-frame-exterior-input">
+    GlnFrameExteriorInput directive.
+    <a [href]="urlCmFrame + '#gln-frame-exterior-input'">#</a>
+  </h4>
+  <p>
+    This directive defines the value of the "exterior" by the input parameter or by default.
+    It also generates events when the input parameter "exterior" changes.
+    This directive defines the values of css parameters:
+  </p>
+  <ul>
+    <li>"--glnfre-trn-y" - transformation value for the label in compressed state;</li>
+    <li>"--glnfre-trn2-y" - transformation value for label in free state;</li>
+    <li>"--glnfre-pd-shr" - indents for the label in the shrink position;</li>
+    <li>"--glnfrs-pd-lf" - left indent for hint line;</li>
+    <li>"--glnfrs-pd-rg" - right indent for the hint line;</li>
+  </ul>
+  <span>Example:</span>
+  <code><pre source="html">
+[glnFrameExteriorInput]="exterior || currConfig?.exterior"
+[glnFrameExteriorInputElementRef]="hostRef"
+(glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()"</pre></code>
+  <p>
+    "ElementRef" defines the DOM element to which these css parameters are added.
+    <br />
+    The "glnFrameExteriorInputChange" event occurs when the value of "exterior" changes.
+    And at the same time, it is required to update all internal parameters for the
+    "glnFrameSize" directive.
+  </p>
+  <p>
+    The directive implements the GlnFrameSizePrepare interface, which has callback functions:
+  </p>
+
+  <p>
+    <i>- calculation of frame radii values;</i>
+  </p>
+  <code><pre source="ts">
+getBorderRadius = (frameSizeValue: number, lineHeight: number): string | null;</pre></code>
+  <ul>
+    <li>frameSizeValue - element height;</li>
+    <li>lineHeight - line height;</li>
+  </ul>
+
+  <p>
+    <i>- calculation of values of horizontal indents;</i>
+  </p>
+  <code><pre source="ts">
+getPaddingHor = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddingHorRes | null;</pre></code>
+  <ul>
+    <li>frameSizeValue - element height;</li>
+    <li>lineHeight - line height;</li>
+  </ul>
+  <p>
+    value of css-parameters:
+  </p>
+  <ul>
+    <li>"--glnfre-pd-shr" - indents for the label in the shrink position;</li>
+    <li>"--glnfrs-pd-lf" - left indent for hint line;</li>
+    <li>"--glnfrs-pd-rg" - right indent for the hint line;</li>
+  </ul>
+
+  <p>
+    <i>- calculation of values of vertical indents;</i>
+  </p>
+  <code><pre source="ts">
+getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddingVerRes | null;</pre></code>
+  <ul>
+    <li>frameSizeValue - element height;</li>
+    <li>lineHeight - line height;</li>
+  </ul>
+  <p>
+    value of css-parameters:
+  </p>
+  <ul>
+    <li>"--glnfre-trn-y" - transformation value for the label in compressed state;</li>
+    <li>"--glnfre-trn2-y" - transformation value for label in free state;</li>
+  </ul>
+</section>
+
+<hr br-nn>
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="gln-frame-size">
+    GlnFrameSize directive.
+    <a [href]="urlCmFrame + '#gln-frame-size'">#</a>
+  </h4>
+  <p>
+    This directive defines the value "size" (SizeValue) by the input parameter or by default.
+    It also defines indents for ornaments (images) horizontally and vertical alignment.
+    It also generates events when the input parameter "size" (SizeValue) changes.
+    This directive defines the values of css parameters:
+  </p>
+  <ul>
+    <li>"--glnfrs-br-rd" - frame radius;</li>
+    <li>"--glnfrs-pd-lf" - left margin to the frame;</li>
+    <li>"--glnfrs-pd-rg" - right indent to frame;</li>
+    <li>"--glnfrs-pd-tp" - top indent to frame;</li>
+    <li>"--glnfrs-pd-bt" - bottom indent to frame;</li>
+  </ul>
+  <span>Example:</span>
+  <code><pre source="html">
+[glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
+[glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
+[glnFrameSizeLabelPd]="currConfig?.labelPd"
+[glnFrameSizePrepare]="glnFrameExteriorInput"</pre></code>
+  <p>
+    There is an input parameter with interface GlnFrameSizePrepare.
+    Through this input parameter, the inverse functions are called to obtain the required values.
+    The "line height" value is defined, which is passed when calling inverse functions.
+  </p>
+  <p>
+    The inverse functions are called through the GlnFrameSizePrepare interface:
+  </p>
+  <p>
+    <i>- determining the values of the frame radii;</i>
+  </p>
+  <code><pre source="ts">
+getBorderRadius(frameSizeValue: number, lineHeight: number): string | null;</pre></code>
+  <ul>
+    <li>frameSizeValue - element height;</li>
+    <li>lineHeight - line height;</li>
+  </ul>
+  <p>
+    value of css-parameters:
+  </p>
+  <ul>
+    <li>"--glnfrs-br-rd" - frame radius;</li>
+  </ul>
+  <p>
+    <i>- determination of the values of horizontal indents;</i>
+  </p>
+  <code><pre source="ts">
+getPaddingHor(frameSizeValue: number, lineHeight: number): GlnFrameSizePaddingHorRes | null;</pre></code>
+  <ul>
+    <li>frameSizeValue - element height;</li>
+    <li>lineHeight - line height;</li>
+  </ul>
+  <p>
+    value of css-parameters:
+  </p>
+  <ul>
+    <li>"--glnfrs-pd-lf" - left margin to the frame;</li>
+    <li>"--glnfrs-pd-rg" - right indent to frame;</li>
+  </ul>
+
+  <p>
+    <i>- definition of values of vertical indents;</i>
+  </p>
+  <code><pre source="ts">
+getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddingVerRes | null;</pre></code>
+  <ul>
+    <li>frameSizeValue - element height;</li>
+    <li>lineHeight - line height;</li>
+  </ul>
+  <p>
+    value of css-parameters:
+  </p>
+  <ul>
+    <li>"--glnfrs-pd-tp" - top indent to frame;</li>
+    <li>"--glnfrs-pd-bt" - bottom indent to frame;</li>
+  </ul>
+</section>
+
+<hr br-nn>
+
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="gln-input">
+    GlnInput component.
+    <a [href]="urlCmFrame + '#gln-input'">#</a>
+  </h4>
+  <p>
+    This component uses the above elements to implement the input element.
+  </p>
+  <span>File "gln-input.component.html"</span>
+  <code><pre source="html">
+&lt;div #glnFrameExteriorInput="glnFrameExteriorInput"
+  [glnFrameExteriorInput]="exterior || currConfig?.exterior"
+  [glnFrameExteriorInputElementRef]="hostRef"
+  (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()"
+  // parameter value "exterior"
+  // css-parameter: "--glnfre-trn-y"
+  // css-parameter: "--glnfre-trn2-y"
+  // css-parameter: "--glnfre-pd-shr"
+&gt;
+  &lt;gln-frame #glnFrame
+    [label]="label"
+    [exterior]="glnFrameExteriorInput.exterior"
+    [config]="currConfig"
+    [isLabelShrink]="getBoolean(isLabelShrink)"
+    [isNoLabel]="getBoolean(isNoLabel)"
+    [isError]="!!formControl.errors || getBoolean(isError)"
+
+    #glnFrameSize="glnFrameSize"
+    [glnFrameSize]="frameSize || currConfig?.frameSize"
+    [glnFrameSizeElementRef]="hostRef"
+    [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
+    [glnFrameSizeLabelPd]="currConfig?.labelPd"
+    [glnFrameSizePrepare]="glnFrameExteriorInput"
+    // parameter value "frameSizeValue";
+    // css-parameter: "--glnfrs-br-rd",
+    // css-parameter: "--glnfrs-pd-lf",
+    // css-parameter: "--glnfrs-pd-rg",
+    // css-parameter: "--glnfrs-pd-tp",
+    // css-parameter: "--glnfrs-pd-bt"
+
+    glnFrameOrnament
+    [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
+    [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
+    // indents for ornaments (images) on the left and right;
+    // alignment of ornaments vertically;
+    // css-parameter: "--glnfro-pd-lf",
+    // css-parameter: "--glnfro-pd-rg"
+  &gt;
+    ...
+  &lt;/gln-frame&gt;
+&lt;/div&gt;</pre></code>
+</section>

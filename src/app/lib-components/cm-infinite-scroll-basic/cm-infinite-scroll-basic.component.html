@@ -1,0 +1,467 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmInfiniteScroll + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnInfiniteScrollModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    A situation often arises when you need to display a vertical list of some elements.
+    Moreover, the number of elements can be significant.
+    In order not to load the server and reduce the display time of this page, the data output is
+    organized page by page
+    (that is, in small portions of 10 - 20 elements).
+    It is not always convenient to display the list page by page, there is an alternative option: to
+    display the list
+    with "infinite scrolling".
+    Its idea is to initially display the first portion of the list, and when the user scrolls to the
+    last item, load the
+    next portion of the list.
+  </p>
+  <p>
+    For example, let's build a simple list of participants with 5 elements.
+    To implement scrolling, you need a container element and its contents (in our example, a list of
+    participants).
+    The container has a fixed height, which is less than the height of all elements inside the
+    container.
+    Also the container has a css-style "overflow-y: scroll;".
+    In this case, the scroll element will be displayed for this container.
+  </p>
+</section>
+
+<div class="isb-item-wrap">
+  <div class="isb-items"
+    *ngFor="let item of elements0; let idx=index;
+      let count=count; trackBy: trackByElement">
+    <div class="isb-row">
+      <span class="isb-label">serial number</span>
+      <span class="isb-value">{{ idx+1 }}/{{ count }} </span>
+    </div>
+    <div class="isb-row">
+      <span class="isb-label">participant</span>
+      <span class="isb-value">{{ item.name }} {{ item.surname }}</span>
+    </div>
+    <div class="isb-row">
+      <span class="isb-label">email</span>
+      <span class="isb-value">{{ item.email }}</span>
+    </div>
+    <div class="isb-row">
+      <span class="isb-label">phone</span>
+      <span class="isb-value">{{ item.phone }}</span>
+    </div>
+  </div>
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <pre source="html">
+&lt;div class="isb-item-wrap"&gt;
+  &lt;div class="isb-items"
+    *ngFor="let item of elements0; let idx=index;
+      let count=count; trackBy: trackByElement"&gt;
+    &lt;div class="isb-row"&gt;
+      &lt;span class="isb-label"&gt;serial number&lt;/span&gt;
+      &lt;span class="isb-value"&gt;<b>&#123;</b>&#123; idx+1 &#125;&#125;/<b>&#123;</b>&#123; count &#125;&#125; &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="isb-row"&gt;
+      &lt;span class="isb-label"&gt;participant&lt;/span&gt;
+      &lt;span class="isb-value"&gt;<b>&#123;</b>&#123; item.name &#125;&#125; <b>&#123;</b>&#123; item.surname &#125;&#125;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="isb-row"&gt;
+      &lt;span class="isb-label"&gt;email&lt;/span&gt;
+      &lt;span class="isb-value"&gt;<b>&#123;</b>&#123; item.email &#125;&#125;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="isb-row"&gt;
+      &lt;span class="isb-label"&gt;phone&lt;/span&gt;
+      &lt;span class="isb-value"&gt;<b>&#123;</b>&#123; item.phone &#125;&#125;&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+export interface Element &#123;
+  name: string;
+  surname: string;
+  email: string;
+  phone: string;
+&#125;
+
+const CN_CNT = 5;
+const CN_NAME1 = ['James', 'Mary', 'Robert', 'Patricia', 'John', 
+  'Jennifer', 'Michael', 'Linda', 'William', 'Elizabeth', 'David'];
+const CN_NAME2 = ['Barbara', 'Richard', 'Susan', 'Joseph', 'Jessica', 
+  'Thomas', 'Sarah', 'Charles', 'Karen', 'Christopher', 'Nancy'];
+const CN_NAME3 = ['Daniel', 'Lisa', 'Matthew', 'Betty', 'Anthony',
+  'Margaret', 'Mark', 'Sandra', 'Donald', 'Ashley'];
+const CN_SURNAME1 = ['Smith', 'Johnson', 'Williams', 'Brown',
+  'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez'];
+const CN_SURNAME2 = ['Hernandez', 'Lopez', 'Gonzales', 'Wilson', 
+  'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'];
+const CN_SURNAME3 = ['Perez', 'Thompson', 'White', 'Harris',
+  'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson', 'Walker'];
+
+@Component(&#123;
+  selector: 'app-infinite-scroll-basic',
+  templateUrl: './infinite-scroll-basic.component.html',
+  styleUrls: ['./infinite-scroll-basic.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class InfiniteScrollBasicComponent &#123;
+  public elements0: Element[] = [];
+
+  private names: string[]
+    = [...CN_NAME1, ...CN_NAME2, ...CN_NAME3];
+  private surnames: string[]
+    = [...CN_SURNAME1, ...CN_SURNAME2, ...CN_SURNAME3];
+
+  constructor() &#123;
+    this.elements0 = this.createElementList(CN_CNT);
+  &#125;
+
+  // ** Public API **
+
+  public trackByElement(index: number, item: Element): string &#123;
+    return item?.name + item?.surname;
+  &#125;
+
+  // ** Private API **
+
+  private randomNumber(value: number): number &#123;
+    return Math.floor(Math.random() * value + 1);
+  &#125;
+
+  private createPhone(): string &#123;
+    const part1 = ('000' + this.randomNumber(1000)).slice(-3);
+    const part2 = ('000' + this.randomNumber(1000)).slice(-3);
+    const part3 = ('000' + this.randomNumber(100)).slice(-2);
+    const part4 = ('000' + this.randomNumber(100)).slice(-2);
+    return part1 + '-' + part2 + '-' + part3 + '-' + part4;
+  &#125;
+
+  private createElement(): Element &#123;
+    const cntN = this.names.length;
+    const name = this.names[Math.floor(Math.random() * cntN)];
+    const cntS = this.surnames.length;
+    const surname = this.surnames[Math.floor(Math.random() * cntS)];
+    const email = name + '.' + surname + '@gmail.com';
+    const phone = this.createPhone();
+    return &#123; name, surname, email, phone &#125;;
+  &#125;
+
+  private createElementList(cnt: number): Element[] &#123;
+    const result: Element[] = [];
+    while (result.length &lt; cnt) &#123;
+      result.push(this.createElement());
+    &#125;
+    return result;
+  &#125;
+&#125;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <pre source="css">
+.isb-item-wrap &#123;
+  outline: 1px solid blue;
+  height: 400px;
+  overflow-y: scroll;
+&#125;
+.isb-items &#123;
+  outline: 1px dashed green;
+  padding: 15px 0;
+&#125;
+.isb-row &#123;
+  display: flex;
+  padding: 3px 10px;
+&#125;
+.isb-label &#123;
+  flex-basis: 120px;
+&#125;
+.isb-value &#123;
+  flex-grow: 1;
+&#125;</pre>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<section mr-vr>
+  <p>
+    Now let's add the "infinite-scroll" implementation to the previous example.
+    To do this, add the "gln-infinite-scroll" component inside the container ("isb-item-wrap").
+    And move all the contents of the container into the gln-infinite-scroll component.
+  </p>
+  <p>
+    The "gln-infinite-scroll" component adds an empty element at the end of its context:
+  </p>
+  <pre>
+&lt;div #anchor&gt;&lt;/div&gt;</pre>
+  <p>
+    When the "gln-infinite-scroll" component is initialized, an observer is created:
+  </p>
+  <pre>
+this.observer = new IntersectionObserver(([entry]) => &#123;
+  if (entry.isIntersecting) &#123;
+    this.scrolled.emit();
+  &#125;
+&#125;, options);
+
+this.observer.observe(this.anchor.nativeElement);</pre>
+  <p>
+    And this observer is assigned the native #anchor element.
+    As a result, when the native #anchor element becomes visible, the observer is triggered and
+    the "scrolled" event is
+    raised.
+    The parent component subscribe to this event.
+    And when this event occurs, a request for a new data packet is executed.
+  </p>
+  <p>
+    The "gln-infinite-scroll" component expects it or its parent to have a css: overflow-y: scroll
+    or
+    overflow: auto property.
+    This makes it possible to use Intersection Observer.
+    The
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API"
+      target="_blank">Intersection
+      Observer API
+    </a>
+    provides a way to asynchronously observe changes in the intersection of a target
+    element with an ancestor element or with a top-level document's viewport.
+  </p>
+</section>
+
+<div class="isb-block">
+
+  <gln-infinite-scroll class="isb-item-wrap"
+    (scrolled)="doScroll()">
+
+    <div class="isb-items"
+      *ngFor="let item of elements1; let idx=index; let count=count;
+        trackBy: trackByElement">
+      <div class="isb-row">
+        <span class="isb-label">serial number</span>
+        <span class="isb-value">{{ idx+1 }}/{{ count }} </span>
+      </div>
+      <div class="isb-row">
+        <span class="isb-label">participant</span>
+        <span class="isb-value">{{ item.name }} {{ item.surname }}</span>
+      </div>
+      <div class="isb-row">
+        <span class="isb-label">email</span>
+        <span class="isb-value">{{ item.email }}</span>
+      </div>
+      <div class="isb-row">
+        <span class="isb-label">phone</span>
+        <span class="isb-value">{{ item.phone }}</span>
+      </div>
+    </div>
+
+  </gln-infinite-scroll>
+
+  <div *ngIf="isLoading"
+    class="isb-loading">
+    Loading...
+  </div>
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <pre source="html">
+&lt;div class="isb-block"&gt;
+
+  &lt;gln-infinite-scroll class="isb-item-wrap"
+    (scrolled)="doScroll()"&gt;
+
+    &lt;div class="isb-items"
+      *ngFor="let item of elements1; let idx=index; let count=count;
+        trackBy: trackByElement"&gt;
+      &lt;div class="isb-row"&gt;
+        &lt;span class="isb-label"&gt;serial number&lt;/span&gt;
+        &lt;span class="isb-value"&gt;<b>&#123;</b>&#123; idx+1 &#125;&#125;/<b>&#123;</b>&#123; count &#125;&#125; &lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="isb-row"&gt;
+        &lt;span class="isb-label"&gt;participant&lt;/span&gt;
+        &lt;span class="isb-value"&gt;<b>&#123;</b>&#123; item.name &#125;&#125; <b>&#123;</b>&#123; item.surname &#125;&#125;&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="isb-row"&gt;
+        &lt;span class="isb-label"&gt;email&lt;/span&gt;
+        &lt;span class="isb-value"&gt;<b>&#123;</b>&#123; item.email &#125;&#125;&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="isb-row"&gt;
+        &lt;span class="isb-label"&gt;phone&lt;/span&gt;
+        &lt;span class="isb-value"&gt;<b>&#123;</b>&#123; item.phone &#125;&#125;&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/gln-infinite-scroll&gt;
+
+  &lt;div *ngIf="isLoading"
+    class="isb-loading"&gt;
+    Loading...
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <pre source="ts">
+import &#123;
+  ChangeDetectorRef, Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+export interface Element &#123;
+  name: string;
+  surname: string;
+  email: string;
+  phone: string;
+&#125;
+
+const CN_CNT = 5;
+const CN_NAME1 = ['James', 'Mary', 'Robert', 'Patricia', 'John', 
+  'Jennifer', 'Michael', 'Linda', 'William', 'Elizabeth', 'David'];
+const CN_NAME2 = ['Barbara', 'Richard', 'Susan', 'Joseph', 'Jessica', 
+  'Thomas', 'Sarah', 'Charles', 'Karen', 'Christopher', 'Nancy'];
+const CN_NAME3 = ['Daniel', 'Lisa', 'Matthew', 'Betty', 'Anthony',
+  'Margaret', 'Mark', 'Sandra', 'Donald', 'Ashley'];
+const CN_SURNAME1 = ['Smith', 'Johnson', 'Williams', 'Brown',
+  'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez'];
+const CN_SURNAME2 = ['Hernandez', 'Lopez', 'Gonzales', 'Wilson', 
+  'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'];
+const CN_SURNAME3 = ['Perez', 'Thompson', 'White', 'Harris',
+  'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson', 'Walker'];
+
+@Component(&#123;
+  selector: 'app-infinite-scroll-basic',
+  templateUrl: './infinite-scroll-basic.component.html',
+  styleUrls: ['./infinite-scroll-basic.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class InfiniteScrollComponent &#123;
+  public elements1: Element[] = [];
+  public isLoading = false;
+
+  private names: string[]
+    = [...CN_NAME1, ...CN_NAME2, ...CN_NAME3];
+  private surnames: string[]
+    = [...CN_SURNAME1, ...CN_SURNAME2, ...CN_SURNAME3];
+
+  constructor(private changeDetectorRef: ChangeDetectorRef) &#123;
+    this.elements1 = this.createElementList(CN_CNT);
+  &#125;
+
+  // ** Public API **
+
+  public trackByElement(index: number, item: Element): string &#123;
+    return item?.name + item?.surname;
+  &#125;
+
+  public doScroll(): void &#123;
+    this.isLoading = true;
+    setTimeout(() => &#123;
+      this.elements1.push(...this.createElementList(CN_CNT));
+      this.isLoading = false;
+      this.changeDetectorRef.markForCheck();
+    &#125;, 1000);
+  &#125;
+
+  // ** Private API **
+
+  private randomNumber(value: number): number &#123;
+    return Math.floor(Math.random() * value + 1);
+  &#125;
+
+  private createPhone(): string &#123;
+    const part1 = ('000' + this.randomNumber(1000)).slice(-3);
+    const part2 = ('000' + this.randomNumber(1000)).slice(-3);
+    const part3 = ('000' + this.randomNumber(100)).slice(-2);
+    const part4 = ('000' + this.randomNumber(100)).slice(-2);
+    return part1 + '-' + part2 + '-' + part3 + '-' + part4;
+  &#125;
+
+  private createElement(): Element &#123;
+    const cntN = this.names.length;
+    const name = this.names[Math.floor(Math.random() * cntN)];
+    const cntS = this.surnames.length;
+    const surname = this.surnames[Math.floor(Math.random() * cntS)];
+    const email = name + '.' + surname + '@gmail.com';
+    const phone = this.createPhone();
+    return &#123; name, surname, email, phone &#125;;
+  &#125;
+
+  private createElementList(cnt: number): Element[] &#123;
+    const result: Element[] = [];
+    while (result.length &lt; cnt) &#123;
+      result.push(this.createElement());
+    &#125;
+    return result;
+  &#125;
+&#125;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <pre source="css">
+
+.isb-block &#123;
+  position: relative;
+&#125;
+.isb-item-wrap &#123;
+  outline: 1px solid blue;
+  height: 400px;
+  overflow-y: scroll;
+&#125;
+.isb-items &#123;
+  outline: 1px dashed green;
+  padding: 15px 0;
+&#125;
+.isb-row &#123;
+  display: flex;
+  padding: 3px 10px;
+&#125;
+.isb-label &#123;
+  flex-basis: 120px;
+&#125;
+.isb-value &#123;
+  flex-grow: 1;
+&#125;
+.isb-loading &#123;
+  color: blue;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(253 255 255 / 70%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+&#125;</pre>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<section mr-vr>
+  <p>
+    When the user scrolls to the last item in the list, a request is made to retrieve a new batch
+    of data.
+    After receiving a new batch of data, the total number in the list is increased by 5 items.
+  </p>
+</section>

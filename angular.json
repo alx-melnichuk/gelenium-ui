@@ -8,9 +8,6 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
-        },
-        "@schematics/angular:application": {
-          "strict": true
         }
       },
       "root": "",
@@ -20,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/gelenium-ui",
+            "outputPath": "dist/gelenium-ui-demo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -32,6 +29,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./dist/gelenium-ui/styles.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -47,7 +45,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "9kb"
+                  "maximumError": "4kb"
                 }
               ],
               "fileReplacements": [
@@ -101,6 +99,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./dist/gelenium-ui/styles.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -158,8 +157,10 @@
       }
     }
   },
-  "defaultProject": "gelenium-ui-demo",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "analytics": false,
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

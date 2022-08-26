@@ -1,0 +1,172 @@
+/*# sourceURL=gln-select.component.scss */
+
+@import '../_styles/mx-display-inline-flex.scss';
+@import '../_styles/mx-flex-direction.scss';
+
+gln-select {
+  --glnsl--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnsl--default-s: var(--glncl-default-s, var(--gln-default-s));
+
+  @include mxDisplayInlineFlex();
+  @include mxFlexDirection(column);
+  min-width: var(--glnsl-min-width, var(--glnsl-el-min-width, 50px));
+
+  &[wdFull] {
+    width: 100%;
+    gln-frame>div>[glnfr-elem] {
+      width: 100%;
+    }
+  }
+
+  // Element "Frame".
+  gln-frame {
+    &:focus-visible {
+      outline: none;
+    }
+    &:not([opn]):not([dis]) {
+      cursor: pointer;
+    }
+
+    // Element "gln-frame - glnsl-rhomb".
+    --glnsl--default46: hsl(var(--glnsl--default-h), var(--glnsl--default-s), 46%); // hsl(20, 2%, 46%); rgba(0, 0, 0, 0.54); // +
+    --glnsl--primary46: hsl(var(--glnsl--primary-h), var(--glnsl--primary-s), 46%); //  #1976d2;
+    --glnsl--danger51: hsl(var(--glnsl--danger-h), var(--glnsl--danger-s), 51%); // hsl(0, 65%, 51%); #d32f2f; rgb(211, 47, 47)
+    --glnsl--default74: hsl(var(--glnsl--default-h), var(--glnsl--default-s), 74%); // hsl(20, 2%, 74%); rgba(0, 0, 0, 0.26); // +
+
+    &:not([dis]) {
+      &[hfc] {
+        --glnslr-hover-focus-color: var(--glnsl--primary46);
+      }
+      &:not([err]) { // The state without disabled, error, hover, focused.
+        &:not(:hover):not(:focus-within):not([foc]) {
+          --glnsl-rhomb-cl: var(--glnsl-rhomb-def, var(--glnsl--default46));
+        } // The state without disabled, error, focused and with hover.
+        &:hover:not(:focus-within):not([foc]) {
+          --glnsl-rhomb-cl: var(--glnsl-rhomb-hov, var(--glnslr-hover-focus-color, var(--glnsl--default46)));
+        } // The state without disabled, error and with focused.
+        &:focus-within, &[foc] {
+          --glnsl-rhomb-cl: var(--glnsl-rhomb-foc, var(--glnsl--primary46));
+        }
+      }
+      &[err] {// The state without disabled, hover, focused and error.
+        --glnsl-rhomb-cl: var(--glnsl-rhomb-err, var(--glnsl--danger51));
+      }
+    } // The state with disabled.
+    &[dis] {
+      --glnsl-rhomb-cl: var(--glnsl-rhomb-dis, var(--glnsl--default74));
+    }
+  }
+  
+  gln-frame>div>[glnfr-orn-rg]>[glnsl-rhomb] {
+    align-items: center;
+    color: var(--glnsl-rhomb-cl);
+    display: flex;
+    height: 1em;
+    user-select: none;
+    &::after {
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid;
+      content: ' ';
+      height: 0;
+      margin: 0 0.375em; // 0 6px
+      width: 0;
+    }
+    &:not([noAnm])::after {
+      transition: transform 0.3s linear 0ms;
+    }
+    &[opn]::after {
+      transform: rotate(180deg);
+    }
+  }
+  gln-frame:not([ext-s])>div>[glnfr-orn-rg]>[glnsl-rhomb] {
+    padding-right: 0.375em; // 6px
+  }
+
+  // Element "Frame - glnfr-elem".
+  gln-frame>div>[glnfr-elem] {
+    background: none;
+    border: 0;
+    box-sizing: border-box;
+    color: currentColor;
+    display: block;
+    font: inherit;
+    margin: 0;
+    min-height: var(--glnsl-el-min-height, unset);
+    -webkit-tap-highlight-color: transparent;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  // Element "div glnsl-wrap".
+  &>[glnsl-wrap] {
+    position: relative;
+  }
+
+  // Element "gln-hint-or-error"
+  gln-hint-or-error {
+    padding-left: var(--glnsl-he-pd-lf, var(--glnfrs-pd-lf));
+    padding-right: var(--glnsl-he-pd-rg, var(--glnfrs-pd-rg));
+  }
+}
+
+
+// Element "gln-select-panel-wrap"
+.gln-select-panel-wrap {
+  background-color: var(--glnslpw-def-bg-cl, var(--gln-default-bg-cl));
+  color: var(--glnslpw-def-cl, hsl(var(--gln-default-h), var(--gln-default-s), 17%)); // (!) hsla(0, 0%, 0%, 0.87);
+  flex-basis: 100%;
+  font-size: inherit; // 16px
+  max-width: inherit;
+  
+  &:not([noAnm]) {
+    opacity: 0;
+    &[is-open]:not([is-hide]) {
+      animation: kf-open-panel 200ms cubic-bezier(0.2, 0, 0.2, 1) 0ms;
+      opacity: 1;
+    }
+    &:not([is-open])[is-hide] {
+      animation: kf-close-panel 200ms linear 0ms;
+      opacity: 0;
+    }
+  }
+
+  @keyframes kf-open-panel {
+    0% {
+      opacity: 0;
+      transform: translateY(var(--glnslpo-translate-y, 0px)) scale(0.6);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes kf-close-panel {
+    0% {
+      opacity: 1;
+      transform: none;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(var(--glnslpo-translate-y, 0px)) scale(0.6);
+    }
+  }
+}
+
+// Element "gln-select-panel"
+.gln-select-panel {
+  border-radius: var(--glnslpo-border-radius, unset);
+  box-sizing: border-box;
+  max-height: var(--glnslpo-max-height, 100%);
+  min-height: 16px;
+  min-width: 16px;
+  overflow: auto;
+  outline: 0;
+  -webkit-overflow-scrolling: touch;
+  // To block the display of a shadow, you must specify "--glnslpo-elevation: none;".
+  box-shadow: var(--glnslpo-elevation, rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px);
+}

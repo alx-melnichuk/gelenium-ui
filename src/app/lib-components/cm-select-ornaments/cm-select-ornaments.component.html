@@ -1,0 +1,280 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Ornaments.
+    <a [href]="urlCmSelect + '#Ornaments'">#</a>
+  </h3>
+  <p>
+    For the GlnSelect component, it is possible to display an ornament
+    (picture or text).
+    <br />
+    To display the ornament on the left, you need to add the "gln-orn-lf"
+    attribute to the element inside the "gln-select" content.
+    <br />
+    To display the ornament on the right, you need to add the "gln-orn-rg"
+    attribute to the element inside the "gln-select" content.
+  </p>
+  <span>
+    Example:
+  </span>
+  <code><pre source="html">
+&lt;gln-select formControlName="model01a"
+  label="Enter value"&gt;
+  <i>&lt;div <strong>gln-orn-lf</strong>&gt;&lt;span&gt;left&lt;/span&gt;&lt;/div&gt;</i>
+  <i>&lt;div <strong>gln-orn-rg</strong>&gt;&lt;span&gt;right&lt;/span&gt;&lt;/div&gt;</i>
+  &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+  &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
+  &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
+  &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
+  &lt;gln-option value="kiwi"&gt;Kiwi&lt;/gln-option&gt;
+&lt;/gln-select&gt;</pre></code>
+  <p>
+    Adding a prefix or suffix does not disable legend animation for that element.
+    <br />
+    For blocks: <code><i>&lt;span&gt;left&lt;/span&gt;</i></code> and
+    <code><i>&lt;span&gt;right&lt;/span&gt;</i></code>
+    you need to specify the value of horizontal indents.
+  </p>
+</section>
+
+<hr br-nn />
+
+<section>
+  <p>
+    For example, let's build a display of Unicode characters.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior06a"
+    (change)="exterior06a=$event.value">
+    <mat-button-toggle [checked]="exterior06a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior06a==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior06a==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup06a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem so-elem">
+      <div>
+        <small>
+          <em>Section: "gln-orn-lf" + uncode.</em>
+        </small>
+      </div>
+
+      <gln-select formControlName="model06a"
+        label="Vegetarian salad 01"
+        isMultiple
+        [visibleSize]="8"
+        helperText="Select a value from the list."
+        [exterior]="exterior06a"
+        wdFull>
+        <gln-option *ngFor="let item of salad"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+        <button gln-orn-lf
+          class="so-btn so-uncode"
+          (click)="isUncode06a=!isUncode06a;$event.stopPropagation();">
+          <span>{{ isUncode06a ? '&#9733;': '&#9734;' }}</span>
+        </button>
+      </gln-select>
+
+    </div>
+
+    <div class="app-elem so-elem">
+      <div>
+        <small>
+          <em>Section: "gln-orn-rg" + uncode.</em>
+        </small>
+      </div>
+
+      <gln-select formControlName="model06b"
+        label="Vegetarian salad 02"
+        isMultiple
+        [visibleSize]="8"
+        helperText="Select a value from the list."
+        [exterior]="exterior06a"
+        wdFull>
+        <gln-option *ngFor="let item of salad"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+        <button gln-orn-rg
+          class="so-btn so-uncode"
+          (click)="isUncode06b=!isUncode06b;$event.stopPropagation();">
+          <span>{{ isUncode06b ? '&#9733;': '&#9734;' }}</span>
+        </button>
+      </gln-select>
+
+    </div>
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup06a"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem so-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "gln-orn-lf" + uncode.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+
+      &lt;gln-select formControlName="model06a"
+        label="Vegetarian salad 01"
+        isMultiple
+        [visibleSize]="8"
+        helperText="Select a value from the list."
+        [exterior]="exterior06a"
+        wdFull&gt;
+        &lt;gln-option *ngFor="let item of salad"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+        &lt;button gln-orn-lf
+          class="so-btn so-uncode"
+          (click)="isUncode06a=!isUncode06a;$event.stopPropagation();"&gt;
+          &lt;span&gt;<b>&#123;</b>&#123; isUncode06a ? '&#9733;': '&#9734;' &#125;&#125;&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/gln-select&gt;
+
+    &lt;/div&gt;
+
+    &lt;div class="app-elem so-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Section: "gln-orn-rg" + uncode.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+
+      &lt;gln-select formControlName="model06b"
+        label="Vegetarian salad 02"
+        isMultiple
+        [visibleSize]="8"
+        helperText="Select a value from the list."
+        [exterior]="exterior06a"
+        wdFull&gt;
+        &lt;gln-option *ngFor="let item of salad"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+        &lt;button gln-orn-rg
+          class="so-btn so-uncode"
+          (click)="isUncode06b=!isUncode06b;$event.stopPropagation();"&gt;
+          &lt;span&gt;<b>&#123;</b>&#123; isUncode06b ? '&#9733;': '&#9734;' &#125;&#125;&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/gln-select&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+ ChangeDetectionStrategy, Component, Input, ViewEncapsulation
+ &#125; from '@angular/core';
+import &#123;
+ FormControl, FormGroup
+ &#125; from '@angular/forms';
+import &#123;
+ GlnFrameConfig, OrnamAlign
+ &#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SelectComponent &#123;
+
+  public exterior06a = 'outlined';
+
+  public salad = [
+    'lettuce (lettuce)',
+    'leaf parsley',
+    'mustard leaf',
+    'swans',
+    'sorrel',
+    'spinach',
+    'purslane',
+    'chard (leaf beet)',
+    'vegetable fennel',
+    'arugula',
+    'cucumber grass',
+    'nettles',
+  ];
+  public isUncode06a = false;
+  public isUncode06b = false;
+  public control06a = &#123;
+    model06a: new FormControl([], []),
+    model06b: new FormControl([], []),
+  &#125;;
+  public formGroup06a: FormGroup = new FormGroup(this.control06a);
+
+  public capitalizeFirstLetter(value: string): string &#123;
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.so-elem &#123;
+  width: 200px;
+  min-width: unset;
+&#125;
+.io-pd-hor &#123;
+  padding-left: 8px;
+  padding-right: 8px;
+&#125;
+.so-btn &#123;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 50%;
+  background-color: transparent;
+&#125;
+.so-btn:hover &#123;
+  background-color: hsla(0, 6%, 16%, 15%);
+&#125;
+.so-uncode &#123;
+  font-size: 27px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

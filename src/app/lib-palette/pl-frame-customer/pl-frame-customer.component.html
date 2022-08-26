@@ -1,0 +1,310 @@
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Customer.
+    <a [href]="urlPlFrame + '#Customer'">#</a>
+  </h4>
+  <p>
+    This library provides base colors for displaying components in various
+    states: mouseover, focus, error, and disabled.
+  </p>
+  <span>These colors are fixed in CSS variables:</span>
+  <ul>
+    <li>"default-bg" default background color;</li>
+    <li>"default" default text color;</li>
+    <li>"primary" color when receiving focus;</li>
+    <li>"danger" color in error state;</li>
+    <li>"success" color in the state of success;</li>
+    <li>"info" color for displaying an information message;</li>
+    <li>"warning" color for displaying a warning message;</li>
+  </ul>
+  <p>
+    To display the GlnFrame component, use: default, primary, danger.
+    Using the GlnColor directive, we can override the value of these
+    CSS variables for this component.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: &nbsp;</span>
+  <mat-button-toggle-group value="exterior01a"
+    (change)="exterior01a=$event.value">
+    <mat-button-toggle [checked]="exterior01a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior01a==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior01a==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<form [formGroup]="formGroup01a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group fc-other-palette">
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>State: empty.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01a"
+        label="Enter value"
+        helperText="Enter a value for the parameter."
+        [exterior]="exterior01a"
+        [glnColor]="{ default: 'other-default', primary: 'other-primary', danger: 'other-danger' }"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Attributes: isRequired.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01b"
+        isRequired
+        [label]="!control01a.model01b.value
+          ? 'Requires a value':'Parameter value'"
+        [helperText]="control01a.model01b.value
+          ? 'The field is filled.'
+          : 'The field is not filled.'"
+        [exterior]="exterior01a"
+        [glnColor]="{ default: 'other-default'
+          , primary: 'other-primary', danger: 'other-danger' }"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Color: primary or success.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01c"
+        [label]="!control01a.model01c.value
+          ? 'Enter a parameter':'Parameter specified'"
+        [helperText]="control01a.model01c.value
+          ? 'The parameter was specified. (success)'
+          : 'The parameter was not specified. (primary)'"
+        [glnColor]="control01a.model01c.value
+          ? { primary: 'success' } : {}"
+        [exterior]="exterior01a"
+        [glnColor]="{ default: 'other-default'
+          , primary: (control01a.model01c.value
+            ? 'other-success' : 'other-primary')
+          , danger: 'other-danger' }"
+        wdFull>
+      </gln-input>
+    </div>
+
+    <div class="app-elem ip-elem">
+      <div>
+        <small>
+          <em>Attribute: isDisabled.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior01a"
+        [glnColor]="{ default: 'other-default'
+          , primary: 'other-primary', danger: 'other-danger' }"
+        wdFull>
+      </gln-input>
+    </div>
+
+  </div>
+
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup01a"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group fc-other-palette"&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;State: empty.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01a"
+        label="Enter value"
+        helperText="Enter a value for the parameter."
+        [exterior]="exterior01a"
+        [glnColor]="&#123; default: 'other-default'
+          , primary: 'other-primary', danger: 'other-danger' &#125;"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: isRequired.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01b"
+        isRequired
+        [label]="!control01a.model01b.value
+          ? 'Requires a value':'Parameter value'"
+        [helperText]="control01a.model01b.value
+          ? 'The field is filled.'
+          : 'The field is not filled.'"
+        [exterior]="exterior01a"
+        [glnColor]="&#123; default: 'other-default'
+          , primary: 'other-primary', danger: 'other-danger' &#125;"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Color: primary or success.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01c"
+        [label]="!control01a.model01c.value
+          ? 'Enter a parameter':'Parameter specified'"
+        [helperText]="control01a.model01c.value
+          ? 'The parameter was specified. (success)'
+          : 'The parameter was not specified. (primary)'"
+        [glnColor]="control01a.model01c.value
+          ? &#123; primary: 'success' &#125; : &#123;&#125;"
+        [exterior]="exterior01a"
+        [glnColor]="&#123; default: 'other-default'
+          , primary: (control01a.model01c.value
+            ? 'other-success' : 'other-primary')
+          , danger: 'other-danger' &#125;"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem ip-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01d"
+        label="Disabled"
+        isDisabled
+        helperText="The parameter is disabled."
+        [exterior]="exterior01a"
+        [glnColor]="&#123; default: 'other-default'
+          , primary: 'other-primary', danger: 'other-danger' &#125;"
+        wdFull&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-frame',
+  templateUrl: './frame.component.html',
+  styleUrls: ['./frame.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class FrameComponent &#123;
+  public exterior01a = 'outlined';
+  public control01a = &#123;
+    model01a: new FormControl(null, []),
+    model01b: new FormControl(null, []),
+    model01c: new FormControl('Hello World', []),
+    model01d: new FormControl('Hello World', []),
+  &#125;;
+  public formGroup01a: FormGroup = new FormGroup(this.control01a);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.ip-elem &#123;
+  width: 29ch;
+&#125;
+
+.fc-other-palette &#123;
+
+// "default" color;
+--gln-other-default-h: 231;
+--gln-other-default-s: 23%;
+--gln-other-default-l: 50%;
+--gln-other-default-cl:
+  hsl(var(--gln-other-default-h)
+    , var(--gln-other-default-s)
+    , var(--gln-other-default-l)
+  );
+
+// "primary" color;
+--gln-other-primary-h: 186;
+--gln-other-primary-s: 51%;
+--gln-other-primary-l: 50%;
+--gln-other-primary-cl:
+  hsl(var(--gln-other-primary-h)
+    , var(--gln-other-primary-s)
+    , var(--gln-other-primary-l)
+  );
+
+// "danger" color;
+--gln-other-danger-h: 330;
+--gln-other-danger-s: 70%;
+--gln-other-danger-l: 50%;
+--gln-other-danger-cl:
+  hsl(var(--gln-other-danger-h)
+    , var(--gln-other-danger-s)
+    , var(--gln-other-danger-l)
+  );
+
+// "success" color;
+--gln-other-success-h: 290;
+--gln-other-success-s: 70%;
+--gln-other-success-l: 50%;
+--gln-other-success-cl:
+  hsl(var(--gln-other-success-h)
+    , var(--gln-other-success-s)
+    , var(--gln-other-success-l)
+  );
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

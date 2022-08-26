@@ -1,0 +1,331 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlDrRegexRemove + '#Basic'">#</a>
+  </h3>
+  <p>
+    When changing the value, the GlnRegexRemove directive deletes the data that matches the
+    specified regular expression.
+    The regular expression must contain those characters that should not be present in the resulting
+    string.
+    In other words, if for a character the regex check returned true, then this character is not
+    included in the resulting string.
+    This allows the required business logic to be implemented without displaying an error.
+  </p>
+</section>
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="allow-digits-only">
+    1. Allow: digits only.
+    <a [href]="urlDrRegexRemove + '#allow-digits-only'">#</a>
+  </h4>
+  <p>
+    For example, you want to allow only numbers to be entered.<br />
+    To do this, we will use the following regular expression:
+    <code>/[^\d]/gm</code><br />
+    For this expression, all non-numeric values will be removed.
+  </p>
+</section>
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="allow-letters-only">
+    2. Allow: letters only.
+    <a [href]="urlDrRegexRemove + '#allow-letters-only'">#</a>
+  </h4>
+  <p>
+    For example, you want to allow only letters to be entered.<br />
+    To do this, we will use the following regular expression:
+    <code>/[^A-Za-z]/gm</code><br />
+    For this expression, all non-letter values will be removed.
+  </p>
+</section>
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="allow-letters-digits">
+    3. Allow: letters, digits and space.
+    <a [href]="urlDrRegexRemove + '#allow-letters-digits'">#</a>
+  </h4>
+  <p>
+    For example, you want to allow only letters, digits and space to be entered.<br />
+    To do this, we will use the following regular expression:<br />
+    <code>/[^\ \dA-Za-z]/gm</code><br />
+    All other values will be removed for this expression.
+  </p>
+</section>
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="allow-single-spaces-only">
+    4. Allow: Single spaces only.
+    <a [href]="urlDrRegexRemove + '#allow-single-spaces-only'">#</a>
+  </h4>
+
+  <p>
+    For example, suppose you want to prevent a second consecutive space from being entered.
+    And also prohibit leading spaces.
+    For this we will use the following regular expression:<br />
+    <code>/(^[ ]+)|((?<=[ ])[ ]+)/g</code><br />
+  </p>
+  <p>
+    The expression <code>(?&lt;=...)</code> is retrospective and means that it precedes it.
+  </p>
+  <p>
+    For this expression, the following will be removed:
+  </p>
+  <ul>
+    <li>leading spaces;</li>
+    <li>all the second consecutive spaces;</li>
+  </ul>
+  <p>
+    We cannot remove trailing spaces with a regular pattern, since the user will not be able to
+    enter a new word.
+    Trailing spaces can be removed using the "change" event.<br />
+    <code>(change)="control01.model01d.setValue(control01.model01d.value?.trim())"</code>
+  </p>
+</section>
+
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior01"
+    (change)="exterior01=$event.value">
+    <mat-button-toggle [checked]="exterior01==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior01==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior01==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>1. Digits only. Regex="/[^\d]/gm"</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01a"
+        wdFull
+        [label]="!control01.model01a.value
+          ?'Enter a digits':'A digits'"
+        glnRegexRemove="/[^\d]/gm"
+        [helperText]="!control01.model01a.errors
+        ?(!control01.model01a.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>2. Letters only. Regex="/[^A-Za-z]/gm"</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01b"
+        wdFull
+        [label]="!control01.model01b.value
+          ?'Enter a letters':'A letters'"
+        glnRegexRemove="/[^A-Za-z]/gm"
+        [helperText]="!control01.model01b.errors
+        ?(!control01.model01b.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>3. Regex="/[^\ \dA-Za-z]/gm"</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01c"
+        wdFull
+        [label]="!control01.model01c.value
+          ?'Enter a letters, digits, space'
+          :'A letters, digits, space'"
+        glnRegexRemove="/[^\ \dA-Za-z]/gm"
+        [helperText]="!control01.model01c.errors
+        ?(!control01.model01c.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>4. Single spaces only.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model01d"
+        wdFull
+        [label]="!control01.model01d.value
+          ?'Enter a surname and name':'Surname and name'"
+        glnRegexRemove="/(^[ ]+)|((?<=[ ])[ ]+)/g"
+        [helperText]="!control01.model01d.errors
+        ?(!control01.model01d.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        (change)="control01.model01d.setValue(
+          control01.model01d.value!.trim())"
+        [exterior]="exterior01">
+      </gln-input>
+    </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <pre source="html">
+&lt;form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;1. Digits only. Regex="/[^\d]/gm"&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01a"
+        wdFull
+        [label]="!control01.model01a.value
+          ?'Enter a digits':'A digits'"
+        glnRegexRemove="/[^\d]/gm"
+        [helperText]="!control01.model01a.errors
+        ?(!control01.model01a.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;2. Letters only. Regex="/[^A-Za-z]/gm"&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01b"
+        wdFull
+        [label]="!control01.model01b.value
+          ?'Enter a letters':'A letters'"
+        glnRegexRemove="/[^A-Za-z]/gm"
+        [helperText]="!control01.model01b.errors
+        ?(!control01.model01b.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;3. Regex="/[^\ \dA-Za-z]/gm"&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01c"
+        wdFull
+        [label]="!control01.model01c.value
+          ?'Enter a letters, digits, space'
+          :'A letters, digits, space'"
+        glnRegexRemove="/[^\ \dA-Za-z]/gm"
+        [helperText]="!control01.model01c.errors
+        ?(!control01.model01c.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        [exterior]="exterior01"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;4. Single spaces only.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01d"
+        wdFull
+        [label]="!control01.model01d.value
+          ?'Enter a surname and name':'Surname and name'"
+        glnRegexRemove="/(^[ ]+)|((?&lt;=[ ])[ ]+)/g"
+        [helperText]="!control01.model01d.errors
+        ?(!control01.model01d.value
+          ? 'Enter value.':'The value is correct.')
+        :'The value is not correct.'"
+        (change)="control01.model01d.setValue(
+          control01.model01d.value?.trim())"
+        [exterior]="exterior01"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup, Validators
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-regex',
+  templateUrl: './regex.component.html',
+  styleUrls: ['./regex.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RegexComponent &#123;
+  public control01 = &#123;
+    model01a: new FormControl('123', []),
+    model01b: new FormControl('Alex', []),
+    model01c: new FormControl('New level 12', []),
+    model01d: new FormControl('Sarah Chauncey Woolsey', []),
+  &#125;;
+  public formGroup01: FormGroup = new FormGroup(this.control01);
+  public exterior01 = 'outlined';
+&#125;</pre>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

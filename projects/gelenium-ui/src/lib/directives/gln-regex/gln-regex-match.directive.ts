@@ -36,8 +36,8 @@ export class GlnRegexMatchDirective implements OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.glnRegexMatch) {
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['glnRegexMatch']) {
       const regexStr = GlnRegexMatchUtil.create(this.glnRegexMatch);
       this.regex = RegexUtil.create(regexStr);
     }

@@ -1,0 +1,735 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Button Size
+    <a [href]="urlCmButton + '#Size'">#</a>
+  </h3>
+  <p>
+    The "size" property determines the size of the element (its height).
+  </p>
+  <p>
+    It takes the following values:
+  </p>
+  <ul>
+    <li>"short" - sets the height to 38px;</li>
+    <li>"small" - sets the height to 44px (default);</li>
+    <li>"middle" - sets the height to 50px;</li>
+    <li>"wide" - sets the height to 56px;</li>
+    <li>"large" - sets the height to 62px;</li>
+    <li>"huge" - sets the height to 68px;</li>
+  </ul>
+  <p>
+    The font size is determined from the parent container.
+    The size of the font can be defined with the css-style for the "gln-button" tag.
+    In the example, this is implemented with the styles "bs-large" and "bs-huge".
+    We can change the font size at the gln-input tag level,
+    but the height of the element will not change.
+  </p>
+  <p>
+    The height of the element remains the same even when the font size is changed
+    (from font-size: 10px to font-size: 26px).
+  </p>
+  <p>
+    It is possible to specify the height of an element. To do this,
+    in the "config.frameSizeValue" property, we define the required height in pixels.
+    In this case, "frameSize" and "config.frameSize" should not be used.
+  </p>
+</section>
+
+<section mr-vr
+  id="size1">
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior03a"
+    (change)="exterior03a=$event.value">
+    <mat-button-toggle [checked]="exterior03a==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Short" - 38px; font: 16px; (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03a"
+      frameSize="short">
+      <span>{{ getLabel(exterior03a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Short" - 38px; font: 16px; (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03a"
+      frameSize="short">
+      <a [routerLink]="[routerLink]"
+        fragment="size1">
+        <span>{{ getLabel(exterior03a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Small" - 44px; font: 16px; (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03a"
+      frameSize="small">
+      <span>{{ getLabel(exterior03a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Small" - 44px; font: 16px; (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03a"
+      frameSize="small">
+      <a [routerLink]="[routerLink]"
+        fragment="size1">
+        <span>{{ getLabel(exterior03a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Middle" - 50px; font: 16px; (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03a"
+      frameSize="middle">
+      <span>{{ getLabel(exterior03a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Middle" - 50px; font: 16px; (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03a"
+      frameSize="middle">
+      <a [routerLink]="[routerLink]"
+        fragment="size1">
+        <span>{{ getLabel(exterior03a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Wide" - 56px; font: 16px; (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03a"
+      frameSize="wide">
+      <span>{{ getLabel(exterior03a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Wide" - 56px; font: 16px; (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03a"
+      frameSize="wide">
+      <a [routerLink]="[routerLink]"
+        fragment="size1">
+        <span>{{ getLabel(exterior03a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Large" - 62px; font: 18px; (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03a"
+      class="bs-large"
+      frameSize="large">
+      <span>{{ getLabel(exterior03a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Large" - 62px; font: 18px; (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03a"
+      class="bs-large"
+      frameSize="large">
+      <a [routerLink]="[routerLink]"
+        fragment="size1">
+        <span>{{ getLabel(exterior03a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Huge" - 68px; font: 20px; (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03a"
+      class="bs-huge"
+      frameSize="huge">
+      <span>{{ getLabel(exterior03a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Huge" - 68px; font: 20px; (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03a"
+      class="bs-huge"
+      frameSize="huge">
+      <a [routerLink]="[routerLink]"
+        fragment="size1">
+        <span>{{ getLabel(exterior03a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Short" - 38px; font: 16px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03a"
+      frameSize="short"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Short" - 38px; font: 16px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03a"
+      frameSize="short"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="size1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Small" - 44px; font: 16px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03a"
+      frameSize="small"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Small" - 44px; font: 16px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03a"
+      frameSize="small"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="size1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Middle" - 50px; font: 16px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03a"
+      frameSize="middle"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Middle" - 50px; font: 16px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03a"
+      frameSize="middle"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="size1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Wide" - 56px; font: 16px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03a"
+      frameSize="wide"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Wide" - 56px; font: 16px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03a"
+      frameSize="wide"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="size1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Large" - 62px; font: 18px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03a"
+      class="bs-large"
+      frameSize="large"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Large" - 62px; font: 18px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03a"
+      class="bs-large"
+      frameSize="large"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="size1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Huge" - 68px; font: 20px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03a"
+      class="bs-huge"
+      frameSize="huge"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Huge" - 68px; font: 20px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03a"
+      class="bs-huge"
+      frameSize="huge"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="size1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior03a = 'outlined';
+  public routerLink = '/components/button1';
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.bs-huge &#123;
+  font-size: 20px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<h4 class="app-hover-link"
+  id="size-config">
+  Configuration for custom height (57px).
+  <a [href]="urlCmButton + '#size-config'">#</a>
+</h4>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior03b"
+    (change)="exterior03b=$event.value">
+    <mat-button-toggle [checked]="exterior03b==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03b==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03b==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>height: 57px; font: 16px; (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03b"
+      [config]="config03">
+      <span>{{ getLabel(exterior03b) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>height: 57px; font: 16px; (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03b"
+      [config]="config03">
+      <a [routerLink]="[routerLink]"
+        fragment="size-config">
+        <span>{{ getLabel(exterior03b) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>height: 57px; font: 18px; (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03b"
+      class="bs-large"
+      [config]="config03">
+      <span>{{ getLabel(exterior03b) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>height: 57px; font: 18px; (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03b"
+      class="bs-large"
+      [config]="config03">
+      <a [routerLink]="[routerLink]"
+        fragment="size-config">
+        <span>{{ getLabel(exterior03b) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>height: 57px; font: 20px; (Button)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03b"
+      class="bs-huge"
+      [config]="config03">
+      <span>{{ getLabel(exterior03b) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>height: 57px; font: 20px; (Link)</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior03b"
+      class="bs-huge"
+      [config]="config03">
+      <a [routerLink]="[routerLink]"
+        fragment="size-config">
+        <span>{{ getLabel(exterior03b) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;height: 57px; font: 16px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03b"
+      [config]="config03"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03b) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;height: 57px; font: 16px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03b"
+      [config]="config03"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="size-config"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03b) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;height: 57px; font: 18px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03b"
+      class="bs-large"
+      [config]="config03"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03b) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;height: 57px; font: 18px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03b"
+      class="bs-large"
+      [config]="config03"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="size-config"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03b) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;height: 57px; font: 20px; (Button)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03b"
+      class="bs-huge"
+      [config]="config03"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03b) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;height: 57px; font: 20px; (Link)&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior03b"
+      class="bs-huge"
+      [config]="config03"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="size-config"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03b) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior03b = 'outlined';
+  public routerLink = '/components/button1';
+  public fragment03i = 'size-link03i';
+  // GlnButtonConfig
+  public config03 = &#123;
+    frameSizeValue: 57,
+  &#125;;
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.bs-large &#123;
+  font-size: 18px;
+&#125;
+.bs-huge &#123;
+  font-size: 20px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+<hr br-nn />

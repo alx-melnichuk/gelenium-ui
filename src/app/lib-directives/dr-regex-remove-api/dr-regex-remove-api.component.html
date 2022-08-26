@@ -1,0 +1,47 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    API: GlnRegexRemove.
+    <a [href]="urlDrRegexRemove + '#Api'">#</a>
+  </h3>
+  <p>
+    Selector:
+    <span fw500>[glnRegexRemove]</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>glnRegexRemove</span>
+  </p>
+  <p>
+    When changing the value, the directive deletes the data that matches the specified regular
+    expression.
+  </p>
+</section>
+
+<section mr-vr>
+  <h4 class="app-hover-link"
+    id="properties">
+    Properties.
+    <a [href]="urlDrRegexRemove + '#properties'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <td>
+      <code>@Input()</code>
+      <code>glnRegexRemove: string | null;</code>
+    </td>
+    <td>
+      <span>Regular expression for entering numbers only.</span>
+      <ul>
+        <li><code>glnRegexRemove="/[^\d]/gm"</code></li>
+        <li><code>[glnRegexRemove]="'/[^\\d]/gm'"</code></li>
+      </ul>
+    </td>
+  </tr>
+</table>

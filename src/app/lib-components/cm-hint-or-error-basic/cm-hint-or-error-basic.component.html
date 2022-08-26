@@ -1,0 +1,200 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmHintOrError + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnHintOrErrorModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    The GlnHintOrErrorComponent component is a simple utility component.
+    Its main tasks are:
+  </p>
+  <ul>
+    <li>display hint text; (color: var(--glnhe-def-cl));</li>
+    <li>display error text (color: var(--glnhe-err-cl));</li>
+    <li>
+      display hint text when the input element has received focus
+      (color: var(--glnhe-foc-cl));
+    </li>
+    <li>
+      display error when the input element has received focus
+      (color: var(--glnhe-foc-err-cl));
+    </li>
+    <li>display hint on disabled (color: var(--glnhe-dis-cl));</li>
+  </ul>
+  <p>
+    All css variables are global css variables from the GlnFrame component.
+    This component is used in GlnInputComponent and GlnTextareaComponent.
+    <br />
+    Here is an example of usage:
+  </p>
+  <code>
+    <pre>
+  &lt;gln-hint-or-error *ngIf="!!helperText"
+    [text]="helperText"
+    [isError]="!!formControl.errors || isError2"
+    [isFocused]="isFocused"
+    [isDisabled]="isDisabled2"&gt;
+  &lt;/gln-hint-or-error&gt;
+    </pre>
+  </code>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabled01=changeIsDisabled(!isDisabled01)" />
+    Is disabled
+  </label>
+</section>
+
+<form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <input class="heb-input"
+        type="text"
+        formControlName="model01a"
+        required
+        minlength="4"
+        (focus)="isFocusInput01a=true"
+        (blur)="isFocusInput01a=false" />
+      <gln-hint-or-error
+        [text]="controls01.model01a.invalid ? 'The value is not correct.' : 'The value is correct.'"
+        [isError]="controls01.model01a.invalid"
+        [isFocused]="isFocusInput01a"
+        [isDisabled]="controls01.model01a.disabled">
+      </gln-hint-or-error>
+    </div>
+
+    <div class="app-elem">
+      <input class="heb-input"
+        type="text"
+        formControlName="model01b"
+        required
+        (focus)="isFocusInput01b=true"
+        (blur)="isFocusInput01b=false" />
+      <gln-hint-or-error
+        [text]="controls01.model01b.invalid ? 'The value is not correct.' : 'The value is correct.'"
+        [isError]="controls01.model01b.invalid"
+        [isFocused]="isFocusInput01b"
+        [isDisabled]="controls01.model01b.disabled">
+      </gln-hint-or-error>
+    </div>
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;input class="heb-input"
+        type="text"
+        formControlName="model01a"
+        required
+        minlength="4"
+        (focus)="isFocusInput01a=true"
+        (blur)="isFocusInput01a=false" /&gt;
+      &lt;gln-hint-or-error
+        [text]="controls01.model01a.invalid
+          ? 'The value is not correct.' : 'The value is correct.'"
+        [isError]="controls01.model01a.invalid"
+        [isFocused]="isFocusInput01a"
+        [isDisabled]="controls01.model01a.disabled"&gt;
+      &lt;/gln-hint-or-error&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;input class="heb-input"
+        type="text"
+        formControlName="model01b"
+        required
+        (focus)="isFocusInput01b=true"
+        (blur)="isFocusInput01b=false" /&gt;
+      &lt;gln-hint-or-error
+        [text]="controls01.model01b.invalid
+          ? 'The value is not correct.' : 'The value is correct.'"
+        [isError]="controls01.model01b.invalid"
+        [isFocused]="isFocusInput01b"
+        [isDisabled]="controls01.model01b.disabled"&gt;
+      &lt;/gln-hint-or-error&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-textarea',
+  templateUrl: './textarea.component.html',
+  styleUrls: ['./textarea.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class TextareaComponent &#123;
+  public controls01 = &#123;
+    model01a: new FormControl('is', []),
+    model01b: new FormControl('demo', []),
+  &#125;;
+  public formGroup01: FormGroup = new FormGroup(this.controls01);
+  public isDisabled01 = false;
+  public isFocusInput01a = false;
+  public isFocusInput01b = false;
+
+  public changeIsDisabled(isDisabled01: boolean): boolean): void &#123;
+    if (isDisabled01) &#123;
+      this.formGroup01.disable();
+    &#125; else &#123;
+      this.formGroup01.enable();
+    &#125;
+    return isDisabled01;
+  &#125;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+input.heb-input.ng-invalid &#123;
+  border: red solid 2px;
+  outline-color: red;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

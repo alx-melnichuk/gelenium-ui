@@ -1,28 +1,36 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AutoFocuseComponent } from '../lib-directives/components/auto-focuse/auto-focuse.component';
-import { RegexCheckComponent } from '../lib-directives/components/regex-check/regex-check.component';
-import { RegexMatchComponent } from '../lib-directives/components/regex-match/regex-match.component';
-import { RegexRemoveComponent } from '../lib-directives/components/regex-remove/regex-remove.component';
+import { UrlUtil } from '../lib-core/utils/url.util';
 
-import { UrlDirectives } from './constants/url-directives.constants';
 import { LmDirectivesComponent } from './lm-directives.component';
 
-const URL_AUTO_FOCUSE = UrlDirectives.get('URL_AUTO_FOCUSE');
-const URL_REGEX_CHECK = UrlDirectives.get('URL_REGEX_CHECK');
-const URL_REGEX_MATCH = UrlDirectives.get('URL_REGEX_MATCH');
-const URL_REGEX_REMOVE = UrlDirectives.get('URL_REGEX_REMOVE');
+const URL_AUTO_FOCUSE = UrlUtil.get('URL_AUTO_FOCUSE');
+const URL_REGEX_CHECK = UrlUtil.get('URL_REGEX_CHECK');
+const URL_REGEX_MATCH = UrlUtil.get('URL_REGEX_MATCH');
+const URL_REGEX_REMOVE = UrlUtil.get('URL_REGEX_REMOVE');
 
 const routes: Routes = [
   {
     path: '',
     component: LmDirectivesComponent,
     children: [
-      { path: URL_AUTO_FOCUSE, component: AutoFocuseComponent },
-      { path: URL_REGEX_CHECK, component: RegexCheckComponent },
-      { path: URL_REGEX_MATCH, component: RegexMatchComponent },
-      { path: URL_REGEX_REMOVE, component: RegexRemoveComponent },
+      {
+        path: URL_AUTO_FOCUSE,
+        loadChildren: () => import('../lib-directives/dr-auto-focuse/dr-auto-focuse.module').then((m) => m.DrAutoFocuseModule),
+      },
+      {
+        path: URL_REGEX_CHECK,
+        loadChildren: () => import('../lib-directives/dr-regex-check/dr-regex-check.module').then((m) => m.DrRegexCheckModule),
+      },
+      {
+        path: URL_REGEX_MATCH,
+        loadChildren: () => import('../lib-directives/dr-regex-match/dr-regex-match.module').then((m) => m.DrRegexMatchModule),
+      },
+      {
+        path: URL_REGEX_REMOVE,
+        loadChildren: () => import('../lib-directives/dr-regex-remove/dr-regex-remove.module').then((m) => m.DrRegexRemoveModule),
+      },
       { path: '**', redirectTo: URL_REGEX_CHECK },
     ],
   },

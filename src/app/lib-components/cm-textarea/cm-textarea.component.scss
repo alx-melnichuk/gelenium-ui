@@ -1,0 +1,36 @@
+/*# sourceURL=cm-textarea.component.scss */
+
+app-cm-textarea {
+  display: block;
+
+  .ta-section {
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+  .ta-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .ta-item {
+    width: 240px;
+    margin: 10px 10px;
+  }
+  .ta-group {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .ta-elem {
+    min-width: 25ch;
+    margin: 10px 10px;
+  }
+  .ta-elem>div {
+    margin-bottom: 13px;
+  }
+
+  .ta-text {
+    color: #00000096;
+    font-size: 0.84em;
+    font-style: italic;
+  }
+}

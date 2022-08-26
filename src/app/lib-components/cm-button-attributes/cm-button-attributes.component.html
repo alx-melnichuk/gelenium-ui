@@ -1,0 +1,335 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Attributes
+    <a [href]="urlCmButton + '#Attributes'">#</a>
+  </h3>
+  <p>The following attributes are supported:</p>
+  <ul>
+    <li>
+      "isDisabled" - a sign that the field is disabled (isDisabled);
+    </li>
+    <li>
+      "wdFull" is an attribute sets the width to the width of the parent (width: 100%);
+    </li>
+  </ul>
+  <p>The following css-properties are supported:</p>
+  <ul>
+    <li>
+      "--glnbt-uppercase: none;" - the property blocks the translation of the button name to
+      uppercase;
+    </li>
+    <li>
+      "--glnbt-elevation: none;" - the property to remove the height of the button
+      (only for "contained");
+    </li>
+  </ul>
+</section>
+
+<section mr-vr
+  id="attributes1">
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior02a"
+    (change)="exterior02a=$event.value">
+    <mat-button-toggle [checked]="exterior02a==='contained'"
+      value="contained">{{ labelContained }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>css: "--glnbt-uppercase" (Button).</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior02a"
+      style="--glnbt-uppercase: none;">
+      <span>{{ getLabel(exterior02a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>css: "--glnbt-uppercase" (Link).</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior02a"
+      style="--glnbt-uppercase: none;">
+      <a [routerLink]="[routerLink]"
+        fragment="attributes1">
+        <span>{{ getLabel(exterior02a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+<hr br-nn />
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isDisabled (Button).</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior02a"
+      isDisabled>
+      <span>{{ getLabel(exterior02a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isDisabled (Link).</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior02a"
+      isDisabled>
+      <a [routerLink]="[routerLink]"
+        fragment="attributes1">
+        <span>{{ getLabel(exterior02a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+<hr br-nn />
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: wdFull (Button).</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior02a"
+      wdFull>
+      <span>{{ getLabel(exterior02a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: wdFull (Link).</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior02a"
+      wdFull>
+      <a [routerLink]="[routerLink]"
+        fragment="attributes1">
+        <span>{{ getLabel(exterior02a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+<hr br-nn />
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>css: "--glnbt-elevation" (for "contained").</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior02a"
+      style="--glnbt-elevation: none;">
+      <span>{{ getLabel(exterior02a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>css: "--glnbt-elevation" (for "contained").</em>
+      </small>
+    </div>
+    <gln-button [exterior]="exterior02a"
+      style="--glnbt-elevation: none;">
+      <a [routerLink]="[routerLink]"
+        fragment="attributes1">
+        <span>{{ getLabel(exterior02a) }} Link</span>
+      </a>
+    </gln-button>
+  </div>
+</div>
+
+
+<section mr-vr2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;css: "--glnbt-uppercase" (Button).&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior02a"
+      style="--glnbt-uppercase: none;"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;css: "--glnbt-uppercase" (Link).&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior02a"
+      style="--glnbt-uppercase: none;"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="attributes1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;hr br-nn /&gt;
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: isDisabled (Button).&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior02a"
+      isDisabled&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: isDisabled (Link).&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior02a"
+      isDisabled&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="attributes1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;hr br-nn /&gt;
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: wdFull (Button).&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior02a"
+      wdFull&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: wdFull (Link).&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior02a"
+      wdFull&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="attributes1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;hr br-nn /&gt;
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;css: "--glnbt-elevation" (for "contained").&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior02a"
+      style="--glnbt-elevation: none;"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;css: "--glnbt-elevation" (for "contained").&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior02a"
+      style="--glnbt-elevation: none;"&gt;
+      &lt;a [routerLink]="[routerLink]"
+        fragment="attributes1"&gt;
+        &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior02a) &#125;&#125; Link&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public exterior02a = 'outlined';
+  public routerLink = '/components/button';
+  public getLabel(exterior: string): string &#123;
+    return exterior ?
+      exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+<hr br-nn />
