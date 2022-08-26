@@ -12,7 +12,7 @@
     "angular-material",
     "material-design",
     "angular-ui-component",
-    "angular12"
+    "angular14"
   ],
   "license": "MIT",
   "name": "gelenium-ui",
