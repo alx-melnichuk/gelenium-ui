@@ -14,7 +14,7 @@
     "angular-ui-component",
     "angular12"
   ],
-  "license": "GNU v.2",
+  "license": "MIT",
   "name": "gelenium-ui",
   "peerDependencies": {
     "@angular/common": "^14.1.0",
