@@ -1,13 +1,17 @@
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/alx-melnichuk/gelenium-ui/tree/0.2.0) (2022-08-26)
 
-This release adds a new 'Select' component.
-
 ### BREAKING CHANGES
 
 * redesigned display logic for **Frame**
 * added palette with primary colors **styles.css**
-* demo project redesigned
+* the library has been moved to Angular v.14.
+
+### Features
+
+* added a new **Select** component.
+
+The demo project has been reworked.
 
 
 <a name="0.1.0"></a>
