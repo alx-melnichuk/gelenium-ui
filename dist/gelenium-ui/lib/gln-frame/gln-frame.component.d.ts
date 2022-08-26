@@ -1,0 +1,37 @@
+import { ElementRef, InjectionToken, OnChanges, OnInit, Renderer2, SimpleChanges } from '@angular/core';
+import { GlnFrameExterior } from './gln-frame-exterior.interface';
+import { GlnFrameConfig } from './gln-frame-config.interface';
+import * as i0 from "@angular/core";
+export declare const GLN_FRAME_CONFIG: InjectionToken<GlnFrameConfig>;
+export declare class GlnFrameComponent implements OnChanges, OnInit {
+    private rootConfig;
+    hostRef: ElementRef<HTMLElement>;
+    private renderer;
+    config: GlnFrameConfig | null | undefined;
+    exterior: string | null | undefined;
+    isDisabled: boolean | null | undefined;
+    isError: boolean | null | undefined;
+    isFilled: boolean;
+    isLabelShrink: boolean | null | undefined;
+    isNoAnimation: boolean | null | undefined;
+    isNoLabel: boolean | null | undefined;
+    isRequired: boolean | null | undefined;
+    label: string | null | undefined;
+    get isOutlinedExterior(): boolean;
+    get isUnderlineExterior(): boolean;
+    get isStandardExterior(): boolean;
+    currConfig: GlnFrameConfig | null;
+    frameExterior: GlnFrameExterior | null;
+    labelShrink: boolean | null;
+    noAnimation: boolean | null;
+    noLabel: boolean | null;
+    constructor(rootConfig: GlnFrameConfig | null, hostRef: ElementRef<HTMLElement>, renderer: Renderer2);
+    ngOnChanges(changes: SimpleChanges): void;
+    ngOnInit(): void;
+    private settingExterior;
+    private settingLabelShrink;
+    private settingNoAnimation;
+    private settingNoLabel;
+    static ɵfac: i0.ɵɵFactoryDeclaration<GlnFrameComponent, [{ optional: true; }, null, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<GlnFrameComponent, "gln-frame", ["glnFrame"], { "config": "config"; "exterior": "exterior"; "isDisabled": "isDisabled"; "isError": "isError"; "isFilled": "isFilled"; "isLabelShrink": "isLabelShrink"; "isNoAnimation": "isNoAnimation"; "isNoLabel": "isNoLabel"; "isRequired": "isRequired"; "label": "label"; }, {}, never, ["*"], false>;
+}
