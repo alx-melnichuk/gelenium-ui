@@ -1,0 +1,151 @@
+/*# sourceURL=gln-switch.component.scss */
+
+@import '../_styles/mx-align-items.scss';
+@import '../_styles/mx-display-inline-flex.scss';
+@import '../_styles/mx-flex-direction.scss';
+@import '../_styles/mx-justify-content.scss';
+@import '../_styles/mx-text-decoration.scss';
+@import '../_styles/mx-user-select.scss';
+
+gln-switch {
+  @include mxDisplayInlineFlex();
+  box-sizing: border-box;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 0; // !
+  // =v mui.com 
+  width: 58px;
+  height: 38px;
+  padding: 12px;
+  vertical-align: middle;
+  // =^ mui.com 
+  // =v amui
+  /*
+  display: inline-block;
+  height: 24px;
+  max-width: 100%;
+  line-height: 24px;
+  white-space: nowrap;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  */
+  // =^ amui
+
+  input[glnsw-input] {
+    display: none;
+  }
+  // .glnsw-input {
+  //   cursor: inherit;
+  //   position: absolute;
+  //   opacity: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   top: 0;
+  //   left: 0;
+  //   margin: 0;
+  //   padding: 0;
+  //   z-index: 1;
+  // }
+
+  span[glnsw-wrap] {
+    // #outline: 1px dashed orange;
+    // #-webkit-align-items: center;    // #-webkit-box-align: center;    // #-ms-flex-align: center;
+    // #align-items: center;
+    @include mxAlignItems(center);
+    background-color: transparent;
+    border: 0;
+    border-radius: 50%;
+    box-sizing: border-box;
+    // color: inherit;
+    color: #fff;
+    cursor: pointer;
+    @include mxDisplayInlineFlex();
+    -webkit-tap-highlight-color: transparent;
+
+     height: 100%;
+    // #-webkit-box-pack: center;    // #-ms-flex-pack: center;    // #-webkit-justify-content: center;
+    // #justify-content: center;
+    @include mxJustifyContent(center);
+    left: 0;
+    margin: 0;
+    outline: 0;
+    padding: 9px;
+    position: absolute;
+    @include mxTextDecoration(none);
+    top: 0;
+    -webkit-transition: left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,-webkit-transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    @include mxUserSelect(none);
+    vertical-align: middle;
+    z-index: 1;
+  }
+  span[glnsw-wrap]:hover {
+    // background-color: rgba(0, 0, 0, 0.09/*0.04*/);
+    background-color: hsl(0deg 0% 0% / 4%);
+  }
+  span[glnsw-wrap].gln-checked {
+    color: #1976d2;
+    -webkit-transform: translateX(20px);
+    -moz-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+  span[glnsw-wrap].gln-checked:hover {
+    // background-color: rgba(25, 118, 210, 0.04); // #1976d20a hsl(210deg 79% 46% / 4%);
+    background-color: hsl(210deg 79% 46% / 10%);
+  }
+
+  span[glnsw-wrap].gln-checked + span[glnsw-track] {
+    background-color: #1976d2;
+    opacity: 0.5;
+  }
+
+  span[glnsw-thumb] {
+    // outline: 1px dashed blueviolet;
+    background-color: currentColor;
+    border-radius: 50%;
+    box-shadow: 0px 1px 3px 1px rgb(0 0 0 / 15%), 0px 0px 3px 1px rgb(0 0 0 / 15%);
+    height: 19px;
+    width: 19px;
+    // =v mui.com
+    // #box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+    // =^ mui.com
+  }
+
+  span[glnsw-ripple] {
+    border-radius: inherit;
+    inset: 0px;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+  }
+
+  span[glnsw-track] {
+    background-color: hsl(250, 5%, 70%);
+    // #background-color: #000;
+    border-radius: 7px;
+    height: 100%;
+    // #opacity: 0.38;
+    -webkit-transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    @include mxUserSelect(none);
+    width: 100%;
+    z-index: -1;
+  }
+  // == OLD ==
+
+
+  
+  --demo1: #c3c3c3;
+  --demo2: hsl(250, 5%, 65%);
+  --demo2: hsl(250, 5%, 70%);
+  // --gln-default-h: 250;
+  // --gln-default-s: 5%;
+  // --gln-default-l: 20%;
+  // --gln-default-cl: hsl(var(--gln-default-h),var(--gln-default-s),var(--gln-default-l));
+
+}

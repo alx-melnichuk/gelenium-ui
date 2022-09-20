@@ -1,0 +1,33 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmSwitch + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    The GlnSwitch component displays an "on" or "off" state.
+  </p>
+</section>
+
+
+<form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group"
+    style="margin-left: 200px;">
+
+    <div class="app-elem">
+      <gln-switch formControlName="model01a"
+        style="outline: 1px solid green;">
+      </gln-switch>
+      [ {{ formGroup01.controls['model01a'].value ? 't' : 'f'}} ]
+    </div>
+
+  </div>
+</form>
