@@ -10,7 +10,7 @@ import { UrlUtil } from '../../lib-core/utils/url.util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GdStartGettingStartedComponent {
-  public urlGdStart = '/' + UrlUtil.get('URL_GUIDES') + '/' + UrlUtil.get('URL_START');
+  public urlGdStart = '/' + UrlUtil.get('URL_GUIDES') + '/' + UrlUtil.get('URL_GUIDES_START');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

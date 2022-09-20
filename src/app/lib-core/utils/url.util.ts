@@ -11,6 +11,7 @@ export class UrlUtil {
     if (name) {
       if (value) {
         UrlUtil.objMap[name] = value;
+        console.log(`UrlUtil.add(${name}, ${value})`); // #
       } else {
         UrlUtil.remove(name);
       }

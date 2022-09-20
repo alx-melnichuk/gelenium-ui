@@ -10,8 +10,8 @@ import { UrlUtil } from '../../lib-core/utils/url.util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CmInputApiComponent {
-  public urlCmInput = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_INPUT');
-  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
+  public urlCmInput = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_INPUT');
+  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_FRAME');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

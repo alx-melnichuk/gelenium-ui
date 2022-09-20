@@ -10,7 +10,7 @@ import { UrlUtil } from '../../lib-core/utils/url.util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CmHintOrErrorApiComponent {
-  public urlCmHintOrError = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_HINT_OR_ERROR');
+  public urlCmHintOrError = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_HINT_OR_ERROR');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

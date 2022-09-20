@@ -16,8 +16,8 @@ const logLabel = 'ComponentsInput';
 export class CmInputComponent implements AfterViewInit {
   public showNum = '';
 
-  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
-  public urlPlInput = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_INPUT');
+  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_FRAME');
+  public urlPlInput = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_INPUT');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

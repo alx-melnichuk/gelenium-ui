@@ -35,7 +35,7 @@ export class PlFrameCustomerComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlPlFrame = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_FRAME');
+  public urlPlFrame = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_FRAME');
 
   public exterior01a = 'outlined';
   public control01a = {

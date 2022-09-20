@@ -37,7 +37,7 @@ export class PlTextareaBootstrapComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlPlTextarea = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_TEXTAREA');
+  public urlPlTextarea = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_TEXTAREA');
 
   public control02a = {
     model02a: new FormControl(null, []),

@@ -35,7 +35,7 @@ export class CmInputValidationComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmInput = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_INPUT');
+  public urlCmInput = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_INPUT');
 
   public minLength03b = 3;
   public controls03 = {

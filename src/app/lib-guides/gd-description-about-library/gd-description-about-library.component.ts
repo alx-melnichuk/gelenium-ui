@@ -10,7 +10,7 @@ import { UrlUtil } from '../../lib-core/utils/url.util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GdDescriptionAboutLibraryComponent {
-  public urlGdDescription = '/' + UrlUtil.get('URL_GUIDES') + '/' + UrlUtil.get('URL_DESCRIPTION');
+  public urlGdDescription = '/' + UrlUtil.get('URL_GUIDES') + '/' + UrlUtil.get('URL_GUIDES_DESCRIPTION');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

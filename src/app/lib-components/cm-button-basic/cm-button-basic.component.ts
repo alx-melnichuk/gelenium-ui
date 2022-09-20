@@ -20,5 +20,5 @@ export class CmButtonBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmButton = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_BUTTON');
+  public urlCmButton = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_BUTTON');
 }

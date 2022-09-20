@@ -10,7 +10,7 @@ import { UrlUtil } from '../../lib-core/utils/url.util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrRegexMatchApiComponent {
-  public urlDrRegexMatch = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_REGEX_MATCH');
+  public urlDrRegexMatch = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_DIRECTIVES_REGEX_MATCH');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

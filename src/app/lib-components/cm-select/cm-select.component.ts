@@ -16,8 +16,8 @@ const logLabel = 'ComponentsSelect';
 export class CmSelectComponent implements AfterViewInit {
   public showNum = '';
 
-  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
-  public urlPlSelect = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_SELECT');
+  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_FRAME');
+  public urlPlSelect = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_SELECT');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

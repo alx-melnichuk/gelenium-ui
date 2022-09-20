@@ -10,7 +10,7 @@ import { UrlUtil } from '../../lib-core/utils/url.util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CmInfiniteScrollApiComponent {
-  public urlCmInfiniteScroll = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_INFINITE_SCROLL');
+  public urlCmInfiniteScroll = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_INFINITE_SCROLL');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

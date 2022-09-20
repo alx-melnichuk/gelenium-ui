@@ -35,7 +35,7 @@ export class CmFrameLabelComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
+  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_FRAME');
 
   public exterior03a = 'outlined';
   public formGroup03a: FormGroup = new FormGroup({

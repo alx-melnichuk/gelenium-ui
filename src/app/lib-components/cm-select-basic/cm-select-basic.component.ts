@@ -21,7 +21,7 @@ export class CmSelectBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmSelect = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_SELECT');
+  public urlCmSelect = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_SELECT');
 
   public control01 = {
     model01a: new FormControl(null, []),

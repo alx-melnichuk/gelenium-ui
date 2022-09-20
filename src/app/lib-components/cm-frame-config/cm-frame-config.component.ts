@@ -29,7 +29,7 @@ export class CmFrameConfigComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
+  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_FRAME');
 
   public formGroup07: FormGroup = new FormGroup({
     model07a: new FormControl('', []),

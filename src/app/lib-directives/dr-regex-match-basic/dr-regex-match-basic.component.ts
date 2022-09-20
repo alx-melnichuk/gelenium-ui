@@ -35,7 +35,7 @@ export class DrRegexMatchBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlDrRegexMatch = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_REGEX_MATCH');
+  public urlDrRegexMatch = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_DIRECTIVES_REGEX_MATCH');
 
   public control01 = {
     model01a: new FormControl('', []),

@@ -37,7 +37,7 @@ export class CmFrameSizeComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
+  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_FRAME');
 
   public formGroup02a: FormGroup = new FormGroup({
     model02a: new FormControl('Demo Size Short', []),

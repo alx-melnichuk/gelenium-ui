@@ -10,7 +10,7 @@ import { UrlUtil } from '../../lib-core/utils/url.util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrAutoFocuseApiComponent {
-  public urlDrAutoFocuse = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_AUTO_FOCUSE');
+  public urlDrAutoFocuse = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_DIRECTIVES_AUTO_FOCUSE');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

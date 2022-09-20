@@ -28,7 +28,7 @@ export class CmButtonBorderRadiusComponent {
   @Input()
   public labelText = BTN_TEXT;
 
-  public urlCmButton = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_BUTTON');
+  public urlCmButton = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_BUTTON');
 
   public routerLink = this.urlCmButton;
 

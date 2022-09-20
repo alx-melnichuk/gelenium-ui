@@ -26,7 +26,7 @@ export class PlButtonBasicComponent {
   @Input()
   public labelText = BTN_TEXT;
 
-  public urlPlButton = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_BUTTON');
+  public urlPlButton = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_BUTTON');
 
   public routerLink = this.urlPlButton;
   public exterior01a = 'outlined';

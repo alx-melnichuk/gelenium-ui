@@ -35,7 +35,7 @@ export class DrRegexRemoveBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlDrRegexRemove = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_REGEX_REMOVE');
+  public urlDrRegexRemove = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_DIRECTIVES_REGEX_REMOVE');
 
   public control01 = {
     model01a: new FormControl('123', []),

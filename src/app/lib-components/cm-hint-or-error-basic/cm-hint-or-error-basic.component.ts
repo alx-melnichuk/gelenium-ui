@@ -21,7 +21,7 @@ export class CmHintOrErrorBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmHintOrError = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_HINT_OR_ERROR');
+  public urlCmHintOrError = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_HINT_OR_ERROR');
 
   public controls01 = {
     model01a: new FormControl('is', []),

@@ -16,7 +16,7 @@ const logLabel = 'ComponentsButton';
 export class CmButtonComponent implements AfterViewInit {
   public showNum = '';
 
-  public urlPlButton = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_BUTTON');
+  public urlPlButton = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_BUTTON');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

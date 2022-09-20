@@ -37,7 +37,7 @@ export class PlSelectBootstrapComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlPlSelect = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_SELECT');
+  public urlPlSelect = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_SELECT');
 
   public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
   public control02a = {

@@ -35,7 +35,7 @@ export class CmSelectGroupComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmSelect = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_SELECT');
+  public urlCmSelect = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_SELECT');
 
   public exterior04a = 'outlined';
 

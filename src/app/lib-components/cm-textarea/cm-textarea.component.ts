@@ -16,8 +16,8 @@ const logLabel = 'ComponentsTextarea';
 export class CmTextareaComponent implements AfterViewInit {
   public showNum = '';
 
-  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
-  public urlPlTextarea = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_TEXTAREA');
+  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_FRAME');
+  public urlPlTextarea = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_TEXTAREA');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

@@ -35,7 +35,7 @@ export class CmInputNumericalComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmInput = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_INPUT');
+  public urlCmInput = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_INPUT');
   public urlDrRegexMatch = '/' + 'directives' + '/' + 'regex-match'; // TODO replace to UrlUtil.get()
 
   public formGroup04: FormGroup = new FormGroup({

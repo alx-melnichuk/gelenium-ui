@@ -35,7 +35,7 @@ export class CmInfiniteScrollBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmInfiniteScroll = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_INFINITE_SCROLL');
+  public urlCmInfiniteScroll = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_INFINITE_SCROLL');
 
   public elements0: Element[] = [];
   public elements1: Element[] = [];

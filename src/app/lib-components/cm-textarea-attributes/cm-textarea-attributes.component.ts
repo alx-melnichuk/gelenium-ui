@@ -35,7 +35,7 @@ export class CmTextareaAttributesComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmTextarea = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_TEXTAREA');
+  public urlCmTextarea = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_TEXTAREA');
 
   public formGroup02: FormGroup = new FormGroup({
     model02a: new FormControl('', []),

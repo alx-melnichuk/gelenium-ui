@@ -35,7 +35,7 @@ export class PlInputBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlPlInput = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_INPUT');
+  public urlPlInput = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_INPUT');
 
   public exterior01a = 'outlined';
   public control01a = {
