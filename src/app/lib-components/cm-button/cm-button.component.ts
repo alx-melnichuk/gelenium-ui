@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsulation } from '@angular/core';
 import { take } from 'rxjs/operators';
 
+import { RouterConfig } from '../../lib-core/config/router-config';
 import { ScrollAfterRoutingUtil } from '../../lib-core/utils/scroll-after-routing.util';
-import { UrlUtil } from '../../lib-core/utils/url.util';
 
 const logLabel = 'ComponentsButton';
 
@@ -16,7 +16,7 @@ const logLabel = 'ComponentsButton';
 export class CmButtonComponent implements AfterViewInit {
   public showNum = '';
 
-  public urlPlButton = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_BUTTON');
+  public urlPlButton = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_BUTTON');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
 
+import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_SHOW_SOURCE, LABEL_HTML, LABEL_TS, LABEL_CSS } from '../../lib-core/constants';
-import { UrlUtil } from '../../lib-core/utils/url.util';
 
 export interface Element {
   name: string;
@@ -35,7 +35,7 @@ export class CmInfiniteScrollBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmInfiniteScroll = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_INFINITE_SCROLL');
+  public urlCmInfiniteScroll = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INFINITE_SCROLL');
 
   public elements0: Element[] = [];
   public elements1: Element[] = [];

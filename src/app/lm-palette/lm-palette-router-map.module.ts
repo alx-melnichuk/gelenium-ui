@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UrlUtil } from '../lib-core/utils/url.util';
+import { RouterConfig } from '../lib-core/config/router-config';
 import { SiteMenuUtil, SiteUrl } from '../lib-core/utils/site-menu.util';
 
 // Defining a route map for an 'Palette' partition.
 
-UrlUtil.add('URL_PALETTE', 'palette');
+RouterConfig.add('URL_PALETTE', 'palette');
 
 // ** Menu for "Button". **
 
-UrlUtil.add('URL_PALETTE_BUTTON', 'button');
-const urlPlButton = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_BUTTON');
+RouterConfig.add('URL_PALETTE_BUTTON', 'button');
+const urlPlButton = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_BUTTON');
 
 const siteUrlsButton: SiteUrl[] = [
   { label: 'Basic', url: urlPlButton, fragment: 'Basic' },
@@ -23,8 +23,8 @@ SiteMenuUtil.addItem('Palette', 'Button', { label: 'Button', siteUrls: siteUrlsB
 
 // ** Menu for "Frame". **
 
-UrlUtil.add('URL_PALETTE_FRAME', 'frame');
-const urlPlFrame = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_FRAME');
+RouterConfig.add('URL_PALETTE_FRAME', 'frame');
+const urlPlFrame = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_FRAME');
 
 const siteUrlsFrame: SiteUrl[] = [{ label: 'Customer', url: urlPlFrame, fragment: 'Customer' }];
 
@@ -32,8 +32,8 @@ SiteMenuUtil.addItem('Palette', 'Frame', { label: 'Frame', siteUrls: siteUrlsFra
 
 // ** Menu for "Input". **
 
-UrlUtil.add('URL_PALETTE_INPUT', 'input');
-const urlPlInput = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_INPUT');
+RouterConfig.add('URL_PALETTE_INPUT', 'input');
+const urlPlInput = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_INPUT');
 
 const siteUrlsInput: SiteUrl[] = [
   { label: 'Basic', url: urlPlInput, fragment: 'Basic' },
@@ -45,8 +45,8 @@ SiteMenuUtil.addItem('Palette', 'Input', { label: 'Input', siteUrls: siteUrlsInp
 
 // ** Menu for "Select". **
 
-UrlUtil.add('URL_PALETTE_SELECT', 'select');
-const urlPlSelect = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_SELECT');
+RouterConfig.add('URL_PALETTE_SELECT', 'select');
+const urlPlSelect = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_SELECT');
 
 const siteUrlsSelect: SiteUrl[] = [
   { label: 'Basic', url: urlPlSelect, fragment: 'Basic' },
@@ -58,8 +58,8 @@ SiteMenuUtil.addItem('Palette', 'Select', { label: 'Select', siteUrls: siteUrlsS
 
 // ** Menu for "Textarea". **
 
-UrlUtil.add('URL_PALETTE_TEXTAREA', 'textarea');
-const urlPlTextarea = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_PALETTE_TEXTAREA');
+RouterConfig.add('URL_PALETTE_TEXTAREA', 'textarea');
+const urlPlTextarea = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_TEXTAREA');
 
 const siteUrlsTextarea: SiteUrl[] = [
   { label: 'Basic', url: urlPlTextarea, fragment: 'Basic' },

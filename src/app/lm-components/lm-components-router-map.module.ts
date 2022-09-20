@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UrlUtil } from '../lib-core/utils/url.util';
+import { RouterConfig } from '../lib-core/config/router-config';
 import { SiteMenuUtil, SiteUrl } from '../lib-core/utils/site-menu.util';
 
 // Defining a route map for an 'Components' partition.
 
-UrlUtil.add('URL_COMPONENTS', 'components');
+RouterConfig.add('URL_COMPONENTS', 'components');
 
-UrlUtil.add('URL_COMPONENTS_BUTTON', 'button');
-const urlButton = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_BUTTON');
+RouterConfig.add('URL_COMPONENTS_BUTTON', 'button');
+const urlButton = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_BUTTON');
 const siteUrlsButton: SiteUrl[] = [
   { label: 'Basic', url: urlButton, fragment: 'Basic' },
   { label: 'Attributes', url: urlButton, fragment: 'Attributes' },
@@ -22,8 +22,8 @@ const siteUrlsButton: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Button', { label: 'Button', siteUrls: siteUrlsButton });
 
-UrlUtil.add('URL_COMPONENTS_FRAME', 'frame');
-const urlFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_FRAME');
+RouterConfig.add('URL_COMPONENTS_FRAME', 'frame');
+const urlFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
 const siteUrlsFrame: SiteUrl[] = [
   { label: 'Basic', url: urlFrame, fragment: 'Basic' },
   { label: 'Attributes', url: urlFrame, fragment: 'Attributes' },
@@ -39,16 +39,16 @@ const siteUrlsFrame: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Frame', { label: 'Frame', siteUrls: siteUrlsFrame });
 
-UrlUtil.add('URL_COMPONENTS_HINT_OR_ERROR', 'hint-or-error');
-const urlHintOrError = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_HINT_OR_ERROR');
+RouterConfig.add('URL_COMPONENTS_HINT_OR_ERROR', 'hint-or-error');
+const urlHintOrError = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_HINT_OR_ERROR');
 const siteUrlsHintOrError: SiteUrl[] = [
   { label: 'Basic', url: urlHintOrError, fragment: 'Basic' },
   { label: 'Api', url: urlHintOrError, fragment: 'Api' },
 ];
 SiteMenuUtil.addItem('Components', 'HintOrError', { label: 'HintOrError', siteUrls: siteUrlsHintOrError });
 
-UrlUtil.add('URL_COMPONENTS_INFINITE_SCROLL', 'infinite-scroll');
-const urlInfiniteScroll = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_INFINITE_SCROLL');
+RouterConfig.add('URL_COMPONENTS_INFINITE_SCROLL', 'infinite-scroll');
+const urlInfiniteScroll = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INFINITE_SCROLL');
 const siteUrls: SiteUrl[] = [
   { label: 'Basic', url: urlInfiniteScroll, fragment: 'Basic' },
   { label: 'Optional', url: urlInfiniteScroll, fragment: 'Optional' },
@@ -56,8 +56,8 @@ const siteUrls: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'InfiniteScroll', { label: 'InfiniteScroll', siteUrls });
 
-UrlUtil.add('URL_COMPONENTS_INPUT', 'input');
-const urlInput = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_INPUT');
+RouterConfig.add('URL_COMPONENTS_INPUT', 'input');
+const urlInput = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INPUT');
 const siteUrlsInput: SiteUrl[] = [
   { label: 'Basic', url: urlInput, fragment: 'Basic' },
   { label: 'Attributes', url: urlInput, fragment: 'Attributes' },
@@ -73,8 +73,8 @@ const siteUrlsInput: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Input', { label: 'Input', siteUrls: siteUrlsInput });
 
-UrlUtil.add('URL_COMPONENTS_SELECT', 'select');
-const urlSelect = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_SELECT');
+RouterConfig.add('URL_COMPONENTS_SELECT', 'select');
+const urlSelect = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SELECT');
 const siteUrlsSelect: SiteUrl[] = [
   { label: 'Basic', url: urlSelect, fragment: 'Basic' },
   { label: 'Attributes', url: urlSelect, fragment: 'Attributes' },
@@ -91,13 +91,13 @@ const siteUrlsSelect: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Select', { label: 'Select', siteUrls: siteUrlsSelect });
 
-UrlUtil.add('URL_COMPONENTS_SWITCH', 'switch');
-const urlSwitch = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_SWITCH');
+RouterConfig.add('URL_COMPONENTS_SWITCH', 'switch');
+const urlSwitch = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SWITCH');
 const siteUrlsSwitch: SiteUrl[] = [{ label: 'Basic', url: urlSwitch, fragment: 'Basic' }];
 SiteMenuUtil.addItem('Components', 'Switch', { label: 'Switch', siteUrls: siteUrlsSwitch });
 
-UrlUtil.add('URL_COMPONENTS_TEXTAREA', 'textarea');
-const urlTextarea = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_COMPONENTS_TEXTAREA');
+RouterConfig.add('URL_COMPONENTS_TEXTAREA', 'textarea');
+const urlTextarea = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TEXTAREA');
 const siteUrlsTextarea: SiteUrl[] = [
   { label: 'Basic', url: urlTextarea, fragment: 'Basic' },
   { label: 'Attributes', url: urlTextarea, fragment: 'Attributes' },
