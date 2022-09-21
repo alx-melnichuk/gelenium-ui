@@ -81,6 +81,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, ControlValueAccess
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
 
+  public inputId = `${this.id}-input`;
   public isFocused = false;
 
   public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
@@ -89,10 +90,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, ControlValueAccess
   @HostListener('click')
   public doClick(): void {
     if (!this.disabled) {
-      const newValue = !this.formControl.value;
-      this.formControl.setValue(newValue);
-      this.onChange(newValue);
-      this.setStateChecked(newValue);
+      this.setStateChecked(this.setValueToControlAndChange(!this.formControl.value), this.hostRef);
     }
   }
 
@@ -110,8 +108,8 @@ export class GlnSwitchComponent implements OnChanges, OnInit, ControlValueAccess
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['isDisabled']) {
-      this.disabled = BooleanUtil.init(this.isDisabled);
-      this.setDisabledState(!!this.disabled);
+      const disabled = BooleanUtil.init(this.isDisabled);
+      this.setDisabledState(!!disabled);
     }
     if (changes['isReadOnly']) {
       this.readOnly = BooleanUtil.init(this.isReadOnly);
@@ -134,7 +132,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, ControlValueAccess
 
   public writeValue(value: any): void {
     this.formControl.setValue(!!value, { emitEvent: false });
-    this.setStateChecked(!!value);
+    this.setStateChecked(!!value, this.hostRef);
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
@@ -154,6 +152,9 @@ export class GlnSwitchComponent implements OnChanges, OnInit, ControlValueAccess
       } else if (!isDisabled && this.formControl.disabled) {
         this.formControl.enable();
       }
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);
+
       this.changeDetectorRef.markForCheck();
     }
   }
@@ -196,17 +197,23 @@ export class GlnSwitchComponent implements OnChanges, OnInit, ControlValueAccess
   //   return BooleanUtil.init(value);
   // }
 
-  // public doChangeInput(event: Event): void {
-  //   // https://github.com/angular/angular/issues/9587 "event.stopImmediatePropagation() called from listeners not working"
-  //   // Added Event.cancelBubble check to make sure there was no call to event.stopImmediatePropagation() in previous handlers.
-  //   if (!!event && !event.cancelBubble) {
-  //     this.onChange(this.formControl.value);
-  //   }
-  // }
+  public doChangeInput(event: Event): void {
+    // https://github.com/angular/angular/issues/9587 "event.stopImmediatePropagation() called from listeners not working"
+    // Added Event.cancelBubble check to make sure there was no call to event.stopImmediatePropagation() in previous handlers.
+    if (!!event && !event.cancelBubble) {
+      this.setStateChecked(this.setValueToControlAndChange(!this.formControl.value), this.hostRef);
+    }
+  }
 
   // ** Private API **
 
-  private setStateChecked(checked: boolean): void {
-    HtmlElemUtil.setClass(this.renderer, this.wrapElementRef, 'gln-checked', checked);
+  private setValueToControlAndChange(newValue: boolean): boolean {
+    this.formControl.setValue(newValue);
+    this.onChange(newValue);
+    return newValue;
+  }
+
+  private setStateChecked(checked: boolean, elementRef: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(this.renderer, elementRef, 'gln-checked', checked);
   }
 }

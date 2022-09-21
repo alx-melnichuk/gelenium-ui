@@ -25,9 +25,22 @@ export class CmSwitchBasicComponent {
 
   public formGroup01: FormGroup = new FormGroup({
     model01a: new FormControl(true, []),
-    model01b: new FormControl('', []),
-    model01c: new FormControl('', []),
+    model01b: new FormControl(false, []),
+    model01c: new FormControl(true, []),
+    model01d: new FormControl(false, []),
   });
+
+  public formGroup02a: FormGroup = new FormGroup({
+    model02a: new FormControl(true, []),
+    model02b: new FormControl(false, []),
+    model02c: new FormControl(true, []),
+    model02d: new FormControl(false, []),
+  });
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
+
+  public log(text: string): void {
+    console.log(`${text}`);
+  }
 }

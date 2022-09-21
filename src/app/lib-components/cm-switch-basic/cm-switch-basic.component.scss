@@ -2,4 +2,8 @@
 
 app-cm-switch-basic {
   display: block;
+
+  .sb-elem {
+    min-width: 17ch;
+  }
 }

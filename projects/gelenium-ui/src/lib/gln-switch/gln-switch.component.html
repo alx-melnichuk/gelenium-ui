@@ -1,8 +1,12 @@
-<ng-container [formGroup]="formGroup">
+<div glnsw-container
+  [formGroup]="formGroup">
   <input glnsw-input
+    [attr.id]="inputId"
     formControlName="textData"
     type="checkbox"
-    class="gln-switch-input" />
+    class="gln-switch-input"
+    role="switch"
+    (change)="doChangeInput($event)" />
   <span #wrapElement
     glnsw-wrap
     class="gln-switch-wrap">
@@ -16,4 +20,9 @@
   <span glnsw-track
     class="gln-switch-track">
   </span>
-</ng-container>
+</div>
+<label [attr.for]="inputId">
+  <span>
+    <ng-content></ng-content>
+  </span>
+</label>

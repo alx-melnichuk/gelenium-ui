@@ -11,23 +11,104 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
   </code>
   <p>
     The GlnSwitch component displays an "on" or "off" state.
+    This component is designed to display the state of any parameter.
   </p>
 </section>
 
 
-<form [formGroup]="formGroup01"
+<form *ngIf="false"
+  [formGroup]="formGroup01"
   novalidate
   autocomplete="off">
 
-  <div class="app-group"
-    style="margin-left: 200px;">
+  <div class="app-group">
+
+    <div class="app-elem sb-elem">
+      <div>
+        <small>
+          <em>checked by default.</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model01a">
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sb-elem">
+      <div>
+        <small>
+          <em>unchecked by default.</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model01b">
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sb-elem">
+      <div>
+        <small>
+          <em>disabled and checked.</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model01c"
+        isDisabled>
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sb-elem">
+      <div>
+        <small>
+          <em>disabled and unchecked.</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model01d"
+        isDisabled>
+      </gln-switch>
+    </div>
+
+  </div>
+</form>
+
+
+<!-- -->
+
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Attributes.
+    <a [href]="urlCmSwitch + '#Attributes'">#</a>
+  </h3>
+  <p>
+    You can display the label.
+  </p>
+</section>
+
+<form [formGroup]="formGroup02a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
 
     <div class="app-elem">
-      <gln-switch formControlName="model01a"
-        style="outline: 1px solid green;">
+      <div>
+        <small>
+          <em>checked by default.</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model02a">
+        Label
       </gln-switch>
-      [ {{ formGroup01.controls['model01a'].value ? 't' : 'f'}} ]
     </div>
+
+    <!-- <div class="app-elem">
+      <div>
+        <small>
+          <em>disabled and unchecked.</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model02b"
+        isDisabled>
+        Disabled
+      </gln-switch>
+    </div> -->
 
   </div>
 </form>
