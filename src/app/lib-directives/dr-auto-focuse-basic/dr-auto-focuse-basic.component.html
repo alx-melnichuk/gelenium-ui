@@ -21,11 +21,11 @@
   <pre source="html">
 &lt;form novalidation&gt;
   &lt;label&gt;
-    &lt;input type="text" ([ngModel])="modelLogin"
+    &lt;input type="text" [(ngModel)]="modelLogin"
       name="login" <strong>autofocuse</strong> /&gt; Login
   &lt;/label&gt;
   &lt;label&gt;
-    &lt;input type="password" ([ngModel])="modelPassword"
+    &lt;input type="password" [(ngModel)]="modelPassword"
       name="password" /&gt; Password
   &lt;/label&gt;
 &lt;/form&gt;</pre>
@@ -53,11 +53,11 @@
   <pre source="html">
 &lt;form novalidation&gt;
   &lt;label&gt;
-    &lt;input type="text" ([ngModel])="modelLogin"
+    &lt;input type="text" [(ngModel)]="modelLogin"
       name="login" <strong>glnAutoFocuse</strong> /&gt; Login
   &lt;/label&gt;
   &lt;label&gt;
-    &lt;input type="password" ([ngModel])="modelPassword"
+    &lt;input type="password" [(ngModel)]="modelPassword"
       name="password" /&gt; Password
   &lt;/label&gt;
 &lt;/form&gt;</pre>
@@ -72,14 +72,14 @@
 &lt;form novalidation&gt;
   &lt;label&gt;
     &lt;input type="text"
-     ([ngModel])="modelLogin"
+     [(ngModel)]="modelLogin"
       name="login"
       [glnAutoFocuse]="!modelLogin" /&gt;
     Login
   &lt;/label&gt;
   &lt;label&gt;
     &lt;input type="password"
-     ([ngModel])="modelPassword"
+     [(ngModel)]="modelPassword"
       name="password"
       [glnAutoFocuse]="!!modelLogin" /&gt;
     Password
@@ -311,7 +311,7 @@ export class AutoFocuseComponent implements OnInit &#123;
         &lt;div&gt;
           &lt;label&gt;
             &lt;input type="text"
-             ([ngModel])="model01"
+             [(ngModel)]="model01"
               name="model01"
               [glnAutoFocuse]="!model01" /&gt;
             Name01
@@ -325,7 +325,7 @@ export class AutoFocuseComponent implements OnInit &#123;
         &lt;div&gt;
           &lt;label&gt;
             &lt;input type="text"
-             ([ngModel])="model99"
+             [(ngModel)]="model99"
               name="model99"
               [glnAutoFocuse]="!model99" /&gt;
             Name99

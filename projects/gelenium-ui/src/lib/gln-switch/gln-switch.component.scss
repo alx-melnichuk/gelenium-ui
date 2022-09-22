@@ -43,17 +43,24 @@ gln-switch {
     }
   }
 
+  &:not([noAnm]):not([hkInit]) {
+    --glnsw-delay-150: 150ms;
+  }
+
   @include mxAlignItems(center);
   @include mxDisplayInlineFlex();
   border-radius: 2em;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  outline: 0;
 
   div[glnsw-container] {
     outline: 1px dashed green;
     @include mxDisplayInlineFlex();
     border-radius: 2em;
+    cursor: pointer;
+    outline: 0;
     overflow: hidden;
     padding: 1em 1.2em;
     position: relative;
@@ -66,6 +73,7 @@ gln-switch {
     height: 1px;
     opacity: 0;
     position: absolute;
+    @include mxUserSelect(none);
     width: 1px;
   }
 
@@ -75,19 +83,19 @@ gln-switch {
     background-color: transparent;
     border: 0;
     border-radius: 50%;
-    cursor: pointer;
     left: 0;
     margin: 0;
     outline: 0;
-    padding: 0.8em;
+    padding: 0.75em;
     position: absolute;
     top: 0;
     @include mxUserSelect(none);
-    -webkit-transition: left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, -webkit-transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    transition: left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    -webkit-transition: left var(--glnsw-delay-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms, -webkit-transform var(--glnsw-delay-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: left var(--glnsw-delay-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform var(--glnsw-delay-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     z-index: 1;
   }
-  &:not([dis]):hover span[glnsw-wrap] {
+  
+  &:not([dis]) div[glnsw-container]:hover span[glnsw-wrap] {
     background-color: var(--glnsw---bg-wrap-hov);
   }
   &.gln-checked span[glnsw-wrap] {
@@ -102,8 +110,8 @@ gln-switch {
     box-shadow: 0px 1px 3px 1px rgb(0 0 0 / 15%), 0px 0px 3px 1px rgb(0 0 0 / 15%);
     display: block;
     height: 1.5em;
-    -webkit-transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    -webkit-transition: background-color var(--glnsw-delay-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: background-color var(--glnsw-delay-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     width: 1.5em;
   }
 
@@ -114,10 +122,16 @@ gln-switch {
     border-radius: 0.5em;
     height: 1em;
     width: 2.5em;
-    -webkit-transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    -webkit-transition: opacity var(--glnsw-delay-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color var(--glnsw-delay-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: opacity var(--glnsw-delay-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color var(--glnsw-delay-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     @include mxUserSelect(none);
     z-index: 0;
+  }
+
+  // ** Block: **
+
+  label {
+    font-size: var(--glnsw-pr-font-size);
   }
   // **  **
 }

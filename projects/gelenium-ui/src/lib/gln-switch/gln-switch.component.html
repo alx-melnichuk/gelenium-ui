@@ -1,12 +1,14 @@
 <div glnsw-container
-  [formGroup]="formGroup">
+  class="gln-switch-container"
+  [formGroup]="formGroup"
+  (click)="!disabled ? toggle() : null">
   <input glnsw-input
     [attr.id]="inputId"
     formControlName="textData"
     type="checkbox"
     class="gln-switch-input"
     role="switch"
-    (change)="doChangeInput($event)" />
+    (change)="$event.stopPropagation()" />
   <span #wrapElement
     glnsw-wrap
     class="gln-switch-wrap">

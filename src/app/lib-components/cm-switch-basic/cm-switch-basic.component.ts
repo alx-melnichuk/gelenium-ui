@@ -30,17 +30,48 @@ export class CmSwitchBasicComponent {
     model01d: new FormControl(false, []),
   });
 
-  public formGroup02a: FormGroup = new FormGroup({
+  // Attributes
+  public formGroup02: FormGroup = new FormGroup({
     model02a: new FormControl(true, []),
     model02b: new FormControl(false, []),
-    model02c: new FormControl(true, []),
-    model02d: new FormControl(false, []),
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  // Size
+  public formGroup03: FormGroup = new FormGroup({
+    model03a: new FormControl(true, []),
+    model03b: new FormControl(true, []),
+    model03c: new FormControl(true, []),
+    model03d: new FormControl(true, []),
+    model03e: new FormControl(true, []),
+    model03f: new FormControl(true, []),
+  });
 
-  public log(text: string): void {
-    console.log(`${text}`);
+  // Color
+  public formGroup04: FormGroup = new FormGroup({
+    model04a: new FormControl(true, []),
+    model04b: new FormControl(true, []),
+    model04c: new FormControl(true, []),
+    model04d: new FormControl(true, []),
+    model04e: new FormControl(true, []),
+  });
+  public demoModel02c = true; // #
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  constructor() {
+    // setTimeout(() => {
+    //   this.formGroup02b.controls['model03a'].setValue(false);
+    // }, 2000);
+    // setTimeout(() => {
+    //   this.formGroup02b.controls['model03a'].setValue(true);
+    // }, 4000);
+  }
+
+  public log(text: string, event?: any): void {
+    let value = '';
+    let checked = '';
+    if (!!event && event instanceof Event) {
+      value = (event.target as any)['value'];
+      checked = (event.target as any)['checked'];
+    }
+    console.log(`${text}`, event, ` ${value} ${checked}`);
   }
 }

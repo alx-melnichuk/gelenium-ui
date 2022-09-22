@@ -10,13 +10,13 @@
 import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
   </code>
   <p>
-    The GlnSwitch component displays an "on" or "off" state.
-    This component is designed to display the state of any parameter.
+    The GlnSwitch component displays the "on" or "off" state.
+    It can be used to display the status of any parameter.
   </p>
 </section>
 
 
-<form *ngIf="false"
+<form *ngIf="true"
   [formGroup]="formGroup01"
   novalidate
   autocomplete="off">
@@ -71,7 +71,8 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
 
 <!-- -->
 
-<section mr-vr>
+<section *ngIf="true"
+  mr-vr>
   <h3 class="app-hover-link">
     Attributes.
     <a [href]="urlCmSwitch + '#Attributes'">#</a>
@@ -79,9 +80,15 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
   <p>
     You can display the label.
   </p>
+  <span>For example:</span>
+  <code><pre source="html">
+&lt;gln-switch formControlName="model02a"&gt;
+  Label
+&lt;/gln-switch&gt;</pre></code>
 </section>
 
-<form [formGroup]="formGroup02a"
+<form *ngIf="true"
+  [formGroup]="formGroup02"
   novalidate
   autocomplete="off">
 
@@ -98,7 +105,7 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
       </gln-switch>
     </div>
 
-    <!-- <div class="app-elem">
+    <div class="app-elem">
       <div>
         <small>
           <em>disabled and unchecked.</em>
@@ -108,7 +115,215 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
         isDisabled>
         Disabled
       </gln-switch>
-    </div> -->
+    </div>
 
   </div>
 </form>
+
+<!-- -->
+
+<section *ngIf="true"
+  mr-vr>
+  <h4 class="app-hover-link">
+    Size.
+    <a [href]="urlCmSwitch + '#Size'">#</a>
+  </h4>
+  <p>
+    The GlnSwitch component has the ability to change its size.
+    All component elements are associated with a font size for the gln-switch tag.
+    Thus, by changing the font size, you can choose the size of this component that is optimal for
+    you.
+  </p>
+  <span>For example:</span>
+</section>
+
+<form *ngIf="true"
+  [formGroup]="formGroup03"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 9px; height: 27px;</em>
+        </small>
+      </div>
+      <gln-switch class="sb-mini09"
+        formControlName="model03a">
+        Parameter definition label
+      </gln-switch>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 10px; height: 30px;</em>
+        </small>
+      </div>
+      <gln-switch class="sb-mini10"
+        formControlName="model03b">
+        Parameter definition label
+      </gln-switch>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 11px; height: 33px;</em>
+        </small>
+      </div>
+      <gln-switch class="sb-mini11"
+        formControlName="model03c">
+        Parameter definition label
+      </gln-switch>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 12px; height: 36px;</em>
+        </small>
+      </div>
+      <gln-switch class="sb-small12"
+        formControlName="model03d">
+        Parameter definition label
+      </gln-switch>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 13px; height: 39px;</em>
+        </small>
+      </div>
+      <gln-switch class="sb-small13"
+        formControlName="model03e">
+        Parameter definition label
+      </gln-switch>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 14px; height: 42px;</em>
+        </small>
+      </div>
+      <gln-switch class="sb-small14"
+        formControlName="model03f">
+        Parameter definition label
+      </gln-switch>
+    </div>
+  </div>
+
+</form>
+
+
+
+<!-- -->
+
+<section *ngIf="true"
+  mr-vr>
+  <h4 class="app-hover-link">
+    Color.
+    <a [href]="urlCmSwitch + '#Color'">#</a>
+  </h4>
+  <p>
+    The GlnSwitch component has the ability to change its color.
+  </p>
+  <span>For example:</span>
+  <code><pre source="html">
+&lt;gln-switch
+  <i><strong>[glnColor]="&#123; primary: 'danger' &#125;"</strong></i>
+  formControlName="model02a"&gt;
+  Label
+&lt;/gln-switch&gt;</pre></code>
+</section>
+
+<form *ngIf="true"
+  [formGroup]="formGroup04"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem sb-elem">
+      <div>
+        <small>
+          <em>color: primary</em>
+        </small>
+      </div>
+      <gln-switch [glnColor]="{ primary: 'primary' }"
+        formControlName="model04a">
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sb-elem">
+      <div>
+        <small>
+          <em>color: danger</em>
+        </small>
+      </div>
+      <gln-switch [glnColor]="{ primary: 'danger' }"
+        formControlName="model04b">
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sb-elem">
+      <div>
+        <small>
+          <em>color: success</em>
+        </small>
+      </div>
+      <gln-switch [glnColor]="{ primary: 'success' }"
+        formControlName="model04c">
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sb-elem">
+      <div>
+        <small>
+          <em>color: info</em>
+        </small>
+      </div>
+      <gln-switch [glnColor]="{ primary: 'info' }"
+        formControlName="model04d">
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sb-elem">
+      <div>
+        <small>
+          <em>color: warning</em>
+        </small>
+      </div>
+      <gln-switch [glnColor]="{ primary: 'warning' }"
+        formControlName="model04e">
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sb-elem sb-customer">
+      <div>
+        <small>
+          <em>color: customer</em>
+        </small>
+      </div>
+      <gln-switch [glnColor]="{ primary: 'customer' }"
+        formControlName="model04e">
+      </gln-switch>
+    </div>
+
+  </div>
+</form>
+
+<!-- -->

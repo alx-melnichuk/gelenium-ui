@@ -6,4 +6,17 @@ app-cm-switch-basic {
   .sb-elem {
     min-width: 17ch;
   }
+  .sb-mini09 { font-size: 9px; }
+  .sb-mini10 { font-size: 10px; }
+  .sb-mini11 { font-size: 11px; }
+  .sb-small12 { font-size: 12px; }
+  .sb-small13 { font-size: 13px; }
+  .sb-small14 { font-size: 14px; }
+
+  .sb-customer {
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
+    --gln-customer-cl: hsl(var(--gln-customer-h), var(--gln-customer-s), var(--gln-customer-l));
+  }
 }
