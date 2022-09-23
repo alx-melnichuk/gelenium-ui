@@ -12,9 +12,19 @@ gln-switch {
 
   --glnsw--default-h: var(--glncl-default-h, var(--gln-default-h));
   --glnsw--default-s: var(--glncl-default-s, var(--gln-default-s));
+  --glnsw--default-l: var(--glncl-default-l, var(--gln-default-l));
 
   --glnsw--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
   --glnsw--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
+  --glnsw--primary-l: var(--glncl-primary-s, var(--gln-primary-l));
+
+  @include mxAlignItems(center);
+  @include mxDisplayInlineFlex();
+  border-radius: 2em;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  outline: 0;
 
   &:not([dis]) {
     label {
@@ -24,11 +34,13 @@ gln-switch {
       --glnsw---bg-wrap-hov: hsla(var(--glnsw--default-h), var(--glnsw--default-s), 70%, 20%);
       --glnsw---bg-thumb   : hsl(var(--glnsw--default-bg-h), var(--glnsw--default-bg-s), var(--glnsw--default-bg-l));
       --glnsw---bg-track   : hsl(var(--glnsw--default-h), var(--glnsw--default-s), 75%);
+      --glntr-ripple-cl    : hsla(var(--glnsw--default-h), var(--glnsw--default-s), var(--glnsw--default-l), 0.10);
     }
     &.gln-checked {
       --glnsw---bg-wrap-hov: hsla(var(--glnsw--primary-h), var(--glnsw--primary-s), 75%, 20%);
       --glnsw---bg-thumb   : hsl(var(--glnsw--primary-h), var(--glnsw--primary-s), 50%);
       --glnsw---bg-track   : hsl(var(--glnsw--primary-h), var(--glnsw--primary-s), 75%);
+      --glntr-ripple-cl    : hsla(var(--glnsw--primary-h), var(--glnsw--primary-s), var(--glnsw--primary-l), 0.30);
     }
   }
   &[dis] {
@@ -47,13 +59,9 @@ gln-switch {
     --glnsw-delay-150: 150ms;
   }
 
-  @include mxAlignItems(center);
-  @include mxDisplayInlineFlex();
-  border-radius: 2em;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  outline: 0;
+  &[rea] {
+    pointer-events: none;
+  }
 
   div[glnsw-container] {
     outline: 1px dashed green;
@@ -98,9 +106,9 @@ gln-switch {
   &:not([dis]) div[glnsw-container]:hover span[glnsw-wrap] {
     background-color: var(--glnsw---bg-wrap-hov);
   }
-  &.gln-checked span[glnsw-wrap] {
-    @include  mxTransform_TranslateXY(1.8em, 0); 
-  }
+  // &.gln-checked span[glnsw-wrap] {
+  //   @include  mxTransform_TranslateXY(1.8em, 0); 
+  // }
 
   // ** Block: glnsw-thumb **
 

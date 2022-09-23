@@ -1,8 +1,16 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { GlnSwitchConfig, GLN_SWITCH_CONFIG } from 'gelenium-ui';
+
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
+
+const glnSwitchConfigDefault: GlnSwitchConfig = {
+  isNoAnimation: true, // ?: boolean | undefined;
+  isReadOnly: true, // ?: boolean | undefined;
+  isChecked: true,
+};
 
 @Component({
   selector: 'app-cm-switch-basic',
@@ -10,6 +18,7 @@ import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-co
   styleUrls: ['./cm-switch-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // providers: [{ provide: GLN_SWITCH_CONFIG, useValue: glnSwitchConfigDefault }],
 })
 export class CmSwitchBasicComponent {
   @Input()
@@ -31,6 +40,16 @@ export class CmSwitchBasicComponent {
   });
 
   // Attributes
+  public isDisabled02a = false;
+  public isNoAnimation02a = false;
+  public isReadOnly02a = false;
+  public config02a: GlnSwitchConfig = {
+    isNoAnimation: true, // ?: boolean | undefined;
+    isReadOnly: true, // ?: boolean | undefined;
+    isChecked: true,
+  };
+  public modelData02a = true;
+
   public formGroup02: FormGroup = new FormGroup({
     model02a: new FormControl(true, []),
     model02b: new FormControl(false, []),

@@ -1,3 +1,4 @@
+<!-- BASIC -->
 <section mr-vr>
   <h3 class="app-hover-link">
     Basic.
@@ -69,7 +70,7 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
 </form>
 
 
-<!-- -->
+<!-- ATTRIBUTES -->
 
 <section *ngIf="true"
   mr-vr>
@@ -78,8 +79,19 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
     <a [href]="urlCmSwitch + '#Attributes'">#</a>
   </h3>
   <p>
-    You can display the label.
-  </p>
+  <p>The following attributes are supported:</p>
+  <ul>
+    <li>"id" - parameter for defining the unique identifier of the input field
+      (id="unique_identifier");
+    </li>
+
+    <li>
+      "config" - Defines a configuration object.
+      <!-- <a [href]="urlCmFrame + '#Config'">More details.</a> -->
+    </li>
+
+  </ul>
+
   <span>For example:</span>
   <code><pre source="html">
 &lt;gln-switch formControlName="model02a"&gt;
@@ -87,12 +99,81 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
 &lt;/gln-switch&gt;</pre></code>
 </section>
 
+<!-- <div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: isChecked.</em>
+      </small>
+    </div>
+    <gln-switch [(ngModel)]="modelData02a">
+    </gln-switch>
+  </div>
+
+</div> -->
+
+
+<label>
+  <input type="checkbox"
+    [(ngModel)]="isDisabled02a" />isDisabled02a
+</label>
+<label>
+  <input type="checkbox"
+    [(ngModel)]="isNoAnimation02a" />isNoAnimation02a
+</label>
+<label>
+  <input type="checkbox"
+    [(ngModel)]="isReadOnly02a" />isReadOnly02a
+</label>
+<!--  -->
+
 <form *ngIf="true"
   [formGroup]="formGroup02"
   novalidate
   autocomplete="off">
 
   <div class="app-group">
+
+    <!-- demo1 -->
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: id.</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model02a"
+        config9="config02a"
+        [isDisabled]="isDisabled02a ? true : undefined"
+        [isNoAnimation]="isNoAnimation02a ? true : undefined"
+        [isReadOnly]="isReadOnly02a ? true : undefined"
+        id="unique_id_switch02a">
+      </gln-switch> ( {{ formGroup02.controls['model02a'].value }})
+    </div>
+
+    <!-- demo2 -->
+    <!-- <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: id.</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model02a"
+        isChecked>
+      </gln-switch> ( {{ formGroup02.controls['model02a'].value }})
+    </div> -->
+
+    <!-- origin -->
+    <!-- <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: id.</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model02a"
+        id="unique_id_switch02a">
+      </gln-switch>
+    </div>
 
     <div class="app-elem">
       <div>
@@ -115,7 +196,7 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
         isDisabled>
         Disabled
       </gln-switch>
-    </div>
+    </div> -->
 
   </div>
 </form>
@@ -325,5 +406,6 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
 
   </div>
 </form>
+
 
 <!-- -->

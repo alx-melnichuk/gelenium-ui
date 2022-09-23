@@ -1,9 +1,10 @@
 <div glnsw-container
   class="gln-switch-container"
   [formGroup]="formGroup"
-  (click)="!disabled ? toggle() : null">
+  (click)="toggle()">
   <input glnsw-input
-    [attr.id]="inputId"
+    [attr.id]="idForInput"
+    [attr.disabled]="disabled || readOnly ? true : undefined"
     formControlName="textData"
     type="checkbox"
     class="gln-switch-input"
@@ -15,15 +16,19 @@
     <span glnsw-thumb
       class="gln-switch-thumb">
     </span>
-    <span glnsw-ripple
+    <!-- <span glnsw-ripple
       class="gln-switch-ripple">
-    </span>
+    </span> -->
+    <gln-touch-ripple *ngIf="!disabled"
+      isCenter>
+    </gln-touch-ripple>
   </span>
   <span glnsw-track
     class="gln-switch-track">
   </span>
 </div>
-<label [attr.for]="inputId">
+<label [attr.for]="idForInput">
+  <!-- [ {{ formControl.value }} ] -->
   <span>
     <ng-content></ng-content>
   </span>
