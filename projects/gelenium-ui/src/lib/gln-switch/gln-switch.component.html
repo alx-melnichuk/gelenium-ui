@@ -16,10 +16,7 @@
     <span glnsw-thumb
       class="gln-switch-thumb">
     </span>
-    <!-- <span glnsw-ripple
-      class="gln-switch-ripple">
-    </span> -->
-    <gln-touch-ripple *ngIf="!disabled"
+    <gln-touch-ripple *ngIf="!disabled && !readOnly && !noRipple"
       isCenter>
     </gln-touch-ripple>
   </span>
@@ -27,8 +24,10 @@
     class="gln-switch-track">
   </span>
 </div>
-<label [attr.for]="idForInput">
-  <!-- [ {{ formControl.value }} ] -->
+<label glnsw-label
+  class="gln-switch-label"
+  [attr.for]="idForInput"
+  (click)="doClickByLabel($event)">
   <span>
     <ng-content></ng-content>
   </span>

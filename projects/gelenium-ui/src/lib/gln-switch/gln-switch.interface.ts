@@ -1,5 +1,6 @@
-import { GlnBaseControlValueConfig } from '../_classes/gln-base-control-value-config.interface';
+import { GlnBaseControlConfig } from '../_interface/gln-base-control-config.interface';
 
-export interface GlnSwitchConfig extends GlnBaseControlValueConfig {
+export interface GlnSwitchConfig extends GlnBaseControlConfig {
   isChecked?: boolean | undefined;
+  isNoRipple?: boolean | undefined;
 }

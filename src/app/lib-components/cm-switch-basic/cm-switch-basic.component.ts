@@ -43,6 +43,7 @@ export class CmSwitchBasicComponent {
   public isDisabled02a = false;
   public isNoAnimation02a = false;
   public isReadOnly02a = false;
+  public isNoRipple02a = false;
   public config02a: GlnSwitchConfig = {
     isNoAnimation: true, // ?: boolean | undefined;
     isReadOnly: true, // ?: boolean | undefined;

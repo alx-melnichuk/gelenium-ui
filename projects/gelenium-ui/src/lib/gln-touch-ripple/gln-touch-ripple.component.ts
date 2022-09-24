@@ -64,14 +64,15 @@ export class GlnTouchRippleComponent implements OnChanges {
     }
     const clientHeight = parentElement.clientHeight;
     const clientWidth = parentElement.clientWidth;
-    if (clientHeight && clientWidth && event.currentTarget) {
+
+    if (clientHeight && clientWidth) {
       const radius = Math.min(clientWidth, clientHeight) / 2;
-      const rect = (event.currentTarget as HTMLElement).getBoundingClientRect() || { left: 0, top: 0 };
-      let offsetX = Math.round(event.clientX - rect.left);
-      let offsetY = Math.round(event.clientY - rect.top);
-      if (isCenter) {
-        offsetX = Math.round(clientWidth / 2);
-        offsetY = Math.round(clientHeight / 2);
+      let offsetX = Math.round(clientWidth / 2);
+      let offsetY = Math.round(clientHeight / 2);
+      if (!isCenter && event.currentTarget) {
+        const rect = (event.currentTarget as HTMLElement).getBoundingClientRect() || { left: 0, top: 0 };
+        offsetX = Math.round(event.clientX - rect.left);
+        offsetY = Math.round(event.clientY - rect.top);
       }
       const left = offsetX - radius / 2;
       const top = offsetY - radius / 2;

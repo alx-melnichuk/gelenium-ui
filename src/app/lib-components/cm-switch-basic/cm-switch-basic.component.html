@@ -126,6 +126,11 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
   <input type="checkbox"
     [(ngModel)]="isReadOnly02a" />isReadOnly02a
 </label>
+
+<label>
+  <input type="checkbox"
+    [(ngModel)]="isNoRipple02a" />isNoRipple02a
+</label>
 <!--  -->
 
 <form *ngIf="true"
@@ -147,7 +152,9 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
         [isDisabled]="isDisabled02a ? true : undefined"
         [isNoAnimation]="isNoAnimation02a ? true : undefined"
         [isReadOnly]="isReadOnly02a ? true : undefined"
+        [isNoRipple]="isNoRipple02a ? true : undefined"
         id="unique_id_switch02a">
+        formGroup02.controls['model02a'].value
       </gln-switch> ( {{ formGroup02.controls['model02a'].value }})
     </div>
 

@@ -16,6 +16,7 @@ import {
   Output,
   Renderer2,
   SimpleChanges,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import {
@@ -25,15 +26,13 @@ import {
   Validator,
   FormControl,
   FormGroup,
-  AbstractControl,
-  ValidationErrors,
   ValidatorFn,
-  AsyncValidatorFn,
+  Validators,
 } from '@angular/forms';
 
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
-import { GlnBaseControlValueConfig } from '../_classes/gln-base-control-value-config.interface';
-import { GlnBaseControlValue } from '../_classes/gln-base-control-value.class';
+import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
+import { GlnBaseControl } from '../_interface/gln-base-control';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
@@ -59,38 +58,44 @@ export const GLN_SWITCH_CONFIG = new InjectionToken<GlnSwitchConfig>('GLN_SWITCH
   ],
 })
 export class GlnSwitchComponent
-  extends GlnBaseControlValue
+  extends GlnBaseControl
   implements OnChanges, OnInit, AfterViewInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
 {
-  // @Input()
-  // public id = `glnsw-${uniqueIdCounter++}`; // Defined in GlnBaseValueInit.
+  @Input()
+  public override id = `glnsw-${uniqueIdCounter++}`; // Defined in GlnBaseControl.
   @Input()
   public config: GlnSwitchConfig | null | undefined;
   @Input()
   public isChecked: string | boolean | null | undefined; // Specifies the initial value of the element.
-  // @Input()
-  // public isDisabled: string | boolean | null | undefined; // Defined in GlnBaseValueInit.
-  // @Input()
-  // public isNoAnimation: string | boolean | null | undefined; // Defined in GlnBaseValueInit.
-  // @Input()
-  // public isReadOnly: string | boolean | null | undefined; // Defined in GlnBaseValueInit.
-  // @Input()
-  // public isRequired: string | boolean | null | undefined;
-  // @Input()
-  // public tabIndex = 0; // Defined in GlnBaseValueInit.
+  @Input()
+  public override isDisabled: string | boolean | null | undefined; // Defined in GlnBaseControl.
+  @Input()
+  public override isNoAnimation: string | boolean | null | undefined; // Defined in GlnBaseControl.
+  @Input()
+  public isNoRipple: string | boolean | null | undefined;
+  @Input()
+  public override isReadOnly: string | boolean | null | undefined; // Defined in GlnBaseControl.
+  @Input()
+  public override isRequired: string | boolean | null | undefined; // Defined in GlnBaseControl.
+  @Input()
+  public override tabIndex = 0; // Defined in GlnBaseControl.
 
   @Output()
   readonly change: EventEmitter<boolean> = new EventEmitter();
 
+  @ViewChild(GlnTouchRippleComponent, { static: false })
+  public touchRipple: GlnTouchRippleComponent | null = null;
+
   public checked: boolean | null = null; // Binding attribute "isChecked".
   public currConfig: GlnSwitchConfig;
-  // protected disabled: boolean | null = null; // Binding attribute "isDisabled". // Defined in GlnBaseValueInit.
+  public override disabled: boolean | null = null; // Binding attribute "isDisabled". // Defined in GlnBaseControl.
   public formControl: FormControl = new FormControl({ value: false, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public idForInput = this.setIdForInput(this.id);
-  // protected noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // Defined in GlnBaseValueInit.
-  // protected readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Defined in GlnBaseValueInit.
-  // protected required: boolean | null = null; // Binding attribute "isRequired". // Defined in GlnBaseValueInit.
+  public override noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // Defined in GlnBaseControl.
+  public noRipple: boolean | null = null; // Binding attribute "isNoRipple".
+  public override readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Defined in GlnBaseControl.
+  public override required: boolean | null = null; // Binding attribute "isRequired". // Defined in GlnBaseControl.
 
   constructor(
     hostRef: ElementRef<HTMLElement>,
@@ -100,7 +105,6 @@ export class GlnSwitchComponent
     @Optional() @Inject(GLN_SWITCH_CONFIG) private rootConfig: GlnSwitchConfig | null
   ) {
     super(
-      `glnsw-${uniqueIdCounter++}`, // id: string,
       hostRef, // public hostRef: ElementRef<HTMLElement>,
       renderer, // protected renderer: Renderer2,
       ngZone // protected ngZone: NgZone
@@ -114,7 +118,7 @@ export class GlnSwitchComponent
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
-    // In the GlnBaseValueInit.ngOnChanges(), the definition is made:
+    // In the GlnBaseControl.ngOnChanges(), the definition is made:
     // - this.disabled = BooleanUtil.init(this.isDisabled);
     // - this.noAnimation = BooleanUtil.init(this.isNoAnimation);
     // - this.readOnly = BooleanUtil.init(this.isReadOnly);
@@ -124,12 +128,16 @@ export class GlnSwitchComponent
     if (changes['id']) {
       this.idForInput = this.setIdForInput(this.id);
     }
+    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null)) {
+      this.noRipple = BooleanUtil.init(this.isNoRipple) || this.currConfig.isNoRipple || null;
+    }
+    if (changes['isRequired']) {
+      this.prepareFormGroup(this.required);
+    }
   }
 
   public override ngOnInit(): void {
     super.ngOnInit();
-    // Add an attribute that disables animation on initialization.
-    super.setAttrByIsHookInit(true);
 
     // Determine the font size of the parent element.
     const parentFontSize = this.getFontSize(HtmlElemUtil.getElementRef(this.hostRef.nativeElement.parentElement));
@@ -142,13 +150,13 @@ export class GlnSwitchComponent
       this.formControl.setValue(isChecked, { emitEvent: false });
       this.settingChecked(isChecked, this.hostRef, this.renderer);
     }
+    if (this.noRipple == null) {
+      this.noRipple = this.currConfig.isNoRipple || null;
+    }
   }
 
-  public ngAfterViewInit(): void {
-    super.runWhenNgZoneIsStable(() => {
-      // Remove an attribute that disables animation on initialization.
-      super.setAttrByIsHookInit(false);
-    });
+  public override ngAfterViewInit(): void {
+    super.ngAfterViewInit();
   }
 
   // ** ControlValueAccessor - start **
@@ -174,33 +182,13 @@ export class GlnSwitchComponent
 
   // ** ControlValueAccessor - finish **
 
-  // ** Validator - start **
-
-  public validate(control: AbstractControl): ValidationErrors | null {
-    return !control ? null : this.formControl.errors;
-  }
-
-  // ** Validator - finish **
-
-  // ** GlnNodeInternalValidator - start **
-
-  public addValidators(validators: ValidatorFn | ValidatorFn[]): void {
-    if (validators != null) {
-      this.formControl.addValidators(validators);
-      this.formControl.updateValueAndValidity();
-    }
-  }
-
-  public addAsyncValidators(validators: AsyncValidatorFn | AsyncValidatorFn[]): void {
-    if (validators != null) {
-      this.formControl.addAsyncValidators(validators);
-      this.formControl.updateValueAndValidity();
-    }
-  }
-
-  // ** GlnNodeInternalValidator - finish **
-
   // ** Public API **
+
+  public doClickByLabel(event: MouseEvent): void {
+    if (!this.disabled && !this.readOnly && this.touchRipple) {
+      this.touchRipple.touchRipple(event, true);
+    }
+  }
 
   /** Toggles the state of the switch. */
   public toggle(): void {
@@ -220,7 +208,7 @@ export class GlnSwitchComponent
     return {};
   }
 
-  protected override getControlValueConfig(): GlnBaseControlValueConfig {
+  protected override getConfig(): GlnSwitchConfig {
     return { ...this.currConfig };
   }
 
@@ -244,5 +232,14 @@ export class GlnSwitchComponent
     this.checked = isChecked;
     HtmlElemUtil.setClass(renderer, elem, 'gln-checked', isChecked);
     HtmlElemUtil.setAttr(renderer, elem, 'chk', isChecked ? '' : null);
+  }
+
+  private prepareFormGroup(isRequired: boolean | null): void {
+    this.formControl.clearValidators();
+    const newValidator: ValidatorFn[] = [];
+    if (isRequired) {
+      newValidator.push(Validators.required);
+    }
+    this.formControl.setValidators(newValidator);
   }
 }
