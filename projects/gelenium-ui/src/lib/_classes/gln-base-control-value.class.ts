@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, Input, NgZone, OnChanges, OnInit, Renderer2, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, Input, NgZone, OnChanges, OnInit, Renderer2, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { take } from 'rxjs/operators';
 
@@ -10,7 +10,7 @@ import { GlnBaseControlValueConfig } from './gln-base-control-value-config.inter
 export const CSS_ATTR_HOOK_INIT = 'hkInit';
 
 @Directive()
-export abstract class GlnBaseControlValue implements OnChanges, OnInit, AfterViewInit, ControlValueAccessor {
+export abstract class GlnBaseControlValue implements OnChanges, OnInit, ControlValueAccessor {
   @Input()
   public id = '';
   @Input()
@@ -34,8 +34,6 @@ export abstract class GlnBaseControlValue implements OnChanges, OnInit, AfterVie
     if (!id) {
       console.warn('The "id" parameter is not defined.');
     }
-    // Add the CSS_ATTR_HOOK_INIT attribute, which disables the animation on initialization.
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_HOOK_INIT, '');
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -73,14 +71,6 @@ export abstract class GlnBaseControlValue implements OnChanges, OnInit, AfterVie
     }
   }
 
-  public ngAfterViewInit(): void {
-    // The ngZone will become stable when there are no more render tasks. This means that our component has already been rendered.
-    // And we can remove the CSS_ATTR_HOOK_INIT attribute, which blocks the animation during initialization.
-    this.ngZone.onStable.pipe(take(1)).subscribe(() => {
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_HOOK_INIT, null);
-    });
-  }
-
   // ** ControlValueAccessor - start **
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -113,6 +103,20 @@ export abstract class GlnBaseControlValue implements OnChanges, OnInit, AfterVie
   }
 
   // ** Protected API **
+
+  // Add or Remove an attribute that disables animation on initialization.
+  protected setAttrByIsHookInit(isHookInit: boolean): void {
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_HOOK_INIT, isHookInit ? '' : null);
+  }
+
+  // Execute the method when ngZone becomes stable.
+  protected runWhenNgZoneIsStable(callBack = (): void => {}): void {
+    // The ngZone will become stable when there are no more render tasks.
+    // This means that our component has already been rendered.
+    this.ngZone.onStable.pipe(take(1)).subscribe(() => {
+      callBack();
+    });
+  }
 
   protected getControlValueConfig(): GlnBaseControlValueConfig {
     return {};

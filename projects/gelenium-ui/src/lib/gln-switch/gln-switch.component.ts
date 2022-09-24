@@ -128,6 +128,9 @@ export class GlnSwitchComponent
 
   public override ngOnInit(): void {
     super.ngOnInit();
+    // Add an attribute that disables animation on initialization.
+    super.setAttrByIsHookInit(true);
+
     // Determine the font size of the parent element.
     const parentFontSize = this.getFontSize(HtmlElemUtil.getElementRef(this.hostRef.nativeElement.parentElement));
     if (parentFontSize > 0) {
@@ -141,9 +144,11 @@ export class GlnSwitchComponent
     }
   }
 
-  public override ngAfterViewInit(): void {
-    // Removing the CSS_ATTR_HOOK_INIT attribute, which disables animation on initialization.
-    super.ngAfterViewInit();
+  public ngAfterViewInit(): void {
+    super.runWhenNgZoneIsStable(() => {
+      // Remove an attribute that disables animation on initialization.
+      super.setAttrByIsHookInit(false);
+    });
   }
 
   // ** ControlValueAccessor - start **

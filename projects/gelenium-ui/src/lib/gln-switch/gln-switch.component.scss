@@ -106,9 +106,9 @@ gln-switch {
   &:not([dis]) div[glnsw-container]:hover span[glnsw-wrap] {
     background-color: var(--glnsw---bg-wrap-hov);
   }
-  // &.gln-checked span[glnsw-wrap] {
-  //   @include  mxTransform_TranslateXY(1.8em, 0); 
-  // }
+  &.gln-checked span[glnsw-wrap] {
+    @include  mxTransform_TranslateXY(1.8em, 0); 
+  }
 
   // ** Block: glnsw-thumb **
 
