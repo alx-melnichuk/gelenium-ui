@@ -17,7 +17,7 @@ import { BooleanUtil } from '../_utils/boolean.util';
  * - position: relative;
  * - overflow: hidden;
  */
-const RIPPLE_CLASS = 'glntr-ripple';
+const CSS_RIPPLE_CLASS = 'glntr-ripple';
 let uniqueIdCounter = 0;
 
 @Component({
@@ -81,7 +81,7 @@ export class GlnTouchRippleComponent implements OnChanges {
       circle.style.width = circle.style.height = `${radius}px`;
       circle.style.left = `${left}px`;
       circle.style.top = `${top}px`;
-      circle.classList.add(RIPPLE_CLASS);
+      circle.classList.add(CSS_RIPPLE_CLASS);
 
       circle.addEventListener(
         'animationend',

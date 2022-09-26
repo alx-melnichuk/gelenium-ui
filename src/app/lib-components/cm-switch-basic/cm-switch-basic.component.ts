@@ -8,8 +8,10 @@ import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-co
 
 const glnSwitchConfigDefault: GlnSwitchConfig = {
   isNoAnimation: true, // ?: boolean | undefined;
-  isReadOnly: true, // ?: boolean | undefined;
+  // isReadOnly: true, // ?: boolean | undefined;
+  // isRequired: true, // ?: boolean | undefined;
   isChecked: true,
+  isNoRipple: true,
 };
 
 @Component({
@@ -43,11 +45,12 @@ export class CmSwitchBasicComponent {
   public isDisabled02a = false;
   public isNoAnimation02a = false;
   public isReadOnly02a = false;
+  public isRequired02a = false;
   public isNoRipple02a = false;
   public config02a: GlnSwitchConfig = {
-    isNoAnimation: true, // ?: boolean | undefined;
+    // isNoAnimation: true, // ?: boolean | undefined;
     isReadOnly: true, // ?: boolean | undefined;
-    isChecked: true,
+    // isChecked: true,
   };
   public modelData02a = true;
 

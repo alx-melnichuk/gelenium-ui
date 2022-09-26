@@ -2,5 +2,8 @@ import { GlnBaseControlConfig } from '../_interface/gln-base-control-config.inte
 
 export interface GlnSwitchConfig extends GlnBaseControlConfig {
   isChecked?: boolean | undefined;
+  isNoAnimation?: boolean | undefined;
   isNoRipple?: boolean | undefined;
+  isReadOnly?: boolean | undefined;
+  isRequired?: boolean | undefined;
 }

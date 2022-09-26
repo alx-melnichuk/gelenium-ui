@@ -33,9 +33,11 @@ import {
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
 import { GlnBaseControl } from '../_interface/gln-base-control';
+import { GlnProperties } from '../_interface/gln-base-properties';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
+
 import { GlnSwitchConfig } from './gln-switch.interface';
 
 const CSS_PROP_PARENT_FONT_SIZE = '--glnsw-pr-font-size';
@@ -70,13 +72,13 @@ export class GlnSwitchComponent
   @Input()
   public override isDisabled: string | boolean | null | undefined; // Defined in GlnBaseControl.
   @Input()
-  public override isNoAnimation: string | boolean | null | undefined; // Defined in GlnBaseControl.
+  public isNoAnimation: string | boolean | null | undefined; // Defined in GlnBaseControl.
   @Input()
   public isNoRipple: string | boolean | null | undefined;
   @Input()
-  public override isReadOnly: string | boolean | null | undefined; // Defined in GlnBaseControl.
+  public isReadOnly: string | boolean | null | undefined; // Defined in GlnBaseControl.
   @Input()
-  public override isRequired: string | boolean | null | undefined; // Defined in GlnBaseControl.
+  public isRequired: string | boolean | null | undefined; // Defined in GlnBaseControl.
   @Input()
   public override tabIndex = 0; // Defined in GlnBaseControl.
 
@@ -92,10 +94,10 @@ export class GlnSwitchComponent
   public formControl: FormControl = new FormControl({ value: false, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public idForInput = this.setIdForInput(this.id);
-  public override noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // Defined in GlnBaseControl.
+  public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // Defined in GlnBaseControl.
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple".
-  public override readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Defined in GlnBaseControl.
-  public override required: boolean | null = null; // Binding attribute "isRequired". // Defined in GlnBaseControl.
+  public readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Defined in GlnBaseControl.
+  public required: boolean | null = null; // Binding attribute "isRequired". // Defined in GlnBaseControl.
 
   constructor(
     hostRef: ElementRef<HTMLElement>,
@@ -120,17 +122,19 @@ export class GlnSwitchComponent
     }
     // In the GlnBaseControl.ngOnChanges(), the definition is made:
     // - this.disabled = BooleanUtil.init(this.isDisabled);
-    // - this.noAnimation = BooleanUtil.init(this.isNoAnimation);
-    // - this.readOnly = BooleanUtil.init(this.isReadOnly);
-    // - this.required = BooleanUtil.init(this.isRequired);
     super.ngOnChanges(changes);
 
     if (changes['id']) {
       this.idForInput = this.setIdForInput(this.id);
     }
-    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null)) {
-      this.noRipple = BooleanUtil.init(this.isNoRipple) || this.currConfig.isNoRipple || null;
-    }
+    // Checking and handle the 'isNoAnimation' parameter.
+    super.onChangesProperty(changes, 'isNoAnimation', this.currConfig as GlnProperties);
+    // Checking and handle the 'isNoRipple' parameter.
+    super.onChangesProperty(changes, 'isNoRipple', this.currConfig as GlnProperties);
+    // Checking and handle the 'isReadOnly' parameter.
+    super.onChangesProperty(changes, 'isReadOnly', this.currConfig as GlnProperties);
+    // Checking and handle the 'isRequired' parameter.
+    super.onChangesProperty(changes, 'isRequired', this.currConfig as GlnProperties);
     if (changes['isRequired']) {
       this.prepareFormGroup(this.required);
     }
@@ -144,15 +148,23 @@ export class GlnSwitchComponent
     if (parentFontSize > 0) {
       HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_PARENT_FONT_SIZE, NumberUtil.str(parentFontSize)?.concat('px'));
     }
-    // If parameter AA is defined, then set the initial value.
+    // If parameter 'isChecked' is defined, then set the initial value.
     const isChecked = this.isChecked != null ? BooleanUtil.init(this.isChecked) : this.currConfig.isChecked;
     if (isChecked != null && isChecked !== this.formControl.value) {
       this.formControl.setValue(isChecked, { emitEvent: false });
-      this.settingChecked(isChecked, this.hostRef, this.renderer);
+      this.settingChecked(this.renderer, this.hostRef, isChecked);
     }
-    if (this.noRipple == null) {
-      this.noRipple = this.currConfig.isNoRipple || null;
+    // Checking and handle the 'isNoAnimation' parameter.
+    super.onInitProperty('isNoAnimation', this.currConfig as GlnProperties);
+    // Checking and handle the 'isReadOnly' parameter.
+    super.onInitProperty('isReadOnly', this.currConfig as GlnProperties);
+    // Checking and handle the 'isRequired' parameter.
+    super.onInitProperty('isRequired', this.currConfig as GlnProperties);
+    if (this.required !== null) {
+      this.prepareFormGroup(this.required);
     }
+    // Checking and handle the 'isNoRipple' parameter.
+    super.onInitProperty('isNoRipple', this.currConfig as GlnProperties);
   }
 
   public override ngAfterViewInit(): void {
@@ -164,7 +176,7 @@ export class GlnSwitchComponent
   public override writeValue(value: any): void {
     if (value !== this.formControl.value) {
       this.formControl.setValue(!!value, { emitEvent: false });
-      this.settingChecked(!!value, this.hostRef, this.renderer);
+      this.settingChecked(this.renderer, this.hostRef, !!value);
       this.changeDetectorRef.markForCheck();
     }
   }
@@ -195,7 +207,7 @@ export class GlnSwitchComponent
     if (!this.disabled && !this.readOnly) {
       const newValue = !this.formControl.value;
       this.formControl.setValue(newValue, { emitEvent: false });
-      this.settingChecked(newValue, this.hostRef, this.renderer);
+      this.settingChecked(this.renderer, this.hostRef, newValue);
       this.onChange(newValue);
       this.change.emit(newValue);
       this.changeDetectorRef.markForCheck();
@@ -228,7 +240,7 @@ export class GlnSwitchComponent
     return result;
   }
 
-  private settingChecked(isChecked: boolean, elem: ElementRef<HTMLElement>, renderer: Renderer2): void {
+  private settingChecked(renderer: Renderer2, elem: ElementRef<HTMLElement>, isChecked: boolean): void {
     this.checked = isChecked;
     HtmlElemUtil.setClass(renderer, elem, 'gln-checked', isChecked);
     HtmlElemUtil.setAttr(renderer, elem, 'chk', isChecked ? '' : null);

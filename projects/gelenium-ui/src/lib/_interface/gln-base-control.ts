@@ -17,6 +17,9 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { GlnBaseControlConfig } from './gln-base-control-config.interface';
 import { GlnBaseProperties } from './gln-base-properties';
 
+export const CSS_CLASS_DISABLED = 'gln-disabled';
+export const CSS_ATTR_DISABLED = 'dis';
+
 export const CSS_ATTR_ID = 'id';
 export const CSS_ATTR_TAB_INDEX = 'tabindex';
 export const CSS_ATTR_HOOK_INIT = 'hkInit';
@@ -32,21 +35,12 @@ export abstract class GlnBaseControl
   @Input()
   public id: string = '';
   @Input()
-  public override isDisabled: string | boolean | null | undefined; // Defined in GlnBaseProperties.
-  @Input()
-  public override isNoAnimation: string | boolean | null | undefined; // Defined in GlnBaseProperties.
-  @Input()
-  public override isReadOnly: string | boolean | null | undefined; // Defined in GlnBaseProperties.
-  @Input()
-  public override isRequired: string | boolean | null | undefined; // Defined in GlnBaseProperties.
+  public isDisabled: string | boolean | null | undefined; // Defined in GlnBaseProperties.
   @Input()
   public tabIndex: number = 0;
 
-  protected override disabled: boolean | null = null; // Binding attribute "isDisabled". // Defined in GlnBaseProperties.
+  protected disabled: boolean | null = null; // Binding attribute "isDisabled". // Defined in GlnBaseProperties.
   protected flags: number = 0;
-  protected override noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // Defined in GlnBaseProperties.
-  protected override readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Defined in GlnBaseProperties.
-  protected override required: boolean | null = null; // Binding attribute "isRequired". // Defined in GlnBaseProperties.
 
   constructor(
     hostRef: ElementRef<HTMLElement>, // public hostRef: ElementRef<HTMLElement>,
@@ -56,11 +50,13 @@ export abstract class GlnBaseControl
     super(hostRef, renderer);
   }
 
-  public override ngOnChanges(changes: SimpleChanges): void {
-    super.ngOnChanges(changes);
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['isDisabled']) {
+      this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
+    }
   }
 
-  public override ngOnInit(): void {
+  public ngOnInit(): void {
     if (!(this.flags & FLAG_NO_UPDATE_ID)) {
       // Update ID value if it is missing.
       this.updateIdWhenMissing(this.renderer, this.hostRef, this.id);
@@ -73,7 +69,6 @@ export abstract class GlnBaseControl
       // Add an attribute that disables animation on initialization.
       this.setAttrByIsHookInit(true);
     }
-    super.ngOnInit();
   }
 
   public ngAfterViewInit(): void {
@@ -103,8 +98,9 @@ export abstract class GlnBaseControl
     this.onTouched = fn;
   }
 
-  public override setDisabledState(isDisabled: boolean): void {
-    super.setDisabledState(isDisabled);
+  public setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+    this.setClassAndAttr(this.renderer, this.hostRef, CSS_CLASS_DISABLED, CSS_ATTR_DISABLED, isDisabled);
   }
 
   // ** ControlValueAccessor - finish **
@@ -146,7 +142,7 @@ export abstract class GlnBaseControl
 
   // ** Protected API **
 
-  protected override getConfig(): GlnBaseControlConfig {
+  protected getConfig(): GlnBaseControlConfig {
     return {};
   }
 
