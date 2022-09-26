@@ -61,7 +61,7 @@ gln-frame {
   }
   border-radius: var(--glnfr-br-rd, var(--glnfrs-br-rd, var(--def-br-rd)));
 
-  &:not([noAnm]) {
+  &:not([noani]) {
     --glnfr-trn-drt-200: 200ms;
     --glnfr-trn-drt-100: 100ms;
     --glnfr-trn-drt-50: 50ms;

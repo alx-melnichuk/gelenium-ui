@@ -72,13 +72,13 @@ export class GlnSwitchComponent
   @Input()
   public override isDisabled: string | boolean | null | undefined; // Defined in GlnBaseControl.
   @Input()
-  public isNoAnimation: string | boolean | null | undefined; // Defined in GlnBaseControl.
+  public isNoAnimation: string | boolean | null | undefined;
   @Input()
   public isNoRipple: string | boolean | null | undefined;
   @Input()
-  public isReadOnly: string | boolean | null | undefined; // Defined in GlnBaseControl.
+  public isReadOnly: string | boolean | null | undefined;
   @Input()
-  public isRequired: string | boolean | null | undefined; // Defined in GlnBaseControl.
+  public isRequired: string | boolean | null | undefined;
   @Input()
   public override tabIndex = 0; // Defined in GlnBaseControl.
 
@@ -94,10 +94,10 @@ export class GlnSwitchComponent
   public formControl: FormControl = new FormControl({ value: false, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public idForInput = this.setIdForInput(this.id);
-  public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // Defined in GlnBaseControl.
+  public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple".
-  public readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Defined in GlnBaseControl.
-  public required: boolean | null = null; // Binding attribute "isRequired". // Defined in GlnBaseControl.
+  public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
+  public required: boolean | null = null; // Binding attribute "isRequired".
 
   constructor(
     hostRef: ElementRef<HTMLElement>,
