@@ -87,6 +87,16 @@ export class GlnFrameComponent extends GlnBaseProperties implements OnChanges, O
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes['exterior']) {
+      // You cannot take a value only from the config, since values from the directives
+      // glnFrameExteriorInput, glnFrameSize are used for rendering.
+      // --glnfre-pd-shr: 33.25px; // glnFrameExteriorInput
+      // --glnfre-trn-y: -8.62px;  // glnFrameExteriorInput
+      // --glnfre-trn2-y: 13.5px;  // glnFrameExteriorInput
+      // --glnfrs-br-rd: 5px;      // glnFrameSize
+      // --glnfrs-pd-lf: 12.5px;   // glnFrameSize
+      // --glnfrs-pd-rg: 12.5px;   // glnFrameSize
+      // --glnfrs-pd-tp: 13.5px;   // glnFrameSize
+      // --glnfrs-pd-bt: 13.5px;   // glnFrameSize
       this.frameExterior = GlnFrameExteriorUtil.convert(this.exterior || null);
       this.settingExterior(this.renderer, this.hostRef, this.frameExterior);
     }
