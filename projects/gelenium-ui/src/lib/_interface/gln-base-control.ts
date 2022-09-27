@@ -17,15 +17,14 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { GlnBaseControlConfig } from './gln-base-control-config.interface';
 import { GlnBaseProperties } from './gln-base-properties';
 
-export const CSS_CLASS_DISABLED = 'gln-disabled';
-export const CSS_ATTR_DISABLED = 'dis';
-
-export const CSS_ATTR_ID = 'id';
-export const CSS_ATTR_TAB_INDEX = 'tabindex';
-export const CSS_ATTR_HOOK_INIT = 'hkInit';
-export const FLAG_NO_UPDATE_ID = 1;
-export const FLAG_NO_TAB_INDEX = 2;
-export const FLAG_NO_HOOK_INIT = 4;
+export const GLN_BC_CL_DISABLED = 'gln-disabled';
+export const GLN_BC_AT_DISABLED = 'dis';
+export const GLN_BC_AT_ID = 'id';
+export const GLN_BC_AT_TAB_INDEX = 'tabindex';
+export const GLN_BC_AT_HOOK_INIT = 'hkInit';
+export const GLN_BC_FL_NO_UPDATE_ID = 1;
+export const GLN_BC_FL_NO_TAB_INDEX = 2;
+export const GLN_BC_FL_NO_HOOK_INIT = 4;
 
 @Directive()
 export abstract class GlnBaseControl
@@ -57,22 +56,22 @@ export abstract class GlnBaseControl
   }
 
   public ngOnInit(): void {
-    if (!(this.flags & FLAG_NO_UPDATE_ID)) {
+    if (!(this.flags & GLN_BC_FL_NO_UPDATE_ID)) {
       // Update ID value if it is missing.
       this.updateIdWhenMissing(this.renderer, this.hostRef, this.id);
     }
-    if (!(this.flags & FLAG_NO_TAB_INDEX)) {
+    if (!(this.flags & GLN_BC_FL_NO_TAB_INDEX)) {
       // Set the TagIndex value if the flag 'disabled' is not set.
       this.setAttrTabindexByDisabled(this.renderer, this.hostRef, this.tabIndex, !!this.disabled);
     }
-    if (!(this.flags & FLAG_NO_HOOK_INIT)) {
+    if (!(this.flags & GLN_BC_FL_NO_HOOK_INIT)) {
       // Add an attribute that disables animation on initialization.
       this.setAttrByIsHookInit(true);
     }
   }
 
   public ngAfterViewInit(): void {
-    if (!(this.flags & FLAG_NO_HOOK_INIT)) {
+    if (!(this.flags & GLN_BC_FL_NO_HOOK_INIT)) {
       this.runWhenNgZoneIsStable(() => {
         // Remove an attribute that disables animation on initialization.
         this.setAttrByIsHookInit(false);
@@ -100,7 +99,7 @@ export abstract class GlnBaseControl
 
   public setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
-    this.setClassAndAttr(this.renderer, this.hostRef, CSS_CLASS_DISABLED, CSS_ATTR_DISABLED, isDisabled);
+    this.setClassAndAttr(this.renderer, this.hostRef, GLN_BC_CL_DISABLED, GLN_BC_AT_DISABLED, isDisabled);
   }
 
   // ** ControlValueAccessor - finish **
@@ -151,15 +150,15 @@ export abstract class GlnBaseControl
   }
   /** Update ID value if it is missing. */
   protected updateIdWhenMissing(renderer: Renderer2, elem: ElementRef<HTMLElement> | null, id: string): void {
-    HtmlElemUtil.updateIfMissing(renderer, elem, CSS_ATTR_ID, id);
+    HtmlElemUtil.updateIfMissing(renderer, elem, GLN_BC_AT_ID, id);
   }
   /** Set the TagIndex value if the flag 'disabled' is not set. */
   protected setAttrTabindexByDisabled(rnd: Renderer2, elem: ElementRef<HTMLElement> | null, tabIndex: number, disabled: boolean): void {
-    HtmlElemUtil.setAttr(rnd, elem, CSS_ATTR_TAB_INDEX, !disabled ? '' + tabIndex : null);
+    HtmlElemUtil.setAttr(rnd, elem, GLN_BC_AT_TAB_INDEX, !disabled ? '' + tabIndex : null);
   }
   /** Add or Remove an attribute that disables animation on initialization. */
   protected setAttrByIsHookInit(isHookInit: boolean): void {
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_HOOK_INIT, isHookInit ? '' : null);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, GLN_BC_AT_HOOK_INIT, isHookInit ? '' : null);
   }
   /** Execute the method when ngZone becomes stable. */
   protected runWhenNgZoneIsStable(callBack = (): void => {}): void {

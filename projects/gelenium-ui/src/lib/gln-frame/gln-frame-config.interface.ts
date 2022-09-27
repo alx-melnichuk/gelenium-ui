@@ -14,3 +14,13 @@ export interface GlnFrameConfig {
   ornamLfAlign?: GlnFrameOrnamAlign | undefined;
   ornamRgAlign?: GlnFrameOrnamAlign | undefined;
 }
+
+export interface GlnFrameConfig2 {
+  exterior?: GlnFrameExterior | undefined;
+  frameSize?: GlnFrameSize | undefined;
+  frameSizeValue?: number | undefined;
+  isLabelShrink?: boolean | undefined;
+  isNoAnimation?: boolean | undefined;
+  isNoLabel?: boolean | undefined;
+  labelPd?: number | undefined; // px
+}

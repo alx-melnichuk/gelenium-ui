@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -41,6 +42,13 @@ import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { GlnInputType, GlnInputTypeUtil } from '../gln-input/gln-input.interface';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { GlnBaseControl, GLN_BC_FL_NO_TAB_INDEX, GLN_BC_FL_NO_UPDATE_ID } from '../_interface/gln-base-control';
+import { GlnProperties } from '../_interface/gln-base-properties';
+import { GlnInputConfig } from './gln-input-config.interface';
+import { BooleanUtil } from '../_utils/boolean.util';
+
+export const GLN_IN_CL_LABEL_SHRINK = 'glnin-shrink';
+export const GLN_IN_CL_NO_LABEL = 'glnin-no-label';
 
 let uniqueIdCounter = 0;
 
@@ -60,11 +68,11 @@ export const GLN_INPUT_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_INPUT_CO
   ],
 })
 export class GlnInputComponent
-  extends GlnBasisFrame
-  implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
+  extends GlnBaseControl
+  implements OnChanges, OnInit, AfterViewInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
 {
-  // @Input()
-  // public id = `glnin-${uniqueIdCounter++}`; // Is in GlnBasisControl.
+  @Input()
+  public override id = `glnin-${uniqueIdCounter++}`; // Defined in GlnBaseControl.
   @Input()
   public autoComplete = '';
   @Input()
@@ -75,22 +83,22 @@ export class GlnInputComponent
   public frameSize: string | null | undefined; // GlnFrameSizeType
   @Input()
   public helperText: string | null | undefined;
-  // @Input()
-  // public isDisabled: string | boolean | null | undefined; // Is in GlnBasisControl.
-  // @Input()
-  // public isError: string | boolean | null | undefined; // Is in GlnBasisControl.
-  // @Input()
-  // public isLabelShrink: string | boolean | null | undefined; // Is in GlnBasisControl.
-  // @Input()
-  // public isNoAnimation: string | boolean | null | undefined; // Is in GlnBasisControl.
-  // @Input()
-  // public isNoLabel: string | boolean | null | undefined; // Is in GlnBasisControl.
-  // @Input()
-  // public isReadOnly: string | boolean | null | undefined; // Is in GlnBasisControl.
-  // @Input()
-  // public isRequired: string | boolean | null | undefined; // Is in GlnBasisControl.
-  // @Input()
-  // public isValueInit: string | boolean | null | undefined; // Is in GlnBasisControl.
+  @Input()
+  public override isDisabled: string | boolean | null | undefined; // Defined in GlnBaseControl.
+  @Input()
+  public isError: string | boolean | null | undefined;
+  @Input()
+  public isLabelShrink: string | boolean | null | undefined;
+  @Input()
+  public isNoAnimation: string | boolean | null | undefined;
+  @Input()
+  public isNoLabel: string | boolean | null | undefined;
+  @Input()
+  public isReadOnly: string | boolean | null | undefined;
+  @Input()
+  public isRequired: string | boolean | null | undefined;
+  @Input()
+  public isValueInit: string | boolean | null | undefined; // #
   @Input()
   public label: string | null | undefined;
   @Input()
@@ -110,7 +118,7 @@ export class GlnInputComponent
   @Input()
   public step: number | null | undefined;
   @Input()
-  public tabIndex = 0;
+  public override tabIndex = 0; // Defined in GlnBaseControl.
   @Input()
   public type: string = GlnInputType.text.valueOf();
   @Input()
@@ -120,55 +128,86 @@ export class GlnInputComponent
   readonly focused: EventEmitter<void> = new EventEmitter();
   @Output()
   readonly blured: EventEmitter<void> = new EventEmitter();
-  // @Output()
-  // readonly writeValueInit: EventEmitter<() => void> = new EventEmitter(); // From GlnBasisByFrame
 
   @ViewChild('inputElement')
   public inputElementRef: ElementRef<HTMLElement> | null = null;
 
-  public currConfig: GlnFrameConfig | null = null;
-  // public disabled: boolean | null = null; // Binding attribute "isDisabled". // Is in GlnBasisControl.
-  // public error: boolean | null = null; // Binding attribute "isError". // Is in GlnBasisControl.
+  public currConfig: GlnFrameConfig;
+  public override disabled: boolean | null = null; // Binding attribute "isDisabled". // Defined in GlnBaseControl. // +
+  public error: boolean | null = null; // Binding attribute "isError". // +
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public isFocused = false;
   public isFilled = false;
-  // public isWriteValueInit: boolean | null = null;                            // Is in GlnBasisControl.
-  // public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink". // Is in GlnBasisControl.
-  // public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // Is in GlnBasisControl.
-  // public noLabel: boolean | null = null; // Binding attribute "isNoLabel". // Is in GlnBasisControl.
-  // public readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Is in GlnBasisControl.
-  // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisControl.
+  public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink". // +
+  public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // +
+  public noLabel: boolean | null = null; // Binding attribute "isNoLabel". // +
+  public readOnly: boolean | null = null; // Binding attribute "isReadOnly". // +
+  public required: boolean | null = null; // Binding attribute "isRequired". // +
   public typeVal: GlnInputType = GlnInputType.text;
-  // public valueInit: boolean | null = null; // Binding attribute "isValueInit". // Is in GlnBasisControl.
 
   constructor(
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    @Inject(PLATFORM_ID) private platformId: Object,
-    changeDetectorRef: ChangeDetectorRef,
-    @Optional() @Inject(GLN_INPUT_CONFIG) private rootConfig: GlnFrameConfig | null,
     hostRef: ElementRef<HTMLElement>,
     renderer: Renderer2,
-    ngZone: NgZone
+    ngZone: NgZone,
+
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private changeDetectorRef: ChangeDetectorRef,
+    @Optional() @Inject(GLN_INPUT_CONFIG) private rootConfig: GlnFrameConfig | null
   ) {
-    super(uniqueIdCounter++, 'glnin', hostRef, renderer, changeDetectorRef, ngZone);
-    this.currConfig = this.rootConfig;
+    super(
+      hostRef, // public hostRef: ElementRef<HTMLElement>,
+      renderer, // protected renderer: Renderer2,
+      ngZone // protected ngZone: NgZone
+    );
+    this.flags = GLN_BC_FL_NO_UPDATE_ID + GLN_BC_FL_NO_TAB_INDEX;
+    this.currConfig = this.rootConfig || {};
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-input', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
   }
 
   public override ngOnChanges(changes: SimpleChanges): void {
-    // In the GlnBasisControl.ngOnChanges(), the definition is made:
+    if (changes['config']) {
+      this.currConfig = { ...this.rootConfig, ...this.config };
+    }
+    // In the GlnBaseControl.ngOnChanges(), the definition is made:
     // - this.disabled = BooleanUtil.init(this.isDisabled);
-    // - this.error = BooleanUtil.init(this.isError);
-    // - this.labelShrink = BooleanUtil.init(this.isLabelShrink);
-    // - this.noAnimation = BooleanUtil.init(this.isNoAnimation);
-    // - this.noLabel = BooleanUtil.init(this.isNoLabel);
-    // - this.readOnly = BooleanUtil.init(this.isReadOnly);
-    // - this.required = BooleanUtil.init(this.isRequired);
-    // - this.valueInit = BooleanUtil.init(this.isValueInit);
     super.ngOnChanges(changes);
+
+    // #public autoComplete = '';
+    // #public config: GlnFrameConfig | null | undefined;
+    // #public exterior: string | null | undefined; // GlnFrameExteriorType
+    // #public frameSize: string | null | undefined; // GlnFrameSizeType
+    // #public helperText: string | null | undefined;
+
+    // Checking and handle the 'isError' parameter.
+    super.onChangesProperty(changes, 'isError', this.currConfig as GlnProperties);
+    // Checking and handle the 'isLabelShrink' parameter.
+    super.onChangesProperty(changes, 'isLabelShrink', this.currConfig as GlnProperties, GLN_IN_CL_LABEL_SHRINK);
+    // Checking and handle the 'isNoAnimation' parameter.
+    super.onChangesProperty(changes, 'isNoAnimation', this.currConfig as GlnProperties);
+    // Checking and handle the 'isNoLabel' parameter.
+    super.onChangesProperty(changes, 'isNoLabel', this.currConfig as GlnProperties, GLN_IN_CL_NO_LABEL);
+    // Checking and handle the 'isReadOnly' parameter.
+    super.onChangesProperty(changes, 'isReadOnly', this.currConfig as GlnProperties);
+    // Checking and handle the 'isRequired' parameter.
+    super.onChangesProperty(changes, 'isRequired', this.currConfig as GlnProperties);
+
+    // #public label: string | null | undefined;
+    // #public max: number | null | undefined;
+    // #public maxLength: number | null | undefined;
+    // #public min: number | null | undefined;
+    // #public minLength: number | null | undefined;
+    // #public ornamLfAlign: string | null | undefined; // OrnamAlign
+    // #public ornamRgAlign: string | null | undefined; // OrnamAlign
+    // #public pattern: string | RegExp = '';
+    // #public step: number | null | undefined;
+    // #public override tabIndex = 0; // Defined in GlnBaseControl.
+    // #public type: string = GlnInputType.text.valueOf();
+    // #public wdFull: string | null | undefined;
+
     if (changes['type']) {
       this.typeVal = GlnInputTypeUtil.create(this.type) || GlnInputType.text;
     }
@@ -182,10 +221,23 @@ export class GlnInputComponent
 
   public override ngOnInit(): void {
     super.ngOnInit();
+
+    // Checking and handle the 'isError' parameter.
+    super.onInitProperty('isError', this.currConfig as GlnProperties);
+    // Checking and handle the 'isLabelShrink' parameter.
+    super.onInitProperty('isLabelShrink', this.currConfig as GlnProperties, GLN_IN_CL_LABEL_SHRINK);
+    // Checking and handle the 'isNoAnimation' parameter.
+    super.onInitProperty('isNoAnimation', this.currConfig as GlnProperties);
+    // Checking and handle the 'isNoLabel' parameter.
+    super.onInitProperty('isNoLabel', this.currConfig as GlnProperties, GLN_IN_CL_NO_LABEL);
+    // Checking and handle the 'isReadOnly' parameter.
+    super.onInitProperty('isReadOnly', this.currConfig as GlnProperties);
+    // Checking and handle the 'isRequired' parameter.
+    super.onInitProperty('isRequired', this.currConfig as GlnProperties);
   }
 
-  public override ngAfterContentInit(): void {
-    super.ngAfterContentInit();
+  public override ngAfterViewInit(): void {
+    super.ngAfterViewInit();
   }
 
   // ** ControlValueAccessor - start **
@@ -209,32 +261,6 @@ export class GlnInputComponent
   }
 
   // ** ControlValueAccessor - finish **
-
-  // ** Validator - start **
-
-  public validate(control: AbstractControl): ValidationErrors | null {
-    return !control ? null : this.formControl.errors;
-  }
-
-  // ** Validator - finish **
-
-  // ** GlnNodeInternalValidator - start **
-
-  public addValidators(validators: ValidatorFn | ValidatorFn[]): void {
-    if (validators != null) {
-      this.formControl.addValidators(validators);
-      this.formControl.updateValueAndValidity();
-    }
-  }
-
-  public addAsyncValidators(validators: AsyncValidatorFn | AsyncValidatorFn[]): void {
-    if (validators != null) {
-      this.formControl.addAsyncValidators(validators);
-      this.formControl.updateValueAndValidity();
-    }
-  }
-
-  // ** GlnNodeInternalValidator - finish **
 
   // ** Public API **
 
@@ -264,6 +290,16 @@ export class GlnInputComponent
     if (!!event && !event.cancelBubble) {
       this.onChange(this.formControl.value);
     }
+  }
+
+  // ** Protcted API **
+
+  protected override getConfig(): GlnFrameConfig {
+    return this.currConfig;
+  }
+
+  protected override getFormControl(): FormControl | null {
+    return this.formControl;
   }
 
   // ** Private API **

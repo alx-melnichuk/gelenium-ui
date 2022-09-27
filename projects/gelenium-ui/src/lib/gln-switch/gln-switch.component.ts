@@ -118,7 +118,7 @@ export class GlnSwitchComponent
       renderer, // protected renderer: Renderer2,
       ngZone // protected ngZone: NgZone
     );
-    this.currConfig = this.rootConfig || this.createConfig();
+    this.currConfig = this.rootConfig || {};
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-switch', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
   }
@@ -230,10 +230,6 @@ export class GlnSwitchComponent
   }
 
   // ** Protected API **
-
-  protected createConfig(): GlnSwitchConfig {
-    return {};
-  }
 
   protected override getConfig(): GlnSwitchConfig {
     return { ...this.currConfig };
