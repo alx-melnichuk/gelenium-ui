@@ -17,7 +17,7 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
 </section>
 
 
-<form *ngIf="false"
+<form *ngIf="true"
   [formGroup]="formGroup01"
   novalidate
   autocomplete="off">
@@ -27,7 +27,7 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem sb-elem">
       <div>
         <small>
-          <em>checked by default.</em>
+          <em>Checked by default.</em>
         </small>
       </div>
       <gln-switch formControlName="model01a">
@@ -37,7 +37,7 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem sb-elem">
       <div>
         <small>
-          <em>unchecked by default.</em>
+          <em>Unchecked by default.</em>
         </small>
       </div>
       <gln-switch formControlName="model01b">
@@ -47,7 +47,7 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem sb-elem">
       <div>
         <small>
-          <em>disabled and checked.</em>
+          <em>Disabled and checked.</em>
         </small>
       </div>
       <gln-switch formControlName="model01c"
@@ -58,7 +58,7 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem sb-elem">
       <div>
         <small>
-          <em>disabled and unchecked.</em>
+          <em>Disabled and unchecked.</em>
         </small>
       </div>
       <gln-switch formControlName="model01d"
@@ -69,167 +69,194 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
   </div>
 </form>
 
+<!--source-->
+
 
 <!-- ATTRIBUTES -->
 
-<section *ngIf="false"
+<section *ngIf="true"
   mr-vr>
   <h3 class="app-hover-link">
     Attributes.
     <a [href]="urlCmSwitch + '#Attributes'">#</a>
   </h3>
-  <p>
   <p>The following attributes are supported:</p>
   <ul>
     <li>"id" - parameter for defining the unique identifier of the input field
       (id="unique_identifier");
     </li>
-
     <li>
       "config" - Defines a configuration object.
-      <!-- <a [href]="urlCmFrame + '#Config'">More details.</a> -->
+      <a [href]="urlCmSwitch + '#Config'">More details.</a>
     </li>
-
+    <li>"isChecked" - specifies only the initial value of the element (isChecked);</li>
+    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
+    <li>"isNoAnimation" - disable animation execution (isNoAnimation);</li>
+    <li>"isNoRipple" - disables the execution of the ripple effect (isNoRipple);</li>
+    <li>"isReadOnly" - Specifies the status of an element as read-only (isReadOnly);</li>
   </ul>
-
-  <span>For example:</span>
-  <code><pre source="html">
-&lt;gln-switch formControlName="model02a"&gt;
-  Label
-&lt;/gln-switch&gt;</pre></code>
 </section>
 
-<!-- <div class="app-group">
+<div class="app-group"
+  *ngIf="true">
 
   <div class="app-elem">
     <div>
       <small>
-        <em>Attributes: isChecked.</em>
+        <em>Attributes: id, isChecked. Value={{ data02a }}</em>
       </small>
     </div>
-    <gln-switch [(ngModel)]="modelData02a">
+    <gln-switch id="unique_id_switch02a"
+      (change)="data02a=$event.checked"
+      [isChecked]="data02a">Checked
     </gln-switch>
   </div>
 
-</div> -->
-
-
-<label>
-  <input type="checkbox"
-    [(ngModel)]="isDisabled02a" />isDisabled02a
-</label>
-<label>
-  <input type="checkbox"
-    [(ngModel)]="isNoAnimation02a" />isNoAnimation02a
-</label>
-<label>
-  <input type="checkbox"
-    [(ngModel)]="isReadOnly02a" />isReadOnly02a
-</label>
-<label>
-  <input type="checkbox"
-    [(ngModel)]="isRequired02a" />isRequired02a
-</label>
-<label>
-  <input type="checkbox"
-    [(ngModel)]="isNoRipple02a" />isNoRipple02a
-</label>
-<!--  -->
+</div>
 
 <form *ngIf="true"
-  [formGroup]="formGroup02"
+  [formGroup]="formGroup02a"
   novalidate
   autocomplete="off">
 
   <div class="app-group">
 
-    <!-- demo1 -->
     <div class="app-elem">
       <div>
         <small>
-          <em>Attributes: id.</em>
-        </small>
-      </div>
-      <gln-switch formControlName="model02a"
-        config9="config02a"
-        isDisabled9="isDisabled02a ? true : undefined"
-        [isNoAnimation]="isNoAnimation02a ? true : undefined"
-        [isReadOnly]="isReadOnly02a ? true : undefined"
-        [isRequired]="isRequired02a ? true : undefined"
-        [isNoRipple]="isNoRipple02a ? true : undefined"
-        id9="unique_id_switch02a">
-        formGroup02.controls['model02a'].value
-      </gln-switch> ( {{ formGroup02.controls['model02a'].value }})
-    </div>
-
-    <!-- demo2 -->
-    <!-- <div class="app-elem">
-      <div>
-        <small>
-          <em>Attributes: id.</em>
-        </small>
-      </div>
-      <gln-switch formControlName="model02a"
-        isChecked>
-      </gln-switch> ( {{ formGroup02.controls['model02a'].value }})
-    </div> -->
-
-    <!-- origin -->
-    <!-- <div class="app-elem">
-      <div>
-        <small>
-          <em>Attributes: id.</em>
-        </small>
-      </div>
-      <gln-switch formControlName="model02a"
-        id="unique_id_switch02a">
-      </gln-switch>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>checked by default.</em>
-        </small>
-      </div>
-      <gln-switch formControlName="model02a">
-        Label
-      </gln-switch>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>disabled and unchecked.</em>
+          <em>Attributes: isReadOnly.</em>
         </small>
       </div>
       <gln-switch formControlName="model02b"
-        isDisabled>
-        Disabled
+        isReadOnly>ReadOnly
       </gln-switch>
-    </div> -->
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: isDisabled.</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model02c"
+        isDisabled>Disabled
+      </gln-switch>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: isNoAnimation</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model02d"
+        isNoAnimation> noAnimation
+      </gln-switch>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: isNoRipple</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model02e"
+        isNoRipple>noRipple
+      </gln-switch>
+    </div>
 
   </div>
 </form>
 
-<!-- -->
+<!--source-->
 
-<section *ngIf="false"
-  mr-vr>
+<section mr-vr
+  *ngIf="true">
   <h4 class="app-hover-link">
+    Position.
+    <a [href]="urlCmSwitch + '#attributes-position'">#</a>
+  </h4>
+  <p>
+    It is possible to change the position of the label relative to the GlnSwitch component.
+  </p>
+</section>
+
+<form *ngIf="true"
+  [formGroup]="formGroup02b"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: position - top.</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model02f"
+        position="top">Position - top
+      </gln-switch>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: position - bottom.</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model02g"
+        position="bottom">Position - bottom
+      </gln-switch>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: position - start.</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model02h"
+        position="start">Position - start
+      </gln-switch>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: position - end.</em>
+        </small>
+      </div>
+      <gln-switch formControlName="model02i"
+        position="end">Position - end
+      </gln-switch>
+    </div>
+
+  </div>
+</form>
+
+<!--source-->
+
+
+
+<!-- SIZE -->
+
+<section *ngIf="true"
+  mr-vr>
+  <h3 class="app-hover-link">
     Size.
     <a [href]="urlCmSwitch + '#Size'">#</a>
-  </h4>
+  </h3>
   <p>
     The GlnSwitch component has the ability to change its size.
     All component elements are associated with a font size for the gln-switch tag.
-    Thus, by changing the font size, you can choose the size of this component that is optimal for
-    you.
+    Thus, by changing the font size, you can choose the size of this component
+    that is optimal for you.
   </p>
   <span>For example:</span>
 </section>
 
-<form *ngIf="false"
+<form *ngIf="true"
   [formGroup]="formGroup03"
   novalidate
   autocomplete="off">
@@ -320,16 +347,17 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
 
 </form>
 
+<!--source-->
 
 
-<!-- -->
+<!-- PALLETE -->
 
-<section *ngIf="false"
+<section *ngIf="true"
   mr-vr>
-  <h4 class="app-hover-link">
-    Color.
-    <a [href]="urlCmSwitch + '#Color'">#</a>
-  </h4>
+  <h3 class="app-hover-link">
+    Palette.
+    <a [href]="urlCmSwitch + '#Palette'">#</a>
+  </h3>
   <p>
     The GlnSwitch component has the ability to change its color.
   </p>
@@ -342,7 +370,7 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
 &lt;/gln-switch&gt;</pre></code>
 </section>
 
-<form *ngIf="false"
+<form *ngIf="true"
   [formGroup]="formGroup04"
   novalidate
   autocomplete="off">
@@ -418,5 +446,91 @@ import &#123; GlnSwitchModule &#125; from 'gelenium-ui';</pre>
   </div>
 </form>
 
+<!-- source -->
 
-<!-- -->
+<!-- CUSTOMIZATION -->
+
+<section *ngIf="true"
+  mr-vr>
+  <h3 class="app-hover-link">
+    Customization.
+    <a [href]="urlCmSwitch + '#Customization'">#</a>
+  </h3>
+  <p>
+    The GlnSwitch component has additional user customization.
+  </p>
+</section>
+
+<form *ngIf="true"
+  [formGroup]="formGroup05"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem sb-elem">
+      <div>
+        <small>
+          <em>style as in Android</em>
+        </small>
+      </div>
+      <gln-switch class="sb-android12"
+        formControlName="model05a">Android 12
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sb-elem">
+      <div>
+        <small>
+          <em>style as in iOS</em>
+        </small>
+      </div>
+      <gln-switch class="sb-ios"
+        formControlName="model05b"
+        isNoRipple
+        noHov>iOS style
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sb-elem">
+      <div>
+        <small>
+          <em>style small</em>
+        </small>
+      </div>
+      <gln-switch class="sb-small"
+        formControlName="model05c"
+        isNoRipple
+        noHov>small
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sb-elem">
+      <div>
+        <small>
+          <em>style middle</em>
+        </small>
+      </div>
+      <gln-switch class="sb-middle"
+        formControlName="model05d"
+        isNoRipple
+        noHov>middle
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sb-elem">
+      <div>
+        <small>
+          <em>style big</em>
+        </small>
+      </div>
+      <gln-switch class="sb-big"
+        formControlName="model05e"
+        isNoRipple
+        noHov>big
+      </gln-switch>
+    </div>
+
+  </div>
+
+</form>

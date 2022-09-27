@@ -42,21 +42,18 @@ export class CmSwitchBasicComponent {
   });
 
   // Attributes
-  public isDisabled02a = false;
-  public isNoAnimation02a = false;
-  public isReadOnly02a = false;
-  public isRequired02a = false;
-  public isNoRipple02a = false;
-  public config02a: GlnSwitchConfig = {
-    // isNoAnimation: true, // ?: boolean | undefined;
-    isReadOnly: true, // ?: boolean | undefined;
-    // isChecked: true,
-  };
-  public modelData02a = true;
-
-  public formGroup02: FormGroup = new FormGroup({
-    model02a: new FormControl(true, []),
-    model02b: new FormControl(false, []),
+  public data02a = true;
+  public formGroup02a: FormGroup = new FormGroup({
+    model02b: new FormControl(true, []),
+    model02c: new FormControl(true, []),
+    model02d: new FormControl(true, []),
+    model02e: new FormControl(true, []),
+  });
+  public formGroup02b: FormGroup = new FormGroup({
+    model02f: new FormControl(true, []),
+    model02g: new FormControl(true, []),
+    model02h: new FormControl(true, []),
+    model02i: new FormControl(true, []),
   });
 
   // Size
@@ -69,7 +66,7 @@ export class CmSwitchBasicComponent {
     model03f: new FormControl(true, []),
   });
 
-  // Color
+  // Palette
   public formGroup04: FormGroup = new FormGroup({
     model04a: new FormControl(true, []),
     model04b: new FormControl(true, []),
@@ -77,24 +74,16 @@ export class CmSwitchBasicComponent {
     model04d: new FormControl(true, []),
     model04e: new FormControl(true, []),
   });
-  public demoModel02c = true; // #
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {
-    // setTimeout(() => {
-    //   this.formGroup02b.controls['model03a'].setValue(false);
-    // }, 2000);
-    // setTimeout(() => {
-    //   this.formGroup02b.controls['model03a'].setValue(true);
-    // }, 4000);
-  }
 
-  public log(text: string, event?: any): void {
-    let value = '';
-    let checked = '';
-    if (!!event && event instanceof Event) {
-      value = (event.target as any)['value'];
-      checked = (event.target as any)['checked'];
-    }
-    console.log(`${text}`, event, ` ${value} ${checked}`);
-  }
+  // Customization
+  public formGroup05: FormGroup = new FormGroup({
+    model05a: new FormControl(true, []),
+    model05b: new FormControl(true, []),
+    model05c: new FormControl(true, []),
+    model05d: new FormControl(true, []),
+    model05e: new FormControl(true, []),
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  constructor() {}
 }

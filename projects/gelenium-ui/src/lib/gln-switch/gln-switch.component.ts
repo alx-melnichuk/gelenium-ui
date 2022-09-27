@@ -37,10 +37,14 @@ import { GlnProperties } from '../_interface/gln-base-properties';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
-
+import { GlnSwitchChange } from './gln-switch-change.interface';
 import { GlnSwitchConfig } from './gln-switch.interface';
+import { GlnSwitchPosition, GlnSwitchPositionUtil } from './gln-switch-position.interface';
 
-const CSS_PROP_PARENT_FONT_SIZE = '--glnsw-pr-font-size';
+export const CSS_PROP_PARENT_FONT_SIZE = '--glnsw-pr-font-size';
+export const CSS_PROP_CONTAINER_PADDING = '--glnsw-cont-pd';
+export const CSS_PROP_WRAP_PADDING = '--glnsw-wrap-pd';
+export const CSS_PROP_WRAP_SHIFT = '--glnsw-wrap-shift';
 
 let uniqueIdCounter = 0;
 
@@ -80,10 +84,12 @@ export class GlnSwitchComponent
   @Input()
   public isRequired: string | boolean | null | undefined;
   @Input()
+  public position: string | null | undefined; // 'top' | 'bottom' | 'start' | 'end';
+  @Input()
   public override tabIndex = 0; // Defined in GlnBaseControl.
 
   @Output()
-  readonly change: EventEmitter<boolean> = new EventEmitter();
+  readonly change: EventEmitter<GlnSwitchChange> = new EventEmitter();
 
   @ViewChild(GlnTouchRippleComponent, { static: false })
   public touchRipple: GlnTouchRippleComponent | null = null;
@@ -96,6 +102,7 @@ export class GlnSwitchComponent
   public idForInput = this.setIdForInput(this.id);
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple".
+  public labelPosition: GlnSwitchPosition = GlnSwitchPosition.end; // Binding attribute "position".
   public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
   public required: boolean | null = null; // Binding attribute "isRequired".
 
@@ -138,16 +145,19 @@ export class GlnSwitchComponent
     if (changes['isRequired']) {
       this.prepareFormGroup(this.required);
     }
+    // Checking and handle the 'position' parameter.
+    if (changes['position'] || (changes['config'] && this.position == null)) {
+      const positionInp = GlnSwitchPositionUtil.convert(this.position || null);
+      this.labelPosition = positionInp || GlnSwitchPositionUtil.create(this.currConfig?.position || null);
+      this.settingPosition(this.renderer, this.hostRef, this.labelPosition);
+    }
   }
 
   public override ngOnInit(): void {
     super.ngOnInit();
 
-    // Determine the font size of the parent element.
-    const parentFontSize = this.getFontSize(HtmlElemUtil.getElementRef(this.hostRef.nativeElement.parentElement));
-    if (parentFontSize > 0) {
-      HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_PARENT_FONT_SIZE, NumberUtil.str(parentFontSize)?.concat('px'));
-    }
+    this.prepareCssParameters(this.hostRef);
+
     // If parameter 'isChecked' is defined, then set the initial value.
     const isChecked = this.isChecked != null ? BooleanUtil.init(this.isChecked) : this.currConfig.isChecked;
     if (isChecked != null && isChecked !== this.formControl.value) {
@@ -165,6 +175,11 @@ export class GlnSwitchComponent
     }
     // Checking and handle the 'isNoRipple' parameter.
     super.onInitProperty('isNoRipple', this.currConfig as GlnProperties);
+    // Checking and handle the 'position' parameter.
+    if (this.labelPosition == null) {
+      this.labelPosition = GlnSwitchPositionUtil.create(this.currConfig?.position || null);
+      this.settingPosition(this.renderer, this.hostRef, this.labelPosition);
+    }
   }
 
   public override ngAfterViewInit(): void {
@@ -209,7 +224,7 @@ export class GlnSwitchComponent
       this.formControl.setValue(newValue, { emitEvent: false });
       this.settingChecked(this.renderer, this.hostRef, newValue);
       this.onChange(newValue);
-      this.change.emit(newValue);
+      this.change.emit({ checked: newValue, source: this });
       this.changeDetectorRef.markForCheck();
     }
   }
@@ -230,16 +245,6 @@ export class GlnSwitchComponent
     return `${this.id}-input`;
   }
 
-  private getFontSize(elem: ElementRef<HTMLElement> | null): number {
-    let result = 0;
-    if (elem && elem.nativeElement) {
-      // Get the line height from the style set.
-      const fontSizePx = getComputedStyle(elem.nativeElement).getPropertyValue('font-size');
-      result = Number(fontSizePx.replace('px', ''));
-    }
-    return result;
-  }
-
   private settingChecked(renderer: Renderer2, elem: ElementRef<HTMLElement>, isChecked: boolean): void {
     this.checked = isChecked;
     HtmlElemUtil.setClass(renderer, elem, 'gln-checked', isChecked);
@@ -253,5 +258,65 @@ export class GlnSwitchComponent
       newValidator.push(Validators.required);
     }
     this.formControl.setValidators(newValidator);
+  }
+
+  private settingPosition(renderer: Renderer2, elem: ElementRef<HTMLElement>, position: GlnSwitchPosition | null): void {
+    if (position) {
+      const positionStr = position.toString();
+      HtmlElemUtil.setClass(renderer, elem, 'glnsw-' + positionStr, true);
+      HtmlElemUtil.setAttr(renderer, elem, 'pos-' + positionStr[0], '');
+    }
+  }
+
+  private prepareCssParameters(hostRef: ElementRef<HTMLElement>): void {
+    // Determine the font size of the parent element.
+    const parentElem: Element | null = hostRef && hostRef.nativeElement ? hostRef.nativeElement.parentElement : null;
+    const parentFontSize: number = parentElem ? Number(getComputedStyle(parentElem).getPropertyValue('font-size').replace('px', '')) : 0;
+    if (parentFontSize > 0) {
+      HtmlElemUtil.setProperty(hostRef, CSS_PROP_PARENT_FONT_SIZE, NumberUtil.str(parentFontSize)?.concat('px'));
+    }
+    const hostElement: Element | null = hostRef ? hostRef.nativeElement : null;
+    // Determine the font size of the host element.
+    const hostFontSizeVal: number = hostElement ? Number(getComputedStyle(hostElement).getPropertyValue('font-size').replace('px', '')) : 0;
+    const hostFontSize: number = NumberUtil.roundTo100(hostFontSizeVal);
+    // Define a container element.
+    const containerElement: Element | null = hostElement ? hostElement.children[0] : null;
+    if (containerElement && containerElement.children.length > 2) {
+      // Define the 'track' element in the container.
+      const trackElement: Element | null = containerElement.children[2];
+      // Determine the height of the 'track' element.
+      const trackHeightVal: number = trackElement ? Number(getComputedStyle(trackElement).getPropertyValue('height').replace('px', '')) : 0;
+      const trackHeight: number = NumberUtil.roundTo100(trackHeightVal);
+      let containerPadding = 0;
+      if (hostFontSize > 0 && trackHeight > 0) {
+        // Determine the padding of the container element.
+        containerPadding = NumberUtil.roundTo100((3 * hostFontSize - trackHeight) / 2);
+        HtmlElemUtil.setProperty(hostRef, CSS_PROP_CONTAINER_PADDING, NumberUtil.str(containerPadding)?.concat('px'));
+      }
+      // Define the 'wrap' element in the container.
+      const wrapElement: Element | null = containerElement.children[1];
+      const thumbElement: Element | null = wrapElement && wrapElement.children.length > 0 ? wrapElement.children[0] : null;
+      // Determine the height of the 'thumb' element.
+      const thumbHeightVal: number = thumbElement ? Number(getComputedStyle(thumbElement).getPropertyValue('height').replace('px', '')) : 0;
+      const thumbHeight: number = NumberUtil.roundTo100(thumbHeightVal);
+      // Determine the padding of the 'wrap' element.
+      let wrapPadding = 0;
+      if (hostFontSize > 0 && thumbHeight > 0) {
+        wrapPadding = NumberUtil.roundTo100((3 * hostFontSize - thumbHeight) / 2);
+        HtmlElemUtil.setProperty(hostRef, CSS_PROP_WRAP_PADDING, NumberUtil.str(wrapPadding)?.concat('px'));
+      }
+      // Determine the width of the 'track' element.
+      const trackWidthVal: number = trackElement ? Number(getComputedStyle(trackElement).getPropertyValue('width').replace('px', '')) : 0;
+      const trackWidth: number = NumberUtil.roundTo100(trackWidthVal);
+      let wrapShift = 0;
+      if (hostFontSize > 0 && containerPadding > 0 && trackWidth > 0 && thumbHeight > 0 && wrapPadding > 0) {
+        const containerLen = trackWidth + 2 * containerPadding;
+        const wrapLen = thumbHeight + 2 * wrapPadding;
+        wrapShift = NumberUtil.roundTo100(containerLen - wrapLen);
+      }
+      if (wrapShift > 0) {
+        HtmlElemUtil.setProperty(hostRef, CSS_PROP_WRAP_SHIFT, NumberUtil.str(wrapShift)?.concat('px'));
+      }
+    }
   }
 }
