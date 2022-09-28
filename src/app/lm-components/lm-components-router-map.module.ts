@@ -99,6 +99,8 @@ const siteUrlsSwitch: SiteUrl[] = [
   { label: 'Item size', url: urlSwitch, fragment: 'ItemSize' },
   { label: 'Palette', url: urlSwitch, fragment: 'Palette' },
   { label: 'Customization', url: urlSwitch, fragment: 'Customization' },
+  { label: 'Config', url: urlSwitch, fragment: 'Config' },
+  { label: 'Api', url: urlSwitch, fragment: 'Api' },
 ];
 SiteMenuUtil.addItem('Components', 'Switch', { label: 'Switch', siteUrls: siteUrlsSwitch });
 

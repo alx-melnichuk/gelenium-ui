@@ -20,42 +20,66 @@ export abstract class GlnBaseProperties {
   }
 
   protected onChangesProperty(changes: SimpleChanges, name: string, config: GlnProperties, className?: string, attrName?: string): void {
-    if (name) {
+    // Get the internal property name from the input property name.
+    const propertyInn = this.getPropertyByPropertyName(name);
+    if (propertyInn) {
       const that: GlnProperties = this as unknown as GlnProperties;
-
       if (changes[name] || (changes['config'] && that[name] == null)) {
-        const isFlag = BooleanUtil.init(that[name]) || config[name];
-        const propertyInn = this.getPropertyByPropertyName(name);
-        this.updatePropertyAndSettingClassAttr(propertyInn, !!isFlag, className, attrName);
+        const value: boolean | null = BooleanUtil.init(that[name]);
+        const isFlag: boolean = !!(value != null ? value : config[name]);
+        // Set the new value of the internal property.
+        that[propertyInn] = isFlag;
+        // Add/remove the required class and attribute by flag value.
+        this.setClassAndAttrByProperty(propertyInn, isFlag, className, attrName);
       }
     }
   }
 
   protected onInitProperty(name: string, config: GlnProperties, className?: string, attrName?: string): void {
-    if (name) {
+    // Get the internal property name from the input property name.
+    const propertyInn = this.getPropertyByPropertyName(name);
+    if (propertyInn) {
       const that: GlnProperties = this as unknown as GlnProperties;
-      const propertyInn = this.getPropertyByPropertyName(name);
       if (that[propertyInn] == null) {
-        const isFlag = config[name];
-        this.updatePropertyAndSettingClassAttr(propertyInn, !!isFlag, className, attrName);
+        const isFlag: boolean = !!config[name];
+        // Set the new value of the internal property.
+        that[propertyInn] = isFlag;
+        // Add/remove the required class and attribute by flag value.
+        this.setClassAndAttrByProperty(propertyInn, isFlag, className, attrName);
       }
     }
   }
 
   protected getPropertyByPropertyName(propertyName: string): string {
-    const text = propertyName.startsWith('is') ? propertyName.slice(2) : propertyName;
-    const property = text[0] === text[0].toUpperCase() ? text[0].toLowerCase() + text.slice(1) : text;
-    return property;
+    let result: string = propertyName;
+    if (result && result.length > 1) {
+      result = result.startsWith('is') ? result.slice(2) : result;
+    }
+    if (result && result.length > 0) {
+      result = result[0] === result[0].toUpperCase() ? result[0].toLowerCase() + result.slice(1) : result;
+    }
+    return result;
   }
-
-  protected updatePropertyAndSettingClassAttr(property: string, isFlag: boolean, className?: string, attrName?: string): void {
-    const that: GlnProperties = this as unknown as GlnProperties;
-    that[property] = isFlag;
-    const text: string = this.toKebabCase(property);
-    const classNameValue = className || 'gln-' + text;
+  // Get class name by property name.
+  protected getClassNameByproperty(property: string, isConvertToKebabCase?: boolean): string {
+    return 'gln-' + (isConvertToKebabCase ? this.toKebabCase(property) : property);
+  }
+  // Get attribute name by property name.
+  protected getAttrNameByproperty(property: string, isConvertToKebabCase?: boolean): string {
+    const text: string = isConvertToKebabCase ? this.toKebabCase(property) : property;
     const len = text.startsWith('no') ? 5 : 3;
-    const attrNameValue = attrName || text.replace('-', '').slice(0, len);
+    return text.replace('-', '').slice(0, len);
+  }
+  // Add/remove the required class and attribute by flag value.
+  protected setClassAndAttrByProperty(property: string, isFlag: boolean, className?: string, attrName?: string): void {
+    const propertyKebabCase = this.toKebabCase(property);
+    // Get class name by property name.
+    const classNameValue = className || this.getClassNameByproperty(propertyKebabCase);
+    // Add/remove the required class by flag value.
     HtmlElemUtil.setClass(this.renderer, this.hostRef, classNameValue, isFlag);
+    // Get attribute name by property name.
+    const attrNameValue = attrName || this.getAttrNameByproperty(propertyKebabCase);
+    // Add/remove required attribute by flag value.
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, attrNameValue, isFlag ? '' : null);
   }
 

@@ -2,7 +2,6 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsul
 import { take } from 'rxjs/operators';
 
 import { ScrollAfterRoutingUtil } from '../../lib-core/utils/scroll-after-routing.util';
-import { RouterConfig } from '../../lib-core/config/router-config';
 
 const logLabel = 'ComponentsSwitch';
 
@@ -15,10 +14,6 @@ const logLabel = 'ComponentsSwitch';
 })
 export class CmSwitchComponent implements AfterViewInit {
   public showNum = '';
-
-  // public urlCmFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
-  // public urlPlTextarea = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_TEXTAREA');
-  // public urlCmSwitch = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SWITCH');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

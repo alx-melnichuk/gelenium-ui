@@ -102,7 +102,7 @@ export class GlnSwitchComponent
   public idForInput = this.setIdForInput(this.id);
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple".
-  public labelPosition: GlnSwitchPosition = GlnSwitchPosition.end; // Binding attribute "position".
+  public labelPosition: GlnSwitchPosition | null = null; // Binding attribute "position".
   public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
   public required: boolean | null = null; // Binding attribute "isRequired".
 
@@ -170,7 +170,7 @@ export class GlnSwitchComponent
     super.onInitProperty('isReadOnly', this.currConfig as GlnProperties);
     // Checking and handle the 'isRequired' parameter.
     super.onInitProperty('isRequired', this.currConfig as GlnProperties);
-    if (this.required !== null) {
+    if (this.required) {
       this.prepareFormGroup(this.required);
     }
     // Checking and handle the 'isNoRipple' parameter.
