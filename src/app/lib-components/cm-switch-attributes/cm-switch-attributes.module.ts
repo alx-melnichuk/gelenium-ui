@@ -7,11 +7,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { GlnSwitchModule } from 'gelenium-ui';
 
-import { CmSwitchBasicComponent } from './cm-switch-basic.component';
+import { CmSwitchAttributesComponent } from './cm-switch-attributes.component';
 
 @NgModule({
-  declarations: [CmSwitchBasicComponent],
+  declarations: [CmSwitchAttributesComponent],
   imports: [CommonModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnSwitchModule],
-  exports: [CmSwitchBasicComponent],
+  exports: [CmSwitchAttributesComponent],
 })
-export class CmSwitchBasicModule {}
+export class CmSwitchAttributesModule {}

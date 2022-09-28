@@ -1,19 +1,17 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-
-import { GlnSwitchConfig } from 'gelenium-ui';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
 
 @Component({
-  selector: 'app-cm-switch-basic',
-  templateUrl: './cm-switch-basic.component.html',
-  styleUrls: ['./cm-switch-basic.component.scss'],
+  selector: 'app-cm-switch-palette',
+  templateUrl: './cm-switch-palette.component.html',
+  styleUrls: ['./cm-switch-palette.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CmSwitchBasicComponent {
+export class CmSwitchPaletteComponent {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -25,13 +23,14 @@ export class CmSwitchBasicComponent {
 
   public urlCmSwitch = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SWITCH');
 
-  public formGroup01: FormGroup = new FormGroup({
-    model01a: new FormControl(true, []),
-    model01b: new FormControl(false, []),
-    model01c: new FormControl(true, []),
-    model01d: new FormControl(false, []),
+  public formGroup04: FormGroup = new FormGroup({
+    model04a: new FormControl(true, []),
+    model04b: new FormControl(true, []),
+    model04c: new FormControl(true, []),
+    model04d: new FormControl(true, []),
+    model04e: new FormControl(true, []),
+    model04f: new FormControl(true, []),
   });
-
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }

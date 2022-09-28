@@ -93,7 +93,13 @@ SiteMenuUtil.addItem('Components', 'Select', { label: 'Select', siteUrls: siteUr
 
 RouterConfig.add('URL_COMPONENTS_SWITCH', 'switch');
 const urlSwitch = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SWITCH');
-const siteUrlsSwitch: SiteUrl[] = [{ label: 'Basic', url: urlSwitch, fragment: 'Basic' }];
+const siteUrlsSwitch: SiteUrl[] = [
+  { label: 'Basic', url: urlSwitch, fragment: 'Basic' },
+  { label: 'Attributes', url: urlSwitch, fragment: 'Attributes' },
+  { label: 'Item size', url: urlSwitch, fragment: 'ItemSize' },
+  { label: 'Palette', url: urlSwitch, fragment: 'Palette' },
+  { label: 'Customization', url: urlSwitch, fragment: 'Customization' },
+];
 SiteMenuUtil.addItem('Components', 'Switch', { label: 'Switch', siteUrls: siteUrlsSwitch });
 
 RouterConfig.add('URL_COMPONENTS_TEXTAREA', 'textarea');
