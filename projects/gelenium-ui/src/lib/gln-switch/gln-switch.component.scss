@@ -67,7 +67,7 @@ gln-switch {
     }
   }
 
-  &:not([noani]):not([hkInit]) {
+  &:not([noani]):not([hdAnmInit]) {
     --glnsw-delay-150: 150ms;
   }
 

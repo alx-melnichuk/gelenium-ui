@@ -1,6 +1,6 @@
 <ng-container [formGroup]="formGroup">
   <div class="glnin-wrap"
-    [glnFrameExteriorInput]="exterior || currConfig?.exterior"
+    [glnFrameExteriorInput]="exteriorVal"
     #glnFrameExteriorInput="glnFrameExteriorInput"
     [glnFrameExteriorInputElementRef]="hostRef"
     (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()">
@@ -21,8 +21,8 @@
       [glnFrameSizeLabelPd]="currConfig?.labelPd"
       [glnFrameSizePrepare]="glnFrameExteriorInput"
       glnFrameOrnament
-      [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
-      [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
+      [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
+      [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
       [glnFrameOrnamentPath]="'/div{0}'">
 
       <span glnfr-orn-lf

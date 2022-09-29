@@ -131,7 +131,6 @@ export class FeatureComponent implements OnInit &#123;
     But if for some reason you use [(ngModel)], then it is possible to change the
     rendering algorithm when the component is initialized.
     <br />
-    This requires adding parameters: isValueInit, isNoAnimation, writeValueInit.
   </p>
 </section>
 
@@ -143,10 +142,7 @@ export class FeatureComponent implements OnInit &#123;
       helperText="Field for parameter 3."
       #ctrl08c="ngModel"
       [isError]="!ctrl08c.value ? '':null"
-      [exterior]="exterior08a"
-      isValueInit
-      [isNoAnimation]="noAnm08c"
-      (writeValueInit)="noAnm08c=false">
+      [exterior]="exterior08a">
     </gln-input>
   </div>
 
@@ -156,10 +152,7 @@ export class FeatureComponent implements OnInit &#123;
       helperText="Field for parameter 4."
       #ctrl08d="ngModel"
       [isError]="!ctrl08d.value ? '':null"
-      [exterior]="exterior08a"
-      isValueInit
-      [isNoAnimation]="noAnm08d"
-      (writeValueInit)="noAnm08d=false">
+      [exterior]="exterior08a">
     </gln-input>
   </div>
 
@@ -182,10 +175,7 @@ export class FeatureComponent implements OnInit &#123;
       helperText="Field for parameter 3."
       #ctrl08c="ngModel"
       [isError]="!ctrl08c.value ? '':null"
-      [exterior]="exterior08a"
-      isValueInit
-      [isNoAnimation]="noAnm08c"
-      (writeValueInit)="noAnm08c=false"&gt;
+      [exterior]="exterior08a"&gt;
     &lt;/gln-input&gt;
   &lt;/div&gt;
 
@@ -195,10 +185,7 @@ export class FeatureComponent implements OnInit &#123;
       helperText="Field for parameter 4."
       #ctrl08d="ngModel"
       [isError]="!ctrl08d.value ? '':null"
-      [exterior]="exterior08a"
-      isValueInit
-      [isNoAnimation]="noAnm08d"
-      (writeValueInit)="noAnm08d=false"&gt;
+      [exterior]="exterior08a"&gt;
     &lt;/gln-input&gt;
   &lt;/div&gt;
 
@@ -218,12 +205,8 @@ import &#123;
 &#125;)
 export class FeatureComponent implements OnInit &#123;
   public exterior08a = 'outlined';
-
   public model08c = 'Hello World';
-  public noAnm08c = true;
-
   public model08d = 'Hello World';
-  public noAnm08d = true;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -244,19 +227,12 @@ export class FeatureComponent implements OnInit &#123;
 
 <section mr-vr>
   <span>Let's add a sign to disable the animation.</span>
-  <code><pre source="ts">
-public noAnm08c = true;</pre></code>
-  <span>Let's add event handling after the second call to "writeValue".</span>
   <code><pre source="html">
-&lt;gln-input [(ngModel)]="model08c"
-  isValueInit
-  [isNoAnimation]="noAnm08c"
-  (writeValueInit)="noAnm08c=false"&gt;
+&lt;gln-input [(ngModel)]="model08c"&gt;
 &lt;/gln-input&gt;</pre></code>
   <p>
     In this case, when the component is created, the flag for disabling animation is set.
-    And only after the second call to writeValue and when using setTimeout,
-    the animation will be enabled.
+    And only after the second call to writeValue, the animation will be enabled.
   </p>
   <p>
     But we strongly recommend DO NOT USE [(ngModel)] (at least in production).

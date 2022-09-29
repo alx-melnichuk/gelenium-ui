@@ -1,6 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
-  AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -8,6 +7,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  Host,
   Inject,
   InjectionToken,
   Input,
@@ -19,12 +19,14 @@ import {
   PLATFORM_ID,
   Renderer2,
   SimpleChanges,
+  SkipSelf,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import {
   AbstractControl,
   AsyncValidatorFn,
+  ControlContainer,
   ControlValueAccessor,
   FormControl,
   FormGroup,
@@ -36,19 +38,28 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from '../directives/gln-frame-ornament/gln-frame-ornam-align.interface';
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
-import { GlnBasisFrame } from '../_classes/gln-basis-frame.class';
 import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
+import { GlnFrameExterior, GlnFrameExteriorUtil } from '../gln-frame/gln-frame-exterior.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
+import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
 import { GlnInputType, GlnInputTypeUtil } from '../gln-input/gln-input.interface';
-import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { GlnBaseControl, GLN_BC_FL_NO_TAB_INDEX, GLN_BC_FL_NO_UPDATE_ID } from '../_interface/gln-base-control';
-import { GlnProperties } from '../_interface/gln-base-properties';
-import { GlnInputConfig } from './gln-input-config.interface';
+import { GlnBaseProperties, GlnProperties } from '../_interface/gln-base-properties';
+import { GlnHideAnimationOnInit } from '../_interface/gln-hide-animation-on-init';
 import { BooleanUtil } from '../_utils/boolean.util';
+import { HtmlElemUtil } from '../_utils/html-elem.util';
 
-export const GLN_IN_CL_LABEL_SHRINK = 'glnin-shrink';
-export const GLN_IN_CL_NO_LABEL = 'glnin-no-label';
+export const CLS_IN_DISABLED = 'gln-disabled';
+export const ATR_IN_DISABLED = 'dis';
+export const CLS_IN_LABEL_SHRINK = 'glnin-shrink';
+export const ATR_IN_LABEL_SHRINK = 'shr';
+export const CLS_IN_NO_LABEL = 'glnin-no-label';
+export const ATR_IN_ORN_LF = 'orn-lft';
+export const ATR_IN_ORN_RG = 'orn-rgh';
+export const ATR_IN_EXTERIOR_OL = 'ext-ol';
+export const ATR_IN_EXTERIOR_UL = 'ext-ul';
+export const ATR_IN_EXTERIOR_ST = 'ext-st';
 
 let uniqueIdCounter = 0;
 
@@ -68,11 +79,11 @@ export const GLN_INPUT_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_INPUT_CO
   ],
 })
 export class GlnInputComponent
-  extends GlnBaseControl
+  extends GlnBaseProperties
   implements OnChanges, OnInit, AfterViewInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
 {
   @Input()
-  public override id = `glnin-${uniqueIdCounter++}`; // Defined in GlnBaseControl.
+  public id = `glnin-${uniqueIdCounter++}`; // Defined in GlnBaseControl.
   @Input()
   public autoComplete = '';
   @Input()
@@ -84,7 +95,7 @@ export class GlnInputComponent
   @Input()
   public helperText: string | null | undefined;
   @Input()
-  public override isDisabled: string | boolean | null | undefined; // Defined in GlnBaseControl.
+  public isDisabled: string | boolean | null | undefined; // Defined in GlnBaseControl.
   @Input()
   public isError: string | boolean | null | undefined;
   @Input()
@@ -97,8 +108,6 @@ export class GlnInputComponent
   public isReadOnly: string | boolean | null | undefined;
   @Input()
   public isRequired: string | boolean | null | undefined;
-  @Input()
-  public isValueInit: string | boolean | null | undefined; // #
   @Input()
   public label: string | null | undefined;
   @Input()
@@ -118,7 +127,7 @@ export class GlnInputComponent
   @Input()
   public step: number | null | undefined;
   @Input()
-  public override tabIndex = 0; // Defined in GlnBaseControl.
+  public tabIndex: number = 0; // Defined in GlnBaseControl.
   @Input()
   public type: string = GlnInputType.text.valueOf();
   @Input()
@@ -132,26 +141,34 @@ export class GlnInputComponent
   @ViewChild('inputElement')
   public inputElementRef: ElementRef<HTMLElement> | null = null;
 
+  @ViewChild(GlnFrameComponent, { static: true })
+  public frame!: GlnFrameComponent;
+
   public currConfig: GlnFrameConfig;
-  public override disabled: boolean | null = null; // Binding attribute "isDisabled". // Defined in GlnBaseControl. // +
-  public error: boolean | null = null; // Binding attribute "isError". // +
+  public disabled: boolean | null = null; // Binding attribute "isDisabled". // Defined in GlnBaseControl.
+  public exteriorVal: GlnFrameExterior | null = null; // Binding attribute "exterior".
+  public error: boolean | null = null; // Binding attribute "isError".
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public isFocused = false;
   public isFilled = false;
-  public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink". // +
-  public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // +
-  public noLabel: boolean | null = null; // Binding attribute "isNoLabel". // +
-  public readOnly: boolean | null = null; // Binding attribute "isReadOnly". // +
-  public required: boolean | null = null; // Binding attribute "isRequired". // +
+  public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink".
+  public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
+  public noLabel: boolean | null = null; // Binding attribute "isNoLabel".
+  public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
+  public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
+  public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
+  public required: boolean | null = null; // Binding attribute "isRequired".
   public typeVal: GlnInputType = GlnInputType.text;
 
-  constructor(
-    hostRef: ElementRef<HTMLElement>,
-    renderer: Renderer2,
-    ngZone: NgZone,
+  private hideAnimationOnInit: GlnHideAnimationOnInit | undefined;
 
+  constructor(
+    renderer: Renderer2,
+    hostRef: ElementRef<HTMLElement>,
+    private ngZone: NgZone,
+    @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null,
     // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: Object,
     private changeDetectorRef: ChangeDetectorRef,
@@ -159,108 +176,170 @@ export class GlnInputComponent
   ) {
     super(
       hostRef, // public hostRef: ElementRef<HTMLElement>,
-      renderer, // protected renderer: Renderer2,
-      ngZone // protected ngZone: NgZone
+      renderer // protected renderer: Renderer2,
     );
-    this.flags = GLN_BC_FL_NO_UPDATE_ID + GLN_BC_FL_NO_TAB_INDEX;
     this.currConfig = this.rootConfig || {};
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-input', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
   }
 
-  public override ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
-    // In the GlnBaseControl.ngOnChanges(), the definition is made:
-    // - this.disabled = BooleanUtil.init(this.isDisabled);
-    super.ngOnChanges(changes);
-
-    // #public autoComplete = '';
-    // #public config: GlnFrameConfig | null | undefined;
-    // #public exterior: string | null | undefined; // GlnFrameExteriorType
-    // #public frameSize: string | null | undefined; // GlnFrameSizeType
-    // #public helperText: string | null | undefined;
-
+    if (changes['isDisabled']) {
+      this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
+    }
+    // Checking and handle the 'exterior' parameter.
+    if (changes['exterior'] || (changes['config'] && this.exteriorVal == null && this.currConfig.exterior)) {
+      this.exteriorVal = GlnFrameExteriorUtil.convert(this.exterior || null) || this.currConfig.exterior || null;
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_EXTERIOR_OL, GlnFrameExteriorUtil.isOutlined(this.exteriorVal) ? '' : null);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_EXTERIOR_UL, GlnFrameExteriorUtil.isUnderline(this.exteriorVal) ? '' : null);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_EXTERIOR_ST, GlnFrameExteriorUtil.isStandard(this.exteriorVal) ? '' : null);
+    }
     // Checking and handle the 'isError' parameter.
     super.onChangesProperty(changes, 'isError', this.currConfig as GlnProperties);
     // Checking and handle the 'isLabelShrink' parameter.
-    super.onChangesProperty(changes, 'isLabelShrink', this.currConfig as GlnProperties, GLN_IN_CL_LABEL_SHRINK);
+    super.onChangesProperty(changes, 'isLabelShrink', this.currConfig as GlnProperties, CLS_IN_LABEL_SHRINK, ATR_IN_LABEL_SHRINK);
     // Checking and handle the 'isNoAnimation' parameter.
     super.onChangesProperty(changes, 'isNoAnimation', this.currConfig as GlnProperties);
     // Checking and handle the 'isNoLabel' parameter.
-    super.onChangesProperty(changes, 'isNoLabel', this.currConfig as GlnProperties, GLN_IN_CL_NO_LABEL);
+    super.onChangesProperty(changes, 'isNoLabel', this.currConfig as GlnProperties, CLS_IN_NO_LABEL);
     // Checking and handle the 'isReadOnly' parameter.
     super.onChangesProperty(changes, 'isReadOnly', this.currConfig as GlnProperties);
     // Checking and handle the 'isRequired' parameter.
     super.onChangesProperty(changes, 'isRequired', this.currConfig as GlnProperties);
-
-    // #public label: string | null | undefined;
-    // #public max: number | null | undefined;
-    // #public maxLength: number | null | undefined;
-    // #public min: number | null | undefined;
-    // #public minLength: number | null | undefined;
-    // #public ornamLfAlign: string | null | undefined; // OrnamAlign
-    // #public ornamRgAlign: string | null | undefined; // OrnamAlign
-    // #public pattern: string | RegExp = '';
-    // #public step: number | null | undefined;
-    // #public override tabIndex = 0; // Defined in GlnBaseControl.
-    // #public type: string = GlnInputType.text.valueOf();
-    // #public wdFull: string | null | undefined;
+    // Checking and handle the 'ornamLfAlign' parameter.
+    if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlignVal == null && this.currConfig.ornamLfAlign)) {
+      this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.convert(this.ornamLfAlign || null) || this.currConfig.ornamLfAlign || null;
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_ORN_LF, this.ornamLfAlignVal?.toString());
+    }
+    // Checking and handle the 'ornamRgAlign' parameter.
+    if (changes['ornamRgAlign'] || (changes['config'] && this.ornamRgAlignVal == null && this.currConfig.ornamRgAlign)) {
+      this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.convert(this.ornamRgAlign || null) || this.currConfig.ornamRgAlign || null;
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_ORN_RG, this.ornamRgAlignVal?.toString());
+    }
 
     if (changes['type']) {
       this.typeVal = GlnInputTypeUtil.create(this.type) || GlnInputType.text;
-    }
-    if (changes['config']) {
-      this.currConfig = { ...this.rootConfig, ...this.config };
     }
     if (changes['isRequired'] || changes['minLength'] || changes['maxLength']) {
       this.prepareFormGroup(this.required, this.minLength, this.maxLength);
     }
   }
 
-  public override ngOnInit(): void {
-    super.ngOnInit();
+  public ngOnInit(): void {
+    // Update ID value if it is missing.
+    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
+    // If using [(ngModel)].
+    if (!this.parentFormGroup) {
+      this.hideAnimationOnInit = new GlnHideAnimationOnInit(this.renderer, this.frame.hostRef, this.ngZone);
+      // Add an attribute that disables animation on initialization.
+      this.hideAnimationOnInit.ngOnInit();
+    }
 
+    // Checking and handle the 'exterior' parameter.
+    if (this.exteriorVal == null && this.currConfig.exterior) {
+      this.exteriorVal = this.currConfig.exterior || null;
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_EXTERIOR_OL, GlnFrameExteriorUtil.isOutlined(this.exteriorVal) ? '' : null);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_EXTERIOR_UL, GlnFrameExteriorUtil.isUnderline(this.exteriorVal) ? '' : null);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_EXTERIOR_ST, GlnFrameExteriorUtil.isStandard(this.exteriorVal) ? '' : null);
+    }
     // Checking and handle the 'isError' parameter.
     super.onInitProperty('isError', this.currConfig as GlnProperties);
     // Checking and handle the 'isLabelShrink' parameter.
-    super.onInitProperty('isLabelShrink', this.currConfig as GlnProperties, GLN_IN_CL_LABEL_SHRINK);
+    super.onInitProperty('isLabelShrink', this.currConfig as GlnProperties, CLS_IN_LABEL_SHRINK);
     // Checking and handle the 'isNoAnimation' parameter.
     super.onInitProperty('isNoAnimation', this.currConfig as GlnProperties);
     // Checking and handle the 'isNoLabel' parameter.
-    super.onInitProperty('isNoLabel', this.currConfig as GlnProperties, GLN_IN_CL_NO_LABEL);
+    super.onInitProperty('isNoLabel', this.currConfig as GlnProperties, CLS_IN_NO_LABEL);
     // Checking and handle the 'isReadOnly' parameter.
     super.onInitProperty('isReadOnly', this.currConfig as GlnProperties);
     // Checking and handle the 'isRequired' parameter.
     super.onInitProperty('isRequired', this.currConfig as GlnProperties);
+
+    // Checking and handle the 'ornamLfAlign' parameter.
+    if (this.ornamLfAlignVal == null && this.currConfig.ornamLfAlign) {
+      this.ornamLfAlignVal = this.currConfig.ornamLfAlign || null;
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_ORN_LF, this.ornamLfAlignVal?.toString());
+    }
+    // Checking and handle the 'ornamRgAlign' parameter.
+    if (this.ornamRgAlignVal == null && this.currConfig.ornamRgAlign) {
+      this.ornamRgAlignVal = this.currConfig.ornamRgAlign || null;
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_ORN_RG, this.ornamRgAlignVal?.toString());
+    }
   }
 
-  public override ngAfterViewInit(): void {
-    super.ngAfterViewInit();
+  public ngAfterViewInit(): void {
+    // If using [(ngModel)].
+    // Remove an attribute that disables animation on initialization.
+    this.hideAnimationOnInit?.ngAfterViewInitWithNgZone();
   }
 
   // ** ControlValueAccessor - start **
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-  public override writeValue(value: any): void {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public onChange: (val: unknown) => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public onTouched: () => void = () => {};
+
+  public writeValue(value: any): void {
     const isFilledOld = !!this.formControl.value;
     this.formControl.setValue(value, { emitEvent: false });
     this.isFilled = this.formControl.value !== '' && this.formControl.value != null;
     if (isFilledOld !== this.isFilled) {
       this.changeDetectorRef.markForCheck();
     }
-    super.writeValue(value);
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+  public registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+  public registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
-  public override setDisabledState(isDisabled: boolean): void {
-    if (this.disabled !== isDisabled) {
-      isDisabled ? this.formGroup.disable() : this.formGroup.enable();
-      super.setDisabledState(isDisabled);
+  public setDisabledState(disabled: boolean): void {
+    if (this.disabled !== disabled) {
+      this.disabled = disabled;
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, CLS_IN_DISABLED, disabled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_DISABLED, disabled ? '' : null);
+      if (disabled && !this.formControl.disabled) {
+        this.formControl.disable();
+      } else if (!disabled && this.formControl.disabled) {
+        this.formControl.enable();
+      }
     }
   }
 
   // ** ControlValueAccessor - finish **
+
+  // ** Validator - start **
+
+  public validate(control: AbstractControl): ValidationErrors | null {
+    return this.formControl.errors;
+  }
+
+  // ** Validator - finish **
+
+  // ** GlnNodeInternalValidator - start **
+
+  public addValidators(validators: ValidatorFn | ValidatorFn[]): void {
+    if (validators != null) {
+      this.formControl.addValidators(validators);
+      this.formControl.updateValueAndValidity();
+    }
+  }
+
+  public addAsyncValidators(validators: AsyncValidatorFn | AsyncValidatorFn[]): void {
+    if (validators != null) {
+      this.formControl.addAsyncValidators(validators);
+      this.formControl.updateValueAndValidity();
+    }
+  }
+
+  // ** GlnNodeInternalValidator - finish **
 
   // ** Public API **
 
@@ -293,14 +372,6 @@ export class GlnInputComponent
   }
 
   // ** Protcted API **
-
-  protected override getConfig(): GlnFrameConfig {
-    return this.currConfig;
-  }
-
-  protected override getFormControl(): FormControl | null {
-    return this.formControl;
-  }
 
   // ** Private API **
 

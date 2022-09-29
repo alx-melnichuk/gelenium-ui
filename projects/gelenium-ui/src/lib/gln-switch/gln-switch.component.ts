@@ -6,6 +6,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  Host,
   Inject,
   InjectionToken,
   Input,
@@ -16,6 +17,7 @@ import {
   Output,
   Renderer2,
   SimpleChanges,
+  SkipSelf,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -28,23 +30,29 @@ import {
   FormGroup,
   ValidatorFn,
   Validators,
+  AbstractControl,
+  ValidationErrors,
+  AsyncValidatorFn,
+  ControlContainer,
 } from '@angular/forms';
 
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
-import { GlnBaseControl } from '../_interface/gln-base-control';
-import { GlnProperties } from '../_interface/gln-base-properties';
+import { GlnBaseProperties, GlnProperties } from '../_interface/gln-base-properties';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
 import { GlnSwitchChange } from './gln-switch-change.interface';
 import { GlnSwitchConfig } from './gln-switch.interface';
 import { GlnSwitchPosition, GlnSwitchPositionUtil } from './gln-switch-position.interface';
+import { GlnHideAnimationOnInit } from '../_interface/gln-hide-animation-on-init';
 
 export const CSS_PROP_PARENT_FONT_SIZE = '--glnsw-pr-font-size';
 export const CSS_PROP_CONTAINER_PADDING = '--glnsw-cont-pd';
 export const CSS_PROP_WRAP_PADDING = '--glnsw-wrap-pd';
 export const CSS_PROP_WRAP_SHIFT = '--glnsw-wrap-shift';
+export const CLS_SW_DISABLED = 'gln-disabled';
+export const ATR_SW_DISABLED = 'dis';
 
 let uniqueIdCounter = 0;
 
@@ -64,17 +72,17 @@ export const GLN_SWITCH_CONFIG = new InjectionToken<GlnSwitchConfig>('GLN_SWITCH
   ],
 })
 export class GlnSwitchComponent
-  extends GlnBaseControl
+  extends GlnBaseProperties
   implements OnChanges, OnInit, AfterViewInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
 {
   @Input()
-  public override id = `glnsw-${uniqueIdCounter++}`; // Defined in GlnBaseControl.
+  public id = `glnsw-${uniqueIdCounter++}`; // Defined in GlnBaseControl.
   @Input()
   public config: GlnSwitchConfig | null | undefined;
   @Input()
   public isChecked: string | boolean | null | undefined; // Specifies the initial value of the element.
   @Input()
-  public override isDisabled: string | boolean | null | undefined; // Defined in GlnBaseControl.
+  public isDisabled: string | boolean | null | undefined; // Defined in GlnBaseControl.
   @Input()
   public isNoAnimation: string | boolean | null | undefined;
   @Input()
@@ -86,7 +94,7 @@ export class GlnSwitchComponent
   @Input()
   public position: string | null | undefined; // 'top' | 'bottom' | 'start' | 'end';
   @Input()
-  public override tabIndex = 0; // Defined in GlnBaseControl.
+  public tabIndex: number = 0; // Defined in GlnBaseControl.
 
   @Output()
   readonly change: EventEmitter<GlnSwitchChange> = new EventEmitter();
@@ -96,7 +104,7 @@ export class GlnSwitchComponent
 
   public checked: boolean | null = null; // Binding attribute "isChecked".
   public currConfig: GlnSwitchConfig;
-  public override disabled: boolean | null = null; // Binding attribute "isDisabled". // Defined in GlnBaseControl.
+  public disabled: boolean | null = null; // Binding attribute "isDisabled". // Defined in GlnBaseControl.
   public formControl: FormControl = new FormControl({ value: false, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public idForInput = this.setIdForInput(this.id);
@@ -106,33 +114,34 @@ export class GlnSwitchComponent
   public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
   public required: boolean | null = null; // Binding attribute "isRequired".
 
+  private hideAnimationOnInit: GlnHideAnimationOnInit | undefined;
+
   constructor(
-    hostRef: ElementRef<HTMLElement>,
     renderer: Renderer2,
-    ngZone: NgZone,
+    hostRef: ElementRef<HTMLElement>,
+    private ngZone: NgZone,
+    @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null,
     private changeDetectorRef: ChangeDetectorRef,
     @Optional() @Inject(GLN_SWITCH_CONFIG) private rootConfig: GlnSwitchConfig | null
   ) {
     super(
       hostRef, // public hostRef: ElementRef<HTMLElement>,
-      renderer, // protected renderer: Renderer2,
-      ngZone // protected ngZone: NgZone
+      renderer // protected renderer: Renderer2,
     );
     this.currConfig = this.rootConfig || {};
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-switch', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
   }
 
-  public override ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
-    // In the GlnBaseControl.ngOnChanges(), the definition is made:
-    // - this.disabled = BooleanUtil.init(this.isDisabled);
-    super.ngOnChanges(changes);
-
     if (changes['id']) {
       this.idForInput = this.setIdForInput(this.id);
+    }
+    if (changes['isDisabled']) {
+      this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
     // Checking and handle the 'isNoAnimation' parameter.
     super.onChangesProperty(changes, 'isNoAnimation', this.currConfig as GlnProperties);
@@ -153,16 +162,24 @@ export class GlnSwitchComponent
     }
   }
 
-  public override ngOnInit(): void {
-    super.ngOnInit();
+  public ngOnInit(): void {
+    // Update ID value if it is missing.
+    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
+    // Set the TagIndex value if the flag 'disabled' is not set.
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', !this.disabled ? '' + this.tabIndex : null);
+
+    this.hideAnimationOnInit = new GlnHideAnimationOnInit(this.renderer, this.hostRef, this.ngZone);
+    // Add an attribute that disables animation on initialization.
+    this.hideAnimationOnInit.ngOnInit();
 
     this.prepareCssParameters(this.hostRef);
 
     // If parameter 'isChecked' is defined, then set the initial value.
-    const isChecked = this.isChecked != null ? BooleanUtil.init(this.isChecked) : this.currConfig.isChecked;
-    if (isChecked != null && isChecked !== this.formControl.value) {
-      this.formControl.setValue(isChecked, { emitEvent: false });
-      this.settingChecked(this.renderer, this.hostRef, isChecked);
+    const isChecked: boolean | null = BooleanUtil.init(this.isChecked);
+    const isCheckedVal = isChecked != null ? isChecked : this.currConfig.isChecked || null;
+    if (isCheckedVal != null && isCheckedVal !== this.formControl.value) {
+      this.formControl.setValue(isCheckedVal, { emitEvent: false });
+      this.settingChecked(this.renderer, this.hostRef, isCheckedVal);
     }
     // Checking and handle the 'isNoAnimation' parameter.
     super.onInitProperty('isNoAnimation', this.currConfig as GlnProperties);
@@ -182,23 +199,43 @@ export class GlnSwitchComponent
     }
   }
 
-  public override ngAfterViewInit(): void {
-    super.ngAfterViewInit();
+  public ngAfterViewInit(): void {
+    // Remove an attribute that disables animation on initialization.
+    if (this.parentFormGroup) {
+      this.hideAnimationOnInit?.ngAfterViewInitWithPromise(); // If using FormControl.
+    } else {
+      this.hideAnimationOnInit?.ngAfterViewInitWithNgZone(); // If using [(ngModel)].
+    }
   }
 
   // ** ControlValueAccessor - start **
 
-  public override writeValue(value: any): void {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public onChange: (val: unknown) => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public onTouched: () => void = () => {};
+
+  public writeValue(value: any): void {
     if (value !== this.formControl.value) {
       this.formControl.setValue(!!value, { emitEvent: false });
       this.settingChecked(this.renderer, this.hostRef, !!value);
       this.changeDetectorRef.markForCheck();
     }
   }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+  public registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+  public registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
 
-  public override setDisabledState(disabled: boolean): void {
+  public setDisabledState(disabled: boolean): void {
     if (this.disabled !== disabled) {
-      super.setDisabledState(disabled);
+      this.disabled = disabled;
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, CLS_SW_DISABLED, disabled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_SW_DISABLED, disabled ? '' : null);
       if (disabled && !this.formControl.disabled) {
         this.formControl.disable();
       } else if (!disabled && this.formControl.disabled) {
@@ -208,6 +245,32 @@ export class GlnSwitchComponent
   }
 
   // ** ControlValueAccessor - finish **
+
+  // ** Validator - start **
+
+  public validate(control: AbstractControl): ValidationErrors | null {
+    return this.formControl.errors;
+  }
+
+  // ** Validator - finish **
+
+  // ** GlnNodeInternalValidator - start **
+
+  public addValidators(validators: ValidatorFn | ValidatorFn[]): void {
+    if (validators != null) {
+      this.formControl.addValidators(validators);
+      this.formControl.updateValueAndValidity();
+    }
+  }
+
+  public addAsyncValidators(validators: AsyncValidatorFn | AsyncValidatorFn[]): void {
+    if (validators != null) {
+      this.formControl.addAsyncValidators(validators);
+      this.formControl.updateValueAndValidity();
+    }
+  }
+
+  // ** GlnNodeInternalValidator - finish **
 
   // ** Public API **
 
@@ -230,10 +293,6 @@ export class GlnSwitchComponent
   }
 
   // ** Protected API **
-
-  protected override getConfig(): GlnSwitchConfig {
-    return { ...this.currConfig };
-  }
 
   // ** Private API **
 

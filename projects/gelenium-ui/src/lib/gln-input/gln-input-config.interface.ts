@@ -5,13 +5,13 @@ export interface GlnInputConfig extends GlnFrameConfig2 {
   // exterior?: GlnFrameExterior | undefined;
   // frameSize?: GlnFrameSize | undefined;
   // frameSizeValue?: number | undefined;
-  // isLabelShrink?: boolean | undefined; //+
-  // isNoAnimation?: boolean | undefined; //+
-  // isNoLabel?: boolean | undefined; //+
+  // isLabelShrink?: boolean | undefined; //++html
+  // isNoAnimation?: boolean | undefined; //++html
+  // isNoLabel?: boolean | undefined;     //++html
   // labelPd?: number | undefined; // px
-  isError?: boolean | undefined; //+
-  isReadOnly?: boolean | undefined; //+
-  isRequired?: boolean | undefined; //+
+  isError?: boolean | undefined; //++html
+  isReadOnly?: boolean | undefined; //++html
+  isRequired?: boolean | undefined; //++html
   ornamLfAlign?: GlnFrameOrnamAlign | undefined;
   ornamRgAlign?: GlnFrameOrnamAlign | undefined;
 }

@@ -35,7 +35,18 @@
     </gln-switch>
   </div>
 
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: [(ngModel)]. Value={{ data02b }}</em>
+      </small>
+    </div>
+    <gln-switch [(ngModel)]="data02b">
+    </gln-switch>
+  </div>
+
 </div>
+
 
 <form [formGroup]="formGroup02a"
   novalidate
@@ -114,6 +125,16 @@
     &lt;/gln-switch&gt;
   &lt;/div&gt;
 
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: [(ngModel)]. Value=<b>&#123;</b>&#123; data02b &#125;&#125;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-switch [(ngModel)]="data02b"&gt;
+    &lt;/gln-switch&gt;
+  &lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;form [formGroup]="formGroup02a"
@@ -187,6 +208,7 @@ import &#123;
 &#125;)
 export class SwitchComponent &#123;
   public data02a = true;
+  public data02b = true;
   public formGroup02a: FormGroup = new FormGroup(&#123;
     model02b: new FormControl(true, []),
     model02c: new FormControl(true, []),

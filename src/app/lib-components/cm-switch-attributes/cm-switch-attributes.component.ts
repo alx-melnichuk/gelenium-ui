@@ -24,6 +24,7 @@ export class CmSwitchAttributesComponent {
   public urlCmSwitch = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SWITCH');
 
   public data02a = true;
+  public data02b = true;
   public formGroup02a: FormGroup = new FormGroup({
     model02b: new FormControl(true, []),
     model02c: new FormControl(true, []),
