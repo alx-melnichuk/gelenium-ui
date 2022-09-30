@@ -3,7 +3,7 @@ import { Directive, ElementRef, Input, Renderer2, SimpleChanges } from '@angular
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
-export type GlnProperties = {
+export type GlnProperty = {
   [key: string]: string | boolean | null | undefined;
 };
 
@@ -19,11 +19,11 @@ export abstract class GlnBaseProperties {
     return isFlag;
   }
 
-  protected onChangesProperty(changes: SimpleChanges, name: string, config: GlnProperties, className?: string, attrName?: string): void {
+  protected onChangesProperty(changes: SimpleChanges, name: string, config: GlnProperty, className?: string, attrName?: string): void {
     // Get the internal property name from the input property name.
     const propertyInn = this.getPropertyByPropertyName(name);
     if (propertyInn) {
-      const that: GlnProperties = this as unknown as GlnProperties;
+      const that: GlnProperty = this as unknown as GlnProperty;
       if (changes[name] || (changes['config'] && that[name] == null)) {
         const value: boolean | null = BooleanUtil.init(that[name]);
         const isFlag: boolean = !!(value != null ? value : config[name]);
@@ -35,11 +35,11 @@ export abstract class GlnBaseProperties {
     }
   }
 
-  protected onInitProperty(name: string, config: GlnProperties, className?: string, attrName?: string): void {
+  protected onInitProperty(name: string, config: GlnProperty, className?: string, attrName?: string): void {
     // Get the internal property name from the input property name.
     const propertyInn = this.getPropertyByPropertyName(name);
     if (propertyInn) {
-      const that: GlnProperties = this as unknown as GlnProperties;
+      const that: GlnProperty = this as unknown as GlnProperty;
       if (that[propertyInn] == null) {
         const isFlag: boolean = !!config[name];
         // Set the new value of the internal property.
@@ -61,7 +61,7 @@ export abstract class GlnBaseProperties {
     return result;
   }
   // Get class name by property name.
-  protected getClassNameByproperty(property: string, isConvertToKebabCase?: boolean): string {
+  protected getClassNameByProperty(property: string, isConvertToKebabCase?: boolean): string {
     return 'gln-' + (isConvertToKebabCase ? this.toKebabCase(property) : property);
   }
   // Get attribute name by property name.
@@ -74,7 +74,7 @@ export abstract class GlnBaseProperties {
   protected setClassAndAttrByProperty(property: string, isFlag: boolean, className?: string, attrName?: string): void {
     const propertyKebabCase = this.toKebabCase(property);
     // Get class name by property name.
-    const classNameValue = className || this.getClassNameByproperty(propertyKebabCase);
+    const classNameValue = className || this.getClassNameByProperty(propertyKebabCase);
     // Add/remove the required class by flag value.
     HtmlElemUtil.setClass(this.renderer, this.hostRef, classNameValue, isFlag);
     // Get attribute name by property name.

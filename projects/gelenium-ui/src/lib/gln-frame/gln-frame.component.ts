@@ -13,7 +13,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { GlnBaseProperties, GlnProperties } from '../_interface/gln-base-properties';
+import { GlnBaseProperties, GlnProperty } from '../_interface/gln-base-properties';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnFrameExterior, GlnFrameExteriorUtil } from './gln-frame-exterior.interface';
@@ -113,11 +113,11 @@ export class GlnFrameComponent extends GlnBaseProperties implements OnChanges, O
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);
     }
     // Checking and handle the 'isLabelShrink' parameter.
-    super.onChangesProperty(changes, 'isLabelShrink', this.currConfig as GlnProperties, CLS_FR_LABEL_SHRINK, ATR_FR_LABEL_SHRINK);
+    super.onChangesProperty(changes, 'isLabelShrink', this.currConfig as GlnProperty, CLS_FR_LABEL_SHRINK, ATR_FR_LABEL_SHRINK);
     // Checking and handle the 'isNoAnimation' parameter.
-    super.onChangesProperty(changes, 'isNoAnimation', this.currConfig as GlnProperties);
+    super.onChangesProperty(changes, 'isNoAnimation', this.currConfig as GlnProperty);
     // Checking and handle the 'isNoLabel' parameter.
-    super.onChangesProperty(changes, 'isNoLabel', this.currConfig as GlnProperties, CLS_FR_NO_LABEL, ATR_FR_NO_LABEL);
+    super.onChangesProperty(changes, 'isNoLabel', this.currConfig as GlnProperty, CLS_FR_NO_LABEL, ATR_FR_NO_LABEL);
 
     if (changes['label'] || changes['isRequired']) {
       const isIndent = !!this.label || this.isRequired;
@@ -128,11 +128,11 @@ export class GlnFrameComponent extends GlnBaseProperties implements OnChanges, O
 
   public ngOnInit(): void {
     // Checking and handle the 'isLabelShrink' parameter.
-    super.onInitProperty('isLabelShrink', this.currConfig as GlnProperties, CLS_FR_LABEL_SHRINK, ATR_FR_LABEL_SHRINK);
+    super.onInitProperty('isLabelShrink', this.currConfig as GlnProperty, CLS_FR_LABEL_SHRINK, ATR_FR_LABEL_SHRINK);
     // Checking and handle the 'isNoAnimation' parameter.
-    super.onInitProperty('isNoAnimation', this.currConfig as GlnProperties);
+    super.onInitProperty('isNoAnimation', this.currConfig as GlnProperty);
     // Checking and handle the 'isNoLabel' parameter.
-    super.onInitProperty('isNoLabel', this.currConfig as GlnProperties, CLS_FR_NO_LABEL, ATR_FR_NO_LABEL);
+    super.onInitProperty('isNoLabel', this.currConfig as GlnProperty, CLS_FR_NO_LABEL, ATR_FR_NO_LABEL);
   }
 
   // ** Public API **

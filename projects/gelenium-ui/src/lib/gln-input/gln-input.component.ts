@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
+  AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -45,13 +46,14 @@ import { GlnFrameExterior, GlnFrameExteriorUtil } from '../gln-frame/gln-frame-e
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
 import { GlnInputType, GlnInputTypeUtil } from '../gln-input/gln-input.interface';
-import { GlnBaseProperties, GlnProperties } from '../_interface/gln-base-properties';
 import { GlnHideAnimationOnInit } from '../_interface/gln-hide-animation-on-init';
+import { GlnProperties, PropertiesType } from '../_interface/gln-properties';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 export const CLS_IN_DISABLED = 'gln-disabled';
 export const ATR_IN_DISABLED = 'dis';
+export const ATR_IN_HIDE_ANIMATION_INIT = 'hdAnmInit';
 export const CLS_IN_LABEL_SHRINK = 'glnin-shrink';
 export const ATR_IN_LABEL_SHRINK = 'shr';
 export const CLS_IN_NO_LABEL = 'glnin-no-label';
@@ -79,8 +81,7 @@ export const GLN_INPUT_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_INPUT_CO
   ],
 })
 export class GlnInputComponent
-  extends GlnBaseProperties
-  implements OnChanges, OnInit, AfterViewInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
+  implements OnChanges, OnInit, AfterContentInit, AfterViewInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
 {
   @Input()
   public id = `glnin-${uniqueIdCounter++}`; // Defined in GlnBaseControl.
@@ -163,24 +164,23 @@ export class GlnInputComponent
   public typeVal: GlnInputType = GlnInputType.text;
 
   private hideAnimationOnInit: GlnHideAnimationOnInit | undefined;
+  private isRemoveAttrHideAnimation: boolean = false;
+  private properties: GlnProperties;
 
   constructor(
-    renderer: Renderer2,
-    hostRef: ElementRef<HTMLElement>,
     private ngZone: NgZone,
-    @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null,
     // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: Object,
+    private renderer: Renderer2,
+    public hostRef: ElementRef<HTMLElement>,
     private changeDetectorRef: ChangeDetectorRef,
-    @Optional() @Inject(GLN_INPUT_CONFIG) private rootConfig: GlnFrameConfig | null
+    @Optional() @Inject(GLN_INPUT_CONFIG) private rootConfig: GlnFrameConfig | null,
+    @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null
   ) {
-    super(
-      hostRef, // public hostRef: ElementRef<HTMLElement>,
-      renderer // protected renderer: Renderer2,
-    );
     this.currConfig = this.rootConfig || {};
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-input', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
+    this.properties = new GlnProperties(this.renderer, this.hostRef, this as unknown as PropertiesType);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -197,18 +197,19 @@ export class GlnInputComponent
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_EXTERIOR_UL, GlnFrameExteriorUtil.isUnderline(this.exteriorVal) ? '' : null);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_EXTERIOR_ST, GlnFrameExteriorUtil.isStandard(this.exteriorVal) ? '' : null);
     }
+    const currConfig: PropertiesType = this.currConfig as PropertiesType;
     // Checking and handle the 'isError' parameter.
-    super.onChangesProperty(changes, 'isError', this.currConfig as GlnProperties);
+    this.properties.onChangesProperty(changes, 'isError', currConfig);
     // Checking and handle the 'isLabelShrink' parameter.
-    super.onChangesProperty(changes, 'isLabelShrink', this.currConfig as GlnProperties, CLS_IN_LABEL_SHRINK, ATR_IN_LABEL_SHRINK);
+    this.properties.onChangesProperty(changes, 'isLabelShrink', currConfig, CLS_IN_LABEL_SHRINK, ATR_IN_LABEL_SHRINK);
     // Checking and handle the 'isNoAnimation' parameter.
-    super.onChangesProperty(changes, 'isNoAnimation', this.currConfig as GlnProperties);
+    this.properties.onChangesProperty(changes, 'isNoAnimation', currConfig);
     // Checking and handle the 'isNoLabel' parameter.
-    super.onChangesProperty(changes, 'isNoLabel', this.currConfig as GlnProperties, CLS_IN_NO_LABEL);
+    this.properties.onChangesProperty(changes, 'isNoLabel', currConfig, CLS_IN_NO_LABEL);
     // Checking and handle the 'isReadOnly' parameter.
-    super.onChangesProperty(changes, 'isReadOnly', this.currConfig as GlnProperties);
+    this.properties.onChangesProperty(changes, 'isReadOnly', currConfig);
     // Checking and handle the 'isRequired' parameter.
-    super.onChangesProperty(changes, 'isRequired', this.currConfig as GlnProperties);
+    this.properties.onChangesProperty(changes, 'isRequired', currConfig);
     // Checking and handle the 'ornamLfAlign' parameter.
     if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlignVal == null && this.currConfig.ornamLfAlign)) {
       this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.convert(this.ornamLfAlign || null) || this.currConfig.ornamLfAlign || null;
@@ -219,7 +220,6 @@ export class GlnInputComponent
       this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.convert(this.ornamRgAlign || null) || this.currConfig.ornamRgAlign || null;
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_ORN_RG, this.ornamRgAlignVal?.toString());
     }
-
     if (changes['type']) {
       this.typeVal = GlnInputTypeUtil.create(this.type) || GlnInputType.text;
     }
@@ -245,18 +245,19 @@ export class GlnInputComponent
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_EXTERIOR_UL, GlnFrameExteriorUtil.isUnderline(this.exteriorVal) ? '' : null);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_EXTERIOR_ST, GlnFrameExteriorUtil.isStandard(this.exteriorVal) ? '' : null);
     }
+    const currConfig: PropertiesType = this.currConfig as PropertiesType;
     // Checking and handle the 'isError' parameter.
-    super.onInitProperty('isError', this.currConfig as GlnProperties);
+    this.properties.onInitProperty('isError', currConfig);
     // Checking and handle the 'isLabelShrink' parameter.
-    super.onInitProperty('isLabelShrink', this.currConfig as GlnProperties, CLS_IN_LABEL_SHRINK);
+    this.properties.onInitProperty('isLabelShrink', currConfig, CLS_IN_LABEL_SHRINK);
     // Checking and handle the 'isNoAnimation' parameter.
-    super.onInitProperty('isNoAnimation', this.currConfig as GlnProperties);
+    this.properties.onInitProperty('isNoAnimation', currConfig);
     // Checking and handle the 'isNoLabel' parameter.
-    super.onInitProperty('isNoLabel', this.currConfig as GlnProperties, CLS_IN_NO_LABEL);
+    this.properties.onInitProperty('isNoLabel', currConfig, CLS_IN_NO_LABEL);
     // Checking and handle the 'isReadOnly' parameter.
-    super.onInitProperty('isReadOnly', this.currConfig as GlnProperties);
+    this.properties.onInitProperty('isReadOnly', currConfig);
     // Checking and handle the 'isRequired' parameter.
-    super.onInitProperty('isRequired', this.currConfig as GlnProperties);
+    this.properties.onInitProperty('isRequired', currConfig);
 
     // Checking and handle the 'ornamLfAlign' parameter.
     if (this.ornamLfAlignVal == null && this.currConfig.ornamLfAlign) {
@@ -268,6 +269,15 @@ export class GlnInputComponent
       this.ornamRgAlignVal = this.currConfig.ornamRgAlign || null;
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_IN_ORN_RG, this.ornamRgAlignVal?.toString());
     }
+  }
+
+  public ngAfterContentInit(): void {
+    // // When using [(ngModel)] parentFormGroup will be null.
+    // this.isRemoveAttrHideAnimation = !this.parentFormGroup;
+    // if (this.isRemoveAttrHideAnimation) {
+    //   // Add an attribute that disables animation on initialization.
+    //   HtmlElemUtil.setAttr(this.renderer, this.frame.hostRef, ATR_IN_HIDE_ANIMATION_INIT, '');
+    // }
   }
 
   public ngAfterViewInit(): void {
@@ -290,6 +300,13 @@ export class GlnInputComponent
     if (isFilledOld !== this.isFilled) {
       this.changeDetectorRef.markForCheck();
     }
+    // if (this.isRemoveAttrHideAnimation) {
+    //   this.isRemoveAttrHideAnimation = false;
+    //   Promise.resolve().then(() => {
+    //     // Remove an attribute that disables animation on initialization.
+    //     HtmlElemUtil.setAttr(this.renderer, this.frame.hostRef, ATR_IN_HIDE_ANIMATION_INIT, null);
+    //   });
+    // }
   }
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public registerOnChange(fn: any): void {

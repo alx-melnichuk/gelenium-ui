@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -10,7 +10,6 @@ import {
   Inject,
   InjectionToken,
   Input,
-  NgZone,
   OnChanges,
   OnInit,
   Optional,
@@ -38,21 +37,24 @@ import {
 
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
-import { GlnBaseProperties, GlnProperties } from '../_interface/gln-base-properties';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
 import { GlnSwitchChange } from './gln-switch-change.interface';
 import { GlnSwitchConfig } from './gln-switch.interface';
 import { GlnSwitchPosition, GlnSwitchPositionUtil } from './gln-switch-position.interface';
-import { GlnHideAnimationOnInit } from '../_interface/gln-hide-animation-on-init';
+import { ScreenUtil } from '../_utils/screen.util';
+import { HtmlConvertUtil } from '../_utils/html-convert.util';
+import { GlnProperties, PropertiesType } from '../_interface/gln-properties';
 
-export const CSS_PROP_PARENT_FONT_SIZE = '--glnsw-pr-font-size';
-export const CSS_PROP_CONTAINER_PADDING = '--glnsw-cont-pd';
-export const CSS_PROP_WRAP_PADDING = '--glnsw-wrap-pd';
-export const CSS_PROP_WRAP_SHIFT = '--glnsw-wrap-shift';
 export const CLS_SW_DISABLED = 'gln-disabled';
 export const ATR_SW_DISABLED = 'dis';
+export const ATR_SW_HIDE_ANIMATION_INIT = 'hdAnmInit';
+export const PRP_SW_PARENT_FONT_SIZE = '--glnsw-pr-font-size';
+export const PRP_SW_CONTAINER_PADDING = '--glnsw-container-pd';
+export const PRP_SW_WRAP_PADDING = '--glnsw-wrap-pd';
+export const PRP_SW_WRAP_SHIFT = '--glnsw-wrap-shift';
+export const PRP_SW_TRACK_BORDER_RADIUS = '--glnsw-track-brd-rds';
 
 let uniqueIdCounter = 0;
 
@@ -71,10 +73,7 @@ export const GLN_SWITCH_CONFIG = new InjectionToken<GlnSwitchConfig>('GLN_SWITCH
     { provide: GLN_NODE_INTERNAL_VALIDATOR, useExisting: GlnSwitchComponent },
   ],
 })
-export class GlnSwitchComponent
-  extends GlnBaseProperties
-  implements OnChanges, OnInit, AfterViewInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
-{
+export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnNodeInternalValidator {
   @Input()
   public id = `glnsw-${uniqueIdCounter++}`; // Defined in GlnBaseControl.
   @Input()
@@ -107,6 +106,7 @@ export class GlnSwitchComponent
   public disabled: boolean | null = null; // Binding attribute "isDisabled". // Defined in GlnBaseControl.
   public formControl: FormControl = new FormControl({ value: false, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
+  public isWrapAndThumb: boolean = false;
   public idForInput = this.setIdForInput(this.id);
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple".
@@ -114,23 +114,20 @@ export class GlnSwitchComponent
   public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
   public required: boolean | null = null; // Binding attribute "isRequired".
 
-  private hideAnimationOnInit: GlnHideAnimationOnInit | undefined;
+  private isRemoveAttrHideAnimation: boolean = false;
+  private properties: GlnProperties;
 
   constructor(
-    renderer: Renderer2,
-    hostRef: ElementRef<HTMLElement>,
-    private ngZone: NgZone,
-    @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null,
+    private renderer: Renderer2,
+    public hostRef: ElementRef<HTMLElement>,
     private changeDetectorRef: ChangeDetectorRef,
-    @Optional() @Inject(GLN_SWITCH_CONFIG) private rootConfig: GlnSwitchConfig | null
+    @Optional() @Inject(GLN_SWITCH_CONFIG) private rootConfig: GlnSwitchConfig | null,
+    @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null
   ) {
-    super(
-      hostRef, // public hostRef: ElementRef<HTMLElement>,
-      renderer // protected renderer: Renderer2,
-    );
     this.currConfig = this.rootConfig || {};
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-switch', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
+    this.properties = new GlnProperties(this.renderer, this.hostRef, this as unknown as PropertiesType);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -144,13 +141,14 @@ export class GlnSwitchComponent
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
     // Checking and handle the 'isNoAnimation' parameter.
-    super.onChangesProperty(changes, 'isNoAnimation', this.currConfig as GlnProperties);
+    this.properties.onChangesProperty(changes, 'isNoAnimation', this.currConfig as PropertiesType);
     // Checking and handle the 'isNoRipple' parameter.
-    super.onChangesProperty(changes, 'isNoRipple', this.currConfig as GlnProperties);
+    this.properties.onChangesProperty(changes, 'isNoRipple', this.currConfig as PropertiesType);
     // Checking and handle the 'isReadOnly' parameter.
-    super.onChangesProperty(changes, 'isReadOnly', this.currConfig as GlnProperties);
+    this.properties.onChangesProperty(changes, 'isReadOnly', this.currConfig as PropertiesType);
     // Checking and handle the 'isRequired' parameter.
-    super.onChangesProperty(changes, 'isRequired', this.currConfig as GlnProperties);
+    this.properties.onChangesProperty(changes, 'isRequired', this.currConfig as PropertiesType);
+
     if (changes['isRequired']) {
       this.prepareFormGroup(this.required);
     }
@@ -168,10 +166,6 @@ export class GlnSwitchComponent
     // Set the TagIndex value if the flag 'disabled' is not set.
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', !this.disabled ? '' + this.tabIndex : null);
 
-    this.hideAnimationOnInit = new GlnHideAnimationOnInit(this.renderer, this.hostRef, this.ngZone);
-    // Add an attribute that disables animation on initialization.
-    this.hideAnimationOnInit.ngOnInit();
-
     this.prepareCssParameters(this.hostRef);
 
     // If parameter 'isChecked' is defined, then set the initial value.
@@ -182,16 +176,16 @@ export class GlnSwitchComponent
       this.settingChecked(this.renderer, this.hostRef, isCheckedVal);
     }
     // Checking and handle the 'isNoAnimation' parameter.
-    super.onInitProperty('isNoAnimation', this.currConfig as GlnProperties);
+    this.properties.onInitProperty('isNoAnimation', this.currConfig as PropertiesType);
     // Checking and handle the 'isReadOnly' parameter.
-    super.onInitProperty('isReadOnly', this.currConfig as GlnProperties);
+    this.properties.onInitProperty('isReadOnly', this.currConfig as PropertiesType);
     // Checking and handle the 'isRequired' parameter.
-    super.onInitProperty('isRequired', this.currConfig as GlnProperties);
+    this.properties.onInitProperty('isRequired', this.currConfig as PropertiesType);
     if (this.required) {
       this.prepareFormGroup(this.required);
     }
     // Checking and handle the 'isNoRipple' parameter.
-    super.onInitProperty('isNoRipple', this.currConfig as GlnProperties);
+    this.properties.onInitProperty('isNoRipple', this.currConfig as PropertiesType);
     // Checking and handle the 'position' parameter.
     if (this.labelPosition == null) {
       this.labelPosition = GlnSwitchPositionUtil.create(this.currConfig?.position || null);
@@ -199,12 +193,14 @@ export class GlnSwitchComponent
     }
   }
 
-  public ngAfterViewInit(): void {
-    // Remove an attribute that disables animation on initialization.
-    if (this.parentFormGroup) {
-      this.hideAnimationOnInit?.ngAfterViewInitWithPromise(); // If using FormControl.
-    } else {
-      this.hideAnimationOnInit?.ngAfterViewInitWithNgZone(); // If using [(ngModel)].
+  public ngAfterContentInit(): void {
+    // This allows you to add an element to the DOM without the initial animation.
+    this.isWrapAndThumb = true;
+    // When using [(ngModel)] parentFormGroup will be null.
+    this.isRemoveAttrHideAnimation = !this.parentFormGroup;
+    if (this.isRemoveAttrHideAnimation) {
+      // Add an attribute that disables animation on initialization.
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_SW_HIDE_ANIMATION_INIT, '');
     }
   }
 
@@ -220,6 +216,13 @@ export class GlnSwitchComponent
       this.formControl.setValue(!!value, { emitEvent: false });
       this.settingChecked(this.renderer, this.hostRef, !!value);
       this.changeDetectorRef.markForCheck();
+    }
+    if (this.isRemoveAttrHideAnimation) {
+      this.isRemoveAttrHideAnimation = false;
+      Promise.resolve().then(() => {
+        // Remove an attribute that disables animation on initialization.
+        HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_SW_HIDE_ANIMATION_INIT, null);
+      });
     }
   }
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
@@ -297,7 +300,7 @@ export class GlnSwitchComponent
   // ** Private API **
 
   private setIdForInput(id: string): string {
-    return `${this.id}-input`;
+    return `${id}-input`;
   }
 
   private settingChecked(renderer: Renderer2, elem: ElementRef<HTMLElement>, isChecked: boolean): void {
@@ -328,50 +331,51 @@ export class GlnSwitchComponent
     const parentElem: Element | null = hostRef && hostRef.nativeElement ? hostRef.nativeElement.parentElement : null;
     const parentFontSize: number = parentElem ? Number(getComputedStyle(parentElem).getPropertyValue('font-size').replace('px', '')) : 0;
     if (parentFontSize > 0) {
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_PARENT_FONT_SIZE, NumberUtil.str(parentFontSize)?.concat('px'));
+      HtmlElemUtil.setProperty(hostRef, PRP_SW_PARENT_FONT_SIZE, NumberUtil.str(parentFontSize)?.concat('px'));
     }
-    const hostElement: Element | null = hostRef ? hostRef.nativeElement : null;
-    // Determine the font size of the host element.
-    const hostFontSizeVal: number = hostElement ? Number(getComputedStyle(hostElement).getPropertyValue('font-size').replace('px', '')) : 0;
-    const hostFontSize: number = NumberUtil.roundTo100(hostFontSizeVal);
-    // Define a container element.
-    const containerElement: Element | null = hostElement ? hostElement.children[0] : null;
-    if (containerElement && containerElement.children.length > 2) {
-      // Define the 'track' element in the container.
-      const trackElement: Element | null = containerElement.children[2];
-      // Determine the height of the 'track' element.
-      const trackHeightVal: number = trackElement ? Number(getComputedStyle(trackElement).getPropertyValue('height').replace('px', '')) : 0;
-      const trackHeight: number = NumberUtil.roundTo100(trackHeightVal);
-      let containerPadding = 0;
-      if (hostFontSize > 0 && trackHeight > 0) {
-        // Determine the padding of the container element.
-        containerPadding = NumberUtil.roundTo100((3 * hostFontSize - trackHeight) / 2);
-        HtmlElemUtil.setProperty(hostRef, CSS_PROP_CONTAINER_PADDING, NumberUtil.str(containerPadding)?.concat('px'));
-      }
-      // Define the 'wrap' element in the container.
-      const wrapElement: Element | null = containerElement.children[1];
-      const thumbElement: Element | null = wrapElement && wrapElement.children.length > 0 ? wrapElement.children[0] : null;
-      // Determine the height of the 'thumb' element.
-      const thumbHeightVal: number = thumbElement ? Number(getComputedStyle(thumbElement).getPropertyValue('height').replace('px', '')) : 0;
-      const thumbHeight: number = NumberUtil.roundTo100(thumbHeightVal);
-      // Determine the padding of the 'wrap' element.
-      let wrapPadding = 0;
-      if (hostFontSize > 0 && thumbHeight > 0) {
-        wrapPadding = NumberUtil.roundTo100((3 * hostFontSize - thumbHeight) / 2);
-        HtmlElemUtil.setProperty(hostRef, CSS_PROP_WRAP_PADDING, NumberUtil.str(wrapPadding)?.concat('px'));
-      }
-      // Determine the width of the 'track' element.
-      const trackWidthVal: number = trackElement ? Number(getComputedStyle(trackElement).getPropertyValue('width').replace('px', '')) : 0;
-      const trackWidth: number = NumberUtil.roundTo100(trackWidthVal);
-      let wrapShift = 0;
-      if (hostFontSize > 0 && containerPadding > 0 && trackWidth > 0 && thumbHeight > 0 && wrapPadding > 0) {
-        const containerLen = trackWidth + 2 * containerPadding;
-        const wrapLen = thumbHeight + 2 * wrapPadding;
-        wrapShift = NumberUtil.roundTo100(containerLen - wrapLen);
-      }
-      if (wrapShift > 0) {
-        HtmlElemUtil.setProperty(hostRef, CSS_PROP_WRAP_SHIFT, NumberUtil.str(wrapShift)?.concat('px'));
-      }
+    if (hostRef && hostRef.nativeElement) {
+      const hostElement: Element = hostRef.nativeElement;
+      // Determine the font size of the host element.
+      const hostFontSizeVal: number = Number(getComputedStyle(hostElement).getPropertyValue('font-size').replace('px', ''));
+      const hostFontSize: number = NumberUtil.roundTo100(hostFontSizeVal);
+      // Determine the font size of the document element.
+      const rootFontSizeVal: number = Number(getComputedStyle(document.documentElement).getPropertyValue('font-size').replace('px', ''));
+      const rootFontSize: number = NumberUtil.roundTo100(rootFontSizeVal);
+
+      const screenHeight: number = ScreenUtil.getHeight();
+      const screenWidth: number = ScreenUtil.getWidth();
+      // Determine the height of the 'track' element. ('--glnsw-track-hg': 1em;)
+      const trackHeightStr: string = getComputedStyle(hostElement).getPropertyValue('--glnsw-track-hg');
+      const trackHeightVal: number = HtmlConvertUtil.toPx(trackHeightStr, hostFontSize, rootFontSize, screenHeight, screenWidth);
+      const trackHeight: number = NumberUtil.roundTo100(trackHeightVal > 0 ? trackHeightVal : 1 * hostFontSize);
+
+      // Determine the border-radius of the 'track' element.
+      const trackBorderRadius: number = NumberUtil.roundTo100(trackHeight / 2);
+      HtmlElemUtil.setProperty(hostRef, PRP_SW_TRACK_BORDER_RADIUS, NumberUtil.str(trackBorderRadius)?.concat('px'));
+
+      // Determine the width of the 'track' element. ('--glnsw-track-wd': 2.3em;)
+      const trackWidthStr: string = getComputedStyle(hostElement).getPropertyValue('--glnsw-track-wd');
+      const trackWidthVal: number = HtmlConvertUtil.toPx(trackWidthStr, hostFontSize, rootFontSize, screenHeight, screenWidth);
+      const trackWidth: number = NumberUtil.roundTo100(trackWidthVal > 0 ? trackWidthVal : 2.3 * hostFontSize);
+
+      // Determine the height of the 'thumb' element. ('--glnsw-thumb-hg': 1.5em);
+      const thumbHeightStr: string = getComputedStyle(hostElement).getPropertyValue('--glnsw-thumb-hg');
+      const thumbHeightVal: number = HtmlConvertUtil.toPx(thumbHeightStr, hostFontSize, rootFontSize, screenHeight, screenWidth);
+      const thumbHeight: number = NumberUtil.roundTo100(thumbHeightVal > 0 ? thumbHeightVal : 1.5 * hostFontSize);
+
+      // Determine the padding of the container element.
+      const containerPadding = NumberUtil.roundTo100((3 * hostFontSize - trackHeight) / 2);
+      HtmlElemUtil.setProperty(hostRef, PRP_SW_CONTAINER_PADDING, NumberUtil.str(containerPadding)?.concat('px'));
+
+      // Determine the padding of the wrap element.
+      const wrapPadding = NumberUtil.roundTo100((3 * hostFontSize - thumbHeight) / 2);
+      HtmlElemUtil.setProperty(hostRef, PRP_SW_WRAP_PADDING, NumberUtil.str(wrapPadding)?.concat('px'));
+
+      // Determine the shift of the wrap element.
+      const containerLen = trackWidth + 2 * containerPadding;
+      const wrapLen = thumbHeight + 2 * wrapPadding;
+      const wrapShift = NumberUtil.roundTo100(containerLen - wrapLen);
+      HtmlElemUtil.setProperty(hostRef, PRP_SW_WRAP_SHIFT, NumberUtil.str(wrapShift)?.concat('px'));
     }
   }
 }

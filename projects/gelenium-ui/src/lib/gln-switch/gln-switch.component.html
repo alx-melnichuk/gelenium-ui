@@ -10,7 +10,7 @@
     class="gln-switch-input"
     role="switch"
     (change)="$event.stopPropagation()" />
-  <span #wrapElement
+  <span *ngIf="isWrapAndThumb"
     glnsw-wrap
     class="gln-switch-wrap">
     <span glnsw-thumb
@@ -20,7 +20,8 @@
       isCenter>
     </gln-touch-ripple>
   </span>
-  <span glnsw-track
+  <span *ngIf="isWrapAndThumb"
+    glnsw-track
     class="gln-switch-track">
   </span>
 </div>
