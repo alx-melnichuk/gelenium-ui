@@ -45,7 +45,6 @@ import { GlnSwitchConfig } from './gln-switch.interface';
 import { GlnSwitchPosition, GlnSwitchPositionUtil } from './gln-switch-position.interface';
 import { ScreenUtil } from '../_utils/screen.util';
 import { HtmlConvertUtil } from '../_utils/html-convert.util';
-import { GlnProperties, PropertiesType } from '../_interface/gln-properties';
 
 export const CLS_SW_DISABLED = 'gln-disabled';
 export const ATR_SW_DISABLED = 'dis';
@@ -75,13 +74,13 @@ export const GLN_SWITCH_CONFIG = new InjectionToken<GlnSwitchConfig>('GLN_SWITCH
 })
 export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnNodeInternalValidator {
   @Input()
-  public id = `glnsw-${uniqueIdCounter++}`; // Defined in GlnBaseControl.
+  public id = `glnsw-${uniqueIdCounter++}`;
   @Input()
   public config: GlnSwitchConfig | null | undefined;
   @Input()
   public isChecked: string | boolean | null | undefined; // Specifies the initial value of the element.
   @Input()
-  public isDisabled: string | boolean | null | undefined; // Defined in GlnBaseControl.
+  public isDisabled: string | boolean | null | undefined;
   @Input()
   public isNoAnimation: string | boolean | null | undefined;
   @Input()
@@ -93,7 +92,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   @Input()
   public position: string | null | undefined; // 'top' | 'bottom' | 'start' | 'end';
   @Input()
-  public tabIndex: number = 0; // Defined in GlnBaseControl.
+  public tabIndex: number = 0;
 
   @Output()
   readonly change: EventEmitter<GlnSwitchChange> = new EventEmitter();
@@ -103,19 +102,18 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
 
   public checked: boolean | null = null; // Binding attribute "isChecked".
   public currConfig: GlnSwitchConfig;
-  public disabled: boolean | null = null; // Binding attribute "isDisabled". // Defined in GlnBaseControl.
+  public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public formControl: FormControl = new FormControl({ value: false, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public isWrapAndThumb: boolean = false;
   public idForInput = this.setIdForInput(this.id);
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple".
-  public labelPosition: GlnSwitchPosition | null = null; // Binding attribute "position".
+  public positionVal: GlnSwitchPosition | null = null; // Binding attribute "position".
   public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
   public required: boolean | null = null; // Binding attribute "isRequired".
 
   private isRemoveAttrHideAnimation: boolean = false;
-  private properties: GlnProperties;
 
   constructor(
     private renderer: Renderer2,
@@ -127,7 +125,6 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     this.currConfig = this.rootConfig || {};
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-switch', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
-    this.properties = new GlnProperties(this.renderer, this.hostRef, this as unknown as PropertiesType);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -140,23 +137,24 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     if (changes['isDisabled']) {
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
-    // Checking and handle the 'isNoAnimation' parameter.
-    this.properties.onChangesProperty(changes, 'isNoAnimation', this.currConfig as PropertiesType);
-    // Checking and handle the 'isNoRipple' parameter.
-    this.properties.onChangesProperty(changes, 'isNoRipple', this.currConfig as PropertiesType);
-    // Checking and handle the 'isReadOnly' parameter.
-    this.properties.onChangesProperty(changes, 'isReadOnly', this.currConfig as PropertiesType);
-    // Checking and handle the 'isRequired' parameter.
-    this.properties.onChangesProperty(changes, 'isRequired', this.currConfig as PropertiesType);
+    if (changes['isNoAnimation'] || (changes['config'] && this.noAnimation == null && this.currConfig.isNoAnimation != null)) {
+      this.settingNoAnimation(BooleanUtil.init(this.isNoAnimation) ?? (this.currConfig.isNoAnimation || null));
+    }
+    if (changes['isNoRipple'] || (changes['config'] && this.noRipple == null && this.currConfig.isNoRipple != null)) {
+      this.settingNoRipple(BooleanUtil.init(this.isNoRipple) ?? (this.currConfig.isNoRipple || null));
+    }
+    if (changes['isReadOnly'] || (changes['config'] && this.readOnly == null && this.currConfig.isReadOnly != null)) {
+      this.settingReadOnly(BooleanUtil.init(this.isReadOnly) ?? (this.currConfig.isReadOnly || null));
+    }
+    if (changes['isRequired'] || (changes['config'] && this.required == null && this.currConfig.isRequired != null)) {
+      this.settingRequired(BooleanUtil.init(this.isRequired) ?? (this.currConfig.isRequired || null));
+    }
+    if (changes['position'] || (changes['config'] && this.positionVal == null && this.currConfig.position != null)) {
+      this.settingPosition(GlnSwitchPositionUtil.convert(this.position || null) ?? (this.currConfig.position || null));
+    }
 
     if (changes['isRequired']) {
       this.prepareFormGroup(this.required);
-    }
-    // Checking and handle the 'position' parameter.
-    if (changes['position'] || (changes['config'] && this.position == null)) {
-      const positionInp = GlnSwitchPositionUtil.convert(this.position || null);
-      this.labelPosition = positionInp || GlnSwitchPositionUtil.create(this.currConfig?.position || null);
-      this.settingPosition(this.renderer, this.hostRef, this.labelPosition);
     }
   }
 
@@ -168,28 +166,30 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
 
     this.prepareCssParameters(this.hostRef);
 
-    // If parameter 'isChecked' is defined, then set the initial value.
-    const isChecked: boolean | null = BooleanUtil.init(this.isChecked);
-    const isCheckedVal = isChecked != null ? isChecked : this.currConfig.isChecked || null;
-    if (isCheckedVal != null && isCheckedVal !== this.formControl.value) {
-      this.formControl.setValue(isCheckedVal, { emitEvent: false });
-      this.settingChecked(this.renderer, this.hostRef, isCheckedVal);
+    const isChecked: boolean | null = BooleanUtil.init(this.isChecked) ?? (this.currConfig.isChecked || null);
+    if (isChecked && !this.formControl.value) {
+      this.formControl.setValue(true, { emitEvent: false });
+      this.settingChecked(true);
     }
-    // Checking and handle the 'isNoAnimation' parameter.
-    this.properties.onInitProperty('isNoAnimation', this.currConfig as PropertiesType);
-    // Checking and handle the 'isReadOnly' parameter.
-    this.properties.onInitProperty('isReadOnly', this.currConfig as PropertiesType);
-    // Checking and handle the 'isRequired' parameter.
-    this.properties.onInitProperty('isRequired', this.currConfig as PropertiesType);
+
+    if (this.noAnimation == null && this.currConfig.isNoAnimation != null) {
+      this.settingNoAnimation(this.currConfig.isNoAnimation);
+    }
+    if (this.noRipple == null && this.currConfig.isNoRipple != null) {
+      this.settingNoRipple(this.currConfig.isNoRipple);
+    }
+    if (this.readOnly == null && this.currConfig.isReadOnly != null) {
+      this.settingReadOnly(this.currConfig.isReadOnly);
+    }
+    if (this.required == null && this.currConfig.isRequired != null) {
+      this.settingRequired(this.currConfig.isRequired);
+    }
+    if (this.positionVal == null && this.currConfig.position != null) {
+      this.settingPosition(this.currConfig.position);
+    }
+
     if (this.required) {
       this.prepareFormGroup(this.required);
-    }
-    // Checking and handle the 'isNoRipple' parameter.
-    this.properties.onInitProperty('isNoRipple', this.currConfig as PropertiesType);
-    // Checking and handle the 'position' parameter.
-    if (this.labelPosition == null) {
-      this.labelPosition = GlnSwitchPositionUtil.create(this.currConfig?.position || null);
-      this.settingPosition(this.renderer, this.hostRef, this.labelPosition);
     }
   }
 
@@ -214,7 +214,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   public writeValue(value: any): void {
     if (value !== this.formControl.value) {
       this.formControl.setValue(!!value, { emitEvent: false });
-      this.settingChecked(this.renderer, this.hostRef, !!value);
+      this.settingChecked(!!value);
       this.changeDetectorRef.markForCheck();
     }
     if (this.isRemoveAttrHideAnimation) {
@@ -288,7 +288,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     if (!this.disabled && !this.readOnly) {
       const newValue = !this.formControl.value;
       this.formControl.setValue(newValue, { emitEvent: false });
-      this.settingChecked(this.renderer, this.hostRef, newValue);
+      this.settingChecked(newValue);
       this.onChange(newValue);
       this.change.emit({ checked: newValue, source: this });
       this.changeDetectorRef.markForCheck();
@@ -303,12 +303,6 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     return `${id}-input`;
   }
 
-  private settingChecked(renderer: Renderer2, elem: ElementRef<HTMLElement>, isChecked: boolean): void {
-    this.checked = isChecked;
-    HtmlElemUtil.setClass(renderer, elem, 'gln-checked', isChecked);
-    HtmlElemUtil.setAttr(renderer, elem, 'chk', isChecked ? '' : null);
-  }
-
   private prepareFormGroup(isRequired: boolean | null): void {
     this.formControl.clearValidators();
     const newValidator: ValidatorFn[] = [];
@@ -316,14 +310,6 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
       newValidator.push(Validators.required);
     }
     this.formControl.setValidators(newValidator);
-  }
-
-  private settingPosition(renderer: Renderer2, elem: ElementRef<HTMLElement>, position: GlnSwitchPosition | null): void {
-    if (position) {
-      const positionStr = position.toString();
-      HtmlElemUtil.setClass(renderer, elem, 'glnsw-' + positionStr, true);
-      HtmlElemUtil.setAttr(renderer, elem, 'pos-' + positionStr[0], '');
-    }
   }
 
   private prepareCssParameters(hostRef: ElementRef<HTMLElement>): void {
@@ -377,5 +363,44 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
       const wrapShift = NumberUtil.roundTo100(containerLen - wrapLen);
       HtmlElemUtil.setProperty(hostRef, PRP_SW_WRAP_SHIFT, NumberUtil.str(wrapShift)?.concat('px'));
     }
+  }
+
+  private settingChecked(isChecked: boolean): void {
+    this.checked = isChecked;
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-checked', isChecked);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'chk', isChecked ? '' : null);
+  }
+  private settingPosition(position: GlnSwitchPosition | null): void {
+    if (this.positionVal != position) {
+      this.settingClassAndAttrByPosition(this.positionVal?.toString() || '', false);
+      this.positionVal = position;
+      this.settingClassAndAttrByPosition(this.positionVal?.toString() || '', true);
+    }
+  }
+  private settingClassAndAttrByPosition(positionStr: string, isAdd: boolean): void {
+    if (positionStr) {
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnsw-' + positionStr, isAdd);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'pos-' + positionStr[0], isAdd ? '' : null);
+    }
+  }
+  private settingNoAnimation(noAnimation: boolean | null): void {
+    this.noAnimation = noAnimation;
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-animation', !!noAnimation);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noani', noAnimation ? '' : null);
+  }
+  private settingNoRipple(noRipple: boolean | null): void {
+    this.noRipple = noRipple;
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-ripple', !!noRipple);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'norip', noRipple ? '' : null);
+  }
+  private settingReadOnly(readOnly: boolean | null): void {
+    this.readOnly = readOnly;
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-read-only', !!readOnly);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'rea', readOnly ? '' : null);
+  }
+  private settingRequired(required: boolean | null): void {
+    this.required = required;
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-required', !!required);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'req', required ? '' : null);
   }
 }

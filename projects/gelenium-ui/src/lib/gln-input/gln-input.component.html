@@ -6,6 +6,7 @@
     (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()">
     <gln-frame [config]="currConfig"
       [exterior]="glnFrameExteriorInput.exterior"
+      [isAttrHideAnimation]="isAttrHideAnimation"
       [isDisabled]="disabled"
       [isError]="!!formControl.errors || error"
       [isFilled]="isFilled"
