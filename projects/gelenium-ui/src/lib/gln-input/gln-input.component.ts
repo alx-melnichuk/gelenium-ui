@@ -130,7 +130,7 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   public error: boolean | null = null; // Binding attribute "isError".
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
-  public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
+  public frameSizeVal: string | null = null;
   public isAttrHideAnimation: boolean | undefined;
   public isFocused = false;
   public isFilled = false;
@@ -166,6 +166,9 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     }
     if (changes['exterior'] || (changes['config'] && this.exteriorVal == null && this.currConfig.exterior != null)) {
       this.settingExterior(GlnFrameExteriorUtil.convert(this.exterior || null) ?? (this.currConfig.exterior || null));
+    }
+    if (changes['frameSize'] || (changes['config'] && this.frameSizeVal == null && this.currConfig.frameSize != null)) {
+      this.frameSizeVal = (this.frameSize || null) ?? (this.currConfig.frameSize?.toString() || null);
     }
     if (changes['isError'] || (changes['config'] && this.error == null && this.currConfig.isError != null)) {
       this.settingError(BooleanUtil.init(this.isError) ?? (this.currConfig.isError || null));
@@ -205,6 +208,9 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
 
     if (this.exteriorVal == null && this.currConfig.exterior != null) {
       this.settingExterior(this.currConfig.exterior);
+    }
+    if (this.frameSizeVal == null && this.currConfig.frameSize != null) {
+      this.frameSizeVal = this.currConfig.frameSize?.toString() || null;
     }
     if (this.error == null && this.currConfig.isError != null) {
       this.settingError(this.currConfig.isError);

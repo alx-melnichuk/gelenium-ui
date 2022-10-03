@@ -164,7 +164,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     // Set the TagIndex value if the flag 'disabled' is not set.
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', !this.disabled ? '' + this.tabIndex : null);
 
-    this.prepareCssParameters(this.hostRef);
+    this.prepareCssProperties(this.hostRef);
 
     const isChecked: boolean | null = BooleanUtil.init(this.isChecked) ?? (this.currConfig.isChecked || null);
     if (isChecked && !this.formControl.value) {
@@ -289,6 +289,11 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
       const newValue = !this.formControl.value;
       this.formControl.setValue(newValue, { emitEvent: false });
       this.settingChecked(newValue);
+      if (this.isRemoveAttrHideAnimation) {
+        this.isRemoveAttrHideAnimation = false;
+        // Remove an attribute that disables animation on initialization.
+        HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_SW_HIDE_ANIMATION_INIT, null);
+      }
       this.onChange(newValue);
       this.change.emit({ checked: newValue, source: this });
       this.changeDetectorRef.markForCheck();
@@ -312,7 +317,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     this.formControl.setValidators(newValidator);
   }
 
-  private prepareCssParameters(hostRef: ElementRef<HTMLElement>): void {
+  private prepareCssProperties(hostRef: ElementRef<HTMLElement>): void {
     // Determine the font size of the parent element.
     const parentElem: Element | null = hostRef && hostRef.nativeElement ? hostRef.nativeElement.parentElement : null;
     const parentFontSize: number = parentElem ? Number(getComputedStyle(parentElem).getPropertyValue('font-size').replace('px', '')) : 0;

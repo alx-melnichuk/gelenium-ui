@@ -1,62 +1,51 @@
 <ng-container [formGroup]="formGroup">
-  <div class="glnin-wrap"
-    [glnFrameExteriorInput]="exteriorVal"
-    #glnFrameExteriorInput="glnFrameExteriorInput"
-    [glnFrameExteriorInputElementRef]="hostRef"
-    (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()">
-    <gln-frame [config]="currConfig"
-      [exterior]="glnFrameExteriorInput.exterior"
-      [isAttrHideAnimation]="isAttrHideAnimation"
-      [isDisabled]="disabled"
-      [isError]="!!formControl.errors || error"
-      [isFilled]="isFilled"
-      [isLabelShrink]="labelShrink"
-      [isNoAnimation]="noAnimation"
-      [isNoLabel]="noLabel"
-      [isRequired]="required"
-      [label]="label"
-      [glnFrameSize]="frameSize || currConfig?.frameSize"
-      #glnFrameSize="glnFrameSize"
-      [glnFrameSizeElementRef]="hostRef"
-      [glnFrameSizeValue]="currConfig?.frameSizeValue || frameSizeDefault"
-      [glnFrameSizeLabelPd]="currConfig?.labelPd"
-      [glnFrameSizePrepare]="glnFrameExteriorInput"
-      glnFrameOrnament
-      [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
-      [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
-      [glnFrameOrnamentPath]="'/div{0}'">
+  <gln-frame [config]="currConfig"
+    [exterior]="exteriorVal"
+    [frameSize]="frameSizeVal"
+    [isAttrHideAnimation]="isAttrHideAnimation"
+    [isDisabled]="disabled"
+    [isError]="!!formControl.errors || error"
+    [isFilled]="isFilled"
+    [isLabelShrink]="labelShrink"
+    [isNoAnimation]="noAnimation"
+    [isNoLabel]="noLabel"
+    [isRequired]="required"
+    [label]="label"
+    glnFrameOrnament
+    [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
+    [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
+    [glnFrameOrnamentPath]="'/div{0}'">
 
-      <span glnfr-orn-lf
-        class="gln-ornam-lf">
-        <ng-content select="[gln-orn-lf]"></ng-content>
-      </span>
-      <span glnfr-orn-rg
-        class="gln-ornam-rg">
-        <ng-content select="[gln-orn-rg]"></ng-content>
-      </span>
+    <span glnfr-orn-lf
+      class="gln-ornam-lf">
+      <ng-content select="[gln-orn-lf]"></ng-content>
+    </span>
+    <span glnfr-orn-rg
+      class="gln-ornam-rg">
+      <ng-content select="[gln-orn-rg]"></ng-content>
+    </span>
 
-      <input #inputElement
-        formControlName="textData"
-        glnfr-pd-ver
-        glnfr-pd-hor
-        glnfr-elem
-        [attr.id]="id + '_input'"
-        [type]="typeVal"
-        [ngClass]="['glnin-input', (readOnly ? 'gln-readonly' : '')]"
-        [attr.disabled]="disabled ? '': null"
-        [attr.autocomplete]="!!autoComplete ? autoComplete : null"
-        [attr.readonly]="readOnly ? '': null"
-        [attr.min]="min"
-        [attr.max]="max"
-        [attr.step]="step"
-        [attr.tabindex]="!disabled ? tabIndex : null"
-        [pattern]="pattern"
-        (focus)="doFocus()"
-        (blur)="doBlur()"
-        (input)="doInput($event)" />
+    <input #inputElement
+      formControlName="textData"
+      glnfr-pd-ver
+      glnfr-pd-hor
+      glnfr-elem
+      [attr.id]="id + '_input'"
+      [type]="typeVal"
+      [ngClass]="['glnin-input', (readOnly ? 'gln-readonly' : '')]"
+      [attr.disabled]="disabled ? '': null"
+      [attr.autocomplete]="!!autoComplete ? autoComplete : null"
+      [attr.readonly]="readOnly ? '': null"
+      [attr.min]="min"
+      [attr.max]="max"
+      [attr.step]="step"
+      [attr.tabindex]="!disabled ? tabIndex : null"
+      [pattern]="pattern"
+      (focus)="doFocus()"
+      (blur)="doBlur()"
+      (input)="doInput($event)" />
 
-    </gln-frame>
-  </div>
+  </gln-frame>
 </ng-container>
 <gln-hint-or-error *ngIf="!!helperText"
   [text]="helperText"
