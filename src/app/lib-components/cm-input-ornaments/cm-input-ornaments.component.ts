@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { GlnFrameConfig, GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from 'gelenium-ui';
+import { GlnFrameConfigOld, GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import {
@@ -60,13 +60,13 @@ export class CmInputOrnamentsComponent {
   public isBtnEyeCrossed05f = false;
   public isBtnEyeCrossed05g = false;
   public isBtnEyeCrossed05h = false;
-  public config05h: GlnFrameConfig = {
+  public config05h: GlnFrameConfigOld = {
     ornamRgAlign: GlnFrameOrnamAlign.baseline,
   };
   public ornamLfAlign05 = 'default';
   public ornamRgAlign05 = 'default';
 
-  public config05: GlnFrameConfig = {};
+  public config05: GlnFrameConfigOld = {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {
     this.changeConfig05(this.convert(this.ornamLfAlign05), this.convert(this.ornamRgAlign05));

@@ -1,6 +1,6 @@
-import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
+import { GlnFrameConfigOld } from '../gln-frame/gln-frame-config.interface';
 
-export interface GlnSelectConfig extends GlnFrameConfig {
+export interface GlnSelectConfig extends GlnFrameConfigOld {
   // exterior?: GlnFrameExterior | undefined;
   // frameSize?: GlnFrameSize | undefined;
   // frameSizeValue?: number | undefined;

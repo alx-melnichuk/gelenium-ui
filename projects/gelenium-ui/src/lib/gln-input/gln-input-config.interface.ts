@@ -1,13 +1,14 @@
 import { GlnFrameOrnamAlign } from '../directives/gln-frame-ornament/gln-frame-ornam-align.interface';
-import { GlnFrameConfig2 } from '../gln-frame/gln-frame-config.interface';
+import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 
-export interface GlnInputConfig extends GlnFrameConfig2 {
-  // exterior?: GlnFrameExterior | undefined;
-  // frameSizeValue?: number | undefined;
-  // isLabelShrink?: boolean | undefined; //++html
-  // isNoAnimation?: boolean | undefined; //++html
-  // isNoLabel?: boolean | undefined;     //++html
-  // labelPd?: number | undefined; // px
+export interface GlnInputConfig extends GlnFrameConfig {
+  // GlnFrameConfig
+  // exterior?: string | undefined; // GlnFrameExterior
+  // frameSize?: string | undefined; // GlnFrameSize
+  // isLabelShrink?: boolean | undefined;
+  // isNoAnimation?: boolean | undefined;
+  // isNoLabel?: boolean | undefined;
+
   isError?: boolean | undefined; //++html
   isReadOnly?: boolean | undefined; //++html
   isRequired?: boolean | undefined; //++html

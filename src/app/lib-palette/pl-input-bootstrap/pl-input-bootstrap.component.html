@@ -9,7 +9,7 @@
     To do this, you need to specify the following configuration:
   </p>
   <code><pre source="ts">
-public config02b: GlnFrameConfig = &#123;
+public config02b: GlnFrameConfigOld = &#123;
   exterior: GlnFrameExterior.outlined,
   frameSize: GlnFrameSize.short,
   isNoLabel: true,
@@ -189,7 +189,7 @@ import &#123;
   FormControl, FormGroup
 &#125; from '@angular/forms';
 import &#123;
-  GlnFrameConfig, GlnFrameExterior, GlnFrameSize
+  GlnFrameConfigOld, GlnFrameExterior, GlnFrameSize
 &#125; from 'gelenium-ui';
 
 @Component(&#123;
@@ -206,7 +206,7 @@ export class InputComponent &#123;
     model02d: new FormControl('Hello World', []),
   &#125;;
   public formGroup02a: FormGroup = new FormGroup(this.control02a);
-  public config02a: GlnFrameConfig = &#123;
+  public config02a: GlnFrameConfigOld = &#123;
     exterior: GlnFrameExterior.outlined,
     frameSize: GlnFrameSize.short,
     isNoLabel: true,

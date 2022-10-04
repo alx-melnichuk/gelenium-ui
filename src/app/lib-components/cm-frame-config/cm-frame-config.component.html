@@ -6,13 +6,13 @@
   <p>
     If your application will have a single style for GlnInput elements, then you can set a single
     configuration.
-    To do this, you need to create an object with the GlnFrameConfig interface and define the
+    To do this, you need to create an object with the GlnFrameConfigOld interface and define the
     required values.
     Next, specify the resulting object in the list of providers for the entire application (at the
     level of the AppComponent).
   </p>
   <code><pre source="ts">
-const glnFrameConfigDefault: GlnFrameConfig = &#123;
+const glnFrameConfigDefault: GlnFrameConfigOld = &#123;
   exterior: GlnFrameExterior.outlined,
   frameSize: GlnFrameSize.small,
 &#125;;
@@ -37,7 +37,7 @@ export class AppComponent &#123;
 <section mr-vr
   id="config-interface">
   <h4 class="app-hover-link">
-    GlnFrameConfig interface.
+    GlnFrameConfigOld interface.
     <a [href]="urlCmFrame + '#config-interface'">#</a>
   </h4>
 </section>
@@ -184,7 +184,7 @@ export class AppComponent &#123;
     <li>"frameSize" will have the value "small" (height to 44px);</li>
   </ul>
   <code><pre source="ts">
-const glnFrameConfigDefault: GlnFrameConfig = &#123;
+const glnFrameConfigDefault: GlnFrameConfigOld = &#123;
   exterior: GlnFrameExterior.outlined,
   frameSize: GlnFrameSize.small,
 &#125;;</pre></code>
@@ -320,10 +320,10 @@ import &#123;
   FormControl, FormGroup
 &#125; from '@angular/forms';
 import &#123;
-  GlnFrameExterior, GlnFrameSize, GlnFrameConfig, GLN_FRAME_CONFIG
+  GlnFrameExterior, GlnFrameSize, GlnFrameConfigOld, GLN_FRAME_CONFIG
 &#125; from 'gelenium-ui';
 
-const glnFrameConfigDefault: GlnFrameConfig = &#123;
+const glnFrameConfigDefault: GlnFrameConfigOld = &#123;
   exterior: GlnFrameExterior.outlined,
   frameSize: GlnFrameSize.small,
 &#125;;

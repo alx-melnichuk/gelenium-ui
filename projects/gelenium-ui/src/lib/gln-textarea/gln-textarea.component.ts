@@ -37,13 +37,13 @@ import {
 
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnBasisFrame } from '../_classes/gln-basis-frame.class';
-import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
+import { GlnFrameConfigOld } from '../gln-frame/gln-frame-config.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 let uniqueIdCounter = 0;
 
-export const GLN_TEXTAREA_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_TEXTAREA_CONFIG');
+export const GLN_TEXTAREA_CONFIG = new InjectionToken<GlnFrameConfigOld>('GLN_TEXTAREA_CONFIG');
 
 @Component({
   selector: 'gln-textarea',
@@ -71,7 +71,7 @@ export class GlnTextareaComponent
   @Input()
   public cntRows: number | null | undefined;
   @Input()
-  public config: GlnFrameConfig | null | undefined;
+  public config: GlnFrameConfigOld | null | undefined;
   @Input()
   public exterior: string | null | undefined; // GlnFrameExteriorType
   @Input()
@@ -123,7 +123,7 @@ export class GlnTextareaComponent
   @ViewChild('textareaElement')
   public textareaElementRef: ElementRef | null = null;
 
-  public currConfig: GlnFrameConfig | null = null;
+  public currConfig: GlnFrameConfigOld | null = null;
   public currentRows = 1;
   // public disabled: boolean | null = null; // Binding attribute "isDisabled". // Is in GlnBasisControl.
   // public error: boolean | null = null; // Binding attribute "isError". // Is in GlnBasisControl.
@@ -144,7 +144,7 @@ export class GlnTextareaComponent
     // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: Object,
     changeDetectorRef: ChangeDetectorRef,
-    @Optional() @Inject(GLN_TEXTAREA_CONFIG) private rootConfig: GlnFrameConfig | null,
+    @Optional() @Inject(GLN_TEXTAREA_CONFIG) private rootConfig: GlnFrameConfigOld | null,
     hostRef: ElementRef<HTMLElement>,
     renderer: Renderer2,
     ngZone: NgZone

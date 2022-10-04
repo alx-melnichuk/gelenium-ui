@@ -16,20 +16,18 @@
   <span>For example:</span>
   <code><pre source="html">
 &lt;div&gt;
-  &lt;gln-input style="<strong>--glnfr-br-rd: 25px;</strong>"
+  &lt;gln-input style="<strong>--glnfr-br-rd: 25px;</strong> <i>--glnfr-pd-lf: 29px;</i>"
     formControlName="model05"
     label="Enter value"
-    exterior="outlined"
-    [config]="&#123; labelPd: 29 &#125;"&gt;
+    exterior="outlined"&gt;
   &lt;/gln-input&gt;
 &lt;/div&gt;</pre></code>
   <span>Another example:</span>
   <code><pre source="html">
-&lt;div style="<strong>--glnfr-br-rd: 25px;</strong>"&gt;
+&lt;div style="<strong>--glnfr-br-rd: 25px;</strong> <i>--glnfr-pd-lf: 29px;</i>"&gt;
   &lt;gln-input formControlName="model05"
     label="Enter value"
-    exterior="outlined"
-    [config]="&#123; labelPd: 29 &#125;"&gt;
+    exterior="outlined"&gt;
   &lt;/gln-input&gt;
 &lt;/div&gt;</pre></code>
   <p>
@@ -37,11 +35,10 @@
   </p>
   <code><pre source="html">
 &lt;div&gt;
-  &lt;gln-input style="<strong>--glnfr-br-rd: 25px 25px 0 0;</strong>"
+  &lt;gln-input style="<strong>--glnfr-br-rd: 25px 25px 0 0;</strong> <i>--glnfr-pd-lf: 20px;</i>"
     formControlName="model05"
     label="Enter value"
-    exterior="underline"
-    [config]="&#123; labelPd: 20 &#125;"&gt;
+    exterior="underline"&gt;
   &lt;/gln-input&gt;
 &lt;/div&gt;</pre></code>
   <p>
@@ -50,10 +47,21 @@
     The maximum value for the fillet radius is 50% of the height of the current element.<br />
   </p>
   <p>
-    You can also change the value of the left / right indents, for a more convenient perception.
+    You can also change the value of the left / right indents, for a more convenient
+    perception.<br />
+    To change the left (and right) indent of the label, you need to add the css variable
+    <i>'--glnfr-pd-lf'</i>.
   </p>
 </section>
 
+
+<section mr-vr
+  id="border-radius-example01">
+  <h4 class="app-hover-link">
+    Example 1.
+    <a [href]="urlCmFrame + '#border-radius-example01'">#</a>
+  </h4>
+</section>
 
 <section mr-vr>
   <span>exterior: </span>
@@ -118,8 +126,11 @@
   autocomplete="off">
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('short') * borderRadius / 100, exterior05)">
+    [attr.style]="'--glnfr-br-rd:'
+      + getRadius(getValue('short') * borderRadius/100, exterior05) + ';'
+      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
+      + getValue('short') * getRatio(exterior05) + 'px;'
+    ">
     <div class="app-elem">
       <div>
         <small>
@@ -130,17 +141,17 @@
         label="Enter value"
         [isNoLabel]="isNoLabel05 ? '':null"
         frameSize="short"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? { labelPd: getValue('short') * getRatio(exterior05) }
-          : null">
+        [exterior]="exterior05">
       </gln-input>
     </div>
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('small') * borderRadius / 100, exterior05)">
+    [attr.style]="'--glnfr-br-rd :'
+      + getRadius(getValue('small') * borderRadius / 100, exterior05) + ';'
+      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
+      + getValue('small') * getRatio(exterior05) + 'px;'
+      ">
     <div class="app-elem">
       <div>
         <small>
@@ -151,17 +162,17 @@
         label="Enter value"
         [isNoLabel]="isNoLabel05 ? '':null"
         frameSize="small"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? { labelPd: getValue('small') * getRatio(exterior05) }
-          : null">
+        [exterior]="exterior05">
       </gln-input>
     </div>
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('middle') * borderRadius / 100, exterior05)">
+    [attr.style]="'--glnfr-br-rd :'
+      + getRadius(getValue('middle') * borderRadius / 100, exterior05) + ';'
+      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
+      + getValue('middle') * getRatio(exterior05) + 'px;'
+      ">
     <div class="app-elem">
       <div>
         <small>
@@ -172,17 +183,17 @@
         label="Enter value"
         [isNoLabel]="isNoLabel05 ? '':null"
         frameSize="middle"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? { labelPd: getValue('middle') * getRatio(exterior05) }
-          : null">
+        [exterior]="exterior05">
       </gln-input>
     </div>
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('wide') * borderRadius / 100, exterior05)">
+    [attr.style]="'--glnfr-br-rd :'
+      + getRadius(getValue('wide') * borderRadius / 100, exterior05) + ';'
+      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
+      + getValue('wide') * getRatio(exterior05) + 'px;'
+      ">
     <div class="app-elem">
       <div>
         <small>
@@ -193,17 +204,17 @@
         label="Enter value"
         [isNoLabel]="isNoLabel05 ? '':null"
         frameSize="wide"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? { labelPd: getValue('wide') * getRatio(exterior05) }
-          : null">
+        [exterior]="exterior05">
       </gln-input>
     </div>
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('large') * borderRadius / 100, exterior05)">
+    [attr.style]="'--glnfr-br-rd :'
+      + getRadius(getValue('large') * borderRadius / 100, exterior05) + ';'
+      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
+      + getValue('large') * getRatio(exterior05) + 'px;'
+      ">
     <div class="app-elem">
       <div>
         <small>
@@ -215,17 +226,17 @@
         label="Enter value"
         [isNoLabel]="isNoLabel05 ? '':null"
         frameSize="large"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? { labelPd: getValue('large') * getRatio(exterior05) }
-          : null">
+        [exterior]="exterior05">
       </gln-input>
     </div>
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('huge') * borderRadius / 100, exterior05)">
+    [attr.style]="'--glnfr-br-rd :'
+      + getRadius(getValue('huge') * borderRadius / 100, exterior05) + ';'
+      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
+      + getValue('huge') * getRatio(exterior05) + 'px;'
+      ">
     <div class="app-elem">
       <div>
         <small>
@@ -237,10 +248,7 @@
         label="Enter value"
         [isNoLabel]="isNoLabel05 ? '':null"
         frameSize="huge"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? { labelPd: getValue('huge') * getRatio(exterior05) }
-          : null">
+        [exterior]="exterior05">
       </gln-input>
     </div>
   </div>
@@ -261,8 +269,11 @@
   autocomplete="off"&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-        getValue('short') * borderRadius / 100, exterior05)"&gt;
+    [attr.style]="'--glnfr-br-rd:'
+      + getRadius(getValue('short') * borderRadius/100, exterior05) + ';'
+      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
+      + getValue('short') * getRatio(exterior05) + 'px;'
+    "&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -273,17 +284,17 @@
         label="Enter value"
         [isNoLabel]="isNoLabel05 ? '':null"
         frameSize="short"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? &#123; labelPd: getValue('short') * getRatio(exterior05) &#125;
-          : null"&gt;
+        [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('small') * borderRadius / 100, exterior05)"&gt;
+    [attr.style]="'--glnfr-br-rd :'
+      + getRadius(getValue('small') * borderRadius / 100, exterior05) + ';'
+      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
+      + getValue('small') * getRatio(exterior05) + 'px;'
+      "&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -294,17 +305,17 @@
         label="Enter value"
         [isNoLabel]="isNoLabel05 ? '':null"
         frameSize="small"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? &#123; labelPd: getValue('small') * getRatio(exterior05) &#125;
-          : null"&gt;
+        [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('middle') * borderRadius / 100, exterior05)"&gt;
+    [attr.style]="'--glnfr-br-rd :'
+      + getRadius(getValue('middle') * borderRadius / 100, exterior05) + ';'
+      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
+      + getValue('middle') * getRatio(exterior05) + 'px;'
+      "&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -315,17 +326,17 @@
         label="Enter value"
         [isNoLabel]="isNoLabel05 ? '':null"
         frameSize="middle"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? &#123; labelPd: getValue('middle') * getRatio(exterior05) &#125;
-          : null"&gt;
+        [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('wide') * borderRadius / 100, exterior05)"&gt;
+    [attr.style]="'--glnfr-br-rd :'
+      + getRadius(getValue('wide') * borderRadius / 100, exterior05) + ';'
+      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
+      + getValue('wide') * getRatio(exterior05) + 'px;'
+      "&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -336,17 +347,17 @@
         label="Enter value"
         [isNoLabel]="isNoLabel05 ? '':null"
         frameSize="wide"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? &#123; labelPd: getValue('wide') * getRatio(exterior05) &#125;
-          : null"&gt;
+        [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('large') * borderRadius / 100, exterior05)"&gt;
+    [attr.style]="'--glnfr-br-rd :'
+      + getRadius(getValue('large') * borderRadius / 100, exterior05) + ';'
+      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
+      + getValue('large') * getRatio(exterior05) + 'px;'
+      "&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -358,17 +369,17 @@
         label="Enter value"
         [isNoLabel]="isNoLabel05 ? '':null"
         frameSize="large"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? &#123; labelPd: getValue('large') * getRatio(exterior05) &#125;
-          : null"&gt;
+        [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('huge') * borderRadius / 100, exterior05)"&gt;
+    [attr.style]="'--glnfr-br-rd :'
+      + getRadius(getValue('huge') * borderRadius / 100, exterior05) + ';'
+      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
+      + getValue('huge') * getRatio(exterior05) + 'px;'
+      "&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -380,10 +391,7 @@
         label="Enter value"
         [isNoLabel]="isNoLabel05 ? '':null"
         frameSize="huge"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? &#123; labelPd: getValue('huge') * getRatio(exterior05) &#125;
-          : null"&gt;
+        [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -506,12 +514,12 @@ export class ButtonComponent &#123;
           <em>Demo - A (top-left, bottom-left)</em>
         </small>
       </div>
-      <gln-input style="--glnfr-br-rd: 12.5px 0px 0px 12.5px;"
+      <gln-input [attr.style]="'--glnfr-br-rd: 12.5px 0px 0px 12.5px;'
+        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06a"
         label="Enter value"
         [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null">
+        exterior="outlined">
       </gln-input>
     </div>
 
@@ -521,12 +529,12 @@ export class ButtonComponent &#123;
           <em>Demo - B (top-right, bottom-right)</em>
         </small>
       </div>
-      <gln-input style="--glnfr-br-rd: 0px 12.5px 12.5px 0px;"
+      <gln-input [attr.style]="'--glnfr-br-rd: 0px 12.5px 12.5px 0px;'
+        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06b"
         label="Enter value"
         [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null">
+        exterior="outlined">
       </gln-input>
     </div>
 
@@ -536,12 +544,12 @@ export class ButtonComponent &#123;
           <em>Demo - C (top-left, bottom-right)</em>
         </small>
       </div>
-      <gln-input style="--glnfr-br-rd: 12.5px 0px 12.5px 0px;"
+      <gln-input [attr.style]="'--glnfr-br-rd: 12.5px 0px 12.5px 0px;'
+        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06c"
         label="Enter value"
         [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null">
+        exterior="outlined">
       </gln-input>
     </div>
 
@@ -551,12 +559,12 @@ export class ButtonComponent &#123;
           <em>Demo - D (bottom-right, top-left)</em>
         </small>
       </div>
-      <gln-input style="--glnfr-br-rd: 0px 12.5px 0px 12.5px;"
+      <gln-input [attr.style]="'--glnfr-br-rd: 0px 12.5px 0px 12.5px;'
+        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06d"
         label="Enter value"
         [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null">
+        exterior="outlined">
       </gln-input>
     </div>
 
@@ -566,12 +574,12 @@ export class ButtonComponent &#123;
           <em>Demo - E (border-radius: 5%/50%)</em>
         </small>
       </div>
-      <gln-input style="--glnfr-br-rd: 5% / 50%;"
+      <gln-input [attr.style]="'--glnfr-br-rd: 5% / 50%;'
+        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06e"
         label="Enter value"
         [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null">
+        exterior="outlined">
       </gln-input>
     </div>
 
@@ -593,11 +601,11 @@ export class ButtonComponent &#123;
         </small>
       </div>
       <gln-input class="radius-f"
+        [attr.style]="(isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06f"
         label="Enter value"
         [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="underline"
-        [config]="isAddPadding06 ? configUnderline : null">
+        exterior="underline">
       </gln-input>
     </div>
   </div>
@@ -632,12 +640,12 @@ export class ButtonComponent &#123;
           &lt;em&gt;Demo - A (top-left, bottom-left)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input style="--glnfr-br-rd: 12.5px 0px 0px 12.5px;"
+      &lt;gln-input [attr.style]="'--glnfr-br-rd: 12.5px 0px 0px 12.5px;'
+        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06a"
         label="Enter value"
         [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null"&gt;
+        exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
@@ -647,12 +655,12 @@ export class ButtonComponent &#123;
           &lt;em&gt;Demo - B (top-right, bottom-right)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input style="--glnfr-br-rd: 0px 12.5px 12.5px 0px;"
+      &lt;gln-input [attr.style]="'--glnfr-br-rd: 0px 12.5px 12.5px 0px;'
+        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06b"
         label="Enter value"
         [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null"&gt;
+        exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
@@ -662,12 +670,12 @@ export class ButtonComponent &#123;
           &lt;em&gt;Demo - C (top-left, bottom-right)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input style="--glnfr-br-rd: 12.5px 0px 12.5px 0px;"
+      &lt;gln-input [attr.style]="'--glnfr-br-rd: 12.5px 0px 12.5px 0px;'
+        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06c"
         label="Enter value"
         [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null"&gt;
+        exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
@@ -677,12 +685,12 @@ export class ButtonComponent &#123;
           &lt;em&gt;Demo - D (bottom-right, top-left)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input style="--glnfr-br-rd: 0px 12.5px 0px 12.5px;"
+      &lt;gln-input [attr.style]="'--glnfr-br-rd: 0px 12.5px 0px 12.5px;'
+        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06d"
         label="Enter value"
         [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null"&gt;
+        exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
@@ -692,12 +700,12 @@ export class ButtonComponent &#123;
           &lt;em&gt;Demo - E (border-radius: 5%/50%)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input style="--glnfr-br-rd: 5% / 50%;"
+      &lt;gln-input [attr.style]="'--glnfr-br-rd: 5% / 50%;'
+        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06e"
         label="Enter value"
         [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null"&gt;
+        exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
@@ -719,11 +727,11 @@ export class ButtonComponent &#123;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input class="radius-f"
+        [attr.style]="(isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06f"
         label="Enter value"
         [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="underline"
-        [config]="isAddPadding06 ? configUnderline : null"&gt;
+        exterior="underline"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -757,12 +765,6 @@ export class ButtonComponent &#123;
     model06e: new FormControl('Demo - E', []),
     model06f: new FormControl('Demo - F', []),
   &#125;);
-  public configOutlined: GlnFrameConfig = &#123;
-    labelPd: 18.5, // 0.37*FrameSizeValue.middle
-  &#125;;
-  public configUnderline: GlnFrameConfig = &#123;
-    labelPd: 18.5, // 0.37*FrameSizeValue.middle
-  &#125;;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

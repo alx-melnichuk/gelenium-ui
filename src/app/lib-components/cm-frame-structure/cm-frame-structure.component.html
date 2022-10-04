@@ -217,7 +217,6 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
   <code><pre source="html">
 [glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
 [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
-[glnFrameSizeLabelPd]="currConfig?.labelPd"
 [glnFrameSizePrepare]="glnFrameExteriorInput"</pre></code>
   <p>
     There is an input parameter with interface GlnFrameSizePrepare.
@@ -312,7 +311,6 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
     [glnFrameSize]="frameSize || currConfig?.frameSize"
     [glnFrameSizeElementRef]="hostRef"
     [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
-    [glnFrameSizeLabelPd]="currConfig?.labelPd"
     [glnFrameSizePrepare]="glnFrameExteriorInput"
     // parameter value "frameSizeValue";
     // css-parameter: "--glnfrs-br-rd",

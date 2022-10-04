@@ -39,17 +39,18 @@ import {
 
 import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from '../directives/gln-frame-ornament/gln-frame-ornam-align.interface';
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
-import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
-import { GlnFrameExterior, GlnFrameExteriorUtil } from '../gln-frame/gln-frame-exterior.interface';
-import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
+import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
+import { GlnFrameExterior } from '../gln-frame/gln-frame-exterior.interface';
+import { GlnFrameSize } from '../gln-frame/gln-frame-size.interface';
 import { GlnInputType, GlnInputTypeUtil } from '../gln-input/gln-input.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+
 import { GlnInputConfig } from './gln-input-config.interface';
 
 let uniqueIdCounter = 0;
 
-export const GLN_INPUT_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_INPUT_CONFIG');
+export const GLN_INPUT_CONFIG = new InjectionToken<GlnInputConfig>('GLN_INPUT_CONFIG');
 
 @Component({
   selector: 'gln-input',
@@ -121,22 +122,38 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   @Output()
   readonly blured: EventEmitter<void> = new EventEmitter();
 
+  @ViewChild(GlnFrameComponent, { static: true })
+  public frameComp!: GlnFrameComponent;
   @ViewChild('inputElement')
   public inputElementRef: ElementRef<HTMLElement> | null = null;
 
+  public get exteriorVal(): GlnFrameExterior | null {
+    return this.frameComp.exteriorVal;
+  }
+  public get frameSizeVal(): GlnFrameSize | null {
+    return this.frameComp.frameSizeVal;
+  }
+  public get frameSizeValue(): number {
+    return this.frameComp.frameSizeValue;
+  }
+  public get labelShrink(): boolean | null {
+    return this.frameComp.labelShrink;
+  }
+  public get noAnimation(): boolean | null {
+    return this.frameComp.noAnimation;
+  }
+  public get noLabel(): boolean | null {
+    return this.frameComp.noLabel;
+  }
+
   public currConfig: GlnInputConfig;
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
-  public exteriorVal: GlnFrameExterior | null = null; // Binding attribute "exterior".
   public error: boolean | null = null; // Binding attribute "isError".
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
-  public frameSizeVal: string | null = null;
   public isAttrHideAnimation: boolean | undefined;
   public isFocused = false;
   public isFilled = false;
-  public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink".
-  public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
-  public noLabel: boolean | null = null; // Binding attribute "isNoLabel".
   public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
   public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
@@ -164,23 +181,8 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     if (changes['isDisabled']) {
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
-    if (changes['exterior'] || (changes['config'] && this.exteriorVal == null && this.currConfig.exterior != null)) {
-      this.settingExterior(GlnFrameExteriorUtil.convert(this.exterior || null) ?? (this.currConfig.exterior || null));
-    }
-    if (changes['frameSize'] || (changes['config'] && this.frameSizeVal == null && this.currConfig.frameSize != null)) {
-      this.frameSizeVal = (this.frameSize || null) ?? (this.currConfig.frameSize?.toString() || null);
-    }
     if (changes['isError'] || (changes['config'] && this.error == null && this.currConfig.isError != null)) {
       this.settingError(BooleanUtil.init(this.isError) ?? (this.currConfig.isError || null));
-    }
-    if (changes['isLabelShrink'] || (changes['config'] && this.labelShrink == null && this.currConfig.isLabelShrink != null)) {
-      this.settingLabelShrink(BooleanUtil.init(this.isLabelShrink) ?? (this.currConfig.isLabelShrink || null));
-    }
-    if (changes['isNoAnimation'] || (changes['config'] && this.noAnimation == null && this.currConfig.isNoAnimation != null)) {
-      this.settingNoAnimation(BooleanUtil.init(this.isNoAnimation) ?? (this.currConfig.isNoAnimation || null));
-    }
-    if (changes['isNoLabel'] || (changes['config'] && this.noLabel == null && this.currConfig.isNoLabel != null)) {
-      this.settingNoLabel(BooleanUtil.init(this.isNoLabel) ?? (this.currConfig.isNoLabel || null));
     }
     if (changes['isReadOnly'] || (changes['config'] && this.readOnly == null && this.currConfig.isReadOnly != null)) {
       this.settingReadOnly(BooleanUtil.init(this.isReadOnly) ?? (this.currConfig.isReadOnly || null));
@@ -206,23 +208,8 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
-    if (this.exteriorVal == null && this.currConfig.exterior != null) {
-      this.settingExterior(this.currConfig.exterior);
-    }
-    if (this.frameSizeVal == null && this.currConfig.frameSize != null) {
-      this.frameSizeVal = this.currConfig.frameSize?.toString() || null;
-    }
     if (this.error == null && this.currConfig.isError != null) {
       this.settingError(this.currConfig.isError);
-    }
-    if (this.labelShrink == null && this.currConfig.isLabelShrink != null) {
-      this.settingLabelShrink(this.currConfig.isLabelShrink);
-    }
-    if (this.noAnimation == null && this.currConfig.isNoAnimation != null) {
-      this.settingNoAnimation(this.currConfig.isNoAnimation);
-    }
-    if (this.noLabel == null && this.currConfig.isNoLabel != null) {
-      this.settingNoLabel(this.currConfig.isNoLabel);
     }
     if (this.readOnly == null && this.currConfig.isReadOnly != null) {
       this.settingReadOnly(this.currConfig.isReadOnly);
@@ -317,6 +304,10 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
 
   // ** Public API **
 
+  public getBoolean(value: string | boolean | null | undefined): boolean | null {
+    return BooleanUtil.init(value);
+  }
+
   public focus(): void {
     if (isPlatformBrowser(this.platformId) && !!this.inputElementRef) {
       this.inputElementRef.nativeElement.focus();
@@ -367,38 +358,10 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
   }
 
-  private settingExterior(exteriorVal: GlnFrameExterior | null): void {
-    this.exteriorVal = exteriorVal;
-    const isOutlined = GlnFrameExteriorUtil.isOutlined(exteriorVal);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-outlined', isOutlined);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ext-ol', isOutlined ? '' : null);
-    const isUnderline = GlnFrameExteriorUtil.isUnderline(exteriorVal);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-underline', isUnderline);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ext-ul', isUnderline ? '' : null);
-    const isStandard = GlnFrameExteriorUtil.isStandard(exteriorVal);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-standard', isStandard);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ext-st', isStandard ? '' : null);
-  }
-
   private settingError(error: boolean | null): void {
     this.error = error;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-error', !!error);
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', error ? '' : null);
-  }
-  private settingLabelShrink(labelShrink: boolean | null): void {
-    this.labelShrink = labelShrink;
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnin-shrink', !!labelShrink);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'shr', labelShrink ? '' : null);
-  }
-  private settingNoAnimation(noAnimation: boolean | null): void {
-    this.noAnimation = noAnimation;
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-animation', !!noAnimation);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noani', noAnimation ? '' : null);
-  }
-  private settingNoLabel(noLabel: boolean | null): void {
-    this.noLabel = noLabel;
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnin-no-label', !!noLabel);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'nolab', noLabel ? '' : null);
   }
   private settingReadOnly(readOnly: boolean | null): void {
     this.readOnly = readOnly;

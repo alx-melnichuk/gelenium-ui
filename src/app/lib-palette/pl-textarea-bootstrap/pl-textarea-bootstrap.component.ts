@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { GlnFrameConfig, GlnFrameExterior, GlnFrameSize } from 'gelenium-ui';
+import { GlnFrameConfigOld, GlnFrameExterior, GlnFrameSize } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import {
@@ -47,7 +47,7 @@ export class PlTextareaBootstrapComponent {
   };
   public formGroup02a: FormGroup = new FormGroup(this.control02a);
 
-  public config02a: GlnFrameConfig = {
+  public config02a: GlnFrameConfigOld = {
     exterior: GlnFrameExterior.outlined,
     frameSize: GlnFrameSize.short,
     isNoLabel: true,

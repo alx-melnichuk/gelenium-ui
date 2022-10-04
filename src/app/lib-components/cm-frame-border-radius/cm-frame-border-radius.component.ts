@@ -12,7 +12,7 @@ import {
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
 
-import { GlnFrameConfig, GlnFrameSize, GlnFrameSizeUtil } from 'gelenium-ui';
+import { GlnFrameSizeUtil } from 'gelenium-ui';
 
 @Component({
   selector: 'app-cm-frame-border-radius',
@@ -67,13 +67,6 @@ export class CmFrameBorderRadiusComponent {
     model06e: new FormControl('Demo - E', []),
     model06f: new FormControl('Demo - F', []),
   });
-  public configOutlined: GlnFrameConfig = {
-    labelPd: 18.5, // 0.37*FrameSizeValue.middle
-  };
-  public configUnderline: GlnFrameConfig = {
-    labelPd: 18.5, // 0.37*FrameSizeValue.middle
-  };
-
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
