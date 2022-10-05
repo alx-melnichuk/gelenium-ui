@@ -4,11 +4,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
 
-import { GlnFrameSize, GlnFrameConfigOld, GlnFrameExterior, GLN_FRAME_CONFIG } from 'gelenium-ui';
+import { GlnFrameConfig, GLN_FRAME_CONFIG } from 'gelenium-ui';
 
-const glnFrameConfigDefault: GlnFrameConfigOld = {
-  exterior: GlnFrameExterior.outlined,
-  frameSize: GlnFrameSize.small,
+const glnFrameConfigDefault: GlnFrameConfig = {
+  exterior: 'outlined',
+  frameSize: 'small',
 };
 
 @Component({

@@ -2,7 +2,7 @@ import { GlnFrameOrnamAlign } from '../directives/gln-frame-ornament/gln-frame-o
 import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 
 export interface GlnInputConfig extends GlnFrameConfig {
-  // GlnFrameConfig
+  // interface GlnFrameConfig
   // exterior?: string | undefined; // GlnFrameExterior
   // frameSize?: string | undefined; // GlnFrameSize
   // isLabelShrink?: boolean | undefined;

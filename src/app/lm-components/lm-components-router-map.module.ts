@@ -32,7 +32,6 @@ const siteUrlsFrame: SiteUrl[] = [
   { label: 'Helper text', url: urlFrame, fragment: 'HelperText' },
   { label: 'Border radius', url: urlFrame, fragment: 'BorderRadius' },
   { label: 'Palette', url: urlFrame, fragment: 'Palette' },
-  { label: 'Feature', url: urlFrame, fragment: 'Feature' },
   { label: 'Structure', url: urlFrame, fragment: 'Structure' },
   { label: 'Config', url: urlFrame, fragment: 'Config' },
   { label: 'Api', url: urlFrame, fragment: 'Api' },

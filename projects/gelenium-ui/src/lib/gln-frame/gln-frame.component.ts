@@ -2,12 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  EventEmitter,
   Inject,
   InjectionToken,
   Input,
   OnChanges,
   OnInit,
   Optional,
+  Output,
   Renderer2,
   SimpleChanges,
   ViewEncapsulation,
@@ -37,6 +39,8 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
   public config: GlnFrameConfig | null | undefined;
   @Input()
+  public cssElementRef: ElementRef<HTMLElement> = this.hostRef;
+  @Input()
   public exterior: string | null | undefined; // GlnFrameExteriorType
   @Input()
   public frameSize: string | null | undefined; // GlnFrameSizeType
@@ -47,7 +51,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
   public isError: string | boolean | null | undefined;
   @Input()
-  public isFilled = false;
+  public isFilled: string | boolean | null | undefined;
   @Input()
   public isLabelShrink: string | boolean | null | undefined;
   @Input()
@@ -59,6 +63,9 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
   public label: string | null | undefined;
 
+  @Output()
+  readonly changeCssParams: EventEmitter<void> = new EventEmitter();
+
   public get isOutlinedExterior(): boolean {
     return GlnFrameExterior.outlined === this.exteriorVal;
   }
@@ -68,11 +75,25 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public get isStandardExterior(): boolean {
     return GlnFrameExterior.standard === this.exteriorVal;
   }
+  public get lineHeight(): number {
+    return this.lineHeightInn;
+  }
 
   public attrHideAnimation: boolean | null = null; // Binding attribute "isAttrHideAnimation".
   public currConfig: GlnFrameConfig;
-  public exteriorVal: GlnFrameExterior | null = null;
-  public frameSizeVal: GlnFrameSize | null = null;
+  public cssBorderRadius: string | null = null;
+  public cssPaddingBottom: number | null = null;
+  public cssPaddingLeft: number | null = null;
+  public cssPaddingRight: number | null = null;
+  public cssPaddingShrink: number | null = null;
+  public cssPaddingTop: number | null = null;
+  public cssTranslateY: number | null = null;
+  public cssTranslateY2: number | null = null;
+  public disabled: boolean | null = null; // Binding attribute "isDisabled".
+  public exteriorVal: GlnFrameExterior | null = null; // Binding attribute "exterior".
+  public error: boolean | null = null; // Binding attribute "isError".
+  public filled: boolean | null = null; // Binding attribute "isFilled".
+  public frameSizeVal: GlnFrameSize | null = null; // Binding attribute "frameSize".
   public frameSizeValue: number = 0;
   public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink".
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
@@ -107,7 +128,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       isUpdateCssParams = true;
     }
     if (isUpdateCssParams && this.exteriorVal) {
-      this.updateCssParams(this.exteriorVal, this.frameSizeValue, this.getLineHeight(), this.hostRef);
+      this.updateCssParams(this.exteriorVal, this.frameSizeValue, this.getLineHeight(), this.cssElementRef);
     }
 
     if (changes['isAttrHideAnimation']) {
@@ -121,16 +142,19 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       }
     }
     if (changes['isDisabled']) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', !!this.isDisabled);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabled ? '' : null);
+      this.disabled = !!BooleanUtil.init(this.isDisabled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);
     }
     if (changes['isError']) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-error', !!this.isError);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isError ? '' : null);
+      this.error = !!BooleanUtil.init(this.isError);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-error', this.error);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.error ? '' : null);
     }
     if (changes['isFilled']) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-filled', this.isFilled);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilled ? '' : null);
+      this.filled = !!BooleanUtil.init(this.isFilled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-filled', this.filled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.filled ? '' : null);
     }
 
     if (changes['isLabelShrink'] || (changes['config'] && this.labelShrink == null && this.currConfig.isLabelShrink != null)) {
@@ -163,7 +187,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       isUpdateCssParams = true;
     }
     if (isUpdateCssParams && this.exteriorVal) {
-      this.updateCssParams(this.exteriorVal, this.frameSizeValue, this.getLineHeight(), this.hostRef);
+      this.updateCssParams(this.exteriorVal, this.frameSizeValue, this.getLineHeight(), this.cssElementRef);
     }
 
     if (this.labelShrink == null && this.currConfig.isLabelShrink != null) {
@@ -183,8 +207,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
 
   private getLineHeight(): number {
     if (this.lineHeightInn === 0) {
-      const lineHeight: number = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height').replace('px', ''));
-      this.lineHeightInn = NumberUtil.roundTo100(lineHeight);
+      this.lineHeightInn = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height').replace('px', ''));
     }
     return this.lineHeightInn;
   }
@@ -201,48 +224,52 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     return result;
   }
 
-  private updateCssParams(exteriorVal: GlnFrameExterior, frameSizeValue: number, lineHeight: number, host: ElementRef<HTMLElement>): void {
-    let borderRadius: string | null = null;
-    let bottom: number | null = null;
-    let left: number | null = null;
-    let pdShr: number | null = null;
-    let top: number | null = null;
-    let translateY: number | null = null;
-    let translateY2: number | null = null;
-    const radius: number = frameSizeValue > 0 ? NumberUtil.roundTo100(frameSizeValue / 10) : 0;
+  private updateCssParams(exteriorVal: GlnFrameExterior, frameSizeValue: number, lineHeight: number, elem: ElementRef<HTMLElement>): void {
+    this.cssBorderRadius = null;
+    this.cssPaddingBottom = null;
+    this.cssPaddingLeft = null;
+    this.cssPaddingRight = null;
+    this.cssPaddingShrink = null;
+    this.cssPaddingTop = null;
+    this.cssTranslateY = null;
+    this.cssTranslateY2 = null;
+
     if (frameSizeValue > 0 && lineHeight > 0) {
+      const radius: number = NumberUtil.roundTo100(frameSizeValue / 10);
       const param = frameSizeValue - lineHeight;
       if (exteriorVal === GlnFrameExterior.outlined) {
-        borderRadius = radius > 0 ? radius + 'px' : null;
-        bottom = param * 0.5;
-        left = NumberUtil.roundTo100(0.25 * frameSizeValue);
-        top = param * 0.5;
-        translateY = NumberUtil.roundTo100((-0.75 * lineHeight) / 2);
-        translateY2 = NumberUtil.roundTo100(param * 0.5);
+        this.cssBorderRadius = radius > 0 ? radius + 'px' : null;
+        this.cssPaddingBottom = param * 0.5;
+        this.cssPaddingLeft = NumberUtil.roundTo100(0.25 * frameSizeValue);
+        this.cssPaddingTop = param * 0.5;
+        this.cssTranslateY = NumberUtil.roundTo100((-0.75 * lineHeight) / 2);
+        this.cssTranslateY2 = NumberUtil.roundTo100(param * 0.5);
       } else if (exteriorVal === GlnFrameExterior.underline) {
-        borderRadius = radius > 0 ? radius + 'px ' + radius + 'px 0px 0px' : null;
-        bottom = param * 0.25;
-        left = NumberUtil.roundTo100(0.21428 * frameSizeValue);
-        top = param * 0.75;
-        translateY = NumberUtil.roundTo100((frameSizeValue * 0.757 - lineHeight * 1.257) * 0.45);
-        translateY2 = NumberUtil.roundTo100(param * 0.5);
+        this.cssBorderRadius = radius > 0 ? radius + 'px ' + radius + 'px 0px 0px' : null;
+        this.cssPaddingBottom = param * 0.25;
+        this.cssPaddingLeft = NumberUtil.roundTo100(0.21428 * frameSizeValue);
+        this.cssPaddingTop = param * 0.75;
+        this.cssTranslateY = NumberUtil.roundTo100((frameSizeValue * 0.757 - lineHeight * 1.257) * 0.45);
+        this.cssTranslateY2 = NumberUtil.roundTo100(param * 0.5);
       } else if (exteriorVal === GlnFrameExterior.standard) {
-        bottom = param * 0.25;
-        left = 0;
-        top = param * 0.75;
-        translateY = NumberUtil.roundTo100((frameSizeValue * 0.75 - lineHeight * 1.27) * 0.4);
-        translateY2 = NumberUtil.roundTo100(param * 0.75);
+        this.cssPaddingBottom = param * 0.25;
+        this.cssPaddingLeft = 0;
+        this.cssPaddingTop = param * 0.75;
+        this.cssTranslateY = NumberUtil.roundTo100((frameSizeValue * 0.75 - lineHeight * 1.27) * 0.4);
+        this.cssTranslateY2 = NumberUtil.roundTo100(param * 0.75);
       }
-      pdShr = left != null ? NumberUtil.roundTo100(2 * left * 1.33) : pdShr;
+      this.cssPaddingRight = this.cssPaddingLeft;
+      this.cssPaddingShrink = this.cssPaddingLeft != null ? NumberUtil.roundTo100(2 * this.cssPaddingLeft * 1.33) : this.cssPaddingShrink;
     }
-    HtmlElemUtil.setProperty(host, '--glnfrs--pd-lf', NumberUtil.str(left)?.concat('px'));
-    HtmlElemUtil.setProperty(host, '--glnfrs--pd-rg', NumberUtil.str(left)?.concat('px'));
-    HtmlElemUtil.setProperty(host, '--glnfrs--br-rd', borderRadius);
-    HtmlElemUtil.setProperty(host, '--glnfrs--pd-shr', NumberUtil.str(pdShr)?.concat('px'));
-    HtmlElemUtil.setProperty(host, '--glnfrs--pd-tp', NumberUtil.str(top)?.concat('px'));
-    HtmlElemUtil.setProperty(host, '--glnfrs--pd-bt', NumberUtil.str(bottom)?.concat('px'));
-    HtmlElemUtil.setProperty(host, '--glnfrs--trn-y', NumberUtil.str(translateY)?.concat('px'));
-    HtmlElemUtil.setProperty(host, '--glnfrs--trn2-y', NumberUtil.str(translateY2)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-lf', NumberUtil.str(this.cssPaddingLeft)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-rg', NumberUtil.str(this.cssPaddingRight)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--br-rd', this.cssBorderRadius);
+    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-shr', NumberUtil.str(this.cssPaddingShrink)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-tp', NumberUtil.str(this.cssPaddingTop)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-bt', NumberUtil.str(this.cssPaddingBottom)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--trn-y', NumberUtil.str(this.cssTranslateY)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--trn2-y', NumberUtil.str(this.cssTranslateY2)?.concat('px'));
+    this.changeCssParams.emit();
   }
 
   private settingExterior(exteriorVal: GlnFrameExterior | null): void {

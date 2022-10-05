@@ -16,7 +16,7 @@ const logLabel = 'ComponentsFrame';
 export class CmFrameComponent implements AfterViewInit {
   public showNum = '';
 
-  public urlPlSelect = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_SELECT');
+  public urlPlInput = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_INPUT');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

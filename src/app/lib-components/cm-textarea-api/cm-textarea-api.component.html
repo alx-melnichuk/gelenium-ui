@@ -237,24 +237,6 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isValueInit: string<br/>
-          &nbsp;&nbsp;| boolean<br/>
-          &nbsp;&nbsp;| null<br/>
-          &nbsp;&nbsp;| undefined;</code>
-      </td>
-      <td>
-        <span>
-          Sign of calling the event "writeValueInit" after the second "writeValue()"
-          with real data.
-          <br />
-          This should use "[(ngModel)]".
-          <a [href]="urlCmFrame + '#Feature'">More details.</a>
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
         <code>label: string<br/>
           &nbsp;&nbsp;| null<br/>
           &nbsp;&nbsp;| undefined;</code>
@@ -410,22 +392,6 @@
     <tr>
       <td>
         <code>@Output()</code>
-        <code>writeValueInit:<br/> EventEmitter&lt;void&gt;;</code>
-      </td>
-      <td>
-        <span>
-          Fires after the second call to "writeValue()" with real data.
-          <br />
-          This should use "[(ngModel)]".
-          <br />
-          "writeValueInit" must be set.
-          <a [href]="urlCmFrame + '#Feature'">More details.</a>
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Output()</code>
         <code>input: EventEmitter&lt;Event&gt;;</code>
       </td>
       <td>
@@ -562,4 +528,16 @@
   // Blocking frame resizing when receiving focus for "Outlined" mode.
   --glnfr-foc-dcr-br-wd: unset;
 &#125;</pre>
+</section>
+
+<section mr-vr>
+  <p>
+    We recommend using "formControlName" and NOT using "[(ngModel)]" (at least in production).
+    For angular 14, there was still an issue with the second call to the
+    ControlValueAccessor writeValue method when using [(ngModel)].
+    <br />
+    <a href="https://github.com/angular/angular/issues/14988">
+      ValueAccessor.writeValue is being called twice, first time with a phantom null value
+    </a>
+  </p>
 </section>

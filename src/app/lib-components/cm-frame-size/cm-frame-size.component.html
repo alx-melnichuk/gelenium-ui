@@ -367,13 +367,13 @@ export class FrameComponent &#123;
   <div class="app-group">
     <div class="app-elem">
       <div>
-        <small><em>"Config" height: 57px; font-size: 16px;</em></small>
+        <small><em>"frameSize" height: 57px; font-size: 16px;</em></small>
       </div>
       <gln-input formControlName="model02g"
         label="Enter value"
         [isNoLabel]="isNoLabel02b ? '':null"
         helperText="Custom height settings 57px."
-        [config]="config02g"
+        frameSize="57"
         [exterior]="exterior02b">
       </gln-input>
     </div>
@@ -389,7 +389,7 @@ export class FrameComponent &#123;
         label="Enter value"
         [isNoLabel]="isNoLabel02b ? '':null"
         helperText="Custom height settings 57px."
-        [config]="config02g"
+        [config]="{ frameSize: '57' }"
         [exterior]="exterior02b">
       </gln-input>
     </div>
@@ -405,7 +405,7 @@ export class FrameComponent &#123;
         label="Enter value"
         [isNoLabel]="isNoLabel02b ? '':null"
         helperText="Custom height settings 57px."
-        [config]="config02g"
+        [config]="{ frameSize: '57' }"
         [exterior]="exterior02b">
       </gln-input>
     </div>
@@ -429,13 +429,13 @@ export class FrameComponent &#123;
   &lt;div class="app-group"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
-        &lt;small&gt;&lt;em&gt;"Config" height: 57px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
+        &lt;small&gt;&lt;em&gt;"frameSize" height: 57px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02g"
         label="Enter value"
         [isNoLabel]="isNoLabel02b ? '':null"
         helperText="Custom height settings 57px."
-        [config]="config02g"
+        frameSize="57"
         [exterior]="exterior02b"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -451,7 +451,7 @@ export class FrameComponent &#123;
         label="Enter value"
         [isNoLabel]="isNoLabel02b ? '':null"
         helperText="Custom height settings 57px."
-        [config]="config02g"
+        [config]="&#123; frameSize: '57' &#125;"
         [exterior]="exterior02b"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -467,7 +467,7 @@ export class FrameComponent &#123;
         label="Enter value"
         [isNoLabel]="isNoLabel02b ? '':null"
         helperText="Custom height settings 57px."
-        [config]="config02g"
+        [config]="&#123; frameSize: '57' &#125;"
         [exterior]="exterior02b"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -483,9 +483,6 @@ import &#123;
 import &#123;
   FormControl, FormGroup
 &#125; from '@angular/forms';
-import &#123;
-  GlnFrameConfig
-&#125; from 'gelenium-ui';
 
 @Component(&#123;
   selector: 'app-frame',
@@ -501,9 +498,6 @@ export class FrameComponent &#123;
   &#125;);
   public exterior02b = 'outlined';
   public isNoLabel02b = false;
-  public config02g: GlnFrameConfigOld = &#123;
-    frameSizeValue: 57,
-  &#125;;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

@@ -6,15 +6,15 @@
   <p>
     If your application will have a single style for GlnInput elements, then you can set a single
     configuration.
-    To do this, you need to create an object with the GlnFrameConfigOld interface and define the
+    To do this, you need to create an object with the GlnFrameConfig interface and define the
     required values.
     Next, specify the resulting object in the list of providers for the entire application (at the
     level of the AppComponent).
   </p>
   <code><pre source="ts">
-const glnFrameConfigDefault: GlnFrameConfigOld = &#123;
-  exterior: GlnFrameExterior.outlined,
-  frameSize: GlnFrameSize.small,
+const glnFrameConfigDefault: GlnFrameConfig = &#123;
+  exterior: 'outlined',
+  frameSize: 'small',
 &#125;;
 
 @Component(&#123;
@@ -37,7 +37,7 @@ export class AppComponent &#123;
 <section mr-vr
   id="config-interface">
   <h4 class="app-hover-link">
-    GlnFrameConfigOld interface.
+    GlnFrameConfig interface.
     <a [href]="urlCmFrame + '#config-interface'">#</a>
   </h4>
 </section>
@@ -49,7 +49,8 @@ export class AppComponent &#123;
   </tr>
 
   <tr>
-    <td><code>exterior?: GlnFrameExterior;</code></td>
+    <td><code>exterior?: string;<br/>
+      //&nbsp;GlnFrameExteriorType</code></td>
     <td>
       <span>
         This property determines the appearance of the element.
@@ -71,7 +72,8 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
-    <td><code>frameSize?: GlnFrameSize;</code></td>
+    <td><code>frameSize?: string;<br/>
+      //&nbsp;GlnFrameSize;</code></td>
     <td>
       <span>
         This property determines the size of the element (its height).
@@ -86,16 +88,12 @@ export class AppComponent &#123;
         <li>"large" - sets the height to 62px;</li>
         <li>"huge" - sets the height to 68px;</li>
       </ul>
-      <span>(optional)</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>frameSizeValue?: number;</code></td>
-    <td>
       <span>
-        This property sets the height of the element in pixels.
-        This property applies only if there is no "frameSize" property.
+        This property can also contain a string with the value of the height
+        of the element in pixels. For example:
+        <code>frameSize="57" or [frameSize]="'57'"</code>
       </span>
+      <span>(optional)</span>
     </td>
   </tr>
   <tr>
@@ -126,14 +124,7 @@ export class AppComponent &#123;
       <span>(optional)</span>
     </td>
   </tr>
-  <tr>
-    <td><code>labelPd?: number;</code></td>
-    <td>
-      <span>
-        The value of the label offset from the frame (in pixels).
-      </span>
-    </td>
-  </tr>
+  <!--
   <tr>
     <td><code>ornamLfAlign?: OrnamAlign;</code></td>
     <td>
@@ -168,6 +159,7 @@ export class AppComponent &#123;
       </ul>
     </td>
   </tr>
+  -->
 </table>
 
 <section mr-vr
@@ -184,9 +176,9 @@ export class AppComponent &#123;
     <li>"frameSize" will have the value "small" (height to 44px);</li>
   </ul>
   <code><pre source="ts">
-const glnFrameConfigDefault: GlnFrameConfigOld = &#123;
-  exterior: GlnFrameExterior.outlined,
-  frameSize: GlnFrameSize.small,
+const glnFrameConfigDefault: GlnFrameConfig = &#123;
+  exterior: 'outlined',
+  frameSize: 'small',
 &#125;;</pre></code>
 </section>
 
@@ -320,12 +312,12 @@ import &#123;
   FormControl, FormGroup
 &#125; from '@angular/forms';
 import &#123;
-  GlnFrameExterior, GlnFrameSize, GlnFrameConfigOld, GLN_FRAME_CONFIG
+  GlnFrameConfig, GLN_FRAME_CONFIG
 &#125; from 'gelenium-ui';
 
-const glnFrameConfigDefault: GlnFrameConfigOld = &#123;
-  exterior: GlnFrameExterior.outlined,
-  frameSize: GlnFrameSize.small,
+const glnFrameConfigDefault: GlnFrameConfig = &#123;
+  exterior: 'outlined',
+  frameSize: 'small',
 &#125;;
 
 @Component(&#123;

@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { GlnFrameConfigOld } from 'gelenium-ui';
-
 import { RouterConfig } from '../../lib-core/config/router-config';
 import {
   LABEL_CSS,
@@ -58,9 +56,6 @@ export class CmFrameSizeComponent {
   public exterior02b = 'outlined';
   public isNoLabel02b = false;
 
-  public config02g: GlnFrameConfigOld = {
-    frameSizeValue: 57,
-  };
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }

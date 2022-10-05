@@ -42,7 +42,7 @@ gln-input {
   }
 
   gln-hint-or-error {
-    padding-left: var(--glnin-he-pd-lf, var(--glnfrs-pd-lf));
-    padding-right: var(--glnin-he-pd-rg, var(--glnfrs-pd-rg));
+    padding-left: var(--glnin-he-pd-lf, var(--glnfrs--pd-lf));
+    padding-right: var(--glnin-he-pd-rg, var(--glnfrs--pd-rg));
   }
 }
