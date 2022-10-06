@@ -5,7 +5,8 @@
 
     <mat-accordion displayMode="flat">
 
-      <mat-expansion-panel [expanded]="itemData.expanded"
+      <mat-expansion-panel class="app-user-none"
+        [expanded]="itemData.expanded"
         *ngFor="let itemData of itemDataList; trackBy: trackByItemData">
 
         <mat-expansion-panel-header [expandedHeight]="expandedHeight">
