@@ -116,12 +116,13 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     }
 
     let isUpdateCssParams = false;
-    if (changes['exterior'] || (changes['config'] && this.exteriorVal == null && this.currConfig.exterior != null)) {
-      this.settingExterior(GlnFrameExteriorUtil.create(this.exterior || this.currConfig.exterior || null));
+    if (changes['exterior'] || (changes['config'] && this.exterior == null && this.currConfig.exterior != null)) {
+      this.exteriorVal = GlnFrameExteriorUtil.create(this.exterior || this.currConfig.exterior || null);
+      this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
       isUpdateCssParams = true;
     }
-    if (changes['frameSize'] || (changes['config'] && this.frameSizeValue === 0 && this.currConfig.frameSize != null)) {
-      const frameSizeStr: string | null = this.frameSize || this.currConfig.frameSize || null;
+    if (changes['frameSize'] || (changes['config'] && this.frameSize == null && this.currConfig.frameSize != null)) {
+      const frameSizeStr = this.frameSize || this.currConfig.frameSize || null;
       this.frameSizeValue = GlnFrameSizeUtil.getSizeValue(frameSizeStr);
       this.frameSizeVal = GlnFrameSizeUtil.create(frameSizeStr);
       isUpdateCssParams = true;
@@ -156,14 +157,17 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.filled ? '' : null);
     }
 
-    if (changes['isLabelShrink'] || (changes['config'] && this.labelShrink == null && this.currConfig.isLabelShrink != null)) {
-      this.settingLabelShrink(BooleanUtil.init(this.isLabelShrink) ?? (this.currConfig.isLabelShrink || null));
+    if (changes['isLabelShrink'] || (changes['config'] && this.isLabelShrink == null && this.currConfig.isLabelShrink != null)) {
+      this.labelShrink = BooleanUtil.init(this.isLabelShrink) ?? !!this.currConfig.isLabelShrink;
+      this.settingLabelShrink(this.labelShrink, this.renderer, this.hostRef);
     }
-    if (changes['isNoAnimation'] || (changes['config'] && this.noAnimation == null && this.currConfig.isNoAnimation != null)) {
-      this.settingNoAnimation(BooleanUtil.init(this.isNoAnimation) ?? (this.currConfig.isNoAnimation || null));
+    if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
+      this.noAnimation = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
+      this.settingNoAnimation(this.noAnimation, this.renderer, this.hostRef);
     }
-    if (changes['isNoLabel'] || (changes['config'] && this.noLabel == null && this.currConfig.isNoLabel != null)) {
-      this.settingNoLabel(BooleanUtil.init(this.isNoLabel) ?? (this.currConfig.isNoLabel || null));
+    if (changes['isNoLabel'] || (changes['config'] && this.isNoLabel == null && this.currConfig.isNoLabel != null)) {
+      this.noLabel = BooleanUtil.init(this.isNoLabel) ?? !!this.currConfig.isNoLabel;
+      this.settingNoLabel(this.noLabel, this.renderer, this.hostRef);
     }
 
     if (changes['label'] || changes['isRequired']) {
@@ -176,7 +180,8 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public ngOnInit(): void {
     let isUpdateCssParams = false;
     if (this.exteriorVal == null) {
-      this.settingExterior(GlnFrameExteriorUtil.create(this.currConfig.exterior || null));
+      this.exteriorVal = GlnFrameExteriorUtil.create(this.currConfig.exterior || null);
+      this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
       isUpdateCssParams = true;
     }
     if (this.frameSizeValue === 0) {
@@ -188,14 +193,17 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.updateCssParams(this.exteriorVal, this.frameSizeValue, this.getLineHeight(), this.cssElementRef);
     }
 
-    if (this.labelShrink == null && this.currConfig.isLabelShrink != null) {
-      this.settingLabelShrink(this.currConfig.isLabelShrink);
+    if (this.labelShrink == null) {
+      this.labelShrink = !!this.currConfig.isLabelShrink;
+      this.settingLabelShrink(this.labelShrink, this.renderer, this.hostRef);
     }
-    if (this.noAnimation == null && this.currConfig.isNoAnimation != null) {
-      this.settingNoAnimation(this.currConfig.isNoAnimation);
+    if (this.noAnimation == null) {
+      this.noAnimation = !!this.currConfig.isNoAnimation;
+      this.settingNoAnimation(this.noAnimation, this.renderer, this.hostRef);
     }
-    if (this.noLabel == null && this.currConfig.isNoLabel != null) {
-      this.settingNoLabel(this.currConfig.isNoLabel);
+    if (this.noLabel == null) {
+      this.noLabel = !!this.currConfig.isNoLabel;
+      this.settingNoLabel(this.noLabel, this.renderer, this.hostRef);
     }
   }
 
@@ -258,32 +266,28 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     this.changeCssParams.emit();
   }
 
-  private settingExterior(exteriorVal: GlnFrameExterior | null): void {
-    this.exteriorVal = exteriorVal;
+  private settingExterior(exteriorVal: GlnFrameExterior | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
     const isOutlined = GlnFrameExteriorUtil.isOutlined(exteriorVal);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-outlined', isOutlined);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ext-o', isOutlined ? '' : null);
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-outlined', isOutlined);
+    HtmlElemUtil.setAttr(renderer, elem, 'ext-o', isOutlined ? '' : null);
     const isUnderline = GlnFrameExteriorUtil.isUnderline(exteriorVal);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-underline', isUnderline);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ext-u', isUnderline ? '' : null);
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-underline', isUnderline);
+    HtmlElemUtil.setAttr(renderer, elem, 'ext-u', isUnderline ? '' : null);
     const isStandard = GlnFrameExteriorUtil.isStandard(exteriorVal);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-standard', isStandard);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ext-s', isStandard ? '' : null);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-bottom-frame', isStandard || isUnderline);
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-standard', isStandard);
+    HtmlElemUtil.setAttr(renderer, elem, 'ext-s', isStandard ? '' : null);
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-bottom-frame', isStandard || isUnderline);
   }
-  private settingLabelShrink(labelShrink: boolean | null): void {
-    this.labelShrink = labelShrink;
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-shrink', !!labelShrink);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'shr', labelShrink ? '' : null);
+  private settingLabelShrink(labelShrink: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-shrink', !!labelShrink);
+    HtmlElemUtil.setAttr(renderer, elem, 'shr', labelShrink ? '' : null);
   }
-  private settingNoAnimation(noAnimation: boolean | null): void {
-    this.noAnimation = noAnimation;
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-animation', !!noAnimation);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noani', noAnimation ? '' : null);
+  private settingNoAnimation(noAnimation: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-animation', !!noAnimation);
+    HtmlElemUtil.setAttr(renderer, elem, 'noani', noAnimation ? '' : null);
   }
-  private settingNoLabel(noLabel: boolean | null): void {
-    this.noLabel = noLabel;
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-no-label', !!noLabel);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'nolab', noLabel ? '' : null);
+  private settingNoLabel(noLabel: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-no-label', !!noLabel);
+    HtmlElemUtil.setAttr(renderer, elem, 'nolab', noLabel ? '' : null);
   }
 }

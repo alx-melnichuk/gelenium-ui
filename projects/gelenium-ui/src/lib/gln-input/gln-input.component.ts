@@ -181,20 +181,25 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     if (changes['isDisabled']) {
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
-    if (changes['isError'] || (changes['config'] && this.error == null && this.currConfig.isError != null)) {
-      this.settingError(BooleanUtil.init(this.isError) ?? (this.currConfig.isError || null));
+    if (changes['isError'] || (changes['config'] && this.isError == null && this.currConfig.isError != null)) {
+      this.error = BooleanUtil.init(this.isError) ?? !!this.currConfig.isError;
+      this.settingError(this.error, this.renderer, this.hostRef);
     }
-    if (changes['isReadOnly'] || (changes['config'] && this.readOnly == null && this.currConfig.isReadOnly != null)) {
-      this.settingReadOnly(BooleanUtil.init(this.isReadOnly) ?? (this.currConfig.isReadOnly || null));
+    if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
+      this.readOnly = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
+      this.settingReadOnly(this.readOnly, this.renderer, this.hostRef);
     }
-    if (changes['isRequired'] || (changes['config'] && this.required == null && this.currConfig.isRequired != null)) {
-      this.settingRequired(BooleanUtil.init(this.isRequired) ?? (this.currConfig.isRequired || null));
+    if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
+      this.required = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
+      this.settingRequired(this.required, this.renderer, this.hostRef);
     }
-    if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlignVal == null && this.currConfig.ornamLfAlign != null)) {
-      this.settingOrnamLfAlign(GlnFrameOrnamAlignUtil.create(this.ornamLfAlign || this.currConfig.ornamLfAlign || null));
+    if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlign == null && this.currConfig.ornamLfAlign != null)) {
+      this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamLfAlign || this.currConfig.ornamLfAlign || null);
+      this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
     }
-    if (changes['ornamRgAlign'] || (changes['config'] && this.ornamRgAlignVal == null && this.currConfig.ornamRgAlign != null)) {
-      this.settingOrnamRgAlign(GlnFrameOrnamAlignUtil.create(this.ornamRgAlign || this.currConfig.ornamRgAlign || null));
+    if (changes['ornamRgAlign'] || (changes['config'] && this.ornamRgAlign == null && this.currConfig.ornamRgAlign != null)) {
+      this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamRgAlign || this.currConfig.ornamRgAlign || null);
+      this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
     }
     if (changes['type']) {
       this.typeVal = GlnInputTypeUtil.create(this.type) || GlnInputType.text;
@@ -208,20 +213,25 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
-    if (this.error == null && this.currConfig.isError != null) {
-      this.settingError(this.currConfig.isError);
+    if (this.error == null) {
+      this.error = !!this.currConfig.isError;
+      this.settingError(this.error, this.renderer, this.hostRef);
     }
-    if (this.readOnly == null && this.currConfig.isReadOnly != null) {
-      this.settingReadOnly(this.currConfig.isReadOnly);
+    if (this.readOnly == null) {
+      this.readOnly = !!this.currConfig.isReadOnly;
+      this.settingReadOnly(this.readOnly, this.renderer, this.hostRef);
     }
-    if (this.required == null && this.currConfig.isRequired != null) {
-      this.settingRequired(this.currConfig.isRequired);
+    if (this.required == null) {
+      this.required = !!this.currConfig.isRequired;
+      this.settingRequired(this.required, this.renderer, this.hostRef);
     }
-    if (this.ornamLfAlignVal == null && this.currConfig.ornamLfAlign != null) {
-      this.settingOrnamLfAlign(GlnFrameOrnamAlignUtil.create(this.currConfig.ornamLfAlign || null));
+    if (this.ornamLfAlignVal == null) {
+      this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.currConfig.ornamLfAlign || null);
+      this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
     }
-    if (this.ornamRgAlignVal == null && this.currConfig.ornamRgAlign != null) {
-      this.settingOrnamRgAlign(GlnFrameOrnamAlignUtil.create(this.currConfig.ornamRgAlign || null));
+    if (this.ornamRgAlignVal == null) {
+      this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.currConfig.ornamRgAlign || null);
+      this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
     }
   }
 
@@ -358,27 +368,22 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
   }
 
-  private settingError(error: boolean | null): void {
-    this.error = error;
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-error', !!error);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', error ? '' : null);
+  private settingError(error: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-error', !!error);
+    HtmlElemUtil.setAttr(renderer, elem, 'err', error ? '' : null);
   }
-  private settingReadOnly(readOnly: boolean | null): void {
-    this.readOnly = readOnly;
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-read-only', !!readOnly);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'rea', readOnly ? '' : null);
+  private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!readOnly);
+    HtmlElemUtil.setAttr(renderer, elem, 'rea', readOnly ? '' : null);
   }
-  private settingRequired(required: boolean | null): void {
-    this.required = required;
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-required', !!required);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'req', required ? '' : null);
+  private settingRequired(required: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-required', !!required);
+    HtmlElemUtil.setAttr(renderer, elem, 'req', required ? '' : null);
   }
-  private settingOrnamLfAlign(ornamLfAlign: GlnFrameOrnamAlign | null): void {
-    this.ornamLfAlignVal = ornamLfAlign;
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'orn-lft', ornamLfAlign?.toString());
+  private settingOrnamLfAlign(ornamLfAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setAttr(renderer, elem, 'orn-lft', ornamLfAlign?.toString());
   }
-  private settingOrnamRgAlign(ornamRgAlign: GlnFrameOrnamAlign | null): void {
-    this.ornamRgAlignVal = ornamRgAlign;
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'orn-rgh', ornamRgAlign?.toString());
+  private settingOrnamRgAlign(ornamRgAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setAttr(renderer, elem, 'orn-rgh', ornamRgAlign?.toString());
   }
 }
