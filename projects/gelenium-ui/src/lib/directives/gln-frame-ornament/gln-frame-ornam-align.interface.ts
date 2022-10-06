@@ -10,11 +10,11 @@ export enum GlnFrameOrnamAlign {
 }
 
 export class GlnFrameOrnamAlignUtil {
-  public static create(value: GlnFrameOrnamAlign | null, defaultValue: GlnFrameOrnamAlign | null): GlnFrameOrnamAlign {
-    return GlnFrameOrnamAlignUtil.convert((value || defaultValue || '').toString(), GlnFrameOrnamAlign.default) as GlnFrameOrnamAlign;
+  public static create(value: GlnFrameOrnamAlign | string | null): GlnFrameOrnamAlign {
+    return GlnFrameOrnamAlignUtil.convert((value || '').toString()) || GlnFrameOrnamAlign.default;
   }
-  public static convert(value: string | null, defaultValue: GlnFrameOrnamAlign | null = null): GlnFrameOrnamAlign | null {
-    let result: GlnFrameOrnamAlign | null = defaultValue;
+  public static convert(value: string | null): GlnFrameOrnamAlign | null {
+    let result: GlnFrameOrnamAlign | null = null;
     switch (value) {
       case GlnFrameOrnamAlign.default.valueOf():
         result = GlnFrameOrnamAlign.default;

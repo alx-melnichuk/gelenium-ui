@@ -117,14 +117,13 @@ export class GlnFrameComponent implements OnChanges, OnInit {
 
     let isUpdateCssParams = false;
     if (changes['exterior'] || (changes['config'] && this.exteriorVal == null && this.currConfig.exterior != null)) {
-      const configExterior: GlnFrameExterior | null = GlnFrameExteriorUtil.convert(this.exterior || this.currConfig.exterior || null);
-      this.settingExterior(GlnFrameExteriorUtil.create(configExterior));
+      this.settingExterior(GlnFrameExteriorUtil.create(this.exterior || this.currConfig.exterior || null));
       isUpdateCssParams = true;
     }
     if (changes['frameSize'] || (changes['config'] && this.frameSizeValue === 0 && this.currConfig.frameSize != null)) {
-      const frameSize: string | null = this.frameSize || this.currConfig.frameSize || null;
-      this.frameSizeValue = this.setFrameSize(frameSize);
-      this.frameSizeVal = GlnFrameSizeUtil.convert(frameSize);
+      const frameSizeStr: string | null = this.frameSize || this.currConfig.frameSize || null;
+      this.frameSizeValue = GlnFrameSizeUtil.getSizeValue(frameSizeStr);
+      this.frameSizeVal = GlnFrameSizeUtil.create(frameSizeStr);
       isUpdateCssParams = true;
     }
     if (isUpdateCssParams && this.exteriorVal) {
@@ -177,13 +176,12 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public ngOnInit(): void {
     let isUpdateCssParams = false;
     if (this.exteriorVal == null) {
-      const configExterior: GlnFrameExterior | null = GlnFrameExteriorUtil.convert(this.currConfig.exterior || null);
-      this.settingExterior(GlnFrameExteriorUtil.create(configExterior));
+      this.settingExterior(GlnFrameExteriorUtil.create(this.currConfig.exterior || null));
       isUpdateCssParams = true;
     }
     if (this.frameSizeValue === 0) {
-      this.frameSizeValue = this.setFrameSize(this.currConfig.frameSize);
-      this.frameSizeVal = GlnFrameSizeUtil.convert(this.currConfig.frameSize || null);
+      this.frameSizeValue = GlnFrameSizeUtil.getSizeValue(this.currConfig.frameSize);
+      this.frameSizeVal = GlnFrameSizeUtil.create(this.currConfig.frameSize || null);
       isUpdateCssParams = true;
     }
     if (isUpdateCssParams && this.exteriorVal) {
@@ -210,18 +208,6 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.lineHeightInn = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height').replace('px', ''));
     }
     return this.lineHeightInn;
-  }
-
-  private setFrameSize(frameSize: string | null | undefined): number {
-    let result: number = 0;
-    const numberFromFrameSize = frameSize ? Number(frameSize) : 0;
-    if (!isNaN(numberFromFrameSize) && numberFromFrameSize > 0) {
-      result = numberFromFrameSize;
-    } else {
-      const frameSizeVal = GlnFrameSizeUtil.create(GlnFrameSizeUtil.convert(frameSize || null));
-      result = GlnFrameSizeUtil.getValue(frameSizeVal) || 0;
-    }
-    return result;
   }
 
   private updateCssParams(exteriorVal: GlnFrameExterior, frameSizeValue: number, lineHeight: number, elem: ElementRef<HTMLElement>): void {

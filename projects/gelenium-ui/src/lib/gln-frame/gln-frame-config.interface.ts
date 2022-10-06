@@ -4,8 +4,8 @@ import { GlnFrameExterior } from './gln-frame-exterior.interface';
 import { GlnFrameSize } from './gln-frame-size.interface';
 
 export interface GlnFrameConfig {
-  exterior?: string | undefined; // GlnFrameExterior
-  frameSize?: string | undefined; // GlnFrameSize
+  exterior?: string | undefined; // GlnFrameExteriorType
+  frameSize?: string | undefined; // GlnFrameSizeType
   isLabelShrink?: boolean | undefined;
   isNoAnimation?: boolean | undefined;
   isNoLabel?: boolean | undefined;
@@ -19,6 +19,6 @@ export interface GlnFrameConfigOld {
   isNoAnimation?: boolean | undefined;
   isNoLabel?: boolean | undefined;
   labelPd?: number | undefined; // px
-  ornamLfAlign?: GlnFrameOrnamAlign | undefined; // # GlnInputConfig
-  ornamRgAlign?: GlnFrameOrnamAlign | undefined; // # GlnInputConfig
+  ornamLfAlign?: GlnFrameOrnamAlign | undefined;
+  ornamRgAlign?: GlnFrameOrnamAlign | undefined;
 }

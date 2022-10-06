@@ -19,8 +19,8 @@ export enum GlnFrameSizeValue {
 }
 
 export class GlnFrameSizeUtil {
-  public static create(value: GlnFrameSize | null): GlnFrameSize {
-    return GlnFrameSizeUtil.convert(value ? value.toString() : null) || GlnFrameSize.middle;
+  public static create(value: GlnFrameSize | string | null): GlnFrameSize {
+    return GlnFrameSizeUtil.convert((value || '').toString()) || GlnFrameSize.middle;
   }
   public static convert(value: string | null): GlnFrameSize | null {
     let result: GlnFrameSize | null = null;
@@ -85,6 +85,17 @@ export class GlnFrameSizeUtil {
       case GlnFrameSize.huge:
         result = GlnFrameSizeValue.huge;
         break;
+    }
+    return result;
+  }
+  public static getSizeValue(frameSize: string | null | undefined): number {
+    let result: number = 0;
+    const numberFromFrameSize = frameSize ? Number(frameSize) : 0;
+    if (!isNaN(numberFromFrameSize) && numberFromFrameSize > 0) {
+      result = numberFromFrameSize;
+    } else {
+      const frameSizeVal = GlnFrameSizeUtil.create(GlnFrameSizeUtil.convert(frameSize || null));
+      result = GlnFrameSizeUtil.getValue(frameSizeVal) || 0;
     }
     return result;
   }

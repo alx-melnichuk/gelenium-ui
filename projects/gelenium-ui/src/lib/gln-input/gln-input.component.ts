@@ -191,10 +191,10 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
       this.settingRequired(BooleanUtil.init(this.isRequired) ?? (this.currConfig.isRequired || null));
     }
     if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlignVal == null && this.currConfig.ornamLfAlign != null)) {
-      this.settingOrnamLfAlign(GlnFrameOrnamAlignUtil.convert(this.ornamLfAlign || null) ?? (this.currConfig.ornamLfAlign || null));
+      this.settingOrnamLfAlign(GlnFrameOrnamAlignUtil.create(this.ornamLfAlign || this.currConfig.ornamLfAlign || null));
     }
     if (changes['ornamRgAlign'] || (changes['config'] && this.ornamRgAlignVal == null && this.currConfig.ornamRgAlign != null)) {
-      this.settingOrnamRgAlign(GlnFrameOrnamAlignUtil.convert(this.ornamRgAlign || null) ?? (this.currConfig.ornamRgAlign || null));
+      this.settingOrnamRgAlign(GlnFrameOrnamAlignUtil.create(this.ornamRgAlign || this.currConfig.ornamRgAlign || null));
     }
     if (changes['type']) {
       this.typeVal = GlnInputTypeUtil.create(this.type) || GlnInputType.text;
@@ -218,10 +218,10 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
       this.settingRequired(this.currConfig.isRequired);
     }
     if (this.ornamLfAlignVal == null && this.currConfig.ornamLfAlign != null) {
-      this.settingOrnamLfAlign(this.currConfig.ornamLfAlign || null);
+      this.settingOrnamLfAlign(GlnFrameOrnamAlignUtil.create(this.currConfig.ornamLfAlign || null));
     }
     if (this.ornamRgAlignVal == null && this.currConfig.ornamRgAlign != null) {
-      this.settingOrnamRgAlign(this.currConfig.ornamRgAlign);
+      this.settingOrnamRgAlign(GlnFrameOrnamAlignUtil.create(this.currConfig.ornamRgAlign || null));
     }
   }
 
