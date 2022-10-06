@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { GlnFrameConfigOld, GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from 'gelenium-ui';
+import { GlnFrameOrnamAlignUtil } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import {
@@ -60,26 +60,25 @@ export class CmInputOrnamentsComponent {
   public isBtnEyeCrossed05f = false;
   public isBtnEyeCrossed05g = false;
   public isBtnEyeCrossed05h = false;
-  public config05h: GlnFrameConfigOld = {
-    ornamRgAlign: GlnFrameOrnamAlign.baseline,
+  public config05h = {
+    ornamRgAlign: 'baseline',
   };
   public ornamLfAlign05 = 'default';
   public ornamRgAlign05 = 'default';
 
-  public config05: GlnFrameConfigOld = {};
+  public config05 = {
+    ornamLfAlign: this.ornamLfAlign05,
+    ornamRgAlign: this.ornamRgAlign05,
+  };
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {
-    this.changeConfig05(this.convert(this.ornamLfAlign05), this.convert(this.ornamRgAlign05));
-  }
+  constructor() {}
 
-  public convert(ornamAlign: string | null): GlnFrameOrnamAlign {
-    return GlnFrameOrnamAlignUtil.convert(ornamAlign) || GlnFrameOrnamAlign.default;
+  public changeConfig05(ornamLfAlign: string | undefined, ornamRgAlign: string | undefined): void {
+    this.config05 = {
+      ornamLfAlign: GlnFrameOrnamAlignUtil.convert(ornamLfAlign || null)?.toString() || 'default',
+      ornamRgAlign: GlnFrameOrnamAlignUtil.convert(ornamRgAlign || null)?.toString() || 'default',
+    };
   }
-
-  public changeConfig05(ornamLfAlign: GlnFrameOrnamAlign | undefined, ornamRgAlign: GlnFrameOrnamAlign | undefined): void {
-    this.config05 = { ornamLfAlign, ornamRgAlign };
-  }
-
   public toStr(value: number): string {
     return String(value);
   }

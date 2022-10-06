@@ -98,6 +98,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink".
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
   public noLabel: boolean | null = null; // Binding attribute "isNoLabel".
+  public required: boolean | null = null; // Binding attribute "isRequired".
 
   private lineHeightInn: number = 0;
 
@@ -169,6 +170,10 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.noLabel = BooleanUtil.init(this.isNoLabel) ?? !!this.currConfig.isNoLabel;
       this.settingNoLabel(this.noLabel, this.renderer, this.hostRef);
     }
+    if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
+      this.required = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
+      this.settingRequired(this.required, this.renderer, this.hostRef);
+    }
 
     if (changes['label'] || changes['isRequired']) {
       const isIndent = !!this.label || this.isRequired;
@@ -204,6 +209,10 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     if (this.noLabel == null) {
       this.noLabel = !!this.currConfig.isNoLabel;
       this.settingNoLabel(this.noLabel, this.renderer, this.hostRef);
+    }
+    if (this.required == null) {
+      this.required = !!this.currConfig.isRequired;
+      this.settingRequired(this.required, this.renderer, this.hostRef);
     }
   }
 
@@ -289,5 +298,9 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   private settingNoLabel(noLabel: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
     HtmlElemUtil.setClass(renderer, elem, 'glnfr-no-label', !!noLabel);
     HtmlElemUtil.setAttr(renderer, elem, 'nolab', noLabel ? '' : null);
+  }
+  private settingRequired(required: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setClass(renderer, elem, 'glnfr-required', !!required);
+    HtmlElemUtil.setAttr(renderer, elem, 'req', required ? '' : null);
   }
 }

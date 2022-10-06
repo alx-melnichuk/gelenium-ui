@@ -11,7 +11,7 @@
 
     <li>
       "config" - Defines a configuration object.
-      <a [href]="urlCmFrame + '#Config'">More details.</a>
+      <a [href]="urlCmInput + '#Config'">More details.</a>
     </li>
     <li>
       "exterior" - Determines the appearance of an element.<br />
@@ -99,12 +99,12 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>State: empty.</em>
+          <em>Attributes: id, isRequired, no label.</em>
         </small>
       </div>
       <gln-input formControlName="model02a"
         id="unique_id_input02a"
-        label="Enter value"
+        isRequired
         [exterior]="exterior02a">
       </gln-input>
     </div>
@@ -257,13 +257,15 @@ export class InputComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -432,13 +434,15 @@ export class InputComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -649,13 +653,15 @@ export class InputComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -888,13 +894,15 @@ export class InputComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

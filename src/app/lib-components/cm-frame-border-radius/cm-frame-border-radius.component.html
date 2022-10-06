@@ -408,12 +408,12 @@ import &#123;
 &#125; from '@angular/forms';
 
 @Component(&#123;
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
+  selector: 'app-frame',
+  templateUrl: './frame.component.html',
+  styleUrls: ['./frame.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
-export class ButtonComponent &#123;
+export class FrameComponent &#123;
   public borderRadius = 50;
   public ratioOutlined = 0.58;
   public ratioUnderline = 0.4;
@@ -447,19 +447,21 @@ export class ButtonComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;
-.fbr-large &#123;
-  font-size: 18px;
-&#125;
-.fbr-huge &#123;
-  font-size: 20px;
+app-frame &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .fbr-large &#123;
+    font-size: 18px;
+  &#125;
+  .fbr-huge &#123;
+    font-size: 20px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -748,12 +750,12 @@ import &#123;
 &#125; from '@angular/forms';
 
 @Component(&#123;
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
+  selector: 'app-frame',
+  templateUrl: './frame.component.html',
+  styleUrls: ['./frame.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
-export class ButtonComponent &#123;
+export class FrameComponent &#123;
   public isAddPadding06 = true;
   public isNoLabel06 = false;
 
@@ -769,22 +771,24 @@ export class ButtonComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;
-.radius-f &#123;
-  /* GlnFrameSize.middle [50px] / 3 */
-  --glnfr-br-rd: 16.66667px;
-&#125;
-.radius-f div.glnfr-border:before,
-.radius-f div.glnfr-border:after &#123;
-  /* GlnFrameSize.middle [50px] */
-  height: 50px;
+app-frame &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .radius-f &#123;
+    /* GlnFrameSize.middle [50px] / 3 */
+    --glnfr-br-rd: 16.66667px;
+  &#125;
+  .radius-f div.glnfr-border:before,
+  .radius-f div.glnfr-border:after &#123;
+    /* GlnFrameSize.middle [50px] */
+    height: 50px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

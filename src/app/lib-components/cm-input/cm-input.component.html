@@ -74,18 +74,13 @@
   <hr br-tp>
 </section>
 
-<div mr-vr
-  *ngIf="!showNum"
+<div *ngIf="!showNum || showNum==='06'"
   id="Config">
-  <h3>Config</h3>
-  <p>
-    The <a [href]="urlCmFrame + '#Config'">"GlnFrame#Config"</a>
-    page shows how to prepare and use the element configuration.
-  </p>
+  <app-cm-input-config></app-cm-input-config>
   <hr br-tp>
 </div>
 
-<div *ngIf="!showNum || showNum==='06'"
+<div *ngIf="!showNum || showNum==='07'"
   id="Api">
   <app-cm-input-api></app-cm-input-api>
   <hr br-tp>

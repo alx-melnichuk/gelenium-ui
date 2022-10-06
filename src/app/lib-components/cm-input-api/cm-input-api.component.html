@@ -53,13 +53,13 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>config: GlnFrameConfig<br/>
+        <code>config: GlnInputConfig<br/>
           &nbsp;&nbsp;| null<br/>
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Defines a configuration object.</span><br />
-        <a [href]="urlCmFrame + '#Config'">More details.</a>
+        <a [href]="urlCmInput + '#Config'">More details.</a>
       </td>
     </tr>
     <tr>
@@ -124,7 +124,10 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>The element is disabled.<br />Attribute (no content).</span>
+        <span>
+          Indicates that the element is disabled.<br />
+          (default = false;) Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -137,7 +140,8 @@
       </td>
       <td>
         <span>
-          Forces the error status of an item to be displayed.<br />Attribute (no content).
+          Indicates that the element is in an error state.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -151,8 +155,8 @@
       </td>
       <td>
         <span>
-          Disable label animation. The label is always static, at the top.<br />
-          Attribute (no content).
+          Indication that the label has shrunk and moved up.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -165,7 +169,10 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Disable animation execution.</span>
+        <span>
+          Indicates that animation is disabled.<br />
+          (default = false;) Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -178,7 +185,8 @@
       </td>
       <td>
         <span>
-          Disables the display of the label.<br />Attribute (no content).
+          Indicates that the label is not displayed.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -191,7 +199,10 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Whether the element is readonly.<br />Attribute (no content).</span>
+        <span>
+          Indicates that the element is read-only.<br />
+          (default = false;) Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -204,7 +215,8 @@
       </td>
       <td>
         <span>
-          Adds a validation conditional: required field.<br />Attribute (no content).
+          Indicates that the field is required.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -216,7 +228,9 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>The content of the label.</span>
+        <span>
+          Specifies the content of the label.
+        </span>
       </td>
     </tr>
     <tr>
@@ -279,17 +293,18 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Specifies the height justification for the left ornament.
+        <span>
+          This property controls the vertical alignment for the left ornament.
           <br />(default = 'default';)
           It can take the following values:
         </span>
         <ul>
-          <li>"default" - depending on frame type</li>
-          <li>"center" - in the center</li>
-          <li>"flex-start" - at the top</li>
-          <li>"flex-end" - at the bottom</li>
-          <li>"baseline" - along the baseline</li>
-          <li>"stretch" - at the top</li>
+          <li>"default" - defines the default</li>
+          <li>"center" - defines middle alignment</li>
+          <li>"flexStart" - defines top alignment</li>
+          <li>"flexEnd" - defines bottom alignment</li>
+          <li>"baseline" - defines baseline alignment</li>
+          <li>"stretch" - stretches across the entire height</li>
         </ul>
       </td>
     </tr>
@@ -301,17 +316,18 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Specifies the height justification for the right ornament.
+        <span>
+          This property controls the vertical alignment of the right ornament.
           <br />(default = 'default';)
           It can take the following values:
         </span>
         <ul>
-          <li>"default" - depending on frame type</li>
-          <li>"center" - in the center</li>
-          <li>"flex-start" - at the top</li>
-          <li>"flex-end" - at the bottom</li>
-          <li>"baseline" - along the baseline</li>
-          <li>"stretch" - at the top</li>
+          <li>"default" - defines the default</li>
+          <li>"center" - defines middle alignment</li>
+          <li>"flexStart" - defines top alignment</li>
+          <li>"flexEnd" - defines bottom alignment</li>
+          <li>"baseline" - defines baseline alignment</li>
+          <li>"stretch" - stretches across the entire height</li>
         </ul>
       </td>
     </tr>
@@ -323,8 +339,8 @@
       </td>
       <td>
         <span>
-          The attribute defines a regular expression that is passed to the native input element
-          to validate the input value.
+          The attribute defines a regular expression that is passed to the native input
+          element to validate the input value.
           Applies to an input element of type: text, tel, email, url, password, and search.
           <br />(default = '';)
         </span>
@@ -488,7 +504,7 @@
 
   <tr>
     <td><code>--glnin-he-pd-lf:<br/>
-      &nbsp;var(--glnfrs-pd-lf);</code>
+      &nbsp;var(--glnfrs--pd-lf);</code>
     </td>
     <td>
       <span>
@@ -499,7 +515,7 @@
 
   <tr>
     <td><code>--glnin-he-pd-rg:<br/>
-      &nbsp;var(--glnfrs-pd-rg);</code>
+      &nbsp;var(--glnfrs--pd-rg);</code>
     </td>
     <td>
       <span>

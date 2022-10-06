@@ -40,7 +40,7 @@ export class CmInputAttributesComponent {
 
   public exterior02a = 'outlined';
   public formGroup02a: FormGroup = new FormGroup({
-    model02a: new FormControl(null, []),
+    model02a: new FormControl('Hello World', []),
     model02b: new FormControl('Hello World', [Validators.required]),
     model02c: new FormControl('Hello World', []),
     model02d: new FormControl('Hello World', []),

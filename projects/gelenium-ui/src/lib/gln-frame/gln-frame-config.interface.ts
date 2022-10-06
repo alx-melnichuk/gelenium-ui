@@ -9,8 +9,10 @@ export interface GlnFrameConfig {
   isLabelShrink?: boolean | undefined;
   isNoAnimation?: boolean | undefined;
   isNoLabel?: boolean | undefined;
+  isRequired?: boolean | undefined;
 }
 
+// deprecate
 export interface GlnFrameConfigOld {
   exterior?: GlnFrameExterior | undefined;
   frameSize?: GlnFrameSize | undefined;
