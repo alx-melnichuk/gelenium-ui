@@ -92,8 +92,6 @@ export class GlnTextareaComponent
   @Input()
   public isNoAnimation: string | boolean | null | undefined;
   @Input()
-  public isNoLabel: string | boolean | null | undefined;
-  @Input()
   public isPlaceholder: string | boolean | null | undefined;
   @Input()
   public isReadOnly: string | boolean | null | undefined;

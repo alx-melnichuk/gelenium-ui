@@ -116,6 +116,19 @@ export class AppComponent &#123;
       </ul>
     </td>
   </tr>
+  <tr>
+    <td>
+      <code>isPlaceholder?: boolean;</code>
+    </td>
+    <td>
+      <span>
+        Specifies that the value of the "label" field be displayed
+        as the "placeholder" attribute for the "input" element.
+        <br />(default = false;)
+      </span>
+      <span>(optional)</span>
+    </td>
+  </tr>
 
 </table>
 
@@ -172,13 +185,13 @@ exterior="outlined", // GlnFrameConfig
 frameSize="middle",  // GlnFrameConfig
 isLabelShrink=false, // GlnFrameConfig
 isNoAnimation=false, // GlnFrameConfig
-isNoLabel=false,     // GlnFrameConfig
 isRequired=false,    // GlnFrameConfig
 
 isError=false,
 isReadOnly=false,
 ornamLfAlign='default',
-ornamRgAlign='default',</pre></code>
+ornamRgAlign='default',
+isPlaceholder=false,</pre></code>
     </li>
     <li>
       Values from the default configuration provider (if there is one).

@@ -43,7 +43,7 @@ export class CmTextareaAttributesComponent {
     model02c: new FormControl('Hello World', []),
     model02d: new FormControl('Hello World', []),
     model02e: new FormControl('', []),
-    model02f: new FormControl('Hello World', []),
+    model02f: new FormControl(null, []),
   });
   public exterior02 = 'outlined';
   public cntRows = 2;

@@ -12,7 +12,8 @@
     <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
     <li>"isLabelShrink" - a sign that the field has a permanent label,
       without being converted to a placeholder (isLabelShrink);</li>
-    <li>"isNoLabel" - a sign that the field has no label at all (isNoLabel);</li>
+    <li>"isPlaceholder" - "label" is displayed as a "placeholder" attribute
+      for "textarea" (isPlaceholder);</li>
     <li>"helperText" - the parameter is used to provide context for a given
       field or error message (helperText="A value must be entered.");</li>
     <li>"isError" - a sign that the field is in error (isError);</li>
@@ -125,12 +126,12 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: isNoLabel.</em>
+          <em>Attribute: isPlaceholder.</em>
         </small>
       </div>
       <gln-textarea formControlName="model02f"
-        label="isNoLabel"
-        isNoLabel
+        label="Enter text"
+        isPlaceholder
         [cntRows]="cntRows"
         helperText="The label is not displayed."
         [exterior]="exterior02">
@@ -233,12 +234,12 @@
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: isNoLabel.&lt;/em&gt;
+          &lt;em&gt;Attribute: isPlaceholder.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-textarea formControlName="model02f"
-        label="isNoLabel"
-        isNoLabel
+        label="Enter value"
+        isPlaceholder
         [cntRows]="cntRows"
         helperText="The label is not displayed."
         [exterior]="exterior02"&gt;
@@ -272,7 +273,7 @@ export class TextareaComponent &#123;
     model02c: new FormControl('Hello World', []),
     model02d: new FormControl('Hello World', []),
     model02e: new FormControl('', []),
-    model02f: new FormControl('Hello World', []),
+    model02f: new FormControl(null, []),
   &#125;);
   public exterior02 = 'outlined';
   public cntRows = 2;
@@ -288,7 +289,6 @@ app-textarea &#123;
   .app-elem &#123;
     min-width: 26ch;
     margin: 10px 10px;
-  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
