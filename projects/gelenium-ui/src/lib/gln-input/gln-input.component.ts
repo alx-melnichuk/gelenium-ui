@@ -326,13 +326,13 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
 
   public doFocus(): void {
     this.isFocused = true;
-    this.settingFocus(this.renderer, this.hostRef, this.isFocused);
+    this.settingFocus(this.isFocused, this.renderer, this.hostRef);
     this.focused.emit();
   }
 
   public doBlur(): void {
     this.isFocused = false;
-    this.settingFocus(this.renderer, this.hostRef, this.isFocused);
+    this.settingFocus(this.isFocused, this.renderer, this.hostRef);
     this.isFilled = !!this.formControl.value;
     this.onTouched();
     this.blured.emit();
@@ -363,11 +363,10 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     this.formControl.setValidators(newValidator);
   }
 
-  private settingFocus(renderer: Renderer2, elem: ElementRef<HTMLElement>, value: boolean): void {
-    HtmlElemUtil.setClass(renderer, elem, 'gln-focused', value || false);
-    HtmlElemUtil.setAttr(renderer, elem, 'foc', value ? '' : null);
+  private settingFocus(focus: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-focused', focus || false);
+    HtmlElemUtil.setAttr(renderer, elem, 'foc', focus ? '' : null);
   }
-
   private settingError(error: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-error', !!error);
     HtmlElemUtil.setAttr(renderer, elem, 'err', error ? '' : null);

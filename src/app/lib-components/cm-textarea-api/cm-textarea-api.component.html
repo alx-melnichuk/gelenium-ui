@@ -45,9 +45,26 @@
         <code>autoComplete: string;</code>
       </td>
       <td>
-        <span>Defines permissions for autocomplete native textarea.
-          <br />(default = '';)
+        <span>
+          Determines whether the element's value can be automatically populated
+          by the browser.
+          <br />
+          It can take the following values:
         </span>
+        <ul>
+          <li>"off" - the browser does not automatically complete the entry;</li>
+          <li>"on" - The browser can automatically complete the value based
+            on values that the user has entered during previous uses;</li>
+        </ul>
+        <span>
+          If the autocomplete attribute is not specified on a element, then the browser uses the
+          autocomplete attribute value of the element's form owner.
+        </span>
+        <br />
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-autocomplete">
+          More details: MDN "attr-autocomplete".
+        </a>
       </td>
     </tr>
     <tr>
@@ -58,7 +75,10 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Determines the number of columns.
+        <span>
+          The visible width of the text element, in average character width.
+          If it is specified, it must be a positive integer.
+          Used as the "cols" attribute of the "textarea" element.
           <br />(default = null;)
         </span>
       </td>
@@ -71,7 +91,10 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Defines the number of visible rows.
+        <span>
+          The number of visible lines for the text element.
+          If it is specified, it must be a positive integer.
+          Used as the "rows" attribute of the "textarea" element.
           The height of the text area is calculated as "cntRows"
           multiplied by to the line height.
           <br />(default = null;)
@@ -87,7 +110,7 @@
       </td>
       <td>
         <span>Defines a configuration object.</span><br />
-        <a [href]="urlCmFrame + '#Config'">More details.</a>
+        <a [href]="urlCmTextarea + '#Config'">More details.</a>
       </td>
     </tr>
     <tr>
@@ -138,7 +161,8 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Specifies the text for additional clarification or error.
+        <span>
+          Specifies the text for additional clarification or error.
         </span>
       </td>
     </tr>
@@ -151,7 +175,10 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>The element is disabled.<br />Attribute (no content).</span>
+        <span>
+          Indicates that the element is disabled.<br />
+          (default = false;) Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -163,8 +190,9 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Forces the error status of an item to be displayed.
-          <br />Attribute (no content).
+        <span>
+          Indicates that the element is in an error state.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -177,8 +205,9 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Disable label animation. The label is always static, at the top.
-          <br />Attribute (no content).
+        <span>
+          Indication that the label has shrunk and moved up.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -191,7 +220,10 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Disable animation execution.</span>
+        <span>
+          Indicates that animation is disabled.<br />
+          (default = false;) Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -217,7 +249,10 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Whether the element is readonly.<br />Attribute (no content).</span>
+        <span>
+          Indicates that the element is read-only.<br />
+          (default = false;) Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -229,8 +264,9 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Adds a validation conditional: required field.
-          <br />Attribute (no content).
+        <span>
+          Indicates that the field is required.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -242,7 +278,9 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>The content of the label.</span>
+        <span>
+          Specifies the content of the label.
+        </span>
       </td>
     </tr>
     <tr>
@@ -253,7 +291,8 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Defines the maximum number of characters for an textarea element.
+        <span>
+          Defines the maximum number of characters for an textarea element.
           <br />(default = null;)
         </span>
       </td>
@@ -266,9 +305,11 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Defines the maximum number of visible rows.
+        <span>
+          Defines the maximum number of visible rows.
           The maximum height of the text area is calculated as "maxRows"
-          multiplied by to the line height. Active if "cntRows" is not specified.
+          multiplied by to the line height.
+          Active if "cntRows" is not specified.
           <br />(default = null;)
         </span>
       </td>
@@ -281,7 +322,8 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Defines the minimum number of characters for an textarea element.
+        <span>
+          Defines the minimum number of characters for an textarea element.
           <br />(default = null;)
         </span>
       </td>
@@ -294,9 +336,11 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Defines the minimum number of visible rows.
+        <span>
+          Defines the minimum number of visible rows.
           The minimum height of the text area is calculated as "minRows"
-          multiplied by to the line height. Active if "cntRows" is not specified.
+          multiplied by to the line height.
+          Active if "cntRows" is not specified.
           <br />(default = null;)
         </span>
       </td>
@@ -309,17 +353,18 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Specifies the height justification for the left ornament.
+        <span>
+          This property controls the vertical alignment for the left ornament.
           <br />(default = 'default';)
           It can take the following values:
         </span>
         <ul>
-          <li>"default" - depending on frame type</li>
-          <li>"center" - in the center</li>
-          <li>"flex-start" - at the top</li>
-          <li>"flex-end" - at the bottom</li>
-          <li>"baseline" - along the baseline</li>
-          <li>"stretch" - at the top</li>
+          <li>"default" - defines the default</li>
+          <li>"center" - defines middle alignment</li>
+          <li>"flexStart" - defines top alignment</li>
+          <li>"flexEnd" - defines bottom alignment</li>
+          <li>"baseline" - defines baseline alignment</li>
+          <li>"stretch" - stretches across the entire height</li>
         </ul>
       </td>
     </tr>
@@ -331,17 +376,18 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Specifies the height justification for the right ornament.
+        <span>
+          This property controls the vertical alignment of the right ornament.
           <br />(default = 'default';)
           It can take the following values:
         </span>
         <ul>
-          <li>"default" - depending on frame type</li>
-          <li>"center" - in the center</li>
-          <li>"flex-start" - at the top</li>
-          <li>"flex-end" - at the bottom</li>
-          <li>"baseline" - along the baseline</li>
-          <li>"stretch" - at the top</li>
+          <li>"default" - defines the default</li>
+          <li>"center" - defines middle alignment</li>
+          <li>"flexStart" - defines top alignment</li>
+          <li>"flexEnd" - defines bottom alignment</li>
+          <li>"baseline" - defines baseline alignment</li>
+          <li>"stretch" - stretches across the entire height</li>
         </ul>
       </td>
     </tr>
@@ -351,7 +397,8 @@
         <code>tabIndex: number;</code>
       </td>
       <td>
-        <span>Indicates that its element can be focused.
+        <span>
+          Indicates that its element can be focused.
           <br />(default = 0;)
         </span>
       </td>
@@ -370,6 +417,67 @@
         </span>
       </td>
     </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>spellCheck: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates whether the text element is subject to spell checking by the
+          underlying browser/OS.
+          It can take the following values:
+        </span>
+        <ul>
+          <li>
+            "true" - Indicates that the element needs to have its spelling and grammar checked.
+          </li>
+          <li>
+            "default" - Indicates that the element is to act according to a default behavior,
+            possibly based on the parent element's own spellcheck value.
+          </li>
+          <li>
+            "false" - Indicates that the element should not be spell checked.
+          </li>
+        </ul>
+        <br />
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-spellcheck">
+          More details: MDN "attr-spellcheck".
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>wraps: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates how the control wraps text.
+          It can take the following values:
+        </span>
+        <ul>
+          <li>
+            "hard" - The browser automatically inserts line breaks (CR+LF) so
+            that each line has no more than the width of the control;
+            the cols attribute must also be specified for this to take effect.
+          </li>
+          <li>
+            "soft" - The browser ensures that all line breaks in the value consist
+            of a CR+LF pair, but does not insert any additional line breaks.
+          </li>
+        </ul>
+        <br />
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-wrap">
+          More details: MDN "attr-wrap".
+        </a>
+      </td>
+    </tr>
 
     <tr>
       <td>
@@ -377,7 +485,9 @@
         <code>focused: EventEmitter&lt;void&gt;;</code>
       </td>
       <td>
-        <span>Fires when the element receives input focus.</span>
+        <span>
+          Fires when the element receives input focus.
+        </span>
       </td>
     </tr>
     <tr>
@@ -386,7 +496,9 @@
         <code>blured: EventEmitter&lt;void&gt;;</code>
       </td>
       <td>
-        <span>Fires when an element loses input focus.</span>
+        <span>
+          Fires when an element loses input focus.
+        </span>
       </td>
     </tr>
     <tr>
@@ -395,7 +507,9 @@
         <code>input: EventEmitter&lt;Event&gt;;</code>
       </td>
       <td>
-        <span>The event is called when the user changes the value of an element.</span>
+        <span>
+          The event is called when the user changes the value of an element.
+        </span>
       </td>
     </tr>
     <tr>
@@ -404,8 +518,9 @@
         <code>change: EventEmitter&lt;Event&gt;;</code>
       </td>
       <td>
-        <span>The event is called when the user has finished changing the value
-          of an element.</span>
+        <span>
+          Fires when the user finishes changing the value of an element.
+        </span>
       </td>
     </tr>
     <tr>
@@ -415,7 +530,9 @@
         <code>keydownData: EventEmitter&lt;KeyboardEvent&gt;;</code>
       </td>
       <td>
-        <span>The event is called when any button moves down.</span>
+        <span>
+          Fires when any button moves down.
+        </span>
       </td>
     </tr>
     <tr>
@@ -424,8 +541,9 @@
         <code>keypressData: EventEmitter&lt;KeyboardEvent&gt;;</code>
       </td>
       <td>
-        <span>The event is called when a button that has a printable
-          character is pressed.</span>
+        <span>
+          Fires when a button that has a printable character is pressed.
+        </span>
       </td>
     </tr>
     <tr>
@@ -434,7 +552,9 @@
         <code>keyupData: EventEmitter&lt;KeyboardEvent&gt;;</code>
       </td>
       <td>
-        <span>The event is called when any button moves up.</span>
+        <span>
+          Fires when any button moves up.
+        </span>
       </td>
     </tr>
 
@@ -459,7 +579,9 @@
   <tbody>
     <tr colspan="2">
       <td>
-        This element is given input focus.
+        <span>
+          The input focus is given to this element.
+        </span>
       </td>
     </tr>
   </tbody>
@@ -481,7 +603,7 @@
 
   <tr>
     <td><code>--glntx-he-pd-lf:<br/>
-      &nbsp;var(--glnfrs-pd-lf);</code>
+      &nbsp;var(--glnfrs--pd-lf);</code>
     </td>
     <td>
       <span>
@@ -492,7 +614,7 @@
 
   <tr>
     <td><code>--glntx-he-pd-rg:<br/>
-      &nbsp;var(--glnfrs-pd-rg);</code>
+      &nbsp;var(--glnfrs--pd-rg);</code>
     </td>
     <td>
       <span>
@@ -530,7 +652,10 @@
 &#125;</pre>
 </section>
 
+<hr br-nn />
+
 <section mr-vr>
+  <h4>Recommendation</h4>
   <p>
     We recommend using "formControlName" and NOT using "[(ngModel)]" (at least in production).
     For angular 14, there was still an issue with the second call to the

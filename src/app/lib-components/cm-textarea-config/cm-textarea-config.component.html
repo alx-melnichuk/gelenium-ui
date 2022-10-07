@@ -1,18 +1,18 @@
 <section mr-vr>
   <h3 class="app-hover-link">
     Config.
-    <a [href]="urlCmInput + '#Config'">#</a>
+    <a [href]="urlCmTextarea + '#Config'">#</a>
   </h3>
   <p>
-    If your application will have a single style for GlnInput elements, then you can set a single
+    If your application will have a single style for GlnTextarea elements, then you can set a single
     configuration.
-    To do this, you need to create an object with the GlnInputConfig interface and define the
+    To do this, you need to create an object with the GlnTextareaConfig interface and define the
     required values.
     Next, specify the resulting object in the list of providers for the entire application (at the
     level of the AppComponent).
   </p>
   <code><pre source="ts">
-const glnInputConfigDefault: GlnInputConfig = &#123;
+const glnTextareaConfigDefault: GlnTextareaConfig = &#123;
   exterior: 'outlined',
   frameSize: 'small',
 &#125;;
@@ -22,26 +22,25 @@ const glnInputConfigDefault: GlnInputConfig = &#123;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   providers: [
-    &#123; provide: GLN_INPUT_CONFIG, useValue: glnInputConfigDefault &#125;
+    &#123; provide: GLN_TEXTAREA_CONFIG, useValue: glnTextareaConfigDefault &#125;
   ],
 &#125;)
 export class AppComponent &#123;
   title = 'demo';
 &#125;</pre></code>
   <p>
-    After that, all "GlnInput" components will have the same configuration.
+    After that, all "GlnTextarea" components will have the same configuration.
   </p>
 </section>
 
-
 <section mr-vr
-  id="config-input-interface">
+  id="config-textarea-interface">
   <h4 class="app-hover-link">
-    GlnInputConfig interface.
-    <a [href]="urlCmInput + '#config-input-interface'">#</a>
+    GlnTextareaConfig interface.
+    <a [href]="urlCmTextarea + '#config-textarea-interface'">#</a>
   </h4>
   <p>
-    The GlnInputConfig interface is inherited from the GlnFrameConfig
+    The GlnTextareaConfig interface is inherited from the GlnFrameConfig
     (<a [href]="urlCmFrame + '#config-interface'">in more detail</a>).
   </p>
 </section>
@@ -121,10 +120,10 @@ export class AppComponent &#123;
 
 
 <section mr-vr
-  id="config-input-provide">
+  id="config-textarea-provide">
   <h4 class="app-hover-link">
     1. Configuration with "outlined" and "small".
-    <a [href]="urlCmInput + '#config-input-provide'">#</a>
+    <a [href]="urlCmTextarea + '#config-textarea-provide'">#</a>
   </h4>
   <p>
     For example, let's prepare a configuration in which:
@@ -134,7 +133,7 @@ export class AppComponent &#123;
     <li>"frameSize" will have the value "small" (height to 44px);</li>
   </ul>
   <code><pre source="ts">
-const glnInputConfigDefault: GlnInputConfig = &#123;
+const glnTextareaConfigDefault: GlnTextareaConfig = &#123;
   exterior: 'outlined',
   frameSize: 'small',
 &#125;;</pre></code>
@@ -142,13 +141,13 @@ const glnInputConfigDefault: GlnInputConfig = &#123;
 
 
 <section mr-vr
-  id="config-input-params">
+  id="config-textarea-params">
   <h4 class="app-hover-link">
     2. Configuration with "underline" and "wide".
-    <a [href]="urlCmInput + '#config-input-params'">#</a>
+    <a [href]="urlCmTextarea + '#config-textarea-params'">#</a>
   </h4>
   <p>
-    Suppose we have a provider in our application with "GlnInputConfig" and all input elements
+    Suppose we have a provider in our application with "GlnTextareaConfig" and all textarea elements
     accept its default values.
     We can change these values for an individual element.
     To do this, you need to specify in this element those properties that do not match the
@@ -184,7 +183,7 @@ ornamRgAlign='default',</pre></code>
       Values from the default configuration provider (if there is one).
     </li>
     <li>
-      Values from input parameters (if there is one).
+      Values from textarea parameters (if there is one).
     </li>
   </ul>
 </section>
@@ -202,10 +201,11 @@ ornamRgAlign='default',</pre></code>
           <em>1. Default config: "outlined", "medium".</em>
         </small>
       </div>
-      <gln-input formControlName="model07a"
+      <gln-textarea formControlName="model07a"
+        [cntRows]="4"
         label="Enter value"
         helperText="A value must be entered.">
-      </gln-input>
+      </gln-textarea>
     </div>
 
     <div class="app-elem">
@@ -214,13 +214,14 @@ ornamRgAlign='default',</pre></code>
           <em>2. exterior="underline", frameSize="wide".</em>
         </small>
       </div>
-      <gln-input formControlName="model07b"
+      <gln-textarea formControlName="model07b"
+        [cntRows]="4"
         label="Enter value"
         helperText="A value must be entered."
         frameSize="wide"
         exterior="underline"
         isRequired>
-      </gln-input>
+      </gln-textarea>
     </div>
 
   </div>
@@ -249,10 +250,11 @@ ornamRgAlign='default',</pre></code>
           &lt;em&gt;1. Default config: "outlined", "medium".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="model07a"
+      &lt;gln-textarea formControlName="model07a"
+        [cntRows]="4"
         label="Enter value"
         helperText="A value must be entered."&gt;
-      &lt;/gln-input&gt;
+      &lt;/gln-textarea&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
@@ -261,13 +263,14 @@ ornamRgAlign='default',</pre></code>
           &lt;em&gt;2. exterior="underline", frameSize="wide".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input formControlName="model07b"
+      &lt;gln-textarea formControlName="model07b"
+        [cntRows]="4"
         label="Enter value"
         helperText="A value must be entered."
         frameSize="wide"
         exterior="underline"
         isRequired&gt;
-      &lt;/gln-input&gt;
+      &lt;/gln-textarea&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;
@@ -283,24 +286,24 @@ import &#123;
   FormControl, FormGroup
 &#125; from '@angular/forms';
 import &#123;
-  GlnInputConfig, GLN_INPUT_CONFIG
+  GlnTextareaConfig, GLN_TEXTAREA_CONFIG
 &#125; from 'gelenium-ui';
 
-const glnInputConfigDefault: GlnInputConfig = &#123;
+const glnTextareaConfigDefault: GlnTextareaConfig = &#123;
   exterior: 'outlined',
   frameSize: 'small',
 &#125;;
 
 @Component(&#123;
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-textarea',
+  templateUrl: './textarea.component.html',
+  styleUrls: ['./textarea.component.scss'],
   encapsulation: ViewEncapsulation.None,
   providers: [&#123;
-    provide: GLN_INPUT_CONFIG, useValue: glnInputConfigDefault
+    provide: GLN_TEXTAREA_CONFIG, useValue: glnTextareaConfigDefault
   &#125;],
 &#125;)
-export class InputComponent &#123;
+export class TextareaComponent &#123;
   public formGroup07: FormGroup = new FormGroup(&#123;
     model07a: new FormControl('', []),
     model07b: new FormControl('Hello World', []),
@@ -309,14 +312,16 @@ export class InputComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-app-input &#123;
-  .app-group &#123;
-    display: flex;
-    flex-wrap: wrap;
-  &#125;
-  .app-elem &#123;
-    min-width: 26ch;
-    margin: 10px 10px;
+app-textarea &#123;
+  app-input &#123;
+    .app-group &#123;
+      display: flex;
+      flex-wrap: wrap;
+    &#125;
+    .app-elem &#123;
+      min-width: 26ch;
+      margin: 10px 10px;
+    &#125;
   &#125;
 &#125;</pre></code>
         </mat-tab>

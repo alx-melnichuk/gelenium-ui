@@ -6,6 +6,7 @@ import { CmTextareaAttributesModule } from '../cm-textarea-attributes/cm-textare
 import { CmTextareaValidationModule } from '../cm-textarea-validation/cm-textarea-validation.module';
 import { CmTextareaCapabilityModule } from '../cm-textarea-capability/cm-textarea-capability.module';
 import { CmTextareaOrnamentsModule } from '../cm-textarea-ornaments/cm-textarea-ornaments.module';
+import { CmTextareaConfigModule } from '../cm-textarea-config/cm-textarea-config.module';
 import { CmTextareaApiModule } from '../cm-textarea-api/cm-textarea-api.module';
 
 import { CmTextareaComponent } from './cm-textarea.component';
@@ -20,6 +21,7 @@ import { CmTextareaRoutingModule } from './cm-textarea-routing.module';
     CmTextareaValidationModule,
     CmTextareaCapabilityModule,
     CmTextareaOrnamentsModule,
+    CmTextareaConfigModule,
     CmTextareaApiModule,
     CmTextareaRoutingModule,
   ],

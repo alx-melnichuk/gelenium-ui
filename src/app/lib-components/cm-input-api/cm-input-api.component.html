@@ -45,9 +45,26 @@
         <code>autoComplete: string;</code>
       </td>
       <td>
-        <span>Defines permissions for autocomplete native input.
-          <br />(default = '';)
+        <span>
+          Determines whether the element's value can be automatically populated
+          by the browser.
+          <br />
+          It can take the following values:
         </span>
+        <ul>
+          <li>"off" - the browser does not automatically complete the entry;</li>
+          <li>"on" - The browser can automatically complete the value based
+            on values that the user has entered during previous uses;</li>
+        </ul>
+        <span>
+          If the autocomplete attribute is not specified on a element, then the browser uses the
+          autocomplete attribute value of the element's form owner.
+        </span>
+        <br />
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-autocomplete">
+          More details: MDN "attr-autocomplete".
+        </a>
       </td>
     </tr>
     <tr>
@@ -241,8 +258,9 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Determines the maximum value that is acceptable for an input element.
-          <br />(default = null;)
+        <span>
+          Determines the maximum value that is acceptable for an input element.<br />
+          (default = null;)
         </span>
       </td>
     </tr>
@@ -254,8 +272,9 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Defines the maximum number of characters for an input element.
-          <br />(default = null;)
+        <span>
+          Defines the maximum number of characters for an input element.<br />
+          (default = null;)
         </span>
       </td>
     </tr>
@@ -267,8 +286,9 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Determines the minimum value that is acceptable for an input element.
-          <br />(default = null;)
+        <span>
+          Determines the minimum value that is acceptable for an input element.<br />
+          (default = null;)
         </span>
       </td>
     </tr>
@@ -280,8 +300,9 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Defines the minimum number of characters for an input element.
-          <br />(default = null;)
+        <span>
+          Defines the minimum number of characters for an input element.<br />
+          (default = null;)
         </span>
       </td>
     </tr>
@@ -354,7 +375,8 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>The step value for increasing/decreasing the value of the input element.
+        <span>
+          The step value for increasing/decreasing the value of the input element.
           <br />(default = null;)
         </span>
       </td>
@@ -365,7 +387,8 @@
         <code>tabIndex: number;</code>
       </td>
       <td>
-        <span>Indicates that its element can be focused.
+        <span>
+          Indicates that its element can be focused.
           <br />(default = 0;)
         </span>
       </td>
@@ -401,7 +424,9 @@
         <code>focused: EventEmitter&lt;void&gt;;</code>
       </td>
       <td>
-        <span>Fires when the element receives input focus.</span>
+        <span>
+          Fires when the element receives input focus.
+        </span>
       </td>
     </tr>
     <tr>
@@ -410,7 +435,9 @@
         <code>blured: EventEmitter&lt;void&gt;;</code>
       </td>
       <td>
-        <span>Fires when an element loses input focus.</span>
+        <span>
+          Fires when an element loses input focus.
+        </span>
       </td>
     </tr>
     <tr>
@@ -419,7 +446,9 @@
         <code>input: EventEmitter&lt;Event&gt;;</code>
       </td>
       <td>
-        <span>The event is called when the user changes the value of an element.</span>
+        <span>
+          The event is called when the user changes the value of an element.
+        </span>
       </td>
     </tr>
     <tr>
@@ -428,8 +457,9 @@
         <code>change: EventEmitter&lt;Event&gt;;</code>
       </td>
       <td>
-        <span>The event is called when the user has finished changing the value
-          of an element.</span>
+        <span>
+          Fires when the user finishes changing the value of an element.
+        </span>
       </td>
     </tr>
     <tr>
@@ -438,7 +468,9 @@
         <code>keydownData: EventEmitter&lt;KeyboardEvent&gt;;</code>
       </td>
       <td>
-        <span>The event is called when any button moves down.</span>
+        <span>
+          Fires when any button moves down.
+        </span>
       </td>
     </tr>
     <tr>
@@ -447,7 +479,9 @@
         <code>keypressData: EventEmitter&lt;KeyboardEvent&gt;;</code>
       </td>
       <td>
-        <span>The event is called when a button that has a printable character is pressed.</span>
+        <span>
+          Fires when a button that has a printable character is pressed.
+        </span>
       </td>
     </tr>
     <tr>
@@ -456,7 +490,9 @@
         <code>keyupData: EventEmitter&lt;KeyboardEvent&gt;;</code>
       </td>
       <td>
-        <span>The event is called when any button moves up.</span>
+        <span>
+          Fires when any button moves up.
+        </span>
       </td>
     </tr>
 
@@ -481,7 +517,9 @@
   <tbody>
     <tr colspan="2">
       <td>
-        This element is given input focus.
+        <span>
+          The input focus is given to this element.
+        </span>
       </td>
     </tr>
   </tbody>
@@ -551,4 +589,19 @@
   // Blocking frame resizing when receiving focus for "Outlined" mode.
   --glnfr-foc-dcr-br-wd: unset;
 &#125;</pre>
+</section>
+
+<hr br-nn />
+
+<section mr-vr>
+  <h4>Recommendation</h4>
+  <p>
+    We recommend using "formControlName" and NOT using "[(ngModel)]" (at least in production).
+    For angular 14, there was still an issue with the second call to the
+    ControlValueAccessor writeValue method when using [(ngModel)].
+    <br />
+    <a href="https://github.com/angular/angular/issues/14988">
+      ValueAccessor.writeValue is being called twice, first time with a phantom null value
+    </a>
+  </p>
 </section>
