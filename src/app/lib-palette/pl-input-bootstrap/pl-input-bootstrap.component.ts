@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { GlnFrameExterior, GlnFrameSize, GlnInputConfig } from 'gelenium-ui';
+import { GlnInputConfig } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import {
@@ -48,8 +48,8 @@ export class PlInputBootstrapComponent {
   public formGroup02a: FormGroup = new FormGroup(this.control02a);
 
   public config02a: GlnInputConfig = {
-    exterior: GlnFrameExterior.outlined,
-    frameSize: GlnFrameSize.short,
+    exterior: 'outlined',
+    frameSize: 'short',
     isPlaceholder: true,
   };
 
