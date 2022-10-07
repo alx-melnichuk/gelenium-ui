@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { GlnFrameConfigOld, GlnFrameExterior, GlnFrameSize } from 'gelenium-ui';
+import { GlnFrameExterior, GlnFrameSize, GlnInputConfig } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import {
@@ -47,10 +47,10 @@ export class PlInputBootstrapComponent {
   };
   public formGroup02a: FormGroup = new FormGroup(this.control02a);
 
-  public config02a: GlnFrameConfigOld = {
+  public config02a: GlnInputConfig = {
     exterior: GlnFrameExterior.outlined,
     frameSize: GlnFrameSize.short,
-    isNoLabel: true,
+    isPlaceholder: true,
   };
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
