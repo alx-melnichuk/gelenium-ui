@@ -94,6 +94,8 @@ export class GlnTextareaComponent
   @Input()
   public isNoLabel: string | boolean | null | undefined;
   @Input()
+  public isPlaceholder: string | boolean | null | undefined;
+  @Input()
   public isReadOnly: string | boolean | null | undefined;
   @Input()
   public isRequired: string | boolean | null | undefined;
@@ -145,9 +147,6 @@ export class GlnTextareaComponent
   public get noAnimation(): boolean | null {
     return this.frameComp.noAnimation;
   }
-  public get noLabel(): boolean | null {
-    return this.frameComp.noLabel;
-  }
 
   public currConfig: GlnTextareaConfig;
   public currentRows = 1;
@@ -160,6 +159,7 @@ export class GlnTextareaComponent
   public isFilled = false;
   public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
+  public placeholder: boolean | null = null; // Binding attribute "isPlaceholder".
   public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
   public required: boolean | null = null; // Binding attribute "isRequired".
 
@@ -204,7 +204,9 @@ export class GlnTextareaComponent
       this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamRgAlign || this.currConfig.ornamRgAlign || null);
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
     }
-
+    if (changes['isPlaceholder'] || (changes['config'] && this.isPlaceholder == null && this.currConfig.isPlaceholder != null)) {
+      this.placeholder = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
+    }
     if (changes['isRequired'] || changes['minLength'] || changes['maxLength']) {
       this.prepareFormGroup(this.required, this.minLength || null, this.maxLength || null);
     }
@@ -220,6 +222,9 @@ export class GlnTextareaComponent
     if (this.error == null) {
       this.error = !!this.currConfig.isError;
       this.settingError(this.error, this.renderer, this.hostRef);
+    }
+    if (this.placeholder == null) {
+      this.placeholder = !!this.currConfig.isPlaceholder;
     }
     if (this.readOnly == null) {
       this.readOnly = !!this.currConfig.isReadOnly;

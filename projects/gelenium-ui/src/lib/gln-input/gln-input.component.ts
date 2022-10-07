@@ -89,6 +89,8 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   @Input()
   public isNoLabel: string | boolean | null | undefined;
   @Input()
+  public isPlaceholder: string | boolean | null | undefined;
+  @Input()
   public isReadOnly: string | boolean | null | undefined;
   @Input()
   public isRequired: string | boolean | null | undefined;
@@ -142,9 +144,6 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   public get noAnimation(): boolean | null {
     return this.frameComp.noAnimation;
   }
-  public get noLabel(): boolean | null {
-    return this.frameComp.noLabel;
-  }
 
   public currConfig: GlnInputConfig;
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
@@ -156,6 +155,7 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   public isFilled = false;
   public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
+  public placeholder: boolean | null = null; // Binding attribute "isPlaceholder".
   public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
   public required: boolean | null = null; // Binding attribute "isRequired".
   public typeVal: GlnInputType = GlnInputType.text;
@@ -201,6 +201,9 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
       this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamRgAlign || this.currConfig.ornamRgAlign || null);
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
     }
+    if (changes['isPlaceholder'] || (changes['config'] && this.isPlaceholder == null && this.currConfig.isPlaceholder != null)) {
+      this.placeholder = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
+    }
     if (changes['type']) {
       this.typeVal = GlnInputTypeUtil.create(this.type) || GlnInputType.text;
     }
@@ -216,6 +219,9 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     if (this.error == null) {
       this.error = !!this.currConfig.isError;
       this.settingError(this.error, this.renderer, this.hostRef);
+    }
+    if (this.placeholder == null) {
+      this.placeholder = !!this.currConfig.isPlaceholder;
     }
     if (this.readOnly == null) {
       this.readOnly = !!this.currConfig.isReadOnly;

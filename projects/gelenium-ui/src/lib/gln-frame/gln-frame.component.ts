@@ -57,8 +57,6 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
   public isNoAnimation: string | boolean | null | undefined;
   @Input()
-  public isNoLabel: string | boolean | null | undefined;
-  @Input()
   public isRequired: string | boolean | null | undefined;
   @Input()
   public label: string | null | undefined;
@@ -97,7 +95,6 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public frameSizeValue: number = 0;
   public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink".
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
-  public noLabel: boolean | null = null; // Binding attribute "isNoLabel".
   public required: boolean | null = null; // Binding attribute "isRequired".
 
   private lineHeightInn: number = 0;
@@ -166,10 +163,6 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.noAnimation = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
       this.settingNoAnimation(this.noAnimation, this.renderer, this.hostRef);
     }
-    if (changes['isNoLabel'] || (changes['config'] && this.isNoLabel == null && this.currConfig.isNoLabel != null)) {
-      this.noLabel = BooleanUtil.init(this.isNoLabel) ?? !!this.currConfig.isNoLabel;
-      this.settingNoLabel(this.noLabel, this.renderer, this.hostRef);
-    }
     if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
       this.required = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
       this.settingRequired(this.required, this.renderer, this.hostRef);
@@ -205,10 +198,6 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     if (this.noAnimation == null) {
       this.noAnimation = !!this.currConfig.isNoAnimation;
       this.settingNoAnimation(this.noAnimation, this.renderer, this.hostRef);
-    }
-    if (this.noLabel == null) {
-      this.noLabel = !!this.currConfig.isNoLabel;
-      this.settingNoLabel(this.noLabel, this.renderer, this.hostRef);
     }
     if (this.required == null) {
       this.required = !!this.currConfig.isRequired;
@@ -294,10 +283,6 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   private settingNoAnimation(noAnimation: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-no-animation', !!noAnimation);
     HtmlElemUtil.setAttr(renderer, elem, 'noani', noAnimation ? '' : null);
-  }
-  private settingNoLabel(noLabel: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
-    HtmlElemUtil.setClass(renderer, elem, 'glnfr-no-label', !!noLabel);
-    HtmlElemUtil.setAttr(renderer, elem, 'nolab', noLabel ? '' : null);
   }
   private settingRequired(required: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
     HtmlElemUtil.setClass(renderer, elem, 'glnfr-required', !!required);

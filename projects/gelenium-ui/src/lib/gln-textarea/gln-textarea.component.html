@@ -9,9 +9,8 @@
     [isFilled]="isFilled"
     [isLabelShrink]="getBoolean(isLabelShrink) ?? currConfig.isLabelShrink"
     [isNoAnimation]="getBoolean(isNoAnimation) ?? currConfig.isNoAnimation"
-    [isNoLabel]="getBoolean(isNoLabel) ?? currConfig.isNoLabel"
     [isRequired]="required"
-    [label]="label"
+    [label]="!placeholder ? label : null"
     glnFrameOrnament
     [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
     [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
@@ -37,6 +36,7 @@
       [rows]="currentRows"
       [attr.disabled]="disabled ? '': null"
       [attr.autocomplete]="!!autoComplete ? autoComplete : null"
+      [attr.placeholder]="!placeholder ? null : label"
       [attr.readonly]="readOnly ? '': null"
       [attr.tabindex]="!disabled ? tabIndex : null"
       [attr.wrap]="wraps"
