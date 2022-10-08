@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsulation } from '@angular/core';
-import { take } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
 import { ScrollAfterRoutingUtil } from '../../lib-core/utils/scroll-after-routing.util';
 
@@ -25,7 +25,7 @@ export class DrAutoFocuseComponent implements AfterViewInit {
       ScrollAfterRoutingUtil.scrollByFragmentFromPath();
     });
     // The zone will become stable when all components have fully rendered.
-    this.ngZone.onStable.pipe(take(1)).subscribe(() => {
+    this.ngZone.onStable.pipe(first()).subscribe(() => {
       // eslint-disable-next-line no-restricted-syntax
       console.timeEnd(logLabel);
     });

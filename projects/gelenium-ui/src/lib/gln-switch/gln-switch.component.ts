@@ -204,7 +204,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     }
   }
 
-  // ** ControlValueAccessor - start **
+  // ** interface ControlValueAccessor - start **
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public onChange: (val: unknown) => void = () => {};
@@ -247,15 +247,15 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     }
   }
 
-  // ** ControlValueAccessor - finish **
+  // ** interface ControlValueAccessor - finish **
 
-  // ** Validator - start **
+  // ** interface Validator - start **
 
   public validate(control: AbstractControl): ValidationErrors | null {
     return this.formControl.errors;
   }
 
-  // ** Validator - finish **
+  // ** interface Validator - finish **
 
   // ** GlnNodeInternalValidator - start **
 

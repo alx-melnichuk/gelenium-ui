@@ -250,7 +250,7 @@ export class GlnTextareaComponent
     }
   }
 
-  // ** ControlValueAccessor - start **
+  // ** interface ControlValueAccessor - start **
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public onChange: (val: unknown) => void = () => {};
@@ -298,15 +298,15 @@ export class GlnTextareaComponent
     }
   }
 
-  // ** ControlValueAccessor - finish **
+  // ** interface ControlValueAccessor - finish **
 
-  // ** Validator - start **
+  // ** interface Validator - start **
 
   public validate(control: AbstractControl): ValidationErrors | null {
     return this.formControl.errors;
   }
 
-  // ** Validator - finish **
+  // ** interface Validator - finish **
 
   // ** GlnNodeInternalValidator - start **
 
@@ -333,23 +333,27 @@ export class GlnTextareaComponent
   }
 
   public focus(): void {
-    if (isPlatformBrowser(this.platformId) && !!this.textareaElementRef) {
+    if (!this.disabled && isPlatformBrowser(this.platformId) && !!this.textareaElementRef) {
       this.textareaElementRef.nativeElement.focus();
     }
   }
 
   public doFocus(): void {
-    this.isFocused = true;
-    this.settingFocus(this.isFocused, this.renderer, this.hostRef);
-    this.focused.emit();
+    if (!this.disabled) {
+      this.isFocused = true;
+      this.settingFocus(this.isFocused, this.renderer, this.hostRef);
+      this.focused.emit();
+    }
   }
 
   public doBlur(): void {
-    this.isFocused = false;
-    this.settingFocus(this.isFocused, this.renderer, this.hostRef);
-    this.isFilled = !!this.formControl.value;
-    this.onTouched();
-    this.blured.emit();
+    if (!this.disabled) {
+      this.isFocused = false;
+      this.settingFocus(this.isFocused, this.renderer, this.hostRef);
+      this.isFilled = !!this.formControl.value;
+      this.onTouched();
+      this.blured.emit();
+    }
   }
 
   public doInput(event: Event): void {

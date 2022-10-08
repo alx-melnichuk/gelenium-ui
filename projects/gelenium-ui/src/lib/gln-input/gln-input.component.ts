@@ -103,9 +103,9 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   @Input()
   public minLength: number | null | undefined;
   @Input()
-  public ornamLfAlign: string | null | undefined; // OrnamAlign
+  public ornamLfAlign: string | null | undefined; // OrnamAlignType
   @Input()
-  public ornamRgAlign: string | null | undefined; // OrnamAlign
+  public ornamRgAlign: string | null | undefined; // OrnamAlignType
   @Input()
   public pattern: string | RegExp = '';
   @Input()
@@ -247,7 +247,7 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     }
   }
 
-  // ** ControlValueAccessor - start **
+  // ** interface ControlValueAccessor - start **
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public onChange: (val: unknown) => void = () => {};
@@ -288,15 +288,15 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     }
   }
 
-  // ** ControlValueAccessor - finish **
+  // ** interface ControlValueAccessor - finish **
 
-  // ** Validator - start **
+  // ** interface Validator - start **
 
   public validate(control: AbstractControl): ValidationErrors | null {
     return this.formControl.errors;
   }
 
-  // ** Validator - finish **
+  // ** interface Validator - finish **
 
   // ** GlnNodeInternalValidator - start **
 
@@ -323,23 +323,27 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   }
 
   public focus(): void {
-    if (isPlatformBrowser(this.platformId) && !!this.inputElementRef) {
+    if (!this.disabled && isPlatformBrowser(this.platformId) && !!this.inputElementRef) {
       this.inputElementRef.nativeElement.focus();
     }
   }
 
   public doFocus(): void {
-    this.isFocused = true;
-    this.settingFocus(this.isFocused, this.renderer, this.hostRef);
-    this.focused.emit();
+    if (!this.disabled) {
+      this.isFocused = true;
+      this.settingFocus(this.isFocused, this.renderer, this.hostRef);
+      this.focused.emit();
+    }
   }
 
   public doBlur(): void {
-    this.isFocused = false;
-    this.settingFocus(this.isFocused, this.renderer, this.hostRef);
-    this.isFilled = !!this.formControl.value;
-    this.onTouched();
-    this.blured.emit();
+    if (!this.disabled) {
+      this.isFocused = false;
+      this.settingFocus(this.isFocused, this.renderer, this.hostRef);
+      this.isFilled = !!this.formControl.value;
+      this.onTouched();
+      this.blured.emit();
+    }
   }
 
   public doInput(event: Event): void {
@@ -367,13 +371,13 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     this.formControl.setValidators(newValidator);
   }
 
-  private settingFocus(focus: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setClass(renderer, elem, 'gln-focused', focus || false);
-    HtmlElemUtil.setAttr(renderer, elem, 'foc', focus ? '' : null);
-  }
   private settingError(error: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-error', !!error);
     HtmlElemUtil.setAttr(renderer, elem, 'err', error ? '' : null);
+  }
+  private settingFocus(focus: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-focused', focus || false);
+    HtmlElemUtil.setAttr(renderer, elem, 'foc', focus ? '' : null);
   }
   private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!readOnly);

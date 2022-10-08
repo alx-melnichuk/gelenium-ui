@@ -11,6 +11,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  Host,
   Inject,
   InjectionToken,
   Input,
@@ -23,11 +24,13 @@ import {
   QueryList,
   Renderer2,
   SimpleChanges,
+  SkipSelf,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import {
   AbstractControl,
+  ControlContainer,
   ControlValueAccessor,
   FormControl,
   FormGroup,
@@ -36,11 +39,13 @@ import {
   ValidationErrors,
   Validator,
 } from '@angular/forms';
-import { take } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
+import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from '../directives/gln-frame-ornament/gln-frame-ornam-align.interface';
 import { GlnFrameSizePaddingVerHorRes } from '../directives/gln-frame-size/gln-frame-size-prepare.interface';
 import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
-import { GlnBasisFrame } from '../_classes/gln-basis-frame.class';
+import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
+import { GlnFrameExterior } from '../gln-frame/gln-frame-exterior.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
@@ -84,43 +89,40 @@ const CSS_PROP_TRANSLATE_Y = '--glnslpo-translate-y';
   ],
 })
 export class GlnSelectComponent
-  extends GlnBasisFrame
   implements OnChanges, OnInit, AfterContentInit, AfterViewInit, ControlValueAccessor, Validator, GlnOptionParent
 {
-  // @Input()
-  // public id = `glnsl-${uniqueIdCounter++}`; // Is in GlnBasisControl.
   @Input()
-  public config: GlnSelectConfig | null | undefined; // -
+  public id = `glnsl-${uniqueIdCounter++}`;
+  @Input()
+  public config: GlnSelectConfig | null | undefined;
   @Input()
   public exterior: string | null | undefined; // GlnFrameExteriorType
   @Input()
-  public frameSize: string | null | undefined; // GlnFrameSizeType // -
+  public frameSize: string | null | undefined; // GlnFrameSizeType
   @Input()
   public helperText: string | null | undefined;
   @Input()
   public isCheckmark: string | boolean | null | undefined;
-  // @Input()
-  // public isDisabled: string | boolean | null | undefined; // Is in GlnBasisControl.
-  // @Input()
-  // public isError: string | boolean | null | undefined; // Is in GlnBasisControl.
-  // @Input()
-  // public isLabelShrink: string | boolean | null | undefined; // Is in GlnBasisControl.
+  @Input()
+  public isDisabled: string | boolean | null | undefined;
+  @Input()
+  public isError: string | boolean | null | undefined;
+  @Input()
+  public isLabelShrink: string | boolean | null | undefined;
   @Input()
   public isMultiple: string | boolean | null | undefined;
-  // @Input()
-  // public isNoAnimation: string | boolean | null | undefined; // Is in GlnBasisControl.
+  @Input()
+  public isNoAnimation: string | boolean | null | undefined;
   @Input()
   public isNoIcon: string | boolean | null | undefined;
-  // @Input()
-  // public isNoLabel: string | boolean | null | undefined; // Is in GlnBasisControl.
   @Input()
-  public isNoRipple: string | boolean | null | undefined; // -
-  // @Input()
-  // public isReadOnly: string | boolean | null | undefined; // Is in GlnBasisControl.
-  // @Input()
-  // public isRequired: string | boolean | null | undefined; // Is in GlnBasisControl.
-  // @Input()
-  // public isValueInit: string | boolean | null | undefined; // Is in GlnBasisControl. //~
+  public isNoRipple: string | boolean | null | undefined;
+  @Input()
+  public isPlaceholder: string | boolean | null | undefined;
+  @Input()
+  public isReadOnly: string | boolean | null | undefined;
+  @Input()
+  public isRequired: string | boolean | null | undefined;
   @Input()
   public label: string | null | undefined;
   @Input()
@@ -128,18 +130,18 @@ export class GlnSelectComponent
   @Input()
   public minLength: number | null | undefined;
   @Input()
-  public ornamLfAlign: string | null | undefined; // OrnamAlign // +
+  public ornamLfAlign: string | null | undefined; // OrnamAlignType
   @Input()
-  public ornamRgAlign: string | null | undefined; // OrnamAlign // +
+  public ornamRgAlign: string | null | undefined; // OrnamAlignType
   @Input()
   /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
-  public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = ''; // -
+  public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = '';
   @Input()
   public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
   @Input()
-  public visibleSize = 0;
+  public visibleSize: number = 0;
   @Input()
-  public tabIndex = 0; // ~
+  public tabIndex: number = 0;
   @Input()
   public wdFull: string | null | undefined;
 
@@ -177,8 +179,6 @@ export class GlnSelectComponent
   readonly opened: EventEmitter<void> = new EventEmitter();
   @Output()
   readonly closed: EventEmitter<void> = new EventEmitter();
-  // @Output()
-  // readonly writeValueInit: EventEmitter<() => void> = new EventEmitter(); // Is in GlnBasisControl.
   @Output()
   readonly selected: EventEmitter<{ value: unknown | null; values: unknown[]; change: GlnSelectionChange<GlnOptionComponent> }> =
     new EventEmitter();
@@ -190,6 +190,8 @@ export class GlnSelectComponent
   public customTrigger: GlnSelectTriggerDirective | undefined;
   @ViewChild('frameRef', { read: ElementRef, static: true })
   public frameRef!: ElementRef<HTMLElement>;
+  @ViewChild(GlnFrameComponent, { static: true })
+  public frameComp!: GlnFrameComponent;
   /** A trigger that opens a dropdown list of options. */
   @ViewChild('triggerRef', { static: true })
   public triggerRef!: ElementRef<HTMLElement>;
@@ -203,37 +205,53 @@ export class GlnSelectComponent
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set options(value: GlnOptionComponent[]) {}
 
+  public get exteriorVal(): GlnFrameExterior | null {
+    return this.frameComp.exteriorVal;
+  }
+  public get frameSizeVal(): GlnFrameSize | null {
+    return this.frameComp.frameSizeVal;
+  }
+  public get frameSizeValue(): number {
+    return this.frameComp.frameSizeValue;
+  }
+  public get labelShrink(): boolean | null {
+    return this.frameComp.labelShrink;
+  }
+  public get noAnimation(): boolean | null {
+    return this.frameComp.noAnimation;
+  }
+
   public backdropClassVal: string | null = null;
   public checkmark: boolean | null = null; // Binding attribute "isCheckmark". // interface GlnOptionParent
-  public currConfig: GlnSelectConfig | null = null;
-  // public disabled: boolean | null = null; // Binding attribute "isDisabled". // Is in GlnBasisControl.
-  // public error: boolean | null = null; // Binding attribute "isError". // Is in GlnBasisControl.
+  public currConfig: GlnSelectConfig;
+  public disabled: boolean | null = null; // Binding attribute "isDisabled".
+  public error: boolean | null = null; // Binding attribute "isError".
   public errors: ValidationErrors | null = null;
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public hasPanelAnimation = false;
+  public isAttrHideAnimation: boolean | undefined;
   public isFocused = false;
   public isFilled = false;
   public isPanelOpen = false;
-  // public isWriteValueInit: boolean | null = null;                         // Is in GlnBasisControl.
-  // public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink". // Is in GlnBasisControl.
   public multiple: boolean | null = null; // Binding attribute "isMultiple". // interface GlnOptionParent
-  // public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation". // Is in GlnBasisControl.
   public noIcon: boolean | null = null; // Binding attribute "isNoIcon",
-  // public noLabel: boolean | null = null; // Binding attribute "isNoLabel". // Is in GlnBasisControl.
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
+  public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
+  public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
   public overlayPanelClass: string | string[] = '';
   public panelClassList: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
+  public placeholder: boolean | null = null; // Binding attribute "isPlaceholder".
   public positionList: ConnectedPosition[] = [];
-  // public readOnly: boolean | null = null; // Binding attribute "isReadOnly". // Is in GlnBasisControl.
-  // public required: boolean | null = null; // Binding attribute "isRequired". // Is in GlnBasisControl.
+  public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
+  public required: boolean | null = null; // Binding attribute "isRequired".
   public selectedOptions: GlnOptionComponent[] = [];
   /** Strategy for handling scrolling when the selection panel is open. */
   public scrollStrategy: ScrollStrategy;
   /** The position and dimensions for the trigger's bounding box. */
   public triggerRect: DOMRect | null = null;
-  // public valueInit: boolean | null = null; // Binding attribute "isValueInit". // Is in GlnBasisControl.
+  // public valueInit: boolean | null = null; // Binding attribute "isValueInit".
   public visibleSizeVal: number | null = null; // Binding attribute "visibleSize".
 
   private isFocusAttrOnFrame = false;
@@ -245,84 +263,128 @@ export class GlnSelectComponent
   private triggerFrameSize = 0;
 
   constructor(
-    hostRef: ElementRef<HTMLElement>,
-    renderer: Renderer2,
-    changeDetectorRef: ChangeDetectorRef,
     // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: Object,
+    private renderer: Renderer2,
+    public hostRef: ElementRef<HTMLElement>,
+    private changeDetectorRef: ChangeDetectorRef,
+    private ngZone: NgZone,
     @Optional() @Inject(GLN_SELECT_CONFIG) private rootConfig: GlnSelectConfig | null,
+    @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null,
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-    @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any,
-    ngZone: NgZone
+    @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any
   ) {
-    super(uniqueIdCounter++, 'glnsl', hostRef, renderer, changeDetectorRef, ngZone);
-    this.currConfig = this.rootConfig;
+    this.currConfig = this.rootConfig || {};
     this.scrollStrategy = this.scrollStrategyFactory();
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-select', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
   }
 
-  public override ngOnChanges(changes: SimpleChanges): void {
-    // In the GlnBasisControl.ngOnChanges(), the definition is made:
-    // - this.disabled = BooleanUtil.init(this.isDisabled);
-    // - this.error = BooleanUtil.init(this.isError);
-    // - this.labelShrink = BooleanUtil.init(this.isLabelShrink);
-    // - this.noAnimation = BooleanUtil.init(this.isNoAnimation);
-    // - this.noLabel = BooleanUtil.init(this.isNoLabel);
-    // - this.readOnly = BooleanUtil.init(this.isReadOnly);
-    // - this.required = BooleanUtil.init(this.isRequired);
-    // - this.valueInit = BooleanUtil.init(this.isValueInit);
-    super.ngOnChanges(changes);
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
-      if (this.noAnimation == null) {
-        this.noAnimation = this.currConfig?.isNoAnimation || null;
-      }
     }
-    if (changes['isCheckmark'] || (changes['config'] && this.isCheckmark == null)) {
-      this.checkmark = BooleanUtil.init(this.isCheckmark) || this.currConfig?.isCheckmark || null;
+
+    if (changes['isCheckmark'] || (changes['config'] && this.isCheckmark == null && this.currConfig.isCheckmark != null)) {
+      this.checkmark = BooleanUtil.init(this.isCheckmark) ?? !!this.currConfig.isCheckmark;
+      this.settingCheckmark(this.checkmark, this.renderer, this.hostRef);
     }
-    if (changes['isMultiple'] || (changes['config'] && this.isMultiple == null)) {
-      this.multiple = BooleanUtil.init(this.isMultiple) || this.currConfig?.isMultiple || null;
+    if (changes['isDisabled']) {
+      this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
-    if (changes['isNoIcon'] || (changes['config'] && this.isNoIcon == null)) {
-      this.noIcon = BooleanUtil.init(this.isNoIcon) || this.currConfig?.isNoIcon || null;
+    if (changes['isError'] || (changes['config'] && this.isError == null && this.currConfig.isError != null)) {
+      this.error = BooleanUtil.init(this.isError) ?? !!this.currConfig.isError;
+      this.settingError(this.error, this.renderer, this.hostRef);
     }
-    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null)) {
-      this.noRipple = BooleanUtil.init(this.isNoRipple) || this.currConfig?.isNoRipple || null;
+    if (changes['isMultiple'] || (changes['config'] && this.isMultiple == null && this.currConfig?.isMultiple) || null) {
+      this.multiple = BooleanUtil.init(this.isMultiple) ?? !!this.currConfig.isMultiple;
+      this.settingMultiple(this.multiple, this.renderer, this.hostRef);
     }
-    if (changes['panelClass'] || (changes['config'] && this.panelClass == null)) {
+    if (changes['isNoIcon'] || (changes['config'] && this.isNoIcon == null && this.currConfig.isNoIcon != null)) {
+      this.noIcon = BooleanUtil.init(this.isNoIcon) ?? !!this.currConfig.isNoIcon;
+      // ??this.settingNoIcon(this.noIcon, this.renderer, this.hostRef);
+    }
+    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
+      this.noRipple = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
+      // ??this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
+    }
+    if (changes['isPlaceholder'] || (changes['config'] && this.isPlaceholder == null && this.currConfig.isPlaceholder != null)) {
+      this.placeholder = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
+    }
+    if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
+      this.readOnly = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
+      this.settingReadOnly(this.readOnly, this.renderer, this.hostRef);
+    }
+    if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
+      this.required = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
+      this.settingRequired(this.required, this.renderer, this.hostRef);
+    }
+    if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlign == null && this.currConfig.ornamLfAlign != null)) {
+      this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamLfAlign || this.currConfig.ornamLfAlign || null);
+      this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
+    }
+    if (changes['ornamRgAlign'] || (changes['config'] && this.ornamRgAlign == null && this.currConfig.ornamRgAlign != null)) {
+      this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamRgAlign || this.currConfig.ornamRgAlign || null);
+      this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
+    }
+    if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
       this.panelClassList = this.panelClass || this.currConfig?.panelClass;
     }
-    if (changes['position'] || (changes['config'] && this.position == null)) {
+    if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       this.positionList = this.getPositionList(this.position || this.currConfig?.position);
     }
-    if (changes['visibleSize'] || (changes['config'] && this.visibleSize == null)) {
+    if (changes['visibleSize'] || (changes['config'] && this.visibleSize == null && this.currConfig.visibleSize != null)) {
       this.visibleSizeVal = this.visibleSize || this.currConfig?.visibleSize || null;
     }
   }
 
-  public override ngOnInit(): void {
-    super.ngOnInit();
+  public ngOnInit(): void {
+    // Update ID value if it is missing.
+    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
+
     if (this.backdropClassVal == null) {
       this.backdropClassVal = this.currConfig?.backdropClass || null;
     }
     if (this.checkmark == null) {
-      this.checkmark = this.currConfig?.isCheckmark || null;
+      this.checkmark = !!this.currConfig.isCheckmark;
+      this.settingCheckmark(this.checkmark, this.renderer, this.hostRef);
+    }
+    if (this.error == null) {
+      this.error = !!this.currConfig.isError;
+      this.settingError(this.error, this.renderer, this.hostRef);
     }
     if (this.multiple == null) {
-      this.multiple = this.currConfig?.isMultiple || null;
-    }
-    if (this.noAnimation == null) {
-      this.noAnimation = this.currConfig?.isNoAnimation || null;
+      this.multiple = !!this.currConfig.isMultiple;
+      this.settingMultiple(this.multiple, this.renderer, this.hostRef);
     }
     if (this.noIcon == null) {
-      this.noIcon = this.currConfig?.isNoIcon || null;
+      this.noIcon = !!this.currConfig.isNoIcon;
+      // ??this.settingNoIcon(this.noIcon, this.renderer, this.hostRef);
     }
     if (this.noRipple == null) {
-      this.noRipple = this.currConfig?.isNoRipple || null;
+      this.noRipple = !!this.currConfig.isNoRipple;
+      // ??this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
     }
-    if (this.currConfig?.overlayPanelClass) {
+    if (this.placeholder == null) {
+      this.placeholder = !!this.currConfig.isPlaceholder;
+    }
+    if (this.readOnly == null) {
+      this.readOnly = !!this.currConfig.isReadOnly;
+      this.settingReadOnly(this.readOnly, this.renderer, this.hostRef);
+    }
+    if (this.required == null) {
+      this.required = !!this.currConfig.isRequired;
+      this.settingRequired(this.required, this.renderer, this.hostRef);
+    }
+    if (this.ornamLfAlignVal == null) {
+      this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.currConfig.ornamLfAlign || null);
+      this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
+    }
+    if (this.ornamRgAlignVal == null) {
+      this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.currConfig.ornamRgAlign || null);
+      this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
+    }
+    if (this.currConfig.overlayPanelClass != null) {
       this.overlayPanelClass = this.currConfig.overlayPanelClass;
     }
     if (this.panelClassList == null) {
@@ -336,7 +398,7 @@ export class GlnSelectComponent
     }
   }
 
-  public override ngAfterContentInit(): void {
+  public ngAfterContentInit(): void {
     // Initialized when the value is received via "writeValue()" but the list of menu items is just now.
     if (this.selectedOptions.length === 0 && this.options.length > 0) {
       const newValue = this.valueData;
@@ -348,7 +410,11 @@ export class GlnSelectComponent
         this.changeDetectorRef.markForCheck();
       });
     }
-    super.ngAfterContentInit();
+    // When using [(ngModel)] parentFormGroup will be null.
+    if (!this.parentFormGroup) {
+      // Add an attribute that disables animation on initialization.
+      this.isAttrHideAnimation = true;
+    }
   }
 
   public ngAfterViewInit(): void {
@@ -362,16 +428,43 @@ export class GlnSelectComponent
 
   // ** interface ControlValueAccessor - start **
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-  public override writeValue(value: any): void {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public onChange: (val: unknown) => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public onTouched: () => void = () => {};
+
+  public writeValue(value: any): void {
     this.value = value;
-    super.writeValue(value);
+    const isFilledOld = !!this.formControl.value;
+    this.formControl.setValue(value, { emitEvent: false });
+    this.isFilled = this.formControl.value !== '' && this.formControl.value != null;
+    if (isFilledOld !== this.isFilled) {
+      this.changeDetectorRef.markForCheck();
+    }
+    if (this.isAttrHideAnimation) {
+      // Remove an attribute that disables animation on initialization.
+      this.isAttrHideAnimation = false;
+    }
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+  public registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+  public registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
-  public override setDisabledState(isDisabled: boolean): void {
-    if (this.disabled !== isDisabled) {
-      isDisabled ? this.formGroup.disable() : this.formGroup.enable();
-      super.setDisabledState(isDisabled);
+  public setDisabledState(disabled: boolean): void {
+    if (this.disabled !== disabled) {
+      this.disabled = disabled;
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', disabled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', disabled ? '' : null);
+      if (disabled && !this.formControl.disabled) {
+        this.formControl.disable();
+      } else if (!disabled && this.formControl.disabled) {
+        this.formControl.enable();
+      }
     }
   }
 
@@ -418,6 +511,10 @@ export class GlnSelectComponent
 
   // ** Public methods **
 
+  public getBoolean(value: string | boolean | null | undefined): boolean | null {
+    return BooleanUtil.init(value);
+  }
+
   public trackByOption(index: number, item: GlnOptionComponent): string {
     return item.id;
   }
@@ -440,7 +537,7 @@ export class GlnSelectComponent
   }
 
   public focus(): void {
-    if (!this.disabled && isPlatformBrowser(this.platformId)) {
+    if (!this.disabled && isPlatformBrowser(this.platformId) && !!this.frameRef) {
       this.frameRef.nativeElement.focus();
     }
   }
@@ -449,6 +546,7 @@ export class GlnSelectComponent
     if (!this.disabled) {
       const isFocusedEmit = !this.isFocused;
       this.isFocused = true;
+      this.settingFocus(this.isFocused, this.renderer, this.hostRef);
       if (isFocusedEmit) {
         this.focused.emit();
       }
@@ -675,6 +773,37 @@ export class GlnSelectComponent
 
   // ** Private API **
 
+  private settingCheckmark(checkmark: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-checkmark', !!checkmark);
+    HtmlElemUtil.setAttr(renderer, elem, 'che', checkmark ? '' : null);
+  }
+  private settingError(error: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-error', !!error);
+    HtmlElemUtil.setAttr(renderer, elem, 'err', error ? '' : null);
+  }
+  private settingFocus(focus: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-focused', !!focus);
+    HtmlElemUtil.setAttr(renderer, elem, 'foc', focus ? '' : null);
+  }
+  private settingMultiple(multiple: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-multiple', !!multiple);
+    HtmlElemUtil.setAttr(renderer, elem, 'mul', multiple ? '' : null);
+  }
+  private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!readOnly);
+    HtmlElemUtil.setAttr(renderer, elem, 'rea', readOnly ? '' : null);
+  }
+  private settingRequired(required: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-required', !!required);
+    HtmlElemUtil.setAttr(renderer, elem, 'req', required ? '' : null);
+  }
+  private settingOrnamLfAlign(ornamLfAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setAttr(renderer, elem, 'orn-lft', ornamLfAlign?.toString());
+  }
+  private settingOrnamRgAlign(ornamRgAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setAttr(renderer, elem, 'orn-rgh', ornamRgAlign?.toString());
+  }
+
   private updateSelectedOptions(added: GlnOptionComponent[], removed: GlnOptionComponent[], isEmit: boolean): unknown[] {
     this.selectedOptions = this.mergeOptions(this.selectedOptions, added, removed);
 
@@ -686,7 +815,7 @@ export class GlnSelectComponent
       this.selected.emit({ value: !this.multiple ? value : null, values: this.multiple ? values : [], change: { added, removed } });
     }
     // Update the position once the zone is stable so that the overlay will be fully rendered.
-    this.ngZone.onStable.pipe(take(1)).subscribe(() => {
+    this.ngZone.onStable.pipe(first()).subscribe(() => {
       this.connectedOverlay.overlayRef.updatePosition();
     });
     return values;
