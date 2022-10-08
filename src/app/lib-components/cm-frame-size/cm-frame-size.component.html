@@ -37,9 +37,6 @@
     in the "config.frameSizeValue" property, we define the required height in pixels.
     In this case "parameter frameSize" and "config.frameSize" should not be used.
   </p>
-  <p>
-    In order to hide the label (legend), add the "isNoLabel" attribute.
-  </p>
 </section>
 
 <section mr-vr>
@@ -58,8 +55,8 @@
 <section mr-vr>
   <label>
     <input type="checkbox"
-      (change)="isNoLabel02a=!isNoLabel02a" />
-    is no Label
+      (change)="hideLabel02a=!hideLabel02a" />
+    hide Label
   </label>
 </section>
 
@@ -75,8 +72,7 @@
         </small>
       </div>
       <gln-input formControlName="model02a"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02a ? '':null"
+        [label]="hideLabel02a ? null : 'Enter value'"
         frameSize="short"
         [exterior]="exterior02a">
       </gln-input>
@@ -91,8 +87,7 @@
         </small>
       </div>
       <gln-input formControlName="model02b"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02a ? '':null"
+        [label]="hideLabel02a ? null : 'Enter value'"
         frameSize="small"
         [exterior]="exterior02a">
       </gln-input>
@@ -107,8 +102,7 @@
         </small>
       </div>
       <gln-input formControlName="model02c"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02a ? '':null"
+        [label]="hideLabel02a ? null : 'Enter value'"
         frameSize="middle"
         [exterior]="exterior02a">
       </gln-input>
@@ -123,8 +117,7 @@
         </small>
       </div>
       <gln-input formControlName="model02d"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02a ? '':null"
+        [label]="hideLabel02a ? null : 'Enter value'"
         frameSize="wide"
         [exterior]="exterior02a">
       </gln-input>
@@ -140,8 +133,7 @@
       </div>
       <gln-input formControlName="model02e"
         class="fs-large"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02a ? '':null"
+        [label]="hideLabel02a ? null : 'Enter value'"
         frameSize="large"
         [exterior]="exterior02a">
       </gln-input>
@@ -157,8 +149,7 @@
       </div>
       <gln-input formControlName="model02f"
         class="fs-huge"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02a ? '':null"
+        [label]="hideLabel02a ? null : 'Enter value'"
         frameSize="huge"
         [exterior]="exterior02a">
       </gln-input>
@@ -188,8 +179,7 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02a"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02a ? '':null"
+        [label]="hideLabel02a ? null : 'Enter value'"
         frameSize="short"
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
@@ -204,8 +194,7 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02b"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02a ? '':null"
+        [label]="hideLabel02a ? null : 'Enter value'"
         frameSize="small"
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
@@ -220,8 +209,7 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02c"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02a ? '':null"
+        [label]="hideLabel02a ? null : 'Enter value'"
         frameSize="middle"
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
@@ -236,8 +224,7 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02d"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02a ? '':null"
+        [label]="hideLabel02a ? null : 'Enter value'"
         frameSize="wide"
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
@@ -253,8 +240,7 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model02e"
         class="fs-large"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02a ? '':null"
+        [label]="hideLabel02a ? null : 'Enter value'"
         frameSize="large"
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
@@ -270,8 +256,7 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model02f"
         class="fs-huge"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02a ? '':null"
+        [label]="hideLabel02a ? null : 'Enter value'"
         frameSize="huge"
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
@@ -305,7 +290,7 @@ export class FrameComponent &#123;
     model02f: new FormControl('Demo Size Huge', []),
   &#125;);
   public exterior02 = 'outlined';
-  public isNoLabel02a = false;
+  public hideLabel02a = false;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -357,8 +342,8 @@ app-frame &#123;
 <section mr-vr>
   <label>
     <input type="checkbox"
-      (change)="isNoLabel02b=!isNoLabel02b" />
-    is no label
+      (change)="hideLabel02b=!hideLabel02b" />
+    hide label
   </label>
 </section>
 
@@ -372,8 +357,7 @@ app-frame &#123;
         <small><em>"frameSize" height: 57px; font-size: 16px;</em></small>
       </div>
       <gln-input formControlName="model02g"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02b ? '':null"
+        [label]="hideLabel02b ? null : 'Enter value'"
         helperText="Custom height settings 57px."
         frameSize="57"
         [exterior]="exterior02b">
@@ -388,8 +372,7 @@ app-frame &#123;
       </div>
       <gln-input formControlName="model02h"
         class="fs-large"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02b ? '':null"
+        [label]="hideLabel02b ? null : 'Enter value'"
         helperText="Custom height settings 57px."
         [config]="{ frameSize: '57' }"
         [exterior]="exterior02b">
@@ -404,8 +387,7 @@ app-frame &#123;
       </div>
       <gln-input formControlName="model02i"
         class="fs-huge"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02b ? '':null"
+        [label]="hideLabel02b ? null : 'Enter value'"
         helperText="Custom height settings 57px."
         [config]="{ frameSize: '57' }"
         [exterior]="exterior02b">
@@ -434,8 +416,7 @@ app-frame &#123;
         &lt;small&gt;&lt;em&gt;"frameSize" height: 57px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02g"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02b ? '':null"
+        [label]="hideLabel02b ? null : 'Enter value'"
         helperText="Custom height settings 57px."
         frameSize="57"
         [exterior]="exterior02b"&gt;
@@ -450,8 +431,7 @@ app-frame &#123;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02h"
         class="fs-large"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02b ? '':null"
+        [label]="hideLabel02b ? null : 'Enter value'"
         helperText="Custom height settings 57px."
         [config]="&#123; frameSize: '57' &#125;"
         [exterior]="exterior02b"&gt;
@@ -466,8 +446,7 @@ app-frame &#123;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02i"
         class="fs-huge"
-        label="Enter value"
-        [isNoLabel]="isNoLabel02b ? '':null"
+        [label]="hideLabel02b ? null : 'Enter value'"
         helperText="Custom height settings 57px."
         [config]="&#123; frameSize: '57' &#125;"
         [exterior]="exterior02b"&gt;
@@ -499,7 +478,7 @@ export class FrameComponent &#123;
     model02i: new FormControl('Demo Size Config', []),
   &#125;);
   public exterior02b = 'outlined';
-  public isNoLabel02b = false;
+  public hideLabel02b = false;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

@@ -15,8 +15,8 @@
     This requires adding the "isLabelShrink" attribute.
   </p>
   <p>
-    Another example, you need to hide the legend display.
-    This requires adding the "isNoLabel" attribute.
+    Another example, if you require a component without a legend,
+    then simply leave out the "label" parameter.
   </p>
 </section>
 
@@ -53,11 +53,9 @@
 
     <div class="app-elem">
       <div>
-        <small><em>Attribute: isNoLabel.</em></small>
+        <small><em>Attribute: without Label.</em></small>
       </div>
       <gln-input formControlName="model03b"
-        label="isNoLabel"
-        isNoLabel
         helperText="The label is not displayed."
         [exterior]="exterior03a">
       </gln-input>
@@ -96,11 +94,9 @@
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
-        &lt;small&gt;&lt;em&gt;Attribute: isNoLabel.&lt;/em&gt;&lt;/small&gt;
+        &lt;small&gt;&lt;em&gt;Attribute: without Label.&lt;/em&gt;&lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model03b"
-        label="isNoLabel"
-        isNoLabel
         helperText="The label is not displayed."
         [exterior]="exterior03a"&gt;
       &lt;/gln-input&gt;

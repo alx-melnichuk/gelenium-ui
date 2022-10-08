@@ -46,7 +46,7 @@ export class CmFrameSizeComponent {
     model02f: new FormControl('Demo Size Huge', []),
   });
   public exterior02a = 'outlined';
-  public isNoLabel02a = false;
+  public hideLabel02a = false;
 
   public formGroup02b: FormGroup = new FormGroup({
     model02g: new FormControl('Demo Size Config', []),
@@ -54,7 +54,7 @@ export class CmFrameSizeComponent {
     model02i: new FormControl('Demo Size Config', []),
   });
   public exterior02b = 'outlined';
-  public isNoLabel02b = false;
+  public hideLabel02b = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

@@ -45,7 +45,7 @@ export class CmFrameBorderRadiusComponent {
 
   public exterior05 = 'outlined';
   public isAddPadding05 = true;
-  public isNoLabel05 = false;
+  public hideLabel05 = false;
 
   public formGroup05: FormGroup = new FormGroup({
     model05a: new FormControl('Demo Size Short', []),
@@ -57,7 +57,7 @@ export class CmFrameBorderRadiusComponent {
   });
 
   public isAddPadding06 = true;
-  public isNoLabel06 = false;
+  public hideLabel06 = false;
 
   public formGroup06: FormGroup = new FormGroup({
     model06a: new FormControl('Demo - A', []),

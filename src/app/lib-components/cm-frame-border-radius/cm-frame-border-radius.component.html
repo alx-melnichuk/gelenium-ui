@@ -115,8 +115,8 @@
 <section mr-vr>
   <label>
     <input type="checkbox"
-      (change)="isNoLabel05=!isNoLabel05" />
-    is no Label
+      (change)="hideLabel05=!hideLabel05" />
+    hide Label
   </label>
 </section>
 
@@ -138,8 +138,7 @@
         </small>
       </div>
       <gln-input formControlName="model05a"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="short"
         [exterior]="exterior05">
       </gln-input>
@@ -159,8 +158,7 @@
         </small>
       </div>
       <gln-input formControlName="model05b"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="small"
         [exterior]="exterior05">
       </gln-input>
@@ -180,8 +178,7 @@
         </small>
       </div>
       <gln-input formControlName="model05c"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="middle"
         [exterior]="exterior05">
       </gln-input>
@@ -201,8 +198,7 @@
         </small>
       </div>
       <gln-input formControlName="model05d"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="wide"
         [exterior]="exterior05">
       </gln-input>
@@ -223,8 +219,7 @@
       </div>
       <gln-input formControlName="model05e"
         class="fbr-large"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="large"
         [exterior]="exterior05">
       </gln-input>
@@ -245,8 +240,7 @@
       </div>
       <gln-input formControlName="model05f"
         class="fbr-huge"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="huge"
         [exterior]="exterior05">
       </gln-input>
@@ -281,8 +275,7 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model05a"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="short"
         [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
@@ -302,8 +295,7 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model05b"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="small"
         [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
@@ -323,8 +315,7 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model05c"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="middle"
         [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
@@ -344,8 +335,7 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model05d"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="wide"
         [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
@@ -366,8 +356,7 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model05e"
         class="fbr-large"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="large"
         [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
@@ -388,8 +377,7 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model05f"
         class="fbr-huge"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="huge"
         [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
@@ -420,7 +408,7 @@ export class FrameComponent &#123;
 
   public exterior05 = 'outlined';
   public isAddPadding05 = true;
-  public isNoLabel05 = false;
+  public hideLabel05 = false;
 
   public formGroup05: FormGroup = new FormGroup(&#123;
     model05a: new FormControl('Demo Size Short', []),
@@ -493,8 +481,8 @@ app-frame &#123;
 <section mr-vr>
   <label>
     <input type="checkbox"
-      (change)="isNoLabel06=!isNoLabel06" />
-    is no Label
+      (change)="hideLabel06=!hideLabel06" />
+    hide Label
   </label>
 </section>
 
@@ -519,8 +507,7 @@ app-frame &#123;
       <gln-input [attr.style]="'--glnfr-br-rd: 12.5px 0px 0px 12.5px;'
         + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06a"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
+        [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined">
       </gln-input>
     </div>
@@ -534,8 +521,7 @@ app-frame &#123;
       <gln-input [attr.style]="'--glnfr-br-rd: 0px 12.5px 12.5px 0px;'
         + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06b"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
+        [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined">
       </gln-input>
     </div>
@@ -549,8 +535,7 @@ app-frame &#123;
       <gln-input [attr.style]="'--glnfr-br-rd: 12.5px 0px 12.5px 0px;'
         + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06c"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
+        [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined">
       </gln-input>
     </div>
@@ -564,8 +549,7 @@ app-frame &#123;
       <gln-input [attr.style]="'--glnfr-br-rd: 0px 12.5px 0px 12.5px;'
         + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06d"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
+        [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined">
       </gln-input>
     </div>
@@ -579,8 +563,7 @@ app-frame &#123;
       <gln-input [attr.style]="'--glnfr-br-rd: 5% / 50%;'
         + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06e"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
+        [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined">
       </gln-input>
     </div>
@@ -605,8 +588,7 @@ app-frame &#123;
       <gln-input class="radius-f"
         [attr.style]="(isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06f"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
+        [label]="hideLabel06 ? null : 'Enter value'"
         exterior="underline">
       </gln-input>
     </div>
@@ -645,8 +627,7 @@ app-frame &#123;
       &lt;gln-input [attr.style]="'--glnfr-br-rd: 12.5px 0px 0px 12.5px;'
         + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06a"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
+        [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -660,8 +641,7 @@ app-frame &#123;
       &lt;gln-input [attr.style]="'--glnfr-br-rd: 0px 12.5px 12.5px 0px;'
         + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06b"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
+        [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -675,8 +655,7 @@ app-frame &#123;
       &lt;gln-input [attr.style]="'--glnfr-br-rd: 12.5px 0px 12.5px 0px;'
         + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06c"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
+        [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -690,8 +669,7 @@ app-frame &#123;
       &lt;gln-input [attr.style]="'--glnfr-br-rd: 0px 12.5px 0px 12.5px;'
         + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06d"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
+        [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -705,8 +683,7 @@ app-frame &#123;
       &lt;gln-input [attr.style]="'--glnfr-br-rd: 5% / 50%;'
         + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06e"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
+        [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -731,8 +708,7 @@ app-frame &#123;
       &lt;gln-input class="radius-f"
         [attr.style]="(isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06f"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
+        [label]="hideLabel06 ? null : 'Enter value'"
         exterior="underline"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -757,7 +733,7 @@ import &#123;
 &#125;)
 export class FrameComponent &#123;
   public isAddPadding06 = true;
-  public isNoLabel06 = false;
+  public hideLabel06 = false;
 
   public formGroup06: FormGroup = new FormGroup(&#123;
     model06a: new FormControl('Demo - A', []),
