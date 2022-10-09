@@ -40,12 +40,13 @@ export class CmSelectAttributesComponent {
   public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
 
   public exterior02a = 'outlined';
-  public formGroup02a: FormGroup = new FormGroup({
+  public control02a = {
     model02a: new FormControl(null, []),
     model02b: new FormControl(this.fruits[0], [Validators.required]),
     model02c: new FormControl(this.fruits[0], []),
     model02d: new FormControl(this.fruits[0], []),
-  });
+  };
+  public formGroup02a: FormGroup = new FormGroup(this.control02a);
 
   public exterior02b = 'outlined';
   public control02b = {
@@ -97,7 +98,12 @@ export class CmSelectAttributesComponent {
   public formGroup02e: FormGroup = new FormGroup(this.control02e);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor() {
+    // setTimeout(() => {
+    //   const control: FormControl = this.control02a['model02a'];
+    //   control.setValue(this.fruits[1]);
+    // }, 4000);
+  }
 
   public capitalizeFirstLetter(value: string): string {
     return value ? value[0].toUpperCase() + value.slice(1) : '';

@@ -32,8 +32,6 @@ import {
   AbstractControl,
   ControlContainer,
   ControlValueAccessor,
-  FormControl,
-  FormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
@@ -102,6 +100,7 @@ export class GlnSelectComponent
   @Input()
   public helperText: string | null | undefined;
   @Input()
+  /** Flag for displaying a "checkbox" for each option. (only for isMultiple) */
   public isCheckmark: string | boolean | null | undefined;
   @Input()
   public isDisabled: string | boolean | null | undefined;
@@ -114,11 +113,11 @@ export class GlnSelectComponent
   @Input()
   public isNoAnimation: string | boolean | null | undefined;
   @Input()
+  /** Disable the display of the icon - the status of the state of the open list. */
   public isNoIcon: string | boolean | null | undefined;
   @Input()
+  /** This property to turn off the ripple effect. */
   public isNoRipple: string | boolean | null | undefined;
-  @Input()
-  public isPlaceholder: string | boolean | null | undefined;
   @Input()
   public isReadOnly: string | boolean | null | undefined;
   @Input()
@@ -188,8 +187,6 @@ export class GlnSelectComponent
   protected connectedOverlay!: CdkConnectedOverlay;
   @ContentChild(GLN_SELECT_TRIGGER)
   public customTrigger: GlnSelectTriggerDirective | undefined;
-  @ViewChild('frameRef', { read: ElementRef, static: true })
-  public frameRef!: ElementRef<HTMLElement>;
   @ViewChild(GlnFrameComponent, { static: true })
   public frameComp!: GlnFrameComponent;
   /** A trigger that opens a dropdown list of options. */
@@ -227,8 +224,6 @@ export class GlnSelectComponent
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public error: boolean | null = null; // Binding attribute "isError".
   public errors: ValidationErrors | null = null;
-  public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
-  public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public hasPanelAnimation = false;
   public isAttrHideAnimation: boolean | undefined;
@@ -302,14 +297,11 @@ export class GlnSelectComponent
     }
     if (changes['isNoIcon'] || (changes['config'] && this.isNoIcon == null && this.currConfig.isNoIcon != null)) {
       this.noIcon = BooleanUtil.init(this.isNoIcon) ?? !!this.currConfig.isNoIcon;
-      // ??this.settingNoIcon(this.noIcon, this.renderer, this.hostRef);
+      this.settingNoIcon(this.noIcon, this.renderer, this.hostRef);
     }
     if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
       this.noRipple = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
-      // ??this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
-    }
-    if (changes['isPlaceholder'] || (changes['config'] && this.isPlaceholder == null && this.currConfig.isPlaceholder != null)) {
-      this.placeholder = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
+      this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
     }
     if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
       this.readOnly = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
@@ -359,14 +351,11 @@ export class GlnSelectComponent
     }
     if (this.noIcon == null) {
       this.noIcon = !!this.currConfig.isNoIcon;
-      // ??this.settingNoIcon(this.noIcon, this.renderer, this.hostRef);
+      this.settingNoIcon(this.noIcon, this.renderer, this.hostRef);
     }
     if (this.noRipple == null) {
       this.noRipple = !!this.currConfig.isNoRipple;
-      // ??this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
-    }
-    if (this.placeholder == null) {
-      this.placeholder = !!this.currConfig.isPlaceholder;
+      this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
     }
     if (this.readOnly == null) {
       this.readOnly = !!this.currConfig.isReadOnly;
@@ -404,11 +393,6 @@ export class GlnSelectComponent
       const newValue = this.valueData;
       this.valueData = undefined;
       this.value = newValue;
-      // If the template is already rendered at the moment, then it is possible that these changes will not be displayed.
-      // To solve this problem, we call a redraw via Promise.
-      Promise.resolve().then(() => {
-        this.changeDetectorRef.markForCheck();
-      });
     }
     // When using [(ngModel)] parentFormGroup will be null.
     if (!this.parentFormGroup) {
@@ -435,12 +419,6 @@ export class GlnSelectComponent
 
   public writeValue(value: any): void {
     this.value = value;
-    const isFilledOld = !!this.formControl.value;
-    this.formControl.setValue(value, { emitEvent: false });
-    this.isFilled = this.formControl.value !== '' && this.formControl.value != null;
-    if (isFilledOld !== this.isFilled) {
-      this.changeDetectorRef.markForCheck();
-    }
     if (this.isAttrHideAnimation) {
       // Remove an attribute that disables animation on initialization.
       this.isAttrHideAnimation = false;
@@ -460,11 +438,6 @@ export class GlnSelectComponent
       this.disabled = disabled;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', disabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', disabled ? '' : null);
-      if (disabled && !this.formControl.disabled) {
-        this.formControl.disable();
-      } else if (!disabled && this.formControl.disabled) {
-        this.formControl.enable();
-      }
     }
   }
 
@@ -537,8 +510,8 @@ export class GlnSelectComponent
   }
 
   public focus(): void {
-    if (!this.disabled && isPlatformBrowser(this.platformId) && !!this.frameRef) {
-      this.frameRef.nativeElement.focus();
+    if (!this.disabled && isPlatformBrowser(this.platformId) && !!this.frameComp.hostRef) {
+      this.frameComp.hostRef.nativeElement.focus();
     }
   }
 
@@ -576,7 +549,7 @@ export class GlnSelectComponent
         // (Cases-B4) Panel is open and mouse click outside of panel but on trigger.
         // For case Cases-B3,B4, let's add the "foc" attribute to force the display of focus.
         this.isFocusAttrOnFrame = true;
-        HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, '');
+        HtmlElemUtil.setAttr(this.renderer, this.frameComp.hostRef, CSS_ATTR_FOR_FRAME_FOCUS, '');
       }
     }
   }
@@ -630,7 +603,7 @@ export class GlnSelectComponent
       return;
     }
     if (this.isFocusAttrOnFrame) {
-      HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, null);
+      HtmlElemUtil.setAttr(this.renderer, this.frameComp.hostRef, CSS_ATTR_FOR_FRAME_FOCUS, null);
     }
     this.isPanelOpen = false;
     this.changeDetectorRef.markForCheck();
@@ -788,6 +761,14 @@ export class GlnSelectComponent
   private settingMultiple(multiple: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-multiple', !!multiple);
     HtmlElemUtil.setAttr(renderer, elem, 'mul', multiple ? '' : null);
+  }
+  private settingNoIcon(noIcon: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-icon', !!noIcon);
+    HtmlElemUtil.setAttr(renderer, elem, 'noico', noIcon ? '' : null);
+  }
+  private settingNoRipple(noRipple: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-ripple', !!noRipple);
+    HtmlElemUtil.setAttr(renderer, elem, 'norip', noRipple ? '' : null);
   }
   private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!readOnly);
