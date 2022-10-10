@@ -23,19 +23,26 @@
       </ul>
     </li>
     <li>
-      "isRequired" - a sign that the field is required (isRequired);
-    </li>
-    <li>
       "helperText" - the parameter is used to provide context for a given
       field or error message (helperText="A value must be entered.");
     </li>
-    <li>"label" - The content of the label.</li>
     <li>
       "isDisabled" - a sign that the field is disabled (isDisabled);
     </li>
     <li>
-      "wdFull" - an attribute sets the width to the width of the parent (width: 100%).
+      "isError" - a sign that the field is in error (isError);
     </li>
+    <li>
+      "isLabelShrink" - a sign that the field has a permanent label,
+      without being converted to a placeholder (isLabelShrink);
+    </li>
+    <li>
+      "isReadOnly" - a sign that the field is read-only (isReadOnly);
+    </li>
+    <li>
+      "isRequired" - a sign that the field is required (isRequired);
+    </li>
+    <li>"label" - The content of the label.</li>
   </ul>
 </section>
 
@@ -61,7 +68,7 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>State: empty.</em>
+          <em>Attributes: id, label.</em>
         </small>
       </div>
       <gln-select formControlName="model02a"
@@ -98,13 +105,13 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: isNoLabel.</em>
+          <em>Attribute: isReadOnly.</em>
         </small>
       </div>
       <gln-select formControlName="model02c"
-        label="isNoLabel"
-        isNoLabel
-        helperText="The label is not displayed."
+        label="Read Only"
+        isReadOnly
+        helperText="The parameter is read only."
         [exterior]="exterior02a"
         wdFull>
         <gln-option><em>None</em></gln-option>
@@ -124,6 +131,25 @@
         label="Disabled"
         isDisabled
         helperText="The parameter is disabled."
+        [exterior]="exterior02a"
+        wdFull>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isLabelShrink.</em>
+        </small>
+      </div>
+      <gln-select formControlName="model02e"
+        label="Permanent label"
+        isLabelShrink
+        helperText="The position of the label is fixed."
         [exterior]="exterior02a"
         wdFull>
         <gln-option><em>None</em></gln-option>
@@ -155,7 +181,7 @@
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;State: empty.&lt;/em&gt;
+          &lt;em&gt;Attributes: id, label.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-select formControlName="model02a"
@@ -192,13 +218,13 @@
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: isNoLabel.&lt;/em&gt;
+          &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-select formControlName="model02c"
-        label="isNoLabel"
-        isNoLabel
-        helperText="The label is not displayed."
+        label="Read Only"
+        isReadOnly
+        helperText="The parameter is read only."
         [exterior]="exterior02a"
         wdFull&gt;
         &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
@@ -218,6 +244,25 @@
         label="Disabled"
         isDisabled
         helperText="The parameter is disabled."
+        [exterior]="exterior02a"
+        wdFull&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isLabelShrink.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model02e"
+        label="Permanent label"
+        isLabelShrink
+        helperText="The position of the label is fixed."
         [exterior]="exterior02a"
         wdFull&gt;
         &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
@@ -250,247 +295,14 @@ export class SelectComponent &#123;
   public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
 
   public exterior02a = 'outlined';
-  public formGroup02a: FormGroup = new FormGroup(&#123;
+  public control02a = &#123;
     model02a: new FormControl(null, []),
     model02b: new FormControl(this.fruits[0], [Validators.required]),
     model02c: new FormControl(this.fruits[0], []),
     model02d: new FormControl(this.fruits[0], []),
-  &#125;);
-
-  public capitalizeFirstLetter(value: string): string &#123;
-    return value ? value[0].toUpperCase() + value.slice(1) : '';
-  &#125;
-&#125;</pre></code>
-        </mat-tab>
-        <mat-tab [label]="labelCss">
-          <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;</pre></code>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-expansion-panel>
-  </mat-accordion>
-</section>
-
-<hr br-nn />
-
-<section *ngIf="false"
-  mr-vr
-  id="attributes-supported02">
-  <h4 class="app-hover-link">
-    Attributes are also supported:
-    <a [href]="urlCmSelect + '#attributes-supported02'">#</a>
-  </h4>
-  <ul>
-    <li>
-      "isLabelShrink" - a sign that the field has a permanent label,
-      without being converted to a placeholder (isLabelShrink);
-    </li>
-    <li>
-      "isError" - a sign that the field is in error (isError);
-    </li>
-    <li>
-      "isReadOnly" - a sign that the field is read-only (isReadOnly);
-    </li>
-  </ul>
-</section>
-
-
-<section *ngIf="false"
-  mr-vr>
-  <span>exterior: </span>
-  <mat-button-toggle-group value="exterior02b"
-    (change)="exterior02b=$event.value">
-    <mat-button-toggle [checked]="exterior02b==='outlined'"
-      value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02b==='underline'"
-      value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02b==='standard'"
-      value="standard">{{ labelStandard }}</mat-button-toggle>
-  </mat-button-toggle-group>
-</section>
-
-<form *ngIf="false"
-  [formGroup]="formGroup02b"
-  novalidate
-  autocomplete="off">
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isLabelShrink.</em>
-        </small>
-      </div>
-      <gln-select formControlName="model02e"
-        label="Permanent label"
-        isLabelShrink
-        helperText="The position of the label is fixed."
-        [exterior]="exterior02b"
-        wdFull>
-        <gln-option><em>None</em></gln-option>
-        <gln-option *ngFor="let item of fruits"
-          [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-select>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isError.</em>
-        </small>
-      </div>
-      <gln-select formControlName="model02f"
-        [label]="!control02b.model02f.value
-          ? 'Requires a value':'Parameter value'"
-        [isError]="!control02b.model02f.value ? '':null"
-        [helperText]="control02b.model02f.value
-          ? 'The field is filled.'
-          : 'The field is not filled.'"
-        [exterior]="exterior02b"
-        wdFull>
-        <gln-option><em>None</em></gln-option>
-        <gln-option *ngFor="let item of fruits"
-          [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-select>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isReadOnly.</em>
-        </small>
-      </div>
-      <gln-select formControlName="model02g"
-        label="Read Only"
-        isReadOnly
-        helperText="The parameter is read only."
-        [exterior]="exterior02b"
-        wdFull>
-        <gln-option><em>None</em></gln-option>
-        <gln-option *ngFor="let item of fruits"
-          [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-select>
-    </div>
-
-  </div>
-
-</form>
-
-<section mr-vr>
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-tab-group animationDuration="0ms">
-        <mat-tab [label]="labelHtml">
-          <code><pre source="html">
-&lt;form [formGroup]="formGroup02b"
-  novalidate
-  autocomplete="off"&gt;
-
-  &lt;div class="app-group"&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attribute: isLabelShrink.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-select formControlName="model02e"
-        label="Permanent label"
-        isLabelShrink
-        helperText="The position of the label is fixed."
-        [exterior]="exterior02b"
-        wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
-        &lt;gln-option *ngFor="let item of fruits"
-          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-option&gt;
-      &lt;/gln-select&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attribute: isError.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-select formControlName="model02f"
-        [label]="!control02b.model02f.value
-          ? 'Requires a value':'Parameter value'"
-        [isError]="!control02b.model02f.value ? '':null"
-        [helperText]="control02b.model02f.value
-          ? 'The field is filled.'
-          : 'The field is not filled.'"
-        [exterior]="exterior02b"
-        wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
-        &lt;gln-option *ngFor="let item of fruits"
-          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-option&gt;
-      &lt;/gln-select&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-select formControlName="model02g"
-        label="Read Only"
-        isReadOnly
-        helperText="The parameter is read only."
-        [exterior]="exterior02b"
-        wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
-        &lt;gln-option *ngFor="let item of fruits"
-          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
-        &lt;/gln-option&gt;
-      &lt;/gln-select&gt;
-    &lt;/div&gt;
-
-  &lt;/div&gt;
-
-&lt;/form&gt;</pre></code>
-        </mat-tab>
-        <mat-tab [label]="labelTs">
-          <code><pre source="ts">
-import &#123;
-  Component, ViewEncapsulation
-&#125; from '@angular/core';
-import &#123;
-  FormControl, FormGroup, Validators
-&#125; from '@angular/forms';
-
-@Component(&#123;
-  selector: 'app-select',
-  templateUrl: './select.component.html',
-  styleUrls: ['./select.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-&#125;)
-export class SelectComponent &#123;
-  public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
-
-  public exterior02b = 'outlined';
-  public control02b = &#123;
     model02e: new FormControl(null, []),
-    model02f: new FormControl(null, [Validators.required]),
-    model02g: new FormControl(this.fruits[1], []),
-&#125;;
-  public formGroup02b: FormGroup = new FormGroup(this.control02b);
+  &#125;;
+  public formGroup02a: FormGroup = new FormGroup(this.control02a);
 
   public capitalizeFirstLetter(value: string): string &#123;
     return value ? value[0].toUpperCase() + value.slice(1) : '';
@@ -499,13 +311,15 @@ export class SelectComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
+app-select &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -516,8 +330,7 @@ export class SelectComponent &#123;
 <hr br-nn />
 
 
-<section *ngIf="false"
-  mr-vr
+<section mr-vr
   id="attributes-supported03">
   <h4 class="app-hover-link">
     Attributes are also supported:
@@ -562,22 +375,20 @@ export class SelectComponent &#123;
 
 <hr br-nn />
 
-<section *ngIf="false"
-  mr-vr>
+<section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group value="exterior02c"
-    (change)="exterior02c=$event.value">
-    <mat-button-toggle [checked]="exterior02c==='outlined'"
+  <mat-button-toggle-group value="exterior02b"
+    (change)="exterior02b=$event.value">
+    <mat-button-toggle [checked]="exterior02b==='outlined'"
       value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02c==='underline'"
+    <mat-button-toggle [checked]="exterior02b==='underline'"
       value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02c==='standard'"
+    <mat-button-toggle [checked]="exterior02b==='standard'"
       value="standard">{{ labelStandard }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
 
-<form *ngIf="false"
-  [formGroup]="formGroup02c"
+<form [formGroup]="formGroup02b"
   novalidate
   autocomplete="off">
 
@@ -593,9 +404,9 @@ export class SelectComponent &#123;
         class="sa-mini"
         label="Fruit"
         position="center"
-        [exterior]="exterior02c">
+        [exterior]="exterior02b">
         <gln-option><em>None</em></gln-option>
-        <gln-option *ngFor="let item of fruitsC"
+        <gln-option *ngFor="let item of fruitsB"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
       </gln-select>
@@ -611,9 +422,9 @@ export class SelectComponent &#123;
         class="sa-mini"
         label="Fruit"
         position="end"
-        [exterior]="exterior02c">
+        [exterior]="exterior02b">
         <gln-option><em>None</em></gln-option>
-        <gln-option *ngFor="let item of fruitsC"
+        <gln-option *ngFor="let item of fruitsB"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
       </gln-select>
@@ -629,11 +440,11 @@ export class SelectComponent &#123;
         label="Fruit"
         isNoIcon
         [visibleSize]="4"
-        [exterior]="exterior02c"
+        [exterior]="exterior02b"
         helperText="The 'isNoIcon', 'visibleSize' are used."
         wdFull>
         <gln-option><em>None</em></gln-option>
-        <gln-option *ngFor="let item of fruits"
+        <gln-option *ngFor="let item of fruitsC"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
       </gln-select>
@@ -648,11 +459,11 @@ export class SelectComponent &#123;
       <gln-select formControlName="model02l"
         label="Fruit"
         isNoAnimation
-        [exterior]="exterior02c"
+        [exterior]="exterior02b"
         helperText="The 'isNoAnimation' are used."
         wdFull>
         <gln-option><em>None</em></gln-option>
-        <gln-option *ngFor="let item of fruits"
+        <gln-option *ngFor="let item of fruitsB"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
       </gln-select>
@@ -671,7 +482,7 @@ export class SelectComponent &#123;
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;form [formGroup]="formGroup02c"
+&lt;form [formGroup]="formGroup02b"
   novalidate
   autocomplete="off"&gt;
 
@@ -685,11 +496,11 @@ export class SelectComponent &#123;
       &lt;/div&gt;
       &lt;gln-select formControlName="model02i"
         class="sa-mini"
-        label="Fruit 1"
+        label="Fruit"
         position="center"
-        [exterior]="exterior02c"&gt;
+        [exterior]="exterior02b"&gt;
         &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
-        &lt;gln-option *ngFor="let item of fruitsC"
+        &lt;gln-option *ngFor="let item of fruitsB"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
       &lt;/gln-select&gt;
@@ -703,11 +514,11 @@ export class SelectComponent &#123;
       &lt;/div&gt;
       &lt;gln-select formControlName="model02j"
         class="sa-mini"
-        label="Fruit 2"
+        label="Fruit"
         position="end"
-        [exterior]="exterior02c"&gt;
+        [exterior]="exterior02b"&gt;
         &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
-        &lt;gln-option *ngFor="let item of fruitsC"
+        &lt;gln-option *ngFor="let item of fruitsB"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
       &lt;/gln-select&gt;
@@ -720,14 +531,14 @@ export class SelectComponent &#123;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-select formControlName="model02k"
-        label="Fruit 3"
+        label="Fruit"
         isNoIcon
         [visibleSize]="4"
-        [exterior]="exterior02c"
+        [exterior]="exterior02b"
         helperText="The 'isNoIcon', 'visibleSize' are used."
         wdFull&gt;
         &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
-        &lt;gln-option *ngFor="let item of fruits"
+        &lt;gln-option *ngFor="let item of fruitsC"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
       &lt;/gln-select&gt;
@@ -740,13 +551,13 @@ export class SelectComponent &#123;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-select formControlName="model02l"
-        label="Fruit 4"
+        label="Fruit"
         isNoAnimation
-        [exterior]="exterior02c"
+        [exterior]="exterior02b"
         helperText="The 'isNoAnimation' are used."
         wdFull&gt;
         &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
-        &lt;gln-option *ngFor="let item of fruits"
+        &lt;gln-option *ngFor="let item of fruitsB"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
       &lt;/gln-select&gt;
@@ -774,18 +585,21 @@ import &#123;
 export class SelectComponent &#123;
   public fruits = ['mango', 'lemon', 'orange', 'kiwi'];;
 
-  public fruitsC = [
+  public fruitsB = [
     'mango', 'ripe lemon', 'gorgeous orange', 'succulent watermelon'
   ];
-
-  public exterior02c = 'outlined';
-  public control02c = &#123;
+  public exterior02b = 'outlined';
+  public control02b = &#123;
     model02i: new FormControl(null, []),
     model02j: new FormControl(null, []),
     model02k: new FormControl(null, []),
     model02l: new FormControl(null, []),
   &#125;;
-  public formGroup02c: FormGroup = new FormGroup(this.control02c);
+  public formGroup02b: FormGroup = new FormGroup(this.control02b);
+  public fruitsC = [
+    'orange', 'grapefruit', 'lemon', 'clementine', 'mandarin',
+    'mineola', 'pomelo', 'ponkan', 'poncirus', 'citron'
+  ];
 
   public capitalizeFirstLetter(value: string): string &#123;
     return value ? value[0].toUpperCase() + value.slice(1) : '';
@@ -794,19 +608,21 @@ export class SelectComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;
-.sa-text-center &#123;
-  text-align: center;
-&#125;
-.sa-mini &#123;
-  min-width: 90px;
+app-select &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .sa-text-center &#123;
+    text-align: center;
+  &#125;
+  .sa-mini &#123;
+    min-width: 90px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -817,8 +633,7 @@ export class SelectComponent &#123;
 <hr br-nn />
 
 
-<section *ngIf="false"
-  mr-vr
+<section mr-vr
   id="attributes-supported04">
   <h4 class="app-hover-link">
     Attributes are also supported:
@@ -837,22 +652,20 @@ export class SelectComponent &#123;
   </ul>
 </section>
 
-<section *ngIf="false"
-  mr-vr>
+<section mr-vr>
   <span>exterior: </span>
-  <mat-button-toggle-group value="exterior02d"
-    (change)="exterior02d=$event.value">
-    <mat-button-toggle [checked]="exterior02d==='outlined'"
+  <mat-button-toggle-group value="exterior02c"
+    (change)="exterior02c=$event.value">
+    <mat-button-toggle [checked]="exterior02c==='outlined'"
       value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02d==='underline'"
+    <mat-button-toggle [checked]="exterior02c==='underline'"
       value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02d==='standard'"
+    <mat-button-toggle [checked]="exterior02c==='standard'"
       value="standard">{{ labelStandard }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
 
-<form *ngIf="false"
-  [formGroup]="formGroup02d"
+<form [formGroup]="formGroup02c"
   novalidate
   autocomplete="off">
 
@@ -870,7 +683,7 @@ export class SelectComponent &#123;
         isMultiple
         [visibleSize]="8"
         helperText="The 'isMultiple', 'visibleSize' are used."
-        [exterior]="exterior02d">
+        [exterior]="exterior02c">
         <gln-option *ngFor="let item of flowers"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -889,7 +702,7 @@ export class SelectComponent &#123;
         [visibleSize]="8"
         isCheckmark
         helperText="The 'isMultiple', 'isCheckmark' are used."
-        [exterior]="exterior02d"
+        [exterior]="exterior02c"
         wdFull>
         <gln-option *ngFor="let item of flowers"
           [value]="item">{{ capitalizeFirstLetter(item) }}
@@ -909,7 +722,7 @@ export class SelectComponent &#123;
         isMultiple
         [visibleSize]="8"
         helperText="The 'isNoRipple' are used."
-        [exterior]="exterior02d"
+        [exterior]="exterior02c"
         wdFull>
         <gln-option *ngFor="let item of flowers"
           [value]="item">{{ capitalizeFirstLetter(item) }}
@@ -930,7 +743,7 @@ export class SelectComponent &#123;
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;form [formGroup]="formGroup02d"
+&lt;form [formGroup]="formGroup02c"
   novalidate
   autocomplete="off"&gt;
 
@@ -948,7 +761,7 @@ export class SelectComponent &#123;
         isMultiple
         [visibleSize]="8"
         helperText="The 'isMultiple', 'visibleSize' are used."
-        [exterior]="exterior02d"&gt;
+        [exterior]="exterior02c"&gt;
         &lt;gln-option *ngFor="let item of flowers"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -967,7 +780,7 @@ export class SelectComponent &#123;
         [visibleSize]="8"
         isCheckmark
         helperText="The 'isMultiple', 'isCheckmark' are used."
-        [exterior]="exterior02d"
+        [exterior]="exterior02c"
         wdFull&gt;
         &lt;gln-option *ngFor="let item of flowers"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
@@ -987,7 +800,7 @@ export class SelectComponent &#123;
         isMultiple
         [visibleSize]="8"
         helperText="The 'isNoRipple' are used."
-        [exterior]="exterior02d"
+        [exterior]="exterior02c"
         wdFull&gt;
         &lt;gln-option *ngFor="let item of flowers"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
@@ -1030,13 +843,13 @@ export class SelectComponent &#123;
     'hyacinth',
   ];
 
-  public exterior02d = 'outlined';
-  public control02d = &#123;
+  public exterior02c = 'outlined';
+  public control02c = &#123;
     model02m: new FormControl([this.flowers[1], this.flowers[3], this.flowers[4]], []),
     model02n: new FormControl([], []),
     model02o: new FormControl([], []),
   &#125;;
-  public formGroup02d: FormGroup = new FormGroup(this.control02d);
+  public formGroup02c: FormGroup = new FormGroup(this.control02c);
 
   public capitalizeFirstLetter(value: string): string &#123;
     return value ? value[0].toUpperCase() + value.slice(1) : '';
@@ -1045,16 +858,18 @@ export class SelectComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;
-.sa-elem &#123;
-  width: 28ch;
+app-select &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .sa-elem &#123;
+    width: 28ch;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -1065,8 +880,7 @@ export class SelectComponent &#123;
 <hr br-nn />
 
 
-<section *ngIf="false"
-  mr-vr
+<section mr-vr
   id="attributes-config">
   <h4 class="app-hover-link">
     Configuration for custom height (57px).
@@ -1074,8 +888,7 @@ export class SelectComponent &#123;
   </h4>
 </section>
 
-<section *ngIf="false"
-  mr-vr>
+<section mr-vr>
   <span>exterior: </span>
   <mat-button-toggle-group value="exterior02e"
     (change)="exterior02e=$event.value">
@@ -1088,8 +901,7 @@ export class SelectComponent &#123;
   </mat-button-toggle-group>
 </section>
 
-<section *ngIf="false"
-  mr-vr>
+<section mr-vr>
   <label>
     <input type="checkbox"
       (change)="hideLabel02e=!hideLabel02e" />
@@ -1097,8 +909,7 @@ export class SelectComponent &#123;
   </label>
 </section>
 
-<form *ngIf="false"
-  [formGroup]="formGroup02e"
+<form [formGroup]="formGroup02e"
   novalidate
   autocomplete="off">
 
@@ -1249,9 +1060,9 @@ import &#123;
 &#125; from '@angular/forms';
 
 @Component(&#123;
-  selector: 'app-frame',
-  templateUrl: './frame.component.html',
-  styleUrls: ['./frame.component.scss'],
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class SelectComponent &#123;
@@ -1291,16 +1102,18 @@ export class SelectComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;
-.sa-elem &#123;
-  width: 28ch;
+app-select &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .sa-elem &#123;
+    width: 28ch;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

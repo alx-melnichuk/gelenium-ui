@@ -40,16 +40,19 @@ export class AppComponent &#123;
     GlnTextareaConfig interface.
     <a [href]="urlCmTextarea + '#config-textarea-interface'">#</a>
   </h4>
-  <p>
-    The GlnTextareaConfig interface is inherited from the GlnFrameConfig
-    (<a [href]="urlCmFrame + '#config-interface'">in more detail</a>).
-  </p>
 </section>
 
 <table class="app-tab">
   <tr>
     <th>Name</th>
     <th>Description</th>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      The list of properties that are inherited from "GlnFrameConfig" can be viewed
+      at the <a [href]="urlCmFrame + '#config-interface'">"GlnFrame#config-interface" link</a>.
+    </td>
   </tr>
 
   <tr>
@@ -171,8 +174,8 @@ const glnTextareaConfigDefault: GlnTextareaConfig = &#123;
     For example, let's specify the following parameters:
   </p>
   <code><pre source="ts">
-frameSize="wide"
 exterior="underline"
+frameSize="wide"
 isRequired</pre></code>
   <p>
     In other words, there is the following order of determining the configuration parameters:
@@ -212,7 +215,7 @@ isPlaceholder=false,</pre></code>
     <div class="app-elem">
       <div>
         <small>
-          <em>1. Default config: "outlined", "medium".</em>
+          <em>1. Default config: "outlined", "small".</em>
         </small>
       </div>
       <gln-textarea formControlName="model07a"
@@ -261,7 +264,7 @@ isPlaceholder=false,</pre></code>
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;1. Default config: "outlined", "medium".&lt;/em&gt;
+          &lt;em&gt;1. Default config: "outlined", "small".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-textarea formControlName="model07a"

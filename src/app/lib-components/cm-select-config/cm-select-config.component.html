@@ -13,8 +13,8 @@
   </p>
   <code><pre source="ts">
 const glnSelectConfigDefault: GlnSelectConfig = &#123;
-  exterior: GlnFrameExterior.outlined,
-  frameSize: GlnFrameSize.small,
+  exterior: 'underline',
+  frameSize: 'wide',
 &#125;;
 
 @Component(&#123;
@@ -33,11 +33,12 @@ export class AppComponent &#123;
   </p>
 </section>
 
+
 <section mr-vr
-  id="config-interface">
+  id="config-select-interface">
   <h4 class="app-hover-link">
     GlnSelectConfig interface.
-    <a [href]="urlCmSelect + '#config-interface'">#</a>
+    <a [href]="urlCmSelect + '#config-select-interface'">#</a>
   </h4>
 </section>
 
@@ -77,6 +78,16 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
+    <td><code>isError?: boolean;</code></td>
+    <td>
+      <span>
+        Indicates that the element is in an error state.
+        <br />(default = false;)
+      </span><br />
+      <span>(optional)</span>
+    </td>
+  </tr>
+  <tr>
     <td><code>isMultiple?:<br/>
         &nbsp;&nbsp;boolean<br/>
         &nbsp;&nbsp;| undefined;</code></td>
@@ -104,6 +115,60 @@ export class AppComponent &#123;
       <span>
         This property to turn off the ripple effect.
       </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>isReadOnly?: boolean;</code></td>
+    <td>
+      <span>
+        Indicates that the element is read-only.
+        <br />(default = false;)
+      </span><br />
+      <span>(optional)</span>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>ornamLfAlign?: string;<br/>
+      //&nbsp;GlnFrameOrnamAlignType
+      </code>
+    </td>
+    <td>
+      <span>
+        This property controls the vertical alignment for the left ornament.
+        <br />(default = 'default';)
+        It can take the following values:
+      </span>
+      <ul>
+        <li>"default" - defines the default</li>
+        <li>"center" - defines middle alignment</li>
+        <li>"flexStart" - defines top alignment</li>
+        <li>"flexEnd" - defines bottom alignment</li>
+        <li>"baseline" - defines baseline alignment</li>
+        <li>"stretch" - stretches across the entire height</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>ornamRgAlign?: string;<br/>
+      //&nbsp;GlnFrameOrnamAlignType
+      </code>
+    </td>
+    <td>
+      <span>
+        This property controls the vertical alignment of the right ornament.
+        <br />(default = 'default';)
+        It can take the following values:
+      </span>
+      <ul>
+        <li>"default" - defines the default</li>
+        <li>"center" - defines middle alignment</li>
+        <li>"flexStart" - defines top alignment</li>
+        <li>"flexEnd" - defines bottom alignment</li>
+        <li>"baseline" - defines baseline alignment</li>
+        <li>"stretch" - stretches across the entire height</li>
+      </ul>
     </td>
   </tr>
   <tr>
@@ -162,29 +227,89 @@ export class AppComponent &#123;
   </tr>
 </table>
 
+
+<section mr-vr
+  id="config-select-provide">
+  <h4 class="app-hover-link">
+    1. Configuration with "outlined" and "small".
+    <a [href]="urlCmSelect + '#config-select-provide'">#</a>
+  </h4>
+  <p>
+    For example, let's prepare a configuration in which:
+  </p>
+  <ul>
+    <li>"exterior" will have the value "outlined";</li>
+    <li>"frameSize" will have the value "small" (height to 44px);</li>
+  </ul>
+  <code><pre source="ts">
+const glnSelectConfigDefault: GlnSelectConfig = &#123;
+  exterior: 'outlined',
+  frameSize: 'small',
+&#125;;</pre></code>
+</section>
+
+
 <section mr-vr
   id="config-select-params">
   <h4 class="app-hover-link">
-    Configuration with "underline" and "wide".
+    2. Configuration with "underline" and "wide".
     <a [href]="urlCmSelect + '#config-select-params'">#</a>
   </h4>
   <p>
-    An example of using a configuration provider for frame parameters can be viewed at
-    the link "<a [href]="urlCmFrame + '#config-frame-provide'">Frame#config-frame-provide</a>".
+    Suppose we have a provider in our application with "GlnSelectConfig" and all select elements
+    accept its default values.
+    We can change these values for an individual element.
+    To do this, you need to specify in this element those properties that do not match the
+    provider's configuration.
   </p>
   <p>
     For example, let's specify the following parameters:
   </p>
   <code><pre source="ts">
-exterior: GlnFrameExterior.underline,
-frameSize: GlnFrameSize.wide,
-backdropClass: 'sc-backdrop',
-isMultiple: true,
-overlayPanelClass: ['sc-overlay-panel'],
-panelClass: ['sc-panel'],
-visibleSize: 6,
-</pre></code>
+frameSize="wide"
+exterior="underline"
+isRequired
+backdropClass='sc-backdrop'
+isMultiple=true
+overlayPanelClass=['sc-overlay-panel']
+panelClass=['sc-panel']
+visibleSize=6</pre></code>
+  <p>
+    In other words, there is the following order of determining the configuration parameters:
+  </p>
+  <ul>
+    <li>
+      Standard values are taken.
+      <code><pre source="ts">
+exterior="outlined", // GlnFrameConfig
+frameSize="middle",  // GlnFrameConfig
+isLabelShrink=false, // GlnFrameConfig
+isNoAnimation=false, // GlnFrameConfig
+isRequired=false,    // GlnFrameConfig
+
+backdropClass='cdk-overlay-transparent-backdrop'
+isCheckmark=false,
+isError=false,
+isMultiple=false,
+isNoIcon=false,
+isNoRipple=false,
+isReadOnly=false,
+ornamLfAlign='default',
+ornamRgAlign='default',
+overlayPanelClass=undefined;
+panelClass=undefined;
+position='start';
+visibleSize=0</pre></code>
+    </li>
+    <li>
+      Values from the default configuration provider (if there is one).
+    </li>
+    <li>
+      Values from input parameters (if there is one).
+    </li>
+  </ul>
 </section>
+
 
 <form [formGroup]="formGroup08a"
   novalidate
@@ -192,15 +317,34 @@ visibleSize: 6,
 
   <div class="app-group">
 
-    <div class="app-elem  sc-elem">
+    <div class="app-elem sc-elem">
       <div>
         <small>
-          <em>Default config: "underline", "medium".</em>
+          <em>1. Default config: "outlined", "small".</em>
         </small>
       </div>
       <gln-select formControlName="model08a"
-        label="Vegetarian salad"
+        label="Vegetarian salad 01"
         helperText="Choose from a list of values."
+        wdFull>
+        <gln-option *ngFor="let item of salad"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+
+    <div class="app-elem sc-elem">
+      <div>
+        <small>
+          <em>2. exterior="underline", frameSize="wide".</em>
+        </small>
+      </div>
+      <gln-select formControlName="model08b"
+        label="Vegetarian salad 02"
+        helperText="Select a value from the list."
+        frameSize="wide"
+        exterior="underline"
+        isRequired
         wdFull>
         <gln-option *ngFor="let item of salad"
           [value]="item">{{ capitalizeFirstLetter(item) }}
@@ -227,15 +371,34 @@ visibleSize: 6,
 
   &lt;div class="app-group"&gt;
 
-    &lt;div class="app-elem  sc-elem"&gt;
+    &lt;div class="app-elem sc-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Default config: "underline", "medium".&lt;/em&gt;
+          &lt;em&gt;1. Default config: "outlined", "small".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-select formControlName="model08a"
-        label="Vegetarian salad"
+        label="Vegetarian salad 01"
         helperText="Choose from a list of values."
+        wdFull&gt;
+        &lt;gln-option *ngFor="let item of salad"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem sc-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;2. exterior="underline", frameSize="wide".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model08b"
+        label="Vegetarian salad 02"
+        helperText="Select a value from the list."
+        frameSize="wide"
+        exterior="underline"
+        isRequired
         wdFull&gt;
         &lt;gln-option *ngFor="let item of salad"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
@@ -292,8 +455,9 @@ export class SelectComponent &#123;
     'nettles',
   ];
   public control08a = &#123;
-    model08a: new FormControl([], []),
-    &#125;;
+    model08a: new FormControl([this.salad[1]], []),
+    model08b: new FormControl([this.salad[1]], []),
+  &#125;;
   public formGroup08a: FormGroup = new FormGroup(this.control08a);
 
   public capitalizeFirstLetter(value: string): string &#123;
@@ -303,16 +467,18 @@ export class SelectComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;
-.sc-elem &#123;
-  width: 28ch;
+app-select &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .sc-elem &#123;
+    width: 28ch;
+  &#125;
 &#125;
 
 .cdk-overlay-container .sc-backdrop &#123;

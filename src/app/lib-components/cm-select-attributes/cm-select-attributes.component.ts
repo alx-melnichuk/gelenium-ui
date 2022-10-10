@@ -45,26 +45,20 @@ export class CmSelectAttributesComponent {
     model02b: new FormControl(this.fruits[0], [Validators.required]),
     model02c: new FormControl(this.fruits[0], []),
     model02d: new FormControl(this.fruits[0], []),
+    model02e: new FormControl(null, []),
   };
   public formGroup02a: FormGroup = new FormGroup(this.control02a);
 
+  public fruitsB = ['mango', 'ripe lemon', 'gorgeous orange', 'succulent watermelon'];
   public exterior02b = 'outlined';
   public control02b = {
-    model02e: new FormControl(null, []),
-    model02f: new FormControl(null, [Validators.required]),
-    model02g: new FormControl(this.fruits[0], []),
-  };
-  public formGroup02b: FormGroup = new FormGroup(this.control02b);
-
-  public fruitsC = ['mango', 'ripe lemon', 'gorgeous orange', 'succulent watermelon'];
-  public exterior02c = 'outlined';
-  public control02c = {
     model02i: new FormControl(null, []),
     model02j: new FormControl(null, []),
     model02k: new FormControl(null, []),
     model02l: new FormControl(null, []),
   };
-  public formGroup02c: FormGroup = new FormGroup(this.control02c);
+  public formGroup02b: FormGroup = new FormGroup(this.control02b);
+  public fruitsC = ['orange', 'grapefruit', 'lemon', 'clementine', 'mandarin', 'mineola', 'pomelo', 'ponkan', 'poncirus', 'citron'];
 
   public flowers = [
     'rose',
@@ -80,13 +74,13 @@ export class CmSelectAttributesComponent {
     'magnolia',
     'hyacinth',
   ];
-  public exterior02d = 'outlined';
-  public control02d = {
+  public exterior02c = 'outlined';
+  public control02c = {
     model02m: new FormControl([this.flowers[1], this.flowers[3], this.flowers[4]], []),
     model02n: new FormControl([], []),
     model02o: new FormControl([], []),
   };
-  public formGroup02d: FormGroup = new FormGroup(this.control02d);
+  public formGroup02c: FormGroup = new FormGroup(this.control02c);
 
   public exterior02e = 'outlined';
   public hideLabel02e = false;
@@ -98,12 +92,7 @@ export class CmSelectAttributesComponent {
   public formGroup02e: FormGroup = new FormGroup(this.control02e);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {
-    // setTimeout(() => {
-    //   const control: FormControl = this.control02a['model02a'];
-    //   control.setValue(this.fruits[1]);
-    // }, 4000);
-  }
+  constructor() {}
 
   public capitalizeFirstLetter(value: string): string {
     return value ? value[0].toUpperCase() + value.slice(1) : '';

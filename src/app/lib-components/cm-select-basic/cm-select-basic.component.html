@@ -40,7 +40,7 @@ import &#123; GlnOptionModule, GlnSelectModule &#125; from 'gelenium-ui';</pre>
 
     <div class="app-elem">
       <div mb0>
-        <small><em>Outlined</em></small>
+        <small><em>exterior: Outlined</em></small>
       </div>
       <div>
         <small>
@@ -64,7 +64,7 @@ import &#123; GlnOptionModule, GlnSelectModule &#125; from 'gelenium-ui';</pre>
 
     <div class="app-elem">
       <div mb0>
-        <small><em>Underline</em></small>
+        <small><em>exterior: Underline</em></small>
       </div>
       <div>
         <small>
@@ -88,7 +88,7 @@ import &#123; GlnOptionModule, GlnSelectModule &#125; from 'gelenium-ui';</pre>
 
     <div class="app-elem">
       <div mb0>
-        <small><em>Standard</em></small>
+        <small><em>exterior: Standard</em></small>
       </div>
       <div>
         <small>
@@ -231,13 +231,15 @@ export class SelectComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
+app-select &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

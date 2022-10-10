@@ -66,10 +66,6 @@ export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT
 const CSS_ATTR_FOR_FRAME_FOCUS = 'foc';
 const CSS_ATTR_FOR_PANEL_OPENING_ANIMATION = 'is-open';
 const CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION = 'is-hide';
-const CSS_PROP_BORDER_RADIUS = '--glnslpo-border-radius';
-const CSS_PROP_MAX_HEIGHT = '--glnslpo-max-height';
-const CSS_PROP_EL_MIN_WIDTH = '--glnsl-el-min-width';
-const CSS_PROP_EL_MIN_HEIGHT = '--glnsl-el-min-height';
 const CSS_PROP_TRANSLATE_Y = '--glnslpo-translate-y';
 
 @Component({
@@ -249,9 +245,12 @@ export class GlnSelectComponent
   // public valueInit: boolean | null = null; // Binding attribute "isValueInit".
   public visibleSizeVal: number | null = null; // Binding attribute "visibleSize".
 
+  private indexFirstVisibleOption: number = -1;
   private isFocusAttrOnFrame = false;
   private markedOption: GlnOptionComponent | null = null;
   private maxWidth = 0;
+  private optionHeight: number = 0;
+  private selectPanelRef: ElementRef<HTMLElement> | null = null;
   /** Saving the font size of the trigger element. */
   private triggerFontSize = 0;
   /** Saving the frame size of the trigger element. Defines BorderRadius. */
@@ -495,8 +494,8 @@ export class GlnSelectComponent
   public frameSizeChange(event: GlnFrameSizePaddingVerHorRes): void {
     this.triggerFrameSize = event.frameSizeValue || 0;
     const minWidth = NumberUtil.roundTo100(this.triggerFrameSize * 1.1);
-    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_EL_MIN_WIDTH, NumberUtil.str(minWidth)?.concat('px'));
-    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_EL_MIN_HEIGHT, NumberUtil.str(this.triggerFrameSize)?.concat('px'));
+    HtmlElemUtil.setProperty(this.hostRef, '--glnsl-el-min-width', NumberUtil.str(minWidth)?.concat('px'));
+    HtmlElemUtil.setProperty(this.hostRef, '--glnsl-el-min-height', NumberUtil.str(this.triggerFrameSize)?.concat('px'));
   }
 
   public getPanelClass(
@@ -571,6 +570,22 @@ export class GlnSelectComponent
       this.focus();
     }
   }
+  public doOverlayPanelKeydown(event: KeyboardEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    if (!this.disabled && this.isPanelOpen) {
+      switch (event.key) {
+        // (Cases-B5) Panel is open and click the Escape key.
+        // (Cases-B6) Panel is open and click the Tab key.
+        case 'Escape':
+        case 'Tab':
+          this.isFocused = true;
+          this.focus();
+          this.close();
+          break;
+      }
+    }
+  }
   /** Open or close the overlay panel. */
   public toggle(): void {
     if (!this.disabled) {
@@ -612,12 +627,12 @@ export class GlnSelectComponent
     this.markedOption = null;
 
     const overlayElement: HTMLElement = this.connectedOverlay.overlayRef.overlayElement;
-    const selectPanelRef = HtmlElemUtil.getElementRef(overlayElement.children[0]?.children[0] as HTMLElement);
-    const panelHeight = this.getHeight(selectPanelRef);
+    const panelHeight = this.getHeight(this.selectPanelRef);
     if (panelHeight > 0) {
       const overlayRef = HtmlElemUtil.getElementRef(overlayElement);
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
     }
+    this.selectPanelRef = null;
     if (!this.noAnimation) {
       const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement.children[0] as HTMLElement);
       // Add an attribute for animation and transformation.
@@ -632,8 +647,8 @@ export class GlnSelectComponent
     // Adding a class so that custom styles can be applied.
     const overlayRef = HtmlElemUtil.getElementRef(overlayElement);
     HtmlElemUtil.setAttr(this.renderer, overlayRef, 'glnspo-select', '');
-    const selectPanelRef = HtmlElemUtil.getElementRef(overlayElement.children[0]?.children[0] as HTMLElement);
-    const panelHeight = this.getHeight(selectPanelRef);
+    this.selectPanelRef = HtmlElemUtil.getElementRef(overlayElement.children[0]?.children[0] as HTMLElement);
+    const panelHeight = this.getHeight(this.selectPanelRef);
     if (!this.noAnimation && panelHeight > 0) {
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
     }
@@ -646,20 +661,23 @@ export class GlnSelectComponent
     }
     if (this.triggerFrameSize > 0) {
       const borderRadius = NumberUtil.roundTo100(this.triggerFrameSize / 10);
-      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(borderRadius)?.concat('px'));
+      HtmlElemUtil.setProperty(overlayRef, '--glnslpo-border-radius', NumberUtil.str(borderRadius)?.concat('px'));
+    }
+    if (this.optionHeight === 0) {
+      this.optionHeight = this.getOptionHeight(this.options);
     }
     const visibleSize = this.visibleSizeVal ?? 0;
-    const maxHeigthSelectPanel = visibleSize > 0 ? this.getOptionHeigth(this.options) * visibleSize : 0;
-    if (maxHeigthSelectPanel > 0) {
-      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_HEIGHT, NumberUtil.str(maxHeigthSelectPanel)?.concat('px'));
+    if (visibleSize > 0 && this.optionHeight > 0) {
+      const maxHeightOfSelectionPanel = this.optionHeight * visibleSize;
+      HtmlElemUtil.setProperty(overlayRef, '--glnslpo-max-height', NumberUtil.str(maxHeightOfSelectionPanel)?.concat('px'));
     }
     // We cannot get the actual sizes and positions of elements if they are affected by a transformation.
     // Therefore, we first get all the data, and then add attributes for animation and transformation.
-    if (this.markedOption !== null && selectPanelRef !== null && maxHeigthSelectPanel > 0) {
-      const delta = NumberUtil.roundTo100(maxHeigthSelectPanel / 2) - NumberUtil.roundTo100(this.getHeight(this.markedOption.hostRef) / 2);
-      const optionRect = this.markedOption.hostRef.nativeElement.getBoundingClientRect();
-      const panelRect = selectPanelRef.nativeElement.getBoundingClientRect();
-      selectPanelRef.nativeElement.scrollTo(0, optionRect.top - panelRect.top - delta);
+
+    const indexMarked = this.markedOption != null ? this.options.indexOf(this.markedOption) : -1;
+    if (this.markedOption !== null && this.selectPanelRef !== null && visibleSize > 0 && this.optionHeight > 0) {
+      this.indexFirstVisibleOption = this.getIndexFirstVisibleOption(this.options.length, visibleSize, indexMarked, -1);
+      this.selectPanelRef.nativeElement.scrollTo(0, this.indexFirstVisibleOption * this.optionHeight);
     }
     // Important! These operations should be the last, they include animation and the dimensions of the panel are distorted.
     const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement?.children[0] as HTMLElement);
@@ -679,24 +697,24 @@ export class GlnSelectComponent
         if (['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(event.key)) {
           // Prevents the page from scrolling down when pressing space.
           event.preventDefault();
+          event.stopPropagation();
           this.open();
         }
       } else {
-        if (['ArrowDown', 'ArrowUp', ' ', 'Tab'].includes(event.key)) {
-          // Prevents the page from scrolling down when pressing: 'up arrow', 'down arrow', 'space' and 'tab'.
-          event.preventDefault();
-        }
         switch (event.key) {
-          // (Cases-B5) Panel is open and click the Escape key.
-          // (Cases-B6) Panel is open and click the Tab key.
-          case 'Escape':
-          case 'Tab':
-            this.close();
-            break;
           case 'ArrowDown':
           case 'ArrowUp':
             // Moving the cursor marker.
-            this.markedOption = this.movingMarkedOption(event.key === 'ArrowDown', this.markedOption);
+            this.markedOption = this.movingMarkedOption(this.options, event.key === 'ArrowDown', this.markedOption);
+            const indexMarked = this.markedOption != null ? this.options.indexOf(this.markedOption) : -1;
+            const visibleSize = this.visibleSizeVal ?? 0;
+            if (visibleSize > 0 && !!this.selectPanelRef && this.optionHeight > 0) {
+              const value = this.getIndexFirstVisibleOption(this.options.length, visibleSize, indexMarked, this.indexFirstVisibleOption);
+              if (this.indexFirstVisibleOption !== value) {
+                this.indexFirstVisibleOption = value;
+                this.selectPanelRef.nativeElement.scrollTo(0, this.indexFirstVisibleOption * this.optionHeight);
+              }
+            }
             this.changeDetectorRef.markForCheck();
             break;
           // (Cases-B7) Panel is open and click the Enter key.
@@ -831,28 +849,28 @@ export class GlnSelectComponent
     this.onChange(this.valueData);
   }
   /** Move the marked option to the next or previous one. */
-  private movingMarkedOption(isNext: boolean, markedOption: GlnOptionComponent | null): GlnOptionComponent | null {
+  private movingMarkedOption(options: GlnOptionComponent[], isNext: boolean, marked: GlnOptionComponent | null): GlnOptionComponent | null {
     let result: GlnOptionComponent | null = null;
-    if (this.options.length > 0) {
+    if (options.length > 0) {
       let indexOld = -1;
-      if (markedOption != null) {
-        indexOld = this.options.indexOf(markedOption);
-        markedOption.setMarked(false);
+      if (marked != null) {
+        indexOld = options.indexOf(marked);
+        marked.setMarked(false);
       }
-      const maxIndex = this.options.length - 1;
-      const index = isNext ? (indexOld < maxIndex ? indexOld + 1 : 0) : indexOld > 0 ? indexOld - 1 : maxIndex;
-      result = this.options[index];
+      const maxIndex = options.length - 1;
+      const indexNew = indexOld + (isNext && indexOld < maxIndex ? 1 : !isNext && indexOld > 0 ? -1 : 0);
+      result = options[indexNew];
       result.setMarked(true);
     }
     return result;
   }
   /** Get the height of the option. */
-  private getOptionHeigth(options: GlnOptionComponent[]): number {
+  private getOptionHeight(options: GlnOptionComponent[]): number {
     const value: number[] = [];
     const count: number[] = [];
-    let countByIndex = -1;
+    let maxCount = -1;
     let resultIndex = -1;
-    for (let i = 0; i < options.length && countByIndex < 4; i++) {
+    for (let i = 0; i < options.length && maxCount < 4; i++) {
       const height = this.getHeight(options[i].hostRef);
       let index = value.indexOf(height);
       if (index === -1) {
@@ -862,12 +880,37 @@ export class GlnSelectComponent
       } else {
         count[index]++;
       }
-      if (count[index] > countByIndex) {
-        countByIndex = count[index];
+      if (count[index] > maxCount) {
+        maxCount = count[index];
         resultIndex = index;
       }
     }
     return resultIndex > -1 ? value[resultIndex] : 0;
+  }
+
+  private getIndexFirstVisibleOption(countOptions: number, visibleSize: number, indexMarked: number, indexVisible: number): number {
+    let result: number = indexVisible;
+    if (countOptions > 0 && visibleSize > 0 && countOptions > visibleSize && indexMarked > -1 && indexMarked < countOptions) {
+      const maxIndex = countOptions - visibleSize;
+      if (indexVisible === -1) {
+        let index = Math.floor(indexMarked / visibleSize) * visibleSize;
+        result = index + visibleSize <= countOptions ? index : maxIndex;
+      } else {
+        let endIndex = indexVisible + visibleSize;
+        if (endIndex > countOptions) {
+          endIndex = countOptions;
+          result = endIndex - visibleSize;
+        }
+
+        if (indexMarked > -1 && indexMarked < result) {
+          result = indexMarked;
+        } else if (endIndex <= indexMarked) {
+          result = indexMarked - visibleSize + 1;
+          result = result > maxIndex ? maxIndex : result;
+        }
+      }
+    }
+    return result;
   }
 
   private getPosition(value: string | null): HorizontalConnectionPos {

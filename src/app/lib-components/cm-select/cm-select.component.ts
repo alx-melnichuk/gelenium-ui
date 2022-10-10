@@ -14,7 +14,7 @@ const logLabel = 'ComponentsSelect';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CmSelectComponent implements AfterViewInit {
-  public showNum = '02';
+  public showNum = '';
 
   public urlCmFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
   public urlPlSelect = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_SELECT');
