@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { GlnFrameConfigOld, GlnFrameExterior, GlnFrameSize } from 'gelenium-ui';
-
 import { RouterConfig } from '../../lib-core/config/router-config';
 import {
   LABEL_CSS,
@@ -47,11 +45,11 @@ export class PlSelectBootstrapComponent {
     model02d: new FormControl(this.fruits[1], []),
   };
   public formGroup02a: FormGroup = new FormGroup(this.control02a);
-
-  public config02a: GlnFrameConfigOld = {
-    exterior: GlnFrameExterior.outlined,
-    frameSize: GlnFrameSize.short,
-    isNoLabel: true,
+  // GlnSelectConfig
+  public config02a = {
+    exterior: 'outlined',
+    frameSize: 'short',
+    isPlaceholder: true,
   };
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

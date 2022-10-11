@@ -61,14 +61,14 @@ gln-select {
         &:focus-within, &[foc] {
           --glnsl-rhomb-cl: var(--glnsl-foc-err-rhomb, hsl(var(--glnsl--danger-h), var(--glnsl--danger-s), 50%));
         }
-
       }
     } // The state with disabled.
     &[dis] {
       --glnsl-rhomb-cl: var(--glnsl-dis-rhomb, hsl(var(--glnsl--default-h), var(--glnsl--default-s), 60%));
     }
   }
-  
+
+  // Element "gln-frame - div.glnsl-rhomb".
   gln-frame>div>[glnfr-orn-rg]>[glnsl-rhomb] {
     align-items: center;
     color: var(--glnsl-rhomb-cl);

@@ -9,10 +9,10 @@
     To do this, you need to specify the following configuration:
   </p>
   <code><pre source="ts">
-public config02b: GlnFrameConfigOld = &#123;
-  exterior: GlnFrameExterior.outlined,
-  frameSize: GlnFrameSize.short,
-  isNoLabel: true,
+public config02b: GlnSelectConfig = &#123;
+  exterior: 'outlined',
+  frameSize: 'short',
+  isPlaceholder: true,
 &#125;;</pre></code>
   <span>
     And also define some css-styles.
@@ -220,9 +220,6 @@ import &#123;
 import &#123;
   FormControl, FormGroup
 &#125; from '@angular/forms';
-import &#123;
-  GlnFrameConfigOld, GlnFrameExterior, GlnFrameSize
-&#125; from 'gelenium-ui';
 
 @Component(&#123;
   selector: 'app-select',
@@ -239,10 +236,11 @@ export class SelectComponent &#123;
     model02d: new FormControl('Hello World', []),
   &#125;;
   public formGroup02a: FormGroup = new FormGroup(this.control02a);
-  public config02a: GlnFrameConfigOld = &#123;
-    exterior: GlnFrameExterior.outlined,
-    frameSize: GlnFrameSize.short,
-    isNoLabel: true,
+  // GlnSelectConfig
+  public config02a = &#123;
+    exterior: 'outlined',
+    frameSize: 'short',
+    isPlaceholder: true,
   &#125;;
 
   public capitalizeFirstLetter(value: string): string &#123;
@@ -292,7 +290,7 @@ app-select &#123;
     box-shadow: 0 0 0 0.25rem rgb(220 53 69 / 25%);
   &#125;
   // Definition a color to represent "success".
-  .ip-bootstrap .ip-success .gln-frame &#123;
+  .ip-bootstrap .gln-select.ip-success &#123;
     --glncl-primary-h: 135;
     --glncl-primary-s: 40%;
   &#125;

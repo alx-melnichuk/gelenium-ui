@@ -188,7 +188,6 @@ import &#123;
 import &#123;
   FormControl, FormGroup
 &#125; from '@angular/forms';
-import &#123; GlnInputConfig &#125; from 'gelenium-ui';
 
 @Component(&#123;
   selector: 'app-input',
@@ -204,7 +203,8 @@ export class InputComponent &#123;
     model02d: new FormControl('Hello World', []),
   &#125;;
   public formGroup02a: FormGroup = new FormGroup(this.control02a);
-  public config02a: GlnInputConfig = &#123;
+  // GlnInputConfig
+  public config02a = &#123;
     exterior: 'outlined',
     frameSize: 'short',
     isPlaceholder: true,

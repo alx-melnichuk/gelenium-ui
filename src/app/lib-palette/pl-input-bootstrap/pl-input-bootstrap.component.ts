@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { GlnInputConfig } from 'gelenium-ui';
-
 import { RouterConfig } from '../../lib-core/config/router-config';
 import {
   LABEL_CSS,
@@ -47,7 +45,7 @@ export class PlInputBootstrapComponent {
   };
   public formGroup02a: FormGroup = new FormGroup(this.control02a);
 
-  public config02a: GlnInputConfig = {
+  public config02a = {
     exterior: 'outlined',
     frameSize: 'short',
     isPlaceholder: true,
