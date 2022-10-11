@@ -116,12 +116,12 @@ const CN_SURNAME3 = ['Perez', 'Thompson', 'White', 'Harris',
   'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson', 'Walker'];
 
 @Component(&#123;
-  selector: 'app-infinite-scroll-basic',
-  templateUrl: './infinite-scroll-basic.component.html',
-  styleUrls: ['./infinite-scroll-basic.component.scss'],
+  selector: 'app-infinite-scroll',
+  templateUrl: './infinite-scroll.component.html',
+  styleUrls: ['./infinite-scroll.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
-export class InfiniteScrollBasicComponent &#123;
+export class InfiniteScrollComponent &#123;
   public elements0: Element[] = [];
 
   private names: string[]
@@ -174,24 +174,26 @@ export class InfiniteScrollBasicComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <pre source="css">
-.isb-item-wrap &#123;
-  outline: 1px solid blue;
-  height: 400px;
-  overflow-y: scroll;
-&#125;
-.isb-items &#123;
-  outline: 1px dashed green;
-  padding: 15px 0;
-&#125;
-.isb-row &#123;
-  display: flex;
-  padding: 3px 10px;
-&#125;
-.isb-label &#123;
-  flex-basis: 120px;
-&#125;
-.isb-value &#123;
-  flex-grow: 1;
+app-infinite-scroll &#123;
+  .isb-item-wrap &#123;
+    outline: 1px solid blue;
+    height: 400px;
+    overflow-y: scroll;
+  &#125;
+  .isb-items &#123;
+    outline: 1px dashed green;
+    padding: 15px 0;
+  &#125;
+  .isb-row &#123;
+    display: flex;
+    padding: 3px 10px;
+  &#125;
+  .isb-label &#123;
+    flex-basis: 120px;
+  &#125;
+  .isb-value &#123;
+    flex-grow: 1;
+  &#125;
 &#125;</pre>
         </mat-tab>
       </mat-tab-group>

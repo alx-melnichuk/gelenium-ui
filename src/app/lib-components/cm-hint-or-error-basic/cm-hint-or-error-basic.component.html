@@ -153,12 +153,12 @@ import &#123;
 &#125; from '@angular/forms';
 
 @Component(&#123;
-  selector: 'app-textarea',
-  templateUrl: './textarea.component.html',
-  styleUrls: ['./textarea.component.scss'],
+  selector: 'app-hint-or-error',
+  templateUrl: './hint-or-error.component.html',
+  styleUrls: ['./hint-or-error.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
-export class TextareaComponent &#123;
+export class HintOrErrorComponent &#123;
   public controls01 = &#123;
     model01a: new FormControl('is', []),
     model01b: new FormControl('demo', []),
@@ -181,17 +181,19 @@ export class TextareaComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;
-input.heb-input.ng-invalid &#123;
-  border: red solid 2px;
-  outline-color: red;
+app-hint-or-error &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  input.heb-input.ng-invalid &#123;
+    border: red solid 2px;
+    outline-color: red;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
