@@ -5,9 +5,24 @@
   </h3>
   <p>The following attributes are supported:</p>
   <ul>
-    <li>
-      "isDisabled" - a sign that the field is disabled (isDisabled);
+    <li>"id" - parameter for defining the unique identifier of the input field
+      (id="unique_identifier");
     </li>
+    <li>
+      "config" - Defines a configuration object.
+      <a [href]="urlCmButton + '#config-interface'">More details.</a>
+    </li>
+    <li>
+      "exterior" - Determines the appearance of an element.<br />
+      It can take the following values:
+      <ul>
+        <li>"contained";</li>
+        <li>"outlined";</li>
+        <li>"text";</li>
+      </ul>
+    </li>
+    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
+    <li>"isNoRipple" - Disables the ripple effect.</li>
     <li>
       "wdFull" is an attribute sets the width to the width of the parent (width: 100%);
     </li>

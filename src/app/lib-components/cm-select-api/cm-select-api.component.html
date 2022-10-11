@@ -44,7 +44,8 @@
       <td>
         <code>@Input()</code>
         <code>config: GlnFrameConfig<br/>
-          &nbsp;&nbsp;| null = null;</code>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Defines a configuration object.</span><br />
@@ -130,7 +131,10 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>The element is disabled.<br />Attribute (no content).</span>
+        <span>
+          Indicates that the element is disabled.<br />
+          (default = false;) Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -143,7 +147,8 @@
       </td>
       <td>
         <span>
-          Forces the error status of an item to be displayed.<br />Attribute (no content).
+          Indicates that the element is in an error state.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -157,8 +162,8 @@
       </td>
       <td>
         <span>
-          Disable label animation. The label is always static, at the top.<br />
-          Attribute (no content).
+          Indication that the label has shrunk and moved up.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -187,8 +192,8 @@
       </td>
       <td>
         <span>
-          Disable animation display.
-          <br />Attribute (no content).
+          Indicates that animation is disabled.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -217,8 +222,9 @@
       </td>
       <td>
         <span>
-          This property to turn off the ripple effect.<br />Attribute (no content).
-        </span>
+          Flag for disabling the ripple effect.<br />
+          Attribute (no content).
+        </span><br />
       </td>
     </tr>
     <tr>
@@ -230,7 +236,10 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Whether the element is readonly.<br />Attribute (no content).</span>
+        <span>
+          Indicates that the element is read-only.<br />
+          (default = false;) Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -243,7 +252,8 @@
       </td>
       <td>
         <span>
-          Adds a validation conditional: required field.<br />Attribute (no content).
+          Indicates that the field is required.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -255,7 +265,9 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>The content of the label.</span>
+        <span>
+          Specifies the content of the label.
+        </span>
       </td>
     </tr>
     <tr>
@@ -267,8 +279,8 @@
       </td>
       <td>
         <span>
-          Specifies the maximum number of selected options.
-          <br />
+          Specifies the maximum number of selected options.<br />
+          (default = null;)
         </span>
       </td>
     </tr>
@@ -281,8 +293,8 @@
       </td>
       <td>
         <span>
-          Specifies the minimum number of selected options.
-          <br />
+          Specifies the minimum number of selected options.<br />
+          (default = null;)
         </span>
       </td>
     </tr>
@@ -294,17 +306,18 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Specifies the height justification for the left ornament.
+        <span>
+          This property controls the vertical alignment for the left ornament.
           <br />(default = 'default';)
           It can take the following values:
         </span>
         <ul>
-          <li>"default" - depending on frame type</li>
-          <li>"center" - in the center</li>
-          <li>"flex-start" - at the top</li>
-          <li>"flex-end" - at the bottom</li>
-          <li>"baseline" - along the baseline</li>
-          <li>"stretch" - at the top</li>
+          <li>"default" - defines the default</li>
+          <li>"center" - defines middle alignment</li>
+          <li>"flexStart" - defines top alignment</li>
+          <li>"flexEnd" - defines bottom alignment</li>
+          <li>"baseline" - defines baseline alignment</li>
+          <li>"stretch" - stretches across the entire height</li>
         </ul>
       </td>
     </tr>
@@ -316,17 +329,18 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Specifies the height justification for the right ornament.
+        <span>
+          This property controls the vertical alignment of the right ornament.
           <br />(default = 'default';)
           It can take the following values:
         </span>
         <ul>
-          <li>"default" - depending on frame type</li>
-          <li>"center" - in the center</li>
-          <li>"flex-start" - at the top</li>
-          <li>"flex-end" - at the bottom</li>
-          <li>"baseline" - along the baseline</li>
-          <li>"stretch" - at the top</li>
+          <li>"default" - defines the default</li>
+          <li>"center" - defines middle alignment</li>
+          <li>"flexStart" - defines top alignment</li>
+          <li>"flexEnd" - defines bottom alignment</li>
+          <li>"baseline" - defines baseline alignment</li>
+          <li>"stretch" - stretches across the entire height</li>
         </ul>
       </td>
     </tr>

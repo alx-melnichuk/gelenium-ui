@@ -7,21 +7,48 @@
   <ul>
     <li>"id" - parameter for defining the unique identifier of the field
       (id="unique_identifier");</li>
-    <li>"isReadOnly" - a sign that the field is read-only (isReadOnly);</li>
-    <li>"isRequired" - a sign that the field is required (isRequired);</li>
-    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
-    <li>"isLabelShrink" - a sign that the field has a permanent label,
-      without being converted to a placeholder (isLabelShrink);</li>
-    <li>"isPlaceholder" - "label" is displayed as a "placeholder" attribute
-      for "textarea" (isPlaceholder);</li>
+    <li>
+      "config" - Defines a configuration object.
+      <a [href]="urlCmTextarea + '#config-interface'">More details.</a>
+    </li>
+    <li>
+      "exterior" - Determines the appearance of an element.<br />
+      It can take the following values:
+      <ul>
+        <li>"outlined";</li>
+        <li>"underline";</li>
+        <li>"standard";</li>
+      </ul>
+    </li>
     <li>"helperText" - the parameter is used to provide context for a given
       field or error message (helperText="A value must be entered.");</li>
-    <li>"isError" - a sign that the field is in error (isError);</li>
+    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
+    <li>"isError" - a sign that the field is in error status (isError);</li>
+    <li>"isPlaceholder" - specifies that the value of the "label" field be displayed
+      as the "placeholder" attribute for the "input" element (isPlaceholder);</li>
+    <li>"isReadOnly" - a sign that the field is read-only (isReadOnly);</li>
+    <li>"isRequired" - a sign that the field is required (isRequired);</li>
+    <li>"label" - The content of the label.</li>
+    <li>"isLabelShrink" - An indication that the label has moved up and shrunk.</li>
     <li>"minLength" - sets the minimum field length;<br />
       <code>[minLength]="2" or min02=4; [minLength]="min02"</code>
     </li>
     <li>"maxLength" - sets the maximum field length;<br />
       <code>[maxLength]="2" or max02=4; [maxLength]="max02"</code>
+    </li>
+    <li>"autoComplete" - the value of the autocomplete parameter for the input field.
+      <br />&nbsp;&nbsp;autoComplete="off" - The browser is not permitted to automatically enter or
+      select a value for this field.
+      <br />&nbsp;&nbsp;autoComplete="new-password" - A new password.
+      <br />&nbsp;&nbsp;autoComplete="current-password" - The user's current password.
+    </li>
+    <li>
+      "wdFull" - an attribute sets the width to the width of the parent (width: 100%).
+      <br />
+      In this case, the width must be defined at the parent or at the current level.
+      <br />
+      Without this parameter, the width is determined by the content and may change
+      when the font size is changed.
     </li>
   </ul>
   <p>

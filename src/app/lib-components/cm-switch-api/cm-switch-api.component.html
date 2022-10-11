@@ -48,7 +48,7 @@
       </td>
       <td>
         <span>Defines a configuration object.</span><br />
-        <a [href]="urlCmSwitch + '#Config'">More details.</a>
+        <a [href]="urlCmSwitch + '#config-interface'">More details.</a>
       </td>
     </tr>
     <tr>
@@ -115,7 +115,10 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Whether the element is readonly.<br />Attribute (no content).</span>
+        <span>
+          Indicates that the element is read-only.<br />
+          (default = false;) Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -127,8 +130,9 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Adds a validation conditional: required field.
-          <br />Attribute (no content).
+        <span>
+          Indicates that the field is required.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
