@@ -40,7 +40,6 @@ import {
 import { first } from 'rxjs/operators';
 
 import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from '../directives/gln-frame-ornament/gln-frame-ornam-align.interface';
-import { GlnFrameSizePaddingVerHorRes } from '../directives/gln-frame-size/gln-frame-size-prepare.interface';
 import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
 import { GlnFrameExterior } from '../gln-frame/gln-frame-exterior.interface';
@@ -108,6 +107,8 @@ export class GlnSelectComponent
   public isMultiple: string | boolean | null | undefined;
   @Input()
   public isNoAnimation: string | boolean | null | undefined;
+  @Input()
+  public isPlaceholder: string | boolean | null | undefined;
   @Input()
   /** Disable the display of the icon - the status of the state of the open list. */
   public isNoIcon: string | boolean | null | undefined;
@@ -253,8 +254,6 @@ export class GlnSelectComponent
   private selectPanelRef: ElementRef<HTMLElement> | null = null;
   /** Saving the font size of the trigger element. */
   private triggerFontSize = 0;
-  /** Saving the frame size of the trigger element. Defines BorderRadius. */
-  private triggerFrameSize = 0;
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -301,6 +300,9 @@ export class GlnSelectComponent
     if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
       this.noRipple = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
       this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
+    }
+    if (changes['isPlaceholder'] || (changes['config'] && this.isPlaceholder == null && this.currConfig.isPlaceholder != null)) {
+      this.placeholder = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
     }
     if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
       this.readOnly = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
@@ -355,6 +357,9 @@ export class GlnSelectComponent
     if (this.noRipple == null) {
       this.noRipple = !!this.currConfig.isNoRipple;
       this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
+    }
+    if (this.placeholder == null) {
+      this.placeholder = !!this.currConfig.isPlaceholder;
     }
     if (this.readOnly == null) {
       this.readOnly = !!this.currConfig.isReadOnly;
@@ -489,13 +494,6 @@ export class GlnSelectComponent
 
   public trackByOption(index: number, item: GlnOptionComponent): string {
     return item.id;
-  }
-  /** Determine the value of the css variable "frame size". */
-  public frameSizeChange(event: GlnFrameSizePaddingVerHorRes): void {
-    this.triggerFrameSize = event.frameSizeValue || 0;
-    const minWidth = NumberUtil.roundTo100(this.triggerFrameSize * 1.1);
-    HtmlElemUtil.setProperty(this.hostRef, '--glnsl-el-min-width', NumberUtil.str(minWidth)?.concat('px'));
-    HtmlElemUtil.setProperty(this.hostRef, '--glnsl-el-min-height', NumberUtil.str(this.triggerFrameSize)?.concat('px'));
   }
 
   public getPanelClass(
@@ -646,7 +644,7 @@ export class GlnSelectComponent
     const overlayElement: HTMLElement = this.connectedOverlay.overlayRef.overlayElement;
     // Adding a class so that custom styles can be applied.
     const overlayRef = HtmlElemUtil.getElementRef(overlayElement);
-    HtmlElemUtil.setAttr(this.renderer, overlayRef, 'glnspo-select', '');
+    HtmlElemUtil.setAttr(this.renderer, overlayRef, 'glnslpo-select', '');
     this.selectPanelRef = HtmlElemUtil.getElementRef(overlayElement.children[0]?.children[0] as HTMLElement);
     const panelHeight = this.getHeight(this.selectPanelRef);
     if (!this.noAnimation && panelHeight > 0) {
@@ -659,8 +657,8 @@ export class GlnSelectComponent
     if (this.maxWidth > 0) {
       overlayElement.style.maxWidth = `${this.maxWidth}px`;
     }
-    if (this.triggerFrameSize > 0) {
-      const borderRadius = NumberUtil.roundTo100(this.triggerFrameSize / 10);
+    if (this.frameSizeValue > 0) {
+      const borderRadius = NumberUtil.roundTo100(this.frameSizeValue / 10);
       HtmlElemUtil.setProperty(overlayRef, '--glnslpo-border-radius', NumberUtil.str(borderRadius)?.concat('px'));
     }
     if (this.optionHeight === 0) {
@@ -673,7 +671,6 @@ export class GlnSelectComponent
     }
     // We cannot get the actual sizes and positions of elements if they are affected by a transformation.
     // Therefore, we first get all the data, and then add attributes for animation and transformation.
-
     const indexMarked = this.markedOption != null ? this.options.indexOf(this.markedOption) : -1;
     if (this.markedOption !== null && this.selectPanelRef !== null && visibleSize > 0 && this.optionHeight > 0) {
       this.indexFirstVisibleOption = this.getIndexFirstVisibleOption(this.options.length, visibleSize, indexMarked, -1);

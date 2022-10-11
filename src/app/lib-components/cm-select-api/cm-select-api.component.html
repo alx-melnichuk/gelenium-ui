@@ -25,7 +25,7 @@
 <table class="app-tab">
   <tbody>
     <tr>
-      <th>Name</th>
+      <th class="app-mn-wd-22ch">Name</th>
       <th>Description</th>
     </tr>
 
@@ -225,6 +225,22 @@
           Flag for disabling the ripple effect.<br />
           Attribute (no content).
         </span><br />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isPlaceholder: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies that the value of the "label" field be displayed
+          as the "placeholder" attribute for the "input" element.<br />
+          (default = false;) Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -655,13 +671,13 @@
 
 <table class="app-tab">
   <tr>
-    <th>Name</th>
+    <th class="app-mn-wd-22ch">Name</th>
     <th>Description</th>
   </tr>
 
   <tr>
     <td><code>--glnsl-min-width:<br/>
-      &nbsp;var(--glnsl-el-min-width, 50px);</code>
+      &nbsp;50px;</code>
     </td>
     <td>
       <span>
@@ -669,73 +685,116 @@
       </span>
     </td>
   </tr>
+  <!--default-->
   <tr>
-    <td><code>--glnsl-rhomb-def:<br/>
-      hsl(--glnfr--default-[h,s], 46%);</code>
+    <td><code>--glnsl-def-rhomb:<br/>
+      hsl(--gln-primary-[h,s], 45%);</code>
     </td>
     <td>
       <span>
         The color of the triangle is the state of the list (open/closed) by default.
         <br />
-        (hsl(20, 2%, 46%);)
+        (hsl(215, 80%, 45%);)
       </span>
     </td>
   </tr>
   <tr>
-    <td><code>--glnsl-rhomb-hov:<br/>
-      hsl(--glnfr--default-[h,s], 46%);</code>
+    <td><code>--glnsl-hov-rhomb:<br/>
+      hsl(--gln-primary-[h,s], 40%);</code>
     </td>
     <td>
       <span>
         The color of the triangle is the state of the list (open/closed)
         when hovering over with the mouse.
         <br />
-        (hsl(20, 2%, 46%);)
+        (hsl(215, 80%, 40%);)
       </span>
     </td>
   </tr>
   <tr>
-    <td><code>--glnsl-rhomb-foc:<br/>
-      hsl(--glnfr--primary-[h,s], 46%);</code>
+    <td><code>--glnsl-foc-rhomb:<br/>
+      hsl(--gln-primary-[h,s], 50%);</code>
     </td>
     <td>
       <span>
         The color of the triangle is the state of the list (open/closed)
         when focus is received.
         <br />
-        (hsl(210, 79%, 46%); #1976d2;)
+        (hsl(215, 80%, 50%);)
       </span>
     </td>
   </tr>
+  <!-- error -->
   <tr>
-    <td><code>--glnsl-rhomb-err:<br/>
-      hsl(--glnfr--danger-[h,s], 51%);</code>
+    <td><code>--glnsl-def-err-rhomb:<br/>
+      hsl(--gln-danger-[h,s], 45%);</code>
     </td>
     <td>
       <span>
         The color of the triangle is the state of the list (open/closed)
-        in case of an error.
+        by default in case of an error.
         <br />
-        (hsl(0, 65%, 51%); = #d32f2f;)
+        (hsl(5, 85%, 45%);)
       </span>
     </td>
   </tr>
   <tr>
-    <td><code>--glnsl-rhomb-dis:<br/>
-      hsl(--glnfr--default-[h,s], 74%);</code>
+    <td><code>--glnsl-hov-err-rhomb:<br/>
+      hsl(--gln-danger-[h,s], 40%);</code>
+    </td>
+    <td>
+      <span>
+        The color of the triangle is the state of the list (open/closed)
+        when hovering over with the mouse in case of an error.
+        <br />
+        (hsl(5, 85%, 40%);)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-foc-err-rhomb:<br/>
+      hsl(--gln-danger-[h,s], 50%);</code>
+    </td>
+    <td>
+      <span>
+        The color of the triangle is the state of the list (open/closed)
+        when focus is received in case of an error.
+        <br />
+        (hsl(5, 85%, 50%);)
+      </span>
+    </td>
+  </tr>
+  <!--disabled-->
+  <tr>
+    <td><code>--glnsl-dis-rhomb:<br/>
+      hsl(--gln-default-[h,s], 60%);</code>
     </td>
     <td>
       <span>
         The color of the triangle is the state of the list (open/closed)
         when disabled.
         <br />
-        (hsl(20, 2%, 74%);)
+        (hsl(250, 2%, 60%);)
       </span>
     </td>
   </tr>
+
+  <tr>
+    <td><code>--glnsl-plc-hld:<br/>
+      hsl(--gln-default-[h,s], 55%);</code>
+    </td>
+    <td>
+      <span>
+        The value of the "color" property for the "placeholder" element.
+        <br />
+        (hsl(250, 2%, 55%);)
+      </span>
+    </td>
+  </tr>
+
   <tr>
     <td><code>--glnsl-he-pd-lf:<br/>
-      &nbsp;var(--glnfrs-pd-lf);</code>
+      &nbsp;var(--glnfrs--pd-lf);</code>
     </td>
     <td>
       <span>
@@ -745,7 +804,7 @@
   </tr>
   <tr>
     <td><code>--glnsl-he-pd-rg:<br/>
-      &nbsp;var(--glnfrs-pd-rg);</code>
+      &nbsp;var(--glnfrs--pd-rg);</code>
     </td>
     <td>
       <span>
@@ -770,7 +829,8 @@
     </td>
     <td>
       <span>
-        The value of the "color" property for the "gln-select-panel-wrap" element.
+        The value of the "color" property for the "gln-select-panel-wrap" element.<br />
+        (hsl(250, 2%, 17%);)
       </span>
     </td>
   </tr>
@@ -796,6 +856,38 @@
 .gln-select-panel<strong>.no-elevation</strong> &#123;
   --glnslpo-elevation: none;
 &#125;</pre></code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>--glnslpo-border-radius:<br/>
+      &nbsp;unset;</code>
+    </td>
+    <td>
+      <span>
+        Defines the value of the "border-radius" property for the overlay panel
+        (expanded list of options).
+        This will make rounded edges for the options dropdown panel.<br />
+        (default "unset").
+      </span>
+      <span>Example:</span>
+      <code><pre source="css">
+.cdk-overlay-container .gln-select-panel &#123;
+  <strong>--glnslpo-border-radius</strong>: 10px;
+&#125;</pre></code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>--glnslpo-max-height:<br/>
+      &nbsp;100%;</code>
+    </td>
+    <td>
+      <span>
+        Defines the value of the "max-height" property for the overlay panel
+        (expanded list of options).<br />
+        (default 100%).
+      </span>
     </td>
   </tr>
 

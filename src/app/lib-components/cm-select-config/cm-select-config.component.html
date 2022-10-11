@@ -44,7 +44,7 @@ export class AppComponent &#123;
 
 <table class="app-tab">
   <tr>
-    <th>Name</th>
+    <th class="app-mn-wd-22ch">Name</th>
     <th>Description</th>
   </tr>
 
@@ -115,6 +115,19 @@ export class AppComponent &#123;
       <span>
         This property to turn off the ripple effect.
       </span>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>isPlaceholder?: boolean;</code>
+    </td>
+    <td>
+      <span>
+        Specifies that the value of the "label" field be displayed
+        as the "placeholder" attribute for the "select" element.
+        <br />(default = false;)
+      </span>
+      <span>(optional)</span>
     </td>
   </tr>
   <tr>
@@ -484,10 +497,8 @@ app-select &#123;
 .cdk-overlay-container .sc-backdrop &#123;
   background-color: hsla(240, 72%, 94%, 30%);
 &#125;
-.cdk-overlay-container .sc-overlay-panel>.gln-select-panel-wrap &#123;
-  --glnslpo-border-radius: 10px;
-&#125;
 .cdk-overlay-container .gln-select-panel.sc-panel &#123;
+  --glnslpo-border-radius: 10px;
   background-color: hsla(160, 100%, 75%, 4%);
   box-shadow: #276566de 0 5px 5px -3px
     , #27656694 0 8px 10px 1px

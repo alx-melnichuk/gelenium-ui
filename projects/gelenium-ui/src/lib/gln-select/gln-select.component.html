@@ -16,7 +16,7 @@
     [isLabelShrink]="getBoolean(isLabelShrink) ?? currConfig.isLabelShrink"
     [isNoAnimation]="getBoolean(isNoAnimation) ?? currConfig.isNoAnimation"
     [isRequired]="required"
-    [label]="label"
+    [label]="!placeholder ? label : null"
     glnFrameOrnament
     [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
     [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
@@ -52,7 +52,11 @@
       glnfr-elem>
 
       <ng-container [ngSwitch]="isFilled">
-        <div *ngSwitchCase="false">&ZeroWidthSpace;</div>
+        <div *ngSwitchCase="false"
+          glnsl-plc-hld
+          class="glnsl-placeholder">
+          <span>{{ !placeholder ? '&ZeroWidthSpace;' : label }}</span>
+        </div>
 
         <ng-container *ngSwitchCase="true"
           [ngSwitch]="!!customTrigger">

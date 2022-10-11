@@ -9,7 +9,6 @@ export interface GlnFrameConfig {
   isLabelShrink?: boolean | undefined;
   isNoAnimation?: boolean | undefined;
   isNoLabel?: boolean | undefined; // deprecate
-  isPlaceholder?: boolean | undefined;
   isRequired?: boolean | undefined;
 }
 

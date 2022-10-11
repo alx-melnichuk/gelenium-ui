@@ -9,8 +9,8 @@ export interface GlnTextareaConfig extends GlnFrameConfig {
   // isRequired?: boolean | undefined;
 
   isError?: boolean | undefined;
+  isPlaceholder?: boolean | undefined;
   isReadOnly?: boolean | undefined;
   ornamLfAlign?: string | undefined; // GlnFrameOrnamAlignType
   ornamRgAlign?: string | undefined; // GlnFrameOrnamAlignType
-  isPlaceholder?: boolean | undefined;
 }

@@ -7,9 +7,15 @@ gln-select {
   --glnsl--default-h: var(--glncl-default-h, var(--gln-default-h));
   --glnsl--default-s: var(--glncl-default-s, var(--gln-default-s));
 
+  --glnsl--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
+  --glnsl--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
+
+  --glnsl--danger-h: var(--glncl-danger-h, var(--gln-danger-h));
+  --glnsl--danger-s: var(--glncl-danger-s, var(--gln-danger-s));
+
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
-  min-width: var(--glnsl-min-width, var(--glnsl-el-min-width, 50px));
+  min-width: var(--glnsl-min-width, 50px);
 
   &[wdFull] {
     width: 100%;
@@ -28,32 +34,38 @@ gln-select {
     }
 
     // Element "gln-frame - glnsl-rhomb".
-    --glnsl--default46: hsl(var(--glnsl--default-h), var(--glnsl--default-s), 46%); // hsl(20, 2%, 46%); rgba(0, 0, 0, 0.54); // +
-    --glnsl--primary46: hsl(var(--glnsl--primary-h), var(--glnsl--primary-s), 46%); //  #1976d2;
-    --glnsl--danger51: hsl(var(--glnsl--danger-h), var(--glnsl--danger-s), 51%); // hsl(0, 65%, 51%); #d32f2f; rgb(211, 47, 47)
-    --glnsl--default74: hsl(var(--glnsl--default-h), var(--glnsl--default-s), 74%); // hsl(20, 2%, 74%); rgba(0, 0, 0, 0.26); // +
+    // hsl(250,  2%, 46%); rgba(0, 0, 0, 0.54);
+    // hsl(250,  2%, 74%); rgba(0, 0, 0, 0.26);
+    // hsl(215, 80%, 50%); #1976d2;
+    // hsl(  0, 65%, 51%); #d32f2f; rgb(211, 47, 47);
 
     &:not([dis]) {
-      &[hfc] {
-        --glnslr-hover-focus-color: var(--glnsl--primary46);
-      }
       &:not([err]) { // The state without disabled, error, hover, focused.
         &:not(:hover):not(:focus-within):not([foc]) {
-          --glnsl-rhomb-cl: var(--glnsl-rhomb-def, var(--glnsl--default46));
+          --glnsl-rhomb-cl: var(--glnsl-def-rhomb, hsl(var(--glnsl--primary-h), var(--glnsl--primary-s), 45%));
         } // The state without disabled, error, focused and with hover.
         &:hover:not(:focus-within):not([foc]) {
-          --glnsl-rhomb-cl: var(--glnsl-rhomb-hov, var(--glnslr-hover-focus-color, var(--glnsl--default46)));
+          --glnsl-rhomb-cl: var(--glnsl-hov-rhomb, hsl(var(--glnsl--primary-h), var(--glnsl--primary-s), 40%));
         } // The state without disabled, error and with focused.
         &:focus-within, &[foc] {
-          --glnsl-rhomb-cl: var(--glnsl-rhomb-foc, var(--glnsl--primary46));
+          --glnsl-rhomb-cl: var(--glnsl-foc-rhomb, hsl(var(--glnsl--primary-h), var(--glnsl--primary-s), 50%));
         }
       }
       &[err] {// The state without disabled, hover, focused and error.
-        --glnsl-rhomb-cl: var(--glnsl-rhomb-err, var(--glnsl--danger51));
+        &:not(:hover):not(:focus-within):not([foc]) {
+          --glnsl-rhomb-cl: var(--glnsl-def-err-rhomb, hsl(var(--glnsl--danger-h), var(--glnsl--danger-s), 45%));
+        } // The state without disabled, focused and with hover.
+        &:hover:not(:focus-within):not([foc]) {
+          --glnsl-rhomb-cl: var(--glnsl-hov-err-rhomb, hsl(var(--glnsl--danger-h), var(--glnsl--danger-s), 40%));
+        } // The state without disabled and with focused.
+        &:focus-within, &[foc] {
+          --glnsl-rhomb-cl: var(--glnsl-foc-err-rhomb, hsl(var(--glnsl--danger-h), var(--glnsl--danger-s), 50%));
+        }
+
       }
     } // The state with disabled.
     &[dis] {
-      --glnsl-rhomb-cl: var(--glnsl-rhomb-dis, var(--glnsl--default74));
+      --glnsl-rhomb-cl: var(--glnsl-dis-rhomb, hsl(var(--glnsl--default-h), var(--glnsl--default-s), 60%));
     }
   }
   
@@ -92,13 +104,19 @@ gln-select {
     display: block;
     font: inherit;
     margin: 0;
-    min-height: var(--glnsl-el-min-height, unset);
     -webkit-tap-highlight-color: transparent;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     user-select: none;
     white-space: nowrap;
+  }
+
+  // Element "gln-frame - div.glnsl-placeholder".
+  gln-frame>div>[glnfr-elem]>[glnsl-plc-hld] {
+    color: var(--glnsl-plc-hld, hsl(var(--glnsl--default-h), var(--glnsl--default-s), 55%));
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   // Element "div glnsl-wrap".
@@ -157,16 +175,18 @@ gln-select {
   }
 }
 
-// Element "gln-select-panel"
-.gln-select-panel {
-  border-radius: var(--glnslpo-border-radius, unset);
-  box-sizing: border-box;
-  max-height: var(--glnslpo-max-height, 100%);
-  min-height: 16px;
-  min-width: 16px;
-  overflow: auto;
-  outline: 0;
-  -webkit-overflow-scrolling: touch;
-  // To block the display of a shadow, you must specify "--glnslpo-elevation: none;".
-  box-shadow: var(--glnslpo-elevation, rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px);
+.cdk-overlay-container {
+  // Element "gln-select-panel" Overlay
+  .gln-select-panel {
+    border-radius: var(--glnslpo-border-radius, unset);
+    box-sizing: border-box;
+    max-height: var(--glnslpo-max-height, 100%);
+    min-height: 16px;
+    min-width: 16px;
+    overflow: auto;
+    outline: 0;
+    -webkit-overflow-scrolling: touch;
+    // To block the display of a shadow, you must specify "--glnslpo-elevation: none;".
+    box-shadow: var(--glnslpo-elevation, rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px);
+  }
 }

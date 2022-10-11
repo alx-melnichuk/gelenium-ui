@@ -33,6 +33,8 @@
     <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
     <li>"isError" - a sign that the field is in error (isError);</li>
     <li>"isLabelShrink" - An indication that the label has moved up and shrunk.</li>
+    <li>"isPlaceholder" - specifies that the value of the "label" field be displayed
+      as the "placeholder" attribute for the "input" element (isPlaceholder);</li>
     <li>"isReadOnly" - a sign that the field is read-only (isReadOnly);</li>
     <li>"isRequired" - a sign that the field is required (isRequired);</li>
     <li>"label" - The content of the label.</li>
@@ -66,7 +68,7 @@
       </div>
       <gln-select formControlName="model02a"
         id="unique_id_select02a"
-        label="Enter value"
+        label="Choose a value."
         [exterior]="exterior02a"
         wdFull>
         <gln-option><em>None</em></gln-option>
@@ -152,6 +154,25 @@
       </gln-select>
     </div>
 
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isPlaceholder.</em>
+        </small>
+      </div>
+      <gln-select formControlName="model02f"
+        label="Choose a value."
+        isPlaceholder
+        helperText="The placeholder is displayed."
+        [exterior]="exterior02a"
+        wdFull>
+        <gln-option><em>None</em></gln-option>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-select>
+    </div>
+
   </div>
 
 </form>
@@ -179,7 +200,7 @@
       &lt;/div&gt;
       &lt;gln-select formControlName="model02a"
         id="unique_id_select02a"
-        label="Enter value"
+        label="Choose a value."
         [exterior]="exterior02a"
         wdFull&gt;
         &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
@@ -265,6 +286,25 @@
       &lt;/gln-select&gt;
     &lt;/div&gt;
 
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isPlaceholder.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-select formControlName="model02f"
+        label="Choose a value."
+        isPlaceholder
+        helperText="The placeholder is displayed."
+        [exterior]="exterior02a"
+        wdFull&gt;
+        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-select&gt;
+    &lt;/div&gt;
+
   &lt;/div&gt;
 
 &lt;/form&gt;</pre></code>
@@ -294,6 +334,7 @@ export class SelectComponent &#123;
     model02c: new FormControl(this.fruits[0], []),
     model02d: new FormControl(this.fruits[0], []),
     model02e: new FormControl(null, []),
+    model02f: new FormControl(null, []),
   &#125;;
   public formGroup02a: FormGroup = new FormGroup(this.control02a);
 
