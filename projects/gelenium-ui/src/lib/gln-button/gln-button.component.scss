@@ -40,6 +40,11 @@ gln-button {
   }
   --glntr-ripple-cl: var(--glntr--cl-ripple);
 
+  --glnfr--pd-tp: var(--glnbt-pd-tp, var(--glnfrs--pd-tp, var(--def-lb-pd-tp)));
+  --glnfr--pd-bt: var(--glnbt-pd-bt, var(--glnfrs--pd-bt, var(--def-lb-pd-tp)));
+  --glnfr--pd-lf: var(--glnbt-pd-lf, var(--glnfrs--pd-lf, var(--def-lb-pd-lf)));
+  --glnfr--pd-rg: var(--glnbt-pd-rg, var(--glnfrs--pd-rg, var(--def-lb-pd-lf)));
+
   &>[glnbt-clear] {
     appearance: none;
     margin: 0;
@@ -51,7 +56,7 @@ gln-button {
     -webkit-tap-highlight-color: transparent;
     align-items: center;
     background-color: transparent;
-    border-radius: var(--glnbt-br-rd, var(--glnfrs-br-rd, 0.25em)); // 4px
+    border-radius: var(--glnbt-br-rd, var(--glnfrs--br-rd, 0.25em)); // 4px
     box-sizing: border-box;
     cursor: pointer;
     display: inline-flex;
@@ -198,15 +203,15 @@ gln-button {
       line-height: inherit;
       display: flex;
       align-items: center;
-      padding-top: var(--glnbt-lb-pd-tp, var(--glnfrs-pd-tp, var(--def-lb-pd-tp)));
-      padding-bottom: var(--glnbt-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-tp)));
+      padding-top: var(--glnfr--pd-tp);
+      padding-bottom: var(--glnfr--pd-bt);
     }
     &>[glnbt-mr-ver] {
       line-height: inherit;
       display: flex;
       align-items: center;
-      margin-top: var(--glnbt-lb-pd-tp, var(--glnfrs-pd-tp, var(--def-lb-pd-tp)));
-      margin-bottom: var(--glnbt-lb-pd-bt, var(--glnfrs-pd-bt, var(--def-lb-pd-tp)));
+      margin-top: var(--glnfr--pd-tp);
+      margin-bottom: var(--glnfr--pd-bt);
     }
   }
 
@@ -221,11 +226,11 @@ gln-button {
     }
     &>span[glnfr-orn-lf]:empty~[glnbt-pd-hor],
     &>span[glnfr-orn-lf]:empty~a {
-      padding-left: var(--glnbt-lb-pd-lf, var(--glnfrs-pd-lf, var(--def-lb-pd-lf)));
+      padding-left: var(--glnfr--pd-lf);
     }
     &>span[glnfr-orn-rg]:empty~[glnbt-pd-hor],
     &>span[glnfr-orn-rg]:empty~a {
-      padding-right: var(--glnbt-lb-pd-rg, var(--glnfrs-pd-rg, var(--def-lb-pd-lf)));
+      padding-right: var(--glnfr--pd-rg);
     }
   }
 

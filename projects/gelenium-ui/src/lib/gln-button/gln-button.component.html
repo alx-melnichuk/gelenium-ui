@@ -7,15 +7,6 @@
     [attr.id]="id + '_button'"
     [attr.disabled]="disabled ? '' : null"
     [attr.tabindex]="disabled ? null : 0"
-    [glnFrameExteriorButton]="exterior || currConfig?.exterior"
-    #glnFrameExteriorButton="glnFrameExteriorButton"
-    [glnFrameExteriorButtonElementRef]="hostRef"
-    (glnFrameExteriorButtonChange)="glnFrameSize.updatePaddingVerAndHor()"
-    [glnFrameSize]="frameSize || currConfig?.frameSize"
-    #glnFrameSize="glnFrameSize"
-    [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
-    [glnFrameSizeLabelPd]="currConfig?.labelPd"
-    [glnFrameSizePrepare]="glnFrameExteriorButton"
     glnFrameOrnament
     [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
     [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
@@ -29,7 +20,7 @@
       glnbt-pd-hor>
       <ng-content></ng-content>
     </span>
-    <gln-touch-ripple *ngIf="!disabled && !getBoolean(isNoRipple) && !currConfig?.isNoRipple">
+    <gln-touch-ripple *ngIf="!disabled && !noRipple">
     </gln-touch-ripple>
   </button>
 </ng-container>
@@ -37,15 +28,6 @@
   <div class="glnbt-btn glnbt-settings"
     glnbt-btn
     [attr.id]="id + '_link'"
-    [glnFrameExteriorButton]="exterior || currConfig?.exterior"
-    #glnFrameExteriorButton="glnFrameExteriorButton"
-    [glnFrameExteriorButtonElementRef]="hostRef"
-    (glnFrameExteriorButtonChange)="glnFrameSize.updatePaddingVerAndHor()"
-    [glnFrameSize]="frameSize || currConfig?.frameSize || null"
-    #glnFrameSize="glnFrameSize"
-    [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
-    [glnFrameSizeLabelPd]="currConfig?.labelPd"
-    [glnFrameSizePrepare]="glnFrameExteriorButton"
     glnFrameOrnament
     [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
     [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
@@ -54,7 +36,7 @@
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
     <ng-content select="a"></ng-content>
-    <gln-touch-ripple *ngIf="!disabled && !getBoolean(isNoRipple) && !currConfig?.isNoRipple"
+    <gln-touch-ripple *ngIf="!disabled && !noRipple"
       skip-events>
     </gln-touch-ripple>
   </div>

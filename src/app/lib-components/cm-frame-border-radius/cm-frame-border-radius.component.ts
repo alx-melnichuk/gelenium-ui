@@ -70,8 +70,9 @@ export class CmFrameBorderRadiusComponent {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
-  public getValue(frameSize: string | null): number {
-    return GlnFrameSizeUtil.getValue(GlnFrameSizeUtil.convert(frameSize)) ?? 0;
+  public getSize(frameSize: string | null, radiusRatio: number): number {
+    const frameSizeValue = GlnFrameSizeUtil.getValue(GlnFrameSizeUtil.convert(frameSize)) ?? 0;
+    return Math.round((frameSizeValue * radiusRatio * 100) / 100);
   }
   public getRadius(value: number, exterior: string): string {
     return exterior === 'underline' ? value + 'px ' + value + 'px 0 0' : value + 'px';

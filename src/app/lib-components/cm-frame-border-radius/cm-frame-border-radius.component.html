@@ -127,10 +127,9 @@
 
   <div class="app-group"
     [attr.style]="'--glnfr-br-rd:'
-      + getRadius(getValue('short') * borderRadius/100, exterior05) + ';'
+      + getRadius(getSize('short', borderRadius / 100), exterior05) + ';'
       + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getValue('short') * getRatio(exterior05) + 'px;'
-    ">
+      + getSize('short', getRatio(exterior05)) + 'px;'">
     <div class="app-elem">
       <div>
         <small>
@@ -146,11 +145,10 @@
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :'
-      + getRadius(getValue('small') * borderRadius / 100, exterior05) + ';'
+    [attr.style]="'--glnfr-br-rd:'
+      + getRadius(getSize('small', borderRadius / 100), exterior05) + ';'
       + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getValue('small') * getRatio(exterior05) + 'px;'
-      ">
+      + getSize('small', getRatio(exterior05)) + 'px;'">
     <div class="app-elem">
       <div>
         <small>
@@ -166,11 +164,10 @@
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :'
-      + getRadius(getValue('middle') * borderRadius / 100, exterior05) + ';'
+    [attr.style]="'--glnfr-br-rd:'
+      + getRadius(getSize('middle', borderRadius / 100), exterior05) + ';'
       + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getValue('middle') * getRatio(exterior05) + 'px;'
-      ">
+      + getSize('middle', getRatio(exterior05)) + 'px;'">
     <div class="app-elem">
       <div>
         <small>
@@ -186,11 +183,10 @@
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :'
-      + getRadius(getValue('wide') * borderRadius / 100, exterior05) + ';'
+    [attr.style]="'--glnfr-br-rd:'
+      + getRadius(getSize('wide', borderRadius / 100), exterior05) + ';'
       + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getValue('wide') * getRatio(exterior05) + 'px;'
-      ">
+      + getSize('wide', getRatio(exterior05)) + 'px;'">
     <div class="app-elem">
       <div>
         <small>
@@ -206,11 +202,10 @@
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :'
-      + getRadius(getValue('large') * borderRadius / 100, exterior05) + ';'
+    [attr.style]="'--glnfr-br-rd:'
+      + getRadius(getSize('large', borderRadius / 100), exterior05) + ';'
       + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getValue('large') * getRatio(exterior05) + 'px;'
-      ">
+      + getSize('large', getRatio(exterior05)) + 'px;'">
     <div class="app-elem">
       <div>
         <small>
@@ -227,11 +222,10 @@
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :'
-      + getRadius(getValue('huge') * borderRadius / 100, exterior05) + ';'
+    [attr.style]="'--glnfr-br-rd:'
+      + getRadius(getSize('huge', borderRadius / 100), exterior05) + ';'
       + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getValue('huge') * getRatio(exterior05) + 'px;'
-      ">
+      + getSize('huge', getRatio(exterior05)) + 'px;'">
     <div class="app-elem">
       <div>
         <small>
@@ -264,10 +258,9 @@
 
   &lt;div class="app-group"
     [attr.style]="'--glnfr-br-rd:'
-      + getRadius(getValue('short') * borderRadius/100, exterior05) + ';'
+      + getRadius(getSize('short', borderRadius / 100), exterior05) + ';'
       + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getValue('short') * getRatio(exterior05) + 'px;'
-    "&gt;
+      + getSize('short', getRatio(exterior05)) + 'px;'"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -283,11 +276,10 @@
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :'
-      + getRadius(getValue('small') * borderRadius / 100, exterior05) + ';'
+    [attr.style]="'--glnfr-br-rd:'
+      + getRadius(getSize('small', borderRadius / 100), exterior05) + ';'
       + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getValue('small') * getRatio(exterior05) + 'px;'
-      "&gt;
+      + getSize('small', getRatio(exterior05)) + 'px;'"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -303,11 +295,10 @@
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :'
-      + getRadius(getValue('middle') * borderRadius / 100, exterior05) + ';'
+    [attr.style]="'--glnfr-br-rd:'
+      + getRadius(getSize('middle', borderRadius / 100), exterior05) + ';'
       + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getValue('middle') * getRatio(exterior05) + 'px;'
-      "&gt;
+      + getSize('middle', getRatio(exterior05)) + 'px;'"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -323,11 +314,10 @@
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :'
-      + getRadius(getValue('wide') * borderRadius / 100, exterior05) + ';'
+    [attr.style]="'--glnfr-br-rd:'
+      + getRadius(getSize('wide', borderRadius / 100), exterior05) + ';'
       + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getValue('wide') * getRatio(exterior05) + 'px;'
-      "&gt;
+      + getSize('wide', getRatio(exterior05)) + 'px;'"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -343,11 +333,10 @@
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :'
-      + getRadius(getValue('large') * borderRadius / 100, exterior05) + ';'
+    [attr.style]="'--glnfr-br-rd:'
+      + getRadius(getSize('large', borderRadius / 100), exterior05) + ';'
       + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getValue('large') * getRatio(exterior05) + 'px;'
-      "&gt;
+      + getSize('large', getRatio(exterior05)) + 'px;'"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -364,11 +353,10 @@
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :'
-      + getRadius(getValue('huge') * borderRadius / 100, exterior05) + ';'
+    [attr.style]="'--glnfr-br-rd:'
+      + getRadius(getSize('huge', borderRadius / 100), exterior05) + ';'
       + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getValue('huge') * getRatio(exterior05) + 'px;'
-      "&gt;
+      + getSize('huge', getRatio(exterior05)) + 'px;'"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -419,9 +407,10 @@ export class FrameComponent &#123;
     model05f: new FormControl('Demo Size Huge', []),
   &#125;);
 
-  public getValue(frameSize: string | null): number &#123;
-    return GlnFrameSizeUtil.getValue(
+  public getSize(frameSize: string | null, radiusRatio: number): number &#123;
+    const frameSizeValue = GlnFrameSizeUtil.getValue(
       GlnFrameSizeUtil.convert(frameSize)) ?? 0;
+    return Math.round((frameSizeValue * radiusRatio * 100) / 100);
   &#125;
   public getRadius(value: number, exterior: string): string &#123;
     return exterior === 'underline'

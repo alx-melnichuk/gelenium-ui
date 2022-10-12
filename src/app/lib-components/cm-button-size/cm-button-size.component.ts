@@ -37,7 +37,7 @@ export class CmButtonSizeComponent {
   public fragment03i = 'size-link3i';
   // GlnButtonConfig
   public config03 = {
-    frameSizeValue: 57,
+    frameSize: '57',
   };
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

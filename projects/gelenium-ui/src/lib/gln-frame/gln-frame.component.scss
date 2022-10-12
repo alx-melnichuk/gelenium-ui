@@ -18,13 +18,16 @@ gln-frame {
   --glnfr--danger-s: var(--glncl-danger-s, var(--gln-danger-s));
 
   --glnfr--br-rd: var(--glnfr-br-rd, var(--glnfrs--br-rd));
-  --glnfr--pd-lf: var(--glnfr-pd-lf, var(--glnfrs--pd-lf));
-  --glnfr--pd-rg: var(--glnfr-pd-rg, var(--glnfr-pd-lf, var(--glnfrs--pd-rg)));
   --glnfr--pd-shr: var(--glnfr-pd-shr, var(--glnfrs--pd-shr));
-  --glnfr--pd-tp: var(--glnfr-pd-tp, var(--glnfrs--pd-tp));
-  --glnfr--pd-bt: var(--glnfr-pd-bt, var(--glnfr-pd-tp, var(--glnfrs--pd-bt)));
-  --glnfr--trn-y: var(--glnfr-trn-y, var(--glnfrs--trn-y));
-  --glnfr--trn2-y: var(--glnfr-trn2-y, var(--glnfrs--trn2-y));
+
+  --glnfr--pd-lf: var(--glnfr-pd-lf, var(--glnfrs--pd-lf, var(--def-lb-pd-lf)));
+  --glnfr--pd-rg: var(--glnfr-pd-rg, var(--glnfr-pd-lf, var(--glnfrs--pd-rg, var(--def-lb-pd-rg))));
+
+  --glnfr--pd-tp: var(--glnfr-pd-tp, var(--glnfrs--pd-tp, var(--def-lb-pd-tp)));
+  --glnfr--pd-bt: var(--glnfr-pd-bt, var(--glnfr-pd-tp, var(--glnfrs--pd-bt, var(--def-lb-pd-tp))));
+
+  --glnfr--trn-y: var(--glnfr-trn-y, var(--glnfrs--trn-y, var(--def-lb-trn-y)));
+  --glnfr--trn2-y: var(--glnfr-trn2-y, var(--glnfrs--trn2-y, var(--def-lb-trn2-y)));
 
   background-color: transparent;
   border: 0;
@@ -105,10 +108,10 @@ gln-frame {
   }
   &[shr], &:focus-within, &[foc], &[fil] {
     label {
-      max-width: calc(133% - var(--glnfr-lb-pd-shr, var(--glnfr--pd-shr, var(--def-lb-pd-shr))));
+      max-width: calc(133% - var(--glnfr--pd-shr));
       @include mxTransform_TranslateXY_ScaleXY(
-        var(--glnfr-lb-pd-lf, var(--glnfr--pd-lf, var(--def-lb-pd-lf))), // $translateX
-        var(--glnfr-lb-trn-y, var(--glnfr--trn-y, var(--def-lb-trn-y))), // $translateY
+        var(--glnfr--pd-lf), // $translateX
+        var(--glnfr--trn-y), // $translateY
         0.75, // $scaleX
         0.75  // $scaleY
       );
@@ -117,12 +120,12 @@ gln-frame {
   }
   &:not([shr]):not(:focus-within):not([foc]):not([fil]) label {
     max-width: calc(100%
-    - var(--glnfro-pd-lf, var(--glnfr-lb-pd-lf, var(--glnfr--pd-lf, var(--def-lb-pd-lf))))
-    - var(--glnfro-pd-rg, var(--glnfr-lb-pd-rg, var(--glnfr--pd-rg, var(--def-lb-pd-rg))))
+    - var(--glnfro-pd-lf, var(--glnfr--pd-lf))
+    - var(--glnfro-pd-rg, var(--glnfr--pd-rg))
     );
     @include mxTransform_TranslateXY_ScaleXY(
-      var(--glnfro-pd-lf, var(--glnfr-lb-pd-lf, var(--glnfr--pd-lf, var(--def-lb-pd-lf)))), // $translateX
-      var(--glnfr-lb-trn2-y, var(--glnfr--trn2-y, var(--def-lb-trn2-y))), // $translateY
+      var(--glnfro-pd-lf, var(--glnfr--pd-lf)), // $translateX
+      var(--glnfr--trn2-y), // $translateY
       1,  // $scaleX
       1   // $scaleY
     );
@@ -289,8 +292,8 @@ gln-frame {
     left: 0;
     margin: 0;
     padding-bottom: 0px;
-    padding-left: calc(var(--glnfr-lb-pd-lf, var(--glnfr--pd-lf, var(--def-lb-pd-lf))) - var(--glnfr-o-lgn-pd, var(--def-o-lgn-pd)) - var(--glnfr--pg-lf-delta, 0px));
-    padding-right: calc(var(--glnfr-lb-pd-lf, var(--glnfr--pd-lf, var(--def-lb-pd-lf))) - var(--glnfr-o-lgn-pd, var(--def-o-lgn-pd)));
+    padding-left: calc(var(--glnfr--pd-lf) - var(--glnfr-o-lgn-pd, var(--def-o-lgn-pd)) - var(--glnfr--pg-lf-delta, 0px));
+    padding-right: calc(var(--glnfr--pd-rg) - var(--glnfr-o-lgn-pd, var(--def-o-lgn-pd)));
     padding-top: 0px;
     pointer-events: none;
     border-radius: inherit;
@@ -380,12 +383,12 @@ gln-frame {
       align-self: baseline;
     }
     &>[glnfr-pd-ver] {
-      padding-top: var(--glnfr-lb-pd-tp, var(--glnfr--pd-tp, var(--def-lb-pd-tp)));
-      padding-bottom: var(--glnfr-lb-pd-bt, var(--glnfr--pd-bt, var(--def-lb-pd-bt)));
+      padding-top   : var(--glnfr--pd-tp);
+      padding-bottom: var(--glnfr--pd-bt);
     }
     &>[glnfr-mr-ver] {
-      margin-top: var(--glnfr-lb-pd-tp, var(--glnfr--pd-tp, var(--def-lb-pd-tp)));
-      margin-bottom: var(--glnfr-lb-pd-bt, var(--glnfr--pd-bt, var(--def-lb-pd-bt)));
+      margin-top   : var(--glnfr--pd-tp);
+      margin-bottom: var(--glnfr--pd-bt);
     }
 
     &>span[glnfr-orn-lf], &>span[glnfr-orn-rg] {
@@ -398,10 +401,10 @@ gln-frame {
     }
 
     &>span[glnfr-orn-lf]:empty~[glnfr-pd-hor] {
-      padding-left: var(--glnfr-lb-pd-lf, var(--glnfr--pd-lf, var(--def-lb-pd-lf)));
+      padding-left: var(--glnfr--pd-lf);
     }
     &>span[glnfr-orn-rg]:empty~[glnfr-pd-hor] {
-      padding-right: var(--glnfr-lb-pd-rg, var(--glnfr--pd-rg, var(--def-lb-pd-rg)));
+      padding-right: var(--glnfr--pd-rg);
     }
   }
 
@@ -442,7 +445,7 @@ gln-frame {
   &[ext-s]>div>span[glnfr-orn-rg] {
     &>.glnfr-ornam {
       display: inline-block;
-      margin-bottom: var(--glnfr-lb-pd-bt, var(--glnfr--pd-bt, var(--def-lb-pd-bt)));
+      margin-bottom: var(--glnfr--pd-bt);
     }
   }
 }
