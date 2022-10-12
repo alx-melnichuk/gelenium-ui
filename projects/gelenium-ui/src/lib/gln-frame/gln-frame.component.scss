@@ -127,6 +127,9 @@ gln-frame {
       1   // $scaleY
     );
   }
+  &[dis] {
+    pointer-events: none;
+  }
 
   // Definition of internal variables by element state.
   &:not([dis]) {
