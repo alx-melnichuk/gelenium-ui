@@ -126,10 +126,11 @@
   autocomplete="off">
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd:'
-      + getRadius(getSize('short', borderRadius / 100), exterior05) + ';'
-      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getSize('short', getRatio(exterior05)) + 'px;'">
+    [ngStyle]="{
+      '--glnfr-br-rd': getRadius(getSize('short',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('short', getRatio(exterior05)) : 'unset')
+    }">
     <div class="app-elem">
       <div>
         <small>
@@ -145,10 +146,11 @@
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd:'
-      + getRadius(getSize('small', borderRadius / 100), exterior05) + ';'
-      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getSize('small', getRatio(exterior05)) + 'px;'">
+    [ngStyle]="{
+      '--glnfr-br-rd': getRadius(getSize('small',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('small', getRatio(exterior05)) : 'unset')
+    }">
     <div class="app-elem">
       <div>
         <small>
@@ -164,10 +166,11 @@
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd:'
-      + getRadius(getSize('middle', borderRadius / 100), exterior05) + ';'
-      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getSize('middle', getRatio(exterior05)) + 'px;'">
+    [ngStyle]="{
+      '--glnfr-br-rd': getRadius(getSize('middle',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('middle', getRatio(exterior05)) : 'unset')
+    }">
     <div class="app-elem">
       <div>
         <small>
@@ -183,10 +186,11 @@
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd:'
-      + getRadius(getSize('wide', borderRadius / 100), exterior05) + ';'
-      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getSize('wide', getRatio(exterior05)) + 'px;'">
+    [ngStyle]="{
+      '--glnfr-br-rd': getRadius(getSize('wide',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('wide', getRatio(exterior05)) : 'unset')
+    }">
     <div class="app-elem">
       <div>
         <small>
@@ -202,10 +206,11 @@
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd:'
-      + getRadius(getSize('large', borderRadius / 100), exterior05) + ';'
-      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getSize('large', getRatio(exterior05)) + 'px;'">
+    [ngStyle]="{
+      '--glnfr-br-rd': getRadius(getSize('large',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('large', getRatio(exterior05)) : 'unset')
+    }">
     <div class="app-elem">
       <div>
         <small>
@@ -222,10 +227,11 @@
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd:'
-      + getRadius(getSize('huge', borderRadius / 100), exterior05) + ';'
-      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getSize('huge', getRatio(exterior05)) + 'px;'">
+    [ngStyle]="{
+      '--glnfr-br-rd': getRadius(getSize('huge',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('huge', getRatio(exterior05)) : 'unset')
+    }">
     <div class="app-elem">
       <div>
         <small>
@@ -257,10 +263,11 @@
   autocomplete="off"&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd:'
-      + getRadius(getSize('short', borderRadius / 100), exterior05) + ';'
-      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getSize('short', getRatio(exterior05)) + 'px;'"&gt;
+    [ngStyle]="&#123;
+      '--glnfr-br-rd': getRadius(getSize('short',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('short', getRatio(exterior05)) : 'unset')
+    &#125;"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -276,10 +283,11 @@
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd:'
-      + getRadius(getSize('small', borderRadius / 100), exterior05) + ';'
-      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getSize('small', getRatio(exterior05)) + 'px;'"&gt;
+    [ngStyle]="&#123;
+      '--glnfr-br-rd': getRadius(getSize('small',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('small', getRatio(exterior05)) : 'unset')
+    &#125;"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -295,10 +303,11 @@
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd:'
-      + getRadius(getSize('middle', borderRadius / 100), exterior05) + ';'
-      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getSize('middle', getRatio(exterior05)) + 'px;'"&gt;
+    [ngStyle]="&#123;
+      '--glnfr-br-rd': getRadius(getSize('middle',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('middle', getRatio(exterior05)) : 'unset')
+    &#125;"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -314,10 +323,11 @@
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd:'
-      + getRadius(getSize('wide', borderRadius / 100), exterior05) + ';'
-      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getSize('wide', getRatio(exterior05)) + 'px;'"&gt;
+    [ngStyle]="&#123;
+      '--glnfr-br-rd': getRadius(getSize('wide',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('wide', getRatio(exterior05)) : 'unset')
+    &#125;"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -333,10 +343,11 @@
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd:'
-      + getRadius(getSize('large', borderRadius / 100), exterior05) + ';'
-      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getSize('large', getRatio(exterior05)) + 'px;'"&gt;
+    [ngStyle]="&#123;
+      '--glnfr-br-rd': getRadius(getSize('large',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('large', getRatio(exterior05)) : 'unset')
+    &#125;"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -353,10 +364,11 @@
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd:'
-      + getRadius(getSize('huge', borderRadius / 100), exterior05) + ';'
-      + (isAddPadding05 ? '--glnfr-pd-lf' : '--demo') + ':'
-      + getSize('huge', getRatio(exterior05)) + 'px;'"&gt;
+    [ngStyle]="&#123;
+      '--glnfr-br-rd': getRadius(getSize('huge',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('huge', getRatio(exterior05)) : 'unset')
+    &#125;"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -407,14 +419,15 @@ export class FrameComponent &#123;
     model05f: new FormControl('Demo Size Huge', []),
   &#125;);
 
-  public getSize(frameSize: string | null, radiusRatio: number): number &#123;
-    const frameSizeValue = GlnFrameSizeUtil.getValue(
+  public getSize(frameSize: string | null, radiusRatio: number = 1): string &#123;
+    const value = GlnFrameSizeUtil.getValue(
       GlnFrameSizeUtil.convert(frameSize)) ?? 0;
-    return Math.round((frameSizeValue * radiusRatio * 100) / 100);
+    return Math.round((value * radiusRatio * 100) / 100)
+      .toString()
+      .concat('px');
   &#125;
-  public getRadius(value: number, exterior: string): string &#123;
-    return exterior === 'underline'
-      ? value + 'px ' + value + 'px 0 0' : value + 'px';
+  public getRadius(value: string, exterior: string): string &#123;
+    return exterior === 'underline' ? value + ' ' + value + ' 0 0' : value;
   &#125;
   public getRatio(exterior: string): number &#123;
     return exterior === 'underline'
@@ -487,71 +500,81 @@ app-frame &#123;
 
   <div class="app-group">
 
-    <div class="app-elem">
+    <div class="app-elem"
+      [ngStyle]="{
+        '--glnfr-br-rd': '12.5px 0px 0px 12.5px',
+        '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      }">
       <div>
         <small>
           <em>Demo - A (top-left, bottom-left)</em>
         </small>
       </div>
-      <gln-input [attr.style]="'--glnfr-br-rd: 12.5px 0px 0px 12.5px;'
-        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
-        formControlName="model06a"
+      <gln-input formControlName="model06a"
         [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined">
       </gln-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem"
+      [ngStyle]="{
+        '--glnfr-br-rd': '0px 12.5px 12.5px 0px',
+        '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      }">
       <div>
         <small>
           <em>Demo - B (top-right, bottom-right)</em>
         </small>
       </div>
-      <gln-input [attr.style]="'--glnfr-br-rd: 0px 12.5px 12.5px 0px;'
-        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
-        formControlName="model06b"
+      <gln-input formControlName="model06b"
         [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined">
       </gln-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem"
+      [ngStyle]="{
+        '--glnfr-br-rd': '12.5px 0px 12.5px 0px',
+        '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      }">
       <div>
         <small>
           <em>Demo - C (top-left, bottom-right)</em>
         </small>
       </div>
-      <gln-input [attr.style]="'--glnfr-br-rd: 12.5px 0px 12.5px 0px;'
-        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
-        formControlName="model06c"
+      <gln-input formControlName="model06c"
         [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined">
       </gln-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem"
+      [ngStyle]="{
+      '--glnfr-br-rd': '0px 12.5px 0px 12.5px',
+      '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      }">
       <div>
         <small>
           <em>Demo - D (bottom-right, top-left)</em>
         </small>
       </div>
-      <gln-input [attr.style]="'--glnfr-br-rd: 0px 12.5px 0px 12.5px;'
-        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
-        formControlName="model06d"
+      <gln-input formControlName="model06d"
         [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined">
       </gln-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem"
+      [ngStyle]="{
+      '--glnfr-br-rd': '5% / 50%',
+      '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      }">
       <div>
         <small>
           <em>Demo - E (border-radius: 5%/50%)</em>
         </small>
       </div>
-      <gln-input [attr.style]="'--glnfr-br-rd: 5% / 50%;'
-        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
-        formControlName="model06e"
+      <gln-input formControlName="model06e"
         [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined">
       </gln-input>
@@ -568,14 +591,16 @@ app-frame &#123;
   </div>
 
   <div class="app-group">
-    <div class="app-elem">
+    <div class="app-elem"
+      [ngStyle]="{
+      '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      }">
       <div>
         <small>
           <em>Demo - F (border-radius: 16.66px)</em>
         </small>
       </div>
       <gln-input class="radius-f"
-        [attr.style]="(isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06f"
         [label]="hideLabel06 ? null : 'Enter value'"
         exterior="underline">
@@ -607,71 +632,81 @@ app-frame &#123;
 
   &lt;div class="app-group"&gt;
 
-    &lt;div class="app-elem"&gt;
+    &lt;div class="app-elem"
+      [ngStyle]="&#123;
+        '--glnfr-br-rd': '12.5px 0px 0px 12.5px',
+        '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      &#125;"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Demo - A (top-left, bottom-left)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input [attr.style]="'--glnfr-br-rd: 12.5px 0px 0px 12.5px;'
-        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
-        formControlName="model06a"
+      &lt;gln-input formControlName="model06a"
         [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem"&gt;
+    &lt;div class="app-elem"
+      [ngStyle]="&#123;
+        '--glnfr-br-rd': '0px 12.5px 12.5px 0px',
+        '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      &#125;"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Demo - B (top-right, bottom-right)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input [attr.style]="'--glnfr-br-rd: 0px 12.5px 12.5px 0px;'
-        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
-        formControlName="model06b"
+      &lt;gln-input formControlName="model06b"
         [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem"&gt;
+    &lt;div class="app-elem"
+      [ngStyle]="&#123;
+        '--glnfr-br-rd': '12.5px 0px 12.5px 0px',
+        '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      &#125;"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Demo - C (top-left, bottom-right)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input [attr.style]="'--glnfr-br-rd: 12.5px 0px 12.5px 0px;'
-        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
-        formControlName="model06c"
+      &lt;gln-input formControlName="model06c"
         [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem"&gt;
+    &lt;div class="app-elem"
+      [ngStyle]="&#123;
+      '--glnfr-br-rd': '0px 12.5px 0px 12.5px',
+      '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      &#125;"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Demo - D (bottom-right, top-left)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input [attr.style]="'--glnfr-br-rd: 0px 12.5px 0px 12.5px;'
-        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
-        formControlName="model06d"
+      &lt;gln-input formControlName="model06d"
         [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem"&gt;
+    &lt;div class="app-elem"
+      [ngStyle]="&#123;
+      '--glnfr-br-rd': '5% / 50%',
+      '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      &#125;"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Demo - E (border-radius: 5%/50%)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input [attr.style]="'--glnfr-br-rd: 5% / 50%;'
-        + (isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
-        formControlName="model06e"
+      &lt;gln-input formControlName="model06e"
         [label]="hideLabel06 ? null : 'Enter value'"
         exterior="outlined"&gt;
       &lt;/gln-input&gt;
@@ -688,14 +723,16 @@ app-frame &#123;
   &lt;/div&gt;
 
   &lt;div class="app-group"&gt;
-    &lt;div class="app-elem"&gt;
+    &lt;div class="app-elem"
+      [ngStyle]="&#123;
+      '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      &#125;"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Demo - F (border-radius: 16.66px)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input class="radius-f"
-        [attr.style]="(isAddPadding06 ? '--glnfr-pd-lf' : '--demo') + ': 18.5px;'"
         formControlName="model06f"
         [label]="hideLabel06 ? null : 'Enter value'"
         exterior="underline"&gt;
