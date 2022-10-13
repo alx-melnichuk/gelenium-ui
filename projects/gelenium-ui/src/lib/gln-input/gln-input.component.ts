@@ -124,9 +124,14 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
 
   @ViewChild(GlnFrameComponent, { static: true })
   public frameComp!: GlnFrameComponent;
-  @ViewChild('inputElement', { static: true })
+  @ViewChild('inputElementRef', { static: true })
   public inputElementRef!: ElementRef<HTMLElement>;
+  @ViewChild('wrapElementRef', { read: ElementRef<HTMLDivElement>, static: true })
+  public wrapElementRef!: ElementRef<HTMLDivElement>;
 
+  public get wrapHtmlElementRef(): ElementRef<HTMLElement> {
+    return this.wrapElementRef as ElementRef<HTMLElement>;
+  }
   public get exteriorVal(): GlnFrameExterior | null {
     return this.frameComp.exteriorVal;
   }

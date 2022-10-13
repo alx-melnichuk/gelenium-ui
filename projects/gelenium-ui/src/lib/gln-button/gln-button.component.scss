@@ -38,21 +38,24 @@ gln-button {
     --def-lb-pd-lf: 0.5em; // 8px
     --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
   }
+  // To pass the value to GlnTouchRipple.
   --glntr-ripple-cl: var(--glntr--cl-ripple);
 
-  --glnfr--pd-tp: var(--glnbt-pd-tp, var(--glnfrs--pd-tp, var(--def-lb-pd-tp)));
-  --glnfr--pd-bt: var(--glnbt-pd-bt, var(--glnfrs--pd-bt, var(--def-lb-pd-tp)));
-  --glnfr--pd-lf: var(--glnbt-pd-lf, var(--glnfrs--pd-lf, var(--def-lb-pd-lf)));
-  --glnfr--pd-rg: var(--glnbt-pd-rg, var(--glnfrs--pd-rg, var(--def-lb-pd-lf)));
+  &>div {
+    --glnfr--pd-tp: var(--glnbt-pd-tp, var(--glnfrs--pd-tp, var(--def-lb-pd-tp)));
+    --glnfr--pd-bt: var(--glnbt-pd-bt, var(--glnfrs--pd-bt, var(--def-lb-pd-tp)));
+    --glnfr--pd-lf: var(--glnbt-pd-lf, var(--glnfrs--pd-lf, var(--def-lb-pd-lf)));
+    --glnfr--pd-rg: var(--glnbt-pd-rg, var(--glnfrs--pd-rg, var(--def-lb-pd-lf)));
+  }
 
-  &>[glnbt-clear] {
+  &>div>[glnbt-clear] {
     appearance: none;
     margin: 0;
     padding: 0;
     border: none;
     outline: none;
   }
-  &>[glnbt-btn] {
+  &>div>[glnbt-btn] {
     -webkit-tap-highlight-color: transparent;
     align-items: center;
     background-color: transparent;
@@ -76,14 +79,14 @@ gln-button {
     vertical-align: middle;
     width: inherit;
   }
-  &:not([dis])>[glnbt-btn] {
+  &:not([dis])>div>[glnbt-btn] {
     transition:
       background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
       box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
       border-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
       color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
-  &[dis]>[glnbt-btn] {
+  &[dis]>div>[glnbt-btn] {
     cursor: default;
     a {
       pointer-events: none;
@@ -105,7 +108,7 @@ gln-button {
 
   // Exterior: "contained"
   // To block the display of a shadow for a button in the "Contained" mode, you must specify "--glnbt-elevation: none;".
-  &[ext-c]:not([dis])>[glnbt-btn] {
+  &[ext-c]:not([dis])>div>[glnbt-btn] {
     &:not(:hover):not(:active) {
       box-shadow: var(--glnbt-elevation, 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%));
     }
@@ -129,7 +132,7 @@ gln-button {
   }
 
   // Exterior: "outlined"
-  &[ext-o]>[glnbt-btn] {
+  &[ext-o]>div>[glnbt-btn] {
     border-width: 1px;
     border-style: solid;
   }
@@ -157,7 +160,7 @@ gln-button {
   }
 
   // Definition of internal variables by element state.
-  &:not([dis])>[glnbt-btn] {
+  &:not([dis])>div>[glnbt-btn] {
     // The state without disabled, hover, focused.
     &:not(:hover):not(:focus):not(:focus-within):not([foc]) {
       --glnbt--label-cl: var(--glnbt-def-lb-cl, var(--glnbt--lb-cl-def));
@@ -175,14 +178,14 @@ gln-button {
       --glnbt--bground-cl: var(--glnbt-foc-bg-cl, var(--glnbt-def-bg-cl, var(--glnbt--bg-cl-def)));
     }
   } // The state with disabled.
-  &[dis]>[glnbt-btn] {
+  &[dis]>div>[glnbt-btn] {
     --glnbt--label-cl: var(--glnbt-dis-lb-cl, var(--glnbt--lb-cl-dis));
     --glnbt--border-cl: var(--glnbt-dis-br-cl, var(--glnbt--br-cl-dis));
     --glnbt--bground-cl: var(--glnbt-dis-bg-cl, var(--glnbt--bg-cl-dis));
   }
 
   // Define styles for all exteriors.
-  &>[glnbt-btn] {
+  &>div>[glnbt-btn] {
     color           : var(--glnbt--label-cl);
     border-color    : var(--glnbt--border-cl);
     background-color: var(--glnbt--bground-cl);
@@ -191,14 +194,14 @@ gln-button {
   // ** Additional settings **
 
   // To block the display of the button name in uppercase, you must specify "--glnbt-uppercase: none;".
-  &>[glnbt-btn] {
+  &>div>[glnbt-btn] {
     &>span, &>a {
       text-transform: var(--glnbt-uppercase, uppercase);
     }
   }
 
   // Vertical offset.
-  &>[glnbt-btn] {
+  &>div>[glnbt-btn] {
     &>a:not([glnbt-mr-ver]) {
       line-height: inherit;
       display: flex;
@@ -216,7 +219,7 @@ gln-button {
   }
 
   // Ornament "padding".
-  &>[glnbt-btn] {
+  &>div>[glnbt-btn] {
     &>span[glnfr-orn-lf], &>span[glnfr-orn-rg] {
       max-height: inherit;
       display: inline-flex;
@@ -235,7 +238,7 @@ gln-button {
   }
 
   // Ornament "alignment".
-  &>[glnbt-btn] {
+  &>div>[glnbt-btn] {
     &>span[glnfr-orn-lf="center"], &>span[glnfr-orn-rg="center"] {
       align-self: center;
     }

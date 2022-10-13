@@ -47,8 +47,10 @@ export class CmButtonBorderRadiusComponent {
   public getLabel(exterior: string): string {
     return exterior ? exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   }
-  public getSize(frameSize: string | null, radiusRatio: number = 1): number {
-    const frameSizeValue = GlnFrameSizeUtil.getValue(GlnFrameSizeUtil.convert(frameSize)) ?? 0;
-    return Math.round((frameSizeValue * radiusRatio * 100) / 100);
+  public getSize(frameSize: string | null, radiusRatio: number = 1): string {
+    const value = GlnFrameSizeUtil.getValue(GlnFrameSizeUtil.convert(frameSize)) ?? 0;
+    return Math.round((value * radiusRatio * 100) / 100)
+      .toString()
+      .concat('px');
   }
 }

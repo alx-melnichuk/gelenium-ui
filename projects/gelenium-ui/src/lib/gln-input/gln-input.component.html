@@ -1,6 +1,8 @@
-<ng-container [formGroup]="formGroup">
+<div #wrapElementRef
+  [formGroup]="formGroup">
+
   <gln-frame [config]="currConfig"
-    [cssElementRef]="hostRef"
+    [cssElementRef]="wrapHtmlElementRef"
     [exterior]="exterior || currConfig.exterior"
     [frameSize]="frameSize || currConfig.frameSize"
     [isAttrHideAnimation]="isAttrHideAnimation"
@@ -25,7 +27,7 @@
       <ng-content select="[gln-orn-rg]"></ng-content>
     </span>
 
-    <input #inputElement
+    <input #inputElementRef
       formControlName="textData"
       glnfr-pd-ver
       glnfr-pd-hor
@@ -47,10 +49,12 @@
       (input)="doInput($event)" />
 
   </gln-frame>
-</ng-container>
-<gln-hint-or-error *ngIf="!!helperText"
-  [text]="helperText"
-  [isError]="!!formControl.errors || error"
-  [isFocused]="isFocused"
-  [isDisabled]="disabled">
-</gln-hint-or-error>
+
+  <gln-hint-or-error *ngIf="!!helperText"
+    [text]="helperText"
+    [isError]="!!formControl.errors || error"
+    [isFocused]="isFocused"
+    [isDisabled]="disabled">
+  </gln-hint-or-error>
+
+</div>

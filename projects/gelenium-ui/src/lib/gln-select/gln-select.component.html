@@ -6,7 +6,7 @@
   (click)="!disabled ? toggle() : null">
   <gln-frame [ngClass]="[(isPanelOpen ? 'is-open' : '')]"
     [config]="currConfig"
-    [cssElementRef]="hostRef"
+    [cssElementRef]="triggerHtmlElementRef"
     [exterior]="exterior || currConfig.exterior"
     [frameSize]="frameSize || currConfig.frameSize"
     [isAttrHideAnimation]="isAttrHideAnimation"
@@ -78,14 +78,16 @@
     </div>
 
   </gln-frame>
+
+  <gln-hint-or-error *ngIf="!!helperText"
+    [text]="helperText"
+    [isError]="!!errors || error"
+    [isFocused]="isFocused"
+    [isDisabled]="disabled">
+  </gln-hint-or-error>
+
 </div>
 
-<gln-hint-or-error *ngIf="!!helperText"
-  [text]="helperText"
-  [isError]="!!errors || error"
-  [isFocused]="isFocused"
-  [isDisabled]="disabled">
-</gln-hint-or-error>
 
 <ng-template cdkConnectedOverlay
   [cdkConnectedOverlayBackdropClass]="backdropClassVal || 'cdk-overlay-transparent-backdrop'"

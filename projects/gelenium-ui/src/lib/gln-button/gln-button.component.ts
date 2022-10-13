@@ -69,8 +69,11 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   @Output()
   readonly changeCssParams: EventEmitter<void> = new EventEmitter();
 
-  @ViewChild('buttonElement', { static: true })
-  public buttonElementRef!: ElementRef<HTMLElement>;
+  @ViewChild('buttonElementRef', { static: false })
+  public buttonElementRef: ElementRef<HTMLElement> | null = null;
+
+  @ViewChild('wrapElementRef', { read: ElementRef<HTMLDivElement>, static: true })
+  public wrapElementRef!: ElementRef<HTMLDivElement>;
 
   @ViewChild(GlnTouchRippleComponent, { static: false })
   public touchRipple: GlnTouchRippleComponent | null = null;
@@ -80,10 +83,10 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
 
   public currConfig: GlnButtonConfig;
   public cssBorderRadius: string | null = null;
-  public cssPaddingBottom: number | null = null;
-  public cssPaddingLeft: number | null = null;
-  public cssPaddingRight: number | null = null;
-  public cssPaddingTop: number | null = null;
+  public cssPaddingBottom: string | null = null;
+  public cssPaddingLeft: string | null = null;
+  public cssPaddingRight: string | null = null;
+  public cssPaddingTop: string | null = null;
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public exteriorVal: GlnButtonExterior | null = null; // Binding attribute "exterior".
   public isFocused = false;
@@ -123,7 +126,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       isUpdateCssParams = true;
     }
     if (isUpdateCssParams && this.exteriorVal) {
-      this.updateCssParams(this.exteriorVal, this.frameSizeValue, this.getLineHeight(), this.hostRef);
+      this.updateCssParams(this.exteriorVal, this.frameSizeValue, this.getLineHeight(), this.wrapElementRef);
     }
 
     if (changes['isDisabled']) {
@@ -162,7 +165,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       isUpdateCssParams = true;
     }
     if (isUpdateCssParams && this.exteriorVal) {
-      this.updateCssParams(this.exteriorVal, this.frameSizeValue, this.getLineHeight(), this.hostRef);
+      this.updateCssParams(this.exteriorVal, this.frameSizeValue, this.getLineHeight(), this.wrapElementRef);
     }
 
     if (this.noRipple == null) {
@@ -230,34 +233,30 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     return this.lineHeightInn;
   }
 
-  private updateCssParams(exteriorVal: GlnButtonExterior, frameSizeValue: number, lineHeight: number, elem: ElementRef<HTMLElement>): void {
-    this.cssBorderRadius = null;
-    this.cssPaddingBottom = null;
-    this.cssPaddingLeft = null;
-    this.cssPaddingRight = null;
-    this.cssPaddingTop = null;
-
-    if (frameSizeValue > 0 && lineHeight > 0) {
-      this.cssBorderRadius = NumberUtil.roundTo100(0.1 * frameSizeValue) + 'px';
-      const param = (frameSizeValue - lineHeight) / 2;
-      if (exteriorVal === GlnButtonExterior.contained) {
-        this.cssPaddingLeft = NumberUtil.roundTo100(0.3636 * frameSizeValue);
-        this.cssPaddingTop = param;
-      } else if (exteriorVal === GlnButtonExterior.outlined) {
-        this.cssPaddingLeft = NumberUtil.roundTo100(0.3409 * frameSizeValue);
-        this.cssPaddingTop = param - 1;
-      } else if (exteriorVal === GlnButtonExterior.text) {
-        this.cssPaddingLeft = NumberUtil.roundTo100(0.2045 * frameSizeValue);
-        this.cssPaddingTop = param;
+  private updateCssParams(exterior: GlnButtonExterior, frameSize: number, lineHeight: number, elem: ElementRef<HTMLElement>): void {
+    let borderRadius: number | null = null;
+    let paddingLeft: number | null = null;
+    let paddingTop: number | null = null;
+    if (frameSize > 0 && lineHeight > 0) {
+      borderRadius = NumberUtil.roundTo100(0.1 * frameSize);
+      const param = (frameSize - lineHeight) / 2;
+      if (exterior === GlnButtonExterior.contained) {
+        paddingLeft = NumberUtil.roundTo100(0.3636 * frameSize);
+        paddingTop = param;
+      } else if (exterior === GlnButtonExterior.outlined) {
+        paddingLeft = NumberUtil.roundTo100(0.3409 * frameSize);
+        paddingTop = param - 1;
+      } else if (exterior === GlnButtonExterior.text) {
+        paddingLeft = NumberUtil.roundTo100(0.2045 * frameSize);
+        paddingTop = param;
       }
-      this.cssPaddingRight = this.cssPaddingLeft;
-      this.cssPaddingBottom = this.cssPaddingTop;
     }
-    HtmlElemUtil.setProperty(elem, '--glnfrs--br-rd', this.cssBorderRadius);
-    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-lf', NumberUtil.str(this.cssPaddingLeft)?.concat('px'));
-    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-rg', NumberUtil.str(this.cssPaddingRight)?.concat('px'));
-    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-tp', NumberUtil.str(this.cssPaddingTop)?.concat('px'));
-    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-bt', NumberUtil.str(this.cssPaddingBottom)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--br-rd', (this.cssBorderRadius = NumberUtil.str(borderRadius)?.concat('px') || null));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-lf', (this.cssPaddingLeft = NumberUtil.str(paddingLeft)?.concat('px') || null));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-rg', (this.cssPaddingRight = this.cssPaddingLeft));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-tp', (this.cssPaddingTop = NumberUtil.str(paddingTop)?.concat('px') || null));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-bt', (this.cssPaddingBottom = this.cssPaddingTop));
+
     this.changeCssParams.emit();
   }
 

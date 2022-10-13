@@ -71,11 +71,11 @@
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd:'
-    + getSize('short', borderRadius / 100) + 'px;'
-    + (isAddPadding04a ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('short', labelPdRatio) + 'px;'
-    ">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('short', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('short', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -106,11 +106,11 @@
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd:'
-    + getSize('small', borderRadius / 100) + 'px;'
-    + (isAddPadding04a ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('small', labelPdRatio) + 'px;'
-    ">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('small', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('small', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -141,11 +141,11 @@
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd:'
-    + getSize('middle', borderRadius / 100) + 'px;'
-    + (isAddPadding04a ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('middle', labelPdRatio) + 'px;'
-    ">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('middle', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('middle', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -176,11 +176,11 @@
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd:'
-    + getSize('wide', borderRadius / 100) + 'px;'
-    + (isAddPadding04a ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('wide', labelPdRatio) + 'px;'
-    ">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('wide', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('wide', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -211,11 +211,11 @@
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd:'
-    + getSize('large', borderRadius / 100) + 'px;'
-    + (isAddPadding04a ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('large', labelPdRatio) + 'px;'
-    ">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('large', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('large', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -248,11 +248,11 @@
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd:'
-    + getSize('huge', borderRadius / 100) + 'px;'
-    + (isAddPadding04a ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('huge', labelPdRatio) + 'px;'
-    ">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('huge', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('huge', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -294,11 +294,11 @@
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd:'
-    + getSize('short', borderRadius / 100) + 'px;'
-    + (isAddPadding04a ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('short', labelPdRatio) + 'px;'
-    "&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('short', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('short', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -329,11 +329,11 @@
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd:'
-    + getSize('small', borderRadius / 100) + 'px;'
-    + (isAddPadding04a ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('small', labelPdRatio) + 'px;'
-    "&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('small', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('small', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -364,11 +364,11 @@
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd:'
-    + getSize('middle', borderRadius / 100) + 'px;'
-    + (isAddPadding04a ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('middle', labelPdRatio) + 'px;'
-    "&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('middle', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('middle', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -399,11 +399,11 @@
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd:'
-    + getSize('wide', borderRadius / 100) + 'px;'
-    + (isAddPadding04a ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('wide', labelPdRatio) + 'px;'
-    "&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('wide', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('wide', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -434,11 +434,11 @@
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd:'
-    + getSize('large', borderRadius / 100) + 'px;'
-    + (isAddPadding04a ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('large', labelPdRatio) + 'px;'
-    "&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('large', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('large', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -471,11 +471,11 @@
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd:'
-    + getSize('huge', borderRadius / 100) + 'px;'
-    + (isAddPadding04a ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('huge', labelPdRatio) + 'px;'
-    "&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('huge', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('huge', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -504,7 +504,6 @@
       &lt;/a&gt;
     &lt;/gln-button&gt;
   &lt;/div&gt;
-
 &lt;/div&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
@@ -530,9 +529,12 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getSize(frameSize: string | null, radiusRatio: number = 1): number &#123;
-    const frameSizeValue = GlnFrameSizeUtil.getValue(GlnFrameSizeUtil.convert(frameSize)) ?? 0;
-    return Math.round((frameSizeValue * radiusRatio * 100) / 100);
+  public getSize(frameSize: string | null, radiusRatio: number = 1): string &#123;
+    const value = GlnFrameSizeUtil.getValue(
+      GlnFrameSizeUtil.convert(frameSize)) ?? 0;
+    return Math.round((value * radiusRatio * 100) / 100)
+      .toString()
+      .concat('px');
   &#125;
 &#125;</pre></code>
         </mat-tab>
@@ -603,12 +605,12 @@ app-button &#123;
 <hr br-nn />
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd:'
-    + getSize('middle', radiusRatio) + 'px 0 0 '
-    + getSize('middle', radiusRatio) + 'px;'
-    + (isAddPadding04b ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('middle', labelPdRatio) + 'px;'
-    ">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('middle', radiusRatio) + ' 0 0 '
+      + getSize('middle', radiusRatio),
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -639,12 +641,12 @@ app-button &#123;
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd : 0 '
-    + getSize('middle', radiusRatio) + 'px '
-    + getSize('middle', radiusRatio) + 'px 0;'
-    + (isAddPadding04b ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('middle', labelPdRatio) + 'px;'
-    ">
+  [ngStyle]="{
+    '--glnbt-br-rd': '0 ' + getSize('middle', radiusRatio) + ' ' 
+      + getSize('middle', radiusRatio) + ' 0',
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -675,12 +677,12 @@ app-button &#123;
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd : '
-    + getSize('middle', radiusRatio) + 'px 0 '
-    + getSize('middle', radiusRatio) + 'px 0;'
-    + (isAddPadding04b ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('middle', labelPdRatio) + 'px;'
-    ">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('middle', radiusRatio) + ' 0 '
+      + getSize('middle', radiusRatio) + ' 0',
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -711,12 +713,12 @@ app-button &#123;
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd : 0 '
-    + getSize('middle', radiusRatio) + 'px 0 '
-    + getSize('middle', radiusRatio) + 'px;'
-    + (isAddPadding04b ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('middle', labelPdRatio) + 'px;'
-    ">
+  [ngStyle]="{
+    '--glnbt-br-rd': '0 ' + getSize('middle', radiusRatio) + ' 0 '
+      + getSize('middle', radiusRatio),
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -747,10 +749,11 @@ app-button &#123;
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd: 8%/50%;'
-  + (isAddPadding04b ? '--glnbt-pd-lf' : '--demo') + ':'
-  + getSize('middle', labelPdRatio) + 'px;'
-  ">
+  [ngStyle]="{
+    '--glnbt-br-rd': '8%/50%',
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -789,12 +792,12 @@ app-button &#123;
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd:'
-    + getSize('middle', radiusRatio) + 'px 0 0 '
-    + getSize('middle', radiusRatio) + 'px;'
-    + (isAddPadding04b ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('middle', labelPdRatio) + 'px;'
-    "&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('middle', radiusRatio) + ' 0 0 '
+      + getSize('middle', radiusRatio),
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -825,12 +828,12 @@ app-button &#123;
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd : 0 '
-    + getSize('middle', radiusRatio) + 'px '
-    + getSize('middle', radiusRatio) + 'px 0;'
-    + (isAddPadding04b ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('middle', labelPdRatio) + 'px;'
-    "&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': '0 ' + getSize('middle', radiusRatio) + ' '
+      + getSize('middle', radiusRatio) + ' 0',
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -861,12 +864,12 @@ app-button &#123;
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd : '
-    + getSize('middle', radiusRatio) + 'px 0 '
-    + getSize('middle', radiusRatio) + 'px 0;'
-    + (isAddPadding04b ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('middle', labelPdRatio) + 'px;'
-    "&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('middle', radiusRatio) + ' 0 '
+      + getSize('middle', radiusRatio) + ' 0',
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -897,12 +900,12 @@ app-button &#123;
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd : 0 '
-    + getSize('middle', radiusRatio) + 'px 0 '
-    + getSize('middle', radiusRatio) + 'px;'
-    + (isAddPadding04b ? '--glnbt-pd-lf' : '--demo') + ':'
-    + getSize('middle', labelPdRatio) + 'px;'
-    "&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': '0 ' + getSize('middle', radiusRatio) + ' 0 '
+      + getSize('middle', radiusRatio),
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -933,10 +936,11 @@ app-button &#123;
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd: 8%/50%;'
-  + (isAddPadding04b ? '--glnbt-pd-lf' : '--demo') + ':'
-  + getSize('middle', labelPdRatio) + 'px;'
-  "&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': '8%/50%',
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -963,7 +967,6 @@ app-button &#123;
       &lt;/a&gt;
     &lt;/gln-button&gt;
   &lt;/div&gt;
-
 &lt;/div&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
@@ -992,9 +995,12 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getSize(frameSize: string | null, radiusRatio: number = 1): number &#123;
-    const frameSizeValue = GlnFrameSizeUtil.getValue(GlnFrameSizeUtil.convert(frameSize)) ?? 0;
-    return Math.round((frameSizeValue * radiusRatio * 100) / 100);
+  public getSize(frameSize: string | null, radiusRatio: number = 1): string &#123;
+    const value = GlnFrameSizeUtil.getValue(
+      GlnFrameSizeUtil.convert(frameSize)) ?? 0;
+    return Math.round((value * radiusRatio * 100) / 100)
+      .toString()
+      .concat('px');
   &#125;
 &#125;</pre></code>
         </mat-tab>

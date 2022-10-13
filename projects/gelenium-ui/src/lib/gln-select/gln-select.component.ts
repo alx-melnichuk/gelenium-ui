@@ -187,8 +187,8 @@ export class GlnSelectComponent
   @ViewChild(GlnFrameComponent, { static: true })
   public frameComp!: GlnFrameComponent;
   /** A trigger that opens a dropdown list of options. */
-  @ViewChild('triggerRef', { static: true })
-  public triggerRef!: ElementRef<HTMLElement>;
+  @ViewChild('triggerRef', { read: ElementRef<HTMLDivElement>, static: true })
+  public triggerRef!: ElementRef<HTMLDivElement>;
   /** List of possible options. */
   @ContentChildren(GlnOptionComponent, { descendants: true })
   public optionList!: QueryList<GlnOptionComponent>;
@@ -199,6 +199,9 @@ export class GlnSelectComponent
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set options(value: GlnOptionComponent[]) {}
 
+  public get triggerHtmlElementRef(): ElementRef<HTMLElement> {
+    return this.triggerRef as ElementRef<HTMLElement>;
+  }
   public get exteriorVal(): GlnFrameExterior | null {
     return this.frameComp.exteriorVal;
   }

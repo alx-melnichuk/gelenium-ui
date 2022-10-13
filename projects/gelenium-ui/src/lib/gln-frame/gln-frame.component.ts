@@ -17,11 +17,11 @@ import {
 
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { NumberUtil } from '../_utils/number.util';
 
 import { GlnFrameExterior, GlnFrameExteriorUtil } from './gln-frame-exterior.interface';
 import { GlnFrameConfig } from './gln-frame-config.interface';
 import { GlnFrameSize, GlnFrameSizeUtil } from './gln-frame-size.interface';
+import { GlnFrameCssParams, GlnFrameUtil } from './gln-frame.util';
 
 export const ATR_FR_HIDE_ANIMATION_INIT = 'hdAnmInit';
 
@@ -62,7 +62,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public label: string | null | undefined;
 
   @Output()
-  readonly changeCssParams: EventEmitter<void> = new EventEmitter();
+  readonly changeCssParams: EventEmitter<{ css: GlnFrameCssParams }> = new EventEmitter();
 
   public get isOutlinedExterior(): boolean {
     return GlnFrameExterior.outlined === this.exteriorVal;
@@ -80,13 +80,13 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public attrHideAnimation: boolean | null = null; // Binding attribute "isAttrHideAnimation".
   public currConfig: GlnFrameConfig;
   public cssBorderRadius: string | null = null;
-  public cssPaddingBottom: number | null = null;
-  public cssPaddingLeft: number | null = null;
-  public cssPaddingRight: number | null = null;
-  public cssPaddingShrink: number | null = null;
-  public cssPaddingTop: number | null = null;
-  public cssTranslateY: number | null = null;
-  public cssTranslateY2: number | null = null;
+  public cssPaddingBottom: string | null = null;
+  public cssPaddingLeft: string | null = null;
+  public cssPaddingRight: string | null = null;
+  public cssPaddingShrink: string | null = null;
+  public cssPaddingTop: string | null = null;
+  public cssTranslateY: string | null = null;
+  public cssTranslateY2: string | null = null;
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public exteriorVal: GlnFrameExterior | null = null; // Binding attribute "exterior".
   public error: boolean | null = null; // Binding attribute "isError".
@@ -217,51 +217,22 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   }
 
   private updateCssParams(exteriorVal: GlnFrameExterior, frameSizeValue: number, lineHeight: number, elem: ElementRef<HTMLElement>): void {
-    this.cssBorderRadius = null;
-    this.cssPaddingBottom = null;
-    this.cssPaddingLeft = null;
-    this.cssPaddingRight = null;
-    this.cssPaddingShrink = null;
-    this.cssPaddingTop = null;
-    this.cssTranslateY = null;
-    this.cssTranslateY2 = null;
+    const css: GlnFrameCssParams = {
+      ...GlnFrameUtil.getCssHorParams(exteriorVal, frameSizeValue),
+      ...GlnFrameUtil.getCssVerParams(exteriorVal, frameSizeValue, lineHeight),
+    };
 
-    if (frameSizeValue > 0 && lineHeight > 0) {
-      const radius: number = NumberUtil.roundTo100(frameSizeValue / 10);
-      const param = frameSizeValue - lineHeight;
-      if (exteriorVal === GlnFrameExterior.outlined) {
-        this.cssBorderRadius = radius > 0 ? radius + 'px' : null;
-        this.cssPaddingBottom = param * 0.5;
-        this.cssPaddingLeft = NumberUtil.roundTo100(0.25 * frameSizeValue);
-        this.cssPaddingTop = param * 0.5;
-        this.cssTranslateY = NumberUtil.roundTo100((-0.75 * lineHeight) / 2);
-        this.cssTranslateY2 = NumberUtil.roundTo100(param * 0.5);
-      } else if (exteriorVal === GlnFrameExterior.underline) {
-        this.cssBorderRadius = radius > 0 ? radius + 'px ' + radius + 'px 0px 0px' : null;
-        this.cssPaddingBottom = param * 0.25;
-        this.cssPaddingLeft = NumberUtil.roundTo100(0.21428 * frameSizeValue);
-        this.cssPaddingTop = param * 0.75;
-        this.cssTranslateY = NumberUtil.roundTo100((frameSizeValue * 0.757 - lineHeight * 1.257) * 0.45);
-        this.cssTranslateY2 = NumberUtil.roundTo100(param * 0.5);
-      } else if (exteriorVal === GlnFrameExterior.standard) {
-        this.cssPaddingBottom = param * 0.25;
-        this.cssPaddingLeft = 0;
-        this.cssPaddingTop = param * 0.75;
-        this.cssTranslateY = NumberUtil.roundTo100((frameSizeValue * 0.75 - lineHeight * 1.27) * 0.4);
-        this.cssTranslateY2 = NumberUtil.roundTo100(param * 0.75);
-      }
-      this.cssPaddingRight = this.cssPaddingLeft;
-      this.cssPaddingShrink = this.cssPaddingLeft != null ? NumberUtil.roundTo100(2 * this.cssPaddingLeft * 1.33) : this.cssPaddingShrink;
-    }
-    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-lf', NumberUtil.str(this.cssPaddingLeft)?.concat('px'));
-    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-rg', NumberUtil.str(this.cssPaddingRight)?.concat('px'));
-    HtmlElemUtil.setProperty(elem, '--glnfrs--br-rd', this.cssBorderRadius);
-    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-shr', NumberUtil.str(this.cssPaddingShrink)?.concat('px'));
-    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-tp', NumberUtil.str(this.cssPaddingTop)?.concat('px'));
-    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-bt', NumberUtil.str(this.cssPaddingBottom)?.concat('px'));
-    HtmlElemUtil.setProperty(elem, '--glnfrs--trn-y', NumberUtil.str(this.cssTranslateY)?.concat('px'));
-    HtmlElemUtil.setProperty(elem, '--glnfrs--trn2-y', NumberUtil.str(this.cssTranslateY2)?.concat('px'));
-    this.changeCssParams.emit();
+    HtmlElemUtil.setProperty(elem, '--glnfrs--br-rd', (this.cssBorderRadius = css.borderRadius));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-lf', (this.cssPaddingLeft = css.paddingLeft));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-rg', (this.cssPaddingRight = css.paddingRight));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-shr', (this.cssPaddingShrink = css.paddingShrink));
+
+    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-bt', (this.cssPaddingBottom = css.paddingBottom));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-tp', (this.cssPaddingTop = css.paddingTop));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--trn-y', (this.cssTranslateY = css.translateY));
+    HtmlElemUtil.setProperty(elem, '--glnfrs--trn2-y', (this.cssTranslateY2 = css.translateY2));
+
+    this.changeCssParams.emit({ css });
   }
 
   private settingExterior(exteriorVal: GlnFrameExterior | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
