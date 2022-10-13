@@ -7,7 +7,6 @@ export * from './_utils/public-api';
 export * from './directives/gln-auto-focuse/public-api';
 export * from './directives/gln-color/public-api';
 export * from './directives/gln-frame-ornament/public-api';
-export * from './directives/gln-frame-size/public-api';
 export * from './directives/gln-regex/public-api';
 
 export * from './gln-button/public-api';
