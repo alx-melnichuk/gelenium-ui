@@ -24,7 +24,7 @@
 <table class="app-tab">
   <tbody>
     <tr>
-      <th>Name</th>
+      <th class="app-mn-wd-22ch">Name</th>
       <th>Description</th>
     </tr>
 
@@ -49,7 +49,7 @@
       </td>
       <td>
         <span>Defines a configuration object.</span><br />
-        <a [href]="urlCmButton + '#Config'">More details.</a>
+        <a [href]="urlCmButton + '#config-interface'">More details.</a>
       </td>
     </tr>
     <tr>
@@ -129,17 +129,18 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Specifies the height justification for the left ornament.
+        <span>
+          This property controls the vertical alignment for the left ornament.
           <br />(default = 'default';)
           It can take the following values:
         </span>
         <ul>
-          <li>"default" - depending on frame type</li>
-          <li>"center" - in the center</li>
-          <li>"flex-start" - at the top</li>
-          <li>"flex-end" - at the bottom</li>
-          <li>"baseline" - along the baseline</li>
-          <li>"stretch" - at the top</li>
+          <li>"default" - defines the default</li>
+          <li>"center" - defines middle alignment</li>
+          <li>"flexStart" - defines top alignment</li>
+          <li>"flexEnd" - defines bottom alignment</li>
+          <li>"baseline" - defines baseline alignment</li>
+          <li>"stretch" - stretches across the entire height</li>
         </ul>
       </td>
     </tr>
@@ -151,18 +152,51 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Specifies the height justification for the right ornament.
+        <span>
+          This property controls the vertical alignment of the right ornament.
           <br />(default = 'default';)
           It can take the following values:
         </span>
         <ul>
-          <li>"default" - depending on frame type</li>
-          <li>"center" - in the center</li>
-          <li>"flex-start" - at the top</li>
-          <li>"flex-end" - at the bottom</li>
-          <li>"baseline" - along the baseline</li>
-          <li>"stretch" - at the top</li>
+          <li>"default" - defines the default</li>
+          <li>"center" - defines middle alignment</li>
+          <li>"flexStart" - defines top alignment</li>
+          <li>"flexEnd" - defines bottom alignment</li>
+          <li>"baseline" - defines baseline alignment</li>
+          <li>"stretch" - stretches across the entire height</li>
         </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>focused: EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>
+          Fires when the element receives input focus.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>blured: EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>
+          Fires when an element loses input focus.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>changeCssParams: EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>Changes to internal css parameters.</span>
       </td>
     </tr>
 
@@ -207,7 +241,7 @@
 <table class="app-tab">
   <tbody>
     <tr>
-      <th>Name</th>
+      <th class="app-mn-wd-22ch">Name</th>
       <th>Description</th>
     </tr>
 
@@ -356,7 +390,7 @@
 <table class="app-tab">
   <tbody>
     <tr>
-      <th>Name</th>
+      <th class="app-mn-wd-22ch">Name</th>
       <th>Description</th>
     </tr>
 
@@ -387,7 +421,7 @@
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-lb-pd-tp:<br/>
+      <td><code>--glnbt-pd-tp:<br/>
         &nbsp;0.375em; // 6px "contained";<br/>
         &nbsp;0.3125em; // 5px "outlined";<br/>
         &nbsp;0.375em; // 6px "text";</code>
@@ -399,7 +433,7 @@
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-lb-pd-bt:<br/>
+      <td><code>--glnbt-pd-bt:<br/>
         &nbsp;0.375em; // 6px "contained";<br/>
         &nbsp;0.3125em; // 5px "outlined";<br/>
         &nbsp;0.375em; // 6px "text";</code>
@@ -411,7 +445,7 @@
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-lb-pd-lf:<br/>
+      <td><code>--glnbt-pd-lf:<br/>
         &nbsp;1em; // 16px "contained";<br/>
         &nbsp;0.9375em; // 15px "outlined";<br/>
         &nbsp;0.5em; // 8px "text";</code>
@@ -423,7 +457,7 @@
       </td>
     </tr>
     <tr>
-      <td><code>--glnbt-lb-pd-rg:<br/>
+      <td><code>--glnbt-pd-rg:<br/>
         &nbsp;1em; // 16px "contained";<br/>
         &nbsp;0.9375em; // 15px "outlined";<br/>
         &nbsp;0.5em; // 8px "text";</code>

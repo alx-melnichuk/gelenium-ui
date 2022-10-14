@@ -119,59 +119,61 @@ export class ButtonComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.bm-items &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.bm-items &gt; :first-child &#123;
-  margin-left: 1%;
-&#125;
-.bm-items &gt; :not(first-child) &#123;
-  margin-left: 5%;
-&#125;
+app-button &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .bm-items &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .bm-items &gt; :first-child &#123;
+    margin-left: 1%;
+  &#125;
+  .bm-items &gt; :not(first-child) &#123;
+    margin-left: 5%;
+  &#125;
 
-// ** Style: "Material-UI" **
+  // ** Style: "Material-UI" **
 
-// "Material-UI - contained"
+  // "Material-UI - contained"
 
-.bm-mui.glnbt-contained &#123;
-  --glnbt-def-lb-cl: #fff;
-  --glnbt-def-bg-cl: #1976d2;
+  .bm-mui.glnbt-contained &#123;
+    --glnbt-def-lb-cl: #fff;
+    --glnbt-def-bg-cl: #1976d2;
 
-  --glnbt-hov-lb-cl: #fff;
-  --glnbt-hov-bg-cl: #1565c0;
+    --glnbt-hov-lb-cl: #fff;
+    --glnbt-hov-bg-cl: #1565c0;
 
-  --glnbt-dis-lb-cl: rgba(0, 0, 0, 0.26);
-  --glnbt-dis-bg-cl: rgba(0, 0, 0, 0.12);
-&#125;
+    --glnbt-dis-lb-cl: rgba(0, 0, 0, 0.26);
+    --glnbt-dis-bg-cl: rgba(0, 0, 0, 0.12);
+  &#125;
 
-// "Material-UI - outlined"
+  // "Material-UI - outlined"
 
-.bm-mui.glnbt-outlined &#123;
-  --glnbt-def-lb-cl: #1976d2;
-  --glnbt-def-br-cl: rgba(25, 118, 210, 0.5);
+  .bm-mui.glnbt-outlined &#123;
+    --glnbt-def-lb-cl: #1976d2;
+    --glnbt-def-br-cl: rgba(25, 118, 210, 0.5);
 
-  --glnbt-hov-lb-cl: #1976d2;
-  --glnbt-hov-br-cl: #1976d2;
-  --glnbt-hov-bg-cl: rgba(25, 118, 210, 0.04);
+    --glnbt-hov-lb-cl: #1976d2;
+    --glnbt-hov-br-cl: #1976d2;
+    --glnbt-hov-bg-cl: rgba(25, 118, 210, 0.04);
 
-  --glnbt-dis-lb-cl: rgba(0, 0, 0, 0.26);
-  --glnbt-dis-br-cl: rgba(0, 0, 0, 0.12);
-&#125;
+    --glnbt-dis-lb-cl: rgba(0, 0, 0, 0.26);
+    --glnbt-dis-br-cl: rgba(0, 0, 0, 0.12);
+  &#125;
 
-// "Material-UI - text"
+  // "Material-UI - text"
 
-.bm-mui.glnbt-text &#123;
-  --glnbt-def-lb-cl: #1976d2;
+  .bm-mui.glnbt-text &#123;
+    --glnbt-def-lb-cl: #1976d2;
 
-  --glnbt-hov-lb-cl: #1976d2;
-  --glnbt-hov-bg-cl: rgba(25, 118, 210, 0.04);
+    --glnbt-hov-lb-cl: #1976d2;
+    --glnbt-hov-bg-cl: rgba(25, 118, 210, 0.04);
 
-  --glnbt-dis-lb-cl: rgba(0, 0, 0, 0.26);
+    --glnbt-dis-lb-cl: rgba(0, 0, 0, 0.26);
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

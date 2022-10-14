@@ -1,0 +1,15 @@
+/*# sourceURL=cm-switch-palette.component.scss */
+
+app-cm-switch-palette {
+  display: block;
+
+  .sp-elem {
+    min-width: 17ch;
+  }
+  .sp-customer {
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
+    --gln-customer-cl: hsl(var(--gln-customer-h), var(--gln-customer-s), var(--gln-customer-l));
+  }
+}

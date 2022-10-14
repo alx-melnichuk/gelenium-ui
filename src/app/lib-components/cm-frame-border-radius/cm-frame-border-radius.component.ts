@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { UrlUtil } from '../../lib-core/utils/url.util';
-
+import { RouterConfig } from '../../lib-core/config/router-config';
 import {
   LABEL_CSS,
   LABEL_HTML,
@@ -13,7 +12,7 @@ import {
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
 
-import { GlnFrameConfig, GlnFrameSize, GlnFrameSizeUtil } from 'gelenium-ui';
+import { GlnFrameSizeUtil } from 'gelenium-ui';
 
 @Component({
   selector: 'app-cm-frame-border-radius',
@@ -38,7 +37,7 @@ export class CmFrameBorderRadiusComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
+  public urlCmFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
 
   public borderRadius = 50;
   public ratioOutlined = 0.58;
@@ -46,7 +45,7 @@ export class CmFrameBorderRadiusComponent {
 
   public exterior05 = 'outlined';
   public isAddPadding05 = true;
-  public isNoLabel05 = false;
+  public hideLabel05 = false;
 
   public formGroup05: FormGroup = new FormGroup({
     model05a: new FormControl('Demo Size Short', []),
@@ -58,7 +57,7 @@ export class CmFrameBorderRadiusComponent {
   });
 
   public isAddPadding06 = true;
-  public isNoLabel06 = false;
+  public hideLabel06 = false;
 
   public formGroup06: FormGroup = new FormGroup({
     model06a: new FormControl('Demo - A', []),
@@ -68,21 +67,18 @@ export class CmFrameBorderRadiusComponent {
     model06e: new FormControl('Demo - E', []),
     model06f: new FormControl('Demo - F', []),
   });
-  public configOutlined: GlnFrameConfig = {
-    labelPd: 18.5, // 0.37*FrameSizeValue.middle
-  };
-  public configUnderline: GlnFrameConfig = {
-    labelPd: 18.5, // 0.37*FrameSizeValue.middle
-  };
-
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
-  public getValue(frameSize: string | null): number {
-    return GlnFrameSizeUtil.getValue(GlnFrameSizeUtil.convert(frameSize)) ?? 0;
+  public getSize(frameSize: string | null, radiusRatio: number = 1): string {
+    const value = GlnFrameSizeUtil.getValue(GlnFrameSizeUtil.convert(frameSize)) ?? 0;
+    return Math.round((value * radiusRatio * 100) / 100)
+      .toString()
+      .concat('px');
   }
-  public getRadius(value: number, exterior: string): string {
-    return exterior === 'underline' ? value + 'px ' + value + 'px 0 0' : value + 'px';
+
+  public getRadius(value: string, exterior: string): string {
+    return exterior === 'underline' ? value + ' ' + value + ' 0 0' : value;
   }
   public getRatio(exterior: string): number {
     return exterior === 'underline' ? this.ratioUnderline : this.ratioOutlined;

@@ -1,0 +1,266 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Item Size.
+    <a [href]="urlCmSwitch + '#ItemSize'">#</a>
+  </h3>
+  <p>
+    The GlnSwitch component has the ability to change its size.
+    All component elements are associated with a font size for the gln-switch tag.
+    Thus, by changing the font size, you can choose the size of this component
+    that is optimal for you.
+  </p>
+  <span>For example:</span>
+</section>
+
+
+<form [formGroup]="formGroup03"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 9px; height: 27px;</em>
+        </small>
+      </div>
+      <gln-switch class="ss-mini09"
+        formControlName="model03a">
+        Parameter definition label
+      </gln-switch>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 10px; height: 30px;</em>
+        </small>
+      </div>
+      <gln-switch class="ss-mini10"
+        formControlName="model03b">
+        Parameter definition label
+      </gln-switch>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 11px; height: 33px;</em>
+        </small>
+      </div>
+      <gln-switch class="ss-mini11"
+        formControlName="model03c">
+        Parameter definition label
+      </gln-switch>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 12px; height: 36px;</em>
+        </small>
+      </div>
+      <gln-switch class="ss-small12"
+        formControlName="model03d">
+        Parameter definition label
+      </gln-switch>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 13px; height: 39px;</em>
+        </small>
+      </div>
+      <gln-switch class="ss-small13"
+        formControlName="model03e">
+        Parameter definition label
+      </gln-switch>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 14px; height: 42px;</em>
+        </small>
+      </div>
+      <gln-switch class="ss-small14"
+        formControlName="model03f">
+        Parameter definition label
+      </gln-switch>
+    </div>
+  </div>
+
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup03"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;font-size: 9px; height: 27px;&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch class="ss-mini09"
+        formControlName="model03a"&gt;
+        Parameter definition label
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;font-size: 10px; height: 30px;&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch class="ss-mini10"
+        formControlName="model03b"&gt;
+        Parameter definition label
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;font-size: 11px; height: 33px;&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch class="ss-mini11"
+        formControlName="model03c"&gt;
+        Parameter definition label
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;font-size: 12px; height: 36px;&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch class="ss-small12"
+        formControlName="model03d"&gt;
+        Parameter definition label
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;font-size: 13px; height: 39px;&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch class="ss-small13"
+        formControlName="model03e"&gt;
+        Parameter definition label
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;font-size: 14px; height: 42px;&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch class="ss-small14"
+        formControlName="model03f"&gt;
+        Parameter definition label
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-switch',
+  templateUrl: './switch.component.html',
+  styleUrls: ['./switch.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SwitchComponent &#123;
+  public formGroup03: FormGroup = new FormGroup(&#123;
+    model03a: new FormControl(true, []),
+    model03b: new FormControl(true, []),
+    model03c: new FormControl(true, []),
+    model03d: new FormControl(true, []),
+    model03e: new FormControl(true, []),
+    model03f: new FormControl(true, []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-switch &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .ss-mini09 &#123;
+    font-size: 9px;
+  &#125;
+  .ss-mini10 &#123;
+    font-size: 10px;
+  &#125;
+  .ss-mini11 &#123;
+    font-size: 11px;
+  &#125;
+  .ss-small12 &#123;
+    font-size: 12px;
+  &#125;
+  .ss-small13 &#123;
+    font-size: 13px;
+  &#125;
+  .ss-small14 &#123;
+    font-size: 14px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

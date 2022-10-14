@@ -71,8 +71,11 @@
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd :'
-    + getRadius('short', borderRadius / 100) + 'px;'">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('short', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('short', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -80,8 +83,6 @@
       </small>
     </div>
     <gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? { labelPd: (getSize('short') * labelPdRatio) } : null"
       frameSize="short">
       <span>{{ getLabel(exterior04a) }}</span>
     </gln-button>
@@ -94,8 +95,6 @@
       </small>
     </div>
     <gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? { labelPd: (getSize('short') * labelPdRatio) } : null"
       frameSize="short">
       <a [routerLink]="[routerLink]"
         fragment="border-radius1">
@@ -107,8 +106,11 @@
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd :'
-    + getRadius('small', borderRadius / 100) + 'px;'">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('small', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('small', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -116,8 +118,6 @@
       </small>
     </div>
     <gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? { labelPd: (getSize('small') * labelPdRatio) } : null"
       frameSize="small">
       <span>{{ getLabel(exterior04a) }}</span>
     </gln-button>
@@ -130,8 +130,6 @@
       </small>
     </div>
     <gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? { labelPd: (getSize('small') * labelPdRatio) } : null"
       frameSize="small">
       <a [routerLink]="[routerLink]"
         fragment="border-radius1">
@@ -143,7 +141,11 @@
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd :' + getRadius('middle', borderRadius / 100) + 'px;'">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('middle', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('middle', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -151,8 +153,6 @@
       </small>
     </div>
     <gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
       frameSize="middle">
       <span>{{ getLabel(exterior04a) }}</span>
     </gln-button>
@@ -165,8 +165,6 @@
       </small>
     </div>
     <gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
       frameSize="middle">
       <a [routerLink]="[routerLink]"
         fragment="border-radius1">
@@ -178,7 +176,11 @@
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd :' + getRadius('wide', borderRadius / 100) + 'px;'">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('wide', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('wide', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -186,8 +188,6 @@
       </small>
     </div>
     <gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? { labelPd: (getSize('wide') * labelPdRatio) } : null"
       frameSize="wide">
       <span>{{ getLabel(exterior04a) }}</span>
     </gln-button>
@@ -200,8 +200,6 @@
       </small>
     </div>
     <gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? { labelPd: (getSize('wide') * labelPdRatio) } : null"
       frameSize="wide">
       <a [routerLink]="[routerLink]"
         fragment="border-radius1">
@@ -213,7 +211,11 @@
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd :' + getRadius('large', borderRadius / 100) + 'px;'">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('large', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('large', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -222,8 +224,6 @@
     </div>
     <gln-button class="bbr-large"
       [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? { labelPd: (getSize('large') * labelPdRatio) } : null"
       frameSize="large">
       <span>{{ getLabel(exterior04a) }}</span>
     </gln-button>
@@ -237,8 +237,6 @@
     </div>
     <gln-button class="bbr-large"
       [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? { labelPd: (getSize('large') * labelPdRatio) } : null"
       frameSize="large">
       <a [routerLink]="[routerLink]"
         fragment="border-radius1">
@@ -250,7 +248,11 @@
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd :' + getRadius('huge', borderRadius / 100) + 'px;'">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('huge', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('huge', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -259,8 +261,6 @@
     </div>
     <gln-button class="bbr-huge"
       [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? { labelPd: (getSize('huge') * labelPdRatio) } : null"
       frameSize="huge">
       <span>{{ getLabel(exterior04a) }}</span>
     </gln-button>
@@ -274,8 +274,6 @@
     </div>
     <gln-button class="bbr-huge"
       [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? { labelPd: (getSize('huge') * labelPdRatio) } : null"
       frameSize="huge">
       <a [routerLink]="[routerLink]"
         fragment="border-radius1">
@@ -296,8 +294,11 @@
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd :'
-    + getRadius('short', borderRadius / 100) + 'px;'"&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('short', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('short', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -305,8 +306,6 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? &#123; labelPd: (getSize('short') * labelPdRatio) &#125; : null"
       frameSize="short"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
@@ -319,8 +318,6 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? &#123; labelPd: (getSize('short') * labelPdRatio) &#125; : null"
       frameSize="short"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="border-radius1"&gt;
@@ -332,8 +329,11 @@
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd :'
-    + getRadius('small', borderRadius / 100) + 'px;'"&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('small', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('small', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -341,8 +341,6 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? &#123; labelPd: (getSize('small') * labelPdRatio) &#125; : null"
       frameSize="small"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
@@ -355,8 +353,6 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? &#123; labelPd: (getSize('small') * labelPdRatio) &#125; : null"
       frameSize="small"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="border-radius1"&gt;
@@ -368,7 +364,11 @@
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd :' + getRadius('middle', borderRadius / 100) + 'px;'"&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('middle', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('middle', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -376,8 +376,6 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
       frameSize="middle"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
@@ -390,8 +388,6 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
       frameSize="middle"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="border-radius1"&gt;
@@ -403,7 +399,11 @@
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd :' + getRadius('wide', borderRadius / 100) + 'px;'"&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('wide', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('wide', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -411,8 +411,6 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? &#123; labelPd: (getSize('wide') * labelPdRatio) &#125; : null"
       frameSize="wide"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
@@ -425,8 +423,6 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? &#123; labelPd: (getSize('wide') * labelPdRatio) &#125; : null"
       frameSize="wide"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="border-radius1"&gt;
@@ -438,7 +434,11 @@
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd :' + getRadius('large', borderRadius / 100) + 'px;'"&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('large', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('large', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -447,8 +447,6 @@
     &lt;/div&gt;
     &lt;gln-button class="bbr-large"
       [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? &#123; labelPd: (getSize('large') * labelPdRatio) &#125; : null"
       frameSize="large"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
@@ -462,8 +460,6 @@
     &lt;/div&gt;
     &lt;gln-button class="bbr-large"
       [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? &#123; labelPd: (getSize('large') * labelPdRatio) &#125; : null"
       frameSize="large"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="border-radius1"&gt;
@@ -475,7 +471,11 @@
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd :' + getRadius('huge', borderRadius / 100) + 'px;'"&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('huge', borderRadius / 100),
+    '--glnbt-pd-lf':
+      (isAddPadding04a ? getSize('huge', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -484,8 +484,6 @@
     &lt;/div&gt;
     &lt;gln-button class="bbr-huge"
       [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? &#123; labelPd: (getSize('huge') * labelPdRatio) &#125; : null"
       frameSize="huge"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior04a) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
@@ -499,8 +497,6 @@
     &lt;/div&gt;
     &lt;gln-button class="bbr-huge"
       [exterior]="exterior04a"
-      [config]="isAddPadding04a
-        ? &#123; labelPd: (getSize('huge') * labelPdRatio) &#125; : null"
       frameSize="huge"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="border-radius1"&gt;
@@ -515,9 +511,6 @@
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
-import &#123;
-  GlnFrameSizeUtil
-&#125; from 'gelenium-ui';
 
 @Component(&#123;
   selector: 'app-button',
@@ -536,31 +529,32 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getSize(frameSize: string | null): number &#123;
-    return GlnFrameSizeUtil.getValue(
+  public getSize(frameSize: string | null, radiusRatio: number = 1): string &#123;
+    const value = GlnFrameSizeUtil.getValue(
       GlnFrameSizeUtil.convert(frameSize)) ?? 0;
-  &#125;
-  public getRadius(frameSize: string | null, radiusRatio: number): number &#123;
-    return Math.round(
-      (this.getSize(frameSize) * radiusRatio * 100) / 100);
+    return Math.round((value * radiusRatio * 100) / 100)
+      .toString()
+      .concat('px');
   &#125;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;
-.bbr-large &#123;
-  font-size: 18px;
-&#125;
-.bbr-huge &#123;
-  font-size: 20px;
+app-button &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .bbr-large &#123;
+    font-size: 18px;
+  &#125;
+  .bbr-huge &#123;
+    font-size: 20px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -611,9 +605,12 @@ export class ButtonComponent &#123;
 <hr br-nn />
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd :'
-    + getRadius('middle', radiusRatio) + 'px 0 0 '
-    + getRadius('middle', radiusRatio) + 'px'">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('middle', radiusRatio) + ' 0 0 '
+      + getSize('middle', radiusRatio),
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -621,8 +618,6 @@ export class ButtonComponent &#123;
       </small>
     </div>
     <gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
       frameSize="middle">
       <span>{{ 'A - ' + getLabel(exterior04b) }}</span>
     </gln-button>
@@ -635,8 +630,6 @@ export class ButtonComponent &#123;
       </small>
     </div>
     <gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
       frameSize="middle">
       <a [routerLink]="[routerLink]"
         fragment="border-radius2">
@@ -648,9 +641,12 @@ export class ButtonComponent &#123;
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd : 0 '
-    + getRadius('middle', radiusRatio) + 'px '
-    + getRadius('middle', radiusRatio) + 'px 0'">
+  [ngStyle]="{
+    '--glnbt-br-rd': '0 ' + getSize('middle', radiusRatio) + ' ' 
+      + getSize('middle', radiusRatio) + ' 0',
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -658,8 +654,6 @@ export class ButtonComponent &#123;
       </small>
     </div>
     <gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
       frameSize="middle">
       <span>{{ 'B - ' + getLabel(exterior04b) }}</span>
     </gln-button>
@@ -672,8 +666,6 @@ export class ButtonComponent &#123;
       </small>
     </div>
     <gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
       frameSize="middle">
       <a [routerLink]="[routerLink]"
         fragment="border-radius2">
@@ -685,9 +677,12 @@ export class ButtonComponent &#123;
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd : '
-    + getRadius('middle', radiusRatio) + 'px 0 '
-    + getRadius('middle', radiusRatio) + 'px 0'">
+  [ngStyle]="{
+    '--glnbt-br-rd': getSize('middle', radiusRatio) + ' 0 '
+      + getSize('middle', radiusRatio) + ' 0',
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -695,8 +690,6 @@ export class ButtonComponent &#123;
       </small>
     </div>
     <gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
       frameSize="middle">
       <span>{{ 'C - ' + getLabel(exterior04b) }}</span>
     </gln-button>
@@ -709,8 +702,6 @@ export class ButtonComponent &#123;
       </small>
     </div>
     <gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
       frameSize="middle">
       <a [routerLink]="[routerLink]"
         fragment="border-radius2">
@@ -722,9 +713,12 @@ export class ButtonComponent &#123;
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd : 0 '
-    + getRadius('middle', radiusRatio) + 'px 0 '
-    + getRadius('middle', radiusRatio) + 'px'">
+  [ngStyle]="{
+    '--glnbt-br-rd': '0 ' + getSize('middle', radiusRatio) + ' 0 '
+      + getSize('middle', radiusRatio),
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -732,8 +726,6 @@ export class ButtonComponent &#123;
       </small>
     </div>
     <gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
       frameSize="middle">
       <span>{{ 'D - ' + getLabel(exterior04b) }}</span>
     </gln-button>
@@ -746,8 +738,6 @@ export class ButtonComponent &#123;
       </small>
     </div>
     <gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
       frameSize="middle">
       <a [routerLink]="[routerLink]"
         fragment="border-radius2">
@@ -759,7 +749,11 @@ export class ButtonComponent &#123;
 
 
 <div class="app-group"
-  [attr.style]="'--glnbt-br-rd: 8%/50%;'">
+  [ngStyle]="{
+    '--glnbt-br-rd': '8%/50%',
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  }">
   <div class="app-elem">
     <div>
       <small>
@@ -767,8 +761,6 @@ export class ButtonComponent &#123;
       </small>
     </div>
     <gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
       frameSize="middle">
       <span>{{ 'E - ' + getLabel(exterior04b) }}</span>
     </gln-button>
@@ -781,8 +773,6 @@ export class ButtonComponent &#123;
       </small>
     </div>
     <gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? { labelPd: (getSize('middle') * labelPdRatio) } : null"
       frameSize="middle">
       <a [routerLink]="[routerLink]"
         fragment="border-radius2">
@@ -802,9 +792,12 @@ export class ButtonComponent &#123;
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd :'
-    + getRadius('middle', radiusRatio) + 'px 0 0 '
-    + getRadius('middle', radiusRatio) + 'px'"&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('middle', radiusRatio) + ' 0 0 '
+      + getSize('middle', radiusRatio),
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -812,8 +805,6 @@ export class ButtonComponent &#123;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
       frameSize="middle"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; 'A - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
@@ -826,8 +817,6 @@ export class ButtonComponent &#123;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
       frameSize="middle"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="border-radius2"&gt;
@@ -839,9 +828,12 @@ export class ButtonComponent &#123;
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd : 0 '
-    + getRadius('middle', radiusRatio) + 'px '
-    + getRadius('middle', radiusRatio) + 'px 0'"&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': '0 ' + getSize('middle', radiusRatio) + ' '
+      + getSize('middle', radiusRatio) + ' 0',
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -849,8 +841,6 @@ export class ButtonComponent &#123;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
       frameSize="middle"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; 'B - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
@@ -863,8 +853,6 @@ export class ButtonComponent &#123;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
       frameSize="middle"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="border-radius2"&gt;
@@ -876,9 +864,12 @@ export class ButtonComponent &#123;
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd : '
-    + getRadius('middle', radiusRatio) + 'px 0 '
-    + getRadius('middle', radiusRatio) + 'px 0'"&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': getSize('middle', radiusRatio) + ' 0 '
+      + getSize('middle', radiusRatio) + ' 0',
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -886,8 +877,6 @@ export class ButtonComponent &#123;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
       frameSize="middle"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; 'C - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
@@ -900,8 +889,6 @@ export class ButtonComponent &#123;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
       frameSize="middle"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="border-radius2"&gt;
@@ -913,9 +900,12 @@ export class ButtonComponent &#123;
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd : 0 '
-    + getRadius('middle', radiusRatio) + 'px 0 '
-    + getRadius('middle', radiusRatio) + 'px'"&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': '0 ' + getSize('middle', radiusRatio) + ' 0 '
+      + getSize('middle', radiusRatio),
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -923,8 +913,6 @@ export class ButtonComponent &#123;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
       frameSize="middle"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; 'D - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
@@ -937,8 +925,6 @@ export class ButtonComponent &#123;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
       frameSize="middle"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="border-radius2"&gt;
@@ -950,7 +936,11 @@ export class ButtonComponent &#123;
 
 
 &lt;div class="app-group"
-  [attr.style]="'--glnbt-br-rd: 8%/50%;'"&gt;
+  [ngStyle]="&#123;
+    '--glnbt-br-rd': '8%/50%',
+    '--glnbt-pd-lf':
+      (isAddPadding04b ? getSize('middle', labelPdRatio) : 'unset')
+  &#125;"&gt;
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
@@ -958,8 +948,6 @@ export class ButtonComponent &#123;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
       frameSize="middle"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; 'E - ' + getLabel(exterior04b) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
@@ -972,8 +960,6 @@ export class ButtonComponent &#123;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior04b"
-      [config]="isAddPadding04b
-        ? &#123; labelPd: (getSize('middle') * labelPdRatio) &#125; : null"
       frameSize="middle"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="border-radius2"&gt;
@@ -1009,31 +995,32 @@ export class ButtonComponent &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   &#125;
-  public getSize(frameSize: string | null): number &#123;
-    return GlnFrameSizeUtil.getValue(
+  public getSize(frameSize: string | null, radiusRatio: number = 1): string &#123;
+    const value = GlnFrameSizeUtil.getValue(
       GlnFrameSizeUtil.convert(frameSize)) ?? 0;
-  &#125;
-  public getRadius(frameSize: string | null, radiusRatio: number): number &#123;
-    return Math.round(
-      (this.getSize(frameSize) * radiusRatio * 100) / 100);
+    return Math.round((value * radiusRatio * 100) / 100)
+      .toString()
+      .concat('px');
   &#125;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;
-.bbr-large &#123;
-  font-size: 18px;
-&#125;
-.bbr-huge &#123;
-  font-size: 20px;
+app-button &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .bbr-large &#123;
+    font-size: 18px;
+  &#125;
+  .bbr-huge &#123;
+    font-size: 20px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

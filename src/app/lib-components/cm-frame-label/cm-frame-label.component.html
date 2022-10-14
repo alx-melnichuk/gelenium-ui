@@ -15,8 +15,8 @@
     This requires adding the "isLabelShrink" attribute.
   </p>
   <p>
-    Another example, you need to hide the legend display.
-    This requires adding the "isNoLabel" attribute.
+    Another example, if you require a component without a legend,
+    then simply leave out the "label" parameter.
   </p>
 </section>
 
@@ -53,11 +53,9 @@
 
     <div class="app-elem">
       <div>
-        <small><em>Attribute: isNoLabel.</em></small>
+        <small><em>Attribute: without Label.</em></small>
       </div>
       <gln-input formControlName="model03b"
-        label="isNoLabel"
-        isNoLabel
         helperText="The label is not displayed."
         [exterior]="exterior03a">
       </gln-input>
@@ -96,11 +94,9 @@
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
-        &lt;small&gt;&lt;em&gt;Attribute: isNoLabel.&lt;/em&gt;&lt;/small&gt;
+        &lt;small&gt;&lt;em&gt;Attribute: without Label.&lt;/em&gt;&lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model03b"
-        label="isNoLabel"
-        isNoLabel
         helperText="The label is not displayed."
         [exterior]="exterior03a"&gt;
       &lt;/gln-input&gt;
@@ -135,13 +131,15 @@ export class FrameComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
+app-frame &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

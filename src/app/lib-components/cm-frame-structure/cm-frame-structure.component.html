@@ -90,191 +90,24 @@
     Drawing of three types of frame and animation of the label (legend) is performed by the
     GlnFrame component.
     That is, the GlnFrame component only performs rendering based on input data.
-    And it does not contain any additional logic for processing parameters from the configuration,
-    offset calculation and so on.
+    It contains additional logic for processing parameters from the configuration,
+    calculating offsets, and so on.
   </p>
   <span>Componet uses css parameters for its work:</span>
   <ul>
-    <li>"--glnfrs-br-rd" - frame radius;</li>
-    <li>"--glnfrs-pd-lf" - left margin to the frame;</li>
-    <li>"--glnfrs-pd-rg" - right indent to frame;</li>
-    <li>"--glnfrs-pd-tp" - top indent to frame;</li>
-    <li>"--glnfrs-pd-bt" - bottom indent to frame;</li>
-    <li>"--glnfre-pd-shr" - indents for the label in the shrink position;</li>
-    <li>"--glnfre-trn-y" - transformation value for the label in compressed state;</li>
-    <li>"--glnfre-trn2-y" - transformation value for label in free state;</li>
+    <li>"--glnfr-br-rd" - frame radius;</li>
+    <li>"--glnfr-pd-lf" - left margin to the frame;</li>
+    <li>"--glnfr-pd-rg" - right indent to frame;</li>
+    <li>"--glnfr-pd-tp" - top indent to frame;</li>
+    <li>"--glnfr-pd-bt" - bottom indent to frame;</li>
+    <li>"--glnfr-pd-shr" - indents for the label in the shrink position;</li>
+    <li>"--glnfr-trn-y" - transformation value for the label in compressed state;</li>
+    <li>"--glnfr-trn2-y" - transformation value for label in free state;</li>
   </ul>
   <p>
     If you want to change the values of these parameters for all elements at once, then you need
     to specify these css parameters at the root level (or at the body level).
   </p>
-</section>
-
-<hr br-nn>
-
-<section mr-vr>
-  <h4 class="app-hover-link"
-    id="gln-frame-exterior-input">
-    GlnFrameExteriorInput directive.
-    <a [href]="urlCmFrame + '#gln-frame-exterior-input'">#</a>
-  </h4>
-  <p>
-    This directive defines the value of the "exterior" by the input parameter or by default.
-    It also generates events when the input parameter "exterior" changes.
-    This directive defines the values of css parameters:
-  </p>
-  <ul>
-    <li>"--glnfre-trn-y" - transformation value for the label in compressed state;</li>
-    <li>"--glnfre-trn2-y" - transformation value for label in free state;</li>
-    <li>"--glnfre-pd-shr" - indents for the label in the shrink position;</li>
-    <li>"--glnfrs-pd-lf" - left indent for hint line;</li>
-    <li>"--glnfrs-pd-rg" - right indent for the hint line;</li>
-  </ul>
-  <span>Example:</span>
-  <code><pre source="html">
-[glnFrameExteriorInput]="exterior || currConfig?.exterior"
-[glnFrameExteriorInputElementRef]="hostRef"
-(glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()"</pre></code>
-  <p>
-    "ElementRef" defines the DOM element to which these css parameters are added.
-    <br />
-    The "glnFrameExteriorInputChange" event occurs when the value of "exterior" changes.
-    And at the same time, it is required to update all internal parameters for the
-    "glnFrameSize" directive.
-  </p>
-  <p>
-    The directive implements the GlnFrameSizePrepare interface, which has callback functions:
-  </p>
-
-  <p>
-    <i>- calculation of frame radii values;</i>
-  </p>
-  <code><pre source="ts">
-getBorderRadius = (frameSizeValue: number, lineHeight: number): string | null;</pre></code>
-  <ul>
-    <li>frameSizeValue - element height;</li>
-    <li>lineHeight - line height;</li>
-  </ul>
-
-  <p>
-    <i>- calculation of values of horizontal indents;</i>
-  </p>
-  <code><pre source="ts">
-getPaddingHor = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddingHorRes | null;</pre></code>
-  <ul>
-    <li>frameSizeValue - element height;</li>
-    <li>lineHeight - line height;</li>
-  </ul>
-  <p>
-    value of css-parameters:
-  </p>
-  <ul>
-    <li>"--glnfre-pd-shr" - indents for the label in the shrink position;</li>
-    <li>"--glnfrs-pd-lf" - left indent for hint line;</li>
-    <li>"--glnfrs-pd-rg" - right indent for the hint line;</li>
-  </ul>
-
-  <p>
-    <i>- calculation of values of vertical indents;</i>
-  </p>
-  <code><pre source="ts">
-getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddingVerRes | null;</pre></code>
-  <ul>
-    <li>frameSizeValue - element height;</li>
-    <li>lineHeight - line height;</li>
-  </ul>
-  <p>
-    value of css-parameters:
-  </p>
-  <ul>
-    <li>"--glnfre-trn-y" - transformation value for the label in compressed state;</li>
-    <li>"--glnfre-trn2-y" - transformation value for label in free state;</li>
-  </ul>
-</section>
-
-<hr br-nn>
-
-<section mr-vr>
-  <h4 class="app-hover-link"
-    id="gln-frame-size">
-    GlnFrameSize directive.
-    <a [href]="urlCmFrame + '#gln-frame-size'">#</a>
-  </h4>
-  <p>
-    This directive defines the value "size" (SizeValue) by the input parameter or by default.
-    It also defines indents for ornaments (images) horizontally and vertical alignment.
-    It also generates events when the input parameter "size" (SizeValue) changes.
-    This directive defines the values of css parameters:
-  </p>
-  <ul>
-    <li>"--glnfrs-br-rd" - frame radius;</li>
-    <li>"--glnfrs-pd-lf" - left margin to the frame;</li>
-    <li>"--glnfrs-pd-rg" - right indent to frame;</li>
-    <li>"--glnfrs-pd-tp" - top indent to frame;</li>
-    <li>"--glnfrs-pd-bt" - bottom indent to frame;</li>
-  </ul>
-  <span>Example:</span>
-  <code><pre source="html">
-[glnFrameSize]="frameSize || (currConfig?.frameSize || null)"
-[glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
-[glnFrameSizeLabelPd]="currConfig?.labelPd"
-[glnFrameSizePrepare]="glnFrameExteriorInput"</pre></code>
-  <p>
-    There is an input parameter with interface GlnFrameSizePrepare.
-    Through this input parameter, the inverse functions are called to obtain the required values.
-    The "line height" value is defined, which is passed when calling inverse functions.
-  </p>
-  <p>
-    The inverse functions are called through the GlnFrameSizePrepare interface:
-  </p>
-  <p>
-    <i>- determining the values of the frame radii;</i>
-  </p>
-  <code><pre source="ts">
-getBorderRadius(frameSizeValue: number, lineHeight: number): string | null;</pre></code>
-  <ul>
-    <li>frameSizeValue - element height;</li>
-    <li>lineHeight - line height;</li>
-  </ul>
-  <p>
-    value of css-parameters:
-  </p>
-  <ul>
-    <li>"--glnfrs-br-rd" - frame radius;</li>
-  </ul>
-  <p>
-    <i>- determination of the values of horizontal indents;</i>
-  </p>
-  <code><pre source="ts">
-getPaddingHor(frameSizeValue: number, lineHeight: number): GlnFrameSizePaddingHorRes | null;</pre></code>
-  <ul>
-    <li>frameSizeValue - element height;</li>
-    <li>lineHeight - line height;</li>
-  </ul>
-  <p>
-    value of css-parameters:
-  </p>
-  <ul>
-    <li>"--glnfrs-pd-lf" - left margin to the frame;</li>
-    <li>"--glnfrs-pd-rg" - right indent to frame;</li>
-  </ul>
-
-  <p>
-    <i>- definition of values of vertical indents;</i>
-  </p>
-  <code><pre source="ts">
-getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddingVerRes | null;</pre></code>
-  <ul>
-    <li>frameSizeValue - element height;</li>
-    <li>lineHeight - line height;</li>
-  </ul>
-  <p>
-    value of css-parameters:
-  </p>
-  <ul>
-    <li>"--glnfrs-pd-tp" - top indent to frame;</li>
-    <li>"--glnfrs-pd-bt" - bottom indent to frame;</li>
-  </ul>
 </section>
 
 <hr br-nn>
@@ -291,45 +124,34 @@ getPaddingVer = (frameSizeValue: number, lineHeight: number): GlnFrameSizePaddin
   </p>
   <span>File "gln-input.component.html"</span>
   <code><pre source="html">
-&lt;div #glnFrameExteriorInput="glnFrameExteriorInput"
-  [glnFrameExteriorInput]="exterior || currConfig?.exterior"
-  [glnFrameExteriorInputElementRef]="hostRef"
-  (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()"
-  // parameter value "exterior"
-  // css-parameter: "--glnfre-trn-y"
-  // css-parameter: "--glnfre-trn2-y"
-  // css-parameter: "--glnfre-pd-shr"
+// css-parameter: "--glnfr-br-rd",
+// css-parameter: "--glnfr-pd-lf",
+// css-parameter: "--glnfr-pd-rg",
+// css-parameter: "--glnfr-pd-tp",
+// css-parameter: "--glnfr-pd-bt",
+// css-parameter: "--glnfr-pd-shr",
+// css-parameter: "--glnfr-trn-y",
+// css-parameter: "--glnfr-trn2-y"
+&lt;gln-frame
+  [config]="currConfig"
+  [exterior]="exterior || currConfig.exterior"
+  [frameSize]="frameSize || currConfig.frameSize"
+  [isDisabled]="disabled"
+  [isError]="!!formControl.errors || error"
+  [isFilled]="isFilled"
+  [isLabelShrink]="getBoolean(isLabelShrink) ?? currConfig.isLabelShrink"
+  [isNoAnimation]="getBoolean(isNoAnimation) ?? currConfig.isNoAnimation"
+  [isRequired]="required"
+  [label]="label"
+  glnFrameOrnament
+  [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
+  [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
+  // indents for ornaments (images) on the left and right;
+  // alignment of ornaments vertically;
+  // css-parameter: "--glnfro-pd-lf",
+  // css-parameter: "--glnfro-pd-rg"
 &gt;
-  &lt;gln-frame #glnFrame
-    [label]="label"
-    [exterior]="glnFrameExteriorInput.exterior"
-    [config]="currConfig"
-    [isLabelShrink]="getBoolean(isLabelShrink)"
-    [isNoLabel]="getBoolean(isNoLabel)"
-    [isError]="!!formControl.errors || getBoolean(isError)"
-
-    #glnFrameSize="glnFrameSize"
-    [glnFrameSize]="frameSize || currConfig?.frameSize"
-    [glnFrameSizeElementRef]="hostRef"
-    [glnFrameSizeValue]="currConfig?.frameSizeValue || defaultFrameSize"
-    [glnFrameSizeLabelPd]="currConfig?.labelPd"
-    [glnFrameSizePrepare]="glnFrameExteriorInput"
-    // parameter value "frameSizeValue";
-    // css-parameter: "--glnfrs-br-rd",
-    // css-parameter: "--glnfrs-pd-lf",
-    // css-parameter: "--glnfrs-pd-rg",
-    // css-parameter: "--glnfrs-pd-tp",
-    // css-parameter: "--glnfrs-pd-bt"
-
-    glnFrameOrnament
-    [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
-    [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
-    // indents for ornaments (images) on the left and right;
-    // alignment of ornaments vertically;
-    // css-parameter: "--glnfro-pd-lf",
-    // css-parameter: "--glnfro-pd-rg"
-  &gt;
-    ...
-  &lt;/gln-frame&gt;
-&lt;/div&gt;</pre></code>
+  ...
+&lt;/gln-frame&gt;
+</pre></code>
 </section>

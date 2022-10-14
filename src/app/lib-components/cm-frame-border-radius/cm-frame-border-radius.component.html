@@ -16,20 +16,18 @@
   <span>For example:</span>
   <code><pre source="html">
 &lt;div&gt;
-  &lt;gln-input style="<strong>--glnfr-br-rd: 25px;</strong>"
+  &lt;gln-input style="<strong>--glnfr-br-rd: 25px;</strong> <i>--glnfr-pd-lf: 29px;</i>"
     formControlName="model05"
     label="Enter value"
-    exterior="outlined"
-    [config]="&#123; labelPd: 29 &#125;"&gt;
+    exterior="outlined"&gt;
   &lt;/gln-input&gt;
 &lt;/div&gt;</pre></code>
   <span>Another example:</span>
   <code><pre source="html">
-&lt;div style="<strong>--glnfr-br-rd: 25px;</strong>"&gt;
+&lt;div style="<strong>--glnfr-br-rd: 25px;</strong> <i>--glnfr-pd-lf: 29px;</i>"&gt;
   &lt;gln-input formControlName="model05"
     label="Enter value"
-    exterior="outlined"
-    [config]="&#123; labelPd: 29 &#125;"&gt;
+    exterior="outlined"&gt;
   &lt;/gln-input&gt;
 &lt;/div&gt;</pre></code>
   <p>
@@ -37,11 +35,10 @@
   </p>
   <code><pre source="html">
 &lt;div&gt;
-  &lt;gln-input style="<strong>--glnfr-br-rd: 25px 25px 0 0;</strong>"
+  &lt;gln-input style="<strong>--glnfr-br-rd: 25px 25px 0 0;</strong> <i>--glnfr-pd-lf: 20px;</i>"
     formControlName="model05"
     label="Enter value"
-    exterior="underline"
-    [config]="&#123; labelPd: 20 &#125;"&gt;
+    exterior="underline"&gt;
   &lt;/gln-input&gt;
 &lt;/div&gt;</pre></code>
   <p>
@@ -50,10 +47,21 @@
     The maximum value for the fillet radius is 50% of the height of the current element.<br />
   </p>
   <p>
-    You can also change the value of the left / right indents, for a more convenient perception.
+    You can also change the value of the left / right indents, for a more convenient
+    perception.<br />
+    To change the left (and right) indent of the label, you need to add the css variable
+    <i>'--glnfr-pd-lf'</i>.
   </p>
 </section>
 
+
+<section mr-vr
+  id="border-radius-example01">
+  <h4 class="app-hover-link">
+    Example 1.
+    <a [href]="urlCmFrame + '#border-radius-example01'">#</a>
+  </h4>
+</section>
 
 <section mr-vr>
   <span>exterior: </span>
@@ -107,8 +115,8 @@
 <section mr-vr>
   <label>
     <input type="checkbox"
-      (change)="isNoLabel05=!isNoLabel05" />
-    is no Label
+      (change)="hideLabel05=!hideLabel05" />
+    hide Label
   </label>
 </section>
 
@@ -118,8 +126,11 @@
   autocomplete="off">
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('short') * borderRadius / 100, exterior05)">
+    [ngStyle]="{
+      '--glnfr-br-rd': getRadius(getSize('short',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('short', getRatio(exterior05)) : 'unset')
+    }">
     <div class="app-elem">
       <div>
         <small>
@@ -127,20 +138,19 @@
         </small>
       </div>
       <gln-input formControlName="model05a"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="short"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? { labelPd: getValue('short') * getRatio(exterior05) }
-          : null">
+        [exterior]="exterior05">
       </gln-input>
     </div>
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('small') * borderRadius / 100, exterior05)">
+    [ngStyle]="{
+      '--glnfr-br-rd': getRadius(getSize('small',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('small', getRatio(exterior05)) : 'unset')
+    }">
     <div class="app-elem">
       <div>
         <small>
@@ -148,20 +158,19 @@
         </small>
       </div>
       <gln-input formControlName="model05b"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="small"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? { labelPd: getValue('small') * getRatio(exterior05) }
-          : null">
+        [exterior]="exterior05">
       </gln-input>
     </div>
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('middle') * borderRadius / 100, exterior05)">
+    [ngStyle]="{
+      '--glnfr-br-rd': getRadius(getSize('middle',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('middle', getRatio(exterior05)) : 'unset')
+    }">
     <div class="app-elem">
       <div>
         <small>
@@ -169,20 +178,19 @@
         </small>
       </div>
       <gln-input formControlName="model05c"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="middle"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? { labelPd: getValue('middle') * getRatio(exterior05) }
-          : null">
+        [exterior]="exterior05">
       </gln-input>
     </div>
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('wide') * borderRadius / 100, exterior05)">
+    [ngStyle]="{
+      '--glnfr-br-rd': getRadius(getSize('wide',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('wide', getRatio(exterior05)) : 'unset')
+    }">
     <div class="app-elem">
       <div>
         <small>
@@ -190,20 +198,19 @@
         </small>
       </div>
       <gln-input formControlName="model05d"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="wide"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? { labelPd: getValue('wide') * getRatio(exterior05) }
-          : null">
+        [exterior]="exterior05">
       </gln-input>
     </div>
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('large') * borderRadius / 100, exterior05)">
+    [ngStyle]="{
+      '--glnfr-br-rd': getRadius(getSize('large',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('large', getRatio(exterior05)) : 'unset')
+    }">
     <div class="app-elem">
       <div>
         <small>
@@ -212,20 +219,19 @@
       </div>
       <gln-input formControlName="model05e"
         class="fbr-large"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="large"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? { labelPd: getValue('large') * getRatio(exterior05) }
-          : null">
+        [exterior]="exterior05">
       </gln-input>
     </div>
   </div>
 
   <div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('huge') * borderRadius / 100, exterior05)">
+    [ngStyle]="{
+      '--glnfr-br-rd': getRadius(getSize('huge',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('huge', getRatio(exterior05)) : 'unset')
+    }">
     <div class="app-elem">
       <div>
         <small>
@@ -234,13 +240,9 @@
       </div>
       <gln-input formControlName="model05f"
         class="fbr-huge"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="huge"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? { labelPd: getValue('huge') * getRatio(exterior05) }
-          : null">
+        [exterior]="exterior05">
       </gln-input>
     </div>
   </div>
@@ -261,8 +263,11 @@
   autocomplete="off"&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-        getValue('short') * borderRadius / 100, exterior05)"&gt;
+    [ngStyle]="&#123;
+      '--glnfr-br-rd': getRadius(getSize('short',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('short', getRatio(exterior05)) : 'unset')
+    &#125;"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -270,20 +275,19 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model05a"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="short"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? &#123; labelPd: getValue('short') * getRatio(exterior05) &#125;
-          : null"&gt;
+        [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('small') * borderRadius / 100, exterior05)"&gt;
+    [ngStyle]="&#123;
+      '--glnfr-br-rd': getRadius(getSize('small',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('small', getRatio(exterior05)) : 'unset')
+    &#125;"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -291,20 +295,19 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model05b"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="small"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? &#123; labelPd: getValue('small') * getRatio(exterior05) &#125;
-          : null"&gt;
+        [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('middle') * borderRadius / 100, exterior05)"&gt;
+    [ngStyle]="&#123;
+      '--glnfr-br-rd': getRadius(getSize('middle',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('middle', getRatio(exterior05)) : 'unset')
+    &#125;"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -312,20 +315,19 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model05c"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="middle"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? &#123; labelPd: getValue('middle') * getRatio(exterior05) &#125;
-          : null"&gt;
+        [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('wide') * borderRadius / 100, exterior05)"&gt;
+    [ngStyle]="&#123;
+      '--glnfr-br-rd': getRadius(getSize('wide',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('wide', getRatio(exterior05)) : 'unset')
+    &#125;"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -333,20 +335,19 @@
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model05d"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="wide"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? &#123; labelPd: getValue('wide') * getRatio(exterior05) &#125;
-          : null"&gt;
+        [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('large') * borderRadius / 100, exterior05)"&gt;
+    [ngStyle]="&#123;
+      '--glnfr-br-rd': getRadius(getSize('large',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('large', getRatio(exterior05)) : 'unset')
+    &#125;"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -355,20 +356,19 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model05e"
         class="fbr-large"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="large"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? &#123; labelPd: getValue('large') * getRatio(exterior05) &#125;
-          : null"&gt;
+        [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
   &lt;div class="app-group"
-    [attr.style]="'--glnfr-br-rd :' + getRadius(
-      getValue('huge') * borderRadius / 100, exterior05)"&gt;
+    [ngStyle]="&#123;
+      '--glnfr-br-rd': getRadius(getSize('huge',borderRadius/100),exterior05),
+      '--glnfr-pd-lf':
+        (isAddPadding05 ? getSize('huge', getRatio(exterior05)) : 'unset')
+    &#125;"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -377,13 +377,9 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model05f"
         class="fbr-huge"
-        label="Enter value"
-        [isNoLabel]="isNoLabel05 ? '':null"
+        [label]="hideLabel05 ? null : 'Enter value'"
         frameSize="huge"
-        [exterior]="exterior05"
-        [config]="isAddPadding05
-          ? &#123; labelPd: getValue('huge') * getRatio(exterior05) &#125;
-          : null"&gt;
+        [exterior]="exterior05"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -400,19 +396,19 @@ import &#123;
 &#125; from '@angular/forms';
 
 @Component(&#123;
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
+  selector: 'app-frame',
+  templateUrl: './frame.component.html',
+  styleUrls: ['./frame.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
-export class ButtonComponent &#123;
+export class FrameComponent &#123;
   public borderRadius = 50;
   public ratioOutlined = 0.58;
   public ratioUnderline = 0.4;
 
   public exterior05 = 'outlined';
   public isAddPadding05 = true;
-  public isNoLabel05 = false;
+  public hideLabel05 = false;
 
   public formGroup05: FormGroup = new FormGroup(&#123;
     model05a: new FormControl('Demo Size Short', []),
@@ -423,13 +419,15 @@ export class ButtonComponent &#123;
     model05f: new FormControl('Demo Size Huge', []),
   &#125;);
 
-  public getValue(frameSize: string | null): number &#123;
-    return GlnFrameSizeUtil.getValue(
+  public getSize(frameSize: string | null, radiusRatio: number = 1): string &#123;
+    const value = GlnFrameSizeUtil.getValue(
       GlnFrameSizeUtil.convert(frameSize)) ?? 0;
+    return Math.round((value * radiusRatio * 100) / 100)
+      .toString()
+      .concat('px');
   &#125;
-  public getRadius(value: number, exterior: string): string &#123;
-    return exterior === 'underline'
-      ? value + 'px ' + value + 'px 0 0' : value + 'px';
+  public getRadius(value: string, exterior: string): string &#123;
+    return exterior === 'underline' ? value + ' ' + value + ' 0 0' : value;
   &#125;
   public getRatio(exterior: string): number &#123;
     return exterior === 'underline'
@@ -439,19 +437,21 @@ export class ButtonComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;
-.fbr-large &#123;
-  font-size: 18px;
-&#125;
-.fbr-huge &#123;
-  font-size: 20px;
+app-frame &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .fbr-large &#123;
+    font-size: 18px;
+  &#125;
+  .fbr-huge &#123;
+    font-size: 20px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -483,8 +483,8 @@ export class ButtonComponent &#123;
 <section mr-vr>
   <label>
     <input type="checkbox"
-      (change)="isNoLabel06=!isNoLabel06" />
-    is no Label
+      (change)="hideLabel06=!hideLabel06" />
+    hide Label
   </label>
 </section>
 
@@ -500,78 +500,83 @@ export class ButtonComponent &#123;
 
   <div class="app-group">
 
-    <div class="app-elem">
+    <div class="app-elem"
+      [ngStyle]="{
+        '--glnfr-br-rd': '12.5px 0px 0px 12.5px',
+        '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      }">
       <div>
         <small>
           <em>Demo - A (top-left, bottom-left)</em>
         </small>
       </div>
-      <gln-input style="--glnfr-br-rd: 12.5px 0px 0px 12.5px;"
-        formControlName="model06a"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null">
+      <gln-input formControlName="model06a"
+        [label]="hideLabel06 ? null : 'Enter value'"
+        exterior="outlined">
       </gln-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem"
+      [ngStyle]="{
+        '--glnfr-br-rd': '0px 12.5px 12.5px 0px',
+        '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      }">
       <div>
         <small>
           <em>Demo - B (top-right, bottom-right)</em>
         </small>
       </div>
-      <gln-input style="--glnfr-br-rd: 0px 12.5px 12.5px 0px;"
-        formControlName="model06b"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null">
+      <gln-input formControlName="model06b"
+        [label]="hideLabel06 ? null : 'Enter value'"
+        exterior="outlined">
       </gln-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem"
+      [ngStyle]="{
+        '--glnfr-br-rd': '12.5px 0px 12.5px 0px',
+        '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      }">
       <div>
         <small>
           <em>Demo - C (top-left, bottom-right)</em>
         </small>
       </div>
-      <gln-input style="--glnfr-br-rd: 12.5px 0px 12.5px 0px;"
-        formControlName="model06c"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null">
+      <gln-input formControlName="model06c"
+        [label]="hideLabel06 ? null : 'Enter value'"
+        exterior="outlined">
       </gln-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem"
+      [ngStyle]="{
+      '--glnfr-br-rd': '0px 12.5px 0px 12.5px',
+      '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      }">
       <div>
         <small>
           <em>Demo - D (bottom-right, top-left)</em>
         </small>
       </div>
-      <gln-input style="--glnfr-br-rd: 0px 12.5px 0px 12.5px;"
-        formControlName="model06d"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null">
+      <gln-input formControlName="model06d"
+        [label]="hideLabel06 ? null : 'Enter value'"
+        exterior="outlined">
       </gln-input>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem"
+      [ngStyle]="{
+      '--glnfr-br-rd': '5% / 50%',
+      '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      }">
       <div>
         <small>
           <em>Demo - E (border-radius: 5%/50%)</em>
         </small>
       </div>
-      <gln-input style="--glnfr-br-rd: 5% / 50%;"
-        formControlName="model06e"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null">
+      <gln-input formControlName="model06e"
+        [label]="hideLabel06 ? null : 'Enter value'"
+        exterior="outlined">
       </gln-input>
     </div>
 
@@ -586,7 +591,10 @@ export class ButtonComponent &#123;
   </div>
 
   <div class="app-group">
-    <div class="app-elem">
+    <div class="app-elem"
+      [ngStyle]="{
+      '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      }">
       <div>
         <small>
           <em>Demo - F (border-radius: 16.66px)</em>
@@ -594,10 +602,8 @@ export class ButtonComponent &#123;
       </div>
       <gln-input class="radius-f"
         formControlName="model06f"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="underline"
-        [config]="isAddPadding06 ? configUnderline : null">
+        [label]="hideLabel06 ? null : 'Enter value'"
+        exterior="underline">
       </gln-input>
     </div>
   </div>
@@ -626,78 +632,83 @@ export class ButtonComponent &#123;
 
   &lt;div class="app-group"&gt;
 
-    &lt;div class="app-elem"&gt;
+    &lt;div class="app-elem"
+      [ngStyle]="&#123;
+        '--glnfr-br-rd': '12.5px 0px 0px 12.5px',
+        '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      &#125;"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Demo - A (top-left, bottom-left)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input style="--glnfr-br-rd: 12.5px 0px 0px 12.5px;"
-        formControlName="model06a"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null"&gt;
+      &lt;gln-input formControlName="model06a"
+        [label]="hideLabel06 ? null : 'Enter value'"
+        exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem"&gt;
+    &lt;div class="app-elem"
+      [ngStyle]="&#123;
+        '--glnfr-br-rd': '0px 12.5px 12.5px 0px',
+        '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      &#125;"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Demo - B (top-right, bottom-right)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input style="--glnfr-br-rd: 0px 12.5px 12.5px 0px;"
-        formControlName="model06b"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null"&gt;
+      &lt;gln-input formControlName="model06b"
+        [label]="hideLabel06 ? null : 'Enter value'"
+        exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem"&gt;
+    &lt;div class="app-elem"
+      [ngStyle]="&#123;
+        '--glnfr-br-rd': '12.5px 0px 12.5px 0px',
+        '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      &#125;"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Demo - C (top-left, bottom-right)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input style="--glnfr-br-rd: 12.5px 0px 12.5px 0px;"
-        formControlName="model06c"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null"&gt;
+      &lt;gln-input formControlName="model06c"
+        [label]="hideLabel06 ? null : 'Enter value'"
+        exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem"&gt;
+    &lt;div class="app-elem"
+      [ngStyle]="&#123;
+      '--glnfr-br-rd': '0px 12.5px 0px 12.5px',
+      '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      &#125;"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Demo - D (bottom-right, top-left)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input style="--glnfr-br-rd: 0px 12.5px 0px 12.5px;"
-        formControlName="model06d"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null"&gt;
+      &lt;gln-input formControlName="model06d"
+        [label]="hideLabel06 ? null : 'Enter value'"
+        exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-    &lt;div class="app-elem"&gt;
+    &lt;div class="app-elem"
+      [ngStyle]="&#123;
+      '--glnfr-br-rd': '5% / 50%',
+      '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      &#125;"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Demo - E (border-radius: 5%/50%)&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-input style="--glnfr-br-rd: 5% / 50%;"
-        formControlName="model06e"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="outlined"
-        [config]="isAddPadding06 ? configOutlined : null"&gt;
+      &lt;gln-input formControlName="model06e"
+        [label]="hideLabel06 ? null : 'Enter value'"
+        exterior="outlined"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
@@ -712,7 +723,10 @@ export class ButtonComponent &#123;
   &lt;/div&gt;
 
   &lt;div class="app-group"&gt;
-    &lt;div class="app-elem"&gt;
+    &lt;div class="app-elem"
+      [ngStyle]="&#123;
+      '--glnfr-pd-lf': (isAddPadding06 ? '18.5px' : 'unset')
+      &#125;"&gt;
       &lt;div&gt;
         &lt;small&gt;
           &lt;em&gt;Demo - F (border-radius: 16.66px)&lt;/em&gt;
@@ -720,10 +734,8 @@ export class ButtonComponent &#123;
       &lt;/div&gt;
       &lt;gln-input class="radius-f"
         formControlName="model06f"
-        label="Enter value"
-        [isNoLabel]="isNoLabel06 ? '':null"
-        exterior="underline"
-        [config]="isAddPadding06 ? configUnderline : null"&gt;
+        [label]="hideLabel06 ? null : 'Enter value'"
+        exterior="underline"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -740,14 +752,14 @@ import &#123;
 &#125; from '@angular/forms';
 
 @Component(&#123;
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
+  selector: 'app-frame',
+  templateUrl: './frame.component.html',
+  styleUrls: ['./frame.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
-export class ButtonComponent &#123;
+export class FrameComponent &#123;
   public isAddPadding06 = true;
-  public isNoLabel06 = false;
+  public hideLabel06 = false;
 
   public formGroup06: FormGroup = new FormGroup(&#123;
     model06a: new FormControl('Demo - A', []),
@@ -757,32 +769,28 @@ export class ButtonComponent &#123;
     model06e: new FormControl('Demo - E', []),
     model06f: new FormControl('Demo - F', []),
   &#125;);
-  public configOutlined: GlnFrameConfig = &#123;
-    labelPd: 18.5, // 0.37*FrameSizeValue.middle
-  &#125;;
-  public configUnderline: GlnFrameConfig = &#123;
-    labelPd: 18.5, // 0.37*FrameSizeValue.middle
-  &#125;;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;
-.radius-f &#123;
-  /* GlnFrameSize.middle [50px] / 3 */
-  --glnfr-br-rd: 16.66667px;
-&#125;
-.radius-f div.glnfr-border:before,
-.radius-f div.glnfr-border:after &#123;
-  /* GlnFrameSize.middle [50px] */
-  height: 50px;
+app-frame &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .radius-f &#123;
+    /* GlnFrameSize.middle [50px] / 3 */
+    --glnfr-br-rd: 16.66667px;
+  &#125;
+  .radius-f div.glnfr-border:before,
+  .radius-f div.glnfr-border:after &#123;
+    /* GlnFrameSize.middle [50px] */
+    height: 50px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

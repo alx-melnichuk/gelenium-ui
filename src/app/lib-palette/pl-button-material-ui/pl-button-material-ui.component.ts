@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { GlnButtonConfig, GlnButtonExterior, GlnFrameSize } from 'gelenium-ui';
-
+import { RouterConfig } from '../../lib-core/config/router-config';
 import { BTN_CONTAINED, BTN_OUTLINED, BTN_TEXT, LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
-import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-pl-button-material-ui',
@@ -28,7 +26,7 @@ export class PlButtonMaterialUiComponent {
   @Input()
   public labelText = BTN_TEXT;
 
-  public urlPlButton = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_BUTTON');
+  public urlPlButton = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_BUTTON');
 
   public routerLink = this.urlPlButton;
   public exterior03a = 'outlined';

@@ -1,0 +1,236 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Palette.
+    <a [href]="urlCmSwitch + '#Palette'">#</a>
+  </h3>
+  <p>
+    The GlnSwitch component has the ability to change its color.
+  </p>
+  <span>For example:</span>
+  <code><pre source="html">
+&lt;gln-switch
+  <i><strong>[glnColor]="&#123; primary: 'danger' &#125;"</strong></i>
+  formControlName="model02a"&gt;
+  Label
+&lt;/gln-switch&gt;</pre></code>
+  <p>
+    This means that you want to use the system color "danger"
+    as the "primary" color.
+  </p>
+</section>
+
+
+<form [formGroup]="formGroup04"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem sp-elem">
+      <div>
+        <small>
+          <em>color: primary</em>
+        </small>
+      </div>
+      <gln-switch [glnColor]="{ primary: 'primary' }"
+        formControlName="model04a">
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sp-elem">
+      <div>
+        <small>
+          <em>color: danger</em>
+        </small>
+      </div>
+      <gln-switch [glnColor]="{ primary: 'danger' }"
+        formControlName="model04b">
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sp-elem">
+      <div>
+        <small>
+          <em>color: success</em>
+        </small>
+      </div>
+      <gln-switch [glnColor]="{ primary: 'success' }"
+        formControlName="model04c">
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sp-elem">
+      <div>
+        <small>
+          <em>color: info</em>
+        </small>
+      </div>
+      <gln-switch [glnColor]="{ primary: 'info' }"
+        formControlName="model04d">
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sp-elem">
+      <div>
+        <small>
+          <em>color: warning</em>
+        </small>
+      </div>
+      <gln-switch [glnColor]="{ primary: 'warning' }"
+        formControlName="model04e">
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sp-elem sp-customer">
+      <div>
+        <small>
+          <em>color: customer</em>
+        </small>
+      </div>
+      <gln-switch [glnColor]="{ primary: 'customer' }"
+        formControlName="model04f">
+      </gln-switch>
+    </div>
+
+  </div>
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem sp-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;color: primary&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch [glnColor]="&#123; primary: 'primary' &#125;"
+        formControlName="model04a"&gt;
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem sp-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;color: danger&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch [glnColor]="&#123; primary: 'danger' &#125;"
+        formControlName="model04b"&gt;
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem sp-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;color: success&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch [glnColor]="&#123; primary: 'success' &#125;"
+        formControlName="model04c"&gt;
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem sp-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;color: info&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch [glnColor]="&#123; primary: 'info' &#125;"
+        formControlName="model04d"&gt;
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem sp-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;color: warning&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch [glnColor]="&#123; primary: 'warning' &#125;"
+        formControlName="model04e"&gt;
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem sp-elem sp-customer"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;color: customer&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch [glnColor]="&#123; primary: 'customer' &#125;"
+        formControlName="model04f"&gt;
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-switch',
+  templateUrl: './switch.component.html',
+  styleUrls: ['./switch.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SwitchComponent &#123;
+  public formGroup04: FormGroup = new FormGroup(&#123;
+    model04a: new FormControl(true, []),
+    model04b: new FormControl(true, []),
+    model04c: new FormControl(true, []),
+    model04d: new FormControl(true, []),
+    model04e: new FormControl(true, []),
+    model04f: new FormControl(true, []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-switch &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .sp-elem &#123;
+    min-width: 17ch;
+  &#125;
+  .sp-customer &#123;
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
+    --gln-customer-cl:
+      hsl(var(--gln-customer-h), var(--gln-customer-s), var(--gln-customer-l));
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

@@ -7,7 +7,6 @@ import { CmFrameSizeModule } from '../cm-frame-size/cm-frame-size.module';
 import { CmFrameLabelModule } from '../cm-frame-label/cm-frame-label.module';
 import { CmFrameHelperTextModule } from '../cm-frame-helper-text/cm-frame-helper-text.module';
 import { CmFrameBorderRadiusModule } from '../cm-frame-border-radius/cm-frame-border-radius.module';
-import { CmFrameFeatureModule } from '../cm-frame-feature/cm-frame-feature.module';
 import { CmFrameStructureModule } from '../cm-frame-structure/cm-frame-structure.module';
 import { CmFrameConfigModule } from '../cm-frame-config/cm-frame-config.module';
 import { CmFrameApiModule } from '../cm-frame-api/cm-frame-api.module';
@@ -25,7 +24,6 @@ import { CmFrameRoutingModule } from './cm-frame-routing.module';
     CmFrameLabelModule,
     CmFrameHelperTextModule,
     CmFrameBorderRadiusModule,
-    CmFrameFeatureModule,
     CmFrameStructureModule,
     CmFrameConfigModule,
     CmFrameApiModule,

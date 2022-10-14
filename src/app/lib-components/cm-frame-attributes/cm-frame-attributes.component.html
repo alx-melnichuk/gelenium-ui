@@ -7,7 +7,7 @@
   <ul>
     <li>
       "config" - Defines a configuration object.
-      <a [href]="urlCmFrame + '#Config'">More details.</a>
+      <a [href]="urlCmFrame + '#config-interface'">More details.</a>
     </li>
     <li>
       "exterior" - Determines the appearance of an element.<br />
@@ -22,7 +22,6 @@
     <li>"isError" - a sign that the field is in error status (isError);</li>
     <li>"isFilled" - Indicates that the input element is not empty (filled).</li>
     <li>"isLabelShrink" - An indication that the label has moved up and shrunk.</li>
-    <li>"isNoLabel" - Hide label display.</li>
     <li>"isRequired" - a sign that the field is required (isRequired);</li>
     <li>"label" - The content of the label.</li>
     <li>
@@ -65,11 +64,12 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>State: empty.</em>
+          <em>Attributes: isRequired, empty label.</em>
         </small>
       </div>
       <gln-input formControlName="model02a"
-        label="Enter value"
+        label=""
+        isRequired
         [exterior]="exterior02a">
       </gln-input>
     </div>
@@ -77,7 +77,7 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>Attributes: isRequired.</em>
+          <em>Attributes: isRequired, label.</em>
         </small>
       </div>
       <gln-input formControlName="model02b"
@@ -90,12 +90,10 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: isNoLabel.</em>
+          <em>Attribute: without Label.</em>
         </small>
       </div>
       <gln-input formControlName="model02c"
-        label="isNoLabel"
-        isNoLabel
         helperText="The label is not displayed."
         [exterior]="exterior02a">
       </gln-input>
@@ -137,11 +135,12 @@
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;State: empty.&lt;/em&gt;
+          &lt;em&gt;Attributes: isRequired, empty label.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02a"
-        label="Enter value"
+        label=""
+        isRequired
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -149,7 +148,7 @@
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attributes: isRequired.&lt;/em&gt;
+          &lt;em&gt;Attributes: isRequired, label.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02b"
@@ -162,12 +161,10 @@
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: isNoLabel.&lt;/em&gt;
+          &lt;em&gt;Attribute: without Label.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02c"
-        label="isNoLabel"
-        isNoLabel
         helperText="The label is not displayed."
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
@@ -218,13 +215,15 @@ export class FrameComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
+app-frame &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -394,13 +393,15 @@ export class FrameComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
+app-frame &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

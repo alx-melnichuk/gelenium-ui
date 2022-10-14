@@ -1,100 +1,93 @@
-<ng-container [formGroup]="formGroup">
-  <div glnsl-wrap
-    class="glnsl-wrap"
-    [glnFrameExteriorInput]="exterior || currConfig?.exterior"
-    #glnFrameExteriorInput="glnFrameExteriorInput"
-    [glnFrameExteriorInputElementRef]="hostRef"
-    (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()"
-    cdkOverlayOrigin
-    #origin="cdkOverlayOrigin"
-    #triggerRef
-    (click)="!disabled ? toggle() : null">
-    <gln-frame #frameRef
-      [ngClass]="[(isPanelOpen ? 'is-open' : '')]"
-      [config]="currConfig"
-      [exterior]="glnFrameExteriorInput.exterior"
-      [isDisabled]="disabled"
-      [isError]="!!errors || error"
-      [isFilled]="isFilled"
-      [isLabelShrink]="labelShrink || currConfig?.isLabelShrink"
-      [isNoAnimation]="noAnimation || currConfig?.isNoAnimation || isWriteValueInit"
-      [isNoLabel]="noLabel || currConfig?.isNoLabel"
-      [isRequired]="required"
-      [label]="label"
-      [glnFrameSize]="frameSize || currConfig?.frameSize"
-      #glnFrameSize="glnFrameSize"
-      [glnFrameSizeElementRef]="hostRef"
-      [glnFrameSizeValue]="currConfig?.frameSizeValue || frameSizeDefault"
-      [glnFrameSizeLabelPd]="currConfig?.labelPd"
-      [glnFrameSizePrepare]="glnFrameExteriorInput"
-      (glnFrameSizeChange)="frameSizeChange($event)"
-      glnFrameOrnament
-      [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
-      [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
-      [glnFrameOrnamentPath]="'/div{0}'"
-      [attr.opn]="isPanelOpen ? '' : null"
-      [attr.tabindex]="!disabled ? tabIndex : null"
-      (focus)="doFocus()"
-      (blur)="doBlur()"
-      (keydown)="frameKeydown($event)">
+<div glnsl-wrap
+  class="glnsl-wrap"
+  cdkOverlayOrigin
+  #origin="cdkOverlayOrigin"
+  #triggerRef
+  (click)="!disabled ? toggle() : null">
+  <gln-frame [ngClass]="[(isPanelOpen ? 'is-open' : '')]"
+    [config]="currConfig"
+    [cssElementRef]="triggerHtmlElementRef"
+    [exterior]="exterior || currConfig.exterior"
+    [frameSize]="frameSize || currConfig.frameSize"
+    [isAttrHideAnimation]="isAttrHideAnimation"
+    [isDisabled]="disabled"
+    [isError]="!!errors || error"
+    [isFilled]="isFilled"
+    [isLabelShrink]="getBoolean(isLabelShrink) ?? currConfig.isLabelShrink"
+    [isNoAnimation]="getBoolean(isNoAnimation) ?? currConfig.isNoAnimation"
+    [isRequired]="required"
+    [label]="!placeholder ? label : null"
+    glnFrameOrnament
+    [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
+    [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
+    [glnFrameOrnamentPath]="'/div{0}'"
+    [attr.opn]="isPanelOpen ? '' : null"
+    [attr.tabindex]="!disabled ? tabIndex : null"
+    (focus)="doFocus()"
+    (blur)="doBlur()"
+    (keydown)="frameKeydown($event)">
 
-      <span glnfr-orn-lf
-        class="gln-ornam-lf">
-        <ng-content select="[gln-orn-lf]"></ng-content>
-      </span>
+    <span glnfr-orn-lf
+      class="gln-ornam-lf">
+      <ng-content select="[gln-orn-lf]"></ng-content>
+    </span>
 
-      <span glnfr-orn-rg
-        class="gln-ornam-rg">
-        <ng-content select="[gln-orn-rg]"></ng-content>
+    <span glnfr-orn-rg
+      class="gln-ornam-rg">
+      <ng-content select="[gln-orn-rg]"></ng-content>
 
-        <div *ngIf="!getBoolean(isNoIcon) && !currConfig?.isNoIcon"
-          glnsl-rhomb
-          [attr.opn]="isPanelOpen ? '' : null"
-          [attr.noAnm]="noAnimation ? '' : null"
-          [ngClass]="['glnsl-rhomb', (isPanelOpen ? 'is-open' : '')]"
-          focusable="false"
-          aria-hidden="true">
-        </div>
-      </span>
-
-      <div [ngClass]="[(readOnly ? 'gln-readonly' : '')]"
-        glnfr-pd-ver
-        glnfr-pd-hor
-        glnfr-elem
-        [attr.id]="id + '-elem'">
-
-        <ng-container [ngSwitch]="isFilled">
-          <div *ngSwitchCase="false">&ZeroWidthSpace;</div>
-
-          <ng-container *ngSwitchCase="true"
-            [ngSwitch]="!!customTrigger">
-
-            <ng-content *ngSwitchCase="true"
-              select="gln-select-trigger">
-            </ng-content>
-
-            <ng-container *ngSwitchCase="false">
-              <ng-container
-                *ngFor="let option of selectedOptions; count as countVal; last as isLast; trackBy: trackByOption;">
-                <span [innerHTML]="option.getTrustHtml()"></span>
-                <span *ngIf="countVal > 1 && !isLast">, </span>
-              </ng-container>
-            </ng-container>
-
-          </ng-container>
-        </ng-container>
+      <div *ngIf="!getBoolean(isNoIcon) && !currConfig?.isNoIcon"
+        glnsl-rhomb
+        [attr.opn]="isPanelOpen ? '' : null"
+        [attr.noAnm]="noAnimation ? '' : null"
+        [ngClass]="['glnsl-rhomb', (isPanelOpen ? 'is-open' : '')]"
+        focusable="false"
+        aria-hidden="true">
       </div>
+    </span>
 
-    </gln-frame>
-  </div>
-</ng-container>
+    <div [attr.id]="id + '-elem'"
+      glnfr-pd-ver
+      glnfr-pd-hor
+      glnfr-elem>
 
-<gln-hint-or-error *ngIf="!!helperText"
-  [text]="helperText"
-  [isError]="!!errors || error"
-  [isFocused]="isFocused"
-  [isDisabled]="disabled">
-</gln-hint-or-error>
+      <ng-container [ngSwitch]="isFilled">
+        <div *ngSwitchCase="false"
+          glnsl-plc-hld
+          class="glnsl-placeholder">
+          <span>{{ !placeholder ? '&ZeroWidthSpace;' : label }}</span>
+        </div>
+
+        <ng-container *ngSwitchCase="true"
+          [ngSwitch]="!!customTrigger">
+
+          <ng-content *ngSwitchCase="true"
+            select="gln-select-trigger">
+          </ng-content>
+
+          <ng-container *ngSwitchCase="false">
+            <ng-container
+              *ngFor="let option of selectedOptions; count as countVal; last as isLast; trackBy: trackByOption;">
+              <span [innerHTML]="option.getTrustHtml()"></span>
+              <span *ngIf="countVal > 1 && !isLast">, </span>
+            </ng-container>
+          </ng-container>
+
+        </ng-container>
+      </ng-container>
+    </div>
+
+  </gln-frame>
+
+  <gln-hint-or-error *ngIf="!!helperText"
+    [text]="helperText"
+    [isError]="!!errors || error"
+    [isFocused]="isFocused"
+    [isDisabled]="disabled">
+  </gln-hint-or-error>
+
+</div>
+
 
 <ng-template cdkConnectedOverlay
   [cdkConnectedOverlayBackdropClass]="backdropClassVal || 'cdk-overlay-transparent-backdrop'"
@@ -109,7 +102,8 @@
   [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
   (backdropClick)="backdropClick()"
   (attach)="attach()"
-  (detach)="isPanelOpen ? close() : null">
+  (detach)="isPanelOpen ? close() : null"
+  (overlayKeydown)="doOverlayPanelKeydown($event)">
 
   <div glnslp-wrap
     class="gln-select-panel-wrap"

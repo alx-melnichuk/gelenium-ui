@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { UrlUtil } from '../../lib-core/utils/url.util';
+import { RouterConfig } from '../../lib-core/config/router-config';
 
 @Component({
   selector: 'app-gd-description-about-library',
@@ -10,7 +10,7 @@ import { UrlUtil } from '../../lib-core/utils/url.util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GdDescriptionAboutLibraryComponent {
-  public urlGdDescription = '/' + UrlUtil.get('URL_GUIDES') + '/' + UrlUtil.get('URL_DESCRIPTION');
+  public urlGdDescription = '/' + RouterConfig.get('URL_GUIDES') + '/' + RouterConfig.get('URL_GUIDES_DESCRIPTION');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

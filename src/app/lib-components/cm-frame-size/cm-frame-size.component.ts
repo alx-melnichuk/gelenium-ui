@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { GlnFrameConfig } from 'gelenium-ui';
-
+import { RouterConfig } from '../../lib-core/config/router-config';
 import {
   LABEL_CSS,
   LABEL_HTML,
@@ -12,7 +11,6 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
-import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-cm-frame-size',
@@ -37,7 +35,7 @@ export class CmFrameSizeComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
+  public urlCmFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
 
   public formGroup02a: FormGroup = new FormGroup({
     model02a: new FormControl('Demo Size Short', []),
@@ -48,7 +46,7 @@ export class CmFrameSizeComponent {
     model02f: new FormControl('Demo Size Huge', []),
   });
   public exterior02a = 'outlined';
-  public isNoLabel02a = false;
+  public hideLabel02a = false;
 
   public formGroup02b: FormGroup = new FormGroup({
     model02g: new FormControl('Demo Size Config', []),
@@ -56,11 +54,8 @@ export class CmFrameSizeComponent {
     model02i: new FormControl('Demo Size Config', []),
   });
   public exterior02b = 'outlined';
-  public isNoLabel02b = false;
+  public hideLabel02b = false;
 
-  public config02g: GlnFrameConfig = {
-    frameSizeValue: 57,
-  };
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }

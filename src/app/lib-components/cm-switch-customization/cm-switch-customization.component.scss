@@ -1,0 +1,91 @@
+/*# sourceURL=cm-switch-customization.component.scss */
+
+app-cm-switch-customization {
+  display: block;
+
+  .sc-elem {
+    min-width: 17ch;
+  }
+
+  .sc-android12 {
+    --glnsw-thumb-hg: 1em;
+    --glnsw-thumb-wd: 1em;
+    --glnsw-track-hg: 1.375em;
+    --glnsw-track-wd: 2.625em;
+
+    --glnsw-def-track: hsl(0deg 0% 0% / 38%);
+    --glnsw-def-thumb: hsl(0deg 0% 100%);
+
+    .gln-switch-track:before, .gln-switch-track:after {
+      content: "";
+      position: absolute;
+      top: 33.5%;
+      width: 1em;
+      height: 1em;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .gln-switch-track:before {
+      background-image: url('data:image/svg+xml;utf8,<svg '
+        + 'xmlns="http://www.w3.org/2000/svg" height="16" width="16" '
+        + 'viewBox="0 0 24 24"><path fill="%23fff" d="M21,7L9,19L3.5,'
+        + '13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/></svg>');
+      left: 1em;
+    }
+    .gln-switch-track:after {
+      background-image: url('data:image/svg+xml;utf8,<svg '
+        + 'xmlns="http://www.w3.org/2000/svg" height="16" width="16" '
+        + 'viewBox="0 0 24 24"><path fill="%23fff" '
+        + 'd="M19,13H5V11H19V13Z" /></svg>');
+      right: 1em;
+    }
+  }
+
+  .sc-ios {
+    --glnsw-thumb-hg: 1.375em;
+    --glnsw-thumb-wd: 1.375em;
+    --glnsw-track-hg: 1.625em;
+    --glnsw-track-wd: 2.625em;
+  
+    --glnsw-def-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-track: #E9E9EA;
+    --glnsw-def-chk-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-chk-track: #65C466;
+  }
+
+  .sc-small {
+    --glnsw-thumb-hg: 0.75em;
+    --glnsw-thumb-wd: 0.75em;
+    --glnsw-track-hg: 1em;
+    --glnsw-track-wd: 1.75em;
+  
+    --glnsw-def-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-track: rgba(0,0,0,.25);
+    --glnsw-def-chk-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-chk-track: #1890ff;
+  }
+
+  .sc-middle {
+    --glnsw-thumb-hg: 1em;
+    --glnsw-thumb-wd: 1em;
+    --glnsw-track-hg: 1.375em;
+    --glnsw-track-wd: 2.625em;
+  
+    --glnsw-def-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-track: rgba(0,0,0,.25);
+    --glnsw-def-chk-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-chk-track: #1890ff;
+  }
+
+  .sc-big {
+    --glnsw-thumb-hg: 1.375em;
+    --glnsw-thumb-wd: 1.375em;
+    --glnsw-track-hg: 1.625em;
+    --glnsw-track-wd: 2.625em;
+
+    --glnsw-def-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-track: rgba(0,0,0,.25);
+    --glnsw-def-chk-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-chk-track: #1890ff;
+  }
+}

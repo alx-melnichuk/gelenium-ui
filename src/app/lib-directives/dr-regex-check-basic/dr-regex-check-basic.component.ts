@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { RouterConfig } from '../../lib-core/config/router-config';
 import {
   LABEL_CSS,
   LABEL_HTML,
@@ -10,7 +11,6 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
-import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-dr-regex-check-basic',
@@ -35,7 +35,7 @@ export class DrRegexCheckBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlDrRegexCheck = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_REGEX_CHECK');
+  public urlDrRegexCheck = '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_REGEX_CHECK');
 
   public control01a = {
     model01a: new FormControl('1', []),

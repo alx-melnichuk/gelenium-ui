@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { UrlUtil } from '../../lib-core/utils/url.util';
+import { RouterConfig } from '../../lib-core/config/router-config';
 
 @Component({
   selector: 'app-dr-regex-check-api',
@@ -10,7 +10,7 @@ import { UrlUtil } from '../../lib-core/utils/url.util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrRegexCheckApiComponent {
-  public urlDrRegexCheck = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_REGEX_CHECK');
+  public urlDrRegexCheck = '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_REGEX_CHECK');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

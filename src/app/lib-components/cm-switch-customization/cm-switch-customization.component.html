@@ -1,0 +1,295 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Customization.
+    <a [href]="urlCmSwitch + '#Customization'">#</a>
+  </h3>
+  <p>
+    The GlnSwitch component has additional user customization.
+  </p>
+</section>
+
+
+<form [formGroup]="formGroup05"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem sc-elem">
+      <div>
+        <small>
+          <em>style as in Android</em>
+        </small>
+      </div>
+      <gln-switch class="sc-android12"
+        formControlName="model05a">Android 12
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sc-elem">
+      <div>
+        <small>
+          <em>style as in iOS</em>
+        </small>
+      </div>
+      <gln-switch class="sc-ios"
+        formControlName="model05b"
+        isNoRipple
+        noHov>iOS style
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sc-elem">
+      <div>
+        <small>
+          <em>style small</em>
+        </small>
+      </div>
+      <gln-switch class="sc-small"
+        formControlName="model05c"
+        isNoRipple
+        noHov>small
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sc-elem">
+      <div>
+        <small>
+          <em>style middle</em>
+        </small>
+      </div>
+      <gln-switch class="sc-middle"
+        formControlName="model05d"
+        isNoRipple
+        noHov>middle
+      </gln-switch>
+    </div>
+
+    <div class="app-elem sc-elem">
+      <div>
+        <small>
+          <em>style big</em>
+        </small>
+      </div>
+      <gln-switch class="sc-big"
+        formControlName="model05e"
+        isNoRipple
+        noHov>big
+      </gln-switch>
+    </div>
+
+  </div>
+
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup05"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem sc-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;style as in Android&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch class="sc-android12"
+        formControlName="model05a"&gt;Android 12
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem sc-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;style as in iOS&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch class="sc-ios"
+        formControlName="model05b"
+        isNoRipple
+        noHov&gt;iOS style
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem sc-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;style small&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch class="sc-small"
+        formControlName="model05c"
+        isNoRipple
+        noHov&gt;small
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem sc-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;style middle&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch class="sc-middle"
+        formControlName="model05d"
+        isNoRipple
+        noHov&gt;middle
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem sc-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;style big&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-switch class="sc-big"
+        formControlName="model05e"
+        isNoRipple
+        noHov&gt;big
+      &lt;/gln-switch&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-switch',
+  templateUrl: './switch.component.html',
+  styleUrls: ['./switch.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SwitchComponent &#123;
+  public formGroup05: FormGroup = new FormGroup(&#123;
+    model05a: new FormControl(true, []),
+    model05b: new FormControl(true, []),
+    model05c: new FormControl(true, []),
+    model05d: new FormControl(true, []),
+    model05e: new FormControl(true, []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-switch &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+
+  .sc-elem &#123;
+    min-width: 17ch;
+  &#125;
+
+  .sc-android12 &#123;
+    --glnsw-thumb-hg: 1em;
+    --glnsw-thumb-wd: 1em;
+    --glnsw-track-hg: 1.375em;
+    --glnsw-track-wd: 2.625em;
+
+    --glnsw-def-track: hsl(0deg 0% 0% / 38%);
+    --glnsw-def-thumb: hsl(0deg 0% 100%);
+
+    .gln-switch-track:before, .gln-switch-track:after &#123;
+      content: "";
+      position: absolute;
+      top: 33.5%;
+      width: 1em;
+      height: 1em;
+      background-repeat: no-repeat;
+      background-size: cover;
+    &#125;
+    .gln-switch-track:before &#123;
+      background-image: url('data:image/svg+xml;utf8,&lt;svg '
+        + 'xmlns="http://www.w3.org/2000/svg" height="16" width="16" '
+        + 'viewBox="0 0 24 24"&gt;&lt;path fill="%23fff" d="M21,7L9,19'
+        + 'L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/&gt;&lt;/svg&gt;');
+      left: 1em;
+    &#125;
+    .gln-switch-track:after &#123;
+      background-image: url('data:image/svg+xml;utf8,&lt;svg '
+      + 'xmlns="http://www.w3.org/2000/svg" height="16" width="16" '
+      + 'viewBox="0 0 24 24"&gt;&lt;path fill="%23fff" '
+      + 'd="M19,13H5V11H19V13Z" /&gt;&lt;/svg&gt;');
+      right: 1em;
+    &#125;
+  &#125;
+
+  .sc-ios &#123;
+    --glnsw-thumb-hg: 1.375em;
+    --glnsw-thumb-wd: 1.375em;
+    --glnsw-track-hg: 1.625em;
+    --glnsw-track-wd: 2.625em;
+
+    --glnsw-def-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-track: #E9E9EA;
+    --glnsw-def-chk-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-chk-track: #65C466;
+  &#125;
+
+  .sc-small &#123;
+    --glnsw-thumb-hg: 0.75em;
+    --glnsw-thumb-wd: 0.75em;
+    --glnsw-track-hg: 1em;
+    --glnsw-track-wd: 1.75em;
+
+    --glnsw-def-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-track: rgba(0,0,0,.25);
+    --glnsw-def-chk-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-chk-track: #1890ff;
+  &#125;
+
+  .sc-middle &#123;
+    --glnsw-thumb-hg: 1em;
+    --glnsw-thumb-wd: 1em;
+    --glnsw-track-hg: 1.375em;
+    --glnsw-track-wd: 2.625em;
+
+    --glnsw-def-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-track: rgba(0,0,0,.25);
+    --glnsw-def-chk-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-chk-track: #1890ff;
+  &#125;
+
+  .sc-big &#123;
+    --glnsw-thumb-hg: 1.375em;
+    --glnsw-thumb-wd: 1.375em;
+    --glnsw-track-hg: 1.625em;
+    --glnsw-track-wd: 2.625em;
+
+    --glnsw-def-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-track: rgba(0,0,0,.25);
+    --glnsw-def-chk-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-chk-track: #1890ff;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

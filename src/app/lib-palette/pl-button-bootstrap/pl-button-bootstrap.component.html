@@ -35,10 +35,10 @@ public cfgText: GlnButtonConfig = &#123;
   <div>
     <h4>Bootstrap style buttons.</h4>
   </div>
-  <p class="app-hover-link">
+  <h4 class="app-hover-link">
     Button style in "Primary" mode.
     <a [href]="urlPlButton + '#bootstrap-primary'">#</a>
-  </p>
+  </h4>
 </section>
 
 <section mr-vr>
@@ -88,10 +88,10 @@ public cfgText: GlnButtonConfig = &#123;
 
 <section mr-vr
   id="bootstrap-secondary">
-  <p class="app-hover-link">
+  <h4 class="app-hover-link">
     Button style in "Secondary" mode.
     <a [href]="urlPlButton + '#bootstrap-secondary'">#</a>
-  </p>
+  </h4>
 </section>
 
 <section mr-vr>
@@ -141,10 +141,10 @@ public cfgText: GlnButtonConfig = &#123;
 
 <section mr-vr
   id="bootstrap-success">
-  <p class="app-hover-link">
+  <h4 class="app-hover-link">
     Button style in "Success" mode.
     <a [href]="urlPlButton + '#bootstrap-success'">#</a>
-  </p>
+  </h4>
 </section>
 
 <section mr-vr>
@@ -194,10 +194,10 @@ public cfgText: GlnButtonConfig = &#123;
 
 <section mr-vr
   id="bootstrap-danger">
-  <p class="app-hover-link">
+  <h4 class="app-hover-link">
     Button style in "Danger" mode.
     <a [href]="urlPlButton + '#bootstrap-danger'">#</a>
-  </p>
+  </h4>
 </section>
 
 <section mr-vr>
@@ -247,10 +247,10 @@ public cfgText: GlnButtonConfig = &#123;
 
 <section mr-vr
   id="bootstrap-warning">
-  <p class="app-hover-link">
+  <h4 class="app-hover-link">
     Button style in "Warning" mode.
     <a [href]="urlPlButton + '#bootstrap-warning'">#</a>
-  </p>
+  </h4>
 </section>
 
 <section mr-vr>
@@ -300,10 +300,10 @@ public cfgText: GlnButtonConfig = &#123;
 
 <section mr-vr
   id="bootstrap-info">
-  <p class="app-hover-link">
+  <h4 class="app-hover-link">
     Button style in "Info" mode.
     <a [href]="urlPlButton + '#bootstrap-info'">#</a>
-  </p>
+  </h4>
 </section>
 
 <section mr-vr>
@@ -353,10 +353,10 @@ public cfgText: GlnButtonConfig = &#123;
 
 <section mr-vr
   id="bootstrap-light">
-  <p class="app-hover-link">
+  <h4 class="app-hover-link">
     Button style in "Light" mode.
     <a [href]="urlPlButton + '#bootstrap-light'">#</a>
-  </p>
+  </h4>
 </section>
 
 <section mr-vr>
@@ -406,10 +406,10 @@ public cfgText: GlnButtonConfig = &#123;
 
 <section mr-vr
   id="bootstrap-dark">
-  <p class="app-hover-link">
+  <h4 class="app-hover-link">
     Button style in "Dark" mode.
     <a [href]="urlPlButton + '#bootstrap-dark'">#</a>
-  </p>
+  </h4>
 </section>
 
 <section mr-vr>
@@ -459,10 +459,10 @@ public cfgText: GlnButtonConfig = &#123;
 
 <section mr-vr
   id="bootstrap-link">
-  <p class="app-hover-link">
+  <h4 class="app-hover-link">
     Button style in "Reference" mode.
     <a [href]="urlPlButton + '#bootstrap-link'">#</a>
-  </p>
+  </h4>
 </section>
 
 <section mr-vr>
@@ -940,271 +940,273 @@ export class ButtonComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.bb-items &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.bb-items &gt; :first-child &#123;
-  margin-left: 1%;
-&#125;
-.bb-items &gt; :not(first-child) &#123;
-  margin-left: 5%;
-&#125;
+app-button &#123;
+  .bb-items &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .bb-items &gt; :first-child &#123;
+    margin-left: 1%;
+  &#125;
+  .bb-items &gt; :not(first-child) &#123;
+    margin-left: 5%;
+  &#125;
 
-// ** Style: bstrap "bs-btn" **
-.bstr-btn.gln-button &#123;
-  font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.5;
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
-  --glnbt-lb-pd-lf: 0.75rem;
-  --glnbt-lb-pd-rg: 0.75rem;
-  --glnbt-uppercase: none;
-  --glnbt-dis-lb-cl: var(--glnbt-def-lb-cl);
-  --glnbt-dis-br-cl: var(--glnbt-def-br-cl);
-  --glnbt-dis-bg-cl: var(--glnbt-def-bg-cl);
-&#125;
+  // ** Style: bstrap "bs-btn" **
+  .bstr-btn.gln-button &#123;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    --glnbt-pd-lf: 0.75rem;
+    --glnbt-pd-rg: 0.75rem;
+    --glnbt-uppercase: none;
+    --glnbt-dis-lb-cl: var(--glnbt-def-lb-cl);
+    --glnbt-dis-br-cl: var(--glnbt-def-br-cl);
+    --glnbt-dis-bg-cl: var(--glnbt-def-bg-cl);
+  &#125;
 
-.bstr-btn.gln-button.gln-disabled&gt;.glnbt-btn &#123;
-  opacity: .65;
-  pointer-events: none;
-&#125;
-.bstr-btn.gln-button:not(.gln-disabled)&gt;.glnbt-btn:focus-within,
-.bstr-btn.gln-button:not(.gln-disabled).focus&gt;.glnbt-btn &#123;
-  box-shadow: 0 0 0 0.25rem var(--bstr--sh-focus);
-&#125;
+  .bstr-btn.gln-button.gln-disabled&gt;.glnbt-btn &#123;
+    opacity: .65;
+    pointer-events: none;
+  &#125;
+  .bstr-btn.gln-button:not(.gln-disabled)&gt;.glnbt-btn:focus-within,
+  .bstr-btn.gln-button:not(.gln-disabled).focus&gt;.glnbt-btn &#123;
+    box-shadow: 0 0 0 0.25rem var(--bstr--sh-focus);
+  &#125;
 
-// ** Style: bstrap "contained" **
-.bstr-btn.glnbt-contained&gt;.glnbt-btn &#123;
-  --glnbt-elevation: none;
-  --glnbt-foc-lb-cl: var(--glnbt-hov-lb-cl);
-  --glnbt-foc-br-cl: var(--glnbt-hov-br-cl);
-  --glnbt-foc-bg-cl: var(--glnbt-hov-bg-cl);
-&#125;
+  // ** Style: bstrap "contained" **
+  .bstr-btn.glnbt-contained&gt;.glnbt-btn &#123;
+    --glnbt-elevation: none;
+    --glnbt-foc-lb-cl: var(--glnbt-hov-lb-cl);
+    --glnbt-foc-br-cl: var(--glnbt-hov-br-cl);
+    --glnbt-foc-bg-cl: var(--glnbt-hov-bg-cl);
+  &#125;
 
-// ** Style: bstrap "outline" **
-.bstr-btn.glnbt-outlined&gt;.glnbt-btn &#123;
-  --glnbt-foc-lb-cl: var(--glnbt-def-lb-cl);
-  --glnbt-foc-lb-cl: var(--glnbt-def-lb-cl);
-  --glnbt-foc-br-cl: var(--glnbt-def-br-cl);
-&#125;
+  // ** Style: bstrap "outline" **
+  .bstr-btn.glnbt-outlined&gt;.glnbt-btn &#123;
+    --glnbt-foc-lb-cl: var(--glnbt-def-lb-cl);
+    --glnbt-foc-lb-cl: var(--glnbt-def-lb-cl);
+    --glnbt-foc-br-cl: var(--glnbt-def-br-cl);
+  &#125;
 
-// ** Style: bstrap state "active" **
-.bstr-btn.gln-button:not(.gln-disabled)&gt;.glnbt-btn:active &#123;
-  --glnbt-foc-lb-cl: var(--glnbt-hov-lb-cl);
-  --glnbt-foc-br-cl: var(--glnbt-hov-br-cl);
-  --glnbt-foc-bg-cl: var(--glnbt-hov-bg-cl);
-&#125;
+  // ** Style: bstrap state "active" **
+  .bstr-btn.gln-button:not(.gln-disabled)&gt;.glnbt-btn:active &#123;
+    --glnbt-foc-lb-cl: var(--glnbt-hov-lb-cl);
+    --glnbt-foc-br-cl: var(--glnbt-hov-br-cl);
+    --glnbt-foc-bg-cl: var(--glnbt-hov-bg-cl);
+  &#125;
 
-// ** Style: bstrap "Primary" **
+  // ** Style: bstrap "Primary" **
 
-.bstr-primary.contained &#123;
-  --bstr--sh-focus: rgb(49 132 253 / 50%);
+  .bstr-primary.contained &#123;
+    --bstr--sh-focus: rgb(49 132 253 / 50%);
 
-  --glnbt-def-lb-cl: #fff;
-  --glnbt-def-br-cl: #0d6efd;
-  --glnbt-def-bg-cl: #0d6efd;
+    --glnbt-def-lb-cl: #fff;
+    --glnbt-def-br-cl: #0d6efd;
+    --glnbt-def-bg-cl: #0d6efd;
 
-  --glnbt-hov-lb-cl: #fff;
-  --glnbt-hov-br-cl: #0a58ca;
-  --glnbt-hov-bg-cl: #0b5ed7;
-&#125;
-.bstr-primary.outline &#123;
-  --bstr--sh-focus: rgb(13 110 253 / 50%);
+    --glnbt-hov-lb-cl: #fff;
+    --glnbt-hov-br-cl: #0a58ca;
+    --glnbt-hov-bg-cl: #0b5ed7;
+  &#125;
+  .bstr-primary.outline &#123;
+    --bstr--sh-focus: rgb(13 110 253 / 50%);
 
-  --glnbt-def-lb-cl: #0d6efd;
-  --glnbt-def-br-cl: #0d6efd;
+    --glnbt-def-lb-cl: #0d6efd;
+    --glnbt-def-br-cl: #0d6efd;
 
-  --glnbt-hov-lb-cl: #fff;
-  --glnbt-hov-br-cl: #0d6efd;
-  --glnbt-hov-bg-cl: #0d6efd;
-&#125;
+    --glnbt-hov-lb-cl: #fff;
+    --glnbt-hov-br-cl: #0d6efd;
+    --glnbt-hov-bg-cl: #0d6efd;
+  &#125;
 
-// ** Style: bstrap "Secondary" **
+  // ** Style: bstrap "Secondary" **
 
-.bstr-secondary.contained &#123;
-  --bstr--sh-focus: rgb(130 138 145 / 50%);
+  .bstr-secondary.contained &#123;
+    --bstr--sh-focus: rgb(130 138 145 / 50%);
 
-  --glnbt-def-lb-cl: #fff;
-  --glnbt-def-br-cl: #6c757d;
-  --glnbt-def-bg-cl: #6c757d;
+    --glnbt-def-lb-cl: #fff;
+    --glnbt-def-br-cl: #6c757d;
+    --glnbt-def-bg-cl: #6c757d;
 
-  --glnbt-hov-lb-cl: #fff;
-  --glnbt-hov-br-cl: #565e64;
-  --glnbt-hov-bg-cl: #5c636a;
-&#125;
-.bstr-secondary.outline &#123;
-  --bstr--sh-focus: rgb(108 117 125 / 50%);
+    --glnbt-hov-lb-cl: #fff;
+    --glnbt-hov-br-cl: #565e64;
+    --glnbt-hov-bg-cl: #5c636a;
+  &#125;
+  .bstr-secondary.outline &#123;
+    --bstr--sh-focus: rgb(108 117 125 / 50%);
 
-  --glnbt-def-lb-cl: #6c757d;
-  --glnbt-def-br-cl: #6c757d;
+    --glnbt-def-lb-cl: #6c757d;
+    --glnbt-def-br-cl: #6c757d;
 
-  --glnbt-hov-lb-cl: #fff;
-  --glnbt-hov-br-cl: #6c757d;
-  --glnbt-hov-bg-cl: #6c757d;
-&#125;
+    --glnbt-hov-lb-cl: #fff;
+    --glnbt-hov-br-cl: #6c757d;
+    --glnbt-hov-bg-cl: #6c757d;
+  &#125;
 
-// ** Style: bstrap "Success" **
+  // ** Style: bstrap "Success" **
 
-.bstr-success.contained &#123;
-  --bstr--sh-focus: rgb(60 153 110 / 50%);
+  .bstr-success.contained &#123;
+    --bstr--sh-focus: rgb(60 153 110 / 50%);
 
-  --glnbt-def-lb-cl: #fff;
-  --glnbt-def-br-cl: #198754;
-  --glnbt-def-bg-cl: #198754;
+    --glnbt-def-lb-cl: #fff;
+    --glnbt-def-br-cl: #198754;
+    --glnbt-def-bg-cl: #198754;
 
-  --glnbt-hov-lb-cl: #fff;
-  --glnbt-hov-br-cl: #146c43;
-  --glnbt-hov-bg-cl: #157347;
-&#125;
-.bstr-success.outline &#123;
-  --bstr--sh-focus: rgb(25 135 84 / 50%);
+    --glnbt-hov-lb-cl: #fff;
+    --glnbt-hov-br-cl: #146c43;
+    --glnbt-hov-bg-cl: #157347;
+  &#125;
+  .bstr-success.outline &#123;
+    --bstr--sh-focus: rgb(25 135 84 / 50%);
 
-  --glnbt-def-lb-cl: #198754;
-  --glnbt-def-br-cl: #198754;
+    --glnbt-def-lb-cl: #198754;
+    --glnbt-def-br-cl: #198754;
 
-  --glnbt-hov-lb-cl: #fff;
-  --glnbt-hov-br-cl: #198754;
-  --glnbt-hov-bg-cl: #198754;
-&#125;
+    --glnbt-hov-lb-cl: #fff;
+    --glnbt-hov-br-cl: #198754;
+    --glnbt-hov-bg-cl: #198754;
+  &#125;
 
-// ** Style: bstrap "Danger" **
+  // ** Style: bstrap "Danger" **
 
-.bstr-danger.contained &#123;
-  --bstr--sh-focus: rgb(225 83 97 / 50%);
+  .bstr-danger.contained &#123;
+    --bstr--sh-focus: rgb(225 83 97 / 50%);
 
-  --glnbt-def-lb-cl: #fff;
-  --glnbt-def-br-cl: #dc3545;
-  --glnbt-def-bg-cl: #dc3545;
+    --glnbt-def-lb-cl: #fff;
+    --glnbt-def-br-cl: #dc3545;
+    --glnbt-def-bg-cl: #dc3545;
 
-  --glnbt-hov-lb-cl: #fff;
-  --glnbt-hov-br-cl: #b02a37;
-  --glnbt-hov-bg-cl: #bb2d3b;
-&#125;
-.bstr-danger.outline &#123;
-  --bstr--sh-focus: rgb(220 53 69 / 50%);
+    --glnbt-hov-lb-cl: #fff;
+    --glnbt-hov-br-cl: #b02a37;
+    --glnbt-hov-bg-cl: #bb2d3b;
+  &#125;
+  .bstr-danger.outline &#123;
+    --bstr--sh-focus: rgb(220 53 69 / 50%);
 
-  --glnbt-def-lb-cl: #dc3545;
-  --glnbt-def-br-cl: #dc3545;
+    --glnbt-def-lb-cl: #dc3545;
+    --glnbt-def-br-cl: #dc3545;
 
-  --glnbt-hov-lb-cl: #fff;
-  --glnbt-hov-br-cl: #dc3545;
-  --glnbt-hov-bg-cl: #dc3545;
-&#125;
+    --glnbt-hov-lb-cl: #fff;
+    --glnbt-hov-br-cl: #dc3545;
+    --glnbt-hov-bg-cl: #dc3545;
+  &#125;
 
-// ** Style: bstrap "Warning" **
+  // ** Style: bstrap "Warning" **
 
-.bstr-warning.contained &#123;
-  --bstr--sh-focus: rgb(217 164 6 / 50%);
+  .bstr-warning.contained &#123;
+    --bstr--sh-focus: rgb(217 164 6 / 50%);
 
-  --glnbt-def-lb-cl: #000;
-  --glnbt-def-br-cl: #ffc107;
-  --glnbt-def-bg-cl: #ffc107;
+    --glnbt-def-lb-cl: #000;
+    --glnbt-def-br-cl: #ffc107;
+    --glnbt-def-bg-cl: #ffc107;
 
-  --glnbt-hov-lb-cl: #000;
-  --glnbt-hov-br-cl: #ffc720;
-  --glnbt-hov-bg-cl: #ffca2c;
-&#125;
-.bstr-warning.outline &#123;
-  --bstr--sh-focus: rgb(255 193 7 / 50%);
+    --glnbt-hov-lb-cl: #000;
+    --glnbt-hov-br-cl: #ffc720;
+    --glnbt-hov-bg-cl: #ffca2c;
+  &#125;
+  .bstr-warning.outline &#123;
+    --bstr--sh-focus: rgb(255 193 7 / 50%);
 
-  --glnbt-def-lb-cl: #ffc107;
-  --glnbt-def-br-cl: #ffc107;
+    --glnbt-def-lb-cl: #ffc107;
+    --glnbt-def-br-cl: #ffc107;
 
-  --glnbt-hov-lb-cl: #000;
-  --glnbt-hov-br-cl: #ffc107;
-  --glnbt-hov-bg-cl: #ffc107;
-&#125;
+    --glnbt-hov-lb-cl: #000;
+    --glnbt-hov-br-cl: #ffc107;
+    --glnbt-hov-bg-cl: #ffc107;
+  &#125;
 
-// ** Style: bstrap "Info" **
+  // ** Style: bstrap "Info" **
 
-.bstr-info.contained &#123;
-  --bstr--sh-focus: rgb(11 172 204 / 50%);
+  .bstr-info.contained &#123;
+    --bstr--sh-focus: rgb(11 172 204 / 50%);
 
-  --glnbt-def-lb-cl: #000;
-  --glnbt-def-br-cl: #0dcaf0;
-  --glnbt-def-bg-cl: #0dcaf0;
+    --glnbt-def-lb-cl: #000;
+    --glnbt-def-br-cl: #0dcaf0;
+    --glnbt-def-bg-cl: #0dcaf0;
 
-  --glnbt-hov-lb-cl: #000;
-  --glnbt-hov-br-cl: #25cff2;
-  --glnbt-hov-bg-cl: #31d2f2;
-&#125;
-.bstr-info.outline &#123;
-  --bstr--sh-focus: rgb(13 202 240 / 50%);
+    --glnbt-hov-lb-cl: #000;
+    --glnbt-hov-br-cl: #25cff2;
+    --glnbt-hov-bg-cl: #31d2f2;
+  &#125;
+  .bstr-info.outline &#123;
+    --bstr--sh-focus: rgb(13 202 240 / 50%);
 
-  --glnbt-def-lb-cl: #0dcaf0;
-  --glnbt-def-br-cl: #0dcaf0;
+    --glnbt-def-lb-cl: #0dcaf0;
+    --glnbt-def-br-cl: #0dcaf0;
 
-  --glnbt-hov-lb-cl: #000;
-  --glnbt-hov-br-cl: #0dcaf0;
-  --glnbt-hov-bg-cl: #0dcaf0;
-&#125;
+    --glnbt-hov-lb-cl: #000;
+    --glnbt-hov-br-cl: #0dcaf0;
+    --glnbt-hov-bg-cl: #0dcaf0;
+  &#125;
 
-// ** Style: bstrap "Light" **
+  // ** Style: bstrap "Light" **
 
-.bstr-light.contained &#123;
-  --bstr--sh-focus: rgb(211 212 213 / 50%);
+  .bstr-light.contained &#123;
+    --bstr--sh-focus: rgb(211 212 213 / 50%);
 
-  --glnbt-def-lb-cl: #000;
-  --glnbt-def-br-cl: #f8f9fa;
-  --glnbt-def-bg-cl: #f8f9fa;
+    --glnbt-def-lb-cl: #000;
+    --glnbt-def-br-cl: #f8f9fa;
+    --glnbt-def-bg-cl: #f8f9fa;
 
-  --glnbt-hov-lb-cl: #000;
-  --glnbt-hov-br-cl: #f9fafb;
-  --glnbt-hov-bg-cl: #f9fafb;
-&#125;
-.bstr-light.outline &#123;
-  --bstr--sh-focus: rgb(248 249 250 / 50%);
+    --glnbt-hov-lb-cl: #000;
+    --glnbt-hov-br-cl: #f9fafb;
+    --glnbt-hov-bg-cl: #f9fafb;
+  &#125;
+  .bstr-light.outline &#123;
+    --bstr--sh-focus: rgb(248 249 250 / 50%);
 
-  --glnbt-def-lb-cl: #f8f9fa;
-  --glnbt-def-br-cl: #f8f9fa;
+    --glnbt-def-lb-cl: #f8f9fa;
+    --glnbt-def-br-cl: #f8f9fa;
 
-  --glnbt-hov-lb-cl: #000;
-  --glnbt-hov-br-cl: #f8f9fa;
-  --glnbt-hov-bg-cl: #f8f9fa;
-&#125;
+    --glnbt-hov-lb-cl: #000;
+    --glnbt-hov-br-cl: #f8f9fa;
+    --glnbt-hov-bg-cl: #f8f9fa;
+  &#125;
 
-// ** Style: bstrap "Dark" **
+  // ** Style: bstrap "Dark" **
 
-.bstr-dark.contained &#123;
-  --bstr--sh-focus: rgb(66 70 73 / 50%);
+  .bstr-dark.contained &#123;
+    --bstr--sh-focus: rgb(66 70 73 / 50%);
 
-  --glnbt-def-lb-cl: #fff;
-  --glnbt-def-br-cl: #212529;
-  --glnbt-def-bg-cl: #212529;
+    --glnbt-def-lb-cl: #fff;
+    --glnbt-def-br-cl: #212529;
+    --glnbt-def-bg-cl: #212529;
 
-  --glnbt-hov-lb-cl: #fff;
-  --glnbt-hov-br-cl: #1a1e21;
-  --glnbt-hov-bg-cl: #1c1f23;
-&#125;
-.bstr-dark.outline &#123;
-  --bstr--sh-focus: rgb(33 37 41 / 50%);
+    --glnbt-hov-lb-cl: #fff;
+    --glnbt-hov-br-cl: #1a1e21;
+    --glnbt-hov-bg-cl: #1c1f23;
+  &#125;
+  .bstr-dark.outline &#123;
+    --bstr--sh-focus: rgb(33 37 41 / 50%);
 
-  --glnbt-def-lb-cl: #212529;
-  --glnbt-def-br-cl: #212529;
+    --glnbt-def-lb-cl: #212529;
+    --glnbt-def-br-cl: #212529;
 
-  --glnbt-hov-lb-cl: #fff;
-  --glnbt-hov-br-cl: #212529;
-  --glnbt-hov-bg-cl: #212529;
-&#125;
+    --glnbt-hov-lb-cl: #fff;
+    --glnbt-hov-br-cl: #212529;
+    --glnbt-hov-bg-cl: #212529;
+  &#125;
 
-// ** Style: bstrap "Reference" **
+  // ** Style: bstrap "Reference" **
 
-.bstr-link &#123;
-  --bstr--sh-focus: rgb(13 110 253 / 25%);
+  .bstr-link &#123;
+    --bstr--sh-focus: rgb(13 110 253 / 25%);
 
-  --glnbt-def-lb-cl: #0d6efd;
-  --glnbt-def-bg-cl: transparent;
+    --glnbt-def-lb-cl: #0d6efd;
+    --glnbt-def-bg-cl: transparent;
 
-  --glnbt-hov-lb-cl: #0a58ca;
-  --glnbt-hov-bg-cl: transparent;
-&#125;
-.bstr-link.gln-button&gt;.glnbt-btn &#123;
-  text-decoration: underline;
-&#125;
-.bstr-link.gln-button.gln-disabled&gt;.glnbt-btn &#123;
-  --glnbt-dis-lb-cl: #6c757d;
+    --glnbt-hov-lb-cl: #0a58ca;
+    --glnbt-hov-bg-cl: transparent;
+  &#125;
+  .bstr-link.gln-button&gt;.glnbt-btn &#123;
+    text-decoration: underline;
+  &#125;
+  .bstr-link.gln-button.gln-disabled&gt;.glnbt-btn &#123;
+    --glnbt-dis-lb-cl: #6c757d;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

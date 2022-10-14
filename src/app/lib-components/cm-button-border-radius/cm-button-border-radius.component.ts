@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 
 import { GlnFrameSizeUtil } from 'gelenium-ui';
 
+import { RouterConfig } from '../../lib-core/config/router-config';
 import { BTN_CONTAINED, BTN_OUTLINED, BTN_TEXT, LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
-import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-cm-button-border-radius',
@@ -28,7 +28,7 @@ export class CmButtonBorderRadiusComponent {
   @Input()
   public labelText = BTN_TEXT;
 
-  public urlCmButton = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_BUTTON');
+  public urlCmButton = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_BUTTON');
 
   public routerLink = this.urlCmButton;
 
@@ -47,10 +47,10 @@ export class CmButtonBorderRadiusComponent {
   public getLabel(exterior: string): string {
     return exterior ? exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   }
-  public getSize(frameSize: string | null): number {
-    return GlnFrameSizeUtil.getValue(GlnFrameSizeUtil.convert(frameSize)) ?? 0;
-  }
-  public getRadius(frameSize: string | null, radiusRatio: number): number {
-    return Math.round((this.getSize(frameSize) * radiusRatio * 100) / 100);
+  public getSize(frameSize: string | null, radiusRatio: number = 1): string {
+    const value = GlnFrameSizeUtil.getValue(GlnFrameSizeUtil.convert(frameSize)) ?? 0;
+    return Math.round((value * radiusRatio * 100) / 100)
+      .toString()
+      .concat('px');
   }
 }

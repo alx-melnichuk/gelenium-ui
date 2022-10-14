@@ -109,19 +109,21 @@ export class ButtonComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.bb-items &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.bb-items &gt; :first-child &#123;
-  margin-left: 1%;
-&#125;
-.bb-items &gt; :not(first-child) &#123;
-  margin-left: 5%;
+app-button &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .bb-items &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .bb-items &gt; :first-child &#123;
+    margin-left: 1%;
+  &#125;
+  .bb-items &gt; :not(first-child) &#123;
+    margin-left: 5%;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

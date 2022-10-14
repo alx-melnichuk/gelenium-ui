@@ -103,7 +103,7 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
     this.isWriteValueInit = this.valueInit && !this.hostRef.nativeElement.hasAttribute('formcontrolname');
   }
 
-  // ** ControlValueAccessor - start **
+  // ** interface ControlValueAccessor - start **
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public onChange: (val: unknown) => void = () => {};
@@ -139,7 +139,7 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
     this.changeDetectorRef.markForCheck();
   }
 
-  // ** ControlValueAccessor - finish **
+  // ** interface ControlValueAccessor - finish **
 
   // ** Public API **
 

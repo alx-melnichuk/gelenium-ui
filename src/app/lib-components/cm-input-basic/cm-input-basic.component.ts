@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
+import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
-import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-cm-input-basic',
@@ -21,7 +21,7 @@ export class CmInputBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmInput = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_INPUT');
+  public urlCmInput = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INPUT');
 
   public formGroup01: FormGroup = new FormGroup({
     model01a: new FormControl('', []),

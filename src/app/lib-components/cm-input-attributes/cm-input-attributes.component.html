@@ -8,10 +8,9 @@
     <li>"id" - parameter for defining the unique identifier of the input field
       (id="unique_identifier");
     </li>
-
     <li>
       "config" - Defines a configuration object.
-      <a [href]="urlCmFrame + '#Config'">More details.</a>
+      <a [href]="urlCmInput + '#config-interface'">More details.</a>
     </li>
     <li>
       "exterior" - Determines the appearance of an element.<br />
@@ -27,8 +26,9 @@
     </li>
     <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
     <li>"isError" - a sign that the field is in error status (isError);</li>
-    <li>"isNoLabel" - Hide label display.</li>
-    <li>"isReadOnly" - read-only access flag (isReadOnly);</li>
+    <li>"isPlaceholder" - specifies that the value of the "label" field be displayed
+      as the "placeholder" attribute for the "input" element (isPlaceholder);</li>
+    <li>"isReadOnly" - a sign that the field is read-only (isReadOnly);</li>
     <li>"isRequired" - a sign that the field is required (isRequired);</li>
     <li>"label" - The content of the label.</li>
     <li>"isLabelShrink" - An indication that the label has moved up and shrunk.</li>
@@ -48,34 +48,8 @@
       when the font size is changed.
     </li>
   </ul>
-  <p>
-    The "type" attribute can take the following values:
-  </p>
-  <ul>
-    <li>'color';</li>
-    <li>'date';</li>
-    <li>'datetime-local';</li>
-    <li>'email';</li>
-    <li>'month';</li>
-    <li>'number';</li>
-    <li>'password';</li>
-    <li>'search';</li>
-    <li>'tel';</li>
-    <li>'text';</li>
-    <li>'time';</li>
-    <li>'url';</li>
-    <li>'week';</li>
-  </ul>
-  <p>
-    For a field with the "color" type, it is desirable to set a non-empty value (for example,
-    "#000000"), otherwise, a warning may appear:<br />
-    <i>
-      platform-browser.js:745 The specified value "" does not conform to the required format.
-      The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
-    </i><br />
-    This warning appears when there are two input elements of type "color" and "date".
-  </p>
 </section>
+
 
 <section mr-vr>
   <span>exterior: </span>
@@ -99,7 +73,7 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>State: empty.</em>
+          <em>Attributes: id, label.</em>
         </small>
       </div>
       <gln-input formControlName="model02a"
@@ -126,13 +100,13 @@
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: isNoLabel.</em>
+          <em>Attribute: isReadOnly.</em>
         </small>
       </div>
       <gln-input formControlName="model02c"
-        label="isNoLabel"
-        isNoLabel
-        helperText="The label is not displayed."
+        label="Read Only"
+        isReadOnly
+        helperText="The parameter is read only."
         [exterior]="exterior02a">
       </gln-input>
     </div>
@@ -147,6 +121,34 @@
         label="Disabled"
         isDisabled
         helperText="The parameter is disabled."
+        [exterior]="exterior02a">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isLabelShrink.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02e"
+        label="Permanent label"
+        isLabelShrink
+        helperText="The position of the label is fixed."
+        [exterior]="exterior02a">
+      </gln-input>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isPlaceholder.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02f"
+        label="Enter text"
+        isPlaceholder
+        helperText="The placeholder is displayed."
         [exterior]="exterior02a">
       </gln-input>
     </div>
@@ -173,7 +175,7 @@
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;State: empty.&lt;/em&gt;
+          &lt;em&gt;Attributes: id, label.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02a"
@@ -200,13 +202,13 @@
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: isNoLabel.&lt;/em&gt;
+          &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02c"
-        label="isNoLabel"
-        isNoLabel
-        helperText="The label is not displayed."
+        label="Read Only"
+        isReadOnly
+        helperText="The parameter is read only."
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -225,137 +227,6 @@
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
-  &lt;/div&gt;
-
-&lt;/form&gt;</pre></code>
-        </mat-tab>
-        <mat-tab [label]="labelTs">
-          <code><pre source="ts">
-import &#123;
-  Component, ViewEncapsulation
-&#125; from '@angular/core';
-import &#123;
-  FormControl, FormGroup, Validators
-&#125; from '@angular/forms';
-
-@Component(&#123;
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-&#125;)
-export class InputComponent &#123;
-  public exterior02a = 'outlined';
-
-  public formGroup02a: FormGroup = new FormGroup(&#123;
-    model02a: new FormControl(null, []),
-    model02b: new FormControl('Hello World', [Validators.required]),
-    model02c: new FormControl('Hello World', []),
-    model02d: new FormControl('Hello World', []),
-  &#125;);
-&#125;</pre></code>
-        </mat-tab>
-        <mat-tab [label]="labelCss">
-          <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;</pre></code>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-expansion-panel>
-  </mat-accordion>
-</section>
-
-<hr br-nn />
-
-<section mr-vr>
-  <span>exterior: </span>
-  <mat-button-toggle-group value="exterior02b"
-    (change)="exterior02b=$event.value">
-    <mat-button-toggle [checked]="exterior02b==='outlined'"
-      value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02b==='underline'"
-      value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02b==='standard'"
-      value="standard">{{ labelStandard }}</mat-button-toggle>
-  </mat-button-toggle-group>
-</section>
-
-<form [formGroup]="formGroup02b"
-  novalidate
-  autocomplete="off">
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isLabelShrink.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02e"
-        label="Permanent label"
-        isLabelShrink
-        helperText="The position of the label is fixed."
-        [exterior]="exterior02b">
-      </gln-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isError.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02f"
-        [label]="!control02b.model02f.value
-        ? 'Requires a value':'Parameter value'"
-        [isError]="!control02b.model02f.value ? '':null"
-        [helperText]="control02b.model02f.value
-      ? 'The field is filled.'
-      : 'The field is not filled.'"
-        [exterior]="exterior02b">
-      </gln-input>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isReadOnly.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02g"
-        label="Read Only"
-        isReadOnly
-        helperText="The parameter is read only."
-        [exterior]="exterior02b">
-      </gln-input>
-    </div>
-
-  </div>
-
-</form>
-
-<section mr-vr>
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-tab-group animationDuration="0ms">
-        <mat-tab [label]="labelHtml">
-          <code><pre source="html">
-&lt;form [formGroup]="formGroup02b"
-  novalidate
-  autocomplete="off"&gt;
-
-  &lt;div class="app-group"&gt;
-
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
@@ -366,38 +237,21 @@ export class InputComponent &#123;
         label="Permanent label"
         isLabelShrink
         helperText="The position of the label is fixed."
-        [exterior]="exterior02b"&gt;
+        [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: isError.&lt;/em&gt;
+          &lt;em&gt;Attribute: isPlaceholder.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02f"
-        [label]="!control02b.model02f.value
-        ? 'Requires a value':'Parameter value'"
-        [isError]="!control02b.model02f.value ? '':null"
-        [helperText]="control02b.model02f.value
-      ? 'The field is filled.'
-      : 'The field is not filled.'"
-        [exterior]="exterior02b"&gt;
-      &lt;/gln-input&gt;
-    &lt;/div&gt;
-
-    &lt;div class="app-elem"&gt;
-      &lt;div&gt;
-        &lt;small&gt;
-          &lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;
-        &lt;/small&gt;
-      &lt;/div&gt;
-      &lt;gln-input formControlName="model02g"
-        label="Read Only"
-        isReadOnly
-        helperText="The parameter is read only."
-        [exterior]="exterior02b"&gt;
+        label="Enter text"
+        isPlaceholder
+        helperText="The placeholder is displayed."
+        [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
@@ -421,24 +275,29 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class InputComponent &#123;
-  public exterior02b = 'outlined';
-  public control02b = &#123;
-    model02e: new FormControl(null, []),
-    model02f: new FormControl('Hello World', [Validators.required]),
-    model02g: new FormControl('Hello World', []),
-  &#125;;
-  public formGroup02b: FormGroup = new FormGroup(this.control02b);
+  public formGroup02a: FormGroup = new FormGroup(&#123;
+    model02a: new FormControl('', []),
+    model02b: new FormControl('Hello World'
+      , [Validators.required]),
+    model02c: new FormControl('Hello World', []),
+    model02d: new FormControl('Hello World', []),
+    model02e: new FormControl('', []),
+    model02f: new FormControl(null, []),
+  &#125;);
+  public exterior02a = 'outlined';
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -448,6 +307,27 @@ export class InputComponent &#123;
 
 <hr br-nn />
 
+
+<section mr-vr>
+  <p>
+    The "type" attribute can take the following values:
+  </p>
+  <ul>
+    <li>'color';</li>
+    <li>'date';</li>
+    <li>'datetime-local';</li>
+    <li>'email';</li>
+    <li>'month';</li>
+    <li>'number';</li>
+    <li>'password';</li>
+    <li>'search';</li>
+    <li>'tel';</li>
+    <li>'text';</li>
+    <li>'time';</li>
+    <li>'url';</li>
+    <li>'week';</li>
+  </ul>
+</section>
 
 <section mr-vr>
   <span>exterior: </span>
@@ -649,13 +529,15 @@ export class InputComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -665,6 +547,18 @@ export class InputComponent &#123;
 
 <hr br-nn />
 
+
+<section>
+  <p>
+    For a field with the "color" type, it is desirable to set a non-empty value (for example,
+    "#000000"), otherwise, a warning may appear:<br />
+    <i>
+      platform-browser.js:745 The specified value "" does not conform to the required format.
+      The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+    </i><br />
+    This warning appears when there are two input elements of type "color" and "date".
+  </p>
+</section>
 
 <section mr-vr>
   <span>exterior: </span>
@@ -888,13 +782,15 @@ export class InputComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

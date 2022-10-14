@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { GlnFrameConfig, GlnFrameExterior, GlnFrameSize } from 'gelenium-ui';
-
+import { RouterConfig } from '../../lib-core/config/router-config';
 import {
   LABEL_CSS,
   LABEL_HTML,
@@ -12,7 +11,6 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
-import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-pl-input-bootstrap',
@@ -37,7 +35,7 @@ export class PlInputBootstrapComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlPlInput = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_INPUT');
+  public urlPlInput = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_INPUT');
 
   public control02a = {
     model02a: new FormControl(null, []),
@@ -47,10 +45,10 @@ export class PlInputBootstrapComponent {
   };
   public formGroup02a: FormGroup = new FormGroup(this.control02a);
 
-  public config02a: GlnFrameConfig = {
-    exterior: GlnFrameExterior.outlined,
-    frameSize: GlnFrameSize.short,
-    isNoLabel: true,
+  public config02a = {
+    exterior: 'outlined',
+    frameSize: 'short',
+    isPlaceholder: true,
   };
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

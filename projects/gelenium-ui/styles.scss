@@ -10,39 +10,41 @@
   --gln-default-bg-l: 100%;
   --gln-default-bg-cl: hsl(var(--gln-default-bg-h),var(--gln-default-bg-s),var(--gln-default-bg-l));
   // "default" color: hsl(20, 2%, 5%); OLD
-  // "default" color: hsl(250, 2%, 5%);
+  // "default" color: hsl(250, 2%, 20%);
   --gln-default-h: 250;
   --gln-default-s: 5%;
   --gln-default-l: 20%;
   --gln-default-cl: hsl(var(--gln-default-h),var(--gln-default-s),var(--gln-default-l));
   // "primary" color: hsl(210, 79%, 46%); OLD
-  // "primary" color: hsl(215, 80%, 50%);
+  // "primary" color: hsl(215, 80%, 50%); // BS hsl(216, 98%, 52%);
   --gln-primary-h: 215;
   --gln-primary-s: 80%;
   --gln-primary-l: 50%;
   --gln-primary-cl: hsl(var(--gln-primary-h),var(--gln-primary-s),var(--gln-primary-l));
   // "danger" color: hsl(0, 65%, 51%); OLD
-  // "danger" color: hsl(5, 85%, 50%);
+  // "danger" color: hsl(5, 85%, 50%); // BS hsl(354, 70%, 54%);
   --gln-danger-h: 5;
   --gln-danger-s: 70%;
   --gln-danger-l: 50%;
   --gln-danger-cl: hsl(var(--gln-danger-h),var(--gln-danger-s),var(--gln-danger-l));
   // "success" color: hsl(152, 69%, 31%); #198754; OLD
   // "success" color: hsl(135, 30%, 50%);
-  --gln-success-h: 135;
-  --gln-success-s: 30%;
+  // "success" color: hsl(125, 50%, 50%); // BS hsl(152, 69%, 31%);
+  --gln-success-h: 125;
+  --gln-success-s: 50%;
   --gln-success-l: 50%;
   --gln-success-cl: hsl(var(--gln-success-h),var(--gln-success-s),var(--gln-success-l));
   // "info" color: hsl(190, 90%, 50%); #0dcaf0; OLD
   // "info" color: hsl(90, 70%, 50%);
-  --gln-info-h: 90;
-  --gln-info-s: 70%;
+  // "info" color: hsl(180, 50%, 50%); // BS hsl(190, 90%, 50%);
+  --gln-info-h: 180;
+  --gln-info-s: 50%;
   --gln-info-l: 50%;
   --gln-info-cl: hsl(var(--gln-info-h),var(--gln-info-s),var(--gln-info-l));
   // "warning" color: hsl(45, 100%, 51%); #ffc107: OLD
-  // "warning" color: hsl(45, 70%, 50%);
+  // "warning" color: hsl(45, 75%, 50%); // BS hsl( 45, 100%, 51%);
   --gln-warning-h: 45;
-  --gln-warning-s: 70%;
+  --gln-warning-s: 75%;
   --gln-warning-l: 50%;
   --gln-warning-cl: hsl(var(--gln-warning-h),var(--gln-warning-s),var(--gln-warning-l));
 }

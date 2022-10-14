@@ -38,6 +38,7 @@
 
 <hr br-nn />
 
+
 <section>
   <p>
     For example, let's build a display of Unicode characters.
@@ -153,7 +154,7 @@
         &lt;button gln-orn-lf
           class="so-btn so-uncode"
           (click)="isUncode06a=!isUncode06a;$event.stopPropagation();"&gt;
-          &lt;span&gt;<b>&#123;</b>&#123; isUncode06a ? '&#9733;': '&#9734;' &#125;&#125;&lt;/span&gt;
+          &lt;span&gt;<b>&#123;</b>&#123; isUncode06a ? '&amp;#9733;': '&amp;#9734;' &#125;&#125;&lt;/span&gt;
         &lt;/button&gt;
       &lt;/gln-select&gt;
 
@@ -179,7 +180,7 @@
         &lt;button gln-orn-rg
           class="so-btn so-uncode"
           (click)="isUncode06b=!isUncode06b;$event.stopPropagation();"&gt;
-          &lt;span&gt;<b>&#123;</b>&#123; isUncode06b ? '&#9733;': '&#9734;' &#125;&#125;&lt;/span&gt;
+          &lt;span&gt;<b>&#123;</b>&#123; isUncode06b ? '&amp;#9733;': '&amp;#9734;' &#125;&#125;&lt;/span&gt;
         &lt;/button&gt;
       &lt;/gln-select&gt;
 
@@ -196,14 +197,11 @@ import &#123;
 import &#123;
  FormControl, FormGroup
  &#125; from '@angular/forms';
-import &#123;
- GlnFrameConfig, OrnamAlign
- &#125; from 'gelenium-ui';
 
 @Component(&#123;
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class SelectComponent &#123;
@@ -239,39 +237,41 @@ export class SelectComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;
-.so-elem &#123;
-  width: 200px;
-  min-width: unset;
-&#125;
-.io-pd-hor &#123;
-  padding-left: 8px;
-  padding-right: 8px;
-&#125;
-.so-btn &#123;
-  outline: 0;
-  border: 0;
-  margin: 0;
-  box-sizing: border-box;
-  cursor: pointer;
-  user-select: none;
-  border-radius: 50%;
-  background-color: transparent;
-&#125;
-.so-btn:hover &#123;
-  background-color: hsla(0, 6%, 16%, 15%);
-&#125;
-.so-uncode &#123;
-  font-size: 27px;
-  padding-top: 2px;
-  padding-bottom: 2px;
+app-select &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .so-elem &#123;
+    width: 30ch;
+    min-width: unset;
+  &#125;
+  .io-pd-hor &#123;
+    padding-left: 8px;
+    padding-right: 8px;
+  &#125;
+  .so-btn &#123;
+    outline: 0;
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 50%;
+    background-color: transparent;
+  &#125;
+  .so-btn:hover &#123;
+    background-color: hsla(0, 6%, 16%, 15%);
+  &#125;
+  .so-uncode &#123;
+    font-size: 27px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

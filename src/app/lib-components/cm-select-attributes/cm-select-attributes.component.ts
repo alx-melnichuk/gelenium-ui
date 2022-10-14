@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { RouterConfig } from '../../lib-core/config/router-config';
 import {
   LABEL_CSS,
   LABEL_HTML,
@@ -10,7 +11,6 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
-import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-cm-select-attributes',
@@ -35,35 +35,31 @@ export class CmSelectAttributesComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmSelect = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_SELECT');
+  public urlCmSelect = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SELECT');
 
   public fruits = ['mango', 'lemon', 'orange', 'kiwi'];
 
   public exterior02a = 'outlined';
-  public formGroup02a: FormGroup = new FormGroup({
+  public control02a = {
     model02a: new FormControl(null, []),
     model02b: new FormControl(this.fruits[0], [Validators.required]),
     model02c: new FormControl(this.fruits[0], []),
     model02d: new FormControl(this.fruits[0], []),
-  });
+    model02e: new FormControl(null, []),
+    model02f: new FormControl(null, []),
+  };
+  public formGroup02a: FormGroup = new FormGroup(this.control02a);
 
+  public fruitsB = ['mango', 'ripe lemon', 'gorgeous orange', 'succulent watermelon'];
   public exterior02b = 'outlined';
   public control02b = {
-    model02e: new FormControl(null, []),
-    model02f: new FormControl(null, [Validators.required]),
-    model02g: new FormControl(this.fruits[0], []),
-  };
-  public formGroup02b: FormGroup = new FormGroup(this.control02b);
-
-  public fruitsC = ['mango', 'ripe lemon', 'gorgeous orange', 'succulent watermelon'];
-  public exterior02c = 'outlined';
-  public control02c = {
     model02i: new FormControl(null, []),
     model02j: new FormControl(null, []),
     model02k: new FormControl(null, []),
     model02l: new FormControl(null, []),
   };
-  public formGroup02c: FormGroup = new FormGroup(this.control02c);
+  public formGroup02b: FormGroup = new FormGroup(this.control02b);
+  public fruitsC = ['orange', 'grapefruit', 'lemon', 'clementine', 'mandarin', 'mineola', 'pomelo', 'ponkan', 'poncirus', 'citron'];
 
   public flowers = [
     'rose',
@@ -79,24 +75,22 @@ export class CmSelectAttributesComponent {
     'magnolia',
     'hyacinth',
   ];
-  public exterior02d = 'outlined';
-  public control02d = {
+  public exterior02c = 'outlined';
+  public control02c = {
     model02m: new FormControl([this.flowers[1], this.flowers[3], this.flowers[4]], []),
     model02n: new FormControl([], []),
     model02o: new FormControl([], []),
   };
-  public formGroup02d: FormGroup = new FormGroup(this.control02d);
+  public formGroup02c: FormGroup = new FormGroup(this.control02c);
 
   public exterior02e = 'outlined';
-  public isNoLabel02e = false;
+  public hideLabel02e = false;
   public control02e = {
     model02p: new FormControl([this.flowers[1], this.flowers[3], this.flowers[4]], []),
     model02q: new FormControl([this.flowers[1], this.flowers[3], this.flowers[4]], []),
     model02r: new FormControl([this.flowers[1], this.flowers[3], this.flowers[4]], []),
   };
   public formGroup02e: FormGroup = new FormGroup(this.control02e);
-  // GlnFrameConfig
-  public config02p = { frameSizeValue: 57 };
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

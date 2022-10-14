@@ -241,14 +241,11 @@ import &#123;
 import &#123;
  FormControl, FormGroup
  &#125; from '@angular/forms';
-import &#123;
- GlnFrameConfig, OrnamAlign
- &#125; from 'gelenium-ui';
 
 @Component(&#123;
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-textarea',
+  templateUrl: './textarea.component.html',
+  styleUrls: ['./textarea.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class TextareaComponent &#123;
@@ -262,7 +259,7 @@ export class TextareaComponent &#123;
   public exterior05 = 'outlined';
   public isBtnEye05c = false;
   public isBtnEye05d = false;
-  // GlnFrameConfig
+  // GlnTextareaConfig
   public configBaseline: any = &#123;
     ornamRgAlign: 'baseline',
   &#125;;
@@ -272,35 +269,37 @@ export class TextareaComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
-&#125;
-.to-elem &#123;
-  width: 26ch;
-&#125;
-.to-pd-hor &#123;
-  padding-left: 8px;
-  padding-right: 8px;
-&#125;
-.to-btn &#123;
-  outline: 0;
-  border: 0;
-  margin: 0;
-  box-sizing: border-box;
-  cursor: pointer;
-  user-select: none;
-  border-radius: 50%;
-  background-color: transparent;
-&#125;
-.to-uncode &#123;
-  font-size: 20px;
-  padding-top: 6px;
-  padding-bottom: 6px;
+app-textarea &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .to-elem &#123;
+    width: 26ch;
+  &#125;
+  .to-pd-hor &#123;
+    padding-left: 8px;
+    padding-right: 8px;
+  &#125;
+  .to-btn &#123;
+    outline: 0;
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 50%;
+    background-color: transparent;
+  &#125;
+  .to-uncode &#123;
+    font-size: 20px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

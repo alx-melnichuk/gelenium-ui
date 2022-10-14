@@ -25,53 +25,56 @@ app-pl-textarea-material-ui {
     --glncl-danger-h: 0;
     --glncl-danger-s: 65%;
     // scheme "success"
-    // #--sh-success: hsl(135, 40%, 50%);
-    --gln-sh-success-h: 135;
+    --gln-sh-success-h: 125;
     --gln-sh-success-s: 40%;
   }
   
   // gln-frame
-  .ip-material-ui .gln-frame:not([dis]):not([err]) {
+  .ip-material-ui .gln-frame {
+    // Def
     --glnfr-def-lb-cl: var(--mui-default);
     --glnfr-def-br-cl: rgba(0, 0, 0, 0.23);
+    --glnfr-def-bg-cl: rgba(0, 0, 0, 0.06);
     --glnfr-def-bf-cl: rgba(0, 0, 0, 0.42);
 
     --glnfr-hov-lb-cl: var(--mui-default);
     --glnfr-hov-br-cl: var(--mui-default-hov);
+    --glnfr-hov-bg-cl: rgba(0, 0, 0, 0.09);
     --glnfr-hov-bf-cl: var(--mui-default-hov);
 
     --glnfr-foc-lb-cl: var(--mui-primary);
     --glnfr-foc-br-cl: var(--mui-primary);
+    --glnfr-foc-bg-cl: rgba(0, 0, 0, 0.05);
     --glnfr-foc-bf-cl: var(--mui-default-hov);
     --glnfr-foc-af-cl: var(--mui-primary);
-  }
-  .ip-material-ui .gln-frame:not([dis])[err] {
-    --glnfr-def-lb-cl: var(--mui-danger);
-    --glnfr-def-br-cl: var(--mui-danger);
-    --glnfr-def-bf-cl: var(--mui-danger);
 
-    --glnfr-hov-lb-cl: var(--mui-danger);
-    --glnfr-hov-br-cl: var(--mui-danger);
-    --glnfr-hov-bf-cl: var(--mui-danger);
+    // Blocking frame resizing when hovering the mouse for "Outlined" mode.
+    --glnfr-hov-dcr-br-wd: unset;
 
-    --glnfr-foc-lb-cl: var(--mui-danger);
-    --glnfr-foc-br-cl: var(--mui-danger);
-    --glnfr-foc-bf-cl: var(--mui-danger);
-    --glnfr-foc-af-cl: var(--mui-danger);
-  }
-  .ip-material-ui .gln-frame[dis] {
+    // Err
+    --glnfr-def-err-lb-cl: var(--mui-danger);
+    --glnfr-def-err-br-cl: var(--mui-danger);
+    --glnfr-def-err-bg-cl: rgba(0, 0, 0, 0.06);
+    --glnfr-def-err-bf-cl: var(--mui-danger);
+
+    --glnfr-hov-err-lb-cl: var(--mui-danger);
+    --glnfr-hov-err-br-cl: var(--mui-danger);
+    --glnfr-hov-err-bg-cl: rgba(0, 0, 0, 0.09);
+    --glnfr-hov-err-bf-cl: var(--mui-danger);
+
+    --glnfr-foc-err-lb-cl: var(--mui-danger);
+    --glnfr-foc-err-br-cl: var(--mui-danger);
+    --glnfr-foc-err-bg-cl: rgba(0, 0, 0, 0.05);
+    --glnfr-foc-err-bf-cl: var(--mui-danger);
+    --glnfr-foc-err-af-cl: var(--mui-danger);
+
+    // Dis
     --glnfr-dis-lb-cl: var(--mui-default-dis);
     --glnfr-dis-br-cl: rgba(0, 0, 0, 0.26);
     --glnfr-dis-bg-cl: rgba(0, 0, 0, 0.12);
     --glnfr-dis-bf-cl: rgba(0, 0, 0, 0.42);
   }
-  .ip-material-ui .gln-frame {
-    --glnfr-def-bg-cl: rgba(0, 0, 0, 0.06);
-    --glnfr-hov-bg-cl: rgba(0, 0, 0, 0.09);
-    --glnfr-foc-bg-cl: rgba(0, 0, 0, 0.05);
-    // Blocking frame resizing when hovering the mouse for "Outlined" mode.
-    --glnfr-hov-dcr-br-wd: unset;
-  }
+
   .ip-material-ui .ip-success .gln-frame:not([dis]):not([err]) {
     --glnfr-foc-lb-cl: hsl(var(--gln-sh-success-h), var(--gln-sh-success-s), 45%);
     --glnfr-foc-br-cl: hsl(var(--gln-sh-success-h), var(--gln-sh-success-s), 50%);

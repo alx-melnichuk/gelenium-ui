@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsulation } from '@angular/core';
 import { take } from 'rxjs/operators';
 
+import { RouterConfig } from '../../lib-core/config/router-config';
 import { ScrollAfterRoutingUtil } from '../../lib-core/utils/scroll-after-routing.util';
-import { UrlUtil } from '../../lib-core/utils/url.util';
 
 const logLabel = 'ComponentsSelect';
 
@@ -16,8 +16,8 @@ const logLabel = 'ComponentsSelect';
 export class CmSelectComponent implements AfterViewInit {
   public showNum = '';
 
-  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
-  public urlPlSelect = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_SELECT');
+  public urlCmFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
+  public urlPlSelect = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_SELECT');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

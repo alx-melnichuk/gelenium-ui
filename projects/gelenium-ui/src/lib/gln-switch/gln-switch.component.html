@@ -1,0 +1,35 @@
+<div glnsw-container
+  class="gln-switch-container"
+  [formGroup]="formGroup"
+  (click)="toggle()">
+  <input glnsw-input
+    [attr.id]="idForInput"
+    [attr.disabled]="disabled || readOnly ? true : undefined"
+    formControlName="textData"
+    type="checkbox"
+    class="gln-switch-input"
+    role="switch"
+    (change)="$event.stopPropagation()" />
+  <span *ngIf="isWrapAndThumb"
+    glnsw-wrap
+    class="gln-switch-wrap">
+    <span glnsw-thumb
+      class="gln-switch-thumb">
+    </span>
+    <gln-touch-ripple *ngIf="!disabled && !readOnly && !noRipple"
+      isCenter>
+    </gln-touch-ripple>
+  </span>
+  <span *ngIf="isWrapAndThumb"
+    glnsw-track
+    class="gln-switch-track">
+  </span>
+</div>
+<label glnsw-label
+  class="gln-switch-label"
+  [attr.for]="idForInput"
+  (click)="doClickByLabel($event)">
+  <span>
+    <ng-content></ng-content>
+  </span>
+</label>

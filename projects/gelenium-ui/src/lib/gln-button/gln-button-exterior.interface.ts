@@ -7,7 +7,7 @@ export enum GlnButtonExterior {
 }
 
 export class GlnButtonExteriorUtil {
-  public static create(value: GlnButtonExterior | null): GlnButtonExterior {
+  public static create(value: GlnButtonExterior | string | null): GlnButtonExterior {
     return GlnButtonExteriorUtil.convert((value || '').toString()) || GlnButtonExterior.text;
   }
   public static convert(value: string | null): GlnButtonExterior | null {

@@ -1,0 +1,7 @@
+// mxTransform_TranslateXY(12, 0); 
+@mixin mxTransform_TranslateXY($translateX, $translateY) {
+  -webkit-transform: translate($translateX, $translateY);
+  -moz-transform: translate($translateX, $translateY);
+  -ms-transform: translate($translateX, $translateY);
+  transform: translate($translateX, $translateY);
+}

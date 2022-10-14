@@ -1,64 +1,62 @@
-<ng-container [formGroup]="formGroup">
-  <div class="glntx-wrap"
-    [glnFrameExteriorInput]="exterior || currConfig?.exterior"
-    #glnFrameExteriorInput="glnFrameExteriorInput"
-    [glnFrameExteriorInputElementRef]="hostRef"
-    (glnFrameExteriorInputChange)="glnFrameSize.updatePaddingVerAndHor()">
-    <gln-frame [config]="config"
-      [exterior]="glnFrameExteriorInput.exterior"
-      [isDisabled]="disabled"
-      [isError]="!!formControl.errors || error"
-      [isFilled]="isFilled"
-      [isLabelShrink]="labelShrink || currConfig?.isLabelShrink"
-      [isNoAnimation]="noAnimation || currConfig?.isNoAnimation || isWriteValueInit"
-      [isNoLabel]="noLabel || currConfig?.isNoLabel"
-      [isRequired]="required"
-      [label]="label"
-      [glnFrameSize]="frameSize || currConfig?.frameSize"
-      #glnFrameSize="glnFrameSize"
-      [glnFrameSizeElementRef]="hostRef"
-      [glnFrameSizeValue]="currConfig?.frameSizeValue || frameSizeDefault"
-      [glnFrameSizeLabelPd]="currConfig?.labelPd"
-      [glnFrameSizePrepare]="glnFrameExteriorInput"
-      glnFrameOrnament
-      [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
-      [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
-      [glnFrameOrnamentPath]="'/div{0}'">
+<div #wrapElementRef
+  [formGroup]="formGroup">
 
-      <span glnfr-orn-lf
-        class="gln-ornam-lf">
-        <ng-content select="[gln-orn-lf]"></ng-content>
-      </span>
-      <span glnfr-orn-rg
-        class="gln-ornam-rg">
-        <ng-content select="[gln-orn-rg]"></ng-content>
-      </span>
+  <gln-frame [config]="config"
+    [cssElementRef]="wrapHtmlElementRef"
+    [exterior]="exterior || currConfig.exterior"
+    [frameSize]="frameSize || currConfig.frameSize"
+    [isAttrHideAnimation]="isAttrHideAnimation"
+    [isDisabled]="disabled"
+    [isError]="!!formControl.errors || error"
+    [isFilled]="isFilled"
+    [isLabelShrink]="getBoolean(isLabelShrink) ?? currConfig.isLabelShrink"
+    [isNoAnimation]="getBoolean(isNoAnimation) ?? currConfig.isNoAnimation"
+    [isRequired]="required"
+    [label]="!placeholder ? label : null"
+    glnFrameOrnament
+    [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
+    [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
+    [glnFrameOrnamentPath]="'/div{0}'"
+    (click)="focus()">
 
-      <textarea #textareaElement
-        formControlName="textData"
-        glnfr-mr-ver
-        glnfr-pd-hor
-        glnfr-elem
-        [attr.id]="id + '_textarea'"
-        [rows]="currentRows"
-        [ngClass]="['glntx-textarea', (readOnly ? 'gln-readonly' : '')]"
-        [attr.disabled]="disabled ? '': null"
-        [attr.autocomplete]="!!autoComplete ? autoComplete : null"
-        [attr.readonly]="readOnly ? '': null"
-        [attr.tabindex]="!disabled ? tabIndex : null"
-        [cols]="cntCols"
-        (focus)="doFocus()"
-        (blur)="doBlur()"
-        (input)="doInput($event)"
-        (click)="$event.stopPropagation();">
-      </textarea>
+    <span glnfr-orn-lf
+      class="gln-ornam-lf">
+      <ng-content select="[gln-orn-lf]"></ng-content>
+    </span>
+    <span glnfr-orn-rg
+      class="gln-ornam-rg">
+      <ng-content select="[gln-orn-rg]"></ng-content>
+    </span>
 
-    </gln-frame>
-  </div>
-</ng-container>
-<gln-hint-or-error *ngIf="!!helperText"
-  [text]="helperText"
-  [isError]="!!formControl.errors || error"
-  [isFocused]="isFocused"
-  [isDisabled]="disabled">
-</gln-hint-or-error>
+    <textarea #textareaElement
+      formControlName="textData"
+      glnfr-mr-ver
+      glnfr-pd-hor
+      glnfr-elem
+      [attr.id]="id + '_textarea'"
+      [ngClass]="['glntx-textarea', (readOnly ? 'gln-readonly' : '')]"
+      [cols]="cntCols"
+      [rows]="currentRows"
+      [attr.disabled]="disabled ? '': null"
+      [attr.autocomplete]="!!autoComplete ? autoComplete : null"
+      [attr.placeholder]="!placeholder ? null : label"
+      [attr.readonly]="readOnly ? '': null"
+      [attr.tabindex]="!disabled ? tabIndex : null"
+      [attr.wrap]="wraps"
+      [attr.spellcheck]="spellCheck"
+      (focus)="doFocus()"
+      (blur)="doBlur()"
+      (input)="doInput($event)"
+      (click)="$event.stopPropagation();">
+    </textarea>
+
+  </gln-frame>
+
+  <gln-hint-or-error *ngIf="!!helperText"
+    [text]="helperText"
+    [isError]="!!formControl.errors || error"
+    [isFocused]="isFocused"
+    [isDisabled]="disabled">
+  </gln-hint-or-error>
+
+</div>

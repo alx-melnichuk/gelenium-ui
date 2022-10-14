@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { GlnFrameConfig, GlnFrameOrnamAlign } from 'gelenium-ui';
-import { UrlUtil } from '../../lib-core/utils/url.util';
-
+import { RouterConfig } from '../../lib-core/config/router-config';
 import {
   LABEL_CSS,
   LABEL_HTML,
@@ -37,7 +35,7 @@ export class CmTextareaOrnamentsComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmTextarea = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_TEXTAREA');
+  public urlCmTextarea = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TEXTAREA');
 
   public controls05 = {
     model05a: new FormControl('', []),
@@ -49,9 +47,9 @@ export class CmTextareaOrnamentsComponent {
   public exterior05 = 'outlined';
   public isBtnEye05c = false;
   public isBtnEye05d = false;
-
-  public configBaseline: GlnFrameConfig = {
-    ornamRgAlign: GlnFrameOrnamAlign.baseline,
+  // GlnTextareaConfig
+  public configBaseline: any = {
+    ornamRgAlign: 'baseline',
   };
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

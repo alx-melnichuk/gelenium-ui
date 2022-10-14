@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { GlnFrameConfig, GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from 'gelenium-ui';
+import { GlnFrameOrnamAlignUtil } from 'gelenium-ui';
 
+import { RouterConfig } from '../../lib-core/config/router-config';
 import {
   LABEL_CSS,
   LABEL_HTML,
@@ -12,7 +13,6 @@ import {
   LABEL_TS,
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
-import { UrlUtil } from '../../lib-core/utils/url.util';
 
 @Component({
   selector: 'app-cm-input-ornaments',
@@ -37,7 +37,7 @@ export class CmInputOrnamentsComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmInput = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_INPUT');
+  public urlCmInput = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INPUT');
 
   public minLength05 = 3;
   public maxLength05 = 15;
@@ -60,26 +60,25 @@ export class CmInputOrnamentsComponent {
   public isBtnEyeCrossed05f = false;
   public isBtnEyeCrossed05g = false;
   public isBtnEyeCrossed05h = false;
-  public config05h: GlnFrameConfig = {
-    ornamRgAlign: GlnFrameOrnamAlign.baseline,
+  public config05h = {
+    ornamRgAlign: 'baseline',
   };
   public ornamLfAlign05 = 'default';
   public ornamRgAlign05 = 'default';
 
-  public config05: GlnFrameConfig = {};
+  public config05 = {
+    ornamLfAlign: this.ornamLfAlign05,
+    ornamRgAlign: this.ornamRgAlign05,
+  };
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {
-    this.changeConfig05(this.convert(this.ornamLfAlign05), this.convert(this.ornamRgAlign05));
-  }
+  constructor() {}
 
-  public convert(ornamAlign: string | null): GlnFrameOrnamAlign {
-    return GlnFrameOrnamAlignUtil.convert(ornamAlign) || GlnFrameOrnamAlign.default;
+  public changeConfig05(ornamLfAlign: string | undefined, ornamRgAlign: string | undefined): void {
+    this.config05 = {
+      ornamLfAlign: GlnFrameOrnamAlignUtil.convert(ornamLfAlign || null)?.toString() || 'default',
+      ornamRgAlign: GlnFrameOrnamAlignUtil.convert(ornamRgAlign || null)?.toString() || 'default',
+    };
   }
-
-  public changeConfig05(ornamLfAlign: GlnFrameOrnamAlign | undefined, ornamRgAlign: GlnFrameOrnamAlign | undefined): void {
-    this.config05 = { ornamLfAlign, ornamRgAlign };
-  }
-
   public toStr(value: number): string {
     return String(value);
   }

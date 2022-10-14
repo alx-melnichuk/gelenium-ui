@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
-import { UrlUtil } from '../../lib-core/utils/url.util';
 
-import { GlnFrameSize, GlnFrameConfig, GlnFrameExterior, GLN_FRAME_CONFIG } from 'gelenium-ui';
+import { GlnFrameConfig, GLN_FRAME_CONFIG } from 'gelenium-ui';
 
 const glnFrameConfigDefault: GlnFrameConfig = {
-  exterior: GlnFrameExterior.outlined,
-  frameSize: GlnFrameSize.small,
+  exterior: 'outlined',
+  frameSize: 'small',
 };
 
 @Component({
@@ -29,7 +29,7 @@ export class CmFrameConfigComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
+  public urlCmFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
 
   public formGroup07: FormGroup = new FormGroup({
     model07a: new FormControl('', []),

@@ -25,7 +25,7 @@
 <table class="app-tab">
   <tbody>
     <tr>
-      <th>Name</th>
+      <th class="app-mn-wd-22ch">Name</th>
       <th>Description</th>
     </tr>
 
@@ -44,7 +44,8 @@
       <td>
         <code>@Input()</code>
         <code>config: GlnFrameConfig<br/>
-          &nbsp;&nbsp;| null = null;</code>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
         <span>Defines a configuration object.</span><br />
@@ -114,8 +115,8 @@
       </td>
       <td>
         <span>
-          Checkbox display flag for each option.<br />
-          It is used in conjunction with the "isMultiple" sign.<br />
+          Flag for displaying a "checkbox" for each option.
+          (only for isMultiple)<br />
           Attribute (no content).
         </span>
       </td>
@@ -130,7 +131,10 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>The element is disabled.<br />Attribute (no content).</span>
+        <span>
+          Indicates that the element is disabled.<br />
+          (default = false;) Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -143,7 +147,8 @@
       </td>
       <td>
         <span>
-          Forces the error status of an item to be displayed.<br />Attribute (no content).
+          Indicates that the element is in an error state.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -157,8 +162,8 @@
       </td>
       <td>
         <span>
-          Disable label animation. The label is always static, at the top.<br />
-          Attribute (no content).
+          Indication that the label has shrunk and moved up.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -187,8 +192,8 @@
       </td>
       <td>
         <span>
-          Disable animation display.
-          <br />Attribute (no content).
+          Indicates that animation is disabled.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -210,20 +215,6 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>isNoLabel: string<br/>
-          &nbsp;&nbsp;| boolean<br/>
-          &nbsp;&nbsp;| null<br/>
-          &nbsp;&nbsp;| undefined;</code>
-      </td>
-      <td>
-        <span>
-          Disables the display of the label.<br />Attribute (no content).
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
         <code>isNoRipple: string<br/>
           &nbsp;&nbsp;| boolean<br/>
           &nbsp;&nbsp;| null<br/>
@@ -231,7 +222,24 @@
       </td>
       <td>
         <span>
-          This property to turn off the ripple effect.<br />Attribute (no content).
+          Flag for disabling the ripple effect.<br />
+          Attribute (no content).
+        </span><br />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isPlaceholder: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies that the value of the "label" field be displayed
+          as the "placeholder" attribute for the "input" element.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -244,7 +252,10 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Whether the element is readonly.<br />Attribute (no content).</span>
+        <span>
+          Indicates that the element is read-only.<br />
+          (default = false;) Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -257,25 +268,8 @@
       </td>
       <td>
         <span>
-          Adds a validation condition: required field.<br />Attribute (no content).
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>isValueInit: string<br/>
-          &nbsp;&nbsp;| boolean<br/>
-          &nbsp;&nbsp;| null<br/>
-          &nbsp;&nbsp;| undefined;</code>
-      </td>
-      <td>
-        <span>
-          Sign of calling the event "writeValueInit" after the second "writeValue()"
-          with real data.
-          <br />
-          This should use "[(ngModel)]".
-          <a [href]="urlCmFrame + '#Feature'">More details.</a>
+          Indicates that the field is required.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -287,7 +281,9 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>The content of the label.</span>
+        <span>
+          Specifies the content of the label.
+        </span>
       </td>
     </tr>
     <tr>
@@ -298,8 +294,9 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Defines the maximum number of characters for an input element.
-          <br />
+        <span>
+          Specifies the maximum number of selected options.<br />
+          (default = null;)
         </span>
       </td>
     </tr>
@@ -311,8 +308,9 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Defines the minimum number of characters for an input element.
-          <br />
+        <span>
+          Specifies the minimum number of selected options.<br />
+          (default = null;)
         </span>
       </td>
     </tr>
@@ -324,17 +322,18 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Specifies the height justification for the left ornament.
+        <span>
+          This property controls the vertical alignment for the left ornament.
           <br />(default = 'default';)
           It can take the following values:
         </span>
         <ul>
-          <li>"default" - depending on frame type</li>
-          <li>"center" - in the center</li>
-          <li>"flex-start" - at the top</li>
-          <li>"flex-end" - at the bottom</li>
-          <li>"baseline" - along the baseline</li>
-          <li>"stretch" - at the top</li>
+          <li>"default" - defines the default</li>
+          <li>"center" - defines middle alignment</li>
+          <li>"flexStart" - defines top alignment</li>
+          <li>"flexEnd" - defines bottom alignment</li>
+          <li>"baseline" - defines baseline alignment</li>
+          <li>"stretch" - stretches across the entire height</li>
         </ul>
       </td>
     </tr>
@@ -346,17 +345,18 @@
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>Specifies the height justification for the right ornament.
+        <span>
+          This property controls the vertical alignment of the right ornament.
           <br />(default = 'default';)
           It can take the following values:
         </span>
         <ul>
-          <li>"default" - depending on frame type</li>
-          <li>"center" - in the center</li>
-          <li>"flex-start" - at the top</li>
-          <li>"flex-end" - at the bottom</li>
-          <li>"baseline" - along the baseline</li>
-          <li>"stretch" - at the top</li>
+          <li>"default" - defines the default</li>
+          <li>"center" - defines middle alignment</li>
+          <li>"flexStart" - defines top alignment</li>
+          <li>"flexEnd" - defines bottom alignment</li>
+          <li>"baseline" - defines baseline alignment</li>
+          <li>"stretch" - stretches across the entire height</li>
         </ul>
       </td>
     </tr>
@@ -484,22 +484,6 @@
       </td>
       <td>
         <span>Fires when the selection panel closes.</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Output()</code>
-        <code>writeValueInit:<br/> EventEmitter&lt;void&gt;;</code>
-      </td>
-      <td>
-        <span>
-          Fires after the second call to "writeValue()" with real data.
-          <br />
-          This should use "[(ngModel)]".
-          <br />
-          "writeValueInit" must be set.
-          <a [href]="urlCmFrame + '#Feature'">More details.</a>
-        </span>
       </td>
     </tr>
     <tr>
@@ -687,13 +671,13 @@
 
 <table class="app-tab">
   <tr>
-    <th>Name</th>
+    <th class="app-mn-wd-22ch">Name</th>
     <th>Description</th>
   </tr>
 
   <tr>
     <td><code>--glnsl-min-width:<br/>
-      &nbsp;var(--glnsl-el-min-width, 50px);</code>
+      &nbsp;50px;</code>
     </td>
     <td>
       <span>
@@ -701,73 +685,116 @@
       </span>
     </td>
   </tr>
+  <!--default-->
   <tr>
-    <td><code>--glnsl-rhomb-def:<br/>
-      hsl(--glnfr--default-[h,s], 46%);</code>
+    <td><code>--glnsl-def-rhomb:<br/>
+      hsl(--gln-primary-[h,s], 45%);</code>
     </td>
     <td>
       <span>
         The color of the triangle is the state of the list (open/closed) by default.
         <br />
-        (hsl(20, 2%, 46%);)
+        (hsl(215, 80%, 45%);)
       </span>
     </td>
   </tr>
   <tr>
-    <td><code>--glnsl-rhomb-hov:<br/>
-      hsl(--glnfr--default-[h,s], 46%);</code>
+    <td><code>--glnsl-hov-rhomb:<br/>
+      hsl(--gln-primary-[h,s], 40%);</code>
     </td>
     <td>
       <span>
         The color of the triangle is the state of the list (open/closed)
         when hovering over with the mouse.
         <br />
-        (hsl(20, 2%, 46%);)
+        (hsl(215, 80%, 40%);)
       </span>
     </td>
   </tr>
   <tr>
-    <td><code>--glnsl-rhomb-foc:<br/>
-      hsl(--glnfr--primary-[h,s], 46%);</code>
+    <td><code>--glnsl-foc-rhomb:<br/>
+      hsl(--gln-primary-[h,s], 50%);</code>
     </td>
     <td>
       <span>
         The color of the triangle is the state of the list (open/closed)
         when focus is received.
         <br />
-        (hsl(210, 79%, 46%); #1976d2;)
+        (hsl(215, 80%, 50%);)
       </span>
     </td>
   </tr>
+  <!-- error -->
   <tr>
-    <td><code>--glnsl-rhomb-err:<br/>
-      hsl(--glnfr--danger-[h,s], 51%);</code>
+    <td><code>--glnsl-def-err-rhomb:<br/>
+      hsl(--gln-danger-[h,s], 45%);</code>
     </td>
     <td>
       <span>
         The color of the triangle is the state of the list (open/closed)
-        in case of an error.
+        by default in case of an error.
         <br />
-        (hsl(0, 65%, 51%); = #d32f2f;)
+        (hsl(5, 85%, 45%);)
       </span>
     </td>
   </tr>
   <tr>
-    <td><code>--glnsl-rhomb-dis:<br/>
-      hsl(--glnfr--default-[h,s], 74%);</code>
+    <td><code>--glnsl-hov-err-rhomb:<br/>
+      hsl(--gln-danger-[h,s], 40%);</code>
+    </td>
+    <td>
+      <span>
+        The color of the triangle is the state of the list (open/closed)
+        when hovering over with the mouse in case of an error.
+        <br />
+        (hsl(5, 85%, 40%);)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>--glnsl-foc-err-rhomb:<br/>
+      hsl(--gln-danger-[h,s], 50%);</code>
+    </td>
+    <td>
+      <span>
+        The color of the triangle is the state of the list (open/closed)
+        when focus is received in case of an error.
+        <br />
+        (hsl(5, 85%, 50%);)
+      </span>
+    </td>
+  </tr>
+  <!--disabled-->
+  <tr>
+    <td><code>--glnsl-dis-rhomb:<br/>
+      hsl(--gln-default-[h,s], 60%);</code>
     </td>
     <td>
       <span>
         The color of the triangle is the state of the list (open/closed)
         when disabled.
         <br />
-        (hsl(20, 2%, 74%);)
+        (hsl(250, 2%, 60%);)
       </span>
     </td>
   </tr>
+
+  <tr>
+    <td><code>--glnsl-plc-hld:<br/>
+      hsl(--gln-default-[h,s], 55%);</code>
+    </td>
+    <td>
+      <span>
+        The value of the "color" property for the "placeholder" element.
+        <br />
+        (hsl(250, 2%, 55%);)
+      </span>
+    </td>
+  </tr>
+
   <tr>
     <td><code>--glnsl-he-pd-lf:<br/>
-      &nbsp;var(--glnfrs-pd-lf);</code>
+      &nbsp;var(--glnfrs--pd-lf);</code>
     </td>
     <td>
       <span>
@@ -777,7 +804,7 @@
   </tr>
   <tr>
     <td><code>--glnsl-he-pd-rg:<br/>
-      &nbsp;var(--glnfrs-pd-rg);</code>
+      &nbsp;var(--glnfrs--pd-rg);</code>
     </td>
     <td>
       <span>
@@ -802,7 +829,8 @@
     </td>
     <td>
       <span>
-        The value of the "color" property for the "gln-select-panel-wrap" element.
+        The value of the "color" property for the "gln-select-panel-wrap" element.<br />
+        (hsl(250, 2%, 17%);)
       </span>
     </td>
   </tr>
@@ -828,6 +856,38 @@
 .gln-select-panel<strong>.no-elevation</strong> &#123;
   --glnslpo-elevation: none;
 &#125;</pre></code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>--glnslpo-border-radius:<br/>
+      &nbsp;(frameSizeValue / 10) + 'px';</code>
+    </td>
+    <td>
+      <span>
+        Defines the value of the "border-radius" property for the overlay panel
+        (expanded list of options).
+        This will make rounded edges for the options dropdown panel.<br />
+        (default "(frameSizeValue / 10) + 'px'").
+      </span>
+      <span>Example:</span>
+      <code><pre source="css">
+.cdk-overlay-container .gln-select-panel &#123;
+  <strong>--glnslpo-border-radius</strong>: 10px;
+&#125;</pre></code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>--glnslpo-max-height:<br/>
+      &nbsp;100%;</code>
+    </td>
+    <td>
+      <span>
+        Defines the value of the "max-height" property for the overlay panel
+        (expanded list of options).<br />
+        (default 100%).
+      </span>
     </td>
   </tr>
 
@@ -864,7 +924,12 @@
 
 <section mr-vr>
   <p>
-    We recommend using "formControlName" and NOT using "[(ngModel)]".
-    <a [href]="urlCmFrame + '#Feature'">More details.</a>
+    We recommend using "formControlName" and NOT using "[(ngModel)]" (at least in production).
+    For angular 14, there was still an issue with the second call to the
+    ControlValueAccessor writeValue method when using [(ngModel)].
+    <br />
+    <a href="https://github.com/angular/angular/issues/14988">
+      ValueAccessor.writeValue is being called twice, first time with a phantom null value
+    </a>
   </p>
 </section>

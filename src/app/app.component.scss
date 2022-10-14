@@ -60,6 +60,10 @@ app-root {
     color: #00000096;
   }
 
+  .app-mn-wd-22ch {
+    min-width: 22ch;
+  }
+
   table.app-tab {
     width: 100%;
     border-collapse: collapse;
@@ -98,5 +102,9 @@ app-root {
     a {
       padding: 0 0.5em;
     }
+  }
+
+  .app-user-none {
+    user-select: none;
   }
 }

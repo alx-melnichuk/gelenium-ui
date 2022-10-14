@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsulation } from '@angular/core';
-import { take } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
+import { RouterConfig } from '../../lib-core/config/router-config';
 import { ScrollAfterRoutingUtil } from '../../lib-core/utils/scroll-after-routing.util';
-import { UrlUtil } from '../../lib-core/utils/url.util';
 
 const logLabel = 'ComponentsTextarea';
 
@@ -16,8 +16,8 @@ const logLabel = 'ComponentsTextarea';
 export class CmTextareaComponent implements AfterViewInit {
   public showNum = '';
 
-  public urlCmFrame = '/' + UrlUtil.get('URL_COMPONENTS') + '/' + UrlUtil.get('URL_FRAME');
-  public urlPlTextarea = '/' + UrlUtil.get('URL_PALETTE') + '/' + UrlUtil.get('URL_TEXTAREA');
+  public urlCmFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
+  public urlPlTextarea = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_TEXTAREA');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax
@@ -29,7 +29,7 @@ export class CmTextareaComponent implements AfterViewInit {
       ScrollAfterRoutingUtil.scrollByFragmentFromPath();
     });
     // The zone will become stable when all components have fully rendered.
-    this.ngZone.onStable.pipe(take(1)).subscribe(() => {
+    this.ngZone.onStable.pipe(first()).subscribe(() => {
       // eslint-disable-next-line no-restricted-syntax
       console.timeEnd(logLabel);
     });

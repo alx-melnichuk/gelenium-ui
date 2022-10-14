@@ -13,8 +13,8 @@
   </p>
   <code><pre source="ts">
 const glnFrameConfigDefault: GlnFrameConfig = &#123;
-  exterior: GlnFrameExterior.outlined,
-  frameSize: GlnFrameSize.small,
+  exterior: 'outlined',
+  frameSize: 'small',
 &#125;;
 
 @Component(&#123;
@@ -44,12 +44,13 @@ export class AppComponent &#123;
 
 <table class="app-tab">
   <tr>
-    <th>Name</th>
+    <th class="app-mn-wd-22ch">Name</th>
     <th>Description</th>
   </tr>
 
   <tr>
-    <td><code>exterior?: GlnFrameExterior;</code></td>
+    <td><code>exterior?: string;<br/>
+      //&nbsp;GlnFrameExteriorType</code></td>
     <td>
       <span>
         This property determines the appearance of the element.
@@ -71,7 +72,8 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
-    <td><code>frameSize?: GlnFrameSize;</code></td>
+    <td><code>frameSize?: string;<br/>
+      //&nbsp;GlnFrameSize;</code></td>
     <td>
       <span>
         This property determines the size of the element (its height).
@@ -86,16 +88,12 @@ export class AppComponent &#123;
         <li>"large" - sets the height to 62px;</li>
         <li>"huge" - sets the height to 68px;</li>
       </ul>
-      <span>(optional)</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>frameSizeValue?: number;</code></td>
-    <td>
       <span>
-        This property sets the height of the element in pixels.
-        This property applies only if there is no "frameSize" property.
+        This property can also contain a string with the value of the height
+        of the element in pixels. For example:
+        <code>frameSize="57" or [frameSize]="'57'"</code>
       </span>
+      <span>(optional)</span>
     </td>
   </tr>
   <tr>
@@ -118,90 +116,51 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
-    <td><code>isNoLabel?: boolean;</code></td>
+    <td>
+      <code>isRequired?: boolean;</code>
+    </td>
     <td>
       <span>
-        Disabled the display of the label. (default = false;)
+        Indicates that the field is required. (default = false;)
       </span><br />
       <span>(optional)</span>
     </td>
   </tr>
-  <tr>
-    <td><code>labelPd?: number;</code></td>
-    <td>
-      <span>
-        The value of the label offset from the frame (in pixels).
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>ornamLfAlign?: OrnamAlign;</code></td>
-    <td>
-      <span>
-        This property controls the vertical alignment for the left ornament.
-        It takes the following values:
-      </span>
-      <ul>
-        <li>"default" - defines the default</li>
-        <li>"center" - defines middle alignment</li>
-        <li>"flexStart" - defines top alignment</li>
-        <li>"flexEnd" - defines bottom alignment</li>
-        <li>"baseline" - defines baseline alignment</li>
-        <li>"stretch" - stretches across the entire height</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><code>ornamRgAlign?: OrnamAlign;</code></td>
-    <td>
-      <span>
-        This property controls the vertical alignment of the right ornament.
-        It takes the following values:
-      </span>
-      <ul>
-        <li>"default" - defines the default</li>
-        <li>"center" - defines middle alignment</li>
-        <li>"flexStart" - defines top alignment</li>
-        <li>"flexEnd" - defines bottom alignment</li>
-        <li>"baseline" - defines baseline alignment</li>
-        <li>"stretch" - stretches across the entire height</li>
-      </ul>
-    </td>
-  </tr>
+
 </table>
 
 <section mr-vr
-  id="config-frame-provide">
+  id="config-provide">
   <h4 class="app-hover-link">
     1. Configuration with "outlined" and "small".
-    <a [href]="urlCmFrame + '#config-frame-provide'">#</a>
+    <a [href]="urlCmFrame + '#config-provide'">#</a>
   </h4>
   <p>
     For example, let's prepare a configuration in which:
   </p>
   <ul>
-    <li>"exterior" will have the value "outlined".</li>
-    <li>"frameSize" will have the value "small" (height to 44px;).</li>
+    <li>"exterior" will have the value "outlined";</li>
+    <li>"frameSize" will have the value "small" (height to 44px);</li>
   </ul>
   <code><pre source="ts">
 const glnFrameConfigDefault: GlnFrameConfig = &#123;
-  exterior: GlnFrameExterior.outlined,
-  frameSize: GlnFrameSize.small,
+  exterior: 'outlined',
+  frameSize: 'small',
 &#125;;</pre></code>
 </section>
 
 <section mr-vr
-  id="config-frame-params">
+  id="config-params">
   <h4 class="app-hover-link">
     2. Configuration with "underline" and "wide".
-    <a [href]="urlCmFrame + '#config-frame-params'">#</a>
+    <a [href]="urlCmFrame + '#config-params'">#</a>
   </h4>
   <p>
     Suppose we have a provider in our application with "GlnFrameConfig" and all input elements
     accept its default values.
     We can change these values for an individual element.
-    To do this, you need to specify in this element those properties that do not match in the
-    configuration provider.
+    To do this, you need to specify in this element those properties that do not match the
+    provider's configuration.
   </p>
   <p>
     For example, let's specify the following parameters:
@@ -216,10 +175,10 @@ exterior="underline"</pre></code>
     <li>
       Standard values are taken.
       <code><pre source="ts">
-exterior="standard",
+exterior="outlined",
 frameSize="middle",
 isLabelShrink=false,
-isNoLabel=false</pre></code>
+isNoAnimation=false</pre></code>
     </li>
     <li>
       Values from the default configuration provider (if there is one).
@@ -239,7 +198,7 @@ isNoLabel=false</pre></code>
     <div class="app-elem">
       <div>
         <small>
-          <em>1. Default config: "outlined", "medium".</em>
+          <em>1. Default config: "outlined", "small".</em>
         </small>
       </div>
       <gln-input formControlName="model07a"
@@ -284,7 +243,7 @@ isNoLabel=false</pre></code>
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;1. Default config: "outlined", "medium".&lt;/em&gt;
+          &lt;em&gt;1. Default config: "outlined", "small".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model07a"
@@ -320,12 +279,12 @@ import &#123;
   FormControl, FormGroup
 &#125; from '@angular/forms';
 import &#123;
-  GlnFrameExterior, GlnFrameSize, GlnFrameConfig, GLN_FRAME_CONFIG
+  GlnFrameConfig, GLN_FRAME_CONFIG
 &#125; from 'gelenium-ui';
 
 const glnFrameConfigDefault: GlnFrameConfig = &#123;
-  exterior: GlnFrameExterior.outlined,
-  frameSize: GlnFrameSize.small,
+  exterior: 'outlined',
+  frameSize: 'small',
 &#125;;
 
 @Component(&#123;
@@ -333,7 +292,9 @@ const glnFrameConfigDefault: GlnFrameConfig = &#123;
   templateUrl: './frame.component.html',
   styleUrls: ['./frame.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [&#123; provide: GLN_FRAME_CONFIG, useValue: glnFrameConfigDefault &#125;],
+  providers: [&#123;
+    provide: GLN_FRAME_CONFIG, useValue: glnFrameConfigDefault
+  &#125;],
 &#125;)
 export class FrameComponent &#123;
   public formGroup07: FormGroup = new FormGroup(&#123;
@@ -344,13 +305,15 @@ export class FrameComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-.app-group &#123;
-  display: flex;
-  flex-wrap: wrap;
-&#125;
-.app-elem &#123;
-  min-width: 26ch;
-  margin: 10px 10px;
+app-frame &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>

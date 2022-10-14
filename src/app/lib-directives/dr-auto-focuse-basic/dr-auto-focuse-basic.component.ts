@@ -3,8 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { UrlParamUtil } from 'gelenium-ui';
 
+import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
-import { UrlUtil } from '../../lib-core/utils/url.util';
 
 const MODE_A = 'A';
 const MODE_B = 'B';
@@ -30,7 +30,7 @@ export class DrAutoFocuseBasicComponent implements OnInit {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlDrAutoFocuse = '/' + UrlUtil.get('URL_DIRECTIVES') + '/' + UrlUtil.get('URL_AUTO_FOCUSE');
+  public urlDrAutoFocuse = '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_AUTO_FOCUSE');
 
   public mode = MODE_A;
 

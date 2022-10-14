@@ -124,9 +124,9 @@ const CN_SURNAME3 = ['Perez', 'Thompson', 'White', 'Harris',
   'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson', 'Walker'];
 
 @Component(&#123;
-  selector: 'app-infinite-scroll-optional',
-  templateUrl: './infinite-scroll-optional.component.html',
-  styleUrls: ['./infinite-scroll-optional.component.scss'],
+  selector: 'app-infinite-scroll',
+  templateUrl: './infinite-scroll.component.html',
+  styleUrls: ['./infinite-scroll.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class InfiniteScrollComponent &#123;
@@ -192,39 +192,41 @@ export class InfiniteScrollComponent &#123;
         </mat-tab>
         <mat-tab [label]="labelCss">
           <pre source="css">
-.iso-block &#123;
-  position: relative;
-&#125;
-.iso-item-wrap &#123;
-  outline: 1px solid blue;
-  height: 400px;
-  overflow-y: scroll;
-&#125;
-.iso-items &#123;
-  outline: 1px dashed green;
-  padding: 15px 0;
-&#125;
-.iso-row &#123;
-  display: flex;
-  padding: 3px 10px;
-&#125;
-.iso-label &#123;
-  flex-basis: 120px;
-&#125;
-.iso-value &#123;
-  flex-grow: 1;
-&#125;
-.iso-loading &#123;
-  color: blue;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgb(253 255 255 / 70%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+app-infinite-scroll &#123;
+  .iso-block &#123;
+    position: relative;
+  &#125;
+  .iso-item-wrap &#123;
+    outline: 1px solid blue;
+    height: 400px;
+    overflow-y: scroll;
+  &#125;
+  .iso-items &#123;
+    outline: 1px dashed green;
+    padding: 15px 0;
+  &#125;
+  .iso-row &#123;
+    display: flex;
+    padding: 3px 10px;
+  &#125;
+  .iso-label &#123;
+    flex-basis: 120px;
+  &#125;
+  .iso-value &#123;
+    flex-grow: 1;
+  &#125;
+  .iso-loading &#123;
+    color: blue;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(253 255 255 / 70%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  &#125;
 &#125;</pre>
         </mat-tab>
       </mat-tab-group>

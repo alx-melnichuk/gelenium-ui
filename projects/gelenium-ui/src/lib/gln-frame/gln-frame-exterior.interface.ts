@@ -7,7 +7,7 @@ export enum GlnFrameExterior {
 }
 
 export class GlnFrameExteriorUtil {
-  public static create(value: GlnFrameExterior | null): GlnFrameExterior {
+  public static create(value: GlnFrameExterior | string | null): GlnFrameExterior {
     return GlnFrameExteriorUtil.convert((value || '').toString()) || GlnFrameExterior.outlined;
   }
   public static convert(value: string | null): GlnFrameExterior | null {
