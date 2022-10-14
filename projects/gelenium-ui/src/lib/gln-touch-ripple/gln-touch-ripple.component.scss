@@ -8,7 +8,7 @@ gln-touch-ripple {
   inset: 0px;
   border-radius: inherit;
   &:not([skip-events]) {
-    pointer-events: auto;
+    pointer-events: all;
   }
   &[skip-events] {
     pointer-events: none;
