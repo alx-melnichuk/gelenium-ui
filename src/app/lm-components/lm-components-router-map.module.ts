@@ -8,6 +8,14 @@ import { SiteMenuUtil, SiteUrl } from '../lib-core/utils/site-menu.util';
 
 RouterConfig.add('URL_COMPONENTS', 'components');
 
+RouterConfig.add('URL_COMPONENTS_AUTOCOMPLETE', 'autocomplete');
+const urlAutocomplete = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_AUTOCOMPLETE');
+const siteUrlsAutocomplete: SiteUrl[] = [
+  { label: 'Basic', url: urlAutocomplete, fragment: 'Basic' },
+  { label: 'Api', url: urlAutocomplete, fragment: 'Api' },
+];
+SiteMenuUtil.addItem('Components', 'Autocomplete', { label: 'Autocomplete', siteUrls: siteUrlsAutocomplete });
+
 RouterConfig.add('URL_COMPONENTS_BUTTON', 'button');
 const urlButton = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_BUTTON');
 const siteUrlsButton: SiteUrl[] = [

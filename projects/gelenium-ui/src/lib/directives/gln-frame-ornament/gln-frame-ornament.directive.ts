@@ -71,7 +71,7 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
     }
   }
 
-  // ** Private API **
+  // ** Private methods **
 
   private initialSetting(htmlElement: HTMLElement, pathElement: string | null): void {
     const element = HtmlElemUtil.getElementByPathClassOrTag(htmlElement, pathElement);

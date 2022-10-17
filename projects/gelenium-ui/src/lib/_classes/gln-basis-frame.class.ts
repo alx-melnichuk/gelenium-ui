@@ -151,5 +151,5 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
     return BooleanUtil.init(value);
   }
 
-  // ** Private API **
+  // ** Private methods **
 }

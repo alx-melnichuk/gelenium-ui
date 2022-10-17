@@ -1,0 +1,75 @@
+<!-- This button triggers the overlay and is it's origin -->
+<!--<button (click)="toggle()"
+  type="button"
+  cdkOverlayOrigin
+  #trigger="cdkOverlayOrigin">
+  {{isPanelOpen ? "Close" : "Open"}}
+</button>-->
+
+<!-- This template displays the overlay content and is connected to the button -->
+<!--<ng-template cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="hostRef"
+  [cdkConnectedOverlayOpen]="isPanelOpen">
+  <ul class="example-list">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+</ng-template>
+-->
+
+<!--
+<div glnsl-wrap
+  class="glnsl-wrap"
+  cdkOverlayOrigin
+  #origin="cdkOverlayOrigin">Demo
+</div>-->
+
+<ng-template cdkConnectedOverlay
+  cdkConnectedOverlayBackdropClass9="backdropClassVal || 'cdk-overlay-transparent-backdrop'"
+  cdkConnectedOverlayHasBackdrop
+  [cdkConnectedOverlayDisableClose]="true"
+  cdkConnectedOverlayLockPosition
+  cdkConnectedOverlayMinWidth9="triggerRect?.width!"
+  [cdkConnectedOverlayOpen]="isPanelOpen || hasPanelAnimation"
+  [cdkConnectedOverlayOrigin]="hostRef"
+  cdkConnectedOverlayPanelClass9="overlayPanelClass"
+  cdkConnectedOverlayPositions9="positionList"
+  cdkConnectedOverlayScrollStrategy9="scrollStrategy"
+  backdropClick9="backdropClick()"
+  (attach)="attach()"
+  (detach)="isPanelOpen ? close() : null"
+  overlayKeydown9="doOverlayPanelKeydown($event)">
+
+  <div glnslp-wrap
+    class="gln-select-panel-wrap"
+    ngClass9="[(noAnimation ? 'gln-no-animation' : '')]"
+    attr.noAnm9="noAnimation ? '' : null"
+    animationend9="hasPanelAnimation = isPanelOpen"
+    animationcancel9="hasPanelAnimation = isPanelOpen">
+    <div glnsl-panel
+      class="gln-select-panel"
+      [ngClass]="getPanelClass(panelClassList)"
+      role="listbox"
+      attr.id9="id + '-panel'"
+      attr.aria-multiselectable9="multiple"
+      focus9="doFocusOnPanel()">
+      <ng-content select=":not(gln-select-trigger)"></ng-content>
+    </div>
+  </div>
+
+</ng-template>
+
+
+<!--let-formFieldId="id"-->
+<!--<ng-template>
+  <div class="gln-autocomplete-panel"
+    role="listbox"
+    [id]="id"
+    attr.aria-label9="ariaLabel || null"
+    attr.aria-labelledby9="_getPanelAriaLabelledby(formFieldId)"
+    [ngClass]="getPanelClass(panelClassList)"
+    #panel>
+    <ng-content></ng-content>
+  </div>
+</ng-template>-->

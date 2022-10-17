@@ -1,0 +1,97 @@
+<p>cm-autocomplete-basic works!</p>
+<!-- urlCmAutocomplete -->
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmAutocomplete + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    The GlnAutocomplete component allows you to supplement the input of the GlnInput
+    component with a panel of suggested options.
+  </p>
+  <!-- <span>For example:</span>
+  <code><pre source="html">
+&lt;gln-select formControlName="model01a"
+  label="Enter value"
+  wdFull&gt;
+  &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+  &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
+  &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
+  &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
+  &lt;gln-option value="kiwi"&gt;Kiwi&lt;/gln-option&gt;
+&lt;/gln-select&gt;</pre></code> -->
+
+</section>
+
+
+<form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <gln-input formControlName="model01a"
+        label="Enter fruit"
+        exterior="outlined"
+        [glnAutocompleteTrigger]="autocompleteInput"
+        (input)=doInput($event)>
+      </gln-input>
+      <gln-autocomplete #autocompleteInput="glnAutocomplete">
+        <gln-option><em>None</em></gln-option>
+        <gln-option value="mango1">Mango1</gln-option>
+        <gln-option value="lemon1">Lemon1</gln-option>
+        <gln-option value="orange1">Orange1</gln-option>
+        <gln-option value="kiwi1">Kiwi1</gln-option>
+        <gln-option value="mango2">Mango2</gln-option>
+        <gln-option value="lemon2">Lemon2</gln-option>
+        <gln-option value="orange2">Orange2</gln-option>
+        <gln-option value="kiwi2">Kiwi2</gln-option>
+      </gln-autocomplete>
+      <!-- fruits -->
+      <!-- <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete> -->
+    </div>
+
+  </div>
+</form>
+
+<p>_</p>
+<p>_</p>
+<p>_</p>
+<p>_</p>
+<p>demo1</p>
+<p>_</p>
+<p>_</p>
+<p>_</p>
+<p>_</p>
+<p>demo2</p>
+<p>_</p>
+<p>_</p>
+<p>_</p>
+<p>_</p>
+<p>demo3</p>
+<p>_</p>
+<p>_</p>
+<p>_</p>
+<p>_</p>
+<p>demo4</p>
+<p>_</p>
+<p>_</p>
+<p>_</p>
+<p>_</p>
+<p>demo5</p>
+<p>_</p>
+<p>_</p>
+<p>_</p>
+<p>_</p>
+<p>demo6</p>

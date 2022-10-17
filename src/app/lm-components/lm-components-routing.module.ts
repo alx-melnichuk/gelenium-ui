@@ -6,6 +6,7 @@ import { RouterConfig } from '../lib-core/config/router-config';
 import { LmComponentsRouterMapModule } from './lm-components-router-map.module';
 import { LmComponentsComponent } from './lm-components.component';
 
+const URL_COMPONENTS_AUTOCOMPLETE = RouterConfig.get('URL_COMPONENTS_AUTOCOMPLETE');
 const URL_COMPONENTS_BUTTON = RouterConfig.get('URL_COMPONENTS_BUTTON');
 const URL_COMPONENTS_FRAME = RouterConfig.get('URL_COMPONENTS_FRAME');
 const URL_COMPONENTS_HINT_OR_ERROR = RouterConfig.get('URL_COMPONENTS_HINT_OR_ERROR');
@@ -20,6 +21,10 @@ const routes: Routes = [
     path: '',
     component: LmComponentsComponent,
     children: [
+      {
+        path: URL_COMPONENTS_AUTOCOMPLETE,
+        loadChildren: () => import('../lib-components/cm-autocomplete/cm-autocomplete.module').then((m) => m.CmAutocompleteModule),
+      },
       {
         path: URL_COMPONENTS_BUTTON,
         loadChildren: () => import('../lib-components/cm-button/cm-button.module').then((m) => m.CmButtonModule),
