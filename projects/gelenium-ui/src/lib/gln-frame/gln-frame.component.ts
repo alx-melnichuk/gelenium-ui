@@ -205,9 +205,9 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     }
   }
 
-  // ** Public API **
+  // ** Public methods **
 
-  // ** Private API **
+  // ** Private methods **
 
   private getLineHeight(): number {
     if (this.lineHeightInn === 0) {

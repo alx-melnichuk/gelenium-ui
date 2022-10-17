@@ -762,7 +762,7 @@ export class GlnSelectComponent
     }
   }
 
-  // ** Private API **
+  // ** Private methods **
 
   private settingCheckmark(checkmark: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-checkmark', !!checkmark);

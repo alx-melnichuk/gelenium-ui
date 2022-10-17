@@ -23,7 +23,7 @@ export class LmDirectivesComponent {
     }
   }
 
-  // ** Public API **
+  // ** Public methods **
 
   public trackByItemData(index: number, item: SiteItem): number {
     return item.order;

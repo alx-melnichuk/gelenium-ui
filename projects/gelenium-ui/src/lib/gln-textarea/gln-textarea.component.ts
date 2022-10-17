@@ -331,7 +331,7 @@ export class GlnTextareaComponent
 
   // ** GlnNodeInternalValidator - finish **
 
-  // ** Public API **
+  // ** Public methods **
 
   public getBoolean(value: string | boolean | null | undefined): boolean | null {
     return BooleanUtil.init(value);
@@ -370,7 +370,7 @@ export class GlnTextareaComponent
     }
   }
 
-  // ** Private API **
+  // ** Private methods **
 
   private prepareFormGroup(isRequired: boolean | null, minLength: number | null | undefined, maxLength: number | null | undefined): void {
     this.formControl.clearValidators();

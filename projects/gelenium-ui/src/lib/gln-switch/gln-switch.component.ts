@@ -275,7 +275,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
 
   // ** GlnNodeInternalValidator - finish **
 
-  // ** Public API **
+  // ** Public methods **
 
   public doClickByLabel(event: MouseEvent): void {
     if (!this.disabled && !this.readOnly && this.touchRipple) {
@@ -300,9 +300,9 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     }
   }
 
-  // ** Protected API **
+  // ** Protected methods **
 
-  // ** Private API **
+  // ** Private methods **
 
   private setIdForInput(id: string): string {
     return `${id}-input`;

@@ -47,7 +47,7 @@ export class CmInfiniteScrollOptionalComponent {
     this.elements2 = this.createElementList(CN_CNT);
   }
 
-  // ** Public API **
+  // ** Public methods **
 
   public trackByElement(index: number, item: Element): string {
     return item?.name + item?.surname;
@@ -62,7 +62,7 @@ export class CmInfiniteScrollOptionalComponent {
     }, 1000);
   }
 
-  // ** Private API **
+  // ** Private methods **
 
   private randomNumber(value: number): number {
     return Math.floor(Math.random() * value + 1);

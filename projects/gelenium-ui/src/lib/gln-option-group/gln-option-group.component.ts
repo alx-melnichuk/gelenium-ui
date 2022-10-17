@@ -52,7 +52,7 @@ export class GlnOptionGroupComponent implements OnChanges, OnInit, GlnOptionGrou
     }
   }
 
-  // ** Public API **
+  // ** Public methods **
 
   /** Check or uncheck disabled. */
   public setDisabled(value: boolean | null): void {

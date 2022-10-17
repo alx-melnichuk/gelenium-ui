@@ -42,7 +42,7 @@ export class GlnAutoFocuseDirective implements OnChanges, AfterViewInit {
     }
   }
 
-  // ** Public API **
+  // ** Public methods **
 
   public focuseElement(): void {
     const isDisabled = (this.hostRef.nativeElement as HTMLInputElement).disabled;

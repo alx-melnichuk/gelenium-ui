@@ -59,7 +59,7 @@ export class GlnInfiniteScrollComponent implements AfterViewInit, OnInit, OnDest
     }
   }
 
-  // ** Private API **
+  // ** Private methods **
 
   private isHostScrollable(): boolean {
     const style = window.getComputedStyle(this.hostRef.nativeElement);

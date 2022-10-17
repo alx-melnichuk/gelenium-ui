@@ -141,7 +141,7 @@ export abstract class GlnBasisFrame implements OnChanges, OnInit, AfterContentIn
 
   // ** interface ControlValueAccessor - finish **
 
-  // ** Public API **
+  // ** Public methods **
 
   public markForCheck(): void {
     this.changeDetectorRef.markForCheck();

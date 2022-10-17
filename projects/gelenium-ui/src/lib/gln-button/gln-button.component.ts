@@ -190,7 +190,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     }
   }
 
-  // ** Public API **
+  // ** Public methods **
 
   public getBoolean(value: string | boolean | null | undefined): boolean | null {
     return BooleanUtil.init(value);
@@ -224,7 +224,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     }
   }
 
-  // ** Private API **
+  // ** Private methods **
 
   private getLineHeight(): number {
     if (this.lineHeightInn === 0) {

@@ -85,7 +85,7 @@ export class GlnOptionComponent implements OnChanges, OnInit {
     this.setSelected(!!this.selected);
   }
 
-  // ** Public API **
+  // ** Public methods **
 
   public getTextContent(): string {
     return (this.hostRef.nativeElement.textContent || '').trim();
