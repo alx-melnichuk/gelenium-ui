@@ -131,11 +131,20 @@ gln-select {
   }
 }
 
-
 // Element "gln-select-panel-wrap"
 .gln-select-panel-wrap {
-  background-color: var(--glnslpw-def-bg-cl, var(--gln-default-bg-cl));
-  color: var(--glnslpw-def-cl, hsl(var(--gln-default-h), var(--gln-default-s), 17%)); // (!) hsla(0, 0%, 0%, 0.87);
+  --glnsl--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnsl--default-s: var(--glncl-default-s, var(--gln-default-s));
+  --glnsl--default-l: var(--glncl-default-l, var(--gln-default-l));
+  --glnsl--default-cl: hsl(var(--glnsl--default-h),var(--glnsl--default-s),var(--glnsl--default-l));
+
+  --glnsl--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
+  --glnsl--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
+  --glnsl--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
+  --glnsl--default-bg-cl: hsl(var(--glnsl--default-bg-h), var(--glnsl--default-bg-s), var(--glnsl--default-bg-l));
+
+  background-color: var(--glnslpw-def-bg-cl, var(--glnsl--default-bg-cl));
+  color: var(--glnslpw-def-cl, var(--glnsl--default-cl)); // hsla(0, 0%, 0%, 0.87);
   flex-basis: 100%;
   font-size: inherit; // 16px
   max-width: inherit;
@@ -143,16 +152,16 @@ gln-select {
   &:not([noAnm]) {
     opacity: 0;
     &[is-open]:not([is-hide]) {
-      animation: kf-open-panel 200ms cubic-bezier(0.2, 0, 0.2, 1) 0ms;
+      animation: kf-sl-open-panel 200ms cubic-bezier(0.2, 0, 0.2, 1) 0ms;
       opacity: 1;
     }
     &:not([is-open])[is-hide] {
-      animation: kf-close-panel 200ms linear 0ms;
+      animation: kf-sl-close-panel 200ms linear 0ms;
       opacity: 0;
     }
   }
 
-  @keyframes kf-open-panel {
+  @keyframes kf-sl-open-panel {
     0% {
       opacity: 0;
       transform: translateY(var(--glnslpo-translate-y, 0px)) scale(0.6);
@@ -163,7 +172,7 @@ gln-select {
     }
   }
 
-  @keyframes kf-close-panel {
+  @keyframes kf-sl-close-panel {
     0% {
       opacity: 1;
       transform: none;

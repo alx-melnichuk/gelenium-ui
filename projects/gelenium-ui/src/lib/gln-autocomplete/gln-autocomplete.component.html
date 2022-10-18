@@ -25,41 +25,6 @@
   #origin="cdkOverlayOrigin">Demo
 </div>-->
 
-<ng-template cdkConnectedOverlay
-  cdkConnectedOverlayBackdropClass9="backdropClassVal || 'cdk-overlay-transparent-backdrop'"
-  cdkConnectedOverlayHasBackdrop
-  [cdkConnectedOverlayDisableClose]="true"
-  cdkConnectedOverlayLockPosition
-  cdkConnectedOverlayMinWidth9="triggerRect?.width!"
-  [cdkConnectedOverlayOpen]="isPanelOpen || hasPanelAnimation"
-  [cdkConnectedOverlayOrigin]="hostRef"
-  cdkConnectedOverlayPanelClass9="overlayPanelClass"
-  cdkConnectedOverlayPositions9="positionList"
-  cdkConnectedOverlayScrollStrategy9="scrollStrategy"
-  backdropClick9="backdropClick()"
-  (attach)="attach()"
-  (detach)="isPanelOpen ? close() : null"
-  overlayKeydown9="doOverlayPanelKeydown($event)">
-
-  <div glnslp-wrap
-    class="gln-select-panel-wrap"
-    ngClass9="[(noAnimation ? 'gln-no-animation' : '')]"
-    attr.noAnm9="noAnimation ? '' : null"
-    animationend9="hasPanelAnimation = isPanelOpen"
-    animationcancel9="hasPanelAnimation = isPanelOpen">
-    <div glnsl-panel
-      class="gln-select-panel"
-      [ngClass]="getPanelClass(panelClassList)"
-      role="listbox"
-      attr.id9="id + '-panel'"
-      attr.aria-multiselectable9="multiple"
-      focus9="doFocusOnPanel()">
-      <ng-content select=":not(gln-select-trigger)"></ng-content>
-    </div>
-  </div>
-
-</ng-template>
-
 
 <!--let-formFieldId="id"-->
 <!--<ng-template>
@@ -73,3 +38,61 @@
     <ng-content></ng-content>
   </div>
 </ng-template>-->
+
+
+
+<button (click)="toggle()"
+  type="button">
+  {{isPanelOpen ? "Close" : "Open"}}
+</button>
+
+<ng-template [ngIf]="isPanelOpen">
+  <div glnacp-container
+    [style.top.px]="panelTop"
+    [style.left.px]="panelLeft"
+    [style.fontSize.px]="panelFontSize">
+    <div glnacp-wrap>
+      <div glnac-panel
+        class="gln-autocomplete-panel"
+        role="listbox"
+        [id]="id"
+        attr.aria-label9="ariaLabel || null"
+        attr.aria-labelledby9="_getPanelAriaLabelledby(formFieldId)"
+        [ngClass]="getPanelClass(panelClassList)">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<!--
+    min-width: 251.562px;
+    --glnslpo-translate-y: -36px;
+    font-size: 16px;
+    --glnslpo-border-radius: 5px;
+    max-width: 251.562px;
+    +top: 699.594px;
+    +left: 299.812px;
+  -->
+<!--
+<ng-template [ngIf]="isPanelOpen">
+  <div glnacp-container
+    class="gln-autocomplete-panel-container"
+    [style.top.px]="panelTop > 0 ? panelTop : null"
+    [style.left.px]="panelLeft > 0 ? panelLeft : null"
+    [style.fontSize.px]="panelFontSize > 0 ? panelFontSize : null ">
+
+    <div glnacp-wrap
+      class="gln-autocomplete-panel-wrap">
+      < ! - -
+        [style.maxWidth]: inherit; panelMaxWidth
+      [ngClass]="[(noAnimation ? 'gln-no-animation' : '')]"
+      [attr.noAnm]="noAnimation ? '' : null"
+      (animationend)="hasPanelAnimation = isPanelOpen"
+      (animationcancel)="hasPanelAnimation = isPanelOpen"
+      - - >
+    </div>
+  </div>
+</ng-template>
+-->

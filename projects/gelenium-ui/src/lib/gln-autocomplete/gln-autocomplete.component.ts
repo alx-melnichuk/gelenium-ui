@@ -20,6 +20,7 @@ import {
 import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
 
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
+import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { GlnAutocompleteOptions } from './gln-autocomplete-options.interface';
 
@@ -52,6 +53,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
   public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = '';
 
+  @Input()
+  public wdFull: string | null | undefined;
+
   @ViewChild(TemplateRef, { static: true })
   public template!: TemplateRef<any>;
   @ViewChild('panel', { read: ElementRef<HTMLElement>, static: true })
@@ -75,7 +79,12 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   public isPanelOpen: boolean = false;
   public multiple: boolean | null = null; // Binding attribute "isMultiple". // interface GlnOptionParent
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
+  public originRef: ElementRef<HTMLElement> | null = null;
   public panelClassList: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
+  public panelFontSize: number | null = null;
+  public panelMaxWidth: number | null = null;
+  public panelTop: number | null = null;
+  public panelLeft: number | null = null;
 
   constructor(
     // // eslint-disable-next-line @typescript-eslint/ban-types
@@ -108,10 +117,17 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
     if (this.panelClassList == null) {
       this.panelClassList = this.currConfig?.panelClass;
     }
+  }
 
-    // setTimeout(() => {
-    //   this.open();
-    // }, 4000);
+  public ngAfterViewInit(): void {
+    let maxWidth = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('max-width').replace('px', ''));
+    this.panelMaxWidth = !isNaN(maxWidth) ? maxWidth : 0;
+    if (this.panelMaxWidth === 0 && BooleanUtil.init(this.wdFull)) {
+      maxWidth = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('width').replace('px', ''));
+      this.panelMaxWidth = !isNaN(maxWidth) ? maxWidth : 0;
+    }
+
+    // public panelFontSize: number = -1;
   }
 
   // ** interface GlnOptionParent - start **
@@ -135,9 +151,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   // ** interface GlnAutocompleteOptions - start **
 
   /** Open the autocomplete suggestion panel. */
-  public openPanel = (): void => {
+  public openPanel = (originRef: ElementRef<HTMLElement>): void => {
     console.log(`openPanel();`); // #
-    this.open();
+    this.open(originRef);
   };
 
   /** Close the autocomplete suggestion panel. */
@@ -149,7 +165,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   public toggle(): void {
     this.isPanelOpen = !this.isPanelOpen;
     if (this.isPanelOpen) {
-      this.open();
+      this.open(this.hostRef);
     } else {
       this.close();
     }
@@ -159,10 +175,16 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   // ** Public methods **
 
   /** Open overlay panel. */
-  public open(): void {
+  public open(originRef: ElementRef<HTMLElement>): void {
+    this.originRef = originRef;
     this.isOpen = true;
     this.isPanelOpen = true;
     this.changeDetectorRef.markForCheck();
+    const panelRect: DOMRect = this.getCssPanelProperties(this.originRef, this.hostRef);
+    this.panelTop = panelRect.top;
+    this.panelLeft = panelRect.left;
+
+    console.log(`open(); panelTop=${this.panelTop} panelLeft=${this.panelLeft}`, panelRect); // #
     // if (!this.disabled && !this.readOnly && !this.isPanelOpen && this.options.length > 0) {
     //   this.isPanelOpen = true;
     //   this.hasPanelAnimation = !this.noAnimation;
@@ -176,6 +198,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   }
   /** Closes the overlay panel and focuses the main element. */
   public close(): void {
+    this.originRef = null;
     this.isPanelOpen = false;
     this.isOpen = false;
     this.changeDetectorRef.markForCheck();
@@ -189,5 +212,20 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
     list: string | string[] | Set<string> | { [key: string]: any } | undefined
   ): string | string[] | Set<string> | { [key: string]: any } {
     return list ?? '';
+  }
+
+  // ** Public methods **
+
+  private getCssPanelProperties(originRef: ElementRef<HTMLElement> | null, hostRef: ElementRef<HTMLElement> | null): DOMRect {
+    const result: DOMRect = new DOMRect();
+    if (originRef && hostRef) {
+      const originRect: DOMRect = originRef.nativeElement.getBoundingClientRect();
+      const hostRect: DOMRect = hostRef.nativeElement.getBoundingClientRect();
+      result.x = originRect.left - hostRect.left;
+      result.y = originRect.bottom - hostRect.top;
+      result.width = originRect.width;
+      result.height = originRect.height;
+    }
+    return result;
   }
 }

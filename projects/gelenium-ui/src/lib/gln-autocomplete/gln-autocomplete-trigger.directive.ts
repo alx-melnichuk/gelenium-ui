@@ -20,16 +20,16 @@ export class GlnAutocompleteTriggerDirective implements OnInit {
   public handlerFocusin(): void {
     console.log(`handlerFocusin()`); // #
     if (this.glnAutocompleteOptions != null) {
-      this.glnAutocompleteOptions.openPanel();
+      this.glnAutocompleteOptions.openPanel(this.hostRef);
     }
   }
 
   @HostListener('focusout')
   public handlerFocusout(): void {
     console.log(`handlerFocusout()`); // #
-    if (this.glnAutocompleteOptions != null) {
-      this.glnAutocompleteOptions.closePanel();
-    }
+    // if (this.glnAutocompleteOptions != null) {
+    //   this.glnAutocompleteOptions.closePanel();
+    // }
   }
 
   @HostListener('input', ['$event'])
