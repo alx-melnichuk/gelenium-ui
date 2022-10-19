@@ -1,10 +1,9 @@
 <div glnsl-wrap
-  class="glnsl-wrap"
-  cdkOverlayOrigin
-  #origin="cdkOverlayOrigin"
-  #triggerRef
-  (click)="!disabled ? toggle() : null">
+  class="glnsl-wrap">
   <gln-frame [ngClass]="[(isPanelOpen ? 'is-open' : '')]"
+    cdkOverlayOrigin
+    #origin="cdkOverlayOrigin"
+    #triggerRef
     [config]="currConfig"
     [cssElementRef]="triggerHtmlElementRef"
     [exterior]="exterior || currConfig.exterior"
@@ -25,7 +24,8 @@
     [attr.tabindex]="!disabled ? tabIndex : null"
     (focus)="doFocus()"
     (blur)="doBlur()"
-    (keydown)="frameKeydown($event)">
+    (keydown)="frameKeydown($event)"
+    (click)="!disabled ? toggle() : null">
 
     <span glnfr-orn-lf
       class="gln-ornam-lf">
