@@ -148,6 +148,7 @@ gln-select {
   flex-basis: 100%;
   font-size: inherit; // 16px
   max-width: inherit;
+  text-align: start;
   
   &:not([noAnm]) {
     opacity: 0;
@@ -189,7 +190,7 @@ gln-select {
   .gln-select-panel {
     border-radius: var(--glnslpo-border-radius, unset);
     box-sizing: border-box;
-    max-height: var(--glnslpo-max-height, 100%);
+    max-height: var(--glnslpo-max-height, 80vh);
     min-height: 16px;
     min-width: 16px;
     overflow: auto;

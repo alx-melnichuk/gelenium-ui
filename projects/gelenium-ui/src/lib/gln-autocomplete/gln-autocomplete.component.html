@@ -42,15 +42,21 @@
 
 
 <button (click)="toggle()"
+  style="position: absolute; left: 0px; top: -100px;"
   type="button">
   {{isPanelOpen ? "Close" : "Open"}}
 </button>
 
 <ng-template [ngIf]="isPanelOpen">
   <div glnacp-container
+    glnAutocompletePanel
+    (attached)="attached($event)"
+    (detached)="detached($event)"
     [style.top.px]="panelTop"
     [style.left.px]="panelLeft"
-    [style.fontSize.px]="panelFontSize">
+    [style.right.px]="panelRight"
+    [style.minWidth.px]="panelMinWidth"
+    [style.maxWidth.px]="panelMaxWidth">
     <div glnacp-wrap>
       <div glnac-panel
         class="gln-autocomplete-panel"

@@ -10,11 +10,7 @@ export class GlnAutocompleteTriggerDirective implements OnInit {
   @Input('glnAutocompleteTrigger')
   public glnAutocompleteOptions: GlnAutocompleteOptions | null | undefined;
 
-  constructor(public hostRef: ElementRef<HTMLElement>) {
-    // setTimeout(() => {
-    //   this.demo('test01');
-    // }, 4000);
-  }
+  constructor(public hostRef: ElementRef<HTMLElement>) {}
 
   @HostListener('focusin')
   public handlerFocusin(): void {

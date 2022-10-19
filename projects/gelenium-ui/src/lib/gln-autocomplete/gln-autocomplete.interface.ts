@@ -1,3 +1,2 @@
-export interface GlnAutocompleteConfig {
-  panelClass?: string | string[] | Set<string> | { [key: string]: any } | undefined;
-}
+// Horizontal position
+export type DemoType = 'start' | 'center' | 'end';

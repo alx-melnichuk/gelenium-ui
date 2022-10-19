@@ -19,7 +19,6 @@ gln-autocomplete {
 
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
-  min-width: var(--glnac-min-width, 50px); // ?
   position: relative;
 
 
@@ -32,13 +31,8 @@ gln-autocomplete {
     position: absolute;
     // pointer-events: auto;
     z-index: 1000;
-    // min-width: 251.562px;
     // --glnslpo-translate-y: -36px;
-    // font-size: 16px;
     // --glnslpo-border-radius: 5px;
-    // max-width: 251.562px;
-    // top: 699.594px;
-    // left: 299.812px;
   }
 
   // Element "div glnacp-wrap".
@@ -46,9 +40,10 @@ gln-autocomplete {
     background-color: var(--glnslpw-def-bg-cl, var(--glnsl--default-bg-cl));
     color: var(--glnslpw-def-cl, var(--glnsl--default-cl)); // hsla(0, 0%, 0%, 0.87);
     
-    flex-basis: 100%;
+    // #flex-basis: 100%;
     font-size: inherit; // 16px
     max-width: inherit;
+    text-align: start;
     /*
     &:not([noAnm]) {
       opacity: 0;
@@ -88,9 +83,9 @@ gln-autocomplete {
 
   // Element "div glnac-panel".
   [glnac-panel] {
-    border-radius: var(--glnslpo-border-radius, unset);
+    border-radius: var(--glnacp-border-radius, unset);
     box-sizing: border-box;
-    max-height: var(--glnslpo-max-height, 100%);
+    max-height: var(--glnacpo-max-height, 60vh);
     min-height: 16px;
     min-width: 16px;
     overflow: auto;
