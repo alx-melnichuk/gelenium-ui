@@ -1,22 +1,22 @@
 <!-- Basic - start  -->
-<section *ngIf="false"
-  mr-vr>
-  <h3 class="app-hover-link">
-    Basic.
-    <a [href]="urlCmAutocomplete + '#Basic'">#</a>
-  </h3>
-  <span>
-    To use this component, in your module you need to add:
-  </span>
-  <code><pre source="ts">
+<ng-container *ngIf="false">
+  <section mr-vr>
+    <h3 class="app-hover-link">
+      Basic.
+      <a [href]="urlCmAutocomplete + '#Basic'">#</a>
+    </h3>
+    <span>
+      To use this component, in your module you need to add:
+    </span>
+    <code><pre source="ts">
 import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</pre>
   </code>
-  <p>
-    The GlnAutocomplete component allows you to supplement the input of the GlnInput
-    component with a panel of suggested options.
-  </p>
-  <span>For example:</span>
-  <code><pre source="html">
+    <p>
+      The GlnAutocomplete component allows you to supplement the input of the GlnInput
+      component with a panel of suggested options.
+    </p>
+    <span>For example:</span>
+    <code><pre source="html">
 &lt;gln-input formControlName="model01a"
   label="Enter value"
   [glnAutocompleteTrigger]="autocompleteModel01a"&gt;
@@ -27,181 +27,221 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
     &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
     &lt;gln-option value="kiwi"&gt;Kiwi&lt;/gln-option&gt;
   &lt;gln-autocomplete&gt;</pre></code>
-</section>
+  </section>
 
-<hr br-nn />
+  <hr br-nn />
 
-<form *ngIf="false"
-  [formGroup]="formGroup01"
-  novalidate
-  autocomplete="off">
+  <form [formGroup]="formGroup01"
+    novalidate
+    autocomplete="off">
 
-  <div class="app-group">
+    <div class="app-group">
 
-    <div class="app-elem">
-      <div mb0>
-        <small><em>exterior: Outlined</em></small>
+      <div class="app-elem">
+        <div mb0>
+          <small><em>exterior: Outlined</em></small>
+        </div>
+        <gln-input formControlName="model01a"
+          label="Enter value"
+          exterior="outlined"
+          wdFull
+          [glnAutocompleteTrigger]="autocompleteModel01a">
+        </gln-input>
+        <gln-autocomplete #autocompleteModel01a="glnAutocomplete">
+          <gln-option value="mango">Mango</gln-option>
+          <gln-option value="lemon">Lemon</gln-option>
+          <gln-option value="orange">Orange</gln-option>
+          <gln-option value="kiwi">Kiwi</gln-option>
+        </gln-autocomplete>
       </div>
-      <gln-input formControlName="model01a"
-        label="Enter value"
-        exterior="outlined"
-        wdFull
-        [glnAutocompleteTrigger]="autocompleteModel01a">
-      </gln-input>
-      <gln-autocomplete #autocompleteModel01a="glnAutocomplete">
-        <gln-option value="mango">Mango</gln-option>
-        <gln-option value="lemon">Lemon</gln-option>
-        <gln-option value="orange">Orange</gln-option>
-        <gln-option value="kiwi">Kiwi</gln-option>
-      </gln-autocomplete>
+
+      <div class="app-elem">
+        <div mb0>
+          <small><em>exterior: Underline</em></small>
+        </div>
+        <gln-input formControlName="model01b"
+          label="Enter value"
+          exterior="underline"
+          wdFull
+          [glnAutocompleteTrigger]="autocompleteModel01b">
+        </gln-input>
+        <gln-autocomplete #autocompleteModel01b="glnAutocomplete">
+          <gln-option value="mango">Mango</gln-option>
+          <gln-option value="lemon">Lemon</gln-option>
+          <gln-option value="orange">Orange</gln-option>
+          <gln-option value="kiwi">Kiwi</gln-option>
+        </gln-autocomplete>
+      </div>
+
+      <div class="app-elem">
+        <div mb0>
+          <small><em>exterior: Standard</em></small>
+        </div>
+        <gln-input formControlName="model01c"
+          label="Enter value"
+          exterior="standard"
+          wdFull
+          [glnAutocompleteTrigger]="autocompleteModel01c">
+        </gln-input>
+        <gln-autocomplete #autocompleteModel01c="glnAutocomplete">
+          <gln-option value="mango">Mango</gln-option>
+          <gln-option value="lemon">Lemon</gln-option>
+          <gln-option value="orange">Orange</gln-option>
+          <gln-option value="kiwi">Kiwi</gln-option>
+        </gln-autocomplete>
+      </div>
+
     </div>
 
-    <div class="app-elem">
-      <div mb0>
-        <small><em>exterior: Underline</em></small>
-      </div>
-      <gln-input formControlName="model01b"
-        label="Enter value"
-        exterior="underline"
-        wdFull
-        [glnAutocompleteTrigger]="autocompleteModel01b">
-      </gln-input>
-      <gln-autocomplete #autocompleteModel01b="glnAutocomplete">
-        <gln-option value="mango">Mango</gln-option>
-        <gln-option value="lemon">Lemon</gln-option>
-        <gln-option value="orange">Orange</gln-option>
-        <gln-option value="kiwi">Kiwi</gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div mb0>
-        <small><em>exterior: Standard</em></small>
-      </div>
-      <gln-input formControlName="model01c"
-        label="Enter value"
-        exterior="standard"
-        wdFull
-        [glnAutocompleteTrigger]="autocompleteModel01c">
-      </gln-input>
-      <gln-autocomplete #autocompleteModel01c="glnAutocomplete">
-        <gln-option value="mango">Mango</gln-option>
-        <gln-option value="lemon">Lemon</gln-option>
-        <gln-option value="orange">Orange</gln-option>
-        <gln-option value="kiwi">Kiwi</gln-option>
-      </gln-autocomplete>
-    </div>
-
-  </div>
-
-</form>
-
+  </form>
+</ng-container>
 <hr br-nn />
 
 
 <!-- Attributes - start -->
-<section *ngIf="false"
-  mr-vr>
-  <h3 class="app-hover-link">
-    Attributes.
-    <a [href]="urlCmAutocomplete + '#Attributes'">#</a>
-  </h3>
-  <h4 class="app-hover-link"
-    id="attributes-supported01">
-    The following attributes are supported:
-    <a [href]="urlCmAutocomplete + '#attributes-supported01'">#</a>
-  </h4>
-  <ul>
-    <li>
-      "config" - Defines a configuration object.
-      <a [href]="urlCmAutocomplete + '#config-interface'">More details.</a>
-    </li>
-    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
-    <li>
-      "position" - Defines horizontal positioning.
-      It can take the following values:
-      <ul>
-        <li>"start" - positioned at the left edge;</li>
-        <li>"center" - positioned in the middle;</li>
-        <li>"end" - positioned on the right edge;</li>
-      </ul>
-    </li>
+<ng-container *ngIf="true">
+  <section mr-vr>
+    <h3 class="app-hover-link">
+      Attributes.
+      <a [href]="urlCmAutocomplete + '#Attributes'">#</a>
+    </h3>
+    <h4 class="app-hover-link"
+      id="attributes-supported01">
+      The following attributes are supported:
+      <a [href]="urlCmAutocomplete + '#attributes-supported01'">#</a>
+    </h4>
+    <ul>
+      <li>
+        "config" - Defines a configuration object.
+        <a [href]="urlCmAutocomplete + '#config-interface'">More details.</a>
+      </li>
+      <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
+      <li>
+        "position" - Defines horizontal positioning.
+        It can take the following values:
+        <ul>
+          <li>"start" - positioned at the left edge;</li>
+          <li>"center" - positioned in the middle;</li>
+          <li>"end" - positioned on the right edge;</li>
+        </ul>
+      </li>
 
-  </ul>
-</section>
+    </ul>
+  </section>
 
-<hr br-nn />
+  <hr br-nn />
 
-<section *ngIf="false"
-  mr-vr>
-  <span>exterior: </span>
-  <mat-button-toggle-group value="exterior02b"
-    (change)="exterior02b=$event.value">
-    <mat-button-toggle [checked]="exterior02b==='outlined'"
-      value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02b==='underline'"
-      value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02b==='standard'"
-      value="standard">{{ labelStandard }}</mat-button-toggle>
-  </mat-button-toggle-group>
-</section>
+  <section mr-vr>
+    <span>exterior: </span>
+    <mat-button-toggle-group value="exterior02b"
+      (change)="exterior02b=$event.value">
+      <mat-button-toggle [checked]="exterior02b==='outlined'"
+        value="outlined">{{ labelOutlined }}</mat-button-toggle>
+      <mat-button-toggle [checked]="exterior02b==='underline'"
+        value="underline">{{ labelUnderline }}</mat-button-toggle>
+      <mat-button-toggle [checked]="exterior02b==='standard'"
+        value="standard">{{ labelStandard }}</mat-button-toggle>
+    </mat-button-toggle-group>
+  </section>
 
-<form *ngIf="false"
-  [formGroup]="formGroup02b"
-  novalidate
-  autocomplete="off">
+  <form [formGroup]="formGroup02b"
+    novalidate
+    autocomplete="off">
 
-  <div class="app-group">
+    <div class="app-group">
 
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: without isPositionRight.</em>
-        </small>
+      <div class="app-elem">
+        <div>
+          <small>
+            <em>Attribute: wdFull.</em>
+          </small>
+        </div>
+        <div class="aca-middle">
+          <gln-input formControlName="model02i"
+            label="Fruit"
+            [exterior]="exterior02b"
+            wdFull
+            [glnAutocompleteTrigger]="autocompleteModel02i">
+          </gln-input>
+        </div>
+        <gln-autocomplete #autocompleteModel02i="glnAutocomplete"
+          wdFull>
+          <gln-option *ngFor="let item of fruitsB"
+            [value]="item">{{ capitalizeFirstLetter(item) }}
+          </gln-option>
+        </gln-autocomplete>
       </div>
-      <div class="aca-middle">
-        <gln-input formControlName="model02i"
-          label="Fruit"
-          position="center"
-          [exterior]="exterior02b"
-          wdFull
-          [glnAutocompleteTrigger]="autocompleteModel02i">
-        </gln-input>
-      </div>
-      <gln-autocomplete #autocompleteModel02i="glnAutocomplete">
-        <gln-option *ngFor="let item of fruitsB"
-          [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
 
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isPositionRight.</em>
-        </small>
-      </div>
-      <div class="aca-middle">
+      <div class="app-elem">
+        <div>
+          <small>
+            <em>Attribute: wdFull and max-width.</em>
+          </small>
+        </div>
         <gln-input formControlName="model02j"
+          class="aca-large"
           label="Fruit"
-          position="end"
           [exterior]="exterior02b"
-          wdFull
+          wdFull9
           [glnAutocompleteTrigger]="autocompleteModel02j">
         </gln-input>
+        <gln-autocomplete #autocompleteModel02j="glnAutocomplete"
+          wdFull>
+          <gln-option *ngFor="let item of fruitsB"
+            [value]="item">{{ capitalizeFirstLetter(item) }}
+          </gln-option>
+        </gln-autocomplete>
       </div>
-      <gln-autocomplete #autocompleteModel02j="glnAutocomplete"
-        isPositionRight>
-        <gln-option *ngFor="let item of fruitsB"
-          [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
+
+      <div class="app-elem">
+        <div>
+          <small>
+            <em>Attribute: position='center'.</em>
+          </small>
+        </div>
+        <div class="aca-middle">
+          <gln-input formControlName="model02k"
+            label="Fruit"
+            [exterior]="exterior02b"
+            wdFull
+            [glnAutocompleteTrigger]="autocompleteModel02k">
+          </gln-input>
+        </div>
+        <gln-autocomplete #autocompleteModel02k="glnAutocomplete"
+          position="center">
+          <gln-option *ngFor="let item of fruitsB"
+            [value]="item">{{ capitalizeFirstLetter(item) }}
+          </gln-option>
+        </gln-autocomplete>
+      </div>
+
+      <div class="app-elem">
+        <div>
+          <small>
+            <em>Attribute: position='end'.</em>
+          </small>
+        </div>
+        <div class="aca-middle">
+          <gln-input formControlName="model02l"
+            label="Fruit"
+            [exterior]="exterior02b"
+            wdFull
+            [glnAutocompleteTrigger]="autocompleteModel02l">
+          </gln-input>
+        </div>
+        <gln-autocomplete #autocompleteModel02l="glnAutocomplete"
+          position="end">
+          <gln-option *ngFor="let item of fruitsB"
+            [value]="item">{{ capitalizeFirstLetter(item) }}
+          </gln-option>
+        </gln-autocomplete>
+      </div>
+
     </div>
+  </form>
 
-  </div>
-</form>
-
-<hr br-nn />
+  <hr br-nn />
+</ng-container>
 
 <!--  -->
 
@@ -211,56 +251,58 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
 <p>-</p>
 <hr br-nn />
 
+<ng-container *ngIf="false">
 
-<form [formGroup]="formGroup0"
-  novalidate
-  autocomplete="off">
+  <form [formGroup]="formGroup0"
+    novalidate
+    autocomplete="off">
 
-  <div class="app-group">
+    <div class="app-group">
 
-    <div class="app-elem9 elem1">
-      <gln-input formControlName="model0a"
-        class="elem1"
-        label="Enter fruit"
-        exterior="outlined"
-        wdFull9
-        [glnAutocompleteTrigger]="autocompleteModel0a"
-        (input)=doInput($event)>
-      </gln-input>
-      <gln-autocomplete #autocompleteModel0a="glnAutocomplete"
-        wdFull9>
-        <ng-container *ngIf="true">
-          <gln-option value="mango1">Mango1a</gln-option>
-          <gln-option value="lemon1">Lemon1a</gln-option>
-          <gln-option value="orange1">Orange1a</gln-option>
-          <gln-option value="kiwi1">Kiwi1a</gln-option>
-          <gln-option value="mango2">Mango2a</gln-option>
-          <gln-option value="lemon2">Lemon2a</gln-option>
-          <gln-option value="orange2">Orange2a</gln-option>
-          <gln-option value="kiwi2">Kiwi2a</gln-option>
-        </ng-container>
-        <ng-container *ngIf="false">
-          <gln-option value="mango1">Mango1a test Mango1b test</gln-option>
-          <gln-option value="lemon1">Lemon1a test Lemon1b test</gln-option>
-          <gln-option value="orange1">Orange1a test Orange1b test</gln-option>
-          <gln-option value="kiwi1">Kiwi1a test Kiwi1b test</gln-option>
-          <gln-option value="mango2">Mango2a test Mango2b test</gln-option>
-          <gln-option value="lemon2">Lemon2a test Lemon2b test</gln-option>
-          <gln-option value="orange2">Orange2a Orange2b test</gln-option>
-          <gln-option value="kiwi2">Kiwi2a test Kiwi2b test</gln-option>
-        </ng-container>
-      </gln-autocomplete>
-      <!-- fruits -->
-      <!-- <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <div class="app-elem9 elem1">
+        <gln-input formControlName="model0a"
+          class="elem1"
+          label="Enter fruit"
+          exterior="outlined"
+          wdFull9
+          [glnAutocompleteTrigger]="autocompleteModel0a"
+          (input)=doInput($event)>
+        </gln-input>
+        <gln-autocomplete #autocompleteModel0a="glnAutocomplete"
+          wdFull9>
+          <ng-container *ngIf="true">
+            <gln-option value="mango1">Mango1a</gln-option>
+            <gln-option value="lemon1">Lemon1a</gln-option>
+            <gln-option value="orange1">Orange1a</gln-option>
+            <gln-option value="kiwi1">Kiwi1a</gln-option>
+            <gln-option value="mango2">Mango2a</gln-option>
+            <gln-option value="lemon2">Lemon2a</gln-option>
+            <gln-option value="orange2">Orange2a</gln-option>
+            <gln-option value="kiwi2">Kiwi2a</gln-option>
+          </ng-container>
+          <ng-container *ngIf="false">
+            <gln-option value="mango1">Mango1a test Mango1b test</gln-option>
+            <gln-option value="lemon1">Lemon1a test Lemon1b test</gln-option>
+            <gln-option value="orange1">Orange1a test Orange1b test</gln-option>
+            <gln-option value="kiwi1">Kiwi1a test Kiwi1b test</gln-option>
+            <gln-option value="mango2">Mango2a test Mango2b test</gln-option>
+            <gln-option value="lemon2">Lemon2a test Lemon2b test</gln-option>
+            <gln-option value="orange2">Orange2a Orange2b test</gln-option>
+            <gln-option value="kiwi2">Kiwi2a test Kiwi2b test</gln-option>
+          </ng-container>
+        </gln-autocomplete>
+        <!-- fruits -->
+        <!-- <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           {{option}}
         </mat-option>
       </mat-autocomplete> -->
+      </div>
+
     </div>
+  </form>
 
-  </div>
-</form>
-
+</ng-container>
 <!-- 
   .ab-elem {
     width: 200px;
