@@ -27,7 +27,8 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { GlnAutocompleteOptions } from './gln-autocomplete-options.interface';
 
 import { GlnAutocompleteConfig } from './gln-autocomplete-config.interface';
-import { NumberUtil } from '../_utils/number.util';
+import { GlnAutocompletePosition, GlnAutocompletePositionUtil } from './gln-autocomplete.interface';
+import { GlnAutocompletePanelConfig } from './gln-autocomplete-panel.directive';
 
 let uniqueIdCounter = 0;
 
@@ -54,12 +55,11 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   @Input()
   public isDisabled: string | boolean | null | undefined;
   @Input()
-  /** Position the panel to the right. */
-  public isPositionRight: string | boolean | null | undefined;
-
   @Input()
   /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
   public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = '';
+  @Input()
+  public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
 
   @Input()
   public wdFull: string | null | undefined;
@@ -92,16 +92,13 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public hasPanelAnimation: boolean = false;
   public isPanelOpen: boolean = false;
+  public isWdFull: boolean = false;
   public multiple: boolean | null = null; // Binding attribute "isMultiple". // interface GlnOptionParent
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public originRef: ElementRef<HTMLElement> | null = null;
   public panelClassList: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
-  public panelMaxWidth: number | null = null;
-  public panelLeft: number | null = null;
-  public panelRight: number | null = null;
-  public panelTop: number | null = null;
-  public panelMinWidth: number | null = null;
-  public positionRight: boolean | null = null; // Binding attribute "isPositionRight".
+  public panelConfig: GlnAutocompletePanelConfig | null = null;
+  public positionValue: GlnAutocompletePosition = GlnAutocompletePosition.start; // Binding attribute "position" ('start' | 'center' | 'end').
 
   constructor(
     // // eslint-disable-next-line @typescript-eslint/ban-types
@@ -130,8 +127,11 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
     if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
       this.panelClassList = this.panelClass || this.currConfig?.panelClass;
     }
-    if (changes['isPositionRight'] || (changes['config'] && this.isPositionRight == null && this.currConfig.isPositionRight != null)) {
-      this.positionRight = BooleanUtil.init(this.isPositionRight) ?? !!this.currConfig.isPositionRight;
+    if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
+      this.positionValue = GlnAutocompletePositionUtil.create(this.position ?? (this.currConfig.position || null));
+    }
+    if (changes['wdFull']) {
+      this.isWdFull = !!BooleanUtil.init(this.wdFull);
     }
   }
 
@@ -142,8 +142,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
     if (this.panelClassList == null) {
       this.panelClassList = this.currConfig?.panelClass;
     }
-    if (this.positionRight == null) {
-      this.positionRight = !!this.currConfig.isPositionRight;
+    if (this.positionValue == null) {
+      this.positionValue = GlnAutocompletePositionUtil.create(this.currConfig.position || null);
     }
   }
 
@@ -170,7 +170,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   /** Open the autocomplete suggestion panel. */
   public openPanel = (originRef: ElementRef<HTMLElement>): void => {
     console.log(`openPanel();`); // #
-    this.open(originRef, !!BooleanUtil.init(this.wdFull), !!this.positionRight);
+    this.open(originRef, !!BooleanUtil.init(this.wdFull));
   };
 
   /** Close the autocomplete suggestion panel. */
@@ -182,7 +182,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   public toggle(): void {
     this.isPanelOpen = !this.isPanelOpen;
     if (this.isPanelOpen) {
-      this.open(this.hostRef, !!BooleanUtil.init(this.wdFull), !!this.positionRight);
+      this.open(this.hostRef, !!BooleanUtil.init(this.wdFull));
     } else {
       this.close();
     }
@@ -192,7 +192,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   // ** Public methods **
 
   /** Open overlay panel. */
-  public open(originRef: ElementRef<HTMLElement>, isWdFull: boolean, isPositionRight: boolean): void {
+  public open(originRef: ElementRef<HTMLElement>, isWdFull: boolean): void {
     /*if (!this.disabled && originRef != null && !this.isPanelOpen && this.options.length > 0) {
       this.originRef = originRef;
       this.isPanelOpen = true;
@@ -212,36 +212,19 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
       // this.hasPanelAnimation = !this.noAnimation;
       // this.markedOption = this.selectedOptions.length > 0 ? this.selectedOptions[this.selectedOptions.length - 1] : null;
       // this.triggerRect = this.triggerRef.nativeElement.getBoundingClientRect();
-      const panelRect = this.getPanelRect(this.originRef, this.hostRef);
-      // #this.panelHeight = this.panelRect.height;
-      // #this.panelLeft = this.panelRect.x;
-      // #this.panelTop = this.panelRect.y;
-      // #this.panelWidth = this.panelRect.width;
       // this.isFocusAttrOnFrame = false;
       // this.panelFontSize = Number((getComputedStyle(this.originRef.nativeElement).fontSize || '0').replace('px', ''));
-      this.panelLeft = panelRect.left;
-      this.panelMinWidth = panelRect.width;
-      this.panelRight = null;
-      this.panelTop = panelRect.top;
 
-      console.log(`open(); panelTop=${this.panelTop} panelLeft=${this.panelLeft} panelRight=${this.panelRight}`); // #
+      const originRect: DOMRect = this.originRef.nativeElement.getBoundingClientRect();
+      console.log(`Panel();   origin left=${originRect.left} right=${originRect.right} top=${originRect.top} height=${originRect.height}`); // #
+      const hostRect: DOMRect = this.hostRef.nativeElement.getBoundingClientRect();
+      console.log(`Panel();   host   left=${hostRect.left} right=${hostRect.right} top=${hostRect.top} height=${hostRect.height}`); // #
 
-      let maxWidth = Number(getComputedStyle(this.originRef.nativeElement).getPropertyValue('max-width').replace('px', ''));
-      this.panelMaxWidth = !isNaN(maxWidth) && maxWidth > 0 ? maxWidth : null;
-      if (this.panelMaxWidth === null && isWdFull) {
-        this.panelMaxWidth = panelRect.width;
-      }
+      const maxWidthVal = Number(getComputedStyle(this.originRef.nativeElement).getPropertyValue('max-width').replace('px', ''));
+      const maxWidth: number = !isNaN(maxWidthVal) ? maxWidthVal : 0;
+      const position: string = this.positionValue.toString();
 
-      if (!isWdFull && isPositionRight) {
-        this.panelLeft = null;
-        this.panelRight = -panelRect.width;
-      }
-
-      console.log(`open(); panelMinWidth=${this.panelMinWidth} panelMaxWidth=${this.panelMaxWidth}`); // #
-
-      const borderRadius = panelRect.height > 0 ? NumberUtil.roundTo100(panelRect.height / 10) : null;
-      HtmlElemUtil.setProperty(this.hostRef, '--glnacp-border-radius', NumberUtil.str(borderRadius)?.concat('px'));
-
+      this.panelConfig = { originRect, hostRect, maxWidth, isWdFull, position };
       this.changeDetectorRef.markForCheck();
       this.opened.emit();
     }
@@ -253,12 +236,23 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
     this.changeDetectorRef.markForCheck();
   }
   /** Callback when the panel is attached. */
-  public attached = (elem: ElementRef<HTMLElement>): void => {
+  /*public attached = (elem: ElementRef<HTMLElement>, position: GlnAutocompletePosition, origWidth: number | null, wdFull: boolean): void => {
     console.log(`attached(); elem=`, elem); // #
-  };
+    if (origWidth != null) {
+      if (!wdFull) {
+        if (position === GlnAutocompletePosition.end) {
+          this.panelLeft = null;
+          this.panelRight = -origWidth;
+        } else if (position === GlnAutocompletePosition.center) {
+          console.log(``); // #
+        }
+        this.changeDetectorRef.markForCheck(); // ?
+      }
+    }
+  };*/
 
   /** Callback when the panel is detached. */
-  public detached = (elem: ElementRef<HTMLElement>): void => {
+  /*public detached = (elem: ElementRef<HTMLElement>): void => {
     console.log(`detached(); elem=`, elem); // #
     this.originRef = null;
     this.panelLeft = null;
@@ -266,7 +260,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
     this.panelMaxWidth = null;
     this.panelRight = null;
     this.panelTop = null;
-  };
+  };*/
 
   public getPanelClass(
     list: string | string[] | Set<string> | { [key: string]: any } | undefined
@@ -274,18 +268,5 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
     return list ?? '';
   }
 
-  // ** Public methods **
-
-  private getPanelRect(originRef: ElementRef<HTMLElement> | null, hostRef: ElementRef<HTMLElement> | null): DOMRect {
-    const result: DOMRect = new DOMRect();
-    if (originRef && hostRef) {
-      const originRect: DOMRect = originRef.nativeElement.getBoundingClientRect();
-      const hostRect: DOMRect = hostRef.nativeElement.getBoundingClientRect();
-      result.x = originRect.left - hostRect.left;
-      result.y = originRect.bottom - hostRect.top;
-      result.width = originRect.width;
-      result.height = originRect.height;
-    }
-    return result;
-  }
+  // ** Private methods **
 }

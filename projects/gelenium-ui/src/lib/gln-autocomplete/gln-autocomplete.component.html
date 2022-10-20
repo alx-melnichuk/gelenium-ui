@@ -49,14 +49,7 @@
 
 <ng-template [ngIf]="isPanelOpen">
   <div glnacp-container
-    glnAutocompletePanel
-    (attached)="attached($event)"
-    (detached)="detached($event)"
-    [style.top.px]="panelTop"
-    [style.left.px]="panelLeft"
-    [style.right.px]="panelRight"
-    [style.minWidth.px]="panelMinWidth"
-    [style.maxWidth.px]="panelMaxWidth">
+    [glnAutocompletePanel]="panelConfig">
     <div glnacp-wrap>
       <div glnac-panel
         class="gln-autocomplete-panel"

@@ -10,10 +10,13 @@ app-cm-autocomplete-basic {
 		text-align: center;
 	}
 	.aca-middle {
-    width: 160px;
+    width: 170px;
 	}
 
-
+  .aca-large {
+    width: 230px;
+    max-width: 250px;
+  }
 
   .elem1 {
     // min-width: 160px;
