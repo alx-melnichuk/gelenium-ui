@@ -46,13 +46,18 @@ export class CmAutocompleteBasicComponent {
   public formGroup01: FormGroup = new FormGroup(this.control01);
 
   // Block "Attributes".
-  public fruitsB = ['mango', 'ripe lemon', 'gorgeous orange', 'succulent watermelon'];
+  // prettier-ignore
+  public fruitsB = [
+    'mango', 'ripe lemon', 'gorgeous orange',
+    'african cherry orange', 'succulent watermelon'
+  ];
   public exterior02b = 'outlined';
   public control02b = {
     model02i: new FormControl(null, []),
     model02j: new FormControl(null, []),
     model02k: new FormControl(null, []),
     model02l: new FormControl(null, []),
+    model02m: new FormControl(null, []),
   };
   public formGroup02b: FormGroup = new FormGroup(this.control02b);
 
@@ -64,11 +69,11 @@ export class CmAutocompleteBasicComponent {
     'grapes'    , 'guava'    , 'iwi'       , 'jackfruit' , 'jamun'        ,
     'jujube'    , 'lemon'    , 'lime'      , 'longan'    , 'loquat'       ,
     'lychee'    , 'mandarin' , 'mango'     , 'melon'     , 'mulberry'     ,
-    'nectarine' , 'olive'    , 'orange'    , 'palm fruit', 'papaya'       ,
-    'passion fruit', 'peach' , 'pear'      , 'persimmon' , 'pineapple'    ,
-    'plum'  , 'pomegranate', 'prickly pear', 'pumpkin'   , 'quince'       ,
-    'raspberry', 'red currant', 'sapodilla', 'satsuma'   , 'strawberry'   ,
-    'sweet lemon', 'tamarind', 'tangerine' , 'watermelon'
+    'nectarine' , 'kiwi'     , 'olive'     , 'orange'    , 'palm fruit'   ,
+    'papaya', 'passion fruit', 'peach'     , 'pear'      , 'persimmon'    ,
+    'pineapple' , 'plum'  , 'pomegranate', 'prickly pear', 'pumpkin'      ,
+    'quince'    , 'raspberry', 'red currant', 'sapodilla', 'satsuma'      ,
+    'strawberry','sweet lemon', 'tamarind' , 'tangerine' , 'watermelon'
   ];
 
   public formGroup0: FormGroup = new FormGroup({

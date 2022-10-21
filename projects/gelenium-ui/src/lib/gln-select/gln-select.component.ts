@@ -246,7 +246,6 @@ export class GlnSelectComponent
   public scrollStrategy: ScrollStrategy;
   /** The position and dimensions for the trigger's bounding box. */
   public triggerRect: DOMRect | null = null;
-  // public valueInit: boolean | null = null; // Binding attribute "isValueInit".
   public visibleSizeVal: number | null = null; // Binding attribute "visibleSize".
 
   private indexFirstVisibleOption: number = -1;
@@ -669,8 +668,8 @@ export class GlnSelectComponent
     }
     const visibleSize = this.visibleSizeVal ?? 0;
     if (visibleSize > 0 && this.optionHeight > 0) {
-      const maxHeightOfSelectionPanel = this.optionHeight * visibleSize;
-      HtmlElemUtil.setProperty(overlayRef, '--glnslpo-max-height', NumberUtil.str(maxHeightOfSelectionPanel)?.concat('px'));
+      const maxHeightOfOptionsPanel = this.optionHeight * visibleSize;
+      HtmlElemUtil.setProperty(overlayRef, '--glnslpo-max-height', NumberUtil.str(maxHeightOfOptionsPanel)?.concat('px'));
     }
     // We cannot get the actual sizes and positions of elements if they are affected by a transformation.
     // Therefore, we first get all the data, and then add attributes for animation and transformation.

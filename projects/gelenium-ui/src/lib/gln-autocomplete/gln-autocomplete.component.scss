@@ -85,7 +85,7 @@ gln-autocomplete {
   [glnac-panel] {
     border-radius: var(--glnacp-border-radius, unset);
     box-sizing: border-box;
-    max-height: var(--glnacpo-max-height, 60vh);
+    max-height: var(--glnacpo-max-height, 80vh);
     min-height: 16px;
     min-width: 16px;
     overflow: auto;

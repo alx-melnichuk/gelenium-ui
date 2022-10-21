@@ -60,6 +60,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = '';
   @Input()
   public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
+  @Input()
+  public visibleSize: number = 0;
 
   @Input()
   public wdFull: string | null | undefined;
@@ -99,6 +101,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   public panelClassList: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
   public panelConfig: GlnAutocompletePanelConfig | null = null;
   public positionValue: GlnAutocompletePosition = GlnAutocompletePosition.start; // Binding attribute "position" ('start' | 'center' | 'end').
+  public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
 
   constructor(
     // // eslint-disable-next-line @typescript-eslint/ban-types
@@ -130,6 +133,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       this.positionValue = GlnAutocompletePositionUtil.create(this.position ?? (this.currConfig.position || null));
     }
+    if (changes['visibleSize'] || (changes['config'] && this.visibleSize == null && this.currConfig.visibleSize != null)) {
+      this.visibleSizeValue = this.visibleSize || this.currConfig?.visibleSize || null;
+    }
     if (changes['wdFull']) {
       this.isWdFull = !!BooleanUtil.init(this.wdFull);
     }
@@ -144,6 +150,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
     }
     if (this.positionValue == null) {
       this.positionValue = GlnAutocompletePositionUtil.create(this.currConfig.position || null);
+    }
+    if (this.visibleSizeValue == null) {
+      this.visibleSizeValue = this.currConfig?.visibleSize || null;
     }
   }
 
@@ -170,7 +179,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   /** Open the autocomplete suggestion panel. */
   public openPanel = (originRef: ElementRef<HTMLElement>): void => {
     console.log(`openPanel();`); // #
-    this.open(originRef, !!BooleanUtil.init(this.wdFull));
+    this.open(originRef, this.isWdFull, this.positionValue, this.visibleSizeValue || 0);
   };
 
   /** Close the autocomplete suggestion panel. */
@@ -182,7 +191,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   public toggle(): void {
     this.isPanelOpen = !this.isPanelOpen;
     if (this.isPanelOpen) {
-      this.open(this.hostRef, !!BooleanUtil.init(this.wdFull));
+      this.open(this.hostRef, this.isWdFull, this.positionValue, this.visibleSizeValue || 0);
     } else {
       this.close();
     }
@@ -192,28 +201,10 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   // ** Public methods **
 
   /** Open overlay panel. */
-  public open(originRef: ElementRef<HTMLElement>, isWdFull: boolean): void {
-    /*if (!this.disabled && originRef != null && !this.isPanelOpen && this.options.length > 0) {
-      this.originRef = originRef;
-      this.isPanelOpen = true;
-      const panelRect: GlnRect = this.getPanelRect(this.originRef, this.hostRef);
-      this.panelHeight = panelRect.height;
-      this.panelLeft = panelRect.x;
-      this.panelTop = panelRect.y;
-      this.panelWidth = panelRect.width;
-      this.panelFontSize = Number((getComputedStyle(this.originRef.nativeElement).fontSize || '0').replace('px', ''));
-      console.log(`open(); panelTop=${this.panelTop} panelLeft=${this.panelLeft} panelFontSize=${this.panelFontSize}`); // #
-      this.changeDetectorRef.markForCheck();
-      this.opened.emit();
-    }*/
+  public open(originRef: ElementRef<HTMLElement>, isWdFull: boolean, position: GlnAutocompletePosition, visibleSize: number): void {
     if (!this.disabled && originRef != null && !this.isPanelOpen && this.options.length > 0) {
       this.originRef = originRef;
       this.isPanelOpen = true;
-      // this.hasPanelAnimation = !this.noAnimation;
-      // this.markedOption = this.selectedOptions.length > 0 ? this.selectedOptions[this.selectedOptions.length - 1] : null;
-      // this.triggerRect = this.triggerRef.nativeElement.getBoundingClientRect();
-      // this.isFocusAttrOnFrame = false;
-      // this.panelFontSize = Number((getComputedStyle(this.originRef.nativeElement).fontSize || '0').replace('px', ''));
 
       const originRect: DOMRect = this.originRef.nativeElement.getBoundingClientRect();
       console.log(`Panel();   origin left=${originRect.left} right=${originRect.right} top=${originRect.top} height=${originRect.height}`); // #
@@ -222,9 +213,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
 
       const maxWidthVal = Number(getComputedStyle(this.originRef.nativeElement).getPropertyValue('max-width').replace('px', ''));
       const maxWidth: number = !isNaN(maxWidthVal) ? maxWidthVal : 0;
-      const position: string = this.positionValue.toString();
 
-      this.panelConfig = { originRect, hostRect, maxWidth, isWdFull, position };
+      this.panelConfig = { hostRect, isWdFull, maxWidth, options: this.options, originRect, position, visibleSize };
       this.changeDetectorRef.markForCheck();
       this.opened.emit();
     }

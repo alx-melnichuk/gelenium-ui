@@ -1,22 +1,25 @@
 import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { GlnOptionComponent } from '../gln-option/gln-option.component';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
 import { GlnAutocompletePosition } from './gln-autocomplete.interface';
 
 export interface GlnAutocompletePanelConfig {
-  originRect: DOMRect;
   hostRect: DOMRect;
-  maxWidth: number;
   isWdFull: boolean;
+  maxWidth: number;
+  options: GlnOptionComponent[];
+  originRect: DOMRect;
   position: string; // Horizontal position = 'start' | 'center' | 'end';
+  visibleSize: number;
 }
 
 @Directive({
   selector: '[glnAutocompletePanel]',
 })
 export class GlnAutocompletePanelDirective implements OnInit, OnDestroy {
-  @Input()
-  public glnAutocompletePanel: GlnAutocompletePanelConfig | null | undefined;
+  @Input('glnAutocompletePanel')
+  public config: GlnAutocompletePanelConfig | null | undefined;
 
   @Output()
   readonly attached: EventEmitter<ElementRef<HTMLElement>> = new EventEmitter();
@@ -30,61 +33,119 @@ export class GlnAutocompletePanelDirective implements OnInit, OnDestroy {
   private right: number | null = null;
   private top: number | null = null;
 
-  constructor(public hostRef: ElementRef<HTMLElement>, private changeDetectorRef: ChangeDetectorRef) {
-    console.log(`GlnAutocompletePanel()`); // #
-  }
+  constructor(public hostRef: ElementRef<HTMLElement>, private changeDetectorRef: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
-    console.log(`OnInit()`); // #
-    this.prepareProperties(this.glnAutocompletePanel);
+    const config = this.config;
+    this.prepareCssBorderRadius(config?.originRect.height);
+    this.prepareCssMaxHeight(config?.visibleSize || 0, this.getOptionHeight(config?.options || []));
+    this.prepareCssMaxWidthAndMinWidth(config?.isWdFull, config?.originRect.width, config?.maxWidth);
+    this.prepareCssLeftAndRight(config?.isWdFull, config?.position, config?.originRect, config?.hostRect.left);
+    this.prepareCssTop(config?.originRect, config?.hostRect);
+
+    this.changeDetectorRef.markForCheck();
     this.attached.emit(this.hostRef);
   }
 
   public ngOnDestroy(): void {
-    console.log(`OnDestroy()`); // #
     this.detached.emit(this.hostRef);
   }
 
   // ** Private methods **
 
-  private prepareProperties(config: GlnAutocompletePanelConfig | null | undefined): void {
+  private prepareCssBorderRadius(originRectHeight?: number): void {
     this.borderRadius = null;
-    this.maxWidth = null;
-    this.minWidth = null;
+    if (originRectHeight && originRectHeight > 0) {
+      this.borderRadius = originRectHeight > 0 ? NumberUtil.roundTo100(originRectHeight / 10) : null;
+    }
+    HtmlElemUtil.setProperty(this.hostRef, '--glnacp-border-radius', NumberUtil.str(this.borderRadius)?.concat('px'));
+  }
+  // Should only be called after calling prepareCssMaxWidthAndMinWidth(), which specifies the width of the panel.
+  private prepareCssLeftAndRight(isWdFull?: boolean, position?: string, originRect?: DOMRect, hostRectLeft?: number): void {
     this.left = null;
     this.right = null;
-    this.top = null;
-
-    if (config != null) {
-      this.borderRadius = config.originRect.height > 0 ? NumberUtil.roundTo100(config.originRect.height / 10) : null;
-      this.minWidth = config.originRect.width;
-      this.top = config.originRect.bottom - config.hostRect.top;
-      if (!config.isWdFull) {
-        const clientRect = this.hostRef.nativeElement.getBoundingClientRect();
-        switch (config.position) {
-          case GlnAutocompletePosition.end:
-            this.right = -config.originRect.width;
-            break;
+    if (isWdFull != null && originRect != null && hostRectLeft != null) {
+      const isJoinOnLeftSide = NumberUtil.roundTo100(hostRectLeft - originRect.left) < 0.02;
+      if (!isWdFull) {
+        switch (position) {
           case GlnAutocompletePosition.center:
-            this.left = NumberUtil.roundTo100((config.originRect.width - clientRect.width) / 2);
+            const clientRect = this.hostRef.nativeElement.getBoundingClientRect();
+            const delta = NumberUtil.roundTo100((originRect.width - clientRect.width) / 2);
+            if (isJoinOnLeftSide) {
+              this.left = delta;
+            } else {
+              this.right = delta;
+            }
+            break;
+          case GlnAutocompletePosition.end:
+            this.right = isJoinOnLeftSide ? -originRect.width : 0;
             break;
           default:
             // GlnAutocompletePosition.start
-            this.left = config.originRect.left - config.hostRect.left;
+            this.left = isJoinOnLeftSide ? 0 : -originRect.width;
             break;
         }
       } else {
-        this.maxWidth = config.maxWidth > config.originRect.width ? config.maxWidth : config.originRect.width;
-        this.left = config.originRect.left - config.hostRect.left;
+        // isWdFull
+        this.left = isJoinOnLeftSide ? 0 : -originRect.width;
       }
     }
-    HtmlElemUtil.setProperty(this.hostRef, '--glnacp-border-radius', NumberUtil.str(this.borderRadius)?.concat('px'));
-    HtmlElemUtil.setProperty(this.hostRef, 'min-width', NumberUtil.str(this.minWidth)?.concat('px'));
-    HtmlElemUtil.setProperty(this.hostRef, 'max-width', NumberUtil.str(this.maxWidth)?.concat('px'));
     HtmlElemUtil.setProperty(this.hostRef, 'left', NumberUtil.str(this.left)?.concat('px'));
     HtmlElemUtil.setProperty(this.hostRef, 'right', NumberUtil.str(this.right)?.concat('px'));
-    HtmlElemUtil.setProperty(this.hostRef, 'top', NumberUtil.str(this.top)?.concat('px'));
+  }
 
-    this.changeDetectorRef.markForCheck();
+  private prepareCssMaxWidthAndMinWidth(isWdFull?: boolean, originRectWidth?: number, maxWidth?: number): void {
+    this.maxWidth = null;
+    this.minWidth = null;
+    if (originRectWidth != null) {
+      this.minWidth = originRectWidth;
+      if (isWdFull) {
+        this.maxWidth = maxWidth != null && maxWidth > originRectWidth ? maxWidth : originRectWidth;
+      }
+    }
+    HtmlElemUtil.setProperty(this.hostRef, 'min-width', NumberUtil.str(this.minWidth)?.concat('px'));
+    HtmlElemUtil.setProperty(this.hostRef, 'max-width', NumberUtil.str(this.maxWidth)?.concat('px'));
+  }
+
+  private prepareCssTop(originRect?: DOMRect, hostRect?: DOMRect): void {
+    this.top = null;
+    if (originRect != null && hostRect) {
+      this.top = NumberUtil.roundTo100(originRect.bottom - hostRect.top);
+    }
+    HtmlElemUtil.setProperty(this.hostRef, 'top', NumberUtil.str(this.top)?.concat('px'));
+  }
+
+  private prepareCssMaxHeight(visibleSize: number, optionHeight: number): void {
+    let maxHeightOfOptionsPanel: number | null = null;
+    if (visibleSize > 0 && optionHeight > 0) {
+      maxHeightOfOptionsPanel = optionHeight * visibleSize;
+    }
+    HtmlElemUtil.setProperty(this.hostRef, '--glnacpo-max-height', NumberUtil.str(maxHeightOfOptionsPanel)?.concat('px'));
+  }
+  private getHeight(value: ElementRef<HTMLElement> | null): number {
+    return value ? Number(getComputedStyle(value.nativeElement).getPropertyValue('height').replace('px', '')) : 0;
+  }
+  /** Get the height of the option. */
+  private getOptionHeight(options: GlnOptionComponent[]): number {
+    const value: number[] = [];
+    const count: number[] = [];
+    let maxCount = -1;
+    let resultIndex = -1;
+    for (let i = 0; i < options.length && maxCount < 4; i++) {
+      const height = this.getHeight(options[i].hostRef);
+      let index = value.indexOf(height);
+      if (index === -1) {
+        value.push(height);
+        count.push(1);
+        index = value.length - 1;
+      } else {
+        count[index]++;
+      }
+      if (count[index] > maxCount) {
+        maxCount = count[index];
+        resultIndex = index;
+      }
+    }
+    return resultIndex > -1 ? value[resultIndex] : 0;
   }
 }
