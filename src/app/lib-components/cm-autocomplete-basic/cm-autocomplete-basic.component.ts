@@ -81,7 +81,9 @@ export class CmAutocompleteBasicComponent {
   });
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor() {
+    console.log('#');
+  }
 
   // Block "Attributes".
   public capitalizeFirstLetter(value: string): string {
@@ -90,5 +92,12 @@ export class CmAutocompleteBasicComponent {
 
   public doInput(event: Event): void {
     console.log(`doInput() event.value=`, (event.target as any).value);
+  }
+
+  public handlerInput(event: any): void {
+    console.log(event.target.value);
+  }
+  public log(eventTarget: any): void {
+    console.log(eventTarget.value);
   }
 }

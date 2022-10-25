@@ -29,6 +29,7 @@ import { GlnAutocompleteOptions } from './gln-autocomplete-options.interface';
 import { GlnAutocompleteConfig } from './gln-autocomplete-config.interface';
 import { GlnAutocompletePosition, GlnAutocompletePositionUtil } from './gln-autocomplete.interface';
 import { GlnAutocompletePanelConfig } from './gln-autocomplete-panel.directive';
+import { GlnAutocompleteTrigger } from './gln-autocomplete-trigger.interface';
 
 let uniqueIdCounter = 0;
 
@@ -93,15 +94,16 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   public currConfig: GlnAutocompleteConfig;
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public hasPanelAnimation: boolean = false;
-  public isPanelOpen: boolean = false;
+  public isOptionsPanelOpen: boolean = false;
   public isWdFull: boolean = false;
   public multiple: boolean | null = null; // Binding attribute "isMultiple". // interface GlnOptionParent
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
-  public originRef: ElementRef<HTMLElement> | null = null;
   public panelClassList: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
   public panelConfig: GlnAutocompletePanelConfig | null = null;
   public positionValue: GlnAutocompletePosition = GlnAutocompletePosition.start; // Binding attribute "position" ('start' | 'center' | 'end').
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
+
+  private autocompleteTrigger: GlnAutocompleteTrigger | null = null;
 
   constructor(
     // // eslint-disable-next-line @typescript-eslint/ban-types
@@ -159,27 +161,33 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   // ** interface GlnOptionParent - start **
 
   public optionSelection(optionItem: GlnOptionComponent): void {
-    console.log(`optionSelection(); optionItem=`, optionItem); // #
-    // Promise.resolve().then(() => {
-    //   this.selectionOptionElement(optionItem);
-    //   if (this.isPanelOpen && !this.isFocused) {
-    //     this.isFocused = true;
-    //     this.focus();
-    //   }
-    //   if (!this.multiple) {
-    //     this.close();
-    //   }
-    // });
+    console.log(`optionSelection(); optionItem.value=`, optionItem.value); // #
+    Promise.resolve().then(() => {
+      if (this.autocompleteTrigger) {
+        this.autocompleteTrigger.setValueForInput(String(optionItem.value));
+        console.log(`optionSelection(); autocompleteTrigger.setValueForInput(String(optionItem.value));`); // #
+        if (this.isOptionsPanelOpen) {
+          this.autocompleteTrigger?.setFocus();
+          this.close();
+        }
+      }
+    });
   }
 
   // ** interface GlnOptionParent - finish **
 
   // ** interface GlnAutocompleteOptions - start **
 
+  /** A sign that the panel is open. */
+  public isPanelOpen = (): boolean => {
+    return this.isOptionsPanelOpen;
+  };
+
   /** Open the autocomplete suggestion panel. */
-  public openPanel = (originRef: ElementRef<HTMLElement>): void => {
+  public openPanel = (autocompleteTrigger: GlnAutocompleteTrigger): void => {
     console.log(`openPanel();`); // #
-    this.open(originRef, this.isWdFull, this.positionValue, this.visibleSizeValue || 0);
+    this.autocompleteTrigger = autocompleteTrigger;
+    this.open(this.autocompleteTrigger.getOriginRef(), this.isWdFull, this.positionValue, this.visibleSizeValue || 0);
   };
 
   /** Close the autocomplete suggestion panel. */
@@ -189,8 +197,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   };
 
   public toggle(): void {
-    this.isPanelOpen = !this.isPanelOpen;
-    if (this.isPanelOpen) {
+    this.isOptionsPanelOpen = !this.isOptionsPanelOpen;
+    if (this.isOptionsPanelOpen) {
       this.open(this.hostRef, this.isWdFull, this.positionValue, this.visibleSizeValue || 0);
     } else {
       this.close();
@@ -202,16 +210,15 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
 
   /** Open overlay panel. */
   public open(originRef: ElementRef<HTMLElement>, isWdFull: boolean, position: GlnAutocompletePosition, visibleSize: number): void {
-    if (!this.disabled && originRef != null && !this.isPanelOpen && this.options.length > 0) {
-      this.originRef = originRef;
-      this.isPanelOpen = true;
+    if (!this.disabled && originRef != null && !this.isOptionsPanelOpen && this.options.length > 0) {
+      this.isOptionsPanelOpen = true;
 
-      const originRect: DOMRect = this.originRef.nativeElement.getBoundingClientRect();
+      const originRect: DOMRect = originRef.nativeElement.getBoundingClientRect();
       console.log(`Panel();   origin left=${originRect.left} right=${originRect.right} top=${originRect.top} height=${originRect.height}`); // #
       const hostRect: DOMRect = this.hostRef.nativeElement.getBoundingClientRect();
       console.log(`Panel();   host   left=${hostRect.left} right=${hostRect.right} top=${hostRect.top} height=${hostRect.height}`); // #
 
-      const maxWidthVal = Number(getComputedStyle(this.originRef.nativeElement).getPropertyValue('max-width').replace('px', ''));
+      const maxWidthVal = Number(getComputedStyle(originRef.nativeElement).getPropertyValue('max-width').replace('px', ''));
       const maxWidth: number = !isNaN(maxWidthVal) ? maxWidthVal : 0;
 
       this.panelConfig = { hostRect, isWdFull, maxWidth, options: this.options, originRect, position, visibleSize };
@@ -221,8 +228,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   }
   /** Closes the panel and focuses the main element. */
   public close(): void {
-    this.originRef = null;
-    this.isPanelOpen = false;
+    this.autocompleteTrigger = null;
+    this.isOptionsPanelOpen = false;
     this.changeDetectorRef.markForCheck();
   }
   /** Callback when the panel is attached. */
@@ -258,5 +265,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
     return list ?? '';
   }
 
+  public log(text: string): void {
+    console.log(text);
+  }
   // ** Private methods **
 }

@@ -1,7 +1,9 @@
-import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
+
 import { GlnAutocompletePosition } from './gln-autocomplete.interface';
 
 export interface GlnAutocompletePanelConfig {
@@ -33,7 +35,7 @@ export class GlnAutocompletePanelDirective implements OnInit, OnDestroy {
   private right: number | null = null;
   private top: number | null = null;
 
-  constructor(public hostRef: ElementRef<HTMLElement>, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(public hostRef: ElementRef<HTMLElement>) {}
 
   public ngOnInit(): void {
     const config = this.config;
@@ -43,7 +45,8 @@ export class GlnAutocompletePanelDirective implements OnInit, OnDestroy {
     this.prepareCssLeftAndRight(config?.isWdFull, config?.position, config?.originRect, config?.hostRect.left);
     this.prepareCssTop(config?.originRect, config?.hostRect);
 
-    this.changeDetectorRef.markForCheck();
+    this.settingCss(this.hostRef, this.borderRadius, this.left, this.right);
+
     this.attached.emit(this.hostRef);
   }
 
@@ -58,7 +61,7 @@ export class GlnAutocompletePanelDirective implements OnInit, OnDestroy {
     if (originRectHeight && originRectHeight > 0) {
       this.borderRadius = originRectHeight > 0 ? NumberUtil.roundTo100(originRectHeight / 10) : null;
     }
-    HtmlElemUtil.setProperty(this.hostRef, '--glnacp-border-radius', NumberUtil.str(this.borderRadius)?.concat('px'));
+    // HtmlElemUtil.setProperty(this.hostRef, '--glnacp-border-radius', NumberUtil.str(this.borderRadius)?.concat('px'));
   }
   // Should only be called after calling prepareCssMaxWidthAndMinWidth(), which specifies the width of the panel.
   private prepareCssLeftAndRight(isWdFull?: boolean, position?: string, originRect?: DOMRect, hostRectLeft?: number): void {
@@ -90,8 +93,8 @@ export class GlnAutocompletePanelDirective implements OnInit, OnDestroy {
         this.left = isJoinOnLeftSide ? 0 : -originRect.width;
       }
     }
-    HtmlElemUtil.setProperty(this.hostRef, 'left', NumberUtil.str(this.left)?.concat('px'));
-    HtmlElemUtil.setProperty(this.hostRef, 'right', NumberUtil.str(this.right)?.concat('px'));
+    // HtmlElemUtil.setProperty(this.hostRef, 'left', NumberUtil.str(this.left)?.concat('px'));
+    // HtmlElemUtil.setProperty(this.hostRef, 'right', NumberUtil.str(this.right)?.concat('px'));
   }
 
   private prepareCssMaxWidthAndMinWidth(isWdFull?: boolean, originRectWidth?: number, maxWidth?: number): void {
@@ -107,6 +110,13 @@ export class GlnAutocompletePanelDirective implements OnInit, OnDestroy {
     HtmlElemUtil.setProperty(this.hostRef, 'max-width', NumberUtil.str(this.maxWidth)?.concat('px'));
   }
 
+  private settingCss(elem: ElementRef<HTMLElement>, borderRadius: number | null, left: number | null, right: number | null): void {
+    // Set Property 'borderRadius'.
+    // Set Property 'left', 'right'.
+    HtmlElemUtil.setProperty(elem, '--glnacp-border-radius', NumberUtil.str(borderRadius)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, 'left', NumberUtil.str(left)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, 'right', NumberUtil.str(right)?.concat('px'));
+  }
   private prepareCssTop(originRect?: DOMRect, hostRect?: DOMRect): void {
     this.top = null;
     if (originRect != null && hostRect) {

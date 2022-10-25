@@ -3,13 +3,13 @@
   type="button"
   cdkOverlayOrigin
   #trigger="cdkOverlayOrigin">
-  {{isPanelOpen ? "Close" : "Open"}}
+  {{isOptionsPanelOpen ? "Close" : "Open"}}
 </button>-->
 
 <!-- This template displays the overlay content and is connected to the button -->
 <!--<ng-template cdkConnectedOverlay
   [cdkConnectedOverlayOrigin]="hostRef"
-  [cdkConnectedOverlayOpen]="isPanelOpen">
+  [cdkConnectedOverlayOpen]="isOptionsPanelOpen">
   <ul class="example-list">
     <li>Item 1</li>
     <li>Item 2</li>
@@ -44,12 +44,13 @@
 <button (click)="toggle()"
   style="position: absolute; left: 0px; top: -100px;"
   type="button">
-  {{isPanelOpen ? "Close" : "Open"}}
+  {{isOptionsPanelOpen ? "Close" : "Open"}}
 </button>
 
-<ng-template [ngIf]="isPanelOpen">
+<ng-template [ngIf]="isOptionsPanelOpen">
   <div glnacp-container
-    [glnAutocompletePanel]="panelConfig">
+    [glnAutocompletePanel]="panelConfig"
+    focusin9="log('focusin')">
     <div glnacp-wrap>
       <div glnac-panel
         class="gln-autocomplete-panel"
@@ -75,7 +76,7 @@
     +left: 299.812px;
   -->
 <!--
-<ng-template [ngIf]="isPanelOpen">
+<ng-template [ngIf]="isOptionsPanelOpen">
   <div glnacp-container
     class="gln-autocomplete-panel-container"
     [style.top.px]="panelTop > 0 ? panelTop : null"
@@ -88,8 +89,8 @@
         [style.maxWidth]: inherit; panelMaxWidth
       [ngClass]="[(noAnimation ? 'gln-no-animation' : '')]"
       [attr.noAnm]="noAnimation ? '' : null"
-      (animationend)="hasPanelAnimation = isPanelOpen"
-      (animationcancel)="hasPanelAnimation = isPanelOpen"
+      (animationend)="hasPanelAnimation = isOptionsPanelOpen"
+      (animationcancel)="hasPanelAnimation = isOptionsPanelOpen"
       - - >
     </div>
   </div>
