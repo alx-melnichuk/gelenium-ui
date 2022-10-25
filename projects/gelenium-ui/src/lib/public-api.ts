@@ -1,6 +1,7 @@
 export * from './gelenium-ui.service';
 export * from './gelenium-ui.module';
 
+export * from './_classes/public-api';
 export * from './_decorators/public-api';
 export * from './_utils/public-api';
 
