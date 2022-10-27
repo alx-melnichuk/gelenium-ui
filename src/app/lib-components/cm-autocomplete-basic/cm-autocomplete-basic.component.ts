@@ -53,7 +53,10 @@ export class CmAutocompleteBasicComponent {
   ];
   public exterior02b = 'outlined';
   public control02b = {
-    model02i: new FormControl(null, []),
+    model02d: new FormControl(null, []),
+    model02e: new FormControl(null, []),
+    // demo
+    // model02i: new FormControl(null, []),
     model02j: new FormControl(null, []),
     model02k: new FormControl(null, []),
     model02l: new FormControl(null, []),

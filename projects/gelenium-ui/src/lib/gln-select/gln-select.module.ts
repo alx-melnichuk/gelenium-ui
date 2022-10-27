@@ -27,7 +27,7 @@ import { GlnSelectTriggerDirective } from './gln-select-trigger.directive';
     GlnOptionModule,
     GlnOptionGroupModule,
   ],
-  exports: [GlnSelectComponent, GlnSelectTriggerDirective, GlnHintOrErrorModule, GlnOptionModule, GlnOptionGroupModule],
+  exports: [GlnSelectComponent, GlnSelectTriggerDirective, GlnOptionModule, GlnOptionGroupModule],
   providers: [GLN_SELECT_SCROLL_STRATEGY_PROVIDER_REPOSITION],
 })
 export class GlnSelectModule {}

@@ -1,3 +1,5 @@
+import { ElementRef } from '@angular/core';
+
 // Horizontal position
 export type GlnAutocompletePositionType = 'start' | 'center' | 'end';
 
@@ -27,4 +29,16 @@ export class GlnAutocompletePositionUtil {
     }
     return result;
   }
+}
+
+export interface Focusable {
+  focus(): void;
+}
+
+export interface HostableRef {
+  hostRef: ElementRef<HTMLElement>;
+}
+
+export interface Frameable {
+  frameComp: HostableRef;
 }

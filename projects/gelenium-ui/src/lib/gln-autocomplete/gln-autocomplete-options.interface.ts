@@ -7,4 +7,6 @@ export interface GlnAutocompleteOptions {
   openPanel(autocompleteTrigger: GlnAutocompleteTrigger): void;
   // Close the autocomplete suggestion panel.
   closePanel(): void;
+  // Move the option marker by the amount of the offset.
+  movingMarkedOption(delta: number): void;
 }

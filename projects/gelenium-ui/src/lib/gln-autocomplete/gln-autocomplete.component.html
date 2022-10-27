@@ -40,19 +40,15 @@
 </ng-template>-->
 
 
-
-<button (click)="toggle()"
-  style="position: absolute; left: 0px; top: -100px;"
-  type="button">
-  {{isOptionsPanelOpen ? "Close" : "Open"}}
-</button>
-
 <ng-template [ngIf]="isOptionsPanelOpen">
   <div glnacp-container
     [glnAutocompletePanel]="panelConfig"
     focusin9="log('focusin')">
     <div glnacp-wrap>
       <div glnac-panel
+        glnOptionsPanel
+        [glnOptionsPanelOptions]="options"
+        [glnOptionsPanelVisibleSize]="visibleSizeValue"
         class="gln-autocomplete-panel"
         role="listbox"
         [id]="id"

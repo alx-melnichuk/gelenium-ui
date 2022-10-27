@@ -8,7 +8,7 @@ import { GlnAutocompletePosition } from './gln-autocomplete.interface';
 
 export interface GlnAutocompletePanelConfig {
   hostRect: DOMRect;
-  isWdFull: boolean;
+  isWdOrigin: boolean;
   maxWidth: number;
   options: GlnOptionComponent[];
   originRect: DOMRect;
@@ -38,14 +38,25 @@ export class GlnAutocompletePanelDirective implements OnInit, OnDestroy {
   constructor(public hostRef: ElementRef<HTMLElement>) {}
 
   public ngOnInit(): void {
-    const config = this.config;
-    this.prepareCssBorderRadius(config?.originRect.height);
-    this.prepareCssMaxHeight(config?.visibleSize || 0, this.getOptionHeight(config?.options || []));
-    this.prepareCssMaxWidthAndMinWidth(config?.isWdFull, config?.originRect.width, config?.maxWidth);
-    this.prepareCssLeftAndRight(config?.isWdFull, config?.position, config?.originRect, config?.hostRect.left);
-    this.prepareCssTop(config?.originRect, config?.hostRect);
+    // Prepare and setting property 'borderRadius'.
+    this.prepareCssBorderRadius(this.config?.originRect.height);
+    this.settingCssBorderRadius(this.hostRef, this.borderRadius);
 
-    this.settingCss(this.hostRef, this.borderRadius, this.left, this.right);
+    // #// Prepare and setting property 'max-height'.
+    // #this.prepareCssMaxHeight(this.config?.visibleSize || 0, this.getOptionHeight(this.config?.options || [])); /*+*/
+    // #this.settingCssMaxHeight(this.hostRef, this.maxHeight); /*+*/
+
+    // Prepare and setting properties: 'max-width', 'min-width'.
+    this.prepareCssMaxWidthAndMinWidth(this.config?.isWdOrigin, this.config?.originRect.width, this.config?.maxWidth);
+    this.settingCssMaxWidthAndMinWidth(this.hostRef, this.minWidth, this.maxWidth);
+
+    // Prepare and setting properties: 'left', 'right'.
+    this.prepareCssLeftAndRight(this.config?.isWdOrigin, this.config?.position, this.config?.originRect, this.config?.hostRect.left);
+    this.settingCssLeftAndRight(this.hostRef, this.left, this.right);
+
+    // Prepare and setting property 'top'.
+    this.prepareCssTop(this.config?.originRect, this.config?.hostRect);
+    this.settingCssTop(this.hostRef, this.top);
 
     this.attached.emit(this.hostRef);
   }
@@ -61,15 +72,30 @@ export class GlnAutocompletePanelDirective implements OnInit, OnDestroy {
     if (originRectHeight && originRectHeight > 0) {
       this.borderRadius = originRectHeight > 0 ? NumberUtil.roundTo100(originRectHeight / 10) : null;
     }
-    // HtmlElemUtil.setProperty(this.hostRef, '--glnacp-border-radius', NumberUtil.str(this.borderRadius)?.concat('px'));
+  }
+  // #private prepareCssMaxHeight(visibleSize: number, optionHeight: number): void {
+  // #  this.maxHeight = null;
+  // #  if (visibleSize > 0 && optionHeight > 0) {
+  // #    this.maxHeight = optionHeight * visibleSize;
+  // #  }
+  // #}
+  private prepareCssMaxWidthAndMinWidth(isWdOrigin?: boolean, originRectWidth?: number, maxWidth?: number): void {
+    this.maxWidth = null;
+    this.minWidth = null;
+    if (originRectWidth != null) {
+      this.minWidth = originRectWidth;
+      if (isWdOrigin) {
+        this.maxWidth = maxWidth != null && maxWidth > originRectWidth ? maxWidth : originRectWidth;
+      }
+    }
   }
   // Should only be called after calling prepareCssMaxWidthAndMinWidth(), which specifies the width of the panel.
-  private prepareCssLeftAndRight(isWdFull?: boolean, position?: string, originRect?: DOMRect, hostRectLeft?: number): void {
+  private prepareCssLeftAndRight(isWdOrigin?: boolean, position?: string, originRect?: DOMRect, hostRectLeft?: number): void {
     this.left = null;
     this.right = null;
-    if (isWdFull != null && originRect != null && hostRectLeft != null) {
+    if (isWdOrigin != null && originRect != null && hostRectLeft != null) {
       const isJoinOnLeftSide = NumberUtil.roundTo100(hostRectLeft - originRect.left) < 0.02;
-      if (!isWdFull) {
+      if (!isWdOrigin) {
         switch (position) {
           case GlnAutocompletePosition.center:
             const clientRect = this.hostRef.nativeElement.getBoundingClientRect();
@@ -89,54 +115,41 @@ export class GlnAutocompletePanelDirective implements OnInit, OnDestroy {
             break;
         }
       } else {
-        // isWdFull
+        // isWdOrigin
         this.left = isJoinOnLeftSide ? 0 : -originRect.width;
       }
     }
-    // HtmlElemUtil.setProperty(this.hostRef, 'left', NumberUtil.str(this.left)?.concat('px'));
-    // HtmlElemUtil.setProperty(this.hostRef, 'right', NumberUtil.str(this.right)?.concat('px'));
-  }
-
-  private prepareCssMaxWidthAndMinWidth(isWdFull?: boolean, originRectWidth?: number, maxWidth?: number): void {
-    this.maxWidth = null;
-    this.minWidth = null;
-    if (originRectWidth != null) {
-      this.minWidth = originRectWidth;
-      if (isWdFull) {
-        this.maxWidth = maxWidth != null && maxWidth > originRectWidth ? maxWidth : originRectWidth;
-      }
-    }
-    HtmlElemUtil.setProperty(this.hostRef, 'min-width', NumberUtil.str(this.minWidth)?.concat('px'));
-    HtmlElemUtil.setProperty(this.hostRef, 'max-width', NumberUtil.str(this.maxWidth)?.concat('px'));
-  }
-
-  private settingCss(elem: ElementRef<HTMLElement>, borderRadius: number | null, left: number | null, right: number | null): void {
-    // Set Property 'borderRadius'.
-    // Set Property 'left', 'right'.
-    HtmlElemUtil.setProperty(elem, '--glnacp-border-radius', NumberUtil.str(borderRadius)?.concat('px'));
-    HtmlElemUtil.setProperty(elem, 'left', NumberUtil.str(left)?.concat('px'));
-    HtmlElemUtil.setProperty(elem, 'right', NumberUtil.str(right)?.concat('px'));
   }
   private prepareCssTop(originRect?: DOMRect, hostRect?: DOMRect): void {
     this.top = null;
     if (originRect != null && hostRect) {
       this.top = NumberUtil.roundTo100(originRect.bottom - hostRect.top);
     }
-    HtmlElemUtil.setProperty(this.hostRef, 'top', NumberUtil.str(this.top)?.concat('px'));
   }
 
-  private prepareCssMaxHeight(visibleSize: number, optionHeight: number): void {
-    let maxHeightOfOptionsPanel: number | null = null;
-    if (visibleSize > 0 && optionHeight > 0) {
-      maxHeightOfOptionsPanel = optionHeight * visibleSize;
-    }
-    HtmlElemUtil.setProperty(this.hostRef, '--glnacpo-max-height', NumberUtil.str(maxHeightOfOptionsPanel)?.concat('px'));
+  private settingCssBorderRadius(elem: ElementRef<HTMLElement>, borderRadius: number | null): void {
+    HtmlElemUtil.setProperty(elem, '--glnacp-border-radius', NumberUtil.str(borderRadius)?.concat('px'));
   }
-  private getHeight(value: ElementRef<HTMLElement> | null): number {
+  // #private settingCssMaxHeight(elem: ElementRef<HTMLElement>, maxHeight: number | null): void {
+  // #  HtmlElemUtil.setProperty(elem, '--glnacpo-max-height', NumberUtil.str(maxHeight)?.concat('px'));
+  // #}
+  private settingCssMaxWidthAndMinWidth(elem: ElementRef<HTMLElement>, minWidth: number | null, maxWidth: number | null): void {
+    HtmlElemUtil.setProperty(elem, 'min-width', NumberUtil.str(minWidth)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, 'max-width', NumberUtil.str(maxWidth)?.concat('px'));
+  }
+  private settingCssLeftAndRight(elem: ElementRef<HTMLElement>, left: number | null, right: number | null): void {
+    HtmlElemUtil.setProperty(elem, 'left', NumberUtil.str(left)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, 'right', NumberUtil.str(right)?.concat('px'));
+  }
+  private settingCssTop(elem: ElementRef<HTMLElement>, top: number | null): void {
+    HtmlElemUtil.setProperty(elem, 'top', NumberUtil.str(top)?.concat('px'));
+  }
+
+  private getHeight(value: ElementRef<HTMLElement> | null): number /*+*/ {
     return value ? Number(getComputedStyle(value.nativeElement).getPropertyValue('height').replace('px', '')) : 0;
   }
   /** Get the height of the option. */
-  private getOptionHeight(options: GlnOptionComponent[]): number {
+  private getOptionHeight(options: GlnOptionComponent[]): number /*+*/ {
     const value: number[] = [];
     const count: number[] = [];
     let maxCount = -1;

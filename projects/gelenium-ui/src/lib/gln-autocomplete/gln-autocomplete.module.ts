@@ -12,7 +12,13 @@ import { GlnAutocompletePanelDirective } from './gln-autocomplete-panel.directiv
 @NgModule({
   declarations: [GlnAutocompleteComponent, GlnAutocompleteTriggerDirective, GlnAutocompletePanelDirective],
   imports: [CommonModule, OverlayModule, GlnOptionModule, GlnOptionGroupModule],
-  exports: [GlnAutocompleteComponent, GlnAutocompleteTriggerDirective, GlnOptionModule, GlnOptionGroupModule, GlnAutocompletePanelDirective],
+  exports: [
+    GlnAutocompleteComponent,
+    GlnAutocompleteTriggerDirective,
+    GlnAutocompletePanelDirective,
+    GlnOptionModule,
+    GlnOptionGroupModule,
+  ],
   // providers: [MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER],
 })
 export class GlnAutocompleteModule {}
