@@ -177,16 +177,16 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
             label="Fruit"
             [exterior]="exterior02b"
             wdFull
-            [glnAutocompleteTrigger]="autocomplete02l">
+            [glnOptionListTrigger]="optionList02l">
           </gln-input>
         </div>
-        <gln-autocomplete #autocomplete02l="glnAutocomplete"
+        <gln-option-list #optionList02l="glnOptionList"
           [visibleSize]="5">
           <gln-option *ngFor="let item of fruits"
             [value]="item">
             {{ capitalizeFirstLetter(item) }}
           </gln-option>
-        </gln-autocomplete>
+        </gln-option-list>
       </div>
 
       <ng-container *ngIf="false">

@@ -5,7 +5,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GlnAutocompleteModule, GlnInputModule } from 'gelenium-ui';
+import { GlnOptionListModule, GlnAutocompleteModule, GlnInputModule, GlnSelectModule } from 'gelenium-ui';
 
 import { CmAutocompleteBasicComponent } from './cm-autocomplete-basic.component';
 
@@ -18,6 +18,8 @@ import { CmAutocompleteBasicComponent } from './cm-autocomplete-basic.component'
     MatExpansionModule,
     MatTabsModule,
     GlnAutocompleteModule,
+    GlnOptionListModule,
+    GlnSelectModule,
     GlnInputModule,
   ],
   exports: [CmAutocompleteBasicComponent],

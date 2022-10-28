@@ -57,7 +57,6 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   @Input()
   public isDisabled: string | boolean | null | undefined;
   @Input()
-  @Input()
   /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
   public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = '';
   @Input()
@@ -119,6 +118,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
     this.currConfig = this.rootConfig || {};
     // this.scrollStrategy = this.scrollStrategyFactory();
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-autocomplete', true);
+    // window.addEventListener('blur', function () {
+    //   console.log(`window.addEventListener(blur)`); // #
+    // });
   }
 
   public ngOnChanges(changes: SimpleChanges): void {

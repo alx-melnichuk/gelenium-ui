@@ -31,14 +31,14 @@ export class GlnAutocompletePositionUtil {
   }
 }
 
-export interface Focusable {
+export interface Focusable0 {
   focus(): void;
 }
 
-export interface HostableRef {
+export interface HostableRef0 {
   hostRef: ElementRef<HTMLElement>;
 }
 
-export interface Frameable {
-  frameComp: HostableRef;
+export interface Frameable0 {
+  frameComp: HostableRef0;
 }

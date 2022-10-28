@@ -1,0 +1,25 @@
+<ng-template [ngIf]="isOptionsPanelOpen">
+  <div glnacp-container
+    [style.top.px]="panelTop"
+    [style.left.px]="panelLeft"
+    [style.right.px]="panelRight"
+    [style.minWidth.px]="panelMinWidth"
+    [style.maxWidth.px]="panelMaxWidth"
+    [glnOptionHeight]="options"
+    (attached)="setMaxHeight($event.optionHeight)">
+    <div glnacp-wrap>
+      <div glnac-panel
+        glnOptionsPanel9
+        glnOptionsPanelOptions9="options"
+        glnOptionsPanelVisibleSize9="visibleSizeValue"
+        class="gln-autocomplete-panel"
+        role="listbox"
+        id9="id"
+        attr.aria-label9="ariaLabel || null"
+        attr.aria-labelledby9="_getPanelAriaLabelledby(formFieldId)"
+        ngClass9="getPanelClass(panelClassList)">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</ng-template>
