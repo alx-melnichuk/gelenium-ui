@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, HostListener, NgZone, ViewEncapsulation } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
@@ -33,5 +33,19 @@ export class CmSelectComponent implements AfterViewInit {
       // eslint-disable-next-line no-restricted-syntax
       console.timeEnd(logLabel); // 800ms - 850ms
     });
+
+    // document.getElementById(fragment)?.scrollIntoView();
+    // const data: HTMLCollectionOf<Element> = document.getElementsByTagName('app-site-scheme');
+    // const elem: Element | null = data.length > 0 ? data[0] : null;
+    // const block: Element | null = elem && elem.children.length > 1 ? elem.children[1] : null;
   }
+
+  // @HostListener('scroll', ['$event'])
+  // public doScroll(event: any): void {
+  //   console.log('doScroll()', event); // event.srcElement.scrollLeft, $event.srcElement.scrollTop);
+  // }
+  // @HostListener('window:scroll', ['$event'])
+  // public doWindowScroll(event: any): void {
+  //   console.log('doWindowScroll()', event); // event.srcElement.scrollLeft, $event.srcElement.scrollTop);
+  // }
 }

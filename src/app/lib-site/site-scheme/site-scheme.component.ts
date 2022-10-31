@@ -10,4 +10,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 export class SiteSchemeComponent {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
+
+  public doScroll(event: any): void {
+    console.log('doScroll()', event); // #
+  }
 }

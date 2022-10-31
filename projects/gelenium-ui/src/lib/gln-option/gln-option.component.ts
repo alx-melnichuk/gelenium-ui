@@ -21,6 +21,7 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GLN_OPTION_GROUP, GlnOptionGroup } from './gln-option-group.interface';
 import { GLN_OPTION_PARENT, GlnOptionParent } from './gln-option-parent.interface';
+import { GlnOption } from './gln-option.interface';
 
 let uniqueIdCounter = 0;
 
@@ -32,7 +33,7 @@ let uniqueIdCounter = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnOptionComponent implements OnChanges, OnInit {
+export class GlnOptionComponent implements OnChanges, OnInit, GlnOption {
   @Input()
   public id = `glnop-${uniqueIdCounter++}`;
   @Input()
@@ -43,12 +44,10 @@ export class GlnOptionComponent implements OnChanges, OnInit {
   @ViewChild('contentRef', { static: true })
   public contentRef!: ElementRef<HTMLElement>;
 
-  public checkmark = false;
   public disabled: boolean | null | undefined;
   public formControl: FormControl = new FormControl();
   public formGroup: FormGroup = new FormGroup({ checkinfo: this.formControl });
   public marked = false;
-  public multiple = false;
   public selected: boolean | null | undefined;
 
   constructor(
@@ -77,8 +76,6 @@ export class GlnOptionComponent implements OnChanges, OnInit {
 
   public ngOnInit(): void {
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
-    this.setMultiple(this.parent?.multiple || null);
-    this.setCheckmark(this.parent?.checkmark || null);
     if (this.disabled === undefined) {
       this.setDisabled(this.group?.disabled);
     }
@@ -87,6 +84,8 @@ export class GlnOptionComponent implements OnChanges, OnInit {
 
   // ** Public methods **
 
+  // ** interface GlnOption - start **
+
   public getTextContent(): string {
     return (this.hostRef.nativeElement.textContent || '').trim();
   }
@@ -94,15 +93,11 @@ export class GlnOptionComponent implements OnChanges, OnInit {
   public getTrustHtml(): string {
     return (this.contentRef.nativeElement.innerHTML || '').trim();
   }
-  /** Check or uncheck "checkmark". */
-  public setCheckmark(value: boolean | null): void {
-    if (this.checkmark !== !!value && (!!value === false || this.multiple)) {
-      this.checkmark = !!value;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-checkmark', !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'che', value ? '' : null);
-      this.changeDetectorRef.markForCheck();
-    }
+
+  public getValue<T>(): T | null | undefined {
+    return this.value === null ? null : this.value === undefined ? undefined : (this.value as T);
   }
+
   /** Check or uncheck disabled. */
   public setDisabled(value: boolean | null | undefined): void {
     if (this.disabled !== !!value) {
@@ -123,15 +118,6 @@ export class GlnOptionComponent implements OnChanges, OnInit {
       this.changeDetectorRef.markForCheck();
     }
   }
-  /** Check or uncheck multiple. */
-  public setMultiple(value: boolean | null): void {
-    if (this.multiple !== value) {
-      this.multiple = !!value;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-multiple', !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'mul', value ? '' : null);
-      this.changeDetectorRef.markForCheck();
-    }
-  }
   /** Check or uncheck selected. */
   public setSelected(value: boolean | null): void {
     if (this.selected !== !!value) {
@@ -143,4 +129,6 @@ export class GlnOptionComponent implements OnChanges, OnInit {
       this.changeDetectorRef.markForCheck();
     }
   }
+
+  // ** interface GlnOption - finish **
 }

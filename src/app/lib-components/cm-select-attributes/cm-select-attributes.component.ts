@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
@@ -19,7 +19,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CmSelectAttributesComponent {
+export class CmSelectAttributesComponent implements OnInit, OnDestroy {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -93,7 +93,17 @@ export class CmSelectAttributesComponent {
   public formGroup02e: FormGroup = new FormGroup(this.control02e);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor() {
+    console.log(`CmSelectAttributes();`); // #
+  }
+
+  ngOnInit(): void {
+    console.log(`CmSelectAttributes.OnInit();`); // #
+  }
+
+  ngOnDestroy(): void {
+    console.log(`CmSelectAttributes.OnDestroy();`); // #
+  }
 
   public capitalizeFirstLetter(value: string): string {
     return value ? value[0].toUpperCase() + value.slice(1) : '';

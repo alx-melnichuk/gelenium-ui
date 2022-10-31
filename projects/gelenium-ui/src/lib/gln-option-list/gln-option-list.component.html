@@ -4,11 +4,11 @@
     [style.left.px]="panelLeft"
     [style.right.px]="panelRight"
     [style.minWidth.px]="panelMinWidth"
-    [style.maxWidth.px]="panelMaxWidth"
-    [glnOptionHeight]="options"
-    (attached)="setMaxHeight($event.optionHeight)">
+    [style.maxWidth.px]="panelMaxWidth">
     <div glnacp-wrap>
       <div glnac-panel
+        [glnOptionListScroll]="options"
+        (glnOptionListScrollAttached)="setOptionListScroll($event)"
         glnOptionsPanel9
         glnOptionsPanelOptions9="options"
         glnOptionsPanelVisibleSize9="visibleSizeValue"

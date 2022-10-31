@@ -6,10 +6,11 @@ import { GlnOptionGroupModule } from '../gln-option-group/gln-option-group.modul
 
 import { GlnOptionListComponent } from './gln-option-list.component';
 import { GlnOptionListTriggerDirective } from './gln-option-list-trigger.directive';
+import { GlnOptionListScrollDirective } from './gln-option-list-scroll.directive';
 
 @NgModule({
-  declarations: [GlnOptionListComponent, GlnOptionListTriggerDirective],
+  declarations: [GlnOptionListComponent, GlnOptionListTriggerDirective, GlnOptionListScrollDirective],
   imports: [CommonModule, GlnOptionModule, GlnOptionGroupModule],
-  exports: [GlnOptionListComponent, GlnOptionListTriggerDirective],
+  exports: [GlnOptionListComponent, GlnOptionListTriggerDirective, GlnOptionListScrollDirective],
 })
 export class GlnOptionListModule {}

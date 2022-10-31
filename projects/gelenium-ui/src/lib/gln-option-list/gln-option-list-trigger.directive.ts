@@ -26,6 +26,7 @@ const TAG_NAME_OPTION = 'GLN-OPTION';
 
 @Directive({
   selector: '[glnOptionListTrigger]',
+  exportAs: 'glnOptionListTrigger',
 })
 export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOptionListTrigger {
   @Input('glnOptionListTrigger')
@@ -126,7 +127,7 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
       return;
     }
     if (this.optionList.isPanelOpen()) {
-      this.closeOptionsPanel();
+      this.optionList?.closePanel();
     } else {
       this.openOptionsPanel();
     }
@@ -140,11 +141,11 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
       switch (event.key) {
         case 'Escape':
         case 'Tab':
-          this.closeOptionsPanel();
+          this.optionList?.closePanel();
           break;
         case 'ArrowDown':
         case 'ArrowUp':
-          this.movingMarkedOptionsPanel(event.key === 'ArrowDown' ? 1 : -1);
+          this.optionList?.movingMarkedOption(event.key === 'ArrowDown' ? 1 : -1);
           break;
       }
     } else {
@@ -195,11 +196,5 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
       getOriginalRect: (): DOMRect | null => this.getOriginalRect(),
       setValue: (value: string): void => this.setValue(value),
     });
-  }
-  private closeOptionsPanel(): void {
-    this.optionList?.closePanel();
-  }
-  private movingMarkedOptionsPanel(delta: number): void {
-    this.optionList?.movingMarkedOption(delta);
   }
 }

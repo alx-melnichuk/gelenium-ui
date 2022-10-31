@@ -17,6 +17,7 @@ import {
   Input,
   NgZone,
   OnChanges,
+  OnDestroy,
   OnInit,
   Optional,
   Output,
@@ -82,7 +83,7 @@ const CSS_PROP_TRANSLATE_Y = '--glnslpo-translate-y';
   ],
 })
 export class GlnSelectComponent
-  implements OnChanges, OnInit, AfterContentInit, AfterViewInit, ControlValueAccessor, Validator, GlnOptionParent
+  implements OnChanges, OnInit, AfterContentInit, AfterViewInit, OnDestroy, ControlValueAccessor, Validator, GlnOptionParent
 {
   @Input()
   public id = `glnsl-${uniqueIdCounter++}`;
@@ -393,6 +394,15 @@ export class GlnSelectComponent
     }
   }
 
+  public ngOnDestroy(): void {
+    if (this.isPanelOpen) {
+      if (this.hasPanelAnimation) {
+        this.hasPanelAnimation = false;
+      }
+      this.close();
+    }
+  }
+
   public ngAfterContentInit(): void {
     // Initialized when the value is received via "writeValue()" but the list of menu items is just now.
     if (this.selectedOptions.length === 0 && this.options.length > 0) {
@@ -627,18 +637,24 @@ export class GlnSelectComponent
     this.markedOption = null;
 
     const overlayElement: HTMLElement = this.connectedOverlay.overlayRef.overlayElement;
-    const panelHeight = this.getHeight(this.selectPanelRef);
-    if (panelHeight > 0) {
-      const overlayRef = HtmlElemUtil.getElementRef(overlayElement);
-      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
+    if (overlayElement != null) {
+      const panelHeight = this.getHeight(this.selectPanelRef);
+      if (panelHeight > 0) {
+        const overlayRef = HtmlElemUtil.getElementRef(overlayElement);
+        HtmlElemUtil.setProperty(
+          overlayRef,
+          CSS_PROP_TRANSLATE_Y,
+          this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight())
+        );
+      }
+      if (!this.noAnimation) {
+        const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement.children[0] as HTMLElement);
+        // Add an attribute for animation and transformation.
+        HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, null);
+        HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION, '');
+      }
     }
     this.selectPanelRef = null;
-    if (!this.noAnimation) {
-      const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement.children[0] as HTMLElement);
-      // Add an attribute for animation and transformation.
-      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, null);
-      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION, '');
-    }
     this.closed.emit();
   }
   /** Callback when the overlay panel is attached. */

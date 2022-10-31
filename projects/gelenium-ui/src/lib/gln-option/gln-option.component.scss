@@ -21,10 +21,6 @@ gln-option {
   text-decoration: none;
   user-select: none;
 
-  &>[mul]>input {
-    cursor: inherit;
-  }
-
   &[dis] {
     opacity: 0.38;
     pointer-events: none;
@@ -56,7 +52,7 @@ gln-option {
   }
 
   &>[glno-chbox-wrap] {
-    margin-right: 9px;
+    margin-right: 0.5em;
     &>input {
       cursor: inherit;
     }

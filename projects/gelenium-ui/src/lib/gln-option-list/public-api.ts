@@ -1,3 +1,4 @@
+export * from './gln-option-list-scroll.directive';
 export * from './gln-option-list-trigger.directive';
 export * from './gln-option-list-trigger.interface';
 export * from './gln-option-list.component';

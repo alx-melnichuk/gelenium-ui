@@ -17,9 +17,11 @@ import {
 
 import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
+import { GlnOption } from '../gln-option/gln-option.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
+import { GlnOptionListScroll } from './gln-option-list-scroll.interface';
 import { GlnOptionListTrigger } from './gln-option-list-trigger.interface';
 import { GlnOptionList, GlnOptionListPosition, GlnOptionListPositionUtil } from './gln-option-list.interface';
 
@@ -54,11 +56,11 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   @ContentChildren(GlnOptionComponent, { descendants: true })
   public optionList!: QueryList<GlnOptionComponent>;
 
-  public get options(): GlnOptionComponent[] {
-    return this.optionList?.toArray() || [];
+  public get options(): GlnOption[] {
+    return (this.optionList?.toArray() as GlnOption[]) || [];
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public set options(value: GlnOptionComponent[]) {}
+  public set options(value: GlnOption[]) {}
 
   // public currConfig: GlnAutocompleteConfig;
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
@@ -88,6 +90,7 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   // private optionsPanel: GlnOptionsPanel | null = null;
   private originRect: DOMRect | null = null;
   private optionHeight: number = 0;
+  private optionListScroll: GlnOptionListScroll | null = null;
 
   constructor(private renderer: Renderer2, public hostRef: ElementRef<HTMLElement>, private changeDetectorRef: ChangeDetectorRef) {}
   // window.addEventListener('blur', function () {
@@ -165,6 +168,7 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   /** Move the option marker by the amount of the offset. */
   public movingMarkedOption = (delta: number): void => {
     // this.optionsPanel?.movingMarkedOption(delta);
+    this.optionListScroll?.movingMarkedOption(delta);
   };
 
   // ** interface GlnOptionList - finish **
@@ -194,11 +198,16 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
 
   // ** interface GlnOptionParent - finish **
 
-  public setMaxHeight(optionHeight: number): void {
+  public setOptionListScroll(value: GlnOptionListScroll): void {
+    console.log(`setOptionListScroll()`, value); // #
+    this.optionListScroll = value;
+  }
+
+  /*public setMaxHeight(optionHeight: number): void {
     this.optionHeight = optionHeight;
     this.prepareCssMaxHeight(this.visibleSizeValue, this.optionHeight);
     HtmlElemUtil.setProperty(this.hostRef, '--glnacp-max-height', NumberUtil.str(this.panelMaxHeight)?.concat('px'));
-  }
+  }*/
 
   // ** Private methods **
 
