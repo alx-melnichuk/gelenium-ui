@@ -1,5 +1,5 @@
-import { CdkConnectedOverlay, ConnectedPosition, HorizontalConnectionPos, ScrollStrategy } from '@angular/cdk/overlay';
-import { isPlatformBrowser } from '@angular/common';
+import { CdkConnectedOverlay, ConnectedPosition, HorizontalConnectionPos, OverlayRef, ScrollStrategy } from '@angular/cdk/overlay';
+import { isPlatformBrowser, Location } from '@angular/common';
 import {
   AfterContentInit,
   AfterViewInit,
@@ -58,6 +58,7 @@ import { GlnSelectConfig } from './gln-select-config.interface';
 import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
 import { GlnSelectionChange } from './gln-selection-change.interface';
 import { GlnSelectTriggerDirective, GLN_SELECT_TRIGGER } from './gln-select-trigger.directive';
+import { Subscription, SubscriptionLike } from 'rxjs';
 
 let uniqueIdCounter = 0;
 
@@ -251,6 +252,7 @@ export class GlnSelectComponent
 
   private indexFirstVisibleOption: number = -1;
   private isFocusAttrOnFrame = false;
+  // private locationChanges: SubscriptionLike = Subscription.EMPTY;
   private markedOption: GlnOptionComponent | null = null;
   private maxWidth = 0;
   private optionHeight: number = 0;
@@ -269,7 +271,8 @@ export class GlnSelectComponent
     @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null,
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
     @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any
-  ) {
+  ) // private location: Location
+  {
     this.currConfig = this.rootConfig || {};
     this.scrollStrategy = this.scrollStrategyFactory();
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-select', true);
@@ -395,6 +398,7 @@ export class GlnSelectComponent
   }
 
   public ngOnDestroy(): void {
+    // this.locationChanges.unsubscribe();
     if (this.isPanelOpen) {
       if (this.hasPanelAnimation) {
         this.hasPanelAnimation = false;
@@ -549,6 +553,7 @@ export class GlnSelectComponent
   public doBlur(): void {
     if (!this.disabled) {
       this.isFocused = false;
+      this.settingFocus(this.isFocused, this.renderer, this.hostRef);
       if (!this.isPanelOpen && !this.hasPanelAnimation) {
         // (Cases-B1) Panel is close and on the trigger, click the Tab key.
         this.blured.emit();
@@ -655,6 +660,7 @@ export class GlnSelectComponent
       }
     }
     this.selectPanelRef = null;
+    // this.locationChanges.unsubscribe();
     this.closed.emit();
   }
   /** Callback when the overlay panel is attached. */
@@ -702,6 +708,18 @@ export class GlnSelectComponent
     } else {
       // Add an attribute for animation and transformation.
       HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, '');
+    }
+
+    // this.locationChanges = this.location.subscribe((value: any) => {
+    //   // () => {
+    //   console.log('location.subscribe()', value); // #
+    //   this.close();
+    // });
+  }
+  /** Callback when the overlay panel is detached. */
+  public detach() {
+    if (this.isPanelOpen) {
+      this.close();
     }
   }
   /** Handles all keypress events for the component's panel. */
