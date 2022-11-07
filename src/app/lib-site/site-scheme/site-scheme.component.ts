@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
+
+import { glnDebounceTimerObjFn } from 'gelenium-ui';
+
+import { CE_SITE_SCHEME_SCROLL } from '../../lib-core/constants';
+import { CustomEventUtil } from '../../lib-core/custom-event.util';
 
 @Component({
   selector: 'app-site-scheme',
@@ -7,11 +12,22 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SiteSchemeComponent {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+export class SiteSchemeComponent implements OnDestroy {
+  public doScroll = (): void => {};
 
-  public doScroll(event: any): void {
-    console.log('doScroll()', event); // #
+  private debounceTimerObjScroll: { run(...args: any[]): void; clear(): void };
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  constructor() {
+    this.debounceTimerObjScroll = glnDebounceTimerObjFn(() => this.handlerScroll(), 200);
+    this.doScroll = this.debounceTimerObjScroll.run;
+  }
+
+  public ngOnDestroy(): void {
+    this.debounceTimerObjScroll.clear();
+  }
+
+  public handlerScroll(): void {
+    CustomEventUtil.emit(CE_SITE_SCHEME_SCROLL);
   }
 }

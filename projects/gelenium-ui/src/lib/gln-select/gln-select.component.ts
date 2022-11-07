@@ -1,5 +1,5 @@
-import { CdkConnectedOverlay, ConnectedPosition, HorizontalConnectionPos, OverlayRef, ScrollStrategy } from '@angular/cdk/overlay';
-import { isPlatformBrowser, Location } from '@angular/common';
+import { CdkConnectedOverlay, ConnectedPosition, HorizontalConnectionPos, ScrollStrategy } from '@angular/cdk/overlay';
+import { isPlatformBrowser } from '@angular/common';
 import {
   AfterContentInit,
   AfterViewInit,
@@ -54,11 +54,11 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
-import { GlnSelectConfig } from './gln-select-config.interface';
 import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
+import { GlnSelectConfig } from './gln-select-config.interface';
 import { GlnSelectionChange } from './gln-selection-change.interface';
+import { GlnSelectOpenUtil } from './gln-select-open.util';
 import { GlnSelectTriggerDirective, GLN_SELECT_TRIGGER } from './gln-select-trigger.directive';
-import { Subscription, SubscriptionLike } from 'rxjs';
 
 let uniqueIdCounter = 0;
 
@@ -252,7 +252,6 @@ export class GlnSelectComponent
 
   private indexFirstVisibleOption: number = -1;
   private isFocusAttrOnFrame = false;
-  // private locationChanges: SubscriptionLike = Subscription.EMPTY;
   private markedOption: GlnOptionComponent | null = null;
   private maxWidth = 0;
   private optionHeight: number = 0;
@@ -271,8 +270,7 @@ export class GlnSelectComponent
     @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null,
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
     @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any
-  ) // private location: Location
-  {
+  ) {
     this.currConfig = this.rootConfig || {};
     this.scrollStrategy = this.scrollStrategyFactory();
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-select', true);
@@ -398,7 +396,6 @@ export class GlnSelectComponent
   }
 
   public ngOnDestroy(): void {
-    // this.locationChanges.unsubscribe();
     if (this.isPanelOpen) {
       if (this.hasPanelAnimation) {
         this.hasPanelAnimation = false;
@@ -628,7 +625,7 @@ export class GlnSelectComponent
     }
   }
   /** Closes the overlay panel and focuses the main element. */
-  public close(): void {
+  public close(options?: { noAnimation?: boolean }): void {
     if (this.disabled || !this.isPanelOpen) {
       return;
     }
@@ -652,19 +649,24 @@ export class GlnSelectComponent
           this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight())
         );
       }
-      if (!this.noAnimation) {
+      if (!this.noAnimation && !options?.noAnimation) {
         const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement.children[0] as HTMLElement);
         // Add an attribute for animation and transformation.
         HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, null);
         HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION, '');
       }
     }
+    if (options?.noAnimation && this.hasPanelAnimation) {
+      this.hasPanelAnimation = false;
+    }
     this.selectPanelRef = null;
-    // this.locationChanges.unsubscribe();
     this.closed.emit();
   }
   /** Callback when the overlay panel is attached. */
   public attach(): void {
+    // Add the current object to the list of elements with the panel open.
+    GlnSelectOpenUtil.add(this);
+
     const overlayElement: HTMLElement = this.connectedOverlay.overlayRef.overlayElement;
     // Adding a class so that custom styles can be applied.
     const overlayRef = HtmlElemUtil.getElementRef(overlayElement);
@@ -709,15 +711,11 @@ export class GlnSelectComponent
       // Add an attribute for animation and transformation.
       HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, '');
     }
-
-    // this.locationChanges = this.location.subscribe((value: any) => {
-    //   // () => {
-    //   console.log('location.subscribe()', value); // #
-    //   this.close();
-    // });
   }
   /** Callback when the overlay panel is detached. */
   public detach() {
+    // Remove the current object from the list of items with the panel open.
+    GlnSelectOpenUtil.remove(this);
     if (this.isPanelOpen) {
       this.close();
     }
