@@ -1,4 +1,7 @@
+import { ElementRef } from '@angular/core';
+
 export interface GlnOption {
+  hostRef: ElementRef<HTMLElement>;
   getTextContent(): string;
   getTrustHtml(): string;
   getValue<T>(): T | null | undefined;

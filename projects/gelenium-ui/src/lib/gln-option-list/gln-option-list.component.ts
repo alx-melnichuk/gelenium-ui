@@ -57,7 +57,7 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   public optionList!: QueryList<GlnOptionComponent>;
 
   public get options(): GlnOption[] {
-    return (this.optionList?.toArray() as GlnOption[]) || [];
+    return (this.optionList.toArray() as GlnOption[]) || [];
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set options(value: GlnOption[]) {}
