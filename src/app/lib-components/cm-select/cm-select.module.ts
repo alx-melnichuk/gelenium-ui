@@ -7,6 +7,7 @@ import { CmSelectValidationModule } from '../cm-select-validation/cm-select-vali
 import { CmSelectGroupModule } from '../cm-select-group/cm-select-group.module';
 import { CmSelectTriggerModule } from '../cm-select-trigger/cm-select-trigger.module';
 import { CmSelectOrnamentsModule } from '../cm-select-ornaments/cm-select-ornaments.module';
+import { CmSelectFeatureModule } from '../cm-select-feature/cm-select-feature.module';
 import { CmSelectConfigModule } from '../cm-select-config/cm-select-config.module';
 import { CmSelectApiModule } from '../cm-select-api/cm-select-api.module';
 
@@ -23,6 +24,7 @@ import { CmSelectRoutingModule } from './cm-select-routing.module';
     CmSelectGroupModule,
     CmSelectTriggerModule,
     CmSelectOrnamentsModule,
+    CmSelectFeatureModule,
     CmSelectConfigModule,
     CmSelectApiModule,
     CmSelectRoutingModule,

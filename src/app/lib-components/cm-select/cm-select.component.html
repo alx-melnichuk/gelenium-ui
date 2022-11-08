@@ -70,7 +70,7 @@
 </section>
 
 <section mr-vr
-  *ngIf="!showNum || showNum==='07'"
+  *ngIf="!showNum"
   id="Palette">
   <h3>Palette</h3>
   <p>
@@ -79,6 +79,12 @@
   </p>
   <hr br-tp>
 </section>
+
+<div *ngIf="!showNum || showNum==='07'"
+  id="Feature">
+  <app-cm-select-feature></app-cm-select-feature>
+  <hr br-tp>
+</div>
 
 <div *ngIf="!showNum || showNum==='08'"
   id="Config">

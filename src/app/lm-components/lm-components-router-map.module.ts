@@ -93,6 +93,7 @@ const siteUrlsSelect: SiteUrl[] = [
   { label: 'Helper text', url: urlSelect, fragment: 'HelperText' },
   { label: 'Border radius', url: urlSelect, fragment: 'BorderRadius' },
   { label: 'Palette', url: urlSelect, fragment: 'Palette' },
+  { label: 'Feature', url: urlSelect, fragment: 'Feature' },
   { label: 'Config', url: urlSelect, fragment: 'Config' },
   { label: 'Api', url: urlSelect, fragment: 'Api' },
 ];
