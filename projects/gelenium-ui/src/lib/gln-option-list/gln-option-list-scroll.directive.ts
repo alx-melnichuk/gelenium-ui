@@ -41,54 +41,66 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
   /** Moving the option marker by the specified offset amount. */
   public movingMarkedOption(delta: number): void {
     console.log(`movingMarkedOption(${delta})`); // #
-    const indexOld = this.markedOption != null ? this.optionList.indexOf(this.markedOption) : -1;
-    const newIndex = indexOld + delta;
-    if (this.optionList.length > 0 && delta !== 0 && -1 < newIndex && newIndex < this.optionList.length) {
+    const indexPrev = this.markedOption != null ? this.optionList.indexOf(this.markedOption) : -1;
+    const indexNext = indexPrev + delta;
+    if (this.optionList.length > 0 && delta !== 0 && -1 < indexNext && indexNext < this.optionList.length) {
       // Change option marker.
       this.markedOption?.setMarked(false);
-      this.markedOption = this.optionList[newIndex];
+      this.markedOption = this.optionList[indexNext];
       this.markedOption.setMarked(true);
 
-      this.prepareMarkedOption(this.markedOption);
+      const panelRect: DOMRect = this.hostRef.nativeElement.getBoundingClientRect();
+      const scrollY = this.getScrollYOnPanel(indexPrev, indexNext, this.optionList, panelRect);
+      const scrollTop: number = this.hostRef.nativeElement.scrollTop;
+      this.hostRef.nativeElement.scrollTo(0, scrollTop + scrollY);
     }
   }
-
-  /*public movingMarkedOption0(delta: number): void {
-    const indexOld = this.markedOption != null ? this.optionList.indexOf(this.markedOption) : -1;
-
-    // Change option marker.
-    let markedOption: GlnOptionComponent | null = null;
-    const newIndex = indexOld + delta;
-    if (this.optionList.length > 0 && -1 < newIndex && newIndex < this.optionList.length) {
-      this.markedOption?.setMarked(false);
-      markedOption = this.optionList[newIndex];
-      markedOption.setMarked(true);
-    }
-    this.markedOption = markedOption;
-
-    // Get the index of the new option marker.
-    const indexNew = this.markedOption != null ? this.optionList.indexOf(this.markedOption) : -1;
-    if (indexNew != -1 && indexNew != indexOld) {
-      // If the option marker has changed, then shift the options bar.
-      this.setScrollForMarkedOption(indexNew, this.visibleSizeValue ?? 0, 36 / *this.optionHeight* /);
-      // this.changeDetectorRef.markForCheck();
-    }
-  }*/
 
   // ** interface GlnOptionListScroll - finish **
 
   // ** Private methods **
 
-  private prepareMarkedOption(markedOption: GlnOption | null): void {
-    if (markedOption != null) {
-      const optRect: DOMRect = markedOption.hostRef.nativeElement.getBoundingClientRect();
-      console.log(`optRect`, optRect); // #
-      const hostRect: DOMRect = this.hostRef.nativeElement.getBoundingClientRect();
-      console.log(`hostRect`, hostRect); // #
-      // hostRect.scrollTop
-      const isTop = hostRect.top <= optRect.top;
-      const isBottom = optRect.bottom <= hostRect.bottom;
-      console.log(`isTop=${isTop} isBottom=${isBottom}`); // #
+  private getScrollYOnPanel(indexPrev: number, indexNext: number, optionList: GlnOption[], panelRect: DOMRect): number {
+    let result: number = 0;
+    let isTop = false;
+    let isBottom = false;
+    const option: GlnOption | null = -1 < indexNext && indexNext < optionList.length ? optionList[indexNext] : null;
+    if (option !== null) {
+      const optionRect: DOMRect = option.hostRef.nativeElement.getBoundingClientRect();
+      const delta = indexPrev !== -1 ? indexNext - indexPrev : indexNext;
+      if (delta === -1 && panelRect.top > optionRect.top) {
+        isBottom = true;
+      } else if (delta === 1 && panelRect.bottom < optionRect.bottom) {
+        isTop = true;
+      } else if (optionRect.bottom < panelRect.top || panelRect.bottom < optionRect.top) {
+        isTop = true;
+        isBottom = true;
+      }
     }
+    if (isTop || isBottom) {
+      result = this.getDeltaScrollYOnPanel(panelRect, indexNext, optionList, isTop, isBottom);
+    }
+    return result;
+  }
+  private getDeltaScrollYOnPanel(panelRect: DOMRect, index: number, optionList: GlnOption[], isTop: boolean, isBottom: boolean): number {
+    let result: number = 0;
+    const option: GlnOption | null = -1 < index && index < optionList.length ? optionList[index] : null;
+    if (option != null && (isTop || isBottom)) {
+      let option1Rect: DOMRect = option.hostRef.nativeElement.getBoundingClientRect();
+      let option2Rect: DOMRect = option1Rect;
+      let index1 = index;
+      let index2 = index;
+      let isFlagTop = true;
+      while (panelRect.height > option2Rect.bottom - option1Rect.top) {
+        if (isTop && isFlagTop && index1 > 0) {
+          option1Rect = optionList[--index1].hostRef.nativeElement.getBoundingClientRect();
+        } else if (isBottom && !isFlagTop && index2 < optionList.length - 1) {
+          option2Rect = optionList[++index2].hostRef.nativeElement.getBoundingClientRect();
+        }
+        isFlagTop = !isFlagTop;
+      }
+      result = option1Rect.top - panelRect.top;
+    }
+    return result;
   }
 }
