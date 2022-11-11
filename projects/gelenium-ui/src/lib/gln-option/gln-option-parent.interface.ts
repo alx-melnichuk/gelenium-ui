@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
 
+import { GlnOption } from './gln-option.interface';
 import { GlnOptionsPanel } from './gln-options-panel.interface';
 
 /**
@@ -10,7 +11,7 @@ export interface GlnOptionParent {
   checkmark?: boolean | null | undefined; // Only for multiple=true
   multiple?: boolean | null | undefined;
   noRipple?: boolean | null | undefined;
-  optionSelection(option: unknown): void;
+  optionSelection(option: GlnOption): void;
   setOptionsPanel?(value: GlnOptionsPanel): void;
 }
 

@@ -4,42 +4,33 @@
 @import '../_styles/mx-flex-direction.scss';
 
 gln-option-list {
-  --glnsl--default-h: var(--glncl-default-h, var(--gln-default-h));
-  --glnsl--default-s: var(--glncl-default-s, var(--gln-default-s));
-  --glnsl--default-l: var(--glncl-default-l, var(--gln-default-l));
-  --glnsl--default-cl: hsl(var(--glnsl--default-h),var(--glnsl--default-s),var(--glnsl--default-l));
+  --glnol--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnol--default-s: var(--glncl-default-s, var(--gln-default-s));
+  --glnol--default-l: var(--glncl-default-l, var(--gln-default-l));
+  --glnol--default-cl: hsl(var(--glnol--default-h),var(--glnol--default-s),var(--glnol--default-l));
 
-  --glnsl--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
-  --glnsl--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
-  --glnsl--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
-  --glnsl--default-bg-cl: hsl(var(--glnsl--default-bg-h), var(--glnsl--default-bg-s), var(--glnsl--default-bg-l));
+  --glnol--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
+  --glnol--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
+  --glnol--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
+  --glnol--default-bg-cl: hsl(var(--glnol--default-bg-h), var(--glnol--default-bg-s), var(--glnol--default-bg-l));
 
-  --glnsl--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
-  --glnsl--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
-
-  --glnacp-max-height: 180px; // #
-  
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
   position: relative;
 
-  // Element "div glnacp-container"
-  [glnacp-container] {
+  // Element "div glnolp-container"
+  [glnolp-container] {
     box-sizing: border-box;
-    // display: flex;
-    max-height: var(--glnacp-max-height, 80vh); // #max-height: 100vh;
+    max-height: var(--glnolpo-max-height, var(--glnolpn--max-height, 80vh));
     max-width: 100vw;
     position: absolute;
-    // pointer-events: auto;
     z-index: 1000;
-    // --glnslpo-translate-y: -36px;
-    // --glnslpo-border-radius: 5px;
   }
 
-  // Element "div glnacp-wrap".
-  [glnacp-wrap] {
-    background-color: var(--glnslpw-def-bg-cl, var(--glnsl--default-bg-cl));
-    color: var(--glnslpw-def-cl, var(--glnsl--default-cl)); // hsla(0, 0%, 0%, 0.87);
+  // Element "div glnolp-wrap".
+  [glnolp-wrap] {
+    background-color: var(--glnslpw-def-bg-cl, var(--glnol--default-bg-cl));
+    color: var(--glnslpw-def-cl, var(--glnol--default-cl)); // hsla(0, 0%, 0%, 0.87);
     // #flex-basis: 100%;
     font-size: inherit; // 16px
     max-height: inherit;
@@ -82,18 +73,18 @@ gln-option-list {
     */
   }
 
-  // Element "div glnac-panel".
-  [glnac-panel] {
-    border-radius: var(--glnacp-border-radius, unset);
+  // Element "div glnol-panel".
+  [glnol-panel] {
+    border-radius: var(--glnolpo-border-radius, var(--glnolpn--border-radius, unset));
     box-sizing: border-box;
-    max-height: inherit; // # max-height: var(--glnacp-max-height, 80vh);
+    max-height: inherit;
     min-height: 0px;
     min-width: 0px;
     overflow: auto;
     outline: 0;
     -webkit-overflow-scrolling: touch;
-    // To block the display of a shadow, you must specify "--glnslpo-elevation: none;".
-    box-shadow: var(--glnslpo-elevation, rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px);
+    // To block the display of a shadow, you must specify "--glnolp-elevation: none;".
+    box-shadow: var(--glnolp-elevation, rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px);
   }
 
 }

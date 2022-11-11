@@ -6,11 +6,10 @@ import { GlnTouchRippleModule } from '../gln-touch-ripple/gln-touch-ripple.modul
 
 import { GlnOptionComponent } from './gln-option.component';
 import { GlnOptionsPanelDirective } from './gln-options-panel.directive';
-import { GlnOptionHeightDirective } from './gln-option-height.directive';
 
 @NgModule({
-  declarations: [GlnOptionComponent, GlnOptionsPanelDirective, GlnOptionHeightDirective],
+  declarations: [GlnOptionComponent, GlnOptionsPanelDirective],
   imports: [CommonModule, ReactiveFormsModule, GlnTouchRippleModule],
-  exports: [GlnOptionComponent, GlnOptionsPanelDirective, GlnOptionHeightDirective],
+  exports: [GlnOptionComponent, GlnOptionsPanelDirective],
 })
 export class GlnOptionModule {}

@@ -103,7 +103,7 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
     return this.hostRef?.nativeElement.getBoundingClientRect() || null;
   }
   /** Set the new value of the current element. */
-  public setValue(value: string): void {
+  public setValue(value: string | null | undefined): void {
     console.log(`setValueForOriginal(); value=${value}`); // #
     // Update the component's model value.
     if (this.accessorControl != null) {
@@ -112,7 +112,7 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
     // Update the value of the DOM element.
     const event = new Event('input', { bubbles: true, cancelable: true });
     const inputElement: HTMLInputElement = this.hostRef.nativeElement as HTMLInputElement;
-    inputElement.value = value;
+    inputElement.value = value || '';
     inputElement.dispatchEvent(event);
   }
 
@@ -145,7 +145,7 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
           break;
         case 'ArrowDown':
         case 'ArrowUp':
-          this.optionList?.movingMarkedOption(event.key === 'ArrowDown' ? 1 : -1);
+          this.optionList?.moveMarkedOption(event.key === 'ArrowDown' ? 1 : -1);
           break;
       }
     } else {

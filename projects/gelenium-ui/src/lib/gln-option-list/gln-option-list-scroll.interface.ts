@@ -1,3 +1,3 @@
 export interface GlnOptionListScroll {
-  movingMarkedOption(delta: number): void;
+  moveMarkedOption(delta: number): void;
 }

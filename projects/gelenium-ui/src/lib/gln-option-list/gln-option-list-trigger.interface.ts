@@ -4,5 +4,5 @@ export interface GlnOptionListTrigger {
   // Get the dimensions of the source.
   getOriginalRect(): DOMRect | null;
   // Set the new value of the current element.
-  setValue(value: string): void;
+  setValue(value: string | null | undefined): void;
 }

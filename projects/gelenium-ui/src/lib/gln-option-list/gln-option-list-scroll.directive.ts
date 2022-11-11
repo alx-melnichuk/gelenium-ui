@@ -26,7 +26,7 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
   public ngOnInit(): void {
     console.log(`optionList.length=${this.optionList.length}`); // #
     this.attached.emit({
-      movingMarkedOption: (delta: number): void => this.movingMarkedOption(delta),
+      moveMarkedOption: (delta: number): void => this.moveMarkedOption(delta),
     });
   }
 
@@ -39,7 +39,7 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
   // ** interface GlnOptionListScroll - start **
 
   /** Moving the option marker by the specified offset amount. */
-  public movingMarkedOption(delta: number): void {
+  public moveMarkedOption(delta: number): void {
     console.log(`movingMarkedOption(${delta})`); // #
     const indexPrev = this.markedOption != null ? this.optionList.indexOf(this.markedOption) : -1;
     const indexNext = indexPrev + delta;

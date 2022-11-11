@@ -1,17 +1,14 @@
 <ng-template [ngIf]="isOptionsPanelOpen">
-  <div glnacp-container
+  <div glnolp-container
     [style.top.px]="panelTop"
     [style.left.px]="panelLeft"
     [style.right.px]="panelRight"
     [style.minWidth.px]="panelMinWidth"
     [style.maxWidth.px]="panelMaxWidth">
-    <div glnacp-wrap>
-      <div glnac-panel
+    <div glnolp-wrap>
+      <div glnol-panel
         [glnOptionListScroll]="options"
-        (glnOptionListScrollAttached)="setOptionListScroll($event)"
-        glnOptionsPanel9
-        glnOptionsPanelOptions9="options"
-        glnOptionsPanelVisibleSize9="visibleSizeValue"
+        (glnOptionListScrollAttached)="optionListScrollAttached($event)"
         class="gln-autocomplete-panel"
         role="listbox"
         id9="id"

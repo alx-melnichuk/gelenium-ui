@@ -19,6 +19,7 @@ export interface GlnAutocompletePanelConfig {
 @Directive({
   selector: '[glnAutocompletePanel]',
 })
+// # delete
 export class GlnAutocompletePanelDirective implements OnInit, OnDestroy {
   @Input('glnAutocompletePanel')
   public config: GlnAutocompletePanelConfig | null | undefined;

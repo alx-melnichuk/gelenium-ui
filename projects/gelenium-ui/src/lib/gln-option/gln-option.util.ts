@@ -41,4 +41,8 @@ export class GlnOptionUtil {
     }
     return result;
   }
+  /** Get the height of the option element based on the font size and line height. */
+  public static getHeightOption(fontSize: number, lineHeight: number): number {
+    return fontSize > 0 && lineHeight > 0 ? lineHeight + 2 * 0.375 * fontSize : 0;
+  }
 }

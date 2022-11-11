@@ -15,15 +15,23 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
 import { GlnOption } from '../gln-option/gln-option.interface';
+import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
+
+import { GlnOptionList } from './gln-option-list.interface';
 import { GlnOptionListScroll } from './gln-option-list-scroll.interface';
 import { GlnOptionListTrigger } from './gln-option-list-trigger.interface';
-import { GlnOptionList, GlnOptionListPosition, GlnOptionListPositionUtil } from './gln-option-list.interface';
+import { GlnOptionUtil } from '../gln-option/gln-option.util';
+import { GlnOptionListPosition, GlnOptionListPositionUtil } from './gln-option-list-position';
+
+interface LeftRight {
+  left: number | null;
+  right: number | null;
+}
 
 @Component({
   selector: 'gln-option-list',
@@ -48,9 +56,8 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   readonly opened: EventEmitter<void> = new EventEmitter();
   @Output()
   readonly closed: EventEmitter<void> = new EventEmitter();
-  // @Output()
-  // readonly selected: EventEmitter<{ value: unknown | null; values: unknown[]; change: GlnSelectionChange<GlnOptionComponent> }> =
-  //   new EventEmitter();
+  @Output()
+  readonly selected: EventEmitter<GlnOption> = new EventEmitter();
 
   /** List of possible options. */
   @ContentChildren(GlnOptionComponent, { descendants: true })
@@ -86,16 +93,13 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   // setOptionsPanel?(value: GlnOptionsPanel): void;
   // interface GlnOptionParent - finish
 
+  private optionHeight: number = 0;
+  private optionListScroll: GlnOptionListScroll | null = null;
   private optionListTrigger: GlnOptionListTrigger | null = null;
   // private optionsPanel: GlnOptionsPanel | null = null;
   private originRect: DOMRect | null = null;
-  private optionHeight: number = 0;
-  private optionListScroll: GlnOptionListScroll | null = null;
 
   constructor(private renderer: Renderer2, public hostRef: ElementRef<HTMLElement>, private changeDetectorRef: ChangeDetectorRef) {}
-  // window.addEventListener('blur', function () {
-  //   console.log(`window.addEventListener(blur)`); // #
-  // });
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['isDisabled']) {
@@ -115,7 +119,9 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   }
 
   ngOnInit(): void {
-    // console.log(`OnInit()`); // #
+    const fontSize = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('font-size').replace('px', '') || '0');
+    const lineHeight = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height').replace('px', '') || '0');
+    this.optionHeight = GlnOptionUtil.getHeightOption(fontSize, lineHeight);
   }
 
   // ** interface GlnOptionList - start **
@@ -129,28 +135,30 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
     this.optionListTrigger = trigger;
     this.originRect = this.optionListTrigger?.getOriginalRect() || null;
     if (!this.disabled && this.originRect != null && !this.isOptionsPanelOpen && this.options.length > 0) {
-      const fontSize = getComputedStyle(this.hostRef.nativeElement).getPropertyValue('font-size'); // '16px'
-      const lineHeight = getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height'); // '24px'
-
-      // this.open(originRect, this.isWdOrigin, this.positionValue, this.visibleSizeValue || 0);
-      // open(originRect: DOMRect | null, isWdOrigin: boolean, position: GlnAutocompletePosition, visibleSize: number): void {
       this.isOptionsPanelOpen = true;
-      // console.log(`Panel();   origin left=${originRect.left} right=${originRect.right} top=${originRect.top} height=${originRect.height}`); // #
       const hostRect: DOMRect = this.hostRef.nativeElement.getBoundingClientRect();
-      // console.log(`Panel();   host   left=${hostRect.left} right=${hostRect.right} top=${hostRect.top} height=${hostRect.height}`); // #
 
-      // this.optionsConfig = { options: this.options, visibleSize };
-      // this.panelConfig = { hostRect, isWdOrigin, maxWidth, options: this.options, originRect, position, visibleSize };
+      // Prepare and setting property 'border-radius'.
+      this.panelBorderRadius = this.originRect.height > 0 ? NumberUtil.roundTo100(this.originRect.height / 10) : null;
+      HtmlElemUtil.setProperty(this.hostRef, '--glnolpn--border-radius', NumberUtil.str(this.panelBorderRadius)?.concat('px'));
 
-      // Prepare and setting property 'borderRadius'.
-      this.prepareCssBorderRadius(this.originRect.height);
-      HtmlElemUtil.setProperty(this.hostRef, '--glnacp-border-radius', NumberUtil.str(this.panelBorderRadius)?.concat('px'));
+      // Prepare and setting property 'max-height'.
+      const visibleSize = this.visibleSizeValue;
+      this.panelMaxHeight = visibleSize != null && visibleSize > 0 && this.optionHeight > 0 ? this.optionHeight * visibleSize : 0;
+      HtmlElemUtil.setProperty(this.hostRef, '--glnolpn--max-height', NumberUtil.str(this.panelMaxHeight)?.concat('px'));
+
       // Prepare and setting properties: 'max-width', 'min-width'.
-      this.prepareCssMaxWidthAndMinWidth(this.isWdOrigin, this.originRect.width);
+      this.panelMinWidth = this.originRect.width;
+      this.panelMaxWidth = this.isWdOrigin ? this.originRect.width : null;
+
       // Prepare and setting properties: 'left', 'right'.
-      this.prepareCssLeftAndRight(this.isWdOrigin, this.originRect.left, this.originRect.width, hostRect.left, this.position || undefined);
+      const position = this.position || undefined;
+      const resLeftRight = this.getCssLeftRight(this.isWdOrigin, this.originRect.left, this.originRect.width, hostRect.left, position);
+      this.panelLeft = resLeftRight.left;
+      this.panelRight = resLeftRight.right;
+
       // Prepare and setting property 'top'.
-      this.prepareCssTop(this.originRect, hostRect);
+      this.panelTop = NumberUtil.roundTo100(this.originRect.bottom - hostRect.top);
 
       this.changeDetectorRef.markForCheck();
       this.opened.emit();
@@ -161,67 +169,45 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
     this.isOptionsPanelOpen = false;
     this.optionListTrigger = null;
     this.originRect = null;
-    // this.optionsPanel = null;
     this.changeDetectorRef.markForCheck();
     this.closed.emit();
   };
   /** Move the option marker by the amount of the offset. */
-  public movingMarkedOption = (delta: number): void => {
-    // this.optionsPanel?.movingMarkedOption(delta);
-    this.optionListScroll?.movingMarkedOption(delta);
+  public moveMarkedOption = (delta: number): void => {
+    this.optionListScroll?.moveMarkedOption(delta);
   };
 
   // ** interface GlnOptionList - finish **
 
   // ** interface GlnOptionParent - start **
 
-  public optionSelection(optionItem: GlnOptionComponent): void {
-    console.log(`optionSelection(); optionItem.value=`, optionItem.value); // #
+  public optionSelection(optionItem: GlnOption): void {
+    console.log(`optionSelection(); optionItem.value=`, optionItem.getValue()); // #
+
     Promise.resolve().then(() => {
-      if (this.optionListTrigger) {
-        const value: string = optionItem.value as unknown as string;
-        this.optionListTrigger.setValue(value);
-        console.log(`optionSelection(); optionListTrigger.setValueForOriginal(String(optionItem.value));`); // #
-        if (this.isOptionsPanelOpen) {
-          this.optionListTrigger?.passFocus();
-          this.closePanel();
-        }
+      this.selected.emit(optionItem);
+      const value: string | null | undefined = optionItem.getValue<string>();
+      this.optionListTrigger?.setValue(value);
+      console.log(`optionSelection(); this.optionListTrigger.setValue(value);`); // #
+      if (this.isOptionsPanelOpen) {
+        this.optionListTrigger?.passFocus();
+        this.closePanel();
       }
     });
   }
 
-  public setOptionsPanel(value: any /*GlnOptionsPanel*/): void {
-    // this.optionsPanel = value;
-    console.log(`setOptionsPanel() `, value); // #
-    // console.log(`this.optionsPanel ${this.optionsPanel != null ? '!' : ''}=null`); // #
-  }
-
   // ** interface GlnOptionParent - finish **
 
-  public setOptionListScroll(value: GlnOptionListScroll): void {
-    console.log(`setOptionListScroll()`, value); // #
+  public optionListScrollAttached(value: GlnOptionListScroll): void {
+    console.log(`optionListScrollAttached()`, value); // #
     this.optionListScroll = value;
   }
 
-  /*public setMaxHeight(optionHeight: number): void {
-    this.optionHeight = optionHeight;
-    this.prepareCssMaxHeight(this.visibleSizeValue, this.optionHeight);
-    HtmlElemUtil.setProperty(this.hostRef, '--glnacp-max-height', NumberUtil.str(this.panelMaxHeight)?.concat('px'));
-  }*/
-
   // ** Private methods **
 
-  private prepareCssBorderRadius(originRectHeight: number): void {
-    this.panelBorderRadius = originRectHeight > 0 ? NumberUtil.roundTo100(originRectHeight / 10) : null;
-  }
-  private prepareCssMaxWidthAndMinWidth(isWdOrigin: boolean, originRectWidth: number): void {
-    this.panelMinWidth = originRectWidth;
-    this.panelMaxWidth = isWdOrigin ? originRectWidth : null;
-  }
   // Should only be called after calling prepareCssMaxWidthAndMinWidth(), which specifies the width of the panel.
-  private prepareCssLeftAndRight(isWdOrigin: boolean, originLeft: number, originWidth: number, hostLeft: number, position?: string): void {
-    this.panelLeft = null;
-    this.panelRight = null;
+  private getCssLeftRight(isWdOrigin: boolean, originLeft: number, originWidth: number, hostLeft: number, position?: string): LeftRight {
+    const result: LeftRight = { left: null, right: null };
     const isJoinOnLeftSide = NumberUtil.roundTo100(hostLeft - originLeft) < 0.02;
     if (!isWdOrigin) {
       switch (position) {
@@ -229,31 +215,23 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
           const clientRect = this.hostRef.nativeElement.getBoundingClientRect();
           const delta = NumberUtil.roundTo100((originWidth - clientRect.width) / 2);
           if (isJoinOnLeftSide) {
-            this.panelLeft = delta;
+            result.left = delta;
           } else {
-            this.panelRight = delta;
+            result.right = delta;
           }
           break;
         case GlnOptionListPosition.end:
-          this.panelRight = isJoinOnLeftSide ? -originWidth : 0;
+          result.right = isJoinOnLeftSide ? -originWidth : 0;
           break;
         default:
           // GlnOptionListPosition.start
-          this.panelLeft = isJoinOnLeftSide ? 0 : -originWidth;
+          result.left = isJoinOnLeftSide ? 0 : -originWidth;
           break;
       }
     } else {
       // isWdOrigin
-      this.panelLeft = isJoinOnLeftSide ? 0 : -originWidth;
+      result.left = isJoinOnLeftSide ? 0 : -originWidth;
     }
-  }
-  private prepareCssTop(originRect: DOMRect, hostRect: DOMRect): void {
-    this.panelTop = NumberUtil.roundTo100(originRect.bottom - hostRect.top);
-  }
-  private prepareCssMaxHeight(visibleSize: number | null, optionHeight: number): void {
-    this.panelMaxHeight = null;
-    if (visibleSize != null && visibleSize > 0 && optionHeight > 0) {
-      this.panelMaxHeight = optionHeight * visibleSize;
-    }
+    return result;
   }
 }
