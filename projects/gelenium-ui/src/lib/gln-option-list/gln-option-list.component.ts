@@ -173,8 +173,8 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
     this.closed.emit();
   };
   /** Move the option marker by the amount of the offset. */
-  public moveMarkedOption = (delta: number): void => {
-    this.optionListScroll?.moveMarkedOption(delta);
+  public moveMarkedOption = (keyboardKey: string): void => {
+    this.optionListScroll?.moveMarkedOption(keyboardKey);
   };
 
   // ** interface GlnOptionList - finish **

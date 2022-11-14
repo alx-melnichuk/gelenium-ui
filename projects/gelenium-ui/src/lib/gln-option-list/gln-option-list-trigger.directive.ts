@@ -17,7 +17,7 @@ import { AbstractControl, NgControl } from '@angular/forms';
 import { GlnDebounceTimer } from '../_classes/gln-debounce-timer';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
-import { Focusable, Frameable, GlnOptionList } from './gln-option-list.interface';
+import { Focusable, Frameable, GlnOptionList, KeyboardKeysToMoveMarkedOption } from './gln-option-list.interface';
 import { GlnOptionListTrigger } from './gln-option-list-trigger.interface';
 
 const DEBOUNCE_TIMEOUT = 600;
@@ -134,21 +134,7 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
   }
 
   private handlingKeydown(event: KeyboardEvent): void {
-    if (this.optionList == null) {
-      return;
-    }
-    if (this.optionList.isPanelOpen()) {
-      switch (event.key) {
-        case 'Escape':
-        case 'Tab':
-          this.optionList?.closePanel();
-          break;
-        case 'ArrowDown':
-        case 'ArrowUp':
-          this.optionList?.moveMarkedOption(event.key === 'ArrowDown' ? 1 : -1);
-          break;
-      }
-    } else {
+    if (this.optionList && !this.optionList.isPanelOpen()) {
       switch (event.key) {
         case ' ':
         case 'ArrowDown':
@@ -156,7 +142,29 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
           this.openOptionsPanel();
           break;
       }
+    } else if (this.optionList?.isPanelOpen()) {
+      console.log(`event.key=${event.key}`); // #
+      if (['Escape', 'Tab'].indexOf(event.key) > -1) {
+        this.optionList.closePanel();
+      } else if (KeyboardKeysToMoveMarkedOption.indexOf(event.key) > -1) {
+        this.optionList.moveMarkedOption(event.key);
+      }
+      /*switch (event.key) {
+        case 'Escape':
+        case 'Tab':
+          this.optionList.closePanel();
+          break;
+        case 'ArrowDown':
+        case 'ArrowUp':
+          this.optionList.moveMarkedOption(event.key === 'ArrowDown' ? 1 : -1);
+          break;
+        case 'Home':
+          break;
+        case 'End':
+          break;
+      }*/
     }
+
     // #if (!this.disabled && this.isPanelOpen) { }
   }
 
