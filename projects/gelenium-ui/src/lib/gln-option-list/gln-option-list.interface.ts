@@ -2,7 +2,10 @@ import { ElementRef } from '@angular/core';
 
 import { GlnOptionListTrigger } from './gln-option-list-trigger.interface';
 
-export const KeyboardKeysToMoveMarkedOption = ['ArrowDown', 'ArrowUp', 'Home', 'End'];
+export const KeyboardKeysToMoveMarkedToArrow = ['ArrowUp', 'ArrowDown', 'Home', 'End'];
+export const KeyboardKeysToMoveMarkedToPage = ['PageUp', 'PageDown'];
+
+export const KeyboardKeysToMoveMarkedOption = [...KeyboardKeysToMoveMarkedToArrow, ...KeyboardKeysToMoveMarkedToPage];
 
 export interface GlnOptionList {
   // A sign that the panel is open.

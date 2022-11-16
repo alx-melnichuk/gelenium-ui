@@ -3,8 +3,9 @@ import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output }
 import { GlnOption } from '../gln-option/gln-option.interface';
 
 import { GlnOptionListScroll } from './gln-option-list-scroll.interface';
+import { KeyboardKeysToMoveMarkedToPage, KeyboardKeysToMoveMarkedToArrow } from './gln-option-list.interface';
 
-export type ScrollOptionType = { index: number; scroll: number; indexTop: number; indexBottom: number };
+export type ScrollOptionType = { index: number; scroll: number };
 
 @Directive({
   selector: '[glnOptionListScroll]',
@@ -21,8 +22,6 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
   @Output('glnOptionListScrollAttached')
   readonly attached: EventEmitter<GlnOptionListScroll> = new EventEmitter();
 
-  private indexBottom: number = -1;
-  private indexTop: number = -1;
   private markedOption: GlnOption | null = null;
 
   constructor(public hostRef: ElementRef<HTMLElement>) {}
@@ -45,7 +44,7 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
   /** Moving the option marker by the specified offset amount. */
   public moveMarkedOption0(keyboardKey: string): void {
     const indexPrev = this.markedOption != null ? this.optionList.indexOf(this.markedOption) : -1;
-    const delta: number = this.getDeltaForKeyboardKey(keyboardKey, indexPrev, this.optionList.length);
+    const delta: number = this.getDeltaForKeyboardKey0(keyboardKey, indexPrev, this.optionList.length);
     console.log(`movingMarkedOption(${keyboardKey})`); // #
     // console.log(`movingMarkedOption(${keyboardKey} delta=${delta})`); // #
     const indexNext = indexPrev + delta;
@@ -57,7 +56,7 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
       this.markedOption.setMarked(true);
 
       const panelRect: DOMRect = this.hostRef.nativeElement.getBoundingClientRect();
-      const scrollY = this.getScrollYOnPanel(indexPrev, indexNext, this.optionList, panelRect);
+      const scrollY = this.getScrollYOnPanel0(indexPrev, indexNext, this.optionList, panelRect);
       if (scrollY !== 0) {
         const scrollTop: number = this.hostRef.nativeElement.scrollTop;
         this.hostRef.nativeElement.scrollTo(0, scrollTop + scrollY);
@@ -68,19 +67,23 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
   public moveMarkedOption(keyboardKey: string): void {
     const indexPrev = this.markedOption != null ? this.optionList.indexOf(this.markedOption) : -1;
     const panelRect: DOMRect = this.hostRef.nativeElement.getBoundingClientRect();
-    const { index, scroll, indexTop, indexBottom } = this.scrollOption(keyboardKey, indexPrev, this.optionList, panelRect);
-    console.log(`movingMarkedOption() index=${index} scroll=${scroll} indexTop=${indexTop}, indexBottom=${indexBottom}`); // #
-    if (-1 < index && index < this.optionList.length) {
+    let result: ScrollOptionType = { index: -1, scroll: 0 };
+    if (KeyboardKeysToMoveMarkedToArrow.indexOf(keyboardKey) > -1) {
+      result = this.scrollOptionToArrow(keyboardKey, indexPrev, this.optionList, panelRect);
+    } else if (KeyboardKeysToMoveMarkedToPage.indexOf(keyboardKey) > -1) {
+      result = this.scrollOptionToPage(keyboardKey, indexPrev, this.optionList, panelRect);
+    }
+    console.log(`movingMarkedOption() index=${result.index} scroll=${result.scroll}`); // #
+    if (-1 < result.index && result.index < this.optionList.length) {
       // Change option marker.
       this.markedOption?.setMarked(false);
-      this.markedOption = this.optionList[index];
+      this.markedOption = this.optionList[result.index];
       this.markedOption.setMarked(true);
-
-      this.indexTop = indexTop;
-      this.indexBottom = indexBottom;
-      if (scroll !== 0) {
+      // Change position scroll.
+      if (result.scroll !== 0) {
         const scrollTop: number = this.hostRef.nativeElement.scrollTop;
-        this.hostRef.nativeElement.scrollTo(0, scrollTop + scroll);
+        console.log(`scrollTop=${scrollTop} result.scroll=${result.scroll} scrollTop+result.scroll=${scrollTop + result.scroll}`); // #
+        this.hostRef.nativeElement.scrollTo(0, scrollTop + result.scroll);
       }
     }
   }
@@ -89,7 +92,7 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
 
   // ** Private methods **
 
-  private getScrollYOnPanel(indexPrev: number, indexNext: number, optionList: GlnOption[], panelRect: DOMRect): number {
+  private getScrollYOnPanel0(indexPrev: number, indexNext: number, optionList: GlnOption[], panelRect: DOMRect): number {
     let result: number = 0;
     let isTop = false;
     let isBottom = false;
@@ -107,13 +110,97 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
       }
     }
     if (isTop || isBottom) {
-      result = this.getDeltaScrollYOnPanel(panelRect, indexNext, optionList, isTop, isBottom);
+      result = this.getDeltaScrollYOnPanel0(panelRect, indexNext, optionList, isTop, isBottom);
     }
     return result;
   }
 
+  private scrollOptionToArrow(keyboardKey: string, indexPrev: number, optionList: GlnOption[], panelRect: DOMRect): ScrollOptionType {
+    const result: ScrollOptionType = { index: -1, scroll: 0 };
+    const indexMax = optionList.length - 1;
+    let isTop = false;
+    let isBottom = false;
+    let option: GlnOption | null = null;
+    switch (keyboardKey) {
+      case 'ArrowUp':
+      case 'Home':
+        if (0 < indexPrev) {
+          option = optionList[(result.index = keyboardKey === 'ArrowUp' ? indexPrev - 1 : 0)];
+          isBottom = panelRect.top > option.hostRef.nativeElement.getBoundingClientRect().top;
+        }
+        break;
+      case 'ArrowDown':
+      case 'End':
+        if (indexPrev < indexMax) {
+          option = optionList[(result.index = keyboardKey === 'ArrowDown' ? indexPrev + 1 : indexMax)];
+          isTop = panelRect.bottom < option.hostRef.nativeElement.getBoundingClientRect().bottom;
+        }
+        break;
+    }
+    if (option != null && (isTop || isBottom)) {
+      let option1Rect: DOMRect = option.hostRef.nativeElement.getBoundingClientRect();
+      let option2Rect: DOMRect = option1Rect;
+      let index1: number = result.index;
+      let index2: number = result.index;
+      let isFlagTop = true;
+      while (panelRect.height > option2Rect.bottom - option1Rect.top) {
+        if (isTop && isFlagTop && index1 > 0) {
+          option1Rect = optionList[--index1].hostRef.nativeElement.getBoundingClientRect();
+        } else if (isBottom && !isFlagTop && index2 < indexMax) {
+          option2Rect = optionList[++index2].hostRef.nativeElement.getBoundingClientRect();
+        }
+        isFlagTop = !isFlagTop;
+      }
+      result.scroll = option1Rect.top - panelRect.top;
+    }
+    return result;
+  }
+  private scrollOptionToPage(keyboardKey: string, indexPrev: number, optionList: GlnOption[], panelRect: DOMRect): ScrollOptionType {
+    const result: ScrollOptionType = { index: -1, scroll: 0 };
+    if (KeyboardKeysToMoveMarkedToPage.indexOf(keyboardKey) === -1 || indexPrev === -1) {
+      return result;
+    }
+    const indexMax = optionList.length - 1;
+    if ('PageDown' === keyboardKey) {
+      let index: number = indexPrev;
+      let rectBt: DOMRect = optionList[indexPrev].hostRef.nativeElement.getBoundingClientRect();
+      while (panelRect.bottom > rectBt.bottom && index < indexMax) {
+        rectBt = optionList[++index].hostRef.nativeElement.getBoundingClientRect();
+      }
+      index += index < indexMax ? 1 : 0;
+      const delta2 = index - indexPrev;
+      let index1: number = index;
+      let index2: number = index;
+      let rectTp: DOMRect = optionList[index1].hostRef.nativeElement.getBoundingClientRect();
+      while (panelRect.height > rectBt.bottom - rectTp.top && index2 < indexMax) {
+        rectBt = optionList[++index2].hostRef.nativeElement.getBoundingClientRect();
+        console.log(`index2= ${index2} panelRect.height=${panelRect.height} rectBt.bottom - rectTp.top=${rectBt.bottom - rectTp.top}`); // #
+      }
+      result.index = index2 + 1 - delta2;
+      result.scroll = rectTp.top - panelRect.top;
+    } else if ('PageUp' === keyboardKey) {
+      let index: number = indexPrev;
+      let rectTp: DOMRect = optionList[indexPrev].hostRef.nativeElement.getBoundingClientRect();
+      while (rectTp.top > panelRect.top && 0 < index) {
+        rectTp = optionList[--index].hostRef.nativeElement.getBoundingClientRect();
+      }
+      index -= 0 < index ? 1 : 0;
+      const delta1 = indexPrev - index;
+      let index1: number = index;
+      let index2: number = index;
+      let rectBt: DOMRect = optionList[index2].hostRef.nativeElement.getBoundingClientRect();
+      while (panelRect.height > rectBt.bottom - rectTp.top && 0 < index1) {
+        rectTp = optionList[--index1].hostRef.nativeElement.getBoundingClientRect();
+        console.log(`index1= ${index1} panelRect.height=${panelRect.height} rectBt.bottom - rectTp.top=${rectBt.bottom - rectTp.top}`); // #
+      }
+      result.index = index1 - 1 + delta1;
+      result.scroll = rectTp.top - panelRect.top;
+    }
+
+    return result;
+  }
   private scrollOption(keyboardKey: string, indexPrev: number, optionList: GlnOption[], panelRect: DOMRect): ScrollOptionType {
-    let scrollY: number = 0;
+    let scrollTop: number = 0;
     const indexMax = optionList.length - 1;
     let index1: number = -1;
     let index2: number = -1;
@@ -136,24 +223,7 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
           isTop = panelRect.bottom < option.hostRef.nativeElement.getBoundingClientRect().bottom;
         }
         break;
-      // case 'PageUp':
-      //   if (0 < indexPrev) {
-      //     indexNext = 0;
-      //     const optionRect = optionList[indexNext].hostRef.nativeElement.getBoundingClientRect();
-      //     isBottom = panelRect.top > optionRect.top;
-      //   }
-      //   break;
-      // case 'PageDown':
-      //   if (indexPrev < indexMax) {
-      //     indexNext = indexMax;
-      //     const optionRect = optionList[indexNext].hostRef.nativeElement.getBoundingClientRect();
-      //     isTop = panelRect.bottom < optionRect.bottom;
-      //   }
-      //   break;
     }
-    // scrollY = this.getDeltaScrollYOnPanel(panelRect, indexNext, optionList, isTop, isBottom);
-    // let scrollY: number = 0;
-    // const option: GlnOption | null = -1 < indexNext && indexNext < optionList.length ? optionList[indexNext] : null;
     if (option != null && (isTop || isBottom)) {
       let option1Rect: DOMRect = option.hostRef.nativeElement.getBoundingClientRect();
       let option2Rect: DOMRect = option1Rect;
@@ -168,11 +238,11 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
         }
         isFlagTop = !isFlagTop;
       }
-      scrollY = option1Rect.top - panelRect.top;
+      scrollTop = option1Rect.top - panelRect.top;
     }
-    return { index: indexNext, scroll: scrollY, indexTop: index1, indexBottom: index2 };
+    return { index: indexNext, scroll: scrollTop };
   }
-  private getDeltaScrollYOnPanel(panelRect: DOMRect, index: number, optionList: GlnOption[], isTop: boolean, isBottom: boolean): number {
+  private getDeltaScrollYOnPanel0(panelRect: DOMRect, index: number, optionList: GlnOption[], isTop: boolean, isBottom: boolean): number {
     let result: number = 0;
     const option: GlnOption | null = -1 < index && index < optionList.length ? optionList[index] : null;
     if (option != null && (isTop || isBottom)) {
@@ -194,7 +264,7 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
     return result;
   }
 
-  private getDeltaForKeyboardKey(keyboardKey: string, indexPrev: number, amount: number): number {
+  private getDeltaForKeyboardKey0(keyboardKey: string, indexPrev: number, amount: number): number {
     let result: number = 0;
     if ('ArrowDown' === keyboardKey) {
       result = 1;

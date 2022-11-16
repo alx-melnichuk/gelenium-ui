@@ -147,22 +147,10 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
       if (['Escape', 'Tab'].indexOf(event.key) > -1) {
         this.optionList.closePanel();
       } else if (KeyboardKeysToMoveMarkedOption.indexOf(event.key) > -1) {
+        event.preventDefault();
+        event.stopPropagation();
         this.optionList.moveMarkedOption(event.key);
       }
-      /*switch (event.key) {
-        case 'Escape':
-        case 'Tab':
-          this.optionList.closePanel();
-          break;
-        case 'ArrowDown':
-        case 'ArrowUp':
-          this.optionList.moveMarkedOption(event.key === 'ArrowDown' ? 1 : -1);
-          break;
-        case 'Home':
-          break;
-        case 'End':
-          break;
-      }*/
     }
 
     // #if (!this.disabled && this.isPanelOpen) { }
