@@ -182,9 +182,9 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
         </div>
         <gln-option-list #optionList02l="glnOptionList"
           [visibleSize]="5">
-          <gln-option *ngFor="let item of fruits"
+          <gln-option *ngFor="let item of fruits; index as idx;"
             [value]="item">
-            {{ capitalizeFirstLetter(item) }}
+            {{ idx + ' ' + capitalizeFirstLetter(item) }}
           </gln-option>
         </gln-option-list>
       </div>

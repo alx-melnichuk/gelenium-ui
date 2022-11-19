@@ -157,46 +157,37 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
   }
   private scrollOptionToPage(keyboardKey: string, indexPrev: number, optionList: GlnOption[], panelRect: DOMRect): ScrollOptionType {
     const result: ScrollOptionType = { index: -1, scroll: 0 };
-    if (KeyboardKeysToMoveMarkedToPage.indexOf(keyboardKey) === -1 || indexPrev === -1) {
-      return result;
-    }
-    const indexMax = optionList.length - 1;
-    if ('PageDown' === keyboardKey) {
-      let index: number = indexPrev;
-      let rectBt: DOMRect = optionList[indexPrev].hostRef.nativeElement.getBoundingClientRect();
-      while (panelRect.bottom > rectBt.bottom && index < indexMax) {
-        rectBt = optionList[++index].hostRef.nativeElement.getBoundingClientRect();
+    if (indexPrev !== -1 && ('PageDown' === keyboardKey || 'PageUp' === keyboardKey)) {
+      const indexMax: number = optionList.length - 1;
+      const isModeDown = 'PageDown' === keyboardKey;
+      let optionRect: DOMRect = optionList[indexPrev].hostRef.nativeElement.getBoundingClientRect();
+      let deltaBt: number = 0;
+      let indexBt: number = indexPrev;
+      let deltaTp: number = 0;
+      let indexTp: number = indexPrev;
+      if (isModeDown) {
+        while (optionRect.bottom <= panelRect.bottom && indexBt < indexMax) {
+          optionRect = optionList[++indexBt].hostRef.nativeElement.getBoundingClientRect();
+        }
+        deltaBt = indexBt < indexMax ? indexBt - indexPrev - 1 : 0;
+      } else {
+        while (panelRect.top <= optionRect.top && 0 < indexTp) {
+          optionRect = optionList[--indexTp].hostRef.nativeElement.getBoundingClientRect();
+        }
+        deltaTp = 0 < indexTp ? indexPrev - indexTp - 1 : 0;
       }
-      index += index < indexMax ? 1 : 0;
-      const delta2 = index - indexPrev;
-      let index1: number = index;
-      let index2: number = index;
-      let rectTp: DOMRect = optionList[index1].hostRef.nativeElement.getBoundingClientRect();
-      while (panelRect.height > rectBt.bottom - rectTp.top && index2 < indexMax) {
-        rectBt = optionList[++index2].hostRef.nativeElement.getBoundingClientRect();
-        console.log(`index2= ${index2} panelRect.height=${panelRect.height} rectBt.bottom - rectTp.top=${rectBt.bottom - rectTp.top}`); // #
+      let rectTp: DOMRect = optionRect;
+      let rectBt: DOMRect = optionRect;
+      while (panelRect.height > rectBt.bottom - rectTp.top && 0 < indexTp && indexBt < indexMax) {
+        if (isModeDown) {
+          rectBt = optionList[++indexBt].hostRef.nativeElement.getBoundingClientRect();
+        } else {
+          rectTp = optionList[--indexTp].hostRef.nativeElement.getBoundingClientRect();
+        }
       }
-      result.index = index2 + 1 - delta2;
-      result.scroll = rectTp.top - panelRect.top;
-    } else if ('PageUp' === keyboardKey) {
-      let index: number = indexPrev;
-      let rectTp: DOMRect = optionList[indexPrev].hostRef.nativeElement.getBoundingClientRect();
-      while (rectTp.top > panelRect.top && 0 < index) {
-        rectTp = optionList[--index].hostRef.nativeElement.getBoundingClientRect();
-      }
-      index -= 0 < index ? 1 : 0;
-      const delta1 = indexPrev - index;
-      let index1: number = index;
-      let index2: number = index;
-      let rectBt: DOMRect = optionList[index2].hostRef.nativeElement.getBoundingClientRect();
-      while (panelRect.height > rectBt.bottom - rectTp.top && 0 < index1) {
-        rectTp = optionList[--index1].hostRef.nativeElement.getBoundingClientRect();
-        console.log(`index1= ${index1} panelRect.height=${panelRect.height} rectBt.bottom - rectTp.top=${rectBt.bottom - rectTp.top}`); // #
-      }
-      result.index = index1 - 1 + delta1;
+      result.index = isModeDown ? indexBt - deltaBt : indexTp + deltaTp;
       result.scroll = rectTp.top - panelRect.top;
     }
-
     return result;
   }
   private scrollOption(keyboardKey: string, indexPrev: number, optionList: GlnOption[], panelRect: DOMRect): ScrollOptionType {
