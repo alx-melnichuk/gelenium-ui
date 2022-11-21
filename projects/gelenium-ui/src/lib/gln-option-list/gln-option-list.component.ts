@@ -22,16 +22,10 @@ import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
 
-import { GlnOptionList } from './gln-option-list.interface';
+import { GlnOptionList, GlnOptionListPosition, GlnOptionListPositionUtil } from './gln-option-list.interface';
 import { GlnOptionListScroll } from './gln-option-list-scroll.interface';
 import { GlnOptionListTrigger } from './gln-option-list-trigger.interface';
 import { GlnOptionUtil } from '../gln-option/gln-option.util';
-import { GlnOptionListPosition, GlnOptionListPositionUtil } from './gln-option-list-position';
-
-interface LeftRight {
-  left: number | null;
-  right: number | null;
-}
 
 @Component({
   selector: 'gln-option-list',
@@ -93,13 +87,15 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   // setOptionsPanel?(value: GlnOptionsPanel): void;
   // interface GlnOptionParent - finish
 
-  private optionHeight: number = 0;
-  private optionListScroll: GlnOptionListScroll | null = null;
-  private optionListTrigger: GlnOptionListTrigger | null = null;
-  // private optionsPanel: GlnOptionsPanel | null = null;
-  private originRect: DOMRect | null = null;
+  protected optionHeight: number = 0;
+  protected optionListScroll: GlnOptionListScroll | null = null;
+  protected optionListTrigger: GlnOptionListTrigger | null = null;
+  protected originRect: DOMRect | null = null;
 
-  constructor(private renderer: Renderer2, public hostRef: ElementRef<HTMLElement>, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(protected renderer: Renderer2, public hostRef: ElementRef<HTMLElement>, protected changeDetectorRef: ChangeDetectorRef) {
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-option-list', true);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'gln-option-list', '');
+  }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['isDisabled']) {
@@ -152,10 +148,18 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
       this.panelMaxWidth = this.isWdOrigin ? this.originRect.width : null;
 
       // Prepare and setting properties: 'left', 'right'.
-      const position = this.position || undefined;
-      const resLeftRight = this.getCssLeftRight(this.isWdOrigin, this.originRect.left, this.originRect.width, hostRect.left, position);
-      this.panelLeft = resLeftRight.left;
-      this.panelRight = resLeftRight.right;
+      this.panelLeft = null;
+      this.panelRight = null;
+      if (!this.isNotWdOriginAndPositionCenter(this.isWdOrigin, this.positionValue)) {
+        const isJoinOnLeft = hostRect.left === this.originRect.left;
+        if (this.isWdOrigin || (!this.isWdOrigin && GlnOptionListPosition.start === this.positionValue)) {
+          this.panelLeft = isJoinOnLeft ? 0 : -this.originRect.width;
+        } else if (!this.isWdOrigin && GlnOptionListPosition.end === this.positionValue) {
+          this.panelRight = isJoinOnLeft ? -this.originRect.width : 0;
+        }
+        HtmlElemUtil.setProperty(this.hostRef, '--glnolpn--panel-left', NumberUtil.str(this.panelLeft)?.concat('px'));
+        HtmlElemUtil.setProperty(this.hostRef, '--glnolpn--panel-right', NumberUtil.str(this.panelRight)?.concat('px'));
+      }
 
       // Prepare and setting property 'top'.
       this.panelTop = NumberUtil.roundTo100(this.originRect.bottom - hostRect.top);
@@ -203,35 +207,9 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
     this.optionListScroll = value;
   }
 
-  // ** Private methods **
-
-  // Should only be called after calling prepareCssMaxWidthAndMinWidth(), which specifies the width of the panel.
-  private getCssLeftRight(isWdOrigin: boolean, originLeft: number, originWidth: number, hostLeft: number, position?: string): LeftRight {
-    const result: LeftRight = { left: null, right: null };
-    const isJoinOnLeftSide = NumberUtil.roundTo100(hostLeft - originLeft) < 0.02;
-    if (!isWdOrigin) {
-      switch (position) {
-        case GlnOptionListPosition.center:
-          const clientRect = this.hostRef.nativeElement.getBoundingClientRect();
-          const delta = NumberUtil.roundTo100((originWidth - clientRect.width) / 2);
-          if (isJoinOnLeftSide) {
-            result.left = delta;
-          } else {
-            result.right = delta;
-          }
-          break;
-        case GlnOptionListPosition.end:
-          result.right = isJoinOnLeftSide ? -originWidth : 0;
-          break;
-        default:
-          // GlnOptionListPosition.start
-          result.left = isJoinOnLeftSide ? 0 : -originWidth;
-          break;
-      }
-    } else {
-      // isWdOrigin
-      result.left = isJoinOnLeftSide ? 0 : -originWidth;
-    }
-    return result;
+  public isNotWdOriginAndPositionCenter(isWdOrigin: boolean, positionValue: GlnOptionListPosition): boolean {
+    return !isWdOrigin && GlnOptionListPosition.center === positionValue;
   }
+
+  // ** Private methods **
 }

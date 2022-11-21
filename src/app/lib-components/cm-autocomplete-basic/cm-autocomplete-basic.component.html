@@ -172,21 +172,24 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
             <em>Attribute: position='end'.</em>
           </small>
         </div>
-        <div class="aca-middle">
+        <div class="aca-middle aca-demo1">
           <gln-input formControlName="model02l"
             label="Fruit"
             [exterior]="exterior02b"
             wdFull
-            [glnOptionListTrigger]="optionList02l">
+            [glnAutocomplete2Trigger]="optionList02l">
           </gln-input>
         </div>
-        <gln-option-list #optionList02l="glnOptionList"
-          [visibleSize]="5">
-          <gln-option *ngFor="let item of fruits; index as idx;"
+        <gln-autocomplete2 #optionList02l="glnAutocomplete2"
+          [visibleSize]="5"
+          position9="start"
+          position9="end"
+          position9="center">
+          <gln-option *ngFor="let item of fruitsB; index as idx;"
             [value]="item">
             {{ idx + ' ' + capitalizeFirstLetter(item) }}
           </gln-option>
-        </gln-option-list>
+        </gln-autocomplete2>
       </div>
 
       <ng-container *ngIf="false">

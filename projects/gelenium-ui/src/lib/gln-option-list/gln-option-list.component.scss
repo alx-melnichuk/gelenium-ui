@@ -3,7 +3,7 @@
 @import '../_styles/mx-display-inline-flex.scss';
 @import '../_styles/mx-flex-direction.scss';
 
-gln-option-list {
+[gln-option-list] {
   --glnol--default-h: var(--glncl-default-h, var(--gln-default-h));
   --glnol--default-s: var(--glncl-default-s, var(--gln-default-s));
   --glnol--default-l: var(--glncl-default-l, var(--gln-default-l));
@@ -21,9 +21,11 @@ gln-option-list {
   // Element "div glnolp-container"
   [glnolp-container] {
     box-sizing: border-box;
+    left: var(--glnolpd--panel-left, var(--glnolpn--panel-left));
     max-height: var(--glnolpo-max-height, var(--glnolpn--max-height, 80vh));
     max-width: 100vw;
     position: absolute;
+    right: var(--glnolpd--panel-right, var(--glnolpn--panel-right));
     z-index: 1000;
   }
 

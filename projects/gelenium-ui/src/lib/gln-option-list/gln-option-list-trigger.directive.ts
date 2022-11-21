@@ -32,18 +32,18 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
   @Input('glnOptionListTrigger')
   public optionList: GlnOptionList | null | undefined;
 
-  private accessorControl: AbstractControl<any, any> | null = null;
-  private accessorFocusable: Focusable | null = null;
-  private frameRef: ElementRef<HTMLElement> | null = null;
-  private debounceTimer: GlnDebounceTimer = new GlnDebounceTimer();
-  private isFocusAttrOnFrame = false;
+  protected accessorControl: AbstractControl<any, any> | null = null;
+  protected accessorFocusable: Focusable | null = null;
+  protected frameRef: ElementRef<HTMLElement> | null = null;
+  protected debounceTimer: GlnDebounceTimer = new GlnDebounceTimer();
+  protected isFocusAttrOnFrame = false;
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) protected platformId: Object,
+    protected renderer: Renderer2,
     public hostRef: ElementRef<HTMLElement>,
-    @Optional() @Host() private control: NgControl | null
+    @Optional() @Host() protected control: NgControl | null
   ) {}
 
   @HostListener('mousedown')

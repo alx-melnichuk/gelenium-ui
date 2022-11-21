@@ -1,10 +1,10 @@
 <ng-template [ngIf]="isOptionsPanelOpen">
   <div glnolp-container
     [style.top.px]="panelTop"
-    [style.left.px]="panelLeft"
-    [style.right.px]="panelRight"
     [style.minWidth.px]="panelMinWidth"
-    [style.maxWidth.px]="panelMaxWidth">
+    [style.maxWidth.px]="panelMaxWidth"
+    glnOptionListPanel
+    [originRect]="isNotWdOriginAndPositionCenter(isWdOrigin, positionValue) ? originRect : null">
     <div glnolp-wrap>
       <div glnol-panel
         [glnOptionListScroll]="options"
