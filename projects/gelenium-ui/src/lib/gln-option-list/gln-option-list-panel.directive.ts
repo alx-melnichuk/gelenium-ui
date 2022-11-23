@@ -8,7 +8,7 @@ import { NumberUtil } from '../_utils/number.util';
   exportAs: 'glnOptionListPanel',
 })
 export class GlnOptionListPanelDirective implements OnInit {
-  @Input()
+  @Input('glnOptionListPanelOriginRect')
   public originRect: DOMRect | null | undefined;
 
   private panelLeft: number | null = null;

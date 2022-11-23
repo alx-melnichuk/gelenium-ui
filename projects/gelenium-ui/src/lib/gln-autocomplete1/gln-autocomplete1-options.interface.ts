@@ -1,10 +1,10 @@
-import { GlnAutocompleteTrigger } from './gln-autocomplete-trigger.interface';
+import { GlnAutocomplete1Trigger } from './gln-autocomplete1-trigger.interface';
 
-export interface GlnAutocompleteOptions {
+export interface GlnAutocomplete1Options {
   // A sign that the panel is open.
   isPanelOpen(): boolean;
   // Open the autocomplete suggestion panel.
-  openPanel(autocompleteTrigger: GlnAutocompleteTrigger): void;
+  openPanel(autocompleteTrigger: GlnAutocomplete1Trigger): void;
   // Close the autocomplete suggestion panel.
   closePanel(): void;
   // Move the option marker by the amount of the offset.

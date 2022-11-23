@@ -45,14 +45,14 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
           label="Enter value"
           exterior="outlined"
           wdFull
-          [glnAutocompleteTrigger]="autocomplete01a">
+          [glnAutocomplete2Trigger]="autocomplete01a">
         </gln-input>
-        <gln-autocomplete #autocomplete01a="glnAutocomplete">
+        <gln-autocomplete2 #autocomplete01a="glnAutocomplete2">
           <gln-option value="mango">Mango</gln-option>
           <gln-option value="lemon">Lemon</gln-option>
           <gln-option value="orange">Orange</gln-option>
           <gln-option value="kiwi">Kiwi</gln-option>
-        </gln-autocomplete>
+        </gln-autocomplete2>
       </div>
 
       <div class="app-elem">
@@ -63,14 +63,14 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
           label="Enter value"
           exterior="underline"
           wdFull
-          [glnAutocompleteTrigger]="autocomplete01b">
+          [glnAutocomplete2Trigger]="autocomplete01b">
         </gln-input>
-        <gln-autocomplete #autocomplete01b="glnAutocomplete">
+        <gln-autocomplete2 #autocomplete01b="glnAutocomplete2">
           <gln-option value="mango">Mango</gln-option>
           <gln-option value="lemon">Lemon</gln-option>
           <gln-option value="orange">Orange</gln-option>
           <gln-option value="kiwi">Kiwi</gln-option>
-        </gln-autocomplete>
+        </gln-autocomplete2>
       </div>
 
       <div class="app-elem">
@@ -81,14 +81,14 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
           label="Enter value"
           exterior="standard"
           wdFull
-          [glnAutocompleteTrigger]="autocomplete01c">
+          [glnAutocomplete2Trigger]="autocomplete01c">
         </gln-input>
-        <gln-autocomplete #autocomplete01c="glnAutocomplete">
+        <gln-autocomplete2 #autocomplete01c="glnAutocomplete2">
           <gln-option value="mango">Mango</gln-option>
           <gln-option value="lemon">Lemon</gln-option>
           <gln-option value="orange">Orange</gln-option>
           <gln-option value="kiwi">Kiwi</gln-option>
-        </gln-autocomplete>
+        </gln-autocomplete2>
       </div>
 
     </div>
@@ -166,13 +166,208 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
 
     <div class="app-group">
 
-      <div class="app-elem">
+      <ng-container *ngIf="true">
+
+        <div class="app-elem">
+          <div>
+            <small>
+              <em>Attribute: without wdOrigin.</em>
+            </small>
+          </div>
+          <div class="aca-middle">
+            <gln-input formControlName="model02d"
+              label="Fruit"
+              [exterior]="exterior02b"
+              wdFull
+              [glnAutocomplete2Trigger]="autocomplete02d">
+            </gln-input>
+          </div>
+          <gln-autocomplete2 #autocomplete02d="glnAutocomplete2">
+            <gln-option *ngFor="let item of fruitsB"
+              [value]="item">{{ capitalizeFirstLetter(item) }}
+            </gln-option>
+          </gln-autocomplete2>
+        </div>
+
+        <div class="app-elem">
+          <div>
+            <small>
+              <em>Attribute: with wdOrigin.</em>
+            </small>
+          </div>
+          <div class="aca-middle">
+            <gln-input formControlName="model02e"
+              label="Fruit"
+              [exterior]="exterior02b"
+              wdFull
+              [glnAutocomplete2Trigger]="autocomplete02e">
+            </gln-input>
+          </div>
+          <gln-autocomplete2 #autocomplete02e="glnAutocomplete2"
+            wdOrigin>
+            <gln-option *ngFor="let item of fruitsB"
+              [value]="item">{{ capitalizeFirstLetter(item) }}
+            </gln-option>
+          </gln-autocomplete2>
+        </div>
+
+        <!--<div class="app-elem">
+          <div>
+            <small>
+              <em>Attribute: wdOrigin and max-width.</em>
+            </small>
+          </div>
+          <gln-input formControlName="model02j"
+            class="aca-large"
+            label="Fruit"
+            [exterior]="exterior02b"
+            [glnAutocomplete2Trigger]="autocomplete02j">
+          </gln-input>
+          <gln-autocomplete2 #autocomplete02j="glnAutocomplete2"
+            wdOrigin>
+            <gln-option *ngFor="let item of fruitsB"
+              [value]="item">
+              {{ capitalizeFirstLetter(item) }}
+            </gln-option>
+            <gln-option value="buddha's hand (fingered citron)">
+              Buddha's hand (Fingered citron)
+            </gln-option>
+          </gln-autocomplete2>
+        </div>-->
+
+        <div class="app-elem">
+          <div>
+            <small>
+              <em>Attribute: position='center'.</em>
+            </small>
+          </div>
+          <div class="aca-middle">
+            <gln-input formControlName="model02k"
+              label="Fruit"
+              [exterior]="exterior02b"
+              wdFull
+              [glnAutocomplete2Trigger]="autocomplete02k">
+            </gln-input>
+          </div>
+          <gln-autocomplete2 #autocomplete02k="glnAutocomplete2"
+            position="center">
+            <gln-option *ngFor="let item of fruitsB"
+              [value]="item">
+              {{ capitalizeFirstLetter(item) }}
+            </gln-option>
+          </gln-autocomplete2>
+        </div>
+
+        <div class="app-elem">
+          <div>
+            <small>
+              <em>Attribute: position='end'.</em>
+            </small>
+          </div>
+          <div class="aca-middle aca-inline">
+            <gln-input formControlName="model02l"
+              label="Fruit"
+              [exterior]="exterior02b"
+              wdFull
+              [glnAutocomplete2Trigger]="autocomplete02l">
+            </gln-input>
+          </div>
+          <gln-autocomplete2 #autocomplete02l="glnAutocomplete2"
+            position="end">
+            <gln-option *ngFor="let item of fruitsB"
+              [value]="item">
+              {{ capitalizeFirstLetter(item) }}
+            </gln-option>
+          </gln-autocomplete2>
+        </div>
+
+
+        <div class="app-elem aca-middle">
+          <div>
+            <small>
+              <em>Attribute: visibleSize=4.</em>
+            </small>
+          </div>
+          <gln-input formControlName="model02m"
+            label="Fruit"
+            [exterior]="exterior02b"
+            wdFull
+            [glnAutocomplete2Trigger]="autocomplete02m"
+            hintOrError="The 'visibleSize' are used.">
+          </gln-input>
+          <gln-autocomplete2 #autocomplete02m="glnAutocomplete2"
+            [visibleSize]="4">
+            <gln-option *ngFor="let item of fruits"
+              [value]="item">
+              {{ capitalizeFirstLetter(item) }}
+            </gln-option>
+          </gln-autocomplete2>
+        </div>
+
+
+        <div class="app-elem aca-middle">
+          <div>
+            <small>
+              <em>Attribute: visibleSize=4, position="center".</em>
+            </small>
+          </div>
+          <gln-input formControlName="model02m"
+            label="Fruit"
+            [exterior]="exterior02b"
+            wdFull
+            [glnAutocomplete2Trigger]="autocomplete02n"
+            hintOrError="The 'visibleSize' are used.">
+          </gln-input>
+          <gln-autocomplete2 #autocomplete02n="glnAutocomplete2"
+            [visibleSize]="4"
+            position="center">
+            <gln-option *ngFor="let item of fruits"
+              [value]="item">
+              {{ capitalizeFirstLetter(item) }} - {{ capitalizeFirstLetter(item) }} demo
+            </gln-option>
+          </gln-autocomplete2>
+        </div>
+
+        <div class="app-elem aca-middle">
+          <div>
+            <small>
+              <em>Attribute: visibleSize=4, position="end".</em>
+            </small>
+          </div>
+          <gln-input formControlName="model02m"
+            label="Fruit"
+            [exterior]="exterior02b"
+            wdFull
+            [glnAutocomplete2Trigger]="autocomplete02o"
+            hintOrError="The 'visibleSize' are used.">
+          </gln-input>
+          <gln-autocomplete2 #autocomplete02o="glnAutocomplete2"
+            [visibleSize]="4"
+            position="end">
+            <gln-option *ngFor="let item of fruits"
+              [value]="item">
+              {{ capitalizeFirstLetter(item) }} - {{ capitalizeFirstLetter(item) }} demo
+            </gln-option>
+          </gln-autocomplete2>
+        </div>
+
+      </ng-container>
+
+    </div>
+  </form>
+
+  <hr br-nn />
+</ng-container>
+
+<!-- 
+        <div *ngIf="false"
+        class="app-elem">
         <div>
           <small>
             <em>Attribute: position='end'.</em>
           </small>
         </div>
-        <div class="aca-middle aca-demo1">
+        <div class="aca-middle aca-inline">
           <gln-input formControlName="model02l"
             label="Fruit"
             [exterior]="exterior02b"
@@ -192,223 +387,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
         </gln-autocomplete2>
       </div>
 
-      <ng-container *ngIf="false">
-
-        <div class="app-elem">
-          <div>
-            <small>
-              <em>Attribute: without wdOrigin.</em>
-            </small>
-          </div>
-          <div class="aca-middle">
-            <gln-input formControlName="model02d"
-              label="Fruit"
-              [exterior]="exterior02b"
-              wdFull
-              [glnAutocompleteTrigger]="autocomplete02d">
-            </gln-input>
-          </div>
-          <gln-autocomplete #autocomplete02d="glnAutocomplete">
-            <gln-option *ngFor="let item of fruitsB"
-              [value]="item">{{ capitalizeFirstLetter(item) }}
-            </gln-option>
-          </gln-autocomplete>
-        </div>
-
-        <div class="app-elem">
-          <div>
-            <small>
-              <em>Attribute: with wdOrigin.</em>
-            </small>
-          </div>
-          <div class="aca-middle">
-            <gln-input formControlName="model02e"
-              label="Fruit"
-              [exterior]="exterior02b"
-              wdFull
-              [glnAutocompleteTrigger]="autocomplete02e">
-            </gln-input>
-          </div>
-          <gln-autocomplete #autocomplete02e="glnAutocomplete"
-            wdOrigin>
-            <gln-option *ngFor="let item of fruitsB"
-              [value]="item">{{ capitalizeFirstLetter(item) }}
-            </gln-option>
-          </gln-autocomplete>
-        </div>
-
-        <!-- demo -->
-
-        <p>-</p>
-        <p>-</p>
-
-        <div class="app-elem">
-          <div>
-            <small>
-              <em>Attribute: wdOrigin.</em>
-            </small>
-          </div>
-          <div class="aca-middle">
-            <input formControlName="model02j" />
-          </div>
-          <gln-autocomplete #autocomplete02i="glnAutocomplete"
-            wdOrigin>
-            <gln-option *ngFor="let item of fruitsB"
-              [value]="item">{{ capitalizeFirstLetter(item) }}
-            </gln-option>
-          </gln-autocomplete>
-        </div>
-
-        <div class="app-elem">
-          <div>
-            <small>
-              <em>Attribute: wdOrigin and max-width.</em>
-            </small>
-          </div>
-          <gln-input formControlName="model02j"
-            class="aca-large"
-            label="Fruit"
-            [exterior]="exterior02b"
-            [glnAutocompleteTrigger]="autocomplete02j">
-          </gln-input>
-          <gln-autocomplete #autocomplete02j="glnAutocomplete"
-            wdOrigin>
-            <gln-option *ngFor="let item of fruitsB"
-              [value]="item">
-              {{ capitalizeFirstLetter(item) }}
-            </gln-option>
-            <gln-option value="buddha's hand (fingered citron)">
-              Buddha's hand (Fingered citron)
-            </gln-option>
-          </gln-autocomplete>
-        </div>
-
-        <div class="app-elem">
-          <div>
-            <small>
-              <em>Attribute: position='center'.</em>
-            </small>
-          </div>
-          <div class="aca-middle">
-            <gln-input formControlName="model02k"
-              label="Fruit"
-              [exterior]="exterior02b"
-              wdFull
-              [glnAutocompleteTrigger]="autocomplete02k">
-            </gln-input>
-          </div>
-          <gln-autocomplete #autocomplete02k="glnAutocomplete"
-            position="center">
-            <gln-option *ngFor="let item of fruitsB"
-              [value]="item">
-              {{ capitalizeFirstLetter(item) }}
-            </gln-option>
-          </gln-autocomplete>
-        </div>
-
-        <div class="app-elem">
-          <div>
-            <small>
-              <em>Attribute: position='end'.</em>
-            </small>
-          </div>
-          <div class="aca-middle">
-            <gln-input formControlName="model02l"
-              label="Fruit"
-              [exterior]="exterior02b"
-              wdFull
-              [glnAutocompleteTrigger]="autocomplete02l">
-            </gln-input>
-          </div>
-          <gln-autocomplete #autocomplete02l="glnAutocomplete"
-            position="end"
-            [visibleSize]="3">
-            <gln-option *ngFor="let item of fruitsB"
-              [value]="item">
-              {{ capitalizeFirstLetter(item) }}
-            </gln-option>
-          </gln-autocomplete>
-        </div>
-
-
-        <div class="app-elem aca-middle">
-          <div>
-            <small>
-              <em>Attribute: visibleSize=4.</em>
-            </small>
-          </div>
-          <gln-input formControlName="model02m"
-            label="Fruit"
-            [exterior]="exterior02b"
-            wdFull
-            [glnAutocompleteTrigger]="autocomplete02m"
-            hintOrError="The 'visibleSize' are used.">
-          </gln-input>
-          <gln-autocomplete #autocomplete02m="glnAutocomplete"
-            [visibleSize]="4">
-            <gln-option *ngFor="let item of fruits"
-              [value]="item">
-              {{ capitalizeFirstLetter(item) }}
-            </gln-option>
-          </gln-autocomplete>
-        </div>
-
-
-        <div class="app-elem aca-middle">
-          <div>
-            <small>
-              <em>Attribute: visibleSize=4, position="center".</em>
-            </small>
-          </div>
-          <gln-input formControlName="model02m"
-            label="Fruit"
-            [exterior]="exterior02b"
-            wdFull
-            [glnAutocompleteTrigger]="autocomplete02n"
-            hintOrError="The 'visibleSize' are used.">
-          </gln-input>
-          <gln-autocomplete #autocomplete02n="glnAutocomplete"
-            [visibleSize]="4"
-            position="center">
-            <gln-option *ngFor="let item of fruits"
-              [value]="item">
-              {{ capitalizeFirstLetter(item) }} - {{ capitalizeFirstLetter(item) }} demo
-            </gln-option>
-          </gln-autocomplete>
-        </div>
-
-        <div class="app-elem aca-middle">
-          <div>
-            <small>
-              <em>Attribute: visibleSize=4, position="end".</em>
-            </small>
-          </div>
-          <gln-input formControlName="model02m"
-            label="Fruit"
-            [exterior]="exterior02b"
-            wdFull
-            [glnAutocompleteTrigger]="autocomplete02o"
-            hintOrError="The 'visibleSize' are used.">
-          </gln-input>
-          <gln-autocomplete #autocomplete02o="glnAutocomplete"
-            [visibleSize]="4"
-            position="end">
-            <gln-option *ngFor="let item of fruits"
-              [value]="item">
-              {{ capitalizeFirstLetter(item) }} - {{ capitalizeFirstLetter(item) }} demo
-            </gln-option>
-          </gln-autocomplete>
-        </div>
-
-      </ng-container>
-
-    </div>
-  </form>
-
-  <hr br-nn />
-</ng-container>
-
-<!--  -->
+ -->
 
 <p>-</p>
 <p>-</p>
@@ -431,10 +410,10 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
           label="Enter fruit"
           exterior="outlined"
           wdFull9
-          [glnAutocompleteTrigger]="autocomplete0a"
+          [glnAutocomplete2Trigger]="autocomplete0a"
           (input)=doInput($event)>
         </gln-input>
-        <gln-autocomplete #autocomplete0a="glnAutocomplete"
+        <gln-autocomplete2 #autocomplete0a="glnAutocomplete2"
           wdOrigin9>
           <ng-container *ngIf="true">
             <gln-option value="mango1">Mango1a</gln-option>
@@ -456,7 +435,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
             <gln-option value="orange2">Orange2a Orange2b test</gln-option>
             <gln-option value="kiwi2">Kiwi2a test Kiwi2b test</gln-option>
           </ng-container>
-        </gln-autocomplete>
+        </gln-autocomplete2>
         <!-- fruits -->
         <!-- <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">

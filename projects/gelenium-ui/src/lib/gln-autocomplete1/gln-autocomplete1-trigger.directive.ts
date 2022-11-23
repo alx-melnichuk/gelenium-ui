@@ -17,21 +17,21 @@ import { AbstractControl, NgControl } from '@angular/forms';
 import { GlnDebounceTimer } from '../_classes/gln-debounce-timer';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
-import { GlnAutocompleteOptions } from './gln-autocomplete-options.interface';
-import { GlnAutocompleteTrigger } from './gln-autocomplete-trigger.interface';
-import { Focusable0, Frameable0 } from './gln-autocomplete.interface';
+import { GlnAutocomplete1Options } from './gln-autocomplete1-options.interface';
+import { GlnAutocomplete1Trigger } from './gln-autocomplete1-trigger.interface';
+import { Focusable0, Frameable0 } from './gln-autocomplete1.interface';
 
 const DEBOUNCE_TIMEOUT = 600;
 const CSS_ATTR_FOR_FRAME_FOCUS = 'foc';
 const TAG_NAME_OPTION = 'GLN-OPTION';
 
 @Directive({
-  selector: '[glnAutocompleteTrigger]',
-  exportAs: 'glnAutocompleteTrigger',
+  selector: '[glnAutocomplete1Trigger]',
+  exportAs: 'glnAutocomplete1Trigger',
 })
-export class GlnAutocompleteTriggerDirective implements OnInit, OnDestroy, GlnAutocompleteTrigger {
+export class GlnAutocomplete1TriggerDirective implements OnInit, OnDestroy, GlnAutocomplete1Trigger {
   @Input('glnAutocompleteTrigger')
-  public glnAutocompleteOptions: GlnAutocompleteOptions | null | undefined;
+  public glnAutocompleteOptions: GlnAutocomplete1Options | null | undefined;
 
   private accessorControl: AbstractControl<any, any> | null = null;
   private accessorFocusable: Focusable0 | null = null;

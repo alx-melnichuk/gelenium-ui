@@ -5,20 +5,20 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { GlnOptionModule } from '../gln-option/gln-option.module';
 import { GlnOptionGroupModule } from '../gln-option-group/gln-option-group.module';
 
-import { GlnAutocompleteComponent } from './gln-autocomplete.component';
-import { GlnAutocompleteTriggerDirective } from './gln-autocomplete-trigger.directive';
-import { GlnAutocompletePanelDirective } from './gln-autocomplete-panel.directive';
+import { GlnAutocomplete1Component } from './gln-autocomplete1.component';
+import { GlnAutocomplete1TriggerDirective } from './gln-autocomplete1-trigger.directive';
+import { GlnAutocomplete1PanelDirective } from './gln-autocomplete1-panel.directive';
 
 @NgModule({
-  declarations: [GlnAutocompleteComponent, GlnAutocompleteTriggerDirective, GlnAutocompletePanelDirective],
+  declarations: [GlnAutocomplete1Component, GlnAutocomplete1TriggerDirective, GlnAutocomplete1PanelDirective],
   imports: [CommonModule, OverlayModule, GlnOptionModule, GlnOptionGroupModule],
   exports: [
-    GlnAutocompleteComponent,
-    GlnAutocompleteTriggerDirective,
-    GlnAutocompletePanelDirective,
+    GlnAutocomplete1Component,
+    GlnAutocomplete1TriggerDirective,
+    GlnAutocomplete1PanelDirective,
     GlnOptionModule,
     GlnOptionGroupModule,
   ],
   // providers: [MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER],
 })
-export class GlnAutocompleteModule {}
+export class GlnAutocomplete1Module {}

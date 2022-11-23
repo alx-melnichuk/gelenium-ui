@@ -4,7 +4,7 @@ import { GlnOptionComponent } from '../gln-option/gln-option.component';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
 
-import { GlnAutocompletePosition } from './gln-autocomplete.interface';
+import { GlnAutocomplete1Position } from './gln-autocomplete1.interface';
 
 export interface GlnAutocompletePanelConfig {
   hostRect: DOMRect;
@@ -17,11 +17,11 @@ export interface GlnAutocompletePanelConfig {
 }
 
 @Directive({
-  selector: '[glnAutocompletePanel]',
+  selector: '[glnAutocomplete1Panel]',
 })
 // # delete
-export class GlnAutocompletePanelDirective implements OnInit, OnDestroy {
-  @Input('glnAutocompletePanel')
+export class GlnAutocomplete1PanelDirective implements OnInit, OnDestroy {
+  @Input('glnAutocomplete1Panel')
   public config: GlnAutocompletePanelConfig | null | undefined;
 
   @Output()
@@ -98,7 +98,7 @@ export class GlnAutocompletePanelDirective implements OnInit, OnDestroy {
       const isJoinOnLeftSide = NumberUtil.roundTo100(hostRectLeft - originRect.left) < 0.02;
       if (!isWdOrigin) {
         switch (position) {
-          case GlnAutocompletePosition.center:
+          case GlnAutocomplete1Position.center:
             const clientRect = this.hostRef.nativeElement.getBoundingClientRect();
             const delta = NumberUtil.roundTo100((originRect.width - clientRect.width) / 2);
             if (isJoinOnLeftSide) {
@@ -107,7 +107,7 @@ export class GlnAutocompletePanelDirective implements OnInit, OnDestroy {
               this.right = delta;
             }
             break;
-          case GlnAutocompletePosition.end:
+          case GlnAutocomplete1Position.end:
             this.right = isJoinOnLeftSide ? -originRect.width : 0;
             break;
           default:

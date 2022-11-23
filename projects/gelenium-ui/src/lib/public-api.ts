@@ -10,7 +10,7 @@ export * from './directives/gln-color/public-api';
 export * from './directives/gln-frame-ornament/public-api';
 export * from './directives/gln-regex/public-api';
 
-export * from './gln-autocomplete/public-api';
+export * from './gln-autocomplete1/public-api';
 export * from './gln-autocomplete2/public-api';
 export * from './gln-button/public-api';
 export * from './gln-frame/public-api';

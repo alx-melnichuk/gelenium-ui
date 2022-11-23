@@ -7,15 +7,13 @@ app-cm-autocomplete-basic {
 	.aca-middle {
     width: 160px;
 	}
-  .aca-demo {
+
+  // Block "Attributes".
+  .aca-inline {
     display: inline-flex;
   }
-  // Block "Attributes".
-  .aca-large {
-    width: 200px;
-    max-width: 230px;
-  }
 
+  
   .elem1 {
     // min-width: 160px;
     width: 160px;

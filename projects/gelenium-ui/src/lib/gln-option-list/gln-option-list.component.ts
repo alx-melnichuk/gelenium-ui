@@ -18,6 +18,7 @@ import {
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
 import { GlnOption } from '../gln-option/gln-option.interface';
 import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
+import { GlnOptionUtil } from '../gln-option/gln-option.util';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
@@ -25,7 +26,6 @@ import { NumberUtil } from '../_utils/number.util';
 import { GlnOptionList, GlnOptionListPosition, GlnOptionListPositionUtil } from './gln-option-list.interface';
 import { GlnOptionListScroll } from './gln-option-list-scroll.interface';
 import { GlnOptionListTrigger } from './gln-option-list-trigger.interface';
-import { GlnOptionUtil } from '../gln-option/gln-option.util';
 
 @Component({
   selector: 'gln-option-list',
@@ -140,7 +140,7 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
 
       // Prepare and setting property 'max-height'.
       const visibleSize = this.visibleSizeValue;
-      this.panelMaxHeight = visibleSize != null && visibleSize > 0 && this.optionHeight > 0 ? this.optionHeight * visibleSize : 0;
+      this.panelMaxHeight = visibleSize != null && visibleSize > 0 && this.optionHeight > 0 ? this.optionHeight * visibleSize : null;
       HtmlElemUtil.setProperty(this.hostRef, '--glnolpn--max-height', NumberUtil.str(this.panelMaxHeight)?.concat('px'));
 
       // Prepare and setting properties: 'max-width', 'min-width'.

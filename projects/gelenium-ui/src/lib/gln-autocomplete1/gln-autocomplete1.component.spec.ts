@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GlnAutocompleteComponent } from './gln-autocomplete.component';
+import { GlnAutocomplete1Component } from './gln-autocomplete1.component';
 
 describe('GlnAutocompleteComponent', () => {
-  let component: GlnAutocompleteComponent;
-  let fixture: ComponentFixture<GlnAutocompleteComponent>;
+  let component: GlnAutocomplete1Component;
+  let fixture: ComponentFixture<GlnAutocomplete1Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GlnAutocompleteComponent ]
-    })
-    .compileComponents();
+      declarations: [GlnAutocomplete1Component],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(GlnAutocompleteComponent);
+    fixture = TestBed.createComponent(GlnAutocomplete1Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

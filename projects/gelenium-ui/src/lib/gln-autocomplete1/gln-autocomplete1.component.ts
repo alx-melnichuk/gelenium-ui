@@ -24,32 +24,32 @@ import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-par
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { GlnAutocompleteOptions } from './gln-autocomplete-options.interface';
+import { GlnAutocomplete1Options } from './gln-autocomplete1-options.interface';
 
-import { GlnAutocompleteConfig } from './gln-autocomplete-config.interface';
-import { GlnAutocompletePosition, GlnAutocompletePositionUtil } from './gln-autocomplete.interface';
-import { GlnAutocompletePanelConfig } from './gln-autocomplete-panel.directive';
-import { GlnAutocompleteTrigger } from './gln-autocomplete-trigger.interface';
+import { GlnAutocomplete1Config } from './gln-autocomplete1-config.interface';
+import { GlnAutocomplete1Position, GlnAutocomplete1PositionUtil } from './gln-autocomplete1.interface';
+import { GlnAutocompletePanelConfig } from './gln-autocomplete1-panel.directive';
+import { GlnAutocomplete1Trigger } from './gln-autocomplete1-trigger.interface';
 import { GlnOptionsPanel } from '../gln-option/gln-options-panel.interface';
 
 let uniqueIdCounter = 0;
 
-export const GLN_AUTOCOMPLETE_CONFIG = new InjectionToken<GlnAutocompleteConfig>('GLN_AUTOCOMPLETE_CONFIG');
+export const GLN_AUTOCOMPLETE_CONFIG = new InjectionToken<GlnAutocomplete1Config>('GLN_AUTOCOMPLETE_CONFIG');
 
 @Component({
-  selector: 'gln-autocomplete',
-  exportAs: 'glnAutocomplete',
-  templateUrl: './gln-autocomplete.component.html',
-  styleUrls: ['./gln-autocomplete.component.scss'],
+  selector: 'gln-autocomplete1',
+  exportAs: 'glnAutocomplete1',
+  templateUrl: './gln-autocomplete1.component.html',
+  styleUrls: ['./gln-autocomplete1.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: GLN_OPTION_PARENT, useExisting: GlnAutocompleteComponent }],
+  providers: [{ provide: GLN_OPTION_PARENT, useExisting: GlnAutocomplete1Component }],
 })
-export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionParent, GlnAutocompleteOptions {
+export class GlnAutocomplete1Component implements OnChanges, OnInit, GlnOptionParent, GlnAutocomplete1Options {
   @Input()
   public id = `glnac-${uniqueIdCounter++}`;
   @Input()
-  public config: GlnAutocompleteConfig | null | undefined;
+  public config: GlnAutocomplete1Config | null | undefined;
 
   @Input()
   /** Flag for displaying a "checkbox" for each option. (only for isMultiple) */
@@ -91,7 +91,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   public set options(value: GlnOptionComponent[]) {}
 
   public checkmark: boolean | null = null; // Binding attribute "isCheckmark". // interface GlnOptionParent
-  public currConfig: GlnAutocompleteConfig;
+  public currConfig: GlnAutocomplete1Config;
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public hasPanelAnimation: boolean = false;
   public isOptionsPanelOpen: boolean = false;
@@ -100,10 +100,10 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public panelClassList: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
   public panelConfig: GlnAutocompletePanelConfig | null = null;
-  public positionValue: GlnAutocompletePosition = GlnAutocompletePosition.start; // Binding attribute "position" ('start' | 'center' | 'end').
+  public positionValue: GlnAutocomplete1Position = GlnAutocomplete1Position.start; // Binding attribute "position" ('start' | 'center' | 'end').
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
 
-  private autocompleteTrigger: GlnAutocompleteTrigger | null = null;
+  private autocompleteTrigger: GlnAutocomplete1Trigger | null = null;
   private optionsPanel: GlnOptionsPanel | null = null;
 
   constructor(
@@ -113,7 +113,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
     public hostRef: ElementRef<HTMLElement>,
     private changeDetectorRef: ChangeDetectorRef,
     // private ngZone: NgZone,
-    @Optional() @Inject(GLN_AUTOCOMPLETE_CONFIG) private rootConfig: GlnAutocompleteConfig | null // @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null, // // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any // @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any
+    @Optional() @Inject(GLN_AUTOCOMPLETE_CONFIG) private rootConfig: GlnAutocomplete1Config | null // @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null, // // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any // @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any
   ) {
     this.currConfig = this.rootConfig || {};
     // this.scrollStrategy = this.scrollStrategyFactory();
@@ -137,7 +137,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
       this.panelClassList = this.panelClass || this.currConfig?.panelClass;
     }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
-      this.positionValue = GlnAutocompletePositionUtil.create(this.position ?? (this.currConfig.position || null));
+      this.positionValue = GlnAutocomplete1PositionUtil.create(this.position ?? (this.currConfig.position || null));
     }
     if (changes['visibleSize'] || (changes['config'] && this.visibleSize == null && this.currConfig.visibleSize != null)) {
       this.visibleSizeValue = this.visibleSize || this.currConfig?.visibleSize || null;
@@ -155,7 +155,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
       this.panelClassList = this.currConfig?.panelClass;
     }
     if (this.positionValue == null) {
-      this.positionValue = GlnAutocompletePositionUtil.create(this.currConfig.position || null);
+      this.positionValue = GlnAutocomplete1PositionUtil.create(this.currConfig.position || null);
     }
     if (this.visibleSizeValue == null) {
       this.visibleSizeValue = this.currConfig?.visibleSize || null;
@@ -192,7 +192,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
     return this.isOptionsPanelOpen;
   };
   /** Open the autocomplete suggestion panel. */
-  public openPanel = (autocompleteTrigger: GlnAutocompleteTrigger): void => {
+  public openPanel = (autocompleteTrigger: GlnAutocomplete1Trigger): void => {
     this.autocompleteTrigger = autocompleteTrigger;
     const originRect: DOMRect | null = this.autocompleteTrigger.getOriginRect();
     if (originRect) {
@@ -215,7 +215,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnOptionPar
   // ** Public methods **
 
   /** Open overlay panel. */
-  public open(originRect: DOMRect | null, isWdOrigin: boolean, position: GlnAutocompletePosition, visibleSize: number): void {
+  public open(originRect: DOMRect | null, isWdOrigin: boolean, position: GlnAutocomplete1Position, visibleSize: number): void {
     if (!this.disabled && originRect != null && !this.isOptionsPanelOpen && this.options.length > 0) {
       this.isOptionsPanelOpen = true;
 
