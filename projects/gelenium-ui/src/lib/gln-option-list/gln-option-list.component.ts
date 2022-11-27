@@ -44,7 +44,7 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   @Input()
   public visibleSize: number | null | undefined;
   @Input()
-  public wdOrigin: string | null | undefined;
+  public isMaxWd: string | boolean | null | undefined;
 
   @Output()
   readonly opened: EventEmitter<void> = new EventEmitter();
@@ -66,8 +66,8 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   // public currConfig: GlnAutocompleteConfig;
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
   // public hasPanelAnimation: boolean = false;
+  public isMaxWidth: boolean = false; // Binding attribute "isMaxWd".
   public isOptionsPanelOpen: boolean = false;
-  public isWdOrigin: boolean = false; // Binding attribute "wdOrigin".
   // public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public panelBorderRadius: number | null = null;
   public panelLeft: number | null = null;
@@ -103,14 +103,14 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);
     }
+    if (changes['isMaxWd']) {
+      this.isMaxWidth = !!BooleanUtil.init(this.isMaxWd);
+    }
     if (changes['position']) {
       this.positionValue = GlnOptionListPositionUtil.create(this.position || null);
     }
     if (changes['visibleSize']) {
       this.visibleSizeValue = this.visibleSize || null;
-    }
-    if (changes['wdOrigin']) {
-      this.isWdOrigin = !!BooleanUtil.init(this.wdOrigin);
     }
   }
 
@@ -145,16 +145,16 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
 
       // Prepare and setting properties: 'max-width', 'min-width'.
       this.panelMinWidth = this.originRect.width;
-      this.panelMaxWidth = this.isWdOrigin ? this.originRect.width : null;
+      this.panelMaxWidth = this.isMaxWidth ? this.originRect.width : null;
 
       // Prepare and setting properties: 'left', 'right'.
       this.panelLeft = null;
       this.panelRight = null;
-      if (!this.isNotWdOriginAndPositionCenter(this.isWdOrigin, this.positionValue)) {
+      if (!this.isNotMaxWidthAndPositionCenter(this.isMaxWidth, this.positionValue)) {
         const isJoinOnLeft = hostRect.left === this.originRect.left;
-        if (this.isWdOrigin || (!this.isWdOrigin && GlnOptionListPosition.start === this.positionValue)) {
+        if (this.isMaxWidth || (!this.isMaxWidth && GlnOptionListPosition.start === this.positionValue)) {
           this.panelLeft = isJoinOnLeft ? 0 : -this.originRect.width;
-        } else if (!this.isWdOrigin && GlnOptionListPosition.end === this.positionValue) {
+        } else if (!this.isMaxWidth && GlnOptionListPosition.end === this.positionValue) {
           this.panelRight = isJoinOnLeft ? -this.originRect.width : 0;
         }
         HtmlElemUtil.setProperty(this.hostRef, '--glnolpn--panel-left', NumberUtil.str(this.panelLeft)?.concat('px'));
@@ -207,7 +207,7 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
     this.optionListScroll = value;
   }
 
-  public isNotWdOriginAndPositionCenter(isWdOrigin: boolean, positionValue: GlnOptionListPosition): boolean {
+  public isNotMaxWidthAndPositionCenter(isWdOrigin: boolean, positionValue: GlnOptionListPosition): boolean {
     return !isWdOrigin && GlnOptionListPosition.center === positionValue;
   }
 
