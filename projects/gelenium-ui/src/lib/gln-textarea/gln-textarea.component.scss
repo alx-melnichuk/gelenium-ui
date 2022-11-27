@@ -9,9 +9,6 @@ gln-textarea {
 
   &[wdFull] {
     width: 100%;
-    gln-frame>div>[glnfr-elem] {
-      width: 100%;
-    }
   }
 
   &[noHeEllipsis] {
@@ -38,7 +35,6 @@ gln-textarea {
     letter-spacing: inherit;
     color: inherit;
     border: 0;
-    box-sizing: content-box;
     background: none;
     margin: 0;
     padding: 0;
