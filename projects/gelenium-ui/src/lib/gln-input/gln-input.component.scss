@@ -36,6 +36,18 @@ gln-input {
       outline: 0;
     }
   }
+  // Element "Frame - glnfr-elem".
+  gln-frame>div>input[glnfr-elem] {
+    &[type="color" i],
+    &[type="date" i],
+    &[type="datetime-local" i],
+    &[type="month" i],
+    &[type="time" i],
+    &[type="week" i] {
+      box-sizing: content-box;
+      height: 1.4375em; // The value of the "line height" for the input element. (23px for font-size: 16px)
+    }  
+  }
 
   gln-hint-or-error {
     padding-left: var(--glnin-he-pd-lf, var(--glnfrs--pd-lf));
