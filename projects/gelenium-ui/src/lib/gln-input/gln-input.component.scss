@@ -45,7 +45,7 @@ gln-input {
     &[type="time" i],
     &[type="week" i] {
       box-sizing: content-box;
-      height: 1.4375em; // The value of the "line height" for the input element. (23px for font-size: 16px)
+      height: var(--glnfr--elem-height); // 1.4375em - 23px for font-size: 16px
     }  
   }
 
