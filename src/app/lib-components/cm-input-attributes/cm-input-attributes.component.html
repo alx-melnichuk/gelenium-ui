@@ -655,6 +655,24 @@ app-input &#123;
       </gln-input>
     </div>
 
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: type="datetime-local", isLabelShrink.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02q"
+        [label]="!control02d.model02q.value
+        ? 'Enter datetime-local':'Datetime-local'"
+        isLabelShrink
+        type="datetime-local"
+        [helperText]="!control02d.model02q.value
+        ?'Enter your datetime-local value.'
+        :'Datetime value is \''
+        + control02d.model02q.value + '\''"
+        [exterior]="exterior02d">
+      </gln-input>
+    </div>
   </div>
 
 </form>
@@ -750,6 +768,25 @@ app-input &#123;
       &lt;/gln-input&gt;
     &lt;/div&gt;
 
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: type="datetime-local", isLabelShrink.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02q"
+        [label]="!control02d.model02q.value
+        ? 'Enter datetime-local':'Datetime-local'"
+        isLabelShrink
+        type="datetime-local"
+        [helperText]="!control02d.model02q.value
+        ?'Enter your datetime-local value.'
+        :'Datetime value is \''
+        + control02d.model02q.value + '\''"
+        [exterior]="exterior02d"&gt;
+      &lt;/gln-input&gt;
+    &lt;/div&gt;
+
   &lt;/div&gt;
 
 &lt;/form&gt;</pre></code>
@@ -776,6 +813,7 @@ export class InputComponent &#123;
     model02n: new FormControl('#000000'),
     model02o: new FormControl(null, []),
     model02p: new FormControl(null, []),
+    model02q: new FormControl(null, []),
   &#125;;
   public formGroup02d: FormGroup = new FormGroup(this.control02d);
 &#125;</pre></code>

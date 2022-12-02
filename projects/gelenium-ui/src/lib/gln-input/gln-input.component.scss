@@ -19,34 +19,30 @@ gln-input {
     }  
   }
 
-  // Input
   // The style sets the line height: 1.4375em;
   // This allows you to automatically change the padding when the font size changes.
-  .glnin-input {
-    font-size: inherit;
-    font-family: inherit;
-    letter-spacing: inherit;
+  // Element "Frame - glnfr-elem".
+  gln-frame>div>input[glnfr-elem] {
     color: inherit;
     border: 0;
     background: none;
-    margin: 0;
-    padding: 0;
 
     &:focus {
       outline: 0;
     }
-  }
-  // Element "Frame - glnfr-elem".
-  gln-frame>div>input[glnfr-elem] {
+
     &[type="color" i],
     &[type="date" i],
     &[type="datetime-local" i],
     &[type="month" i],
     &[type="time" i],
     &[type="week" i] {
-      box-sizing: content-box;
       height: var(--glnfr--elem-height); // 1.4375em - 23px for font-size: 16px
-    }  
+    }
+
+    &[type="color" i] {
+      box-sizing: content-box;
+    }
   }
 
   gln-hint-or-error {

@@ -26,18 +26,15 @@ gln-textarea {
     }
   }
 
-  // Textarea
   // The style sets the line height: 1.4375em;
   // This allows you to automatically change the padding when the font size changes.
-  .glntx-textarea {
-    font-size: inherit;
-    font-family: inherit;
-    letter-spacing: inherit;
+  // Element "Frame - glnfr-elem".
+  gln-frame>div>textarea[glnfr-elem] {
     color: inherit;
     border: 0;
     background: none;
-    margin: 0;
-    padding: 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
     resize: none;
 
     &:focus {

@@ -205,8 +205,9 @@ gln-frame {
     display: flex;
     flex-wrap: nowrap;
     &>[glnfr-elem] {
-      box-sizing: border-box;
+      font: inherit; // include: line-height: inherit;
       flex-grow: 1;
+      margin: 0;
       width: 100%;
     }
     &>[glnfr-orn-lf], &>[glnfr-orn-rg] {
@@ -380,24 +381,21 @@ gln-frame {
 
   // Ornament "padding".
   &>div {
-    &>[glnfr-pd-ver],
-    &>[glnfr-mr-ver] {
-      line-height: inherit; // Stores the line height for the end element.
-      align-self: baseline;
-    }
     &>[glnfr-pd-ver] {
+      align-self: baseline;
       padding-top   : var(--glnfr---pd-tp);
       padding-bottom: var(--glnfr---pd-bt);
     }
     &>[glnfr-mr-ver] {
+      align-self: baseline;
       margin-top   : var(--glnfr---pd-tp);
       margin-bottom: var(--glnfr---pd-bt);
     }
 
     &>span[glnfr-orn-lf], &>span[glnfr-orn-rg] {
-      max-height: inherit;
-      display: inline-flex;
       align-items: center;
+      display: inline-flex;
+      max-height: inherit;
     }
     &>span[glnfr-orn-rg] {
       order: 1;
