@@ -1,5 +1,5 @@
 <!-- Basic - start  -->
-<ng-container *ngIf="false">
+<ng-container *ngIf="true">
   <section mr-vr>
     <h3 class="app-hover-link">
       Basic.
@@ -38,8 +38,16 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
     <div class="app-group">
 
       <div class="app-elem">
-        <div>
+        <div mb0>
           <small><em>exterior: Outlined</em></small>
+        </div>
+        <div>
+          <small>
+            <em>
+              Model: {{ control01.model01a.value === null
+              ? 'null' : control01.model01a.value }}
+            </em>
+          </small>
         </div>
         <gln-input formControlName="model01a"
           label="Enter value"
@@ -56,8 +64,16 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
       </div>
 
       <div class="app-elem">
-        <div>
+        <div mb0>
           <small><em>exterior: Underline</em></small>
+        </div>
+        <div>
+          <small>
+            <em>
+              Model: {{ control01.model01b.value !== null
+              ? control01.model01b.value : 'null' }}
+            </em>
+          </small>
         </div>
         <gln-input formControlName="model01b"
           label="Enter value"
@@ -74,8 +90,16 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
       </div>
 
       <div class="app-elem">
-        <div>
+        <div mb0>
           <small><em>exterior: Standard</em></small>
+        </div>
+        <div>
+          <small>
+            <em>
+              Model: {{ control01.model01c.value !== null
+              ? control01.model01c.value : 'null' }}
+            </em>
+          </small>
         </div>
         <gln-input formControlName="model01c"
           label="Enter value"
@@ -100,7 +124,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
 
 <!-- Attributes - start -->
 <ng-container *ngIf="true">
-  <section *ngIf="false"
+  <section *ngIf="true"
     mr-vr>
     <h3 class="app-hover-link">
       Attributes.

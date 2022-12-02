@@ -1,3 +1,7 @@
+import { GlnOption } from './../gln-option/gln-option.interface';
 export interface GlnOptionListScroll {
-  moveMarkedOption(keyboardKey: string): void;
+  // Get the option marked.
+  getMarkedOption(): GlnOption | null;
+  // Move the marked option by the key.
+  moveMarkedOptionByKey(keyboardKey: string): void;
 }

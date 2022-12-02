@@ -1,5 +1,7 @@
 import { ElementRef } from '@angular/core';
 
+import { GlnOption } from '../gln-option/gln-option.interface';
+
 import { GlnOptionListTrigger } from './gln-option-list-trigger.interface';
 
 export const KeyboardKeysToMoveMarkedToArrow = ['ArrowUp', 'ArrowDown', 'Home', 'End'];
@@ -14,8 +16,12 @@ export interface GlnOptionList {
   openPanel(trigger: GlnOptionListTrigger): void;
   // Close the autocomplete suggestion panel.
   closePanel(): void;
-  // Move the option marker by the amount of the offset.
-  moveMarkedOption(keyboardKey: string): void;
+  // Get the option marked.
+  getMarkedOption(): GlnOption | null;
+  // Move the marked option by the key.
+  moveMarkedOptionByKey(keyboardKey: string): void;
+  // Set the marked option as selected.
+  setMarkedOptionAsSelected(): void;
 }
 
 export interface Focusable {

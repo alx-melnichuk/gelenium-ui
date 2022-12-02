@@ -79,14 +79,6 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   public positionValue: GlnOptionListPosition = GlnOptionListPosition.start; // Binding attribute "position" ('start' | 'center' | 'end').
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
 
-  // interface GlnOptionParent - start
-  // checkmark?: boolean | null | undefined; // Only for multiple=true
-  // multiple?: boolean | null | undefined;
-  // noRipple?: boolean | null | undefined;
-  // optionSelection(option: unknown): void;
-  // setOptionsPanel?(value: GlnOptionsPanel): void;
-  // interface GlnOptionParent - finish
-
   protected optionHeight: number = 0;
   protected optionListScroll: GlnOptionListScroll | null = null;
   protected optionListTrigger: GlnOptionListTrigger | null = null;
@@ -176,23 +168,35 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
     this.changeDetectorRef.markForCheck();
     this.closed.emit();
   };
-  /** Move the option marker by the amount of the offset. */
-  public moveMarkedOption = (keyboardKey: string): void => {
-    this.optionListScroll?.moveMarkedOption(keyboardKey);
+  /** Get the option marked. */
+  public getMarkedOption = (): GlnOption | null => {
+    return this.optionListScroll?.getMarkedOption() || null;
   };
-
+  /** Move the marked option by the key. */
+  public moveMarkedOptionByKey = (keyboardKey: string): void => {
+    this.optionListScroll?.moveMarkedOptionByKey(keyboardKey);
+  };
+  /** Set the marked option as selected. */
+  public setMarkedOptionAsSelected = (): void => {
+    const option: GlnOption | null = this.optionListScroll?.getMarkedOption() || null;
+    console.log(`setMarkedOptionAsSelected(); option.value=`, option?.getValue()); // #
+    if (option !== null) {
+      this.setOptionSelected(option);
+    }
+  };
   // ** interface GlnOptionList - finish **
 
   // ** interface GlnOptionParent - start **
 
-  public optionSelection(optionItem: GlnOption): void {
-    console.log(`optionSelection(); optionItem.value=`, optionItem.getValue()); // #
+  /** Set the option as selected. */
+  public setOptionSelected(optionItem: GlnOption): void {
+    console.log(`setOptionSelected(); optionItem.value=`, optionItem.getValue()); // #
 
     Promise.resolve().then(() => {
       this.selected.emit(optionItem);
       const value: string | null | undefined = optionItem.getValue<string>();
       this.optionListTrigger?.setValue(value);
-      console.log(`optionSelection(); this.optionListTrigger.setValue(value);`); // #
+      console.log(`setOptionSelected(); this.optionListTrigger.setValue(value);`); // #
       if (this.isOptionsPanelOpen) {
         this.optionListTrigger?.passFocus();
         this.closePanel();

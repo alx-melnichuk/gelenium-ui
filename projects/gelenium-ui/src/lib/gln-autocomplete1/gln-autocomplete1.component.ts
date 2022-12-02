@@ -164,7 +164,7 @@ export class GlnAutocomplete1Component implements OnChanges, OnInit, GlnOptionPa
 
   // ** interface GlnOptionParent - start **
 
-  public optionSelection(optionItem: GlnOptionComponent): void {
+  public setOptionSelected(optionItem: GlnOptionComponent): void {
     console.log(`optionSelection(); optionItem.value=`, optionItem.value); // #
     Promise.resolve().then(() => {
       if (this.autocompleteTrigger) {

@@ -11,7 +11,9 @@ export interface GlnOptionParent {
   checkmark?: boolean | null | undefined; // Only for multiple=true
   multiple?: boolean | null | undefined;
   noRipple?: boolean | null | undefined;
-  optionSelection(option: GlnOption): void;
+  // Set the option as selected.
+  setOptionSelected(option: GlnOption): void;
+  // Define an instance of the options panel.
   setOptionsPanel?(value: GlnOptionsPanel): void;
 }
 

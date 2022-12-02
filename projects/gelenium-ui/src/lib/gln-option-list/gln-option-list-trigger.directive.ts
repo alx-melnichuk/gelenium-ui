@@ -149,7 +149,12 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
       } else if (KeyboardKeysToMoveMarkedOption.indexOf(event.key) > -1) {
         event.preventDefault();
         event.stopPropagation();
-        this.optionList.moveMarkedOption(event.key);
+        this.optionList.moveMarkedOptionByKey(event.key);
+      } else if ('Enter' === event.key) {
+        event.preventDefault();
+        event.stopPropagation();
+        console.log(`'Enter' === event.key`); // #
+        this.optionList.setMarkedOptionAsSelected();
       }
     }
 

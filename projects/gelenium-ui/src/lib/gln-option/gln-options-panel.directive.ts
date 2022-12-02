@@ -1,4 +1,5 @@
 import { Directive, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, Optional, SimpleChanges } from '@angular/core';
+
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
 
@@ -31,6 +32,7 @@ export class GlnOptionsPanelDirective implements OnChanges, OnInit, OnDestroy, G
   constructor(public hostRef: ElementRef<HTMLElement>, @Optional() @Inject(GLN_OPTION_PARENT) public parent: GlnOptionParent) {
     console.log(`parent ${this.parent != null ? '!' : ''}= null`);
     if (this.parent != null && typeof this.parent['setOptionsPanel'] === 'function') {
+      // Define an instance of the options panel.
       this.parent.setOptionsPanel({
         movingMarkedOption: (delta: number): void => this.movingMarkedOption(delta),
       });
@@ -99,6 +101,7 @@ export class GlnOptionsPanelDirective implements OnChanges, OnInit, OnDestroy, G
       }
     }
   }
+
   private getIndexFirstVisibleOption(countOptions: number, visibleSize: number, indexMarked: number, indexVisible: number): number {
     let result: number = indexVisible;
     if (countOptions > 0 && visibleSize > 0 && countOptions > visibleSize && indexMarked > -1 && indexMarked < countOptions) {
@@ -161,55 +164,4 @@ export class GlnOptionsPanelDirective implements OnChanges, OnInit, OnDestroy, G
   private settingCssMaxHeight(elem: ElementRef<HTMLElement>, maxHeight: number | null): void {
     HtmlElemUtil.setProperty(elem, '--glnacpo-max-height', NumberUtil.str(maxHeight)?.concat('px'));
   }
-
-  /*
-  private indexFirstVisibleOption: number = -1;
-  private markedOption: GlnOptionComponent | null = null;
-  private optionHeight: number = 0;
-  private options: GlnOptionComponent[] = [];
-  private selectPanelRef: ElementRef<HTMLElement> | null = null;
-  private visibleSizeVal: number | null = null;
-  */
-
-  /*public ngOnInit(): void {
-    console.log(`glnOptionsPanel`);
-    this.selectPanelRef = this.hostRef;
-    if (this.config) {
-      this.options = this.config.options || [];
-      this.visibleSizeVal = this.config.visibleSize || 0;
-
-      if (this.optionHeight === 0) {
-        this.optionHeight = this.getOptionHeight(this.options);
-      }
-
-      const indexMarked = this.markedOption != null ? this.options.indexOf(this.markedOption) : -1;
-      if (this.markedOption !== null && this.selectPanelRef !== null && this.visibleSizeVal > 0 && this.optionHeight > 0) {
-        this.indexFirstVisibleOption = this.getIndexFirstVisibleOption(this.options.length, this.visibleSizeVal, indexMarked, -1);
-        this.selectPanelRef.nativeElement.scrollTo(0, this.indexFirstVisibleOption * this.optionHeight);
-      }
-    }
-  }*/
-
-  // ** Public methods **
-
-  /*public moveMarkedOption(isNext: boolean): GlnOptionComponent | null {
-    let result: GlnOptionComponent | null = null;
-
-    // Moving the cursor marker.
-    this.markedOption = this.movingMarkedOption(this.options, isNext, this.markedOption);
-
-    const indexMarked = this.markedOption != null ? this.options.indexOf(this.markedOption) : -1;
-    const visibleSize = this.visibleSizeVal ?? 0;
-    if (visibleSize > 0 && !!this.selectPanelRef && this.optionHeight > 0) {
-      const value = this.getIndexFirstVisibleOption(this.options.length, visibleSize, indexMarked, this.indexFirstVisibleOption);
-      if (this.indexFirstVisibleOption !== value) {
-        this.indexFirstVisibleOption = value;
-        this.selectPanelRef.nativeElement.scrollTo(0, this.indexFirstVisibleOption * this.optionHeight);
-      }
-    }
-
-    return result;
-  }*/
-
-  // ** Private methods **
 }

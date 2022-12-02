@@ -92,7 +92,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   public isFocused = false;
   public frameSizeVal: GlnFrameSize | null = null; // Binding attribute "frameSize".
   public frameSizeValue: number = 0;
-  public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
+  public noRipple: boolean | null = null; // Binding attribute "isNoRipple".
   public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
 

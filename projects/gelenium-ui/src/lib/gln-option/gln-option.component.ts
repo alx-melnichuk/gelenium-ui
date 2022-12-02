@@ -63,7 +63,7 @@ export class GlnOptionComponent implements OnChanges, OnInit, GlnOption {
   @HostListener('click')
   public doClick(): void {
     if (this.parent && !this.disabled) {
-      this.parent.optionSelection(this);
+      this.parent.setOptionSelected(this);
     }
   }
 

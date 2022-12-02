@@ -29,7 +29,8 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
   public ngOnInit(): void {
     console.log(`optionList.length=${this.optionList.length}`); // #
     this.attached.emit({
-      moveMarkedOption: (keyboardKey: string): void => this.moveMarkedOption(keyboardKey),
+      getMarkedOption: (): GlnOption | null => this.getMarkedOption(),
+      moveMarkedOptionByKey: (keyboardKey: string): void => this.moveMarkedOptionByKey(keyboardKey),
     });
   }
 
@@ -41,30 +42,12 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
 
   // ** interface GlnOptionListScroll - start **
 
-  /** Moving the option marker by the specified offset amount. */
-  public moveMarkedOption0(keyboardKey: string): void {
-    const indexPrev = this.markedOption != null ? this.optionList.indexOf(this.markedOption) : -1;
-    const delta: number = this.getDeltaForKeyboardKey0(keyboardKey, indexPrev, this.optionList.length);
-    console.log(`movingMarkedOption(${keyboardKey})`); // #
-    // console.log(`movingMarkedOption(${keyboardKey} delta=${delta})`); // #
-    const indexNext = indexPrev + delta;
-    if (this.optionList.length > 0 && delta !== 0 && -1 < indexNext && indexNext < this.optionList.length) {
-      console.log(`movingMarkedOption(delta=${delta})`); // #
-      // Change option marker.
-      this.markedOption?.setMarked(false);
-      this.markedOption = this.optionList[indexNext];
-      this.markedOption.setMarked(true);
-
-      const panelRect: DOMRect = this.hostRef.nativeElement.getBoundingClientRect();
-      const scrollY = this.getScrollYOnPanel0(indexPrev, indexNext, this.optionList, panelRect);
-      if (scrollY !== 0) {
-        const scrollTop: number = this.hostRef.nativeElement.scrollTop;
-        this.hostRef.nativeElement.scrollTo(0, scrollTop + scrollY);
-      }
-    }
+  /** Get the option marked. */
+  public getMarkedOption(): GlnOption | null {
+    return this.markedOption;
   }
-
-  public moveMarkedOption(keyboardKey: string): void {
+  /** Move the marked option by the key. */
+  public moveMarkedOptionByKey(keyboardKey: string): void {
     const indexPrev = this.markedOption != null ? this.optionList.indexOf(this.markedOption) : -1;
     const panelRect: DOMRect = this.hostRef.nativeElement.getBoundingClientRect();
     let result: ScrollOptionType = { index: -1, scroll: 0 };
@@ -73,7 +56,7 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
     } else if (KeyboardKeysToMoveMarkedToPage.indexOf(keyboardKey) > -1) {
       result = this.scrollOptionToPage(keyboardKey, indexPrev, this.optionList, panelRect);
     }
-    console.log(`movingMarkedOption() index=${result.index} scroll=${result.scroll}`); // #
+    console.log(`moveMarkedOptionByKey() index=${result.index} scroll=${result.scroll}`); // #
     if (-1 < result.index && result.index < this.optionList.length) {
       // Change option marker.
       this.markedOption?.setMarked(false);
@@ -92,7 +75,7 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
 
   // ** Private methods **
 
-  private getScrollYOnPanel0(indexPrev: number, indexNext: number, optionList: GlnOption[], panelRect: DOMRect): number {
+  /*private getScrollYOnPanel0(indexPrev: number, indexNext: number, optionList: GlnOption[], panelRect: DOMRect): number {
     let result: number = 0;
     let isTop = false;
     let isBottom = false;
@@ -113,7 +96,7 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
       result = this.getDeltaScrollYOnPanel0(panelRect, indexNext, optionList, isTop, isBottom);
     }
     return result;
-  }
+  }*/
 
   private scrollOptionToArrow(keyboardKey: string, indexPrev: number, optionList: GlnOption[], panelRect: DOMRect): ScrollOptionType {
     const result: ScrollOptionType = { index: -1, scroll: 0 };
@@ -190,7 +173,7 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
     }
     return result;
   }
-  private scrollOption(keyboardKey: string, indexPrev: number, optionList: GlnOption[], panelRect: DOMRect): ScrollOptionType {
+  /*private scrollOption(keyboardKey: string, indexPrev: number, optionList: GlnOption[], panelRect: DOMRect): ScrollOptionType {
     let scrollTop: number = 0;
     const indexMax = optionList.length - 1;
     let index1: number = -1;
@@ -232,8 +215,8 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
       scrollTop = option1Rect.top - panelRect.top;
     }
     return { index: indexNext, scroll: scrollTop };
-  }
-  private getDeltaScrollYOnPanel0(panelRect: DOMRect, index: number, optionList: GlnOption[], isTop: boolean, isBottom: boolean): number {
+  }*/
+  /*private getDeltaScrollYOnPanel0(panelRect: DOMRect, index: number, optionList: GlnOption[], isTop: boolean, isBottom: boolean): number {
     let result: number = 0;
     const option: GlnOption | null = -1 < index && index < optionList.length ? optionList[index] : null;
     if (option != null && (isTop || isBottom)) {
@@ -253,9 +236,9 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
       result = option1Rect.top - panelRect.top;
     }
     return result;
-  }
+  }*/
 
-  private getDeltaForKeyboardKey0(keyboardKey: string, indexPrev: number, amount: number): number {
+  /*private getDeltaForKeyboardKey0(keyboardKey: string, indexPrev: number, amount: number): number {
     let result: number = 0;
     if ('ArrowDown' === keyboardKey) {
       result = 1;
@@ -267,5 +250,5 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
       result = amount - indexPrev - 1;
     }
     return result;
-  }
+  }*/
 }

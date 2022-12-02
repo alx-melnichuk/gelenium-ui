@@ -484,7 +484,7 @@ export class GlnSelectComponent
 
   // ** interface GlnOptionParent - start **
 
-  public optionSelection(optionItem: GlnOptionComponent): void {
+  public setOptionSelected(optionItem: GlnOptionComponent): void {
     Promise.resolve().then(() => {
       this.selectionOptionElement(optionItem);
       if (this.isPanelOpen && !this.isFocused) {
