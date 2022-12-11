@@ -146,17 +146,17 @@ gln-select {
   
   &:not([noAnm]) {
     opacity: 0;
-    &[is-open]:not([is-hide]) {
-      animation: kf-sl-open-panel 200ms cubic-bezier(0.2, 0, 0.2, 1) 0ms;
+    &[is-show]:not([is-hide]) {
+      animation: kf-sl-show-panel 200ms cubic-bezier(0.2, 0, 0.2, 1) 0ms;
       opacity: 1;
     }
-    &:not([is-open])[is-hide] {
-      animation: kf-sl-close-panel 200ms linear 0ms;
+    &:not([is-show])[is-hide] {
+      animation: kf-sl-hide-panel 200ms linear 0ms;
       opacity: 0;
     }
   }
 
-  @keyframes kf-sl-open-panel {
+  @keyframes kf-sl-show-panel {
     0% {
       opacity: 0;
       transform: translateY(var(--glnslpo-translate-y, 0px)) scale(0.6);
@@ -167,7 +167,7 @@ gln-select {
     }
   }
 
-  @keyframes kf-sl-close-panel {
+  @keyframes kf-sl-hide-panel {
     0% {
       opacity: 1;
       transform: none;
@@ -191,6 +191,6 @@ gln-select {
     outline: 0;
     -webkit-overflow-scrolling: touch;
     // To block the display of a shadow, you must specify "--glnslpo-elevation: none;".
-    box-shadow: var(--glnslpo-elevation, rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px);
+    box-shadow: var(--glnslpo-elevation, (rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px));
   }
 }
