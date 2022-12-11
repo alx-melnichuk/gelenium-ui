@@ -952,7 +952,7 @@ export class GlnSelectComponent
     const horizontalAlignment: HorizontalConnectionPos = this.getPosition(position || null);
     return [
       { originX: horizontalAlignment, originY: 'bottom', overlayX: horizontalAlignment, overlayY: 'top' },
-      { originX: horizontalAlignment, originY: 'top', overlayX: horizontalAlignment, overlayY: 'bottom', offsetY: -5 },
+      { originX: horizontalAlignment, originY: 'top', overlayX: horizontalAlignment, overlayY: 'bottom' /*, offsetY: -5*/ },
     ];
   }
 }
