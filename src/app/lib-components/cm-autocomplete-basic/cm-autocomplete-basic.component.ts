@@ -54,14 +54,17 @@ export class CmAutocompleteBasicComponent {
   ];
   public exterior02b = 'outlined';
   public control02b = {
-    model02d: new FormControl(null, []),
     model02e: new FormControl(null, []),
-    // demo
-    // model02i: new FormControl(null, []),
+    model02f: new FormControl(null, []),
+    model02g: new FormControl(null, []),
+    model02h: new FormControl(null, []),
+    model02i: new FormControl(null, []),
     model02j: new FormControl(null, []),
     model02k: new FormControl(null, []),
-    model02l: new FormControl(null, []),
-    model02m: new FormControl(null, []),
+    // model02l: new FormControl(null, []),
+    // model02m: new FormControl(null, []),
+    // model02n: new FormControl(null, []),
+    // model02o: new FormControl(null, []),
   };
   public formGroup02b: FormGroup = new FormGroup(this.control02b);
 

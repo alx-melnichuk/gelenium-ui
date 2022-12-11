@@ -1,10 +1,10 @@
 <ng-template [ngIf]="isOptionsPanelOpen || hasPanelAnimation">
   <div glnolp-container
-    [style.top.px]="panelTop"
     [style.minWidth.px]="panelMinWidth"
     [style.maxWidth.px]="panelMaxWidth"
     glnOptionListPanel
-    [glnOptionListPanelOriginRect]="isNotMaxWidthAndPositionCenter(isMaxWidth, positionValue) ? originRect : null">
+    [glnOptionListPanelOriginRect]="isNotMaxWidthAndPositionCenter(isMaxWidth, positionValue) ? originRect : null"
+    (glnOptionListPanelAttached)="optionListPanelAttached($event)">
     <div glnolp-wrap
       [ngClass]="[(noAnimation ? 'gln-no-animation' : '')]"
       [attr.noAnm]="noAnimation ? '' : null"

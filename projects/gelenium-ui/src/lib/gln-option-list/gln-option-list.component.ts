@@ -26,6 +26,15 @@ import { NumberUtil } from '../_utils/number.util';
 import { GlnOptionList, GlnOptionListPosition, GlnOptionListPositionUtil } from './gln-option-list.interface';
 import { GlnOptionListScroll } from './gln-option-list-scroll.interface';
 import { GlnOptionListTrigger } from './gln-option-list-trigger.interface';
+import { ScreenUtil } from '../_utils/screen.util';
+
+const CSS_PROP_BORDER_RADIUS = '--glnolp--border-radius';
+const CSS_PROP_MAX_HEIGHT = '--glnolp--max-height';
+const CSS_PROP_BOTTOM = '--glnolp--bottom';
+const CSS_PROP_LEFT = '--glnolp--left';
+const CSS_PROP_RIGHT = '--glnolp--right';
+const CSS_PROP_TOP = '--glnolp--top';
+const CSS_PROP_TRANSLATE_Y = '--glnolp--translate-y';
 
 @Component({
   selector: 'gln-option-list',
@@ -70,8 +79,11 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   public hasPanelAnimation: boolean = false;
   public isMaxWidth: boolean = false; // Binding attribute "isMaxWd".
   public isOptionsPanelOpen: boolean = false;
+  public isPanelOnTop: boolean = false;
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
+  public optionsPanelRef: ElementRef<HTMLElement> | null = null;
   public panelBorderRadius: number | null = null;
+  public panelBottom: number | null = null;
   public panelLeft: number | null = null;
   public panelMaxHeight: number | null = null;
   public panelMaxWidth: number | null = null;
@@ -133,12 +145,12 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
 
       // Prepare and setting property 'border-radius'.
       this.panelBorderRadius = this.originRect.height > 0 ? NumberUtil.roundTo100(this.originRect.height / 10) : null;
-      HtmlElemUtil.setProperty(this.hostRef, '--glnolpn--border-radius', NumberUtil.str(this.panelBorderRadius)?.concat('px'));
+      HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(this.panelBorderRadius)?.concat('px'));
 
       // Prepare and setting property 'max-height'.
       const visibleSize = this.visibleSizeValue;
       this.panelMaxHeight = visibleSize != null && visibleSize > 0 && this.optionHeight > 0 ? this.optionHeight * visibleSize : null;
-      HtmlElemUtil.setProperty(this.hostRef, '--glnolpn--max-height', NumberUtil.str(this.panelMaxHeight)?.concat('px'));
+      HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MAX_HEIGHT, NumberUtil.str(this.panelMaxHeight)?.concat('px'));
 
       // Prepare and setting properties: 'max-width', 'min-width'.
       this.panelMinWidth = this.originRect.width;
@@ -154,8 +166,8 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
         } else if (!this.isMaxWidth && GlnOptionListPosition.end === this.positionValue) {
           this.panelRight = isJoinOnLeft ? -this.originRect.width : 0;
         }
-        HtmlElemUtil.setProperty(this.hostRef, '--glnolpn--panel-left', NumberUtil.str(this.panelLeft)?.concat('px'));
-        HtmlElemUtil.setProperty(this.hostRef, '--glnolpn--panel-right', NumberUtil.str(this.panelRight)?.concat('px'));
+        HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_LEFT, NumberUtil.str(this.panelLeft)?.concat('px'));
+        HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_RIGHT, NumberUtil.str(this.panelRight)?.concat('px'));
       }
 
       // Prepare and setting property 'top'.
@@ -212,6 +224,24 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
 
   // ** interface GlnOptionParent - finish **
 
+  public optionListPanelAttached(panelRef: ElementRef<HTMLElement>): void {
+    console.log(`optionListPanelAttached()`); // #
+    this.optionsPanelRef = panelRef;
+    const panelHeight = this.getHeight(this.optionsPanelRef);
+    this.isPanelOnTop = this.isCheckPanelOnTop(this.originRect, panelHeight, ScreenUtil.getHeight());
+    if (!this.noAnimation && panelHeight > 0) {
+      HtmlElemUtil.setProperty(this.optionsPanelRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.isPanelOnTop, panelHeight));
+    }
+    if (this.isPanelOnTop && this.originRect) {
+      // Prepare and setting property 'top'.
+      this.panelTop = null;
+      const hostRect: DOMRect = this.hostRef.nativeElement.getBoundingClientRect();
+      this.panelBottom = -(NumberUtil.roundTo100(this.originRect.top - hostRect.top) - 1);
+    }
+    HtmlElemUtil.setProperty(this.optionsPanelRef, CSS_PROP_TOP, NumberUtil.str(this.panelTop)?.concat('px'));
+    HtmlElemUtil.setProperty(this.optionsPanelRef, CSS_PROP_BOTTOM, NumberUtil.str(this.panelBottom)?.concat('px'));
+  }
+
   public optionListScrollAttached(value: GlnOptionListScroll): void {
     console.log(`optionListScrollAttached()`, value); // #
     this.optionListScroll = value;
@@ -226,4 +256,28 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   }
 
   // ** Private methods **
+
+  private isCheckPanelOnTop(triggerRect: DOMRect | null, panelHeight: number, screenHeight: number): boolean {
+    let result = false;
+    if (!!triggerRect && triggerRect.top > 0 && triggerRect.height > 0 && panelHeight > 0 && screenHeight > 0) {
+      const value = triggerRect.top + triggerRect.height + panelHeight;
+      result = value > screenHeight;
+    }
+    console.log(`isCheckPanelOnTop() result=${result}`); // #
+    return result;
+  }
+
+  private getHeight(value: ElementRef<HTMLElement> | null): number {
+    return value ? Number(getComputedStyle(value.nativeElement).getPropertyValue('height').replace('px', '')) : 0;
+  }
+
+  /** Define the "TranslateY" parameter to correctly open or close. */
+  private getTranslateY(isPanelOnTop: boolean, panelHeight: number): string | null {
+    let result: string | null = null;
+    if (panelHeight > 0) {
+      const delta = String(NumberUtil.roundTo100((panelHeight - 0.6 * panelHeight) / 2)).concat('px');
+      result = (isPanelOnTop ? '' : '-') + delta;
+    }
+    return result;
+  }
 }

@@ -1,5 +1,5 @@
 <!-- Basic - start  -->
-<ng-container *ngIf="true">
+<ng-container *ngIf="false">
   <section mr-vr>
     <h3 class="app-hover-link">
       Basic.
@@ -189,9 +189,24 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
         This value is multiplied by the height of the option and defines the
         maximum height of the options panel.
       </li>
+      <li>
+        isNoAnimation
+        <br />
+        demo1
+        <br />
+        demo2
+        <br />
+        demo3
+        <br />
+        demo4
+        <br />
+        demo5
+        <br />
+        demo6
+      </li>
     </ul>
   </section>
-
+  <!-- css: "--glnbt-elevation"  style="--glnbt-elevation: none;"  -->
   <hr br-nn />
 
   <section mr-vr
@@ -220,13 +235,13 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
             <em>Attribute: without isMaxWd.</em>
           </small>
         </div>
-        <gln-input formControlName="model02d"
+        <gln-input formControlName="model02e"
           class="aca-middle"
           label="Fruit"
           [exterior]="exterior02b"
-          [glnAutocompleteTrigger]="autocomplete02d">
+          [glnAutocompleteTrigger]="autocomplete02e">
         </gln-input>
-        <gln-autocomplete #autocomplete02d="glnAutocomplete">
+        <gln-autocomplete #autocomplete02e="glnAutocomplete">
           <gln-option *ngFor="let item of fruitsB"
             [value]="item">{{ capitalizeFirstLetter(item) }}
           </gln-option>
@@ -239,13 +254,13 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
             <em>Attribute: with isMaxWd.</em>
           </small>
         </div>
-        <gln-input formControlName="model02e"
+        <gln-input formControlName="model02f"
           class="aca-middle"
           label="Fruit"
           [exterior]="exterior02b"
-          [glnAutocompleteTrigger]="autocomplete02e">
+          [glnAutocompleteTrigger]="autocomplete02f">
         </gln-input>
-        <gln-autocomplete #autocomplete02e="glnAutocomplete"
+        <gln-autocomplete #autocomplete02f="glnAutocomplete"
           isMaxWd>
           <gln-option *ngFor="let item of fruitsB"
             [value]="item">{{ capitalizeFirstLetter(item) }}
@@ -253,43 +268,19 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
         </gln-autocomplete>
       </div>
 
-      <!--<div class="app-elem">
-          <div>
-            <small>
-              <em>Attribute: wdOrigin and max-width.</em>
-            </small>
-          </div>
-          <gln-input formControlName="model02j"
-            class="aca-large"
-            label="Fruit"
-            [exterior]="exterior02b"
-            [glnAutocompleteTrigger]="autocomplete02j">
-          </gln-input>
-          <gln-autocomplete #autocomplete02j="glnAutocomplete"
-            wdOrigin>
-            <gln-option *ngFor="let item of fruitsB"
-              [value]="item">
-              {{ capitalizeFirstLetter(item) }}
-            </gln-option>
-            <gln-option value="buddha's hand (fingered citron)">
-              Buddha's hand (Fingered citron)
-            </gln-option>
-          </gln-autocomplete>
-        </div>-->
-
       <div class="app-elem">
         <div>
           <small>
             <em>Attribute: position=center.</em>
           </small>
         </div>
-        <gln-input formControlName="model02k"
+        <gln-input formControlName="model02g"
           class="aca-middle"
           label="Fruit"
           [exterior]="exterior02b"
-          [glnAutocompleteTrigger]="autocomplete02k">
+          [glnAutocompleteTrigger]="autocomplete02g">
         </gln-input>
-        <gln-autocomplete #autocomplete02k="glnAutocomplete"
+        <gln-autocomplete #autocomplete02g="glnAutocomplete"
           position="center">
           <gln-option *ngFor="let item of fruitsB"
             [value]="item">
@@ -304,13 +295,13 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
             <em>Attribute: position=end.</em>
           </small>
         </div>
-        <gln-input formControlName="model02l"
+        <gln-input formControlName="model02h"
           class="aca-middle"
           label="Fruit"
           [exterior]="exterior02b"
-          [glnAutocompleteTrigger]="autocomplete02l">
+          [glnAutocompleteTrigger]="autocomplete02h">
         </gln-input>
-        <gln-autocomplete #autocomplete02l="glnAutocomplete"
+        <gln-autocomplete #autocomplete02h="glnAutocomplete"
           position="end">
           <gln-option *ngFor="let item of fruitsB"
             [value]="item">
@@ -319,23 +310,22 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
         </gln-autocomplete>
       </div>
 
-
       <div class="app-elem aca-middle">
         <div>
           <small>
-            <em>Attribute: visibleSize=8.</em>
+            <em>Attribute: visibleSize=6.</em>
           </small>
         </div>
-        <gln-input formControlName="model02m"
+        <gln-input formControlName="model02i"
           style="width: 161px;"
           label="Fruit"
           [exterior]="exterior02b"
           wdFull9
-          [glnAutocompleteTrigger]="autocomplete02m"
+          [glnAutocompleteTrigger]="autocomplete02i"
           hintOrError="The 'visibleSize' are used.">
         </gln-input>
-        <gln-autocomplete #autocomplete02m="glnAutocomplete"
-          [visibleSize]="8">
+        <gln-autocomplete #autocomplete02i="glnAutocomplete"
+          [visibleSize]="6">
           <gln-option *ngFor="let item of fruits"
             [value]="item">
             {{ capitalizeFirstLetter(item) }}
@@ -343,89 +333,51 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
         </gln-autocomplete>
       </div>
 
+      <div class="app-elem">
+        <div>
+          <small>
+            <em>Attribute: isNoAnimation.</em>
+          </small>
+        </div>
+        <gln-input formControlName="model02j"
+          class="aca-middle"
+          label="Fruit"
+          [exterior]="exterior02b"
+          [glnAutocompleteTrigger]="autocomplete02j">
+        </gln-input>
+        <gln-autocomplete #autocomplete02j="glnAutocomplete"
+          isNoAnimation>
+          <gln-option *ngFor="let item of fruitsB"
+            [value]="item">{{ capitalizeFirstLetter(item) }}
+          </gln-option>
+        </gln-autocomplete>
+      </div>
 
-      <!-- <div class="app-elem aca-middle">
-          <div>
-            <small>
-              <em>Attribute: visibleSize=4, position="center".</em>
-            </small>
-          </div>
-          <gln-input formControlName="model02m"
-            label="Fruit"
-            [exterior]="exterior02b"
-            wdFull
-            [glnAutocompleteTrigger]="autocomplete02n"
-            hintOrError="The 'visibleSize' are used.">
-          </gln-input>
-          <gln-autocomplete #autocomplete02n="glnAutocomplete"
-            [visibleSize]="4"
-            position="center">
-            <gln-option *ngFor="let item of fruits"
-              [value]="item">
-              {{ capitalizeFirstLetter(item) }} - {{ capitalizeFirstLetter(item) }} demo
-            </gln-option>
-          </gln-autocomplete>
-        </div> -->
-
-      <!-- <div class="app-elem aca-middle">
-          <div>
-            <small>
-              <em>Attribute: visibleSize=4, position="end".</em>
-            </small>
-          </div>
-          <gln-input formControlName="model02m"
-            label="Fruit"
-            [exterior]="exterior02b"
-            wdFull
-            [glnAutocompleteTrigger]="autocomplete02o"
-            hintOrError="The 'visibleSize' are used.">
-          </gln-input>
-          <gln-autocomplete #autocomplete02o="glnAutocomplete"
-            [visibleSize]="4"
-            position="end">
-            <gln-option *ngFor="let item of fruits"
-              [value]="item">
-              {{ capitalizeFirstLetter(item) }} - {{ capitalizeFirstLetter(item) }} demo
-            </gln-option>
-          </gln-autocomplete>
-        </div> -->
-
+      <div class="app-elem">
+        <div>
+          <small>
+            <em>css: --glnolp-elevation.</em>
+          </small>
+        </div>
+        <gln-input formControlName="model02k"
+          class="aca-middle"
+          label="Fruit"
+          [exterior]="exterior02b"
+          [glnAutocompleteTrigger]="autocomplete02k">
+        </gln-input>
+        <gln-autocomplete #autocomplete02k="glnAutocomplete"
+          style="--glnolp-elevation: none;">
+          <gln-option *ngFor="let item of fruitsB"
+            [value]="item">{{ capitalizeFirstLetter(item) }}
+          </gln-option>
+        </gln-autocomplete>
+      </div>
 
     </div>
   </form>
 
   <hr br-nn />
 </ng-container>
-
-<!-- 
-        <div *ngIf="false"
-        class="app-elem">
-        <div>
-          <small>
-            <em>Attribute: position='end'.</em>
-          </small>
-        </div>
-        <div class="aca-middle aca-inline">
-          <gln-input formControlName="model02l"
-            label="Fruit"
-            [exterior]="exterior02b"
-            wdFull
-            [glnAutocompleteTrigger]="optionList02l">
-          </gln-input>
-        </div>
-        <gln-autocomplete #optionList02l="glnAutocomplete"
-          [visibleSize]="5"
-          position9="start"
-          position9="end"
-          position9="center">
-          <gln-option *ngFor="let item of fruitsB; index as idx;"
-            [value]="item">
-            {{ idx + ' ' + capitalizeFirstLetter(item) }}
-          </gln-option>
-        </gln-autocomplete>
-      </div>
-
- -->
 
 <p>-</p>
 <p>-</p>
