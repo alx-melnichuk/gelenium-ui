@@ -115,6 +115,30 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
         </gln-autocomplete>
       </div>
 
+      <div class="app-elem">
+        <div mb0>
+          <small><em>Native "input" element</em></small>
+        </div>
+        <div>
+          <small>
+            <em>
+              Model: {{ control01.model01d.value !== null
+              ? control01.model01d.value : 'null' }}
+            </em>
+          </small>
+        </div>
+        <input type="text"
+          class="aca-input"
+          formControlName="model01d"
+          [glnAutocompleteTrigger]="autocomplete01d" />
+        <gln-autocomplete #autocomplete01d="glnAutocomplete">
+          <gln-option value="mango">Mango</gln-option>
+          <gln-option value="lemon">Lemon</gln-option>
+          <gln-option value="orange">Orange</gln-option>
+          <gln-option value="kiwi">Kiwi</gln-option>
+        </gln-autocomplete>
+      </div>
+
     </div>
 
   </form>

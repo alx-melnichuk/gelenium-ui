@@ -3,11 +3,15 @@
 app-cm-autocomplete-basic {
   display: block;
 
-  // Block "Basic", Block "Attributes". 
+  // Block "Basic". 
 	.aca-middle {
     width: 160px;
 	}
 
+  .aca-input {
+    line-height: 2em;
+    margin-top: 1em;
+  }
   // Block "Attributes".
 
   
