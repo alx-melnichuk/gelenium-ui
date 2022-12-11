@@ -64,9 +64,9 @@ let uniqueIdCounter = 0;
 
 export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT_CONFIG');
 
-const CSS_ATTR_FOR_FRAME_FOCUS = 'foc';
-const CSS_ATTR_FOR_PANEL_OPENING_ANIMATION = 'is-open';
-const CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION = 'is-hide';
+const CSS_ATTR_FRAME_FOCUS = 'foc';
+const CSS_ATTR_PANEL_OPENING_ANIMATION = 'is-open';
+const CSS_ATTR_PANEL_CLOSING_ANIMATION = 'is-hide';
 const CSS_PROP_TRANSLATE_Y = '--glnslpo-translate-y';
 
 @Component({
@@ -560,7 +560,7 @@ export class GlnSelectComponent
         // (Cases-B4) Panel is open and mouse click outside of panel but on trigger.
         // For case Cases-B3,B4, let's add the "foc" attribute to force the display of focus.
         this.isFocusAttrOnFrame = true;
-        HtmlElemUtil.setAttr(this.renderer, this.frameComp.hostRef, CSS_ATTR_FOR_FRAME_FOCUS, '');
+        HtmlElemUtil.setAttr(this.renderer, this.frameComp.hostRef, CSS_ATTR_FRAME_FOCUS, '');
       }
     }
   }
@@ -630,7 +630,7 @@ export class GlnSelectComponent
       return;
     }
     if (this.isFocusAttrOnFrame) {
-      HtmlElemUtil.setAttr(this.renderer, this.frameComp.hostRef, CSS_ATTR_FOR_FRAME_FOCUS, null);
+      HtmlElemUtil.setAttr(this.renderer, this.frameComp.hostRef, CSS_ATTR_FRAME_FOCUS, null);
     }
     this.isPanelOpen = false;
     this.changeDetectorRef.markForCheck();
@@ -652,8 +652,8 @@ export class GlnSelectComponent
       if (!this.noAnimation && !options?.noAnimation) {
         const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement.children[0] as HTMLElement);
         // Add an attribute for animation and transformation.
-        HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, null);
-        HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_CLOSING_ANIMATION, '');
+        HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_PANEL_OPENING_ANIMATION, null);
+        HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_PANEL_CLOSING_ANIMATION, '');
       }
     }
     if (options?.noAnimation && this.hasPanelAnimation) {
@@ -709,7 +709,7 @@ export class GlnSelectComponent
       HtmlElemUtil.setClass(this.renderer, selectPanelWrapRef, 'gln-no-animation', true);
     } else {
       // Add an attribute for animation and transformation.
-      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_FOR_PANEL_OPENING_ANIMATION, '');
+      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_PANEL_OPENING_ANIMATION, '');
     }
   }
   /** Callback when the overlay panel is detached. */
