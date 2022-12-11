@@ -1,17 +1,23 @@
-<ng-template [ngIf]="isOptionsPanelOpen">
+<ng-template [ngIf]="isOptionsPanelOpen || hasPanelAnimation">
   <div glnolp-container
     [style.top.px]="panelTop"
     [style.minWidth.px]="panelMinWidth"
     [style.maxWidth.px]="panelMaxWidth"
     glnOptionListPanel
     [glnOptionListPanelOriginRect]="isNotMaxWidthAndPositionCenter(isMaxWidth, positionValue) ? originRect : null">
-    <div glnolp-wrap>
+    <div glnolp-wrap
+      [ngClass]="[(noAnimation ? 'gln-no-animation' : '')]"
+      [attr.noAnm]="noAnimation ? '' : null"
+      [attr.is-show]="isOptionsPanelOpen ? '' : null"
+      [attr.is-hide]="!isOptionsPanelOpen ? '' : null"
+      (animationend)="hasPanelAnimation = isOptionsPanelOpen"
+      (animationcancel)="hasPanelAnimation = isOptionsPanelOpen">
       <div glnol-panel
         [glnOptionListScroll]="options"
         (glnOptionListScrollAttached)="optionListScrollAttached($event)"
-        class="gln-autocomplete-panel"
+        class="gln-option-list-panel"
         role="listbox"
-        id9="id"
+        [attr.id]="id + '-panel'"
         attr.aria-label9="ariaLabel || null"
         attr.aria-labelledby9="_getPanelAriaLabelledby(formFieldId)"
         ngClass9="getPanelClass(panelClassList)">

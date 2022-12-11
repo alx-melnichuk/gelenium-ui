@@ -112,7 +112,7 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
     // Update the value of the DOM element.
     const event = new Event('input', { bubbles: true, cancelable: true });
     const inputElement: HTMLInputElement = this.hostRef.nativeElement as HTMLInputElement;
-    inputElement.value = value || '';
+    inputElement.value = value as string;
     inputElement.dispatchEvent(event);
   }
 
@@ -127,7 +127,7 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
       return;
     }
     if (this.optionList.isPanelOpen()) {
-      this.optionList?.closePanel();
+      this.optionList?.close();
     } else {
       this.openOptionsPanel();
     }
@@ -145,7 +145,7 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
     } else if (this.optionList?.isPanelOpen()) {
       console.log(`event.key=${event.key}`); // #
       if (['Escape', 'Tab'].indexOf(event.key) > -1) {
-        this.optionList.closePanel();
+        this.optionList.close();
       } else if (KeyboardKeysToMoveMarkedOption.indexOf(event.key) > -1) {
         event.preventDefault();
         event.stopPropagation();
@@ -192,7 +192,7 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
   }
 
   private openOptionsPanel(): void {
-    this.optionList?.openPanel({
+    this.optionList?.open({
       passFocus: (): void => this.passFocus(),
       getOriginalRect: (): DOMRect | null => this.getOriginalRect(),
       setValue: (value: string): void => this.setValue(value),

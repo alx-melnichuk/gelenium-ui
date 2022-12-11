@@ -13,9 +13,9 @@ export interface GlnOptionList {
   // A sign that the panel is open.
   isPanelOpen(): boolean;
   // Open the autocomplete suggestion panel.
-  openPanel(trigger: GlnOptionListTrigger): void;
+  open(trigger: GlnOptionListTrigger): void;
   // Close the autocomplete suggestion panel.
-  closePanel(): void;
+  close(options?: { noAnimation?: boolean }): void;
   // Get the option marked.
   getMarkedOption(): GlnOption | null;
   // Move the marked option by the key.

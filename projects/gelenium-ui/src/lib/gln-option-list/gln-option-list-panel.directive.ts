@@ -1,6 +1,6 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
-import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { Directive, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
 
 @Directive({
@@ -10,6 +10,9 @@ import { NumberUtil } from '../_utils/number.util';
 export class GlnOptionListPanelDirective implements OnInit {
   @Input('glnOptionListPanelOriginRect')
   public originRect: DOMRect | null | undefined;
+
+  @Output('glnOptionListPanelAttached')
+  readonly attached: EventEmitter<ElementRef<HTMLElement>> = new EventEmitter();
 
   private panelLeft: number | null = null;
   private panelRight: number | null = null;
@@ -26,5 +29,6 @@ export class GlnOptionListPanelDirective implements OnInit {
       HtmlElemUtil.setProperty(this.hostRef, '--glnolpd--panel-left', NumberUtil.str(this.panelLeft)?.concat('px'));
       HtmlElemUtil.setProperty(this.hostRef, '--glnolpd--panel-right', NumberUtil.str(this.panelRight)?.concat('px'));
     }
+    this.attached.emit(this.hostRef);
   }
 }

@@ -45,6 +45,8 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   public visibleSize: number | null | undefined;
   @Input()
   public isMaxWd: string | boolean | null | undefined;
+  @Input()
+  public isNoAnimation: string | boolean | null | undefined;
 
   @Output()
   readonly opened: EventEmitter<void> = new EventEmitter();
@@ -65,10 +67,10 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
 
   // public currConfig: GlnAutocompleteConfig;
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
-  // public hasPanelAnimation: boolean = false;
+  public hasPanelAnimation: boolean = false;
   public isMaxWidth: boolean = false; // Binding attribute "isMaxWd".
   public isOptionsPanelOpen: boolean = false;
-  // public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
+  public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
   public panelBorderRadius: number | null = null;
   public panelLeft: number | null = null;
   public panelMaxHeight: number | null = null;
@@ -98,6 +100,9 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
     if (changes['isMaxWd']) {
       this.isMaxWidth = !!BooleanUtil.init(this.isMaxWd);
     }
+    if (changes['isNoAnimation']) {
+      this.noAnimation = !!BooleanUtil.init(this.isNoAnimation);
+    }
     if (changes['position']) {
       this.positionValue = GlnOptionListPositionUtil.create(this.position || null);
     }
@@ -119,7 +124,7 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
     return this.isOptionsPanelOpen;
   };
   /** Open the autocomplete suggestion panel. */
-  public openPanel = (trigger: GlnOptionListTrigger | null): void => {
+  public open = (trigger: GlnOptionListTrigger | null): void => {
     this.optionListTrigger = trigger;
     this.originRect = this.optionListTrigger?.getOriginalRect() || null;
     if (!this.disabled && this.originRect != null && !this.isOptionsPanelOpen && this.options.length > 0) {
@@ -161,10 +166,11 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
     }
   };
   /** Close the autocomplete suggestion panel. */
-  public closePanel = (): void => {
+  public close = (options?: { noAnimation?: boolean }): void => {
     this.isOptionsPanelOpen = false;
     this.optionListTrigger = null;
     this.originRect = null;
+
     this.changeDetectorRef.markForCheck();
     this.closed.emit();
   };
@@ -199,7 +205,7 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
       console.log(`setOptionSelected(); this.optionListTrigger.setValue(value);`); // #
       if (this.isOptionsPanelOpen) {
         this.optionListTrigger?.passFocus();
-        this.closePanel();
+        this.close();
       }
     });
   }
@@ -213,6 +219,10 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
 
   public isNotMaxWidthAndPositionCenter(isWdOrigin: boolean, positionValue: GlnOptionListPosition): boolean {
     return !isWdOrigin && GlnOptionListPosition.center === positionValue;
+  }
+
+  public log(text: string): void {
+    console.log(text);
   }
 
   // ** Private methods **
