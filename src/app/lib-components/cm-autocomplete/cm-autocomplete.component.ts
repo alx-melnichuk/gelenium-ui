@@ -34,7 +34,6 @@ export class CmAutocompleteComponent implements AfterViewInit, OnDestroy {
   }
 
   public handlerEventSiteSchemeScroll = (): void => {
-    console.log(`handlerEventSiteSchemeScroll();`); // $
     GlnOptionListOpenUtil.closeAll();
   };
 

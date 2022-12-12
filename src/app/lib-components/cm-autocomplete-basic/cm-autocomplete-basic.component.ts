@@ -52,21 +52,25 @@ export class CmAutocompleteBasicComponent {
     'mango', 'ripe lemon', 'gorgeous orange',
     'african cherry orange', 'succulent watermelon'
   ];
+  // attributes-supported01
   public exterior02b = 'outlined';
   public control02b = {
     model02e: new FormControl(null, []),
     model02f: new FormControl(null, []),
     model02g: new FormControl(null, []),
+  };
+  public formGroup02b: FormGroup = new FormGroup(this.control02b);
+
+  // attributes-supported02
+  public exterior02c = 'outlined';
+  public control02c = {
     model02h: new FormControl(null, []),
     model02i: new FormControl(null, []),
     model02j: new FormControl(null, []),
     model02k: new FormControl(null, []),
-    // model02l: new FormControl(null, []),
-    // model02m: new FormControl(null, []),
-    // model02n: new FormControl(null, []),
-    // model02o: new FormControl(null, []),
+    model02l: new FormControl(null, []),
   };
-  public formGroup02b: FormGroup = new FormGroup(this.control02b);
+  public formGroup02c: FormGroup = new FormGroup(this.control02c);
 
   // prettier-ignore
   public fruits = [
