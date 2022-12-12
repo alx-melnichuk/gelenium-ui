@@ -22,11 +22,12 @@ import { GlnOptionUtil } from '../gln-option/gln-option.util';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
+import { ScreenUtil } from '../_utils/screen.util';
 
 import { GlnOptionList, GlnOptionListPosition, GlnOptionListPositionUtil } from './gln-option-list.interface';
+import { GlnOptionListOpenUtil } from './gln-option-list-open.util';
 import { GlnOptionListScroll } from './gln-option-list-scroll.interface';
 import { GlnOptionListTrigger } from './gln-option-list-trigger.interface';
-import { ScreenUtil } from '../_utils/screen.util';
 
 const CSS_PROP_BORDER_RADIUS = '--glnolp--border-radius';
 const CSS_PROP_MAX_HEIGHT = '--glnolp--max-height';
@@ -141,8 +142,10 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
     this.originRect = this.optionListTrigger?.getOriginalRect() || null;
     if (!this.disabled && this.originRect != null && !this.isOptionsPanelOpen && this.options.length > 0) {
       this.isOptionsPanelOpen = true;
-      const hostRect: DOMRect = this.hostRef.nativeElement.getBoundingClientRect();
+      // Add the current object to the list of elements with the panel open.
+      GlnOptionListOpenUtil.add(this);
 
+      const hostRect: DOMRect = this.hostRef.nativeElement.getBoundingClientRect();
       // Prepare and setting property 'border-radius'.
       this.panelBorderRadius = this.originRect.height > 0 ? NumberUtil.roundTo100(this.originRect.height / 10) : null;
       HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(this.panelBorderRadius)?.concat('px'));
@@ -179,12 +182,19 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   };
   /** Close the autocomplete suggestion panel. */
   public close = (options?: { noAnimation?: boolean }): void => {
-    this.isOptionsPanelOpen = false;
-    this.optionListTrigger = null;
-    this.originRect = null;
+    if (this.isOptionsPanelOpen) {
+      this.isOptionsPanelOpen = false;
+      // Remove the current object from the list of items with the panel open.
+      GlnOptionListOpenUtil.remove(this);
 
-    this.changeDetectorRef.markForCheck();
-    this.closed.emit();
+      this.optionListTrigger = null;
+      this.originRect = null;
+      if (this.hasPanelAnimation && options?.noAnimation) {
+        this.hasPanelAnimation = false;
+      }
+      this.changeDetectorRef.markForCheck();
+      this.closed.emit();
+    }
   };
   /** Get the option marked. */
   public getMarkedOption = (): GlnOption | null => {
