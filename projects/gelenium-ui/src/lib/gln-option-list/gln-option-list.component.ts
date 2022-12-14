@@ -26,8 +26,8 @@ import { ScreenUtil } from '../_utils/screen.util';
 
 import { GlnOptionList, GlnOptionListPosition, GlnOptionListPositionUtil } from './gln-option-list.interface';
 import { GlnOptionListOpenUtil } from './gln-option-list-open.util';
-import { GlnOptionListScroll } from './gln-option-list-scroll.interface';
 import { GlnOptionListTrigger } from './gln-option-list-trigger.interface';
+import { GlnOptionsScroll } from '../gln-option/gln-options-scroll.interface';
 
 const CSS_PROP_BORDER_RADIUS = '--glnolp--border-radius';
 const CSS_PROP_MAX_HEIGHT = '--glnolp--max-height';
@@ -99,7 +99,7 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
 
   protected optionHeight: number = 0;
-  protected optionListScroll: GlnOptionListScroll | null = null;
+  protected optionsScroll: GlnOptionsScroll | null = null;
   protected optionListTrigger: GlnOptionListTrigger | null = null;
   protected originRect: DOMRect | null = null;
 
@@ -205,15 +205,15 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   };
   /** Get the option marked. */
   public getMarkedOption = (): GlnOption | null => {
-    return this.optionListScroll?.getMarkedOption() || null;
+    return this.optionsScroll?.getMarkedOption() || null;
   };
   /** Move the marked option by the key. */
   public moveMarkedOptionByKey = (keyboardKey: string): void => {
-    this.optionListScroll?.moveMarkedOptionByKey(keyboardKey);
+    this.optionsScroll?.moveMarkedOptionByKey(keyboardKey);
   };
   /** Set the marked option as selected. */
   public setMarkedOptionAsSelected = (): void => {
-    const option: GlnOption | null = this.optionListScroll?.getMarkedOption() || null;
+    const option: GlnOption | null = this.optionsScroll?.getMarkedOption() || null;
     console.log(`setMarkedOptionAsSelected(); option.value=`, option?.value); // #
     if (option !== null) {
       this.setOptionSelected(option);
@@ -259,9 +259,9 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
     HtmlElemUtil.setProperty(this.optionsPanelRef, CSS_PROP_BOTTOM, NumberUtil.str(this.panelBottom)?.concat('px'));
   }
 
-  public optionListScrollAttached(value: GlnOptionListScroll): void {
+  public optionsScrollAttached(value: GlnOptionsScroll): void {
     console.log(`optionListScrollAttached()`, value); // #
-    this.optionListScroll = value;
+    this.optionsScroll = value;
   }
 
   public isNotMaxWidthAndPositionCenter(isWdOrigin: boolean, positionValue: GlnOptionListPosition): boolean {

@@ -13,8 +13,8 @@
       (animationend)="hasPanelAnimation = isOptionsPanelOpen"
       (animationcancel)="hasPanelAnimation = isOptionsPanelOpen">
       <div glnol-panel
-        [glnOptionListScroll]="options"
-        (glnOptionListScrollAttached)="optionListScrollAttached($event)"
+        [glnOptionsScroll]="options"
+        (glnOptionsScrollAttached)="optionsScrollAttached($event)"
         class="gln-option-list-panel"
         role="listbox"
         [attr.id]="id + '-panel'"
