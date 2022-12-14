@@ -7,11 +7,14 @@ import {
   Renderer2,
   ElementRef,
   ChangeDetectorRef,
+  Input,
 } from '@angular/core';
 
 import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
 import { GlnOptionListComponent } from '../gln-option-list/gln-option-list.component';
 import { GlnOptionList } from '../gln-option-list/gln-option-list.interface';
+
+let uniqueIdCounter = 0;
 
 @Component({
   selector: 'gln-autocomplete',
@@ -23,6 +26,8 @@ import { GlnOptionList } from '../gln-option-list/gln-option-list.interface';
   providers: [{ provide: GLN_OPTION_PARENT, useExisting: GlnAutocompleteComponent }],
 })
 export class GlnAutocompleteComponent extends GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList, GlnOptionParent {
+  @Input()
+  public override id = `glnac-${uniqueIdCounter++}`;
   constructor(renderer: Renderer2, hostRef: ElementRef<HTMLElement>, changeDetectorRef: ChangeDetectorRef) {
     super(renderer, hostRef, changeDetectorRef);
   }

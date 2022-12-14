@@ -37,6 +37,8 @@ const CSS_PROP_RIGHT = '--glnolp--right';
 const CSS_PROP_TOP = '--glnolp--top';
 const CSS_PROP_TRANSLATE_Y = '--glnolp--translate-y';
 
+let uniqueIdCounter = 0;
+
 @Component({
   selector: 'gln-option-list',
   exportAs: 'glnOptionList',
@@ -47,6 +49,8 @@ const CSS_PROP_TRANSLATE_Y = '--glnolp--translate-y';
   providers: [{ provide: GLN_OPTION_PARENT, useExisting: GlnOptionListComponent }],
 })
 export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList, GlnOptionParent {
+  @Input()
+  public id = `glnol-${uniqueIdCounter++}`;
   @Input()
   public isDisabled: string | boolean | null | undefined;
   @Input()
@@ -125,6 +129,9 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   }
 
   ngOnInit(): void {
+    // Update ID value if it is missing.
+    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
+
     const fontSize = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('font-size').replace('px', '') || '0');
     const lineHeight = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height').replace('px', '') || '0');
     this.optionHeight = GlnOptionUtil.getHeightOption(fontSize, lineHeight);

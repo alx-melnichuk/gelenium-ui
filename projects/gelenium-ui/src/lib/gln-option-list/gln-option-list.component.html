@@ -17,7 +17,7 @@
         (glnOptionListScrollAttached)="optionListScrollAttached($event)"
         class="gln-option-list-panel"
         role="listbox"
-        id9="id + '-panel'"
+        [attr.id]="id + '-panel'"
         attr.aria-label9="ariaLabel || null"
         attr.aria-labelledby9="_getPanelAriaLabelledby(formFieldId)"
         ngClass9="getPanelClass(panelClassList)">

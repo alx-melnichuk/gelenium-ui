@@ -161,7 +161,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
 
   <ul>
     <li>
-      ??"id" - parameter for defining the unique identifier of the field
+      "id" - parameter for defining the unique identifier of the field
       (id="unique_identifier");
     </li>
     <li>
@@ -169,16 +169,6 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
       <a [href]="urlCmAutocomplete + '#config-interface'">More details.</a>
     </li>
     <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
-    <!-- <li>
-      "wdOrigin" - attribute sets the minimum and maximum width of the options
-      panel to be equal to the width of the parent.
-      <br />
-      Without this setting, the maximum width of the options panel is determined
-      by its content.
-      <br />
-      The value of the minimum width of the options panel is always equal to the
-      width of the parent.
-    </li> -->
     <li>
       "position" - Defines horizontal positioning.
       It can take the following values:
@@ -188,9 +178,6 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
         <li>"end" - positioned on the right edge;</li>
       </ul>
     </li>
-    <!-- <li>
-      isNoAnimation
-    </li> -->
   </ul>
 </section>
 
@@ -214,7 +201,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: position=start (default).</em>
+          <em>Attribute: id, position=start (default).</em>
         </small>
       </div>
       <gln-input formControlName="model02e"
@@ -224,6 +211,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
         [glnAutocompleteTrigger]="autocomplete02e">
       </gln-input>
       <gln-autocomplete #autocomplete02e="glnAutocomplete"
+        id="unique_id_autocomplete02e"
         position="start">
         <gln-option *ngFor="let item of fruitsB"
           [value]="item">
@@ -291,18 +279,22 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
   </h4>
   <ul>
     <li>
-      isMaxWd
+      "isMaxWd" - set the maximum width when expanding the drop-down list of options.
     </li>
     <li>
-      "visibleSize" - Specifies the maximum number of visible option elements.
-      This value is multiplied by the height of the option and defines the
-      maximum height of the options panel.
+      "visibleSize" - sets the maximum number of visible option elements.
+      <br />
+      The options bar is set to <i>max-height = optionHeight * visibleSize</i>.
+      <br />
+      Where option height is <i>optionHeight = lineHeight + 2 * 0.375 * fontSize</i>;
     </li>
     <li>
-      isNoAnimation
+      "isNoAnimation" - hide the display of animation when expanding the drop-down
+      list of options.
     </li>
     <li>
-      css: --glnolp-elevation
+      css: '--glnolp-elevation: none;' - hide the display of shadow effects when
+      expanding the drop-down list of options.
     </li>
   </ul>
 
