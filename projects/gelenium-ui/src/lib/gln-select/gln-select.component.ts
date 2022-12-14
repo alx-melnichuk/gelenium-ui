@@ -60,14 +60,14 @@ import { GlnSelectionChange } from './gln-selection-change.interface';
 import { GlnSelectOpenUtil } from './gln-select-open.util';
 import { GlnSelectTriggerDirective, GLN_SELECT_TRIGGER } from './gln-select-trigger.directive';
 
-let uniqueIdCounter = 0;
-
 export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT_CONFIG');
 
 const CSS_ATTR_FRAME_FOCUS = 'foc';
 const CSS_ATTR_PANEL_OPENING_ANIMATION = 'is-show';
 const CSS_ATTR_PANEL_CLOSING_ANIMATION = 'is-hide';
 const CSS_PROP_TRANSLATE_Y = '--glnslpo-translate-y';
+
+let uniqueIdCounter = 0;
 
 @Component({
   selector: 'gln-select',
