@@ -60,7 +60,7 @@ import { GlnSelectionChange } from './gln-selection-change.interface';
 import { GlnSelectOpenUtil } from './gln-select-open.util';
 import { GlnSelectTriggerDirective, GLN_SELECT_TRIGGER } from './gln-select-trigger.directive';
 import { GlnOption } from '../gln-option/gln-option.interface';
-import { GlnOptionListScroll } from '../gln-option-list/gln-option-list-scroll.interface';
+import { GlnOptionsScroll, OptionsScrollKeys } from '../gln-option/gln-options-scroll.interface';
 
 export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT_CONFIG');
 
@@ -251,7 +251,7 @@ export class GlnSelectComponent
   public triggerRect: DOMRect | null = null;
   public visibleSizeVal: number | null = null; // Binding attribute "visibleSize".
 
-  protected optionListScroll: GlnOptionListScroll | null = null;
+  protected optionsScroll: GlnOptionsScroll | null = null;
 
   private isFocusAttrOnFrame = false;
   private maxWidth = 0;
@@ -730,37 +730,29 @@ export class GlnSelectComponent
           this.open();
         }
       } else {
-        switch (event.key) {
-          case 'ArrowDown':
-          case 'ArrowUp':
-          case 'Home':
-          case 'End':
-          case 'PageUp':
-          case 'PageDown':
+        if (event.key === 'Enter') {
+          // (Cases-B7) Panel is open and click the Enter key.
+          const marked1Option: GlnOption | null = this.optionsScroll?.getMarkedOption() || null;
+          if (marked1Option != null) {
             event.preventDefault();
             event.stopPropagation();
-            this.optionListScroll?.moveMarkedOptionByKey(event.key);
-            break;
-          // (Cases-B7) Panel is open and click the Enter key.
-          case 'Enter':
-            const marked1Option: GlnOption | null = this.optionListScroll?.getMarkedOption() || null;
-            if (marked1Option != null) {
-              event.preventDefault();
-              event.stopPropagation();
-              // Selects the element of the current marker.
-              this.selectionOptionElement(marked1Option);
-              // And if not multiple, then closing the panel.
-              if (!this.multiple) {
-                this.close();
-              }
+            // Selects the element of the current marker.
+            this.selectionOptionElement(marked1Option);
+            // And if not multiple, then closing the panel.
+            if (!this.multiple) {
+              this.close();
             }
-            break;
+          }
+        } else if (OptionsScrollKeys.indexOf(event.key) > -1) {
+          event.preventDefault();
+          event.stopPropagation();
+          this.optionsScroll?.moveMarkedOptionByKey(event.key);
         }
       }
     }
   }
-  public optionListScrollAttached(value: GlnOptionListScroll): void {
-    this.optionListScroll = value;
+  public optionsScrollAttached(value: GlnOptionsScroll): void {
+    this.optionsScroll = value;
   }
   /** Processing the option selected by the user. */
   public selectionOptionElement(addOption: GlnOption | null): void {

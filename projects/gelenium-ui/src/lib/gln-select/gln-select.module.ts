@@ -9,7 +9,6 @@ import { GlnFrameOrnamentModule } from '../directives/gln-frame-ornament/gln-fra
 import { GlnHintOrErrorModule } from '../gln-hint-or-error/gln-hint-or-error.module';
 import { GlnOptionModule } from '../gln-option/gln-option.module';
 import { GlnOptionGroupModule } from '../gln-option-group/gln-option-group.module';
-import { GlnOptionListModule } from '../gln-option-list/gln-option-list.module';
 
 import { GlnSelectComponent } from './gln-select.component';
 import { GLN_SELECT_SCROLL_STRATEGY_PROVIDER_REPOSITION } from './gln-select.providers';
@@ -27,7 +26,6 @@ import { GlnSelectTriggerDirective } from './gln-select-trigger.directive';
     GlnHintOrErrorModule,
     GlnOptionModule,
     GlnOptionGroupModule,
-    GlnOptionListModule,
   ],
   exports: [GlnSelectComponent, GlnSelectTriggerDirective, GlnOptionModule, GlnOptionGroupModule],
   providers: [GLN_SELECT_SCROLL_STRATEGY_PROVIDER_REPOSITION],

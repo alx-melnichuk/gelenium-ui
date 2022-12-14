@@ -6,3 +6,5 @@ export * from './gln-option.module';
 export * from './gln-option.util';
 export * from './gln-options-panel.directive';
 export * from './gln-options-panel.interface';
+export * from './gln-options-scroll.directive';
+export * from './gln-options-scroll.interface';

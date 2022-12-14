@@ -114,8 +114,8 @@
     <div glnsl-panel
       class="gln-select-panel"
       [ngClass]="getPanelClass(panelClassList)"
-      [glnOptionListScroll]="options"
-      (glnOptionListScrollAttached)="optionListScrollAttached($event)"
+      [glnOptionsScroll]="options"
+      (glnOptionsScrollAttached)="optionsScrollAttached($event)"
       role="listbox"
       [attr.id]="id + '-panel'"
       [attr.aria-multiselectable]="multiple"
