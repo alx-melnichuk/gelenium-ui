@@ -58,7 +58,9 @@ export class GlnOptionsPanelDirective implements OnChanges, OnInit, OnDestroy, G
   }
 
   public ngOnDestroy(): void {
-    this.markedOption?.setMarked(false);
+    if (this.markedOption) {
+      this.markedOption.marked = false;
+    }
   }
 
   // ** Public methods **
@@ -73,9 +75,11 @@ export class GlnOptionsPanelDirective implements OnChanges, OnInit, OnDestroy, G
     let markedOption: GlnOptionComponent | null = null;
     const newIndex = indexOld + delta;
     if (this.optionList.length > 0 && -1 < newIndex && newIndex < this.optionList.length) {
-      this.markedOption?.setMarked(false);
+      if (this.markedOption) {
+        this.markedOption.marked = false;
+      }
       markedOption = this.optionList[newIndex];
-      markedOption.setMarked(true);
+      markedOption.marked = true;
     }
     this.markedOption = markedOption;
 

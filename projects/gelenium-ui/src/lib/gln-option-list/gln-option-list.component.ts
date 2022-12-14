@@ -214,7 +214,7 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   /** Set the marked option as selected. */
   public setMarkedOptionAsSelected = (): void => {
     const option: GlnOption | null = this.optionListScroll?.getMarkedOption() || null;
-    console.log(`setMarkedOptionAsSelected(); option.value=`, option?.getValue()); // #
+    console.log(`setMarkedOptionAsSelected(); option.value=`, option?.value); // #
     if (option !== null) {
       this.setOptionSelected(option);
     }
@@ -225,11 +225,11 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
 
   /** Set the option as selected. */
   public setOptionSelected(optionItem: GlnOption): void {
-    console.log(`setOptionSelected(); optionItem.value=`, optionItem.getValue()); // #
+    console.log(`setOptionSelected(); optionItem.value=`, optionItem.value); // #
 
     Promise.resolve().then(() => {
       this.selected.emit(optionItem);
-      const value: string | null | undefined = optionItem.getValue<string>();
+      const value: string | null | undefined = optionItem.value as string;
       this.optionListTrigger?.setValue(value);
       console.log(`setOptionSelected(); this.optionListTrigger.setValue(value);`); // #
       if (this.isOptionsPanelOpen) {

@@ -35,7 +35,7 @@ let uniqueIdCounter = 0;
 })
 export class GlnOptionComponent implements OnChanges, OnInit, GlnOption {
   @Input()
-  public id = `glnop-${uniqueIdCounter++}`;
+  public id: string = `glnop-${uniqueIdCounter++}`;
   @Input()
   public isDisabled: string | boolean | null | undefined;
   @Input()
@@ -44,11 +44,31 @@ export class GlnOptionComponent implements OnChanges, OnInit, GlnOption {
   @ViewChild('contentRef', { static: true })
   public contentRef!: ElementRef<HTMLElement>;
 
-  public disabled: boolean | null | undefined;
+  public get disabled(): boolean | null | undefined {
+    return this.innDisabled;
+  }
+  public set disabled(value: boolean | null | undefined) {
+    this.setDisabled(value);
+  }
+  public get marked(): boolean | null | undefined {
+    return this.innMarked;
+  }
+  public set marked(value: boolean | null | undefined) {
+    this.setMarked(value);
+  }
+  public get selected(): boolean | null | undefined {
+    return this.innSelected;
+  }
+  public set selected(value: boolean | null | undefined) {
+    this.setSelected(value);
+  }
+
   public formControl: FormControl = new FormControl();
   public formGroup: FormGroup = new FormGroup({ checkinfo: this.formControl });
-  public marked = false;
-  public selected: boolean | null | undefined;
+
+  private innDisabled: boolean | null | undefined;
+  private innMarked: boolean | null | undefined;
+  private innSelected: boolean | null | undefined;
 
   constructor(
     public hostRef: ElementRef<HTMLElement>,
@@ -69,17 +89,18 @@ export class GlnOptionComponent implements OnChanges, OnInit, GlnOption {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['isDisabled']) {
-      this.disabled = BooleanUtil.init(this.isDisabled);
-      this.setDisabled(this.disabled ?? this.group?.disabled);
+      const disabled = BooleanUtil.init(this.isDisabled);
+      this.setDisabled(disabled ?? this.group?.disabled);
     }
   }
 
   public ngOnInit(): void {
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
-    if (this.disabled === undefined) {
+    if (this.innDisabled === undefined) {
       this.setDisabled(this.group?.disabled);
     }
-    this.setSelected(!!this.selected);
+    this.setMarked(!!this.innMarked);
+    this.setSelected(!!this.innSelected);
   }
 
   // ** Public methods **
@@ -94,14 +115,14 @@ export class GlnOptionComponent implements OnChanges, OnInit, GlnOption {
     return (this.contentRef.nativeElement.innerHTML || '').trim();
   }
 
-  public getValue<T>(): T | null | undefined {
-    return this.value === null ? null : this.value === undefined ? undefined : (this.value as T);
-  }
+  // ** interface GlnOption - finish **
+
+  // ** Private methods **
 
   /** Check or uncheck disabled. */
-  public setDisabled(value: boolean | null | undefined): void {
-    if (this.disabled !== !!value) {
-      this.disabled = !!value;
+  private setDisabled(value: boolean | null | undefined): void {
+    if (this.innDisabled !== !!value) {
+      this.innDisabled = !!value;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', !!value);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', value ? '' : null);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'aria-disabled', '' + !!value);
@@ -110,18 +131,18 @@ export class GlnOptionComponent implements OnChanges, OnInit, GlnOption {
     }
   }
   /** Check or uncheck marking. */
-  public setMarked(value: boolean | null): void {
-    if (this.marked !== !!value) {
-      this.marked = !!value;
+  private setMarked(value: boolean | null | undefined): void {
+    if (this.innMarked !== !!value) {
+      this.innMarked = !!value;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-marked', !!value);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'mar', value ? '' : null);
       this.changeDetectorRef.markForCheck();
     }
   }
   /** Check or uncheck selected. */
-  public setSelected(value: boolean | null): void {
-    if (this.selected !== !!value) {
-      this.selected = !!value;
+  private setSelected(value: boolean | null | undefined): void {
+    if (this.innSelected !== !!value) {
+      this.innSelected = !!value;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-selected', !!value);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'sel', value ? '' : null);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'aria-selected', '' + !!value);
@@ -129,6 +150,4 @@ export class GlnOptionComponent implements OnChanges, OnInit, GlnOption {
       this.changeDetectorRef.markForCheck();
     }
   }
-
-  // ** interface GlnOption - finish **
 }

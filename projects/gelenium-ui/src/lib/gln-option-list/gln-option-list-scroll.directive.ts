@@ -35,7 +35,9 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
   }
 
   public ngOnDestroy(): void {
-    this.markedOption?.setMarked(false);
+    if (this.markedOption) {
+      this.markedOption.marked = false;
+    }
   }
 
   // ** Public methods **
@@ -59,9 +61,11 @@ export class GlnOptionListScrollDirective implements OnInit, OnDestroy, GlnOptio
     console.log(`moveMarkedOptionByKey() index=${result.index} scroll=${result.scroll}`); // #
     if (-1 < result.index && result.index < this.optionList.length) {
       // Change option marker.
-      this.markedOption?.setMarked(false);
+      if (this.markedOption) {
+        this.markedOption.marked = false;
+      }
       this.markedOption = this.optionList[result.index];
-      this.markedOption.setMarked(true);
+      this.markedOption.marked = true;
       // Change position scroll.
       if (result.scroll !== 0) {
         const scrollTop: number = this.hostRef.nativeElement.scrollTop;

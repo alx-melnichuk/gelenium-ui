@@ -1,26 +1,26 @@
-import { GlnOptionComponent } from './gln-option.component';
+import { GlnOption } from './gln-option.interface';
 
 export class GlnOptionUtil {
-  public static setSelected(options: GlnOptionComponent[], isSelected: boolean): number {
+  public static setSelected(options: GlnOption[], isSelected: boolean): number {
     let result = 0;
     for (let idx = 0; idx < options.length; idx++) {
       const option = options[idx];
       if (option.selected !== isSelected) {
-        option.setSelected(isSelected);
+        option.selected = isSelected;
         result++;
       }
     }
     return result;
   }
-  public static findByValue(options: GlnOptionComponent[], value: unknown | null): GlnOptionComponent | null {
-    let result: GlnOptionComponent | null = null;
+  public static findByValue(options: GlnOption[], value: unknown | null): GlnOption | null {
+    let result: GlnOption | null = null;
     for (let idx = 0; idx < options.length && !result; idx++) {
       result = options[idx].value === value ? options[idx] : result;
     }
     return result;
   }
   /** Get a list of values for all selected options. */
-  public static getValues(options: GlnOptionComponent[]): unknown[] {
+  public static getValues(options: GlnOption[]): unknown[] {
     const result: unknown[] = Array(options.length);
     for (let idx = 0; idx < options.length; idx++) {
       result[idx] = options[idx].value;
@@ -28,8 +28,8 @@ export class GlnOptionUtil {
     return result;
   }
   /** Get a list of options according to an array of values. */
-  public static getOptionsByValues(newValue: unknown | unknown[] | null, options: GlnOptionComponent[]): GlnOptionComponent[] {
-    const result: GlnOptionComponent[] = [];
+  public static getOptionsByValues(newValue: unknown | unknown[] | null, options: GlnOption[]): GlnOption[] {
+    const result: GlnOption[] = [];
     const values: unknown[] = Array.isArray(newValue) ? newValue : [newValue];
     const buff = values.slice();
     for (let idx = 0; idx < options.length && buff.length > 0; idx++) {
