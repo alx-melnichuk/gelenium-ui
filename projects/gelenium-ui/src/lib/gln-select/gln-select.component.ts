@@ -59,6 +59,8 @@ import { GlnSelectConfig } from './gln-select-config.interface';
 import { GlnSelectionChange } from './gln-selection-change.interface';
 import { GlnSelectOpenUtil } from './gln-select-open.util';
 import { GlnSelectTriggerDirective, GLN_SELECT_TRIGGER } from './gln-select-trigger.directive';
+import { GlnOption } from '../gln-option/gln-option.interface';
+import { GlnOptionListScroll } from '../gln-option-list/gln-option-list-scroll.interface';
 
 export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT_CONFIG');
 
@@ -158,9 +160,9 @@ export class GlnSelectComponent
       // Get a list of menu items according to an array of values.
       const newOptions = GlnOptionUtil.getOptionsByValues(newValue, this.options);
       // Which elements of array "this.selectedOptions" are not included in array "newOptions".
-      const removed = ArrayUtil.uninclude<GlnOptionComponent>(this.selectedOptions, newOptions);
+      const removed = ArrayUtil.uninclude<GlnOption>(this.selectedOptions, newOptions);
       // Which elements of array "newOptions" are not included in array "this.selectedOptions".
-      const added = ArrayUtil.uninclude<GlnOptionComponent>(newOptions, this.selectedOptions);
+      const added = ArrayUtil.uninclude<GlnOption>(newOptions, this.selectedOptions);
 
       this.selectedOptions = this.mergeOptions(this.selectedOptions, added, removed);
       this.updateValueDataAndIsFilledAndValidity(newValue);
@@ -178,8 +180,7 @@ export class GlnSelectComponent
   @Output()
   readonly closed: EventEmitter<void> = new EventEmitter();
   @Output()
-  readonly selected: EventEmitter<{ value: unknown | null; values: unknown[]; change: GlnSelectionChange<GlnOptionComponent> }> =
-    new EventEmitter();
+  readonly selected: EventEmitter<{ value: unknown | null; values: unknown[]; change: GlnSelectionChange<GlnOption> }> = new EventEmitter();
 
   /** Overlay panel with its own parameters. */
   @ViewChild(CdkConnectedOverlay)
@@ -195,11 +196,11 @@ export class GlnSelectComponent
   @ContentChildren(GlnOptionComponent, { descendants: true })
   public optionList!: QueryList<GlnOptionComponent>;
 
-  public get options(): GlnOptionComponent[] {
-    return this.optionList?.toArray() || [];
+  public get options(): GlnOption[] {
+    return (this.optionList?.toArray() || []) as GlnOption[];
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public set options(value: GlnOptionComponent[]) {}
+  public set options(value: GlnOption[]) {}
 
   public get triggerHtmlElementRef(): ElementRef<HTMLElement> {
     return this.triggerRef as ElementRef<HTMLElement>;
@@ -243,16 +244,16 @@ export class GlnSelectComponent
   public positionList: ConnectedPosition[] = [];
   public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
   public required: boolean | null = null; // Binding attribute "isRequired".
-  public selectedOptions: GlnOptionComponent[] = [];
+  public selectedOptions: GlnOption[] = [];
   /** Strategy for handling scrolling when the selection panel is open. */
   public scrollStrategy: ScrollStrategy;
   /** The position and dimensions for the trigger's bounding box. */
   public triggerRect: DOMRect | null = null;
   public visibleSizeVal: number | null = null; // Binding attribute "visibleSize".
 
-  private indexFirstVisibleOption: number = -1;
+  protected optionListScroll: GlnOptionListScroll | null = null;
+
   private isFocusAttrOnFrame = false;
-  private markedOption: GlnOptionComponent | null = null;
   private maxWidth = 0;
   private optionHeight: number = 0;
   private selectPanelRef: ElementRef<HTMLElement> | null = null;
@@ -484,7 +485,7 @@ export class GlnSelectComponent
 
   // ** interface GlnOptionParent - start **
 
-  public setOptionSelected(optionItem: GlnOptionComponent): void {
+  public setOptionSelected(optionItem: GlnOption): void {
     Promise.resolve().then(() => {
       this.selectionOptionElement(optionItem);
       if (this.isPanelOpen && !this.isFocused) {
@@ -505,7 +506,7 @@ export class GlnSelectComponent
     return BooleanUtil.init(value);
   }
 
-  public trackByOption(index: number, item: GlnOptionComponent): string {
+  public trackByOption(index: number, item: GlnOption): string {
     return item.id;
   }
 
@@ -616,7 +617,7 @@ export class GlnSelectComponent
     if (!this.disabled && !this.readOnly && !this.isPanelOpen && this.options.length > 0) {
       this.isPanelOpen = true;
       this.hasPanelAnimation = !this.noAnimation;
-      this.markedOption = this.selectedOptions.length > 0 ? this.selectedOptions[this.selectedOptions.length - 1] : null;
+      // #?this.markedOption = this.selectedOptions.length > 0 ? this.selectedOptions[this.selectedOptions.length - 1] : null;
       this.triggerRect = this.triggerRef.nativeElement.getBoundingClientRect();
       this.isFocusAttrOnFrame = false;
       this.triggerFontSize = Number((getComputedStyle(this.triggerRef.nativeElement).fontSize || '0').replace('px', ''));
@@ -635,9 +636,6 @@ export class GlnSelectComponent
     this.isPanelOpen = false;
     this.changeDetectorRef.markForCheck();
     this.onTouched();
-    this.markedOption?.setMarked(false);
-    this.markedOption = null;
-
     const overlayElement: HTMLElement = this.connectedOverlay.overlayRef.overlayElement;
     if (overlayElement != null) {
       const panelHeight = this.getHeight(this.selectPanelRef);
@@ -695,13 +693,13 @@ export class GlnSelectComponent
       const maxHeightOfOptionsPanel = this.optionHeight * visibleSize;
       HtmlElemUtil.setProperty(overlayRef, '--glnslpo-max-height', NumberUtil.str(maxHeightOfOptionsPanel)?.concat('px'));
     }
-    // We cannot get the actual sizes and positions of elements if they are affected by a transformation.
-    // Therefore, we first get all the data, and then add attributes for animation and transformation.
-    const indexMarked = this.markedOption != null ? this.options.indexOf(this.markedOption) : -1;
-    if (this.markedOption !== null && this.selectPanelRef !== null && visibleSize > 0 && this.optionHeight > 0) {
-      this.indexFirstVisibleOption = this.getIndexFirstVisibleOption(this.options.length, visibleSize, indexMarked, -1);
-      this.selectPanelRef.nativeElement.scrollTo(0, this.indexFirstVisibleOption * this.optionHeight);
-    }
+    // #?// We cannot get the actual sizes and positions of elements if they are affected by a transformation.
+    // #?// Therefore, we first get all the data, and then add attributes for animation and transformation.
+    // #?const indexMarked = this.markedOption != null ? this.options.indexOf(this.markedOption) : -1;
+    // #?if (this.markedOption !== null && this.selectPanelRef !== null && visibleSize > 0 && this.optionHeight > 0) {
+    // #?  this.indexFirstVisibleOption = this.getIndexFirstVisibleOption(this.options.length, visibleSize, indexMarked, -1);
+    // #?  this.selectPanelRef.nativeElement.scrollTo(0, this.indexFirstVisibleOption * this.optionHeight);
+    // #?}
     // Important! These operations should be the last, they include animation and the dimensions of the panel are distorted.
     const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement?.children[0] as HTMLElement);
     if (this.noAnimation) {
@@ -735,24 +733,22 @@ export class GlnSelectComponent
         switch (event.key) {
           case 'ArrowDown':
           case 'ArrowUp':
-            // Moving the cursor marker.
-            this.markedOption = this.movingMarkedOption(this.options, event.key === 'ArrowDown', this.markedOption);
-            const indexMarked = this.markedOption != null ? this.options.indexOf(this.markedOption) : -1;
-            const visibleSize = this.visibleSizeVal ?? 0;
-            if (visibleSize > 0 && !!this.selectPanelRef && this.optionHeight > 0) {
-              const value = this.getIndexFirstVisibleOption(this.options.length, visibleSize, indexMarked, this.indexFirstVisibleOption);
-              if (this.indexFirstVisibleOption !== value) {
-                this.indexFirstVisibleOption = value;
-                this.selectPanelRef.nativeElement.scrollTo(0, this.indexFirstVisibleOption * this.optionHeight);
-              }
-            }
-            this.changeDetectorRef.markForCheck();
+          case 'Home':
+          case 'End':
+          case 'PageUp':
+          case 'PageDown':
+            event.preventDefault();
+            event.stopPropagation();
+            this.optionListScroll?.moveMarkedOptionByKey(event.key);
             break;
           // (Cases-B7) Panel is open and click the Enter key.
           case 'Enter':
-            if (this.markedOption != null) {
+            const marked1Option: GlnOption | null = this.optionListScroll?.getMarkedOption() || null;
+            if (marked1Option != null) {
+              event.preventDefault();
+              event.stopPropagation();
               // Selects the element of the current marker.
-              this.selectionOptionElement(this.markedOption);
+              this.selectionOptionElement(marked1Option);
               // And if not multiple, then closing the panel.
               if (!this.multiple) {
                 this.close();
@@ -763,31 +759,34 @@ export class GlnSelectComponent
       }
     }
   }
+  public optionListScrollAttached(value: GlnOptionListScroll): void {
+    this.optionListScroll = value;
+  }
   /** Processing the option selected by the user. */
-  public selectionOptionElement(addOption: GlnOptionComponent | null): void {
+  public selectionOptionElement(addOption: GlnOption | null): void {
     const newOptions = addOption !== null ? [addOption] : [];
     if (!this.disabled && newOptions.length > 0) {
-      const removed: GlnOptionComponent[] = [];
+      const removed: GlnOption[] = [];
       if (this.multiple) {
         // Which elements of array "this.selectedOptions" are included in array "addOptions".
-        removed.push(...ArrayUtil.include<GlnOptionComponent>(this.selectedOptions, newOptions));
+        removed.push(...ArrayUtil.include<GlnOption>(this.selectedOptions, newOptions));
       } else {
         // Which elements of array "this.selectedOptions" are not included in array "addOptions".
-        removed.push(...ArrayUtil.uninclude<GlnOptionComponent>(this.selectedOptions, newOptions));
+        removed.push(...ArrayUtil.uninclude<GlnOption>(this.selectedOptions, newOptions));
       }
       // Which elements of array "addOptions" are not included in array "this.selectedOptions".
-      const added = ArrayUtil.uninclude<GlnOptionComponent>(newOptions, this.selectedOptions);
+      const added = ArrayUtil.uninclude<GlnOption>(newOptions, this.selectedOptions);
       this.updateSelectedOptions(added, removed, true);
     }
   }
 
-  public addOption(option: GlnOptionComponent | null): void {
+  public addOption(option: GlnOption | null): void {
     if (option && this.selectedOptions.indexOf(option) === -1) {
       this.updateSelectedOptions([option], [], true);
     }
   }
 
-  public deleteOption(option: GlnOptionComponent | null): void {
+  public deleteOption(option: GlnOption | null): void {
     if (option && this.selectedOptions.indexOf(option) > -1) {
       this.updateSelectedOptions([], [option], true);
     }
@@ -834,7 +833,7 @@ export class GlnSelectComponent
     HtmlElemUtil.setAttr(renderer, elem, 'orn-rgh', ornamRgAlign?.toString());
   }
 
-  private updateSelectedOptions(added: GlnOptionComponent[], removed: GlnOptionComponent[], isEmit: boolean): unknown[] {
+  private updateSelectedOptions(added: GlnOption[], removed: GlnOption[], isEmit: boolean): unknown[] {
     this.selectedOptions = this.mergeOptions(this.selectedOptions, added, removed);
 
     const values = GlnOptionUtil.getValues(this.selectedOptions);
@@ -851,9 +850,9 @@ export class GlnSelectComponent
     return values;
   }
 
-  private mergeOptions(selected: GlnOptionComponent[], added: GlnOptionComponent[], removed: GlnOptionComponent[]): GlnOptionComponent[] {
+  private mergeOptions(selected: GlnOption[], added: GlnOption[], removed: GlnOption[]): GlnOption[] {
     GlnOptionUtil.setSelected(removed, false);
-    const currentOptions = ArrayUtil.delete<GlnOptionComponent>(selected, removed);
+    const currentOptions = ArrayUtil.delete<GlnOption>(selected, removed);
     GlnOptionUtil.setSelected(added, true);
     const resultOptions = currentOptions.concat(added);
     return this.options.filter((option) => resultOptions.includes(option));
@@ -879,24 +878,8 @@ export class GlnSelectComponent
     // Calling the validation method for the new value.
     this.onChange(this.valueData);
   }
-  /** Move the marked option to the next or previous one. */
-  private movingMarkedOption(options: GlnOptionComponent[], isNext: boolean, marked: GlnOptionComponent | null): GlnOptionComponent | null {
-    let result: GlnOptionComponent | null = null;
-    if (options.length > 0) {
-      let indexOld = -1;
-      if (marked != null) {
-        indexOld = options.indexOf(marked);
-        marked.setMarked(false);
-      }
-      const maxIndex = options.length - 1;
-      const indexNew = indexOld + (isNext && indexOld < maxIndex ? 1 : !isNext && indexOld > 0 ? -1 : 0);
-      result = options[indexNew];
-      result.setMarked(true);
-    }
-    return result;
-  }
   /** Get the height of the option. */
-  private getOptionHeight(options: GlnOptionComponent[]): number {
+  private getOptionHeight(options: GlnOption[]): number {
     const value: number[] = [];
     const count: number[] = [];
     let maxCount = -1;
@@ -917,31 +900,6 @@ export class GlnSelectComponent
       }
     }
     return resultIndex > -1 ? value[resultIndex] : 0;
-  }
-
-  private getIndexFirstVisibleOption(countOptions: number, visibleSize: number, indexMarked: number, indexVisible: number): number {
-    let result: number = indexVisible;
-    if (countOptions > 0 && visibleSize > 0 && countOptions > visibleSize && indexMarked > -1 && indexMarked < countOptions) {
-      const maxIndex = countOptions - visibleSize;
-      if (indexVisible === -1) {
-        let index = Math.floor(indexMarked / visibleSize) * visibleSize;
-        result = index + visibleSize <= countOptions ? index : maxIndex;
-      } else {
-        let endIndex = indexVisible + visibleSize;
-        if (endIndex > countOptions) {
-          endIndex = countOptions;
-          result = endIndex - visibleSize;
-        }
-
-        if (indexMarked > -1 && indexMarked < result) {
-          result = indexMarked;
-        } else if (endIndex <= indexMarked) {
-          result = indexMarked - visibleSize + 1;
-          result = result > maxIndex ? maxIndex : result;
-        }
-      }
-    }
-    return result;
   }
 
   private getPosition(value: string | null): HorizontalConnectionPos {

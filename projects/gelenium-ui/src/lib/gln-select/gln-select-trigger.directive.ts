@@ -5,6 +5,7 @@ export const GLN_SELECT_TRIGGER = new InjectionToken<GlnSelectTriggerDirective>(
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'gln-select-trigger',
+  exportAs: 'glnSelectTrigger',
   providers: [{ provide: GLN_SELECT_TRIGGER, useExisting: GlnSelectTriggerDirective }],
 })
 export class GlnSelectTriggerDirective {}
