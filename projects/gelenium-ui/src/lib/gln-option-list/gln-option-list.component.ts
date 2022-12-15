@@ -30,9 +30,11 @@ import { GlnOptionListTrigger } from './gln-option-list-trigger.interface';
 import { GlnOptionsScroll } from '../gln-option/gln-options-scroll.interface';
 
 const CSS_PROP_BORDER_RADIUS = '--glnolp--border-radius';
-const CSS_PROP_MAX_HEIGHT = '--glnolp--max-height';
 const CSS_PROP_BOTTOM = '--glnolp--bottom';
 const CSS_PROP_LEFT = '--glnolp--left';
+const CSS_PROP_MAX_HEIGHT = '--glnolp--max-height';
+const CSS_PROP_MAX_WIDTH = '--glnolp--max-width';
+const CSS_PROP_MIN_WIDTH = '--glnolp--min-width';
 const CSS_PROP_RIGHT = '--glnolp--right';
 const CSS_PROP_TOP = '--glnolp--top';
 const CSS_PROP_TRANSLATE_Y = '--glnolp--translate-y';
@@ -162,9 +164,12 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
       this.panelMaxHeight = visibleSize != null && visibleSize > 0 && this.optionHeight > 0 ? this.optionHeight * visibleSize : null;
       HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MAX_HEIGHT, NumberUtil.str(this.panelMaxHeight)?.concat('px'));
 
-      // Prepare and setting properties: 'max-width', 'min-width'.
+      // Prepare and setting property: 'min-width'.
       this.panelMinWidth = this.originRect.width;
+      HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MIN_WIDTH, NumberUtil.str(this.panelMinWidth)?.concat('px'));
+      // Prepare and setting property: 'max-width'.
       this.panelMaxWidth = this.isMaxWidth ? this.originRect.width : null;
+      HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MAX_WIDTH, NumberUtil.str(this.panelMaxWidth)?.concat('px'));
 
       // Prepare and setting properties: 'left', 'right'.
       this.panelLeft = null;

@@ -1,7 +1,5 @@
 <ng-template [ngIf]="isOptionsPanelOpen || hasPanelAnimation">
   <div glnolp-container
-    [style.minWidth.px]="panelMinWidth"
-    [style.maxWidth.px]="panelMaxWidth"
     glnOptionListPanel
     [glnOptionListPanelOriginRect]="isNotMaxWidthAndPositionCenter(isMaxWidth, positionValue) ? originRect : null"
     (glnOptionListPanelAttached)="optionListPanelAttached($event)">

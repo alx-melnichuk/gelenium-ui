@@ -67,8 +67,6 @@ export class CmAutocompleteBasicComponent {
     model02h: new FormControl(null, []),
     model02i: new FormControl(null, []),
     model02j: new FormControl(null, []),
-    model02k: new FormControl(null, []),
-    model02l: new FormControl(null, []),
   };
   public formGroup02c: FormGroup = new FormGroup(this.control02c);
 
@@ -87,6 +85,19 @@ export class CmAutocompleteBasicComponent {
     'strawberry','sweet lemon', 'tamarind' , 'tangerine' , 'watermelon'
   ];
 
+  // attributes-supported03
+  public exterior02d = 'outlined';
+
+  public control02d = {
+    model02n: new FormControl(null, []),
+    model02o: new FormControl(null, []),
+    model02p: new FormControl(null, []),
+    model02q: new FormControl(null, []),
+  };
+
+  public formGroup02d: FormGroup = new FormGroup(this.control02d);
+
+  // #old
   public formGroup0: FormGroup = new FormGroup({
     model0a: new FormControl('', []),
   });

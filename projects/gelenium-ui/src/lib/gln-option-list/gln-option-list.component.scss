@@ -24,7 +24,8 @@
     box-sizing: border-box;
     left: var(--glnolpd--panel-left, var(--glnolp--left));
     max-height: var(--glnol-max-height, var(--glnolp--max-height, 80vh));
-    max-width: 100vw;
+    max-width: var(--glnol-max-width, var(--glnolp--max-width, 100vw));
+    min-width: var(--glnol-min-width, var(--glnolp--min-width));
     position: absolute;
     right: var(--glnolpd--panel-right, var(--glnolp--right));
     top: var(--glnolp--top);
@@ -81,7 +82,7 @@
     box-sizing: border-box;
     max-height: inherit;
     min-height: 0px;
-    min-width: 0px;
+    min-width: inherit;
     overflow: auto;
     outline: 0;
     -webkit-overflow-scrolling: touch;

@@ -187,7 +187,7 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
       this.isFocusAttrOnFrame = true;
       HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, '');
     } else if (this.optionList.isPanelOpen()) {
-      // this.optionList.closePanel(); // return back.
+      this.optionList.close(); // return back.
     }
   }
 

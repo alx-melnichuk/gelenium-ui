@@ -29,8 +29,6 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
   &lt;<strong>gln-autocomplete</strong>&gt;</pre></code>
   </section>
 
-  <hr br-nn />
-
   <form [formGroup]="formGroup01"
     novalidate
     autocomplete="off">
@@ -44,8 +42,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
         <div>
           <small>
             <em>
-              Model: {{ control01.model01a.value === null
-              ? 'null' : control01.model01a.value }}
+              Model: {{ control01.model01a.value }}
             </em>
           </small>
         </div>
@@ -70,8 +67,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
         <div>
           <small>
             <em>
-              Model: {{ control01.model01b.value !== null
-              ? control01.model01b.value : 'null' }}
+              Model: {{ control01.model01b.value }}
             </em>
           </small>
         </div>
@@ -96,8 +92,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
         <div>
           <small>
             <em>
-              Model: {{ control01.model01c.value !== null
-              ? control01.model01c.value : 'null' }}
+              Model: {{ control01.model01c.value }}
             </em>
           </small>
         </div>
@@ -122,8 +117,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
         <div>
           <small>
             <em>
-              Model: {{ control01.model01d.value !== null
-              ? control01.model01d.value : 'null' }}
+              Model: {{ control01.model01d.value }}
             </em>
           </small>
         </div>
@@ -143,7 +137,12 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
 
   </form>
 </ng-container>
+
+<!-- section mr-vr
+  mat-accordion -->
+
 <hr br-nn />
+
 
 
 <!-- Attributes - start -->
@@ -201,7 +200,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: id, position=start (default).</em>
+          <em>Attribute: id, position='start' (default).</em>
         </small>
       </div>
       <gln-input formControlName="model02e"
@@ -223,7 +222,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: position=center.</em>
+          <em>Attribute: position='center'.</em>
         </small>
       </div>
       <gln-input formControlName="model02f"
@@ -244,7 +243,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: position=end.</em>
+          <em>Attribute: position='end'.</em>
         </small>
       </div>
       <gln-input formControlName="model02g"
@@ -271,6 +270,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
 <hr br-nn />
 
 
+
 <section mr-vr
   id="attributes-supported02">
   <h4 class="app-hover-link">
@@ -279,25 +279,23 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
   </h4>
   <ul>
     <li>
-      "isMaxWd" - set the maximum width when expanding the drop-down list of options.
-    </li>
-    <li>
-      "visibleSize" - sets the maximum number of visible option elements.
+      "isMaxWd" - set the maximum width when expanding the dropdown list of options.
       <br />
-      The options bar is set to <i>max-height = optionHeight * visibleSize</i>.
+      Without this setting, the maximum width of the options panel is determined by its
+      content.
       <br />
-      Where option height is <i>optionHeight = lineHeight + 2 * 0.375 * fontSize</i>;
+      The value of the minimum width of the options panel is always equal to the width
+      of the parent.
     </li>
     <li>
-      "isNoAnimation" - hide the display of animation when expanding the drop-down
-      list of options.
+      css: '--glnol-min-width: 180px;' - defines the minimum width of the option list
+      dropdown list of options.
     </li>
     <li>
-      css: '--glnolp-elevation: none;' - hide the display of shadow effects when
-      expanding the drop-down list of options.
+      css: '--glnol-max-width: 180px;' - defines the maximum width of the option list
+      dropdown list of options.
     </li>
   </ul>
-
 </section>
 
 <section mr-vr>
@@ -358,21 +356,100 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
       </gln-autocomplete>
     </div>
 
-    <div class="app-elem aca-middle">
+    <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: visibleSize=6.</em>
+          <em>Attribute: '--glnol-max-width: 185px;'.</em>
         </small>
       </div>
       <gln-input formControlName="model02j"
         style="width: 161px;"
         label="Fruit"
         [exterior]="exterior02c"
-        wdFull9
         [glnAutocompleteTrigger]="autocomplete02j"
         hintOrError="The 'visibleSize' are used.">
       </gln-input>
       <gln-autocomplete #autocomplete02j="glnAutocomplete"
+        style="--glnol-max-width: 185px;">
+        <gln-option *ngFor="let item of fruitsB"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+  </div>
+</form>
+
+<!-- section mr-vr
+  mat-accordion -->
+
+<hr br-nn />
+
+
+
+<section mr-vr
+  id="attributes-supported03">
+  <h4 class="app-hover-link">
+    Attributes are also supported:
+    <a [href]="urlCmAutocomplete + '#attributes-supported03'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "visibleSize" - sets the maximum number of visible option elements.
+      <br />
+      The options bar is set to <i>max-height = optionHeight * visibleSize</i>.
+      <br />
+      Where option height is <i>optionHeight = lineHeight + 2 * 0.375 * fontSize</i>;
+    </li>
+    <li>
+      css: '--glnol-max-height: 180px;' - defines the maximum height of the option
+      list dropdown list of options.
+    </li>
+    <li>
+      "isNoAnimation" - hide the display of animation when expanding the dropdown
+      list of options.
+    </li>
+    <li>
+      css: '--glnolp-elevation: none;' - hide the display of shadow effects when
+      expanding the dropdown list of options.
+    </li>
+  </ul>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior02d"
+    (change)="exterior02d=$event.value">
+    <mat-button-toggle [checked]="exterior02d==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02d==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02d==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup02d"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem aca-middle">
+      <div>
+        <small>
+          <em>Attribute: visibleSize=6.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02n"
+        style="width: 161px;"
+        label="Fruit"
+        [exterior]="exterior02d"
+        [glnAutocompleteTrigger]="autocomplete02n"
+        helperText="The 'visibleSize' are used.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02n="glnAutocomplete"
         [visibleSize]="6">
         <gln-option *ngFor="let item of fruits"
           [value]="item">
@@ -384,16 +461,38 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
     <div class="app-elem">
       <div>
         <small>
+          <em>css: '--glnol-max-height: 180px;'.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02o"
+        class="aca-middle"
+        label="Fruit"
+        [exterior]="exterior02d"
+        [glnAutocompleteTrigger]="autocomplete02o"
+        helperText="css: '--glnol-max-height'.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02o="glnAutocomplete"
+        style="--glnol-max-height: 180px;">
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
           <em>Attribute: isNoAnimation.</em>
         </small>
       </div>
-      <gln-input formControlName="model02k"
+      <gln-input formControlName="model02p"
         class="aca-middle"
         label="Fruit"
-        [exterior]="exterior02c"
-        [glnAutocompleteTrigger]="autocomplete02k">
+        [exterior]="exterior02d"
+        [glnAutocompleteTrigger]="autocomplete02p"
+        helperText="Attribute: isNoAnimation.">
       </gln-input>
-      <gln-autocomplete #autocomplete02k="glnAutocomplete"
+      <gln-autocomplete #autocomplete02p="glnAutocomplete"
         isNoAnimation>
         <gln-option *ngFor="let item of fruitsB"
           [value]="item">{{ capitalizeFirstLetter(item) }}
@@ -404,16 +503,17 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
     <div class="app-elem">
       <div>
         <small>
-          <em>css: --glnolp-elevation.</em>
+          <em>css: '--glnolp-elevation: none;'.</em>
         </small>
       </div>
-      <gln-input formControlName="model02l"
+      <gln-input formControlName="model02q"
         class="aca-middle"
         label="Fruit"
-        [exterior]="exterior02c"
-        [glnAutocompleteTrigger]="autocomplete02l">
+        [exterior]="exterior02d"
+        [glnAutocompleteTrigger]="autocomplete02q"
+        helperText="css: '--glnolp-elevation'.">
       </gln-input>
-      <gln-autocomplete #autocomplete02l="glnAutocomplete"
+      <gln-autocomplete #autocomplete02q="glnAutocomplete"
         style="--glnolp-elevation: none;">
         <gln-option *ngFor="let item of fruitsB"
           [value]="item">{{ capitalizeFirstLetter(item) }}
@@ -421,10 +521,14 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
       </gln-autocomplete>
     </div>
 
+
   </div>
 </form>
+<!-- section mr-vr
+  mat-accordion -->
 
 <hr br-nn />
+
 
 
 <p>-</p>
