@@ -167,7 +167,7 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
     if (this.optionList == null || this.optionList.disabled) {
       return;
     }
-    if (!this.optionList.isPanelOpen() && (inputValue || '').length > 0) {
+    if (!this.optionList.isPanelOpen()) {
       this.openOptionsPanel();
     }
   };
