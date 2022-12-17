@@ -10,6 +10,7 @@ export const KeyboardKeysToMoveMarkedToPage = ['PageUp', 'PageDown'];
 export const KeyboardKeysToMoveMarkedOption = [...KeyboardKeysToMoveMarkedToArrow, ...KeyboardKeysToMoveMarkedToPage];
 
 export interface GlnOptionList {
+  readonly disabled: boolean | null;
   // A sign that the panel is open.
   isPanelOpen(): boolean;
   // Open the autocomplete suggestion panel.

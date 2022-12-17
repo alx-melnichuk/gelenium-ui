@@ -194,7 +194,7 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   };
   /** Close the autocomplete suggestion panel. */
   public close = (options?: { noAnimation?: boolean }): void => {
-    if (this.isOptionsPanelOpen) {
+    if (!this.disabled && this.originRect != null && this.isOptionsPanelOpen) {
       this.isOptionsPanelOpen = false;
       // Remove the current object from the list of items with the panel open.
       GlnOptionListOpenUtil.remove(this);

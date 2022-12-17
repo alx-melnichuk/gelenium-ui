@@ -91,7 +91,7 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
 
   /** Set focus to the current element. */
   public passFocus(): void {
-    console.log(`passFocusToOriginal();`); // #
+    // #console.log(`passFocusToOriginal();`); // #
     if (this.accessorFocusable != null) {
       this.accessorFocusable.focus();
     } else if (isPlatformBrowser(this.platformId) && !!this.hostRef) {
@@ -104,7 +104,7 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
   }
   /** Set the new value of the current element. */
   public setValue(value: string | null | undefined): void {
-    console.log(`setValueForOriginal(); value=${value}`); // #
+    // #console.log(`setValueForOriginal(); value=${value}`); // #
     // Update the component's model value.
     if (this.accessorControl != null) {
       this.accessorControl.setValue(value, { emitEvent: true });
@@ -123,18 +123,21 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
   // ** Private methods **
 
   private handlingMousedown(): void {
-    if (this.optionList == null) {
+    if (this.optionList == null || this.optionList.disabled) {
       return;
     }
     if (this.optionList.isPanelOpen()) {
-      this.optionList?.close();
+      this.optionList.close();
     } else {
       this.openOptionsPanel();
     }
   }
 
   private handlingKeydown(event: KeyboardEvent): void {
-    if (this.optionList && !this.optionList.isPanelOpen()) {
+    if (this.optionList == null || this.optionList.disabled) {
+      return;
+    }
+    if (!this.optionList.isPanelOpen()) {
       switch (event.key) {
         case ' ':
         case 'ArrowDown':
@@ -142,8 +145,8 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
           this.openOptionsPanel();
           break;
       }
-    } else if (this.optionList?.isPanelOpen()) {
-      console.log(`event.key=${event.key}`); // #
+    } else {
+      // #console.log(`event.key=${event.key}`); // #
       if (['Escape', 'Tab'].indexOf(event.key) > -1) {
         this.optionList.close();
       } else if (KeyboardKeysToMoveMarkedOption.indexOf(event.key) > -1) {
@@ -153,20 +156,24 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
       } else if ('Enter' === event.key) {
         event.preventDefault();
         event.stopPropagation();
-        console.log(`'Enter' === event.key`); // #
+        // #console.log(`'Enter' === event.key`); // #
         this.optionList.setMarkedOptionAsSelected();
       }
     }
-
-    // #if (!this.disabled && this.isPanelOpen) { }
   }
 
   private handlingInput = (inputValue: string): void => {
-    console.log(`handlingInput() inputValue=${inputValue}`);
+    // #console.log(`handlingInput() inputValue=${inputValue}`);
+    if (this.optionList == null || this.optionList.disabled) {
+      return;
+    }
+    if (!this.optionList.isPanelOpen() && (inputValue || '').length > 0) {
+      this.openOptionsPanel();
+    }
   };
 
   private handlingFocusin(event: FocusEvent | null): void {
-    if (this.optionList == null) {
+    if (this.optionList == null || this.optionList.disabled) {
       return;
     }
     if (this.frameRef != null && this.isFocusAttrOnFrame) {
@@ -178,7 +185,7 @@ export class GlnOptionListTriggerDirective implements OnInit, OnDestroy, GlnOpti
   }
 
   private handlingFocusout(event: FocusEvent | null): void {
-    if (this.optionList == null) {
+    if (this.optionList == null || this.optionList.disabled) {
       return;
     }
     const element: HTMLElement | null = (event?.relatedTarget as HTMLElement) || null;

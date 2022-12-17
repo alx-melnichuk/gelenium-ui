@@ -44,11 +44,11 @@
     &:not([noAnm]) {
       opacity: 0;
       &[is-show]:not([is-hide]) {
-        animation: kf-ac-show-panel 200ms cubic-bezier(0.2, 0, 0.2, 1) 0ms;
+        animation: kf-ac-show-panel 120ms cubic-bezier(0.2, 0, 0.2, 1) 0ms;
         opacity: 1;
       }
       &:not([is-show])[is-hide] {
-        animation: kf-ac-hide-panel 200ms linear 0ms;
+        animation: kf-ac-hide-panel 120ms linear 0ms;
         opacity: 0;
       }
     }
