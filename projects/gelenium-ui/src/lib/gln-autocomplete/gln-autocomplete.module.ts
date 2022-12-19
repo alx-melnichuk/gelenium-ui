@@ -7,10 +7,11 @@ import { GlnOptionListModule } from '../gln-option-list/gln-option-list.module';
 
 import { GlnAutocompleteComponent } from './gln-autocomplete.component';
 import { GlnAutocompleteTriggerDirective } from './gln-autocomplete-trigger.directive';
+import { GlnAutocompletePanelDirective } from './gln-autocomplete-panel.directive';
 
 @NgModule({
-  declarations: [GlnAutocompleteComponent, GlnAutocompleteTriggerDirective],
+  declarations: [GlnAutocompleteComponent, GlnAutocompleteTriggerDirective, GlnAutocompletePanelDirective],
   imports: [CommonModule, GlnOptionModule, GlnOptionGroupModule, GlnOptionListModule],
-  exports: [GlnAutocompleteComponent, GlnAutocompleteTriggerDirective],
+  exports: [GlnAutocompleteComponent, GlnAutocompleteTriggerDirective, GlnAutocompletePanelDirective],
 })
 export class GlnAutocompleteModule {}

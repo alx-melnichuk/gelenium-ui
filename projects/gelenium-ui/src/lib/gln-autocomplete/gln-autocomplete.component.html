@@ -1,0 +1,27 @@
+<ng-template [ngIf]="isOptionsPanelOpen || hasPanelAnimation">
+  <div glnolp-container
+    #container
+    glnAutocompletePanel
+    (glnAutocompletePanelAttached)="containerAttached(container, originRect)"
+    (glnAutocompletePanelDetached)="containerDetached()">
+    <div glnolp-wrap
+      [ngClass]="[(noAnimation ? 'gln-no-animation' : '')]"
+      [attr.noAnm]="noAnimation ? '' : null"
+      [attr.is-show]="isOptionsPanelOpen ? '' : null"
+      [attr.is-hide]="!isOptionsPanelOpen ? '' : null"
+      (animationend)="hasPanelAnimation = isOptionsPanelOpen"
+      (animationcancel)="hasPanelAnimation = isOptionsPanelOpen">
+      <div glnol-panel
+        [glnOptionsScroll]="options"
+        (glnOptionsScrollAttached)="optionsScrollAttached($event)"
+        class="gln-option-list-panel"
+        role="listbox"
+        [attr.id]="id + '-panel'"
+        attr.aria-label9="ariaLabel || null"
+        attr.aria-labelledby9="_getPanelAriaLabelledby(formFieldId)"
+        ngClass9="getPanelClass(panelClassList)">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -27,6 +27,7 @@ export class GlnOptionsScrollDirective implements OnInit, OnDestroy, GlnOptionsS
   public ngOnInit(): void {
     console.log(`optionList.length=${this.optionList.length}`); // #
     this.attached.emit({
+      hostRef: this.hostRef,
       getMarkedOption: (): GlnOption | null => this.getMarkedOption(),
       moveMarkedOptionByKey: (keyboardKey: string): void => this.moveMarkedOptionByKey(keyboardKey),
     });
