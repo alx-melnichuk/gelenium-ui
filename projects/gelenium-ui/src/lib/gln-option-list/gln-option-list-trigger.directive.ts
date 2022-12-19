@@ -17,8 +17,9 @@ import { AbstractControl, NgControl } from '@angular/forms';
 import { GlnDebounceTimer } from '../_classes/gln-debounce-timer';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
-import { Focusable, Frameable, GlnOptionList, KeyboardKeysToMoveMarkedOption } from './gln-option-list.interface';
+import { GlnOptionList, KeyboardKeysToMoveMarkedOption } from './gln-option-list.interface';
 import { GlnOptionListTrigger } from './gln-option-list-trigger.interface';
+import { Focusable, Frameable } from '../gln-autocomplete/gln-autocomplete-trigger.interface';
 
 const DEBOUNCE_TIMEOUT = 600;
 const CSS_ATTR_FOR_FRAME_FOCUS = 'foc';
