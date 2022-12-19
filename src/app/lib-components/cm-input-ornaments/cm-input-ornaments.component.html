@@ -144,11 +144,11 @@
         [helperText]="
           (!controls05.model05d.value
           ? 'Required field.'
-          : (controls05.model05d.errors!['minlength']
+          : ((controls05.model05d.errors || {})['minlength']
             ? 'Minimum length '
             + controls05.model05d.errors!['minlength'].requiredLength
             + ' characters.'
-            : (controls05.model05d.errors!['maxlength']
+            : ((controls05.model05d.errors || {})['maxlength']
               ? 'Maximum length '
               + controls05.model05d.errors!['maxlength'].requiredLength
               + ' characters.'
@@ -476,11 +476,11 @@
         [helperText]="
           (!controls05.model05d.value
           ? 'Required field.'
-          : (controls05.model05d.errors!['minlength']
+          : ((controls05.model05d.errors || &#123;&#125;)['minlength']
             ? 'Minimum length '
             + controls05.model05d.errors!['minlength'].requiredLength
             + ' characters.'
-            : (controls05.model05d.errors!['maxlength']
+            : ((controls05.model05d.errors || &#123;&#125;)['maxlength']
               ? 'Maximum length '
               + controls05.model05d.errors!['maxlength'].requiredLength
               + ' characters.'
