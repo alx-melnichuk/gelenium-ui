@@ -14,10 +14,11 @@ import {
 } from '@angular/core';
 import { AbstractControl, NgControl } from '@angular/forms';
 
-import { GlnAutocompleteTrigger } from './gln-autocomplete-trigger.interface';
 import { OptionsScrollKeys } from '../gln-option/gln-options-scroll.interface';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+
 import { GlnAutocomplete } from './gln-autocomplete.interface';
+import { GlnAutocompleteTrigger } from './gln-autocomplete-trigger.interface';
 
 const CSS_ATTR_FOR_FRAME_FOCUS = 'foc';
 const TAG_NAME_OPTION = 'GLN-OPTION';
@@ -92,7 +93,7 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
     });
   }
 
-  // ** interface GlnOptionsTrigger - start **
+  // ** interface GlnAutocompleteTrigger - start **
 
   /** Set focus to the current element. */
   public passFocus(): void {
@@ -125,7 +126,7 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
     inputElement.dispatchEvent(event);
   }
 
-  // ** interface GlnOptionsTrigger - finish **
+  // ** interface GlnAutocompleteTrigger - finish **
 
   // ** Public methods **
 
