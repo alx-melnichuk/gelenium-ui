@@ -1,4 +1,3 @@
-export * from './gln-option-list-open.util';
 export * from './gln-option-list-panel.directive';
 export * from './gln-option-list-trigger.directive';
 export * from './gln-option-list-trigger.interface';

@@ -25,7 +25,6 @@ import { NumberUtil } from '../_utils/number.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
 import { GlnOptionList, GlnOptionListPosition, GlnOptionListPositionUtil } from './gln-option-list.interface';
-import { GlnOptionListOpenUtil } from './gln-option-list-open.util';
 import { GlnOptionListTrigger } from './gln-option-list-trigger.interface';
 import { GlnOptionsScroll } from '../gln-option/gln-options-scroll.interface';
 
@@ -151,8 +150,6 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
     this.originRect = this.optionListTrigger?.getOriginalRect() || null;
     if (!this.disabled && this.originRect != null && !this.isOptionsPanelOpen && this.options.length > 0) {
       this.isOptionsPanelOpen = true;
-      // Add the current object to the list of elements with the panel open.
-      GlnOptionListOpenUtil.add(this);
 
       const hostRect: DOMRect = this.hostRef.nativeElement.getBoundingClientRect();
       // Prepare and setting property 'border-radius'.
@@ -196,8 +193,6 @@ export class GlnOptionListComponent implements OnChanges, OnInit, GlnOptionList,
   public close = (options?: { noAnimation?: boolean }): void => {
     if (!this.disabled && this.originRect != null && this.isOptionsPanelOpen) {
       this.isOptionsPanelOpen = false;
-      // Remove the current object from the list of items with the panel open.
-      GlnOptionListOpenUtil.remove(this);
 
       this.optionListTrigger = null;
       this.originRect = null;

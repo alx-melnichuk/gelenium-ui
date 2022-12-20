@@ -25,17 +25,17 @@ export interface GlnOptionList {
   setMarkedOptionAsSelected(): void;
 }
 
-// export interface Focusable {
-//   focus(): void;
-// }
+export interface Focusable {
+  focus(): void;
+}
 
-// export interface HostableRef {
-//   hostRef: ElementRef<HTMLElement>;
-// }
+export interface HostableRef {
+  hostRef: ElementRef<HTMLElement>;
+}
 
-// export interface Frameable {
-//   frameComp: HostableRef;
-// }
+export interface Frameable {
+  frameComp: HostableRef;
+}
 
 // Horizontal position
 export type GlnOptionListPositionType = 'start' | 'center' | 'end';
