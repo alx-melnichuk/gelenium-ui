@@ -19,6 +19,8 @@ export class GlnOptionsScrollDirective implements OnInit, OnDestroy, GlnOptionsS
 
   @Output('glnOptionsScrollAttached')
   readonly attached: EventEmitter<GlnOptionsScroll> = new EventEmitter();
+  @Output('glnOptionsScrollDetached')
+  readonly detached: EventEmitter<void> = new EventEmitter();
 
   private markedOption: GlnOption | null = null;
 
@@ -37,6 +39,7 @@ export class GlnOptionsScrollDirective implements OnInit, OnDestroy, GlnOptionsS
     if (this.markedOption) {
       this.markedOption.marked = false;
     }
+    this.detached.emit();
   }
 
   // ** Public methods **

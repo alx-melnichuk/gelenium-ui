@@ -88,7 +88,6 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocompl
   public hasPanelAnimation: boolean = false;
   public isMaxWidth: boolean = false; // Binding attribute "isMaxWd".
   public isOptionsPanelOpen: boolean = false;
-  public isPanelOnTop: boolean = false;
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
   public panelBorderRadius: number | null = null;
   public panelBottom: number | null = null;
@@ -101,11 +100,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocompl
   public positionValue: GlnAutocompletePosition = GlnAutocompletePosition.start; // Binding attribute "position" ('start'|'center'|'end').
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
 
-  protected containerRef: ElementRef<HTMLElement> | null = null;
   protected optionHeight: number = 0;
   protected optionsScroll: GlnOptionsScroll | null = null;
-  protected optionListTrigger: GlnAutocompleteTrigger | null = null;
-  protected originRect: DOMRect | null = null;
+  protected trigger: GlnAutocompleteTrigger | null = null;
 
   constructor(protected renderer: Renderer2, public hostRef: ElementRef<HTMLElement>, protected changeDetectorRef: ChangeDetectorRef) {
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-option-list', true);
@@ -141,18 +138,28 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocompl
     this.optionHeight = GlnOptionUtil.getHeightOption(fontSize, lineHeight);
   }
 
-  // ** interface GlnOptionList - start **
+  public getHostRect(): DOMRect {
+    return this.hostRef.nativeElement.getBoundingClientRect();
+  }
+
+  public getTriggerRect(): DOMRect | null {
+    return this.trigger?.getOriginalRect() || null;
+  }
+
+  // ** interface GlnAutocomplete - start **
 
   /** A sign that the panel is open. */
   public isPanelOpen = (): boolean => {
     return this.isOptionsPanelOpen;
   };
-  /** Open the autocomplete suggestion panel. */
-  public open = (trigger: GlnAutocompleteTrigger | null): void => {
-    this.optionListTrigger = trigger;
-    this.originRect = this.optionListTrigger?.getOriginalRect() || null;
 
-    if (!this.disabled && this.originRect != null && !this.isOptionsPanelOpen && this.options.length > 0) {
+  public setTrigger = (trigger: GlnAutocompleteTrigger): void => {
+    this.trigger = trigger;
+  };
+  /** Open the autocomplete suggestion panel. */
+  public open = (): void => {
+    const triggerRect = this.getTriggerRect();
+    if (!this.disabled && triggerRect != null && !this.isOptionsPanelOpen && this.options.length > 0) {
       this.isOptionsPanelOpen = true;
       // Add the current object to the list of elements with the panel open.
       GlnAutocompleteOpenUtil.add(this);
@@ -163,11 +170,11 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocompl
       HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MAX_HEIGHT, NumberUtil.str(this.panelMaxHeight)?.concat('px'));
 
       // Prepare and setting property: 'min-width'.
-      this.panelMinWidth = this.originRect.width;
+      this.panelMinWidth = triggerRect.width;
       HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MIN_WIDTH, NumberUtil.str(this.panelMinWidth)?.concat('px'));
 
       // Prepare and setting property: 'max-width'.
-      this.panelMaxWidth = this.isMaxWidth ? this.originRect.width : null;
+      this.panelMaxWidth = this.isMaxWidth ? triggerRect.width : null;
       HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MAX_WIDTH, NumberUtil.str(this.panelMaxWidth)?.concat('px'));
 
       this.changeDetectorRef.markForCheck();
@@ -176,17 +183,14 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocompl
   };
   /** Close the autocomplete suggestion panel. */
   public close = (options?: { noAnimation?: boolean }): void => {
-    if (!this.disabled && this.originRect != null && this.isOptionsPanelOpen) {
+    if (!this.disabled && this.isOptionsPanelOpen) {
       this.isOptionsPanelOpen = false;
       // Remove the current object from the list of items with the panel open.
       GlnAutocompleteOpenUtil.remove(this);
 
-      this.optionListTrigger = null;
-      this.originRect = null;
       if (this.hasPanelAnimation && options?.noAnimation) {
         this.hasPanelAnimation = false;
       }
-      this.containerRef = null;
 
       this.changeDetectorRef.markForCheck();
       this.closed.emit();
@@ -208,7 +212,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocompl
       this.setOptionSelected(option);
     }
   };
-  // ** interface GlnOptionList - finish **
+  // ** interface GlnAutocomplete - finish **
 
   // ** interface GlnOptionParent - start **
 
@@ -219,10 +223,10 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocompl
     Promise.resolve().then(() => {
       this.selected.emit(optionItem);
       const value: string | null | undefined = optionItem.value as string;
-      this.optionListTrigger?.setValue(value);
+      this.trigger?.setValue(value);
       console.log(`setOptionSelected(); this.optionListTrigger.setValue(value);`); // #
       if (this.isOptionsPanelOpen) {
-        this.optionListTrigger?.passFocus();
+        this.trigger?.passFocus();
         this.close();
       }
     });
@@ -230,96 +234,90 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocompl
 
   // ** interface GlnOptionParent - finish **
 
-  public cleanProperties(): void {}
+  // ** directive: GlnAutocompletePanel - start **
 
-  public containerAttached(container: HTMLElement | null, originRect: DOMRect | null): void {
-    if (originRect != null && container != null) {
-      this.containerRef = HtmlElemUtil.getElementRef(container);
-      const containerRect: DOMRect = container.getBoundingClientRect();
-      const panelHeight = this.getHeight(this.containerRef);
-      this.isPanelOnTop = this.isCheckPanelOnTop(originRect, panelHeight, ScreenUtil.getHeight());
+  public containerAttached(container: HTMLElement | null, triggerRect: DOMRect | null, hostRect: DOMRect | null): void {
+    const containerRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(container);
+    if (containerRef != null && triggerRect != null) {
+      const containerRect: DOMRect = containerRef.nativeElement.getBoundingClientRect();
 
-      // Prepare property 'border-radius'.
-      this.panelBorderRadius = originRect.height > 0 ? NumberUtil.roundTo100(originRect.height / 10) : null;
-      // Setting property 'border-radius'.
-      HtmlElemUtil.setProperty(this.containerRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(this.panelBorderRadius)?.concat('px'));
-
-      // Prepare properties: 'bottom', 'top'.
-      this.panelBottom = this.isPanelOnTop ? -(NumberUtil.roundTo100(originRect.top - containerRect.top) - 1) : null;
-      this.panelTop = this.isPanelOnTop ? null : NumberUtil.roundTo100(originRect.bottom - containerRect.top);
-      // Setting properties: 'bottom', 'top'.
-      HtmlElemUtil.setProperty(this.containerRef, CSS_PROP_BOTTOM, NumberUtil.str(this.panelBottom)?.concat('px'));
-      HtmlElemUtil.setProperty(this.containerRef, CSS_PROP_TOP, NumberUtil.str(this.panelTop)?.concat('px'));
+      // Prepare and setting property 'border-radius'.
+      this.panelBorderRadius = triggerRect.height > 0 ? NumberUtil.roundTo100(triggerRect.height / 10) : null;
+      HtmlElemUtil.setProperty(containerRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(this.panelBorderRadius)?.concat('px'));
 
       // Prepare properties: 'left', 'right'.
-      const isJoinOnLeft = containerRect.left === originRect.left;
+      const isJoinOnLeft = containerRect.left === triggerRect.left;
       // Default - GlnAutocompletePosition.start === this.positionValue
-      this.panelLeft = isJoinOnLeft ? 0 : -originRect.width;
+      this.panelLeft = isJoinOnLeft ? 0 : -triggerRect.width;
       this.panelRight = null;
       if (!this.isMaxWidth) {
         if (GlnAutocompletePosition.center === this.positionValue) {
-          const delta = NumberUtil.roundTo100((originRect.width - containerRect.width) / 2);
+          const delta = NumberUtil.roundTo100((triggerRect.width - containerRect.width) / 2);
           this.panelLeft = isJoinOnLeft ? delta : null;
           this.panelRight = isJoinOnLeft ? null : delta;
         } else if (GlnAutocompletePosition.end === this.positionValue) {
           this.panelLeft = null;
-          this.panelRight = isJoinOnLeft ? -originRect.width : 0;
+          this.panelRight = isJoinOnLeft ? -triggerRect.width : 0;
         }
       }
       // Setting properties: 'left', 'right'.
-      HtmlElemUtil.setProperty(this.containerRef, CSS_PROP_LEFT, NumberUtil.str(this.panelLeft)?.concat('px'));
-      HtmlElemUtil.setProperty(this.containerRef, CSS_PROP_RIGHT, NumberUtil.str(this.panelRight)?.concat('px'));
-
-      // Prepare and setting property 'translate-y'.
-      if (!this.noAnimation && panelHeight > 0) {
-        HtmlElemUtil.setProperty(this.containerRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.isPanelOnTop, panelHeight));
-      }
+      HtmlElemUtil.setProperty(containerRef, CSS_PROP_LEFT, NumberUtil.str(this.panelLeft)?.concat('px'));
+      HtmlElemUtil.setProperty(containerRef, CSS_PROP_RIGHT, NumberUtil.str(this.panelRight)?.concat('px'));
     }
+
+    this.containerResize(container, triggerRect, hostRect);
   }
 
   public containerDetached(): void {
     this.panelBorderRadius = null;
-
     this.panelBottom = null;
     this.panelTop = null;
-
     this.panelLeft = null;
     this.panelRight = null;
 
     this.panelMaxHeight = null;
-    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MAX_HEIGHT, NumberUtil.str(this.panelMaxHeight)?.concat('px'));
+    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MAX_HEIGHT, null);
     this.panelMinWidth = null;
-    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MIN_WIDTH, NumberUtil.str(this.panelMinWidth)?.concat('px'));
+    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MIN_WIDTH, null);
     this.panelMaxWidth = null;
-    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MAX_WIDTH, NumberUtil.str(this.panelMaxWidth)?.concat('px'));
+    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MAX_WIDTH, null);
   }
 
-  public optionsScrollAttached(value: GlnOptionsScroll): void {
+  public containerResize(container: HTMLElement | null, triggerRect: DOMRect | null, hostRect: DOMRect | null): void {
+    const containerRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(container);
+    if (containerRef != null && triggerRect != null && hostRect != null) {
+      const panelHeight: number = this.getHeight(containerRef);
+      const isPanelOnTop: boolean = triggerRect.top + triggerRect.height + panelHeight > ScreenUtil.getHeight();
+
+      // Prepare properties: 'bottom', 'top'.
+      this.panelBottom = isPanelOnTop ? -(NumberUtil.roundTo100(triggerRect.top - hostRect.top) - 1) : null;
+      this.panelTop = isPanelOnTop ? null : NumberUtil.roundTo100(triggerRect.bottom - hostRect.top);
+      // Setting properties: 'bottom', 'top'.
+      HtmlElemUtil.setProperty(containerRef, CSS_PROP_BOTTOM, NumberUtil.str(this.panelBottom)?.concat('px'));
+      HtmlElemUtil.setProperty(containerRef, CSS_PROP_TOP, NumberUtil.str(this.panelTop)?.concat('px'));
+
+      // Prepare and setting property 'translate-y'.
+      if (panelHeight > 0) {
+        // Define the "TranslateY" parameter to correctly open or close.
+        const translateY: number = (isPanelOnTop ? 1 : -1) * NumberUtil.roundTo100((panelHeight - 0.6 * panelHeight) / 2);
+        HtmlElemUtil.setProperty(containerRef, CSS_PROP_TRANSLATE_Y, NumberUtil.str(translateY)?.concat('px'));
+      }
+    }
+  }
+
+  // ** directive: GlnAutocompletePanel - finish **
+
+  // ** directive: GlnOptionsScroll - start **
+
+  public setOptionsScroll(value: GlnOptionsScroll | null): void {
     this.optionsScroll = value;
   }
 
-  // ** Private methods **
+  // ** directive: GlnOptionsScroll - finish **
 
-  private isCheckPanelOnTop(triggerRect: DOMRect | null, panelHeight: number, screenHeight: number): boolean {
-    let result = false;
-    if (!!triggerRect && triggerRect.top > 0 && triggerRect.height > 0 && panelHeight > 0 && screenHeight > 0) {
-      const value = triggerRect.top + triggerRect.height + panelHeight;
-      result = value > screenHeight;
-    }
-    return result;
-  }
+  // ** Private methods **
 
   private getHeight(value: ElementRef<HTMLElement> | null): number {
     return value ? Number(getComputedStyle(value.nativeElement).getPropertyValue('height').replace('px', '')) : 0;
-  }
-
-  /** Define the "TranslateY" parameter to correctly open or close. */
-  private getTranslateY(isPanelOnTop: boolean, panelHeight: number): string | null {
-    let result: string | null = null;
-    if (panelHeight > 0) {
-      const delta = String(NumberUtil.roundTo100((panelHeight - 0.6 * panelHeight) / 2)).concat('px');
-      result = (isPanelOnTop ? '' : '-') + delta;
-    }
-    return result;
   }
 }

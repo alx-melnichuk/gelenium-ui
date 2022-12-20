@@ -2,8 +2,9 @@
   <div glnolp-container
     #container
     glnAutocompletePanel
-    (glnAutocompletePanelAttached)="containerAttached(container, originRect)"
-    (glnAutocompletePanelDetached)="containerDetached()">
+    (glnAutocompletePanelAttached)="containerAttached(container, getTriggerRect(), getHostRect())"
+    (glnAutocompletePanelDetached)="containerDetached()"
+    (glnAutocompletePanelResize)="containerResize(container, getTriggerRect(), getHostRect())">
     <div glnolp-wrap
       [ngClass]="[(noAnimation ? 'gln-no-animation' : '')]"
       [attr.noAnm]="noAnimation ? '' : null"
@@ -13,7 +14,8 @@
       (animationcancel)="hasPanelAnimation = isOptionsPanelOpen">
       <div glnol-panel
         [glnOptionsScroll]="options"
-        (glnOptionsScrollAttached)="optionsScrollAttached($event)"
+        (glnOptionsScrollAttached)="setOptionsScroll($event)"
+        (glnOptionsScrollDetached)="setOptionsScroll(null)"
         class="gln-option-list-panel"
         role="listbox"
         [attr.id]="id + '-panel'"

@@ -8,15 +8,3 @@ export interface GlnAutocompleteTrigger {
   // Set the new value of the current element.
   setValue(value: string | null | undefined): void;
 }
-
-export interface Focusable {
-  focus(): void;
-}
-
-export interface HostableRef {
-  hostRef: ElementRef<HTMLElement>;
-}
-
-export interface Frameable {
-  frameComp: HostableRef;
-}

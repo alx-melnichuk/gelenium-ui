@@ -1,41 +1,50 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
+  AfterContentInit,
   Directive,
   ElementRef,
+  Host,
   HostListener,
+  Inject,
   Input,
   OnInit,
-  OnDestroy,
-  Inject,
+  Optional,
   PLATFORM_ID,
   Renderer2,
-  Optional,
-  Host,
 } from '@angular/core';
 import { AbstractControl, NgControl } from '@angular/forms';
 
-import { Focusable, Frameable } from './gln-autocomplete-trigger.interface';
-import { GlnOptions, GlnOptionsTrigger } from '../gln-option/gln-options.interface';
+import { GlnAutocompleteTrigger } from './gln-autocomplete-trigger.interface';
 import { OptionsScrollKeys } from '../gln-option/gln-options-scroll.interface';
-import { GlnDebounceTimer } from '../_classes/gln-debounce-timer';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { GlnAutocomplete } from './gln-autocomplete.interface';
 
-const DEBOUNCE_TIMEOUT = 600;
 const CSS_ATTR_FOR_FRAME_FOCUS = 'foc';
 const TAG_NAME_OPTION = 'GLN-OPTION';
+
+interface Focusable {
+  focus(): void;
+}
+
+interface HostableRef {
+  hostRef: ElementRef<HTMLElement>;
+}
+
+interface Frameable {
+  frameComp: HostableRef;
+}
 
 @Directive({
   selector: '[glnAutocompleteTrigger]',
   exportAs: 'glnAutocompleteTrigger',
 })
-export class GlnAutocompleteTriggerDirective implements OnInit, OnDestroy, GlnOptionsTrigger {
+export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit, GlnAutocompleteTrigger {
   @Input('glnAutocompleteTrigger')
-  public optionList: GlnOptions | null | undefined;
+  public autocomplete: GlnAutocomplete | null | undefined;
 
   protected accessorControl: AbstractControl<any, any> | null = null;
   protected accessorFocusable: Focusable | null = null;
   protected frameRef: ElementRef<HTMLElement> | null = null;
-  protected debounceTimer: GlnDebounceTimer = new GlnDebounceTimer();
   protected isFocusAttrOnFrame = false;
 
   constructor(
@@ -66,14 +75,6 @@ export class GlnAutocompleteTriggerDirective implements OnInit, OnDestroy, GlnOp
     this.handlingFocusout(event);
   }
 
-  @HostListener('input', ['$event'])
-  public handlerInput(event: InputEvent): void {
-    const inputElement: HTMLInputElement = event.target as HTMLInputElement;
-    this.debounceTimer.run(() => {
-      this.handlingInput(inputElement.value);
-    }, DEBOUNCE_TIMEOUT);
-  }
-
   public ngOnInit(): void {
     if (this.control) {
       this.accessorControl = this.control.control;
@@ -83,8 +84,12 @@ export class GlnAutocompleteTriggerDirective implements OnInit, OnDestroy, GlnOp
     }
   }
 
-  public ngOnDestroy(): void {
-    this.debounceTimer.clear();
+  public ngAfterContentInit(): void {
+    this.autocomplete?.setTrigger({
+      passFocus: (): void => this.passFocus(),
+      getOriginalRect: (): DOMRect | null => this.getOriginalRect(),
+      setValue: (value: string): void => this.setValue(value),
+    });
   }
 
   // ** interface GlnOptionsTrigger - start **
@@ -108,7 +113,7 @@ export class GlnAutocompleteTriggerDirective implements OnInit, OnDestroy, GlnOp
   }
   /** Set the new value of the current element. */
   public setValue(value: string | null | undefined): void {
-    // #console.log(`setValueForOriginal(); value=${value}`); // #
+    console.log(`setValueForOriginal(); value=${value}`); // #
     // Update the component's model value.
     if (this.accessorControl != null) {
       this.accessorControl.setValue(value, { emitEvent: true });
@@ -127,57 +132,47 @@ export class GlnAutocompleteTriggerDirective implements OnInit, OnDestroy, GlnOp
   // ** Private methods **
 
   private handlingMousedown(): void {
-    if (this.optionList == null || this.optionList.disabled) {
+    if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
-    if (this.optionList.isPanelOpen()) {
-      this.optionList.close();
+    if (this.autocomplete.isPanelOpen()) {
+      this.autocomplete.close();
     } else {
-      this.openOptionsPanel();
+      this.autocomplete.open();
     }
   }
 
   private handlingKeydown(event: KeyboardEvent): void {
-    if (this.optionList == null || this.optionList.disabled) {
+    if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
-    if (!this.optionList.isPanelOpen()) {
+    if (!this.autocomplete.isPanelOpen()) {
       switch (event.key) {
         case ' ':
         case 'ArrowDown':
         case 'ArrowUp':
-          this.openOptionsPanel();
+          this.autocomplete.open();
           break;
       }
     } else {
       // #console.log(`event.key=${event.key}`); // #
       if (['Escape', 'Tab'].indexOf(event.key) > -1) {
-        this.optionList.close();
+        this.autocomplete.close();
       } else if (OptionsScrollKeys.indexOf(event.key) > -1) {
         event.preventDefault();
         event.stopPropagation();
-        this.optionList.moveMarkedOptionByKey(event.key);
+        this.autocomplete.moveMarkedOptionByKey(event.key);
       } else if ('Enter' === event.key) {
         event.preventDefault();
         event.stopPropagation();
         // #console.log(`'Enter' === event.key`); // #
-        this.optionList.setMarkedOptionAsSelected();
+        this.autocomplete.setMarkedOptionAsSelected();
       }
     }
   }
 
-  private handlingInput = (inputValue: string): void => {
-    // #console.log(`handlingInput() inputValue=${inputValue}`);
-    if (this.optionList == null || this.optionList.disabled) {
-      return;
-    }
-    if (!this.optionList.isPanelOpen()) {
-      this.openOptionsPanel();
-    }
-  };
-
   private handlingFocusin(event: FocusEvent | null): void {
-    if (this.optionList == null || this.optionList.disabled) {
+    if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
     if (this.frameRef != null && this.isFocusAttrOnFrame) {
@@ -189,24 +184,18 @@ export class GlnAutocompleteTriggerDirective implements OnInit, OnDestroy, GlnOp
   }
 
   private handlingFocusout(event: FocusEvent | null): void {
-    if (this.optionList == null || this.optionList.disabled) {
+    if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
-    const element: HTMLElement | null = (event?.relatedTarget as HTMLElement) || null;
-    if (this.frameRef != null && element?.tagName === TAG_NAME_OPTION) {
-      // It is required to return input focus to the current input element.
-      this.isFocusAttrOnFrame = true;
-      HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, '');
-    } else if (this.optionList.isPanelOpen()) {
-      this.optionList.close(); // return back.
+    if (this.autocomplete.isPanelOpen()) {
+      const element: HTMLElement | null = (event?.relatedTarget as HTMLElement) || null;
+      const tagName: string = element?.tagName || '';
+      if (tagName !== TAG_NAME_OPTION) {
+        this.autocomplete.close(); // return back.
+      } else if (this.frameRef != null) {
+        this.isFocusAttrOnFrame = true;
+        HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, '');
+      }
     }
-  }
-
-  private openOptionsPanel(): void {
-    this.optionList?.open({
-      passFocus: (): void => this.passFocus(),
-      getOriginalRect: (): DOMRect | null => this.getOriginalRect(),
-      setValue: (value: string): void => this.setValue(value),
-    });
   }
 }

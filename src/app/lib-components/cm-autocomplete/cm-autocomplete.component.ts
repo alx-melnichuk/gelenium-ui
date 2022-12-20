@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-import { GlnOptionListOpenUtil } from 'gelenium-ui';
+import { GlnAutocompleteOpenUtil } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { CE_SITE_SCHEME_SCROLL } from '../../lib-core/constants';
@@ -34,7 +34,7 @@ export class CmAutocompleteComponent implements AfterViewInit, OnDestroy {
   }
 
   public handlerEventSiteSchemeScroll = (): void => {
-    GlnOptionListOpenUtil.closeAll();
+    GlnAutocompleteOpenUtil.closeAll();
   };
 
   public ngAfterViewInit(): void {
