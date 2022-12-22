@@ -3,7 +3,10 @@
 app-cm-autocomplete-basic {
   display: block;
 
-  // Block "Basic". 
+  // Block "Basic".
+  .aca-elem {
+    max-width: 40ch;
+	}
 	.aca-middle {
     width: 160px;
 	}

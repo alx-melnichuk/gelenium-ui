@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { GlnAutocompleteConfig, GLN_AUTOCOMPLETE_CONFIG } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import {
@@ -12,12 +13,18 @@ import {
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
 
+const glnAutocompleteConfigDefault: GlnAutocompleteConfig = {
+  position: 'end',
+  visibleSize: 10,
+};
+
 @Component({
   selector: 'app-cm-autocomplete-basic',
   templateUrl: './cm-autocomplete-basic.component.html',
   styleUrls: ['./cm-autocomplete-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: GLN_AUTOCOMPLETE_CONFIG, useValue: glnAutocompleteConfigDefault }],
 })
 export class CmAutocompleteBasicComponent {
   @Input()
@@ -52,7 +59,8 @@ export class CmAutocompleteBasicComponent {
     'mango', 'ripe lemon', 'gorgeous orange',
     'african cherry orange', 'succulent watermelon'
   ];
-  // attributes-supported01
+
+  // Block "attributes-supported01"
   public exterior02b = 'outlined';
   public control02b = {
     model02e: new FormControl(null, []),
@@ -62,7 +70,7 @@ export class CmAutocompleteBasicComponent {
   };
   public formGroup02b: FormGroup = new FormGroup(this.control02b);
 
-  // attributes-supported02
+  // Block "attributes-supported02"
   public exterior02c = 'outlined';
   public control02c = {
     model02i: new FormControl(null, []),
@@ -86,7 +94,7 @@ export class CmAutocompleteBasicComponent {
     'strawberry','sweet lemon', 'tamarind' , 'tangerine' , 'watermelon'
   ];
 
-  // attributes-supported03
+  // Block "attributes-supported03"
   public exterior02d = 'outlined';
 
   public control02d = {
@@ -98,7 +106,16 @@ export class CmAutocompleteBasicComponent {
 
   public formGroup02d: FormGroup = new FormGroup(this.control02d);
 
+  // Block "Config"
+  public control08a = {
+    model08a: new FormControl(null, []),
+    model08b: new FormControl(null, []),
+  };
+  public formGroup08a: FormGroup = new FormGroup(this.control08a);
+
+  //
   // #old
+  //
   public formGroup0: FormGroup = new FormGroup({
     model0a: new FormControl('', []),
   });
@@ -120,7 +137,12 @@ export class CmAutocompleteBasicComponent {
   public handlerInput(event: any): void {
     console.log(event.target.value);
   }
-  public log(eventTarget: any): void {
-    console.log(eventTarget.value);
+  public log(text: string): void {
+    console.log(text);
+  }
+  public filter(text: string | null, buff: string[]): string[] {
+    console.log(`filter(${text})`);
+    const cnt: number = (text || '').length;
+    return buff.slice(0, cnt);
   }
 }
