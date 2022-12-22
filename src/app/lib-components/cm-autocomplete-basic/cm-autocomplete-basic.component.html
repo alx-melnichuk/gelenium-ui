@@ -442,7 +442,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
       list of options.
     </li>
     <li>
-      css: '--glnolp-elevation: none;' - hide the display of shadow effects when
+      css: '--glnac-elevation: none;' - hide the display of shadow effects when
       expanding the dropdown list of options.
     </li>
   </ul>
@@ -536,7 +536,7 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
     <div class="app-elem">
       <div>
         <small>
-          <em>css: '--glnolp-elevation: none;'.</em>
+          <em>css: '--glnac-elevation: none;'.</em>
         </small>
       </div>
       <gln-input formControlName="model02q"
@@ -544,10 +544,10 @@ import &#123; GlnAutocompleteModule, GlnInputModule &#125; from 'gelenium-ui';</
         label="Fruit"
         [exterior]="exterior02d"
         [glnAutocompleteTrigger]="autocomplete02q"
-        helperText="css: '--glnolp-elevation'.">
+        helperText="css: '--glnac-elevation'.">
       </gln-input>
       <gln-autocomplete #autocomplete02q="glnAutocomplete"
-        style="--glnolp-elevation: none;">
+        style="--glnac-elevation: none;">
         <gln-option *ngFor="let item of fruitsB"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>

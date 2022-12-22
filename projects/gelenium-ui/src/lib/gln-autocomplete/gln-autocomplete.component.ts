@@ -5,9 +5,13 @@ import {
   ContentChildren,
   ElementRef,
   EventEmitter,
+  Inject,
+  InjectionToken,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
+  Optional,
   Output,
   QueryList,
   Renderer2,
@@ -21,6 +25,7 @@ import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-par
 import { GlnOptionsScroll } from '../gln-option/gln-options-scroll.interface';
 import { GlnOptionUtil } from '../gln-option/gln-option.util';
 
+import { GlnDebounceTimer } from '../_classes/gln-debounce-timer';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
@@ -30,18 +35,21 @@ import { GlnAutocomplete } from './gln-autocomplete.interface';
 import { GlnAutocompletePosition, GlnAutocompletePositionUtil } from './gln-autocomplete-position.util';
 import { GlnAutocompleteTrigger } from './gln-autocomplete-trigger.interface';
 import { GlnAutocompleteOpenUtil } from './gln-autocomplete-open.util';
+import { GlnAutocompleteConfig } from './gln-autocomplete-config.interface';
 
-const CSS_PROP_BORDER_RADIUS = '--glnolp--border-radius';
-const CSS_PROP_BOTTOM = '--glnolp--bottom';
-const CSS_PROP_LEFT = '--glnolp--left';
-const CSS_PROP_MAX_HEIGHT = '--glnolp--max-height';
-const CSS_PROP_MAX_WIDTH = '--glnolp--max-width';
-const CSS_PROP_MIN_WIDTH = '--glnolp--min-width';
-const CSS_PROP_RIGHT = '--glnolp--right';
-const CSS_PROP_TOP = '--glnolp--top';
-const CSS_PROP_TRANSLATE_Y = '--glnolp--translate-y';
+const CSS_PROP_BORDER_RADIUS = '--glnacp--border-radius';
+const CSS_PROP_BOTTOM = '--glnacp--bottom';
+const CSS_PROP_LEFT = '--glnacp--left';
+const CSS_PROP_MAX_HEIGHT = '--glnacp--max-height';
+const CSS_PROP_MAX_WIDTH = '--glnacp--max-width';
+const CSS_PROP_MIN_WIDTH = '--glnacp--min-width';
+const CSS_PROP_RIGHT = '--glnacp--right';
+const CSS_PROP_TOP = '--glnacp--top';
+const CSS_PROP_TRANSLATE_Y = '--glnacp--translate-y';
 
 let uniqueIdCounter = 0;
+
+export const GLN_AUTOCOMPLETE_CONFIG = new InjectionToken<GlnAutocompleteConfig>('GLN_AUTOCOMPLETE_CONFIG');
 
 @Component({
   selector: 'gln-autocomplete',
@@ -52,19 +60,21 @@ let uniqueIdCounter = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: GLN_OPTION_PARENT, useExisting: GlnAutocompleteComponent }],
 })
-export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocomplete, GlnOptionParent {
+export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, GlnAutocomplete, GlnOptionParent {
   @Input()
   public id = `glnac-${uniqueIdCounter++}`;
   @Input()
+  public config: GlnAutocompleteConfig | null | undefined;
+  @Input()
   public isDisabled: string | boolean | null | undefined;
-  @Input()
-  public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
-  @Input()
-  public visibleSize: number | null | undefined;
   @Input()
   public isMaxWd: string | boolean | null | undefined;
   @Input()
   public isNoAnimation: string | boolean | null | undefined;
+  @Input()
+  public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
+  @Input()
+  public visibleSize: number | null | undefined;
 
   @Output()
   readonly opened: EventEmitter<void> = new EventEmitter();
@@ -83,10 +93,10 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocompl
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set options(value: GlnOption[]) {}
 
-  // public currConfig: GlnAutocompleteConfig;
+  public currConfig: GlnAutocompleteConfig;
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public hasPanelAnimation: boolean = false;
-  public isMaxWidth: boolean = false; // Binding attribute "isMaxWd".
+  public isMaxWidth: boolean | null = null; // Binding attribute "isMaxWd".
   public isOptionsPanelOpen: boolean = false;
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
   public panelBorderRadius: number | null = null;
@@ -97,35 +107,46 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocompl
   public panelMinWidth: number | null = null;
   public panelRight: number | null = null;
   public panelTop: number | null = null;
-  public positionValue: GlnAutocompletePosition = GlnAutocompletePosition.start; // Binding attribute "position" ('start'|'center'|'end').
+  public positionValue: GlnAutocompletePosition | null = null; // Binding attribute "position" ('start'|'center'|'end').
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
 
-  protected optionHeight: number = 0;
-  protected optionsScroll: GlnOptionsScroll | null = null;
-  protected trigger: GlnAutocompleteTrigger | null = null;
+  private optionHeight: number = 0;
+  private optionInitDebounceTimer: GlnDebounceTimer = new GlnDebounceTimer();
+  private optionsScroll: GlnOptionsScroll | null = null;
+  private trigger: GlnAutocompleteTrigger | null = null;
 
-  constructor(protected renderer: Renderer2, public hostRef: ElementRef<HTMLElement>, protected changeDetectorRef: ChangeDetectorRef) {
+  constructor(
+    private renderer: Renderer2,
+    public hostRef: ElementRef<HTMLElement>,
+    private changeDetectorRef: ChangeDetectorRef,
+    @Optional() @Inject(GLN_AUTOCOMPLETE_CONFIG) private rootConfig: GlnAutocompleteConfig | null
+  ) {
+    this.currConfig = this.rootConfig || {};
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-option-list', true);
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'gln-option-list', '');
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['config']) {
+      this.currConfig = { ...this.rootConfig, ...this.config };
+    }
+
     if (changes['isDisabled']) {
       this.disabled = !!BooleanUtil.init(this.isDisabled);
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);
     }
-    if (changes['isMaxWd']) {
-      this.isMaxWidth = !!BooleanUtil.init(this.isMaxWd);
+    if (changes['isMaxWd'] || (changes['config'] && this.isMaxWd == null && this.currConfig.isMaxWd != null)) {
+      this.isMaxWidth = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
     }
-    if (changes['isNoAnimation']) {
-      this.noAnimation = !!BooleanUtil.init(this.isNoAnimation);
+    if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
+      this.noAnimation = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
     }
-    if (changes['position']) {
-      this.positionValue = GlnAutocompletePositionUtil.create(this.position || null);
+    if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
+      this.positionValue = GlnAutocompletePositionUtil.create(this.position || this.currConfig.position || null);
     }
-    if (changes['visibleSize']) {
-      this.visibleSizeValue = this.visibleSize || null;
+    if (changes['visibleSize'] || (changes['config'] && this.visibleSize == null && this.currConfig.visibleSize != null)) {
+      this.visibleSizeValue = this.visibleSize || this.currConfig.visibleSize || null;
     }
   }
 
@@ -136,6 +157,23 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocompl
     const fontSize = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('font-size').replace('px', '') || '0');
     const lineHeight = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height').replace('px', '') || '0');
     this.optionHeight = GlnOptionUtil.getHeightOption(fontSize, lineHeight);
+
+    if (this.isMaxWidth == null) {
+      this.isMaxWidth = !!this.currConfig.isMaxWd;
+    }
+    if (this.noAnimation == null) {
+      this.noAnimation = !!this.currConfig.isNoAnimation;
+    }
+    if (this.positionValue == null) {
+      this.positionValue = GlnAutocompletePositionUtil.create(this.currConfig.position || null);
+    }
+    if (this.visibleSizeValue == null) {
+      this.visibleSizeValue = this.currConfig.visibleSize || null;
+    }
+  }
+
+  public ngOnDestroy(): void {
+    this.optionInitDebounceTimer.clear();
   }
 
   public getHostRect(): DOMRect {
@@ -217,12 +255,12 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocompl
   // ** interface GlnOptionParent - start **
 
   /** Set the option as selected. */
-  public setOptionSelected(optionItem: GlnOption): void {
-    console.log(`setOptionSelected(); optionItem.value=`, optionItem.value); // #
+  public setOptionSelected(option: GlnOption): void {
+    console.log(`setOptionSelected(); option.value=`, option.value); // #
 
     Promise.resolve().then(() => {
-      this.selected.emit(optionItem);
-      const value: string | null | undefined = optionItem.value as string;
+      this.selected.emit(option);
+      const value: string | null | undefined = option.value as string;
       this.trigger?.setValue(value);
       console.log(`setOptionSelected(); this.optionListTrigger.setValue(value);`); // #
       if (this.isOptionsPanelOpen) {
@@ -230,6 +268,18 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocompl
         this.close();
       }
     });
+  }
+
+  public optionInit?: (option: GlnOption) => void = this.handlerOptionInit;
+
+  public handlerOptionInit(option: GlnOption): void {
+    console.log(`handlerOptionInit()`); // #
+    this.optionInit = undefined;
+    this.optionInitDebounceTimer.run(() => {
+      this.optionInit = this.handlerOptionInit;
+      console.log(`handlingOptionInit()`); // #
+      this.open();
+    }, 10);
   }
 
   // ** interface GlnOptionParent - finish **

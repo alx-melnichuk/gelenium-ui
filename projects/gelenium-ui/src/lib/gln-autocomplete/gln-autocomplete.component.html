@@ -1,27 +1,28 @@
 <ng-template [ngIf]="isOptionsPanelOpen || hasPanelAnimation">
-  <div glnolp-container
+  <div glnac-container
+    class="glnac-container"
     #container
     glnAutocompletePanel
     (glnAutocompletePanelAttached)="containerAttached(container, getTriggerRect(), getHostRect())"
     (glnAutocompletePanelDetached)="containerDetached()"
     (glnAutocompletePanelResize)="containerResize(container, getTriggerRect(), getHostRect())">
-    <div glnolp-wrap
-      [ngClass]="[(noAnimation ? 'gln-no-animation' : '')]"
+    <div glnac-wrap
+      [ngClass]="['glnac-wrap', (noAnimation ? 'gln-no-animation' : '')]"
       [attr.noAnm]="noAnimation ? '' : null"
       [attr.is-show]="isOptionsPanelOpen ? '' : null"
       [attr.is-hide]="!isOptionsPanelOpen ? '' : null"
       (animationend)="hasPanelAnimation = isOptionsPanelOpen"
       (animationcancel)="hasPanelAnimation = isOptionsPanelOpen">
-      <div glnol-panel
-        [glnOptionsScroll]="options"
-        (glnOptionsScrollAttached)="setOptionsScroll($event)"
-        (glnOptionsScrollDetached)="setOptionsScroll(null)"
-        class="gln-option-list-panel"
+      <div glnac-panel
+        class="glnac-panel"
+        ngClass9="getPanelClass(panelClassList)"
         role="listbox"
         [attr.id]="id + '-panel'"
         attr.aria-label9="ariaLabel || null"
         attr.aria-labelledby9="_getPanelAriaLabelledby(formFieldId)"
-        ngClass9="getPanelClass(panelClassList)">
+        [glnOptionsScroll]="options"
+        (glnOptionsScrollAttached)="setOptionsScroll($event)"
+        (glnOptionsScrollDetached)="setOptionsScroll(null)">
         <ng-content></ng-content>
       </div>
     </div>

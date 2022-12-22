@@ -1,5 +1,3 @@
-import { ElementRef } from '@angular/core';
-
 export interface GlnAutocompleteTrigger {
   // Set focus to the current element.
   passFocus(): void;

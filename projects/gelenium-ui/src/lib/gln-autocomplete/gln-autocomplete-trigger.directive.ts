@@ -157,7 +157,8 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
       }
     } else {
       // #console.log(`event.key=${event.key}`); // #
-      if (['Escape', 'Tab'].indexOf(event.key) > -1) {
+      const notModifierKey = !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
+      if ((['Escape', 'Tab'].indexOf(event.key) > -1 && notModifierKey) || ('ArrowUp' === event.key && event.altKey)) {
         this.autocomplete.close();
       } else if (OptionsScrollKeys.indexOf(event.key) > -1) {
         event.preventDefault();

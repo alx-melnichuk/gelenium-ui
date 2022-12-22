@@ -4,38 +4,38 @@
 @import '../_styles/mx-flex-direction.scss';
 
 gln-autocomplete {
-  --glnol--default-h: var(--glncl-default-h, var(--gln-default-h));
-  --glnol--default-s: var(--glncl-default-s, var(--gln-default-s));
-  --glnol--default-l: var(--glncl-default-l, var(--gln-default-l));
-  --glnol--default-cl: hsl(var(--glnol--default-h),var(--glnol--default-s),var(--glnol--default-l));
+  --glnac--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnac--default-s: var(--glncl-default-s, var(--gln-default-s));
+  --glnac--default-l: var(--glncl-default-l, var(--gln-default-l));
+  --glnac--default-cl: hsl(var(--glnac--default-h),var(--glnac--default-s),var(--glnac--default-l));
 
-  --glnol--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
-  --glnol--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
-  --glnol--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
-  --glnol--default-bg-cl: hsl(var(--glnol--default-bg-h), var(--glnol--default-bg-s), var(--glnol--default-bg-l));
+  --glnac--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
+  --glnac--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
+  --glnac--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
+  --glnac--default-bg-cl: hsl(var(--glnac--default-bg-h), var(--glnac--default-bg-s), var(--glnac--default-bg-l));
 
   @include mxDisplayInlineFlex();
   @include mxFlexDirection(column);
   position: relative;
 
-  // Element "div glnolp-container"
-  [glnolp-container] {
-    bottom: var(--glnolp--bottom);
+  // Element "div glnac-container"
+  [glnac-container] {
+    bottom: var(--glnacp--bottom);
     box-sizing: border-box;
-    left: var(--glnolp--left);
-    max-height: var(--glnol-max-height, var(--glnolp--max-height, 80vh));
-    max-width: var(--glnol-max-width, var(--glnolp--max-width, 100vw));
-    min-width: var(--glnol-min-width, var(--glnolp--min-width));
+    left: var(--glnacp--left);
+    max-height: var(--glnac-max-height, var(--glnacp--max-height, 80vh));
+    max-width: var(--glnac-max-width, var(--glnacp--max-width, 100vw));
+    min-width: var(--glnac-min-width, var(--glnacp--min-width));
     position: absolute;
-    right: var(--glnolp--right);
-    top: var(--glnolp--top);
+    right: var(--glnacp--right);
+    top: var(--glnacp--top);
     z-index: 1000;
   }
 
-  // Element "div glnolp-wrap".
-  [glnolp-wrap] {
-    background-color: var(--glnolpw-def-bg-cl, var(--glnol--default-bg-cl));
-    color: var(--glnolpw-def-cl, var(--glnol--default-cl)); // hsla(0, 0%, 0%, 0.87);
+  // Element "div glnac-wrap".
+  [glnac-wrap] {
+    background-color: var(--glnac-def-bg-cl, var(--glnac--default-bg-cl));
+    color: var(--glnac-def-cl, var(--glnac--default-cl)); // hsla(0, 0%, 0%, 0.87);
     font-size: inherit; // 16px
     max-height: inherit;
     max-width: inherit;
@@ -44,11 +44,11 @@ gln-autocomplete {
     &:not([noAnm]) {
       opacity: 0;
       &[is-show]:not([is-hide]) {
-        animation: kf-ac-show-panel 120ms cubic-bezier(0.2, 0, 0.2, 1) 0ms;
+        animation: kf-ac-show-panel 200ms cubic-bezier(0.2, 0, 0.2, 1) 0ms;
         opacity: 1;
       }
       &:not([is-show])[is-hide] {
-        animation: kf-ac-hide-panel 120ms linear 0ms;
+        animation: kf-ac-hide-panel 200ms linear 0ms;
         opacity: 0;
       }
     }
@@ -56,7 +56,7 @@ gln-autocomplete {
     @keyframes kf-ac-show-panel {
       0% {
         opacity: 0;
-        transform: translateY(var(--glnolp--translate-y, 0px)) scale(0.6);
+        transform: translateY(var(--glnacp--translate-y, 0px)) scale(0.6);
       }
       100% {
         opacity: 1;
@@ -71,14 +71,14 @@ gln-autocomplete {
       }
       100% {
         opacity: 0;
-        transform: translateY(var(--glnolp--translate-y, 0px)) scale(0.6);
+        transform: translateY(var(--glnacp--translate-y, 0px)) scale(0.6);
       }
     }
   }
 
-  // Element "div glnol-panel".
-  [glnol-panel] {
-    border-radius: var(--glnolp-border-radius, var(--glnolp--border-radius, unset));
+  // Element "div glnac-panel".
+  [glnac-panel] {
+    border-radius: var(--glnac-border-radius, var(--glnacp--border-radius, unset));
     box-sizing: border-box;
     max-height: inherit;
     min-height: 0px;
@@ -86,8 +86,8 @@ gln-autocomplete {
     overflow: auto;
     outline: 0;
     -webkit-overflow-scrolling: touch;
-    // To block the display of a shadow, you must specify "--glnolp-elevation: none;".
-    box-shadow: var(--glnolp-elevation, rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px);
+    // To block the display of a shadow, you must specify "--glnac-elevation: none;".
+    box-shadow: var(--glnac-elevation, rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px);
   }
 
 }

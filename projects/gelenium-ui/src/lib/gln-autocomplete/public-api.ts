@@ -1,3 +1,4 @@
+export * from './gln-autocomplete-config.interface';
 export * from './gln-autocomplete-open.util';
 export * from './gln-autocomplete-panel.directive';
 export * from './gln-autocomplete-position.util';
