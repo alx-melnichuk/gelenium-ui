@@ -14,7 +14,9 @@ export interface GlnOptionParent {
   // Set the option as selected.
   setOptionSelected(option: GlnOption): void;
   // Define an instance of the options panel.
-  setOptionsPanel?(value: GlnOptionsPanel): void;
+  // setOptionsPanel?(value: GlnOptionsPanel): void;
+  //
+  optionInit?(option: GlnOption): void;
 }
 
 /**

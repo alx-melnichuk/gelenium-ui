@@ -31,9 +31,9 @@ export class GlnOptionsPanelDirective implements OnChanges, OnInit, OnDestroy, G
 
   constructor(public hostRef: ElementRef<HTMLElement>, @Optional() @Inject(GLN_OPTION_PARENT) public parent: GlnOptionParent) {
     console.log(`parent ${this.parent != null ? '!' : ''}= null`);
-    if (this.parent != null && typeof this.parent['setOptionsPanel'] === 'function') {
+    if (this.parent != null && typeof (this.parent as any)['setOptionsPanel'] === 'function') {
       // Define an instance of the options panel.
-      this.parent.setOptionsPanel({
+      (this.parent as any).setOptionsPanel({
         movingMarkedOption: (delta: number): void => this.movingMarkedOption(delta),
       });
     }

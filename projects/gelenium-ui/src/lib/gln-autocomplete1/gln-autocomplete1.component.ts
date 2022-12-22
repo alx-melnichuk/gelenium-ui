@@ -34,7 +34,7 @@ import { GlnOptionsPanel } from '../gln-option/gln-options-panel.interface';
 
 let uniqueIdCounter = 0;
 
-export const GLN_AUTOCOMPLETE_CONFIG = new InjectionToken<GlnAutocomplete1Config>('GLN_AUTOCOMPLETE_CONFIG');
+export const GLN_AUTOCOMPLETE1_CONFIG = new InjectionToken<GlnAutocomplete1Config>('GLN_AUTOCOMPLETE1_CONFIG');
 
 @Component({
   selector: 'gln-autocomplete1',
@@ -113,7 +113,7 @@ export class GlnAutocomplete1Component implements OnChanges, OnInit, GlnOptionPa
     public hostRef: ElementRef<HTMLElement>,
     private changeDetectorRef: ChangeDetectorRef,
     // private ngZone: NgZone,
-    @Optional() @Inject(GLN_AUTOCOMPLETE_CONFIG) private rootConfig: GlnAutocomplete1Config | null // @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null, // // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any // @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any
+    @Optional() @Inject(GLN_AUTOCOMPLETE1_CONFIG) private rootConfig: GlnAutocomplete1Config | null // @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null, // // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any // @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any
   ) {
     this.currConfig = this.rootConfig || {};
     // this.scrollStrategy = this.scrollStrategyFactory();
