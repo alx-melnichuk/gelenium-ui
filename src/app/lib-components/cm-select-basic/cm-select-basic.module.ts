@@ -5,13 +5,13 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GlnSelectModule } from 'gelenium-ui';
+import { GlnOptionModule, GlnSelectModule } from 'gelenium-ui';
 
 import { CmSelectBasicComponent } from './cm-select-basic.component';
 
 @NgModule({
   declarations: [CmSelectBasicComponent],
-  imports: [CommonModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnSelectModule],
+  imports: [CommonModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnSelectModule, GlnOptionModule],
   exports: [CmSelectBasicComponent],
 })
 export class CmSelectBasicModule {}
