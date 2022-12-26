@@ -29,7 +29,7 @@ import &#123; GlnAutocompleteModule, GlnOptionModule, GlnInputModule &#125; from
   &lt;<strong>gln-autocomplete</strong>&gt;</pre></code>
   </section>
 
-  <form *ngIf="true"
+  <form *ngIf="false"
     [formGroup]="formGroup01"
     novalidate
     autocomplete="off">
@@ -59,8 +59,7 @@ import &#123; GlnAutocompleteModule, GlnOptionModule, GlnInputModule &#125; from
 
     </div>
 
-    <div *ngIf="false"
-      class="app-group">
+    <div class="app-group">
 
       <div class="app-elem">
         <div mb0>
@@ -592,6 +591,102 @@ import &#123; GlnAutocompleteModule, GlnOptionModule, GlnInputModule &#125; from
 
 
 
+<!-- Feature - start  -->
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Feature
+    <a [href]="urlCmAutocomplete + '#Feature'">#</a>
+  </h3>
+  <p>
+    The GlnAutocomplete component has the functionality of opening a panel to select
+    available values.
+    This panel closes when the user selects the desired value.
+    Also, this panel is closed in case of loss of focus of the current input element.
+    It is possible to forcibly close all open panels of GlnAutocomplete components,
+    for example, when an emergency transition to another page occurs.
+  </p>
+  <p>
+    There is a static class GlnAutocompleteOpenUtil, which contains a list of all
+    GlnAutocomplete components with an open panel.
+    Calling the static method "closeAll()" will gracefully close all open panes.
+  </p>
+</section>
+
+<section mr-vr
+  id="feature-activate">
+  <h4 class="app-hover-link">
+    GlnAutocomplete activate.
+    <a [href]="urlCmAutocomplete + '#feature-activate'">#</a>
+  </h4>
+  <p>
+    Demo !
+  </p>
+</section>
+
+<form *ngIf="true"
+  [formGroup]="formGroup07a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem aca-middle">
+      <div>
+        <small>
+          <em>Default: visibleSize: 6.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model07a"
+        style="width: 161px;"
+        label="Fruit"
+        [glnAutocompleteTrigger]="autocomplete07a"
+        helperText="Size: 6.">
+      </gln-input>
+      <gln-autocomplete #autocomplete07a="glnAutocomplete"
+        [visibleSize]="6">
+        <gln-option *ngFor="let item of getFruits0(control07a.model07a.value, autocomplete07a)"
+          [value]="item">
+          {{ 'fruit - ' + capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+
+    <div *ngIf="false"
+      class="app-elem aca-middle">
+      <div>
+        <small>
+          <em>Params: position: 'center', visibleSize: 5.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model07b"
+        style="width: 161px;"
+        label="Fruit"
+        [glnAutocompleteTrigger]="autocomplete07b"
+        helperText="Position: 'center', Size: 5.">
+      </gln-input>
+      <gln-autocomplete #autocomplete07b="glnAutocomplete"
+        position="center"
+        [visibleSize]="5">
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">
+          {{ 'fruit - ' + capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+
+  </div>
+</form>
+<!-- section mr-vr
+  mat-accordion -->
+
+<hr br-nn />
+<!-- Feature - finish -->
+
+
+
+
 <!-- Config - start -->
 <section *ngIf="true"
   mr-vr>
@@ -610,7 +705,7 @@ import &#123; GlnAutocompleteModule, GlnOptionModule, GlnInputModule &#125; from
   <code><pre source="ts">
 const glnAutocompleteConfigDefault: GlnAutocompleteConfig = &#123;
   position: 'center',
-  visibleSize: 10,
+  visibleSize: 8,
 &#125;;
 
 @Component(&#123;
@@ -715,13 +810,51 @@ export class AppComponent &#123;
   <code><pre source="ts">
 const glnAutocompleteConfigDefault: GlnAutocompleteConfig = &#123;
   position: 'end';
-  visibleSize: 10
+  visibleSize: 8
 &#125;;</pre></code>
 </section>
 
+<section mr-vr
+  id="config-params">
+  <h4 class="app-hover-link">
+    2. Configuration with "position" and "visibleSize".
+    <a [href]="urlCmAutocomplete + '#config-params'">#</a>
+  </h4>
+  <p>
+    Suppose we have a provider in our application with "GlnAutocompleteConfig"
+    and all Autocomplete elements accept its default values.
+    We can change these values for an individual element.
+    To do this, you need to specify in this element those properties that do not match the
+    provider's configuration.
+  </p>
+  <p>
+    For example, let's specify the following parameters:
+  </p>
+  <code><pre source="ts">
+position="center"
+visibleSize=5</pre></code>
+  <p>
+    In other words, there is the following order of determining the configuration parameters:
+  </p>
+  <ul>
+    <li>
+      Standard values are taken.
+      <code><pre source="ts">
+isMaxWd=false,
+isNoAnimation=false,
+position='start',
+visibleSize=0</pre></code>
+    </li>
+    <li>
+      Values from the default configuration provider (if there is one).
+    </li>
+    <li>
+      Values from input parameters (if there is one).
+    </li>
+  </ul>
+</section>
 
-
-<form *ngIf="false"
+<form *ngIf="true"
   [formGroup]="formGroup08a"
   novalidate
   autocomplete="off">
@@ -731,14 +864,14 @@ const glnAutocompleteConfigDefault: GlnAutocompleteConfig = &#123;
     <div class="app-elem aca-middle">
       <div>
         <small>
-          <em>Default: position: 'end', visibleSize: 10.</em>
+          <em>Default: position: 'end', visibleSize: 8.</em>
         </small>
       </div>
       <gln-input formControlName="model08a"
         style="width: 161px;"
         label="Fruit"
         [glnAutocompleteTrigger]="autocomplete08a"
-        helperText="Position: 'end', Size: 10.">
+        helperText="Position: 'end', Size: 8.">
       </gln-input>
       <gln-autocomplete #autocomplete08a="glnAutocomplete">
         <gln-option *ngFor="let item of fruits"
@@ -752,18 +885,18 @@ const glnAutocompleteConfigDefault: GlnAutocompleteConfig = &#123;
     <div class="app-elem aca-middle">
       <div>
         <small>
-          <em>Params: position: 'center', visibleSize: 6.</em>
+          <em>Params: position: 'center', visibleSize: 5.</em>
         </small>
       </div>
       <gln-input formControlName="model08b"
         style="width: 161px;"
         label="Fruit"
         [glnAutocompleteTrigger]="autocomplete08b"
-        helperText="Position: 'center', Size: 6.">
+        helperText="Position: 'center', Size: 5.">
       </gln-input>
       <gln-autocomplete #autocomplete08b="glnAutocomplete"
         position="center"
-        [visibleSize]="6">
+        [visibleSize]="5">
         <gln-option *ngFor="let item of fruits"
           [value]="item">
           {{ 'fruit - ' + capitalizeFirstLetter(item) }}

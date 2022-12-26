@@ -1,7 +1,6 @@
 import { InjectionToken } from '@angular/core';
 
 import { GlnOption } from './gln-option.interface';
-import { GlnOptionsPanel } from './gln-options-panel.interface';
 
 /**
  * Describes the interface of a parent element that contains a list of options.
@@ -13,10 +12,6 @@ export interface GlnOptionParent {
   noRipple?: boolean | null | undefined;
   // Set the option as selected.
   setOptionSelected(option: GlnOption): void;
-  // Define an instance of the options panel.
-  // setOptionsPanel?(value: GlnOptionsPanel): void;
-  //
-  optionInit?(option: GlnOption): void;
 }
 
 /**

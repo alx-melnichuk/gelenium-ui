@@ -9,7 +9,6 @@ import {
   InjectionToken,
   Input,
   OnChanges,
-  OnDestroy,
   OnInit,
   Optional,
   Output,
@@ -60,7 +59,7 @@ export const GLN_AUTOCOMPLETE_CONFIG = new InjectionToken<GlnAutocompleteConfig>
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: GLN_OPTION_PARENT, useExisting: GlnAutocompleteComponent }],
 })
-export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, GlnAutocomplete, GlnOptionParent {
+export class GlnAutocompleteComponent implements OnChanges, OnInit, GlnAutocomplete, GlnOptionParent {
   @Input()
   public id = `glnac-${uniqueIdCounter++}`;
   @Input()
@@ -111,7 +110,6 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
 
   private optionHeight: number = 0;
-  private optionInitDebounceTimer: GlnDebounceTimer = new GlnDebounceTimer();
   private optionsScroll: GlnOptionsScroll | null = null;
   private trigger: GlnAutocompleteTrigger | null = null;
 
@@ -170,10 +168,6 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     if (this.visibleSizeValue == null) {
       this.visibleSizeValue = this.currConfig.visibleSize || null;
     }
-  }
-
-  public ngOnDestroy(): void {
-    this.optionInitDebounceTimer.clear();
   }
 
   public getHostRect(): DOMRect {
@@ -268,18 +262,6 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
         this.close();
       }
     });
-  }
-
-  public optionInit?: (option: GlnOption) => void = this.handlerOptionInit;
-
-  public handlerOptionInit(option: GlnOption): void {
-    console.log(`handlerOptionInit()`); // #
-    this.optionInit = undefined;
-    this.optionInitDebounceTimer.run(() => {
-      this.optionInit = this.handlerOptionInit;
-      console.log(`handlingOptionInit()`); // #
-      this.open();
-    }, 10);
   }
 
   // ** interface GlnOptionParent - finish **

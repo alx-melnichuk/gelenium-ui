@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { GlnAutocompleteConfig, GLN_AUTOCOMPLETE_CONFIG } from 'gelenium-ui';
+import { GlnAutocomplete, GlnAutocompleteConfig, GLN_AUTOCOMPLETE_CONFIG } from 'gelenium-ui';
+import { Observable } from 'rxjs';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import {
@@ -15,7 +16,7 @@ import {
 
 const glnAutocompleteConfigDefault: GlnAutocompleteConfig = {
   position: 'end',
-  visibleSize: 10,
+  visibleSize: 8,
 };
 
 @Component({
@@ -24,7 +25,7 @@ const glnAutocompleteConfigDefault: GlnAutocompleteConfig = {
   styleUrls: ['./cm-autocomplete-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: GLN_AUTOCOMPLETE_CONFIG, useValue: glnAutocompleteConfigDefault }],
+  // providers: [{ provide: GLN_AUTOCOMPLETE_CONFIG, useValue: glnAutocompleteConfigDefault }],
 })
 export class CmAutocompleteBasicComponent {
   @Input()
@@ -106,6 +107,13 @@ export class CmAutocompleteBasicComponent {
 
   public formGroup02d: FormGroup = new FormGroup(this.control02d);
 
+  // Block "Feature"
+  public control07a = {
+    model07a: new FormControl(null, []),
+    model07b: new FormControl(null, []),
+  };
+  public formGroup07a: FormGroup = new FormGroup(this.control07a);
+
   // Block "Config"
   public control08a = {
     model08a: new FormControl(null, []),
@@ -130,13 +138,35 @@ export class CmAutocompleteBasicComponent {
     return value ? value[0].toUpperCase() + value.slice(1) : '';
   }
 
-  public doInput(event: Event): void {
-    console.log(`doInput() event.value=`, (event.target as any).value);
+  // Block "Feature"
+
+  /*public getFruits(value: string | null, autocomplete: GlnAutocomplete | null): Observable<string[]> {
+    const result: string[] = [];
+    if (value != null) {
+      result.push(...this.fruits.filter((item) => item.indexOf(value) > -1));
+    }
+    console.log(`result.length=${result.length}`); // #
+
+    return new Observable<string[]>((observer) => {
+      // setInterval(() => observer.next(new Date().toString()), 1000)
+      setTimeout(() => {
+        console.log(`result`); // #
+        // autocomplete?.open();
+        observer.next(result);
+      }, 200);
+    });
+  }*/
+  public getFruits0(value: string | null, autocomplete: GlnAutocomplete): string[] {
+    const result: string[] = [];
+    if (value != null) {
+      result.push(...this.fruits.filter((item) => item.indexOf(value) > -1));
+    }
+    console.log(`result.length=${result.length}`); // #
+    return result;
   }
 
-  public handlerInput(event: any): void {
-    console.log(event.target.value);
-  }
+  // old
+
   public log(text: string): void {
     console.log(text);
   }

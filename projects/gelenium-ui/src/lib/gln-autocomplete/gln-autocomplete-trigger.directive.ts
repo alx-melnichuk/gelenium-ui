@@ -56,16 +56,6 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
     @Optional() @Host() protected control: NgControl | null
   ) {}
 
-  @HostListener('mousedown')
-  public handlerMousedown(): void {
-    this.handlingMousedown();
-  }
-
-  @HostListener('keydown', ['$event'])
-  public handlerKeydown(event: KeyboardEvent): void {
-    this.handlingKeydown(event);
-  }
-
   @HostListener('focusin', ['$event'])
   public handlerFocusin(event: FocusEvent): void {
     this.handlingFocusin(event);
@@ -74,6 +64,21 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
   @HostListener('focusout', ['$event'])
   public handlerFocusout(event: FocusEvent): void {
     this.handlingFocusout(event);
+  }
+
+  @HostListener('input', ['$event'])
+  public handlerInput(event: InputEvent): void {
+    this.handlingInput(event);
+  }
+
+  @HostListener('keydown', ['$event'])
+  public handlerKeydown(event: KeyboardEvent): void {
+    this.handlingKeydown(event);
+  }
+
+  @HostListener('mousedown')
+  public handlerMousedown(): void {
+    this.handlingMousedown();
   }
 
   public ngOnInit(): void {
@@ -132,47 +137,6 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
 
   // ** Private methods **
 
-  private handlingMousedown(): void {
-    if (this.autocomplete == null || this.autocomplete.disabled) {
-      return;
-    }
-    if (this.autocomplete.isPanelOpen()) {
-      this.autocomplete.close();
-    } else {
-      this.autocomplete.open();
-    }
-  }
-
-  private handlingKeydown(event: KeyboardEvent): void {
-    if (this.autocomplete == null || this.autocomplete.disabled) {
-      return;
-    }
-    if (!this.autocomplete.isPanelOpen()) {
-      switch (event.key) {
-        case ' ':
-        case 'ArrowDown':
-        case 'ArrowUp':
-          this.autocomplete.open();
-          break;
-      }
-    } else {
-      // #console.log(`event.key=${event.key}`); // #
-      const notModifierKey = !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
-      if ((['Escape', 'Tab'].indexOf(event.key) > -1 && notModifierKey) || ('ArrowUp' === event.key && event.altKey)) {
-        this.autocomplete.close();
-      } else if (OptionsScrollKeys.indexOf(event.key) > -1) {
-        event.preventDefault();
-        event.stopPropagation();
-        this.autocomplete.moveMarkedOptionByKey(event.key);
-      } else if ('Enter' === event.key) {
-        event.preventDefault();
-        event.stopPropagation();
-        // #console.log(`'Enter' === event.key`); // #
-        this.autocomplete.setMarkedOptionAsSelected();
-      }
-    }
-  }
-
   private handlingFocusin(event: FocusEvent | null): void {
     if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
@@ -198,6 +162,61 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
         this.isFocusAttrOnFrame = true;
         HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, '');
       }
+    }
+  }
+
+  private handlingInput(event: InputEvent): void {
+    if (this.autocomplete == null || this.autocomplete.disabled) {
+      return;
+    }
+    const data: string | null = event.data;
+    console.log(`handlingInput() data=${data} `, event); // #
+    if (!this.autocomplete.isPanelOpen()) {
+      Promise.resolve().then(() => {
+        this.autocomplete?.open();
+      });
+    }
+  }
+
+  private handlingKeydown(event: KeyboardEvent): void {
+    if (this.autocomplete == null || this.autocomplete.disabled) {
+      return;
+    }
+    if (!this.autocomplete.isPanelOpen()) {
+      // const value: number | string | null = (event.target as HTMLInputElement).value;
+      switch (event.key) {
+        case ' ':
+        case 'ArrowDown':
+        case 'ArrowUp':
+          this.autocomplete.open();
+          break;
+      }
+    } else {
+      // #console.log(`event.key=${event.key}`); // #
+      const notModifierKey = !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
+      if ((['Escape', 'Tab'].indexOf(event.key) > -1 && notModifierKey) || ('ArrowUp' === event.key && event.altKey)) {
+        this.autocomplete.close();
+      } else if (OptionsScrollKeys.indexOf(event.key) > -1) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.autocomplete.moveMarkedOptionByKey(event.key);
+      } else if ('Enter' === event.key) {
+        event.preventDefault();
+        event.stopPropagation();
+        // #console.log(`'Enter' === event.key`); // #
+        this.autocomplete.setMarkedOptionAsSelected();
+      }
+    }
+  }
+
+  private handlingMousedown(): void {
+    if (this.autocomplete == null || this.autocomplete.disabled) {
+      return;
+    }
+    if (this.autocomplete.isPanelOpen()) {
+      this.autocomplete.close();
+    } else {
+      this.autocomplete.open();
     }
   }
 }

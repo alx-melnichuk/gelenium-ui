@@ -101,10 +101,6 @@ export class GlnOptionComponent implements OnChanges, OnInit, GlnOption {
     }
     this.setMarked(!!this.innMarked);
     this.setSelected(!!this.innSelected);
-
-    if (this.parent != null && typeof this.parent['optionInit'] === 'function') {
-      this.parent.optionInit(this);
-    }
   }
 
   // ** Public methods **
