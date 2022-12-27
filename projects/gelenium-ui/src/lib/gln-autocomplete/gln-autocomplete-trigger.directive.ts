@@ -95,6 +95,7 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
       passFocus: (): void => this.passFocus(),
       getOriginalRect: (): DOMRect | null => this.getOriginalRect(),
       setValue: (value: string): void => this.setValue(value),
+      getValue: (): string | null => this.getValue(),
     });
   }
 
@@ -119,7 +120,7 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
   }
   /** Set the new value of the current element. */
   public setValue(value: string | null | undefined): void {
-    console.log(`setValueForOriginal(); value=${value}`); // #
+    console.log(`ACT().setValue(${value})`); // #
     // Update the component's model value.
     if (this.accessorControl != null) {
       this.accessorControl.setValue(value, { emitEvent: true });
@@ -129,6 +130,17 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
     const inputElement: HTMLInputElement = this.hostRef.nativeElement as HTMLInputElement;
     inputElement.value = value as string;
     inputElement.dispatchEvent(event);
+  }
+  /** Get the value of the current element. */
+  public getValue(): string | null {
+    let result: string | null = null;
+    if (this.accessorControl != null) {
+      result = this.accessorControl.value;
+    } else {
+      const inputElement: HTMLInputElement = this.hostRef.nativeElement as HTMLInputElement;
+      result = inputElement.value;
+    }
+    return result;
   }
 
   // ** interface GlnAutocompleteTrigger - finish **
@@ -147,6 +159,11 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
     if (this.isFocusAttrOnFrame) {
       this.isFocusAttrOnFrame = false;
     }
+    // Promise.resolve().then(() => {
+    //   console.log(`ACT().handlingFocusin() autocomplete.open();`); // #
+    //   console.log(``); // #
+    //   this.autocomplete?.open();
+    // });
   }
 
   private handlingFocusout(event: FocusEvent | null): void {
@@ -157,7 +174,11 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
       const element: HTMLElement | null = (event?.relatedTarget as HTMLElement) || null;
       const tagName: string = element?.tagName || '';
       if (tagName !== TAG_NAME_OPTION) {
-        this.autocomplete.close(); // return back.
+        Promise.resolve().then(() => {
+          console.log(`ACT().handlingFocusout() autocomplete?.close();`); // #
+          console.log(``); // #
+          this.autocomplete?.close(); // return back.
+        });
       } else if (this.frameRef != null) {
         this.isFocusAttrOnFrame = true;
         HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, '');
@@ -170,12 +191,12 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
       return;
     }
     const data: string | null = event.data;
-    console.log(`handlingInput() data=${data} `, event); // #
-    if (!this.autocomplete.isPanelOpen()) {
-      Promise.resolve().then(() => {
-        this.autocomplete?.open();
-      });
-    }
+    console.log(`ACT().handlingInput() data=${data}`); // #
+    // Promise.resolve().then(() => {
+    //   console.log(`ACT().handlingInput() autocomplete?.open();`); // #
+    //   console.log(``); // #
+    //   this.autocomplete?.open();
+    // });
   }
 
   private handlingKeydown(event: KeyboardEvent): void {
@@ -185,17 +206,31 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
     if (!this.autocomplete.isPanelOpen()) {
       // const value: number | string | null = (event.target as HTMLInputElement).value;
       switch (event.key) {
-        case ' ':
         case 'ArrowDown':
         case 'ArrowUp':
-          this.autocomplete.open();
+          // #this.autocomplete.open();
+          Promise.resolve().then(() => {
+            console.log(`ACT().handlingKeydown() autocomplete?.open();`); // #
+            console.log(``); // #
+            this.autocomplete?.open();
+          });
           break;
       }
     } else {
       // #console.log(`event.key=${event.key}`); // #
       const notModifierKey = !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
-      if ((['Escape', 'Tab'].indexOf(event.key) > -1 && notModifierKey) || ('ArrowUp' === event.key && event.altKey)) {
-        this.autocomplete.close();
+      if (('Escape' === event.key && notModifierKey) || ('ArrowUp' === event.key && event.altKey)) {
+        Promise.resolve().then(() => {
+          console.log(`ACT().handlingKeydown() autocomplete?.close({ isActive: true });`); // #
+          console.log(``); // #
+          this.autocomplete?.close({ isActive: true });
+        });
+      } else if ('Tab' === event.key) {
+        Promise.resolve().then(() => {
+          console.log(`ACT().handlingKeydown('Tab') autocomplete?.close();`); // #
+          console.log(``); // #
+          this.autocomplete?.close();
+        });
       } else if (OptionsScrollKeys.indexOf(event.key) > -1) {
         event.preventDefault();
         event.stopPropagation();
@@ -204,7 +239,11 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
         event.preventDefault();
         event.stopPropagation();
         // #console.log(`'Enter' === event.key`); // #
-        this.autocomplete.setMarkedOptionAsSelected();
+        Promise.resolve().then(() => {
+          console.log(`ACT().handlingKeydown() autocomplete?.setMarkedOptionAsSelected();`); // #
+          console.log(``); // #
+          this.autocomplete?.setMarkedOptionAsSelected();
+        });
       }
     }
   }
@@ -213,10 +252,15 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
     if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
-    if (this.autocomplete.isPanelOpen()) {
-      this.autocomplete.close();
-    } else {
-      this.autocomplete.open();
-    }
+    const isPanelOpen = this.autocomplete.isPanelOpen();
+    Promise.resolve().then(() => {
+      console.log(`ACT().handlingMousedown() autocomplete?.${isPanelOpen ? 'close({ isActive: true })' : 'open()'};`); // #
+      console.log(``); // #
+      if (isPanelOpen) {
+        this.autocomplete?.close({ isActive: true });
+      } else {
+        this.autocomplete?.open();
+      }
+    });
   }
 }

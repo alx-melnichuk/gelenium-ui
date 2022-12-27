@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { GlnAutocomplete, GlnAutocompleteConfig, GLN_AUTOCOMPLETE_CONFIG } from 'gelenium-ui';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import {
@@ -113,6 +113,12 @@ export class CmAutocompleteBasicComponent {
     model07b: new FormControl(null, []),
   };
   public formGroup07a: FormGroup = new FormGroup(this.control07a);
+  public value07a$: Subject<string[]> = new BehaviorSubject<string[]>([]);
+  public value07a: Observable<string[]> = this.value07a$.asObservable();
+
+  public value07b: string[] = this.fruits;
+
+  public resFruits: string[] = [];
 
   // Block "Config"
   public control08a = {
@@ -140,29 +146,37 @@ export class CmAutocompleteBasicComponent {
 
   // Block "Feature"
 
-  /*public getFruits(value: string | null, autocomplete: GlnAutocomplete | null): Observable<string[]> {
+  /*public getFruits1(value: string | null, autocomplete: GlnAutocomplete | null): void {
     const result: string[] = [];
-    if (value != null) {
+    if (!!value) {
       result.push(...this.fruits.filter((item) => item.indexOf(value) > -1));
     }
-    console.log(`result.length=${result.length}`); // #
-
-    return new Observable<string[]>((observer) => {
-      // setInterval(() => observer.next(new Date().toString()), 1000)
-      setTimeout(() => {
-        console.log(`result`); // #
-        // autocomplete?.open();
-        observer.next(result);
-      }, 200);
-    });
+    console.log(`getFruits1("${value}")`); // #
+    setTimeout(() => {
+      console.log(`getFruits1("${value}")=${result.length}`); // #
+      console.log(``); // #
+      this.resultFruits$.next(result);
+    }, 200);
+    // setTimeout(() => {
+    //   autocomplete?.open();
+    // }, 210);
   }*/
-  public getFruits0(value: string | null, autocomplete: GlnAutocomplete): string[] {
-    const result: string[] = [];
-    if (value != null) {
-      result.push(...this.fruits.filter((item) => item.indexOf(value) > -1));
-    }
-    console.log(`result.length=${result.length}`); // #
-    return result;
+
+  public filtered(list: string[] | null, value: string | null): string[] {
+    const valueStr = (value || '').toLowerCase();
+    const result: string[] = list?.filter((item) => item.toLowerCase().includes(valueStr)) || [];
+    console.log(`CMAB.filtered(${value}) res.length=${result.length}`); // #
+    return list?.filter((item) => item.toLowerCase().includes(valueStr)) || [];
+  }
+
+  public filteredAsyn(list: string[] | null, value: string | null, result$: Subject<string[]>): void {
+    console.log(`CMAB.filteredAsyn("${value}")`); // #
+    const that = this;
+    setTimeout(() => {
+      const result: string[] = that.filtered(list, value);
+      console.log(`CMAB.filteredAsyn("${value}")=${result.length}`); // #
+      result$.next(result);
+    }, 200);
   }
 
   // old

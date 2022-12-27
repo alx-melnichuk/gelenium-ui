@@ -630,7 +630,7 @@ import &#123; GlnAutocompleteModule, GlnOptionModule, GlnInputModule &#125; from
 
   <div class="app-group">
 
-    <div class="app-elem aca-middle">
+    <!-- <div class="app-elem aca-middle">
       <div>
         <small>
           <em>Default: visibleSize: 6.</em>
@@ -640,20 +640,20 @@ import &#123; GlnAutocompleteModule, GlnOptionModule, GlnInputModule &#125; from
         style="width: 161px;"
         label="Fruit"
         [glnAutocompleteTrigger]="autocomplete07a"
-        helperText="Size: 6.">
+        helperText="Size: 6."
+        (input)="filteredAsyn(fruits, control07a.model07a.value, value07a$)">
       </gln-input>
       <gln-autocomplete #autocomplete07a="glnAutocomplete"
         [visibleSize]="6">
-        <gln-option *ngFor="let item of getFruits0(control07a.model07a.value, autocomplete07a)"
-          [value]="item">
+        <gln-option [value]="item"
+          *ngFor="let item of value07a | async">
           {{ 'fruit - ' + capitalizeFirstLetter(item) }}
         </gln-option>
       </gln-autocomplete>
-    </div>
+    </div> -->
 
 
-    <div *ngIf="false"
-      class="app-elem aca-middle">
+    <div class="app-elem aca-middle">
       <div>
         <small>
           <em>Params: position: 'center', visibleSize: 5.</em>
@@ -663,18 +663,18 @@ import &#123; GlnAutocompleteModule, GlnOptionModule, GlnInputModule &#125; from
         style="width: 161px;"
         label="Fruit"
         [glnAutocompleteTrigger]="autocomplete07b"
-        helperText="Position: 'center', Size: 5.">
+        helperText="Position: 'center', Size: 5."
+        (input)="value07b = filtered(fruits, control07a.model07b.value)">
       </gln-input>
       <gln-autocomplete #autocomplete07b="glnAutocomplete"
         position="center"
         [visibleSize]="5">
-        <gln-option *ngFor="let item of fruits"
+        <gln-option *ngFor="let item of value07b"
           [value]="item">
           {{ 'fruit - ' + capitalizeFirstLetter(item) }}
         </gln-option>
       </gln-autocomplete>
     </div>
-
 
   </div>
 </form>
@@ -854,7 +854,7 @@ visibleSize=0</pre></code>
   </ul>
 </section>
 
-<form *ngIf="true"
+<form *ngIf="false"
   [formGroup]="formGroup08a"
   novalidate
   autocomplete="off">

@@ -6,13 +6,18 @@
     (glnAutocompletePanelAttached)="containerAttached(container, getTriggerRect(), getHostRect())"
     (glnAutocompletePanelDetached)="containerDetached()"
     (glnAutocompletePanelResize)="containerResize(container, getTriggerRect(), getHostRect())">
-    <div glnac-wrap
-      [ngClass]="['glnac-wrap', (noAnimation ? 'gln-no-animation' : '')]"
-      [attr.noAnm]="noAnimation ? '' : null"
+    <!--
       [attr.is-show]="isOptionsPanelOpen ? '' : null"
       [attr.is-hide]="!isOptionsPanelOpen ? '' : null"
-      (animationend)="hasPanelAnimation = isOptionsPanelOpen"
-      (animationcancel)="hasPanelAnimation = isOptionsPanelOpen">
+      (animationstart)="log('animationstart');log('');"
+      (animationend)="log('animationend');log('');hasPanelAnimation9 = isOptionsPanelOpen;"
+      (animationcancel)="log('animationcancel');log('');hasPanelAnimation9 = isOptionsPanelOpen;"
+    -- =V -->
+    <div glnac-wrap
+      [ngClass]="['glnac-wrap', (noAnimation ? 'gln-no-animation' : ''), (options.length > 0 ? 'is-show' : 'is-hide')]"
+      [attr.noAnm]="noAnimation ? '' : null"
+      [attr.is-show]="options.length > 0 ? '' : null"
+      [attr.is-hide]="options.length === 0 ? '' : null">
       <div glnac-panel
         class="glnac-panel"
         ngClass9="getPanelClass(panelClassList)"
