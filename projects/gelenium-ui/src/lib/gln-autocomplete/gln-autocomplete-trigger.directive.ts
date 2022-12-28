@@ -159,24 +159,19 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
     if (this.isFocusAttrOnFrame) {
       this.isFocusAttrOnFrame = false;
     }
-    // Promise.resolve().then(() => {
-    //   console.log(`ACT().handlingFocusin() autocomplete.open();`); // #
-    //   console.log(``); // #
-    //   this.autocomplete?.open();
-    // });
   }
 
   private handlingFocusout(event: FocusEvent | null): void {
     if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
-    if (this.autocomplete.isPanelOpen()) {
+    if (this.autocomplete.isOpen()) {
       const element: HTMLElement | null = (event?.relatedTarget as HTMLElement) || null;
       const tagName: string = element?.tagName || '';
       if (tagName !== TAG_NAME_OPTION) {
         Promise.resolve().then(() => {
-          console.log(`ACT().handlingFocusout() autocomplete?.close();`); // #
           console.log(``); // #
+          console.log(`ACT().handlingFocusout() autocomplete?.close();`); // #
           this.autocomplete?.close(); // return back.
         });
       } else if (this.frameRef != null) {
@@ -190,45 +185,40 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
     if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
-    const data: string | null = event.data;
-    console.log(`ACT().handlingInput() data=${data}`); // #
-    // Promise.resolve().then(() => {
-    //   console.log(`ACT().handlingInput() autocomplete?.open();`); // #
-    //   console.log(``); // #
-    //   this.autocomplete?.open();
-    // });
+    // #const value: number | string | null = (event.target as HTMLInputElement).value;
+    console.log(``); // #
+    console.log(`ACT().handlingInput() data:${event.data} autocomplete.isOpen():${this.autocomplete.isOpen()}`); // #
+
+    if (!this.autocomplete.isOpen()) {
+      Promise.resolve().then(() => {
+        console.log(``); // #
+        console.log(`ACT().handlingInput() autocomplete?.open();`); // #
+        this.autocomplete?.open();
+      });
+    }
   }
 
   private handlingKeydown(event: KeyboardEvent): void {
     if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
-    if (!this.autocomplete.isPanelOpen()) {
-      // const value: number | string | null = (event.target as HTMLInputElement).value;
-      switch (event.key) {
-        case 'ArrowDown':
-        case 'ArrowUp':
-          // #this.autocomplete.open();
-          Promise.resolve().then(() => {
-            console.log(`ACT().handlingKeydown() autocomplete?.open();`); // #
-            console.log(``); // #
-            this.autocomplete?.open();
-          });
-          break;
+    if (!this.autocomplete.isOpen()) {
+      // If the panel of available options is closed.
+      if (['ArrowDown', 'ArrowUp'].indexOf(event.key) > -1) {
+        Promise.resolve().then(() => {
+          console.log(``); // #
+          console.log(`ACT().handlingKeydown() autocomplete?.open();`); // #
+          this.autocomplete?.open();
+        });
       }
     } else {
+      // If the panel of available options is open.
       // #console.log(`event.key=${event.key}`); // #
       const notModifierKey = !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
-      if (('Escape' === event.key && notModifierKey) || ('ArrowUp' === event.key && event.altKey)) {
+      if ('Tab' === event.key || ('Escape' === event.key && notModifierKey) || ('ArrowUp' === event.key && event.altKey)) {
         Promise.resolve().then(() => {
-          console.log(`ACT().handlingKeydown() autocomplete?.close({ isActive: true });`); // #
           console.log(``); // #
-          this.autocomplete?.close({ isActive: true });
-        });
-      } else if ('Tab' === event.key) {
-        Promise.resolve().then(() => {
-          console.log(`ACT().handlingKeydown('Tab') autocomplete?.close();`); // #
-          console.log(``); // #
+          console.log(`ACT().handlingKeydown(Tab,Escape,Alt+ArrowUp) autocomplete?.close();`); // #
           this.autocomplete?.close();
         });
       } else if (OptionsScrollKeys.indexOf(event.key) > -1) {
@@ -240,8 +230,8 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
         event.stopPropagation();
         // #console.log(`'Enter' === event.key`); // #
         Promise.resolve().then(() => {
-          console.log(`ACT().handlingKeydown() autocomplete?.setMarkedOptionAsSelected();`); // #
           console.log(``); // #
+          console.log(`ACT().handlingKeydown(Enter) autocomplete?.setMarkedOptionAsSelected();`); // #
           this.autocomplete?.setMarkedOptionAsSelected();
         });
       }
@@ -252,12 +242,12 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
     if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
-    const isPanelOpen = this.autocomplete.isPanelOpen();
+    const isPanelOpen = this.autocomplete.isOpen();
     Promise.resolve().then(() => {
-      console.log(`ACT().handlingMousedown() autocomplete?.${isPanelOpen ? 'close({ isActive: true })' : 'open()'};`); // #
       console.log(``); // #
+      console.log(`ACT().handlingMousedown() autocomplete?.${isPanelOpen ? 'close()' : 'open()'};`); // #
       if (isPanelOpen) {
-        this.autocomplete?.close({ isActive: true });
+        this.autocomplete?.close();
       } else {
         this.autocomplete?.open();
       }

@@ -6,11 +6,11 @@ export interface GlnAutocomplete {
   readonly disabled: boolean | null;
   id: string;
   // A sign that the panel is open.
-  isPanelOpen(): boolean;
+  isOpen(): boolean;
   // Open the autocomplete suggestion panel.
   open(): void;
   // Close the autocomplete suggestion panel.
-  close(options?: { noAnimation?: boolean; isActive?: boolean }): void;
+  close(options?: { noAnimation?: boolean }): void;
   // Get the option marked.
   getMarkedOption(): GlnOption | null;
   // Move the marked option by the key.

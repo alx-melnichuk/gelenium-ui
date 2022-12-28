@@ -1,23 +1,19 @@
-<ng-template [ngIf]="isOptionsPanelOpen || hasPanelAnimation">
+<ng-template [ngIf]="isPanelOpen || hasPanelAnimation">
   <div glnac-container
     class="glnac-container"
     #container
+    [attr.hasPanelAnimation]="hasPanelAnimation"
     glnAutocompletePanel
     (glnAutocompletePanelAttached)="containerAttached(container, getTriggerRect(), getHostRect())"
     (glnAutocompletePanelDetached)="containerDetached()"
     (glnAutocompletePanelResize)="containerResize(container, getTriggerRect(), getHostRect())">
-    <!--
-      [attr.is-show]="isOptionsPanelOpen ? '' : null"
-      [attr.is-hide]="!isOptionsPanelOpen ? '' : null"
-      (animationstart)="log('animationstart');log('');"
-      (animationend)="log('animationend');log('');hasPanelAnimation9 = isOptionsPanelOpen;"
-      (animationcancel)="log('animationcancel');log('');hasPanelAnimation9 = isOptionsPanelOpen;"
-    -- =V -->
     <div glnac-wrap
       [ngClass]="['glnac-wrap', (noAnimation ? 'gln-no-animation' : ''), (options.length > 0 ? 'is-show' : 'is-hide')]"
       [attr.noAnm]="noAnimation ? '' : null"
-      [attr.is-show]="options.length > 0 ? '' : null"
-      [attr.is-hide]="options.length === 0 ? '' : null">
+      [attr.is-show]="isPanelOpen ? '' : null"
+      [attr.is-hide]="!isPanelOpen ? '' : null"
+      (animationend)="hasPanelAnimation = isPanelOpen"
+      (animationcancel)="hasPanelAnimation = isPanelOpen">
       <div glnac-panel
         class="glnac-panel"
         ngClass9="getPanelClass(panelClassList)"
