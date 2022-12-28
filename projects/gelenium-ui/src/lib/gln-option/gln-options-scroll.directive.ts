@@ -27,7 +27,6 @@ export class GlnOptionsScrollDirective implements OnInit, OnDestroy, GlnOptionsS
   constructor(public hostRef: ElementRef<HTMLElement>) {}
 
   public ngOnInit(): void {
-    console.log(`optionList.length=${this.optionList.length}`); // #
     this.attached.emit({
       hostRef: this.hostRef,
       getMarkedOption: (): GlnOption | null => this.getMarkedOption(),
