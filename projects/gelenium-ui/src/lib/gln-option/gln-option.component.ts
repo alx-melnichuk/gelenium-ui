@@ -126,7 +126,8 @@ export class GlnOptionComponent implements OnChanges, OnInit, GlnOption {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', !!value);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', value ? '' : null);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'aria-disabled', '' + !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', value ? null : '0');
+      // Removed "tabindex" attribute because focus was lost when pressing "Tab".
+      // HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', value ? null : '0');
       this.changeDetectorRef.markForCheck();
     }
   }
