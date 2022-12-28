@@ -115,10 +115,7 @@ export class CmAutocompleteBasicComponent {
   public formGroup07a: FormGroup = new FormGroup(this.control07a);
   public value07a$: Subject<string[]> = new BehaviorSubject<string[]>([]);
   public value07a: Observable<string[]> = this.value07a$.asObservable();
-
-  public value07b: string[] = this.fruits;
-
-  public resFruits: string[] = [];
+  public value07b: string[] = [];
 
   // Block "Config"
   public control08a = {
@@ -146,22 +143,6 @@ export class CmAutocompleteBasicComponent {
 
   // Block "Feature"
 
-  /*public getFruits1(value: string | null, autocomplete: GlnAutocomplete | null): void {
-    const result: string[] = [];
-    if (!!value) {
-      result.push(...this.fruits.filter((item) => item.indexOf(value) > -1));
-    }
-    console.log(`getFruits1("${value}")`); // #
-    setTimeout(() => {
-      console.log(`getFruits1("${value}")=${result.length}`); // #
-      console.log(``); // #
-      this.resultFruits$.next(result);
-    }, 200);
-    // setTimeout(() => {
-    //   autocomplete?.open();
-    // }, 210);
-  }*/
-
   public filtered(list: string[] | null, value: string | null): string[] {
     const valueStr = (value || '').toLowerCase();
     const result: string[] = list?.filter((item) => item.toLowerCase().includes(valueStr)) || [];
@@ -172,6 +153,7 @@ export class CmAutocompleteBasicComponent {
   public filteredAsyn(list: string[] | null, value: string | null, result$: Subject<string[]>): void {
     console.log(`CMAB.filteredAsyn("${value}")`); // #
     const that = this;
+    result$.next([]);
     setTimeout(() => {
       const result: string[] = that.filtered(list, value);
       console.log(`CMAB.filteredAsyn("${value}")=${result.length}`); // #

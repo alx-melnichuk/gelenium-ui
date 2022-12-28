@@ -9,7 +9,7 @@
       To use this component, in your module you need to add:
     </span>
     <code><pre source="ts">
-import &#123; GlnAutocompleteModule, GlnOptionModule, GlnInputModule &#125; from 'gelenium-ui';</pre>
+import &#123; GlnAutocompleteModule, GlnOptionModule &#125; from 'gelenium-ui';</pre>
   </code>
     <p>
       The GlnAutocomplete component allows you to supplement the input of the GlnInput
@@ -27,6 +27,12 @@ import &#123; GlnAutocompleteModule, GlnOptionModule, GlnInputModule &#125; from
     &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
     &lt;gln-option value="kiwi"&gt;Kiwi&lt;/gln-option&gt;
   &lt;<strong>gln-autocomplete</strong>&gt;</pre></code>
+    <p>
+      If you are using the GlnInput component, then you need to add the appropriate module.
+    </p>
+    <code><pre source="ts">
+import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
+    </code>
   </section>
 
   <form *ngIf="false"
@@ -630,7 +636,7 @@ import &#123; GlnAutocompleteModule, GlnOptionModule, GlnInputModule &#125; from
 
   <div class="app-group">
 
-    <!-- <div class="app-elem aca-middle">
+    <div class="app-elem aca-middle">
       <div>
         <small>
           <em>Default: visibleSize: 6.</em>
@@ -650,8 +656,7 @@ import &#123; GlnAutocompleteModule, GlnOptionModule, GlnInputModule &#125; from
           {{ 'fruit - ' + capitalizeFirstLetter(item) }}
         </gln-option>
       </gln-autocomplete>
-    </div> -->
-
+    </div>
 
     <div class="app-elem aca-middle">
       <div>
