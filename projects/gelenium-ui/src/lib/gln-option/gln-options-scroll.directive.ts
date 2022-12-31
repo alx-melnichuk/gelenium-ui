@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 
 import { GlnOption } from './gln-option.interface';
 import { GlnOptionsScroll, OptionsScrollKeysToArrow, OptionsScrollKeysToPage } from './gln-options-scroll.interface';
@@ -9,7 +9,7 @@ type IndexAndScrollType = { index: number; scroll: number };
   selector: '[glnOptionsScroll]',
   exportAs: 'glnOptionsScroll',
 })
-export class GlnOptionsScrollDirective implements OnInit, OnDestroy, GlnOptionsScroll {
+export class GlnOptionsScrollDirective implements OnChanges, OnInit, OnDestroy, GlnOptionsScroll {
   @Input('glnOptionsScroll')
   public options: GlnOption[] | null | undefined;
 
@@ -25,6 +25,12 @@ export class GlnOptionsScrollDirective implements OnInit, OnDestroy, GlnOptionsS
   private markedOption: GlnOption | null = null;
 
   constructor(public hostRef: ElementRef<HTMLElement>) {}
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['options']) {
+      console.log(`OS.options.len=${this.options?.length}`); // #
+    }
+  }
 
   public ngOnInit(): void {
     this.attached.emit({
@@ -59,7 +65,7 @@ export class GlnOptionsScrollDirective implements OnInit, OnDestroy, GlnOptionsS
     } else if (OptionsScrollKeysToPage.indexOf(keyboardKey) > -1) {
       result = this.scrollOptionToPage(keyboardKey, indexPrev, this.optionList, panelRect);
     }
-    console.log(`moveMarkedOptionByKey() index=${result.index} scroll=${result.scroll}`); // #
+    console.log(`OS.moveMarkedOptionByKey() index=${result.index} scroll=${result.scroll}`); // #
     if (-1 < result.index && result.index < this.optionList.length) {
       // Change option marker.
       if (this.markedOption) {
@@ -70,7 +76,7 @@ export class GlnOptionsScrollDirective implements OnInit, OnDestroy, GlnOptionsS
       // Change position scroll.
       if (result.scroll !== 0) {
         const scrollTop: number = this.hostRef.nativeElement.scrollTop;
-        console.log(`scrollTop=${scrollTop} result.scroll=${result.scroll} scrollTop+result.scroll=${scrollTop + result.scroll}`); // #
+        console.log(`OS.scrollTop=${scrollTop} result.scroll=${result.scroll} scrollTop+result.scroll=${scrollTop + result.scroll}`); // #
         this.hostRef.nativeElement.scrollTo(0, scrollTop + result.scroll);
       }
     }

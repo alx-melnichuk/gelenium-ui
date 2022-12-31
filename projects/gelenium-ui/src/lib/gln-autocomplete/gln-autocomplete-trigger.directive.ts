@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
-  AfterContentInit,
+  AfterViewInit,
   Directive,
   ElementRef,
   Host,
@@ -39,7 +39,7 @@ interface Frameable {
   selector: '[glnAutocompleteTrigger]',
   exportAs: 'glnAutocompleteTrigger',
 })
-export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit, GlnAutocompleteTrigger {
+export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, GlnAutocompleteTrigger {
   @Input('glnAutocompleteTrigger')
   public autocomplete: GlnAutocomplete | null | undefined;
 
@@ -90,7 +90,9 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
     }
   }
 
-  public ngAfterContentInit(): void {
+  public ngAfterViewInit(): void {
+    const rect = this.hostRef.nativeElement.getBoundingClientRect();
+    console.log(`ACT().AfterViewInit() rect.width=${rect.width}`); // #
     this.autocomplete?.setTrigger({
       passFocus: (): void => this.passFocus(),
       getOriginalRect: (): DOMRect | null => this.getOriginalRect(),
@@ -150,6 +152,8 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
   // ** Private methods **
 
   private handlingFocusin(event: FocusEvent | null): void {
+    console.log(``); // #
+    console.log(`ACT().handlingFocusin();`); // #
     if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
@@ -165,8 +169,14 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
     if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
+    console.log(``); // #
+    console.log(`ACT().handlingFocusout();`); // #
     if (this.autocomplete.isOpen()) {
-      const element: HTMLElement | null = (event?.relatedTarget as HTMLElement) || null;
+      Promise.resolve().then(() => {
+        console.log(`ACT().handlingFocusout() autocomplete?.close();`); // #
+        // this.autocomplete?.close(); // return back.
+      });
+      /* const element: HTMLElement | null = (event?.relatedTarget as HTMLElement) || null;
       const tagName: string = element?.tagName || '';
       if (tagName !== TAG_NAME_OPTION) {
         Promise.resolve().then(() => {
@@ -177,7 +187,7 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
       } else if (this.frameRef != null) {
         this.isFocusAttrOnFrame = true;
         HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, '');
-      }
+      }*/
     }
   }
 
@@ -193,7 +203,7 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
       Promise.resolve().then(() => {
         console.log(``); // #
         console.log(`ACT().handlingInput() autocomplete?.open();`); // #
-        this.autocomplete?.open();
+        this.autocomplete?.open(); /*important!*/
       });
     }
   }
@@ -202,6 +212,7 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
     if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
+    // #console.log(`event.key=${event.key}`); // #
     if (!this.autocomplete.isOpen()) {
       // If the panel of available options is closed.
       if (['ArrowDown', 'ArrowUp'].indexOf(event.key) > -1) {
@@ -213,7 +224,6 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
       }
     } else {
       // If the panel of available options is open.
-      // #console.log(`event.key=${event.key}`); // #
       const notModifierKey = !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
       if ('Tab' === event.key || ('Escape' === event.key && notModifierKey) || ('ArrowUp' === event.key && event.altKey)) {
         Promise.resolve().then(() => {
@@ -239,7 +249,7 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
   }
 
   private handlingMousedown(): void {
-    if (this.autocomplete == null || this.autocomplete.disabled) {
+    /*if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
     const isPanelOpen = this.autocomplete.isOpen();
@@ -251,6 +261,6 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterContentInit
       } else {
         this.autocomplete?.open();
       }
-    });
+    });*/
   }
 }

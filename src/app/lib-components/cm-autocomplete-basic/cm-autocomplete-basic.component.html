@@ -46,31 +46,6 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
         <div mb0>
           <small><em>exterior: Outlined</em></small>
         </div>
-        <div class="aca-elem">
-          <small><em>Model: {{ control01.model01a.value }}</em></small>
-        </div>
-        <gln-input formControlName="model01a"
-          label="Enter value"
-          exterior="outlined"
-          wdFull
-          [glnAutocompleteTrigger]="autocomplete01a">
-        </gln-input>
-        <gln-autocomplete #autocomplete01a="glnAutocomplete">
-          <gln-option *ngFor="let item of filter(control01.model01a.value, fruits)"
-            [value]="item">
-            {{ capitalizeFirstLetter(item) }}
-          </gln-option>
-        </gln-autocomplete>
-      </div>
-
-    </div>
-
-    <div class="app-group">
-
-      <div class="app-elem">
-        <div mb0>
-          <small><em>exterior: Outlined</em></small>
-        </div>
         <div>
           <small>
             <em>
@@ -103,18 +78,20 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
             </em>
           </small>
         </div>
-        <gln-input formControlName="model01b"
-          label="Enter value"
-          exterior="underline"
-          wdFull
-          [glnAutocompleteTrigger]="autocomplete01b">
-        </gln-input>
-        <gln-autocomplete #autocomplete01b="glnAutocomplete">
-          <gln-option value="mango">Mango</gln-option>
-          <gln-option value="lemon">Lemon</gln-option>
-          <gln-option value="orange">Orange</gln-option>
-          <gln-option value="kiwi">Kiwi</gln-option>
-        </gln-autocomplete>
+        <div style="display: inline;">
+          <gln-input formControlName="model01b"
+            label="Enter value"
+            exterior="underline"
+            wdFull
+            [glnAutocompleteTrigger]="autocomplete01b">
+          </gln-input>
+          <gln-autocomplete #autocomplete01b="glnAutocomplete">
+            <gln-option value="mango">Mango</gln-option>
+            <gln-option value="lemon">Lemon</gln-option>
+            <gln-option value="orange">Orange</gln-option>
+            <gln-option value="kiwi">Kiwi</gln-option>
+          </gln-autocomplete>
+        </div>
       </div>
 
       <div class="app-elem">
@@ -639,23 +616,32 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem aca-middle">
       <div>
         <small>
-          <em>Default: visibleSize: 6.</em>
+          <em>Default: visibleSize: 6. {{ value07aLoading }}</em>
         </small>
       </div>
-      <gln-input formControlName="model07a"
-        style="width: 161px;"
-        label="Fruit"
-        [glnAutocompleteTrigger]="autocomplete07a"
-        helperText="Size: 6."
-        (input)="filteredAsyn(fruits, control07a.model07a.value, value07a$)">
-      </gln-input>
-      <gln-autocomplete #autocomplete07a="glnAutocomplete"
-        [visibleSize]="6">
-        <gln-option [value]="item"
-          *ngFor="let item of value07a | async">
-          {{ 'fruit - ' + capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
+      <div style="display: inline;"
+        *ngIf="true">
+        <gln-input formControlName="model07a"
+          style9="width: 161px;"
+          label="Fruit"
+          [glnAutocompleteTrigger]="autocomplete07a"
+          helperText="Size: 6."
+          (input)="value07aLoading = true; filteredAsyn(fruits, control07a.model07a.value, value07a$);">
+        </gln-input>
+        <gln-autocomplete #autocomplete07a="glnAutocomplete"
+          [visibleSize]="6"
+          [attr.load]="value07aLoading">
+          <gln-option *ngIf="value07aLoading"
+            value="">Loading
+          </gln-option>
+          <!-- <ng-container *ngIf="!value07aLoading"> -->
+          <gln-option [value]="item"
+            *ngFor="let item of value07a | async">
+            {{ 'fruit - ' + capitalizeFirstLetter(item) }}
+          </gln-option>
+          <!-- </ng-container> -->
+        </gln-autocomplete>
+      </div>
     </div>
 
     <div class="app-elem aca-middle">

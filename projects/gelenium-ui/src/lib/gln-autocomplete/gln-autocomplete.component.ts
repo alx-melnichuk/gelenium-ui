@@ -18,6 +18,7 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
 import { GlnOption } from '../gln-option/gln-option.interface';
@@ -36,17 +37,15 @@ import { GlnAutocompletePosition, GlnAutocompletePositionUtil } from './gln-auto
 import { GlnAutocompleteTrigger } from './gln-autocomplete-trigger.interface';
 import { GlnAutocompleteOpenUtil } from './gln-autocomplete-open.util';
 import { GlnAutocompleteConfig } from './gln-autocomplete-config.interface';
-import { Subscription } from 'rxjs/internal/Subscription';
 
-const CSS_PROP_BORDER_RADIUS = '--glnacp--border-radius';
-const CSS_PROP_BOTTOM = '--glnacp--bottom';
-const CSS_PROP_LEFT = '--glnacp--left';
-const CSS_PROP_MAX_HEIGHT = '--glnacp--max-height';
-const CSS_PROP_MAX_WIDTH = '--glnacp--max-width';
-const CSS_PROP_MIN_WIDTH = '--glnacp--min-width';
-const CSS_PROP_RIGHT = '--glnacp--right';
-const CSS_PROP_TOP = '--glnacp--top';
-const CSS_PROP_TRANSLATE_Y = '--glnacp--translate-y';
+const CSS_PROP_WIDTH = '--glnac--width';
+const CSS_PROP_JUSTIFY_CONTENT = '--glnac--justify-content';
+const CSS_PROP_BORDER_RADIUS = '--glnac--border-radius';
+const CSS_PROP_BOTTOM = '--glnacc--bottom';
+const CSS_PROP_MAX_HEIGHT = '--glnac--max-height';
+const CSS_PROP_MAX_WIDTH = '--glnac--max-width';
+const CSS_PROP_TOP = '--glnacc--top';
+const CSS_PROP_TRANSLATE_Y = '--glnacc--translate-y';
 
 let uniqueIdCounter = 0;
 
@@ -100,18 +99,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public isMaxWidth: boolean | null = null; // Binding attribute "isMaxWd".
   public isPanelOpen: boolean = false;
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
-  public panelBorderRadius: number | null = null;
-  public panelBottom: number | null = null;
-  public panelLeft: number | null = null;
-  public panelMaxHeight: number | null = null;
-  public panelMaxWidth: number | null = null;
-  public panelMinWidth: number | null = null;
-  public panelRight: number | null = null;
-  public panelTop: number | null = null;
   public positionValue: GlnAutocompletePosition | null = null; // Binding attribute "position" ('start'|'center'|'end').
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
 
-  private container: HTMLElement | null = null;
   private optionHeight: number = 0;
   private optionListSub: Subscription | null = null;
   private optionsScroll: GlnOptionsScroll | null = null;
@@ -140,15 +130,18 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     }
     if (changes['isMaxWd'] || (changes['config'] && this.isMaxWd == null && this.currConfig.isMaxWd != null)) {
       this.isMaxWidth = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
+      this.setCssMaxWidth(this.isMaxWidth, this.hostRef);
     }
     if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
       this.noAnimation = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
     }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       this.positionValue = GlnAutocompletePositionUtil.create(this.position || this.currConfig.position || null);
+      this.setCssJustifyContent(this.positionValue, this.hostRef);
     }
     if (changes['visibleSize'] || (changes['config'] && this.visibleSize == null && this.currConfig.visibleSize != null)) {
       this.visibleSizeValue = this.visibleSize || this.currConfig.visibleSize || null;
+      this.setCssMaxHeight(this.optionHeight, this.visibleSizeValue, this.hostRef);
     }
   }
 
@@ -156,22 +149,27 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
-    const fontSize = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('font-size').replace('px', '') || '0');
-    const lineHeight = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height').replace('px', '') || '0');
+    const fontSize = HtmlElemUtil.propertyAsNumber(this.hostRef, 'font-size');
+    const lineHeight = HtmlElemUtil.propertyAsNumber(this.hostRef, 'line-height');
     this.optionHeight = GlnOptionUtil.getHeightOption(fontSize, lineHeight);
 
     if (this.isMaxWidth == null) {
       this.isMaxWidth = !!this.currConfig.isMaxWd;
+      this.setCssMaxWidth(this.isMaxWidth, this.hostRef);
     }
     if (this.noAnimation == null) {
       this.noAnimation = !!this.currConfig.isNoAnimation;
     }
     if (this.positionValue == null) {
       this.positionValue = GlnAutocompletePositionUtil.create(this.currConfig.position || null);
+      this.setCssJustifyContent(this.positionValue, this.hostRef);
     }
     if (this.visibleSizeValue == null) {
       this.visibleSizeValue = this.currConfig.visibleSize || null;
     }
+
+    // Calling a method according to what is defined by this.optionHeight and this.visibleSizeValue.
+    this.setCssMaxHeight(this.optionHeight, this.visibleSizeValue, this.hostRef);
   }
 
   public ngOnDestroy(): void {
@@ -196,13 +194,18 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public open = (): void => {
     if (!this.disabled && !this.isPanelOpen) {
       console.log(`AC.open();  isPanelOpen:${this.isPanelOpen} options.len:${this.optionList.length}`);
+
       if (this.optionListSub == null) {
+        console.log(`AC.open();  optionListSub = optionList.changes.subscribe();`); //#
+        // Set subscription: when changing the list of options, open the options panel.
         this.optionListSub = this.optionList.changes.subscribe((items: GlnOptionComponent[]) => {
-          console.log(`AC.optionList.changes() isPanelOpen:${this.isPanelOpen} items:${items.length} options:${this.options.length}`);
-          this.setPanelVisible();
+          this.changeDetectorRef.markForCheck();
+          console.log(`AC.optionList.changes() isPanelOpen:${this.isPanelOpen} panelOpening(); options:${this.options.length}`);
+          this.panelOpening();
         });
       }
-      this.setPanelVisible();
+      // If the list of options is not empty, then the options panel will be opened.
+      this.panelOpening();
     }
   };
   /** Close the autocomplete suggestion panel. */
@@ -210,12 +213,15 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     if (!this.disabled && this.isPanelOpen) {
       this.isPanelOpen = false;
       console.log(`AC.close(); isPanelOpen=${this.isPanelOpen};`); // #
-      console.log(``); // #
       // Remove the current object from the list of items with the panel open.
       GlnAutocompleteOpenUtil.remove(this);
 
+      if (this.optionListSub != null) {
+        console.log(`AC.close();  optionListSub = null;`); //#
+      }
       this.optionListSub?.unsubscribe();
       this.optionListSub = null;
+      console.log(``); // #
 
       if (this.hasPanelAnimation && options?.noAnimation) {
         this.hasPanelAnimation = false;
@@ -244,6 +250,12 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   /** Set trigger object for autocomplete. */
   public setTrigger = (trigger: GlnAutocompleteTrigger | null): void => {
     this.trigger = trigger;
+    const triggerRect: DOMRect | null = this.getTriggerRect();
+    // Setting property 'width'.
+    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_WIDTH, NumberUtil.str(triggerRect?.width || null)?.concat('px'));
+    // Prepare and setting property 'border-radius'.
+    const panelBorderRadius = !!triggerRect && triggerRect.height > 0 ? NumberUtil.roundTo100(triggerRect.height / 10) : null;
+    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(panelBorderRadius)?.concat('px'));
   };
 
   // ** interface GlnAutocomplete - finish **
@@ -252,16 +264,16 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
 
   /** Set the option as selected. */
   public setOptionSelected(option: GlnOption): void {
-    console.log(`setOptionSelected(); option.value:`, option.value); // #
+    console.log(`AC.setOptionSelected(); option.value:`, option.value); // #
 
     Promise.resolve().then(() => {
       this.selected.emit(option);
       const value: string | null | undefined = option.value as string;
       this.trigger?.setValue(value);
-      console.log(`setOptionSelected(); this.optionListTrigger.setValue(value);`); // #
+      console.log(`AC.setOptionSelected(); this.optionListTrigger.setValue(value);`); // #
       if (this.isPanelOpen) {
         this.trigger?.passFocus();
-        this.close();
+        // this.close();
       }
     });
   }
@@ -270,66 +282,18 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
 
   // ** directive: GlnAutocompletePanel - start **
 
-  public containerAttached(container: HTMLElement | null, triggerRect: DOMRect | null, hostRect: DOMRect | null): void {
-    const containerRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(container);
-    if (containerRef != null && triggerRect != null) {
-      this.container = container;
-      const containerRect: DOMRect = containerRef.nativeElement.getBoundingClientRect();
-
-      // Prepare and setting property 'border-radius'.
-      this.panelBorderRadius = triggerRect.height > 0 ? NumberUtil.roundTo100(triggerRect.height / 10) : null;
-      HtmlElemUtil.setProperty(containerRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(this.panelBorderRadius)?.concat('px'));
-
-      // Prepare properties: 'left', 'right'.
-      const isJoinOnLeft = containerRect.left === triggerRect.left;
-      // Default - GlnAutocompletePosition.start === this.positionValue
-      this.panelLeft = isJoinOnLeft ? 0 : -triggerRect.width;
-      this.panelRight = null;
-      if (!this.isMaxWidth) {
-        if (GlnAutocompletePosition.center === this.positionValue) {
-          const delta = NumberUtil.roundTo100((triggerRect.width - containerRect.width) / 2);
-          this.panelLeft = isJoinOnLeft ? delta : null;
-          this.panelRight = isJoinOnLeft ? null : delta;
-        } else if (GlnAutocompletePosition.end === this.positionValue) {
-          this.panelLeft = null;
-          this.panelRight = isJoinOnLeft ? -triggerRect.width : 0;
-        }
-      }
-      // Setting properties: 'left', 'right'.
-      HtmlElemUtil.setProperty(containerRef, CSS_PROP_LEFT, NumberUtil.str(this.panelLeft)?.concat('px'));
-      HtmlElemUtil.setProperty(containerRef, CSS_PROP_RIGHT, NumberUtil.str(this.panelRight)?.concat('px'));
-    }
-
-    this.containerResize(container, triggerRect, hostRect);
-  }
-
-  public containerDetached(): void {
-    this.panelBorderRadius = null;
-    this.panelBottom = null;
-    this.panelTop = null;
-    this.panelLeft = null;
-    this.panelRight = null;
-
-    this.panelMaxHeight = null;
-    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MAX_HEIGHT, null);
-    this.panelMinWidth = null;
-    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MIN_WIDTH, null);
-    this.panelMaxWidth = null;
-    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MAX_WIDTH, null);
-  }
-
   public containerResize(container: HTMLElement | null, triggerRect: DOMRect | null, hostRect: DOMRect | null): void {
     const containerRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(container);
     if (containerRef != null && triggerRect != null && hostRect != null) {
-      const panelHeight: number = this.getHeight(containerRef);
+      const panelHeight: number = HtmlElemUtil.propertyAsNumber(containerRef, 'height');
       const isPanelOnTop: boolean = triggerRect.top + triggerRect.height + panelHeight > ScreenUtil.getHeight();
 
       // Prepare properties: 'bottom', 'top'.
-      this.panelBottom = isPanelOnTop ? -(NumberUtil.roundTo100(triggerRect.top - hostRect.top) - 1) : null;
-      this.panelTop = isPanelOnTop ? null : NumberUtil.roundTo100(triggerRect.bottom - hostRect.top);
+      const panelBottom = isPanelOnTop ? -(NumberUtil.roundTo100(triggerRect.top - hostRect.top) - 1) : null;
+      const panelTop = isPanelOnTop ? null : NumberUtil.roundTo100(triggerRect.bottom - hostRect.top);
       // Setting properties: 'bottom', 'top'.
-      HtmlElemUtil.setProperty(containerRef, CSS_PROP_BOTTOM, NumberUtil.str(this.panelBottom)?.concat('px'));
-      HtmlElemUtil.setProperty(containerRef, CSS_PROP_TOP, NumberUtil.str(this.panelTop)?.concat('px'));
+      HtmlElemUtil.setProperty(containerRef, CSS_PROP_BOTTOM, NumberUtil.str(panelBottom)?.concat('px'));
+      HtmlElemUtil.setProperty(containerRef, CSS_PROP_TOP, NumberUtil.str(panelTop)?.concat('px'));
 
       // Prepare and setting property 'translate-y'.
       if (panelHeight > 0) {
@@ -338,9 +302,6 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
         HtmlElemUtil.setProperty(containerRef, CSS_PROP_TRANSLATE_Y, NumberUtil.str(translateY)?.concat('px'));
       }
     }
-  }
-  public log(text: string): void {
-    console.log(text);
   }
 
   // ** directive: GlnAutocompletePanel - finish **
@@ -355,39 +316,37 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
 
   // ** Private methods **
 
-  private getHeight(value: ElementRef<HTMLElement> | null): number {
-    return value ? Number(getComputedStyle(value.nativeElement).getPropertyValue('height').replace('px', '')) : 0;
-  }
-
-  private setPanelVisible(): void {
-    console.log(`AC.setPanelVisible() isPanelOpen:${this.isPanelOpen} options:${this.options.length}`);
-    const triggerRect: DOMRect | null = this.getTriggerRect();
-    if (!this.isPanelOpen && triggerRect != null && this.options.length > 0) {
+  private panelOpening(): void {
+    console.log(`AC.panelOpening() isPanelOpen:${this.isPanelOpen} options:${this.options.length}`);
+    // If the list of options is not empty, then open the panel.
+    if (!this.isPanelOpen && this.getTriggerRect() != null && this.options.length > 0) {
       this.isPanelOpen = true;
-      console.log(`AC.setPanelVisible() isPanelOpen=${this.isPanelOpen};`); // #
+      console.log(`AC.panelOpening() isPanelOpen=${this.isPanelOpen};`); // #
       console.log(``); // #
 
       // Add the current object to the list of elements with the panel open.
       GlnAutocompleteOpenUtil.add(this);
 
-      // Prepare and setting property 'max-height'.
-      const visibleSize = this.visibleSizeValue;
-      this.panelMaxHeight = visibleSize != null && visibleSize > 0 && this.optionHeight > 0 ? this.optionHeight * visibleSize : null;
-      HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MAX_HEIGHT, NumberUtil.str(this.panelMaxHeight)?.concat('px'));
-
-      // Prepare and setting property: 'min-width'.
-      this.panelMinWidth = triggerRect.width;
-      HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MIN_WIDTH, NumberUtil.str(this.panelMinWidth)?.concat('px'));
-
-      // Prepare and setting property: 'max-width'.
-      this.panelMaxWidth = this.isMaxWidth ? triggerRect.width : null;
-      HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_MAX_WIDTH, NumberUtil.str(this.panelMaxWidth)?.concat('px'));
-
       this.changeDetectorRef.markForCheck();
       this.opened.emit();
     }
-    // if (this.isPanelOpen && triggerRect != null && this.options.length > 0) {
-    //   this.containerResize(this.container, triggerRect, this.getHostRect());
-    // }
+  }
+  /** Prepare and setting property: 'max-height'. */
+  private setCssMaxHeight(optionHeight: number, visibleSizeValue: number | null, elem: ElementRef<HTMLElement> | null): void {
+    const maxHeight = visibleSizeValue != null && visibleSizeValue > 0 && optionHeight > 0 ? optionHeight * visibleSizeValue : null;
+    HtmlElemUtil.setProperty(elem, CSS_PROP_MAX_HEIGHT, NumberUtil.str(maxHeight)?.concat('px'));
+  }
+  /** Prepare and setting property: 'max-width'. */
+  private setCssMaxWidth(isMaxWidth: boolean | null, elem: ElementRef<HTMLElement> | null): void {
+    const maxWidthStr: string | null = isMaxWidth ? `var(${CSS_PROP_WIDTH})` : null;
+    HtmlElemUtil.setProperty(elem, CSS_PROP_MAX_WIDTH, maxWidthStr);
+  }
+  /** Prepare and setting property: 'justify-content'. */
+  private setCssJustifyContent(positionValue: GlnAutocompletePosition | null, elem: ElementRef<HTMLElement> | null): void {
+    let justifyContent: string = 'flex-start';
+    justifyContent = GlnAutocompletePosition.center === positionValue ? 'center' : justifyContent;
+    justifyContent = GlnAutocompletePosition.end === positionValue ? 'flex-end' : justifyContent;
+    // Setting properties: 'justify-content'.
+    HtmlElemUtil.setProperty(elem, CSS_PROP_JUSTIFY_CONTENT, justifyContent);
   }
 }

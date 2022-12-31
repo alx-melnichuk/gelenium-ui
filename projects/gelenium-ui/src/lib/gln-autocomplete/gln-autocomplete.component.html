@@ -2,13 +2,12 @@
   <div glnac-container
     class="glnac-container"
     #container
-    [attr.hasPanelAnimation]="hasPanelAnimation"
+    [attr.otp-len]="options.length"
     glnAutocompletePanel
-    (glnAutocompletePanelAttached)="containerAttached(container, getTriggerRect(), getHostRect())"
-    (glnAutocompletePanelDetached)="containerDetached()"
+    (glnAutocompletePanelAttached)="containerResize(container, getTriggerRect(), getHostRect())"
     (glnAutocompletePanelResize)="containerResize(container, getTriggerRect(), getHostRect())">
     <div glnac-wrap
-      [ngClass]="['glnac-wrap', (noAnimation ? 'gln-no-animation' : ''), (options.length > 0 ? 'is-show' : 'is-hide')]"
+      [ngClass]="['glnac-wrap', (noAnimation ? 'gln-no-animation' : ''), (isPanelOpen ? 'is-show' : 'is-hide')]"
       [attr.noAnm]="noAnimation ? '' : null"
       [attr.is-show]="isPanelOpen ? '' : null"
       [attr.is-hide]="!isPanelOpen ? '' : null"
