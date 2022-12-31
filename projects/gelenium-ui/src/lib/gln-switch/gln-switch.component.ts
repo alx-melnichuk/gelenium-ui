@@ -319,15 +319,16 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
 
   private prepareCssProperties(hostRef: ElementRef<HTMLElement>): void {
     // Determine the font size of the parent element.
-    const parentElem: Element | null = hostRef && hostRef.nativeElement ? hostRef.nativeElement.parentElement : null;
-    const parentFontSize: number = parentElem ? Number(getComputedStyle(parentElem).getPropertyValue('font-size').replace('px', '')) : 0;
+    const parentElem: HTMLElement | null = hostRef && hostRef.nativeElement ? hostRef.nativeElement.parentElement : null;
+    const parentRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(parentElem);
+    const parentFontSize: number = HtmlElemUtil.propertyAsNumber(parentRef, 'font-size');
     if (parentFontSize > 0) {
       HtmlElemUtil.setProperty(hostRef, PRP_SW_PARENT_FONT_SIZE, NumberUtil.str(parentFontSize)?.concat('px'));
     }
     if (hostRef && hostRef.nativeElement) {
       const hostElement: Element = hostRef.nativeElement;
       // Determine the font size of the host element.
-      const hostFontSizeVal: number = Number(getComputedStyle(hostElement).getPropertyValue('font-size').replace('px', ''));
+      const hostFontSizeVal: number = HtmlElemUtil.propertyAsNumber(hostRef, 'font-size');
       const hostFontSize: number = NumberUtil.roundTo100(hostFontSizeVal);
       // Determine the font size of the document element.
       const rootFontSizeVal: number = Number(getComputedStyle(document.documentElement).getPropertyValue('font-size').replace('px', ''));

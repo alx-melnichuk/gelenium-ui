@@ -2,6 +2,7 @@ import { AfterContentInit, Directive, ElementRef, Input, OnChanges, Renderer2, S
 
 import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from './gln-frame-ornam-align.interface';
 import { HtmlElemUtil } from '../../_utils/html-elem.util';
+import { HtmlPathUtil } from '../../_utils/html-path.util';
 import { NumberUtil } from '../../_utils/number.util';
 
 export const ATTR_ORN_LF = 'glnfr-orn-lf';
@@ -74,7 +75,7 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
   // ** Private methods **
 
   private initialSetting(htmlElement: HTMLElement, pathElement: string | null): void {
-    const element = HtmlElemUtil.getElementByPathClassOrTag(htmlElement, pathElement);
+    const element = HtmlPathUtil.getElementByPathClassOrTag(htmlElement, pathElement);
     if (element) {
       const elementRef = HtmlElemUtil.getElementRef(element);
 

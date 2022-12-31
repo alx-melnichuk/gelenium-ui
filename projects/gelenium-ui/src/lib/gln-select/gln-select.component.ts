@@ -423,7 +423,7 @@ export class GlnSelectComponent
     let maxWidth = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('max-width').replace('px', ''));
     this.maxWidth = !isNaN(maxWidth) ? maxWidth : 0;
     if (this.maxWidth === 0 && BooleanUtil.init(this.wdFull)) {
-      maxWidth = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('width').replace('px', ''));
+      maxWidth = HtmlElemUtil.propertyAsNumber(this.hostRef, 'width');
       this.maxWidth = !isNaN(maxWidth) ? maxWidth : 0;
     }
   }
