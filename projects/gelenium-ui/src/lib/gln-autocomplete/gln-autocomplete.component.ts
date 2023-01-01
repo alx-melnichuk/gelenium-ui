@@ -94,8 +94,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public set options(value: GlnOption[]) {}
 
   public currConfig: GlnAutocompleteConfig;
-  public disabled: boolean | null = null; // Binding attribute "isDisabled".
+  public disabled: boolean | null = null; // Binding attribute "isDisabled". // interface GlnAutocomplete
   public hasPanelAnimation: boolean = false;
+  public isContainerMousedown: boolean = false; // interface GlnAutocomplete
   public isMaxWidth: boolean | null = null; // Binding attribute "isMaxWd".
   public isPanelOpen: boolean = false;
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
@@ -184,6 +185,10 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     return this.trigger?.getOriginalRect() || null;
   }
 
+  public getOptions(optionList: QueryList<GlnOptionComponent> | null): GlnOption[] {
+    return (optionList?.toArray() as GlnOption[]) || [];
+  }
+
   // ** interface GlnAutocomplete - start **
 
   /** A sign that the panel is open. */
@@ -200,7 +205,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
         // Set subscription: when changing the list of options, open the options panel.
         this.optionListSub = this.optionList.changes.subscribe((items: GlnOptionComponent[]) => {
           this.changeDetectorRef.markForCheck();
-          console.log(`AC.optionList.changes() isPanelOpen:${this.isPanelOpen} panelOpening(); options:${this.options.length}`);
+          console.log(`AC.optionList.changes() isPanelOpen:${this.isPanelOpen} panelOpening(); optionList.len:${this.optionList.length}`);
           this.panelOpening();
         });
       }
@@ -304,6 +309,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     }
   }
 
+  log(text: string): void {
+    console.log(text);
+  }
   // ** directive: GlnAutocompletePanel - finish **
 
   // ** directive: GlnOptionsScroll - start **
@@ -317,9 +325,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   // ** Private methods **
 
   private panelOpening(): void {
-    console.log(`AC.panelOpening() isPanelOpen:${this.isPanelOpen} options:${this.options.length}`);
+    console.log(`AC.panelOpening() isPanelOpen:${this.isPanelOpen} options:${this.optionList.length}`); // #
     // If the list of options is not empty, then open the panel.
-    if (!this.isPanelOpen && this.getTriggerRect() != null && this.options.length > 0) {
+    if (!this.isPanelOpen && this.getTriggerRect() != null && this.optionList.length > 0) {
       this.isPanelOpen = true;
       console.log(`AC.panelOpening() isPanelOpen=${this.isPanelOpen};`); // #
       console.log(``); // #

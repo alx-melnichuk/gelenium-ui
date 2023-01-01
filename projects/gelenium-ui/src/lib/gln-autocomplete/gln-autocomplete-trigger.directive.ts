@@ -153,15 +153,16 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
 
   private handlingFocusin(event: FocusEvent | null): void {
     console.log(``); // #
-    console.log(`ACT().handlingFocusin();`); // #
+    console.log(`ACT().handlingFocusin(); this.isFocusAttrOnFrame=${this.isFocusAttrOnFrame}`); // #
     if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
-    if (this.frameRef != null && this.isFocusAttrOnFrame) {
-      HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, null);
-    }
     if (this.isFocusAttrOnFrame) {
       this.isFocusAttrOnFrame = false;
+      console.log(`ACT().handlingFocusin(); this.isFocusAttrOnFrame=false;`); // #
+      if (this.frameRef != null) {
+        HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, null);
+      }
     }
   }
 
@@ -170,24 +171,21 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
       return;
     }
     console.log(``); // #
-    console.log(`ACT().handlingFocusout();`); // #
+    const isOpen = this.autocomplete.isOpen();
+    const isFocusAttr = this.isFocusAttrOnFrame;
+    console.log(`ACT().handlingFocusout(); this.autocomplete.isOpen():${isOpen}  this.isFocusAttrOnFrame=${isFocusAttr}`); // #
     if (this.autocomplete.isOpen()) {
-      Promise.resolve().then(() => {
-        console.log(`ACT().handlingFocusout() autocomplete?.close();`); // #
-        // this.autocomplete?.close(); // return back.
-      });
-      /* const element: HTMLElement | null = (event?.relatedTarget as HTMLElement) || null;
-      const tagName: string = element?.tagName || '';
-      if (tagName !== TAG_NAME_OPTION) {
+      if (!this.autocomplete.isContainerMousedown) {
         Promise.resolve().then(() => {
           console.log(``); // #
           console.log(`ACT().handlingFocusout() autocomplete?.close();`); // #
-          this.autocomplete?.close(); // return back.
+          // this.autocomplete?.close(); // return back.
         });
       } else if (this.frameRef != null) {
+        console.log(`ACT().handlingFocusout(); isContainerMousedown this.isFocusAttrOnFrame=true;`); // #
         this.isFocusAttrOnFrame = true;
         HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, '');
-      }*/
+      }
     }
   }
 
@@ -197,7 +195,8 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
     }
     // #const value: number | string | null = (event.target as HTMLInputElement).value;
     console.log(``); // #
-    console.log(`ACT().handlingInput() data:${event.data} autocomplete.isOpen():${this.autocomplete.isOpen()}`); // #
+    const isOpen = this.autocomplete.isOpen();
+    console.log(`ACT().handlingInput() data:${event.data} autocomplete.isOpen():${isOpen} event.target:${event.target};`); // #
 
     if (!this.autocomplete.isOpen()) {
       Promise.resolve().then(() => {
