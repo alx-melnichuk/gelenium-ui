@@ -113,9 +113,8 @@ export class CmAutocompleteBasicComponent {
     model07b: new FormControl(null, []),
   };
   public formGroup07a: FormGroup = new FormGroup(this.control07a);
-  public value07a$: Subject<string[]> = new BehaviorSubject<string[]>([]);
-  public value07a: Observable<string[]> = this.value07a$.asObservable();
-  public value07aLoading: boolean = false;
+  public value07a$: Subject<string[] | null> = new BehaviorSubject<string[] | null>([]);
+  public value07a: Observable<string[] | null> = this.value07a$.asObservable();
   public value07b: string[] = [];
 
   // Block "Config"
@@ -133,7 +132,7 @@ export class CmAutocompleteBasicComponent {
   });
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
+  constructor() {
     console.log('#');
   }
 
@@ -146,25 +145,20 @@ export class CmAutocompleteBasicComponent {
 
   public filtered(list: string[] | null, value: string | null): string[] {
     const valueStr = (value || '').toLowerCase();
-    const result: string[] = list?.filter((item) => item.toLowerCase().includes(valueStr)) || [];
+    const result: string[] = (!!value && list?.filter((item) => item.toLowerCase().includes(valueStr))) || [];
     console.log(`CMAB.filtered(${value}) res.length=${result.length}`); // #
     return list?.filter((item) => item.toLowerCase().includes(valueStr)) || [];
   }
 
-  public filteredAsyn(list: string[] | null, value: string | null, result$: Subject<string[]>): void {
-    console.log(`CMAB.filteredAsyn(${value})`); // #
-    const that = this;
-    result$.next([]);
-    console.log(`CMAB.filteredAsyn(${value}) value07aLoading:${this.value07aLoading}`); // #
-    this.changeDetectorRef.markForCheck();
+  public filteredAsyn(list: string[] | null, value: string | null, result$: Subject<string[] | null>): void {
+    const this2 = this;
+    result$.next(null);
+    console.log(`CMAB.filteredAsyn(${value}) Loading: true`); // #
     setTimeout(() => {
-      const result: string[] = that.filtered(list, value);
-      console.log(`CMAB.filteredAsyn("${value}")=${result.length}`); // #
+      const result: string[] = this2.filtered(list, value);
+      console.log(`CMAB.filteredAsyn("${value}")=${result.length}  Loading: false`); // #
       result$.next(result);
-      that.value07aLoading = false;
-      console.log(`CMAB.filteredAsyn(${value}) value07aLoading:${that.value07aLoading}`); // #
-      that.changeDetectorRef.markForCheck();
-    }, 1400);
+    }, 700);
   }
 
   // old

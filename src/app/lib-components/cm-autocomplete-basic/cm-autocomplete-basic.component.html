@@ -616,32 +616,38 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem aca-middle">
       <div>
         <small>
-          <em>Default: visibleSize: 6. {{ value07aLoading }}</em>
+          <em>Default: visibleSize: 6.</em>
         </small>
       </div>
-      <div style="display: inline;"
-        *ngIf="true">
-        <gln-input formControlName="model07a"
-          style9="width: 161px;"
-          label="Fruit"
-          [glnAutocompleteTrigger]="autocomplete07a"
-          helperText="Size: 6."
-          (input)="value07aLoading = true; filteredAsyn(fruits, control07a.model07a.value, value07a$);">
-        </gln-input>
-        <gln-autocomplete #autocomplete07a="glnAutocomplete"
-          [visibleSize]="6"
-          [attr.load]="value07aLoading">
-          <gln-option *ngIf="value07aLoading"
-            value="">Loading
+      <!-- <div style="display: inline;"
+        *ngIf="true"> -->
+      <gln-input formControlName="model07a"
+        style="width: 161px;"
+        label="Fruit"
+        [glnAutocompleteTrigger]="autocomplete07a"
+        helperText="Size: 6."
+        (input)="filteredAsyn(fruits, control07a.model07a.value, value07a$);"
+        (focusout)="log('focusout');">
+        <span *ngIf="(value07a | async) == null"
+          gln-orn-rg
+          class="aca-spnr-sun-rays spinner">
+        </span>
+      </gln-input>
+      <gln-autocomplete #autocomplete07a="glnAutocomplete"
+        [visibleSize]="6">
+        <ng-container *ngIf="(value07a | async) == null">
+          <gln-option class="aca-hide">
           </gln-option>
-          <!-- <ng-container *ngIf="!value07aLoading"> -->
-          <gln-option [value]="item"
-            *ngFor="let item of value07a | async">
-            {{ 'fruit - ' + capitalizeFirstLetter(item) }}
-          </gln-option>
-          <!-- </ng-container> -->
-        </gln-autocomplete>
-      </div>
+          <div style="padding: 10px 10px;">
+            Loading...
+          </div>
+        </ng-container>
+        <gln-option [value]="item"
+          *ngFor="let item of value07a | async">
+          {{ 'fruit - ' + capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+      <!-- </div> -->
     </div>
 
     <div class="app-elem aca-middle">
