@@ -103,7 +103,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public isMaxWidth: boolean | null = null; // Binding attribute "isMaxWd".
   public isPanelOpen: boolean = false;
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
-  public panelClassValue: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
+  public panelClassValue: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
   public positionValue: GlnAutocompletePosition | null = null; // Binding attribute "position" ('start'|'center'|'end').
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
 

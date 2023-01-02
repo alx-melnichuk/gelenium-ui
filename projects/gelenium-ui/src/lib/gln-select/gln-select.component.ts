@@ -239,7 +239,7 @@ export class GlnSelectComponent
   public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
   public overlayPanelClass: string | string[] = '';
-  public panelClassValue: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
+  public panelClassValue: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
   public placeholder: boolean | null = null; // Binding attribute "isPlaceholder".
   public positionList: ConnectedPosition[] = [];
   public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
