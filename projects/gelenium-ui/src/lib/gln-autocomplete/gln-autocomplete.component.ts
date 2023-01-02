@@ -103,7 +103,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public isMaxWidth: boolean | null = null; // Binding attribute "isMaxWd".
   public isPanelOpen: boolean = false;
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
-  public panelClassValue: string | string[] | Set<string> | { [key: string]: any } = ''; // Binding attribute "panelClass"
+  public panelClassValue: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
   public positionValue: GlnAutocompletePosition | null = null; // Binding attribute "position" ('start'|'center'|'end').
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
 
@@ -141,7 +141,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
       this.noAnimation = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
     }
     if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
-      this.panelClassValue = this.panelClass || this.currConfig?.panelClass || '';
+      this.panelClassValue = this.panelClass || this.currConfig?.panelClass;
     }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       this.positionValue = GlnAutocompletePositionUtil.create(this.position || this.currConfig.position || null);
@@ -169,7 +169,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
       this.noAnimation = !!this.currConfig.isNoAnimation;
     }
     if (this.panelClassValue == null) {
-      this.panelClassValue = this.currConfig?.panelClass || '';
+      this.panelClassValue = this.currConfig?.panelClass;
     }
     if (this.positionValue == null) {
       this.positionValue = GlnAutocompletePositionUtil.create(this.currConfig.position || null);

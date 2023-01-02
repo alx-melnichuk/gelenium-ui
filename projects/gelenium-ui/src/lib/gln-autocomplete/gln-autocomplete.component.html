@@ -17,7 +17,7 @@
       (animationcancel)="hasPanelAnimation = isPanelOpen">
       <div glnac-panel
         class="glnac-panel"
-        [ngClass]="panelClassValue"
+        [ngClass]="panelClassValue || ''"
         role="listbox"
         [attr.id]="id + '-panel'"
         attr.aria-label9="ariaLabel || null"

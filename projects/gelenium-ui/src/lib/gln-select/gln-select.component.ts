@@ -239,7 +239,7 @@ export class GlnSelectComponent
   public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
   public overlayPanelClass: string | string[] = '';
-  public panelClassList: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
+  public panelClassValue: string | string[] | Set<string> | { [key: string]: any } | undefined; // Binding attribute "panelClass"
   public placeholder: boolean | null = null; // Binding attribute "isPlaceholder".
   public positionList: ConnectedPosition[] = [];
   public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
@@ -326,7 +326,7 @@ export class GlnSelectComponent
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
     }
     if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
-      this.panelClassList = this.panelClass || this.currConfig?.panelClass;
+      this.panelClassValue = this.panelClass || this.currConfig?.panelClass;
     }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       this.positionList = this.getPositionList(this.position || this.currConfig?.position);
@@ -385,8 +385,8 @@ export class GlnSelectComponent
     if (this.currConfig.overlayPanelClass != null) {
       this.overlayPanelClass = this.currConfig.overlayPanelClass;
     }
-    if (this.panelClassList == null) {
-      this.panelClassList = this.currConfig?.panelClass;
+    if (this.panelClassValue == null) {
+      this.panelClassValue = this.currConfig?.panelClass;
     }
     if (this.positionList.length === 0) {
       this.positionList = this.getPositionList(this.currConfig?.position);
@@ -508,12 +508,6 @@ export class GlnSelectComponent
 
   public trackByOption(index: number, item: GlnOption): string {
     return item.id;
-  }
-
-  public getPanelClass(
-    list: string | string[] | Set<string> | { [key: string]: any } | undefined
-  ): string | string[] | Set<string> | { [key: string]: any } {
-    return list ?? '';
   }
 
   public isEmpty(): boolean {

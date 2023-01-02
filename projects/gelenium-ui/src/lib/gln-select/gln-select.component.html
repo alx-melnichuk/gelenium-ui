@@ -113,7 +113,7 @@
     (animationcancel)="hasPanelAnimation = isPanelOpen">
     <div glnsl-panel
       class="gln-select-panel"
-      [ngClass]="getPanelClass(panelClassList)"
+      [ngClass]="panelClassValue || ''"
       [glnOptionsScroll]="options"
       (glnOptionsScrollAttached)="optionsScrollAttached($event)"
       role="listbox"
