@@ -109,18 +109,25 @@ export class CmAutocompleteBasicComponent {
   public formGroup02d: FormGroup = new FormGroup(this.control02d);
 
   // Block "Asynchrony"
-  public exterior03 = 'outlined';
+  public exterior03c = 'outlined';
 
-  public control03 = {
+  public control03c = {
     model03a: new FormControl(null, []),
     model03b: new FormControl(null, []),
+  };
+
+  public formGroup03c: FormGroup = new FormGroup(this.control03c);
+  public value03a: string[] = [];
+  public value03b: string[] = [];
+
+  public exterior03d = 'outlined';
+
+  public control03d = {
     model03c: new FormControl(null, []),
     model03d: new FormControl(null, []),
   };
 
-  public formGroup03: FormGroup = new FormGroup(this.control03);
-  public value03a: string[] = [];
-  public value03b: string[] = [];
+  public formGroup03d: FormGroup = new FormGroup(this.control03d);
   public value03c$: Subject<string[] | null> = new BehaviorSubject<string[] | null>([]);
   public value03c: Observable<string[] | null> = this.value03c$.asObservable();
   public value03d$: Subject<string[] | null> = new BehaviorSubject<string[] | null>([]);
