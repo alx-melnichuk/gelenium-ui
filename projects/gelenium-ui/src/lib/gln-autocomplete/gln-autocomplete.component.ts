@@ -72,6 +72,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   @Input()
   public isNoAnimation: string | boolean | null | undefined;
   @Input()
+  /** Classes to be passed to the options panel. Supports the same syntax as `ngClass`. */
+  public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = '';
+  @Input()
   public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
   @Input()
   public visibleSize: number | null | undefined;
@@ -100,6 +103,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public isMaxWidth: boolean | null = null; // Binding attribute "isMaxWd".
   public isPanelOpen: boolean = false;
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
+  public panelClassValue: string | string[] | Set<string> | { [key: string]: any } = ''; // Binding attribute "panelClass"
   public positionValue: GlnAutocompletePosition | null = null; // Binding attribute "position" ('start'|'center'|'end').
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
 
@@ -136,6 +140,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
       this.noAnimation = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
     }
+    if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
+      this.panelClassValue = this.panelClass || this.currConfig?.panelClass || '';
+    }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       this.positionValue = GlnAutocompletePositionUtil.create(this.position || this.currConfig.position || null);
       this.setCssJustifyContent(this.positionValue, this.hostRef);
@@ -161,6 +168,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     if (this.noAnimation == null) {
       this.noAnimation = !!this.currConfig.isNoAnimation;
     }
+    if (this.panelClassValue == null) {
+      this.panelClassValue = this.currConfig?.panelClass || '';
+    }
     if (this.positionValue == null) {
       this.positionValue = GlnAutocompletePositionUtil.create(this.currConfig.position || null);
       this.setCssJustifyContent(this.positionValue, this.hostRef);
@@ -176,6 +186,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public ngOnDestroy(): void {
     this.optionListSub?.unsubscribe();
   }
+
+  // ** Public methods **
 
   public getHostRect(): DOMRect {
     return this.hostRef.nativeElement.getBoundingClientRect();

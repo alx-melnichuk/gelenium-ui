@@ -1,8 +1,7 @@
 export interface GlnAutocompleteConfig {
   isMaxWd?: boolean | undefined;
   isNoAnimation?: boolean | undefined;
-  position?: string | undefined; // Horizontal position = 'start' | 'center' | 'end';
+  position?: string | undefined; // Horizontal position = 'start'-default | 'center' | 'end';
+  panelClass?: string | string[] | Set<string> | { [key: string]: any } | undefined;
   visibleSize?: number | undefined; // default 0
-
-  // panelClass?: string | string[] | Set<string> | { [key: string]: any } | undefined;
 }
