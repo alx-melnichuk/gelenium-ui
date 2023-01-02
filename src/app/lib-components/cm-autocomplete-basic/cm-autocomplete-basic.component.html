@@ -845,8 +845,7 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
         </span>
       </gln-input>
       <gln-autocomplete #autocomplete07a="glnAutocomplete"
-        [visibleSize]="6"
-        panelClass="demo1">
+        [visibleSize]="6">
         <ng-container *ngIf="(value07a | async) == null">
           <gln-option class="acs-hide">
           </gln-option>
@@ -983,6 +982,19 @@ export class AppComponent &#123;
         <li>'center' - align to the center of the main element;</li>
         <li>'end' - align to the right side of the main element;</li>
       </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><code>panelClass?:<br/>
+        &nbsp;&nbsp;string<br/>
+        &nbsp;&nbsp;| string[]<br/>
+        &nbsp;&nbsp;| Set&lt;string&gt;<br/>
+        &nbsp;&nbsp;| &#123; [key: string]: unknown &#125;<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        Classes to be passed to the options panel. Supports the same syntax as `ngClass`.
+      </span>
     </td>
   </tr>
   <tr>
