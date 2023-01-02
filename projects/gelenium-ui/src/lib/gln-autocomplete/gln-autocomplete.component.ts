@@ -72,6 +72,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   @Input()
   public isNoAnimation: string | boolean | null | undefined;
   @Input()
+  public isNoCloseOnSelect: string | boolean | null | undefined;
+  @Input()
   /** Classes to be passed to the options panel. Supports the same syntax as `ngClass`. */
   public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = '';
   @Input()
@@ -103,6 +105,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public isMaxWidth: boolean | null = null; // Binding attribute "isMaxWd".
   public isPanelOpen: boolean = false;
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
+  public noCloseOnSelect: boolean | null = null; // Binding attribute "isNoCloseOnSelect".
   public panelClassValue: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
   public positionValue: GlnAutocompletePosition | null = null; // Binding attribute "position" ('start'|'center'|'end').
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
@@ -140,6 +143,12 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
       this.noAnimation = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
     }
+    if (
+      changes['isNoCloseOnSelect'] ||
+      (changes['config'] && this.isNoCloseOnSelect == null && this.currConfig.isNoCloseOnSelect != null)
+    ) {
+      this.noCloseOnSelect = BooleanUtil.init(this.isNoCloseOnSelect) ?? !!this.currConfig.isNoCloseOnSelect;
+    }
     if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
       this.panelClassValue = this.panelClass || this.currConfig?.panelClass;
     }
@@ -167,6 +176,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     }
     if (this.noAnimation == null) {
       this.noAnimation = !!this.currConfig.isNoAnimation;
+    }
+    if (this.isNoCloseOnSelect == null) {
+      this.noCloseOnSelect = !!this.currConfig.isNoCloseOnSelect;
     }
     if (this.panelClassValue == null) {
       this.panelClassValue = this.currConfig?.panelClass;
@@ -281,16 +293,22 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
 
   /** Set the option as selected. */
   public setOptionSelected(option: GlnOption): void {
-    console.log(`AC.setOptionSelected(); option.value:`, option.value); // #
+    console.log(`AC.setOptionSelected(); {Ia} option.value:`, option.value); // #
 
     Promise.resolve().then(() => {
       this.selected.emit(option);
       const value: string | null | undefined = option.value as string;
+      console.log(`AC.setOptionSelected(); {IIa} trigger.setValue(value);`); // #
       this.trigger?.setValue(value);
-      console.log(`AC.setOptionSelected(); this.optionListTrigger.setValue(value);`); // #
+      // public noCloseOnSelect: boolean | null = null; // Binding attribute "isNoCloseOnSelect".
+
       if (this.isPanelOpen) {
+        console.log(`AC.setOptionSelected(); {IIa}trigger.passFocus();`); // #
         this.trigger?.passFocus();
-        // this.close();
+        if (!this.noCloseOnSelect) {
+          console.log(`AC.setOptionSelected(); {IIa}noCloseOnSelect:${this.noCloseOnSelect} close();`); // #
+          this.close();
+        }
       }
     });
   }

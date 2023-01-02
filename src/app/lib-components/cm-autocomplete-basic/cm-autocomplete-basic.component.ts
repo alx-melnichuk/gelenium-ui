@@ -108,6 +108,18 @@ export class CmAutocompleteBasicComponent {
 
   public formGroup02d: FormGroup = new FormGroup(this.control02d);
 
+  // attributes-supported04
+  public exterior02e = 'outlined';
+
+  public control02e = {
+    model02p: new FormControl(null, []),
+    // model02q: new FormControl(null, []),
+    // model02r: new FormControl(null, []),
+    // model02s: new FormControl(null, []),
+  };
+
+  public formGroup02e: FormGroup = new FormGroup(this.control02e);
+
   // Block "Asynchrony"
   public exterior03c = 'outlined';
 

@@ -167,7 +167,7 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
   </h3>
   <h4 class="app-hover-link"
     id="attributes-supported01">
-    The following attributes are supported:
+    The following attributes are supported 1:
     <a [href]="urlCmAutocomplete + '#attributes-supported01'">#</a>
   </h4>
 
@@ -321,7 +321,7 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
   mr-vr
   id="attributes-supported02">
   <h4 class="app-hover-link">
-    Attributes are also supported:
+    Attributes are also supported 2:
     <a [href]="urlCmAutocomplete + '#attributes-supported02'">#</a>
   </h4>
   <ul>
@@ -477,7 +477,7 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
   mr-vr
   id="attributes-supported03">
   <h4 class="app-hover-link">
-    Attributes are also supported:
+    Attributes are also supported 3:
     <a [href]="urlCmAutocomplete + '#attributes-supported03'">#</a>
   </h4>
   <ul>
@@ -517,7 +517,7 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
   </mat-button-toggle-group>
 </section>
 
-<form *ngIf="false"
+<form *ngIf="true"
   [formGroup]="formGroup02d"
   novalidate
   autocomplete="off">
@@ -620,6 +620,76 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
 
 <hr br-nn />
 <!-- attributes-supported03 - finish -->
+
+
+
+<!-- attributes-supported04 - start -->
+<section *ngIf="true"
+  mr-vr
+  id="attributes-supported04">
+  <h4 class="app-hover-link">
+    Attributes are also supported 4:
+    <a [href]="urlCmAutocomplete + '#attributes-supported04'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "isNoCloseOnSelect" - the options panel will not close after an option is selected.
+    </li>
+  </ul>
+</section>
+
+<section *ngIf="true"
+  mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior02e"
+    (change)="exterior02e=$event.value">
+    <mat-button-toggle [checked]="exterior02e==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02e==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02e==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form *ngIf="true"
+  [formGroup]="formGroup02e"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isNoCloseOnSelect.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02p"
+        class="aca-middle"
+        label="Fruit"
+        [exterior]="exterior02e"
+        [glnAutocompleteTrigger]="autocomplete02p"
+        autoComplete="off"
+        helperText="Used isNoCloseOnSelect">
+      </gln-input>
+      <gln-autocomplete #autocomplete02p="glnAutocomplete"
+        [visibleSize]="6"
+        isNoCloseOnSelect>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+  </div>
+</form>
+<!-- section mr-vr
+  mat-accordion -->
+
+<hr br-nn />
+<!-- attributes-supported04 - finish -->
 
 
 
@@ -732,7 +802,8 @@ export class AutocompleteComponent &#123;
       </gln-autocomplete>
     </div>
 
-    <div class="app-elem">
+    <div class="app-elem"
+      *ngIf="false">
       <div mb0>
         <small>
           <em>Synchronous mode for native "input".</em>
@@ -861,7 +932,7 @@ export class AutocompleteComponent &#123;
   </mat-button-toggle-group>
 </section>
 
-<form *ngIf="true"
+<form *ngIf="false"
   [formGroup]="formGroup03d"
   novalidate
   autocomplete="off">
@@ -974,7 +1045,7 @@ export class AutocompleteComponent &#123;
   </p>
 </section>
 
-<form *ngIf="true"
+<form *ngIf="false"
   [formGroup]="formGroup07a"
   novalidate
   autocomplete="off">
@@ -1125,6 +1196,16 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
+    <td><code>isNoCloseOnSelect?:<br/>
+      &nbsp;&nbsp;boolean<br/>
+      &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        The options panel will not close after an option is selected. (default = false;)
+      </span>
+    </td>
+  </tr>
+  <tr>
     <td><code>position?:<br/>
         &nbsp;&nbsp;string<br/>
         &nbsp;&nbsp;| undefined;<br/>
@@ -1232,7 +1313,7 @@ visibleSize=0</pre></code>
   </ul>
 </section>
 
-<form *ngIf="true"
+<form *ngIf="false"
   [formGroup]="formGroup08a"
   novalidate
   autocomplete="off">

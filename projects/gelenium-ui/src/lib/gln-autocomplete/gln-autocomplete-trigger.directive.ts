@@ -47,6 +47,7 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
   protected accessorFocusable: Focusable | null = null;
   protected frameRef: ElementRef<HTMLElement> | null = null;
   protected isFocusAttrOnFrame = false;
+  protected skipTimeStamp: number | null = null;
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -122,16 +123,20 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
   }
   /** Set the new value of the current element. */
   public setValue(value: string | null | undefined): void {
-    console.log(`ACT().setValue(${value})`); // #
     // Update the component's model value.
     if (this.accessorControl != null) {
       this.accessorControl.setValue(value, { emitEvent: true });
     }
     // Update the value of the DOM element.
     const event = new Event('input', { bubbles: true, cancelable: true });
+    this.skipTimeStamp = event.timeStamp;
+    console.log(`ACT().setValue(${value}); {Ib} skipTimeStamp=${this.skipTimeStamp};`); // #
     const inputElement: HTMLInputElement = this.hostRef.nativeElement as HTMLInputElement;
     inputElement.value = value as string;
-    inputElement.dispatchEvent(event);
+    Promise.resolve().then(() => {
+      console.log(`ACT().setValue(${value}); {IIb} inputElement.dispatchEvent(event);`); // #
+      inputElement.dispatchEvent(event);
+    });
   }
   /** Get the value of the current element. */
   public getValue(): string | null {
@@ -152,14 +157,13 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
   // ** Private methods **
 
   private handlingFocusin(event: FocusEvent | null): void {
-    console.log(``); // #
-    console.log(`ACT().handlingFocusin(); this.isFocusAttrOnFrame=${this.isFocusAttrOnFrame}`); // #
     if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
+    console.log(`ACT().handlingFocusin(); isFocusAttr:${this.isFocusAttrOnFrame};`); // #
     if (this.isFocusAttrOnFrame) {
       this.isFocusAttrOnFrame = false;
-      console.log(`ACT().handlingFocusin(); this.isFocusAttrOnFrame=false;`); // #
+      console.log(`ACT().handlingFocusin(); isFocusAttr=false;`); // #
       if (this.frameRef != null) {
         HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, null);
       }
@@ -170,19 +174,17 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
     if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
-    console.log(``); // #
     const isOpen = this.autocomplete.isOpen();
     const isFocusAttr = this.isFocusAttrOnFrame;
-    console.log(`ACT().handlingFocusout(); this.autocomplete.isOpen():${isOpen}  this.isFocusAttrOnFrame=${isFocusAttr}`); // #
+    console.log(`ACT().handlingFocusout(); {Id} autocomplete.isOpen():${isOpen}; isFocusAttr:${isFocusAttr};`); // #
     if (this.autocomplete.isOpen()) {
       if (!this.autocomplete.isContainerMousedown) {
         Promise.resolve().then(() => {
-          console.log(``); // #
-          console.log(`ACT().handlingFocusout() autocomplete?.close();`); // #
+          console.log(`ACT().handlingFocusout(); {IId} isContnrMouseDown:false; autocomplete?.close();`); // #
           // this.autocomplete?.close(); // return back.
         });
       } else if (this.frameRef != null) {
-        console.log(`ACT().handlingFocusout(); isContainerMousedown this.isFocusAttrOnFrame=true;`); // #
+        console.log(`ACT().handlingFocusout(); {Id}isContnrMouseDown:true; isFocusAttr=true;`); // #
         this.isFocusAttrOnFrame = true;
         HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, '');
       }
@@ -194,14 +196,15 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
       return;
     }
     // #const value: number | string | null = (event.target as HTMLInputElement).value;
-    console.log(``); // #
     const isOpen = this.autocomplete.isOpen();
-    console.log(`ACT().handlingInput() data:${event.data} autocomplete.isOpen():${isOpen} event.target:${event.target};`); // #
+    console.log(`ACT().handlingInput(); {Ic} autocomplete.isOpen():${isOpen} skipTimeStamp:${this.skipTimeStamp};`); // #
 
-    if (!this.autocomplete.isOpen()) {
+    if (this.skipTimeStamp != null) {
+      this.skipTimeStamp = null;
+      console.log(`ACT().handlingInput(); {Ic}this.skipTimeStamp=null;`); // #
+    } else if (!this.autocomplete.isOpen()) {
       Promise.resolve().then(() => {
-        console.log(``); // #
-        console.log(`ACT().handlingInput() autocomplete?.open();`); // #
+        console.log(`ACT().handlingInput(); {IIc} autocomplete?.open();`); // #
         this.autocomplete?.open(); /*important!*/
       });
     }
@@ -216,8 +219,7 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
       // If the panel of available options is closed.
       if (['ArrowDown', 'ArrowUp'].indexOf(event.key) > -1) {
         Promise.resolve().then(() => {
-          console.log(``); // #
-          console.log(`ACT().handlingKeydown() autocomplete?.open();`); // #
+          console.log(`ACT().handlingKeydown(); autocomplete?.open();`); // #
           this.autocomplete?.open();
         });
       }
@@ -226,8 +228,7 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
       const notModifierKey = !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
       if ('Tab' === event.key || ('Escape' === event.key && notModifierKey) || ('ArrowUp' === event.key && event.altKey)) {
         Promise.resolve().then(() => {
-          console.log(``); // #
-          console.log(`ACT().handlingKeydown(Tab,Escape,Alt+ArrowUp) autocomplete?.close();`); // #
+          console.log(`ACT().handlingKeydown(Tab,Escape,Alt+ArrowUp); autocomplete?.close();`); // #
           this.autocomplete?.close();
         });
       } else if (OptionsScrollKeys.indexOf(event.key) > -1) {
@@ -239,7 +240,6 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
         event.stopPropagation();
         // #console.log(`'Enter' === event.key`); // #
         Promise.resolve().then(() => {
-          console.log(``); // #
           console.log(`ACT().handlingKeydown(Enter) autocomplete?.setMarkedOptionAsSelected();`); // #
           this.autocomplete?.setMarkedOptionAsSelected();
         });
@@ -253,7 +253,6 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
     }
     const isPanelOpen = this.autocomplete.isOpen();
     Promise.resolve().then(() => {
-      console.log(``); // #
       console.log(`ACT().handlingMousedown() autocomplete?.${isPanelOpen ? 'close()' : 'open()'};`); // #
       if (isPanelOpen) {
         this.autocomplete?.close();

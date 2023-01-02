@@ -6,8 +6,8 @@
     glnAutocompletePanel
     (glnAutocompletePanelAttached)="containerResize(container, getTriggerRect(), getHostRect())"
     (glnAutocompletePanelResize)="containerResize(container, getTriggerRect(), getHostRect())"
-    (mousedown)="isContainerMousedown = true; log('isContainerMousedown=true;');"
-    (mouseup)="isContainerMousedown = false; log('isContainerMousedown=false;');">
+    (mousedown)="isContainerMousedown = true; log('AC.isContnrMouseDown=true;');"
+    (mouseup)="isContainerMousedown = false; log('AC.isContnrMouseDown=false;');">
     <div glnac-wrap
       [ngClass]="['glnac-wrap', (noAnimation ? 'gln-no-animation' : ''), (isPanelOpen ? 'is-show' : 'is-hide')]"
       [attr.noAnm]="noAnimation ? '' : null"
