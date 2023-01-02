@@ -64,19 +64,20 @@ export class CmAutocompleteBasicComponent {
   // Block "attributes-supported01"
   public exterior02b = 'outlined';
   public control02b = {
-    model02e: new FormControl(null, []),
-    model02f: new FormControl(null, []),
-    model02g: new FormControl(null, []),
-    model02h: new FormControl(null, []),
+    model02a: new FormControl(null, []),
+    model02b: new FormControl(null, []),
+    model02c: new FormControl(null, []),
+    model02d: new FormControl(null, []),
   };
   public formGroup02b: FormGroup = new FormGroup(this.control02b);
 
   // Block "attributes-supported02"
   public exterior02c = 'outlined';
   public control02c = {
+    model02f: new FormControl(null, []),
+    model02g: new FormControl(null, []),
+    model02h: new FormControl(null, []),
     model02i: new FormControl(null, []),
-    model02j: new FormControl(null, []),
-    model02k: new FormControl(null, []),
   };
   public formGroup02c: FormGroup = new FormGroup(this.control02c);
 
@@ -99,13 +100,31 @@ export class CmAutocompleteBasicComponent {
   public exterior02d = 'outlined';
 
   public control02d = {
+    model02k: new FormControl(null, []),
+    model02l: new FormControl(null, []),
+    model02m: new FormControl(null, []),
     model02n: new FormControl(null, []),
-    model02o: new FormControl(null, []),
-    model02p: new FormControl(null, []),
-    model02q: new FormControl(null, []),
   };
 
   public formGroup02d: FormGroup = new FormGroup(this.control02d);
+
+  // Block "Asynchrony"
+  public exterior03 = 'outlined';
+
+  public control03 = {
+    model03a: new FormControl(null, []),
+    model03b: new FormControl(null, []),
+    model03c: new FormControl(null, []),
+    model03d: new FormControl(null, []),
+  };
+
+  public formGroup03: FormGroup = new FormGroup(this.control03);
+  public value03a: string[] = [];
+  public value03b: string[] = [];
+  public value03c$: Subject<string[] | null> = new BehaviorSubject<string[] | null>([]);
+  public value03c: Observable<string[] | null> = this.value03c$.asObservable();
+  public value03d$: Subject<string[] | null> = new BehaviorSubject<string[] | null>([]);
+  public value03d: Observable<string[] | null> = this.value03d$.asObservable();
 
   // Block "Feature"
   public control07a = {

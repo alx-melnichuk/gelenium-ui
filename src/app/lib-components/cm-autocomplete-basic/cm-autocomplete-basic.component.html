@@ -57,7 +57,8 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
           label="Enter value"
           exterior="outlined"
           wdFull
-          [glnAutocompleteTrigger]="autocomplete01a">
+          [glnAutocompleteTrigger]="autocomplete01a"
+          autoComplete="off">
         </gln-input>
         <gln-autocomplete #autocomplete01a="glnAutocomplete">
           <gln-option value="mango">Mango</gln-option>
@@ -83,7 +84,8 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
             label="Enter value"
             exterior="underline"
             wdFull
-            [glnAutocompleteTrigger]="autocomplete01b">
+            [glnAutocompleteTrigger]="autocomplete01b"
+            autoComplete="off">
           </gln-input>
           <gln-autocomplete #autocomplete01b="glnAutocomplete">
             <gln-option value="mango">Mango</gln-option>
@@ -109,7 +111,8 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
           label="Enter value"
           exterior="standard"
           wdFull
-          [glnAutocompleteTrigger]="autocomplete01c">
+          [glnAutocompleteTrigger]="autocomplete01c"
+          autoComplete="off">
         </gln-input>
         <gln-autocomplete #autocomplete01c="glnAutocomplete">
           <gln-option value="mango">Mango</gln-option>
@@ -131,9 +134,10 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
           </small>
         </div>
         <input type="text"
-          class="aca-input"
+          class="acb-input"
           formControlName="model01d"
-          [glnAutocompleteTrigger]="autocomplete01d" />
+          [glnAutocompleteTrigger]="autocomplete01d"
+          autocomplete="off" />
         <gln-autocomplete #autocomplete01d="glnAutocomplete">
           <gln-option value="mango">Mango</gln-option>
           <gln-option value="lemon">Lemon</gln-option>
@@ -211,38 +215,19 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: isDisabled.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02e"
-        class="aca-middle"
-        label="Fruit"
-        [exterior]="exterior02b"
-        [glnAutocompleteTrigger]="autocomplete02e">
-      </gln-input>
-      <gln-autocomplete #autocomplete02e="glnAutocomplete"
-        isDisabled>
-        <gln-option *ngFor="let item of fruitsB"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
           <em>Attribute: id, position='start' (default).</em>
         </small>
       </div>
-      <gln-input formControlName="model02f"
+      <gln-input formControlName="model02a"
         class="aca-middle"
         label="Fruit"
         [exterior]="exterior02b"
-        [glnAutocompleteTrigger]="autocomplete02f">
+        [glnAutocompleteTrigger]="autocomplete02a"
+        autoComplete="off"
+        helperText="Used: id, position.">
       </gln-input>
-      <gln-autocomplete #autocomplete02f="glnAutocomplete"
-        id="unique_id_autocomplete02e"
+      <gln-autocomplete #autocomplete02a="glnAutocomplete"
+        id="unique_id_autocomplete02a"
         position="start">
         <gln-option *ngFor="let item of fruitsB"
           [value]="item">
@@ -257,13 +242,15 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
           <em>Attribute: position='center'.</em>
         </small>
       </div>
-      <gln-input formControlName="model02g"
+      <gln-input formControlName="model02b"
         class="aca-middle"
         label="Fruit"
         [exterior]="exterior02b"
-        [glnAutocompleteTrigger]="autocomplete02g">
+        [glnAutocompleteTrigger]="autocomplete02b"
+        autoComplete="off"
+        helperText="Used: position='center'.">
       </gln-input>
-      <gln-autocomplete #autocomplete02g="glnAutocomplete"
+      <gln-autocomplete #autocomplete02b="glnAutocomplete"
         position="center">
         <gln-option *ngFor="let item of fruitsB"
           [value]="item">
@@ -278,14 +265,39 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
           <em>Attribute: position='end'.</em>
         </small>
       </div>
-      <gln-input formControlName="model02h"
+      <gln-input formControlName="model02c"
         class="aca-middle"
         label="Fruit"
         [exterior]="exterior02b"
-        [glnAutocompleteTrigger]="autocomplete02h">
+        [glnAutocompleteTrigger]="autocomplete02c"
+        autoComplete="off"
+        helperText="Used: position='end'.">
       </gln-input>
-      <gln-autocomplete #autocomplete02h="glnAutocomplete"
+      <gln-autocomplete #autocomplete02c="glnAutocomplete"
         position="end">
+        <gln-option *ngFor="let item of fruitsB"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isDisabled.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02d"
+        class="aca-middle"
+        label="Fruit"
+        [exterior]="exterior02b"
+        [glnAutocompleteTrigger]="autocomplete02d"
+        autoComplete="off"
+        helperText="Used: isDisabled.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02d="glnAutocomplete"
+        isDisabled>
         <gln-option *ngFor="let item of fruitsB"
           [value]="item">
           {{ capitalizeFirstLetter(item) }}
@@ -323,12 +335,16 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
       of the parent.
     </li>
     <li>
-      css: '--glnol-min-width: 180px;' - defines the minimum width of the option list
+      css: '--glnac-min-width: 180px;' - defines the minimum width of the option list
       dropdown list of options.
     </li>
     <li>
-      css: '--glnol-max-width: 180px;' - defines the maximum width of the option list
+      css: '--glnac-max-width: 180px;' - defines the maximum width of the option list
       dropdown list of options.
+    </li>
+    <li>
+      "panelClass" - set the classes to be applied to the options panel.
+      Supports the same syntax as `ngClass`.
     </li>
   </ul>
 </section>
@@ -360,15 +376,18 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
           <em>Attribute: without isMaxWd.</em>
         </small>
       </div>
-      <gln-input formControlName="model02i"
+      <gln-input formControlName="model02f"
         class="aca-middle"
         label="Fruit"
         [exterior]="exterior02c"
-        [glnAutocompleteTrigger]="autocomplete02i">
+        [glnAutocompleteTrigger]="autocomplete02f"
+        autoComplete="off"
+        helperText="Not used: isMaxWd.">
       </gln-input>
-      <gln-autocomplete #autocomplete02i="glnAutocomplete">
+      <gln-autocomplete #autocomplete02f="glnAutocomplete">
         <gln-option *ngFor="let item of fruitsB"
-          [value]="item">{{ capitalizeFirstLetter(item) }}
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
         </gln-option>
       </gln-autocomplete>
     </div>
@@ -379,16 +398,19 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
           <em>Attribute: with isMaxWd.</em>
         </small>
       </div>
-      <gln-input formControlName="model02j"
+      <gln-input formControlName="model02g"
         class="aca-middle"
         label="Fruit"
         [exterior]="exterior02c"
-        [glnAutocompleteTrigger]="autocomplete02j">
+        [glnAutocompleteTrigger]="autocomplete02g"
+        autoComplete="off"
+        helperText="Used: isMaxWd.">
       </gln-input>
-      <gln-autocomplete #autocomplete02j="glnAutocomplete"
+      <gln-autocomplete #autocomplete02g="glnAutocomplete"
         isMaxWd>
         <gln-option *ngFor="let item of fruitsB"
-          [value]="item">{{ capitalizeFirstLetter(item) }}
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
         </gln-option>
       </gln-autocomplete>
     </div>
@@ -396,18 +418,42 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: '--glnol-max-width: 185px;'.</em>
+          <em>Attribute: '--glnac-max-width: 185px;'.</em>
         </small>
       </div>
-      <gln-input formControlName="model02k"
+      <gln-input formControlName="model02h"
         style="width: 161px;"
         label="Fruit"
         [exterior]="exterior02c"
-        [glnAutocompleteTrigger]="autocomplete02k"
-        hintOrError="The 'visibleSize' are used.">
+        [glnAutocompleteTrigger]="autocomplete02h"
+        autoComplete="off"
+        helperText="Used: --glnac-max-width: 185px.">
       </gln-input>
-      <gln-autocomplete #autocomplete02k="glnAutocomplete"
-        style="--glnol-max-width: 185px;">
+      <gln-autocomplete #autocomplete02h="glnAutocomplete"
+        style="--glnac-max-width: 185px;">
+        <gln-option *ngFor="let item of fruitsB"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: panelClass.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02i"
+        class="aca-middle"
+        label="Fruit"
+        [exterior]="exterior02c"
+        [glnAutocompleteTrigger]="autocomplete02i"
+        autoComplete="off"
+        helperText="Used: panelClass.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02i="glnAutocomplete"
+        panelClass="aca-panel-color">
         <gln-option *ngFor="let item of fruitsB"
           [value]="item">
           {{ capitalizeFirstLetter(item) }}
@@ -443,7 +489,7 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
       Where option height is <i>optionHeight = lineHeight + 2 * 0.375 * fontSize</i>;
     </li>
     <li>
-      css: '--glnol-max-height: 180px;' - defines the maximum height of the option
+      css: '--glnac-max-height: 180px;' - defines the maximum height of the option
       list dropdown list of options.
     </li>
     <li>
@@ -478,20 +524,21 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
 
   <div class="app-group">
 
-    <div class="app-elem aca-middle">
+    <div class="app-elem">
       <div>
         <small>
           <em>Attribute: visibleSize=6.</em>
         </small>
       </div>
-      <gln-input formControlName="model02n"
+      <gln-input formControlName="model02k"
         style="width: 161px;"
         label="Fruit"
         [exterior]="exterior02d"
-        [glnAutocompleteTrigger]="autocomplete02n"
-        helperText="The 'visibleSize' are used.">
+        [glnAutocompleteTrigger]="autocomplete02k"
+        autoComplete="off"
+        helperText="Used: visibleSize=6.">
       </gln-input>
-      <gln-autocomplete #autocomplete02n="glnAutocomplete"
+      <gln-autocomplete #autocomplete02k="glnAutocomplete"
         [visibleSize]="6">
         <gln-option *ngFor="let item of fruits"
           [value]="item">
@@ -503,18 +550,19 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem">
       <div>
         <small>
-          <em>css: '--glnol-max-height: 180px;'.</em>
+          <em>css: '--glnac-max-height: 180px;'.</em>
         </small>
       </div>
-      <gln-input formControlName="model02o"
+      <gln-input formControlName="model02l"
         class="aca-middle"
         label="Fruit"
         [exterior]="exterior02d"
-        [glnAutocompleteTrigger]="autocomplete02o"
-        helperText="css: '--glnol-max-height'.">
+        [glnAutocompleteTrigger]="autocomplete02l"
+        autoComplete="off"
+        helperText="Used: --glnac-max-height.">
       </gln-input>
-      <gln-autocomplete #autocomplete02o="glnAutocomplete"
-        style="--glnol-max-height: 180px;">
+      <gln-autocomplete #autocomplete02l="glnAutocomplete"
+        style="--glnac-max-height: 180px;">
         <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -527,14 +575,15 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
           <em>Attribute: isNoAnimation.</em>
         </small>
       </div>
-      <gln-input formControlName="model02p"
+      <gln-input formControlName="model02m"
         class="aca-middle"
         label="Fruit"
         [exterior]="exterior02d"
-        [glnAutocompleteTrigger]="autocomplete02p"
-        helperText="Attribute: isNoAnimation.">
+        [glnAutocompleteTrigger]="autocomplete02m"
+        autoComplete="off"
+        helperText="Used: isNoAnimation.">
       </gln-input>
-      <gln-autocomplete #autocomplete02p="glnAutocomplete"
+      <gln-autocomplete #autocomplete02m="glnAutocomplete"
         isNoAnimation>
         <gln-option *ngFor="let item of fruitsB"
           [value]="item">{{ capitalizeFirstLetter(item) }}
@@ -548,21 +597,21 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
           <em>css: '--glnac-elevation: none;'.</em>
         </small>
       </div>
-      <gln-input formControlName="model02q"
+      <gln-input formControlName="model02n"
         class="aca-middle"
         label="Fruit"
         [exterior]="exterior02d"
-        [glnAutocompleteTrigger]="autocomplete02q"
-        helperText="css: '--glnac-elevation'.">
+        [glnAutocompleteTrigger]="autocomplete02n"
+        autoComplete="off"
+        helperText="Used: --glnac-elevation.">
       </gln-input>
-      <gln-autocomplete #autocomplete02q="glnAutocomplete"
+      <gln-autocomplete #autocomplete02n="glnAutocomplete"
         style="--glnac-elevation: none;">
         <gln-option *ngFor="let item of fruitsB"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
       </gln-autocomplete>
     </div>
-
 
   </div>
 </form>
@@ -571,6 +620,168 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
 
 <hr br-nn />
 <!-- attributes-supported03 - finish -->
+
+
+
+<!-- Asynchrony - start -->
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Asynchrony
+    <a [href]="urlCmAutocomplete + '#Asynchrony'">#</a>
+  </h3>
+  <p>
+    The GlnAutocomplete component displays a list of options on its panel.
+    We can react to a change in the value in the input line and change the list of options.
+    This will display, in the list of options, only the current values.
+  </p>
+  <p>
+    For a synchronous update, let's define a method for handling the "input" event in the input
+    line.
+    This method fires when the user enters new values.
+    And in this method we will call the function of filtering the entire list of options
+    by the value entered in the input line.
+  </p>
+  <p>
+    For an asynchronous update, we do the same, only the filtering function will be asynchronous.
+  </p>
+</section>
+
+<section *ngIf="true"
+  mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior03"
+    (change)="exterior03=$event.value">
+    <mat-button-toggle [checked]="exterior03==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form *ngIf="true"
+  [formGroup]="formGroup03"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Synchronous mode for GlnInput.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model03a"
+        class="acs-middle"
+        label="Fruit"
+        [exterior]="exterior03"
+        [glnAutocompleteTrigger]="autocomplete03a"
+        helperText="Used: visibleSize=5."
+        (input)="value03a = filtered(fruits, control03.model03a.value)">
+      </gln-input>
+      <gln-autocomplete #autocomplete03a="glnAutocomplete"
+        [visibleSize]="5">
+        <gln-option *ngFor="let item of value03a"
+          [value]="item">
+          {{ 'fruit - ' + capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div mb0>
+        <small>
+          <em>Synchronous mode for native "input".</em>
+        </small>
+      </div>
+      <input type="text"
+        class="acs-input acs-middle"
+        formControlName="model03b"
+        [glnAutocompleteTrigger]="autocomplete03b"
+        (input)="value03b = filtered(fruits, control03.model03b.value)"
+        autocomplete="off" />
+      <gln-autocomplete #autocomplete03b="glnAutocomplete"
+        [visibleSize]="5">
+        <gln-option *ngFor="let item of value03b"
+          [value]="item">
+          {{ 'fruit - ' + capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Asynchronous mode for GlnInput.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model03c"
+        style="width: 161px;"
+        label="Fruit"
+        [exterior]="exterior03"
+        [glnAutocompleteTrigger]="autocomplete03c"
+        helperText="Used: visibleSize=6."
+        (input)="filteredAsyn(fruits, control03.model03c.value, value03c$);">
+        <span *ngIf="(value03c | async) == null"
+          gln-orn-rg
+          class="acs-spinner-sun-rays">
+        </span>
+      </gln-input>
+      <gln-autocomplete #autocomplete03c="glnAutocomplete"
+        [visibleSize]="6">
+        <ng-container *ngIf="(value03c | async) == null">
+          <gln-option class="acs-hide">
+          </gln-option>
+          <div style="padding: 10px 10px;">
+            Loading...
+          </div>
+        </ng-container>
+        <gln-option *ngFor="let item of value03c | async"
+          [value]="item">
+          {{ 'fruit - ' + capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div mb0>
+        <small>
+          <em>Asynchronous mode for native "input".</em>
+        </small>
+      </div>
+      <input type="text"
+        style="width: 161px;"
+        class="acs-input"
+        formControlName="model03d"
+        [glnAutocompleteTrigger]="autocomplete03d"
+        (input)="filteredAsyn(fruits, control03.model03d.value, value03d$);"
+        autocomplete="off" />
+      <gln-autocomplete #autocomplete03d="glnAutocomplete"
+        [visibleSize]="6">
+        <ng-container *ngIf="(value03d | async) == null">
+          <gln-option class="acs-hide">
+          </gln-option>
+          <div style="padding: 10px 10px;">
+            Loading...
+          </div>
+        </ng-container>
+        <gln-option *ngFor="let item of value03d | async"
+          [value]="item">
+          {{ 'fruit - ' + capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+  </div>
+</form>
+
+<!-- section mr-vr
+  mat-accordion -->
+
+<hr br-nn />
+<!-- Asynchrony - finish -->
 
 
 
@@ -634,9 +845,10 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
         </span>
       </gln-input>
       <gln-autocomplete #autocomplete07a="glnAutocomplete"
-        [visibleSize]="6">
+        [visibleSize]="6"
+        panelClass="demo1">
         <ng-container *ngIf="(value07a | async) == null">
-          <gln-option class="aca-hide">
+          <gln-option class="acs-hide">
           </gln-option>
           <div style="padding: 10px 10px;">
             Loading...
@@ -851,7 +1063,7 @@ visibleSize=0</pre></code>
   </ul>
 </section>
 
-<form *ngIf="false"
+<form *ngIf="true"
   [formGroup]="formGroup08a"
   novalidate
   autocomplete="off">
