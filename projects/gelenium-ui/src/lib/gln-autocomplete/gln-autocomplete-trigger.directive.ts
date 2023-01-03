@@ -160,13 +160,20 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
     if (this.autocomplete == null || this.autocomplete.disabled) {
       return;
     }
-    console.log(`ACT().handlingFocusin(); isFocusAttr:${this.isFocusAttrOnFrame};`); // #
+    const strIsFocusAttr = this.isFocusAttrOnFrame ? 'isFocusAttr:true' : '';
+    console.log(`ACT().handlingFocusin(); {If} ${strIsFocusAttr};`); // #
     if (this.isFocusAttrOnFrame) {
       this.isFocusAttrOnFrame = false;
-      console.log(`ACT().handlingFocusin(); isFocusAttr=false;`); // #
+      console.log(`ACT().handlingFocusin(); {If} isFocusAttr=false;`); // #
       if (this.frameRef != null) {
         HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, null);
       }
+    }
+    if (this.autocomplete.openOnFocus && !this.autocomplete.isOpen()) {
+      Promise.resolve().then(() => {
+        console.log(`ACT().handlingFocusin(); {IIf} openOnFocus:true; autocomplete?.open();`); // #
+        this.autocomplete?.open();
+      });
     }
   }
 
@@ -175,8 +182,8 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
       return;
     }
     const isOpen = this.autocomplete.isOpen();
-    const isFocusAttr = this.isFocusAttrOnFrame;
-    console.log(`ACT().handlingFocusout(); {Id} autocomplete.isOpen():${isOpen}; isFocusAttr:${isFocusAttr};`); // #
+    const strIsFocusAttr = this.isFocusAttrOnFrame ? 'isFocusAttr:true' : '';
+    console.log(`ACT().handlingFocusout(); {Id} autocomplete.isOpen():${isOpen} ${strIsFocusAttr};`); // #
     if (this.autocomplete.isOpen()) {
       if (!this.autocomplete.isContainerMousedown) {
         Promise.resolve().then(() => {

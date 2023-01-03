@@ -76,6 +76,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   @Input()
   public isNoCloseOnSelect: string | boolean | null | undefined;
   @Input()
+  public isOpenOnFocus: string | boolean | null | undefined;
+  @Input()
   /** Classes to be passed to the options panel. Supports the same syntax as `ngClass`. */
   public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = '';
   @Input()
@@ -109,6 +111,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public isPanelOpen: boolean = false;
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
   public noCloseOnSelect: boolean | null = null; // Binding attribute "isNoCloseOnSelect".
+  public openOnFocus: boolean | null = null; // Binding attribute "isOpenOnFocus".
   public panelClassValue: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
   public positionValue: GlnAutocompletePosition | null = null; // Binding attribute "position" ('start'|'center'|'end').
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
@@ -155,6 +158,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     ) {
       this.noCloseOnSelect = BooleanUtil.init(this.isNoCloseOnSelect) ?? !!this.currConfig.isNoCloseOnSelect;
     }
+    if (changes['isOpenOnFocus'] || (changes['config'] && this.isOpenOnFocus == null && this.currConfig.isOpenOnFocus != null)) {
+      this.openOnFocus = BooleanUtil.init(this.isOpenOnFocus) ?? !!this.currConfig.isOpenOnFocus;
+    }
     if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
       this.panelClassValue = this.panelClass || this.currConfig?.panelClass;
     }
@@ -188,6 +194,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     }
     if (this.isNoCloseOnSelect == null) {
       this.noCloseOnSelect = !!this.currConfig.isNoCloseOnSelect;
+    }
+    if (this.isOpenOnFocus == null) {
+      this.openOnFocus = !!this.currConfig.isOpenOnFocus;
     }
     if (this.panelClassValue == null) {
       this.panelClassValue = this.currConfig?.panelClass;

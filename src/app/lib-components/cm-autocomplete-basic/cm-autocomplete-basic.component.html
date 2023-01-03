@@ -641,6 +641,12 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
     <li>
       "isNoCloseOnSelect" - the options panel will not close after an option is selected.
     </li>
+    <li>
+      "isClearOnEscape" - clear the input field when pressing 'Escape'.
+    </li>
+    <li>
+      "isOpenOnFocus" - the options panel opens after receiving input focus.
+    </li>
   </ul>
 </section>
 
@@ -706,6 +712,30 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
       <gln-autocomplete #autocomplete02q="glnAutocomplete"
         [visibleSize]="6"
         isClearOnEscape>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isOpenOnFocus.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02r"
+        class="aca-middle"
+        label="Fruit"
+        [exterior]="exterior02e"
+        [glnAutocompleteTrigger]="autocomplete02r"
+        autoComplete="off"
+        helperText="Used: isOpenOnFocus.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02r="glnAutocomplete"
+        [visibleSize]="6"
+        isOpenOnFocus>
         <gln-option *ngFor="let item of fruits"
           [value]="item">
           {{ capitalizeFirstLetter(item) }}
@@ -1242,6 +1272,17 @@ export class AppComponent &#123;
     <td>
       <span>
         The options panel will not close after an option is selected. (default = false;)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>isOpenOnFocus?:<br/>
+      &nbsp;&nbsp;boolean<br/>
+      &nbsp;&nbsp;| undefined;</code>
+    </td>
+    <td>
+      <span>
+        The options panel opens after receiving input focus. (default = false;)
       </span>
     </td>
   </tr>

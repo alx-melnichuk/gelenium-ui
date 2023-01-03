@@ -7,6 +7,7 @@ export interface GlnAutocomplete {
   readonly clearOnEscape: boolean | null;
   readonly id: string;
   readonly isContainerMousedown: boolean | null;
+  readonly openOnFocus?: boolean | null;
   // A sign that the panel is open.
   isOpen(): boolean;
   // Open the autocomplete suggestion panel.
