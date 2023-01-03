@@ -312,7 +312,11 @@
   </div>
 
   <section mr-vr>
-    <span>ornamLfAlign: </span>
+    <div>
+      <small>
+        <em>ornamLfAlign:</em>
+      </small>
+    </div>
     <mat-button-toggle-group value="ornamLfAlign05"
       (change)="changeConfig05(ornamLfAlign05=$event.value, config05['ornamRgAlign'])">
       <mat-button-toggle [checked]="ornamLfAlign05==='default'"
@@ -373,7 +377,11 @@
   </div>
 
   <section mr-vr>
-    <span>ornamRgAlign: </span>
+    <div>
+      <small>
+        <em>ornamRgAlign:</em>
+      </small>
+    </div>
     <mat-button-toggle-group value="ornamRgAlign05"
       (change)="changeConfig05(config05['ornamLfAlign'], ornamRgAlign05=$event.value)">
       <mat-button-toggle [checked]="ornamRgAlign05==='default'"
