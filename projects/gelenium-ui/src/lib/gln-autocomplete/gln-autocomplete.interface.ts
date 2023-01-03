@@ -4,8 +4,9 @@ import { GlnAutocompleteTrigger } from './gln-autocomplete-trigger.interface';
 
 export interface GlnAutocomplete {
   readonly disabled: boolean | null;
+  readonly clearOnEscape: boolean | null;
   readonly id: string;
-  readonly isContainerMousedown: boolean;
+  readonly isContainerMousedown: boolean | null;
   // A sign that the panel is open.
   isOpen(): boolean;
   // Open the autocomplete suggestion panel.

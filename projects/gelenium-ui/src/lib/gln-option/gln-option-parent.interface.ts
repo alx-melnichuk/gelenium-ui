@@ -11,7 +11,7 @@ export interface GlnOptionParent {
   multiple?: boolean | null | undefined;
   noRipple?: boolean | null | undefined;
   // Set the option as selected.
-  setOptionSelected(option: GlnOption): void;
+  setOptionSelected(option: GlnOption | null): void;
 }
 
 /**

@@ -62,9 +62,11 @@ export const GLN_AUTOCOMPLETE_CONFIG = new InjectionToken<GlnAutocompleteConfig>
 })
 export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, GlnAutocomplete, GlnOptionParent {
   @Input()
-  public id = `glnac-${uniqueIdCounter++}`;
+  public id: string = `glnac-${uniqueIdCounter++}`;
   @Input()
   public config: GlnAutocompleteConfig | null | undefined;
+  @Input()
+  public isClearOnEscape: string | boolean | null | undefined;
   @Input()
   public isDisabled: string | boolean | null | undefined;
   @Input()
@@ -99,9 +101,10 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public set options(value: GlnOption[]) {}
 
   public currConfig: GlnAutocompleteConfig;
+  public clearOnEscape: boolean | null = null; // Binding attribute "isClearOnEscape". // interface GlnAutocomplete
   public disabled: boolean | null = null; // Binding attribute "isDisabled". // interface GlnAutocomplete
   public hasPanelAnimation: boolean = false;
-  public isContainerMousedown: boolean = false; // interface GlnAutocomplete
+  public isContainerMousedown: boolean | null = false; // interface GlnAutocomplete
   public isMaxWidth: boolean | null = null; // Binding attribute "isMaxWd".
   public isPanelOpen: boolean = false;
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
@@ -135,6 +138,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
       this.disabled = !!BooleanUtil.init(this.isDisabled);
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);
+    }
+    if (changes['isClearOnEscape'] || (changes['config'] && this.isClearOnEscape == null && this.currConfig.isClearOnEscape != null)) {
+      this.clearOnEscape = BooleanUtil.init(this.isClearOnEscape) ?? !!this.currConfig.isClearOnEscape;
     }
     if (changes['isMaxWd'] || (changes['config'] && this.isMaxWd == null && this.currConfig.isMaxWd != null)) {
       this.isMaxWidth = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
@@ -170,6 +176,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     const lineHeight = HtmlElemUtil.propertyAsNumber(this.hostRef, 'line-height');
     this.optionHeight = GlnOptionUtil.getHeightOption(fontSize, lineHeight);
 
+    if (this.isClearOnEscape == null) {
+      this.clearOnEscape = !!this.currConfig.isClearOnEscape;
+    }
     if (this.isMaxWidth == null) {
       this.isMaxWidth = !!this.currConfig.isMaxWd;
       this.setCssMaxWidth(this.isMaxWidth, this.hostRef);
@@ -271,10 +280,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   /** Set the marked option as selected. */
   public setMarkedOptionAsSelected = (): void => {
     const option: GlnOption | null = this.optionsScroll?.getMarkedOption() || null;
-    console.log(`setMarkedOptionAsSelected(); option.value:`, option?.value); // #
-    if (option !== null) {
-      this.setOptionSelected(option);
-    }
+    console.log(`AC.setMarkedOptionAsSelected(); option.value:`, option?.value); // #
+    this.setOptionSelected(option);
   };
   /** Set trigger object for autocomplete. */
   public setTrigger = (trigger: GlnAutocompleteTrigger | null): void => {
@@ -292,21 +299,24 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   // ** interface GlnOptionParent - start **
 
   /** Set the option as selected. */
-  public setOptionSelected(option: GlnOption): void {
-    console.log(`AC.setOptionSelected(); {Ia} option.value:`, option.value); // #
-
+  public setOptionSelected(option: GlnOption | null): void {
+    console.log(`AC.setOptionSelected(); {Ia} option${!option ? ':null' : '?.value:' + option?.value}`); // #
+    if (option == null) {
+      return;
+    }
     Promise.resolve().then(() => {
       this.selected.emit(option);
-      const value: string | null | undefined = option.value as string;
-      console.log(`AC.setOptionSelected(); {IIa} trigger.setValue(value);`); // #
-      this.trigger?.setValue(value);
-      // public noCloseOnSelect: boolean | null = null; // Binding attribute "isNoCloseOnSelect".
-
+      console.log(`AC.setOptionSelected(); {IIa} trigger.setValue(${option.value});`); // #
+      // Set a new value for the trigger (input element).
+      this.trigger?.setValue(option.value as string);
+      // If the options list panel is open.
       if (this.isPanelOpen) {
-        console.log(`AC.setOptionSelected(); {IIa}trigger.passFocus();`); // #
+        // Send input focus to trigger (input element).
+        console.log(`AC.setOptionSelected(); {IIa2}trigger.passFocus();`); // #
         this.trigger?.passFocus();
         if (!this.noCloseOnSelect) {
-          console.log(`AC.setOptionSelected(); {IIa}noCloseOnSelect:${this.noCloseOnSelect} close();`); // #
+          // If the 'noCloseOnSelect' flag is specified, then close the options list panel.
+          console.log(`AC.setOptionSelected(); {IIa3}noCloseOnSelect:${this.noCloseOnSelect} close();`); // #
           this.close();
         }
       }

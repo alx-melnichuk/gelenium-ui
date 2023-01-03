@@ -46,7 +46,7 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
   protected accessorControl: AbstractControl<any, any> | null = null;
   protected accessorFocusable: Focusable | null = null;
   protected frameRef: ElementRef<HTMLElement> | null = null;
-  protected isFocusAttrOnFrame = false;
+  protected isFocusAttrOnFrame: boolean = false;
   protected skipTimeStamp: number | null = null;
 
   constructor(
@@ -197,7 +197,8 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
     }
     // #const value: number | string | null = (event.target as HTMLInputElement).value;
     const isOpen = this.autocomplete.isOpen();
-    console.log(`ACT().handlingInput(); {Ic} autocomplete.isOpen():${isOpen} skipTimeStamp:${this.skipTimeStamp};`); // #
+    const skipTmSt = this.skipTimeStamp;
+    console.log(`ACT().handlingInput(); {Ic} autocomplete.isOpen():${isOpen}${skipTmSt ? ' skipTimeStamp:' + skipTmSt : ''};`); // #
 
     if (this.skipTimeStamp != null) {
       this.skipTimeStamp = null;
@@ -215,18 +216,28 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
       return;
     }
     // #console.log(`event.key=${event.key}`); // #
+    const isClearOnEscape = this.autocomplete?.clearOnEscape;
+    const notModifierKey = !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
+    const isEscapeKey = 'Escape' === event.key && notModifierKey;
+    const st1 = isEscapeKey ? `isEscapeKey:${isEscapeKey}; isClearOnEscape:${isClearOnEscape};` : '';
+    console.log(`ACT().handlingKeydown(); {Ie} ${st1}`); // #
+    if (isEscapeKey && isClearOnEscape) {
+      Promise.resolve().then(() => {
+        this.setValue('');
+      });
+    }
+
     if (!this.autocomplete.isOpen()) {
       // If the panel of available options is closed.
       if (['ArrowDown', 'ArrowUp'].indexOf(event.key) > -1) {
         Promise.resolve().then(() => {
-          console.log(`ACT().handlingKeydown(); autocomplete?.open();`); // #
+          console.log(`ACT().handlingKeydown(); {IIe} autocomplete?.open();`); // #
           this.autocomplete?.open();
         });
       }
     } else {
       // If the panel of available options is open.
-      const notModifierKey = !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
-      if ('Tab' === event.key || ('Escape' === event.key && notModifierKey) || ('ArrowUp' === event.key && event.altKey)) {
+      if ('Tab' === event.key || isEscapeKey || ('ArrowUp' === event.key && event.altKey)) {
         Promise.resolve().then(() => {
           console.log(`ACT().handlingKeydown(Tab,Escape,Alt+ArrowUp); autocomplete?.close();`); // #
           this.autocomplete?.close();

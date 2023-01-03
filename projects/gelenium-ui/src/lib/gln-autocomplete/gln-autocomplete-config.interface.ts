@@ -1,4 +1,5 @@
 export interface GlnAutocompleteConfig {
+  isClearOnEscape?: boolean | undefined;
   isMaxWd?: boolean | undefined;
   isNoAnimation?: boolean | undefined;
   isNoCloseOnSelect?: boolean | undefined;
