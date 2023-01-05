@@ -146,6 +146,7 @@ export class CmAutocompleteBasicComponent {
   public value03d: Observable<string[] | null> = this.value03d$.asObservable();
 
   // Block "Feature"
+  public urlCmSelect = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SELECT');
   public control07a = {
     model07a: new FormControl(null, []),
     model07b: new FormControl(null, []),

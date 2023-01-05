@@ -1088,6 +1088,51 @@ export class AutocompleteComponent &#123;
     for example, when an emergency transition to another page occurs.
   </p>
   <p>
+    This situation is described in more detail in section
+    <a [href]="urlCmSelect + '#Feature'">Feature</a> for GlnSelect.
+  </p>
+  <p>
+    Usage example:
+  </p>
+  <span>
+    1. set the scroll event handler for the parent component;
+  </span>
+  <code><pre source="html">
+&lt;div style="height: 100%; overflow-y: auto;"
+  (scroll)="doScroll()"&gt;
+  &lt;div class="main-side-content"&gt;
+
+    &lt;gln-input
+      [<strong>glnAutocompleteTrigger</strong>]="<i><strong>autocomplete04</strong></i>"&gt;
+    &lt;/gln-input&gt;
+    &lt;<strong>gln-autocomplete</strong> #<i><strong>autocomplete04</strong></i>="glnAutocomplete"&gt;
+      &lt;gln-option *ngFor="let item of value04" [value]="item"&gt;<b>&#123;</b>&#123; item &#125;&#125;
+      &lt;/gln-option&gt;
+    &lt;/<strong>gln-autocomplete</strong>&gt;
+
+    &lt;gln-input
+      [<strong>glnAutocompleteTrigger</strong>]="<i><strong>autocomplete05</strong></i>"&gt;
+    &lt;/gln-input&gt;
+    &lt;<strong>gln-autocomplete</strong> #<i><strong>autocomplete05</strong></i>="glnAutocomplete"&gt;
+      &lt;gln-option *ngFor="let item of value05" [value]="item"&gt;<b>&#123;</b>&#123; item &#125;&#125;
+      &lt;/gln-option&gt;
+    &lt;/<strong>gln-autocomplete</strong>&gt;
+
+    ...
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+  <br />
+  <code><pre source="ts">
+export class SiteComponent &#123;
+  public doScroll(): void &#123;
+    // Close the open GlnAutocomplete panel.
+    GlnAutocompleteOpenUtil.closeAll();
+  &#125;
+&#125;</pre></code>
+  <p>
+    2. close the open panel of the GlnAutocomplete component;
+  </p>
+  <p>
     There is a static class GlnAutocompleteOpenUtil, which contains a list of all
     GlnAutocomplete components with an open panel.
     Calling the static method "closeAll()" will gracefully close all open panes.
@@ -1105,6 +1150,12 @@ export class AutocompleteComponent &#123;
   </p>
 </section>
 
+<!-- 
+            <span [innerHtml]="'fruit - ' + capitalizeFirstLetter(item)
+              | glnHighlight:control03c.model03a.value:true">
+          </span>
+
+ -->
 <form *ngIf="false"
   [formGroup]="formGroup07a"
   novalidate
