@@ -147,14 +147,17 @@ export class CmAutocompleteBasicComponent {
 
   // Block "Feature"
   public urlCmSelect = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SELECT');
-  public control07a = {
-    model07a: new FormControl(null, []),
-    model07b: new FormControl(null, []),
+  public control06a = {
+    model06a: new FormControl('', []),
   };
-  public formGroup07a: FormGroup = new FormGroup(this.control07a);
-  public value07a$: Subject<string[] | null> = new BehaviorSubject<string[] | null>([]);
-  public value07a: Observable<string[] | null> = this.value07a$.asObservable();
-  public value07b: string[] = [];
+  public formGroup06a: FormGroup = new FormGroup(this.control06a);
+  public value06a: string[] = [];
+
+  public control06b = {
+    model06b: new FormControl('', []),
+  };
+  public formGroup06b: FormGroup = new FormGroup(this.control06b);
+  public value06b: string[] = [];
 
   // Block "Config"
   public control08a = {
@@ -173,6 +176,11 @@ export class CmAutocompleteBasicComponent {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {
     console.log('#');
+    // Block "Feature"
+    this.control06a.model06a.setValue('red cur');
+    this.value06a = this.filtered2(this.fruits, this.control06a.model06a.value);
+    this.control06b.model06b.setValue('red cur');
+    this.value06b = this.filtered2(this.fruits, this.control06b.model06b.value);
   }
 
   // Block "Attributes".
@@ -184,8 +192,8 @@ export class CmAutocompleteBasicComponent {
 
   public filtered(list: string[] | null, value: string | null): string[] {
     const valueStr = (value || '').toLowerCase();
-    const result: string[] = (!!value && list?.filter((item) => item.toLowerCase().includes(valueStr))) || [];
-    console.log(`CMAB.filtered(${value}) res.length=${result.length}`); // #
+    const res: string[] = (!!value && list?.filter((item) => item.toLowerCase().includes(valueStr))) || [];
+    console.log(`CMAB.filtered(${value}) res.length=${res.length}`); // #
     return list?.filter((item) => item.toLowerCase().includes(valueStr)) || [];
   }
 
@@ -200,6 +208,18 @@ export class CmAutocompleteBasicComponent {
     }, 700);
   }
 
+  // Block "Feature" only
+  public filtered2(list: string[] | null, value: string | null): string[] {
+    const valueBuff = (value || '')
+      .toLowerCase()
+      .split(' ')
+      .filter((word) => word.length > 0);
+    console.log(`CMAB.filtered2(${value}) valueBuff.length=${valueBuff.length}`, valueBuff); // #
+    const res: string[] = (!!value && list?.filter((item) => valueBuff.some((item2) => item.toLowerCase().includes(item2)))) || [];
+    console.log(`CMAB.filtered2(${value}) res.length=${res.length}`); // #
+
+    return list?.filter((item) => valueBuff.some((item2) => item.toLowerCase().includes(item2))) || [];
+  }
   // old
 
   public log(text: string): void {

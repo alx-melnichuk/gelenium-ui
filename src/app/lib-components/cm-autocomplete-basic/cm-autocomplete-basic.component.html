@@ -862,8 +862,7 @@ export class AutocompleteComponent &#123;
       </gln-autocomplete>
     </div>
 
-    <div class="app-elem"
-      *ngIf="false">
+    <div class="app-elem">
       <div mb0>
         <small>
           <em>Synchronous mode for native "input".</em>
@@ -1094,9 +1093,14 @@ export class AutocompleteComponent &#123;
   <p>
     Usage example:
   </p>
-  <span>
+</section>
+
+<section mr-vr
+  id="feature-close-all">
+  <h4 class="app-hover-link">
     1. set the scroll event handler for the parent component;
-  </span>
+    <a [href]="urlCmAutocomplete + '#feature-close-all'">#</a>
+  </h4>
   <code><pre source="html">
 &lt;div style="height: 100%; overflow-y: auto;"
   (scroll)="doScroll()"&gt;
@@ -1140,85 +1144,128 @@ export class SiteComponent &#123;
 </section>
 
 <section mr-vr
-  id="feature-activate">
+  id="feature-highlight">
   <h4 class="app-hover-link">
-    GlnAutocomplete activate.
-    <a [href]="urlCmAutocomplete + '#feature-activate'">#</a>
+    Highlight
+    <a [href]="urlCmAutocomplete + '#feature-highlight'">#</a>
   </h4>
   <p>
-    Demo !
+    Sometimes it is required to select a fragment of the input line in the list of
+    available values of the panel of the GlnAutocomplete component.
+    You can use the "GlnHighlight" channel for this purpose.
   </p>
+  <p>
+    It is required to add the "GlnHighlight" channel in the component template and
+    pass the search value (input string value) as the first parameter to it.
+  </p>
+  <span>Template example:</span>
+  <code><pre source="html">
+&lt;gln-input formControlName="model05"
+  [<strong>glnAutocompleteTrigger</strong>]="<i><strong>autocomplete05</strong></i>"&gt;
+&lt;/gln-input&gt;
+&lt;<strong>gln-autocomplete</strong> #<i><strong>autocomplete05</strong></i>="glnAutocomplete"&gt;
+  &lt;gln-option *ngFor="let item of value05" [value]="item"&gt;
+    &lt;span
+      [innerHtml]="item | <strong>glnHighlight:</strong> control05.model05.value"&gt;
+    &lt;/span&gt;
+  &lt;/gln-option&gt;
+&lt;/<strong>gln-autocomplete</strong>&gt;</pre></code>
+  <br />
 </section>
 
-<!-- 
-            <span [innerHtml]="'fruit - ' + capitalizeFirstLetter(item)
-              | glnHighlight:control03c.model03a.value:true">
-          </span>
-
- -->
-<form *ngIf="false"
-  [formGroup]="formGroup07a"
+<form [formGroup]="formGroup06a"
   novalidate
   autocomplete="off">
 
   <div class="app-group">
 
-    <div class="app-elem aca-middle">
-      <div>
+    <div class="app-elem">
+      <div mb0>
         <small>
-          <em>Default: visibleSize: 6.</em>
+          <em>Highlight of the input line.</em>
         </small>
       </div>
-      <!-- <div style="display: inline;"
-        *ngIf="true"> -->
-      <gln-input formControlName="model07a"
-        style="width: 161px;"
-        label="Fruit"
-        [glnAutocompleteTrigger]="autocomplete07a"
-        helperText="Size: 6."
-        (input)="filteredAsyn(fruits, control07a.model07a.value, value07a$);"
-        (focusout)="log('focusout');">
-        <span *ngIf="(value07a | async) == null"
-          gln-orn-rg
-          class="aca-spnr-sun-rays spinner">
-        </span>
+      <gln-input formControlName="model06a"
+        class="acs-middle"
+        [glnAutocompleteTrigger]="autocomplete06a"
+        helperText="Used: glnHighlight."
+        (input)="value06a = filtered2(fruits, control06a.model06a.value)"
+        autocomplete="off">
       </gln-input>
-      <gln-autocomplete #autocomplete07a="glnAutocomplete"
-        [visibleSize]="6">
-        <ng-container *ngIf="(value07a | async) == null">
-          <gln-option style="display: none;">
-          </gln-option>
-          <div style="padding: 10px 10px;">
-            Loading...
-          </div>
-        </ng-container>
-        <gln-option [value]="item"
-          *ngFor="let item of value07a | async">
-          {{ 'fruit - ' + capitalizeFirstLetter(item) }}
+      <gln-autocomplete #autocomplete06a="glnAutocomplete"
+        [visibleSize]="5">
+        <gln-option *ngFor="let item of value06a"
+          [value]="item">
+          <span [innerHtml]="'fruit - ' + capitalizeFirstLetter(item)
+            | glnHighlight: control06a.model06a.value">
+          </span>
         </gln-option>
       </gln-autocomplete>
-      <!-- </div> -->
     </div>
 
-    <div class="app-elem aca-middle">
-      <div>
+  </div>
+</form>
+<!-- section mr-vr
+  mat-accordion -->
+
+<section mr-vr
+  id="feature-highlight2">
+  <h4 class="app-hover-link">
+    Highlight for each word
+    <a [href]="urlCmAutocomplete + '#feature-highlight2'">#</a>
+  </h4>
+  <p>
+    The "GlnHighlight" channel has a second optional parameter "isSearchByAllWords".
+    If you specify this parameter, the search string will be split into separate fragments.
+    And these fragments will be highlighted.
+  </p>
+  <p>
+    The division into fragments is performed by the following symbols:
+  </p>
+  <code><pre>
+' ', '-', '[', ']', '/', '&#123;', '&#125;', '(', ')', '*', '+', '?', '.', '\', '^', '$', '|'
+  </pre></code>
+  <span>Template example:</span>
+  <code><pre source="html">
+&lt;gln-input formControlName="model05"
+  [<strong>glnAutocompleteTrigger</strong>]="<i><strong>autocomplete05</strong></i>"&gt;
+&lt;/gln-input&gt;
+&lt;<strong>gln-autocomplete</strong> #<i><strong>autocomplete05</strong></i>="glnAutocomplete"&gt;
+  &lt;gln-option *ngFor="let item of value05" [value]="item"&gt;
+    &lt;span
+      [innerHtml]="item | <strong>glnHighlight:</strong> control05.model05.value <strong>: true</strong>"&gt;
+    &lt;/span&gt;
+  &lt;/gln-option&gt;
+&lt;/<strong>gln-autocomplete</strong>&gt;</pre></code>
+  <br />
+</section>
+
+<form [formGroup]="formGroup06b"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div mb0>
         <small>
-          <em>Params: position: 'center', visibleSize: 5.</em>
+          <em>Highlight of the input line.</em>
         </small>
       </div>
-      <gln-input formControlName="model07b"
-        style="width: 161px;"
-        label="Fruit"
-        [glnAutocompleteTrigger]="autocomplete07b"
-        helperText="Position: 'center', Size: 5."
-        (input)="value07b = filtered(fruits, control07a.model07b.value)">
+      <gln-input formControlName="model06b"
+        class="acs-middle"
+        [glnAutocompleteTrigger]="autocomplete06b"
+        helperText="Used: glnHighlight."
+        (input)="value06b = filtered2(fruits, control06b.model06b.value)"
+        autocomplete="off">
       </gln-input>
-      <gln-autocomplete #autocomplete07b="glnAutocomplete"
-        position="center"
+      <gln-autocomplete #autocomplete06b="glnAutocomplete"
         [visibleSize]="5">
-        <gln-option *ngFor="let item of value07b"
+        <gln-option *ngFor="let item of value06b"
           [value]="item">
-          {{ 'fruit - ' + capitalizeFirstLetter(item) }}
+          <span [innerHtml]="'fruit - ' + capitalizeFirstLetter(item)
+            | glnHighlight: control06b.model06b.value: true">
+          </span>
         </gln-option>
       </gln-autocomplete>
     </div>
