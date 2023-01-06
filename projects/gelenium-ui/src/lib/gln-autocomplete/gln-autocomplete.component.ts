@@ -77,6 +77,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   @Input()
   public isNoOpenOnMouse: string | boolean | null | undefined;
   @Input()
+  /** This property to turn off the ripple effect. */
+  public isNoRipple: string | boolean | null | undefined;
+  @Input()
   public isOpenOnFocus: string | boolean | null | undefined;
   @Input()
   /** Classes to be passed to the options panel. Supports the same syntax as `ngClass`. */
@@ -114,6 +117,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
   public noCloseOnSelect: boolean | null = null; // Binding attribute "isNoCloseOnSelect".
   public noOpenOnMouse: boolean | null = null; // Binding attribute "isNoOpenOnMouse". // interface GlnAutocomplete
+  public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public openOnFocus: boolean | null = null; // Binding attribute "isOpenOnFocus". // interface GlnAutocomplete
   public panelClassValue: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
   public positionValue: GlnAutocompletePosition | null = null; // Binding attribute "position" ('start'|'center'|'end').
@@ -164,6 +168,10 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     if (changes['isNoOpenOnMouse'] || (changes['config'] && this.isNoOpenOnMouse == null && this.currConfig.isNoOpenOnMouse != null)) {
       this.noOpenOnMouse = BooleanUtil.init(this.isNoOpenOnMouse) ?? !!this.currConfig.isNoOpenOnMouse;
     }
+    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
+      this.noRipple = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
+      this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
+    }
     if (changes['isOpenOnFocus'] || (changes['config'] && this.isOpenOnFocus == null && this.currConfig.isOpenOnFocus != null)) {
       this.openOnFocus = BooleanUtil.init(this.isOpenOnFocus) ?? !!this.currConfig.isOpenOnFocus;
     }
@@ -203,6 +211,10 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     }
     if (this.isNoOpenOnMouse == null) {
       this.noOpenOnMouse = !!this.currConfig.isNoOpenOnMouse;
+    }
+    if (this.noRipple == null) {
+      this.noRipple = !!this.currConfig.isNoRipple;
+      this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
     }
     if (this.isOpenOnFocus == null) {
       this.openOnFocus = !!this.currConfig.isOpenOnFocus;
@@ -388,5 +400,10 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     justifyContent = GlnAutocompletePosition.end === positionValue ? 'flex-end' : justifyContent;
     // Setting properties: 'justify-content'.
     HtmlElemUtil.setProperty(elem, CSS_PROP_JUSTIFY_CONTENT, justifyContent);
+  }
+
+  private settingNoRipple(noRipple: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-ripple', !!noRipple);
+    HtmlElemUtil.setAttr(renderer, elem, 'norip', noRipple ? '' : null);
   }
 }

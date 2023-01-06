@@ -649,6 +649,9 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
       "isNoOpenOnMouse" - the options panel will not open/close on mouse click.
     </li>
     <li>
+      "isNoRipple" - Disables the ripple effect.
+    </li>
+    <li>
       "isOpenOnFocus" - the options panel opens after receiving input focus.
     </li>
   </ul>
@@ -750,7 +753,7 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: isOpenOnFocus.</em>
+          <em>Attribute: isNoRipple, isNoCloseOnSelect.</em>
         </small>
       </div>
       <gln-input formControlName="model02s"
@@ -759,9 +762,34 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
         [exterior]="exterior02e"
         [glnAutocompleteTrigger]="autocomplete02s"
         autoComplete="off"
-        helperText="Used: isOpenOnFocus.">
+        helperText="Used: isNoRipple.">
       </gln-input>
       <gln-autocomplete #autocomplete02s="glnAutocomplete"
+        [visibleSize]="6"
+        isNoCloseOnSelect
+        isNoRipple>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isOpenOnFocus.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02t"
+        class="aca-elem"
+        label="Fruit"
+        [exterior]="exterior02e"
+        [glnAutocompleteTrigger]="autocomplete02t"
+        autoComplete="off"
+        helperText="Used: isOpenOnFocus.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02t="glnAutocomplete"
         [visibleSize]="6"
         isOpenOnFocus>
         <gln-option *ngFor="let item of fruits"
@@ -1413,6 +1441,17 @@ export class AppComponent &#123;
     <td>
       <span>
         The options panel will not open/close on mouse click. (default = false;)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>isNoRipple?:<br/>
+      &nbsp;&nbsp;boolean<br/>
+      &nbsp;&nbsp;| undefined;</code>
+    </td>
+    <td>
+      <span>
+        Disables the ripple effect. (default = false;)
       </span>
     </td>
   </tr>
