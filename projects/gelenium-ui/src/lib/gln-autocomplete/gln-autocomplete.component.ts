@@ -76,6 +76,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   @Input()
   public isNoCloseOnSelect: string | boolean | null | undefined;
   @Input()
+  public isNoOpenOnMouse: string | boolean | null | undefined;
+  @Input()
   public isOpenOnFocus: string | boolean | null | undefined;
   @Input()
   /** Classes to be passed to the options panel. Supports the same syntax as `ngClass`. */
@@ -111,7 +113,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public isPanelOpen: boolean = false;
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
   public noCloseOnSelect: boolean | null = null; // Binding attribute "isNoCloseOnSelect".
-  public openOnFocus: boolean | null = null; // Binding attribute "isOpenOnFocus".
+  public noOpenOnMouse: boolean | null = null; // Binding attribute "isNoOpenOnMouse". // interface GlnAutocomplete
+  public openOnFocus: boolean | null = null; // Binding attribute "isOpenOnFocus". // interface GlnAutocomplete
   public panelClassValue: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
   public positionValue: GlnAutocompletePosition | null = null; // Binding attribute "position" ('start'|'center'|'end').
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
@@ -158,6 +161,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     ) {
       this.noCloseOnSelect = BooleanUtil.init(this.isNoCloseOnSelect) ?? !!this.currConfig.isNoCloseOnSelect;
     }
+    if (changes['isNoOpenOnMouse'] || (changes['config'] && this.isNoOpenOnMouse == null && this.currConfig.isNoOpenOnMouse != null)) {
+      this.noOpenOnMouse = BooleanUtil.init(this.isNoOpenOnMouse) ?? !!this.currConfig.isNoOpenOnMouse;
+    }
     if (changes['isOpenOnFocus'] || (changes['config'] && this.isOpenOnFocus == null && this.currConfig.isOpenOnFocus != null)) {
       this.openOnFocus = BooleanUtil.init(this.isOpenOnFocus) ?? !!this.currConfig.isOpenOnFocus;
     }
@@ -194,6 +200,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     }
     if (this.isNoCloseOnSelect == null) {
       this.noCloseOnSelect = !!this.currConfig.isNoCloseOnSelect;
+    }
+    if (this.isNoOpenOnMouse == null) {
+      this.noOpenOnMouse = !!this.currConfig.isNoOpenOnMouse;
     }
     if (this.isOpenOnFocus == null) {
       this.openOnFocus = !!this.currConfig.isOpenOnFocus;

@@ -523,7 +523,7 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
   </mat-button-toggle-group>
 </section>
 
-<form *ngIf="true"
+<form *ngIf="false"
   [formGroup]="formGroup02d"
   novalidate
   autocomplete="off">
@@ -639,10 +639,13 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
   </h4>
   <ul>
     <li>
+      "isClearOnEscape" - clear the input field when pressing 'Escape'.
+    </li>
+    <li>
       "isNoCloseOnSelect" - the options panel will not close after an option is selected.
     </li>
     <li>
-      "isClearOnEscape" - clear the input field when pressing 'Escape'.
+      "isNoOpenOnMouse" - the options panel will not open/close on mouse click.
     </li>
     <li>
       "isOpenOnFocus" - the options panel opens after receiving input focus.
@@ -671,21 +674,47 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
 
   <div class="app-group">
 
-    <div class="app-elem">
+    <div *ngIf="false"
+      class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isClearOnEscape.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02p"
+        class="aca-elem"
+        label="Fruit"
+        [exterior]="exterior02e"
+        [glnAutocompleteTrigger]="autocomplete02p"
+        autoComplete="off"
+        helperText="Used: isClearOnEscape.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02p="glnAutocomplete"
+        [visibleSize]="6"
+        isClearOnEscape>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div *ngIf="false"
+      class="app-elem">
       <div>
         <small>
           <em>Attribute: isNoCloseOnSelect.</em>
         </small>
       </div>
-      <gln-input formControlName="model02p"
-        class="aca-middle"
+      <gln-input formControlName="model02q"
+        class="aca-elem"
         label="Fruit"
         [exterior]="exterior02e"
-        [glnAutocompleteTrigger]="autocomplete02p"
+        [glnAutocompleteTrigger]="autocomplete02q"
         autoComplete="off"
-        helperText="Used isNoCloseOnSelect">
+        helperText="Used: isNoCloseOnSelect.">
       </gln-input>
-      <gln-autocomplete #autocomplete02p="glnAutocomplete"
+      <gln-autocomplete #autocomplete02q="glnAutocomplete"
         [visibleSize]="6"
         isNoCloseOnSelect>
         <gln-option *ngFor="let item of fruits"
@@ -695,23 +724,24 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
       </gln-autocomplete>
     </div>
 
-    <div class="app-elem">
+    <div *ngIf="false"
+      class="app-elem">
       <div>
         <small>
-          <em>Attribute: isClearOnEscape.</em>
+          <em>Attribute: isNoOpenOnMouse.</em>
         </small>
       </div>
-      <gln-input formControlName="model02q"
-        class="aca-middle"
+      <gln-input formControlName="model02r"
+        class="aca-elem"
         label="Fruit"
         [exterior]="exterior02e"
-        [glnAutocompleteTrigger]="autocomplete02q"
+        [glnAutocompleteTrigger]="autocomplete02r"
         autoComplete="off"
-        helperText="Used: isClearOnEscape.">
+        helperText="Used: isNoOpenOnMouse.">
       </gln-input>
-      <gln-autocomplete #autocomplete02q="glnAutocomplete"
+      <gln-autocomplete #autocomplete02r="glnAutocomplete"
         [visibleSize]="6"
-        isClearOnEscape>
+        isNoOpenOnMouse>
         <gln-option *ngFor="let item of fruits"
           [value]="item">
           {{ capitalizeFirstLetter(item) }}
@@ -725,15 +755,15 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
           <em>Attribute: isOpenOnFocus.</em>
         </small>
       </div>
-      <gln-input formControlName="model02r"
-        class="aca-middle"
+      <gln-input formControlName="model02s"
+        class="aca-elem"
         label="Fruit"
         [exterior]="exterior02e"
-        [glnAutocompleteTrigger]="autocomplete02r"
+        [glnAutocompleteTrigger]="autocomplete02s"
         autoComplete="off"
         helperText="Used: isOpenOnFocus.">
       </gln-input>
-      <gln-autocomplete #autocomplete02r="glnAutocomplete"
+      <gln-autocomplete #autocomplete02s="glnAutocomplete"
         [visibleSize]="6"
         isOpenOnFocus>
         <gln-option *ngFor="let item of fruits"
@@ -832,7 +862,7 @@ export class AutocompleteComponent &#123;
   </mat-button-toggle-group>
 </section>
 
-<form *ngIf="true"
+<form *ngIf="false"
   [formGroup]="formGroup03c"
   novalidate
   autocomplete="off">
@@ -1110,7 +1140,8 @@ export class AutocompleteComponent &#123;
       [<strong>glnAutocompleteTrigger</strong>]="<i><strong>autocomplete04</strong></i>"&gt;
     &lt;/gln-input&gt;
     &lt;<strong>gln-autocomplete</strong> #<i><strong>autocomplete04</strong></i>="glnAutocomplete"&gt;
-      &lt;gln-option *ngFor="let item of value04" [value]="item"&gt;<b>&#123;</b>&#123; item &#125;&#125;
+      &lt;gln-option *ngFor="let item of value04" [value]="item"&gt;
+        <b>&#123;</b>&#123; item &#125;&#125;
       &lt;/gln-option&gt;
     &lt;/<strong>gln-autocomplete</strong>&gt;
 
@@ -1118,7 +1149,8 @@ export class AutocompleteComponent &#123;
       [<strong>glnAutocompleteTrigger</strong>]="<i><strong>autocomplete05</strong></i>"&gt;
     &lt;/gln-input&gt;
     &lt;<strong>gln-autocomplete</strong> #<i><strong>autocomplete05</strong></i>="glnAutocomplete"&gt;
-      &lt;gln-option *ngFor="let item of value05" [value]="item"&gt;<b>&#123;</b>&#123; item &#125;&#125;
+      &lt;gln-option *ngFor="let item of value05" [value]="item"&gt;
+        <b>&#123;</b>&#123; item &#125;&#125;
       &lt;/gln-option&gt;
     &lt;/<strong>gln-autocomplete</strong>&gt;
 
@@ -1173,7 +1205,8 @@ export class SiteComponent &#123;
   <br />
 </section>
 
-<form [formGroup]="formGroup06a"
+<form *ngIf="false"
+  [formGroup]="formGroup06a"
   novalidate
   autocomplete="off">
 
@@ -1240,7 +1273,8 @@ export class SiteComponent &#123;
   <br />
 </section>
 
-<form [formGroup]="formGroup06b"
+<form *ngIf="false"
+  [formGroup]="formGroup06b"
   novalidate
   autocomplete="off">
 
@@ -1370,6 +1404,17 @@ export class AppComponent &#123;
     <td>
       <span>
         The options panel will not close after an option is selected. (default = false;)
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td><code>isNoOpenOnMouse?:<br/>
+      &nbsp;&nbsp;boolean<br/>
+      &nbsp;&nbsp;| undefined;</code>
+    </td>
+    <td>
+      <span>
+        The options panel will not open/close on mouse click. (default = false;)
       </span>
     </td>
   </tr>
@@ -1556,21 +1601,3 @@ visibleSize=0</pre></code>
 <p>-</p>
 <p>-</p>
 <hr br-nn />
-
-
-
-<p>_</p>
-<p>_</p>
-<p>_</p>
-<p>_</p>
-<p>demo1</p>
-<p>_</p>
-<p>_</p>
-<p>_</p>
-<p>_</p>
-<p>demo2</p>
-<p>_</p>
-<p>_</p>
-<p>_</p>
-<p>_</p>
-<p>demo3</p>

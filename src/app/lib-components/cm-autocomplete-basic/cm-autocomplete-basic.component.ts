@@ -115,7 +115,7 @@ export class CmAutocompleteBasicComponent {
     model02p: new FormControl(null, []),
     model02q: new FormControl(null, []),
     model02r: new FormControl(null, []),
-    // model02s: new FormControl(null, []),
+    model02s: new FormControl(null, []),
   };
 
   public formGroup02e: FormGroup = new FormGroup(this.control02e);

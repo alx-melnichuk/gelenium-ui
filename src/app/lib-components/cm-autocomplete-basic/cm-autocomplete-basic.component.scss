@@ -23,6 +23,11 @@ app-cm-autocomplete-basic {
     background-color: honeydew;
   }
 
+  // attributes-supported04
+  .aca-elem {
+    width: 170px;
+  }
+
   // Block "Asynchrony"
   
 	.acs-middle {
@@ -76,12 +81,9 @@ app-cm-autocomplete-basic {
   // == == ==
   // == OLD ==
 
-  .aca-elem {
-    max-width: 40ch;
-	}
-  // temp
-  div.app-elem {
-    outline: 1px dashed green;
-  }
+  // // temp
+  // div.app-elem {
+  //   outline: 1px dashed green;
+  // }
 
 }

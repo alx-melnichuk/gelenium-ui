@@ -3,10 +3,11 @@ import { GlnOption } from '../gln-option/gln-option.interface';
 import { GlnAutocompleteTrigger } from './gln-autocomplete-trigger.interface';
 
 export interface GlnAutocomplete {
-  readonly disabled: boolean | null;
   readonly clearOnEscape: boolean | null;
+  readonly disabled: boolean | null;
   readonly id: string;
   readonly isContainerMousedown: boolean | null;
+  readonly noOpenOnMouse?: boolean | null;
   readonly openOnFocus?: boolean | null;
   // A sign that the panel is open.
   isOpen(): boolean;
