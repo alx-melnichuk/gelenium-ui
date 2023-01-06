@@ -2,12 +2,11 @@
   <div glnac-container
     class="glnac-container"
     #container
-    [attr.otp-len]="getOptions(optionList).length"
     glnAutocompletePanel
     (glnAutocompletePanelAttached)="containerResize(container, getTriggerRect(), getHostRect())"
     (glnAutocompletePanelResize)="containerResize(container, getTriggerRect(), getHostRect())"
-    (mousedown)="isContainerMousedown = true; log('AC.isContnrMouseDown=true;');"
-    (mouseup)="isContainerMousedown = false; log('AC.isContnrMouseDown=false;');">
+    (mousedown)="isContainerMousedown = true"
+    (mouseup)="isContainerMousedown = false">
     <div glnac-wrap
       [ngClass]="['glnac-wrap', (noAnimation ? 'gln-no-animation' : ''), (isPanelOpen ? 'is-show' : 'is-hide')]"
       [attr.noAnm]="noAnimation ? '' : null"
@@ -20,8 +19,6 @@
         [ngClass]="panelClassValue || ''"
         role="listbox"
         [attr.id]="id + '-panel'"
-        attr.aria-label9="ariaLabel || null"
-        attr.aria-labelledby9="_getPanelAriaLabelledby(formFieldId)"
         [glnOptionsScroll]="getOptions(optionList)"
         (glnOptionsScrollAttached)="setOptionsScroll($event)"
         (glnOptionsScrollDetached)="setOptionsScroll(null)">

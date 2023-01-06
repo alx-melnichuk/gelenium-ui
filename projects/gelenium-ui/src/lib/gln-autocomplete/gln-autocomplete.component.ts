@@ -26,7 +26,6 @@ import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-par
 import { GlnOptionsScroll } from '../gln-option/gln-options-scroll.interface';
 import { GlnOptionUtil } from '../gln-option/gln-option.util';
 
-import { GlnDebounceTimer } from '../_classes/gln-debounce-timer';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
@@ -108,6 +107,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public clearOnEscape: boolean | null = null; // Binding attribute "isClearOnEscape". // interface GlnAutocomplete
   public disabled: boolean | null = null; // Binding attribute "isDisabled". // interface GlnAutocomplete
   public hasPanelAnimation: boolean = false;
+  // The mouse button is pressed over the container options panel.
   public isContainerMousedown: boolean | null = false; // interface GlnAutocomplete
   public isMaxWidth: boolean | null = null; // Binding attribute "isMaxWd".
   public isPanelOpen: boolean = false;
@@ -249,15 +249,11 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   /** Open the autocomplete suggestion panel. */
   public open = (): void => {
     if (!this.disabled && !this.isPanelOpen) {
-      console.log(`AC.open();  isPanelOpen:${this.isPanelOpen} options.len:${this.optionList.length}`);
-
       if (this.optionListSub == null) {
-        console.log(`AC.open();  optionListSub = optionList.changes.subscribe();`); //#
         // Set subscription: when changing the list of options, open the options panel.
-        this.optionListSub = this.optionList.changes.subscribe((items: GlnOptionComponent[]) => {
-          this.changeDetectorRef.markForCheck();
-          console.log(`AC.optionList.changes() isPanelOpen:${this.isPanelOpen} panelOpening(); optionList.len:${this.optionList.length}`);
+        this.optionListSub = this.optionList.changes.subscribe(() => {
           this.panelOpening();
+          this.changeDetectorRef.markForCheck();
         });
       }
       // If the list of options is not empty, then the options panel will be opened.
@@ -268,21 +264,13 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public close = (options?: { noAnimation?: boolean }): void => {
     if (!this.disabled && this.isPanelOpen) {
       this.isPanelOpen = false;
-      console.log(`AC.close(); isPanelOpen=${this.isPanelOpen};`); // #
       // Remove the current object from the list of items with the panel open.
       GlnAutocompleteOpenUtil.remove(this);
-
-      if (this.optionListSub != null) {
-        console.log(`AC.close();  optionListSub = null;`); //#
-      }
       this.optionListSub?.unsubscribe();
       this.optionListSub = null;
-      console.log(``); // #
-
       if (this.hasPanelAnimation && options?.noAnimation) {
         this.hasPanelAnimation = false;
       }
-
       this.changeDetectorRef.markForCheck();
       this.closed.emit();
     }
@@ -298,7 +286,6 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   /** Set the marked option as selected. */
   public setMarkedOptionAsSelected = (): void => {
     const option: GlnOption | null = this.optionsScroll?.getMarkedOption() || null;
-    console.log(`AC.setMarkedOptionAsSelected(); option.value:`, option?.value); // #
     this.setOptionSelected(option);
   };
   /** Set trigger object for autocomplete. */
@@ -318,27 +305,22 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
 
   /** Set the option as selected. */
   public setOptionSelected(option: GlnOption | null): void {
-    console.log(`AC.setOptionSelected(); {Ia} option${!option ? ':null' : '?.value:' + option?.value}`); // #
-    if (option == null) {
-      return;
-    }
-    Promise.resolve().then(() => {
-      this.selected.emit(option);
-      console.log(`AC.setOptionSelected(); {IIa} trigger.setValue(${option.value});`); // #
-      // Set a new value for the trigger (input element).
-      this.trigger?.setValue(option.value as string);
-      // If the options list panel is open.
-      if (this.isPanelOpen) {
-        // Send input focus to trigger (input element).
-        console.log(`AC.setOptionSelected(); {IIa2}trigger.passFocus();`); // #
-        this.trigger?.passFocus();
-        if (!this.noCloseOnSelect) {
-          // If the 'noCloseOnSelect' flag is specified, then close the options list panel.
-          console.log(`AC.setOptionSelected(); {IIa3}noCloseOnSelect:${this.noCloseOnSelect} close();`); // #
-          this.close();
+    if (option != null) {
+      Promise.resolve().then(() => {
+        this.selected.emit(option);
+        // Set a new value for the trigger (input element).
+        this.trigger?.setValue(option.value as string);
+        // If the options list panel is open.
+        if (this.isPanelOpen) {
+          // Send input focus to trigger (input element).
+          this.trigger?.passFocus();
+          if (!this.noCloseOnSelect) {
+            // If the 'noCloseOnSelect' flag is specified, then close the options list panel.
+            this.close();
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   // ** interface GlnOptionParent - finish **
@@ -367,9 +349,6 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     }
   }
 
-  log(text: string): void {
-    console.log(text);
-  }
   // ** directive: GlnAutocompletePanel - finish **
 
   // ** directive: GlnOptionsScroll - start **
@@ -383,16 +362,11 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   // ** Private methods **
 
   private panelOpening(): void {
-    console.log(`AC.panelOpening() isPanelOpen:${this.isPanelOpen} options:${this.optionList.length}`); // #
     // If the list of options is not empty, then open the panel.
     if (!this.isPanelOpen && this.getTriggerRect() != null && this.optionList.length > 0) {
       this.isPanelOpen = true;
-      console.log(`AC.panelOpening() isPanelOpen=${this.isPanelOpen};`); // #
-      console.log(``); // #
-
       // Add the current object to the list of elements with the panel open.
       GlnAutocompleteOpenUtil.add(this);
-
       this.changeDetectorRef.markForCheck();
       this.opened.emit();
     }
