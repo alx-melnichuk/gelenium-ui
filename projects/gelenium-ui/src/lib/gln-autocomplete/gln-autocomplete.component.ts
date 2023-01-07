@@ -107,6 +107,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public set options(value: GlnOption[]) {}
 
   public currConfig: GlnAutocompleteConfig;
+  public containerElem: HTMLElement | null = null;
   public clearOnEscape: boolean | null = null; // Binding attribute "isClearOnEscape". // interface GlnAutocomplete
   public disabled: boolean | null = null; // Binding attribute "isDisabled". // interface GlnAutocomplete
   public hasPanelAnimation: boolean = false;
@@ -119,13 +120,16 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public noOpenOnMouse: boolean | null = null; // Binding attribute "isNoOpenOnMouse". // interface GlnAutocomplete
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public openOnFocus: boolean | null = null; // Binding attribute "isOpenOnFocus". // interface GlnAutocomplete
+  public optionHeight: number = 0;
   public panelClassValue: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
   public positionValue: GlnAutocompletePosition | null = null; // Binding attribute "position" ('start'|'center'|'end').
   public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
 
-  private optionHeight: number = 0;
   private optionListSub: Subscription | null = null;
   private optionsScroll: GlnOptionsScroll | null = null;
+  private panelBottom: number | null | undefined;
+  private panelTop: number | null | undefined;
+  private translateY: number | null | undefined;
   private trigger: GlnAutocompleteTrigger | null = null;
 
   constructor(
@@ -265,6 +269,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
         // Set subscription: when changing the list of options, open the options panel.
         this.optionListSub = this.optionList.changes.subscribe(() => {
           this.panelOpening();
+          Promise.resolve().then(() => {
+            this.containerResize(this.containerElem, this.getTriggerRect(), this.getHostRect(), this.optionHeight);
+          });
           this.changeDetectorRef.markForCheck();
         });
       }
@@ -282,6 +289,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
       this.optionListSub = null;
       if (this.hasPanelAnimation && options?.noAnimation) {
         this.hasPanelAnimation = false;
+      }
+      if (this.hasPanelAnimation) {
+        this.containerResize(this.containerElem, this.getTriggerRect(), this.getHostRect(), this.optionHeight);
       }
       this.changeDetectorRef.markForCheck();
       this.closed.emit();
@@ -339,24 +349,38 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
 
   // ** directive: GlnAutocompletePanel - start **
 
-  public containerResize(container: HTMLElement | null, triggerRect: DOMRect | null, hostRect: DOMRect | null): void {
+  public containerAttached(container: HTMLElement | null, triggerRect: DOMRect | null, hostRect: DOMRect | null, optHeight: number): void {
+    this.panelBottom = undefined;
+    this.panelTop = undefined;
+    this.translateY = undefined;
+    this.containerElem = container;
+    this.containerResize(container, triggerRect, hostRect, optHeight);
+  }
+
+  public containerResize(container: HTMLElement | null, triggerRect: DOMRect | null, hostRect: DOMRect | null, optHeight: number): void {
     const containerRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(container);
     if (containerRef != null && triggerRect != null && hostRect != null) {
       const panelHeight: number = HtmlElemUtil.propertyAsNumber(containerRef, 'height');
-      const isPanelOnTop: boolean = triggerRect.top + triggerRect.height + panelHeight > ScreenUtil.getHeight();
+      const isPanelOnTop: boolean = triggerRect.top + triggerRect.height + panelHeight + optHeight > ScreenUtil.getHeight();
 
       // Prepare properties: 'bottom', 'top'.
       const panelBottom = isPanelOnTop ? -(NumberUtil.roundTo100(triggerRect.top - hostRect.top) - 1) : null;
       const panelTop = isPanelOnTop ? null : NumberUtil.roundTo100(triggerRect.bottom - hostRect.top);
       // Setting properties: 'bottom', 'top'.
-      HtmlElemUtil.setProperty(containerRef, CSS_PROP_BOTTOM, NumberUtil.str(panelBottom)?.concat('px'));
-      HtmlElemUtil.setProperty(containerRef, CSS_PROP_TOP, NumberUtil.str(panelTop)?.concat('px'));
+      if (this.panelBottom !== panelBottom) {
+        HtmlElemUtil.setProperty(containerRef, CSS_PROP_BOTTOM, NumberUtil.str((this.panelBottom = panelBottom))?.concat('px'));
+      }
+      if (this.panelTop !== panelTop) {
+        HtmlElemUtil.setProperty(containerRef, CSS_PROP_TOP, NumberUtil.str((this.panelTop = panelTop))?.concat('px'));
+      }
 
       // Prepare and setting property 'translate-y'.
       if (panelHeight > 0) {
         // Define the "TranslateY" parameter to correctly open or close.
         const translateY: number = (isPanelOnTop ? 1 : -1) * NumberUtil.roundTo100((panelHeight - 0.6 * panelHeight) / 2);
-        HtmlElemUtil.setProperty(containerRef, CSS_PROP_TRANSLATE_Y, NumberUtil.str(translateY)?.concat('px'));
+        if (this.translateY !== translateY) {
+          HtmlElemUtil.setProperty(containerRef, CSS_PROP_TRANSLATE_Y, NumberUtil.str((this.translateY = translateY))?.concat('px'));
+        }
       }
     }
   }

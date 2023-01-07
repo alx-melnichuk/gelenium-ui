@@ -3,8 +3,8 @@
     class="glnac-container"
     #container
     glnAutocompletePanel
-    (glnAutocompletePanelAttached)="containerResize(container, getTriggerRect(), getHostRect())"
-    (glnAutocompletePanelResize)="containerResize(container, getTriggerRect(), getHostRect())"
+    (glnAutocompletePanelAttached)="containerAttached(container, getTriggerRect(), getHostRect(), optionHeight);"
+    (glnAutocompletePanelResize)="containerResize(container, getTriggerRect(), getHostRect(), optionHeight)"
     (mousedown)="isContainerMousedown = true"
     (mouseup)="isContainerMousedown = false">
     <div glnac-wrap
