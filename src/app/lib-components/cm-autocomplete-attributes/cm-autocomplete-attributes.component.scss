@@ -1,0 +1,30 @@
+/*# sourceURL=cm-autocomplete-attributes.component.scss */
+
+app-cm-autocomplete-attributes {
+  display: block;
+
+  // Block "attributes-supported01"
+	.aca-middle {
+    width: 160px;
+	}
+
+  // Block "attributes-supported02"
+	.aca-medium {
+    width: 160px;
+	}
+
+  .aca-panel-color {
+    color: blue;
+    background-color: honeydew;
+  }
+
+  // Block "attributes-supported03"
+	.aca-normal {
+    width: 160px;
+	}
+
+  // Block "attributes-supported04"
+  .aca-elem {
+    width: 170px;
+  }
+}

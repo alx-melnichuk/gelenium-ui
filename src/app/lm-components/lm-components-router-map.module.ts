@@ -12,6 +12,8 @@ RouterConfig.add('URL_COMPONENTS_AUTOCOMPLETE', 'autocomplete');
 const urlAutocomplete = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_AUTOCOMPLETE');
 const siteUrlsAutocomplete: SiteUrl[] = [
   { label: 'Basic', url: urlAutocomplete, fragment: 'Basic' },
+  { label: 'Attributes', url: urlAutocomplete, fragment: 'Attributes' },
+  { label: 'Asynchrony', url: urlAutocomplete, fragment: 'Asynchrony' },
   { label: 'Api', url: urlAutocomplete, fragment: 'Api' },
 ];
 SiteMenuUtil.addItem('Components', 'Autocomplete', { label: 'Autocomplete', siteUrls: siteUrlsAutocomplete });

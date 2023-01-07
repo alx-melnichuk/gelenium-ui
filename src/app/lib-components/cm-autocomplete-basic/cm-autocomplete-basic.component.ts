@@ -62,26 +62,6 @@ export class CmAutocompleteBasicComponent {
     'african cherry orange', 'succulent watermelon'
   ];
 
-  // Block "attributes-supported01"
-  public exterior02b = 'outlined';
-  public control02b = {
-    model02a: new FormControl(null, []),
-    model02b: new FormControl(null, []),
-    model02c: new FormControl(null, []),
-    model02d: new FormControl(null, []),
-  };
-  public formGroup02b: FormGroup = new FormGroup(this.control02b);
-
-  // Block "attributes-supported02"
-  public exterior02c = 'outlined';
-  public control02c = {
-    model02f: new FormControl(null, []),
-    model02g: new FormControl(null, []),
-    model02h: new FormControl(null, []),
-    model02i: new FormControl(null, []),
-  };
-  public formGroup02c: FormGroup = new FormGroup(this.control02c);
-
   // prettier-ignore
   public fruits = [
     'apple'     , 'apricot'  , 'avocado'   , 'banana'    , 'black currant',
@@ -96,56 +76,6 @@ export class CmAutocompleteBasicComponent {
     'quince'    , 'raspberry', 'red currant', 'sapodilla', 'satsuma'      ,
     'strawberry','sweet lemon', 'tamarind' , 'tangerine' , 'watermelon'
   ];
-
-  // Block "attributes-supported03"
-  public exterior02d = 'outlined';
-
-  public control02d = {
-    model02k: new FormControl(null, []),
-    model02l: new FormControl(null, []),
-    model02m: new FormControl(null, []),
-    model02n: new FormControl(null, []),
-  };
-
-  public formGroup02d: FormGroup = new FormGroup(this.control02d);
-
-  // attributes-supported04
-  public exterior02e = 'outlined';
-
-  public control02e = {
-    model02p: new FormControl(null, []),
-    model02q: new FormControl(null, []),
-    model02r: new FormControl(null, []),
-    model02s: new FormControl(null, []),
-    model02t: new FormControl(null, []),
-  };
-
-  public formGroup02e: FormGroup = new FormGroup(this.control02e);
-
-  // Block "Asynchrony"
-  public exterior03c = 'outlined';
-
-  public control03c = {
-    model03a: new FormControl(null, []),
-    model03b: new FormControl(null, []),
-  };
-
-  public formGroup03c: FormGroup = new FormGroup(this.control03c);
-  public value03a: string[] = [];
-  public value03b: string[] = [];
-
-  public exterior03d = 'outlined';
-
-  public control03d = {
-    model03c: new FormControl(null, []),
-    model03d: new FormControl(null, []),
-  };
-
-  public formGroup03d: FormGroup = new FormGroup(this.control03d);
-  public value03c$: Subject<string[] | null> = new BehaviorSubject<string[] | null>([]);
-  public value03c: Observable<string[] | null> = this.value03c$.asObservable();
-  public value03d$: Subject<string[] | null> = new BehaviorSubject<string[] | null>([]);
-  public value03d: Observable<string[] | null> = this.value03d$.asObservable();
 
   // Block "Feature"
   public urlCmSelect = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SELECT');
@@ -191,24 +121,6 @@ export class CmAutocompleteBasicComponent {
   }
 
   // Block "Feature"
-
-  public filtered(list: string[] | null, value: string | null): string[] {
-    const valueStr = (value || '').toLowerCase();
-    const res: string[] = (!!value && list?.filter((item) => item.toLowerCase().includes(valueStr))) || [];
-    console.log(`CMAB.filtered(${value}) res.length=${res.length}`); // #
-    return list?.filter((item) => item.toLowerCase().includes(valueStr)) || [];
-  }
-
-  public filteredAsyn(list: string[] | null, value: string | null, result$: Subject<string[] | null>): void {
-    const this2 = this;
-    result$.next(null);
-    console.log(`CMAB.filteredAsyn(${value}) Loading: true`); // #
-    setTimeout(() => {
-      const result: string[] = this2.filtered(list, value);
-      console.log(`CMAB.filteredAsyn("${value}")=${result.length}  Loading: false`); // #
-      result$.next(result);
-    }, 700);
-  }
 
   // Block "Feature" only
   public filtered2(list: string[] | null, value: string | null): string[] {

@@ -7,10 +7,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { GlnAutocompleteModule, GlnInputModule, GlnOptionModule } from 'gelenium-ui';
 
-import { CmAutocompleteBasicComponent } from './cm-autocomplete-basic.component';
+import { CmAutocompleteAttributesComponent } from './cm-autocomplete-attributes.component';
 
 @NgModule({
-  declarations: [CmAutocompleteBasicComponent],
+  declarations: [CmAutocompleteAttributesComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -21,6 +21,6 @@ import { CmAutocompleteBasicComponent } from './cm-autocomplete-basic.component'
     GlnInputModule,
     GlnOptionModule,
   ],
-  exports: [CmAutocompleteBasicComponent],
+  exports: [CmAutocompleteAttributesComponent],
 })
-export class CmAutocompleteBasicModule {}
+export class CmAutocompleteAttributesModule {}

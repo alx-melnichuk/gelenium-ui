@@ -43,30 +43,21 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
   </p>
 </section>
 
-<form *ngIf="true"
-  [formGroup]="formGroup01"
+<form [formGroup]="formGroup01"
   novalidate
   autocomplete="off">
 
   <div class="app-group">
 
     <div class="app-elem">
-      <div mb0>
-        <small><em>exterior: Outlined</em></small>
-      </div>
       <div>
-        <small>
-          <em>
-            Model: {{ control01.model01a.value }}
-          </em>
-        </small>
+        <small><em>exterior: Outlined</em></small>
       </div>
       <gln-input formControlName="model01a"
         label="Enter value"
         exterior="outlined"
         wdFull
-        [glnAutocompleteTrigger]="autocomplete01a"
-        autoComplete="off">
+        [glnAutocompleteTrigger]="autocomplete01a">
       </gln-input>
       <gln-autocomplete #autocomplete01a="glnAutocomplete">
         <gln-option value="mango">Mango</gln-option>
@@ -77,23 +68,15 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
     </div>
 
     <div class="app-elem">
-      <div mb0>
-        <small><em>exterior: Underline</em></small>
-      </div>
       <div>
-        <small>
-          <em>
-            Model: {{ control01.model01b.value }}
-          </em>
-        </small>
+        <small><em>exterior: Underline</em></small>
       </div>
       <div style="display: inline;">
         <gln-input formControlName="model01b"
           label="Enter value"
           exterior="underline"
           wdFull
-          [glnAutocompleteTrigger]="autocomplete01b"
-          autoComplete="off">
+          [glnAutocompleteTrigger]="autocomplete01b">
         </gln-input>
         <gln-autocomplete #autocomplete01b="glnAutocomplete">
           <gln-option value="mango">Mango</gln-option>
@@ -105,22 +88,14 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
     </div>
 
     <div class="app-elem">
-      <div mb0>
-        <small><em>exterior: Standard</em></small>
-      </div>
       <div>
-        <small>
-          <em>
-            Model: {{ control01.model01c.value }}
-          </em>
-        </small>
+        <small><em>exterior: Standard</em></small>
       </div>
       <gln-input formControlName="model01c"
         label="Enter value"
         exterior="standard"
         wdFull
-        [glnAutocompleteTrigger]="autocomplete01c"
-        autoComplete="off">
+        [glnAutocompleteTrigger]="autocomplete01c">
       </gln-input>
       <gln-autocomplete #autocomplete01c="glnAutocomplete">
         <gln-option value="mango">Mango</gln-option>
@@ -131,21 +106,13 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
     </div>
 
     <div class="app-elem">
-      <div mb0>
-        <small><em>Native "input" element</em></small>
-      </div>
       <div>
-        <small>
-          <em>
-            Model: {{ control01.model01d.value }}
-          </em>
-        </small>
+        <small><em>Native "input" element</em></small>
       </div>
       <input type="text"
         class="acb-input"
         formControlName="model01d"
-        [glnAutocompleteTrigger]="autocomplete01d"
-        autocomplete="off" />
+        [glnAutocompleteTrigger]="autocomplete01d" />
       <gln-autocomplete #autocomplete01d="glnAutocomplete">
         <gln-option value="mango">Mango</gln-option>
         <gln-option value="lemon">Lemon</gln-option>
@@ -158,972 +125,171 @@ import &#123; GlnInputModule &#125; from 'gelenium-ui';</pre>
 
 </form>
 
-<!-- section mr-vr
-  mat-accordion -->
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;exterior: Outlined&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01a"
+        label="Enter value"
+        exterior="outlined"
+        wdFull
+        [glnAutocompleteTrigger]="autocomplete01a"&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete01a="glnAutocomplete"&gt;
+        &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
+        &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
+        &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
+        &lt;gln-option value="kiwi"&gt;Kiwi&lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;exterior: Underline&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div style="display: inline;"&gt;
+        &lt;gln-input formControlName="model01b"
+          label="Enter value"
+          exterior="underline"
+          wdFull
+          [glnAutocompleteTrigger]="autocomplete01b"&gt;
+        &lt;/gln-input&gt;
+        &lt;gln-autocomplete #autocomplete01b="glnAutocomplete"&gt;
+          &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
+          &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
+          &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
+          &lt;gln-option value="kiwi"&gt;Kiwi&lt;/gln-option&gt;
+        &lt;/gln-autocomplete&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;exterior: Standard&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model01c"
+        label="Enter value"
+        exterior="standard"
+        wdFull
+        [glnAutocompleteTrigger]="autocomplete01c"&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete01c="glnAutocomplete"&gt;
+        &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
+        &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
+        &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
+        &lt;gln-option value="kiwi"&gt;Kiwi&lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Native "input" element&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;input type="text"
+        class="acb-input"
+        formControlName="model01d"
+        [glnAutocompleteTrigger]="autocomplete01d" /&gt;
+      &lt;gln-autocomplete #autocomplete01d="glnAutocomplete"&gt;
+        &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
+        &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
+        &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
+        &lt;gln-option value="kiwi"&gt;Kiwi&lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormGroup, FormControl 
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-autocomplete',
+  templateUrl: './autocomplete.component.html',
+  styleUrls: ['./autocomplete.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class AutocompleteComponent &#123;
+
+  public control01 = &#123;
+    model01a: new FormControl(null, []),
+    model01b: new FormControl(null, []),
+    model01c: new FormControl(null, []),
+    model01d: new FormControl(null, []),
+  &#125;;
+  public formGroup01: FormGroup = new FormGroup(this.control01);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-autocomplete &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .acb-input &#123;
+    font-size: 1em;
+    line-height: 2em;
+    margin-top: 1em;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
 
 <hr br-nn />
 
 
 
 <!-- attributes-supported01 - start -->
-<section *ngIf="true"
-  mr-vr>
-  <h3 class="app-hover-link">
-    Attributes.
-    <a [href]="urlCmAutocomplete + '#Attributes'">#</a>
-  </h3>
-  <h4 class="app-hover-link"
-    id="attributes-supported01">
-    The following attributes are supported 1:
-    <a [href]="urlCmAutocomplete + '#attributes-supported01'">#</a>
-  </h4>
-
-  <ul>
-    <li>
-      "id" - parameter for defining the unique identifier of the field
-      (id="unique_identifier");
-    </li>
-    <li>
-      "config" - Defines a configuration object.
-      <a [href]="urlCmAutocomplete + '#config-interface'">More details.</a>
-    </li>
-    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
-    <li>
-      "position" - Defines horizontal positioning.
-      It can take the following values:
-      <ul>
-        <li>"start" - positioned at the left edge (default);</li>
-        <li>"center" - positioned in the middle;</li>
-        <li>"end" - positioned on the right edge;</li>
-      </ul>
-    </li>
-  </ul>
-</section>
-
-<section *ngIf="true"
-  mr-vr>
-  <span>exterior: </span>
-  <mat-button-toggle-group value="exterior02b"
-    (change)="exterior02b=$event.value">
-    <mat-button-toggle [checked]="exterior02b==='outlined'"
-      value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02b==='underline'"
-      value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02b==='standard'"
-      value="standard">{{ labelStandard }}</mat-button-toggle>
-  </mat-button-toggle-group>
-</section>
-
-<form *ngIf="true"
-  [formGroup]="formGroup02b">
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: id, position='start' (default).</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02a"
-        class="aca-middle"
-        label="Fruit"
-        [exterior]="exterior02b"
-        [glnAutocompleteTrigger]="autocomplete02a"
-        autoComplete="off"
-        helperText="Used: id, position.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02a="glnAutocomplete"
-        id="unique_id_autocomplete02a"
-        position="start">
-        <gln-option *ngFor="let item of fruitsB"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: position='center'.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02b"
-        class="aca-middle"
-        label="Fruit"
-        [exterior]="exterior02b"
-        [glnAutocompleteTrigger]="autocomplete02b"
-        autoComplete="off"
-        helperText="Used: position='center'.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02b="glnAutocomplete"
-        position="center">
-        <gln-option *ngFor="let item of fruitsB"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: position='end'.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02c"
-        class="aca-middle"
-        label="Fruit"
-        [exterior]="exterior02b"
-        [glnAutocompleteTrigger]="autocomplete02c"
-        autoComplete="off"
-        helperText="Used: position='end'.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02c="glnAutocomplete"
-        position="end">
-        <gln-option *ngFor="let item of fruitsB"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isDisabled.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02d"
-        class="aca-middle"
-        label="Fruit"
-        [exterior]="exterior02b"
-        [glnAutocompleteTrigger]="autocomplete02d"
-        autoComplete="off"
-        helperText="Used: isDisabled.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02d="glnAutocomplete"
-        isDisabled>
-        <gln-option *ngFor="let item of fruitsB"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-  </div>
-</form>
-
-<!-- section mr-vr
-  mat-accordion -->
-
-<hr br-nn />
 <!-- attributes-supported01 - finish -->
 
 
 
 <!-- attributes-supported02 - start -->
-<section *ngIf="true"
-  mr-vr
-  id="attributes-supported02">
-  <h4 class="app-hover-link">
-    Attributes are also supported 2:
-    <a [href]="urlCmAutocomplete + '#attributes-supported02'">#</a>
-  </h4>
-  <ul>
-    <li>
-      "isMaxWd" - set the maximum width when expanding the dropdown list of options.
-      <br />
-      Without this setting, the maximum width of the options panel is determined by its
-      content.
-      <br />
-      The value of the minimum width of the options panel is always equal to the width
-      of the parent.
-    </li>
-    <li>
-      css: '--glnac-min-width: 180px;' - defines the minimum width of the option list
-      dropdown list of options.
-    </li>
-    <li>
-      css: '--glnac-max-width: 180px;' - defines the maximum width of the option list
-      dropdown list of options.
-    </li>
-    <li>
-      "panelClass" - set the classes to be applied to the options panel.
-      Supports the same syntax as 'ngClass'.
-    </li>
-  </ul>
-</section>
-
-<section *ngIf="true"
-  mr-vr>
-  <span>exterior: </span>
-  <mat-button-toggle-group value="exterior02c"
-    (change)="exterior02c=$event.value">
-    <mat-button-toggle [checked]="exterior02c==='outlined'"
-      value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02c==='underline'"
-      value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02c==='standard'"
-      value="standard">{{ labelStandard }}</mat-button-toggle>
-  </mat-button-toggle-group>
-</section>
-
-<form *ngIf="true"
-  [formGroup]="formGroup02c"
-  novalidate
-  autocomplete="off">
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: without isMaxWd.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02f"
-        class="aca-middle"
-        label="Fruit"
-        [exterior]="exterior02c"
-        [glnAutocompleteTrigger]="autocomplete02f"
-        autoComplete="off"
-        helperText="Not used: isMaxWd.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02f="glnAutocomplete">
-        <gln-option *ngFor="let item of fruitsB"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: with isMaxWd.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02g"
-        class="aca-middle"
-        label="Fruit"
-        [exterior]="exterior02c"
-        [glnAutocompleteTrigger]="autocomplete02g"
-        autoComplete="off"
-        helperText="Used: isMaxWd.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02g="glnAutocomplete"
-        isMaxWd>
-        <gln-option *ngFor="let item of fruitsB"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: '--glnac-max-width: 185px;'.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02h"
-        style="width: 161px;"
-        label="Fruit"
-        [exterior]="exterior02c"
-        [glnAutocompleteTrigger]="autocomplete02h"
-        autoComplete="off"
-        helperText="Used: --glnac-max-width: 185px.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02h="glnAutocomplete"
-        style="--glnac-max-width: 185px;">
-        <gln-option *ngFor="let item of fruitsB"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: panelClass.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02i"
-        class="aca-middle"
-        label="Fruit"
-        [exterior]="exterior02c"
-        [glnAutocompleteTrigger]="autocomplete02i"
-        autoComplete="off"
-        helperText="Used: panelClass.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02i="glnAutocomplete"
-        panelClass="aca-panel-color">
-        <gln-option *ngFor="let item of fruitsB"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-  </div>
-</form>
-
-<!-- section mr-vr
-  mat-accordion -->
-
-<hr br-nn />
 <!-- attributes-supported02 - finish -->
 
 
 
 <!-- attributes-supported03 - start -->
-<section *ngIf="true"
-  mr-vr
-  id="attributes-supported03">
-  <h4 class="app-hover-link">
-    Attributes are also supported 3:
-    <a [href]="urlCmAutocomplete + '#attributes-supported03'">#</a>
-  </h4>
-  <ul>
-    <li>
-      "visibleSize" - sets the maximum number of visible option elements.
-      <br />
-      The options bar is set to <i>max-height = optionHeight * visibleSize</i>.
-      <br />
-      Where option height is <i>optionHeight = lineHeight + 2 * 0.375 * fontSize</i>;
-    </li>
-    <li>
-      css: '--glnac-max-height: 180px;' - defines the maximum height of the option
-      list dropdown list of options.
-    </li>
-    <li>
-      "isNoAnimation" - hide the display of animation when expanding the dropdown
-      list of options.
-    </li>
-    <li>
-      css: '--glnac-elevation: none;' - hide the display of shadow effects when
-      expanding the dropdown list of options.
-    </li>
-  </ul>
-</section>
-
-<section *ngIf="true"
-  mr-vr>
-  <span>exterior: </span>
-  <mat-button-toggle-group value="exterior02d"
-    (change)="exterior02d=$event.value">
-    <mat-button-toggle [checked]="exterior02d==='outlined'"
-      value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02d==='underline'"
-      value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02d==='standard'"
-      value="standard">{{ labelStandard }}</mat-button-toggle>
-  </mat-button-toggle-group>
-</section>
-
-<form *ngIf="true"
-  [formGroup]="formGroup02d"
-  novalidate
-  autocomplete="off">
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: visibleSize=6.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02k"
-        style="width: 161px;"
-        label="Fruit"
-        [exterior]="exterior02d"
-        [glnAutocompleteTrigger]="autocomplete02k"
-        autoComplete="off"
-        helperText="Used: visibleSize=6.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02k="glnAutocomplete"
-        [visibleSize]="6">
-        <gln-option *ngFor="let item of fruits"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>css: '--glnac-max-height: 180px;'.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02l"
-        class="aca-middle"
-        label="Fruit"
-        [exterior]="exterior02d"
-        [glnAutocompleteTrigger]="autocomplete02l"
-        autoComplete="off"
-        helperText="Used: --glnac-max-height.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02l="glnAutocomplete"
-        style="--glnac-max-height: 180px;">
-        <gln-option *ngFor="let item of fruits"
-          [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isNoAnimation.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02m"
-        class="aca-middle"
-        label="Fruit"
-        [exterior]="exterior02d"
-        [glnAutocompleteTrigger]="autocomplete02m"
-        autoComplete="off"
-        helperText="Used: isNoAnimation.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02m="glnAutocomplete"
-        isNoAnimation>
-        <gln-option *ngFor="let item of fruitsB"
-          [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>css: '--glnac-elevation: none;'.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02n"
-        class="aca-middle"
-        label="Fruit"
-        [exterior]="exterior02d"
-        [glnAutocompleteTrigger]="autocomplete02n"
-        autoComplete="off"
-        helperText="Used: --glnac-elevation.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02n="glnAutocomplete"
-        style="--glnac-elevation: none;">
-        <gln-option *ngFor="let item of fruitsB"
-          [value]="item">{{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-  </div>
-</form>
-<!-- section mr-vr
-  mat-accordion -->
-
-<hr br-nn />
 <!-- attributes-supported03 - finish -->
 
 
 
 <!-- attributes-supported04 - start -->
-<section *ngIf="true"
-  mr-vr
-  id="attributes-supported04">
-  <h4 class="app-hover-link">
-    Attributes are also supported 4:
-    <a [href]="urlCmAutocomplete + '#attributes-supported04'">#</a>
-  </h4>
-  <ul>
-    <li>
-      "isClearOnEscape" - clear the input field when pressing 'Escape'.
-    </li>
-    <li>
-      "isNoCloseOnSelect" - the options panel will not close after an option is selected.
-    </li>
-    <li>
-      "isNoOpenOnMouse" - the options panel will not open/close on mouse click.
-    </li>
-    <li>
-      "isNoRipple" - Disables the ripple effect.
-    </li>
-    <li>
-      "isOpenOnFocus" - the options panel opens after receiving input focus.
-    </li>
-  </ul>
-</section>
-
-<section *ngIf="true"
-  mr-vr>
-  <span>exterior: </span>
-  <mat-button-toggle-group value="exterior02e"
-    (change)="exterior02e=$event.value">
-    <mat-button-toggle [checked]="exterior02e==='outlined'"
-      value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02e==='underline'"
-      value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02e==='standard'"
-      value="standard">{{ labelStandard }}</mat-button-toggle>
-  </mat-button-toggle-group>
-</section>
-
-<form *ngIf="true"
-  [formGroup]="formGroup02e"
-  novalidate
-  autocomplete="off">
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isClearOnEscape.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02p"
-        class="aca-elem"
-        label="Fruit"
-        [exterior]="exterior02e"
-        [glnAutocompleteTrigger]="autocomplete02p"
-        autoComplete="off"
-        helperText="Used: isClearOnEscape.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02p="glnAutocomplete"
-        [visibleSize]="6"
-        isClearOnEscape>
-        <gln-option *ngFor="let item of fruits"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isNoCloseOnSelect.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02q"
-        class="aca-elem"
-        label="Fruit"
-        [exterior]="exterior02e"
-        [glnAutocompleteTrigger]="autocomplete02q"
-        autoComplete="off"
-        helperText="Used: isNoCloseOnSelect.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02q="glnAutocomplete"
-        [visibleSize]="6"
-        isNoCloseOnSelect>
-        <gln-option *ngFor="let item of fruits"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isNoOpenOnMouse.</em>(open:&#11014;,&#11015;)
-        </small>
-      </div>
-      <gln-input formControlName="model02r"
-        class="aca-elem"
-        label="Fruit"
-        [exterior]="exterior02e"
-        [glnAutocompleteTrigger]="autocomplete02r"
-        autoComplete="off"
-        helperText="Used: isNoOpenOnMouse.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02r="glnAutocomplete"
-        [visibleSize]="6"
-        isNoOpenOnMouse>
-        <gln-option *ngFor="let item of fruits"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isNoRipple, isNoCloseOnSelect.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02s"
-        class="aca-elem"
-        label="Fruit"
-        [exterior]="exterior02e"
-        [glnAutocompleteTrigger]="autocomplete02s"
-        autoComplete="off"
-        helperText="Used: isNoRipple.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02s="glnAutocomplete"
-        [visibleSize]="6"
-        isNoCloseOnSelect
-        isNoRipple>
-        <gln-option *ngFor="let item of fruits"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: isOpenOnFocus.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model02t"
-        class="aca-elem"
-        label="Fruit"
-        [exterior]="exterior02e"
-        [glnAutocompleteTrigger]="autocomplete02t"
-        autoComplete="off"
-        helperText="Used: isOpenOnFocus.">
-      </gln-input>
-      <gln-autocomplete #autocomplete02t="glnAutocomplete"
-        [visibleSize]="6"
-        isOpenOnFocus>
-        <gln-option *ngFor="let item of fruits"
-          [value]="item">
-          {{ capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-  </div>
-</form>
-<!-- section mr-vr
-  mat-accordion -->
-
-<hr br-nn />
 <!-- attributes-supported04 - finish -->
 
 
 
 <!-- Asynchrony - start -->
-<section mr-vr>
-  <h3 class="app-hover-link">
-    Asynchrony
-    <a [href]="urlCmAutocomplete + '#Asynchrony'">#</a>
-  </h3>
-</section>
-
-<section mr-vr
-  id="asynchrony-01">
-  <h4 class="app-hover-link">
-    Synchronous processing:
-    <a [href]="urlCmAutocomplete + '#asynchrony-01'">#</a>
-  </h4>
-  <p>
-    The GlnAutocomplete component displays a list of options on its panel.
-    We can react to a change in the value in the input line and change the list of options.
-    This will display, in the list of options, only the current values.
-  </p>
-  <p>
-    For a synchronous update, let's define a method for handling the "input" event in the input
-    line.
-    This method fires when the user enters new values.
-    And in this method we will call the function of filtering the entire list of options
-    by the value entered in the input line.
-  </p>
-  <span>For example, this template:</span>
-  <code><pre source="html">
-&lt;gln-input formControlName="model03a"
-  [glnAutocompleteTrigger]="autocomplete03a"
-  (input)="value03a = filtered(fruits, control03c.model03a.value)"&gt;
-&lt;/gln-input&gt;
-&lt;gln-autocomplete #autocomplete03a="glnAutocomplete"
-  [visibleSize]="5"&gt;
-  &lt;gln-option *ngFor="let item of value03a"
-    [value]="item"&gt;
-    <b>&#123;</b>&#123; item &#125;&#125;
-  &lt;/gln-option&gt;
-&lt;/gln-autocomplete&gt;</pre></code>
-  <br />
-  <span>For example, this component:</span>
-  <code><pre source="ts">
-export class AutocompleteComponent &#123;
-
-  public control03c = &#123;
-    model03a: new FormControl(null, []),
-  &#125;;
-
-  public formGroup03c: FormGroup = new FormGroup(this.control03c);
-  public value03a: string[] = [];
-
-  public filtered(list: string[] | null, value: string | null): string[] &#123;
-    const valueStr = (value || '').toLowerCase();
-    return list?.filter((item) => item.toLowerCase().includes(valueStr)) || [];
-  &#125;
-&#125;</pre></code>
-</section>
-
-<section mr-vr
-  id="asynchrony-01-example">
-  <h4 class="app-hover-link">
-    Let's look at an example 1:
-    <a [href]="urlCmAutocomplete + '#asynchrony-01-example'">#</a>
-  </h4>
-</section>
-
-<section mr-vr>
-  <span>exterior: </span>
-  <mat-button-toggle-group value="exterior03c"
-    (change)="exterior03c=$event.value">
-    <mat-button-toggle [checked]="exterior03c==='outlined'"
-      value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior03c==='underline'"
-      value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior03c==='standard'"
-      value="standard">{{ labelStandard }}</mat-button-toggle>
-  </mat-button-toggle-group>
-</section>
-
-<form *ngIf="true"
-  [formGroup]="formGroup03c"
-  novalidate
-  autocomplete="off">
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Synchronous mode for GlnInput.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model03a"
-        class="acs-middle"
-        label="Fruit"
-        [exterior]="exterior03c"
-        [glnAutocompleteTrigger]="autocomplete03a"
-        helperText="Used: visibleSize=5."
-        (input)="value03a = filtered(fruits, control03c.model03a.value)">
-      </gln-input>
-      <gln-autocomplete #autocomplete03a="glnAutocomplete"
-        [visibleSize]="5">
-        <gln-option *ngFor="let item of value03a"
-          [value]="item">
-          {{ 'fruit - ' + capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div mb0>
-        <small>
-          <em>Synchronous mode for native "input".</em>
-        </small>
-      </div>
-      <input type="text"
-        class="acs-input acs-middle"
-        formControlName="model03b"
-        [glnAutocompleteTrigger]="autocomplete03b"
-        (input)="value03b = filtered(fruits, control03c.model03b.value)"
-        autocomplete="off" />
-      <gln-autocomplete #autocomplete03b="glnAutocomplete"
-        [visibleSize]="5">
-        <gln-option *ngFor="let item of value03b"
-          [value]="item">
-          {{ 'fruit - ' + capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-  </div>
-</form>
-
-<section mr-vr
-  id="asynchrony-02">
-  <h4 class="app-hover-link">
-    Asynchronous processing:
-    <a [href]="urlCmAutocomplete + '#asynchrony-02'">#</a>
-  </h4>
-  <p>
-    For an asynchronous update, we do the same, only the filtering function will be asynchronous.
-  </p>
-  <p>
-    In asynchronous mode, the list of options is formed for some time.
-    Only after the subscription to changes in the list of options has been triggered, you can open
-    the options panel.
-  </p>
-  <p>
-    When performing an asynchronous load, the panel does not open and it is not clear to the
-    user what is currently running.
-  </p>
-  <p>
-    We want to display the sign of data loading with the string: "Loading...".
-    In order for the panel to open, let's add one option and along with it add the
-    "&lt;div&gt;Loading...&lt;/div&gt;" block.
-  </p>
-  <p>
-    Now, at the time of loading, a panel with the line "Loading ..." will be displayed.
-    And so that the option that we added above is not visible, we indicate to it "display: none;".
-  </p>
-  <span>For example, this template:</span>
-  <code><pre source="html">
-&lt;gln-input formControlName="model03c"
-  [glnAutocompleteTrigger]="autocomplete03c"
-  (input)="filteredAsyn(fruits, control03d.model03c.value, value03c$);"&gt;
-  &lt;span *ngIf="(value03c | async) == null"
-    gln-orn-rg
-    class="acs-spinner-sun-rays"&gt;
-  &lt;/span&gt;
-&lt;/gln-input&gt;
-&lt;gln-autocomplete #autocomplete03c="glnAutocomplete"
-  [visibleSize]="6"&gt;
-  &lt;ng-container *ngIf="(value03c | async) == null"&gt;
-    &lt;gln-option style="display: none;"&gt;
-    &lt;/gln-option&gt;
-    &lt;div style="padding: 10px 10px;"&gt;
-      Loading...
-    &lt;/div&gt;
-  &lt;/ng-container&gt;
-  &lt;gln-option *ngFor="let item of value03c | async"
-    [value]="item"&gt;
-    <b>&#123;</b>&#123; item &#125;&#125;
-  &lt;/gln-option&gt;
-&lt;/gln-autocomplete&gt;</pre></code>
-  <br />
-  <span>For example, this component:</span>
-  <code><pre source="ts">
-export class AutocompleteComponent &#123;
-
-  public control03d = &#123;
-    model03c: new FormControl(null, []),
-    &#125;;
-
-  public formGroup03d: FormGroup = new FormGroup(this.control03d);
-  public value03c$: Subject&lt;string[] | null&gt;
-    = new BehaviorSubject&lt;string[] | null&gt;([]);
-  public value03c: Observable&lt;string[] | null&gt;
-    = this.value03c$.asObservable();
-
-  public filtered(list: string[] | null, value: string | null): string[] &#123;
-    const valueStr = (value || '').toLowerCase();
-    return list?.filter((item) => item.toLowerCase().includes(valueStr)) || [];
-  &#125;
-  public filteredAsyn(
-    list: string[] | null,
-    value: string | null,
-    result$: Subject&lt;string[] | null&gt;
-  ): void &#123;
-    const this2 = this;
-    result$.next(null); // The null indicates that the data is being loaded.
-    setTimeout(() => &#123;
-      result$.next(this2.filtered(list, value));
-    &#125;, 700);
-  &#125;
-&#125;</pre></code>
-</section>
-
-<section mr-vr
-  id="asynchrony-02-example">
-  <h4 class="app-hover-link">
-    Let's look at an example 2:
-    <a [href]="urlCmAutocomplete + '#asynchrony-02-example'">#</a>
-  </h4>
-</section>
-
-<section mr-vr>
-  <span>exterior: </span>
-  <mat-button-toggle-group value="exterior03d"
-    (change)="exterior03d=$event.value">
-    <mat-button-toggle [checked]="exterior03d==='outlined'"
-      value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior03d==='underline'"
-      value="underline">{{ labelUnderline }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior03d==='standard'"
-      value="standard">{{ labelStandard }}</mat-button-toggle>
-  </mat-button-toggle-group>
-</section>
-
-<form *ngIf="true"
-  [formGroup]="formGroup03d"
-  novalidate
-  autocomplete="off">
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Asynchronous mode for GlnInput.</em>
-        </small>
-      </div>
-      <gln-input formControlName="model03c"
-        style="width: 161px;"
-        label="Fruit"
-        [exterior]="exterior03d"
-        [glnAutocompleteTrigger]="autocomplete03c"
-        helperText="Used: visibleSize=6."
-        (input)="filteredAsyn(fruits, control03d.model03c.value, value03c$);">
-        <span *ngIf="(value03c | async) == null"
-          gln-orn-rg
-          class="acs-spinner-sun-rays">
-        </span>
-      </gln-input>
-      <gln-autocomplete #autocomplete03c="glnAutocomplete"
-        [visibleSize]="6">
-        <ng-container *ngIf="(value03c | async) == null">
-          <gln-option style="display: none;">
-          </gln-option>
-          <div style="padding: 10px 10px;">
-            Loading...
-          </div>
-        </ng-container>
-        <gln-option *ngFor="let item of value03c | async"
-          [value]="item">
-          {{ 'fruit - ' + capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-    <div class="app-elem">
-      <div mb0>
-        <small>
-          <em>Asynchronous mode for native "input".</em>
-        </small>
-      </div>
-      <input type="text"
-        style="width: 161px;"
-        class="acs-input"
-        formControlName="model03d"
-        [glnAutocompleteTrigger]="autocomplete03d"
-        (input)="filteredAsyn(fruits, control03d.model03d.value, value03d$);"
-        autocomplete="off" />
-      <gln-autocomplete #autocomplete03d="glnAutocomplete"
-        [visibleSize]="6">
-        <ng-container *ngIf="(value03d | async) == null">
-          <gln-option style="display: none;">
-          </gln-option>
-          <div style="padding: 10px 10px;">
-            Loading...
-          </div>
-        </ng-container>
-        <gln-option *ngFor="let item of value03d | async"
-          [value]="item">
-          {{ 'fruit - ' + capitalizeFirstLetter(item) }}
-        </gln-option>
-      </gln-autocomplete>
-    </div>
-
-  </div>
-</form>
-
-<!-- section mr-vr
- mat-accordion -->
-
-<hr br-nn />
 <!-- Asynchrony - finish -->
 
 
@@ -1582,7 +748,7 @@ visibleSize=0</pre></code>
 
   <div class="app-group">
 
-    <div class="app-elem aca-middle">
+    <div class="app-elem">
       <div>
         <small>
           <em>Default: position: 'end', visibleSize: 8.</em>
@@ -1602,8 +768,7 @@ visibleSize=0</pre></code>
       </gln-autocomplete>
     </div>
 
-
-    <div class="app-elem aca-middle">
+    <div class="app-elem">
       <div>
         <small>
           <em>Params: position: 'center', visibleSize: 5.</em>
@@ -1625,8 +790,8 @@ visibleSize=0</pre></code>
       </gln-autocomplete>
     </div>
 
-
   </div>
+
 </form>
 <!-- section mr-vr
   mat-accordion -->
