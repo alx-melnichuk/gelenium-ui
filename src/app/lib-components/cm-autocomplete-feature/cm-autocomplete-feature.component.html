@@ -1,0 +1,448 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Feature
+    <a [href]="urlCmAutocomplete + '#Feature'">#</a>
+  </h3>
+  <p>
+    The GlnAutocomplete component has the functionality of opening a panel to select
+    available values.
+    This panel closes when the user selects the desired value.
+    Also, this panel is closed in case of loss of focus of the current input element.
+    It is possible to forcibly close all open panels of GlnAutocomplete components,
+    for example, when an emergency transition to another page occurs.
+  </p>
+  <p>
+    This situation is described in more detail in section
+    <a [href]="urlCmSelect + '#Feature'">Feature</a> for GlnSelect.
+  </p>
+</section>
+
+<section mr-vr
+  id="feature-close-all">
+  <h4 class="app-hover-link">
+    Usage example:
+    <a [href]="urlCmAutocomplete + '#feature-close-all'">#</a>
+  </h4>
+  <p>
+    1. set the scroll event handler for the parent component;
+  </p>
+  <code><pre source="html">
+&lt;div style="height: 100%; overflow-y: auto;"
+  (scroll)="<i><strong>doScroll()</strong></i>"&gt;
+  &lt;div class="main-side-content"&gt;
+
+    &lt;gln-input
+      [<strong>glnAutocompleteTrigger</strong>]="<i>autocomplete04</i>"&gt;
+    &lt;/gln-input&gt;
+    &lt;<strong>gln-autocomplete</strong> #<i>autocomplete04</i>="glnAutocomplete"&gt;
+      &lt;gln-option *ngFor="let item of value04" [value]="item"&gt;
+        <b>&#123;</b>&#123; item &#125;&#125;
+      &lt;/gln-option&gt;
+    &lt;/<strong>gln-autocomplete</strong>&gt;
+
+    &lt;gln-input
+      [<strong>glnAutocompleteTrigger</strong>]="<i>autocomplete05</i>"&gt;
+    &lt;/gln-input&gt;
+    &lt;<strong>gln-autocomplete</strong> #<i>autocomplete05</i>="glnAutocomplete"&gt;
+      &lt;gln-option *ngFor="let item of value05" [value]="item"&gt;
+        <b>&#123;</b>&#123; item &#125;&#125;
+      &lt;/gln-option&gt;
+    &lt;/<strong>gln-autocomplete</strong>&gt;
+
+    ...
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+  <br />
+  <code><pre source="ts">
+export class SiteComponent &#123;
+  public <i><strong>doScroll()</strong></i>: void &#123;
+    // Close the open GlnAutocomplete panel.
+    GlnAutocompleteOpenUtil.closeAll();
+  &#125;
+&#125;</pre></code>
+  <p>
+    2. close the open panel of the GlnAutocomplete component;
+  </p>
+  <p>
+    There is a static class GlnAutocompleteOpenUtil, which contains a list of all
+    GlnAutocomplete components with an open panel.
+    Calling the static method "closeAll()" will gracefully close all open panes.
+  </p>
+</section>
+
+<section mr-vr
+  id="feature-highlight">
+  <h4 class="app-hover-link">
+    Highlight
+    <a [href]="urlCmAutocomplete + '#feature-highlight'">#</a>
+  </h4>
+  <p>
+    Sometimes it is required to select a fragment of the input line in the list of
+    available values of the panel of the GlnAutocomplete component.
+    You can use the "GlnHighlight" channel for this purpose.
+  </p>
+  <p>
+    It is required to add the "GlnHighlight" channel in the component template and
+    pass the search value (input string value) as the first parameter to it.
+  </p>
+  <span>Template example:</span>
+  <code><pre source="html">
+&lt;gln-input formControlName="model05"
+  [<strong>glnAutocompleteTrigger</strong>]="<i><strong>autocomplete05</strong></i>"&gt;
+&lt;/gln-input&gt;
+&lt;<strong>gln-autocomplete</strong> #<i><strong>autocomplete05</strong></i>="glnAutocomplete"&gt;
+  &lt;gln-option *ngFor="let item of value05" [value]="item"&gt;
+    &lt;span
+      [innerHtml]="item | <strong>glnHighlight:</strong> control05.model05.value"&gt;
+    &lt;/span&gt;
+  &lt;/gln-option&gt;
+&lt;/<strong>gln-autocomplete</strong>&gt;</pre></code>
+</section>
+
+<form [formGroup]="formGroup06a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Highlight of the input line.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model06a"
+        class="acf-middle"
+        [glnAutocompleteTrigger]="autocomplete06a"
+        helperText="Used: glnHighlight."
+        (input)="value06a = filtered2(fruits, control06a.model06a.value)">
+      </gln-input>
+      <gln-autocomplete #autocomplete06a="glnAutocomplete"
+        [visibleSize]="5">
+        <gln-option *ngFor="let item of value06a"
+          [value]="item">
+          <span [innerHtml]="'fruit - ' + capitalizeFirstLetter(item)
+            | glnHighlight: control06a.model06a.value">
+          </span>
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup06a"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Highlight of the input line.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model06a"
+        class="acf-middle"
+        [glnAutocompleteTrigger]="autocomplete06a"
+        helperText="Used: glnHighlight."
+        (input)="value06a = filtered2(fruits, control06a.model06a.value)"&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete06a="glnAutocomplete"
+        [visibleSize]="5"&gt;
+        &lt;gln-option *ngFor="let item of value06a"
+          [value]="item"&gt;
+          &lt;span [innerHtml]="'fruit - ' + capitalizeFirstLetter(item)
+            | glnHighlight: control06a.model06a.value"&gt;
+          &lt;/span&gt;
+        &lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormGroup, FormControl 
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-autocomplete',
+  templateUrl: './autocomplete.component.html',
+  styleUrls: ['./autocomplete.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class AutocompleteComponent &#123;
+  // prettier-ignore
+  public fruits = [
+    'apple'     , 'apricot'  , 'avocado'   , 'banana'    , 'black currant',
+    'blackberry', 'blueberry', 'cherry'    , 'coconut'   , 'cranberry'    ,
+    'dragonfruit', 'fig'     , 'goji berry', 'grape'     , 'grapefruit'   ,
+    'grapes'    , 'guava'    , 'iwi'       , 'jackfruit' , 'jamun'        ,
+    'jujube'    , 'lemon'    , 'lime'      , 'longan'    , 'loquat'       ,
+    'lychee'    , 'mandarin' , 'mango'     , 'melon'     , 'mulberry'     ,
+    'nectarine' , 'kiwi'     , 'olive'     , 'orange'    , 'palm fruit'   ,
+    'papaya', 'passion fruit', 'peach'     , 'pear'      , 'persimmon'    ,
+    'pineapple' , 'plum'  , 'pomegranate', 'prickly pear', 'pumpkin'      ,
+    'quince'    , 'raspberry', 'red currant', 'sapodilla', 'satsuma'      ,
+    'strawberry','sweet lemon', 'tamarind' , 'tangerine' , 'watermelon'
+  ];
+
+  public control06a = &#123;
+    model06a: new FormControl('', []),
+  &#125;;
+  public formGroup06a: FormGroup = new FormGroup(this.control06a);
+  public value06a: string[] = [];
+
+  constructor() &#123;
+    this.control06a.model06a.setValue('red cur');
+    this.value06a = this.filtered2(
+      this.fruits, this.control06a.model06a.value);
+  &#125;
+
+  public capitalizeFirstLetter(value: string): string &#123;
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  &#125;
+
+  public filtered2(
+    list: string[] | null, value: string | null
+  ): string[] &#123;
+    const valueBuff = (value || '')
+      .toLowerCase()
+      .split(' ')
+      .filter((word) => word.length > 0);
+    return list?.filter((item) => valueBuff.some(
+      (item2) => item.toLowerCase().includes(item2))) || [];
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-autocomplete &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .acf-middle &#123;
+    width: 160px;
+	&#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="feature-highlight2">
+  <h4 class="app-hover-link">
+    Highlight for each word
+    <a [href]="urlCmAutocomplete + '#feature-highlight2'">#</a>
+  </h4>
+  <p>
+    The "GlnHighlight" channel has a second optional parameter "isSearchByAllWords".
+    If you specify this parameter, the search string will be split into separate fragments.
+    And these fragments will be highlighted.
+  </p>
+  <p>
+    The division into fragments is performed by the following symbols:
+  </p>
+  <code><pre>
+' ', '-', '[', ']', '/', '&#123;', '&#125;', '(', ')', '*', '+', '?', '.', '\', '^', '$', '|'
+  </pre></code>
+  <span>Template example:</span>
+  <code><pre source="html">
+&lt;gln-input formControlName="model05"
+  [<strong>glnAutocompleteTrigger</strong>]="<i><strong>autocomplete05</strong></i>"&gt;
+&lt;/gln-input&gt;
+&lt;<strong>gln-autocomplete</strong> #<i><strong>autocomplete05</strong></i>="glnAutocomplete"&gt;
+  &lt;gln-option *ngFor="let item of value05" [value]="item"&gt;
+    &lt;span
+      [innerHtml]="item | <strong>glnHighlight:</strong> control05.model05.value <strong>: true</strong>"&gt;
+    &lt;/span&gt;
+  &lt;/gln-option&gt;
+&lt;/<strong>gln-autocomplete</strong>&gt;</pre></code>
+</section>
+
+<form [formGroup]="formGroup06b"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Highlight of the input line.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model06b"
+        class="acf-middle"
+        [glnAutocompleteTrigger]="autocomplete06b"
+        helperText="Used: glnHighlight."
+        (input)="value06b = filtered2(fruits, control06b.model06b.value)"
+        autocomplete="off">
+      </gln-input>
+      <gln-autocomplete #autocomplete06b="glnAutocomplete"
+        [visibleSize]="5">
+        <gln-option *ngFor="let item of value06b"
+          [value]="item">
+          <span [innerHtml]="'fruit - ' + capitalizeFirstLetter(item)
+            | glnHighlight: control06b.model06b.value: true">
+          </span>
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup06b"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Highlight of the input line.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model06b"
+        class="acf-middle"
+        [glnAutocompleteTrigger]="autocomplete06b"
+        helperText="Used: glnHighlight."
+        (input)="value06b = filtered2(fruits, control06b.model06b.value)"
+        autocomplete="off"&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete06b="glnAutocomplete"
+        [visibleSize]="5"&gt;
+        &lt;gln-option *ngFor="let item of value06b"
+          [value]="item"&gt;
+          &lt;span [innerHtml]="'fruit - ' + capitalizeFirstLetter(item)
+            | glnHighlight: control06b.model06b.value: true"&gt;
+          &lt;/span&gt;
+        &lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormGroup, FormControl 
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-autocomplete',
+  templateUrl: './autocomplete.component.html',
+  styleUrls: ['./autocomplete.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class AutocompleteComponent &#123;
+  // prettier-ignore
+  public fruits = [
+    'apple'     , 'apricot'  , 'avocado'   , 'banana'    , 'black currant',
+    'blackberry', 'blueberry', 'cherry'    , 'coconut'   , 'cranberry'    ,
+    'dragonfruit', 'fig'     , 'goji berry', 'grape'     , 'grapefruit'   ,
+    'grapes'    , 'guava'    , 'iwi'       , 'jackfruit' , 'jamun'        ,
+    'jujube'    , 'lemon'    , 'lime'      , 'longan'    , 'loquat'       ,
+    'lychee'    , 'mandarin' , 'mango'     , 'melon'     , 'mulberry'     ,
+    'nectarine' , 'kiwi'     , 'olive'     , 'orange'    , 'palm fruit'   ,
+    'papaya', 'passion fruit', 'peach'     , 'pear'      , 'persimmon'    ,
+    'pineapple' , 'plum'  , 'pomegranate', 'prickly pear', 'pumpkin'      ,
+    'quince'    , 'raspberry', 'red currant', 'sapodilla', 'satsuma'      ,
+    'strawberry','sweet lemon', 'tamarind' , 'tangerine' , 'watermelon'
+  ];
+
+  public control06b = &#123;
+    model06b: new FormControl('', []),
+  &#125;;
+  public formGroup06b: FormGroup = new FormGroup(this.control06b);
+  public value06b: string[] = [];
+
+  constructor() &#123;
+    this.control06b.model06b.setValue('red cur');
+    this.value06b = this.filtered2(
+      this.fruits, this.control06b.model06b.value);
+  &#125;
+
+  public capitalizeFirstLetter(value: string): string &#123;
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  &#125;
+
+  public filtered2(
+    list: string[] | null, value: string | null
+  ): string[] &#123;
+    const valueBuff = (value || '')
+      .toLowerCase()
+      .split(' ')
+      .filter((word) => word.length > 0);
+    return list?.filter((item) => valueBuff.some(
+      (item2) => item.toLowerCase().includes(item2))) || [];
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-autocomplete &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .acf-middle &#123;
+    width: 160px;
+	&#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

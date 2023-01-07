@@ -1,7 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { GlnAutocomplete, GlnAutocompleteConfig, GLN_AUTOCOMPLETE_CONFIG } from 'gelenium-ui';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import {
@@ -14,21 +12,14 @@ import {
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
 
-const glnAutocompleteConfigDefault: GlnAutocompleteConfig = {
-  panelClass: ['acc-panel'],
-  position: 'end',
-  visibleSize: 8,
-};
-
 @Component({
-  selector: 'app-cm-autocomplete-basic',
-  templateUrl: './cm-autocomplete-basic.component.html',
-  styleUrls: ['./cm-autocomplete-basic.component.scss'],
+  selector: 'app-cm-autocomplete-feature',
+  templateUrl: './cm-autocomplete-feature.component.html',
+  styleUrls: ['./cm-autocomplete-feature.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // providers: [{ provide: GLN_AUTOCOMPLETE_CONFIG, useValue: glnAutocompleteConfigDefault }],
 })
-export class CmAutocompleteBasicComponent {
+export class CmAutocompleteFeatureComponent {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -45,22 +36,7 @@ export class CmAutocompleteBasicComponent {
   public labelCss = LABEL_CSS;
 
   public urlCmAutocomplete = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_AUTOCOMPLETE');
-
-  // Block "Basic".
-  public control01 = {
-    model01a: new FormControl(null, []),
-    model01b: new FormControl(null, []),
-    model01c: new FormControl(null, []),
-    model01d: new FormControl(null, []),
-  };
-  public formGroup01: FormGroup = new FormGroup(this.control01);
-
-  // Block "Attributes".
-  // prettier-ignore
-  public fruitsB = [
-    'mango', 'ripe lemon', 'gorgeous orange',
-    'african cherry orange', 'succulent watermelon'
-  ];
+  public urlCmSelect = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SELECT');
 
   // prettier-ignore
   public fruits = [
@@ -77,38 +53,36 @@ export class CmAutocompleteBasicComponent {
     'strawberry','sweet lemon', 'tamarind' , 'tangerine' , 'watermelon'
   ];
 
-  // Block "Config"
-  public control08a = {
-    model08a: new FormControl(null, []),
-    model08b: new FormControl(null, []),
+  public control06a = {
+    model06a: new FormControl('', []),
   };
-  public formGroup08a: FormGroup = new FormGroup(this.control08a);
+  public formGroup06a: FormGroup = new FormGroup(this.control06a);
+  public value06a: string[] = [];
 
-  //
-  // #old
-  //
-  public formGroup0: FormGroup = new FormGroup({
-    model0a: new FormControl('', []),
-  });
+  public control06b = {
+    model06b: new FormControl('', []),
+  };
+  public formGroup06b: FormGroup = new FormGroup(this.control06b);
+  public value06b: string[] = [];
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor() {
+    this.control06a.model06a.setValue('red cur');
+    this.value06a = this.filtered2(this.fruits, this.control06a.model06a.value);
 
-  // Block "Attributes".
+    this.control06b.model06b.setValue('red cur');
+    this.value06b = this.filtered2(this.fruits, this.control06b.model06b.value);
+  }
+
   public capitalizeFirstLetter(value: string): string {
     return value ? value[0].toUpperCase() + value.slice(1) : '';
   }
 
-  // Block "Feature"
-
-  // old
-
-  public log(text: string): void {
-    console.log(text);
-  }
-  public filter(text: string | null, buff: string[]): string[] {
-    console.log(`filter(${text})`);
-    const cnt: number = (text || '').length;
-    return buff.slice(0, cnt);
+  public filtered2(list: string[] | null, value: string | null): string[] {
+    const valueBuff = (value || '')
+      .toLowerCase()
+      .split(' ')
+      .filter((word) => word.length > 0);
+    return list?.filter((item) => valueBuff.some((item2) => item.toLowerCase().includes(item2))) || [];
   }
 }
