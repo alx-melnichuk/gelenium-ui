@@ -15,6 +15,7 @@ import {
 } from '../../lib-core/constants';
 
 const glnAutocompleteConfigDefault: GlnAutocompleteConfig = {
+  panelClass: ['acc-panel'],
   position: 'end',
   visibleSize: 8,
 };

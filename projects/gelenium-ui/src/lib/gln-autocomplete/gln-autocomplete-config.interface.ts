@@ -10,7 +10,7 @@ export interface GlnAutocompleteConfig {
   isNoRipple?: boolean | undefined;
   // The options panel opens after receiving input focus.
   isOpenOnFocus?: boolean | undefined;
-  position?: string | undefined; // Horizontal position = 'start'-default | 'center' | 'end';
   panelClass?: string | string[] | Set<string> | { [key: string]: unknown } | undefined;
+  position?: string | undefined; // Horizontal position = 'start'-default | 'center' | 'end';
   visibleSize?: number | undefined; // default 0
 }
