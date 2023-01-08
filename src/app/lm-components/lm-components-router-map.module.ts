@@ -15,6 +15,7 @@ const siteUrlsAutocomplete: SiteUrl[] = [
   { label: 'Attributes', url: urlAutocomplete, fragment: 'Attributes' },
   { label: 'Asynchrony', url: urlAutocomplete, fragment: 'Asynchrony' },
   { label: 'Feature', url: urlAutocomplete, fragment: 'Feature' },
+  { label: 'Config', url: urlAutocomplete, fragment: 'Config' },
   { label: 'Api', url: urlAutocomplete, fragment: 'Api' },
 ];
 SiteMenuUtil.addItem('Components', 'Autocomplete', { label: 'Autocomplete', siteUrls: siteUrlsAutocomplete });

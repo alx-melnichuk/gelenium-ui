@@ -55,60 +55,6 @@ export class CmAutocompleteBasicComponent {
   };
   public formGroup01: FormGroup = new FormGroup(this.control01);
 
-  // Block "Attributes".
-  // prettier-ignore
-  public fruitsB = [
-    'mango', 'ripe lemon', 'gorgeous orange',
-    'african cherry orange', 'succulent watermelon'
-  ];
-
-  // prettier-ignore
-  public fruits = [
-    'apple'     , 'apricot'  , 'avocado'   , 'banana'    , 'black currant',
-    'blackberry', 'blueberry', 'cherry'    , 'coconut'   , 'cranberry'    ,
-    'dragonfruit', 'fig'     , 'goji berry', 'grape'     , 'grapefruit'   ,
-    'grapes'    , 'guava'    , 'iwi'       , 'jackfruit' , 'jamun'        ,
-    'jujube'    , 'lemon'    , 'lime'      , 'longan'    , 'loquat'       ,
-    'lychee'    , 'mandarin' , 'mango'     , 'melon'     , 'mulberry'     ,
-    'nectarine' , 'kiwi'     , 'olive'     , 'orange'    , 'palm fruit'   ,
-    'papaya', 'passion fruit', 'peach'     , 'pear'      , 'persimmon'    ,
-    'pineapple' , 'plum'  , 'pomegranate', 'prickly pear', 'pumpkin'      ,
-    'quince'    , 'raspberry', 'red currant', 'sapodilla', 'satsuma'      ,
-    'strawberry','sweet lemon', 'tamarind' , 'tangerine' , 'watermelon'
-  ];
-
-  // Block "Config"
-  public control08a = {
-    model08a: new FormControl(null, []),
-    model08b: new FormControl(null, []),
-  };
-  public formGroup08a: FormGroup = new FormGroup(this.control08a);
-
-  //
-  // #old
-  //
-  public formGroup0: FormGroup = new FormGroup({
-    model0a: new FormControl('', []),
-  });
-
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
-
-  // Block "Attributes".
-  public capitalizeFirstLetter(value: string): string {
-    return value ? value[0].toUpperCase() + value.slice(1) : '';
-  }
-
-  // Block "Feature"
-
-  // old
-
-  public log(text: string): void {
-    console.log(text);
-  }
-  public filter(text: string | null, buff: string[]): string[] {
-    console.log(`filter(${text})`);
-    const cnt: number = (text || '').length;
-    return buff.slice(0, cnt);
-  }
 }
