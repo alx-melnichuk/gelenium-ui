@@ -943,13 +943,17 @@ app-autocomplete &#123;
       "isNoCloseOnSelect" - the options panel will not close after an option is selected.
     </li>
     <li>
-      "isNoOpenOnMouse" - the options panel will not open/close on mouse click.
-    </li>
-    <li>
       "isNoRipple" - Disables the ripple effect.
     </li>
     <li>
+      "isNoOpenOnMouse" - the options panel will not open/close on mouse click.
+    </li>
+    <li>
       "isOpenOnFocus" - the options panel opens after receiving input focus.
+    </li>
+    <li>
+      "css: font-size: 1.125em;" - You can change the font size for GlnAutocomplete
+      and that font size will be applied to the available options in the list.
     </li>
   </ul>
 </section>
@@ -999,18 +1003,19 @@ app-autocomplete &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: isNoCloseOnSelect.</em>
+          <em>Attribute: isNoCloseOnSelect, isNoRipple.</em>
         </small>
       </div>
       <gln-input formControlName="model02q"
-        class="aca-elem"
+        style="width: 192px;"
         label="Fruit"
         [exterior]="exterior02e"
         [glnAutocompleteTrigger]="autocomplete02q"
-        helperText="Used: isNoCloseOnSelect.">
+        helperText="isNoCloseOnSelect, isNoRipple">
       </gln-input>
       <gln-autocomplete #autocomplete02q="glnAutocomplete"
         [visibleSize]="6"
+        isNoRipple
         isNoCloseOnSelect>
         <gln-option *ngFor="let item of fruits"
           [value]="item">
@@ -1045,7 +1050,7 @@ app-autocomplete &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: isNoRipple, isNoCloseOnSelect.</em>
+          <em>Attribute: isOpenOnFocus.</em>
         </small>
       </div>
       <gln-input formControlName="model02s"
@@ -1053,12 +1058,11 @@ app-autocomplete &#123;
         label="Fruit"
         [exterior]="exterior02e"
         [glnAutocompleteTrigger]="autocomplete02s"
-        helperText="Used: isNoRipple.">
+        helperText="Used: isOpenOnFocus.">
       </gln-input>
       <gln-autocomplete #autocomplete02s="glnAutocomplete"
         [visibleSize]="6"
-        isNoCloseOnSelect
-        isNoRipple>
+        isOpenOnFocus>
         <gln-option *ngFor="let item of fruits"
           [value]="item">
           {{ capitalizeFirstLetter(item) }}
@@ -1069,7 +1073,7 @@ app-autocomplete &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: isOpenOnFocus.</em>
+          <em>css: font-size: 1.125em;</em>
         </small>
       </div>
       <gln-input formControlName="model02t"
@@ -1077,9 +1081,10 @@ app-autocomplete &#123;
         label="Fruit"
         [exterior]="exterior02e"
         [glnAutocompleteTrigger]="autocomplete02t"
-        helperText="Used: isOpenOnFocus.">
+        helperText="css: font-size: 1.125em;">
       </gln-input>
       <gln-autocomplete #autocomplete02t="glnAutocomplete"
+        style="font-size: 1.125em;"
         [visibleSize]="6"
         isOpenOnFocus>
         <gln-option *ngFor="let item of fruits"
