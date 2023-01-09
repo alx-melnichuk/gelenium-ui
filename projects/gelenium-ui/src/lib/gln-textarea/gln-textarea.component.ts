@@ -129,12 +129,7 @@ export class GlnTextareaComponent
   public frameComp!: GlnFrameComponent;
   @ViewChild('textareaElement', { static: true })
   public textareaElementRef!: ElementRef<HTMLElement>;
-  @ViewChild('wrapElementRef', { read: ElementRef<HTMLDivElement>, static: true })
-  public wrapElementRef!: ElementRef<HTMLDivElement>;
 
-  public get wrapHtmlElementRef(): ElementRef<HTMLElement> {
-    return this.wrapElementRef as ElementRef<HTMLElement>;
-  }
   public get exteriorVal(): GlnFrameExterior | null {
     return this.frameComp.exteriorVal;
   }
