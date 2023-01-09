@@ -43,6 +43,7 @@ gln-input {
 
     &[type="color" i] {
       box-sizing: content-box;
+      display: inline-flex;
     }
   }
 
