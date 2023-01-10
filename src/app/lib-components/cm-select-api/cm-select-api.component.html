@@ -23,12 +23,13 @@
 </section>
 
 <table class="app-tab">
-  <tbody>
+  <thead>
     <tr>
       <th class="app-mn-wd-22ch">Name</th>
       <th>Description</th>
     </tr>
-
+  </thead>
+  <tbody>
     <tr>
       <td>
         <code>@Input()</code>
@@ -121,7 +122,6 @@
         </span>
       </td>
     </tr>
-
     <tr>
       <td>
         <code>@Input()</code>
@@ -177,8 +177,8 @@
       </td>
       <td>
         <span>
-          Sign of multiple choice of options.
-          <br />Attribute (no content).
+          Sign of multiple choice of options.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -207,8 +207,8 @@
       </td>
       <td>
         <span>
-          Disable the display of the icon - the status of the state of the open list.
-          <br />Attribute (no content).
+          Disable the display of the icon - the status of the state of the open list.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -223,7 +223,7 @@
       <td>
         <span>
           Flag for disabling the ripple effect.<br />
-          Attribute (no content).
+          (default = false;) Attribute (no content).
         </span><br />
       </td>
     </tr>
@@ -366,12 +366,13 @@
         <code>panelClass: string<br/>
           &nbsp;&nbsp;| string[]<br/>
           &nbsp;&nbsp;| Set&lt;string&gt;<br/>
-          &nbsp;&nbsp;| &#123; [key: string]: any &#125;<br/>
+          &nbsp;&nbsp;| &#123; [key: string]: unknown &#125;<br/>
           = ''</code>
       </td>
       <td>
         <span>
-          Classes to be passed to the select panel. Supports the same syntax as `ngClass`.
+          Classes to be passed to the select panel. Supports the same syntax as 'ngClass'.<br />
+          (default = '';)
         </span>
       </td>
     </tr>
@@ -467,7 +468,6 @@
         <span>Fires when an element loses input focus.</span>
       </td>
     </tr>
-
     <tr>
       <td>
         <code>@Output()</code>

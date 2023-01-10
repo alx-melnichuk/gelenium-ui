@@ -42,130 +42,131 @@ export class AppComponent &#123;
 </section>
 
 <table class="app-tab">
-  <tr>
-    <th class="app-mn-wd-22ch">Name</th>
-    <th>Description</th>
-  </tr>
+  <tbody>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
 
-  <tr>
-    <td><code>isClearOnEscape?:<br/>
+    <tr>
+      <td><code>isClearOnEscape?:<br/>
       &nbsp;&nbsp;boolean<br/>
       &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        Clear the input field when pressing 'Escape'. (default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isMaxWd?:<br/>
+      <td>
+        <span>
+          Clear the input field when pressing 'Escape'. (default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isMaxWd?:<br/>
       &nbsp;&nbsp;boolean<br/>
       &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        isMaxWd<br />
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isNoAnimation?:<br/>
+      <td>
+        <span>
+          isMaxWd<br />
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isNoAnimation?:<br/>
       &nbsp;&nbsp;boolean<br/>
       &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        Disable animation execution. (default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isNoCloseOnSelect?:<br/>
+      <td>
+        <span>
+          Disable animation execution. (default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isNoCloseOnSelect?:<br/>
       &nbsp;&nbsp;boolean<br/>
       &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        The options panel will not close after an option is selected. (default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isNoOpenOnMouse?:<br/>
+      <td>
+        <span>
+          The options panel will not close after an option is selected. (default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isNoOpenOnMouse?:<br/>
       &nbsp;&nbsp;boolean<br/>
       &nbsp;&nbsp;| undefined;</code>
-    </td>
-    <td>
-      <span>
-        The options panel will not open/close on mouse click. (default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isNoRipple?:<br/>
+      </td>
+      <td>
+        <span>
+          The options panel will not open/close on mouse click. (default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isNoRipple?:<br/>
       &nbsp;&nbsp;boolean<br/>
       &nbsp;&nbsp;| undefined;</code>
-    </td>
-    <td>
-      <span>
-        Disables the ripple effect. (default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isOpenOnFocus?:<br/>
+      </td>
+      <td>
+        <span>
+          Disables the ripple effect. (default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isOpenOnFocus?:<br/>
       &nbsp;&nbsp;boolean<br/>
       &nbsp;&nbsp;| undefined;</code>
-    </td>
-    <td>
-      <span>
-        The options panel opens after receiving input focus. (default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>position?:<br/>
+      </td>
+      <td>
+        <span>
+          The options panel opens after receiving input focus. (default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>position?:<br/>
         &nbsp;&nbsp;string<br/>
         &nbsp;&nbsp;| undefined;<br/>
         //&nbsp;GlnAutocompletePositionType
       </code></td>
-    <td>
-      <span>
-        Specifies how to horizontally align the options list panel.
-      </span>
-      <ul>
-        <li>'start' - align to the left of the main element; (default)</li>
-        <li>'center' - align to the center of the main element;</li>
-        <li>'end' - align to the right side of the main element;</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><code>panelClass?:<br/>
+      <td>
+        <span>
+          Specifies how to horizontally align the options list panel.
+        </span>
+        <ul>
+          <li>'start' - align to the left of the main element; (default)</li>
+          <li>'center' - align to the center of the main element;</li>
+          <li>'end' - align to the right side of the main element;</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>panelClass?:<br/>
         &nbsp;&nbsp;string<br/>
         &nbsp;&nbsp;| string[]<br/>
         &nbsp;&nbsp;| Set&lt;string&gt;<br/>
         &nbsp;&nbsp;| &#123; [key: string]: unknown &#125;<br/>
         &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        Classes to be passed to the options panel. Supports the same syntax as `ngClass`.
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>visibleSize?:<br/>
+      <td>
+        <span>
+          Classes to be passed to the options panel. Supports the same syntax as `ngClass`.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>visibleSize?:<br/>
         &nbsp;&nbsp;number<br/>
         &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        Specifies the maximum number of visible option elements.
-        This value is multiplied by the height of the option and defines the
-        maximum height of the options panel.
-        <br />
-        If multiple option elements have the smallest height, then that will be the
-        height of the option element.
-      </span>
-    </td>
-  </tr>
-
+      <td>
+        <span>
+          Specifies the maximum number of visible option elements.
+          This value is multiplied by the height of the option and defines the
+          maximum height of the options panel.
+          <br />
+          If multiple option elements have the smallest height, then that will be the
+          height of the option element.
+        </span>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 <section mr-vr
