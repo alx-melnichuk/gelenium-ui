@@ -240,6 +240,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
 
   public ngOnDestroy(): void {
     this.optionListSub?.unsubscribe();
+    this.optionListSub = null;
   }
 
   // ** Public methods **
