@@ -1,7 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { GlnAutocomplete, GlnAutocompleteConfig, GLN_AUTOCOMPLETE_CONFIG } from 'gelenium-ui';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import {
@@ -14,19 +12,12 @@ import {
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
 
-const glnAutocompleteConfigDefault: GlnAutocompleteConfig = {
-  panelClass: ['acc-panel'],
-  position: 'end',
-  visibleSize: 8,
-};
-
 @Component({
   selector: 'app-cm-autocomplete-basic',
   templateUrl: './cm-autocomplete-basic.component.html',
   styleUrls: ['./cm-autocomplete-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // providers: [{ provide: GLN_AUTOCOMPLETE_CONFIG, useValue: glnAutocompleteConfigDefault }],
 })
 export class CmAutocompleteBasicComponent {
   @Input()
