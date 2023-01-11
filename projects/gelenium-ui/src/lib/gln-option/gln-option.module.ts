@@ -5,12 +5,11 @@ import { ReactiveFormsModule } from '@angular/forms'; // Required for the "formG
 import { GlnTouchRippleModule } from '../gln-touch-ripple/gln-touch-ripple.module';
 
 import { GlnOptionComponent } from './gln-option.component';
-import { GlnOptionsPanelDirective } from './gln-options-panel.directive';
 import { GlnOptionsScrollDirective } from './gln-options-scroll.directive';
 
 @NgModule({
-  declarations: [GlnOptionComponent, GlnOptionsPanelDirective, GlnOptionsScrollDirective],
+  declarations: [GlnOptionComponent, GlnOptionsScrollDirective],
   imports: [CommonModule, ReactiveFormsModule, GlnTouchRippleModule],
-  exports: [GlnOptionComponent, GlnOptionsPanelDirective, GlnOptionsScrollDirective],
+  exports: [GlnOptionComponent, GlnOptionsScrollDirective],
 })
 export class GlnOptionModule {}
