@@ -37,14 +37,14 @@ import { GlnAutocompleteTrigger } from './gln-autocomplete-trigger.interface';
 import { GlnAutocompleteOpenUtil } from './gln-autocomplete-open.util';
 import { GlnAutocompleteConfig } from './gln-autocomplete-config.interface';
 
-const CSS_PROP_WIDTH = '--glnac--width';
-const CSS_PROP_JUSTIFY_CONTENT = '--glnac--justify-content';
 const CSS_PROP_BORDER_RADIUS = '--glnac--border-radius';
 const CSS_PROP_BOTTOM = '--glnacc--bottom';
+const CSS_PROP_JUSTIFY_CONTENT = '--glnac--justify-content';
 const CSS_PROP_MAX_HEIGHT = '--glnac--max-height';
 const CSS_PROP_MAX_WIDTH = '--glnac--max-width';
 const CSS_PROP_TOP = '--glnacc--top';
 const CSS_PROP_TRANSLATE_Y = '--glnacc--translate-y';
+const CSS_PROP_WIDTH = '--glnac--width';
 
 let uniqueIdCounter = 0;
 
@@ -113,17 +113,17 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public hasPanelAnimation: boolean = false;
   // The mouse button is pressed over the container options panel.
   public isContainerMousedown: boolean | null = false; // interface GlnAutocomplete
-  public isMaxWidth: boolean | null = null; // Binding attribute "isMaxWd".
   public isPanelOpen: boolean = false;
+  public maxWd: boolean | null = null; // Binding attribute "isMaxWd".
   public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
   public noCloseOnSelect: boolean | null = null; // Binding attribute "isNoCloseOnSelect".
   public noOpenOnMouse: boolean | null = null; // Binding attribute "isNoOpenOnMouse". // interface GlnAutocomplete
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public openOnFocus: boolean | null = null; // Binding attribute "isOpenOnFocus". // interface GlnAutocomplete
   public optionHeight: number = 0;
-  public panelClassValue: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
-  public positionValue: GlnAutocompletePosition | null = null; // Binding attribute "position" ('start'|'center'|'end').
-  public visibleSizeValue: number | null = null; // Binding attribute "visibleSize".
+  public panelClassVal: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
+  public positionVal: GlnAutocompletePosition | null = null; // Binding attribute "position" ('start'|'center'|'end').
+  public visibleSizeVal: number | null = null; // Binding attribute "visibleSize".
 
   private optionListSub: Subscription | null = null;
   private optionsScroll: GlnOptionsScroll | null = null;
@@ -157,8 +157,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
       this.clearOnEscape = BooleanUtil.init(this.isClearOnEscape) ?? !!this.currConfig.isClearOnEscape;
     }
     if (changes['isMaxWd'] || (changes['config'] && this.isMaxWd == null && this.currConfig.isMaxWd != null)) {
-      this.isMaxWidth = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
-      this.setCssMaxWidth(this.isMaxWidth, this.hostRef);
+      this.maxWd = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
+      this.setCssMaxWidth(this.maxWd, this.hostRef);
     }
     if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
       this.noAnimation = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
@@ -180,15 +180,15 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
       this.openOnFocus = BooleanUtil.init(this.isOpenOnFocus) ?? !!this.currConfig.isOpenOnFocus;
     }
     if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
-      this.panelClassValue = this.panelClass || this.currConfig?.panelClass;
+      this.panelClassVal = this.panelClass || this.currConfig.panelClass;
     }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
-      this.positionValue = GlnAutocompletePositionUtil.create(this.position || this.currConfig.position || null);
-      this.setCssJustifyContent(this.positionValue, this.hostRef);
+      this.positionVal = GlnAutocompletePositionUtil.create(this.position || this.currConfig.position || null);
+      this.setCssJustifyContent(this.positionVal, this.hostRef);
     }
     if (changes['visibleSize'] || (changes['config'] && this.visibleSize == null && this.currConfig.visibleSize != null)) {
-      this.visibleSizeValue = this.visibleSize || this.currConfig.visibleSize || null;
-      this.setCssMaxHeight(this.optionHeight, this.visibleSizeValue, this.hostRef);
+      this.visibleSizeVal = this.visibleSize || this.currConfig.visibleSize || null;
+      this.setCssMaxHeight(this.optionHeight, this.visibleSizeVal, this.hostRef);
     }
   }
 
@@ -203,9 +203,9 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     if (this.isClearOnEscape == null) {
       this.clearOnEscape = !!this.currConfig.isClearOnEscape;
     }
-    if (this.isMaxWidth == null) {
-      this.isMaxWidth = !!this.currConfig.isMaxWd;
-      this.setCssMaxWidth(this.isMaxWidth, this.hostRef);
+    if (this.maxWd == null) {
+      this.maxWd = !!this.currConfig.isMaxWd;
+      this.setCssMaxWidth(this.maxWd, this.hostRef);
     }
     if (this.noAnimation == null) {
       this.noAnimation = !!this.currConfig.isNoAnimation;
@@ -223,19 +223,19 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     if (this.isOpenOnFocus == null) {
       this.openOnFocus = !!this.currConfig.isOpenOnFocus;
     }
-    if (this.panelClassValue == null) {
-      this.panelClassValue = this.currConfig?.panelClass;
+    if (this.panelClassVal == null) {
+      this.panelClassVal = this.currConfig.panelClass;
     }
-    if (this.positionValue == null) {
-      this.positionValue = GlnAutocompletePositionUtil.create(this.currConfig.position || null);
-      this.setCssJustifyContent(this.positionValue, this.hostRef);
+    if (this.positionVal == null) {
+      this.positionVal = GlnAutocompletePositionUtil.create(this.currConfig.position || null);
+      this.setCssJustifyContent(this.positionVal, this.hostRef);
     }
-    if (this.visibleSizeValue == null) {
-      this.visibleSizeValue = this.currConfig.visibleSize || null;
+    if (this.visibleSizeVal == null) {
+      this.visibleSizeVal = this.currConfig.visibleSize || null;
     }
 
     // Calling a method according to what is defined by this.optionHeight and this.visibleSizeValue.
-    this.setCssMaxHeight(this.optionHeight, this.visibleSizeValue, this.hostRef);
+    this.setCssMaxHeight(this.optionHeight, this.visibleSizeVal, this.hostRef);
   }
 
   public ngOnDestroy(): void {
@@ -409,8 +409,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     }
   }
   /** Prepare and setting property: 'max-height'. */
-  private setCssMaxHeight(optionHeight: number, visibleSizeValue: number | null, elem: ElementRef<HTMLElement> | null): void {
-    const maxHeight = visibleSizeValue != null && visibleSizeValue > 0 && optionHeight > 0 ? optionHeight * visibleSizeValue : null;
+  private setCssMaxHeight(optionHeight: number, visibleSizeVal: number | null, elem: ElementRef<HTMLElement> | null): void {
+    const maxHeight = visibleSizeVal != null && visibleSizeVal > 0 && optionHeight > 0 ? optionHeight * visibleSizeVal : null;
     HtmlElemUtil.setProperty(elem, CSS_PROP_MAX_HEIGHT, NumberUtil.str(maxHeight)?.concat('px'));
   }
   /** Prepare and setting property: 'max-width'. */

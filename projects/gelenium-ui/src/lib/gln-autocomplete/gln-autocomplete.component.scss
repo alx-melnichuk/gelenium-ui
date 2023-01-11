@@ -23,12 +23,12 @@ gln-autocomplete {
   [glnac-container] {
     bottom: var(--glnacc--bottom);
     box-sizing: border-box;
-    max-height: var(--glnac-max-height, var(--glnac--max-height, 80vh)); /*param!*/
-    max-width: var(--glnac-max-width, var(--glnac--max-width, 100vw)); /*param!*/
-    min-width: var(--glnac-min-width, var(--glnac--width)); /*param!!*/
+    max-height: var(--glnac-max-height, var(--glnac--max-height, 80vh));
+    max-width: var(--glnac-max-width, var(--glnac--max-width, 100vw));
+    min-width: var(--glnac-min-width, var(--glnac--width));
     position: absolute;
     top: var(--glnacc--top);
-    z-index: 1000;
+    z-index: var(--glnac-z-index, 1000);
   }
 
   // Element "div glnac-wrap".
