@@ -18,7 +18,6 @@ export * from './gln-infinite-scroll/public-api';
 export * from './gln-input/public-api';
 export * from './gln-option/public-api';
 export * from './gln-option-group/public-api';
-export * from './gln-option-list/public-api';
 export * from './gln-switch/public-api';
 export * from './gln-select/public-api';
 export * from './gln-textarea/public-api';
