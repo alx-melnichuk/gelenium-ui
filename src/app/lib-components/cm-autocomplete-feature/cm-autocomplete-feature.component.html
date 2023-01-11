@@ -81,6 +81,12 @@ export class SiteComponent &#123;
     available values of the panel of the GlnAutocomplete component.
     You can use the "GlnHighlight" channel for this purpose.
   </p>
+  <span>
+    To use this pipe GlnHighlight, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnHighlightModule &#125; from 'gelenium-ui';</pre>
+  </code>
   <p>
     It is required to add the "GlnHighlight" channel in the component template and
     pass the search value (input string value) as the first parameter to it.

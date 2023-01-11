@@ -22,3 +22,5 @@ export * from './gln-switch/public-api';
 export * from './gln-select/public-api';
 export * from './gln-textarea/public-api';
 export * from './gln-touch-ripple/public-api';
+
+export * from './pipes/gln-highlight/public-api';

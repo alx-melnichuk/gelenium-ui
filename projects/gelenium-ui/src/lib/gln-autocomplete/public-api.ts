@@ -7,4 +7,3 @@ export * from './gln-autocomplete-trigger.interface';
 export * from './gln-autocomplete.component';
 export * from './gln-autocomplete.interface';
 export * from './gln-autocomplete.module';
-export * from './gln-highlight.pipe';
