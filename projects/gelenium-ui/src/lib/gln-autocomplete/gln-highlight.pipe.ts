@@ -38,7 +38,6 @@ export class GlnHighlightPipe implements PipeTransform {
           .split(' ')
           .filter((word) => word.length > 0)
           .join('|');
-        console.log(`pattern=${pattern}`);
       }
       const regex = new RegExp(pattern, 'gi');
       const match = result.match(regex);
