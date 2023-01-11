@@ -11,6 +11,7 @@ export interface GlnSelectConfig extends GlnFrameConfig {
   backdropClass?: string | undefined; // default 'cdk-overlay-transparent-backdrop'
   isCheckmark?: boolean | undefined;
   isError?: boolean | undefined;
+  isMaxWd?: boolean | undefined;
   isMultiple?: boolean | undefined;
   isNoIcon?: boolean | undefined;
   isNoRipple?: boolean | undefined;

@@ -73,7 +73,8 @@ export class AppComponent &#123;
     <td>
       <span>
         Checkbox display flag for each option.<br />
-        It is used in conjunction with the "isMultiple" sign.<br />
+        It is used in conjunction with the "isMultiple" sign.
+        <br />(default = false;)
       </span>
     </td>
   </tr>
@@ -88,12 +89,24 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
+    <td><code>isMaxWd?:<br/>
+    &nbsp;&nbsp;boolean<br/>
+    &nbsp;&nbsp;| undefined;</code></td>
+    <td>
+      <span>
+        Set the width limit of the options list panel.
+        <br />(default = false;)
+      </span>
+    </td>
+  </tr>
+  <tr>
     <td><code>isMultiple?:<br/>
         &nbsp;&nbsp;boolean<br/>
         &nbsp;&nbsp;| undefined;</code></td>
     <td>
       <span>
         Sign of multiple choice of options.
+        <br />(default = false;)
       </span>
     </td>
   </tr>
@@ -104,6 +117,7 @@ export class AppComponent &#123;
     <td>
       <span>
         Disable the display of the icon - the status of the state of the open list.
+        <br />(default = false;)
       </span>
     </td>
   </tr>
@@ -114,6 +128,7 @@ export class AppComponent &#123;
     <td>
       <span>
         This property to turn off the ripple effect.
+        <br />(default = false;)
       </span>
     </td>
   </tr>
@@ -205,6 +220,7 @@ export class AppComponent &#123;
     <td>
       <span>
         Classes to be passed to the select panel. Supports the same syntax as `ngClass`.
+        <br />(default = '';)
       </span>
     </td>
   </tr>

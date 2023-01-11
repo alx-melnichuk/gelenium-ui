@@ -67,7 +67,11 @@ export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT
 const CSS_ATTR_FRAME_FOCUS = 'foc';
 const CSS_ATTR_PANEL_OPENING_ANIMATION = 'is-show';
 const CSS_ATTR_PANEL_CLOSING_ANIMATION = 'is-hide';
-const CSS_PROP_TRANSLATE_Y = '--glnslpo-translate-y';
+const CSS_PROP_BORDER_RADIUS = '--glnslpo--border-radius';
+const CSS_PROP_MAX_HEIGHT = '--glnslpo--max-height';
+const CSS_PROP_MAX_WIDTH = '--glnslpo--max-width';
+const CSS_PROP_TRANSLATE_Y = '--glnslpo--translate-y';
+const CSS_PROP_WIDTH = '--glnslpo--width';
 
 let uniqueIdCounter = 0;
 
@@ -108,6 +112,8 @@ export class GlnSelectComponent
   @Input()
   public isLabelShrink: string | boolean | null | undefined;
   @Input()
+  public isMaxWd: string | boolean | null | undefined;
+  @Input()
   public isMultiple: string | boolean | null | undefined;
   @Input()
   public isNoAnimation: string | boolean | null | undefined;
@@ -139,7 +145,7 @@ export class GlnSelectComponent
   @Input()
   public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
   @Input()
-  public visibleSize: number = 0;
+  public visibleSize: number | null | undefined;
   @Input()
   public tabIndex: number = 0;
   @Input()
@@ -202,9 +208,6 @@ export class GlnSelectComponent
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set options(value: GlnOption[]) {}
 
-  public get triggerHtmlElementRef(): ElementRef<HTMLElement> {
-    return this.triggerRef as ElementRef<HTMLElement>;
-  }
   public get exteriorVal(): GlnFrameExterior | null {
     return this.frameComp.exteriorVal;
   }
@@ -233,13 +236,14 @@ export class GlnSelectComponent
   public isFocused = false;
   public isFilled = false;
   public isPanelOpen = false;
+  public maxWd: boolean | null = null; // Binding attribute "isMaxWd".
   public multiple: boolean | null = null; // Binding attribute "isMultiple". // interface GlnOptionParent
   public noIcon: boolean | null = null; // Binding attribute "isNoIcon",
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
   public overlayPanelClass: string | string[] = '';
-  public panelClassValue: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
+  public panelClassVal: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
   public placeholder: boolean | null = null; // Binding attribute "isPlaceholder".
   public positionList: ConnectedPosition[] = [];
   public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
@@ -253,12 +257,12 @@ export class GlnSelectComponent
 
   protected optionsScroll: GlnOptionsScroll | null = null;
 
-  private isFocusAttrOnFrame = false;
-  private maxWidth = 0;
+  private hostWidth: number = 0;
+  private isFocusAttrOnFrame: boolean = false;
   private optionHeight: number = 0;
   private selectPanelRef: ElementRef<HTMLElement> | null = null;
   /** Saving the font size of the trigger element. */
-  private triggerFontSize = 0;
+  private triggerFontSize: number = 0;
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -294,7 +298,10 @@ export class GlnSelectComponent
       this.error = BooleanUtil.init(this.isError) ?? !!this.currConfig.isError;
       this.settingError(this.error, this.renderer, this.hostRef);
     }
-    if (changes['isMultiple'] || (changes['config'] && this.isMultiple == null && this.currConfig?.isMultiple) || null) {
+    if (changes['isMaxWd'] || (changes['config'] && this.isMaxWd == null && this.currConfig.isMaxWd != null)) {
+      this.maxWd = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
+    }
+    if (changes['isMultiple'] || (changes['config'] && this.isMultiple == null && this.currConfig.isMultiple) || null) {
       this.multiple = BooleanUtil.init(this.isMultiple) ?? !!this.currConfig.isMultiple;
       this.settingMultiple(this.multiple, this.renderer, this.hostRef);
     }
@@ -325,14 +332,17 @@ export class GlnSelectComponent
       this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamRgAlign || this.currConfig.ornamRgAlign || null);
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
     }
+    if (changes['config'] && this.currConfig.overlayPanelClass != null) {
+      this.overlayPanelClass = this.currConfig.overlayPanelClass;
+    }
     if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
-      this.panelClassValue = this.panelClass || this.currConfig?.panelClass;
+      this.panelClassVal = this.panelClass || this.currConfig.panelClass;
     }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
-      this.positionList = this.getPositionList(this.position || this.currConfig?.position);
+      this.positionList = this.getPositionList(this.position || this.currConfig.position);
     }
     if (changes['visibleSize'] || (changes['config'] && this.visibleSize == null && this.currConfig.visibleSize != null)) {
-      this.visibleSizeVal = this.visibleSize || this.currConfig?.visibleSize || null;
+      this.visibleSizeVal = this.visibleSize || this.currConfig.visibleSize || null;
     }
   }
 
@@ -340,8 +350,12 @@ export class GlnSelectComponent
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
+    const fontSize = HtmlElemUtil.propertyAsNumber(this.hostRef, 'font-size');
+    const lineHeight = HtmlElemUtil.propertyAsNumber(this.hostRef, 'line-height');
+    this.optionHeight = GlnOptionUtil.getHeightOption(fontSize, lineHeight);
+
     if (this.backdropClassVal == null) {
-      this.backdropClassVal = this.currConfig?.backdropClass || null;
+      this.backdropClassVal = this.currConfig.backdropClass || null;
     }
     if (this.checkmark == null) {
       this.checkmark = !!this.currConfig.isCheckmark;
@@ -350,6 +364,9 @@ export class GlnSelectComponent
     if (this.error == null) {
       this.error = !!this.currConfig.isError;
       this.settingError(this.error, this.renderer, this.hostRef);
+    }
+    if (this.maxWd == null) {
+      this.maxWd = !!this.currConfig.isMaxWd;
     }
     if (this.multiple == null) {
       this.multiple = !!this.currConfig.isMultiple;
@@ -385,14 +402,14 @@ export class GlnSelectComponent
     if (this.currConfig.overlayPanelClass != null) {
       this.overlayPanelClass = this.currConfig.overlayPanelClass;
     }
-    if (this.panelClassValue == null) {
-      this.panelClassValue = this.currConfig?.panelClass;
+    if (this.panelClassVal == null) {
+      this.panelClassVal = this.currConfig.panelClass;
     }
     if (this.positionList.length === 0) {
-      this.positionList = this.getPositionList(this.currConfig?.position);
+      this.positionList = this.getPositionList(this.currConfig.position);
     }
     if (this.visibleSizeVal == null) {
-      this.visibleSizeVal = this.currConfig?.visibleSize || null;
+      this.visibleSizeVal = this.currConfig.visibleSize || null;
     }
   }
 
@@ -420,12 +437,7 @@ export class GlnSelectComponent
   }
 
   public ngAfterViewInit(): void {
-    let maxWidth = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('max-width').replace('px', ''));
-    this.maxWidth = !isNaN(maxWidth) ? maxWidth : 0;
-    if (this.maxWidth === 0 && BooleanUtil.init(this.wdFull)) {
-      maxWidth = HtmlElemUtil.propertyAsNumber(this.hostRef, 'width');
-      this.maxWidth = !isNaN(maxWidth) ? maxWidth : 0;
-    }
+    this.hostWidth = HtmlElemUtil.propertyAsNumber(this.hostRef, 'width');
   }
 
   // ** interface ControlValueAccessor - start **
@@ -663,6 +675,9 @@ export class GlnSelectComponent
     // Adding a class so that custom styles can be applied.
     const overlayRef = HtmlElemUtil.getElementRef(overlayElement);
     HtmlElemUtil.setAttr(this.renderer, overlayRef, 'glnslpo-select', '');
+    // Setting property 'width'.
+    HtmlElemUtil.setProperty(overlayRef, CSS_PROP_WIDTH, NumberUtil.str(this.hostWidth)?.concat('px'));
+
     this.selectPanelRef = HtmlElemUtil.getElementRef(overlayElement.children[0]?.children[0] as HTMLElement);
     const panelHeight = this.getHeight(this.selectPanelRef);
     if (!this.noAnimation && panelHeight > 0) {
@@ -672,28 +687,18 @@ export class GlnSelectComponent
     if (this.triggerFontSize > 0) {
       overlayElement.style.fontSize = `${this.triggerFontSize}px`;
     }
-    if (this.maxWidth > 0) {
-      overlayElement.style.maxWidth = `${this.maxWidth}px`;
-    }
     if (this.frameSizeValue > 0) {
       const borderRadius = NumberUtil.roundTo100(this.frameSizeValue / 10);
-      HtmlElemUtil.setProperty(overlayRef, '--glnslpo-border-radius', NumberUtil.str(borderRadius)?.concat('px'));
-    }
-    if (this.optionHeight === 0) {
-      this.optionHeight = this.getOptionHeight(this.options);
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(borderRadius)?.concat('px'));
     }
     const visibleSize = this.visibleSizeVal ?? 0;
     if (visibleSize > 0 && this.optionHeight > 0) {
       const maxHeightOfOptionsPanel = this.optionHeight * visibleSize;
-      HtmlElemUtil.setProperty(overlayRef, '--glnslpo-max-height', NumberUtil.str(maxHeightOfOptionsPanel)?.concat('px'));
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_HEIGHT, NumberUtil.str(maxHeightOfOptionsPanel)?.concat('px'));
     }
-    // #?// We cannot get the actual sizes and positions of elements if they are affected by a transformation.
-    // #?// Therefore, we first get all the data, and then add attributes for animation and transformation.
-    // #?const indexMarked = this.markedOption != null ? this.options.indexOf(this.markedOption) : -1;
-    // #?if (this.markedOption !== null && this.selectPanelRef !== null && visibleSize > 0 && this.optionHeight > 0) {
-    // #?  this.indexFirstVisibleOption = this.getIndexFirstVisibleOption(this.options.length, visibleSize, indexMarked, -1);
-    // #?  this.selectPanelRef.nativeElement.scrollTo(0, this.indexFirstVisibleOption * this.optionHeight);
-    // #?}
+    if (this.maxWd) {
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_WIDTH, NumberUtil.str(this.hostWidth)?.concat('px'));
+    }
     // Important! These operations should be the last, they include animation and the dimensions of the panel are distorted.
     const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement?.children[0] as HTMLElement);
     if (this.noAnimation) {
@@ -863,29 +868,6 @@ export class GlnSelectComponent
     this.isFilled = !this.isEmpty() && this.selectedOptions.length > 0;
     // Calling the validation method for the new value.
     this.onChange(this.valueData);
-  }
-  /** Get the height of the option. */
-  private getOptionHeight(options: GlnOption[]): number {
-    const value: number[] = [];
-    const count: number[] = [];
-    let maxCount = -1;
-    let resultIndex = -1;
-    for (let i = 0; i < options.length && maxCount < 4; i++) {
-      const height = this.getHeight(options[i].hostRef);
-      let index = value.indexOf(height);
-      if (index === -1) {
-        value.push(height);
-        count.push(1);
-        index = value.length - 1;
-      } else {
-        count[index]++;
-      }
-      if (count[index] > maxCount) {
-        maxCount = count[index];
-        resultIndex = index;
-      }
-    }
-    return resultIndex > -1 ? value[resultIndex] : 0;
   }
 
   private getPosition(value: string | null): HorizontalConnectionPos {

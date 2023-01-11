@@ -170,6 +170,31 @@
     <tr>
       <td>
         <code>@Input()</code>
+        <code>isMaxWd: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Flag for setting the maximum width when expanding the drop-down list of options.
+          <br />
+          Without this setting, the maximum width of the options panel is determined by its
+          content.
+          <br />
+          The value of the minimum width of the options panel is always equal to the width
+          of the parent.
+          <br />
+          (default = false;) Attribute (no content).
+          <br />
+          Also, the minimum/maximum width of the options panel can be set via css parameters:
+          '--glnslpo-min-width', '--glnslpo-max-width'.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
         <code>isMultiple: string<br/>
           &nbsp;&nbsp;| boolean<br/>
           &nbsp;&nbsp;| null<br/>
