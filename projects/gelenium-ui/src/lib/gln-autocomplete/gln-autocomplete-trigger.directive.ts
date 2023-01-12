@@ -150,7 +150,9 @@ export class GlnAutocompleteTriggerDirective implements OnInit, AfterViewInit, G
       this.isFocusAttrOnFrame = false;
       HtmlElemUtil.setAttr(this.renderer, this.frameRef, CSS_ATTR_FOR_FRAME_FOCUS, null);
     }
-    if (!this.autocomplete.isOpen() && (this.isMousedown || this.autocomplete.openOnFocus)) {
+    const noOpenOnMouse = this.autocomplete.noOpenOnMouse;
+    const openOnFocus = this.autocomplete.openOnFocus;
+    if (!this.autocomplete.isOpen() && ((this.isMousedown && !noOpenOnMouse) || (!this.isMousedown && openOnFocus))) {
       Promise.resolve().then(() => this.autocomplete?.open());
     }
   }
