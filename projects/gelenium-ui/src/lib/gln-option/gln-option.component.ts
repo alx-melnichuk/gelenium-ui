@@ -145,7 +145,7 @@ export class GlnOptionComponent implements OnChanges, OnInit, GlnOption {
     if (this.innSelected !== !!value) {
       this.innSelected = !!value;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-selected', !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'sel', value ? '' : null);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'sel', !!value ? '' : null);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'aria-selected', '' + !!value);
       this.formControl.setValue(value);
       this.changeDetectorRef.markForCheck();

@@ -34,19 +34,19 @@ app-cm-select-attributes {
 }
 
 // Block "attributes-supported03"
-.cdk-overlay-pane .gln-select-panel.sa-max-width {
+.cdk-overlay-container .gln-select-panel.sa-max-width {
   --glnslpo-max-width: 185px;
 }
-.cdk-overlay-pane .gln-select-panel.sa-panel-color {
+.cdk-overlay-container .gln-select-panel.sa-panel-color {
   color: blue;
   background-color: honeydew;
 }
 
 // Block "attributes-supported04"
-.cdk-overlay-pane .gln-select-panel.sa-max-height {
+.cdk-overlay-container .gln-select-panel.sa-max-height {
   --glnslpo-max-height: 180px;
 }
-.cdk-overlay-pane .gln-select-panel.sa-elevation {
+.cdk-overlay-container .gln-select-panel.sa-no-elevation {
   --glnslpo-elevation: none;
 }
 

@@ -868,18 +868,12 @@
       </span><br />
       <span>Example:</span>
       <code><pre source="html">
-&lt;gln-select formControlName="model01a"
-  <strong>panelClass="no-elevation"</strong>
-  label="Enter value"&gt;
-  &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
-  &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
-  &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
-  &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
-  &lt;gln-option value="kiwi"&gt;Kiwi&lt;/gln-option&gt;
+&lt;gln-select <strong>panelClass="app-no-elevation"</strong>&gt;
+  ...
 &lt;/gln-select&gt;</pre></code>
       <code><pre source="css">
-.gln-select-panel<strong>.no-elevation</strong> &#123;
-  --glnslpo-elevation: none;
+.cdk-overlay-container .gln-select-panel.<strong>app-no-elevation</strong> &#123;
+  <strong>--glnslpo-elevation</strong>: none;
 &#125;</pre></code>
     </td>
   </tr>
@@ -896,8 +890,12 @@
         (default "(frameSizeValue / 10) + 'px'").
       </span>
       <span>Example:</span>
+      <code><pre source="html">
+&lt;gln-select <strong>panelClass="app-border-radius"</strong>&gt;
+  ...
+&lt;/gln-select&gt;</pre></code>
       <code><pre source="css">
-.cdk-overlay-container .gln-select-panel &#123;
+.cdk-overlay-container .gln-select-panel.<strong>app-border-radius</strong> &#123;
   <strong>--glnslpo-border-radius</strong>: 10px;
 &#125;</pre></code>
     </td>
@@ -905,14 +903,23 @@
   <tr>
     <td>
       <code>--glnslpo-max-height:<br/>
-      &nbsp;100%;</code>
+      &nbsp;80vh;</code>
     </td>
     <td>
       <span>
         Defines the value of the "max-height" property for the overlay panel
         (expanded list of options).<br />
-        (default 100%).
+        (default 80vh).
       </span>
+      <span>Example:</span>
+      <code><pre source="html">
+&lt;gln-select <strong>panelClass="app-max-height"</strong>&gt;
+  ...
+&lt;/gln-select&gt;</pre></code>
+      <code><pre source="css">
+.cdk-overlay-container .gln-select-panel.<strong>app-max-height</strong> &#123;
+  <strong>--glnslpo-max-height</strong>: 180px;
+&#125;</pre></code>
     </td>
   </tr>
 

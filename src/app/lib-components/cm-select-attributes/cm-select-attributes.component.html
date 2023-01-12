@@ -79,7 +79,7 @@
         label="Choose a value."
         [exterior]="exterior02a"
         wdFull>
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -98,7 +98,7 @@
         helperText="A value must be entered."
         [exterior]="exterior02a"
         wdFull>
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -117,7 +117,7 @@
         helperText="The parameter is read only."
         [exterior]="exterior02a"
         wdFull>
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -136,7 +136,7 @@
         helperText="The parameter is disabled."
         [exterior]="exterior02a"
         wdFull>
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -155,7 +155,7 @@
         helperText="The position of the label is fixed."
         [exterior]="exterior02a"
         wdFull>
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -174,7 +174,7 @@
         helperText="The placeholder is displayed."
         [exterior]="exterior02a"
         wdFull>
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -211,7 +211,7 @@
         label="Choose a value."
         [exterior]="exterior02a"
         wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -230,7 +230,7 @@
         helperText="A value must be entered."
         [exterior]="exterior02a"
         wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -249,7 +249,7 @@
         helperText="The parameter is read only."
         [exterior]="exterior02a"
         wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -268,7 +268,7 @@
         helperText="The parameter is disabled."
         [exterior]="exterior02a"
         wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -287,7 +287,7 @@
         helperText="The position of the label is fixed."
         [exterior]="exterior02a"
         wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -306,7 +306,7 @@
         helperText="The placeholder is displayed."
         [exterior]="exterior02a"
         wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruits"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -422,7 +422,7 @@ app-select &#123;
         position="start"
         [exterior]="exterior02b"
         helperText="Used: position='start'.">
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruitsB"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -441,7 +441,7 @@ app-select &#123;
         position="center"
         [exterior]="exterior02b"
         helperText="Used: position='center'.">
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruitsB"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -460,7 +460,7 @@ app-select &#123;
         position="end"
         [exterior]="exterior02b"
         helperText="Used: position='end'.">
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruitsB"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -498,7 +498,7 @@ app-select &#123;
         position="start"
         [exterior]="exterior02b"
         helperText="Used: position='start'."&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruitsB"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -517,7 +517,7 @@ app-select &#123;
         position="center"
         [exterior]="exterior02b"
         helperText="Used: position='center'."&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruitsB"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -536,7 +536,7 @@ app-select &#123;
         position="end"
         [exterior]="exterior02b"
         helperText="Used: position='end'."&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruitsB"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -664,7 +664,7 @@ app-select &#123;
         label="Fruit"
         [exterior]="exterior02c"
         helperText="Not used: isMaxWd.">
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits02C"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -683,7 +683,7 @@ app-select &#123;
         isMaxWd
         [exterior]="exterior02c"
         helperText="Used: isMaxWd.">
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits02C"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -702,7 +702,7 @@ app-select &#123;
         panelClass="sa-max-width"
         [exterior]="exterior02c"
         helperText="css: --glnslpo-max-width">
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits02C"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -721,7 +721,7 @@ app-select &#123;
         panelClass="sa-panel-color"
         [exterior]="exterior02c"
         helperText="Used: panelClass.">
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits02C"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -758,7 +758,7 @@ app-select &#123;
         label="Fruit"
         [exterior]="exterior02c"
         helperText="Not used: isMaxWd."&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruits02C"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -777,7 +777,7 @@ app-select &#123;
         isMaxWd
         [exterior]="exterior02c"
         helperText="Used: isMaxWd."&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruits02C"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -796,7 +796,7 @@ app-select &#123;
         panelClass="sa-max-width"
         [exterior]="exterior02c"
         helperText="css: --glnslpo-max-width"&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruits02C"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -815,7 +815,7 @@ app-select &#123;
         panelClass="sa-panel-color"
         [exterior]="exterior02c"
         helperText="Used: panelClass."&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruits02C"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -876,10 +876,10 @@ app-select &#123;
   &#125;
 &#125;
 
-.cdk-overlay-pane .gln-select-panel.sa-max-width &#123;
+.cdk-overlay-container .gln-select-panel.sa-max-width &#123;
   --glnslpo-max-width: 185px;
 &#125;
-.cdk-overlay-pane .gln-select-panel.sa-panel-color &#123;
+.cdk-overlay-container .gln-select-panel.sa-panel-color &#123;
   color: blue;
   background-color: honeydew;
 &#125;</pre></code>
@@ -988,7 +988,7 @@ app-select &#123;
         isNoAnimation
         [exterior]="exterior02d"
         helperText="Used: isNoAnimation.">
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits02D"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -1004,10 +1004,10 @@ app-select &#123;
       <gln-select formControlName="model02s"
         class="sa-normal"
         label="Fruit"
-        panelClass="sa-elevation"
+        panelClass="sa-no-elevation"
         [exterior]="exterior02d"
         helperText="css: --glnslpo-elevation">
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits02D"
           [value]="item">{{ capitalizeFirstLetter(item) }}
         </gln-option>
@@ -1081,7 +1081,7 @@ app-select &#123;
         isNoAnimation
         [exterior]="exterior02d"
         helperText="Used: isNoAnimation."&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruits02D"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -1097,10 +1097,10 @@ app-select &#123;
       &lt;gln-select formControlName="model02s"
         class="sa-normal"
         label="Fruit"
-        panelClass="sa-elevation"
+        panelClass="sa-no-elevation"
         [exterior]="exterior02d"
         helperText="css: --glnslpo-elevation"&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruits02D"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
         &lt;/gln-option&gt;
@@ -1166,10 +1166,10 @@ app-select &#123;
   &#125;
 &#125;
 
-.cdk-overlay-pane .gln-select-panel.sa-max-height &#123;
+.cdk-overlay-container .gln-select-panel.sa-max-height &#123;
   --glnslpo-max-height: 180px;
 &#125;
-.cdk-overlay-pane .gln-select-panel.sa-elevation &#123;
+.cdk-overlay-container .gln-select-panel.sa-no-elevation &#123;
   --glnslpo-elevation: none;
 &#125;</pre></code>
         </mat-tab>
