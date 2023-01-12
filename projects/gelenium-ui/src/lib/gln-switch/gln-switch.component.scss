@@ -18,11 +18,6 @@ gln-switch {
   --glnsw--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
   --glnsw--primary-l: var(--glncl-primary-s, var(--gln-primary-l));
 
-  --glnsw-thumb-hg: 1.5em;
-  --glnsw-thumb-wd: 1.5em;
-  --glnsw-track-hg: 1em;
-  --glnsw-track-wd: 2.3em;
-
   @include mxAlignItems(center);
   @include mxDisplayInlineFlex();
   -webkit-flex-shrink: 0;
@@ -82,19 +77,17 @@ gln-switch {
 
   div[glnsw-container] {
     @include mxDisplayInlineFlex();
-    border-radius: 2em;
+    border-radius: var(--glnsw-container-brd-rds, 2em);
     cursor: pointer;
     flex-shrink: 0;
     outline: 0;
     overflow: hidden;
-    padding: var(--glnsw-container-pd, 1em);
+    padding: var(--glnsw-container-pd, var(--glnsw--container-pd, 1em));
     position: relative;
     z-index: 0;
   }
 
   input[glnsw-input] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
     height: 1px;
     opacity: 0;
     position: absolute;
@@ -107,11 +100,11 @@ gln-switch {
   span[glnsw-wrap] {
     background-color: transparent;
     border: 0;
-    border-radius: 50%;
+    border-radius: var(--glnsw-wrap-brd-rds, 50%);
     left: 0;
     margin: 0;
     outline: 0;
-    padding: var(--glnsw-wrap-pd, 0.75em);
+    padding: var(--glnsw-wrap-pd, var(--glnsw--wrap-pd, 0.75em));
     position: absolute;
     top: 0;
     @include mxUserSelect(none);
@@ -124,14 +117,14 @@ gln-switch {
     background-color: var(--glnsw---bg-wrap-hov);
   }
   &[chk] span[glnsw-wrap] {
-    @include  mxTransform_TranslateXY(var(--glnsw-wrap-shift, 1.25em), 0); 
+    @include  mxTransform_TranslateXY(var(--glnsw-wrap-shift, var(--glnsw--wrap-shift, 1.25em)), 0); 
   }
 
   // ** Block: glnsw-thumb **
 
   span[glnsw-thumb] {
     background-color: var(--glnsw---bg-thumb);
-    border-radius: 50%;
+    border-radius: var(--glnsw-thumb-brd-rds, 50%);
     box-shadow: 0px 1px 3px 1px rgb(0 0 0 / 15%), 0px 0px 3px 1px rgb(0 0 0 / 15%);
     display: block;
     height: var(--glnsw-thumb-hg, 1.5em);
@@ -144,7 +137,7 @@ gln-switch {
 
   span[glnsw-track] {
     background-color: var(--glnsw---bg-track);
-    border-radius: var(--glnsw-track-brd-rds, 32%/64%);
+    border-radius: var(--glnsw-track-brd-rds, var(--glnsw--track-brd-rds, 32%/64%));
     height: var(--glnsw-track-hg, 1em);
     width: var(--glnsw-track-wd, 2.3em);
     -webkit-transition: opacity var(--glnsw-trn-drt-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color var(--glnsw-trn-drt-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
@@ -156,7 +149,7 @@ gln-switch {
   // ** Block: glnsw-label **
 
   label[glnsw-label] {
-    font-size: var(--glnsw-pr-font-size);
+    font-size: var(--glnsw-label-font-size, var(--glnsw--label-font-size));
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

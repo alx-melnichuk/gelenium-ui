@@ -46,14 +46,17 @@ import { GlnSwitchPosition, GlnSwitchPositionUtil } from './gln-switch-position.
 import { ScreenUtil } from '../_utils/screen.util';
 import { HtmlConvertUtil } from '../_utils/html-convert.util';
 
-export const CLS_SW_DISABLED = 'gln-disabled';
-export const ATR_SW_DISABLED = 'dis';
-export const ATR_SW_HIDE_ANIMATION_INIT = 'hdAnmInit';
-export const PRP_SW_PARENT_FONT_SIZE = '--glnsw-pr-font-size';
-export const PRP_SW_CONTAINER_PADDING = '--glnsw-container-pd';
-export const PRP_SW_WRAP_PADDING = '--glnsw-wrap-pd';
-export const PRP_SW_WRAP_SHIFT = '--glnsw-wrap-shift';
-export const PRP_SW_TRACK_BORDER_RADIUS = '--glnsw-track-brd-rds';
+const CSS_CLS_DISABLED = 'gln-disabled';
+const CSS_ATTR_DISABLED = 'dis';
+const CSS_ATTR_HIDE_ANIMATION_INIT = 'hdAnmInit';
+const CSS_PROP_LABEL_FONT_SIZE = '--glnsw--label-font-size';
+const CSS_PROP_CONTAINER_PADDING = '--glnsw--container-pd';
+const CSS_PROP_WRAP_PADDING = '--glnsw--wrap-pd';
+const CSS_PROP_WRAP_SHIFT = '--glnsw--wrap-shift';
+const CSS_PROP_TRACK_BORDER_RADIUS = '--glnsw--track-brd-rds';
+const CSS_PROP_THUMB_HEIGHT = '--glnsw-thumb-hg';
+const CSS_PROP_TRACK_HEIGHT = '--glnsw-track-hg';
+const CSS_PROP_TRACK_WIDTH = '--glnsw-track-wd';
 
 let uniqueIdCounter = 0;
 
@@ -200,7 +203,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     this.isRemoveAttrHideAnimation = !this.parentFormGroup;
     if (this.isRemoveAttrHideAnimation) {
       // Add an attribute that disables animation on initialization.
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_SW_HIDE_ANIMATION_INIT, '');
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_HIDE_ANIMATION_INIT, '');
     }
   }
 
@@ -221,7 +224,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
       this.isRemoveAttrHideAnimation = false;
       Promise.resolve().then(() => {
         // Remove an attribute that disables animation on initialization.
-        HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_SW_HIDE_ANIMATION_INIT, null);
+        HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_HIDE_ANIMATION_INIT, null);
       });
     }
   }
@@ -237,8 +240,8 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   public setDisabledState(disabled: boolean): void {
     if (this.disabled !== disabled) {
       this.disabled = disabled;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, CLS_SW_DISABLED, disabled);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_SW_DISABLED, disabled ? '' : null);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, CSS_CLS_DISABLED, disabled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_DISABLED, disabled ? '' : null);
       if (disabled && !this.formControl.disabled) {
         this.formControl.disable();
       } else if (!disabled && this.formControl.disabled) {
@@ -292,7 +295,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
       if (this.isRemoveAttrHideAnimation) {
         this.isRemoveAttrHideAnimation = false;
         // Remove an attribute that disables animation on initialization.
-        HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_SW_HIDE_ANIMATION_INIT, null);
+        HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_HIDE_ANIMATION_INIT, null);
       }
       this.onChange(newValue);
       this.change.emit({ checked: newValue, source: this });
@@ -323,7 +326,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     const parentRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(parentElem);
     const parentFontSize: number = HtmlElemUtil.propertyAsNumber(parentRef, 'font-size');
     if (parentFontSize > 0) {
-      HtmlElemUtil.setProperty(hostRef, PRP_SW_PARENT_FONT_SIZE, NumberUtil.str(parentFontSize)?.concat('px'));
+      HtmlElemUtil.setProperty(hostRef, CSS_PROP_LABEL_FONT_SIZE, NumberUtil.str(parentFontSize)?.concat('px'));
     }
     if (hostRef && hostRef.nativeElement) {
       const hostElement: Element = hostRef.nativeElement;
@@ -336,38 +339,38 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
 
       const screenHeight: number = ScreenUtil.getHeight();
       const screenWidth: number = ScreenUtil.getWidth();
-      // Determine the height of the 'track' element. ('--glnsw-track-hg': 1em;)
-      const trackHeightStr: string = getComputedStyle(hostElement).getPropertyValue('--glnsw-track-hg');
+      // Determine the height of the 'track' element. (1em;)
+      const trackHeightStr: string = getComputedStyle(hostElement).getPropertyValue(CSS_PROP_TRACK_HEIGHT);
       const trackHeightVal: number = HtmlConvertUtil.toPx(trackHeightStr, hostFontSize, rootFontSize, screenHeight, screenWidth);
       const trackHeight: number = NumberUtil.roundTo100(trackHeightVal > 0 ? trackHeightVal : 1 * hostFontSize);
 
       // Determine the border-radius of the 'track' element.
       const trackBorderRadius: number = NumberUtil.roundTo100(trackHeight / 2);
-      HtmlElemUtil.setProperty(hostRef, PRP_SW_TRACK_BORDER_RADIUS, NumberUtil.str(trackBorderRadius)?.concat('px'));
+      HtmlElemUtil.setProperty(hostRef, CSS_PROP_TRACK_BORDER_RADIUS, NumberUtil.str(trackBorderRadius)?.concat('px'));
 
-      // Determine the width of the 'track' element. ('--glnsw-track-wd': 2.3em;)
-      const trackWidthStr: string = getComputedStyle(hostElement).getPropertyValue('--glnsw-track-wd');
+      // Determine the width of the 'track' element. (2.3em;)
+      const trackWidthStr: string = getComputedStyle(hostElement).getPropertyValue(CSS_PROP_TRACK_WIDTH);
       const trackWidthVal: number = HtmlConvertUtil.toPx(trackWidthStr, hostFontSize, rootFontSize, screenHeight, screenWidth);
       const trackWidth: number = NumberUtil.roundTo100(trackWidthVal > 0 ? trackWidthVal : 2.3 * hostFontSize);
 
-      // Determine the height of the 'thumb' element. ('--glnsw-thumb-hg': 1.5em);
-      const thumbHeightStr: string = getComputedStyle(hostElement).getPropertyValue('--glnsw-thumb-hg');
+      // Determine the height of the 'thumb' element. (1.5em);
+      const thumbHeightStr: string = getComputedStyle(hostElement).getPropertyValue(CSS_PROP_THUMB_HEIGHT);
       const thumbHeightVal: number = HtmlConvertUtil.toPx(thumbHeightStr, hostFontSize, rootFontSize, screenHeight, screenWidth);
       const thumbHeight: number = NumberUtil.roundTo100(thumbHeightVal > 0 ? thumbHeightVal : 1.5 * hostFontSize);
 
       // Determine the padding of the container element.
       const containerPadding = NumberUtil.roundTo100((3 * hostFontSize - trackHeight) / 2);
-      HtmlElemUtil.setProperty(hostRef, PRP_SW_CONTAINER_PADDING, NumberUtil.str(containerPadding)?.concat('px'));
+      HtmlElemUtil.setProperty(hostRef, CSS_PROP_CONTAINER_PADDING, NumberUtil.str(containerPadding)?.concat('px'));
 
       // Determine the padding of the wrap element.
       const wrapPadding = NumberUtil.roundTo100((3 * hostFontSize - thumbHeight) / 2);
-      HtmlElemUtil.setProperty(hostRef, PRP_SW_WRAP_PADDING, NumberUtil.str(wrapPadding)?.concat('px'));
+      HtmlElemUtil.setProperty(hostRef, CSS_PROP_WRAP_PADDING, NumberUtil.str(wrapPadding)?.concat('px'));
 
       // Determine the shift of the wrap element.
       const containerLen = trackWidth + 2 * containerPadding;
       const wrapLen = thumbHeight + 2 * wrapPadding;
       const wrapShift = NumberUtil.roundTo100(containerLen - wrapLen);
-      HtmlElemUtil.setProperty(hostRef, PRP_SW_WRAP_SHIFT, NumberUtil.str(wrapShift)?.concat('px'));
+      HtmlElemUtil.setProperty(hostRef, CSS_PROP_WRAP_SHIFT, NumberUtil.str(wrapShift)?.concat('px'));
     }
   }
 
