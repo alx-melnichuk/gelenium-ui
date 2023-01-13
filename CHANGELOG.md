@@ -1,3 +1,23 @@
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/alx-melnichuk/gelenium-ui/tree/0.4.0) (2023-01-16)
+
+### BREAKING CHANGES
+
+For the GlnSwitch component, css parameters for client settings and a new example have been added.
+Added 'GlnHighlight' channel to highlight text fragment in GlnHighlightModule.
+This channel is used in the GlnAutocomplete demo page.
+For components: GlnInput, GlnTextarea the extra 'div' node has been removed.
+Fixed setting the height of the GlnInput component for types: color, date, datetime-local, month, time, week.
+Added option panel closing when deleting GlnSelect.
+Fixed GlnTouchRipple bug where sometimes click on source element didn't work.
+The GlnOption interface has been created for methods of the GlnOptionComponent class.
+This will allow other classes to use this interface and not be tied to a specific implementation.
+
+### Features
+
+* added a new **Autocomplete** component.
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/alx-melnichuk/gelenium-ui/tree/0.3.0) (2022-10-14)
 
