@@ -88,4 +88,18 @@ app-cm-switch-customization {
     --glnsw-def-chk-thumb: hsl(0deg 0% 100%);
     --glnsw-def-chk-track: #1890ff;
   }
+
+  .sc-square {
+    --glnsw-thumb-hg: 1.375em;
+    --glnsw-thumb-wd: 1.375em;
+    --glnsw-thumb-brd-rds: 0.3em;
+    --glnsw-track-hg: 1.625em;
+    --glnsw-track-wd: 2.625em;
+    --glnsw-track-brd-rds: 0.4em;
+
+    --glnsw-def-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-track: rgba(0,0,0,.25);
+    --glnsw-def-chk-thumb: hsl(0deg 0% 100%);
+    --glnsw-def-chk-track: #5f9ea0;
+  }
 }

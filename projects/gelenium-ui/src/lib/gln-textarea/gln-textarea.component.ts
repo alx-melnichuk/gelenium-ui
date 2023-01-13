@@ -129,12 +129,7 @@ export class GlnTextareaComponent
   public frameComp!: GlnFrameComponent;
   @ViewChild('textareaElement', { static: true })
   public textareaElementRef!: ElementRef<HTMLElement>;
-  @ViewChild('wrapElementRef', { read: ElementRef<HTMLDivElement>, static: true })
-  public wrapElementRef!: ElementRef<HTMLDivElement>;
 
-  public get wrapHtmlElementRef(): ElementRef<HTMLElement> {
-    return this.wrapElementRef as ElementRef<HTMLElement>;
-  }
   public get exteriorVal(): GlnFrameExterior | null {
     return this.frameComp.exteriorVal;
   }
@@ -331,7 +326,7 @@ export class GlnTextareaComponent
 
   // ** GlnNodeInternalValidator - finish **
 
-  // ** Public API **
+  // ** Public methods **
 
   public getBoolean(value: string | boolean | null | undefined): boolean | null {
     return BooleanUtil.init(value);
@@ -370,7 +365,7 @@ export class GlnTextareaComponent
     }
   }
 
-  // ** Private API **
+  // ** Private methods **
 
   private prepareFormGroup(isRequired: boolean | null, minLength: number | null | undefined, maxLength: number | null | undefined): void {
     this.formControl.clearValidators();

@@ -1,8 +1,6 @@
-import { GlnBaseControlConfig } from '../_interface/gln-base-control-config.interface';
-
 import { GlnSwitchPosition } from './gln-switch-position.interface';
 
-export interface GlnSwitchConfig extends GlnBaseControlConfig {
+export interface GlnSwitchConfig {
   isChecked?: boolean | undefined;
   isNoAnimation?: boolean | undefined;
   isNoRipple?: boolean | undefined;

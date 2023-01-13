@@ -174,6 +174,189 @@
   </tbody>
 </table>
 
+<hr br-nn />
+
+<section mr-vr
+  id="api-css-variables-optional">
+  <h4 class="app-hover-link">
+    Css variables, optional. You can override the default values.
+    <a [href]="urlCmSwitch + '#api-css-variables-optional'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- of the uncheck -->
+    <tr>
+      <td><code>--glnsw-def-wrap:<br/>
+        &nbsp;hsla(var(--glnsw--default-[h,s]), 70%, 20%);</code></td>
+      <td><span>Determines the background-color for the wrap "thumb" of the uncheck on hover.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-def-thumb:<br/>
+        &nbsp;hsl(var(--glnsw--default-bg-[h,s,l]));</code></td>
+      <td><span>Determines the background-color for the "thumb" of the uncheck.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-def-track:<br/>
+        &nbsp;hsl(var(--glnsw--default-[h,s]), 75%);</code></td>
+      <td><span>Determines the background-color for the "track" of the uncheck.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-def-rip:<br/>
+        &nbsp;hsla(var(--glnsw--default-[h,s]), 70%, 30%);</code></td>
+      <td><span>Determines the color ripple effect of the uncheck.</span></td>
+    </tr>
+    <!-- of the check -->
+    <tr>
+      <td><code>--glnsw-def-chk-wrap:<br/>
+        &nbsp;hsla(var(--glnsw--primary-[h,s]), 75%, 20%);</code></td>
+      <td>
+        <span>Determines the background-color for the wrap "thumb" of the check on hover.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-def-chk-thumb:<br/>
+        &nbsp;hsl(var(--glnsw--primary-[h,s]), 50%);</code></td>
+      <td><span>Determines the background-color for the "thumb" of the check.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-def-chk-track:<br/>
+        &nbsp;hsl(var(--glnsw--primary-[h,s]), 75%);</code></td>
+      <td><span>Determines the background-color for the "track" of the check.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-def-chk-rip:<br/>
+        &nbsp;hsla(var(--glnsw--primary-[h,s]), 75%, 30%);</code></td>
+      <td><span>Determines the color ripple effect of the check.</span></td>
+    </tr>
+    <!-- disable and of the uncheck -->
+    <tr>
+      <td><code>--glnsw-dis-thumb:<br/>
+        &nbsp;hsl(var(--glnsw--default-bg-[h,s]), 95%);</code></td>
+      <td>
+        <span>
+          Determines the background-color for the "thumb" when disable and of the uncheck.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-dis-track:<br/>
+        &nbsp;hsla(var(--glnsw--default-[h,s]), 60%, 30%);</code></td>
+      <td>
+        <span>
+          Determines the background-color for the "track" when disable and of the uncheck.
+        </span>
+      </td>
+    </tr>
+    <!-- disable and of the check -->
+    <tr>
+      <td><code>--glnsw-dis-chk-thumb:<br/>
+        &nbsp;hsl(var(--glnsw--primary-[h,s]), 80%);</code></td>
+      <td>
+        <span>
+          Determines the background-color for the "thumb" when disable and of the check.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-dis-chk-track:<br/>
+        &nbsp;hsl(var(--glnsw--primary-[h,s]), 93%);</code></td>
+      <td>
+        <span>
+          Determines the background-color for the "track" when disable and of the check.
+        </span>
+      </td>
+    </tr>
+
+    <!-- "container" -->
+    <tr>
+      <td><code>--glnsw-container-pd: 1em;</code></td>
+      <td>
+        <span>Determines the padding value for the "container".</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-container-brd-rds: 2em;</code></td>
+      <td>
+        <span>Determines the border-radius value for the "container".</span>
+      </td>
+    </tr>
+    <!-- wrap "thumb" -->
+    <tr>
+      <td><code>--glnsw-wrap-brd-rds: 50%;</code></td>
+      <td>
+        <span>Determines the border-radius value of the wrap "thumb".</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-wrap-pd: 0.75em;</code></td>
+      <td>
+        <span>Determines the padding value of the wrap "thumb".</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-wrap-shift: 1.25em</code></td>
+      <td>
+        <span>Determines the shift value of the wrap "thumb".</span>
+      </td>
+    </tr>
+    <!-- "thumb" -->
+    <tr>
+      <td><code>--glnsw-thumb-brd-rds: 50%;</code></td>
+      <td>
+        <span>Determines the border-radius value of the "thumb".</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-thumb-hg: 1.5em;</code></td>
+      <td>
+        <span>Determines the height value of the "thumb".</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-thumb-wd: 1.5em;</code></td>
+      <td>
+        <span>Determines the width value of the "thumb".</span>
+      </td>
+    </tr>
+    <!-- "track" -->
+    <tr>
+      <td><code>--glnsw-track-brd-rds: 32%/64%;</code></td>
+      <td>
+        <span>Determines the border-radius value of the "track".</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-track-hg: 1em;</code></td>
+      <td>
+        <span>Determines the height value of the "track".</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsw-track-wd: 2.3em;</code></td>
+      <td>
+        <span>Determines the width value of the "track".</span>
+      </td>
+    </tr>
+    <!-- "label" -->
+    <tr>
+      <td><code>--glnsw-label-font-size</code></td>
+      <td>
+        <span>Determines the font-size value of the "label".</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <section mr-vr>
   <p>
     But we strongly recommend DO NOT USE [(ngModel)] (at least in production).

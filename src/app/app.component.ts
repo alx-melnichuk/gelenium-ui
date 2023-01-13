@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { AutoUnsubscribe } from './lib-core/decorators/auto-unsubscribe';
 import { ScrollAfterRoutingUtil } from './lib-core/utils/scroll-after-routing.util';
 
 @Component({
@@ -11,8 +10,7 @@ import { ScrollAfterRoutingUtil } from './lib-core/utils/scroll-after-routing.ut
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-@AutoUnsubscribe()
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'gelenium-ui-demo';
   private routerEventsSub: Subscription | null = null;
 
@@ -20,5 +18,9 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.routerEventsSub = ScrollAfterRoutingUtil.listenForRouterEvents(this.router);
+  }
+
+  public ngOnDestroy(): void {
+    this.routerEventsSub?.unsubscribe();
   }
 }

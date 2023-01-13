@@ -1,0 +1,68 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Feature
+    <a [href]="urlCmSelect + '#Feature'">#</a>
+  </h3>
+  <p>
+    Suppose we have a parent component that consists of several sections (child components).
+    Each section has its own unique id (#anchor) and is at least 800px high.
+    An absolute link to an anchor allows you to quickly navigate to the desired section.
+    In other words, using the link "href=#anchor" we can move between sections.
+  </p>
+  <p>
+    Let's assume that the user followed an absolute link to the first section.
+    The user then followed an absolute link to the second section.
+    In the second section, the user opened the GlnSelect component selection panel.
+  </p>
+  <p>
+    Next, the user presses a button on the "Back" panel (go to the previous link, i.e. return to the
+    first section).
+    The panel for selecting the GlnSelect component from the second section will open on the screen.
+  </p>
+  <p>
+    This happens because the component of the second section was not destroyed and there was no
+    event to close the open selection panel of the GlnSelect component.
+    In this case, the parent component was not explicitly scrolled.
+    Although all GlnSelect components were set to "block scroll" when the select bar was open, it
+    didn't work in this case.
+    And since the GlnSelect component's select bar is rendered on its own layer of the "body"
+    element, this results in an overlay of the first section and the open GlnSelect component's
+    select bar of the second section.
+    (This issue arose while developing this demo page.)
+  </p>
+  <p>
+    To solve this problem, you need:
+  </p>
+  <span>
+    1. set the scroll event handler for the parent component;
+  </span>
+  <code><pre source="html">
+&lt;div style="height: 100%; overflow-y: auto;"
+  (scroll)="doScroll()"&gt;
+  &lt;div class="main-side-content"&gt;
+    &lt;section id="section1"&gt;
+      &lt;app-section1&gt;&lt;/app-section1&gt;
+    &lt;/section&gt;
+    &lt;section id="section2"&gt;
+      &lt;app-section2&gt;&lt;/app-section2&gt;
+    &lt;/section&gt;
+    ...
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+  <br />
+  <code><pre source="ts">
+export class SiteComponent &#123;
+  public doScroll(): void &#123;
+    // Close an open selection panel.
+    GlnSelectOpenUtil.closeAll();
+  &#125;
+&#125;</pre></code>
+  <p>
+    2. close the open selection panel of the GlnSelect component;
+  </p>
+  <p>
+    There is a static class GlnSelectOpenUtil, which contains a list of all GlnSelect components
+    with an open selection panel.
+    Calling the static method "closeAll()" will gracefully close all open selection panes.
+  </p>
+</section>

@@ -1,0 +1,1182 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Attributes.
+    <a [href]="urlCmAutocomplete + '#Attributes'">#</a>
+  </h3>
+  <h4 class="app-hover-link"
+    id="attributes-supported01">
+    The following attributes are supported 1:
+    <a [href]="urlCmAutocomplete + '#attributes-supported01'">#</a>
+  </h4>
+
+  <ul>
+    <li>
+      "id" - parameter for defining the unique identifier of the field
+      (id="unique_identifier");
+    </li>
+    <li>
+      "config" - Defines a configuration object.
+      <a [href]="urlCmAutocomplete + '#config-interface'">More details.</a>
+    </li>
+    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
+    <li>
+      "position" - Defines horizontal positioning.
+      It can take the following values:
+      <ul>
+        <li>"start" - positioned at the left edge (default);</li>
+        <li>"center" - positioned in the middle;</li>
+        <li>"end" - positioned on the right edge;</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior02b"
+    (change)="exterior02b=$event.value">
+    <mat-button-toggle [checked]="exterior02b==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02b==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02b==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup02b"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: id, position='start' (default).</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02a"
+        class="aca-middle"
+        label="Fruit"
+        [exterior]="exterior02b"
+        [glnAutocompleteTrigger]="autocomplete02a"
+        helperText="Used: id, position.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02a="glnAutocomplete"
+        id="unique_id_autocomplete02a"
+        position="start">
+        <gln-option *ngFor="let item of fruitsB"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: position='center'.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02b"
+        class="aca-middle"
+        label="Fruit"
+        [exterior]="exterior02b"
+        [glnAutocompleteTrigger]="autocomplete02b"
+        helperText="Used: position='center'.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02b="glnAutocomplete"
+        position="center">
+        <gln-option *ngFor="let item of fruitsB"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: position='end'.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02c"
+        class="aca-middle"
+        label="Fruit"
+        [exterior]="exterior02b"
+        [glnAutocompleteTrigger]="autocomplete02c"
+        helperText="Used: position='end'.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02c="glnAutocomplete"
+        position="end">
+        <gln-option *ngFor="let item of fruitsB"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isDisabled.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02d"
+        class="aca-middle"
+        label="Fruit"
+        [exterior]="exterior02b"
+        [glnAutocompleteTrigger]="autocomplete02d"
+        helperText="Used: isDisabled.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02d="glnAutocomplete"
+        isDisabled>
+        <gln-option *ngFor="let item of fruitsB"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+  </div>
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup02b"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: id, position='start' (default).&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02a"
+        class="aca-middle"
+        label="Fruit"
+        [exterior]="exterior02b"
+        [glnAutocompleteTrigger]="autocomplete02a"
+        helperText="Used: id, position."&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete02a="glnAutocomplete"
+        id="unique_id_autocomplete02a"
+        position="start"&gt;
+        &lt;gln-option *ngFor="let item of fruitsB"
+          [value]="item"&gt;
+          <b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: position='center'.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02b"
+        class="aca-middle"
+        label="Fruit"
+        [exterior]="exterior02b"
+        [glnAutocompleteTrigger]="autocomplete02b"
+        helperText="Used: position='center'."&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete02b="glnAutocomplete"
+        position="center"&gt;
+        &lt;gln-option *ngFor="let item of fruitsB"
+          [value]="item"&gt;
+          <b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: position='end'.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02c"
+        class="aca-middle"
+        label="Fruit"
+        [exterior]="exterior02b"
+        [glnAutocompleteTrigger]="autocomplete02c"
+        helperText="Used: position='end'."&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete02c="glnAutocomplete"
+        position="end"&gt;
+        &lt;gln-option *ngFor="let item of fruitsB"
+          [value]="item"&gt;
+          <b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isDisabled.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02d"
+        class="aca-middle"
+        label="Fruit"
+        [exterior]="exterior02b"
+        [glnAutocompleteTrigger]="autocomplete02d"
+        helperText="Used: isDisabled."&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete02d="glnAutocomplete"
+        isDisabled&gt;
+        &lt;gln-option *ngFor="let item of fruitsB"
+          [value]="item"&gt;
+          <b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormGroup, FormControl 
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-autocomplete',
+  templateUrl: './autocomplete.component.html',
+  styleUrls: ['./autocomplete.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class AutocompleteComponent &#123;
+  public fruitsB = [
+    'mango', 'ripe lemon', 'gorgeous orange',
+    'african cherry orange', 'succulent watermelon'
+  ];
+  public exterior02b = 'outlined';
+  public control02b = &#123;
+    model02a: new FormControl(null, []),
+    model02b: new FormControl(null, []),
+    model02c: new FormControl(null, []),
+    model02d: new FormControl(null, []),
+  &#125;;
+  public formGroup02b: FormGroup = new FormGroup(this.control02b);
+
+  public capitalizeFirstLetter(value: string): string &#123;
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-autocomplete &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .aca-middle &#123;
+    width: 160px;
+	&#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="attributes-supported02">
+  <h4 class="app-hover-link">
+    Attributes are also supported 2:
+    <a [href]="urlCmAutocomplete + '#attributes-supported02'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "isMaxWd" - set the maximum width when expanding the dropdown list of options.
+      <br />
+      Without this setting, the maximum width of the options panel is determined by its
+      content.
+      <br />
+      The value of the minimum width of the options panel is always equal to the width
+      of the parent.
+    </li>
+    <li>
+      css: '--glnac-min-width: 180px;' - defines the minimum width of the option list
+      dropdown list of options.
+    </li>
+    <li>
+      css: '--glnac-max-width: 180px;' - defines the maximum width of the option list
+      dropdown list of options.
+    </li>
+    <li>
+      "panelClass" - set the classes to be applied to the options panel.
+      Supports the same syntax as 'ngClass'.
+    </li>
+  </ul>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior02c"
+    (change)="exterior02c=$event.value">
+    <mat-button-toggle [checked]="exterior02c==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02c==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02c==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup02c"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: without isMaxWd.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02f"
+        class="aca-medium"
+        label="Fruit"
+        [exterior]="exterior02c"
+        [glnAutocompleteTrigger]="autocomplete02f"
+        helperText="Not used: isMaxWd.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02f="glnAutocomplete">
+        <gln-option *ngFor="let item of fruitsB"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: with isMaxWd.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02g"
+        class="aca-medium"
+        label="Fruit"
+        [exterior]="exterior02c"
+        [glnAutocompleteTrigger]="autocomplete02g"
+        helperText="Used: isMaxWd.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02g="glnAutocomplete"
+        isMaxWd>
+        <gln-option *ngFor="let item of fruitsB"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>css: '--glnac-max-width: 185px;'.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02h"
+        style="width: 161px;"
+        label="Fruit"
+        [exterior]="exterior02c"
+        [glnAutocompleteTrigger]="autocomplete02h"
+        helperText="css: --glnac-max-width">
+      </gln-input>
+      <gln-autocomplete #autocomplete02h="glnAutocomplete"
+        style="--glnac-max-width: 185px;">
+        <gln-option *ngFor="let item of fruitsB"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: panelClass.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02i"
+        class="aca-medium"
+        label="Fruit"
+        [exterior]="exterior02c"
+        [glnAutocompleteTrigger]="autocomplete02i"
+        helperText="Used: panelClass.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02i="glnAutocomplete"
+        panelClass="aca-panel-color">
+        <gln-option *ngFor="let item of fruitsB"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup02c"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: without isMaxWd.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02f"
+        class="aca-medium"
+        label="Fruit"
+        [exterior]="exterior02c"
+        [glnAutocompleteTrigger]="autocomplete02f"
+        helperText="Not used: isMaxWd."&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete02f="glnAutocomplete"&gt;
+        &lt;gln-option *ngFor="let item of fruitsB"
+          [value]="item"&gt;
+          <b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: with isMaxWd.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02g"
+        class="aca-medium"
+        label="Fruit"
+        [exterior]="exterior02c"
+        [glnAutocompleteTrigger]="autocomplete02g"
+        helperText="Used: isMaxWd."&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete02g="glnAutocomplete"
+        isMaxWd&gt;
+        &lt;gln-option *ngFor="let item of fruitsB"
+          [value]="item"&gt;
+          <b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;css: '--glnac-max-width: 185px;'.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02h"
+        style="width: 161px;"
+        label="Fruit"
+        [exterior]="exterior02c"
+        [glnAutocompleteTrigger]="autocomplete02h"
+        helperText="css: --glnac-max-width"&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete02h="glnAutocomplete"
+        style="--glnac-max-width: 185px;"&gt;
+        &lt;gln-option *ngFor="let item of fruitsB"
+          [value]="item"&gt;
+          <b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: panelClass.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02i"
+        class="aca-medium"
+        label="Fruit"
+        [exterior]="exterior02c"
+        [glnAutocompleteTrigger]="autocomplete02i"
+        helperText="Used: panelClass."&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete02i="glnAutocomplete"
+        panelClass="aca-panel-color"&gt;
+        &lt;gln-option *ngFor="let item of fruitsB"
+          [value]="item"&gt;
+          <b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormGroup, FormControl 
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-autocomplete',
+  templateUrl: './autocomplete.component.html',
+  styleUrls: ['./autocomplete.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class AutocompleteComponent &#123;
+  public fruitsB = [
+    'mango', 'ripe lemon', 'gorgeous orange',
+    'african cherry orange', 'succulent watermelon'
+  ];
+  
+  public exterior02c = 'outlined';
+  public control02c = &#123;
+    model02f: new FormControl(null, []),
+    model02g: new FormControl(null, []),
+    model02h: new FormControl(null, []),
+    model02i: new FormControl(null, []),
+  &#125;;
+  public formGroup02c: FormGroup = new FormGroup(this.control02c);
+
+  public capitalizeFirstLetter(value: string): string &#123;
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-autocomplete &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .aca-medium &#123;
+    width: 160px;
+	&#125;
+  .aca-panel-color &#123;
+    color: blue;
+    background-color: honeydew;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="attributes-supported03">
+  <h4 class="app-hover-link">
+    Attributes are also supported 3:
+    <a [href]="urlCmAutocomplete + '#attributes-supported03'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "visibleSize" - sets the maximum number of visible option elements.
+      <br />
+      The options bar is set to <i>max-height = optionHeight * visibleSize</i>.
+      <br />
+      Where option height is <i>optionHeight = lineHeight + 2 * 0.375 * fontSize</i>;
+    </li>
+    <li>
+      css: '--glnac-max-height: 180px;' - defines the maximum height of the option
+      list dropdown list of options.
+    </li>
+    <li>
+      "isNoAnimation" - hide the display of animation when expanding the dropdown
+      list of options.
+    </li>
+    <li>
+      css: '--glnac-elevation: none;' - hide the display of shadow effects when
+      expanding the dropdown list of options.
+    </li>
+  </ul>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior02d"
+    (change)="exterior02d=$event.value">
+    <mat-button-toggle [checked]="exterior02d==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02d==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02d==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup02d"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: visibleSize=6.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02k"
+        style="width: 161px;"
+        label="Fruit"
+        [exterior]="exterior02d"
+        [glnAutocompleteTrigger]="autocomplete02k"
+        helperText="Used: visibleSize=6.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02k="glnAutocomplete"
+        [visibleSize]="6">
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>css: '--glnac-max-height: 180px;'.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02l"
+        class="aca-normal"
+        label="Fruit"
+        [exterior]="exterior02d"
+        [glnAutocompleteTrigger]="autocomplete02l"
+        helperText="css: --glnac-max-height">
+      </gln-input>
+      <gln-autocomplete #autocomplete02l="glnAutocomplete"
+        style="--glnac-max-height: 180px;">
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isNoAnimation.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02m"
+        class="aca-normal"
+        label="Fruit"
+        [exterior]="exterior02d"
+        [glnAutocompleteTrigger]="autocomplete02m"
+        helperText="Used: isNoAnimation.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02m="glnAutocomplete"
+        isNoAnimation>
+        <gln-option *ngFor="let item of fruitsB"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>css: '--glnac-elevation: none;'.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02n"
+        class="aca-normal"
+        label="Fruit"
+        [exterior]="exterior02d"
+        [glnAutocompleteTrigger]="autocomplete02n"
+        helperText="css: --glnac-elevation">
+      </gln-input>
+      <gln-autocomplete #autocomplete02n="glnAutocomplete"
+        style="--glnac-elevation: none;">
+        <gln-option *ngFor="let item of fruitsB"
+          [value]="item">{{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+  </div>
+
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup02d"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: visibleSize=6.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02k"
+        style="width: 161px;"
+        label="Fruit"
+        [exterior]="exterior02d"
+        [glnAutocompleteTrigger]="autocomplete02k"
+        helperText="Used: visibleSize=6."&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete02k="glnAutocomplete"
+        [visibleSize]="6"&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;
+          <b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;css: '--glnac-max-height: 180px;'.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02l"
+        class="aca-normal"
+        label="Fruit"
+        [exterior]="exterior02d"
+        [glnAutocompleteTrigger]="autocomplete02l"
+        helperText="css: --glnac-max-height"&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete02l="glnAutocomplete"
+        style="--glnac-max-height: 180px;"&gt;
+        &lt;gln-option *ngFor="let item of fruits"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attribute: isNoAnimation.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02m"
+        class="aca-normal"
+        label="Fruit"
+        [exterior]="exterior02d"
+        [glnAutocompleteTrigger]="autocomplete02m"
+        helperText="Used: isNoAnimation."&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete02m="glnAutocomplete"
+        isNoAnimation&gt;
+        &lt;gln-option *ngFor="let item of fruitsB"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;css: '--glnac-elevation: none;'.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-input formControlName="model02n"
+        class="aca-normal"
+        label="Fruit"
+        [exterior]="exterior02d"
+        [glnAutocompleteTrigger]="autocomplete02n"
+        helperText="css: --glnac-elevation"&gt;
+      &lt;/gln-input&gt;
+      &lt;gln-autocomplete #autocomplete02n="glnAutocomplete"
+        style="--glnac-elevation: none;"&gt;
+        &lt;gln-option *ngFor="let item of fruitsB"
+          [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
+        &lt;/gln-option&gt;
+      &lt;/gln-autocomplete&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormGroup, FormControl 
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-autocomplete',
+  templateUrl: './autocomplete.component.html',
+  styleUrls: ['./autocomplete.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class AutocompleteComponent &#123;
+  public fruitsB = [
+    'mango', 'ripe lemon', 'gorgeous orange',
+    'african cherry orange', 'succulent watermelon'
+  ];
+  public fruits = [
+    'apple'     , 'apricot'  , 'avocado'   , 'banana'    , 'black currant',
+    'blackberry', 'blueberry', 'cherry'    , 'coconut'   , 'cranberry'    ,
+    'dragonfruit', 'fig'     , 'goji berry', 'grape'     , 'grapefruit'   ,
+    'grapes'    , 'guava'    , 'iwi'       , 'jackfruit' , 'jamun'        ,
+    'jujube'    , 'lemon'    , 'lime'      , 'longan'    , 'loquat'       ,
+    'lychee'    , 'mandarin' , 'mango'     , 'melon'     , 'mulberry'     ,
+    'nectarine' , 'kiwi'     , 'olive'     , 'orange'    , 'palm fruit'   ,
+    'papaya', 'passion fruit', 'peach'     , 'pear'      , 'persimmon'    ,
+    'pineapple' , 'plum'  , 'pomegranate', 'prickly pear', 'pumpkin'      ,
+    'quince'    , 'raspberry', 'red currant', 'sapodilla', 'satsuma'      ,
+    'strawberry','sweet lemon', 'tamarind' , 'tangerine' , 'watermelon'
+  ];
+  public exterior02d = 'outlined';
+  public control02d = &#123;
+    model02k: new FormControl(null, []),
+    model02l: new FormControl(null, []),
+    model02m: new FormControl(null, []),
+    model02n: new FormControl(null, []),
+  &#125;;
+  public formGroup02d: FormGroup = new FormGroup(this.control02d);
+
+  public capitalizeFirstLetter(value: string): string &#123;
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-autocomplete &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .aca-normal &#123;
+    width: 160px;
+	&#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+
+<section mr-vr
+  id="attributes-supported04">
+  <h4 class="app-hover-link">
+    Attributes are also supported 4:
+    <a [href]="urlCmAutocomplete + '#attributes-supported04'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "isClearOnEscape" - clear the input field when pressing 'Escape'.
+    </li>
+    <li>
+      "isNoCloseOnSelect" - the options panel will not close after an option is selected.
+    </li>
+    <li>
+      "isNoRipple" - Disables the ripple effect.
+    </li>
+    <li>
+      "isNoOpenOnMouse" - the options panel will not open/close on mouse click.
+    </li>
+    <li>
+      "isOpenOnFocus" - the options panel opens after receiving input focus.
+    </li>
+    <li>
+      "css: font-size: 1.125em;" - You can change the font size for GlnAutocomplete
+      and that font size will be applied to the available options in the list.
+    </li>
+  </ul>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior02e"
+    (change)="exterior02e=$event.value">
+    <mat-button-toggle [checked]="exterior02e==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02e==='underline'"
+      value="underline">{{ labelUnderline }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02e==='standard'"
+      value="standard">{{ labelStandard }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<form [formGroup]="formGroup02e"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isClearOnEscape.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02p"
+        class="aca-elem"
+        label="Fruit"
+        [exterior]="exterior02e"
+        [glnAutocompleteTrigger]="autocomplete02p"
+        helperText="Used: isClearOnEscape.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02p="glnAutocomplete"
+        [visibleSize]="6"
+        isClearOnEscape>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isNoCloseOnSelect, isNoRipple.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02q"
+        style="width: 192px;"
+        label="Fruit"
+        [exterior]="exterior02e"
+        [glnAutocompleteTrigger]="autocomplete02q"
+        helperText="isNoCloseOnSelect, isNoRipple">
+      </gln-input>
+      <gln-autocomplete #autocomplete02q="glnAutocomplete"
+        [visibleSize]="6"
+        isNoRipple
+        isNoCloseOnSelect>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isNoOpenOnMouse.</em>(open:&#11014;,&#11015;)
+        </small>
+      </div>
+      <gln-input formControlName="model02r"
+        class="aca-elem"
+        label="Fruit"
+        [exterior]="exterior02e"
+        [glnAutocompleteTrigger]="autocomplete02r"
+        helperText="Used: isNoOpenOnMouse.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02r="glnAutocomplete"
+        [visibleSize]="6"
+        isNoOpenOnMouse>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: isOpenOnFocus.</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02s"
+        class="aca-elem"
+        label="Fruit"
+        [exterior]="exterior02e"
+        [glnAutocompleteTrigger]="autocomplete02s"
+        helperText="Used: isOpenOnFocus.">
+      </gln-input>
+      <gln-autocomplete #autocomplete02s="glnAutocomplete"
+        [visibleSize]="6"
+        isOpenOnFocus>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>css: font-size: 1.125em;</em>
+        </small>
+      </div>
+      <gln-input formControlName="model02t"
+        class="aca-elem"
+        label="Fruit"
+        [exterior]="exterior02e"
+        [glnAutocompleteTrigger]="autocomplete02t"
+        helperText="css: font-size: 1.125em;">
+      </gln-input>
+      <gln-autocomplete #autocomplete02t="glnAutocomplete"
+        style="font-size: 1.125em;"
+        [visibleSize]="6"
+        isOpenOnFocus>
+        <gln-option *ngFor="let item of fruits"
+          [value]="item">
+          {{ capitalizeFirstLetter(item) }}
+        </gln-option>
+      </gln-autocomplete>
+    </div>
+
+  </div>
+</form>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup02d"
+
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormGroup, FormControl 
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-autocomplete',
+  templateUrl: './autocomplete.component.html',
+  styleUrls: ['./autocomplete.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class AutocompleteComponent &#123;
+  // prettier-ignore
+  public fruits = [
+    'apple'     , 'apricot'  , 'avocado'   , 'banana'    , 'black currant',
+    'blackberry', 'blueberry', 'cherry'    , 'coconut'   , 'cranberry'    ,
+    'dragonfruit', 'fig'     , 'goji berry', 'grape'     , 'grapefruit'   ,
+    'grapes'    , 'guava'    , 'iwi'       , 'jackfruit' , 'jamun'        ,
+    'jujube'    , 'lemon'    , 'lime'      , 'longan'    , 'loquat'       ,
+    'lychee'    , 'mandarin' , 'mango'     , 'melon'     , 'mulberry'     ,
+    'nectarine' , 'kiwi'     , 'olive'     , 'orange'    , 'palm fruit'   ,
+    'papaya', 'passion fruit', 'peach'     , 'pear'      , 'persimmon'    ,
+    'pineapple' , 'plum'  , 'pomegranate', 'prickly pear', 'pumpkin'      ,
+    'quince'    , 'raspberry', 'red currant', 'sapodilla', 'satsuma'      ,
+    'strawberry','sweet lemon', 'tamarind' , 'tangerine' , 'watermelon'
+  ];
+  public exterior02e = 'outlined';
+  public control02e = &#123;
+    model02p: new FormControl(null, []),
+    model02q: new FormControl(null, []),
+    model02r: new FormControl(null, []),
+    model02s: new FormControl(null, []),
+    model02t: new FormControl(null, []),
+  &#125;;
+  public formGroup02e: FormGroup = new FormGroup(this.control02e);
+
+  public capitalizeFirstLetter(value: string): string &#123;
+    return value ? value[0].toUpperCase() + value.slice(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-autocomplete &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .aca-normal &#123;
+    width: 160px;
+	&#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

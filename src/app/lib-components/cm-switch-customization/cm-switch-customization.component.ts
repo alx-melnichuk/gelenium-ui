@@ -29,6 +29,7 @@ export class CmSwitchCustomizationComponent {
     model05c: new FormControl(true, []),
     model05d: new FormControl(true, []),
     model05e: new FormControl(true, []),
+    model05f: new FormControl(true, []),
   });
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

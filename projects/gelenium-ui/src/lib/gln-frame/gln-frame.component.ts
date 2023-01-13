@@ -205,13 +205,13 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     }
   }
 
-  // ** Public API **
+  // ** Public methods **
 
-  // ** Private API **
+  // ** Private methods **
 
   private getLineHeight(): number {
     if (this.lineHeightInn === 0) {
-      this.lineHeightInn = Number(getComputedStyle(this.hostRef.nativeElement).getPropertyValue('line-height').replace('px', ''));
+      this.lineHeightInn = HtmlElemUtil.propertyAsNumber(this.hostRef, 'line-height');
     }
     return this.lineHeightInn;
   }

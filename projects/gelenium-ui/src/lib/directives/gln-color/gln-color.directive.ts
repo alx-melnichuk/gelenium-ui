@@ -38,7 +38,7 @@ export class GlnColorDirective implements OnChanges {
     }
   }
 
-  // ** Private API **
+  // ** Private methods **
 
   private settingCssProoperties(maps: Map<string, string>): Map<string, string> {
     const paramMaps: Map<string, string> = new Map();

@@ -1,4 +1,4 @@
 /*
- * Public API Surface of gelenium-ui
+ * Public methods Surface of gelenium-ui
  */
 export * from './lib/public-api';

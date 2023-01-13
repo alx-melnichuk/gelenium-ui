@@ -17,15 +17,16 @@ gln-frame {
   --glnfr--danger-h: var(--glncl-danger-h, var(--gln-danger-h));
   --glnfr--danger-s: var(--glncl-danger-s, var(--gln-danger-s));
 
+  --glnfr--elem-height: 1.4375em; // The value of the "line height" for the input element. (23px for font-size: 16px)
+
   background-color: transparent;
   border: 0;
-  display: flex;
-  line-height: 1.4375em; // The value of the "line height" for the input element. (23px for font-size: 16px)
+  display: block;
+  line-height: var(--glnfr--elem-height); // 1.4375em - 23px for font-size: 16px
   margin: 0;
   min-width: 0;
   padding: 0px;
   position: relative;
-  vertical-align: top;
 
   // Small indentation of the legend from the border for "outlined" mode.
   --def-o-lgn-pd: 0.3em;
@@ -196,16 +197,18 @@ gln-frame {
     color: var(--glnfr--label-cl);
   }
 
-  // ** Section "div.glnfr-border". **
+  // ** Section "div[decor-brb].glnfr-border". **
   &>div {
     align-items: center;
     box-sizing: border-box;
     border-radius: inherit;
     display: flex;
     flex-wrap: nowrap;
-    width: 100%;
     &>[glnfr-elem] {
+      font: inherit; // include: line-height: inherit;
       flex-grow: 1;
+      margin: 0;
+      width: 100%;
     }
     &>[glnfr-orn-lf], &>[glnfr-orn-rg] {
       flex-shrink: 0;
@@ -378,24 +381,21 @@ gln-frame {
 
   // Ornament "padding".
   &>div {
-    &>[glnfr-pd-ver],
-    &>[glnfr-mr-ver] {
-      line-height: inherit; // Stores the line height for the end element.
-      align-self: baseline;
-    }
     &>[glnfr-pd-ver] {
+      align-self: baseline;
       padding-top   : var(--glnfr---pd-tp);
       padding-bottom: var(--glnfr---pd-bt);
     }
     &>[glnfr-mr-ver] {
+      align-self: baseline;
       margin-top   : var(--glnfr---pd-tp);
       margin-bottom: var(--glnfr---pd-bt);
     }
 
     &>span[glnfr-orn-lf], &>span[glnfr-orn-rg] {
-      max-height: inherit;
-      display: inline-flex;
       align-items: center;
+      display: inline-flex;
+      max-height: inherit;
     }
     &>span[glnfr-orn-rg] {
       order: 1;

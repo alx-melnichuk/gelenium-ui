@@ -11,6 +11,7 @@ export interface GlnSelectConfig extends GlnFrameConfig {
   backdropClass?: string | undefined; // default 'cdk-overlay-transparent-backdrop'
   isCheckmark?: boolean | undefined;
   isError?: boolean | undefined;
+  isMaxWd?: boolean | undefined;
   isMultiple?: boolean | undefined;
   isNoIcon?: boolean | undefined;
   isNoRipple?: boolean | undefined;
@@ -19,7 +20,7 @@ export interface GlnSelectConfig extends GlnFrameConfig {
   ornamLfAlign?: string | undefined; // GlnFrameOrnamAlignType
   ornamRgAlign?: string | undefined; // GlnFrameOrnamAlignType
   overlayPanelClass?: string | string[] | undefined;
-  panelClass?: string | string[] | Set<string> | { [key: string]: any } | undefined;
+  panelClass?: string | string[] | Set<string> | { [key: string]: unknown } | undefined;
   position?: string | undefined; // Horizontal position = 'start'-default | 'center' | 'end';
   visibleSize?: number | undefined; // default 0
 }

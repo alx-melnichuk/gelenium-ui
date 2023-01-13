@@ -1,0 +1,18 @@
+/*# sourceURL=cm-autocomplete.component.scss */
+
+app-cm-autocomplete {
+  display: block;
+
+  .a-items {
+    display: flex;
+    flex-wrap: wrap;
+
+    &>:first-child {
+      margin-left: 3%;
+    }
+
+    &>:not(first-child) {
+      margin-left: 7%;
+    }
+  }
+}

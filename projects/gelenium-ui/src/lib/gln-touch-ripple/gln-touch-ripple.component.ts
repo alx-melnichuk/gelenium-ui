@@ -49,13 +49,13 @@ export class GlnTouchRippleComponent implements OnChanges {
     }
   }
 
-  // ** Public API **
+  // ** Public methods **
 
   public touchRipple(event: MouseEvent, isCenter: boolean = this.center): void {
     this.doRipple(event, isCenter);
   }
 
-  // ** Private API **
+  // ** Private methods **
 
   private doRipple(event: MouseEvent, isCenter: boolean): void {
     const parentElement = this.hostRef.nativeElement.parentElement;

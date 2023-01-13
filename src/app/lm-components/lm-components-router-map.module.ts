@@ -8,6 +8,18 @@ import { SiteMenuUtil, SiteUrl } from '../lib-core/utils/site-menu.util';
 
 RouterConfig.add('URL_COMPONENTS', 'components');
 
+RouterConfig.add('URL_COMPONENTS_AUTOCOMPLETE', 'autocomplete');
+const urlAutocomplete = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_AUTOCOMPLETE');
+const siteUrlsAutocomplete: SiteUrl[] = [
+  { label: 'Basic', url: urlAutocomplete, fragment: 'Basic' },
+  { label: 'Attributes', url: urlAutocomplete, fragment: 'Attributes' },
+  { label: 'Asynchrony', url: urlAutocomplete, fragment: 'Asynchrony' },
+  { label: 'Feature', url: urlAutocomplete, fragment: 'Feature' },
+  { label: 'Config', url: urlAutocomplete, fragment: 'Config' },
+  { label: 'Api', url: urlAutocomplete, fragment: 'Api' },
+];
+SiteMenuUtil.addItem('Components', 'Autocomplete', { label: 'Autocomplete', siteUrls: siteUrlsAutocomplete });
+
 RouterConfig.add('URL_COMPONENTS_BUTTON', 'button');
 const urlButton = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_BUTTON');
 const siteUrlsButton: SiteUrl[] = [
@@ -85,6 +97,7 @@ const siteUrlsSelect: SiteUrl[] = [
   { label: 'Helper text', url: urlSelect, fragment: 'HelperText' },
   { label: 'Border radius', url: urlSelect, fragment: 'BorderRadius' },
   { label: 'Palette', url: urlSelect, fragment: 'Palette' },
+  { label: 'Feature', url: urlSelect, fragment: 'Feature' },
   { label: 'Config', url: urlSelect, fragment: 'Config' },
   { label: 'Api', url: urlSelect, fragment: 'Api' },
 ];

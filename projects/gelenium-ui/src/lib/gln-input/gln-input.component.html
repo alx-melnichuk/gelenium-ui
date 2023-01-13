@@ -1,8 +1,7 @@
-<div #wrapElementRef
-  [formGroup]="formGroup">
+<ng-container [formGroup]="formGroup">
 
   <gln-frame [config]="currConfig"
-    [cssElementRef]="wrapHtmlElementRef"
+    [cssElementRef]="hostRef"
     [exterior]="exterior || currConfig.exterior"
     [frameSize]="frameSize || currConfig.frameSize"
     [isAttrHideAnimation]="isAttrHideAnimation"
@@ -57,4 +56,4 @@
     [isDisabled]="disabled">
   </gln-hint-or-error>
 
-</div>
+</ng-container>

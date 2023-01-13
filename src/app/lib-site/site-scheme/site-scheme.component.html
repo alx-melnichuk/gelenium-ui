@@ -1,7 +1,8 @@
 <div class="ss-left-side app-brd-rg">
   <ng-content select="[sideLeftPanel]"></ng-content>
 </div>
-<div class="ss-main-side">
+<div class="ss-main-side"
+  (scroll)="doScroll()">
   <div class="ss-main-side-content">
     <ng-content select="[sideMainPanel]"></ng-content>
   </div>

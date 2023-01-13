@@ -1,0 +1,15 @@
+/*# sourceURL=cm-autocomplete-basic.component.scss */
+
+app-cm-autocomplete-basic {
+  display: block;
+
+  // Block "Basic".
+  .acb-input {
+    border-width: 1px;
+    box-sizing: border-box;
+    font-size: 1em;
+    line-height: 2em;
+    margin-top: 0.8em;
+    padding: 2px 9px;
+  }
+}

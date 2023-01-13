@@ -60,7 +60,7 @@ export class DrAutoFocuseBasicComponent implements OnInit {
     this.doChangeMode(this.mode);
   }
 
-  // ** Public API **
+  // ** Public methods **
 
   public doChangeMode(mode: string): void {
     if (mode === MODE_A) {

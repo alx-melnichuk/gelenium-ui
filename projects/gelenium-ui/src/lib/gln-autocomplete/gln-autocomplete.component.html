@@ -1,0 +1,29 @@
+<ng-template [ngIf]="isPanelOpen || hasPanelAnimation">
+  <div glnac-container
+    class="glnac-container"
+    #container
+    glnAutocompletePanel
+    (glnAutocompletePanelAttached)="containerAttached(container, getTriggerRect(), getHostRect(), optionHeight);"
+    (glnAutocompletePanelResize)="containerResize(container, getTriggerRect(), getHostRect(), optionHeight)"
+    (mousedown)="isContainerMousedown = true"
+    (mouseup)="isContainerMousedown = false">
+    <div glnac-wrap
+      [ngClass]="['glnac-wrap', (noAnimation ? 'gln-no-animation' : ''), (isPanelOpen ? 'is-show' : 'is-hide')]"
+      [attr.noAnm]="noAnimation ? '' : null"
+      [attr.is-show]="isPanelOpen ? '' : null"
+      [attr.is-hide]="!isPanelOpen ? '' : null"
+      (animationend)="hasPanelAnimation = isPanelOpen"
+      (animationcancel)="hasPanelAnimation = isPanelOpen">
+      <div glnac-panel
+        class="glnac-panel"
+        [ngClass]="panelClassVal || ''"
+        role="listbox"
+        [attr.id]="id + '-panel'"
+        [glnOptionsScroll]="getOptions(optionList)"
+        (glnOptionsScrollAttached)="setOptionsScroll($event)"
+        (glnOptionsScrollDetached)="setOptionsScroll(null)">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</ng-template>

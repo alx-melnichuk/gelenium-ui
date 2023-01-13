@@ -7,7 +7,7 @@
     To use this component, in your module you need to add:
   </span>
   <code><pre source="ts">
-import &#123; GlnOptionModule, GlnSelectModule &#125; from 'gelenium-ui';</pre>
+import &#123; GlnSelectModule, GlnOptionModule &#125; from 'gelenium-ui';</pre>
   </code>
   <p>
     The GlnSelect component is a form control. It includes: label, option list and help text.
@@ -21,7 +21,7 @@ import &#123; GlnOptionModule, GlnSelectModule &#125; from 'gelenium-ui';</pre>
   </ul>
   <span>For example:</span>
   <code><pre source="html">
-&lt;gln-select formControlName="model01a"
+&lt;<strong>gln-select</strong> formControlName="model01a"
   label="Enter value"
   wdFull&gt;
   &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
@@ -29,7 +29,7 @@ import &#123; GlnOptionModule, GlnSelectModule &#125; from 'gelenium-ui';</pre>
   &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
   &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
   &lt;gln-option value="kiwi"&gt;Kiwi&lt;/gln-option&gt;
-&lt;/gln-select&gt;</pre></code>
+&lt;<strong>/gln-select</strong>&gt;</pre></code>
 </section>
 
 <form [formGroup]="formGroup01"
@@ -54,7 +54,7 @@ import &#123; GlnOptionModule, GlnSelectModule &#125; from 'gelenium-ui';</pre>
         label="Enter value"
         exterior="outlined"
         wdFull>
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option value="mango">Mango</gln-option>
         <gln-option value="lemon">Lemon</gln-option>
         <gln-option value="orange">Orange</gln-option>
@@ -78,7 +78,7 @@ import &#123; GlnOptionModule, GlnSelectModule &#125; from 'gelenium-ui';</pre>
         label="Enter value"
         exterior="underline"
         wdFull>
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option value="mango">Mango</gln-option>
         <gln-option value="lemon">Lemon</gln-option>
         <gln-option value="orange">Orange</gln-option>
@@ -102,7 +102,7 @@ import &#123; GlnOptionModule, GlnSelectModule &#125; from 'gelenium-ui';</pre>
         label="Enter value"
         exterior="standard"
         wdFull>
-        <gln-option><em>None</em></gln-option>
+        <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option value="mango">Mango</gln-option>
         <gln-option value="lemon">Lemon</gln-option>
         <gln-option value="orange">Orange</gln-option>
@@ -145,7 +145,7 @@ import &#123; GlnOptionModule, GlnSelectModule &#125; from 'gelenium-ui';</pre>
         label="Enter value"
         exterior="outlined"
         wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
         &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
         &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
@@ -169,7 +169,7 @@ import &#123; GlnOptionModule, GlnSelectModule &#125; from 'gelenium-ui';</pre>
         label="Enter value"
         exterior="underline"
         wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
         &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
         &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
@@ -193,7 +193,7 @@ import &#123; GlnOptionModule, GlnSelectModule &#125; from 'gelenium-ui';</pre>
         label="Enter value"
         exterior="standard"
         wdFull&gt;
-        &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
+        &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
         &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
         &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;

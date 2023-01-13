@@ -1,0 +1,52 @@
+/*# sourceURL=cm-autocomplete-asynchrony.component.scss */
+
+app-cm-autocomplete-asynchrony {
+  display: block;
+
+  .acs-middle {
+    width: 160px;
+	}
+
+  .acs-input {
+    border-width: 1px;
+    box-sizing: border-box;
+    font-size: 1em;
+    line-height: 2em;
+    margin-top: 1.3em;
+    padding: 2px 9px;
+  }
+
+  .acs-spinner-sun-rays {
+    animation: aca-kf-spinner-rotate 4s linear infinite;
+    background: center no-repeat;
+    background-image: url("data:image/svg+xml,"
+    + "<svg xmlns='http://www.w3.org/2000/svg' width='36' height='36'"
+    + " viewBox='0 0 48 48' fill='rgb(0 0 0 / 99%)'>"
+    + "<path d='M25 18c-.6 0-1-.4-1-1V9c0-.6.4-1 1-1s1 .4 1 1v8c0 .6-.4 1-1 1z'/>"
+    + "<path opacity='.45' d='M25 42c-.6 0-1-.4-1-1v-8c0-.6.4-1 1-1s1 .4 1 1v8c0 .6-.4 1-1 1z'/>"
+    + "<path opacity='.3' d='M29 19c-.2 0-.3 0-.5-.1-.4-.3-.6-.8-.3-1.3l4-6.9c.3-.4.8-.6 1.3-.3.4.3.6.8.3 1.3l-4 6.9c-.2.2-.5.4-.8.4z'/>"
+    + "<path opacity='.55' d='M17 39.8c-.2 0-.3 0-.5-.1-.4-.3-.6-.8-.3-1.3l4-6.9c.3-.4.8-.6 1.3-.3.4.3.6.8.3 1.3l-4 6.9c-.2.2-.5.4-.8.4z'/>"
+    + "<path opacity='.93' d='M21 19c-.3 0-.6-.2-.8-.5l-4-6.9c-.3-.4-.1-1 .3-1.3.4-.3 1-.1 1.3.3l4 6.9c.3.4.1 1-.3 1.3-.2.2-.3.2-.5.2z'/>"
+    + "<path opacity='.3' d='M33 39.8c-.3 0-.6-.2-.8-.5l-4-6.9c-.3-.4-.1-1 .3-1.3.4-.3 1-.1 1.3.3l4 6.9c.3.4.1 1-.3 1.3-.2.1-.3.2-.5.2z'/>"
+    + "<path opacity='.75' d='M17 26H9c-.6 0-1-.4-1-1s.4-1 1-1h8c.6 0 1 .4 1 1s-.4 1-1 1z'/>"
+    + "<path opacity='.3' d='M41 26h-8c-.6 0-1-.4-1-1s.4-1 1-1h8c.6 0 1 .4 1 1s-.4 1-1 1z'/>"
+    + "<path opacity='.86' d='M18.1 21.9c-.2 0-.3 0-.5-.1l-6.9-4c-.4-.3-.6-.8-.3-1.3.3-.4.8-.6 1.3-.3l6.9 4c.4.3.6.8.3 1.3-.2.3-.5.4-.8.4z'/>"
+    + "<path opacity='.3' d='M38.9 33.9c-.2 0-.3 0-.5-.1l-6.9-4c-.4-.3-.6-.8-.3-1.3.3-.4.8-.6 1.3-.3l6.9 4c.4.3.6.8.3 1.3-.2.3-.5.4-.8.4z'/>"
+    + "<path opacity='.65' d='M11.1 33.9c-.3 0-.6-.2-.8-.5-.3-.4-.1-1 .3-1.3l6.9-4c.4-.3 1-.1 1.3.3.3.4.1 1-.3 1.3l-6.9 4c-.1.2-.3.2-.5.2z'/>"
+    + "<path opacity='.3' d='M31.9 21.9c-.3 0-.6-.2-.8-.5-.3-.4-.1-1 .3-1.3l6.9-4c.4-.3 1-.1 1.3.3.3.4.1 1-.3 1.3l-6.9 4c-.2.2-.3.2-.5.2z'/>"
+    + "</svg>");
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 36px;
+    width: 36px;
+  }
+  @keyframes aca-kf-spinner-rotate {
+    0% {
+      transform: rotate(0deg);
+    } 50% {
+      transform: rotate(540deg);
+    } 100% {
+      transform: rotate(1080deg);
+    }
+  }
+}

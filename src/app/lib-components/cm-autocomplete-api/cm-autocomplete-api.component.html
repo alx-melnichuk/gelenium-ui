@@ -1,0 +1,640 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    API: GlnAutocomplete.
+    <a [href]="urlCmAutocomplete + '#Api'">#</a>
+  </h3>
+  <p>
+    Selector:
+    <span fw500>gln-autocomplete</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>glnAutocomplete</span>
+  </p>
+</section>
+
+<section mr-vr
+  id="api-properties">
+  <h4 class="app-hover-link">
+    Properties.
+    <a [href]="urlCmAutocomplete + '#api-properties'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>id: string;</code>
+      </td>
+      <td>
+        <span>
+          ID of the native input element.<br />(default = `glnac-$&#123;uniqueIdCounter++&#125;`;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>config: GlnAutocompleteConfig<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Defines a configuration object.</span><br />
+        <a [href]="urlCmAutocomplete + '#config-interface'">More details.</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isClearOnEscape: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Flag for clearing the input field when "Escape" is pressed.<br />
+          (default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isDisabled: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates that the element is disabled.<br />
+          (default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isMaxWd: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Flag for setting the maximum width when expanding the drop-down list of options.
+          <br />
+          Without this setting, the maximum width of the options panel is determined by its
+          content.
+          <br />
+          The value of the minimum width of the options panel is always equal to the width
+          of the parent.
+          <br />
+          (default = false;) Attribute (no content).
+          <br />
+          Also, the minimum/maximum width of the options panel can be set via css parameters:
+          '--glnac-min-width', '--glnac-max-width'.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoAnimation: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Flag for disable animation when opening a drop-down list of options.<br />
+          (default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoCloseOnSelect: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Flag for canceling the closing of the options list panel when an option is selected.<br />
+          (default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoOpenOnMouse: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Flag for disabling opening/closing of the options list panel when the mouse button
+          is pressed over the input field.
+          <br />
+          (default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoRipple: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Flag for disabling the ripple effect.<br />
+          (default = false;) Attribute (no content).
+        </span><br />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isOpenOnFocus: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Flag for opening the options list panel when receiving input focus.<br />
+          (default = false;) Attribute (no content).
+        </span><br />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>panelClass: string<br/>
+          &nbsp;&nbsp;| string[]<br/>
+          &nbsp;&nbsp;| Set&lt;string&gt;<br/>
+          &nbsp;&nbsp;| &#123; [key: string]: unknown &#125;<br/>
+          = ''</code>
+      </td>
+      <td>
+        <span>
+          Classes to be passed to the options panel. Supports the same syntax as 'ngClass'.<br />
+          (default = '';)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>position: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies how to horizontally align the options list panel.
+        </span>
+        <ul>
+          <li>'start' - align to the left of the main element; (default)</li>
+          <li>'center' - align to the center of the main element;</li>
+          <li>'end' - align to the right side of the main element;</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>visibleSize: number;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the maximum number of visible option elements.
+          <br />
+          The options list panel is set to <i>max-height = optionHeight * visibleSize</i>.
+          <br />
+          Where option height is <i>optionHeight = lineHeight + 2 * 0.375 * fontSize</i>;
+          <br />(default = 0;)
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>opened: EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>Fires when the options list panel opens.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>closed: EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>Fires when the options list panel closes.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>selected: EventEmitter<br/>
+          &nbsp;&lt;option: GlnOption&gt;
+        </code>
+      </td>
+      <td>
+        <span>
+          Fires when an option is selected.<br />
+          Passes the value of the selected option.
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<section mr-vr
+  id="api-methods">
+  <h4 class="app-hover-link">
+    GlnAutocomplete interface methods:
+    <a [href]="urlCmAutocomplete + '#api-methods'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>isOpen(): boolean;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Returns the flag for the open options list panel
+        (true - open, false - closed).
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>open(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Opens the autocomplete options list panel.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>close(options?: &#123; noAnimation?: boolean &#125;): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Closes the autocomplete options list panel.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Parameters (optionale)</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="app-mn-wd-22ch">
+        <code>options?: &#123;<br/>
+          &nbsp;&nbsp;noAnimation?: boolean<br/>
+          &#125;</code>
+      </td>
+      <td>
+        Flag for disable animation when closing a drop-down list of options.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>getMarkedOption(): GlnOption | null;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Get the option marked.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>moveMarkedOptionByKey(keyboardKey: string): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Move the marked option according to the pressed key.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Parameters</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="app-mn-wd-22ch">
+        <code>keyboardKey: string</code>
+      </td>
+      <td>
+        The value of the key pressed.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>setMarkedOptionAsSelected(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Set the marked option as selected.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>setTrigger(trigger: GlnAutocompleteTrigger | null): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Set trigger object for autocomplete.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Parameters</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="app-mn-wd-22ch">
+        <code>trigger:<br/>
+          &nbsp;&nbsp;GlnAutocompleteTrigger<br/>
+          &nbsp;&nbsp;| null</code>
+      <td>
+        Set the trigger object to interact with the autocomplete object.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<section mr-vr
+  id="api-methods2">
+  <h4 class="app-hover-link">
+    GlnOptionParent interface methods:
+    <a [href]="urlCmAutocomplete + '#api-methods2'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>setOptionSelected(option: GlnOption | null): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Set the option as selected.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Parameters</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="app-mn-wd-22ch">
+        <code>option: GlnOption<br/>
+          &nbsp;&nbsp;| null</code>
+      <td>
+        The option object to make selected.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<section mr-vr
+  id="api-css-variables-optional">
+  <h4 class="app-hover-link">
+    Css variables, optional. You can override the default values.
+    <a [href]="urlCmAutocomplete + '#api-css-variables-optional'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--glnac-max-height:<br/>
+      &nbsp;100vw;</code>
+      </td>
+      <td>
+        <span>
+          Defines the maximum height of the option list dropdown list of options.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnac-max-width:<br/>
+      &nbsp;100vw;</code>
+      </td>
+      <td>
+        <span>
+          Defines the maximum width of the option list dropdown list of options.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnac-min-width:<br/>
+      &nbsp;<i>original</i>;</code>
+      </td>
+      <td>
+        <span>
+          Defines the minimum width of the option list dropdown list of options.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnac-def-bg-cl:<br/>
+        var(--glnac--default-bg-cl);</code>
+      </td>
+      <td>
+        <span>
+          The value of the "background-color" property for the options list
+          ("glnac-wrap" element).<br />
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnac-def-cl:<br/>
+        var(--glnac--default-cl);</code>
+      </td>
+      <td>
+        <span>
+          The value of the "color" property for the options list
+          ("glnac-wrap" element).<br />
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--glnac-border-radius:<br/>
+        &nbsp;(triggerRect.height / 10) + 'px';</code>
+      </td>
+      <td>
+        <span>
+          Defines the value of the "border-radius" property for the options list panel.
+          This will make rounded edges for the options dropdown panel.<br />
+          (default "(triggerRect.height / 10) + 'px'").
+        </span>
+        <span>Example:</span>
+        <code><pre source="html">
+&lt;gln-input formControlName="model01a"
+  [glnAutocompleteTrigger]="<i>autocomplete01</i>"&gt;
+&lt;/gln-input&gt;
+&lt;<strong>gln-autocomplete</strong> #<i>autocomplete01</i>="glnAutocomplete"
+  <i><strong>class="app-border-radius"</strong></i>&gt;
+  ...
+&lt;<strong>gln-autocomplete</strong>&gt;</pre></code>
+        <code><pre source="css">
+gln-autocomplete<i><strong>.app-border-radius</strong></i> &#123;
+--glnac-border-radius: 7px;
+&#125;</pre></code>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnac-elevation:<br/>
+      &nbsp;undefined</code>
+      </td>
+      <td>
+        <span>
+          To block the display of a shadow, you must specify "--glnac-elevation: none;".
+        </span><br />
+        <span>Example:</span>
+        <code><pre source="html">
+&lt;gln-input formControlName="model01a"
+  [glnAutocompleteTrigger]="<i>autocomplete01</i>"&gt;
+&lt;/gln-input&gt;
+&lt;<strong>gln-autocomplete</strong> #<i>autocomplete01</i>="glnAutocomplete"
+  <i><strong>class="app-no-elevation"</strong></i>&gt;
+  ...
+&lt;<strong>gln-autocomplete</strong>&gt;</pre></code>
+        <code><pre source="css">
+gln-autocomplete<i><strong>.app-no-elevation</strong></i> &#123;
+  --glnac-elevation: none;
+&#125;</pre></code>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnac-z-index:<br/>
+      &nbsp;1000;</code>
+      </td>
+      <td>
+        <span>
+          Defines the value 'z-index' of the option list dropdown list of options.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>css: font-size: 1.125em;</code>
+      </td>
+      <td>
+        <span>
+          You can change the font size for the GlnAutocomplete element and that
+          font size will be applied to the available options in the list.
+          <br />
+          More details <a [href]="urlCmAutocomplete + '#attributes-supported04'">
+            attributes-supported04</a>.
+        </span>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

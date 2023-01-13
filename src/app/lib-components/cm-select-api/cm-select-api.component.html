@@ -23,12 +23,13 @@
 </section>
 
 <table class="app-tab">
-  <tbody>
+  <thead>
     <tr>
       <th class="app-mn-wd-22ch">Name</th>
       <th>Description</th>
     </tr>
-
+  </thead>
+  <tbody>
     <tr>
       <td>
         <code>@Input()</code>
@@ -121,7 +122,6 @@
         </span>
       </td>
     </tr>
-
     <tr>
       <td>
         <code>@Input()</code>
@@ -170,6 +170,31 @@
     <tr>
       <td>
         <code>@Input()</code>
+        <code>isMaxWd: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Flag for setting the maximum width when expanding the drop-down list of options.
+          <br />
+          Without this setting, the maximum width of the options panel is determined by its
+          content.
+          <br />
+          The value of the minimum width of the options panel is always equal to the width
+          of the parent.
+          <br />
+          (default = false;) Attribute (no content).
+          <br />
+          Also, the minimum/maximum width of the options panel can be set via css parameters:
+          '--glnslpo-min-width', '--glnslpo-max-width'.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
         <code>isMultiple: string<br/>
           &nbsp;&nbsp;| boolean<br/>
           &nbsp;&nbsp;| null<br/>
@@ -177,8 +202,8 @@
       </td>
       <td>
         <span>
-          Sign of multiple choice of options.
-          <br />Attribute (no content).
+          Sign of multiple choice of options.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -207,8 +232,8 @@
       </td>
       <td>
         <span>
-          Disable the display of the icon - the status of the state of the open list.
-          <br />Attribute (no content).
+          Disable the display of the icon - the status of the state of the open list.<br />
+          (default = false;) Attribute (no content).
         </span>
       </td>
     </tr>
@@ -223,7 +248,7 @@
       <td>
         <span>
           Flag for disabling the ripple effect.<br />
-          Attribute (no content).
+          (default = false;) Attribute (no content).
         </span><br />
       </td>
     </tr>
@@ -366,12 +391,13 @@
         <code>panelClass: string<br/>
           &nbsp;&nbsp;| string[]<br/>
           &nbsp;&nbsp;| Set&lt;string&gt;<br/>
-          &nbsp;&nbsp;| &#123; [key: string]: any &#125;<br/>
+          &nbsp;&nbsp;| &#123; [key: string]: unknown &#125;<br/>
           = ''</code>
       </td>
       <td>
         <span>
-          Classes to be passed to the select panel. Supports the same syntax as `ngClass`.
+          Classes to be passed to the select panel. Supports the same syntax as 'ngClass'.<br />
+          (default = '';)
         </span>
       </td>
     </tr>
@@ -467,7 +493,6 @@
         <span>Fires when an element loses input focus.</span>
       </td>
     </tr>
-
     <tr>
       <td>
         <code>@Output()</code>
@@ -605,7 +630,7 @@
 <table class="app-tab">
   <thead>
     <th colspan="2">
-      Parameters
+      <code>Parameters</code>
     </th>
   </thead>
   <tbody>
@@ -641,7 +666,7 @@
 <table class="app-tab">
   <thead>
     <th colspan="2">
-      Parameters
+      <code>Parameters</code>
     </th>
   </thead>
   <tbody>
@@ -843,18 +868,12 @@
       </span><br />
       <span>Example:</span>
       <code><pre source="html">
-&lt;gln-select formControlName="model01a"
-  <strong>panelClass="no-elevation"</strong>
-  label="Enter value"&gt;
-  &lt;gln-option&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
-  &lt;gln-option value="mango"&gt;Mango&lt;/gln-option&gt;
-  &lt;gln-option value="lemon"&gt;Lemon&lt;/gln-option&gt;
-  &lt;gln-option value="orange"&gt;Orange&lt;/gln-option&gt;
-  &lt;gln-option value="kiwi"&gt;Kiwi&lt;/gln-option&gt;
+&lt;gln-select <strong>panelClass="app-no-elevation"</strong>&gt;
+  ...
 &lt;/gln-select&gt;</pre></code>
       <code><pre source="css">
-.gln-select-panel<strong>.no-elevation</strong> &#123;
-  --glnslpo-elevation: none;
+.cdk-overlay-container .gln-select-panel.<strong>app-no-elevation</strong> &#123;
+  <strong>--glnslpo-elevation</strong>: none;
 &#125;</pre></code>
     </td>
   </tr>
@@ -871,8 +890,12 @@
         (default "(frameSizeValue / 10) + 'px'").
       </span>
       <span>Example:</span>
+      <code><pre source="html">
+&lt;gln-select <strong>panelClass="app-border-radius"</strong>&gt;
+  ...
+&lt;/gln-select&gt;</pre></code>
       <code><pre source="css">
-.cdk-overlay-container .gln-select-panel &#123;
+.cdk-overlay-container .gln-select-panel.<strong>app-border-radius</strong> &#123;
   <strong>--glnslpo-border-radius</strong>: 10px;
 &#125;</pre></code>
     </td>
@@ -880,14 +903,23 @@
   <tr>
     <td>
       <code>--glnslpo-max-height:<br/>
-      &nbsp;100%;</code>
+      &nbsp;80vh;</code>
     </td>
     <td>
       <span>
         Defines the value of the "max-height" property for the overlay panel
         (expanded list of options).<br />
-        (default 100%).
+        (default 80vh).
       </span>
+      <span>Example:</span>
+      <code><pre source="html">
+&lt;gln-select <strong>panelClass="app-max-height"</strong>&gt;
+  ...
+&lt;/gln-select&gt;</pre></code>
+      <code><pre source="css">
+.cdk-overlay-container .gln-select-panel.<strong>app-max-height</strong> &#123;
+  <strong>--glnslpo-max-height</strong>: 180px;
+&#125;</pre></code>
     </td>
   </tr>
 

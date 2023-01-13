@@ -49,6 +49,14 @@
   </p>
 </section>
 
+<section mr-vr
+  id="ornaments-properties01">
+  <h4 class="app-hover-link">
+    Ornaments properties:
+    <a [href]="urlCmInput + '#ornaments-properties01'">#</a>
+  </h4>
+</section>
+
 <section mr-vr>
   <span>exterior: </span>
   <mat-button-toggle-group value="exterior05"
@@ -144,11 +152,11 @@
         [helperText]="
           (!controls05.model05d.value
           ? 'Required field.'
-          : (controls05.model05d.errors!['minlength']
+          : ((controls05.model05d.errors || {})['minlength']
             ? 'Minimum length '
             + controls05.model05d.errors!['minlength'].requiredLength
             + ' characters.'
-            : (controls05.model05d.errors!['maxlength']
+            : ((controls05.model05d.errors || {})['maxlength']
               ? 'Maximum length '
               + controls05.model05d.errors!['maxlength'].requiredLength
               + ' characters.'
@@ -304,7 +312,11 @@
   </div>
 
   <section mr-vr>
-    <span>ornamLfAlign: </span>
+    <div>
+      <small>
+        <em>ornamLfAlign:</em>
+      </small>
+    </div>
     <mat-button-toggle-group value="ornamLfAlign05"
       (change)="changeConfig05(ornamLfAlign05=$event.value, config05['ornamRgAlign'])">
       <mat-button-toggle [checked]="ornamLfAlign05==='default'"
@@ -365,7 +377,11 @@
   </div>
 
   <section mr-vr>
-    <span>ornamRgAlign: </span>
+    <div>
+      <small>
+        <em>ornamRgAlign:</em>
+      </small>
+    </div>
     <mat-button-toggle-group value="ornamRgAlign05"
       (change)="changeConfig05(config05['ornamLfAlign'], ornamRgAlign05=$event.value)">
       <mat-button-toggle [checked]="ornamRgAlign05==='default'"
@@ -476,11 +492,11 @@
         [helperText]="
           (!controls05.model05d.value
           ? 'Required field.'
-          : (controls05.model05d.errors!['minlength']
+          : ((controls05.model05d.errors || &#123;&#125;)['minlength']
             ? 'Minimum length '
             + controls05.model05d.errors!['minlength'].requiredLength
             + ' characters.'
-            : (controls05.model05d.errors!['maxlength']
+            : ((controls05.model05d.errors || &#123;&#125;)['maxlength']
               ? 'Maximum length '
               + controls05.model05d.errors!['maxlength'].requiredLength
               + ' characters.'

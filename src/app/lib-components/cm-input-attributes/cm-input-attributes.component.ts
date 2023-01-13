@@ -62,6 +62,7 @@ export class CmInputAttributesComponent {
     model02n: new FormControl('#000000'),
     model02o: new FormControl(null, []),
     model02p: new FormControl(null, []),
+    model02q: new FormControl(null, []),
   };
   public formGroup02d: FormGroup = new FormGroup(this.control02d);
   public exterior02d = 'outlined';
