@@ -1,0 +1,301 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmSpinner + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnSpinnerModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    The GlnSpinner component displays a "svg" image that rotates around its own axis.
+    <br />
+    This component is used to display the data processing process.
+  </p>
+</section>
+
+<div *ngIf="false"
+  class="app-group">
+
+  <div class="app-elem">
+    <gln-spinner size="45"></gln-spinner>
+  </div>
+
+</div>
+
+<hr br-nn />
+
+<hr /> <!-- Page: "ItemSize" 03 -->
+
+<section>
+  <h3 class="app-hover-link">
+    Item size.
+    <a [href]="urlCmSpinner + '#ItemSize'">#</a>
+  </h3>
+  <p>
+    The "size" property determines the size of the element (its height).
+  </p>
+  <p>
+    It takes the following values:
+  </p>
+  <ul>
+    <li>"short" - sets the height to 38px;</li>
+    <li>"small" - sets the height to 44px;</li>
+    <li>"middle" - sets the height to 50px (default);</li>
+    <li>"wide" - sets the height to 56px;</li>
+    <li>"large" - sets the height to 62px;</li>
+    <li>"huge" - sets the height to 68px;</li>
+  </ul>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isNoAnimation03a=!isNoAnimation03a" />
+    start animation
+  </label>
+</section>
+
+<ng-container *ngIf="false">
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Short" height: 38px;</em></small>
+      </div>
+      <gln-spinner size="short"
+        [isNoAnimation]="isNoAnimation03a ? '' : null">
+      </gln-spinner>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Small" height: 44px;</em></small>
+      </div>
+      <gln-spinner size="small"
+        [isNoAnimation]="isNoAnimation03a ? '' : null">
+      </gln-spinner>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Middle" height: 50px;</em></small>
+      </div>
+      <gln-spinner size="middle"
+        [isNoAnimation]="isNoAnimation03a ? '' : null">
+      </gln-spinner>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Wide" height: 56px;</em></small>
+      </div>
+      <gln-spinner size="wide"
+        [isNoAnimation]="isNoAnimation03a ? '' : null">
+      </gln-spinner>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Large" height: 62px;</em></small>
+      </div>
+      <gln-spinner size="large"
+        [isNoAnimation]="isNoAnimation03a ? '' : null">
+      </gln-spinner>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"huge" height: 68px;</em></small>
+      </div>
+      <gln-spinner size="huge"
+        [isNoAnimation]="isNoAnimation03a ? '' : null">
+      </gln-spinner>
+    </div>
+  </div>
+
+</ng-container>
+
+<section mr-vr
+  id="api-properties">
+  <h4 class="app-hover-link">
+    Configuration for custom height (57px).
+    <a [href]="urlCmSpinner + '#ItemSize-custom'">#</a>
+  </h4>
+</section>
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>custom height 57px;</em></small>
+    </div>
+    <gln-spinner [config]="{ size: '57' }"
+      [isNoAnimation]="isNoAnimation03a ? '' : null">
+    </gln-spinner>
+  </div>
+</div>
+
+<hr br-nn />
+
+<hr /> <!-- Page: "Palette" 04 -->
+
+<section>
+  <h3 class="app-hover-link">
+    Palette.
+    <a [href]="urlCmSpinner + '#Palette'">#</a>
+  </h3>
+  <p>
+    The GlnSpinner component has the ability to change its color.
+  </p>
+  <span>For example:</span>
+  <code><pre source="html">
+&lt;gln-spinner
+  <i><strong>[glnColor]="&#123; primary: 'danger' &#125;"</strong></i>&gt;
+&lt;/gln-spinner&gt;</pre></code>
+  <p>
+    This means that you want to use the system color "danger"
+    as the "primary" color.
+  </p>
+  <span>
+    To use the glnColor directive, you need to add in your module:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
+  </code>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isNoAnimation04a=!isNoAnimation04a" />
+    start animation
+  </label>
+</section>
+
+<div class="app-group">
+
+  <div class="app-elem spp-elem">
+    <div>
+      <small><em>color: primary</em></small>
+    </div>
+    <gln-spinner [glnColor]="{ primary: 'primary' }"
+      [isNoAnimation]="isNoAnimation04a ? '' : null">
+    </gln-spinner>
+  </div>
+
+  <div class="app-elem spp-elem">
+    <div>
+      <small><em>color: danger</em></small>
+    </div>
+    <gln-spinner [glnColor]="{ primary: 'danger' }"
+      [isNoAnimation]="isNoAnimation04a ? '' : null">
+    </gln-spinner>
+  </div>
+
+  <div class="app-elem spp-elem">
+    <div>
+      <small><em>color: success</em></small>
+    </div>
+    <gln-spinner [glnColor]="{ primary: 'success' }"
+      [isNoAnimation]="isNoAnimation04a ? '' : null">
+    </gln-spinner>
+  </div>
+
+  <div class="app-elem spp-elem">
+    <div>
+      <small><em>color: info</em></small>
+    </div>
+    <gln-spinner [glnColor]="{ primary: 'info' }"
+      [isNoAnimation]="isNoAnimation04a ? '' : null">
+    </gln-spinner>
+  </div>
+
+  <div class="app-elem spp-elem">
+    <div>
+      <small><em>color: warning</em></small>
+    </div>
+    <gln-spinner [glnColor]="{ primary: 'warning' }"
+      [isNoAnimation]="isNoAnimation04a ? '' : null">
+    </gln-spinner>
+  </div>
+
+  <div class="app-elem spp-elem spp-customer">
+    <div>
+      <small><em>color: customer</em></small>
+    </div>
+    <gln-spinner [glnColor]="{ primary: 'customer' }"
+      [isNoAnimation]="isNoAnimation04a ? '' : null">
+    </gln-spinner>
+  </div>
+
+</div>
+
+<hr br-nn />
+
+<hr /> <!-- Page: "Customization" 05 -->
+
+<section>
+  <h3 class="app-hover-link">
+    Customization.
+    <a [href]="urlCmSpinner + '#Customization'">#</a>
+  </h3>
+  <p>
+    The GlnSpinner component has additional user customization.
+  </p>
+
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isNoAnimation05a=!isNoAnimation05a" />
+    start animation
+  </label>
+</section>
+
+
+<div class="">
+
+  <div class="app-group">
+
+    <div class="app-elem spp-elem">
+      <div>
+        <small><em>svg: one-arrow</em></small>
+      </div>
+      <gln-spinner isExternal
+        [isNoAnimation]="isNoAnimation05a ? '' : null">
+        <div class="spc-svg-one-arrow"></div>
+      </gln-spinner>
+    </div>
+
+    <div class="app-elem spp-elem">
+      <div>
+        <small><em>svg: two-arrow</em></small>
+      </div>
+      <gln-spinner isExternal
+        [isNoAnimation]="isNoAnimation05a ? '' : null">
+        <div class="spc-svg-two-arrows"></div>
+        <!-- <svg class="spc-svg">
+          <use
+            href="assets/icons/lib-components/cm-spinner-customization/icon-two-arrow.svg#svg-two arrows"
+            height="50"
+            width="50">
+          </use>
+        </svg> -->
+      </gln-spinner>
+    </div>
+
+  </div>
+
+</div>

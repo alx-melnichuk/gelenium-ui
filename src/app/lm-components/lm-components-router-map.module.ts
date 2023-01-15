@@ -103,6 +103,17 @@ const siteUrlsSelect: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Select', { label: 'Select', siteUrls: siteUrlsSelect });
 
+RouterConfig.add('URL_COMPONENTS_SPINNER', 'spinner');
+const urlSpinner = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SPINNER');
+const siteUrlsSpinner: SiteUrl[] = [
+  { label: 'Basic', url: urlSpinner, fragment: 'Basic' },
+  // { label: 'Attributes', url: urlSpinner, fragment: 'Attributes' },
+  // { label: 'Customization', url: urlSpinner, fragment: 'Customization' },
+  // { label: 'Config', url: urlSpinner, fragment: 'Config' },
+  // { label: 'Api', url: urlSpinner, fragment: 'Api' },
+];
+SiteMenuUtil.addItem('Components', 'Spinner', { label: 'Spinner', siteUrls: siteUrlsSpinner });
+
 RouterConfig.add('URL_COMPONENTS_SWITCH', 'switch');
 const urlSwitch = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SWITCH');
 const siteUrlsSwitch: SiteUrl[] = [
