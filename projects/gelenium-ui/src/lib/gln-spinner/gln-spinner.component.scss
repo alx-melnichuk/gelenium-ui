@@ -1,0 +1,29 @@
+/*# sourceURL=gln-spinner.component.scss */
+
+gln-spinner {
+  display: block;
+
+  --glnsp--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
+  --glnsp--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
+  --glnsp--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
+
+  color: hsl(var(--glnsp--primary-h), var(--glnsp--primary-s), var(--glnsp--primary-l));
+
+  &>[gln-sgv] {
+    fill: currentColor;
+    height: var(--glnsp-size, var(--glnsp--size, 32px));
+    width: var(--glnsp-size, var(--glnsp--size, 32px));
+  }
+  &:not([noani])>[gln-sgv] {
+    animation: kf-sp-rotation var(--glnsp-rotation-duration, 1s) linear infinite;
+    @keyframes kf-sp-rotation {
+      0% { 
+        transform: rotate(0); 
+      }
+      100% { 
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+}
