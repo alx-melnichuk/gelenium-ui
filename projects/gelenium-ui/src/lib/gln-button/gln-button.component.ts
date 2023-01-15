@@ -90,7 +90,6 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public exteriorVal: GlnButtonExterior | null = null; // Binding attribute "exterior".
   public isFocused = false;
-  public frameSizeVal: GlnFrameSize | null = null; // Binding attribute "frameSize".
   public frameSizeValue: number = 0;
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple".
   public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
@@ -122,7 +121,6 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     if (changes['frameSize'] || (changes['config'] && this.frameSize == null && this.currConfig.frameSize != null)) {
       const frameSizeStr: string = this.frameSize || this.currConfig.frameSize || GlnFrameSize.small.toString();
       this.frameSizeValue = GlnFrameSizeUtil.getSizeValue(frameSizeStr);
-      this.frameSizeVal = GlnFrameSizeUtil.convert(frameSizeStr);
       isUpdateCssParams = true;
     }
     if (isUpdateCssParams && this.exteriorVal) {
@@ -161,7 +159,6 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     if (this.frameSizeValue === 0) {
       const frameSizeStr: string = this.currConfig.frameSize || GlnFrameSize.small.toString();
       this.frameSizeValue = GlnFrameSizeUtil.getSizeValue(frameSizeStr);
-      this.frameSizeVal = GlnFrameSizeUtil.convert(frameSizeStr);
       isUpdateCssParams = true;
     }
     if (isUpdateCssParams && this.exteriorVal) {
