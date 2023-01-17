@@ -19,19 +19,11 @@ import &#123; GlnSpinnerModule &#125; from 'gelenium-ui';</pre>
   </section>
 
 
-  <div class="app-group"
-    style9="position: relative;">
+  <div class="app-group">
 
     <div class="app-elem">
       <gln-spinner></gln-spinner>
     </div>
-
-    <!-- <div class="app-elem9"
-      style="margin: 10px 10px;">
-      <gln-spinner demo2
-        isNoAnimation9
-        style="position: absolute; left: 4px; top: 10px;"></gln-spinner>
-    </div> -->
 
   </div>
 
@@ -320,7 +312,7 @@ import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
 </ng-container>
 
 <!-- Page: "Customization" 05 -->
-
+<i id="Customization">Customization_ID</i>
 <section>
   <h3 class="app-hover-link">
     Customization.
@@ -347,132 +339,31 @@ import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
 
     <div class="app-elem spp-elem">
       <div>
-        <small><em>svg: one-arrow</em></small>
+        <small><em>spinner refresh</em></small>
       </div>
       <gln-spinner isExternal
         [isNoAnimation]="isNoAnimation05a ? '' : null">
-        <div class="spc-svg-one-arrow"></div>
+        <div class="spc-spinner-refresh"></div>
       </gln-spinner>
     </div>
 
     <div class="app-elem spp-elem">
       <div>
-        <small><em>svg: two-arrow</em></small>
+        <small><em>spinner of dots</em></small>
       </div>
       <gln-spinner isExternal
         [isNoAnimation]="isNoAnimation05a ? '' : null">
-        <div class="spc-svg-two-arrows"></div>
-        <!-- <svg class="spc-svg">
+        <svg class="spc-svg">
           <use
-            href="assets/icons/lib-components/cm-spinner-customization/icon-two-arrow.svg#svg-two arrows"
-            height="50"
-            width="50">
+            href="assets/icons/lib-components/cm-spinner-customization/icon-spinner-of-dots.svg#icon-spinner-of-dots">
           </use>
-        </svg> -->
+        </svg>
       </gln-spinner>
     </div>
 
   </div>
 
 </div>
-
-
-<!-- Page: "Feature" 06 -->
-<section id="Feature">"Feature"</section>
-
-<a [href]="urlCmSpinner + '#Feature'">#</a>
-<ng-container *ngIf="true">
-  <section>
-    <h3 class="app-hover-link">
-      Feature.
-      <a [href]="urlCmSpinner + '#Feature'">#</a>
-    </h3>
-    <p>
-      A component can cover the surface of the parent element with a translucent background.
-    </p>
-  </section>
-
-  <form [formGroup]="formGroup06a"
-    style="    border: 1px solid green;"
-    novalidate
-    autocomplete="off">
-
-    <div class="app-group">
-
-      <div class="app-elem">
-        <div>
-          <small><em>Native "input" element 1</em></small>
-        </div>
-        <input type="text"
-          class="spf-input06"
-          formControlName="model06a" />
-      </div>
-
-      <div class="app-elem">
-        <div>
-          <small><em>Native "input" element 2</em></small>
-        </div>
-        <input type="text"
-          class="spf-input06"
-          formControlName="model06b" />
-      </div>
-
-    </div>
-    <div class="app-group">
-
-      <div class="app-elem">
-        <div>
-          <small><em>Native "input" element 3</em></small>
-        </div>
-        <input type="text"
-          class="spf-input06"
-          formControlName="model06c" />
-      </div>
-
-      <div class="app-elem">
-        <div>
-          <small><em>Native "input" element 4</em></small>
-        </div>
-        <input type="text"
-          class="spf-input06"
-          formControlName="model06d" />
-      </div>
-
-    </div>
-
-    <gln-spinner *ngIf="isShowSpinner06a"
-      isOwner
-      isNoAnimation9>
-    </gln-spinner>
-
-    <gln-spinner *ngIf="isShowSpinner06b"
-      isScreen
-      isNoAnimation9>
-    </gln-spinner>
-
-  </form>
-
-  <div class="app-group spf-center">
-    <button class="spf-btn"
-      type="button"
-      tabindex="0"
-      [attr.disabled]="isShowSpinner06a ? '' : null"
-      (click)="setShowSpinnerForBlock()">
-      <span>show spinner for block</span>
-    </button>
-  </div>
-
-  <div class="app-group spf-center">
-    <button class="spf-btn"
-      type="button"
-      tabindex="0"
-      [attr.disabled]="isShowSpinner06b ? '' : null"
-      (click)="setShowSpinnerForScreen()">
-      <span>show spinner for screen</span>
-    </button>
-  </div>
-
-</ng-container>
 
 <!-- Page: "Api" 09 -->
 <ng-container *ngIf="true">

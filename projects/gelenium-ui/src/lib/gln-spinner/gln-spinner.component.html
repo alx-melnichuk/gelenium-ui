@@ -1,17 +1,14 @@
-<div glnsp-wrap
-  (click)="clearEvent($event)"
-  (mousedown)="clearEvent($event)"
-  (mouseup)="clearEvent($event)">
-  <ng-container *ngIf="!isExternalVal; else elseBlockExternal">
-    <svg glnsp-size
-      glnsp-inner>
-      <circle></circle>
-    </svg>
-  </ng-container>
-  <ng-template #elseBlockExternal>
-    <div glnsp-size
-      glnsp-svg>
-      <ng-content></ng-content>
-    </div>
-  </ng-template>
-</div>
+<ng-container *ngIf="!isExternalVal; else elseBlockExternal">
+  <svg glnsp-size
+    glnsp-inner
+    glnsp-rotate>
+    <circle></circle>
+  </svg>
+</ng-container>
+<ng-template #elseBlockExternal>
+  <div glnsp-size
+    glnsp-svg
+    glnsp-rotate>
+    <ng-content></ng-content>
+  </div>
+</ng-template>

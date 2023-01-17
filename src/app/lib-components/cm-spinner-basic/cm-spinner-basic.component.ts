@@ -36,34 +36,6 @@ export class CmSpinnerBasicComponent {
   // Page: "Customization" 05
   public isNoAnimation05a: boolean = true;
 
-  // Page: "Feature" 06
-  public control06a = {
-    model06a: new FormControl(null, []),
-    model06b: new FormControl(null, []),
-    model06c: new FormControl(null, []),
-    model06d: new FormControl(null, []),
-  };
-  public formGroup06a: FormGroup = new FormGroup(this.control06a);
-  public isShowSpinner06a: boolean = false;
-  public isShowSpinner06b: boolean = false;
-
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
-
-  // Page: "Feature" 06
-  public setShowSpinnerForBlock() {
-    this.isShowSpinner06a = true;
-    setTimeout(() => {
-      this.isShowSpinner06a = false;
-      this.changeDetectorRef.markForCheck();
-    }, 8000);
-  }
-
-  public setShowSpinnerForScreen() {
-    this.isShowSpinner06b = true;
-    setTimeout(() => {
-      this.isShowSpinner06b = false;
-      this.changeDetectorRef.markForCheck();
-    }, 8000);
-  }
 }
