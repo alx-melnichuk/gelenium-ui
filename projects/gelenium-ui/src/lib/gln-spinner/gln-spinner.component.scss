@@ -1,20 +1,85 @@
 /*# sourceURL=gln-spinner.component.scss */
 
+@import '../_styles/mx-display-flex.scss';
+
 gln-spinner {
-  display: block;
 
   --glnsp--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
   --glnsp--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
   --glnsp--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
 
+  --glnspow--bg-color: hsla(var(--glnsp--primary-h), var(--glnsp--primary-s), var(--glnsp--primary-l), 3%);
+
+  @include mxDisplayFlex();
+
   color: hsl(var(--glnsp--primary-h), var(--glnsp--primary-s), var(--glnsp--primary-l));
 
-  &>[gln-sgv] {
-    fill: currentColor;
+  // Block "<div glnsp-wrap>"
+  &>[glnsp-wrap] {
+    display: inline-block;
+  }
+  &:not([noani])>[glnsp-wrap]>svg[glnsp-inner] {
+    animation: kf-spwr-rotate 1.4s linear infinite;
+    @keyframes kf-spwr-rotate {
+      0% { 
+        transform: rotate(0deg); 
+      }
+      100% { 
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  // Blocks: "<svg glnsp-size" - (Internal svg), "<div glnsp-size>" - ("External svg").
+  &>[glnsp-wrap]>[glnsp-size] {
     height: var(--glnsp-size, var(--glnsp--size, 32px));
     width: var(--glnsp-size, var(--glnsp--size, 32px));
   }
-  &:not([noani])>[gln-sgv] {
+
+  // ** Section "Internal svg" **
+
+  // Block "<svg glnsp-inner>"
+  &>[glnsp-wrap]>svg[glnsp-inner] {
+    display: block;
+    circle {
+      cx: 50%;
+      cy: 50%;
+      fill: none;
+      r: 44%;
+      stroke: currentColor;
+      stroke-dasharray: 182%, 285%;
+      stroke-dashoffset: 0;
+      stroke-linecap: round;
+      stroke-width: 8.18%;
+      transform-origin: center center;
+    }
+  }
+  &:not([noani])>[glnsp-wrap]>svg[glnsp-inner] {
+    circle {
+      // animation: kf-sp-inner-move var(--glnspin-duration, 3s) linear infinite; 
+      animation: kf-sp-inner-move 1.4s ease-in-out infinite;
+      @keyframes kf-sp-inner-move {
+        0% {
+          stroke-dasharray: 1px, 285%;
+          stroke-dashoffset: 0px;
+        } 50% {
+          stroke-dasharray: 227%, 285%;
+          stroke-dashoffset: -34%;
+        } 100% {
+          stroke-dasharray: 227%, 285%;
+          stroke-dashoffset: -285%;
+        }
+      }
+    }
+  }
+
+  // ** Section "External svg" **
+
+  // Block "<div glnsp-svg>"
+  &>[glnsp-svg] {
+    fill: currentColor;
+  }
+  &:not([noani])>[glnsp-svg] {
     animation: kf-sp-rotation var(--glnsp-rotation-duration, 1s) linear infinite;
     @keyframes kf-sp-rotation {
       0% { 
@@ -23,6 +88,22 @@ gln-spinner {
       100% { 
         transform: rotate(360deg);
       }
+    }
+  }
+
+  // ** Section "flex-size" **
+  &[flex-size] {
+    position: relative;
+    &>[glnsp-wrap] {
+      align-items: center;
+      background-color: var(--glnsp-bg-color, var(--glnspow--bg-color));
+      bottom: var(--glnspow--bottom);
+      @include mxDisplayFlex();
+      justify-content: center;
+      left: var(--glnspow--left);
+      position: absolute;
+      right: var(--glnspow--right);
+      top: var(--glnspow--top);
     }
   }
 

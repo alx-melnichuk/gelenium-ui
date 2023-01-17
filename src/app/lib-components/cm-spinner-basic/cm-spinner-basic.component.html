@@ -1,64 +1,138 @@
-<section mr-vr>
-  <h3 class="app-hover-link">
-    Basic.
-    <a [href]="urlCmSpinner + '#Basic'">#</a>
-  </h3>
-  <span>
-    To use this component, in your module you need to add:
-  </span>
-  <code><pre source="ts">
+<!-- Page: "Basic" 01 -->
+<ng-container *ngIf="true">
+  <section mr-vr>
+    <h3 class="app-hover-link">
+      Basic.
+      <a [href]="urlCmSpinner + '#Basic'">#</a>
+    </h3>
+    <span>
+      To use this component, in your module you need to add:
+    </span>
+    <code><pre source="ts">
 import &#123; GlnSpinnerModule &#125; from 'gelenium-ui';</pre>
   </code>
-  <p>
-    The GlnSpinner component displays a "svg" image that rotates around its own axis.
-    <br />
-    This component is used to display the data processing process.
-  </p>
-</section>
+    <p>
+      The GlnSpinner component displays a "svg" image that rotates around its own axis.
+      <br />
+      This component is used to display the data processing process.
+    </p>
+  </section>
 
-<div *ngIf="false"
-  class="app-group">
 
-  <div class="app-elem">
-    <gln-spinner size="45"></gln-spinner>
+  <div class="app-group"
+    style9="position: relative;">
+
+    <div class="app-elem">
+      <gln-spinner></gln-spinner>
+    </div>
+
+    <!-- <div class="app-elem9"
+      style="margin: 10px 10px;">
+      <gln-spinner demo2
+        isNoAnimation9
+        style="position: absolute; left: 4px; top: 10px;"></gln-spinner>
+    </div> -->
+
   </div>
 
-</div>
+  <hr br-nn />
+</ng-container>
 
-<hr br-nn />
 
-<hr /> <!-- Page: "ItemSize" 03 -->
+<!-- Page: "Attributes" 02 -->
+<ng-container *ngIf="true">
+  <section mr-vr>
+    <h3 class="app-hover-link">
+      Attributes.
+      <a [href]="urlCmSpinner + '#Attributes'">#</a>
+    </h3>
+    <p>The following attributes are supported:</p>
+    <ul>
+      <li>"id" - parameter for defining the unique identifier of the input field
+        (id="unique_identifier");
+      </li>
+      <li>
+        "config" - Defines a configuration object.
+        <a [href]="urlCmSpinner + '#config-interface'">More details.</a>
+      </li>
+      <li>
+        "isExternal" - Displays the specified content instead of an inline SVG image.
+      </li>
+      <li>"isNoAnimation" - disable animation execution (isNoAnimation);</li>
+      <li>"size" - specifies the size (height and width) of the component.</li>
+    </ul>
+  </section>
 
-<section>
-  <h3 class="app-hover-link">
-    Item size.
-    <a [href]="urlCmSpinner + '#ItemSize'">#</a>
-  </h3>
-  <p>
-    The "size" property determines the size of the element (its height).
-  </p>
-  <p>
-    It takes the following values:
-  </p>
-  <ul>
-    <li>"short" - sets the height to 38px;</li>
-    <li>"small" - sets the height to 44px;</li>
-    <li>"middle" - sets the height to 50px (default);</li>
-    <li>"wide" - sets the height to 56px;</li>
-    <li>"large" - sets the height to 62px;</li>
-    <li>"huge" - sets the height to 68px;</li>
-  </ul>
-</section>
 
-<section mr-vr>
-  <label>
-    <input type="checkbox"
-      (change)="isNoAnimation03a=!isNoAnimation03a" />
-    start animation
-  </label>
-</section>
+  <section mr-vr>
+    <label>
+      <input type="checkbox"
+        (change)="isNoAnimation02a=!isNoAnimation02a" />
+      start animation
+    </label>
+    <br />
+    <label>
+      <input type="checkbox"
+        (change)="isExternal02a=!isExternal02a" />
+      is external
+    </label>
+  </section>
 
-<ng-container *ngIf="false">
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attributes: id, isNoAnimation, isExternal.</em>
+        </small>
+      </div>
+      <gln-spinner id="unique_id_spinner02a"
+        [isNoAnimation]="isNoAnimation02a ? '' : null"
+        [isExternal]="isExternal02a ? '' : null">
+        <div class="spa-external02">
+          demo
+        </div>
+      </gln-spinner>
+    </div>
+
+  </div>
+
+  <hr br-nn />
+</ng-container>
+
+
+<!-- Page: "ItemSize" 03 -->
+<ng-container *ngIf="true">
+  <section>
+    <h3 class="app-hover-link">
+      Item size.
+      <a [href]="urlCmSpinner + '#ItemSize'">#</a>
+    </h3>
+    <p>
+      The "size" property determines the size of the element (its height).
+    </p>
+    <p>
+      It takes the following values:
+    </p>
+    <ul>
+      <li>"short" - sets the height to 38px;</li>
+      <li>"small" - sets the height to 44px;</li>
+      <li>"middle" - sets the height to 50px (default);</li>
+      <li>"wide" - sets the height to 56px;</li>
+      <li>"large" - sets the height to 62px;</li>
+      <li>"huge" - sets the height to 68px;</li>
+    </ul>
+  </section>
+
+
+  <section mr-vr>
+    <label>
+      <input type="checkbox"
+        (change)="isNoAnimation03a=!isNoAnimation03a" />
+      start animation
+    </label>
+  </section>
+
   <div class="app-group">
     <div class="app-elem">
       <div>
@@ -125,125 +199,127 @@ import &#123; GlnSpinnerModule &#125; from 'gelenium-ui';</pre>
     </div>
   </div>
 
+
+  <section mr-vr
+    id="api-properties">
+    <h4 class="app-hover-link">
+      Configuration for custom height (57px).
+      <a [href]="urlCmSpinner + '#ItemSize-custom'">#</a>
+    </h4>
+  </section>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>custom height 57px;</em></small>
+      </div>
+      <gln-spinner [config]="{ size: '57' }"
+        [isNoAnimation]="isNoAnimation03a ? '' : null">
+      </gln-spinner>
+    </div>
+  </div>
+
+  <hr br-nn />
 </ng-container>
 
-<section mr-vr
-  id="api-properties">
-  <h4 class="app-hover-link">
-    Configuration for custom height (57px).
-    <a [href]="urlCmSpinner + '#ItemSize-custom'">#</a>
-  </h4>
-</section>
 
-<div class="app-group">
-  <div class="app-elem">
-    <div>
-      <small><em>custom height 57px;</em></small>
-    </div>
-    <gln-spinner [config]="{ size: '57' }"
-      [isNoAnimation]="isNoAnimation03a ? '' : null">
-    </gln-spinner>
-  </div>
-</div>
-
-<hr br-nn />
-
-<hr /> <!-- Page: "Palette" 04 -->
-
-<section>
-  <h3 class="app-hover-link">
-    Palette.
-    <a [href]="urlCmSpinner + '#Palette'">#</a>
-  </h3>
-  <p>
-    The GlnSpinner component has the ability to change its color.
-  </p>
-  <span>For example:</span>
-  <code><pre source="html">
-&lt;gln-spinner
-  <i><strong>[glnColor]="&#123; primary: 'danger' &#125;"</strong></i>&gt;
+<!-- Page: "Palette" 04 -->
+<ng-container *ngIf="true">
+  <section>
+    <h3 class="app-hover-link">
+      Palette.
+      <a [href]="urlCmSpinner + '#Palette'">#</a>
+    </h3>
+    <p>
+      The GlnSpinner component has the ability to change its color.
+    </p>
+    <span>For example:</span>
+    <code><pre source="html">
+&lt;gln-spinner <strong>[glnColor]="&#123; primary: 'danger' &#125;"</strong>&gt;
 &lt;/gln-spinner&gt;</pre></code>
-  <p>
-    This means that you want to use the system color "danger"
-    as the "primary" color.
-  </p>
-  <span>
-    To use the glnColor directive, you need to add in your module:
-  </span>
-  <code><pre source="ts">
+    <p>
+      This means that you want to use the system color "danger"
+      as the "primary" color.
+    </p>
+    <span>
+      To use the glnColor directive, you need to add in your module:
+    </span>
+    <code><pre source="ts">
 import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
   </code>
-</section>
+  </section>
 
-<section mr-vr>
-  <label>
-    <input type="checkbox"
-      (change)="isNoAnimation04a=!isNoAnimation04a" />
-    start animation
-  </label>
-</section>
 
-<div class="app-group">
+  <section mr-vr>
+    <label>
+      <input type="checkbox"
+        (change)="isNoAnimation04a=!isNoAnimation04a" />
+      start animation
+    </label>
+  </section>
 
-  <div class="app-elem spp-elem">
-    <div>
-      <small><em>color: primary</em></small>
+  <div class="app-group">
+
+    <div class="app-elem spp-elem">
+      <div>
+        <small><em>color: primary</em></small>
+      </div>
+      <gln-spinner [glnColor]="{ primary: 'primary' }"
+        [isNoAnimation]="isNoAnimation04a ? '' : null">
+      </gln-spinner>
     </div>
-    <gln-spinner [glnColor]="{ primary: 'primary' }"
-      [isNoAnimation]="isNoAnimation04a ? '' : null">
-    </gln-spinner>
+
+    <div class="app-elem spp-elem">
+      <div>
+        <small><em>color: danger</em></small>
+      </div>
+      <gln-spinner [glnColor]="{ primary: 'danger' }"
+        [isNoAnimation]="isNoAnimation04a ? '' : null">
+      </gln-spinner>
+    </div>
+
+    <div class="app-elem spp-elem">
+      <div>
+        <small><em>color: success</em></small>
+      </div>
+      <gln-spinner [glnColor]="{ primary: 'success' }"
+        [isNoAnimation]="isNoAnimation04a ? '' : null">
+      </gln-spinner>
+    </div>
+
+    <div class="app-elem spp-elem">
+      <div>
+        <small><em>color: info</em></small>
+      </div>
+      <gln-spinner [glnColor]="{ primary: 'info' }"
+        [isNoAnimation]="isNoAnimation04a ? '' : null">
+      </gln-spinner>
+    </div>
+
+    <div class="app-elem spp-elem">
+      <div>
+        <small><em>color: warning</em></small>
+      </div>
+      <gln-spinner [glnColor]="{ primary: 'warning' }"
+        [isNoAnimation]="isNoAnimation04a ? '' : null">
+      </gln-spinner>
+    </div>
+
+    <div class="app-elem spp-elem spp-customer">
+      <div>
+        <small><em>color: customer</em></small>
+      </div>
+      <gln-spinner [glnColor]="{ primary: 'customer' }"
+        [isNoAnimation]="isNoAnimation04a ? '' : null">
+      </gln-spinner>
+    </div>
+
   </div>
 
-  <div class="app-elem spp-elem">
-    <div>
-      <small><em>color: danger</em></small>
-    </div>
-    <gln-spinner [glnColor]="{ primary: 'danger' }"
-      [isNoAnimation]="isNoAnimation04a ? '' : null">
-    </gln-spinner>
-  </div>
+  <hr br-nn />
+</ng-container>
 
-  <div class="app-elem spp-elem">
-    <div>
-      <small><em>color: success</em></small>
-    </div>
-    <gln-spinner [glnColor]="{ primary: 'success' }"
-      [isNoAnimation]="isNoAnimation04a ? '' : null">
-    </gln-spinner>
-  </div>
-
-  <div class="app-elem spp-elem">
-    <div>
-      <small><em>color: info</em></small>
-    </div>
-    <gln-spinner [glnColor]="{ primary: 'info' }"
-      [isNoAnimation]="isNoAnimation04a ? '' : null">
-    </gln-spinner>
-  </div>
-
-  <div class="app-elem spp-elem">
-    <div>
-      <small><em>color: warning</em></small>
-    </div>
-    <gln-spinner [glnColor]="{ primary: 'warning' }"
-      [isNoAnimation]="isNoAnimation04a ? '' : null">
-    </gln-spinner>
-  </div>
-
-  <div class="app-elem spp-elem spp-customer">
-    <div>
-      <small><em>color: customer</em></small>
-    </div>
-    <gln-spinner [glnColor]="{ primary: 'customer' }"
-      [isNoAnimation]="isNoAnimation04a ? '' : null">
-    </gln-spinner>
-  </div>
-
-</div>
-
-<hr br-nn />
-
-<hr /> <!-- Page: "Customization" 05 -->
+<!-- Page: "Customization" 05 -->
 
 <section>
   <h3 class="app-hover-link">
@@ -299,3 +375,318 @@ import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
   </div>
 
 </div>
+
+
+<!-- Page: "Feature" 06 -->
+<section id="Feature">"Feature"</section>
+
+<a [href]="urlCmSpinner + '#Feature'">#</a>
+<ng-container *ngIf="true">
+  <section>
+    <h3 class="app-hover-link">
+      Feature.
+      <a [href]="urlCmSpinner + '#Feature'">#</a>
+    </h3>
+    <p>
+      A component can cover the surface of the parent element with a translucent background.
+    </p>
+  </section>
+
+  <form [formGroup]="formGroup06a"
+    style="    border: 1px solid green;"
+    novalidate
+    autocomplete="off">
+
+    <div class="app-group">
+
+      <div class="app-elem">
+        <div>
+          <small><em>Native "input" element 1</em></small>
+        </div>
+        <input type="text"
+          class="spf-input06"
+          formControlName="model06a" />
+      </div>
+
+      <div class="app-elem">
+        <div>
+          <small><em>Native "input" element 2</em></small>
+        </div>
+        <input type="text"
+          class="spf-input06"
+          formControlName="model06b" />
+      </div>
+
+    </div>
+    <div class="app-group">
+
+      <div class="app-elem">
+        <div>
+          <small><em>Native "input" element 3</em></small>
+        </div>
+        <input type="text"
+          class="spf-input06"
+          formControlName="model06c" />
+      </div>
+
+      <div class="app-elem">
+        <div>
+          <small><em>Native "input" element 4</em></small>
+        </div>
+        <input type="text"
+          class="spf-input06"
+          formControlName="model06d" />
+      </div>
+
+    </div>
+
+    <gln-spinner *ngIf="isShowSpinner06a"
+      isOwner
+      isNoAnimation9>
+    </gln-spinner>
+
+    <gln-spinner *ngIf="isShowSpinner06b"
+      isScreen
+      isNoAnimation9>
+    </gln-spinner>
+
+  </form>
+
+  <div class="app-group spf-center">
+    <button class="spf-btn"
+      type="button"
+      tabindex="0"
+      [attr.disabled]="isShowSpinner06a ? '' : null"
+      (click)="setShowSpinnerForBlock()">
+      <span>show spinner for block</span>
+    </button>
+  </div>
+
+  <div class="app-group spf-center">
+    <button class="spf-btn"
+      type="button"
+      tabindex="0"
+      [attr.disabled]="isShowSpinner06b ? '' : null"
+      (click)="setShowSpinnerForScreen()">
+      <span>show spinner for screen</span>
+    </button>
+  </div>
+
+</ng-container>
+
+<!-- Page: "Api" 09 -->
+<ng-container *ngIf="true">
+  <section mr-vr>
+    <h3 class="app-hover-link">
+      API: GlnSpinner.
+      <a [href]="urlCmSpinner + '#Api'">#</a>
+    </h3>
+    <p>
+      Selector:
+      <span fw500>gln-spinner</span>
+    </p>
+    <p>
+      Exported as:
+      <span fw500>glnSpinner</span>
+    </p>
+  </section>
+
+  <section mr-vr
+    id="api-properties">
+    <h4 class="app-hover-link">
+      Properties.
+      <a [href]="urlCmSpinner + '#api-properties'">#</a>
+    </h4>
+  </section>
+
+  <table class="app-tab">
+    <thead>
+      <tr>
+        <th class="app-mn-wd-22ch">Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <code>@Input()</code>
+          <code>id: string;</code>
+        </td>
+        <td>
+          <span>
+            ID of the native element.
+            <br />(default = `glnsp-$&#123;uniqueIdCounter++&#125;`;)
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>@Input()</code>
+          <code>config: GlnSwitchConfig<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+        </td>
+        <td>
+          <span>Defines a configuration object.</span><br />
+          <a [href]="urlCmSpinner + '#config-interface'">More details.</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>@Input()</code>
+          <code>isExternal: string<br/>
+            &nbsp;&nbsp;| boolean<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+        </td>
+        <td>
+          <span style="color: red">
+            ??Вместо внутренней svg картинки отобразить контекст пользователя.
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>@Input()</code>
+          <code>isNoAnimation: string<br/>
+            &nbsp;&nbsp;| boolean<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+        </td>
+        <td>
+          <span>Disable animation execution.</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>@Input()</code>
+          <code>size: string<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+        </td>
+        <td>
+          <span>Determines the size of the element.<br />
+            It can take the following values:
+          </span>
+          <ul>
+            <li>"short" - height: 38px;</li>
+            <li>"small" - height: 44px (default);</li>
+            <li>"middle" - height: 50px;</li>
+            <li>"wide" - height: 56px;</li>
+            <li>"large" - height: 62px;</li>
+            <li>"huge" - height: 68px;</li>
+          </ul>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <section mr-vr
+    id="api-css-variables-optional">
+    <h4 class="app-hover-link">
+      Css variables, optional. You can override the default values.
+      <a [href]="urlCmSpinner + '#api-css-variables-optional'">#</a>
+    </h4>
+  </section>
+
+  <table class="app-tab">
+    <thead>
+      <tr>
+        <th class="app-mn-wd-22ch">Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>--glnsp--primary-h:<br/>
+          &nbsp;var(--glncl-primary-h,<br/>
+          &nbsp;&nbsp;var(--gln-primary-h)<br/>
+          &nbsp;);</code>
+        </td>
+        <td>
+          <span>
+            The value is determined by the system css-variable
+            <code ubr>--gln-primary-h</code>.<br />
+            Or the css-variable of the GlnColor directive
+            <code ubr>--glncl-primary-h</code>.<br />
+            The saturation value for the "hsl()" css function.<br />
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td><code>--glnsp--primary-s:<br/>
+          &nbsp;var(--glncl-primary-s,<br/>
+          &nbsp;&nbsp;var(--gln-primary-s)<br/>
+          &nbsp;);</code>
+        </td>
+        <td>
+          <span>
+            The value is determined by the system css-variable
+            <code ubr>--gln-primary-s</code>.<br />
+            Or the css-variable of the GlnColor directive
+            <code ubr>--glncl-primary-s</code>.<br />
+            The saturation value for the "hsl()" css function.<br />
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td><code>--glnsp--primary-l:<br/>
+          &nbsp;var(--glncl-primary-l,<br/>
+          &nbsp;&nbsp;var(--gln-primary-l)<br/>
+          &nbsp;);</code>
+        </td>
+        <td>
+          <span>
+            The value is determined by the system css-variable
+            <code ubr>--gln-primary-l</code>.<br />
+            Or the css-variable of the GlnColor directive
+            <code ubr>--glncl-primary-l</code>.<br />
+            The saturation value for the "hsl()" css function.<br />
+          </span>
+        </td>
+      </tr>
+
+      <tr>
+        <td><code>--glnsp-size:<br/>
+        &nbsp;&nbsp;var(--glnsp--size, 32px);</code></td>
+        <td>
+          <span>
+            Determines the height and width of the element.
+          </span>
+        </td>
+      </tr>
+
+      <!-- <tr>
+        <td><code>--glnspin-duration: 3s;</code></td>
+        <td>
+          <span>
+            Sets the length of time that an animation takes to complete one cycle.
+          </span>
+        </td>
+      </tr> -->
+      <!-- <tr>
+        <td><code>--glnspin-stroke-dashoff-min: 66%;</code></td>
+        <td>
+          <span>
+            Set the minimum 'stroke-dashoff' value for the inner svg image (percentage).
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td><code>--glnspin-stroke-dashoff-max: 66%;</code></td>
+        <td>
+          <span>
+            Set the maximum 'stroke-dashoff' value for the inner svg image (percentage).
+          </span>
+        </td>
+      </tr> -->
+
+    </tbody>
+  </table>
+</ng-container>
+
+<!-- 
+  @Input()
+  public size: string | null | undefined; // GlnSizeType
+ -->

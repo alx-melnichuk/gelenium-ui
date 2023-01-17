@@ -3,6 +3,18 @@
 app-cm-spinner-basic {
   display: block;
 
+  // Page: "Attributes" 02
+  .spa-external02 {
+    align-items: center;
+    background-color: aquamarine;
+    border: 1px solid green;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    height: inherit;
+    width: inherit;
+  }
+
   // Page: "Palette" 04
   .spp-elem {
     min-width: 17ch;
@@ -13,6 +25,33 @@ app-cm-spinner-basic {
     --gln-customer-l: 50%;
     --gln-customer-cl: hsl(var(--gln-customer-h), var(--gln-customer-s), var(--gln-customer-l));
   }
+
+  // Page: "Feature" 06
+  .spf-input06 {
+    border-width: 1px;
+    box-sizing: border-box;
+    font-size: 1em;
+    line-height: 2em;
+    margin-top: 0.8em;
+    padding: 2px 9px;
+  }
+  .spf-center {
+    justify-content: center;
+  }
+  .spf-btn {
+    background-color: transparent;
+    border-radius: 0.5em;
+    border-width: 1px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 1.5em 0;
+    padding: 0.5em 1em;
+  }
+  .spf-btn:hover, .spf-btn:focus-visible {
+    background-color: rgba(0, 0, 0, 0.04);
+    outline: 0;
+  }
+
 
   // Page: "Customization" 05
   .spc-svg-one-arrow {

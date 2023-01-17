@@ -53,4 +53,7 @@ export class HtmlElemUtil {
   public static propertyAsNumber(elem: ElementRef<HTMLElement> | null, name: string, defaultValue: number = 0): number {
     return !!elem && !!name ? Number(getComputedStyle(elem.nativeElement).getPropertyValue(name).replace('px', '')) : defaultValue;
   }
+  public static getRect(elem: ElementRef<HTMLElement> | null): DOMRect | null {
+    return elem?.nativeElement.getBoundingClientRect() || null;
+  }
 }
