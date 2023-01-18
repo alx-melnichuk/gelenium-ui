@@ -14,7 +14,7 @@
   <code><pre source="ts">
 const glnSelectConfigDefault: GlnSelectConfig = &#123;
   exterior: 'underline',
-  frameSize: 'wide',
+  size: 'wide',
 &#125;;
 
 @Component(&#123;
@@ -268,12 +268,12 @@ export class AppComponent &#123;
   </p>
   <ul>
     <li>"exterior" will have the value "outlined";</li>
-    <li>"frameSize" will have the value "small" (height to 44px);</li>
+    <li>"size" will have the value "small" (height to 44px);</li>
   </ul>
   <code><pre source="ts">
 const glnSelectConfigDefault: GlnSelectConfig = &#123;
   exterior: 'outlined',
-  frameSize: 'small',
+  size: 'small',
 &#125;;</pre></code>
 </section>
 
@@ -295,7 +295,7 @@ const glnSelectConfigDefault: GlnSelectConfig = &#123;
     For example, let's specify the following parameters:
   </p>
   <code><pre source="ts">
-frameSize="wide"
+size="wide"
 exterior="underline"
 isRequired
 backdropClass='sc-backdrop'
@@ -311,7 +311,7 @@ visibleSize=6</pre></code>
       Standard values are taken.
       <code><pre source="ts">
 exterior="outlined", // GlnFrameConfig
-frameSize="middle",  // GlnFrameConfig
+size="middle",  // GlnFrameConfig
 isLabelShrink=false, // GlnFrameConfig
 isNoAnimation=false, // GlnFrameConfig
 isRequired=false,    // GlnFrameConfig
@@ -365,13 +365,13 @@ visibleSize=0</pre></code>
     <div class="app-elem sc-elem">
       <div>
         <small>
-          <em>2. exterior="underline", frameSize="wide".</em>
+          <em>2. exterior="underline", size="wide".</em>
         </small>
       </div>
       <gln-select formControlName="model08b"
         label="Vegetarian salad 02"
         helperText="Select a value from the list."
-        frameSize="wide"
+        size="wide"
         exterior="underline"
         isRequired
         wdFull>
@@ -419,13 +419,13 @@ visibleSize=0</pre></code>
     &lt;div class="app-elem sc-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;2. exterior="underline", frameSize="wide".&lt;/em&gt;
+          &lt;em&gt;2. exterior="underline", size="wide".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-select formControlName="model08b"
         label="Vegetarian salad 02"
         helperText="Select a value from the list."
-        frameSize="wide"
+        size="wide"
         exterior="underline"
         isRequired
         wdFull&gt;
@@ -448,12 +448,12 @@ import &#123;
   FormControl, FormGroup
 &#125; from '@angular/forms';
 import &#123;
-  GlnFrameExterior, GlnFrameSize, GlnSelectConfig, GLN_SELECT_CONFIG
+  GlnSelectConfig, GLN_SELECT_CONFIG
 &#125; from 'gelenium-ui';
 
 const glnSelectConfigDefault: GlnSelectConfig = &#123;
-  exterior: GlnFrameExterior.underline,
-  frameSize: GlnFrameSize.wide,
+  exterior: 'outlined',
+  size: 'wide',
   backdropClass: 'sc-backdrop',
   isMultiple: true,
   overlayPanelClass: ['sc-overlay-panel'],

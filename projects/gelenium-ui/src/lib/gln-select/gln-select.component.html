@@ -5,7 +5,7 @@
   [config]="currConfig"
   [cssElementRef]="hostRef"
   [exterior]="exterior || currConfig.exterior"
-  [frameSize]="frameSize || currConfig.frameSize"
+  [frameSize]="size || currConfig.size"
   [isAttrHideAnimation]="isAttrHideAnimation"
   [isDisabled]="disabled"
   [isError]="!!errors || error"
@@ -37,7 +37,7 @@
     <div *ngIf="!getBoolean(isNoIcon) && !currConfig?.isNoIcon"
       glnsl-rhomb
       [attr.opn]="isPanelOpen ? '' : null"
-      [attr.noAnm]="noAnimation ? '' : null"
+      [attr.noAnm]="frameComp?.noAnimation ? '' : null"
       [ngClass]="['glnsl-rhomb', (isPanelOpen ? 'is-open' : '')]"
       focusable="false"
       aria-hidden="true">
@@ -102,8 +102,8 @@
 
   <div glnslp-wrap
     class="gln-select-panel-wrap"
-    [ngClass]="[(noAnimation ? 'gln-no-animation' : '')]"
-    [attr.noAnm]="noAnimation ? '' : null"
+    [ngClass]="[(frameComp?.noAnimation ? 'gln-no-animation' : '')]"
+    [attr.noAnm]="frameComp?.noAnimation ? '' : null"
     (animationend)="hasPanelAnimation = isPanelOpen"
     (animationcancel)="hasPanelAnimation = isPanelOpen">
     <div glnsl-panel

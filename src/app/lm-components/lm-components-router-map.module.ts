@@ -93,7 +93,7 @@ const siteUrlsSelect: SiteUrl[] = [
   { label: 'Group', url: urlSelect, fragment: 'Group' },
   { label: 'Trigger', url: urlSelect, fragment: 'Trigger' },
   { label: 'Ornaments', url: urlSelect, fragment: 'Ornaments' },
-  { label: 'Item size', url: urlSelect, fragment: 'ItemSize' },
+  { label: 'Size', url: urlSelect, fragment: 'Size' },
   { label: 'Helper text', url: urlSelect, fragment: 'HelperText' },
   { label: 'Border radius', url: urlSelect, fragment: 'BorderRadius' },
   { label: 'Palette', url: urlSelect, fragment: 'Palette' },

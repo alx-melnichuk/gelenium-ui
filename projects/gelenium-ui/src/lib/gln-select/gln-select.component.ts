@@ -43,8 +43,6 @@ import { first } from 'rxjs/operators';
 import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from '../directives/gln-frame-ornament/gln-frame-ornam-align.interface';
 import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
-import { GlnFrameExterior } from '../gln-frame/gln-frame-exterior.interface';
-import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
 import { GlnOptionUtil } from '../gln-option/gln-option.util';
@@ -99,7 +97,7 @@ export class GlnSelectComponent
   @Input()
   public exterior: string | null | undefined; // GlnFrameExteriorType
   @Input()
-  public frameSize: string | null | undefined; // GlnFrameSizeType
+  public size: string | null | undefined; // GlnFrameSizeType
   @Input()
   public helperText: string | null | undefined;
   @Input()
@@ -208,29 +206,12 @@ export class GlnSelectComponent
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set options(value: GlnOption[]) {}
 
-  public get exteriorVal(): GlnFrameExterior | null {
-    return this.frameComp.exteriorVal;
-  }
-  public get frameSizeVal(): GlnFrameSize | null {
-    return this.frameComp.frameSizeVal;
-  }
-  public get frameSizeValue(): number {
-    return this.frameComp.frameSizeValue;
-  }
-  public get labelShrink(): boolean | null {
-    return this.frameComp.labelShrink;
-  }
-  public get noAnimation(): boolean | null {
-    return this.frameComp.noAnimation;
-  }
-
   public backdropClassVal: string | null = null;
   public checkmark: boolean | null = null; // Binding attribute "isCheckmark". // interface GlnOptionParent
   public currConfig: GlnSelectConfig;
   public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public error: boolean | null = null; // Binding attribute "isError".
   public errors: ValidationErrors | null = null;
-  public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public hasPanelAnimation = false;
   public isAttrHideAnimation: boolean | undefined;
   public isFocused = false;
@@ -622,7 +603,7 @@ export class GlnSelectComponent
   public open(): void {
     if (!this.disabled && !this.readOnly && !this.isPanelOpen && this.options.length > 0) {
       this.isPanelOpen = true;
-      this.hasPanelAnimation = !this.noAnimation;
+      this.hasPanelAnimation = !this.frameComp.noAnimation;
       // #?this.markedOption = this.selectedOptions.length > 0 ? this.selectedOptions[this.selectedOptions.length - 1] : null;
       this.triggerRect = this.triggerRef.nativeElement.getBoundingClientRect();
       this.isFocusAttrOnFrame = false;
@@ -653,7 +634,7 @@ export class GlnSelectComponent
           this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight())
         );
       }
-      if (!this.noAnimation && !options?.noAnimation) {
+      if (!this.frameComp.noAnimation && !options?.noAnimation) {
         const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement.children[0] as HTMLElement);
         // Add an attribute for animation and transformation.
         HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_PANEL_OPENING_ANIMATION, null);
@@ -680,15 +661,15 @@ export class GlnSelectComponent
 
     this.selectPanelRef = HtmlElemUtil.getElementRef(overlayElement.children[0]?.children[0] as HTMLElement);
     const panelHeight = this.getHeight(this.selectPanelRef);
-    if (!this.noAnimation && panelHeight > 0) {
+    if (!this.frameComp.noAnimation && panelHeight > 0) {
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
     }
     // Set the font size for the overlay.
     if (this.triggerFontSize > 0) {
       overlayElement.style.fontSize = `${this.triggerFontSize}px`;
     }
-    if (this.frameSizeValue > 0) {
-      const borderRadius = NumberUtil.roundTo100(this.frameSizeValue / 10);
+    if (this.frameComp.frameSizeValue > 0) {
+      const borderRadius = NumberUtil.roundTo100(this.frameComp.frameSizeValue / 10);
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(borderRadius)?.concat('px'));
     }
     const visibleSize = this.visibleSizeVal ?? 0;
@@ -701,7 +682,7 @@ export class GlnSelectComponent
     }
     // Important! These operations should be the last, they include animation and the dimensions of the panel are distorted.
     const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement?.children[0] as HTMLElement);
-    if (this.noAnimation) {
+    if (this.frameComp.noAnimation) {
       HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, 'noAnm', '');
       HtmlElemUtil.setClass(this.renderer, selectPanelWrapRef, 'gln-no-animation', true);
     } else {
