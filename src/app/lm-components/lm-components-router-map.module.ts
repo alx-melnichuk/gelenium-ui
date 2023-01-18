@@ -75,7 +75,7 @@ const siteUrlsInput: SiteUrl[] = [
   { label: 'Validation', url: urlInput, fragment: 'Validation' },
   { label: 'Numerical value', url: urlInput, fragment: 'NumericalValue' },
   { label: 'Ornaments', url: urlInput, fragment: 'Ornaments' },
-  { label: 'Item size', url: urlInput, fragment: 'ItemSize' },
+  { label: 'Size', url: urlInput, fragment: 'Size' },
   { label: 'Helper text', url: urlInput, fragment: 'HelperText' },
   { label: 'Border radius', url: urlInput, fragment: 'BorderRadius' },
   { label: 'Palette', url: urlInput, fragment: 'Palette' },

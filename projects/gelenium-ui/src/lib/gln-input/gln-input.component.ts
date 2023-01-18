@@ -40,8 +40,6 @@ import {
 import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from '../directives/gln-frame-ornament/gln-frame-ornam-align.interface';
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
-import { GlnFrameExterior } from '../gln-frame/gln-frame-exterior.interface';
-import { GlnFrameSize } from '../gln-frame/gln-frame-size.interface';
 import { GlnInputType, GlnInputTypeUtil } from '../gln-input/gln-input.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
@@ -75,7 +73,7 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   @Input()
   public exterior: string | null | undefined; // GlnFrameExteriorType
   @Input()
-  public frameSize: string | null | undefined; // GlnFrameSizeType
+  public size: string | null | undefined; // GlnFrameSizeType
   @Input()
   public helperText: string | null | undefined;
   @Input()
@@ -126,22 +124,6 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   public frameComp!: GlnFrameComponent;
   @ViewChild('inputElementRef', { static: true })
   public inputElementRef!: ElementRef<HTMLElement>;
-
-  public get exteriorVal(): GlnFrameExterior | null {
-    return this.frameComp.exteriorVal;
-  }
-  public get frameSizeVal(): GlnFrameSize | null {
-    return this.frameComp.frameSizeVal;
-  }
-  public get frameSizeValue(): number {
-    return this.frameComp.frameSizeValue;
-  }
-  public get labelShrink(): boolean | null {
-    return this.frameComp.labelShrink;
-  }
-  public get noAnimation(): boolean | null {
-    return this.frameComp.noAnimation;
-  }
 
   public currConfig: GlnInputConfig;
   public disabled: boolean | null = null; // Binding attribute "isDisabled".

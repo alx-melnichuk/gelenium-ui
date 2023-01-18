@@ -8,7 +8,7 @@ import { GlnInputConfig, GLN_INPUT_CONFIG } from 'gelenium-ui';
 
 const glnInputConfigDefault: GlnInputConfig = {
   exterior: 'outlined',
-  frameSize: 'small',
+  size: 'small',
 };
 
 @Component({
