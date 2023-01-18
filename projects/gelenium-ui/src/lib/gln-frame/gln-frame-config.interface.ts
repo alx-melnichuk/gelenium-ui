@@ -5,4 +5,5 @@ export interface GlnFrameConfig {
   isNoAnimation?: boolean | undefined;
   isNoLabel?: boolean | undefined; // deprecate
   isRequired?: boolean | undefined;
+  size?: string | undefined; // GlnFrameSizeType
 }

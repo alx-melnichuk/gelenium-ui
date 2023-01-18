@@ -135,7 +135,7 @@ const siteUrlsTextarea: SiteUrl[] = [
   { label: 'Validation', url: urlTextarea, fragment: 'Validation' },
   { label: 'Capability', url: urlTextarea, fragment: 'Capability' },
   { label: 'Ornaments', url: urlTextarea, fragment: 'Ornaments' },
-  { label: 'Item size', url: urlTextarea, fragment: 'ItemSize' },
+  { label: 'Size', url: urlTextarea, fragment: 'Size' },
   { label: 'Helper text', url: urlTextarea, fragment: 'HelperText' },
   { label: 'Border radius', url: urlTextarea, fragment: 'BorderRadius' },
   { label: 'Palette', url: urlTextarea, fragment: 'Palette' },
