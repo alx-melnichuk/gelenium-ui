@@ -13,12 +13,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { GlnSize, GlnSizeUtil } from '../_constants/gln-size';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
 
 import { GlnSpinnerConfig } from './gln-spinner-config.interface';
+
+const SIZE: { [key: string]: number } = { short: 38, small: 44, middle: 50, wide: 56, large: 62, huge: 68 };
 
 const CSS_PROP_SIZE = '--glnsp--size';
 
@@ -52,7 +53,7 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
   public isExternalVal: boolean | null = null; // Binding attribute "isExternal".
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
   public isNoPulsateVal: boolean | null = null; // Binding attribute "isNoPulsate".
-  public sizeValue: number = 0;
+  public sizeVal: number = 0;
 
   constructor(
     private renderer: Renderer2,
@@ -80,8 +81,8 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
       this.settingNoPulsate(this.isNoPulsateVal);
     }
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
-      this.sizeValue = GlnSizeUtil.getSizeValue(this.size || this.currConfig.size || GlnSize.small.toString());
-      this.setCssSize(this.sizeValue, this.hostRef);
+      this.sizeVal = SIZE[this.size || this.currConfig.size || ''] || SIZE['small'];
+      this.setCssSize(this.sizeVal, this.hostRef);
     }
   }
 
@@ -100,9 +101,9 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
       this.isNoPulsateVal = !!(this.currConfig.isNoPulsate || null);
       this.settingNoPulsate(this.isNoPulsateVal);
     }
-    if (this.sizeValue === 0) {
-      this.sizeValue = GlnSizeUtil.getSizeValue(this.currConfig.size || GlnSize.small.toString());
-      this.setCssSize(this.sizeValue, this.hostRef);
+    if (this.sizeVal === 0) {
+      this.sizeVal = SIZE[this.currConfig.size || ''] || SIZE['small'];
+      this.setCssSize(this.sizeVal, this.hostRef);
     }
   }
 
