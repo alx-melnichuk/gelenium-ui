@@ -40,7 +40,8 @@ import &#123; GlnSpinnerModule &#125; from 'gelenium-ui';</pre>
     </h3>
     <p>The following attributes are supported:</p>
     <ul>
-      <li>"id" - parameter for defining the unique identifier of the input field
+      <li>
+        "id" - parameter for defining the unique identifier of the input field
         (id="unique_identifier");
       </li>
       <li>
@@ -50,8 +51,15 @@ import &#123; GlnSpinnerModule &#125; from 'gelenium-ui';</pre>
       <li>
         "isExternal" - Displays the specified content instead of an inline SVG image.
       </li>
-      <li>"isNoAnimation" - disable animation execution (isNoAnimation);</li>
-      <li>"size" - specifies the size (height and width) of the component.</li>
+      <li>
+        "isNoAnimation" - disable animation execution (isNoAnimation);
+      </li>
+      <li>
+        "isNoPulsate" - disable circle pulsate (isNoPulsate);
+      </li>
+      <li>
+        "size" - specifies the size (height and width) of the component.
+      </li>
     </ul>
   </section>
 
@@ -61,6 +69,12 @@ import &#123; GlnSpinnerModule &#125; from 'gelenium-ui';</pre>
       <input type="checkbox"
         (change)="isNoAnimation02a=!isNoAnimation02a" />
       start animation
+    </label>
+    <br />
+    <label>
+      <input type="checkbox"
+        (change)="isNoPulsate02a=!isNoPulsate02a" />
+      no pulsate
     </label>
     <br />
     <label>
@@ -75,11 +89,12 @@ import &#123; GlnSpinnerModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem">
       <div>
         <small>
-          <em>Attributes: id, isNoAnimation, isExternal.</em>
+          <em>Attributes: isNoAnimation, isNoPulsate, isExternal.</em>
         </small>
       </div>
       <gln-spinner id="unique_id_spinner02a"
         [isNoAnimation]="isNoAnimation02a ? '' : null"
+        [isNoPulsate]="isNoPulsate02a ? '' : null"
         [isExternal]="isExternal02a ? '' : null">
         <div class="spa-external02">
           demo
@@ -343,7 +358,7 @@ import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
       </div>
       <gln-spinner isExternal
         [isNoAnimation]="isNoAnimation05a ? '' : null">
-        <div class="spc-spinner-refresh"></div>
+        <i class="spc-spinner-refresh"></i>
       </gln-spinner>
     </div>
 
@@ -353,7 +368,7 @@ import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
       </div>
       <gln-spinner isExternal
         [isNoAnimation]="isNoAnimation05a ? '' : null">
-        <svg class="spc-svg">
+        <svg>
           <use
             href="assets/icons/lib-components/cm-spinner-customization/icon-spinner-of-dots.svg#icon-spinner-of-dots">
           </use>
@@ -431,9 +446,7 @@ import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
             &nbsp;&nbsp;| undefined;</code>
         </td>
         <td>
-          <span style="color: red">
-            ??Вместо внутренней svg картинки отобразить контекст пользователя.
-          </span>
+          <span>Display user context instead of internal svg image.</span>
         </td>
       </tr>
       <tr>

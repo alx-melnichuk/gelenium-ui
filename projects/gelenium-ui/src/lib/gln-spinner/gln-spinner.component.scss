@@ -50,7 +50,7 @@ gln-spinner {
       transform-origin: center center;
     }
   }
-  &:not([noani])>svg[glnsp-inner]>circle {
+  &:not([noani]):not([nopul])>svg[glnsp-inner]>circle {
     animation: kf-spi-move var(--glnsp-rotate-duration, 1.4s) ease-in-out infinite;
     @keyframes kf-spi-move {
       0% {
@@ -69,8 +69,10 @@ gln-spinner {
   // ** Section "External svg" **
 
   // Block "<div glnsp-svg>"
-  &>[glnsp-svg] {
+  &>[glnsp-svg]>svg {
     fill: currentColor;
+    height: inherit;
+    width: inherit;
   }
 
 }

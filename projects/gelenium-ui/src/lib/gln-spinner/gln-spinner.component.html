@@ -1,14 +1,14 @@
 <ng-container *ngIf="!isExternalVal; else elseBlockExternal">
   <svg glnsp-size
-    glnsp-inner
-    glnsp-rotate>
+    glnsp-rotate
+    glnsp-inner>
     <circle></circle>
   </svg>
 </ng-container>
 <ng-template #elseBlockExternal>
   <div glnsp-size
-    glnsp-svg
-    glnsp-rotate>
+    glnsp-rotate
+    glnsp-svg>
     <ng-content></ng-content>
   </div>
 </ng-template>

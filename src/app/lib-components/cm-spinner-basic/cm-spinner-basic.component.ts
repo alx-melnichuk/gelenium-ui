@@ -25,6 +25,7 @@ export class CmSpinnerBasicComponent {
 
   // Page: "Attributes" 02
   public isNoAnimation02a: boolean = true;
+  public isNoPulsate02a: boolean = false;
   public isExternal02a: boolean = false;
 
   // Page: "ItemSize" 03

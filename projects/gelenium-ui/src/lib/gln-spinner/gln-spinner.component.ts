@@ -44,11 +44,14 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
   @Input()
   public isNoAnimation: string | boolean | null | undefined;
   @Input()
+  public isNoPulsate: string | boolean | null | undefined;
+  @Input()
   public size: string | null | undefined; // GlnSizeType
 
   public currConfig: GlnSpinnerConfig;
   public isExternalVal: boolean | null = null; // Binding attribute "isExternal".
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
+  public isNoPulsateVal: boolean | null = null; // Binding attribute "isNoPulsate".
   public sizeValue: number = 0;
 
   constructor(
@@ -72,6 +75,10 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
       this.isNoAnimationVal = !!(BooleanUtil.init(this.isNoAnimation) ?? (this.currConfig.isNoAnimation || null));
       this.settingNoAnimation(this.isNoAnimationVal);
     }
+    if (changes['isNoPulsate'] || (changes['config'] && this.isNoPulsateVal == null && this.currConfig.isNoPulsate != null)) {
+      this.isNoPulsateVal = !!(BooleanUtil.init(this.isNoPulsate) ?? (this.currConfig.isNoPulsate || null));
+      this.settingNoPulsate(this.isNoPulsateVal);
+    }
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
       this.sizeValue = GlnSizeUtil.getSizeValue(this.size || this.currConfig.size || GlnSize.small.toString());
       this.setCssSize(this.sizeValue, this.hostRef);
@@ -88,6 +95,10 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
     if (this.isNoAnimationVal == null && this.currConfig.isNoAnimation != null) {
       this.isNoAnimationVal = !!(this.currConfig.isNoAnimation || null);
       this.settingNoAnimation(this.isNoAnimationVal);
+    }
+    if (this.isNoPulsateVal == null && this.currConfig.isNoPulsate != null) {
+      this.isNoPulsateVal = !!(this.currConfig.isNoPulsate || null);
+      this.settingNoPulsate(this.isNoPulsateVal);
     }
     if (this.sizeValue === 0) {
       this.sizeValue = GlnSizeUtil.getSizeValue(this.currConfig.size || GlnSize.small.toString());
@@ -107,5 +118,10 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
   private settingNoAnimation(isNoAnimationVal: boolean | null): void {
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-animation', !!isNoAnimationVal);
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noani', isNoAnimationVal ? '' : null);
+  }
+
+  private settingNoPulsate(isNoPulsateVal: boolean | null): void {
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-pulsate', !!isNoPulsateVal);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'nopul', isNoPulsateVal ? '' : null);
   }
 }
