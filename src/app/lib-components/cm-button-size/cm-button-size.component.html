@@ -30,8 +30,7 @@
   </p>
   <p>
     It is possible to specify the height of an element. To do this,
-    in the "config.frameSizeValue" property, we define the required height in pixels.
-    In this case, "frameSize" and "config.frameSize" should not be used.
+    in the "config.size" property, we define the required height in pixels.
   </p>
 </section>
 
@@ -58,7 +57,7 @@
       </small>
     </div>
     <gln-button [exterior]="exterior03a"
-      frameSize="short">
+      size="short">
       <span>{{ getLabel(exterior03a) }}</span>
     </gln-button>
   </div>
@@ -70,7 +69,7 @@
       </small>
     </div>
     <gln-button [exterior]="exterior03a"
-      frameSize="short">
+      size="short">
       <a [routerLink]="[routerLink]"
         fragment="size1">
         <span>{{ getLabel(exterior03a) }} Link</span>
@@ -88,7 +87,7 @@
       </small>
     </div>
     <gln-button [exterior]="exterior03a"
-      frameSize="small">
+      size="small">
       <span>{{ getLabel(exterior03a) }}</span>
     </gln-button>
   </div>
@@ -100,7 +99,7 @@
       </small>
     </div>
     <gln-button [exterior]="exterior03a"
-      frameSize="small">
+      size="small">
       <a [routerLink]="[routerLink]"
         fragment="size1">
         <span>{{ getLabel(exterior03a) }} Link</span>
@@ -118,7 +117,7 @@
       </small>
     </div>
     <gln-button [exterior]="exterior03a"
-      frameSize="middle">
+      size="middle">
       <span>{{ getLabel(exterior03a) }}</span>
     </gln-button>
   </div>
@@ -130,7 +129,7 @@
       </small>
     </div>
     <gln-button [exterior]="exterior03a"
-      frameSize="middle">
+      size="middle">
       <a [routerLink]="[routerLink]"
         fragment="size1">
         <span>{{ getLabel(exterior03a) }} Link</span>
@@ -148,7 +147,7 @@
       </small>
     </div>
     <gln-button [exterior]="exterior03a"
-      frameSize="wide">
+      size="wide">
       <span>{{ getLabel(exterior03a) }}</span>
     </gln-button>
   </div>
@@ -160,7 +159,7 @@
       </small>
     </div>
     <gln-button [exterior]="exterior03a"
-      frameSize="wide">
+      size="wide">
       <a [routerLink]="[routerLink]"
         fragment="size1">
         <span>{{ getLabel(exterior03a) }} Link</span>
@@ -179,7 +178,7 @@
     </div>
     <gln-button [exterior]="exterior03a"
       class="bs-large"
-      frameSize="large">
+      size="large">
       <span>{{ getLabel(exterior03a) }}</span>
     </gln-button>
   </div>
@@ -192,7 +191,7 @@
     </div>
     <gln-button [exterior]="exterior03a"
       class="bs-large"
-      frameSize="large">
+      size="large">
       <a [routerLink]="[routerLink]"
         fragment="size1">
         <span>{{ getLabel(exterior03a) }} Link</span>
@@ -211,7 +210,7 @@
     </div>
     <gln-button [exterior]="exterior03a"
       class="bs-huge"
-      frameSize="huge">
+      size="huge">
       <span>{{ getLabel(exterior03a) }}</span>
     </gln-button>
   </div>
@@ -224,7 +223,7 @@
     </div>
     <gln-button [exterior]="exterior03a"
       class="bs-huge"
-      frameSize="huge">
+      size="huge">
       <a [routerLink]="[routerLink]"
         fragment="size1">
         <span>{{ getLabel(exterior03a) }} Link</span>
@@ -250,7 +249,7 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03a"
-      frameSize="short"&gt;
+      size="short"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
   &lt;/div&gt;
@@ -262,7 +261,7 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03a"
-      frameSize="short"&gt;
+      size="short"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="size1"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125; Link&lt;/span&gt;
@@ -280,7 +279,7 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03a"
-      frameSize="small"&gt;
+      size="small"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
   &lt;/div&gt;
@@ -292,7 +291,7 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03a"
-      frameSize="small"&gt;
+      size="small"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="size1"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125; Link&lt;/span&gt;
@@ -310,7 +309,7 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03a"
-      frameSize="middle"&gt;
+      size="middle"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
   &lt;/div&gt;
@@ -322,7 +321,7 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03a"
-      frameSize="middle"&gt;
+      size="middle"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="size1"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125; Link&lt;/span&gt;
@@ -340,7 +339,7 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03a"
-      frameSize="wide"&gt;
+      size="wide"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
   &lt;/div&gt;
@@ -352,7 +351,7 @@
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03a"
-      frameSize="wide"&gt;
+      size="wide"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="size1"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125; Link&lt;/span&gt;
@@ -371,7 +370,7 @@
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03a"
       class="bs-large"
-      frameSize="large"&gt;
+      size="large"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
   &lt;/div&gt;
@@ -384,7 +383,7 @@
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03a"
       class="bs-large"
-      frameSize="large"&gt;
+      size="large"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="size1"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125; Link&lt;/span&gt;
@@ -403,7 +402,7 @@
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03a"
       class="bs-huge"
-      frameSize="huge"&gt;
+      size="huge"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
   &lt;/div&gt;
@@ -416,7 +415,7 @@
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03a"
       class="bs-huge"
-      frameSize="huge"&gt;
+      size="huge"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="size1"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03a) &#125;&#125; Link&lt;/span&gt;
@@ -498,7 +497,7 @@ app-button &#123;
       </small>
     </div>
     <gln-button [exterior]="exterior03b"
-      [config]="config03">
+      size="57">
       <span>{{ getLabel(exterior03b) }}</span>
     </gln-button>
   </div>
@@ -510,7 +509,7 @@ app-button &#123;
       </small>
     </div>
     <gln-button [exterior]="exterior03b"
-      [config]="config03">
+      size="57">
       <a [routerLink]="[routerLink]"
         fragment="size-config">
         <span>{{ getLabel(exterior03b) }} Link</span>
@@ -529,7 +528,7 @@ app-button &#123;
     </div>
     <gln-button [exterior]="exterior03b"
       class="bs-large"
-      [config]="config03">
+      [size]="57">
       <span>{{ getLabel(exterior03b) }}</span>
     </gln-button>
   </div>
@@ -542,7 +541,7 @@ app-button &#123;
     </div>
     <gln-button [exterior]="exterior03b"
       class="bs-large"
-      [config]="config03">
+      [size]="57">
       <a [routerLink]="[routerLink]"
         fragment="size-config">
         <span>{{ getLabel(exterior03b) }} Link</span>
@@ -561,7 +560,7 @@ app-button &#123;
     </div>
     <gln-button [exterior]="exterior03b"
       class="bs-huge"
-      [config]="config03">
+      [config]="{ size: '57' }">
       <span>{{ getLabel(exterior03b) }}</span>
     </gln-button>
   </div>
@@ -574,7 +573,7 @@ app-button &#123;
     </div>
     <gln-button [exterior]="exterior03b"
       class="bs-huge"
-      [config]="config03">
+      [config]="{ size: 57 }">
       <a [routerLink]="[routerLink]"
         fragment="size-config">
         <span>{{ getLabel(exterior03b) }} Link</span>
@@ -600,7 +599,7 @@ app-button &#123;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03b"
-      [config]="config03"&gt;
+      size="57"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03b) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
   &lt;/div&gt;
@@ -612,7 +611,7 @@ app-button &#123;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03b"
-      [config]="config03"&gt;
+      size="57"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="size-config"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03b) &#125;&#125; Link&lt;/span&gt;
@@ -631,7 +630,7 @@ app-button &#123;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03b"
       class="bs-large"
-      [config]="config03"&gt;
+      [size]="57"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03b) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
   &lt;/div&gt;
@@ -644,7 +643,7 @@ app-button &#123;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03b"
       class="bs-large"
-      [config]="config03"&gt;
+      [size]="57"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="size-config"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03b) &#125;&#125; Link&lt;/span&gt;
@@ -663,7 +662,7 @@ app-button &#123;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03b"
       class="bs-huge"
-      [config]="config03"&gt;
+      [config]="&#123; size: '57' &#125;"&gt;
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03b) &#125;&#125;&lt;/span&gt;
     &lt;/gln-button&gt;
   &lt;/div&gt;
@@ -676,7 +675,7 @@ app-button &#123;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior03b"
       class="bs-huge"
-      [config]="config03"&gt;
+      [config]="&#123; size: 57 &#125;"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="size-config"&gt;
         &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior03b) &#125;&#125; Link&lt;/span&gt;
@@ -701,10 +700,7 @@ export class ButtonComponent &#123;
   public exterior03b = 'outlined';
   public routerLink = '/components/button1';
   public fragment03i = 'size-link03i';
-  // GlnButtonConfig
-  public config03 = &#123;
-    frameSizeValue: 57,
-  &#125;;
+
   public getLabel(exterior: string): string &#123;
     return exterior ?
       exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';

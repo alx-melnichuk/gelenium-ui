@@ -13,8 +13,8 @@
   </p>
   <code><pre source="ts">
   const glnButtonConfigDefault: GlnButtonConfig = &#123;
-    exterior: GlnButtonExterior.contained,
-    frameSize: GlnFrameSize.small,
+    exterior: 'contained',
+    size: 'small',
   &#125;;
 
   @Component(&#123;
@@ -53,7 +53,9 @@
   </tr>
 
   <tr>
-    <td><code>exterior?: GlnButtonExterior;</code></td>
+    <td>
+      <code>exterior?: string</code>
+    </td>
     <td>
       <span>
         This property determines the appearance of the button.
@@ -74,7 +76,10 @@
     </td>
   </tr>
   <tr>
-    <td><code>frameSize?: GlnFrameSize;</code></td>
+    <td>
+      <code>size?: number<br/>
+        &nbsp;&nbsp;| string</code>
+    </td>
     <td>
       <span>
         This property determines the size of the element (its height).
@@ -89,16 +94,11 @@
         <li>"large" - sets the height to 62px;</li>
         <li>"huge" - sets the height to 68px;</li>
       </ul>
-      <span>(optional)</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>frameSizeValue?: number;</code></td>
-    <td>
       <span>
-        This property sets the height of the element in pixels.
-        This property applies only if there is no "frameSize" property.
+        In this property, you can specify the value of the height of the
+        element in pixels. (size="57").
       </span>
+      <span>(optional)</span>
     </td>
   </tr>
   <tr>
@@ -132,13 +132,13 @@
   </p>
   <ul>
     <li>"exterior" will have the value "outlined".</li>
-    <li>"frameSize" will have the value "middle" (height to 50px;).</li>
+    <li>"size" will have the value "middle" (height to 50px;).</li>
   </ul>
   <code><pre source="ts">
-    const glnButtonConfigDefault: GlnButtonConfig = &#123;
-      exterior: GlnButtonExterior.outlined,
-      frameSize: GlnFrameSize.middle,
-    &#125;;</pre></code>
+  const glnButtonConfigDefault: GlnButtonConfig = &#123;
+    exterior: 'text',
+    size: 'middle',
+  &#125;;</pre></code>
 </section>
 
 <section mr-vr
@@ -158,8 +158,8 @@
     For example, let's specify the following parameters:
   </p>
   <code><pre source="ts">
-  frameSize="wide"
-  exterior="outlined"</pre></code>
+  exterior="outlined",
+  size="wide"</pre></code>
   <p>
     In other words, there is the following order of determining the configuration parameters:
   </p>
@@ -168,7 +168,7 @@
       Standard values are taken.
       <code><pre source="ts">
   exterior="text",
-  frameSize="small",
+  size="small",
   isNoRipple=false</pre></code>
     </li>
     <li>
@@ -185,7 +185,7 @@
   <div class="app-elem">
     <div>
       <small>
-        <em>1. Default config: "text", "small".</em>
+        <em>1. Default config: "text", "middle".</em>
       </small>
     </div>
     <gln-button>
@@ -196,11 +196,11 @@
   <div class="app-elem">
     <div>
       <small>
-        <em>2. exterior="outlined", frameSize="wide".</em>
+        <em>2. exterior="outlined", size="wide".</em>
       </small>
     </div>
     <gln-button exterior="outlined"
-      frameSize="wide">
+      size="wide">
       <span>Settings</span>
     </gln-button>
   </div>
@@ -232,11 +232,11 @@
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
-        &lt;em&gt;2. exterior="outlined", frameSize="wide".&lt;/em&gt;
+        &lt;em&gt;2. exterior="outlined", size="wide".&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-button exterior="outlined"
-      frameSize="wide"&gt;
+      size="wide"&gt;
       &lt;span&gt;Settings&lt;/span&gt;
     &lt;/gln-button&gt;
   &lt;/div&gt;

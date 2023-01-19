@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { GlnFrameSizeUtil } from 'gelenium-ui';
-
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { BTN_CONTAINED, BTN_OUTLINED, BTN_TEXT, LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
 
@@ -47,9 +45,8 @@ export class CmButtonBorderRadiusComponent {
   public getLabel(exterior: string): string {
     return exterior ? exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
   }
-  public getSize(frameSize: string | null, radiusRatio: number = 1): string {
-    const value = GlnFrameSizeUtil.getValue(GlnFrameSizeUtil.convert(frameSize)) ?? 0;
-    return Math.round((value * radiusRatio * 100) / 100)
+  public getSize(size: number | null, radiusRatio: number = 1): string {
+    return Math.round(((size ?? 0) * radiusRatio * 100) / 100)
       .toString()
       .concat('px');
   }

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { GlnButtonConfig, GlnButtonExterior, GlnFrameSize } from 'gelenium-ui';
+import { GlnButtonConfig } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { BTN_CONTAINED, BTN_OUTLINED, BTN_TEXT, LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
@@ -43,20 +43,20 @@ export class PlButtonBootstrapComponent {
   public isDisabledReference = false;
 
   public cfgContained: GlnButtonConfig = {
-    exterior: GlnButtonExterior.contained,
-    frameSize: GlnFrameSize.short,
+    exterior: 'contained',
+    size: 'short',
     isNoRipple: true,
   };
 
   public cfgOutlined: GlnButtonConfig = {
-    exterior: GlnButtonExterior.outlined,
-    frameSize: GlnFrameSize.short,
+    exterior: 'outlined',
+    size: 'short',
     isNoRipple: true,
   };
 
   public cfgText: GlnButtonConfig = {
-    exterior: GlnButtonExterior.text,
-    frameSize: GlnFrameSize.short,
+    exterior: 'text',
+    size: 'short',
     isNoRipple: true,
   };
 
