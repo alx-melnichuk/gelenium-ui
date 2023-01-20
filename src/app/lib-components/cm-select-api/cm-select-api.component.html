@@ -75,7 +75,8 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>size: string<br/>
+        <code>size: number<br/>
+          &nbsp;&nbsp;| string<br/>
           &nbsp;&nbsp;| null<br/>
           &nbsp;&nbsp;| undefined;</code>
       </td>
@@ -91,6 +92,11 @@
           <li>"large" - height: 62px;</li>
           <li>"huge" - height: 68px;</li>
         </ul>
+        <span>
+          This property can also contain a string with the value of the height
+          of the element in pixels.<br />
+          For example: <code>size="57" or [size]="57"</code>
+        </span>
       </td>
     </tr>
     <tr>

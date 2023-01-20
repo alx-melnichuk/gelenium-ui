@@ -97,7 +97,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple".
   public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
-  public sizeVal: number | null = null;
+  public sizeVal: number | null = null; // Binding attribute "size".
 
   private lineHeight: number = 0;
 

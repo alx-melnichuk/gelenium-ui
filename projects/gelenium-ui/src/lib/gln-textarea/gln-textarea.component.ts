@@ -78,8 +78,6 @@ export class GlnTextareaComponent
   @Input()
   public exterior: string | null | undefined; // GlnFrameExteriorType
   @Input()
-  public size: string | null | undefined; // GlnFrameSizeType
-  @Input()
   public helperText: string | null | undefined;
   @Input()
   public isDisabled: string | boolean | null | undefined;
@@ -109,6 +107,8 @@ export class GlnTextareaComponent
   public ornamLfAlign: string | null | undefined; // OrnamAlign
   @Input()
   public ornamRgAlign: string | null | undefined; // OrnamAlign
+  @Input()
+  public size: number | string | null | undefined; // GlnFrameSizeType
   @Input()
   public tabIndex = 0;
   @Input()

@@ -8,7 +8,7 @@ import { GlnFrameConfig, GLN_FRAME_CONFIG } from 'gelenium-ui';
 
 const glnFrameConfigDefault: GlnFrameConfig = {
   exterior: 'outlined',
-  frameSize: 'small',
+  size: 'small',
 };
 
 @Component({

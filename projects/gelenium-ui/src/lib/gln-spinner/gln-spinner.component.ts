@@ -47,13 +47,13 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
   @Input()
   public isNoPulsate: string | boolean | null | undefined;
   @Input()
-  public size: string | null | undefined; // GlnSizeType
+  public size: number | string | null | undefined; // GlnSizeType
 
   public currConfig: GlnSpinnerConfig;
   public isExternalVal: boolean | null = null; // Binding attribute "isExternal".
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
   public isNoPulsateVal: boolean | null = null; // Binding attribute "isNoPulsate".
-  public sizeVal: number = 0;
+  public sizeVal: number | null = null; // Binding attribute "size".
 
   constructor(
     private renderer: Renderer2,
@@ -81,7 +81,8 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
       this.settingNoPulsate(this.isNoPulsateVal);
     }
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
-      this.sizeVal = SIZE[this.size || this.currConfig.size || ''] || SIZE['small'];
+      const sizeStr: string = (this.size || this.currConfig.size || '').toString();
+      this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       this.setCssSize(this.sizeVal, this.hostRef);
     }
   }
@@ -101,8 +102,9 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
       this.isNoPulsateVal = !!(this.currConfig.isNoPulsate || null);
       this.settingNoPulsate(this.isNoPulsateVal);
     }
-    if (this.sizeVal === 0) {
-      this.sizeVal = SIZE[this.currConfig.size || ''] || SIZE['small'];
+    if (this.sizeVal == null) {
+      const sizeStr: string = (this.currConfig.size || '').toString();
+      this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       this.setCssSize(this.sizeVal, this.hostRef);
     }
   }
@@ -110,6 +112,11 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
   // ** Public methods **
 
   // ** Private methods **
+
+  private converSize(size: string, defaultValue: number): number {
+    const sizeNum: number = Number.parseFloat(size);
+    return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
+  }
 
   /** Prepare and setting property: 'max-height'. */
   private setCssSize(size: number, elem: ElementRef<HTMLElement> | null): void {

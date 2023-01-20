@@ -73,8 +73,6 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   @Input()
   public exterior: string | null | undefined; // GlnFrameExteriorType
   @Input()
-  public size: string | null | undefined; // GlnFrameSizeType
-  @Input()
   public helperText: string | null | undefined;
   @Input()
   public isDisabled: string | boolean | null | undefined;
@@ -106,6 +104,8 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   public ornamRgAlign: string | null | undefined; // OrnamAlignType
   @Input()
   public pattern: string | RegExp = '';
+  @Input()
+  public size: number | string | null | undefined; // GlnFrameSizeType
   @Input()
   public step: number | null | undefined;
   @Input()

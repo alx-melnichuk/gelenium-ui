@@ -97,8 +97,6 @@ export class GlnSelectComponent
   @Input()
   public exterior: string | null | undefined; // GlnFrameExteriorType
   @Input()
-  public size: string | null | undefined; // GlnFrameSizeType
-  @Input()
   public helperText: string | null | undefined;
   @Input()
   /** Flag for displaying a "checkbox" for each option. (only for isMultiple) */
@@ -142,6 +140,8 @@ export class GlnSelectComponent
   public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = '';
   @Input()
   public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
+  @Input()
+  public size: number | string | null | undefined; // GlnFrameSizeType
   @Input()
   public visibleSize: number | null | undefined;
   @Input()
@@ -668,8 +668,8 @@ export class GlnSelectComponent
     if (this.triggerFontSize > 0) {
       overlayElement.style.fontSize = `${this.triggerFontSize}px`;
     }
-    if (this.frameComp.frameSizeValue > 0) {
-      const borderRadius = NumberUtil.roundTo100(this.frameComp.frameSizeValue / 10);
+    if (this.frameComp.sizeVal != null && this.frameComp.sizeVal > 0) {
+      const borderRadius = NumberUtil.roundTo100(this.frameComp.sizeVal / 10);
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(borderRadius)?.concat('px'));
     }
     const visibleSize = this.visibleSizeVal ?? 0;

@@ -27,12 +27,12 @@ app-cm-frame-border-radius {
   }
 
   .radius-f {
-    /* GlnFrameSize.middle [50px] / 3 */
+    /* Size: middle [50px] / 3 */
     --glnfr-br-rd: 16.66667px;
   }
   .radius-f div.glnfr-border:before,
   .radius-f div.glnfr-border:after {
-    /* GlnFrameSize.middle [50px] */
+    /* Size: middle [50px] */
     height: 50px;
   }
 

@@ -3,10 +3,10 @@ import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 export interface GlnInputConfig extends GlnFrameConfig {
   //   interface GlnFrameConfig
   // exterior?: string | undefined; // GlnFrameExteriorType
-  // frameSize?: string | undefined; // GlnFrameSizeType
   // isLabelShrink?: boolean | undefined;
   // isNoAnimation?: boolean | undefined;
   // isRequired?: boolean | undefined;
+  // size?: number | string | undefined;
 
   isError?: boolean | undefined;
   isPlaceholder?: boolean | undefined;

@@ -213,17 +213,43 @@ import &#123; GlnSpinnerModule &#125; from 'gelenium-ui';</pre>
       Configuration for custom height (57px).
       <a [href]="urlCmSpinner + '#ItemSize-custom'">#</a>
     </h4>
+    <p>
+      In the 'size' parameter, you can specify the required size of the element.
+    </p>
+    <span>For example:</span>
+    <code><pre source="html">
+&lt;gln-spinner <strong>size="57"</strong>&gt;
+&lt;/gln-spinner&gt;</pre></code>
+    <p>
+      You can also specify the required size of the element in the configuration
+      parameter.
+    </p>
+    <span>For example:</span>
+    <code><pre source="html">
+&lt;gln-spinner <strong>[config]="&#123; size: 57 &#125;"</strong>&gt;
+&lt;/gln-spinner&gt;</pre></code>
   </section>
 
   <div class="app-group">
+
     <div class="app-elem">
       <div>
-        <small><em>custom height 57px;</em></small>
+        <small><em>custom [size]="57"</em></small>
+      </div>
+      <gln-spinner [size]="57"
+        [isNoAnimation]="isNoAnimation03a ? '' : null">
+      </gln-spinner>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small><em>custom [config]="&#123; size: '57' &#125;"</em></small>
       </div>
       <gln-spinner [config]="{ size: '57' }"
         [isNoAnimation]="isNoAnimation03a ? '' : null">
       </gln-spinner>
     </div>
+
   </div>
 
   <hr br-nn />
@@ -464,7 +490,8 @@ import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
       <tr>
         <td>
           <code>@Input()</code>
-          <code>size: string<br/>
+          <code>size: number<br/>
+            &nbsp;&nbsp;| string<br/>
             &nbsp;&nbsp;| null<br/>
             &nbsp;&nbsp;| undefined;</code>
         </td>
@@ -480,6 +507,11 @@ import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
             <li>"large" - height: 62px;</li>
             <li>"huge" - height: 68px;</li>
           </ul>
+          <span>
+            This property can also contain a string with the value of the height
+            of the element in pixels.<br />
+            For example: <code>size="57" or [size]="57"</code>
+          </span>
         </td>
       </tr>
 
