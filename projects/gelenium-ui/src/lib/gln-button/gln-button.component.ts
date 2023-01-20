@@ -120,9 +120,8 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       isUpdateCssParams = true;
     }
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
-      const prmStr: string = (this.size || this.currConfig.size || '').toString();
-      const prmNum3: number = Number.parseFloat(prmStr);
-      this.sizeVal = !Number.isNaN(prmNum3) && prmNum3 > 0 ? prmNum3 : SIZE[prmStr] || SIZE['small'];
+      const sizeStr: string = (this.size || this.currConfig.size || '').toString();
+      this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       isUpdateCssParams = true;
     }
     if (isUpdateCssParams && this.exteriorVal) {
@@ -159,9 +158,8 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       isUpdateCssParams = true;
     }
     if (this.sizeVal == null) {
-      const prmStr: string = (this.currConfig.size || '').toString();
-      const prmNum3: number = Number.parseFloat(prmStr);
-      this.sizeVal = !Number.isNaN(prmNum3) && prmNum3 > 0 ? prmNum3 : SIZE[prmStr] || SIZE['small'];
+      const sizeStr: string = (this.currConfig.size || '').toString();
+      this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       isUpdateCssParams = true;
     }
     if (isUpdateCssParams && this.exteriorVal) {
@@ -231,6 +229,11 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       this.lineHeight = HtmlElemUtil.propertyAsNumber(this.hostRef, 'line-height');
     }
     return this.lineHeight;
+  }
+
+  private converSize(size: string, defaultValue: number): number {
+    const sizeNum: number = Number.parseFloat(size);
+    return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
   }
 
   private updateCssParams(exterior: GlnButtonExterior, size: number | null, lineHeight: number, elem: ElementRef<HTMLElement>): void {
