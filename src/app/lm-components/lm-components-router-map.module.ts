@@ -39,7 +39,7 @@ const urlFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.g
 const siteUrlsFrame: SiteUrl[] = [
   { label: 'Basic', url: urlFrame, fragment: 'Basic' },
   { label: 'Attributes', url: urlFrame, fragment: 'Attributes' },
-  { label: 'Frame size', url: urlFrame, fragment: 'FrameSize' },
+  { label: 'Size', url: urlFrame, fragment: 'Size' },
   { label: 'Label', url: urlFrame, fragment: 'Label' },
   { label: 'Helper text', url: urlFrame, fragment: 'HelperText' },
   { label: 'Border radius', url: urlFrame, fragment: 'BorderRadius' },
