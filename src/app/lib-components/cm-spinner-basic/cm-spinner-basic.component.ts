@@ -1,8 +1,13 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+
+import { GlnSpinnerConfig, GLN_SPINNER_CONFIG } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
+
+const glnSpinnerConfigDefault: GlnSpinnerConfig = {
+  size: 'short',
+};
 
 @Component({
   selector: 'app-cm-spinner-basic',
@@ -10,6 +15,7 @@ import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-co
   styleUrls: ['./cm-spinner-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // providers: [{ provide: GLN_SPINNER_CONFIG, useValue: glnSpinnerConfigDefault }],
 })
 export class CmSpinnerBasicComponent {
   @Input()
@@ -37,6 +43,9 @@ export class CmSpinnerBasicComponent {
   // Page: "Customization" 05
   public isNoAnimation05a: boolean = true;
 
+  // Page: "Config" 08
+  public isNoAnimation08a: boolean = true;
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+  constructor() {}
 }

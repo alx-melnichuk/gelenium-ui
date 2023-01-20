@@ -47,7 +47,7 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
   @Input()
   public isNoPulsate: string | boolean | null | undefined;
   @Input()
-  public size: number | string | null | undefined; // GlnSizeType
+  public size: number | string | null | undefined;
 
   public currConfig: GlnSpinnerConfig;
   public isExternalVal: boolean | null = null; // Binding attribute "isExternal".
