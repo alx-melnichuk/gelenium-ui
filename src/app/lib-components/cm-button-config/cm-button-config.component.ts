@@ -9,6 +9,7 @@ const glnButtonConfigDefault: GlnButtonConfig = {
   exterior: 'text',
   size: 'middle',
 };
+
 @Component({
   selector: 'app-cm-button-config',
   templateUrl: './cm-button-config.component.html',
