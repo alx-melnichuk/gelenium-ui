@@ -41,25 +41,18 @@ gln-button {
   // To pass the value to GlnTouchRipple.
   --glntr-ripple-cl: var(--glntr--cl-ripple);
 
-  &>div {
-    --glnfr--pd-tp: var(--glnbt-pd-tp, var(--glnfrs--pd-tp, var(--def-lb-pd-tp)));
-    --glnfr--pd-bt: var(--glnbt-pd-bt, var(--glnfrs--pd-bt, var(--def-lb-pd-tp)));
-    --glnfr--pd-lf: var(--glnbt-pd-lf, var(--glnfrs--pd-lf, var(--def-lb-pd-lf)));
-    --glnfr--pd-rg: var(--glnbt-pd-rg, var(--glnfrs--pd-rg, var(--def-lb-pd-lf)));
-  }
-
-  &>div>[glnbt-clear] {
+  &>[glnbt-clear] {
     appearance: none;
     margin: 0;
     padding: 0;
     border: none;
     outline: none;
   }
-  &>div>[glnbt-btn] {
+  &>[glnbt-btn] {
     -webkit-tap-highlight-color: transparent;
     align-items: center;
     background-color: transparent;
-    border-radius: var(--glnbt-br-rd, var(--glnfrs--br-rd, 0.25em)); // 4px
+    border-radius: var(--glnbt-br-rd, var(--glnbtf--br-rd, 0.25em)); // 4px
     box-sizing: border-box;
     cursor: pointer;
     display: inline-flex;
@@ -79,14 +72,14 @@ gln-button {
     vertical-align: middle;
     width: inherit;
   }
-  &:not([dis])>div>[glnbt-btn] {
+  &:not([dis])>[glnbt-btn] {
     transition:
       background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
       box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
       border-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
       color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
-  &[dis]>div>[glnbt-btn] {
+  &[dis]>[glnbt-btn] {
     cursor: default;
     a {
       pointer-events: none;
@@ -108,7 +101,7 @@ gln-button {
 
   // Exterior: "contained"
   // To block the display of a shadow for a button in the "Contained" mode, you must specify "--glnbt-elevation: none;".
-  &[ext-c]:not([dis])>div>[glnbt-btn] {
+  &[ext-c]:not([dis])>[glnbt-btn] {
     &:not(:hover):not(:active) {
       box-shadow: var(--glnbt-elevation, 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%));
     }
@@ -119,7 +112,6 @@ gln-button {
       box-shadow: var(--glnbt-elevation, 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%));
     }
   }
-
   &[ext-c] {
     --glnbt--lb-cl-def: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%);
     --glnbt--bg-cl-def: hsl(var(--glnbt---def-h), var(--glnbt---def-s), 50%);
@@ -132,11 +124,10 @@ gln-button {
   }
 
   // Exterior: "outlined"
-  &[ext-o]>div>[glnbt-btn] {
+  &[ext-o]>[glnbt-btn] {
     border-width: 1px;
     border-style: solid;
   }
-
   &[ext-o] {
     --glnbt--lb-cl-def: hsl(var(--glnbt---def-h), var(--glnbt---def-s), 50%);
     --glnbt--br-cl-def: hsl(var(--glnbt---def-h), var(--glnbt---def-s), 70%);
@@ -160,7 +151,7 @@ gln-button {
   }
 
   // Definition of internal variables by element state.
-  &:not([dis])>div>[glnbt-btn] {
+  &:not([dis])>[glnbt-btn] {
     // The state without disabled, hover, focused.
     &:not(:hover):not(:focus):not(:focus-within):not([foc]) {
       --glnbt--label-cl: var(--glnbt-def-lb-cl, var(--glnbt--lb-cl-def));
@@ -178,14 +169,14 @@ gln-button {
       --glnbt--bground-cl: var(--glnbt-foc-bg-cl, var(--glnbt-def-bg-cl, var(--glnbt--bg-cl-def)));
     }
   } // The state with disabled.
-  &[dis]>div>[glnbt-btn] {
+  &[dis]>[glnbt-btn] {
     --glnbt--label-cl: var(--glnbt-dis-lb-cl, var(--glnbt--lb-cl-dis));
     --glnbt--border-cl: var(--glnbt-dis-br-cl, var(--glnbt--br-cl-dis));
     --glnbt--bground-cl: var(--glnbt-dis-bg-cl, var(--glnbt--bg-cl-dis));
   }
 
   // Define styles for all exteriors.
-  &>div>[glnbt-btn] {
+  &>[glnbt-btn] {
     color           : var(--glnbt--label-cl);
     border-color    : var(--glnbt--border-cl);
     background-color: var(--glnbt--bground-cl);
@@ -194,32 +185,32 @@ gln-button {
   // ** Additional settings **
 
   // To block the display of the button name in uppercase, you must specify "--glnbt-uppercase: none;".
-  &>div>[glnbt-btn] {
+  &>[glnbt-btn] {
     &>span, &>a {
       text-transform: var(--glnbt-uppercase, uppercase);
     }
   }
 
   // Vertical offset.
-  &>div>[glnbt-btn] {
+  &>[glnbt-btn] {
     &>a:not([glnbt-mr-ver]) {
       line-height: inherit;
       display: flex;
       align-items: center;
-      padding-top: var(--glnfr--pd-tp);
-      padding-bottom: var(--glnfr--pd-bt);
+      padding-top: var(--glnbt-pd-tp, var(--glnbtf--pd-tp, var(--def-lb-pd-tp)));
+      padding-bottom: var(--glnbt-pd-bt, var(--glnbtf--pd-bt, var(--def-lb-pd-tp)));
     }
     &>[glnbt-mr-ver] {
       line-height: inherit;
       display: flex;
       align-items: center;
-      margin-top: var(--glnfr--pd-tp);
-      margin-bottom: var(--glnfr--pd-bt);
+      margin-top: var(--glnbt-pd-tp, var(--glnbtf--pd-tp, var(--def-lb-pd-tp)));
+      margin-bottom: var(--glnbt-pd-bt, var(--glnbtf--pd-bt, var(--def-lb-pd-tp)));
     }
   }
 
   // Ornament "padding".
-  &>div>[glnbt-btn] {
+  &>[glnbt-btn] {
     &>span[glnfr-orn-lf], &>span[glnfr-orn-rg] {
       max-height: inherit;
       display: inline-flex;
@@ -229,16 +220,17 @@ gln-button {
     }
     &>span[glnfr-orn-lf]:empty~[glnbt-pd-hor],
     &>span[glnfr-orn-lf]:empty~a {
-      padding-left: var(--glnfr--pd-lf);
+      padding-left: var(--glnbt-pd-lf, var(--glnbtf--pd-lf, var(--def-lb-pd-lf)));
     }
     &>span[glnfr-orn-rg]:empty~[glnbt-pd-hor],
     &>span[glnfr-orn-rg]:empty~a {
-      padding-right: var(--glnfr--pd-rg);
+      padding-right: var(--glnbt-pd-rg, var(--glnbtf--pd-rg, var(--def-lb-pd-lf)));
     }
   }
 
   // Ornament "alignment".
-  &>div>[glnbt-btn] {
+  // &>div>[glnbt-btn] {
+  &>[glnbt-btn] {
     &>span[glnfr-orn-lf="center"], &>span[glnfr-orn-rg="center"] {
       align-self: center;
     }

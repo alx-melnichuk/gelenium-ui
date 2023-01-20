@@ -33,6 +33,12 @@ import { NumberUtil } from '../_utils/number.util';
 
 const SIZE: { [key: string]: number } = { short: 38, small: 44, middle: 50, wide: 56, large: 62, huge: 68 };
 
+const CSS_PROP_BORDER_RADIUS = '--glnbtf--br-rd';
+const CSS_PROP_PADDING_LEFT = '--glnbtf--pd-lf';
+const CSS_PROP_PADDING_RIGHT = '--glnbtf--pd-rg';
+const CSS_PROP_PADDING_TOP = '--glnbtf--pd-tp';
+const CSS_PROP_PADDING_BOTTOM = '--glnbtf--pd-bt';
+
 export const GLN_BUTTON_CONFIG = new InjectionToken<GlnButtonConfig>('GLN_BUTTON_CONFIG');
 
 let uniqueIdCounter = 0;
@@ -72,9 +78,6 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
 
   @ViewChild('buttonElementRef', { static: false })
   public buttonElementRef: ElementRef<HTMLElement> | null = null;
-
-  @ViewChild('wrapElementRef', { read: ElementRef<HTMLDivElement>, static: true })
-  public wrapElementRef!: ElementRef<HTMLDivElement>;
 
   @ViewChild(GlnTouchRippleComponent, { static: false })
   public touchRipple: GlnTouchRippleComponent | null = null;
@@ -125,7 +128,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       isUpdateCssParams = true;
     }
     if (isUpdateCssParams && this.exteriorVal) {
-      this.updateCssParams(this.exteriorVal, this.sizeVal, this.getLineHeight(), this.wrapElementRef);
+      this.updateCssParams(this.exteriorVal, this.sizeVal, this.getLineHeight(), this.hostRef);
     }
 
     if (changes['isDisabled']) {
@@ -163,7 +166,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       isUpdateCssParams = true;
     }
     if (isUpdateCssParams && this.exteriorVal) {
-      this.updateCssParams(this.exteriorVal, this.sizeVal, this.getLineHeight(), this.wrapElementRef);
+      this.updateCssParams(this.exteriorVal, this.sizeVal, this.getLineHeight(), this.hostRef);
     }
 
     if (this.noRipple == null) {
@@ -254,11 +257,11 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
         paddingTop = param;
       }
     }
-    HtmlElemUtil.setProperty(elem, '--glnfrs--br-rd', (this.cssBorderRadius = NumberUtil.str(borderRadius)?.concat('px') || null));
-    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-lf', (this.cssPaddingLeft = NumberUtil.str(paddingLeft)?.concat('px') || null));
-    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-rg', (this.cssPaddingRight = this.cssPaddingLeft));
-    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-tp', (this.cssPaddingTop = NumberUtil.str(paddingTop)?.concat('px') || null));
-    HtmlElemUtil.setProperty(elem, '--glnfrs--pd-bt', (this.cssPaddingBottom = this.cssPaddingTop));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, (this.cssBorderRadius = NumberUtil.str(borderRadius)?.concat('px') || null));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_LEFT, (this.cssPaddingLeft = NumberUtil.str(paddingLeft)?.concat('px') || null));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_RIGHT, (this.cssPaddingRight = this.cssPaddingLeft));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TOP, (this.cssPaddingTop = NumberUtil.str(paddingTop)?.concat('px') || null));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_BOTTOM, (this.cssPaddingBottom = this.cssPaddingTop));
 
     this.changeCssParams.emit();
   }
