@@ -1,16 +1,23 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
+import { GlnSpinnerConfig, GLN_SPINNER_CONFIG } from 'gelenium-ui';
+
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
 
+const glnSpinnerConfigDefault: GlnSpinnerConfig = {
+  size: 'short',
+};
+
 @Component({
-  selector: 'app-cm-spinner-basic',
-  templateUrl: './cm-spinner-basic.component.html',
-  styleUrls: ['./cm-spinner-basic.component.scss'],
+  selector: 'app-cm-spinner-config',
+  templateUrl: './cm-spinner-config.component.html',
+  styleUrls: ['./cm-spinner-config.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: GLN_SPINNER_CONFIG, useValue: glnSpinnerConfigDefault }],
 })
-export class CmSpinnerBasicComponent {
+export class CmSpinnerConfigComponent {
   @Input()
   public labelShowSource = LABEL_SHOW_SOURCE;
   @Input()
@@ -22,6 +29,7 @@ export class CmSpinnerBasicComponent {
 
   public urlCmSpinner = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SPINNER');
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public isNoAnimation08a: boolean = true;
+
   constructor() {}
 }

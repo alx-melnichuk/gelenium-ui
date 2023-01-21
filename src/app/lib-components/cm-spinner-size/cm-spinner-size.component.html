@@ -1,0 +1,328 @@
+<section>
+  <h3 class="app-hover-link">
+    Size.
+    <a [href]="urlCmSpinner + '#Size'">#</a>
+  </h3>
+  <p>
+    The "size" property determines the size of the element (its height).
+  </p>
+  <p>
+    It takes the following values:
+  </p>
+  <ul>
+    <li>"short" - sets the height to 38px;</li>
+    <li>"small" - sets the height to 44px (default);</li>
+    <li>"middle" - sets the height to 50px;</li>
+    <li>"wide" - sets the height to 56px;</li>
+    <li>"large" - sets the height to 62px;</li>
+    <li>"huge" - sets the height to 68px;</li>
+  </ul>
+</section>
+
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isNoAnimation03a=!isNoAnimation03a" />
+    start animation
+  </label>
+</section>
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>"Short" height: 38px;</em></small>
+    </div>
+    <gln-spinner size="short"
+      [isNoAnimation]="isNoAnimation03a ? '' : null">
+    </gln-spinner>
+  </div>
+</div>
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>"Small" height: 44px;</em></small>
+    </div>
+    <gln-spinner size="small"
+      [isNoAnimation]="isNoAnimation03a ? '' : null">
+    </gln-spinner>
+  </div>
+</div>
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>"Middle" height: 50px;</em></small>
+    </div>
+    <gln-spinner size="middle"
+      [isNoAnimation]="isNoAnimation03a ? '' : null">
+    </gln-spinner>
+  </div>
+</div>
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>"Wide" height: 56px;</em></small>
+    </div>
+    <gln-spinner size="wide"
+      [isNoAnimation]="isNoAnimation03a ? '' : null">
+    </gln-spinner>
+  </div>
+</div>
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>"Large" height: 62px;</em></small>
+    </div>
+    <gln-spinner size="large"
+      [isNoAnimation]="isNoAnimation03a ? '' : null">
+    </gln-spinner>
+  </div>
+</div>
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>"huge" height: 68px;</em></small>
+    </div>
+    <gln-spinner size="huge"
+      [isNoAnimation]="isNoAnimation03a ? '' : null">
+    </gln-spinner>
+  </div>
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;"Short" height: 38px;&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner size="short"
+      [isNoAnimation]="isNoAnimation03a ? '' : null"&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;"Small" height: 44px;&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner size="small"
+      [isNoAnimation]="isNoAnimation03a ? '' : null"&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;"Middle" height: 50px;&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner size="middle"
+      [isNoAnimation]="isNoAnimation03a ? '' : null"&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;"Wide" height: 56px;&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner size="wide"
+      [isNoAnimation]="isNoAnimation03a ? '' : null"&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;"Large" height: 62px;&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner size="large"
+      [isNoAnimation]="isNoAnimation03a ? '' : null"&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;"huge" height: 68px;&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner size="huge"
+      [isNoAnimation]="isNoAnimation03a ? '' : null"&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-spinner',
+  templateUrl: './spinner.component.html',
+  styleUrls: ['./spinner.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SpinnerComponent &#123;
+  public isNoAnimation03a: boolean = true;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-spinner &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+<section mr-vr
+  id="size-custom">
+  <h4 class="app-hover-link">
+    Configuration for custom height (57px).
+    <a [href]="urlCmSpinner + '#size-custom'">#</a>
+  </h4>
+  <p>
+    In the 'size' parameter, you can specify the required size of the element.
+  </p>
+  <span>For example:</span>
+  <code><pre source="html">
+&lt;gln-spinner <strong>size="57"</strong>&gt;
+&lt;/gln-spinner&gt;</pre></code>
+  <p>
+    You can also specify the required size of the element in the configuration
+    parameter.
+  </p>
+  <span>For example:</span>
+  <code><pre source="html">
+&lt;gln-spinner <strong>[config]="&#123; size: 57 &#125;"</strong>&gt;
+&lt;/gln-spinner&gt;</pre></code>
+</section>
+
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isNoAnimation03b=!isNoAnimation03b" />
+    start animation
+  </label>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>custom [size]="57"</em></small>
+    </div>
+    <gln-spinner [size]="57"
+      [isNoAnimation]="isNoAnimation03b ? '' : null">
+    </gln-spinner>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>custom [config]="&#123; size: '57' &#125;"</em></small>
+    </div>
+    <gln-spinner [config]="{ size: '57' }"
+      [isNoAnimation]="isNoAnimation03b ? '' : null">
+    </gln-spinner>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;custom [size]="57"&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner [size]="57"
+      [isNoAnimation]="isNoAnimation03b ? '' : null"&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;custom [config]="&#123; size: '57' &#125;"&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner [config]="&#123; size: '57' &#125;"
+      [isNoAnimation]="isNoAnimation03b ? '' : null"&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-spinner',
+  templateUrl: './spinner.component.html',
+  styleUrls: ['./spinner.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SpinnerComponent &#123;
+  public isNoAnimation03b: boolean = true;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-spinner &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

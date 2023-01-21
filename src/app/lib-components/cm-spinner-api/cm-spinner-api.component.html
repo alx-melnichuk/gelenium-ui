@@ -1,0 +1,208 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    API: GlnSpinner.
+    <a [href]="urlCmSpinner + '#Api'">#</a>
+  </h3>
+  <p>
+    Selector:
+    <span fw500>gln-spinner</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>glnSpinner</span>
+  </p>
+</section>
+
+<section mr-vr
+  id="api-properties">
+  <h4 class="app-hover-link">
+    Properties.
+    <a [href]="urlCmSpinner + '#api-properties'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>id: string;</code>
+      </td>
+      <td>
+        <span>
+          ID of the native element.
+          <br />(default = `glnsp-$&#123;uniqueIdCounter++&#125;`;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>config: GlnSpinnerConfig<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Defines a configuration object.</span><br />
+        <a [href]="urlCmSpinner + '#config-interface'">More details.</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isExternal: string<br/>
+            &nbsp;&nbsp;| boolean<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Display user context instead of internal svg image.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoAnimation: string<br/>
+            &nbsp;&nbsp;| boolean<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Disable animation execution.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoPulsate: string<br/>
+            &nbsp;&nbsp;| boolean<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Disable circle pulsate.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>size: number<br/>
+            &nbsp;&nbsp;| string<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Determines the size of the element.<br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"short" - height: 38px;</li>
+          <li>"small" - height: 44px (default);</li>
+          <li>"middle" - height: 50px;</li>
+          <li>"wide" - height: 56px;</li>
+          <li>"large" - height: 62px;</li>
+          <li>"huge" - height: 68px;</li>
+        </ul>
+        <span>
+          This property can also contain a string with the value of the height
+          of the element in pixels.<br />
+          For example: <code>size="57" or [size]="57"</code>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<section mr-vr
+  id="api-css-variables-optional">
+  <h4 class="app-hover-link">
+    Css variables, optional. You can override the default values.
+    <a [href]="urlCmSpinner + '#api-css-variables-optional'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--glnsp--primary-h:<br/>
+          &nbsp;var(--glncl-primary-h,<br/>
+          &nbsp;&nbsp;var(--gln-primary-h)<br/>
+          &nbsp;);</code>
+      </td>
+      <td>
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-primary-h</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-primary-h</code>.<br />
+          The hue value for the "hsl()" css function.<br />
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsp--primary-s:<br/>
+          &nbsp;var(--glncl-primary-s,<br/>
+          &nbsp;&nbsp;var(--gln-primary-s)<br/>
+          &nbsp;);</code>
+      </td>
+      <td>
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-primary-s</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-primary-s</code>.<br />
+          The saturation value for the "hsl()" css function.<br />
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsp--primary-l:<br/>
+          &nbsp;var(--glncl-primary-l,<br/>
+          &nbsp;&nbsp;var(--gln-primary-l)<br/>
+          &nbsp;);</code>
+      </td>
+      <td>
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-primary-l</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-primary-l</code>.<br />
+          The lightness value for the "hsl()" css function.<br />
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsp-size:<br/>
+        &nbsp;&nbsp;var(--glnsp--size, 32px);</code></td>
+      <td>
+        <span>
+          Determines the height and width of the element.<br />
+          The value of the internal css variable '--glnsp--size' is determined
+          by the input parameter 'size'.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsp-duration: 1.4s;</code></td>
+      <td>
+        <span>
+          This is the animation time for rotating an image (internal or external)
+          around its axis in one cycle.<br />
+          Also, this is the execution time of one circle ripple cycle for the internal svg image.
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>

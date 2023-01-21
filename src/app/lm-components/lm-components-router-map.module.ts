@@ -107,10 +107,12 @@ RouterConfig.add('URL_COMPONENTS_SPINNER', 'spinner');
 const urlSpinner = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SPINNER');
 const siteUrlsSpinner: SiteUrl[] = [
   { label: 'Basic', url: urlSpinner, fragment: 'Basic' },
-  // { label: 'Attributes', url: urlSpinner, fragment: 'Attributes' },
-  // { label: 'Customization', url: urlSpinner, fragment: 'Customization' },
-  // { label: 'Config', url: urlSpinner, fragment: 'Config' },
-  // { label: 'Api', url: urlSpinner, fragment: 'Api' },
+  { label: 'Attributes', url: urlSpinner, fragment: 'Attributes' },
+  { label: 'Size', url: urlSpinner, fragment: 'Size' },
+  { label: 'Palette', url: urlSpinner, fragment: 'Palette' },
+  { label: 'Customization', url: urlSpinner, fragment: 'Customization' },
+  { label: 'Config', url: urlSpinner, fragment: 'Config' },
+  { label: 'Api', url: urlSpinner, fragment: 'Api' },
 ];
 SiteMenuUtil.addItem('Components', 'Spinner', { label: 'Spinner', siteUrls: siteUrlsSpinner });
 
@@ -119,7 +121,7 @@ const urlSwitch = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.
 const siteUrlsSwitch: SiteUrl[] = [
   { label: 'Basic', url: urlSwitch, fragment: 'Basic' },
   { label: 'Attributes', url: urlSwitch, fragment: 'Attributes' },
-  { label: 'Item size', url: urlSwitch, fragment: 'ItemSize' },
+  { label: 'Size', url: urlSwitch, fragment: 'Size' },
   { label: 'Palette', url: urlSwitch, fragment: 'Palette' },
   { label: 'Customization', url: urlSwitch, fragment: 'Customization' },
   { label: 'Config', url: urlSwitch, fragment: 'Config' },

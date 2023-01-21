@@ -6,11 +6,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { GlnSpinnerModule } from 'gelenium-ui';
 
-import { CmSpinnerBasicComponent } from './cm-spinner-basic.component';
+import { CmSpinnerCustomizationComponent } from './cm-spinner-customization.component';
 
 @NgModule({
-  declarations: [CmSpinnerBasicComponent],
+  declarations: [CmSpinnerCustomizationComponent],
   imports: [CommonModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnSpinnerModule],
-  exports: [CmSpinnerBasicComponent],
+  exports: [CmSpinnerCustomizationComponent],
 })
-export class CmSpinnerBasicModule {}
+export class CmSpinnerCustomizationModule {}

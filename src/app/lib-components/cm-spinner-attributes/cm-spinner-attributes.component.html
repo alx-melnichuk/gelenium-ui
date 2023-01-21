@@ -1,0 +1,145 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Attributes.
+    <a [href]="urlCmSpinner + '#Attributes'">#</a>
+  </h3>
+  <p>The following attributes are supported:</p>
+  <ul>
+    <li>
+      "id" - parameter for defining the unique identifier of the input field
+      (id="unique_identifier");
+    </li>
+    <li>
+      "config" - Defines a configuration object.
+      <a [href]="urlCmSpinner + '#config-interface'">More details.</a>
+    </li>
+    <li>
+      "isExternal" - Displays the specified content instead of an inline SVG image.
+    </li>
+    <li>
+      "isNoAnimation" - disable animation execution (isNoAnimation);
+    </li>
+    <li>
+      "isNoPulsate" - disable circle pulsate (isNoPulsate);
+    </li>
+    <li>
+      "size" - specifies the size (height and width) of the component.
+    </li>
+  </ul>
+</section>
+
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isNoAnimation02a=!isNoAnimation02a" />
+    start animation
+  </label>
+  <br />
+  <label>
+    <input type="checkbox"
+      (change)="isNoPulsate02a=!isNoPulsate02a" />
+    no pulsate
+  </label>
+  <br />
+  <label>
+    <input type="checkbox"
+      (change)="isExternal02a=!isExternal02a" />
+    is external
+  </label>
+</section>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: isNoAnimation, isNoPulsate, isExternal.</em>
+      </small>
+    </div>
+    <gln-spinner id="unique_id_spinner02a"
+      [isNoAnimation]="isNoAnimation02a ? '' : null"
+      [isNoPulsate]="isNoPulsate02a ? '' : null"
+      [isExternal]="isExternal02a ? '' : null">
+      <div class="spa-external02">
+        demo
+      </div>
+    </gln-spinner>
+  </div>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: isNoAnimation, isNoPulsate, isExternal.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner id="unique_id_spinner02a"
+      [isNoAnimation]="isNoAnimation02a ? '' : null"
+      [isNoPulsate]="isNoPulsate02a ? '' : null"
+      [isExternal]="isExternal02a ? '' : null"&gt;
+      &lt;div class="spa-external02"&gt;
+        demo
+      &lt;/div&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-spinner',
+  templateUrl: './spinner.component.html',
+  styleUrls: ['./spinner.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SpinnerComponent &#123;
+  public isNoAnimation02a: boolean = true;
+  public isNoPulsate02a: boolean = false;
+  public isExternal02a: boolean = false;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-spinner &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .spa-external02 &#123;
+    align-items: center;
+    background-color: aquamarine;
+    border: 1px solid green;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    height: inherit;
+    width: inherit;
+  &#125;  
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

@@ -1,0 +1,197 @@
+<section>
+  <h3 class="app-hover-link">
+    Palette.
+    <a [href]="urlCmSpinner + '#Palette'">#</a>
+  </h3>
+  <p>
+    The GlnSpinner component has the ability to change its color.
+  </p>
+  <span>For example:</span>
+  <code><pre source="html">
+&lt;gln-spinner <strong>[glnColor]="&#123; primary: 'danger' &#125;"</strong>&gt;
+&lt;/gln-spinner&gt;</pre></code>
+  <p>
+    This means that you want to use the system color "danger"
+    as the "primary" color.
+  </p>
+  <span>
+    To use the glnColor directive, you need to add in your module:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre></code>
+</section>
+
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isNoAnimation04a=!isNoAnimation04a" />
+    start animation
+  </label>
+</section>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>color: primary</em></small>
+    </div>
+    <gln-spinner [glnColor]="{ primary: 'primary' }"
+      [isNoAnimation]="isNoAnimation04a ? '' : null">
+    </gln-spinner>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>color: danger</em></small>
+    </div>
+    <gln-spinner [glnColor]="{ primary: 'danger' }"
+      [isNoAnimation]="isNoAnimation04a ? '' : null">
+    </gln-spinner>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>color: success</em></small>
+    </div>
+    <gln-spinner [glnColor]="{ primary: 'success' }"
+      [isNoAnimation]="isNoAnimation04a ? '' : null">
+    </gln-spinner>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>color: info</em></small>
+    </div>
+    <gln-spinner [glnColor]="{ primary: 'info' }"
+      [isNoAnimation]="isNoAnimation04a ? '' : null">
+    </gln-spinner>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>color: warning</em></small>
+    </div>
+    <gln-spinner [glnColor]="{ primary: 'warning' }"
+      [isNoAnimation]="isNoAnimation04a ? '' : null">
+    </gln-spinner>
+  </div>
+
+  <div class="app-elem spp-customer">
+    <div>
+      <small><em>color: customer</em></small>
+    </div>
+    <gln-spinner [glnColor]="{ primary: 'customer' }"
+      [isNoAnimation]="isNoAnimation04a ? '' : null">
+    </gln-spinner>
+  </div>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: primary&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner [glnColor]="&#123; primary: 'primary' &#125;"
+      [isNoAnimation]="isNoAnimation04a ? '' : null"&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: danger&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner [glnColor]="&#123; primary: 'danger' &#125;"
+      [isNoAnimation]="isNoAnimation04a ? '' : null"&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: success&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner [glnColor]="&#123; primary: 'success' &#125;"
+      [isNoAnimation]="isNoAnimation04a ? '' : null"&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: info&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner [glnColor]="&#123; primary: 'info' &#125;"
+      [isNoAnimation]="isNoAnimation04a ? '' : null"&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: warning&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner [glnColor]="&#123; primary: 'warning' &#125;"
+      [isNoAnimation]="isNoAnimation04a ? '' : null"&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem spp-customer"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: customer&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner [glnColor]="&#123; primary: 'customer' &#125;"
+      [isNoAnimation]="isNoAnimation04a ? '' : null"&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-spinner',
+  templateUrl: './spinner.component.html',
+  styleUrls: ['./spinner.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SpinnerComponent &#123;
+  public isNoAnimation04a: boolean = true;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-spinner &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .spp-customer &#123;
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
+    --gln-customer-cl:
+    hsl(var(--gln-customer-h), var(--gln-customer-s), var(--gln-customer-l));
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
