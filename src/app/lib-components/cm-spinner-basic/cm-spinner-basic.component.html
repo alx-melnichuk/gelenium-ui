@@ -11,9 +11,9 @@
 import &#123; GlnSpinnerModule &#125; from 'gelenium-ui';</pre>
   </code>
   <p>
-    The GlnSpinner component displays a "svg" image that rotates around its own axis.
-    <br />
-    This component is used to display the data processing process.
+    The GlnSpinner component is used to display the progress of data processing.<br />
+    This component renders an internal "svg" image that rotates around its own axis.<br />
+    Also, this component can display its content instead of an internal image.
   </p>
 </section>
 
@@ -464,6 +464,16 @@ app-spinner &#123;
 &lt;/gln-spinner&gt;</pre></code>
 </section>
 
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isNoAnimation03b=!isNoAnimation03b" />
+    start animation
+  </label>
+</section>
+
+
 <div class="app-group">
 
   <div class="app-elem">
@@ -471,7 +481,7 @@ app-spinner &#123;
       <small><em>custom [size]="57"</em></small>
     </div>
     <gln-spinner [size]="57"
-      [isNoAnimation]="isNoAnimation03a ? '' : null">
+      [isNoAnimation]="isNoAnimation03b ? '' : null">
     </gln-spinner>
   </div>
 
@@ -480,7 +490,7 @@ app-spinner &#123;
       <small><em>custom [config]="&#123; size: '57' &#125;"</em></small>
     </div>
     <gln-spinner [config]="{ size: '57' }"
-      [isNoAnimation]="isNoAnimation03a ? '' : null">
+      [isNoAnimation]="isNoAnimation03b ? '' : null">
     </gln-spinner>
   </div>
 
@@ -503,7 +513,7 @@ app-spinner &#123;
       &lt;small&gt;&lt;em&gt;custom [size]="57"&lt;/em&gt;&lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-spinner [size]="57"
-      [isNoAnimation]="isNoAnimation03a ? '' : null"&gt;
+      [isNoAnimation]="isNoAnimation03b ? '' : null"&gt;
     &lt;/gln-spinner&gt;
   &lt;/div&gt;
 
@@ -512,7 +522,7 @@ app-spinner &#123;
       &lt;small&gt;&lt;em&gt;custom [config]="&#123; size: '57' &#125;"&lt;/em&gt;&lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-spinner [config]="&#123; size: '57' &#125;"
-      [isNoAnimation]="isNoAnimation03a ? '' : null"&gt;
+      [isNoAnimation]="isNoAnimation03b ? '' : null"&gt;
     &lt;/gln-spinner&gt;
   &lt;/div&gt;
 
@@ -531,7 +541,7 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class SpinnerComponent &#123;
-  public isNoAnimation03a: boolean = true;
+  public isNoAnimation03b: boolean = true;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -1367,7 +1377,7 @@ app-spinner &#123;
           <code ubr>--gln-primary-h</code>.<br />
           Or the css-variable of the GlnColor directive
           <code ubr>--glncl-primary-h</code>.<br />
-          The saturation value for the "hsl()" css function.<br />
+          The hue value for the "hsl()" css function.<br />
         </span>
       </td>
     </tr>
@@ -1399,45 +1409,30 @@ app-spinner &#123;
           <code ubr>--gln-primary-l</code>.<br />
           Or the css-variable of the GlnColor directive
           <code ubr>--glncl-primary-l</code>.<br />
-          The saturation value for the "hsl()" css function.<br />
+          The lightness value for the "hsl()" css function.<br />
         </span>
       </td>
     </tr>
-
     <tr>
       <td><code>--glnsp-size:<br/>
         &nbsp;&nbsp;var(--glnsp--size, 32px);</code></td>
       <td>
         <span>
-          Determines the height and width of the element.
+          Determines the height and width of the element.<br />
+          The value of the internal css variable '--glnsp--size' is determined
+          by the input parameter 'size'.
         </span>
       </td>
     </tr>
-
-    <!-- <tr>
-        <td><code>--glnspin-duration: 3s;</code></td>
-        <td>
-          <span>
-            Sets the length of time that an animation takes to complete one cycle.
-          </span>
-        </td>
-      </tr> -->
-    <!-- <tr>
-        <td><code>--glnspin-stroke-dashoff-min: 66%;</code></td>
-        <td>
-          <span>
-            Set the minimum 'stroke-dashoff' value for the inner svg image (percentage).
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td><code>--glnspin-stroke-dashoff-max: 66%;</code></td>
-        <td>
-          <span>
-            Set the maximum 'stroke-dashoff' value for the inner svg image (percentage).
-          </span>
-        </td>
-      </tr> -->
-
+    <tr>
+      <td><code>--glnsp-duration: 1.4s;</code></td>
+      <td>
+        <span>
+          This is the animation time for rotating an image (internal or external)
+          around its axis in one cycle.<br />
+          Also, this is the execution time of one circle ripple cycle for the internal svg image.
+        </span>
+      </td>
+    </tr>
   </tbody>
 </table>

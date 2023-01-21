@@ -36,6 +36,7 @@ export class CmSpinnerBasicComponent {
 
   // Page: "ItemSize" 03
   public isNoAnimation03a: boolean = true;
+  public isNoAnimation03b: boolean = true;
 
   // Page: "Palette" 04
   public isNoAnimation04a: boolean = true;

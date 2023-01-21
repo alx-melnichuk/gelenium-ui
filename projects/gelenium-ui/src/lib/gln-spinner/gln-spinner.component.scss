@@ -21,7 +21,7 @@ gln-spinner {
   // Blocks: "<svg glnsp-rotate" - (Internal svg), "<div glnsp-rotate>" - ("External svg").
 
   &:not([noani])>[glnsp-rotate] {
-    animation: kf-spi-rotate var(--glnsp-rotate-duration, 1.4s) linear infinite;
+    animation: kf-spi-rotate var(--glnsp-duration, 1.4s) linear infinite;
     @keyframes kf-spi-rotate {
       0% { 
         transform: rotate(0deg); 
@@ -51,7 +51,7 @@ gln-spinner {
     }
   }
   &:not([noani]):not([nopul])>svg[glnsp-inner]>circle {
-    animation: kf-spi-move var(--glnsp-rotate-duration, 1.4s) ease-in-out infinite;
+    animation: kf-spi-move var(--glnsp-duration, 1.4s) ease-in-out infinite;
     @keyframes kf-spi-move {
       0% {
         stroke-dasharray: 1px, 285%;
