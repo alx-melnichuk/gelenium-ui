@@ -6,7 +6,7 @@ export interface GlnTextareaConfig extends GlnFrameConfig {
   // isLabelShrink?: boolean | undefined;
   // isNoAnimation?: boolean | undefined;
   // isRequired?: boolean | undefined;
-  // size?: number | string | undefined;
+  // size?: number | string | undefined; // 'short','small','middle','wide','large','huge'
 
   isError?: boolean | undefined;
   isPlaceholder?: boolean | undefined;

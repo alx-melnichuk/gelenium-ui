@@ -47,10 +47,10 @@ An ornament (text or picture) can be placed at the beginning or at the end of an
 
 ### Frame Size
 
-The element's height is set according to the value of the frameSize parameter. 
+The element's height is set according to the value of the "size" parameter. 
 All padding and offsets are determined by this variable and the font size.
 
-The "frameSize" property takes the following values:
+The "size" property takes the following values:
 - "short" - sets the height to 38px;
 - "small" - sets the height to 44px;
 - "middle" - sets the height to 50px (default);
@@ -64,7 +64,9 @@ We can change the font size at the gln-input tag level, but the height of the el
 
 The height of the element remains the same even when the font size is changed (from font-size: 10px to 26px).
 
-It is possible to specify the height of an element. To do this, in the "config.frameSizeValue" property, we define the required height in pixels.
+In the value of the 'size' parameter, you can also specify a numeric value (the height of the element in pixels).
+
+In the configuration, you can also specify the value of the 'size' parameter, both string and numeric.
 
 An element with an "outlined" appearance.
 

@@ -67,7 +67,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   @Input()
   public ornamRgAlign: string | null | undefined; // OrnamAlignType
   @Input()
-  public size: number | string | null | undefined; // GlnFrameSizeType
+  public size: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
 
   @Output()
   readonly focused: EventEmitter<void> = new EventEmitter();

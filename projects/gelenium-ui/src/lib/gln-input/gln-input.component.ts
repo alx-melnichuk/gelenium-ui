@@ -105,7 +105,7 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   @Input()
   public pattern: string | RegExp = '';
   @Input()
-  public size: number | string | null | undefined; // GlnFrameSizeType
+  public size: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
   @Input()
   public step: number | null | undefined;
   @Input()

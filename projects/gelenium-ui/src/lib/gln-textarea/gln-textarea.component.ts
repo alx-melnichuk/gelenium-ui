@@ -108,7 +108,7 @@ export class GlnTextareaComponent
   @Input()
   public ornamRgAlign: string | null | undefined; // OrnamAlign
   @Input()
-  public size: number | string | null | undefined; // GlnFrameSizeType
+  public size: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
   @Input()
   public tabIndex = 0;
   @Input()

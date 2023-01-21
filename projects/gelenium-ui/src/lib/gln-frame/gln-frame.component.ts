@@ -69,7 +69,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
   public label: string | null | undefined;
   @Input()
-  public size: number | string | null | undefined; // GlnFrameSizeType
+  public size: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
 
   @Output()
   readonly changeCssParams: EventEmitter<{ css: GlnFrameCssParams }> = new EventEmitter();

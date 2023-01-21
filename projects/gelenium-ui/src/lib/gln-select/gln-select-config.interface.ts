@@ -6,7 +6,7 @@ export interface GlnSelectConfig extends GlnFrameConfig {
   // isLabelShrink?: boolean | undefined;
   // isNoAnimation?: boolean | undefined;
   // isRequired?: boolean | undefined;
-  // size?: number | string | undefined;
+  // size?: number | string | undefined; // 'short','small','middle','wide','large','huge'
 
   backdropClass?: string | undefined; // default 'cdk-overlay-transparent-backdrop'
   isCheckmark?: boolean | undefined;

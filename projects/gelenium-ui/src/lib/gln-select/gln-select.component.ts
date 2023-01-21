@@ -141,7 +141,7 @@ export class GlnSelectComponent
   @Input()
   public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
   @Input()
-  public size: number | string | null | undefined; // GlnFrameSizeType
+  public size: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
   @Input()
   public visibleSize: number | null | undefined;
   @Input()

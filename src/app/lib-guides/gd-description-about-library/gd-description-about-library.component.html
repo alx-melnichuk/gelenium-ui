@@ -79,16 +79,16 @@
 
 <section mr-vr>
   <h4 class="app-hover-link"
-    id="about-library-frame-size">
-    Frame Size.
-    <a [href]="urlGdDescription + '#about-library-frame-size'">#</a>
+    id="about-library-size">
+    Size.
+    <a [href]="urlGdDescription + '#about-library-size'">#</a>
   </h4>
   <p>
-    The element's height is set according to the value of the frameSize parameter.
+    The element's height is set according to the value of the "size" parameter.
     All padding and offsets are determined by this variable and the font size.
   </p>
   <p>
-    The "frameSize" property takes the following values:
+    The "size" property takes the following values:
   </p>
   <ul>
     <li>"short" - sets the height to 38px;</li>
@@ -98,7 +98,8 @@
     <li>"large" - sets the height to 62px;</li>
     <li>"huge" - sets the height to 68px;</li>
   </ul>
-  <p>The font size for native input and label is determined from the parent container.
+  <p>
+    The font size for native input and label is determined from the parent container.
     The size of the font can be defined with the css-style for the "gln-input" tag.
     We can change the font size at the gln-input tag level, but the height of the element will not
     change.
@@ -108,8 +109,10 @@
     10px to 26px).
   </p>
   <p>
-    It is possible to specify the height of an element.
-    To do this, in the "config.frameSizeValue" property, we define the required height in pixels.
+    In the value of the 'size' parameter, you can also specify a numeric value (the height
+    of the element in pixels).<br />
+    In the configuration, you can also specify the value of the 'size' parameter,
+    both string and numeric.
   </p>
   <p>
     An element with an "outlined" appearance.
