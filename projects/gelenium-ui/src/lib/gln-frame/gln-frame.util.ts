@@ -2,20 +2,6 @@ import { NumberUtil } from '../_utils/number.util';
 
 import { GlnFrameExterior } from './gln-frame-exterior.interface';
 
-export interface GlnFrameCssHorParams {
-  borderRadius: string | null;
-  paddingLeft: string | null;
-  paddingRight: string | null;
-  paddingShrink: string | null;
-}
-export interface GlnFrameCssVerParams {
-  paddingBottom: string | null;
-  paddingTop: string | null;
-  translateY: string | null;
-  translateY2: string | null;
-}
-export interface GlnFrameCssParams extends GlnFrameCssHorParams, GlnFrameCssVerParams {}
-
 export class GlnFrameUtil {
   public static getCssHorParams(exteriorVal: string, size: number): { [key: string]: string | undefined } {
     let borderRadius: string | undefined;
