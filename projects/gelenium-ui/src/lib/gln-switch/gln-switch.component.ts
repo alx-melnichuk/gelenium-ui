@@ -39,7 +39,6 @@ import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../direct
 import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { NumberUtil } from '../_utils/number.util';
 import { GlnSwitchChange } from './gln-switch-change.interface';
 import { GlnSwitchConfig } from './gln-switch.interface';
 import { GlnSwitchPosition, GlnSwitchPositionUtil } from './gln-switch-position.interface';
@@ -326,51 +325,56 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     const parentRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(parentElem);
     const parentFontSize: number = HtmlElemUtil.propertyAsNumber(parentRef, 'font-size');
     if (parentFontSize > 0) {
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_LABEL_FONT_SIZE, NumberUtil.str(parentFontSize)?.concat('px'));
+      HtmlElemUtil.setProperty(hostRef, CSS_PROP_LABEL_FONT_SIZE, parentFontSize.toString().concat('px'));
     }
     if (hostRef && hostRef.nativeElement) {
       const hostElement: Element = hostRef.nativeElement;
       // Determine the font size of the host element.
       const hostFontSizeVal: number = HtmlElemUtil.propertyAsNumber(hostRef, 'font-size');
-      const hostFontSize: number = NumberUtil.roundTo100(hostFontSizeVal);
+      const hostFontSize: number = Math.round(hostFontSizeVal * 100) / 100;
       // Determine the font size of the document element.
       const rootFontSizeVal: number = Number(getComputedStyle(document.documentElement).getPropertyValue('font-size').replace('px', ''));
-      const rootFontSize: number = NumberUtil.roundTo100(rootFontSizeVal);
+      const rootFontSize: number = Math.round(rootFontSizeVal * 100) / 100;
 
       const screenHeight: number = ScreenUtil.getHeight();
       const screenWidth: number = ScreenUtil.getWidth();
       // Determine the height of the 'track' element. (1em;)
       const trackHeightStr: string = getComputedStyle(hostElement).getPropertyValue(CSS_PROP_TRACK_HEIGHT);
       const trackHeightVal: number = HtmlConvertUtil.toPx(trackHeightStr, hostFontSize, rootFontSize, screenHeight, screenWidth);
-      const trackHeight: number = NumberUtil.roundTo100(trackHeightVal > 0 ? trackHeightVal : 1 * hostFontSize);
+      const trackHeightNum: number = trackHeightVal > 0 ? trackHeightVal : hostFontSize;
+      const trackHeight: number = Math.round(trackHeightNum * 100) / 100;
 
       // Determine the border-radius of the 'track' element.
-      const trackBorderRadius: number = NumberUtil.roundTo100(trackHeight / 2);
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_TRACK_BORDER_RADIUS, NumberUtil.str(trackBorderRadius)?.concat('px'));
+      const trackBorderRadius: number = Math.round((trackHeight / 2) * 100) / 100;
+      HtmlElemUtil.setProperty(hostRef, CSS_PROP_TRACK_BORDER_RADIUS, trackBorderRadius.toString().concat('px'));
 
       // Determine the width of the 'track' element. (2.3em;)
       const trackWidthStr: string = getComputedStyle(hostElement).getPropertyValue(CSS_PROP_TRACK_WIDTH);
       const trackWidthVal: number = HtmlConvertUtil.toPx(trackWidthStr, hostFontSize, rootFontSize, screenHeight, screenWidth);
-      const trackWidth: number = NumberUtil.roundTo100(trackWidthVal > 0 ? trackWidthVal : 2.3 * hostFontSize);
+      const trackWidthNum: number = trackWidthVal > 0 ? trackWidthVal : 2.3 * hostFontSize;
+      const trackWidth: number = Math.round(trackWidthNum * 100) / 100;
 
       // Determine the height of the 'thumb' element. (1.5em);
       const thumbHeightStr: string = getComputedStyle(hostElement).getPropertyValue(CSS_PROP_THUMB_HEIGHT);
       const thumbHeightVal: number = HtmlConvertUtil.toPx(thumbHeightStr, hostFontSize, rootFontSize, screenHeight, screenWidth);
-      const thumbHeight: number = NumberUtil.roundTo100(thumbHeightVal > 0 ? thumbHeightVal : 1.5 * hostFontSize);
+      const thumbHeightNum: number = thumbHeightVal > 0 ? thumbHeightVal : 1.5 * hostFontSize;
+      const thumbHeight: number = Math.round(thumbHeightNum * 100) / 100;
 
       // Determine the padding of the container element.
-      const containerPadding = NumberUtil.roundTo100((3 * hostFontSize - trackHeight) / 2);
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_CONTAINER_PADDING, NumberUtil.str(containerPadding)?.concat('px'));
+      const containerPaddingNum = (3 * hostFontSize - trackHeight) / 2;
+      const containerPadding = Math.round(containerPaddingNum * 100) / 100;
+      HtmlElemUtil.setProperty(hostRef, CSS_PROP_CONTAINER_PADDING, containerPadding.toString().concat('px'));
 
       // Determine the padding of the wrap element.
-      const wrapPadding = NumberUtil.roundTo100((3 * hostFontSize - thumbHeight) / 2);
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_WRAP_PADDING, NumberUtil.str(wrapPadding)?.concat('px'));
+      const wrapPaddingNum = (3 * hostFontSize - thumbHeight) / 2;
+      const wrapPadding = Math.round(wrapPaddingNum * 100) / 100;
+      HtmlElemUtil.setProperty(hostRef, CSS_PROP_WRAP_PADDING, wrapPadding.toString().concat('px'));
 
       // Determine the shift of the wrap element.
       const containerLen = trackWidth + 2 * containerPadding;
       const wrapLen = thumbHeight + 2 * wrapPadding;
-      const wrapShift = NumberUtil.roundTo100(containerLen - wrapLen);
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_WRAP_SHIFT, NumberUtil.str(wrapShift)?.concat('px'));
+      const wrapShift = Math.round((containerLen - wrapLen) * 100) / 100;
+      HtmlElemUtil.setProperty(hostRef, CSS_PROP_WRAP_SHIFT, wrapShift.toString().concat('px'));
     }
   }
 

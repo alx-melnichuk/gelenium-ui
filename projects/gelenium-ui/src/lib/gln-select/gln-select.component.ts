@@ -49,7 +49,6 @@ import { GlnOptionUtil } from '../gln-option/gln-option.util';
 import { ArrayUtil } from '../_utils/array.util';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { NumberUtil } from '../_utils/number.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
 import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
@@ -657,7 +656,7 @@ export class GlnSelectComponent
     const overlayRef = HtmlElemUtil.getElementRef(overlayElement);
     HtmlElemUtil.setAttr(this.renderer, overlayRef, 'glnslpo-select', '');
     // Setting property 'width'.
-    HtmlElemUtil.setProperty(overlayRef, CSS_PROP_WIDTH, NumberUtil.str(this.hostWidth)?.concat('px'));
+    HtmlElemUtil.setProperty(overlayRef, CSS_PROP_WIDTH, this.hostWidth.toString().concat('px'));
 
     this.selectPanelRef = HtmlElemUtil.getElementRef(overlayElement.children[0]?.children[0] as HTMLElement);
     const panelHeight = this.getHeight(this.selectPanelRef);
@@ -669,16 +668,16 @@ export class GlnSelectComponent
       overlayElement.style.fontSize = `${this.triggerFontSize}px`;
     }
     if (this.frameComp.sizeVal != null && this.frameComp.sizeVal > 0) {
-      const borderRadius = NumberUtil.roundTo100(this.frameComp.sizeVal / 10);
-      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(borderRadius)?.concat('px'));
+      const borderRadius = Math.round((this.frameComp.sizeVal / 10) * 100) / 100;
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, borderRadius.toString().concat('px'));
     }
     const visibleSize = this.visibleSizeVal ?? 0;
     if (visibleSize > 0 && this.optionHeight > 0) {
       const maxHeightOfOptionsPanel = this.optionHeight * visibleSize;
-      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_HEIGHT, NumberUtil.str(maxHeightOfOptionsPanel)?.concat('px'));
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_HEIGHT, maxHeightOfOptionsPanel.toString().concat('px'));
     }
     if (this.maxWd) {
-      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_WIDTH, NumberUtil.str(this.hostWidth)?.concat('px'));
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_WIDTH, this.hostWidth.toString().concat('px'));
     }
     // Important! These operations should be the last, they include animation and the dimensions of the panel are distorted.
     const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement?.children[0] as HTMLElement);
@@ -838,7 +837,8 @@ export class GlnSelectComponent
     let result: string | null = null;
     if (panelHeight > 0 && !!triggerRect && triggerRect.top > 0 && triggerRect.height > 0 && screenHeight > 0) {
       const value = triggerRect.top + triggerRect.height + panelHeight;
-      const delta = String(NumberUtil.roundTo100((panelHeight - 0.6 * panelHeight) / 2)).concat('px');
+      const valueNum = (panelHeight - 0.6 * panelHeight) / 2;
+      const delta = (Math.round(valueNum * 100) / 100).toString().concat('px');
       result = (value < screenHeight ? '-' : '') + delta;
     }
     return result;

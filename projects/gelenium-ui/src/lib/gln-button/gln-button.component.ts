@@ -29,7 +29,6 @@ import { GlnButtonConfig } from './gln-button-config.interface';
 import { GlnLinkDirective } from './gln-link.directive';
 import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from '../directives/gln-frame-ornament/gln-frame-ornam-align.interface';
 import { GlnButtonExterior, GlnButtonExteriorUtil } from './gln-button-exterior.interface';
-import { NumberUtil } from '../_utils/number.util';
 
 const SIZE: { [key: string]: number } = { short: 38, small: 44, middle: 50, wide: 56, large: 62, huge: 68 };
 
@@ -242,23 +241,25 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     let paddingLeft: number | null = null;
     let paddingTop: number | null = null;
     if (size != null && size > 0 && lineHeight > 0) {
-      borderRadius = NumberUtil.roundTo100(0.1 * size);
+      borderRadius = Math.round(0.1 * size * 100) / 100;
       const param = (size - lineHeight) / 2;
       if (exterior === GlnButtonExterior.contained) {
-        paddingLeft = NumberUtil.roundTo100(0.3636 * size);
+        paddingLeft = Math.round(0.3636 * size * 100) / 100;
         paddingTop = param;
       } else if (exterior === GlnButtonExterior.outlined) {
-        paddingLeft = NumberUtil.roundTo100(0.3409 * size);
+        paddingLeft = Math.round(0.3409 * size * 100) / 100;
         paddingTop = param - 1;
       } else if (exterior === GlnButtonExterior.text) {
-        paddingLeft = NumberUtil.roundTo100(0.2045 * size);
+        paddingLeft = Math.round(0.2045 * size * 100) / 100;
         paddingTop = param;
       }
     }
-    HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, (this.cssBorderRadius = NumberUtil.str(borderRadius)?.concat('px') || null));
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_LEFT, (this.cssPaddingLeft = NumberUtil.str(paddingLeft)?.concat('px') || null));
+
+    this.cssBorderRadius = borderRadius?.toString() ?? null;
+    HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, this.cssBorderRadius?.concat('px') || null);
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_LEFT, (this.cssPaddingLeft = (paddingLeft?.toString() ?? null)?.concat('px') || null));
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_RIGHT, (this.cssPaddingRight = this.cssPaddingLeft));
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TOP, (this.cssPaddingTop = NumberUtil.str(paddingTop)?.concat('px') || null));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TOP, (this.cssPaddingTop = (paddingTop?.toString() ?? null)?.concat('px') || null));
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_BOTTOM, (this.cssPaddingBottom = this.cssPaddingTop));
   }
 

@@ -28,7 +28,6 @@ import { GlnOptionUtil } from '../gln-option/gln-option.util';
 
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { NumberUtil } from '../_utils/number.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
 import { GlnAutocomplete } from './gln-autocomplete.interface';
@@ -316,10 +315,12 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     this.trigger = trigger;
     const triggerRect: DOMRect | null = this.getTriggerRect();
     // Setting property 'width'.
-    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_WIDTH, NumberUtil.str(triggerRect?.width || null)?.concat('px'));
+    const triggerRectWidth: number | null = triggerRect?.width ?? null;
+    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_WIDTH, triggerRectWidth?.toString().concat('px'));
     // Prepare and setting property 'border-radius'.
-    const panelBorderRadius = !!triggerRect && triggerRect.height > 0 ? NumberUtil.roundTo100(triggerRect.height / 10) : null;
-    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(panelBorderRadius)?.concat('px'));
+    const triggerRectHeight: number | null = triggerRect?.height ?? 0;
+    const panelBorderRadius: number | null = triggerRectHeight > 0 ? Math.round((triggerRectHeight / 10) * 100) / 100 : null;
+    HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_BORDER_RADIUS, panelBorderRadius?.toString().concat('px'));
   };
 
   // ** interface GlnAutocomplete - finish **
@@ -365,22 +366,25 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
       const isPanelOnTop: boolean = triggerRect.top + triggerRect.height + panelHeight + optHeight > ScreenUtil.getHeight();
 
       // Prepare properties: 'bottom', 'top'.
-      const panelBottom = isPanelOnTop ? -(NumberUtil.roundTo100(triggerRect.top - hostRect.top) - 1) : null;
-      const panelTop = isPanelOnTop ? null : NumberUtil.roundTo100(triggerRect.bottom - hostRect.top);
+      const panelBottom: number | null = isPanelOnTop ? -Math.round((triggerRect.top - hostRect.top - 1) * 100) / 100 : null;
+      const panelTop: number | null = isPanelOnTop ? null : Math.round((triggerRect.bottom - hostRect.top) * 100) / 100;
       // Setting properties: 'bottom', 'top'.
       if (this.panelBottom !== panelBottom) {
-        HtmlElemUtil.setProperty(containerRef, CSS_PROP_BOTTOM, NumberUtil.str((this.panelBottom = panelBottom))?.concat('px'));
+        this.panelBottom = panelBottom;
+        HtmlElemUtil.setProperty(containerRef, CSS_PROP_BOTTOM, panelBottom?.toString().concat('px'));
       }
       if (this.panelTop !== panelTop) {
-        HtmlElemUtil.setProperty(containerRef, CSS_PROP_TOP, NumberUtil.str((this.panelTop = panelTop))?.concat('px'));
+        this.panelTop = panelTop;
+        HtmlElemUtil.setProperty(containerRef, CSS_PROP_TOP, panelTop?.toString().concat('px'));
       }
 
       // Prepare and setting property 'translate-y'.
       if (panelHeight > 0) {
         // Define the "TranslateY" parameter to correctly open or close.
-        const translateY: number = (isPanelOnTop ? 1 : -1) * NumberUtil.roundTo100((panelHeight - 0.6 * panelHeight) / 2);
+        const translateY: number = ((isPanelOnTop ? 1 : -1) * Math.round(((panelHeight - 0.6 * panelHeight) / 2) * 100)) / 100;
         if (this.translateY !== translateY) {
-          HtmlElemUtil.setProperty(containerRef, CSS_PROP_TRANSLATE_Y, NumberUtil.str((this.translateY = translateY))?.concat('px'));
+          this.translateY = translateY;
+          HtmlElemUtil.setProperty(containerRef, CSS_PROP_TRANSLATE_Y, translateY?.toString().concat('px'));
         }
       }
     }
@@ -410,8 +414,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   }
   /** Prepare and setting property: 'max-height'. */
   private setCssMaxHeight(optionHeight: number, visibleSizeVal: number | null, elem: ElementRef<HTMLElement> | null): void {
-    const maxHeight = visibleSizeVal != null && visibleSizeVal > 0 && optionHeight > 0 ? optionHeight * visibleSizeVal : null;
-    HtmlElemUtil.setProperty(elem, CSS_PROP_MAX_HEIGHT, NumberUtil.str(maxHeight)?.concat('px'));
+    const maxHeight: number | null = !!visibleSizeVal && visibleSizeVal > 0 && optionHeight > 0 ? optionHeight * visibleSizeVal : null;
+    HtmlElemUtil.setProperty(elem, CSS_PROP_MAX_HEIGHT, maxHeight?.toString().concat('px'));
   }
   /** Prepare and setting property: 'max-width'. */
   private setCssMaxWidth(isMaxWidth: boolean | null, elem: ElementRef<HTMLElement> | null): void {

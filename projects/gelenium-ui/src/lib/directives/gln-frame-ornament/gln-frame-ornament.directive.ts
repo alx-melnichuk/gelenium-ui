@@ -3,7 +3,6 @@ import { AfterContentInit, Directive, ElementRef, Input, OnChanges, Renderer2, S
 import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from './gln-frame-ornam-align.interface';
 import { HtmlElemUtil } from '../../_utils/html-elem.util';
 import { HtmlPathUtil } from '../../_utils/html-path.util';
-import { NumberUtil } from '../../_utils/number.util';
 
 export const ATTR_ORN_LF = 'glnfr-orn-lf';
 export const ATTR_ORN_RG = 'glnfr-orn-rg';
@@ -65,10 +64,10 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
 
     const elementRef: ElementRef<HTMLElement> | null = this.glnFrameOrnamentElementRef || this.hostRef;
     if (this.ornamentLfWidth > 0) {
-      HtmlElemUtil.setProperty(elementRef, '--glnfro-pd-lf', NumberUtil.str(this.ornamentLfWidth)?.concat('px'));
+      HtmlElemUtil.setProperty(elementRef, '--glnfro-pd-lf', this.ornamentLfWidth.toString().concat('px'));
     }
     if (this.ornamentRgWidth > 0) {
-      HtmlElemUtil.setProperty(elementRef, '--glnfro-pd-rg', NumberUtil.str(this.ornamentRgWidth)?.concat('px'));
+      HtmlElemUtil.setProperty(elementRef, '--glnfro-pd-rg', this.ornamentRgWidth.toString().concat('px'));
     }
   }
 

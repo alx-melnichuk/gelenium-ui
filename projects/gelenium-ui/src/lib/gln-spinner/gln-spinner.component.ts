@@ -15,7 +15,6 @@ import {
 
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { NumberUtil } from '../_utils/number.util';
 
 import { GlnSpinnerConfig } from './gln-spinner-config.interface';
 
@@ -120,7 +119,7 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
 
   /** Prepare and setting property: 'max-height'. */
   private setCssSize(size: number, elem: ElementRef<HTMLElement> | null): void {
-    HtmlElemUtil.setProperty(elem, CSS_PROP_SIZE, NumberUtil.str(size > 0 ? size : null)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_SIZE, (size > 0 ? size.toString() : null)?.concat('px'));
   }
 
   private settingNoAnimation(isNoAnimationVal: boolean | null): void {
