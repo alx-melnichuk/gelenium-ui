@@ -17,10 +17,10 @@ export interface GlnFrameCssVerParams {
 export interface GlnFrameCssParams extends GlnFrameCssHorParams, GlnFrameCssVerParams {}
 
 export class GlnFrameUtil {
-  public static getCssHorParams(exteriorVal: GlnFrameExterior, size: number): GlnFrameCssHorParams {
-    let borderRadius: string | null = null;
-    let paddingLeft: string | null = null;
-    let paddingShrink: string | null = null;
+  public static getCssHorParams(exteriorVal: string, size: number): { [key: string]: string | undefined } {
+    let borderRadius: string | undefined;
+    let paddingLeft: string | undefined;
+    let paddingShrink: string | undefined;
 
     if (size > 0) {
       const radius: string = NumberUtil.roundTo100(size / 10)
@@ -44,7 +44,7 @@ export class GlnFrameUtil {
             .concat('px');
           break;
         case GlnFrameExterior.standard:
-          borderRadius = null;
+          borderRadius = undefined;
           paddingLeft = '0px';
           paddingShrink = '0px';
           break;
@@ -52,11 +52,12 @@ export class GlnFrameUtil {
     }
     return { borderRadius, paddingLeft, paddingRight: paddingLeft, paddingShrink };
   }
-  public static getCssVerParams(exteriorVal: GlnFrameExterior, size: number, lineHeight: number): GlnFrameCssVerParams {
-    let paddingBottom: string | null = null;
-    let paddingTop: string | null = null;
-    let translateY: string | null = null;
-    let translateY2: string | null = null;
+
+  public static getCssVerParams(exteriorVal: string, size: number, lineHeight: number): { [key: string]: string | undefined } {
+    let paddingBottom: string | undefined;
+    let paddingTop: string | undefined;
+    let translateY: string | undefined;
+    let translateY2: string | undefined;
 
     if (size > 0 && lineHeight > 0) {
       const param = size - lineHeight;

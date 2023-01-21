@@ -73,8 +73,6 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   readonly focused: EventEmitter<void> = new EventEmitter();
   @Output()
   readonly blured: EventEmitter<void> = new EventEmitter();
-  @Output()
-  readonly changeCssParams: EventEmitter<void> = new EventEmitter();
 
   @ViewChild('buttonElementRef', { static: false })
   public buttonElementRef: ElementRef<HTMLElement> | null = null;
@@ -262,8 +260,6 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_RIGHT, (this.cssPaddingRight = this.cssPaddingLeft));
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TOP, (this.cssPaddingTop = NumberUtil.str(paddingTop)?.concat('px') || null));
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_BOTTOM, (this.cssPaddingBottom = this.cssPaddingTop));
-
-    this.changeCssParams.emit();
   }
 
   private settingExterior(exteriorVal: GlnButtonExterior | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {

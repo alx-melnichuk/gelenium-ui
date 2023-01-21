@@ -2,14 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
   Inject,
   InjectionToken,
   Input,
   OnChanges,
   OnInit,
   Optional,
-  Output,
   Renderer2,
   SimpleChanges,
   ViewEncapsulation,
@@ -20,10 +18,11 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnFrameExterior, GlnFrameExteriorUtil } from './gln-frame-exterior.interface';
 import { GlnFrameConfig } from './gln-frame-config.interface';
-import { GlnFrameCssParams, GlnFrameUtil } from './gln-frame.util';
+import { GlnFrameUtil } from './gln-frame.util';
 
 const SIZE: { [key: string]: number } = { short: 38, small: 44, middle: 50, wide: 56, large: 62, huge: 68 };
 
+const CSS_ATTR_HIDE_ANIMATION_INIT = 'hdAnmInit';
 const CSS_PROP_BORDER_RADIUS = '--glnfrs--br-rd';
 const CSS_PROP_PADDING_LEFT = '--glnfrs--pd-lf';
 const CSS_PROP_PADDING_RIGHT = '--glnfrs--pd-rg';
@@ -32,8 +31,6 @@ const CSS_PROP_PADDING_BOTTOM = '--glnfrs--pd-bt';
 const CSS_PROP_PADDING_TOP = '--glnfrs--pd-tp';
 const CSS_PROP_PADDING_TRN_Y = '--glnfrs--trn-y';
 const CSS_PROP_PADDING_TRN2_Y = '--glnfrs--trn2-y';
-
-export const ATR_FR_HIDE_ANIMATION_INIT = 'hdAnmInit';
 
 export const GLN_FRAME_CONFIG = new InjectionToken<GlnFrameConfig>('GLN_FRAME_CONFIG');
 
@@ -70,9 +67,6 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public label: string | null | undefined;
   @Input()
   public size: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
-
-  @Output()
-  readonly changeCssParams: EventEmitter<{ css: GlnFrameCssParams }> = new EventEmitter();
 
   public get isOutlinedExterior(): boolean {
     return GlnFrameExterior.outlined === this.exteriorVal;
@@ -140,10 +134,10 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     if (changes['isAttrHideAnimation']) {
       this.attrHideAnimation = !!BooleanUtil.init(this.isAttrHideAnimation);
       if (this.attrHideAnimation) {
-        HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_FR_HIDE_ANIMATION_INIT, '');
+        HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_HIDE_ANIMATION_INIT, '');
       } else {
         Promise.resolve().then(() => {
-          HtmlElemUtil.setAttr(this.renderer, this.hostRef, ATR_FR_HIDE_ANIMATION_INIT, null);
+          HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_HIDE_ANIMATION_INIT, null);
         });
       }
     }
@@ -229,17 +223,8 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
   }
 
-  private updateCssParams(exteriorVal: GlnFrameExterior, size: number | null, lineHeight: number, elem: ElementRef<HTMLElement>): void {
-    let css: GlnFrameCssParams = {
-      borderRadius: null,
-      paddingLeft: null,
-      paddingRight: null,
-      paddingShrink: null,
-      paddingBottom: null,
-      paddingTop: null,
-      translateY: null,
-      translateY2: null,
-    };
+  private updateCssParams(exteriorVal: string, size: number | null, lineHeight: number, elem: ElementRef<HTMLElement>): void {
+    let css: { [key: string]: string | undefined } = {};
     if (size != null && size > 0 && lineHeight > 0) {
       css = {
         ...css,
@@ -248,17 +233,15 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       };
     }
 
-    HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, (this.cssBorderRadius = css.borderRadius));
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_LEFT, (this.cssPaddingLeft = css.paddingLeft));
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_RIGHT, (this.cssPaddingRight = css.paddingRight));
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_SHRINK, (this.cssPaddingShrink = css.paddingShrink));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, (this.cssBorderRadius = css['borderRadius'] || null));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_LEFT, (this.cssPaddingLeft = css['paddingLeft'] || null));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_RIGHT, (this.cssPaddingRight = css['paddingRight'] || null));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_SHRINK, (this.cssPaddingShrink = css['paddingShrink'] || null));
 
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_BOTTOM, (this.cssPaddingBottom = css.paddingBottom));
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TOP, (this.cssPaddingTop = css.paddingTop));
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TRN_Y, (this.cssTranslateY = css.translateY));
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TRN2_Y, (this.cssTranslateY2 = css.translateY2));
-
-    this.changeCssParams.emit({ css });
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_BOTTOM, (this.cssPaddingBottom = css['paddingBottom'] || null));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TOP, (this.cssPaddingTop = css['paddingTop'] || null));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TRN_Y, (this.cssTranslateY = css['translateY'] || null));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TRN2_Y, (this.cssTranslateY2 = css['translateY2'] || null));
   }
 
   private settingExterior(exteriorVal: GlnFrameExterior | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
