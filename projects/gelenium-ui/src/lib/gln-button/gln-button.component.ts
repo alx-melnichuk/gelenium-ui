@@ -37,6 +37,7 @@ const CSS_PROP_PADDING_LEFT = '--glnbtf--pd-lf';
 const CSS_PROP_PADDING_RIGHT = '--glnbtf--pd-rg';
 const CSS_PROP_PADDING_TOP = '--glnbtf--pd-tp';
 const CSS_PROP_PADDING_BOTTOM = '--glnbtf--pd-bt';
+const CSS_PROP_SIZE = '--glnbt--size';
 
 export const GLN_BUTTON_CONFIG = new InjectionToken<GlnButtonConfig>('GLN_BUTTON_CONFIG');
 
@@ -122,6 +123,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
       this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
+      this.setCssSize(this.sizeVal, this.hostRef);
       isUpdateCssParams = true;
     }
     if (isUpdateCssParams && this.exteriorVal) {
@@ -160,6 +162,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     if (this.sizeVal == null) {
       const sizeStr: string = (this.currConfig.size || '').toString();
       this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
+      this.setCssSize(this.sizeVal, this.hostRef);
       isUpdateCssParams = true;
     }
     if (isUpdateCssParams && this.exteriorVal) {
@@ -261,6 +264,10 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_RIGHT, (this.cssPaddingRight = this.cssPaddingLeft));
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TOP, (this.cssPaddingTop = (paddingTop?.toString() ?? null)?.concat('px') || null));
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_BOTTOM, (this.cssPaddingBottom = this.cssPaddingTop));
+  }
+
+  private setCssSize(size: number, elem: ElementRef<HTMLElement> | null): void {
+    HtmlElemUtil.setProperty(elem, CSS_PROP_SIZE, (size > 0 ? size.toString() : null)?.concat('px'));
   }
 
   private settingExterior(exteriorVal: GlnButtonExterior | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {

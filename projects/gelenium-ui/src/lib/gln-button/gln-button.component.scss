@@ -153,12 +153,12 @@ gln-button {
   // Definition of internal variables by element state.
   &:not([dis])>[glnbt-btn] {
     // The state without disabled, hover, focused.
-    &:not(:hover):not(:focus):not(:focus-within):not([foc]) {
+    &:not(:hover):not(:focus):not(:focus-within):not(:focus-visible):not([foc]) {
       --glnbt--label-cl: var(--glnbt-def-lb-cl, var(--glnbt--lb-cl-def));
       --glnbt--border-cl: var(--glnbt-def-br-cl, var(--glnbt--br-cl-def));
       --glnbt--bground-cl: var(--glnbt-def-bg-cl, var(--glnbt--bg-cl-def));
     } // The state without disabled and with hover or with hover, focused.
-    &:hover, &:hover:focus, &:hover:focus-within, &:hover[foc] {
+    &:hover, &:hover:focus, &:hover:focus-within, &:focus-visible, &:hover[foc] {
       --glnbt--label-cl: var(--glnbt-hov-lb-cl, var(--glnbt--lb-cl-hov));
       --glnbt--border-cl: var(--glnbt-hov-br-cl, var(--glnbt--br-cl-hov));
       --glnbt--bground-cl: var(--glnbt-hov-bg-cl, var(--glnbt--bg-cl-hov));
@@ -194,14 +194,12 @@ gln-button {
   // Vertical offset.
   &>[glnbt-btn] {
     &>a:not([glnbt-mr-ver]) {
-      line-height: inherit;
       display: flex;
       align-items: center;
       padding-top: var(--glnbt-pd-tp, var(--glnbtf--pd-tp, var(--def-lb-pd-tp)));
       padding-bottom: var(--glnbt-pd-bt, var(--glnbtf--pd-bt, var(--def-lb-pd-tp)));
     }
     &>[glnbt-mr-ver] {
-      line-height: inherit;
       display: flex;
       align-items: center;
       margin-top: var(--glnbt-pd-tp, var(--glnbtf--pd-tp, var(--def-lb-pd-tp)));
