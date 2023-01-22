@@ -12,6 +12,7 @@ const URL_COMPONENTS_FRAME = RouterConfig.get('URL_COMPONENTS_FRAME');
 const URL_COMPONENTS_HINT_OR_ERROR = RouterConfig.get('URL_COMPONENTS_HINT_OR_ERROR');
 const URL_COMPONENTS_INFINITE_SCROLL = RouterConfig.get('URL_COMPONENTS_INFINITE_SCROLL');
 const URL_COMPONENTS_INPUT = RouterConfig.get('URL_COMPONENTS_INPUT');
+const URL_COMPONENTS_PAGINATION = RouterConfig.get('URL_COMPONENTS_PAGINATION');
 const URL_COMPONENTS_SELECT = RouterConfig.get('URL_COMPONENTS_SELECT');
 const URL_COMPONENTS_SPINNER = RouterConfig.get('URL_COMPONENTS_SPINNER');
 const URL_COMPONENTS_SWITCH = RouterConfig.get('URL_COMPONENTS_SWITCH');
@@ -45,6 +46,10 @@ const routes: Routes = [
       {
         path: URL_COMPONENTS_INPUT,
         loadChildren: () => import('../lib-components/cm-input/cm-input.module').then((m) => m.CmInputModule),
+      },
+      {
+        path: URL_COMPONENTS_PAGINATION,
+        loadChildren: () => import('../lib-components/cm-pagination/cm-pagination.module').then((m) => m.CmPaginationModule),
       },
       {
         path: URL_COMPONENTS_SELECT,

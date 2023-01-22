@@ -1,0 +1,53 @@
+<p>gln-pagination works!</p>
+<nav glnpg-nav
+  aria-label="pagination navigation"
+  class="gln-pagination-nav">
+  <ul glnpg-ul>
+    <li *ngIf="isShowFirstVal">
+      <gln-button glnpg-btn
+        glnpg-icon
+        class="gln-pagination-btn glnpg-btn-first"
+        exterior="outlined"
+        [size]="sizeVal">
+        &ZeroWidthSpace;
+        <svg glnpg-svg
+          class="gln-pagination-icon glnpg-icon-first"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24">
+          <path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path>
+        </svg>
+      </gln-button>
+    </li>
+
+    <li *ngFor="let item of pageBuffer; trackBy: trackByIndex;">
+      <gln-button glnpg-btn
+        [ngClass]="['gln-pagination-btn', (page === item ? 'gln-selected' : '')]"
+        exterior="outlined"
+        [size]="sizeVal">
+        {{ item }}
+      </gln-button>
+    </li>
+
+    <li *ngIf="isShowLastVal">
+      <gln-button glnpg-btn
+        glnpg-icon
+        class="gln-pagination-btn glnpg-btn-last"
+        exterior="outlined"
+        [size]="sizeVal">
+        &ZeroWidthSpace;
+        <svg glnpg-svg
+          class="gln-pagination-icon glnpg-icon-last"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24">
+          <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path>
+        </svg>
+      </gln-button>
+    </li>
+
+  </ul>
+</nav>
+<!--
+
+-->

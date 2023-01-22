@@ -1,0 +1,29 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmPagination + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnPaginationModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    The GlnPagination component is designed to change the current page from the specified
+    range.
+  </p>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <gln-pagination class="demo"
+      [count]="10"
+      isShowFirst
+      isShowLast
+      [size]="32"></gln-pagination>
+  </div>
+
+</div>
