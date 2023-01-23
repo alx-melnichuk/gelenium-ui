@@ -44,7 +44,11 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   @Input() // The number of always visible pages before and after the current page.
   public countNearby: number = 1; // siblingCount
   @Input() // Current page number, initial value.
-  public initPage: number = 1;
+  public page: number = 1;
+  @Input()
+  public isHideNext: string | boolean | null | undefined;
+  @Input()
+  public isHidePrev: string | boolean | null | undefined;
   @Input()
   public isShowFirst: string | boolean | null | undefined;
   @Input()
@@ -53,9 +57,10 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   public size: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
 
   public currConfig: GlnPaginationConfig;
+  public isHideNextVal: boolean | null = null; // Binding attribute "isHideNext".
+  public isHidePrevVal: boolean | null = null; // Binding attribute "isHidePrev".
   public isShowFirstVal: boolean | null = null; // Binding attribute "isShowFirst".
   public isShowLastVal: boolean | null = null; // Binding attribute "isShowLast".
-  public page: number = 1;
   public pageBuffer: number[] = [];
   public sizeVal: number | null = null; // Binding attribute "size".
 
@@ -73,6 +78,14 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
 
+    if (changes['isHideNext'] || (changes['config'] && this.isHideNextVal == null && this.currConfig.isHideNext != null)) {
+      this.isHideNextVal = !!(BooleanUtil.init(this.isHideNext) ?? (this.currConfig.isHideNext || null));
+      this.settingHideNext(this.isHideNextVal);
+    }
+    if (changes['isHidePrev'] || (changes['config'] && this.isHidePrevVal == null && this.currConfig.isHidePrev != null)) {
+      this.isHidePrevVal = !!(BooleanUtil.init(this.isHidePrev) ?? (this.currConfig.isHidePrev || null));
+      this.settingHidePrev(this.isHidePrevVal);
+    }
     if (changes['isShowFirst'] || (changes['config'] && this.isShowFirstVal == null && this.currConfig.isShowFirst != null)) {
       this.isShowFirstVal = !!(BooleanUtil.init(this.isShowFirst) ?? (this.currConfig.isShowFirst || null));
       this.settingShowFirst(this.isShowFirstVal);
@@ -93,6 +106,22 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
+    if (this.isHideNextVal == null) {
+      this.isHideNextVal = !!(this.currConfig.isHideNext || null);
+      this.settingHideNext(this.isHideNextVal);
+    }
+    if (this.isHidePrevVal == null) {
+      this.isHidePrevVal = !!(this.currConfig.isHidePrev || null);
+      this.settingHidePrev(this.isHidePrevVal);
+    }
+    if (this.isShowFirstVal == null) {
+      this.isShowFirstVal = !!(this.currConfig.isShowFirst || null);
+      this.settingShowFirst(this.isShowFirstVal);
+    }
+    if (this.isShowLastVal == null) {
+      this.isShowLastVal = !!(this.currConfig.isShowLast || null);
+      this.settingShowLast(this.isShowLastVal);
+    }
     if (this.sizeVal == null) {
       const sizeStr: string = (this.currConfig.size || '').toString();
       this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
@@ -100,12 +129,20 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       this.setCssBorderRadius(this.sizeVal, this.hostRef);
     }
 
-    this.pageBuffer = new Array(3 + this.countBorder * 2 + this.countNearby * 2);
-    for (let i = 0; i < this.count && i < this.pageBuffer.length; i++) {
-      this.pageBuffer[i] = i + 1;
-    }
-    this.pageBuffer[0] = 1234;
-    this.page = this.initPage;
+    // this.pageBuffer = new Array(3 + this.countBorder * 2 + this.countNearby * 2);
+    // for (let i = 0; i < this.count && i < this.pageBuffer.length; i++) {
+    //   this.pageBuffer[i] = i + 1;
+    // }
+
+    // const data = this.getPageBuffer(this.count, 1, this.countNearby, this.countBorder); // [1, 2, 3, 4, 5, -1, 10]
+    // const data = this.getPageBuffer(this.count, 7, this.countNearby, this.countBorder); // [1, -1, 6, 7, 8, 9, 10]
+    // const data = this.getPageBuffer(this.count, 6, this.countNearby, this.countBorder); // [1, -1, 5, 6, 7, -1, 10]
+    // const data = this.getPageBuffer(this.count, 6, 0/*countNearby*/, this.countBorder); // [1, -1, 6, -1, 10]
+    // const data = this.getPageBuffer(this.count, 6, 0 /*countNearby*/, 2 /*countBorder*/); // [1, 2, -1, 6, -1, 9, 10]
+    // const data = this.getPageBuffer(this.count, 6, 1 /*countNearby*/, 2 /*countBorder*/); // [1, 2, -1, 5, 6, 7, 8, 9, 10]
+
+    this.pageBuffer = this.getPageBuffer(this.count, this.page, this.countNearby, this.countBorder);
+    // console.log(`pageBuffer=`, this.pageBuffer); // #
   }
 
   // ** Public methods **
@@ -115,6 +152,44 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   }
 
   // ** Private methods **
+
+  private getPageBuffer(count: number, page: number, countNearby: number, countBorder: number): number[] {
+    const result: number[] = [];
+    if (count > 0 && page > 0 && countNearby > -1 && countBorder > -1) {
+      result.length = 3 + countBorder * 2 + countNearby * 2;
+
+      const pageLeft: number = countBorder + 1 + countNearby + 1;
+      const pageRight: number = count - pageLeft;
+
+      const isPageLeft: boolean = page <= pageLeft;
+      const isPageRight: boolean = page > pageRight;
+
+      let idx: number = 0;
+      let idxPage: number = 1;
+      let len1: number = isPageLeft ? pageLeft + 1 : countBorder;
+      while (idx < len1) {
+        result[idx++] = idxPage++;
+      }
+      if (!isPageLeft) {
+        result[idx++] = -1;
+      }
+      if (!isPageLeft && !isPageRight) {
+        idxPage = page - countNearby;
+        const len2: number = idx + 1 + 2 * countNearby;
+        while (idx < len2) {
+          result[idx++] = idxPage++;
+        }
+      }
+      if (!isPageRight) {
+        result[idx++] = -1;
+      }
+      idxPage = isPageRight ? pageRight : count - countBorder + 1;
+      while (idx < result.length) {
+        result[idx++] = idxPage++;
+      }
+    }
+    return result;
+  }
 
   private converSize(size: string, defaultValue: number): number {
     const sizeNum: number = Number.parseFloat(size);
@@ -130,6 +205,16 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, (borderRadius > 0 ? borderRadius.toString() : null)?.concat('px'));
   }
 
+  private settingHideNext(isHideNextVal: boolean | null): void {
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnpg-hide-next', !!isHideNextVal);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'nex', isHideNextVal ? '' : null);
+  }
+
+  private settingHidePrev(isHidePrevVal: boolean | null): void {
+    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnpg-hide-prev', !!isHidePrevVal);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'pre', isHidePrevVal ? '' : null);
+  }
+
   private settingShowFirst(isShowFirstVal: boolean | null): void {
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnpg-show-first', !!isShowFirstVal);
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fir', isShowFirstVal ? '' : null);
@@ -140,5 +225,3 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'las', isShowLastVal ? '' : null);
   }
 }
-/*
- */

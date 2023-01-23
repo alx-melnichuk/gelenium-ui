@@ -63,7 +63,7 @@ gln-button {
     justify-content: center;
     letter-spacing: inherit;
     line-height: inherit;
-    min-width: 4.571em; // 64px
+    min-width: var(--glnbt--size, 2.5em);
     overflow: hidden;
     position: relative;
     text-decoration: none;

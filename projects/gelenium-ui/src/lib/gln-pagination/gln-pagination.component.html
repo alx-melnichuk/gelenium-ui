@@ -4,7 +4,7 @@
   class="gln-pagination-nav">
   <ul glnpg-ul>
     <li *ngIf="isShowFirstVal">
-      <gln-button glnpg-btn
+      <gln-button glnpg-size
         glnpg-icon
         class="gln-pagination-btn glnpg-btn-first"
         exterior="outlined"
@@ -21,16 +21,26 @@
     </li>
 
     <li *ngFor="let item of pageBuffer; trackBy: trackByIndex;">
-      <gln-button glnpg-btn
-        [ngClass]="['gln-pagination-btn', (page === item ? 'gln-selected' : '')]"
-        exterior="outlined"
-        [size]="sizeVal">
-        {{ item }}
-      </gln-button>
+      <ng-container *ngIf="item == -1; else elseBlockPage">
+        <div glnpg-size
+          glnpg-ellipsis
+          class="gln-pagination-text gln-pagination-ellipsis">
+          &hellip;
+        </div>
+      </ng-container>
+      <ng-template #elseBlockPage>
+        <gln-button glnpg-size
+          glnpg-btn
+          [ngClass]="['gln-pagination-btn', 'gln-pagination-page', (page === item ? 'gln-selected' : '')]"
+          exterior="outlined"
+          [size]="sizeVal">
+          {{ item }}
+        </gln-button>
+      </ng-template>
     </li>
 
     <li *ngIf="isShowLastVal">
-      <gln-button glnpg-btn
+      <gln-button glnpg-size
         glnpg-icon
         class="gln-pagination-btn glnpg-btn-last"
         exterior="outlined"
@@ -48,6 +58,3 @@
 
   </ul>
 </nav>
-<!--
-
--->
