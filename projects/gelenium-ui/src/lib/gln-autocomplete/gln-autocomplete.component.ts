@@ -128,6 +128,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   private optionsScroll: GlnOptionsScroll | null = null;
   private panelBottom: number | null | undefined;
   private panelTop: number | null | undefined;
+  private selectedOption: GlnOption | null = null;
   private translateY: number | null | undefined;
   private trigger: GlnAutocompleteTrigger | null = null;
 
@@ -240,6 +241,10 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public ngOnDestroy(): void {
     this.optionListSub?.unsubscribe();
     this.optionListSub = null;
+    if (this.selectedOption != null) {
+      this.selectedOption.selected = false;
+      this.selectedOption = null;
+    }
   }
 
   // ** Public methods **
@@ -332,6 +337,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     if (option != null) {
       Promise.resolve().then(() => {
         this.selected.emit(option);
+        this.selectedOption = option;
         // Set a new value for the trigger (input element).
         this.trigger?.setValue(option.value as string);
         // If the options list panel is open.
@@ -396,6 +402,20 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
 
   public setOptionsScroll(value: GlnOptionsScroll | null): void {
     this.optionsScroll = value;
+    if (this.selectedOption != null) {
+      this.selectedOption.selected = false;
+      this.selectedOption = null;
+    }
+    if (this.optionsScroll != null) {
+      let value: string | null = this.trigger != null ? this.trigger.getValue() : null;
+      const opts: GlnOption[] = this.getOptions(this.optionList);
+      const selectedOption: GlnOption | null = (!!value && opts.find((item: GlnOption) => item.value === value)) || null;
+      if (selectedOption != null) {
+        this.selectedOption = selectedOption;
+        this.selectedOption.selected = true;
+        this.optionsScroll.setMarkedOption(selectedOption);
+      }
+    }
   }
 
   // ** directive: GlnOptionsScroll - finish **

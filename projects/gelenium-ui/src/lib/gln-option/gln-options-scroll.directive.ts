@@ -39,6 +39,7 @@ export class GlnOptionsScrollDirective implements OnInit, OnDestroy, GlnOptionsS
     if (this.markedOption) {
       this.markedOption.marked = false;
     }
+    this.markedOption = null;
     this.detached.emit();
   }
 
