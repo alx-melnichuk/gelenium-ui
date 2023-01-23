@@ -729,7 +729,7 @@ export class GlnSelectComponent
       }
     }
   }
-  public optionsScrollAttached(value: GlnOptionsScroll): void {
+  public setOptionsScroll(value: GlnOptionsScroll | null): void {
     this.optionsScroll = value;
     if (this.optionsScroll != null) {
       const markedOption: GlnOption | null = this.selectedOptions.slice(-1)[0] || null;
