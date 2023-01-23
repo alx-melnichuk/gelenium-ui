@@ -52,7 +52,12 @@ export class GlnOptionsScrollDirective implements OnInit, OnDestroy, GlnOptionsS
   }
   /** Set the option marked. */
   public setMarkedOption(value: GlnOption | null): void {
-    if (this.options && value != null && this.options.indexOf(value) > -1) {
+    if (value == null) {
+      if (this.markedOption) {
+        this.markedOption.marked = false;
+      }
+      this.markedOption = null;
+    } else if (this.options && this.options.indexOf(value) > -1) {
       this.markedOption = value;
     }
   }
