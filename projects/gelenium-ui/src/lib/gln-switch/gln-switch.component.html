@@ -4,7 +4,7 @@
   (click)="toggle()">
   <input glnsw-input
     [attr.id]="idForInput"
-    [attr.disabled]="disabled || readOnly ? true : undefined"
+    [attr.disabled]="disabled || isReadOnlyVal ? true : undefined"
     formControlName="textData"
     type="checkbox"
     class="gln-switch-input"
@@ -16,7 +16,7 @@
     <span glnsw-thumb
       class="gln-switch-thumb">
     </span>
-    <gln-touch-ripple *ngIf="!disabled && !readOnly && !noRipple"
+    <gln-touch-ripple *ngIf="!disabled && !isReadOnlyVal && !isNoRippleVal"
       isCenter>
     </gln-touch-ripple>
   </span>
