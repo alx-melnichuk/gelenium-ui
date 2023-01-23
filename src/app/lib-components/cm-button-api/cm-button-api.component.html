@@ -75,33 +75,6 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>size: number<br/>
-          &nbsp;&nbsp;| string<br/>
-          &nbsp;&nbsp;| null<br/>
-          &nbsp;&nbsp;| undefined;</code>
-      </td>
-      <td>
-        <span>Determines the size of the button.</span><br />
-        <a [href]="urlCmFrame + '#Size'">More details.</a><br />
-        <span>It can take the following values:</span>
-        <ul>
-          <li>"short" - height: 38px;</li>
-          <li>"small" - height: 44px (default);</li>
-          <li>"middle" - height: 50px;</li>
-          <li>"wide" - height: 56px;</li>
-          <li>"large" - height: 62px;</li>
-          <li>"huge" - height: 68px;</li>
-        </ul>
-        <span>
-          This property can also contain a string with the value of the height
-          of the element in pixels.<br />
-          For example: <code>size="57" or [size]="57"</code>
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
         <code>isDisabled: string<br/>
           &nbsp;&nbsp;| boolean<br/>
           &nbsp;&nbsp;| null<br/>
@@ -171,6 +144,35 @@
           <li>"baseline" - defines baseline alignment</li>
           <li>"stretch" - stretches across the entire height</li>
         </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>size: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Determines the size of the button.</span><br />
+        <a [href]="urlCmFrame + '#Size'">More details.</a><br />
+        <span>It can take the following values:</span>
+        <ul>
+          <li>"short" - height: 38px;</li>
+          <li>"small" - height: 44px (default);</li>
+          <li>"middle" - height: 50px;</li>
+          <li>"wide" - height: 56px;</li>
+          <li>"large" - height: 62px;</li>
+          <li>"huge" - height: 68px;</li>
+        </ul>
+        <span>
+          This property can also contain the element's height in pixels, either as a string
+          or as a number.<br />
+          The value in the units of "pixels" allow you to accurately calculate the size of
+          internal elements.<br />
+          For example: <code>size="57" or [size]="57"</code>
+        </span>
       </td>
     </tr>
     <tr>
