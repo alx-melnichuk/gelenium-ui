@@ -603,7 +603,6 @@ export class GlnSelectComponent
     if (!this.disabled && !this.readOnly && !this.isPanelOpen && this.options.length > 0) {
       this.isPanelOpen = true;
       this.hasPanelAnimation = !this.frameComp.noAnimation;
-      // #?this.markedOption = this.selectedOptions.length > 0 ? this.selectedOptions[this.selectedOptions.length - 1] : null;
       this.triggerRect = this.triggerRef.nativeElement.getBoundingClientRect();
       this.isFocusAttrOnFrame = false;
       this.triggerFontSize = Number((getComputedStyle(this.triggerRef.nativeElement).fontSize || '0').replace('px', ''));
@@ -732,6 +731,12 @@ export class GlnSelectComponent
   }
   public optionsScrollAttached(value: GlnOptionsScroll): void {
     this.optionsScroll = value;
+    if (this.optionsScroll != null) {
+      const markedOption: GlnOption | null = this.selectedOptions.slice(-1)[0] || null;
+      if (markedOption != null) {
+        this.optionsScroll.setMarkedOption(markedOption);
+      }
+    }
   }
   /** Processing the option selected by the user. */
   public selectionOptionElement(addOption: GlnOption | null): void {

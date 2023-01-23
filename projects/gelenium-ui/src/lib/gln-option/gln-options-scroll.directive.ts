@@ -30,6 +30,7 @@ export class GlnOptionsScrollDirective implements OnInit, OnDestroy, GlnOptionsS
     this.attached.emit({
       hostRef: this.hostRef,
       getMarkedOption: (): GlnOption | null => this.getMarkedOption(),
+      setMarkedOption: (value: GlnOption | null): void => this.setMarkedOption(value),
       moveMarkedOptionByKey: (keyboardKey: string): void => this.moveMarkedOptionByKey(keyboardKey),
     });
   }
@@ -48,6 +49,12 @@ export class GlnOptionsScrollDirective implements OnInit, OnDestroy, GlnOptionsS
   /** Get the option marked. */
   public getMarkedOption(): GlnOption | null {
     return this.markedOption;
+  }
+  /** Set the option marked. */
+  public setMarkedOption(value: GlnOption | null): void {
+    if (this.options && value != null && this.options.indexOf(value) > -1) {
+      this.markedOption = value;
+    }
   }
   /** Move the marked option by the key. */
   public moveMarkedOptionByKey(keyboardKey: string): void {
