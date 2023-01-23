@@ -90,14 +90,14 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
-    if (this.isExternalVal == null && this.currConfig.isExternal != null) {
+    if (this.isExternalVal == null) {
       this.isExternalVal = !!(this.currConfig.isExternal || null);
     }
-    if (this.isNoAnimationVal == null && this.currConfig.isNoAnimation != null) {
+    if (this.isNoAnimationVal == null) {
       this.isNoAnimationVal = !!(this.currConfig.isNoAnimation || null);
       this.settingNoAnimation(this.isNoAnimationVal);
     }
-    if (this.isNoPulsateVal == null && this.currConfig.isNoPulsate != null) {
+    if (this.isNoPulsateVal == null) {
       this.isNoPulsateVal = !!(this.currConfig.isNoPulsate || null);
       this.settingNoPulsate(this.isNoPulsateVal);
     }
