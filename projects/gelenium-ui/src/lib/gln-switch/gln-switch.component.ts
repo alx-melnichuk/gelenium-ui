@@ -103,17 +103,17 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   @ViewChild(GlnTouchRippleComponent, { static: false })
   public touchRipple: GlnTouchRippleComponent | null = null;
 
-  public checked: boolean | null = null; // Binding attribute "isChecked".
   public currConfig: GlnSwitchConfig;
-  public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public formControl: FormControl = new FormControl({ value: false, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
-  public isWrapAndThumb: boolean = false;
   public idForInput = this.setIdForInput(this.id);
+  public isCheckedVal: boolean | null = null; // Binding attribute "isChecked".
+  public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
   public isNoRippleVal: boolean | null = null; // Binding attribute "isNoRipple".
   public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
   public isRequiredVal: boolean | null = null; // Binding attribute "isRequired".
+  public isWrapAndThumb: boolean = false;
   public positionVal: string | null = null; // Binding attribute "position".
 
   private isRemoveAttrHideAnimation: boolean = false;
@@ -142,25 +142,25 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     }
     if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimationVal == null && this.currConfig.isNoAnimation != null)) {
       this.isNoAnimationVal = !!(BooleanUtil.init(this.isNoAnimation) ?? (this.currConfig.isNoAnimation || null));
-      this.settingNoAnimation(this.isNoAnimationVal);
+      this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
     if (changes['isNoRipple'] || (changes['config'] && this.isNoRippleVal == null && this.currConfig.isNoRipple != null)) {
       this.isNoRippleVal = !!(BooleanUtil.init(this.isNoRipple) ?? (this.currConfig.isNoRipple || null));
-      this.settingNoRipple(this.isNoRippleVal);
+      this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
     if (changes['isReadOnly'] || (changes['config'] && this.isReadOnlyVal == null && this.currConfig.isReadOnly != null)) {
       this.isReadOnlyVal = !!(BooleanUtil.init(this.isReadOnly) ?? (this.currConfig.isReadOnly || null));
-      this.settingReadOnly(this.isReadOnlyVal);
+      this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
     if (changes['isRequired'] || (changes['config'] && this.isRequiredVal == null && this.currConfig.isRequired != null)) {
       this.isRequiredVal = !!(BooleanUtil.init(this.isRequired) ?? (this.currConfig.isRequired || null));
-      this.settingRequired(this.isRequiredVal);
+      this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
     if (changes['position'] || (changes['config'] && this.positionVal == null && this.currConfig.position != null)) {
-      this.settingClassAndAttrByPosition(this.positionVal, false);
+      this.settingClassAndAttrByPosition(this.positionVal || '', false, this.renderer, this.hostRef);
       const positionStr: string = (this.position || this.currConfig.position || '').toString();
       this.positionVal = POSITION[positionStr] || POSITION['end'];
-      this.settingClassAndAttrByPosition(this.positionVal, true);
+      this.settingClassAndAttrByPosition(this.positionVal, true, this.renderer, this.hostRef);
     }
 
     if (changes['isRequired']) {
@@ -172,36 +172,36 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
     // Set the TagIndex value if the flag 'disabled' is not set.
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', !this.disabled ? '' + this.tabIndex : null);
+    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', !this.isDisabledVal ? '' + this.tabIndex : null);
 
     this.prepareCssProperties(this.hostRef);
 
     const isChecked: boolean | null = BooleanUtil.init(this.isChecked) ?? (this.currConfig.isChecked || null);
     if (isChecked && !this.formControl.value) {
       this.formControl.setValue(true, { emitEvent: false });
-      this.settingChecked(true);
+      this.settingChecked(true, this.renderer, this.hostRef);
     }
 
     if (this.isNoAnimationVal == null) {
       this.isNoAnimationVal = !!(this.currConfig.isNoAnimation || null);
-      this.settingNoAnimation(this.isNoAnimationVal);
+      this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
     if (this.isNoRippleVal == null) {
       this.isNoRippleVal = !!(this.currConfig.isNoRipple || null);
-      this.settingNoRipple(this.isNoRippleVal);
+      this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
     if (this.isReadOnlyVal == null) {
       this.isReadOnlyVal = !!(this.currConfig.isReadOnly || null);
-      this.settingReadOnly(this.isReadOnlyVal);
+      this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
     if (this.isRequiredVal == null) {
       this.isRequiredVal = !!(this.currConfig.isRequired || null);
-      this.settingRequired(this.isRequiredVal);
+      this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
     if (this.positionVal == null) {
       const positionStr: string = (this.position || this.currConfig.position || '').toString();
-      this.positionVal = POSITION[positionStr] || POSITION['end'];
-      this.settingClassAndAttrByPosition(this.positionVal, true);
+      const positionVal: string = POSITION[positionStr] || POSITION['end'];
+      this.settingClassAndAttrByPosition((this.positionVal = positionVal), true, this.renderer, this.hostRef);
     }
 
     if (this.isRequiredVal) {
@@ -230,7 +230,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   public writeValue(value: any): void {
     if (value !== this.formControl.value) {
       this.formControl.setValue(!!value, { emitEvent: false });
-      this.settingChecked(!!value);
+      this.settingChecked(!!value, this.renderer, this.hostRef);
       this.changeDetectorRef.markForCheck();
     }
     if (this.isRemoveAttrHideAnimation) {
@@ -251,8 +251,8 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   }
 
   public setDisabledState(disabled: boolean): void {
-    if (this.disabled !== disabled) {
-      this.disabled = disabled;
+    if (this.isDisabledVal !== disabled) {
+      this.isDisabledVal = disabled;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, CSS_CLS_DISABLED, disabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_DISABLED, disabled ? '' : null);
       if (disabled && !this.formControl.disabled) {
@@ -294,17 +294,17 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   // ** Public methods **
 
   public doClickByLabel(event: MouseEvent): void {
-    if (!this.disabled && !this.isReadOnlyVal && this.touchRipple) {
+    if (!this.isDisabledVal && !this.isReadOnlyVal && this.touchRipple) {
       this.touchRipple.touchRipple(event, true);
     }
   }
 
   /** Toggles the state of the switch. */
   public toggle(): void {
-    if (!this.disabled && !this.isReadOnlyVal) {
+    if (!this.isDisabledVal && !this.isReadOnlyVal) {
       const newValue = !this.formControl.value;
       this.formControl.setValue(newValue, { emitEvent: false });
-      this.settingChecked(newValue);
+      this.settingChecked(newValue, this.renderer, this.hostRef);
       if (this.isRemoveAttrHideAnimation) {
         this.isRemoveAttrHideAnimation = false;
         // Remove an attribute that disables animation on initialization.
@@ -392,31 +392,31 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     }
   }
 
-  private settingChecked(isChecked: boolean): void {
-    this.checked = isChecked;
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-checked', isChecked);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'chk', isChecked ? '' : null);
+  private settingChecked(isChecked: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    this.isCheckedVal = isChecked;
+    HtmlElemUtil.setClass(renderer, elem, 'gln-checked', !!isChecked);
+    HtmlElemUtil.setAttr(renderer, elem, 'chk', isChecked ? '' : null);
   }
-  private settingClassAndAttrByPosition(positionStr: string | null, isAdd: boolean): void {
+  private settingClassAndAttrByPosition(positionStr: string, isAdd: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     if (positionStr) {
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnsw-' + positionStr, isAdd);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'pos-' + positionStr[0], isAdd ? '' : null);
+      HtmlElemUtil.setClass(renderer, elem, 'glnsw-' + positionStr, isAdd);
+      HtmlElemUtil.setAttr(renderer, elem, 'pos-' + positionStr[0], isAdd ? '' : null);
     }
   }
-  private settingNoAnimation(isNoAnimationVal: boolean | null): void {
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-animation', !!isNoAnimationVal);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noani', isNoAnimationVal ? '' : null);
+  private settingNoAnimation(isNoAnimationVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-animation', !!isNoAnimationVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'noani', isNoAnimationVal ? '' : null);
   }
-  private settingNoRipple(isNoRippleVal: boolean | null): void {
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-ripple', !!isNoRippleVal);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'norip', isNoRippleVal ? '' : null);
+  private settingNoRipple(isNoRippleVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-ripple', !!isNoRippleVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'norip', isNoRippleVal ? '' : null);
   }
-  private settingReadOnly(isReadOnlyVal: boolean | null): void {
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-read-only', !!isReadOnlyVal);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'rea', isReadOnlyVal ? '' : null);
+  private settingReadOnly(isReadOnlyVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!isReadOnlyVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'rea', isReadOnlyVal ? '' : null);
   }
-  private settingRequired(isRequiredVal: boolean | null): void {
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-required', !!isRequiredVal);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'req', isRequiredVal ? '' : null);
+  private settingRequired(isRequiredVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-required', !!isRequiredVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'req', isRequiredVal ? '' : null);
   }
 }

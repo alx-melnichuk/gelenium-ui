@@ -60,7 +60,7 @@ export const GLN_AUTOCOMPLETE_CONFIG = new InjectionToken<GlnAutocompleteConfig>
 })
 export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, GlnAutocomplete, GlnOptionParent {
   @Input()
-  public id: string = `glnac-${uniqueIdCounter++}`;
+  public id: string = `glnac-${uniqueIdCounter++}`; // interface GlnAutocomplete
   @Input()
   public config: GlnAutocompleteConfig | null | undefined;
   @Input()
@@ -112,10 +112,10 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public hasPanelAnimation: boolean = false;
   // The mouse button is pressed over the container options panel.
   public isContainerMousedown: boolean | null = false; // interface GlnAutocomplete
+  public isMaxWdVal: boolean | null = null; // Binding attribute "isMaxWd".
+  public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
+  public isNoCloseOnSelectVal: boolean | null = null; // Binding attribute "isNoCloseOnSelect".
   public isPanelOpen: boolean = false;
-  public maxWd: boolean | null = null; // Binding attribute "isMaxWd".
-  public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
-  public noCloseOnSelect: boolean | null = null; // Binding attribute "isNoCloseOnSelect".
   public noOpenOnMouse: boolean | null = null; // Binding attribute "isNoOpenOnMouse". // interface GlnAutocomplete
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public openOnFocus: boolean | null = null; // Binding attribute "isOpenOnFocus". // interface GlnAutocomplete
@@ -157,17 +157,17 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
       this.clearOnEscape = BooleanUtil.init(this.isClearOnEscape) ?? !!this.currConfig.isClearOnEscape;
     }
     if (changes['isMaxWd'] || (changes['config'] && this.isMaxWd == null && this.currConfig.isMaxWd != null)) {
-      this.maxWd = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
-      this.setCssMaxWidth(this.maxWd, this.hostRef);
+      this.isMaxWdVal = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
+      this.setCssMaxWidth(this.isMaxWdVal, this.hostRef);
     }
     if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
-      this.noAnimation = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
+      this.isNoAnimationVal = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
     }
     if (
       changes['isNoCloseOnSelect'] ||
       (changes['config'] && this.isNoCloseOnSelect == null && this.currConfig.isNoCloseOnSelect != null)
     ) {
-      this.noCloseOnSelect = BooleanUtil.init(this.isNoCloseOnSelect) ?? !!this.currConfig.isNoCloseOnSelect;
+      this.isNoCloseOnSelectVal = BooleanUtil.init(this.isNoCloseOnSelect) ?? !!this.currConfig.isNoCloseOnSelect;
     }
     if (changes['isNoOpenOnMouse'] || (changes['config'] && this.isNoOpenOnMouse == null && this.currConfig.isNoOpenOnMouse != null)) {
       this.noOpenOnMouse = BooleanUtil.init(this.isNoOpenOnMouse) ?? !!this.currConfig.isNoOpenOnMouse;
@@ -203,15 +203,15 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     if (this.isClearOnEscape == null) {
       this.clearOnEscape = !!this.currConfig.isClearOnEscape;
     }
-    if (this.maxWd == null) {
-      this.maxWd = !!this.currConfig.isMaxWd;
-      this.setCssMaxWidth(this.maxWd, this.hostRef);
+    if (this.isMaxWdVal == null) {
+      this.isMaxWdVal = !!this.currConfig.isMaxWd;
+      this.setCssMaxWidth(this.isMaxWdVal, this.hostRef);
     }
-    if (this.noAnimation == null) {
-      this.noAnimation = !!this.currConfig.isNoAnimation;
+    if (this.isNoAnimationVal == null) {
+      this.isNoAnimationVal = !!this.currConfig.isNoAnimation;
     }
     if (this.isNoCloseOnSelect == null) {
-      this.noCloseOnSelect = !!this.currConfig.isNoCloseOnSelect;
+      this.isNoCloseOnSelectVal = !!this.currConfig.isNoCloseOnSelect;
     }
     if (this.isNoOpenOnMouse == null) {
       this.noOpenOnMouse = !!this.currConfig.isNoOpenOnMouse;
@@ -344,7 +344,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
         if (this.isPanelOpen) {
           // Send input focus to trigger (input element).
           this.trigger?.passFocus();
-          if (!this.noCloseOnSelect) {
+          if (!this.isNoCloseOnSelectVal) {
             // If the 'noCloseOnSelect' flag is specified, then close the options list panel.
             this.close();
           }
@@ -433,17 +433,17 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     }
   }
   /** Prepare and setting property: 'max-height'. */
-  private setCssMaxHeight(optionHeight: number, visibleSizeVal: number | null, elem: ElementRef<HTMLElement> | null): void {
+  private setCssMaxHeight(optionHeight: number, visibleSizeVal: number | null, elem: ElementRef<HTMLElement>): void {
     const maxHeight: number | null = !!visibleSizeVal && visibleSizeVal > 0 && optionHeight > 0 ? optionHeight * visibleSizeVal : null;
     HtmlElemUtil.setProperty(elem, CSS_PROP_MAX_HEIGHT, maxHeight?.toString().concat('px'));
   }
   /** Prepare and setting property: 'max-width'. */
-  private setCssMaxWidth(isMaxWidth: boolean | null, elem: ElementRef<HTMLElement> | null): void {
+  private setCssMaxWidth(isMaxWidth: boolean | null, elem: ElementRef<HTMLElement>): void {
     const maxWidthStr: string | null = isMaxWidth ? `var(${CSS_PROP_WIDTH})` : null;
     HtmlElemUtil.setProperty(elem, CSS_PROP_MAX_WIDTH, maxWidthStr);
   }
   /** Prepare and setting property: 'justify-content'. */
-  private setCssJustifyContent(positionValue: GlnAutocompletePosition | null, elem: ElementRef<HTMLElement> | null): void {
+  private setCssJustifyContent(positionValue: GlnAutocompletePosition | null, elem: ElementRef<HTMLElement>): void {
     let justifyContent: string = 'flex-start';
     justifyContent = GlnAutocompletePosition.center === positionValue ? 'center' : justifyContent;
     justifyContent = GlnAutocompletePosition.end === positionValue ? 'flex-end' : justifyContent;

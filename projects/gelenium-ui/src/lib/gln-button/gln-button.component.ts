@@ -89,10 +89,10 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   public cssPaddingLeft: string | null = null;
   public cssPaddingRight: string | null = null;
   public cssPaddingTop: string | null = null;
-  public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public exteriorVal: GlnButtonExterior | null = null; // Binding attribute "exterior".
+  public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isFocused = false;
-  public noRipple: boolean | null = null; // Binding attribute "isNoRipple".
+  public isNoRippleVal: boolean | null = null; // Binding attribute "isNoRipple".
   public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
   public sizeVal: number | null = null; // Binding attribute "size".
@@ -131,13 +131,13 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     }
 
     if (changes['isDisabled']) {
-      this.disabled = !!BooleanUtil.init(this.isDisabled);
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled || false);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);
+      this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabledVal || false);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabledVal ? '' : null);
     }
     if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
-      this.noRipple = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
-      this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
+      this.isNoRippleVal = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
+      this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
     if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlign == null && this.currConfig.ornamLfAlign != null)) {
       this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamLfAlign || this.currConfig.ornamLfAlign || null);
@@ -169,9 +169,9 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       this.updateCssParams(this.exteriorVal, this.sizeVal, this.getLineHeight(), this.hostRef);
     }
 
-    if (this.noRipple == null) {
-      this.noRipple = !!this.currConfig.isNoRipple;
-      this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
+    if (this.isNoRippleVal == null) {
+      this.isNoRippleVal = !!this.currConfig.isNoRipple;
+      this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
     if (this.ornamLfAlignVal == null) {
       this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.currConfig.ornamLfAlign || null);
@@ -198,19 +198,19 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   }
 
   public doClick(event: MouseEvent): void {
-    if (!!event && !event.cancelBubble && !this.disabled && this.linkElement && this.touchRipple) {
+    if (!!event && !event.cancelBubble && !this.isDisabledVal && this.linkElement && this.touchRipple) {
       this.touchRipple.touchRipple(event);
     }
   }
 
   public focus(): void {
-    if (!this.disabled && isPlatformBrowser(this.platformId) && !!this.buttonElementRef) {
+    if (!this.isDisabledVal && isPlatformBrowser(this.platformId) && !!this.buttonElementRef) {
       this.buttonElementRef.nativeElement.focus();
     }
   }
 
   public doFocus(): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       this.isFocused = true;
       this.settingFocus(this.isFocused, this.renderer, this.hostRef);
       this.focused.emit();
@@ -218,7 +218,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   }
 
   public doBlur(): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       this.isFocused = false;
       this.settingFocus(this.isFocused, this.renderer, this.hostRef);
       this.blured.emit();
@@ -266,11 +266,11 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_BOTTOM, (this.cssPaddingBottom = this.cssPaddingTop));
   }
 
-  private setCssSize(size: number, elem: ElementRef<HTMLElement> | null): void {
+  private setCssSize(size: number, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setProperty(elem, CSS_PROP_SIZE, (size > 0 ? size.toString() : null)?.concat('px'));
   }
 
-  private settingExterior(exteriorVal: GlnButtonExterior | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingExterior(exteriorVal: GlnButtonExterior | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     const isText = GlnButtonExteriorUtil.isText(exteriorVal);
     HtmlElemUtil.setClass(renderer, elem, 'glnbt-text', isText);
     HtmlElemUtil.setAttr(renderer, elem, 'ext-t', isText ? '' : null);
@@ -289,10 +289,10 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     HtmlElemUtil.setClass(renderer, elem, 'gln-no-ripple', !!noRipple);
     HtmlElemUtil.setAttr(renderer, elem, 'norip', noRipple ? '' : null);
   }
-  private settingOrnamLfAlign(ornamLfAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingOrnamLfAlign(ornamLfAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setAttr(renderer, elem, 'orn-lft', ornamLfAlign?.toString());
   }
-  private settingOrnamRgAlign(ornamRgAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingOrnamRgAlign(ornamRgAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setAttr(renderer, elem, 'orn-rgh', ornamRgAlign?.toString());
   }
 }

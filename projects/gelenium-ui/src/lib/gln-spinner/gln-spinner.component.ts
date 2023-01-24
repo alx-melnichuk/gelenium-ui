@@ -70,14 +70,15 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
 
     if (changes['isExternal'] || (changes['config'] && this.isExternalVal == null && this.currConfig.isExternal != null)) {
       this.isExternalVal = !!(BooleanUtil.init(this.isExternal) ?? (this.currConfig.isExternal || null));
+      this.settingExternal(this.isExternalVal, this.renderer, this.hostRef);
     }
     if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimationVal == null && this.currConfig.isNoAnimation != null)) {
       this.isNoAnimationVal = !!(BooleanUtil.init(this.isNoAnimation) ?? (this.currConfig.isNoAnimation || null));
-      this.settingNoAnimation(this.isNoAnimationVal);
+      this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
     if (changes['isNoPulsate'] || (changes['config'] && this.isNoPulsateVal == null && this.currConfig.isNoPulsate != null)) {
       this.isNoPulsateVal = !!(BooleanUtil.init(this.isNoPulsate) ?? (this.currConfig.isNoPulsate || null));
-      this.settingNoPulsate(this.isNoPulsateVal);
+      this.settingNoPulsate(this.isNoPulsateVal, this.renderer, this.hostRef);
     }
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
@@ -92,14 +93,15 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
 
     if (this.isExternalVal == null) {
       this.isExternalVal = !!(this.currConfig.isExternal || null);
+      this.settingExternal(this.isExternalVal, this.renderer, this.hostRef);
     }
     if (this.isNoAnimationVal == null) {
       this.isNoAnimationVal = !!(this.currConfig.isNoAnimation || null);
-      this.settingNoAnimation(this.isNoAnimationVal);
+      this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
     if (this.isNoPulsateVal == null) {
       this.isNoPulsateVal = !!(this.currConfig.isNoPulsate || null);
-      this.settingNoPulsate(this.isNoPulsateVal);
+      this.settingNoPulsate(this.isNoPulsateVal, this.renderer, this.hostRef);
     }
     if (this.sizeVal == null) {
       const sizeStr: string = (this.currConfig.size || '').toString();
@@ -118,17 +120,22 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
   }
 
   /** Prepare and setting property: 'max-height'. */
-  private setCssSize(size: number, elem: ElementRef<HTMLElement> | null): void {
+  private setCssSize(size: number, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setProperty(elem, CSS_PROP_SIZE, (size > 0 ? size.toString() : null)?.concat('px'));
   }
 
-  private settingNoAnimation(isNoAnimationVal: boolean | null): void {
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-animation', !!isNoAnimationVal);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noani', isNoAnimationVal ? '' : null);
+  private settingExternal(isExternalVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-external', !!isExternalVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'ext', isExternalVal ? '' : null);
   }
 
-  private settingNoPulsate(isNoPulsateVal: boolean | null): void {
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-pulsate', !!isNoPulsateVal);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'nopul', isNoPulsateVal ? '' : null);
+  private settingNoAnimation(isNoAnimationVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-animation', !!isNoAnimationVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'noani', isNoAnimationVal ? '' : null);
+  }
+
+  private settingNoPulsate(isNoPulsateVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-pulsate', !!isNoPulsateVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'nopul', isNoPulsateVal ? '' : null);
   }
 }

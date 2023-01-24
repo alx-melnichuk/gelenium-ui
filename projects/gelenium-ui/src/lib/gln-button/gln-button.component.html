@@ -5,8 +5,8 @@
     glnbt-btn
     type="button"
     [attr.id]="id + '_button'"
-    [attr.disabled]="disabled ? '' : null"
-    [attr.tabindex]="disabled ? null : 0"
+    [attr.disabled]="isDisabledVal ? '' : null"
+    [attr.tabindex]="isDisabledVal ? null : 0"
     glnFrameOrnament
     [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
     [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
@@ -20,7 +20,7 @@
       glnbt-pd-hor>
       <ng-content></ng-content>
     </span>
-    <gln-touch-ripple *ngIf="!disabled && !noRipple">
+    <gln-touch-ripple *ngIf="!isDisabledVal && !isNoRippleVal">
     </gln-touch-ripple>
   </button>
 </ng-container>
@@ -36,7 +36,7 @@
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
     <ng-content select="a"></ng-content>
-    <gln-touch-ripple *ngIf="!disabled && !noRipple"
+    <gln-touch-ripple *ngIf="!isDisabledVal && !isNoRippleVal"
       skip-events>
     </gln-touch-ripple>
   </div>

@@ -1,6 +1,6 @@
 <label *ngIf="label != null"
   class="glnfr-label">
-  <span lbl>{{ label }}</span><span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}
+  <span lbl>{{ label }}</span><span *ngIf="isRequiredVal">{{ (!!label ? '&nbsp;' : '') + '*' }}
   </span>
 </label>
 <div class="glnfr-border"
@@ -14,7 +14,7 @@
     aria-hidden="true">
     <legend *ngIf="label != null"
       class="glnfr-legend">
-      <span lgn>{{ label }}</span><span *ngIf="isRequired">{{ (!!label ? '&nbsp;' : '') + '*' }}
+      <span lgn>{{ label }}</span><span *ngIf="isRequiredVal">{{ (!!label ? '&nbsp;' : '') + '*' }}
       </span>
     </legend>
   </fieldset>

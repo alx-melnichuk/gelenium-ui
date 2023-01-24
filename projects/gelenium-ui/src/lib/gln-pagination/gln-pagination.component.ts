@@ -80,19 +80,19 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
 
     if (changes['isHideNext'] || (changes['config'] && this.isHideNextVal == null && this.currConfig.isHideNext != null)) {
       this.isHideNextVal = !!(BooleanUtil.init(this.isHideNext) ?? (this.currConfig.isHideNext || null));
-      this.settingHideNext(this.isHideNextVal);
+      this.settingHideNext(this.isHideNextVal, this.renderer, this.hostRef);
     }
     if (changes['isHidePrev'] || (changes['config'] && this.isHidePrevVal == null && this.currConfig.isHidePrev != null)) {
       this.isHidePrevVal = !!(BooleanUtil.init(this.isHidePrev) ?? (this.currConfig.isHidePrev || null));
-      this.settingHidePrev(this.isHidePrevVal);
+      this.settingHidePrev(this.isHidePrevVal, this.renderer, this.hostRef);
     }
     if (changes['isShowFirst'] || (changes['config'] && this.isShowFirstVal == null && this.currConfig.isShowFirst != null)) {
       this.isShowFirstVal = !!(BooleanUtil.init(this.isShowFirst) ?? (this.currConfig.isShowFirst || null));
-      this.settingShowFirst(this.isShowFirstVal);
+      this.settingShowFirst(this.isShowFirstVal, this.renderer, this.hostRef);
     }
     if (changes['isShowLast'] || (changes['config'] && this.isShowLastVal == null && this.currConfig.isShowLast != null)) {
       this.isShowLastVal = !!(BooleanUtil.init(this.isShowLast) ?? (this.currConfig.isShowLast || null));
-      this.settingShowLast(this.isShowLastVal);
+      this.settingShowLast(this.isShowLastVal, this.renderer, this.hostRef);
     }
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
@@ -108,19 +108,19 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
 
     if (this.isHideNextVal == null) {
       this.isHideNextVal = !!(this.currConfig.isHideNext || null);
-      this.settingHideNext(this.isHideNextVal);
+      this.settingHideNext(this.isHideNextVal, this.renderer, this.hostRef);
     }
     if (this.isHidePrevVal == null) {
       this.isHidePrevVal = !!(this.currConfig.isHidePrev || null);
-      this.settingHidePrev(this.isHidePrevVal);
+      this.settingHidePrev(this.isHidePrevVal, this.renderer, this.hostRef);
     }
     if (this.isShowFirstVal == null) {
       this.isShowFirstVal = !!(this.currConfig.isShowFirst || null);
-      this.settingShowFirst(this.isShowFirstVal);
+      this.settingShowFirst(this.isShowFirstVal, this.renderer, this.hostRef);
     }
     if (this.isShowLastVal == null) {
       this.isShowLastVal = !!(this.currConfig.isShowLast || null);
-      this.settingShowLast(this.isShowLastVal);
+      this.settingShowLast(this.isShowLastVal, this.renderer, this.hostRef);
     }
     if (this.sizeVal == null) {
       const sizeStr: string = (this.currConfig.size || '').toString();
@@ -196,32 +196,32 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
   }
 
-  private setCssSize(size: number, elem: ElementRef<HTMLElement> | null): void {
+  private setCssSize(size: number, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setProperty(elem, CSS_PROP_SIZE, (size > 0 ? size.toString() : null)?.concat('px'));
   }
 
-  private setCssBorderRadius(size: number, elem: ElementRef<HTMLElement> | null): void {
+  private setCssBorderRadius(size: number, elem: ElementRef<HTMLElement>): void {
     const borderRadius: number = size > 0 ? Math.round((size / 2) * 100) / 100 : 0;
     HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, (borderRadius > 0 ? borderRadius.toString() : null)?.concat('px'));
   }
 
-  private settingHideNext(isHideNextVal: boolean | null): void {
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnpg-hide-next', !!isHideNextVal);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'nex', isHideNextVal ? '' : null);
+  private settingHideNext(isHideNextVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'glnpg-hide-next', !!isHideNextVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'nex', isHideNextVal ? '' : null);
   }
 
-  private settingHidePrev(isHidePrevVal: boolean | null): void {
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnpg-hide-prev', !!isHidePrevVal);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'pre', isHidePrevVal ? '' : null);
+  private settingHidePrev(isHidePrevVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'glnpg-hide-prev', !!isHidePrevVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'pre', isHidePrevVal ? '' : null);
   }
 
-  private settingShowFirst(isShowFirstVal: boolean | null): void {
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnpg-show-first', !!isShowFirstVal);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fir', isShowFirstVal ? '' : null);
+  private settingShowFirst(isShowFirstVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'glnpg-show-first', !!isShowFirstVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'fir', isShowFirstVal ? '' : null);
   }
 
-  private settingShowLast(isShowLastVal: boolean | null): void {
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnpg-show-last', !!isShowLastVal);
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'las', isShowLastVal ? '' : null);
+  private settingShowLast(isShowLastVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'glnpg-show-last', !!isShowLastVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'las', isShowLastVal ? '' : null);
   }
 }

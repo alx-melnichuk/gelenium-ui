@@ -5,13 +5,13 @@
     [exterior]="exterior || currConfig.exterior"
     [size]="size || currConfig.size"
     [isAttrHideAnimation]="isAttrHideAnimation"
-    [isDisabled]="disabled"
-    [isError]="!!formControl.errors || error"
+    [isDisabled]="isDisabledVal"
+    [isError]="!!formControl.errors || isErrorVal"
     [isFilled]="isFilled"
     [isLabelShrink]="getBoolean(isLabelShrink) ?? currConfig.isLabelShrink"
     [isNoAnimation]="getBoolean(isNoAnimation) ?? currConfig.isNoAnimation"
-    [isRequired]="required"
-    [label]="!placeholder ? label : null"
+    [isRequired]="isRequired"
+    [label]="!isPlaceholderVal ? label : null"
     glnFrameOrnament
     [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
     [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
@@ -33,14 +33,14 @@
       glnfr-pd-hor
       glnfr-elem
       [attr.id]="id + '_textarea'"
-      [ngClass]="['glntx-textarea', (readOnly ? 'gln-readonly' : '')]"
+      [ngClass]="['glntx-textarea', (isReadOnlyVal ? 'gln-readonly' : '')]"
       [cols]="cntCols"
       [rows]="currentRows"
-      [attr.disabled]="disabled ? '': null"
+      [attr.disabled]="isDisabledVal ? '': null"
       [attr.autocomplete]="!!autoComplete ? autoComplete : null"
-      [attr.placeholder]="!placeholder ? null : label"
-      [attr.readonly]="readOnly ? '': null"
-      [attr.tabindex]="!disabled ? tabIndex : null"
+      [attr.placeholder]="!isPlaceholderVal ? null : label"
+      [attr.readonly]="isReadOnlyVal ? '': null"
+      [attr.tabindex]="!isDisabledVal ? tabIndex : null"
       [attr.wrap]="wraps"
       [attr.spellcheck]="spellCheck"
       (focus)="doFocus()"
@@ -53,9 +53,9 @@
 
   <gln-hint-or-error *ngIf="!!helperText"
     [text]="helperText"
-    [isError]="!!formControl.errors || error"
+    [isError]="!!formControl.errors || isErrorVal"
     [isFocused]="isFocused"
-    [isDisabled]="disabled">
+    [isDisabled]="isDisabledVal">
   </gln-hint-or-error>
 
 </ng-container>

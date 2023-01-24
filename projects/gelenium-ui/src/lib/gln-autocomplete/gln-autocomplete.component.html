@@ -8,8 +8,8 @@
     (mousedown)="isContainerMousedown = true"
     (mouseup)="isContainerMousedown = false">
     <div glnac-wrap
-      [ngClass]="['glnac-wrap', (noAnimation ? 'gln-no-animation' : ''), (isPanelOpen ? 'is-show' : 'is-hide')]"
-      [attr.noAnm]="noAnimation ? '' : null"
+      [ngClass]="['glnac-wrap', (isNoAnimationVal ? 'gln-no-animation' : ''), (isPanelOpen ? 'is-show' : 'is-hide')]"
+      [attr.noAnm]="isNoAnimationVal ? '' : null"
       [attr.is-show]="isPanelOpen ? '' : null"
       [attr.is-hide]="!isPanelOpen ? '' : null"
       (animationend)="hasPanelAnimation = isPanelOpen"

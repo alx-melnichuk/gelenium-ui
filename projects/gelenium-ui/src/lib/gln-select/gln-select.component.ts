@@ -208,26 +208,26 @@ export class GlnSelectComponent
   public backdropClassVal: string | null = null;
   public checkmark: boolean | null = null; // Binding attribute "isCheckmark". // interface GlnOptionParent
   public currConfig: GlnSelectConfig;
-  public disabled: boolean | null = null; // Binding attribute "isDisabled".
-  public error: boolean | null = null; // Binding attribute "isError".
   public errors: ValidationErrors | null = null;
   public hasPanelAnimation = false;
   public isAttrHideAnimation: boolean | undefined;
+  public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
+  public isErrorVal: boolean | null = null; // Binding attribute "isError".
   public isFocused = false;
   public isFilled = false;
   public isPanelOpen = false;
-  public maxWd: boolean | null = null; // Binding attribute "isMaxWd".
+  public isMaxWdVal: boolean | null = null; // Binding attribute "isMaxWd".
+  public isNoIconVal: boolean | null = null; // Binding attribute "isNoIcon",
+  public isPlaceholderVal: boolean | null = null; // Binding attribute "isPlaceholder".
+  public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
+  public isRequiredVal: boolean | null = null; // Binding attribute "isRequired".
   public multiple: boolean | null = null; // Binding attribute "isMultiple". // interface GlnOptionParent
-  public noIcon: boolean | null = null; // Binding attribute "isNoIcon",
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
   public overlayPanelClass: string | string[] = '';
   public panelClassVal: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
-  public placeholder: boolean | null = null; // Binding attribute "isPlaceholder".
   public positionList: ConnectedPosition[] = [];
-  public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
-  public required: boolean | null = null; // Binding attribute "isRequired".
   public selectedOptions: GlnOption[] = [];
   /** Strategy for handling scrolling when the selection panel is open. */
   public scrollStrategy: ScrollStrategy;
@@ -275,34 +275,34 @@ export class GlnSelectComponent
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
     if (changes['isError'] || (changes['config'] && this.isError == null && this.currConfig.isError != null)) {
-      this.error = BooleanUtil.init(this.isError) ?? !!this.currConfig.isError;
-      this.settingError(this.error, this.renderer, this.hostRef);
+      this.isErrorVal = BooleanUtil.init(this.isError) ?? !!this.currConfig.isError;
+      this.settingError(this.isErrorVal, this.renderer, this.hostRef);
     }
     if (changes['isMaxWd'] || (changes['config'] && this.isMaxWd == null && this.currConfig.isMaxWd != null)) {
-      this.maxWd = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
+      this.isMaxWdVal = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
     }
     if (changes['isMultiple'] || (changes['config'] && this.isMultiple == null && this.currConfig.isMultiple) || null) {
       this.multiple = BooleanUtil.init(this.isMultiple) ?? !!this.currConfig.isMultiple;
       this.settingMultiple(this.multiple, this.renderer, this.hostRef);
     }
     if (changes['isNoIcon'] || (changes['config'] && this.isNoIcon == null && this.currConfig.isNoIcon != null)) {
-      this.noIcon = BooleanUtil.init(this.isNoIcon) ?? !!this.currConfig.isNoIcon;
-      this.settingNoIcon(this.noIcon, this.renderer, this.hostRef);
+      this.isNoIconVal = BooleanUtil.init(this.isNoIcon) ?? !!this.currConfig.isNoIcon;
+      this.settingNoIcon(this.isNoIconVal, this.renderer, this.hostRef);
     }
     if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
       this.noRipple = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
       this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
     }
     if (changes['isPlaceholder'] || (changes['config'] && this.isPlaceholder == null && this.currConfig.isPlaceholder != null)) {
-      this.placeholder = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
+      this.isPlaceholderVal = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
     }
     if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
-      this.readOnly = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
-      this.settingReadOnly(this.readOnly, this.renderer, this.hostRef);
+      this.isReadOnlyVal = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
+      this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
     if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
-      this.required = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
-      this.settingRequired(this.required, this.renderer, this.hostRef);
+      this.isRequiredVal = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
+      this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
     if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlign == null && this.currConfig.ornamLfAlign != null)) {
       this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamLfAlign || this.currConfig.ornamLfAlign || null);
@@ -341,35 +341,35 @@ export class GlnSelectComponent
       this.checkmark = !!this.currConfig.isCheckmark;
       this.settingCheckmark(this.checkmark, this.renderer, this.hostRef);
     }
-    if (this.error == null) {
-      this.error = !!this.currConfig.isError;
-      this.settingError(this.error, this.renderer, this.hostRef);
+    if (this.isErrorVal == null) {
+      this.isErrorVal = !!this.currConfig.isError;
+      this.settingError(this.isErrorVal, this.renderer, this.hostRef);
     }
-    if (this.maxWd == null) {
-      this.maxWd = !!this.currConfig.isMaxWd;
+    if (this.isMaxWdVal == null) {
+      this.isMaxWdVal = !!this.currConfig.isMaxWd;
     }
     if (this.multiple == null) {
       this.multiple = !!this.currConfig.isMultiple;
       this.settingMultiple(this.multiple, this.renderer, this.hostRef);
     }
-    if (this.noIcon == null) {
-      this.noIcon = !!this.currConfig.isNoIcon;
-      this.settingNoIcon(this.noIcon, this.renderer, this.hostRef);
+    if (this.isNoIconVal == null) {
+      this.isNoIconVal = !!this.currConfig.isNoIcon;
+      this.settingNoIcon(this.isNoIconVal, this.renderer, this.hostRef);
     }
     if (this.noRipple == null) {
       this.noRipple = !!this.currConfig.isNoRipple;
       this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
     }
-    if (this.placeholder == null) {
-      this.placeholder = !!this.currConfig.isPlaceholder;
+    if (this.isPlaceholderVal == null) {
+      this.isPlaceholderVal = !!this.currConfig.isPlaceholder;
     }
-    if (this.readOnly == null) {
-      this.readOnly = !!this.currConfig.isReadOnly;
-      this.settingReadOnly(this.readOnly, this.renderer, this.hostRef);
+    if (this.isReadOnlyVal == null) {
+      this.isReadOnlyVal = !!this.currConfig.isReadOnly;
+      this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
-    if (this.required == null) {
-      this.required = !!this.currConfig.isRequired;
-      this.settingRequired(this.required, this.renderer, this.hostRef);
+    if (this.isRequiredVal == null) {
+      this.isRequiredVal = !!this.currConfig.isRequired;
+      this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
     if (this.ornamLfAlignVal == null) {
       this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.currConfig.ornamLfAlign || null);
@@ -444,8 +444,8 @@ export class GlnSelectComponent
   }
 
   public setDisabledState(disabled: boolean): void {
-    if (this.disabled !== disabled) {
-      this.disabled = disabled;
+    if (this.isDisabledVal !== disabled) {
+      this.isDisabledVal = disabled;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', disabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', disabled ? '' : null);
     }
@@ -459,7 +459,7 @@ export class GlnSelectComponent
   public validate(control: AbstractControl): ValidationErrors | null {
     let result: ValidationErrors | null = null;
     if (this.isEmpty()) {
-      if (this.required) {
+      if (this.isRequiredVal) {
         result = { ...(result || {}), ...{ required: true } };
       }
     } else if (this.multiple) {
@@ -507,13 +507,13 @@ export class GlnSelectComponent
   }
 
   public focus(): void {
-    if (!this.disabled && isPlatformBrowser(this.platformId) && !!this.frameComp.hostRef) {
+    if (!this.isDisabledVal && isPlatformBrowser(this.platformId) && !!this.frameComp.hostRef) {
       this.frameComp.hostRef.nativeElement.focus();
     }
   }
 
   public doFocus(): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       const isFocusedEmit = !this.isFocused;
       this.isFocused = true;
       this.settingFocus(this.isFocused, this.renderer, this.hostRef);
@@ -535,7 +535,7 @@ export class GlnSelectComponent
    * Otherwise, it will cause a false positive, "blur" on the panel when it is opened.
    */
   public doBlur(): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       this.isFocused = false;
       this.settingFocus(this.isFocused, this.renderer, this.hostRef);
       if (!this.isPanelOpen && !this.hasPanelAnimation) {
@@ -553,7 +553,7 @@ export class GlnSelectComponent
   }
   /** Occurs when a mouse click event occurs outside of the options list pane. */
   public backdropClick(): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       // (Cases-B3) Panel is open and mouse click outside of panel and trigger.
       // (Cases-B4) Panel is open and mouse click outside of panel but on trigger.
       this.isFocused = true;
@@ -563,7 +563,7 @@ export class GlnSelectComponent
   }
   /** Occurs when the panel receives input focus. */
   public doFocusOnPanel(): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       // (Cases-B2) Panel is open and mouse click within the panel.
       this.isFocused = true;
       this.focus();
@@ -572,7 +572,7 @@ export class GlnSelectComponent
   public doOverlayPanelKeydown(event: KeyboardEvent): void {
     event.preventDefault();
     event.stopPropagation();
-    if (!this.disabled && this.isPanelOpen) {
+    if (!this.isDisabledVal && this.isPanelOpen) {
       switch (event.key) {
         // (Cases-B5) Panel is open and click the Escape key.
         // (Cases-B6) Panel is open and click the Tab key.
@@ -587,7 +587,7 @@ export class GlnSelectComponent
   }
   /** Open or close the overlay panel. */
   public toggle(): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       if (this.isPanelOpen) {
         this.close();
       } else {
@@ -600,9 +600,9 @@ export class GlnSelectComponent
   }
   /** Open overlay panel. */
   public open(): void {
-    if (!this.disabled && !this.readOnly && !this.isPanelOpen && this.options.length > 0) {
+    if (!this.isDisabledVal && !this.isReadOnlyVal && !this.isPanelOpen && this.options.length > 0) {
       this.isPanelOpen = true;
-      this.hasPanelAnimation = !this.frameComp.noAnimation;
+      this.hasPanelAnimation = !this.frameComp.isNoAnimationVal;
       this.triggerRect = this.triggerRef.nativeElement.getBoundingClientRect();
       this.isFocusAttrOnFrame = false;
       this.triggerFontSize = Number((getComputedStyle(this.triggerRef.nativeElement).fontSize || '0').replace('px', ''));
@@ -612,7 +612,7 @@ export class GlnSelectComponent
   }
   /** Closes the overlay panel and focuses the main element. */
   public close(options?: { noAnimation?: boolean }): void {
-    if (this.disabled || !this.isPanelOpen) {
+    if (this.isDisabledVal || !this.isPanelOpen) {
       return;
     }
     if (this.isFocusAttrOnFrame) {
@@ -632,7 +632,7 @@ export class GlnSelectComponent
           this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight())
         );
       }
-      if (!this.frameComp.noAnimation && !options?.noAnimation) {
+      if (!this.frameComp.isNoAnimationVal && !options?.noAnimation) {
         const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement.children[0] as HTMLElement);
         // Add an attribute for animation and transformation.
         HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_PANEL_OPENING_ANIMATION, null);
@@ -659,7 +659,7 @@ export class GlnSelectComponent
 
     this.selectPanelRef = HtmlElemUtil.getElementRef(overlayElement.children[0]?.children[0] as HTMLElement);
     const panelHeight = this.getHeight(this.selectPanelRef);
-    if (!this.frameComp.noAnimation && panelHeight > 0) {
+    if (!this.frameComp.isNoAnimationVal && panelHeight > 0) {
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
     }
     // Set the font size for the overlay.
@@ -675,12 +675,12 @@ export class GlnSelectComponent
       const maxHeightOfOptionsPanel = this.optionHeight * visibleSize;
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_HEIGHT, maxHeightOfOptionsPanel.toString().concat('px'));
     }
-    if (this.maxWd) {
+    if (this.isMaxWdVal) {
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_WIDTH, this.hostWidth.toString().concat('px'));
     }
     // Important! These operations should be the last, they include animation and the dimensions of the panel are distorted.
     const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement?.children[0] as HTMLElement);
-    if (this.frameComp.noAnimation) {
+    if (this.frameComp.isNoAnimationVal) {
       HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, 'noAnm', '');
       HtmlElemUtil.setClass(this.renderer, selectPanelWrapRef, 'gln-no-animation', true);
     } else {
@@ -698,7 +698,7 @@ export class GlnSelectComponent
   }
   /** Handles all keypress events for the component's panel. */
   public frameKeydown(event: KeyboardEvent): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       if (!this.isPanelOpen) {
         // Open the selection panel by pressing the keys: 'up arrow', 'down arrow', 'space' and 'enter'.
         if (['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(event.key)) {
@@ -741,7 +741,7 @@ export class GlnSelectComponent
   /** Processing the option selected by the user. */
   public selectionOptionElement(addOption: GlnOption | null): void {
     const newOptions = addOption !== null ? [addOption] : [];
-    if (!this.disabled && newOptions.length > 0) {
+    if (!this.isDisabledVal && newOptions.length > 0) {
       const removed: GlnOption[] = [];
       if (this.multiple) {
         // Which elements of array "this.selectedOptions" are included in array "addOptions".
@@ -770,11 +770,11 @@ export class GlnSelectComponent
 
   // ** Private methods **
 
-  private settingCheckmark(checkmark: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingCheckmark(checkmark: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-checkmark', !!checkmark);
     HtmlElemUtil.setAttr(renderer, elem, 'che', checkmark ? '' : null);
   }
-  private settingError(error: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingError(error: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-error', !!error);
     HtmlElemUtil.setAttr(renderer, elem, 'err', error ? '' : null);
   }
@@ -782,30 +782,30 @@ export class GlnSelectComponent
     HtmlElemUtil.setClass(renderer, elem, 'gln-focused', !!focus);
     HtmlElemUtil.setAttr(renderer, elem, 'foc', focus ? '' : null);
   }
-  private settingMultiple(multiple: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+  private settingMultiple(multiple: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-multiple', !!multiple);
     HtmlElemUtil.setAttr(renderer, elem, 'mul', multiple ? '' : null);
   }
-  private settingNoIcon(noIcon: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+  private settingNoIcon(noIcon: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-no-icon', !!noIcon);
     HtmlElemUtil.setAttr(renderer, elem, 'noico', noIcon ? '' : null);
   }
-  private settingNoRipple(noRipple: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+  private settingNoRipple(noRipple: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-no-ripple', !!noRipple);
     HtmlElemUtil.setAttr(renderer, elem, 'norip', noRipple ? '' : null);
   }
-  private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!readOnly);
     HtmlElemUtil.setAttr(renderer, elem, 'rea', readOnly ? '' : null);
   }
-  private settingRequired(required: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingRequired(required: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-required', !!required);
     HtmlElemUtil.setAttr(renderer, elem, 'req', required ? '' : null);
   }
-  private settingOrnamLfAlign(ornamLfAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingOrnamLfAlign(ornamLfAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setAttr(renderer, elem, 'orn-lft', ornamLfAlign?.toString());
   }
-  private settingOrnamRgAlign(ornamRgAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingOrnamRgAlign(ornamRgAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setAttr(renderer, elem, 'orn-rgh', ornamRgAlign?.toString());
   }
 

@@ -80,8 +80,11 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public get lineHeight(): number {
     return this.lineHeightInn;
   }
+  public get noAnimation(): boolean | null {
+    // Used in GlnSelect.
+    return this.isNoAnimationVal;
+  }
 
-  public attrHideAnimation: boolean | null = null; // Binding attribute "isAttrHideAnimation".
   public currConfig: GlnFrameConfig;
   public cssBorderRadius: string | null = null;
   public cssPaddingBottom: string | null = null;
@@ -91,13 +94,14 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public cssPaddingTop: string | null = null;
   public cssTranslateY: string | null = null;
   public cssTranslateY2: string | null = null;
-  public disabled: boolean | null = null; // Binding attribute "isDisabled".
   public exteriorVal: GlnFrameExterior | null = null; // Binding attribute "exterior".
-  public error: boolean | null = null; // Binding attribute "isError".
-  public filled: boolean | null = null; // Binding attribute "isFilled".
-  public labelShrink: boolean | null = null; // Binding attribute "isLabelShrink".
-  public noAnimation: boolean | null = null; // Binding attribute "isNoAnimation".
-  public required: boolean | null = null; // Binding attribute "isRequired".
+  public isAttrHideAnimationVal: boolean | null = null; // Binding attribute "isAttrHideAnimation".
+  public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
+  public isErrorVal: boolean | null = null; // Binding attribute "isError".
+  public isFilledVal: boolean | null = null; // Binding attribute "isFilled".
+  public isLabelShrinkVal: boolean | null = null; // Binding attribute "isLabelShrink".
+  public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
+  public isRequiredVal: boolean | null = null; // Binding attribute "isRequired".
   public sizeVal: number | null = null; // Binding attribute "size".
 
   private lineHeightInn: number = 0;
@@ -132,8 +136,8 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     }
 
     if (changes['isAttrHideAnimation']) {
-      this.attrHideAnimation = !!BooleanUtil.init(this.isAttrHideAnimation);
-      if (this.attrHideAnimation) {
+      this.isAttrHideAnimationVal = !!BooleanUtil.init(this.isAttrHideAnimation);
+      if (this.isAttrHideAnimationVal) {
         HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_HIDE_ANIMATION_INIT, '');
       } else {
         Promise.resolve().then(() => {
@@ -142,32 +146,32 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       }
     }
     if (changes['isDisabled']) {
-      this.disabled = !!BooleanUtil.init(this.isDisabled);
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);
+      this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabledVal);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabledVal ? '' : null);
     }
     if (changes['isError']) {
-      this.error = !!BooleanUtil.init(this.isError);
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-error', this.error);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.error ? '' : null);
+      this.isErrorVal = !!BooleanUtil.init(this.isError);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-error', this.isErrorVal);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isErrorVal ? '' : null);
     }
     if (changes['isFilled']) {
-      this.filled = !!BooleanUtil.init(this.isFilled);
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-filled', this.filled);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.filled ? '' : null);
+      this.isFilledVal = !!BooleanUtil.init(this.isFilled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-filled', this.isFilledVal);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilledVal ? '' : null);
     }
 
     if (changes['isLabelShrink'] || (changes['config'] && this.isLabelShrink == null && this.currConfig.isLabelShrink != null)) {
-      this.labelShrink = BooleanUtil.init(this.isLabelShrink) ?? !!this.currConfig.isLabelShrink;
-      this.settingLabelShrink(this.labelShrink, this.renderer, this.hostRef);
+      this.isLabelShrinkVal = BooleanUtil.init(this.isLabelShrink) ?? !!this.currConfig.isLabelShrink;
+      this.settingLabelShrink(this.isLabelShrinkVal, this.renderer, this.hostRef);
     }
     if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
-      this.noAnimation = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
-      this.settingNoAnimation(this.noAnimation, this.renderer, this.hostRef);
+      this.isNoAnimationVal = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
+      this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
     if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
-      this.required = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
-      this.settingRequired(this.required, this.renderer, this.hostRef);
+      this.isRequiredVal = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
+      this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
 
     if (changes['label'] || changes['isRequired']) {
@@ -193,17 +197,17 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       this.updateCssParams(this.exteriorVal, this.sizeVal, this.getLineHeight(), this.cssElementRef);
     }
 
-    if (this.labelShrink == null) {
-      this.labelShrink = !!this.currConfig.isLabelShrink;
-      this.settingLabelShrink(this.labelShrink, this.renderer, this.hostRef);
+    if (this.isLabelShrinkVal == null) {
+      this.isLabelShrinkVal = !!this.currConfig.isLabelShrink;
+      this.settingLabelShrink(this.isLabelShrinkVal, this.renderer, this.hostRef);
     }
-    if (this.noAnimation == null) {
-      this.noAnimation = !!this.currConfig.isNoAnimation;
-      this.settingNoAnimation(this.noAnimation, this.renderer, this.hostRef);
+    if (this.isNoAnimationVal == null) {
+      this.isNoAnimationVal = !!this.currConfig.isNoAnimation;
+      this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
-    if (this.required == null) {
-      this.required = !!this.currConfig.isRequired;
-      this.settingRequired(this.required, this.renderer, this.hostRef);
+    if (this.isRequiredVal == null) {
+      this.isRequiredVal = !!this.currConfig.isRequired;
+      this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
   }
 
@@ -244,7 +248,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TRN2_Y, (this.cssTranslateY2 = css['translateY2'] || null));
   }
 
-  private settingExterior(exteriorVal: GlnFrameExterior | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingExterior(exteriorVal: GlnFrameExterior | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     const isOutlined = GlnFrameExteriorUtil.isOutlined(exteriorVal);
     HtmlElemUtil.setClass(renderer, elem, 'glnfr-outlined', isOutlined);
     HtmlElemUtil.setAttr(renderer, elem, 'ext-o', isOutlined ? '' : null);
@@ -256,15 +260,15 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     HtmlElemUtil.setAttr(renderer, elem, 'ext-s', isStandard ? '' : null);
     HtmlElemUtil.setClass(renderer, elem, 'glnfr-bottom-frame', isStandard || isUnderline);
   }
-  private settingLabelShrink(labelShrink: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingLabelShrink(labelShrink: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'glnfr-shrink', !!labelShrink);
     HtmlElemUtil.setAttr(renderer, elem, 'shr', labelShrink ? '' : null);
   }
-  private settingNoAnimation(noAnimation: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingNoAnimation(noAnimation: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-no-animation', !!noAnimation);
     HtmlElemUtil.setAttr(renderer, elem, 'noani', noAnimation ? '' : null);
   }
-  private settingRequired(required: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingRequired(required: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'glnfr-required', !!required);
     HtmlElemUtil.setAttr(renderer, elem, 'req', required ? '' : null);
   }
