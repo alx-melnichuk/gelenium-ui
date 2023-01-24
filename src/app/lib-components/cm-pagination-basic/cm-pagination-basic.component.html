@@ -23,8 +23,27 @@ import &#123; GlnPaginationModule &#125; from 'gelenium-ui';</pre>
       isShowFirst
       isShowLast
       [count]="10"
-      [page]="6"
-      [size]="32"></gln-pagination>
+      [page]="page01a"
+      [size]="32"
+      (changePage)="page01a = $event">
+    </gln-pagination>
+  </div>
+
+</div>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <gln-pagination class="demo"
+      isShowFirst
+      isShowLast
+      [count]="10"
+      [page]="page02a"
+      [size]="32"
+      exterior="outlined"
+      (changePage)="page02a = $event">
+    </gln-pagination>
   </div>
 
 </div>

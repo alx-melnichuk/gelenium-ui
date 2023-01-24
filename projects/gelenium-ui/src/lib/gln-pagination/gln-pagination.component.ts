@@ -2,12 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  EventEmitter,
   Inject,
   InjectionToken,
   Input,
   OnChanges,
   OnInit,
   Optional,
+  Output,
   Renderer2,
   SimpleChanges,
   ViewEncapsulation,
@@ -17,9 +19,12 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { GlnPaginationConfig } from './gln-pagination-config.interface';
 
 const SIZE: { [key: string]: number } = { short: 38, small: 44, middle: 50, wide: 56, large: 62, huge: 68 };
+const EXTERIOR: { [key: string]: string } = { text: 'text', outlined: 'outlined' };
 
 const CSS_PROP_SIZE = '--glnpg--size';
 const CSS_PROP_BORDER_RADIUS = '--glnbt-br-rd';
+const COUNT_BORDER = 1;
+const COUNT_NEARBY = 1;
 
 export const GLN_PAGINATION_CONFIG = new InjectionToken<GlnPaginationConfig>('GLN_PAGINATION_CONFIG');
 
@@ -43,8 +48,8 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   public countBorder: number = 1; // boundaryCount
   @Input() // The number of always visible pages before and after the current page.
   public countNearby: number = 1; // siblingCount
-  @Input() // Current page number, initial value.
-  public page: number = 1;
+  @Input()
+  public exterior: string | null | undefined;
   @Input()
   public isHideNext: string | boolean | null | undefined;
   @Input()
@@ -54,9 +59,18 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   @Input()
   public isShowLast: string | boolean | null | undefined;
   @Input()
+  public page: number = 1;
+  @Input()
   public size: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
 
+  @Output()
+  readonly changePage: EventEmitter<number> = new EventEmitter();
+
   public currConfig: GlnPaginationConfig;
+  public countBorderVal: number | null = null; // Binding attribute "countBorder".
+  public countNearbyVal: number | null = null; // Binding attribute "countNearby".
+  public exteriorVal: string | null = null; // Binding attribute "exterior".
+  public exteriorActive: string = 'contained';
   public isHideNextVal: boolean | null = null; // Binding attribute "isHideNext".
   public isHidePrevVal: boolean | null = null; // Binding attribute "isHidePrev".
   public isShowFirstVal: boolean | null = null; // Binding attribute "isShowFirst".
@@ -77,7 +91,23 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
+    let isPageBuffer: boolean = !!changes['count'] || !!changes['page'];
+    if (changes['countBorder'] || (changes['config'] && this.countBorderVal == null && this.currConfig.countBorder != null)) {
+      this.countBorderVal = this.countBorder || this.currConfig.countBorder || COUNT_BORDER;
+      isPageBuffer = true;
+    }
+    if (changes['countNearby'] || (changes['config'] && this.countNearbyVal == null && this.currConfig.countNearby != null)) {
+      this.countNearbyVal = this.countNearby || this.currConfig.countNearby || COUNT_NEARBY;
+      isPageBuffer = true;
+    }
+    if (isPageBuffer) {
+      this.updatePageBuffer(this.count, this.page, this.countNearbyVal, this.countBorderVal);
+    }
 
+    if (changes['exterior'] || (changes['config'] && this.exteriorVal == null && this.currConfig.exterior != null)) {
+      this.exteriorVal = EXTERIOR[this.exterior || this.currConfig.exterior || ''] || EXTERIOR['text'];
+      this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
+    }
     if (changes['isHideNext'] || (changes['config'] && this.isHideNextVal == null && this.currConfig.isHideNext != null)) {
       this.isHideNextVal = !!(BooleanUtil.init(this.isHideNext) ?? (this.currConfig.isHideNext || null));
       this.settingHideNext(this.isHideNextVal, this.renderer, this.hostRef);
@@ -106,6 +136,23 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
+    let isPageBuffer: boolean = false;
+    if (this.countBorderVal == null) {
+      this.countBorderVal = this.currConfig.countBorder || COUNT_BORDER;
+      isPageBuffer = true;
+    }
+    if (this.countNearbyVal == null) {
+      this.countNearbyVal = this.currConfig.countNearby || COUNT_BORDER;
+      isPageBuffer = true;
+    }
+    if (isPageBuffer || this.pageBuffer.length === 0) {
+      this.updatePageBuffer(this.count, this.page, this.countNearbyVal, this.countBorderVal);
+    }
+
+    if (this.exteriorVal == null) {
+      this.exteriorVal = EXTERIOR[this.currConfig.exterior || ''] || EXTERIOR['text'];
+      this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
+    }
     if (this.isHideNextVal == null) {
       this.isHideNextVal = !!(this.currConfig.isHideNext || null);
       this.settingHideNext(this.isHideNextVal, this.renderer, this.hostRef);
@@ -141,7 +188,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     // const data = this.getPageBuffer(this.count, 6, 0 /*countNearby*/, 2 /*countBorder*/); // [1, 2, -1, 6, -1, 9, 10]
     // const data = this.getPageBuffer(this.count, 6, 1 /*countNearby*/, 2 /*countBorder*/); // [1, 2, -1, 5, 6, 7, 8, 9, 10]
 
-    this.pageBuffer = this.getPageBuffer(this.count, this.page, this.countNearby, this.countBorder);
+    this.updatePageBuffer(this.count, this.page, this.countNearby, this.countBorder);
     // console.log(`pageBuffer=`, this.pageBuffer); // #
   }
 
@@ -151,12 +198,18 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     return index;
   }
 
+  public doClickPage(itemPage: number | null): void {
+    if (itemPage != null && 0 < itemPage && itemPage <= this.count) {
+      this.changePage.emit(itemPage);
+    }
+  }
+
   // ** Private methods **
 
-  private getPageBuffer(count: number, page: number, countNearby: number, countBorder: number): number[] {
-    const result: number[] = [];
-    if (count > 0 && page > 0 && countNearby > -1 && countBorder > -1) {
-      result.length = 3 + countBorder * 2 + countNearby * 2;
+  private updatePageBuffer(count: number, page: number, countNearby: number | null, countBorder: number | null): void {
+    const pageBuffer: number[] = [];
+    if (count > 0 && page > 0 && countNearby != null && countNearby > -1 && countBorder != null && countBorder > -1) {
+      pageBuffer.length = 3 + countBorder * 2 + countNearby * 2;
 
       const pageLeft: number = countBorder + 1 + countNearby + 1;
       const pageRight: number = count - pageLeft;
@@ -168,27 +221,27 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       let idxPage: number = 1;
       let len1: number = isPageLeft ? pageLeft + 1 : countBorder;
       while (idx < len1) {
-        result[idx++] = idxPage++;
+        pageBuffer[idx++] = idxPage++;
       }
       if (!isPageLeft) {
-        result[idx++] = -1;
+        pageBuffer[idx++] = -1;
       }
       if (!isPageLeft && !isPageRight) {
         idxPage = page - countNearby;
         const len2: number = idx + 1 + 2 * countNearby;
         while (idx < len2) {
-          result[idx++] = idxPage++;
+          pageBuffer[idx++] = idxPage++;
         }
       }
       if (!isPageRight) {
-        result[idx++] = -1;
+        pageBuffer[idx++] = -1;
       }
       idxPage = isPageRight ? pageRight : count - countBorder + 1;
-      while (idx < result.length) {
-        result[idx++] = idxPage++;
+      while (idx < pageBuffer.length) {
+        pageBuffer[idx++] = idxPage++;
       }
     }
-    return result;
+    this.pageBuffer = pageBuffer;
   }
 
   private converSize(size: string, defaultValue: number): number {
@@ -205,21 +258,24 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, (borderRadius > 0 ? borderRadius.toString() : null)?.concat('px'));
   }
 
+  private settingExterior(exterior: string, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    if (!!exterior) {
+      HtmlElemUtil.setClass(renderer, elem, 'glnpg-' + exterior, true);
+      HtmlElemUtil.setAttr(renderer, elem, 'ext-' + exterior[0], '');
+    }
+  }
   private settingHideNext(isHideNextVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'glnpg-hide-next', !!isHideNextVal);
     HtmlElemUtil.setAttr(renderer, elem, 'nex', isHideNextVal ? '' : null);
   }
-
   private settingHidePrev(isHidePrevVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'glnpg-hide-prev', !!isHidePrevVal);
     HtmlElemUtil.setAttr(renderer, elem, 'pre', isHidePrevVal ? '' : null);
   }
-
   private settingShowFirst(isShowFirstVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'glnpg-show-first', !!isShowFirstVal);
     HtmlElemUtil.setAttr(renderer, elem, 'fir', isShowFirstVal ? '' : null);
   }
-
   private settingShowLast(isShowLastVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'glnpg-show-last', !!isShowLastVal);
     HtmlElemUtil.setAttr(renderer, elem, 'las', isShowLastVal ? '' : null);

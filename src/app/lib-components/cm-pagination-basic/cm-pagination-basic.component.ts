@@ -23,6 +23,8 @@ export class CmPaginationBasicComponent {
   public urlCmPagination = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_PAGINATION');
 
   // Page: "Basic" 01
+  public page01a: number = 1;
+  public page02a: number = 1;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

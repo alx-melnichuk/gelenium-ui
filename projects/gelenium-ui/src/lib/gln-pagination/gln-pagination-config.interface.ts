@@ -1,4 +1,9 @@
 export interface GlnPaginationConfig {
+  // The number of always visible pages at the beginning and at the end.
+  countBorder?: number | undefined;
+  // The number of always visible pages before and after the current page.
+  countNearby?: number | undefined;
+  exterior?: string | undefined;
   isHideNext?: boolean | undefined;
   isHidePrev?: boolean | undefined;
   isShowFirst?: boolean | undefined;

@@ -1,4 +1,3 @@
-<p>gln-pagination works!</p>
 <nav glnpg-nav
   aria-label="pagination navigation"
   class="gln-pagination-nav">
@@ -7,8 +6,10 @@
       <gln-button glnpg-size
         glnpg-icon
         class="gln-pagination-btn glnpg-btn-first"
-        exterior="outlined"
-        [size]="sizeVal">
+        [isDisabled]="page == 1"
+        [exterior]="exteriorVal"
+        [size]="sizeVal"
+        (click)="doClickPage(1)">
         &ZeroWidthSpace;
         <svg glnpg-svg
           class="gln-pagination-icon glnpg-icon-first"
@@ -19,7 +20,24 @@
         </svg>
       </gln-button>
     </li>
-
+    <li *ngIf="!isHidePrevVal">
+      <gln-button glnpg-size
+        glnpg-icon
+        class="gln-pagination-btn glnpg-btn-prev"
+        [isDisabled]="page == 1"
+        [exterior]="exteriorVal"
+        [size]="sizeVal"
+        (click)="doClickPage(page - 1)">
+        &ZeroWidthSpace;
+        <svg glnpg-svg
+          class="gln-pagination-icon glnpg-icon-prev"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+        </svg>
+      </gln-button>
+    </li>
     <li *ngFor="let item of pageBuffer; trackBy: trackByIndex;">
       <ng-container *ngIf="item == -1; else elseBlockPage">
         <div glnpg-size
@@ -32,19 +50,39 @@
         <gln-button glnpg-size
           glnpg-btn
           [ngClass]="['gln-pagination-btn', 'gln-pagination-page', (page === item ? 'gln-selected' : '')]"
-          exterior="outlined"
-          [size]="sizeVal">
+          [exterior]="page != item ? exteriorVal : exteriorActive"
+          [size]="sizeVal"
+          (click)="doClickPage(item)">
           {{ item }}
         </gln-button>
       </ng-template>
     </li>
-
+    <li *ngIf="!isHideNextVal">
+      <gln-button glnpg-size
+        glnpg-icon
+        class="gln-pagination-btn glnpg-btn-next"
+        [isDisabled]="page == count"
+        [exterior]="exteriorVal"
+        [size]="sizeVal"
+        (click)="doClickPage(page + 1)">
+        &ZeroWidthSpace;
+        <svg glnpg-svg
+          class="gln-pagination-icon glnpg-icon-next"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+        </svg>
+      </gln-button>
+    </li>
     <li *ngIf="isShowLastVal">
       <gln-button glnpg-size
         glnpg-icon
         class="gln-pagination-btn glnpg-btn-last"
-        exterior="outlined"
-        [size]="sizeVal">
+        [isDisabled]="page == count"
+        [exterior]="exteriorVal"
+        [size]="sizeVal"
+        (click)="doClickPage(count)">
         &ZeroWidthSpace;
         <svg glnpg-svg
           class="gln-pagination-icon glnpg-icon-last"
@@ -55,6 +93,5 @@
         </svg>
       </gln-button>
     </li>
-
   </ul>
 </nav>
