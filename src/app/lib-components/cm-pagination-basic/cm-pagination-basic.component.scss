@@ -4,5 +4,18 @@ app-cm-pagination-basic {
   display: block;
 
   // Page: "Basic" 01
+  .pgb-elem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   
+  // Page: "Attributes" 02
+  .pga-elem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

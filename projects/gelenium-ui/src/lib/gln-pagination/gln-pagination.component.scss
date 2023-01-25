@@ -3,6 +3,16 @@
 @import '../_styles/mx-display-flex.scss';
 
 gln-pagination {
+
+  --demo01: rgba(0, 0, 0, 0.04);
+  --shem01: hsla(250, 2%, 20%, 0.04);
+
+  --demo02: rgba(0, 0, 0, 0.08);
+  --shem02: hsla(250, 2%, 20%, 0.08);
+
+  --demo03: rgba(0, 0, 0, 0.12);
+  --shem03: hsla(250, 2%, 20%, 0.12);
+
   display: block;
 
   // Block "<ul glnpg-ul>"
@@ -44,7 +54,8 @@ gln-pagination {
   }
 
   .selected {
-    background-color: rgba(0, 0, 0, 0.08);
+    // background-color: rgba(0, 0, 0, 0.08);
+    background-color: hsla(var(--gln-default-h), var(--gln-default-s), 50%, 0.2); // rgba(0, 0, 0, 0.12);
   }
   .focusVisible {
     background-color: rgba(0, 0, 0, 0.12);
