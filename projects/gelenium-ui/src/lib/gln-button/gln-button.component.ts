@@ -84,11 +84,11 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   public linkElement: GlnLinkDirective | null = null;
 
   public currConfig: GlnButtonConfig;
-  public cssBorderRadius: string | null = null;
-  public cssPaddingBottom: string | null = null;
-  public cssPaddingLeft: string | null = null;
-  public cssPaddingRight: string | null = null;
-  public cssPaddingTop: string | null = null;
+  public cssBorderRadius: number | null = null;
+  public cssPaddingBottom: number | null = null;
+  public cssPaddingLeft: number | null = null;
+  public cssPaddingRight: number | null = null;
+  public cssPaddingTop: number | null = null;
   public exteriorVal: GlnButtonExterior | null = null; // Binding attribute "exterior".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isFocused = false;
@@ -258,12 +258,18 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       }
     }
 
-    this.cssBorderRadius = borderRadius?.toString() ?? null;
-    HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, this.cssBorderRadius?.concat('px') || null);
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_LEFT, (this.cssPaddingLeft = (paddingLeft?.toString() ?? null)?.concat('px') || null));
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_RIGHT, (this.cssPaddingRight = this.cssPaddingLeft));
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TOP, (this.cssPaddingTop = (paddingTop?.toString() ?? null)?.concat('px') || null));
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_BOTTOM, (this.cssPaddingBottom = this.cssPaddingTop));
+    this.cssBorderRadius = borderRadius;
+    HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, this.cssBorderRadius?.toString().concat('px') || null);
+
+    this.cssPaddingLeft = paddingLeft != null ? paddingLeft - 0.5 : null;
+    this.cssPaddingRight = paddingLeft != null ? paddingLeft + 0.5 : null;
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_LEFT, this.cssPaddingLeft?.toString().concat('px') || null);
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_RIGHT, this.cssPaddingRight?.toString().concat('px') || null);
+
+    this.cssPaddingTop = paddingTop != null ? paddingTop + 0.5 : null;
+    this.cssPaddingBottom = paddingTop != null ? paddingTop - 0.5 : null;
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TOP, this.cssPaddingTop?.toString().concat('px') || null);
+    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_BOTTOM, this.cssPaddingBottom?.toString().concat('px') || null);
   }
 
   private setCssSize(size: number, elem: ElementRef<HTMLElement>): void {
