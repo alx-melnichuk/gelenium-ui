@@ -37,6 +37,7 @@ export class CmPaginationBasicComponent {
   public page02b: number = 1;
   public page02c: number = 1;
   public page02d: number = 1;
+  public page02e: number = 1;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

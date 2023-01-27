@@ -13,6 +13,14 @@ gln-pagination {
   --demo03: rgba(0, 0, 0, 0.12);
   --shem03: hsla(250, 2%, 20%, 0.12);
 
+  --glnpg--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnpg--default-s: var(--glncl-default-s, var(--gln-default-s));
+  --glnpg--default-l: var(--glncl-default-l, var(--gln-default-l));
+
+  // --glnpg--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
+  // --glnpg--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
+  // --glnpg--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
+
   display: block;
 
   // Block "<ul glnpg-ul>"
@@ -29,20 +37,24 @@ gln-pagination {
   // Block "<gln-button glnpg-size>"
   [glnpg-size] {
     margin: 0 3px;
-    &[glnpg-icon] {
-      --glnbt-pd-lf: 0.35825em;
-      --glnbt-pd-rg: 0.35825em;
-    }
-    &[glnpg-btn] {
-      --glnbt-pd-lf: 0.428em; // 6px;
-      --glnbt-pd-rg: 0.5em; // 7px;
-    }
-    &[glnpg-ellipsis] {
-      min-width: var(--glnpg--size, 2em); // 32px;
-      text-align: center;
-      box-sizing: border-box;
-    }
   }
+  [glnpg-icon] {
+    --glnbt-pd-lf: 0.35825em;
+    --glnbt-pd-rg: 0.35825em;
+  }
+  [glnpg-btn] {
+    --glnbt-pd-lf: 0.428em; // 6px;
+    --glnbt-pd-rg: 0.5em; // 7px;
+    // #&[sel] {
+    // #  --glnbt-def-bg-cl: hsla(250, 2%, 20%, 0.08);
+    // #}
+  }
+  [glnpg-ellipsis] {
+    min-width: var(--glnpg--size, 2em); // 32px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
   // Block "<svg glnpg-svg>"
   [glnpg-svg] {
     display: inline-block;
@@ -53,10 +65,49 @@ gln-pagination {
     user-select: none;
   }
 
-  .selected {
-    // background-color: rgba(0, 0, 0, 0.08);
-    background-color: hsla(var(--gln-default-h), var(--gln-default-s), 50%, 0.2); // rgba(0, 0, 0, 0.12);
+  // Block "<gln-button>"
+
+
+  // &[ext-o] {
+  //   --glnbt--lb-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 50%);
+  //   --glnbt--br-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 50%);
+  //   --glnbt--bg-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 95%);
+
+  //   --glnbt--lb-cl-dis: hsl(var(--glnbt---dis-h), var(--glnbt---dis-s), 65%);
+  //   --glnbt--br-cl-dis: hsl(var(--glnbt---dis-h), var(--glnbt---dis-s), 75%);
+  // }
+
+  gln-button[ext-o] {
+    // --glnbt-def-lb-cl: 0; // var(--glnbt--lb-cl-def));--glnbt--lb-cl-def: hsl(var(--glnbt---def-h), var(--glnbt---def-s), 50%);
+    --glnbt-def-lb-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.87); //++
+    // --glnbt-def-br-cl: 0; // var(--glnbt--br-cl-def)); --glnbt--br-cl-def: hsl(var(--glnbt---def-h), var(--glnbt---def-s), 70%);
+    --glnbt-def-br-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.23); //++
+    // --glnbt-def-bg-cl: 0; // var(--glnbt--bg-cl-def));
+
+    --glnbt-hov-lb-cl: var(--glnbt-def-lb-cl); // ++
+    --glnbt-hov-br-cl: var(--glnbt-def-br-cl); // ++
+    // --glnbt-hov-bg-cl: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), 95%);
+    --glnbt-hov-bg-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.04); //++
+
+    // --glnbt-dis-lb-cl: 0; // var(--glnbt--lb-cl-dis));
+    // --glnbt-dis-br-cl: hsl(var(--glnbt--default-h), var(--glnbt--default-s), 75%);
+    --glnbt-dis-br-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.15); // ++ 0.23) opacity:0.38
+    // --glnbt-dis-bg-cl: 0; // var(--glnbt--bg-cl-dis));
+    // }
+    --glnbt-ripple-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.25);
+
+    &[sel] {
+      // &:not([dis])>[glnbt-btn] {
+        --glnbt-def-bg-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.08);
+        --glnbt-hov-bg-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.12); //++
+      // }
+      // &[dis]>[glnbt-btn] {
+        --glnbt-dis-bg-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.08);
+        --glnbt-dis-br-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.12); //
+      // }
+    }
   }
+
   .focusVisible {
     background-color: rgba(0, 0, 0, 0.12);
   }

@@ -19,7 +19,7 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { GlnPaginationConfig } from './gln-pagination-config.interface';
 
 const SIZE: { [key: string]: number } = { short: 38, small: 44, middle: 50, wide: 56, large: 62, huge: 68 };
-const EXTERIOR: { [key: string]: string } = { text: 'text', outlined: 'outlined' };
+const EXTERIOR: { [key: string]: string } = { text: 'text', outlined: 'outlined', contained: 'contained' };
 
 const CSS_PROP_SIZE = '--glnpg--size';
 const CSS_PROP_BORDER_RADIUS = '--glnbt-br-rd';
@@ -51,6 +51,8 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   @Input()
   public exterior: string | null | undefined;
   @Input()
+  public isDisabled: string | boolean | null | undefined;
+  @Input()
   public isHideNext: string | boolean | null | undefined;
   @Input()
   public isHidePrev: string | boolean | null | undefined;
@@ -70,7 +72,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   public countBorderVal: number | null = null; // Binding attribute "countBorder".
   public countNearbyVal: number | null = null; // Binding attribute "countNearby".
   public exteriorVal: string | null = null; // Binding attribute "exterior".
-  public exteriorActive: string = 'contained';
+  public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isHideNextVal: boolean | null = null; // Binding attribute "isHideNext".
   public isHidePrevVal: boolean | null = null; // Binding attribute "isHidePrev".
   public isShowFirstVal: boolean | null = null; // Binding attribute "isShowFirst".
@@ -107,6 +109,11 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     if (changes['exterior'] || (changes['config'] && this.exteriorVal == null && this.currConfig.exterior != null)) {
       this.exteriorVal = EXTERIOR[this.exterior || this.currConfig.exterior || ''] || EXTERIOR['text'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
+    }
+    if (changes['isDisabled']) {
+      this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabledVal || false);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabledVal ? '' : null);
     }
     if (changes['isHideNext'] || (changes['config'] && this.isHideNextVal == null && this.currConfig.isHideNext != null)) {
       this.isHideNextVal = !!(BooleanUtil.init(this.isHideNext) ?? (this.currConfig.isHideNext || null));
@@ -199,7 +206,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   }
 
   public doClickPage(itemPage: number | null): void {
-    if (itemPage != null && 0 < itemPage && itemPage <= this.count) {
+    if (!this.isDisabledVal && itemPage != null && 0 < itemPage && itemPage <= this.count) {
       this.changePage.emit(itemPage);
     }
   }

@@ -6,8 +6,8 @@
       <gln-button glnpg-size
         glnpg-icon
         class="gln-pagination-btn glnpg-btn-first"
-        [isDisabled]="page == 1"
         [exterior]="exteriorVal"
+        [isDisabled]="isDisabledVal || page == 1"
         [size]="sizeVal"
         (click)="doClickPage(1)">
         &ZeroWidthSpace;
@@ -24,8 +24,8 @@
       <gln-button glnpg-size
         glnpg-icon
         class="gln-pagination-btn glnpg-btn-prev"
-        [isDisabled]="page == 1"
         [exterior]="exteriorVal"
+        [isDisabled]="isDisabledVal || page == 1"
         [size]="sizeVal"
         (click)="doClickPage(page - 1)">
         &ZeroWidthSpace;
@@ -49,8 +49,10 @@
       <ng-template #elseBlockPage>
         <gln-button glnpg-size
           glnpg-btn
+          [attr.sel]="page === item ? '' : null"
           [ngClass]="['gln-pagination-btn', 'gln-pagination-page', (page === item ? 'gln-selected' : '')]"
-          [exterior]="page != item ? exteriorVal : exteriorActive"
+          [exterior]="exteriorVal"
+          [isDisabled]="isDisabledVal"
           [size]="sizeVal"
           (click)="doClickPage(item)">
           {{ item }}
@@ -61,8 +63,8 @@
       <gln-button glnpg-size
         glnpg-icon
         class="gln-pagination-btn glnpg-btn-next"
-        [isDisabled]="page == count"
         [exterior]="exteriorVal"
+        [isDisabled]="isDisabledVal || page == count"
         [size]="sizeVal"
         (click)="doClickPage(page + 1)">
         &ZeroWidthSpace;
@@ -79,8 +81,8 @@
       <gln-button glnpg-size
         glnpg-icon
         class="gln-pagination-btn glnpg-btn-last"
-        [isDisabled]="page == count"
         [exterior]="exteriorVal"
+        [isDisabled]="isDisabledVal || page == count"
         [size]="sizeVal"
         (click)="doClickPage(count)">
         &ZeroWidthSpace;

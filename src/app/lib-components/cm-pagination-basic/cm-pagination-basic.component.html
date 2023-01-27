@@ -195,7 +195,23 @@ import &#123; GlnPaginationModule &#125; from 'gelenium-ui';</pre>
       </gln-pagination>
     </div>
 
-    <!-- isDisabled -->
+    <!--  -->
+
+    <div class="app-elem pga-elem">
+      <div>
+        <small>
+          <em>Attributes: isDisabled.</em>
+        </small>
+      </div>
+      <gln-pagination [page]="page02e"
+        [count]="10"
+        [size]="32"
+        [exterior]="exterior02b"
+        isDisabled
+        (changePage)="page02e = $event">
+      </gln-pagination>
+    </div>
+
 
   </div>
 
