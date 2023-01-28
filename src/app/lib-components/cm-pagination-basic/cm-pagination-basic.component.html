@@ -10,28 +10,31 @@
     <code><pre source="ts">
 import &#123; GlnPaginationModule &#125; from 'gelenium-ui';</pre>
   </code>
-    <p>
-      The GlnPagination component is designed to change the current page from the specified
-      range.
-    </p>
-    <span>For example:</span>
-    <code><pre source="html">
+    <ng-container *ngIf="false">
+
+      <p>
+        The GlnPagination component is designed to change the current page from the specified
+        range.
+      </p>
+      <span>For example:</span>
+      <code><pre source="html">
 &lt;<strong>gln-pagination</strong>
   [<i><strong>page</strong></i>]="page01"
   [<i><strong>count</strong></i>]="pageCount01"
   (<i><strong>changePage</strong></i>)="page01a=$event"&gt;
 &lt;<strong>/gln-pagination</strong>&gt;</pre></code>
-    <span>
-      The "page" current page number.<br />
-      The "count" - total number of pages.<br />
-      The "changePage" parameter is the page number change event.
-    </span>
+      <span>
+        The "page" current page number.<br />
+        The "count" - total number of pages.<br />
+        The "changePage" parameter is the page number change event.
+      </span>
+    </ng-container>
   </section>
 
 
   <div class="app-group">
 
-    <div class="app-elem pgb-elem">
+    <!-- <div class="app-elem pgb-elem">
       <div>
         <small>
           <em>Exterior: 'text'.</em>
@@ -41,6 +44,39 @@ import &#123; GlnPaginationModule &#125; from 'gelenium-ui';</pre>
         [count]="10"
         [size]="32"
         (changePage)="page01a = $event">
+      </gln-pagination>
+    </div> -->
+
+    <div class="app-elem pgb-elem">
+      <div>
+        <small>
+          <em>Exterior: 'outlined'.</em>
+        </small>
+      </div>
+      <gln-pagination [page]="page01b"
+        class="pgb-dark-grey"
+        [count]="10"
+        [size]="32"
+        [glnColor]="{ primary: 'dark-grey' }"
+        exterior="outlined"
+        (changePage)="page01b = $event">
+      </gln-pagination>
+    </div>
+
+    <div class="app-elem pgb-elem">
+      <div>
+        <small>
+          <em>Exterior: 'outlined'.</em>
+        </small>
+      </div>
+      <gln-pagination [page]="page01b"
+        class="pgb-dark-grey"
+        [count]="10"
+        [size]="32"
+        [glnColor]="{ primary: 'dark-grey' }"
+        isDisabled
+        exterior="outlined"
+        (changePage)="page01b = $event">
       </gln-pagination>
     </div>
 
@@ -53,7 +89,88 @@ import &#123; GlnPaginationModule &#125; from 'gelenium-ui';</pre>
       <gln-pagination [page]="page01b"
         [count]="10"
         [size]="32"
+        glnColor9="{ primary: 'primary' }"
         exterior="outlined"
+        (changePage)="page01b = $event">
+      </gln-pagination>
+    </div>
+
+    <div class="app-elem pgb-elem">
+      <div>
+        <small>
+          <em>Exterior: 'outlined'.</em>
+        </small>
+      </div>
+      <gln-pagination [page]="page01b"
+        [count]="10"
+        [size]="32"
+        glnColor9="{ primary: 'primary' }"
+        exterior="outlined"
+        isDisabled
+        (changePage)="page01b = $event">
+      </gln-pagination>
+    </div>
+
+    <div class="app-elem pgb-elem">
+      <div>
+        <small>
+          <em>Exterior: 'outlined'.</em>
+        </small>
+      </div>
+      <gln-pagination [page]="page01b"
+        class="pgb-dark-grey"
+        [count]="10"
+        [size]="32"
+        [glnColor]="{ primary: 'dark-grey' }"
+        exterior="text"
+        (changePage)="page01b = $event">
+      </gln-pagination>
+    </div>
+
+    <div class="app-elem pgb-elem">
+      <div>
+        <small>
+          <em>Exterior: 'outlined'.</em>
+        </small>
+      </div>
+      <gln-pagination [page]="page01b"
+        class="pgb-dark-grey"
+        [count]="10"
+        [size]="32"
+        [glnColor]="{ primary: 'dark-grey' }"
+        isDisabled
+        exterior="text"
+        (changePage)="page01b = $event">
+      </gln-pagination>
+    </div>
+
+    <div class="app-elem pgb-elem">
+      <div>
+        <small>
+          <em>Exterior: 'outlined'.</em>
+        </small>
+      </div>
+      <gln-pagination [page]="page01b"
+        [count]="10"
+        [size]="32"
+        glnColor9="{ primary: 'primary' }"
+        exterior="text"
+        (changePage)="page01b = $event">
+      </gln-pagination>
+    </div>
+
+    <div class="app-elem pgb-elem">
+      <div>
+        <small>
+          <em>Exterior: 'outlined'.</em>
+        </small>
+      </div>
+      <gln-pagination [page]="page01b"
+        [count]="10"
+        [size]="32"
+        glnColor9="{ primary: 'primary' }"
+        exterior="text"
+        isDisabled
         (changePage)="page01b = $event">
       </gln-pagination>
     </div>
@@ -65,7 +182,7 @@ import &#123; GlnPaginationModule &#125; from 'gelenium-ui';</pre>
 <br />
 
 <i id="Attributes">#</i>
-<ng-container *ngIf="true">
+<ng-container *ngIf="false">
   <section mr-vr>
     <h3 class="app-hover-link">
       Attributes.
@@ -218,7 +335,7 @@ import &#123; GlnPaginationModule &#125; from 'gelenium-ui';</pre>
 </ng-container>
 
 
-<ng-container *ngIf="true">
+<ng-container *ngIf="false">
   <section mr-vr
     id="attributes-supported02">
     <h4 class="app-hover-link">

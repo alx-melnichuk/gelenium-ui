@@ -10,6 +10,11 @@ app-cm-pagination-basic {
     flex-direction: column;
     align-items: center;
   }
+  .pgb-dark-grey { // "default" color: hsl(250, 5%, 20%);
+    --gln-dark-grey-h: 251;
+    --gln-dark-grey-s: 5%;
+    --gln-dark-grey-l: 20%;
+  }
 
   // Page: "Attributes" 02
   .pga-elem {
