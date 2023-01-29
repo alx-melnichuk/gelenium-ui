@@ -5,12 +5,15 @@
 gln-button {
   --glnbt--default-h: var(--glncl-default-h, var(--gln-default-h));
   --glnbt--default-s: var(--glncl-default-s, var(--gln-default-s));
+  --glnbt--default-l: var(--glncl-default-l, var(--gln-default-l));
 
   --glnbt--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
   --glnbt--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
+  --glnbt--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
 
   --glnbt--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
   --glnbt--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
+  --glnbt--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
 
   @include mxDisplayFlex();
   height: max-content;
@@ -92,13 +95,6 @@ gln-button {
     cursor: inherit;
   }
 
-  --glnbt---def-h: var(--glnbt--primary-h);
-  --glnbt---def-s: var(--glnbt--primary-s);
-  --glnbt---hov-h: var(--glnbt--primary-h);
-  --glnbt---hov-s: var(--glnbt--primary-s);
-  --glnbt---dis-h: var(--glnbt--default-h);
-  --glnbt---dis-s: var(--glnbt--default-s);
-
   // Exterior: "contained"
   // To block the display of a shadow for a button in the "Contained" mode, you must specify "--glnbt-elevation: none;".
   &[ext-c]:not([dis])>[glnbt-btn] {
@@ -113,14 +109,13 @@ gln-button {
     }
   }
   &[ext-c] {
-    --glnbt--lb-cl-def: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%);
-    --glnbt--bg-cl-def: hsl(var(--glnbt---def-h), var(--glnbt---def-s), 50%);
+    --glnbt--lb-cl-def: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), var(--glnbt--default-bg-l));
+    --glnbt--bg-cl-def: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l));
 
-    --glnbt--lb-cl-hov: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%);
-    --glnbt--bg-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 40%);
-  
-    --glnbt--lb-cl-dis: hsl(var(--glnbt---dis-h), var(--glnbt---dis-s), 65%);
-    --glnbt--bg-cl-dis: hsl(var(--glnbt---dis-h), var(--glnbt---dis-s), 90%);
+    --glnbt--lb-cl-hov: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), var(--glnbt--default-bg-l));
+    --glnbt--bg-cl-hov: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), calc(var(--glnbt--primary-l) - 10%));
+
+    --glnbt--bg-cl-dis: hsla(var(--glnbt--default-h), var(--glnbt--default-s), var(--glnbt--default-l), 0.12); // rgba(0, 0, 0, 0.12);
   }
 
   // Exterior: "outlined"
@@ -129,26 +124,23 @@ gln-button {
     border-style: solid;
   }
   &[ext-o] {
-    --glnbt--lb-cl-def: hsl(var(--glnbt---def-h), var(--glnbt---def-s), 50%);
-    --glnbt--br-cl-def: hsl(var(--glnbt---def-h), var(--glnbt---def-s), 70%);
+    --glnbt--lb-cl-def: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l));
+    --glnbt--br-cl-def: hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l), 0.75);
 
-    --glnbt--lb-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 50%);
-    --glnbt--br-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 50%);
-    --glnbt--bg-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 95%);
-  
-    --glnbt--lb-cl-dis: hsl(var(--glnbt---dis-h), var(--glnbt---dis-s), 65%);
-    --glnbt--br-cl-dis: hsl(var(--glnbt---dis-h), var(--glnbt---dis-s), 75%);
-  }
+    --glnbt--lb-cl-hov: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l));
+    --glnbt--br-cl-hov: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l));
+    --glnbt--bg-cl-hov: hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l), 0.10);
+
+    --glnbt--br-cl-dis: hsla(var(--glnbt--default-h), var(--glnbt--default-s), var(--glnbt--default-l), 0.25); // rgba(0, 0, 0, 0.12);
+    }
 
   // Exterior: "text"
   &[ext-t] {
-    --glnbt--lb-cl-def: hsl(var(--glnbt---def-h), var(--glnbt---def-s), 50%);
-    
-    --glnbt--lb-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 50%);
-    --glnbt--bg-cl-hov: hsl(var(--glnbt---hov-h), var(--glnbt---hov-s), 95%);
+    --glnbt--lb-cl-def: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l));
 
-    --glnbt--lb-cl-dis: hsl(var(--glnbt---dis-h), var(--glnbt---dis-s), 65%);
-  }
+    --glnbt--lb-cl-hov: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l));
+    --glnbt--bg-cl-hov: hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l), 0.10);
+    }
 
   // Definition of internal variables by element state.
   &:not([dis])>[glnbt-btn] {
@@ -170,7 +162,7 @@ gln-button {
     }
   } // The state with disabled.
   &[dis]>[glnbt-btn] {
-    --glnbt--label-cl: var(--glnbt-dis-lb-cl, var(--glnbt--lb-cl-dis));
+    --glnbt--label-cl: var(--glnbt-dis-lb-cl, hsla(var(--glnbt--default-h), var(--glnbt--default-s), var(--glnbt--default-l), 0.35));
     --glnbt--border-cl: var(--glnbt-dis-br-cl, var(--glnbt--br-cl-dis));
     --glnbt--bground-cl: var(--glnbt-dis-bg-cl, var(--glnbt--bg-cl-dis));
   }
