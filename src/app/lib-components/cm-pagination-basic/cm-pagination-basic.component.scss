@@ -10,6 +10,32 @@ app-cm-pagination-basic {
     flex-direction: column;
     align-items: center;
   }
+
+  // Page: "Attributes" 02
+  .pga-elem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  // Page: "Size" 03
+  .pgs-elem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  // Page: "Border" 04
+  .pgr-elem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  //
   .pgb-dark-grey1 {
     // "default" color: hsl(250, 5%, 20%);
     --gln-dark-grey1-h: 250;
@@ -21,13 +47,5 @@ app-cm-pagination-basic {
     --gln-dark-grey2-h: 0;
     --gln-dark-grey2-s: 0%;
     --gln-dark-grey2-l: 70%;
-  }
-
-  // Page: "Attributes" 02
-  .pga-elem {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 }
