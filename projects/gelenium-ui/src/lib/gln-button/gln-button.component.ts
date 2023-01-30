@@ -261,13 +261,13 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     this.cssBorderRadius = borderRadius;
     HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, this.cssBorderRadius?.toString().concat('px') || null);
 
-    this.cssPaddingLeft = paddingLeft != null ? paddingLeft - 0.5 : null;
-    this.cssPaddingRight = paddingLeft != null ? paddingLeft + 0.5 : null;
+    this.cssPaddingLeft = paddingLeft != null ? paddingLeft : null;
+    this.cssPaddingRight = paddingLeft != null ? paddingLeft : null;
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_LEFT, this.cssPaddingLeft?.toString().concat('px') || null);
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_RIGHT, this.cssPaddingRight?.toString().concat('px') || null);
 
-    this.cssPaddingTop = paddingTop != null ? paddingTop + 0.5 : null;
-    this.cssPaddingBottom = paddingTop != null ? paddingTop - 0.5 : null;
+    this.cssPaddingTop = paddingTop != null ? paddingTop : null;
+    this.cssPaddingBottom = paddingTop != null ? paddingTop : null;
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TOP, this.cssPaddingTop?.toString().concat('px') || null);
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_BOTTOM, this.cssPaddingBottom?.toString().concat('px') || null);
   }
