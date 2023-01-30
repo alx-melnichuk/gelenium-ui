@@ -198,6 +198,8 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   }
 
   public doClick(event: MouseEvent): void {
+    // https://github.com/angular/angular/issues/9587 "event.stopImmediatePropagation() called from listeners not working"
+    // Added Event.cancelBubble check to make sure there was no call to event.stopImmediatePropagation() in previous handlers.
     if (!!event && !event.cancelBubble && !this.isDisabledVal && this.linkElement && this.touchRipple) {
       this.touchRipple.touchRipple(event);
     }
