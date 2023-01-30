@@ -57,6 +57,8 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   @Input()
   public isHidePrev: string | boolean | null | undefined;
   @Input()
+  public isNoRound: string | boolean | null | undefined;
+  @Input()
   public isShowFirst: string | boolean | null | undefined;
   @Input()
   public isShowLast: string | boolean | null | undefined;
@@ -75,6 +77,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isHideNextVal: boolean | null = null; // Binding attribute "isHideNext".
   public isHidePrevVal: boolean | null = null; // Binding attribute "isHidePrev".
+  public isNoRoundVal: boolean | null = null; // Binding attribute "isNoRound".
   public isShowFirstVal: boolean | null = null; // Binding attribute "isShowFirst".
   public isShowLastVal: boolean | null = null; // Binding attribute "isShowLast".
   public pageBuffer: number[] = [];
@@ -93,6 +96,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
+    let isBorderRadius: boolean = false;
     let isPageBuffer: boolean = !!changes['count'] || !!changes['page'];
     if (changes['countBorder'] || (changes['config'] && this.countBorderVal == null && this.currConfig.countBorder != null)) {
       this.countBorderVal = this.countBorder || this.currConfig.countBorder || COUNT_BORDER;
@@ -123,6 +127,10 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       this.isHidePrevVal = !!(BooleanUtil.init(this.isHidePrev) ?? (this.currConfig.isHidePrev || null));
       this.settingHidePrev(this.isHidePrevVal, this.renderer, this.hostRef);
     }
+    if (changes['isNoRound'] || (changes['config'] && this.isNoRoundVal == null && this.currConfig.isNoRound != null)) {
+      this.isNoRoundVal = !!(BooleanUtil.init(this.isNoRound) ?? (this.currConfig.isNoRound || null));
+      isBorderRadius = true;
+    }
     if (changes['isShowFirst'] || (changes['config'] && this.isShowFirstVal == null && this.currConfig.isShowFirst != null)) {
       this.isShowFirstVal = !!(BooleanUtil.init(this.isShowFirst) ?? (this.currConfig.isShowFirst || null));
       this.settingShowFirst(this.isShowFirstVal, this.renderer, this.hostRef);
@@ -133,9 +141,12 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     }
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
-      this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
+      this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['short']);
       this.setCssSize(this.sizeVal, this.hostRef);
-      this.setCssBorderRadius(this.sizeVal, this.hostRef);
+      isBorderRadius = true;
+    }
+    if (isBorderRadius) {
+      this.setCssBorderRadius(this.sizeVal, this.isNoRoundVal, this.hostRef);
     }
   }
 
@@ -143,6 +154,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
+    let isBorderRadius: boolean = false;
     let isPageBuffer: boolean = false;
     if (this.countBorderVal == null) {
       this.countBorderVal = this.currConfig.countBorder || COUNT_BORDER;
@@ -168,6 +180,10 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       this.isHidePrevVal = !!(this.currConfig.isHidePrev || null);
       this.settingHidePrev(this.isHidePrevVal, this.renderer, this.hostRef);
     }
+    if (this.isNoRoundVal == null) {
+      this.isNoRoundVal = !!(this.currConfig.isNoRound || null);
+      isBorderRadius = true;
+    }
     if (this.isShowFirstVal == null) {
       this.isShowFirstVal = !!(this.currConfig.isShowFirst || null);
       this.settingShowFirst(this.isShowFirstVal, this.renderer, this.hostRef);
@@ -178,9 +194,13 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     }
     if (this.sizeVal == null) {
       const sizeStr: string = (this.currConfig.size || '').toString();
-      this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
+      this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['short']);
       this.setCssSize(this.sizeVal, this.hostRef);
-      this.setCssBorderRadius(this.sizeVal, this.hostRef);
+      isBorderRadius = true;
+    }
+
+    if (isBorderRadius) {
+      this.setCssBorderRadius(this.sizeVal, this.isNoRoundVal, this.hostRef);
     }
 
     // this.pageBuffer = new Array(3 + this.countBorder * 2 + this.countNearby * 2);
@@ -260,8 +280,8 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     HtmlElemUtil.setProperty(elem, CSS_PROP_SIZE, (size > 0 ? size.toString() : null)?.concat('px'));
   }
 
-  private setCssBorderRadius(size: number, elem: ElementRef<HTMLElement>): void {
-    const borderRadius: number = size > 0 ? Math.round((size / 2) * 100) / 100 : 0;
+  private setCssBorderRadius(size: number | null, isNoRound: boolean | null, elem: ElementRef<HTMLElement>): void {
+    const borderRadius: number = !isNoRound && size != null && size > 0 ? Math.round((size / 2) * 100) / 100 : 0;
     HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, (borderRadius > 0 ? borderRadius.toString() : null)?.concat('px'));
   }
 
