@@ -18,8 +18,9 @@ gln-button {
   @include mxDisplayFlex();
   height: max-content;
   font-weight: 500;
-  font-size: 0.875em; // 14px
-  line-height: 1.75;
+  // !This allows you to specify the exact 'font-size' value for a particular component.
+  // !font-size: 0.875em; // 14px
+  // !line-height: 1.75;
   outline: none;
 
   &[wdFull] {
