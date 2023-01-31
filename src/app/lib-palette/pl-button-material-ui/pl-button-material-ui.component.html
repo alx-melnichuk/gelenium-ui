@@ -27,18 +27,21 @@
 
 <div class="bm-items">
   <gln-button class="bm-mui"
-    [exterior]="exterior03a">
+    [exterior]="exterior03a"
+    size="short">
     <span>{{ getLabel(exterior03a) }}</span>
   </gln-button>
 
   <gln-button class="bm-mui"
     [exterior]="exterior03a"
+    size="short"
     isDisabled>
     <span>{{ getLabel(exterior03a) }}</span>
   </gln-button>
 
   <gln-button class="bm-mui"
-    [exterior]="exterior03a">
+    [exterior]="exterior03a"
+    size="short">
     <a [routerLink]="[routerLink]"
       fragment="material-ui1">
       <span>{{ getLabel(exterior03a) }} Link</span>
@@ -47,6 +50,7 @@
 
   <gln-button class="bm-mui"
     [exterior]="exterior03a"
+    size="short"
     isDisabled>
     <a [routerLink]="[routerLink]"
       fragment="material-ui1">
