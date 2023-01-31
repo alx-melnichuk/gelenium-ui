@@ -34,7 +34,7 @@
     class="gln-ornam-rg">
     <ng-content select="[gln-orn-rg]"></ng-content>
 
-    <div *ngIf="!getBoolean(isNoIcon) && !currConfig?.isNoIcon"
+    <div *ngIf="!isNoIconVal"
       glnsl-rhomb
       [attr.opn]="isPanelOpen ? '' : null"
       [attr.noAnm]="frameComp?.noAnimation ? '' : null"
