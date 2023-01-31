@@ -31,6 +31,7 @@ export class CmPaginationBasicComponent {
   public isShowAttributes = true;
   public isShowSize = true;
   public isShowBorder = true;
+  public isShowPalette = true;
 
   // Page: "Basic" 01
   public page01a: number = 1;
@@ -61,6 +62,24 @@ export class CmPaginationBasicComponent {
   public exterior04a = 'outlined';
   public page04a: number = 1;
   public page04b: number = 1;
+
+  // Page: "Palette"
+  public urlPlPagination = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_PAGINATION');
+
+  // Page: "PaletteBasic" 11
+  public exterior11a = 'outlined';
+  public page11a: number = 1;
+  public page11b: number = 1;
+
+  // Page: "PaletteBootstrap" 12
+  public exterior12a = 'outlined';
+  public page12a: number = 1;
+  public page12b: number = 1;
+
+  // Page: "PaletteMaterialUI" 13
+  public exterior13a = 'outlined';
+  public page13a: number = 1;
+  public page13b: number = 1;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

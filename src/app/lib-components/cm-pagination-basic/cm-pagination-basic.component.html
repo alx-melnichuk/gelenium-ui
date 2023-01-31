@@ -199,7 +199,7 @@ _<i id="Attributes">#A</i>
     (change)="exterior02a=$event.value">
     <mat-button-toggle [checked]="exterior02a==='outlined'"
       value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior02a==='underline'"
+    <mat-button-toggle [checked]="exterior02a==='text'"
       value="text">{{ labelText }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
@@ -435,7 +435,7 @@ _<i id="Size">#S</i>
     (change)="exterior03a=$event.value">
     <mat-button-toggle [checked]="exterior03a==='outlined'"
       value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior03a==='underline'"
+    <mat-button-toggle [checked]="exterior03a==='text'"
       value="text">{{ labelText }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
@@ -703,7 +703,7 @@ app-input &#123;
     (change)="exterior03b=$event.value">
     <mat-button-toggle [checked]="exterior03b==='outlined'"
       value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior03b==='underline'"
+    <mat-button-toggle [checked]="exterior03b==='text'"
       value="text">{{ labelText }}</mat-button-toggle>
   </mat-button-toggle-group>
 </section>
@@ -1009,7 +1009,342 @@ app-input &#123;
 </section>
 
 <hr br-nn />
+
+<!-- Page: "PaletteBasic" 11 -->
+_<i id="Basic">#PB</i>
+
+<section *ngIf="isShowPalette"
+  mr-vr>
+  <h4 class="app-hover-link">
+    Basic.
+    <a [href]="urlPlPagination + '#Basic'">#</a>
+  </h4>
+  <p>
+    The GlnPagination component has a default palette.
+  </p>
+</section>
+
+<section *ngIf="isShowPalette"
+  mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior11a"
+    (change)="exterior11a=$event.value">
+    <mat-button-toggle [checked]="exterior11a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior11a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div *ngIf="isShowPalette"
+  class="app-group">
+
+  <div class="app-elem pgpb-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page11a"
+      style="font-size: 16px;"
+      [count]="10"
+      [exterior]="exterior11a"
+      (changePage)="page11a = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpb-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior, isDisabled.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page11b"
+      style="font-size: 16px;"
+      [count]="10"
+      [exterior]="exterior11a"
+      isDisabled
+      (changePage)="page11b = $event">
+    </gln-pagination>
+  </div>
+
+</div>
+
+
+<section *ngIf="isShowPalette"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem pgpb-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page11a"
+      style="font-size: 16px;"
+      [count]="10"
+      [exterior]="exterior11a"
+      (changePage)="page11a = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpb-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior, isDisabled.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page11b"
+      style="font-size: 16px;"
+      [count]="10"
+      [exterior]="exterior11a"
+      isDisabled
+      (changePage)="page11b = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class PaginationComponent &#123;
+  public exterior11a = 'outlined';
+  public page11a: number = 1;
+  public page11b: number = 1;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .pgpb-elem &#123;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
 <hr br-nn />
+
+<!-- Page: "PaletteBootstrap" 12 -->
+_<i id="Bootstrap">#PB</i>
+
+<section *ngIf="isShowPalette"
+  mr-vr>
+  <h4 class="app-hover-link">
+    Like a Bootstrap.
+    <a [href]="urlPlPagination + '#Bootstrap'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnPagination in style as "Bootstrap".
+  </p>
+</section>
+
+
+<div *ngIf="isShowPalette"
+  class="app-group">
+
+  <div class="app-elem pgpb-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-bs"
+      [page]="page12a"
+      [count]="10"
+      exterior="outlined"
+      size="short"
+      isNoIcon
+      isNoRound
+      (changePage)="page12a = $event">
+      <span gln-orn-prev>Previous</span>
+      <span gln-orn-next>Next</span>
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpb-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior, isDisabled.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-bs"
+      [page]="page12b"
+      [count]="10"
+      exterior="outlined"
+      size="short"
+      isNoIcon
+      isNoRound
+      isDisabled
+      (changePage)="page12b = $event">
+      <span gln-orn-prev>Previous</span>
+      <span gln-orn-next>Next</span>
+    </gln-pagination>
+  </div>
+
+</div>
+
+
+
+
+<!-- Page: "PaletteMaterialUI" 13 -->
+_<i id="MaterialUI">#PM</i>
+
+<section *ngIf="isShowPalette"
+  mr-vr>
+  <h4 class="app-hover-link">
+    Like a Material-UI.
+    <a [href]="urlPlPagination + '#MaterialUI'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnPagination in style as "Material-UI".
+  </p>
+</section>
+
+
+<section *ngIf="isShowPalette"
+  mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior13a"
+    (change)="exterior13a=$event.value">
+    <mat-button-toggle [checked]="exterior13a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior13a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div *ngIf="isShowPalette"
+  class="app-group">
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui"
+      [page]="page13a"
+      [count]="10"
+      [exterior]="exterior13a"
+      [size]="32"
+      (changePage)="page13a = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior, isDisabled.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui"
+      [page]="page13b"
+      [count]="10"
+      [exterior]="exterior13a"
+      [size]="32"
+      isDisabled
+      (changePage)="page13b = $event">
+    </gln-pagination>
+  </div>
+
+</div>
+
+<!--
+<section *ngIf="isShowPalette"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class PaginationComponent &#123;
+  public exterior13a = 'outlined';
+  public page13a: number = 1;
+  public page13b: number = 1;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .pgpm-elem &#123;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+-->
+<hr br-nn />
+
+<!-- END -->
+
 
 
 <ng-container *ngIf="false">

@@ -30,18 +30,23 @@ gln-pagination {
 
   // Block "<gln-button glnpg-size>"
   [glnpg-size] {
+    --glnbt-uppercase: none;
     margin: 0 3px;
   }
-  [glnpg-icon] {
-    --glnbt-pd-lf: 0.35825em;
-    --glnbt-pd-rg: 0.35825em;
+
+  // Block "<gln-button>"
+  gln-button:not([glnpg-page]) {
+    --glnbt-pd-lf: 0;
+    --glnbt-pd-rg: 0;
   }
-  [glnpg-btn] {
-    --glnbt-pd-lf: 0.428em; // 6px;
-    --glnbt-pd-rg: 0.5em; // 7px;
-    // #&[sel] {
-    // #  --glnbt-def-bg-cl: hsla(250, 2%, 20%, 0.08);
-    // #}
+  gln-button[glnpg-page] {
+    --glnbt-pd-lf: 0.5em; // 8px;
+    --glnbt-pd-rg: 0.5em; // 8px;
+  }
+
+  [gln-orn-first],[gln-orn-last],[gln-orn-prev],[gln-orn-next] {
+    padding-left: var(--glnpg-orn-pd-lf, 1em);
+    padding-right: var(--glnpg-orn-pd-rg, 1em);
   }
   [glnpg-ellipsis] {
     min-width: var(--glnpg--size, 2em); // 32px;
