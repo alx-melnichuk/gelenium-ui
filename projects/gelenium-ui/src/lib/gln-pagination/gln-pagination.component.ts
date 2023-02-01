@@ -56,8 +56,6 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   public isHideNext: string | boolean | null | undefined;
   @Input()
   public isHidePrev: string | boolean | null | undefined;
-  @Input() // Disable the display of the icon.
-  public isNoIcon: string | boolean | null | undefined;
   @Input()
   public isNoRound: string | boolean | null | undefined;
   @Input()
@@ -79,7 +77,6 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isHideNextVal: boolean | null = null; // Binding attribute "isHideNext".
   public isHidePrevVal: boolean | null = null; // Binding attribute "isHidePrev".
-  public isNoIconVal: boolean | null = null; // Binding attribute "isNoIcon",
   public isNoRoundVal: boolean | null = null; // Binding attribute "isNoRound".
   public isShowFirstVal: boolean | null = null; // Binding attribute "isShowFirst".
   public isShowLastVal: boolean | null = null; // Binding attribute "isShowLast".
@@ -129,10 +126,6 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     if (changes['isHidePrev'] || (changes['config'] && this.isHidePrevVal == null && this.currConfig.isHidePrev != null)) {
       this.isHidePrevVal = !!(BooleanUtil.init(this.isHidePrev) ?? (this.currConfig.isHidePrev || null));
       this.settingHidePrev(this.isHidePrevVal, this.renderer, this.hostRef);
-    }
-    if (changes['isNoIcon'] || (changes['config'] && this.isNoIconVal == null && this.currConfig.isNoIcon != null)) {
-      this.isNoIconVal = !!(BooleanUtil.init(this.isNoIcon) ?? (this.currConfig.isNoIcon || null));
-      this.settingNoIcon(this.isNoIconVal, this.renderer, this.hostRef);
     }
     if (changes['isNoRound'] || (changes['config'] && this.isNoRoundVal == null && this.currConfig.isNoRound != null)) {
       this.isNoRoundVal = !!(BooleanUtil.init(this.isNoRound) ?? (this.currConfig.isNoRound || null));
@@ -186,10 +179,6 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     if (this.isHidePrevVal == null) {
       this.isHidePrevVal = !!(this.currConfig.isHidePrev || null);
       this.settingHidePrev(this.isHidePrevVal, this.renderer, this.hostRef);
-    }
-    if (this.isNoIconVal == null) {
-      this.isNoIconVal = !!this.currConfig.isNoIcon;
-      this.settingNoIcon(this.isNoIconVal, this.renderer, this.hostRef);
     }
     if (this.isNoRoundVal == null) {
       this.isNoRoundVal = !!(this.currConfig.isNoRound || null);
@@ -307,10 +296,6 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   private settingHidePrev(isHidePrevVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'glnpg-hide-prev', !!isHidePrevVal);
     HtmlElemUtil.setAttr(renderer, elem, 'pre', isHidePrevVal ? '' : null);
-  }
-  private settingNoIcon(isNoIconVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setClass(renderer, elem, 'gln-no-icon', !!isNoIconVal);
-    HtmlElemUtil.setAttr(renderer, elem, 'noico', isNoIconVal ? '' : null);
   }
   private settingShowFirst(isShowFirstVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'glnpg-show-first', !!isShowFirstVal);
