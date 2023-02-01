@@ -44,10 +44,6 @@ gln-pagination {
     --glnbt-pd-rg: 0.5em; // 8px;
   }
 
-  [gln-orn-first],[gln-orn-last],[gln-orn-prev],[gln-orn-next] {
-    padding-left: var(--glnpg-orn-pd-lf, 1em);
-    padding-right: var(--glnpg-orn-pd-rg, 1em);
-  }
   [glnpg-ellipsis] {
     min-width: var(--glnpg--size, 2em); // 32px;
     text-align: center;
@@ -65,6 +61,21 @@ gln-pagination {
   }
 
   // Block "<gln-button>"
+  gln-button [glnbt-elem] {
+    &>[gln-orn-first]~svg {
+      display: none;
+    }
+    &>[gln-orn-last]~svg {
+      display: none;
+    }
+    &>[gln-orn-prev]~svg {
+      display: none;
+    }
+    &>[gln-orn-next]~svg {
+      display: none;
+    }
+  }
+
   gln-button {
     font-weight: 400;
     &[ext-o] {

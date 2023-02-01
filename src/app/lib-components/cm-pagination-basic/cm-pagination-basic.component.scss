@@ -31,6 +31,47 @@ app-cm-pagination-basic {
     flex-direction: column;
   }
 
+  // Page: "Ornaments" 05
+  .pgo-elem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .pgo-prev {
+    height: 24px;
+    fill: currentColor;
+  }
+  .pgo-next {
+    background-color: currentColor;
+    display: inline-block;
+    height: 24px;
+    mask: url("data:image/svg+xml;charset=utf8,"
+      + "<svg xmlns='http://www.w3.org/2000/svg' "
+      + " viewBox='0 0 24 24'>"
+      + "<path d='m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z'>"
+      + "</path>"
+      + "</svg>");
+    width: 24px;
+  }
+  .pgo-first {
+    height: 24px;
+    fill: currentColor;
+  }
+  .pgo-last {
+    background-color: currentColor;
+    display: inline-block;
+    height: 24px;
+    mask: url("data:image/svg+xml;charset=utf8,"
+      + "<svg xmlns='http://www.w3.org/2000/svg' "
+      + " viewBox='0 0 24 24'>"
+      + "<path d='M8 18a.987.987 0 0 1-.383-.076A1 1 0 0 1 7 17V7a1 1 0 0 1 "
+      + "1.707-.707l5 5a1 1 0 0 1 0 1.414l-5 5A1 1 0 0 1 8 18zm1-8.586v5.172"
+      + "L11.586 12zM16 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0v10a1 1 0 0 1-1 1z'>"
+      + "</path>"
+      + "</svg>");
+    width: 24px;
+  }
+
   // Page: "PaletteBasic" 11
   .pgpb-elem {
     width: 100%;
@@ -44,8 +85,12 @@ app-cm-pagination-basic {
     display: flex;
     flex-direction: column;
   }
-  .pgpm-bs {
+  .pgpb-bs {
     font-size: 16px;
+  }
+  .pgpb-pd {
+    padding-left: 1em;
+    padding-right: 1em;
   }
 
   // Page: "PaletteMaterialUI" 13

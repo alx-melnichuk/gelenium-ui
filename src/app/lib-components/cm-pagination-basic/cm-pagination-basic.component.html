@@ -1217,6 +1217,108 @@ app-input &#123;
 
 <hr br-nn />
 
+<!-- Page: "Ornaments" 05 -->
+_<i id="Ornaments">#PO</i>
+
+<section *ngIf="isShowOrnam"
+  mr-vr>
+  <h3 class="app-hover-link">
+    Ornaments.
+    <a [href]="urlCmPagination + '#Ornaments'">#</a>
+  </h3>
+  <p>
+    For the GlnPagination component, it is possible to display an ornament
+    (picture or text).
+    <br />
+    To display the ornament, you need to add a block inside "gln-pagination" with one
+    of the attributes: "gln-orn-first", "gln-orn-prev", "gln-orn-next", "gln-orn-last".
+  </p>
+  <span>
+    Example:
+  </span>
+  <code><pre source="html">
+&lt;gln-pagination&gt;
+  <i>&lt;div <strong>gln-orn-lf</strong>&gt;&lt;span&gt;left&lt;/span&gt;&lt;/div&gt;</i>
+  text
+  <i>&lt;div <strong>gln-orn-rg</strong>&gt;&lt;span&gt;right&lt;/span&gt;&lt;/div&gt;</i>
+&lt;/gln-pagination&gt;</pre></code>
+  <p>
+    For these blocks, you need to specify the value of the horizontal indents.
+  </p>
+</section>
+
+<section *ngIf="isShowOrnam"
+  mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior05a"
+    (change)="exterior05a=$event.value">
+    <mat-button-toggle [checked]="exterior05a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior05a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div *ngIf="isShowOrnam"
+  class="app-group">
+
+  <div class="app-elem pgo-elem">
+    <div>
+      <small>
+        <em>Ornaments: 'gln-orn-prev', 'gln-orn-next'.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page05a"
+      [count]="10"
+      [exterior]="exterior05a"
+      (changePage)="page05a = $event">
+      <svg gln-orn-prev
+        class="pgo-prev"
+        focusable="false"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24">
+        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+      </svg>
+      <span gln-orn-next
+        class="pgo-next"></span>
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgo-elem">
+    <div>
+      <small>
+        <em>Ornaments: 'gln-orn-first', 'gln-orn-last'.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page05b"
+      [count]="10"
+      [exterior]="exterior05a"
+      isHideNext
+      isHidePrev
+      isShowFirst
+      isShowLast
+      (changePage)="page05b = $event">
+      <svg gln-orn-first
+        class="pgo-first"
+        focusable="false"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24">
+        <path
+          d="M16.383 6.076a.994.994 0 0 0-1.09.217l-5 5a1 1 0 0 0 0 1.414l5 5A1 1 0 0 0 16 18a.987.987 0 0 0 .383-.076A1 1 0 0 0 17 17V7a1 1 0 0 0-.617-.924zM15 14.586 12.414 12 15 9.414zM8 6a1 1 0 0 0-1 1v10a1 1 0 0 0 2 0V7a1 1 0 0 0-1-1z">
+        </path>
+      </svg>
+      <span gln-orn-last
+        class="pgo-last">
+      </span>
+    </gln-pagination>
+  </div>
+
+</div>
+
+
+<hr br-nn />
+
 <!-- Page: "PaletteBasic" 11 -->
 _<i id="Basic">#PB</i>
 
@@ -1389,16 +1491,17 @@ _<i id="Bootstrap">#PB</i>
         <em>Attributes: count, page, exterior.</em>
       </small>
     </div>
-    <gln-pagination class="pgpm-bs"
+    <gln-pagination class="pgpb-bs"
       [page]="page12a"
       [count]="10"
       exterior="outlined"
       size="short"
-      isNoIcon
       isNoRound
       (changePage)="page12a = $event">
-      <span gln-orn-prev>Previous</span>
-      <span gln-orn-next>Next</span>
+      <span gln-orn-prev
+        class="pgpb-pd">Previous</span>
+      <span gln-orn-next
+        class="pgpb-pd">Next</span>
     </gln-pagination>
   </div>
 
@@ -1408,17 +1511,18 @@ _<i id="Bootstrap">#PB</i>
         <em>Attributes: count, page, exterior, isDisabled.</em>
       </small>
     </div>
-    <gln-pagination class="pgpm-bs"
+    <gln-pagination class="pgpb-bs"
       [page]="page12b"
       [count]="10"
       exterior="outlined"
       size="short"
-      isNoIcon
       isNoRound
       isDisabled
       (changePage)="page12b = $event">
-      <span gln-orn-prev>Previous</span>
-      <span gln-orn-next>Next</span>
+      <span gln-orn-prev
+        class="pgpb-pd">Previous</span>
+      <span gln-orn-next
+        class="pgpb-pd">Next</span>
     </gln-pagination>
   </div>
 

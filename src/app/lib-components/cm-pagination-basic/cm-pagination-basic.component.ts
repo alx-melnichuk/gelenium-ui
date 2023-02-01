@@ -32,6 +32,7 @@ export class CmPaginationBasicComponent {
   public isShowSize = true;
   public isShowBorder = true;
   public isShowPalette = true;
+  public isShowOrnam = true;
 
   // Page: "Basic" 01
   public page01a: number = 1;
@@ -67,6 +68,11 @@ export class CmPaginationBasicComponent {
   public exterior04a = 'outlined';
   public page04a: number = 1;
   public page04b: number = 1;
+
+  // Page: "Ornaments" 05
+  public exterior05a = 'outlined';
+  public page05a: number = 1;
+  public page05b: number = 1;
 
   // Page: "Palette"
   public urlPlPagination = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_PAGINATION');
