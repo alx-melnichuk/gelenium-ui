@@ -66,51 +66,52 @@ gln-pagination {
 
   // Block "<gln-button>"
   gln-button {
+    font-weight: 400;
     &[ext-o] {
       &:not([sel]) {
-        --glnbt-def-lb-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.95);
-        --glnbt-def-br-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.23);
+        --glnbt-def-lb-cl: var(--glnpg-def-lb-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.95));
+        --glnbt-def-br-cl: var(--glnpg-def-br-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.23));
 
-        --glnbt-hov-lb-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.95);
-        --glnbt-hov-br-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.3);
-        --glnbt-hov-bg-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.08);
+        --glnbt-hov-lb-cl: var(--glnpg-hov-lb-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.95));
+        --glnbt-hov-br-cl: var(--glnpg-hov-br-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.3));
+        --glnbt-hov-bg-cl: var(--glnpg-hov-bg-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.08));
 
-        --glnbt-ripple-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.38);
+        --glnbt-ripple-cl: var(--glnpg-ripple-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.38));
       }
       &[sel] {
-        --glnbt-def-lb-cl: hsla(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l), 0.95);
-        --glnbt-def-br-cl: hsla(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l), 0.4);
-        --glnbt-def-bg-cl: hsla(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l), 0.12);
+        --glnbt-def-lb-cl: var(--glnpg-sel-def-lb-cl, hsla(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l), 0.95));
+        --glnbt-def-br-cl: var(--glnpg-sel-def-br-cl, hsla(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l), 0.4));
+        --glnbt-def-bg-cl: var(--glnpg-sel-def-bg-cl, hsla(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l), 0.12));
 
-        --glnbt-hov-lb-cl: hsla(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l), 0.95);
-        --glnbt-hov-br-cl: hsla(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l), 0.3);
-        --glnbt-hov-bg-cl: hsla(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l), 0.24);
+        --glnbt-hov-lb-cl: var(--glnpg-sel-hov-lb-cl, hsla(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l), 0.95));
+        --glnbt-hov-br-cl: var(--glnpg-sel-hov-br-cl, hsla(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l), 0.3));
+        --glnbt-hov-bg-cl: var(--glnpg-sel-hov-bg-cl, hsla(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l), 0.24));
 
-        --glnbt-dis-bg-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.08);
+        --glnbt-dis-bg-cl: var(--glnpg-sel-dis-bg-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.08));
 
-        --glnbt-ripple-cl: hsla(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l), 0.38);
+        --glnbt-ripple-cl: var(--glnpg-sel-ripple-cl, hsla(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l), 0.38));
       }
-      --glnbt-dis-br-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.15);
+      --glnbt-dis-br-cl: var(--glnpg-dis-br-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.15));
     }
     &[ext-t] {
       &:not([sel]) {
-        --glnbt-def-lb-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.95);
+        --glnbt-def-lb-cl: var(--glnpg-def-lb-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.95));
 
-        --glnbt-hov-lb-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.95);
-        --glnbt-hov-bg-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.08);
+        --glnbt-hov-lb-cl: var(--glnpg-hov-lb-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.95));
+        --glnbt-hov-bg-cl: var(--glnpg-hov-bg-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.08));
 
-        --glnbt-ripple-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.38);
+        --glnbt-ripple-cl: var(--glnpg-ripple-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.38));
       }
       &[sel] {
-        --glnbt-def-lb-cl: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), var(--glnbt--default-bg-l));
-        --glnbt-def-bg-cl: hsl(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l));
+        --glnbt-def-lb-cl: var(--glnpg-sel-def-lb-cl, hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), var(--glnbt--default-bg-l)));
+        --glnbt-def-bg-cl: var(--glnpg-sel-def-bg-cl, hsl(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l)));
 
-        --glnbt-hov-lb-cl: hsl(var(--glnpg--default-bg-h), var(--glnpg--default-bg-s), var(--glnpg--default-bg-l));
-        --glnbt-hov-bg-cl: hsl(var(--glnpg--primary-h), var(--glnpg--primary-s), calc(var(--glnpg--primary-l) - 10%));
+        --glnbt-hov-lb-cl: var(--glnpg-sel-hov-lb-cl, hsl(var(--glnpg--default-bg-h), var(--glnpg--default-bg-s), var(--glnpg--default-bg-l)));
+        --glnbt-hov-bg-cl: var(--glnpg-sel-hov-bg-cl, hsl(var(--glnpg--primary-h), var(--glnpg--primary-s), calc(var(--glnpg--primary-l) - 10%)));
 
-        --glnbt-dis-bg-cl: hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.08);
+        --glnbt-dis-bg-cl: var(--glnpg-sel-dis-bg-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.08));
 
-        --glnbt-ripple-cl: hsla(var(--glnpg--default-bg-h), var(--glnpg--default-bg-s), var(--glnpg--default-bg-l), 0.38);
+        --glnbt-ripple-cl: var(--glnpg-sel-ripple-cl, hsla(var(--glnpg--default-bg-h), var(--glnpg--default-bg-s), var(--glnpg--default-bg-l), 0.38));
       }
     }
   }

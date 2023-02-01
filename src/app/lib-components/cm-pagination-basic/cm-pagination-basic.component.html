@@ -236,7 +236,6 @@ _<i id="Attributes">#A</i>
     </gln-pagination>
   </div>
 
-
   <div class="app-elem pga-elem">
     <div>
       <small>
@@ -361,6 +360,214 @@ export class PaginationComponent &#123;
   public page02b: number = 1;
   public page02c: number = 1;
   public page02d: number = 1;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .pga-elem &#123;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<!-- <hr br-nn /> -->
+
+<section *ngIf="isShowAttributes"
+  mr-vr
+  id="attributes-supported02">
+  <h4 class="app-hover-link">
+    Attributes are also supported 2:
+    <a [href]="urlCmPagination + '#attributes-supported02'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "countBorder" - number of always visible pages at the beginning and at the end;<br />
+      (default 1)
+    </li>
+    <li>
+      "countNearby" - number of always visible pages before and after the current page;<br />
+      (default 1)
+    </li>
+  </ul>
+</section>
+
+<section *ngIf="isShowAttributes"
+  mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior02b"
+    (change)="exterior02b=$event.value">
+    <mat-button-toggle [checked]="exterior02b==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02b==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div *ngIf="isShowAttributes"
+  class="app-group">
+
+  <div class="app-elem pga-elem">
+    <div>
+      <small>
+        <em>Attributes: page=6, countNearby=0.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page02f"
+      [count]="11"
+      [exterior]="exterior02b"
+      [countNearby]="0"
+      (changePage)="page02f = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pga-elem">
+    <div>
+      <small>
+        <em>Attributes: page=6, countNearby=1.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page02g"
+      [count]="11"
+      [exterior]="exterior02b"
+      (changePage)="page02g = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pga-elem">
+    <div>
+      <small>
+        <em>Attributes: page=6, countNearby=0, countBorder=2.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page02h"
+      [count]="11"
+      [exterior]="exterior02b"
+      [countNearby]="0"
+      [countBorder]="2"
+      (changePage)="page02h = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pga-elem">
+    <div>
+      <small>
+        <em>Attributes: page=6, countBorder=2.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page02i"
+      [count]="11"
+      [exterior]="exterior02b"
+      [countBorder]="2"
+      (changePage)="page02i = $event">
+    </gln-pagination>
+  </div>
+
+</div>
+
+<section *ngIf="isShowAttributes"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem pga-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: page=6, countNearby=0.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page02f"
+      [count]="11"
+      [exterior]="exterior02b"
+      [countNearby]="0"
+      (changePage)="page02f = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pga-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: page=6, countNearby=1.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page02g"
+      [count]="11"
+      [exterior]="exterior02b"
+      (changePage)="page02g = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pga-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: page=6, countNearby=0, countBorder=2.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page02h"
+      [count]="11"
+      [exterior]="exterior02b"
+      [countNearby]="0"
+      [countBorder]="2"
+      (changePage)="page02h = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pga-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: page=6, countBorder=2.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page02i"
+      [count]="11"
+      [exterior]="exterior02b"
+      [countBorder]="2"
+      (changePage)="page02i = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class PaginationComponent &#123;
+  public exterior02b = 'outlined';
+  public page02f: number = 6;
+  public page02g: number = 6;
+  public page02h: number = 6;
+  public page02i: number = 6;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -1235,32 +1442,20 @@ _<i id="MaterialUI">#PM</i>
 </section>
 
 
-<section *ngIf="isShowPalette"
-  mr-vr>
-  <span>exterior: </span>
-  <mat-button-toggle-group value="exterior13a"
-    (change)="exterior13a=$event.value">
-    <mat-button-toggle [checked]="exterior13a==='outlined'"
-      value="outlined">{{ labelOutlined }}</mat-button-toggle>
-    <mat-button-toggle [checked]="exterior13a==='text'"
-      value="text">{{ labelText }}</mat-button-toggle>
-  </mat-button-toggle-group>
-</section>
-
-
 <div *ngIf="isShowPalette"
   class="app-group">
 
   <div class="app-elem pgpm-elem">
     <div>
       <small>
-        <em>Attributes: count, page, exterior.</em>
+        <em>Attributes: count, page, exterior='text', grey.</em>
       </small>
     </div>
-    <gln-pagination class="pgpm-mui"
+    <gln-pagination class="pgpm-mui pgpm-grey"
+      [glnColor]="{ primary: 'grey' }"
       [page]="page13a"
       [count]="10"
-      [exterior]="exterior13a"
+      exterior="text"
       [size]="32"
       (changePage)="page13a = $event">
     </gln-pagination>
@@ -1269,16 +1464,112 @@ _<i id="MaterialUI">#PM</i>
   <div class="app-elem pgpm-elem">
     <div>
       <small>
-        <em>Attributes: count, page, exterior, isDisabled.</em>
+        <em>Attributes: count, page, exterior='text', blue.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui pgpm-blue"
+      [glnColor]="{ primary: 'blue' }"
+      [page]="page13b"
+      [count]="10"
+      exterior="text"
+      [size]="32"
+      (changePage)="page13b = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior='text', pink.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui pgpm-pink"
+      [glnColor]="{ primary: 'pink' }"
+      [page]="page13c"
+      [count]="10"
+      exterior="text"
+      [size]="32"
+      (changePage)="page13c = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior='text', isDisabled.</em>
       </small>
     </div>
     <gln-pagination class="pgpm-mui"
-      [page]="page13b"
+      [page]="page13d"
       [count]="10"
-      [exterior]="exterior13a"
+      exterior="text"
       [size]="32"
       isDisabled
-      (changePage)="page13b = $event">
+      (changePage)="page13d = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior='outlined', light-grey.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui pgpm-light-grey"
+      [glnColor]="{ primary: 'light-grey' }"
+      [page]="page13f"
+      [count]="10"
+      exterior="outlined"
+      [size]="32"
+      (changePage)="page13f = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior='outlined', light-blue.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui pgpm-light-blue"
+      [glnColor]="{ primary: 'light-blue' }"
+      [page]="page13g"
+      [count]="10"
+      exterior="outlined"
+      [size]="32"
+      (changePage)="page13g = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior='outlined', pink.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui pgpm-pink"
+      [glnColor]="{ primary: 'pink' }"
+      [page]="page13h"
+      [count]="10"
+      exterior="outlined"
+      [size]="32"
+      (changePage)="page13h = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior='outlined', isDisabled.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui"
+      [page]="page13i"
+      [count]="10"
+      exterior="outlined"
+      [size]="32"
+      isDisabled
+      (changePage)="page13i = $event">
     </gln-pagination>
   </div>
 
@@ -1344,166 +1635,3 @@ app-input &#123;
 <hr br-nn />
 
 <!-- END -->
-
-
-
-<ng-container *ngIf="false">
-
-  <div class="app-group">
-
-    <div class="app-elem pgb-elem">
-      <div>
-        <small>
-          <em>Exterior: 'outlined' 'dark-grey'.</em>
-        </small>
-      </div>
-      <gln-pagination [page]="page01b"
-        class="pgb-dark-grey1"
-        [count]="10"
-        [size]="32"
-        [glnColor]="{ primary: 'dark-grey1' }"
-        exterior="outlined"
-        (changePage)="page01b = $event">
-      </gln-pagination>
-    </div>
-
-    <div class="app-elem pgb-elem">
-      <div>
-        <small>
-          <em>Exterior: 'outlined' 'dark-grey' isDisabled.</em>
-        </small>
-      </div>
-      <gln-pagination [page]="page01b"
-        class="pgb-dark-grey1"
-        [count]="10"
-        [size]="32"
-        [glnColor]="{ primary: 'dark-grey1' }"
-        isDisabled
-        exterior="outlined"
-        (changePage)="page01b = $event">
-      </gln-pagination>
-    </div>
-
-    <div class="app-elem pgb-elem">
-      <div>
-        <small>
-          <em>Exterior: 'outlined' 'primary'.</em>
-        </small>
-      </div>
-      <gln-pagination [page]="page01b"
-        [count]="10"
-        [size]="32"
-        glnColor9="{ primary: 'primary' }"
-        exterior="outlined"
-        (changePage)="page01b = $event">
-      </gln-pagination>
-    </div>
-
-    <div class="app-elem pgb-elem">
-      <div>
-        <small>
-          <em>Exterior: 'outlined' 'primary' isDisabled.</em>
-        </small>
-      </div>
-      <gln-pagination [page]="page01b"
-        [count]="10"
-        [size]="32"
-        glnColor9="{ primary: 'primary' }"
-        exterior="outlined"
-        isDisabled
-        (changePage)="page01b = $event">
-      </gln-pagination>
-    </div>
-
-    <div class="app-elem pgb-elem">
-      <div>
-        <small>
-          <em>Exterior: 'text' 'dark-grey'.</em>
-        </small>
-      </div>
-      <gln-pagination [page]="page01b"
-        class="pgb-dark-grey2"
-        [count]="10"
-        [size]="32"
-        [glnColor]="{ primary: 'dark-grey2' }"
-        exterior="text"
-        (changePage)="page01b = $event">
-      </gln-pagination>
-    </div>
-
-    <div class="app-elem pgb-elem">
-      <div>
-        <small>
-          <em>Exterior: 'text' 'dark-grey' isDisabled.</em>
-        </small>
-      </div>
-      <gln-pagination [page]="page01b"
-        class="pgb-dark-grey2"
-        [count]="10"
-        [size]="32"
-        [glnColor]="{ primary: 'dark-grey2' }"
-        isDisabled
-        exterior="text"
-        (changePage)="page01b = $event">
-      </gln-pagination>
-    </div>
-
-    <div class="app-elem pgb-elem">
-      <div>
-        <small>
-          <em>Exterior: 'text'.</em>
-        </small>
-      </div>
-      <gln-pagination [page]="page01b"
-        [count]="10"
-        [size]="32"
-        glnColor9="{ primary: 'primary' }"
-        exterior="text"
-        (changePage)="page01b = $event">
-      </gln-pagination>
-    </div>
-
-    <div class="app-elem pgb-elem">
-      <div>
-        <small>
-          <em>Exterior: 'text' isDisabled.</em>
-        </small>
-      </div>
-      <gln-pagination [page]="page01b"
-        [count]="10"
-        [size]="32"
-        glnColor9="{ primary: 'primary' }"
-        exterior="text"
-        isDisabled
-        (changePage)="page01b = $event">
-      </gln-pagination>
-    </div>
-
-  </div>
-
-</ng-container>
-
-
-
-
-<ng-container *ngIf="false">
-  <section mr-vr
-    id="attributes-supported02">
-    <h4 class="app-hover-link">
-      Attributes are also supported 2:
-      <a [href]="urlCmPagination + '#attributes-supported02'">#</a>
-    </h4>
-    <ul>
-      <li>
-        "countBorder" - number of always visible pages at the beginning and at the end;<br />
-        (default 1)
-      </li>
-      <li>
-        "countNearby" - number of always visible pages before and after the current page;<br />
-        (default 1)
-      </li>
-    </ul>
-  </section>
-</ng-container>
-
-<hr br-nn />

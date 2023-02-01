@@ -43,6 +43,11 @@ export class CmPaginationBasicComponent {
   public page02b: number = 1;
   public page02c: number = 1;
   public page02d: number = 1;
+  public exterior02b = 'outlined';
+  public page02f: number = 6;
+  public page02g: number = 6;
+  public page02h: number = 6;
+  public page02i: number = 6;
 
   // Page: "Size" 03
   public exterior03a = 'outlined';
@@ -77,9 +82,15 @@ export class CmPaginationBasicComponent {
   public page12b: number = 1;
 
   // Page: "PaletteMaterialUI" 13
-  public exterior13a = 'outlined';
   public page13a: number = 1;
   public page13b: number = 1;
+  public page13c: number = 1;
+  public page13d: number = 1;
+
+  public page13f: number = 1;
+  public page13g: number = 1;
+  public page13h: number = 1;
+  public page13i: number = 1;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

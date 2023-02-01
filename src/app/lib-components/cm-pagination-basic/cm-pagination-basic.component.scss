@@ -37,6 +37,7 @@ app-cm-pagination-basic {
     display: flex;
     flex-direction: column;
   }
+
   // Page: "PaletteBootstrap" 12
   .pgpb-elem {
     width: 100%;
@@ -46,31 +47,50 @@ app-cm-pagination-basic {
   .pgpm-bs {
     font-size: 16px;
   }
+
   // Page: "PaletteMaterialUI" 13
   .pgpm-elem {
     width: 100%;
     display: flex;
     flex-direction: column;
   }
-
   // ** Style: "Material-UI" **
-
   .pgpm-mui {
     font-size: 14px;
   }
-
-
-  //
-  .pgb-dark-grey1 {
-    // "default" color: hsl(250, 5%, 20%);
-    --gln-dark-grey1-h: 250;
-    --gln-dark-grey1-s: 5%;
-    --gln-dark-grey1-l: 20%;
+  .pgpm-grey {
+    --gln-grey-h: 0;
+    --gln-grey-s: 0%;
+    --gln-grey-l: 85%;
+    --glnpg-hov-bg-cl: rgba(0, 0, 0, 0.04);
+    --glnpg-sel-def-lb-cl: rgba(0, 0, 0, 0.87);
+    --glnpg-sel-def-bg-cl: rgba(0, 0, 0, 0.08);
+    --glnpg-sel-hov-lb-cl: rgba(0, 0, 0, 0.87);
+    --glnpg-sel-hov-bg-cl: rgba(0, 0, 0, 0.12);
+    --glnpg-sel-ripple-cl: rgba(0, 0, 0, 0.35);
+  }
+  .pgpm-blue {
+    --gln-blue-h: 210;
+    --gln-blue-s: 79%;
+    --gln-blue-l: 46%;
+  }
+  .pgpm-pink {
+    --gln-pink-h: 291;
+    --gln-pink-s: 64%;
+    --gln-pink-l: 42%;
+  }
+  .pgpm-light-grey {
+    --gln-light-grey-h: 0;
+    --gln-light-grey-s: 0%;
+    --gln-light-grey-l: 40%;
+    --glnpg-def-lb-cl: rgba(0, 0, 0, 0.87);
+    --glnpg-sel-def-lb-cl: rgba(0, 0, 0, 0.87);
+    --glnpg-sel-hov-lb-cl: rgba(0, 0, 0, 0.87);
+  }
+  .pgpm-light-blue {
+    --gln-blue-h: 210;
+    --gln-blue-s: 85%;
+    --gln-blue-l: 50%;
   }
 
-  .pgb-dark-grey2 {
-    --gln-dark-grey2-h: 0;
-    --gln-dark-grey2-s: 0%;
-    --gln-dark-grey2-l: 70%;
-  }
 }
