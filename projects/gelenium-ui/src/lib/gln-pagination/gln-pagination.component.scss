@@ -74,6 +74,10 @@ gln-pagination {
     &>[gln-orn-next]~svg {
       display: none;
     }
+    &>[glnpg-pd-hor] {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
   }
 
   gln-button {

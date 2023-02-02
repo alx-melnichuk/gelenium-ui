@@ -233,9 +233,13 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
 
   // ** Private methods **
 
-  private updatePageBuffer(count: number, page: number, countNearby: number | null, countBorder: number | null): void {
+  private updatePageBuffer(countIn: number, pageIn: number, countNearbyIn: number | null, countBorderIn: number | null): void {
     const pageBuffer: number[] = [];
-    if (count > 0 && page > 0 && countNearby != null && countNearby > -1 && countBorder != null && countBorder > -1) {
+    const count: number = countIn > 0 ? countIn : 1;
+    const page: number = pageIn > 0 ? pageIn : 1;
+    const countNearby: number = countNearbyIn != null && countNearbyIn > -1 ? countNearbyIn : 1;
+    const countBorder: number = countBorderIn != null && countBorderIn > -1 ? countBorderIn : 1;
+    if (count > 0 && page > 0 && countNearby > -1 && countBorder > -1) {
       pageBuffer.length = 3 + countBorder * 2 + countNearby * 2;
 
       const pageLeft: number = countBorder + 1 + countNearby + 1;

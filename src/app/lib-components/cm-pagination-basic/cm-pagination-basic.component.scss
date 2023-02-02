@@ -37,25 +37,24 @@ app-cm-pagination-basic {
     display: flex;
     flex-direction: column;
   }
-  .pgo-prev {
+  .pgo-ornam {
     height: 24px;
     fill: currentColor;
   }
-  .pgo-next {
+  .pgo-first {
     background-color: currentColor;
     display: inline-block;
     height: 24px;
     mask: url("data:image/svg+xml;charset=utf8,"
       + "<svg xmlns='http://www.w3.org/2000/svg' "
       + " viewBox='0 0 24 24'>"
-      + "<path d='m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z'>"
+      + "<path d='M16.383 6.076a.994.994 0 0 0-1.09.217l-5 5a1 1 0 0 0 0 1.4"
+      + "14l5 5A1 1 0 0 0 16 18a.987.987 0 0 0 .383-.076A1 1 0 0 0 17 17V7a1"
+      + " 1 0 0 0-.617-.924zM15 14.586 12.414 12 15 9.414zM8 6a1 1 0 0 0-1 1"
+      + "v10a1 1 0 0 0 2 0V7a1 1 0 0 0-1-1z'>"
       + "</path>"
       + "</svg>");
     width: 24px;
-  }
-  .pgo-first {
-    height: 24px;
-    fill: currentColor;
   }
   .pgo-last {
     background-color: currentColor;

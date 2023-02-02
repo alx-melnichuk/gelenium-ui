@@ -73,6 +73,7 @@ export class CmPaginationBasicComponent {
   public exterior05a = 'outlined';
   public page05a: number = 1;
   public page05b: number = 1;
+  public page05c: number = 1;
 
   // Page: "Palette"
   public urlPlPagination = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_PAGINATION');
