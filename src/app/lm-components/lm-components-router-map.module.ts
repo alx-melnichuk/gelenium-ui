@@ -90,10 +90,12 @@ const siteUrlsPagination: SiteUrl[] = [
   { label: 'Basic', url: urlPagination, fragment: 'Basic' },
   { label: 'Attributes', url: urlPagination, fragment: 'Attributes' },
   { label: 'Size', url: urlPagination, fragment: 'Size' },
-  // { label: 'Palette', url: urlPagination, fragment: 'Palette' },
-  // { label: 'Customization', url: urlPagination, fragment: 'Customization' },
-  // { label: 'Config', url: urlPagination, fragment: 'Config' },
-  // { label: 'Api', url: urlPagination, fragment: 'Api' },
+  { label: 'Border', url: urlPagination, fragment: 'Border' },
+  { label: 'Ornaments', url: urlPagination, fragment: 'Ornaments' },
+  { label: 'Palette', url: urlPagination, fragment: 'Palette' },
+  // ?{ label: 'Customization', url: urlPagination, fragment: 'Customization' },
+  { label: 'Config', url: urlPagination, fragment: 'Config' },
+  { label: 'Api', url: urlPagination, fragment: 'Api' },
 ];
 SiteMenuUtil.addItem('Components', 'Pagination', { label: 'Pagination', siteUrls: siteUrlsPagination });
 

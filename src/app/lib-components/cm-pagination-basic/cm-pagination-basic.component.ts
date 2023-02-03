@@ -1,7 +1,16 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
+import { GlnPaginationConfig, GLN_PAGINATION_CONFIG } from 'gelenium-ui';
+
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { BTN_OUTLINED, BTN_TEXT, LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
+
+const glnPaginationConfigDefault: GlnPaginationConfig = {
+  count: 11,
+  countNearby: 2,
+  exterior: 'outlined',
+  size: 'small',
+};
 
 @Component({
   selector: 'app-cm-pagination-basic',
@@ -9,6 +18,7 @@ import { BTN_OUTLINED, BTN_TEXT, LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL
   styleUrls: ['./cm-pagination-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // providers: [{ provide: GLN_PAGINATION_CONFIG, useValue: glnPaginationConfigDefault }],
 })
 export class CmPaginationBasicComponent {
   @Input()
@@ -33,6 +43,7 @@ export class CmPaginationBasicComponent {
   public isShowBorder = true;
   public isShowPalette = true;
   public isShowOrnam = true;
+  public isShowConfig = true;
 
   // Page: "Basic" 01
   public page01a: number = 1;
@@ -74,6 +85,11 @@ export class CmPaginationBasicComponent {
   public page05a: number = 1;
   public page05b: number = 1;
   public page05c: number = 1;
+
+  // Page: "Config" 08
+  public urlCmFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
+  public page08a: number = 6;
+  public page08b: number = 6;
 
   // Page: "Palette"
   public urlPlPagination = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_PAGINATION');
