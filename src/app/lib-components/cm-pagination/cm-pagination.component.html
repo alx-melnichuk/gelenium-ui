@@ -19,12 +19,29 @@
 </div> -->
 
 <!-- <div *ngIf="!showNum || showNum==='04'"
-  id="Palette">
-  <app-cm-pagination-palette></app-cm-pagination-palette>
+  id="Border">
+  <app-cm-pagination-border></app-cm-pagination-border>
   <hr br-tp>
 </div> -->
 
 <!-- <div *ngIf="!showNum || showNum==='05'"
+  id="Ornaments">
+  <app-cm-pagination-ornaments></app-cm-pagination-ornaments>
+  <hr br-tp>
+</div> -->
+
+<section mr-vr
+  *ngIf="!showNum"
+  id="Palette">
+  <h3>Palette</h3>
+  <p>
+    The <a [href]="urlPlPagination + '#Basic'">"Palette GlnPagination#Basic"</a>
+    page shows you how to change the color palette of an element.
+  </p>
+  <hr br-tp>
+</section>
+
+<!-- <div *ngIf="!showNum || showNum==='07'"
   id="Customization">
   <app-cm-pagination-customization></app-cm-pagination-customization>
   <hr br-tp>

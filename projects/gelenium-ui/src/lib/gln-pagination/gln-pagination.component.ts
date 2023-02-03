@@ -23,6 +23,7 @@ const EXTERIOR: { [key: string]: string } = { text: 'text', outlined: 'outlined'
 
 const CSS_PROP_SIZE = '--glnpg--size';
 const CSS_PROP_BORDER_RADIUS = '--glnbt-br-rd';
+const COUNT = 1;
 const COUNT_BORDER = 1;
 const COUNT_NEARBY = 1;
 
@@ -71,6 +72,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   readonly changePage: EventEmitter<number> = new EventEmitter();
 
   public currConfig: GlnPaginationConfig;
+  public countVal: number | null = null; // Binding attribute "count".
   public countBorderVal: number | null = null; // Binding attribute "countBorder".
   public countNearbyVal: number | null = null; // Binding attribute "countNearby".
   public exteriorVal: string | null = null; // Binding attribute "exterior".
@@ -97,17 +99,21 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     let isBorderRadius: boolean = false;
-    let isPageBuffer: boolean = !!changes['count'] || !!changes['page'];
+    let isPageBuffer: boolean = !!changes['page'];
+    if (changes['count'] || (changes['config'] && this.countVal == null && this.currConfig.count != null)) {
+      this.countVal = this.getNotNegative(this.count ?? this.currConfig.count) ?? COUNT;
+      isPageBuffer = true;
+    }
     if (changes['countBorder'] || (changes['config'] && this.countBorderVal == null && this.currConfig.countBorder != null)) {
-      this.countBorderVal = this.countBorder || this.currConfig.countBorder || COUNT_BORDER;
+      this.countBorderVal = this.getNotNegative(this.countBorder ?? this.currConfig.countBorder) ?? COUNT_BORDER;
       isPageBuffer = true;
     }
     if (changes['countNearby'] || (changes['config'] && this.countNearbyVal == null && this.currConfig.countNearby != null)) {
-      this.countNearbyVal = this.countNearby || this.currConfig.countNearby || COUNT_NEARBY;
+      this.countNearbyVal = this.getNotNegative(this.countNearby ?? this.currConfig.countNearby) ?? COUNT_NEARBY;
       isPageBuffer = true;
     }
     if (isPageBuffer) {
-      this.updatePageBuffer(this.count, this.page, this.countNearbyVal, this.countBorderVal);
+      this.pageBuffer = this.createPageBuffer(this.countVal, this.page, this.countNearbyVal, this.countBorderVal);
     }
 
     if (changes['exterior'] || (changes['config'] && this.exteriorVal == null && this.currConfig.exterior != null)) {
@@ -156,16 +162,17 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
 
     let isBorderRadius: boolean = false;
     let isPageBuffer: boolean = false;
+    if (this.countVal == null) {
+      this.countVal = this.getNotNegative(this.currConfig.count) ?? COUNT;
+      isPageBuffer = true;
+    }
     if (this.countBorderVal == null) {
-      this.countBorderVal = this.currConfig.countBorder || COUNT_BORDER;
+      this.countBorderVal = this.getNotNegative(this.currConfig.countBorder) ?? COUNT_BORDER;
       isPageBuffer = true;
     }
     if (this.countNearbyVal == null) {
-      this.countNearbyVal = this.currConfig.countNearby || COUNT_BORDER;
+      this.countNearbyVal = this.getNotNegative(this.currConfig.countNearby) ?? COUNT_BORDER;
       isPageBuffer = true;
-    }
-    if (isPageBuffer || this.pageBuffer.length === 0) {
-      this.updatePageBuffer(this.count, this.page, this.countNearbyVal, this.countBorderVal);
     }
 
     if (this.exteriorVal == null) {
@@ -203,20 +210,9 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       this.setCssBorderRadius(this.sizeVal, this.isNoRoundVal, this.hostRef);
     }
 
-    // this.pageBuffer = new Array(3 + this.countBorder * 2 + this.countNearby * 2);
-    // for (let i = 0; i < this.count && i < this.pageBuffer.length; i++) {
-    //   this.pageBuffer[i] = i + 1;
-    // }
-
-    // const data = this.getPageBuffer(this.count, 1, this.countNearby, this.countBorder); // [1, 2, 3, 4, 5, -1, 10]
-    // const data = this.getPageBuffer(this.count, 7, this.countNearby, this.countBorder); // [1, -1, 6, 7, 8, 9, 10]
-    // const data = this.getPageBuffer(this.count, 6, this.countNearby, this.countBorder); // [1, -1, 5, 6, 7, -1, 10]
-    // const data = this.getPageBuffer(this.count, 6, 0/*countNearby*/, this.countBorder); // [1, -1, 6, -1, 10]
-    // const data = this.getPageBuffer(this.count, 6, 0 /*countNearby*/, 2 /*countBorder*/); // [1, 2, -1, 6, -1, 9, 10]
-    // const data = this.getPageBuffer(this.count, 6, 1 /*countNearby*/, 2 /*countBorder*/); // [1, 2, -1, 5, 6, 7, 8, 9, 10]
-
-    this.updatePageBuffer(this.count, this.page, this.countNearby, this.countBorder);
-    // console.log(`pageBuffer=`, this.pageBuffer); // #
+    if (isPageBuffer || this.pageBuffer.length === 0) {
+      this.pageBuffer = this.createPageBuffer(this.countVal, this.page, this.countNearbyVal, this.countBorderVal);
+    }
   }
 
   // ** Public methods **
@@ -233,24 +229,35 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
 
   // ** Private methods **
 
-  private updatePageBuffer(countIn: number, pageIn: number, countNearbyIn: number | null, countBorderIn: number | null): void {
+  private getNotNegative(value: number | null | undefined): number | null {
+    return value != null && value > -1 ? value : null;
+  }
+
+  // getPageBuffer(count=12, page=1, countNearby=1, countBorder=1); // [1, 2, 3, 4, 5, -1, 12]
+  // getPageBuffer(count=12, page=4, countNearby=1, countBorder=1); // [1, -1, 6, 7, 8, 9, 10]
+  // getPageBuffer(count=12, page=9, countNearby=1, countBorder=1); // [1, -1, 5, 6, 7, -1, 10]
+  // getPageBuffer(count=12, page=6, countNearby=0, countBorder=1); // [1, -1, 6, -1, 10]
+  // getPageBuffer(count=12, page=6, countNearby=0, countBorder=2); // [1, 2, -1, 6, -1, 9, 10]
+  // getPageBuffer(count=12, page=6, countNearby=1, countBorder=2); // [1, 2, -1, 5, 6, 7, 8, 9, 10]
+
+  private createPageBuffer(countIn: number | null, pageIn: number, countNearbyIn: number | null, countBorderIn: number | null): number[] {
     const pageBuffer: number[] = [];
-    const count: number = countIn > 0 ? countIn : 1;
+    const count: number = countIn != null && countIn > -1 ? countIn : 1;
     const page: number = pageIn > 0 ? pageIn : 1;
-    const countNearby: number = countNearbyIn != null && countNearbyIn > -1 ? countNearbyIn : 1;
-    const countBorder: number = countBorderIn != null && countBorderIn > -1 ? countBorderIn : 1;
+    const countNearby: number = countNearbyIn != null && countNearbyIn > -1 ? countNearbyIn : 0;
+    const countBorder: number = countBorderIn != null && countBorderIn > -1 ? countBorderIn : 0;
     if (count > 0 && page > 0 && countNearby > -1 && countBorder > -1) {
       pageBuffer.length = 3 + countBorder * 2 + countNearby * 2;
 
       const pageLeft: number = countBorder + 1 + countNearby + 1;
-      const pageRight: number = count - pageLeft;
+      const pageRight: number = count - (countBorder + 1 + countNearby);
 
       const isPageLeft: boolean = page <= pageLeft;
-      const isPageRight: boolean = page > pageRight;
+      const isPageRight: boolean = page >= pageRight;
 
       let idx: number = 0;
       let idxPage: number = 1;
-      let len1: number = isPageLeft ? pageLeft + 1 : countBorder;
+      let len1: number = isPageLeft ? pageLeft + countNearby : countBorder;
       while (idx < len1) {
         pageBuffer[idx++] = idxPage++;
       }
@@ -267,12 +274,12 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       if (!isPageRight) {
         pageBuffer[idx++] = -1;
       }
-      idxPage = isPageRight ? pageRight : count - countBorder + 1;
+      idxPage = isPageRight ? pageRight - countNearby : count - countBorder + 1;
       while (idx < pageBuffer.length) {
         pageBuffer[idx++] = idxPage++;
       }
     }
-    this.pageBuffer = pageBuffer;
+    return pageBuffer;
   }
 
   private converSize(size: string, defaultValue: number): number {

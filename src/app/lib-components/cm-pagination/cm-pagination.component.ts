@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsulation } from '@angular/core';
 import { first } from 'rxjs/operators';
 
+import { RouterConfig } from '../../lib-core/config/router-config';
 import { ScrollAfterRoutingUtil } from '../../lib-core/utils/scroll-after-routing.util';
 
 const logLabel = 'ComponentsPagination';
@@ -14,6 +15,8 @@ const logLabel = 'ComponentsPagination';
 })
 export class CmPaginationComponent implements AfterViewInit {
   public showNum = '';
+
+  public urlPlPagination = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_PAGINATION');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax
