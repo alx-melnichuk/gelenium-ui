@@ -47,78 +47,81 @@
 </section>
 
 <table class="app-tab">
-  <tr>
-    <th class="app-mn-wd-22ch">Name</th>
-    <th>Description</th>
-  </tr>
-
-  <tr>
-    <td>
-      <code>exterior?: string</code>
-    </td>
-    <td>
-      <span>
-        This property determines the appearance of the button.
-        It takes the following values:
-      </span>
-      <ul>
-        <li>
-          "contained" - The element has a background.
-        </li>
-        <li>
-          "outlined" - A border around the entire perimeter of the element.
-        </li>
-        <li>
-          "text" - There is no border. (default)
-        </li>
-      </ul>
-      <span>(optional)</span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>size?: number<br/>
-        &nbsp;&nbsp;| string</code>
-    </td>
-    <td>
-      <span>
-        This property determines the size of the element (its height).
-        <a [href]="urlCmFrame + '#Size'">More details.</a>
-        It takes the following values:
-      </span>
-      <ul>
-        <li>"short" - sets the height to 38px;</li>
-        <li>"small" - sets the height to 44px (default);</li>
-        <li>"middle" - sets the height to 50px;</li>
-        <li>"wide" - sets the height to 56px;</li>
-        <li>"large" - sets the height to 62px;</li>
-        <li>"huge" - sets the height to 68px;</li>
-      </ul>
-      <span>
-        In this property, you can specify the value of the height of the
-        element in pixels. (size="57").
-      </span>
-      <span>(optional)</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>labelPd?: number;</code></td>
-    <td>
-      <span>
-        The value of the label's horizontal offset from the frame (in pixels).
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isNoRipple?: boolean;</code></td>
-    <td>
-      <span>
-        This property to turn off the ripple effect.
-        <br />(default = false;)
-      </span><br />
-      <span>(optional)</span>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>exterior?: string;</code>
+      </td>
+      <td>
+        <span>
+          This property determines the appearance of the button.
+          It takes the following values:
+        </span>
+        <ul>
+          <li>
+            "contained" - The element has a background.
+          </li>
+          <li>
+            "outlined" - A border around the entire perimeter of the element.
+          </li>
+          <li>
+            "text" - There is no border. (default)
+          </li>
+        </ul>
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>size?: number<br/>
+        &nbsp;&nbsp;| string;</code>
+      </td>
+      <td>
+        <span>
+          This property determines the size of the element (its height).
+          <a [href]="urlCmFrame + '#Size'">More details.</a>
+          It takes the following values:
+        </span>
+        <ul>
+          <li>"short" - sets the height to 38px;</li>
+          <li>"small" - sets the height to 44px (default);</li>
+          <li>"middle" - sets the height to 50px;</li>
+          <li>"wide" - sets the height to 56px;</li>
+          <li>"large" - sets the height to 62px;</li>
+          <li>"huge" - sets the height to 68px;</li>
+        </ul>
+        <span>
+          In this property, you can specify the value of the height of the
+          element in pixels. (size="57").
+        </span>
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>labelPd?: number;</code></td>
+      <td>
+        <span>
+          The value of the label's horizontal offset from the frame (in pixels).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isNoRipple?: boolean;</code></td>
+      <td>
+        <span>
+          This property to turn off the ripple effect.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 <section mr-vr
