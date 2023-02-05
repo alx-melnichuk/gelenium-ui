@@ -112,7 +112,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       this.countNearbyVal = this.getNotNegative(this.countNearby ?? this.currConfig.countNearby) ?? COUNT_NEARBY;
       isPageBuffer = true;
     }
-    if (isPageBuffer) {
+    if (isPageBuffer && this.countVal != null && this.page != null && this.countNearbyVal != null && this.countBorderVal != null) {
       this.pageBuffer = this.createPageBuffer(this.countVal, this.page, this.countNearbyVal, this.countBorderVal);
     }
 
@@ -234,48 +234,76 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   }
 
   // getPageBuffer(count=12, page=1, countNearby=1, countBorder=1); // [1, 2, 3, 4, 5, -1, 12]
-  // getPageBuffer(count=12, page=4, countNearby=1, countBorder=1); // [1, -1, 6, 7, 8, 9, 10]
-  // getPageBuffer(count=12, page=9, countNearby=1, countBorder=1); // [1, -1, 5, 6, 7, -1, 10]
-  // getPageBuffer(count=12, page=6, countNearby=0, countBorder=1); // [1, -1, 6, -1, 10]
-  // getPageBuffer(count=12, page=6, countNearby=0, countBorder=2); // [1, 2, -1, 6, -1, 9, 10]
-  // getPageBuffer(count=12, page=6, countNearby=1, countBorder=2); // [1, 2, -1, 5, 6, 7, 8, 9, 10]
+  // getPageBuffer(count=12, page=4, countNearby=1, countBorder=1); // [1, -1, 6, 7, 8, 9, 12]
+  // getPageBuffer(count=12, page=9, countNearby=1, countBorder=1); // [1, -1, 5, 6, 7, -1, 12]
+  // getPageBuffer(count=12, page=6, countNearby=0, countBorder=1); // [1, -1, 6, -1, 12]
+  // getPageBuffer(count=12, page=6, countNearby=0, countBorder=2); // [1, 2, -1, 6, -1, 11, 12]
+  // getPageBuffer(count=12, page=6, countNearby=1, countBorder=2); // [1, 2, -1, 5, 6, 7, -1, 11, 12]
 
-  private createPageBuffer(countIn: number | null, pageIn: number, countNearbyIn: number | null, countBorderIn: number | null): number[] {
+  private createPageBuffer(countIn: number, pageIn: number, countNearbyIn: number, countBorderIn: number): number[] {
     const pageBuffer: number[] = [];
-    const count: number = countIn != null && countIn > -1 ? countIn : 1;
-    const page: number = pageIn > 0 ? pageIn : 1;
-    const countNearby: number = countNearbyIn != null && countNearbyIn > -1 ? countNearbyIn : 0;
-    const countBorder: number = countBorderIn != null && countBorderIn > -1 ? countBorderIn : 0;
-    if (count > 0 && page > 0 && countNearby > -1 && countBorder > -1) {
-      pageBuffer.length = 3 + countBorder * 2 + countNearby * 2;
+    const count: number = countIn < 0 ? 0 : countIn;
+    let countNearby: number = countNearbyIn < 0 ? 0 : countNearbyIn;
+    let countBorder: number = countBorderIn < 0 ? 0 : countBorderIn;
 
-      const pageLeft: number = countBorder + 1 + countNearby + 1;
-      const pageRight: number = count - (countBorder + 1 + countNearby);
+    if (count > 0) {
+      const cntNearby: number = countNearby || 1;
+      const cntBorder: number = countBorder || 1;
+      let deltaPg: number = 0;
+      let isEllipsisLeft: boolean = false;
+      let isEllipsisRight: boolean = false;
+      let maxIdxPageLeft: number = 0;
+      const countPages: number = 1 + 2 * cntNearby + 2 * cntBorder + (countNearby > 0 && countBorder > 0 ? 2 : 0);
 
-      const isPageLeft: boolean = page <= pageLeft;
-      const isPageRight: boolean = page >= pageRight;
+      if (countNearby == 0 && countBorder == 0) {
+        isEllipsisLeft = pageIn > 2;
+        isEllipsisRight = pageIn <= count - 2;
+        maxIdxPageLeft = count - 1;
+        deltaPg = 3 - (isEllipsisLeft ? 1 : 0) - (isEllipsisRight ? 1 : 0);
+      } else if (countPages < count) {
+        const deltaSite = countNearby > 0 && countBorder > 0 ? 1 : 0;
+        const pageLeft: number = cntNearby + cntBorder + 1 + deltaSite;
+        const pageRight: number = count - cntNearby - cntBorder - deltaSite;
+        isEllipsisLeft = pageIn > pageLeft;
+        isEllipsisRight = pageIn < pageRight;
+        maxIdxPageLeft = count - countNearby - cntNearby - cntBorder - deltaSite;
+        deltaPg = 1 + (isEllipsisLeft && isEllipsisRight ? 0 : 1);
+      } else {
+        deltaPg = count;
+        countNearby = 0;
+        countBorder = 0;
+      }
 
       let idx: number = 0;
       let idxPage: number = 1;
-      let len1: number = isPageLeft ? pageLeft + countNearby : countBorder;
-      while (idx < len1) {
+
+      const lenBr1: number = idx + countBorder;
+      while (idx < lenBr1) {
         pageBuffer[idx++] = idxPage++;
       }
-      if (!isPageLeft) {
+      if (isEllipsisLeft) {
         pageBuffer[idx++] = -1;
+        const delta = pageIn - countNearby;
+        idxPage = delta < maxIdxPageLeft ? delta : maxIdxPageLeft;
       }
-      if (!isPageLeft && !isPageRight) {
-        idxPage = page - countNearby;
-        const len2: number = idx + 1 + 2 * countNearby;
-        while (idx < len2) {
-          pageBuffer[idx++] = idxPage++;
-        }
+      const lenNr1: number = idx + countNearby;
+      while (idx < lenNr1) {
+        pageBuffer[idx++] = idxPage++;
       }
-      if (!isPageRight) {
+      const lenPg: number = idx + deltaPg;
+      while (idx < lenPg) {
+        pageBuffer[idx++] = idxPage++;
+      }
+      const lenNr2: number = idx + countNearby;
+      while (idx < lenNr2) {
+        pageBuffer[idx++] = idxPage++;
+      }
+      if (isEllipsisRight) {
         pageBuffer[idx++] = -1;
+        idxPage = count - cntBorder + 1;
       }
-      idxPage = isPageRight ? pageRight - countNearby : count - countBorder + 1;
-      while (idx < pageBuffer.length) {
+      const lenBr2: number = idx + countBorder;
+      while (idx < lenBr2) {
         pageBuffer[idx++] = idxPage++;
       }
     }
