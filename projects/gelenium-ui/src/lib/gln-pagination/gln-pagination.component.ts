@@ -17,6 +17,7 @@ import {
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { GlnPaginationConfig } from './gln-pagination-config.interface';
+import { GlnPaginationUtil } from './gln-pagination.util';
 
 const SIZE: { [key: string]: number } = { short: 38, small: 44, middle: 50, wide: 56, large: 62, huge: 68 };
 const EXTERIOR: { [key: string]: string } = { text: 'text', outlined: 'outlined', contained: 'contained' };
@@ -113,7 +114,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       isPageBuffer = true;
     }
     if (isPageBuffer && this.countVal != null && this.page != null && this.countNearbyVal != null && this.countBorderVal != null) {
-      this.pageBuffer = this.createPageBuffer(this.countVal, this.page, this.countNearbyVal, this.countBorderVal);
+      this.pageBuffer = GlnPaginationUtil.createPageBuffer(this.countVal, this.page, this.countNearbyVal, this.countBorderVal);
     }
 
     if (changes['exterior'] || (changes['config'] && this.exteriorVal == null && this.currConfig.exterior != null)) {
@@ -211,7 +212,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     }
 
     if (isPageBuffer || this.pageBuffer.length === 0) {
-      this.pageBuffer = this.createPageBuffer(this.countVal, this.page, this.countNearbyVal, this.countBorderVal);
+      this.pageBuffer = GlnPaginationUtil.createPageBuffer(this.countVal, this.page, this.countNearbyVal, this.countBorderVal);
     }
   }
 
@@ -231,83 +232,6 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
 
   private getNotNegative(value: number | null | undefined): number | null {
     return value != null && value > -1 ? value : null;
-  }
-
-  // getPageBuffer(count=12, page=1, countNearby=1, countBorder=1); // [1, 2, 3, 4, 5, -1, 12]
-  // getPageBuffer(count=12, page=4, countNearby=1, countBorder=1); // [1, -1, 6, 7, 8, 9, 12]
-  // getPageBuffer(count=12, page=9, countNearby=1, countBorder=1); // [1, -1, 5, 6, 7, -1, 12]
-  // getPageBuffer(count=12, page=6, countNearby=0, countBorder=1); // [1, -1, 6, -1, 12]
-  // getPageBuffer(count=12, page=6, countNearby=0, countBorder=2); // [1, 2, -1, 6, -1, 11, 12]
-  // getPageBuffer(count=12, page=6, countNearby=1, countBorder=2); // [1, 2, -1, 5, 6, 7, -1, 11, 12]
-
-  private createPageBuffer(countIn: number, pageIn: number, countNearbyIn: number, countBorderIn: number): number[] {
-    const pageBuffer: number[] = [];
-    const count: number = countIn < 0 ? 0 : countIn;
-    let countNearby: number = countNearbyIn < 0 ? 0 : countNearbyIn;
-    let countBorder: number = countBorderIn < 0 ? 0 : countBorderIn;
-
-    if (count > 0) {
-      const cntNearby: number = countNearby || 1;
-      const cntBorder: number = countBorder || 1;
-      let deltaPg: number = 0;
-      let isEllipsisLeft: boolean = false;
-      let isEllipsisRight: boolean = false;
-      let maxIdxPageLeft: number = 0;
-      const countPages: number = 1 + 2 * cntNearby + 2 * cntBorder + (countNearby > 0 && countBorder > 0 ? 2 : 0);
-
-      if (countNearby == 0 && countBorder == 0) {
-        isEllipsisLeft = pageIn > 2;
-        isEllipsisRight = pageIn <= count - 2;
-        maxIdxPageLeft = count - 1;
-        deltaPg = 3 - (isEllipsisLeft ? 1 : 0) - (isEllipsisRight ? 1 : 0);
-      } else if (countPages < count) {
-        const deltaSite = countNearby > 0 && countBorder > 0 ? 1 : 0;
-        const pageLeft: number = cntNearby + cntBorder + 1 + deltaSite;
-        const pageRight: number = count - cntNearby - cntBorder - deltaSite;
-        isEllipsisLeft = pageIn > pageLeft;
-        isEllipsisRight = pageIn < pageRight;
-        maxIdxPageLeft = count - countNearby - cntNearby - cntBorder - deltaSite;
-        deltaPg = 1 + (isEllipsisLeft && isEllipsisRight ? 0 : 1);
-      } else {
-        deltaPg = count;
-        countNearby = 0;
-        countBorder = 0;
-      }
-
-      let idx: number = 0;
-      let idxPage: number = 1;
-
-      const lenBr1: number = idx + countBorder;
-      while (idx < lenBr1) {
-        pageBuffer[idx++] = idxPage++;
-      }
-      if (isEllipsisLeft) {
-        pageBuffer[idx++] = -1;
-        const delta = pageIn - countNearby;
-        idxPage = delta < maxIdxPageLeft ? delta : maxIdxPageLeft;
-      }
-      const lenNr1: number = idx + countNearby;
-      while (idx < lenNr1) {
-        pageBuffer[idx++] = idxPage++;
-      }
-      const lenPg: number = idx + deltaPg;
-      while (idx < lenPg) {
-        pageBuffer[idx++] = idxPage++;
-      }
-      const lenNr2: number = idx + countNearby;
-      while (idx < lenNr2) {
-        pageBuffer[idx++] = idxPage++;
-      }
-      if (isEllipsisRight) {
-        pageBuffer[idx++] = -1;
-        idxPage = count - cntBorder + 1;
-      }
-      const lenBr2: number = idx + countBorder;
-      while (idx < lenBr2) {
-        pageBuffer[idx++] = idxPage++;
-      }
-    }
-    return pageBuffer;
   }
 
   private converSize(size: string, defaultValue: number): number {
