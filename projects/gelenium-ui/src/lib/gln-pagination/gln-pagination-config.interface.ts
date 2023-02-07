@@ -7,6 +7,7 @@ export interface GlnPaginationConfig {
   exterior?: string | undefined; // 'outlined', 'text'
   isHideNext?: boolean | undefined;
   isHidePrev?: boolean | undefined;
+  isNoRipple?: boolean | undefined;
   isNoRound?: boolean | undefined;
   isShowFirst?: boolean | undefined;
   isShowLast?: boolean | undefined;

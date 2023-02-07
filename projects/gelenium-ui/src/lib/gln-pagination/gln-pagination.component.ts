@@ -59,6 +59,8 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   @Input()
   public isHidePrev: string | boolean | null | undefined;
   @Input()
+  public isNoRipple: string | boolean | null | undefined;
+  @Input()
   public isNoRound: string | boolean | null | undefined;
   @Input()
   public isShowFirst: string | boolean | null | undefined;
@@ -80,6 +82,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isHideNextVal: boolean | null = null; // Binding attribute "isHideNext".
   public isHidePrevVal: boolean | null = null; // Binding attribute "isHidePrev".
+  public isNoRippleVal: boolean | null = null; // Binding attribute "isNoRipple".
   public isNoRoundVal: boolean | null = null; // Binding attribute "isNoRound".
   public isShowFirstVal: boolean | null = null; // Binding attribute "isShowFirst".
   public isShowLastVal: boolean | null = null; // Binding attribute "isShowLast".
@@ -134,6 +137,9 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       this.isHidePrevVal = !!(BooleanUtil.init(this.isHidePrev) ?? (this.currConfig.isHidePrev || null));
       this.settingHidePrev(this.isHidePrevVal, this.renderer, this.hostRef);
     }
+    if (changes['isNoRipple'] || (changes['config'] && this.isNoRippleVal == null && this.currConfig.isNoRipple != null)) {
+      this.isNoRippleVal = !!(BooleanUtil.init(this.isNoRipple) ?? (this.currConfig.isNoRipple || null));
+    }
     if (changes['isNoRound'] || (changes['config'] && this.isNoRoundVal == null && this.currConfig.isNoRound != null)) {
       this.isNoRoundVal = !!(BooleanUtil.init(this.isNoRound) ?? (this.currConfig.isNoRound || null));
       isBorderRadius = true;
@@ -187,6 +193,9 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     if (this.isHidePrevVal == null) {
       this.isHidePrevVal = !!(this.currConfig.isHidePrev || null);
       this.settingHidePrev(this.isHidePrevVal, this.renderer, this.hostRef);
+    }
+    if (this.isNoRippleVal == null) {
+      this.isNoRippleVal = !!(this.currConfig.isNoRipple || null);
     }
     if (this.isNoRoundVal == null) {
       this.isNoRoundVal = !!(this.currConfig.isNoRound || null);

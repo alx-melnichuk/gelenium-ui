@@ -7,6 +7,7 @@
         class="glnpg-btn-first"
         [exterior]="exteriorVal"
         [isDisabled]="isDisabledVal || page == 1"
+        [isNoRipple]="isNoRippleVal"
         [size]="sizeVal"
         (click)="doClickPage(1)">
         &ZeroWidthSpace;
@@ -25,6 +26,7 @@
         class="glnpg-btn-prev"
         [exterior]="exteriorVal"
         [isDisabled]="isDisabledVal || page == 1"
+        [isNoRipple]="isNoRippleVal"
         [size]="sizeVal"
         (click)="doClickPage(page - 1)">
         &ZeroWidthSpace;
@@ -53,6 +55,7 @@
           [ngClass]="['glnpg-btn-page', (page === item ? 'gln-selected' : '')]"
           [exterior]="exteriorVal"
           [isDisabled]="isDisabledVal"
+          [isNoRipple]="isNoRippleVal"
           [size]="sizeVal"
           (click)="doClickPage(item)">
           {{ item }}
@@ -64,6 +67,7 @@
         class="glnpg-btn-next"
         [exterior]="exteriorVal"
         [isDisabled]="isDisabledVal || page == count"
+        [isNoRipple]="isNoRippleVal"
         [size]="sizeVal"
         (click)="doClickPage(page + 1)">
         &ZeroWidthSpace;
@@ -82,6 +86,7 @@
         class="glnpg-btn-last"
         [exterior]="exteriorVal"
         [isDisabled]="isDisabledVal || page == count"
+        [isNoRipple]="isNoRippleVal"
         [size]="sizeVal"
         (click)="doClickPage(count)">
         &ZeroWidthSpace;
