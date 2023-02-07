@@ -29,6 +29,7 @@ import { GlnButtonConfig } from './gln-button-config.interface';
 import { GlnLinkDirective } from './gln-link.directive';
 import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from '../directives/gln-frame-ornament/gln-frame-ornam-align.interface';
 import { GlnButtonExterior, GlnButtonExteriorUtil } from './gln-button-exterior.interface';
+import { GlnButtonUtil } from './gln-button.util';
 
 const SIZE: { [key: string]: number } = { short: 38, small: 44, middle: 50, wide: 56, large: 62, huge: 68 };
 
@@ -242,32 +243,19 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   }
 
   private updateCssParams(exterior: GlnButtonExterior, size: number | null, lineHeight: number, elem: ElementRef<HTMLElement>): void {
-    this.cssBorderRadius = null;
-    this.cssPaddingLeft = null;
-    this.cssPaddingRight = null;
-    this.cssPaddingTop = null;
-    this.cssPaddingBottom = null;
-    if (size != null && size > 0 && lineHeight > 0) {
-      this.cssBorderRadius = Math.round(0.1 * size * 100) / 100;
-      const param = (size - lineHeight) / 2;
-      if (exterior === GlnButtonExterior.contained) {
-        this.cssPaddingLeft = Math.round(0.3636 * size * 100) / 100;
-        this.cssPaddingTop = param;
-      } else if (exterior === GlnButtonExterior.outlined) {
-        this.cssPaddingLeft = Math.round(0.3409 * size * 100) / 100;
-        this.cssPaddingTop = param - 1;
-      } else if (exterior === GlnButtonExterior.text) {
-        this.cssPaddingLeft = Math.round(0.2045 * size * 100) / 100;
-        this.cssPaddingTop = param;
-      }
-    }
+    // Get css parameters for the button.
+    const { borderRadius, paddingLeft, paddingTop } = GlnButtonUtil.getCssParams(exterior, size, lineHeight);
+
+    this.cssBorderRadius = borderRadius || null;
     HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, this.cssBorderRadius?.toString().concat('px') || null);
 
-    this.cssPaddingRight = this.cssPaddingLeft;
+    this.cssPaddingLeft = paddingLeft || null;
+    this.cssPaddingRight = paddingLeft || null;
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_LEFT, this.cssPaddingLeft?.toString().concat('px') || null);
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_RIGHT, this.cssPaddingRight?.toString().concat('px') || null);
 
-    this.cssPaddingBottom = this.cssPaddingTop;
+    this.cssPaddingTop = paddingTop || null;
+    this.cssPaddingBottom = paddingTop || null;
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TOP, this.cssPaddingTop?.toString().concat('px') || null);
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_BOTTOM, this.cssPaddingBottom?.toString().concat('px') || null);
   }
