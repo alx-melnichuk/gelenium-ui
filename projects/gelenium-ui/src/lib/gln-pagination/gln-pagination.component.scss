@@ -25,13 +25,12 @@ gln-pagination {
     list-style: none;
     margin: 0;
     padding: 0;
-    // --glnbt-foc-bg-cl: hsl(var(--gln-primary-h), var(--gln-primary-s), 95%);
   }
 
   // Block "<gln-button glnpg-size>"
   [glnpg-size] {
     --glnbt-uppercase: none;
-    margin: 0 3px;
+    margin: 0 var(--glnpg-indent-items, 3px);
   }
 
   // Block "<gln-button>"

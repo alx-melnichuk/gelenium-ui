@@ -20,7 +20,7 @@ import { GlnPaginationConfig } from './gln-pagination-config.interface';
 import { GlnPaginationUtil } from './gln-pagination.util';
 
 const SIZE: { [key: string]: number } = { short: 38, small: 44, middle: 50, wide: 56, large: 62, huge: 68 };
-const EXTERIOR: { [key: string]: string } = { text: 'text', outlined: 'outlined', contained: 'contained' };
+const EXTERIOR: { [key: string]: string } = { text: 'text', outlined: 'outlined' };
 
 const CSS_PROP_SIZE = '--glnpg--size';
 const CSS_PROP_BORDER_RADIUS = '--glnbt-br-rd';
@@ -34,6 +34,7 @@ let uniqueIdCounter = 0;
 
 @Component({
   selector: 'gln-pagination',
+  exportAs: 'glnPagination',
   templateUrl: './gln-pagination.component.html',
   styleUrls: ['./gln-pagination.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -44,12 +45,12 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   public id = `glnpg-${uniqueIdCounter++}`;
   @Input()
   public config: GlnPaginationConfig | null | undefined;
-  @Input() // The total number of pages.
-  public count: number = 1;
-  @Input() // The number of always visible pages at the beginning and at the end.
-  public countBorder: number = 1; // boundaryCount
-  @Input() // The number of always visible pages before and after the current page.
-  public countNearby: number = 1; // siblingCount
+  @Input()
+  public count: number | null | undefined = 1;
+  @Input()
+  public countBorder: number | null | undefined = 1;
+  @Input()
+  public countNearby: number | null | undefined = 1;
   @Input()
   public exterior: string | null | undefined;
   @Input()
@@ -232,7 +233,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   }
 
   public doClickPage(itemPage: number | null): void {
-    if (!this.isDisabledVal && itemPage != null && 0 < itemPage && itemPage <= this.count) {
+    if (!this.isDisabledVal && itemPage != null && this.countVal != null && 0 < itemPage && itemPage <= this.countVal) {
       this.changePage.emit(itemPage);
     }
   }
