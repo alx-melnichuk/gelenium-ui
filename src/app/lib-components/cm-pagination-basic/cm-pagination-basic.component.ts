@@ -103,6 +103,7 @@ export class CmPaginationBasicComponent {
   public exterior12a = 'outlined';
   public page12a: number = 1;
   public page12b: number = 1;
+  public page12c: number = 1;
 
   // Page: "PaletteMaterialUI" 13
   public page13a: number = 1;
