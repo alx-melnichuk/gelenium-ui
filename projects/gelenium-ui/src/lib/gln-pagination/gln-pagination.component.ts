@@ -61,7 +61,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   @Input()
   public isNoRipple: string | boolean | null | undefined;
   @Input()
-  public isNoRound: string | boolean | null | undefined;
+  public isNoRounded: string | boolean | null | undefined;
   @Input()
   public isShowFirst: string | boolean | null | undefined;
   @Input()
@@ -83,7 +83,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   public isHideNextVal: boolean | null = null; // Binding attribute "isHideNext".
   public isHidePrevVal: boolean | null = null; // Binding attribute "isHidePrev".
   public isNoRippleVal: boolean | null = null; // Binding attribute "isNoRipple".
-  public isNoRoundVal: boolean | null = null; // Binding attribute "isNoRound".
+  public isNoRoundedVal: boolean | null = null; // Binding attribute "isNoRounded".
   public isShowFirstVal: boolean | null = null; // Binding attribute "isShowFirst".
   public isShowLastVal: boolean | null = null; // Binding attribute "isShowLast".
   public pageBuffer: number[] = [];
@@ -140,8 +140,8 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     if (changes['isNoRipple'] || (changes['config'] && this.isNoRippleVal == null && this.currConfig.isNoRipple != null)) {
       this.isNoRippleVal = !!(BooleanUtil.init(this.isNoRipple) ?? (this.currConfig.isNoRipple || null));
     }
-    if (changes['isNoRound'] || (changes['config'] && this.isNoRoundVal == null && this.currConfig.isNoRound != null)) {
-      this.isNoRoundVal = !!(BooleanUtil.init(this.isNoRound) ?? (this.currConfig.isNoRound || null));
+    if (changes['isNoRounded'] || (changes['config'] && this.isNoRoundedVal == null && this.currConfig.isNoRounded != null)) {
+      this.isNoRoundedVal = !!(BooleanUtil.init(this.isNoRounded) ?? (this.currConfig.isNoRounded || null));
       isBorderRadius = true;
     }
     if (changes['isShowFirst'] || (changes['config'] && this.isShowFirstVal == null && this.currConfig.isShowFirst != null)) {
@@ -159,7 +159,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       isBorderRadius = true;
     }
     if (isBorderRadius) {
-      this.setCssBorderRadius(this.sizeVal, this.isNoRoundVal, this.hostRef);
+      this.setCssBorderRadius(this.sizeVal, this.isNoRoundedVal, this.hostRef);
     }
   }
 
@@ -197,8 +197,8 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     if (this.isNoRippleVal == null) {
       this.isNoRippleVal = !!(this.currConfig.isNoRipple || null);
     }
-    if (this.isNoRoundVal == null) {
-      this.isNoRoundVal = !!(this.currConfig.isNoRound || null);
+    if (this.isNoRoundedVal == null) {
+      this.isNoRoundedVal = !!(this.currConfig.isNoRounded || null);
       isBorderRadius = true;
     }
     if (this.isShowFirstVal == null) {
@@ -217,7 +217,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     }
 
     if (isBorderRadius) {
-      this.setCssBorderRadius(this.sizeVal, this.isNoRoundVal, this.hostRef);
+      this.setCssBorderRadius(this.sizeVal, this.isNoRoundedVal, this.hostRef);
     }
 
     if (isPageBuffer || this.pageBuffer.length === 0) {
@@ -251,8 +251,8 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   private setCssSize(size: number, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setProperty(elem, CSS_PROP_SIZE, (size > 0 ? size.toString() : null)?.concat('px'));
   }
-  private setCssBorderRadius(size: number | null, isNoRound: boolean | null, elem: ElementRef<HTMLElement>): void {
-    const borderRadius: number = !isNoRound && size != null && size > 0 ? Math.round((size / 2) * 100) / 100 : 0;
+  private setCssBorderRadius(size: number | null, isNoRounded: boolean | null, elem: ElementRef<HTMLElement>): void {
+    const borderRadius: number = !isNoRounded && size != null && size > 0 ? Math.round((size / 2) * 100) / 100 : 0;
     HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, (borderRadius > 0 ? borderRadius.toString() : null)?.concat('px'));
   }
   private settingExterior(exterior: string, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {

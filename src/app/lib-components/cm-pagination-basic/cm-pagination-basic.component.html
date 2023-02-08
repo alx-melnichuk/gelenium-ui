@@ -403,6 +403,10 @@ app-input &#123;
       "countNearby" - number of always visible pages before and after the current page;<br />
       (default 1)
     </li>
+    <li>
+      "isNoRipple" - This property to turn off the ripple effect;<br />
+      (default false)
+    </li>
   </ul>
 </section>
 
@@ -425,13 +429,14 @@ app-input &#123;
   <div class="app-elem pga-elem">
     <div>
       <small>
-        <em>Attributes: page=6, countNearby=0.</em>
+        <em>Attributes: page=6, countNearby=0, isNoRipple.</em>
       </small>
     </div>
     <gln-pagination [page]="page02f"
       [count]="11"
       [exterior]="exterior02b"
       [countNearby]="0"
+      isNoRipple
       (changePage)="page02f = $event">
     </gln-pagination>
   </div>
@@ -502,6 +507,7 @@ app-input &#123;
       [count]="11"
       [exterior]="exterior02b"
       [countNearby]="0"
+      isNoRipple
       (changePage)="page02f = $event"&gt;
     &lt;/gln-pagination&gt;
   &lt;/div&gt;
@@ -1090,7 +1096,7 @@ _<i id="Border">#B</i>
     <br />
     If you exclude this css-property, then the shape of the buttons will be square.
     <br />
-    To disable this css property, you need to add the 'isNoRound' attribute.
+    To disable this css property, you need to add the 'isNoRounded' attribute.
   </p>
 </section>
 
@@ -1101,14 +1107,14 @@ _<i id="Border">#B</i>
   <div class="app-elem pgr-elem">
     <div>
       <small>
-        <em>Attributes: isNoRound, Exterior: 'text'.</em>
+        <em>Attributes: isNoRounded, Exterior: 'text'.</em>
       </small>
     </div>
     <gln-pagination [page]="page04a"
       style="font-size: 16px;"
       [count]="10"
       exterior="text"
-      isNoRound
+      isNoRounded
       (changePage)="page04a = $event">
     </gln-pagination>
   </div>
@@ -1116,14 +1122,14 @@ _<i id="Border">#B</i>
   <div class="app-elem pgr-elem">
     <div>
       <small>
-        <em>Config: isNoRound, Exterior: 'outlined'.</em>
+        <em>Config: isNoRounded, Exterior: 'outlined'.</em>
       </small>
     </div>
     <gln-pagination [page]="page04b"
       style="font-size: 16px;"
       [count]="10"
       exterior="outlined"
-      [config]="{ isNoRound: true }"
+      [config]="{ isNoRounded: true }"
       (changePage)="page04b = $event">
     </gln-pagination>
   </div>
@@ -1145,14 +1151,14 @@ _<i id="Border">#B</i>
   &lt;div class="app-elem pgr-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
-        &lt;em&gt;Attributes: isNoRound, Exterior: 'text'.&lt;/em&gt;
+        &lt;em&gt;Attributes: isNoRounded, Exterior: 'text'.&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-pagination [page]="page04a"
       style="font-size: 16px;"
       [count]="10"
       exterior="text"
-      isNoRound
+      isNoRounded
       (changePage)="page04a = $event"&gt;
     &lt;/gln-pagination&gt;
   &lt;/div&gt;
@@ -1160,14 +1166,14 @@ _<i id="Border">#B</i>
   &lt;div class="app-elem pgr-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
-        &lt;em&gt;Config: isNoRound, Exterior: 'outlined'.&lt;/em&gt;
+        &lt;em&gt;Config: isNoRounded, Exterior: 'outlined'.&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-pagination [page]="page04b"
       style="font-size: 16px;"
       [count]="10"
       exterior="outlined"
-      [config]="&#123; isNoRound: true &#125;"
+      [config]="&#123; isNoRounded: true &#125;"
       (changePage)="page04b = $event"&gt;
     &lt;/gln-pagination&gt;
   &lt;/div&gt;
@@ -1654,7 +1660,7 @@ export class AppComponent &#123;
     </tr>
     <tr>
       <td>
-        <code>isNoRound?: boolean;</code>
+        <code>isNoRounded?: boolean;</code>
       </td>
       <td>
         <span>
@@ -1777,7 +1783,7 @@ const glnPaginationConfigDefault: GlnPaginationConfig = &#123;
   exterior="text",
   isHideNext=false,
   isHidePrev=false,
-  isNoRound=false,
+  isNoRounded=false,
   isShowFirst=false,
   isShowLast=false,
   size="short"</pre></code>
@@ -2100,7 +2106,7 @@ _<i id="Bootstrap">#PB</i>
       [count]="10"
       exterior="outlined"
       size="short"
-      isNoRound
+      isNoRounded
       (changePage)="page12a = $event">
       <span gln-orn-prev
         class="pgpb-pd">Previous</span>
@@ -2120,7 +2126,7 @@ _<i id="Bootstrap">#PB</i>
       [count]="10"
       exterior="outlined"
       size="short"
-      isNoRound
+      isNoRounded
       isDisabled
       (changePage)="page12b = $event">
       <span gln-orn-prev
