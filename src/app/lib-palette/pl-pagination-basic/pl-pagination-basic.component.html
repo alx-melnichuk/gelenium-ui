@@ -4,8 +4,26 @@
     <a [href]="urlPlPagination + '#Basic'">#</a>
   </h4>
   <p>
-    The GlnPagination component has a default palette.
+    The GlnPagination component has the ability to change its color.
   </p>
+  <span>For example:</span>
+  <code><pre source="html">
+&lt;gln-pagination
+  <i><strong>[glnColor]="&#123; primary: 'danger' &#125;"</strong></i>
+  [page]="page10a"
+  [count]="10"
+  (changePage)="page10a = $event"&gt;
+&lt;/gln-pagination&gt;</pre></code>
+  <p>
+    This means that you want to use the system color "danger"
+    as the "primary" color.
+  </p>
+  <span>
+    To use the glnColor directive, you need to add in your module:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
+  </code>
 </section>
 
 <section mr-vr>
@@ -39,15 +57,75 @@
   <div class="app-elem pgpb-elem">
     <div>
       <small>
-        <em>Attributes: count, page, exterior, isDisabled.</em>
+        <em>Attributes: count, page, exterior, color='danger'.</em>
       </small>
     </div>
     <gln-pagination [page]="page11b"
       style="font-size: 16px;"
       [count]="10"
+      [glnColor]="{ primary: 'danger' }"
+      [exterior]="exterior11a"
+      (changePage)="page11b = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpb-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior, color='success'.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page11c"
+      style="font-size: 16px;"
+      [count]="10"
+      [glnColor]="{ primary: 'success' }"
+      [exterior]="exterior11a"
+      (changePage)="page11c = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpb-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior, color='info'.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page11d"
+      style="font-size: 16px;"
+      [count]="10"
+      [glnColor]="{ primary: 'info' }"
+      [exterior]="exterior11a"
+      (changePage)="page11d = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpb-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior, color='warning'.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page11e"
+      style="font-size: 16px;"
+      [count]="10"
+      [glnColor]="{ primary: 'warning' }"
+      [exterior]="exterior11a"
+      (changePage)="page11e = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpb-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior, isDisabled.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page11f"
+      style="font-size: 16px;"
+      [count]="10"
       [exterior]="exterior11a"
       isDisabled
-      (changePage)="page11b = $event">
+      (changePage)="page11f = $event">
     </gln-pagination>
   </div>
 
@@ -82,15 +160,75 @@
   &lt;div class="app-elem pgpb-elem"&gt;
     &lt;div&gt;
       &lt;small&gt;
-        &lt;em&gt;Attributes: count, page, exterior, isDisabled.&lt;/em&gt;
+        &lt;em&gt;Attributes: count, page, exterior, color='danger'.&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;gln-pagination [page]="page11b"
       style="font-size: 16px;"
       [count]="10"
+      [glnColor]="&#123; primary: 'danger' &#125;"
+      [exterior]="exterior11a"
+      (changePage)="page11b = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpb-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior, color='success'.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page11c"
+      style="font-size: 16px;"
+      [count]="10"
+      [glnColor]="&#123; primary: 'success' &#125;"
+      [exterior]="exterior11a"
+      (changePage)="page11c = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpb-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior, color='info'.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page11d"
+      style="font-size: 16px;"
+      [count]="10"
+      [glnColor]="&#123; primary: 'info' &#125;"
+      [exterior]="exterior11a"
+      (changePage)="page11d = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpb-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior, color='warning'.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page11e"
+      style="font-size: 16px;"
+      [count]="10"
+      [glnColor]="&#123; primary: 'warning' &#125;"
+      [exterior]="exterior11a"
+      (changePage)="page11e = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpb-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior, isDisabled.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page11f"
+      style="font-size: 16px;"
+      [count]="10"
       [exterior]="exterior11a"
       isDisabled
-      (changePage)="page11b = $event"&gt;
+      (changePage)="page11f = $event"&gt;
     &lt;/gln-pagination&gt;
   &lt;/div&gt;
 
@@ -109,9 +247,12 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class PaginationComponent &#123;
-  public exterior11a = 'outlined';
   public page11a: number = 1;
   public page11b: number = 1;
+  public page11c: number = 1;
+  public page11d: number = 1;
+  public page11e: number = 1;
+  public page11f: number = 1;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

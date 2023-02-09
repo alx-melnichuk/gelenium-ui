@@ -31,6 +31,10 @@ export class PlPaginationBasicComponent {
   public exterior11a = 'outlined';
   public page11a: number = 1;
   public page11b: number = 1;
+  public page11c: number = 1;
+  public page11d: number = 1;
+  public page11e: number = 1;
+  public page11f: number = 1;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
