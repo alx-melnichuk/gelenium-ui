@@ -1,0 +1,140 @@
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Basic.
+    <a [href]="urlPlPagination + '#Basic'">#</a>
+  </h4>
+  <p>
+    The GlnPagination component has a default palette.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior11a"
+    (change)="exterior11a=$event.value">
+    <mat-button-toggle [checked]="exterior11a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior11a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem pgpb-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page11a"
+      style="font-size: 16px;"
+      [count]="10"
+      [exterior]="exterior11a"
+      (changePage)="page11a = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpb-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior, isDisabled.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page11b"
+      style="font-size: 16px;"
+      [count]="10"
+      [exterior]="exterior11a"
+      isDisabled
+      (changePage)="page11b = $event">
+    </gln-pagination>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem pgpb-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page11a"
+      style="font-size: 16px;"
+      [count]="10"
+      [exterior]="exterior11a"
+      (changePage)="page11a = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpb-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior, isDisabled.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page11b"
+      style="font-size: 16px;"
+      [count]="10"
+      [exterior]="exterior11a"
+      isDisabled
+      (changePage)="page11b = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class PaginationComponent &#123;
+  public exterior11a = 'outlined';
+  public page11a: number = 1;
+  public page11b: number = 1;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .pgpb-elem &#123;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

@@ -1,0 +1,212 @@
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Like a Bootstrap.
+    <a [href]="urlPlPagination + '#Bootstrap'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnPagination in style as "Bootstrap".
+  </p>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem pgpbs-elem">
+    <div>
+      <small>
+        <em>Attributes: count=10, exterior='text'.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpbs-bs"
+      [page]="page12a"
+      [count]="10"
+      exterior="text"
+      size="short"
+      isNoRipple
+      isNoRounded
+      (changePage)="page12a = $event">
+      <span gln-orn-prev
+        class="pgpbs-pd">Previous</span>
+      <span gln-orn-next
+        class="pgpbs-pd">Next</span>
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpbs-elem">
+    <div>
+      <small>
+        <em>Attributes: count=10, exterior='text', icons.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpbs-bs"
+      [page]="page12b"
+      [count]="10"
+      exterior="text"
+      size="short"
+      isNoRipple
+      isNoRounded
+      (changePage)="page12b = $event">
+      <span gln-orn-prev
+        class="pgpbs-pd">&laquo;</span>
+      <span gln-orn-next
+        class="pgpbs-pd">&raquo;</span>
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpbs-elem">
+    <div>
+      <small>
+        <em>Attributes: count=10, exterior='text', isDisabled.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpbs-bs"
+      [page]="page12c"
+      [count]="10"
+      exterior="text"
+      size="short"
+      isNoRipple
+      isNoRounded
+      isDisabled
+      (changePage)="page12c = $event">
+      <span gln-orn-prev
+        class="pgpbs-pd">Previous</span>
+      <span gln-orn-next
+        class="pgpbs-pd">Next</span>
+    </gln-pagination>
+  </div>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem pgpbs-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count=10, exterior='text'.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination class="pgpbs-bs"
+      [page]="page12a"
+      [count]="10"
+      exterior="text"
+      size="short"
+      isNoRipple
+      isNoRounded
+      (changePage)="page12a = $event"&gt;
+      &lt;span gln-orn-prev
+        class="pgpbs-pd"&gt;Previous&lt;/span&gt;
+      &lt;span gln-orn-next
+        class="pgpbs-pd"&gt;Next&lt;/span&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpbs-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count=10, exterior='text', icons.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination class="pgpbs-bs"
+      [page]="page12b"
+      [count]="10"
+      exterior="text"
+      size="short"
+      isNoRipple
+      isNoRounded
+      (changePage)="page12b = $event"&gt;
+      &lt;span gln-orn-prev
+        class="pgpbs-pd"&gt;&laquo;&lt;/span&gt;
+      &lt;span gln-orn-next
+        class="pgpbs-pd"&gt;&raquo;&lt;/span&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpbs-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count=10, exterior='text', isDisabled.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination class="pgpbs-bs"
+      [page]="page12c"
+      [count]="10"
+      exterior="text"
+      size="short"
+      isNoRipple
+      isNoRounded
+      isDisabled
+      (changePage)="page12c = $event"&gt;
+      &lt;span gln-orn-prev
+        class="pgpbs-pd"&gt;Previous&lt;/span&gt;
+      &lt;span gln-orn-next
+        class="pgpbs-pd"&gt;Next&lt;/span&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class PaginationComponent &#123;
+  public page12a: number = 1;
+  public page12b: number = 1;
+  public page12c: number = 1;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .pgpbs-elem &#123;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  &#125;
+  .pgpbs-bs &#123;
+    font-size: 16px;
+    --glnpg-indent-items: 0px;
+    --glnbt-br-rd: 0px;
+    gln-button &#123;
+      margin-left: -1px;
+      border: 1px solid #dee2e6;
+    &#125;
+    --glnpg-def-lb-cl: #007bff;
+  &#125;
+  .pgpbs-pd &#123;
+    padding-left: 1em;
+    padding-right: 1em;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

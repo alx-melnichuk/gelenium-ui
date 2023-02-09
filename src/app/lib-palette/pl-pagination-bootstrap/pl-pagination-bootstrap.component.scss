@@ -1,0 +1,25 @@
+/*# sourceURL=pl-pagination-bootstrap.component.scss */
+
+app-pl-pagination-bootstrap {
+  display: block;
+
+  .pgpbs-elem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .pgpbs-bs {
+    font-size: 16px;
+    --glnpg-indent-items: 0px;
+    --glnbt-br-rd: 0px;
+    gln-button {
+      margin-left: -1px;
+      border: 1px solid #dee2e6;
+    }
+    --glnpg-def-lb-cl: #007bff;
+  }
+  .pgpbs-pd {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}

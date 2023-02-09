@@ -9,6 +9,7 @@ import { LmPaletteComponent } from './lm-palette.component';
 const URL_PALETTE_BUTTON = RouterConfig.get('URL_PALETTE_BUTTON');
 const URL_PALETTE_FRAME = RouterConfig.get('URL_PALETTE_FRAME');
 const URL_PALETTE_INPUT = RouterConfig.get('URL_PALETTE_INPUT');
+const URL_PALETTE_PAGINATION = RouterConfig.get('URL_PALETTE_PAGINATION');
 const URL_PALETTE_SELECT = RouterConfig.get('URL_PALETTE_SELECT');
 const URL_PALETTE_TEXTAREA = RouterConfig.get('URL_PALETTE_TEXTAREA');
 
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: URL_PALETTE_INPUT,
         loadChildren: () => import('../lib-palette/pl-input/pl-input.module').then((m) => m.PlInputModule),
+      },
+      {
+        path: URL_PALETTE_PAGINATION,
+        loadChildren: () => import('../lib-palette/pl-pagination/pl-pagination.module').then((m) => m.PlPaginationModule),
       },
       {
         path: URL_PALETTE_SELECT,
