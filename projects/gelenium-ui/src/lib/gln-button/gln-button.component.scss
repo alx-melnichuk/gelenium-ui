@@ -189,12 +189,14 @@ gln-button {
     &>a:not([glnbt-mr-ver]) {
       display: flex;
       align-items: center;
+      justify-content: center;
       padding-top: var(--glnbt-pd-tp, var(--glnbtf--pd-tp, var(--def-lb-pd-tp)));
       padding-bottom: var(--glnbt-pd-bt, var(--glnbtf--pd-bt, var(--def-lb-pd-tp)));
     }
     &>[glnbt-mr-ver] {
       display: flex;
       align-items: center;
+      justify-content: center;
       margin-top: var(--glnbt-pd-tp, var(--glnbtf--pd-tp, var(--def-lb-pd-tp)));
       margin-bottom: var(--glnbt-pd-bt, var(--glnbtf--pd-bt, var(--def-lb-pd-tp)));
     }
