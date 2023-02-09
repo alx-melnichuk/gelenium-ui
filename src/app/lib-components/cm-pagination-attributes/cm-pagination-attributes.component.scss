@@ -1,0 +1,11 @@
+/*# sourceURL=cm-pagination-attributes.component.scss */
+
+app-cm-pagination-attributes {
+  display: block;
+
+  .pga-elem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}

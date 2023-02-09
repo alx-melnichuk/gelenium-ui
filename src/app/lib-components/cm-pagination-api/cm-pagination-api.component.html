@@ -1,0 +1,724 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    API: GlnPagination.
+    <a [href]="urlCmPagination + '#Api'">#</a>
+  </h3>
+  <p>
+    Selector:
+    <span fw500>gln-pagination</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>glnPagination</span>
+  </p>
+</section>
+
+<section mr-vr
+  id="api-properties">
+  <h4 class="app-hover-link">
+    Properties.
+    <a [href]="urlCmPagination + '#api-properties'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>id: string;</code>
+      </td>
+      <td>
+        <span>
+          ID of the native element.
+          <br />(default = `glnpg-$&#123;uniqueIdCounter++&#125;`;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>config: GlnPaginationConfig<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Defines a configuration object.</span><br />
+        <a [href]="urlCmPagination + '#config-interface'">More details.</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>count: number<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          The total number of pages.<br />
+          (Default 1)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>countBorder: number<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          The number of always visible pages at the beginning and at the end.<br />
+          (Default 1)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>countNearby: number<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          The number of always visible pages before and after the current page.<br />
+          (Default 1)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>exterior: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Determines the appearance of an element.<br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"text" (default);</li>
+          <li>"outlined";</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isDisabled: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates that the element is disabled.<br />
+          (default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isHideNext: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates that the "Next" button is hidden.<br />
+          (default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isHidePrev: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates that the "Previous" button is hidden.<br />
+          (default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoRipple: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Flag for disabling the ripple effect.<br />
+          (default = false;) Attribute (no content).
+        </span><br />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoRounded: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          The flag disables the round button image, it will be displayed rectangular.
+          <br />
+          (default = false;) Attribute (no content).
+        </span><br />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isShowFirst: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates that the "First" button is displayed.
+          <br />
+          (default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isShowLast: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates that the "Last" button is displayed.
+          <br />
+          (default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>page: number</code>
+      </td>
+      <td>
+        <span>
+          Current page number.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>size: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Determines the size of the element.<br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"short" - height: 38px (default);</li>
+          <li>"small" - height: 44px;</li>
+          <li>"middle" - height: 50px;</li>
+          <li>"wide" - height: 56px;</li>
+          <li>"large" - height: 62px;</li>
+          <li>"huge" - height: 68px;</li>
+        </ul>
+        <span>
+          This property can also contain the element's height in pixels, either as a string
+          or as a number.<br />
+          The value in the units of "pixels" allow you to accurately calculate the size of
+          internal elements.<br />
+          For example: <code>size="57" or [size]="57"</code>
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>changePage: EventEmitter&lt;number&gt;;</code>
+      </td>
+      <td>
+        <span>
+          Fires when a new page is selected.<br />
+          Contains the number of the newly selected page.
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<section mr-vr
+  id="api-methods">
+  <h4 class="app-hover-link">
+    Methods
+    <a [href]="urlCmPagination + '#api-methods'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>doClickPage(itemPage: number | null): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Select a new page.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Parameters</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>itemPage: number<br/>
+          &nbsp;&nbsp;| null;</code>
+      </td>
+      <td>
+        The number of the newly selected page.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<section mr-vr
+  id="api-css-variables-optional">
+  <h4 class="app-hover-link">
+    Css variables, optional. You can override the default values.
+    <a [href]="urlCmPagination + '#api-css-variables-optional'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--glnpg--default-h:<br/>
+        &nbsp;var(--glncl-default-h,<br/>
+        &nbsp;&nbsp;var(--gln-default-h)<br/>
+        &nbsp;);</code></td>
+      <td>
+        <span>
+          The value of the color of additional elements and in the "disabled" state.
+        </span>
+        <br />
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-default-h</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-default-h</code>.<br />
+          The hue value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg--default-s:<br/>
+        &nbsp;var(--glncl-default-s,<br/>
+        &nbsp;&nbsp;var(--gln-default-s)<br/>
+        &nbsp;);</code></td>
+      <td>
+        <span>
+          The value of the color of additional elements and in the "disabled" state.
+        </span>
+        <br />
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-default-s</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-default-s</code>.<br />
+          The saturation value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg--default-l:<br/>
+        &nbsp;var(--glncl-default-l,<br/>
+        &nbsp;&nbsp;var(--gln-default-l)<br/>
+        &nbsp;);</code></td>
+      <td>
+        <span>
+          The value of the color of additional elements and in the "disabled" state.
+        </span>
+        <br />
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-default-l</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-default-l</code>.<br />
+          The lightness value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg--default-bg-h:<br/>
+        &nbsp;var(--glncl-default-bg-h,<br/>
+        &nbsp;&nbsp;var(--gln-default-bg-h)<br/>
+        &nbsp;);</code>
+      </td>
+      <td>
+        <span>
+          This setting defines text color and ripple effect.
+        </span>
+        <br />
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-default-bg-h</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-default-bg-h</code>.<br />
+          The hue value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg--default-bg-s:<br/>
+        &nbsp;var(--glncl-default-bg-s,<br/>
+        &nbsp;&nbsp;var(--gln-default-bg-s)<br/>
+        &nbsp;);</code>
+      </td>
+      <td>
+        <span>
+          This setting defines text color and ripple effect.
+        </span>
+        <br />
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-default-bg-s</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-default-bg-s</code>.<br />
+          The saturation value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg--default-bg-l:<br/>
+        &nbsp;var(--glncl-default-bg-l,<br/>
+        &nbsp;&nbsp;var(--gln-default-bg-l)<br/>
+        &nbsp;);</code>
+      </td>
+      <td>
+        <span>
+          This setting defines text color and ripple effect.
+        </span>
+        <br />
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-default-bg-l</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-default-bg-l</code>.<br />
+          The lightness value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg--primary-h:<br/>
+        &nbsp;var(--glncl-primary-h,<br/>
+        &nbsp;&nbsp;var(--gln-primary-h)<br/>
+        &nbsp;);</code>
+      </td>
+      <td>
+        <span>
+          This setting specifies the color of the currently selected element.
+        </span>
+        <br />
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-primary-h</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-primary-h</code>.<br />
+          The hue value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg--primary-s:<br/>
+        &nbsp;var(--glncl-primary-s,<br/>
+        &nbsp;&nbsp;var(--gln-primary-s)<br/>
+        &nbsp;);</code>
+      </td>
+      <td>
+        <span>
+          This setting specifies the color of the currently selected element.
+        </span>
+        <br />
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-primary-s</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-primary-s</code>.<br />
+          The saturation value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg--primary-l:<br/>
+        &nbsp;var(--glncl-primary-l,<br/>
+        &nbsp;&nbsp;var(--gln-primary-l)<br/>
+        &nbsp;);</code>
+      </td>
+      <td>
+        <span>
+          This setting specifies the color of the currently selected element.
+        </span>
+        <br />
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-primary-l</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-primary-l</code>.<br />
+          The lightness value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<section mr-vr
+  id="api-css-variables-option">
+  <h4>
+    Css variables, optional. You can override the default values.
+    <a [href]="urlCmPagination + '#api-css-variables-option'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--glnpg-indent-items: 3px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the value of the horizontal margin between buttons.
+        </span>
+        <br />
+        Default 3px.
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><em>Default values. The element is not selected.</em></td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-def-lb-cl:<br/>
+        &nbsp;hsla(--glnpg--default-[h,s,l],95%); // "outlined", "text"</code>
+      </td>
+      <td>
+        <span>Text color.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-def-br-cl:<br/>
+        &nbsp;hsla(--glnpg--default-[h,s,l],23%); // "outlined"</code>
+      </td>
+      <td>
+        <span>Border color.</span>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><em>Values on mouseover. The element is not selected.</em></td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-hov-lb-cl:<br/>
+        &nbsp;hsla(--glnpg--default-[h,s,l],95%); // "outlined", "text"</code>
+      </td>
+      <td>
+        <span>Text color when hovering the mouse.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-hov-br-cl:<br/>
+        &nbsp;hsla(--glnpg--default-[h,s,l],30%); // "outlined"</code>
+      </td>
+      <td>
+        <span>
+          Border color when hovering the mouse.<br />
+          The value is defined only for the "outlined" mode.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-hov-bg-cl:<br/>
+        &nbsp;hsla(--glnpg--default-[h,s,l],08%); // "outlined", "text"</code>
+      </td>
+      <td>
+        <span>
+          Background color when hovering the mouse.
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><em>Values for the "ripple" effect. The element is not selected.</em></td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-ripple-cl:<br/>
+        &nbsp;hsla(--glnpg--default-[h,s,l],38%); // "outlined", "text"</code>
+      </td>
+      <td>
+        <span>
+          The color of the ripple effect.
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><em>Values when status: "disabled". The element is not selected.</em></td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-dis-br-cl:<br/>
+        &nbsp;hsla(--glnpg--default-[h,s,l],15%); // "outlined"</code>
+      </td>
+      <td>
+        <span>
+          Background color for status: "disabled".
+        </span>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td colspan="2"><em>Default values. The element is selected.</em></td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-sel-def-lb-cl:<br/>
+        &nbsp;hsl(--glnbt--default-bg-[h,s,l]); // "text"<br/>
+        &nbsp;hsla(--glnbt--primary-[h,s,l],95%); // "outlined"</code>
+      </td>
+      <td>
+        <span>Text color. The element is selected.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-sel-def-br-cl:<br/>
+        &nbsp;hsla(--glnbt--primary-[h,s,l],40%); // "outlined"</code>
+      </td>
+      <td>
+        <span>Border color. The element is selected.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-sel-def-bg-cl:<br/>
+        &nbsp;hsl(--glnbt--primary-[h,s,l]); // "text"<br/>
+        &nbsp;hsla(--glnbt--primary-[h,s,l],12%); // "outlined"</code>
+      </td>
+      <td>
+        <span>Background color. The element is selected.</span>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><em>Values on mouseover. The element is selected.</em></td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-sel-hov-lb-cl:<br/>
+        &nbsp;hsl(--glnbt--default-bg-[h,s,l]); // "text"<br/>
+        &nbsp;hsla(--glnbt--primary-[h,s,l],95%); // "outlined"</code>
+      </td>
+      <td>
+        <span>Text color when hovering the mouse. The element is selected.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-sel-hov-br-cl:<br/>
+        &nbsp;hsla(--glnbt--primary-[h,s,l],30%); // "outlined"</code>
+      </td>
+      <td>
+        <span>
+          Border color when hovering the mouse. The element is selected.<br />
+          The value is defined only for the "outlined" mode.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-sel-hov-bg-cl:<br/>
+        &nbsp;hsl(--glnbt--primary-[h,s], --glnbt--primary-l - 10%); // "text"<br/>
+        &nbsp;hsla(--glnbt--primary-[h,s,l],24%); // "outlined"</code>
+      </td>
+      <td>
+        <span>
+          Background color when hovering the mouse. The element is selected.
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><em>Values for the "ripple" effect. The element is selected.</em></td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-sel-ripple-cl:<br/>
+        &nbsp;hsla(--glnpg--default-bg-[h,s,l],38%); // "text"<br/>
+        &nbsp;hsla(--glnbt--primary-[h,s,l],38%); // "outlined"</code>
+      </td>
+      <td>
+        <span>
+          The color of the ripple effect. The element is selected.
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><em>Values when status: "disabled". The element is selected.</em></td>
+    </tr>
+    <tr>
+      <td><code>--glnpg-sel-dis-bg-cl:<br/>
+        &nbsp;hsla(--glnpg--default-[h,s,l],08%); // "outlined", "text"</code>
+      </td>
+      <td>
+        <span>
+          Background color for status: "disabled". The element is selected.
+        </span>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

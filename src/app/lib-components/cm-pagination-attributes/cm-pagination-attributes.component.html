@@ -1,0 +1,446 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Attributes.
+    <a [href]="urlCmPagination + '#Attributes'">#</a>
+  </h3>
+  <p>The following attributes are supported:</p>
+  <ul>
+    <li>"id" - parameter for defining the unique identifier of the input field
+      (id="unique_identifier");
+    </li>
+    <li>
+      "config" - Defines a configuration object.
+      <a [href]="urlCmPagination + '#config-interface'">More details.</a>
+    </li>
+    <li>
+      "count" - total number of pages;
+      (default 1)
+    </li>
+    <li>
+      "page" - current page number;
+      (default 1)
+    </li>
+    <li>
+      "exterior" - Determines the appearance of an element.<br />
+      It can take the following values:
+      <ul>
+        <li>"text" - default;</li>
+        <li>"outlined";</li>
+      </ul>
+    </li>
+    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
+    <li>
+      "isHidePrev" - indicates that the "previous page" button is hidden (isHidePrev);
+    </li>
+    <li>
+      "isHideNext" - indicates that the "next page" button is hidden (isHideNext);
+    </li>
+    <li>
+      "isShowFirst" - indicates that the "first page" button is displayed (isShowFirst);
+    </li>
+    <li>
+      "isShowLast" - indicates that the "last page" button is displayed (isShowLast);
+    </li>
+  </ul>
+</section>
+
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior02a"
+    (change)="exterior02a=$event.value">
+    <mat-button-toggle [checked]="exterior02a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem pga-elem">
+    <div>
+      <small>
+        <em>Attributes: id, count, page, exterior.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page02a"
+      id="unique_id_pagination02a"
+      [count]="10"
+      [exterior]="exterior02a"
+      (changePage)="page02a = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pga-elem">
+    <div>
+      <small>
+        <em>Attributes: isDisabled.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page02b"
+      [count]="10"
+      [exterior]="exterior02a"
+      isDisabled
+      (changePage)="page02b = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pga-elem">
+    <div>
+      <small>
+        <em>Attributes: isHidePrev, isHideNext.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page02c"
+      [count]="10"
+      [exterior]="exterior02a"
+      isHidePrev
+      isHideNext
+      (changePage)="page02c = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pga-elem">
+    <div>
+      <small>
+        <em>Attributes: isShowFirst, isShowLast.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page02d"
+      [count]="10"
+      [exterior]="exterior02a"
+      isShowFirst
+      isShowLast
+      (changePage)="page02d = $event">
+    </gln-pagination>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem pga-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: id, count, page, exterior.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page02a"
+      id="unique_id_pagination02a"
+      [count]="10"
+      [exterior]="exterior02a"
+      (changePage)="page02a = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pga-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: isDisabled.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page02b"
+      [count]="10"
+      [exterior]="exterior02a"
+      isDisabled
+      (changePage)="page02b = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+
+  &lt;div class="app-elem pga-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: isHidePrev, isHideNext.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page02c"
+      [count]="10"
+      [exterior]="exterior02a"
+      isHidePrev
+      isHideNext
+      (changePage)="page02c = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pga-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: isShowFirst, isShowLast.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page02d"
+      [count]="10"
+      [exterior]="exterior02a"
+      isShowFirst
+      isShowLast
+      (changePage)="page02d = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class PaginationComponent &#123;
+  public exterior02a = 'outlined';
+  public page02a: number = 1;
+  public page02b: number = 1;
+  public page02c: number = 1;
+  public page02d: number = 1;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .pga-elem &#123;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<!-- <hr br-nn /> -->
+
+<section mr-vr
+  id="attributes-supported02">
+  <h4 class="app-hover-link">
+    Attributes are also supported 2:
+    <a [href]="urlCmPagination + '#attributes-supported02'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "countBorder" - number of always visible pages at the beginning and at the end;<br />
+      (default 1)
+    </li>
+    <li>
+      "countNearby" - number of always visible pages before and after the current page;<br />
+      (default 1)
+    </li>
+    <li>
+      "isNoRipple" - This property to turn off the ripple effect;<br />
+      (default false)
+    </li>
+  </ul>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior02b"
+    (change)="exterior02b=$event.value">
+    <mat-button-toggle [checked]="exterior02b==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior02b==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem pga-elem">
+    <div>
+      <small>
+        <em>Attributes: page=6, countNearby=0, isNoRipple.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page02f"
+      [count]="11"
+      [exterior]="exterior02b"
+      [countNearby]="0"
+      isNoRipple
+      (changePage)="page02f = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pga-elem">
+    <div>
+      <small>
+        <em>Attributes: page=6, countNearby=1.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page02g"
+      [count]="11"
+      [exterior]="exterior02b"
+      (changePage)="page02g = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pga-elem">
+    <div>
+      <small>
+        <em>Attributes: page=6, countNearby=0, countBorder=2.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page02h"
+      [count]="11"
+      [exterior]="exterior02b"
+      [countNearby]="0"
+      [countBorder]="2"
+      (changePage)="page02h = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pga-elem">
+    <div>
+      <small>
+        <em>Attributes: page=6, countBorder=2.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page02i"
+      [count]="11"
+      [exterior]="exterior02b"
+      [countBorder]="2"
+      (changePage)="page02i = $event">
+    </gln-pagination>
+  </div>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem pga-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: page=6, countNearby=0.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page02f"
+      [count]="11"
+      [exterior]="exterior02b"
+      [countNearby]="0"
+      isNoRipple
+      (changePage)="page02f = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pga-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: page=6, countNearby=1.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page02g"
+      [count]="11"
+      [exterior]="exterior02b"
+      (changePage)="page02g = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pga-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: page=6, countNearby=0, countBorder=2.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page02h"
+      [count]="11"
+      [exterior]="exterior02b"
+      [countNearby]="0"
+      [countBorder]="2"
+      (changePage)="page02h = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pga-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: page=6, countBorder=2.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page02i"
+      [count]="11"
+      [exterior]="exterior02b"
+      [countBorder]="2"
+      (changePage)="page02i = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class PaginationComponent &#123;
+  public exterior02b = 'outlined';
+  public page02f: number = 6;
+  public page02g: number = 6;
+  public page02h: number = 6;
+  public page02i: number = 6;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .pga-elem &#123;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

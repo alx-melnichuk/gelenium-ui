@@ -1,0 +1,465 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Size
+    <a [href]="urlCmPagination + '#Size'">#</a>
+  </h3>
+  <p>
+    The "size" property determines the size of the element (its height).
+  </p>
+  <p>
+    It takes the following values:
+  </p>
+  <ul>
+    <li>"short" - sets the height to 38px (default);</li>
+    <li>"small" - sets the height to 44px;</li>
+    <li>"middle" - sets the height to 50px;</li>
+    <li>"wide" - sets the height to 56px;</li>
+    <li>"large" - sets the height to 62px;</li>
+    <li>"huge" - sets the height to 68px;</li>
+  </ul>
+  <p>
+    The font size is determined from the parent container.
+    The size of the font can be defined with the css-style for the "gln-pagination" tag.
+    We can change the font size at the gln-pagination tag level,
+    but the height of the element will not change.
+  </p>
+  <p>
+    The height of the element remains the same even when the font size is changed
+    (from font-size: 10px to font-size: 26px).
+  </p>
+  <p>
+    It is possible to specify the height of an element. To do this,
+    in the "config.size" property, we define the required height in pixels.
+  </p>
+</section>
+
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior03a"
+    (change)="exterior03a=$event.value">
+    <mat-button-toggle [checked]="exterior03a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem pgs-elem">
+    <div>
+      <small>
+        <em>"Short" - 38px; font: 14px;</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page03a"
+      style="font-size: 14px;"
+      [count]="10"
+      [exterior]="exterior03a"
+      size="short"
+      (changePage)="page03a = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgs-elem">
+    <div>
+      <small>
+        <em>"Small" - 44px; font: 16px;</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page03b"
+      style="font-size: 16px;"
+      [count]="10"
+      [exterior]="exterior03a"
+      size="small"
+      (changePage)="page03b = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgs-elem">
+    <div>
+      <small>
+        <em>"Middle" - 50px; font: 16px;</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page03c"
+      style="font-size: 16px;"
+      [count]="10"
+      [exterior]="exterior03a"
+      size="middle"
+      (changePage)="page03c = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgs-elem">
+    <div>
+      <small>
+        <em>"Wide" - 56px; font: 18px;</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page03d"
+      style="font-size: 18px;"
+      [count]="10"
+      [exterior]="exterior03a"
+      size="wide"
+      (changePage)="page03d = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgs-elem">
+    <div>
+      <small>
+        <em>"Large" - 62px; font: 20px;</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page03e"
+      style="font-size: 20px;"
+      [count]="10"
+      [exterior]="exterior03a"
+      size="large"
+      (changePage)="page03e = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgs-elem">
+    <div>
+      <small>
+        <em>"Huge" - 68px; font: 22px;</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page03f"
+      style="font-size: 22px;"
+      [count]="10"
+      [exterior]="exterior03a"
+      size="huge"
+      (changePage)="page03f = $event">
+    </gln-pagination>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem pgs-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Short" - 38px; font: 14px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page03a"
+      style="font-size: 14px;"
+      [count]="10"
+      [exterior]="exterior03a"
+      size="short"
+      (changePage)="page03a = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgs-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Small" - 44px; font: 16px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page03b"
+      style="font-size: 16px;"
+      [count]="10"
+      [exterior]="exterior03a"
+      size="small"
+      (changePage)="page03b = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgs-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Middle" - 50px; font: 16px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page03c"
+      style="font-size: 16px;"
+      [count]="10"
+      [exterior]="exterior03a"
+      size="middle"
+      (changePage)="page03c = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgs-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Wide" - 56px; font: 18px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page03d"
+      style="font-size: 18px;"
+      [count]="10"
+      [exterior]="exterior03a"
+      size="wide"
+      (changePage)="page03d = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgs-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Large" - 62px; font: 20px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page03e"
+      style="font-size: 20px;"
+      [count]="10"
+      [exterior]="exterior03a"
+      size="large"
+      (changePage)="page03e = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgs-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Huge" - 68px; font: 22px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page03f"
+      style="font-size: 22px;"
+      [count]="10"
+      [exterior]="exterior03a"
+      size="huge"
+      (changePage)="page03f = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class PaginationComponent &#123;
+  public exterior03a = 'outlined';
+  public page03a: number = 1;
+  public page03b: number = 1;
+  public page03c: number = 1;
+  public page03d: number = 1;
+  public page03e: number = 1;
+  public page03f: number = 1;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .pgs-elem &#123;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<h4 class="app-hover-link"
+  id="size-config">
+  Configuration for custom height (57px).
+  <a [href]="urlCmPagination + '#size-config'">#</a>
+</h4>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior03b"
+    (change)="exterior03b=$event.value">
+    <mat-button-toggle [checked]="exterior03b==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior03b==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem pgs-elem">
+    <div>
+      <small>
+        <em>height: 57px; font: 16px;</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page03h"
+      style="font-size: 16px;"
+      [count]="10"
+      [exterior]="exterior03b"
+      size="57"
+      (changePage)="page03h = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgs-elem">
+    <div>
+      <small>
+        <em>height: 57px; font: 18px;</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page03i"
+      style="font-size: 18px;"
+      [count]="10"
+      [exterior]="exterior03b"
+      size="57"
+      (changePage)="page03i = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgs-elem">
+    <div>
+      <small>
+        <em>height: 57px; font: 20px;</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page03j"
+      style="font-size: 20px;"
+      [count]="10"
+      [exterior]="exterior03b"
+      [config]="{ size: '57' }"
+      (changePage)="page03j = $event">
+    </gln-pagination>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem pgs-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;height: 57px; font: 16px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page03h"
+      style="font-size: 16px;"
+      [count]="10"
+      [exterior]="exterior03b"
+      size="57"
+      (changePage)="page03h = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgs-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;height: 57px; font: 18px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page03i"
+      style="font-size: 18px;"
+      [count]="10"
+      [exterior]="exterior03b"
+      size="57"
+      (changePage)="page03i = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgs-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;height: 57px; font: 20px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page03j"
+      style="font-size: 20px;"
+      [count]="10"
+      [exterior]="exterior03b"
+      [config]="&#123; size: '57' &#125;"
+      (changePage)="page03j = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class PaginationComponent &#123;
+  public exterior03b = 'outlined';
+  public page03h: number = 1;
+  public page03i: number = 1;
+  public page03j: number = 1;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .pgs-elem &#123;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

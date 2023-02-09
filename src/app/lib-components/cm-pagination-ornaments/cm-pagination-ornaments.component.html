@@ -1,0 +1,272 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Ornaments.
+    <a [href]="urlCmPagination + '#Ornaments'">#</a>
+  </h3>
+  <p>
+    For the GlnPagination component, it is possible to display an ornament
+    (picture or text).
+    <br />
+    To display the ornament, you need to add a block inside "gln-pagination" with one
+    of the attributes: "gln-orn-first", "gln-orn-prev", "gln-orn-next", "gln-orn-last".
+  </p>
+  <span>
+    Example:
+  </span>
+  <code><pre source="html">
+&lt;<strong>gln-pagination</strong>&gt;
+  &lt;span <i><strong>gln-orn-prev</strong></i>&gt;prev&lt;/span&gt;
+  &lt;span <i><strong>gln-orn-next</strong></i>&gt;next&lt;/span&gt;
+  &lt;span <i><strong>gln-orn-first</strong></i>&gt;first&lt;/span&gt;
+  &lt;span <i><strong>gln-orn-last</strong></i>&gt;last&lt;/span&gt;
+&lt;/<strong>gln-pagination</strong>&gt;</pre></code>
+  <p>
+    For these blocks, you need to specify a horizontal indent value or use
+    the 'glnpg-pd-hor' attribute.
+  </p>
+</section>
+
+<section mr-vr>
+  <span>exterior: </span>
+  <mat-button-toggle-group value="exterior05a"
+    (change)="exterior05a=$event.value">
+    <mat-button-toggle [checked]="exterior05a==='outlined'"
+      value="outlined">{{ labelOutlined }}</mat-button-toggle>
+    <mat-button-toggle [checked]="exterior05a==='text'"
+      value="text">{{ labelText }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem pgo-elem">
+    <div>
+      <small>
+        <em>Ornaments: text 'prev', 'next'.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page05a"
+      [count]="10"
+      [exterior]="exterior05a"
+      (changePage)="page05a = $event">
+      <span gln-orn-prev
+        glnpg-pd-hor>prev
+      </span>
+      <span gln-orn-next
+        glnpg-pd-hor>next
+      </span>
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgo-elem">
+    <div>
+      <small>
+        <em>Ornaments: 'gln-orn-prev', 'gln-orn-next'.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page05b"
+      [count]="10"
+      [exterior]="exterior05a"
+      (changePage)="page05b = $event">
+      <svg gln-orn-prev
+        class="pgo-ornam"
+        focusable="false"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24">
+        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+      </svg>
+      <svg gln-orn-next
+        class="pgo-ornam"
+        focusable="false"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24">
+        <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+      </svg>
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgo-elem">
+    <div>
+      <small>
+        <em>Ornaments: 'gln-orn-first', 'gln-orn-last'.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page05c"
+      [count]="10"
+      [exterior]="exterior05a"
+      isHideNext
+      isHidePrev
+      isShowFirst
+      isShowLast
+      (changePage)="page05c = $event">
+      <span gln-orn-first
+        class="pgo-first">
+      </span>
+      <span gln-orn-last
+        class="pgo-last">
+      </span>
+    </gln-pagination>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem pgo-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Ornaments: text 'prev', 'next'.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page05a"
+      [count]="10"
+      [exterior]="exterior05a"
+      (changePage)="page05a = $event"&gt;
+      &lt;span gln-orn-prev
+        glnpg-pd-hor&gt;prev
+      &lt;/span&gt;
+      &lt;span gln-orn-next
+        glnpg-pd-hor&gt;next
+      &lt;/span&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgo-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Ornaments: 'gln-orn-prev', 'gln-orn-next'.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page05b"
+      [count]="10"
+      [exterior]="exterior05a"
+      (changePage)="page05b = $event"&gt;
+      &lt;svg gln-orn-prev
+        class="pgo-ornam"
+        focusable="false"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"&gt;
+        &lt;path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"&gt;&lt;/path&gt;
+      &lt;/svg&gt;
+      &lt;svg gln-orn-next
+        class="pgo-ornam"
+        focusable="false"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"&gt;
+        &lt;path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"&gt;&lt;/path&gt;
+      &lt;/svg&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgo-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Ornaments: 'gln-orn-first', 'gln-orn-last'.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page05c"
+      [count]="10"
+      [exterior]="exterior05a"
+      isHideNext
+      isHidePrev
+      isShowFirst
+      isShowLast
+      (changePage)="page05c = $event"&gt;
+      &lt;span gln-orn-first
+        class="pgo-first"&gt;
+      &lt;/span&gt;
+      &lt;span gln-orn-last
+        class="pgo-last"&gt;
+      &lt;/span&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class PaginationComponent &#123;
+  public exterior05a = 'outlined';
+  public page05a: number = 1;
+  public page05b: number = 1;
+  public page05c: number = 1;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .pgo-elem &#123;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  &#125;
+  .pgo-ornam &#123;
+    height: 24px;
+    fill: currentColor;
+  &#125;
+  .pgo-first &#123;
+    background-color: currentColor;
+    display: inline-block;
+    height: 24px;
+    mask: url("data:image/svg+xml;charset=utf8,"
+      + "&lt;svg xmlns='http://www.w3.org/2000/svg' "
+      + " viewBox='0 0 24 24'&gt;"
+      + "&lt;path d='M16.383 6.076a.994.994 0 0 0-1.09.217l-5 5a1 1 0 0 0 0 1.4"
+      + "14l5 5A1 1 0 0 0 16 18a.987.987 0 0 0 .383-.076A1 1 0 0 0 17 17V7a1"
+      + " 1 0 0 0-.617-.924zM15 14.586 12.414 12 15 9.414zM8 6a1 1 0 0 0-1 1"
+      + "v10a1 1 0 0 0 2 0V7a1 1 0 0 0-1-1z'&gt;"
+      + "&lt;/path&gt;"
+      + "&lt;/svg&gt;");
+    width: 24px;
+  &#125;
+  .pgo-last &#123;
+    background-color: currentColor;
+    display: inline-block;
+    height: 24px;
+    mask: url("data:image/svg+xml;charset=utf8,"
+      + "&lt;svg xmlns='http://www.w3.org/2000/svg' "
+      + " viewBox='0 0 24 24'&gt;"
+      + "&lt;path d='M8 18a.987.987 0 0 1-.383-.076A1 1 0 0 1 7 17V7a1 1 0 0 1 "
+      + "1.707-.707l5 5a1 1 0 0 1 0 1.414l-5 5A1 1 0 0 1 8 18zm1-8.586v5.172"
+      + "L11.586 12zM16 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0v10a1 1 0 0 1-1 1z'&gt;"
+      + "&lt;/path&gt;"
+      + "&lt;/svg&gt;");
+    width: 24px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

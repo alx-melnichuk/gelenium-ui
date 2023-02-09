@@ -1,0 +1,139 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Border
+    <a [href]="urlCmPagination + '#Border'">#</a>
+  </h3>
+  <p>
+    The GlnPagination component has the ability to change the border-radius css property.
+    <br />
+    In other words, the buttons of the GlnPagination component can be square instead of round.
+    <br />
+    The round shape of the GlnPagination component buttons is given a special css property
+    '--glnbt-br-rd'.
+    <br />
+    If you exclude this css-property, then the shape of the buttons will be square.
+    <br />
+    To disable this css property, you need to add the 'isNoRounded' attribute.
+  </p>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem pgr-elem">
+    <div>
+      <small>
+        <em>Attributes: isNoRounded, Exterior: 'text'.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page04a"
+      style="font-size: 16px;"
+      [count]="10"
+      exterior="text"
+      isNoRounded
+      (changePage)="page04a = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgr-elem">
+    <div>
+      <small>
+        <em>Config: isNoRounded, Exterior: 'outlined'.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page04b"
+      style="font-size: 16px;"
+      [count]="10"
+      exterior="outlined"
+      [config]="{ isNoRounded: true }"
+      (changePage)="page04b = $event">
+    </gln-pagination>
+  </div>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem pgr-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: isNoRounded, Exterior: 'text'.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page04a"
+      style="font-size: 16px;"
+      [count]="10"
+      exterior="text"
+      isNoRounded
+      (changePage)="page04a = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgr-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Config: isNoRounded, Exterior: 'outlined'.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page04b"
+      style="font-size: 16px;"
+      [count]="10"
+      exterior="outlined"
+      [config]="&#123; isNoRounded: true &#125;"
+      (changePage)="page04b = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class PaginationComponent &#123;
+  public exterior04a = 'outlined';
+  public page04a: number = 1;
+  public page04b: number = 1;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .pgr-elem &#123;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
