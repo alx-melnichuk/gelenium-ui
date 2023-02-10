@@ -18,6 +18,7 @@
   [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
   [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
   [glnFrameOrnamentPath]="'/div{0}'"
+  [glnFrameOrnamentAfterContent]="true"
   [attr.opn]="isPanelOpen ? '' : null"
   [attr.tabindex]="!isDisabledVal ? tabIndex : null"
   (focus)="doFocus()"
@@ -25,24 +26,19 @@
   (keydown)="frameKeydown($event)"
   (click)="!isDisabledVal ? toggle() : null">
 
-  <span glnfr-orn-lf
-    class="gln-ornam-lf">
-    <ng-content select="[gln-orn-lf]"></ng-content>
-  </span>
+  <ng-content select="[gln-orn-lf]"></ng-content>
 
-  <span glnfr-orn-rg
-    class="gln-ornam-rg">
-    <ng-content select="[gln-orn-rg]"></ng-content>
+  <ng-content select="[gln-orn-rg]"></ng-content>
 
-    <div *ngIf="!isNoIconVal"
-      glnsl-rhomb
-      [attr.opn]="isPanelOpen ? '' : null"
-      [attr.noAnm]="frameComp?.noAnimation ? '' : null"
-      [ngClass]="['glnsl-rhomb', (isPanelOpen ? 'is-open' : '')]"
-      focusable="false"
-      aria-hidden="true">
-    </div>
-  </span>
+  <div *ngIf="!isNoIconVal"
+    glnsl-rhomb
+    gln-orn-rg
+    [attr.opn]="isPanelOpen ? '' : null"
+    [attr.noAnm]="frameComp?.noAnimation ? '' : null"
+    [ngClass]="['glnsl-rhomb', (isPanelOpen ? 'is-open' : '')]"
+    focusable="false"
+    aria-hidden="true">
+  </div>
 
   <div [attr.id]="id + '-elem'"
     glnfr-pd-ver

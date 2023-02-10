@@ -1,11 +1,19 @@
 import { AfterContentInit, Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 
-import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from './gln-frame-ornam-align.interface';
 import { HtmlElemUtil } from '../../_utils/html-elem.util';
 import { HtmlPathUtil } from '../../_utils/html-path.util';
 
-export const ATTR_ORN_LF = 'glnfr-orn-lf';
-export const ATTR_ORN_RG = 'glnfr-orn-rg';
+export const ATTR_ORN_LF = 'gln-orn-lf';
+export const ATTR_ORN_RG = 'gln-orn-rg';
+
+export const ORNAMENT_ALIGN: { [key: string]: string } = {
+  'default': 'default',
+  'center': 'center',
+  'flex-start': 'flex-start',
+  'flex-end': 'flex-end',
+  'baseline': 'baseline',
+  'stretch': 'stretch',
+};
 
 @Directive({
   selector: '[glnFrameOrnament]',
@@ -27,10 +35,8 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
   public glnFrameOrnamentAfterContent: boolean | null | undefined;
 
   private isInit = true;
-  private ornamentLf: HTMLElement | null = null;
-  private ornamentRg: HTMLElement | null = null;
-  private ornamentLfElemRef: ElementRef<HTMLElement> | null = null;
-  private ornamentRgElemRef: ElementRef<HTMLElement> | null = null;
+  private ornamentLeftRefList: ElementRef<HTMLElement>[] = [];
+  private ornamentRightRefList: ElementRef<HTMLElement>[] = [];
   private ornamentLfWidth = 0;
   private ornamentRgWidth = 0;
 
@@ -43,24 +49,24 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
       }
       this.isInit = false;
     }
-    if (changes['glnFrameOrnamentLfAlign'] && this.ornamentLfElemRef) {
-      this.settingOrnamentLeft(this.renderer, this.glnFrameOrnamentLfAlign || null, this.ornamentLfElemRef);
+    if (changes['glnFrameOrnamentLfAlign']) {
+      this.settingOrnamentLeftList(this.renderer, this.glnFrameOrnamentLfAlign || '', this.ornamentLeftRefList);
     }
-    if (changes['glnFrameOrnamentRgAlign'] && this.ornamentRgElemRef) {
-      this.settingOrnamentRight(this.renderer, this.glnFrameOrnamentRgAlign || null, this.ornamentRgElemRef);
+    if (changes['glnFrameOrnamentRgAlign']) {
+      this.settingOrnamentRightList(this.renderer, this.glnFrameOrnamentRgAlign || '', this.ornamentRightRefList);
     }
   }
 
   public ngAfterContentInit(): void {
     if (this.glnFrameOrnamentAfterContent) {
       this.initialSetting(this.hostRef.nativeElement, this.glnFrameOrnamentPath || null);
-
-      this.settingOrnamentLeft(this.renderer, this.glnFrameOrnamentLfAlign || null, this.ornamentLfElemRef);
-      this.settingOrnamentRight(this.renderer, this.glnFrameOrnamentRgAlign || null, this.ornamentRgElemRef);
+      this.settingOrnamentLeftList(this.renderer, this.glnFrameOrnamentLfAlign || '', this.ornamentLeftRefList);
+      this.settingOrnamentRightList(this.renderer, this.glnFrameOrnamentRgAlign || '', this.ornamentRightRefList);
     }
     // Get the width of the ornament block.
-    this.ornamentLfWidth = this.ornamentLf?.offsetWidth || 0;
-    this.ornamentRgWidth = this.ornamentRg?.offsetWidth || 0;
+
+    this.ornamentLfWidth = this.getWidthByList(this.ornamentLeftRefList);
+    this.ornamentRgWidth = this.getWidthByList(this.ornamentRightRefList);
 
     const elementRef: ElementRef<HTMLElement> | null = this.glnFrameOrnamentElementRef || this.hostRef;
     if (this.ornamentLfWidth > 0) {
@@ -76,27 +82,40 @@ export class GlnFrameOrnamentDirective implements OnChanges, AfterContentInit {
   private initialSetting(htmlElement: HTMLElement, pathElement: string | null): void {
     const element = HtmlPathUtil.getElementByPathClassOrTag(htmlElement, pathElement);
     if (element) {
-      const elementRef = HtmlElemUtil.getElementRef(element);
-
-      this.ornamentLf = HtmlElemUtil.getChildByAttribute(elementRef, [ATTR_ORN_LF]) as HTMLElement;
-      this.ornamentLfElemRef = HtmlElemUtil.getElementRef(this.ornamentLf);
-
-      this.ornamentRg = HtmlElemUtil.getChildByAttribute(elementRef, [ATTR_ORN_RG]) as HTMLElement;
-      this.ornamentRgElemRef = HtmlElemUtil.getElementRef(this.ornamentRg);
+      const leftList: NodeListOf<Element> = element.querySelectorAll<Element>('[' + ATTR_ORN_LF + ']');
+      for (let idx = 0; idx < leftList.length; idx++) {
+        if (leftList.item(idx) != null) {
+          this.ornamentLeftRefList.push(new ElementRef<HTMLElement>(leftList.item(idx) as HTMLElement));
+        }
+      }
+      const rightList: NodeListOf<Element> = element.querySelectorAll<Element>('[' + ATTR_ORN_RG + ']');
+      for (let idx = 0; idx < rightList.length; idx++) {
+        if (rightList.item(idx) != null) {
+          this.ornamentRightRefList.push(new ElementRef<HTMLElement>(rightList.item(idx) as HTMLElement));
+        }
+      }
     }
   }
 
-  private settingOrnamentLeft(renderer: Renderer2, ornamentLfAlign: string | null, leftElemRef: ElementRef<HTMLElement> | null): void {
-    if (leftElemRef) {
-      const ornamLfAlign2 = GlnFrameOrnamAlignUtil.convert(ornamentLfAlign || null) || GlnFrameOrnamAlign.default;
-      HtmlElemUtil.setAttr(renderer, leftElemRef, ATTR_ORN_LF, ornamLfAlign2.toString());
+  private settingOrnamentLeftList(renderer: Renderer2, ornamentLfAlign: string, elementRefList: ElementRef<HTMLElement>[]): void {
+    const ornamLfAlign = ORNAMENT_ALIGN[ornamentLfAlign] || ORNAMENT_ALIGN['default'];
+    for (let idx = 0; idx < elementRefList.length; idx++) {
+      HtmlElemUtil.setAttr(renderer, elementRefList[idx], ATTR_ORN_LF, ornamLfAlign);
     }
   }
 
-  private settingOrnamentRight(renderer: Renderer2, ornamentRgAlign: string | null, rightElemRef: ElementRef<HTMLElement> | null): void {
-    if (rightElemRef) {
-      const ornamRgAlign2 = GlnFrameOrnamAlignUtil.convert(ornamentRgAlign || null) || GlnFrameOrnamAlign.default;
-      HtmlElemUtil.setAttr(renderer, rightElemRef, ATTR_ORN_RG, ornamRgAlign2.toString());
+  private settingOrnamentRightList(renderer: Renderer2, ornamentRgAlign: string, elementRefList: ElementRef<HTMLElement>[]): void {
+    const ornamRgAlign = ORNAMENT_ALIGN[ornamentRgAlign] || ORNAMENT_ALIGN['default'];
+    for (let idx = 0; idx < elementRefList.length; idx++) {
+      HtmlElemUtil.setAttr(renderer, elementRefList[idx], ATTR_ORN_RG, ornamRgAlign);
     }
+  }
+
+  private getWidthByList(elementRefList: ElementRef<HTMLElement>[]): number {
+    let result: number = 0;
+    for (const elementRef of elementRefList) {
+      result = result + elementRef.nativeElement.offsetWidth || 0;
+    }
+    return result;
   }
 }

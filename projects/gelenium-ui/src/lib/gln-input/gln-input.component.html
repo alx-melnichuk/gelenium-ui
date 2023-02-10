@@ -17,14 +17,8 @@
     [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
     [glnFrameOrnamentPath]="'/div{0}'">
 
-    <span glnfr-orn-lf
-      class="gln-ornam-lf">
-      <ng-content select="[gln-orn-lf]"></ng-content>
-    </span>
-    <span glnfr-orn-rg
-      class="gln-ornam-rg">
-      <ng-content select="[gln-orn-rg]"></ng-content>
-    </span>
+    <ng-content select="[gln-orn-lf]"></ng-content>
+    <ng-content select="[gln-orn-rg]"></ng-content>
 
     <input #inputElementRef
       formControlName="textData"

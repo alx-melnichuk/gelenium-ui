@@ -18,14 +18,8 @@
     [glnFrameOrnamentPath]="'/div{0}'"
     (click)="focus()">
 
-    <span glnfr-orn-lf
-      class="gln-ornam-lf">
-      <ng-content select="[gln-orn-lf]"></ng-content>
-    </span>
-    <span glnfr-orn-rg
-      class="gln-ornam-rg">
-      <ng-content select="[gln-orn-rg]"></ng-content>
-    </span>
+    <ng-content select="[gln-orn-lf]"></ng-content>
+    <ng-content select="[gln-orn-rg]"></ng-content>
 
     <textarea #textareaElement
       formControlName="textData"
