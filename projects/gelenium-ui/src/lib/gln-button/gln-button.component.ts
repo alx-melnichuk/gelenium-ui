@@ -27,9 +27,9 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnButtonConfig } from './gln-button-config.interface';
 import { GlnLinkDirective } from './gln-link.directive';
-import { GlnButtonExterior, GlnButtonExteriorUtil } from './gln-button-exterior.interface';
 import { GlnButtonUtil } from './gln-button.util';
 
+const EXTERIOR: { [key: string]: string } = { outlined: 'outlined', contained: 'contained', text: 'text' };
 const SIZE: { [key: string]: number } = { short: 38, small: 44, middle: 50, wide: 56, large: 62, huge: 68 };
 
 const CSS_PROP_BORDER_RADIUS = '--glnbtf--br-rd';
@@ -55,7 +55,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   @Input()
   public config: GlnButtonConfig | null | undefined;
   @Input()
-  public exterior: string | null | undefined; // GlnButtonExteriorType
+  public exterior: string | null | undefined; // 'outlined', 'contained', 'text'
   @Input()
   public isDisabled: string | boolean | null | undefined;
   @Input()
@@ -81,7 +81,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   public cssBorderRadius: number | null = null;
   public cssPaddingLeft: number | null = null;
   public cssPaddingRight: number | null = null;
-  public exteriorVal: GlnButtonExterior | null = null; // Binding attribute "exterior".
+  public exteriorVal: string | null = null; // Binding attribute "exterior".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isFocused = false;
   public isNoRippleVal: boolean | null = null; // Binding attribute "isNoRipple".
@@ -106,7 +106,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     }
     let isUpdateCssParams = false;
     if (changes['exterior'] || (changes['config'] && this.exterior == null && this.currConfig.exterior != null)) {
-      this.exteriorVal = GlnButtonExteriorUtil.create(this.exterior || this.currConfig.exterior || null);
+      this.exteriorVal = EXTERIOR[this.exterior || this.currConfig.exterior || ''] || EXTERIOR['outlined'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
       isUpdateCssParams = true;
     }
@@ -137,7 +137,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
 
     let isUpdateCssParams = false;
     if (this.exteriorVal == null) {
-      this.exteriorVal = GlnButtonExteriorUtil.create(this.currConfig.exterior || null);
+      this.exteriorVal = EXTERIOR[this.currConfig.exterior || ''] || EXTERIOR['outlined'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
       isUpdateCssParams = true;
     }
@@ -215,7 +215,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
   }
 
-  private updateCssParams(exterior: GlnButtonExterior, size: number | null, lineHeight: number, elem: ElementRef<HTMLElement>): void {
+  private updateCssParams(exterior: string, size: number | null, lineHeight: number, elem: ElementRef<HTMLElement>): void {
     // Get css parameters for the button.
     const { borderRadius, paddingLeft } = GlnButtonUtil.getCssParams(exterior, size, lineHeight);
 
@@ -232,14 +232,14 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     HtmlElemUtil.setProperty(elem, CSS_PROP_SIZE, (size > 0 ? size.toString() : null)?.concat('px'));
   }
 
-  private settingExterior(exteriorVal: GlnButtonExterior | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    const isText = GlnButtonExteriorUtil.isText(exteriorVal);
+  private settingExterior(exteriorVal: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    const isText = exteriorVal === EXTERIOR['text'];
     HtmlElemUtil.setClass(renderer, elem, 'glnbt-text', isText);
     HtmlElemUtil.setAttr(renderer, elem, 'ext-t', isText ? '' : null);
-    const isContained = GlnButtonExteriorUtil.isContained(exteriorVal);
+    const isContained = exteriorVal === EXTERIOR['contained'];
     HtmlElemUtil.setClass(renderer, elem, 'glnbt-contained', isContained);
     HtmlElemUtil.setAttr(renderer, elem, 'ext-c', isContained ? '' : null);
-    const isOutlined = GlnButtonExteriorUtil.isOutlined(exteriorVal);
+    const isOutlined = exteriorVal === EXTERIOR['outlined'];
     HtmlElemUtil.setClass(renderer, elem, 'glnbt-outlined', isOutlined);
     HtmlElemUtil.setAttr(renderer, elem, 'ext-o', isOutlined ? '' : null);
   }
