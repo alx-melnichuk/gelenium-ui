@@ -40,7 +40,6 @@ import {
 import { ORNAMENT_ALIGN } from '../directives/gln-frame-ornament/gln-frame-ornament.directive';
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
-import { GlnInputType, GlnInputTypeUtil } from '../gln-input/gln-input.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
@@ -49,6 +48,22 @@ import { GlnInputConfig } from './gln-input-config.interface';
 let uniqueIdCounter = 0;
 
 export const GLN_INPUT_CONFIG = new InjectionToken<GlnInputConfig>('GLN_INPUT_CONFIG');
+
+export const INPUT_TYPE: { [key: string]: string } = {
+  'color': 'color',
+  'date': 'date',
+  'datetime-local': 'datetime-local',
+  'email': 'email',
+  'month': 'month',
+  'number': 'number',
+  'password': 'password',
+  'search': 'search',
+  'tel': 'tel',
+  'text': 'text',
+  'time': 'time',
+  'url': 'url',
+  'week': 'week',
+};
 
 @Component({
   selector: 'gln-input',
@@ -111,7 +126,7 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   @Input()
   public tabIndex: number = 0;
   @Input()
-  public type: string = GlnInputType.text.valueOf();
+  public type: string = INPUT_TYPE['text'];
   @Input()
   public wdFull: string | null | undefined;
 
@@ -138,7 +153,7 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   public isRequiredVal: boolean | null = null; // Binding attribute "isRequired".
   public ornamLfAlignVal: string | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: string | null = null; // Binding attribute "ornamRgAlign".
-  public typeVal: GlnInputType = GlnInputType.text;
+  public typeVal: string = INPUT_TYPE['text']; // Binding attribute "type".
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -185,7 +200,7 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
       this.isPlaceholderVal = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
     }
     if (changes['type']) {
-      this.typeVal = GlnInputTypeUtil.create(this.type) || GlnInputType.text;
+      this.typeVal = INPUT_TYPE[this.type] || INPUT_TYPE['text'];
     }
     if (changes['isRequired'] || changes['minLength'] || changes['maxLength']) {
       this.prepareFormGroup(this.isRequiredVal, this.minLength, this.maxLength);
