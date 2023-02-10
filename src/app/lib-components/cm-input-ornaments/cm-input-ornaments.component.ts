@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { GlnFrameOrnamAlignUtil } from 'gelenium-ui';
-
 import { RouterConfig } from '../../lib-core/config/router-config';
 import {
   LABEL_CSS,
@@ -75,8 +73,8 @@ export class CmInputOrnamentsComponent {
 
   public changeConfig05(ornamLfAlign: string | undefined, ornamRgAlign: string | undefined): void {
     this.config05 = {
-      ornamLfAlign: GlnFrameOrnamAlignUtil.convert(ornamLfAlign || null)?.toString() || 'default',
-      ornamRgAlign: GlnFrameOrnamAlignUtil.convert(ornamRgAlign || null)?.toString() || 'default',
+      ornamLfAlign: ornamLfAlign || 'default',
+      ornamRgAlign: ornamRgAlign || 'default',
     };
   }
   public toStr(value: number): string {

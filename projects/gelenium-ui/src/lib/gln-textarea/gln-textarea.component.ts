@@ -37,7 +37,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from '../directives/gln-frame-ornament/gln-frame-ornam-align.interface';
+import { ORNAMENT_ALIGN } from '../directives/gln-frame-ornament/gln-frame-ornament.directive';
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
 import { BooleanUtil } from '../_utils/boolean.util';
@@ -140,8 +140,8 @@ export class GlnTextareaComponent
   public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
   public isRequiredVal: boolean | null = null; // Binding attribute "isRequired".
   public isPlaceholderVal: boolean | null = null; // Binding attribute "isPlaceholder".
-  public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
-  public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
+  public ornamLfAlignVal: string | null = null; // Binding attribute "ornamLfAlign".
+  public ornamRgAlignVal: string | null = null; // Binding attribute "ornamRgAlign".
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -177,11 +177,11 @@ export class GlnTextareaComponent
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
     if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlign == null && this.currConfig.ornamLfAlign != null)) {
-      this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamLfAlign || this.currConfig.ornamLfAlign || null);
+      this.ornamLfAlignVal = ORNAMENT_ALIGN[this.ornamLfAlign || this.currConfig.ornamLfAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
     }
     if (changes['ornamRgAlign'] || (changes['config'] && this.ornamRgAlign == null && this.currConfig.ornamRgAlign != null)) {
-      this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamRgAlign || this.currConfig.ornamRgAlign || null);
+      this.ornamRgAlignVal = ORNAMENT_ALIGN[this.ornamRgAlign || this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
     }
     if (changes['isPlaceholder'] || (changes['config'] && this.isPlaceholder == null && this.currConfig.isPlaceholder != null)) {
@@ -215,11 +215,11 @@ export class GlnTextareaComponent
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
     if (this.ornamLfAlignVal == null) {
-      this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.currConfig.ornamLfAlign || null);
+      this.ornamLfAlignVal = ORNAMENT_ALIGN[this.currConfig.ornamLfAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
     }
     if (this.ornamRgAlignVal == null) {
-      this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.currConfig.ornamRgAlign || null);
+      this.ornamRgAlignVal = ORNAMENT_ALIGN[this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
     }
   }
@@ -380,10 +380,10 @@ export class GlnTextareaComponent
     HtmlElemUtil.setClass(renderer, elem, 'gln-required', !!required);
     HtmlElemUtil.setAttr(renderer, elem, 'req', required ? '' : null);
   }
-  private settingOrnamLfAlign(ornamLfAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+  private settingOrnamLfAlign(ornamLfAlign: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setAttr(renderer, elem, 'orn-lft', ornamLfAlign?.toString());
   }
-  private settingOrnamRgAlign(ornamRgAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+  private settingOrnamRgAlign(ornamRgAlign: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setAttr(renderer, elem, 'orn-rgh', ornamRgAlign?.toString());
   }
 

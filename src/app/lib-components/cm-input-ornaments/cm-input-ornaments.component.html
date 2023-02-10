@@ -758,8 +758,8 @@ export class InputComponent &#123;
     ornamRgAlign: string | undefined
   ): void &#123;
     this.config05 = &#123;
-      ornamLfAlign: GlnFrameOrnamAlignUtil.convert(ornamLfAlign || null)?.toString() || 'default',
-      ornamRgAlign: GlnFrameOrnamAlignUtil.convert(ornamRgAlign || null)?.toString() || 'default',
+      ornamLfAlign: ornamLfAlign || 'default',
+      ornamRgAlign: ornamRgAlign || 'default',
     &#125;;
   &#125;
   public toStr(value: number): string &#123;
