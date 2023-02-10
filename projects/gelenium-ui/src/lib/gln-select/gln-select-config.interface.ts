@@ -2,7 +2,7 @@ import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 
 export interface GlnSelectConfig extends GlnFrameConfig {
   //   interface GlnFrameConfig
-  // exterior?: string | undefined; // GlnFrameExteriorType
+  // exterior?: string | undefined; // 'outlined' | 'underline' | 'standard'
   // isLabelShrink?: boolean | undefined;
   // isNoAnimation?: boolean | undefined;
   // isRequired?: boolean | undefined;

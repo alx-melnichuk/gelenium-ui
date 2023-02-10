@@ -16,10 +16,10 @@ import {
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
-import { GlnFrameExterior, GlnFrameExteriorUtil } from './gln-frame-exterior.interface';
 import { GlnFrameConfig } from './gln-frame-config.interface';
 import { GlnFrameUtil } from './gln-frame.util';
 
+const EXTERIOR: { [key: string]: string } = { outlined: 'outlined', underline: 'underline', standard: 'standard' };
 const SIZE: { [key: string]: number } = { short: 38, small: 44, middle: 50, wide: 56, large: 62, huge: 68 };
 
 const CSS_ATTR_HIDE_ANIMATION_INIT = 'hdAnmInit';
@@ -48,7 +48,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   @Input()
   public cssElementRef: ElementRef<HTMLElement> = this.hostRef;
   @Input()
-  public exterior: string | null | undefined; // GlnFrameExteriorType
+  public exterior: string | null | undefined; // 'outlined' | 'underline' | 'standard'
   @Input()
   public isAttrHideAnimation: string | boolean | null | undefined;
   @Input()
@@ -69,13 +69,13 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public size: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
 
   public get isOutlinedExterior(): boolean {
-    return GlnFrameExterior.outlined === this.exteriorVal;
+    return this.exteriorVal === EXTERIOR['outlined'];
   }
   public get isUnderlineExterior(): boolean {
-    return GlnFrameExterior.underline === this.exteriorVal;
+    return this.exteriorVal === EXTERIOR['underline'];
   }
   public get isStandardExterior(): boolean {
-    return GlnFrameExterior.standard === this.exteriorVal;
+    return this.exteriorVal === EXTERIOR['standard'];
   }
   public get lineHeight(): number {
     return this.lineHeightInn;
@@ -94,7 +94,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public cssPaddingTop: string | null = null;
   public cssTranslateY: string | null = null;
   public cssTranslateY2: string | null = null;
-  public exteriorVal: GlnFrameExterior | null = null; // Binding attribute "exterior".
+  public exteriorVal: string | null = null; // Binding attribute "exterior".
   public isAttrHideAnimationVal: boolean | null = null; // Binding attribute "isAttrHideAnimation".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isErrorVal: boolean | null = null; // Binding attribute "isError".
@@ -122,7 +122,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
 
     let isUpdateCssParams = false;
     if (changes['exterior'] || (changes['config'] && this.exterior == null && this.currConfig.exterior != null)) {
-      this.exteriorVal = GlnFrameExteriorUtil.create(this.exterior || this.currConfig.exterior || null);
+      this.exteriorVal = EXTERIOR[this.exterior || this.currConfig.exterior || ''] || EXTERIOR['outlined'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
       isUpdateCssParams = true;
     }
@@ -184,7 +184,7 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   public ngOnInit(): void {
     let isUpdateCssParams = false;
     if (this.exteriorVal == null) {
-      this.exteriorVal = GlnFrameExteriorUtil.create(this.currConfig.exterior || null);
+      this.exteriorVal = EXTERIOR[this.currConfig.exterior || ''] || EXTERIOR['outlined'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
       isUpdateCssParams = true;
     }
@@ -248,14 +248,14 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TRN2_Y, (this.cssTranslateY2 = css['translateY2'] || null));
   }
 
-  private settingExterior(exteriorVal: GlnFrameExterior | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    const isOutlined = GlnFrameExteriorUtil.isOutlined(exteriorVal);
+  private settingExterior(exteriorVal: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    const isOutlined = exteriorVal === EXTERIOR['outlined'];
     HtmlElemUtil.setClass(renderer, elem, 'glnfr-outlined', isOutlined);
     HtmlElemUtil.setAttr(renderer, elem, 'ext-o', isOutlined ? '' : null);
-    const isUnderline = GlnFrameExteriorUtil.isUnderline(exteriorVal);
+    const isUnderline = exteriorVal === EXTERIOR['underline'];
     HtmlElemUtil.setClass(renderer, elem, 'glnfr-underline', isUnderline);
     HtmlElemUtil.setAttr(renderer, elem, 'ext-u', isUnderline ? '' : null);
-    const isStandard = GlnFrameExteriorUtil.isStandard(exteriorVal);
+    const isStandard = exteriorVal === EXTERIOR['standard'];
     HtmlElemUtil.setClass(renderer, elem, 'glnfr-standard', isStandard);
     HtmlElemUtil.setAttr(renderer, elem, 'ext-s', isStandard ? '' : null);
     HtmlElemUtil.setClass(renderer, elem, 'glnfr-bottom-frame', isStandard || isUnderline);

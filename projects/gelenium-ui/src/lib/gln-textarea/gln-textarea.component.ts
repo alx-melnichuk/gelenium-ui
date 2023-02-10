@@ -76,7 +76,7 @@ export class GlnTextareaComponent
   @Input()
   public config: GlnTextareaConfig | null | undefined;
   @Input()
-  public exterior: string | null | undefined; // GlnFrameExteriorType
+  public exterior: string | null | undefined; // 'outlined' | 'underline' | 'standard'
   @Input()
   public helperText: string | null | undefined;
   @Input()

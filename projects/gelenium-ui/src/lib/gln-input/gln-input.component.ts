@@ -86,7 +86,7 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   @Input()
   public config: GlnInputConfig | null | undefined;
   @Input()
-  public exterior: string | null | undefined; // GlnFrameExteriorType
+  public exterior: string | null | undefined; // 'outlined' | 'underline' | 'standard'
   @Input()
   public helperText: string | null | undefined;
   @Input()
