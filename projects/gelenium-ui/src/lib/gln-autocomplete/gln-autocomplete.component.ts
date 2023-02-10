@@ -31,7 +31,6 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
 import { GlnAutocomplete } from './gln-autocomplete.interface';
-import { GlnAutocompletePosition, GlnAutocompletePositionUtil } from './gln-autocomplete-position.util';
 import { GlnAutocompleteTrigger } from './gln-autocomplete-trigger.interface';
 import { GlnAutocompleteOpenUtil } from './gln-autocomplete-open.util';
 import { GlnAutocompleteConfig } from './gln-autocomplete-config.interface';
@@ -48,6 +47,8 @@ const CSS_PROP_WIDTH = '--glnac--width';
 let uniqueIdCounter = 0;
 
 export const GLN_AUTOCOMPLETE_CONFIG = new InjectionToken<GlnAutocompleteConfig>('GLN_AUTOCOMPLETE_CONFIG');
+
+export const AUTOCOMPLETE_POSITION: { [key: string]: string } = { start: 'start', center: 'center', end: 'end' };
 
 @Component({
   selector: 'gln-autocomplete',
@@ -121,7 +122,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public openOnFocus: boolean | null = null; // Binding attribute "isOpenOnFocus". // interface GlnAutocomplete
   public optionHeight: number = 0;
   public panelClassVal: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
-  public positionVal: GlnAutocompletePosition | null = null; // Binding attribute "position" ('start'|'center'|'end').
+  public positionVal: string | null = null; // Binding attribute "position" ('start'|'center'|'end').
   public visibleSizeVal: number | null = null; // Binding attribute "visibleSize".
 
   private optionListSub: Subscription | null = null;
@@ -183,7 +184,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
       this.panelClassVal = this.panelClass || this.currConfig.panelClass;
     }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
-      this.positionVal = GlnAutocompletePositionUtil.create(this.position || this.currConfig.position || null);
+      this.positionVal = AUTOCOMPLETE_POSITION[this.position || this.currConfig.position || ''] || AUTOCOMPLETE_POSITION['start'];
       this.setCssJustifyContent(this.positionVal, this.hostRef);
     }
     if (changes['visibleSize'] || (changes['config'] && this.visibleSize == null && this.currConfig.visibleSize != null)) {
@@ -227,7 +228,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
       this.panelClassVal = this.currConfig.panelClass;
     }
     if (this.positionVal == null) {
-      this.positionVal = GlnAutocompletePositionUtil.create(this.currConfig.position || null);
+      this.positionVal = AUTOCOMPLETE_POSITION[this.currConfig.position || ''] || AUTOCOMPLETE_POSITION['start'];
       this.setCssJustifyContent(this.positionVal, this.hostRef);
     }
     if (this.visibleSizeVal == null) {
@@ -443,10 +444,10 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     HtmlElemUtil.setProperty(elem, CSS_PROP_MAX_WIDTH, maxWidthStr);
   }
   /** Prepare and setting property: 'justify-content'. */
-  private setCssJustifyContent(positionValue: GlnAutocompletePosition | null, elem: ElementRef<HTMLElement>): void {
+  private setCssJustifyContent(positionValue: string | null, elem: ElementRef<HTMLElement>): void {
     let justifyContent: string = 'flex-start';
-    justifyContent = GlnAutocompletePosition.center === positionValue ? 'center' : justifyContent;
-    justifyContent = GlnAutocompletePosition.end === positionValue ? 'flex-end' : justifyContent;
+    justifyContent = AUTOCOMPLETE_POSITION['center'] === positionValue ? 'center' : justifyContent;
+    justifyContent = AUTOCOMPLETE_POSITION['end'] === positionValue ? 'flex-end' : justifyContent;
     // Setting properties: 'justify-content'.
     HtmlElemUtil.setProperty(elem, CSS_PROP_JUSTIFY_CONTENT, justifyContent);
   }
