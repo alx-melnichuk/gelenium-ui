@@ -27,7 +27,6 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnButtonConfig } from './gln-button-config.interface';
 import { GlnLinkDirective } from './gln-link.directive';
-import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from '../directives/gln-frame-ornament/gln-frame-ornam-align.interface';
 import { GlnButtonExterior, GlnButtonExteriorUtil } from './gln-button-exterior.interface';
 import { GlnButtonUtil } from './gln-button.util';
 
@@ -36,8 +35,6 @@ const SIZE: { [key: string]: number } = { short: 38, small: 44, middle: 50, wide
 const CSS_PROP_BORDER_RADIUS = '--glnbtf--br-rd';
 const CSS_PROP_PADDING_LEFT = '--glnbtf--pd-lf';
 const CSS_PROP_PADDING_RIGHT = '--glnbtf--pd-rg';
-const CSS_PROP_PADDING_TOP = '--glnbtf--pd-tp';
-const CSS_PROP_PADDING_BOTTOM = '--glnbtf--pd-bt';
 const CSS_PROP_SIZE = '--glnbt--size';
 
 export const GLN_BUTTON_CONFIG = new InjectionToken<GlnButtonConfig>('GLN_BUTTON_CONFIG');
@@ -64,10 +61,6 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   @Input()
   public isNoRipple: string | boolean | null | undefined;
   @Input()
-  public ornamLfAlign: string | null | undefined; // OrnamAlignType
-  @Input()
-  public ornamRgAlign: string | null | undefined; // OrnamAlignType
-  @Input()
   public size: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
 
   @Output()
@@ -86,16 +79,12 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
 
   public currConfig: GlnButtonConfig;
   public cssBorderRadius: number | null = null;
-  public cssPaddingBottom: number | null = null;
   public cssPaddingLeft: number | null = null;
   public cssPaddingRight: number | null = null;
-  public cssPaddingTop: number | null = null;
   public exteriorVal: GlnButtonExterior | null = null; // Binding attribute "exterior".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isFocused = false;
   public isNoRippleVal: boolean | null = null; // Binding attribute "isNoRipple".
-  public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
-  public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
   public sizeVal: number | null = null; // Binding attribute "size".
 
   private lineHeight: number = 0;
@@ -140,14 +129,6 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       this.isNoRippleVal = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
       this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
-    if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlign == null && this.currConfig.ornamLfAlign != null)) {
-      this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamLfAlign || this.currConfig.ornamLfAlign || null);
-      this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
-    }
-    if (changes['ornamRgAlign'] || (changes['config'] && this.ornamRgAlign == null && this.currConfig.ornamRgAlign != null)) {
-      this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamRgAlign || this.currConfig.ornamRgAlign || null);
-      this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
-    }
   }
 
   public ngOnInit(): void {
@@ -173,14 +154,6 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     if (this.isNoRippleVal == null) {
       this.isNoRippleVal = !!this.currConfig.isNoRipple;
       this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
-    }
-    if (this.ornamLfAlignVal == null) {
-      this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.currConfig.ornamLfAlign || null);
-      this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
-    }
-    if (this.ornamRgAlignVal == null) {
-      this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.currConfig.ornamRgAlign || null);
-      this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
     }
   }
 
@@ -244,7 +217,7 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
 
   private updateCssParams(exterior: GlnButtonExterior, size: number | null, lineHeight: number, elem: ElementRef<HTMLElement>): void {
     // Get css parameters for the button.
-    const { borderRadius, paddingLeft, paddingTop } = GlnButtonUtil.getCssParams(exterior, size, lineHeight);
+    const { borderRadius, paddingLeft } = GlnButtonUtil.getCssParams(exterior, size, lineHeight);
 
     this.cssBorderRadius = borderRadius || null;
     HtmlElemUtil.setProperty(elem, CSS_PROP_BORDER_RADIUS, this.cssBorderRadius?.toString().concat('px') || null);
@@ -253,11 +226,6 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
     this.cssPaddingRight = paddingLeft || null;
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_LEFT, this.cssPaddingLeft?.toString().concat('px') || null);
     HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_RIGHT, this.cssPaddingRight?.toString().concat('px') || null);
-
-    this.cssPaddingTop = paddingTop || null;
-    this.cssPaddingBottom = paddingTop || null;
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_TOP, this.cssPaddingTop?.toString().concat('px') || null);
-    HtmlElemUtil.setProperty(elem, CSS_PROP_PADDING_BOTTOM, this.cssPaddingBottom?.toString().concat('px') || null);
   }
 
   private setCssSize(size: number, elem: ElementRef<HTMLElement>): void {
@@ -282,11 +250,5 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   private settingNoRipple(noRipple: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-no-ripple', !!noRipple);
     HtmlElemUtil.setAttr(renderer, elem, 'norip', noRipple ? '' : null);
-  }
-  private settingOrnamLfAlign(ornamLfAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setAttr(renderer, elem, 'orn-lft', ornamLfAlign?.toString());
-  }
-  private settingOrnamRgAlign(ornamRgAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setAttr(renderer, elem, 'orn-rgh', ornamRgAlign?.toString());
   }
 }

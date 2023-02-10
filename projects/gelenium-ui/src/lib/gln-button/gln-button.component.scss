@@ -18,9 +18,7 @@ gln-button {
   @include mxDisplayFlex();
   height: max-content;
   font-weight: 500;
-  // !This allows you to specify the exact 'font-size' value for a particular component.
-  // !font-size: 0.875em; // 14px
-  // !line-height: 1.75;
+  font-size: 1em;
   outline: none;
 
   &[wdFull] {
@@ -28,17 +26,14 @@ gln-button {
   }
 
   &[ext-c] {
-    --def-lb-pd-tp: 0.375em; // 6px
     --def-lb-pd-lf: 1em; // 16px
     --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%, 0.3));
   }
   &[ext-o] {
-    --def-lb-pd-tp: 0.3125em; // 5px
     --def-lb-pd-lf: 0.9375em; // 15px
     --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
   }
   &[ext-t] {
-    --def-lb-pd-tp: 0.375em; // 6px
     --def-lb-pd-lf: 0.5em; // 8px
     --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
   }
@@ -55,7 +50,6 @@ gln-button {
   &>[glnbt-btn] {
     -webkit-tap-highlight-color: transparent;
     align-items: center;
-    background-color: transparent;
     border-radius: var(--glnbt-br-rd, var(--glnbtf--br-rd, 0.25em)); // 4px
     box-sizing: border-box;
     cursor: pointer;
@@ -63,18 +57,16 @@ gln-button {
     font-family: inherit;
     font-weight: inherit;
     font-size: 1em;
-    height: max-content;
     justify-content: center;
     letter-spacing: inherit;
     line-height: inherit;
+    min-height: var(--glnbt--size, 2.5em);
     min-width: var(--glnbt--size, 2.5em);
     overflow: hidden;
     position: relative;
     text-decoration: none;
     text-transform: inherit;
     user-select: none;
-    vertical-align: middle;
-    width: inherit;
   }
   &:not([dis])>[glnbt-btn] {
     transition:
@@ -190,57 +182,33 @@ gln-button {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding-top: var(--glnbt-pd-tp, var(--glnbtf--pd-tp, var(--def-lb-pd-tp)));
-      padding-bottom: var(--glnbt-pd-bt, var(--glnbtf--pd-bt, var(--def-lb-pd-tp)));
     }
     &>[glnbt-mr-ver] {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: var(--glnbt-pd-tp, var(--glnbtf--pd-tp, var(--def-lb-pd-tp)));
-      margin-bottom: var(--glnbt-pd-bt, var(--glnbtf--pd-bt, var(--def-lb-pd-tp)));
     }
   }
 
   // Ornament "padding".
   &>[glnbt-btn] {
-    &>span[glnfr-orn-lf], &>span[glnfr-orn-rg] {
-      max-height: inherit;
-      display: inline-flex;
-    }
-    &>span[glnfr-orn-rg] {
+    &>[gln-orn-rg] {
       order: 1;
     }
-    &>span[glnfr-orn-lf]:empty~[glnbt-pd-hor],
-    &>span[glnfr-orn-lf]:empty~a {
-      padding-left: var(--glnbt-pd-lf, var(--glnbtf--pd-lf, var(--def-lb-pd-lf)));
+    --glnbtf--orn-lf: var(--glnbt-pd-lf, var(--glnbtf--pd-lf, var(--def-lb-pd-lf)));
+    &>[gln-orn-lf]~[glnbt-pd-hor], 
+    &>[gln-orn-lf]~a {
+      --glnbtf--orn-lf: 0;
     }
-    &>span[glnfr-orn-rg]:empty~[glnbt-pd-hor],
-    &>span[glnfr-orn-rg]:empty~a {
-      padding-right: var(--glnbt-pd-rg, var(--glnbtf--pd-rg, var(--def-lb-pd-lf)));
+    --glnbtf--orn-rg: var(--glnbt-pd-rg, var(--glnbtf--pd-rg, var(--def-lb-pd-lf)));
+    &>[gln-orn-rg]~[glnbt-pd-hor],
+    &>[gln-orn-rg]~a {
+      --glnbtf--orn-rg: 0;
+    }
+    &>[glnbt-pd-hor], a {
+      padding-left: var(--glnbtf--orn-lf);
+      padding-right: var(--glnbtf--orn-rg);
     }
   }
 
-  // Ornament "alignment".
-  // &>div>[glnbt-btn] {
-  &>[glnbt-btn] {
-    &>span[glnfr-orn-lf="center"], &>span[glnfr-orn-rg="center"] {
-      align-self: center;
-    }
-    &>span[glnfr-orn-lf="flex-start"], &>span[glnfr-orn-rg="flex-start"] {
-      align-self: flex-start;
-    }
-    &>span[glnfr-orn-lf="flex-end"], &>span[glnfr-orn-rg="flex-end"] {
-      align-self: flex-end;
-    }
-    &>span[glnfr-orn-lf="baseline"], &>span[glnfr-orn-rg="baseline"] {
-      align-self: baseline;
-    }
-    &>span[glnfr-orn-lf="stretch"], &>span[glnfr-orn-rg="stretch"] {
-      align-self: stretch;
-    }
-    &>span[glnfr-orn-lf="default"], &>span[glnfr-orn-rg="default"] {
-      align-self: center;
-    }
-  }
 }

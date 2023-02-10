@@ -7,10 +7,6 @@
     [attr.id]="id + '_button'"
     [attr.disabled]="isDisabledVal ? '' : null"
     [attr.tabindex]="isDisabledVal ? null : 0"
-    glnFrameOrnament
-    [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
-    [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
-    [glnFrameOrnamentAfterContent]="true"
     (focus)="doFocus()"
     (blur)="doBlur()">
     <ng-container [ngTemplateOutlet]="templateOrnament">
@@ -29,10 +25,6 @@
   <div class="glnbt-btn glnbt-settings"
     glnbt-btn
     [attr.id]="id + '_link'"
-    glnFrameOrnament
-    [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
-    [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
-    [glnFrameOrnamentAfterContent]="true"
     (click)="doClick($event)">
     <ng-container [ngTemplateOutlet]="templateOrnament">
     </ng-container>
@@ -45,12 +37,6 @@
 
 
 <ng-template #templateOrnament>
-  <span glnfr-orn-lf
-    class="gln-ornam-lf">
-    <ng-content select="[gln-orn-lf]"></ng-content>
-  </span>
-  <span glnfr-orn-rg
-    class="gln-ornam-rg">
-    <ng-content select="[gln-orn-rg]"></ng-content>
-  </span>
+  <ng-content select="[gln-orn-lf]"></ng-content>
+  <ng-content select="[gln-orn-rg]"></ng-content>
 </ng-template>

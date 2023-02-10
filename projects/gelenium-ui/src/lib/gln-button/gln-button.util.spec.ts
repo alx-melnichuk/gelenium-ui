@@ -1,26 +1,23 @@
 import { GlnButtonUtil } from './gln-button.util';
 
 class Res {
-  public static getPrmByContained(size: number, lineHeight: number): { borderRadius: number; paddingLeft: number; paddingTop: number } {
+  public static getPrmByContained(size: number, lineHeight: number): { borderRadius: number; paddingLeft: number } {
     const borderRadius = Math.round(0.1 * size * 100) / 100;
     const param = (size - lineHeight) / 2;
     const paddingLeft = Math.round(0.3636 * size * 100) / 100;
-    const paddingTop = param;
-    return { borderRadius, paddingLeft, paddingTop };
+    return { borderRadius, paddingLeft };
   }
-  public static getPrmByOutlined(size: number, lineHeight: number): { borderRadius: number; paddingLeft: number; paddingTop: number } {
+  public static getPrmByOutlined(size: number, lineHeight: number): { borderRadius: number; paddingLeft: number } {
     const borderRadius = Math.round(0.1 * size * 100) / 100;
     const param = (size - lineHeight) / 2;
     const paddingLeft = Math.round(0.3409 * size * 100) / 100;
-    const paddingTop = param - 1;
-    return { borderRadius, paddingLeft, paddingTop };
+    return { borderRadius, paddingLeft };
   }
-  public static getPrmByText(size: number, lineHeight: number): { borderRadius: number; paddingLeft: number; paddingTop: number } {
+  public static getPrmByText(size: number, lineHeight: number): { borderRadius: number; paddingLeft: number } {
     const borderRadius = Math.round(0.1 * size * 100) / 100;
     const param = (size - lineHeight) / 2;
     const paddingLeft = Math.round(0.2045 * size * 100) / 100;
-    const paddingTop = param;
-    return { borderRadius, paddingLeft, paddingTop };
+    return { borderRadius, paddingLeft };
   }
 }
 
