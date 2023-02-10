@@ -195,19 +195,18 @@ gln-button {
     &>[gln-orn-rg] {
       order: 1;
     }
-    --glnbtf--orn-lf: var(--glnbt-pd-lf, var(--glnbtf--pd-lf, var(--def-lb-pd-lf)));
-    &>[gln-orn-lf]~[glnbt-pd-hor], 
+
+    &>[gln-orn-lf]~[glnbt-pd-hor],
     &>[gln-orn-lf]~a {
-      --glnbtf--orn-lf: 0;
+      --glnbt--orn-lf: 0;
     }
-    --glnbtf--orn-rg: var(--glnbt-pd-rg, var(--glnbtf--pd-rg, var(--def-lb-pd-lf)));
     &>[gln-orn-rg]~[glnbt-pd-hor],
     &>[gln-orn-rg]~a {
-      --glnbtf--orn-rg: 0;
+      --glnbt--orn-rg: 0;
     }
     &>[glnbt-pd-hor], a {
-      padding-left: var(--glnbtf--orn-lf);
-      padding-right: var(--glnbtf--orn-rg);
+      padding-left: var(--glnbt--orn-lf, var(--glnbt-pd-lf, var(--glnbtf--pd-lf, var(--def-lb-pd-lf))));
+      padding-right: var(--glnbt--orn-rg, var(--glnbt-pd-rg, var(--glnbtf--pd-rg, var(--def-lb-pd-lf))));
     }
   }
 
