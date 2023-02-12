@@ -12,10 +12,6 @@
     [isNoAnimation]="getBoolean(isNoAnimation) ?? currConfig.isNoAnimation"
     [isRequired]="isRequired"
     [label]="!isPlaceholderVal ? label : null"
-    glnFrameOrnament
-    [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
-    [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
-    [glnFrameOrnamentPath]="'/div{0}'"
     (click)="focus()">
 
     <ng-content select="[gln-orn-lf]"></ng-content>

@@ -14,11 +14,6 @@
   [isNoAnimation]="getBoolean(isNoAnimation) ?? currConfig.isNoAnimation"
   [isRequired]="isRequiredVal"
   [label]="!isPlaceholderVal ? label : null"
-  glnFrameOrnament
-  [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
-  [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
-  [glnFrameOrnamentPath]="'/div{0}'"
-  [glnFrameOrnamentAfterContent]="true"
   [attr.opn]="isPanelOpen ? '' : null"
   [attr.tabindex]="!isDisabledVal ? tabIndex : null"
   (focus)="doFocus()"

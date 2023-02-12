@@ -11,11 +11,7 @@
     [isLabelShrink]="getBoolean(isLabelShrink) ?? currConfig.isLabelShrink"
     [isNoAnimation]="getBoolean(isNoAnimation) ?? currConfig.isNoAnimation"
     [isRequired]="isRequiredVal"
-    [label]="!isPlaceholderVal ? label : null"
-    glnFrameOrnament
-    [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
-    [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
-    [glnFrameOrnamentPath]="'/div{0}'">
+    [label]="!isPlaceholderVal ? label : null">
 
     <ng-content select="[gln-orn-lf]"></ng-content>
     <ng-content select="[gln-orn-rg]"></ng-content>

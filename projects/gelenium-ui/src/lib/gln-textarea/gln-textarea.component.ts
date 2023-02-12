@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChildren,
   ElementRef,
   EventEmitter,
   forwardRef,
@@ -16,6 +17,7 @@ import {
   Optional,
   Output,
   PLATFORM_ID,
+  QueryList,
   Renderer2,
   SimpleChanges,
   SkipSelf,
@@ -38,6 +40,9 @@ import {
 } from '@angular/forms';
 
 import { ORNAMENT_ALIGN } from '../directives/gln-frame-ornament/gln-frame-ornament.directive';
+import { GlnOrnament, GlnOrnamentOwner, GlnOrnamentOwnerUtil, GLN_ORNAMENT_OWNER } from '../directives/gln-ornament/gln-ornament.interface';
+import { CSS_ATTR_ORN_LF, CSS_PROP_ORN_PD_LF, GlnOrnamentLeftDirective } from '../directives/gln-ornament/gln-ornament-left.directive';
+import { CSS_ATTR_ORN_RG, CSS_PROP_ORN_PD_RG, GlnOrnamentRightDirective } from '../directives/gln-ornament/gln-ornament-right.directive';
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
 import { BooleanUtil } from '../_utils/boolean.util';
@@ -60,10 +65,11 @@ export const GLN_TEXTAREA_CONFIG = new InjectionToken<GlnTextareaConfig>('GLN_TE
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => GlnTextareaComponent), multi: true },
     { provide: NG_VALIDATORS, useExisting: forwardRef(() => GlnTextareaComponent), multi: true },
     { provide: GLN_NODE_INTERNAL_VALIDATOR, useExisting: GlnTextareaComponent },
+    { provide: GLN_ORNAMENT_OWNER, useExisting: GlnTextareaComponent },
   ],
 })
 export class GlnTextareaComponent
-  implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
+  implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnNodeInternalValidator, GlnOrnamentOwner
 {
   @Input()
   public id = `glntx-${uniqueIdCounter++}`;
@@ -127,6 +133,10 @@ export class GlnTextareaComponent
   public frameComp!: GlnFrameComponent;
   @ViewChild('textareaElement', { static: true })
   public textareaElementRef!: ElementRef<HTMLElement>;
+  @ContentChildren(GlnOrnamentLeftDirective, { descendants: true })
+  public ornamLeftList!: QueryList<GlnOrnamentLeftDirective>;
+  @ContentChildren(GlnOrnamentRightDirective, { descendants: true })
+  public ornamRightList!: QueryList<GlnOrnamentRightDirective>;
 
   public currConfig: GlnTextareaConfig;
   public currentRows = 1;
@@ -179,10 +189,12 @@ export class GlnTextareaComponent
     if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlign == null && this.currConfig.ornamLfAlign != null)) {
       this.ornamLfAlignVal = ORNAMENT_ALIGN[this.ornamLfAlign || this.currConfig.ornamLfAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
+      this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, this.getElements(this.ornamLeftList));
     }
     if (changes['ornamRgAlign'] || (changes['config'] && this.ornamRgAlign == null && this.currConfig.ornamRgAlign != null)) {
       this.ornamRgAlignVal = ORNAMENT_ALIGN[this.ornamRgAlign || this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
+      this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList));
     }
     if (changes['isPlaceholder'] || (changes['config'] && this.isPlaceholder == null && this.currConfig.isPlaceholder != null)) {
       this.isPlaceholderVal = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
@@ -230,6 +242,8 @@ export class GlnTextareaComponent
       // Add an attribute that disables animation on initialization.
       this.isAttrHideAnimation = true;
     }
+    this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, this.getElements(this.ornamLeftList));
+    this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList));
   }
 
   // ** interface ControlValueAccessor - start **
@@ -308,6 +322,24 @@ export class GlnTextareaComponent
 
   // ** GlnNodeInternalValidator - finish **
 
+  // ** GlnOrnamentOwner - start **
+
+  public changeOrnament(isRemove: boolean, elementRef: ElementRef<HTMLElement>, isRight: boolean): void {
+    const ornamList: ElementRef<HTMLElement>[] = this.getElements(!isRight ? this.ornamLeftList : this.ornamRightList);
+    const ornamWidth: number | null = GlnOrnamentOwnerUtil.getWidthAllOrnaments(ornamList, isRemove, elementRef);
+    const nameProperty: string = !isRight ? CSS_PROP_ORN_PD_LF : CSS_PROP_ORN_PD_RG;
+    HtmlElemUtil.setProperty(this.frameComp.hostRef, nameProperty, ornamWidth?.toString().concat('px'));
+
+    if (!isRight) {
+      this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, [elementRef]);
+    } else {
+      this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, [elementRef]);
+    }
+    this.changeDetectorRef.markForCheck();
+  }
+
+  // ** GlnOrnamentOwner - finish **
+
   // ** Public methods **
 
   public getBoolean(value: string | boolean | null | undefined): boolean | null {
@@ -364,6 +396,10 @@ export class GlnTextareaComponent
     this.formControl.setValidators(newValidator);
   }
 
+  private getElements(queryList: QueryList<GlnOrnament> | null): ElementRef<HTMLElement>[] {
+    return (queryList?.toArray() || []).map((item: GlnOrnament) => item.hostRef);
+  }
+
   private settingFocus(focus: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-focused', focus || false);
     HtmlElemUtil.setAttr(renderer, elem, 'foc', focus ? '' : null);
@@ -385,6 +421,14 @@ export class GlnTextareaComponent
   }
   private settingOrnamRgAlign(ornamRgAlign: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setAttr(renderer, elem, 'orn-rgh', ornamRgAlign?.toString());
+  }
+  private settingOrnamentList(attrName: string, ornamAlign: string, renderer: Renderer2, elementRefList: ElementRef<HTMLElement>[]): void {
+    const ornamAlignValue = ORNAMENT_ALIGN[ornamAlign] || ORNAMENT_ALIGN['default'];
+    if (attrName) {
+      for (let idx = 0; idx < elementRefList.length; idx++) {
+        HtmlElemUtil.setAttr(renderer, elementRefList[idx], attrName, ornamAlignValue);
+      }
+    }
   }
 
   private getCurrentRows(numberOfLines: number, minRows: number | null | undefined, maxRows: number | null | undefined): number {

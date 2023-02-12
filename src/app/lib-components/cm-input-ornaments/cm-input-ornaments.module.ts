@@ -5,13 +5,22 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GlnInputModule, GlnRegexModule } from 'gelenium-ui';
+import { GlnInputModule, GlnRegexModule, GlnOrnamentModule } from 'gelenium-ui';
 
 import { CmInputOrnamentsComponent } from './cm-input-ornaments.component';
 
 @NgModule({
   declarations: [CmInputOrnamentsComponent],
-  imports: [CommonModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnInputModule, GlnRegexModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatButtonToggleModule,
+    MatExpansionModule,
+    MatTabsModule,
+    GlnInputModule,
+    GlnRegexModule,
+    GlnOrnamentModule,
+  ],
   exports: [CmInputOrnamentsComponent],
 })
 export class CmInputOrnamentsModule {}
