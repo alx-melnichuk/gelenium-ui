@@ -1,6 +1,7 @@
 import { AfterContentInit, Directive, ElementRef, Inject, OnDestroy, Optional } from '@angular/core';
 
-import { GlnOrnament, GlnOrnamentOwner, GLN_ORNAMENT_OWNER } from './gln-ornament.interface';
+import { GlnOrnamentOwner, GLN_ORNAMENT_OWNER } from './gln-ornament-owner.interface';
+import { GlnOrnament } from './gln-ornament.interface';
 
 export const CSS_ATTR_ORN_LF = 'gln-orn-lf';
 export const CSS_PROP_ORN_PD_LF = '--glnfro-pd-lf';

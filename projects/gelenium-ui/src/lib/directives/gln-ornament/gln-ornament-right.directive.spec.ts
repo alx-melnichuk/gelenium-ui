@@ -1,6 +1,7 @@
 import { ElementRef } from '@angular/core';
+
+import { GlnOrnamentOwner } from './gln-ornament-owner.interface';
 import { GlnOrnamentRightDirective } from './gln-ornament-right.directive';
-import { GlnOrnamentOwner } from './gln-ornament.interface';
 
 const testElement: HTMLElement = document.createElement('div');
 const hostRef = new ElementRef<HTMLElement>(testElement);

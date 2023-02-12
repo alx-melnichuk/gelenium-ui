@@ -41,7 +41,9 @@ import {
 import { first } from 'rxjs/operators';
 
 import { ORNAMENT_ALIGN } from '../directives/gln-frame-ornament/gln-frame-ornament.directive';
-import { GlnOrnament, GlnOrnamentOwner, GlnOrnamentOwnerUtil, GLN_ORNAMENT_OWNER } from '../directives/gln-ornament/gln-ornament.interface';
+import { GlnOrnament } from '../directives/gln-ornament/gln-ornament.interface';
+import { GlnOrnamentOwner, GLN_ORNAMENT_OWNER } from '../directives/gln-ornament/gln-ornament-owner.interface';
+import { GlnOrnamentOwnerUtil } from '../directives/gln-ornament/gln-ornament-owner.util';
 import { CSS_ATTR_ORN_LF, CSS_PROP_ORN_PD_LF, GlnOrnamentLeftDirective } from '../directives/gln-ornament/gln-ornament-left.directive';
 import { CSS_ATTR_ORN_RG, CSS_PROP_ORN_PD_RG, GlnOrnamentRightDirective } from '../directives/gln-ornament/gln-ornament-right.directive';
 import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
