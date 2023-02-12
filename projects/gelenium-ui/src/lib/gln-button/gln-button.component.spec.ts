@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { GlnFrameOrnamentDirective } from '../directives/gln-frame-ornament/gln-frame-ornament.directive';
 import { GlnTouchRippleComponent } from './../gln-touch-ripple/gln-touch-ripple.component';
 
 import { GlnButtonComponent } from './gln-button.component';
@@ -10,7 +9,7 @@ describe('GlnButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GlnButtonComponent, GlnFrameOrnamentDirective, GlnTouchRippleComponent],
+      declarations: [GlnButtonComponent, GlnTouchRippleComponent],
     }).compileComponents();
   });
 
