@@ -56,7 +56,7 @@ import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
-import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
+import { GLN_SELECT_SCROLL_STRATEGY, GLN_SELECT_SCROLL_STRATEGY_PROVIDER_BLOCK_FACTORY } from './gln-select.providers';
 import { GlnSelectConfig } from './gln-select-config.interface';
 import { GlnSelectionChange } from './gln-selection-change.interface';
 import { GlnSelectOpenUtil } from './gln-select-open.util';
@@ -275,10 +275,11 @@ export class GlnSelectComponent
     @Optional() @Inject(GLN_SELECT_CONFIG) private rootConfig: GlnSelectConfig | null,
     @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null,
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-    @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any
+    @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any | null
   ) {
     this.currConfig = this.rootConfig || {};
-    this.scrollStrategy = this.scrollStrategyFactory();
+    this.scrollStrategy =
+      this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : GLN_SELECT_SCROLL_STRATEGY_PROVIDER_BLOCK_FACTORY;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-select', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
   }
