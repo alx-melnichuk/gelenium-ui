@@ -34,24 +34,24 @@ export class GlnTouchRippleComponent implements OnChanges {
   @Input()
   public isCenter: string | null = null;
 
-  private center = false;
+  private isCenterVal = false;
 
   constructor(private hostRef: ElementRef<HTMLElement>, @Inject(DOCUMENT) private document: Document) {}
 
   @HostListener('mousedown', ['$event'])
   public doMousedown(event: MouseEvent): void {
-    this.doRipple(event, this.center);
+    this.doRipple(event, this.isCenterVal);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['isCenter']) {
-      this.center = !!BooleanUtil.init(this.isCenter);
+      this.isCenterVal = !!BooleanUtil.init(this.isCenter);
     }
   }
 
   // ** Public methods **
 
-  public touchRipple(event: MouseEvent, isCenter: boolean = this.center): void {
+  public touchRipple(event: MouseEvent, isCenter: boolean = this.isCenterVal): void {
     this.doRipple(event, isCenter);
   }
 
@@ -66,18 +66,18 @@ export class GlnTouchRippleComponent implements OnChanges {
     const clientWidth = parentElement.clientWidth;
 
     if (clientHeight && clientWidth) {
-      const radius = Math.min(clientWidth, clientHeight) / 2;
-      let offsetX = Math.round(clientWidth / 2);
-      let offsetY = Math.round(clientHeight / 2);
+      const radius: number = Math.min(clientWidth, clientHeight) / 2;
+      let offsetX: number = Math.round(clientWidth / 2);
+      let offsetY: number = Math.round(clientHeight / 2);
       if (!isCenter && event.currentTarget) {
-        const rect = (event.currentTarget as HTMLElement).getBoundingClientRect() || { left: 0, top: 0 };
+        const rect: DOMRect = (event.currentTarget as HTMLElement).getBoundingClientRect() || { left: 0, top: 0 };
         offsetX = Math.round(event.clientX - rect.left);
         offsetY = Math.round(event.clientY - rect.top);
       }
-      const left = offsetX - radius / 2;
-      const top = offsetY - radius / 2;
+      const left: number = offsetX - radius / 2;
+      const top: number = offsetY - radius / 2;
 
-      const circle = this.document.createElement('span');
+      const circle: HTMLSpanElement = this.document.createElement('span');
       circle.style.width = circle.style.height = `${radius}px`;
       circle.style.left = `${left}px`;
       circle.style.top = `${top}px`;
@@ -93,8 +93,6 @@ export class GlnTouchRippleComponent implements OnChanges {
         // A value of "true" indicates that the listener should be called at most once after being added.
         { once: true }
       );
-      this.hostRef.nativeElement.appendChild(circle);
-
       circle.addEventListener(
         'animationcancel',
         () => {
@@ -105,6 +103,7 @@ export class GlnTouchRippleComponent implements OnChanges {
         // A value of "true" indicates that the listener should be called at most once after being added.
         { once: true }
       );
+
       this.hostRef.nativeElement.appendChild(circle);
     }
   }
