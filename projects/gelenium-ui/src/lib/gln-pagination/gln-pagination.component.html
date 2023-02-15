@@ -6,7 +6,7 @@
       <gln-button glnpg-size
         class="glnpg-btn-first"
         [exterior]="exteriorVal"
-        [isDisabled]="isDisabledVal || page == 1"
+        [isDisabled]="isDisabledVal || page == 1 || !pageValid(page, countVal)"
         [isNoRipple]="isNoRippleVal"
         [size]="sizeVal"
         (click)="doClickPage(1)">
@@ -25,7 +25,7 @@
       <gln-button glnpg-size
         class="glnpg-btn-prev"
         [exterior]="exteriorVal"
-        [isDisabled]="isDisabledVal || page == 1"
+        [isDisabled]="isDisabledVal || page == 1 || !pageValid(page, countVal)"
         [isNoRipple]="isNoRippleVal"
         [size]="sizeVal"
         (click)="doClickPage(page - 1)">
@@ -66,7 +66,7 @@
       <gln-button glnpg-size
         class="glnpg-btn-next"
         [exterior]="exteriorVal"
-        [isDisabled]="isDisabledVal || page == count"
+        [isDisabled]="isDisabledVal || page == count || !pageValid(page, countVal)"
         [isNoRipple]="isNoRippleVal"
         [size]="sizeVal"
         (click)="doClickPage(page + 1)">
@@ -85,7 +85,7 @@
       <gln-button glnpg-size
         class="glnpg-btn-last"
         [exterior]="exteriorVal"
-        [isDisabled]="isDisabledVal || page == count"
+        [isDisabled]="isDisabledVal || page == count || !pageValid(page, countVal)"
         [isNoRipple]="isNoRippleVal"
         [size]="sizeVal"
         (click)="doClickPage(countVal)">

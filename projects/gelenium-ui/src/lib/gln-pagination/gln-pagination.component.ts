@@ -232,6 +232,10 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     return index;
   }
 
+  public pageValid(itemPage: number | null, count: number | null): boolean {
+    return itemPage != null && count != null && 0 < itemPage && itemPage <= count;
+  }
+
   public doClickPage(itemPage: number | null): void {
     if (!this.isDisabledVal && itemPage != null && this.countVal != null && 0 < itemPage && itemPage <= this.countVal) {
       this.changePage.emit(itemPage);
