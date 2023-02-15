@@ -39,8 +39,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { ORNAMENT_ALIGN } from '../directives/gln-frame-ornament/gln-frame-ornament.directive';
-import { GlnOrnament } from '../directives/gln-ornament/gln-ornament.interface';
+import { GlnOrnament, ORNAMENT_ALIGN } from '../directives/gln-ornament/gln-ornament.interface';
 import { GlnOrnamentOwner, GLN_ORNAMENT_OWNER } from '../directives/gln-ornament/gln-ornament-owner.interface';
 import { GlnOrnamentOwnerUtil } from '../directives/gln-ornament/gln-ornament-owner.util';
 import { CSS_ATTR_ORN_LF, CSS_PROP_ORN_PD_LF, GlnOrnamentLeftDirective } from '../directives/gln-ornament/gln-ornament-left.directive';
