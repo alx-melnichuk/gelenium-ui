@@ -82,6 +82,18 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
+      <td>
+        <code>progress?: number<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          The value of the filled circle arc value from 0 to 1.
+          <br />(default 0.7).
+        </span>
+      </td>
+    </tr>
+    <tr>
       <td><code>size?: number<br/>
         &nbsp;&nbsp;| string<br/>
         &nbsp;&nbsp;| undefined;</code></td>
@@ -103,6 +115,18 @@ export class AppComponent &#123;
           The value in the units of "pixels" allow you to accurately calculate the size of
           internal elements.<br />
           For example: <code>size="57" or [size]="57"</code>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>strokeWd?: number<br/>
+            &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          The value specifies the stroke width.
+          <br />(default = size / 10).
         </span>
       </td>
     </tr>
@@ -156,7 +180,10 @@ size="middle"</pre></code>
 isExternal=false,
 isNoAnimation=false,
 isNoPulsate=false,
-size='small'</pre></code>
+progress=0.7,
+size='small',
+strokeWd=size/10,
+</pre></code>
     </li>
     <li>
       Values from the default configuration provider (if there is one).

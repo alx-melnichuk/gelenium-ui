@@ -25,7 +25,12 @@ export class CmSpinnerAttributesComponent {
   public isNoAnimation02a: boolean = true;
   public isNoPulsate02a: boolean = false;
   public isExternal02a: boolean = false;
+  public progress02a: number = 0.7;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
+
+  public getValue(eventTarget: any): any {
+    return eventTarget != null ? (eventTarget as Attr).value : '';
+  }
 }

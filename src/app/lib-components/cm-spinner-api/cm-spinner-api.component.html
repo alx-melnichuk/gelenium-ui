@@ -92,6 +92,17 @@
     <tr>
       <td>
         <code>@Input()</code>
+        <code>progress: number<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>The value of the filled circle arc value from 0 to 1 (default 0.7).</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
         <code>size: number<br/>
             &nbsp;&nbsp;| string<br/>
             &nbsp;&nbsp;| null<br/>
@@ -116,6 +127,17 @@
           internal elements.<br />
           For example: <code>size="57" or [size]="57"</code>
         </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>strokeWd: number<br/>
+            &nbsp;&nbsp;| null<br/>
+            &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>The value specifies the stroke width. (default = size / 10).</span>
       </td>
     </tr>
   </tbody>
@@ -186,23 +208,25 @@
       </td>
     </tr>
     <tr>
-      <td><code>--glnsp-size:<br/>
-        &nbsp;&nbsp;var(--glnsp--size, 32px);</code></td>
-      <td>
-        <span>
-          Determines the height and width of the element.<br />
-          The value of the internal css variable '--glnsp--size' is determined
-          by the input parameter 'size'.
-        </span>
-      </td>
-    </tr>
-    <tr>
       <td><code>--glnsp-duration: 1.4s;</code></td>
       <td>
         <span>
           This is the animation time for rotating an image (internal or external)
           around its axis in one cycle.<br />
           Also, this is the execution time of one circle ripple cycle for the internal svg image.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsp-init-rotate: -90deg;</code></td>
+      <td>
+        <span>
+          Specifies the rotation angle of an element when not animated.
+          The default value is -90 degrees (-90deg) and the progress count starts from the highest
+          point.
+          To start the progress countdown at the rightmost point, then specify 0 degrees (0deg).
+          To start the progress countdown at the lowest point, then specify 90 degrees (90deg).
+          To start the progress countdown at the leftmost point, then specify 180 degrees (180deg).
         </span>
       </td>
     </tr>

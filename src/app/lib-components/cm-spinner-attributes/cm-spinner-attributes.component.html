@@ -23,6 +23,9 @@
       "isNoPulsate" - disable circle pulsate (isNoPulsate);
     </li>
     <li>
+      "progress" - the value of the filled circle arc value from 0 to 1 (default 0.7);
+    </li>
+    <li>
       "size" - specifies the size (height and width) of the component.
     </li>
   </ul>
@@ -47,6 +50,32 @@
       (change)="isExternal02a=!isExternal02a" />
     is external
   </label>
+  <br />
+  <div class="spa-progress-wrap">
+    <span class="spa-progress-label">
+      progress = <b>{{ progress02a }}</b>
+    </span>
+    <input type="range"
+      min="0"
+      max="1"
+      step="0.1"
+      [value]="progress02a"
+      list="progress02a-marks"
+      (input)="progress02a=getValue($event.target)" />
+    <datalist id="progress02a-marks">
+      <option value="0.0"></option>
+      <option value="0.1"></option>
+      <option value="0.2"></option>
+      <option value="0.3"></option>
+      <option value="0.4"></option>
+      <option value="0.5"></option>
+      <option value="0.6"></option>
+      <option value="0.7"></option>
+      <option value="0.8"></option>
+      <option value="0.9"></option>
+      <option value="1.0"></option>
+    </datalist>
+  </div>
 </section>
 
 <div class="app-group">
@@ -60,7 +89,8 @@
     <gln-spinner id="unique_id_spinner02a"
       [isNoAnimation]="isNoAnimation02a ? '' : null"
       [isNoPulsate]="isNoPulsate02a ? '' : null"
-      [isExternal]="isExternal02a ? '' : null">
+      [isExternal]="isExternal02a ? '' : null"
+      [progress]="progress02a">
       <div class="spa-external02">
         demo
       </div>
@@ -89,7 +119,8 @@
     &lt;gln-spinner id="unique_id_spinner02a"
       [isNoAnimation]="isNoAnimation02a ? '' : null"
       [isNoPulsate]="isNoPulsate02a ? '' : null"
-      [isExternal]="isExternal02a ? '' : null"&gt;
+      [isExternal]="isExternal02a ? '' : null"
+      [progress]="progress02a"&gt;
       &lt;div class="spa-external02"&gt;
         demo
       &lt;/div&gt;
@@ -114,6 +145,7 @@ export class SpinnerComponent &#123;
   public isNoAnimation02a: boolean = true;
   public isNoPulsate02a: boolean = false;
   public isExternal02a: boolean = false;
+  public progress02a: number = 0.7;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">

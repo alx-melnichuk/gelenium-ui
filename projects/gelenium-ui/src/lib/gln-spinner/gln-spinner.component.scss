@@ -14,8 +14,8 @@ gln-spinner {
 
   // Blocks: "<svg glnsp-size" - (Internal svg), "<div glnsp-size>" - ("External svg").
   &>[glnsp-size] {
-    height: var(--glnsp-size, var(--glnsp--size, 32px));
-    width: var(--glnsp-size, var(--glnsp--size, 32px));
+    height: var(--glnsp--size, 32px);
+    width: var(--glnsp--size, 32px);
   }
 
   // Blocks: "<svg glnsp-rotate" - (Internal svg), "<div glnsp-rotate>" - ("External svg").
@@ -23,16 +23,20 @@ gln-spinner {
   &:not([noani])>[glnsp-rotate] {
     animation: kf-spi-rotate var(--glnsp-duration, 1.4s) linear infinite;
     @keyframes kf-spi-rotate {
-      0% { 
-        transform: rotate(0deg); 
+      0% {
+        transform: rotate(0deg);
       }
-      100% { 
+      100% {
         transform: rotate(360deg);
       }
     }
   }
 
   // ** Section "Internal svg" **
+
+  &>svg[glnsp-inner][glnsp-rotate] {
+    transform: rotate(var(--glnsp-init-rotate, -90deg));
+  }
 
   // Block "<svg glnsp-inner>"
   &>svg[glnsp-inner] {
@@ -41,30 +45,44 @@ gln-spinner {
       cx: 50%;
       cy: 50%;
       fill: none;
-      r: 44%;
+      r: var(--glnsp--nr-radius);
       stroke: currentColor;
-      stroke-dasharray: 182%, 285%;
-      stroke-dashoffset: 0;
-      stroke-linecap: round;
-      stroke-width: 8.18%;
+      stroke-dasharray: var(--glnsp--circumference), var(--glnsp--circumference);
+      stroke-dashoffset: var(--glnsp--stroke-offset);
+      stroke-width: var(--glnsp--stroke-wd);
       transform-origin: center center;
     }
   }
   &:not([noani]):not([nopul])>svg[glnsp-inner]>circle {
-    animation: kf-spi-move var(--glnsp-duration, 1.4s) ease-in-out infinite;
-    @keyframes kf-spi-move {
+    animation: kf-spi-move1 var(--glnsp-duration, 1.4s) ease-in-out infinite;
+    @keyframes kf-spi-move1 {
       0% {
-        stroke-dasharray: 1px, 285%;
+        stroke-dasharray: 1px, 280%;
         stroke-dashoffset: 0px;
       } 50% {
-        stroke-dasharray: 227%, 285%;
+        stroke-dasharray: 227%, 280%;
         stroke-dashoffset: -34%;
       } 100% {
-        stroke-dasharray: 227%, 285%;
-        stroke-dashoffset: -285%;
+        stroke-dasharray: 227%, 280%;
+        stroke-dashoffset: -280%;
       }
     }
   }
+  /*&:not([noani]):not([nopul])>svg[glnsp-inner]>circle {
+    animation: kf-spi-move var(--glnsp-duration, 1.4s) ease-in-out infinite;
+    @keyframes kf-spi-move {
+      0% {
+        stroke-dasharray: 1px, var(--glnsp--stroke-array-max);   // stroke-array-max: 200px
+        stroke-dashoffset: 0;
+      } 50% {
+        stroke-dasharray: var(--glnsp--stroke-array-mdl), var(--glnsp--stroke-array-max); // stroke-array-mdl: 100px, stroke-array-max: 200px
+        stroke-dashoffset: var(--glnsp--stroke-offset-mdl);       // stroke-offset-mdl: -15px
+      } 100% {
+        stroke-dasharray: var(--glnsp--stroke-array-mdl), var(--glnsp--stroke-array-max); // stroke-array-max: 200px
+        stroke-dashoffset: var(--glnsp--stroke-offset-max);      // stroke-offset-max: -125px
+      }
+    }
+  }*/
 
   // ** Section "External svg" **
 
