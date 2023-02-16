@@ -34,7 +34,7 @@ gln-spinner {
 
   // ** Section "Internal svg" **
 
-  &>svg[glnsp-inner][glnsp-rotate] {
+  &[noani]>svg[glnsp-inner][glnsp-rotate] {
     transform: rotate(var(--glnsp-init-rotate, -90deg));
   }
 
