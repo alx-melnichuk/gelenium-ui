@@ -1,0 +1,15 @@
+/*# sourceURL=cm-tooltip-basic.component.scss */
+
+app-cm-tooltip-basic {
+  display: block;
+
+  // Page: "Basic"
+  .ttb-btn {
+    border-radius: 4px;
+    border-width: 0;
+    font-size: 0.875em; // 14px
+    height: 38px;
+    min-width: 64px;
+    padding: 0 16px;
+  }
+}

@@ -23,6 +23,7 @@ export * from './gln-select/public-api';
 export * from './gln-spinner/public-api';
 export * from './gln-switch/public-api';
 export * from './gln-textarea/public-api';
+export * from './gln-tooltip/public-api';
 export * from './gln-touch-ripple/public-api';
 
 export * from './pipes/gln-highlight/public-api';

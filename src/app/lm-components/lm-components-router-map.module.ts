@@ -160,6 +160,20 @@ const siteUrlsTextarea: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Textarea', { label: 'Textarea', siteUrls: siteUrlsTextarea });
 
+RouterConfig.add('URL_COMPONENTS_TOOLTIP', 'tooltip');
+const urlTooltip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TOOLTIP');
+const siteUrlsTooltip: SiteUrl[] = [
+  { label: 'Basic', url: urlTooltip, fragment: 'Basic' },
+  // { label: 'Attributes', url: urlTooltip, fragment: 'Attributes' },
+  // { label: 'Size', url: urlTooltip, fragment: 'Size' },
+  // { label: 'Border', url: urlTooltip, fragment: 'Border' },
+  // { label: 'Ornaments', url: urlTooltip, fragment: 'Ornaments' },
+  // { label: 'Palette', url: urlTooltip, fragment: 'Palette' },
+  // { label: 'Config', url: urlTooltip, fragment: 'Config' },
+  // { label: 'Api', url: urlTooltip, fragment: 'Api' },
+];
+SiteMenuUtil.addItem('Components', 'Tooltip', { label: 'Tooltip', siteUrls: siteUrlsTooltip });
+
 @NgModule({
   imports: [CommonModule],
 })

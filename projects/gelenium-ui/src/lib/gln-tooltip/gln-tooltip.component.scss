@@ -1,0 +1,25 @@
+/*# sourceURL=gln-touch-ripple.component.scss */
+
+gln-tooltip-cmp {
+  // display: block;
+  border-radius: 4px;
+  background-color: rgba(97,97,97,.6);
+  color: white;
+  margin: 14px; // margin: $margin; $margin: 14px;
+  max-width: 250px; // max-width: $max-width; $max-width: 250px;
+  padding-left: 8px; // padding-left: $horizontal-padding; $horizontal-padding: 8px;
+  padding-right: 8px;  // padding-right: $horizontal-padding; $horizontal-padding: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gln-tooltip-cmp {
+  // font-family: Roboto,Helvetica Neue,sans-serif;
+  font-size: 0.75em; // 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.gln-tooltip-panel {
+  pointer-events: none !important;
+}

@@ -17,6 +17,7 @@ const URL_COMPONENTS_SELECT = RouterConfig.get('URL_COMPONENTS_SELECT');
 const URL_COMPONENTS_SPINNER = RouterConfig.get('URL_COMPONENTS_SPINNER');
 const URL_COMPONENTS_SWITCH = RouterConfig.get('URL_COMPONENTS_SWITCH');
 const URL_COMPONENTS_TEXTAREA = RouterConfig.get('URL_COMPONENTS_TEXTAREA');
+const URL_COMPONENTS_TOOLTIP = RouterConfig.get('URL_COMPONENTS_TOOLTIP');
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
       {
         path: URL_COMPONENTS_TEXTAREA,
         loadChildren: () => import('../lib-components/cm-textarea/cm-textarea.module').then((m) => m.CmTextareaModule),
+      },
+      {
+        path: URL_COMPONENTS_TOOLTIP,
+        loadChildren: () => import('../lib-components/cm-tooltip/cm-tooltip.module').then((m) => m.CmTooltipModule),
       },
       { path: '**', redirectTo: URL_COMPONENTS_INPUT },
     ],
