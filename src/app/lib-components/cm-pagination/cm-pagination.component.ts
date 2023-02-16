@@ -30,7 +30,7 @@ export class CmPaginationComponent implements AfterViewInit {
     // The zone will become stable when all components have fully rendered.
     this.ngZone.onStable.pipe(first()).subscribe(() => {
       // eslint-disable-next-line no-restricted-syntax
-      console.timeEnd(logLabel); // ??? ms - ??? ms
+      console.timeEnd(logLabel); // 388 ms - 453 ms
     });
   }
 }

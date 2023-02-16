@@ -93,7 +93,6 @@ const siteUrlsPagination: SiteUrl[] = [
   { label: 'Border', url: urlPagination, fragment: 'Border' },
   { label: 'Ornaments', url: urlPagination, fragment: 'Ornaments' },
   { label: 'Palette', url: urlPagination, fragment: 'Palette' },
-  // ?{ label: 'Customization', url: urlPagination, fragment: 'Customization' },
   { label: 'Config', url: urlPagination, fragment: 'Config' },
   { label: 'Api', url: urlPagination, fragment: 'Api' },
 ];
