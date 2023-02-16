@@ -9,7 +9,6 @@ import { BTN_OUTLINED, BTN_TEXT, LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL
   styleUrls: ['./cm-pagination-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // providers: [{ provide: GLN_PAGINATION_CONFIG, useValue: glnPaginationConfigDefault }],
 })
 export class CmPaginationBasicComponent {
   @Input()
