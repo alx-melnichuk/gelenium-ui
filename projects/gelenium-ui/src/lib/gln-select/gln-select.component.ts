@@ -55,7 +55,7 @@ import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
-import { GLN_SELECT_SCROLL_STRATEGY, GLN_SELECT_SCROLL_STRATEGY_PROVIDER_BLOCK_FACTORY } from './gln-select.providers';
+import { GLN_SELECT_SCROLL_STRATEGY, GLN_SELECT_SCROLL_STRATEGY_PROVIDER_CLOSE_FACTORY } from './gln-select.providers';
 import { GlnSelectConfig } from './gln-select-config.interface';
 import { GlnSelectionChange } from './gln-selection-change.interface';
 import { GlnSelectOpenUtil } from './gln-select-open.util';
@@ -278,7 +278,7 @@ export class GlnSelectComponent
   ) {
     this.currConfig = this.rootConfig || {};
     this.scrollStrategy =
-      this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : GLN_SELECT_SCROLL_STRATEGY_PROVIDER_BLOCK_FACTORY;
+      this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : GLN_SELECT_SCROLL_STRATEGY_PROVIDER_CLOSE_FACTORY;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-select', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
   }
