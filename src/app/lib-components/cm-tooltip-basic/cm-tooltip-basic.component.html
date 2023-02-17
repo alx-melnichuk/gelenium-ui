@@ -19,12 +19,37 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 &lt;/button&gt;</pre></code>
 </section>
 
-<div class="app-group">
 
-  <div class="app-elem">
+<!-- <section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="demo1=!demo1" />
+    demo1
+  </label>
+</section> -->
+<section mr-vr>
+  <label>
+    Position
+    <select style="padding: 5px; outline: none;"
+      (change)="position1=getValue($event.target)">
+      <option *ngFor="let item of positionList"
+        [value]="item"
+        [attr.selected]="position1==item ? '' : null">{{ item }}
+      </option>
+    </select>
+  </label>
+</section>
+
+<div class="app-group"
+  style9="position: relative;">
+
+  <div class="ttb-elem">
+    <!-- <button class="ttb-btn">
+      Action
+    </button> -->
     <button class="ttb-btn"
-      glnTooltip="Information about the action."
-      glnTooltipDisabled9>
+      glnTooltip="Info the action"
+      [glnTooltipPosition]="position1">
       Action
     </button>
   </div>
