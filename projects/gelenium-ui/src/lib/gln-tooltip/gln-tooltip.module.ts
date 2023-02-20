@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 
 import { GlnTooltipComponent } from './gln-tooltip.component';
-import { GlnTooltip2Directive } from './gln-tooltip2.directive';
+import { GlnTooltipDirective } from './gln-tooltip.directive';
 
 @NgModule({
-  declarations: [GlnTooltipComponent, GlnTooltip2Directive],
+  declarations: [GlnTooltipComponent, GlnTooltipDirective],
   imports: [CommonModule, OverlayModule],
-  exports: [GlnTooltipComponent, GlnTooltip2Directive],
+  exports: [GlnTooltipComponent, GlnTooltipDirective],
   entryComponents: [GlnTooltipComponent],
 })
 export class GlnTooltipModule {}
