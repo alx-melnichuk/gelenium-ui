@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 import { GlnTooltipBaseComponent } from './gln-tooltip-base.component';
 
@@ -13,6 +13,11 @@ import { GlnTooltipBaseComponent } from './gln-tooltip-base.component';
 export class GlnTooltipComponent extends GlnTooltipBaseComponent {
   @Input()
   public override text: string = '';
+
+  @HostBinding('class.gln-tooltip')
+  public getClassTooltip(): boolean {
+    return true;
+  }
 
   constructor(hostRef: ElementRef<HTMLElement>, changeDetectorRef: ChangeDetectorRef) {
     super(hostRef, changeDetectorRef);

@@ -1,11 +1,12 @@
 import {
   ConnectedPosition,
+  FlexibleConnectedPositionStrategy,
+  HorizontalConnectionPos,
   Overlay,
-  OverlayConfig,
-  OverlayPositionBuilder,
   OverlayRef,
   PositionStrategy,
   ScrollStrategy,
+  VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { Directive, ElementRef, Input, OnDestroy, Renderer2, ViewContainerRef } from '@angular/core';
@@ -17,7 +18,7 @@ const CSS_ATTR_IS_HIDE = 'is-hide';
 const CSS_ATTR_IS_SHOW = 'is-show';
 const CSS_ATTR_NO_ANM = 'noAnm';
 
-const PANEL_CLASS = 'gln-tooltip-panel';
+const CSS_CLASS_PANEL = 'gln-tooltip-panel';
 
 export function GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_CLOSE_FACTORY(overlay: Overlay): () => ScrollStrategy {
   return () => overlay.scrollStrategies.close();
@@ -33,7 +34,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
   public panelClassVal: string[] = []; // Binding attribute "panelClass"
-  public positionList: ConnectedPosition[] = []; // Binding attribute "position"
+  public positionVal: string | null = null; // Binding attribute "position"
   public showDelayVal: number | null = null; // Binding attribute "showDelay".
 
   protected overlayRef: OverlayRef | null = null;
@@ -42,9 +43,10 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   protected scrollStrategy: ScrollStrategy;
   protected tooltipInstance: T | null = null;
 
+  private panelClassPosition: string = '';
+
   constructor(
     protected overlay: Overlay,
-    protected overlayPositionBuilder: OverlayPositionBuilder,
     protected renderer: Renderer2,
     protected viewContainerRef: ViewContainerRef,
     public hostRef: ElementRef<HTMLElement>
@@ -57,15 +59,15 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
 
   public ngOnDestroy(): void {
     // const nativeElement = this._elementRef.nativeElement;
-
     // clearTimeout(this._touchstartTimeout);
+
+    this.handlerToAnimationFinish();
+    // this.tooltipInstance = null;
 
     if (this.overlayRef != null) {
       this.overlayRef.dispose();
       this.overlayRef = null;
     }
-
-    this.tooltipInstance = null;
     this.portal = null;
   }
 
@@ -80,11 +82,53 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     }
 
     if (this.overlayRef == null) {
-      const positionStrategy: PositionStrategy = this.createPositionStrategy(this.hostRef);
-      const scrollStrategy: ScrollStrategy = this.overlay.scrollStrategies.reposition();
-      const panelClass: string[] = [PANEL_CLASS].concat(this.panelClassVal) || [];
-      // this.overlayRef = this.createOverlay(positionStrategy, scrollStrategy, [PANEL_CLASS].concat(this.panelClassVal || []));
-      this.overlayRef = this.overlay.create(this.createOverlayConfig(positionStrategy, scrollStrategy, panelClass));
+      // this.overlayRef = this.createOverlay(
+      //   this.overlay,
+      //   this.createPositionStrategy(this.hostRef, this.getConnectedPosition(this.positionVal)),
+      //   this.createScrollStrategy(),
+      //   [CSS_CLASS_PANEL].concat(this.panelClassVal) || []
+      // );
+
+      // .flexibleConnectedTo(this._elementRef)
+      const positionStrategy: PositionStrategy = // this.createPositionStrategy(this.hostRef, this.getConnectedPosition(this.positionVal))
+        this.overlay
+          .position()
+          .flexibleConnectedTo(this.hostRef)
+          .withFlexibleDimensions(false)
+          .withPositions([this.getConnectedPosition(this.positionVal)]);
+      // // Create connected position strategy.
+      // const strategy = this.overlay.position()
+      //                    .flexibleConnectedTo(this._elementRef)
+      //                    .withTransformOriginOn(`.${this._cssClassPrefix}-tooltip`)
+      //                    .withFlexibleDimensions(false)
+      //                    .withViewportMargin(this._viewportMargin)
+      //                    .withScrollableContainers(scrollableAncestors);
+
+      this.overlayRef = this.overlay.create({
+        // class OverlayConfig
+        // Strategy with which to position the overlay.
+        positionStrategy, // : this.createPositionStrategy(this.hostRef, this.getConnectedPosition(this.positionVal)),
+        // Strategy to be used when handling scroll events while the overlay is open.
+        scrollStrategy: this.createScrollStrategy(),
+        // Custom class to add to the overlay pane.
+        panelClass: [CSS_CLASS_PANEL].concat(this.panelClassVal) || [],
+        // // Whether the overlay has a backdrop.
+        // hasBackdrop?: boolean;
+        // // Custom class to add to the backdrop
+        // backdropClass?: string | string[];
+        // /** The width of the overlay panel. If a number is provided, pixel units are assumed. */
+        // width?: number | string;
+        // /** The height of the overlay panel. If a number is provided, pixel units are assumed. */
+        // height?: number | string;
+        // /** The min-width of the overlay panel. If a number is provided, pixel units are assumed. */
+        // minWidth?: number | string;
+        // /** The min-height of the overlay panel. If a number is provided, pixel units are assumed. */
+        // minHeight?: number | string;
+        // /** The max-width of the overlay panel. If a number is provided, pixel units are assumed. */
+        // maxWidth?: number | string;
+        // /** The max-height of the overlay panel. If a number is provided, pixel units are assumed. */
+        // maxHeight?: number | string;
+      });
     }
     this.overlayDetach();
     // const overlayRef = this.createOverlay();
@@ -107,6 +151,9 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     this.tooltipInstance = this.overlayRef.attach(this.portal).instance;
     // Pass content to the tooltip component instance.
     this.tooltipInstance.text = this.message || '';
+
+    // Updates the position of the tooltip.
+    this.updatesPosition(this.positionVal, this.overlayRef);
 
     return this.executeCallBackOnDelay(delay, () => {
       const instanceRef: ElementRef<HTMLElement> = this.tooltipInstance!.getHostRef();
@@ -135,27 +182,57 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       if (!this.isNoAnimationVal) {
         // Add an animation completion listener.
         // A value of "true" indicates that the listener should be called at most once after being added.
-        instanceRef.nativeElement.addEventListener('animationend', this.overlayDetach, { once: true });
-        instanceRef.nativeElement.addEventListener('animationcancel', this.overlayDetach, { once: true });
+        instanceRef.nativeElement.addEventListener('animationend', this.handlerToAnimationFinish);
+        instanceRef.nativeElement.addEventListener('animationcancel', this.handlerToAnimationFinish);
       } else {
         // If there is no animation, then remove the tooltip component instance.
         this.overlayDetach();
       }
     });
   }
-
+  private handlerToAnimationFinish = (): void => {
+    const instanceRef: ElementRef<HTMLElement> | undefined = this.tooltipInstance?.getHostRef();
+    if (instanceRef != undefined) {
+      instanceRef.nativeElement.removeEventListener('animationend', this.handlerToAnimationFinish);
+      instanceRef.nativeElement.removeEventListener('animationcancel', this.handlerToAnimationFinish);
+    }
+    this.overlayDetach();
+  };
   /** If the tooltip is currently visible, returns true. */
   public isVisible(): boolean {
     return !!this.tooltipInstance?.isVisible();
   }
 
-  public overlayDetach = (): void => {
+  public overlayDetach(): void {
     console.log(`overlayDetach();`); // #
     if (this.overlayRef && this.overlayRef.hasAttached()) {
       this.overlayRef.detach();
     }
     this.tooltipInstance = null;
-  };
+  }
+
+  // ** Protected methods **
+
+  // Updates the position of the tooltip.
+  protected updatesPosition(positionInp: string | null, overlayRef: OverlayRef | null): void {
+    if (overlayRef != null) {
+      const position: string = positionInp || 'top';
+      const positionStrategy = overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
+      const connectedPosition: ConnectedPosition = this.getConnectedPosition(position);
+      positionStrategy.withPositions([connectedPosition]);
+      // overlayRef.updatePosition();
+
+      this.renderer.setAttribute(overlayRef.overlayElement, 'glntt-position', position);
+      const panelClassPosition: string = 'gln-' + position;
+      if (panelClassPosition !== this.panelClassPosition) {
+        // Remove a CSS class or an array of classes from the overlay pane.
+        overlayRef.removePanelClass(this.panelClassPosition);
+        // Add a CSS class or an array of classes to the overlay pane.
+        overlayRef.addPanelClass((this.panelClassPosition = panelClassPosition));
+      }
+      positionStrategy.apply();
+    }
+  }
 
   // ** Private methods **
 
@@ -172,61 +249,61 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       }
     });
   }
-  private createPositionStrategy(hostRef: ElementRef<HTMLElement>): PositionStrategy {
+  private getConnectedPosition(position: string | null): ConnectedPosition {
+    let originX: HorizontalConnectionPos = 'center'; // 'start' | 'center' | 'end'
+    let originY: VerticalConnectionPos = 'top'; // 'top' | 'center' | 'bottom'
+    let overlayX: HorizontalConnectionPos = 'center'; // 'start' | 'center' | 'end'
+    let overlayY: VerticalConnectionPos = 'bottom'; // 'top' | 'center' | 'bottom'
+
+    const tokenList: string[] = (position || '').split('-');
+    const token1: string = tokenList[0];
+    const token2: string | undefined = tokenList[1];
+
+    if ('top' === token1 || 'bottom' === token1) {
+      originY = 'top' === token1 ? 'top' : 'bottom';
+      overlayY = 'top' === token1 ? 'bottom' : 'top';
+      originX = overlayX = 'start' === token2 ? 'start' : 'end' === token2 ? 'end' : 'center';
+    } else if ('left' === token1 || 'right' === token1) {
+      originX = 'left' === token1 ? 'start' : 'end';
+      overlayX = 'left' === token1 ? 'end' : 'start';
+      originY = overlayY = 'start' === token2 ? 'top' : 'end' === token2 ? 'bottom' : 'center';
+    }
+    return { originX, originY, overlayX, overlayY };
+  }
+  private createPositionStrategy(hostRef: ElementRef<HTMLElement>, connectedPosition: ConnectedPosition): PositionStrategy {
     return (
-      this.overlayPositionBuilder
+      this.overlay
+        .position()
         // Create position attached to the elementRef
         .flexibleConnectedTo(hostRef)
         // Describe how to connect overlay to the elementRef
         // Means, attach overlay's center bottom point to the
         // top center point of the elementRef.
         .withPositions([
+          connectedPosition,
           // { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom' } // top center
-          // { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom' },   // top start-left
-          { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom' }, // top end-right
+          // { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom' },  // top start-left
+          // { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom' },      // top end-right
           // { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top' }, // bottom center
+          // { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top' }, // bottom start-left
+          // { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top' }, // bottom end-right
+          // { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center' }, // left center
+          // { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'top' }, // left-start
+          // { originX: 'start', originY: 'bottom', overlayX: 'end', overlayY: 'bottom' }, // left-end
+          // { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center' }, // right center
+          // { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top' }, // right-start
+          // { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'bottom' }, // right-end
         ])
     );
   }
-  private createOverlayConfig(positionStrategy: PositionStrategy, scrollStrategy: ScrollStrategy, panelClass: string[]): OverlayConfig {
-    return {
-      // class OverlayConfig
-      // Strategy with which to position the overlay.
-      positionStrategy,
-      // Strategy to be used when handling scroll events while the overlay is open.
-      scrollStrategy,
-      // Custom class to add to the overlay pane.
-      panelClass,
-      // // Whether the overlay has a backdrop.
-      // hasBackdrop?: boolean;
-      // // Custom class to add to the backdrop
-      // backdropClass?: string | string[];
-      // /** The width of the overlay panel. If a number is provided, pixel units are assumed. */
-      // width?: number | string;
-      // /** The height of the overlay panel. If a number is provided, pixel units are assumed. */
-      // height?: number | string;
-      // /** The min-width of the overlay panel. If a number is provided, pixel units are assumed. */
-      // minWidth?: number | string;
-      // /** The min-height of the overlay panel. If a number is provided, pixel units are assumed. */
-      // minHeight?: number | string;
-      // /** The max-width of the overlay panel. If a number is provided, pixel units are assumed. */
-      // maxWidth?: number | string;
-      // /** The max-height of the overlay panel. If a number is provided, pixel units are assumed. */
-      // maxHeight?: number | string;
-      // Direction of the text in the overlay panel. If a `Directionality` instance
-      // is passed in, the overlay will handle changes to its value automatically.
-      // direction,
-      // Whether the overlay should be disposed of when the user goes backwards/forwards in history.
-      // Note that this usually doesn't include clicking on links (unless the user is using
-      // the `HashLocationStrategy`).
-      disposeOnNavigation: true,
-    };
+  private createScrollStrategy(): ScrollStrategy {
+    return this.overlay.scrollStrategies.close();
   }
   private createOverlay(
-    positionStrategy?: PositionStrategy | undefined,
-    scrollStrategy?: ScrollStrategy | undefined,
-    panelClass?: string | string[] | undefined
-    // direction?: Directionality | undefined
+    overlay: Overlay,
+    positionStrategy: PositionStrategy,
+    scrollStrategy: ScrollStrategy,
+    panelClass: string[]
   ): OverlayRef {
     if (false) {
       /*
@@ -258,7 +335,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
         scrollStrategy: this._scrollStrategy()
       }); */
     }
-    const result: OverlayRef = this.overlay.create({
+    const result: OverlayRef = overlay.create({
       // class OverlayConfig
       // Strategy with which to position the overlay.
       positionStrategy,
@@ -282,13 +359,6 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       // maxWidth?: number | string;
       // /** The max-height of the overlay panel. If a number is provided, pixel units are assumed. */
       // maxHeight?: number | string;
-      // Direction of the text in the overlay panel. If a `Directionality` instance
-      // is passed in, the overlay will handle changes to its value automatically.
-      // direction,
-      // Whether the overlay should be disposed of when the user goes backwards/forwards in history.
-      // Note that this usually doesn't include clicking on links (unless the user is using
-      // the `HashLocationStrategy`).
-      disposeOnNavigation: true,
     });
 
     // this._updatePosition(this._overlayRef);

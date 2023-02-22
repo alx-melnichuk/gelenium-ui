@@ -1,5 +1,4 @@
-import { ConnectedPosition, Overlay, OverlayPositionBuilder, OverlayRef, PositionStrategy, ScrollStrategy } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
+import { Overlay } from '@angular/cdk/overlay';
 import {
   Directive,
   ElementRef,
@@ -61,7 +60,7 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public override isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public override isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
   public override panelClassVal: string[] = []; // Binding attribute "panelClass"
-  public override positionList: ConnectedPosition[] = []; // Binding attribute "position"
+  public override positionVal: string | null = null; // Binding attribute "position"
   public override showDelayVal: number | null = null; // Binding attribute "showDelay".
 
   protected readonly tooltipComponent = GlnTooltipComponent;
@@ -72,13 +71,12 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
 
   constructor(
     overlay: Overlay,
-    overlayPositionBuilder: OverlayPositionBuilder,
     renderer: Renderer2,
     viewContainerRef: ViewContainerRef,
     hostRef: ElementRef<HTMLElement>,
     @Optional() @Inject(GLN_TOOLTIP_CONFIG) private rootConfig: GlnTooltipConfig | null
   ) {
-    super(overlay, overlayPositionBuilder, renderer, viewContainerRef, hostRef);
+    super(overlay, renderer, viewContainerRef, hostRef);
     this.currConfig = this.rootConfig || {};
     // this.scrollStrategy =
     //   this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : GLN_SELECT_SCROLL_STRATEGY_PROVIDER_BLOCK_FACTORY;
@@ -121,7 +119,9 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
       this.panelClassVal = Array.isArray(panelClass) ? panelClass : [panelClass];
     }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
-      this.positionList = this.getPositionList(this.position || this.currConfig.position);
+      this.positionVal = this.position || this.currConfig.position || null;
+      // Updates the position of the tooltip.
+      super.updatesPosition(this.positionVal, this.overlayRef);
     }
     if (changes['showDelay'] || (changes['config'] && this.showDelay == null && this.currConfig.showDelay != null)) {
       const showDelayStr: string = (this.showDelay || this.currConfig.showDelay || '').toString();
@@ -141,8 +141,8 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
       const panelClass: string | string[] = this.currConfig.panelClass || [];
       this.panelClassVal = Array.isArray(panelClass) ? panelClass : [panelClass];
     }
-    if (this.positionList.length === 0) {
-      this.positionList = this.getPositionList(this.currConfig.position);
+    if (this.positionVal === null) {
+      this.positionVal = this.currConfig.position || null;
     }
     if (this.showDelay == null) {
       const showDelayStr: string = (this.currConfig.showDelay || '').toString();
@@ -187,11 +187,11 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     return (value && ['start', 'center', 'end'].indexOf(value) > -1 ? value : 'start') as HorizontalConnectionPos;
   }*/
 
-  private getPositionList(position: string | undefined | null): ConnectedPosition[] {
-    // const horizontalAlignment: HorizontalConnectionPos = this.getPosition(position || null);
+  /*private getPositionList(position: string | undefined | null): ConnectedPosition[] {
+    const horizontalAlignment: HorizontalConnectionPos = this.getPosition(position || null);
     return [
-      // { originX: horizontalAlignment, originY: 'bottom', overlayX: horizontalAlignment, overlayY: 'top' },
-      // { originX: horizontalAlignment, originY: 'top', overlayX: horizontalAlignment, overlayY: 'bottom' },
+      { originX: horizontalAlignment, originY: 'bottom', overlayX: horizontalAlignment, overlayY: 'top' },
+      { originX: horizontalAlignment, originY: 'top', overlayX: horizontalAlignment, overlayY: 'bottom' },
     ];
-  }
+  }*/
 }

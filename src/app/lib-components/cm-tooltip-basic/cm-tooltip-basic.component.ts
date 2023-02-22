@@ -23,7 +23,7 @@ export class CmTooltipBasicComponent {
   public urlCmTooltip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TOOLTIP');
 
   public demo1 = false;
-  public position1 = 'left-start';
+  public position1 = 'top';
   public positionList: string[] = [
     'bottom',
     'bottom-start',

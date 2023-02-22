@@ -3,13 +3,16 @@
 gln-tooltip-cmp {
   // display: block;
   border-radius: 4px;
-  background-color: rgba(97,97,97,.6);
+  background-color: rgb(125, 125, 125);
+  // background-color: rgba(97, 97, 97, 0.92);
   color: white;
-  margin: 14px; // margin: $margin; $margin: 14px;
-  max-width: 250px; // max-width: $max-width; $max-width: 250px;
+  font-weight: 500;
+  // margin: 2px; // margin: $margin; $margin: 14px;
+  max-width: 300px; // max-width: $max-width; $max-width: 250px;
   padding-left: 8px; // padding-left: $horizontal-padding; $horizontal-padding: 8px;
   padding-right: 8px;  // padding-right: $horizontal-padding; $horizontal-padding: 8px;
   overflow: hidden;
+  overflow-wrap: break-word;
   text-overflow: ellipsis;
 
   &:not([noAnm]) {
@@ -58,4 +61,21 @@ gln-tooltip-cmp {
 .gln-tooltip-panel {
   outline: 1px dashed green; // #
   pointer-events: none !important;
+  --glntt--panel-indent: var(--glntt-panel-indent, 0.875em);
+}
+.cdk-overlay-pane.gln-tooltip-panel {
+  z-index: 1500;
+}
+
+.gln-tooltip-panel[glntt-position*='bottom'] gln-tooltip-cmp {
+  margin-top: var(--glntt--panel-indent);
+}
+.gln-tooltip-panel[glntt-position*='top'] gln-tooltip-cmp {
+  margin-bottom: var(--glntt--panel-indent);
+}
+.gln-tooltip-panel[glntt-position*='left'] gln-tooltip-cmp {
+  margin-right: var(--glntt--panel-indent);
+}
+.gln-tooltip-panel[glntt-position*='right'] gln-tooltip-cmp {
+  margin-left: var(--glntt--panel-indent);
 }
