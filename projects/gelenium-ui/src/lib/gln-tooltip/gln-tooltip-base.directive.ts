@@ -9,7 +9,7 @@ import {
   VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
-import { Directive, ElementRef, Input, OnDestroy, Renderer2, ViewContainerRef } from '@angular/core';
+import { Directive, ElementRef, OnDestroy, Renderer2, ViewContainerRef } from '@angular/core';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnTooltipBaseComponent } from './gln-tooltip-base.component';
@@ -23,6 +23,21 @@ const CSS_CLASS_PANEL = 'gln-tooltip-panel';
 export function GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_CLOSE_FACTORY(overlay: Overlay): () => ScrollStrategy {
   return () => overlay.scrollStrategies.close();
 }
+
+export const TOOLTIP_POSITION: { [key: string]: string } = {
+  'bottom': 'bottom',
+  'bottom-start': 'bottom-start',
+  'bottom-end': 'bottom-end',
+  'top': 'top',
+  'top-start': 'top-start',
+  'top-end': 'top-end',
+  'right': 'right',
+  'right-start': 'right-start',
+  'right-end': 'right-end',
+  'left': 'left',
+  'left-start': 'left-start',
+  'left-end': 'left-end',
+};
 
 @Directive()
 export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent> implements OnDestroy {
@@ -39,7 +54,6 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
 
   protected overlayRef: OverlayRef | null = null;
   protected portal: ComponentPortal<T> | null = null;
-  /** Scroll handling strategy when the tooltip is open. */
   protected scrollStrategy: ScrollStrategy;
   protected tooltipInstance: T | null = null;
 
@@ -82,32 +96,15 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     }
 
     if (this.overlayRef == null) {
-      // this.overlayRef = this.createOverlay(
-      //   this.overlay,
-      //   this.createPositionStrategy(this.hostRef, this.getConnectedPosition(this.positionVal)),
-      //   this.createScrollStrategy(),
-      //   [CSS_CLASS_PANEL].concat(this.panelClassVal) || []
-      // );
-
-      // .flexibleConnectedTo(this._elementRef)
-      const positionStrategy: PositionStrategy = // this.createPositionStrategy(this.hostRef, this.getConnectedPosition(this.positionVal))
-        this.overlay
-          .position()
-          .flexibleConnectedTo(this.hostRef)
-          .withFlexibleDimensions(false)
-          .withPositions([this.getConnectedPosition(this.positionVal)]);
-      // // Create connected position strategy.
-      // const strategy = this.overlay.position()
-      //                    .flexibleConnectedTo(this._elementRef)
-      //                    .withTransformOriginOn(`.${this._cssClassPrefix}-tooltip`)
-      //                    .withFlexibleDimensions(false)
-      //                    .withViewportMargin(this._viewportMargin)
-      //                    .withScrollableContainers(scrollableAncestors);
+      const positionStrategy: PositionStrategy = this.overlay
+        .position()
+        .flexibleConnectedTo(this.hostRef)
+        .withFlexibleDimensions(false)
+        .withPositions([this.getConnectedPosition(this.getValidPosition(this.positionVal))]);
 
       this.overlayRef = this.overlay.create({
-        // class OverlayConfig
         // Strategy with which to position the overlay.
-        positionStrategy, // : this.createPositionStrategy(this.hostRef, this.getConnectedPosition(this.positionVal)),
+        positionStrategy,
         // Strategy to be used when handling scroll events while the overlay is open.
         scrollStrategy: this.createScrollStrategy(),
         // Custom class to add to the overlay pane.
@@ -129,27 +126,17 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
         // /** The max-height of the overlay panel. If a number is provided, pixel units are assumed. */
         // maxHeight?: number | string;
       });
+      // https://github.com/angular/components/issues/1432  Ability to manually control overlay's z-index.
       // Adding z-index: 'unset' will allow you to have one parent with a single z-index value.
       // This will correctly use the z-index for child elements.
       this.overlayRef.hostElement.style.zIndex = 'unset';
     }
     this.overlayDetach();
-    // const overlayRef = this.createOverlay();
-    // this._detach();
-    // this._portal = this._portal || new ComponentPortal(this._tooltipComponent, this._viewContainerRef);
-    // this._tooltipInstance = overlayRef.attach(this._portal).instance;
-    // this._tooltipInstance.afterHidden().pipe(takeUntil(this._destroyed)).subscribe(() => this._detach());
-    // this._setTooltipClass(this._tooltipClass);
-    // this._updateTooltipMessage();
-    // this._tooltipInstance!.show(delay);
 
     if (this.portal == null) {
       // Create a portal for tooltips.
       this.portal = new ComponentPortal(this.tooltipComponent, this.viewContainerRef);
     }
-    // #const tooltipPortal = new ComponentPortal(GlnTooltipComponent);
-    // #const tooltipRef: ComponentRef<GlnTooltipComponent> = this.overlayRef.attach(tooltipPortal);
-
     // Attach the tooltip portal to the overlay and get an instance of it.
     this.tooltipInstance = this.overlayRef.attach(this.portal).instance;
     // Pass content to the tooltip component instance.
@@ -159,14 +146,17 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     this.updatesPosition(this.positionVal, this.overlayRef);
 
     return this.executeCallBackOnDelay(delay, () => {
-      const instanceRef: ElementRef<HTMLElement> = this.tooltipInstance!.getHostRef();
-      // Add the necessary attributes for the tooltip before displaying.
-      HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_SHOW, '');
-      if (this.isNoAnimationVal) {
-        HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_NO_ANM, '');
+      const tooltipInstance: T | null = this.tooltipInstance;
+      if (tooltipInstance != null) {
+        const instanceRef: ElementRef<HTMLElement> = tooltipInstance.getHostRef();
+        // Add the necessary attributes for the tooltip before displaying.
+        HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_SHOW, '');
+        if (this.isNoAnimationVal) {
+          HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_NO_ANM, '');
+        }
+        // Set isVisibility = true;
+        tooltipInstance.show();
       }
-      // Set isVisibility = true;
-      this.tooltipInstance!.show();
     });
   }
 
@@ -176,20 +166,23 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       return Promise.resolve();
     }
     return this.executeCallBackOnDelay(delay, () => {
-      const instanceRef: ElementRef<HTMLElement> = this.tooltipInstance!.getHostRef();
-      // Add the necessary attributes for the tooltip before hiding.
-      HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_SHOW, null);
-      HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_HIDE, '');
-      // Set isVisibility = false;
-      this.tooltipInstance!.hide();
-      if (!this.isNoAnimationVal) {
-        // Add an animation completion listener.
-        // A value of "true" indicates that the listener should be called at most once after being added.
-        instanceRef.nativeElement.addEventListener('animationend', this.handlerToAnimationFinish);
-        instanceRef.nativeElement.addEventListener('animationcancel', this.handlerToAnimationFinish);
-      } else {
-        // If there is no animation, then remove the tooltip component instance.
-        this.overlayDetach();
+      const tooltipInstance: T | null = this.tooltipInstance;
+      if (tooltipInstance != null) {
+        const instanceRef: ElementRef<HTMLElement> = tooltipInstance.getHostRef();
+        // Add the necessary attributes for the tooltip before hiding.
+        HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_SHOW, null);
+        HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_HIDE, '');
+        // Set isVisibility = false;
+        tooltipInstance.hide();
+        if (!this.isNoAnimationVal) {
+          // Add an animation completion listener.
+          // A value of "true" indicates that the listener should be called at most once after being added.
+          instanceRef.nativeElement.addEventListener('animationend', this.handlerToAnimationFinish);
+          instanceRef.nativeElement.addEventListener('animationcancel', this.handlerToAnimationFinish);
+        } else {
+          // If there is no animation, then remove the tooltip component instance.
+          this.overlayDetach();
+        }
       }
     });
   }
@@ -219,8 +212,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   // Updates the position of the tooltip.
   protected updatesPosition(positionInp: string | null, overlayRef: OverlayRef | null): void {
     if (overlayRef != null) {
-      const position: string = positionInp || 'top';
       const positionStrategy = overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
+      const position: string = this.getValidPosition(positionInp);
       const connectedPosition: ConnectedPosition = this.getConnectedPosition(position);
       positionStrategy.withPositions([connectedPosition]);
       // overlayRef.updatePosition();
@@ -235,6 +228,10 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       }
       positionStrategy.apply();
     }
+  }
+
+  protected getValidPosition(position: string | null): string {
+    return TOOLTIP_POSITION[position || ''] || TOOLTIP_POSITION['bottom'];
   }
 
   // ** Private methods **
@@ -254,9 +251,9 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   }
   private getConnectedPosition(position: string | null): ConnectedPosition {
     let originX: HorizontalConnectionPos = 'center'; // 'start' | 'center' | 'end'
-    let originY: VerticalConnectionPos = 'top'; // 'top' | 'center' | 'bottom'
+    let originY: VerticalConnectionPos = 'bottom'; // 'top' | 'center' | 'bottom'
     let overlayX: HorizontalConnectionPos = 'center'; // 'start' | 'center' | 'end'
-    let overlayY: VerticalConnectionPos = 'bottom'; // 'top' | 'center' | 'bottom'
+    let overlayY: VerticalConnectionPos = 'top'; // 'top' | 'center' | 'bottom'
 
     const tokenList: string[] = (position || '').split('-');
     const token1: string = tokenList[0];
@@ -273,103 +270,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     }
     return { originX, originY, overlayX, overlayY };
   }
-  private createPositionStrategy(hostRef: ElementRef<HTMLElement>, connectedPosition: ConnectedPosition): PositionStrategy {
-    return (
-      this.overlay
-        .position()
-        // Create position attached to the elementRef
-        .flexibleConnectedTo(hostRef)
-        // Describe how to connect overlay to the elementRef
-        // Means, attach overlay's center bottom point to the
-        // top center point of the elementRef.
-        .withPositions([
-          connectedPosition,
-          // { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom' } // top center
-          // { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom' },  // top start-left
-          // { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom' },      // top end-right
-          // { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top' }, // bottom center
-          // { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top' }, // bottom start-left
-          // { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top' }, // bottom end-right
-          // { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center' }, // left center
-          // { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'top' }, // left-start
-          // { originX: 'start', originY: 'bottom', overlayX: 'end', overlayY: 'bottom' }, // left-end
-          // { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center' }, // right center
-          // { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top' }, // right-start
-          // { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'bottom' }, // right-end
-        ])
-    );
-  }
   private createScrollStrategy(): ScrollStrategy {
     return this.overlay.scrollStrategies.close();
-  }
-  private createOverlay(
-    overlay: Overlay,
-    positionStrategy: PositionStrategy,
-    scrollStrategy: ScrollStrategy,
-    panelClass: string[]
-  ): OverlayRef {
-    if (false) {
-      /*
-      const scrollableAncestors = this._scrollDispatcher.getAncestorScrollContainers(this._elementRef);
-
-      // Create connected position strategy that listens for scroll events to reposition.
-      const strategy = this._overlay.position()
-                          .flexibleConnectedTo(this._elementRef)
-                          .withTransformOriginOn(`.${this._cssClassPrefix}-tooltip`)
-                          .withFlexibleDimensions(false)
-                          .withViewportMargin(this._viewportMargin)
-                          .withScrollableContainers(scrollableAncestors);
-
-      strategy.positionChanges.pipe(takeUntil(this._destroyed)).subscribe(change => {
-        this._updateCurrentPositionClass(change.connectionPair);
-
-        if (this._tooltipInstance) {
-          if (change.scrollableViewProperties.isOverlayClipped && this._tooltipInstance.isVisible()) {
-            // After position changes occur and the overlay is clipped by
-            // a parent scrollable then close the tooltip.
-            this._ngZone.run(() => this.hide(0));
-          }
-        }
-      });
-      this.overlayRef = this.overlay.create({
-        // direction: this._dir,
-        positionStrategy: strategy,
-        // panelClass: `${this._cssClassPrefix}-${PANEL_CLASS}`,
-        scrollStrategy: this._scrollStrategy()
-      }); */
-    }
-    const result: OverlayRef = overlay.create({
-      // class OverlayConfig
-      // Strategy with which to position the overlay.
-      positionStrategy,
-      // Strategy to be used when handling scroll events while the overlay is open.
-      scrollStrategy,
-      // Custom class to add to the overlay pane.
-      panelClass,
-      // // Whether the overlay has a backdrop.
-      // hasBackdrop?: boolean;
-      // // Custom class to add to the backdrop
-      // backdropClass?: string | string[];
-      // /** The width of the overlay panel. If a number is provided, pixel units are assumed. */
-      // width?: number | string;
-      // /** The height of the overlay panel. If a number is provided, pixel units are assumed. */
-      // height?: number | string;
-      // /** The min-width of the overlay panel. If a number is provided, pixel units are assumed. */
-      // minWidth?: number | string;
-      // /** The min-height of the overlay panel. If a number is provided, pixel units are assumed. */
-      // minHeight?: number | string;
-      // /** The max-width of the overlay panel. If a number is provided, pixel units are assumed. */
-      // maxWidth?: number | string;
-      // /** The max-height of the overlay panel. If a number is provided, pixel units are assumed. */
-      // maxHeight?: number | string;
-    });
-
-    // this._updatePosition(this._overlayRef);
-
-    // this._overlayRef.detachments().pipe(takeUntil(this._destroyed)).subscribe(() => this._detach());
-    // this._overlayRef.outsidePointerEvents().pipe(takeUntil(this._destroyed)).subscribe(() => this._tooltipInstance?._handleBodyInteraction());
-
-    return result;
   }
 }
 

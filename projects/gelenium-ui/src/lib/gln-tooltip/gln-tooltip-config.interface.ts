@@ -2,7 +2,7 @@ export interface GlnTooltipConfig {
   hideDelay?: number | undefined;
   isNoAnimation?: boolean | undefined;
   panelClass?: string | string[] | undefined;
-  position?: string | undefined; // 'left' | 'right' | 'above' | 'below' | 'before' | 'after';
+  position?: string | undefined; // 'bottom[-start,-end]','top[-start,-end]','right[-start,-end]','left[-start,-end]';
   showDelay?: number | undefined;
   // backdropClass?: string | undefined; // default 'cdk-overlay-transparent-backdrop'
 }

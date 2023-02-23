@@ -22,15 +22,6 @@ import { GlnTooltipBaseDirective } from './gln-tooltip-base.directive';
 import { GlnTooltipConfig } from './gln-tooltip-config.interface';
 import { GlnTooltipComponent } from './gln-tooltip.component';
 
-export const TOOLTIP_POSITION: { [key: string]: string } = {
-  left: 'left',
-  right: 'right',
-  above: 'above',
-  below: 'below',
-  before: 'before',
-  after: 'after',
-};
-
 export const GLN_TOOLTIP_CONFIG = new InjectionToken<GlnTooltipConfig>('GLN_TOOLTIP_CONFIG');
 
 @Directive({
@@ -51,7 +42,7 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   @Input('glnTooltipPanelClass')
   public panelClass: string | string[] = '';
   @Input('glnTooltipPosition')
-  public position: string | null | undefined; // 'left' | 'right' | 'above' | 'below' | 'before' | 'after'
+  public position: string | null | undefined; // 'bottom[-start,-end]','top[-start,-end]','right[-start,-end]','left[-start,-end]';
   @Input('glnTooltipShowDelay')
   public showDelay: number | string | null | undefined;
 

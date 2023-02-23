@@ -22,6 +22,16 @@ export class CmTooltipBasicComponent {
 
   public urlCmTooltip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TOOLTIP');
 
+  public isShowBasic = false;
+  public isShowAttributes01 = false;
+  public isShowAttributes02 = true;
+
+  // Page: "Attributes" 02
+  public showDelay02a: number = 600;
+  public hideDelay02a: number = 600;
+
+  // Page:
+
   public demo1 = false;
   public position1 = 'top';
   public positionList: string[] = [
@@ -42,6 +52,24 @@ export class CmTooltipBasicComponent {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
+  // Page: "Attributes" 02
+  public incremValue(value: number, delta: number, max: number): number {
+    return value + delta <= max ? value + delta : value > max ? max : value;
+  }
+  public decremValue(value: number, delta: number, min: number): number {
+    return value - delta >= min ? value - delta : value < min ? min : value;
+  }
+
+  // Page: ""
+
+  // public inputValue(eventTarget: EventTarget | null): string {
+  //   const inputElement: HTMLInputElement | undefined | null = eventTarget as HTMLInputElement;
+  //   return inputElement?.value || '';
+  // }
+  // public converInt(size: string, defaultValue: number): number {
+  //   const sizeNum: number = Number.parseInt(size);
+  //   return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
+  // }
   public getValue(eventTarget: any): any {
     return eventTarget != null ? (eventTarget as Attr).value : '';
   }
