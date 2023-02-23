@@ -696,6 +696,9 @@ export class GlnSelectComponent
   public attach(): void {
     // Add the current object to the list of elements with the panel open.
     GlnSelectOpenUtil.add(this);
+    // Adding z-index: 'unset' will allow you to have one parent with a single z-index value.
+    // This will correctly use the z-index for child elements.
+    this.connectedOverlay.overlayRef.hostElement.style.zIndex = 'unset';
 
     const overlayElement: HTMLElement = this.connectedOverlay.overlayRef.overlayElement;
     // Adding a class so that custom styles can be applied.
