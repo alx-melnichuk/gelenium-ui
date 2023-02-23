@@ -129,6 +129,9 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
         // /** The max-height of the overlay panel. If a number is provided, pixel units are assumed. */
         // maxHeight?: number | string;
       });
+      // Adding z-index: 'unset' will allow you to have one parent with a single z-index value.
+      // This will correctly use the z-index for child elements.
+      this.overlayRef.hostElement.style.zIndex = 'unset';
     }
     this.overlayDetach();
     // const overlayRef = this.createOverlay();
