@@ -102,7 +102,7 @@ gln-frame {
       , transform var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
       , max-width var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     white-space: nowrap;
-    z-index: 1;
+    // Removed "z-index" property in label styles for GlnFrame. Positioned elements always come on top.
     &>span[lbl] {
       overflow: hidden;
       text-overflow: ellipsis;
