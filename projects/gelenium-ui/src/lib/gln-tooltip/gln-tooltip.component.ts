@@ -19,6 +19,8 @@ export class GlnTooltipComponent extends GlnTooltipBaseComponent {
     return true;
   }
 
+  public override isArrow: boolean | null = null;
+
   constructor(hostRef: ElementRef<HTMLElement>, changeDetectorRef: ChangeDetectorRef) {
     super(hostRef, changeDetectorRef);
     console.log(`GlnTooltipCmp();`); // #

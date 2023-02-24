@@ -9,7 +9,7 @@ import {
   VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
-import { Directive, ElementRef, OnDestroy, Renderer2, ViewContainerRef } from '@angular/core';
+import { Directive, ElementRef, OnDestroy, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnTooltipBaseComponent } from './gln-tooltip-base.component';
@@ -40,7 +40,7 @@ export const TOOLTIP_POSITION: { [key: string]: string } = {
 };
 
 @Directive()
-export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent> implements OnDestroy {
+export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent> implements OnInit, OnDestroy {
   public message: string | null | undefined;
 
   protected abstract readonly tooltipComponent: ComponentType<T>;
@@ -48,6 +48,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   public hideDelayVal: number | null = null; // Binding attribute "hideDelay".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
+  public isMousedownVal: boolean | null = null; // Binding attribute "isMousedown".
+  public isArrowVal: boolean | null = true; // Binding attribute "isArrow".
   public panelClassVal: string[] = []; // Binding attribute "panelClass"
   public positionVal: string | null = null; // Binding attribute "position"
   public showDelayVal: number | null = null; // Binding attribute "showDelay".
@@ -70,6 +72,13 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       // GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_CLOSE_FACTORY(this.overlay);
       this.overlay.scrollStrategies.block(); // close();
   }
+  //
+  public ngOnInit(): void {
+    if (this.isMousedownVal) {
+      console.log(`ngOnInit(); addEventListener('mousedown')`); // #
+      this.hostRef.nativeElement.addEventListener('mousedown', this.handlerMousedown);
+    }
+  }
 
   public ngOnDestroy(): void {
     // const nativeElement = this._elementRef.nativeElement;
@@ -83,6 +92,10 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       this.overlayRef = null;
     }
     this.portal = null;
+    if (this.isMousedownVal) {
+      console.log(`ngOnDestroy(); removeEventListener('mousedown')`); // #
+      this.hostRef.nativeElement.removeEventListener('mousedown', this.handlerMousedown);
+    }
   }
 
   // ** Public methods **
@@ -145,15 +158,25 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     // Updates the position of the tooltip.
     this.updatesPosition(this.positionVal, this.overlayRef);
 
+    const offsetWidth: number = this.hostRef.nativeElement.offsetWidth;
+    const offsetHeight: number = this.hostRef.nativeElement.offsetHeight;
+
+    const instanceRef: ElementRef<HTMLElement> = this.tooltipInstance.getHostRef();
+    const fontSize: number = Number(getComputedStyle(instanceRef.nativeElement).getPropertyValue('font-size').replace('px', ''));
+
+    const bottomTranslateX: number = Math.round(offsetWidth / 2 - fontSize / 2);
+
     return this.executeCallBackOnDelay(delay, () => {
       const tooltipInstance: T | null = this.tooltipInstance;
       if (tooltipInstance != null) {
+        tooltipInstance.setArrow(this.isArrowVal);
         const instanceRef: ElementRef<HTMLElement> = tooltipInstance.getHostRef();
         // Add the necessary attributes for the tooltip before displaying.
         HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_SHOW, '');
         if (this.isNoAnimationVal) {
           HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_NO_ANM, '');
         }
+        HtmlElemUtil.setProperty(instanceRef, '--glnttd--bt-tr-x', bottomTranslateX.toString().concat('px'));
         // Set isVisibility = true;
         tooltipInstance.show();
       }
@@ -170,13 +193,12 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       if (tooltipInstance != null) {
         const instanceRef: ElementRef<HTMLElement> = tooltipInstance.getHostRef();
         // Add the necessary attributes for the tooltip before hiding.
-        HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_SHOW, null);
         HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_HIDE, '');
+        HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_SHOW, null);
         // Set isVisibility = false;
         tooltipInstance.hide();
         if (!this.isNoAnimationVal) {
           // Add an animation completion listener.
-          // A value of "true" indicates that the listener should be called at most once after being added.
           instanceRef.nativeElement.addEventListener('animationend', this.handlerToAnimationFinish);
           instanceRef.nativeElement.addEventListener('animationcancel', this.handlerToAnimationFinish);
         } else {
@@ -186,14 +208,6 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       }
     });
   }
-  private handlerToAnimationFinish = (): void => {
-    const instanceRef: ElementRef<HTMLElement> | undefined = this.tooltipInstance?.getHostRef();
-    if (instanceRef != undefined) {
-      instanceRef.nativeElement.removeEventListener('animationend', this.handlerToAnimationFinish);
-      instanceRef.nativeElement.removeEventListener('animationcancel', this.handlerToAnimationFinish);
-    }
-    this.overlayDetach();
-  };
   /** If the tooltip is currently visible, returns true. */
   public isVisible(): boolean {
     return !!this.tooltipInstance?.isVisible();
@@ -233,6 +247,23 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   protected getValidPosition(position: string | null): string {
     return TOOLTIP_POSITION[position || ''] || TOOLTIP_POSITION['bottom'];
   }
+
+  protected handlerToAnimationFinish = (): void => {
+    const instanceRef: ElementRef<HTMLElement> | undefined = this.tooltipInstance?.getHostRef();
+    if (instanceRef != undefined) {
+      instanceRef.nativeElement.removeEventListener('animationend', this.handlerToAnimationFinish);
+      instanceRef.nativeElement.removeEventListener('animationcancel', this.handlerToAnimationFinish);
+    }
+    this.overlayDetach();
+  };
+
+  protected handlerMousedown = (): void => {
+    console.log(`handlerMousedown();`); // #
+    this.isVisible() ? this.hide() : this.show();
+  };
+  protected handlerMouseenter = (): void => {};
+
+  protected handlerMouseleave = (): void => {};
 
   // ** Private methods **
 

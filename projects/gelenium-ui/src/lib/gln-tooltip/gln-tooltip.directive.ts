@@ -50,15 +50,12 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public override hideDelayVal: number | null = null; // Binding attribute "hideDelay".
   public override isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public override isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
+  public override isMousedownVal: boolean | null = true; // Binding attribute "isMousedown".
   public override panelClassVal: string[] = []; // Binding attribute "panelClass"
   public override positionVal: string | null = null; // Binding attribute "position"
   public override showDelayVal: number | null = null; // Binding attribute "showDelay".
 
   protected readonly tooltipComponent = GlnTooltipComponent;
-
-  // private overlayRef: OverlayRef | null = null;
-  // private portal: ComponentPortal<GlnTooltipComponent> | null = null;
-  // private tooltipInstance: GlnTooltipComponent | null = null;
 
   constructor(
     overlay: Overlay,
@@ -84,11 +81,11 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   //   console.log(`doMouseout();`); // #
   //   this.hide();
   // }
-  @HostListener('mousedown', ['$event'])
-  public doMousedown(event: MouseEvent): void {
-    console.log(`doMousedown();`); // # mouseenter
-    this.toggle();
-  }
+  // @HostListener('mousedown', ['$event'])
+  // public doMousedown(event: MouseEvent): void {
+  //   console.log(`doMousedown();`); // # mouseenter
+  //   this.toggle();
+  // }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['config']) {
@@ -120,7 +117,7 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     }
   }
 
-  public ngOnInit(): void {
+  public override ngOnInit(): void {
     if (this.hideDelay == null) {
       const hideDelayStr: string = (this.currConfig.hideDelay || '').toString();
       this.hideDelayVal = this.converInt(hideDelayStr, 0);
@@ -139,6 +136,7 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
       const showDelayStr: string = (this.currConfig.showDelay || '').toString();
       this.showDelayVal = this.converInt(showDelayStr, 0);
     }
+    super.ngOnInit();
   }
 
   public override ngOnDestroy(): void {

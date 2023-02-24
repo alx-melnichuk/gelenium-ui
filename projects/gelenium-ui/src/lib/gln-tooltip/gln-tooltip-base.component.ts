@@ -4,6 +4,7 @@ import { ChangeDetectorRef, Directive, ElementRef, HostListener, OnInit, Rendere
 export abstract class GlnTooltipBaseComponent {
   public text: string = '';
   public isVisibility: boolean | null = null;
+  public isArrow: boolean | null = null;
 
   constructor(protected hostRef: ElementRef<HTMLElement>, protected changeDetectorRef: ChangeDetectorRef) {}
 
@@ -30,5 +31,12 @@ export abstract class GlnTooltipBaseComponent {
 
   public getHostRef(): ElementRef<HTMLElement> {
     return this.hostRef;
+  }
+
+  public setArrow(isArrow: boolean | null): void {
+    if (this.isArrow !== isArrow) {
+      this.isArrow !== isArrow;
+      this.changeDetectorRef.markForCheck();
+    }
   }
 }
