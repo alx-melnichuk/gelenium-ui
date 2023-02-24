@@ -112,88 +112,133 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
   </ul>
 </section>
 
-
-<div *ngIf="isShowAttributes01"
-  class="tta-group-place">
-  <div class="tta-group">
+<ng-container *ngIf="isShowAttributes01">
+  <div class="app-group">
     <div>
-      <button class="tta-btn"
-        glnTooltipPosition="top-start"
-        glnTooltip="Inform">
-        top-start
-      </button>
-      <button class="tta-btn"
-        glnTooltipPosition="top"
-        glnTooltip="Inform">
-        top
-      </button>
-      <button class="tta-btn"
-        glnTooltipPosition="top-end"
-        glnTooltip="Inform">
-        top-end
-      </button>
-    </div>
-  </div>
-  <div class="tta-group">
-    <div class="tta-group-left">
-      <button class="tta-btn"
-        glnTooltipPosition="left-start"
-        glnTooltip="Inform">
-        left-start
-      </button>
-      <button class="tta-btn"
-        glnTooltipPosition="left"
-        glnTooltip="Inform">
-        left
-      </button>
-      <button class="tta-btn"
-        glnTooltipPosition="left-end"
-        glnTooltip="Inform">
-        left-end
-      </button>
-    </div>
-    <div class="tta-group-right">
-      <button class="tta-btn"
-        glnTooltipPosition="right-start"
-        glnTooltip="Inform">
-        right-start
-      </button>
-      <button class="tta-btn"
-        glnTooltipPosition="right"
-        glnTooltip="Inform">
-        right
-      </button>
-      <button class="tta-btn"
-        glnTooltipPosition="right-end"
-        glnTooltip="Inform">
-        right-end
-      </button>
-    </div>
-  </div>
-  <div class="tta-group">
-    <div>
-      <button class="tta-btn"
-        glnTooltipPosition="bottom-start"
-        glnTooltip="Inform">
-        bottom-start
-      </button>
-      <button class="tta-btn"
-        glnTooltipPosition="bottom"
-        glnTooltip="Inform">
-        bottom
-      </button>
-      <button class="tta-btn"
-        glnTooltipPosition="bottom-end"
-        glnTooltip="Inform">
-        bottom-end
-      </button>
+      <small>
+        <em>Attribute: glnTooltipPosition.</em>
+      </small>
     </div>
   </div>
 
-</div>
+  <hr br-nn />
 
+  <div class="tta-group-place">
+    <div class="tta-group">
+      <div>
+        <button class="tta-btn-cl"
+          glnTooltipPosition="top-start"
+          glnTooltip="Inform">
+          top-start
+        </button>
+        <button class="tta-btn-cl"
+          glnTooltipPosition="top"
+          glnTooltip="Inform">
+          top
+        </button>
+        <button class="tta-btn-cl"
+          glnTooltipPosition="top-end"
+          glnTooltip="Inform">
+          top-end
+        </button>
+      </div>
+    </div>
+    <div class="tta-group">
+      <div class="tta-group-left">
+        <button class="tta-btn-cl"
+          glnTooltipPosition="left-start"
+          glnTooltip="Inform">
+          left-start
+        </button>
+        <button class="tta-btn-cl"
+          glnTooltipPosition="left"
+          glnTooltip="Inform">
+          left
+        </button>
+        <button class="tta-btn-cl"
+          glnTooltipPosition="left-end"
+          glnTooltip="Inform">
+          left-end
+        </button>
+      </div>
+      <div class="tta-group-right">
+        <button class="tta-btn-cl"
+          glnTooltipPosition="right-start"
+          glnTooltip="Inform">
+          right-start
+        </button>
+        <button class="tta-btn-cl"
+          glnTooltipPosition="right"
+          glnTooltip="Inform">
+          right
+        </button>
+        <button class="tta-btn-cl"
+          glnTooltipPosition="right-end"
+          glnTooltip="Inform">
+          right-end
+        </button>
+      </div>
+    </div>
+    <div class="tta-group">
+      <div>
+        <button class="tta-btn-cl"
+          glnTooltipPosition="bottom-start"
+          glnTooltip="Inform">
+          bottom-start
+        </button>
+        <button class="tta-btn-cl"
+          glnTooltipPosition="bottom"
+          glnTooltip="Inform">
+          bottom
+        </button>
+        <button class="tta-btn-cl"
+          glnTooltipPosition="bottom-end"
+          glnTooltip="Inform">
+          bottom-end
+        </button>
+      </div>
+    </div>
 
-<hr br-nn />
+  </div>
+
+  <hr br-nn />
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: glnTooltipDisabled.</em>
+        </small>
+      </div>
+      <div>
+        <button class="tta-btn"
+          glnTooltipDisabled
+          glnTooltip="Information about the action.">
+          Action
+        </button>
+      </div>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: [glnTooltipDisabled]="true".</em>
+        </small>
+      </div>
+      <div>
+        <button class="tta-btn"
+          [glnTooltipDisabled]="true"
+          glnTooltip="Information about the action.">
+          Action
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <hr br-nn />
+</ng-container>
 
 <!-- Page: "Attributes" 02 -->
 <section *ngIf="isShowAttributes02"
@@ -213,105 +258,126 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
   </ul>
 </section>
 
-<div *ngIf="isShowAttributes02"
-  class="app-group">
-
-  <div class="tta2-elem">
-
-    <div class="tta2-io-mrl">
+<ng-container *ngIf="isShowAttributes02">
+  <div class="app-group">
+    <div class="tta2-elem">
       <small>
-        <em>Value ShowDelay</em>
-      </small>
-    </div>
-    <div class="tta2-io">
-      <button class="tta2-io-btn tta2-io-uncode2"
-        (click)="showDelay02a=decremValue(showDelay02a, 100, 0)">
-        &#8854;
-      </button>
-      <input class="tta2-input"
-        type="number"
-        min="0"
-        max="10000"
-        step="100"
-        readonly
-        [value]="showDelay02a" />
-      <button class="tta2-io-btn tta2-io-uncode2"
-        (click)="showDelay02a=incremValue(showDelay02a, 100, 10000)">
-        &#8853;
-      </button>
-    </div>
-    <div class="tta2-io-mrl">
-      <small>
-        <em>milliseconds</em>
+        <em>Attributes: glnTooltipShowDelay, glnTooltipHideDelay.</em>
       </small>
     </div>
   </div>
 
-  <div class="tta2-elem">
-    <div class="tta2-io-mrl">
-      <small>
-        <em>Value HideDelay</em>
-      </small>
+  <div class="app-group">
+
+    <div class="tta2-elem">
+
+      <div class="tta2-io-mrl">
+        <small><em>Value ShowDelay</em></small>
+      </div>
+      <div class="tta2-io">
+        <button class="tta2-io-btn tta2-io-uncode2"
+          (click)="showDelay02a=decremValue(showDelay02a, 100, 0)">
+          &#8854;
+        </button>
+        <input class="tta2-input"
+          type="number"
+          min="0"
+          max="10000"
+          step="100"
+          readonly
+          [value]="showDelay02a" />
+        <button class="tta2-io-btn tta2-io-uncode2"
+          (click)="showDelay02a=incremValue(showDelay02a, 100, 10000)">
+          &#8853;
+        </button>
+      </div>
+      <div class="tta2-io-mrl">
+        <small><em>milliseconds</em></small>
+      </div>
     </div>
-    <div class="tta2-io">
-      <button class="tta2-io-btn tta2-io-uncode2"
-        (click)="hideDelay02a=decremValue(hideDelay02a, 100, 0)">
-        &#8854;
-      </button>
-      <input class="tta2-input"
-        type="number"
-        min="0"
-        max="10000"
-        step="100"
-        readonly
-        [value]="hideDelay02a" />
-      <button class="tta2-io-btn tta2-io-uncode2"
-        (click)="hideDelay02a=incremValue(hideDelay02a, 100, 10000)">
-        &#8853;
-      </button>
+
+    <div class="tta2-elem">
+      <div class="tta2-io-mrl">
+        <small><em>Value HideDelay</em></small>
+      </div>
+      <div class="tta2-io">
+        <button class="tta2-io-btn tta2-io-uncode2"
+          (click)="hideDelay02a=decremValue(hideDelay02a, 100, 0)">
+          &#8854;
+        </button>
+        <input class="tta2-input"
+          type="number"
+          min="0"
+          max="10000"
+          step="100"
+          readonly
+          [value]="hideDelay02a" />
+        <button class="tta2-io-btn tta2-io-uncode2"
+          (click)="hideDelay02a=incremValue(hideDelay02a, 100, 10000)">
+          &#8853;
+        </button>
+      </div>
+      <div class="tta2-io-mrl">
+        <small><em>milliseconds</em></small>
+      </div>
     </div>
-    <div class="tta2-io-mrl">
-      <small>
-        <em>milliseconds</em>
-      </small>
+
+    <div class="tta2-elem">
+      <div>
+        <small><em>Show tooltip on click.</em></small>
+      </div>
+      <div>
+        <button class="tta2-btn"
+          [glnTooltipShowDelay]="showDelay02a"
+          [glnTooltipHideDelay]="hideDelay02a"
+          glnTooltip="Information">
+          Action
+        </button>
+      </div>
     </div>
+
   </div>
 
-  <div class="tta2-elem">
+  <!--  -->
+
+  <hr br-nn />
+
+</ng-container>
+
+<div class="app-group">
+
+  <div class="app-elem">
     <div>
       <small>
-        <em>Show tooltip on click.</em>
+        <em>Attribute: ??.</em>
       </small>
     </div>
     <div>
-      <button class="tta2-btn"
-        [glnTooltipShowDelay]="showDelay02a"
-        [glnTooltipHideDelay]="hideDelay02a"
-        glnTooltip="Information">
+      <button class="tta-btn"
+        glnTooltipPosition="bottom-start"
+        glnTooltip="Information about.">
         Action
       </button>
     </div>
   </div>
 
+  <!-- <div class="app-elem">
+  <div>
+    <small>
+      <em>Attribute: [glnTooltipDisabled]="true".</em>
+    </small>
+  </div>
+  <div>
+    <button class="tta-btn"
+      [glnTooltipDisabled]="true"
+      glnTooltip="Information about the action.">
+      Action
+    </button>
+  </div>
+</div> -->
 
 </div>
 
-<!--
-  @Input('glnTooltipHideDelay')
-  public hideDelay: number | string | null | undefined;
-
-  @Input('glnTooltipDisabled')
-  public isDisabled: string | boolean | null | undefined;
-
-  @Input()
-  public isNoAnimation: string | boolean | null | undefined;
-
-  @Input('glnTooltipPanelClass')
-  public panelClass: string | string[] = '';
-
-  @Input('glnTooltipShowDelay')
-  public showDelay: number | string | null | undefined;
- -->
 
 <!-- <section mr-vr>
   <label>
@@ -320,7 +386,8 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
     demo1
   </label>
 </section> -->
-<section mr-vr>
+
+<!-- <section mr-vr>
   <label>
     Position
     <select style="padding: 5px; outline: none;"
@@ -331,14 +398,11 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       </option>
     </select>
   </label>
-</section>
+</section> -->
 
-<div class="app-group">
+<!-- <div class="app-group">
 
   <div class="ttb-elem">
-    <!-- <button class="ttb-btn">
-      Action
-    </button> -->
     <button class="ttb-btn"
       glnTooltip="Info the action 1 demo 1"
       glnTooltipShowDelay9="500"
@@ -349,19 +413,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
     </button>
   </div>
 
-
-  <div class="ttb-elem">
-    <button class="ttb-btn"
-      glnTooltip="Info the action 2 demo 2"
-      glnTooltipShowDelay9="500"
-      glnTooltipHideDelay9="500"
-      glnTooltipPanelClass9="tta-panel-demo"
-      glnTooltipPosition="top-end">
-      Action2
-    </button>
-  </div>
-
-</div>
+</div> -->
 
 <br /><br /><br /><br /><br /><br /><br /><br />
 _
