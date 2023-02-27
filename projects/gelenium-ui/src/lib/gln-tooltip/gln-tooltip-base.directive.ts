@@ -10,7 +10,7 @@ import {
 } from '@angular/cdk/overlay';
 import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform';
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
-import { Directive, ElementRef, OnDestroy, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, OnDestroy, Renderer2, ViewContainerRef } from '@angular/core';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnTooltipBaseComponent } from './gln-tooltip-base.component';
@@ -44,7 +44,7 @@ export const TOOLTIP_POSITION: { [key: string]: string } = {
 };
 
 @Directive()
-export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent> implements OnInit, OnDestroy {
+export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent> implements AfterViewInit, OnDestroy {
   public message: string | null | undefined;
 
   protected abstract readonly tooltipComponent: ComponentType<T>;
@@ -66,6 +66,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
 
   private panelClassPosition: string = '';
   private readonly listenerList: EventListenerType[] = [];
+  private isAddFinishHoverableEventInit: boolean = false;
+  private isAddFinishTouchableEventInit: boolean = false;
 
   constructor(
     protected document: Document,
@@ -80,12 +82,10 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       // GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_CLOSE_FACTORY(this.overlay);
       this.overlay.scrollStrategies.block(); // close();
   }
-  //
-  public ngOnInit(): void {
-    console.log(`ngOnInit()`); // #
-    const isHoverable: boolean = !this.isNoHoverableVal && this.isSupportsMouseEvents();
-    const isTouchable: boolean = !this.isNoTouchableVal && !this.isSupportsMouseEvents();
-    this.addEventListeners(this.listenerList, this.hostRef.nativeElement, isHoverable, isTouchable);
+
+  public ngAfterViewInit(): void {
+    console.log(`ngAfterViewInit()`); // #
+    this.addStartEventListeners(!!this.isNoHoverableVal, !!this.isNoTouchableVal, this.isSupportsMouseEvents());
   }
 
   public ngOnDestroy(): void {
@@ -192,6 +192,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
 
   /** Hides the tooltip after a delay in ms. */
   public hide(delay: number = this.hideDelayVal || 0): Promise<void> {
+    console.log(`this.hide();#1`); // #
     if (this.isDisabledVal || !this.tooltipInstance) {
       return Promise.resolve();
     }
@@ -229,23 +230,45 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   }
 
   // ** Protected methods **
-
-  protected addEventListeners(listenerList: EventListenerType[], element: HTMLElement, isHoverable: boolean, isTouchable: boolean): void {
-    if (isHoverable) {
-      listenerList.push(['mouseenter', this.handlerMouseenter]);
-      listenerList.push(['mouseleave', this.handlerMouseleave]);
-      listenerList.push(['wheel', (event) => this.handlerWheel(event as WheelEvent)]);
-    } else if (isTouchable) {
-      listenerList.push(['touchstart', this.handlerTouchstart]);
-      listenerList.push(['touchstart', this.handlerTouchend]);
-      listenerList.push(['touchstart', this.handlerTouchcancel]);
+  protected addStartEventListeners(isNoHoverable: boolean, isNoTouchable: boolean, isSupportsMouse: boolean): void {
+    if (!isNoHoverable && isSupportsMouse) {
+      this.listenerList.push(['mouseenter', () => this.handlerMouseEnter()]);
+    } else if (!isNoTouchable && isSupportsMouse) {
+      this.listenerList.push(['touchstart', () => this.handlerTouchStart()]);
     }
+    this.addEventListeners(this.listenerList, this.hostRef.nativeElement);
+  }
+
+  protected addFinishHoverableEventListeners(): void {
+    if (this.isAddFinishHoverableEventInit) {
+      return;
+    }
+    this.isAddFinishHoverableEventInit = true;
+    const finishListeners: (readonly [string, EventListenerOrEventListenerObject])[] = [];
+    finishListeners.push(['mouseleave', () => this.handlerMouseLeave()], ['wheel', (event) => this.handlerMouseWheel(event as WheelEvent)]);
+    this.addEventListeners(finishListeners, this.hostRef.nativeElement);
+    this.listenerList.push(...finishListeners);
+  }
+
+  protected addFinishTouchableEventListeners(): void {
+    if (this.isAddFinishTouchableEventInit) {
+      return;
+    }
+    this.isAddFinishTouchableEventInit = true;
+    const finishListeners: (readonly [string, EventListenerOrEventListenerObject])[] = [];
+    finishListeners.push(['touchend', this.handlerTouchEnd], ['touchcancel', this.handlerTouchCancel]);
+    this.addEventListeners(finishListeners, this.hostRef.nativeElement);
+    this.listenerList.push(...finishListeners);
+  }
+
+  protected addEventListeners(listenerList: EventListenerType[], element: HTMLElement): void {
     for (let idx = 0; idx < listenerList.length; idx++) {
       const [event, listener] = listenerList[idx];
       console.log(`addEventListeners(); addEventListener('${event}')`); // #
       element.addEventListener(event, listener, PASSIVE_OPTIONS);
     }
   }
+
   protected removeEventListeners(listenerList: EventListenerType[], element: HTMLElement): void {
     for (let idx = 0; idx < listenerList.length; idx++) {
       const [event, listener] = listenerList[idx];
@@ -255,12 +278,12 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     listenerList.length = 0;
   }
 
-  protected getValidPosition(position: string | null): string {
-    return TOOLTIP_POSITION[position || ''] || TOOLTIP_POSITION['bottom'];
-  }
-
   protected isSupportsMouseEvents(): boolean {
     return !this.platform.IOS && !this.platform.ANDROID;
+  }
+
+  protected getValidPosition(position: string | null): string {
+    return TOOLTIP_POSITION[position || ''] || TOOLTIP_POSITION['bottom'];
   }
 
   protected handlerToAnimationFinish = (): void => {
@@ -272,16 +295,16 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     this.overlayDetach();
   };
 
-  protected handlerMouseenter = (): void => {
-    console.log(`handlerMouseenter();`); // #
+  protected handlerMouseEnter = (): void => {
+    this.addFinishHoverableEventListeners();
+    console.log(`this.show();#1`); // #
     this.show();
   };
-  protected handlerMouseleave = (): void => {
-    console.log(`handlerMouseleave();`); // #
+  protected handlerMouseLeave = (): void => {
     this.hide();
   };
-  protected handlerWheel = (event: WheelEvent): void => {
-    console.log(`handlerWheel();`); // #
+  protected handlerMouseWheel = (event: WheelEvent): void => {
+    console.log(`handlerMouseWheel();`); // #
     if (this.isVisible()) {
       const elementPointer = this.document.elementFromPoint(event.clientX + event.deltaX, event.clientY + event.deltaY);
       const element = this.hostRef.nativeElement;
@@ -295,17 +318,19 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     }
   };
 
-  protected handlerTouchstart = (): void => {
-    console.log(`handlerTouchstart();`); // #
-    // this.show();
+  protected handlerTouchStart = (): void => {
+    console.log(`handlerTouchStart();`); // #
+    this.addFinishTouchableEventListeners();
+    console.log(`this.show();#2`); // #
+    this.show();
   };
-  protected handlerTouchend = (): void => {
-    console.log(`handlerTouchend();`); // #
-    // this.hide();
+  protected handlerTouchEnd = (): void => {
+    console.log(`handlerTouchEnd();`); // #
+    this.hide();
   };
-  protected handlerTouchcancel = (): void => {
-    console.log(`handlerTouchcancel();`); // #
-    // this.hide();
+  protected handlerTouchCancel = (): void => {
+    console.log(`handlerTouChcancel();`); // #
+    this.hide();
   };
 
   protected setTooltipMessage(tooltipInstance: T | null, tooltipMessage: string): void {
