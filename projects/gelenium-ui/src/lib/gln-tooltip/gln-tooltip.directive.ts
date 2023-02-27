@@ -1,4 +1,6 @@
 import { Overlay } from '@angular/cdk/overlay';
+import { Platform } from '@angular/cdk/platform';
+import { DOCUMENT } from '@angular/common';
 import {
   Directive,
   ElementRef,
@@ -31,26 +33,32 @@ export const GLN_TOOLTIP_CONFIG = new InjectionToken<GlnTooltipConfig>('GLN_TOOL
 export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipComponent> implements OnChanges, OnInit, OnDestroy {
   @Input()
   public config: GlnTooltipConfig | null | undefined;
-  @Input('glnTooltipHideDelay')
+  @Input('glnttHideDelay')
   public hideDelay: number | string | null | undefined;
-  @Input('glnTooltipDisabled')
+  @Input('glnttDisabled')
   public isDisabled: string | boolean | null | undefined;
-  @Input()
+  @Input('glnttNoAnimation')
   public isNoAnimation: string | boolean | null | undefined;
+  @Input('glnttNoHoverable')
+  public isNoHoverable: string | boolean | null | undefined;
+  @Input('glnttNoTouchable')
+  public isNoTouchable: string | boolean | null | undefined;
   @Input('glnTooltip')
   public override message: string | null | undefined;
-  @Input('glnTooltipPanelClass')
+  @Input('glnttPanelClass')
   public panelClass: string | string[] = '';
-  @Input('glnTooltipPosition')
+  @Input('glnttPosition')
   public position: string | null | undefined; // 'bottom[-start,-end]','top[-start,-end]','right[-start,-end]','left[-start,-end]';
-  @Input('glnTooltipShowDelay')
+  @Input('glnttShowDelay')
   public showDelay: number | string | null | undefined;
 
   public currConfig: GlnTooltipConfig;
   public override hideDelayVal: number | null = null; // Binding attribute "hideDelay".
+  public override isArrowVal: boolean | null = null; // Binding attribute "isArrow".
   public override isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public override isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
-  public override isMousedownVal: boolean | null = true; // Binding attribute "isMousedown".
+  public override isNoHoverableVal: boolean | null = null; // Binding attribute "isNoHoverable".
+  public override isNoTouchableVal: boolean | null = null; // Binding attribute "isNoTouchable".
   public override panelClassVal: string[] = []; // Binding attribute "panelClass"
   public override positionVal: string | null = null; // Binding attribute "position"
   public override showDelayVal: number | null = null; // Binding attribute "showDelay".
@@ -58,19 +66,21 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   protected readonly tooltipComponent = GlnTooltipComponent;
 
   constructor(
+    @Inject(DOCUMENT) _document: Document,
     overlay: Overlay,
+    platform: Platform,
     renderer: Renderer2,
     viewContainerRef: ViewContainerRef,
     hostRef: ElementRef<HTMLElement>,
     @Optional() @Inject(GLN_TOOLTIP_CONFIG) private rootConfig: GlnTooltipConfig | null
   ) {
-    super(overlay, renderer, viewContainerRef, hostRef);
+    super(document, overlay, platform, renderer, viewContainerRef, hostRef);
     this.currConfig = this.rootConfig || {};
     // this.scrollStrategy =
     //   this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : GLN_SELECT_SCROLL_STRATEGY_PROVIDER_BLOCK_FACTORY;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-tooltip', true);
   }
-
+  /*
   // @HostListener('mouseenter', ['$event'])
   // public doMouseenter(event: MouseEvent): void {
   //   console.log(`doMouseenter();`); // #
@@ -84,9 +94,12 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   // @HostListener('mousedown', ['$event'])
   // public doMousedown(event: MouseEvent): void {
   //   console.log(`doMousedown();`); // # mouseenter
-  //   this.toggle();
   // }
-
+  // @HostListener('click', ['$event'])
+  // public doClick(event: MouseEvent): void {
+  //   console.log(`doClick();`); // # mouseenter
+  // }
+*/
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
@@ -102,6 +115,19 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
       this.isNoAnimationVal = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
     }
+    if (changes['isNoHoverable'] || (changes['config'] && this.isNoHoverable == null && this.currConfig.isNoHoverable != null)) {
+      this.isNoHoverableVal = BooleanUtil.init(this.isNoHoverable) ?? !!this.currConfig.isNoHoverable;
+    }
+    if (changes['isNoTouchable'] || (changes['config'] && this.isNoTouchable == null && this.currConfig.isNoTouchable != null)) {
+      this.isNoTouchableVal = BooleanUtil.init(this.isNoTouchable) ?? !!this.currConfig.isNoTouchable;
+    }
+    if (changes['message']) {
+      if (this.isVisible()) {
+        this.hide(0);
+      } else {
+        this.setTooltipMessage(this.tooltipInstance, this.message || '');
+      }
+    }
     if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
       const panelClass: string | string[] = this.panelClass || this.currConfig.panelClass || [];
       this.panelClassVal = Array.isArray(panelClass) ? panelClass : [panelClass];
@@ -109,7 +135,7 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       this.positionVal = this.position || this.currConfig.position || null;
       // Updates the position of the tooltip.
-      super.updatesPosition(this.positionVal, this.overlayRef);
+      super.setTooltipPosition(this.positionVal, this.overlayRef);
     }
     if (changes['showDelay'] || (changes['config'] && this.showDelay == null && this.currConfig.showDelay != null)) {
       const showDelayStr: string = (this.showDelay || this.currConfig.showDelay || '').toString();
@@ -124,6 +150,12 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     }
     if (this.isNoAnimationVal == null) {
       this.isNoAnimationVal = !!this.currConfig.isNoAnimation;
+    }
+    if (this.isNoHoverable == null) {
+      this.isNoHoverableVal = !!this.currConfig.isNoHoverable;
+    }
+    if (this.isNoTouchable == null) {
+      this.isNoTouchableVal = !!this.currConfig.isNoTouchable;
     }
     if (this.panelClassVal == null) {
       const panelClass: string | string[] = this.currConfig.panelClass || [];

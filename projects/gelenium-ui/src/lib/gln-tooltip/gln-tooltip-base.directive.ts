@@ -8,6 +8,7 @@ import {
   ScrollStrategy,
   VerticalConnectionPos,
 } from '@angular/cdk/overlay';
+import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform';
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { Directive, ElementRef, OnDestroy, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
@@ -19,6 +20,9 @@ const CSS_ATTR_IS_SHOW = 'is-show';
 const CSS_ATTR_NO_ANM = 'noAnm';
 
 const CSS_CLASS_PANEL = 'gln-tooltip-panel';
+const PASSIVE_OPTIONS = normalizePassiveListenerOptions({ passive: true });
+
+type EventListenerType = readonly [string, EventListenerOrEventListenerObject];
 
 export function GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_CLOSE_FACTORY(overlay: Overlay): () => ScrollStrategy {
   return () => overlay.scrollStrategies.close();
@@ -46,10 +50,11 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   protected abstract readonly tooltipComponent: ComponentType<T>;
 
   public hideDelayVal: number | null = null; // Binding attribute "hideDelay".
+  public isArrowVal: boolean | null = null; // Binding attribute "isArrow".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
-  public isMousedownVal: boolean | null = null; // Binding attribute "isMousedown".
-  public isArrowVal: boolean | null = true; // Binding attribute "isArrow".
+  public isNoHoverableVal: boolean | null = null; // Binding attribute "isNoMousable".
+  public isNoTouchableVal: boolean | null = null; // Binding attribute "isTouchable".
   public panelClassVal: string[] = []; // Binding attribute "panelClass"
   public positionVal: string | null = null; // Binding attribute "position"
   public showDelayVal: number | null = null; // Binding attribute "showDelay".
@@ -60,9 +65,12 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   protected tooltipInstance: T | null = null;
 
   private panelClassPosition: string = '';
+  private readonly listenerList: EventListenerType[] = [];
 
   constructor(
+    protected document: Document,
     protected overlay: Overlay,
+    protected platform: Platform,
     protected renderer: Renderer2,
     protected viewContainerRef: ViewContainerRef,
     public hostRef: ElementRef<HTMLElement>
@@ -74,13 +82,14 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   }
   //
   public ngOnInit(): void {
-    if (this.isMousedownVal) {
-      console.log(`ngOnInit(); addEventListener('mousedown')`); // #
-      this.hostRef.nativeElement.addEventListener('mousedown', this.handlerMousedown);
-    }
+    console.log(`ngOnInit()`); // #
+    const isHoverable: boolean = !this.isNoHoverableVal && this.isSupportsMouseEvents();
+    const isTouchable: boolean = !this.isNoTouchableVal && !this.isSupportsMouseEvents();
+    this.addEventListeners(this.listenerList, this.hostRef.nativeElement, isHoverable, isTouchable);
   }
 
   public ngOnDestroy(): void {
+    console.log(`ngOnDestroy()`); // #
     // const nativeElement = this._elementRef.nativeElement;
     // clearTimeout(this._touchstartTimeout);
 
@@ -92,10 +101,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       this.overlayRef = null;
     }
     this.portal = null;
-    if (this.isMousedownVal) {
-      console.log(`ngOnDestroy(); removeEventListener('mousedown')`); // #
-      this.hostRef.nativeElement.removeEventListener('mousedown', this.handlerMousedown);
-    }
+
+    this.removeEventListeners(this.listenerList, this.hostRef.nativeElement);
   }
 
   // ** Public methods **
@@ -152,11 +159,11 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     }
     // Attach the tooltip portal to the overlay and get an instance of it.
     this.tooltipInstance = this.overlayRef.attach(this.portal).instance;
-    // Pass content to the tooltip component instance.
-    this.tooltipInstance.text = this.message || '';
-
+    // Pass the tooltip text to the component instance.
+    this.setTooltipMessage(this.tooltipInstance, this.message);
+    this.setTooltipClass(this.tooltipInstance, 'tooltip-demo');
     // Updates the position of the tooltip.
-    this.updatesPosition(this.positionVal, this.overlayRef);
+    this.setTooltipPosition(this.positionVal, this.overlayRef);
 
     const offsetWidth: number = this.hostRef.nativeElement.offsetWidth;
     const offsetHeight: number = this.hostRef.nativeElement.offsetHeight;
@@ -223,8 +230,98 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
 
   // ** Protected methods **
 
+  protected addEventListeners(listenerList: EventListenerType[], element: HTMLElement, isHoverable: boolean, isTouchable: boolean): void {
+    if (isHoverable) {
+      listenerList.push(['mouseenter', this.handlerMouseenter]);
+      listenerList.push(['mouseleave', this.handlerMouseleave]);
+      listenerList.push(['wheel', (event) => this.handlerWheel(event as WheelEvent)]);
+    } else if (isTouchable) {
+      listenerList.push(['touchstart', this.handlerTouchstart]);
+      listenerList.push(['touchstart', this.handlerTouchend]);
+      listenerList.push(['touchstart', this.handlerTouchcancel]);
+    }
+    for (let idx = 0; idx < listenerList.length; idx++) {
+      const [event, listener] = listenerList[idx];
+      console.log(`addEventListeners(); addEventListener('${event}')`); // #
+      element.addEventListener(event, listener, PASSIVE_OPTIONS);
+    }
+  }
+  protected removeEventListeners(listenerList: EventListenerType[], element: HTMLElement): void {
+    for (let idx = 0; idx < listenerList.length; idx++) {
+      const [event, listener] = listenerList[idx];
+      console.log(`removeEventListeners(); removeEventListener('${event}')`); // #
+      element.removeEventListener(event, listener, PASSIVE_OPTIONS);
+    }
+    listenerList.length = 0;
+  }
+
+  protected getValidPosition(position: string | null): string {
+    return TOOLTIP_POSITION[position || ''] || TOOLTIP_POSITION['bottom'];
+  }
+
+  protected isSupportsMouseEvents(): boolean {
+    return !this.platform.IOS && !this.platform.ANDROID;
+  }
+
+  protected handlerToAnimationFinish = (): void => {
+    const instanceRef: ElementRef<HTMLElement> | undefined = this.tooltipInstance?.getHostRef();
+    if (instanceRef != undefined) {
+      instanceRef.nativeElement.removeEventListener('animationend', this.handlerToAnimationFinish);
+      instanceRef.nativeElement.removeEventListener('animationcancel', this.handlerToAnimationFinish);
+    }
+    this.overlayDetach();
+  };
+
+  protected handlerMouseenter = (): void => {
+    console.log(`handlerMouseenter();`); // #
+    this.show();
+  };
+  protected handlerMouseleave = (): void => {
+    console.log(`handlerMouseleave();`); // #
+    this.hide();
+  };
+  protected handlerWheel = (event: WheelEvent): void => {
+    console.log(`handlerWheel();`); // #
+    if (this.isVisible()) {
+      const elementPointer = this.document.elementFromPoint(event.clientX + event.deltaX, event.clientY + event.deltaY);
+      const element = this.hostRef.nativeElement;
+      // On non-touch devices, the `mouseleave` event will not fire if the user scrolls
+      // the page using the wheel without moving the cursor.
+      // To solve this problem, we handle the `wheel` event and compare the coordinates
+      // of the mouse cursor and our element.
+      if (elementPointer !== element && !element.contains(elementPointer)) {
+        this.hide(0);
+      }
+    }
+  };
+
+  protected handlerTouchstart = (): void => {
+    console.log(`handlerTouchstart();`); // #
+    // this.show();
+  };
+  protected handlerTouchend = (): void => {
+    console.log(`handlerTouchend();`); // #
+    // this.hide();
+  };
+  protected handlerTouchcancel = (): void => {
+    console.log(`handlerTouchcancel();`); // #
+    // this.hide();
+  };
+
+  protected setTooltipMessage(tooltipInstance: T | null, tooltipMessage: string): void {
+    if (tooltipInstance != null) {
+      tooltipInstance.text = tooltipMessage;
+      tooltipInstance.markForCheck();
+    }
+  }
+  protected setTooltipClass(tooltipInstance: T | null, tooltipClassName: string | string[]): void {
+    if (tooltipInstance != null) {
+      tooltipInstance.className = tooltipClassName;
+      tooltipInstance.markForCheck();
+    }
+  }
   // Updates the position of the tooltip.
-  protected updatesPosition(positionInp: string | null, overlayRef: OverlayRef | null): void {
+  protected setTooltipPosition(positionInp: string | null, overlayRef: OverlayRef | null): void {
     if (overlayRef != null) {
       const positionStrategy = overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
       const position: string = this.getValidPosition(positionInp);
@@ -243,27 +340,6 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       positionStrategy.apply();
     }
   }
-
-  protected getValidPosition(position: string | null): string {
-    return TOOLTIP_POSITION[position || ''] || TOOLTIP_POSITION['bottom'];
-  }
-
-  protected handlerToAnimationFinish = (): void => {
-    const instanceRef: ElementRef<HTMLElement> | undefined = this.tooltipInstance?.getHostRef();
-    if (instanceRef != undefined) {
-      instanceRef.nativeElement.removeEventListener('animationend', this.handlerToAnimationFinish);
-      instanceRef.nativeElement.removeEventListener('animationcancel', this.handlerToAnimationFinish);
-    }
-    this.overlayDetach();
-  };
-
-  protected handlerMousedown = (): void => {
-    console.log(`handlerMousedown();`); // #
-    this.isVisible() ? this.hide() : this.show();
-  };
-  protected handlerMouseenter = (): void => {};
-
-  protected handlerMouseleave = (): void => {};
 
   // ** Private methods **
 

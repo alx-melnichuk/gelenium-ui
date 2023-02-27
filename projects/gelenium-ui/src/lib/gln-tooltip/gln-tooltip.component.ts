@@ -18,6 +18,10 @@ export class GlnTooltipComponent extends GlnTooltipBaseComponent {
   public getClassTooltip(): boolean {
     return true;
   }
+  @HostBinding('attr.class')
+  public get classList(): string {
+    return this.getListClassNames(this.className);
+  }
 
   public override isArrow: boolean | null = null;
 
