@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
@@ -24,7 +24,7 @@ export class CmTooltipBasicComponent {
 
   public isShowBasic = false;
   public isShowAttributes01 = false; // 02
-  public isShowAttributes02 = false;
+  public isShowAttributes02 = true;
   // public isShowSize = false; // 03
   // Palette // 04
   // Customization // 05
@@ -54,14 +54,20 @@ export class CmTooltipBasicComponent {
     'left-end',
   ];
 
+  public demo02 = 'Information-A';
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor(private changeDetectorRef: ChangeDetectorRef) {
+    setTimeout(() => {
+      this.demo02 = 'Information-Demo';
+      this.changeDetectorRef.markForCheck();
+    }, 6000);
+  }
 
   // Page: "Attributes" 02
-  public incremValue(value: number, delta: number, max: number): number {
+  public incVal(value: number, delta: number, max: number): number {
     return value + delta <= max ? value + delta : value > max ? max : value;
   }
-  public decremValue(value: number, delta: number, min: number): number {
+  public decVal(value: number, delta: number, min: number): number {
     return value - delta >= min ? value - delta : value < min ? min : value;
   }
 

@@ -11,14 +11,10 @@
   <code><pre source="ts">
 import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
   </code>
-  <span>
-    Tooltip displays text when the user:
-  </span>
-  <ul class="ttb-mt0">
-    <li>hover over an element;</li>
-    <li>focuses on the element;</li>
-    <li>by clicking on an element;</li>
-  </ul>
+  <p>
+    The GlnTooltip component displays a tooltip when the user hovers over
+    or long presses on an element.
+  </p>
   <span> For example:</span>
   <code><pre source="html">
 &lt;button <strong>glnTooltip</strong>=<i>"Information about the action."</i>&gt;
@@ -37,35 +33,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       </small>
     </div>
     <div>
-      <button class="ttb-btn"
-        glnTooltip="Information about the action.">
-        Action
-      </button>
-    </div>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Show tooltip with focus.</em>
-      </small>
-    </div>
-    <div>
-      <button class="ttb-btn"
-        glnTooltip="Information about the action.">
-        Action
-      </button>
-    </div>
-  </div>
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Show tooltip on click.</em>
-      </small>
-    </div>
-    <div>
-      <button class="ttb-btn"
+      <button class="ttbs-btn"
         glnTooltip="Information about the action.">
         Action
       </button>
@@ -82,7 +50,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
     <a [href]="urlCmTooltip + '#Attributes'">#</a>
   </h3>
   <span>The following attributes are supported:</span>
-  <ul class="tta-mt0">
+  <ul>
     <li>
       "config" - Defines a configuration object.
       <a [href]="urlCmTooltip + '#config-interface'">More details.</a>
@@ -91,7 +59,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       "glnTooltip" - specifies the tooltip text;
     </li>
     <li>
-      "glnTooltipPosition" - specifies the position of the tooltip;
+      "glnttPosition" - specifies the position of the tooltip;
       <br />
       This property can take the following values:
       <ul>
@@ -109,90 +77,97 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
         <li>'right-end';</li>
       </ul>
     </li>
+    <li>
+      "glnttDisabled" - a sign that the tooltip is disabled (glnttDisabled);
+    </li>
+    <li>
+      "glnttNoAnimation" - a sign that the animation is disabled (glnttNoAnimation);
+    </li>
   </ul>
 </section>
 
 <ng-container *ngIf="isShowAttributes01">
+
   <div class="app-group">
     <div>
       <small>
-        <em>Attribute: glnTooltipPosition.</em>
+        <em>Attribute: glnttPosition.</em>
       </small>
     </div>
   </div>
 
   <hr br-nn />
 
-  <div class="tta-group-place">
-    <div class="tta-group">
+  <div class="tta1-group-place">
+    <div class="tta1-group">
       <div>
-        <button class="tta-btn-cl"
-          glnTooltipPosition="top-start"
+        <button class="tta1-btn-cl"
+          glnttPosition="top-start"
           glnTooltip="Inform">
           top-start
         </button>
-        <button class="tta-btn-cl"
-          glnTooltipPosition="top"
+        <button class="tta1-btn-cl"
+          glnttPosition="top"
           glnTooltip="Inform">
           top
         </button>
-        <button class="tta-btn-cl"
-          glnTooltipPosition="top-end"
+        <button class="tta1-btn-cl"
+          glnttPosition="top-end"
           glnTooltip="Inform">
           top-end
         </button>
       </div>
     </div>
-    <div class="tta-group">
-      <div class="tta-group-left">
-        <button class="tta-btn-cl"
-          glnTooltipPosition="left-start"
+    <div class="tta1-group">
+      <div class="tta1-group50 left">
+        <button class="tta1-btn-cl"
+          glnttPosition="left-start"
           glnTooltip="Inform">
           left-start
         </button>
-        <button class="tta-btn-cl"
-          glnTooltipPosition="left"
+        <button class="tta1-btn-cl"
+          glnttPosition="left"
           glnTooltip="Inform">
           left
         </button>
-        <button class="tta-btn-cl"
-          glnTooltipPosition="left-end"
+        <button class="tta1-btn-cl"
+          glnttPosition="left-end"
           glnTooltip="Inform">
           left-end
         </button>
       </div>
-      <div class="tta-group-right">
-        <button class="tta-btn-cl"
-          glnTooltipPosition="right-start"
+      <div class="tta1-group50 right">
+        <button class="tta1-btn-cl"
+          glnttPosition="right-start"
           glnTooltip="Inform">
           right-start
         </button>
-        <button class="tta-btn-cl"
-          glnTooltipPosition="right"
+        <button class="tta1-btn-cl"
+          glnttPosition="right"
           glnTooltip="Inform">
           right
         </button>
-        <button class="tta-btn-cl"
-          glnTooltipPosition="right-end"
+        <button class="tta1-btn-cl"
+          glnttPosition="right-end"
           glnTooltip="Inform">
           right-end
         </button>
       </div>
     </div>
-    <div class="tta-group">
+    <div class="tta1-group">
       <div>
-        <button class="tta-btn-cl"
-          glnTooltipPosition="bottom-start"
+        <button class="tta1-btn-cl"
+          glnttPosition="bottom-start"
           glnTooltip="Inform">
           bottom-start
         </button>
-        <button class="tta-btn-cl"
-          glnTooltipPosition="bottom"
+        <button class="tta1-btn-cl"
+          glnttPosition="bottom"
           glnTooltip="Inform">
           bottom
         </button>
-        <button class="tta-btn-cl"
-          glnTooltipPosition="bottom-end"
+        <button class="tta1-btn-cl"
+          glnttPosition="bottom-end"
           glnTooltip="Inform">
           bottom-end
         </button>
@@ -208,12 +183,12 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: glnTooltipDisabled.</em>
+          <em>Attribute: glnttDisabled.</em>
         </small>
       </div>
       <div>
-        <button class="tta-btn"
-          glnTooltipDisabled
+        <button class="tta1-btn"
+          glnttDisabled
           glnTooltip="Information about the action.">
           Action
         </button>
@@ -223,12 +198,12 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: [glnTooltipDisabled]="true".</em>
+          <em>Attribute: [glnttDisabled]="true".</em>
         </small>
       </div>
       <div>
-        <button class="tta-btn"
-          [glnTooltipDisabled]="true"
+        <button class="tta1-btn"
+          [glnttDisabled]="true"
           glnTooltip="Information about the action.">
           Action
         </button>
@@ -238,6 +213,28 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
   </div>
 
   <hr br-nn />
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: glnttNoAnimation.</em>
+        </small>
+      </div>
+      <div>
+        <button class="tta1-btn"
+          glnttNoAnimation
+          glnTooltip="Information.">
+          Action
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <hr br-nn />
+
 </ng-container>
 
 <!-- Page: "Attributes" 02 -->
@@ -250,33 +247,41 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
   </h4>
   <ul>
     <li>
-      "glnTooltipShowDelay" - specifies the delay time before showing the tooltip, ms;
+      "glnttShowDelay" - specifies the delay time before showing the tooltip, ms;
     </li>
     <li>
-      "glnTooltipHideDelay" - specifies the delay time before hiding the tooltip, ms;
+      "glnttHideDelay" - specifies the delay time before hiding the tooltip, ms;
+    </li>
+    <li>
+      "glnttNoHoverable" - a sign that the display of the mouse hover tooltip is disabled
+      (glnttNoHoverable);
+    </li>
+    <li>
+      "glnttNoTouchable" - a sign that the display of a touch action tip is disabled
+      (glnttNoTouchable);
     </li>
   </ul>
 </section>
 
 <ng-container *ngIf="isShowAttributes02">
   <div class="app-group">
-    <div class="tta2-elem">
+    <div class="app-elem">
       <small>
-        <em>Attributes: glnTooltipShowDelay, glnTooltipHideDelay.</em>
+        <em>Attributes: glnttShowDelay, glnttHideDelay.</em>
       </small>
     </div>
   </div>
 
   <div class="app-group">
 
-    <div class="tta2-elem">
+    <div class="app-elem tta2-io-wd">
 
       <div class="tta2-io-mrl">
         <small><em>Value ShowDelay</em></small>
       </div>
       <div class="tta2-io">
-        <button class="tta2-io-btn tta2-io-uncode2"
-          (click)="showDelay02a=decremValue(showDelay02a, 100, 0)">
+        <button class="tta2-io-btn"
+          (click)="showDelay02a=decVal(showDelay02a, 100, 0)">
           &#8854;
         </button>
         <input class="tta2-input"
@@ -286,8 +291,8 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
           step="100"
           readonly
           [value]="showDelay02a" />
-        <button class="tta2-io-btn tta2-io-uncode2"
-          (click)="showDelay02a=incremValue(showDelay02a, 100, 10000)">
+        <button class="tta2-io-btn"
+          (click)="showDelay02a=incVal(showDelay02a, 100, 10000)">
           &#8853;
         </button>
       </div>
@@ -296,13 +301,13 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       </div>
     </div>
 
-    <div class="tta2-elem">
+    <div class="app-elem tta2-io-wd">
       <div class="tta2-io-mrl">
         <small><em>Value HideDelay</em></small>
       </div>
       <div class="tta2-io">
-        <button class="tta2-io-btn tta2-io-uncode2"
-          (click)="hideDelay02a=decremValue(hideDelay02a, 100, 0)">
+        <button class="tta2-io-btn"
+          (click)="hideDelay02a=decVal(hideDelay02a, 100, 0)">
           &#8854;
         </button>
         <input class="tta2-input"
@@ -312,8 +317,8 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
           step="100"
           readonly
           [value]="hideDelay02a" />
-        <button class="tta2-io-btn tta2-io-uncode2"
-          (click)="hideDelay02a=incremValue(hideDelay02a, 100, 10000)">
+        <button class="tta2-io-btn"
+          (click)="hideDelay02a=incVal(hideDelay02a, 100, 10000)">
           &#8853;
         </button>
       </div>
@@ -322,14 +327,14 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       </div>
     </div>
 
-    <div class="tta2-elem">
+    <div class="app-elem">
       <div>
-        <small><em>Show tooltip on click.</em></small>
+        <small><em>Show tooltip.</em></small>
       </div>
       <div>
         <button class="tta2-btn"
-          [glnTooltipShowDelay]="showDelay02a"
-          [glnTooltipHideDelay]="hideDelay02a"
+          [glnttShowDelay]="showDelay02a"
+          [glnttHideDelay]="hideDelay02a"
           glnTooltip="Information">
           Action
         </button>
@@ -338,15 +343,49 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 
   </div>
 
-  <!--  -->
+  <div class="app-group">
 
-  <hr br-nn />
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: glnttNoHoverable.</em>
+        </small>
+      </div>
+      <div>
+        <button class="tta2-btn"
+          glnttNoHoverable
+          glnTooltip="Information about the action.">
+          Action
+        </button>
+      </div>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: glnttNoTouchable.</em>
+        </small>
+      </div>
+      <div>
+        <button class="tta2-btn"
+          glnttNoTouchable
+          glnTooltip="Information about the action.">
+          Action
+        </button>
+      </div>
+    </div>
+
+  </div>
 
 </ng-container>
 
+<br />
+<div style="height: 300px;">_</div>
+<br />
+
 <div class="app-group">
 
-  <div class="app-elem">
+  <!-- <div class="app-elem">
     <div>
       <small>
         <em>Attribute: ??.</em>
@@ -354,22 +393,83 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
     </div>
     <div>
       <button class="tta-btn"
-        glnTooltipPosition="bottom-start"
+        glnttPosition="bottom-start"
         glnTooltip="Information about.">
         Action
       </button>
     </div>
+  </div> -->
+
+  <!-- // # Add to examples -->
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show tooltip only on a click.</em>
+      </small>
+    </div>
+    <div>
+      <button class="ttbs-btn"
+        glnTooltip9="Information about the action."
+        [glnTooltip]="demo02"
+        glnttNoHoverable
+        glnttNoTouchable
+        #tooltip="glnTooltip"
+        (click)="tooltip.toggle()">
+        Action
+      </button>
+    </div>
   </div>
+  <!-- // # -->
+
+  <!-- // # display tooltip on the "show" button, hide tooltip on the "hide" button -->
+
+  <!-- // # Add to examples
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show tooltip only when it has focus.</em>
+      </small>
+    </div>
+    <div>
+      <button class="ttbs-btn"
+        glnTooltip="Information about the action."
+        glnttNoHoverable
+        glnttNoTouchable
+        #tooltip="glnTooltip"
+        (focus)="tooltip.show()"
+        (blur)="tooltip.hide()">
+        Action
+      </button>
+    </div>
+  </div>
+   // # -->
+
+  <!-- // #
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show tooltip on ??.</em>
+      </small>
+    </div>
+    <div>
+      <button class="ttbs-btn"
+        glnTooltip="Information about the action."
+        glnttNoHoverable
+        glnttNoTouchable>
+        Action
+      </button>
+    </div>
+  </div>
+  -->
 
   <!-- <div class="app-elem">
   <div>
     <small>
-      <em>Attribute: [glnTooltipDisabled]="true".</em>
+      <em>Attribute: ??.</em>
     </small>
   </div>
   <div>
     <button class="tta-btn"
-      [glnTooltipDisabled]="true"
       glnTooltip="Information about the action.">
       Action
     </button>
@@ -405,17 +505,18 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
   <div class="ttb-elem">
     <button class="ttb-btn"
       glnTooltip="Info the action 1 demo 1"
-      glnTooltipShowDelay9="500"
-      glnTooltipHideDelay9="500"
-      glnTooltipPanelClass="tta-panel-demo"
-      glnTooltipPosition="top-start">
+      glnttShowDelay9="500"
+      glnttHideDelay9="500"
+      glnttPanelClass="tta-panel-demo"
+      glnttPosition="top-start">
       Action1
     </button>
   </div>
 
 </div> -->
 
-<br /><br /><br /><br /><br /><br /><br /><br />
-_
+<br />
+<br />
 <div style="height: 300px;">_</div>
-<br /><br /><br /><br /><br /><br /><br /><br />
+<br />
+<div style="height: 300px;">_</div>

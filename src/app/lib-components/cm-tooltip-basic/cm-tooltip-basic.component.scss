@@ -4,10 +4,7 @@ app-cm-tooltip-basic {
   display: block;
 
   // Page: "Basic"
-  .ttb-mt0 {
-    margin-top: 0;
-  }
-  .ttb-btn {
+  .ttbs-btn {
     border-radius: 4px;
     border-width: 0;
     font-size: 0.875em; // 14px
@@ -17,47 +14,37 @@ app-cm-tooltip-basic {
   }
 
   // Page: "Attributes" 01
-  .tta-mt0 {
-    margin-top: 0;
-  }
-  .tta-group-place {
+  .tta1-group-place {
     width: 400px;
   }
-  .tta-group {
+  .tta1-group {
     display: flex;
     width: 100%;
     flex-direction: row;
     justify-content: center;
   }
-  .tta-group-left {
+  .tta1-group50{
     flex-basis: 50%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    &.left {
+      align-items: flex-start;  
+    }
+    &.right {
+      align-items: flex-end;  
+    }
   }
-  .tta-group-right {
-    flex-basis: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-  .tta-btn-cl {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    background-color: transparent;
-    margin: 5px 5px;
-    cursor: pointer;
-    user-select: none;
-    font-weight: 600;
-    min-width: 100px;
+  .tta1-btn-cl {
     border-radius: 5px;
-    border-width: 1px;
+    border-width: 0px;
     color: cadetblue;;
+    font-weight: 600;
     height: 38px;
+    margin: 5px 5px;
+    min-width: 100px;
+    user-select: all;
   }
-  .tta-btn {
+  .tta1-btn {
     border-radius: 4px;
     border-width: 0;
     font-size: 0.875em; // 14px
@@ -73,9 +60,8 @@ app-cm-tooltip-basic {
     padding-left: 1em;
     padding-right: 1em;
   }
-  .tta2-elem {
+  .tta2-io-wd {
     min-width: 15ch;
-    margin: 10px 10px;
   }
   .tta2-io-mrl {
     margin-left: 32px;
@@ -84,18 +70,13 @@ app-cm-tooltip-basic {
     display: flex;
   }
   .tta2-io-btn {
-    outline: 0;
-    border: 0;
-    margin: 0;
-    box-sizing: border-box;
-    cursor: pointer;
-    user-select: none;
-    border-radius: 50%;
     background-color: transparent;
-  }
-  .tta2-io-uncode2 {
-    font-size: 24px;
+    border: 0;
+    border-radius: 50%;
     color: #00000080;
+    cursor: pointer;
+    font-size: 24px;
+    outline: 0;
     &:hover {
       color: #000000fa;
     }
