@@ -4,7 +4,6 @@ import { DOCUMENT } from '@angular/common';
 import {
   Directive,
   ElementRef,
-  HostListener,
   Inject,
   InjectionToken,
   Input,
@@ -111,6 +110,9 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     }
     if (changes['isDisabled']) {
       this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
+      if (this.isVisible()) {
+        this.hide(0);
+      }
     }
     if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
       this.isNoAnimationVal = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
@@ -143,7 +145,7 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     }
   }
 
-  public override ngOnInit(): void {
+  public ngOnInit(): void {
     if (this.hideDelay == null) {
       const hideDelayStr: string = (this.currConfig.hideDelay || '').toString();
       this.hideDelayVal = this.converInt(hideDelayStr, 0);
@@ -168,7 +170,6 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
       const showDelayStr: string = (this.currConfig.showDelay || '').toString();
       this.showDelayVal = this.converInt(showDelayStr, 0);
     }
-    super.ngOnInit();
   }
 
   public override ngOnDestroy(): void {
