@@ -105,7 +105,7 @@
     </div>
     <gln-button [exterior]="exterior05a">
       <div gln-orn-lf
-        class="bo-text bo-font-large">
+        class="bo-text">
         <span>&lt;</span>
       </div>
       <span>Previous value (text)</span>
@@ -121,7 +121,7 @@
     <gln-button [exterior]="exterior05a">
       <span>Next value (text)</span>
       <div gln-orn-rg
-        class="bo-text bo-font-large">
+        class="bo-text">
         <span>&gt;</span>
       </div>
     </gln-button>
@@ -135,12 +135,11 @@
         <em>Section: "gln-orn-lf" + text (Link).</em>
       </small>
     </div>
-    <gln-button class="bo-font-large"
-      [exterior]="exterior05a">
+    <gln-button [exterior]="exterior05a">
       <a [routerLink]="[routerLink]"
         fragment="ornament-text">
         <span class="bo-text">&lt;</span>
-        <span class="bo-label">Previous link (text)</span>
+        <span>Previous link (text)</span>
       </a>
       <i gln-orn-lf></i>
     </gln-button>
@@ -152,11 +151,10 @@
         <em>Section: "gln-orn-rg" + text (Link).</em>
       </small>
     </div>
-    <gln-button class="bo-font-large"
-      [exterior]="exterior05a">
+    <gln-button [exterior]="exterior05a">
       <a [routerLink]="[routerLink]"
         fragment="ornament-text">
-        <span class="bo-label">Next link (text)</span>
+        <span>Next link (text)</span>
         <span class="bo-text">&gt;</span>
       </a>
       <i gln-orn-rg></i>
@@ -183,7 +181,7 @@
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior05a"&gt;
       &lt;div gln-orn-lf
-        class="bo-text bo-font-large"&gt;
+        class="bo-text"&gt;
         &lt;span&gt;&lt;&lt;/span&gt;
       &lt;/div&gt;
       &lt;span&gt;Previous value (text)&lt;/span&gt;
@@ -199,7 +197,7 @@
     &lt;gln-button [exterior]="exterior05a"&gt;
       &lt;span&gt;Next value (text)&lt;/span&gt;
       &lt;div gln-orn-rg
-        class="bo-text bo-font-large"&gt;
+        class="bo-text"&gt;
         &lt;span&gt;&gt;&lt;/span&gt;
       &lt;/div&gt;
     &lt;/gln-button&gt;
@@ -213,12 +211,11 @@
         &lt;em&gt;Section: "gln-orn-lf" + text (Link).&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
-    &lt;gln-button class="bo-font-large"
-      [exterior]="exterior05a"&gt;
+    &lt;gln-button [exterior]="exterior05a"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="ornament-text"&gt;
         &lt;span class="bo-text"&gt;&lt;&lt;/span&gt;
-        &lt;span class="bo-label"&gt;Previous link (text)&lt;/span&gt;
+        &lt;span&gt;Previous link (text)&lt;/span&gt;
       &lt;/a&gt;
       &lt;i gln-orn-lf&gt;&lt;/i&gt;
     &lt;/gln-button&gt;
@@ -230,11 +227,10 @@
         &lt;em&gt;Section: "gln-orn-rg" + text (Link).&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
-    &lt;gln-button class="bo-font-large"
-      [exterior]="exterior05a"&gt;
+    &lt;gln-button [exterior]="exterior05a"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="ornament-text"&gt;
-        &lt;span class="bo-label"&gt;Next link (text)&lt;/span&gt;
+        &lt;span&gt;Next link (text)&lt;/span&gt;
         &lt;span class="bo-text"&gt;&gt;&lt;/span&gt;
       &lt;/a&gt;
       &lt;i gln-orn-rg&gt;&lt;/i&gt;
@@ -273,16 +269,9 @@ app-button &#123;
   .bo-no-uppercase &#123;
     --glnbt-uppercase: none;
   &#125;
-  .bo-font-large &#123;
-    font-size: 20px;
-  &#125;
   .bo-text &#123;
     margin-right: 10px;
     margin-left: 10px;
-  &#125;
-  .bo-label &#123;
-    font-weight: 500;
-    font-size: 14px;
   &#125;
 &#125;</pre></code>
         </mat-tab>
@@ -331,7 +320,7 @@ app-button &#123;
     </div>
     <gln-button [exterior]="exterior05b">
       <div gln-orn-lf
-        class="bo-uncode bo-font-large">
+        class="bo-uncode">
         &#9668;
       </div>
       <span>Previous value (uncode)</span>
@@ -347,7 +336,7 @@ app-button &#123;
     <gln-button [exterior]="exterior05b">
       <span>Next value (uncode)</span>
       <div gln-orn-rg
-        class="bo-uncode bo-font-large">
+        class="bo-uncode">
         &#9658;
       </div>
     </gln-button>
@@ -361,12 +350,11 @@ app-button &#123;
         <em>Section: "gln-orn-lf" + uncode (Link).</em>
       </small>
     </div>
-    <gln-button class="bo-font-large"
-      [exterior]="exterior05b">
+    <gln-button [exterior]="exterior05b">
       <a [routerLink]="[routerLink]"
         fragment="ornament-uncode">
         <span class="bo-uncode">&#9668;</span>
-        <span class="bo-label">Previous link (uncode)</span>
+        <span>Previous link (uncode)</span>
       </a>
       <i gln-orn-lf></i>
     </gln-button>
@@ -378,11 +366,10 @@ app-button &#123;
         <em>Section: "gln-orn-rg" + uncode (Link).</em>
       </small>
     </div>
-    <gln-button class="bo-font-large"
-      [exterior]="exterior05b">
+    <gln-button [exterior]="exterior05b">
       <a [routerLink]="[routerLink]"
         fragment="ornament-uncode">
-        <span class="bo-label">Next link (uncode)</span>
+        <span>Next link (uncode)</span>
         <span class="bo-uncode">&#9658;</span>
       </a>
       <i gln-orn-rg></i>
@@ -409,7 +396,7 @@ app-button &#123;
     &lt;/div&gt;
     &lt;gln-button [exterior]="exterior05b"&gt;
       &lt;div gln-orn-lf
-        class="bo-uncode bo-font-large"&gt;
+        class="bo-uncode"&gt;
         &amp;#9668;
       &lt;/div&gt;
       &lt;span&gt;Previous value (uncode)&lt;/span&gt;
@@ -425,7 +412,7 @@ app-button &#123;
     &lt;gln-button [exterior]="exterior05b"&gt;
       &lt;span&gt;Next value (uncode)&lt;/span&gt;
       &lt;div gln-orn-rg
-        class="bo-uncode bo-font-large"&gt;
+        class="bo-uncode"&gt;
         &amp;#9658;
       &lt;/div&gt;
     &lt;/gln-button&gt;
@@ -439,12 +426,11 @@ app-button &#123;
         &lt;em&gt;Section: "gln-orn-lf" + uncode (Link).&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
-    &lt;gln-button class="bo-font-large"
-      [exterior]="exterior05b"&gt;
+    &lt;gln-button [exterior]="exterior05b"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="ornament-uncode"&gt;
         &lt;span class="bo-uncode"&gt;&amp;#9668;&lt;/span&gt;
-        &lt;span class="bo-label"&gt;Previous link (uncode)&lt;/span&gt;
+        &lt;span&gt;Previous link (uncode)&lt;/span&gt;
       &lt;/a&gt;
       &lt;i gln-orn-lf&gt;&lt;/i&gt;
     &lt;/gln-button&gt;
@@ -456,11 +442,10 @@ app-button &#123;
         &lt;em&gt;Section: "gln-orn-rg" + uncode (Link).&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
-    &lt;gln-button class="bo-font-large"
-      [exterior]="exterior05b"&gt;
+    &lt;gln-button [exterior]="exterior05b"&gt;
       &lt;a [routerLink]="[routerLink]"
         fragment="ornament-uncode"&gt;
-        &lt;span class="bo-label"&gt;Next link (uncode)&lt;/span&gt;
+        &lt;span&gt;Next link (uncode)&lt;/span&gt;
         &lt;span class="bo-uncode"&gt;&amp;#9658;&lt;/span&gt;
       &lt;/a&gt;
       &lt;i gln-orn-rg&gt;&lt;/i&gt;
@@ -499,16 +484,9 @@ app-button &#123;
   .bo-no-uppercase &#123;
     --glnbt-uppercase: none;
   &#125;
-  .bo-font-large &#123;
-    font-size: 20px;
-  &#125;
   .bo-text &#123;
     margin-right: 10px;
     margin-left: 10px;
-  &#125;
-  .bo-label &#123;
-    font-weight: 500;
-    font-size: 14px;
   &#125;
 &#125;</pre></code>
         </mat-tab>
