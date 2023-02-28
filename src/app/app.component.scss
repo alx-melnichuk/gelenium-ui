@@ -53,7 +53,7 @@ app-root {
     min-width: 28ch;
     margin: 10px 10px;
   }
-  .app-elem>div:not([mb0]) {
+  .app-elem > div:first-child  {
     margin-bottom: 13px;
   }
   .app-group div>small {
