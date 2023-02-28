@@ -23,13 +23,16 @@ export class CmTooltipBasicComponent {
   public urlCmTooltip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TOOLTIP');
 
   public isShowBasic = false;
-  public isShowAttributes01 = false; // 02
+  public isShowAttributes01 = true; // 02 false
   public isShowAttributes02 = true;
   // public isShowSize = false; // 03
   // Palette // 04
   // Customization // 05
   // Config // 08
   // Api // 09
+
+  // Page: "Attributes" 01
+  public isDisabled01a: boolean = true;
 
   // Page: "Attributes" 02
   public showDelay02a: number = 600;
@@ -38,6 +41,7 @@ export class CmTooltipBasicComponent {
   // Page:
 
   public demo1 = false;
+  public demo2 = false;
   public position1 = 'top';
   public positionList: string[] = [
     'bottom',
