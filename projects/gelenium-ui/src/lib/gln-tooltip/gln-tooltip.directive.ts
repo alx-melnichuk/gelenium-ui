@@ -43,7 +43,7 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   @Input('glnttNoTouchable')
   public isNoTouchable: string | boolean | null | undefined;
   @Input('glnTooltip')
-  public override message: string | null | undefined;
+  public message: string | null | undefined;
   @Input('glnttPanelClass')
   public panelClass: string | string[] = '';
   @Input('glnttPosition')
@@ -54,12 +54,10 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public currConfig: GlnTooltipConfig;
   public override hideDelayVal: number | null = null; // Binding attribute "hideDelay".
   public override isArrowVal: boolean | null = null; // Binding attribute "isArrow".
-  public override isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public override isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
   public override isNoHoverableVal: boolean | null = null; // Binding attribute "isNoHoverable".
   public override isNoTouchableVal: boolean | null = null; // Binding attribute "isNoTouchable".
   public override panelClassVal: string[] = []; // Binding attribute "panelClass"
-  public override positionVal: string | null = null; // Binding attribute "position"
   public override showDelayVal: number | null = null; // Binding attribute "showDelay".
 
   protected readonly tooltipComponent = GlnTooltipComponent;
@@ -79,26 +77,7 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     //   this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : GLN_SELECT_SCROLL_STRATEGY_PROVIDER_BLOCK_FACTORY;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-tooltip', true);
   }
-  /*
-  // @HostListener('mouseenter', ['$event'])
-  // public doMouseenter(event: MouseEvent): void {
-  //   console.log(`doMouseenter();`); // #
-  //   this.show();
-  // }
-  // @HostListener('mouseout')
-  // public doMouseout(event: MouseEvent): void {
-  //   console.log(`doMouseout();`); // #
-  //   this.hide();
-  // }
-  // @HostListener('mousedown', ['$event'])
-  // public doMousedown(event: MouseEvent): void {
-  //   console.log(`doMousedown();`); // # mouseenter
-  // }
-  // @HostListener('click', ['$event'])
-  // public doClick(event: MouseEvent): void {
-  //   console.log(`doClick();`); // # mouseenter
-  // }
-*/
+
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
@@ -110,9 +89,6 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     }
     if (changes['isDisabled']) {
       this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
-      if (this.isVisible()) {
-        this.hide(0);
-      }
     }
     if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
       this.isNoAnimationVal = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
@@ -124,11 +100,7 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
       this.isNoTouchableVal = BooleanUtil.init(this.isNoTouchable) ?? !!this.currConfig.isNoTouchable;
     }
     if (changes['message']) {
-      if (this.isVisible()) {
-        this.hide(0);
-      } else {
-        this.setTooltipMessage(this.tooltipInstance, this.message || '');
-      }
+      this.messageVal = this.message || null;
     }
     if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
       const panelClass: string | string[] = this.panelClass || this.currConfig.panelClass || [];
@@ -136,8 +108,6 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       this.positionVal = this.position || this.currConfig.position || null;
-      // Updates the position of the tooltip.
-      super.setTooltipPosition(this.positionVal, this.overlayRef);
     }
     if (changes['showDelay'] || (changes['config'] && this.showDelay == null && this.currConfig.showDelay != null)) {
       const showDelayStr: string = (this.showDelay || this.currConfig.showDelay || '').toString();
@@ -178,42 +148,10 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
 
   // ** Public methods **
 
-  /** Show tooltip after delay in ms, default is 0 ms delay. */
-  public override show(delay: number = this.showDelayVal || 0): Promise<void> {
-    return super.show(delay);
-  }
-
-  /** Hides the tooltip after a delay in ms, the default is a delay of 0 ms. */
-  public override hide(delay: number = this.hideDelayVal || 0): Promise<void> {
-    return super.hide(delay);
-  }
-
-  /** Shows/hides the tooltip. */
-  public toggle(): void {
-    this.isVisible() ? this.hide() : this.show();
-  }
-
-  /** If the tooltip is currently visible, returns true. */
-  public override isVisible(): boolean {
-    return super.isVisible();
-  }
-
   // ** Private methods **
 
   private converInt(size: string, defaultValue: number): number {
     const sizeNum: number = Number.parseInt(size);
     return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
   }
-
-  /*private getPosition(value: string | null): HorizontalConnectionPos {
-    return (value && ['start', 'center', 'end'].indexOf(value) > -1 ? value : 'start') as HorizontalConnectionPos;
-  }*/
-
-  /*private getPositionList(position: string | undefined | null): ConnectedPosition[] {
-    const horizontalAlignment: HorizontalConnectionPos = this.getPosition(position || null);
-    return [
-      { originX: horizontalAlignment, originY: 'bottom', overlayX: horizontalAlignment, overlayY: 'top' },
-      { originX: horizontalAlignment, originY: 'top', overlayX: horizontalAlignment, overlayY: 'bottom' },
-    ];
-  }*/
 }

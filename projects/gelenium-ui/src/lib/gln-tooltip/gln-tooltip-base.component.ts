@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Directive, ElementRef, HostListener, OnInit, Rendere
 
 @Directive()
 export abstract class GlnTooltipBaseComponent {
-  public text: string = '';
+  public text: string | null = null;
   public className: string | string[] = '';
   public isVisibility: boolean | null = null;
   public isArrow: boolean | null = null;
