@@ -77,12 +77,6 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
         <li>'right-end';</li>
       </ul>
     </li>
-    <li>
-      "glnttDisabled" - a sign that the tooltip is disabled (glnttDisabled);
-    </li>
-    <li>
-      "glnttNoAnimation" - a sign that the animation is disabled (glnttNoAnimation);
-    </li>
   </ul>
 </section>
 
@@ -179,71 +173,6 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
   <hr br-nn />
   <section mr-vr>
   </section>
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: glnttDisabled.</em>
-        </small>
-      </div>
-      <div>
-        <button class="tta1-btn"
-          glnttDisabled
-          glnTooltip="Information">
-          Action
-        </button>
-      </div>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute:
-            <label>
-              <input class="tta1-ver"
-                type="checkbox"
-                (change)="isDisabled01a=!isDisabled01a" />
-              [glnttDisabled]="{{isDisabled01a}}".
-            </label>
-
-          </em>
-        </small>
-      </div>
-      <div>
-        <button class="tta1-btn"
-          [glnttDisabled]="isDisabled01a"
-          glnTooltip="Information">
-          Action
-        </button>
-      </div>
-    </div>
-
-  </div>
-
-  <hr br-nn />
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Attribute: glnttNoAnimation.</em>
-        </small>
-      </div>
-      <div>
-        <button class="tta1-btn"
-          glnttNoAnimation
-          glnTooltip="Information">
-          Action
-        </button>
-      </div>
-    </div>
-
-  </div>
-
-  <hr br-nn />
 
 </ng-container>
 
@@ -389,28 +318,166 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 
 </ng-container>
 
+
+<!-- Page: "Attributes" 03 -->
+<section *ngIf="isShowAttributes03"
+  mr-vr
+  id="attributes-supported03">
+  <h4 class="app-hover-link">
+    Attributes are also supported 3:
+    <a [href]="urlCmTooltip + '#attributes-supported03'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "glnttDisabled" - a sign that the tooltip is disabled (glnttDisabled);
+      <br>
+      Disabling a tooltip removes its DOM element's internal subscriptions.
+    </li>
+    <li>
+      "glnttNoAnimation" - a sign that the animation is disabled (glnttNoAnimation);
+    </li>
+  </ul>
+</section>
+
+<ng-container *ngIf="isShowAttributes03">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: glnttDisabled.</em>
+        </small>
+      </div>
+      <div>
+        <button class="tta1-btn"
+          glnttDisabled
+          glnTooltip="Information">
+          Action
+        </button>
+      </div>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute:
+            <label>
+              <input class="tta1-ver"
+                type="checkbox"
+                [checked]="isDisabled03a"
+                (change)="isDisabled03a=!isDisabled03a" />
+              [glnttDisabled]="{{isDisabled03a}}".
+            </label>
+
+          </em>
+        </small>
+      </div>
+      <div>
+        <button class="tta1-btn"
+          [glnttDisabled]="isDisabled03a"
+          glnTooltip="Information">
+          Action
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <hr br-nn />
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: glnttNoAnimation.</em>
+        </small>
+      </div>
+      <div>
+        <button class="tta1-btn"
+          glnttNoAnimation
+          glnTooltip="Information">
+          Action
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <hr br-nn />
+
+</ng-container>
+
 <br />
 <div style="height: 300px;">_</div>
 <br />
 
 <div class="app-group">
 
-  <!-- <div class="app-elem">
+  <div class="app-elem">
     <div>
       <small>
-        <em>Attribute: ??.</em>
+        <em>Show the tooltip only if the element is out of bounds.</em>
       </small>
     </div>
     <div>
-      <button class="tta-btn"
-        glnttPosition="bottom-start"
-        glnTooltip="Information about.">
-        Action
+      <button class="ttbs-btn"
+        style="max-width: 75px; white-space: nowrap; overflow: hidden;"
+        glnTooltip="Information"
+        [glnttDisabled]="!overflowChild1.getChildHasOverflow()"
+        glnOverflowChild
+        #overflowChild1="glnOverflowChild">
+        <span>Action demo</span>
       </button>
     </div>
-  </div> -->
+  </div>
 
-  <!-- // # Add to examples -->
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show the tooltip only if the element is out of bounds.</em>
+      </small>
+    </div>
+    <div>
+      <table class="ttz-table">
+        <thead>
+          <tr>
+            <th>Company</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td glnTooltip="Centro comercial Moctezuma"
+              [glnttDisabled]="!overflowChildZ1.getChildHasOverflow()"
+              glnOverflowChild
+              #overflowChildZ1="glnOverflowChild">
+              <span>Centro comercial Moctezuma</span>
+            </td>
+          </tr>
+          <tr>
+            <td glnTooltip="Francisco Chang"
+              [glnttDisabled]="!overflowChildZ2.getChildHasOverflow()"
+              glnOverflowChild
+              #overflowChildZ2="glnOverflowChild">
+              <span>Francisco Chang</span>
+            </td>
+          </tr>
+          <tr>
+            <td glnTooltip="Mexico"
+              [glnttDisabled]="!overflowChildZ3.getChildHasOverflow()"
+              glnOverflowChild
+              #overflowChildZ3="glnOverflowChild">
+              <span>Mexico</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <!-- // # Add to examples --
   <div class="app-elem">
     <div>
       <small>
@@ -419,17 +486,25 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
     </div>
     <div>
       <button class="ttbs-btn"
+        style="max-width: 75px; white-space: nowrap; overflow: hidden;"
         glnTooltip9="Information"
         [glnTooltip]="demo02"
         glnttNoHoverable
         glnttNoTouchable
+        glnttPanelClass="tta-panel-demo"
+        glnttDisabled9="!overflowChild.value"
+        [glnttDisabled]="!overflowChild.getChildHasOverflow()"
         #tooltip="glnTooltip"
-        (click)="tooltip.toggle()">
-        Action
+        (click)="tooltip.toggle()"
+        glnOverflowChild
+        #overflowChild="glnOverflowChild">
+        <span>
+          Action demonstartion
+        </span>
       </button>
     </div>
   </div>
-  <!-- // # -->
+  -- // # -->
 
   <!-- // # display tooltip on the "show" button, hide tooltip on the "hide" button -->
 

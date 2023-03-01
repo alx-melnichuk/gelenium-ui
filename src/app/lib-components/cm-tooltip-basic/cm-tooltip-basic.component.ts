@@ -23,8 +23,9 @@ export class CmTooltipBasicComponent {
   public urlCmTooltip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TOOLTIP');
 
   public isShowBasic = false;
-  public isShowAttributes01 = true; // 02 false
-  public isShowAttributes02 = true;
+  public isShowAttributes01 = false; // 02
+  public isShowAttributes02 = false;
+  public isShowAttributes03 = false;
   // public isShowSize = false; // 03
   // Palette // 04
   // Customization // 05
@@ -32,11 +33,13 @@ export class CmTooltipBasicComponent {
   // Api // 09
 
   // Page: "Attributes" 01
-  public isDisabled01a: boolean = true;
 
   // Page: "Attributes" 02
   public showDelay02a: number = 600;
   public hideDelay02a: number = 600;
+
+  // Page: "Attributes" 03
+  public isDisabled03a: boolean = true;
 
   // Page:
 
@@ -61,10 +64,10 @@ export class CmTooltipBasicComponent {
   public demo02 = 'Information-A';
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private changeDetectorRef: ChangeDetectorRef) {
-    setTimeout(() => {
-      this.demo02 = 'Information-Demo';
-      this.changeDetectorRef.markForCheck();
-    }, 6000);
+    // setTimeout(() => {
+    //   this.demo02 = 'Information-Demo';
+    //   this.changeDetectorRef.markForCheck();
+    // }, 6000);
   }
 
   // Page: "Attributes" 02

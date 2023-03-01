@@ -93,10 +93,20 @@ app-cm-tooltip-basic {
     padding: 0 16px;
   }
 
-  // Page: ""
+  
 
+  // Page: ""
+  .ttz-table {
+    border-style: double;
+    td {
+      max-width: 180px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
 }
 
-.tta-panel-demo gln-tooltip-cmp {
+// Page: "Attributes" 03
+.tta-panel-demo.gln-tooltip {
   background-color: indigo;
 }
