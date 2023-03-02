@@ -13,6 +13,7 @@ import {
   Optional,
   Renderer2,
   SimpleChanges,
+  TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
 
@@ -32,6 +33,8 @@ export const GLN_TOOLTIP_CONFIG = new InjectionToken<GlnTooltipConfig>('GLN_TOOL
 export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipComponent> implements OnChanges, OnInit, OnDestroy {
   @Input()
   public config: GlnTooltipConfig | null | undefined;
+  @Input('glnttContent')
+  public override content: Record<string, unknown> | null = null;
   @Input('glnttHideDelay')
   public hideDelay: number | string | null | undefined;
   @Input('glnttDisabled')
@@ -43,7 +46,7 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   @Input('glnttNoTouchable')
   public isNoTouchable: string | boolean | null | undefined;
   @Input('glnTooltip')
-  public message: string | null | undefined;
+  public message: string | TemplateRef<unknown> | null | undefined;
   @Input('glnttPanelClass')
   public panelClass: string | string[] = '';
   @Input('glnttPosition')
