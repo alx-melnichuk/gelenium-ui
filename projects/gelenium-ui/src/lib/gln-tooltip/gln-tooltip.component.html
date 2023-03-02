@@ -1,2 +1,9 @@
-{{ text }}
+<ng-container *ngIf="!templateRef; else elseBlock">
+  {{ text }}
+</ng-container>
+<ng-template #elseBlock>
+  <ng-container [ngTemplateOutlet]="templateRef"
+    [ngTemplateOutletContext]="content">
+  </ng-container>
+</ng-template>
 <!-- <span class="gln-tooltip-arrow"></span> -->

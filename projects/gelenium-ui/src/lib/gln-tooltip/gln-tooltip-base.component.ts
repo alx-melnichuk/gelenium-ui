@@ -1,11 +1,13 @@
-import { ChangeDetectorRef, Directive, ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, TemplateRef } from '@angular/core';
 
 @Directive()
 export abstract class GlnTooltipBaseComponent {
-  public text: string | null = null;
+  public content: Record<string, unknown> | null = null;
   public className: string | string[] = '';
   public isVisibility: boolean | null = null;
   public isArrow: boolean | null = null;
+  public text: string | null | undefined = null;
+  public templateRef: TemplateRef<unknown> | null = null;
 
   constructor(protected hostRef: ElementRef<HTMLElement>, protected changeDetectorRef: ChangeDetectorRef) {}
 

@@ -9,8 +9,8 @@ import {
   VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform';
-import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
-import { AfterViewInit, Directive, ElementRef, OnDestroy, Renderer2, ViewContainerRef } from '@angular/core';
+import { ComponentPortal, ComponentType, TemplatePortal } from '@angular/cdk/portal';
+import { AfterViewInit, Directive, ElementRef, OnDestroy, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnTooltipBaseComponent } from './gln-tooltip-base.component';
@@ -45,6 +45,7 @@ export const TOOLTIP_POSITION: { [key: string]: string } = {
 
 @Directive()
 export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent> implements AfterViewInit, OnDestroy {
+  public content: Record<string, unknown> | null = null;
   public hideDelayVal: number | null = null; // Binding attribute "hideDelay".
   public isArrowVal: boolean | null = null; // Binding attribute "isArrow".
   // Binding attribute "isDisabled".
@@ -61,15 +62,14 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       }
     }
   }
-
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
   public isNoHoverableVal: boolean | null = null; // Binding attribute "isNoMousable".
   public isNoTouchableVal: boolean | null = null; // Binding attribute "isNoTouchable".
   // Binding attribute "message"
-  public get messageVal(): string | null {
+  public get messageVal(): string | TemplateRef<unknown> | null | undefined {
     return this.innMessageVal;
   }
-  public set messageVal(value: string | null) {
+  public set messageVal(value: string | TemplateRef<unknown> | null | undefined) {
     if (value !== this.innMessageVal) {
       this.innMessageVal = value;
       if (this.isPhaseAfterViewInit) {
@@ -100,7 +100,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   private readonly listenersForEnd: EventListenerType[] = [];
   private innIsDisabledVal: boolean | null = null;
   private innPositionVal: string | null = null;
-  private innMessageVal: string | null = null;
+  private innMessageVal: string | TemplateRef<unknown> | null | undefined = null;
   private isPhaseAfterViewInit: boolean = false;
   private panelClassPosition: string = '';
 
@@ -167,8 +167,16 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     }
     // Attach the tooltip portal to the overlay and get an instance of it.
     this.tooltipInstance = this.overlayRef.attach(this.portal).instance;
-    // Pass the tooltip text to the component instance.
-    this.setTooltipMessage(this.tooltipInstance, this.messageVal);
+
+    const typeName: string = typeof this.messageVal;
+    const messageStr: string | null = typeName === 'string' ? (this.messageVal as string) : null;
+    const messageTmplRef: TemplateRef<unknown> | null = typeName === 'object' ? (this.messageVal as TemplateRef<unknown>) : null;
+
+    if (!!messageStr) {
+      this.setTooltipMessage(this.tooltipInstance, messageStr);
+    } else if (messageTmplRef != null) {
+      this.setTooltipTemplate(this.tooltipInstance, messageTmplRef, this.content);
+    }
     this.setTooltipClass(this.tooltipInstance, this.panelClassVal);
     // Updates the position of the tooltip.
     this.setTooltipPosition(this.positionVal, this.overlayRef);
@@ -378,6 +386,13 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     if (tooltipInstance != null) {
       tooltipInstance.text = tooltipMessage;
       tooltipInstance.markForCheck();
+    }
+  }
+  protected setTooltipTemplate(instance: T | null, template: TemplateRef<unknown> | null, content: Record<string, unknown> | null): void {
+    if (instance != null) {
+      instance.templateRef = template;
+      instance.content = content;
+      instance.markForCheck();
     }
   }
   protected setTooltipClass(tooltipInstance: T | null, tooltipClassName: string | string[]): void {
