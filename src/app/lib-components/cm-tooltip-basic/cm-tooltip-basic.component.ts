@@ -26,7 +26,8 @@ export class CmTooltipBasicComponent {
   public isShowAttributes01 = true; // 02
   public isShowAttributes02 = true;
   public isShowAttributes03 = true;
-  public isShowFeature07 = false;
+  public isShowCustomization = true;
+  public isShowFeature = false;
   // public isShowSize = false; // 03
   // Palette // 04
   // Customization // 05

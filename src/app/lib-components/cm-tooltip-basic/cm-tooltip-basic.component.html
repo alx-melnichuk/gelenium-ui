@@ -43,6 +43,8 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 </div>
 
 <!-- Page: "Attributes" 01 -->
+<i id="Attributes"
+  temp>_Attributes_</i>
 <section *ngIf="isShowAttributes01"
   mr-vr>
   <h3 class="app-hover-link">
@@ -318,6 +320,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 
 </ng-container>
 
+<hr br-nn />
 
 <!-- Page: "Attributes" 03 -->
 <section *ngIf="isShowAttributes03"
@@ -409,12 +412,62 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 
 </ng-container>
 
+<!-- Page: "Customization" 06 -->
+<i id="Customization"
+  temp>_Customization_</i>
+<section *ngIf="isShowCustomization"
+  mr-vr
+  id="Customization">
+  <h4 class="app-hover-link">
+    Customization
+    <a [href]="urlCmTooltip + '#Customization'">#</a>
+  </h4>
+  <p>
+    The GlnTooltip component has additional user customization.
+    <br />
+    It is possible to specify your own tooltip context.
+  </p>
+</section>
 
+<ng-container *ngIf="isShowCustomization">
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Show tooltip HTML only on a click.</em>
+        </small>
+      </div>
+      <div>
+        <ng-template #contextTmpl06a
+          let-name="nameVar">
+          <b>{{name}}</b> is a very <em>tasty</em>&nbsp;<u>fruit</u> !
+        </ng-template>
+
+        <button class="ttcs-btn"
+          [glnTooltip]="contextTmpl06a"
+          [glnttContent]="{ nameVar: 'Mango' }"
+          glnttNoHoverable
+          glnttNoTouchable
+          #tooltip06a="glnTooltip"
+          (click)="tooltip06a.toggle()">
+          <span>
+            Action
+          </span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</ng-container>
+
+<hr br-nn />
 
 <!-- Page: "Feature" 07 -->
-<section *ngIf="isShowFeature07"
-  mr-vr
-  id="Feature">
+<i id="Feature"
+  temp>_Feature_</i>
+<section *ngIf="isShowFeature"
+  mr-vr>
   <h4 class="app-hover-link">
     Feature
     <a [href]="urlCmTooltip + '#Feature'">#</a>
@@ -446,7 +499,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 &lt;/button&gt;</pre></code>
 </section>
 
-<ng-container *ngIf="isShowFeature07">
+<ng-container *ngIf="isShowFeature">
   <div class="app-group">
 
     <div class="app-elem">
@@ -513,8 +566,6 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 </ng-container>
 
 <div class="app-group">
-
-
 
   <br />
   <div style="height: 300px;">_</div>
