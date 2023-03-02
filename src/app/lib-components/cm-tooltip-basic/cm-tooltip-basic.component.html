@@ -409,73 +409,116 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 
 </ng-container>
 
-<br />
-<div style="height: 300px;">_</div>
-<br />
 
-<div class="app-group">
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Show the tooltip only if the element is out of bounds.</em>
-      </small>
-    </div>
-    <div>
-      <button class="ttbs-btn"
-        style="max-width: 75px; white-space: nowrap; overflow: hidden;"
-        glnTooltip="Information"
-        [glnttDisabled]="!overflowChild1.getChildHasOverflow()"
-        glnOverflowChild
-        #overflowChild1="glnOverflowChild">
-        <span>Action demo</span>
-      </button>
-    </div>
-  </div>
+<!-- Page: "Feature" 07 -->
+<section *ngIf="isShowFeature07"
+  mr-vr
+  id="Feature">
+  <h4 class="app-hover-link">
+    Feature
+    <a [href]="urlCmTooltip + '#Feature'">#</a>
+  </h4>
+  <p>
+    Sometimes there are situations where we don't know if an element will fit entirely within its
+    parent's bounds.
+    This may be when internationalization is used, i.e. different translations of the value are
+    substituted.
+    Or when the value does not fit into the specified table column width.
+    In these cases, we should only display the tooltip when the element goes beyond its parent.
+    <br />
+    To do this, you can use the glnOverflowChild directive.
+    <br />
+    The directive's getChildHasOverflow() method determines the first child element and checks
+    if it overflows its parent.
+    And if it goes beyond the boundaries of the parent element, then we can enable the display of a
+    tooltip.
+  </p>
+  <span> For example:</span>
+  <code><pre source="html">
+&lt;button class="ttbs-btn"
+  style="max-width: 75px; white-space: nowrap; overflow: hidden;"
+  <i><strong>glnTooltip</strong></i>="Action demo"
+  <i><strong>[glnttDisabled]</strong></i>="<strong>!overflowChild.getChildHasOverflow()</strong>"
+  <strong>glnOverflowChild</strong>
+  <strong>#overflowChild="glnOverflowChild"</strong>&gt;
+  &lt;span&gt;Action demo&lt;/span&gt;
+&lt;/button&gt;</pre></code>
+</section>
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Show the tooltip only if the element is out of bounds.</em>
-      </small>
+<ng-container *ngIf="isShowFeature07">
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Show the tooltip only if the element is out of bounds.</em>
+        </small>
+      </div>
+      <div>
+        <button class="ttft-btn"
+          style="max-width: 75px; white-space: nowrap; overflow: hidden;"
+          glnTooltip="Action demo"
+          [glnttDisabled]="!overflowChildZ0.getChildHasOverflow()"
+          glnOverflowChild
+          #overflowChildZ0="glnOverflowChild">
+          <span>Action demo</span>
+        </button>
+      </div>
     </div>
-    <div>
-      <table class="ttz-table">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Show the tooltip only if the element is out of bounds.</em>
+        </small>
+      </div>
+      <table class="ttft-table">
         <thead>
           <tr>
-            <th>Company</th>
+            <th>fruits</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td glnTooltip="Centro comercial Moctezuma"
+            <td glnTooltip="mango"
               [glnttDisabled]="!overflowChildZ1.getChildHasOverflow()"
               glnOverflowChild
               #overflowChildZ1="glnOverflowChild">
-              <span>Centro comercial Moctezuma</span>
+              <span>mango</span>
             </td>
           </tr>
           <tr>
-            <td glnTooltip="Francisco Chang"
+            <td glnTooltip="gorgeous orange"
               [glnttDisabled]="!overflowChildZ2.getChildHasOverflow()"
               glnOverflowChild
               #overflowChildZ2="glnOverflowChild">
-              <span>Francisco Chang</span>
+              <span>gorgeous orange</span>
             </td>
           </tr>
           <tr>
-            <td glnTooltip="Mexico"
+            <td glnTooltip="succulent watermelon"
               [glnttDisabled]="!overflowChildZ3.getChildHasOverflow()"
               glnOverflowChild
               #overflowChildZ3="glnOverflowChild">
-              <span>Mexico</span>
+              <span>succulent watermelon</span>
             </td>
           </tr>
         </tbody>
       </table>
 
     </div>
+
   </div>
+</ng-container>
+
+<div class="app-group">
+
+
+
+  <br />
+  <div style="height: 300px;">_</div>
+  <br />
 
   <!-- // # Add to examples --
   <div class="app-elem">

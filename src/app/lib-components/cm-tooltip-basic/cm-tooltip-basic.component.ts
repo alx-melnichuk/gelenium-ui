@@ -22,10 +22,11 @@ export class CmTooltipBasicComponent {
 
   public urlCmTooltip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TOOLTIP');
 
-  public isShowBasic = false;
-  public isShowAttributes01 = false; // 02
-  public isShowAttributes02 = false;
-  public isShowAttributes03 = false;
+  public isShowBasic = true;
+  public isShowAttributes01 = true; // 02
+  public isShowAttributes02 = true;
+  public isShowAttributes03 = true;
+  public isShowFeature07 = false;
   // public isShowSize = false; // 03
   // Palette // 04
   // Customization // 05
@@ -40,6 +41,8 @@ export class CmTooltipBasicComponent {
 
   // Page: "Attributes" 03
   public isDisabled03a: boolean = true;
+
+  // Page: "Feature" 07
 
   // Page:
 
