@@ -446,11 +446,11 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 
         <button class="ttcs-btn"
           [glnTooltip]="contextTmpl06a"
-          [glnttContent]="{ nameVar: 'Mango' }"
-          glnttNoHoverable
+          [glnttContent]="{ nameVar: 'Mango' }">
+          <!-- ^glnttNoHoverable
           glnttNoTouchable
           #tooltip06a="glnTooltip"
-          (click)="tooltip06a.toggle()">
+          (click)="tooltip06a.toggle()" -->
           <span>
             Action
           </span>
@@ -565,11 +565,32 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
   </div>
 </ng-container>
 
+<br />
+<div style="height: 300px;">_</div>
+<br />
+
 <div class="app-group">
 
-  <br />
-  <div style="height: 300px;">_</div>
-  <br />
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show tooltip only when it has focus.</em>
+      </small>
+    </div>
+    <div>
+      <button class="ttbs-btn"
+        glnTooltip="Information demo"
+        glnttNoHoverable
+        glnttNoTouchable
+        glnttConfig8="{ maxWidth: 280 }"
+        glnttConfig9="{ maxWidth: 400 }"
+        glnttConfig10="{ maxWidth: 'none' }"
+        #tooltip="glnTooltip"
+        (click)="tooltip.toggle()">
+        Action
+      </button>
+    </div>
+  </div>
 
   <!-- // # Add to examples --
   <div class="app-elem">
