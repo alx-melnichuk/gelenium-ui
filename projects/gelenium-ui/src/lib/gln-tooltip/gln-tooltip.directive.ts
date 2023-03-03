@@ -1,4 +1,4 @@
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
 import {
@@ -23,7 +23,9 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { GlnTooltipBaseDirective } from './gln-tooltip-base.directive';
 import { GlnTooltipConfig } from './gln-tooltip-config.interface';
 import { GlnTooltipComponent } from './gln-tooltip.component';
+import { GLN_TOOLTIP_SCROLL_STRATEGY } from './gln-tooltip.providers';
 
+export const TOOLTIP_MAX_WIDTH = 280;
 export const GLN_TOOLTIP_CONFIG = new InjectionToken<GlnTooltipConfig>('GLN_TOOLTIP_CONFIG');
 
 @Directive({
@@ -31,7 +33,7 @@ export const GLN_TOOLTIP_CONFIG = new InjectionToken<GlnTooltipConfig>('GLN_TOOL
   exportAs: 'glnTooltip',
 })
 export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipComponent> implements OnChanges, OnInit, OnDestroy {
-  @Input()
+  @Input('glnttConfig')
   public config: GlnTooltipConfig | null | undefined;
   @Input('glnttContent')
   public override content: Record<string, unknown> | null = null;
@@ -60,6 +62,10 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public override isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
   public override isNoHoverableVal: boolean | null = null; // Binding attribute "isNoHoverable".
   public override isNoTouchableVal: boolean | null = null; // Binding attribute "isNoTouchable".
+  public override maxHeightVal: number | string | null = null; // Binding attribute "maxHeight".
+  public override maxWidthVal: number | string | null = null; // Binding attribute "maxWidth".
+  public override minHeightVal: number | string | null = null; // Binding attribute "minHeight".
+  public override minWidthVal: number | string | null = null; // Binding attribute "minWidth".
   public override panelClassVal: string[] = []; // Binding attribute "panelClass"
   public override showDelayVal: number | null = null; // Binding attribute "showDelay".
 
@@ -72,18 +78,22 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     renderer: Renderer2,
     viewContainerRef: ViewContainerRef,
     hostRef: ElementRef<HTMLElement>,
-    @Optional() @Inject(GLN_TOOLTIP_CONFIG) private rootConfig: GlnTooltipConfig | null
+    @Optional() @Inject(GLN_TOOLTIP_CONFIG) private rootConfig: GlnTooltipConfig | null,
+    @Optional() @Inject(GLN_TOOLTIP_SCROLL_STRATEGY) scrollStrategyFactory: (() => ScrollStrategy) | null
   ) {
-    super(document, overlay, platform, renderer, viewContainerRef, hostRef);
+    super(document, overlay, platform, renderer, viewContainerRef, hostRef, scrollStrategyFactory);
     this.currConfig = this.rootConfig || {};
-    // this.scrollStrategy =
-    //   this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : GLN_SELECT_SCROLL_STRATEGY_PROVIDER_BLOCK_FACTORY;
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-tooltip', true);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
+
+      this.maxHeightVal = this.currConfig.maxHeight || null;
+      this.maxWidthVal = this.currConfig.maxWidth || TOOLTIP_MAX_WIDTH;
+      this.minHeightVal = this.currConfig.minHeight || null;
+      this.minWidthVal = this.currConfig.minWidth || null;
     }
 
     if (changes['hideDelay'] || (changes['config'] && this.hideDelay == null && this.currConfig.hideDelay != null)) {

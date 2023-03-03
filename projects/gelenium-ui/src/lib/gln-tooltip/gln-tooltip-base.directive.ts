@@ -9,8 +9,9 @@ import {
   VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform';
-import { ComponentPortal, ComponentType, TemplatePortal } from '@angular/cdk/portal';
+import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { AfterViewInit, Directive, ElementRef, OnDestroy, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnTooltipBaseComponent } from './gln-tooltip-base.component';
@@ -23,10 +24,6 @@ const CSS_CLASS_PANEL = 'gln-tooltip-panel';
 const PASSIVE_OPTIONS = normalizePassiveListenerOptions({ passive: true });
 
 type EventListenerType = readonly [string, EventListenerOrEventListenerObject];
-
-export function GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_CLOSE_FACTORY(overlay: Overlay): () => ScrollStrategy {
-  return () => overlay.scrollStrategies.close();
-}
 
 export const TOOLTIP_POSITION: { [key: string]: string } = {
   'bottom': 'bottom',
@@ -65,6 +62,11 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
   public isNoHoverableVal: boolean | null = null; // Binding attribute "isNoMousable".
   public isNoTouchableVal: boolean | null = null; // Binding attribute "isNoTouchable".
+  public maxHeightVal: number | string | null = null; // Binding "config.maxHeight".
+  public maxWidthVal: number | string | null = null; // Binding "config.maxWidth".
+  public minHeightVal: number | string | null = null; // Binding "config.minHeight".
+  public minWidthVal: number | string | null = null; // Binding "config.minWidth".
+
   // Binding attribute "message"
   public get messageVal(): string | TemplateRef<unknown> | null | undefined {
     return this.innMessageVal;
@@ -93,6 +95,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   protected abstract readonly tooltipComponent: ComponentType<T>;
   protected overlayRef: OverlayRef | null = null;
   protected portal: ComponentPortal<T> | null = null;
+  /** A strategy for handling scrolling when the overlay panel is open. */
   protected scrollStrategy: ScrollStrategy;
   protected tooltipInstance: T | null = null;
 
@@ -103,6 +106,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   private innMessageVal: string | TemplateRef<unknown> | null | undefined = null;
   private isPhaseAfterViewInit: boolean = false;
   private panelClassPosition: string = '';
+  private overlayDetachingSub: Subscription | null = null;
 
   constructor(
     protected document: Document,
@@ -110,12 +114,10 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     protected platform: Platform,
     protected renderer: Renderer2,
     protected viewContainerRef: ViewContainerRef,
-    public hostRef: ElementRef<HTMLElement>
+    public hostRef: ElementRef<HTMLElement>,
+    protected scrollStrategyFactory: (() => ScrollStrategy) | null
   ) {
-    this.scrollStrategy =
-      // this.scrollStrategyFactory != null ? this.scrollStrategyFactory() :
-      // GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_CLOSE_FACTORY(this.overlay);
-      this.overlay.scrollStrategies.block(); // close();
+    this.scrollStrategy = this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : this.overlay.scrollStrategies.noop();
   }
 
   public ngAfterViewInit(): void {
@@ -138,6 +140,9 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     }
     this.portal = null;
 
+    this.overlayDetachingSub?.unsubscribe();
+    this.overlayDetachingSub = null;
+
     this.removeEventListeners(this.hostRef.nativeElement, this.listenersForStart);
     this.listenersForStart.length = 0;
     this.removeEventListeners(this.hostRef.nativeElement, this.listenersForEnd);
@@ -159,35 +164,22 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     if (this.overlayRef == null) {
       this.overlayRef = this.createOverlay();
     }
+    // Remove the reference to the visual component instance. Remove the subscription to the overlay detach event.
     this.overlayDetach();
+    // Added the subscription to the overlay detach event.
+    this.overlayDetachingSub = this.overlayRef.detachments().subscribe(() => this.overlayDetach());
 
     if (this.portal == null) {
-      // Create a portal for tooltips.
       this.portal = new ComponentPortal(this.tooltipComponent, this.viewContainerRef);
     }
     // Attach the tooltip portal to the overlay and get an instance of it.
     this.tooltipInstance = this.overlayRef.attach(this.portal).instance;
 
-    const typeName: string = typeof this.messageVal;
-    const messageStr: string | null = typeName === 'string' ? (this.messageVal as string) : null;
-    const messageTmplRef: TemplateRef<unknown> | null = typeName === 'object' ? (this.messageVal as TemplateRef<unknown>) : null;
+    this.setTooltipMessage(this.tooltipInstance, this.messageVal, this.content);
 
-    if (!!messageStr) {
-      this.setTooltipMessage(this.tooltipInstance, messageStr);
-    } else if (messageTmplRef != null) {
-      this.setTooltipTemplate(this.tooltipInstance, messageTmplRef, this.content);
-    }
     this.setTooltipClass(this.tooltipInstance, this.panelClassVal);
     // Updates the position of the tooltip.
     this.setTooltipPosition(this.positionVal, this.overlayRef);
-
-    const offsetWidth: number = this.hostRef.nativeElement.offsetWidth;
-    const offsetHeight: number = this.hostRef.nativeElement.offsetHeight;
-
-    const instanceRef: ElementRef<HTMLElement> = this.tooltipInstance.getHostRef();
-    const fontSize: number = Number(getComputedStyle(instanceRef.nativeElement).getPropertyValue('font-size').replace('px', ''));
-
-    const bottomTranslateX: number = Math.round(offsetWidth / 2 - fontSize / 2);
 
     return this.executeCallBackOnDelay(delay, () => {
       const tooltipInstance: T | null = this.tooltipInstance;
@@ -199,8 +191,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
         if (this.isNoAnimationVal) {
           HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_NO_ANM, '');
         }
-        HtmlElemUtil.setProperty(instanceRef, '--glnttd--bt-tr-x', bottomTranslateX.toString().concat('px'));
-        // Set isVisibility = true;
+        this.setPropertiesForInstance(this.hostRef, instanceRef);
+        // Set isVisibility = true on the component instance;
         tooltipInstance.show();
       }
     });
@@ -211,6 +203,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     if (this.isDisabledVal || !this.tooltipInstance) {
       return Promise.resolve();
     }
+    console.log(`hide() removeEventListenersForEnd`); // #
     // Remove event listeners for moving the cursor outside the element's border.
     this.removeEventListeners(this.hostRef.nativeElement, this.listenersForEnd);
 
@@ -221,7 +214,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
         // Add the necessary attributes for the tooltip before hiding.
         HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_HIDE, '');
         HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_SHOW, null);
-        // Set isVisibility = false;
+        // Set isVisibility = false on the component instance;
         tooltipInstance.hide();
         if (!this.isNoAnimationVal) {
           // Add an animation completion listener.
@@ -242,13 +235,16 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   public isVisible(): boolean {
     return !!this.tooltipInstance?.isVisible();
   }
-
+  /** When detaching the overlay, remove: the reference to the component instance and the subscription to this event. */
   public overlayDetach(): void {
-    console.log(`overlayDetach();`); // #
     if (this.overlayRef && this.overlayRef.hasAttached()) {
       this.overlayRef.detach();
     }
+    // Remove the reference to the component instance.
     this.tooltipInstance = null;
+    // Remove the subscription to this event.
+    this.overlayDetachingSub?.unsubscribe();
+    this.overlayDetachingSub = null;
   }
 
   // ** Protected methods **
@@ -264,7 +260,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       // Strategy with which to position the overlay.
       positionStrategy,
       // Strategy to be used when handling scroll events while the overlay is open.
-      scrollStrategy: this.overlay.scrollStrategies.close(),
+      // #scrollStrategy: this.overlay.scrollStrategies.close(),
+      scrollStrategy: this.scrollStrategy, // work
       // Custom class to add to the overlay pane.
       panelClass: [CSS_CLASS_PANEL],
       // // Whether the overlay has a backdrop.
@@ -275,14 +272,14 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       // width?: number | string;
       // /** The height of the overlay panel. If a number is provided, pixel units are assumed. */
       // height?: number | string;
-      // /** The min-width of the overlay panel. If a number is provided, pixel units are assumed. */
-      // minWidth?: number | string;
-      // /** The min-height of the overlay panel. If a number is provided, pixel units are assumed. */
-      // minHeight?: number | string;
-      // /** The max-width of the overlay panel. If a number is provided, pixel units are assumed. */
-      // maxWidth?: number | string;
-      // /** The max-height of the overlay panel. If a number is provided, pixel units are assumed. */
-      // maxHeight?: number | string;
+      // The min-width of the overlay panel. If a number is provided, pixel units are assumed.
+      minWidth: this.minWidthVal != null && this.minWidthVal >= 0 ? this.minWidthVal : undefined,
+      // The min-height of the overlay panel. If a number is provided, pixel units are assumed.
+      minHeight: this.minHeightVal != null && this.minHeightVal >= 0 ? this.minHeightVal : undefined,
+      // The max-width of the overlay panel. If a number is provided, pixel units are assumed.
+      maxWidth: this.maxWidthVal != null && this.maxWidthVal >= 0 ? this.maxWidthVal : undefined,
+      // The max-height of the overlay panel. If a number is provided, pixel units are assumed.
+      maxHeight: this.maxHeightVal != null && this.maxHeightVal >= 0 ? this.maxHeightVal : undefined,
     });
     // https://github.com/angular/components/issues/1432  Ability to manually control overlay's z-index.
     // Adding z-index: 'unset' will allow you to have one parent with a single z-index value.
@@ -290,7 +287,6 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     result.hostElement.style.zIndex = 'unset';
     return result;
   }
-
   /** Handling the completion of the tooltip hide animation. */
   protected handlerToAnimationFinish = (): void => {
     const instanceRef: ElementRef<HTMLElement> | undefined = this.tooltipInstance?.getHostRef();
@@ -382,17 +378,19 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
 
   // - - - - Set tooltip properties. - - - -
 
-  protected setTooltipMessage(tooltipInstance: T | null, tooltipMessage: string | null): void {
-    if (tooltipInstance != null) {
-      tooltipInstance.text = tooltipMessage;
-      tooltipInstance.markForCheck();
-    }
-  }
-  protected setTooltipTemplate(instance: T | null, template: TemplateRef<unknown> | null, content: Record<string, unknown> | null): void {
-    if (instance != null) {
-      instance.templateRef = template;
-      instance.content = content;
-      instance.markForCheck();
+  protected setTooltipMessage(inst: T | null, msg: string | TemplateRef<unknown> | null, cont: Record<string, unknown> | null): void {
+    if (inst != null && msg != null) {
+      const typeName: string = typeof msg;
+      const messageStr: string | null = typeName === 'string' ? (msg as string) : null;
+      const messageTmplRef: TemplateRef<unknown> | null = typeName === 'object' ? (msg as TemplateRef<unknown>) : null;
+      if (!!messageStr) {
+        inst.text = messageStr;
+        inst.markForCheck();
+      } else if (messageTmplRef != null) {
+        inst.templateRef = messageTmplRef;
+        inst.content = cont;
+        inst.markForCheck();
+      }
     }
   }
   protected setTooltipClass(tooltipInstance: T | null, tooltipClassName: string | string[]): void {
@@ -418,6 +416,18 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
         overlayRef.addPanelClass((this.panelClassPosition = positionClass));
       }
       positionStrategy.apply();
+    }
+  }
+
+  protected setPropertiesForInstance(hostRef: ElementRef<HTMLElement> | null, instanceRef: ElementRef<HTMLElement> | null): void {
+    if (hostRef != null && instanceRef != null) {
+      const offsetWidth: number = hostRef.nativeElement.offsetWidth;
+      const offsetHeight: number = hostRef.nativeElement.offsetHeight;
+
+      const fontSize: number = Number(getComputedStyle(instanceRef.nativeElement).getPropertyValue('font-size').replace('px', ''));
+      const bottomTranslateX: number = Math.round(offsetWidth / 2 - fontSize / 2);
+
+      HtmlElemUtil.setProperty(instanceRef, '--glnttd--bt-tr-x', bottomTranslateX.toString().concat('px'));
     }
   }
 
