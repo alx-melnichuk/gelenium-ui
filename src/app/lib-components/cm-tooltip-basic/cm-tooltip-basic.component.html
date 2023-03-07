@@ -565,32 +565,94 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
   </div>
 </ng-container>
 
-<br />
-<div style="height: 300px;">_</div>
-<br />
+<section mr-vr>
+  <label>
+    Position
+    <select style="padding: 5px; outline: none;"
+      (change)="position1=getValue($event.target)">
+      <option *ngFor="let item of positionList"
+        [value]="item"
+        [attr.selected]="position1==item ? '' : null">{{ item }}
+      </option>
+    </select>
+  </label>
+</section>
 
-<div class="app-group">
+<div style="overflow: hidden;">
+  <div style="height: 300px; overflow: auto;">
 
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Show tooltip only when it has focus.</em>
-      </small>
+    <!-- <br />
+    <div style="height: 100px;">_</div>
+    <br /> -->
+
+    <div class="app-group"
+      style="justify-content: flex-end;">
+
+      <div class="app-elem">
+        <div>
+          <small>
+            <em>Show tooltip only on click.</em>
+          </small>
+        </div>
+        <div>
+          <button class="ttbs-btn"
+            glnTooltip="Information demo"
+            glnttNoHoverable
+            glnttNoTouchable
+            glnttConfig8="{ maxWidth: 280 }"
+            glnttConfig9="{ maxWidth: 400 }"
+            glnttConfig10="{ maxWidth: 'none' }"
+            #tooltip="glnTooltip"
+            (click)="tooltip.toggle()">
+            Action
+          </button>
+        </div>
+      </div>
+
+      <div class="app-elem">
+        <div>
+          <small>
+            <em>Show tooltip3 only on click.</em>
+          </small>
+        </div>
+        <div>
+          <button class="ttbs-btn"
+            glnTooltip3="Information demo"
+            [glnttPosition]="position1"
+            #tooltip3="glnTooltip3"
+            (click)="tooltip3.toggle()">
+            Action
+          </button>
+        </div>
+      </div>
+
+      <div class="app-elem">
+        <div>
+          <small>
+            <em>Show title.</em>
+          </small>
+        </div>
+        <div>
+          <button class="ttbs-btn"
+            title="Show demo title customer native demo test">
+            Action
+          </button>
+        </div>
+      </div>
+
     </div>
-    <div>
-      <button class="ttbs-btn"
-        glnTooltip="Information demo"
-        glnttNoHoverable
-        glnttNoTouchable
-        glnttConfig8="{ maxWidth: 280 }"
-        glnttConfig9="{ maxWidth: 400 }"
-        glnttConfig10="{ maxWidth: 'none' }"
-        #tooltip="glnTooltip"
-        (click)="tooltip.toggle()">
-        Action
-      </button>
-    </div>
+
+    <br />
+    <div style="height: 300px;">_</div>
+    <br />
+
   </div>
+</div>
+
+<div class="app-group"
+  style="justify-content: flex-end;">
+
+
 
   <!-- // # Add to examples --
   <div class="app-elem">
@@ -738,7 +800,5 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 </div> -->
 
 <br />
-<br />
-<div style="height: 300px;">_</div>
 <br />
 <div style="height: 300px;">_</div>

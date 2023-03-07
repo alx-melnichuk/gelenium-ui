@@ -23,10 +23,10 @@ export class CmTooltipBasicComponent {
   public urlCmTooltip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TOOLTIP');
 
   public isShowBasic = true;
-  public isShowAttributes01 = true; // 02
-  public isShowAttributes02 = true;
-  public isShowAttributes03 = true;
-  public isShowCustomization = true;
+  public isShowAttributes01 = false; // 02
+  public isShowAttributes02 = false;
+  public isShowAttributes03 = false;
+  public isShowCustomization = false;
   public isShowFeature = false;
   // public isShowSize = false; // 03
   // Palette // 04
@@ -49,7 +49,7 @@ export class CmTooltipBasicComponent {
 
   public demo1 = false;
   public demo2 = false;
-  public position1 = 'top';
+  public position1 = 'bottom';
   public positionList: string[] = [
     'bottom',
     'bottom-start',

@@ -1,0 +1,43 @@
+/*# sourceURL=gln-tooltip-block.component.scss */
+
+gln-tooltip3-block {
+  // display: block;
+  border-radius: 4px;
+  background-color: rgb(125, 125, 125);
+  // background-color: rgba(97, 97, 97, 0.92);
+  color: white;
+  // font-family: Roboto,Helvetica Neue,sans-serif;
+  font-size: var(--glntt-font-size, 12px);
+  font-weight: 500;
+  // margin: 2px; // margin: $margin; $margin: 14px;
+  max-width: 270px; // max-width: $max-width; $max-width: 250px;
+  overflow-wrap: break-word;
+  padding-left: 0.5em; // padding-left: $horizontal-padding; $horizontal-padding: 8px;
+  padding-right: 0.5em; // 16px * 0.5 = 8px; padding-right: $horizontal-padding; $horizontal-padding: 8px;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em; // 16px * 0.25 = 4px;
+  position: absolute;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/*
+gln-tooltip-block {
+  border-radius: 4px;
+  background-color: rgba(97,97,97,.6);
+  color: white;
+  margin: 14px; // margin: $margin; $margin: 14px;
+  max-width: 250px; // max-width: $max-width; $max-width: 250px;
+  padding-left: 8px; // padding-left: $horizontal-padding; $horizontal-padding: 8px;
+  padding-right: 8px;  // padding-right: $horizontal-padding; $horizontal-padding: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  // font-family: Roboto,Helvetica Neue,sans-serif;
+  font-size: 0.75em; // 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.gln-tooltip-panel {
+  pointer-events: none !important;
+}
+*/
