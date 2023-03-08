@@ -3,18 +3,21 @@
 gln-layer {
   display: flex;
   position: relative;
-
+  outline: 1px solid blue; // # temp
+  
   --glnly--indent: var(--glntt-indent, 0.875em); // 16px * 0.875 = 14px;
 
-  &[glnly-position*='bottom'] {
-    & > [glnly-indent] {
-      margin-top: var(--glnly--indent);
-    }
+  &[glnly-position*='bottom'] > [glnly-indent] {
+    margin-top: var(--glnly--indent);
   }
-  &[glnly-position*='top'] {
-    & > [glnly-indent] {
-      margin-bottom: var(--glnly--indent);
-    }
+  &[glnly-position*='top'] > [glnly-indent] {
+    margin-bottom: var(--glnly--indent);
+  }
+  &[glnly-position*='left'] > [glnly-indent] {
+    margin-right: var(--glnly--indent);
+  }
+  &[glnly-position*='right'] > [glnly-indent] {
+    margin-left: var(--glnly--indent);
   }
 }
 

@@ -34,8 +34,9 @@ export class GlnLayerHandler<T> {
   private portalBlockOutlet: DomPortalOutlet | null = null;
   private portalLayer: ComponentPortal<GlnLayerComponent> | null = null;
   private portalBlock: ComponentPortal<T> | null = null;
-  private instanceLayerRef: ComponentRef<GlnLayerComponent> | null = null;
-  private instanceBlockRef: ComponentRef<T> | null = null;
+  private layerInstanceRef: ComponentRef<GlnLayerComponent> | null = null;
+  private blockInstanceRef: ComponentRef<T> | null = null;
+  private originalElement: HTMLElement | null = null;
 
   constructor(
     private applicationRef: ApplicationRef,
@@ -50,7 +51,7 @@ export class GlnLayerHandler<T> {
 
   public open(originalElement: HTMLElement | null, position: string | null): ComponentRef<T> | null {
     if (!!originalElement && !!originalElement.parentElement) {
-      const offsetWidth: number = originalElement.offsetWidth;
+      this.originalElement = originalElement;
 
       this.portalLayerOutlet = new DomPortalOutlet(
         originalElement.parentElement,
@@ -61,24 +62,27 @@ export class GlnLayerHandler<T> {
 
       this.portalLayer = new ComponentPortal(GlnLayerComponent, this.viewContainerRef, this.injector);
 
-      this.instanceLayerRef = this.portalLayerOutlet.attach(this.portalLayer);
+      this.layerInstanceRef = this.portalLayerOutlet.attach(this.portalLayer);
 
-      const elementLayerRef: ElementRef<any> = this.instanceLayerRef.location;
-      HtmlElemUtil.setProperty(elementLayerRef, 'width', offsetWidth.toString().concat('px'));
+      const layerElementRef: ElementRef<any> = this.layerInstanceRef.location;
+      // HtmlElemUtil.setProperty(layerElementRef, 'width', offsetWidth.toString().concat('px'));
 
-      const elementLayer: Element = this.instanceLayerRef.location.nativeElement;
+      const layerElement: Element = this.layerInstanceRef.location.nativeElement;
 
       // Create a portalHost from a DOM element.
-      this.portalBlockOutlet = new DomPortalOutlet(elementLayer, this.componentFactoryResolver, this.applicationRef, this.injector);
+      this.portalBlockOutlet = new DomPortalOutlet(layerElement, this.componentFactoryResolver, this.applicationRef, this.injector);
 
       console.log(`GlnLayerHandler.open() portalBlockOutlet.attach();`); // #
       this.portalBlock = new ComponentPortal(this.componentType, this.viewContainerRef, this.injector);
 
-      this.instanceBlockRef = this.portalBlockOutlet.attach(this.portalBlock);
+      this.blockInstanceRef = this.portalBlockOutlet.attach(this.portalBlock);
+
+      const blockElementRef: ElementRef<any> = this.blockInstanceRef.location;
+      HtmlElemUtil.setAttr(this.renderer, blockElementRef, 'glnly-indent', '');
 
       this.setLayerPosition(position);
     }
-    return this.instanceBlockRef;
+    return this.blockInstanceRef;
   }
 
   public close(): void {
@@ -90,7 +94,7 @@ export class GlnLayerHandler<T> {
       this.portalLayerOutlet.detach();
     }
     // Remove the reference to the component instance.
-    this.instanceLayerRef = null;
+    this.layerInstanceRef = null;
   }
 
   /** Get the correct "position" value. */
@@ -99,66 +103,74 @@ export class GlnLayerHandler<T> {
   }
 
   public setLayerPosition(position: string | null): void {
-    if (!!this.instanceLayerRef && !!this.instanceBlockRef) {
-      const elementLayerRef: ElementRef<HTMLElement> = this.instanceLayerRef.location;
-      const validPosition: string = this.getValidPosition(position);
+    const layerElementRef: ElementRef<HTMLElement> | null = this.layerInstanceRef?.location || null;
+    if (!!this.originalElement && !!layerElementRef) {
+      const positionVld: string = this.getValidPosition(position);
 
-      HtmlElemUtil.setAttr(this.renderer, elementLayerRef, 'glnly-position', validPosition);
+      const originalHeight: number = this.originalElement.offsetHeight;
+      const originalWidth: number = this.originalElement.offsetWidth;
 
-      const layerJustifyContent: string = this.getLayerJustifyContent(validPosition);
-      HtmlElemUtil.setProperty(elementLayerRef, 'justify-content', layerJustifyContent);
+      const isLayerRight: boolean = this.isLayerRightOfOriginalElement(this.originalElement, layerElementRef.nativeElement);
 
-      const elementBlockRef: ElementRef<any> = this.instanceBlockRef.location;
+      const layerProperties: Record<string, string> = this.getLayerProperties(positionVld, isLayerRight, originalHeight, originalWidth);
 
-      const blockMargin: string = this.getBlockMargin(validPosition);
-      HtmlElemUtil.setProperty(elementBlockRef, blockMargin, 'var(--glnly--indent)');
+      const keyList: string[] = Object.keys(layerProperties);
+      for (let idx = 0; idx < keyList.length; idx++) {
+        HtmlElemUtil.setProperty(layerElementRef, keyList[idx], layerProperties[keyList[idx]]);
+      }
+
+      HtmlElemUtil.setAttr(this.renderer, layerElementRef, 'glnly-position', positionVld);
     }
   }
 
-  private getLayerJustifyContent(position: string): string {
-    let result: string = '';
-    if (position === 'bottom') {
-      result = 'center';
-    } else if (position === 'bottom-start') {
-      result = ' flex-start';
-    } else if (position === 'bottom-end') {
-      result = 'flex-end';
-    } else if (position === 'top') {
-      result = 'center';
-    } else if (position === 'top-start') {
-      result = ' flex-start';
-    } else if (position === 'top-end') {
-      result = 'flex-end';
-    } else if (position === 'right') {
-      result = '';
-    } else if (position === 'right-start') {
-      result = '';
-    } else if (position === 'right-end') {
-      result = '';
-    } else if (position === '') {
-      result = '';
+  private isLayerRightOfOriginalElement(originalElement: HTMLElement | null, layerElement: HTMLElement | null): boolean {
+    let result: boolean = false;
+    if (!!originalElement && !!layerElement) {
+      const originalRect: DOMRect = originalElement.getBoundingClientRect();
+      const layerRect: DOMRect = layerElement.getBoundingClientRect();
+      result = originalRect.left < layerRect.left && originalRect.right === layerRect.left;
     }
-    // '': 'right',
-    // : 'right-start',
-    // : 'right-end',
-    // 'left': 'left',
-    // 'left-start': 'left-start',
-    // 'left-end': 'left-end',
-
     return result;
   }
-  private getBlockMargin(position: string): string {
-    let result: string = '';
-    if (position.startsWith('bottom')) {
-      result = 'margin-top';
-    } else if (position.startsWith('top')) {
-      result = 'margin-bottom';
-    } else if (position.startsWith('right')) {
-      result = 'margin-left';
-    } else if (position.startsWith('left')) {
-      result = 'margin-right';
-    }
+  private getLayerProperties(position: string | null, isLayerRight: boolean, orgHeight: number, orgWidth: number): Record<string, string> {
+    const layerProperties: Record<string, string> = {};
+    if (!!position) {
+      layerProperties['height'] = '0px';
+      layerProperties['width'] = '0px';
 
-    return result;
+      const deltaTop: number = !isLayerRight ? 0 : orgHeight;
+      const deltaRight: number = !isLayerRight ? 0 : orgWidth;
+
+      const justify: string = position.endsWith('-start') ? 'flex-start' : position.endsWith('-end') ? 'flex-end' : 'center';
+      layerProperties['justify-content'] = justify;
+
+      const positionBottom: boolean = position.startsWith('bottom');
+      const positionLeft: boolean = position.startsWith('left');
+
+      if (positionBottom || position.startsWith('top')) {
+        layerProperties['align-items'] = positionBottom ? 'flex-start' : 'flex-end';
+        layerProperties['top'] = deltaTop - (positionBottom ? 0 : orgHeight) + 'px';
+        if ('flex-start' === justify) {
+          layerProperties['right'] = deltaRight + 'px';
+        } else if ('flex-end' === justify) {
+          layerProperties['right'] = deltaRight - orgWidth + 'px';
+        } else if ('center' === justify) {
+          layerProperties['right'] = deltaRight - Math.round((orgWidth / 2) * 100) / 100 + 'px';
+        }
+      } else if (positionLeft || position.startsWith('right')) {
+        layerProperties['flex-direction'] = 'column'; // Displays the block on the left.
+        layerProperties['align-items'] = positionLeft ? 'flex-end' : 'flex-start';
+
+        layerProperties['right'] = deltaRight - (positionLeft ? 0 : orgWidth) + 'px';
+        if ('flex-start' === justify) {
+          layerProperties['top'] = deltaTop - orgHeight + 'px';
+        } else if ('flex-end' === justify) {
+          layerProperties['top'] = deltaTop + 'px';
+        } else if ('center' === justify) {
+          layerProperties['top'] = deltaTop - Math.round((orgHeight / 2) * 100) / 100 + 'px';
+        }
+      }
+    }
+    return layerProperties;
   }
 }

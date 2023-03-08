@@ -578,6 +578,46 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
   </label>
 </section>
 
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show tooltip3 only on click.</em>
+      </small>
+    </div>
+    <div style="outline: 1px solid orange;">
+      <button class="ttbs-btn"
+        glnTooltip3="Information demo"
+        [glnttPosition]="position1"
+        #tooltip3a="glnTooltip3"
+        (click)="tooltip3a.toggle()">
+        Action
+      </button>
+    </div>
+  </div>
+
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show tooltip3 only on click. display: flex;</em>
+      </small>
+    </div>
+    <div style="outline: 1px solid orange; display: flex;">
+      <button class="ttbs-btn"
+        glnTooltip3="Information demo"
+        [glnttPosition]="position1"
+        #tooltip3b="glnTooltip3"
+        (click)="tooltip3b.toggle()">
+        Action
+      </button>
+    </div>
+  </div>
+
+</div>
+
+
 <div style="overflow: hidden;">
   <div style="height: 300px; overflow: auto;">
 
@@ -609,7 +649,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
         </div>
       </div>
 
-      <div class="app-elem">
+      <!-- <div class="app-elem">
         <div>
           <small>
             <em>Show tooltip3 only on click.</em>
@@ -624,7 +664,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
             Action
           </button>
         </div>
-      </div>
+      </div> -->
 
       <div class="app-elem">
         <div>

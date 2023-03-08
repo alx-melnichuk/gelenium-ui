@@ -57,9 +57,8 @@ export class GlnTooltip3Directive implements OnChanges, OnInit {
   private portalLayerOutlet: DomPortalOutlet | null = null;
   private portalLayer: ComponentPortal<GlnLayerComponent> | null = null;
   private portalBlock: ComponentPortal<GlnTooltip3BlockComponent> | null = null;
-  private _windowRef: ComponentRef<GlnTooltip3BlockComponent> | null = null;
-  private instanceLayerRef: ComponentRef<GlnLayerComponent> | null = null;
-  private instanceBlockRef: ComponentRef<GlnTooltip3BlockComponent> | null = null;
+  private layerInstanceRef: ComponentRef<GlnLayerComponent> | null = null;
+  private blockInstanceRef: ComponentRef<GlnTooltip3BlockComponent> | null = null;
 
   constructor(
     private applicationRef: ApplicationRef,
@@ -96,7 +95,7 @@ export class GlnTooltip3Directive implements OnChanges, OnInit {
   public show(): void {
     console.log(`show();`);
     const originalElement: HTMLElement | null = this.hostRef.nativeElement;
-    if (this.isDisabledVal || !this.message || !!this.instanceBlockRef || !originalElement) {
+    if (this.isDisabledVal || !this.message || !!this.blockInstanceRef || !originalElement) {
       return;
     }
 
@@ -125,13 +124,13 @@ export class GlnTooltip3Directive implements OnChanges, OnInit {
     this.instanceBlockRef = this.portalBlockOutlet.attach(this.portalBlock);
     */
 
-    this.instanceBlockRef = this.layerHandler.open(originalElement, this.positionVal);
-    if (!!this.instanceBlockRef) {
-      this.instanceBlockRef.setInput('text', this.message);
+    this.blockInstanceRef = this.layerHandler.open(originalElement, this.positionVal);
+    if (!!this.blockInstanceRef) {
+      this.blockInstanceRef.setInput('text', this.message);
 
-      this.instanceBlockRef.changeDetectorRef.detectChanges();
+      this.blockInstanceRef.changeDetectorRef.detectChanges();
 
-      this.instanceBlockRef.changeDetectorRef.markForCheck();
+      this.blockInstanceRef.changeDetectorRef.markForCheck();
     }
     /*
     // Locate the component factory for the HeaderComponent
@@ -150,12 +149,12 @@ export class GlnTooltip3Directive implements OnChanges, OnInit {
 
   public hide(): void {
     console.log(`this.hide();#1`); // #
-    if (this.isDisabledVal || !this.instanceBlockRef) {
+    if (this.isDisabledVal || !this.blockInstanceRef) {
       return;
     }
     this.layerHandler.close();
     // Remove the reference to the component instance.
-    this.instanceBlockRef = null;
+    this.blockInstanceRef = null;
   }
 
   /** Shows/hides the tooltip. */
@@ -164,7 +163,7 @@ export class GlnTooltip3Directive implements OnChanges, OnInit {
   }
   /** If the tooltip is currently visible, returns true. */
   public isVisible(): boolean {
-    return !!this.instanceBlockRef;
+    return !!this.blockInstanceRef;
   }
 }
 /*
