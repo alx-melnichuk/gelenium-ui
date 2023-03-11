@@ -41,7 +41,7 @@ export class CmTooltipBasicComponent {
   public hideDelay02a: number = 600;
 
   // Page: "Attributes" 03
-  public isDisabled03a: boolean = true;
+  public isDisabled02e: boolean = true;
 
   // Page: "Feature" 07
 
