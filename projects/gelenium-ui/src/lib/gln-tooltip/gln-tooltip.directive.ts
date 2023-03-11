@@ -43,6 +43,8 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public isDisabled: string | boolean | null | undefined;
   @Input('glnttNoAnimation')
   public isNoAnimation: string | boolean | null | undefined;
+  @Input('glnttNoHideOnScroll')
+  public isNoHideOnScroll: string | boolean | null | undefined;
   @Input('glnttNoHoverable')
   public isNoHoverable: string | boolean | null | undefined;
   @Input('glnttNoTouchable')
@@ -60,6 +62,7 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public override hideDelayVal: number | null = null; // Binding attribute "hideDelay".
   public override isArrowVal: boolean | null = null; // Binding attribute "isArrow".
   public override isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
+  public override isNoHideOnScrollVal: boolean | null = null; // Binding attribute "isNoHideOnScroll".
   public override isNoHoverableVal: boolean | null = null; // Binding attribute "isNoHoverable".
   public override isNoTouchableVal: boolean | null = null; // Binding attribute "isNoTouchable".
   public override maxHeightVal: number | string | null = null; // Binding attribute "maxHeight".
@@ -69,7 +72,7 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public override panelClassVal: string[] = []; // Binding attribute "panelClass"
   public override showDelayVal: number | null = null; // Binding attribute "showDelay".
 
-  protected readonly tooltipComponent = GlnTooltipComponent;
+  protected readonly tooltipCompType = GlnTooltipComponent;
 
   constructor(
     @Inject(DOCUMENT) _document: Document,
@@ -106,6 +109,9 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
       this.isNoAnimationVal = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
     }
+    if (changes['isNoHideOnScroll'] || (changes['config'] && this.isNoHideOnScroll == null && this.currConfig.isNoHideOnScroll != null)) {
+      this.isNoHideOnScrollVal = BooleanUtil.init(this.isNoHideOnScroll) ?? !!this.currConfig.isNoHideOnScroll;
+    }
     if (changes['isNoHoverable'] || (changes['config'] && this.isNoHoverable == null && this.currConfig.isNoHoverable != null)) {
       this.isNoHoverableVal = BooleanUtil.init(this.isNoHoverable) ?? !!this.currConfig.isNoHoverable;
     }
@@ -129,17 +135,20 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   }
 
   public ngOnInit(): void {
-    if (this.hideDelay == null) {
+    if (this.hideDelayVal == null) {
       const hideDelayStr: string = (this.currConfig.hideDelay || '').toString();
       this.hideDelayVal = this.converInt(hideDelayStr, 0);
     }
     if (this.isNoAnimationVal == null) {
       this.isNoAnimationVal = !!this.currConfig.isNoAnimation;
     }
-    if (this.isNoHoverable == null) {
+    if (this.isNoHideOnScrollVal == null) {
+      this.isNoHideOnScrollVal = !!this.currConfig.isNoHideOnScroll;
+    }
+    if (this.isNoHoverableVal == null) {
       this.isNoHoverableVal = !!this.currConfig.isNoHoverable;
     }
-    if (this.isNoTouchable == null) {
+    if (this.isNoTouchableVal == null) {
       this.isNoTouchableVal = !!this.currConfig.isNoTouchable;
     }
     if (this.panelClassVal == null) {
@@ -149,7 +158,7 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     if (this.positionVal === null) {
       this.positionVal = this.currConfig.position || null;
     }
-    if (this.showDelay == null) {
+    if (this.showDelayVal == null) {
       const showDelayStr: string = (this.currConfig.showDelay || '').toString();
       this.showDelayVal = this.converInt(showDelayStr, 0);
     }

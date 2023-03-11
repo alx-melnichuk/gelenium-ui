@@ -1,61 +1,32 @@
-import { ChangeDetectorRef, Directive, ElementRef, TemplateRef } from '@angular/core';
+import { Directive, TemplateRef } from '@angular/core';
 
 @Directive()
 export abstract class GlnTooltipBaseComponent {
   public content: Record<string, unknown> | null = null;
-  public className: string | string[] = '';
   public isVisibility: boolean | null = null;
   public isArrow: boolean | null = null;
   public text: string | null | undefined = null;
   public templateRef: TemplateRef<unknown> | null = null;
 
-  constructor(protected hostRef: ElementRef<HTMLElement>, protected changeDetectorRef: ChangeDetectorRef) {}
+  constructor() {}
 
   // ** Public methods **
 
   public show(): void {
     this.isVisibility = true;
-    this.changeDetectorRef.markForCheck();
   }
 
   public hide(): void {
     this.isVisibility = false;
-    this.changeDetectorRef.markForCheck();
   }
 
   public isVisible(): boolean {
     return !!this.isVisibility;
   }
 
-  public getHostRef(): ElementRef<HTMLElement> {
-    return this.hostRef;
-  }
-  /** Used to draw the original text before positioning the tooltip.
-   * This solves the issue in components with ChangeDetectionStrategy.OnPush. */
-  public markForCheck(): void {
-    this.changeDetectorRef.markForCheck();
-  }
-
   public setArrow(isArrow: boolean | null): void {
     if (this.isArrow !== isArrow) {
       this.isArrow !== isArrow;
-      this.changeDetectorRef.markForCheck();
     }
-  }
-
-  public getListClassNames(className: string | string[]): string {
-    const buffer: string[] = [];
-    if (typeof className === 'string') {
-      buffer.push(className);
-    } else if (Array.isArray(className)) {
-      buffer.push(...className);
-    }
-    const result: string[] = [];
-    for (let idx = 0; idx < buffer.length; idx++) {
-      if (buffer[idx]) {
-        result.push(buffer[idx]);
-      }
-    }
-    return result.join(' ');
   }
 }

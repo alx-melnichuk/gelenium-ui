@@ -1,6 +1,7 @@
 export interface GlnTooltipConfig {
   hideDelay?: number | undefined;
   isNoAnimation?: boolean | undefined;
+  isNoHideOnScroll?: boolean | undefined;
   isNoHoverable?: boolean | undefined;
   isNoTouchable?: boolean | undefined;
   maxHeight?: number | string | undefined;

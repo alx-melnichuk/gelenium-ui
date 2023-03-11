@@ -1,13 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  HostBinding,
-  Input,
-  TemplateRef,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 
 import { GlnTooltipBaseComponent } from './gln-tooltip-base.component';
 
@@ -23,8 +14,6 @@ export class GlnTooltipComponent extends GlnTooltipBaseComponent {
   @Input()
   public override content: Record<string, unknown> | null = null;
   @Input()
-  public override className: string | string[] = '';
-  @Input()
   public override text: string | null | undefined = null;
   @Input()
   public override templateRef: TemplateRef<unknown> | null = null;
@@ -33,15 +22,10 @@ export class GlnTooltipComponent extends GlnTooltipBaseComponent {
   public getClassTooltip(): boolean {
     return true;
   }
-  @HostBinding('attr.class')
-  public get classList(): string {
-    return this.getListClassNames(this.className);
-  }
 
   public override isArrow: boolean | null = null;
 
-  constructor(hostRef: ElementRef<HTMLElement>, changeDetectorRef: ChangeDetectorRef) {
-    super(hostRef, changeDetectorRef);
-    console.log(`GlnTooltipCmp();`); // #
+  constructor() {
+    super();
   }
 }
