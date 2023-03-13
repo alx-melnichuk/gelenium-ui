@@ -37,6 +37,8 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public config: GlnTooltipConfig | null | undefined;
   @Input('glnttContent')
   public override content: Record<string, unknown> | null = null;
+  @Input('glnttClasses')
+  public classes: string | string[] = '';
   @Input('glnttHideDelay')
   public hideDelay: number | string | null | undefined;
   @Input('glnttDisabled')
@@ -51,14 +53,13 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public isNoTouchable: string | boolean | null | undefined;
   @Input('glnTooltip')
   public message: string | TemplateRef<unknown> | null | undefined;
-  @Input('glnttPanelClass')
-  public panelClass: string | string[] = '';
   @Input('glnttPosition')
   public position: string | null | undefined; // 'bottom[-start,-end]','top[-start,-end]','right[-start,-end]','left[-start,-end]';
   @Input('glnttShowDelay')
   public showDelay: number | string | null | undefined;
 
   public currConfig: GlnTooltipConfig;
+  public override classesVal: string[] = []; // Binding attribute "classes"
   public override hideDelayVal: number | null = null; // Binding attribute "hideDelay".
   public override isArrowVal: boolean | null = null; // Binding attribute "isArrow".
   public override isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
@@ -69,7 +70,9 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public override maxWidthVal: number | string | null = null; // Binding attribute "maxWidth".
   public override minHeightVal: number | string | null = null; // Binding attribute "minHeight".
   public override minWidthVal: number | string | null = null; // Binding attribute "minWidth".
-  public override panelClassVal: string[] = []; // Binding attribute "panelClass"
+  public override messageVal: string | TemplateRef<unknown> | null | undefined = null; // Binding attribute "message".
+  public override overlayClassesVal: string[] = [];
+  public override positionVal: string | null = null; // Binding attribute "position"
   public override showDelayVal: number | null = null; // Binding attribute "showDelay".
 
   protected readonly tooltipCompType = GlnTooltipComponent;
@@ -99,6 +102,10 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
       this.minWidthVal = this.currConfig.minWidth || null;
     }
 
+    if (changes['classes'] || (changes['config'] && this.classes == null && this.currConfig.classes != null)) {
+      const classes: string | string[] = this.classes || this.currConfig.classes || [];
+      this.classesVal = Array.isArray(classes) ? classes : [classes];
+    }
     if (changes['hideDelay'] || (changes['config'] && this.hideDelay == null && this.currConfig.hideDelay != null)) {
       const hideDelayStr: string = (this.hideDelay || this.currConfig.hideDelay || '').toString();
       this.hideDelayVal = this.converInt(hideDelayStr, 0);
@@ -121,10 +128,6 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     if (changes['message']) {
       this.messageVal = this.message || null;
     }
-    if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
-      const panelClass: string | string[] = this.panelClass || this.currConfig.panelClass || [];
-      this.panelClassVal = Array.isArray(panelClass) ? panelClass : [panelClass];
-    }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       this.positionVal = this.position || this.currConfig.position || null;
     }
@@ -135,6 +138,10 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   }
 
   public ngOnInit(): void {
+    if (this.classesVal.length === 0) {
+      const classes: string | string[] = this.currConfig.classes || [];
+      this.classesVal = Array.isArray(classes) ? classes : [classes];
+    }
     if (this.hideDelayVal == null) {
       const hideDelayStr: string = (this.currConfig.hideDelay || '').toString();
       this.hideDelayVal = this.converInt(hideDelayStr, 0);
@@ -151,9 +158,9 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     if (this.isNoTouchableVal == null) {
       this.isNoTouchableVal = !!this.currConfig.isNoTouchable;
     }
-    if (this.panelClassVal == null) {
-      const panelClass: string | string[] = this.currConfig.panelClass || [];
-      this.panelClassVal = Array.isArray(panelClass) ? panelClass : [panelClass];
+    if (this.overlayClassesVal.length === 0) {
+      const overlayClasses: string | string[] = this.currConfig.overlayClasses || [];
+      this.overlayClassesVal = Array.isArray(overlayClasses) ? overlayClasses : [overlayClasses];
     }
     if (this.positionVal === null) {
       this.positionVal = this.currConfig.position || null;

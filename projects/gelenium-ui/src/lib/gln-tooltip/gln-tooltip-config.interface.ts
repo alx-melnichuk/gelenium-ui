@@ -1,4 +1,5 @@
 export interface GlnTooltipConfig {
+  classes?: string | string[] | undefined;
   hideDelay?: number | undefined;
   isNoAnimation?: boolean | undefined;
   isNoHideOnScroll?: boolean | undefined;
@@ -8,7 +9,7 @@ export interface GlnTooltipConfig {
   maxWidth?: number | string | undefined;
   minHeight?: number | string | undefined;
   minWidth?: number | string | undefined;
-  panelClass?: string | string[] | undefined;
+  overlayClasses?: string | string[] | undefined;
   position?: string | undefined; // 'bottom[-start,-end]','top[-start,-end]','right[-start,-end]','left[-start,-end]';
   showDelay?: number | undefined;
   // backdropClass?: string | undefined; // default 'cdk-overlay-transparent-backdrop'
