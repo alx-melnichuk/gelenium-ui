@@ -268,6 +268,23 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       </div>
     </div>
 
+    <!-- <div class="app-elem">
+      <div>
+        <small><em>Show tooltip.</em></small>
+      </div>
+      <div>
+        <button class="tta2-btn"
+          [glnttShowDelay]="showDelay02a"
+          [glnttHideDelay]="hideDelay02a"
+          glnTooltip="Information"
+          glnttNoHoverable
+          glnttNoTouchable
+          #tooltip2="glnTooltip"
+          (click)="tooltip2.toggle()">
+          Action
+        </button>
+      </div>
+    </div> -->
     <div class="app-elem">
       <div>
         <small><em>Show tooltip.</em></small>
@@ -276,7 +293,11 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
         <button class="tta2-btn"
           [glnttShowDelay]="showDelay02a"
           [glnttHideDelay]="hideDelay02a"
-          glnTooltip="Information">
+          glnTooltip="Information"
+          glnttNoHoverable9
+          glnttNoTouchable9
+          #tooltip2="glnTooltip"
+          click9="tooltip2.toggle()">
           Action
         </button>
       </div>
@@ -284,7 +305,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 
   </div>
 
-  <div class="app-group">
+  <!-- <div class="app-group">
 
     <div class="app-elem">
       <div>
@@ -316,7 +337,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       </div>
     </div>
 
-  </div>
+  </div> -->
 
 </ng-container>
 
@@ -340,7 +361,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       "glnttNoAnimation" - a sign that the animation is disabled (glnttNoAnimation);
     </li>
     <li>
-      "glnttPanelClass" - set the classes to be applied to the overlay panel;
+      "glnttClasses" - set the classes to be applied to the overlay panel;
     </li>
   </ul>
 </section>
@@ -412,12 +433,12 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: glnttPanelClass.</em>
+          <em>Attribute: glnttClasses.</em>
         </small>
       </div>
       <div>
         <button class="tta3-btn"
-          glnttPanelClass="tta3-panel-demo"
+          glnttClasses="tta3-panel-demo"
           glnTooltip="Information">
           Action
         </button>
@@ -630,7 +651,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
             glnTooltip="Information demo"
             glnttNoHoverable
             glnttNoTouchable
-            glnttPanelClass="tta3-panel-demo"
+            glnttClasses="tta3-panel-demo"
             #tooltip07a="glnTooltip"
             (click)="tooltip07a.toggle()">
             Action2
@@ -683,7 +704,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
         [glnTooltip]="demo02"
         glnttNoHoverable
         glnttNoTouchable
-        glnttPanelClass="tta-panel-demo"
+        glnttClasses="tta-panel-demo"
         glnttDisabled9="!overflowChild.value"
         [glnttDisabled]="!overflowChild.getChildHasOverflow()"
         #tooltip="glnTooltip"
@@ -785,7 +806,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       glnTooltip="Info the action"
       glnttShowDelay9="500"
       glnttHideDelay9="500"
-      glnttPanelClass9="tta-panel-demo"
+      glnttClasses9="tta-panel-demo"
       glnttPosition9="top-start"
       [glnttPosition]="position1"
       glnttNoHoverable
@@ -806,7 +827,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       glnTooltip="Info the action 1 demo 1"
       glnttShowDelay9="500"
       glnttHideDelay9="500"
-      glnttPanelClass="tta-panel-demo"
+      glnttClasses="tta-panel-demo"
       glnttPosition="top-start">
       Action1
     </button>

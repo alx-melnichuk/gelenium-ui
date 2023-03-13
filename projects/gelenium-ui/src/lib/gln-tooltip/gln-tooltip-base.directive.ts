@@ -38,10 +38,12 @@ export const TOOLTIP_POSITION: { [key: string]: string } = {
   'left-start': 'left-start',
   'left-end': 'left-end',
 };
+let qidx = 1;
 
 @Directive()
 export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent> implements AfterViewInit, OnDestroy {
   public content: Record<string, unknown> | null = null;
+  public classesVal: string[] = []; // Binding attribute "classes"
   public hideDelayVal: number | null = null; // Binding attribute "hideDelay".
   public isArrowVal: boolean | null = null; // Binding attribute "isArrow".
   // Binding attribute "isDisabled".
@@ -65,30 +67,9 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   public maxWidthVal: number | string | null = null; // Binding "config.maxWidth".
   public minHeightVal: number | string | null = null; // Binding "config.minHeight".
   public minWidthVal: number | string | null = null; // Binding "config.minWidth".
-
-  // Binding attribute "message"
-  public get messageVal(): string | TemplateRef<unknown> | null | undefined {
-    return this.innMessageVal;
-  }
-  public set messageVal(value: string | TemplateRef<unknown> | null | undefined) {
-    if (value !== this.innMessageVal) {
-      this.innMessageVal = value;
-      if (this.isPhaseAfterViewInit) {
-        this.hide(0, { noAnimation: true });
-      }
-    }
-  }
-  public panelClassVal: string[] = []; // Binding attribute "panelClass"
-  // Binding attribute "position"
-  public get positionVal(): string | null {
-    return this.innPositionVal;
-  }
-  public set positionVal(value: string | null) {
-    if (value !== this.innPositionVal) {
-      this.innPositionVal = value;
-      this.setTooltipPosition(this.innPositionVal, this.overlayRef);
-    }
-  }
+  public messageVal: string | TemplateRef<unknown> | null | undefined = null; // Binding attribute "message".
+  public overlayClassesVal: string[] = [];
+  public positionVal: string | null = null; // Binding attribute "position"
   public showDelayVal: number | null = null; // Binding attribute "showDelay".
 
   protected abstract readonly tooltipCompType: ComponentType<T>;
@@ -105,10 +86,10 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   // Event listeners for the parent element's scroll (to complete the displaying of the additional element).
   private readonly listenersForScrollEnd: EventListenerType[] = [];
   private innIsDisabledVal: boolean | null = null;
-  private innPositionVal: string | null = null;
-  private innMessageVal: string | TemplateRef<unknown> | null | undefined = null;
   private isPhaseAfterViewInit: boolean = false;
-  private positionClass: string = '';
+  private positionClassCurr: string = '';
+  private timeoutOnOpening: number | undefined = undefined;
+  private timeoutOnClosing: number | undefined = undefined;
 
   constructor(
     protected document: Document,
@@ -140,23 +121,113 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     // clearTimeout(this._touchstartTimeout);
     this.removeAnimationEventListener(this.tooltipInstRef?.location || null);
 
-    this.overlayDetach();
-    // this.tooltipInstRef = null;
-    this.portal = null;
-
-    if (this.overlayRef != null) {
+    if (this.overlayRef) {
       this.overlayRef.dispose();
-      this.overlayRef = null;
+      this.tooltipInstRef = null;
     }
+
+    this.portal = null;
   }
 
   // ** Public methods **
 
   /** Show tooltip after delay in ms. */
-  public show(delay: number = this.showDelayVal || 1): Promise<void> {
+  public show(delay: number = this.showDelayVal || 0): Promise<void> {
+    const qid = qidx++;
+    console.log(`#show2(qid=${qid}); start timeoutOpen ${!this.timeoutOnOpening ? '==' : '!='}null`); // #
+    console.log(`#show2(qid=${qid});       timeoutClose${!this.timeoutOnClosing ? '==' : '!='}null`); // #
+
+    if (this.isDisabledVal || !this.isPhaseAfterViewInit) {
+      return Promise.resolve();
+    }
+    if (!!this.timeoutOnClosing) {
+      console.log(`#show2(${qid}); 12 .clearTimeout(this.timeoutOnClosing);`); // #
+      window.clearTimeout(this.timeoutOnClosing);
+      this.timeoutOnClosing = undefined;
+      this.overlayDetach();
+    }
+    if (!!this.tooltipInstRef) {
+      console.log(`#show2(${qid}); 13 this.tooltipInstRef!=null`); // #
+    }
+    if (!!this.timeoutOnOpening) {
+      console.log(`#show2(${qid}); 15 !!this.timeoutOnOpening: true`); // #
+    }
+
+    if (!this.messageVal || !!this.tooltipInstRef || !!this.timeoutOnOpening) {
+      console.log(
+        `#show2(${qid}); return tooltipInstRef${this.tooltipInstRef ? '==' : '!='}null timeoutOnOpening:${this.timeoutOnOpening}`
+      ); // #
+      return Promise.resolve();
+    }
+
+    // Adding event listeners to finish displaying the additional element.
+    EventListenerUtil.addListeners(this.listenersForEnd);
+    if (!this.isNoHideOnScrollVal) {
+      Promise.resolve().then(() => {
+        // Get a list of parents on which the scroll is located (if there are none, then the document).
+        const scrollParentList: Element[] = ParentScrollUtil.getParentListWithScroll(this.hostRef.nativeElement.parentElement);
+        for (let idx = 0; idx < scrollParentList.length; idx++) {
+          this.listenersForScrollEnd.push([scrollParentList[idx], 'scroll', () => this.hide(0, { noAnimation: true })]);
+        }
+        // Adding event listeners for the parent element's scroll (to complete the displaying of the additional element).
+        EventListenerUtil.addListeners(this.listenersForScrollEnd);
+      });
+    }
+
+    if (this.overlayRef == null) {
+      console.log(`#show2(${qid}); 22`); // #
+      this.overlayRef = this.overlay.create(this.createOverlayConfig());
+      // https://github.com/angular/components/issues/1432  Ability to manually control overlay's z-index.
+      // Adding z-index: 'unset' will allow you to have one parent with a single z-index value.
+      // This will correctly use the z-index for child elements.
+      this.overlayRef.hostElement.style.zIndex = 'unset';
+    }
+    if (this.portal == null) {
+      console.log(`#show2(${qid}); 23`); // #
+      this.portal = new ComponentPortal(this.tooltipCompType, this.viewContainerRef);
+    }
+
+    return new Promise<void>((resolve: () => void, reject: () => void) => {
+      console.log(`#show2(${qid}); 31`); // #
+      this.timeoutOnOpening = window.setTimeout(
+        () => {
+          console.log(`#show2(${qid}); 32`); // #
+          this.timeoutOnOpening = undefined;
+
+          console.log(`#show2(${qid}); 33 this.tooltipInstRef${!!this.tooltipInstRef ? '!=' : '=='}null;`); // #
+          // Attach the tooltip portal to the overlay.
+          this.tooltipInstRef = this.overlayRef?.attach(this.portal);
+          console.log(`#show2(${qid}); 36 tooltipInstRef = overlayRef.attach(this.portal);`); // #
+          if (!!this.tooltipInstRef) {
+            // Tooltip updates.
+            this.setTooltipMessage(this.tooltipInstRef, this.messageVal, this.content);
+            this.setTooltipClasses(this.classesVal, this.renderer, this.tooltipInstRef);
+            this.setTooltipPosition(this.positionVal, this.overlayRef, this.renderer);
+
+            const instanceRef: ElementRef<HTMLElement> = this.tooltipInstRef.location;
+            if (this.isNoAnimationVal) {
+              HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_NO_ANM, '');
+            }
+
+            // Add the necessary attributes for the tooltip before displaying.
+            HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_SHOW, '');
+            this.setPropertiesForInstance(this.hostRef, instanceRef);
+            // Set isVisibility = true on the component instance;
+            this.tooltipInstRef.instance.show();
+            this.tooltipInstRef.changeDetectorRef.markForCheck();
+
+            console.log(`#show2(${qid}); 37`); // #
+          }
+          console.log(`#show2(${qid}); 99 - finish`); // #
+          resolve();
+        },
+        delay > 0 ? delay : 0
+      );
+    });
+  }
+  public show1(delay: number = this.showDelayVal || 0): Promise<void> {
     console.log(`#show(${delay});`);
     if (this.isDisabledVal || !this.isPhaseAfterViewInit || !!this.tooltipInstRef || !this.messageVal) {
-      // || (this._isTooltipVisible() && !this._tooltip Instance!._showTimeoutId && !this._tooltip Instance!._hideTimeoutId)
       return Promise.resolve();
     }
     if (this.overlayRef == null) {
@@ -174,7 +245,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     this.tooltipInstRef = this.overlayRef.attach(this.portal);
     // Tooltip updates.
     this.setTooltipMessage(this.tooltipInstRef, this.messageVal, this.content);
-    this.setTooltipPosition(this.positionVal, this.overlayRef);
+    this.setTooltipClasses(this.classesVal, this.renderer, this.tooltipInstRef);
+    this.setTooltipPosition(this.positionVal, this.overlayRef, this.renderer);
 
     // Adding event listeners to finish displaying the additional element.
     EventListenerUtil.addListeners(this.listenersForEnd);
@@ -208,6 +280,72 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   }
   /** Hides the tooltip after a delay in ms. */
   public hide(delay: number = this.hideDelayVal || 0, options?: { noAnimation?: boolean }): Promise<void> {
+    const qid = qidx++;
+    console.log(`#hide2(qid=${qid}); start timeoutClose${!this.timeoutOnClosing ? '==' : '!='}null`); // #
+    console.log(`#hide2(qid=${qid});       timeoutOpen ${!this.timeoutOnOpening ? '==' : '!='}null`); // #
+
+    if (this.isDisabledVal || !this.isPhaseAfterViewInit) {
+      return Promise.resolve();
+    }
+    if (!!this.timeoutOnOpening) {
+      console.log(`#hide2(${qid}); 12 clearTimeout(this.timeoutOnOpening);`); // #
+      window.clearTimeout(this.timeoutOnOpening);
+      this.timeoutOnOpening = undefined;
+    }
+
+    if (!this.tooltipInstRef) {
+      console.log(`#hide2(${qid}); 13 this.tooltipInstRef==null`); // #
+    }
+    if (!!this.timeoutOnClosing) {
+      console.log(`#hide2(${qid}); 15 !!this.timeoutOnClosing: true`); // #
+    }
+    if (!this.tooltipInstRef || !!this.timeoutOnClosing) {
+      console.log(
+        `#hide2(${qid}); return tooltipInstRef${this.tooltipInstRef ? '==' : '!='}null timeoutOnClosing:${this.timeoutOnClosing}`
+      );
+      return Promise.resolve();
+    }
+
+    // Removing event listeners to finish displaying the additional element.
+    EventListenerUtil.removeListeners(this.listenersForEnd);
+    // Removing event listeners for the parent element's scroll (to complete the displaying of the additional element).
+    EventListenerUtil.removeListeners(this.listenersForScrollEnd);
+    this.listenersForScrollEnd.length = 0;
+    console.log(`#hide2(${qid}); 24`); // #
+
+    return new Promise<void>((resolve: () => void, reject: () => void) => {
+      console.log(`#hide2(${qid}); 31`); // #
+      this.timeoutOnClosing = window.setTimeout(
+        () => {
+          console.log(`#hide2(${qid}); 32`); // #
+          this.timeoutOnClosing = undefined;
+
+          console.log(`#hide2(${qid}); 33 this.tooltipInstRef${!!this.tooltipInstRef ? '!=' : '=='}null;`); // #
+          if (!!this.tooltipInstRef) {
+            console.log(`#hide2(${qid}); 21`); // #
+
+            // Set isVisibility = false on the component instance;
+            this.tooltipInstRef.instance.hide();
+            this.tooltipInstRef.changeDetectorRef.markForCheck();
+            if (!this.isNoAnimationVal && !options?.noAnimation) {
+              // Add an animation completion listener.
+              this.addAnimationEventListener(this.tooltipInstRef.location);
+              // Add the necessary attributes for the tooltip before hiding.
+              HtmlElemUtil.setAttr(this.renderer, this.tooltipInstRef.location, CSS_ATTR_IS_HIDE, '');
+              HtmlElemUtil.setAttr(this.renderer, this.tooltipInstRef.location, CSS_ATTR_IS_SHOW, null);
+            } else {
+              // If there is no animation, then remove the tooltip component instance.
+              this.overlayDetach();
+            }
+          }
+          console.log(`#hide2(${qid}); 99 - finish`); // #
+          resolve();
+        },
+        delay > 0 ? delay : 0
+      );
+    });
+  }
+  public hide1(delay: number = this.hideDelayVal || 0, options?: { noAnimation?: boolean }): Promise<void> {
     console.log(`#hide(${delay});#1`); // #
     if (this.isDisabledVal || !this.isPhaseAfterViewInit || !this.tooltipInstRef) {
       return Promise.resolve();
@@ -266,7 +404,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       // #scrollStrategy: this.overlay.scrollStrategies.close(),
       scrollStrategy: this.scrollStrategy, // work
       // Custom class to add to the overlay pane.
-      panelClass: [CSS_CLASS_PANEL].concat(this.panelClassVal),
+      panelClass: [CSS_CLASS_PANEL].concat(this.overlayClassesVal),
       // // Whether the overlay has a backdrop.
       // hasBackdrop?: boolean;
       // // Custom class to add to the backdrop
@@ -308,7 +446,14 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
         // Defining event listeners to move the cursor within the element's border.
         this.listenersToStart.push([element, 'mouseenter', () => this.show()]);
         // Defining event listeners to move the cursor outside the element's border.
-        this.listenersForEnd.push([element, 'mouseleave', () => this.hide()]);
+        this.listenersForEnd.push([
+          element,
+          'mouseleave',
+          () => {
+            console.log(`mouseleave`); // #
+            this.hide();
+          },
+        ]);
       } else if (!this.isNoTouchableVal && !this.isSupportsMouseEvents()) {
         // Defining event listeners the touch within the element's border.
         this.listenersToStart.push([element, 'touchstart', () => this.show()]);
@@ -333,7 +478,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
 
   protected setTooltipMessage(
     instRef: ComponentRef<T> | null,
-    message: string | TemplateRef<unknown> | null,
+    message: string | TemplateRef<unknown> | null | undefined,
     content: Record<string, unknown> | null
   ): void {
     if (instRef != null && message != null) {
@@ -350,21 +495,30 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       }
     }
   }
-  // Updates the position of the tooltip.
-  protected setTooltipPosition(positionInp: string | null, overlayRef: OverlayRef | null): void {
+  /** Add style classes to the tooltip element. */
+  protected setTooltipClasses(classes: string[], renderer: Renderer2, instRef: ComponentRef<T> | null): void {
+    if (instRef != null && classes.length > 0) {
+      for (let idx = 0; idx < classes.length; idx++) {
+        HtmlElemUtil.setClass(renderer, instRef.location, classes[idx], true);
+      }
+      instRef.changeDetectorRef.markForCheck();
+    }
+  }
+  /** Updates the position of the tooltip. */
+  protected setTooltipPosition(positionInp: string | null, overlayRef: OverlayRef | null, renderer: Renderer2): void {
     if (overlayRef != null) {
       const positionStrategy = overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
       const position: string = this.getValidPosition(positionInp);
       const connectedPosition: ConnectedPosition = this.getConnectedPosition(position);
       positionStrategy.withPositions([connectedPosition]);
 
-      this.renderer.setAttribute(overlayRef.overlayElement, 'glntt-position', position);
+      renderer.setAttribute(overlayRef.overlayElement, 'glntt-position', position);
       const positionClass: string = 'gln-' + position;
-      if (positionClass !== this.positionClass) {
+      if (positionClass !== this.positionClassCurr) {
         // Remove a CSS class or an array of classes from the overlay pane.
-        overlayRef.removePanelClass(this.positionClass);
+        overlayRef.removePanelClass(this.positionClassCurr);
         // Add a CSS class or an array of classes to the overlay pane.
-        overlayRef.addPanelClass((this.positionClass = positionClass));
+        overlayRef.addPanelClass((this.positionClassCurr = positionClass));
       }
       positionStrategy.apply();
     }
