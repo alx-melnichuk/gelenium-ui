@@ -42,7 +42,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 
 </div>
 
-<!-- Page: "Attributes" 01 -->
+<!-- Page: "Attributes" 01  // 02(abcd) -->
 <i id="Attributes"
   temp>_Attributes_</i>
 <section *ngIf="isShowAttributes01"
@@ -178,7 +178,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 
 </ng-container>
 
-<!-- Page: "Attributes" 02 -->
+<!-- Page: "Attributes" 02  // 02(efgh) -->
 <section *ngIf="isShowAttributes02"
   mr-vr
   id="attributes-supported02">
@@ -222,7 +222,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       </div>
       <div class="tta2-io">
         <button class="tta2-io-btn"
-          (click)="showDelay02a=decVal(showDelay02a, 100, 0)">
+          (click)="showDelay02e=decVal(showDelay02e, 100, 0)">
           &#8854;
         </button>
         <input class="tta2-input"
@@ -231,9 +231,9 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
           max="10000"
           step="100"
           readonly
-          [value]="showDelay02a" />
+          [value]="showDelay02e" />
         <button class="tta2-io-btn"
-          (click)="showDelay02a=incVal(showDelay02a, 100, 10000)">
+          (click)="showDelay02e=incVal(showDelay02e, 100, 10000)">
           &#8853;
         </button>
       </div>
@@ -248,7 +248,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       </div>
       <div class="tta2-io">
         <button class="tta2-io-btn"
-          (click)="hideDelay02a=decVal(hideDelay02a, 100, 0)">
+          (click)="hideDelay02e=decVal(hideDelay02e, 100, 0)">
           &#8854;
         </button>
         <input class="tta2-input"
@@ -257,9 +257,9 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
           max="10000"
           step="100"
           readonly
-          [value]="hideDelay02a" />
+          [value]="hideDelay02e" />
         <button class="tta2-io-btn"
-          (click)="hideDelay02a=incVal(hideDelay02a, 100, 10000)">
+          (click)="hideDelay02e=incVal(hideDelay02e, 100, 10000)">
           &#8853;
         </button>
       </div>
@@ -268,36 +268,15 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       </div>
     </div>
 
-    <!-- <div class="app-elem">
-      <div>
-        <small><em>Show tooltip.</em></small>
-      </div>
-      <div>
-        <button class="tta2-btn"
-          [glnttShowDelay]="showDelay02a"
-          [glnttHideDelay]="hideDelay02a"
-          glnTooltip="Information"
-          glnttNoHoverable
-          glnttNoTouchable
-          #tooltip2="glnTooltip"
-          (click)="tooltip2.toggle()">
-          Action
-        </button>
-      </div>
-    </div> -->
     <div class="app-elem">
       <div>
         <small><em>Show tooltip.</em></small>
       </div>
       <div>
         <button class="tta2-btn"
-          [glnttShowDelay]="showDelay02a"
-          [glnttHideDelay]="hideDelay02a"
-          glnTooltip="Information"
-          glnttNoHoverable9
-          glnttNoTouchable9
-          #tooltip2="glnTooltip"
-          click9="tooltip2.toggle()">
+          [glnttShowDelay]="showDelay02e"
+          [glnttHideDelay]="hideDelay02e"
+          glnTooltip="Information">
           Action
         </button>
       </div>
@@ -305,7 +284,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 
   </div>
 
-  <!-- <div class="app-group">
+  <div class="app-group">
 
     <div class="app-elem">
       <div>
@@ -337,13 +316,13 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       </div>
     </div>
 
-  </div> -->
+  </div>
 
 </ng-container>
 
 <hr br-nn />
 
-<!-- Page: "Attributes" 03 -->
+<!-- Page: "Attributes" 03 // 02(ijkl) -->
 <section *ngIf="isShowAttributes03"
   mr-vr
   id="attributes-supported03">
@@ -361,6 +340,9 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       "glnttNoAnimation" - a sign that the animation is disabled (glnttNoAnimation);
     </li>
     <li>
+      "glnttNoTransform" - a sign that the transformation is disabled (glnttNoTransform);
+    </li>
+    <li>
       "glnttClasses" - set the classes to be applied to the overlay panel;
     </li>
   </ul>
@@ -373,28 +355,13 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: glnttDisabled.</em>
-        </small>
-      </div>
-      <div>
-        <button class="tta3-btn"
-          glnttDisabled
-          glnTooltip="Information">
-          Action
-        </button>
-      </div>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
           <em>Attribute:
             <label>
               <input class="tta3-ver"
                 type="checkbox"
-                [checked]="isDisabled02e"
-                (change)="isDisabled02e=!isDisabled02e" />
-              [glnttDisabled]="{{isDisabled02e}}".
+                [checked]="isDisabled02i"
+                (change)="isDisabled02i=!isDisabled02i" />
+              [glnttDisabled]="{{isDisabled02i}}".
             </label>
 
           </em>
@@ -402,18 +369,13 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       </div>
       <div>
         <button class="tta3-btn"
-          [glnttDisabled]="isDisabled02e"
+          [glnttDisabled]="isDisabled02i"
           glnTooltip="Information">
           Action
         </button>
       </div>
     </div>
 
-  </div>
-
-  <hr br-nn />
-
-  <div class="app-group">
 
     <div class="app-elem">
       <div>
@@ -433,6 +395,21 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
     <div class="app-elem">
       <div>
         <small>
+          <em>Attribute: glnttNoTransform.</em>
+        </small>
+      </div>
+      <div>
+        <button class="tta3-btn"
+          glnttNoTransform
+          glnTooltip="Information">
+          Action
+        </button>
+      </div>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
           <em>Attribute: glnttClasses.</em>
         </small>
       </div>
@@ -441,6 +418,102 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
           glnttClasses="tta3-panel-demo"
           glnTooltip="Information">
           Action
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <hr br-nn />
+
+</ng-container>
+
+
+<!-- Page: "Attributes" 04 // 02(mnop)-->
+<section *ngIf="isShowAttributes04"
+  mr-vr
+  id="attributes-supported04">
+  <h4 class="app-hover-link">
+    Attributes are also supported 4:
+    <a [href]="urlCmTooltip + '#attributes-supported04'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "glnttArrow" - a sign that an arrow is added to the tooltip (glnttArrow);
+    </li>
+  </ul>
+</section>
+
+<ng-container *ngIf="isShowAttributes04">
+
+  <!-- <section mr-vr>
+    <label>
+      Position
+      <select style="padding: 5px; outline: none;"
+        (change)="position02m=getValue($event.target)">
+        <option *ngFor="let item of positionList"
+          [value]="item"
+          [attr.selected]="position02m==item ? '' : null">{{ item }}
+        </option>
+      </select>
+    </label>
+  </section> -->
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Position value:</em>
+        </small>
+      </div>
+      <div>
+        <select class="tta4-select"
+          (change)="position02m=getValue($event.target)">
+          <option *ngFor="let item of positionList"
+            [value]="item"
+            [attr.selected]="position02m==item ? '' : null">{{ item }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: glnttArrow.</em>
+        </small>
+      </div>
+      <div>
+        <button class="tta3-btn"
+          glnttArrow
+          [glnttPosition]="position02m"
+          glnTooltip="Information text demo"
+          glnttNoHoverable
+          glnttNoTouchable
+          #tooltip02m="glnTooltip"
+          (click)="tooltip02m.toggle()">
+          Action 1
+        </button>
+      </div>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Attribute: glnttArrow.</em>
+        </small>
+      </div>
+      <div>
+        <button class="tta3-btn"
+          glnttArrow
+          [glnttPosition]="position02m"
+          glnTooltip="Info"
+          glnttNoHoverable
+          glnttNoTouchable
+          #tooltip02n="glnTooltip"
+          (click)="tooltip02n.toggle()">
+          Action 1
         </button>
       </div>
     </div>
@@ -556,7 +629,7 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
       </div>
       <div>
         <button class="ttft-btn"
-          style="max-width: 75px; white-space: nowrap; overflow: hidden;"
+          style="max-width: 106px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
           glnTooltip="Action demo"
           [glnttDisabled]="!overflowChildZ0.getChildHasOverflow()"
           glnOverflowChild
@@ -651,7 +724,6 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
             glnTooltip="Information demo"
             glnttNoHoverable
             glnttNoTouchable
-            glnttClasses="tta3-panel-demo"
             #tooltip07a="glnTooltip"
             (click)="tooltip07a.toggle()">
             Action2
@@ -689,6 +761,57 @@ import &#123; GlnTooltipModule &#125; from 'gelenium-ui';</pre>
 <div class="app-group"
   style="justify-content: flex-end;">
 
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show tooltip only on click.</em>
+      </small>
+    </div>
+    <div>
+      <button class="ttbs-btn"
+        glnTooltip="Information demo"
+        [glnttPosition]="position1"
+        glnttNoHoverable
+        glnttNoTouchable
+        glnttNoTransform
+        #tooltip07b="glnTooltip"
+        (click)="tooltip07b.toggle()">
+        Action2
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show tooltip only on click.</em>
+      </small>
+    </div>
+    <div>
+      <button class="ttbs-btn"
+        glnTooltip="Information demo text autoposition"
+        [glnttPosition]="position1">
+        Action3
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show tooltip only on click.</em>
+      </small>
+    </div>
+    <div>
+      <button class="ttbs-btn"
+        glnTooltip="demo"
+        glnttNoTransform
+        [glnttPosition]="position1">
+        Action4
+      </button>
+    </div>
+  </div>
 
   <!-- // # Add to examples --
   <div class="app-elem">

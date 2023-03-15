@@ -22,34 +22,30 @@ export class CmTooltipBasicComponent {
 
   public urlCmTooltip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TOOLTIP');
 
-  public isShowBasic = false;
-  public isShowAttributes01 = false; // 02
-  public isShowAttributes02 = true;
-  public isShowAttributes03 = false;
-  public isShowCustomization = false;
-  public isShowFeature = false;
+  public isShowBasic = true;
+  public isShowAttributes01 = true; // 02(abcd)
+  public isShowAttributes02 = true; // 02(efgh)
+  public isShowAttributes03 = true; // 02(ijkl)
+  public isShowAttributes04 = true; // 02(mnop)
+  public isShowCustomization = true;
+  public isShowFeature = true;
   // public isShowSize = false; // 03
   // Palette // 04
   // Customization // 05
   // Config // 08
   // Api // 09
 
-  // Page: "Attributes" 01
+  // Page: "Attributes" 01 // 02(abcd)
 
-  // Page: "Attributes" 02
-  public showDelay02a: number = 600;
-  public hideDelay02a: number = 600;
+  // Page: "Attributes" 02 // 02(efgh)
+  public showDelay02e: number = 500;
+  public hideDelay02e: number = 500;
 
-  // Page: "Attributes" 03
-  public isDisabled02e: boolean = true;
+  // Page: "Attributes" 03 // 02(ijkl)
+  public isDisabled02i: boolean = true;
 
-  // Page: "Feature" 07
-
-  // Page:
-
-  public demo1 = false;
-  public demo2 = false;
-  public position1 = 'bottom';
+  // Page: "Attributes" 04 // 02(mnop)
+  public position02m = 'bottom-start'; // 'bottom';
   public positionList: string[] = [
     'bottom',
     'bottom-start',
@@ -64,6 +60,14 @@ export class CmTooltipBasicComponent {
     'left-start',
     'left-end',
   ];
+
+  // Page: "Feature" 07
+
+  // Page:
+
+  public demo1 = false;
+  public demo2 = false;
+  public position1 = 'bottom';
 
   public demo02 = 'Information-A';
   // eslint-disable-next-line @typescript-eslint/no-empty-function
