@@ -21,8 +21,10 @@ import { GlnTooltipBaseComponent } from './gln-tooltip-base.component';
 const CSS_ATTR_IS_HIDE = 'is-hide';
 const CSS_ATTR_IS_SHOW = 'is-show';
 const CSS_ATTR_NO_ANM = 'noAnm';
+const CSS_ATTR_NO_TRN = 'noTrn';
 
 const CSS_CLASS_PANEL = 'gln-tooltip-panel';
+
 const SHOW_DELAY_FOR_MOUSE = 100;
 const HIDE_DELAY_FOR_MOUSE = 0;
 const SHOW_DELAY_FOR_TOUCH = 800;
@@ -67,6 +69,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   public isNoHoverableVal: boolean | null = null; // Binding attribute "isNoMousable".
   public isNoHideOnScrollVal: boolean | null = null; // Binding attribute "isNoHideOnScroll".
   public isNoTouchableVal: boolean | null = null; // Binding attribute "isNoTouchable".
+  public isNoTransformVal: boolean | null = null; // Binding attribute "isNoTransit".
   public maxHeightVal: number | string | null = null; // Binding "config.maxHeight".
   public maxWidthVal: number | string | null = null; // Binding "config.maxWidth".
   public minHeightVal: number | string | null = null; // Binding "config.minHeight".
@@ -262,17 +265,22 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     this.tooltipInstRef = this.overlayRef.attach(this.portal);
 
     // Tooltip updates.
+    const validPosition: string = this.getValidPosition(this.positionVal);
     this.setTooltipMessage(this.tooltipInstRef, this.messageVal, this.content);
     this.setTooltipClasses(this.classesVal, this.renderer, this.tooltipInstRef);
-    this.setTooltipPosition(this.positionVal, this.overlayRef, this.renderer);
+    this.setOverlayPosition(validPosition, this.overlayRef, this.renderer);
 
     const instanceRef: ElementRef<HTMLElement> = this.tooltipInstRef.location;
     if (this.isNoAnimationVal) {
-      HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_NO_ANM, '');
+      this.renderer.setAttribute(instanceRef.nativeElement, CSS_ATTR_NO_ANM, '');
+    }
+    if (this.isNoTransformVal) {
+      this.renderer.setAttribute(instanceRef.nativeElement, CSS_ATTR_NO_TRN, '');
     }
     // Add the necessary attributes for the tooltip before displaying.
-    HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_SHOW, '');
-    // this.setPropertiesForInstance(this.hostRef, instanceRef);
+    this.renderer.setAttribute(instanceRef.nativeElement, CSS_ATTR_IS_SHOW, '');
+    this.setPropertiesForInstance(this.hostRef, instanceRef);
+    this.setInstanceProperties(validPosition, instanceRef, this.renderer);
     // Set isVisibility = true on the component instance;
     this.tooltipInstRef.instance.show();
     this.tooltipInstRef.changeDetectorRef.markForCheck();
@@ -293,8 +301,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
         // Add an animation completion listener.
         this.addAnimationEventListener(this.tooltipInstRef.location);
         // Add the necessary attributes for the tooltip before hiding.
-        HtmlElemUtil.setAttr(this.renderer, this.tooltipInstRef.location, CSS_ATTR_IS_HIDE, '');
-        HtmlElemUtil.setAttr(this.renderer, this.tooltipInstRef.location, CSS_ATTR_IS_SHOW, null);
+        this.renderer.setAttribute(this.tooltipInstRef.location.nativeElement, CSS_ATTR_IS_HIDE, '');
+        this.renderer.removeAttribute(this.tooltipInstRef.location.nativeElement, CSS_ATTR_IS_SHOW);
       } else {
         // If there is no animation, then remove the tooltip component instance.
         this.overlayDetach();
@@ -410,21 +418,20 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   protected setTooltipClasses(classes: string[], renderer: Renderer2, instRef: ComponentRef<T> | null): void {
     if (instRef != null && classes.length > 0) {
       for (let idx = 0; idx < classes.length; idx++) {
-        HtmlElemUtil.setClass(renderer, instRef.location, classes[idx], true);
+        this.renderer.addClass(instRef.location.nativeElement, classes[idx]);
       }
       instRef.changeDetectorRef.markForCheck();
     }
   }
   /** Updates the position of the tooltip. */
-  protected setTooltipPosition(positionInp: string | null, overlayRef: OverlayRef | null, renderer: Renderer2): void {
-    if (overlayRef != null) {
+  protected setOverlayPosition(validPosition: string, overlayRef: OverlayRef | null, renderer: Renderer2 | null): void {
+    if (!!validPosition && overlayRef != null && !!renderer) {
       const positionStrategy = overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
-      const position: string = this.getValidPosition(positionInp);
-      const connectedPosition: ConnectedPosition = this.getConnectedPosition(position);
+      const connectedPosition: ConnectedPosition = this.getConnectedPosition(validPosition);
       positionStrategy.withPositions([connectedPosition]);
 
-      renderer.setAttribute(overlayRef.overlayElement, 'glntt-position', position);
-      const positionClass: string = 'gln-' + position;
+      renderer.setAttribute(overlayRef.overlayElement, 'glntt-position', validPosition);
+      const positionClass: string = 'gln-' + validPosition;
       if (positionClass !== this.positionClassCurr) {
         // Remove a CSS class or an array of classes from the overlay pane.
         overlayRef.removePanelClass(this.positionClassCurr);
@@ -434,7 +441,13 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       positionStrategy.apply();
     }
   }
-
+  protected setInstanceProperties(validPosition: string, instanceRef: ElementRef<HTMLElement> | null, renderer: Renderer2 | null): void {
+    if (!!validPosition && !!instanceRef && !!renderer) {
+      const tokenList: string[] = (validPosition || '').split('-');
+      const token1: string = tokenList[0];
+      renderer.setAttribute(instanceRef.nativeElement, 'pos', token1);
+    }
+  }
   protected setPropertiesForInstance(hostRef: ElementRef<HTMLElement> | null, instanceRef: ElementRef<HTMLElement> | null): void {
     if (hostRef != null && instanceRef != null) {
       const offsetWidth: number = hostRef.nativeElement.offsetWidth;

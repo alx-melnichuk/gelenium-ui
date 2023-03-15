@@ -41,6 +41,8 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public classes: string | string[] = '';
   @Input('glnttHideDelay')
   public hideDelay: number | string | null | undefined;
+  @Input('glnttHideTouchDelay')
+  public hideTouchDelay: number | string | null | undefined;
   @Input('glnttDisabled')
   public isDisabled: string | boolean | null | undefined;
   @Input('glnttNoAnimation')
@@ -51,21 +53,27 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public isNoHoverable: string | boolean | null | undefined;
   @Input('glnttNoTouchable')
   public isNoTouchable: string | boolean | null | undefined;
+  @Input('glnttNoTransform')
+  public isNoTransform: string | boolean | null | undefined;
   @Input('glnTooltip')
   public message: string | TemplateRef<unknown> | null | undefined;
   @Input('glnttPosition')
   public position: string | null | undefined; // 'bottom[-start,-end]','top[-start,-end]','right[-start,-end]','left[-start,-end]';
   @Input('glnttShowDelay')
   public showDelay: number | string | null | undefined;
+  @Input('glnttShowTouchDelay')
+  public showTouchDelay: number | string | null | undefined;
 
   public currConfig: GlnTooltipConfig;
   public override classesVal: string[] = []; // Binding attribute "classes"
   public override hideDelayVal: number | null = null; // Binding attribute "hideDelay".
+  public override hideTouchDelayVal: number | null = null; // Binding attribute "hideTouchDelay".
   public override isArrowVal: boolean | null = null; // Binding attribute "isArrow".
   public override isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
   public override isNoHideOnScrollVal: boolean | null = null; // Binding attribute "isNoHideOnScroll".
   public override isNoHoverableVal: boolean | null = null; // Binding attribute "isNoHoverable".
   public override isNoTouchableVal: boolean | null = null; // Binding attribute "isNoTouchable".
+  public override isNoTransformVal: boolean | null = null; // Binding attribute "isNoTransform".
   public override maxHeightVal: number | string | null = null; // Binding attribute "maxHeight".
   public override maxWidthVal: number | string | null = null; // Binding attribute "maxWidth".
   public override minHeightVal: number | string | null = null; // Binding attribute "minHeight".
@@ -74,6 +82,7 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public override overlayClassesVal: string[] = [];
   public override positionVal: string | null = null; // Binding attribute "position"
   public override showDelayVal: number | null = null; // Binding attribute "showDelay".
+  public override showTouchDelayVal: number | null = null; // Binding attribute "showTouchDelay".
 
   protected readonly tooltipCompType = GlnTooltipComponent;
 
@@ -110,6 +119,10 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
       const hideDelayStr: string = (this.hideDelay || this.currConfig.hideDelay || '').toString();
       this.hideDelayVal = this.converInt(hideDelayStr, 0);
     }
+    if (changes['hideTouchDelay'] || (changes['config'] && this.hideTouchDelay == null && this.currConfig.hideTouchDelay != null)) {
+      const hideTouchDelayStr: string = (this.hideTouchDelay || this.currConfig.hideTouchDelay || '').toString();
+      this.hideTouchDelayVal = this.converInt(hideTouchDelayStr, 0);
+    }
     if (changes['isDisabled']) {
       this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
     }
@@ -125,6 +138,9 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     if (changes['isNoTouchable'] || (changes['config'] && this.isNoTouchable == null && this.currConfig.isNoTouchable != null)) {
       this.isNoTouchableVal = BooleanUtil.init(this.isNoTouchable) ?? !!this.currConfig.isNoTouchable;
     }
+    if (changes['isNoTransform'] || (changes['config'] && this.isNoTransform == null && this.currConfig.isNoTransform != null)) {
+      this.isNoTransformVal = BooleanUtil.init(this.isNoTransform) ?? !!this.currConfig.isNoTransform;
+    }
     if (changes['message']) {
       this.messageVal = this.message || null;
     }
@@ -134,6 +150,10 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     if (changes['showDelay'] || (changes['config'] && this.showDelay == null && this.currConfig.showDelay != null)) {
       const showDelayStr: string = (this.showDelay || this.currConfig.showDelay || '').toString();
       this.showDelayVal = this.converInt(showDelayStr, 0);
+    }
+    if (changes['showTouchDelay'] || (changes['config'] && this.showTouchDelay == null && this.currConfig.showTouchDelay != null)) {
+      const showTouchDelayStr: string = (this.showTouchDelay || this.currConfig.showTouchDelay || '').toString();
+      this.showTouchDelayVal = this.converInt(showTouchDelayStr, 0);
     }
   }
 
@@ -145,6 +165,10 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     if (this.hideDelayVal == null) {
       const hideDelayStr: string = (this.currConfig.hideDelay || '').toString();
       this.hideDelayVal = this.converInt(hideDelayStr, 0);
+    }
+    if (this.hideTouchDelayVal == null) {
+      const hideTouchDelayStr: string = (this.currConfig.hideTouchDelay || '').toString();
+      this.hideTouchDelayVal = this.converInt(hideTouchDelayStr, 0);
     }
     if (this.isNoAnimationVal == null) {
       this.isNoAnimationVal = !!this.currConfig.isNoAnimation;
@@ -158,6 +182,9 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     if (this.isNoTouchableVal == null) {
       this.isNoTouchableVal = !!this.currConfig.isNoTouchable;
     }
+    if (this.isNoTransformVal == null) {
+      this.isNoTransformVal = !!this.currConfig.isNoTransform;
+    }
     if (this.overlayClassesVal.length === 0) {
       const overlayClasses: string | string[] = this.currConfig.overlayClasses || [];
       this.overlayClassesVal = Array.isArray(overlayClasses) ? overlayClasses : [overlayClasses];
@@ -168,6 +195,10 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     if (this.showDelayVal == null) {
       const showDelayStr: string = (this.currConfig.showDelay || '').toString();
       this.showDelayVal = this.converInt(showDelayStr, 0);
+    }
+    if (this.showTouchDelayVal == null) {
+      const showTouchDelayStr: string = (this.currConfig.showTouchDelay || '').toString();
+      this.showTouchDelayVal = this.converInt(showTouchDelayStr, 0);
     }
   }
 

@@ -33,24 +33,44 @@ gln-tooltip-cmp {
     @keyframes kf-tt-show {
       0% {
         opacity: 0;
-        // transform: translateY(var(--glnttpo--translate-y, 0px)) scale(0.6);
+        transform: var(--glntt---no-translate, (translate(var(--glntt---trnsl-x, 0px), var(--glntt---trnsl-y, 0px)) scale(0.3)));
       }
       100% {
         opacity: 1;
-        // transform: none;
+        transform: none;
       }
     }
   
     @keyframes kf-tt-hide {
       0% {
         opacity: 1;
-        // transform: none;
+        transform: none;
       }
       100% {
         opacity: 0;
-        // transform: translateY(var(--glnttpo--translate-y, 0px)) scale(0.6);
+        transform: var(--glntt---no-translate, (translate(var(--glntt---trnsl-x, 0px), var(--glntt---trnsl-y, 0px)) scale(0.3)));
       }
     }
+  }
+
+  &[pos='bottom'] {
+    --glntt---trnsl-y: -60%;
+    margin-top: var(--glntt---panel-indent);
+  }
+  &[pos='top'] {
+    --glntt---trnsl-y: 60%;
+    margin-bottom: var(--glntt---panel-indent);
+  }
+  &[pos='left'] {
+    --glntt---trnsl-x: 40%; 
+    margin-right: var(--glntt---panel-indent);
+  }
+  &[pos='right'] {
+    --glntt---trnsl-x: -40%;
+    margin-left: var(--glntt---panel-indent);
+  }
+  &[noTrn] {
+    --glntt---no-translate: none;
   }
 
   &>.gln-tooltip-arrow {
@@ -79,16 +99,13 @@ gln-tooltip-cmp {
 .gln-tooltip-panel {
   outline: 1px dashed green; // #
   pointer-events: none !important;
-  --glntt--panel-indent: var(--glntt-panel-indent, 0.875em); // 16px * 0.875 = 14px;
+  --glntt---panel-indent: var(--glntt-panel-indent, 0.875em); // 16px * 0.875 = 14px;
 }
 .cdk-overlay-pane.gln-tooltip-panel {
   z-index: 1500;
 }
 
 .gln-tooltip-panel[glntt-position*='bottom'] {
-  gln-tooltip-cmp {
-    margin-top: var(--glntt--panel-indent);
-  }
   .gln-tooltip-arrow {
     left: 0;
     margin-top: -0.71em;
@@ -98,13 +115,4 @@ gln-tooltip-cmp {
       transform-origin: 0 100%;
     }
   }
-}
-.gln-tooltip-panel[glntt-position*='top'] gln-tooltip-cmp {
-  margin-bottom: var(--glntt--panel-indent);
-}
-.gln-tooltip-panel[glntt-position*='left'] gln-tooltip-cmp {
-  margin-right: var(--glntt--panel-indent);
-}
-.gln-tooltip-panel[glntt-position*='right'] gln-tooltip-cmp {
-  margin-left: var(--glntt--panel-indent);
 }
