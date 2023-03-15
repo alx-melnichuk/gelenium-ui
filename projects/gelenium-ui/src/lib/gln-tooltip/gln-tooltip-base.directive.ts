@@ -23,7 +23,10 @@ const CSS_ATTR_IS_SHOW = 'is-show';
 const CSS_ATTR_NO_ANM = 'noAnm';
 
 const CSS_CLASS_PANEL = 'gln-tooltip-panel';
-const DELAY_DEFAULT = 100;
+const SHOW_DELAY_FOR_MOUSE = 100;
+const HIDE_DELAY_FOR_MOUSE = 0;
+const SHOW_DELAY_FOR_TOUCH = 800;
+const HIDE_DELAY_FOR_TOUCH = 1500;
 
 export const TOOLTIP_POSITION: { [key: string]: string } = {
   'bottom': 'bottom',
@@ -45,6 +48,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   public content: Record<string, unknown> | null = null;
   public classesVal: string[] = []; // Binding attribute "classes"
   public hideDelayVal: number | null = null; // Binding attribute "hideDelay".
+  public hideTouchDelayVal: number | null = null; // Binding attribute "hideTouchDelay".
   public isArrowVal: boolean | null = null; // Binding attribute "isArrow".
   // Binding attribute "isDisabled".
   public get isDisabledVal(): boolean | null {
@@ -54,7 +58,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     if (value !== this.innIsDisabledVal) {
       this.innIsDisabledVal = value;
       if (this.isPhaseAfterViewInit) {
-        this.hide(0, { noAnimation: true });
+        this.startHide(0, true);
         this.definingEventListeners();
       }
     }
@@ -71,6 +75,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   public overlayClassesVal: string[] = [];
   public positionVal: string | null = null; // Binding attribute "position"
   public showDelayVal: number | null = null; // Binding attribute "showDelay".
+  public showTouchDelayVal: number | null = null; // Binding attribute "showTouchDelay".
 
   protected abstract readonly tooltipCompType: ComponentType<T>;
   protected overlayRef: OverlayRef | null = null;
@@ -88,8 +93,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   private innIsDisabledVal: boolean | null = null;
   private isPhaseAfterViewInit: boolean = false;
   private positionClassCurr: string = '';
-  private timeoutOnOpening: number | undefined = undefined;
-  private timeoutOnClosing: number | undefined = undefined;
+  private timeoutForShow: number | undefined = undefined;
+  private timeoutForHide: number | undefined = undefined;
 
   constructor(
     protected document: Document,
@@ -118,8 +123,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     EventListenerUtil.removeListeners(this.listenersForScrollEnd);
     this.listenersForScrollEnd.length = 0;
 
-    window.clearTimeout(this.timeoutOnOpening);
-    window.clearTimeout(this.timeoutOnClosing);
+    window.clearTimeout(this.timeoutForShow);
+    window.clearTimeout(this.timeoutForHide);
 
     this.removeAnimationEventListener(this.tooltipInstRef?.location || null);
 
@@ -133,110 +138,13 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
 
   // ** Public methods **
 
-  /** Show tooltip after delay in ms. */
-  public show(delay: number = this.showDelayVal || 0): Promise<void> {
-    if (this.isDisabledVal || !this.isPhaseAfterViewInit) {
-      return Promise.resolve();
-    }
-
-    if (!this.tooltipInstRef || !!this.timeoutOnClosing) {
-      // Adding event listeners to finish displaying the additional element.
-      EventListenerUtil.addListeners(this.listenersForEnd);
-      this.addListenersForScrollEnd();
-    }
-    if (!!this.tooltipInstRef || !!this.timeoutOnClosing) {
-      if (!!this.timeoutOnClosing) {
-        window.clearTimeout(this.timeoutOnClosing);
-        this.timeoutOnClosing = undefined; //   this.overlayDetach();
-      }
-      return Promise.resolve();
-    }
-
-    if (this.overlayRef == null) {
-      this.overlayRef = this.overlay.create(this.createOverlayConfig());
-      // https://github.com/angular/components/issues/1432  Ability to manually control overlay's z-index.
-      // Adding z-index: 'unset' will allow you to have one parent with a single z-index value.
-      // This will correctly use the z-index for child elements.
-      this.overlayRef.hostElement.style.zIndex = 'unset';
-    }
-    if (this.portal == null) {
-      this.portal = new ComponentPortal(this.tooltipCompType, this.viewContainerRef);
-    }
-
-    return new Promise<void>((resolve: () => void, reject: () => void) => {
-      this.timeoutOnOpening = window.setTimeout(
-        () => {
-          this.timeoutOnOpening = undefined;
-          // Attach the tooltip portal to the overlay.
-          this.tooltipInstRef = this.overlayRef?.attach(this.portal);
-          if (!!this.tooltipInstRef) {
-            // Tooltip updates.
-            this.setTooltipMessage(this.tooltipInstRef, this.messageVal, this.content);
-            this.setTooltipClasses(this.classesVal, this.renderer, this.tooltipInstRef);
-            this.setTooltipPosition(this.positionVal, this.overlayRef, this.renderer);
-
-            const instanceRef: ElementRef<HTMLElement> = this.tooltipInstRef.location;
-            if (this.isNoAnimationVal) {
-              HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_NO_ANM, '');
-            }
-            // Add the necessary attributes for the tooltip before displaying.
-            HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_SHOW, '');
-            // this.setPropertiesForInstance(this.hostRef, instanceRef);
-            // Set isVisibility = true on the component instance;
-            this.tooltipInstRef.instance.show();
-            this.tooltipInstRef.changeDetectorRef.markForCheck();
-          }
-          resolve();
-        },
-        delay > 0 ? delay : DELAY_DEFAULT
-      );
-    });
+  /** Show tooltip without delay. */
+  public show(): Promise<void> {
+    return this.startShow(0);
   }
-  /** Hides the tooltip after a delay in ms. */
-  public hide(delay: number = this.hideDelayVal || 0, options?: { noAnimation?: boolean }): Promise<void> {
-    if (this.isDisabledVal || !this.isPhaseAfterViewInit) {
-      return Promise.resolve();
-    }
-
-    if (!!this.tooltipInstRef || !!this.timeoutOnOpening) {
-      // Removing event listeners to finish displaying the additional element.
-      EventListenerUtil.removeListeners(this.listenersForEnd);
-      // Removing event listeners for the parent element's scroll (to complete the displaying of the additional element).
-      EventListenerUtil.removeListeners(this.listenersForScrollEnd);
-      this.listenersForScrollEnd.length = 0;
-    }
-    if (!this.tooltipInstRef || !!this.timeoutOnOpening) {
-      if (!!this.timeoutOnOpening) {
-        window.clearTimeout(this.timeoutOnOpening);
-        this.timeoutOnOpening = undefined;
-      }
-      return Promise.resolve();
-    }
-
-    return new Promise<void>((resolve: () => void, reject: () => void) => {
-      this.timeoutOnClosing = window.setTimeout(
-        () => {
-          this.timeoutOnClosing = undefined;
-          if (!!this.tooltipInstRef) {
-            // Set isVisibility = false on the component instance;
-            this.tooltipInstRef.instance.hide();
-            this.tooltipInstRef.changeDetectorRef.markForCheck();
-            if (!this.isNoAnimationVal && !options?.noAnimation) {
-              // Add an animation completion listener.
-              this.addAnimationEventListener(this.tooltipInstRef.location);
-              // Add the necessary attributes for the tooltip before hiding.
-              HtmlElemUtil.setAttr(this.renderer, this.tooltipInstRef.location, CSS_ATTR_IS_HIDE, '');
-              HtmlElemUtil.setAttr(this.renderer, this.tooltipInstRef.location, CSS_ATTR_IS_SHOW, null);
-            } else {
-              // If there is no animation, then remove the tooltip component instance.
-              this.overlayDetach();
-            }
-          }
-          resolve();
-        },
-        delay > 0 ? delay : DELAY_DEFAULT
-      );
-    });
+  /** Hides the tooltip without delay. */
+  public hide(options?: { noAnimation?: boolean }): Promise<void> {
+    return this.startHide(0, options?.noAnimation || !!this.isNoAnimationVal);
   }
   /** Shows/hides the tooltip. */
   public toggle(): void {
@@ -246,27 +154,161 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   public isVisible(): boolean {
     return !!this.tooltipInstRef;
   }
+
+  // ** Protected methods **
+
+  /** Show tooltip after delay in ms. */
+  protected startShow(delay: number): Promise<void> {
+    if (this.isDisabledVal || !this.isPhaseAfterViewInit) {
+      return Promise.resolve();
+    }
+    // # console.log(`startShow(); - start`); // #
+    if (!this.tooltipInstRef || !!this.timeoutForHide) {
+      // # console.log(`startShow(); !tooltipInstRef || !!timeoutForHide  addListeners();`); // #
+      // Adding event listeners to finish displaying the additional element.
+      EventListenerUtil.addListeners(this.listenersForEnd);
+      if (!this.isNoHideOnScrollVal) {
+        // Get a list of parents on which the scroll is located (if there are none, then the document).
+        const scrollParentList: Element[] = ParentScrollUtil.getParentListWithScroll(this.hostRef.nativeElement.parentElement);
+        for (let idx = 0; idx < scrollParentList.length; idx++) {
+          this.listenersForScrollEnd.push([scrollParentList[idx], 'scroll', () => this.startHide(0, true)]);
+        }
+        // Adding event listeners for the parent element's scroll (to complete the displaying of the additional element).
+        EventListenerUtil.addListeners(this.listenersForScrollEnd);
+      }
+    }
+    if (!!this.tooltipInstRef || !!this.timeoutForHide) {
+      if (!!this.timeoutForHide) {
+        // # console.log(`startShow(); !!timeoutForHide  clearTimeout(timeoutForHide);`); // #
+        console.log(``); // #
+        window.clearTimeout(this.timeoutForHide);
+        this.timeoutForHide = undefined;
+      }
+      // # console.log(`startShow(); !!tooltipInstRef || !!timeoutForHide  return;`); // #
+      return Promise.resolve();
+    }
+    return new Promise<void>((resolve: () => void, reject: () => void) => {
+      this.timeoutForShow = window.setTimeout(
+        () => {
+          this.timeoutForShow = undefined;
+          this.performShow();
+          // # console.log(`startShow(); - end`); // #
+          console.log(``); // #
+          resolve();
+        },
+        delay > 0 && !this.isNoAnimationVal ? delay : 0
+      );
+    });
+  }
+  /** Hides the tooltip after a delay in ms. */
+  protected startHide(delay: number, isNoAnimation: boolean): Promise<void> {
+    if (this.isDisabledVal || !this.isPhaseAfterViewInit) {
+      return Promise.resolve();
+    }
+    // # console.log(`startHide(); - start`); // #
+    if (!!this.tooltipInstRef || !!this.timeoutForShow) {
+      // # console.log(`startHide(); !!tooltipInstRef || !!timeoutForShow  removeListeners();`); // #
+      // Removing event listeners to finish displaying the additional element.
+      EventListenerUtil.removeListeners(this.listenersForEnd);
+      // Removing event listeners for the parent element's scroll (to complete the displaying of the additional element).
+      EventListenerUtil.removeListeners(this.listenersForScrollEnd);
+      this.listenersForScrollEnd.length = 0;
+    }
+    if (!this.tooltipInstRef || !!this.timeoutForShow) {
+      if (!!this.timeoutForShow) {
+        // # console.log(`startHide(); !!timeoutForShow  clearTimeout(timeoutForShow);`); // #
+        console.log(``); // #
+        window.clearTimeout(this.timeoutForShow);
+        this.timeoutForShow = undefined;
+      }
+      // # console.log(`startHide(); !tooltipInstRef || !!timeoutForShow  return;`); // #
+      return Promise.resolve();
+    }
+    // # console.log(`startHide(); timeoutForHide = setTimeout();`); // #
+    return new Promise<void>((resolve: () => void, reject: () => void) => {
+      this.timeoutForHide = window.setTimeout(
+        () => {
+          this.timeoutForHide = undefined;
+          // # console.log(`startHide(); performHide(isNoAnimation:${isNoAnimation});`); // #
+          this.performHide(isNoAnimation);
+          // # console.log(`startHide(); - end`); // #
+          console.log(``); // #
+          resolve();
+        },
+        delay > 0 && !isNoAnimation ? delay : 0
+      );
+    });
+  }
+  protected performShow(): void {
+    if (this.isDisabledVal || !this.isPhaseAfterViewInit) {
+      return;
+    }
+    // # console.log(`performShow(); - start`); // #
+    if (this.overlayRef == null) {
+      // # console.log(`performShow(); overlay.create();`); // #
+      this.overlayRef = this.overlay.create(this.createOverlayConfig());
+      // https://github.com/angular/components/issues/1432  Ability to manually control overlay's z-index.
+      // Adding z-index: 'unset' will allow you to have one parent with a single z-index value.
+      // This will correctly use the z-index for child elements.
+      this.overlayRef.hostElement.style.zIndex = 'unset';
+    }
+    if (this.portal == null) {
+      // # console.log(`performShow(); portal = new ComponentPortal()`); // #
+      this.portal = new ComponentPortal(this.tooltipCompType, this.viewContainerRef);
+    }
+
+    // # console.log(`performShow(); tooltipInstRef = overlayRef.attach(portal);`); // #
+    // Attach the tooltip portal to the overlay.
+    this.tooltipInstRef = this.overlayRef.attach(this.portal);
+
+    // Tooltip updates.
+    this.setTooltipMessage(this.tooltipInstRef, this.messageVal, this.content);
+    this.setTooltipClasses(this.classesVal, this.renderer, this.tooltipInstRef);
+    this.setTooltipPosition(this.positionVal, this.overlayRef, this.renderer);
+
+    const instanceRef: ElementRef<HTMLElement> = this.tooltipInstRef.location;
+    if (this.isNoAnimationVal) {
+      HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_NO_ANM, '');
+    }
+    // Add the necessary attributes for the tooltip before displaying.
+    HtmlElemUtil.setAttr(this.renderer, instanceRef, CSS_ATTR_IS_SHOW, '');
+    // this.setPropertiesForInstance(this.hostRef, instanceRef);
+    // Set isVisibility = true on the component instance;
+    this.tooltipInstRef.instance.show();
+    this.tooltipInstRef.changeDetectorRef.markForCheck();
+    // # console.log(`performShow(); - end`); // #
+  }
+
+  protected performHide(isNoAnimation: boolean): void {
+    if (this.isDisabledVal || !this.isPhaseAfterViewInit) {
+      return;
+    }
+    // # console.log(`performHide(); - start`); // #
+    if (!!this.tooltipInstRef) {
+      // # console.log(`performHide(); tooltipInstRef.instance.hide();`); // #
+      // Set isVisibility = false on the component instance;
+      this.tooltipInstRef.instance.hide();
+      this.tooltipInstRef.changeDetectorRef.markForCheck();
+      if (!isNoAnimation) {
+        // Add an animation completion listener.
+        this.addAnimationEventListener(this.tooltipInstRef.location);
+        // Add the necessary attributes for the tooltip before hiding.
+        HtmlElemUtil.setAttr(this.renderer, this.tooltipInstRef.location, CSS_ATTR_IS_HIDE, '');
+        HtmlElemUtil.setAttr(this.renderer, this.tooltipInstRef.location, CSS_ATTR_IS_SHOW, null);
+      } else {
+        // If there is no animation, then remove the tooltip component instance.
+        this.overlayDetach();
+      }
+    }
+    // # console.log(`performHide(); - end`); // #
+  }
   /** When detaching the overlay, remove: the reference to the component instance and the subscription to this event. */
-  public overlayDetach(): void {
+  protected overlayDetach(): void {
     if (this.overlayRef && this.overlayRef.hasAttached()) {
       this.overlayRef.detach();
     }
     // Remove the reference to the component.
     this.tooltipInstRef = null;
-  }
-
-  // ** Protected methods **
-
-  protected addListenersForScrollEnd(): void {
-    if (!this.isNoHideOnScrollVal) {
-      // Get a list of parents on which the scroll is located (if there are none, then the document).
-      const scrollParentList: Element[] = ParentScrollUtil.getParentListWithScroll(this.hostRef.nativeElement.parentElement);
-      for (let idx = 0; idx < scrollParentList.length; idx++) {
-        this.listenersForScrollEnd.push([scrollParentList[idx], 'scroll', () => this.hide(0, { noAnimation: true })]);
-      }
-      // Adding event listeners for the parent element's scroll (to complete the displaying of the additional element).
-      EventListenerUtil.addListeners(this.listenersForScrollEnd);
-    }
   }
   protected createPositionStrategy(overlay: Overlay, positions: ConnectedPosition[]): PositionStrategy {
     return overlay.position().flexibleConnectedTo(this.hostRef).withFlexibleDimensions(false).withPositions(positions);
@@ -317,17 +359,18 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
 
     if (!this.isDisabledVal) {
       const element: HTMLElement = this.hostRef.nativeElement;
+      const isNoAnimat: boolean = !!this.isNoAnimationVal;
       if (!this.isNoHoverableVal && this.isSupportsMouseEvents()) {
         // Defining event listeners to move the cursor within the element's border.
-        this.listenersToStart.push([element, 'mouseenter', () => this.show()]);
+        this.listenersToStart.push([element, 'mouseenter', () => this.startShow(this.showDelayVal || SHOW_DELAY_FOR_MOUSE)]);
         // Defining event listeners to move the cursor outside the element's border.
-        this.listenersForEnd.push([element, 'mouseleave', () => this.hide()]);
+        this.listenersForEnd.push([element, 'mouseleave', () => this.startHide(this.hideDelayVal || HIDE_DELAY_FOR_MOUSE, isNoAnimat)]);
       } else if (!this.isNoTouchableVal && !this.isSupportsMouseEvents()) {
         // Defining event listeners the touch within the element's border.
-        this.listenersToStart.push([element, 'touchstart', () => this.show()]);
+        this.listenersToStart.push([element, 'touchstart', () => this.startShow(this.showTouchDelayVal || SHOW_DELAY_FOR_TOUCH)]);
         // Defining event listeners the touch outside the element's border.
-        this.listenersForEnd.push([element, 'touchend', () => this.hide()]);
-        this.listenersForEnd.push([element, 'touchcancel', () => this.hide()]);
+        this.listenersForEnd.push([element, 'touchend', () => this.startHide(this.hideTouchDelayVal || HIDE_DELAY_FOR_TOUCH, isNoAnimat)]);
+        this.listenersForEnd.push([element, 'touchcancel', () => this.startHide(0, true)]);
       }
       // Adding event listeners to start displaying an additional element.
       EventListenerUtil.addListeners(this.listenersToStart);
