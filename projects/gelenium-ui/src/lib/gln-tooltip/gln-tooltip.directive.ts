@@ -43,6 +43,8 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public hideDelay: number | string | null | undefined;
   @Input('glnttHideTouchDelay')
   public hideTouchDelay: number | string | null | undefined;
+  @Input('glnttArrow')
+  public isArrow: string | boolean | null | undefined;
   @Input('glnttDisabled')
   public isDisabled: string | boolean | null | undefined;
   @Input('glnttNoAnimation')
@@ -123,6 +125,9 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
       const hideTouchDelayStr: string = (this.hideTouchDelay || this.currConfig.hideTouchDelay || '').toString();
       this.hideTouchDelayVal = this.converInt(hideTouchDelayStr, 0);
     }
+    if (changes['isArrow'] || (changes['config'] && this.isArrow == null && this.currConfig.isArrow != null)) {
+      this.isArrowVal = BooleanUtil.init(this.isArrow) ?? !!this.currConfig.isArrow;
+    }
     if (changes['isDisabled']) {
       this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
     }
@@ -169,6 +174,9 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     if (this.hideTouchDelayVal == null) {
       const hideTouchDelayStr: string = (this.currConfig.hideTouchDelay || '').toString();
       this.hideTouchDelayVal = this.converInt(hideTouchDelayStr, 0);
+    }
+    if (this.isArrowVal == null) {
+      this.isArrowVal = !!this.currConfig.isArrow;
     }
     if (this.isNoAnimationVal == null) {
       this.isNoAnimationVal = !!this.currConfig.isNoAnimation;

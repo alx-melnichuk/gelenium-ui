@@ -2,6 +2,7 @@ export interface GlnTooltipConfig {
   classes?: string | string[] | undefined;
   hideDelay?: number | undefined;
   hideTouchDelay?: number | undefined;
+  isArrow?: boolean | undefined;
   isNoAnimation?: boolean | undefined;
   isNoHideOnScroll?: boolean | undefined;
   isNoHoverable?: boolean | undefined;

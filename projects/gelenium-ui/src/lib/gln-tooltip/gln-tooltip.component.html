@@ -6,4 +6,7 @@
     [ngTemplateOutletContext]="content">
   </ng-container>
 </ng-template>
-<!-- <span class="gln-tooltip-arrow"></span> -->
+<span class="gln-tooltip-arrow"
+  *ngIf="isArrow"
+  [attr.pos]="position"
+  [attr.alg]="alignment"></span>

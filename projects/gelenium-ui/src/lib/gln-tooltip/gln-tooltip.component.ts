@@ -23,9 +23,17 @@ export class GlnTooltipComponent extends GlnTooltipBaseComponent {
     return true;
   }
 
-  public override isArrow: boolean | null = null;
+  public isArrow: boolean | null = null;
+  public position: string | null = null;
+  public alignment: string | null = null;
 
   constructor() {
     super();
+  }
+
+  public override setOption(options: Record<string, unknown>): void {
+    this.isArrow = options['isArrow'] != null ? !!options['isArrow'] : this.isArrow;
+    this.position = options['pos'] != null ? (options['pos'] as string) : this.position;
+    this.alignment = options['alg'] != null ? (options['alg'] as string) : this.alignment;
   }
 }

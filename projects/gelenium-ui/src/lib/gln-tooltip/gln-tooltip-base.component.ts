@@ -4,7 +4,6 @@ import { Directive, TemplateRef } from '@angular/core';
 export abstract class GlnTooltipBaseComponent {
   public content: Record<string, unknown> | null = null;
   public isVisibility: boolean | null = null;
-  public isArrow: boolean | null = null;
   public text: string | null | undefined = null;
   public templateRef: TemplateRef<unknown> | null = null;
 
@@ -24,9 +23,5 @@ export abstract class GlnTooltipBaseComponent {
     return !!this.isVisibility;
   }
 
-  public setArrow(isArrow: boolean | null): void {
-    if (this.isArrow !== isArrow) {
-      this.isArrow !== isArrow;
-    }
-  }
+  public setOption(options: Record<string, unknown>): void {}
 }

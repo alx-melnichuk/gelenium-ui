@@ -266,23 +266,38 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
 
     // Tooltip updates.
     const validPosition: string = this.getValidPosition(this.positionVal);
-    this.setTooltipMessage(this.tooltipInstRef, this.messageVal, this.content);
-    this.setTooltipClasses(this.classesVal, this.renderer, this.tooltipInstRef);
+    const tokenList: string[] = (validPosition || '').split('-');
+    const position: string = tokenList[0];
+    const alignment: string = tokenList[1] || 'center';
+
+    this.setInstanceMessage(this.tooltipInstRef, this.messageVal, this.content);
+    if (this.isArrowVal) {
+      this.tooltipInstRef.instance.setOption({ isArrow: true, pos: position, alg: alignment });
+      // this.setInstanceCssArrow(this.hostRef, this.tooltipInstRef.location);
+    }
+    const instanceRef: ElementRef<HTMLElement> = this.tooltipInstRef.location;
+    for (let idx = 0; idx < this.classesVal.length; idx++) {
+      this.renderer.addClass(instanceRef.nativeElement, this.classesVal[idx]);
+    }
+
     this.setOverlayPosition(validPosition, this.overlayRef, this.renderer);
 
-    const instanceRef: ElementRef<HTMLElement> = this.tooltipInstRef.location;
     if (this.isNoAnimationVal) {
       this.renderer.setAttribute(instanceRef.nativeElement, CSS_ATTR_NO_ANM, '');
     }
     if (this.isNoTransformVal) {
       this.renderer.setAttribute(instanceRef.nativeElement, CSS_ATTR_NO_TRN, '');
     }
+
+    this.renderer.setAttribute(instanceRef.nativeElement, 'pos', position);
+    this.renderer.setAttribute(instanceRef.nativeElement, 'alg', alignment);
+
     // Add the necessary attributes for the tooltip before displaying.
     this.renderer.setAttribute(instanceRef.nativeElement, CSS_ATTR_IS_SHOW, '');
-    this.setPropertiesForInstance(this.hostRef, instanceRef);
-    this.setInstanceProperties(validPosition, instanceRef, this.renderer);
+
     // Set isVisibility = true on the component instance;
     this.tooltipInstRef.instance.show();
+
     this.tooltipInstRef.changeDetectorRef.markForCheck();
     // # console.log(`performShow(); - end`); // #
   }
@@ -395,12 +410,12 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
 
   // - - - - Set tooltip properties. - - - -
 
-  protected setTooltipMessage(
+  protected setInstanceMessage(
     instRef: ComponentRef<T> | null,
     message: string | TemplateRef<unknown> | null | undefined,
     content: Record<string, unknown> | null
   ): void {
-    if (instRef != null && message != null) {
+    if (!!instRef && message != null) {
       const typeName: string = typeof message;
       const messageStr: string | null = typeName === 'string' ? (message as string) : null;
       const messageTmplRef: TemplateRef<unknown> | null = typeName === 'object' ? (message as TemplateRef<unknown>) : null;
@@ -412,15 +427,6 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
         instRef.instance.content = content;
         instRef.changeDetectorRef.markForCheck();
       }
-    }
-  }
-  /** Add style classes to the tooltip element. */
-  protected setTooltipClasses(classes: string[], renderer: Renderer2, instRef: ComponentRef<T> | null): void {
-    if (instRef != null && classes.length > 0) {
-      for (let idx = 0; idx < classes.length; idx++) {
-        this.renderer.addClass(instRef.location.nativeElement, classes[idx]);
-      }
-      instRef.changeDetectorRef.markForCheck();
     }
   }
   /** Updates the position of the tooltip. */
@@ -441,22 +447,19 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       positionStrategy.apply();
     }
   }
-  protected setInstanceProperties(validPosition: string, instanceRef: ElementRef<HTMLElement> | null, renderer: Renderer2 | null): void {
-    if (!!validPosition && !!instanceRef && !!renderer) {
-      const tokenList: string[] = (validPosition || '').split('-');
-      const token1: string = tokenList[0];
-      renderer.setAttribute(instanceRef.nativeElement, 'pos', token1);
-    }
-  }
-  protected setPropertiesForInstance(hostRef: ElementRef<HTMLElement> | null, instanceRef: ElementRef<HTMLElement> | null): void {
+  protected setInstanceCssArrow(hostRef: ElementRef<HTMLElement> | null, instanceRef: ElementRef<HTMLElement> | null): void {
     if (hostRef != null && instanceRef != null) {
       const offsetWidth: number = hostRef.nativeElement.offsetWidth;
       const offsetHeight: number = hostRef.nativeElement.offsetHeight;
 
       const fontSize: number = Number(getComputedStyle(instanceRef.nativeElement).getPropertyValue('font-size').replace('px', ''));
-      const bottomTranslateX: number = Math.round(offsetWidth / 2 - fontSize / 2);
+      console.log(`fontSize: ${fontSize}px`); // #
+      // const bottomTranslateX: number = Math.round(offsetWidth / 2 - fontSize / 2);
 
-      HtmlElemUtil.setProperty(instanceRef, '--glnttd--bt-tr-x', bottomTranslateX.toString().concat('px'));
+      // const minShiftX: number = Math.round((offsetWidth / 2 - 0.92 * fontSize / 2) * 100) / 100;
+      // HtmlElemUtil.setProperty(instanceRef, '--glnttd--min-shift-x', minShiftX.toString().concat('px'));
+      const maxShiftX: number = Math.round((offsetWidth / 2 - (0.92 * fontSize) / 2) * 100) / 100;
+      HtmlElemUtil.setProperty(instanceRef, '--glnttd--max-shift-x', maxShiftX.toString().concat('px'));
     }
   }
 
