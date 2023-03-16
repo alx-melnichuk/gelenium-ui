@@ -25,7 +25,7 @@ import { GlnTooltipConfig } from './gln-tooltip-config.interface';
 import { GlnTooltipComponent } from './gln-tooltip.component';
 import { GLN_TOOLTIP_SCROLL_STRATEGY } from './gln-tooltip.providers';
 
-export const TOOLTIP_MAX_WIDTH = 280;
+export const MAX_WIDTH = 280;
 export const GLN_TOOLTIP_CONFIG = new InjectionToken<GlnTooltipConfig>('GLN_TOOLTIP_CONFIG');
 
 @Directive({
@@ -57,6 +57,14 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public isNoTouchable: string | boolean | null | undefined;
   @Input('glnttNoTransform')
   public isNoTransform: string | boolean | null | undefined;
+  @Input('glnttMaxHeight')
+  public maxHeight: number | string | null | undefined;
+  @Input('glnttMaxWidth')
+  public maxWidth: number | string | null | undefined;
+  @Input('glnttMinHeight')
+  public minHeight: number | string | null | undefined;
+  @Input('glnttMinWidth')
+  public minWidth: number | string | null | undefined;
   @Input('glnTooltip')
   public message: string | TemplateRef<unknown> | null | undefined;
   @Input('glnttPosition')
@@ -82,7 +90,6 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public override minWidthVal: number | string | null = null; // Binding attribute "minWidth".
   public override messageVal: string | TemplateRef<unknown> | null | undefined = null; // Binding attribute "message".
   public override overlayClassesVal: string[] = [];
-  public override positionVal: string | null = null; // Binding attribute "position"
   public override showDelayVal: number | null = null; // Binding attribute "showDelay".
   public override showTouchDelayVal: number | null = null; // Binding attribute "showTouchDelay".
 
@@ -106,11 +113,6 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
-
-      this.maxHeightVal = this.currConfig.maxHeight || null;
-      this.maxWidthVal = this.currConfig.maxWidth || TOOLTIP_MAX_WIDTH;
-      this.minHeightVal = this.currConfig.minHeight || null;
-      this.minWidthVal = this.currConfig.minWidth || null;
     }
 
     if (changes['classes'] || (changes['config'] && this.classes == null && this.currConfig.classes != null)) {
@@ -145,6 +147,22 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     }
     if (changes['isNoTransform'] || (changes['config'] && this.isNoTransform == null && this.currConfig.isNoTransform != null)) {
       this.isNoTransformVal = BooleanUtil.init(this.isNoTransform) ?? !!this.currConfig.isNoTransform;
+    }
+    if (changes['maxHeight'] || (changes['config'] && this.maxHeight == null && this.currConfig.maxHeight != null)) {
+      const maxHeightStr: string = (this.maxHeight || this.currConfig.maxHeight || '').toString();
+      this.maxHeightVal = this.converInt(maxHeightStr, -1);
+    }
+    if (changes['maxWidth'] || (changes['config'] && this.maxWidth == null && this.currConfig.maxWidth != null)) {
+      const maxWidthStr: string = (this.maxWidth || this.currConfig.maxWidth || '').toString();
+      this.maxWidthVal = this.converInt(maxWidthStr, MAX_WIDTH);
+    }
+    if (changes['minHeight'] || (changes['config'] && this.minHeight == null && this.currConfig.minHeight != null)) {
+      const minHeightStr: string = (this.minHeight || this.currConfig.minHeight || '').toString();
+      this.minHeightVal = this.converInt(minHeightStr, -1);
+    }
+    if (changes['minWidth'] || (changes['config'] && this.minWidth == null && this.currConfig.minWidth != null)) {
+      const minWidthStr: string = (this.minWidth || this.currConfig.minWidth || '').toString();
+      this.minWidthVal = this.converInt(minWidthStr, -1);
     }
     if (changes['message']) {
       this.messageVal = this.message || null;
@@ -192,6 +210,22 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
     }
     if (this.isNoTransformVal == null) {
       this.isNoTransformVal = !!this.currConfig.isNoTransform;
+    }
+    if (this.maxHeightVal == null) {
+      const maxHeightStr: string = (this.currConfig.maxHeight || '').toString();
+      this.maxHeightVal = this.converInt(maxHeightStr, -1);
+    }
+    if (this.maxWidthVal == null) {
+      const maxWidthStr: string = (this.currConfig.maxWidth || '').toString();
+      this.maxWidthVal = this.converInt(maxWidthStr, MAX_WIDTH);
+    }
+    if (this.minHeightVal == null) {
+      const minHeightStr: string = (this.currConfig.minHeight || '').toString();
+      this.minHeightVal = this.converInt(minHeightStr, -1);
+    }
+    if (this.minWidthVal == null) {
+      const minWidthStr: string = (this.currConfig.minWidth || '').toString();
+      this.minWidthVal = this.converInt(minWidthStr, -1);
     }
     if (this.overlayClassesVal.length === 0) {
       const overlayClasses: string | string[] = this.currConfig.overlayClasses || [];

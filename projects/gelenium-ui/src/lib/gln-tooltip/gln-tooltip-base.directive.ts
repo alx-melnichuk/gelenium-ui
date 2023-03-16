@@ -13,7 +13,6 @@ import { Platform } from '@angular/cdk/platform';
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { AfterViewInit, ComponentRef, Directive, ElementRef, OnDestroy, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
 import { EventListenerType, EventListenerUtil } from '../_utils/event-listener.util';
-import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { ParentScrollUtil } from '../_utils/parent-scroll.util';
 
 import { GlnTooltipBaseComponent } from './gln-tooltip-base.component';
@@ -25,6 +24,8 @@ const CSS_ATTR_NO_TRN = 'noTrn';
 
 const CSS_CLASS_PANEL = 'gln-tooltip-panel';
 
+const ANIMATION_END = 'animationend';
+const ANIMATION_CANCEL = 'animationcancel';
 const SHOW_DELAY_FOR_MOUSE = 100;
 const HIDE_DELAY_FOR_MOUSE = 0;
 const SHOW_DELAY_FOR_TOUCH = 800;
@@ -76,7 +77,18 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   public minWidthVal: number | string | null = null; // Binding "config.minWidth".
   public messageVal: string | TemplateRef<unknown> | null | undefined = null; // Binding attribute "message".
   public overlayClassesVal: string[] = [];
-  public positionVal: string | null = null; // Binding attribute "position"
+  // Binding attribute "position"
+  public get positionVal(): string | null {
+    return this.innPositionVal;
+  }
+  public set positionVal(value: string | null) {
+    if (value !== this.innPositionVal) {
+      this.innPositionVal = value;
+      if (this.isPhaseAfterViewInit) {
+        this.startHide(0, true);
+      }
+    }
+  }
   public showDelayVal: number | null = null; // Binding attribute "showDelay".
   public showTouchDelayVal: number | null = null; // Binding attribute "showTouchDelay".
 
@@ -94,6 +106,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   // Event listeners for the parent element's scroll (to complete the displaying of the additional element).
   private readonly listenersForScrollEnd: EventListenerType[] = [];
   private innIsDisabledVal: boolean | null = null;
+  private innPositionVal: string | null = null;
   private isPhaseAfterViewInit: boolean = false;
   private positionClassCurr: string = '';
   private timeoutForShow: number | undefined = undefined;
@@ -265,17 +278,17 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     this.tooltipInstRef = this.overlayRef.attach(this.portal);
 
     // Tooltip updates.
-    const validPosition: string = this.getValidPosition(this.positionVal);
-    const tokenList: string[] = (validPosition || '').split('-');
-    const position: string = tokenList[0];
-    const alignment: string = tokenList[1] || 'center';
-
     this.setInstanceMessage(this.tooltipInstRef, this.messageVal, this.content);
+
+    const validPosition: string = this.getValidPosition(this.positionVal);
+    const { position, alignment } = this.getPositionParts(validPosition);
+
+    const instanceRef: ElementRef<HTMLElement> = this.tooltipInstRef.location;
     if (this.isArrowVal) {
       this.tooltipInstRef.instance.setOption({ isArrow: true, pos: position, alg: alignment });
-      // this.setInstanceCssArrow(this.hostRef, this.tooltipInstRef.location);
+      const heightHalf: number = Math.round((this.hostRef.nativeElement.offsetHeight / 2) * 100) / 100;
+      instanceRef.nativeElement.style.setProperty('--glnttr--own-hg-half', heightHalf.toString().concat('px'));
     }
-    const instanceRef: ElementRef<HTMLElement> = this.tooltipInstRef.location;
     for (let idx = 0; idx < this.classesVal.length; idx++) {
       this.renderer.addClass(instanceRef.nativeElement, this.classesVal[idx]);
     }
@@ -341,26 +354,17 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       // Strategy with which to position the overlay.
       positionStrategy: this.createPositionStrategy(this.overlay, [this.getConnectedPosition(this.getValidPosition(this.positionVal))]),
       // Strategy to be used when handling scroll events while the overlay is open.
-      // #scrollStrategy: this.overlay.scrollStrategies.close(),
-      scrollStrategy: this.scrollStrategy, // work
+      scrollStrategy: this.scrollStrategy,
       // Custom class to add to the overlay pane.
       panelClass: [CSS_CLASS_PANEL].concat(this.overlayClassesVal),
-      // // Whether the overlay has a backdrop.
-      // hasBackdrop?: boolean;
-      // // Custom class to add to the backdrop
-      // backdropClass?: string | string[];
-      // /** The width of the overlay panel. If a number is provided, pixel units are assumed. */
-      // width?: number | string;
-      // /** The height of the overlay panel. If a number is provided, pixel units are assumed. */
-      // height?: number | string;
       // The min-width of the overlay panel. If a number is provided, pixel units are assumed.
       minWidth: this.minWidthVal != null && this.minWidthVal >= 0 ? this.minWidthVal : undefined,
       // The min-height of the overlay panel. If a number is provided, pixel units are assumed.
       minHeight: this.minHeightVal != null && this.minHeightVal >= 0 ? this.minHeightVal : undefined,
       // The max-width of the overlay panel. If a number is provided, pixel units are assumed.
-      maxWidth: this.maxWidthVal != null && this.maxWidthVal >= 0 ? this.maxWidthVal : undefined,
+      maxWidth: this.maxWidthVal != null && this.maxWidthVal > 0 ? this.maxWidthVal : undefined,
       // The max-height of the overlay panel. If a number is provided, pixel units are assumed.
-      maxHeight: this.maxHeightVal != null && this.maxHeightVal >= 0 ? this.maxHeightVal : undefined,
+      maxHeight: this.maxHeightVal != null && this.maxHeightVal > 0 ? this.maxHeightVal : undefined,
     };
   }
   /** Handling the completion of the tooltip hide animation. */
@@ -447,57 +451,46 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       positionStrategy.apply();
     }
   }
-  protected setInstanceCssArrow(hostRef: ElementRef<HTMLElement> | null, instanceRef: ElementRef<HTMLElement> | null): void {
-    if (hostRef != null && instanceRef != null) {
-      const offsetWidth: number = hostRef.nativeElement.offsetWidth;
-      const offsetHeight: number = hostRef.nativeElement.offsetHeight;
-
-      const fontSize: number = Number(getComputedStyle(instanceRef.nativeElement).getPropertyValue('font-size').replace('px', ''));
-      console.log(`fontSize: ${fontSize}px`); // #
-      // const bottomTranslateX: number = Math.round(offsetWidth / 2 - fontSize / 2);
-
-      // const minShiftX: number = Math.round((offsetWidth / 2 - 0.92 * fontSize / 2) * 100) / 100;
-      // HtmlElemUtil.setProperty(instanceRef, '--glnttd--min-shift-x', minShiftX.toString().concat('px'));
-      const maxShiftX: number = Math.round((offsetWidth / 2 - (0.92 * fontSize) / 2) * 100) / 100;
-      HtmlElemUtil.setProperty(instanceRef, '--glnttd--max-shift-x', maxShiftX.toString().concat('px'));
-    }
-  }
 
   // ** Private methods **
 
-  private getConnectedPosition(position: string | null): ConnectedPosition {
+  private getPositionParts(positionIn: string | null): { position: string; alignment: string } {
+    const tokenList: string[] = (positionIn || '').split('-');
+    const position: string = tokenList[0] || 'bottom';
+    const alignment: string = tokenList[1] || 'center';
+    return { position, alignment };
+  }
+  private getConnectedPosition(positionIn: string | null): ConnectedPosition {
     let originX: HorizontalConnectionPos = 'center'; // 'start' | 'center' | 'end'
     let originY: VerticalConnectionPos = 'bottom'; // 'top' | 'center' | 'bottom'
     let overlayX: HorizontalConnectionPos = 'center'; // 'start' | 'center' | 'end'
     let overlayY: VerticalConnectionPos = 'top'; // 'top' | 'center' | 'bottom'
 
-    const tokenList: string[] = (position || '').split('-');
-    const token1: string = tokenList[0];
-    const token2: string | undefined = tokenList[1];
+    const { position, alignment } = this.getPositionParts(positionIn);
 
-    if ('top' === token1 || 'bottom' === token1) {
-      originY = 'top' === token1 ? 'top' : 'bottom';
-      overlayY = 'top' === token1 ? 'bottom' : 'top';
-      originX = overlayX = 'start' === token2 ? 'start' : 'end' === token2 ? 'end' : 'center';
-    } else if ('left' === token1 || 'right' === token1) {
-      originX = 'left' === token1 ? 'start' : 'end';
-      overlayX = 'left' === token1 ? 'end' : 'start';
-      originY = overlayY = 'start' === token2 ? 'top' : 'end' === token2 ? 'bottom' : 'center';
+    if ('top' === position || 'bottom' === position) {
+      originY = 'top' === position ? 'top' : 'bottom';
+      overlayY = 'top' === position ? 'bottom' : 'top';
+      originX = overlayX = 'start' === alignment ? 'start' : 'end' === alignment ? 'end' : 'center';
+    } else if ('left' === position || 'right' === position) {
+      originX = 'left' === position ? 'start' : 'end';
+      overlayX = 'left' === position ? 'end' : 'start';
+      originY = overlayY = 'start' === alignment ? 'top' : 'end' === alignment ? 'bottom' : 'center';
     }
     return { originX, originY, overlayX, overlayY };
   }
   /** Add an animation completion listener. */
   private addAnimationEventListener(instanceRef: ElementRef<HTMLElement> | null): void {
     if (!!instanceRef) {
-      instanceRef.nativeElement.addEventListener('animationend', this.handlerToAnimationFinish);
-      instanceRef.nativeElement.addEventListener('animationcancel', this.handlerToAnimationFinish);
+      instanceRef.nativeElement.addEventListener(ANIMATION_END, this.handlerToAnimationFinish);
+      instanceRef.nativeElement.addEventListener(ANIMATION_CANCEL, this.handlerToAnimationFinish);
     }
   }
   /** Remove an animation completion listener. */
   private removeAnimationEventListener(instanceRef: ElementRef<HTMLElement> | null): void {
     if (!!instanceRef) {
-      instanceRef.nativeElement.removeEventListener('animationend', this.handlerToAnimationFinish);
-      instanceRef.nativeElement.removeEventListener('animationcancel', this.handlerToAnimationFinish);
+      instanceRef.nativeElement.removeEventListener(ANIMATION_END, this.handlerToAnimationFinish);
+      instanceRef.nativeElement.removeEventListener(ANIMATION_CANCEL, this.handlerToAnimationFinish);
     }
   }
 }
