@@ -1,7 +1,16 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
 
+import { GlnTooltipConfig, GLN_TOOLTIP_CONFIG } from 'gelenium-ui';
+
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
+
+const glnTooltipConfigDefault: GlnTooltipConfig = {
+  classes: 'ttc-panel',
+  isArrow: true,
+  isNoTransform: true,
+  position: 'bottom-start',
+};
 
 @Component({
   selector: 'app-cm-tooltip-basic',
@@ -9,6 +18,7 @@ import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-co
   styleUrls: ['./cm-tooltip-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: GLN_TOOLTIP_CONFIG, useValue: glnTooltipConfigDefault }],
 })
 export class CmTooltipBasicComponent {
   @Input()
@@ -22,17 +32,17 @@ export class CmTooltipBasicComponent {
 
   public urlCmTooltip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TOOLTIP');
 
-  public isShowBasic = true;
-  public isShowAttributes01 = true; // 02(abcd)
-  public isShowAttributes02 = true; // 02(efgh)
-  public isShowAttributes03 = true; // 02(ijkl)
-  public isShowAttributes04 = true; // 02(mnop)
-  public isShowCustomization = true;
-  public isShowFeature = true;
+  public isShowBasic = false;
+  public isShowAttributes01 = false; // 02(abcd)
+  public isShowAttributes02 = false; // 02(efgh)
+  public isShowAttributes03 = false; // 02(ijkl)
+  public isShowAttributes04 = false; // 02(mnop)
+  public isShowCustomization = false;
+  public isShowFeature = false;
   // public isShowSize = false; // 03
   // Palette // 04
   // Customization // 05
-  // Config // 08
+  public isShowConfig = true; // 08
   // Api // 09
 
   // Page: "Attributes" 01 // 02(abcd)
@@ -45,7 +55,7 @@ export class CmTooltipBasicComponent {
   public isDisabled02i: boolean = true;
 
   // Page: "Attributes" 04 // 02(mnop)
-  public position02m = 'bottom-start'; // 'bottom';
+  public position02m = 'left'; // 'bottom';
   public positionList: string[] = [
     'bottom',
     'bottom-start',
@@ -62,6 +72,8 @@ export class CmTooltipBasicComponent {
   ];
 
   // Page: "Feature" 07
+
+  // Page: "Config" 08
 
   // Page:
 

@@ -16,5 +16,4 @@ export interface GlnTooltipConfig {
   position?: string | undefined; // 'bottom[-start,-end]','top[-start,-end]','right[-start,-end]','left[-start,-end]';
   showDelay?: number | undefined;
   showTouchDelay?: number | undefined;
-  // backdropClass?: string | undefined; // default 'cdk-overlay-transparent-backdrop'
 }
