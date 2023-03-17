@@ -171,9 +171,10 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   public ngOnInit(): void {
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
-    // Set the TagIndex value if the flag 'disabled' is not set.
-    HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'tabindex', !this.isDisabledVal ? '' + this.tabIndex : null);
-
+    if (!this.isDisabledVal) {
+      // Set the TagIndex value if the flag 'disabled' is not set.
+      this.renderer.setAttribute(this.hostRef.nativeElement, 'tabindex', '' + this.tabIndex);
+    }
     this.prepareCssProperties(this.hostRef);
 
     const isChecked: boolean | null = BooleanUtil.init(this.isChecked) ?? (this.currConfig.isChecked || null);
@@ -216,7 +217,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     this.isRemoveAttrHideAnimation = !this.parentFormGroup;
     if (this.isRemoveAttrHideAnimation) {
       // Add an attribute that disables animation on initialization.
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_HIDE_ANIMATION_INIT, '');
+      this.renderer.setAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT, '');
     }
   }
 
@@ -237,7 +238,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
       this.isRemoveAttrHideAnimation = false;
       Promise.resolve().then(() => {
         // Remove an attribute that disables animation on initialization.
-        HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_HIDE_ANIMATION_INIT, null);
+        this.renderer.removeAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT);
       });
     }
   }
@@ -308,7 +309,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
       if (this.isRemoveAttrHideAnimation) {
         this.isRemoveAttrHideAnimation = false;
         // Remove an attribute that disables animation on initialization.
-        HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_HIDE_ANIMATION_INIT, null);
+        this.renderer.removeAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT);
       }
       this.onChange(newValue);
       this.change.emit({ checked: newValue, source: this });
