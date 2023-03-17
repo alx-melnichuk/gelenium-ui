@@ -1,9 +1,10 @@
-import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
+import { ScrollStrategy } from '@angular/cdk/overlay';
 import { InjectionToken } from '@angular/core';
 
 /** Injection token that determines how scrolling is handled when the overlay panel is open. */
 export const GLN_TOOLTIP_SCROLL_STRATEGY = new InjectionToken<() => ScrollStrategy>('GLN_TOOLTIP_SCROLL_STRATEGY');
 
+/*
 export function GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_BLOCK_FACTORY(overlay: Overlay): () => ScrollStrategy {
   return () => overlay.scrollStrategies.block();
 }
@@ -22,3 +23,12 @@ export const GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_CLOSE = {
   deps: [Overlay],
   useFactory: GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_CLOSE_FACTORY,
 };
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, BrowserAnimationsModule, ...],
+  bootstrap: [AppComponent],
+  providers: [GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_CLOSE],
+})
+export class AppModule {}
+*/

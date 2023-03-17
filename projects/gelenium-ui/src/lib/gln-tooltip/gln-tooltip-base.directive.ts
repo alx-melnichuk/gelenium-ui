@@ -3,7 +3,6 @@ import {
   FlexibleConnectedPositionStrategy,
   HorizontalConnectionPos,
   Overlay,
-  OverlayConfig,
   OverlayRef,
   PositionStrategy,
   ScrollStrategy,
@@ -26,10 +25,6 @@ const CSS_CLASS_PANEL = 'gln-tooltip-panel';
 
 const ANIMATION_END = 'animationend';
 const ANIMATION_CANCEL = 'animationcancel';
-const SHOW_DELAY_FOR_MOUSE = 100;
-const HIDE_DELAY_FOR_MOUSE = 0;
-const SHOW_DELAY_FOR_TOUCH = 800;
-const HIDE_DELAY_FOR_TOUCH = 1500;
 
 export const TOOLTIP_POSITION: { [key: string]: string } = {
   'bottom': 'bottom',
@@ -163,8 +158,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     return this.startHide(0, options?.noAnimation || !!this.isNoAnimationVal);
   }
   /** Shows/hides the tooltip. */
-  public toggle(): void {
-    this.isVisible() ? this.hide() : this.show();
+  public toggle(): Promise<void> {
+    return this.isVisible() ? this.hide() : this.show();
   }
   /** If the tooltip is currently visible, returns true. */
   public isVisible(): boolean {
@@ -178,9 +173,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     if (this.isDisabledVal || !this.isPhaseAfterViewInit) {
       return Promise.resolve();
     }
-    // # console.log(`startShow(); - start`); // #
     if (!this.tooltipInstRef || !!this.timeoutForHide) {
-      // # console.log(`startShow(); !tooltipInstRef || !!timeoutForHide  addListeners();`); // #
       // Adding event listeners to finish displaying the additional element.
       EventListenerUtil.addListeners(this.listenersForEnd);
       if (!this.isNoHideOnScrollVal) {
@@ -195,12 +188,9 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     }
     if (!!this.tooltipInstRef || !!this.timeoutForHide) {
       if (!!this.timeoutForHide) {
-        // # console.log(`startShow(); !!timeoutForHide  clearTimeout(timeoutForHide);`); // #
-        console.log(``); // #
         window.clearTimeout(this.timeoutForHide);
         this.timeoutForHide = undefined;
       }
-      // # console.log(`startShow(); !!tooltipInstRef || !!timeoutForHide  return;`); // #
       return Promise.resolve();
     }
     return new Promise<void>((resolve: () => void, reject: () => void) => {
@@ -208,8 +198,6 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
         () => {
           this.timeoutForShow = undefined;
           this.performShow();
-          // # console.log(`startShow(); - end`); // #
-          console.log(``); // #
           resolve();
         },
         delay > 0 && !this.isNoAnimationVal ? delay : 0
@@ -221,9 +209,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     if (this.isDisabledVal || !this.isPhaseAfterViewInit) {
       return Promise.resolve();
     }
-    // # console.log(`startHide(); - start`); // #
     if (!!this.tooltipInstRef || !!this.timeoutForShow) {
-      // # console.log(`startHide(); !!tooltipInstRef || !!timeoutForShow  removeListeners();`); // #
       // Removing event listeners to finish displaying the additional element.
       EventListenerUtil.removeListeners(this.listenersForEnd);
       // Removing event listeners for the parent element's scroll (to complete the displaying of the additional element).
@@ -232,48 +218,46 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     }
     if (!this.tooltipInstRef || !!this.timeoutForShow) {
       if (!!this.timeoutForShow) {
-        // # console.log(`startHide(); !!timeoutForShow  clearTimeout(timeoutForShow);`); // #
-        console.log(``); // #
         window.clearTimeout(this.timeoutForShow);
         this.timeoutForShow = undefined;
       }
-      // # console.log(`startHide(); !tooltipInstRef || !!timeoutForShow  return;`); // #
       return Promise.resolve();
     }
-    // # console.log(`startHide(); timeoutForHide = setTimeout();`); // #
     return new Promise<void>((resolve: () => void, reject: () => void) => {
       this.timeoutForHide = window.setTimeout(
         () => {
           this.timeoutForHide = undefined;
-          // # console.log(`startHide(); performHide(isNoAnimation:${isNoAnimation});`); // #
           this.performHide(isNoAnimation);
-          // # console.log(`startHide(); - end`); // #
-          console.log(``); // #
           resolve();
         },
         delay > 0 && !isNoAnimation ? delay : 0
       );
     });
   }
+
   protected performShow(): void {
     if (this.isDisabledVal || !this.isPhaseAfterViewInit) {
       return;
     }
-    // # console.log(`performShow(); - start`); // #
     if (this.overlayRef == null) {
-      // # console.log(`performShow(); overlay.create();`); // #
-      this.overlayRef = this.overlay.create(this.createOverlayConfig());
+      this.overlayRef = this.overlay.create({
+        positionStrategy: this.createPositionStrategy(this.overlay, [this.getConnectedPosition(this.getValidPosition(this.positionVal))]),
+        scrollStrategy: this.scrollStrategy,
+        panelClass: [CSS_CLASS_PANEL].concat(this.overlayClassesVal),
+        minWidth: this.minWidthVal != null && this.minWidthVal >= 0 ? this.minWidthVal : undefined,
+        minHeight: this.minHeightVal != null && this.minHeightVal >= 0 ? this.minHeightVal : undefined,
+        maxWidth: this.maxWidthVal != null && this.maxWidthVal > 0 ? this.maxWidthVal : undefined,
+        maxHeight: this.maxHeightVal != null && this.maxHeightVal > 0 ? this.maxHeightVal : undefined,
+      });
       // https://github.com/angular/components/issues/1432  Ability to manually control overlay's z-index.
       // Adding z-index: 'unset' will allow you to have one parent with a single z-index value.
       // This will correctly use the z-index for child elements.
       this.overlayRef.hostElement.style.zIndex = 'unset';
     }
     if (this.portal == null) {
-      // # console.log(`performShow(); portal = new ComponentPortal()`); // #
       this.portal = new ComponentPortal(this.tooltipCompType, this.viewContainerRef);
     }
 
-    // # console.log(`performShow(); tooltipInstRef = overlayRef.attach(portal);`); // #
     // Attach the tooltip portal to the overlay.
     this.tooltipInstRef = this.overlayRef.attach(this.portal);
 
@@ -312,16 +296,13 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     this.tooltipInstRef.instance.show();
 
     this.tooltipInstRef.changeDetectorRef.markForCheck();
-    // # console.log(`performShow(); - end`); // #
   }
 
   protected performHide(isNoAnimation: boolean): void {
     if (this.isDisabledVal || !this.isPhaseAfterViewInit) {
       return;
     }
-    // # console.log(`performHide(); - start`); // #
     if (!!this.tooltipInstRef) {
-      // # console.log(`performHide(); tooltipInstRef.instance.hide();`); // #
       // Set isVisibility = false on the component instance;
       this.tooltipInstRef.instance.hide();
       this.tooltipInstRef.changeDetectorRef.markForCheck();
@@ -336,7 +317,6 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
         this.overlayDetach();
       }
     }
-    // # console.log(`performHide(); - end`); // #
   }
   /** When detaching the overlay, remove: the reference to the component instance and the subscription to this event. */
   protected overlayDetach(): void {
@@ -347,25 +327,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     this.tooltipInstRef = null;
   }
   protected createPositionStrategy(overlay: Overlay, positions: ConnectedPosition[]): PositionStrategy {
-    return overlay.position().flexibleConnectedTo(this.hostRef).withFlexibleDimensions(false).withPositions(positions);
-  }
-  protected createOverlayConfig(): OverlayConfig {
-    return {
-      // Strategy with which to position the overlay.
-      positionStrategy: this.createPositionStrategy(this.overlay, [this.getConnectedPosition(this.getValidPosition(this.positionVal))]),
-      // Strategy to be used when handling scroll events while the overlay is open.
-      scrollStrategy: this.scrollStrategy,
-      // Custom class to add to the overlay pane.
-      panelClass: [CSS_CLASS_PANEL].concat(this.overlayClassesVal),
-      // The min-width of the overlay panel. If a number is provided, pixel units are assumed.
-      minWidth: this.minWidthVal != null && this.minWidthVal >= 0 ? this.minWidthVal : undefined,
-      // The min-height of the overlay panel. If a number is provided, pixel units are assumed.
-      minHeight: this.minHeightVal != null && this.minHeightVal >= 0 ? this.minHeightVal : undefined,
-      // The max-width of the overlay panel. If a number is provided, pixel units are assumed.
-      maxWidth: this.maxWidthVal != null && this.maxWidthVal > 0 ? this.maxWidthVal : undefined,
-      // The max-height of the overlay panel. If a number is provided, pixel units are assumed.
-      maxHeight: this.maxHeightVal != null && this.maxHeightVal > 0 ? this.maxHeightVal : undefined,
-    };
+    return overlay.position().flexibleConnectedTo(this.hostRef).withFlexibleDimensions(false).withPositions(positions).withPush(false);
   }
   /** Handling the completion of the tooltip hide animation. */
   protected handlerToAnimationFinish = (): void => {
@@ -389,14 +351,14 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       const isNoAnimat: boolean = !!this.isNoAnimationVal;
       if (!this.isNoHoverableVal && this.isSupportsMouseEvents()) {
         // Defining event listeners to move the cursor within the element's border.
-        this.listenersToStart.push([element, 'mouseenter', () => this.startShow(this.showDelayVal || SHOW_DELAY_FOR_MOUSE)]);
+        this.listenersToStart.push([element, 'mouseenter', () => this.startShow(this.showDelayVal || 0)]);
         // Defining event listeners to move the cursor outside the element's border.
-        this.listenersForEnd.push([element, 'mouseleave', () => this.startHide(this.hideDelayVal || HIDE_DELAY_FOR_MOUSE, isNoAnimat)]);
+        this.listenersForEnd.push([element, 'mouseleave', () => this.startHide(this.hideDelayVal || 0, isNoAnimat)]);
       } else if (!this.isNoTouchableVal && !this.isSupportsMouseEvents()) {
         // Defining event listeners the touch within the element's border.
-        this.listenersToStart.push([element, 'touchstart', () => this.startShow(this.showTouchDelayVal || SHOW_DELAY_FOR_TOUCH)]);
+        this.listenersToStart.push([element, 'touchstart', () => this.startShow(this.showTouchDelayVal || 0)]);
         // Defining event listeners the touch outside the element's border.
-        this.listenersForEnd.push([element, 'touchend', () => this.startHide(this.hideTouchDelayVal || HIDE_DELAY_FOR_TOUCH, isNoAnimat)]);
+        this.listenersForEnd.push([element, 'touchend', () => this.startHide(this.hideTouchDelayVal || 0, isNoAnimat)]);
         this.listenersForEnd.push([element, 'touchcancel', () => this.startHide(0, true)]);
       }
       // Adding event listeners to start displaying an additional element.
