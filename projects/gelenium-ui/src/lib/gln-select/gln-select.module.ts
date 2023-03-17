@@ -8,13 +8,11 @@ import { GlnHintOrErrorModule } from '../gln-hint-or-error/gln-hint-or-error.mod
 import { GlnOptionModule } from '../gln-option/gln-option.module';
 
 import { GlnSelectComponent } from './gln-select.component';
-import { GLN_SELECT_SCROLL_STRATEGY_PROVIDER_BLOCK } from './gln-select.providers';
 import { GlnSelectTriggerDirective } from './gln-select-trigger.directive';
 
 @NgModule({
   declarations: [GlnSelectComponent, GlnSelectTriggerDirective],
   imports: [CommonModule, OverlayModule, ReactiveFormsModule, GlnFrameModule, GlnHintOrErrorModule, GlnOptionModule],
   exports: [GlnSelectComponent, GlnSelectTriggerDirective],
-  providers: [GLN_SELECT_SCROLL_STRATEGY_PROVIDER_BLOCK],
 })
 export class GlnSelectModule {}

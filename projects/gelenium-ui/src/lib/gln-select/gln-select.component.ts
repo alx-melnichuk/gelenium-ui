@@ -277,7 +277,7 @@ export class GlnSelectComponent
     @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: (() => ScrollStrategy) | null
   ) {
     this.currConfig = this.rootConfig || {};
-    this.scrollStrategy = this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : this.overlay.scrollStrategies.noop();
+    this.scrollStrategy = this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : this.overlay.scrollStrategies.block();
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-select', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
   }
