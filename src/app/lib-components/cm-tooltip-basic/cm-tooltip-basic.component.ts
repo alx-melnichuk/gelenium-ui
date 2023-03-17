@@ -18,7 +18,7 @@ const glnTooltipConfigDefault: GlnTooltipConfig = {
   styleUrls: ['./cm-tooltip-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: GLN_TOOLTIP_CONFIG, useValue: glnTooltipConfigDefault }],
+  // providers: [{ provide: GLN_TOOLTIP_CONFIG, useValue: glnTooltipConfigDefault }],
 })
 export class CmTooltipBasicComponent {
   @Input()
@@ -32,18 +32,16 @@ export class CmTooltipBasicComponent {
 
   public urlCmTooltip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TOOLTIP');
 
-  public isShowBasic = false;
-  public isShowAttributes01 = false; // 02(abcd)
-  public isShowAttributes02 = false; // 02(efgh)
-  public isShowAttributes03 = false; // 02(ijkl)
-  public isShowAttributes04 = false; // 02(mnop)
-  public isShowCustomization = false;
-  public isShowFeature = false;
-  // public isShowSize = false; // 03
-  // Palette // 04
+  public isShowBasic = true;
+  public isShowAttributes01 = true; // 02(abcd)
+  public isShowAttributes02 = true; // 02(efgh)
+  public isShowAttributes03 = true; // 02(ijkl)
+  public isShowAttributes04 = true; // 02(mnop)
+  public isShowCustomization = true;
+  public isShowFeature = true;
   // Customization // 05
   public isShowConfig = true; // 08
-  // Api // 09
+  public isShowApi = true; // 09
 
   // Page: "Attributes" 01 // 02(abcd)
 
@@ -55,7 +53,7 @@ export class CmTooltipBasicComponent {
   public isDisabled02i: boolean = true;
 
   // Page: "Attributes" 04 // 02(mnop)
-  public position02m = 'left'; // 'bottom';
+  public position02m = 'bottom';
   public positionList: string[] = [
     'bottom',
     'bottom-start',
@@ -83,12 +81,7 @@ export class CmTooltipBasicComponent {
 
   public demo02 = 'Information-A';
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
-    // setTimeout(() => {
-    //   this.demo02 = 'Information-Demo';
-    //   this.changeDetectorRef.markForCheck();
-    // }, 6000);
-  }
+  constructor() {}
 
   // Page: "Attributes" 02
   public incVal(value: number, delta: number, max: number): number {
@@ -100,14 +93,6 @@ export class CmTooltipBasicComponent {
 
   // Page: ""
 
-  // public inputValue(eventTarget: EventTarget | null): string {
-  //   const inputElement: HTMLInputElement | undefined | null = eventTarget as HTMLInputElement;
-  //   return inputElement?.value || '';
-  // }
-  // public converInt(size: string, defaultValue: number): number {
-  //   const sizeNum: number = Number.parseInt(size);
-  //   return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
-  // }
   public getValue(eventTarget: any): any {
     return eventTarget != null ? (eventTarget as Attr).value : '';
   }

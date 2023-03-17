@@ -14,9 +14,6 @@ app-cm-tooltip-basic {
   }
 
   // Page: "Attributes" 01 // 02(abcd)
-  .tta1-ver {
-    vertical-align: middle;
-  }
   .tta1-group-place {
     width: 400px;
   }
@@ -46,14 +43,6 @@ app-cm-tooltip-basic {
     margin: 5px 5px;
     min-width: 100px;
     user-select: all;
-  }
-  .tta1-btn {
-    border-radius: 4px;
-    border-width: 0;
-    font-size: 0.875em; // 14px
-    height: 38px;
-    min-width: 64px;
-    padding: 0 16px;
   }
 
   // Page: "Attributes" 02 // 02(efgh)
@@ -179,23 +168,33 @@ app-cm-tooltip-basic {
     margin: 3px;
   }
 
-  // Page: ""
+
+  // Page: "Api" 09
+  table.ttap-table {
+    td {
+      &[mx-wd-230] {
+        max-width: 230px;
+        width: 230px;
+      }
+    }
+  }
+  
 }
 
 // Page: "Attributes" 03
-.gln-tooltip.tta3-panel-demo {
-  background-color: darkorange;
-  color: black;
-  .gln-tooltip-arrow {
-    color: darkorange;
-  }
+.tta3-panel-demo {
+  --glntt-color: black;
+  --glntt-bg-color: darkorange;
 }
-// Page: "Config" 08
-.gln-tooltip.ttc-panel {
-  background-color: cornflowerblue;
-  box-shadow: rgb(100, 119, 154) 0 8px 10px 1px;
 
-  .gln-tooltip-arrow {
-    color: cornflowerblue;
-  }
+// Page: "Customization" 06
+.ttcs-bootstrap {
+  --glntt-color: #fff;
+  --glntt-bg-color: #000;
+}
+
+// Page: "Config" 08
+.ttc-panel {
+  --glntt-bg-color: cornflowerblue;
+  box-shadow: rgb(100, 119, 154) 0 8px 10px 1px;
 }
