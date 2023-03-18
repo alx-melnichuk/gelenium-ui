@@ -239,9 +239,10 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     if (this.isDisabledVal || !this.isPhaseAfterViewInit) {
       return;
     }
+    const validPosition: string = this.getValidPosition(this.positionVal);
     if (this.overlayRef == null) {
       this.overlayRef = this.overlay.create({
-        positionStrategy: this.createPositionStrategy(this.overlay, [this.getConnectedPosition(this.getValidPosition(this.positionVal))]),
+        positionStrategy: this.createPositionStrategy(this.overlay, [this.getConnectedPosition(validPosition)]),
         scrollStrategy: this.scrollStrategy,
         panelClass: [CSS_CLASS_PANEL].concat(this.overlayClassesVal),
         minWidth: this.minWidthVal != null && this.minWidthVal >= 0 ? this.minWidthVal : undefined,
@@ -264,20 +265,21 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     // Tooltip updates.
     this.setInstanceMessage(this.tooltipInstRef, this.messageVal, this.content);
 
-    const validPosition: string = this.getValidPosition(this.positionVal);
     const { position, alignment } = this.getPositionParts(validPosition);
 
     const instanceRef: ElementRef<HTMLElement> = this.tooltipInstRef.location;
     if (this.isArrowVal) {
       this.tooltipInstRef.instance.setOption({ isArrow: true, pos: position, alg: alignment });
       const heightHalf: number = Math.round((this.hostRef.nativeElement.offsetHeight / 2) * 100) / 100;
-      instanceRef.nativeElement.style.setProperty('--glnttr--own-hg-half', heightHalf.toString().concat('px'));
+      this.overlayRef.hostElement.style.setProperty('--glnttar--own-hg-half', heightHalf.toString().concat('px'));
     }
     for (let idx = 0; idx < this.classesVal.length; idx++) {
       this.renderer.addClass(instanceRef.nativeElement, this.classesVal[idx]);
     }
 
-    this.setOverlayPosition(validPosition, this.overlayRef, this.renderer);
+    const positionStrategy = this.overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
+    positionStrategy.withPositions(this.getConnectedPositionList(validPosition));
+    positionStrategy.apply();
 
     if (this.isNoAnimationVal) {
       this.renderer.setAttribute(instanceRef.nativeElement, CSS_ATTR_NO_ANM, '');
@@ -285,19 +287,13 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     if (this.isNoTransformVal) {
       this.renderer.setAttribute(instanceRef.nativeElement, CSS_ATTR_NO_TRN, '');
     }
-
-    this.renderer.setAttribute(instanceRef.nativeElement, 'pos', position);
-    this.renderer.setAttribute(instanceRef.nativeElement, 'alg', alignment);
-
     // Add the necessary attributes for the tooltip before displaying.
     this.renderer.setAttribute(instanceRef.nativeElement, CSS_ATTR_IS_SHOW, '');
-
     // Set isVisibility = true on the component instance;
     this.tooltipInstRef.instance.show();
 
     this.tooltipInstRef.changeDetectorRef.markForCheck();
   }
-
   protected performHide(isNoAnimation: boolean): void {
     if (this.isDisabledVal || !this.isPhaseAfterViewInit) {
       return;
@@ -327,7 +323,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     this.tooltipInstRef = null;
   }
   protected createPositionStrategy(overlay: Overlay, positions: ConnectedPosition[]): PositionStrategy {
-    return overlay.position().flexibleConnectedTo(this.hostRef).withFlexibleDimensions(false).withPositions(positions).withPush(false);
+    return overlay.position().flexibleConnectedTo(this.hostRef).withFlexibleDimensions(false).withPositions(positions);
   }
   /** Handling the completion of the tooltip hide animation. */
   protected handlerToAnimationFinish = (): void => {
@@ -395,24 +391,6 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       }
     }
   }
-  /** Updates the position of the tooltip. */
-  protected setOverlayPosition(validPosition: string, overlayRef: OverlayRef | null, renderer: Renderer2 | null): void {
-    if (!!validPosition && overlayRef != null && !!renderer) {
-      const positionStrategy = overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
-      const connectedPosition: ConnectedPosition = this.getConnectedPosition(validPosition);
-      positionStrategy.withPositions([connectedPosition]);
-
-      renderer.setAttribute(overlayRef.overlayElement, 'glntt-position', validPosition);
-      const positionClass: string = 'gln-' + validPosition;
-      if (positionClass !== this.positionClassCurr) {
-        // Remove a CSS class or an array of classes from the overlay pane.
-        overlayRef.removePanelClass(this.positionClassCurr);
-        // Add a CSS class or an array of classes to the overlay pane.
-        overlayRef.addPanelClass((this.positionClassCurr = positionClass));
-      }
-      positionStrategy.apply();
-    }
-  }
 
   // ** Private methods **
 
@@ -439,7 +417,16 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       overlayX = 'left' === position ? 'end' : 'start';
       originY = overlayY = 'start' === alignment ? 'top' : 'end' === alignment ? 'bottom' : 'center';
     }
-    return { originX, originY, overlayX, overlayY };
+    return { originX, originY, overlayX, overlayY, panelClass: ['glntt-' + position, 'glntt-' + alignment] };
+  }
+  private getConnectedPositionList(validPosition: string): ConnectedPosition[] {
+    const result: ConnectedPosition[] = [];
+    const positions: string[] = Object.keys(TOOLTIP_POSITION);
+    let idx: number = positions.indexOf(validPosition);
+    for (let len: number = idx !== -1 ? positions.length : 0; len > 0; len--, idx = idx < positions.length ? idx + 1 : 0) {
+      result.push(this.getConnectedPosition(positions[idx]));
+    }
+    return result;
   }
   /** Add an animation completion listener. */
   private addAnimationEventListener(instanceRef: ElementRef<HTMLElement> | null): void {
