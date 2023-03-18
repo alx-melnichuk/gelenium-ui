@@ -156,7 +156,8 @@ app-tooltip &#123;
 </section>
 
 
-<div class="app-group">
+<div *ngIf="isShowAttributes01"
+  class="app-group">
   <div>
     <small>
       <em>Attribute: glnttPosition.</em>
@@ -432,7 +433,8 @@ app-tooltip &#123;
   </ul>
 </section>
 
-<div class="app-group">
+<div *ngIf="isShowAttributes02"
+  class="app-group">
   <div class="app-elem">
     <small>
       <em>Attributes: glnttShowDelay, glnttHideDelay.</em>
@@ -1002,6 +1004,9 @@ app-tooltip &#123;
   </ul>
 </section>
 
+<!-- <div style="height: 300px;">_</div>
+<div style="height: 300px;">_</div>
+<div style="height: 300px;">_</div> -->
 
 <div *ngIf="isShowAttributes04"
   class="app-group">
@@ -1064,7 +1069,30 @@ app-tooltip &#123;
     </div>
   </div>
 
+  <!-- <div class="app-elem">
+    <div>
+      <small>
+        <em>Tooltip on click.</em>
+      </small>
+    </div>
+    <div>
+      <button class="tta4-btn"
+        glnttArrow
+        [glnttPosition]="position02m"
+        glnTooltip="Information about the action of this button."
+        glnttNoHoverable
+        glnttNoTouchable
+        #tooltip02n="glnTooltip"
+        (click)="tooltip02n.toggle()">
+        Action
+      </button>
+    </div>
+  </div> -->
+
 </div>
+<!-- <div style="height: 300px;">_</div>
+<div style="height: 300px;">_</div>
+<div style="height: 300px;">_</div> -->
 
 <hr br-nn />
 
@@ -1379,71 +1407,71 @@ app-tooltip &#123;
 &lt;/button&gt;</pre></code>
 </section>
 
-<ng-container *ngIf="isShowFeature">
-  <div class="app-group">
 
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Show the tooltip only if the element is out of bounds.</em>
-        </small>
-      </div>
-      <div>
-        <button class="ttft-btn"
-          style="max-width: 106px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
-          glnTooltip="Action demo"
-          [glnttDisabled]="!overflowChildZ0.getChildHasOverflow()"
-          glnOverflowChild
-          #overflowChildZ0="glnOverflowChild">
-          <span>Action demo</span>
-        </button>
-      </div>
+<div *ngIf="isShowFeature"
+  class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show the tooltip only if the element is out of bounds.</em>
+      </small>
     </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Show the tooltip only if the element is out of bounds.</em>
-        </small>
-      </div>
-      <table class="ttft-table">
-        <thead>
-          <tr>
-            <th>fruits</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td glnTooltip="mango"
-              [glnttDisabled]="!overflowChildZ1.getChildHasOverflow()"
-              glnOverflowChild
-              #overflowChildZ1="glnOverflowChild">
-              <span>mango</span>
-            </td>
-          </tr>
-          <tr>
-            <td glnTooltip="gorgeous orange"
-              [glnttDisabled]="!overflowChildZ2.getChildHasOverflow()"
-              glnOverflowChild
-              #overflowChildZ2="glnOverflowChild">
-              <span>gorgeous orange</span>
-            </td>
-          </tr>
-          <tr>
-            <td glnTooltip="succulent watermelon"
-              [glnttDisabled]="!overflowChildZ3.getChildHasOverflow()"
-              glnOverflowChild
-              #overflowChildZ3="glnOverflowChild">
-              <span>succulent watermelon</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
+    <div>
+      <button class="ttft-btn"
+        style="max-width: 106px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+        glnTooltip="Action demo"
+        [glnttDisabled]="!overflowChildZ0.getChildHasOverflow()"
+        glnOverflowChild
+        #overflowChildZ0="glnOverflowChild">
+        <span>Action demo</span>
+      </button>
     </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show the tooltip only if the element is out of bounds.</em>
+      </small>
+    </div>
+    <table class="ttft-table">
+      <thead>
+        <tr>
+          <th>fruits</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td glnTooltip="mango"
+            [glnttDisabled]="!overflowChildZ1.getChildHasOverflow()"
+            glnOverflowChild
+            #overflowChildZ1="glnOverflowChild">
+            <span>mango</span>
+          </td>
+        </tr>
+        <tr>
+          <td glnTooltip="gorgeous orange"
+            [glnttDisabled]="!overflowChildZ2.getChildHasOverflow()"
+            glnOverflowChild
+            #overflowChildZ2="glnOverflowChild">
+            <span>gorgeous orange</span>
+          </td>
+        </tr>
+        <tr>
+          <td glnTooltip="succulent watermelon"
+            [glnttDisabled]="!overflowChildZ3.getChildHasOverflow()"
+            glnOverflowChild
+            #overflowChildZ3="glnOverflowChild">
+            <span>succulent watermelon</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
   </div>
-</ng-container>
+
+</div>
 
 
 <section *ngIf="isShowFeature">
@@ -1763,7 +1791,8 @@ export class AppComponent &#123;
   </tbody>
 </table>
 
-<section mr-vr
+<section *ngIf="isShowConfig"
+  mr-vr
   id="config-provide">
   <h4 class="app-hover-link">
     1. Configuration with isArrow="false", Position="bottom-start", Classes="ttc-panel".
@@ -1787,7 +1816,8 @@ const glnTooltipConfigDefault: GlnTooltipConfig = &#123;
 &#125;;</pre></code>
 </section>
 
-<section mr-vr
+<section *ngIf="isShowConfig"
+  mr-vr
   id="config-params">
   <h4 class="app-hover-link">
     2. Configuration with isArrow="false", Position="right", Classes="_", MaxWidth="120".
@@ -1843,64 +1873,63 @@ showTouchDelay=800</pre></code>
   </ul>
 </section>
 
-<ng-container *ngIf="isShowConfig">
-
-  <hr br-nn />
-  <div class="app-group">
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>Show tooltip only on click.</em>
-        </small>
-      </div>
-    </div>
-  </div>
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>1. Default config: isArrow="true", Position="bottom-start".</em>
-        </small>
-      </div>
-      <div>
-        <button class="ttc-btn"
-          glnttArrow
-          glnTooltip="Information about the action of this button.">
-          Action
-        </button>
-      </div>
-    </div>
-
-    <div class="app-elem">
-      <div>
-        <small>
-          <em>2. isArrow="false", Position="right", Classes="_", MaxWidth="120".</em>
-        </small>
-      </div>
-      <div>
-        <button class="ttc-btn"
-          glnttArrow
-          glnttPosition="left"
-          glnTooltip="Information about the action of this button."
-          glnttClasses="_"
-          glnttMaxWidth="120"
-          [glnttArrow]="false"
-          glnttPosition="right"
-          [glnttNoTransform]="false">
-          Action
-        </button>
-      </div>
-    </div>
-
-  </div>
-
-  <hr br-nn />
-
-</ng-container>
 
 <hr br-nn />
+
+<div *ngIf="isShowConfig"
+  class="app-group">
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show tooltip only on click.</em>
+      </small>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isShowConfig"
+  class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>1. Default config: isArrow="true", Position="bottom-start".</em>
+      </small>
+    </div>
+    <div>
+      <button class="ttc-btn"
+        glnttArrow
+        glnTooltip="Information about the action of this button.">
+        Action
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>2. isArrow="false", Position="right", Classes="_", MaxWidth="120".</em>
+      </small>
+    </div>
+    <div>
+      <button class="ttc-btn"
+        glnttArrow
+        glnttPosition="left"
+        glnTooltip="Information about the action of this button."
+        glnttClasses="_"
+        glnttMaxWidth="120"
+        [glnttArrow]="false"
+        glnttPosition="right"
+        [glnttNoTransform]="false">
+        Action
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<hr br-nn />
+
 
 <!-- Page: "Api" 09 -->
 <i id="Api"
@@ -2269,7 +2298,8 @@ showTouchDelay=800</pre></code>
 </table>
 
 
-<section mr-vr
+<section *ngIf="isShowApi"
+  mr-vr
   id="api-methods">
   <h4 class="app-hover-link">
     Methods
@@ -2277,152 +2307,155 @@ showTouchDelay=800</pre></code>
   </h4>
 </section>
 
-<table class="app-tab">
-  <thead>
-    <th>
-      <span fw500>show(): Promise&lt;void&gt;;</span>
-    </th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        Open the overlay panel with tooltip content.
-      </td>
-    </tr>
-  </tbody>
-</table>
-<table class="app-tab">
-  <thead>
-    <th>
-      <code>Return</code>
-    </th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        Returns a "promise" by which you can track the completion of the execution.
-      </td>
-    </tr>
-  </tbody>
-</table>
+<ng-container *ngIf="isShowApi">
 
-<hr br-nn />
+  <table class="app-tab">
+    <thead>
+      <th>
+        <span fw500>show(): Promise&lt;void&gt;;</span>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Open the overlay panel with tooltip content.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="app-tab">
+    <thead>
+      <th>
+        <code>Return</code>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Returns a "promise" by which you can track the completion of the execution.
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<table class="app-tab">
-  <thead>
-    <th>
-      <span fw500>hide(options?: &#123; noAnimation?: boolean &#125;): Promise&lt;void&gt;;</span>
-    </th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        Close the overlay panel with tooltip content.
-      </td>
-    </tr>
-  </tbody>
-</table>
-<table class="app-tab ttap-table">
-  <thead>
-    <th colspan="2">
-      <code>Parameters</code>
-    </th>
-  </thead>
-  <tbody>
-    <tr>
-      <td mx-wd-230>
-        <code>options.noAnimation: boolean<br/>
+  <hr br-nn />
+
+  <table class="app-tab">
+    <thead>
+      <th>
+        <span fw500>hide(options?: &#123; noAnimation?: boolean &#125;): Promise&lt;void&gt;;</span>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Close the overlay panel with tooltip content.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="app-tab ttap-table">
+    <thead>
+      <th colspan="2">
+        <code>Parameters</code>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td mx-wd-230>
+          <code>options.noAnimation: boolean<br/>
           &nbsp;&nbsp;| undefined;</code>
-      </td>
-      <td>
-        Flag to disable the animation when the tooltip closes.
-      </td>
-    </tr>
-  </tbody>
-</table>
-<table class="app-tab">
-  <thead>
-    <th>
-      <code>Return</code>
-    </th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        Returns a "promise" by which you can track the completion of the execution.
-      </td>
-    </tr>
-  </tbody>
-</table>
+        </td>
+        <td>
+          Flag to disable the animation when the tooltip closes.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="app-tab">
+    <thead>
+      <th>
+        <code>Return</code>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Returns a "promise" by which you can track the completion of the execution.
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<hr br-nn />
-
-
-<table class="app-tab">
-  <thead>
-    <th>
-      <span fw500>toggle(): Promise&lt;void&gt;;</span>
-    </th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        Closes an open tooltip overlay panel and opens a closed one.
-        Usually used on a mouse click event.
-      </td>
-    </tr>
-  </tbody>
-</table>
-<table class="app-tab">
-  <thead>
-    <th>
-      <code>Return</code>
-    </th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        Returns a "promise" by which you can track the completion of the execution.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<hr br-nn />
-
-<table class="app-tab">
-  <thead>
-    <th>
-      <span fw500>isVisible(): boolean;</span>
-    </th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        Returns a sign that the tooltip is currently displayed.
-      </td>
-    </tr>
-  </tbody>
-</table>
-<table class="app-tab">
-  <thead>
-    <th>
-      <code>Return</code>
-    </th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        "true" - the tooltip overlay panel is open, "false" - the tooltip overlay panel is closed.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<hr br-nn />
+  <hr br-nn />
 
 
-<section mr-vr
+  <table class="app-tab">
+    <thead>
+      <th>
+        <span fw500>toggle(): Promise&lt;void&gt;;</span>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Closes an open tooltip overlay panel and opens a closed one.
+          Usually used on a mouse click event.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="app-tab">
+    <thead>
+      <th>
+        <code>Return</code>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Returns a "promise" by which you can track the completion of the execution.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr br-nn />
+
+  <table class="app-tab">
+    <thead>
+      <th>
+        <span fw500>isVisible(): boolean;</span>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Returns a sign that the tooltip is currently displayed.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="app-tab">
+    <thead>
+      <th>
+        <code>Return</code>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          "true" - the tooltip overlay panel is open, "false" - the tooltip overlay panel is closed.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr br-nn />
+</ng-container>
+
+<section *ngIf="isShowApi"
+  mr-vr
   id="api-providers">
   <h4 class="app-hover-link">
     Providers.
