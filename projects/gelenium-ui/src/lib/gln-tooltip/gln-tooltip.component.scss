@@ -12,15 +12,12 @@ gln-tooltip-cmp {
   --glntt---color: var(--glntt-color, hsl(var(--glntt--default-bg-h), var(--glntt--default-bg-s), var(--glntt--default-bg-l)));
   --glntt---bg-color: var(--glntt-bg-color, hsl(var(--glntt--default-h), var(--glntt--default-s), calc(var(--glntt--default-l) + 20%)));
 
-  border-radius: 4px;
+  border-radius: 0.33em;
   background-color: var(--glntt---bg-color);
   color: var(--glntt---color);
   font-size: var(--glntt-font-size, 12px);
   font-weight: 500;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  padding-top: 0.25em;
-  padding-bottom: 0.25em;
+  padding: 0.33em 0.66em;
   position: relative;
   overflow-wrap: break-word;
   text-overflow: ellipsis;
@@ -98,11 +95,9 @@ gln-tooltip-cmp {
 }
 
 .gln-tooltip-panel {
-  --glntt---panel-indent: var(--glntt-panel-indent, 1.16em); // 12px * 1.16 = 14px;
-
   &.glntt-bottom {
     --glntt---trnsl-y: -60%;
-    --glntt---mr-tp: var(--glntt---panel-indent);
+    --glntt---mr-tp: var(--glntt-panel-indent, 1.16em); // 12px * 1.16 = 14px;
     --glnttar---trf-org: 0 100%;
     --glnttar---tp: 1px;
     --glnttar---mr-tp: -0.65em;
@@ -111,7 +106,7 @@ gln-tooltip-cmp {
   }
   &.glntt-top {
     --glntt---trnsl-y: 60%;
-    --glntt---mr-bt: var(--glntt---panel-indent);
+    --glntt---mr-bt: var(--glntt-panel-indent, 1.16em);
     --glnttar---trf-org: 100% 0;
     --glnttar---bt: 1px;
     --glnttar---mr-bt: -0.65em;
@@ -132,7 +127,7 @@ gln-tooltip-cmp {
   }
   &.glntt-left {
     --glntt---trnsl-x: 40%;
-    --glntt---mr-rg: var(--glntt---panel-indent);
+    --glntt---mr-rg: var(--glntt-panel-indent, 1.16em);
     --glnttar---trf-org: 0 0;
     --glnttar---rg: 1px;
     --glnttar---mr-rg: -0.65em;
@@ -142,7 +137,7 @@ gln-tooltip-cmp {
   }
   &.glntt-right {
     --glntt---trnsl-x: -40%;
-    --glntt---mr-lf: var(--glntt---panel-indent);
+    --glntt---mr-lf: var(--glntt-panel-indent, 1.16em);
     --glnttar---trf-org: 100% 100%;
     --glnttar---lf: 1px;
     --glnttar---mr-lf: -0.65em;
@@ -160,10 +155,6 @@ gln-tooltip-cmp {
       --glnttar---bt: calc(min(60%, var(--glnttar--own-hg-half, 1.16em)) - 0.46em);
     }
   }
-}
-
-.gln-tooltip-panel {
-  outline: 1px dashed green; // # temp
 }
 
 .cdk-overlay-pane.gln-tooltip-panel {
