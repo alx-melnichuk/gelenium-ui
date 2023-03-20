@@ -1,0 +1,14 @@
+/*# sourceURL=cm-tooltip-api.component.scss */
+
+app-cm-tooltip-api {
+  display: block;
+
+  table.ttap-table {
+    td {
+      &[mx-wd-230] {
+        max-width: 230px;
+        width: 230px;
+      }
+    }
+  }
+}

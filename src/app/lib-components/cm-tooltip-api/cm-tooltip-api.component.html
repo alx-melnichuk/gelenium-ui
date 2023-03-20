@@ -1,0 +1,621 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    API: GlnTooltip.
+    <a [href]="urlCmTooltip + '#Api'">#</a>
+  </h3>
+  <p>
+    Selector:
+    <span fw500>[glnTooltip]</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>glnTooltip</span>
+  </p>
+</section>
+
+
+<section mr-vr
+  id="api-properties">
+  <h4 class="app-hover-link">
+    Properties.
+    <a [href]="urlCmTooltip + '#api-properties'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttConfig: GlnTooltipConfig<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Defines a configuration object.</span><br />
+        <a [href]="urlCmTooltip + '#config-interface'">More details.</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttContent: <br/>
+          &nbsp;&nbsp;Record&lt;string, unknown&gt;<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the content object.<br />
+          Used when a template (TemplateRef) is passed in the 'glnTooltip' parameter.
+          <br />
+          (default = null;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttClasses: string<br/>
+          &nbsp;&nbsp;| string[];</code>
+      </td>
+      <td>
+        <span>
+          Specifies the style class that is added to the tooltip.
+          <br />(default = '';)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttHideDelay: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the amount of time to delay before hiding the tooltip when
+          the hover event ends, in ms.
+          <br />(default = 0;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttHideTouchDelay: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the amount of time to delay before hiding the tooltip when
+          the touch event ends, in ms.
+          <br />(default = 1500;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttArrow: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates that the displaying an additional arrow.
+          <br />(default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttDisabled: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates that the element is disabled.
+          <br />(default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttNoAnimation: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Disable animation execution.
+          <br />(default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttNoHideOnScroll: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates that the tooltip will not close when scrolling on any
+          of the parent elements.
+          You can disable this functionality and use a strategy to close the overlay.
+          You can define a provider with your own strategy and "GLN_TOOLTIP_SCROLL_STRATEGY"
+          identifier.
+          <br />More about
+          <a href="https://material.angular.io/cdk/overlay/overview#scroll-strategies">
+            "scroll-strategies"
+          </a>.
+          <br />(default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttNoHoverable: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates that the tooltip will not respond to hover events.
+          <br />(default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttNoTouchable: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates that the tooltip will not respond to touch events.
+          <br />(default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttNoTransform: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates that the tooltip will not transform on opening/closing.
+          <br />(default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttMaxHeight: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the maximum height of the overlay on which the tooltip is displayed.
+          <br />(default = undefined;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttMaxWidth: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the maximum width of the overlay on which the tooltip is displayed.
+          If you want to remove the width restriction, then you need to specify a value of 0.
+          <br />(default = 280; (px))
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttMinHeight: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the minimum height of the overlay on which the tooltip is displayed.
+          <br />(default = undefined)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttMinWidth: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the minimum width of the overlay on which the tooltip is displayed.
+          <br />(default = undefined;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnTooltip: string<br/>
+          &nbsp;&nbsp;| TemplateRef&lt;unknown&gt;<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          A string of tooltip text or a template for displaying a tooltip.
+          In the case of a template, you can also use the context value for this
+          template (glnttContent).
+          <br />(default = undefined;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttPosition: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the location of the tooltip.
+        </span>
+        <br />
+        <span>Takes the following values:</span>
+        <ul>
+          <li>'bottom' - under the element, align to the center; (default)</li>
+          <li>'bottom-start' - under the element, align to the left;</li>
+          <li>'bottom-end' - under the element, align to the right;</li>
+          <li>'top'- above the element, align to the center;</li>
+          <li>'top-start' - above the element, align to the left;</li>
+          <li>'top-end' - above the element, align to the right;</li>
+          <li>'right' - to the right of the element, align to the center;</li>
+          <li>'right-start' - to the right of the element, align to the top;</li>
+          <li>'right-end' - to the right of the element, align to the bottom;</li>
+          <li>'left' - to the left of the element, align to the center;</li>
+          <li>'left-start' - to the left of the element, align to the top;</li>
+          <li>'left-end' - to the left of the element, align to the bottom;</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttShowDelay: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the amount of time to delay before displaying a tooltip
+          on a hover event, in ms.
+          <br />(default = 100;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>glnttShowTouchDelay: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the amount of time to delay before displaying a tooltip
+          on a touch event, in ms.
+          <br />(default = 800;)
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<section mr-vr
+  id="api-methods">
+  <h4 class="app-hover-link">
+    Methods
+    <a [href]="urlCmTooltip + '#api-methods'">#</a>
+  </h4>
+</section>
+
+<ng-container>
+
+  <table class="app-tab">
+    <thead>
+      <th>
+        <span fw500>show(): Promise&lt;void&gt;;</span>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Open the overlay panel with tooltip content.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="app-tab">
+    <thead>
+      <th>
+        <code>Return</code>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Returns a "promise" by which you can track the completion of the execution.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr br-nn />
+
+  <table class="app-tab">
+    <thead>
+      <th>
+        <span fw500>hide(options?: &#123; noAnimation?: boolean &#125;): Promise&lt;void&gt;;</span>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Close the overlay panel with tooltip content.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="app-tab ttap-table">
+    <thead>
+      <th colspan="2">
+        <code>Parameters</code>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td mx-wd-230>
+          <code>options.noAnimation: boolean<br/>
+          &nbsp;&nbsp;| undefined;</code>
+        </td>
+        <td>
+          Flag to disable the animation when the tooltip closes.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="app-tab">
+    <thead>
+      <th>
+        <code>Return</code>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Returns a "promise" by which you can track the completion of the execution.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr br-nn />
+
+
+  <table class="app-tab">
+    <thead>
+      <th>
+        <span fw500>toggle(): Promise&lt;void&gt;;</span>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Closes an open tooltip overlay panel and opens a closed one.
+          Usually used on a mouse click event.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="app-tab">
+    <thead>
+      <th>
+        <code>Return</code>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Returns a "promise" by which you can track the completion of the execution.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr br-nn />
+
+  <table class="app-tab">
+    <thead>
+      <th>
+        <span fw500>isVisible(): boolean;</span>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Returns a sign that the tooltip is currently displayed.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="app-tab">
+    <thead>
+      <th>
+        <code>Return</code>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          "true" - the tooltip overlay panel is open, "false" - the tooltip overlay panel is closed.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr br-nn />
+</ng-container>
+
+
+<section mr-vr
+  id="api-css-variables-optional">
+  <h4 class="app-hover-link">
+    Css variables, optional. You can override the default values.
+    <a [href]="urlCmTooltip + '#api-css-variables-optional'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--glntt-bg-color:<br/>
+        &nbsp;&nbsp;hsla(--glntt--default-[h,s,l]);</code>
+      </td>
+      <td>
+        <span>
+          Sets the background color for the tooltip.<br />
+          Based on system css variables: <code ubr>--gln--default-[h,s,l]</code>.<br />
+          Or the css-variable of the GlnColor directive: <code ubr>--glncl-default-[h,s,l]</code>.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glntt-color:<br/>
+        &nbsp;&nbsp;hsla(--glntt--default-bg-[h,s,l]);</code>
+      </td>
+      <td>
+        <span>
+          Sets the color for the tooltip.<br />
+          Based on system css variables: <code ubr>--gln--default-bg-[h,s,l]</code>.<br />
+          Or the css-variable of the GlnColor directive:
+          <code ubr>--glncl-default-bg-[h,s,l]</code>.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glntt-font-size:<br/>
+        &nbsp;&nbsp;12px;</code>
+      </td>
+      <td>
+        <span>
+          Sets the font size for the tooltip.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glntt-panel-indent:<br/>
+        &nbsp;&nbsp;1.16em;</code>
+      </td>
+      <td>
+        <span>
+          Sets the indent from the element for the tooltip.<br />
+          This setting is applied at the ".gln-tooltip-panel" class level.
+        </span>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+
+<section mr-vr
+  id="api-providers">
+  <h4 class="app-hover-link">
+    Providers.
+    <a [href]="urlCmTooltip + '#api-providers'">#</a>
+  </h4>
+  <p>
+    For "GlnTooltip" it is possible to change the scroll behavior.
+    To do this, you need to define your provider with the name "GLN_TOOLTIP_SCROLL_STRATEGY".
+  </p>
+  <span>Here is an example of usage</span>
+  <code><pre source="ts">
+export function GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_BLOCK_FACTORY(
+  overlay: Overlay
+): () => ScrollStrategy &#123;
+  return () => overlay.scrollStrategies.block();
+&#125;
+
+export const GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_BLOCK = &#123;
+  provide: <strong>GLN_TOOLTIP_SCROLL_STRATEGY</strong>,
+  deps: [Overlay],
+  useFactory: GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_BLOCK_FACTORY,
+&#125;;
+
+@NgModule(&#123;
+  declarations: [AppComponent],
+  imports: [BrowserModule, BrowserAnimationsModule, ...],
+  bootstrap: [AppComponent],
+  providers: [GLN_TOOLTIP_SCROLL_STRATEGY_PROVIDER_BLOCK],
+&#125;)
+export class AppModule &#123;&#125;</pre></code>
+  <p>
+    After that, all "GlnTooltip" components will have the same scroll behavior.
+  </p>
+</section>
+
+<hr br-nn />
