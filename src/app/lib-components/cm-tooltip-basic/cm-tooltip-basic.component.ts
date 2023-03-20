@@ -6,7 +6,7 @@ import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
 
 const glnTooltipConfigDefault: GlnTooltipConfig = {
-  classes: 'ttc-panel',
+  classes: 'ttcf-panel',
   isArrow: true,
   isNoTransform: true,
   position: 'bottom-start',

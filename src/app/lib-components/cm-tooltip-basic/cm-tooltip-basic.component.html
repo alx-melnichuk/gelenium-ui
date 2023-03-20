@@ -100,7 +100,7 @@ app-tooltip &#123;
   .ttbs-btn &#123;
     border-radius: 4px;
     border-width: 0;
-    font-size: 0.875em; // 14px
+    font-size: 0.875em;
     height: 38px;
     min-width: 64px;
     padding: 0 16px;
@@ -734,7 +734,7 @@ app-tooltip &#123;
   .tta2-btn &#123;
     border-radius: 4px;
     border-width: 0;
-    font-size: 0.875em; // 14px
+    font-size: 0.875em;
     height: 38px;
     min-width: 64px;
     padding: 0 16px;
@@ -964,7 +964,7 @@ app-tooltip &#123;
   .tta3-btn &#123;
     border-radius: 4px;
     border-width: 0;
-    font-size: 0.875em; // 14px
+    font-size: 0.875em;
     height: 38px;
     min-width: 64px;
     padding: 0 16px;
@@ -1004,9 +1004,6 @@ app-tooltip &#123;
   </ul>
 </section>
 
-<!-- <div style="height: 300px;">_</div>
-<div style="height: 300px;">_</div>
-<div style="height: 300px;">_</div> -->
 
 <div *ngIf="isShowAttributes04"
   class="app-group">
@@ -1069,30 +1066,7 @@ app-tooltip &#123;
     </div>
   </div>
 
-  <!-- <div class="app-elem">
-    <div>
-      <small>
-        <em>Tooltip on click.</em>
-      </small>
-    </div>
-    <div>
-      <button class="tta4-btn"
-        glnttArrow
-        [glnttPosition]="position02m"
-        glnTooltip="Information about the action of this button."
-        glnttNoHoverable
-        glnttNoTouchable
-        #tooltip02n="glnTooltip"
-        (click)="tooltip02n.toggle()">
-        Action
-      </button>
-    </div>
-  </div> -->
-
 </div>
-<!-- <div style="height: 300px;">_</div>
-<div style="height: 300px;">_</div>
-<div style="height: 300px;">_</div> -->
 
 <hr br-nn />
 
@@ -1216,7 +1190,7 @@ app-tooltip &#123;
   .tta4-btn &#123;
     border-radius: 4px;
     border-width: 0;
-    font-size: 0.875em; // 14px
+    font-size: 0.875em;
     height: 38px;
     min-width: 64px;
     padding: 0 16px;
@@ -1292,6 +1266,40 @@ app-tooltip &#123;
   <div class="app-elem">
     <div>
       <small>
+        <em>Style MUI.</em>
+      </small>
+    </div>
+    <div>
+      <button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttNoTransform
+        glnttClasses="ttcs-mui"
+        [glnttConfig]="{ overlayClasses: 'ttcs-panel-mui' }">
+        Action
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Style MUI Light.</em>
+      </small>
+    </div>
+    <div>
+      <button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttNoTransform
+        glnttClasses="ttcs-mui-light"
+        [glnttConfig]="{ overlayClasses: 'ttcs-panel-mui' }">
+        Action
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
         <em>Style Bootstrap.</em>
       </small>
     </div>
@@ -1300,7 +1308,8 @@ app-tooltip &#123;
         glnTooltip="Information"
         glnttArrow
         glnttNoTransform
-        glnttClasses="ttcs-bootstrap">
+        glnttClasses="ttcs-bootstrap"
+        [glnttConfig]="{ overlayClasses: 'ttcs-panel-bootstrap' }">
         Action
       </button>
     </div>
@@ -1321,6 +1330,78 @@ app-tooltip &#123;
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
 &lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Show tooltip HTML.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;ng-template #contextTmpl06a
+        let-name="nameVar"&gt;
+        &lt;b&gt;<b>&#123;</b>&#123;name&#125;&#125;&lt;/b&gt; is a very &lt;em&gt;tasty&lt;/em&gt;&nbsp;&lt;u&gt;fruit&lt;/u&gt; !
+      &lt;/ng-template&gt;
+
+      &lt;button class="ttcs-btn"
+        [glnTooltip]="contextTmpl06a"
+        [glnttContent]="&#123; nameVar: 'Mango' &#125;"&gt;
+        &lt;span&gt; Action &lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Style MUI.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttNoTransform
+        glnttClasses="ttcs-mui"
+        [glnttConfig]="&#123; overlayClasses: 'ttcs-panel-mui' &#125;"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Style MUI Light.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttNoTransform
+        glnttClasses="ttcs-mui-light"
+        [glnttConfig]="&#123; overlayClasses: 'ttcs-panel-mui' &#125;"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Style Bootstrap.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttArrow
+        glnttNoTransform
+        glnttClasses="ttcs-bootstrap"
+        [glnttConfig]="&#123; overlayClasses: 'ttcs-panel-bootstrap' &#125;"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
 
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -1353,15 +1434,43 @@ app-tooltip &#123;
   .ttcs-btn &#123;
     border-radius: 4px;
     border-width: 0;
-    font-size: 0.875em; // 14px
+    font-size: 0.875em;
     height: 38px;
     min-width: 64px;
     padding: 0 16px;
   &#125;
 &#125;
+.gln-tooltip-panel.ttcs-panel-bootstrap &#123;
+  --glntt-panel-indent: 7px;
+&#125;
 .ttcs-bootstrap &#123;
   --glntt-color: #fff;
   --glntt-bg-color: #000;
+  --glntt-font-size: 14px;
+  border-radius: 0.43em;
+  font-weight: 400;
+  padding: 4px 8px;
+&#125;
+.gln-tooltip-panel.ttcs-panel-mui &#123;
+  --glntt-panel-indent: 14px;
+&#125;
+.ttcs-mui &#123;
+  --glntt-bg-color:rgba(97, 97, 97, 0.92);
+  --glntt-color: rgb(255, 255, 255);
+  --glntt-font-size: 11px;
+  border-radius: 4px;
+  padding: 4px 8px;
+&#125;
+.ttcs-mui-light &#123;
+  --glntt-bg-color:#fff;
+  --glntt-color: rgba(0, 0, 0, 0.87);
+  --glntt-font-size: 11px;
+  border-radius: 4px;
+  padding: 4px 8px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2)
+    , 0px 1px 1px 0px rgba(0,0,0,0.14)
+    , 0px 1px 3px 0px rgba(0,0,0,0.12)
+    , 0px -1px 0px 0px rgba(0, 0, 0, 0.08);
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -1473,6 +1582,136 @@ app-tooltip &#123;
 
 </div>
 
+<section *ngIf="isShowFeature"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Show the tooltip only if the element is out of bounds.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="ttft-btn"
+        style="max-width: 106px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+        glnTooltip="Action demo"
+        [glnttDisabled]="!overflowChildZ0.getChildHasOverflow()"
+        glnOverflowChild
+        #overflowChildZ0="glnOverflowChild"&gt;
+        &lt;span&gt;Action demo&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Show the tooltip only if the element is out of bounds.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;table class="ttft-table"&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;fruits&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td glnTooltip="mango"
+            [glnttDisabled]="!overflowChildZ1.getChildHasOverflow()"
+            glnOverflowChild
+            #overflowChildZ1="glnOverflowChild"&gt;
+            &lt;span&gt;mango&lt;/span&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td glnTooltip="gorgeous orange"
+            [glnttDisabled]="!overflowChildZ2.getChildHasOverflow()"
+            glnOverflowChild
+            #overflowChildZ2="glnOverflowChild"&gt;
+            &lt;span&gt;gorgeous orange&lt;/span&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td glnTooltip="succulent watermelon"
+            [glnttDisabled]="!overflowChildZ3.getChildHasOverflow()"
+            glnOverflowChild
+            #overflowChildZ3="glnOverflowChild"&gt;
+            &lt;span&gt;succulent watermelon&lt;/span&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-tooltip',
+  templateUrl: './tooltip.component.html',
+  styleUrls: ['./tooltip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class TooltipComponent &#123;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-tooltip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .ttft-btn &#123;
+    border-radius: 4px;
+    border-width: 0;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 16px;
+  &#125;
+  table.ttft-table &#123;
+    border-collapse: collapse;
+    th &#123;
+      font-weight: 500;
+    &#125;
+    th, td &#123;
+      border: 1px solid black;
+      max-width: 140px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding: 2px 7px;
+    &#125;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
 
 <section *ngIf="isShowFeature">
   <p>
@@ -1482,49 +1721,142 @@ app-tooltip &#123;
   </p>
 </section>
 
-<ng-container *ngIf="isShowFeature">
-  <div style="height: 100px; overflow: auto;">
+<div *ngIf="isShowFeature"
+  style="height: 100px; overflow: auto;">
 
-    <div class="app-group"
-      style="height: 170px;">
+  <div class="app-group"
+    style="height: 170px;">
 
-      <div class="app-elem">
-        <div>
-          <small>
-            <em>Show tooltip on hover.</em>
-          </small>
-        </div>
-        <div>
-          <button class="ttbs-btn"
-            glnTooltip="Information demo">
-            Action
-          </button>
-        </div>
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Show tooltip on hover.</em>
+        </small>
       </div>
-
-      <div class="app-elem">
-        <div>
-          <small>
-            <em>Show tooltip only on click.</em>
-          </small>
-        </div>
-        <div>
-          <button class="ttbs-btn"
-            glnTooltip="Information demo"
-            glnttNoHoverable
-            glnttNoTouchable
-            #tooltip07a="glnTooltip"
-            (click)="tooltip07a.toggle()">
-            Action2
-          </button>
-        </div>
+      <div>
+        <button class="ttft-btn"
+          glnTooltip="Information demo">
+          Action
+        </button>
       </div>
+    </div>
 
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>Show tooltip only on click.</em>
+        </small>
+      </div>
+      <div>
+        <button class="ttft-btn"
+          glnTooltip="Information demo"
+          glnttNoHoverable
+          glnttNoTouchable
+          #tooltip07a="glnTooltip"
+          (click)="tooltip07a.toggle()">
+          Action2
+        </button>
+      </div>
     </div>
 
   </div>
 
-</ng-container>
+</div>
+
+
+<section *ngIf="isShowFeature"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div style="height: 100px; overflow: auto;"&gt;
+
+  &lt;div class="app-group"
+    style="height: 170px;"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Show tooltip on hover.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;button class="ttft-btn"
+          glnTooltip="Information demo"&gt;
+          Action
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Show tooltip only on click.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;button class="ttft-btn"
+          glnTooltip="Information demo"
+          glnttNoHoverable
+          glnttNoTouchable
+          #tooltip07a="glnTooltip"
+          (click)="tooltip07a.toggle()"&gt;
+          Action2
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-tooltip',
+  templateUrl: './tooltip.component.html',
+  styleUrls: ['./tooltip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class TooltipComponent &#123;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-tooltip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .ttft-btn &#123;
+    border-radius: 4px;
+    border-width: 0;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 16px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
 
 <hr br-nn />
 
@@ -1795,21 +2127,21 @@ export class AppComponent &#123;
   mr-vr
   id="config-provide">
   <h4 class="app-hover-link">
-    1. Configuration with isArrow="false", Position="bottom-start", Classes="ttc-panel".
+    1. Configuration with isArrow="false", Position="bottom-start", Classes="ttcf-panel".
     <a [href]="urlCmTooltip + '#config-provide'">#</a>
   </h4>
   <p>
     For example, let's prepare a configuration in which:
   </p>
   <ul>
-    <li>"classes" will have the value "ttc-panel";</li>
+    <li>"classes" will have the value "ttcf-panel";</li>
     <li>"isArrow" will have the value "true";</li>
     <li>"isNoTransform" will have the value "true";</li>
     <li>"position" will have the value "bottom-start";</li>
   </ul>
   <code><pre source="ts">
 const glnTooltipConfigDefault: GlnTooltipConfig = &#123;
-  classes: 'ttc-panel',
+  classes: 'ttcf-panel',
   isArrow: true,
   isNoTransform: true,
   position: 'bottom-start',
@@ -1873,19 +2205,7 @@ showTouchDelay=800</pre></code>
   </ul>
 </section>
 
-
 <hr br-nn />
-
-<div *ngIf="isShowConfig"
-  class="app-group">
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Show tooltip only on click.</em>
-      </small>
-    </div>
-  </div>
-</div>
 
 <div *ngIf="isShowConfig"
   class="app-group">
@@ -1897,7 +2217,7 @@ showTouchDelay=800</pre></code>
       </small>
     </div>
     <div>
-      <button class="ttc-btn"
+      <button class="ttcf-btn"
         glnttArrow
         glnTooltip="Information about the action of this button.">
         Action
@@ -1912,7 +2232,7 @@ showTouchDelay=800</pre></code>
       </small>
     </div>
     <div>
-      <button class="ttc-btn"
+      <button class="ttcf-btn"
         glnttArrow
         glnttPosition="left"
         glnTooltip="Information about the action of this button."
@@ -1927,6 +2247,113 @@ showTouchDelay=800</pre></code>
   </div>
 
 </div>
+
+<section *ngIf="isShowConfig"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;1. Default config: isArrow="true", Position="bottom-start".&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="ttcf-btn"
+        glnttArrow
+        glnTooltip="Information about the action of this button."&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;2. isArrow="false", Position="right", Classes="_", MaxWidth="120".&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="ttcf-btn"
+        glnttArrow
+        glnttPosition="left"
+        glnTooltip="Information about the action of this button."
+        glnttClasses="_"
+        glnttMaxWidth="120"
+        [glnttArrow]="false"
+        glnttPosition="right"
+        [glnttNoTransform]="false"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  GlnTooltipConfig, GLN_TOOLTIP_CONFIG
+&#125; from 'gelenium-ui';
+
+const glnTooltipConfigDefault: GlnTooltipConfig = &#123;
+  classes: 'ttcf-panel',
+  isArrow: true,
+  isNoTransform: true,
+  position: 'bottom-start',
+  &#125;;
+
+@Component(&#123;
+  selector: 'app-tooltip',
+  templateUrl: './tooltip.component.html',
+  styleUrls: ['./tooltip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [&#123; provide: GLN_TOOLTIP_CONFIG, useValue: glnTooltipConfigDefault &#125;],
+&#125;)
+export class TooltipComponent &#123;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-tooltip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .ttcf-btn &#123;
+    border-radius: 4px;
+    border-width: 0;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 16px;
+  &#125;
+&#125;
+.ttcf-panel &#123;
+  --glntt-bg-color: cornflowerblue;
+  box-shadow: rgb(100, 119, 154) 0 2px 7px 1px;
+&#125;
+</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
 
 <hr br-nn />
 
@@ -2453,6 +2880,74 @@ showTouchDelay=800</pre></code>
 
   <hr br-nn />
 </ng-container>
+
+
+<section mr-vr
+  id="api-css-variables-optional">
+  <h4 class="app-hover-link">
+    Css variables, optional. You can override the default values.
+    <a [href]="urlCmTooltip + '#api-css-variables-optional'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--glntt-bg-color:<br/>
+        &nbsp;&nbsp;hsla(--glntt--default-[h,s,l]);</code>
+      </td>
+      <td>
+        <span>
+          Sets the background color for the tooltip.<br />
+          Based on system css variables: <code ubr>--gln--default-[h,s,l]</code>.<br />
+          Or the css-variable of the GlnColor directive: <code ubr>--glncl-default-[h,s,l]</code>.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glntt-color:<br/>
+        &nbsp;&nbsp;hsla(--glntt--default-bg-[h,s,l]);</code>
+      </td>
+      <td>
+        <span>
+          Sets the color for the tooltip.<br />
+          Based on system css variables: <code ubr>--gln--default-bg-[h,s,l]</code>.<br />
+          Or the css-variable of the GlnColor directive:
+          <code ubr>--glncl-default-bg-[h,s,l]</code>.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glntt-font-size:<br/>
+        &nbsp;&nbsp;12px;</code>
+      </td>
+      <td>
+        <span>
+          Sets the font size for the tooltip.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glntt-panel-indent:<br/>
+        &nbsp;&nbsp;1.16em;</code>
+      </td>
+      <td>
+        <span>
+          Sets the indent from the element for the tooltip.<br />
+          This setting is applied at the ".gln-tooltip-panel" class level.
+        </span>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
 
 <section *ngIf="isShowApi"
   mr-vr
