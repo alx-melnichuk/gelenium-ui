@@ -120,13 +120,11 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   }
 
   public ngAfterViewInit(): void {
-    console.log(`ngAfterViewInit()`); // #
     this.isPhaseAfterViewInit = true;
     this.definingEventListeners();
   }
 
   public ngOnDestroy(): void {
-    console.log(`ngOnDestroy()`); // #
     EventListenerUtil.removeListeners(this.listenersToStart);
     this.listenersToStart.length = 0;
     EventListenerUtil.removeListeners(this.listenersForEnd);
