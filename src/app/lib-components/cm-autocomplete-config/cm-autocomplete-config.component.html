@@ -144,7 +144,7 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
-      <td><code>panelClass?:<br/>
+      <td><code>classes?:<br/>
         &nbsp;&nbsp;string<br/>
         &nbsp;&nbsp;| string[]<br/>
         &nbsp;&nbsp;| Set&lt;string&gt;<br/>
@@ -178,20 +178,20 @@ export class AppComponent &#123;
 <section mr-vr
   id="config-provide">
   <h4 class="app-hover-link">
-    1. Configuration with "panelClass", "position" and "visibleSize".
+    1. Configuration with "classes", "position" and "visibleSize".
     <a [href]="urlCmAutocomplete + '#config-provide'">#</a>
   </h4>
   <p>
     For example, let's prepare a configuration in which:
   </p>
   <ul>
-    <li>"panelClass" will have the value ['acc-panel']</li>
+    <li>"classes" will have the value ['acc-panel']</li>
     <li>"position" will have the value 'end'</li>
     <li>"visibleSize" will have the value 7</li>
   </ul>
   <code><pre source="ts">
 const glnAutocompleteConfigDefault: GlnAutocompleteConfig = &#123;
-  panelClass=['acc-panel']
+classes=['acc-panel']
   position: 'end';
   visibleSize: 7
 &#125;;</pre></code>
@@ -230,7 +230,7 @@ isNoCloseOnSelect=false,
 isNoOpenOnMouse=false,
 isNoRipple=false,
 isOpenOnFocus=false,
-panelClass='',
+classes='',
 position='start',
 visibleSize=0</pre></code>
     </li>
