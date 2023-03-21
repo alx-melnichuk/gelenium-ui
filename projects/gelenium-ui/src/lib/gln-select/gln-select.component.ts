@@ -245,7 +245,7 @@ export class GlnSelectComponent
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public ornamLfAlignVal: string | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: string | null = null; // Binding attribute "ornamRgAlign".
-  public overlayPanelClass: string | string[] = '';
+  public overlayClassesVal: string | string[] = '';
   public classesVal: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "classes"
   public positionList: ConnectedPosition[] = [];
   public selectedOptions: GlnOption[] = [];
@@ -335,8 +335,8 @@ export class GlnSelectComponent
       const rhombRef: ElementRef<HTMLElement> | undefined = this.ornamRhomb?.hostRef;
       this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList, rhombRef));
     }
-    if (changes['config'] && this.currConfig.overlayPanelClass != null) {
-      this.overlayPanelClass = this.currConfig.overlayPanelClass;
+    if (changes['config'] && this.currConfig.overlayClasses != null) {
+      this.overlayClassesVal = this.currConfig.overlayClasses;
     }
     if (changes['classes'] || (changes['config'] && this.classes == null && this.currConfig.classes != null)) {
       this.classesVal = this.classes || this.currConfig.classes;
@@ -402,8 +402,8 @@ export class GlnSelectComponent
       this.ornamRgAlignVal = ORNAMENT_ALIGN[this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
     }
-    if (this.currConfig.overlayPanelClass != null) {
-      this.overlayPanelClass = this.currConfig.overlayPanelClass;
+    if (this.currConfig.overlayClasses != null) {
+      this.overlayClassesVal = this.currConfig.overlayClasses;
     }
     if (this.classesVal == null) {
       this.classesVal = this.currConfig.classes;

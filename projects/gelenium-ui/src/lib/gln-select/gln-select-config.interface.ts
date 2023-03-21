@@ -19,7 +19,7 @@ export interface GlnSelectConfig extends GlnFrameConfig {
   isReadOnly?: boolean | undefined;
   ornamLfAlign?: string | undefined; // GlnFrameOrnamAlignType
   ornamRgAlign?: string | undefined; // GlnFrameOrnamAlignType
-  overlayPanelClass?: string | string[] | undefined;
+  overlayClasses?: string | string[] | undefined;
   classes?: string | string[] | Set<string> | { [key: string]: unknown } | undefined;
   position?: string | undefined; // Horizontal position = 'start'-default | 'center' | 'end';
   visibleSize?: number | undefined; // default 0

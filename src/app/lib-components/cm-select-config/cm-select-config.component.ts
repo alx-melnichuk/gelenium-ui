@@ -11,7 +11,7 @@ const glnSelectConfigDefault: GlnSelectConfig = {
   size: 'small',
   backdropClass: 'sc-backdrop',
   isMultiple: true,
-  overlayPanelClass: ['sc-overlay-panel'],
+  overlayClasses: ['sc-overlay-panel'],
   classes: ['sc-panel'],
   visibleSize: 6,
 };
