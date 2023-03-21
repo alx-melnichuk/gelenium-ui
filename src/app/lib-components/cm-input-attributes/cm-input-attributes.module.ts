@@ -5,13 +5,13 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GlnColorModule, GlnInputModule } from 'gelenium-ui';
+import { GlnInputModule } from 'gelenium-ui';
 
 import { CmInputAttributesComponent } from './cm-input-attributes.component';
 
 @NgModule({
   declarations: [CmInputAttributesComponent],
-  imports: [CommonModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnColorModule, GlnInputModule],
+  imports: [CommonModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnInputModule],
   exports: [CmInputAttributesComponent],
 })
 export class CmInputAttributesModule {}
