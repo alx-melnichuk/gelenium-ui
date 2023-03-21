@@ -260,3 +260,225 @@ app-tooltip &#123;
 </section>
 
 <hr br-nn />
+
+<section mr-vr>
+  <p>
+    Examples of using system settings to define the background color.
+  </p>
+</section>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>Color "primary".</em></small>
+    </div>
+    <div>
+      <button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttClasses="ttcs-primary">
+        Action
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Color "danger".</em></small>
+    </div>
+    <div>
+      <button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttClasses="ttcs-danger">
+        Action
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Color "success".</em></small>
+    </div>
+    <div>
+      <button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttClasses="ttcs-success">
+        Action
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Color "info".</em></small>
+    </div>
+    <div>
+      <button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttClasses="ttcs-info">
+        Action
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Color "warning".</em></small>
+    </div>
+    <div>
+      <button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttClasses="ttcs-warning">
+        Action
+      </button>
+    </div>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Color "primary".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttClasses="ttcs-primary"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Color "danger".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttClasses="ttcs-danger"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Color "success".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttClasses="ttcs-success"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Color "info".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttClasses="ttcs-info"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Color "warning".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="ttcs-btn"
+        glnTooltip="Information"
+        glnttClasses="ttcs-warning"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-tooltip',
+  templateUrl: './tooltip.component.html',
+  styleUrls: ['./tooltip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class TooltipComponent &#123;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-tooltip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .ttcs-btn &#123;
+    border-radius: 4px;
+    border-width: 0;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 16px;
+  &#125;
+&#125;
+.ttcs-primary &#123;
+  --glncl-default-h: var(--gln-primary-h);
+  --glncl-default-s: var(--gln-primary-s);
+  --glncl-default-l: var(--gln-primary-l);
+&#125;
+.ttcs-danger &#123;
+  --glncl-default-h: var(--gln-danger-h);
+  --glncl-default-s: var(--gln-danger-s);
+  --glncl-default-l: var(--gln-danger-l);
+&#125;
+.ttcs-success &#123;
+  --glncl-default-h: var(--gln-success-h);
+  --glncl-default-s: var(--gln-success-s);
+  --glncl-default-l: var(--gln-success-l);
+&#125;
+.ttcs-info &#123;
+  --glncl-default-h: var(--gln-info-h);
+  --glncl-default-s: var(--gln-info-s);
+  --glncl-default-l: var(--gln-info-l);
+&#125;
+.ttcs-warning &#123;
+  --glncl-default-h: var(--gln-warning-h);
+  --glncl-default-s: var(--gln-warning-s);
+  --glncl-default-l: var(--gln-warning-l);
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

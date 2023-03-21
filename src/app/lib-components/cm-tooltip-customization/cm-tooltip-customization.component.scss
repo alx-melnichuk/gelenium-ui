@@ -45,3 +45,29 @@ app-cm-tooltip-customization {
     , 0px 1px 3px 0px rgba(0,0,0,0.12)
     , 0px -1px 0px 0px rgba(0, 0, 0, 0.08);
 }
+
+.ttcs-primary {
+  --glncl-default-h: var(--gln-primary-h);
+  --glncl-default-s: var(--gln-primary-s);
+  --glncl-default-l: var(--gln-primary-l);
+}
+.ttcs-danger {
+  --glncl-default-h: var(--gln-danger-h);
+  --glncl-default-s: var(--gln-danger-s);
+  --glncl-default-l: var(--gln-danger-l);
+}
+.ttcs-success {
+  --glncl-default-h: var(--gln-success-h);
+  --glncl-default-s: var(--gln-success-s);
+  --glncl-default-l: var(--gln-success-l);
+}
+.ttcs-info {
+  --glncl-default-h: var(--gln-info-h);
+  --glncl-default-s: var(--gln-info-s);
+  --glncl-default-l: var(--gln-info-l);
+}
+.ttcs-warning {
+  --glncl-default-h: var(--gln-warning-h);
+  --glncl-default-s: var(--gln-warning-s);
+  --glncl-default-l: var(--gln-warning-l);
+}
