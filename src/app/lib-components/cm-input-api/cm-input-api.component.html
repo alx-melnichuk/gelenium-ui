@@ -102,7 +102,8 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>frameSize: string<br/>
+        <code>size: number<br/>
+          &nbsp;&nbsp;| string<br/>
           &nbsp;&nbsp;| null<br/>
           &nbsp;&nbsp;| undefined;</code>
       </td>
@@ -118,6 +119,13 @@
           <li>"large" - height: 62px;</li>
           <li>"huge" - height: 68px;</li>
         </ul>
+        <span>
+          This property can also contain the element's height in pixels, either as a string
+          or as a number.<br />
+          The value in the units of "pixels" allow you to accurately calculate the size of
+          internal elements.<br />
+          For example: <code>size="57" or [size]="57"</code>
+        </span>
       </td>
     </tr>
     <tr>
@@ -401,8 +409,10 @@
         <code>type: string;</code>
       </td>
       <td>
-        <span>The type of the native input element.<br />(default =
-          GlnInputType.text.valueOf();)</span>
+        <span>
+          The type of the native input element.
+          <br />(default = 'text';)
+        </span>
       </td>
     </tr>
     <tr>

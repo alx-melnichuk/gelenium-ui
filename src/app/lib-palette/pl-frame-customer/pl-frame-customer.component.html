@@ -22,6 +22,12 @@
     Using the GlnColor directive, we can override the value of these
     CSS variables for this component.
   </p>
+  <span>
+    To use the glnColor directive, you need to add in your module:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
+  </code>
 </section>
 
 <section mr-vr>
@@ -91,8 +97,6 @@
         [helperText]="control01a.model01c.value
           ? 'The parameter was specified. (success)'
           : 'The parameter was not specified. (primary)'"
-        [glnColor]="control01a.model01c.value
-          ? { primary: 'success' } : {}"
         [exterior]="exterior01a"
         [glnColor]="{ default: 'other-default'
           , primary: (control01a.model01c.value
@@ -187,8 +191,6 @@
         [helperText]="control01a.model01c.value
           ? 'The parameter was specified. (success)'
           : 'The parameter was not specified. (primary)'"
-        [glnColor]="control01a.model01c.value
-          ? &#123; primary: 'success' &#125; : &#123;&#125;"
         [exterior]="exterior01a"
         [glnColor]="&#123; default: 'other-default'
           , primary: (control01a.model01c.value

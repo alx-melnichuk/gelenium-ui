@@ -5,4 +5,7 @@ export class ScreenUtil {
   public static getHeight(): number {
     return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
   }
+  public static getRect(): DOMRect {
+    return document.documentElement.getBoundingClientRect() || document.body.getBoundingClientRect();
+  }
 }

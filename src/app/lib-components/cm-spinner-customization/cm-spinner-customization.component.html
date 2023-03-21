@@ -1,0 +1,169 @@
+<section>
+  <h3 class="app-hover-link">
+    Customization.
+    <a [href]="urlCmSpinner + '#Customization'">#</a>
+  </h3>
+  <p>
+    The GlnSpinner component has additional user customization.
+    By default, the GlnSpinner component renders an inline svg image.
+    It is also possible to display user-specified content.
+    The 'isExternal' parameter is used for this.
+  </p>
+  <p>
+    You can specify in the content a class that uses the svg image from resources.
+  </p>
+  <span>For example html:</span>
+  <code><pre source="html">
+&lt;gln-spinner <strong>isExternal</strong>&gt;
+  <strong>&lt;i class="app-external-svg"&gt;&lt;/i&gt;</strong>
+&lt;/gln-spinner&gt;</pre></code>
+  <span>For example css:</span>
+  <code><pre source="css">
+.app-external-svg &#123;
+  background-image: url('assets/icons/icon-demo.svg');
+  display: inline-block;
+  height: inherit;
+  width: inherit;
+&#125;</pre></code>
+  <p>
+    You can also specify in the content the 'svg' tag inside which the 'use' tag.
+    And already inside the 'use' tag, use a link to the svg image from the resources.
+  </p>
+  <span>For example html:</span>
+  <code><pre source="html">
+&lt;gln-spinner <strong>isExternal</strong>&gt;
+  <strong>&lt;svg&gt;&lt;use href="assets/icons/icon-demo.svg"&gt;&lt;/use&gt;&lt;/svg&gt;</strong>
+&lt;/gln-spinner&gt;</pre></code>
+</section>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isNoAnimation05a=!isNoAnimation05a" />
+    start animation
+  </label>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>spinner refresh</em></small>
+    </div>
+    <gln-spinner isExternal
+      [isNoAnimation]="isNoAnimation05a ? '' : null">
+      <i class="spc-spinner-refresh"></i>
+    </gln-spinner>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>spinner of dots</em></small>
+    </div>
+    <gln-spinner isExternal
+      [isNoAnimation]="isNoAnimation05a ? '' : null">
+      <svg>
+        <use
+          href="assets/icons/lib-components/cm-spinner-customization/icon-spinner-of-dots.svg#icon-spinner-of-dots">
+        </use>
+      </svg>
+    </gln-spinner>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;spinner refresh&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner isExternal
+      [isNoAnimation]="isNoAnimation05a ? '' : null"&gt;
+      &lt;i class="spc-spinner-refresh"&gt;&lt;/i&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;spinner of dots&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-spinner isExternal
+      [isNoAnimation]="isNoAnimation05a ? '' : null"&gt;
+      &lt;svg&gt;
+        &lt;use
+          href="assets/icons/lib-components/cm-spinner-customization/icon-spinner-of-dots.svg#icon-spinner-of-dots"&gt;
+        &lt;/use&gt;
+      &lt;/svg&gt;
+    &lt;/gln-spinner&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-spinner',
+  templateUrl: './spinner.component.html',
+  styleUrls: ['./spinner.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SpinnerComponent &#123;
+  public isNoAnimation05a: boolean = true;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-spinner &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .spc-spinner-refresh &#123;
+    background-color: currentColor;
+    display: inline-block;
+    height: inherit;
+    mask: url("data:image/svg+xml;charset=utf8,"
+      + "&lt;svg xmlns='http://www.w3.org/2000/svg' "
+      + " viewBox='-1.5 0 24 24'&gt;"
+      + "&lt;g stroke-width='0'&gt;&lt;/g&gt;"
+      + "&lt;g stroke-linecap='round' stroke-linejoin='round'&gt;&lt;/g&gt;"
+      + "&lt;g&gt;"
+      + "&lt;path"
+      + " d='m7.5 21 2.999-3v1.5c4.143 0 7.501-3.359 7.501-7.502 0-2.074-."
+      + "842-3.952-2.202-5.309l2.114-2.124c1.908 1.901 3.088 4.531 3.088 7"
+      + ".437 0 5.798-4.7 10.498-10.498 10.498-.001 0-.001 0-.002 0v1.5zm-"
+      + "7.5-9c.007-5.796 4.704-10.493 10.499-10.5h.001v-1.5l3 3-3 3v-1.5s"
+      + "-.001 0-.002 0c-4.143 0-7.502 3.359-7.502 7.502 0 2.074.842 3.952"
+      + " 2.203 5.31l-2.112 2.124c-1.907-1.89-3.088-4.511-3.088-7.407 0-.0"
+      + "1 0-.02 0-.03v.002z'&gt;"
+      + "&lt;/path&gt;"
+      + "&lt;/g&gt;"
+      + "&lt;/svg&gt;");
+    width: inherit;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

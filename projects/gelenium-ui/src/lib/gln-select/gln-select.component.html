@@ -5,44 +5,35 @@
   [config]="currConfig"
   [cssElementRef]="hostRef"
   [exterior]="exterior || currConfig.exterior"
-  [frameSize]="frameSize || currConfig.frameSize"
+  [size]="size || currConfig.size"
   [isAttrHideAnimation]="isAttrHideAnimation"
-  [isDisabled]="disabled"
-  [isError]="!!errors || error"
+  [isDisabled]="isDisabledVal"
+  [isError]="!!errors || isErrorVal"
   [isFilled]="isFilled"
   [isLabelShrink]="getBoolean(isLabelShrink) ?? currConfig.isLabelShrink"
   [isNoAnimation]="getBoolean(isNoAnimation) ?? currConfig.isNoAnimation"
-  [isRequired]="required"
-  [label]="!placeholder ? label : null"
-  glnFrameOrnament
-  [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
-  [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
-  [glnFrameOrnamentPath]="'/div{0}'"
+  [isRequired]="isRequiredVal"
+  [label]="!isPlaceholderVal ? label : null"
   [attr.opn]="isPanelOpen ? '' : null"
-  [attr.tabindex]="!disabled ? tabIndex : null"
+  [attr.tabindex]="!isDisabledVal ? tabIndex : null"
   (focus)="doFocus()"
   (blur)="doBlur()"
   (keydown)="frameKeydown($event)"
-  (click)="!disabled ? toggle() : null">
+  (click)="!isDisabledVal ? toggle() : null">
 
-  <span glnfr-orn-lf
-    class="gln-ornam-lf">
-    <ng-content select="[gln-orn-lf]"></ng-content>
-  </span>
+  <ng-content select="[gln-orn-lf]"></ng-content>
 
-  <span glnfr-orn-rg
-    class="gln-ornam-rg">
-    <ng-content select="[gln-orn-rg]"></ng-content>
+  <ng-content select="[gln-orn-rg]"></ng-content>
 
-    <div *ngIf="!getBoolean(isNoIcon) && !currConfig?.isNoIcon"
-      glnsl-rhomb
-      [attr.opn]="isPanelOpen ? '' : null"
-      [attr.noAnm]="noAnimation ? '' : null"
-      [ngClass]="['glnsl-rhomb', (isPanelOpen ? 'is-open' : '')]"
-      focusable="false"
-      aria-hidden="true">
-    </div>
-  </span>
+  <div *ngIf="!isNoIconVal"
+    glnsl-rhomb
+    gln-orn-rg
+    [attr.opn]="isPanelOpen ? '' : null"
+    [attr.noAnm]="frameComp?.noAnimation ? '' : null"
+    [ngClass]="['glnsl-rhomb', (isPanelOpen ? 'is-open' : '')]"
+    focusable="false"
+    aria-hidden="true">
+  </div>
 
   <div [attr.id]="id + '-elem'"
     glnfr-pd-ver
@@ -53,7 +44,7 @@
       <div *ngSwitchCase="false"
         glnsl-plc-hld
         class="glnsl-placeholder">
-        <span>{{ !placeholder ? '&ZeroWidthSpace;' : label }}</span>
+        <span>{{ !isPlaceholderVal ? '&ZeroWidthSpace;' : label }}</span>
       </div>
 
       <ng-container *ngSwitchCase="true"
@@ -79,9 +70,9 @@
 
 <gln-hint-or-error *ngIf="!!helperText"
   [text]="helperText"
-  [isError]="!!errors || error"
+  [isError]="!!errors || isErrorVal"
   [isFocused]="isFocused"
-  [isDisabled]="disabled">
+  [isDisabled]="isDisabledVal">
 </gln-hint-or-error>
 
 
@@ -102,15 +93,16 @@
 
   <div glnslp-wrap
     class="gln-select-panel-wrap"
-    [ngClass]="[(noAnimation ? 'gln-no-animation' : '')]"
-    [attr.noAnm]="noAnimation ? '' : null"
+    [ngClass]="[(frameComp?.noAnimation ? 'gln-no-animation' : '')]"
+    [attr.noAnm]="frameComp?.noAnimation ? '' : null"
     (animationend)="hasPanelAnimation = isPanelOpen"
     (animationcancel)="hasPanelAnimation = isPanelOpen">
     <div glnsl-panel
       class="gln-select-panel"
       [ngClass]="panelClassVal || ''"
       [glnOptionsScroll]="options"
-      (glnOptionsScrollAttached)="optionsScrollAttached($event)"
+      (glnOptionsScrollAttached)="setOptionsScroll($event)"
+      (glnOptionsScrollDetached)="setOptionsScroll(null)"
       role="listbox"
       [attr.id]="id + '-panel'"
       [attr.aria-multiselectable]="multiple"

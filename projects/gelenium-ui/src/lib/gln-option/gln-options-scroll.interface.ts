@@ -10,6 +10,8 @@ export interface GlnOptionsScroll {
   readonly hostRef: ElementRef<HTMLElement>;
   // Get the option marked.
   getMarkedOption(): GlnOption | null;
+  // Set the option marked.
+  setMarkedOption(value: GlnOption | null): void;
   // Move the marked option by the key.
   moveMarkedOptionByKey(keyboardKey: string): void;
 }

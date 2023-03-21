@@ -1,0 +1,1081 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Attributes.
+    <a [href]="urlCmTooltip + '#Attributes'">#</a>
+  </h3>
+  <span>The following attributes are supported:</span>
+  <ul>
+    <li>
+      "config" - Defines a configuration object.
+      <a [href]="urlCmTooltip + '#config-interface'">More details.</a>
+    </li>
+    <li>
+      "glnTooltip" - specifies the tooltip text;
+    </li>
+    <li>
+      "glnttPosition" - specifies the position of the tooltip;
+      <br />
+      This property can take the following values:
+      <ul>
+        <li>'bottom' (default);</li>
+        <li>'bottom-start';</li>
+        <li>'bottom-end';</li>
+        <li>'top';</li>
+        <li>'top-start';</li>
+        <li>'top-end';</li>
+        <li>'left';</li>
+        <li>'left-start';</li>
+        <li>'left-end';</li>
+        <li>'right';</li>
+        <li>'right-start';</li>
+        <li>'right-end';</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+
+<div class="app-group">
+  <div>
+    <small>
+      <em>Attribute: glnttPosition.</em>
+    </small>
+  </div>
+</div>
+
+<hr br-nn />
+
+<div class="tta1-group-place">
+  <div class="tta1-group">
+    <div>
+      <button class="tta1-btn-cl"
+        glnttPosition="top-start"
+        glnTooltip="Information">
+        top-start
+      </button>
+      <button class="tta1-btn-cl"
+        glnttPosition="top"
+        glnTooltip="Information">
+        top
+      </button>
+      <button class="tta1-btn-cl"
+        glnttPosition="top-end"
+        glnTooltip="Information">
+        top-end
+      </button>
+    </div>
+  </div>
+  <div class="tta1-group">
+    <div class="tta1-group50 left">
+      <button class="tta1-btn-cl"
+        glnttPosition="left-start"
+        glnTooltip="Information">
+        left-start
+      </button>
+      <button class="tta1-btn-cl"
+        glnttPosition="left"
+        glnTooltip="Information">
+        left
+      </button>
+      <button class="tta1-btn-cl"
+        glnttPosition="left-end"
+        glnTooltip="Information">
+        left-end
+      </button>
+    </div>
+    <div class="tta1-group50 right">
+      <button class="tta1-btn-cl"
+        glnttPosition="right-start"
+        glnTooltip="Information">
+        right-start
+      </button>
+      <button class="tta1-btn-cl"
+        glnttPosition="right"
+        glnTooltip="Information">
+        right
+      </button>
+      <button class="tta1-btn-cl"
+        glnttPosition="right-end"
+        glnTooltip="Information">
+        right-end
+      </button>
+    </div>
+  </div>
+  <div class="tta1-group">
+    <div>
+      <button class="tta1-btn-cl"
+        glnttPosition="bottom-start"
+        glnTooltip="Information">
+        bottom-start
+      </button>
+      <button class="tta1-btn-cl"
+        glnttPosition="bottom"
+        glnTooltip="Information">
+        bottom
+      </button>
+      <button class="tta1-btn-cl"
+        glnttPosition="bottom-end"
+        glnTooltip="Information">
+        bottom-end
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<hr br-nn />
+<hr br-nn />
+<hr br-nn />
+<hr br-nn />
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="tta1-group-place"&gt;
+  &lt;div class="tta1-group"&gt;
+    &lt;div&gt;
+      &lt;button class="tta1-btn-cl"
+        glnttPosition="top-start"
+        glnTooltip="Information"&gt;
+        top-start
+      &lt;/button&gt;
+      &lt;button class="tta1-btn-cl"
+        glnttPosition="top"
+        glnTooltip="Information"&gt;
+        top
+      &lt;/button&gt;
+      &lt;button class="tta1-btn-cl"
+        glnttPosition="top-end"
+        glnTooltip="Information"&gt;
+        top-end
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="tta1-group"&gt;
+    &lt;div class="tta1-group50 left"&gt;
+      &lt;button class="tta1-btn-cl"
+        glnttPosition="left-start"
+        glnTooltip="Information"&gt;
+        left-start
+      &lt;/button&gt;
+      &lt;button class="tta1-btn-cl"
+        glnttPosition="left"
+        glnTooltip="Information"&gt;
+        left
+      &lt;/button&gt;
+      &lt;button class="tta1-btn-cl"
+        glnttPosition="left-end"
+        glnTooltip="Information"&gt;
+        left-end
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="tta1-group50 right"&gt;
+      &lt;button class="tta1-btn-cl"
+        glnttPosition="right-start"
+        glnTooltip="Information"&gt;
+        right-start
+      &lt;/button&gt;
+      &lt;button class="tta1-btn-cl"
+        glnttPosition="right"
+        glnTooltip="Information"&gt;
+        right
+      &lt;/button&gt;
+      &lt;button class="tta1-btn-cl"
+        glnttPosition="right-end"
+        glnTooltip="Information"&gt;
+        right-end
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="tta1-group"&gt;
+    &lt;div&gt;
+      &lt;button class="tta1-btn-cl"
+        glnttPosition="bottom-start"
+        glnTooltip="Information"&gt;
+        bottom-start
+      &lt;/button&gt;
+      &lt;button class="tta1-btn-cl"
+        glnttPosition="bottom"
+        glnTooltip="Information"&gt;
+        bottom
+      &lt;/button&gt;
+      &lt;button class="tta1-btn-cl"
+        glnttPosition="bottom-end"
+        glnTooltip="Information"&gt;
+        bottom-end
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-tooltip',
+  templateUrl: './tooltip.component.html',
+  styleUrls: ['./tooltip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class TooltipComponent &#123;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-tooltip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+
+  .tta1-group-place &#123;
+    width: 400px;
+  &#125;
+  .tta1-group &#123;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+  &#125;
+  .tta1-group50 &#123;
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    &.left &#123;
+      align-items: flex-start;  
+    &#125;
+    &.right &#123;
+      align-items: flex-end;  
+    &#125;
+  &#125;
+  .tta1-btn-cl &#123;
+    border-radius: 5px;
+    border-width: 0px;
+    color: cadetblue;;
+    font-weight: 600;
+    height: 38px;
+    margin: 5px 5px;
+    min-width: 100px;
+    user-select: all;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+
+<!-- Page: "Attributes" 02  // 02(efgh) -->
+<section mr-vr
+  id="attributes-supported02">
+  <h4 class="app-hover-link">
+    Attributes are also supported 2:
+    <a [href]="urlCmTooltip + '#attributes-supported02'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "glnttShowDelay" - specifies the delay time before showing the tooltip, ms;
+    </li>
+    <li>
+      "glnttHideDelay" - specifies the delay time before hiding the tooltip, ms;
+    </li>
+    <li>
+      "glnttNoHoverable" - a sign that the display of the mouse hover tooltip is disabled
+      (glnttNoHoverable);
+    </li>
+    <li>
+      "glnttNoTouchable" - a sign that the display of a touch action tip is disabled
+      (glnttNoTouchable);
+    </li>
+  </ul>
+</section>
+
+<div class="app-group">
+  <div class="app-elem">
+    <small>
+      <em>Attributes: glnttShowDelay, glnttHideDelay.</em>
+    </small>
+  </div>
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem tta2-io-wd">
+
+    <div class="tta2-io-mrl">
+      <small><em>Value ShowDelay</em></small>
+    </div>
+    <div class="tta2-io">
+      <button class="tta2-io-btn"
+        (click)="showDelay02e=decVal(showDelay02e, 100, 0)">
+        &#8854;
+      </button>
+      <input class="tta2-input"
+        type="number"
+        min="0"
+        max="10000"
+        step="100"
+        readonly
+        [value]="showDelay02e" />
+      <button class="tta2-io-btn"
+        (click)="showDelay02e=incVal(showDelay02e, 100, 10000)">
+        &#8853;
+      </button>
+    </div>
+    <div class="tta2-io-mrl">
+      <small><em>milliseconds</em></small>
+    </div>
+  </div>
+
+  <div class="app-elem tta2-io-wd">
+    <div class="tta2-io-mrl">
+      <small><em>Value HideDelay</em></small>
+    </div>
+    <div class="tta2-io">
+      <button class="tta2-io-btn"
+        (click)="hideDelay02e=decVal(hideDelay02e, 100, 0)">
+        &#8854;
+      </button>
+      <input class="tta2-input"
+        type="number"
+        min="0"
+        max="10000"
+        step="100"
+        readonly
+        [value]="hideDelay02e" />
+      <button class="tta2-io-btn"
+        (click)="hideDelay02e=incVal(hideDelay02e, 100, 10000)">
+        &#8853;
+      </button>
+    </div>
+    <div class="tta2-io-mrl">
+      <small><em>milliseconds</em></small>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Show tooltip.</em></small>
+    </div>
+    <div>
+      <button class="tta2-btn"
+        [glnttShowDelay]="showDelay02e"
+        [glnttHideDelay]="hideDelay02e"
+        glnTooltip="Information">
+        Action
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: glnttNoHoverable.</em>
+      </small>
+    </div>
+    <div>
+      <button class="tta2-btn"
+        glnttNoHoverable
+        glnTooltip="Information">
+        Action
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: glnttNoTouchable.</em>
+      </small>
+    </div>
+    <div>
+      <button class="tta2-btn"
+        glnttNoTouchable
+        glnTooltip="Information">
+        Action
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<hr br-nn />
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem tta2-io-wd"&gt;
+
+    &lt;div class="tta2-io-mrl"&gt;
+      &lt;small&gt;&lt;em&gt;Value ShowDelay&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="tta2-io"&gt;
+      &lt;button class="tta2-io-btn"
+        (click)="showDelay02e=decVal(showDelay02e, 100, 0)"&gt;
+        &#8854;
+      &lt;/button&gt;
+      &lt;input class="tta2-input"
+        type="number"
+        min="0"
+        max="10000"
+        step="100"
+        readonly
+        [value]="showDelay02e" /&gt;
+      &lt;button class="tta2-io-btn"
+        (click)="showDelay02e=incVal(showDelay02e, 100, 10000)"&gt;
+        &#8853;
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="tta2-io-mrl"&gt;
+      &lt;small&gt;&lt;em&gt;milliseconds&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem tta2-io-wd"&gt;
+    &lt;div class="tta2-io-mrl"&gt;
+      &lt;small&gt;&lt;em&gt;Value HideDelay&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="tta2-io"&gt;
+      &lt;button class="tta2-io-btn"
+        (click)="hideDelay02e=decVal(hideDelay02e, 100, 0)"&gt;
+        &#8854;
+      &lt;/button&gt;
+      &lt;input class="tta2-input"
+        type="number"
+        min="0"
+        max="10000"
+        step="100"
+        readonly
+        [value]="hideDelay02e" /&gt;
+      &lt;button class="tta2-io-btn"
+        (click)="hideDelay02e=incVal(hideDelay02e, 100, 10000)"&gt;
+        &#8853;
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="tta2-io-mrl"&gt;
+      &lt;small&gt;&lt;em&gt;milliseconds&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Show tooltip.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="tta2-btn"
+        [glnttShowDelay]="showDelay02e"
+        [glnttHideDelay]="hideDelay02e"
+        glnTooltip="Information"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: glnttNoHoverable.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="tta2-btn"
+        glnttNoHoverable
+        glnTooltip="Information"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: glnttNoTouchable.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="tta2-btn"
+        glnttNoTouchable
+        glnTooltip="Information"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-tooltip',
+  templateUrl: './tooltip.component.html',
+  styleUrls: ['./tooltip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class TooltipComponent &#123;
+  public showDelay02e: number = 500;
+  public hideDelay02e: number = 500;
+
+  public incVal(value: number, delta: number, max: number): number &#123;
+    return value + delta &lt;= max
+      ? value + delta : value &gt; max ? max : value;
+  &#125;
+  public decVal(value: number, delta: number, min: number): number &#123;
+    return value - delta &gt;= min
+      ? value - delta : value &lt; min ? min : value;
+  &#125;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-tooltip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .tta2-input &#123;
+    height: 26px;
+    width: 55px;
+    padding-left: 1em;
+    padding-right: 1em;
+  &#125;
+  .tta2-io-wd &#123;
+    min-width: 15ch;
+  &#125;
+  .tta2-io-mrl &#123;
+    margin-left: 32px;
+  &#125;
+  .tta2-io &#123;
+    display: flex;
+  &#125;
+  .tta2-io-btn &#123;
+    background-color: transparent;
+    border: 0;
+    border-radius: 50%;
+    color: #00000080;
+    cursor: pointer;
+    font-size: 24px;
+    outline: 0;
+    &:hover &#123;
+      color: #000000fa;
+    &#125;
+  &#125;
+  .tta2-btn &#123;
+    border-radius: 4px;
+    border-width: 0;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 16px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<!-- Page: "Attributes" 03 // 02(ijkl) -->
+<section mr-vr
+  id="attributes-supported03">
+  <h4 class="app-hover-link">
+    Attributes are also supported 3:
+    <a [href]="urlCmTooltip + '#attributes-supported03'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "glnttDisabled" - a sign that the tooltip is disabled (glnttDisabled);
+      <br>
+      Disabling a tooltip removes its DOM element's internal subscriptions.
+    </li>
+    <li>
+      "glnttNoAnimation" - a sign that the animation is disabled (glnttNoAnimation);
+    </li>
+    <li>
+      "glnttNoTransform" - a sign that the transformation is disabled (glnttNoTransform);
+    </li>
+    <li>
+      "glnttClasses" - set the classes to be applied to the overlay panel;
+    </li>
+  </ul>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute:
+          <label>
+            <input class="tta3-ver"
+              type="checkbox"
+              [checked]="isDisabled02i"
+              (change)="isDisabled02i=!isDisabled02i" />
+            [glnttDisabled]="{{isDisabled02i}}".
+          </label>
+        </em>
+      </small>
+    </div>
+    <div>
+      <button class="tta3-btn"
+        [glnttDisabled]="isDisabled02i"
+        glnTooltip="Information">
+        Action
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: glnttNoAnimation.</em>
+      </small>
+    </div>
+    <div>
+      <button class="tta3-btn"
+        glnttNoAnimation
+        glnTooltip="Information">
+        Action
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: glnttNoTransform.</em>
+      </small>
+    </div>
+    <div>
+      <button class="tta3-btn"
+        glnttNoTransform
+        glnTooltip="Information">
+        Action
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: glnttClasses.</em>
+      </small>
+    </div>
+    <div>
+      <button class="tta3-btn"
+        glnttClasses="tta3-panel-demo"
+        glnTooltip="Information">
+        Action
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<hr br-nn />
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute:
+          &lt;label&gt;
+            &lt;input class="tta3-ver"
+              type="checkbox"
+              [checked]="isDisabled02i"
+              (change)="isDisabled02i=!isDisabled02i" /&gt;
+            [glnttDisabled]="<b>&#123;</b>&#123;isDisabled02i&#125;&#125;".
+          &lt;/label&gt;
+        &lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="tta3-btn"
+        [glnttDisabled]="isDisabled02i"
+        glnTooltip="Information"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: glnttNoAnimation.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="tta3-btn"
+        glnttNoAnimation
+        glnTooltip="Information"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: glnttNoTransform.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="tta3-btn"
+        glnttNoTransform
+        glnTooltip="Information"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: glnttClasses.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="tta3-btn"
+        glnttClasses="tta3-panel-demo"
+        glnTooltip="Information"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-tooltip',
+  templateUrl: './tooltip.component.html',
+  styleUrls: ['./tooltip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class TooltipComponent &#123;
+  public isDisabled02i: boolean = true;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-tooltip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .tta3-btn &#123;
+    border-radius: 4px;
+    border-width: 0;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 16px;
+  &#125;
+  .tta3-ver &#123;
+    vertical-align: middle;
+  &#125;
+&#125;
+.tta3-panel-demo &#123;
+  background-color: darkorange;
+  color: black;
+  .gln-tooltip-arrow &#123;
+    color: darkorange;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<!-- Page: "Attributes" 04 // 02(mnop)-->
+<section mr-vr
+  id="attributes-supported04">
+  <h4 class="app-hover-link">
+    Attributes are also supported 4:
+    <a [href]="urlCmTooltip + '#attributes-supported04'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "glnttArrow" - a sign that an arrow is added to the tooltip (glnttArrow);
+    </li>
+  </ul>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem tta4-elem">
+    <div>
+      <small>
+        <em>Position value:</em>
+      </small>
+    </div>
+    <div>
+      <select class="tta4-select"
+        (change)="position02m=getValue($event.target)">
+        <option *ngFor="let item of positionList"
+          [value]="item"
+          [attr.selected]="position02m==item ? '' : null">{{ item }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: glnttArrow. Tooltip on click.</em>
+      </small>
+    </div>
+    <div>
+      <button class="tta4-btn"
+        glnttArrow
+        [glnttPosition]="position02m"
+        glnTooltip="Information about the action of this button."
+        glnttMaxWidth="120"
+        glnttNoHoverable
+        glnttNoTouchable
+        #tooltip02m="glnTooltip"
+        (click)="tooltip02m.toggle()">
+        Action
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: glnttArrow. Tooltip on click.</em>
+      </small>
+    </div>
+    <div>
+      <button class="tta4-btn"
+        glnttArrow
+        [glnttPosition]="position02m"
+        glnTooltip="Info"
+        glnttNoHoverable
+        glnttNoTouchable
+        #tooltip02n="glnTooltip"
+        (click)="tooltip02n.toggle()">
+        Action
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<hr br-nn />
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem tta4-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Position value:&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;select class="tta4-select"
+        (change)="position02m=getValue($event.target)"&gt;
+        &lt;option *ngFor="let item of positionList"
+          [value]="item"
+          [attr.selected]="position02m==item ? '' : null"&gt;<b>&#123;</b>&#123; item &#125;&#125;
+        &lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: glnttArrow. Tooltip on click.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="tta4-btn"
+        glnttArrow
+        [glnttPosition]="position02m"
+        glnTooltip="Information about the action of this button."
+        glnttMaxWidth="120"
+        glnttNoHoverable
+        glnttNoTouchable
+        #tooltip02m="glnTooltip"
+        (click)="tooltip02m.toggle()"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: glnttArrow. Tooltip on click.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;button class="tta4-btn"
+        glnttArrow
+        [glnttPosition]="position02m"
+        glnTooltip="Info"
+        glnttNoHoverable
+        glnttNoTouchable
+        #tooltip02n="glnTooltip"
+        (click)="tooltip02n.toggle()"&gt;
+        Action
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-tooltip',
+  templateUrl: './tooltip.component.html',
+  styleUrls: ['./tooltip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class TooltipComponent &#123;
+  public position02m = 'bottom';
+  public positionList: string[] = [
+    'bottom',
+    'bottom-start',
+    'bottom-end',
+    'top',
+    'top-start',
+    'top-end',
+    'right',
+    'right-start',
+    'right-end',
+    'left',
+    'left-start',
+    'left-end',
+  ];
+
+  public getValue(eventTarget: any): any &#123;
+    return eventTarget != null ? (eventTarget as Attr).value : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-tooltip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .tta4-elem &#123;
+    min-width: 200px;
+  &#125;
+  .tta4-btn &#123;
+    border-radius: 4px;
+    border-width: 0;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 16px;
+  &#125;
+  .tta4-select &#123;
+    padding: 6px 1em;
+    font-size: 14px;
+    outline: none;
+    margin: 3px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

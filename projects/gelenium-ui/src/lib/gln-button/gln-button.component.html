@@ -1,56 +1,42 @@
-<div #wrapElementRef>
-  <ng-container *ngIf="!linkElement; else elseBlockLink">
-    <button #buttonElementRef
-      class="glnbt-btn glnbt-settings"
-      glnbt-clear
-      glnbt-btn
-      type="button"
-      [attr.id]="id + '_button'"
-      [attr.disabled]="disabled ? '' : null"
-      [attr.tabindex]="disabled ? null : 0"
-      glnFrameOrnament
-      [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
-      [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
-      [glnFrameOrnamentAfterContent]="true"
-      (focus)="doFocus()"
-      (blur)="doBlur()">
-      <ng-container [ngTemplateOutlet]="templateOrnament">
-      </ng-container>
-      <span class="glnbt-label"
-        glnbt-mr-ver
-        glnbt-pd-hor>
-        <ng-content></ng-content>
-      </span>
-      <gln-touch-ripple *ngIf="!disabled && !noRipple">
-      </gln-touch-ripple>
-    </button>
-  </ng-container>
-  <ng-template #elseBlockLink>
-    <div class="glnbt-btn glnbt-settings"
-      glnbt-btn
-      [attr.id]="id + '_link'"
-      glnFrameOrnament
-      [glnFrameOrnamentLfAlign]="ornamLfAlign || currConfig?.ornamLfAlign"
-      [glnFrameOrnamentRgAlign]="ornamRgAlign || currConfig?.ornamRgAlign"
-      [glnFrameOrnamentAfterContent]="true"
-      (click)="doClick($event)">
-      <ng-container [ngTemplateOutlet]="templateOrnament">
-      </ng-container>
-      <ng-content select="a"></ng-content>
-      <gln-touch-ripple *ngIf="!disabled && !noRipple"
-        skip-events>
-      </gln-touch-ripple>
-    </div>
-  </ng-template>
-</div>
+<ng-container *ngIf="!linkElement; else elseBlockLink">
+  <button #buttonElementRef
+    class="glnbt-btn glnbt-settings"
+    glnbt-clear
+    glnbt-btn
+    type="button"
+    [attr.id]="id + '_button'"
+    [attr.disabled]="isDisabledVal ? '' : null"
+    [attr.tabindex]="isDisabledVal ? null : 0"
+    (focus)="doFocus()"
+    (blur)="doBlur()">
+    <ng-container [ngTemplateOutlet]="templateOrnament">
+    </ng-container>
+    <span class="glnbt-label"
+      glnbt-mr-ver
+      glnbt-pd-hor
+      glnbt-elem>
+      <ng-content></ng-content>
+    </span>
+    <gln-touch-ripple *ngIf="!isDisabledVal && !isNoRippleVal">
+    </gln-touch-ripple>
+  </button>
+</ng-container>
+<ng-template #elseBlockLink>
+  <div class="glnbt-btn glnbt-settings"
+    glnbt-btn
+    [attr.id]="id + '_link'"
+    (click)="doClick($event)">
+    <ng-container [ngTemplateOutlet]="templateOrnament">
+    </ng-container>
+    <ng-content select="a"></ng-content>
+    <gln-touch-ripple *ngIf="!isDisabledVal && !isNoRippleVal"
+      skip-events>
+    </gln-touch-ripple>
+  </div>
+</ng-template>
+
 
 <ng-template #templateOrnament>
-  <span glnfr-orn-lf
-    class="gln-ornam-lf">
-    <ng-content select="[gln-orn-lf]"></ng-content>
-  </span>
-  <span glnfr-orn-rg
-    class="gln-ornam-rg">
-    <ng-content select="[gln-orn-rg]"></ng-content>
-  </span>
+  <ng-content select="[gln-orn-lf]"></ng-content>
+  <ng-content select="[gln-orn-rg]"></ng-content>
 </ng-template>

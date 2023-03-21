@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { GlnSwitchConfig, GlnSwitchPosition, GLN_SWITCH_CONFIG } from 'gelenium-ui';
+import { GlnSwitchConfig, GLN_SWITCH_CONFIG } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
 
 const glnSwitchConfigDefault: GlnSwitchConfig = {
   isNoRipple: true,
-  position: GlnSwitchPosition.start,
+  position: 'start',
 };
 
 @Component({

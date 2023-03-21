@@ -43,6 +43,19 @@ const siteUrlsInput: SiteUrl[] = [
 
 SiteMenuUtil.addItem('Palette', 'Input', { label: 'Input', siteUrls: siteUrlsInput });
 
+// ** Menu for "Pagination". **
+
+RouterConfig.add('URL_PALETTE_PAGINATION', 'pagination');
+const urlPlPagination = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_PAGINATION');
+
+const siteUrlsPagination: SiteUrl[] = [
+  { label: 'Basic', url: urlPlPagination, fragment: 'Basic' },
+  { label: 'Like a Bootstrap', url: urlPlPagination, fragment: 'Bootstrap' },
+  { label: 'Like a Material-UI', url: urlPlPagination, fragment: 'MaterialUI' },
+];
+
+SiteMenuUtil.addItem('Palette', 'Pagination', { label: 'Pagination', siteUrls: siteUrlsPagination });
+
 // ** Menu for "Select". **
 
 RouterConfig.add('URL_PALETTE_SELECT', 'select');

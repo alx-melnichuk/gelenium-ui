@@ -23,230 +23,223 @@
 </section>
 
 <table class="app-tab">
-  <tr>
-    <th class="app-mn-wd-22ch">Name</th>
-    <th>Description</th>
-  </tr>
-
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>config: GlnFrameConfig<br/>
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>config: GlnFrameConfig<br/>
         &nbsp;&nbsp;| null<br/>
         &nbsp;&nbsp;| undefined;</code>
-    </td>
-    <td>
-      <span>Defines a configuration object.</span><br />
-      <a [href]="urlCmFrame + '#config-interface'">More details.</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>cssElementRef: <br/>
+      </td>
+      <td>
+        <span>Defines a configuration object.</span><br />
+        <a [href]="urlCmFrame + '#config-interface'">More details.</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>cssElementRef: <br/>
       &nbsp;ElementRef&lt;HTMLElement&gt;<br/>
       &nbsp;= this.hostRef;
       </code>
-    </td>
-    <td>
-      <span>
-        Defines the element for which css parameters will be added:
-      </span>
-      <ul>
-        <li>"--glnfrs--pd-lf" - the left padding for the frame content;</li>
-        <li>"--glnfrs--pd-rg" - the right padding for the frame content;</li>
-        <li>"--glnfrs--br-rd" - the border radius for the frame;</li>
-        <li>"--glnfrs--pd-shr" - the left padding the label at the when is shrink;</li>
-        <li>"--glnfrs--pd-tp" - the top padding for the frame content;</li>
-        <li>"--glnfrs--pd-bt" - the bottom padding for the frame content;</li>
-        <li>"--glnfrs--trn-y" - the top offset for the label with shrink;</li>
-        <li>"--glnfrs--trn2-y" - the top offset for the label without shrinkage (placeholder);</li>
-      </ul>
-      <span>
-        (default = this.hostRef;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>exterior: string<br/>
+      </td>
+      <td>
+        <span>
+          Defines the element for which css parameters will be added:
+        </span>
+        <ul>
+          <li>"--glnfrs--pd-lf" - the left padding for the frame content;</li>
+          <li>"--glnfrs--pd-rg" - the right padding for the frame content;</li>
+          <li>"--glnfrs--br-rd" - the border radius for the frame;</li>
+          <li>"--glnfrs--pd-shr" - the left padding the label at the when is shrink;</li>
+          <li>"--glnfrs--pd-tp" - the top padding for the frame content;</li>
+          <li>"--glnfrs--pd-bt" - the bottom padding for the frame content;</li>
+          <li>"--glnfrs--trn-y" - the top offset for the label with shrink;</li>
+          <li>"--glnfrs--trn2-y" - the top offset for the label without shrinkage (placeholder);
+          </li>
+        </ul>
+        <span>
+          (default = this.hostRef;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>exterior: string<br/>
         &nbsp;&nbsp;| null<br/>
-        &nbsp;&nbsp;| undefined;<br/>
-        //&nbsp;GlnFrameExteriorType
-      </code>
-    </td>
-    <td>
-      <span>
-        Determines the appearance of an element.<br />
-        It can take the following values:
-      </span>
-      <ul>
-        <li>"outlined";</li>
-        <li>"underline";</li>
-        <li>"standard";</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>frameSize: string<br/>
-        &nbsp;&nbsp;| null<br/>
-        &nbsp;&nbsp;| undefined;<br/>
-        //&nbsp;GlnFrameSizeType
-      </code>
-    </td>
-    <td>
-      <span>Determines the size of the element.<br />
-        It can take the following values:
-      </span>
-      <ul>
-        <li>"short" - height: 38px;</li>
-        <li>"small" - height: 44px;</li>
-        <li>"middle" - height: 50px (default);</li>
-        <li>"wide" - height: 56px;</li>
-        <li>"large" - height: 62px;</li>
-        <li>"huge" - height: 68px;</li>
-      </ul>
-      <span>
-        This property can also contain a string with the value of the height
-        of the element in pixels. For example:
-        <code>frameSize="57" or [frameSize]="'57'"</code>
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>isAttrHideAnimation<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Determines the appearance of an element.<br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"outlined" (default);</li>
+          <li>"underline";</li>
+          <li>"standard";</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isAttrHideAnimation<br/>
         &nbsp;&nbsp;: string<br/>
         &nbsp;&nbsp;| boolean<br/>
         &nbsp;&nbsp;| null<br/>
         &nbsp;&nbsp;| undefined;</code>
-    </td>
-    <td>
-      <span>
-        Specifies whether to add (remove) the animation lock attribute (hdAnmInit)
-        on initialization.
-        These apply when [(ngModel)] is used.<br />
-        (default = false;)</span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>isDisabled: string<br/>
+      </td>
+      <td>
+        <span>
+          Specifies whether to add (remove) the animation lock attribute (hdAnmInit)
+          on initialization.
+          These apply when [(ngModel)] is used.<br />
+          (default = false;)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isDisabled: string<br/>
         &nbsp;&nbsp;| boolean<br/>
         &nbsp;&nbsp;| null<br/>
         &nbsp;&nbsp;| undefined;</code>
-    </td>
-    <td>
-      <span>
-        Indicates that the element is disabled.<br />
-        (default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>isError: string<br/>
+      </td>
+      <td>
+        <span>
+          Indicates that the element is disabled.<br />
+          (default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isError: string<br/>
         &nbsp;&nbsp;| boolean<br/>
         &nbsp;&nbsp;| null<br/>
         &nbsp;&nbsp;| undefined;</code>
-    </td>
-    <td>
-      <span>
-        Indicates that the element is in an error state.<br />
-        (default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>isFilled: string<br/>
+      </td>
+      <td>
+        <span>
+          Indicates that the element is in an error state.<br />
+          (default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isFilled: string<br/>
         &nbsp;&nbsp;| boolean<br/>
         &nbsp;&nbsp;| null<br/>
         &nbsp;&nbsp;| undefined;</code>
-    </td>
-    <td>
-      <span>
-        Indicates that the input element is not empty (filled).<br />
-        (default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>isLabelShrink: string<br/>
+      </td>
+      <td>
+        <span>
+          Indicates that the input element is not empty (filled).<br />
+          (default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isLabelShrink: string<br/>
         &nbsp;&nbsp;| boolean<br/>
         &nbsp;&nbsp;| null<br/>
         &nbsp;&nbsp;| undefined;</code>
-    </td>
-    <td>
-      <span>
-        Indication that the label has shrunk and moved up.<br />
-        (default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>isNoAnimation: string<br/>
+      </td>
+      <td>
+        <span>
+          Indication that the label has shrunk and moved up.<br />
+          (default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoAnimation: string<br/>
         &nbsp;&nbsp;| boolean<br/>
         &nbsp;&nbsp;| null<br/>
         &nbsp;&nbsp;| undefined;</code>
-    </td>
-    <td>
-      <span>
-        Indicates that animation is disabled.<br />
-        (default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>isRequired: string<br/>
+      </td>
+      <td>
+        <span>
+          Indicates that animation is disabled.<br />
+          (default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isRequired: string<br/>
         &nbsp;&nbsp;| boolean<br/>
         &nbsp;&nbsp;| null<br/>
         &nbsp;&nbsp;| undefined;</code>
-    </td>
-    <td>
-      <span>
-        Indicates that the field is required.<br />
-        (default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>@Input()</code>
-      <code>label: string<br/>
+      </td>
+      <td>
+        <span>
+          Indicates that the field is required.<br />
+          (default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>label: string<br/>
         &nbsp;&nbsp;| null<br/>
         &nbsp;&nbsp;| undefined;</code>
-    </td>
-    <td>
-      <span>
-        Specifies the content of the label.
-      </span>
-    </td>
-  </tr>
-
-  <tr>
-    <td>
-      <code>@Output()</code>
-      <code>changeCssParams: EventEmitter&lt;void&gt;;</code>
-    </td>
-    <td>
-      <span>Changes to internal css parameters.</span>
-    </td>
-  </tr>
-
+      </td>
+      <td>
+        <span>
+          Specifies the content of the label.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>size: number<br/>
+        &nbsp;&nbsp;| string<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;<br/>
+      </code>
+      </td>
+      <td>
+        <span>Determines the size of the element.<br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"short" - height: 38px;</li>
+          <li>"small" - height: 44px;</li>
+          <li>"middle" - height: 50px (default);</li>
+          <li>"wide" - height: 56px;</li>
+          <li>"large" - height: 62px;</li>
+          <li>"huge" - height: 68px;</li>
+        </ul>
+        <span>
+          This property can also contain the element's height in pixels, either as a string
+          or as a number.<br />
+          The value in the units of "pixels" allow you to accurately calculate the size of
+          internal elements.<br />
+          For example: <code>size="57" or [size]="57"</code>
+        </span>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 <section mr-vr

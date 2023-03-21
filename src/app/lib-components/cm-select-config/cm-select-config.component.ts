@@ -8,7 +8,7 @@ import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-co
 
 const glnSelectConfigDefault: GlnSelectConfig = {
   exterior: 'outlined',
-  frameSize: 'small',
+  size: 'small',
   backdropClass: 'sc-backdrop',
   isMultiple: true,
   overlayPanelClass: ['sc-overlay-panel'],

@@ -14,7 +14,7 @@
   <code><pre source="ts">
 const glnFrameConfigDefault: GlnFrameConfig = &#123;
   exterior: 'outlined',
-  frameSize: 'small',
+  size: 'small',
 &#125;;
 
 @Component(&#123;
@@ -49,8 +49,7 @@ export class AppComponent &#123;
   </tr>
 
   <tr>
-    <td><code>exterior?: string;<br/>
-      //&nbsp;GlnFrameExteriorType</code></td>
+    <td><code>exterior?: string;</code></td>
     <td>
       <span>
         This property determines the appearance of the element.
@@ -68,31 +67,6 @@ export class AppComponent &#123;
           "standard" - The border is just at the bottom of the element.
         </li>
       </ul>
-      <span>(optional)</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>frameSize?: string;<br/>
-      //&nbsp;GlnFrameSize;</code></td>
-    <td>
-      <span>
-        This property determines the size of the element (its height).
-        <a [href]="urlCmFrame + '#FrameSize'">More details.</a>
-        It takes the following values:
-      </span>
-      <ul>
-        <li>"short" - sets the height to 38px;</li>
-        <li>"small" - sets the height to 44px;</li>
-        <li>"middle" - sets the height to 50px (default);</li>
-        <li>"wide" - sets the height to 56px;</li>
-        <li>"large" - sets the height to 62px;</li>
-        <li>"huge" - sets the height to 68px;</li>
-      </ul>
-      <span>
-        This property can also contain a string with the value of the height
-        of the element in pixels. For example:
-        <code>frameSize="57" or [frameSize]="'57'"</code>
-      </span>
       <span>(optional)</span>
     </td>
   </tr>
@@ -126,6 +100,33 @@ export class AppComponent &#123;
       <span>(optional)</span>
     </td>
   </tr>
+  <tr>
+    <td><code>size?: number<br/>
+      &nbsp;&nbsp;| string;</code></td>
+    <td>
+      <span>
+        This property determines the size of the element (its height).
+        <a [href]="urlCmFrame + '#Size'">More details.</a>
+        It takes the following values:
+      </span>
+      <ul>
+        <li>"short" - sets the height to 38px;</li>
+        <li>"small" - sets the height to 44px;</li>
+        <li>"middle" - sets the height to 50px (default);</li>
+        <li>"wide" - sets the height to 56px;</li>
+        <li>"large" - sets the height to 62px;</li>
+        <li>"huge" - sets the height to 68px;</li>
+      </ul>
+      <span>
+        This property can also contain the element's height in pixels, either as a string
+        or as a number.<br />
+        The value in the units of "pixels" allow you to accurately calculate the size of
+        internal elements.<br />
+        For example: <code>size="57" or [size]="57"</code>
+      </span>
+      <span>(optional)</span>
+    </td>
+  </tr>
 
 </table>
 
@@ -140,12 +141,12 @@ export class AppComponent &#123;
   </p>
   <ul>
     <li>"exterior" will have the value "outlined";</li>
-    <li>"frameSize" will have the value "small" (height to 44px);</li>
+    <li>"size" will have the value "small" (height to 44px);</li>
   </ul>
   <code><pre source="ts">
 const glnFrameConfigDefault: GlnFrameConfig = &#123;
   exterior: 'outlined',
-  frameSize: 'small',
+  size: 'small',
 &#125;;</pre></code>
 </section>
 
@@ -166,7 +167,7 @@ const glnFrameConfigDefault: GlnFrameConfig = &#123;
     For example, let's specify the following parameters:
   </p>
   <code><pre source="ts">
-frameSize="wide"
+size="wide"
 exterior="underline"</pre></code>
   <p>
     In other words, there is the following order of determining the configuration parameters:
@@ -176,7 +177,7 @@ exterior="underline"</pre></code>
       Standard values are taken.
       <code><pre source="ts">
 exterior="outlined",
-frameSize="middle",
+size="middle",
 isLabelShrink=false,
 isNoAnimation=false</pre></code>
     </li>
@@ -210,13 +211,13 @@ isNoAnimation=false</pre></code>
     <div class="app-elem">
       <div>
         <small>
-          <em>2. exterior="underline", frameSize="wide".</em>
+          <em>2. exterior="underline", size="wide".</em>
         </small>
       </div>
       <gln-input formControlName="model07b"
         label="Enter value"
         helperText="A value must be entered."
-        frameSize="wide"
+        size="wide"
         exterior="underline">
       </gln-input>
     </div>
@@ -255,13 +256,13 @@ isNoAnimation=false</pre></code>
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;2. exterior="underline", frameSize="wide".&lt;/em&gt;
+          &lt;em&gt;2. exterior="underline", size="wide".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model07b"
         label="Enter value"
         helperText="A value must be entered."
-        frameSize="wide"
+        size="wide"
         exterior="underline"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -284,7 +285,7 @@ import &#123;
 
 const glnFrameConfigDefault: GlnFrameConfig = &#123;
   exterior: 'outlined',
-  frameSize: 'small',
+  size: 'small',
 &#125;;
 
 @Component(&#123;

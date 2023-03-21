@@ -1,0 +1,12 @@
+<ng-container *ngIf="!templateRef; else elseBlock">
+  {{ text }}
+</ng-container>
+<ng-template #elseBlock>
+  <ng-container [ngTemplateOutlet]="templateRef"
+    [ngTemplateOutletContext]="content">
+  </ng-container>
+</ng-template>
+<span class="gln-tooltip-arrow glntt-arrow"
+  *ngIf="isArrow"
+  [attr.pos]="position"
+  [attr.alg]="alignment"></span>

@@ -1,0 +1,49 @@
+/*# sourceURL=pl-pagination-material-ui.component.scss */
+
+app-pl-pagination-material-ui {
+  display: block;
+
+  .pgpm-elem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  // ** Style: "Material-UI" **
+  .pgpm-mui {
+    font-size: 14px;
+  }
+  .pgpm-grey {
+    --gln-grey-h: 0;
+    --gln-grey-s: 0%;
+    --gln-grey-l: 85%;
+    --glnpg-hov-bg-cl: rgba(0, 0, 0, 0.04);
+    --glnpg-sel-def-lb-cl: rgba(0, 0, 0, 0.87);
+    --glnpg-sel-def-bg-cl: rgba(0, 0, 0, 0.08);
+    --glnpg-sel-hov-lb-cl: rgba(0, 0, 0, 0.87);
+    --glnpg-sel-hov-bg-cl: rgba(0, 0, 0, 0.12);
+    --glnpg-sel-ripple-cl: rgba(0, 0, 0, 0.35);
+  }
+  .pgpm-blue {
+    --gln-blue-h: 210;
+    --gln-blue-s: 79%;
+    --gln-blue-l: 46%;
+  }
+  .pgpm-pink {
+    --gln-pink-h: 291;
+    --gln-pink-s: 64%;
+    --gln-pink-l: 42%;
+  }
+  .pgpm-light-grey {
+    --gln-light-grey-h: 0;
+    --gln-light-grey-s: 0%;
+    --gln-light-grey-l: 40%;
+    --glnpg-def-lb-cl: rgba(0, 0, 0, 0.87);
+    --glnpg-sel-def-lb-cl: rgba(0, 0, 0, 0.87);
+    --glnpg-sel-hov-lb-cl: rgba(0, 0, 0, 0.87);
+  }
+  .pgpm-light-blue {
+    --gln-blue-h: 210;
+    --gln-blue-s: 85%;
+    --gln-blue-l: 50%;
+  }
+}

@@ -12,8 +12,6 @@ import {
   LABEL_UNDERLINE,
 } from '../../lib-core/constants';
 
-import { GlnFrameSizeUtil } from 'gelenium-ui';
-
 @Component({
   selector: 'app-cm-frame-border-radius',
   templateUrl: './cm-frame-border-radius.component.html',
@@ -70,9 +68,8 @@ export class CmFrameBorderRadiusComponent {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
-  public getSize(frameSize: string | null, radiusRatio: number = 1): string {
-    const value = GlnFrameSizeUtil.getValue(GlnFrameSizeUtil.convert(frameSize)) ?? 0;
-    return Math.round((value * radiusRatio * 100) / 100)
+  public getSize(size: number | null, radiusRatio: number = 1): string {
+    return Math.round(((size ?? 0) * radiusRatio * 100) / 100)
       .toString()
       .concat('px');
   }

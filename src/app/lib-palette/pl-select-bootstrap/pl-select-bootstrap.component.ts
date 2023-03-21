@@ -48,7 +48,7 @@ export class PlSelectBootstrapComponent {
   // GlnSelectConfig
   public config02a = {
     exterior: 'outlined',
-    frameSize: 'short',
+    size: 'short',
     isPlaceholder: true,
   };
 

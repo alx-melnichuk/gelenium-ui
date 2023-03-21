@@ -14,7 +14,7 @@
   <code><pre source="ts">
 const glnInputConfigDefault: GlnInputConfig = &#123;
   exterior: 'outlined',
-  frameSize: 'small',
+  size: 'small',
 &#125;;
 
 @Component(&#123;
@@ -148,12 +148,12 @@ export class AppComponent &#123;
   </p>
   <ul>
     <li>"exterior" will have the value "outlined";</li>
-    <li>"frameSize" will have the value "small" (height to 44px);</li>
+    <li>"size" will have the value "small" (height to 44px);</li>
   </ul>
   <code><pre source="ts">
 const glnInputConfigDefault: GlnInputConfig = &#123;
   exterior: 'outlined',
-  frameSize: 'small',
+  size: 'small',
 &#125;;</pre></code>
 </section>
 
@@ -176,7 +176,7 @@ const glnInputConfigDefault: GlnInputConfig = &#123;
   </p>
   <code><pre source="ts">
 exterior="underline"
-frameSize="wide"
+size="wide"
 isRequired</pre></code>
   <p>
     In other words, there is the following order of determining the configuration parameters:
@@ -186,7 +186,7 @@ isRequired</pre></code>
       Standard values are taken.
       <code><pre source="ts">
 exterior="outlined", // GlnFrameConfig
-frameSize="middle",  // GlnFrameConfig
+size="middle",       // GlnFrameConfig
 isLabelShrink=false, // GlnFrameConfig
 isNoAnimation=false, // GlnFrameConfig
 isRequired=false,    // GlnFrameConfig
@@ -228,13 +228,13 @@ isPlaceholder=false,</pre></code>
     <div class="app-elem">
       <div>
         <small>
-          <em>2. exterior="underline", frameSize="wide".</em>
+          <em>2. exterior="underline", size="wide".</em>
         </small>
       </div>
       <gln-input formControlName="model07b"
         label="Enter value"
         helperText="A value must be entered."
-        frameSize="wide"
+        size="wide"
         exterior="underline"
         isRequired>
       </gln-input>
@@ -275,13 +275,13 @@ isPlaceholder=false,</pre></code>
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;2. exterior="underline", frameSize="wide".&lt;/em&gt;
+          &lt;em&gt;2. exterior="underline", size="wide".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model07b"
         label="Enter value"
         helperText="A value must be entered."
-        frameSize="wide"
+        size="wide"
         exterior="underline"
         isRequired&gt;
       &lt;/gln-input&gt;
@@ -305,7 +305,7 @@ import &#123;
 
 const glnInputConfigDefault: GlnInputConfig = &#123;
   exterior: 'outlined',
-  frameSize: 'small',
+  size: 'small',
 &#125;;
 
 @Component(&#123;

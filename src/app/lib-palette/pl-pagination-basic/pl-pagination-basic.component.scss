@@ -1,0 +1,11 @@
+/*# sourceURL=pl-pagination-basic.component.scss */
+
+app-pl-pagination-basic {
+  display: block;
+
+  .pgpb-elem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}

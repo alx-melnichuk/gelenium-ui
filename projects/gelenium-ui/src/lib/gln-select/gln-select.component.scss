@@ -66,7 +66,7 @@ gln-select {
   }
 
   // Element "gln-frame - div.glnsl-rhomb".
-  gln-frame>div>[glnfr-orn-rg]>[glnsl-rhomb] {
+  gln-frame>div>[gln-orn-rg][glnsl-rhomb] {
     align-items: center;
     color: var(--glnsl-rhomb-cl);
     display: flex;
@@ -88,7 +88,7 @@ gln-select {
       transform: rotate(180deg);
     }
   }
-  gln-frame:not([ext-s])>div>[glnfr-orn-rg]>[glnsl-rhomb] {
+  gln-frame:not([ext-s])>div>[gln-orn-rg][glnsl-rhomb] {
     padding-right: 0.375em; // 6px
   }
 

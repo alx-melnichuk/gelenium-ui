@@ -1,7 +1,14 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
 
+import { GlnButtonConfig, GLN_BUTTON_CONFIG } from 'gelenium-ui';
+
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
+
+const glnButtonConfigDefault: GlnButtonConfig = {
+  exterior: 'text',
+  size: 'middle',
+};
 
 @Component({
   selector: 'app-cm-button-config',
@@ -9,6 +16,7 @@ import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-co
   styleUrls: ['./cm-button-config.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: GLN_BUTTON_CONFIG, useValue: glnButtonConfigDefault }],
 })
 export class CmButtonConfigComponent {
   @Input()

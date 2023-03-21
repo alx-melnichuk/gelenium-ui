@@ -1,10 +1,10 @@
 <section mr-vr>
   <h3 class="app-hover-link">
-    Frame Size
-    <a [href]="urlCmFrame + '#FrameSize'">#</a>
+    Size
+    <a [href]="urlCmFrame + '#Size'">#</a>
   </h3>
   <p>
-    The "frameSize" property determines the size of the element (its height).
+    The "size" property determines the size of the element (its height).
   </p>
   <p>
     It takes the following values:
@@ -18,7 +18,7 @@
     <li>"huge" - sets the height to 68px;</li>
   </ul>
   <p>
-    The element's height is set according to the value of the frameSize parameter.
+    The element's height is set according to the value of the 'size' parameter.
     All padding and offsets are determined by this variable and the font size.
   </p>
   <p>
@@ -33,9 +33,18 @@
     (from font-size: 10px to 26px).
   </p>
   <p>
+    This property can also contain the element's height in pixels, either as a string
+    or as a number.<br />
+    The value in the units of "pixels" allow you to accurately calculate the size of
+    internal elements.<br />
+    For example: <code>size="57" or [size]="57"</code>
+  </p>
+  <p>
     It is possible to specify the height of an element. To do this,
-    in the "config.frameSizeValue" property, we define the required height in pixels.
-    In this case "parameter frameSize" and "config.frameSize" should not be used.
+    in the "config.size" property, we define the required height in pixels.
+    <br />
+    For example: <code>[config]="&#123; size : '57' &#125;"</code> or
+    <code>[config]="&#123; size : 57 &#125;"</code>
   </p>
 </section>
 
@@ -73,7 +82,7 @@
       </div>
       <gln-input formControlName="model02a"
         [label]="hideLabel02a ? null : 'Enter value'"
-        frameSize="short"
+        size="short"
         [exterior]="exterior02a">
       </gln-input>
     </div>
@@ -88,7 +97,7 @@
       </div>
       <gln-input formControlName="model02b"
         [label]="hideLabel02a ? null : 'Enter value'"
-        frameSize="small"
+        size="small"
         [exterior]="exterior02a">
       </gln-input>
     </div>
@@ -103,7 +112,7 @@
       </div>
       <gln-input formControlName="model02c"
         [label]="hideLabel02a ? null : 'Enter value'"
-        frameSize="middle"
+        size="middle"
         [exterior]="exterior02a">
       </gln-input>
     </div>
@@ -118,7 +127,7 @@
       </div>
       <gln-input formControlName="model02d"
         [label]="hideLabel02a ? null : 'Enter value'"
-        frameSize="wide"
+        size="wide"
         [exterior]="exterior02a">
       </gln-input>
     </div>
@@ -134,7 +143,7 @@
       <gln-input formControlName="model02e"
         class="fs-large"
         [label]="hideLabel02a ? null : 'Enter value'"
-        frameSize="large"
+        size="large"
         [exterior]="exterior02a">
       </gln-input>
     </div>
@@ -150,7 +159,7 @@
       <gln-input formControlName="model02f"
         class="fs-huge"
         [label]="hideLabel02a ? null : 'Enter value'"
-        frameSize="huge"
+        size="huge"
         [exterior]="exterior02a">
       </gln-input>
     </div>
@@ -180,7 +189,7 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model02a"
         [label]="hideLabel02a ? null : 'Enter value'"
-        frameSize="short"
+        size="short"
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -195,7 +204,7 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model02b"
         [label]="hideLabel02a ? null : 'Enter value'"
-        frameSize="small"
+        size="small"
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -210,7 +219,7 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model02c"
         [label]="hideLabel02a ? null : 'Enter value'"
-        frameSize="middle"
+        size="middle"
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -225,7 +234,7 @@
       &lt;/div&gt;
       &lt;gln-input formControlName="model02d"
         [label]="hideLabel02a ? null : 'Enter value'"
-        frameSize="wide"
+        size="wide"
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -241,7 +250,7 @@
       &lt;gln-input formControlName="model02e"
         class="fs-large"
         [label]="hideLabel02a ? null : 'Enter value'"
-        frameSize="large"
+        size="large"
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -257,7 +266,7 @@
       &lt;gln-input formControlName="model02f"
         class="fs-huge"
         [label]="hideLabel02a ? null : 'Enter value'"
-        frameSize="huge"
+        size="huge"
         [exterior]="exterior02a"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -354,12 +363,12 @@ app-frame &#123;
   <div class="app-group">
     <div class="app-elem">
       <div>
-        <small><em>"frameSize" height: 57px; font-size: 16px;</em></small>
+        <small><em>"size" height: 57px; font-size: 16px;</em></small>
       </div>
       <gln-input formControlName="model02g"
         [label]="hideLabel02b ? null : 'Enter value'"
         helperText="Custom height settings 57px."
-        frameSize="57"
+        size="57"
         [exterior]="exterior02b">
       </gln-input>
     </div>
@@ -374,7 +383,7 @@ app-frame &#123;
         class="fs-large"
         [label]="hideLabel02b ? null : 'Enter value'"
         helperText="Custom height settings 57px."
-        [config]="{ frameSize: '57' }"
+        [size]="57"
         [exterior]="exterior02b">
       </gln-input>
     </div>
@@ -389,7 +398,7 @@ app-frame &#123;
         class="fs-huge"
         [label]="hideLabel02b ? null : 'Enter value'"
         helperText="Custom height settings 57px."
-        [config]="{ frameSize: '57' }"
+        [config]="{ size: '57' }"
         [exterior]="exterior02b">
       </gln-input>
     </div>
@@ -413,12 +422,12 @@ app-frame &#123;
   &lt;div class="app-group"&gt;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
-        &lt;small&gt;&lt;em&gt;"frameSize" height: 57px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
+        &lt;small&gt;&lt;em&gt;"size" height: 57px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02g"
         [label]="hideLabel02b ? null : 'Enter value'"
         helperText="Custom height settings 57px."
-        frameSize="57"
+        size="57"
         [exterior]="exterior02b"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -433,7 +442,7 @@ app-frame &#123;
         class="fs-large"
         [label]="hideLabel02b ? null : 'Enter value'"
         helperText="Custom height settings 57px."
-        [config]="&#123; frameSize: '57' &#125;"
+        [size]="57"
         [exterior]="exterior02b"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;
@@ -448,7 +457,7 @@ app-frame &#123;
         class="fs-huge"
         [label]="hideLabel02b ? null : 'Enter value'"
         helperText="Custom height settings 57px."
-        [config]="&#123; frameSize: '57' &#125;"
+        [config]="&#123; size: '57' &#125;"
         [exterior]="exterior02b"&gt;
       &lt;/gln-input&gt;
     &lt;/div&gt;

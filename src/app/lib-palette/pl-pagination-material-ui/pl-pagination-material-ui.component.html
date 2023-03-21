@@ -1,0 +1,371 @@
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Like a Material-UI.
+    <a [href]="urlPlPagination + '#MaterialUI'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnPagination in style as "Material-UI".
+  </p>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior='text', grey.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui pgpm-grey"
+      [glnColor]="{ primary: 'grey' }"
+      [page]="page13a"
+      [count]="10"
+      exterior="text"
+      [size]="32"
+      (changePage)="page13a = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior='text', blue.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui pgpm-blue"
+      [glnColor]="{ primary: 'blue' }"
+      [page]="page13b"
+      [count]="10"
+      exterior="text"
+      [size]="32"
+      (changePage)="page13b = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior='text', pink.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui pgpm-pink"
+      [glnColor]="{ primary: 'pink' }"
+      [page]="page13c"
+      [count]="10"
+      exterior="text"
+      [size]="32"
+      (changePage)="page13c = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior='text', isDisabled.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui"
+      [page]="page13d"
+      [count]="10"
+      exterior="text"
+      [size]="32"
+      isDisabled
+      (changePage)="page13d = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior='outlined', light-grey.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui pgpm-light-grey"
+      [glnColor]="{ primary: 'light-grey' }"
+      [page]="page13f"
+      [count]="10"
+      exterior="outlined"
+      [size]="32"
+      (changePage)="page13f = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior='outlined', light-blue.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui pgpm-light-blue"
+      [glnColor]="{ primary: 'light-blue' }"
+      [page]="page13g"
+      [count]="10"
+      exterior="outlined"
+      [size]="32"
+      (changePage)="page13g = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior='outlined', pink.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui pgpm-pink"
+      [glnColor]="{ primary: 'pink' }"
+      [page]="page13h"
+      [count]="10"
+      exterior="outlined"
+      [size]="32"
+      (changePage)="page13h = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgpm-elem">
+    <div>
+      <small>
+        <em>Attributes: count, page, exterior='outlined', isDisabled.</em>
+      </small>
+    </div>
+    <gln-pagination class="pgpm-mui"
+      [page]="page13i"
+      [count]="10"
+      exterior="outlined"
+      [size]="32"
+      isDisabled
+      (changePage)="page13i = $event">
+    </gln-pagination>
+  </div>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem pgpm-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior='text', grey.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination class="pgpm-mui pgpm-grey"
+      [glnColor]="&#123; primary: 'grey' &#125;"
+      [page]="page13a"
+      [count]="10"
+      exterior="text"
+      [size]="32"
+      (changePage)="page13a = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpm-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior='text', blue.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination class="pgpm-mui pgpm-blue"
+      [glnColor]="&#123; primary: 'blue' &#125;"
+      [page]="page13b"
+      [count]="10"
+      exterior="text"
+      [size]="32"
+      (changePage)="page13b = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpm-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior='text', pink.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination class="pgpm-mui pgpm-pink"
+      [glnColor]="&#123; primary: 'pink' &#125;"
+      [page]="page13c"
+      [count]="10"
+      exterior="text"
+      [size]="32"
+      (changePage)="page13c = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpm-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior='text', isDisabled.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination class="pgpm-mui"
+      [page]="page13d"
+      [count]="10"
+      exterior="text"
+      [size]="32"
+      isDisabled
+      (changePage)="page13d = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpm-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior='outlined', light-grey.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination class="pgpm-mui pgpm-light-grey"
+      [glnColor]="&#123; primary: 'light-grey' &#125;"
+      [page]="page13f"
+      [count]="10"
+      exterior="outlined"
+      [size]="32"
+      (changePage)="page13f = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpm-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior='outlined', light-blue.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination class="pgpm-mui pgpm-light-blue"
+      [glnColor]="&#123; primary: 'light-blue' &#125;"
+      [page]="page13g"
+      [count]="10"
+      exterior="outlined"
+      [size]="32"
+      (changePage)="page13g = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpm-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior='outlined', pink.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination class="pgpm-mui pgpm-pink"
+      [glnColor]="&#123; primary: 'pink' &#125;"
+      [page]="page13h"
+      [count]="10"
+      exterior="outlined"
+      [size]="32"
+      (changePage)="page13h = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgpm-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: count, page, exterior='outlined', isDisabled.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination class="pgpm-mui"
+      [page]="page13i"
+      [count]="10"
+      exterior="outlined"
+      [size]="32"
+      isDisabled
+      (changePage)="page13i = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class PaginationComponent &#123;
+
+  public page13a: number = 1;
+  public page13b: number = 1;
+  public page13c: number = 1;
+  public page13d: number = 1;
+
+  public page13f: number = 1;
+  public page13g: number = 1;
+  public page13h: number = 1;
+  public page13i: number = 1;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .pgpm-elem &#123;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  &#125;
+  // ** Style: "Material-UI" **
+  .pgpm-mui &#123;
+    font-size: 14px;
+  &#125;
+  .pgpm-grey &#123;
+    --gln-grey-h: 0;
+    --gln-grey-s: 0%;
+    --gln-grey-l: 85%;
+    --glnpg-hov-bg-cl: rgba(0, 0, 0, 0.04);
+    --glnpg-sel-def-lb-cl: rgba(0, 0, 0, 0.87);
+    --glnpg-sel-def-bg-cl: rgba(0, 0, 0, 0.08);
+    --glnpg-sel-hov-lb-cl: rgba(0, 0, 0, 0.87);
+    --glnpg-sel-hov-bg-cl: rgba(0, 0, 0, 0.12);
+    --glnpg-sel-ripple-cl: rgba(0, 0, 0, 0.35);
+  &#125;
+  .pgpm-blue &#123;
+    --gln-blue-h: 210;
+    --gln-blue-s: 79%;
+    --gln-blue-l: 46%;
+  &#125;
+  .pgpm-pink &#123;
+    --gln-pink-h: 291;
+    --gln-pink-s: 64%;
+    --gln-pink-l: 42%;
+  &#125;
+  .pgpm-light-grey &#123;
+    --gln-light-grey-h: 0;
+    --gln-light-grey-s: 0%;
+    --gln-light-grey-l: 40%;
+    --glnpg-def-lb-cl: rgba(0, 0, 0, 0.87);
+    --glnpg-sel-def-lb-cl: rgba(0, 0, 0, 0.87);
+    --glnpg-sel-hov-lb-cl: rgba(0, 0, 0, 0.87);
+  &#125;
+  .pgpm-light-blue &#123;
+    --gln-blue-h: 210;
+    --gln-blue-s: 85%;
+    --gln-blue-l: 50%;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

@@ -10,18 +10,18 @@
   </p>
   <code><pre source="ts">
 public cfgContained: GlnButtonConfig = &#123;
-  exterior: GlnButtonExterior.contained,
-  frameSize: GlnFrameSize.short,
+  exterior: 'contained',
+  size: 'short',
   isNoRipple: true,
 &#125;;
 public cfgOutlined: GlnButtonConfig = &#123;
-  exterior: GlnButtonExterior.outlined,
-  frameSize: GlnFrameSize.short,
+  exterior: 'outlined',
+  size: 'short',
   isNoRipple: true,
 &#125;;
 public cfgText: GlnButtonConfig = &#123;
-  exterior: GlnButtonExterior.text,
-  frameSize: GlnFrameSize.short,
+  exterior: 'text',
+  size: 'short',
   isNoRipple: true,
 &#125;;</pre></code>
   <span>
@@ -899,6 +899,9 @@ public cfgText: GlnButtonConfig = &#123;
 import &#123;
   Component, ViewEncapsulation
 &#125; from '@angular/core';
+import &#123;
+  GlnButtonConfig
+&#125; from 'gelenium-ui';
 
 @Component(&#123;
   selector: 'app-button',
@@ -920,20 +923,20 @@ export class ButtonComponent &#123;
   public isDisabledReference = false;
 
   public cfgContained: GlnButtonConfig = &#123;
-    exterior: GlnButtonExterior.contained,
-    frameSize: GlnFrameSize.short,
+    exterior: 'contained',
+    size: 'short',
     isNoRipple: true,
   &#125;;
 
   public cfgOutlined: GlnButtonConfig = &#123;
-    exterior: GlnButtonExterior.outlined,
-    frameSize: GlnFrameSize.short,
+    exterior: 'outlined',
+    size: 'short',
     isNoRipple: true,
   &#125;;
 
   public cfgText: GlnButtonConfig = &#123;
-    exterior: GlnButtonExterior.text,
-    frameSize: GlnFrameSize.short,
+    exterior: 'text',
+    size: 'short',
     isNoRipple: true,
   &#125;;
 &#125;</pre></code>

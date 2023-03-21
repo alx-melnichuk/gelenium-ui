@@ -1,4 +1,4 @@
-import { CdkConnectedOverlay, ConnectedPosition, HorizontalConnectionPos, ScrollStrategy } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, ConnectedPosition, HorizontalConnectionPos, Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import { isPlatformBrowser } from '@angular/common';
 import {
   AfterContentInit,
@@ -40,18 +40,19 @@ import {
 } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from '../directives/gln-frame-ornament/gln-frame-ornam-align.interface';
+import { GlnOrnament, ORNAMENT_ALIGN } from '../directives/gln-ornament/gln-ornament.interface';
+import { GlnOrnamentOwner, GLN_ORNAMENT_OWNER } from '../directives/gln-ornament/gln-ornament-owner.interface';
+import { GlnOrnamentOwnerUtil } from '../directives/gln-ornament/gln-ornament-owner.util';
+import { CSS_ATTR_ORN_LF, CSS_PROP_ORN_PD_LF, GlnOrnamentLeftDirective } from '../directives/gln-ornament/gln-ornament-left.directive';
+import { CSS_ATTR_ORN_RG, CSS_PROP_ORN_PD_RG, GlnOrnamentRightDirective } from '../directives/gln-ornament/gln-ornament-right.directive';
 import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
-import { GlnFrameExterior } from '../gln-frame/gln-frame-exterior.interface';
-import { GlnFrameSize, GlnFrameSizeUtil } from '../gln-frame/gln-frame-size.interface';
 import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
 import { GlnOptionUtil } from '../gln-option/gln-option.util';
 import { ArrayUtil } from '../_utils/array.util';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { NumberUtil } from '../_utils/number.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
 import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
@@ -87,19 +88,27 @@ let uniqueIdCounter = 0;
     { provide: NG_VALIDATORS, useExisting: forwardRef(() => GlnSelectComponent), multi: true },
     { provide: GLN_NODE_INTERNAL_VALIDATOR, useExisting: GlnSelectComponent },
     { provide: GLN_OPTION_PARENT, useExisting: GlnSelectComponent },
+    { provide: GLN_ORNAMENT_OWNER, useExisting: GlnSelectComponent },
   ],
 })
 export class GlnSelectComponent
-  implements OnChanges, OnInit, AfterContentInit, AfterViewInit, OnDestroy, ControlValueAccessor, Validator, GlnOptionParent
+  implements
+    OnChanges,
+    OnInit,
+    AfterContentInit,
+    AfterViewInit,
+    OnDestroy,
+    ControlValueAccessor,
+    Validator,
+    GlnOptionParent,
+    GlnOrnamentOwner
 {
   @Input()
   public id = `glnsl-${uniqueIdCounter++}`;
   @Input()
   public config: GlnSelectConfig | null | undefined;
   @Input()
-  public exterior: string | null | undefined; // GlnFrameExteriorType
-  @Input()
-  public frameSize: string | null | undefined; // GlnFrameSizeType
+  public exterior: string | null | undefined; // 'outlined' | 'underline' | 'standard'
   @Input()
   public helperText: string | null | undefined;
   @Input()
@@ -144,6 +153,8 @@ export class GlnSelectComponent
   public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = '';
   @Input()
   public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
+  @Input()
+  public size: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
   @Input()
   public visibleSize: number | null | undefined;
   @Input()
@@ -207,49 +218,38 @@ export class GlnSelectComponent
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public set options(value: GlnOption[]) {}
-
-  public get exteriorVal(): GlnFrameExterior | null {
-    return this.frameComp.exteriorVal;
-  }
-  public get frameSizeVal(): GlnFrameSize | null {
-    return this.frameComp.frameSizeVal;
-  }
-  public get frameSizeValue(): number {
-    return this.frameComp.frameSizeValue;
-  }
-  public get labelShrink(): boolean | null {
-    return this.frameComp.labelShrink;
-  }
-  public get noAnimation(): boolean | null {
-    return this.frameComp.noAnimation;
-  }
+  @ContentChildren(GlnOrnamentLeftDirective, { descendants: true })
+  public ornamLeftList!: QueryList<GlnOrnamentLeftDirective>;
+  @ContentChildren(GlnOrnamentRightDirective, { descendants: true })
+  public ornamRightList!: QueryList<GlnOrnamentRightDirective>;
+  @ViewChild(GlnOrnamentRightDirective)
+  public ornamRhomb: GlnOrnamentRightDirective | undefined;
 
   public backdropClassVal: string | null = null;
   public checkmark: boolean | null = null; // Binding attribute "isCheckmark". // interface GlnOptionParent
   public currConfig: GlnSelectConfig;
-  public disabled: boolean | null = null; // Binding attribute "isDisabled".
-  public error: boolean | null = null; // Binding attribute "isError".
   public errors: ValidationErrors | null = null;
-  public frameSizeDefault = GlnFrameSizeUtil.getValue(GlnFrameSize.middle) || 0;
   public hasPanelAnimation = false;
   public isAttrHideAnimation: boolean | undefined;
+  public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
+  public isErrorVal: boolean | null = null; // Binding attribute "isError".
   public isFocused = false;
   public isFilled = false;
   public isPanelOpen = false;
-  public maxWd: boolean | null = null; // Binding attribute "isMaxWd".
+  public isMaxWdVal: boolean | null = null; // Binding attribute "isMaxWd".
+  public isNoIconVal: boolean | null = null; // Binding attribute "isNoIcon",
+  public isPlaceholderVal: boolean | null = null; // Binding attribute "isPlaceholder".
+  public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
+  public isRequiredVal: boolean | null = null; // Binding attribute "isRequired".
   public multiple: boolean | null = null; // Binding attribute "isMultiple". // interface GlnOptionParent
-  public noIcon: boolean | null = null; // Binding attribute "isNoIcon",
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
-  public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
-  public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
+  public ornamLfAlignVal: string | null = null; // Binding attribute "ornamLfAlign".
+  public ornamRgAlignVal: string | null = null; // Binding attribute "ornamRgAlign".
   public overlayPanelClass: string | string[] = '';
   public panelClassVal: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
-  public placeholder: boolean | null = null; // Binding attribute "isPlaceholder".
   public positionList: ConnectedPosition[] = [];
-  public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
-  public required: boolean | null = null; // Binding attribute "isRequired".
   public selectedOptions: GlnOption[] = [];
-  /** Strategy for handling scrolling when the selection panel is open. */
+  /** A strategy for handling scrolling when the overlay panel is open. */
   public scrollStrategy: ScrollStrategy;
   /** The position and dimensions for the trigger's bounding box. */
   public triggerRect: DOMRect | null = null;
@@ -271,13 +271,13 @@ export class GlnSelectComponent
     public hostRef: ElementRef<HTMLElement>,
     private changeDetectorRef: ChangeDetectorRef,
     private ngZone: NgZone,
+    private overlay: Overlay,
     @Optional() @Inject(GLN_SELECT_CONFIG) private rootConfig: GlnSelectConfig | null,
     @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null,
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-    @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: any
+    @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: (() => ScrollStrategy) | null
   ) {
     this.currConfig = this.rootConfig || {};
-    this.scrollStrategy = this.scrollStrategyFactory();
+    this.scrollStrategy = this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : this.overlay.scrollStrategies.block();
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-select', true);
     HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
   }
@@ -295,42 +295,45 @@ export class GlnSelectComponent
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
     if (changes['isError'] || (changes['config'] && this.isError == null && this.currConfig.isError != null)) {
-      this.error = BooleanUtil.init(this.isError) ?? !!this.currConfig.isError;
-      this.settingError(this.error, this.renderer, this.hostRef);
+      this.isErrorVal = BooleanUtil.init(this.isError) ?? !!this.currConfig.isError;
+      this.settingError(this.isErrorVal, this.renderer, this.hostRef);
     }
     if (changes['isMaxWd'] || (changes['config'] && this.isMaxWd == null && this.currConfig.isMaxWd != null)) {
-      this.maxWd = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
+      this.isMaxWdVal = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
     }
     if (changes['isMultiple'] || (changes['config'] && this.isMultiple == null && this.currConfig.isMultiple) || null) {
       this.multiple = BooleanUtil.init(this.isMultiple) ?? !!this.currConfig.isMultiple;
       this.settingMultiple(this.multiple, this.renderer, this.hostRef);
     }
     if (changes['isNoIcon'] || (changes['config'] && this.isNoIcon == null && this.currConfig.isNoIcon != null)) {
-      this.noIcon = BooleanUtil.init(this.isNoIcon) ?? !!this.currConfig.isNoIcon;
-      this.settingNoIcon(this.noIcon, this.renderer, this.hostRef);
+      this.isNoIconVal = BooleanUtil.init(this.isNoIcon) ?? !!this.currConfig.isNoIcon;
+      this.settingNoIcon(this.isNoIconVal, this.renderer, this.hostRef);
     }
     if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
       this.noRipple = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
       this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
     }
     if (changes['isPlaceholder'] || (changes['config'] && this.isPlaceholder == null && this.currConfig.isPlaceholder != null)) {
-      this.placeholder = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
+      this.isPlaceholderVal = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
     }
     if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
-      this.readOnly = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
-      this.settingReadOnly(this.readOnly, this.renderer, this.hostRef);
+      this.isReadOnlyVal = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
+      this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
     if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
-      this.required = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
-      this.settingRequired(this.required, this.renderer, this.hostRef);
+      this.isRequiredVal = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
+      this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
     if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlign == null && this.currConfig.ornamLfAlign != null)) {
-      this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamLfAlign || this.currConfig.ornamLfAlign || null);
+      this.ornamLfAlignVal = ORNAMENT_ALIGN[this.ornamLfAlign || this.currConfig.ornamLfAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
+      this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, this.getElements(this.ornamLeftList));
     }
     if (changes['ornamRgAlign'] || (changes['config'] && this.ornamRgAlign == null && this.currConfig.ornamRgAlign != null)) {
-      this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamRgAlign || this.currConfig.ornamRgAlign || null);
+      this.ornamRgAlignVal = ORNAMENT_ALIGN[this.ornamRgAlign || this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
+      const rhombRef: ElementRef<HTMLElement> | undefined = this.ornamRhomb?.hostRef;
+      this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList, rhombRef));
     }
     if (changes['config'] && this.currConfig.overlayPanelClass != null) {
       this.overlayPanelClass = this.currConfig.overlayPanelClass;
@@ -361,42 +364,42 @@ export class GlnSelectComponent
       this.checkmark = !!this.currConfig.isCheckmark;
       this.settingCheckmark(this.checkmark, this.renderer, this.hostRef);
     }
-    if (this.error == null) {
-      this.error = !!this.currConfig.isError;
-      this.settingError(this.error, this.renderer, this.hostRef);
+    if (this.isErrorVal == null) {
+      this.isErrorVal = !!this.currConfig.isError;
+      this.settingError(this.isErrorVal, this.renderer, this.hostRef);
     }
-    if (this.maxWd == null) {
-      this.maxWd = !!this.currConfig.isMaxWd;
+    if (this.isMaxWdVal == null) {
+      this.isMaxWdVal = !!this.currConfig.isMaxWd;
     }
     if (this.multiple == null) {
       this.multiple = !!this.currConfig.isMultiple;
       this.settingMultiple(this.multiple, this.renderer, this.hostRef);
     }
-    if (this.noIcon == null) {
-      this.noIcon = !!this.currConfig.isNoIcon;
-      this.settingNoIcon(this.noIcon, this.renderer, this.hostRef);
+    if (this.isNoIconVal == null) {
+      this.isNoIconVal = !!this.currConfig.isNoIcon;
+      this.settingNoIcon(this.isNoIconVal, this.renderer, this.hostRef);
     }
     if (this.noRipple == null) {
       this.noRipple = !!this.currConfig.isNoRipple;
       this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
     }
-    if (this.placeholder == null) {
-      this.placeholder = !!this.currConfig.isPlaceholder;
+    if (this.isPlaceholderVal == null) {
+      this.isPlaceholderVal = !!this.currConfig.isPlaceholder;
     }
-    if (this.readOnly == null) {
-      this.readOnly = !!this.currConfig.isReadOnly;
-      this.settingReadOnly(this.readOnly, this.renderer, this.hostRef);
+    if (this.isReadOnlyVal == null) {
+      this.isReadOnlyVal = !!this.currConfig.isReadOnly;
+      this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
-    if (this.required == null) {
-      this.required = !!this.currConfig.isRequired;
-      this.settingRequired(this.required, this.renderer, this.hostRef);
+    if (this.isRequiredVal == null) {
+      this.isRequiredVal = !!this.currConfig.isRequired;
+      this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
     if (this.ornamLfAlignVal == null) {
-      this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.currConfig.ornamLfAlign || null);
+      this.ornamLfAlignVal = ORNAMENT_ALIGN[this.currConfig.ornamLfAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
     }
     if (this.ornamRgAlignVal == null) {
-      this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.currConfig.ornamRgAlign || null);
+      this.ornamRgAlignVal = ORNAMENT_ALIGN[this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
     }
     if (this.currConfig.overlayPanelClass != null) {
@@ -434,6 +437,9 @@ export class GlnSelectComponent
       // Add an attribute that disables animation on initialization.
       this.isAttrHideAnimation = true;
     }
+    this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, this.getElements(this.ornamLeftList));
+    const rhombRef: ElementRef<HTMLElement> | undefined = this.ornamRhomb?.hostRef;
+    this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList, rhombRef));
   }
 
   public ngAfterViewInit(): void {
@@ -464,8 +470,8 @@ export class GlnSelectComponent
   }
 
   public setDisabledState(disabled: boolean): void {
-    if (this.disabled !== disabled) {
-      this.disabled = disabled;
+    if (this.isDisabledVal !== disabled) {
+      this.isDisabledVal = disabled;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', disabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', disabled ? '' : null);
     }
@@ -479,7 +485,7 @@ export class GlnSelectComponent
   public validate(control: AbstractControl): ValidationErrors | null {
     let result: ValidationErrors | null = null;
     if (this.isEmpty()) {
-      if (this.required) {
+      if (this.isRequiredVal) {
         result = { ...(result || {}), ...{ required: true } };
       }
     } else if (this.multiple) {
@@ -512,6 +518,26 @@ export class GlnSelectComponent
 
   // ** interface GlnOptionParent - finish **
 
+  // ** GlnOrnamentOwner - start **
+
+  public changeOrnament(isRemove: boolean, elementRef: ElementRef<HTMLElement>, isRight: boolean): void {
+    const ornamList: ElementRef<HTMLElement>[] = !isRight
+      ? this.getElements(this.ornamLeftList)
+      : this.getElements(this.ornamRightList, this.ornamRhomb?.hostRef);
+    const ornamWidth: number | null = GlnOrnamentOwnerUtil.getWidthAllOrnaments(ornamList, isRemove, elementRef);
+    const nameProperty: string = !isRight ? CSS_PROP_ORN_PD_LF : CSS_PROP_ORN_PD_RG;
+    HtmlElemUtil.setProperty(this.frameComp.hostRef, nameProperty, ornamWidth?.toString().concat('px'));
+
+    if (!isRight) {
+      this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, [elementRef]);
+    } else {
+      this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, [elementRef]);
+    }
+    this.changeDetectorRef.markForCheck();
+  }
+
+  // ** GlnOrnamentOwner - finish **
+
   // ** Public methods **
 
   public getBoolean(value: string | boolean | null | undefined): boolean | null {
@@ -527,13 +553,13 @@ export class GlnSelectComponent
   }
 
   public focus(): void {
-    if (!this.disabled && isPlatformBrowser(this.platformId) && !!this.frameComp.hostRef) {
+    if (!this.isDisabledVal && isPlatformBrowser(this.platformId) && !!this.frameComp.hostRef) {
       this.frameComp.hostRef.nativeElement.focus();
     }
   }
 
   public doFocus(): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       const isFocusedEmit = !this.isFocused;
       this.isFocused = true;
       this.settingFocus(this.isFocused, this.renderer, this.hostRef);
@@ -555,7 +581,7 @@ export class GlnSelectComponent
    * Otherwise, it will cause a false positive, "blur" on the panel when it is opened.
    */
   public doBlur(): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       this.isFocused = false;
       this.settingFocus(this.isFocused, this.renderer, this.hostRef);
       if (!this.isPanelOpen && !this.hasPanelAnimation) {
@@ -573,7 +599,7 @@ export class GlnSelectComponent
   }
   /** Occurs when a mouse click event occurs outside of the options list pane. */
   public backdropClick(): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       // (Cases-B3) Panel is open and mouse click outside of panel and trigger.
       // (Cases-B4) Panel is open and mouse click outside of panel but on trigger.
       this.isFocused = true;
@@ -583,7 +609,7 @@ export class GlnSelectComponent
   }
   /** Occurs when the panel receives input focus. */
   public doFocusOnPanel(): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       // (Cases-B2) Panel is open and mouse click within the panel.
       this.isFocused = true;
       this.focus();
@@ -592,7 +618,7 @@ export class GlnSelectComponent
   public doOverlayPanelKeydown(event: KeyboardEvent): void {
     event.preventDefault();
     event.stopPropagation();
-    if (!this.disabled && this.isPanelOpen) {
+    if (!this.isDisabledVal && this.isPanelOpen) {
       switch (event.key) {
         // (Cases-B5) Panel is open and click the Escape key.
         // (Cases-B6) Panel is open and click the Tab key.
@@ -607,7 +633,7 @@ export class GlnSelectComponent
   }
   /** Open or close the overlay panel. */
   public toggle(): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       if (this.isPanelOpen) {
         this.close();
       } else {
@@ -620,10 +646,9 @@ export class GlnSelectComponent
   }
   /** Open overlay panel. */
   public open(): void {
-    if (!this.disabled && !this.readOnly && !this.isPanelOpen && this.options.length > 0) {
+    if (!this.isDisabledVal && !this.isReadOnlyVal && !this.isPanelOpen && this.options.length > 0) {
       this.isPanelOpen = true;
-      this.hasPanelAnimation = !this.noAnimation;
-      // #?this.markedOption = this.selectedOptions.length > 0 ? this.selectedOptions[this.selectedOptions.length - 1] : null;
+      this.hasPanelAnimation = !this.frameComp.isNoAnimationVal;
       this.triggerRect = this.triggerRef.nativeElement.getBoundingClientRect();
       this.isFocusAttrOnFrame = false;
       this.triggerFontSize = Number((getComputedStyle(this.triggerRef.nativeElement).fontSize || '0').replace('px', ''));
@@ -633,7 +658,7 @@ export class GlnSelectComponent
   }
   /** Closes the overlay panel and focuses the main element. */
   public close(options?: { noAnimation?: boolean }): void {
-    if (this.disabled || !this.isPanelOpen) {
+    if (this.isDisabledVal || !this.isPanelOpen) {
       return;
     }
     if (this.isFocusAttrOnFrame) {
@@ -653,7 +678,7 @@ export class GlnSelectComponent
           this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight())
         );
       }
-      if (!this.noAnimation && !options?.noAnimation) {
+      if (!this.frameComp.isNoAnimationVal && !options?.noAnimation) {
         const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement.children[0] as HTMLElement);
         // Add an attribute for animation and transformation.
         HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_PANEL_OPENING_ANIMATION, null);
@@ -670,38 +695,41 @@ export class GlnSelectComponent
   public attach(): void {
     // Add the current object to the list of elements with the panel open.
     GlnSelectOpenUtil.add(this);
+    // Adding z-index: 'unset' will allow you to have one parent with a single z-index value.
+    // This will correctly use the z-index for child elements.
+    this.connectedOverlay.overlayRef.hostElement.style.zIndex = 'unset';
 
     const overlayElement: HTMLElement = this.connectedOverlay.overlayRef.overlayElement;
     // Adding a class so that custom styles can be applied.
     const overlayRef = HtmlElemUtil.getElementRef(overlayElement);
     HtmlElemUtil.setAttr(this.renderer, overlayRef, 'glnslpo-select', '');
     // Setting property 'width'.
-    HtmlElemUtil.setProperty(overlayRef, CSS_PROP_WIDTH, NumberUtil.str(this.hostWidth)?.concat('px'));
+    HtmlElemUtil.setProperty(overlayRef, CSS_PROP_WIDTH, this.hostWidth.toString().concat('px'));
 
     this.selectPanelRef = HtmlElemUtil.getElementRef(overlayElement.children[0]?.children[0] as HTMLElement);
     const panelHeight = this.getHeight(this.selectPanelRef);
-    if (!this.noAnimation && panelHeight > 0) {
+    if (!this.frameComp.isNoAnimationVal && panelHeight > 0) {
       HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
     }
     // Set the font size for the overlay.
     if (this.triggerFontSize > 0) {
       overlayElement.style.fontSize = `${this.triggerFontSize}px`;
     }
-    if (this.frameSizeValue > 0) {
-      const borderRadius = NumberUtil.roundTo100(this.frameSizeValue / 10);
-      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, NumberUtil.str(borderRadius)?.concat('px'));
+    if (this.frameComp.sizeVal != null && this.frameComp.sizeVal > 0) {
+      const borderRadius = Math.round((this.frameComp.sizeVal / 10) * 100) / 100;
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, borderRadius.toString().concat('px'));
     }
     const visibleSize = this.visibleSizeVal ?? 0;
     if (visibleSize > 0 && this.optionHeight > 0) {
       const maxHeightOfOptionsPanel = this.optionHeight * visibleSize;
-      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_HEIGHT, NumberUtil.str(maxHeightOfOptionsPanel)?.concat('px'));
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_HEIGHT, maxHeightOfOptionsPanel.toString().concat('px'));
     }
-    if (this.maxWd) {
-      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_WIDTH, NumberUtil.str(this.hostWidth)?.concat('px'));
+    if (this.isMaxWdVal) {
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_WIDTH, this.hostWidth.toString().concat('px'));
     }
     // Important! These operations should be the last, they include animation and the dimensions of the panel are distorted.
     const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement?.children[0] as HTMLElement);
-    if (this.noAnimation) {
+    if (this.frameComp.isNoAnimationVal) {
       HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, 'noAnm', '');
       HtmlElemUtil.setClass(this.renderer, selectPanelWrapRef, 'gln-no-animation', true);
     } else {
@@ -719,7 +747,7 @@ export class GlnSelectComponent
   }
   /** Handles all keypress events for the component's panel. */
   public frameKeydown(event: KeyboardEvent): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       if (!this.isPanelOpen) {
         // Open the selection panel by pressing the keys: 'up arrow', 'down arrow', 'space' and 'enter'.
         if (['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(event.key)) {
@@ -750,13 +778,19 @@ export class GlnSelectComponent
       }
     }
   }
-  public optionsScrollAttached(value: GlnOptionsScroll): void {
+  public setOptionsScroll(value: GlnOptionsScroll | null): void {
     this.optionsScroll = value;
+    if (this.optionsScroll != null) {
+      const markedOption: GlnOption | null = this.selectedOptions.slice(-1)[0] || null;
+      if (markedOption != null) {
+        this.optionsScroll.setMarkedOption(markedOption);
+      }
+    }
   }
   /** Processing the option selected by the user. */
   public selectionOptionElement(addOption: GlnOption | null): void {
     const newOptions = addOption !== null ? [addOption] : [];
-    if (!this.disabled && newOptions.length > 0) {
+    if (!this.isDisabledVal && newOptions.length > 0) {
       const removed: GlnOption[] = [];
       if (this.multiple) {
         // Which elements of array "this.selectedOptions" are included in array "addOptions".
@@ -785,11 +819,15 @@ export class GlnSelectComponent
 
   // ** Private methods **
 
-  private settingCheckmark(checkmark: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private getElements(queryList: QueryList<GlnOrnament> | null, elem?: ElementRef<HTMLElement> | undefined): ElementRef<HTMLElement>[] {
+    return (queryList?.toArray() || []).map((item: GlnOrnament) => item.hostRef).concat(elem != null ? [elem] : []);
+  }
+
+  private settingCheckmark(checkmark: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-checkmark', !!checkmark);
     HtmlElemUtil.setAttr(renderer, elem, 'che', checkmark ? '' : null);
   }
-  private settingError(error: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingError(error: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-error', !!error);
     HtmlElemUtil.setAttr(renderer, elem, 'err', error ? '' : null);
   }
@@ -797,31 +835,39 @@ export class GlnSelectComponent
     HtmlElemUtil.setClass(renderer, elem, 'gln-focused', !!focus);
     HtmlElemUtil.setAttr(renderer, elem, 'foc', focus ? '' : null);
   }
-  private settingMultiple(multiple: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+  private settingMultiple(multiple: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-multiple', !!multiple);
     HtmlElemUtil.setAttr(renderer, elem, 'mul', multiple ? '' : null);
   }
-  private settingNoIcon(noIcon: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+  private settingNoIcon(noIcon: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-no-icon', !!noIcon);
     HtmlElemUtil.setAttr(renderer, elem, 'noico', noIcon ? '' : null);
   }
-  private settingNoRipple(noRipple: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+  private settingNoRipple(noRipple: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-no-ripple', !!noRipple);
     HtmlElemUtil.setAttr(renderer, elem, 'norip', noRipple ? '' : null);
   }
-  private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!readOnly);
     HtmlElemUtil.setAttr(renderer, elem, 'rea', readOnly ? '' : null);
   }
-  private settingRequired(required: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingRequired(required: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-required', !!required);
     HtmlElemUtil.setAttr(renderer, elem, 'req', required ? '' : null);
   }
-  private settingOrnamLfAlign(ornamLfAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingOrnamLfAlign(ornamLfAlign: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setAttr(renderer, elem, 'orn-lft', ornamLfAlign?.toString());
   }
-  private settingOrnamRgAlign(ornamRgAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingOrnamRgAlign(ornamRgAlign: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setAttr(renderer, elem, 'orn-rgh', ornamRgAlign?.toString());
+  }
+  private settingOrnamentList(attrName: string, ornamAlign: string, renderer: Renderer2, elementRefList: ElementRef<HTMLElement>[]): void {
+    const ornamAlignValue = ORNAMENT_ALIGN[ornamAlign] || ORNAMENT_ALIGN['default'];
+    if (attrName) {
+      for (let idx = 0; idx < elementRefList.length; idx++) {
+        HtmlElemUtil.setAttr(renderer, elementRefList[idx], attrName, ornamAlignValue);
+      }
+    }
   }
 
   private updateSelectedOptions(added: GlnOption[], removed: GlnOption[], isEmit: boolean): unknown[] {
@@ -857,7 +903,8 @@ export class GlnSelectComponent
     let result: string | null = null;
     if (panelHeight > 0 && !!triggerRect && triggerRect.top > 0 && triggerRect.height > 0 && screenHeight > 0) {
       const value = triggerRect.top + triggerRect.height + panelHeight;
-      const delta = String(NumberUtil.roundTo100((panelHeight - 0.6 * panelHeight) / 2)).concat('px');
+      const valueNum = (panelHeight - 0.6 * panelHeight) / 2;
+      const delta = (Math.round(valueNum * 100) / 100).toString().concat('px');
       result = (value < screenHeight ? '-' : '') + delta;
     }
     return result;

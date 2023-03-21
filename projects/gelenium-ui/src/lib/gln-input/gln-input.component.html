@@ -3,28 +3,18 @@
   <gln-frame [config]="currConfig"
     [cssElementRef]="hostRef"
     [exterior]="exterior || currConfig.exterior"
-    [frameSize]="frameSize || currConfig.frameSize"
+    [size]="size || currConfig.size"
     [isAttrHideAnimation]="isAttrHideAnimation"
-    [isDisabled]="disabled"
-    [isError]="!!formControl.errors || error"
+    [isDisabled]="isDisabledVal"
+    [isError]="!!formControl.errors || isErrorVal"
     [isFilled]="isFilled"
     [isLabelShrink]="getBoolean(isLabelShrink) ?? currConfig.isLabelShrink"
     [isNoAnimation]="getBoolean(isNoAnimation) ?? currConfig.isNoAnimation"
-    [isRequired]="required"
-    [label]="!placeholder ? label : null"
-    glnFrameOrnament
-    [glnFrameOrnamentLfAlign]="ornamLfAlignVal"
-    [glnFrameOrnamentRgAlign]="ornamRgAlignVal"
-    [glnFrameOrnamentPath]="'/div{0}'">
+    [isRequired]="isRequiredVal"
+    [label]="!isPlaceholderVal ? label : null">
 
-    <span glnfr-orn-lf
-      class="gln-ornam-lf">
-      <ng-content select="[gln-orn-lf]"></ng-content>
-    </span>
-    <span glnfr-orn-rg
-      class="gln-ornam-rg">
-      <ng-content select="[gln-orn-rg]"></ng-content>
-    </span>
+    <ng-content select="[gln-orn-lf]"></ng-content>
+    <ng-content select="[gln-orn-rg]"></ng-content>
 
     <input #inputElementRef
       formControlName="textData"
@@ -33,15 +23,15 @@
       glnfr-elem
       [attr.id]="id + '_input'"
       [type]="typeVal"
-      [ngClass]="['glnin-input', (readOnly ? 'gln-readonly' : '')]"
-      [attr.disabled]="disabled ? '': null"
+      [ngClass]="['glnin-input', (isReadOnlyVal ? 'gln-readonly' : '')]"
+      [attr.disabled]="isDisabledVal ? '': null"
       [attr.autocomplete]="!!autoComplete ? autoComplete : null"
-      [attr.placeholder]="!placeholder ? null : label"
-      [attr.readonly]="readOnly ? '': null"
+      [attr.placeholder]="!isPlaceholderVal ? null : label"
+      [attr.readonly]="isReadOnlyVal ? '': null"
       [attr.min]="min"
       [attr.max]="max"
       [attr.step]="step"
-      [attr.tabindex]="!disabled ? tabIndex : null"
+      [attr.tabindex]="!isDisabledVal ? tabIndex : null"
       [pattern]="pattern"
       (focus)="doFocus()"
       (blur)="doBlur()"
@@ -51,9 +41,9 @@
 
   <gln-hint-or-error *ngIf="!!helperText"
     [text]="helperText"
-    [isError]="!!formControl.errors || error"
+    [isError]="!!formControl.errors || isErrorVal"
     [isFocused]="isFocused"
-    [isDisabled]="disabled">
+    [isDisabled]="isDisabledVal">
   </gln-hint-or-error>
 
 </ng-container>

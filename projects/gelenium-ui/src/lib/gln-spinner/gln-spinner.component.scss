@@ -1,0 +1,96 @@
+/*# sourceURL=gln-spinner.component.scss */
+
+@import '../_styles/mx-display-flex.scss';
+
+gln-spinner {
+
+  --glnsp--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
+  --glnsp--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
+  --glnsp--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
+
+  @include mxDisplayFlex();
+
+  color: hsl(var(--glnsp--primary-h), var(--glnsp--primary-s), var(--glnsp--primary-l));
+
+  // Blocks: "<svg glnsp-size" - (Internal svg), "<div glnsp-size>" - ("External svg").
+  &>[glnsp-size] {
+    height: var(--glnsp--size, 32px);
+    width: var(--glnsp--size, 32px);
+  }
+
+  // Blocks: "<svg glnsp-rotate" - (Internal svg), "<div glnsp-rotate>" - ("External svg").
+
+  &:not([noani])>[glnsp-rotate] {
+    animation: kf-spi-rotate var(--glnsp-duration, 1.4s) linear infinite;
+    @keyframes kf-spi-rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  // ** Section "Internal svg" **
+
+  &[noani]>svg[glnsp-inner][glnsp-rotate] {
+    transform: rotate(var(--glnsp-init-rotate, -90deg));
+  }
+
+  // Block "<svg glnsp-inner>"
+  &>svg[glnsp-inner] {
+    display: block;
+    circle {
+      cx: 50%;
+      cy: 50%;
+      fill: none;
+      r: var(--glnsp--nr-radius);
+      stroke: currentColor;
+      stroke-dasharray: var(--glnsp--circumference), var(--glnsp--circumference);
+      stroke-dashoffset: var(--glnsp--stroke-offset);
+      stroke-width: var(--glnsp--stroke-wd);
+      transform-origin: center center;
+    }
+  }
+  &:not([noani]):not([nopul])>svg[glnsp-inner]>circle {
+    animation: kf-spi-move1 var(--glnsp-duration, 1.4s) ease-in-out infinite;
+    @keyframes kf-spi-move1 {
+      0% {
+        stroke-dasharray: 1px, 280%;
+        stroke-dashoffset: 0px;
+      } 50% {
+        stroke-dasharray: 227%, 280%;
+        stroke-dashoffset: -34%;
+      } 100% {
+        stroke-dasharray: 227%, 280%;
+        stroke-dashoffset: -280%;
+      }
+    }
+  }
+  /*&:not([noani]):not([nopul])>svg[glnsp-inner]>circle {
+    animation: kf-spi-move var(--glnsp-duration, 1.4s) ease-in-out infinite;
+    @keyframes kf-spi-move {
+      0% {
+        stroke-dasharray: 1px, var(--glnsp--stroke-array-max);   // stroke-array-max: 200px
+        stroke-dashoffset: 0;
+      } 50% {
+        stroke-dasharray: var(--glnsp--stroke-array-mdl), var(--glnsp--stroke-array-max); // stroke-array-mdl: 100px, stroke-array-max: 200px
+        stroke-dashoffset: var(--glnsp--stroke-offset-mdl);       // stroke-offset-mdl: -15px
+      } 100% {
+        stroke-dasharray: var(--glnsp--stroke-array-mdl), var(--glnsp--stroke-array-max); // stroke-array-max: 200px
+        stroke-dashoffset: var(--glnsp--stroke-offset-max);      // stroke-offset-max: -125px
+      }
+    }
+  }*/
+
+  // ** Section "External svg" **
+
+  // Block "<div glnsp-svg>"
+  &>[glnsp-svg]>svg {
+    fill: currentColor;
+    height: inherit;
+    width: inherit;
+  }
+
+}

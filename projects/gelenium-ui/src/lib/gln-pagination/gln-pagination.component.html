@@ -1,0 +1,104 @@
+<nav glnpg-nav
+  aria-label="pagination navigation"
+  class="gln-pagination-nav">
+  <ul glnpg-ul>
+    <li *ngIf="isShowFirstVal">
+      <gln-button glnpg-size
+        class="glnpg-btn-first"
+        [exterior]="exteriorVal"
+        [isDisabled]="isDisabledVal || page == 1 || !pageValid(page, countVal)"
+        [isNoRipple]="isNoRippleVal"
+        [size]="sizeVal"
+        (click)="doClickPage(1)">
+        &ZeroWidthSpace;
+        <ng-content select="[gln-orn-first]"></ng-content>
+        <svg glnpg-svg
+          class="gln-pagination-icon glnpg-icon-first"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24">
+          <path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path>
+        </svg>
+      </gln-button>
+    </li>
+    <li *ngIf="!isHidePrevVal">
+      <gln-button glnpg-size
+        class="glnpg-btn-prev"
+        [exterior]="exteriorVal"
+        [isDisabled]="isDisabledVal || page == 1 || !pageValid(page, countVal)"
+        [isNoRipple]="isNoRippleVal"
+        [size]="sizeVal"
+        (click)="doClickPage(page - 1)">
+        &ZeroWidthSpace;
+        <ng-content select="[gln-orn-prev]"></ng-content>
+        <svg glnpg-svg
+          class="glnpg-icon-prev"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+        </svg>
+      </gln-button>
+    </li>
+    <li *ngFor="let item of pageBuffer; trackBy: trackByIndex;">
+      <ng-container *ngIf="item == -1; else elseBlockPage">
+        <div glnpg-size
+          glnpg-ellipsis
+          class="glnpg-ellipsis">
+          &hellip;
+        </div>
+      </ng-container>
+      <ng-template #elseBlockPage>
+        <gln-button glnpg-size
+          glnpg-page
+          [attr.sel]="page === item ? '' : null"
+          [ngClass]="['glnpg-btn-page', (page === item ? 'gln-selected' : '')]"
+          [exterior]="exteriorVal"
+          [isDisabled]="isDisabledVal"
+          [isNoRipple]="isNoRippleVal"
+          [size]="sizeVal"
+          (click)="doClickPage(item)">
+          {{ item }}
+        </gln-button>
+      </ng-template>
+    </li>
+    <li *ngIf="!isHideNextVal">
+      <gln-button glnpg-size
+        class="glnpg-btn-next"
+        [exterior]="exteriorVal"
+        [isDisabled]="isDisabledVal || page == count || !pageValid(page, countVal)"
+        [isNoRipple]="isNoRippleVal"
+        [size]="sizeVal"
+        (click)="doClickPage(page + 1)">
+        &ZeroWidthSpace;
+        <ng-content select="[gln-orn-next]"></ng-content>
+        <svg glnpg-svg
+          class="glnpg-icon-next"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+        </svg>
+      </gln-button>
+    </li>
+    <li *ngIf="isShowLastVal">
+      <gln-button glnpg-size
+        class="glnpg-btn-last"
+        [exterior]="exteriorVal"
+        [isDisabled]="isDisabledVal || page == count || !pageValid(page, countVal)"
+        [isNoRipple]="isNoRippleVal"
+        [size]="sizeVal"
+        (click)="doClickPage(countVal)">
+        &ZeroWidthSpace;
+        <ng-content select="[gln-orn-last]"></ng-content>
+        <svg glnpg-svg
+          class="glnpg-icon-last"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24">
+          <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path>
+        </svg>
+      </gln-button>
+    </li>
+  </ul>
+</nav>

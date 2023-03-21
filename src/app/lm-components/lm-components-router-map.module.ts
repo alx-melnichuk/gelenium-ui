@@ -39,7 +39,7 @@ const urlFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.g
 const siteUrlsFrame: SiteUrl[] = [
   { label: 'Basic', url: urlFrame, fragment: 'Basic' },
   { label: 'Attributes', url: urlFrame, fragment: 'Attributes' },
-  { label: 'Frame size', url: urlFrame, fragment: 'FrameSize' },
+  { label: 'Size', url: urlFrame, fragment: 'Size' },
   { label: 'Label', url: urlFrame, fragment: 'Label' },
   { label: 'Helper text', url: urlFrame, fragment: 'HelperText' },
   { label: 'Border radius', url: urlFrame, fragment: 'BorderRadius' },
@@ -75,7 +75,7 @@ const siteUrlsInput: SiteUrl[] = [
   { label: 'Validation', url: urlInput, fragment: 'Validation' },
   { label: 'Numerical value', url: urlInput, fragment: 'NumericalValue' },
   { label: 'Ornaments', url: urlInput, fragment: 'Ornaments' },
-  { label: 'Item size', url: urlInput, fragment: 'ItemSize' },
+  { label: 'Size', url: urlInput, fragment: 'Size' },
   { label: 'Helper text', url: urlInput, fragment: 'HelperText' },
   { label: 'Border radius', url: urlInput, fragment: 'BorderRadius' },
   { label: 'Palette', url: urlInput, fragment: 'Palette' },
@@ -83,6 +83,20 @@ const siteUrlsInput: SiteUrl[] = [
   { label: 'Api', url: urlInput, fragment: 'Api' },
 ];
 SiteMenuUtil.addItem('Components', 'Input', { label: 'Input', siteUrls: siteUrlsInput });
+
+RouterConfig.add('URL_COMPONENTS_PAGINATION', 'pagination');
+const urlPagination = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_PAGINATION');
+const siteUrlsPagination: SiteUrl[] = [
+  { label: 'Basic', url: urlPagination, fragment: 'Basic' },
+  { label: 'Attributes', url: urlPagination, fragment: 'Attributes' },
+  { label: 'Size', url: urlPagination, fragment: 'Size' },
+  { label: 'Border', url: urlPagination, fragment: 'Border' },
+  { label: 'Ornaments', url: urlPagination, fragment: 'Ornaments' },
+  { label: 'Palette', url: urlPagination, fragment: 'Palette' },
+  { label: 'Config', url: urlPagination, fragment: 'Config' },
+  { label: 'Api', url: urlPagination, fragment: 'Api' },
+];
+SiteMenuUtil.addItem('Components', 'Pagination', { label: 'Pagination', siteUrls: siteUrlsPagination });
 
 RouterConfig.add('URL_COMPONENTS_SELECT', 'select');
 const urlSelect = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SELECT');
@@ -93,7 +107,7 @@ const siteUrlsSelect: SiteUrl[] = [
   { label: 'Group', url: urlSelect, fragment: 'Group' },
   { label: 'Trigger', url: urlSelect, fragment: 'Trigger' },
   { label: 'Ornaments', url: urlSelect, fragment: 'Ornaments' },
-  { label: 'Item size', url: urlSelect, fragment: 'ItemSize' },
+  { label: 'Size', url: urlSelect, fragment: 'Size' },
   { label: 'Helper text', url: urlSelect, fragment: 'HelperText' },
   { label: 'Border radius', url: urlSelect, fragment: 'BorderRadius' },
   { label: 'Palette', url: urlSelect, fragment: 'Palette' },
@@ -103,12 +117,25 @@ const siteUrlsSelect: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Select', { label: 'Select', siteUrls: siteUrlsSelect });
 
+RouterConfig.add('URL_COMPONENTS_SPINNER', 'spinner');
+const urlSpinner = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SPINNER');
+const siteUrlsSpinner: SiteUrl[] = [
+  { label: 'Basic', url: urlSpinner, fragment: 'Basic' },
+  { label: 'Attributes', url: urlSpinner, fragment: 'Attributes' },
+  { label: 'Size', url: urlSpinner, fragment: 'Size' },
+  { label: 'Palette', url: urlSpinner, fragment: 'Palette' },
+  { label: 'Customization', url: urlSpinner, fragment: 'Customization' },
+  { label: 'Config', url: urlSpinner, fragment: 'Config' },
+  { label: 'Api', url: urlSpinner, fragment: 'Api' },
+];
+SiteMenuUtil.addItem('Components', 'Spinner', { label: 'Spinner', siteUrls: siteUrlsSpinner });
+
 RouterConfig.add('URL_COMPONENTS_SWITCH', 'switch');
 const urlSwitch = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SWITCH');
 const siteUrlsSwitch: SiteUrl[] = [
   { label: 'Basic', url: urlSwitch, fragment: 'Basic' },
   { label: 'Attributes', url: urlSwitch, fragment: 'Attributes' },
-  { label: 'Item size', url: urlSwitch, fragment: 'ItemSize' },
+  { label: 'Size', url: urlSwitch, fragment: 'Size' },
   { label: 'Palette', url: urlSwitch, fragment: 'Palette' },
   { label: 'Customization', url: urlSwitch, fragment: 'Customization' },
   { label: 'Config', url: urlSwitch, fragment: 'Config' },
@@ -124,7 +151,7 @@ const siteUrlsTextarea: SiteUrl[] = [
   { label: 'Validation', url: urlTextarea, fragment: 'Validation' },
   { label: 'Capability', url: urlTextarea, fragment: 'Capability' },
   { label: 'Ornaments', url: urlTextarea, fragment: 'Ornaments' },
-  { label: 'Item size', url: urlTextarea, fragment: 'ItemSize' },
+  { label: 'Size', url: urlTextarea, fragment: 'Size' },
   { label: 'Helper text', url: urlTextarea, fragment: 'HelperText' },
   { label: 'Border radius', url: urlTextarea, fragment: 'BorderRadius' },
   { label: 'Palette', url: urlTextarea, fragment: 'Palette' },
@@ -132,6 +159,18 @@ const siteUrlsTextarea: SiteUrl[] = [
   { label: 'Api', url: urlTextarea, fragment: 'Api' },
 ];
 SiteMenuUtil.addItem('Components', 'Textarea', { label: 'Textarea', siteUrls: siteUrlsTextarea });
+
+RouterConfig.add('URL_COMPONENTS_TOOLTIP', 'tooltip');
+const urlTooltip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TOOLTIP');
+const siteUrlsTooltip: SiteUrl[] = [
+  { label: 'Basic', url: urlTooltip, fragment: 'Basic' },
+  { label: 'Attributes', url: urlTooltip, fragment: 'Attributes' },
+  { label: 'Customization', url: urlTooltip, fragment: 'Customization' },
+  { label: 'Feature', url: urlTooltip, fragment: 'Feature' },
+  { label: 'Config', url: urlTooltip, fragment: 'Config' },
+  { label: 'Api', url: urlTooltip, fragment: 'Api' },
+];
+SiteMenuUtil.addItem('Components', 'Tooltip', { label: 'Tooltip', siteUrls: siteUrlsTooltip });
 
 @NgModule({
   imports: [CommonModule],

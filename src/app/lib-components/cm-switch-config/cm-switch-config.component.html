@@ -13,12 +13,12 @@
   </p>
   <code><pre source="ts">
 import &#123;
-  GlnSwitchConfig, GlnSwitchPosition, GLN_SWITCH_CONFIG
+  GlnSwitchConfig, GLN_SWITCH_CONFIG
 &#125; from 'gelenium-ui';
 
 const glnSwitchConfigDefault: GlnSwitchConfig = &#123;
   isNoRipple: true,
-  position: GlnSwitchPosition.start,
+  position: 'start',
 &#125;;
 
 @Component(&#123;
@@ -104,7 +104,7 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
-    <td><code>position?: GlnSwitchPosition | undefined;</code></td>
+    <td><code>position?: string | undefined;</code></td>
     <td>
       <span>
         This property defines the position of the label relative to
@@ -136,12 +136,12 @@ export class AppComponent &#123;
   </p>
   <ul>
     <li>"isNoRipple" will have the value "true";</li>
-    <li>"position" will have the value "GlnSwitchPosition.start";).</li>
+    <li>"position" will have the value "start";).</li>
   </ul>
   <code><pre source="ts">
 const glnSwitchConfigDefault: GlnSwitchConfig = &#123;
   isNoRipple: true,
-  position: GlnSwitchPosition.start,
+  position: 'start',
 &#125;;</pre></code>
 </section>
 
@@ -268,12 +268,12 @@ import &#123;
 &#125; from '@angular/forms';
 
 import &#123;
-  GlnSwitchConfig, GlnSwitchPosition, GLN_SWITCH_CONFIG
+  GlnSwitchConfig, GLN_SWITCH_CONFIG
 &#125; from 'gelenium-ui';
 
 const glnSwitchConfigDefault: GlnSwitchConfig = &#123;
   isNoRipple: true,
-  position: GlnSwitchPosition.start,
+  position: 'start',
 &#125;;
 
 @Component(&#123;

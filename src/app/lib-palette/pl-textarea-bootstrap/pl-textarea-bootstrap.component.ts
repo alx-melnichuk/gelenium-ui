@@ -49,7 +49,7 @@ export class PlTextareaBootstrapComponent {
 
   public config02a: GlnTextareaConfig = {
     exterior: 'outlined',
-    frameSize: 'short',
+    size: 'short',
     isPlaceholder: true,
   };
 

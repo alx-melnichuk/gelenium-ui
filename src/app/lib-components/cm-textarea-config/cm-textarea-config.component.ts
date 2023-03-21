@@ -8,7 +8,7 @@ import { GlnTextareaConfig, GLN_TEXTAREA_CONFIG } from 'gelenium-ui';
 
 const glnTextareaConfigDefault: GlnTextareaConfig = {
   exterior: 'outlined',
-  frameSize: 'small',
+  size: 'small',
 };
 
 @Component({

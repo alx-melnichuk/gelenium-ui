@@ -1,0 +1,410 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Config.
+    <a [href]="urlCmPagination + '#Config'">#</a>
+  </h3>
+  <p>
+    If your application will have a single style for all GlnPagination elements,
+    then you can set a single configuration.
+    To do this, you need to create an object with the GlnPaginationConfig interface and define the
+    required values.
+    Next, specify the resulting object in the list of providers for the entire application (at the
+    level of the AppComponent).
+  </p>
+  <code><pre source="ts">
+const glnPaginationConfigDefault: GlnPaginationConfig = &#123;
+  countNearby: 2,
+  exterior: 'outlined',
+  size: 'small',
+&#125;;
+
+@Component(&#123;
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [
+    &#123; provide: GLN_PAGINATION_CONFIG, useValue: glnPaginationConfigDefault &#125;
+  ],
+&#125;)
+export class AppComponent &#123;
+  title = 'demo';
+&#125;</pre></code>
+  <p>
+    After that, all GlnPagination elements based on the "GlnPaginationConfig" component will
+    have the same configuration.
+  </p>
+</section>
+
+<section mr-vr
+  id="config-interface">
+  <h4 class="app-hover-link">
+    GlnPaginationConfig interface.
+    <a [href]="urlCmPagination + '#config-interface'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>count?: number;</code>
+      </td>
+      <td>
+        <span>
+          The total number of pages.<br />
+          If a value less than zero is specified, then zero is used.<br />
+          (default = 1;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>countBorder?: number;</code>
+      </td>
+      <td>
+        <span>
+          The number of always visible pages at the beginning and at the end.<br />
+          If a value less than zero is specified, then zero is used.<br />
+          (default = 1;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>countNearby?: number;</code>
+      </td>
+      <td>
+        <span>
+          The number of always visible pages before and after the current page.<br />
+          If a value less than zero is specified, then zero is used.<br />
+          (default = 1;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>exterior?: string;</code>
+      </td>
+      <td>
+        <span>
+          This property determines the appearance of the page switch buttons.
+          It takes the following values:
+        </span>
+        <ul>
+          <li>
+            "outlined" - A border around the entire perimeter of the element.
+          </li>
+          <li>
+            "text" - There is no border. (default)
+          </li>
+        </ul>
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>isHideNext?: boolean;</code>
+      </td>
+      <td>
+        <span>
+          Specifies that the 'Next' button is hidden.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>isHidePrev?: boolean;</code>
+      </td>
+      <td>
+        <span>
+          Specifies that the 'Previous' button is hidden.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>isNoRipple?: boolean;</code>
+      </td>
+      <td>
+        <span>
+          This property to turn off the ripple effect.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>isNoRounded?: boolean;</code>
+      </td>
+      <td>
+        <span>
+          Specifies that the buttons are not round, but rectangular.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>isShowFirst?: boolean;</code>
+      </td>
+      <td>
+        <span>
+          Specifies that the 'First' button is visible.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>isShowLast?: boolean;</code>
+      </td>
+      <td>
+        <span>
+          Specifies that the 'Last' button is visible.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>size?: number<br/>
+        &nbsp;&nbsp;| string;</code>
+      </td>
+      <td>
+        <span>
+          This property determines the size of the element (its height).
+          <a [href]="urlCmFrame + '#Size'">More details.</a>
+          It takes the following values:
+        </span>
+        <ul>
+          <li>"short" - sets the height to 38px (default);</li>
+          <li>"small" - sets the height to 44px;</li>
+          <li>"middle" - sets the height to 50px;</li>
+          <li>"wide" - sets the height to 56px;</li>
+          <li>"large" - sets the height to 62px;</li>
+          <li>"huge" - sets the height to 68px;</li>
+        </ul>
+        <span>
+          In this property, you can specify the value of the height of the
+          element in pixels. (size="57").
+        </span>
+        <span>(optional)</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<section mr-vr
+  id="config1">
+  <h4 class="app-hover-link">
+    1. Configuration with "outlined" and "small".
+    <a [href]="urlCmPagination + '#config1'">#</a>
+  </h4>
+  <p>
+    For example, let's prepare a configuration in which:
+  </p>
+  <ul>
+    <li>"countNearby" will have the value 2.</li>
+    <li>"exterior" will have the value "outlined".</li>
+    <li>"size" will have the value "small" (height to 44px;).</li>
+  </ul>
+  <code><pre source="ts">
+const glnPaginationConfigDefault: GlnPaginationConfig = &#123;
+  count: 11,
+  countNearby: 2,
+  exterior: 'outlined',
+  size: 'small',
+&#125;;</pre></code>
+</section>
+
+
+<section mr-vr
+  id="config2">
+  <h4 class="app-hover-link">
+    2. Specify "text" and "middle".
+    <a [href]="urlCmPagination + '#config2'">#</a>
+  </h4>
+  <p>
+    Suppose we have a provider in our application with "GlnPaginationConfig" and all GlnPagination
+    elements accept its default values.
+    We can change these values for an individual element.
+    To do this, you need to specify in this element those properties that do not match in the
+    configuration provider.
+  </p>
+  <p>
+    For example, let's specify the following parameters:
+  </p>
+  <code><pre source="ts">
+  count: 12,
+  countNearby: 1,
+  exterior="text",
+  size="middle"</pre></code>
+  <p>
+    In other words, there is the following order of determining the configuration parameters:
+  </p>
+  <ul>
+    <li>
+      Standard values are taken.
+      <code><pre source="ts">
+  count=1,
+  countBorder=1,
+  countNearby=1,
+  exterior="text",
+  isHideNext=false,
+  isHidePrev=false,
+  isNoRounded=false,
+  isShowFirst=false,
+  isShowLast=false,
+  size="short"</pre></code>
+    </li>
+    <li>
+      Values from the default configuration provider (if there is one).
+    </li>
+    <li>
+      Values from input parameters (if there is one).
+    </li>
+  </ul>
+</section>
+
+<div class="app-group">
+
+  <div class="app-elem pgc-elem">
+    <div>
+      <small>
+        <em>1. Default config: "outlined", "small", countNearby=2, count=11.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page08a"
+      (changePage)="page08a = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgc-elem">
+    <div>
+      <small>
+        <em>2. exterior="text", size="middle", countNearby=1, count=12.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page08b"
+      [count]="12"
+      [countNearby]="1"
+      exterior="outlined"
+      size="middle"
+      (changePage)="page08b = $event">
+    </gln-pagination>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem pgc-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;1. Default config: "outlined", "small", countNearby=2.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page08a"
+      (changePage)="page08a = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgc-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;2. exterior="text", size="middle", countNearby=1.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page08b"
+      [count]="12"
+      [countNearby]="1"
+      exterior="outlined"
+      size="middle"
+      (changePage)="page08b = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  GlnPaginationConfig, GLN_PAGINATION_CONFIG
+&#125; from 'gelenium-ui';
+
+const glnPaginationConfigDefault: GlnPaginationConfig = &#123;
+  count: 11,
+  countNearby: 2,
+  exterior: 'outlined',
+  size: 'small',
+&#125;;
+
+@Component(&#123;
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [
+    &#123; provide: GLN_PAGINATION_CONFIG, useValue: glnPaginationConfigDefault &#125;
+  ],
+&#125;)
+export class PaginationComponent &#123;
+  public page08a: number = 6;
+  public page08b: number = 6;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .pgc-elem &#123;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

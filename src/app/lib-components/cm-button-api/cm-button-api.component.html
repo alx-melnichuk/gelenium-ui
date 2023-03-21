@@ -22,12 +22,13 @@
 </section>
 
 <table class="app-tab">
-  <tbody>
+  <thead>
     <tr>
       <th class="app-mn-wd-22ch">Name</th>
       <th>Description</th>
     </tr>
-
+  </thead>
+  <tbody>
     <tr>
       <td>
         <code>@Input()</code>
@@ -74,27 +75,6 @@
     <tr>
       <td>
         <code>@Input()</code>
-        <code>frameSize: string<br/>
-          &nbsp;&nbsp;| null<br/>
-          &nbsp;&nbsp;| undefined;</code>
-      </td>
-      <td>
-        <span>Determines the size of the button.</span><br />
-        <a [href]="urlCmFrame + '#FrameSize'">More details.</a><br />
-        <span>It can take the following values:</span>
-        <ul>
-          <li>"short" - height: 38px;</li>
-          <li>"small" - height: 44px (default);</li>
-          <li>"middle" - height: 50px;</li>
-          <li>"wide" - height: 56px;</li>
-          <li>"large" - height: 62px;</li>
-          <li>"huge" - height: 68px;</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
         <code>isDisabled: string<br/>
           &nbsp;&nbsp;| boolean<br/>
           &nbsp;&nbsp;| null<br/>
@@ -120,54 +100,35 @@
         </span><br />
       </td>
     </tr>
-
     <tr>
       <td>
         <code>@Input()</code>
-        <code>ornamLfAlign: string<br/>
+        <code>size: number<br/>
+          &nbsp;&nbsp;| string<br/>
           &nbsp;&nbsp;| null<br/>
           &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
-        <span>
-          This property controls the vertical alignment for the left ornament.
-          <br />(default = 'default';)
-          It can take the following values:
-        </span>
+        <span>Determines the size of the button.</span><br />
+        <a [href]="urlCmFrame + '#Size'">More details.</a><br />
+        <span>It can take the following values:</span>
         <ul>
-          <li>"default" - defines the default</li>
-          <li>"center" - defines middle alignment</li>
-          <li>"flexStart" - defines top alignment</li>
-          <li>"flexEnd" - defines bottom alignment</li>
-          <li>"baseline" - defines baseline alignment</li>
-          <li>"stretch" - stretches across the entire height</li>
+          <li>"short" - height: 38px;</li>
+          <li>"small" - height: 44px (default);</li>
+          <li>"middle" - height: 50px;</li>
+          <li>"wide" - height: 56px;</li>
+          <li>"large" - height: 62px;</li>
+          <li>"huge" - height: 68px;</li>
         </ul>
+        <span>
+          This property can also contain the element's height in pixels, either as a string
+          or as a number.<br />
+          The value in the units of "pixels" allow you to accurately calculate the size of
+          internal elements.<br />
+          For example: <code>size="57" or [size]="57"</code>
+        </span>
       </td>
     </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>ornamRgAlign: string<br/>
-          &nbsp;&nbsp;| null<br/>
-          &nbsp;&nbsp;| undefined;</code>
-      </td>
-      <td>
-        <span>
-          This property controls the vertical alignment of the right ornament.
-          <br />(default = 'default';)
-          It can take the following values:
-        </span>
-        <ul>
-          <li>"default" - defines the default</li>
-          <li>"center" - defines middle alignment</li>
-          <li>"flexStart" - defines top alignment</li>
-          <li>"flexEnd" - defines bottom alignment</li>
-          <li>"baseline" - defines baseline alignment</li>
-          <li>"stretch" - stretches across the entire height</li>
-        </ul>
-      </td>
-    </tr>
-
     <tr>
       <td>
         <code>@Output()</code>
@@ -190,16 +151,6 @@
         </span>
       </td>
     </tr>
-    <tr>
-      <td>
-        <code>@Output()</code>
-        <code>changeCssParams: EventEmitter&lt;void&gt;;</code>
-      </td>
-      <td>
-        <span>Changes to internal css parameters.</span>
-      </td>
-    </tr>
-
   </tbody>
 </table>
 
@@ -389,12 +340,13 @@
 </section>
 
 <table class="app-tab">
-  <tbody>
+  <thead>
     <tr>
       <th class="app-mn-wd-22ch">Name</th>
       <th>Description</th>
     </tr>
-
+  </thead>
+  <tbody>
     <tr>
       <td><code>--glnbt-uppercase:<br/>
         &nbsp; none;</code>
@@ -419,30 +371,6 @@
       <td><code>--glnbt-br-rd: 0.25em;</code></td>
       <td>
         <span>The value of the border radius.</span>
-      </td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-pd-tp:<br/>
-        &nbsp;0.375em; // 6px "contained";<br/>
-        &nbsp;0.3125em; // 5px "outlined";<br/>
-        &nbsp;0.375em; // 6px "text";</code>
-      </td>
-      <td>
-        <span>
-          The value of the "padding-top" property for the button label.
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td><code>--glnbt-pd-bt:<br/>
-        &nbsp;0.375em; // 6px "contained";<br/>
-        &nbsp;0.3125em; // 5px "outlined";<br/>
-        &nbsp;0.375em; // 6px "text";</code>
-      </td>
-      <td>
-        <span>
-          The value of the "padding-bottom" property for the button label.
-        </span>
       </td>
     </tr>
     <tr>
@@ -613,7 +541,7 @@
     </tr>
 
     <tr>
-      <td colspan="2"></td>
+      <td colspan="2"><em>Values for the "ripple" effect.</em></td>
     </tr>
     <tr>
       <td><code>--glnbt-ripple-cl:<br/>

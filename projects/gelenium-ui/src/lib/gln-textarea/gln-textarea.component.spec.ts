@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GlnFrameOrnamentDirective } from '../directives/gln-frame-ornament/gln-frame-ornament.directive';
 import { GlnFrameComponent } from './../gln-frame/gln-frame.component';
 import { GlnHintOrErrorComponent } from './../gln-hint-or-error/gln-hint-or-error.component';
 
@@ -12,7 +11,7 @@ describe('GlnTextareaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GlnTextareaComponent, GlnFrameComponent, GlnFrameOrnamentDirective, GlnHintOrErrorComponent],
+      declarations: [GlnTextareaComponent, GlnFrameComponent, GlnHintOrErrorComponent],
     }).compileComponents();
   });
 

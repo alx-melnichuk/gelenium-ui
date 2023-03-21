@@ -1,0 +1,11 @@
+/*# sourceURL=cm-pagination-config.component.scss */
+
+app-cm-pagination-config {
+  display: block;
+
+  .pgc-elem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}

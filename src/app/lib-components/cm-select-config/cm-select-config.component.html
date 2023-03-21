@@ -14,7 +14,7 @@
   <code><pre source="ts">
 const glnSelectConfigDefault: GlnSelectConfig = &#123;
   exterior: 'underline',
-  frameSize: 'wide',
+  size: 'wide',
 &#125;;
 
 @Component(&#123;
@@ -56,8 +56,7 @@ export class AppComponent &#123;
   </tr>
 
   <tr>
-    <td><code>backdropClass?:<br/>
-      &nbsp;&nbsp;string<br/>
+    <td><code>backdropClass?: string<br/>
       &nbsp;&nbsp;| undefined;</code></td>
     <td>
       <span>
@@ -67,8 +66,7 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
-    <td><code>isCheckmark?:<br/>
-      &nbsp;&nbsp;boolean<br/>
+    <td><code>isCheckmark?: boolean<br/>
       &nbsp;&nbsp;| undefined;</code></td>
     <td>
       <span>
@@ -85,12 +83,10 @@ export class AppComponent &#123;
         Indicates that the element is in an error state.
         <br />(default = false;)
       </span><br />
-      <span>(optional)</span>
     </td>
   </tr>
   <tr>
-    <td><code>isMaxWd?:<br/>
-    &nbsp;&nbsp;boolean<br/>
+    <td><code>isMaxWd?: boolean<br/>
     &nbsp;&nbsp;| undefined;</code></td>
     <td>
       <span>
@@ -100,8 +96,7 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
-    <td><code>isMultiple?:<br/>
-        &nbsp;&nbsp;boolean<br/>
+    <td><code>isMultiple?: boolean<br/>
         &nbsp;&nbsp;| undefined;</code></td>
     <td>
       <span>
@@ -111,8 +106,7 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
-    <td><code>isNoIcon?:<br/>
-        &nbsp;&nbsp;boolean<br/>
+    <td><code>isNoIcon?: boolean<br/>
         &nbsp;&nbsp;| undefined;</code></td>
     <td>
       <span>
@@ -122,8 +116,7 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
-    <td><code>isNoRipple?:<br/>
-        &nbsp;&nbsp;boolean<br/>
+    <td><code>isNoRipple?: boolean<br/>
         &nbsp;&nbsp;| undefined;</code></td>
     <td>
       <span>
@@ -142,7 +135,6 @@ export class AppComponent &#123;
         as the "placeholder" attribute for the "select" element.
         <br />(default = false;)
       </span>
-      <span>(optional)</span>
     </td>
   </tr>
   <tr>
@@ -152,7 +144,6 @@ export class AppComponent &#123;
         Indicates that the element is read-only.
         <br />(default = false;)
       </span><br />
-      <span>(optional)</span>
     </td>
   </tr>
   <tr>
@@ -200,8 +191,7 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
-    <td><code>overlayPanelClass?:<br/>
-        &nbsp;&nbsp;string<br/>
+    <td><code>overlayPanelClass?: string<br/>
         &nbsp;&nbsp;| string[]<br/>
         &nbsp;&nbsp;| undefined;</code></td>
     <td>
@@ -211,8 +201,7 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
-    <td><code>panelClass?:<br/>
-        &nbsp;&nbsp;string<br/>
+    <td><code>panelClass?: string<br/>
         &nbsp;&nbsp;| string[]<br/>
         &nbsp;&nbsp;| Set&lt;string&gt;<br/>
         &nbsp;&nbsp;| &#123; [key: string]: unknown &#125;<br/>
@@ -225,8 +214,7 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
-    <td><code>position?:<br/>
-        &nbsp;&nbsp;string<br/>
+    <td><code>position?: string<br/>
         &nbsp;&nbsp;| undefined;</code></td>
     <td>
       <span>
@@ -240,8 +228,7 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
-    <td><code>visibleSize?:<br/>
-        &nbsp;&nbsp;number<br/>
+    <td><code>visibleSize?: number<br/>
         &nbsp;&nbsp;| undefined;</code></td>
     <td>
       <span>
@@ -268,12 +255,12 @@ export class AppComponent &#123;
   </p>
   <ul>
     <li>"exterior" will have the value "outlined";</li>
-    <li>"frameSize" will have the value "small" (height to 44px);</li>
+    <li>"size" will have the value "small" (height to 44px);</li>
   </ul>
   <code><pre source="ts">
 const glnSelectConfigDefault: GlnSelectConfig = &#123;
   exterior: 'outlined',
-  frameSize: 'small',
+  size: 'small',
 &#125;;</pre></code>
 </section>
 
@@ -295,7 +282,7 @@ const glnSelectConfigDefault: GlnSelectConfig = &#123;
     For example, let's specify the following parameters:
   </p>
   <code><pre source="ts">
-frameSize="wide"
+size="wide"
 exterior="underline"
 isRequired
 backdropClass='sc-backdrop'
@@ -311,7 +298,7 @@ visibleSize=6</pre></code>
       Standard values are taken.
       <code><pre source="ts">
 exterior="outlined", // GlnFrameConfig
-frameSize="middle",  // GlnFrameConfig
+size="middle",  // GlnFrameConfig
 isLabelShrink=false, // GlnFrameConfig
 isNoAnimation=false, // GlnFrameConfig
 isRequired=false,    // GlnFrameConfig
@@ -365,13 +352,13 @@ visibleSize=0</pre></code>
     <div class="app-elem sc-elem">
       <div>
         <small>
-          <em>2. exterior="underline", frameSize="wide".</em>
+          <em>2. exterior="underline", size="wide".</em>
         </small>
       </div>
       <gln-select formControlName="model08b"
         label="Vegetarian salad 02"
         helperText="Select a value from the list."
-        frameSize="wide"
+        size="wide"
         exterior="underline"
         isRequired
         wdFull>
@@ -419,13 +406,13 @@ visibleSize=0</pre></code>
     &lt;div class="app-elem sc-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;2. exterior="underline", frameSize="wide".&lt;/em&gt;
+          &lt;em&gt;2. exterior="underline", size="wide".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-select formControlName="model08b"
         label="Vegetarian salad 02"
         helperText="Select a value from the list."
-        frameSize="wide"
+        size="wide"
         exterior="underline"
         isRequired
         wdFull&gt;
@@ -448,12 +435,12 @@ import &#123;
   FormControl, FormGroup
 &#125; from '@angular/forms';
 import &#123;
-  GlnFrameExterior, GlnFrameSize, GlnSelectConfig, GLN_SELECT_CONFIG
+  GlnSelectConfig, GLN_SELECT_CONFIG
 &#125; from 'gelenium-ui';
 
 const glnSelectConfigDefault: GlnSelectConfig = &#123;
-  exterior: GlnFrameExterior.underline,
-  frameSize: GlnFrameSize.wide,
+  exterior: 'outlined',
+  size: 'wide',
   backdropClass: 'sc-backdrop',
   isMultiple: true,
   overlayPanelClass: ['sc-overlay-panel'],

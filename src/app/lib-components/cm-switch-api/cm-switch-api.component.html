@@ -22,11 +22,13 @@
 </section>
 
 <table class="app-tab">
-  <tbody>
+  <thead>
     <tr>
       <th class="app-mn-wd-22ch">Name</th>
       <th>Description</th>
     </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>
         <code>@Input()</code>
@@ -34,7 +36,7 @@
       </td>
       <td>
         <span>
-          ID of the native textarea element.
+          ID of the native element.
           <br />(default = `glnsw-$&#123;uniqueIdCounter++&#125;`;)
         </span>
       </td>
@@ -154,9 +156,6 @@
           <li>"start" - the label is on the right;</li>
           <li>"end" - the label is on the left;</li>
         </ul>
-        <span>
-          Accepts GlnSwitchPosition enumeration values.
-        </span>
       </td>
     </tr>
     <tr>
@@ -192,7 +191,6 @@
     </tr>
   </thead>
   <tbody>
-
     <!-- of the uncheck -->
     <tr>
       <td><code>--glnsw-def-wrap:<br/>
@@ -276,7 +274,6 @@
         </span>
       </td>
     </tr>
-
     <!-- "container" -->
     <tr>
       <td><code>--glnsw-container-pd: 1em;</code></td>
@@ -319,7 +316,14 @@
     <tr>
       <td><code>--glnsw-thumb-hg: 1.5em;</code></td>
       <td>
-        <span>Determines the height value of the "thumb".</span>
+        <span>
+          Determines the height value of the "thumb".
+          <br />
+          The parameter value can be specified in the following units: <i>px, em, rem, vh, vw</i>.
+          <br />
+          This is because the dimensions of the shell element are proportional to the value
+          of this parameter.
+        </span>
       </td>
     </tr>
     <tr>
@@ -338,13 +342,27 @@
     <tr>
       <td><code>--glnsw-track-hg: 1em;</code></td>
       <td>
-        <span>Determines the height value of the "track".</span>
+        <span>
+          Determines the height value of the "track".
+          <br />
+          The parameter value can be specified in the following units: <i>px, em, rem, vh, vw</i>.
+          <br />
+          This is because the offset size of the 'thumb' element is proportional to the value
+          of this parameter.
+        </span>
       </td>
     </tr>
     <tr>
       <td><code>--glnsw-track-wd: 2.3em;</code></td>
       <td>
-        <span>Determines the width value of the "track".</span>
+        <span>
+          Determines the width value of the "track".
+          <br />
+          The parameter value can be specified in the following units: <i>px, em, rem, vh, vw</i>.
+          <br />
+          This is because the offset size of the 'thumb' element is proportional to the value
+          of this parameter.
+        </span>
       </td>
     </tr>
     <!-- "label" -->

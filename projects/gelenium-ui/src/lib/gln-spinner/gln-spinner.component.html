@@ -1,0 +1,16 @@
+<ng-container *ngIf="!isExternalVal; else elseBlockExternal">
+  <svg glnsp-size
+    glnsp-rotate
+    glnsp-inner
+    class="glnsp-svg">
+    <circle></circle>
+  </svg>
+</ng-container>
+<ng-template #elseBlockExternal>
+  <div glnsp-size
+    glnsp-rotate
+    glnsp-svg
+    class="glnsp-content">
+    <ng-content></ng-content>
+  </div>
+</ng-template>

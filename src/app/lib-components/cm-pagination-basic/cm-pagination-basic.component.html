@@ -1,0 +1,135 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmPagination + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnPaginationModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    The GlnPagination component is designed to change the current page from the specified
+    range.
+  </p>
+  <span>For example:</span>
+  <code><pre source="html">
+&lt;<strong>gln-pagination</strong>
+  [<i><strong>page</strong></i>]="page01"
+  [<i><strong>count</strong></i>]="pageCount01"
+  (<i><strong>changePage</strong></i>)="page01a=$event"&gt;
+&lt;<strong>/gln-pagination</strong>&gt;</pre></code>
+  <span>
+    The "page" current page number.<br />
+    The "count" - total number of pages.<br />
+    The "changePage" parameter is the page number change event.
+  </span>
+</section>
+
+<div class="app-group">
+
+  <div class="app-elem pgb-elem">
+    <div>
+      <small>
+        <em>Exterior: 'text'.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page01a"
+      [count]="10"
+      (changePage)="page01a = $event">
+    </gln-pagination>
+  </div>
+
+  <div class="app-elem pgb-elem">
+    <div>
+      <small>
+        <em>Exterior: 'outlined'.</em>
+      </small>
+    </div>
+    <gln-pagination [page]="page01b"
+      [count]="10"
+      exterior="outlined"
+      (changePage)="page01b = $event">
+    </gln-pagination>
+  </div>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem pgb-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Exterior: 'text'.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page01a"
+      [count]="10"
+      (changePage)="page01a = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem pgb-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Exterior: 'outlined'.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-pagination [page]="page01b"
+      [count]="10"
+      exterior="outlined"
+      (changePage)="page01b = $event"&gt;
+    &lt;/gln-pagination&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class PaginationComponent &#123;
+  public page01a: number = 1;
+  public page01b: number = 1;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-input &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .pgb-elem &#123;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

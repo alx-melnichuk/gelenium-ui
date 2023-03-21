@@ -1,0 +1,73 @@
+/*# sourceURL=cm-tooltip-customization.component.scss */
+
+app-cm-tooltip-customization {
+  display: block;
+
+  .ttcs-btn {
+    border-radius: 4px;
+    border-width: 0;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 16px;
+  }
+}
+
+.gln-tooltip-panel.ttcs-panel-bootstrap {
+  --glntt-panel-indent: 7px;
+}
+.ttcs-bootstrap {
+  --glntt-color: #fff;
+  --glntt-bg-color: #000;
+  --glntt-font-size: 14px;
+  border-radius: 0.43em;
+  font-weight: 400;
+  padding: 4px 8px;
+}
+.gln-tooltip-panel.ttcs-panel-mui {
+  --glntt-panel-indent: 14px;
+}
+.ttcs-mui {
+  --glntt-bg-color:rgba(97, 97, 97, 0.92);
+  --glntt-color: rgb(255, 255, 255);
+  --glntt-font-size: 11px;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+.ttcs-mui-light {
+  --glntt-bg-color:#fff;
+  --glntt-color: rgba(0, 0, 0, 0.87);
+  --glntt-font-size: 11px;
+  border-radius: 4px;
+  padding: 4px 8px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2)
+    , 0px 1px 1px 0px rgba(0,0,0,0.14)
+    , 0px 1px 3px 0px rgba(0,0,0,0.12)
+    , 0px -1px 0px 0px rgba(0, 0, 0, 0.08);
+}
+
+.ttcs-primary {
+  --glncl-default-h: var(--gln-primary-h);
+  --glncl-default-s: var(--gln-primary-s);
+  --glncl-default-l: var(--gln-primary-l);
+}
+.ttcs-danger {
+  --glncl-default-h: var(--gln-danger-h);
+  --glncl-default-s: var(--gln-danger-s);
+  --glncl-default-l: var(--gln-danger-l);
+}
+.ttcs-success {
+  --glncl-default-h: var(--gln-success-h);
+  --glncl-default-s: var(--gln-success-s);
+  --glncl-default-l: var(--gln-success-l);
+}
+.ttcs-info {
+  --glncl-default-h: var(--gln-info-h);
+  --glncl-default-s: var(--gln-info-s);
+  --glncl-default-l: var(--gln-info-l);
+}
+.ttcs-warning {
+  --glncl-default-h: var(--gln-warning-h);
+  --glncl-default-s: var(--gln-warning-s);
+  --glncl-default-l: var(--gln-warning-l);
+}

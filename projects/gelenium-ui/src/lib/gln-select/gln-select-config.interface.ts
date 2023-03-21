@@ -2,11 +2,11 @@ import { GlnFrameConfig } from '../gln-frame/gln-frame-config.interface';
 
 export interface GlnSelectConfig extends GlnFrameConfig {
   //   interface GlnFrameConfig
-  // exterior?: string | undefined; // GlnFrameExteriorType
-  // frameSize?: string | undefined; // GlnFrameSizeType
+  // exterior?: string | undefined; // 'outlined' | 'underline' | 'standard'
   // isLabelShrink?: boolean | undefined;
   // isNoAnimation?: boolean | undefined;
   // isRequired?: boolean | undefined;
+  // size?: number | string | undefined; // 'short','small','middle','wide','large','huge'
 
   backdropClass?: string | undefined; // default 'cdk-overlay-transparent-backdrop'
   isCheckmark?: boolean | undefined;

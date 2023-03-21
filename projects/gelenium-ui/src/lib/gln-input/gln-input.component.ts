@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChildren,
   ElementRef,
   EventEmitter,
   forwardRef,
@@ -16,6 +17,7 @@ import {
   Optional,
   Output,
   PLATFORM_ID,
+  QueryList,
   Renderer2,
   SimpleChanges,
   SkipSelf,
@@ -37,12 +39,13 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { GlnFrameOrnamAlign, GlnFrameOrnamAlignUtil } from '../directives/gln-frame-ornament/gln-frame-ornam-align.interface';
+import { GlnOrnament, ORNAMENT_ALIGN } from '../directives/gln-ornament/gln-ornament.interface';
+import { GlnOrnamentOwner, GLN_ORNAMENT_OWNER } from '../directives/gln-ornament/gln-ornament-owner.interface';
+import { GlnOrnamentOwnerUtil } from '../directives/gln-ornament/gln-ornament-owner.util';
+import { CSS_ATTR_ORN_LF, CSS_PROP_ORN_PD_LF, GlnOrnamentLeftDirective } from '../directives/gln-ornament/gln-ornament-left.directive';
+import { CSS_ATTR_ORN_RG, CSS_PROP_ORN_PD_RG, GlnOrnamentRightDirective } from '../directives/gln-ornament/gln-ornament-right.directive';
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
-import { GlnFrameExterior } from '../gln-frame/gln-frame-exterior.interface';
-import { GlnFrameSize } from '../gln-frame/gln-frame-size.interface';
-import { GlnInputType, GlnInputTypeUtil } from '../gln-input/gln-input.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
@@ -51,6 +54,22 @@ import { GlnInputConfig } from './gln-input-config.interface';
 let uniqueIdCounter = 0;
 
 export const GLN_INPUT_CONFIG = new InjectionToken<GlnInputConfig>('GLN_INPUT_CONFIG');
+
+export const INPUT_TYPE: { [key: string]: string } = {
+  'color': 'color',
+  'date': 'date',
+  'datetime-local': 'datetime-local',
+  'email': 'email',
+  'month': 'month',
+  'number': 'number',
+  'password': 'password',
+  'search': 'search',
+  'tel': 'tel',
+  'text': 'text',
+  'time': 'time',
+  'url': 'url',
+  'week': 'week',
+};
 
 @Component({
   selector: 'gln-input',
@@ -63,9 +82,12 @@ export const GLN_INPUT_CONFIG = new InjectionToken<GlnInputConfig>('GLN_INPUT_CO
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => GlnInputComponent), multi: true },
     { provide: NG_VALIDATORS, useExisting: forwardRef(() => GlnInputComponent), multi: true },
     { provide: GLN_NODE_INTERNAL_VALIDATOR, useExisting: GlnInputComponent },
+    { provide: GLN_ORNAMENT_OWNER, useExisting: GlnInputComponent },
   ],
 })
-export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnNodeInternalValidator {
+export class GlnInputComponent
+  implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator, GlnNodeInternalValidator, GlnOrnamentOwner
+{
   @Input()
   public id = `glnin-${uniqueIdCounter++}`;
   @Input()
@@ -73,9 +95,7 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   @Input()
   public config: GlnInputConfig | null | undefined;
   @Input()
-  public exterior: string | null | undefined; // GlnFrameExteriorType
-  @Input()
-  public frameSize: string | null | undefined; // GlnFrameSizeType
+  public exterior: string | null | undefined; // 'outlined' | 'underline' | 'standard'
   @Input()
   public helperText: string | null | undefined;
   @Input()
@@ -109,11 +129,13 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   @Input()
   public pattern: string | RegExp = '';
   @Input()
+  public size: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
+  @Input()
   public step: number | null | undefined;
   @Input()
   public tabIndex: number = 0;
   @Input()
-  public type: string = GlnInputType.text.valueOf();
+  public type: string = INPUT_TYPE['text'];
   @Input()
   public wdFull: string | null | undefined;
 
@@ -126,37 +148,25 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   public frameComp!: GlnFrameComponent;
   @ViewChild('inputElementRef', { static: true })
   public inputElementRef!: ElementRef<HTMLElement>;
-
-  public get exteriorVal(): GlnFrameExterior | null {
-    return this.frameComp.exteriorVal;
-  }
-  public get frameSizeVal(): GlnFrameSize | null {
-    return this.frameComp.frameSizeVal;
-  }
-  public get frameSizeValue(): number {
-    return this.frameComp.frameSizeValue;
-  }
-  public get labelShrink(): boolean | null {
-    return this.frameComp.labelShrink;
-  }
-  public get noAnimation(): boolean | null {
-    return this.frameComp.noAnimation;
-  }
+  @ContentChildren(GlnOrnamentLeftDirective, { descendants: true })
+  public ornamLeftList!: QueryList<GlnOrnamentLeftDirective>;
+  @ContentChildren(GlnOrnamentRightDirective, { descendants: true })
+  public ornamRightList!: QueryList<GlnOrnamentRightDirective>;
 
   public currConfig: GlnInputConfig;
-  public disabled: boolean | null = null; // Binding attribute "isDisabled".
-  public error: boolean | null = null; // Binding attribute "isError".
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public isAttrHideAnimation: boolean | undefined;
+  public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
+  public isErrorVal: boolean | null = null; // Binding attribute "isError".
   public isFocused = false;
   public isFilled = false;
-  public ornamLfAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamLfAlign".
-  public ornamRgAlignVal: GlnFrameOrnamAlign | null = null; // Binding attribute "ornamRgAlign".
-  public placeholder: boolean | null = null; // Binding attribute "isPlaceholder".
-  public readOnly: boolean | null = null; // Binding attribute "isReadOnly".
-  public required: boolean | null = null; // Binding attribute "isRequired".
-  public typeVal: GlnInputType = GlnInputType.text;
+  public isPlaceholderVal: boolean | null = null; // Binding attribute "isPlaceholder".
+  public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
+  public isRequiredVal: boolean | null = null; // Binding attribute "isRequired".
+  public ornamLfAlignVal: string | null = null; // Binding attribute "ornamLfAlign".
+  public ornamRgAlignVal: string | null = null; // Binding attribute "ornamRgAlign".
+  public typeVal: string = INPUT_TYPE['text']; // Binding attribute "type".
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -180,33 +190,35 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
     if (changes['isError'] || (changes['config'] && this.isError == null && this.currConfig.isError != null)) {
-      this.error = BooleanUtil.init(this.isError) ?? !!this.currConfig.isError;
-      this.settingError(this.error, this.renderer, this.hostRef);
+      this.isErrorVal = BooleanUtil.init(this.isError) ?? !!this.currConfig.isError;
+      this.settingError(this.isErrorVal, this.renderer, this.hostRef);
     }
     if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
-      this.readOnly = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
-      this.settingReadOnly(this.readOnly, this.renderer, this.hostRef);
+      this.isReadOnlyVal = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
+      this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
     if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
-      this.required = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
-      this.settingRequired(this.required, this.renderer, this.hostRef);
+      this.isRequiredVal = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
+      this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
     if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlign == null && this.currConfig.ornamLfAlign != null)) {
-      this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamLfAlign || this.currConfig.ornamLfAlign || null);
+      this.ornamLfAlignVal = ORNAMENT_ALIGN[this.ornamLfAlign || this.currConfig.ornamLfAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
+      this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, this.getElements(this.ornamLeftList));
     }
     if (changes['ornamRgAlign'] || (changes['config'] && this.ornamRgAlign == null && this.currConfig.ornamRgAlign != null)) {
-      this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.ornamRgAlign || this.currConfig.ornamRgAlign || null);
+      this.ornamRgAlignVal = ORNAMENT_ALIGN[this.ornamRgAlign || this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
+      this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList));
     }
     if (changes['isPlaceholder'] || (changes['config'] && this.isPlaceholder == null && this.currConfig.isPlaceholder != null)) {
-      this.placeholder = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
+      this.isPlaceholderVal = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
     }
     if (changes['type']) {
-      this.typeVal = GlnInputTypeUtil.create(this.type) || GlnInputType.text;
+      this.typeVal = INPUT_TYPE[this.type] || INPUT_TYPE['text'];
     }
     if (changes['isRequired'] || changes['minLength'] || changes['maxLength']) {
-      this.prepareFormGroup(this.required, this.minLength, this.maxLength);
+      this.prepareFormGroup(this.isRequiredVal, this.minLength, this.maxLength);
     }
   }
 
@@ -214,27 +226,27 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
-    if (this.error == null) {
-      this.error = !!this.currConfig.isError;
-      this.settingError(this.error, this.renderer, this.hostRef);
+    if (this.isErrorVal == null) {
+      this.isErrorVal = !!this.currConfig.isError;
+      this.settingError(this.isErrorVal, this.renderer, this.hostRef);
     }
-    if (this.placeholder == null) {
-      this.placeholder = !!this.currConfig.isPlaceholder;
+    if (this.isPlaceholderVal == null) {
+      this.isPlaceholderVal = !!this.currConfig.isPlaceholder;
     }
-    if (this.readOnly == null) {
-      this.readOnly = !!this.currConfig.isReadOnly;
-      this.settingReadOnly(this.readOnly, this.renderer, this.hostRef);
+    if (this.isReadOnlyVal == null) {
+      this.isReadOnlyVal = !!this.currConfig.isReadOnly;
+      this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
-    if (this.required == null) {
-      this.required = !!this.currConfig.isRequired;
-      this.settingRequired(this.required, this.renderer, this.hostRef);
+    if (this.isRequiredVal == null) {
+      this.isRequiredVal = !!this.currConfig.isRequired;
+      this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
     if (this.ornamLfAlignVal == null) {
-      this.ornamLfAlignVal = GlnFrameOrnamAlignUtil.create(this.currConfig.ornamLfAlign || null);
+      this.ornamLfAlignVal = ORNAMENT_ALIGN[this.currConfig.ornamLfAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
     }
     if (this.ornamRgAlignVal == null) {
-      this.ornamRgAlignVal = GlnFrameOrnamAlignUtil.create(this.currConfig.ornamRgAlign || null);
+      this.ornamRgAlignVal = ORNAMENT_ALIGN[this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
     }
   }
@@ -245,6 +257,8 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
       // Add an attribute that disables animation on initialization.
       this.isAttrHideAnimation = true;
     }
+    this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, this.getElements(this.ornamLeftList));
+    this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList));
   }
 
   // ** interface ControlValueAccessor - start **
@@ -276,8 +290,8 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   }
 
   public setDisabledState(disabled: boolean): void {
-    if (this.disabled !== disabled) {
-      this.disabled = disabled;
+    if (this.isDisabledVal !== disabled) {
+      this.isDisabledVal = disabled;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', disabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', disabled ? '' : null);
       if (disabled && !this.formControl.disabled) {
@@ -316,6 +330,24 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
 
   // ** GlnNodeInternalValidator - finish **
 
+  // ** GlnOrnamentOwner - start **
+
+  public changeOrnament(isRemove: boolean, elementRef: ElementRef<HTMLElement>, isRight: boolean): void {
+    const ornamList: ElementRef<HTMLElement>[] = this.getElements(!isRight ? this.ornamLeftList : this.ornamRightList);
+    const ornamWidth: number | null = GlnOrnamentOwnerUtil.getWidthAllOrnaments(ornamList, isRemove, elementRef);
+    const nameProperty: string = !isRight ? CSS_PROP_ORN_PD_LF : CSS_PROP_ORN_PD_RG;
+    HtmlElemUtil.setProperty(this.frameComp.hostRef, nameProperty, ornamWidth?.toString().concat('px'));
+
+    if (!isRight) {
+      this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, [elementRef]);
+    } else {
+      this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, [elementRef]);
+    }
+    this.changeDetectorRef.markForCheck();
+  }
+
+  // ** GlnOrnamentOwner - finish **
+
   // ** Public methods **
 
   public getBoolean(value: string | boolean | null | undefined): boolean | null {
@@ -323,13 +355,13 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   }
 
   public focus(): void {
-    if (!this.disabled && isPlatformBrowser(this.platformId) && !!this.inputElementRef) {
+    if (!this.isDisabledVal && isPlatformBrowser(this.platformId) && !!this.inputElementRef) {
       this.inputElementRef.nativeElement.focus();
     }
   }
 
   public doFocus(): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       this.isFocused = true;
       this.settingFocus(this.isFocused, this.renderer, this.hostRef);
       this.focused.emit();
@@ -337,7 +369,7 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
   }
 
   public doBlur(): void {
-    if (!this.disabled) {
+    if (!this.isDisabledVal) {
       this.isFocused = false;
       this.settingFocus(this.isFocused, this.renderer, this.hostRef);
       this.isFilled = !!this.formControl.value;
@@ -371,26 +403,38 @@ export class GlnInputComponent implements OnChanges, OnInit, AfterContentInit, C
     this.formControl.setValidators(newValidator);
   }
 
-  private settingError(error: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private getElements(queryList: QueryList<GlnOrnament> | null): ElementRef<HTMLElement>[] {
+    return (queryList?.toArray() || []).map((item: GlnOrnament) => item.hostRef);
+  }
+
+  private settingError(error: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-error', !!error);
     HtmlElemUtil.setAttr(renderer, elem, 'err', error ? '' : null);
   }
-  private settingFocus(focus: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+  private settingFocus(focus: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-focused', focus || false);
     HtmlElemUtil.setAttr(renderer, elem, 'foc', focus ? '' : null);
   }
-  private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!readOnly);
     HtmlElemUtil.setAttr(renderer, elem, 'rea', readOnly ? '' : null);
   }
-  private settingRequired(required: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingRequired(required: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-required', !!required);
     HtmlElemUtil.setAttr(renderer, elem, 'req', required ? '' : null);
   }
-  private settingOrnamLfAlign(ornamLfAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingOrnamLfAlign(ornamLfAlign: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setAttr(renderer, elem, 'orn-lft', ornamLfAlign?.toString());
   }
-  private settingOrnamRgAlign(ornamRgAlign: GlnFrameOrnamAlign | null, renderer: Renderer2, elem: ElementRef<HTMLElement> | null): void {
+  private settingOrnamRgAlign(ornamRgAlign: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setAttr(renderer, elem, 'orn-rgh', ornamRgAlign?.toString());
+  }
+  private settingOrnamentList(attrName: string, ornamAlign: string, renderer: Renderer2, elementRefList: ElementRef<HTMLElement>[]): void {
+    const ornamAlignValue = ORNAMENT_ALIGN[ornamAlign] || ORNAMENT_ALIGN['default'];
+    if (attrName) {
+      for (let idx = 0; idx < elementRefList.length; idx++) {
+        HtmlElemUtil.setAttr(renderer, elementRefList[idx], attrName, ornamAlignValue);
+      }
+    }
   }
 }

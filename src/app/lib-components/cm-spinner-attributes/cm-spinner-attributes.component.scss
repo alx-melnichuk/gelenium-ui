@@ -1,0 +1,26 @@
+/*# sourceURL=cm-spinner-attributes.component.scss */
+
+app-cm-spinner-attributes {
+  display: block;
+
+  .spa-progress-wrap {
+    align-items: center;
+    display: flex;
+    margin-left: 0.5em;
+  }
+  .spa-progress-label {
+    display: inline-block;
+    margin-right: 1em;
+    width: 110px;
+  }
+  .spa-external02 {
+    align-items: center;
+    background-color: aquamarine;
+    border: 1px solid green;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    height: inherit;
+    width: inherit;
+  }
+}

@@ -1,0 +1,19 @@
+/*# sourceURL=cm-tooltip-config.component.scss */
+
+app-cm-tooltip-config {
+  display: block;
+
+  .ttcf-btn {
+    border-radius: 4px;
+    border-width: 0;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 16px;
+  }
+}
+
+.ttcf-panel {
+  --glntt-bg-color: cornflowerblue;
+  box-shadow: rgb(100, 119, 154) 0 2px 7px 1px;
+}

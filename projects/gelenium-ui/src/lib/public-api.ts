@@ -7,7 +7,7 @@ export * from './_utils/public-api';
 
 export * from './directives/gln-auto-focuse/public-api';
 export * from './directives/gln-color/public-api';
-export * from './directives/gln-frame-ornament/public-api';
+export * from './directives/gln-ornament/public-api';
 export * from './directives/gln-regex/public-api';
 
 export * from './gln-autocomplete/public-api';
@@ -18,9 +18,12 @@ export * from './gln-infinite-scroll/public-api';
 export * from './gln-input/public-api';
 export * from './gln-option/public-api';
 export * from './gln-option-group/public-api';
-export * from './gln-switch/public-api';
+export * from './gln-pagination/public-api';
 export * from './gln-select/public-api';
+export * from './gln-spinner/public-api';
+export * from './gln-switch/public-api';
 export * from './gln-textarea/public-api';
+export * from './gln-tooltip/public-api';
 export * from './gln-touch-ripple/public-api';
 
 export * from './pipes/gln-highlight/public-api';

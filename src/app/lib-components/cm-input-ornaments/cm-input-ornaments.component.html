@@ -6,7 +6,14 @@
   <p>
     For the GlnInput component, it is possible to display an ornament
     (picture or text).
-    <br />
+  </p>
+  <p>
+    First you need to add a module for working with an ornament.
+  </p>
+  <code><pre source="ts">
+import &#123; GlnOrnamentModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
     To display the ornament on the left, you need to add the "gln-orn-lf"
     attribute to the element inside the "gln-input" content.
     <br />
@@ -758,8 +765,8 @@ export class InputComponent &#123;
     ornamRgAlign: string | undefined
   ): void &#123;
     this.config05 = &#123;
-      ornamLfAlign: GlnFrameOrnamAlignUtil.convert(ornamLfAlign || null)?.toString() || 'default',
-      ornamRgAlign: GlnFrameOrnamAlignUtil.convert(ornamRgAlign || null)?.toString() || 'default',
+      ornamLfAlign: ornamLfAlign || 'default',
+      ornamRgAlign: ornamRgAlign || 'default',
     &#125;;
   &#125;
   public toStr(value: number): string &#123;

@@ -1,0 +1,11 @@
+/*# sourceURL=cm-pagination-border.component.scss */
+
+app-cm-pagination-border {
+  display: block;
+
+  .pgr-elem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
