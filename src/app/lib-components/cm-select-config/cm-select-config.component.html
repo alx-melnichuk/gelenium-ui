@@ -201,7 +201,7 @@ export class AppComponent &#123;
     </td>
   </tr>
   <tr>
-    <td><code>panelClass?: string<br/>
+    <td><code>classes?: string<br/>
         &nbsp;&nbsp;| string[]<br/>
         &nbsp;&nbsp;| Set&lt;string&gt;<br/>
         &nbsp;&nbsp;| &#123; [key: string]: unknown &#125;<br/>
@@ -288,7 +288,7 @@ isRequired
 backdropClass='sc-backdrop'
 isMultiple=true
 overlayPanelClass=['sc-overlay-panel']
-panelClass=['sc-panel']
+classes=['sc-panel']
 visibleSize=6</pre></code>
   <p>
     In other words, there is the following order of determining the configuration parameters:
@@ -313,7 +313,7 @@ isReadOnly=false,
 ornamLfAlign='default',
 ornamRgAlign='default',
 overlayPanelClass=undefined;
-panelClass=undefined;
+classes=undefined;
 position='start';
 visibleSize=0</pre></code>
     </li>
@@ -444,7 +444,7 @@ const glnSelectConfigDefault: GlnSelectConfig = &#123;
   backdropClass: 'sc-backdrop',
   isMultiple: true,
   overlayPanelClass: ['sc-overlay-panel'],
-  panelClass: ['sc-panel'],
+  classes: ['sc-panel'],
   visibleSize: 6,
 &#125;;
 

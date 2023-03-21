@@ -150,7 +150,7 @@ export class GlnSelectComponent
   public ornamRgAlign: string | null | undefined; // OrnamAlignType
   @Input()
   /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
-  public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = '';
+  public classes: string | string[] | Set<string> | { [key: string]: unknown } = '';
   @Input()
   public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
   @Input()
@@ -246,7 +246,7 @@ export class GlnSelectComponent
   public ornamLfAlignVal: string | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: string | null = null; // Binding attribute "ornamRgAlign".
   public overlayPanelClass: string | string[] = '';
-  public panelClassVal: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
+  public classesVal: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "classes"
   public positionList: ConnectedPosition[] = [];
   public selectedOptions: GlnOption[] = [];
   /** A strategy for handling scrolling when the overlay panel is open. */
@@ -338,8 +338,8 @@ export class GlnSelectComponent
     if (changes['config'] && this.currConfig.overlayPanelClass != null) {
       this.overlayPanelClass = this.currConfig.overlayPanelClass;
     }
-    if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
-      this.panelClassVal = this.panelClass || this.currConfig.panelClass;
+    if (changes['classes'] || (changes['config'] && this.classes == null && this.currConfig.classes != null)) {
+      this.classesVal = this.classes || this.currConfig.classes;
     }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       this.positionList = this.getPositionList(this.position || this.currConfig.position);
@@ -405,8 +405,8 @@ export class GlnSelectComponent
     if (this.currConfig.overlayPanelClass != null) {
       this.overlayPanelClass = this.currConfig.overlayPanelClass;
     }
-    if (this.panelClassVal == null) {
-      this.panelClassVal = this.currConfig.panelClass;
+    if (this.classesVal == null) {
+      this.classesVal = this.currConfig.classes;
     }
     if (this.positionList.length === 0) {
       this.positionList = this.getPositionList(this.currConfig.position);
