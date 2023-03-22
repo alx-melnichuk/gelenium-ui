@@ -62,7 +62,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     }
   }
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
-  public isNoHoverableVal: boolean | null = null; // Binding attribute "isNoMousable".
+  public isNoHoverableVal: boolean | null = null; // Binding attribute "isNoHoverable".
   public isNoHideOnScrollVal: boolean | null = null; // Binding attribute "isNoHideOnScroll".
   public isNoTouchableVal: boolean | null = null; // Binding attribute "isNoTouchable".
   public isNoTransformVal: boolean | null = null; // Binding attribute "isNoTransit".
