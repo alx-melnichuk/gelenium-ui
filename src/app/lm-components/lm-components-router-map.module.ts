@@ -34,6 +34,20 @@ const siteUrlsButton: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Button', { label: 'Button', siteUrls: siteUrlsButton });
 
+RouterConfig.add('URL_COMPONENTS_CHIP', 'chip');
+const urlChip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CHIP');
+const siteUrlsChip: SiteUrl[] = [
+  { label: 'Basic', url: urlChip, fragment: 'Basic' },
+  { label: 'Attributes', url: urlChip, fragment: 'Attributes' },
+  // { label: 'Size', url: urlChip, fragment: 'Size' },
+  // { label: 'Border Radius', url: urlChip, fragment: 'BorderRadius' },
+  // { label: 'Ornaments', url: urlChip, fragment: 'Ornaments' },
+  // { label: 'Palette', url: urlChip, fragment: 'Palette' },
+  // { label: 'Config', url: urlChip, fragment: 'Config' },
+  // { label: 'Api', url: urlChip, fragment: 'Api' },
+];
+SiteMenuUtil.addItem('Components', 'Chip', { label: 'Chip', siteUrls: siteUrlsChip });
+
 RouterConfig.add('URL_COMPONENTS_FRAME', 'frame');
 const urlFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
 const siteUrlsFrame: SiteUrl[] = [

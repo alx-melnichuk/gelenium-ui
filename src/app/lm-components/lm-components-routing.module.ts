@@ -8,6 +8,7 @@ import { LmComponentsComponent } from './lm-components.component';
 
 const URL_COMPONENTS_AUTOCOMPLETE = RouterConfig.get('URL_COMPONENTS_AUTOCOMPLETE');
 const URL_COMPONENTS_BUTTON = RouterConfig.get('URL_COMPONENTS_BUTTON');
+const URL_COMPONENTS_CHIP = RouterConfig.get('URL_COMPONENTS_CHIP');
 const URL_COMPONENTS_FRAME = RouterConfig.get('URL_COMPONENTS_FRAME');
 const URL_COMPONENTS_HINT_OR_ERROR = RouterConfig.get('URL_COMPONENTS_HINT_OR_ERROR');
 const URL_COMPONENTS_INFINITE_SCROLL = RouterConfig.get('URL_COMPONENTS_INFINITE_SCROLL');
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: URL_COMPONENTS_BUTTON,
         loadChildren: () => import('../lib-components/cm-button/cm-button.module').then((m) => m.CmButtonModule),
+      },
+      {
+        path: URL_COMPONENTS_CHIP,
+        loadChildren: () => import('../lib-components/cm-chip/cm-chip.module').then((m) => m.CmChipModule),
       },
       {
         path: URL_COMPONENTS_FRAME,

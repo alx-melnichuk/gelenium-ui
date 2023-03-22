@@ -1,0 +1,390 @@
+<section *ngIf="isShowBasic"
+  mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmChip + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    The component is designed to display the name of an entity in the form of a small panel.
+    Also, this panel may optionally have additional attributes (icons or buttons).
+  </p>
+  <span>It comes in two versions:</span>
+  <ul>
+    <li>with an outline (exterior="outlined")</li>
+    <li>with a fill (exterior="filled")</li>
+  </ul>
+
+  <span> For example:</span>
+  <code><pre source="html">
+&lt;<strong>gln-chip</strong> label="chip"&gt;&lt;/<strong>gln-chip</strong>&gt;</pre></code>
+</section>
+
+
+<div *ngIf="isShowBasic"
+  class="app-group">
+
+  <div class="app-elem chbs-fn-sz-13">
+    <gln-chip exterior="outlined"
+      label="Outlined">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem chbs-fn-sz-13">
+    <gln-chip exterior="filled"
+      label="Filled">
+    </gln-chip>
+  </div>
+
+</div>
+
+
+<hr br-nn />
+
+
+<i id="Attributes">_</i>
+<section *ngIf="isShowAttributes02a"
+  mr-vr>
+  <h3 class="app-hover-link">
+    Attributes.
+    <a [href]="urlCmChip + '#Attributes'">#</a>
+  </h3>
+  <span>The following attributes are supported:</span>
+  <ul>
+    <li>
+      "config" - Defines a configuration object.
+      <a [href]="urlCmChip + '#config-interface'">More details.</a>
+    </li>
+    <li>
+      "isHoverable" - indicates that the background color changes on hover;
+    </li>
+    <li>
+      "isDeletable" - indicates that a delete button is displayed;
+    </li>
+  </ul>
+</section>
+
+<div *ngIf="isShowAttributes02a"
+  class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isHoverable</em>
+      </small>
+    </div>
+    <gln-chip class="cha1-fn-sz-13"
+      exterior="outlined"
+      label="Outlined"
+      isHoverable>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isHoverable</em>
+      </small>
+    </div>
+    <gln-chip class="cha1-fn-sz-13"
+      exterior="filled"
+      label="Filled"
+      isHoverable>
+    </gln-chip>
+  </div>
+
+</div>
+<div *ngIf="isShowAttributes02a"
+  class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isHoverable, isDeletable</em>
+      </small>
+    </div>
+    <gln-chip class="cha1-fn-sz-13"
+      exterior="outlined"
+      label="Outlined 1"
+      isHoverable
+      isDeletable
+      (deleted)="showMsg('deleted (Outlined 1)')">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isHoverable, isDeletable</em>
+      </small>
+    </div>
+    <gln-chip class="cha1-fn-sz-13"
+      exterior="filled"
+      label="Filled 1"
+      isHoverable
+      isDeletable
+      (deleted)="showMsg('deleted (Filled 1)')">
+    </gln-chip>
+  </div>
+
+</div>
+
+
+<i id="Size">_</i>
+<section *ngIf="isShowSize03a"
+  mr-vr>
+  <h3 class="app-hover-link">
+    Size
+    <a [href]="urlCmChip + '#Size'">#</a>
+  </h3>
+  <p>
+    The "size" property determines the size of the element (its height).
+  </p>
+  <span>
+    It takes the following values:
+  </span>
+  <ul>
+    <li>"short" - sets the height to 24px;</li>
+    <li>"little" - sets the height to 28px;</li>
+    <li>"small" - sets the height to 32px (default);</li>
+    <li>"middle" - sets the height to 36px;</li>
+    <li>"wide" - sets the height to 40px;</li>
+  </ul>
+  <p>
+    The height of the "delete" button is determined by the formula Math.round(size * 0.672).
+  </p>
+  <p>
+    It is possible to specify the height of an element. To do this,
+    in the "config.size" property, we define the required height in pixels.
+  </p>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Short" - 24px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="outlined"
+      label="Outlined 'Short'"
+      size="short"
+      isDeletable>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Short" - 24px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="filled"
+      label="Filled 'Short'"
+      size="short"
+      isDeletable>
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Little" - 28px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="outlined"
+      label="Outlined 'Little'"
+      size="little"
+      isDeletable>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Little" - 28px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="filled"
+      label="Filled 'Little'"
+      size="little"
+      isDeletable>
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Small" - 32px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="outlined"
+      label="Outlined 'Small'"
+      size="small"
+      isDeletable>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Small" - 32px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="filled"
+      label="Filled 'Small'"
+      size="small"
+      isDeletable>
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Middle" - 36px; font: 14px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-14"
+      exterior="outlined"
+      label="Outlined 'Middle'"
+      size="middle"
+      isDeletable>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Middle" - 36px; font: 14px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-14"
+      exterior="filled"
+      label="Filled 'Middle'"
+      size="middle"
+      isDeletable>
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Wide" - 40px; font: 15px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-15"
+      exterior="outlined"
+      label="Outlined 'Wide'"
+      size="wide"
+      isDeletable>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Wide" - 40px; font: 15px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-15"
+      exterior="filled"
+      label="Filled 'Wide'"
+      size="wide"
+      isDeletable>
+    </gln-chip>
+  </div>
+
+</div>
+
+<!--  -->
+
+
+<hr br-nn />
+
+
+<h4 class="app-hover-link"
+  id="size-config">
+  Configuration for custom height (29px).
+  <a [href]="urlCmChip + '#size-config'">#</a>
+</h4>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Size - 30px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="outlined"
+      label="Outlined 'size: 30px'"
+      size="30"
+      isDeletable>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Size - 30px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="filled"
+      label="Filled 'size: 30px'"
+      size="30"
+      isDeletable>
+    </gln-chip>
+  </div>
+
+</div>
+
+
+<!--
+<div class="app-elem chbs-fn-sz-13">
+  <div>
+    <small><em>Show tooltip on hover.</em></small>
+  </div>
+  <div>
+    <gln-chip exterior="filled"
+      size="middle"
+      isHoverable
+      label="Filled">
+      Action
+    </gln-chip>
+  </div>
+</div>
+-->
+
+<hr br-nn />
