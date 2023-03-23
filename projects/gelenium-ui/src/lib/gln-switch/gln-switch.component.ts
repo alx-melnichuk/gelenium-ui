@@ -296,7 +296,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
 
   public doClickByLabel(event: MouseEvent): void {
     if (!this.isDisabledVal && !this.isReadOnlyVal && this.touchRipple) {
-      this.touchRipple.touchRipple(event, true);
+      this.touchRipple.trigger(event, true);
     }
   }
 

@@ -51,7 +51,7 @@ export class GlnTouchRippleComponent implements OnChanges {
 
   // ** Public methods **
 
-  public touchRipple(event: MouseEvent, isCenter: boolean = this.isCenterVal): void {
+  public trigger(event: MouseEvent, isCenter: boolean = this.isCenterVal): void {
     this.doRipple(event, isCenter);
   }
 
