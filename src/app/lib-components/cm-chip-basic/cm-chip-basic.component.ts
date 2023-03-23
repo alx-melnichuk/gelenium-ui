@@ -23,8 +23,9 @@ export class CmChipBasicComponent {
   public urlCmChip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CHIP');
 
   isShowBasic = false;
-  isShowAttributes02a = true;
-  isShowSize03a = true;
+  isShowAttributes02a = false;
+  isShowSize03a = false;
+  isShowOrnaments05a = true;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

@@ -23,4 +23,28 @@ app-cm-chip-basic {
   .chsz-fn-sz-15 {
     font-size: 15px;
   }
+
+  // Page: "Ornaments05a"
+  .chor-fn-sz {
+    font-size: 13px;
+  }
+  .chor-text {
+    color: blue;
+    font-weight: 600;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  .chor-uncode {
+    color: blue;
+    margin-right: 7px;
+    margin-left: 7px;
+  }
+  .chor-svg {
+    fill: blue;
+    height: 24px;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 24px;
+  }
+
 }

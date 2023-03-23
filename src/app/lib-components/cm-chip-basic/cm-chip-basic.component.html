@@ -29,20 +29,23 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
 <div *ngIf="isShowBasic"
   class="app-group">
 
-  <div class="app-elem chbs-fn-sz-13">
-    <gln-chip exterior="outlined"
-      label="Outlined">
+  <div class="app-elem">
+    <gln-chip class="chbs-fn-sz-13"
+      exterior="outlined"
+      label="chip 'Outlined'">
     </gln-chip>
   </div>
 
-  <div class="app-elem chbs-fn-sz-13">
-    <gln-chip exterior="filled"
-      label="Filled">
+  <div class="app-elem">
+    <gln-chip class="chbs-fn-sz-13"
+      exterior="filled"
+      label="chip 'Filled'">
     </gln-chip>
   </div>
 
 </div>
 
+<!-- source -->
 
 <hr br-nn />
 
@@ -80,7 +83,7 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     </div>
     <gln-chip class="cha1-fn-sz-13"
       exterior="outlined"
-      label="Outlined"
+      label="Outlined A"
       isHoverable>
     </gln-chip>
   </div>
@@ -93,12 +96,13 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     </div>
     <gln-chip class="cha1-fn-sz-13"
       exterior="filled"
-      label="Filled"
+      label="Filled A"
       isHoverable>
     </gln-chip>
   </div>
 
 </div>
+
 <div *ngIf="isShowAttributes02a"
   class="app-group">
 
@@ -110,10 +114,10 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     </div>
     <gln-chip class="cha1-fn-sz-13"
       exterior="outlined"
-      label="Outlined 1"
+      label="Outlined B"
       isHoverable
       isDeletable
-      (deleted)="showMsg('deleted (Outlined 1)')">
+      (deleted)="showMsg('deleted (Outlined B)')">
     </gln-chip>
   </div>
 
@@ -125,14 +129,18 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     </div>
     <gln-chip class="cha1-fn-sz-13"
       exterior="filled"
-      label="Filled 1"
+      label="Filled B"
       isHoverable
       isDeletable
-      (deleted)="showMsg('deleted (Filled 1)')">
+      (deleted)="showMsg('deleted (Filled B)')">
     </gln-chip>
   </div>
 
 </div>
+
+<!-- source -->
+
+<hr br-nn />
 
 
 <i id="Size">_</i>
@@ -156,7 +164,7 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <li>"wide" - sets the height to 40px;</li>
   </ul>
   <p>
-    The height of the "delete" button is determined by the formula Math.round(size * 0.672).
+    The height of the "delete" button is determined by the formula: Math.round(size * 0.672).
   </p>
   <p>
     It is possible to specify the height of an element. To do this,
@@ -165,7 +173,8 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
 </section>
 
 
-<div class="app-group">
+<div *ngIf="isShowSize03a"
+  class="app-group">
 
   <div class="app-elem">
     <div>
@@ -197,7 +206,8 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
 
 </div>
 
-<div class="app-group">
+<div *ngIf="isShowSize03a"
+  class="app-group">
 
   <div class="app-elem">
     <div>
@@ -229,7 +239,8 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
 
 </div>
 
-<div class="app-group">
+<div *ngIf="isShowSize03a"
+  class="app-group">
 
   <div class="app-elem">
     <div>
@@ -261,7 +272,8 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
 
 </div>
 
-<div class="app-group">
+<div *ngIf="isShowSize03a"
+  class="app-group">
 
   <div class="app-elem">
     <div>
@@ -293,7 +305,8 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
 
 </div>
 
-<div class="app-group">
+<div *ngIf="isShowSize03a"
+  class="app-group">
 
   <div class="app-elem">
     <div>
@@ -325,20 +338,21 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
 
 </div>
 
-<!--  -->
-
+<!-- source -->
 
 <hr br-nn />
 
 
-<h4 class="app-hover-link"
+<h4 *ngIf="isShowSize03a"
+  class="app-hover-link"
   id="size-config">
   Configuration for custom height (29px).
   <a [href]="urlCmChip + '#size-config'">#</a>
 </h4>
 
 
-<div class="app-group">
+<div *ngIf="isShowSize03a"
+  class="app-group">
 
   <div class="app-elem">
     <div>
@@ -370,21 +384,213 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
 
 </div>
 
+<!-- source -->
 
-<!--
-<div class="app-elem chbs-fn-sz-13">
-  <div>
-    <small><em>Show tooltip on hover.</em></small>
-  </div>
-  <div>
-    <gln-chip exterior="filled"
-      size="middle"
-      isHoverable
-      label="Filled">
-      Action
+<hr br-nn />
+
+
+<i id="Ornaments">_</i>
+<section *ngIf="isShowOrnaments05a"
+  mr-vr>
+  <h3 class="app-hover-link">
+    Ornaments.
+    <a [href]="urlCmChip + '#Ornaments'">#</a>
+  </h3>
+  <p>
+    For the GlnChip component, it is possible to display an ornament
+    (picture or text).
+    <br />
+    To display the ornament on the left, you need to add a block with the
+    "gln-orn-lf" attribute inside the "gln-chip".
+    <br />
+    To display the ornament on the right, you need to add a block with the
+    "gln-orn-rg" attribute inside the "gln-chip".
+  </p>
+  <span>
+    Example:
+  </span>
+  <code><pre source="html">
+&lt;gln-chip&gt;
+  <i>&lt;div <strong>gln-orn-lf</strong>&gt;&lt;span&gt;left&lt;/span&gt;&lt;/div&gt;</i>
+  <i>&lt;div <strong>gln-orn-rg</strong>&gt;&lt;span&gt;right&lt;/span&gt;&lt;/div&gt;</i>
+&lt;/gln-chip&gt;</pre></code>
+  <p>
+    For blocks: <code><i>&lt;span&gt;left&lt;/span&gt;</i></code> and
+    <code><i>&lt;span&gt;right&lt;/span&gt;</i></code>
+    you need to specify the value of horizontal indents.
+  </p>
+</section>
+
+<section *ngIf="isShowOrnaments05a"
+  mr-vr
+  id="ornament-text">
+  <h4 class="app-hover-link">
+    Ornament - text.
+    <a [href]="urlCmChip + '#ornament-text'">#</a>
+  </h4>
+  <p>
+    The css class "chor-text" defines the horizontal padding.
+    <br />
+    The css class "chor-fn-sz" defines the font size as 13px.
+  </p>
+</section>
+
+
+<div *ngIf="isShowOrnaments05a"
+  class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-lf" + text.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="outlined"
+      label="Previous value (text)"
+      isHoverable>
+      <div gln-orn-lf
+        class="chor-text">
+        <span>&lt;</span>
+      </div>
     </gln-chip>
   </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-rg" + text.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="filled"
+      label="Next value (text)"
+      isHoverable>
+      <div gln-orn-rg
+        class="chor-text">
+        <span>&gt;</span>
+      </div>
+    </gln-chip>
+  </div>
+
 </div>
--->
+
+<!-- source -->
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="ornament-uncode">
+  <h4 class="app-hover-link">
+    Ornament - uncode.
+    <a [href]="urlCmChip + '#ornament-uncode'">#</a>
+  </h4>
+  <p>
+    A unicode character can be used as an ornament.
+    <br />
+    In this example, the css class "chor-uncode" defines the horizontal padding.
+    <br />
+    The css class "chor-fn-sz" defines the font size as 13px.
+  </p>
+</section>
+
+
+<div *ngIf="isShowOrnaments05a"
+  class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-lf" + uncode.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="outlined"
+      label="Previous value (uncode)"
+      isHoverable>
+      <div gln-orn-lf
+        class="chor-uncode">
+        &#9668;
+      </div>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-rg" + uncode.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="filled"
+      label="Next value (uncode)"
+      isHoverable>
+      <div gln-orn-rg
+        class="chor-uncode">
+        &#9658;
+      </div>
+    </gln-chip>
+  </div>
+
+</div>
+
+<!-- source -->
+
+<hr br-nn />
+
+
+<section *ngIf="isShowOrnaments05a"
+  mr-vr
+  id="ornament-svg">
+  <h4 class="app-hover-link">
+    Ornament - svg.
+    <a [href]="urlCmChip + '#ornament-svg'">#</a>
+  </h4>
+  <p>
+    A svg images can be used as an ornament.
+    <br />
+    In this example, the "bo-svg" css class defines the horizontal padding
+    and dimensions.
+  </p>
+</section>
+
+
+<div *ngIf="isShowOrnaments05a"
+  class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-lf" + svg.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="outlined"
+      label="Previous value (svg)"
+      size="middle"
+      isHoverable>
+      <svg gln-orn-lf
+        class="chor-svg">
+        <use
+          href="assets/icons/lib-components/cm-chip-ornaments/icon-circle-left.svg#arrow-circle-down"
+          height="24"
+          width="24"></use>
+      </svg>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-rg" + svg.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="filled"
+      label="Next value (svg)"
+      size="middle"
+      isHoverable>
+      <svg gln-orn-rg
+        class="chor-svg">
+        <use
+          href="assets/icons/lib-components/cm-chip-ornaments/icon-circle-right.svg#arrow-circle-down"
+          height="24"
+          width="24"></use>
+      </svg>
+    </gln-chip>
+  </div>
+
+</div>
+
+<!-- source -->
 
 <hr br-nn />
