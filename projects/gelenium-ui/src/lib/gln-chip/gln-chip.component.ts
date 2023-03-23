@@ -1,8 +1,11 @@
 import {
+  AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
+  HostListener,
   Inject,
   InjectionToken,
   Input,
@@ -12,8 +15,10 @@ import {
   Output,
   Renderer2,
   SimpleChanges,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
@@ -22,9 +27,13 @@ import { GlnChipConfig } from './gln-chip-config.interface';
 const EXTERIOR: { [key: string]: string } = { outlined: 'outlined', filled: 'filled' };
 const SIZE: { [key: string]: number } = { short: 24, little: 28, small: 32, middle: 36, wide: 40 };
 
+const CSS_ATTR_CUR = 'cur';
+
 const CSS_PROP_SIZE = '--glnch--size';
 const CSS_PROP_BRD_RD = '--glnch--brd-rd';
 const CSS_PROP_ICON_SZ = '--glnch--icon-sz';
+const CSS_PROP_ICON_MR_LF = '--glnch--icon-mr-lf';
+const CSS_PROP_ICON_MR_RG = '--glnch--icon-mr-rg';
 
 export const GLN_CHIP_CONFIG = new InjectionToken<GlnChipConfig>('GLN_CHIP_CONFIG');
 
@@ -38,13 +47,15 @@ let uniqueIdCounter = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnChipComponent implements OnChanges, OnInit {
+export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit, AfterViewInit {
   @Input()
   public id = `glnch-${uniqueIdCounter++}`;
   @Input()
   public config: GlnChipConfig | null | undefined;
   @Input()
   public exterior: string | null | undefined; // 'outlined' | 'filled'
+  @Input()
+  public isDisabled: string | boolean | null | undefined;
   @Input()
   public isDeletable: string | boolean | null | undefined;
   @Input()
@@ -54,14 +65,24 @@ export class GlnChipComponent implements OnChanges, OnInit {
   @Input()
   public size: number | string | null | undefined; // 'short','small','middle','wide'
 
-  // Deletable
   @Output()
   readonly deleted: EventEmitter<void> = new EventEmitter();
+  @Output()
+  readonly ripple: EventEmitter<void> = new EventEmitter();
+
+  // @ContentChildren(GlnOrnamentLeftDirective, { descendants: true })
+  // public ornamLeftList!: QueryList<GlnOrnamentLeftDirective>;
+  // @ContentChildren(GlnOrnamentRightDirective, { descendants: true })
+  // public ornamRightList!: QueryList<GlnOrnamentRightDirective>;
+  @ViewChild(GlnTouchRippleComponent, { static: false })
+  public touchRipple: GlnTouchRippleComponent | null = null;
 
   public currConfig: GlnChipConfig;
   public exteriorVal: string | null = null; // Binding attribute "exterior".
+  public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isDeletableVal: boolean | null = null; // Binding attribute "isDeletable".
   public isHoverableVal: boolean | null = null; // Binding attribute "isHoverable".
+  public isNoRippleVal: boolean | null = null; // Binding attribute "isNoRipple".
   public sizeVal: number | null = null; // Binding attribute "size".
 
   constructor(
@@ -73,6 +94,15 @@ export class GlnChipComponent implements OnChanges, OnInit {
     this.renderer.addClass(this.hostRef.nativeElement, 'gln-chip');
   }
 
+  @HostListener('click', ['$event'])
+  public rippleTrigger(event: any, eventTarget: any): void {
+    // https://github.com/angular/angular/issues/9587 "event.stopImmediatePropagation() called from listeners not working"
+    // Added Event.cancelBubble check to make sure there was no call to event.stopImmediatePropagation() in previous handlers.
+    if (!!event && !event.cancelBubble && !this.isDisabledVal && this.touchRipple) {
+      this.touchRipple.trigger(event);
+    }
+  }
+
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
@@ -81,18 +111,30 @@ export class GlnChipComponent implements OnChanges, OnInit {
       this.exteriorVal = EXTERIOR[this.exterior || this.currConfig.exterior || ''] || EXTERIOR['outlined'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
     }
+    if (changes['isDisabled']) {
+      this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabledVal || false);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabledVal ? '' : null);
+    }
+    let isCursor: boolean = false;
     if (changes['isDeletable'] || (changes['config'] && this.isDeletable == null && this.currConfig.isDeletable != null)) {
       this.isDeletableVal = BooleanUtil.init(this.isDeletable) ?? !!this.currConfig.isDeletable;
       this.setCssDeletable(this.isDeletableVal, this.renderer, this.hostRef);
+      isCursor = true;
     }
     if (changes['isHoverable'] || (changes['config'] && this.isHoverable == null && this.currConfig.isHoverable != null)) {
       this.isHoverableVal = BooleanUtil.init(this.isHoverable) ?? !!this.currConfig.isHoverable;
       this.setCssHoverable(this.isHoverableVal, this.renderer, this.hostRef);
+      isCursor = true;
     }
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
       this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       this.setCssSize(this.sizeVal, this.hostRef);
+    }
+
+    if (isCursor) {
+      this.setCssCursor(!!this.isDeletableVal || !!this.isHoverableVal, this.renderer, this.hostRef);
     }
   }
 
@@ -104,23 +146,46 @@ export class GlnChipComponent implements OnChanges, OnInit {
       this.exteriorVal = EXTERIOR[this.currConfig.exterior || ''] || EXTERIOR['outlined'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
     }
+    let isCursor: boolean = false;
     if (this.isDeletableVal == null) {
       this.isDeletableVal = !!this.currConfig.isDeletable;
       this.setCssDeletable(this.isDeletableVal, this.renderer, this.hostRef);
+      isCursor = true;
     }
     if (this.isHoverableVal == null) {
       this.isHoverableVal = !!this.currConfig.isHoverable;
       this.setCssHoverable(this.isHoverableVal, this.renderer, this.hostRef);
+      isCursor = true;
     }
     if (this.sizeVal == null) {
       const sizeStr: string = (this.currConfig.size || '').toString();
       this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       this.setCssSize(this.sizeVal, this.hostRef);
     }
+
+    if (isCursor) {
+      this.setCssCursor(!!this.isDeletableVal || !!this.isHoverableVal, this.renderer, this.hostRef);
+    }
   }
 
-  public clickDeleted(): void {
+  public ngAfterContentInit(): void {
+    // this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, this.getElements(this.ornamLeftList));
+    // const rhombRef: ElementRef<HTMLElement> | undefined = this.ornamRhomb?.hostRef;
+    // this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList, rhombRef));
+  }
+
+  ngAfterViewInit(): void {
+    // const crossWidth: number | null = this.ornamCross?.hostRef.nativeElement.clientWidth || null;
+    // HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_RIPPLE_RG, crossWidth?.toString().concat('px'));
+  }
+
+  public clickDeleted(event: MouseEvent | null | undefined): void {
+    event?.stopPropagation();
     this.deleted.emit();
+  }
+
+  log(text: string): void {
+    console.log(text);
   }
 
   // ** Private methods **
@@ -135,22 +200,19 @@ export class GlnChipComponent implements OnChanges, OnInit {
     HtmlElemUtil.setAttr(renderer, elem, 'del', isDeletable ? '' : null);
   }
   private setCssSize(size: number, elem: ElementRef<HTMLElement>): void {
-    if (size > 0) {
-      HtmlElemUtil.setProperty(elem, CSS_PROP_SIZE, (size > 0 ? size.toString() : null)?.concat('px'));
-      const radius: number = Math.round((size / 2) * 100) / 100;
-      HtmlElemUtil.setProperty(elem, CSS_PROP_BRD_RD, radius.toString().concat('px'));
-      const iconSize: number = Math.round(size * 0.672);
-      // 24 - 16   24*0.66=15,84    24*0.67=16,08  24*0.672=16,128 -16px 24*0,686=16,464 - 16
-      // 28 - 19   28*0.66=18,48    28*0.67=18,76  28*0.672=18,816 -19px 28*0,686=18,928 - 19
-      // 32 - 22   32*0.66=21,12    32*0.67=21,44  32*0.672=21,504 -22px 32*0,686=21,952 - 22
-      // 36 - 25   36*0.66=23,76    36*0.67=24,12  36*0.672=24,192 -24px 36*0,686=24,696 - 25
-      // 40 - 28   40*0.66=26,4     40*0.67=26,8   40*0.672=26,88  -27px 40*0.686=27,44  - 27
-      HtmlElemUtil.setProperty(elem, CSS_PROP_ICON_SZ, iconSize.toString().concat('px'));
-    }
+    HtmlElemUtil.setProperty(elem, CSS_PROP_SIZE, (size > 0 ? size.toString() : null)?.concat('px'));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_BRD_RD, (size > 0 ? Math.round((size / 2) * 100) / 100 : null)?.toString().concat('px'));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_ICON_SZ, (size > 0 ? Math.round(size * 0.672) : null)?.toString().concat('px'));
+    const iconMarginLfRg: number | null = size > 0 ? Math.round(size * 0.169) : null;
+    HtmlElemUtil.setProperty(elem, CSS_PROP_ICON_MR_LF, iconMarginLfRg?.toString().concat('px'));
+    HtmlElemUtil.setProperty(elem, CSS_PROP_ICON_MR_RG, iconMarginLfRg?.toString().concat('px'));
   }
   private setCssHoverable(isHoverable: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'glnch-hoverable', isHoverable);
     HtmlElemUtil.setAttr(renderer, elem, 'hov', isHoverable ? '' : null);
+  }
+  private setCssCursor(isAdded: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setAttr(renderer, elem, CSS_ATTR_CUR, isAdded ? '' : null);
   }
 
   private settingExterior(exteriorVal: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {

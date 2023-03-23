@@ -1,73 +1,72 @@
 /*# sourceURL=gln-chip.component.scss */
 
 @import '../_styles/mx-display-inline-flex.scss';
+@import '../_styles/mx-justify-content.scss';
+@import '../_styles/mx-align-items.scss';
+@import '../_styles/mx-user-select.scss';
+@import '../_styles/mx-appearance.scss';
 
 gln-chip {
+  --glnch--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnch--default-s: var(--glncl-default-s, var(--gln-default-s));
+  --glnch--default-l: var(--glncl-default-l, var(--gln-default-l));
+  --glnch--default-cl: hsl(var(--glnch--default-h),var(--glnch--default-s),var(--glnch--default-l));
 
-  @include mxDisplayInlineFlex();
-  -webkit-box-align: center;
-  align-items: center;
-  background-color: transparent;
-  box-sizing: border-box;
-  height: var(--glnch--size, 32px);
-  -webkit-box-pack: center;
-  justify-content: center;
-  line-height: 1.5;
-  outline: 0px;
-  padding: 0px;
-  text-decoration: none;
-  vertical-align: middle;
-  white-space: nowrap;
+  --glnch--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
+  --glnch--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
+  --glnch--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
+  --glnch--default-bg-cl: hsl(var(--glnch--default-bg-h), var(--glnch--default-bg-s), var(--glnch--default-bg-l));
 
   &[ext-f] {
-    --glnch-bg-cl: rgba(0, 0, 0, 0.08);
+    --glnch--bg-cl: rgba(0, 0, 0, 0.08);
+    --glnch--hov-bg-cl: hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.14); // rgba(0, 0, 0, 0.12);
     --glnch-brd-wd: 0px;
-    // --def-lb-pd-lf: 1em; // 16px
-    // --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%, 0.3));
-    &[hov]:hover {
-      background-color: rgba(0, 0, 0, 0.12);
-    }
+    --glntr-ripple-cl:  var(--glnch-ripple-cl, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.24));
   }
   &[ext-o] {
-    --glnch-bg-cl: transparent;
+    --glnch--bg-cl: transparent;
+    --glnch--hov-bg-cl: hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.06); // rgba(0, 0, 0, 0.04);
     --glnch-brd-wd: 1px;
     --glnch-brd-cl: rgb(189, 189, 189);
-    &[hov]:hover {
-      background-color: rgba(0, 0, 0, 0.04);
-    }
-    // --def-lb-pd-lf: 0.9375em; // 15px
-    // --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
+    --glntr-ripple-cl:  var(--glnch-ripple-cl, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.15));
   }
 
-
-  background-color: var(--glnch-bg-cl);
+  @include mxDisplayInlineFlex();
+  @include mxAlignItems(center);
+  background-color: var(--glnch--bg-cl);
   border-color: var(--glnch-brd-cl);
   border-style: solid;
   border-width: var(--glnch-brd-wd);
   border-radius: var(--glnch--brd-rd, 16px);
+  box-sizing: border-box;
+  color: var(--glnch-def-cl, var(--glnch--default-cl)); // hsla(0, 0%, 0%, 0.87); // #color: rgba(0, 0, 0, 0.87);
+  height: var(--glnch--size, 32px);
+  @include mxJustifyContent(center);
+  outline: 0px;
+  padding: 0px;
+  position: relative;  // For TouchRipple
+  text-decoration: none;
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  vertical-align: middle;
+  white-space: nowrap;
 
-  &[hov] {
-    position: relative;
-    margin: 0px;
-    appearance: none;
-    user-select: none;
+  &:not([dis])[hov]:hover {
+    background-color: var(--glnch--hov-bg-cl);
+  }
+  &[cur] {
+    @include mxAppearance(none);
+    margin: 0;
+    @include mxUserSelect(none);
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
   }
-  &:not([hov]) {
+  &:not([cur]) {
     cursor: default;
   }
 
-  // MuiChip-root MuiChip-outlined   // MuiChip-sizeMedium   // MuiChip-colorDefault   // MuiChip-outlinedDefault
-  // css-j5vx7t
-  max-width: 100%;
-  // font-size: 0.8125rem;
-  color: rgba(0, 0, 0, 0.87);
-
-  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-
   // MuiChip-label MuiChip-labelMedium css-9iedg7
   &>[glnch-label] {
+    display: inline-block;
     overflow: hidden;
     padding-left: 1em;
     padding-right: 1em;
@@ -75,42 +74,49 @@ gln-chip {
     white-space: nowrap;
   }
 
-  &>[glnch-del] {
-    user-select: none;
-    width: 1em;
-    height: 1em;
+  &>[glnch-svg] {
+    outline: 1px solid green; // #temp
     display: inline-block;
     fill: currentcolor;
     flex-shrink: 0;
+    height: var(--glnch--icon-sz, 1.5rem); // 22px; 1.5rem=1.5*16=24 //1em;
+    
     transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    // font-size: 1.5rem;
-    &:hover {
-      color: rgba(0, 0, 0, 0.4);  
-    }
-    -webkit-tap-highlight-color: transparent;
+    @include mxUserSelect(none); 
+    width: var(--glnch--icon-sz, 1.5rem); // 22px; 1.5rem=1.5*16=24  //1em;
+  }
+  &>[glnch-del] {
     color: rgba(0, 0, 0, 0.26);
-    font-size: var(--glnch--icon-sz, 1.5rem); // 22px;
     cursor: pointer;
-    margin: 0px 5px 0px -6px;
+    margin-left: var(--glnch-icon-mr-lf,var(--glnch--icon-mr-lf, 0.3125rem));
+    margin-right: var(--glnch-icon-mr-rg, var(--glnch--icon-mr-rg, 0.3125rem));
+    // transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    -webkit-tap-highlight-color: transparent;
+    &:hover {
+      color: rgba(0, 0, 0, 0.4);
+    }
   }
 
-  // cursor: default;
+  // Ornament "padding".
+  &>[gln-orn-rg] {
+    order: 1;
+  }
+  &>[gln-orn-lf]~[glnch-pd-hor] {
+    --glnch--orn-lf: 0;
+  }
+  &>[gln-orn-rg]~[glnch-pd-hor] {
+    --glnch--orn-rg: 0;
+  }
+  &>[glnch-pd-hor] {
+    padding-left: var(--glnch--orn-lf, var(--glnch-pd-lf, var(--glnchf--pd-lf, 1em)));
+    padding-right: var(--glnch--orn-rg, var(--glnch-pd-rg, var(--glnchf--pd-rg, 1em)));
+  }
 
-  // position: relative;
-  // margin: 0px;
-  // appearance: none;
-  // user-select: none;
-  // -webkit-tap-highlight-color: transparent;
-  // cursor: pointer;
+
+  // MuiChip-root MuiChip-outlined   // MuiChip-sizeMedium   // MuiChip-colorDefault   // MuiChip-outlinedDefault
+  // css-j5vx7t
+  max-width: 100%;
+  // font-size: 0.8125rem;
 
 
-  // cursor: default;
-
-  // position: relative;
-  // margin: 0px;
-  // appearance: none;
-  // user-select: none;
-  // -webkit-tap-highlight-color: transparent;
-  // cursor: pointer;
-  
 }
