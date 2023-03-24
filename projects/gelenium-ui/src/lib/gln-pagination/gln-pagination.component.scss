@@ -121,7 +121,7 @@ gln-pagination {
         --glnbt-def-bg-cl: var(--glnpg-sel-def-bg-cl, hsl(var(--glnpg--primary-h), var(--glnpg--primary-s), var(--glnpg--primary-l)));
 
         --glnbt-hov-lb-cl: var(--glnpg-sel-hov-lb-cl, hsl(var(--glnpg--default-bg-h), var(--glnpg--default-bg-s), var(--glnpg--default-bg-l)));
-        --glnbt-hov-bg-cl: var(--glnpg-sel-hov-bg-cl, hsl(var(--glnpg--primary-h), var(--glnpg--primary-s), calc(var(--glnpg--primary-l) - 10%)));
+        --glnbt-hov-bg-cl: var(--glnpg-sel-hov-bg-cl, hsl(calc(var(--glnpg--primary-h) + 10), var(--glnpg--primary-s), var(--glnpg--primary-l)));
 
         --glnbt-dis-bg-cl: var(--glnpg-sel-dis-bg-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.08));
 
