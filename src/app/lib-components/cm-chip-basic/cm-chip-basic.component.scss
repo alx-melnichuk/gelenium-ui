@@ -29,22 +29,35 @@ app-cm-chip-basic {
     font-size: 13px;
   }
   .chor-text {
-    color: blue;
+    color: black;
     font-weight: 600;
     margin-right: 10px;
     margin-left: 10px;
   }
   .chor-uncode {
-    color: blue;
+    color: black;
     margin-right: 7px;
     margin-left: 7px;
   }
   .chor-svg {
-    fill: blue;
+    fill: black;
     height: 24px;
     margin-right: 5px;
     margin-left: 5px;
     width: 24px;
+  }
+
+  // Page: "Palette"
+  .chpl-fn-sz {
+    font-size: 13px;
+  }
+  .chpl-elem {
+    min-width: 20ch;
+  }
+  .chpl-customer {
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
   }
 
 }
