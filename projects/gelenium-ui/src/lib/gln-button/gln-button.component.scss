@@ -112,6 +112,7 @@ gln-button {
 
     --glnbt--lb-cl-hov: hsl(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), var(--glnbt--default-bg-l));
     --glnbt--bg-cl-hov: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), calc(var(--glnbt--primary-l) - 10%));
+    --glnbt--bg-cl-hov: hsl(calc(var(--glnbt--primary-h) + 5), var(--glnbt--primary-s), var(--glnbt--primary-l));
 
     --glnbt--bg-cl-dis: hsla(var(--glnbt--default-h), var(--glnbt--default-s), var(--glnbt--default-l), 0.12); // rgba(0, 0, 0, 0.12);
   }
