@@ -1,6 +1,4 @@
 import {
-  AfterContentInit,
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -27,8 +25,6 @@ import { GlnChipConfig } from './gln-chip-config.interface';
 const EXTERIOR: { [key: string]: string } = { outlined: 'outlined', filled: 'filled' };
 const SIZE: { [key: string]: number } = { short: 24, little: 28, small: 32, middle: 36, wide: 40 };
 
-const CSS_ATTR_CUR = 'cur';
-
 const CSS_PROP_SIZE = '--glnch--size';
 const CSS_PROP_BRD_RD = '--glnch--brd-rd';
 const CSS_PROP_ICON_SZ = '--glnch--icon-sz';
@@ -47,7 +43,7 @@ let uniqueIdCounter = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit, AfterViewInit {
+export class GlnChipComponent implements OnChanges, OnInit {
   @Input()
   public id = `glnch-${uniqueIdCounter++}`;
   @Input()
@@ -59,7 +55,9 @@ export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit, Af
   @Input()
   public isDeletable: string | boolean | null | undefined;
   @Input()
-  public isHoverable: string | boolean | null | undefined;
+  public isElevation: string | boolean | null | undefined;
+  @Input()
+  public isNoRipple: string | boolean | null | undefined;
   @Input()
   public label: string | null | undefined;
   @Input()
@@ -67,8 +65,6 @@ export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit, Af
 
   @Output()
   readonly deleted: EventEmitter<void> = new EventEmitter();
-  @Output()
-  readonly ripple: EventEmitter<void> = new EventEmitter();
 
   // @ContentChildren(GlnOrnamentLeftDirective, { descendants: true })
   // public ornamLeftList!: QueryList<GlnOrnamentLeftDirective>;
@@ -81,7 +77,7 @@ export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit, Af
   public exteriorVal: string | null = null; // Binding attribute "exterior".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isDeletableVal: boolean | null = null; // Binding attribute "isDeletable".
-  public isHoverableVal: boolean | null = null; // Binding attribute "isHoverable".
+  public isElevationVal: boolean | null = null; // Binding attribute "isElevation".
   public isNoRippleVal: boolean | null = null; // Binding attribute "isNoRipple".
   public sizeVal: number | null = null; // Binding attribute "size".
 
@@ -116,25 +112,22 @@ export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit, Af
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabledVal || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabledVal ? '' : null);
     }
-    let isCursor: boolean = false;
     if (changes['isDeletable'] || (changes['config'] && this.isDeletable == null && this.currConfig.isDeletable != null)) {
       this.isDeletableVal = BooleanUtil.init(this.isDeletable) ?? !!this.currConfig.isDeletable;
       this.setCssDeletable(this.isDeletableVal, this.renderer, this.hostRef);
-      isCursor = true;
     }
-    if (changes['isHoverable'] || (changes['config'] && this.isHoverable == null && this.currConfig.isHoverable != null)) {
-      this.isHoverableVal = BooleanUtil.init(this.isHoverable) ?? !!this.currConfig.isHoverable;
-      this.setCssHoverable(this.isHoverableVal, this.renderer, this.hostRef);
-      isCursor = true;
+    if (changes['isElevation'] || (changes['config'] && this.isElevation == null && this.currConfig.isElevation != null)) {
+      this.isElevationVal = BooleanUtil.init(this.isElevation) ?? !!this.currConfig.isElevation;
+      this.setCssElevation(this.isElevationVal, this.renderer, this.hostRef);
+    }
+    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
+      this.isNoRippleVal = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
+      this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
       this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       this.setCssSize(this.sizeVal, this.hostRef);
-    }
-
-    if (isCursor) {
-      this.setCssCursor(!!this.isDeletableVal || !!this.isHoverableVal, this.renderer, this.hostRef);
     }
   }
 
@@ -146,37 +139,23 @@ export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit, Af
       this.exteriorVal = EXTERIOR[this.currConfig.exterior || ''] || EXTERIOR['outlined'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
     }
-    let isCursor: boolean = false;
     if (this.isDeletableVal == null) {
       this.isDeletableVal = !!this.currConfig.isDeletable;
       this.setCssDeletable(this.isDeletableVal, this.renderer, this.hostRef);
-      isCursor = true;
     }
-    if (this.isHoverableVal == null) {
-      this.isHoverableVal = !!this.currConfig.isHoverable;
-      this.setCssHoverable(this.isHoverableVal, this.renderer, this.hostRef);
-      isCursor = true;
+    if (this.isElevationVal == null) {
+      this.isElevationVal = !!this.currConfig.isElevation;
+      this.setCssElevation(this.isElevationVal, this.renderer, this.hostRef);
+    }
+    if (this.isNoRippleVal == null) {
+      this.isNoRippleVal = !!this.currConfig.isNoRipple;
+      this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
     if (this.sizeVal == null) {
       const sizeStr: string = (this.currConfig.size || '').toString();
       this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       this.setCssSize(this.sizeVal, this.hostRef);
     }
-
-    if (isCursor) {
-      this.setCssCursor(!!this.isDeletableVal || !!this.isHoverableVal, this.renderer, this.hostRef);
-    }
-  }
-
-  public ngAfterContentInit(): void {
-    // this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, this.getElements(this.ornamLeftList));
-    // const rhombRef: ElementRef<HTMLElement> | undefined = this.ornamRhomb?.hostRef;
-    // this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList, rhombRef));
-  }
-
-  ngAfterViewInit(): void {
-    // const crossWidth: number | null = this.ornamCross?.hostRef.nativeElement.clientWidth || null;
-    // HtmlElemUtil.setProperty(this.hostRef, CSS_PROP_RIPPLE_RG, crossWidth?.toString().concat('px'));
   }
 
   public clickDeleted(event: MouseEvent | null | undefined): void {
@@ -199,6 +178,10 @@ export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit, Af
     HtmlElemUtil.setClass(renderer, elem, 'glnch-deletable', isDeletable);
     HtmlElemUtil.setAttr(renderer, elem, 'del', isDeletable ? '' : null);
   }
+  private setCssElevation(isElevation: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'glnch-elevation', isElevation);
+    HtmlElemUtil.setAttr(renderer, elem, 'ele', isElevation ? '' : null);
+  }
   private setCssSize(size: number, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setProperty(elem, CSS_PROP_SIZE, (size > 0 ? size.toString() : null)?.concat('px'));
     HtmlElemUtil.setProperty(elem, CSS_PROP_BRD_RD, (size > 0 ? Math.round((size / 2) * 100) / 100 : null)?.toString().concat('px'));
@@ -206,13 +189,6 @@ export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit, Af
     const iconMarginLfRg: number | null = size > 0 ? Math.round(size * 0.169) : null;
     HtmlElemUtil.setProperty(elem, CSS_PROP_ICON_MR_LF, iconMarginLfRg?.toString().concat('px'));
     HtmlElemUtil.setProperty(elem, CSS_PROP_ICON_MR_RG, iconMarginLfRg?.toString().concat('px'));
-  }
-  private setCssHoverable(isHoverable: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setClass(renderer, elem, 'glnch-hoverable', isHoverable);
-    HtmlElemUtil.setAttr(renderer, elem, 'hov', isHoverable ? '' : null);
-  }
-  private setCssCursor(isAdded: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setAttr(renderer, elem, CSS_ATTR_CUR, isAdded ? '' : null);
   }
 
   private settingExterior(exteriorVal: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
@@ -222,5 +198,9 @@ export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit, Af
     const isFilled = exteriorVal === EXTERIOR['filled'];
     HtmlElemUtil.setClass(renderer, elem, 'glnch-filled', isFilled);
     HtmlElemUtil.setAttr(renderer, elem, 'ext-f', isFilled ? '' : null);
+  }
+  private settingNoRipple(noRipple: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-ripple', !!noRipple);
+    HtmlElemUtil.setAttr(renderer, elem, 'norip', noRipple ? '' : null);
   }
 }

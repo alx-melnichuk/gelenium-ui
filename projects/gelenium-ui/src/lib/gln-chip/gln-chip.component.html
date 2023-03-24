@@ -2,7 +2,7 @@
 
 <ng-content select="[gln-orn-rg]"></ng-content>
 
-<svg *ngIf="isDeletableVal"
+<svg *ngIf="!isDisabledVal && isDeletableVal"
   class="gln-chip-delete"
   gln-orn-rg
   glnch-svg
@@ -22,6 +22,6 @@
   {{ label }}
 </span>
 
-<gln-touch-ripple *ngIf="!isDisabledVal && !isNoRippleVal && isHoverableVal"
+<gln-touch-ripple *ngIf="!isDisabledVal && !isNoRippleVal"
   skip-events>
 </gln-touch-ripple>

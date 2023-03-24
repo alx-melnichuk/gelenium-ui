@@ -10,72 +10,132 @@ gln-chip {
   --glnch--default-h: var(--glncl-default-h, var(--gln-default-h));
   --glnch--default-s: var(--glncl-default-s, var(--gln-default-s));
   --glnch--default-l: var(--glncl-default-l, var(--gln-default-l));
-  --glnch--default-cl: hsl(var(--glnch--default-h),var(--glnch--default-s),var(--glnch--default-l));
 
-  --glnch--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
-  --glnch--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
-  --glnch--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
-  --glnch--default-bg-cl: hsl(var(--glnch--default-bg-h), var(--glnch--default-bg-s), var(--glnch--default-bg-l));
-
-  &[ext-f] {
-    --glnch--bg-cl: rgba(0, 0, 0, 0.08);
-    --glnch--hov-bg-cl: hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.14); // rgba(0, 0, 0, 0.12);
-    --glnch-brd-wd: 0px;
-    --glntr-ripple-cl:  var(--glnch-ripple-cl, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.24));
-  }
-  &[ext-o] {
-    --glnch--bg-cl: transparent;
-    --glnch--hov-bg-cl: hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.06); // rgba(0, 0, 0, 0.04);
-    --glnch-brd-wd: 1px;
-    --glnch-brd-cl: rgb(189, 189, 189);
-    --glntr-ripple-cl:  var(--glnch-ripple-cl, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.15));
-  }
-
+  @include mxAppearance(none);
   @include mxDisplayInlineFlex();
   @include mxAlignItems(center);
-  background-color: var(--glnch--bg-cl);
-  border-color: var(--glnch-brd-cl);
-  border-style: solid;
-  border-width: var(--glnch-brd-wd);
   border-radius: var(--glnch--brd-rd, 16px);
   box-sizing: border-box;
-  color: var(--glnch-def-cl, var(--glnch--default-cl)); // hsla(0, 0%, 0%, 0.87); // #color: rgba(0, 0, 0, 0.87);
   height: var(--glnch--size, 32px);
   @include mxJustifyContent(center);
+  margin: 0;
+  max-width: 100%;
   outline: 0px;
   padding: 0px;
   position: relative;  // For TouchRipple
   text-decoration: none;
-  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  @include mxUserSelect(none);
   vertical-align: middle;
   white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
 
-  &:not([dis])[hov]:hover {
-    background-color: var(--glnch--hov-bg-cl);
+  // Exterior: "outlined"
+  &[ext-o] {
+    border-width: 1px;
+    border-style: solid;
   }
-  &[cur] {
-    @include mxAppearance(none);
-    margin: 0;
-    @include mxUserSelect(none);
-    -webkit-tap-highlight-color: transparent;
+  &[ext-o] {
+    --glnch--lb-cl-def: hsl(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l));        // ~rgba(0, 0, 0, 0.87);
+    --glnch--br-cl-def: hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.50);
+
+    --glnch--lb-cl-hov: hsl(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l));
+    --glnch--br-cl-hov: hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.60);
+    --glnch--bg-cl-hov: hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.06); // ~rgba(0, 0, 0, 0.04);
+
+    --glnch--br-cl-dis: hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.35);
+  }
+  // Exterior: "filled"
+  &[ext-f] {
+    --glnch--basic-cl: hsl(var(--glncl-basic-cl-h), var(--glncl-basic-cl-s), var(--glncl-basic-cl-l)); // #!!
+    --glnch--basic-bg-def: hsl(var(--glncl-basic-bg-h), var(--glncl-basic-bg-s), var(--glncl-basic-bg-l)); // #!!
+    --glnch--basic-bg-hov: hsl(var(--glncl-basic-bg-h), var(--glncl-basic-bg-s), calc(var(--glncl-basic-bg-l) - 6%)); // #!!
+
+    --glnch--lb-cl-def: var(--glnch--basic-cl, hsl(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l))); // #!!
+    --glnch--bg-cl-def: var(--glnch--basic-bg-def, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.10)); // ~rgba(0, 0, 0, 0.08);
+
+    --glnch--lb-cl-hov: var(--glnch--basic-cl, hsl(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l))); // #!!
+    --glnch--bg-cl-hov: var(--glnch--basic-bg-hov, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.18)); // ~rgba(0, 0, 0, 0.12);
+
+    --glnch--bg-cl-dis: hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.11); // rgba(0, 0, 0, 0.12);
+  }
+
+  // Definition of internal variables by element state.
+  &:not([dis]) {
+    // The state without disabled, hover, focused.
+    &:not(:hover):not(:focus):not(:focus-within):not([foc]) {
+      --glnch--label-cl: var(--glnch-def-lb-cl, var(--glnch--lb-cl-def));
+      --glnch--border-cl: var(--glnch-def-br-cl, var(--glnch--br-cl-def));
+      --glnch--bground-cl: var(--glnch-def-bg-cl, var(--glnch--bg-cl-def));
+    } // The state without disabled and with hover or with hover, focused.
+    &:hover, &:hover:focus, &:hover:focus-within, &:hover[foc] {
+      --glnch--label-cl: var(--glnch-hov-lb-cl, var(--glnch--lb-cl-hov));
+      --glnch--border-cl: var(--glnch-hov-br-cl, var(--glnch--br-cl-hov));
+      --glnch--bground-cl: var(--glnch-hov-bg-cl, var(--glnch--bg-cl-hov));
+    }
+    &:focus, &:focus-within, &[foc] {
+      --glnch--label-cl: var(--glnch-foc-lb-cl, var(--glnch-def-lb-cl, var(--glnch--lb-cl-def)));
+      --glnch--border-cl: var(--glnch-foc-br-cl, var(--glnch-def-br-cl, var(--glnch--br-cl-def)));
+      --glnch--bground-cl: var(--glnch-foc-bg-cl, var(--glnch-def-bg-cl, var(--glnch--bg-cl-def)));
+    }
+  } // The state with disabled.
+  &[dis] {
+    --glnch--label-cl: var(--glnch-dis-lb-cl, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.55));
+    --glnch--border-cl: var(--glnch-dis-br-cl, var(--glnch--br-cl-dis));
+    --glnch--bground-cl: var(--glnch-dis-bg-cl, var(--glnch--bg-cl-dis));
+  }
+  // --glnfr--label-cl  : var(--glnfr-dis-lb-cl, hsl(var(--glnfr--default-h), var(--glnfr--default-s), 50%));
+  // --glnfr--dcr-br-cl : var(--glnfr-dis-br-cl, hsl(var(--glnfr--default-h), var(--glnfr--default-s), 60%));
+  // --glnfr--dcr-bg-cl : var(--glnfr-dis-bg-cl, hsl(var(--glnfr--default-h), var(--glnfr--default-s), 92%));
+
+  // Define styles for all exteriors.
+  color           : var(--glnch--label-cl);
+  border-color    : var(--glnch--border-cl);
+  background-color: var(--glnch--bground-cl);
+
+  &[ext-f] {
+    --glntr-ripple-cl:  var(--glnch-ripple-cl, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.24));
+  }
+  &[ext-o] {
+    --glntr-ripple-cl:  var(--glnch-ripple-cl, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.15));
+  }
+
+  &:not([dis]) {
     cursor: pointer;
+    transition:
+      background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      border-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
-  &:not([cur]) {
+
+  &[dis] {
     cursor: default;
+    pointer-events: none;
+  }
+
+  // Elevation display.
+  &[ele] {
+    &:not(:hover):not(:active) {
+      box-shadow: var(--glnch-elevation, 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%));
+    }
+    &:hover {
+      box-shadow: var(--glnch-elevation, 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%));
+    }
+    &:active {
+      box-shadow: var(--glnch-elevation, 0px 4px 5px -3px rgb(0 0 0 / 20%), 0px 7px 9px 1px rgb(0 0 0 / 14%), 0px 2px 10px 2px rgb(0 0 0 / 12%))
+    }
   }
 
   // MuiChip-label MuiChip-labelMedium css-9iedg7
   &>[glnch-label] {
     display: inline-block;
     overflow: hidden;
-    padding-left: 1em;
-    padding-right: 1em;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   &>[glnch-svg] {
-    outline: 1px solid green; // #temp
+    // outline: 1px solid green; // #temp
     display: inline-block;
     fill: currentcolor;
     flex-shrink: 0;
@@ -86,14 +146,16 @@ gln-chip {
     width: var(--glnch--icon-sz, 1.5rem); // 22px; 1.5rem=1.5*16=24  //1em;
   }
   &>[glnch-del] {
-    color: rgba(0, 0, 0, 0.26);
+    --color01: rgba(0, 0, 0, 0.26);
+    color: rgba(0, 0, 0, 0.35);
     cursor: pointer;
     margin-left: var(--glnch-icon-mr-lf,var(--glnch--icon-mr-lf, 0.3125rem));
     margin-right: var(--glnch-icon-mr-rg, var(--glnch--icon-mr-rg, 0.3125rem));
     // transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     -webkit-tap-highlight-color: transparent;
     &:hover {
-      color: rgba(0, 0, 0, 0.4);
+      --color02: rgba(0, 0, 0, 0.4);
+      color: rgba(0, 0, 0, 0.5);
     }
   }
 
@@ -111,12 +173,5 @@ gln-chip {
     padding-left: var(--glnch--orn-lf, var(--glnch-pd-lf, var(--glnchf--pd-lf, 1em)));
     padding-right: var(--glnch--orn-rg, var(--glnch-pd-rg, var(--glnchf--pd-rg, 1em)));
   }
-
-
-  // MuiChip-root MuiChip-outlined   // MuiChip-sizeMedium   // MuiChip-colorDefault   // MuiChip-outlinedDefault
-  // css-j5vx7t
-  max-width: 100%;
-  // font-size: 0.8125rem;
-
 
 }
