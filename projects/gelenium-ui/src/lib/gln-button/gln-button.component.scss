@@ -27,18 +27,16 @@ gln-button {
 
   &[ext-c] {
     --def-lb-pd-lf: 1em; // 16px
-    --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%, 0.3));
+    --glntr-ripple-cl: var(--glnbt-ripple-cl, hsla(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%, 0.3));
   }
   &[ext-o] {
     --def-lb-pd-lf: 0.9375em; // 15px
-    --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
+    --glntr-ripple-cl: var(--glnbt-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
   }
   &[ext-t] {
     --def-lb-pd-lf: 0.5em; // 8px
-    --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
+    --glntr-ripple-cl: var(--glnbt-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
   }
-  // To pass the value to GlnTouchRipple.
-  --glntr-ripple-cl: var(--glntr--cl-ripple);
 
   &>[glnbt-clear] {
     appearance: none;
