@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
   HostListener,
   Inject,
   InjectionToken,
@@ -10,12 +9,12 @@ import {
   OnChanges,
   OnInit,
   Optional,
-  Output,
   Renderer2,
   SimpleChanges,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+
 import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
@@ -27,9 +26,6 @@ const SIZE: { [key: string]: number } = { short: 24, little: 28, small: 32, midd
 
 const CSS_PROP_SIZE = '--glnch--size';
 const CSS_PROP_BRD_RD = '--glnch--brd-rd';
-const CSS_PROP_ICON_SZ = '--glnch--icon-sz';
-const CSS_PROP_ICON_MR_LF = '--glnch--icon-mr-lf';
-const CSS_PROP_ICON_MR_RG = '--glnch--icon-mr-rg';
 
 export const GLN_CHIP_CONFIG = new InjectionToken<GlnChipConfig>('GLN_CHIP_CONFIG');
 
@@ -53,8 +49,6 @@ export class GlnChipComponent implements OnChanges, OnInit {
   @Input()
   public isDisabled: string | boolean | null | undefined;
   @Input()
-  public isDeletable: string | boolean | null | undefined;
-  @Input()
   public isElevation: string | boolean | null | undefined;
   @Input()
   public isNoRipple: string | boolean | null | undefined;
@@ -63,20 +57,12 @@ export class GlnChipComponent implements OnChanges, OnInit {
   @Input()
   public size: number | string | null | undefined; // 'short','small','middle','wide'
 
-  @Output()
-  readonly deleted: EventEmitter<void> = new EventEmitter();
-
-  // @ContentChildren(GlnOrnamentLeftDirective, { descendants: true })
-  // public ornamLeftList!: QueryList<GlnOrnamentLeftDirective>;
-  // @ContentChildren(GlnOrnamentRightDirective, { descendants: true })
-  // public ornamRightList!: QueryList<GlnOrnamentRightDirective>;
   @ViewChild(GlnTouchRippleComponent, { static: false })
   public touchRipple: GlnTouchRippleComponent | null = null;
 
   public currConfig: GlnChipConfig;
   public exteriorVal: string | null = null; // Binding attribute "exterior".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
-  public isDeletableVal: boolean | null = null; // Binding attribute "isDeletable".
   public isElevationVal: boolean | null = null; // Binding attribute "isElevation".
   public isNoRippleVal: boolean | null = null; // Binding attribute "isNoRipple".
   public sizeVal: number | null = null; // Binding attribute "size".
@@ -91,7 +77,7 @@ export class GlnChipComponent implements OnChanges, OnInit {
   }
 
   @HostListener('click', ['$event'])
-  public rippleTrigger(event: any, eventTarget: any): void {
+  public rippleTrigger(event: MouseEvent): void {
     // https://github.com/angular/angular/issues/9587 "event.stopImmediatePropagation() called from listeners not working"
     // Added Event.cancelBubble check to make sure there was no call to event.stopImmediatePropagation() in previous handlers.
     if (!!event && !event.cancelBubble && !this.isDisabledVal && this.touchRipple) {
@@ -111,10 +97,6 @@ export class GlnChipComponent implements OnChanges, OnInit {
       this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabledVal || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabledVal ? '' : null);
-    }
-    if (changes['isDeletable'] || (changes['config'] && this.isDeletable == null && this.currConfig.isDeletable != null)) {
-      this.isDeletableVal = BooleanUtil.init(this.isDeletable) ?? !!this.currConfig.isDeletable;
-      this.setCssDeletable(this.isDeletableVal, this.renderer, this.hostRef);
     }
     if (changes['isElevation'] || (changes['config'] && this.isElevation == null && this.currConfig.isElevation != null)) {
       this.isElevationVal = BooleanUtil.init(this.isElevation) ?? !!this.currConfig.isElevation;
@@ -139,10 +121,6 @@ export class GlnChipComponent implements OnChanges, OnInit {
       this.exteriorVal = EXTERIOR[this.currConfig.exterior || ''] || EXTERIOR['outlined'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
     }
-    if (this.isDeletableVal == null) {
-      this.isDeletableVal = !!this.currConfig.isDeletable;
-      this.setCssDeletable(this.isDeletableVal, this.renderer, this.hostRef);
-    }
     if (this.isElevationVal == null) {
       this.isElevationVal = !!this.currConfig.isElevation;
       this.setCssElevation(this.isElevationVal, this.renderer, this.hostRef);
@@ -158,10 +136,7 @@ export class GlnChipComponent implements OnChanges, OnInit {
     }
   }
 
-  public clickDeleted(event: MouseEvent | null | undefined): void {
-    event?.stopPropagation();
-    this.deleted.emit();
-  }
+  // ** Public methods **
 
   log(text: string): void {
     console.log(text);
@@ -174,10 +149,6 @@ export class GlnChipComponent implements OnChanges, OnInit {
     return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
   }
 
-  private setCssDeletable(isDeletable: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setClass(renderer, elem, 'glnch-deletable', isDeletable);
-    HtmlElemUtil.setAttr(renderer, elem, 'del', isDeletable ? '' : null);
-  }
   private setCssElevation(isElevation: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'glnch-elevation', isElevation);
     HtmlElemUtil.setAttr(renderer, elem, 'ele', isElevation ? '' : null);
@@ -185,10 +156,6 @@ export class GlnChipComponent implements OnChanges, OnInit {
   private setCssSize(size: number, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setProperty(elem, CSS_PROP_SIZE, (size > 0 ? size.toString() : null)?.concat('px'));
     HtmlElemUtil.setProperty(elem, CSS_PROP_BRD_RD, (size > 0 ? Math.round((size / 2) * 100) / 100 : null)?.toString().concat('px'));
-    HtmlElemUtil.setProperty(elem, CSS_PROP_ICON_SZ, (size > 0 ? Math.round(size * 0.672) : null)?.toString().concat('px'));
-    const iconMarginLfRg: number | null = size > 0 ? Math.round(size * 0.169) : null;
-    HtmlElemUtil.setProperty(elem, CSS_PROP_ICON_MR_LF, iconMarginLfRg?.toString().concat('px'));
-    HtmlElemUtil.setProperty(elem, CSS_PROP_ICON_MR_RG, iconMarginLfRg?.toString().concat('px'));
   }
 
   private settingExterior(exteriorVal: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
