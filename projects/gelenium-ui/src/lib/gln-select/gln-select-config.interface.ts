@@ -17,8 +17,8 @@ export interface GlnSelectConfig extends GlnFrameConfig {
   isNoRipple?: boolean | undefined;
   isPlaceholder?: boolean | undefined;
   isReadOnly?: boolean | undefined;
-  ornamLfAlign?: string | undefined; // GlnFrameOrnamAlignType
-  ornamRgAlign?: string | undefined; // GlnFrameOrnamAlignType
+  ornamLfAlign?: string | undefined; // 'default','center','flex-start','flex-end','baseline','stretch'
+  ornamRgAlign?: string | undefined; // 'default','center','flex-start','flex-end','baseline','stretch'
   overlayClasses?: string | string[] | undefined;
   classes?: string | string[] | Set<string> | { [key: string]: unknown } | undefined;
   position?: string | undefined; // Horizontal position = 'start'-default | 'center' | 'end';

@@ -145,9 +145,9 @@ export class GlnSelectComponent
   @Input()
   public minLength: number | null | undefined;
   @Input()
-  public ornamLfAlign: string | null | undefined; // OrnamAlignType
+  public ornamLfAlign: string | null | undefined; // 'default','center','flex-start','flex-end','baseline','stretch'
   @Input()
-  public ornamRgAlign: string | null | undefined; // OrnamAlignType
+  public ornamRgAlign: string | null | undefined; // 'default','center','flex-start','flex-end','baseline','stretch'
   @Input()
   /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
   public classes: string | string[] | Set<string> | { [key: string]: unknown } = '';

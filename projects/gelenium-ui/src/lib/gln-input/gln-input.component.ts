@@ -123,9 +123,9 @@ export class GlnInputComponent
   @Input()
   public minLength: number | null | undefined;
   @Input()
-  public ornamLfAlign: string | null | undefined; // OrnamAlignType
+  public ornamLfAlign: string | null | undefined; // 'default','center','flex-start','flex-end','baseline','stretch'
   @Input()
-  public ornamRgAlign: string | null | undefined; // OrnamAlignType
+  public ornamRgAlign: string | null | undefined; // 'default','center','flex-start','flex-end','baseline','stretch'
   @Input()
   public pattern: string | RegExp = '';
   @Input()
