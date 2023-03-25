@@ -32,11 +32,8 @@ export class CmChipBasicComponent {
   isShowOrnaments05a = true; // false;
 
   // Page: "Size"
-  public isDeletable03a: boolean = false;
-  public isDeletable03b: boolean = false;
 
   // Page: "Pallete"
-  public isDeletable06a: boolean = false;
   public isElevation06a: boolean = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -46,7 +43,8 @@ export class CmChipBasicComponent {
     console.log(text);
   }
 
-  public showMsg(text: string): void {
-    alert(text);
+  public showMsg(text: string, $event: MouseEvent | undefined = undefined): void {
+    $event?.stopPropagation();
+    console.log(text);
   }
 }

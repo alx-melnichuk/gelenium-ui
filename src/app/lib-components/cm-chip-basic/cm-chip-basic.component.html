@@ -71,9 +71,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
         <li>"filled";</li>
       </ul>
     </li>
-    <li>
-      "isDeletable" - indicates that a delete button is displayed;
-    </li>
     <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
     <li>
       "isElevation" - a sign displaying the height of the element (isElevation);
@@ -83,19 +80,19 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
 </section>
 
 
-<div *ngIf="isShowAttributes02a"
+<!-- <div *ngIf="isShowAttributes02a"
   class="app-group">
 
   <div class="app-elem">
     <div>
       <small>
-        <em>Attribute: isDeletable</em>
+        <em>Attribute: ?</em>
       </small>
     </div>
     <gln-chip class="cha1-fn-sz-13"
       exterior="outlined"
       label="Outlined A"
-      isDeletable
+      ?
       (deleted)="showMsg('Outlined A')">
     </gln-chip>
   </div>
@@ -103,18 +100,18 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
   <div class="app-elem">
     <div>
       <small>
-        <em>Attribute: isDeletable</em>
+        <em>Attribute: ?</em>
       </small>
     </div>
     <gln-chip class="cha1-fn-sz-13"
       exterior="filled"
       label="Filled A"
-      isDeletable
+      ?
       (deleted)="showMsg('Filled A')">
     </gln-chip>
   </div>
 
-</div>
+</div> -->
 
 <div *ngIf="isShowAttributes02a"
   class="app-group">
@@ -252,14 +249,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
   </p>
 </section>
 
-<section mr-vr>
-  <label>
-    <input type="checkbox"
-      (change)="isDeletable03a=!isDeletable03a"
-      [checked]="isDeletable03a" />
-    is Deletable
-  </label>
-</section>
 
 <div *ngIf="isShowSize03a"
   class="app-group">
@@ -273,8 +262,7 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chsz-fn-sz-13"
       exterior="outlined"
       label="Outlined 'Short'"
-      size="short"
-      [isDeletable]="isDeletable03a">
+      size="short">
     </gln-chip>
   </div>
 
@@ -287,8 +275,7 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chsz-fn-sz-13"
       exterior="filled"
       label="Filled 'Short'"
-      size="short"
-      [isDeletable]="isDeletable03a">
+      size="short">
     </gln-chip>
   </div>
 
@@ -306,8 +293,7 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chsz-fn-sz-13"
       exterior="outlined"
       label="Outlined 'Little'"
-      size="little"
-      [isDeletable]="isDeletable03a">
+      size="little">
     </gln-chip>
   </div>
 
@@ -320,8 +306,7 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chsz-fn-sz-13"
       exterior="filled"
       label="Filled 'Little'"
-      size="little"
-      [isDeletable]="isDeletable03a">
+      size="little">
     </gln-chip>
   </div>
 
@@ -339,8 +324,7 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chsz-fn-sz-13"
       exterior="outlined"
       label="Outlined 'Small'"
-      size="small"
-      [isDeletable]="isDeletable03a">
+      size="small">
     </gln-chip>
   </div>
 
@@ -353,8 +337,7 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chsz-fn-sz-13"
       exterior="filled"
       label="Filled 'Small'"
-      size="small"
-      [isDeletable]="isDeletable03a">
+      size="small">
     </gln-chip>
   </div>
 
@@ -372,8 +355,7 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chsz-fn-sz-14"
       exterior="outlined"
       label="Outlined 'Middle'"
-      size="middle"
-      [isDeletable]="isDeletable03a">
+      size="middle">
     </gln-chip>
   </div>
 
@@ -386,8 +368,7 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chsz-fn-sz-14"
       exterior="filled"
       label="Filled 'Middle'"
-      size="middle"
-      [isDeletable]="isDeletable03a">
+      size="middle">
     </gln-chip>
   </div>
 
@@ -405,8 +386,7 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chsz-fn-sz-15"
       exterior="outlined"
       label="Outlined 'Wide'"
-      size="wide"
-      [isDeletable]="isDeletable03a">
+      size="wide">
     </gln-chip>
   </div>
 
@@ -419,8 +399,7 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chsz-fn-sz-15"
       exterior="filled"
       label="Filled 'Wide'"
-      size="wide"
-      [isDeletable]="isDeletable03a">
+      size="wide">
     </gln-chip>
   </div>
 
@@ -439,16 +418,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
 </h4>
 
 
-<section mr-vr>
-  <label>
-    <input type="checkbox"
-      (change)="isDeletable03b=!isDeletable03b"
-      [checked]="isDeletable03b" />
-    is Deletable
-  </label>
-</section>
-
-
 <div *ngIf="isShowSize03a"
   class="app-group">
 
@@ -461,7 +430,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chsz-fn-sz-13"
       exterior="outlined"
       label="Outlined 'size: 30px'"
-      [isDeletable]="isDeletable03b"
       size="30">
     </gln-chip>
   </div>
@@ -475,7 +443,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chsz-fn-sz-13"
       exterior="filled"
       label="Filled 'size: 30px'"
-      [isDeletable]="isDeletable03b"
       size="30">
     </gln-chip>
   </div>
@@ -518,6 +485,7 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     you need to specify the value of horizontal indents.
   </p>
 </section>
+
 
 <section *ngIf="isShowOrnaments05a"
   mr-vr
@@ -688,21 +656,77 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
 
 <hr br-nn />
 
-<section mr-vr>
-  <label>
-    <input type="checkbox"
-      (change)="isDeletable06a=!isDeletable06a"
-      [checked]="isDeletable06a" />
-    is Deletable&nbsp;&nbsp;
-  </label>
 
+<section *ngIf="isShowOrnaments05a"
+  mr-vr
+  id="ornament-button">
+  <h4 class="app-hover-link">
+    Ornament - button.
+    <a [href]="urlCmChip + '#ornament-button'">#</a>
+  </h4>
+  <p>
+    A "button" element can be used as an ornament.
+    <br />
+    When a "button" element is clicked, a message is written to the console.
+    <br />
+    If an event is being processed on the "ornament" and you do not want the ripple
+    effect to work, then you need to cancel the further propagation of this event
+    ($event.stopPropagation();).
+  </p>
+</section>
+
+
+<div *ngIf="isShowOrnaments05a"
+  class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-lf" + button.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="outlined"
+      label="Outlined orn-left (button)">
+      <button gln-orn-lf
+        title="delete"
+        class="chor-btn chor-btn-bg"
+        (click)="showMsg('Outlined orn-left (button)', $event)">
+        <span class="chor-label">&#x2715;</span>
+      </button>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-rg" + button.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="filled"
+      label="Filled orn-right (button)">
+      <button gln-orn-rg
+        title="delete"
+        class="chor-btn"
+        (click)="showMsg('Filled orn-right (button)', $event)">
+        <i class="chor-del"></i>
+      </button>
+    </gln-chip>
+  </div>
+
+</div>
+
+<!-- source -->
+
+<hr br-nn />
+
+
+<!-- Page: Pallete -->
+
+<section mr-vr>
   <label>
     <input type="checkbox"
       (change)="isElevation06a=!isElevation06a"
       [checked]="isElevation06a" />
     is Elevation
   </label>
-
 </section>
 
 
@@ -715,7 +739,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="outlined"
       label="Outlined - Primary"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{ default: 'primary' }">
     </gln-chip>
@@ -728,7 +751,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="filled"
       label="Filled - Primary"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{ default: 'primary' }">
     </gln-chip>
@@ -741,7 +763,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="filled"
       label="Filled - Primary"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{  'basic-cl': 'default-bg'
         , 'basic-bg': 'primary' }">
@@ -759,7 +780,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="outlined"
       label="Outlined - Danger"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{ default: 'danger' }">
     </gln-chip>
@@ -772,7 +792,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="filled"
       label="Filled - Danger"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{ default: 'danger' }">
     </gln-chip>
@@ -785,7 +804,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="filled"
       label="Filled - Danger"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{  'basic-cl': 'default-bg'
         , 'basic-bg': 'danger' }">
@@ -803,7 +821,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="outlined"
       label="Outlined - Success"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{ 'default': 'success' }">
     </gln-chip>
@@ -816,7 +833,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="filled"
       label="Filled - Success"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{ default: 'success' }">
     </gln-chip>
@@ -829,7 +845,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="filled"
       label="Filled - Success"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{  'basic-cl': 'default-bg'
         , 'basic-bg': 'success' }">
@@ -847,7 +862,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="outlined"
       label="Outlined - Info"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{ default: 'info' }">
     </gln-chip>
@@ -860,7 +874,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="filled"
       label="Filled - Info"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{ 'basic-cl': 'default'
         , default: 'info' }">
@@ -874,7 +887,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="filled"
       label="Filled - Info"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{  'basic-cl': 'default-bg'
         , 'basic-bg': 'info' }">
@@ -892,7 +904,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="outlined"
       label="Outlined - Warning"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{ default: 'warning' }">
     </gln-chip>
@@ -905,7 +916,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="filled"
       label="Filled - Warning"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{ 'basic-cl': 'default'
         , default: 'warning' }">
@@ -919,7 +929,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz"
       exterior="filled"
       label="Filled - Warning"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{  'basic-cl': 'default-bg'
         , 'basic-bg': 'warning' }">
@@ -937,7 +946,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz chpl-customer"
       exterior="outlined"
       label="Outlined - Customer"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{ default: 'customer' }">
     </gln-chip>
@@ -950,7 +958,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz chpl-customer"
       exterior="filled"
       label="Filled - Customer"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{ 'basic-cl': 'default'
         , default: 'customer' }">
@@ -964,7 +971,6 @@ import &#123; GlnChipModule &#125; from 'gelenium-ui';</pre>
     <gln-chip class="chpl-fn-sz chpl-customer"
       exterior="filled"
       label="Filled - Customer"
-      [isDeletable]="isDeletable06a"
       [isElevation]="isElevation06a"
       [glnColor]="{  'basic-cl': 'default-bg'
         , 'basic-bg': 'customer' }">
