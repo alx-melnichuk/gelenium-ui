@@ -39,7 +39,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { GlnOrnament, ORNAMENT_ALIGN } from '../directives/gln-ornament/gln-ornament.interface';
+import { ORNAMENT_ALIGN } from '../directives/gln-ornament/gln-ornament.interface';
 import { GlnOrnamentOwner, GLN_ORNAMENT_OWNER } from '../directives/gln-ornament/gln-ornament-owner.interface';
 import { GlnOrnamentOwnerUtil } from '../directives/gln-ornament/gln-ornament-owner.util';
 import { CSS_ATTR_ORN_LF, CSS_PROP_ORN_PD_LF, GlnOrnamentLeftDirective } from '../directives/gln-ornament/gln-ornament-left.directive';
@@ -50,6 +50,7 @@ import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnInputConfig } from './gln-input-config.interface';
+import { GlnOrnamentUtil } from '../directives/gln-ornament/gln-ornament.util';
 
 let uniqueIdCounter = 0;
 
@@ -204,12 +205,13 @@ export class GlnInputComponent
     if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlign == null && this.currConfig.ornamLfAlign != null)) {
       this.ornamLfAlignVal = ORNAMENT_ALIGN[this.ornamLfAlign || this.currConfig.ornamLfAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
-      this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, this.getElements(this.ornamLeftList));
+      this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, GlnOrnamentUtil.getElements(this.ornamLeftList));
     }
     if (changes['ornamRgAlign'] || (changes['config'] && this.ornamRgAlign == null && this.currConfig.ornamRgAlign != null)) {
       this.ornamRgAlignVal = ORNAMENT_ALIGN[this.ornamRgAlign || this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
-      this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList));
+      const ornamRgAlign: string = this.ornamRgAlignVal || '';
+      this.settingOrnamentList(CSS_ATTR_ORN_RG, ornamRgAlign, this.renderer, GlnOrnamentUtil.getElements(this.ornamRightList));
     }
     if (changes['isPlaceholder'] || (changes['config'] && this.isPlaceholder == null && this.currConfig.isPlaceholder != null)) {
       this.isPlaceholderVal = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
@@ -257,8 +259,8 @@ export class GlnInputComponent
       // Add an attribute that disables animation on initialization.
       this.isAttrHideAnimation = true;
     }
-    this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, this.getElements(this.ornamLeftList));
-    this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList));
+    this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, GlnOrnamentUtil.getElements(this.ornamLeftList));
+    this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, GlnOrnamentUtil.getElements(this.ornamRightList));
   }
 
   // ** interface ControlValueAccessor - start **
@@ -333,7 +335,7 @@ export class GlnInputComponent
   // ** GlnOrnamentOwner - start **
 
   public changeOrnament(isRemove: boolean, elementRef: ElementRef<HTMLElement>, isRight: boolean): void {
-    const ornamList: ElementRef<HTMLElement>[] = this.getElements(!isRight ? this.ornamLeftList : this.ornamRightList);
+    const ornamList: ElementRef<HTMLElement>[] = GlnOrnamentUtil.getElements(!isRight ? this.ornamLeftList : this.ornamRightList);
     const ornamWidth: number | null = GlnOrnamentOwnerUtil.getWidthAllOrnaments(ornamList, isRemove, elementRef);
     const nameProperty: string = !isRight ? CSS_PROP_ORN_PD_LF : CSS_PROP_ORN_PD_RG;
     HtmlElemUtil.setProperty(this.frameComp.hostRef, nameProperty, ornamWidth?.toString().concat('px'));
@@ -401,10 +403,6 @@ export class GlnInputComponent
       newValidator.push(Validators.maxLength(maxLength));
     }
     this.formControl.setValidators(newValidator);
-  }
-
-  private getElements(queryList: QueryList<GlnOrnament> | null): ElementRef<HTMLElement>[] {
-    return (queryList?.toArray() || []).map((item: GlnOrnament) => item.hostRef);
   }
 
   private settingError(error: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {

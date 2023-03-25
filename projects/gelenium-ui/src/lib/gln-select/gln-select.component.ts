@@ -40,7 +40,7 @@ import {
 } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { GlnOrnament, ORNAMENT_ALIGN } from '../directives/gln-ornament/gln-ornament.interface';
+import { ORNAMENT_ALIGN } from '../directives/gln-ornament/gln-ornament.interface';
 import { GlnOrnamentOwner, GLN_ORNAMENT_OWNER } from '../directives/gln-ornament/gln-ornament-owner.interface';
 import { GlnOrnamentOwnerUtil } from '../directives/gln-ornament/gln-ornament-owner.util';
 import { CSS_ATTR_ORN_LF, CSS_PROP_ORN_PD_LF, GlnOrnamentLeftDirective } from '../directives/gln-ornament/gln-ornament-left.directive';
@@ -62,6 +62,7 @@ import { GlnSelectOpenUtil } from './gln-select-open.util';
 import { GlnSelectTriggerDirective, GLN_SELECT_TRIGGER } from './gln-select-trigger.directive';
 import { GlnOption } from '../gln-option/gln-option.interface';
 import { GlnOptionsScroll, OptionsScrollKeys } from '../gln-option/gln-options-scroll.interface';
+import { GlnOrnamentUtil } from '../directives/gln-ornament/gln-ornament.util';
 
 export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT_CONFIG');
 
@@ -327,13 +328,14 @@ export class GlnSelectComponent
     if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlign == null && this.currConfig.ornamLfAlign != null)) {
       this.ornamLfAlignVal = ORNAMENT_ALIGN[this.ornamLfAlign || this.currConfig.ornamLfAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
-      this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, this.getElements(this.ornamLeftList));
+      this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, GlnOrnamentUtil.getElements(this.ornamLeftList));
     }
     if (changes['ornamRgAlign'] || (changes['config'] && this.ornamRgAlign == null && this.currConfig.ornamRgAlign != null)) {
       this.ornamRgAlignVal = ORNAMENT_ALIGN[this.ornamRgAlign || this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
       const rhombRef: ElementRef<HTMLElement> | undefined = this.ornamRhomb?.hostRef;
-      this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList, rhombRef));
+      const ornamRgAlign: string = this.ornamRgAlignVal || '';
+      this.settingOrnamentList(CSS_ATTR_ORN_RG, ornamRgAlign, this.renderer, GlnOrnamentUtil.getElements(this.ornamRightList, rhombRef));
     }
     if (changes['config'] && this.currConfig.overlayClasses != null) {
       this.overlayClassesVal = this.currConfig.overlayClasses;
@@ -437,9 +439,10 @@ export class GlnSelectComponent
       // Add an attribute that disables animation on initialization.
       this.isAttrHideAnimation = true;
     }
-    this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, this.getElements(this.ornamLeftList));
+    this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, GlnOrnamentUtil.getElements(this.ornamLeftList));
     const rhombRef: ElementRef<HTMLElement> | undefined = this.ornamRhomb?.hostRef;
-    this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList, rhombRef));
+    const ornamRgAlign: string = this.ornamRgAlignVal || '';
+    this.settingOrnamentList(CSS_ATTR_ORN_RG, ornamRgAlign, this.renderer, GlnOrnamentUtil.getElements(this.ornamRightList, rhombRef));
   }
 
   public ngAfterViewInit(): void {
@@ -522,8 +525,8 @@ export class GlnSelectComponent
 
   public changeOrnament(isRemove: boolean, elementRef: ElementRef<HTMLElement>, isRight: boolean): void {
     const ornamList: ElementRef<HTMLElement>[] = !isRight
-      ? this.getElements(this.ornamLeftList)
-      : this.getElements(this.ornamRightList, this.ornamRhomb?.hostRef);
+      ? GlnOrnamentUtil.getElements(this.ornamLeftList)
+      : GlnOrnamentUtil.getElements(this.ornamRightList, this.ornamRhomb?.hostRef);
     const ornamWidth: number | null = GlnOrnamentOwnerUtil.getWidthAllOrnaments(ornamList, isRemove, elementRef);
     const nameProperty: string = !isRight ? CSS_PROP_ORN_PD_LF : CSS_PROP_ORN_PD_RG;
     HtmlElemUtil.setProperty(this.frameComp.hostRef, nameProperty, ornamWidth?.toString().concat('px'));
@@ -818,10 +821,6 @@ export class GlnSelectComponent
   }
 
   // ** Private methods **
-
-  private getElements(queryList: QueryList<GlnOrnament> | null, elem?: ElementRef<HTMLElement> | undefined): ElementRef<HTMLElement>[] {
-    return (queryList?.toArray() || []).map((item: GlnOrnament) => item.hostRef).concat(elem != null ? [elem] : []);
-  }
 
   private settingCheckmark(checkmark: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-checkmark', !!checkmark);
