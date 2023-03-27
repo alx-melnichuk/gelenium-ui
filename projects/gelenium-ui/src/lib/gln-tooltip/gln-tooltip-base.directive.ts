@@ -15,6 +15,7 @@ import { EventListenerType, EventListenerUtil } from '../_utils/event-listener.u
 import { ParentScrollUtil } from '../_utils/parent-scroll.util';
 
 import { GlnTooltipBaseComponent } from './gln-tooltip-base.component';
+import { GlnTooltipOpenUtil } from './gln-tooltip-open.util';
 
 const CSS_ATTR_IS_HIDE = 'is-hide';
 const CSS_ATTR_IS_SHOW = 'is-show';
@@ -40,9 +41,10 @@ export const TOOLTIP_POSITION: { [key: string]: string } = {
   'left-start': 'left-start',
   'left-end': 'left-end',
 };
-
+let unidx: number = 0;
 @Directive()
 export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent> implements AfterViewInit, OnDestroy {
+  public idx = ++unidx;
   public content: Record<string, unknown> | null = null;
   public classesVal: string[] = []; // Binding attribute "classes"
   public hideDelayVal: number | null = null; // Binding attribute "hideDelay".
@@ -195,6 +197,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       this.timeoutForShow = window.setTimeout(
         () => {
           this.timeoutForShow = undefined;
+          // Add the current object to the list of items in the open state.
+          GlnTooltipOpenUtil.add(this);
           this.performShow();
           resolve();
         },
@@ -225,6 +229,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       this.timeoutForHide = window.setTimeout(
         () => {
           this.timeoutForHide = undefined;
+          // Remove the current object from the list of items in the open state.
+          GlnTooltipOpenUtil.remove(this);
           this.performHide(isNoAnimation);
           resolve();
         },
