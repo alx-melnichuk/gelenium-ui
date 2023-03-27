@@ -1,0 +1,538 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Size
+    <a [href]="urlCmChip + '#Size'">#</a>
+  </h3>
+  <p>
+    The "size" property determines the size of the element (its height).
+  </p>
+  <span>
+    It takes the following values:
+  </span>
+  <ul>
+    <li>"short" - sets the height to 24px;</li>
+    <li>"little" - sets the height to 28px;</li>
+    <li>"small" - sets the height to 32px (default);</li>
+    <li>"middle" - sets the height to 36px;</li>
+    <li>"wide" - sets the height to 40px;</li>
+  </ul>
+  <p>
+    The height of the "delete" button is determined by the formula: Math.round(size * 0.672).
+  </p>
+  <p>
+    It is possible to specify the height of an element. To do this,
+    in the "config.size" property, we define the required height in pixels.
+  </p>
+</section>
+
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isElevation03a=!isElevation03a"
+      [checked]="isElevation03a" />
+    is Elevation
+  </label>
+</section>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Short" - 24px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="outlined"
+      label="Outlined 'Short'"
+      [isElevation]="isElevation03a"
+      size="short">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Short" - 24px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="filled"
+      label="Filled 'Short'"
+      [isElevation]="isElevation03a"
+      size="short">
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Little" - 28px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="outlined"
+      label="Outlined 'Little'"
+      [isElevation]="isElevation03a"
+      size="little">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Little" - 28px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="filled"
+      label="Filled 'Little'"
+      [isElevation]="isElevation03a"
+      size="little">
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Small" - 32px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="outlined"
+      label="Outlined 'Small'"
+      [isElevation]="isElevation03a"
+      size="small">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Small" - 32px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="filled"
+      label="Filled 'Small'"
+      [isElevation]="isElevation03a"
+      size="small">
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Middle" - 36px; font: 14px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-14"
+      exterior="outlined"
+      label="Outlined 'Middle'"
+      [isElevation]="isElevation03a"
+      size="middle">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Middle" - 36px; font: 14px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-14"
+      exterior="filled"
+      label="Filled 'Middle'"
+      [isElevation]="isElevation03a"
+      size="middle">
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Wide" - 40px; font: 15px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-15"
+      exterior="outlined"
+      label="Outlined 'Wide'"
+      [isElevation]="isElevation03a"
+      size="wide">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>"Wide" - 40px; font: 15px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-15"
+      exterior="filled"
+      label="Filled 'Wide'"
+      [isElevation]="isElevation03a"
+      size="wide">
+    </gln-chip>
+  </div>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Short" - 24px; font: 13px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chsz-fn-sz-13"
+      exterior="outlined"
+      label="Outlined 'Short'"
+      [isElevation]="isElevation03a"
+      size="short"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Short" - 24px; font: 13px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chsz-fn-sz-13"
+      exterior="filled"
+      label="Filled 'Short'"
+      [isElevation]="isElevation03a"
+      size="short"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Little" - 28px; font: 13px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chsz-fn-sz-13"
+      exterior="outlined"
+      label="Outlined 'Little'"
+      [isElevation]="isElevation03a"
+      size="little"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Little" - 28px; font: 13px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chsz-fn-sz-13"
+      exterior="filled"
+      label="Filled 'Little'"
+      [isElevation]="isElevation03a"
+      size="little"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Small" - 32px; font: 13px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chsz-fn-sz-13"
+      exterior="outlined"
+      label="Outlined 'Small'"
+      [isElevation]="isElevation03a"
+      size="small"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Small" - 32px; font: 13px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chsz-fn-sz-13"
+      exterior="filled"
+      label="Filled 'Small'"
+      [isElevation]="isElevation03a"
+      size="small"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Middle" - 36px; font: 14px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chsz-fn-sz-14"
+      exterior="outlined"
+      label="Outlined 'Middle'"
+      [isElevation]="isElevation03a"
+      size="middle"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Middle" - 36px; font: 14px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chsz-fn-sz-14"
+      exterior="filled"
+      label="Filled 'Middle'"
+      [isElevation]="isElevation03a"
+      size="middle"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Wide" - 40px; font: 15px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chsz-fn-sz-15"
+      exterior="outlined"
+      label="Outlined 'Wide'"
+      [isElevation]="isElevation03a"
+      size="wide"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;"Wide" - 40px; font: 15px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chsz-fn-sz-15"
+      exterior="filled"
+      label="Filled 'Wide'"
+      [isElevation]="isElevation03a"
+      size="wide"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-chip',
+  templateUrl: './chip.component.html',
+  styleUrls: ['./chip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ChipComponent &#123;
+  public isElevation03a: boolean = false;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-chip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .chsz-fn-sz-13 &#123;
+    font-size: 13px;
+  &#125;
+  .chsz-fn-sz-14 &#123;
+    font-size: 14px;
+  &#125;
+  .chsz-fn-sz-15 &#123;
+    font-size: 15px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<h4 class="app-hover-link"
+  id="size-config">
+  Configuration for custom height (30px).
+  <a [href]="urlCmChip + '#size-config'">#</a>
+</h4>
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isElevation03b=!isElevation03b"
+      [checked]="isElevation03b" />
+    is Elevation
+  </label>
+</section>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Size - 30px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="outlined"
+      label="Outlined 'size: 30px'"
+      [isElevation]="isElevation03b"
+      size="30">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Size - 30px; font: 13px;</em>
+      </small>
+    </div>
+    <gln-chip class="chsz-fn-sz-13"
+      exterior="filled"
+      label="Filled 'size: 30px'"
+      [isElevation]="isElevation03b"
+      size="30">
+    </gln-chip>
+  </div>
+
+</div>
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Size - 30px; font: 13px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chsz-fn-sz-13"
+      exterior="outlined"
+      label="Outlined 'size: 30px'"
+      [isElevation]="isElevation03b"
+      size="30"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Size - 30px; font: 13px;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chsz-fn-sz-13"
+      exterior="filled"
+      label="Filled 'size: 30px'"
+      [isElevation]="isElevation03b"
+      size="30"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-chip',
+  templateUrl: './chip.component.html',
+  styleUrls: ['./chip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ChipComponent &#123;
+  public isElevation03b: boolean = false;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-chip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .chsz-fn-sz-13 &#123;
+    font-size: 13px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
