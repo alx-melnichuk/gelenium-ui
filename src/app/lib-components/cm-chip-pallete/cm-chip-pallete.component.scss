@@ -1,0 +1,17 @@
+/*# sourceURL=cm-chip-pallete.component.scss */
+
+app-cm-chip-pallete {
+  display: block;
+
+  .chpl-fn-sz {
+    font-size: 13px;
+  }
+  .chpl-elem {
+    min-width: 20ch;
+  }
+  .chpl-customer {
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
+  }
+}
