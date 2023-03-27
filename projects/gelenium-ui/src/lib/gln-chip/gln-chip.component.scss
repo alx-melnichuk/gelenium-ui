@@ -14,7 +14,7 @@ gln-chip {
   @include mxAppearance(none);
   @include mxDisplayInlineFlex();
   @include mxAlignItems(center);
-  border-radius: var(--glnch--brd-rd, 16px);
+  border-radius: var(--glnch--br-rd, 16px);
   box-sizing: border-box;
   height: var(--glnch--size, 32px);
   @include mxJustifyContent(center);
@@ -83,10 +83,6 @@ gln-chip {
     --glnch--border-cl: var(--glnch-dis-br-cl, var(--glnch--br-cl-dis));
     --glnch--bground-cl: var(--glnch-dis-bg-cl, var(--glnch--bg-cl-dis));
   }
-  // --glnfr--label-cl  : var(--glnfr-dis-lb-cl, hsl(var(--glnfr--default-h), var(--glnfr--default-s), 50%));
-  // --glnfr--dcr-br-cl : var(--glnfr-dis-br-cl, hsl(var(--glnfr--default-h), var(--glnfr--default-s), 60%));
-  // --glnfr--dcr-bg-cl : var(--glnfr-dis-bg-cl, hsl(var(--glnfr--default-h), var(--glnfr--default-s), 92%));
-
   // Define styles for all exteriors.
   color           : var(--glnch--label-cl);
   border-color    : var(--glnch--border-cl);
@@ -116,13 +112,13 @@ gln-chip {
   // Elevation display.
   &[ele] {
     &:not(:hover):not(:active) {
-      box-shadow: var(--glnch-elevation, 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%));
+      box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
     }
     &:hover {
-      box-shadow: var(--glnch-elevation, 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%));
+      box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
     }
     &:active {
-      box-shadow: var(--glnch-elevation, 0px 4px 5px -3px rgb(0 0 0 / 20%), 0px 7px 9px 1px rgb(0 0 0 / 14%), 0px 2px 10px 2px rgb(0 0 0 / 12%))
+      box-shadow: 0px 4px 5px -3px rgb(0 0 0 / 20%), 0px 7px 9px 1px rgb(0 0 0 / 14%), 0px 2px 10px 2px rgb(0 0 0 / 12%);
     }
   }
 
@@ -147,5 +143,4 @@ gln-chip {
     padding-left: var(--glnch--orn-lf, var(--glnch-pd-lf, var(--glnchf--pd-lf, 1em)));
     padding-right: var(--glnch--orn-rg, var(--glnch-pd-rg, var(--glnchf--pd-rg, 1em)));
   }
-
 }

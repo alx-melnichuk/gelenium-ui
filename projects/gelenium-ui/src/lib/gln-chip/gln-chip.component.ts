@@ -25,7 +25,7 @@ const EXTERIOR: { [key: string]: string } = { outlined: 'outlined', filled: 'fil
 const SIZE: { [key: string]: number } = { short: 24, little: 28, small: 32, middle: 36, wide: 40 };
 
 const CSS_PROP_SIZE = '--glnch--size';
-const CSS_PROP_BRD_RD = '--glnch--brd-rd';
+const CSS_PROP_BRD_RD = '--glnch--br-rd';
 
 export const GLN_CHIP_CONFIG = new InjectionToken<GlnChipConfig>('GLN_CHIP_CONFIG');
 
