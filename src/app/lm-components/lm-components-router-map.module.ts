@@ -39,12 +39,11 @@ const urlChip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.ge
 const siteUrlsChip: SiteUrl[] = [
   { label: 'Basic', url: urlChip, fragment: 'Basic' },
   { label: 'Attributes', url: urlChip, fragment: 'Attributes' },
-  // { label: 'Size', url: urlChip, fragment: 'Size' },
-  // { label: 'Border Radius', url: urlChip, fragment: 'BorderRadius' },
-  // { label: 'Ornaments', url: urlChip, fragment: 'Ornaments' },
-  // { label: 'Palette', url: urlChip, fragment: 'Palette' },
-  // { label: 'Config', url: urlChip, fragment: 'Config' },
-  // { label: 'Api', url: urlChip, fragment: 'Api' },
+  { label: 'Size', url: urlChip, fragment: 'Size' },
+  { label: 'Ornaments', url: urlChip, fragment: 'Ornaments' },
+  { label: 'Palette', url: urlChip, fragment: 'Palette' },
+  { label: 'Config', url: urlChip, fragment: 'Config' },
+  { label: 'Api', url: urlChip, fragment: 'Api' },
 ];
 SiteMenuUtil.addItem('Components', 'Chip', { label: 'Chip', siteUrls: siteUrlsChip });
 
