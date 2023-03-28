@@ -40,7 +40,7 @@ import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.co
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { GlnSwitchChange } from './gln-switch-change.interface';
-import { GlnSwitchConfig } from './gln-switch.interface';
+import { GlnSwitchConfig } from './gln-switch-config.interface';
 import { ScreenUtil } from '../_utils/screen.util';
 import { HtmlConvertUtil } from '../_utils/html-convert.util';
 
