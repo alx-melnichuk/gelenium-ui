@@ -126,8 +126,8 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null
   ) {
     this.currConfig = this.rootConfig || {};
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-switch', true);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
+    this.renderer.addClass(this.hostRef.nativeElement, 'gln-switch');
+    this.renderer.addClass(this.hostRef.nativeElement, 'gln-control');
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -336,14 +336,16 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
 
   private prepareCssProperties(hostRef: ElementRef<HTMLElement>): void {
     // Determine the font size of the parent element.
-    const parentElem: HTMLElement | null = hostRef && hostRef.nativeElement ? hostRef.nativeElement.parentElement : null;
-    const parentRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(parentElem);
-    const parentFontSize: number = HtmlElemUtil.propertyAsNumber(parentRef, 'font-size');
-    if (parentFontSize > 0) {
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_LABEL_FONT_SIZE, parentFontSize.toString().concat('px'));
-    }
     if (hostRef && hostRef.nativeElement) {
-      const hostElement: Element = hostRef.nativeElement;
+      const hostElement: HTMLElement = hostRef.nativeElement;
+
+      const parentElem: HTMLElement | null = hostRef && hostRef.nativeElement ? hostRef.nativeElement.parentElement : null;
+      const parentRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(parentElem);
+      const parentFontSize: number = HtmlElemUtil.propertyAsNumber(parentRef, 'font-size');
+      if (parentFontSize > 0) {
+        hostElement.style.setProperty(CSS_PROP_LABEL_FONT_SIZE, parentFontSize.toString().concat('px'));
+      }
+
       // Determine the font size of the host element.
       const hostFontSizeVal: number = HtmlElemUtil.propertyAsNumber(hostRef, 'font-size');
       const hostFontSize: number = Math.round(hostFontSizeVal * 100) / 100;
@@ -361,7 +363,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
 
       // Determine the border-radius of the 'track' element.
       const trackBorderRadius: number = Math.round((trackHeight / 2) * 100) / 100;
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_TRACK_BORDER_RADIUS, trackBorderRadius.toString().concat('px'));
+      hostElement.style.setProperty(CSS_PROP_TRACK_BORDER_RADIUS, trackBorderRadius.toString().concat('px'));
 
       // Determine the width of the 'track' element. (2.3em;)
       const trackWidthStr: string = getComputedStyle(hostElement).getPropertyValue(CSS_PROP_TRACK_WIDTH);
@@ -378,18 +380,18 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
       // Determine the padding of the container element.
       const containerPaddingNum = (3 * hostFontSize - trackHeight) / 2;
       const containerPadding = Math.round(containerPaddingNum * 100) / 100;
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_CONTAINER_PADDING, containerPadding.toString().concat('px'));
+      hostElement.style.setProperty(CSS_PROP_CONTAINER_PADDING, containerPadding.toString().concat('px'));
 
       // Determine the padding of the wrap element.
       const wrapPaddingNum = (3 * hostFontSize - thumbHeight) / 2;
       const wrapPadding = Math.round(wrapPaddingNum * 100) / 100;
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_WRAP_PADDING, wrapPadding.toString().concat('px'));
+      hostElement.style.setProperty(CSS_PROP_WRAP_PADDING, wrapPadding.toString().concat('px'));
 
       // Determine the shift of the wrap element.
       const containerLen = trackWidth + 2 * containerPadding;
       const wrapLen = thumbHeight + 2 * wrapPadding;
       const wrapShift = Math.round((containerLen - wrapLen) * 100) / 100;
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_WRAP_SHIFT, wrapShift.toString().concat('px'));
+      hostElement.style.setProperty(CSS_PROP_WRAP_SHIFT, wrapShift.toString().concat('px'));
     }
   }
 
