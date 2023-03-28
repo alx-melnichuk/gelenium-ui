@@ -95,8 +95,7 @@ gln-chip {
     --glntr-ripple-cl:  var(--glnch-ripple-cl, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.15));
   }
 
-  &:not([dis]) {
-    cursor: pointer;
+  &:not([dis]):not([hdAnmInit]) {
     transition:
       background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
       box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
@@ -104,6 +103,9 @@ gln-chip {
       color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
 
+  &:not([dis]) {
+    cursor: pointer;
+  }
   &[dis] {
     cursor: default;
     pointer-events: none;

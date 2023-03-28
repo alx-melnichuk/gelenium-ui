@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -24,6 +25,7 @@ import { GlnChipConfig } from './gln-chip-config.interface';
 const EXTERIOR: { [key: string]: string } = { outlined: 'outlined', filled: 'filled' };
 const SIZE: { [key: string]: number } = { short: 24, little: 28, small: 32, middle: 36, wide: 40 };
 
+const CSS_ATTR_HIDE_ANIMATION_INIT = 'hdAnmInit';
 const CSS_PROP_SIZE = '--glnch--size';
 const CSS_PROP_BRD_RD = '--glnch--br-rd';
 
@@ -39,7 +41,7 @@ let uniqueIdCounter = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnChipComponent implements OnChanges, OnInit {
+export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit {
   @Input()
   public id = `glnch-${uniqueIdCounter++}`;
   @Input()
@@ -134,13 +136,18 @@ export class GlnChipComponent implements OnChanges, OnInit {
       this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       this.setCssSize(this.sizeVal, this.hostRef);
     }
+    // Add an attribute that disables animation on initialization.
+    this.renderer.setAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT, '');
+  }
+
+  public ngAfterContentInit(): void {
+    Promise.resolve().then(() => {
+      // Remove an attribute that disables animation on initialization.
+      this.renderer.removeAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT);
+    });
   }
 
   // ** Public methods **
-
-  log(text: string): void {
-    console.log(text);
-  }
 
   // ** Private methods **
 
