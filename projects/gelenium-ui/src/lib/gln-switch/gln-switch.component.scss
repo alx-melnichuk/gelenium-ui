@@ -1,7 +1,6 @@
 /*# sourceURL=gln-switch.component.scss */
 
 @import '../_styles/mx-align-items.scss';
-@import '../_styles/mx-display-inline-flex.scss';
 @import '../_styles/mx-transform-translate-x-y.scss';
 
 gln-switch {
@@ -18,7 +17,7 @@ gln-switch {
   --glnsw--primary-l: var(--glncl-primary-s, var(--gln-primary-l));
 
   @include mxAlignItems(center);
-  @include mxDisplayInlineFlex();
+  display: inline-flex;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -75,7 +74,7 @@ gln-switch {
   }
 
   div[glnsw-container] {
-    @include mxDisplayInlineFlex();
+    display: inline-flex;
     border-radius: var(--glnsw-container-brd-rds, 2em);
     cursor: pointer;
     flex-shrink: 0;

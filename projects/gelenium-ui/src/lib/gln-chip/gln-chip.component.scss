@@ -1,6 +1,5 @@
 /*# sourceURL=gln-chip.component.scss */
 
-@import '../_styles/mx-display-inline-flex.scss';
 @import '../_styles/mx-justify-content.scss';
 @import '../_styles/mx-align-items.scss';
 @import '../_styles/mx-appearance.scss';
@@ -11,7 +10,7 @@ gln-chip {
   --glnch--default-l: var(--glncl-default-l, var(--gln-default-l));
 
   @include mxAppearance(none);
-  @include mxDisplayInlineFlex();
+  display: inline-flex;
   @include mxAlignItems(center);
   border-radius: var(--glnch--br-rd, 16px);
   box-sizing: border-box;

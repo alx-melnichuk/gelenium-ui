@@ -1,10 +1,9 @@
 /*# sourceURL=gln-textarea.component.scss */
 
-@import '../_styles/mx-display-inline-flex.scss';
 @import '../_styles/mx-flex-direction.scss';
 
 gln-textarea {
-  @include mxDisplayInlineFlex();
+  display: inline-flex;
   @include mxFlexDirection(column);
 
   &[wdFull] {

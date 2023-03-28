@@ -1,6 +1,5 @@
 /*# sourceURL=gln-select.component.scss */
 
-@import '../_styles/mx-display-inline-flex.scss';
 @import '../_styles/mx-flex-direction.scss';
 
 gln-select {
@@ -13,7 +12,7 @@ gln-select {
   --glnsl--danger-h: var(--glncl-danger-h, var(--gln-danger-h));
   --glnsl--danger-s: var(--glncl-danger-s, var(--gln-danger-s));
 
-  @include mxDisplayInlineFlex();
+  display: inline-flex;
   @include mxFlexDirection(column);
   min-width: var(--glnsl-min-width, 50px);
 
