@@ -71,11 +71,15 @@ gln-chip {
       --glnch--border-cl: var(--glnch-foc-br-cl, var(--glnch-def-br-cl, var(--glnch--br-cl-def)));
       --glnch--bground-cl: var(--glnch-foc-bg-cl, var(--glnch-def-bg-cl, var(--glnch--bg-cl-def)));
     }
+    cursor: pointer;
   } // The state with disabled.
   &[dis] {
     --glnch--label-cl: var(--glnch-dis-lb-cl, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.55));
     --glnch--border-cl: var(--glnch-dis-br-cl, var(--glnch--br-cl-dis));
     --glnch--bground-cl: var(--glnch-dis-bg-cl, var(--glnch--bg-cl-dis));
+    cursor: default;
+    pointer-events: none;
+
   }
   // Define styles for all exteriors.
   color           : var(--glnch--label-cl);
@@ -95,14 +99,6 @@ gln-chip {
       box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
       border-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
       color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  }
-
-  &:not([dis]) {
-    cursor: pointer;
-  }
-  &[dis] {
-    cursor: default;
-    pointer-events: none;
   }
 
   // Elevation display.
