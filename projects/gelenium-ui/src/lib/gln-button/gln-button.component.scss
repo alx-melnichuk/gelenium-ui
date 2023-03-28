@@ -126,7 +126,7 @@ gln-button {
     --glnbt--bg-cl-hov: hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l), 0.10);
 
     --glnbt--br-cl-dis: hsla(var(--glnbt--default-h), var(--glnbt--default-s), var(--glnbt--default-l), 0.25); // rgba(0, 0, 0, 0.12);
-    }
+  }
 
   // Exterior: "text"
   &[ext-t] {
@@ -134,7 +134,7 @@ gln-button {
 
     --glnbt--lb-cl-hov: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l));
     --glnbt--bg-cl-hov: hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l), 0.10);
-    }
+  }
 
   // Definition of internal variables by element state.
   &:not([dis])>[glnbt-btn] {
