@@ -1,0 +1,119 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmCheckbox + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnCheckboxModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    The GlnCheckbox component displays the behavior of a simple "state checkbox"
+    property (&lt;input type="checkbox"&gt;).
+    A component allows you to select one or more of these components.
+  </p>
+  <span> For example:</span>
+  <code><pre source="html">
+&lt;<strong>gln-checkbox</strong> formControlName="model01"&gt;
+&lt;/<strong>gln-checkbox</strong>&gt;</pre></code>
+</section>
+
+
+<form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem cbbs-elem">
+      <div>
+        <small>
+          <em>Unchecked by default.</em>
+        </small>
+      </div>
+      <gln-checkbox formControlName="model01b">
+        Demo checkbox
+      </gln-checkbox>
+    </div>
+
+  </div>
+</form>
+
+<!-- source -->
+<hr br-nn />
+
+<!-- // Page: Attributes02abcdefgh -->
+
+<!-- // Page: Attributes02ijkl -->
+<section *ngIf="isShowAttributes02i"
+  mr-vr
+  id="attributes-position">
+  <h4 class="app-hover-link">
+    Position.
+    <a [href]="urlCmCheckbox + '#attributes-position'">#</a>
+  </h4>
+  <p>
+    It is possible to change the position of the label relative to the GlnCheckbox component.
+  </p>
+</section>
+
+
+<form *ngIf="isShowAttributes02i"
+  [formGroup]="formGroup02i"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem cbat2-elem">
+      <div>
+        <small>
+          <em>Attributes: position - top.</em>
+        </small>
+      </div>
+      <gln-checkbox formControlName="model02i"
+        position="top">Position - top
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbat2-elem">
+      <div>
+        <small>
+          <em>Attributes: position - bottom.</em>
+        </small>
+      </div>
+      <gln-checkbox formControlName="model02j"
+        position="bottom">Position - bottom
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbat2-elem">
+      <div>
+        <small>
+          <em>Attributes: position - start.</em>
+        </small>
+      </div>
+      <gln-checkbox formControlName="model02k"
+        position="start">Position - start
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbat2-elem">
+      <div>
+        <small>
+          <em>Attributes: position - end.</em>
+        </small>
+      </div>
+      <gln-checkbox formControlName="model02l"
+        position="end">Position - end
+      </gln-checkbox>
+    </div>
+
+  </div>
+</form>
+
+
+<!-- source -->
+<hr br-nn />

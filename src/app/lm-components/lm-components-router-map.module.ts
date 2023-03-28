@@ -34,6 +34,19 @@ const siteUrlsButton: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Button', { label: 'Button', siteUrls: siteUrlsButton });
 
+RouterConfig.add('URL_COMPONENTS_CHECKBOX', 'checkbox');
+const urlCheckbox = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CHECKBOX');
+const siteUrlsCheckbox: SiteUrl[] = [
+  { label: 'Basic', url: urlCheckbox, fragment: 'Basic' },
+  // { label: 'Attributes', url: urlCheckbox, fragment: 'Attributes' },
+  // { label: 'Size', url: urlCheckbox, fragment: 'Size' },
+  // { label: 'Ornaments', url: urlCheckbox, fragment: 'Ornaments' },
+  // { label: 'Palette', url: urlCheckbox, fragment: 'Palette' },
+  // { label: 'Config', url: urlCheckbox, fragment: 'Config' },
+  // { label: 'Api', url: urlCheckbox, fragment: 'Api' },
+];
+SiteMenuUtil.addItem('Components', 'Checkbox', { label: 'Checkbox', siteUrls: siteUrlsCheckbox });
+
 RouterConfig.add('URL_COMPONENTS_CHIP', 'chip');
 const urlChip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CHIP');
 const siteUrlsChip: SiteUrl[] = [

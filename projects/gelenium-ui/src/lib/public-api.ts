@@ -12,6 +12,7 @@ export * from './directives/gln-regex/public-api';
 
 export * from './gln-autocomplete/public-api';
 export * from './gln-button/public-api';
+export * from './gln-checkbox/public-api';
 export * from './gln-chip/public-api';
 export * from './gln-frame/public-api';
 export * from './gln-hint-or-error/public-api';
