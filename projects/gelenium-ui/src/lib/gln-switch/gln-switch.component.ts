@@ -157,10 +157,12 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
     if (changes['position'] || (changes['config'] && this.positionVal == null && this.currConfig.position != null)) {
-      this.settingClassAndAttrByPosition(this.positionVal || '', false, this.renderer, this.hostRef);
+      // Remove class by old position value.
+      this.settingByPosition(false, this.positionVal, this.renderer, this.hostRef);
       const positionStr: string = (this.position || this.currConfig.position || '').toString();
       this.positionVal = POSITION[positionStr] || POSITION['end'];
-      this.settingClassAndAttrByPosition(this.positionVal, true, this.renderer, this.hostRef);
+      // Add class by new position value.
+      this.settingByPosition(true, this.positionVal, this.renderer, this.hostRef);
     }
 
     if (changes['isRequired']) {
@@ -180,7 +182,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     const isChecked: boolean | null = BooleanUtil.init(this.isChecked) ?? (this.currConfig.isChecked || null);
     if (isChecked && !this.formControl.value) {
       this.formControl.setValue(true, { emitEvent: false });
-      this.settingChecked(true, this.renderer, this.hostRef);
+      this.settingChecked((this.isCheckedVal = true), this.renderer, this.hostRef);
     }
 
     if (this.isNoAnimationVal == null) {
@@ -202,7 +204,8 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     if (this.positionVal == null) {
       const positionStr: string = (this.position || this.currConfig.position || '').toString();
       const positionVal: string = POSITION[positionStr] || POSITION['end'];
-      this.settingClassAndAttrByPosition((this.positionVal = positionVal), true, this.renderer, this.hostRef);
+      // Add class by new position value.
+      this.settingByPosition(true, (this.positionVal = positionVal), this.renderer, this.hostRef);
     }
 
     if (this.isRequiredVal) {
@@ -231,7 +234,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   public writeValue(value: any): void {
     if (value !== this.formControl.value) {
       this.formControl.setValue(!!value, { emitEvent: false });
-      this.settingChecked(!!value, this.renderer, this.hostRef);
+      this.settingChecked((this.isCheckedVal = !!value), this.renderer, this.hostRef);
       this.changeDetectorRef.markForCheck();
     }
     if (this.isRemoveAttrHideAnimation) {
@@ -305,7 +308,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     if (!this.isDisabledVal && !this.isReadOnlyVal) {
       const newValue = !this.formControl.value;
       this.formControl.setValue(newValue, { emitEvent: false });
-      this.settingChecked(newValue, this.renderer, this.hostRef);
+      this.settingChecked((this.isCheckedVal = newValue), this.renderer, this.hostRef);
       if (this.isRemoveAttrHideAnimation) {
         this.isRemoveAttrHideAnimation = false;
         // Remove an attribute that disables animation on initialization.
@@ -396,11 +399,10 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   }
 
   private settingChecked(isChecked: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    this.isCheckedVal = isChecked;
     HtmlElemUtil.setClass(renderer, elem, 'gln-checked', !!isChecked);
     HtmlElemUtil.setAttr(renderer, elem, 'chk', isChecked ? '' : null);
   }
-  private settingClassAndAttrByPosition(positionStr: string, isAdd: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+  private settingByPosition(isAdd: boolean, positionStr: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     if (positionStr) {
       HtmlElemUtil.setClass(renderer, elem, 'glnsw-' + positionStr, isAdd);
       HtmlElemUtil.setAttr(renderer, elem, 'pos-' + positionStr[0], isAdd ? '' : null);
