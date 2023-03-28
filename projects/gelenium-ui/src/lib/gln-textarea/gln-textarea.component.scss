@@ -1,10 +1,8 @@
 /*# sourceURL=gln-textarea.component.scss */
 
-@import '../_styles/mx-flex-direction.scss';
-
 gln-textarea {
   display: inline-flex;
-  @include mxFlexDirection(column);
+  flex-direction: column;
 
   &[wdFull] {
     width: 100%;

@@ -1,10 +1,8 @@
 /*# sourceURL=gln-input.component.scss */
 
-@import '../_styles/mx-flex-direction.scss';
-
 gln-input {
   display: inline-flex;
-  @include mxFlexDirection(column);
+  flex-direction: column;
 
   &[wdFull] {
     width: 100%;
