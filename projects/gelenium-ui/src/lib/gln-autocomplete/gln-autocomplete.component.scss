@@ -1,8 +1,5 @@
 /*# sourceURL=gln-autocomplete.component.scss */
 
-@import '../_styles/mx-display-flex.scss';
-@import '../_styles/mx-flex-direction.scss';
-
 gln-autocomplete {
   --glnac--default-h: var(--glncl-default-h, var(--gln-default-h));
   --glnac--default-s: var(--glncl-default-s, var(--gln-default-s));
@@ -14,7 +11,7 @@ gln-autocomplete {
   --glnac--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
   --glnac--default-bg-cl: hsl(var(--glnac--default-bg-h), var(--glnac--default-bg-s), var(--glnac--default-bg-l));
 
-  @include mxDisplayFlex();
+  display: flex;
   position: relative;
   width: var(--glnac--width);
   justify-content: var(--glnac--justify-content);

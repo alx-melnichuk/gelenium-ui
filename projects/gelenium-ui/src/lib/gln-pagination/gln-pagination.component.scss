@@ -1,7 +1,5 @@
 /*# sourceURL=gln-pagination.component.scss */
 
-@import '../_styles/mx-display-flex.scss';
-
 gln-pagination {
   --glnpg--default-h: var(--glncl-default-h, var(--gln-default-h));
   --glnpg--default-s: var(--glncl-default-s, var(--gln-default-s));
@@ -20,7 +18,7 @@ gln-pagination {
   // Block "<ul glnpg-ul>"
   [glnpg-ul] {
     align-items: center;
-    @include mxDisplayFlex();
+    display: flex;
     flex-wrap: wrap;
     list-style: none;
     margin: 0;

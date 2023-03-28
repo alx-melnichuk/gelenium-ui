@@ -1,7 +1,5 @@
 /*# sourceURL=gln-button.component.scss */
 
-@import '../_styles/mx-display-flex.scss';
-
 gln-button {
   --glnbt--default-h: var(--glncl-default-h, var(--gln-default-h));
   --glnbt--default-s: var(--glncl-default-s, var(--gln-default-s));
@@ -15,10 +13,10 @@ gln-button {
   --glnbt--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
   --glnbt--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
 
-  @include mxDisplayFlex();
-  height: max-content;
+  display: flex;
   font-weight: 500;
   font-size: 1em;
+  height: max-content;
   outline: none;
 
   &[wdFull] {

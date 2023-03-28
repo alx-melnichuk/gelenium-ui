@@ -1,16 +1,13 @@
 /*# sourceURL=gln-spinner.component.scss */
 
-@import '../_styles/mx-display-flex.scss';
-
 gln-spinner {
 
   --glnsp--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
   --glnsp--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
   --glnsp--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
 
-  @include mxDisplayFlex();
-
   color: hsl(var(--glnsp--primary-h), var(--glnsp--primary-s), var(--glnsp--primary-l));
+  display: flex;
 
   // Blocks: "<svg glnsp-size" - (Internal svg), "<div glnsp-size>" - ("External svg").
   &>[glnsp-size] {
