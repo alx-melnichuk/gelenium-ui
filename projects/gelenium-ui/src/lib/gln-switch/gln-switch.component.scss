@@ -1,6 +1,5 @@
 /*# sourceURL=gln-switch.component.scss */
 
-@import '../_styles/mx-align-items.scss';
 @import '../_styles/mx-transform-translate-x-y.scss';
 
 gln-switch {
@@ -16,7 +15,7 @@ gln-switch {
   --glnsw--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
   --glnsw--primary-l: var(--glncl-primary-s, var(--gln-primary-l));
 
-  @include mxAlignItems(center);
+  align-items: center;
   display: inline-flex;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;

@@ -1,7 +1,6 @@
 /*# sourceURL=gln-chip.component.scss */
 
 @import '../_styles/mx-justify-content.scss';
-@import '../_styles/mx-align-items.scss';
 @import '../_styles/mx-appearance.scss';
 
 gln-chip {
@@ -11,7 +10,7 @@ gln-chip {
 
   @include mxAppearance(none);
   display: inline-flex;
-  @include mxAlignItems(center);
+  align-items: center;
   border-radius: var(--glnch--br-rd, 16px);
   box-sizing: border-box;
   height: var(--glnch--size, 32px);
