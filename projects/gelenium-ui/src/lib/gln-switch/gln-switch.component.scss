@@ -3,7 +3,6 @@
 @import '../_styles/mx-align-items.scss';
 @import '../_styles/mx-display-inline-flex.scss';
 @import '../_styles/mx-transform-translate-x-y.scss';
-@import '../_styles/mx-user-select.scss';
 
 gln-switch {
   --glnsw--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
@@ -24,7 +23,7 @@ gln-switch {
   -ms-flex-negative: 0;
   flex-shrink: 0;
   outline: 0;
-  @include mxUserSelect(none);
+  user-select: none;
   &[pos-t] {
     flex-direction: column-reverse;
   }
@@ -91,7 +90,7 @@ gln-switch {
     height: 1px;
     opacity: 0;
     position: absolute;
-    @include mxUserSelect(none);
+    user-select: none;
     width: 1px;
   }
 
@@ -107,7 +106,7 @@ gln-switch {
     padding: var(--glnsw-wrap-pd, var(--glnsw--wrap-pd, 0.75em));
     position: absolute;
     top: 0;
-    @include mxUserSelect(none);
+    user-select: none;
     transition: left var(--glnsw-trn-dur, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform var(--glnsw-trn-dur, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     z-index: 1;
   }
@@ -139,7 +138,7 @@ gln-switch {
     height: var(--glnsw-track-hg, 1em);
     width: var(--glnsw-track-wd, 2.3em);
     transition: opacity var(--glnsw-trn-dur, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color var(--glnsw-trn-dur, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    @include mxUserSelect(none);
+    user-select: none;
     z-index: 0;
   }
 
