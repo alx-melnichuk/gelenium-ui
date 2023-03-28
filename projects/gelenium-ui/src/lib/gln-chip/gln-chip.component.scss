@@ -1,13 +1,11 @@
 /*# sourceURL=gln-chip.component.scss */
 
-@import '../_styles/mx-appearance.scss';
-
 gln-chip {
   --glnch--default-h: var(--glncl-default-h, var(--gln-default-h));
   --glnch--default-s: var(--glncl-default-s, var(--gln-default-s));
   --glnch--default-l: var(--glncl-default-l, var(--gln-default-l));
 
-  @include mxAppearance(none);
+  appearance: none;
   display: inline-flex;
   align-items: center;
   border-radius: var(--glnch--br-rd, 16px);
