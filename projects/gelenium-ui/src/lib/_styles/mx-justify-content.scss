@@ -1,6 +1,0 @@
-@mixin mxJustifyContent($value) {
-  -webkit-box-pack: $value;
-  -ms-flex-pack: $value;
-  -webkit-justify-content: $value;
-  justify-content: $value;
-}
