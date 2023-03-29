@@ -30,20 +30,70 @@ export class CmCheckboxBasicComponent {
     model01d: new FormControl(false, []),
   });
 
-  // Page: Attributes02abcdefgh
-  isShowAttributes02a = true;
-
-  // Page: Attributes02ijkl
-  isShowAttributes02i = false;
-  public formGroup02i: FormGroup = new FormGroup({
-    model02i: new FormControl(true, []),
-    model02j: new FormControl(false, []),
-    model02k: new FormControl(true, []),
-    model02l: new FormControl(false, []),
+  // Page: Attributes02abcdefg
+  isShowAttributes02a = true; // true;
+  public data02a = true;
+  public data02b = true;
+  public formGroup02a: FormGroup = new FormGroup({
+    model02a: new FormControl(true, []),
+    model02b: new FormControl(true, []),
+    model02c: new FormControl(true, []),
+    model02d: new FormControl(true, []),
+    model02e: new FormControl(true, []),
   });
 
-  // Page: Size03a
-  // Page: Ornaments05a
+  // Page: Attributes02hijklm
+  isShowAttributes02h = true; // true;
+  public formGroup02h: FormGroup = new FormGroup({
+    model02h: new FormControl(true, []),
+    model02i: new FormControl(false, []),
+    model02j: new FormControl(true, []),
+    model02k: new FormControl(false, []),
+  });
+
+  // Page: Size03
+  isShowSize03 = true;
+  public formGroup03: FormGroup = new FormGroup({
+    model03a: new FormControl(true, []),
+    model03b: new FormControl(true, []),
+    model03c: new FormControl(true, []),
+    model03d: new FormControl(true, []),
+    model03e: new FormControl(true, []),
+    model03f: new FormControl(true, []),
+    model03g: new FormControl(true, []),
+    model03h: new FormControl(true, []),
+    model03i: new FormControl(true, []),
+  });
+
+  // Page: Palette04
+  isShowPalette04 = true;
+  public formGroup04a: FormGroup = new FormGroup({
+    model04a: new FormControl(true, []),
+    model04b: new FormControl(true, []),
+    model04c: new FormControl(true, []),
+    model04d: new FormControl(true, []),
+    model04e: new FormControl(true, []),
+    model04f: new FormControl(true, []),
+  });
+
+  public isDisabled04i: boolean = false;
+  public formGroup04i: FormGroup = new FormGroup({
+    model04i: new FormControl(true, []),
+    model04j: new FormControl(true, []),
+    model04k: new FormControl(true, []),
+    model04l: new FormControl(true, []),
+    model04m: new FormControl(true, []),
+  });
+
+  public isDisabled04p: boolean = false;
+  public formGroup04p: FormGroup = new FormGroup({
+    model04p: new FormControl(true, []),
+    model04q: new FormControl(true, []),
+    model04r: new FormControl(true, []),
+    model04s: new FormControl(true, []),
+    model04t: new FormControl(true, []),
+  });
+
   // Page: Config08a
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

@@ -3,17 +3,95 @@
 app-cm-checkbox-basic {
   display: block;
 
+  // Page: Basic01
   .cbbs-elem {
     min-width: 17ch;
+  }
+  .cbbs-fn-sz {
+    font-size: 12px;
+  }
+
+  // Page: Attributes02a
+  .cbat1-elem {
+    min-width: 19ch;
+  }
+  .cbat1-fn-sz {
+    font-size: 12px;
   }
 
   // Page: Attributes02ijkl
   .cbat2-elem {
     min-width: 19ch;
   }
+  .cbat2-fn-sz {
+    font-size: 12px;
+  }
 
-  // Page: Attributes02a
   // Page: Size03a
+  
+  // Page: Palette04
+  .cbpl-elem {
+    min-width: 17ch;
+  }
+  .cbpl-fn-sz {
+    font-size: 12px;
+  }
+  .cbpl-customer {
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
+    --gln-customer-cl: hsl(var(--gln-customer-h), var(--gln-customer-s), var(--gln-customer-l));
+  }
+
+  .cbpl2-elem {
+    min-width: 17ch;
+  }
+  .cbpl2-mui-primary {
+    font-size: 12px;
+    --glncl-primary-h: 210;
+    --glncl-primary-s: 79%;
+    --glncl-primary-l: 46%;
+  }
+  .cbpl2-mui-secondary {
+    font-size: 12px;
+    --glncl-primary-h: 291;
+    --glncl-primary-s: 64%;
+    --glncl-primary-l: 42%;
+  }
+  .cbpl2-mui-success {
+    font-size: 12px;
+    --glncl-primary-h: 123;
+    --glncl-primary-s: 46%;
+    --glncl-primary-l: 34%;
+  }
+  .cbpl2-mui-default {
+    font-size: 12px;
+    --glncl-primary-h: 0;
+    --glncl-primary-s: 0%;
+    --glncl-primary-l: 0%;
+    --glncb-def-cl-svg: rgba(0, 0, 0, 0.6);
+    --glncb-def-chk-cl-svg: rgba(0, 0, 0, 0.6);
+    --glncb-dis-cl-svg: rgba(0, 0, 0, 0.26);
+    --glncb-dis-chk-cl-svg: rgba(0, 0, 0, 0.26);
+  }
+  .cbpl2-mui-pink {
+    font-size: 12px;
+    --glncl-primary-h: 338;
+    --glncl-primary-s: 78%;
+    --glncl-primary-l: 48%;
+  }
+
+  .cbpl3-elem {
+    min-width: 17ch;
+  }
+  .cbpl3-bootstrap {
+    font-size: 10.5px;
+    --glncl-primary-h: 216;
+    --glncl-primary-s: 98%;
+    --glncl-primary-l: 52%;
+  }
+
+
   // Page: Ornaments05a
   // Page: Config08a
 }
