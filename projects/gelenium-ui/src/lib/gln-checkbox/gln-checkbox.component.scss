@@ -7,7 +7,7 @@ gln-checkbox {
 
   --glncb--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
   --glncb--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
-  --glncb--primary-l: var(--glncl-primary-s, var(--gln-primary-l));
+  --glncb--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
 
   align-items: center;
   display: inline-flex;
@@ -30,22 +30,37 @@ gln-checkbox {
 
   &:not([dis]) {
     &:not([chk]) {
-      --glncb--cl-svg   : var(--glncb-dis-cl-svg, hsl(var(--glncb--default-h), var(--glncb--default-s), var(--glncb--default-l)));
+      --glncb--cl-svg      : var(--glncb-def-cl-svg, hsla(var(--glncb--default-h), var(--glncb--default-s), var(--glncb--default-l), 0.6));
+      --glncb--bg-wrap-hov : var(--glncb-def-wrap, hsla(var(--glncb--default-h), var(--glncb--default-s), 70%, 20%));
+      --glntr-ripple-cl    : var(--glncb-def-rip, hsla(var(--glncb--default-h), var(--glncb--default-s), 70%, 30%));
     }
     &[chk] {
-      --glncb--cl-svg   : var(--glncb-dis-cl-svg, hsl(var(--glncb--primary-h), var(--glncb--primary-s), var(--glncb--primary-l)));
+      --glncb--cl-svg      : var(--glncb-def-chk-cl-svg, hsl(var(--glncb--primary-h), var(--glncb--primary-s), var(--glncb--primary-l)));
+      --glncb--bg-wrap-hov : var(--glncb-def-chk-wrap, hsla(var(--glncb--primary-h), var(--glncb--primary-s), 75%, 20%));
+      --glntr-ripple-cl    : var(--glncb-def-chk-rip, hsla(var(--glncb--primary-h), var(--glncb--primary-s), 75%, 30%));
     }
   }
-  // &[dis] {
-  //   &:not([chk]) {
-  //     --glncb--cl-svg   : var(--glncb-dis-cl-svg, hsl(var(--glncb--default-h), var(--glncb--default-s), var(--glncb--default-l)));
-  //   }
-  //   &[chk] {
-  //     --glncb--cl-svg   : var(--glncb-dis-cl-svg, hsl(var(--glncb--primary-h), var(--glncb--primary-s), var(--glncb--default-l)));
-  //   }
-  // }
+  &[dis] {
+    &:not([chk]) {
+      --glncb--cl-svg   : var(--glncb-dis-cl-svg, hsla(var(--glncb--default-h), var(--glncb--default-s), var(--glncb--default-l), 0.3));
+    }
+    &[chk] {
+      --glncb--cl-svg   : var(--glncb-dis-chk-cl-svg, hsla(var(--glncb--default-h), var(--glncb--default-s), var(--glncb--default-l), 0.3));
+    }
+  }
 
-  // --glnbt--bg-cl-dis: hsla(var(--glnbt--default-h), var(--glnbt--default-s), var(--glnbt--default-l), 0.12); // rgba(0, 0, 0, 0.12);
+  &:not([dis]):not([rea]) {
+    cursor: pointer;
+  }
+  &[dis], &[rea] {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &:not([hdAnmInit]) {
+    --glncb-trn-dur: 200ms; // transition-duration
+  }
+
   [glncb-container] {
     align-items: center;
     background-color: transparent;
@@ -53,18 +68,21 @@ gln-checkbox {
     border-radius: 50%;
     box-sizing: border-box;
     color: var(--glncb--cl-svg); // rgba(0, 0, 0, 0.6);
-    cursor: pointer;
     display: inline-flex;
     justify-content: center;
     margin: 0;
     outline: 0;
-    padding: 9px;
+    padding: 1em;
     position: relative;
     text-decoration: none;
     user-select: none;
     vertical-align: middle;
     -webkit-tap-highlight-color: transparent;
   }
+  &:not([dis]):not([noHov]) div[glncb-container]:hover {
+    background-color: var(--glncb--bg-wrap-hov);
+  }
+
 
   [glncb-input] {
     cursor: inherit;
@@ -81,13 +99,17 @@ gln-checkbox {
 
   [glncb-icon] {
     display: inline-block;
+    font-size: 1.5em;
     fill: currentColor;
     flex-shrink: 0;
     height: 1em;
-    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     user-select: none;
     width: 1em;
+    transition: fill var(--glncb-trn-dur, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
 
-    font-size: 1.5rem; // ?
+  [glncb-label] {
+    cursor: inherit;
+    font-size: var(--glncb-label-fn-sz, var(--glncb--label-fn-sz));
   }
 }

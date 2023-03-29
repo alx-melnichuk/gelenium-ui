@@ -17,6 +17,7 @@ import {
   Renderer2,
   SimpleChanges,
   SkipSelf,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import {
@@ -34,6 +35,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
+import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { GlnCheckboxChange } from './gln-checkbox-change.interface';
@@ -45,6 +47,7 @@ const POSITION: { [key: string]: string } = { top: 'top', bottom: 'bottom', star
 const CSS_CLS_DISABLED = 'gln-disabled';
 const CSS_ATTR_DISABLED = 'dis';
 const CSS_ATTR_HIDE_ANIMATION_INIT = 'hdAnmInit';
+const CSS_PROP_LABEL_FONT_SIZE = '--glncb--label-fn-sz';
 
 let uniqueIdCounter = 0;
 
@@ -77,12 +80,19 @@ export class GlnCheckboxComponent
   @Input()
   public isIndeterm: string | boolean | null | undefined;
   @Input()
+  public isNoRipple: string | boolean | null | undefined;
+  @Input()
+  public isReadOnly: string | boolean | null | undefined;
+  @Input()
   public position: string | null | undefined; // 'top' | 'bottom' | 'start' | 'end';
   @Input()
   public tabIndex: number = 0;
 
   @Output()
   readonly change: EventEmitter<GlnCheckboxChange> = new EventEmitter();
+
+  @ViewChild(GlnTouchRippleComponent, { static: false })
+  public touchRipple: GlnTouchRippleComponent | null = null;
 
   public currConfig: GlnCheckboxConfig;
   public formControl: FormControl = new FormControl({ value: false, disabled: false }, []);
@@ -91,6 +101,7 @@ export class GlnCheckboxComponent
   public isCheckedVal: boolean | null = null; // Binding attribute "isChecked".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isIndetermVal: boolean | null = null; // Binding attribute "isIndeterm".
+  public isNoRippleVal: boolean | null = null; // Binding attribute "isNoRipple".
   public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
   public positionVal: string | null = null; // Binding attribute "position".
 
@@ -116,15 +127,20 @@ export class GlnCheckboxComponent
       this.idForInput = this.setIdForInput(this.id);
     }
     if (changes['isDisabled']) {
-      this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
-      console.log(`OnChanges() isDisabledVal=${this.isDisabledVal}; setDisabledState(); settingTabIndex();`); // #
-      this.setDisabledState(this.isDisabledVal);
+      this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
       this.settingTabIndex(!this.isDisabledVal ? '' + this.tabIndex : '-1', this.renderer, this.hostRef);
     }
     if (changes['isIndeterm']) {
       this.isIndetermVal = !!BooleanUtil.init(this.isIndeterm);
-      console.log(`OnChanges() isIndetermVal=${this.isIndetermVal}; setDisabledState(); settingTabIndex();`); // #
       this.settingIndeterm(this.isIndetermVal, this.renderer, this.hostRef);
+    }
+    if (changes['isNoRipple'] || (changes['config'] && this.isNoRippleVal == null && this.currConfig.isNoRipple != null)) {
+      this.isNoRippleVal = !!(BooleanUtil.init(this.isNoRipple) ?? (this.currConfig.isNoRipple || null));
+      this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
+    }
+    if (changes['isReadOnly'] || (changes['config'] && this.isReadOnlyVal == null && this.currConfig.isReadOnly != null)) {
+      this.isReadOnlyVal = !!(BooleanUtil.init(this.isReadOnly) ?? (this.currConfig.isReadOnly || null));
+      this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
     if (changes['position'] || (changes['config'] && this.positionVal == null && this.currConfig.position != null)) {
       // Remove class by old position value.
@@ -139,18 +155,25 @@ export class GlnCheckboxComponent
   public ngOnInit(): void {
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
-
-    // this.prepareCssProperties(this.hostRef);
+    // Defining internal CSS properties.
+    this.prepareCssProperties(this.hostRef);
 
     if (this.isDisabledVal == null) {
-      console.log(`OnInit() isDisabledVal:${this.isDisabledVal}; settingTabIndex();`); // #
       this.settingTabIndex(!this.isDisabledVal ? '' + this.tabIndex : '-1', this.renderer, this.hostRef);
     }
-
     const isChecked: boolean | null = BooleanUtil.init(this.isChecked) ?? (this.currConfig.isChecked || null);
     if (isChecked && !this.formControl.value) {
       this.formControl.setValue(true, { emitEvent: false });
       this.settingChecked((this.isCheckedVal = true), this.renderer, this.hostRef);
+    }
+
+    if (this.isNoRippleVal == null) {
+      this.isNoRippleVal = !!(this.currConfig.isNoRipple || null);
+      this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
+    }
+    if (this.isReadOnlyVal == null) {
+      this.isReadOnlyVal = !!(this.currConfig.isReadOnly || null);
+      this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
     if (this.positionVal == null) {
       const positionStr: string = (this.position || this.currConfig.position || '').toString();
@@ -244,16 +267,15 @@ export class GlnCheckboxComponent
   // ** Public methods **
 
   public doClickByLabel(event: MouseEvent): void {
-    // if (!this.isDisabledVal && !this.isReadOnlyVal && this.touchRipple) {
-    //   this.touchRipple.trigger(event, true);
-    // }
+    if (!this.isDisabledVal && !this.isReadOnlyVal && !!this.touchRipple && !this.isNoRippleVal) {
+      this.touchRipple.trigger(event, true);
+    }
   }
 
   /** Toggles the state of the switch. */
   public toggle(): void {
     if (!this.isDisabledVal && !this.isReadOnlyVal) {
       const newValue = !this.formControl.value;
-      console.log(`toggle(newValue=${newValue});`); // #
       this.formControl.setValue(newValue, { emitEvent: false });
       this.settingChecked((this.isCheckedVal = newValue), this.renderer, this.hostRef);
       if (this.isRemoveAttrHideAnimation) {
@@ -263,6 +285,9 @@ export class GlnCheckboxComponent
       }
       this.onChange(newValue);
       this.change.emit({ checked: newValue, source: this });
+      if (!!this.touchRipple && !this.isNoRippleVal) {
+        this.touchRipple.trigger(null, true);
+      }
       this.changeDetectorRef.markForCheck();
     }
   }
@@ -282,11 +307,23 @@ export class GlnCheckboxComponent
     this.formControl.setValidators(newValidator);
   }
 
-  // private prepareCssProperties(hostRef: ElementRef<HTMLElement>): void {
+  private prepareCssProperties(hostRef: ElementRef<HTMLElement>): void {
+    // Determine the font size of the parent element.
+    if (hostRef && hostRef.nativeElement) {
+      const hostElement: HTMLElement = hostRef.nativeElement;
+
+      const parentElem: HTMLElement | null = hostRef && hostRef.nativeElement ? hostRef.nativeElement.parentElement : null;
+      const parentRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(parentElem);
+      const parentFontSize: number = HtmlElemUtil.propertyAsNumber(parentRef, 'font-size');
+      if (parentFontSize > 0) {
+        hostElement.style.setProperty(CSS_PROP_LABEL_FONT_SIZE, parentFontSize.toString().concat('px'));
+      }
+    }
+  }
 
   private settingByPosition(isAdd: boolean, positionStr: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     if (positionStr) {
-      HtmlElemUtil.setClass(renderer, elem, 'glnsw-' + positionStr, isAdd);
+      HtmlElemUtil.setClass(renderer, elem, 'glnch-' + positionStr, isAdd);
       HtmlElemUtil.setAttr(renderer, elem, 'pos-' + positionStr[0], isAdd ? '' : null);
     }
   }
@@ -298,6 +335,14 @@ export class GlnCheckboxComponent
   private settingIndeterm(isIndeterm: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-indeterm', !!isIndeterm);
     HtmlElemUtil.setAttr(renderer, elem, 'ind', isIndeterm ? '' : null);
+  }
+  private settingNoRipple(isNoRippleVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-ripple', !!isNoRippleVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'norip', isNoRippleVal ? '' : null);
+  }
+  private settingReadOnly(isReadOnlyVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!isReadOnlyVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'rea', isReadOnlyVal ? '' : null);
   }
   private settingTabIndex(tabIndex: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setAttr(renderer, elem, 'tabindex', tabIndex);

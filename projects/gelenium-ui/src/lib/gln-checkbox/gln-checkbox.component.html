@@ -16,31 +16,24 @@
 
   <ng-container *ngIf="!isIndetermVal; else elseBlockIndeterm">
 
-    <ng-container *ngIf="formControl.value; else elseBlockUnChecked">
-      <svg glncb-icon
-        class="gln-checkbox-icon checked MuiSvgIcon-fontSizeMedium css-vubbuv"
-        focusable="false"
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        data-testid="checkedIcon">
-        <path
-          d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z">
-        </path>
-      </svg>
-    </ng-container>
+    <svg glncb-icon
+      class="gln-checkbox-icon  MuiSvgIcon-fontSizeMedium css-vubbuv"
+      [ngClass]="{ 'checked': formControl.value }"
+      focusable="false"
+      aria-hidden="true"
+      viewBox="0 0 24 24">
 
-    <ng-template #elseBlockUnChecked>
-      <svg glncb-icon
-        class="gln-checkbox-icon unchecked MuiSvgIcon-fontSizeMedium css-vubbuv"
-        focusable="false"
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        data-testid="uncheckedIcon">
+      <ng-container *ngIf="formControl.value; else elseBlockUnChecked">
         <path
-          d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z">
+          d="m21.1111,0l-18.47221,0c-1.46458,0 -2.63889,1.19375 -2.63889,2.65278l0,18.56944c0,1.45903 1.17431,2.65278 2.63889,2.65278l18.47221,0c1.46458,0 2.63889,-1.19375 2.63889,-2.65278l0,-18.56944c0,-1.45903 -1.17431,-2.65278 -2.63889,-2.65278zm-11.87499,18.56944l-6.59722,-6.63194l1.86042,-1.87021l4.7368,4.74847l10.01458,-10.06729l1.86042,1.88347l-11.87499,11.93749z">
         </path>
-      </svg>
-    </ng-template>
+      </ng-container>
+      <ng-template #elseBlockUnChecked>
+        <path
+          d="m21.22916,2.65278l0,18.56944l-18.52083,0l0,-18.56944l18.52083,0m0,-2.65278l-18.52083,0c-1.45521,0 -2.64583,1.19375 -2.64583,2.65278l0,18.56944c0,1.45903 1.19062,2.65278 2.64583,2.65278l18.52083,0c1.45521,0 2.64583,-1.19375 2.64583,-2.65278l0,-18.56944c0,-1.45903 -1.19062,-2.65278 -2.64583,-2.65278z">
+        </path>
+      </ng-template>
+    </svg>
 
   </ng-container>
 
@@ -52,13 +45,16 @@
       viewBox="0 0 24 24"
       data-testid="indetermIcon">
       <path
-        d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2z">
+        d="m21.2222,0l-18.56942,0c-1.45903,0 -2.65277,1.19375 -2.65277,2.65277l0,18.56942c0,1.45903 1.19375,2.65277 2.65277,2.65277l18.56942,0c1.45903,0 2.65277,-1.19375 2.65277,-2.65277l0,-18.56942c0,-1.45903 -1.19375,-2.65277 -2.65277,-2.65277zm-2.65277,13.26387l-13.26387,0l0,-2.65277l13.26387,0l0,2.65277z">
       </path>
     </svg>
   </ng-template>
 
   <!-- <span class="MuiTouchRipple-root css-w0pj6f"></span> -->
   <!-- </span> -->
+  <gln-touch-ripple *ngIf="!isDisabledVal && !isReadOnlyVal && !isNoRippleVal"
+    isCenter>
+  </gln-touch-ripple>
 </div>
 <label glncb-label
   class="gln-checkbox-label"
