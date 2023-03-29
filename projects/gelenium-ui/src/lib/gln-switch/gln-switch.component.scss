@@ -141,7 +141,7 @@ gln-switch {
   // ** Block: glnsw-label **
 
   label[glnsw-label] {
-    font-size: var(--glnsw-label-font-size, var(--glnsw--label-font-size));
+    font-size: var(--glnsw-label-fn-sz, var(--glnsw--label-fn-sz));
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -49,7 +49,7 @@ const POSITION: { [key: string]: string } = { top: 'top', bottom: 'bottom', star
 const CSS_CLS_DISABLED = 'gln-disabled';
 const CSS_ATTR_DISABLED = 'dis';
 const CSS_ATTR_HIDE_ANIMATION_INIT = 'hdAnmInit';
-const CSS_PROP_LABEL_FONT_SIZE = '--glnsw--label-font-size';
+const CSS_PROP_LABEL_FONT_SIZE = '--glnsw--label-fn-sz';
 const CSS_PROP_CONTAINER_PADDING = '--glnsw--container-pd';
 const CSS_PROP_WRAP_PADDING = '--glnsw--wrap-pd';
 const CSS_PROP_WRAP_SHIFT = '--glnsw--wrap-shift';
@@ -173,12 +173,13 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   public ngOnInit(): void {
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
+    // Defining internal CSS properties.
+    this.prepareCssProperties(this.hostRef);
+
     if (!this.isDisabledVal) {
       // Set the TagIndex value if the flag 'disabled' is not set.
       this.renderer.setAttribute(this.hostRef.nativeElement, 'tabindex', '' + this.tabIndex);
     }
-    this.prepareCssProperties(this.hostRef);
-
     const isChecked: boolean | null = BooleanUtil.init(this.isChecked) ?? (this.currConfig.isChecked || null);
     if (isChecked && !this.formControl.value) {
       this.formControl.setValue(true, { emitEvent: false });
@@ -298,7 +299,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   // ** Public methods **
 
   public doClickByLabel(event: MouseEvent): void {
-    if (!this.isDisabledVal && !this.isReadOnlyVal && this.touchRipple) {
+    if (!this.isDisabledVal && !this.isReadOnlyVal && this.touchRipple && !this.isNoRippleVal) {
       this.touchRipple.trigger(event, true);
     }
   }
