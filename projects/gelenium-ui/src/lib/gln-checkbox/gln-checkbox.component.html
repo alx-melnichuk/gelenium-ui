@@ -4,14 +4,19 @@
   (click)="toggle()">
   <!-- <span
   class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-zun73v"> -->
-  <input glncb-input
-    [attr.id]="idForInput"
-    [attr.disabled]="isDisabledVal || isReadOnlyVal ? true : undefined"
+  <input #inputElementRef
+    glncb-input
     formControlName="textData"
     class="gln-checkbox-input glncb-input PrivateSwitchBase-input css-1m9pwf3"
     type="checkbox"
+    [attr.id]="id + '_input'"
     [attr.data-indeterminate]="!!isIndetermVal"
+    [attr.disabled]="isDisabledVal ? '': null"
+    [attr.readonly]="isReadOnlyVal ? '': null"
+    [attr.tabindex]="!isDisabledVal ? tabIndex : null"
     aria-label="Checkbox demo"
+    (focus)="doFocus()"
+    (blur)="doBlur()"
     (change)="$event.stopPropagation()" />
 
   <ng-container *ngIf="!isIndetermVal; else elseBlockIndeterm">
@@ -58,7 +63,7 @@
 </div>
 <label glncb-label
   class="gln-checkbox-label"
-  [attr.for]="idForInput"
+  [attr.for]="id + '_input'"
   (click)="doClickByLabel($event)">
   <span>
     <ng-content></ng-content>
