@@ -106,7 +106,6 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   public currConfig: GlnSwitchConfig;
   public formControl: FormControl = new FormControl({ value: false, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
-  public idForInput = this.setIdForInput(this.id);
   public isCheckedVal: boolean | null = null; // Binding attribute "isChecked".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
@@ -133,9 +132,6 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
-    }
-    if (changes['id']) {
-      this.idForInput = this.setIdForInput(this.id);
     }
     if (changes['isDisabled']) {
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
@@ -324,10 +320,6 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   // ** Protected methods **
 
   // ** Private methods **
-
-  private setIdForInput(id: string): string {
-    return `${id}-input`;
-  }
 
   private prepareFormGroup(isRequired: boolean | null): void {
     this.formControl.clearValidators();

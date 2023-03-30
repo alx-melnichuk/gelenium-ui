@@ -3,11 +3,12 @@
   [formGroup]="formGroup"
   (click)="toggle()">
   <input glnsw-input
-    [attr.id]="idForInput"
-    [attr.disabled]="isDisabledVal || isReadOnlyVal ? true : undefined"
     formControlName="textData"
+    [attr.id]="id + '_input'"
     type="checkbox"
     class="gln-switch-input"
+    [attr.disabled]="isDisabledVal ? '': null"
+    [attr.readonly]="isReadOnlyVal ? '': null"
     role="switch"
     (change)="$event.stopPropagation()" />
   <span *ngIf="isWrapAndThumb"
@@ -27,7 +28,7 @@
 </div>
 <label glnsw-label
   class="gln-switch-label"
-  [attr.for]="idForInput"
+  [attr.for]="id + '_input'"
   (click)="doClickByLabel($event)">
   <span>
     <ng-content></ng-content>
