@@ -1,5 +1,6 @@
 export interface GlnCheckboxConfig {
   isChecked?: boolean | undefined;
+  isIndeterm?: boolean | undefined;
   isNoRipple?: boolean | undefined;
   isReadOnly?: boolean | undefined;
   isRequired?: boolean | undefined;

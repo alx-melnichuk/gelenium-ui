@@ -40,8 +40,8 @@ import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../direct
 import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
-import { GlnCheckboxChange } from './gln-checkbox-change.interface';
 
+import { GlnCheckboxChange } from './gln-checkbox-change.interface';
 import { GlnCheckboxConfig } from './gln-checkbox-config.interface';
 
 const POSITION: { [key: string]: string } = { top: 'top', bottom: 'bottom', start: 'start', end: 'end' };
@@ -137,16 +137,18 @@ export class GlnCheckboxComponent
     if (changes['isDisabled']) {
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
-    if (changes['isIndeterm']) {
-      this.isIndetermVal = !!BooleanUtil.init(this.isIndeterm);
+    if (changes['isIndeterm'] || (changes['config'] && this.isIndeterm == null && this.currConfig.isIndeterm != null)) {
+      this.isIndetermVal = !!(BooleanUtil.init(this.isIndeterm) ?? (this.currConfig.isIndeterm || null));
       this.settingIndeterm(this.isIndetermVal, this.renderer, this.hostRef);
-      this.indetermChange.emit(this.isIndetermVal);
+      if (!changes['isIndeterm'].isFirstChange()) {
+        this.indetermChange.emit(this.isIndetermVal);
+      }
     }
-    if (changes['isNoRipple'] || (changes['config'] && this.isNoRippleVal == null && this.currConfig.isNoRipple != null)) {
+    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
       this.isNoRippleVal = !!(BooleanUtil.init(this.isNoRipple) ?? (this.currConfig.isNoRipple || null));
       this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
-    if (changes['isReadOnly'] || (changes['config'] && this.isReadOnlyVal == null && this.currConfig.isReadOnly != null)) {
+    if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
       this.isReadOnlyVal = !!(BooleanUtil.init(this.isReadOnly) ?? (this.currConfig.isReadOnly || null));
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
@@ -154,7 +156,7 @@ export class GlnCheckboxComponent
       this.isRequiredVal = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
-    if (changes['position'] || (changes['config'] && this.positionVal == null && this.currConfig.position != null)) {
+    if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       // Remove class by old position value.
       this.settingByPosition(false, this.positionVal, this.renderer, this.hostRef);
       const positionStr: string = (this.position || this.currConfig.position || '').toString();
@@ -180,6 +182,10 @@ export class GlnCheckboxComponent
       this.settingChecked((this.isCheckedVal = true), this.renderer, this.hostRef);
     }
 
+    if (this.isIndetermVal == null) {
+      this.isIndetermVal = !!(this.currConfig.isIndeterm || null);
+      this.settingIndeterm(this.isIndetermVal, this.renderer, this.hostRef);
+    }
     if (this.isNoRippleVal == null) {
       this.isNoRippleVal = !!(this.currConfig.isNoRipple || null);
       this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
@@ -315,6 +321,18 @@ export class GlnCheckboxComponent
   public focus(): void {
     if (!this.isDisabledVal && isPlatformBrowser(this.platformId) && !!this.inputElementRef) {
       this.inputElementRef.nativeElement.focus();
+    }
+  }
+
+  public getIndeterm(): boolean {
+    return !!this.isIndetermVal;
+  }
+
+  public setIndeterm(value: boolean): void {
+    if (this.isIndetermVal != value) {
+      this.settingIndeterm((this.isIndetermVal = value), this.renderer, this.hostRef);
+      this.indetermChange.emit(this.isIndetermVal);
+      this.changeDetectorRef.markForCheck();
     }
   }
 
