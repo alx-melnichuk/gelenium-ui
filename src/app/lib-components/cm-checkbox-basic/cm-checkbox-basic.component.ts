@@ -1,8 +1,15 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { GlnCheckboxConfig, GLN_CHECKBOX_CONFIG } from 'gelenium-ui';
+
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
+
+const glnCheckboxConfigDefault: GlnCheckboxConfig = {
+  isNoRipple: true,
+  position: 'start',
+};
 
 @Component({
   selector: 'app-cm-checkbox-basic',
@@ -10,6 +17,7 @@ import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-co
   styleUrls: ['./cm-checkbox-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // providers: [{ provide: GLN_CHECKBOX_CONFIG, useValue: glnCheckboxConfigDefault }],
 })
 export class CmCheckboxBasicComponent {
   @Input()
@@ -110,7 +118,15 @@ export class CmCheckboxBasicComponent {
     model04v: new FormControl(true, []),
   });
 
-  // Page: Config08a
+  // Page: Config08
+  isShowConfig08 = true;
+  public formGroup08: FormGroup = new FormGroup({
+    model08a: new FormControl(true, []),
+    model08b: new FormControl(true, []),
+  });
+
+  // Page: Api09
+  isShowApi09 = true;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
