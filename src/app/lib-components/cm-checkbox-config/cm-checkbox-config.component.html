@@ -1,0 +1,323 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Config.
+    <a [href]="urlCmCheckbox + '#Config'">#</a>
+  </h3>
+  <p>
+    If your application will have a single style for GlnCheckbox elements, then you can set a single
+    configuration.
+    To do this, you need to create an object with the GlnCheckboxConfig interface and define the
+    required values.
+    Next, specify the resulting object in the list of providers for the entire application (at the
+    level of the AppComponent).
+  </p>
+  <code><pre source="ts">
+import &#123;
+  GlnCheckboxConfig, GLN_CHECKBOX_CONFIG
+&#125; from 'gelenium-ui';
+
+const glnCheckboxConfigDefault: GlnCheckboxConfig = &#123;
+  isNoRipple: true,
+  position: 'start',
+&#125;;
+
+@Component(&#123;
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  providers: [
+    &#123; provide: GLN_CHECKBOX_CONFIG, useValue: glnCheckboxConfigDefault &#125;
+  ],
+&#125;)
+export class AppComponent &#123;
+  title = 'demo';
+&#125;</pre></code>
+  <p>
+    After that, all input elements based on the "GlnCheckbox" component will have the same
+    configuration.
+  </p>
+</section>
+
+
+<section mr-vr
+  id="config-interface">
+  <h4 class="app-hover-link">
+    GlnCheckboxConfig interface.
+    <a [href]="urlCmCheckbox + '#config-interface'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>isChecked?: boolean | undefined;</code></td>
+      <td>
+        <span>
+          This property only sets the initial value of the element.
+          If an empty attribute is specified, then the initial value will be true.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isIndeterm?: boolean | undefined;</code></td>
+      <td>
+        <span>
+          This property sets the state to "indeterminate".
+          Changing by clicking or calling "toggle()" cancels this state.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isNoRipple?: boolean | undefined;</code></td>
+      <td>
+        <span>
+          This property to turn off the ripple effect.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isReadOnly?: boolean | undefined;</code></td>
+      <td>
+        <span>
+          This property makes the element read-only.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isRequired?: boolean | undefined;</code></td>
+      <td>
+        <span>
+          This property adds a condition: required field.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>position?: string | undefined;</code></td>
+      <td>
+        <span>
+          This property defines the position of the label relative to
+          the element.
+          <br />(default = end;)
+        </span><br />
+        <span>(optional)</span>
+        <span>Possible values:</span>
+        <ul>
+          <li>"top" - the label is on the top;</li>
+          <li>"bottom" - the label is on the bottom;</li>
+          <li>"start" - the label is on the right;</li>
+          <li>"end" - the label is on the left;</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<section mr-vr
+  id="config-provide">
+  <h4 class="app-hover-link">
+    1. Configuration with "isNoRipple: true" and "position: start".
+    <a [href]="urlCmCheckbox + '#config-provide'">#</a>
+  </h4>
+  <p>
+    For example, let's prepare a configuration in which:
+  </p>
+  <ul>
+    <li>"isNoRipple" will have the value "true";</li>
+    <li>"position" will have the value "start";).</li>
+  </ul>
+  <code><pre source="ts">
+const glnCheckboxConfigDefault: GlnCheckboxConfig = &#123;
+  isNoRipple: true,
+  position: 'start',
+&#125;;</pre></code>
+</section>
+
+<section mr-vr
+  id="config-params">
+  <h4 class="app-hover-link">
+    2. Parameter values: "isNoRipple=false" and "position=end".
+    <a [href]="urlCmCheckbox + '#config-params'">#</a>
+  </h4>
+  <p>
+    Suppose we have a provider in our application with "GlnCheckboxConfig" and all
+    input elements accept its default values.
+    We can change these values for an individual element.
+    To do this, you need to specify in this element those properties that do not match the
+    provider's configuration.
+  </p>
+  <p>
+    For example, let's specify the following parameters:
+  </p>
+  <code><pre source="html">
+  &lt;gln-checkbox
+    <i><strong>isNoRipple="false"</strong></i>
+    <i><strong>position="end"</strong></i>
+    formControlName="model06b"&gt;Label
+  &lt;/gln-checkbox&gt;</pre></code>
+  <p>
+    In other words, there is the following order of determining the configuration parameters:
+  </p>
+  <ul>
+    <li>
+      Standard values are taken (if there is one).
+    </li>
+    <li>
+      Values from the default configuration provider (if there is one).
+    </li>
+    <li>
+      Values from input parameters (if there is one).
+    </li>
+  </ul>
+</section>
+
+<form [formGroup]="formGroup08"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>1. Config: isNoRipple="true", position="start".</em>
+        </small>
+      </div>
+      <gln-checkbox class="cbcf-fn-sz"
+        formControlName="model08a">parameter label 1
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>2. Parameters: isNoRipple="false", position="end".</em>
+        </small>
+      </div>
+      <gln-checkbox class="cbcf-fn-sz"
+        formControlName="model08b"
+        isNoRipple="false"
+        position="end">parameter label 2
+      </gln-checkbox>
+    </div>
+
+  </div>
+
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup08"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;1. Config: isNoRipple="true", position="start".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbcf-fn-sz"
+        formControlName="model08a"&gt;parameter label 1
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;2. Parameters: isNoRipple="false", position="end".&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbcf-fn-sz"
+        formControlName="model08b"
+        isNoRipple="false"
+        position="end"&gt;parameter label 2
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+import &#123;
+  GlnCheckboxConfig, GLN_CHECKBOX_CONFIG
+&#125; from 'gelenium-ui';
+
+const glnCheckboxConfigDefault: GlnCheckboxConfig = &#123;
+  isNoRipple: true,
+  position: 'start',
+&#125;;
+
+@Component(&#123;
+  selector: 'app-checkbox',
+  templateUrl: './checkbox.component.html',
+  styleUrls: ['./checkbox.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [&#123;
+    provide: GLN_CHECKBOX_CONFIG, useValue: glnCheckboxConfigDefault
+  &#125;],
+&#125;)
+export class CheckboxComponent &#123;
+  public formGroup06: FormGroup = new FormGroup(&#123;
+    model06a: new FormControl(true, []),
+    model06b: new FormControl(true, []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cbcf-fn-sz &#123;
+    font-size: 12px;    
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
