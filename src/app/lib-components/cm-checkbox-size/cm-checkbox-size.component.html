@@ -1,0 +1,308 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Size.
+    <a [href]="urlCmCheckbox + '#Size'">#</a>
+  </h3>
+  <p>
+    The GlnCheckbox component has the ability to change its size.
+    All component elements are associated with a font size for the gln-Checkbox tag.
+    Thus, by changing the font size, you can choose the size of this component
+    that is optimal for you.
+  </p>
+  <span>For example:</span>
+</section>
+
+
+<form [formGroup]="formGroup03"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 9px; height: 31.5px;</em>
+        </small>
+      </div>
+      <gln-checkbox style="font-size: 9px;"
+        formControlName="model03a">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 10px; height: 35px;</em>
+        </small>
+      </div>
+      <gln-checkbox style="font-size: 10px;"
+        formControlName="model03b">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 11px; height: 38.5px;</em>
+        </small>
+      </div>
+      <gln-checkbox style="font-size: 11px;"
+        formControlName="model03c">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 12px; height: 42px; (optimally)</em>
+        </small>
+      </div>
+      <gln-checkbox style="font-size: 12px;"
+        formControlName="model03d">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 13px; height: 45.5px;</em>
+        </small>
+      </div>
+      <gln-checkbox style="font-size: 13px;"
+        formControlName="model03e">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 14px; height: 49px;</em>
+        </small>
+      </div>
+      <gln-checkbox style="font-size: 14px;"
+        formControlName="model03f">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 15px; height: 52.5px;</em>
+        </small>
+      </div>
+      <gln-checkbox style="font-size: 15px;"
+        formControlName="model03g">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>font-size: 16px; height: 56px;</em>
+        </small>
+      </div>
+      <gln-checkbox style="font-size: 16px;"
+        formControlName="model03h">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup03"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;font-size: 9px; height: 31.5px;&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox style="font-size: 9px;"
+        formControlName="model03a"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;font-size: 10px; height: 35px;&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox style="font-size: 10px;"
+        formControlName="model03b"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;font-size: 11px; height: 38.5px;&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox style="font-size: 11px;"
+        formControlName="model03c"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;font-size: 12px; height: 42px; (optimally)&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox style="font-size: 12px;"
+        formControlName="model03d"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;font-size: 13px; height: 45.5px;&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox style="font-size: 13px;"
+        formControlName="model03e"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;font-size: 14px; height: 49px;&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox style="font-size: 14px;"
+        formControlName="model03f"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;font-size: 15px; height: 52.5px;&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox style="font-size: 15px;"
+        formControlName="model03g"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;font-size: 16px; height: 56px;&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox style="font-size: 16px;"
+        formControlName="model03h"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-checkbox',
+  templateUrl: './checkbox.component.html',
+  styleUrls: ['./checkbox.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CheckboxComponent &#123;
+  public formGroup03: FormGroup = new FormGroup(&#123;
+    model03a: new FormControl(true, []),
+    model03b: new FormControl(true, []),
+    model03c: new FormControl(true, []),
+    model03d: new FormControl(true, []),
+    model03e: new FormControl(true, []),
+    model03f: new FormControl(true, []),
+    model03g: new FormControl(true, []),
+    model03h: new FormControl(true, []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
