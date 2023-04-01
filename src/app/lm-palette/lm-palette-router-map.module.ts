@@ -21,6 +21,19 @@ const siteUrlsButton: SiteUrl[] = [
 
 SiteMenuUtil.addItem('Palette', 'Button', { label: 'Button', siteUrls: siteUrlsButton });
 
+// ** Menu for "Checkbox". **
+
+RouterConfig.add('URL_PALETTE_CHECKBOX', 'checkbox');
+const urlPlCheckbox = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CHECKBOX');
+
+const siteUrlsCheckbox: SiteUrl[] = [
+  { label: 'Basic', url: urlPlCheckbox, fragment: 'Basic' },
+  { label: 'Like a Bootstrap', url: urlPlCheckbox, fragment: 'Bootstrap' },
+  { label: 'Like a Material-UI', url: urlPlCheckbox, fragment: 'MaterialUI' },
+];
+
+SiteMenuUtil.addItem('Palette', 'Checkbox', { label: 'Checkbox', siteUrls: siteUrlsCheckbox });
+
 // ** Menu for "Frame". **
 
 RouterConfig.add('URL_PALETTE_FRAME', 'frame');
