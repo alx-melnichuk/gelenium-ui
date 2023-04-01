@@ -11,35 +11,6 @@ app-cm-checkbox-basic {
     font-size: 12px;
   }
 
-  // Page: Attributes02a
-  .cbat1-elem {
-    min-width: 19ch;
-  }
-  .cbat1-fn-sz {
-    font-size: 12px;
-  }
-
-  // Page: Attributes02d
-  .cbat2-elem {
-    min-width: 19ch;
-  }
-  .cbat2-fn-sz {
-    font-size: 12px;
-  }
-  .cbat2-err {
-    color: red;
-  }
-
-  // Page: Attributes02h
-  .cbat3-elem {
-    min-width: 19ch;
-  }
-  .cbat3-fn-sz {
-    font-size: 12px;
-  }
-
-  // Page: Size03a
-  
   // Page: Palette04
   .cbpl-elem {
     min-width: 17ch;
@@ -132,8 +103,4 @@ app-cm-checkbox-basic {
     --glncb-dis-chk-cl-svg: #212529;
   }
 
-  // Page: Config08a
-  .cbcf-fn-sz {
-    font-size: 12px;    
-  }
 }
