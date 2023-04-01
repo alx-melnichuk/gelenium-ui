@@ -1,0 +1,577 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Attributes.
+    <a [href]="urlCmCheckbox + '#Attributes'">#</a>
+  </h3>
+  <p>The following attributes are supported:</p>
+  <ul>
+    <li>"id" - parameter for defining the unique identifier of the input field
+      (id="unique_identifier");
+    </li>
+    <li>
+      "config" - Defines a configuration object.
+      <a [href]="urlCmCheckbox + '#config-interface'">More details.</a>
+    </li>
+    <li>"isChecked" - specifies only the initial value of the element (isChecked);</li>
+    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
+    <li>"isReadOnly" - Specifies the status of an element as read-only (isReadOnly);</li>
+    <li>
+      "isIndeterm" - Determines whether the checkbox is in the "indeterminate" state
+      (isIndeterm);
+    </li>
+  </ul>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem ">
+    <div>
+      <small>
+        <em>Attributes: id, isChecked. Value={{ data02a }}</em>
+      </small>
+    </div>
+    <gln-checkbox class="cbat1-fn-sz"
+      id="unique_id_checkbox02a"
+      (change)="data02a=$event.checked"
+      [isChecked]="data02a">Checked
+    </gln-checkbox>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attributes: [(ngModel)]. Value={{ data02b }}</em>
+      </small>
+    </div>
+    <gln-checkbox class="cbat1-fn-sz"
+      [(ngModel)]="data02b">ngModel
+    </gln-checkbox>
+  </div>
+
+</div>
+
+<form [formGroup]="formGroup02a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem cbat1-elem">
+      <div>
+        <small><em>Attributes: isReadOnly.</em></small>
+      </div>
+      <gln-checkbox class="cbat1-fn-sz"
+        formControlName="model02a"
+        isReadOnly>Read Only
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbat1-elem">
+      <div>
+        <small><em>Attributes: isDisabled.</em></small>
+      </div>
+      <gln-checkbox class="cbat1-fn-sz"
+        formControlName="model02b"
+        isDisabled>Disabled
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbat1-elem">
+      <div>
+        <small><em>Indeterminate.</em></small>
+      </div>
+      <gln-checkbox class="cbat1-fn-sz"
+        formControlName="model02c"
+        isIndeterm>
+      </gln-checkbox>
+    </div>
+
+  </div>
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: id, isChecked. Value=<b>&#123;</b>&#123; data02a &#125;&#125;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-checkbox class="cbat1-fn-sz"
+      id="unique_id_checkbox02a"
+      (change)="data02a=$event.checked"
+      [isChecked]="data02a"&gt;Checked
+    &lt;/gln-checkbox&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attributes: [(ngModel)]. Value=<b>&#123;</b>&#123; data02b &#125;&#125;&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-checkbox class="cbat1-fn-sz"
+      [(ngModel)]="data02b"&gt;ngModel
+    &lt;/gln-checkbox&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;form [formGroup]="formGroup02a"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem cbat1-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attributes: isReadOnly.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbat1-fn-sz"
+        formControlName="model02a"
+        isReadOnly&gt;Read Only
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbat1-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attributes: isDisabled.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbat1-fn-sz"
+        formControlName="model02b"
+        isDisabled&gt;Disabled
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbat1-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Indeterminate.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbat1-fn-sz"
+        formControlName="model02c"
+        isIndeterm&gt;
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-checkbox',
+  templateUrl: './checkbox.component.html',
+  styleUrls: ['./checkbox.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CheckboxComponent &#123;
+  public data02a = true;
+  public data02b = true;
+  public formGroup02a: FormGroup = new FormGroup(&#123;
+    model02a: new FormControl(true, []),
+    model02b: new FormControl(true, []),
+    model02c: new FormControl(true, []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cbat1-elem &#123;
+    min-width: 19ch;
+  &#125;
+  .cbat1-fn-sz &#123;
+    font-size: 12px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="attributes-supported02">
+  <h4 class="app-hover-link">
+    Attributes are also supported 2:
+    <a [href]="urlCmCheckbox + '#attributes-supported02'">#</a>
+  </h4>
+  <ul>
+    <li>"isNoRipple" - disables the execution of the ripple effect (isNoRipple);</li>
+    <li>"noHov" - disables the display of additional background on hover (noHov);</li>
+    <li>"isRequired" - a sign that the field is required (isRequired);</li>
+  </ul>
+</section>
+
+
+<form [formGroup]="formGroup02d"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem cbat2-elem">
+      <div>
+        <small><em>Attributes: isNoRipple</em></small>
+      </div>
+      <gln-checkbox class="cbat2-fn-sz"
+        formControlName="model02d"
+        isNoRipple>No Ripple
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbat2-elem">
+      <div>
+        <small><em>Attributes: noHov</em></small>
+      </div>
+      <gln-checkbox class="cbat2-fn-sz"
+        formControlName="model02e"
+        noHov>No hover
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbat2-elem">
+      <div>
+        <small>
+          <em>
+            Attributes: isRequired
+          </em>
+        </small>
+      </div>
+      <gln-checkbox class="cbat2-fn-sz"
+        formControlName="model02f"
+        isRequired>
+        <span [ngClass]="{ 'cbat2-err': control02d.model02f.errors }">
+          isRequired errors={{ control02d.model02f.errors | json }}
+        </span>
+      </gln-checkbox>
+    </div>
+
+  </div>
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup02d"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem cbat2-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attributes: isNoRipple&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbat2-fn-sz"
+        formControlName="model02d"
+        isNoRipple&gt;No Ripple
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbat2-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attributes: noHov&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbat2-fn-sz"
+        formControlName="model02e"
+        noHov&gt;No hover
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbat2-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;
+            Attributes: isRequired
+          &lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbat2-fn-sz"
+        formControlName="model02f"
+        isRequired&gt;
+        &lt;span [ngClass]="&#123; 'cbat2-err': control02d.model02f.errors &#125;"&gt;
+          isRequired errors=<b>&#123;</b>&#123; control02d.model02f.errors | json &#125;&#125;
+        &lt;/span&gt;
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-checkbox',
+  templateUrl: './checkbox.component.html',
+  styleUrls: ['./checkbox.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CheckboxComponent &#123;
+  public control02d = &#123;
+    model02d: new FormControl(true, []),
+    model02e: new FormControl(true, []),
+    model02f: new FormControl(null, []),
+  &#125;;
+  public formGroup02d: FormGroup = new FormGroup(this.control02d);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cbat2-elem &#123;
+    min-width: 19ch;
+  &#125;
+  .cbat2-fn-sz &#123;
+    font-size: 12px;
+  &#125;
+  .cbat2-err &#123;
+    color: red;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+
+<section mr-vr
+  id="attributes-position">
+  <h4 class="app-hover-link">
+    Position.
+    <a [href]="urlCmCheckbox + '#attributes-position'">#</a>
+  </h4>
+  <p>
+    It is possible to change the position of the label relative to the GlnCheckbox component.
+  </p>
+</section>
+
+
+<form [formGroup]="formGroup02h"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem cbat3-elem">
+      <div>
+        <small>
+          <em>Attributes: position - top.</em>
+        </small>
+      </div>
+      <gln-checkbox class="cbat3-fn-sz"
+        formControlName="model02h"
+        position="top">Position - top
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbat3-elem">
+      <div>
+        <small>
+          <em>Attributes: position - bottom.</em>
+        </small>
+      </div>
+      <gln-checkbox class="cbat3-fn-sz"
+        formControlName="model02i"
+        position="bottom">Position - bottom
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbat3-elem">
+      <div>
+        <small>
+          <em>Attributes: position - start.</em>
+        </small>
+      </div>
+      <gln-checkbox class="cbat3-fn-sz"
+        formControlName="model02j"
+        position="start">Position - start
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbat3-elem">
+      <div>
+        <small>
+          <em>Attributes: position - end.</em>
+        </small>
+      </div>
+      <gln-checkbox class="cbat3-fn-sz"
+        formControlName="model02k"
+        position="end">Position - end
+      </gln-checkbox>
+    </div>
+
+  </div>
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup02h"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem cbat3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: position - top.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbat3-fn-sz"
+        formControlName="model02h"
+        position="top"&gt;Position - top
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbat3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: position - bottom.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbat3-fn-sz"
+        formControlName="model02i"
+        position="bottom"&gt;Position - bottom
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbat3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: position - start.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbat3-fn-sz"
+        formControlName="model02j"
+        position="start"&gt;Position - start
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbat3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;Attributes: position - end.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbat3-fn-sz"
+        formControlName="model02k"
+        position="end"&gt;Position - end
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-checkbox',
+  templateUrl: './checkbox.component.html',
+  styleUrls: ['./checkbox.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CheckboxComponent &#123;
+  public formGroup02h: FormGroup = new FormGroup(&#123;
+    model02h: new FormControl(true, []),
+    model02i: new FormControl(false, []),
+    model02j: new FormControl(true, []),
+    model02k: new FormControl(false, []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cbat3-elem &#123;
+    min-width: 19ch;
+  &#125;
+  .cbat3-fn-sz &#123;
+    font-size: 12px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
