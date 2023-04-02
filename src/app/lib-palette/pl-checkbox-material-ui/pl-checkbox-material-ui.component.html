@@ -1,0 +1,257 @@
+<section mr-vr
+  id="palette-mui">
+  <h4 class="app-hover-link">
+    Like a Material-UI.
+    <a [href]="urlPlCheckbox + '#palette-mui'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnCheckbox in style as "Material-UI".
+  </p>
+</section>
+
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabled04i=!isDisabled04i" />
+    Is disabled
+  </label>&nbsp;
+  <label>
+    <input type="checkbox"
+      (change)="isIndeterm04i=!isIndeterm04i" />
+    Is indeterminate
+  </label>
+</section>
+
+
+<form [formGroup]="formGroup04i"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem cbpl2-elem">
+      <div>
+        <small><em>color: mui-primary</em></small>
+      </div>
+      <gln-checkbox class="cbpl2-mui-primary"
+        formControlName="model04i"
+        [isDisabled]="isDisabled04i"
+        [isIndeterm]="isIndeterm04i">
+        mui-primary
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl2-elem">
+      <div>
+        <small><em>color: mui-secondary</em></small>
+      </div>
+      <gln-checkbox class="cbpl2-mui-secondary"
+        formControlName="model04j"
+        [isDisabled]="isDisabled04i"
+        [isIndeterm]="isIndeterm04i">
+        mui-secondary
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl2-elem">
+      <div>
+        <small><em>color: mui-success</em></small>
+      </div>
+      <gln-checkbox class="cbpl2-mui-success"
+        formControlName="model04k"
+        [isDisabled]="isDisabled04i"
+        [isIndeterm]="isIndeterm04i">
+        mui-success
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl2-elem">
+      <div>
+        <small><em>color: mui-default</em></small>
+      </div>
+      <gln-checkbox class="cbpl2-mui-default"
+        formControlName="model04l"
+        [isDisabled]="isDisabled04i"
+        [isIndeterm]="isIndeterm04i">
+        mui-default
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl2-elem">
+      <div>
+        <small><em>color: mui-pink</em></small>
+      </div>
+      <gln-checkbox class="cbpl2-mui-pink"
+        formControlName="model04m"
+        [isDisabled]="isDisabled04i"
+        [isIndeterm]="isIndeterm04i">
+        mui-pink
+      </gln-checkbox>
+    </div>
+
+  </div>
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04i"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem cbpl2-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: mui-primary&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl2-mui-primary"
+        formControlName="model04i"
+        [isDisabled]="isDisabled04i"
+        [isIndeterm]="isIndeterm04i"&gt;
+        mui-primary
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl2-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: mui-secondary&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl2-mui-secondary"
+        formControlName="model04j"
+        [isDisabled]="isDisabled04i"
+        [isIndeterm]="isIndeterm04i"&gt;
+        mui-secondary
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl2-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: mui-success&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl2-mui-success"
+        formControlName="model04k"
+        [isDisabled]="isDisabled04i"
+        [isIndeterm]="isIndeterm04i"&gt;
+        mui-success
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl2-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: mui-default&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl2-mui-default"
+        formControlName="model04l"
+        [isDisabled]="isDisabled04i"
+        [isIndeterm]="isIndeterm04i"&gt;
+        mui-default
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl2-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: mui-pink&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl2-mui-pink"
+        formControlName="model04m"
+        [isDisabled]="isDisabled04i"
+        [isIndeterm]="isIndeterm04i"&gt;
+        mui-pink
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-checkbox',
+  templateUrl: './checkbox.component.html',
+  styleUrls: ['./checkbox.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CheckboxComponent &#123;
+  public isDisabled04i: boolean = false;
+  public isIndeterm04i: boolean = false;
+  public formGroup04i: FormGroup = new FormGroup(&#123;
+    model04i: new FormControl(true, []),
+    model04j: new FormControl(true, []),
+    model04k: new FormControl(true, []),
+    model04l: new FormControl(true, []),
+    model04m: new FormControl(true, []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cbpl2-elem &#123;
+    min-width: 17ch;
+  &#125;
+  .cbpl2-mui-primary &#123;
+    font-size: 12px;
+    --glncl-primary-h: 210;
+    --glncl-primary-s: 79%;
+    --glncl-primary-l: 46%;
+  &#125;
+  .cbpl2-mui-secondary &#123;
+    font-size: 12px;
+    --glncl-primary-h: 291;
+    --glncl-primary-s: 64%;
+    --glncl-primary-l: 42%;
+  &#125;
+  .cbpl2-mui-success &#123;
+    font-size: 12px;
+    --glncl-primary-h: 123;
+    --glncl-primary-s: 46%;
+    --glncl-primary-l: 34%;
+  &#125;
+  .cbpl2-mui-default &#123;
+    font-size: 12px;
+    --glncl-primary-h: 0;
+    --glncl-primary-s: 0%;
+    --glncl-primary-l: 0%;
+    --glncb-def-cl-svg: rgba(0, 0, 0, 0.6);
+    --glncb-def-chk-cl-svg: rgba(0, 0, 0, 0.6);
+    --glncb-dis-cl-svg: rgba(0, 0, 0, 0.26);
+    --glncb-dis-chk-cl-svg: rgba(0, 0, 0, 0.26);
+  &#125;
+  .cbpl2-mui-pink &#123;
+    font-size: 12px;
+    --glncl-primary-h: 338;
+    --glncl-primary-s: 78%;
+    --glncl-primary-l: 48%;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
