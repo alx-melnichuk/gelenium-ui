@@ -1,0 +1,45 @@
+/*# sourceURL=pl-checkbox-bootstrap.component.scss */
+
+app-pl-checkbox-bootstrap {
+  display: block;
+
+  .cbpl3-elem {
+    min-width: 17ch;
+  }
+  .cbpl3-bs-default {
+    font-size: 10.67px;
+    &.gln-disabled {
+      opacity: .5;
+    }
+    --glncb-def-cl-svg: rgba(0,0,0,.25);
+    --glncb-dis-cl-svg: rgba(0,0,0,.25);
+  }
+  .cbpl3-bs-primary {
+    --glncb-def-chk-cl-svg: #0d6efd;
+    --glncb-dis-chk-cl-svg: #0d6efd;
+  }
+  .cbpl3-bs-secondary {
+    --glncb-def-chk-cl-svg: #6c757d;
+    --glncb-dis-chk-cl-svg: #6c757d;
+  }
+  .cbpl3-bs-success {
+    --glncb-def-chk-cl-svg: #198754;
+    --glncb-dis-chk-cl-svg: #198754;
+  }
+  .cbpl3-bs-danger {
+    --glncb-def-chk-cl-svg: #dc3545;
+    --glncb-dis-chk-cl-svg: #dc3545;
+  }
+  .cbpl3-bs-warning {
+    --glncb-def-chk-cl-svg: #ffc107;
+    --glncb-dis-chk-cl-svg: #ffc107;
+  }
+  .cbpl3-bs-info {
+    --glncb-def-chk-cl-svg: #0dcaf0;
+    --glncb-dis-chk-cl-svg: #0dcaf0;
+  }
+  .cbpl3-bs-dark {
+    --glncb-def-chk-cl-svg: #212529;
+    --glncb-dis-chk-cl-svg: #212529;
+  }
+}
