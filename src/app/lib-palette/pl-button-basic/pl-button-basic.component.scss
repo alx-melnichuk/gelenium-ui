@@ -13,4 +13,12 @@ app-pl-button-basic {
   .bb-items > :not(first-child) {
     margin-left: 5%;
   }
+  .btpl-elem {
+    min-width: 15ch;
+  }
+  .btpl-customer {
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
+  }
 }
