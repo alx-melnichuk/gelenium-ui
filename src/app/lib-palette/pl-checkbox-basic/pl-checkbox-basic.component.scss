@@ -1,0 +1,18 @@
+/*# sourceURL=pl-checkbox-basic.component.scss */
+
+app-pl-checkbox-basic {
+  display: block;
+
+  .cbpl-elem {
+    min-width: 17ch;
+  }
+  .cbpl-fn-sz {
+    font-size: 12px;
+  }
+  .cbpl-customer {
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
+    --gln-customer-cl: hsl(var(--gln-customer-h), var(--gln-customer-s), var(--gln-customer-l));
+  }
+}

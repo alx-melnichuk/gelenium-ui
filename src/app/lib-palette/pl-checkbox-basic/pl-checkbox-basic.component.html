@@ -1,0 +1,272 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlPlCheckbox + '#Basic'">#</a>
+  </h3>
+  <p>
+    The GlnCheckbox component has the ability to change its color.
+  </p>
+  <span>For example:</span>
+  <code><pre source="html">
+&lt;gln-checkbox
+  <i><strong>[glnColor]="&#123; primary: 'danger' &#125;"</strong></i>
+  formControlName="model02a"&gt;
+  Label
+&lt;/gln-checkbox&gt;</pre></code>
+  <p>
+    This means that you want to use the system color "danger"
+    as the "primary" color.
+  </p>
+  <span>
+    To use the glnColor directive, you need to add in your module:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
+  </code>
+</section>
+
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabled04a=!isDisabled04a" />
+    Is disabled
+  </label>&nbsp;
+  <label>
+    <input type="checkbox"
+      (change)="isIndeterm04a=!isIndeterm04a" />
+    Is indeterminate
+  </label>
+</section>
+
+<form [formGroup]="formGroup04a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem cbpl-elem">
+      <div>
+        <small><em>color: primary</em></small>
+      </div>
+      <gln-checkbox class="cbpl-fn-sz"
+        [glnColor]="{ primary: 'primary' }"
+        formControlName="model04a"
+        [isDisabled]="isDisabled04a"
+        [isIndeterm]="isIndeterm04a">
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl-elem">
+      <div>
+        <small><em>color: danger</em></small>
+      </div>
+      <gln-checkbox class="cbpl-fn-sz"
+        [glnColor]="{ primary: 'danger' }"
+        formControlName="model04b"
+        [isDisabled]="isDisabled04a"
+        [isIndeterm]="isIndeterm04a">
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl-elem">
+      <div>
+        <small><em>color: success</em></small>
+      </div>
+      <gln-checkbox class="cbpl-fn-sz"
+        [glnColor]="{ primary: 'success' }"
+        formControlName="model04c"
+        [isDisabled]="isDisabled04a"
+        [isIndeterm]="isIndeterm04a">
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl-elem">
+      <div>
+        <small><em>color: info</em></small>
+      </div>
+      <gln-checkbox class="cbpl-fn-sz"
+        [glnColor]="{ primary: 'info' }"
+        formControlName="model04d"
+        [isDisabled]="isDisabled04a"
+        [isIndeterm]="isIndeterm04a">
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl-elem">
+      <div>
+        <small><em>color: warning</em></small>
+      </div>
+      <gln-checkbox class="cbpl-fn-sz"
+        [glnColor]="{ primary: 'warning' }"
+        formControlName="model04e"
+        [isDisabled]="isDisabled04a"
+        [isIndeterm]="isIndeterm04a">
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl-elem cbpl-customer">
+      <div>
+        <small><em>color: customer</em></small>
+      </div>
+      <gln-checkbox class="cbpl-fn-sz"
+        [glnColor]="{ primary: 'customer' }"
+        formControlName="model04f"
+        [isDisabled]="isDisabled04a"
+        [isIndeterm]="isIndeterm04a">
+      </gln-checkbox>
+    </div>
+
+  </div>
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04a"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem cbpl-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: primary&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl-fn-sz"
+        [glnColor]="&#123; primary: 'primary' &#125;"
+        formControlName="model04a"
+        [isDisabled]="isDisabled04a"
+        [isIndeterm]="isIndeterm04a"&gt;
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: danger&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl-fn-sz"
+        [glnColor]="&#123; primary: 'danger' &#125;"
+        formControlName="model04b"
+        [isDisabled]="isDisabled04a"
+        [isIndeterm]="isIndeterm04a"&gt;
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: success&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl-fn-sz"
+        [glnColor]="&#123; primary: 'success' &#125;"
+        formControlName="model04c"
+        [isDisabled]="isDisabled04a"
+        [isIndeterm]="isIndeterm04a"&gt;
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: info&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl-fn-sz"
+        [glnColor]="&#123; primary: 'info' &#125;"
+        formControlName="model04d"
+        [isDisabled]="isDisabled04a"
+        [isIndeterm]="isIndeterm04a"&gt;
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: warning&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl-fn-sz"
+        [glnColor]="&#123; primary: 'warning' &#125;"
+        formControlName="model04e"
+        [isDisabled]="isDisabled04a"
+        [isIndeterm]="isIndeterm04a"&gt;
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl-elem cbpl-customer"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: customer&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl-fn-sz"
+        [glnColor]="&#123; primary: 'customer' &#125;"
+        formControlName="model04f"
+        [isDisabled]="isDisabled04a"
+        [isIndeterm]="isIndeterm04a"&gt;
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-checkbox',
+  templateUrl: './checkbox.component.html',
+  styleUrls: ['./checkbox.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CheckboxComponent &#123;
+  public isDisabled04a: boolean = false;
+  public isIndeterm04a: boolean = false;
+  public formGroup04a: FormGroup = new FormGroup(&#123;
+    model04a: new FormControl(true, []),
+    model04b: new FormControl(true, []),
+    model04c: new FormControl(true, []),
+    model04d: new FormControl(true, []),
+    model04e: new FormControl(true, []),
+    model04f: new FormControl(true, []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cbpl-elem &#123;
+    min-width: 17ch;
+  &#125;
+  .cbpl-fn-sz &#123;
+    font-size: 12px;
+  &#125;
+  .cbpl-customer &#123;
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
+    --gln-customer-cl: hsl(var(--gln-customer-h), var(--gln-customer-s), var(--gln-customer-l));
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
