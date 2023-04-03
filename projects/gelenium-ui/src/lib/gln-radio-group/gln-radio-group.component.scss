@@ -1,0 +1,9 @@
+/*# sourceURL=gln-radio-group.component.scss */
+
+gln-radio-group {
+  display: block;
+
+  .gln-radio-button ~ .gln-radio-button {
+    margin-left: var(--glnrg-rad-mf-lf , 1em);
+  }
+}
