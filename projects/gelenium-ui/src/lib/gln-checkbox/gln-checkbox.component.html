@@ -2,8 +2,7 @@
   class="gln-checkbox-container"
   [formGroup]="formGroup"
   (click)="toggle()">
-  <!-- <span
-  class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-zun73v"> -->
+
   <input #inputElementRef
     glncb-input
     formControlName="textData"
@@ -22,7 +21,7 @@
   <ng-container *ngIf="!isIndetermVal; else elseBlockIndeterm">
 
     <svg glncb-icon
-      class="gln-checkbox-icon  MuiSvgIcon-fontSizeMedium css-vubbuv"
+      class="gln-checkbox-icon"
       [ngClass]="{ 'checked': formControl.value }"
       focusable="false"
       aria-hidden="true"
@@ -44,7 +43,7 @@
 
   <ng-template #elseBlockIndeterm>
     <svg glncb-icon
-      class="gln-checkbox-icon indeterm MuiSvgIcon-fontSizeMedium css-vubbuv"
+      class="gln-checkbox-icon indeterm"
       focusable="false"
       aria-hidden="true"
       viewBox="0 0 24 24"
@@ -55,12 +54,11 @@
     </svg>
   </ng-template>
 
-  <!-- <span class="MuiTouchRipple-root css-w0pj6f"></span> -->
-  <!-- </span> -->
   <gln-touch-ripple *ngIf="!isDisabledVal && !isReadOnlyVal && !isNoRippleVal"
     isCenter>
   </gln-touch-ripple>
 </div>
+
 <label glncb-label
   class="gln-checkbox-label"
   [attr.for]="id + '_input'"
