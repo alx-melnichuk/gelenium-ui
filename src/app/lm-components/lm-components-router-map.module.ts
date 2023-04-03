@@ -8,6 +8,7 @@ import { SiteMenuUtil, SiteUrl } from '../lib-core/utils/site-menu.util';
 
 RouterConfig.add('URL_COMPONENTS', 'components');
 
+// -- Autocomplete --
 RouterConfig.add('URL_COMPONENTS_AUTOCOMPLETE', 'autocomplete');
 const urlAutocomplete = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_AUTOCOMPLETE');
 const siteUrlsAutocomplete: SiteUrl[] = [
@@ -20,6 +21,7 @@ const siteUrlsAutocomplete: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Autocomplete', { label: 'Autocomplete', siteUrls: siteUrlsAutocomplete });
 
+// -- Button --
 RouterConfig.add('URL_COMPONENTS_BUTTON', 'button');
 const urlButton = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_BUTTON');
 const siteUrlsButton: SiteUrl[] = [
@@ -34,6 +36,7 @@ const siteUrlsButton: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Button', { label: 'Button', siteUrls: siteUrlsButton });
 
+// -- Checkbox --
 RouterConfig.add('URL_COMPONENTS_CHECKBOX', 'checkbox');
 const urlCheckbox = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CHECKBOX');
 const siteUrlsCheckbox: SiteUrl[] = [
@@ -46,6 +49,7 @@ const siteUrlsCheckbox: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Checkbox', { label: 'Checkbox', siteUrls: siteUrlsCheckbox });
 
+// -- Chip --
 RouterConfig.add('URL_COMPONENTS_CHIP', 'chip');
 const urlChip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CHIP');
 const siteUrlsChip: SiteUrl[] = [
@@ -59,6 +63,7 @@ const siteUrlsChip: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Chip', { label: 'Chip', siteUrls: siteUrlsChip });
 
+// -- Frame --
 RouterConfig.add('URL_COMPONENTS_FRAME', 'frame');
 const urlFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
 const siteUrlsFrame: SiteUrl[] = [
@@ -75,6 +80,7 @@ const siteUrlsFrame: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Frame', { label: 'Frame', siteUrls: siteUrlsFrame });
 
+// -- HintOrError --
 RouterConfig.add('URL_COMPONENTS_HINT_OR_ERROR', 'hint-or-error');
 const urlHintOrError = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_HINT_OR_ERROR');
 const siteUrlsHintOrError: SiteUrl[] = [
@@ -83,6 +89,7 @@ const siteUrlsHintOrError: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'HintOrError', { label: 'HintOrError', siteUrls: siteUrlsHintOrError });
 
+// -- InfiniteScroll --
 RouterConfig.add('URL_COMPONENTS_INFINITE_SCROLL', 'infinite-scroll');
 const urlInfiniteScroll = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INFINITE_SCROLL');
 const siteUrls: SiteUrl[] = [
@@ -92,6 +99,7 @@ const siteUrls: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'InfiniteScroll', { label: 'InfiniteScroll', siteUrls });
 
+// -- Input --
 RouterConfig.add('URL_COMPONENTS_INPUT', 'input');
 const urlInput = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INPUT');
 const siteUrlsInput: SiteUrl[] = [
@@ -109,6 +117,7 @@ const siteUrlsInput: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Input', { label: 'Input', siteUrls: siteUrlsInput });
 
+// -- Pagination --
 RouterConfig.add('URL_COMPONENTS_PAGINATION', 'pagination');
 const urlPagination = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_PAGINATION');
 const siteUrlsPagination: SiteUrl[] = [
@@ -123,6 +132,20 @@ const siteUrlsPagination: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Pagination', { label: 'Pagination', siteUrls: siteUrlsPagination });
 
+// -- Radio --
+RouterConfig.add('URL_COMPONENTS_RADIOBUTTON', 'radio');
+const urlRadio = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_RADIOBUTTON');
+const siteUrlsRadio: SiteUrl[] = [
+  { label: 'Basic', url: urlRadio, fragment: 'Basic' },
+  // { label: 'Attributes', url: urlRadio, fragment: 'Attributes' },
+  // { label: 'Size', url: urlRadio, fragment: 'Size' },
+  // { label: 'Palette', url: urlRadio, fragment: 'Palette' },
+  // { label: 'Config', url: urlRadio, fragment: 'Config' },
+  // { label: 'Api', url: urlRadio, fragment: 'Api' },
+];
+SiteMenuUtil.addItem('Components', 'Radio button', { label: 'Radio button', siteUrls: siteUrlsRadio });
+
+// -- Select --
 RouterConfig.add('URL_COMPONENTS_SELECT', 'select');
 const urlSelect = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SELECT');
 const siteUrlsSelect: SiteUrl[] = [
@@ -142,6 +165,7 @@ const siteUrlsSelect: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Select', { label: 'Select', siteUrls: siteUrlsSelect });
 
+// -- Spinner --
 RouterConfig.add('URL_COMPONENTS_SPINNER', 'spinner');
 const urlSpinner = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SPINNER');
 const siteUrlsSpinner: SiteUrl[] = [
@@ -155,6 +179,7 @@ const siteUrlsSpinner: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Spinner', { label: 'Spinner', siteUrls: siteUrlsSpinner });
 
+// -- Switch --
 RouterConfig.add('URL_COMPONENTS_SWITCH', 'switch');
 const urlSwitch = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SWITCH');
 const siteUrlsSwitch: SiteUrl[] = [
@@ -168,6 +193,7 @@ const siteUrlsSwitch: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Switch', { label: 'Switch', siteUrls: siteUrlsSwitch });
 
+// -- Textarea --
 RouterConfig.add('URL_COMPONENTS_TEXTAREA', 'textarea');
 const urlTextarea = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TEXTAREA');
 const siteUrlsTextarea: SiteUrl[] = [
@@ -185,6 +211,7 @@ const siteUrlsTextarea: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Textarea', { label: 'Textarea', siteUrls: siteUrlsTextarea });
 
+// -- Tooltip --
 RouterConfig.add('URL_COMPONENTS_TOOLTIP', 'tooltip');
 const urlTooltip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TOOLTIP');
 const siteUrlsTooltip: SiteUrl[] = [

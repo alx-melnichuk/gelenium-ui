@@ -15,6 +15,7 @@ const URL_COMPONENTS_HINT_OR_ERROR = RouterConfig.get('URL_COMPONENTS_HINT_OR_ER
 const URL_COMPONENTS_INFINITE_SCROLL = RouterConfig.get('URL_COMPONENTS_INFINITE_SCROLL');
 const URL_COMPONENTS_INPUT = RouterConfig.get('URL_COMPONENTS_INPUT');
 const URL_COMPONENTS_PAGINATION = RouterConfig.get('URL_COMPONENTS_PAGINATION');
+const URL_COMPONENTS_RADIOBUTTON = RouterConfig.get('URL_COMPONENTS_RADIOBUTTON');
 const URL_COMPONENTS_SELECT = RouterConfig.get('URL_COMPONENTS_SELECT');
 const URL_COMPONENTS_SPINNER = RouterConfig.get('URL_COMPONENTS_SPINNER');
 const URL_COMPONENTS_SWITCH = RouterConfig.get('URL_COMPONENTS_SWITCH');
@@ -61,6 +62,10 @@ const routes: Routes = [
       {
         path: URL_COMPONENTS_PAGINATION,
         loadChildren: () => import('../lib-components/cm-pagination/cm-pagination.module').then((m) => m.CmPaginationModule),
+      },
+      {
+        path: URL_COMPONENTS_RADIOBUTTON,
+        loadChildren: () => import('../lib-components/cm-radio/cm-radio.module').then((m) => m.CmRadioModule),
       },
       {
         path: URL_COMPONENTS_SELECT,

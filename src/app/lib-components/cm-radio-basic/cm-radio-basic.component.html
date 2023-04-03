@@ -1,0 +1,118 @@
+<section *ngIf="isShowBasic01"
+  mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmRadio + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnRadioModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    The GlnRadio component displays the behavior of a radio button in a group
+    of related options (&lt;input type="radio"&gt;).
+    The component allows you to select only one element from several related components.
+  </p>
+  <span> For example:</span>
+  <code><pre source="html">
+&lt;<strong>gln-radio</strong> formControlName="model01"&gt;
+&lt;/<strong>gln-radio</strong>&gt;</pre></code>
+</section>
+
+<div class="rdbs-group">
+  <p>current element: "{{ data01a }}"</p>
+  <fieldset>
+    <legend>Select a fruit:</legend>
+
+    <label *ngFor="let item of fruits">
+      <input type="radio"
+        name="fruit"
+        [value]="item"
+        (change)="data01a=getValue($event)"
+        [checked]="data01a==item" />
+      {{ item }}
+    </label>
+
+  </fieldset>
+</div>
+
+<form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <gln-radio-group>
+
+      <gln-radio-button *ngFor="let item of fruits"
+        [value]="item">
+        {{ item }}
+      </gln-radio-button>
+
+    </gln-radio-group>
+
+    <!-- <div class="app-elem rdbs-elem">
+      <div>
+        <small><em>Checked.</em></small>
+      </div>
+      <gln-radio class="rdbs-fn-sz"
+        formControlName="model01a"
+        name="drone">
+         {{ fruits[0] }}
+      </gln-radio>
+    </div> -->
+
+    <!-- <div class="app-elem rdbs-elem">
+      <div>
+        <small><em>Unchecked.</em></small>
+      </div>
+      <gln-radio class="rdbs-fn-sz"
+        formControlName="model01b">
+      </gln-radio>
+    </div>
+
+    <div class="app-elem rdbs-elem">
+      <div>
+        <small><em>Disabled Checked.</em></small>
+      </div>
+      <gln-radio class="rdbs-fn-sz"
+        formControlName="model01d"
+        isDisabled>
+      </gln-radio>
+    </div>
+
+    <div class="app-elem rdbs-elem">
+      <div>
+        <small><em>Disabled Unchecked.</em></small>
+      </div>
+      <gln-radio class="rdbs-fn-sz"
+        formControlName="model01e"
+        isDisabled>
+      </gln-radio>
+    </div> -->
+
+  </div>
+</form>
+
+
+
+
+<!-- 
+<div class="app-group">
+
+  <div class="app-elem ">
+    <div>
+      <small>
+        <em>Attributes: id, isChecked. Value={{ data02a }}</em>
+      </small>
+    </div>
+    <gln-radio class="cbat1-fn-sz"
+      id="unique_id_checkbox02a"
+      change9="data02a=$event.checked"
+      isChecked9="data02a">Checked
+    </gln-radio>
+  </div>
+
+</div> -->

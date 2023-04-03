@@ -1,0 +1,17 @@
+/*# sourceURL=cm-radio-basic.component.scss */
+
+app-cm-radio-basic {
+  display: block;
+
+  // Page: Basic01
+  .rdbs-group {
+    display: inline-block;
+    margin-right: 1em;
+  }
+  .rdbs-elem {
+    min-width: 17ch;
+  }
+  .rdbs-fn-sz {
+    font-size: 12px;
+  }
+}
