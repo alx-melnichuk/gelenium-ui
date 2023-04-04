@@ -31,8 +31,10 @@ gln-radio-button {
   --glnrb---def-sel-cl: hsl(var(--glnrb--primary-h), var(--glnrb--primary-s), var(--glnrb--primary-l));
   --glnrb---def-sel-hov: hsla(var(--glnrb--primary-h), var(--glnrb--primary-s), 75%, 20%);
   --glnrb---def-sel-rip: hsla(var(--glnrb--primary-h), var(--glnrb--primary-s), 75%, 30%);
+  --glnrb---def-lbl: hsl(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l));
   
   --glnrb---dis-cl: hsla(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l), 0.3);
+  --glnrb---dis-lbl: hsla(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l), 0.5);
 
   &:not([dis]) {
     &:not([sel]):not([ind]) {
@@ -50,6 +52,7 @@ gln-radio-button {
       --glnrb--bg-hov   : var(--glnrb-def-ind-bg-hov, var(--glnrb-def-sel-bg-hov, var(--glnrb---def-sel-hov)));
       --glntr-ripple-cl : var(--glnrb-def-ind-rip, var(--glnrb-def-sel-rip, var(--glnrb---def-sel-rip)));
     }
+    --glnrb--lbl   : var(--glnrb-def-lbl, var(--glnrb---def-lbl));
   }
   &[dis] {
     &:not([sel]) {
@@ -61,6 +64,7 @@ gln-radio-button {
     &[ind] {
       --glnrb--cl-svg   : var(--glnrb-dis-ind-cl-svg, var(--glnrb-dis-sel-cl-svg, var(--glnrb---dis-cl)));
     }
+    --glnrb--lbl   : var(--glnrb-dis-lbl, var(--glnrb---dis-lbl));
   }
 
   &:not([dis]):not([rea]) {
@@ -72,10 +76,19 @@ gln-radio-button {
   }
 
   &:not([hdAnmInit]) {
-    --glnrb--trn-dur: 200ms; // transition-duration
+    --glnrb--trn-dur-200: 200ms; // transition-duration
+    --glnrb--trn-dur-150: 150ms; // transition-duration
   }
 
   [glnrb-container] {
+    align-items: center;
+    cursor: inherit; // cursor: pointer;
+    display: inline-flex;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  [glnrb-icon-block] {
     align-items: center;
     background-color: transparent;
     border: 0;
@@ -94,7 +107,7 @@ gln-radio-button {
     vertical-align: middle;
    -webkit-tap-highlight-color: transparent;
   }
-  &:not([dis]):not([noHov]) div[glnrb-container]:hover {
+  &:not([dis]):not([noHov]) [glnrb-icon-block]:hover {
     background-color: var(--glnrb--bg-hov);
   }
 
@@ -116,7 +129,7 @@ gln-radio-button {
     display: flex;
   }
 
-  [glnrb-icon-envelope] {
+  [glnrb-icon] {
     display: inline-block;
     font-size: 1.5em;
     fill: currentColor;
@@ -124,32 +137,27 @@ gln-radio-button {
     height: 1em;
     user-select: none;
     width: 1em;
-    transition: fill var(--glnrb--trn-dur, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    &[envelope] {
+      // outline: 1px dashed orange;
+      transition: fill var(--glnrb--trn-dur-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    }
+    &[selected] {
+      left: 0px;
+      position: absolute;
+    }
   }
   
-  [glnrb-icon-check] {
-    display: inline-block;
-    font-size: 1.5rem;
-    fill: currentcolor;
-    flex-shrink: 0;
-    height: 1em;
-    left: 0px;
-    position: absolute;
-    user-select: none;
-    width: 1em;
-  }
-  &:not([sel]) [glnrb-icon-check] {
+  &:not([sel]) [glnrb-icon][selected] {
     transform: scale(0);
-    transition: transform 150ms cubic-bezier(0.4, 0, 1, 1) 0ms;
+    transition: transform var(--glnrb--trn-dur-150, 0ms) cubic-bezier(0.4, 0, 1, 1) 0ms;
   }
-  &[sel] [glnrb-icon-check] {
+  &[sel] [glnrb-icon][selected] {
     transform: scale(1);
-    transition: transform 150ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    transition: transform var(--glnrb--trn-dur-150, 0ms) cubic-bezier(0, 0, 0.2, 1) 0ms;
   }
 
-  [glnrb-label] {
-    cursor: inherit;
+  [glnrb-content] {
     font-size: var(--glnrb-label-fn-sz, var(--glnrb--label-fn-sz));
+    color: var(--glnrb--lbl);
   }
-
 }

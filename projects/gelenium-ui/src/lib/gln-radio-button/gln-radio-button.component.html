@@ -1,56 +1,52 @@
-<div glnrb-container
+<label glnrb-container
   class="gln-radio-container"
   [formGroup]="formGroup">
 
-  <input #inputElementRef
-    glnrb-input
-    formControlName="radioinfo"
-    class="gln-radio-input glnrb-input PrivateSwitchBase-input css-1m9pwf3"
-    type="radio"
-    [attr.id]="id + '_input'"
-    [attr.disabled]="innDisabled || group?.disabled ? '': null"
-    [attr.readonly]="innReadOnly || group?.readOnly ? '': null"
-    [attr.tabindex]="!innDisabled && !group?.disabled ? '0' : null"
-    aria-label="Radio demo"
-    focus9="doFocus()"
-    blur9="doBlur()"
-    change9="$event.stopPropagation()" />
+  <span glnrb-icon-block
+    class="gln-radio-block">
+    <input #inputElementRef
+      glnrb-input
+      formControlName="radioinfo"
+      class="gln-radio-input glnrb-input"
+      type="radio"
+      [attr.id]="id + '_input'"
+      [attr.disabled]="innDisabled || group?.disabled ? '': null"
+      [attr.readonly]="innReadOnly || group?.readOnly ? '': null"
+      [attr.tabindex]="!innDisabled && !group?.disabled ? '0' : null"
+      aria-label="Radio demo"
+      (click)="doClickByInput()" />
 
-  <span glnrb-icon-wrap
-    class="gln-radio-icon-wrap">
-    <svg glnrb-icon-envelope
-      class="gln-radio-icon-envelope"
-      focusable="false"
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      data-testid="RadioButtonUncheckedIcon">
-      <path
-        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z">
-      </path>
-    </svg>
-    <svg glnrb-icon-check
-      class="gln-radio-icon-check"
-      focusable="false"
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      data-testid="RadioButtonCheckedIcon">
-      <path
-        d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z">
-      </path>
-    </svg>
+    <span glnrb-icon-wrap
+      class="gln-radio-icon-wrap">
+      <svg glnrb-icon
+        envelope
+        class="gln-radio-icon-envelope"
+        focusable="false"
+        aria-hidden="true"
+        viewBox="0 0 24 24">
+        <path
+          d="M12 2C6.47 2 2 6.48 2 12s4.47 10 10 10 10-4.47 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.57-8-8s3.58-8 8-8 8 3.57 8 8-3.58 8-8 8z">
+        </path>
+      </svg>
+      <svg glnrb-icon
+        selected
+        class="gln-radio-icon-selected"
+        focusable="false"
+        aria-hidden="true"
+        viewBox="0 0 24 24">
+        <path
+          d="M8.46 8.46C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.54 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.46 8.46Z">
+        </path>
+      </svg>
+    </span>
+
+    <gln-touch-ripple isCenter
+      *ngIf="!innDisabled && !group?.disabled && !innReadOnly && !group?.readOnly && !innNoRipple && !group?.noRipple">
+    </gln-touch-ripple>
   </span>
 
-  <gln-touch-ripple
-    *ngIf="!innDisabled && !group?.disabled && !innReadOnly && !group?.readOnly && !innNoRipple && !group?.noRipple"
-    isCenter>
-  </gln-touch-ripple>
-</div>
-
-<label glnrb-label
-  class="gln-checkbox-label"
-  [attr.for]="id + '_input'"
-  (click)="log('doClickByLabel()')">
-  <span>
+  <span glnrb-content
+    class="gln-radio-content">
     <ng-content></ng-content>
   </span>
 </label>
