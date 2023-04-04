@@ -1,4 +1,5 @@
 <section *ngIf="isShowBasic01"
+  glncb-label
   mr-vr>
   <h3 class="app-hover-link">
     Basic.
@@ -8,20 +9,27 @@
     To use this component, in your module you need to add:
   </span>
   <code><pre source="ts">
-import &#123; GlnRadioModule &#125; from 'gelenium-ui';</pre>
+import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui';</pre>
   </code>
   <p>
-    The GlnRadio component displays the behavior of a radio button in a group
+    The GlnRadioButton component displays the behavior of a radio button in a group
     of related options (&lt;input type="radio"&gt;).
     The component allows you to select only one element from several related components.
+    The GlnRadioButton component is used inside the GlnRadioGroup component.
   </p>
   <span> For example:</span>
   <code><pre source="html">
-&lt;<strong>gln-radio</strong> formControlName="model01"&gt;
-&lt;/<strong>gln-radio</strong>&gt;</pre></code>
+&lt;<strong>gln-radio-group</strong> formControlName="model01a"&gt;
+  &lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits"
+    class="rbbs-fn-sz"
+    [value]="item"&gt;
+    <b>&#123;</b>&#123; item &#125;&#125;
+  &lt;/<strong>gln-radio-button</strong>&gt;
+&lt;/<strong>gln-radio-group</strong>&gt;</pre></code>
 </section>
 
-<div class="rdbs-group">
+
+<!-- <div class="rdbs-group">
   <p>current element: "{{ data01a }}"</p>
   <fieldset>
     <legend>Select a fruit:</legend>
@@ -36,83 +44,192 @@ import &#123; GlnRadioModule &#125; from 'gelenium-ui';</pre>
     </label>
 
   </fieldset>
-</div>
+</div> -->
+
 
 <form [formGroup]="formGroup01"
   novalidate
   autocomplete="off">
-
   <div class="app-group">
 
-    <gln-radio-group>
-
-      <gln-radio-button *ngFor="let item of fruits"
-        [value]="item">
-        {{ item }}
-      </gln-radio-button>
-
-    </gln-radio-group>
-
-    <!-- <div class="app-elem rdbs-elem">
+    <div class="app-elem">
       <div>
-        <small><em>Checked.</em></small>
+        <small><em>GlnRadioGroup</em></small>
       </div>
-      <gln-radio class="rdbs-fn-sz"
-        formControlName="model01a"
-        name="drone">
-         {{ fruits[0] }}
-      </gln-radio>
-    </div> -->
-
-    <!-- <div class="app-elem rdbs-elem">
-      <div>
-        <small><em>Unchecked.</em></small>
-      </div>
-      <gln-radio class="rdbs-fn-sz"
-        formControlName="model01b">
-      </gln-radio>
+      <gln-radio-group formControlName="model01a">
+        <gln-radio-button *ngFor="let item of fruits"
+          class="rbbs-fn-sz"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
     </div>
-
-    <div class="app-elem rdbs-elem">
-      <div>
-        <small><em>Disabled Checked.</em></small>
-      </div>
-      <gln-radio class="rdbs-fn-sz"
-        formControlName="model01d"
-        isDisabled>
-      </gln-radio>
-    </div>
-
-    <div class="app-elem rdbs-elem">
-      <div>
-        <small><em>Disabled Unchecked.</em></small>
-      </div>
-      <gln-radio class="rdbs-fn-sz"
-        formControlName="model01e"
-        isDisabled>
-      </gln-radio>
-    </div> -->
 
   </div>
 </form>
 
 
+<!-- source -->
+<hr br-nn />
 
 
-<!-- 
-<div class="app-group">
+<!-- Page: Attributes02a -->
+<i id="Attributes">_</i>
+<section *ngIf="isShowAttributes02a"
+  mr-vr>
+  <h3 class="app-hover-link">
+    Attributes.
+    <a [href]="urlCmRadio + '#Attributes'">#</a>
+  </h3>
+  <p>The following attributes are supported:</p>
+  <ul>
+    <li>"id" - parameter for defining the unique identifier of the input field
+      (id="unique_identifier");
+    </li>
+    <!-- <li>
+      "config" - Defines a configuration object.
+      <a [href]="urlCmRadio + '#config-interface'">More details.</a>
+    </li> -->
+    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
+    <li>"isReadOnly" - Specifies the status of an element as read-only (isReadOnly);</li>
+  </ul>
+</section>
 
-  <div class="app-elem ">
-    <div>
-      <small>
-        <em>Attributes: id, isChecked. Value={{ data02a }}</em>
-      </small>
+
+
+<form *ngIf="isShowAttributes02a"
+  [formGroup]="formGroup02a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small><em>GlnRadioButton, isDisabled.</em></small>
+      </div>
+      <gln-radio-group formControlName="model02a">
+        <gln-radio-button *ngFor="let item of fruits; last as isLast"
+          class="rbat1-fn-sz"
+          [value]="item"
+          [isDisabled]="isLast">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
     </div>
-    <gln-radio class="cbat1-fn-sz"
-      id="unique_id_checkbox02a"
-      change9="data02a=$event.checked"
-      isChecked9="data02a">Checked
-    </gln-radio>
   </div>
 
-</div> -->
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>Attributes: isDisabled.</em></small>
+      </div>
+      <gln-radio-group formControlName="model02b"
+        isDisabled>
+        <gln-radio-button *ngFor="let item of fruits"
+          class="rbat1-fn-sz"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>Attributes: isReadOnly.</em></small>
+      </div>
+      <gln-radio-group formControlName="model02c"
+        isReadOnly>
+        <gln-radio-button *ngFor="let item of fruits"
+          class="rbat1-fn-sz"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
+    </div>
+  </div>
+
+</form>
+
+
+<!-- source -->
+<hr br-nn />
+
+
+<section *ngIf="isShowAttributes02f"
+  mr-vr
+  id="attributes-supported02">
+  <h4 class="app-hover-link">
+    Attributes are also supported 2:
+    <a [href]="urlCmRadio + '#attributes-supported02'">#</a>
+  </h4>
+  <ul>
+    <li>"isNoRipple" - disables the execution of the ripple effect (isNoRipple);</li>
+    <li>"isNoHover" - disables the display of additional background on hover (isNoHover);</li>
+    <li>"dirCol" - arranges GlnRadioButton components in a column (dirCol);</li>
+    <li>"isRequired??" - a sign that the field is required (isRequired);</li>
+  </ul>
+</section>
+
+
+<form *ngIf="isShowAttributes02f"
+  [formGroup]="formGroup02f"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attributes: isNoRipple.</em></small>
+      </div>
+      <gln-radio-group formControlName="model02f"
+        isNoRipple>
+        <gln-radio-button *ngFor="let item of fruits"
+          class="rbat2-fn-sz"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>Attributes: isNoHover.</em></small>
+      </div>
+      <gln-radio-group formControlName="model02g"
+        isNoHover>
+        <gln-radio-button *ngFor="let item of fruits"
+          class="rbat2-fn-sz"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>Attributes: dirCol.</em></small>
+      </div>
+      <gln-radio-group formControlName="model02h"
+        dirCol>
+        <gln-radio-button *ngFor="let item of fruits"
+          class="rbat2-fn-sz"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
+    </div>
+  </div>
+
+</form>
+
+
+<!-- source -->
+<hr br-nn />

@@ -24,21 +24,35 @@ export class CmRadioBasicComponent {
   public urlCmRadio = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_RADIOBUTTON');
 
   isShowBasic01 = true;
-  public fruits: string[] = ['banana', 'kiwi', 'orange', 'pear'];
+  public fruits: string[] = ['banana', 'kiwi', 'orange']; // , 'pear'];
   public data01a: string = this.fruits[0];
 
   public formGroup01: FormGroup = new FormGroup({
-    model01a: new FormControl(true, []),
-    model01b: new FormControl(false, []),
-    model01c: new FormControl(true, []),
-    model01d: new FormControl(true, []),
-    model01e: new FormControl(false, []),
-    model01f: new FormControl(false, []),
+    model01a: new FormControl(this.fruits[0], []),
   });
+
+  isShowAttributes02a = true; // 02abcde
+  public formGroup02a: FormGroup = new FormGroup({
+    model02a: new FormControl(this.fruits[0], []),
+    model02b: new FormControl(this.fruits[0], []),
+    model02c: new FormControl(this.fruits[0], []),
+  });
+
+  isShowAttributes02f = true; // 02fghij
+  public formGroup02f: FormGroup = new FormGroup({
+    model02f: new FormControl(this.fruits[0], []),
+    model02g: new FormControl(this.fruits[0], []),
+    model02h: new FormControl(this.fruits[0], []),
+  });
+
   data02a = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor() {
+    // setTimeout(() => {
+    //   this.controls01.model01a.setValue(this.fruits[1]);
+    // }, 4000);
+  }
 
   public getValue(event: Event): string {
     return (event.target as HTMLInputElement)?.value;

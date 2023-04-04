@@ -4,14 +4,18 @@ app-cm-radio-basic {
   display: block;
 
   // Page: Basic01
-  .rdbs-group {
-    display: inline-block;
-    margin-right: 1em;
+  .rbbs-fn-sz {
+    font-size: 16px;
   }
-  .rdbs-elem {
-    min-width: 17ch;
+
+  // Page: Attributes02a
+  .rbat1-fn-sz {
+    font-size: 16px;
   }
-  .rdbs-fn-sz {
-    font-size: 12px;
+
+  // Page: Attributes02f
+  .rbat2-fn-sz {
+    font-size: 16px;
   }
+
 }
