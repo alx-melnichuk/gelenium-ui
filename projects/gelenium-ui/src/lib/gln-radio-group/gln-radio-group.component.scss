@@ -1,9 +1,17 @@
 /*# sourceURL=gln-radio-group.component.scss */
 
 gln-radio-group {
-  display: block;
+  display: inline-flex;
 
-  .gln-radio-button ~ .gln-radio-button {
-    margin-left: var(--glnrg-rad-mf-lf , 1em);
+  &:not([dirCol]) {
+    flex-direction: row;
+
+    .gln-radio-button ~ .gln-radio-button {
+      margin-left: var(--glnrg-rad-mf-lf , 1em);
+    }
   }
+  &[dirCol] {
+    flex-direction: column;
+  }
+
 }
