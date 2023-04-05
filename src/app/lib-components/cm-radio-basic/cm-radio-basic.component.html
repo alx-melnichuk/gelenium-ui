@@ -1,5 +1,4 @@
 <section *ngIf="isShowBasic01"
-  glncb-label
   mr-vr>
   <h3 class="app-hover-link">
     Basic.
@@ -17,48 +16,147 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
     The component allows you to select only one element from several related components.
     The GlnRadioButton component is used inside the GlnRadioGroup component.
   </p>
+  <!-- <p>The GlnRadioButton component can be used in reactive forms.</p>
   <span> For example:</span>
   <code><pre source="html">
-&lt;<strong>gln-radio-group</strong> formControlName="model01a"&gt;
-  &lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits"
-    class="rbbs-fn-sz"
-    [value]="item"&gt;
-    <b>&#123;</b>&#123; item &#125;&#125;
+&lt;form [formGroup]="formGroup01a" novalidate autocomplete="off"&gt;
+  &lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits01a"
+    formControlName="model01a"
+    <i>name="model01a"</i>
+    <i>[value]="item"</i>&gt; <b>&#123;</b>&#123; item &#125;&#125;
   &lt;/<strong>gln-radio-button</strong>&gt;
-&lt;/<strong>gln-radio-group</strong>&gt;</pre></code>
+&lt;/form&gt;</pre></code> -->
 </section>
 
 
-<!-- <div class="rdbs-group">
-  <p>current element: "{{ data01a }}"</p>
-  <fieldset>
-    <legend>Select a fruit:</legend>
-
-    <label *ngFor="let item of fruits">
-      <input type="radio"
-        name="fruit"
-        [value]="item"
-        (change)="data01a=getValue($event)"
-        [checked]="data01a==item" />
-      {{ item }}
-    </label>
-
-  </fieldset>
-</div> -->
-
-
-<form [formGroup]="formGroup01"
+<form *ngIf="false && isShowBasic01"
+  [formGroup]="formGroup01a"
   novalidate
   autocomplete="off">
+
   <div class="app-group">
 
     <div class="app-elem">
       <div>
-        <small><em>GlnRadioGroup</em></small>
+        <small>
+          <em>
+            With "formControlName" model={{ formGroup01a.controls['model01a'].value }}
+          </em>
+        </small>
       </div>
-      <gln-radio-group formControlName="model01a">
-        <gln-radio-button *ngFor="let item of fruits"
-          class="rbbs-fn-sz"
+
+      <gln-radio-button *ngFor="let item of fruits01a"
+        name="model01a"
+        formControlName="model01a"
+        [value]="item">
+        {{ item }}
+      </gln-radio-button>
+    </div>
+
+  </div>
+</form>
+
+
+<!-- source -->
+<hr br-nn />
+
+
+<section *ngIf="false && isShowBasic01"
+  mr-vr>
+  <p>And also the GlnRadioButton component can be used without reactive forms.</p>
+  <span> For example:</span>
+  <code><pre source="html">
+&lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits01b"
+  [(ngModel)]="data01b"
+  <i>name="model01b"</i>
+  <i>[value]="item"</i>&gt; <b>&#123;</b>&#123; item &#125;&#125;
+&lt;/<strong>gln-radio-button</strong>&gt;</pre></code>
+</section>
+
+
+<div *ngIf="false && isShowBasic01"
+  class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>With "ngModel" model={{ data01b }}</em></small>
+    </div>
+
+    <gln-radio-button *ngFor="let item of fruits01b"
+      name="model01b"
+      [(ngModel)]="data01b"
+      [value]="item">
+      {{ item }}
+    </gln-radio-button>
+
+  </div>
+
+</div>
+
+
+<!-- source -->
+<hr br-nn />
+
+
+<section *ngIf="false && isShowBasic01"
+  mr-vr>
+  <p>
+    The GlnRadioGroup component allows you to select one value from a group of GlnRadioButton
+    elements.
+    And also apply settings attributes immediately for the entire group of GlnRadioButton elements.
+  </p>
+  <span> For example:</span>
+  <code><pre source="html">
+&lt;form [formGroup]="formGroup01c" novalidate autocomplete="off"&gt;
+  &lt;<strong>gln-radio-group</strong>&gt;
+    &lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits01c"
+      formControlName="model01c"
+      <i>name="model01c"</i>
+      <i>[value]="item"</i>&gt; <b>&#123;</b>&#123; item &#125;&#125;
+    &lt;/<strong>gln-radio-button</strong>&gt;
+  &lt;/<strong>gln-radio-group</strong>&gt;
+&lt;/form&gt;</pre></code>
+
+  <!--
+&lt;form [formGroup]="formGroup01a" novalidate autocomplete="off"&gt;
+  &lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits01a"
+    formControlName="model01a"
+    <i>name="model01a"</i>
+    <i>[value]="item"</i>&gt;
+    <b>&#123;</b>&#123; item &#125;&#125;
+  &lt;/<strong>gln-radio-button</strong>&gt;
+&lt;/form&gt;</pre></code>
+  
+  
+  <code><pre source="html">
+&lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits01b"
+  [(ngModel)]="data01b"
+  <i>name="model01b"</i>
+  <i>[value]="item"</i>&gt;
+  <b>&#123;</b>&#123; item &#125;&#125;
+&lt;/<strong>gln-radio-button</strong>&gt;</pre></code> -->
+</section>
+
+
+<form *ngIf="false && isShowBasic01"
+  [formGroup]="formGroup01c"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>
+            With GlnRadioGroup model={{ formGroup01c.controls['model01c'].value }}
+          </em>
+        </small>
+      </div>
+      <gln-radio-group>
+        <gln-radio-button *ngFor="let item of fruits01c"
+          formControlName="model01c"
+          name="model01c"
           [value]="item">
           {{ item }}
         </gln-radio-button>
@@ -109,7 +207,7 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
         <small><em>GlnRadioButton, isDisabled.</em></small>
       </div>
       <gln-radio-group formControlName="model02a">
-        <gln-radio-button *ngFor="let item of fruits; last as isLast"
+        <gln-radio-button *ngFor="let item of fruits02a; last as isLast"
           class="rbat1-fn-sz"
           [value]="item"
           [isDisabled]="isLast">
@@ -126,7 +224,7 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
       </div>
       <gln-radio-group formControlName="model02b"
         isDisabled>
-        <gln-radio-button *ngFor="let item of fruits"
+        <gln-radio-button *ngFor="let item of fruits02a"
           class="rbat1-fn-sz"
           [value]="item">
           {{ item }}
@@ -142,7 +240,7 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
       </div>
       <gln-radio-group formControlName="model02c"
         isReadOnly>
-        <gln-radio-button *ngFor="let item of fruits"
+        <gln-radio-button *ngFor="let item of fruits02a"
           class="rbat1-fn-sz"
           [value]="item">
           {{ item }}
@@ -187,7 +285,7 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
       </div>
       <gln-radio-group formControlName="model02f"
         isNoRipple>
-        <gln-radio-button *ngFor="let item of fruits"
+        <gln-radio-button *ngFor="let item of fruits02f"
           class="rbat2-fn-sz"
           [value]="item">
           {{ item }}
@@ -201,9 +299,10 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
       <div>
         <small><em>Attributes: isNoHover.</em></small>
       </div>
-      <gln-radio-group formControlName="model02g"
+      <gln-radio-group formControlName="model02f"
         isNoHover>
-        <gln-radio-button *ngFor="let item of fruits"
+        <!-- model02g -->
+        <gln-radio-button *ngFor="let item of fruits02f"
           class="rbat2-fn-sz"
           [value]="item">
           {{ item }}
@@ -219,7 +318,7 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
       </div>
       <gln-radio-group formControlName="model02h"
         dirCol>
-        <gln-radio-button *ngFor="let item of fruits"
+        <gln-radio-button *ngFor="let item of fruits02f"
           class="rbat2-fn-sz"
           [value]="item">
           {{ item }}
@@ -233,3 +332,181 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 
 <!-- source -->
 <hr br-nn />
+
+
+<i id="Size">_</i>
+<section *ngIf="isShowSize03"
+  mr-vr>
+  <h3 class="app-hover-link">
+    Size.
+    <a [href]="urlCmRadio + '#Size'">#</a>
+  </h3>
+  <p>
+    The GlnRadioButton component has the ability to change its size.
+    The size of the image is related to the font size of the inner element with the
+    class "gln-radio-icon-block".
+    To change the size of the component image, you need to specify the "size" parameter.
+    Or specify the required font size for the block with the class "gln-radio-icon-block"
+  </p>
+  <span>For example:</span>
+</section>
+
+
+<form [formGroup]="formGroup03a"
+  novalidate
+  autocomplete="off">
+
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>"Little" height: 30px; (font-size: 10px;)</em>
+        </small>
+      </div>
+      <gln-radio-group>
+        <gln-radio-button *ngFor="let item of fruits03a"
+          formControlName="model03a"
+          size="little"
+          name="model03a"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>"Short" height: 36px; (font-size: 12px;)</em>
+        </small>
+      </div>
+      <gln-radio-group>
+        <gln-radio-button *ngFor="let item of fruits03a"
+          formControlName="model03b"
+          size="short"
+          name="model03b"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>"Small" height: 42px; (font-size: 14px;)</em>
+        </small>
+      </div>
+      <gln-radio-group>
+        <gln-radio-button *ngFor="let item of fruits03a"
+          formControlName="model03c"
+          size="small"
+          name="model03c"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>"Middle" height: 48px; (font-size: 16px;)</em>
+        </small>
+      </div>
+      <gln-radio-group>
+        <gln-radio-button *ngFor="let item of fruits03a"
+          formControlName="model03d"
+          size="middle"
+          name="model03d"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>"Wide" height: 54px; (font-size: 18px;)</em>
+        </small>
+      </div>
+      <gln-radio-group>
+        <gln-radio-button *ngFor="let item of fruits03a"
+          formControlName="model03e"
+          size="wide"
+          name="model03e"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>"Large" height: 60px; (font-size: 20px;)</em>
+        </small>
+      </div>
+      <gln-radio-group>
+        <gln-radio-button *ngFor="let item of fruits03a"
+          formControlName="model03f"
+          size="large"
+          name="model03f"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>"Huge" height: 66px; (font-size: 22px;)</em>
+        </small>
+      </div>
+      <gln-radio-group>
+        <gln-radio-button *ngFor="let item of fruits03a"
+          formControlName="model03g"
+          size="huge"
+          name="model03g"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>"Custom" height: 53px; (font-size: 17.667px;)</em>
+        </small>
+      </div>
+      <gln-radio-group>
+        <gln-radio-button *ngFor="let item of fruits03a"
+          formControlName="model03h"
+          size="53"
+          name="model03h"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
+    </div>
+  </div>
+
+</form>

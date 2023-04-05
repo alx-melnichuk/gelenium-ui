@@ -24,33 +24,58 @@ export class CmRadioBasicComponent {
   public urlCmRadio = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_RADIOBUTTON');
 
   isShowBasic01 = true;
-  public fruits: string[] = ['banana', 'kiwi', 'orange']; // , 'pear'];
-  public data01a: string = this.fruits[0];
-
-  public formGroup01: FormGroup = new FormGroup({
-    model01a: new FormControl(this.fruits[0], []),
+  public fruits01a: string[] = ['apple', 'apricot', 'banana'];
+  public formGroup01a: FormGroup = new FormGroup({
+    model01a: new FormControl(this.fruits01a[0], []),
   });
 
-  isShowAttributes02a = true; // 02abcde
+  public fruits01b: string[] = ['kiwi', 'orange', 'lemon'];
+  public data01b: string = this.fruits01b[0];
+
+  public fruits01c: string[] = ['mango', 'mandarin', 'peach'];
+  public formGroup01c: FormGroup = new FormGroup({
+    model01c: new FormControl(this.fruits01c[0], []),
+  });
+
+  // Page: Attributes02a
+  isShowAttributes02a = false; // true; // 02abcde,
+  public fruits02a: string[] = ['kiwi', 'orange', 'lemon'];
   public formGroup02a: FormGroup = new FormGroup({
-    model02a: new FormControl(this.fruits[0], []),
-    model02b: new FormControl(this.fruits[0], []),
-    model02c: new FormControl(this.fruits[0], []),
+    model02a: new FormControl(this.fruits02a[0], []),
+    model02b: new FormControl(this.fruits02a[0], []),
+    model02c: new FormControl(this.fruits02a[0], []),
   });
 
-  isShowAttributes02f = true; // 02fghij
+  // Page: Attributes02f
+  isShowAttributes02f = false; // true; // 02fghij
+  public fruits02f: string[] = ['mango', 'mandarin', 'peach'];
   public formGroup02f: FormGroup = new FormGroup({
-    model02f: new FormControl(this.fruits[0], []),
-    model02g: new FormControl(this.fruits[0], []),
-    model02h: new FormControl(this.fruits[0], []),
+    model02f: new FormControl(this.fruits02f[0], []),
+    model02g: new FormControl(this.fruits02f[0], []),
+    model02h: new FormControl(this.fruits02f[0], []),
   });
 
   data02a = false;
 
+  // Page: Size03
+  isShowSize03 = false; // true; // 02abcde ,
+  public fruits03a: string[] = ['apple', 'apricot', 'banana'];
+  public formGroup03a: FormGroup = new FormGroup({
+    model03a: new FormControl(this.fruits03a[0], []),
+    model03b: new FormControl(this.fruits03a[0], []),
+    model03c: new FormControl(this.fruits03a[0], []),
+    model03d: new FormControl(this.fruits03a[0], []),
+    model03e: new FormControl(this.fruits03a[0], []),
+    model03f: new FormControl(this.fruits03a[0], []),
+    model03g: new FormControl(this.fruits03a[0], []),
+    model03h: new FormControl(this.fruits03a[0], []),
+  });
+
+  // model02f= {{ formGroup02f.controls['model02f'].value }}
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {
     // setTimeout(() => {
-    //   this.controls01.model01a.setValue(this.fruits[1]);
+    //   this.formGroup01.controls['model01a'].setValue(this.fruits01a[1]);
     // }, 4000);
   }
 
