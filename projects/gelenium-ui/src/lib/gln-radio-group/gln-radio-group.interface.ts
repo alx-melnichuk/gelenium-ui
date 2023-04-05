@@ -8,6 +8,9 @@ export interface GlnRadioGroup {
   noRipple?: boolean | null | undefined;
   readOnly: boolean | null | undefined;
   selectedRadio: GlnRadioButton | null;
+  readonly id: string;
+  readonly name: string;
+
   // Set the radio button as selected.
   setRadioSelected(radioButton: GlnRadioButton | null): void;
 }
