@@ -3,19 +3,23 @@
   [formGroup]="formGroup">
 
   <span glnrb-icon-block
-    class="gln-radio-block">
+    class="gln-radio-icon-block">
     <input #inputElementRef
       glnrb-input
       formControlName="radioinfo"
       class="gln-radio-input glnrb-input"
       type="radio"
       [attr.id]="id + '_input'"
+      [attr.disabled]="innDisabled ? '': null"
+      [attr.tabindex]="!innDisabled ? '0' : null"
+      aria-label="Radio demo"
+      (click)="doClickByInput($event)" />
+    <!-- 
       [attr.disabled]="innDisabled || group?.disabled ? '': null"
       [attr.readonly]="innReadOnly || group?.readOnly ? '': null"
       [attr.tabindex]="!innDisabled && !group?.disabled ? '0' : null"
-      aria-label="Radio demo"
-      (click)="doClickByInput()" />
 
+ -->
     <span glnrb-icon-wrap
       class="gln-radio-icon-wrap">
       <svg glnrb-icon
@@ -29,8 +33,8 @@
         </path>
       </svg>
       <svg glnrb-icon
-        selected
-        class="gln-radio-icon-selected"
+        checked
+        class="gln-radio-icon-checked"
         focusable="false"
         aria-hidden="true"
         viewBox="0 0 24 24">
@@ -41,7 +45,8 @@
     </span>
 
     <gln-touch-ripple isCenter
-      *ngIf="!innDisabled && !group?.disabled && !innReadOnly && !group?.readOnly && !innNoRipple && !group?.noRipple">
+      *ngIf="!innDisabled">
+      <!-- *ngIf="!innDisabled && !group?.disabled && !innReadOnly && !group?.readOnly && !innNoRipple && !group?.noRipple" -->
     </gln-touch-ripple>
   </span>
 

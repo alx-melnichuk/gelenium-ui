@@ -28,49 +28,49 @@ gln-radio-button {
     flex-direction: row;
   }
 
-  --glnrb---def-sel-cl: hsl(var(--glnrb--primary-h), var(--glnrb--primary-s), var(--glnrb--primary-l));
-  --glnrb---def-sel-hov: hsla(var(--glnrb--primary-h), var(--glnrb--primary-s), 75%, 20%);
-  --glnrb---def-sel-rip: hsla(var(--glnrb--primary-h), var(--glnrb--primary-s), 75%, 30%);
+  --glnrb---def-che-cl: hsl(var(--glnrb--primary-h), var(--glnrb--primary-s), var(--glnrb--primary-l));
+  --glnrb---def-che-hov: hsla(var(--glnrb--primary-h), var(--glnrb--primary-s), 75%, 20%);
+  --glnrb---def-che-rip: hsla(var(--glnrb--primary-h), var(--glnrb--primary-s), 75%, 30%);
   --glnrb---def-lbl: hsl(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l));
   
   --glnrb---dis-cl: hsla(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l), 0.3);
   --glnrb---dis-lbl: hsla(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l), 0.5);
 
   &:not([dis]) {
-    &:not([sel]):not([ind]) {
+    &:not([che]):not([ind]) {
       --glnrb--cl-svg   : var(--glnrb-def-cl-svg, hsla(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l), 0.6));
       --glnrb--bg-hov   : var(--glnrb-def-bg-hov, hsla(var(--glnrb--default-h), var(--glnrb--default-s), 70%, 20%));
       --glntr-ripple-cl : var(--glnrb-def-rip, hsla(var(--glnrb--default-h), var(--glnrb--default-s), 70%, 30%));
     }
-    &[sel] {
-      --glnrb--cl-svg   : var(--glnrb-def-sel-cl-svg, var(--glnrb---def-sel-cl));
-      --glnrb--bg-hov   : var(--glnrb-def-sel-bg-hov, var(--glnrb---def-sel-hov));
-      --glntr-ripple-cl : var(--glnrb-def-sel-rip, var(--glnrb---def-sel-rip));
+    &[che] {
+      --glnrb--cl-svg   : var(--glnrb-def-che-cl-svg, var(--glnrb---def-che-cl));
+      --glnrb--bg-hov   : var(--glnrb-def-che-bg-hov, var(--glnrb---def-che-hov));
+      --glntr-ripple-cl : var(--glnrb-def-che-rip, var(--glnrb---def-che-rip));
     }
     &[ind] {
-      --glnrb--cl-svg   : var(--glnrb-def-ind-cl-svg, var(--glnrb-def-sel-cl-svg, var(--glnrb---def-sel-cl)));
-      --glnrb--bg-hov   : var(--glnrb-def-ind-bg-hov, var(--glnrb-def-sel-bg-hov, var(--glnrb---def-sel-hov)));
-      --glntr-ripple-cl : var(--glnrb-def-ind-rip, var(--glnrb-def-sel-rip, var(--glnrb---def-sel-rip)));
+      --glnrb--cl-svg   : var(--glnrb-def-ind-cl-svg, var(--glnrb-def-che-cl-svg, var(--glnrb---def-che-cl)));
+      --glnrb--bg-hov   : var(--glnrb-def-ind-bg-hov, var(--glnrb-def-che-bg-hov, var(--glnrb---def-che-hov)));
+      --glntr-ripple-cl : var(--glnrb-def-ind-rip, var(--glnrb-def-che-rip, var(--glnrb---def-che-rip)));
     }
     --glnrb--lbl   : var(--glnrb-def-lbl, var(--glnrb---def-lbl));
   }
   &[dis] {
-    &:not([sel]) {
+    &:not([che]) {
       --glnrb--cl-svg   : var(--glnrb-dis-cl-svg, var(--glnrb---dis-cl));
     }
-    &[sel] {
-      --glnrb--cl-svg   : var(--glnrb-dis-sel-cl-svg, var(--glnrb---dis-cl));
+    &[che] {
+      --glnrb--cl-svg   : var(--glnrb-dis-che-cl-svg, var(--glnrb---dis-cl));
     }
     &[ind] {
-      --glnrb--cl-svg   : var(--glnrb-dis-ind-cl-svg, var(--glnrb-dis-sel-cl-svg, var(--glnrb---dis-cl)));
+      --glnrb--cl-svg   : var(--glnrb-dis-ind-cl-svg, var(--glnrb-dis-che-cl-svg, var(--glnrb---dis-cl)));
     }
     --glnrb--lbl   : var(--glnrb-dis-lbl, var(--glnrb---dis-lbl));
   }
 
-  &:not([dis]):not([rea]) {
+  &:not([dis]):not([rea]) label {
     cursor: pointer;
   }
-  &[dis], &[rea] {
+  &[dis], &[rea] label {
     cursor: default;
     pointer-events: none;
   }
@@ -82,7 +82,7 @@ gln-radio-button {
 
   [glnrb-container] {
     align-items: center;
-    cursor: inherit; // cursor: pointer;
+    // cursor: inherit; // cursor: pointer;
     display: inline-flex;
     vertical-align: middle;
     -webkit-tap-highlight-color: transparent;
@@ -96,11 +96,13 @@ gln-radio-button {
     box-sizing: border-box;
     color: var(--glnrb--cl-svg); // rgba(0, 0, 0, 0.6);
     display: inline-flex;
+    font-size: var(--glnrb-icon-fn-sz, var(--glnrb--icon-fn-sz, 14px));
     justify-content: center;
     margin: 0;
     // outline: 0;
     outline: 1px dashed orange;
-    padding: 0.56em;
+    // padding: var(--glnrb-icon-pd, var(--glnrb--icon-pd, 0.56em));
+    padding: 0.625em;
     position: relative;
     text-decoration: none;
     user-select: none;
@@ -131,7 +133,8 @@ gln-radio-button {
 
   [glnrb-icon] {
     display: inline-block;
-    font-size: 1.5em;
+    // font-size: 1.5em;
+    font-size: 1.75em;
     fill: currentColor;
     flex-shrink: 0;
     height: 1em;
@@ -141,17 +144,17 @@ gln-radio-button {
       // outline: 1px dashed orange;
       transition: fill var(--glnrb--trn-dur-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     }
-    &[selected] {
+    &[checked] {
       left: 0px;
       position: absolute;
     }
   }
   
-  &:not([sel]) [glnrb-icon][selected] {
+  &:not([che]) [glnrb-icon][checked] {
     transform: scale(0);
     transition: transform var(--glnrb--trn-dur-150, 0ms) cubic-bezier(0.4, 0, 1, 1) 0ms;
   }
-  &[sel] [glnrb-icon][selected] {
+  &[che] [glnrb-icon][checked] {
     transform: scale(1);
     transition: transform var(--glnrb--trn-dur-150, 0ms) cubic-bezier(0, 0, 0.2, 1) 0ms;
   }

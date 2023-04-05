@@ -3,26 +3,37 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  EventEmitter,
+  forwardRef,
   Inject,
+  InjectionToken,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Optional,
+  Output,
   Renderer2,
   SimpleChanges,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { GlnRadioGroup, GLN_RADIO_GROUP } from '../gln-radio-group/gln-radio-group.interface';
 import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { NumberUtil } from '../_utils/number.util';
 
-import { GlnRadioButton } from './gln-radio-button.interface';
+import { GlnRadioButtonCheckedUtil } from './gln-radio-button-checked.util';
+import { GlnRadioButtonConfig } from './gln-radio-button-config.interface';
 
-const CSS_PROP_LABEL_FONT_SIZE = '--glnrb--label-fn-sz';
+import { GlnRadioButton, GLN_RADIO_BUTTON } from './gln-radio-button.interface';
+
+const SIZE: { [key: string]: number } = { little: 30, short: 36, small: 42, middle: 48, wide: 54, large: 60, huge: 66 };
+
+export const GLN_RADIO_BUTTON_CONFIG = new InjectionToken<GlnRadioButtonConfig>('GLN_RADIO_BUTTON_CONFIG');
 
 let uniqueIdCounter = 0;
 
@@ -33,71 +44,49 @@ let uniqueIdCounter = 0;
   styleUrls: ['./gln-radio-button.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => GlnRadioButtonComponent), multi: true },
+    { provide: GLN_RADIO_BUTTON, useExisting: GlnRadioButtonComponent },
+  ],
 })
-export class GlnRadioButtonComponent implements OnChanges, OnInit, GlnRadioButton {
+export class GlnRadioButtonComponent implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, GlnRadioButton {
   @Input()
   public id: string = `glnrb-${uniqueIdCounter++}`; // interface GlnRadioButton
   @Input()
+  public config: GlnRadioButtonConfig | null | undefined;
+  @Input()
+  public checked: string | boolean | null | undefined;
+  @Input()
   public isDisabled: string | boolean | null | undefined;
   @Input()
+  public name: string = ''; // interface GlnRadioButton
+  @Input()
   public value: string | null | undefined; // interface GlnRadioButton
+  @Input()
+  public size: number | string | null | undefined; // 'little','short','small','middle','wide','large','huge'
+
+  @Output()
+  readonly change: EventEmitter<{ value: string | null | undefined; source: GlnRadioButtonComponent }> = new EventEmitter();
 
   @ViewChild(GlnTouchRippleComponent, { static: false })
   public touchRipple: GlnTouchRippleComponent | null = null;
 
-  // interface GlnRadioButton
-  public get disabled(): boolean | null | undefined {
-    return this.innDisabled;
-  }
-  public set disabled(value: boolean | null | undefined) {
-    this.setDisabled(value);
-  }
-  // interface GlnRadioButton
-  public get hideAnimation(): boolean | null | undefined {
-    return this.innHideAnimation;
-  }
-  public set hideAnimation(value: boolean | null | undefined) {
-    this.setHideAnimation(value);
-  }
-  // interface GlnRadioButton
-  public get noRipple(): boolean | null | undefined {
-    return this.innNoRipple;
-  }
-  public set noRipple(value: boolean | null | undefined) {
-    this.setNoRipple(value);
-  }
-  // interface GlnRadioButton
-  public get readOnly(): boolean | null | undefined {
-    return this.innReadOnly;
-  }
-  public set readOnly(value: boolean | null | undefined) {
-    this.setReadOnly(value);
-  }
-  // interface GlnRadioButton
-  public get selected(): boolean | null | undefined {
-    return this.innSelected;
-  }
-  public set selected(value: boolean | null | undefined) {
-    this.setSelected(value);
-  }
-
   public formControl: FormControl = new FormControl();
   public formGroup: FormGroup = new FormGroup({ radioinfo: this.formControl });
 
+  public innChecked: boolean | null | undefined;
   public innDisabled: boolean | null | undefined;
-  public innHideAnimation: boolean | null | undefined;
-  public innNoHover: boolean | null | undefined;
-  public innNoRipple: boolean | null | undefined;
-  public innReadOnly: boolean | null | undefined;
-  public innSelected: boolean | null | undefined;
+  public currConfig: GlnRadioButtonConfig;
+  public sizeVal: number | null = null; // Binding attribute "size".
 
   constructor(
-    // interface GlnRadioButton
     public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
     private changeDetectorRef: ChangeDetectorRef,
-    @Optional() @Inject(GLN_RADIO_GROUP) public group: GlnRadioGroup
+    @Optional() @Inject(GLN_RADIO_BUTTON_CONFIG) private rootConfig: GlnRadioButtonConfig | null,
+    @Optional() @Inject(GLN_RADIO_GROUP) public radioGroup: GlnRadioGroup
   ) {
+    this.currConfig = this.rootConfig || {};
     this.renderer.addClass(this.hostRef.nativeElement, 'gln-radio-button');
     this.renderer.addClass(this.hostRef.nativeElement, 'gln-control');
   }
@@ -105,113 +94,159 @@ export class GlnRadioButtonComponent implements OnChanges, OnInit, GlnRadioButto
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['isDisabled']) {
       const disabled = BooleanUtil.init(this.isDisabled);
-      this.setDisabled(disabled ?? this.group?.disabled);
+      this.setDisabled(disabled ?? this.radioGroup?.disabled);
+    }
+    if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
+      const sizeStr: string = (this.size || this.currConfig.size || '').toString();
+      this.sizeVal = NumberUtil.converInt(sizeStr, SIZE[sizeStr] || SIZE['middle']);
+      this.setCssSize(this.sizeVal, this.hostRef);
     }
   }
 
   public ngOnInit(): void {
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
-    // Defining internal CSS properties.
-    this.prepareCssProperties(this.hostRef);
+
+    if (this.sizeVal == null) {
+      const sizeStr: string = (this.currConfig.size || '').toString();
+      this.sizeVal = NumberUtil.converInt(sizeStr, SIZE[sizeStr] || SIZE['middle']);
+      this.setCssSize(this.sizeVal, this.hostRef);
+    }
+
+    const checked = BooleanUtil.init(this.checked);
+    this.setChecked(!!checked);
+
+    if (this.radioGroup) {
+      this.name = this.radioGroup.name;
+      // ??
+      // this.checked = this.radioGroup.value === this._value;
+      // if (this.checked) {
+      //   this.radioGroup.selected = this;
+      // }
+    }
+    // If "name" is not specified, then all such elements will be
+    // in the same group named "empty string".
 
     if (this.innDisabled === undefined) {
-      this.setDisabled(this.group?.disabled);
+      this.setDisabled(this.radioGroup?.disabled);
     }
-    if (this.innNoHover === undefined) {
-      this.setNoHover(this.group?.noHover);
-    }
-    if (this.innNoRipple === undefined) {
-      this.setNoRipple(this.group?.noRipple);
-    }
-    if (this.innReadOnly === undefined) {
-      this.setReadOnly(this.group?.readOnly);
-    }
-    if (this.innSelected === undefined && !!this.group) {
-      this.innSelected = this === this.group.selectedRadio;
-    }
-    this.setSelected(!!this.innSelected);
   }
+
+  public ngOnDestroy(): void {
+    GlnRadioButtonCheckedUtil.remove(this);
+  }
+
+  // ** interface ControlValueAccessor - start **
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public onChange: (val: unknown) => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public onTouched: () => void = () => {};
+
+  public writeValue(value: any): void {
+    const newChecked: boolean = value == this.value;
+    console.log(`writeValue   (id=${this.id}; name=${this.name}; value=${value}); newChecked=${newChecked};`); // #
+    this.setChecked(newChecked);
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+  public registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+  public registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  public setDisabledState(disabled: boolean): void {
+    this.setDisabled(disabled);
+  }
+
+  // ** interface ControlValueAccessor - finish **
+
+  // ** interface GlnRadioButton - start **
+
+  public setChecked(newValue: boolean): void {
+    if (this.innChecked !== newValue) {
+      console.log(`setChecked   (id=${this.id}; name=${this.name}; newValue=${newValue};`); // #
+      this.innChecked = newValue;
+      this.settingChecked(this.innChecked, this.renderer, this.hostRef);
+      this.formControl.setValue(newValue); // ??
+
+      if (newValue) {
+        const previous: GlnRadioButton | undefined = GlnRadioButtonCheckedUtil.findByName(this.name || '');
+        console.log(`setChecked   (id=${this.id}; name=${this.name}; !previous=${!previous};`); // #
+        previous?.setChecked(false);
+        GlnRadioButtonCheckedUtil.add(this);
+        this.radioGroup?.setRadioSelected(this);
+      } else {
+        GlnRadioButtonCheckedUtil.remove(this);
+        this.radioGroup?.setRadioSelected(null);
+      }
+      this.changeDetectorRef.markForCheck();
+    }
+  }
+
+  public setName(newValue: string): void {
+    this.name = newValue;
+  }
+  // ** interface GlnRadioButton - finish **
 
   // ** Public methods **
 
-  public doClickByInput(): void {
-    if (!this.innDisabled && !this.group?.disabled && !this.innReadOnly && !this.group?.readOnly) {
-      this.group.setRadioSelected(this);
-      if (this.touchRipple && !this.innNoRipple && !this.group?.noRipple) {
+  public doClickByInput(event: Event): void {
+    // if (!this.innDisabled && !this.group?.disabled && !this.innReadOnly && !this.group?.readOnly) {
+    // this.group.setRadioSelected(this);
+    // if (this.touchRipple && !this.innNoRipple && !this.group?.noRipple) {
+    //   this.touchRipple.trigger(null, true);
+    // }
+    // }
+
+    // We stop propagation so that the change event does not pop up and pass its input object.
+    event.stopPropagation();
+    if (!this.innDisabled /*&& !this.innReadOnly*/) {
+      if (!this.innChecked) {
+        // const isChangeForGroup: boolean = !!this.radioGroup ? this.value !== this.radioGroup.value : false;
+        console.log(`doClickInput (id=${this.id}; name=${this.name}; setChecked(true);`); // #
+        this.setChecked(true);
+        this.onChange(this.value);
+        this.change.emit({ value: this.value, source: this });
+
+        // if (this.radioGroup) {
+        //   this.radioGroup._controlValueAccessorChangeFn(this.value);
+        //   if (groupValueChanged) {
+        //     this.radioGroup._emitChangeEvent();
+        //   }
+        // }
+      }
+      if (this.touchRipple /*&& !this.innNoRipple && !this.group?.noRipple*/) {
         this.touchRipple.trigger(null, true);
       }
     }
   }
-  log(text: string): void {
-    console.log(text); // #
-  }
+
   // ** Private methods **
 
-  private prepareCssProperties(hostRef: ElementRef<HTMLElement>): void {
-    // Determine the font size of the parent element.
-    if (hostRef && hostRef.nativeElement) {
-      const hostElement: HTMLElement = hostRef.nativeElement;
-
-      const parentElem: HTMLElement | null = hostRef && hostRef.nativeElement ? hostRef.nativeElement.parentElement : null;
-      const parentRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(parentElem);
-      const parentFontSize: number = HtmlElemUtil.propertyAsNumber(parentRef, 'font-size');
-      if (parentFontSize > 0) {
-        hostElement.style.setProperty(CSS_PROP_LABEL_FONT_SIZE, parentFontSize.toString().concat('px'));
-      }
-    }
-  }
-
-  /** Check or uncheck the "disabled" property. */
   private setDisabled(value: boolean | null | undefined): void {
     if (this.innDisabled !== !!value) {
       this.innDisabled = !!value;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', value ? '' : null);
+      this.settingDisabled(this.innDisabled, this.renderer, this.hostRef);
       this.changeDetectorRef.markForCheck();
     }
   }
-  /** Check or uncheck the "no-ripple" property. */
-  private setNoHover(value: boolean | null | undefined): void {
-    if (this.innNoHover !== !!value) {
-      this.innNoHover = !!value;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-hover', !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noHov', value ? '' : null);
-      this.changeDetectorRef.markForCheck();
+  private setCssSize(size: number, elem: ElementRef<HTMLElement>): void {
+    let fontSize: number | null = null;
+    if (size > 0) {
+      // fontSize*1.75+ 2*(0.625*padding)
+      fontSize = Math.round((size / 3) * 1000) / 1000;
     }
+    HtmlElemUtil.setProperty(elem, '--glnrb--icon-fn-sz', fontSize?.toString().concat('px'));
   }
-  /** Check or uncheck the "no-ripple" property. */
-  private setNoRipple(value: boolean | null | undefined): void {
-    if (this.innNoRipple !== !!value) {
-      this.innNoRipple = !!value;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-ripple', !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noRip', !!value ? '' : null);
-      this.changeDetectorRef.markForCheck();
-    }
+
+  private settingChecked(value: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-checked', !!value);
+    HtmlElemUtil.setAttr(renderer, elem, 'che', !!value ? '' : null);
   }
-  /** Check or uncheck the "readonly" property. */
-  private setReadOnly(value: boolean | null | undefined): void {
-    if (this.innReadOnly !== !!value) {
-      this.innReadOnly = !!value;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-readonly', !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'rea', !!value ? '' : null);
-      this.changeDetectorRef.markForCheck();
-    }
-  }
-  /** Check or uncheck the "selected" property. */
-  private setSelected(value: boolean | null | undefined): void {
-    if (this.innSelected !== !!value) {
-      this.innSelected = !!value;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-selected', !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'sel', !!value ? '' : null);
-      this.formControl.setValue(value);
-      this.changeDetectorRef.markForCheck();
-    }
-  }
-  private setHideAnimation(value: boolean | null | undefined): void {
-    if (this.innHideAnimation !== !!value) {
-      this.innHideAnimation = !!value;
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'hdAnmInit', !!value ? '' : null);
-      this.changeDetectorRef.markForCheck();
-    }
+  private settingDisabled(value: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-disabled', !!value);
+    HtmlElemUtil.setAttr(renderer, elem, 'dis', value ? '' : null);
   }
 }
