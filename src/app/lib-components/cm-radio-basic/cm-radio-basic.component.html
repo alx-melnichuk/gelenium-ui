@@ -16,7 +16,7 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
     The component allows you to select only one element from several related components.
     The GlnRadioButton component is used inside the GlnRadioGroup component.
   </p>
-  <!-- <p>The GlnRadioButton component can be used in reactive forms.</p>
+  <p>The GlnRadioButton component can be used in reactive forms.</p>
   <span> For example:</span>
   <code><pre source="html">
 &lt;form [formGroup]="formGroup01a" novalidate autocomplete="off"&gt;
@@ -25,11 +25,11 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
     <i>name="model01a"</i>
     <i>[value]="item"</i>&gt; <b>&#123;</b>&#123; item &#125;&#125;
   &lt;/<strong>gln-radio-button</strong>&gt;
-&lt;/form&gt;</pre></code> -->
+&lt;/form&gt;</pre></code>
 </section>
 
 
-<form *ngIf="false && isShowBasic01"
+<form *ngIf="isShowBasic01"
   [formGroup]="formGroup01a"
   novalidate
   autocomplete="off">
@@ -40,11 +40,10 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
       <div>
         <small>
           <em>
-            With "formControlName" model={{ formGroup01a.controls['model01a'].value }}
+            With "formControlName" model="{{ formGroup01a.controls['model01a'].value }}""
           </em>
         </small>
       </div>
-
       <gln-radio-button *ngFor="let item of fruits01a"
         name="model01a"
         formControlName="model01a"
@@ -58,10 +57,10 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 
 
 <!-- source -->
-<hr br-nn />
 
 
-<section *ngIf="false && isShowBasic01"
+
+<section *ngIf="isShowBasic01"
   mr-vr>
   <p>And also the GlnRadioButton component can be used without reactive forms.</p>
   <span> For example:</span>
@@ -74,14 +73,13 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 </section>
 
 
-<div *ngIf="false && isShowBasic01"
+<div *ngIf="isShowBasic01"
   class="app-group">
 
   <div class="app-elem">
     <div>
-      <small><em>With "ngModel" model={{ data01b }}</em></small>
+      <small><em>With "ngModel" model="{{ data01b }}"</em></small>
     </div>
-
     <gln-radio-button *ngFor="let item of fruits01b"
       name="model01b"
       [(ngModel)]="data01b"
@@ -95,10 +93,10 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 
 
 <!-- source -->
-<hr br-nn />
 
 
-<section *ngIf="false && isShowBasic01"
+
+<section *ngIf="isShowBasic01"
   mr-vr>
   <p>
     The GlnRadioGroup component allows you to select one value from a group of GlnRadioButton
@@ -116,29 +114,10 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
     &lt;/<strong>gln-radio-button</strong>&gt;
   &lt;/<strong>gln-radio-group</strong>&gt;
 &lt;/form&gt;</pre></code>
-
-  <!--
-&lt;form [formGroup]="formGroup01a" novalidate autocomplete="off"&gt;
-  &lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits01a"
-    formControlName="model01a"
-    <i>name="model01a"</i>
-    <i>[value]="item"</i>&gt;
-    <b>&#123;</b>&#123; item &#125;&#125;
-  &lt;/<strong>gln-radio-button</strong>&gt;
-&lt;/form&gt;</pre></code>
-  
-  
-  <code><pre source="html">
-&lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits01b"
-  [(ngModel)]="data01b"
-  <i>name="model01b"</i>
-  <i>[value]="item"</i>&gt;
-  <b>&#123;</b>&#123; item &#125;&#125;
-&lt;/<strong>gln-radio-button</strong>&gt;</pre></code> -->
 </section>
 
 
-<form *ngIf="false && isShowBasic01"
+<form *ngIf="isShowBasic01"
   [formGroup]="formGroup01c"
   novalidate
   autocomplete="off">
@@ -149,7 +128,7 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
       <div>
         <small>
           <em>
-            With GlnRadioGroup model={{ formGroup01c.controls['model01c'].value }}
+            With GlnRadioGroup model="{{ formGroup01c.controls['model01c'].value }}"
           </em>
         </small>
       </div>
@@ -171,6 +150,7 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 <hr br-nn />
 
 
+
 <!-- Page: Attributes02a -->
 <i id="Attributes">_</i>
 <section *ngIf="isShowAttributes02a"
@@ -184,15 +164,16 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
     <li>"id" - parameter for defining the unique identifier of the input field
       (id="unique_identifier");
     </li>
-    <!-- <li>
+    <li>
       "config" - Defines a configuration object.
       <a [href]="urlCmRadio + '#config-interface'">More details.</a>
-    </li> -->
+    </li>
     <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
     <li>"isReadOnly" - Specifies the status of an element as read-only (isReadOnly);</li>
+    <li>"isNoRipple" - disables the execution of the ripple effect (isNoRipple);</li>
+    <li>"isNoHover" - disables the display of additional background on hover (isNoHover);</li>
   </ul>
 </section>
-
 
 
 <form *ngIf="isShowAttributes02a"
@@ -201,35 +182,19 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
   autocomplete="off">
 
   <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small><em>GlnRadioButton, isDisabled.</em></small>
-      </div>
-      <gln-radio-group formControlName="model02a">
-        <gln-radio-button *ngFor="let item of fruits02a; last as isLast"
-          class="rbat1-fn-sz"
-          [value]="item"
-          [isDisabled]="isLast">
-          {{ item }}
-        </gln-radio-button>
-      </gln-radio-group>
-    </div>
-  </div>
-
-  <div class="app-group">
     <div class="app-elem">
       <div>
         <small><em>Attributes: isDisabled.</em></small>
       </div>
-      <gln-radio-group formControlName="model02b"
-        isDisabled>
-        <gln-radio-button *ngFor="let item of fruits02a"
-          class="rbat1-fn-sz"
-          [value]="item">
+      <div>
+        <gln-radio-button *ngFor="let item of fruits02a; last as isLast"
+          formControlName="model02a"
+          name="model02a"
+          [value]="item"
+          isDisabled>
           {{ item }}
         </gln-radio-button>
-      </gln-radio-group>
+      </div>
     </div>
   </div>
 
@@ -238,14 +203,51 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
       <div>
         <small><em>Attributes: isReadOnly.</em></small>
       </div>
-      <gln-radio-group formControlName="model02c"
-        isReadOnly>
+      <div>
         <gln-radio-button *ngFor="let item of fruits02a"
-          class="rbat1-fn-sz"
-          [value]="item">
+          formControlName="model02b"
+          name="model02b"
+          [value]="item"
+          isReadOnly>
           {{ item }}
         </gln-radio-button>
-      </gln-radio-group>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>Attributes: isNoHover, isNoRipple.</em></small>
+      </div>
+      <div>
+        <gln-radio-button *ngFor="let item of fruits02a"
+          formControlName="model02c"
+          name="model02c"
+          [value]="item"
+          isNoHover
+          isNoRipple>
+          {{ item }}
+        </gln-radio-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>Attributes: isNoAnimation, isNoRipple.</em></small>
+      </div>
+      <div>
+        <gln-radio-button *ngFor="let item of fruits02a"
+          formControlName="model02d"
+          name="model02d"
+          [value]="item"
+          isNoAnimation
+          isNoRipple>
+          {{ item }}
+        </gln-radio-button>
+      </div>
     </div>
   </div>
 
@@ -253,11 +255,88 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 
 
 <!-- source -->
-<hr br-nn />
 
 
-<section *ngIf="isShowAttributes02f"
+
+<section *ngIf="isShowAttributes02g"
   mr-vr
+  id="attributes-position">
+  <h4 class="app-hover-link">
+    Position.
+    <a [href]="urlCmRadio + '#attributes-position'">#</a>
+  </h4>
+  <p>
+    It is possible to change the position of the label relative to the GlnRadioButton component.
+  </p>
+</section>
+
+
+<form *ngIf="isShowAttributes02g"
+  [formGroup]="formGroup02g"
+  novalidate
+  autocomplete="off">
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbar2-elem">
+      <div>
+        <small>
+          <em>Attributes: position - top.</em>
+        </small>
+      </div>
+      <gln-radio-button formControlName="model02g"
+        name="model02g"
+        value="top"
+        position="top">Position - top
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbar2-elem">
+      <div>
+        <small>
+          <em>Attributes: position - bottom.</em>
+        </small>
+      </div>
+      <gln-radio-button formControlName="model02g"
+        name="model02g"
+        value="bottom"
+        position="bottom">Position - bottom
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbar2-elem">
+      <div>
+        <small>
+          <em>Attributes: position - start.</em>
+        </small>
+      </div>
+      <gln-radio-button formControlName="model02g"
+        name="model02g"
+        value="start"
+        position="start">Position - start
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbar2-elem">
+      <div>
+        <small>
+          <em>Attributes: position - end.</em>
+        </small>
+      </div>
+      <gln-radio-button formControlName="model02g"
+        name="model02g"
+        value="end"
+        position="end">Position - end
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+</form>
+
+
+
+<!-- <section  mr-vr
   id="attributes-supported02">
   <h4 class="app-hover-link">
     Attributes are also supported 2:
@@ -269,11 +348,72 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
     <li>"dirCol" - arranges GlnRadioButton components in a column (dirCol);</li>
     <li>"isRequired??" - a sign that the field is required (isRequired);</li>
   </ul>
+</section> -->
+
+
+<section *ngIf="isShowAttributes02l"
+  mr-vr
+  id="attributes-gln-radio-group">
+  <h4 class="app-hover-link">
+    GlnRadioGroup component.
+    <a [href]="urlCmRadio + '#attributes-gln-radio-group'">#</a>
+  </h4>
+  <p>
+    For convenience of work with GlnRadioButton there is GlnRadioGroup component.
+    <br />
+    For the GlnRadioGroup component, you can specify options that are passed to each
+    GlnRadioButton element.
+  </p>
 </section>
 
 
-<form *ngIf="isShowAttributes02f"
-  [formGroup]="formGroup02f"
+<section mr-vr
+  class="rbat2-props">
+  <label>
+    <input type="checkbox"
+      (change)="isDisabled02l=!isDisabled02l"
+      [checked]="isDisabled02l" /> is disabled
+  </label>
+  <label>
+    <input type="checkbox"
+      (change)="isNoAnimation02l=!isNoAnimation02l"
+      [checked]="isNoAnimation02l" /> is no animation
+  </label>
+  <label>
+    <input type="checkbox"
+      (change)="isNoHover02l=!isNoHover02l"
+      [checked]="isNoHover02l" /> is no hover
+  </label>
+  <label>
+    <input type="checkbox"
+      (change)="isNoRipple02l=!isNoRipple02l"
+      [checked]="isNoRipple02l" /> is no ripple
+  </label>
+  <label>
+    <input type="checkbox"
+      (change)="isReadOnly02l=!isReadOnly02l"
+      [checked]="isReadOnly02l" /> is readonly
+  </label>
+  <label>
+    <input type="checkbox"
+      (change)="isSizeMiddle02l=!isSizeMiddle02l"
+      [checked]="isSizeMiddle02l" /> is size='middle'
+  </label>
+  <label>
+    <input type="checkbox"
+      (change)="isPositionStart02l=!isPositionStart02l"
+      [checked]="isPositionStart02l" /> is position='start'
+  </label>
+  <label>
+    <input type="checkbox"
+      (change)="isDirCol02l=!isDirCol02l"
+      [checked]="isDirCol02l" /> add attr. 'dirCol'
+  </label>
+</section>
+
+
+<form *ngIf="isShowAttributes02l"
+  [formGroup]="formGroup02l"
   novalidate
   autocomplete="off">
 
@@ -281,45 +421,19 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 
     <div class="app-elem">
       <div>
-        <small><em>Attributes: isNoRipple.</em></small>
+        <small><em>GlnRadioGroup</em></small>
       </div>
-      <gln-radio-group formControlName="model02f"
-        isNoRipple>
-        <gln-radio-button *ngFor="let item of fruits02f"
-          class="rbat2-fn-sz"
-          [value]="item">
-          {{ item }}
-        </gln-radio-button>
-      </gln-radio-group>
-    </div>
-  </div>
-
-  <div class="app-group">
-    <div class="app-elem">
-      <div>
-        <small><em>Attributes: isNoHover.</em></small>
-      </div>
-      <gln-radio-group formControlName="model02f"
-        isNoHover>
-        <!-- model02g -->
-        <gln-radio-button *ngFor="let item of fruits02f"
-          class="rbat2-fn-sz"
-          [value]="item">
-          {{ item }}
-        </gln-radio-button>
-      </gln-radio-group>
-    </div>
-  </div>
-
-  <div class="app-group">
-    <div class="app-elem">
-      <div>
-        <small><em>Attributes: dirCol.</em></small>
-      </div>
-      <gln-radio-group formControlName="model02h"
-        dirCol>
-        <gln-radio-button *ngFor="let item of fruits02f"
-          class="rbat2-fn-sz"
+      <gln-radio-group name="model02l"
+        [isDisabled]="isDisabled02l"
+        [isNoAnimation]="isNoAnimation02l"
+        [isNoHover]="isNoHover02l"
+        [isNoRipple]="isNoRipple02l"
+        [isReadOnly]="isReadOnly02l"
+        [size]="isSizeMiddle02l ? 'middle' : undefined"
+        [attr.dirCol]="isDirCol02l ? '' : undefined"
+        [position]="isPositionStart02l ? 'start' : undefined">
+        <gln-radio-button *ngFor="let item of fruits02l"
+          formControlName="model02l"
           [value]="item">
           {{ item }}
         </gln-radio-button>
@@ -332,6 +446,7 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 
 <!-- source -->
 <hr br-nn />
+
 
 
 <i id="Size">_</i>
@@ -347,12 +462,14 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
     class "gln-radio-icon-block".
     To change the size of the component image, you need to specify the "size" parameter.
     Or specify the required font size for the block with the class "gln-radio-icon-block"
+    (you can specify the css parameter "--glnrb-icon-fn-sz").
   </p>
   <span>For example:</span>
 </section>
 
 
-<form [formGroup]="formGroup03a"
+<form *ngIf="isShowSize03"
+  [formGroup]="formGroup03a"
   novalidate
   autocomplete="off">
 
@@ -494,7 +611,7 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
     <div class="app-elem">
       <div>
         <small>
-          <em>"Custom" height: 53px; (font-size: 17.667px;)</em>
+          <em>"Custom" height: 53px (52.97px); (font-size: 17.667px;)</em>
         </small>
       </div>
       <gln-radio-group>
@@ -510,3 +627,6 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
   </div>
 
 </form>
+
+<!-- source -->
+<hr br-nn />

@@ -23,7 +23,7 @@ export class CmRadioBasicComponent {
 
   public urlCmRadio = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_RADIOBUTTON');
 
-  isShowBasic01 = true;
+  isShowBasic01 = false; // true;
   public fruits01a: string[] = ['apple', 'apricot', 'banana'];
   public formGroup01a: FormGroup = new FormGroup({
     model01a: new FormControl(this.fruits01a[0], []),
@@ -38,27 +38,42 @@ export class CmRadioBasicComponent {
   });
 
   // Page: Attributes02a
-  isShowAttributes02a = false; // true; // 02abcde,
-  public fruits02a: string[] = ['kiwi', 'orange', 'lemon'];
+  isShowAttributes02a = false; // true; // 02abcd efghik,
+  public fruits02a: string[] = ['apple', 'apricot', 'banana'];
   public formGroup02a: FormGroup = new FormGroup({
     model02a: new FormControl(this.fruits02a[0], []),
     model02b: new FormControl(this.fruits02a[0], []),
     model02c: new FormControl(this.fruits02a[0], []),
+    model02d: new FormControl(this.fruits02a[0], []),
   });
 
-  // Page: Attributes02f
-  isShowAttributes02f = false; // true; // 02fghij
-  public fruits02f: string[] = ['mango', 'mandarin', 'peach'];
-  public formGroup02f: FormGroup = new FormGroup({
-    model02f: new FormControl(this.fruits02f[0], []),
-    model02g: new FormControl(this.fruits02f[0], []),
-    model02h: new FormControl(this.fruits02f[0], []),
+  isShowAttributes02g = false; // true; // 02ghik,
+  public formGroup02g: FormGroup = new FormGroup({
+    model02g: new FormControl('top', []),
   });
 
-  data02a = false;
+  // Page: Attributes02l
+  isShowAttributes02l = true; // 02lmnopq
+  public fruits02l: string[] = ['kiwi', 'orange', 'lemon'];
+  public formGroup02l: FormGroup = new FormGroup({
+    model02l: new FormControl(this.fruits02l[0], []),
+    model02m: new FormControl(this.fruits02l[0], []),
+    model02n: new FormControl(this.fruits02l[0], []),
+    // model02o: new FormControl(this.fruits02l[0], []),
+    // model02p: new FormControl(this.fruits02l[0], []),
+    // model02q: new FormControl(this.fruits02l[0], []),
+  });
+  public isDisabled02l = false;
+  public isNoAnimation02l = false;
+  public isNoHover02l = false;
+  public isNoRipple02l = false;
+  public isReadOnly02l = false;
+  public isSizeMiddle02l = false;
+  public isPositionStart02l = false;
+  public isDirCol02l = false;
 
   // Page: Size03
-  isShowSize03 = false; // true; // 02abcde ,
+  isShowSize03 = false; // true; // 03
   public fruits03a: string[] = ['apple', 'apricot', 'banana'];
   public formGroup03a: FormGroup = new FormGroup({
     model03a: new FormControl(this.fruits03a[0], []),
@@ -82,7 +97,8 @@ export class CmRadioBasicComponent {
   public getValue(event: Event): string {
     return (event.target as HTMLInputElement)?.value;
   }
-  log(text: Event): void {
-    console.log((text.target as HTMLInputElement).value);
+  log(event: any): void {
+    // console.log((text.target as HTMLInputElement).value);
+    console.log(event);
   }
 }
