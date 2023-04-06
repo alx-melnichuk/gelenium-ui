@@ -105,15 +105,15 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     }
     let isBorderRadius: boolean = false;
     let isPageBuffer: boolean = !!changes['page'];
-    if (changes['count'] || (changes['config'] && this.countVal == null && this.currConfig.count != null)) {
+    if (changes['count'] || (changes['config'] && this.count == null && this.currConfig.count != null)) {
       this.countVal = this.getNotNegative(this.count ?? this.currConfig.count) ?? COUNT;
       isPageBuffer = true;
     }
-    if (changes['countBorder'] || (changes['config'] && this.countBorderVal == null && this.currConfig.countBorder != null)) {
+    if (changes['countBorder'] || (changes['config'] && this.countBorder == null && this.currConfig.countBorder != null)) {
       this.countBorderVal = this.getNotNegative(this.countBorder ?? this.currConfig.countBorder) ?? COUNT_BORDER;
       isPageBuffer = true;
     }
-    if (changes['countNearby'] || (changes['config'] && this.countNearbyVal == null && this.currConfig.countNearby != null)) {
+    if (changes['countNearby'] || (changes['config'] && this.countNearby == null && this.currConfig.countNearby != null)) {
       this.countNearbyVal = this.getNotNegative(this.countNearby ?? this.currConfig.countNearby) ?? COUNT_NEARBY;
       isPageBuffer = true;
     }
@@ -121,7 +121,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       this.pageBuffer = GlnPaginationUtil.createPageBuffer(this.countVal, this.page, this.countNearbyVal, this.countBorderVal);
     }
 
-    if (changes['exterior'] || (changes['config'] && this.exteriorVal == null && this.currConfig.exterior != null)) {
+    if (changes['exterior'] || (changes['config'] && this.exterior == null && this.currConfig.exterior != null)) {
       this.exteriorVal = EXTERIOR[this.exterior || this.currConfig.exterior || ''] || EXTERIOR['text'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
     }
@@ -130,26 +130,26 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabledVal || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabledVal ? '' : null);
     }
-    if (changes['isHideNext'] || (changes['config'] && this.isHideNextVal == null && this.currConfig.isHideNext != null)) {
+    if (changes['isHideNext'] || (changes['config'] && this.isHideNext == null && this.currConfig.isHideNext != null)) {
       this.isHideNextVal = !!(BooleanUtil.init(this.isHideNext) ?? (this.currConfig.isHideNext || null));
       this.settingHideNext(this.isHideNextVal, this.renderer, this.hostRef);
     }
-    if (changes['isHidePrev'] || (changes['config'] && this.isHidePrevVal == null && this.currConfig.isHidePrev != null)) {
+    if (changes['isHidePrev'] || (changes['config'] && this.isHidePrev == null && this.currConfig.isHidePrev != null)) {
       this.isHidePrevVal = !!(BooleanUtil.init(this.isHidePrev) ?? (this.currConfig.isHidePrev || null));
       this.settingHidePrev(this.isHidePrevVal, this.renderer, this.hostRef);
     }
-    if (changes['isNoRipple'] || (changes['config'] && this.isNoRippleVal == null && this.currConfig.isNoRipple != null)) {
+    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
       this.isNoRippleVal = !!(BooleanUtil.init(this.isNoRipple) ?? (this.currConfig.isNoRipple || null));
     }
-    if (changes['isNoRounded'] || (changes['config'] && this.isNoRoundedVal == null && this.currConfig.isNoRounded != null)) {
+    if (changes['isNoRounded'] || (changes['config'] && this.isNoRounded == null && this.currConfig.isNoRounded != null)) {
       this.isNoRoundedVal = !!(BooleanUtil.init(this.isNoRounded) ?? (this.currConfig.isNoRounded || null));
       isBorderRadius = true;
     }
-    if (changes['isShowFirst'] || (changes['config'] && this.isShowFirstVal == null && this.currConfig.isShowFirst != null)) {
+    if (changes['isShowFirst'] || (changes['config'] && this.isShowFirst == null && this.currConfig.isShowFirst != null)) {
       this.isShowFirstVal = !!(BooleanUtil.init(this.isShowFirst) ?? (this.currConfig.isShowFirst || null));
       this.settingShowFirst(this.isShowFirstVal, this.renderer, this.hostRef);
     }
-    if (changes['isShowLast'] || (changes['config'] && this.isShowLastVal == null && this.currConfig.isShowLast != null)) {
+    if (changes['isShowLast'] || (changes['config'] && this.isShowLast == null && this.currConfig.isShowLast != null)) {
       this.isShowLastVal = !!(BooleanUtil.init(this.isShowLast) ?? (this.currConfig.isShowLast || null));
       this.settingShowLast(this.isShowLastVal, this.renderer, this.hostRef);
     }

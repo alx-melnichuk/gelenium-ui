@@ -136,23 +136,23 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     if (changes['isDisabled']) {
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
-    if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimationVal == null && this.currConfig.isNoAnimation != null)) {
+    if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
       this.isNoAnimationVal = !!(BooleanUtil.init(this.isNoAnimation) ?? (this.currConfig.isNoAnimation || null));
       this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
-    if (changes['isNoRipple'] || (changes['config'] && this.isNoRippleVal == null && this.currConfig.isNoRipple != null)) {
+    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
       this.isNoRippleVal = !!(BooleanUtil.init(this.isNoRipple) ?? (this.currConfig.isNoRipple || null));
       this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
-    if (changes['isReadOnly'] || (changes['config'] && this.isReadOnlyVal == null && this.currConfig.isReadOnly != null)) {
+    if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
       this.isReadOnlyVal = !!(BooleanUtil.init(this.isReadOnly) ?? (this.currConfig.isReadOnly || null));
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
-    if (changes['isRequired'] || (changes['config'] && this.isRequiredVal == null && this.currConfig.isRequired != null)) {
+    if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
       this.isRequiredVal = !!(BooleanUtil.init(this.isRequired) ?? (this.currConfig.isRequired || null));
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
-    if (changes['position'] || (changes['config'] && this.positionVal == null && this.currConfig.position != null)) {
+    if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       // Remove class by old position value.
       this.settingByPosition(false, this.positionVal, this.renderer, this.hostRef);
       const positionStr: string = (this.position || this.currConfig.position || '').toString();
