@@ -105,7 +105,6 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   private innIsDisabledVal: boolean | null = null;
   private innPositionVal: string | null = null;
   private isPhaseAfterViewInit: boolean = false;
-  private positionClassCurr: string = '';
   private timeoutForShow: number | undefined = undefined;
   private timeoutForHide: number | undefined = undefined;
 
