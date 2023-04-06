@@ -15,19 +15,6 @@ gln-radio-button {
   outline: 0;
   user-select: none;
 
-  &[pos-t] {
-    flex-direction: column-reverse;
-  }
-  &[pos-b] {
-    flex-direction: column;
-  }
-  &[pos-s] {
-    flex-direction: row-reverse;
-  }
-  &[pos-e] {
-    flex-direction: row;
-  }
-
   --glnrb---def-che-cl: hsl(var(--glnrb--primary-h), var(--glnrb--primary-s), var(--glnrb--primary-l));
   --glnrb---def-che-hov: hsla(var(--glnrb--primary-h), var(--glnrb--primary-s), 75%, 20%);
   --glnrb---def-che-rip: hsla(var(--glnrb--primary-h), var(--glnrb--primary-s), 75%, 30%);
@@ -75,7 +62,7 @@ gln-radio-button {
     pointer-events: none;
   }
 
-  &:not([hdAnmInit]) {
+  &:not([hdAnmInit]):not([noAni]) {
     --glnrb--trn-dur-200: 200ms; // transition-duration
     --glnrb--trn-dur-150: 150ms; // transition-duration
   }
@@ -84,8 +71,22 @@ gln-radio-button {
     align-items: center;
     // cursor: inherit; // cursor: pointer;
     display: inline-flex;
+    flex-shrink: 0;
     vertical-align: middle;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  &[pos-t]>[glnrb-container] {
+    flex-direction: column-reverse;
+  }
+  &[pos-b]>[glnrb-container] {
+    flex-direction: column;
+  }
+  &[pos-s]>[glnrb-container] {
+    flex-direction: row-reverse;
+  }
+  &[pos-e]>[glnrb-container] {
+    flex-direction: row;
   }
 
   [glnrb-icon-block] {
@@ -99,8 +100,8 @@ gln-radio-button {
     font-size: var(--glnrb-icon-fn-sz, var(--glnrb--icon-fn-sz, 14px));
     justify-content: center;
     margin: 0;
-    // outline: 0;
-    outline: 1px dashed orange;
+    outline: 0;
+    // outline: 1px dashed orange;
     // padding: var(--glnrb-icon-pd, var(--glnrb--icon-pd, 0.56em));
     padding: 0.625em;
     position: relative;

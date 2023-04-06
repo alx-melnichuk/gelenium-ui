@@ -1,3 +1,4 @@
+export * from './gln-radio-button-change.interface';
 export * from './gln-radio-button-checked.util';
 export * from './gln-radio-button-config.interface';
 export * from './gln-radio-button.component';

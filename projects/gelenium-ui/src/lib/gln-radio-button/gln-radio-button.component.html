@@ -10,16 +10,12 @@
       class="gln-radio-input glnrb-input"
       type="radio"
       [attr.id]="id + '_input'"
-      [attr.disabled]="innDisabled ? '': null"
-      [attr.tabindex]="!innDisabled ? '0' : null"
+      [attr.disabled]="isDisabledVal ? '': null"
+      [attr.readonly]="isReadOnlyVal ? '': null"
+      [attr.tabindex]="!isDisabledVal ? '0' : null"
       aria-label="Radio demo"
+      (change)="$event.stopPropagation();"
       (click)="doClickByInput($event)" />
-    <!-- 
-      [attr.disabled]="innDisabled || group?.disabled ? '': null"
-      [attr.readonly]="innReadOnly || group?.readOnly ? '': null"
-      [attr.tabindex]="!innDisabled && !group?.disabled ? '0' : null"
-
- -->
     <span glnrb-icon-wrap
       class="gln-radio-icon-wrap">
       <svg glnrb-icon
@@ -45,8 +41,7 @@
     </span>
 
     <gln-touch-ripple isCenter
-      *ngIf="!innDisabled">
-      <!-- *ngIf="!innDisabled && !group?.disabled && !innReadOnly && !group?.readOnly && !innNoRipple && !group?.noRipple" -->
+      *ngIf="!isDisabledVal && !isNoRippleVal && !isReadOnlyVal">
     </gln-touch-ripple>
   </span>
 

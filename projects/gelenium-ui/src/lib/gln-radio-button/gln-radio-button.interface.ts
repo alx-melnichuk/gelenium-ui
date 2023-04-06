@@ -5,7 +5,7 @@ export interface GlnRadioButton {
   readonly name: string;
   readonly value: string | null | undefined;
   setChecked(newValue: boolean): void;
-  setName(newValue: string): void;
+  setProperties(properties: Record<string, unknown>): void;
 }
 
 /**
