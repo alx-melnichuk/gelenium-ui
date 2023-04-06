@@ -6,9 +6,7 @@ import {
   ContentChildren,
   ElementRef,
   EventEmitter,
-  forwardRef,
   Input,
-  NgZone,
   OnChanges,
   OnDestroy,
   OnInit,
@@ -39,9 +37,11 @@ let uniqueIdCounter = 0;
 })
 export class GlnRadioGroupComponent implements OnChanges, OnInit, AfterContentInit, OnDestroy, GlnRadioGroup {
   @Input()
-  public id: string; // interface GlnRadioGroup
+  public id: string;
   @Input()
   public isDisabled: string | boolean | null | undefined;
+  @Input()
+  public isNoAnimation: string | boolean | null | undefined;
   @Input()
   public isNoHover: string | boolean | null | undefined;
   @Input()
@@ -50,6 +50,10 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, AfterContentIn
   public isReadOnly: string | boolean | null | undefined;
   @Input()
   public name: string; // interface GlnRadioGroup
+  @Input()
+  public position: string | null | undefined; // 'top' | 'bottom' | 'start' | 'end'; // interface GlnRadioGroup
+  @Input()
+  public size: number | string | null | undefined; // 'little','short','small','middle','wide','large','huge' // interface GlnRadioGroup
 
   @Output()
   readonly selected: EventEmitter<GlnRadioButton | null> = new EventEmitter();
@@ -63,6 +67,7 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, AfterContentIn
   public set radios(value: GlnRadioButton[]) {}
 
   public disabled: boolean | null | undefined; // interface GlnRadioButtonGroup // Binding attribute "isDisabled".
+  public noAnimation: boolean | null | undefined; // interface GlnRadioButtonGroup // Binding attribute "isNoAnimation".
   public noHover: boolean | null | undefined; // interface GlnRadioButtonGroup // Binding attribute "isNoHover".
   public noRipple: boolean | null | undefined; // interface GlnRadioButtonGroup // Binding attribute "isNoRipple".
   public readOnly: boolean | null | undefined; // interface GlnRadioButtonGroup // Binding attribute "isReadOnly".
@@ -83,30 +88,44 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, AfterContentIn
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
+    const properties: Record<string, unknown> = {};
     if (changes['isDisabled']) {
-      this.setDisabled(BooleanUtil.init(this.isDisabled));
+      this.disabled = !!BooleanUtil.init(this.isDisabled);
+      this.settingDisabled(this.disabled, this.renderer, this.hostRef);
+      properties['isDisabled'] = this.disabled;
+    }
+    if (changes['isNoAnimation']) {
+      this.setNoAnimation(BooleanUtil.init(this.isNoAnimation));
+      properties['isNoAnimation'] = this.noAnimation ? 'true' : null;
     }
     if (changes['isNoHover']) {
       this.setNoHover(BooleanUtil.init(this.isNoHover));
+      properties['isNoHover'] = this.noHover ? 'true' : null;
     }
     if (changes['isNoRipple']) {
       this.setNoRipple(BooleanUtil.init(this.isNoRipple));
+      properties['isNoRipple'] = this.noRipple ? 'true' : null;
     }
     if (changes['isReadOnly']) {
-      this.setReadOnly(BooleanUtil.init(this.isReadOnly));
+      this.readOnly = !!BooleanUtil.init(this.isReadOnly);
+      this.settingReadOnly(this.readOnly, this.renderer, this.hostRef);
+      properties['isReadOnly'] = this.readOnly ? 'true' : null;
     }
     if (changes['name']) {
-      for (let idx = 0; idx < this.radios.length; idx++) {
-        this.radios[idx].setName(this.name);
-      }
+      properties['name'] = this.name;
     }
+    if (changes['position']) {
+      properties['position'] = this.position;
+    }
+    if (changes['size']) {
+      properties['size'] = this.size || null;
+    }
+
+    this.setPropertiesForItems(properties, this.radios);
   }
 
   public ngOnInit(): void {
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
-    if (this.disabled === null) {
-      this.setDisabled(!!this.disabled);
-    }
   }
 
   public ngAfterContentInit(): void {
@@ -131,36 +150,6 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, AfterContentIn
     this.selectedRadio = null;
   }
 
-  // ** interface ControlValueAccessor - start **
-  /*
-  // // eslint-disable-next-line @typescript-eslint/no-empty-function
-  // public onChange: (val: unknown) => void = () => {};
-  // // eslint-disable-next-line @typescript-eslint/no-empty-function
-  // public onTouched: () => void = () => {};
-
-  // public writeValue(value: any): void {
-  //   if (value !== this.valueData) {
-  //     this.valueData = value;
-  //     this.changeDetectorRef.markForCheck();
-  //     const newRadio: GlnRadioButton | null = this.getRadioButtonByValue(value, this.radios);
-  //     this.updateSelectedRadio(newRadio);
-  //   }
-  // }
-  // // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-  // public registerOnChange(fn: any): void {
-  //   this.onChange = fn;
-  // }
-  // // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-  // public registerOnTouched(fn: any): void {
-  //   this.onTouched = fn;
-  // }
-
-  // public setDisabledState(disabled: boolean): void {
-  //   this.setDisabled(disabled);
-  // }
-*/
-  // ** interface ControlValueAccessor - finish **
-
   // ** interface GlnRadioButtonGroup - start **
 
   /** Set the radio button as selected. */
@@ -176,38 +165,20 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, AfterContentIn
 
   // ** Public methods **
 
-  /*public getValue(): string | null | undefined {
-    return this.valueData;
-  }*/
+  // ** Protected methods **
 
-  /*public setValue(newValue: string | null | undefined): void {
-    if (newValue !== this.valueData) {
-      this.updateValueData(newValue);
-      const newRadio: GlnRadioButton | null = this.getRadioButtonByValue(newValue, this.radios);
-      this.updateSelectedRadio(newRadio);
+  protected setPropertiesForItems(properties: Record<string, unknown>, radios: GlnRadioButton[]): void {
+    const keys: string[] = Object.keys(properties);
+    if (keys.length > 0 && radios.length > 0) {
+      for (let idx = 0; idx < radios.length; idx++) {
+        // console.log(`(id=${radios[idx].id}).setProperties(${JSON.stringify(properties)});`); // #
+        radios[idx].setProperties(properties);
+      }
     }
-  }*/
+  }
 
   // ** Private methods **
 
-  /*private updateValueData(newValue: string | null | undefined): void {
-    if (newValue !== this.valueData) {
-      this.valueData = newValue;
-      this.onChange(this.valueData);
-    }
-  }*/
-  /*private updateSelectedRadio(newRadio: GlnRadioButton | null): void {
-    if (newRadio !== this.selectedRadio) {
-      if (!!this.selectedRadio) {
-        this.selectedRadio.selected = false;
-      }
-      this.selectedRadio = newRadio;
-      if (this.selectedRadio != null) {
-        this.selectedRadio.selected = true;
-      }
-      this.selected.emit(newRadio);
-    }
-  }*/
   private getRadioButtonByValue(value: string | null | undefined, radios: GlnRadioButton[]): GlnRadioButton | null {
     let result: GlnRadioButton | null = null;
     for (let idx = 0; idx < radios.length && !result; idx++) {
@@ -218,15 +189,22 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, AfterContentIn
     return result;
   }
   /** Check or uncheck the "disabled" property. */
-  private setDisabled(value: boolean | null): void {
+  /*private setDisabled(value: boolean | null): void {
     if (this.disabled !== !!value) {
       this.disabled = !!value;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', !!value);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', value ? '' : null);
       this.changeDetectorRef.markForCheck();
     }
+  }*/
+  private setNoAnimation(value: boolean | null): void {
+    if (this.noAnimation !== !!value) {
+      this.noAnimation = !!value;
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-animation', !!value);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noAni', value ? '' : null);
+      this.changeDetectorRef.markForCheck();
+    }
   }
-  /** Check or uncheck the "no-hover" property. */
   private setNoHover(value: boolean | null): void {
     if (this.noHover !== !!value) {
       this.noHover = !!value;
@@ -244,13 +222,12 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, AfterContentIn
       this.changeDetectorRef.markForCheck();
     }
   }
-  /** Check or uncheck the "readOnly" property. */
-  private setReadOnly(value: boolean | null): void {
-    if (this.readOnly !== !!value) {
-      this.readOnly = !!value;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-readonly', !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'rea', !!value ? '' : null);
-      this.changeDetectorRef.markForCheck();
-    }
+  private settingDisabled(value: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-disabled', !!value);
+    HtmlElemUtil.setAttr(renderer, elem, 'dis', value ? '' : null);
+  }
+  private settingReadOnly(isReadOnlyVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!isReadOnlyVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'rea', isReadOnlyVal ? '' : null);
   }
 }
