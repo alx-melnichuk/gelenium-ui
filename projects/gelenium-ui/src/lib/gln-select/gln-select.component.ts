@@ -40,29 +40,29 @@ import {
 } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { ORNAMENT_ALIGN } from '../directives/gln-ornament/gln-ornament.interface';
+import { CSS_ATTR_ORN_LF, CSS_PROP_ORN_PD_LF, GlnOrnamentLeftDirective } from '../directives/gln-ornament/gln-ornament-left.directive';
 import { GlnOrnamentOwner, GLN_ORNAMENT_OWNER } from '../directives/gln-ornament/gln-ornament-owner.interface';
 import { GlnOrnamentOwnerUtil } from '../directives/gln-ornament/gln-ornament-owner.util';
-import { CSS_ATTR_ORN_LF, CSS_PROP_ORN_PD_LF, GlnOrnamentLeftDirective } from '../directives/gln-ornament/gln-ornament-left.directive';
 import { CSS_ATTR_ORN_RG, CSS_PROP_ORN_PD_RG, GlnOrnamentRightDirective } from '../directives/gln-ornament/gln-ornament-right.directive';
+import { ORNAMENT_ALIGN } from '../directives/gln-ornament/gln-ornament.interface';
+import { GlnOrnamentUtil } from '../directives/gln-ornament/gln-ornament.util';
 import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
 import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
+import { GlnOption } from '../gln-option/gln-option.interface';
 import { GlnOptionUtil } from '../gln-option/gln-option.util';
+import { GlnOptionsScroll, OptionsScrollKeys } from '../gln-option/gln-options-scroll.interface';
 import { ArrayUtil } from '../_utils/array.util';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
-import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
+import { GlnSelectChange } from './gln-select-change.interface';
 import { GlnSelectConfig } from './gln-select-config.interface';
-import { GlnSelectionChange } from './gln-selection-change.interface';
 import { GlnSelectOpenUtil } from './gln-select-open.util';
-import { GlnSelectTriggerDirective, GLN_SELECT_TRIGGER } from './gln-select-trigger.directive';
-import { GlnOption } from '../gln-option/gln-option.interface';
-import { GlnOptionsScroll, OptionsScrollKeys } from '../gln-option/gln-options-scroll.interface';
-import { GlnOrnamentUtil } from '../directives/gln-ornament/gln-ornament.util';
+import { GLN_SELECT_TRIGGER, GlnSelectTriggerDirective } from './gln-select-trigger.directive';
+import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
 
 export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT_CONFIG');
 
@@ -198,7 +198,7 @@ export class GlnSelectComponent
   @Output()
   readonly closed: EventEmitter<void> = new EventEmitter();
   @Output()
-  readonly selected: EventEmitter<{ value: unknown | null; values: unknown[]; change: GlnSelectionChange<GlnOption> }> = new EventEmitter();
+  readonly selected: EventEmitter<GlnSelectChange> = new EventEmitter();
 
   /** Overlay panel with its own parameters. */
   @ViewChild(CdkConnectedOverlay)
@@ -279,8 +279,8 @@ export class GlnSelectComponent
   ) {
     this.currConfig = this.rootConfig || {};
     this.scrollStrategy = this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : this.overlay.scrollStrategies.block();
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-select', true);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
+    this.renderer.addClass(this.hostRef.nativeElement, 'gln-select');
+    this.renderer.addClass(this.hostRef.nativeElement, 'gln-control');
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
