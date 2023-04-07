@@ -115,7 +115,7 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, AfterContentIn
       properties['name'] = this.name;
     }
     if (changes['position']) {
-      properties['position'] = this.position;
+      properties['position'] = this.position || null;
     }
     if (changes['size']) {
       properties['size'] = this.size || null;
