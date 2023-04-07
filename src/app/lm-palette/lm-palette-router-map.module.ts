@@ -69,6 +69,19 @@ const siteUrlsPagination: SiteUrl[] = [
 
 SiteMenuUtil.addItem('Palette', 'Pagination', { label: 'Pagination', siteUrls: siteUrlsPagination });
 
+// ** Menu for "RadioButton". **
+
+RouterConfig.add('URL_PALETTE_RADIOBUTTON', 'radiobutton');
+const urlPlRadioButton = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_RADIOBUTTON');
+
+const siteUrlsRadioButton: SiteUrl[] = [
+  { label: 'Basic', url: urlPlRadioButton, fragment: 'Basic' },
+  { label: 'Like a Bootstrap', url: urlPlRadioButton, fragment: 'Bootstrap' },
+  { label: 'Like a Material-UI', url: urlPlRadioButton, fragment: 'MaterialUI' },
+];
+
+SiteMenuUtil.addItem('Palette', 'Radio button', { label: 'Radio button', siteUrls: siteUrlsRadioButton });
+
 // ** Menu for "Select". **
 
 RouterConfig.add('URL_PALETTE_SELECT', 'select');
