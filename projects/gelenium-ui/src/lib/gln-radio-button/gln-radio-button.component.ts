@@ -1,11 +1,13 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
   forwardRef,
+  Host,
   Inject,
   InjectionToken,
   Input,
@@ -17,12 +19,14 @@ import {
   PLATFORM_ID,
   Renderer2,
   SimpleChanges,
+  SkipSelf,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import {
   AbstractControl,
   AsyncValidatorFn,
+  ControlContainer,
   ControlValueAccessor,
   FormControl,
   FormGroup,
@@ -31,6 +35,7 @@ import {
   ValidationErrors,
   Validator,
   ValidatorFn,
+  Validators,
 } from '@angular/forms';
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnRadioGroup, GLN_RADIO_GROUP } from '../gln-radio-group/gln-radio-group.interface';
@@ -49,6 +54,8 @@ const SIZE: { [key: string]: number } = { little: 30, short: 36, small: 42, midd
 
 export const GLN_RADIO_BUTTON_CONFIG = new InjectionToken<GlnRadioButtonConfig>('GLN_RADIO_BUTTON_CONFIG');
 
+const CSS_ATTR_HIDE_ANIMATION_INIT = 'hdAnmInit';
+
 let uniqueIdCounter = 0;
 
 @Component({
@@ -66,14 +73,14 @@ let uniqueIdCounter = 0;
   ],
 })
 export class GlnRadioButtonComponent
-  implements OnChanges, OnInit, OnDestroy, GlnRadioButton, ControlValueAccessor, Validator, GlnNodeInternalValidator
+  implements OnChanges, OnInit, AfterContentInit, OnDestroy, GlnRadioButton, ControlValueAccessor, Validator, GlnNodeInternalValidator
 {
   @Input()
   public id: string = `glnrb-${uniqueIdCounter++}`; // interface GlnRadioButton
   @Input()
   public config: GlnRadioButtonConfig | null | undefined;
   @Input()
-  public checked: string | boolean | null | undefined;
+  public isChecked: string | boolean | null | undefined;
   @Input()
   public isDisabled: string | boolean | null | undefined;
   @Input()
@@ -84,6 +91,8 @@ export class GlnRadioButtonComponent
   public isNoRipple: string | boolean | null | undefined;
   @Input()
   public isReadOnly: string | boolean | null | undefined;
+  @Input()
+  public isRequired: string | boolean | null | undefined;
   @Input()
   public name: string = ''; // interface GlnRadioButton
   @Input()
@@ -105,14 +114,17 @@ export class GlnRadioButtonComponent
   public formGroup: FormGroup = new FormGroup({ radioinfo: this.formControl });
 
   public currConfig: GlnRadioButtonConfig;
-  public checkedVal: boolean | null = null; // Binding attribute "checked".
+  public isCheckedVal: boolean | null = null; // Binding attribute "isChecked".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
   public isNoHoverVal: boolean | null = null; // Binding attribute "isNoHover".
   public isNoRippleVal: boolean | null = null; // Binding attribute "isNoRipple".
   public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
+  public isRequiredVal: boolean | null = null; // Binding attribute "isRequired".
   public positionVal: string | null = null; // Binding attribute "position".
   public sizeVal: number | null = null; // Binding attribute "size".
+
+  private isRemoveAttrHideAnimation: boolean = false;
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -120,8 +132,9 @@ export class GlnRadioButtonComponent
     public hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
     private changeDetectorRef: ChangeDetectorRef,
+    @Optional() @Inject(GLN_RADIO_GROUP) public group: GlnRadioGroup,
     @Optional() @Inject(GLN_RADIO_BUTTON_CONFIG) private rootConfig: GlnRadioButtonConfig | null,
-    @Optional() @Inject(GLN_RADIO_GROUP) public group: GlnRadioGroup
+    @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null
   ) {
     this.currConfig = this.rootConfig || {};
     this.renderer.addClass(this.hostRef.nativeElement, 'gln-radio-button');
@@ -151,6 +164,10 @@ export class GlnRadioButtonComponent
       this.isReadOnlyVal = !!(BooleanUtil.init(this.isReadOnly) ?? this.group?.readOnly ?? this.currConfig.isReadOnly);
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
+    if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
+      this.isRequiredVal = !!(BooleanUtil.init(this.isRequired) ?? (this.currConfig.isRequired || null));
+      this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
+    }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       // Remove class by old position value.
       this.settingByPosition(false, this.positionVal, this.renderer, this.hostRef);
@@ -161,6 +178,10 @@ export class GlnRadioButtonComponent
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
       this.sizeVal = this.converSize((this.size || this.group?.size || this.currConfig.size || '').toString());
       this.setCssSize(this.sizeVal, this.hostRef);
+    }
+
+    if (changes['isRequired']) {
+      this.prepareFormGroup(this.isRequiredVal);
     }
   }
 
@@ -186,6 +207,10 @@ export class GlnRadioButtonComponent
       this.isReadOnlyVal = !!(this.group?.readOnly ?? this.currConfig.isReadOnly);
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
+    if (this.isRequiredVal == null) {
+      this.isRequiredVal = !!(this.currConfig.isRequired || null);
+      this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
+    }
     if (this.positionVal == null) {
       this.positionVal = this.converPosition((this.group?.position || this.currConfig.position || '').toString());
       // Add class by new position value.
@@ -196,8 +221,12 @@ export class GlnRadioButtonComponent
       this.setCssSize(this.sizeVal, this.hostRef);
     }
 
-    const checked = BooleanUtil.init(this.checked);
-    this.setChecked(!!checked);
+    if (this.isRequiredVal) {
+      this.prepareFormGroup(this.isRequiredVal);
+    }
+
+    const isChecked: boolean = !!BooleanUtil.init(this.isChecked);
+    this.setIsChecked(isChecked);
 
     if (!!this.group) {
       this.name = this.group.name;
@@ -209,6 +238,16 @@ export class GlnRadioButtonComponent
     }
     // If "name" is not specified, then all such elements will be
     // in the same group named "empty string".
+
+    this.renderer.setAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT, '');
+  }
+
+  public ngAfterContentInit(): void {
+    // When using [(ngModel)] parentFormGroup will be null.
+    this.isRemoveAttrHideAnimation = !this.parentFormGroup;
+    if (!this.isRemoveAttrHideAnimation) {
+      this.renderer.removeAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT);
+    }
   }
 
   public ngOnDestroy(): void {
@@ -223,9 +262,16 @@ export class GlnRadioButtonComponent
   public onTouched: () => void = () => {};
 
   public writeValue(value: any): void {
-    const newChecked: boolean = value == this.value;
+    const newChecked: boolean | null = value != null ? value == this.value : null;
     console.log(`writeValue   (id=${this.id}; name=${this.name}; value=${value}); newChecked=${newChecked};`); // #
-    this.setChecked(newChecked);
+    this.setIsChecked(newChecked);
+    if (this.isRemoveAttrHideAnimation) {
+      this.isRemoveAttrHideAnimation = false;
+      Promise.resolve().then(() => {
+        // Remove an attribute that disables animation on initialization.
+        this.renderer.removeAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT);
+      });
+    }
   }
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public registerOnChange(fn: any): void {
@@ -278,25 +324,30 @@ export class GlnRadioButtonComponent
 
   // ** interface GlnRadioButton - start **
 
-  public setChecked(newValue: boolean): void {
-    if (this.checkedVal !== newValue) {
-      console.log(`setChecked   (id=${this.id}; name=${this.name}; newValue=${newValue};`); // #
-      this.checkedVal = newValue;
-      this.settingChecked(this.checkedVal, this.renderer, this.hostRef);
+  public setIsChecked(newValue: boolean | null): void {
+    if (this.isCheckedVal !== newValue) {
+      console.log(`setChecked   (id=${this.id}; "${this.name}" newValue=${newValue}; value=${this.formControl.value}`); // #
+      const oldIsCheckedVal = this.isCheckedVal;
+      this.isCheckedVal = newValue;
+      this.settingChecked(this.isCheckedVal, this.renderer, this.hostRef);
       this.formControl.setValue(newValue); // ??
 
       if (newValue) {
         const previous: GlnRadioButton | undefined = GlnRadioButtonCheckedUtil.findByName(this.name || '');
         console.log(`setChecked   (id=${this.id}; name=${this.name}; !previous=${!previous};`); // #
-        previous?.setChecked(false);
+        previous?.setIsChecked(false);
         GlnRadioButtonCheckedUtil.add(this);
         this.group?.setRadioSelected(this);
-      } else {
+      } else if (oldIsCheckedVal) {
         GlnRadioButtonCheckedUtil.remove(this);
         this.group?.setRadioSelected(null);
       }
       this.changeDetectorRef.markForCheck();
     }
+  }
+
+  public getIsChecked(): boolean {
+    return !!this.isCheckedVal;
   }
 
   public setProperties(properties: Record<string, unknown>): void {
@@ -355,10 +406,10 @@ export class GlnRadioButtonComponent
     // We stop propagation so that the change event does not pop up and pass its input object.
     event.stopPropagation();
     if (!this.isDisabledVal /*&& !this.innReadOnly*/) {
-      if (!this.checkedVal) {
+      if (!this.isCheckedVal) {
         // const isChangeForGroup: boolean = !!this.radioGroup ? this.value !== this.radioGroup.value : false;
         console.log(`doClickInput (id=${this.id}; name=${this.name}; setChecked(true);`); // #
-        this.setChecked(true);
+        this.setIsChecked(true);
         this.onChange(this.value);
         this.change.emit({ value: this.value, source: this });
 
@@ -383,6 +434,15 @@ export class GlnRadioButtonComponent
 
   // ** Private methods **
 
+  private prepareFormGroup(isRequired: boolean | null): void {
+    this.formControl.clearValidators();
+    const newValidator: ValidatorFn[] = [];
+    if (isRequired) {
+      newValidator.push(Validators.required);
+    }
+    this.formControl.setValidators(newValidator);
+  }
+
   private converSize(sizeStr: string): number {
     return NumberUtil.converInt(sizeStr, SIZE[sizeStr] || SIZE['small']);
   }
@@ -391,7 +451,7 @@ export class GlnRadioButtonComponent
   }
   private setCssSize(size: number, elem: ElementRef<HTMLElement>): void {
     const fontSize: number | null = size > 0 ? Math.round((size / 3) * 1000) / 1000 : null;
-    HtmlElemUtil.setProperty(elem, '--glnrb--icon-fn-sz', fontSize?.toString().concat('px'));
+    HtmlElemUtil.setProperty(elem, '--glnrd--icon-fn-sz', fontSize?.toString().concat('px'));
   }
   private settingByPosition(isAdd: boolean, positionStr: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     if (positionStr) {
@@ -423,5 +483,9 @@ export class GlnRadioButtonComponent
   private settingReadOnly(isReadOnlyVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!isReadOnlyVal);
     HtmlElemUtil.setAttr(renderer, elem, 'rea', isReadOnlyVal ? '' : null);
+  }
+  private settingRequired(isRequiredVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-required', !!isRequiredVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'req', isRequiredVal ? '' : null);
   }
 }

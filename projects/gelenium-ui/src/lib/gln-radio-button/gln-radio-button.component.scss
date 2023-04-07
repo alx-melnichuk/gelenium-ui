@@ -1,13 +1,13 @@
 /*# sourceURL=gln-radio-button.component.scss */
 
 gln-radio-button {
-  --glnrb--default-h: var(--glncl-default-h, var(--gln-default-h));
-  --glnrb--default-s: var(--glncl-default-s, var(--gln-default-s));
-  --glnrb--default-l: var(--glncl-default-l, var(--gln-default-l));
+  --glnrd--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnrd--default-s: var(--glncl-default-s, var(--gln-default-s));
+  --glnrd--default-l: var(--glncl-default-l, var(--gln-default-l));
 
-  --glnrb--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
-  --glnrb--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
-  --glnrb--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
+  --glnrd--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
+  --glnrd--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
+  --glnrd--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
 
   align-items: center;
   display: inline-flex;
@@ -15,43 +15,35 @@ gln-radio-button {
   outline: 0;
   user-select: none;
 
-  --glnrb---def-che-cl: hsl(var(--glnrb--primary-h), var(--glnrb--primary-s), var(--glnrb--primary-l));
-  --glnrb---def-che-hov: hsla(var(--glnrb--primary-h), var(--glnrb--primary-s), 75%, 20%);
-  --glnrb---def-che-rip: hsla(var(--glnrb--primary-h), var(--glnrb--primary-s), 75%, 30%);
-  --glnrb---def-lbl: hsl(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l));
+  --glnrd---def-chk-cl: hsl(var(--glnrd--primary-h), var(--glnrd--primary-s), var(--glnrd--primary-l));
+  --glnrd---def-chk-hov: hsla(var(--glnrd--primary-h), var(--glnrd--primary-s), 75%, 20%);
+  --glnrd---def-chk-rip: hsla(var(--glnrd--primary-h), var(--glnrd--primary-s), 75%, 30%);
+  --glnrd---def-lbl: hsl(var(--glnrd--default-h), var(--glnrd--default-s), var(--glnrd--default-l));
   
-  --glnrb---dis-cl: hsla(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l), 0.3);
-  --glnrb---dis-lbl: hsla(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l), 0.5);
+  --glnrd---dis-cl: hsla(var(--glnrd--default-h), var(--glnrd--default-s), var(--glnrd--default-l), 0.3);
+  --glnrd---dis-lbl: hsla(var(--glnrd--default-h), var(--glnrd--default-s), var(--glnrd--default-l), 0.5);
 
   &:not([dis]) {
-    &:not([che]):not([ind]) {
-      --glnrb--cl-svg   : var(--glnrb-def-cl-svg, hsla(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l), 0.6));
-      --glnrb--bg-hov   : var(--glnrb-def-bg-hov, hsla(var(--glnrb--default-h), var(--glnrb--default-s), 70%, 20%));
-      --glntr-ripple-cl : var(--glnrb-def-rip, hsla(var(--glnrb--default-h), var(--glnrb--default-s), 70%, 30%));
+    &:not([che]) {
+      --glnrd--cl-svg   : var(--glnrd-def-cl-svg, hsla(var(--glnrd--default-h), var(--glnrd--default-s), var(--glnrd--default-l), 0.6));
+      --glnrd--bg-hov   : var(--glnrd-def-bg-hov, hsla(var(--glnrd--default-h), var(--glnrd--default-s), 70%, 20%));
+      --glntr-ripple-cl : var(--glnrd-def-rip, hsla(var(--glnrd--default-h), var(--glnrd--default-s), 70%, 30%));
     }
     &[che] {
-      --glnrb--cl-svg   : var(--glnrb-def-che-cl-svg, var(--glnrb---def-che-cl));
-      --glnrb--bg-hov   : var(--glnrb-def-che-bg-hov, var(--glnrb---def-che-hov));
-      --glntr-ripple-cl : var(--glnrb-def-che-rip, var(--glnrb---def-che-rip));
+      --glnrd--cl-svg   : var(--glnrd-def-chk-cl-svg, var(--glnrd---def-chk-cl));
+      --glnrd--bg-hov   : var(--glnrd-def-chk-bg-hov, var(--glnrd---def-chk-hov));
+      --glntr-ripple-cl : var(--glnrd-def-chk-rip, var(--glnrd---def-chk-rip));
     }
-    &[ind] {
-      --glnrb--cl-svg   : var(--glnrb-def-ind-cl-svg, var(--glnrb-def-che-cl-svg, var(--glnrb---def-che-cl)));
-      --glnrb--bg-hov   : var(--glnrb-def-ind-bg-hov, var(--glnrb-def-che-bg-hov, var(--glnrb---def-che-hov)));
-      --glntr-ripple-cl : var(--glnrb-def-ind-rip, var(--glnrb-def-che-rip, var(--glnrb---def-che-rip)));
-    }
-    --glnrb--lbl   : var(--glnrb-def-lbl, var(--glnrb---def-lbl));
+    --glnrd--lbl   : var(--glnrd-def-lbl, var(--glnrd---def-lbl));
   }
   &[dis] {
     &:not([che]) {
-      --glnrb--cl-svg   : var(--glnrb-dis-cl-svg, var(--glnrb---dis-cl));
+      --glnrd--cl-svg   : var(--glnrd-dis-cl-svg, var(--glnrd---dis-cl));
     }
     &[che] {
-      --glnrb--cl-svg   : var(--glnrb-dis-che-cl-svg, var(--glnrb---dis-cl));
+      --glnrd--cl-svg   : var(--glnrd-dis-chk-cl-svg, var(--glnrd---dis-cl));
     }
-    &[ind] {
-      --glnrb--cl-svg   : var(--glnrb-dis-ind-cl-svg, var(--glnrb-dis-che-cl-svg, var(--glnrb---dis-cl)));
-    }
-    --glnrb--lbl   : var(--glnrb-dis-lbl, var(--glnrb---dis-lbl));
+    --glnrd--lbl   : var(--glnrd-dis-lbl, var(--glnrd---dis-lbl));
   }
 
   &:not([dis]):not([rea]) label {
@@ -63,8 +55,8 @@ gln-radio-button {
   }
 
   &:not([hdAnmInit]):not([noAni]) {
-    --glnrb--trn-dur-200: 200ms; // transition-duration
-    --glnrb--trn-dur-150: 150ms; // transition-duration
+    --glnrd--trn-dur-200: 200ms; // transition-duration
+    --glnrd--trn-dur-150: 150ms; // transition-duration
   }
 
   [glnrb-container] {
@@ -95,14 +87,14 @@ gln-radio-button {
     border: 0;
     border-radius: 50%;
     box-sizing: border-box;
-    color: var(--glnrb--cl-svg); // rgba(0, 0, 0, 0.6);
+    color: var(--glnrd--cl-svg); // rgba(0, 0, 0, 0.6);
     display: inline-flex;
-    font-size: var(--glnrb-icon-fn-sz, var(--glnrb--icon-fn-sz, 14px));
+    font-size: var(--glnrd-icon-fn-sz, var(--glnrd--icon-fn-sz, 14px));
     justify-content: center;
     margin: 0;
     outline: 0;
     // outline: 1px dashed orange;
-    // padding: var(--glnrb-icon-pd, var(--glnrb--icon-pd, 0.56em));
+    // padding: var(--glnrd-icon-pd, var(--glnrd--icon-pd, 0.56em));
     padding: 0.625em;
     position: relative;
     text-decoration: none;
@@ -111,7 +103,7 @@ gln-radio-button {
    -webkit-tap-highlight-color: transparent;
   }
   &:not([dis]):not([noHov]) [glnrb-icon-block]:hover {
-    background-color: var(--glnrb--bg-hov);
+    background-color: var(--glnrd--bg-hov);
   }
 
   [glnrb-input] {
@@ -143,25 +135,25 @@ gln-radio-button {
     width: 1em;
     &[envelope] {
       // outline: 1px dashed orange;
-      transition: fill var(--glnrb--trn-dur-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      transition: fill var(--glnrd--trn-dur-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     }
-    &[checked] {
+    &[circle] {
       left: 0px;
       position: absolute;
     }
   }
   
-  &:not([che]) [glnrb-icon][checked] {
+  &:not([che]) [glnrb-icon][circle] {
     transform: scale(0);
-    transition: transform var(--glnrb--trn-dur-150, 0ms) cubic-bezier(0.4, 0, 1, 1) 0ms;
+    transition: transform var(--glnrd--trn-dur-150, 0ms) cubic-bezier(0.4, 0, 1, 1) 0ms;
   }
-  &[che] [glnrb-icon][checked] {
+  &[che] [glnrb-icon][circle] {
     transform: scale(1);
-    transition: transform var(--glnrb--trn-dur-150, 0ms) cubic-bezier(0, 0, 0.2, 1) 0ms;
+    transition: transform var(--glnrd--trn-dur-150, 0ms) cubic-bezier(0, 0, 0.2, 1) 0ms;
   }
 
   [glnrb-content] {
-    font-size: var(--glnrb-label-fn-sz, var(--glnrb--label-fn-sz));
-    color: var(--glnrb--lbl);
+    font-size: var(--glnrd-label-fn-sz, var(--glnrd--label-fn-sz));
+    color: var(--glnrd--lbl);
   }
 }
