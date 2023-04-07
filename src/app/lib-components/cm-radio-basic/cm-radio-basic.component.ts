@@ -23,7 +23,7 @@ export class CmRadioBasicComponent {
 
   public urlCmRadio = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_RADIOBUTTON');
 
-  isShowBasic01 = false; // true;
+  isShowBasic01 = false; // true; // 01
   public fruits01a: string[] = ['apple', 'apricot', 'banana'];
   public formGroup01a: FormGroup = new FormGroup({
     model01a: new FormControl(this.fruits01a[0], []),
@@ -38,39 +38,44 @@ export class CmRadioBasicComponent {
   });
 
   // Page: Attributes02a
-  isShowAttributes02a = false; // true; // 02abcd efghik,
+  isShowAttributes02a = false; // true; // 02abc
   public fruits02a: string[] = ['apple', 'apricot', 'banana'];
   public formGroup02a: FormGroup = new FormGroup({
     model02a: new FormControl(this.fruits02a[0], []),
     model02b: new FormControl(this.fruits02a[0], []),
-    model02c: new FormControl(this.fruits02a[0], []),
-    model02d: new FormControl(this.fruits02a[0], []),
   });
 
-  isShowAttributes02g = false; // true; // 02ghik,
-  public formGroup02g: FormGroup = new FormGroup({
-    model02g: new FormControl('top', []),
+  // Page: Attributes02e
+  isShowAttributes02e = true; // 02efg
+  public fruits02e: string[] = ['apple', 'apricot', 'banana'];
+  public control02e = {
+    model02e: new FormControl(this.fruits02e[0], []),
+    model02f: new FormControl(this.fruits02e[0], []),
+    model02g: new FormControl(null, []),
+  };
+  public formGroup02e: FormGroup = new FormGroup(this.control02e);
+
+  // Page: Attributes02m  position
+  isShowAttributes02m = false; // true; // 02mhik Position
+  public formGroup02m: FormGroup = new FormGroup({
+    model02m: new FormControl('top', []),
   });
 
-  // Page: Attributes02l
-  isShowAttributes02l = true; // 02lmnopq
-  public fruits02l: string[] = ['kiwi', 'orange', 'lemon'];
-  public formGroup02l: FormGroup = new FormGroup({
-    model02l: new FormControl(this.fruits02l[0], []),
-    model02m: new FormControl(this.fruits02l[0], []),
-    model02n: new FormControl(this.fruits02l[0], []),
-    // model02o: new FormControl(this.fruits02l[0], []),
-    // model02p: new FormControl(this.fruits02l[0], []),
-    // model02q: new FormControl(this.fruits02l[0], []),
+  // Page: Attributes02p GlnRadioGroup
+  isShowAttributes02p = false; // true; // 02pmnopq GlnRadioGroup
+  public isDisabled02p = false;
+  public isNoAnimation02p = false;
+  public isNoHover02p = false;
+  public isNoRipple02p = false;
+  public isReadOnly02p = false;
+  public isSizeMiddle02p = false;
+  public isPositionStart02p = false;
+  public isDirCol02p = false;
+
+  public fruits02p: string[] = ['kiwi', 'orange', 'lemon'];
+  public formGroup02p: FormGroup = new FormGroup({
+    model02p: new FormControl(this.fruits02p[0], []),
   });
-  public isDisabled02l = false;
-  public isNoAnimation02l = false;
-  public isNoHover02l = false;
-  public isNoRipple02l = false;
-  public isReadOnly02l = false;
-  public isSizeMiddle02l = false;
-  public isPositionStart02l = false;
-  public isDirCol02l = false;
 
   // Page: Size03
   isShowSize03 = false; // true; // 03
@@ -86,7 +91,41 @@ export class CmRadioBasicComponent {
     model03h: new FormControl(this.fruits03a[0], []),
   });
 
-  // model02f= {{ formGroup02f.controls['model02f'].value }}
+  // Page: Palette07
+  public urlPlRadio = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_RADIOBUTTON');
+  isShowPalette07a = false; // true; // 07a
+  public isDisabled07a = false;
+  public formGroup07a: FormGroup = new FormGroup({
+    model07a: new FormControl('primary1', []),
+    model07b: new FormControl('danger1', []),
+    model07c: new FormControl('success1', []),
+    model07d: new FormControl('info1', []),
+    model07e: new FormControl('warning1', []),
+    model07f: new FormControl('customer1', []),
+  });
+
+  isShowPalette07i = false; // true; // 07i
+  public isDisabled07i = false;
+  public formGroup07i: FormGroup = new FormGroup({
+    model07i: new FormControl('primary1', []),
+    model07j: new FormControl('secondary1', []),
+    model07k: new FormControl('success1', []),
+    model07l: new FormControl('danger1', []),
+    model07m: new FormControl('warning1', []),
+    model07n: new FormControl('info1', []),
+    model07o: new FormControl('dark1', []),
+  });
+
+  isShowPalette07q = false; // true; // 07q
+  public isDisabled07q = false;
+  public formGroup07q: FormGroup = new FormGroup({
+    model07q: new FormControl('primary1', []),
+    model07r: new FormControl('secondary1', []),
+    model07s: new FormControl('success1', []),
+    model07t: new FormControl('default1', []),
+    model07u: new FormControl('pink1', []),
+  });
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {
     // setTimeout(() => {

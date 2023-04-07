@@ -11,10 +11,11 @@
 import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui';</pre>
   </code>
   <p>
-    The GlnRadioButton component displays the behavior of a radio button in a group
-    of related options (&lt;input type="radio"&gt;).
-    The component allows you to select only one element from several related components.
-    The GlnRadioButton component is used inside the GlnRadioGroup component.
+    GlnRadioButton components are typically used in groups that represent possible
+    values for a single parameter.
+    Components are grouped by a unique "name" attribute value that is the same for
+    all components in this group.
+    In this case, only one value can be selected.
   </p>
   <p>The GlnRadioButton component can be used in reactive forms.</p>
   <span> For example:</span>
@@ -57,6 +58,59 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 
 
 <!-- source -->
+<section *ngIf="isShowBasic01"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04p"
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-radio-button',
+  templateUrl: './radio-button.component.html',
+  styleUrls: ['./radio-button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RadioButtonComponent &#123;
+  public fruits01a: string[] = ['apple', 'apricot', 'banana'];
+  public formGroup01a: FormGroup = new FormGroup(&#123;
+    model01a: new FormControl(this.fruits01a[0], []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
 
 
 
@@ -93,6 +147,57 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 
 
 <!-- source -->
+<section *ngIf="isShowBasic01"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04p"
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-radio-button',
+  templateUrl: './radio-button.component.html',
+  styleUrls: ['./radio-button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RadioButtonComponent &#123;
+  public fruits01b: string[] = ['kiwi', 'orange', 'lemon'];
+  public data01b: string = this.fruits01b[0];
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
 
 
 
@@ -106,10 +211,9 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
   <span> For example:</span>
   <code><pre source="html">
 &lt;form [formGroup]="formGroup01c" novalidate autocomplete="off"&gt;
-  &lt;<strong>gln-radio-group</strong>&gt;
+  &lt;<strong>gln-radio-group</strong> <i>name="model01c"</i>&gt;
     &lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits01c"
       formControlName="model01c"
-      <i>name="model01c"</i>
       <i>[value]="item"</i>&gt; <b>&#123;</b>&#123; item &#125;&#125;
     &lt;/<strong>gln-radio-button</strong>&gt;
   &lt;/<strong>gln-radio-group</strong>&gt;
@@ -132,10 +236,9 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
           </em>
         </small>
       </div>
-      <gln-radio-group>
+      <gln-radio-group name="model01c">
         <gln-radio-button *ngFor="let item of fruits01c"
           formControlName="model01c"
-          name="model01c"
           [value]="item">
           {{ item }}
         </gln-radio-button>
@@ -147,6 +250,60 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 
 
 <!-- source -->
+<section *ngIf="isShowBasic01"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04p"
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-radio-button',
+  templateUrl: './radio-button.component.html',
+  styleUrls: ['./radio-button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RadioButtonComponent &#123;
+  public fruits01c: string[] = ['mango', 'mandarin', 'peach'];
+  public formGroup01c: FormGroup = new FormGroup(&#123;
+    model01c: new FormControl(this.fruits01c[0], []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
 <hr br-nn />
 
 
@@ -170,8 +327,12 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
     </li>
     <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
     <li>"isReadOnly" - Specifies the status of an element as read-only (isReadOnly);</li>
-    <li>"isNoRipple" - disables the execution of the ripple effect (isNoRipple);</li>
-    <li>"isNoHover" - disables the display of additional background on hover (isNoHover);</li>
+    <!-- <li>"isNoRipple" - disables the execution of the ripple effect (isNoRipple);</li>
+    <li>"isNoHover" - disables the display of additional background on hover (isNoHover);</li> -->
+    <li>
+      "checked" - indicates that the current element is selected by default
+      (used if ngModel and Reactive Forms are not used) (isNoHover);
+    </li>
   </ul>
 </section>
 
@@ -215,15 +376,119 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
     </div>
   </div>
 
-  <div class="app-group">
+</form>
+
+<div *ngIf="isShowAttributes02a"
+  class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>Attributes: checked.</em></small>
+    </div>
+    <div>
+      <gln-radio-button name="model02e"
+        [value]="fruits02a[0]"
+        checked>
+        {{ fruits02a[0] }}
+      </gln-radio-button>
+      <gln-radio-button name="model02e"
+        [value]="fruits02a[1]">
+        {{ fruits02a[1] }}
+      </gln-radio-button>
+      <gln-radio-button name="model02e"
+        [value]="fruits02a[2]">
+        {{ fruits02a[2] }}
+      </gln-radio-button>
+    </div>
+  </div>
+</div>
+
+<!-- source -->
+<section *ngIf="isShowAttributes02a"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04p"
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-radio-button',
+  templateUrl: './radio-button.component.html',
+  styleUrls: ['./radio-button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RadioButtonComponent &#123;
+  public fruits02a: string[] = ['apple', 'apricot', 'banana'];
+  public formGroup02a: FormGroup = new FormGroup(&#123;
+    model02a: new FormControl(this.fruits02a[0], []),
+    model02b: new FormControl(this.fruits02a[0], []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<section *ngIf="isShowAttributes02e"
+  mr-vr
+  id="attributes-supported02">
+  <h4 class="app-hover-link">
+    Attributes are also supported 2:
+    <a [href]="urlCmRadio + '#attributes-supported02'">#</a>
+  </h4>
+  <ul>
+    <li>"isNoAnimation" (isNoAnimation);</li>
+    <li>"isNoHover" - disables the display of additional background on hover (isNoHover);</li>
+    <li>"isNoRipple" - disables the execution of the ripple effect (isNoRipple);</li>
+    <!-- <li>"isRequired" - a sign that the field is required (isRequired);</li> -->
+  </ul>
+</section>
+
+
+<form *ngIf="isShowAttributes02e"
+  [formGroup]="formGroup02e"
+  novalidate
+  autocomplete="off">
+
+  <!-- <div class="app-group">
     <div class="app-elem">
       <div>
         <small><em>Attributes: isNoHover, isNoRipple.</em></small>
       </div>
       <div>
-        <gln-radio-button *ngFor="let item of fruits02a"
-          formControlName="model02c"
-          name="model02c"
+        <gln-radio-button *ngFor="let item of fruits02e"
+          formControlName="model02e"
+          name="model02e"
           [value]="item"
           isNoHover
           isNoRipple>
@@ -231,17 +496,17 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
         </gln-radio-button>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="app-group">
+  <!-- <div class="app-group">
     <div class="app-elem">
       <div>
         <small><em>Attributes: isNoAnimation, isNoRipple.</em></small>
       </div>
       <div>
-        <gln-radio-button *ngFor="let item of fruits02a"
-          formControlName="model02d"
-          name="model02d"
+        <gln-radio-button *ngFor="let item of fruits02e"
+          formControlName="model02f"
+          name="model02f"
           [value]="item"
           isNoAnimation
           isNoRipple>
@@ -249,16 +514,47 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
         </gln-radio-button>
       </div>
     </div>
+  </div> -->
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>Attributes: isRequired. </em></small>
+      </div>
+      <div>
+        <gln-radio-button formControlName="model02g"
+          name="model02g"
+          [value]="fruits02e[0]"
+          isRequired>
+          {{ fruits02e[0] }}
+        </gln-radio-button>
+        <gln-radio-button formControlName="model02g"
+          name="model02g"
+          [value]="fruits02e[1]">
+          {{ fruits02e[1] }}
+        </gln-radio-button>
+        <gln-radio-button formControlName="model02g"
+          name="model02g"
+          [value]="fruits02e[2]">
+          {{ fruits02e[2] }}
+        </gln-radio-button>
+      </div>
+      <div>
+        <span [ngClass]="{ 'rdat2-err': control02e.model02g.errors }">
+          isRequired value={{ control02e.model02g.value }} errors={{ control02e.model02g.errors |
+          json }}
+        </span>
+      </div>
+    </div>
   </div>
 
 </form>
 
-
 <!-- source -->
+<!-- DEMO -->
 
-
-
-<section *ngIf="isShowAttributes02g"
+<!-- Attributes: position -->
+<section *ngIf="isShowAttributes02m"
   mr-vr
   id="attributes-position">
   <h4 class="app-hover-link">
@@ -271,12 +567,13 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 </section>
 
 
-<form *ngIf="isShowAttributes02g"
-  [formGroup]="formGroup02g"
+<form *ngIf="isShowAttributes02m"
+  [formGroup]="formGroup02m"
   novalidate
   autocomplete="off">
 
-  <gln-radio-group class="app-group">
+  <gln-radio-group class="app-group"
+    name="model02m">
 
     <div class="app-elem rbar2-elem">
       <div>
@@ -284,8 +581,7 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
           <em>Attributes: position - top.</em>
         </small>
       </div>
-      <gln-radio-button formControlName="model02g"
-        name="model02g"
+      <gln-radio-button formControlName="model02m"
         value="top"
         position="top">Position - top
       </gln-radio-button>
@@ -297,8 +593,7 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
           <em>Attributes: position - bottom.</em>
         </small>
       </div>
-      <gln-radio-button formControlName="model02g"
-        name="model02g"
+      <gln-radio-button formControlName="model02m"
         value="bottom"
         position="bottom">Position - bottom
       </gln-radio-button>
@@ -310,8 +605,7 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
           <em>Attributes: position - start.</em>
         </small>
       </div>
-      <gln-radio-button formControlName="model02g"
-        name="model02g"
+      <gln-radio-button formControlName="model02m"
         value="start"
         position="start">Position - start
       </gln-radio-button>
@@ -323,35 +617,76 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
           <em>Attributes: position - end.</em>
         </small>
       </div>
-      <gln-radio-button formControlName="model02g"
-        name="model02g"
+      <gln-radio-button formControlName="model02m"
         value="end"
         position="end">Position - end
       </gln-radio-button>
     </div>
 
   </gln-radio-group>
-
 </form>
 
 
+<!-- source -->
+<section *ngIf="isShowAttributes02m"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04p"
 
-<!-- <section  mr-vr
-  id="attributes-supported02">
-  <h4 class="app-hover-link">
-    Attributes are also supported 2:
-    <a [href]="urlCmRadio + '#attributes-supported02'">#</a>
-  </h4>
-  <ul>
-    <li>"isNoRipple" - disables the execution of the ripple effect (isNoRipple);</li>
-    <li>"isNoHover" - disables the display of additional background on hover (isNoHover);</li>
-    <li>"dirCol" - arranges GlnRadioButton components in a column (dirCol);</li>
-    <li>"isRequired??" - a sign that the field is required (isRequired);</li>
-  </ul>
-</section> -->
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-radio-button',
+  templateUrl: './radio-button.component.html',
+  styleUrls: ['./radio-button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RadioButtonComponent &#123;
+  public formGroup02m: FormGroup = new FormGroup(&#123;
+    model02m: new FormControl('top', []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .rbar2-elem &#123;
+    min-width: 17ch;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
 
 
-<section *ngIf="isShowAttributes02l"
+<!-- Attributes: GlnRadioGroup -->
+<section *ngIf="isShowAttributes02p"
   mr-vr
   id="attributes-gln-radio-group">
   <h4 class="app-hover-link">
@@ -367,53 +702,54 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 </section>
 
 
-<section mr-vr
+<section *ngIf="isShowAttributes02p"
+  mr-vr
   class="rbat2-props">
   <label>
     <input type="checkbox"
-      (change)="isDisabled02l=!isDisabled02l"
-      [checked]="isDisabled02l" /> is disabled
+      (change)="isDisabled02p=!isDisabled02p"
+      [checked]="isDisabled02p" /> is disabled
   </label>
   <label>
     <input type="checkbox"
-      (change)="isNoAnimation02l=!isNoAnimation02l"
-      [checked]="isNoAnimation02l" /> is no animation
+      (change)="isNoAnimation02p=!isNoAnimation02p"
+      [checked]="isNoAnimation02p" /> is no animation
   </label>
   <label>
     <input type="checkbox"
-      (change)="isNoHover02l=!isNoHover02l"
-      [checked]="isNoHover02l" /> is no hover
+      (change)="isNoHover02p=!isNoHover02p"
+      [checked]="isNoHover02p" /> is no hover
   </label>
   <label>
     <input type="checkbox"
-      (change)="isNoRipple02l=!isNoRipple02l"
-      [checked]="isNoRipple02l" /> is no ripple
+      (change)="isNoRipple02p=!isNoRipple02p"
+      [checked]="isNoRipple02p" /> is no ripple
   </label>
   <label>
     <input type="checkbox"
-      (change)="isReadOnly02l=!isReadOnly02l"
-      [checked]="isReadOnly02l" /> is readonly
+      (change)="isReadOnly02p=!isReadOnly02p"
+      [checked]="isReadOnly02p" /> is readonly
   </label>
   <label>
     <input type="checkbox"
-      (change)="isSizeMiddle02l=!isSizeMiddle02l"
-      [checked]="isSizeMiddle02l" /> is size='middle'
+      (change)="isSizeMiddle02p=!isSizeMiddle02p"
+      [checked]="isSizeMiddle02p" /> is size='middle'
   </label>
   <label>
     <input type="checkbox"
-      (change)="isPositionStart02l=!isPositionStart02l"
-      [checked]="isPositionStart02l" /> is position='start'
+      (change)="isPositionStart02p=!isPositionStart02p"
+      [checked]="isPositionStart02p" /> is position='start'
   </label>
   <label>
     <input type="checkbox"
-      (change)="isDirCol02l=!isDirCol02l"
-      [checked]="isDirCol02l" /> add attr. 'dirCol'
+      (change)="isDirCol02p=!isDirCol02p"
+      [checked]="isDirCol02p" /> add attr. 'dirCol'
   </label>
 </section>
 
 
-<form *ngIf="isShowAttributes02l"
-  [formGroup]="formGroup02l"
+<form *ngIf="isShowAttributes02p"
+  [formGroup]="formGroup02p"
   novalidate
   autocomplete="off">
 
@@ -423,17 +759,17 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
       <div>
         <small><em>GlnRadioGroup</em></small>
       </div>
-      <gln-radio-group name="model02l"
-        [isDisabled]="isDisabled02l"
-        [isNoAnimation]="isNoAnimation02l"
-        [isNoHover]="isNoHover02l"
-        [isNoRipple]="isNoRipple02l"
-        [isReadOnly]="isReadOnly02l"
-        [size]="isSizeMiddle02l ? 'middle' : undefined"
-        [attr.dirCol]="isDirCol02l ? '' : undefined"
-        [position]="isPositionStart02l ? 'start' : undefined">
-        <gln-radio-button *ngFor="let item of fruits02l"
-          formControlName="model02l"
+      <gln-radio-group name="model02p"
+        [isDisabled]="isDisabled02p"
+        [isNoAnimation]="isNoAnimation02p"
+        [isNoHover]="isNoHover02p"
+        [isNoRipple]="isNoRipple02p"
+        [isReadOnly]="isReadOnly02p"
+        [position]="isPositionStart02p ? 'start' : undefined"
+        [size]="isSizeMiddle02p ? 'middle' : undefined"
+        [attr.dirCol]="isDirCol02p ? '' : undefined">
+        <gln-radio-button *ngFor="let item of fruits02p"
+          formControlName="model02p"
           [value]="item">
           {{ item }}
         </gln-radio-button>
@@ -445,6 +781,69 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 
 
 <!-- source -->
+<section *ngIf="isShowAttributes02p"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04p"
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-radio-button',
+  templateUrl: './radio-button.component.html',
+  styleUrls: ['./radio-button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RadioButtonComponent &#123;
+  public isDisabled02p = false;
+  public isNoAnimation02p = false;
+  public isNoHover02p = false;
+  public isNoRipple02p = false;
+  public isReadOnly02p = false;
+  public isSizeMiddle02p = false;
+  public isPositionStart02p = false;
+  public isDirCol02p = false;
+
+  public fruits02p: string[] = ['kiwi', 'orange', 'lemon'];
+  public formGroup02p: FormGroup = new FormGroup(&#123;
+    model02p: new FormControl(this.fruits02p[0], []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
 <hr br-nn />
 
 
@@ -481,11 +880,10 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
           <em>"Little" height: 30px; (font-size: 10px;)</em>
         </small>
       </div>
-      <gln-radio-group>
+      <gln-radio-group name="model03a">
         <gln-radio-button *ngFor="let item of fruits03a"
           formControlName="model03a"
           size="little"
-          name="model03a"
           [value]="item">
           {{ item }}
         </gln-radio-button>
@@ -500,11 +898,10 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
           <em>"Short" height: 36px; (font-size: 12px;)</em>
         </small>
       </div>
-      <gln-radio-group>
+      <gln-radio-group name="model03b">
         <gln-radio-button *ngFor="let item of fruits03a"
           formControlName="model03b"
           size="short"
-          name="model03b"
           [value]="item">
           {{ item }}
         </gln-radio-button>
@@ -519,11 +916,10 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
           <em>"Small" height: 42px; (font-size: 14px;)</em>
         </small>
       </div>
-      <gln-radio-group>
+      <gln-radio-group name="model03c">
         <gln-radio-button *ngFor="let item of fruits03a"
           formControlName="model03c"
           size="small"
-          name="model03c"
           [value]="item">
           {{ item }}
         </gln-radio-button>
@@ -538,11 +934,10 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
           <em>"Middle" height: 48px; (font-size: 16px;)</em>
         </small>
       </div>
-      <gln-radio-group>
+      <gln-radio-group name="model03d">
         <gln-radio-button *ngFor="let item of fruits03a"
           formControlName="model03d"
           size="middle"
-          name="model03d"
           [value]="item">
           {{ item }}
         </gln-radio-button>
@@ -557,11 +952,10 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
           <em>"Wide" height: 54px; (font-size: 18px;)</em>
         </small>
       </div>
-      <gln-radio-group>
+      <gln-radio-group name="model03e">
         <gln-radio-button *ngFor="let item of fruits03a"
           formControlName="model03e"
           size="wide"
-          name="model03e"
           [value]="item">
           {{ item }}
         </gln-radio-button>
@@ -576,11 +970,10 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
           <em>"Large" height: 60px; (font-size: 20px;)</em>
         </small>
       </div>
-      <gln-radio-group>
+      <gln-radio-group name="model03f">
         <gln-radio-button *ngFor="let item of fruits03a"
           formControlName="model03f"
           size="large"
-          name="model03f"
           [value]="item">
           {{ item }}
         </gln-radio-button>
@@ -595,11 +988,10 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
           <em>"Huge" height: 66px; (font-size: 22px;)</em>
         </small>
       </div>
-      <gln-radio-group>
+      <gln-radio-group name="model03g">
         <gln-radio-button *ngFor="let item of fruits03a"
           formControlName="model03g"
           size="huge"
-          name="model03g"
           [value]="item">
           {{ item }}
         </gln-radio-button>
@@ -614,11 +1006,10 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
           <em>"Custom" height: 53px (52.97px); (font-size: 17.667px;)</em>
         </small>
       </div>
-      <gln-radio-group>
+      <gln-radio-group name="model03h">
         <gln-radio-button *ngFor="let item of fruits03a"
           formControlName="model03h"
           size="53"
-          name="model03h"
           [value]="item">
           {{ item }}
         </gln-radio-button>
@@ -629,4 +1020,960 @@ import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui
 </form>
 
 <!-- source -->
+<section *ngIf="isShowSize03"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04p"
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-radio-button',
+  templateUrl: './radio-button.component.html',
+  styleUrls: ['./radio-button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RadioButtonComponent &#123;
+  public fruits03a: string[] = ['apple', 'apricot', 'banana'];
+  public formGroup03a: FormGroup = new FormGroup(&#123;
+    model03a: new FormControl(this.fruits03a[0], []),
+    model03b: new FormControl(this.fruits03a[0], []),
+    model03c: new FormControl(this.fruits03a[0], []),
+    model03d: new FormControl(this.fruits03a[0], []),
+    model03e: new FormControl(this.fruits03a[0], []),
+    model03f: new FormControl(this.fruits03a[0], []),
+    model03g: new FormControl(this.fruits03a[0], []),
+    model03h: new FormControl(this.fruits03a[0], []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+
+<section *ngIf="isShowPalette07a"
+  mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlPlRadio + '#Basic'">#</a>
+  </h3>
+  <p>
+    The GlnRadioButton component has the ability to change its color.
+  </p>
+  <span>For example:</span>
+  <code><pre source="html">
+&lt;gln-radio-button formControlName="model07" name="model07"
+  <i><strong>[glnColor]="&#123; primary: 'danger' &#125;"</strong></i>
+  value="demo1"&gt;Demo 1
+&lt;/gln-radio-button&gt;</pre></code>
+  <p>
+    This means that you want to use the system color "danger"
+    as the "primary" color.
+  </p>
+  <span>
+    To use the glnColor directive, you need to add in your module:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
+  </code>
+</section>
+
+
+<section *ngIf="isShowPalette07a"
+  mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabled07a=!isDisabled07a"
+      [checked]="isDisabled07a" /> Is disabled
+  </label>&nbsp;
+</section>
+
+
+<form *ngIf="isShowPalette07a"
+  [formGroup]="formGroup07a"
+  novalidate
+  autocomplete="off">
+
+  <gln-radio-group class="app-group"
+    name="model07a">
+
+    <div class="app-elem rbpl1-elem">
+      <div>
+        <small><em>color: primary</em></small>
+      </div>
+      <gln-radio-button formControlName="model07a"
+        [glnColor]="{ primary: 'primary' }"
+        value="primary1"
+        [isDisabled]="isDisabled07a">primary 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl1-elem">
+      <div>
+        <small><em>color: primary</em></small>
+      </div>
+      <gln-radio-button formControlName="model07a"
+        [glnColor]="{ primary: 'primary' }"
+        value="primary2"
+        [isDisabled]="isDisabled07a">primary 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group"
+    name="model07b">
+
+    <div class="app-elem rbpl1-elem">
+      <div>
+        <small><em>color: danger</em></small>
+      </div>
+      <gln-radio-button formControlName="model07b"
+        [glnColor]="{ primary: 'danger' }"
+        value="danger1"
+        [isDisabled]="isDisabled07a">danger 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl1-elem">
+      <div>
+        <small><em>color: danger</em></small>
+      </div>
+      <gln-radio-button formControlName="model07b"
+        [glnColor]="{ primary: 'danger' }"
+        value="danger2"
+        [isDisabled]="isDisabled07a">danger 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group"
+    name="model07c">
+
+    <div class="app-elem rbpl1-elem">
+      <div>
+        <small><em>color: success</em></small>
+      </div>
+      <gln-radio-button formControlName="model07c"
+        [glnColor]="{ primary: 'success' }"
+        value="success1"
+        [isDisabled]="isDisabled07a">success 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl1-elem">
+      <div>
+        <small><em>color: success</em></small>
+      </div>
+      <gln-radio-button formControlName="model07c"
+        [glnColor]="{ primary: 'success' }"
+        value="success2"
+        [isDisabled]="isDisabled07a">success 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group"
+    name="model07d">
+
+    <div class="app-elem rbpl1-elem">
+      <div>
+        <small><em>color: info</em></small>
+      </div>
+      <gln-radio-button formControlName="model07d"
+        [glnColor]="{ primary: 'info' }"
+        value="info1"
+        [isDisabled]="isDisabled07a">info 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl1-elem">
+      <div>
+        <small><em>color: info</em></small>
+      </div>
+      <gln-radio-button formControlName="model07d"
+        [glnColor]="{ primary: 'info' }"
+        value="info2"
+        [isDisabled]="isDisabled07a">info 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group"
+    name="model07e">
+
+    <div class="app-elem rbpl1-elem">
+      <div>
+        <small><em>color: warning</em></small>
+      </div>
+      <gln-radio-button formControlName="model07e"
+        [glnColor]="{ primary: 'warning' }"
+        value="warning1"
+        [isDisabled]="isDisabled07a">warning 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl1-elem">
+      <div>
+        <small><em>color: warning</em></small>
+      </div>
+      <gln-radio-button formControlName="model07e"
+        [glnColor]="{ primary: 'warning' }"
+        value="warning2"
+        [isDisabled]="isDisabled07a">warning 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group"
+    name="model07f">
+
+    <div class="app-elem rbpl1-elem">
+      <div>
+        <small><em>color: customer</em></small>
+      </div>
+      <gln-radio-button formControlName="model07f"
+        class="rbpl1-customer"
+        [glnColor]="{ primary: 'customer' }"
+        value="customer1"
+        [isDisabled]="isDisabled07a">customer 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl1-elem">
+      <div>
+        <small><em>color: customer</em></small>
+      </div>
+      <gln-radio-button formControlName="model07f"
+        class="rbpl1-customer"
+        [glnColor]="{ primary: 'customer' }"
+        value="customer2"
+        [isDisabled]="isDisabled07a">customer 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+</form>
+
+<!-- source -->
+<section *ngIf="isShowPalette07a"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04p"
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-radio-button',
+  templateUrl: './radio-button.component.html',
+  styleUrls: ['./radio-button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RadioButtonComponent &#123;
+  public isDisabled07a = false;
+  public formGroup07a: FormGroup = new FormGroup(&#123;
+    model07a: new FormControl('primary1', []),
+    model07b: new FormControl('danger1', []),
+    model07c: new FormControl('success1', []),
+    model07d: new FormControl('info1', []),
+    model07e: new FormControl('warning1', []),
+    model07f: new FormControl('customer1', []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .rbpl1-elem &#123;
+    min-width: 17ch;
+  &#125;
+  .rbpl1-customer &#123;
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+
+<section *ngIf="isShowPalette07i"
+  mr-vr
+  id="palette-bootstrap">
+  <h4 class="app-hover-link">
+    Like a Bootstrap.
+    <a [href]="urlPlRadio + '#palette-bootstrap'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnRadioButton in style as "Bootstrap".
+  </p>
+</section>
+
+
+<section *ngIf="isShowPalette07i"
+  mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabled07a=!isDisabled07a"
+      [checked]="isDisabled07a" /> Is disabled
+  </label>
+</section>
+
+
+<form *ngIf="isShowPalette07i"
+  [formGroup]="formGroup07i"
+  novalidate
+  autocomplete="off">
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl2-elem">
+      <div>
+        <small><em>color: Bootstrap-primary</em></small>
+      </div>
+      <gln-radio-button class="rbpl2-bootstrap primary"
+        formControlName="model07i"
+        name="model07i"
+        value="primary1"
+        [isDisabled]="isDisabled07a">primary 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl2-elem">
+      <div>
+        <small><em>color: Bootstrap-primary</em></small>
+      </div>
+      <gln-radio-button class="rbpl2-bootstrap primary"
+        formControlName="model07i"
+        name="model07i"
+        value="primary2"
+        [isDisabled]="isDisabled07a">primary 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl2-elem">
+      <div>
+        <small><em>color: Bootstrap-secondary</em></small>
+      </div>
+      <gln-radio-button class="rbpl2-bootstrap secondary"
+        formControlName="model07j"
+        name="model07j"
+        value="secondary1"
+        [isDisabled]="isDisabled07a">secondary 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl2-elem">
+      <div>
+        <small><em>color: Bootstrap-secondary</em></small>
+      </div>
+      <gln-radio-button class="rbpl2-bootstrap secondary"
+        formControlName="model07j"
+        name="model07j"
+        value="secondary2"
+        [isDisabled]="isDisabled07a">secondary 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl2-elem">
+      <div>
+        <small><em>color: Bootstrap-success</em></small>
+      </div>
+      <gln-radio-button class="rbpl2-bootstrap success"
+        formControlName="model07k"
+        name="model07k"
+        value="success1"
+        [isDisabled]="isDisabled07a">success 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl2-elem">
+      <div>
+        <small><em>color: Bootstrap-success</em></small>
+      </div>
+      <gln-radio-button class="rbpl2-bootstrap success"
+        formControlName="model07k"
+        name="model07k"
+        value="success2"
+        [isDisabled]="isDisabled07a">success 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl2-elem">
+      <div>
+        <small><em>color: Bootstrap-danger</em></small>
+      </div>
+      <gln-radio-button class="rbpl2-bootstrap danger"
+        formControlName="model07l"
+        name="model07l"
+        value="danger1"
+        [isDisabled]="isDisabled07a">danger 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl2-elem">
+      <div>
+        <small><em>color: Bootstrap-danger</em></small>
+      </div>
+      <gln-radio-button class="rbpl2-bootstrap danger"
+        formControlName="model07l"
+        name="model07l"
+        value="danger2"
+        [isDisabled]="isDisabled07a">danger 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl2-elem">
+      <div>
+        <small><em>color: Bootstrap-warning</em></small>
+      </div>
+      <gln-radio-button class="rbpl2-bootstrap warning"
+        formControlName="model07m"
+        name="model07m"
+        value="warning1"
+        [isDisabled]="isDisabled07a">warning 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl2-elem">
+      <div>
+        <small><em>color: Bootstrap-warning</em></small>
+      </div>
+      <gln-radio-button class="rbpl2-bootstrap warning"
+        formControlName="model07m"
+        name="model07m"
+        value="warning2"
+        [isDisabled]="isDisabled07a">warning 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl2-elem">
+      <div>
+        <small><em>color: Bootstrap-info</em></small>
+      </div>
+      <gln-radio-button class="rbpl2-bootstrap info"
+        formControlName="model07n"
+        name="model07n"
+        value="info1"
+        [isDisabled]="isDisabled07a">info 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl2-elem">
+      <div>
+        <small><em>color: Bootstrap-info</em></small>
+      </div>
+      <gln-radio-button class="rbpl2-bootstrap info"
+        formControlName="model07n"
+        name="model07n"
+        value="info2"
+        [isDisabled]="isDisabled07a">info 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl2-elem">
+      <div>
+        <small><em>color: Bootstrap-dark</em></small>
+      </div>
+      <gln-radio-button class="rbpl2-bootstrap dark"
+        formControlName="model07o"
+        name="model07o"
+        value="dark1"
+        [isDisabled]="isDisabled07a">dark 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl2-elem">
+      <div>
+        <small><em>color: Bootstrap-dark</em></small>
+      </div>
+      <gln-radio-button class="rbpl2-bootstrap dark"
+        formControlName="model07o"
+        name="model07o"
+        value="dark2"
+        [isDisabled]="isDisabled07a">dark 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+</form>
+
+
+<!-- source -->
+<section *ngIf="isShowPalette07i"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04p"
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-radio-button',
+  templateUrl: './radio-button.component.html',
+  styleUrls: ['./radio-button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RadioButtonComponent &#123;
+  public isDisabled07i = false;
+  public formGroup07i: FormGroup = new FormGroup(&#123;
+    model07i: new FormControl('primary1', []),
+    model07j: new FormControl('secondary1', []),
+    model07k: new FormControl('success1', []),
+    model07l: new FormControl('danger1', []),
+    model07m: new FormControl('warning1', []),
+    model07n: new FormControl('info1', []),
+    model07o: new FormControl('dark1', []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .rbpl2-elem &#123;
+    min-width: 17ch;
+  &#125;
+  .rbpl2-bootstrap &#123;
+    --glnrd-icon-fn-sz: 10px;
+    &.gln-disabled [glnrb-icon-block] &#123;
+      opacity: .5;
+    &#125;
+    --glnrd-def-cl-svg: rgba(0,0,0,.25);
+    --glnrd-dis-cl-svg: rgba(0,0,0,.25);
+
+    &.primary &#123;
+      --glnrd-def-chk-cl-svg: #0d6efd;
+      --glnrd-dis-chk-cl-svg: #0d6efd;
+    &#125;
+    &.secondary &#123;
+      --glnrd-def-chk-cl-svg: #6c757d;
+      --glnrd-dis-chk-cl-svg: #6c757d;
+    &#125;
+    &.success &#123;
+      --glnrd-def-chk-cl-svg: #198754;
+      --glnrd-dis-chk-cl-svg: #198754;
+    &#125;
+    &.danger &#123;
+      --glnrd-def-chk-cl-svg: #dc3545;
+      --glnrd-dis-chk-cl-svg: #dc3545;
+    &#125;
+    &.warning &#123;
+      --glnrd-def-chk-cl-svg: #ffc107;
+      --glnrd-dis-chk-cl-svg: #ffc107;
+    &#125;
+    &.info &#123;
+      --glnrd-def-chk-cl-svg: #0dcaf0;
+      --glnrd-dis-chk-cl-svg: #0dcaf0;
+    &#125;
+    &.dark &#123;
+      --glnrd-def-chk-cl-svg: #212529;
+      --glnrd-dis-chk-cl-svg: #212529;
+    &#125;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+
+<section *ngIf="isShowPalette07q"
+  mr-vr
+  id="palette-mui">
+  <h4 class="app-hover-link">
+    Like a Material-UI.
+    <a [href]="urlPlRadio + '#palette-mui'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnRadioButton in style as "Material-UI".
+  </p>
+</section>
+
+
+<section *ngIf="isShowPalette07q"
+  mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabled07q=!isDisabled07q"
+      [checked]="isDisabled07q" /> Is disabled
+  </label>
+</section>
+
+
+<form *ngIf="isShowPalette07q"
+  [formGroup]="formGroup07q"
+  novalidate
+  autocomplete="off">
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-primary</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui primary"
+        formControlName="model07q"
+        name="model07q"
+        value="primary1"
+        [isDisabled]="isDisabled07q">primary 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-primary</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui primary"
+        formControlName="model07q"
+        name="model07q"
+        value="primary2"
+        [isDisabled]="isDisabled07q">primary 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-secondary</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui secondary"
+        formControlName="model07r"
+        name="model07r"
+        value="secondary1"
+        [isDisabled]="isDisabled07q">secondary 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-secondary</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui secondary"
+        formControlName="model07r"
+        name="model07r"
+        value="secondary2"
+        [isDisabled]="isDisabled07q">secondary 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-success</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui success"
+        formControlName="model07s"
+        name="model07s"
+        value="success1"
+        [isDisabled]="isDisabled07q">success 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-success</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui success"
+        formControlName="model07s"
+        name="model07s"
+        value="success2"
+        [isDisabled]="isDisabled07q">success 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-default</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui default"
+        formControlName="model07t"
+        name="model07t"
+        value="default1"
+        [isDisabled]="isDisabled07q">default 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-default</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui default"
+        formControlName="model07t"
+        name="model07t"
+        value="default2"
+        [isDisabled]="isDisabled07q">default 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-pink</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui-pink"
+        formControlName="model07u"
+        name="model07u"
+        value="pink1"
+        [isDisabled]="isDisabled07q">pink 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-pink</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui-pink"
+        formControlName="model07u"
+        name="model07u"
+        value="pink2"
+        [isDisabled]="isDisabled07q">pink 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+</form>
+
+
+<!-- source -->
+<section *ngIf="isShowPalette07q"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04p"
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-radio-button',
+  templateUrl: './radio-button.component.html',
+  styleUrls: ['./radio-button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RadioButtonComponent &#123;
+  public isDisabled07q = false;
+  public formGroup07q: FormGroup = new FormGroup(&#123;
+    model07q: new FormControl('primary1', []),
+    model07r: new FormControl('secondary1', []),
+    model07s: new FormControl('success1', []),
+    model07t: new FormControl('default1', []),
+    model07u: new FormControl('pink1', []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .rbpl3-elem &#123;
+    min-width: 17ch;
+  &#125;
+  .rbpl3-mui &#123;
+    --glnrd-icon-fn-sz: 14px;
+    --glnrd-def-cl-svg: rgba(0, 0, 0, 0.6);
+    --glnrd-def-lbl: rgba(0, 0, 0, 0.6);
+    --glnrd-dis-cl-svg: rgba(0, 0, 0, 0.26);
+    --glnrd-dis-lbl: rgba(0, 0, 0, 0.38);
+
+    &.primary &#123;
+      --glncl-primary-h: 210;
+      --glncl-primary-s: 79%;
+      --glncl-primary-l: 46%;
+    &#125;
+    &.secondary &#123;
+      --glncl-primary-h: 291;
+      --glncl-primary-s: 64%;
+      --glncl-primary-l: 42%;
+    &#125;
+    &.success &#123;
+      --glncl-primary-h: 123;
+      --glncl-primary-s: 46%;
+      --glncl-primary-l: 34%;
+    &#125;
+    &.default &#123;
+      --glncl-primary-h: 0;
+      --glncl-primary-s: 0%;
+      --glncl-primary-l: 0%;
+      --glnrd-def-cl-svg: rgba(0, 0, 0, 0.6);
+      --glnrd-def-chk-cl-svg: rgba(0, 0, 0, 0.6);
+      --glnrd-dis-cl-svg: rgba(0, 0, 0, 0.26);
+      --glnrd-dis-chk-cl-svg: rgba(0, 0, 0, 0.26);
+    &#125;
+  &#125;
+  .rbpl3-mui-pink &#123;
+    --glnrd-icon-fn-sz: 14px;
+    --glnrd-def-lbl: rgba(0, 0, 0, 0.6);
+    --glnrd-dis-lbl: rgba(0, 0, 0, 0.38);
+
+    --glncl-primary-h: 338;
+    --glncl-primary-s: 78%;
+    --glncl-primary-l: 48%;
+
+    --glncl-default-h: 338;
+    --glncl-default-s: 78%;
+    --glncl-default-l: 48%;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
 <hr br-nn />
