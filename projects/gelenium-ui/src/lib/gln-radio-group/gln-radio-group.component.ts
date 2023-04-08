@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -16,7 +15,7 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
-
+import { GlnRadioButtonChange } from '../gln-radio-button/gln-radio-button-change.interface';
 import { GlnRadioButtonComponent } from '../gln-radio-button/gln-radio-button.component';
 import { GlnRadioButton } from '../gln-radio-button/gln-radio-button.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
@@ -35,7 +34,7 @@ let uniqueIdCounter = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: GLN_RADIO_GROUP, useExisting: GlnRadioGroupComponent }],
 })
-export class GlnRadioGroupComponent implements OnChanges, OnInit, AfterContentInit, OnDestroy, GlnRadioGroup {
+export class GlnRadioGroupComponent implements OnChanges, OnInit, OnDestroy, GlnRadioGroup {
   @Input()
   public id: string;
   @Input()
@@ -56,7 +55,7 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, AfterContentIn
   public size: number | string | null | undefined; // 'little','short','small','middle','wide','large','huge' // interface GlnRadioGroup
 
   @Output()
-  readonly selected: EventEmitter<GlnRadioButton | null> = new EventEmitter();
+  readonly change: EventEmitter<GlnRadioButtonChange> = new EventEmitter();
 
   @ContentChildren(GlnRadioButtonComponent, { descendants: true })
   public radioItems!: QueryList<GlnRadioButtonComponent>;
@@ -95,15 +94,18 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, AfterContentIn
       properties['isDisabled'] = this.disabled;
     }
     if (changes['isNoAnimation']) {
-      this.setNoAnimation(BooleanUtil.init(this.isNoAnimation));
+      this.noAnimation = BooleanUtil.init(this.isNoAnimation);
+      this.settingNoAnimation(this.noAnimation, this.renderer, this.hostRef);
       properties['isNoAnimation'] = this.noAnimation ? 'true' : null;
     }
     if (changes['isNoHover']) {
-      this.setNoHover(BooleanUtil.init(this.isNoHover));
+      this.noHover = BooleanUtil.init(this.isNoHover);
+      this.settingNoHover(this.noHover, this.renderer, this.hostRef);
       properties['isNoHover'] = this.noHover ? 'true' : null;
     }
     if (changes['isNoRipple']) {
-      this.setNoRipple(BooleanUtil.init(this.isNoRipple));
+      this.noRipple = BooleanUtil.init(this.isNoRipple);
+      this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
       properties['isNoRipple'] = this.noRipple ? 'true' : null;
     }
     if (changes['isReadOnly']) {
@@ -128,38 +130,24 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, AfterContentIn
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
   }
 
-  public ngAfterContentInit(): void {
-    /*if (this.radios.length > 0 && this.selectedRadio === null && this.valueData !== undefined) {
-      for (let idx = 0; idx < this.radios.length && !this.selectedRadio; idx++) {
-        if (this.valueData === this.radios[idx].value) {
-          this.selectedRadio = this.radios[idx];
-          this.selectedRadio.hideAnimation = true;
-          this.selectedRadio.selected = true;
-          // Update the position once the zone is stable so that the overlay will be fully rendered.
-          this.ngZone.onStable.pipe(first()).subscribe(() => {
-            if (this.selectedRadio != null) {
-              this.selectedRadio.hideAnimation = false;
-            }
-          });
-        }
-      }
-    }*/
-  }
-
   public ngOnDestroy(): void {
     this.selectedRadio = null;
   }
 
   // ** interface GlnRadioButtonGroup - start **
 
+  public getRadioList(): GlnRadioButton[] {
+    return (this.radioItems?.toArray() || []) as GlnRadioButton[];
+  }
   /** Set the radio button as selected. */
-  public setRadioSelected(newRadio: GlnRadioButton | null): void {
-    // if (this.selectedRadio !== newRadio) {
-    //   Promise.resolve().then(() => {
-    //     this.updateValueData(newRadio != null ? newRadio.value : null);
-    //     this.updateSelectedRadio(newRadio);
-    //   });
-    // }
+  public setSelectedRadio(newRadio: GlnRadioButton | null): void {
+    if (this.selectedRadio !== newRadio) {
+      this.selectedRadio = newRadio;
+      if (!!newRadio) {
+        this.change.emit({ value: newRadio?.value, source: newRadio });
+      }
+      this.changeDetectorRef.markForCheck();
+    }
   }
   // ** interface GlnRadioButtonGroup - finish **
 
@@ -179,55 +167,24 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, AfterContentIn
 
   // ** Private methods **
 
-  private getRadioButtonByValue(value: string | null | undefined, radios: GlnRadioButton[]): GlnRadioButton | null {
-    let result: GlnRadioButton | null = null;
-    for (let idx = 0; idx < radios.length && !result; idx++) {
-      if (value === radios[idx].value) {
-        result = radios[idx];
-      }
-    }
-    return result;
+  private settingDisabled(disabled: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-disabled', !!disabled);
+    HtmlElemUtil.setAttr(renderer, elem, 'dis', disabled ? '' : null);
   }
-  /** Check or uncheck the "disabled" property. */
-  /*private setDisabled(value: boolean | null): void {
-    if (this.disabled !== !!value) {
-      this.disabled = !!value;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', value ? '' : null);
-      this.changeDetectorRef.markForCheck();
-    }
-  }*/
-  private setNoAnimation(value: boolean | null): void {
-    if (this.noAnimation !== !!value) {
-      this.noAnimation = !!value;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-animation', !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noAni', value ? '' : null);
-      this.changeDetectorRef.markForCheck();
-    }
+  private settingNoAnimation(noAnimation: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-animation', !!noAnimation);
+    HtmlElemUtil.setAttr(renderer, elem, 'noAni', noAnimation ? '' : null);
   }
-  private setNoHover(value: boolean | null): void {
-    if (this.noHover !== !!value) {
-      this.noHover = !!value;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-hover', !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noHov', value ? '' : null);
-      this.changeDetectorRef.markForCheck();
-    }
+  private settingNoHover(noHover: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-hover', !!noHover);
+    HtmlElemUtil.setAttr(renderer, elem, 'noHov', noHover ? '' : null);
   }
-  /** Check or uncheck the "no-ripple" property. */
-  private setNoRipple(value: boolean | null | undefined): void {
-    if (this.noRipple !== !!value) {
-      this.noRipple = !!value;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-no-ripple', !!value);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'noRip', !!value ? '' : null);
-      this.changeDetectorRef.markForCheck();
-    }
+  private settingNoRipple(noRipple: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-ripple', !!noRipple);
+    HtmlElemUtil.setAttr(renderer, elem, 'noRip', noRipple ? '' : null);
   }
-  private settingDisabled(value: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setClass(renderer, elem, 'gln-disabled', !!value);
-    HtmlElemUtil.setAttr(renderer, elem, 'dis', value ? '' : null);
-  }
-  private settingReadOnly(isReadOnlyVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!isReadOnlyVal);
-    HtmlElemUtil.setAttr(renderer, elem, 'rea', isReadOnlyVal ? '' : null);
+  private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!readOnly);
+    HtmlElemUtil.setAttr(renderer, elem, 'rea', readOnly ? '' : null);
   }
 }
