@@ -470,7 +470,8 @@ app-checkbox &#123;
     <li>"isNoAnimation" (isNoAnimation);</li>
     <li>"isNoHover" - disables the display of additional background on hover (isNoHover);</li>
     <li>"isNoRipple" - disables the execution of the ripple effect (isNoRipple);</li>
-    <!-- <li>"isRequired" - a sign that the field is required (isRequired);</li> -->
+    <li>"isRequired" - "isRequired" - a sign that the field is required
+      (used only with GlnRadioGroup) (isRequired);</li>
   </ul>
 </section>
 
@@ -480,7 +481,7 @@ app-checkbox &#123;
   novalidate
   autocomplete="off">
 
-  <!-- <div class="app-group">
+  <div class="app-group">
     <div class="app-elem">
       <div>
         <small><em>Attributes: isNoHover, isNoRipple.</em></small>
@@ -496,9 +497,9 @@ app-checkbox &#123;
         </gln-radio-button>
       </div>
     </div>
-  </div> -->
+  </div>
 
-  <!-- <div class="app-group">
+  <div class="app-group">
     <div class="app-elem">
       <div>
         <small><em>Attributes: isNoAnimation, isNoRipple.</em></small>
@@ -514,7 +515,8 @@ app-checkbox &#123;
         </gln-radio-button>
       </div>
     </div>
-  </div> -->
+  </div>
+
 
   <div class="app-group">
     <div class="app-elem">
@@ -522,27 +524,30 @@ app-checkbox &#123;
         <small><em>Attributes: isRequired. </em></small>
       </div>
       <div>
-        <gln-radio-button formControlName="model02g"
-          name="model02g"
-          [value]="fruits02e[0]"
-          isRequired>
-          {{ fruits02e[0] }}
-        </gln-radio-button>
-        <gln-radio-button formControlName="model02g"
-          name="model02g"
-          [value]="fruits02e[1]">
-          {{ fruits02e[1] }}
-        </gln-radio-button>
-        <gln-radio-button formControlName="model02g"
-          name="model02g"
-          [value]="fruits02e[2]">
-          {{ fruits02e[2] }}
-        </gln-radio-button>
+        <gln-radio-group name="model02g">
+          <gln-radio-button formControlName="model02g"
+            [value]="fruits02e[0]"
+            isRequired>
+            {{ fruits02e[0] }}
+          </gln-radio-button>
+          <gln-radio-button formControlName="model02g"
+            [value]="fruits02e[1]">
+            {{ fruits02e[1] }}
+          </gln-radio-button>
+          <gln-radio-button formControlName="model02g"
+            [value]="fruits02e[2]">
+            {{ fruits02e[2] }}
+          </gln-radio-button>
+        </gln-radio-group>
       </div>
       <div>
         <span [ngClass]="{ 'rdat2-err': control02e.model02g.errors }">
-          isRequired value={{ control02e.model02g.value }} errors={{ control02e.model02g.errors |
-          json }}
+          isRequired
+          value={{ control02e.model02g.value }}
+          errors={{ control02e.model02g.errors | json }}
+          valid={{ control02e.model02g.valid }}
+          dirty={{ control02e.model02g.dirty }}
+          touched={{ control02e.model02g.touched }}
         </span>
       </div>
     </div>

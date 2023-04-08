@@ -23,7 +23,7 @@ export class CmRadioBasicComponent {
 
   public urlCmRadio = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_RADIOBUTTON');
 
-  isShowBasic01 = false; // true; // 01
+  isShowBasic01 = true; // 01
   public fruits01a: string[] = ['apple', 'apricot', 'banana'];
   public formGroup01a: FormGroup = new FormGroup({
     model01a: new FormControl(this.fruits01a[0], []),
@@ -38,7 +38,7 @@ export class CmRadioBasicComponent {
   });
 
   // Page: Attributes02a
-  isShowAttributes02a = false; // true; // 02abc
+  isShowAttributes02a = true; // 02abc
   public fruits02a: string[] = ['apple', 'apricot', 'banana'];
   public formGroup02a: FormGroup = new FormGroup({
     model02a: new FormControl(this.fruits02a[0], []),
@@ -56,13 +56,13 @@ export class CmRadioBasicComponent {
   public formGroup02e: FormGroup = new FormGroup(this.control02e);
 
   // Page: Attributes02m  position
-  isShowAttributes02m = false; // true; // 02mhik Position
+  isShowAttributes02m = true; // 02mhik Position
   public formGroup02m: FormGroup = new FormGroup({
     model02m: new FormControl('top', []),
   });
 
   // Page: Attributes02p GlnRadioGroup
-  isShowAttributes02p = false; // true; // 02pmnopq GlnRadioGroup
+  isShowAttributes02p = true; // 02pmnopq GlnRadioGroup
   public isDisabled02p = false;
   public isNoAnimation02p = false;
   public isNoHover02p = false;
@@ -78,7 +78,7 @@ export class CmRadioBasicComponent {
   });
 
   // Page: Size03
-  isShowSize03 = false; // true; // 03
+  isShowSize03 = true; // 03
   public fruits03a: string[] = ['apple', 'apricot', 'banana'];
   public formGroup03a: FormGroup = new FormGroup({
     model03a: new FormControl(this.fruits03a[0], []),
@@ -93,7 +93,7 @@ export class CmRadioBasicComponent {
 
   // Page: Palette07
   public urlPlRadio = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_RADIOBUTTON');
-  isShowPalette07a = false; // true; // 07a
+  isShowPalette07a = true; // 07a
   public isDisabled07a = false;
   public formGroup07a: FormGroup = new FormGroup({
     model07a: new FormControl('primary1', []),
@@ -104,7 +104,7 @@ export class CmRadioBasicComponent {
     model07f: new FormControl('customer1', []),
   });
 
-  isShowPalette07i = false; // true; // 07i
+  isShowPalette07i = true; // 07i
   public isDisabled07i = false;
   public formGroup07i: FormGroup = new FormGroup({
     model07i: new FormControl('primary1', []),
@@ -116,7 +116,7 @@ export class CmRadioBasicComponent {
     model07o: new FormControl('dark1', []),
   });
 
-  isShowPalette07q = false; // true; // 07q
+  isShowPalette07q = true; // 07q
   public isDisabled07q = false;
   public formGroup07q: FormGroup = new FormGroup({
     model07q: new FormControl('primary1', []),
