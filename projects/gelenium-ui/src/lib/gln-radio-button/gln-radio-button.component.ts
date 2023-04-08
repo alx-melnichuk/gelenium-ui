@@ -225,8 +225,12 @@ export class GlnRadioButtonComponent
       this.prepareFormGroup(this.isRequiredVal);
     }
 
-    const isChecked: boolean = !!BooleanUtil.init(this.isChecked);
-    this.setIsChecked(isChecked);
+    const isChecked: boolean | null = BooleanUtil.init(this.isChecked);
+    if (isChecked) {
+      this.setChecked();
+    } else {
+      this.setUnchecked(isChecked);
+    }
 
     if (!!this.group) {
       this.name = this.group.name;
@@ -263,8 +267,12 @@ export class GlnRadioButtonComponent
 
   public writeValue(value: any): void {
     const newChecked: boolean | null = value != null ? value == this.value : null;
-    console.log(`writeValue   (id=${this.id}; name=${this.name}; value=${value}); newChecked=${newChecked};`); // #
-    this.setIsChecked(newChecked);
+    // console.log(`writeValue   (id=${this.id}; "${this.name}" newChecked=${newChecked}; value=${value});`); // #
+    if (newChecked) {
+      this.setChecked();
+    } else {
+      this.setUnchecked(newChecked);
+    }
     if (this.isRemoveAttrHideAnimation) {
       this.isRemoveAttrHideAnimation = false;
       Promise.resolve().then(() => {
@@ -324,30 +332,38 @@ export class GlnRadioButtonComponent
 
   // ** interface GlnRadioButton - start **
 
-  public setIsChecked(newValue: boolean | null): void {
-    if (this.isCheckedVal !== newValue) {
-      console.log(`setChecked   (id=${this.id}; "${this.name}" newValue=${newValue}; value=${this.formControl.value}`); // #
-      const oldIsCheckedVal = this.isCheckedVal;
-      this.isCheckedVal = newValue;
-      this.settingChecked(this.isCheckedVal, this.renderer, this.hostRef);
-      this.formControl.setValue(newValue); // ??
+  public getChecked(): boolean {
+    return !!this.isCheckedVal;
+  }
 
-      if (newValue) {
-        const previous: GlnRadioButton | undefined = GlnRadioButtonCheckedUtil.findByName(this.name || '');
-        console.log(`setChecked   (id=${this.id}; name=${this.name}; !previous=${!previous};`); // #
-        previous?.setIsChecked(false);
-        GlnRadioButtonCheckedUtil.add(this);
-        this.group?.setRadioSelected(this);
-      } else if (oldIsCheckedVal) {
-        GlnRadioButtonCheckedUtil.remove(this);
-        this.group?.setRadioSelected(null);
-      }
+  public setChecked(): void {
+    // console.log(`setChecked   (id=${this.id}; "${this.name}" newValue=true; isCheckedVal=${this.isCheckedVal}`); // #
+    if (this.isCheckedVal !== true) {
+      this.isCheckedVal = true;
+      this.settingChecked(this.isCheckedVal, this.renderer, this.hostRef);
+      this.formControl.setValue(this.isCheckedVal);
+
+      GlnRadioButtonCheckedUtil.add(this);
+
       this.changeDetectorRef.markForCheck();
     }
   }
 
-  public getIsChecked(): boolean {
-    return !!this.isCheckedVal;
+  public setUnchecked(newChecked: boolean | null): void {
+    // const newCheckedStr = newChecked == null ? 'null' : newChecked;
+    // console.log(`setUnchecked (id=${this.id}; "${this.name}" newValue=${newCheckedStr}; isCheckedVal=${this.isCheckedVal}`); // #
+    if (this.isCheckedVal !== newChecked) {
+      const oldIsCheckedVal = this.isCheckedVal;
+      this.isCheckedVal = newChecked;
+      this.settingChecked(this.isCheckedVal, this.renderer, this.hostRef);
+      this.formControl.setValue(this.isCheckedVal);
+
+      if (oldIsCheckedVal) {
+        GlnRadioButtonCheckedUtil.remove(this);
+        this.group?.setSelectedRadio(null);
+      }
+      this.changeDetectorRef.markForCheck();
+    }
   }
 
   public setProperties(properties: Record<string, unknown>): void {
@@ -396,29 +412,29 @@ export class GlnRadioButtonComponent
   // ** Public methods **
 
   public doClickByInput(event: Event): void {
-    // if (!this.isDisabledVal && !this.group?.disabled && !this.innReadOnly && !this.group?.readOnly) {
-    // this.group.setRadioSelected(this);
-    // if (this.touchRipple && !this.innNoRipple && !this.group?.noRipple) {
-    //   this.touchRipple.trigger(null, true);
-    // }
-    // }
-
     // We stop propagation so that the change event does not pop up and pass its input object.
     event.stopPropagation();
-    if (!this.isDisabledVal /*&& !this.innReadOnly*/) {
+    if (!this.isDisabledVal && !this.isReadOnlyVal) {
       if (!this.isCheckedVal) {
-        // const isChangeForGroup: boolean = !!this.radioGroup ? this.value !== this.radioGroup.value : false;
-        console.log(`doClickInput (id=${this.id}; name=${this.name}; setChecked(true);`); // #
-        this.setIsChecked(true);
+        // console.log(`doClickInput (id=${this.id}; "${this.name}" setChecked(true);`); // #
+        const previous: GlnRadioButton | undefined = GlnRadioButtonCheckedUtil.findByName(this.name || '');
+        previous?.setUnchecked(false);
+        // console.log(`doClickInput (id=${this.id}; "${this.name}" setChecked();`); // #
+        this.setChecked();
+
+        const radioList: GlnRadioButton[] = this.group?.getRadioList() || [];
+        for (let idx = 0; idx < radioList.length; idx++) {
+          if (this !== radioList[idx]) {
+            // console.log(`radios[${idx}](${radioList[idx].id}).setUnchecked();`); // #
+            radioList[idx].setUnchecked(false);
+          }
+        }
+        if (!this.formControl.touched) {
+          this.onTouched();
+        }
         this.onChange(this.value);
         this.change.emit({ value: this.value, source: this });
-
-        // if (this.radioGroup) {
-        //   this.radioGroup._controlValueAccessorChangeFn(this.value);
-        //   if (groupValueChanged) {
-        //     this.radioGroup._emitChangeEvent();
-        //   }
-        // }
+        this.group?.setSelectedRadio(this);
       }
       if (this.touchRipple && !this.isNoRippleVal) {
         this.touchRipple.trigger(null, true);
@@ -441,6 +457,7 @@ export class GlnRadioButtonComponent
       newValidator.push(Validators.required);
     }
     this.formControl.setValidators(newValidator);
+    this.formControl.updateValueAndValidity();
   }
 
   private converSize(sizeStr: string): number {

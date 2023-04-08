@@ -1,6 +1,6 @@
-import { GlnRadioButtonComponent } from './gln-radio-button.component';
+import { GlnRadioButton } from './gln-radio-button.interface';
 
 export interface GlnRadioButtonChange {
   value: string | null | undefined;
-  source: GlnRadioButtonComponent;
+  source: GlnRadioButton;
 }

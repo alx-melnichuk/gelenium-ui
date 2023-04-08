@@ -1,11 +1,14 @@
-import { InjectionToken } from '@angular/core';
+import { ElementRef, InjectionToken } from '@angular/core';
 
 export interface GlnRadioButton {
+  readonly hostRef: ElementRef<HTMLElement>;
   readonly id: string;
   readonly name: string;
   readonly value: string | null | undefined;
-  setIsChecked(newValue: boolean | null): void;
-  getIsChecked(): boolean;
+
+  getChecked(): boolean;
+  setChecked(): void;
+  setUnchecked(newChecked: boolean | null): void;
   setProperties(properties: Record<string, unknown>): void;
 }
 
