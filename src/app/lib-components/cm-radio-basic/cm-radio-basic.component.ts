@@ -1,15 +1,21 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { GlnRadioButtonConfig, GLN_RADIO_BUTTON_CONFIG } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
 
+const glnRadioButtonConfigDefault: GlnRadioButtonConfig = {
+  isNoRipple: true,
+  position: 'start',
+};
 @Component({
   selector: 'app-cm-radio-basic',
   templateUrl: './cm-radio-basic.component.html',
   styleUrls: ['./cm-radio-basic.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // providers: [{ provide: GLN_RADIO_BUTTON_CONFIG, useValue: glnRadioButtonConfigDefault }],
 })
 export class CmRadioBasicComponent {
   @Input()
@@ -38,7 +44,7 @@ export class CmRadioBasicComponent {
   });
 
   // Page: Attributes02a
-  isShowAttributes02a = true; // 02abc
+  isShowAttributes02a = false; // true; // 02abc
   public fruits02a: string[] = ['apple', 'apricot', 'banana'];
   public formGroup02a: FormGroup = new FormGroup({
     model02a: new FormControl(this.fruits02a[0], []),
@@ -56,7 +62,7 @@ export class CmRadioBasicComponent {
   public formGroup02e: FormGroup = new FormGroup(this.control02e);
 
   // Page: Attributes02m  position
-  isShowAttributes02m = true; // 02mhik Position
+  isShowAttributes02m = false; // true; // 02mhik Position
   public formGroup02m: FormGroup = new FormGroup({
     model02m: new FormControl('top', []),
   });
@@ -93,7 +99,7 @@ export class CmRadioBasicComponent {
 
   // Page: Palette07
   public urlPlRadio = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_RADIOBUTTON');
-  isShowPalette07a = true; // 07a
+  isShowPalette07a = false; // true; // 07a
   public isDisabled07a = false;
   public formGroup07a: FormGroup = new FormGroup({
     model07a: new FormControl('primary1', []),
@@ -104,7 +110,7 @@ export class CmRadioBasicComponent {
     model07f: new FormControl('customer1', []),
   });
 
-  isShowPalette07i = true; // 07i
+  isShowPalette07i = false; // true; // 07i
   public isDisabled07i = false;
   public formGroup07i: FormGroup = new FormGroup({
     model07i: new FormControl('primary1', []),
@@ -116,7 +122,7 @@ export class CmRadioBasicComponent {
     model07o: new FormControl('dark1', []),
   });
 
-  isShowPalette07q = true; // 07q
+  isShowPalette07q = false; // true; // 07q
   public isDisabled07q = false;
   public formGroup07q: FormGroup = new FormGroup({
     model07q: new FormControl('primary1', []),
@@ -125,6 +131,15 @@ export class CmRadioBasicComponent {
     model07t: new FormControl('default1', []),
     model07u: new FormControl('pink1', []),
   });
+
+  isShowConfig08a = false; // true;
+  public fruits08a: string[] = ['kiwi', 'orange', 'lemon'];
+  public formGroup08a: FormGroup = new FormGroup({
+    model08a: new FormControl(this.fruits08a[0], []),
+    model08b: new FormControl(this.fruits08a[0], []),
+  });
+
+  isShowApi09 = true;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {
