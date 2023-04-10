@@ -43,200 +43,208 @@ export class AppComponent &#123;
 </section>
 
 <table class="app-tab">
-  <tr>
-    <th class="app-mn-wd-22ch">Name</th>
-    <th>Description</th>
-  </tr>
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="2">
+        The list of properties that are inherited from "GlnFrameConfig" can be viewed
+        at the <a [href]="urlCmFrame + '#config-interface'">"GlnFrame#config-interface" link</a>.
+      </td>
+    </tr>
 
-  <tr>
-    <td colspan="2">
-      The list of properties that are inherited from "GlnFrameConfig" can be viewed
-      at the <a [href]="urlCmFrame + '#config-interface'">"GlnFrame#config-interface" link</a>.
-    </td>
-  </tr>
-
-  <tr>
-    <td><code>backdropClass?: string<br/>
+    <tr>
+      <td><code>backdropClass?: string<br/>
       &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        The custom class to be set on the backdrop element.<br />
-        If not specified, the default is "cdk-overlay-transparent-backdrop".<br />
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isCheckmark?: boolean<br/>
+      <td>
+        <span>
+          The custom class to be set on the backdrop element.<br />
+          If not specified, the default is "cdk-overlay-transparent-backdrop".<br />
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isCheckmark?: boolean<br/>
       &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        Checkbox display flag for each option.<br />
-        It is used in conjunction with the "isMultiple" sign.
-        <br />(default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isError?: boolean;</code></td>
-    <td>
-      <span>
-        Indicates that the element is in an error state.
-        <br />(default = false;)
-      </span><br />
-    </td>
-  </tr>
-  <tr>
-    <td><code>isMaxWd?: boolean<br/>
+      <td>
+        <span>
+          Checkbox display flag for each option.<br />
+          It is used in conjunction with the "isMultiple" sign.
+          <br />(default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isError?: boolean<br/>
+      &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Indicates that the element is in an error state.
+          <br />(default = false;)
+        </span><br />
+      </td>
+    </tr>
+    <tr>
+      <td><code>isMaxWd?: boolean<br/>
     &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        Set the width limit of the options list panel.
-        <br />(default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isMultiple?: boolean<br/>
+      <td>
+        <span>
+          Set the width limit of the options list panel.
+          <br />(default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isMultiple?: boolean<br/>
         &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        Sign of multiple choice of options.
-        <br />(default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isNoIcon?: boolean<br/>
+      <td>
+        <span>
+          Sign of multiple choice of options.
+          <br />(default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isNoIcon?: boolean<br/>
         &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        Disable the display of the icon - the status of the state of the open list.
-        <br />(default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isNoRipple?: boolean<br/>
+      <td>
+        <span>
+          Disable the display of the icon - the status of the state of the open list.
+          <br />(default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isNoRipple?: boolean<br/>
         &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        This property to turn off the ripple effect.
-        <br />(default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>isPlaceholder?: boolean;</code>
-    </td>
-    <td>
-      <span>
-        Specifies that the value of the "label" field be displayed
-        as the "placeholder" attribute for the "select" element.
-        <br />(default = false;)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isReadOnly?: boolean;</code></td>
-    <td>
-      <span>
-        Indicates that the element is read-only.
-        <br />(default = false;)
-      </span><br />
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>ornamLfAlign?: string;</code>
-    </td>
-    <td>
-      <span>
-        This property controls the vertical alignment for the left ornament.
-        <br />(default = 'default';)
-        It can take the following values:
-      </span>
-      <ul>
-        <li>"default" - defines the default</li>
-        <li>"center" - defines middle alignment</li>
-        <li>"flexStart" - defines top alignment</li>
-        <li>"flexEnd" - defines bottom alignment</li>
-        <li>"baseline" - defines baseline alignment</li>
-        <li>"stretch" - stretches across the entire height</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>ornamRgAlign?: string;</code>
-    </td>
-    <td>
-      <span>
-        This property controls the vertical alignment of the right ornament.
-        <br />(default = 'default';)
-        It can take the following values:
-      </span>
-      <ul>
-        <li>"default" - defines the default</li>
-        <li>"center" - defines middle alignment</li>
-        <li>"flexStart" - defines top alignment</li>
-        <li>"flexEnd" - defines bottom alignment</li>
-        <li>"baseline" - defines baseline alignment</li>
-        <li>"stretch" - stretches across the entire height</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><code>overlayClasses?: string<br/>
+      <td>
+        <span>
+          This property to turn off the ripple effect.
+          <br />(default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>isPlaceholder?: boolean<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies that the value of the "label" field be displayed
+          as the "placeholder" attribute for the "select" element.
+          <br />(default = false;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isReadOnly?: boolean<br/>
+      &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Indicates that the element is read-only.
+          <br />(default = false;)
+        </span><br />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>ornamLfAlign?: string<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          This property controls the vertical alignment for the left ornament.
+          <br />(default = 'default';)
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"default" - defines the default</li>
+          <li>"center" - defines middle alignment</li>
+          <li>"flexStart" - defines top alignment</li>
+          <li>"flexEnd" - defines bottom alignment</li>
+          <li>"baseline" - defines baseline alignment</li>
+          <li>"stretch" - stretches across the entire height</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>ornamRgAlign?: string<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          This property controls the vertical alignment of the right ornament.
+          <br />(default = 'default';)
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"default" - defines the default</li>
+          <li>"center" - defines middle alignment</li>
+          <li>"flexStart" - defines top alignment</li>
+          <li>"flexEnd" - defines bottom alignment</li>
+          <li>"baseline" - defines baseline alignment</li>
+          <li>"stretch" - stretches across the entire height</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>overlayClasses?: string<br/>
         &nbsp;&nbsp;| string[]<br/>
         &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        A custom class to add to the overlay panel element.
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>classes?: string<br/>
+      <td>
+        <span>
+          A custom class to add to the overlay panel element.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>classes?: string<br/>
         &nbsp;&nbsp;| string[]<br/>
         &nbsp;&nbsp;| Set&lt;string&gt;<br/>
         &nbsp;&nbsp;| &#123; [key: string]: unknown &#125;<br/>
         &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        Classes to be passed to the select panel. Supports the same syntax as `ngClass`.
-        <br />(default = '';)
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>position?: string<br/>
+      <td>
+        <span>
+          Classes to be passed to the select panel. Supports the same syntax as `ngClass`.
+          <br />(default = '';)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>position?: string<br/>
         &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        Specifies how to horizontally align the options list panel.
-      </span>
-      <ul>
-        <li>'start' - align to the left of the main element; (default)</li>
-        <li>'center' - align to the center of the main element;</li>
-        <li>'end' - align to the right side of the main element;</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><code>visibleSize?: number<br/>
+      <td>
+        <span>
+          Specifies how to horizontally align the options list panel.
+        </span>
+        <ul>
+          <li>'start' - align to the left of the main element; (default)</li>
+          <li>'center' - align to the center of the main element;</li>
+          <li>'end' - align to the right side of the main element;</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>visibleSize?: number<br/>
         &nbsp;&nbsp;| undefined;</code></td>
-    <td>
-      <span>
-        Specifies the maximum number of visible option elements.
-        This value is multiplied by the height of the option and defines the
-        maximum height of the options panel.
-        <br />
-        If multiple option elements have the smallest height, then that will be the
-        height of the option element.
-      </span>
-    </td>
-  </tr>
+      <td>
+        <span>
+          Specifies the maximum number of visible option elements.
+          This value is multiplied by the height of the option and defines the
+          maximum height of the options panel.
+          <br />
+          If multiple option elements have the smallest height, then that will be the
+          height of the option element.
+        </span>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 

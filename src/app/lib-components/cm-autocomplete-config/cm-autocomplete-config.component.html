@@ -42,15 +42,15 @@ export class AppComponent &#123;
 </section>
 
 <table class="app-tab">
-  <tbody>
+  <thead>
     <tr>
       <th class="app-mn-wd-22ch">Name</th>
       <th>Description</th>
     </tr>
-
+  </thead>
+  <tbody>
     <tr>
-      <td><code>isClearOnEscape?:<br/>
-      &nbsp;&nbsp;boolean<br/>
+      <td><code>isClearOnEscape?: boolean<br/>
       &nbsp;&nbsp;| undefined;</code></td>
       <td>
         <span>
@@ -60,8 +60,7 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
-      <td><code>isMaxWd?:<br/>
-      &nbsp;&nbsp;boolean<br/>
+      <td><code>isMaxWd?: boolean<br/>
       &nbsp;&nbsp;| undefined;</code></td>
       <td>
         <span>
@@ -71,8 +70,7 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
-      <td><code>isNoAnimation?:<br/>
-      &nbsp;&nbsp;boolean<br/>
+      <td><code>isNoAnimation?: boolean<br/>
       &nbsp;&nbsp;| undefined;</code></td>
       <td>
         <span>
@@ -82,8 +80,7 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
-      <td><code>isNoCloseOnSelect?:<br/>
-      &nbsp;&nbsp;boolean<br/>
+      <td><code>isNoCloseOnSelect?: boolean<br/>
       &nbsp;&nbsp;| undefined;</code></td>
       <td>
         <span>
@@ -93,8 +90,7 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
-      <td><code>isNoOpenOnMouse?:<br/>
-      &nbsp;&nbsp;boolean<br/>
+      <td><code>isNoOpenOnMouse?:boolean<br/>
       &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
@@ -105,8 +101,7 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
-      <td><code>isNoRipple?:<br/>
-      &nbsp;&nbsp;boolean<br/>
+      <td><code>isNoRipple?: boolean<br/>
       &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
@@ -117,8 +112,7 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
-      <td><code>isOpenOnFocus?:<br/>
-      &nbsp;&nbsp;boolean<br/>
+      <td><code>isOpenOnFocus?: boolean<br/>
       &nbsp;&nbsp;| undefined;</code>
       </td>
       <td>
@@ -129,8 +123,7 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
-      <td><code>position?:<br/>
-        &nbsp;&nbsp;string<br/>
+      <td><code>position?: string<br/>
         &nbsp;&nbsp;| undefined;</code></td>
       <td>
         <span>
@@ -144,11 +137,12 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
-      <td><code>classes?:<br/>
-        &nbsp;&nbsp;string<br/>
+      <td><code>classes?: string<br/>
         &nbsp;&nbsp;| string[]<br/>
         &nbsp;&nbsp;| Set&lt;string&gt;<br/>
-        &nbsp;&nbsp;| &#123; [key: string]: unknown &#125;<br/>
+        &nbsp;&nbsp;| &#123;<br/>
+        &nbsp;&nbsp;[key: string]: unknown<br/>
+        &nbsp;&nbsp;&#125;<br/>
         &nbsp;&nbsp;| undefined;</code></td>
       <td>
         <span>
@@ -158,8 +152,7 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
-      <td><code>visibleSize?:<br/>
-        &nbsp;&nbsp;number<br/>
+      <td><code>visibleSize?: number<br/>
         &nbsp;&nbsp;| undefined;</code></td>
       <td>
         <span>
