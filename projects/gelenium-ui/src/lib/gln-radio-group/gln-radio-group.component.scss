@@ -1,17 +1,27 @@
 /*# sourceURL=gln-radio-group.component.scss */
 
 gln-radio-group {
-  display: inline-flex;
+  --glnrg--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
+  --glnrg--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
+  --glnrg--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
 
-  &:not([dirCol]) {
+  display: flex;
+  flex-direction: column;
+
+  &>[glnrg-container] {
+    display: flex;
+  }
+  &:not([dirCol])>[glnrg-container] {
     flex-direction: row;
-
     .gln-radio-button ~ .gln-radio-button {
       margin-left: var(--glnrg-rad-mf-lf , 1em);
     }
   }
-  &[dirCol] {
+  &[dirCol]>[glnrg-container] {
     flex-direction: column;
   }
 
+  &.gln-focused>[glnrg-label] {
+    color: var(--glnrg-foc-cl, hsl(var(--glnrg--primary-h), var(--glnrg--primary-s), var(--glnrg--primary-l)));
+  }
 }

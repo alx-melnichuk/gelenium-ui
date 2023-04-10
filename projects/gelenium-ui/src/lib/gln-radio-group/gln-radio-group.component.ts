@@ -48,6 +48,8 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, OnDestroy, Gln
   @Input()
   public isReadOnly: string | boolean | null | undefined;
   @Input()
+  public label: string | null | undefined;
+  @Input()
   public name: string; // interface GlnRadioGroup
   @Input()
   public position: string | null | undefined; // 'top' | 'bottom' | 'start' | 'end'; // interface GlnRadioGroup
@@ -66,13 +68,12 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, OnDestroy, Gln
   public set radios(value: GlnRadioButton[]) {}
 
   public disabled: boolean | null | undefined; // interface GlnRadioButtonGroup // Binding attribute "isDisabled".
+  public isFocused: boolean = false;
   public noAnimation: boolean | null | undefined; // interface GlnRadioButtonGroup // Binding attribute "isNoAnimation".
   public noHover: boolean | null | undefined; // interface GlnRadioButtonGroup // Binding attribute "isNoHover".
   public noRipple: boolean | null | undefined; // interface GlnRadioButtonGroup // Binding attribute "isNoRipple".
   public readOnly: boolean | null | undefined; // interface GlnRadioButtonGroup // Binding attribute "isReadOnly".
   public selectedRadio: GlnRadioButton | null = null;
-
-  public valueData: string | null | undefined;
 
   constructor(
     private renderer: Renderer2,
@@ -136,6 +137,14 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, OnDestroy, Gln
 
   // ** interface GlnRadioButtonGroup - start **
 
+  public setFocus(isFocused: boolean): void {
+    if (this.isFocused !== isFocused) {
+      this.isFocused = isFocused;
+      this.settingFocus(this.isFocused, this.renderer, this.hostRef);
+      this.changeDetectorRef.markForCheck();
+    }
+  }
+
   public getRadioList(): GlnRadioButton[] {
     return (this.radioItems?.toArray() || []) as GlnRadioButton[];
   }
@@ -143,15 +152,23 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, OnDestroy, Gln
   public setSelectedRadio(newRadio: GlnRadioButton | null): void {
     if (this.selectedRadio !== newRadio) {
       this.selectedRadio = newRadio;
-      if (!!newRadio) {
-        this.change.emit({ value: newRadio?.value, source: newRadio });
-      }
+      const radioButtonChange: GlnRadioButtonChange = { value: newRadio?.value, source: newRadio };
+      this.change.emit(radioButtonChange);
+
       this.changeDetectorRef.markForCheck();
     }
   }
   // ** interface GlnRadioButtonGroup - finish **
 
   // ** Public methods **
+
+  public doClickByLabel(): void {
+    if (!this.disabled && !!this.selectedRadio) {
+      this.selectedRadio.focus();
+      this.isFocused = true;
+      this.changeDetectorRef.markForCheck();
+    }
+  }
 
   // ** Protected methods **
 
@@ -170,6 +187,10 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, OnDestroy, Gln
   private settingDisabled(disabled: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-disabled', !!disabled);
     HtmlElemUtil.setAttr(renderer, elem, 'dis', disabled ? '' : null);
+  }
+  private settingFocus(focus: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-focused', focus || false);
+    HtmlElemUtil.setAttr(renderer, elem, 'foc', focus ? '' : null);
   }
   private settingNoAnimation(noAnimation: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-no-animation', !!noAnimation);

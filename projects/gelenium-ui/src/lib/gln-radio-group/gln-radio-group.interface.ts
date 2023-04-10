@@ -14,6 +14,7 @@ export interface GlnRadioGroup {
 
   readonly name: string;
 
+  setFocus(isFocused: boolean): void;
   getRadioList(): GlnRadioButton[];
   // Set the radio button as selected.
   setSelectedRadio(radioButton: GlnRadioButton | null): void;
