@@ -51,8 +51,8 @@ gln-spinner {
     }
   }
   &:not([noani]):not([nopul])>svg[glnsp-inner]>circle {
-    animation: kf-spi-move1 var(--glnsp-duration, 1.4s) ease-in-out infinite;
-    @keyframes kf-spi-move1 {
+    animation: kf-spi-move var(--glnsp-duration, 1.4s) ease-in-out infinite;
+    @keyframes kf-spi-move {
       0% {
         stroke-dasharray: 1px, 280%;
         stroke-dashoffset: 0px;
@@ -66,8 +66,8 @@ gln-spinner {
     }
   }
   /*&:not([noani]):not([nopul])>svg[glnsp-inner]>circle {
-    animation: kf-spi-move var(--glnsp-duration, 1.4s) ease-in-out infinite;
-    @keyframes kf-spi-move {
+    animation: kf-spi-move1 var(--glnsp-duration, 1.4s) ease-in-out infinite;
+    @keyframes kf-spi-move1 {
       0% {
         stroke-dasharray: 1px, var(--glnsp--stroke-array-max);   // stroke-array-max: 200px
         stroke-dashoffset: 0;
