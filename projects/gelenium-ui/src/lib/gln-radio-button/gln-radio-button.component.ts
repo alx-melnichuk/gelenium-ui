@@ -76,7 +76,7 @@ export class GlnRadioButtonComponent
   implements OnChanges, OnInit, AfterContentInit, OnDestroy, GlnRadioButton, ControlValueAccessor, Validator, GlnNodeInternalValidator
 {
   @Input()
-  public id: string = `glnrb-${uniqueIdCounter++}`; // interface GlnRadioButton
+  public id: string; // interface GlnRadioButton
   @Input()
   public config: GlnRadioButtonConfig | null | undefined;
   @Input()
@@ -94,14 +94,20 @@ export class GlnRadioButtonComponent
   @Input()
   public isRequired: string | boolean | null | undefined;
   @Input()
-  public name: string = ''; // interface GlnRadioButton
+  public name: string; // interface GlnRadioButton
   @Input()
   public position: string | null | undefined; // 'top' | 'bottom' | 'start' | 'end';
   @Input()
   public value: string | null | undefined; // interface GlnRadioButton
   @Input()
   public size: number | string | null | undefined; // 'little','short','small','middle','wide','large','huge'
+  @Input()
+  public tabIndex: number = 0;
 
+  @Output()
+  readonly focused: EventEmitter<void> = new EventEmitter();
+  @Output()
+  readonly blured: EventEmitter<void> = new EventEmitter();
   @Output()
   readonly change: EventEmitter<GlnRadioButtonChange> = new EventEmitter();
 
@@ -116,6 +122,7 @@ export class GlnRadioButtonComponent
   public currConfig: GlnRadioButtonConfig;
   public isCheckedVal: boolean | null = null; // Binding attribute "isChecked".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
+  public isFocused: boolean = false;
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
   public isNoHoverVal: boolean | null = null; // Binding attribute "isNoHover".
   public isNoRippleVal: boolean | null = null; // Binding attribute "isNoRipple".
@@ -139,6 +146,9 @@ export class GlnRadioButtonComponent
     this.currConfig = this.rootConfig || {};
     this.renderer.addClass(this.hostRef.nativeElement, 'gln-radio-button');
     this.renderer.addClass(this.hostRef.nativeElement, 'gln-control');
+    const uniqueId: number = uniqueIdCounter++;
+    this.id = `glnrb-${uniqueId}`;
+    this.name = `glnrb-${uniqueId}`;
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -233,16 +243,13 @@ export class GlnRadioButtonComponent
     }
 
     if (!!this.group) {
-      this.name = this.group.name;
-      // ??
-      // this.checked = this.radioGroup.value === this._value;
-      // if (this.checked) {
-      //   this.radioGroup.selected = this;
-      // }
+      // If "name" is not specified, then all such elements will be
+      // in the same group named "empty string".
+      if (!!this.group.name) {
+        this.name = this.group.name;
+      }
     }
-    // If "name" is not specified, then all such elements will be
-    // in the same group named "empty string".
-
+    // Add an attribute that disables animation on initialization.
     this.renderer.setAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT, '');
   }
 
@@ -250,6 +257,7 @@ export class GlnRadioButtonComponent
     // When using [(ngModel)] parentFormGroup will be null.
     this.isRemoveAttrHideAnimation = !this.parentFormGroup;
     if (!this.isRemoveAttrHideAnimation) {
+      // Remove an attribute that disables animation on initialization.
       this.renderer.removeAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT);
     }
   }
@@ -337,13 +345,21 @@ export class GlnRadioButtonComponent
   }
 
   public setChecked(): void {
-    // console.log(`setChecked   (id=${this.id}; "${this.name}" newValue=true; isCheckedVal=${this.isCheckedVal}`); // #
+    // console.log(`setChecked   (id=${this.id}; "${this.name}" newValue=true; isCheckedVal=${this.isCheckedVal}`); // # Mui-focusVisible
     if (this.isCheckedVal !== true) {
+      // Find the previous selected item in the list of selected items.
+      const previous: GlnRadioButton | undefined = GlnRadioButtonCheckedUtil.findByName(this.name || '');
+      // In the previously selected item, set as "unchecked".
+      previous?.setUnchecked(false);
+
       this.isCheckedVal = true;
       this.settingChecked(this.isCheckedVal, this.renderer, this.hostRef);
       this.formControl.setValue(this.isCheckedVal);
 
+      // Add the current item to the list of selected items.
       GlnRadioButtonCheckedUtil.add(this);
+      // Define a new selected element in GlnRadioGroup.
+      this.group?.setSelectedRadio(this);
 
       this.changeDetectorRef.markForCheck();
     }
@@ -354,15 +370,25 @@ export class GlnRadioButtonComponent
     // console.log(`setUnchecked (id=${this.id}; "${this.name}" newValue=${newCheckedStr}; isCheckedVal=${this.isCheckedVal}`); // #
     if (this.isCheckedVal !== newChecked) {
       const oldIsCheckedVal = this.isCheckedVal;
+
       this.isCheckedVal = newChecked;
       this.settingChecked(this.isCheckedVal, this.renderer, this.hostRef);
       this.formControl.setValue(this.isCheckedVal);
 
       if (oldIsCheckedVal) {
+        // Remove the current item from the list of selected items.
         GlnRadioButtonCheckedUtil.remove(this);
+        // Remove the selected item in the GlnRadioGroup.
         this.group?.setSelectedRadio(null);
       }
       this.changeDetectorRef.markForCheck();
+    }
+  }
+
+  public focus(): void {
+    console.log(`focus();`); // #
+    if (!this.isDisabledVal && isPlatformBrowser(this.platformId) && !!this.inputElementRef) {
+      this.inputElementRef.nativeElement.focus();
     }
   }
 
@@ -411,30 +437,16 @@ export class GlnRadioButtonComponent
 
   // ** Public methods **
 
-  public doClickByInput(event: Event): void {
+  public doClickByInput(event: Event | null): void {
     // We stop propagation so that the change event does not pop up and pass its input object.
-    event.stopPropagation();
+    event?.stopPropagation();
     if (!this.isDisabledVal && !this.isReadOnlyVal) {
       if (!this.isCheckedVal) {
-        // console.log(`doClickInput (id=${this.id}; "${this.name}" setChecked(true);`); // #
-        const previous: GlnRadioButton | undefined = GlnRadioButtonCheckedUtil.findByName(this.name || '');
-        previous?.setUnchecked(false);
-        // console.log(`doClickInput (id=${this.id}; "${this.name}" setChecked();`); // #
+        // console.log(`doClickInput (id=${this.id}; "${this.name}" setChecked ();`); // #
         this.setChecked();
 
-        const radioList: GlnRadioButton[] = this.group?.getRadioList() || [];
-        for (let idx = 0; idx < radioList.length; idx++) {
-          if (this !== radioList[idx]) {
-            // console.log(`radios[${idx}](${radioList[idx].id}).setUnchecked();`); // #
-            radioList[idx].setUnchecked(false);
-          }
-        }
-        if (!this.formControl.touched) {
-          this.onTouched();
-        }
         this.onChange(this.value);
         this.change.emit({ value: this.value, source: this });
-        this.group?.setSelectedRadio(this);
       }
       if (this.touchRipple && !this.isNoRippleVal) {
         this.touchRipple.trigger(null, true);
@@ -442,9 +454,26 @@ export class GlnRadioButtonComponent
     }
   }
 
-  public focus(): void {
-    if (!this.isDisabledVal && isPlatformBrowser(this.platformId) && !!this.inputElementRef) {
-      this.inputElementRef.nativeElement.focus();
+  public doFocus(): void {
+    if (!this.isDisabledVal) {
+      console.log(`doFocus()`); // #
+      this.isFocused = true;
+      this.settingFocus(this.isFocused, this.renderer, this.hostRef);
+      this.group?.setFocus(true);
+      this.focused.emit();
+    }
+  }
+
+  public doBlur(): void {
+    if (!this.isDisabledVal) {
+      console.log(`doBlur()`); // #
+      this.isFocused = false;
+      this.settingFocus(this.isFocused, this.renderer, this.hostRef);
+      this.group?.setFocus(false);
+      if (!this.formControl.touched) {
+        this.onTouched();
+      }
+      this.blured.emit();
     }
   }
 
@@ -467,8 +496,14 @@ export class GlnRadioButtonComponent
     return POSITION[positionStr] || POSITION['end'];
   }
   private setCssSize(size: number, elem: ElementRef<HTMLElement>): void {
-    const fontSize: number | null = size > 0 ? Math.round((size / 3) * 1000) / 1000 : null;
-    HtmlElemUtil.setProperty(elem, '--glnrd--icon-fn-sz', fontSize?.toString().concat('px'));
+    let iconSz: number | null = null;
+    let iconPd: number | null = null;
+    if (size > 0) {
+      iconSz = Math.round(0.5714 * size);
+      iconPd = Math.round(((size - iconSz) / 2) * 100) / 100;
+    }
+    HtmlElemUtil.setProperty(elem, '--glnrd--icon-sz', iconSz?.toString().concat('px'));
+    HtmlElemUtil.setProperty(elem, '--glnrd--icon-pd', iconPd?.toString().concat('px'));
   }
   private settingByPosition(isAdd: boolean, positionStr: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     if (positionStr) {
@@ -484,6 +519,10 @@ export class GlnRadioButtonComponent
   private settingDisabled(isDisabledVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-disabled', !!isDisabledVal);
     HtmlElemUtil.setAttr(renderer, elem, 'dis', isDisabledVal ? '' : null);
+  }
+  private settingFocus(focus: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-focused', focus || false);
+    HtmlElemUtil.setAttr(renderer, elem, 'foc', focus ? '' : null);
   }
   private settingNoAnimation(isNoAnimationVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-no-animation', !!isNoAnimationVal);

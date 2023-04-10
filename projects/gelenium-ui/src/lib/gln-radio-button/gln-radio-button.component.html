@@ -12,10 +12,13 @@
       [attr.id]="id + '_input'"
       [attr.disabled]="isDisabledVal ? '': null"
       [attr.readonly]="isReadOnlyVal ? '': null"
-      [attr.tabindex]="!isDisabledVal ? '0' : null"
+      [attr.tabindex]="!isDisabledVal && isCheckedVal ? tabIndex : '-1'"
       aria-label="Radio demo"
       (change)="$event.stopPropagation();"
+      (focus)="doFocus()"
+      (blur)="doBlur()"
       (click)="doClickByInput($event)" />
+    <div glnrb-foc-vis></div>
     <span glnrb-icon-wrap
       class="gln-radio-icon-wrap">
       <svg glnrb-icon

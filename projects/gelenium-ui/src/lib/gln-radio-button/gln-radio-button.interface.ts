@@ -9,6 +9,7 @@ export interface GlnRadioButton {
   getChecked(): boolean;
   setChecked(): void;
   setUnchecked(newChecked: boolean | null): void;
+  focus(): void;
   setProperties(properties: Record<string, unknown>): void;
 }
 
