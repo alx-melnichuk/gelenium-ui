@@ -1,0 +1,52 @@
+/*# sourceURL=pl-radio-material-ui.component.scss */
+
+app-pl-radio-material-ui {
+  display: block;
+
+  .rbpl3-elem {
+    min-width: 17ch;
+  }
+  .rbpl3-mui {
+    --glnrb-def-cl-svg: rgba(0, 0, 0, 0.6);
+    --glnrb-def-lbl: rgba(0, 0, 0, 0.6);
+    --glnrb-dis-cl-svg: rgba(0, 0, 0, 0.26);
+    --glnrb-dis-lbl: rgba(0, 0, 0, 0.38);
+
+    &.primary {
+      --glncl-primary-h: 210;
+      --glncl-primary-s: 79%;
+      --glncl-primary-l: 46%;
+    }
+    &.secondary {
+      --glncl-primary-h: 291;
+      --glncl-primary-s: 64%;
+      --glncl-primary-l: 42%;
+    }
+    &.success {
+      --glncl-primary-h: 123;
+      --glncl-primary-s: 46%;
+      --glncl-primary-l: 34%;
+    }
+    &.default {
+      --glncl-primary-h: 0;
+      --glncl-primary-s: 0%;
+      --glncl-primary-l: 0%;
+      --glnrb-def-cl-svg: rgba(0, 0, 0, 0.6);
+      --glnrb-def-chk-cl-svg: rgba(0, 0, 0, 0.6);
+      --glnrb-dis-cl-svg: rgba(0, 0, 0, 0.26);
+      --glnrb-dis-chk-cl-svg: rgba(0, 0, 0, 0.26);
+    }
+  }
+  .rbpl3-mui-pink {
+    --glnrb-def-lbl: rgba(0, 0, 0, 0.6);
+    --glnrb-dis-lbl: rgba(0, 0, 0, 0.38);
+
+    --glncl-primary-h: 338;
+    --glncl-primary-s: 78%;
+    --glncl-primary-l: 48%;
+
+    --glncl-default-h: 338;
+    --glncl-default-s: 78%;
+    --glncl-default-l: 48%;
+  }
+}
