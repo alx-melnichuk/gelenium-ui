@@ -2,34 +2,4 @@
 
 app-cm-radio-basic {
   display: block;
-
-  // Page: Basic01
-  // .rbbs-fn-sz {
-  //   font-size: 16px;
-  // }
-
-  // Page: Attributes02a
-
-  // Page: Attributes02e
-  .rdat2-err {
-    color: red;
-  }
-  // Page: Attributes02g
-  .rbar2-elem {
-    min-width: 17ch;
-  }
-
-  // Page: Attributes02l
-  .rbat2-props {
-    display: inline-flex;
-    flex-wrap: wrap;
-    max-width: 60ch;
-    margin: 0;
-    &>label {
-      margin-top: 0.5em;
-      min-width: 18ch;
-    }
-  }
-
-
 }

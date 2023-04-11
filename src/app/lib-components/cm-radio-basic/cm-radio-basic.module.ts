@@ -7,22 +7,13 @@ import {
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GlnColorModule, GlnRadioButtonModule, GlnRadioGroupModule } from 'gelenium-ui'; // GlnColorModule only for page: Palette.
+import { GlnRadioButtonModule, GlnRadioGroupModule } from 'gelenium-ui';
 
 import { CmRadioBasicComponent } from './cm-radio-basic.component';
 
 @NgModule({
   declarations: [CmRadioBasicComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatExpansionModule,
-    MatTabsModule,
-    GlnRadioButtonModule,
-    GlnRadioGroupModule,
-    GlnColorModule,
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatExpansionModule, MatTabsModule, GlnRadioButtonModule, GlnRadioGroupModule],
   exports: [CmRadioBasicComponent],
 })
 export class CmRadioBasicModule {}
