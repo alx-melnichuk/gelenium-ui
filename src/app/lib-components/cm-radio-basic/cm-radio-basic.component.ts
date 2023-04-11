@@ -44,7 +44,7 @@ export class CmRadioBasicComponent {
   });
 
   // Page: Attributes02a
-  isShowAttributes02a = false; // true; // 02abc
+  isShowAttributes02a = true; // 02abc
   public fruits02a: string[] = ['apple', 'apricot', 'banana'];
   public formGroup02a: FormGroup = new FormGroup({
     model02a: new FormControl(this.fruits02a[0], []),
@@ -62,7 +62,7 @@ export class CmRadioBasicComponent {
   public formGroup02e: FormGroup = new FormGroup(this.control02e);
 
   // Page: Attributes02m  position
-  isShowAttributes02m = false; // true; // 02mhik Position
+  isShowAttributes02m = true; // 02mhik Position
   public formGroup02m: FormGroup = new FormGroup({
     model02m: new FormControl('top', []),
   });
@@ -99,7 +99,7 @@ export class CmRadioBasicComponent {
 
   // Page: Palette07
   public urlPlRadio = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_RADIOBUTTON');
-  isShowPalette07a = false; // true; // 07a
+  isShowPalette07a = true; // 07a
   public isDisabled07a = false;
   public formGroup07a: FormGroup = new FormGroup({
     model07a: new FormControl('primary1', []),
@@ -110,7 +110,7 @@ export class CmRadioBasicComponent {
     model07f: new FormControl('customer1', []),
   });
 
-  isShowPalette07i = false; // true; // 07i
+  isShowPalette07i = true; // 07i
   public isDisabled07i = false;
   public formGroup07i: FormGroup = new FormGroup({
     model07i: new FormControl('primary1', []),
@@ -122,7 +122,7 @@ export class CmRadioBasicComponent {
     model07o: new FormControl('dark1', []),
   });
 
-  isShowPalette07q = false; // true; // 07q
+  isShowPalette07q = true; // 07q
   public isDisabled07q = false;
   public formGroup07q: FormGroup = new FormGroup({
     model07q: new FormControl('primary1', []),
@@ -132,7 +132,7 @@ export class CmRadioBasicComponent {
     model07u: new FormControl('pink1', []),
   });
 
-  isShowConfig08a = false; // true;
+  isShowConfig08a = true;
   public fruits08a: string[] = ['kiwi', 'orange', 'lemon'];
   public formGroup08a: FormGroup = new FormGroup({
     model08a: new FormControl(this.fruits08a[0], []),

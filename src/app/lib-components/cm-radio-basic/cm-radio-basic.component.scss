@@ -46,40 +46,40 @@ app-cm-radio-basic {
     min-width: 17ch;
   }
   .rbpl2-bootstrap {
-    --glnrd-icon-fn-sz: 10px;
+    --glnrb-icon-fn-sz: 10px;
     &.gln-disabled [glnrb-icon-block] {
       opacity: .5;
     }
-    --glnrd-def-cl-svg: rgba(0,0,0,.25);
-    --glnrd-dis-cl-svg: rgba(0,0,0,.25);
+    --glnrb-def-cl-svg: rgba(0,0,0,.25);
+    --glnrb-dis-cl-svg: rgba(0,0,0,.25);
 
     &.primary {
-      --glnrd-def-chk-cl-svg: #0d6efd;
-      --glnrd-dis-chk-cl-svg: #0d6efd;
+      --glnrb-def-chk-cl-svg: #0d6efd;
+      --glnrb-dis-chk-cl-svg: #0d6efd;
     }
     &.secondary {
-      --glnrd-def-chk-cl-svg: #6c757d;
-      --glnrd-dis-chk-cl-svg: #6c757d;
+      --glnrb-def-chk-cl-svg: #6c757d;
+      --glnrb-dis-chk-cl-svg: #6c757d;
     }
     &.success {
-      --glnrd-def-chk-cl-svg: #198754;
-      --glnrd-dis-chk-cl-svg: #198754;
+      --glnrb-def-chk-cl-svg: #198754;
+      --glnrb-dis-chk-cl-svg: #198754;
     }
     &.danger {
-      --glnrd-def-chk-cl-svg: #dc3545;
-      --glnrd-dis-chk-cl-svg: #dc3545;
+      --glnrb-def-chk-cl-svg: #dc3545;
+      --glnrb-dis-chk-cl-svg: #dc3545;
     }
     &.warning {
-      --glnrd-def-chk-cl-svg: #ffc107;
-      --glnrd-dis-chk-cl-svg: #ffc107;
+      --glnrb-def-chk-cl-svg: #ffc107;
+      --glnrb-dis-chk-cl-svg: #ffc107;
     }
     &.info {
-      --glnrd-def-chk-cl-svg: #0dcaf0;
-      --glnrd-dis-chk-cl-svg: #0dcaf0;
+      --glnrb-def-chk-cl-svg: #0dcaf0;
+      --glnrb-dis-chk-cl-svg: #0dcaf0;
     }
     &.dark {
-      --glnrd-def-chk-cl-svg: #212529;
-      --glnrd-dis-chk-cl-svg: #212529;
+      --glnrb-def-chk-cl-svg: #212529;
+      --glnrb-dis-chk-cl-svg: #212529;
     }
   }
   
@@ -88,11 +88,11 @@ app-cm-radio-basic {
     min-width: 17ch;
   }
   .rbpl3-mui {
-    --glnrd-icon-fn-sz: 14px;
-    --glnrd-def-cl-svg: rgba(0, 0, 0, 0.6);
-    --glnrd-def-lbl: rgba(0, 0, 0, 0.6);
-    --glnrd-dis-cl-svg: rgba(0, 0, 0, 0.26);
-    --glnrd-dis-lbl: rgba(0, 0, 0, 0.38);
+    --glnrb-icon-fn-sz: 14px;
+    --glnrb-def-cl-svg: rgba(0, 0, 0, 0.6);
+    --glnrb-def-lbl: rgba(0, 0, 0, 0.6);
+    --glnrb-dis-cl-svg: rgba(0, 0, 0, 0.26);
+    --glnrb-dis-lbl: rgba(0, 0, 0, 0.38);
 
     &.primary {
       --glncl-primary-h: 210;
@@ -113,16 +113,16 @@ app-cm-radio-basic {
       --glncl-primary-h: 0;
       --glncl-primary-s: 0%;
       --glncl-primary-l: 0%;
-      --glnrd-def-cl-svg: rgba(0, 0, 0, 0.6);
-      --glnrd-def-chk-cl-svg: rgba(0, 0, 0, 0.6);
-      --glnrd-dis-cl-svg: rgba(0, 0, 0, 0.26);
-      --glnrd-dis-chk-cl-svg: rgba(0, 0, 0, 0.26);
+      --glnrb-def-cl-svg: rgba(0, 0, 0, 0.6);
+      --glnrb-def-chk-cl-svg: rgba(0, 0, 0, 0.6);
+      --glnrb-dis-cl-svg: rgba(0, 0, 0, 0.26);
+      --glnrb-dis-chk-cl-svg: rgba(0, 0, 0, 0.26);
     }
   }
   .rbpl3-mui-pink {
-    --glnrd-icon-fn-sz: 14px;
-    --glnrd-def-lbl: rgba(0, 0, 0, 0.6);
-    --glnrd-dis-lbl: rgba(0, 0, 0, 0.38);
+    --glnrb-icon-fn-sz: 14px;
+    --glnrb-def-lbl: rgba(0, 0, 0, 0.6);
+    --glnrb-dis-lbl: rgba(0, 0, 0, 0.38);
 
     --glncl-primary-h: 338;
     --glncl-primary-s: 78%;
