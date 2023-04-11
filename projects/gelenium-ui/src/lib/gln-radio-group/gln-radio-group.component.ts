@@ -15,7 +15,6 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
-import { GlnRadioButtonChange } from '../gln-radio-button/gln-radio-button-change.interface';
 import { GlnRadioButtonComponent } from '../gln-radio-button/gln-radio-button.component';
 import { GlnRadioButton } from '../gln-radio-button/gln-radio-button.interface';
 import { BooleanUtil } from '../_utils/boolean.util';
@@ -57,7 +56,7 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, OnDestroy, Gln
   public size: number | string | null | undefined; // 'little','short','small','middle','wide','large','huge' // interface GlnRadioGroup
 
   @Output()
-  readonly change: EventEmitter<GlnRadioButtonChange> = new EventEmitter();
+  readonly change: EventEmitter<{ value: string | null | undefined; source: GlnRadioButton | null }> = new EventEmitter();
 
   @ContentChildren(GlnRadioButtonComponent, { descendants: true })
   public radioItems!: QueryList<GlnRadioButtonComponent>;
@@ -84,7 +83,7 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, OnDestroy, Gln
     this.renderer.setAttribute(this.hostRef.nativeElement, 'role', 'group');
     const uniqueId: number = uniqueIdCounter++;
     this.id = `glnrg-${uniqueId}`;
-    this.name = `gln-radio-group-${uniqueId}`;
+    this.name = `glnrg-${uniqueId}`;
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -152,8 +151,7 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, OnDestroy, Gln
   public setSelectedRadio(newRadio: GlnRadioButton | null): void {
     if (this.selectedRadio !== newRadio) {
       this.selectedRadio = newRadio;
-      const radioButtonChange: GlnRadioButtonChange = { value: newRadio?.value, source: newRadio };
-      this.change.emit(radioButtonChange);
+      this.change.emit({ value: newRadio?.value, source: newRadio });
 
       this.changeDetectorRef.markForCheck();
     }

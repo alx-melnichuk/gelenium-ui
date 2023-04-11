@@ -14,7 +14,7 @@ gln-radio-group {
   &:not([dirCol])>[glnrg-container] {
     flex-direction: row;
     .gln-radio-button ~ .gln-radio-button {
-      margin-left: var(--glnrg-rad-mf-lf , 1em);
+      margin-left: var(--glnrg-rad-mf-lf, 1em);
     }
   }
   &[dirCol]>[glnrg-container] {
