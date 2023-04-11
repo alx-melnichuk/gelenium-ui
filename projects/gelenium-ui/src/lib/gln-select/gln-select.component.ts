@@ -58,11 +58,11 @@ import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
-import { GlnSelectChange } from './gln-select-change.interface';
 import { GlnSelectConfig } from './gln-select-config.interface';
 import { GlnSelectOpenUtil } from './gln-select-open.util';
 import { GLN_SELECT_TRIGGER, GlnSelectTriggerDirective } from './gln-select-trigger.directive';
 import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
+import { GlnSelectionChange } from './gln-selection-change.interface';
 
 export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT_CONFIG');
 
@@ -198,7 +198,7 @@ export class GlnSelectComponent
   @Output()
   readonly closed: EventEmitter<void> = new EventEmitter();
   @Output()
-  readonly selected: EventEmitter<GlnSelectChange> = new EventEmitter();
+  readonly selected: EventEmitter<{ value: unknown | null; values: unknown[]; change: GlnSelectionChange<GlnOption> }> = new EventEmitter();
 
   /** Overlay panel with its own parameters. */
   @ViewChild(CdkConnectedOverlay)

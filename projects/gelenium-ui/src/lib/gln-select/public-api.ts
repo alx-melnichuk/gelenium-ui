@@ -1,4 +1,3 @@
-export * from './gln-select-change.interface';
 export * from './gln-select-config.interface';
 export * from './gln-select-open.util';
 export * from './gln-select-trigger.directive';
