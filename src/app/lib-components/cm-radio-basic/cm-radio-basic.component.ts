@@ -99,38 +99,6 @@ export class CmRadioBasicComponent {
 
   // Page: Palette07
   public urlPlRadio = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_RADIOBUTTON');
-  isShowPalette07a = true; // 07a
-  public isDisabled07a = false;
-  public formGroup07a: FormGroup = new FormGroup({
-    model07a: new FormControl('primary1', []),
-    model07b: new FormControl('danger1', []),
-    model07c: new FormControl('success1', []),
-    model07d: new FormControl('info1', []),
-    model07e: new FormControl('warning1', []),
-    model07f: new FormControl('customer1', []),
-  });
-
-  isShowPalette07i = true; // 07i
-  public isDisabled07i = false;
-  public formGroup07i: FormGroup = new FormGroup({
-    model07i: new FormControl('primary1', []),
-    model07j: new FormControl('secondary1', []),
-    model07k: new FormControl('success1', []),
-    model07l: new FormControl('danger1', []),
-    model07m: new FormControl('warning1', []),
-    model07n: new FormControl('info1', []),
-    model07o: new FormControl('dark1', []),
-  });
-
-  isShowPalette07q = true; // 07q
-  public isDisabled07q = false;
-  public formGroup07q: FormGroup = new FormGroup({
-    model07q: new FormControl('primary1', []),
-    model07r: new FormControl('secondary1', []),
-    model07s: new FormControl('success1', []),
-    model07t: new FormControl('default1', []),
-    model07u: new FormControl('pink1', []),
-  });
 
   isShowConfig08a = true;
   public fruits08a: string[] = ['kiwi', 'orange', 'lemon'];
