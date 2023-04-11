@@ -1,13 +1,13 @@
 /*# sourceURL=gln-radio-button.component.scss */
 
 gln-radio-button {
-  --glnrd--default-h: var(--glncl-default-h, var(--gln-default-h));
-  --glnrd--default-s: var(--glncl-default-s, var(--gln-default-s));
-  --glnrd--default-l: var(--glncl-default-l, var(--gln-default-l));
+  --glnrb--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnrb--default-s: var(--glncl-default-s, var(--gln-default-s));
+  --glnrb--default-l: var(--glncl-default-l, var(--gln-default-l));
 
-  --glnrd--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
-  --glnrd--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
-  --glnrd--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
+  --glnrb--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
+  --glnrb--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
+  --glnrb--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
 
   align-items: center;
   display: inline-flex;
@@ -15,35 +15,35 @@ gln-radio-button {
   outline: 0;
   user-select: none;
 
-  --glnrd---def-chk-cl: hsl(var(--glnrd--primary-h), var(--glnrd--primary-s), var(--glnrd--primary-l));
-  --glnrd---def-chk-hov: hsla(var(--glnrd--primary-h), var(--glnrd--primary-s), 75%, 20%);
-  --glnrd---def-chk-rip: hsla(var(--glnrd--primary-h), var(--glnrd--primary-s), 75%, 30%);
-  --glnrd---def-lbl: hsl(var(--glnrd--default-h), var(--glnrd--default-s), var(--glnrd--default-l));
+  --glnrb---def-chk-cl: hsl(var(--glnrb--primary-h), var(--glnrb--primary-s), var(--glnrb--primary-l));
+  --glnrb---def-chk-hov: hsla(var(--glnrb--primary-h), var(--glnrb--primary-s), 75%, 20%);
+  --glnrb---def-chk-rip: hsla(var(--glnrb--primary-h), var(--glnrb--primary-s), 75%, 30%);
+  --glnrb---def-lbl: hsl(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l));
   
-  --glnrd---dis-cl: hsla(var(--glnrd--default-h), var(--glnrd--default-s), var(--glnrd--default-l), 0.3);
-  --glnrd---dis-lbl: hsla(var(--glnrd--default-h), var(--glnrd--default-s), var(--glnrd--default-l), 0.5);
+  --glnrb---dis-cl: hsla(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l), 0.3);
+  --glnrb---dis-lbl: hsla(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l), 0.5);
 
   &:not([dis]) {
     &:not([che]) {
-      --glnrd--cl-svg   : var(--glnrd-def-cl-svg, hsla(var(--glnrd--default-h), var(--glnrd--default-s), var(--glnrd--default-l), 0.6));
-      --glnrd--bg-hov   : var(--glnrd-def-bg-hov, hsla(var(--glnrd--default-h), var(--glnrd--default-s), 70%, 20%));
-      --glntr-ripple-cl : var(--glnrd-def-rip, hsla(var(--glnrd--default-h), var(--glnrd--default-s), 70%, 30%));
+      --glnrb--cl-svg   : var(--glnrb-def-cl-svg, hsla(var(--glnrb--default-h), var(--glnrb--default-s), var(--glnrb--default-l), 0.6));
+      --glnrb--bg-hov   : var(--glnrb-def-bg-hov, hsla(var(--glnrb--default-h), var(--glnrb--default-s), 70%, 20%));
+      --glntr-ripple-cl : var(--glnrb-def-rip, hsla(var(--glnrb--default-h), var(--glnrb--default-s), 70%, 30%));
     }
     &[che] {
-      --glnrd--cl-svg   : var(--glnrd-def-chk-cl-svg, var(--glnrd---def-chk-cl));
-      --glnrd--bg-hov   : var(--glnrd-def-chk-bg-hov, var(--glnrd---def-chk-hov));
-      --glntr-ripple-cl : var(--glnrd-def-chk-rip, var(--glnrd---def-chk-rip));
+      --glnrb--cl-svg   : var(--glnrb-def-chk-cl-svg, var(--glnrb---def-chk-cl));
+      --glnrb--bg-hov   : var(--glnrb-def-chk-bg-hov, var(--glnrb---def-chk-hov));
+      --glntr-ripple-cl : var(--glnrb-def-chk-rip, var(--glnrb---def-chk-rip));
     }
-    --glnrd--lbl   : var(--glnrd-def-lbl, var(--glnrd---def-lbl));
+    --glnrb--lbl   : var(--glnrb-def-lbl, var(--glnrb---def-lbl));
   }
   &[dis] {
     &:not([che]) {
-      --glnrd--cl-svg   : var(--glnrd-dis-cl-svg, var(--glnrd---dis-cl));
+      --glnrb--cl-svg   : var(--glnrb-dis-cl-svg, var(--glnrb---dis-cl));
     }
     &[che] {
-      --glnrd--cl-svg   : var(--glnrd-dis-chk-cl-svg, var(--glnrd---dis-cl));
+      --glnrb--cl-svg   : var(--glnrb-dis-chk-cl-svg, var(--glnrb---dis-cl));
     }
-    --glnrd--lbl   : var(--glnrd-dis-lbl, var(--glnrd---dis-lbl));
+    --glnrb--lbl   : var(--glnrb-dis-lbl, var(--glnrb---dis-lbl));
   }
 
   &:not([dis]):not([rea]) label {
@@ -55,8 +55,8 @@ gln-radio-button {
   }
 
   &:not([hdAnmInit]):not([noAni]) {
-    --glnrd--trn-dur-200: 200ms; // transition-duration
-    --glnrd--trn-dur-150: 150ms; // transition-duration
+    --glnrb--trn-dur-200: 200ms; // transition-duration
+    --glnrb--trn-dur-150: 150ms; // transition-duration
   }
 
   [glnrb-container] {
@@ -87,12 +87,12 @@ gln-radio-button {
     border: 0;
     border-radius: 50%;
     box-sizing: border-box;
-    color: var(--glnrd--cl-svg); // rgba(0, 0, 0, 0.6);
+    color: var(--glnrb--cl-svg); // rgba(0, 0, 0, 0.6);
     display: inline-flex;
     justify-content: center;
     margin: 0;
     outline: 0;
-    padding: var(--glnrd--icon-pd, 0.625em);
+    padding: var(--glnrb-icon-pd,var(--glnrb--icon-pd, 0.625em));
     position: relative;
     text-decoration: none;
     user-select: none;
@@ -100,7 +100,7 @@ gln-radio-button {
    -webkit-tap-highlight-color: transparent;
   }
   &:not([dis]):not([noHov]) [glnrb-icon-block]:hover {
-    background-color: var(--glnrd--bg-hov);
+    background-color: var(--glnrb--bg-hov);
   }
 
   [glnrb-input] {
@@ -118,17 +118,17 @@ gln-radio-button {
 
   [glnrb-foc-vis] {
     border-radius: 50%;
+    display: none;
     inset: 0;
-    opacity: 0;
     position: absolute;
     transform: scale(1);
   }
   &:not([dis]) [glnrb-input] {
     &:focus-visible ~ [glnrb-foc-vis]{
-      background-color: var(--glnrd--bg-hov);
-      opacity: 1;
-      animation: kf-trs-move 4s linear infinite;
-      @keyframes kf-trs-move {
+      background-color: var(--glnrb--bg-hov);
+      display: block;
+      animation: kf-trs-foc-vis 4s linear infinite;
+      @keyframes kf-trs-foc-vis {
         0% {
           transform: scale(1);
         } 50% {
@@ -149,11 +149,11 @@ gln-radio-button {
     display: inline-block;
     fill: currentColor;
     flex-shrink: 0;
-    height: var(--glnrd--icon-sz, 1em);
+    height: var(--glnrb-icon-sz, var(--glnrb--icon-sz, 1em));
     user-select: none;
-    width: var(--glnrd--icon-sz, 1em);
+    width: var(--glnrb-icon-sz, var(--glnrb--icon-sz, 1em));
     &[envelope] {
-      transition: fill var(--glnrd--trn-dur-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      transition: fill var(--glnrb--trn-dur-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     }
     &[circle] {
       left: 0px;
@@ -163,15 +163,15 @@ gln-radio-button {
   
   &:not([che]) [glnrb-icon][circle] {
     transform: scale(0);
-    transition: transform var(--glnrd--trn-dur-150, 0ms) cubic-bezier(0.4, 0, 1, 1) 0ms;
+    transition: transform var(--glnrb--trn-dur-150, 0ms) cubic-bezier(0.4, 0, 1, 1) 0ms;
   }
   &[che] [glnrb-icon][circle] {
     transform: scale(1);
-    transition: transform var(--glnrd--trn-dur-150, 0ms) cubic-bezier(0, 0, 0.2, 1) 0ms;
+    transition: transform var(--glnrb--trn-dur-150, 0ms) cubic-bezier(0, 0, 0.2, 1) 0ms;
   }
 
   [glnrb-content] {
-    font-size: var(--glnrd-label-fn-sz, var(--glnrd--label-fn-sz));
-    color: var(--glnrd--lbl);
+    font-size: var(--glnrb-label-fn-sz, var(--glnrb--label-fn-sz));
+    color: var(--glnrb--lbl);
   }
 }

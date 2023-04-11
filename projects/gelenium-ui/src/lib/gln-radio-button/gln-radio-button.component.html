@@ -12,7 +12,7 @@
       [attr.id]="id + '_input'"
       [attr.disabled]="isDisabledVal ? '': null"
       [attr.readonly]="isReadOnlyVal ? '': null"
-      [attr.tabindex]="!isDisabledVal && isCheckedVal ? tabIndex : '-1'"
+      [attr.tabindex]="isDisabledVal || isCheckedVal === false ? '-1' : tabIndex"
       aria-label="Radio demo"
       (change)="$event.stopPropagation();"
       (focus)="doFocus()"

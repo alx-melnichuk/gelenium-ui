@@ -44,7 +44,6 @@ import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
 
-import { GlnRadioButtonChange } from './gln-radio-button-change.interface';
 import { GlnRadioButtonCheckedUtil } from './gln-radio-button-checked.util';
 import { GlnRadioButtonConfig } from './gln-radio-button-config.interface';
 import { GlnRadioButton, GLN_RADIO_BUTTON } from './gln-radio-button.interface';
@@ -109,7 +108,7 @@ export class GlnRadioButtonComponent
   @Output()
   readonly blured: EventEmitter<void> = new EventEmitter();
   @Output()
-  readonly change: EventEmitter<GlnRadioButtonChange> = new EventEmitter();
+  readonly change: EventEmitter<{ value: string | null | undefined; source: GlnRadioButton | null }> = new EventEmitter();
 
   @ViewChild(GlnTouchRippleComponent, { static: false })
   public touchRipple: GlnTouchRippleComponent | null = null;
@@ -275,7 +274,6 @@ export class GlnRadioButtonComponent
 
   public writeValue(value: any): void {
     const newChecked: boolean | null = value != null ? value == this.value : null;
-    // console.log(`writeValue   (id=${this.id}; "${this.name}" newChecked=${newChecked}; value=${value});`); // #
     if (newChecked) {
       this.setChecked();
     } else {
@@ -340,18 +338,26 @@ export class GlnRadioButtonComponent
 
   // ** interface GlnRadioButton - start **
 
-  public getChecked(): boolean {
-    return !!this.isCheckedVal;
+  public getChecked(): boolean | null {
+    return this.isCheckedVal;
   }
 
   public setChecked(): void {
-    // console.log(`setChecked   (id=${this.id}; "${this.name}" newValue=true; isCheckedVal=${this.isCheckedVal}`); // # Mui-focusVisible
     if (this.isCheckedVal !== true) {
       // Find the previous selected item in the list of selected items.
       const previous: GlnRadioButton | undefined = GlnRadioButtonCheckedUtil.findByName(this.name || '');
       // In the previously selected item, set as "unchecked".
-      previous?.setUnchecked(false);
-
+      if (!!previous) {
+        previous.setUnchecked(false);
+      } else if (!!this.group && !previous) {
+        const radios: GlnRadioButton[] = this.group.getRadioList();
+        for (let idx = 0; idx < radios.length; idx++) {
+          const radio: GlnRadioButton = radios[idx];
+          if (this != radio && radio.getChecked() == null) {
+            radio.setUnchecked(false);
+          }
+        }
+      }
       this.isCheckedVal = true;
       this.settingChecked(this.isCheckedVal, this.renderer, this.hostRef);
       this.formControl.setValue(this.isCheckedVal);
@@ -366,8 +372,6 @@ export class GlnRadioButtonComponent
   }
 
   public setUnchecked(newChecked: boolean | null): void {
-    // const newCheckedStr = newChecked == null ? 'null' : newChecked;
-    // console.log(`setUnchecked (id=${this.id}; "${this.name}" newValue=${newCheckedStr}; isCheckedVal=${this.isCheckedVal}`); // #
     if (this.isCheckedVal !== newChecked) {
       const oldIsCheckedVal = this.isCheckedVal;
 
@@ -386,18 +390,15 @@ export class GlnRadioButtonComponent
   }
 
   public focus(): void {
-    console.log(`focus();`); // #
     if (!this.isDisabledVal && isPlatformBrowser(this.platformId) && !!this.inputElementRef) {
       this.inputElementRef.nativeElement.focus();
     }
   }
 
   public setProperties(properties: Record<string, unknown>): void {
-    console.log(`(id=${this.id}).setProperties(${JSON.stringify(properties)});`); // #
     let isMarkForCheck: boolean = false;
     const keys: string[] = Object.keys(properties);
     for (let idx = 0; idx < keys.length; idx++) {
-      const key = keys[idx];
       if ('isDisabled' === keys[idx]) {
         this.setDisabledState(properties['isDisabled'] as boolean);
         isMarkForCheck = true;
@@ -442,7 +443,6 @@ export class GlnRadioButtonComponent
     event?.stopPropagation();
     if (!this.isDisabledVal && !this.isReadOnlyVal) {
       if (!this.isCheckedVal) {
-        // console.log(`doClickInput (id=${this.id}; "${this.name}" setChecked ();`); // #
         this.setChecked();
 
         this.onChange(this.value);
@@ -456,7 +456,6 @@ export class GlnRadioButtonComponent
 
   public doFocus(): void {
     if (!this.isDisabledVal) {
-      console.log(`doFocus()`); // #
       this.isFocused = true;
       this.settingFocus(this.isFocused, this.renderer, this.hostRef);
       this.group?.setFocus(true);
@@ -466,7 +465,6 @@ export class GlnRadioButtonComponent
 
   public doBlur(): void {
     if (!this.isDisabledVal) {
-      console.log(`doBlur()`); // #
       this.isFocused = false;
       this.settingFocus(this.isFocused, this.renderer, this.hostRef);
       this.group?.setFocus(false);
@@ -502,8 +500,8 @@ export class GlnRadioButtonComponent
       iconSz = Math.round(0.5714 * size);
       iconPd = Math.round(((size - iconSz) / 2) * 100) / 100;
     }
-    HtmlElemUtil.setProperty(elem, '--glnrd--icon-sz', iconSz?.toString().concat('px'));
-    HtmlElemUtil.setProperty(elem, '--glnrd--icon-pd', iconPd?.toString().concat('px'));
+    HtmlElemUtil.setProperty(elem, '--glnrb--icon-sz', iconSz?.toString().concat('px'));
+    HtmlElemUtil.setProperty(elem, '--glnrb--icon-pd', iconPd?.toString().concat('px'));
   }
   private settingByPosition(isAdd: boolean, positionStr: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     if (positionStr) {
