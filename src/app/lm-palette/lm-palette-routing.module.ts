@@ -11,6 +11,7 @@ const URL_PALETTE_CHECKBOX = RouterConfig.get('URL_PALETTE_CHECKBOX');
 const URL_PALETTE_FRAME = RouterConfig.get('URL_PALETTE_FRAME');
 const URL_PALETTE_INPUT = RouterConfig.get('URL_PALETTE_INPUT');
 const URL_PALETTE_PAGINATION = RouterConfig.get('URL_PALETTE_PAGINATION');
+const URL_PALETTE_RADIOBUTTON = RouterConfig.get('URL_PALETTE_RADIOBUTTON');
 const URL_PALETTE_SELECT = RouterConfig.get('URL_PALETTE_SELECT');
 const URL_PALETTE_TEXTAREA = RouterConfig.get('URL_PALETTE_TEXTAREA');
 
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: URL_PALETTE_PAGINATION,
         loadChildren: () => import('../lib-palette/pl-pagination/pl-pagination.module').then((m) => m.PlPaginationModule),
+      },
+      {
+        path: URL_PALETTE_RADIOBUTTON,
+        loadChildren: () => import('../lib-palette/pl-radio/pl-radio.module').then((m) => m.PlRadioModule),
       },
       {
         path: URL_PALETTE_SELECT,
