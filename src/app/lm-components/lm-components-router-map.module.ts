@@ -137,11 +137,11 @@ RouterConfig.add('URL_COMPONENTS_RADIOBUTTON', 'radio');
 const urlRadio = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_RADIOBUTTON');
 const siteUrlsRadio: SiteUrl[] = [
   { label: 'Basic', url: urlRadio, fragment: 'Basic' },
-  // { label: 'Attributes', url: urlRadio, fragment: 'Attributes' },
-  // { label: 'Size', url: urlRadio, fragment: 'Size' },
-  // { label: 'Palette', url: urlRadio, fragment: 'Palette' },
-  // { label: 'Config', url: urlRadio, fragment: 'Config' },
-  // { label: 'Api', url: urlRadio, fragment: 'Api' },
+  { label: 'Attributes', url: urlRadio, fragment: 'Attributes' },
+  { label: 'Size', url: urlRadio, fragment: 'Size' },
+  { label: 'Palette', url: urlRadio, fragment: 'Palette' },
+  { label: 'Config', url: urlRadio, fragment: 'Config' },
+  { label: 'Api', url: urlRadio, fragment: 'Api' },
 ];
 SiteMenuUtil.addItem('Components', 'Radio button', { label: 'Radio button', siteUrls: siteUrlsRadio });
 

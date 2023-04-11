@@ -17,7 +17,7 @@ const logLabel = 'ComponentsRadio';
 export class CmRadioComponent implements AfterViewInit {
   public showNum = '';
 
-  // public urlPlRadio = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_RADIO');
+  public urlPlRadio = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_RADIOBUTTON');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax
