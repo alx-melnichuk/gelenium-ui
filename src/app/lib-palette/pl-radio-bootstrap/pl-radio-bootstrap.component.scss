@@ -1,0 +1,45 @@
+/*# sourceURL=pl-radio-bootstrap.component.scss */
+
+app-pl-radio-bootstrap {
+  display: block;
+
+  .rbpl2-elem {
+    min-width: 17ch;
+  }
+  .rbpl2-bootstrap {
+    &.gln-disabled [glnrb-icon-block] {
+      opacity: .5;
+    }
+    --glnrb-def-cl-svg: rgba(0,0,0,.25);
+    --glnrb-dis-cl-svg: rgba(0,0,0,.25);
+
+    &.primary {
+      --glnrb-def-chk-cl-svg: #0d6efd;
+      --glnrb-dis-chk-cl-svg: #0d6efd;
+    }
+    &.secondary {
+      --glnrb-def-chk-cl-svg: #6c757d;
+      --glnrb-dis-chk-cl-svg: #6c757d;
+    }
+    &.success {
+      --glnrb-def-chk-cl-svg: #198754;
+      --glnrb-dis-chk-cl-svg: #198754;
+    }
+    &.danger {
+      --glnrb-def-chk-cl-svg: #dc3545;
+      --glnrb-dis-chk-cl-svg: #dc3545;
+    }
+    &.warning {
+      --glnrb-def-chk-cl-svg: #ffc107;
+      --glnrb-dis-chk-cl-svg: #ffc107;
+    }
+    &.info {
+      --glnrb-def-chk-cl-svg: #0dcaf0;
+      --glnrb-dis-chk-cl-svg: #0dcaf0;
+    }
+    &.dark {
+      --glnrb-def-chk-cl-svg: #212529;
+      --glnrb-dis-chk-cl-svg: #212529;
+    }
+  }
+}
