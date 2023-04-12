@@ -40,16 +40,15 @@ import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../direct
 import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { NumberUtil } from '../_utils/number.util';
 
 import { GlnCheckboxChange } from './gln-checkbox-change.interface';
 import { GlnCheckboxConfig } from './gln-checkbox-config.interface';
 
 const POSITION: { [key: string]: string } = { top: 'top', bottom: 'bottom', start: 'start', end: 'end' };
+const SIZE: { [key: string]: number } = { little: 30, short: 36, small: 42, middle: 48, wide: 54, large: 60, huge: 66 };
 
-const CSS_CLS_DISABLED = 'gln-disabled';
-const CSS_ATTR_DISABLED = 'dis';
 const CSS_ATTR_HIDE_ANIMATION_INIT = 'hdAnmInit';
-const CSS_PROP_LABEL_FONT_SIZE = '--glncb--label-fn-sz';
 
 let uniqueIdCounter = 0;
 
@@ -82,6 +81,8 @@ export class GlnCheckboxComponent
   @Input()
   public isIndeterm: string | boolean | null | undefined;
   @Input()
+  public isNoHover: string | boolean | null | undefined;
+  @Input()
   public isNoRipple: string | boolean | null | undefined;
   @Input()
   public isReadOnly: string | boolean | null | undefined;
@@ -90,8 +91,14 @@ export class GlnCheckboxComponent
   @Input()
   public position: string | null | undefined; // 'top' | 'bottom' | 'start' | 'end';
   @Input()
+  public size: number | string | null | undefined; // 'little','short','small','middle','wide','large','huge'
+  @Input()
   public tabIndex: number = 0;
 
+  @Output()
+  readonly focused: EventEmitter<void> = new EventEmitter();
+  @Output()
+  readonly blured: EventEmitter<void> = new EventEmitter();
   @Output()
   readonly change: EventEmitter<GlnCheckboxChange> = new EventEmitter();
   @Output()
@@ -104,15 +111,17 @@ export class GlnCheckboxComponent
 
   public currConfig: GlnCheckboxConfig;
   public formControl: FormControl = new FormControl({ value: undefined, disabled: false }, []);
-  public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
+  public formGroup: FormGroup = new FormGroup({ checkinfo: this.formControl });
   public isCheckedVal: boolean | null = null; // Binding attribute "isChecked".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isFocused = false;
   public isIndetermVal: boolean | null = null; // Binding attribute "isIndeterm".
+  public isNoHoverVal: boolean | null = null; // Binding attribute "isNoHover".
   public isNoRippleVal: boolean | null = null; // Binding attribute "isNoRipple".
   public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
   public isRequiredVal: boolean | null = null; // Binding attribute "isRequired".
   public positionVal: string | null = null; // Binding attribute "position".
+  public sizeVal: number | null = null; // Binding attribute "size".
 
   private isRemoveAttrHideAnimation: boolean = false;
 
@@ -137,12 +146,16 @@ export class GlnCheckboxComponent
     if (changes['isDisabled']) {
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
-    if (changes['isIndeterm'] || (changes['config'] && this.isIndeterm == null && this.currConfig.isIndeterm != null)) {
-      this.isIndetermVal = !!(BooleanUtil.init(this.isIndeterm) ?? (this.currConfig.isIndeterm || null));
+    if (changes['isIndeterm']) {
+      this.isIndetermVal = !!BooleanUtil.init(this.isIndeterm);
       this.settingIndeterm(this.isIndetermVal, this.renderer, this.hostRef);
       if (!changes['isIndeterm'].isFirstChange()) {
         this.indetermChange.emit(this.isIndetermVal);
       }
+    }
+    if (changes['isNoHover'] || (changes['config'] && this.isNoHover == null && this.currConfig.isNoHover != null)) {
+      this.isNoHoverVal = !!(BooleanUtil.init(this.isNoHover) ?? this.currConfig.isNoHover);
+      this.settingNoHover(this.isNoHoverVal, this.renderer, this.hostRef);
     }
     if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
       this.isNoRippleVal = !!(BooleanUtil.init(this.isNoRipple) ?? (this.currConfig.isNoRipple || null));
@@ -153,16 +166,19 @@ export class GlnCheckboxComponent
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
     if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
-      this.isRequiredVal = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
+      this.isRequiredVal = !!(BooleanUtil.init(this.isRequired) ?? (this.currConfig.isRequired || null));
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       // Remove class by old position value.
       this.settingByPosition(false, this.positionVal, this.renderer, this.hostRef);
-      const positionStr: string = (this.position || this.currConfig.position || '').toString();
-      this.positionVal = POSITION[positionStr] || POSITION['end'];
+      this.positionVal = this.converPosition((this.position || this.currConfig.position || '').toString());
       // Add class by new position value.
       this.settingByPosition(true, this.positionVal, this.renderer, this.hostRef);
+    }
+    if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
+      this.sizeVal = this.converSize((this.size || this.currConfig.size || '').toString());
+      this.setCssSize(this.sizeVal, this.hostRef);
     }
 
     if (changes['isRequired']) {
@@ -173,18 +189,15 @@ export class GlnCheckboxComponent
   public ngOnInit(): void {
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
-    // Defining internal CSS properties.
-    this.prepareCssProperties(this.hostRef);
 
-    const isChecked: boolean | null = BooleanUtil.init(this.isChecked) ?? (this.currConfig.isChecked || null);
+    const isChecked: boolean | null = BooleanUtil.init(this.isChecked);
     if (isChecked && !this.formControl.value) {
       this.formControl.setValue(true, { emitEvent: false });
       this.settingChecked((this.isCheckedVal = true), this.renderer, this.hostRef);
     }
-
-    if (this.isIndetermVal == null) {
-      this.isIndetermVal = !!(this.currConfig.isIndeterm || null);
-      this.settingIndeterm(this.isIndetermVal, this.renderer, this.hostRef);
+    if (this.isNoHoverVal == null) {
+      this.isNoHoverVal = !!this.currConfig.isNoHover;
+      this.settingNoHover(this.isNoHoverVal, this.renderer, this.hostRef);
     }
     if (this.isNoRippleVal == null) {
       this.isNoRippleVal = !!(this.currConfig.isNoRipple || null);
@@ -199,19 +212,29 @@ export class GlnCheckboxComponent
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
     if (this.positionVal == null) {
-      const positionStr: string = (this.position || this.currConfig.position || '').toString();
-      const positionVal: string = POSITION[positionStr] || POSITION['end'];
+      this.positionVal = this.converPosition((this.currConfig.position || '').toString());
       // Add class by new position value.
-      this.settingByPosition(true, (this.positionVal = positionVal), this.renderer, this.hostRef);
+      this.settingByPosition(true, this.positionVal, this.renderer, this.hostRef);
     }
+    if (this.sizeVal == null) {
+      this.sizeVal = this.converSize((this.currConfig.size || '').toString());
+      this.setCssSize(this.sizeVal, this.hostRef);
+    }
+
+    if (this.isRequiredVal) {
+      this.prepareFormGroup(this.isRequiredVal);
+    }
+
+    // Add an attribute that disables animation on initialization.
+    this.renderer.setAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT, '');
   }
 
   public ngAfterContentInit(): void {
     // When using [(ngModel)] parentFormGroup will be null.
     this.isRemoveAttrHideAnimation = !this.parentFormGroup;
-    if (this.isRemoveAttrHideAnimation) {
-      // Add an attribute that disables animation on initialization.
-      this.renderer.setAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT, '');
+    if (!this.isRemoveAttrHideAnimation) {
+      // Remove an attribute that disables animation on initialization.
+      this.renderer.removeAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT);
     }
   }
 
@@ -236,6 +259,7 @@ export class GlnCheckboxComponent
       });
     }
   }
+
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
   public registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -248,8 +272,8 @@ export class GlnCheckboxComponent
   public setDisabledState(disabled: boolean): void {
     if (this.isDisabledVal !== disabled) {
       this.isDisabledVal = disabled;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, CSS_CLS_DISABLED, disabled);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_DISABLED, disabled ? '' : null);
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', disabled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', disabled ? '' : null);
       if (disabled && !this.formControl.disabled) {
         this.formControl.disable();
       } else if (!disabled && this.formControl.disabled) {
@@ -318,6 +342,12 @@ export class GlnCheckboxComponent
     }
   }
 
+  public doClickByInput(event: Event | null): void {
+    // We stop propagation so that the change event does not pop up and pass its input object.
+    event?.stopPropagation();
+    this.toggle();
+  }
+
   public focus(): void {
     if (!this.isDisabledVal && isPlatformBrowser(this.platformId) && !!this.inputElementRef) {
       this.inputElementRef.nativeElement.focus();
@@ -341,6 +371,7 @@ export class GlnCheckboxComponent
   protected doFocus(): void {
     if (!this.isDisabledVal) {
       this.settingFocus((this.isFocused = true), this.renderer, this.hostRef);
+      this.focused.emit();
     }
   }
 
@@ -348,8 +379,11 @@ export class GlnCheckboxComponent
     if (!this.isDisabledVal) {
       this.settingFocus((this.isFocused = false), this.renderer, this.hostRef);
       this.onTouched();
+      this.blured.emit();
     }
   }
+
+  // ** Private methods **
 
   // ** Private methods **
 
@@ -363,20 +397,22 @@ export class GlnCheckboxComponent
     this.formControl.updateValueAndValidity();
   }
 
-  private prepareCssProperties(hostRef: ElementRef<HTMLElement>): void {
-    // Determine the font size of the parent element.
-    if (hostRef && hostRef.nativeElement) {
-      const hostElement: HTMLElement = hostRef.nativeElement;
-
-      const parentElem: HTMLElement | null = hostRef && hostRef.nativeElement ? hostRef.nativeElement.parentElement : null;
-      const parentRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(parentElem);
-      const parentFontSize: number = HtmlElemUtil.propertyAsNumber(parentRef, 'font-size');
-      if (parentFontSize > 0) {
-        hostElement.style.setProperty(CSS_PROP_LABEL_FONT_SIZE, parentFontSize.toString().concat('px'));
-      }
-    }
+  private converSize(sizeStr: string): number {
+    return NumberUtil.converInt(sizeStr, SIZE[sizeStr] || SIZE['small']);
   }
-
+  private converPosition(positionStr: string): string {
+    return POSITION[positionStr] || POSITION['end'];
+  }
+  private setCssSize(size: number, elem: ElementRef<HTMLElement>): void {
+    let iconSz: number | null = null;
+    let iconPd: number | null = null;
+    if (size > 0) {
+      iconSz = Math.round(0.5714 * size);
+      iconPd = Math.round(((size - iconSz) / 2) * 100) / 100;
+    }
+    HtmlElemUtil.setProperty(elem, '--glncb--icon-sz', iconSz?.toString().concat('px'));
+    HtmlElemUtil.setProperty(elem, '--glncb--icon-pd', iconPd?.toString().concat('px'));
+  }
   private settingByPosition(isAdd: boolean, positionStr: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     if (positionStr) {
       HtmlElemUtil.setClass(renderer, elem, 'glnch-' + positionStr, isAdd);
@@ -384,17 +420,21 @@ export class GlnCheckboxComponent
     }
   }
 
-  private settingChecked(isChecked: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setClass(renderer, elem, 'gln-checked', !!isChecked);
-    HtmlElemUtil.setAttr(renderer, elem, 'chk', isChecked ? '' : null);
+  private settingChecked(checkedVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-checked', !!checkedVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'che', !!checkedVal ? '' : null);
   }
-  private settingFocus(focus: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+  private settingFocus(focus: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-focused', focus || false);
     HtmlElemUtil.setAttr(renderer, elem, 'foc', focus ? '' : null);
   }
-  private settingIndeterm(isIndeterm: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setClass(renderer, elem, 'gln-indeterm', !!isIndeterm);
-    HtmlElemUtil.setAttr(renderer, elem, 'ind', isIndeterm ? '' : null);
+  private settingIndeterm(isIndetermVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-indeterm', !!isIndetermVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'ind', isIndetermVal ? '' : null);
+  }
+  private settingNoHover(isNoHoverVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-no-hover', !!isNoHoverVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'noHov', isNoHoverVal ? '' : null);
   }
   private settingNoRipple(isNoRippleVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-no-ripple', !!isNoRippleVal);
@@ -404,8 +444,8 @@ export class GlnCheckboxComponent
     HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!isReadOnlyVal);
     HtmlElemUtil.setAttr(renderer, elem, 'rea', isReadOnlyVal ? '' : null);
   }
-  private settingRequired(required: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setClass(renderer, elem, 'gln-required', !!required);
-    HtmlElemUtil.setAttr(renderer, elem, 'req', required ? '' : null);
+  private settingRequired(isRequiredVal: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-required', !!isRequiredVal);
+    HtmlElemUtil.setAttr(renderer, elem, 'req', isRequiredVal ? '' : null);
   }
 }
