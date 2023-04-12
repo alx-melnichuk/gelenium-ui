@@ -31,8 +31,7 @@
         <em>Attributes: id, isChecked. Value={{ data02a }}</em>
       </small>
     </div>
-    <gln-checkbox class="cbat1-fn-sz"
-      id="unique_id_checkbox02a"
+    <gln-checkbox id="unique_id_checkbox02a"
       (change)="data02a=$event.checked"
       [isChecked]="data02a">Checked
     </gln-checkbox>
@@ -44,8 +43,7 @@
         <em>Attributes: [(ngModel)]. Value={{ data02b }}</em>
       </small>
     </div>
-    <gln-checkbox class="cbat1-fn-sz"
-      [(ngModel)]="data02b">ngModel
+    <gln-checkbox [(ngModel)]="data02b">ngModel
     </gln-checkbox>
   </div>
 
@@ -61,8 +59,7 @@
       <div>
         <small><em>Attributes: isReadOnly.</em></small>
       </div>
-      <gln-checkbox class="cbat1-fn-sz"
-        formControlName="model02a"
+      <gln-checkbox formControlName="model02a"
         isReadOnly>Read Only
       </gln-checkbox>
     </div>
@@ -71,8 +68,7 @@
       <div>
         <small><em>Attributes: isDisabled.</em></small>
       </div>
-      <gln-checkbox class="cbat1-fn-sz"
-        formControlName="model02b"
+      <gln-checkbox formControlName="model02b"
         isDisabled>Disabled
       </gln-checkbox>
     </div>
@@ -81,9 +77,8 @@
       <div>
         <small><em>Indeterminate.</em></small>
       </div>
-      <gln-checkbox class="cbat1-fn-sz"
-        formControlName="model02c"
-        isIndeterm>
+      <gln-checkbox formControlName="model02c"
+        isIndeterm>Indeterminate
       </gln-checkbox>
     </div>
 
@@ -108,8 +103,7 @@
         &lt;em&gt;Attributes: id, isChecked. Value=<b>&#123;</b>&#123; data02a &#125;&#125;&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
-    &lt;gln-checkbox class="cbat1-fn-sz"
-      id="unique_id_checkbox02a"
+    &lt;gln-checkbox id="unique_id_checkbox02a"
       (change)="data02a=$event.checked"
       [isChecked]="data02a"&gt;Checked
     &lt;/gln-checkbox&gt;
@@ -121,8 +115,7 @@
         &lt;em&gt;Attributes: [(ngModel)]. Value=<b>&#123;</b>&#123; data02b &#125;&#125;&lt;/em&gt;
       &lt;/small&gt;
     &lt;/div&gt;
-    &lt;gln-checkbox class="cbat1-fn-sz"
-      [(ngModel)]="data02b"&gt;ngModel
+    &lt;gln-checkbox [(ngModel)]="data02b"&gt;ngModel
     &lt;/gln-checkbox&gt;
   &lt;/div&gt;
 
@@ -138,8 +131,7 @@
       &lt;div&gt;
         &lt;small&gt;&lt;em&gt;Attributes: isReadOnly.&lt;/em&gt;&lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-checkbox class="cbat1-fn-sz"
-        formControlName="model02a"
+      &lt;gln-checkbox formControlName="model02a"
         isReadOnly&gt;Read Only
       &lt;/gln-checkbox&gt;
     &lt;/div&gt;
@@ -148,8 +140,7 @@
       &lt;div&gt;
         &lt;small&gt;&lt;em&gt;Attributes: isDisabled.&lt;/em&gt;&lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-checkbox class="cbat1-fn-sz"
-        formControlName="model02b"
+      &lt;gln-checkbox formControlName="model02b"
         isDisabled&gt;Disabled
       &lt;/gln-checkbox&gt;
     &lt;/div&gt;
@@ -158,9 +149,8 @@
       &lt;div&gt;
         &lt;small&gt;&lt;em&gt;Indeterminate.&lt;/em&gt;&lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-checkbox class="cbat1-fn-sz"
-        formControlName="model02c"
-        isIndeterm&gt;
+      &lt;gln-checkbox formControlName="model02c"
+        isIndeterm&gt;Indeterminate
       &lt;/gln-checkbox&gt;
     &lt;/div&gt;
 
@@ -206,9 +196,6 @@ app-checkbox &#123;
   .cbat1-elem &#123;
     min-width: 19ch;
   &#125;
-  .cbat1-fn-sz &#123;
-    font-size: 12px;
-  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
@@ -226,8 +213,8 @@ app-checkbox &#123;
     <a [href]="urlCmCheckbox + '#attributes-supported02'">#</a>
   </h4>
   <ul>
+    <li>"isNoHover" - disables the display of additional background on hover (isNoHover);</li>
     <li>"isNoRipple" - disables the execution of the ripple effect (isNoRipple);</li>
-    <li>"noHov" - disables the display of additional background on hover (noHov);</li>
     <li>"isRequired" - a sign that the field is required (isRequired);</li>
   </ul>
 </section>
@@ -241,21 +228,19 @@ app-checkbox &#123;
 
     <div class="app-elem cbat2-elem">
       <div>
-        <small><em>Attributes: isNoRipple</em></small>
+        <small><em>Attributes: isNoHover.</em></small>
       </div>
-      <gln-checkbox class="cbat2-fn-sz"
-        formControlName="model02d"
-        isNoRipple>No Ripple
+      <gln-checkbox formControlName="model02d"
+        isNoHover>No hover
       </gln-checkbox>
     </div>
 
     <div class="app-elem cbat2-elem">
       <div>
-        <small><em>Attributes: noHov</em></small>
+        <small><em>Attributes: isNoRipple.</em></small>
       </div>
-      <gln-checkbox class="cbat2-fn-sz"
-        formControlName="model02e"
-        noHov>No hover
+      <gln-checkbox formControlName="model02e"
+        isNoRipple>No ripple
       </gln-checkbox>
     </div>
 
@@ -267,8 +252,7 @@ app-checkbox &#123;
           </em>
         </small>
       </div>
-      <gln-checkbox class="cbat2-fn-sz"
-        formControlName="model02f"
+      <gln-checkbox formControlName="model02f"
         isRequired>
         <span [ngClass]="{ 'cbat2-err': control02d.model02f.errors }">
           isRequired errors={{ control02d.model02f.errors | json }}
@@ -297,21 +281,19 @@ app-checkbox &#123;
 
     &lt;div class="app-elem cbat2-elem"&gt;
       &lt;div&gt;
-        &lt;small&gt;&lt;em&gt;Attributes: isNoRipple&lt;/em&gt;&lt;/small&gt;
+        &lt;small&gt;&lt;em&gt;Attributes: isNoHover.&lt;/em&gt;&lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-checkbox class="cbat2-fn-sz"
-        formControlName="model02d"
-        isNoRipple&gt;No Ripple
+      &lt;gln-checkbox formControlName="model02d"
+        isNoHover&gt;No hover and ripple
       &lt;/gln-checkbox&gt;
     &lt;/div&gt;
 
     &lt;div class="app-elem cbat2-elem"&gt;
       &lt;div&gt;
-        &lt;small&gt;&lt;em&gt;Attributes: noHov&lt;/em&gt;&lt;/small&gt;
+        &lt;small&gt;&lt;em&gt;Attributes: isNoRipple.&lt;/em&gt;&lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-checkbox class="cbat2-fn-sz"
-        formControlName="model02e"
-        noHov&gt;No hover
+      &lt;gln-checkbox formControlName="model02e"
+        isNoRipple&gt;No animation and ripple
       &lt;/gln-checkbox&gt;
     &lt;/div&gt;
 
@@ -323,8 +305,7 @@ app-checkbox &#123;
           &lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-checkbox class="cbat2-fn-sz"
-        formControlName="model02f"
+      &lt;gln-checkbox formControlName="model02f"
         isRequired&gt;
         &lt;span [ngClass]="&#123; 'cbat2-err': control02d.model02f.errors &#125;"&gt;
           isRequired errors=<b>&#123;</b>&#123; control02d.model02f.errors | json &#125;&#125;
@@ -373,9 +354,6 @@ app-checkbox &#123;
   .cbat2-elem &#123;
     min-width: 19ch;
   &#125;
-  .cbat2-fn-sz &#123;
-    font-size: 12px;
-  &#125;
   .cbat2-err &#123;
     color: red;
   &#125;
@@ -414,8 +392,7 @@ app-checkbox &#123;
           <em>Attributes: position - top.</em>
         </small>
       </div>
-      <gln-checkbox class="cbat3-fn-sz"
-        formControlName="model02h"
+      <gln-checkbox formControlName="model02h"
         position="top">Position - top
       </gln-checkbox>
     </div>
@@ -426,8 +403,7 @@ app-checkbox &#123;
           <em>Attributes: position - bottom.</em>
         </small>
       </div>
-      <gln-checkbox class="cbat3-fn-sz"
-        formControlName="model02i"
+      <gln-checkbox formControlName="model02i"
         position="bottom">Position - bottom
       </gln-checkbox>
     </div>
@@ -438,8 +414,7 @@ app-checkbox &#123;
           <em>Attributes: position - start.</em>
         </small>
       </div>
-      <gln-checkbox class="cbat3-fn-sz"
-        formControlName="model02j"
+      <gln-checkbox formControlName="model02j"
         position="start">Position - start
       </gln-checkbox>
     </div>
@@ -450,8 +425,7 @@ app-checkbox &#123;
           <em>Attributes: position - end.</em>
         </small>
       </div>
-      <gln-checkbox class="cbat3-fn-sz"
-        formControlName="model02k"
+      <gln-checkbox formControlName="model02k"
         position="end">Position - end
       </gln-checkbox>
     </div>
@@ -481,8 +455,7 @@ app-checkbox &#123;
           &lt;em&gt;Attributes: position - top.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-checkbox class="cbat3-fn-sz"
-        formControlName="model02h"
+      &lt;gln-checkbox formControlName="model02h"
         position="top"&gt;Position - top
       &lt;/gln-checkbox&gt;
     &lt;/div&gt;
@@ -493,8 +466,7 @@ app-checkbox &#123;
           &lt;em&gt;Attributes: position - bottom.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-checkbox class="cbat3-fn-sz"
-        formControlName="model02i"
+      &lt;gln-checkbox formControlName="model02i"
         position="bottom"&gt;Position - bottom
       &lt;/gln-checkbox&gt;
     &lt;/div&gt;
@@ -505,8 +477,7 @@ app-checkbox &#123;
           &lt;em&gt;Attributes: position - start.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-checkbox class="cbat3-fn-sz"
-        formControlName="model02j"
+      &lt;gln-checkbox formControlName="model02j"
         position="start"&gt;Position - start
       &lt;/gln-checkbox&gt;
     &lt;/div&gt;
@@ -517,8 +488,7 @@ app-checkbox &#123;
           &lt;em&gt;Attributes: position - end.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-checkbox class="cbat3-fn-sz"
-        formControlName="model02k"
+      &lt;gln-checkbox formControlName="model02k"
         position="end"&gt;Position - end
       &lt;/gln-checkbox&gt;
     &lt;/div&gt;
@@ -563,9 +533,6 @@ app-checkbox &#123;
   &#125;
   .cbat3-elem &#123;
     min-width: 19ch;
-  &#125;
-  .cbat3-fn-sz &#123;
-    font-size: 12px;
   &#125;
 &#125;</pre></code>
         </mat-tab>
