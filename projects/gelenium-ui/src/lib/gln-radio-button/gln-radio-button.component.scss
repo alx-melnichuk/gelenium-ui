@@ -61,7 +61,6 @@ gln-radio-button {
 
   [glnrb-container] {
     align-items: center;
-    // cursor: inherit; // cursor: pointer;
     display: inline-flex;
     flex-shrink: 0;
     vertical-align: middle;
@@ -171,7 +170,6 @@ gln-radio-button {
   }
 
   [glnrb-content] {
-    font-size: var(--glnrb-label-fn-sz, var(--glnrb--label-fn-sz));
     color: var(--glnrb--lbl);
   }
 }

@@ -195,6 +195,7 @@ export class GlnRadioButtonComponent
   }
 
   public ngOnInit(): void {
+    // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
     if (this.isDisabledVal === null && !!this.group?.disabled) {
@@ -468,9 +469,7 @@ export class GlnRadioButtonComponent
       this.isFocused = false;
       this.settingFocus(this.isFocused, this.renderer, this.hostRef);
       this.group?.setFocus(false);
-      if (!this.formControl.touched) {
-        this.onTouched();
-      }
+      this.onTouched();
       this.blured.emit();
     }
   }
