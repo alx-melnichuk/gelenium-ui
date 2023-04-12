@@ -74,11 +74,7 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, OnDestroy, Gln
   public readOnly: boolean | null | undefined; // interface GlnRadioButtonGroup // Binding attribute "isReadOnly".
   public selectedRadio: GlnRadioButton | null = null;
 
-  constructor(
-    private renderer: Renderer2,
-    public hostRef: ElementRef<HTMLElement>,
-    private changeDetectorRef: ChangeDetectorRef // private ngZone: NgZone
-  ) {
+  constructor(private renderer: Renderer2, public hostRef: ElementRef<HTMLElement>, private changeDetectorRef: ChangeDetectorRef) {
     this.renderer.addClass(this.hostRef.nativeElement, 'gln-radio-group');
     this.renderer.setAttribute(this.hostRef.nativeElement, 'role', 'group');
     const uniqueId: number = uniqueIdCounter++;
@@ -174,7 +170,6 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, OnDestroy, Gln
     const keys: string[] = Object.keys(properties);
     if (keys.length > 0 && radios.length > 0) {
       for (let idx = 0; idx < radios.length; idx++) {
-        // console.log(`(id=${radios[idx].id}).setProperties(${JSON.stringify(properties)});`); // #
         radios[idx].setProperties(properties);
       }
     }
