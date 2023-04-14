@@ -1,0 +1,29 @@
+/*# sourceURL=gln-snackbar-text.component.scss */
+
+gln-snackbar-text {
+  // @use '../core/style/private';
+  // Button vertical margin is used to ensure that a button height of 36px, when the containing
+  // space falls below 36px.
+  // $button-vertical-margin: -(private.private-div(36px - 20px, 2));
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 20px;
+  opacity: 1;
+  
+  .mat-simple-snackbar-action {
+    flex-shrink: 0;
+    margin: 8px 8px * -1 8px 8px;
+  
+    button {
+      max-height: 36px;
+      min-width: 0;
+    }
+  
+    [dir='rtl'] & {
+      margin-left: -8px;
+      margin-right: 8px;
+    }
+  }
+}
