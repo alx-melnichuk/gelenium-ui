@@ -165,6 +165,20 @@ const siteUrlsSelect: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Select', { label: 'Select', siteUrls: siteUrlsSelect });
 
+// -- Snackbar --
+RouterConfig.add('URL_COMPONENTS_SNACKBAR', 'snackbar');
+const urlSnackbar = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SNACKBAR');
+const siteUrlsSnackbar: SiteUrl[] = [
+  { label: 'Basic', url: urlSnackbar, fragment: 'Basic' },
+  // { label: 'Attributes', url: urlSnackbar, fragment: 'Attributes' },
+  // { label: 'Size', url: urlSnackbar, fragment: 'Size' },
+  // { label: 'Palette', url: urlSnackbar, fragment: 'Palette' },
+  // { label: 'Customization', url: urlSnackbar, fragment: 'Customization' },
+  // { label: 'Config', url: urlSnackbar, fragment: 'Config' },
+  // { label: 'Api', url: urlSnackbar, fragment: 'Api' },
+];
+SiteMenuUtil.addItem('Components', 'Snackbar', { label: 'Snackbar', siteUrls: siteUrlsSnackbar });
+
 // -- Spinner --
 RouterConfig.add('URL_COMPONENTS_SPINNER', 'spinner');
 const urlSpinner = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SPINNER');

@@ -1,0 +1,67 @@
+<section *ngIf="isShowBasic01"
+  mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmSnackbar + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    The GlnSnackbar component is designed to display brief notifications.
+    It is also called "toast".
+    <br />
+    The component informs the user about some event:
+    data calculation process started, data saving completed successfully (or not)
+    and so on.
+    <br />
+    By default, a short message temporarily appears at the bottom of the screen.
+    In this case, the input focus is not transferred to it.
+    The notification panel can contain a button associated with this action.
+  </p>
+  <!-- <span> For example:</span>
+  <code><pre source="html">
+&lt;form [formGroup]="formGroup01a" novalidate autocomplete="off"&gt;
+  &lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits01a"
+    formControlName="model01a"
+    <i>name="model01a"</i>
+    <i>[value]="item"</i>&gt; <b>&#123;</b>&#123; item &#125;&#125;
+  &lt;/<strong>gln-radio-button</strong>&gt;
+&lt;/form&gt;</pre></code> -->
+</section>
+
+
+<div *ngIf="isShowBasic01"
+  class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>
+          Demo
+        </em>
+      </small>
+    </div>
+    <button class="snbs1-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickDemo1()">
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">Open success snackbar</font>
+      </font>
+      <span class="MuiTouchRipple-root css-w0pj6f"></span>
+    </button>
+    <!-- <gln-snackbar message="message Demo01"
+      #snackbar01="glnSnackbar"></gln-snackbar> -->
+    <!-- <gln-radio-button *ngFor="let item of fruits01a"
+      name="model01a"
+      formControlName="model01a"
+      [value]="item">
+      {{ item }}
+    </gln-radio-button> -->
+  </div>
+
+</div>
