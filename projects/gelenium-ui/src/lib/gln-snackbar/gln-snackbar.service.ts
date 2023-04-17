@@ -1,6 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ComponentType, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
+import { ComponentPortal, DomPortalOutlet, TemplatePortal } from '@angular/cdk/portal';
 import {
   ComponentRef,
   EmbeddedViewRef,
@@ -171,7 +171,6 @@ export class GlnSnackbarService implements OnDestroy {
     const containerRef: ComponentRef<_SnackBarContainer> = this.overlayRef.attach(containerPortal);
 
     containerRef.instance.snackBarConfig = currConfig;
-
     (containerRef.location.nativeElement as HTMLElement).setAttribute('role', 'presentation');
 
     const container: _SnackBarContainer = containerRef.instance;
@@ -180,19 +179,23 @@ export class GlnSnackbarService implements OnDestroy {
     const snackBarRef = new MatSnackBarRef<T | EmbeddedViewRef<any>>(container, this.overlayRef);
     let htmlElement: HTMLElement | null = null;
 
+    const containerPortalOutlet: DomPortalOutlet = container.addDomPortalOutlet();
+
     if (content instanceof TemplateRef) {
       // Create a template portal.
       const portal: TemplatePortal<any> = new TemplatePortal(content, null!, { $implicit: currConfig.data, snackBarRef } as any);
 
       htmlElement = portal.templateRef.elementRef.nativeElement;
       // Attach the template portal to the SnackBarContainer.
-      snackBarRef.instance = container.attachTemplatePortal(portal);
+      // #??snackBarRef.instance = container.attachTemplatePortal(portal);
+      snackBarRef.instance = containerPortalOutlet.attachTemplatePortal(portal);
     } else {
       const injector = this._createInjector(currConfig, snackBarRef);
       // Create a component portal.
       const portal = new ComponentPortal(content, undefined, injector);
       // Attach the component portal to the SnackBarContainer.
-      const contentRef: ComponentRef<T> = container.attachComponentPortal<T>(portal);
+      // #??const contentRef: ComponentRef<T> = container.attachComponentPortal<T>(portal);
+      const contentRef: ComponentRef<T> = containerPortalOutlet.attachComponentPortal(portal);
 
       htmlElement = contentRef.location.nativeElement;
       // We can't pass this via the injector, because the injector is created earlier.

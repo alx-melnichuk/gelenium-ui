@@ -1,13 +1,18 @@
 import { AriaLivePoliteness } from '@angular/cdk/a11y';
 import { Platform } from '@angular/cdk/platform';
-import { BasePortalOutlet, CdkPortalOutlet, ComponentPortal, DomPortal, TemplatePortal } from '@angular/cdk/portal';
+import { BasePortalOutlet, CdkPortalOutlet, ComponentPortal, DomPortal, DomPortalOutlet, TemplatePortal } from '@angular/cdk/portal';
+import { DOCUMENT } from '@angular/common';
 import {
+  ApplicationRef,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ComponentFactoryResolver,
   ComponentRef,
   ElementRef,
   EmbeddedViewRef,
+  Inject,
+  Injector,
   NgZone,
   OnDestroy,
   Renderer2,
@@ -23,6 +28,9 @@ import { MatSnackBarConfig } from '../gln-snackbar/snack-bar-config';
  * @docs-private
  */
 export interface _SnackBarContainer {
+  addDomPortalOutlet(): DomPortalOutlet;
+  removeDomPortalOutlet(value: DomPortalOutlet): void;
+
   snackBarConfig: MatSnackBarConfig;
   readonly _onAnnounce: Subject<any>;
   readonly _onExit: Subject<any>;
@@ -74,12 +82,19 @@ export class GlnSnackbarContainerComponent extends BasePortalOutlet implements O
    */
   _role?: 'status' | 'alert';
 
+  private portalOutletList: DomPortalOutlet[] = [];
+  private divElementList: HTMLElement[] = [];
+  private appRef: ApplicationRef | null = null;
+
   constructor(
     private _ngZone: NgZone,
     private _elementRef: ElementRef<HTMLElement>,
     private _changeDetectorRef: ChangeDetectorRef,
     private renderer: Renderer2,
     private _platform: Platform,
+    @Inject(DOCUMENT) private document: Document,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private injector: Injector,
     /** The snack bar configuration. */
     public snackBarConfig: MatSnackBarConfig
   ) {
@@ -106,8 +121,42 @@ export class GlnSnackbarContainerComponent extends BasePortalOutlet implements O
     //   }
     // }
 
-    this.renderer.addClass(this._elementRef.nativeElement, 'mat-snack-bar-container');
+    this.renderer.addClass(this._elementRef.nativeElement, 'gln-snackbar-container');
     this.renderer.setAttribute(this._elementRef.nativeElement, 'role', 'presentation');
+  }
+
+  public addDomPortalOutlet(): DomPortalOutlet {
+    const anchorNode: HTMLElement = this.document.createElement('div');
+    anchorNode.classList.add('gln-snackbar-wrap');
+    this._elementRef.nativeElement.appendChild(anchorNode);
+    const index: number = this.divElementList.push(anchorNode);
+    // We have to resolve the ApplicationRef later in order to allow people
+    // to use overlay-based providers during app initialization.
+    if (!this.appRef) {
+      this.appRef = this.injector.get<ApplicationRef>(ApplicationRef);
+    }
+    const result: DomPortalOutlet = new DomPortalOutlet(
+      anchorNode,
+      this.componentFactoryResolver,
+      this.appRef,
+      this.injector,
+      this.document
+    );
+    return (this.portalOutletList[index] = result);
+  }
+
+  public removeDomPortalOutlet(value: DomPortalOutlet): void {
+    const index1: number = this.portalOutletList.indexOf(value);
+    if (index1 !== -1) {
+      const portalOutlet: DomPortalOutlet = this.portalOutletList[index1];
+      this.portalOutletList.splice(index1, 1);
+      portalOutlet.detach();
+    }
+    const index2: number = this.divElementList.indexOf(value.outletElement as HTMLDivElement);
+    if (index2 !== -1) {
+      const divElement: HTMLElement = this.divElementList[index2];
+      this._elementRef.nativeElement.removeChild(divElement);
+    }
   }
 
   /** Attach a component portal as content to this snack bar container. */
