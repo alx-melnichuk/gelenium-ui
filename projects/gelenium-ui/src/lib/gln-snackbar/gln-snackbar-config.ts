@@ -3,26 +3,26 @@ import { Direction } from '@angular/cdk/bidi';
 import { InjectionToken, ViewContainerRef } from '@angular/core';
 
 /** Injection token that can be used to access the data that was passed in to a snack bar. */
-export const MAT_SNACKBAR1_DATA = new InjectionToken<any>('MAT_SNACKBAR1_DATA');
+export const GLN_SNACKBAR_DATA = new InjectionToken<any>('GLN_SNACKBAR_DATA');
 
 /** Possible values for horizontalPosition on MatSnackBarConfig. */
-export type MatSnackBarHorizontalPosition = 'start' | 'center' | 'end' | 'left' | 'right';
+export type GlnSnackBarHorizontal = 'start' | 'center' | 'end' | 'left' | 'right';
 
 /** Possible values for verticalPosition on MatSnackBarConfig. */
-export type MatSnackBarVerticalPosition = 'top' | 'bottom';
+export type GlnSnackBarVertical = 'top' | 'bottom';
 
 /**
  * Configuration used when opening a snack-bar.
  */
-export class MatSnackBarConfig<D = any> {
+export class GlnSnackBarConfig<D = any> {
   /** The politeness level for the MatAriaLiveAnnouncer announcement. */
-  politeness?: AriaLivePoliteness = 'assertive';
+  politeness?: AriaLivePoliteness = 'assertive'; // #?
 
   /**
    * Message to be announced by the LiveAnnouncer. When opening a snackbar without a custom
    * component or template, the announcement message will default to the specified message.
    */
-  announcementMessage?: string = '';
+  announcementMessage?: string = ''; // #?
 
   /**
    * The view container that serves as the parent for the snackbar for the purposes of dependency
@@ -43,8 +43,8 @@ export class MatSnackBarConfig<D = any> {
   data?: D | null = null;
 
   /** The horizontal position to place the snack bar. */
-  horizontalPosition?: MatSnackBarHorizontalPosition = 'center';
+  horizontalPosition?: GlnSnackBarHorizontal = 'center';
 
   /** The vertical position to place the snack bar. */
-  verticalPosition?: MatSnackBarVerticalPosition = 'bottom';
+  verticalPosition?: GlnSnackBarVertical = 'bottom';
 }

@@ -21,17 +21,17 @@ import {
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { MatSnackBarConfig } from '../gln-snackbar/snack-bar-config';
+import { GlnSnackBarConfig } from '../gln-snackbar/gln-snackbar-config';
 
 /**
  * Internal interface for a snack bar container.
  * @docs-private
  */
-export interface _SnackBarContainer {
-  addDomPortalOutlet(): DomPortalOutlet;
-  removeDomPortalOutlet(value: DomPortalOutlet): void;
+export interface GlnSnackBarContainer {
+  // addDomPortalOutlet(): DomPortalOutlet;
+  // removeDomPortalOutlet(value: DomPortalOutlet): void;
 
-  snackBarConfig: MatSnackBarConfig;
+  snackBarConfig: GlnSnackBarConfig;
   readonly _onAnnounce: Subject<any>;
   readonly _onExit: Subject<any>;
   readonly _onEnter: Subject<any>;
@@ -48,7 +48,7 @@ export interface _SnackBarContainer {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class GlnSnackbarContainerComponent extends BasePortalOutlet implements OnDestroy, _SnackBarContainer {
+export class GlnSnackbarContainerComponent extends BasePortalOutlet implements OnDestroy, GlnSnackBarContainer {
   /** The number of milliseconds to wait before announcing the snack bar's content. */
   private readonly _announceDelay: number = 150;
 
@@ -96,7 +96,7 @@ export class GlnSnackbarContainerComponent extends BasePortalOutlet implements O
     private componentFactoryResolver: ComponentFactoryResolver,
     private injector: Injector,
     /** The snack bar configuration. */
-    public snackBarConfig: MatSnackBarConfig
+    public snackBarConfig: GlnSnackBarConfig
   ) {
     super();
 
@@ -125,7 +125,7 @@ export class GlnSnackbarContainerComponent extends BasePortalOutlet implements O
     this.renderer.setAttribute(this._elementRef.nativeElement, 'role', 'presentation');
   }
 
-  public addDomPortalOutlet(): DomPortalOutlet {
+  /*public addDomPortalOutlet(): DomPortalOutlet {
     const anchorNode: HTMLElement = this.document.createElement('div');
     anchorNode.classList.add('gln-snackbar-wrap');
     this._elementRef.nativeElement.appendChild(anchorNode);
@@ -143,9 +143,9 @@ export class GlnSnackbarContainerComponent extends BasePortalOutlet implements O
       this.document
     );
     return (this.portalOutletList[index] = result);
-  }
+  }*/
 
-  public removeDomPortalOutlet(value: DomPortalOutlet): void {
+  /*public removeDomPortalOutlet(value: DomPortalOutlet): void {
     const index1: number = this.portalOutletList.indexOf(value);
     if (index1 !== -1) {
       const portalOutlet: DomPortalOutlet = this.portalOutletList[index1];
@@ -157,7 +157,7 @@ export class GlnSnackbarContainerComponent extends BasePortalOutlet implements O
       const divElement: HTMLElement = this.divElementList[index2];
       this._elementRef.nativeElement.removeChild(divElement);
     }
-  }
+  }*/
 
   /** Attach a component portal as content to this snack bar container. */
   attachComponentPortal<T>(portal: ComponentPortal<T>): ComponentRef<T> {
