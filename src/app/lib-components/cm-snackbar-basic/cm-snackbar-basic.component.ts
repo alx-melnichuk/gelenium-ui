@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { GlnSnackbarService } from 'gelenium-ui';
+import { GlnSnackbar2Service } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
@@ -25,11 +25,12 @@ export class CmSnackbarBasicComponent {
 
   // Page: Basic01
   isShowBasic01 = true;
+  idxBasic01 = 1;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor(private snackbarService: GlnSnackbarService) {}
+  constructor(private snackbar2Service: GlnSnackbar2Service) {}
 
   public clickDemo1(): void {
-    this.snackbarService.open('message Demo1');
+    this.snackbar2Service.open(`message Demo-${this.idxBasic01++}`);
   }
 }
