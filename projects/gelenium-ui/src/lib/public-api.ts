@@ -28,6 +28,7 @@ export * from './gln-snackbar/public-api';
 export * from './gln-snackbar-alert/public-api';
 export * from './gln-snackbar-container/public-api';
 export * from './gln-snackbar-text/public-api';
+export * from './gln-snackbar2/public-api';
 export * from './gln-spinner/public-api';
 export * from './gln-switch/public-api';
 export * from './gln-textarea/public-api';
