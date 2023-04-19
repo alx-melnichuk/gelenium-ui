@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { ComponentType, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentType, Overlay, OverlayConfig, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { BasePortalOutlet, ComponentPortal, DomPortalOutlet, PortalOutlet, TemplatePortal } from '@angular/cdk/portal';
 import {
   ApplicationRef,
@@ -24,13 +24,13 @@ import { GlnSnackbarModule } from './gln-snackbar.module';
 import { GlnSnackBarConfig, GLN_SNACKBAR_DATA } from './gln-snackbar-config';
 import { DOCUMENT } from '@angular/common';
 
-export const MAT_SNACKBAR1_DEFAULT_OPTIONS = new InjectionToken<GlnSnackBarConfig>('MAT_SNACKBAR1_DEFAULT_OPTIONS', {
+export const GLN_SNACKBAR_DEFAULT_OPTIONS = new InjectionToken<GlnSnackBarConfig>('GLN_SNACKBAR_DEFAULT_OPTIONS', {
   providedIn: 'root',
-  factory: MAT_SNACKBAR1_DEFAULT_OPTIONS_FACTORY,
+  factory: GLN_SNACKBAR_DEFAULT_OPTIONS_FACTORY,
 });
 
 /** @docs-private */
-export function MAT_SNACKBAR1_DEFAULT_OPTIONS_FACTORY(): GlnSnackBarConfig {
+export function GLN_SNACKBAR_DEFAULT_OPTIONS_FACTORY(): GlnSnackBarConfig {
   return new GlnSnackBarConfig();
 }
 
@@ -85,7 +85,7 @@ export class GlnSnackbarService implements OnDestroy {
     private componentFactoryResolver: ComponentFactoryResolver,
     private injector: Injector,
     @Optional() @SkipSelf() private _parentSnackBar: GlnSnackbarService,
-    @Inject(MAT_SNACKBAR1_DEFAULT_OPTIONS) private _defaultConfig: GlnSnackBarConfig
+    @Inject(GLN_SNACKBAR_DEFAULT_OPTIONS) private _defaultConfig: GlnSnackBarConfig
   ) {
     console.log(`GlnSnackbarService();`); // #
   }
@@ -171,11 +171,10 @@ export class GlnSnackbarService implements OnDestroy {
     //
     const currConfig = { ...new GlnSnackBarConfig(), ...this._defaultConfig, ...config };
 
-    // const panelPortalOutlet: DomPortalOutlet = this.createPanelPortalOutlet(overlayRef.overlayElement);
-    // overlayRef.attach(panelPortalOutlet);
+    const panelPortalOutlet: DomPortalOutlet = this.createPanelPortalOutlet(overlayRef.overlayElement);
 
-    const container: GlnSnackBarContainer = this.attachSnackBarContainer(overlayRef, currConfig);
-    // const container: GlnSnackBarContainer = this.attachSnackBarContainer(panelPortalOutlet, currConfig);
+    const container: GlnSnackBarContainer = this.attachSnackBarContainer(panelPortalOutlet, currConfig);
+    // const container: GlnSnackBarContainer = this.attachSnackBarContainer(overlayRef, currConfig);
 
     const snackBarRef = new GlnSnackBarRef<T | EmbeddedViewRef<any>>(container, overlayRef);
 
@@ -286,7 +285,15 @@ export class GlnSnackbarService implements OnDestroy {
     }
 
     overlayConfig.positionStrategy = positionStrategy;
-    return overlay.create(overlayConfig);
+    const overlayRef: OverlayRef = overlay.create(overlayConfig);
+
+    overlayRef.hostElement.classList.add('cdk-global-overlay-wrapper');
+
+    this.positionApply(overlayRef.overlayElement, overlayConfig);
+
+    overlayRef.overlayElement.style.flexDirection = 'column';
+
+    return overlayRef;
   }
   /**
    * Creates an injector to be used inside of a snack bar component.
@@ -303,5 +310,41 @@ export class GlnSnackbarService implements OnDestroy {
         { provide: GLN_SNACKBAR_DATA, useValue: config.data },
       ],
     });
+  }
+  private positionApply(overlayElement: HTMLElement, overlayConfig: OverlayConfig): void {
+    const positionStrategy: any | undefined = overlayConfig.positionStrategy;
+    const { width, height, maxWidth, maxHeight } = overlayConfig;
+    const shouldBeFlushHorizontally = (width === '100%' || width === '100vw') && (!maxWidth || maxWidth === '100%' || maxWidth === '100vw');
+    const shouldBeFlushVertically =
+      (height === '100%' || height === '100vh') && (!maxHeight || maxHeight === '100%' || maxHeight === '100vh');
+
+    // const styles = this._overlayRef.overlayElement.style;
+    // const parentStyles = this._overlayRef.hostElement.style;
+    // styles.position = this._cssPosition;
+    // styles.marginLeft = shouldBeFlushHorizontally ? '0' : this._leftOffset;
+    // styles.marginTop = shouldBeFlushVertically ? '0' : this._topOffset;
+    // styles.marginBottom = this._bottomOffset;
+    // styles.marginRight = this._rightOffset;
+    if (!!overlayElement.parentElement) {
+      const parentStyles = overlayElement.parentElement.style;
+
+      if (!!positionStrategy) {
+        if (shouldBeFlushHorizontally) {
+          parentStyles.justifyContent = 'flex-start';
+        } else if (positionStrategy._xPosition === 'center') {
+          parentStyles.justifyContent = 'center';
+        } else if (overlayConfig.direction === 'rtl') {
+          if (positionStrategy._xPosition === 'flex-start') {
+            parentStyles.justifyContent = 'flex-end';
+          } else if (positionStrategy._xPosition === 'flex-end') {
+            parentStyles.justifyContent = 'flex-start';
+          }
+        } else {
+          parentStyles.justifyContent = positionStrategy._xPosition;
+        }
+
+        parentStyles.alignItems = shouldBeFlushVertically ? 'flex-start' : positionStrategy._alignItems;
+      }
+    }
   }
 }
