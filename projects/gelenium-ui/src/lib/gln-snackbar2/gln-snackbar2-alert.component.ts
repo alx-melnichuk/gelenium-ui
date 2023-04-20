@@ -18,14 +18,26 @@ export interface GlnSnackbar2Alert {
 })
 export class GlnSnackbar2AlertComponent implements GlnSnackbar2Alert {
   /** Data that was injected into the snack bar. */
-  data: { message: string; action: string };
+  public data: { message: string; action: string };
+  public hasError: boolean = false;
+  public hasWarning: boolean = false;
+  public hasInfo: boolean = false;
+  public hasSuccess: boolean = false;
 
-  constructor(public snackbarRef: GlnSnackbar2Ref<GlnSnackbar2AlertComponent>, @Inject(GLN_SNACKBAR2_DATA) data: any) {
+  constructor(
+    // { provide: GlnSnackbar2Ref, useValue: snackbarRef },
+    // { provide: GLN_SNACKBAR2_DATA, useValue: config.data },
+
+    public snackbarRef: GlnSnackbar2Ref<GlnSnackbar2AlertComponent>,
+    @Inject(GLN_SNACKBAR2_DATA) data: any
+  ) {
     this.data = data;
+    console.log(`GlnSnackbar2Alert() data=`, data); // #
   }
 
   /** Performs the action on the snack bar. */
   public action(): void {
+    console.log(`GlnSnackbar2Alert.action()`); // #
     this.snackbarRef.dismissWithAction();
   }
 
