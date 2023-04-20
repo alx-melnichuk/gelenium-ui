@@ -1,0 +1,37 @@
+/*# sourceURL=gln-snackbar2-container.component.scss */
+
+.gln-snackbar-panel {
+  @media (max-width: 799.95px) { // 599.95px
+    --glnsbp--mr: 0.5rem;
+    width: 100%;
+  }
+}
+
+gln-snackbar2-container {
+  align-items: center;
+  // border-radius: 4px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  // margin: 1.5rem;
+  // max-width: 33vw;
+  // min-height: 48px;
+  // min-width: 300px;
+  // padding: 6px 1rem;
+  transform-origin: center;
+  margin: var(--glnsbp--mr, 1rem);
+  width: inherit;
+
+
+}
+
+// .gln-snackbar-container {
+//   color: #fff; // # ng12 color: hsla(0,0%,100%,.7);
+//   background-color: #313131; // # ng12 background: #323232;
+//   box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),
+//     0px 6px 10px 0px rgba(0,0,0,0.14),
+//     0px 1px 18px 0px rgba(0,0,0,0.12);
+//   //# ng12 box-shadow: 0px 3px 5px -1px   rgba(0,0,0,0.2), 0px 6px 10px 0px   rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
+// }
+
