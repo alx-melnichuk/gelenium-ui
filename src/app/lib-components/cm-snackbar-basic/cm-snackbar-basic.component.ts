@@ -31,6 +31,6 @@ export class CmSnackbarBasicComponent {
   constructor(private snackbar2Service: GlnSnackbar2Service) {}
 
   public clickDemo1(): void {
-    this.snackbar2Service.open(`message Demo-${this.idxBasic01++}`);
+    this.snackbar2Service.open(`message Demo-${this.idxBasic01++}`, 'action1');
   }
 }
