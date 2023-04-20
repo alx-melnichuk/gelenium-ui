@@ -27,7 +27,6 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { GlnSnackbarAlertComponent } from '../gln-snackbar-alert/gln-snackbar-alert.component';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
@@ -85,12 +84,12 @@ export class GlnSnackbarComponent /*<T extends GlnSnackbarAlertComponent>*/ impl
   // public messageVal: string | TemplateRef<unknown> | null | undefined = null; // Binding attribute "message".
 
   // protected /*abstract*/ readonly tooltipCompType: ComponentType<T>;
-  protected readonly tooltipCompType = GlnSnackbarAlertComponent;
+  protected readonly tooltipCompType = GlnSnackbarComponent;
   protected overlayRef: OverlayRef | null = null;
-  protected portal: ComponentPortal<GlnSnackbarAlertComponent> | null = null;
+  protected portal: ComponentPortal<any> | null = null;
   /** A strategy for handling scrolling when the overlay panel is open. */
   protected scrollStrategy: ScrollStrategy;
-  protected tooltipInstRef: ComponentRef<GlnSnackbarAlertComponent> | null = null;
+  protected tooltipInstRef: ComponentRef<any> | null = null;
 
   constructor(
     // protected document: Document,
@@ -193,7 +192,7 @@ export class GlnSnackbarComponent /*<T extends GlnSnackbarAlertComponent>*/ impl
   // - - - - Set tooltip properties. - - - -
 
   protected setInstanceMessage(
-    instRef: ComponentRef<GlnSnackbarAlertComponent> | null,
+    instRef: ComponentRef<any> | null,
     message: string | TemplateRef<unknown> | null | undefined,
     content: Record<string, unknown> | null
   ): void {

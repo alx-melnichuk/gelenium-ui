@@ -1,7 +1,7 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 import { Observable, Subject } from 'rxjs';
 
-import { GlnSnackBarContainer } from '../gln-snackbar-container/gln-snackbar-container.component';
+// import { GlnSnackBarContainer } from '../gln-snackbar-container/gln-snackbar-container.component';
 
 /** Event that is emitted when a snack bar is dismissed. */
 export interface MatSnackBarDismiss {
@@ -23,7 +23,7 @@ export class GlnSnackBarRef<T> {
    * The instance of the component making up the content of the snack bar.
    * @docs-private
    */
-  containerInstance: GlnSnackBarContainer;
+  containerInstance: any; // GlnSnackBarContainer;
 
   /** Subject for notifying the user that the snack bar has been dismissed. */
   private readonly _afterDismissed = new Subject<MatSnackBarDismiss>();
@@ -43,7 +43,7 @@ export class GlnSnackBarRef<T> {
   /** Whether the snack bar was dismissed using the action button. */
   private _dismissedByAction = false;
 
-  constructor(containerInstance: GlnSnackBarContainer, private _overlayRef: OverlayRef) {
+  constructor(containerInstance: any /*GlnSnackBarContainer*/, private _overlayRef: OverlayRef) {
     this.containerInstance = containerInstance;
     // Dismiss snackbar on action.
     this.onAction().subscribe(() => this.dismiss());
