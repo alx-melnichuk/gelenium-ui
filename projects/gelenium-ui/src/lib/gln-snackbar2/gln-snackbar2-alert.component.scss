@@ -2,7 +2,7 @@
 
 gln-snackbar2-alert {
   align-items: center;
-  background-color: #313131; // # ng12 background: #323232;
+  background-color: #3131317a; // #313131; // # ng12 background: #323232;
   border-radius: 4px;
   box-sizing: border-box;
   box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
@@ -24,36 +24,34 @@ gln-snackbar2-alert {
   // transform: none;
   // transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
-  [glnsbal-icon] {
-    display: flex;
-    font-size: 22px;
+  [glnsba-icon] {
+    // outline: 1px solid green;
+    display: inline-block;
+    fill: currentColor;
+    flex-shrink: 0;
+    height: 22px;
     margin-right: 12px;
-    opacity: 0.85;
+    opacity: .85;
     padding: 7px 0;
-    &>svg {
-      user-select: none;
-      width: 1em;
-      height: 1em;
-      display: inline-block;
-      fill: currentColor;
-      flex-shrink: 0;
-      transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-      font-size: inherit;
-    }
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    user-select: none;
+    width: 22px;
   }
 
   [glnsba-msg] {
+    flex-grow: 1;
     padding: 8px 0;
+    // outline: 1px solid white;
   }
 
   [glnsba-action-panel] {
-    align-items: center;
-    margin-left: auto;
+    // align-items: center;
+    // margin-left: auto;
     margin-right: -8px;
-    padding-left: 16px;
+    // padding-left: 16px;
   }
 
-  [glnsbaa-btn] {
+  [glnsba-btn] {
     align-items: center;
     background-color: transparent;
     border: 0;
@@ -66,6 +64,7 @@ gln-snackbar2-alert {
     letter-spacing: inherit;
     line-height: inherit;
     margin: 0;
+    // outline: 1px solid blue; // #
     outline: 0;
     position: relative;
     text-decoration: none;
@@ -73,14 +72,14 @@ gln-snackbar2-alert {
     vertical-align: middle;
   }
 
-  [glnsbaa-action] {
+  [glnsba-action] {
     border-radius: 4px;
     color: #9c27b0;
-    font-size: 0.8125rem;
+    font-size: inherit; // font-size: 0.8125rem;
     font-weight: 500;
     line-height: 1.75;
     min-width: 64px;
-    padding: 4px 5px;
+    padding: 4px 5px 4px 12px;
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms
       , box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms
       , border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms
@@ -88,7 +87,7 @@ gln-snackbar2-alert {
     text-transform: uppercase;
   }
 
-  [glnsbaa-close] {
+  [glnsba-close] {
     border-radius: 50%;
     flex: 0 0 auto;
     overflow: visible;
@@ -97,7 +96,7 @@ gln-snackbar2-alert {
     transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
 
-  [glnsbaa-svg] {
+  [glnsba-x-svg] {
     user-select: none;
     width: 1em;
     height: 1em;
