@@ -34,6 +34,13 @@ export class GlnSnackbar2Ref<T> {
   /** The instance of the component making up the content of the snack bar. */
   instance!: T; // +
 
+  /** A promise that is resolved when closed (by an action or close button) and rejected when closed by a timeout. */
+  public result: Promise<any>;
+
+  private detachRefFn: () => void = () => {};
+  private resolve: (result?: any) => void = () => {};
+  private reject: (reason?: any) => void = () => {};
+
   /** User notifications when the diner closes. */
   private readonly afterDismissedSub = new Subject<GlnSnackbarDismiss>();
   /** User notifications that the diner has opened and appeared. */
@@ -48,15 +55,43 @@ export class GlnSnackbar2Ref<T> {
 
   constructor(
     public readonly id: number, // +
-    private portalOutlet: PortalOutlet
+    public wrapPortal: PortalOutlet
   ) {
+    this.result = new Promise((resolve, reject) => {
+      this.resolve = resolve;
+      this.reject = reject;
+    });
     // Dismiss snackbar on action.
     this.onAction().subscribe(() => this.dismiss());
     // containerInstance._onExit.subscribe(() => this.finishDismiss());
   }
 
-  /** Dismisses the snack bar. */
+  public setDetachFn(fn: () => void) {
+    this.detachRefFn = fn;
+  }
+
+  public close(resultAction?: any): void {
+    this.resolve(resultAction);
+    console.log(`resolve(resultAction);`); // #
+    this.removeElement();
+  }
+
   public dismiss(): void {
+    this.reject();
+    console.log(`reject();`); // #
+    this.removeElement();
+  }
+
+  private removeElement(): void {
+    console.log(`removeElement();`); // #
+    this.wrapPortal.detach();
+    this.wrapPortal.dispose();
+    this.detachRefFn();
+  }
+  // ** OLD **
+
+  /** Dismisses the snack bar. */
+  public dismiss0(): void {
     if (!this.afterDismissedSub.closed) {
       // this.containerInstance.exit();
     }
