@@ -41,7 +41,7 @@ import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';</pre>
     <div>
       <small>
         <em>
-          Demo
+          Demo 1 (standard)
         </em>
       </small>
     </div>
@@ -49,10 +49,8 @@ import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';</pre>
       tabindex="0"
       type="button"
       (click)="clickDemo1()">
-      <font style="vertical-align: inherit;">
-        <font style="vertical-align: inherit;">Open success snackbar</font>
-      </font>
-      <span class="MuiTouchRipple-root css-w0pj6f"></span>
+      <span>Open success snackbar</span>
+      <!-- <span class="MuiTouchRipple-root css-w0pj6f"></span> -->
     </button>
     <!-- <gln-snackbar message="message Demo01"
       #snackbar01="glnSnackbar"></gln-snackbar> -->
@@ -62,6 +60,22 @@ import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';</pre>
       [value]="item">
       {{ item }}
     </gln-radio-button> -->
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>
+          Demo 2 (left top)
+        </em>
+      </small>
+    </div>
+    <button class="snbs1-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickDemo2()">
+      <span>Open success snackbar</span>
+    </button>
   </div>
 
 </div>
