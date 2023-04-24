@@ -1,3 +1,4 @@
+export * from './event-listener.util';
 export * from './gln-overflow-child.directive';
 export * from './gln-tooltip-base.component';
 export * from './gln-tooltip-base.directive';
