@@ -49,6 +49,7 @@ export class CmSnackbarBasicComponent {
     const idx: number = this.idxBasic02++;
     const snackbar2Ref: GlnSnackbar2Ref<unknown> = this.snackbar2Service.open(`message Demo-${idx}`, 'action1', {
       data: { msgType: 'success', isNoClose: true },
+      duration: 4000,
       horizontal: 'right',
       vertical: 'top',
     });
