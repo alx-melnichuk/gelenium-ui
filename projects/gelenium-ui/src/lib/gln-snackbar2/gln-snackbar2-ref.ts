@@ -1,5 +1,6 @@
 import { PortalOutlet } from '@angular/cdk/portal';
-import { Observable, Subject } from 'rxjs';
+import { NgZone } from '@angular/core';
+import { Observable, take } from 'rxjs';
 
 export interface GlnSnackbar2Inst<T> {
   /** Your Toast ID. Use this to close it individually */
@@ -32,119 +33,99 @@ export interface GlnSnackbarDismiss {
 
 export class GlnSnackbar2Ref<T> {
   /** The instance of the component making up the content of the snack bar. */
-  instance!: T; // +
+  public instance!: T; // +
 
   /** A promise that is resolved when closed (by an action or close button) and rejected when closed by a timeout. */
-  public result: Promise<any>;
+  public readonly result: Promise<any>;
 
-  private detachRefFn: () => void = () => {};
+  private detachRefFn: (() => void) | null = null;
   private resolve: (result?: any) => void = () => {};
   private reject: (reason?: any) => void = () => {};
 
-  /** User notifications when the diner closes. */
-  private readonly afterDismissedSub = new Subject<GlnSnackbarDismiss>();
-  /** User notifications that the diner has opened and appeared. */
-  private readonly afterOpenedSub = new Subject<void>();
-  /** User notifications when an action is called in a snack bar. */
-  private readonly onActionSub = new Subject<void>();
-
   /** Identifier of the time to wait before closing (the result of calling setTimeout). */
-  private durationTimeoutId: number | undefined;
-  /** An indication that the diner has been closed with an action button. */
-  private dismissedByAction = false;
+  private timeoutId: number | undefined;
+  private isDisplayed: boolean = false;
 
   constructor(
-    public readonly id: number, // +
-    public wrapPortal: PortalOutlet
+    public readonly id: number,
+    public readonly duration: number | undefined | null,
+    public readonly wrapElement: HTMLElement,
+    public wrapPortal: PortalOutlet,
+    private ngZone: NgZone
   ) {
     this.result = new Promise((resolve, reject) => {
       this.resolve = resolve;
       this.reject = reject;
     });
-    // Dismiss snackbar on action.
-    this.onAction().subscribe(() => this.dismiss());
-    // containerInstance._onExit.subscribe(() => this.finishDismiss());
+
+    if (!!duration && duration > 0) {
+      this.ngZone.onStable
+        .asObservable()
+        .pipe(take(1))
+        .subscribe(() => {
+          console.log(`GlnSnackbar2Ref() ngZone.onStable.(setTimeout())`); // #
+          this.timeoutId = window.setTimeout(() => this.dismiss(), Math.min(duration, MAX_TIMEOUT));
+        });
+    }
+
+    this.addAnimationEventListener();
   }
 
-  public setDetachFn(fn: () => void) {
+  public setDetachRefFn(fn: () => void) {
     this.detachRefFn = fn;
   }
 
+  /** Closes the snack bar by clicking on the "action" or "close" button. */
   public close(resultAction?: any): void {
-    this.resolve(resultAction);
     console.log(`resolve(resultAction);`); // #
-    this.removeElement();
+    this.resolve(resultAction);
+    this.hideElement();
+  }
+  /** Closes the snack bar when the timeout expires. */
+  public dismiss(): void {
+    console.log(`reject();`); // #
+    this.reject();
+    this.hideElement();
   }
 
-  public dismiss(): void {
-    this.reject();
-    console.log(`reject();`); // #
-    this.removeElement();
+  private hideElement(): void {
+    console.log(`hideElement();`); // #
+    this.wrapElement.setAttribute('is-hide', '');
   }
+
+  private addAnimationEventListener(): void {
+    this.wrapElement.addEventListener('animationend', this.animationEventListener);
+    this.wrapElement.addEventListener('animationcancel', this.animationEventListener);
+  }
+
+  private removeAnimationEventListener(): void {
+    this.wrapElement.removeEventListener('animationend', this.animationEventListener);
+    this.wrapElement.removeEventListener('animationcancel', this.animationEventListener);
+  }
+
+  private animationEventListener = (ev: AnimationEvent) => {
+    console.log(`animationEventListener();`); // #
+    if (false === this.isDisplayed) {
+      this.isDisplayed = true;
+      this.wrapElement.removeAttribute('is-show');
+    } else if (true === this.isDisplayed) {
+      console.log(`animationEventListener(); this.isDisplayed:false;`); // #
+      this.removeElement();
+    }
+  };
 
   private removeElement(): void {
     console.log(`removeElement();`); // #
+    clearTimeout(this.timeoutId);
+
+    this.removeAnimationEventListener();
+
     this.wrapPortal.detach();
     this.wrapPortal.dispose();
-    this.detachRefFn();
-  }
-  // ** OLD **
 
-  /** Dismisses the snack bar. */
-  public dismiss0(): void {
-    if (!this.afterDismissedSub.closed) {
-      // this.containerInstance.exit();
+    if (!!this.detachRefFn) {
+      this.detachRefFn();
+      this.detachRefFn = null;
     }
-    clearTimeout(this.durationTimeoutId);
-  }
-
-  /** Marks the selected action in the diner. */
-  public dismissWithAction(): void {
-    if (!this.onActionSub.closed) {
-      this.dismissedByAction = true;
-      this.onActionSub.next();
-      this.onActionSub.complete();
-    }
-    clearTimeout(this.durationTimeoutId);
-  }
-
-  /** Dismisses the snack bar after some duration */
-  public dismissAfter(duration: number): void {
-    this.durationTimeoutId = window.setTimeout(() => this.dismiss(), Math.min(duration, MAX_TIMEOUT));
-  }
-
-  /** Marks the snackbar as opened */
-  public open(): void {
-    if (!this.afterOpenedSub.closed) {
-      this.afterOpenedSub.next();
-      this.afterOpenedSub.complete();
-    }
-  }
-  /** Cleans up the DOM after closing. */
-  private finishDismiss(): void {
-    // this._overlayRef.dispose();
-
-    if (!this.onActionSub.closed) {
-      this.onActionSub.complete();
-    }
-
-    this.afterDismissedSub.next({ dismissedByAction: this.dismissedByAction });
-    this.afterDismissedSub.complete();
-    this.dismissedByAction = false;
-  }
-
-  /** Gets an observable that is notified when the snack bar is finished closing. */
-  public afterDismissed(): Observable<GlnSnackbarDismiss> {
-    return this.afterDismissedSub;
-  }
-
-  /** Gets an observable that is notified when the snack bar has opened and appeared. */
-  // public afterOpened(): Observable<void> {
-  //   return this.containerInstance._onEnter;
-  // }
-
-  /** Gets an observable that is notified when the snack bar action is called. */
-  public onAction(): Observable<void> {
-    return this.onActionSub;
   }
 }

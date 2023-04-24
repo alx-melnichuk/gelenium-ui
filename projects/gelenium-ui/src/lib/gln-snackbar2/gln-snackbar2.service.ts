@@ -10,6 +10,7 @@ import {
   Injectable,
   InjectionToken,
   Injector,
+  NgZone,
   OnDestroy,
   Optional,
   TemplateRef,
@@ -49,6 +50,7 @@ export class GlnSnackbar2Service implements OnDestroy {
     private overlay: Overlay,
     private injector: Injector,
     @Inject(DOCUMENT) private document: Document,
+    private ngZone: NgZone,
     private componentFactoryResolver: ComponentFactoryResolver,
     @Optional() @Inject(GLN_SNACKBAR2_CONFIG) private rootConfig: GlnSnackbar2Config | null
   ) {
@@ -155,9 +157,13 @@ export class GlnSnackbar2Service implements OnDestroy {
 
     const id: number = uniqueIdCounter++;
 
-    const wrapPortal: DomPortalOutlet = this.createWrapPortal(overlayMetadata.containerElement, id.toString());
+    const snackbar2Container: GlnSnackbar2ContainerComponent = overlayMetadata.containerRef.instance;
+    // const wrapElement: HTMLElement = this.createWrapElement(overlayMetadata.containerElement, id.toString());
+    const wrapElement: HTMLElement = snackbar2Container.createWrapElement(id.toString(), 'gln-container-wrap', 'is-show');
 
-    const snackbarRef = new GlnSnackbar2Ref<T | EmbeddedViewRef<any>>(id, wrapPortal);
+    const wrapPortal: DomPortalOutlet = this.createWrapPortal(wrapElement);
+
+    const snackbarRef = new GlnSnackbar2Ref<T | EmbeddedViewRef<any>>(id, currConfig.duration, wrapElement, wrapPortal, this.ngZone);
 
     let htmlElement: HTMLElement | null = null;
 
@@ -180,21 +186,16 @@ export class GlnSnackbar2Service implements OnDestroy {
     htmlElement?.setAttribute('role', 'alert');
 
     overlayMetadata.amount++;
-    snackbarRef.setDetachFn(() => {
+    snackbarRef.setDetachRefFn(() => {
       const key: string = this.getKeySnackbar(currConfig);
       this.detachSnackbarRef(overlayMetadata);
     });
+
     // TODO To return, create a new object with the required interface.
     return snackbarRef;
   }
 
-  private createWrapPortal(panel: HTMLElement, id: string): DomPortalOutlet {
-    const containerWrap: HTMLElement = this.document.createElement('div');
-    containerWrap.id = `glnsbc-wrap-${id}`;
-    containerWrap.classList.add('gln-container-wrap');
-    containerWrap.style.width = 'inherit';
-    panel.appendChild(containerWrap);
-
+  private createWrapPortal(containerWrap: HTMLElement): DomPortalOutlet {
     // We have to resolve the ApplicationRef later in order to allow people
     // to use overlay-based providers during app initialization.
     if (!this.appRef) {

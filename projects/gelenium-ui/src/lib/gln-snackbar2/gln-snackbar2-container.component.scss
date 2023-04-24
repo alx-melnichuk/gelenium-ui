@@ -8,6 +8,7 @@
 }
 
 gln-snackbar2-container {
+  --glnsbw--duration: 1220ms; // origin: 220ms;
   align-items: center;
   // border-radius: 4px;
   box-sizing: border-box;
@@ -24,6 +25,38 @@ gln-snackbar2-container {
   width: inherit;
 
 
+  // transition: transform var(--glnsw-trn-dur, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  .gln-container-wrap {
+    &[is-show]:not([is-hide]) {
+      animation: kf-sbcw-show-trans var(--glnsbw--duration, 0s) cubic-bezier(0, 0, 0.2, 1) 0ms;
+      @keyframes kf-sbcw-show-trans {
+        0% {
+          transform: translateY(40px);
+        }
+        100% {
+          transform: none;
+        }
+      }
+    }
+    &:not([is-show])[is-hide] {
+      animation: kf-sbcw-hide-trans var(--glnsbw--duration, 0s) cubic-bezier(0, 0, 0.2, 1) 0ms;
+      @keyframes kf-sbcw-hide-trans {
+        0% {
+          transform: none;
+        }
+        100% {
+          transform: translateY(40px);
+        }
+      }
+    }
+    // transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    // &:not([show]) {
+    // }
+    // &[show] {
+    //   transform: none;
+    // }
+
+  }
 }
 
 // .gln-snackbar-container {
