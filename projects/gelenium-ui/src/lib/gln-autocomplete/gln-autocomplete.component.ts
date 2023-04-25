@@ -197,8 +197,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
-    const fontSize = HtmlElemUtil.propertyAsNumber(this.hostRef, 'font-size');
-    const lineHeight = HtmlElemUtil.propertyAsNumber(this.hostRef, 'line-height');
+    const fontSize: number = HtmlElemUtil.propertyAsNumber(this.hostRef, 'font-size');
+    const lineHeight: number = HtmlElemUtil.propertyAsNumber(this.hostRef, 'line-height');
     this.optionHeight = GlnOptionUtil.getHeightOption(fontSize, lineHeight);
 
     if (this.isClearOnEscape == null) {
