@@ -8,7 +8,7 @@
 }
 
 gln-snackbar2-container {
-  --glnsbw--duration: 1220ms; // origin: 220ms;
+  --glnsbcw--duration: 1220ms; // origin: 220ms;
   align-items: center;
   // border-radius: 4px;
   box-sizing: border-box;
@@ -24,14 +24,18 @@ gln-snackbar2-container {
   margin: var(--glnsbp--mr, 1rem);
   width: inherit;
 
-
   // transition: transform var(--glnsw-trn-dur, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   .gln-container-wrap {
+    margin-top: var(--glnsbcw--mr-tp);
+    margin-bottom: var(--glnsbcw--mr-bt);
+    margin-left: var(--glnsbcw--mr-lf);
+    margin-right: var(--glnsbcw--mr-rg);
+
     &[is-show]:not([is-hide]) {
-      animation: kf-sbcw-show-trans var(--glnsbw--duration, 0s) cubic-bezier(0, 0, 0.2, 1) 0ms;
+      animation: kf-sbcw-show-trans var(--glnsbcw--duration, 0s) cubic-bezier(0, 0, 0.2, 1) 0ms;
       @keyframes kf-sbcw-show-trans {
         0% {
-          transform: translateY(40px);
+          transform: translate(var(--glnsbcw--trans-x, 0px), calc(100vw - var(--glnsbcw--rect-tp) + 1)); // (X,Y)
         }
         100% {
           transform: none;
@@ -39,13 +43,13 @@ gln-snackbar2-container {
       }
     }
     &:not([is-show])[is-hide] {
-      animation: kf-sbcw-hide-trans var(--glnsbw--duration, 0s) cubic-bezier(0, 0, 0.2, 1) 0ms;
+      animation: kf-sbcw-hide-trans var(--glnsbcw--duration, 0s) cubic-bezier(0, 0, 0.2, 1) 0ms;
       @keyframes kf-sbcw-hide-trans {
         0% {
           transform: none;
         }
         100% {
-          transform: translateY(40px);
+          transform: translate(var(--glnsbcw--trans-x, 0px), var(--glnsbcw--trans-y, 0px)); // (X,Y)
         }
       }
     }

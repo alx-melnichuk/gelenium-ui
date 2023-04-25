@@ -108,7 +108,14 @@ export class GlnSnackbar2Service implements OnDestroy {
       overlayRef.hostElement.style.zIndex = 'unset';
       overlayRef.overlayElement.classList.add(CSS_CLASS_PANEL);
 
-      const containerComponent = new ComponentPortal(GlnSnackbar2ContainerComponent, undefined, injector);
+      const currConfig2: GlnSnackbar2Config = { ...currConfig };
+      currConfig2.data = null;
+      const injectorWithConfig: Injector = Injector.create({
+        parent: injector,
+        providers: [{ provide: GlnSnackbar2Config, useValue: currConfig2 }],
+      });
+
+      const containerComponent = new ComponentPortal(GlnSnackbar2ContainerComponent, undefined, injectorWithConfig);
       const containerRef: ComponentRef<GlnSnackbar2ContainerComponent> = overlayRef.attach(containerComponent);
       const containerElement: HTMLElement = containerRef.location.nativeElement;
 
@@ -120,24 +127,23 @@ export class GlnSnackbar2Service implements OnDestroy {
 
   private createOverlay(overlay: Overlay, config: GlnSnackbar2Config): OverlayRef {
     const overlayConfig = new OverlayConfig();
-    overlayConfig.direction = config.direction;
+    // #overlayConfig.direction = config.direction;
 
     const positionStrategy = overlay.position().global();
+    // #export type GlnSnackbarHorizontal = 'left' | 'center' | 'right';
+    // #export type GlnSnackbarVertical = 'top' | 'center' | 'bottom';
     // Set horizontal position.
-    const isRtl = config.direction === 'rtl';
-    const isLeft = config.horizontal === 'left' || (config.horizontal === 'start' && !isRtl) || (config.horizontal === 'end' && isRtl);
-    const isRight = !isLeft && config.horizontal !== 'center';
-    if (isLeft) {
+    if ('left' === config.horizontal) {
       positionStrategy.left('0');
-    } else if (isRight) {
+    } else if ('right' === config.horizontal) {
       positionStrategy.right('0');
     } else {
       positionStrategy.centerHorizontally();
     }
     // Set horizontal position.
-    if (config.vertical === 'top') {
+    if ('top' === config.vertical) {
       positionStrategy.top('0');
-    } else if (config.vertical === 'bottom') {
+    } else if ('bottom' === config.vertical) {
       positionStrategy.bottom('0');
     } else {
       positionStrategy.centerVertically('0');
@@ -153,7 +159,7 @@ export class GlnSnackbar2Service implements OnDestroy {
     content: ComponentType<T> | TemplateRef<T>,
     config?: GlnSnackbar2Config
   ): GlnSnackbar2Ref<T | EmbeddedViewRef<any>> {
-    const currConfig = { ...new GlnSnackbar2Config(), ...this.rootConfig, ...config };
+    const config2: GlnSnackbar2Config = { ...new GlnSnackbar2Config(), ...this.rootConfig, ...config };
 
     const id: number = uniqueIdCounter++;
 
@@ -163,18 +169,18 @@ export class GlnSnackbar2Service implements OnDestroy {
 
     const wrapPortal: DomPortalOutlet = this.createWrapPortal(wrapElement);
 
-    const snackbarRef = new GlnSnackbar2Ref<T | EmbeddedViewRef<any>>(id, currConfig.duration, wrapElement, wrapPortal, this.ngZone);
+    const snackbarRef = new GlnSnackbar2Ref<T | EmbeddedViewRef<any>>(id, config2.duration, wrapElement, wrapPortal, this.ngZone);
 
     let htmlElement: HTMLElement | null = null;
 
     if (content instanceof TemplateRef) {
       // Create a template portal.
-      const portal: TemplatePortal<any> = new TemplatePortal(content, null!, { $implicit: currConfig.data, snackbarRef } as any);
+      const portal: TemplatePortal<any> = new TemplatePortal(content, null!, { $implicit: config2.data, snackbarRef } as any);
       htmlElement = portal.templateRef.elementRef.nativeElement;
       // Attach the template portal to the "containerPortal".
       snackbarRef.instance = wrapPortal.attachTemplatePortal(portal);
     } else {
-      const injector: Injector = this.createInjector(this.injector, currConfig, snackbarRef);
+      const injector: Injector = this.createInjector(this.injector, config2, snackbarRef);
       // Create a component portal.
       const portal = new ComponentPortal(content, undefined, injector);
       // Attach the component portal to the "containerPortal".
@@ -187,9 +193,15 @@ export class GlnSnackbar2Service implements OnDestroy {
 
     overlayMetadata.amount++;
     snackbarRef.setDetachRefFn(() => {
-      const key: string = this.getKeySnackbar(currConfig);
+      const key: string = this.getKeySnackbar(config2);
       this.detachSnackbarRef(overlayMetadata);
     });
+
+    overlayMetadata.overlayRef.getConfig().positionStrategy?.apply();
+
+    if (1 === overlayMetadata.amount) {
+      snackbar2Container.setProperties(wrapElement, config2.horizontal, config2.vertical, config2.transition, config2.slideDirection);
+    }
 
     // TODO To return, create a new object with the required interface.
     return snackbarRef;
