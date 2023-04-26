@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, Renderer2, ViewEncapsulation } from '@angular/core';
 import { GLN_SNACKBAR2_DATA } from './gln-snackbar2-config.interface';
 import { GlnSnackbar2Ref } from './gln-snackbar2-ref';
 
@@ -35,18 +35,20 @@ export class GlnSnackbar2AlertComponent implements GlnSnackbar2Alert {
   public set hasAction(value: boolean) {}
 
   constructor(
-    // { provide: GlnSnackbar2Ref, useValue: snackbarRef },
-    // { provide: GLN_SNACKBAR2_DATA, useValue: config.data },
-    public snackbarRef: GlnSnackbar2Ref<GlnSnackbar2AlertComponent>,
-    @Inject(GLN_SNACKBAR2_DATA) data: any
+    private hostRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2,
+    @Inject(GLN_SNACKBAR2_DATA) data: any,
+    public snackbarRef: GlnSnackbar2Ref<GlnSnackbar2AlertComponent>
   ) {
     this.data = data;
+
     this.hasError = data.msgType === 'error';
-    this.hasWarning = data.msgType === 'warning';
-    this.hasInfo = data.msgType === 'info';
     this.hasSuccess = data.msgType === 'success';
+    this.hasInfo = data.msgType === 'info';
+    this.hasWarning = data.msgType === 'warning';
     this.hasClose = !data.isNoClose;
-    console.log(`GlnSnackbar2Alert() data=`, data); // #
+
+    this.renderer.setAttribute(this.hostRef.nativeElement, 'mt-' + this.data.msgType || 'default', '');
   }
 
   /** Performs the action on the snack bar. */

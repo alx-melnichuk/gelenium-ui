@@ -1,12 +1,52 @@
 /*# sourceURL=gln-snackbar2-alert.component.scss */
 
 gln-snackbar2-alert {
+  --glnsba--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnsba--default-s: var(--glncl-default-s, var(--gln-default-s));
+  --glnsba--default-l: var(--glncl-default-l, var(--gln-default-l));
+
+  --glnsba--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
+  --glnsba--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
+  --glnsba--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
+
+  --glnsba---cur-cl: hsl(var(--glnsba--default-bg-h), var(--glnsba--default-bg-s), var(--glnsba--default-bg-l));
+
+  &[mt-default] {
+    --glnsba---cur-bg: hsl(var(--glnsba--default-h), var(--glnsba--default-s), var(--glnsba--default-l));
+  }
+  &[mt-error] {
+    --glnsba--danger-h: var(--glncl-danger-h, var(--gln-danger-h));
+    --glnsba--danger-s: var(--glncl-danger-s, var(--gln-danger-s));
+    --glnsba--danger-l: var(--glncl-danger-l, var(--gln-danger-l));
+    --glnsba---cur-bg: hsl(var(--glnsba--danger-h), var(--glnsba--danger-s), var(--glnsba--danger-l));
+  }
+  &[mt-success] {
+    --glnsba--success-h: var(--glncl-success-h, var(--gln-success-h));
+    --glnsba--success-s: var(--glncl-success-s, var(--gln-success-s));
+    --glnsba--success-l: var(--glncl-success-l, var(--gln-success-l));
+    --glnsba---cur-bg: hsl(var(--glnsba--success-h), var(--glnsba--success-s), var(--glnsba--success-l));
+  }
+  &[mt-info] {
+    --glnsba--info-h: var(--glncl-info-h, var(--gln-info-h));
+    --glnsba--info-s: var(--glncl-info-s, var(--gln-info-s));
+    --glnsba--info-l: var(--glncl-info-l, var(--gln-info-l));
+    --glnsba---cur-bg: hsl(var(--glnsba--info-h), var(--glnsba--info-s), var(--glnsba--info-l));
+  }
+  &[mt-warning] {
+    --glnsba--warning-h: var(--glncl-warning-h, var(--gln-warning-h));
+    --glnsba--warning-s: var(--glncl-warning-s, var(--gln-warning-s));
+    --glnsba--warning-l: var(--glncl-warning-l, var(--gln-warning-l));
+    --glnsba---cur-bg: hsl(var(--glnsba--warning-h), var(--glnsba--warning-s), var(--glnsba--warning-l));
+  }
+
   align-items: center;
-  background-color: #3131317a; // #313131; // # ng12 background: #323232;
+  // background-color: #3131317a; // #313131; // # ng12 background: #323232;
+  background-color: var(--glnsba---cur-bg);
   border-radius: 4px;
   box-sizing: border-box;
   box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
-  color: #fff; // # ng12 color: hsla(0,0%,100%,.7);
+  // color: #fff; // # ng12 color: hsla(0,0%,100%,.7);
+  color: var(--glnsba---cur-cl);
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;
