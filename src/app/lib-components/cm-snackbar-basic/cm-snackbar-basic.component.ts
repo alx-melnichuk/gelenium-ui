@@ -27,14 +27,20 @@ export class CmSnackbarBasicComponent {
   isShowBasic01 = true;
   idxBasic01 = 1;
   idxBasic02 = 1;
+  public msgType01List: string[] = ['default', 'error', 'warning', 'info', 'success'];
+  public msgType01a: string = this.msgType01List[0];
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private snackbar2Service: GlnSnackbar2Service) {}
 
-  public clickDemo1(): void {
+  public getValue(eventTarget: any): any {
+    return eventTarget != null ? (eventTarget as Attr).value : '';
+  }
+
+  public clickDemo1(msgType01a: string): void {
     const idx: number = this.idxBasic01++;
     const snackbar2Ref: GlnSnackbar2Ref<unknown> = this.snackbar2Service.open(`message Demo-${idx}`, undefined, {
-      data: { msgType: 'warning' },
+      data: { msgType: msgType01a },
     });
     snackbar2Ref.result
       .then((response) => {
