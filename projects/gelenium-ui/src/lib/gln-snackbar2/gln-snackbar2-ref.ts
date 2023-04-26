@@ -1,6 +1,7 @@
 import { PortalOutlet } from '@angular/cdk/portal';
 import { NgZone } from '@angular/core';
 import { Observable, take } from 'rxjs';
+// import { GlnSnackbar2Container } from './gln-snackbar2-container.component';
 
 export interface GlnSnackbar2Inst<T> {
   /** Your Toast ID. Use this to close it individually */
@@ -50,7 +51,8 @@ export class GlnSnackbar2Ref<T> {
     public readonly id: number,
     public readonly duration: number | undefined | null,
     public readonly wrapElement: HTMLElement,
-    public wrapPortal: PortalOutlet,
+    private wrapPortal: PortalOutlet,
+    // private snackbarContainer: GlnSnackbar2Container,
     private ngZone: NgZone
   ) {
     this.result = new Promise((resolve, reject) => {
@@ -90,17 +92,19 @@ export class GlnSnackbar2Ref<T> {
 
   private hideElement(): void {
     console.log(`hideElement();`); // #
+    // this.snackbarContainer.removeElement(this.id);
     this.wrapElement.setAttribute('is-hide', '');
+    this.removeElement();
   }
 
   private addAnimationEventListener(): void {
-    this.wrapElement.addEventListener('animationend', this.animationEventListener);
-    this.wrapElement.addEventListener('animationcancel', this.animationEventListener);
+    // this.wrapElement.addEventListener('animationend', this.animationEventListener);
+    // this.wrapElement.addEventListener('animationcancel', this.animationEventListener);
   }
 
   private removeAnimationEventListener(): void {
-    this.wrapElement.removeEventListener('animationend', this.animationEventListener);
-    this.wrapElement.removeEventListener('animationcancel', this.animationEventListener);
+    // this.wrapElement.removeEventListener('animationend', this.animationEventListener);
+    // this.wrapElement.removeEventListener('animationcancel', this.animationEventListener);
   }
 
   private animationEventListener = (ev: AnimationEvent) => {

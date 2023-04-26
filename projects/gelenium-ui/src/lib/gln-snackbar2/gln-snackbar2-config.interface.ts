@@ -19,24 +19,24 @@ export type GlnSnackbarVertical = 'top' | 'center' | 'bottom';
  * Configuration used when opening a snack-bar.
  */
 export class GlnSnackbar2Config<D = any> {
-  public static defaultHorizontal: GlnSnackbarHorizontal = 'center';
-  public static defaultVertical: GlnSnackbarVertical = 'bottom';
-  public static defaultTransition: GlnSnackbarTransition = 'slide'; // 'grow';
-  public static defaultSlideDirection: GlnSnackbarSlideDirection = 'up'; // up down right left;
+  // public static defaultHorizontal: GlnSnackbarHorizontal = 'center';
+  // public static defaultVertical: GlnSnackbarVertical = 'bottom';
+  // public static defaultTransition: GlnSnackbarTransition = 'slide'; // 'grow';
+  // public static defaultSlideDirection: GlnSnackbarSlideDirection = 'up'; // up down right left;
   /** The data is passed to the child component (via the injector). */
   public data?: D | null = null;
   /** Time to wait (in milliseconds) before automatically closing the snack bar. */
   public duration?: number | undefined = 0;
   /** Horizontal position to accommodate the snack bar. */
-  public horizontal?: GlnSnackbarHorizontal | undefined = GlnSnackbar2Config.defaultHorizontal;
+  public horizontal?: GlnSnackbarHorizontal | undefined = 'center';
   /** Additional CSS classes to add to the snack bar. */
   public panelClass?: string | string[] | undefined;
   /** Vertical position to accommodate the snack bar. */
-  public vertical?: GlnSnackbarVertical | undefined = GlnSnackbar2Config.defaultVertical;
+  public vertical?: GlnSnackbarVertical | undefined = 'bottom';
   /** The dependency injection view container that serves as the parent of the snack bar. */
   public viewContainerRef?: ViewContainerRef | undefined;
   /** The direction of movement of the snack bar during the transformation of the 'slide'. */
-  public slideDirection?: GlnSnackbarSlideDirection | undefined = GlnSnackbar2Config.defaultSlideDirection;
+  public slideDirection?: GlnSnackbarSlideDirection | undefined = 'up'; // up down right left;
   /** Type of transformation when displaying (hiding) the snack bar. */
-  public transition?: GlnSnackbarTransition | undefined = GlnSnackbar2Config.defaultTransition;
+  public transition?: GlnSnackbarTransition | undefined = 'grow'; // grow fade slide;
 }

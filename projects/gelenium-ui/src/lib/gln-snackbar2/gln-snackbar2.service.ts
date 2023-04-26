@@ -159,13 +159,20 @@ export class GlnSnackbar2Service implements OnDestroy {
     content: ComponentType<T> | TemplateRef<T>,
     config?: GlnSnackbar2Config
   ): GlnSnackbar2Ref<T | EmbeddedViewRef<any>> {
+    if (0 === overlayMetadata.amount) {
+      // Position overlay by configuration.
+      overlayMetadata.overlayRef.getConfig().positionStrategy?.apply();
+    }
+
     const config2: GlnSnackbar2Config = { ...new GlnSnackbar2Config(), ...this.rootConfig, ...config };
 
     const id: number = uniqueIdCounter++;
 
     const snackbar2Container: GlnSnackbar2ContainerComponent = overlayMetadata.containerRef.instance;
     // const wrapElement: HTMLElement = this.createWrapElement(overlayMetadata.containerElement, id.toString());
-    const wrapElement: HTMLElement = snackbar2Container.createWrapElement(id.toString(), 'gln-container-wrap', 'is-show');
+    const transition = config2.transition || 'grow';
+    // Create a new wrapper element for "snackbar"
+    const wrapElement: HTMLElement = snackbar2Container.addWrapElement(id, 'gln-container-wrap', [transition, 'is-show']);
 
     const wrapPortal: DomPortalOutlet = this.createWrapPortal(wrapElement);
 
@@ -197,11 +204,9 @@ export class GlnSnackbar2Service implements OnDestroy {
       this.detachSnackbarRef(overlayMetadata);
     });
 
-    overlayMetadata.overlayRef.getConfig().positionStrategy?.apply();
-
-    if (1 === overlayMetadata.amount) {
-      snackbar2Container.setProperties(wrapElement, config2.horizontal, config2.vertical, config2.transition, config2.slideDirection);
-    }
+    // if (1 === overlayMetadata.amount) {
+    //   snackbar2Container.setProperties(wrapElement, config2.horizontal, config2.vertical, config2.transition, config2.slideDirection);
+    // }
 
     // TODO To return, create a new object with the required interface.
     return snackbarRef;
