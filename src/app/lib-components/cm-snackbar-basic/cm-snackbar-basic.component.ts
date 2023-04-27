@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+
 import { GlnSnackbar2Ref, GlnSnackbar2Service } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
@@ -27,8 +28,12 @@ export class CmSnackbarBasicComponent {
   isShowBasic01 = true;
   idxBasic01 = 1;
   idxBasic02 = 1;
+
   public msgType01List: string[] = ['default', 'error', 'warning', 'info', 'success'];
   public msgType01a: string = this.msgType01List[0];
+
+  public transition01aList: string[] = ['grow', 'fade', 'blur', 'slide', 'slide-dw', 'slide-lf', 'slide-rg', 'turn', 'turn-y'];
+  public transition01a: string = this.transition01aList[0];
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private snackbar2Service: GlnSnackbar2Service) {}
@@ -37,10 +42,11 @@ export class CmSnackbarBasicComponent {
     return eventTarget != null ? (eventTarget as Attr).value : '';
   }
 
-  public clickDemo1(msgType01a: string): void {
+  public clickDemo1(msgType01a: string, transition01a: string): void {
     const idx: number = this.idxBasic01++;
     const snackbar2Ref: GlnSnackbar2Ref<unknown> = this.snackbar2Service.open(`message Demo-${idx}`, undefined, {
       data: { msgType: msgType01a },
+      transition: transition01a,
     });
     snackbar2Ref.result
       .then((response) => {

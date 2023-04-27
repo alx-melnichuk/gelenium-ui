@@ -33,13 +33,29 @@ import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';</pre>
 &lt;/form&gt;</pre></code> -->
 </section>
 
-<select class="tta4-select"
-  (change)="msgType01a=getValue($event.target)">
-  <option *ngFor="let item of msgType01List"
-    [value]="item"
-    [attr.selected]="msgType01a==item ? '' : null">{{ item }}
-  </option>
-</select>
+<section>
+  <label>
+    <select class="tta4-select"
+      (change)="msgType01a=getValue($event.target)">
+      <option *ngFor="let item of msgType01List"
+        [value]="item"
+        [attr.selected]="msgType01a==item ? '' : null">{{ item }}
+      </option>
+    </select>
+    msgType
+  </label>
+  &nbsp;
+  <label>
+    <select class="tta4-select"
+      (change)="transition01a=getValue($event.target)">
+      <option *ngFor="let item of transition01aList"
+        [value]="item"
+        [attr.selected]="transition01a==item ? '' : null">{{ item }}
+      </option>
+    </select>
+    transition
+  </label>
+</section>
 
 <div *ngIf="isShowBasic01"
   class="app-group">
@@ -55,7 +71,7 @@ import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';</pre>
     <button class="snbs1-btn"
       tabindex="0"
       type="button"
-      (click)="clickDemo1(msgType01a)">
+      (click)="clickDemo1(msgType01a, transition01a)">
       <span>Open1 snackbar</span>
       <!-- <span class="MuiTouchRipple-root css-w0pj6f"></span> -->
     </button>
