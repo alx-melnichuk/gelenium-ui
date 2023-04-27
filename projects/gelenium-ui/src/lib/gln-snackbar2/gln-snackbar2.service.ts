@@ -169,10 +169,8 @@ export class GlnSnackbar2Service implements OnDestroy {
     const id: number = uniqueIdCounter++;
 
     const snackbar2Container: GlnSnackbar2ContainerComponent = overlayMetadata.containerRef.instance;
-    // const wrapElement: HTMLElement = this.createWrapElement(overlayMetadata.containerElement, id.toString());
-    const transition = config2.transition || 'grow';
     // Create a new wrapper element for "snackbar"
-    const wrapElement: HTMLElement = snackbar2Container.addWrapElement(id, 'gln-container-wrap', [transition, 'is-show']);
+    const wrapElement: HTMLElement = snackbar2Container.addWrapElement(id, config2.transition);
 
     const wrapPortal: DomPortalOutlet = this.createWrapPortal(wrapElement);
 
@@ -203,11 +201,6 @@ export class GlnSnackbar2Service implements OnDestroy {
       const key: string = this.getKeySnackbar(config2);
       this.detachSnackbarRef(overlayMetadata);
     });
-
-    // if (1 === overlayMetadata.amount) {
-    //   snackbar2Container.setProperties(wrapElement, config2.horizontal, config2.vertical, config2.transition, config2.slideDirection);
-    // }
-
     // TODO To return, create a new object with the required interface.
     return snackbarRef;
   }

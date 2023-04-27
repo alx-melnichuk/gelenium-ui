@@ -92,19 +92,18 @@ export class GlnSnackbar2Ref<T> {
 
   private hideElement(): void {
     console.log(`hideElement();`); // #
-    // this.snackbarContainer.removeElement(this.id);
+    this.wrapElement.setAttribute('animated', '');
     this.wrapElement.setAttribute('is-hide', '');
-    this.removeElement();
   }
 
   private addAnimationEventListener(): void {
-    // this.wrapElement.addEventListener('animationend', this.animationEventListener);
-    // this.wrapElement.addEventListener('animationcancel', this.animationEventListener);
+    this.wrapElement.addEventListener('animationend', this.animationEventListener);
+    this.wrapElement.addEventListener('animationcancel', this.animationEventListener);
   }
 
   private removeAnimationEventListener(): void {
-    // this.wrapElement.removeEventListener('animationend', this.animationEventListener);
-    // this.wrapElement.removeEventListener('animationcancel', this.animationEventListener);
+    this.wrapElement.removeEventListener('animationend', this.animationEventListener);
+    this.wrapElement.removeEventListener('animationcancel', this.animationEventListener);
   }
 
   private animationEventListener = (ev: AnimationEvent) => {
@@ -112,6 +111,7 @@ export class GlnSnackbar2Ref<T> {
     if (false === this.isDisplayed) {
       this.isDisplayed = true;
       this.wrapElement.removeAttribute('is-show');
+      this.wrapElement.removeAttribute('animated');
     } else if (true === this.isDisplayed) {
       console.log(`animationEventListener(); this.isDisplayed:false;`); // #
       this.removeElement();
@@ -123,6 +123,7 @@ export class GlnSnackbar2Ref<T> {
     clearTimeout(this.timeoutId);
 
     this.removeAnimationEventListener();
+    // this.snackbarContainer.removeElement(this.id);
 
     this.wrapPortal.detach();
     this.wrapPortal.dispose();
