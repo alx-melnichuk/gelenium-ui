@@ -30,4 +30,7 @@ export class ArrayUtil {
     }
     return result;
   }
+  public static getList<T>(data: T | T[] | undefined | null): T[] {
+    return !data ? [] : Array.isArray(data) ? data : [data];
+  }
 }
