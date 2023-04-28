@@ -17,7 +17,11 @@ export class GlnSnackbar2Config<D = any> {
   public duration?: number | undefined = 0;
   /** Horizontal position to accommodate the snack bar. */
   public horizontal?: string | undefined = GlnSnackbar2Config.defaultHorizontal; // 'left','center','right'
-  /** Additional CSS classes to add to the snack bar. */
+  /** The maximum number of visible snack bar items in the current overlay.
+   * Affects when the overlay is created (when the first element of the snack bar appears).
+   */
+  public maxCountItems?: number | undefined = -1;
+  /** Additional CSS classes to add to the snack bar overlay panel. */
   public panelClass?: string | string[] | undefined;
   /** Vertical position to accommodate the snack bar. */
   public vertical?: string | undefined = GlnSnackbar2Config.defaultVertical; // 'top','center','bottom'
@@ -26,4 +30,6 @@ export class GlnSnackbar2Config<D = any> {
   /** Type of transformation when displaying (hiding) the snack bar. */
   // 'grow','fade','blur','slide','slide-dw','slide-lf','slide-rg','turn','turn-y';
   public transition?: string | undefined = GlnSnackbar2Config.defaultTransition;
+  /** Additional CSS classes to add on the wrapper to the snack bar. */
+  public wrapperClass?: string | string[] | undefined;
 }
