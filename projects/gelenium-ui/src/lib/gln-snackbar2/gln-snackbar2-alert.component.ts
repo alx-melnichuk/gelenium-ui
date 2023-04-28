@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, Renderer2, ViewEncapsulation } from '@angular/core';
 import { GLN_SNACKBAR2_DATA } from './gln-snackbar2-config.interface';
-import { GlnSnackbar2Ref } from './gln-snackbar2-ref';
+import { GlnSnackbar2Reference } from './gln-snackbar2-ref';
 
 export type GlnSnackbarAlertIcon = 'error' | 'warning' | 'info' | 'success';
 
 export interface GlnSnackbar2Alert {
   data: { message: string; action?: string; msgType?: string; isNoClose?: boolean };
-  snackbarRef: GlnSnackbar2Ref<GlnSnackbar2Alert>;
+  snackbarRef: GlnSnackbar2Reference<GlnSnackbar2Alert>;
   action: () => void;
   hasAction: boolean;
 }
@@ -38,7 +38,7 @@ export class GlnSnackbar2AlertComponent implements GlnSnackbar2Alert {
     private hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
     @Inject(GLN_SNACKBAR2_DATA) data: any,
-    public snackbarRef: GlnSnackbar2Ref<GlnSnackbar2AlertComponent>
+    public snackbarRef: GlnSnackbar2Reference<GlnSnackbar2AlertComponent>
   ) {
     this.data = data;
 
