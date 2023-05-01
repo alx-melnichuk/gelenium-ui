@@ -20,7 +20,7 @@ export class GlnSnackbar2Config<D = any> {
   /** The maximum number of visible snack bar items in the current overlay.
    * Affects when the overlay is created (when the first element of the snack bar appears).
    */
-  public maxCountItems?: number | undefined = -1;
+  public maxCountItems?: number | undefined = 0;
   /** Additional CSS classes to add to the snack bar overlay panel. */
   public panelClass?: string | string[] | undefined;
   /** Vertical position to accommodate the snack bar. */

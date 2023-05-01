@@ -10,7 +10,6 @@ import {
   Injectable,
   InjectionToken,
   Injector,
-  NgZone,
   OnDestroy,
   Optional,
   TemplateRef,
@@ -33,7 +32,6 @@ type GlnOverlayMetadata = {
   overlayRef: OverlayRef;
   containerComp: GlnSnackbar2ContainerComponent;
   maxCount: number;
-  snackbarRefList: GlnSnackbar2Reference<any>[];
 };
 
 @Injectable({
@@ -50,7 +48,6 @@ export class GlnSnackbar2Service implements OnDestroy {
     private overlay: Overlay,
     private injector: Injector,
     @Inject(DOCUMENT) private document: Document,
-    private ngZone: NgZone,
     private componentFactoryResolver: ComponentFactoryResolver,
     @Optional() @Inject(GLN_SNACKBAR2_CONFIG) private rootConfig: GlnSnackbar2Config | null
   ) {
@@ -121,11 +118,20 @@ export class GlnSnackbar2Service implements OnDestroy {
 
       const containerComponent = new ComponentPortal(GlnSnackbar2ContainerComponent, undefined, injectorWithConfig);
       const containerRef: ComponentRef<GlnSnackbar2ContainerComponent> = overlayRef.attach(containerComponent);
-      // const containerElement: HTMLElement = containerRef.location.nativeElement;
-      const maxCount: number = currConfig2.maxCountItems || -1;
 
-      overlayMetadata = { key, overlayRef, containerComp: containerRef.instance, maxCount, snackbarRefList: [] };
+      const maxCount: number = currConfig2.maxCountItems || 0;
+
+      overlayMetadata = { key, overlayRef, containerComp: containerRef.instance, maxCount };
       this.overlayMetadataMap.set(key, overlayMetadata);
+
+      const overlayMetadataRes: GlnOverlayMetadata = overlayMetadata;
+      overlayMetadata.containerComp.setRemoveWrapperFn(() => {
+        if (containerRef.instance.wrapperMapSize() == 0) {
+          console.log(`@@setRemoveWrapperFn() overlayRef.detach();`); // #
+          overlayMetadataRes.overlayRef.detach();
+          this.overlayMetadataMap.delete(overlayMetadataRes.key);
+        }
+      });
     }
     return overlayMetadata;
   }
@@ -161,22 +167,24 @@ export class GlnSnackbar2Service implements OnDestroy {
     config?: GlnSnackbar2Config
   ): GlnSnackbar2Ref<T | EmbeddedViewRef<any>> {
     const config2: GlnSnackbar2Config = { ...new GlnSnackbar2Config(), ...this.rootConfig, ...config };
+    const snackbarContainer: GlnSnackbar2ContainerComponent = overlayMetadata.containerComp;
 
-    if (0 === overlayMetadata.snackbarRefList.length) {
+    if (0 === snackbarContainer.wrapperMapSize()) {
       // Position overlay by configuration.
       overlayMetadata.overlayRef.getConfig().positionStrategy?.apply();
     }
-    // const snackbar2Container: GlnSnackbar2ContainerComponent = overlayMetadata.containerRef.instance;
-
     const id: number = uniqueIdCounter++;
-
     const wrapperClasses: string[] = ArrayUtil.getList<string>(config2.wrapperClass);
-    // Create a new wrapper element for "snackbar"
-    const wrapElement: HTMLElement = overlayMetadata.containerComp.createWrapElement(id, wrapperClasses, config2.transition);
+    const transition: string = config2.transition || GlnSnackbar2Config.defaultTransition;
+    // Create a new wrapper element for the current overlay.
+    const wrapperElement: HTMLElement = snackbarContainer.createWrapper(id, wrapperClasses, transition);
+    const wrapperPortal: DomPortalOutlet = this.createWrapPortal(wrapperElement);
 
-    const wrapPortal: DomPortalOutlet = this.createWrapPortal(wrapElement);
-
-    const snackbarRef = new GlnSnackbar2Reference<T | EmbeddedViewRef<any>>(id, config2.duration, wrapElement, wrapPortal, this.ngZone);
+    const snackbarRef = new GlnSnackbar2Reference<T | EmbeddedViewRef<any>>(id, config2.duration);
+    // Add a wrapper element to the list for the current overlay.
+    snackbarContainer.appendWrapper(id, wrapperPortal);
+    // Show this wrapper element of the current overlay.
+    snackbarContainer.showWrapper(id);
 
     let htmlElement: HTMLElement | null = null;
 
@@ -185,41 +193,45 @@ export class GlnSnackbar2Service implements OnDestroy {
       const portal: TemplatePortal<any> = new TemplatePortal(content, null!, { $implicit: config2.data, snackbarRef } as any);
       htmlElement = portal.templateRef.elementRef.nativeElement;
       // Attach the template portal to the "containerPortal".
-      snackbarRef.instance = wrapPortal.attachTemplatePortal(portal);
+      snackbarRef.instance = wrapperPortal.attachTemplatePortal(portal);
     } else {
       const injector: Injector = this.createInjector(this.injector, config2, snackbarRef);
       // Create a component portal.
       const portal = new ComponentPortal(content, undefined, injector);
       // Attach the component portal to the "containerPortal".
-      const contentRef: ComponentRef<T> = wrapPortal.attachComponentPortal(portal);
+      const contentRef: ComponentRef<T> = wrapperPortal.attachComponentPortal(portal);
       htmlElement = contentRef.location.nativeElement;
       // We can't pass this via the injector, because the injector is created earlier.
       snackbarRef.instance = contentRef.instance;
     }
     htmlElement?.setAttribute('role', 'alert');
 
-    this.attachMetadata(overlayMetadata, snackbarRef);
-
-    snackbarRef.setDetachRefFn(() => {
-      this.detachMetadata(overlayMetadata, snackbarRef);
+    snackbarRef.setHideWrapperFn(() => {
+      console.log(`@@containerComp.hideWrapper(${id});`); // #
+      snackbarContainer.hideWrapper(id);
     });
-    // snackbarRef.setAttachRefFn(() => {});
+    snackbarRef.setRemoveWrapperFn(() => {
+      console.log(`@@containerComp.removeWrapper(${id});`); // #
+      snackbarContainer.removeWrapper(id);
+    });
 
-    snackbarRef.open();
-
-    if (overlayMetadata.maxCount > 0 && overlayMetadata.maxCount < overlayMetadata.snackbarRefList.length) {
-      const snackbarRef: GlnSnackbar2Reference<any> = overlayMetadata.snackbarRefList.splice(0, 1)[0];
-      snackbarRef.dismiss({ noAnimation: true });
+    if (overlayMetadata.maxCount > 0) {
+      while (overlayMetadata.maxCount < snackbarContainer.wrapperMapSize()) {
+        const firstId: number | undefined = snackbarContainer.getItemByIndex(0);
+        if (firstId !== undefined) {
+          // Remove the wrapper element from the list for the current overlay.
+          snackbarContainer.removeWrapper(firstId);
+        }
+      }
     }
 
-    // TODO To return, create a new object with the required interface.
-    const snackbarRef2: GlnSnackbar2Ref<T> = {
+    const snackbar2Reference: GlnSnackbar2Ref<T> = {
       instance: snackbarRef.instance,
       result: snackbarRef.result,
       close: snackbarRef.close,
       dismiss: snackbarRef.dismiss,
     };
-    return snackbarRef2;
+    return snackbar2Reference;
   }
 
   private createWrapPortal(containerWrap: HTMLElement): DomPortalOutlet {
@@ -240,19 +252,5 @@ export class GlnSnackbar2Service implements OnDestroy {
         { provide: GLN_SNACKBAR2_DATA, useValue: config.data },
       ],
     });
-  }
-
-  private attachMetadata(overlayMetadata: GlnOverlayMetadata, snackbarRef: GlnSnackbar2Reference<any>): void {
-    overlayMetadata.snackbarRefList.push(snackbarRef);
-  }
-  private detachMetadata(overlayMetadata: GlnOverlayMetadata, snackbarRef: GlnSnackbar2Reference<any>): void {
-    const index: number = overlayMetadata.snackbarRefList.indexOf(snackbarRef);
-    if (index > -1) {
-      overlayMetadata.snackbarRefList.splice(index, 1);
-    }
-    if (overlayMetadata.snackbarRefList.length == 0) {
-      overlayMetadata.overlayRef.detach();
-      this.overlayMetadataMap.delete(overlayMetadata.key);
-    }
   }
 }
