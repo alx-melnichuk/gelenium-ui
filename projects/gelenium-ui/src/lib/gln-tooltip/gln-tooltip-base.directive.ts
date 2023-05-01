@@ -13,7 +13,7 @@ import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { AfterViewInit, ComponentRef, Directive, ElementRef, OnDestroy, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ParentScrollUtil } from '../_utils/parent-scroll.util';
 
-import { EventListenerType, EventListenerUtil } from './event-listener.util';
+import { EventListenerType, EventListenerUtil } from '../_utils/event-listener.util';
 import { GlnTooltipBaseComponent } from './gln-tooltip-base.component';
 import { GlnTooltipOpenUtil } from './gln-tooltip-open.util';
 
