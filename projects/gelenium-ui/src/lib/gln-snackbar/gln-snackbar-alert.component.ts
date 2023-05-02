@@ -1,10 +1,27 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  OnInit,
+  Optional,
+  Renderer2,
+  ViewEncapsulation,
+} from '@angular/core';
 import { GLN_SNACKBAR_DATA } from './gln-snackbar-config.interface';
 import { GlnSnackbarReference } from './gln-snackbar-reference';
 
+export interface GlnSnackbarAlertParams {
+  message: string;
+  action?: string;
+  msgType?: string;
+  isNoClose?: boolean;
+}
+
 export interface GlnSnackbarAlert {
-  data: { message: string; action?: string; msgType?: string; isNoClose?: boolean };
-  snackbarRef: GlnSnackbarReference<GlnSnackbarAlert>;
+  data: GlnSnackbarAlertParams;
+  snackbarRef?: GlnSnackbarReference<GlnSnackbarAlert> | undefined;
   action: () => void;
   hasAction: boolean;
 }
@@ -17,9 +34,10 @@ export interface GlnSnackbarAlert {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnSnackbarAlertComponent implements GlnSnackbarAlert {
+export class GlnSnackbarAlertComponent implements GlnSnackbarAlert, OnInit {
   /** Data that was injected into the snack bar. */
-  public data: { message: string; action?: string; msgType?: string; isNoClose?: boolean };
+  @Input('params')
+  public data: GlnSnackbarAlertParams;
   public hasError: boolean = false;
   public hasWarning: boolean = false;
   public hasInfo: boolean = false;
@@ -35,28 +53,31 @@ export class GlnSnackbarAlertComponent implements GlnSnackbarAlert {
   constructor(
     private hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
-    @Inject(GLN_SNACKBAR_DATA) data: any,
-    public snackbarRef: GlnSnackbarReference<GlnSnackbarAlertComponent>
+    @Inject(GLN_SNACKBAR_DATA) @Optional() data?: any,
+    @Optional() public snackbarRef?: GlnSnackbarReference<GlnSnackbarAlert>
   ) {
-    this.data = data;
+    this.data = data || { message: '' };
+  }
 
-    this.hasError = data.msgType === 'error';
-    this.hasSuccess = data.msgType === 'success';
-    this.hasInfo = data.msgType === 'info';
-    this.hasWarning = data.msgType === 'warning';
-    this.hasClose = !data.isNoClose;
+  public ngOnInit(): void {
+    console.log(`data=`, this.data); // #
+    this.hasError = this.data.msgType === 'error';
+    this.hasSuccess = this.data.msgType === 'success';
+    this.hasInfo = this.data.msgType === 'info';
+    this.hasWarning = this.data.msgType === 'warning';
+    this.hasClose = !this.data.isNoClose;
 
-    this.renderer.setAttribute(this.hostRef.nativeElement, 'mg-' + this.data.msgType || 'default', '');
+    this.renderer.setAttribute(this.hostRef.nativeElement, 'nt-' + (this.data.msgType || 'default'), '');
   }
 
   /** Performs the action on the snack bar. */
   public action(): void {
     console.log(`GlnSnackbarAlert.action(${this.data.action})`); // #
-    this.snackbarRef.close(this.data.action);
+    this.snackbarRef?.close(this.data.action);
   }
 
   public close(): void {
     console.log(`GlnSnackbarAlert.action()`); // #
-    this.snackbarRef.close();
+    this.snackbarRef?.close(undefined);
   }
 }
