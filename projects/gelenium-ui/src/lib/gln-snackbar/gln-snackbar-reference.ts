@@ -20,15 +20,13 @@ export class GlnSnackbarReference<T> {
   private hideWrapperFn: () => void = () => {};
   private removeWrapperFn: () => void = () => {};
   private resolve: (result: any) => void = () => {};
-  private reject: (reason?: any) => void = () => {};
 
   /** Identifier of the time to wait before closing (the result of calling setTimeout). */
   private timeoutId: number | undefined;
 
   constructor(public readonly id: number, public readonly duration: number | undefined | null) {
-    this.result = new Promise((resolve, reject) => {
+    this.result = new Promise((resolve) => {
       this.resolve = resolve;
-      this.reject = reject;
     });
     if (!!this.duration && this.duration > 0) {
       console.log(`$setTimeout(() => { this.dismiss(); }`); // #
@@ -51,9 +49,9 @@ export class GlnSnackbarReference<T> {
   }
   /** Closes the snack bar when the timeout expires. */
   public dismiss(options?: { noAnimation?: boolean }): void {
-    console.log(`$dismiss(); reject();`); // #
+    console.log(`$dismiss(); resolve(undefined);`); // #
     this.clearTimeout();
-    this.reject();
+    this.resolve(undefined);
     if (!options?.noAnimation) {
       this.hideWrapperFn();
     } else {
