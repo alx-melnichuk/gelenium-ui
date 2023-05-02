@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { GlnSnackbar2Ref, GlnSnackbar2Service } from 'gelenium-ui';
+import { GlnSnackbarRef, GlnSnackbarService } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
@@ -36,7 +36,7 @@ export class CmSnackbarBasicComponent {
   public transition01a: string = this.transition01aList[0];
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor(private snackbar2Service: GlnSnackbar2Service) {}
+  constructor(private snackbarService: GlnSnackbarService) {}
 
   public getValue(eventTarget: any): any {
     return eventTarget != null ? (eventTarget as Attr).value : '';
@@ -44,11 +44,11 @@ export class CmSnackbarBasicComponent {
 
   public clickDemo1(msgType01a: string, transition01a: string): void {
     const idx: number = this.idxBasic01++;
-    const snackbar2Ref: GlnSnackbar2Ref<unknown> = this.snackbar2Service.open(`message Demo-${idx}`, undefined, {
+    const snackbarRef: GlnSnackbarRef<unknown> = this.snackbarService.open(`message Demo-${idx}`, undefined, {
       data: { msgType: msgType01a },
       transition: transition01a,
     });
-    snackbar2Ref.result
+    snackbarRef.result
       .then((response) => {
         console.log(`1_resolve(${idx} response=${response});`); // #
       })
@@ -59,13 +59,13 @@ export class CmSnackbarBasicComponent {
 
   public clickDemo2(): void {
     const idx: number = this.idxBasic02++;
-    const snackbar2Ref: GlnSnackbar2Ref<unknown> = this.snackbar2Service.open(`message Demo-${idx}`, 'action1', {
+    const snackbarRef: GlnSnackbarRef<unknown> = this.snackbarService.open(`message Demo-${idx}`, 'action1', {
       data: { msgType: 'success', isNoClose: true },
       duration: 4000,
       horizontal: 'right',
       vertical: 'top',
     });
-    snackbar2Ref.result
+    snackbarRef.result
       .then((response) => {
         console.log(`2_resolve(${idx} response=${response});`); // #
       })
