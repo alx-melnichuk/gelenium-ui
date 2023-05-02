@@ -14,7 +14,7 @@ export class GlnSnackbarConfig<D = any> {
   /** The data is passed to the child component (via the injector). */
   public data?: D | null = null;
   /** Time to wait (in milliseconds) before automatically closing the snack bar. */
-  public duration?: number | undefined = 0;
+  public duration?: number | undefined = 6000;
   /** Horizontal position to accommodate the snack bar. */
   public horizontal?: string | undefined = GlnSnackbarConfig.defaultHorizontal; // 'left','center','right'
   /** The maximum number of visible snack bar items in the current overlay.
