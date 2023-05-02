@@ -1,0 +1,168 @@
+/*# sourceURL=gln-snackbar-container.component.scss */
+
+.gln-snackbar-panel {
+  @media (max-width: 799.95px) { // 599.95px
+    --glnsbp--mr: 0.5rem;
+    width: 100%;
+  }
+}
+
+gln-snackbar-container {
+  // --glnsbcw--duration: 10220ms; // origin: 220ms;
+  align-items: center;
+  // border-radius: 4px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  // margin: 1.5rem;
+  // max-width: 33vw;
+  // min-height: 48px;
+  // min-width: 300px;
+  // padding: 6px 1rem;
+  transform-origin: center;
+  margin: var(--glnsbp--mr, 1rem);
+  width: inherit;
+  outline: 1px solid green;
+
+  --glnsbcw--trn-dur: 260ms; // 260ms
+  // transition: transform var(--glnsw-trn-dur, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  
+  // 'left' | 'center' | 'right'
+  &[hor-left] > .gln-container-wrapper {
+    margin-right: 1em;
+  }
+  &[hor-right] > .gln-container-wrapper {
+    margin-left: 1em;
+  }
+  // 'top' | 'center' | 'bottom'
+  &[ver-bottom] > .gln-container-wrapper {
+    margin-top: 1em;
+  }
+  &[ver-top] > .gln-container-wrapper {
+    margin-bottom: 1em;
+  }
+
+  .gln-container-wrapper {
+    // transform: none;
+    // transition: transform var(--glnsbcw--trn-dur, 0ms) cubic-bezier(0, 0, 0.2, 1) 0ms;
+    // transition: transform 1200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+
+    // grow
+    // opacity: 1;
+    // transform: none;
+    // transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    //   opacity: 0;
+    //   transform: scale(0.75, 0.5625);
+    
+    // ** [animated] - start **
+    &[animated] {
+      animation-duration: var(--glnsbcw--trn-dur, 0ms);
+      animation-timing-function: ease-in-out;
+      &[is-show]:not([is-hide]) {
+        animation-name: var(--glnsbcw--anmt-name, none);
+        animation-direction: normal;
+      }
+      &:not([is-show])[is-hide] {
+        animation-name: var(--glnsbcw--anmt-name, none);
+        animation-direction: reverse;
+      }
+
+      &[grow] {
+        --glnsbcw--anmt-name: kf-sbcw-grow;
+        @keyframes kf-sbcw-grow {
+          0% {
+            opacity: 0;
+            transform: scale(.3);
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+      }
+
+      &[fade] {
+        --glnsbcw--anmt-name: kf-sbcw-fade;
+        @keyframes kf-sbcw-fade {
+          0% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+      }
+
+      &[blur] {
+        --glnsbcw--anmt-name: kf-sbcw-blur;
+        @keyframes kf-sbcw-blur {
+          0% {
+            opacity: 0;
+            filter: blur(20px);
+          }
+          100% {
+            opacity: 1;
+            filter: none;
+          }
+        }
+      }
+
+      &[slide] {
+        &[slide-lf] {
+          --glnsbcw--transl-x: -120vw;
+        }
+        &[slide-rg] {
+          --glnsbcw--transl-x: 120vw;
+        }
+        &[slide-dw] {
+          --glnsbcw--transl-y: -120vh;
+        }
+        &:not([slide-lf]):not([slide-rg]):not([slide-dw]) {
+          --glnsbcw--transl-y: 120vh;
+        }
+        --glnsbcw--anmt-name: kf-sbcw-slide;
+        @keyframes kf-sbcw-slide {
+          0% {
+            transform: translate(var(--glnsbcw--transl-x, 0px), var(--glnsbcw--transl-y, 0px));
+          }
+          100% {
+            transform: translate(0px, 0px);
+          }
+        }
+      }
+
+      &[turn] {
+        &[turn-y] {
+          --glnsbcw--rotate: rotateY(90deg);
+        }
+        &:not([turn-y]) {
+          --glnsbcw--rotate: rotateX(90deg);
+        }
+        --glnsbcw--anmt-name: kf-sbcw-turn;
+        @keyframes kf-sbcw-turn {
+          0% {
+            opacity: 0;
+            transform: perspective(400px) var(--glnsbcw--rotate);
+          }
+          5% {
+            opacity: 1;
+          }
+          100% {
+            transform: perspective(400px);
+          }
+        }
+      }
+      
+      // ** [animated] - finish **
+    }
+  }
+}
+
+// .gln-snackbar-container {
+//   color: #fff; // # ng12 color: hsla(0,0%,100%,.7);
+//   background-color: #313131; // # ng12 background: #323232;
+//   box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),
+//     0px 6px 10px 0px rgba(0,0,0,0.14),
+//     0px 1px 18px 0px rgba(0,0,0,0.12);
+//   //# ng12 box-shadow: 0px 3px 5px -1px   rgba(0,0,0,0.2), 0px 6px 10px 0px   rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
+// }
