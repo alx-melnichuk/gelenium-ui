@@ -6,12 +6,12 @@ import { EventListenerType, EventListenerUtil } from '../_utils/event-listener.u
 
 import { GlnSnackbar2Config } from './gln-snackbar2-config.interface';
 
-export type SnackbarContainerItemResult = {
+export type Snackbar2ContainerItemResult = {
   showAnimationCompleted: () => void;
   hideAnimationCompleted: () => void;
 };
 
-type SnackbarContainerItem = {
+type Snackbar2ContainerItem = {
   wrapperPortal: DomPortalOutlet;
   listeners: EventListenerType[];
 };
@@ -90,9 +90,9 @@ export class GlnSnackbar2ContainerComponent {
     return wrapper;
   }
 
-  public appendWrapper(id: number, wrapperPortal: DomPortalOutlet): SnackbarContainerItemResult {
+  public appendWrapper(id: number, wrapperPortal: DomPortalOutlet): Snackbar2ContainerItemResult {
     console.log(`*appendWrapper(${id})`); // #
-    const result: SnackbarContainerItemResult = {
+    const result: Snackbar2ContainerItemResult = {
       showAnimationCompleted: () => {},
       hideAnimationCompleted: () => {},
     };
@@ -118,7 +118,7 @@ export class GlnSnackbar2ContainerComponent {
 
   public showWrapper(id: number): void {
     console.log(`*showWrapper(${id})`); // #
-    const item: SnackbarContainerItem | undefined = this.wrapperMap.get(id);
+    const item: Snackbar2ContainerItem | undefined = this.wrapperMap.get(id);
     if (!!item) {
       item.wrapperPortal.outletElement.setAttribute('animated', '');
       item.wrapperPortal.outletElement.setAttribute('is-show', '');
@@ -127,7 +127,7 @@ export class GlnSnackbar2ContainerComponent {
 
   public hideWrapper(id: number): void {
     console.log(`*hideWrapper(${id})`); // #
-    const item: SnackbarContainerItem | undefined = this.wrapperMap.get(id);
+    const item: Snackbar2ContainerItem | undefined = this.wrapperMap.get(id);
     if (!!item) {
       item.wrapperPortal.outletElement.setAttribute('animated', '');
       item.wrapperPortal.outletElement.setAttribute('is-hide', '');
@@ -136,7 +136,7 @@ export class GlnSnackbar2ContainerComponent {
 
   public removeWrapper(id: number): void {
     console.log(`*removeWrapper(${id})`); // #
-    const item: SnackbarContainerItem | undefined = this.wrapperMap.get(id);
+    const item: Snackbar2ContainerItem | undefined = this.wrapperMap.get(id);
     if (!!item) {
       EventListenerUtil.removeListeners(item.listeners);
       item.wrapperPortal.detach();

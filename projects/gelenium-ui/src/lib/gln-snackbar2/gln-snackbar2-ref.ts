@@ -10,10 +10,6 @@ export interface GlnSnackbar2Ref<T> {
 /** Maximum amount of milliseconds that can be passed into setTimeout. */
 const MAX_TIMEOUT = Math.pow(2, 31) - 1;
 
-export interface GlnSnackbarDismiss {
-  dismissedByAction: boolean;
-}
-
 export class GlnSnackbar2Reference<T> {
   /** The instance of the component making up the content of the snack bar. */
   public instance!: T;

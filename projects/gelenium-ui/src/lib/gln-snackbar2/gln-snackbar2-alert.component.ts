@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, Inject, Renderer2, View
 import { GLN_SNACKBAR2_DATA } from './gln-snackbar2-config.interface';
 import { GlnSnackbar2Reference } from './gln-snackbar2-ref';
 
-export type GlnSnackbarAlertIcon = 'error' | 'warning' | 'info' | 'success';
+export type GlnSnackbar2AlertIcon = 'error' | 'warning' | 'info' | 'success';
 
 export interface GlnSnackbar2Alert {
   data: { message: string; action?: string; msgType?: string; isNoClose?: boolean };
