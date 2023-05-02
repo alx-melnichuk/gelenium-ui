@@ -26,6 +26,11 @@ export class CmSnackbarBasicComponent {
 
   // Page: Basic01
   isShowBasic01 = true;
+  // Page: Attrib01
+  isShowAttrib01 = true;
+  // Page: Attrib02
+  isShowAttrib02 = true;
+
   idxBasic01 = 1;
   idxBasic02 = 1;
 
@@ -37,6 +42,23 @@ export class CmSnackbarBasicComponent {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private snackbarService: GlnSnackbarService) {}
+
+  // Page: Basic01
+  public clickSimple(): void {
+    this.snackbarService.open('simple notification !');
+  }
+
+  // Page: Attrib01
+  public clickTypical(message: string, action: string = '', config: any): void {
+    this.snackbarService.open(message, action, config);
+  }
+
+  // Page: Attrib02
+  public clickPosition(message: string, action: string = '', config: any): void {
+    this.snackbarService.open(message, action, config);
+  }
+
+  // ** OLD **
 
   public getValue(eventTarget: any): any {
     return eventTarget != null ? (eventTarget as Attr).value : '';

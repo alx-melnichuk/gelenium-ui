@@ -22,16 +22,173 @@ import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';</pre>
     In this case, the input focus is not transferred to it.
     The notification panel can contain a button associated with this action.
   </p>
-  <!-- <span> For example:</span>
+  <span> For example:</span>
   <code><pre source="html">
-&lt;form [formGroup]="formGroup01a" novalidate autocomplete="off"&gt;
-  &lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits01a"
-    formControlName="model01a"
-    <i>name="model01a"</i>
-    <i>[value]="item"</i>&gt; <b>&#123;</b>&#123; item &#125;&#125;
-  &lt;/<strong>gln-radio-button</strong>&gt;
-&lt;/form&gt;</pre></code> -->
+&lt;button type="button" (click)="onClick()"&gt;
+  &lt;span&gt;Open notification&lt;/span&gt;
+&lt;/button&gt;
+</pre></code>
+
+  <code><pre source="ts">
+import &#123; <i><strong>GlnSnackbarModule</strong></i> &#125; from <i><strong>'gelenium-ui'</strong></i>;
+@Component(&#123; ... &#125;)
+export class NotificationComponent &#123;
+  constructor(private <strong>snackbarService: GlnSnackbarService</strong>) &#123;&#125;
+  public onClick(): void &#123;
+    this.<strong>snackbarService.open('text notification !');</strong>
+  &#125;
+&#125;</pre></code>
 </section>
+
+
+<section *ngIf="isShowBasic01"
+  mr-vr
+  id="simple-snackbars">
+  <h4 class="app-hover-link">
+    Simple snackbars
+    <a [href]="urlCmSnackbar + '#simple-snackbars'">#</a>
+  </h4>
+  <p>
+    The following is an example of a simple notification.
+  </p>
+</section>
+
+
+<div *ngIf="isShowBasic01"
+  class="app-group">
+
+  <div class="app-elem">
+    <button class="snbs1-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickSimple()">
+      <span>Open simple notification</span>
+      <!-- <span class="MuiTouchRipple-root css-w0pj6f"></span> -->
+    </button>
+  </div>
+</div>
+
+
+<!-- source -->
+
+
+<section *ngIf="isShowAttrib01"
+  mr-vr
+  id="snackbars-with-types">
+  <h4 class="app-hover-link">
+    Snackbars with types
+    <a [href]="urlCmSnackbar + '#snackbars-with-types'">#</a>
+  </h4>
+  <p>
+    You can display notifications with different types: "info", "success", "error", "warning".
+  </p>
+</section>
+
+
+<section *ngIf="isShowAttrib01">
+  <div class="snat1-elem">
+    <p>
+      <gln-snackbar-alert
+        [params]="{ message: 'notifications with type \'error\'', msgType: 'error', 'isNoClose': true }"
+        (click)="clickTypical('notifications with type \'error\'', '', { data: { msgType: 'error'}})">
+      </gln-snackbar-alert>
+    </p>
+    <p>
+      <gln-snackbar-alert
+        [params]="{ message: 'notifications with type \'warning\'', msgType: 'warning', 'isNoClose': true }"
+        (click)="clickTypical('notifications with type \'warning\'', '', { data: { msgType: 'warning'}})">
+      </gln-snackbar-alert>
+    </p>
+    <p>
+      <gln-snackbar-alert
+        [params]="{ message: 'notifications with type \'success\'', msgType: 'success', 'isNoClose': true }"
+        (click)="clickTypical('notifications with type \'success\'', '', { data: { msgType: 'success'}})">
+      </gln-snackbar-alert>
+    </p>
+    <p>
+      <gln-snackbar-alert
+        [params]="{ message: 'notifications with type \'info\'', msgType: 'info', 'isNoClose': true }"
+        (click)="clickTypical('notifications with type \'info\'', '', { data: { msgType: 'info'}})">
+      </gln-snackbar-alert>
+    </p>
+  </div>
+</section>
+
+
+<!-- source -->
+
+
+<section *ngIf="isShowAttrib02"
+  mr-vr
+  id="positioning-snackbars">
+  <h4 class="app-hover-link">
+    Positioning of snackbars
+    <a [href]="urlCmSnackbar + '#positioning-snackbars'">#</a>
+  </h4>
+  <p>
+    The display position of snackbars is subject to change and is defined in the configuration.
+  </p>
+</section>
+
+
+<div *ngIf="isShowAttrib02">
+
+  <div class="app-group">
+
+    <button class="app-elem snbs1-elem snbs1-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickPosition('Positioning - top left', '', { horizontal: 'left', vertical: 'top' })">
+      <span>Top Left</span>
+    </button>
+
+    <button class="app-elem snbs1-elem snbs1-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickPosition('Positioning - top center', '', { horizontal: 'center', vertical: 'top' })">
+      <span>Top Center</span>
+    </button>
+
+    <button class="app-elem snbs1-elem snbs1-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickPosition('Positioning - top right', '', { horizontal: 'right', vertical: 'top' })">
+      <span>Top Right</span>
+    </button>
+
+  </div>
+
+  <div class="app-group">
+
+    <button class="app-elem snbs1-elem snbs1-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickPosition('Positioning - bottom left', '', { horizontal: 'left', vertical: 'bottom' })">
+      <span>Bottom Left</span>
+    </button>
+
+    <button class="app-elem snbs1-elem snbs1-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickPosition('Positioning - bottom center', '', { horizontal: 'center', vertical: 'bottom' })">
+      <span>Bottom Center</span>
+    </button>
+
+    <button class="app-elem snbs1-elem snbs1-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickPosition('Positioning - bottom right', '', { horizontal: 'right', vertical: 'bottom' })">
+      <span>Bottom Right</span>
+    </button>
+
+  </div>
+
+</div>
+
+<!-- source -->
+
+<p></p>
+<p>_</p>
 
 <section>
   <label>
