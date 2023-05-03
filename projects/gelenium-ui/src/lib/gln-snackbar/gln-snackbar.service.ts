@@ -119,7 +119,7 @@ export class GlnSnackbarService implements OnDestroy {
       const containerComponent = new ComponentPortal(GlnSnackbarContainerComponent, undefined, injectorWithConfig);
       const containerRef: ComponentRef<GlnSnackbarContainerComponent> = overlayRef.attach(containerComponent);
 
-      const maxCount: number = currConfig2.maxCountItems || 0;
+      const maxCount: number = currConfig2.maxCount || GlnSnackbarConfig.defaultMaxCount;
 
       overlayMetadata = { key, overlayRef, containerComp: containerRef.instance, maxCount };
       this.overlayMetadataMap.set(key, overlayMetadata);
