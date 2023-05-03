@@ -25,7 +25,6 @@ export * from './gln-radio-button/public-api';
 export * from './gln-radio-group/public-api';
 export * from './gln-select/public-api';
 export * from './gln-snackbar/public-api';
-export * from './gln-snackbar2/public-api';
 export * from './gln-spinner/public-api';
 export * from './gln-switch/public-api';
 export * from './gln-textarea/public-api';
