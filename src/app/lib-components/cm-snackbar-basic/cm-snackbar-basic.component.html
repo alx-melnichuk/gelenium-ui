@@ -5,30 +5,29 @@
     <a [href]="urlCmSnackbar + '#Basic'">#</a>
   </h3>
   <span>
-    To use this component, in your module you need to add:
+    To display notifications, in your module you need to add:
   </span>
   <code><pre source="ts">
 import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';</pre>
   </code>
   <p>
-    The GlnSnackbar component is designed to display brief notifications.
-    It is also called "toast".
-    <br />
-    The component informs the user about some event:
-    data calculation process started, data saving completed successfully (or not)
-    and so on.
-    <br />
-    By default, a short message temporarily appears at the bottom of the screen.
-    In this case, the input focus is not transferred to it.
-    The notification panel can contain a button associated with this action.
+    This module contains the GlnSnackbarService service, which has methods
+    for displaying notifications.
   </p>
+  <span>
+    Notifications inform the user about some event:
+  </span>
+  <ul>
+    <li>start the data calculation process;</li>
+    <li>data saving was successful (or not);</li>
+    <li>file upload completed successfully (or not);</li>
+  </ul>
   <span> For example:</span>
   <code><pre source="html">
 &lt;button type="button" (click)="onClick()"&gt;
   &lt;span&gt;Open notification&lt;/span&gt;
 &lt;/button&gt;
 </pre></code>
-
   <code><pre source="ts">
 import &#123; <i><strong>GlnSnackbarModule</strong></i> &#125; from <i><strong>'gelenium-ui'</strong></i>;
 @Component(&#123; ... &#125;)
@@ -38,6 +37,99 @@ export class NotificationComponent &#123;
     this.<strong>snackbarService.open('text notification !');</strong>
   &#125;
 &#125;</pre></code>
+  <br />
+  <span>
+    The "open" method of the <i>GlnSnackbarService</i> service has the following
+    parameters:
+  </span>
+  <ul>
+    <li>message: string; - notification text;</li>
+    <li>action?: string; - action button text (optional);</li>
+    <li>config?: <i>GlnSnackbarConfig</i>; - notification configuration (optional);</li>
+  </ul>
+  <p>
+    If the value "action" is specified, then an additional button (with this name)
+    will be displayed in the notification.
+  </p>
+  <span><i>GlnSnackbarConfig</i>&nbsp; basic configuration options:</span>
+  <table class="app-tab">
+    <thead>
+      <tr>
+        <th class="snbs1-mn-wd-12ch">Parameter</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <code>duration?: number<br/>
+            &nbsp;= 6000;</code>
+        </td>
+        <td>
+          Time to wait (in milliseconds) before automatically closing the snackbar.<br />
+          If set to 0, notifications will not automatically close.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>horizontal?: string<br/>
+            &nbsp;= 'center';</code>
+        </td>
+        <td>
+          Horizontal position to accommodate the snackbar.<br />
+          Takes values: 'left', 'center', 'right'.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>maxCount?: number<br/>
+            &nbsp;= 4;</code>
+        </td>
+        <td>
+          The maximum number of visible snackbar items in the current overlay.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>panelClass?: string<br/>
+            &nbsp;| string[];</code>
+        </td>
+        <td>
+          Additional CSS classes to add to the snackbar overlay panel.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>vertical?: string<br/>
+            &nbsp;= 'bottom';</code>
+        </td>
+        <td>
+          Vertical position to accommodate the snackbar.<br />
+          Takes values: 'top', 'center', 'bottom'.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>transition?: string<br/>
+            &nbsp;= 'grow';</code>
+        </td>
+        <td>
+          Type of transformation when displaying (hiding) the snackbar.<br />
+          Takes values: 'grow', 'fade', 'blur', 'slide', 'slide-dw', 'slide-lf',
+          'slide-rg','turn','turn-y';
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>wrapperClass?: string<br/>
+            &nbsp; | string[];</code>
+        </td>
+        <td>
+          Additional CSS classes to add on the wrapper to the snackbar.
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </section>
 
 
@@ -63,13 +155,85 @@ export class NotificationComponent &#123;
       type="button"
       (click)="clickSimple()">
       <span>Open simple notification</span>
-      <!-- <span class="MuiTouchRipple-root css-w0pj6f"></span> -->
     </button>
   </div>
 </div>
 
 
-<!-- source -->
+<section *ngIf="isShowBasic01"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;button class="snbs1-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickSimple()"&gt;
+      &lt;span&gt;Open simple notification&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-snackbar',
+  templateUrl: './snackbar.component.html',
+  styleUrls: ['./snackbar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SnackbarComponent &#123;
+
+  constructor(private snackbarService: GlnSnackbarService) &#123;&#125;
+
+  public clickSimple(): void &#123;
+    this.snackbarService.open('simple notification !');
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-snackbar &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .snbs1-btn &#123;
+    border-radius: 4px;
+    border-width: 0;
+    cursor: pointer;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 1.143em;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
 
 
 <section *ngIf="isShowAttrib01"
@@ -80,42 +244,154 @@ export class NotificationComponent &#123;
     <a [href]="urlCmSnackbar + '#snackbars-with-types'">#</a>
   </h4>
   <p>
-    You can display notifications with different types: "info", "success", "error", "warning".
+    You can display notifications with different types: "default", "error", "warning", "success",
+    "info".
   </p>
 </section>
 
 
-<section *ngIf="isShowAttrib01">
-  <div class="snat1-elem">
-    <p>
-      <gln-snackbar-alert
-        [params]="{ message: 'notifications with type \'error\'', msgType: 'error', 'isNoClose': true }"
-        (click)="clickTypical('notifications with type \'error\'', '', { data: { msgType: 'error'}})">
-      </gln-snackbar-alert>
-    </p>
-    <p>
-      <gln-snackbar-alert
-        [params]="{ message: 'notifications with type \'warning\'', msgType: 'warning', 'isNoClose': true }"
-        (click)="clickTypical('notifications with type \'warning\'', '', { data: { msgType: 'warning'}})">
-      </gln-snackbar-alert>
-    </p>
-    <p>
-      <gln-snackbar-alert
-        [params]="{ message: 'notifications with type \'success\'', msgType: 'success', 'isNoClose': true }"
-        (click)="clickTypical('notifications with type \'success\'', '', { data: { msgType: 'success'}})">
-      </gln-snackbar-alert>
-    </p>
-    <p>
-      <gln-snackbar-alert
-        [params]="{ message: 'notifications with type \'info\'', msgType: 'info', 'isNoClose': true }"
-        (click)="clickTypical('notifications with type \'info\'', '', { data: { msgType: 'info'}})">
-      </gln-snackbar-alert>
-    </p>
-  </div>
+<div *ngIf="isShowAttrib01"
+  class="snat1-elem">
+  <p>
+    <gln-snackbar-alert class="snat1-box"
+      [params]="{ message: 'notifications with type \'default\''
+        , msgType: 'default', 'isNoClose': true }"
+      (click)="clickTypical('notifications with type \'default\''
+        , '', { data: { msgType: 'default'}} )">
+    </gln-snackbar-alert>
+  </p>
+  <p>
+    <gln-snackbar-alert class="snat1-box"
+      [params]="{ message: 'notifications with type \'error\''
+        , msgType: 'error', 'isNoClose': true }"
+      (click)="clickTypical('notifications with type \'error\''
+        , '', { data: { msgType: 'error'}})">
+    </gln-snackbar-alert>
+  </p>
+  <p>
+    <gln-snackbar-alert class="snat1-box"
+      [params]="{ message: 'notifications with type \'warning\''
+        , msgType: 'warning', 'isNoClose': true }"
+      (click)="clickTypical('notifications with type \'warning\''
+        , '', { data: { msgType: 'warning'}})">
+    </gln-snackbar-alert>
+  </p>
+  <p>
+    <gln-snackbar-alert class="snat1-box"
+      [params]="{ message: 'notifications with type \'success\''
+        , msgType: 'success', 'isNoClose': true }"
+      (click)="clickTypical('notifications with type \'success\''
+        , '', { data: { msgType: 'success'}})">
+    </gln-snackbar-alert>
+  </p>
+  <p>
+    <gln-snackbar-alert class="snat1-box"
+      [params]="{ message: 'notifications with type \'info\''
+        , msgType: 'info', 'isNoClose': true }"
+      (click)="clickTypical('notifications with type \'info\''
+        , '', { data: { msgType: 'info'}})">
+    </gln-snackbar-alert>
+  </p>
+</div>
+
+
+<section *ngIf="isShowAttrib01"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="snat1-elem"&gt;
+
+  &lt;p&gt;
+    &lt;gln-snackbar-alert class="snat1-box"
+      [params]="&#123; message: 'notifications with type \'default\''
+        , msgType: 'default', 'isNoClose': true &#125;"
+      (click)="clickTypical('notifications with type \'default\''
+        , '', &#123; data: &#123; msgType: 'default'&#125;&#125; )"&gt;
+    &lt;/gln-snackbar-alert&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar-alert class="snat1-box"
+      [params]="&#123; message: 'notifications with type \'error\''
+        , msgType: 'error', 'isNoClose': true &#125;"
+      (click)="clickTypical('notifications with type \'error\''
+        , '', &#123; data: &#123; msgType: 'error'&#125;&#125;)"&gt;
+    &lt;/gln-snackbar-alert&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar-alert class="snat1-box"
+      [params]="&#123; message: 'notifications with type \'warning\''
+        , msgType: 'warning', 'isNoClose': true &#125;"
+      (click)="clickTypical('notifications with type \'warning\''
+        , '', &#123; data: &#123; msgType: 'warning'&#125;&#125;)"&gt;
+    &lt;/gln-snackbar-alert&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar-alert class="snat1-box"
+      [params]="&#123; message: 'notifications with type \'success\''
+        , msgType: 'success', 'isNoClose': true &#125;"
+      (click)="clickTypical('notifications with type \'success\''
+        , '', &#123; data: &#123; msgType: 'success'&#125;&#125;)"&gt;
+    &lt;/gln-snackbar-alert&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar-alert class="snat1-box"
+      [params]="&#123; message: 'notifications with type \'info\''
+        , msgType: 'info', 'isNoClose': true &#125;"
+      (click)="clickTypical('notifications with type \'info\''
+        , '', &#123; data: &#123; msgType: 'info'&#125;&#125;)"&gt;
+    &lt;/gln-snackbar-alert&gt;
+  &lt;/p&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-snackbar',
+  templateUrl: './snackbar.component.html',
+  styleUrls: ['./snackbar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SnackbarComponent &#123;
+
+  constructor(private snackbarService: GlnSnackbarService) &#123;&#125;
+
+  public clickTypical(
+    message: string, action: string = '', config: any
+  ): void &#123;
+    this.snackbarService.open(message, action, config);
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-snackbar &#123;
+  .snat1-elem &#123;
+    max-width: 40ch;
+  &#125;
+  .snat1-box &#123;
+    cursor: pointer;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
 </section>
 
+<hr br-nn />
 
-<!-- source -->
 
 
 <section *ngIf="isShowAttrib02"
@@ -135,24 +411,27 @@ export class NotificationComponent &#123;
 
   <div class="app-group">
 
-    <button class="app-elem snbs1-elem snbs1-btn"
+    <button class="app-elem snat2-btn"
       tabindex="0"
       type="button"
-      (click)="clickPosition('Positioning - top left', '', { horizontal: 'left', vertical: 'top' })">
+      (click)="clickPosition('Positioning - top left'
+        , '', { horizontal: 'left', vertical: 'top' })">
       <span>Top Left</span>
     </button>
 
-    <button class="app-elem snbs1-elem snbs1-btn"
+    <button class="app-elem snat2-btn"
       tabindex="0"
       type="button"
-      (click)="clickPosition('Positioning - top center', '', { horizontal: 'center', vertical: 'top' })">
+      (click)="clickPosition('Positioning - top center'
+        , '', { horizontal: 'center', vertical: 'top' })">
       <span>Top Center</span>
     </button>
 
-    <button class="app-elem snbs1-elem snbs1-btn"
+    <button class="app-elem snat2-btn"
       tabindex="0"
       type="button"
-      (click)="clickPosition('Positioning - top right', '', { horizontal: 'right', vertical: 'top' })">
+      (click)="clickPosition('Positioning - top right'
+        , '', { horizontal: 'right', vertical: 'top' })">
       <span>Top Right</span>
     </button>
 
@@ -160,24 +439,27 @@ export class NotificationComponent &#123;
 
   <div class="app-group">
 
-    <button class="app-elem snbs1-elem snbs1-btn"
+    <button class="app-elem snat2-btn"
       tabindex="0"
       type="button"
-      (click)="clickPosition('Positioning - bottom left', '', { horizontal: 'left', vertical: 'bottom' })">
+      (click)="clickPosition('Positioning - bottom left'
+        , '', { horizontal: 'left', vertical: 'bottom' })">
       <span>Bottom Left</span>
     </button>
 
-    <button class="app-elem snbs1-elem snbs1-btn"
+    <button class="app-elem snat2-btn"
       tabindex="0"
       type="button"
-      (click)="clickPosition('Positioning - bottom center', '', { horizontal: 'center', vertical: 'bottom' })">
+      (click)="clickPosition('Positioning - bottom center'
+        , '', { horizontal: 'center', vertical: 'bottom' })">
       <span>Bottom Center</span>
     </button>
 
-    <button class="app-elem snbs1-elem snbs1-btn"
+    <button class="app-elem snat2-btn"
       tabindex="0"
       type="button"
-      (click)="clickPosition('Positioning - bottom right', '', { horizontal: 'right', vertical: 'bottom' })">
+      (click)="clickPosition('Positioning - bottom right'
+        , '', { horizontal: 'right', vertical: 'bottom' })">
       <span>Bottom Right</span>
     </button>
 
@@ -185,7 +467,533 @@ export class NotificationComponent &#123;
 
 </div>
 
-<!-- source -->
+
+<section *ngIf="isShowAttrib02"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div&gt;
+  &lt;div class="app-group"&gt;
+
+    &lt;button class="app-elem snat2-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickPosition('Positioning - top left'
+        , '', &#123; horizontal: 'left', vertical: 'top' &#125;)"&gt;
+      &lt;span&gt;Top Left&lt;/span&gt;
+    &lt;/button&gt;
+
+    &lt;button class="app-elem snat2-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickPosition('Positioning - top center'
+        , '', &#123; horizontal: 'center', vertical: 'top' &#125;)"&gt;
+      &lt;span&gt;Top Center&lt;/span&gt;
+    &lt;/button&gt;
+
+    &lt;button class="app-elem snat2-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickPosition('Positioning - top right'
+        , '', &#123; horizontal: 'right', vertical: 'top' &#125;)"&gt;
+      &lt;span&gt;Top Right&lt;/span&gt;
+    &lt;/button&gt;
+
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;button class="app-elem snat2-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickPosition('Positioning - bottom left'
+        , '', &#123; horizontal: 'left', vertical: 'bottom' &#125;)"&gt;
+      &lt;span&gt;Bottom Left&lt;/span&gt;
+    &lt;/button&gt;
+
+    &lt;button class="app-elem snat2-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickPosition('Positioning - bottom center'
+        , '', &#123; horizontal: 'center', vertical: 'bottom' &#125;)"&gt;
+      &lt;span&gt;Bottom Center&lt;/span&gt;
+    &lt;/button&gt;
+
+    &lt;button class="app-elem snat2-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickPosition('Positioning - bottom right'
+        , '', &#123; horizontal: 'right', vertical: 'bottom' &#125;)"&gt;
+      &lt;span&gt;Bottom Right&lt;/span&gt;
+    &lt;/button&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-snackbar',
+  templateUrl: './snackbar.component.html',
+  styleUrls: ['./snackbar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SnackbarComponent &#123;
+
+  constructor(private snackbarService: GlnSnackbarService) &#123;&#125;
+
+  public clickPosition(
+    message: string, action: string = '', config: any
+  ): void &#123;
+    this.snackbarService.open(message, action, config);
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-snackbar &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .snat2-btn &#123;
+    border-radius: 4px;
+    border-width: 0;
+    cursor: pointer;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 16ch;
+    padding: 0 1.143em;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+
+<section *ngIf="isShowAttrib03"
+  mr-vr
+  id="transitions-snackbars">
+  <h4 class="app-hover-link">
+    "Transitions" of snackbars
+    <a [href]="urlCmSnackbar + '#transitions-snackbars'">#</a>
+  </h4>
+  <p>
+    The display of "transitions" of snack bars can be changed.
+    The configuration parameter "transition" is responsible for the transition type.
+  </p>
+  <span>And it can take the following values:</span>
+  <ul>
+    <li>
+      'grow' - "scaling" transition (css - transform: scale(.3)) (default);
+    </li>
+    <li>
+      'fade' - "manifestation" transition (css - opacity: 0);
+    </li>
+    <li>
+      'blur' - "blur" transition (css - filter: blur(20px));
+    </li>
+    <li>
+      'slide' - "slide up" transition (css - transform: translate(0px, 120vh));
+    </li>
+    <li>
+      'slide-dw' - "slide down" transition (css - transform: translate(0px, -120vh));
+    </li>
+    <li>
+      'slide-lf' - "slide left" transition (css - transform: translate(-120vw, 0px));
+    </li>
+    <li>
+      'slide-rg' - "slide right" transition (css - transform: translate(120vw, 0px));
+    </li>
+    <li>
+      'turn' - "3D turn along x-axis" transition (css - transform: perspective(400px)
+      rotateX(90deg));
+    </li>
+    <li>
+      'turn-y' - "3D turn along y-axis" transition (css - transform: perspective(400px)
+      rotateY(90deg));
+    </li>
+  </ul>
+</section>
+
+
+<section *ngIf="isShowAttrib03">
+  <label>
+    transition
+    <select class="snat3-select"
+      (change)="transition02g=getValue02g($event.target)">
+      <option *ngFor="let item of transition02gList"
+        [value]="item"
+        [attr.selected]="transition02g==item ? '' : null">{{ item }}
+      </option>
+    </select>
+  </label>
+</section>
+
+
+<div *ngIf="isShowAttrib03"
+  class="app-group">
+
+  <div class="app-elem">
+    <button class="snat3-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickTransition('show transition \'' + transition02g + '\''
+        , { transition: transition02g })">
+      <span>Open transition</span>
+    </button>
+  </div>
+</div>
+
+
+<section *ngIf="isShowAttrib03"
+  mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;section&gt;
+  &lt;label&gt;
+    transition
+    &lt;select class="snat3-select"
+      (change)="transition02g=getValue02g($event.target)"&gt;
+      &lt;option *ngFor="let item of transition02gList"
+        [value]="item"
+        [attr.selected]="transition02g==item ? '' : null"&gt;<b>&#123;</b>&#123; item &#125;&#125;
+      &lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/label&gt;
+&lt;/section&gt;
+
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;button class="snat3-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickTransition('show transition \'' + transition02g + '\''
+        , &#123; transition: transition02g &#125;)"&gt;
+      &lt;span&gt;Open transition&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-snackbar',
+  templateUrl: './snackbar.component.html',
+  styleUrls: ['./snackbar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SnackbarComponent &#123;
+  public transition02gList: string[] = [
+  'grow', 'fade', 'blur',
+  'slide', 'slide-dw', 'slide-lf', 'slide-rg',
+  'turn', 'turn-y'
+  ];
+  public transition02g: string = this.transition02gList[0];
+
+  constructor(private snackbarService: GlnSnackbarService) &#123;&#125;
+
+  public getValue02g(eventTarget: any): any &#123;
+    return eventTarget != null
+      ? (eventTarget as Attr).value : '';
+  &#125;
+
+  public clickTransition(
+    message: string, config: any
+  ): void &#123;
+    this.snackbarService.open(message, '', config);
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-snackbar &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .snat3-select &#123;
+    padding: 6px 1em;
+    font-size: 14px;
+    outline: none;
+    margin: 3px;
+  &#125;
+  .snat3-btn &#123;
+    border-radius: 4px;
+    border-width: 0;
+    cursor: pointer;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 1.143em;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+
+<section *ngIf="isShowConfig08"
+  mr-vr>
+  <h4 class="app-hover-link">
+    Config
+    <a [href]="urlCmSnackbar + '#Config'">#</a>
+  </h4>
+  <p>
+    If your application will have a single style for displaying notification elements,
+    then you can set a single configuration.
+
+    To do this, you need to create an object with the GlnSnackbarConfig interface and define the
+    required values.
+    Next, specify the resulting object in the list of providers for the entire application (at the
+    level of the AppComponent).
+  </p>
+  <code><pre source="ts">
+const glnSnackbarConfigDefault: GlnSnackbarConfig = &#123;
+  horizontal: 'left',
+  vertical: 'top',
+&#125;;
+
+@Component(&#123;
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  providers: [
+    &#123; provide: GLN_SNACKBAR_CONFIG, useValue: glnSnackbarConfigDefault &#125;
+  ],
+&#125;)
+export class AppComponent &#123;
+  title = 'demo';
+&#125;</pre></code>
+  <p>
+    After that, all notifications will have the same display style.
+  </p>
+</section>
+
+
+<section *ngIf="isShowConfig08"
+  mr-vr
+  id="config-interface">
+  <h4 class="app-hover-link">
+    GlnSnackbarConfig interface.
+    <a [href]="urlCmSnackbar + '#config-interface'">#</a>
+  </h4>
+</section>
+
+
+<table *ngIf="isShowConfig08"
+  class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="2"><em>Description of class GlnSnackbarConfig&lt;D = any&gt;.</em></td>
+    </tr>
+    <tr>
+      <td><code>data?: D | null<br/>
+        &nbsp;&nbsp;| undefined<br/>
+        &nbsp;&nbsp;= undefined;</code></td>
+      <td>
+        <span>
+          The data is passed to the child component (via the injector).
+          <br />(default = undefined;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>duration?: number<br/>
+        &nbsp;&nbsp;| undefined<br/>
+        &nbsp;&nbsp;= 6000;</code></td>
+      <td>
+        <span>
+          Time to wait (in milliseconds) before automatically closing the snackbar.
+          <br />(default = 6000;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>horizontal?: string<br/>
+        &nbsp;&nbsp;| undefined<br/>
+        &nbsp;&nbsp;= 'center';</code></td>
+      <td>
+        <span>
+          Horizontal position to accommodate the snackbar.
+          <br />(default = 'center';)
+        </span>
+        <br />
+        <span>Takes values:</span>
+        <ul>
+          <li>'left' - left aligned;</li>
+          <li>'center' - center aligned (default);</li>
+          <li>'right' - right aligned;</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>maxCount?: number<br/>
+        &nbsp;&nbsp;| undefined<br/>
+        &nbsp;&nbsp;= 6;</code></td>
+      <td>
+        <span>
+          The maximum number of visible snackbar items in the current overlay.
+          <br />(default = 6;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>panelClass?: string<br/>
+        &nbsp;&nbsp;| string[]<br/>
+        &nbsp;&nbsp;| undefined<br/>
+        &nbsp;&nbsp;= undefined;</code></td>
+      <td>
+        <span>
+          Additional CSS classes to add to the snackbar overlay panel.
+          <br />(default = undefined;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>vertical?: string<br/>
+        &nbsp;&nbsp;| undefined<br/>
+        &nbsp;&nbsp;= 'center';</code></td>
+      <td>
+        <span>
+          Vertical position to accommodate the snackbar.
+          <br />(default = 'bottom';)
+        </span>
+        <br />
+        <span>Takes values:</span>
+        <ul>
+          <li>'top' - top aligned;</li>
+          <li>'center' - middle aligned (default);</li>
+          <li>'bottom' - bottom aligned;</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>viewContainerRef?<br/>
+        &nbsp;&nbsp;: ViewContainerRef<br/>
+        &nbsp;&nbsp;| undefined<br/>
+        &nbsp;&nbsp;= undefined;</code></td>
+      <td>
+        <span>
+          The dependency injection view container that serves as the parent of the snackbar.
+          <br />(default = undefined;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>transition?: string<br/>
+        &nbsp;&nbsp;| undefined<br/>
+        &nbsp;&nbsp;= 'grow';</code></td>
+      <td>
+        <span>
+          Type of transformation when displaying (hiding) the snackbar.
+          <br />(default = 'grow';)
+        </span>
+        <span>Takes values:</span>
+        <ul>
+          <li>
+            'grow' - "scaling" transition
+            <br /><i>(css - transform: scale(.3))</i> (default);
+          </li>
+          <li>
+            'fade' - "manifestation" transition
+            <br /><i>(css - opacity: 0)</i>;
+          </li>
+          <li>
+            'blur' - "blur" transition
+            <br /><i>(css - filter: blur(20px))</i>;
+          </li>
+          <li>
+            'slide' - "slide up" transition
+            <br /><i>(css - transform: translate(0px, 120vh))</i>;
+          </li>
+          <li>
+            'slide-dw' - "slide down" transition
+            <br /><i>(css - transform: translate(0px, -120vh))</i>;
+          </li>
+          <li>
+            'slide-lf' - "slide left" transition
+            <br /><i>(css - transform: translate(-120vw, 0px))</i>;
+          </li>
+          <li>
+            'slide-rg' - "slide right" transition
+            <br /><i>(css - transform: translate(120vw, 0px))</i>;
+          </li>
+          <li>
+            'turn' - "3D turn along x-axis" transition
+            <br /><i>(css - transform: perspective(400px) rotateX(90deg))</i>;
+          </li>
+          <li>
+            'turn-y' - "3D turn along y-axis" transition
+            <br /><i>(css - transform: perspective(400px) rotateY(90deg))</i>;
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>wrapperClass?: string<br/>
+        &nbsp;&nbsp;| string[]<br/>
+        &nbsp;&nbsp;| undefined<br/>
+        &nbsp;&nbsp;= undefined;</code></td>
+      <td>
+        <span>
+          Additional CSS classes to add on the wrapper to the snackbar.
+          <br />(default = undefined;)
+        </span>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
 
 <p></p>
 <p>_</p>

@@ -2,10 +2,16 @@
 
 app-cm-snackbar-basic {
   display: block;
+
+  .snbs1-mn-wd-12ch {
+    min-width: 12ch;
+  }
   // Page: Basic01
+
   .snbs1-btn {
     border-radius: 4px;
     border-width: 0;
+    cursor: pointer;
     font-size: 0.875em;
     height: 38px;
     min-width: 64px;
@@ -16,8 +22,35 @@ app-cm-snackbar-basic {
   .snat1-elem {
     max-width: 40ch;
   }
+  .snat1-box {
+    cursor: pointer;
+  }
 
-  .snbs1-elem {
+  // Page: Attrib02
+  .snat2-btn {
+    border-radius: 4px;
+    border-width: 0;
+    cursor: pointer;
+    font-size: 0.875em;
+    height: 38px;
     min-width: 16ch;
+    padding: 0 1.143em;
+  }
+
+  // Page: Attrib03
+  .snat3-select {
+    padding: 6px 1em;
+    font-size: 14px;
+    outline: none;
+    margin: 3px;
+  }
+  .snat3-btn {
+    border-radius: 4px;
+    border-width: 0;
+    cursor: pointer;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 1.143em;
   }
 }

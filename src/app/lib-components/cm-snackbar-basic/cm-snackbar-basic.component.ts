@@ -27,9 +27,15 @@ export class CmSnackbarBasicComponent {
   // Page: Basic01
   isShowBasic01 = true;
   // Page: Attrib01
-  isShowAttrib01 = true;
+  isShowAttrib01 = false; // # true;
   // Page: Attrib02
-  isShowAttrib02 = true;
+  isShowAttrib02 = false; // # true;
+  // Page: Attrib03
+  isShowAttrib03 = false; // # true;
+  public transition02gList: string[] = ['grow', 'fade', 'blur', 'slide', 'slide-dw', 'slide-lf', 'slide-rg', 'turn', 'turn-y'];
+  public transition02g: string = this.transition02gList[0];
+  // Page: Config08
+  isShowConfig08 = true;
 
   idxBasic01 = 1;
   idxBasic02 = 1;
@@ -57,6 +63,17 @@ export class CmSnackbarBasicComponent {
   public clickPosition(message: string, action: string = '', config: any): void {
     this.snackbarService.open(message, action, config);
   }
+
+  // Page: Attrib03
+  public getValue02g(eventTarget: any): any {
+    return eventTarget != null ? (eventTarget as Attr).value : '';
+  }
+
+  public clickTransition(message: string, config: any): void {
+    this.snackbarService.open(message, '', config);
+  }
+
+  // Page: Config08
 
   // ** OLD **
 
