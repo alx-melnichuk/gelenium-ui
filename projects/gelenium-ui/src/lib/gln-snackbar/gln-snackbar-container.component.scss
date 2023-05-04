@@ -3,6 +3,7 @@
 .gln-snackbar-panel {
   @media (max-width: 799.95px) { // 599.95px
     --glnsbp--mr: 0.5rem;
+    --glnsb-panel-margin: var(--glnsb-panel-margin-mini);
     width: 100%;
   }
 }
