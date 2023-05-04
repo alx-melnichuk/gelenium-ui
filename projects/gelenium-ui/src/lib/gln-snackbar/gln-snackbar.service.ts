@@ -8,10 +8,8 @@ import {
   EmbeddedViewRef,
   Inject,
   Injectable,
-  InjectionToken,
   Injector,
   OnDestroy,
-  Optional,
   TemplateRef,
   Type,
 } from '@angular/core';
@@ -27,12 +25,10 @@ import { GlnSnackbarModule } from './gln-snackbar.module';
 const CSS_CLASS_PANEL = 'gln-snackbar-panel';
 let uniqueIdCounter = 0;
 
-export const GLN_SNACKBAR_CONFIG = new InjectionToken<GlnSnackbarConfig>('GLN_SNACKBAR_CONFIG');
-
 type GlnOverlayMetadata = {
   key: string;
   overlayRef: OverlayRef;
-  containerComp: any; // GlnSnackbarContainerComponent;
+  containerComp: GlnSnackbarContainerComponent;
   maxCount: number;
 };
 
@@ -45,13 +41,13 @@ export class GlnSnackbarService implements OnDestroy {
 
   private appRef: ApplicationRef | null = null;
   private overlayMetadataMap: Map<string, GlnOverlayMetadata> = new Map();
+  private rootConfig: GlnSnackbarConfig = new GlnSnackbarConfig();
 
   constructor(
     private overlay: Overlay,
     private injector: Injector,
     @Inject(DOCUMENT) private document: Document,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    @Optional() @Inject(GLN_SNACKBAR_CONFIG) private rootConfig: GlnSnackbarConfig | null
+    private componentFactoryResolver: ComponentFactoryResolver
   ) {}
 
   public ngOnDestroy(): void {
@@ -64,6 +60,14 @@ export class GlnSnackbarService implements OnDestroy {
 
   // ** Public methods **
 
+  public getConfig(): GlnSnackbarConfig {
+    return { ...this.rootConfig };
+  }
+  public setConfig(config: GlnSnackbarConfig): void {
+    this.rootConfig = { ...new GlnSnackbarConfig(), ...config };
+    console.log(`@@setConfig() rootConfig=`, this.rootConfig); // #
+  }
+
   public openFromComponent<T>(component: ComponentType<T>, config?: GlnSnackbarConfig): GlnSnackbarReference<T> {
     const overlayMetadata: GlnOverlayMetadata = this.getOverlayMetadata(this.overlay, this.injector, config);
     return this.openContent<T>(overlayMetadata, component, config) as GlnSnackbarReference<T>;
@@ -75,7 +79,7 @@ export class GlnSnackbarService implements OnDestroy {
   }
 
   public open(message: string, action: string = '', config?: GlnSnackbarConfig): GlnSnackbarReference<GlnSnackbarAlert> {
-    const dataConfig = { ...this.rootConfig, ...config };
+    const dataConfig = { ...config };
     dataConfig.data = { ...{ message, action }, ...dataConfig.data };
     return this.openFromComponent(this.snackbarAlertComponent, dataConfig);
   }
@@ -109,23 +113,25 @@ export class GlnSnackbarService implements OnDestroy {
           overlayRef.overlayElement.classList.add(panelClass[idx]);
         }
       }
-      const currConfig2: GlnSnackbarConfig = { ...currConfig };
-      currConfig2.data = null;
       const injectorWithConfig: Injector = Injector.create({
         parent: injector,
-        providers: [{ provide: GlnSnackbarConfig, useValue: currConfig2 }],
+        providers: [{ provide: GlnSnackbarConfig, useValue: currConfig }],
       });
 
-      const containerComponent = new ComponentPortal(GlnSnackbarContainerComponent, undefined, injectorWithConfig);
-      const containerRef: ComponentRef<GlnSnackbarContainerComponent> = overlayRef.attach(containerComponent);
+      const containerComponentPortal: ComponentPortal<GlnSnackbarContainerComponent> = new ComponentPortal(
+        GlnSnackbarContainerComponent,
+        undefined,
+        injectorWithConfig
+      );
+      const containerRef: ComponentRef<GlnSnackbarContainerComponent> = overlayRef.attach(containerComponentPortal);
 
-      const maxCount: number = currConfig2.maxCount || GlnSnackbarConfig.defaultMaxCount;
+      const maxCount: number = currConfig.maxCount || GlnSnackbarConfig.defaultMaxCount;
 
       overlayMetadata = { key, overlayRef, containerComp: containerRef.instance, maxCount };
       this.overlayMetadataMap.set(key, overlayMetadata);
 
       const overlayMetadataRes: GlnOverlayMetadata = overlayMetadata;
-      overlayMetadata.containerComp.setRemoveWrapperFn(() => {
+      containerRef.instance.setRemoveWrapperFn(() => {
         if (containerRef.instance.wrapperMapSize() == 0) {
           console.log(`@@setRemoveWrapperFn() overlayRef.detach();`); // #
           overlayMetadataRes.overlayRef.detach();
@@ -240,7 +246,8 @@ export class GlnSnackbarService implements OnDestroy {
     if (!this.appRef) {
       this.appRef = this.injector.get<ApplicationRef>(ApplicationRef);
     }
-    return new DomPortalOutlet(containerWrap, this.componentFactoryResolver, this.appRef, this.injector, this.document);
+    const injector: Injector = this.appRef.injector;
+    return new DomPortalOutlet(containerWrap, this.componentFactoryResolver, this.appRef, injector || this.injector, this.document);
   }
 
   private createInjector<T>(injector: Injector, config: GlnSnackbarConfig, snackbarRef: GlnSnackbarReference<T>): Injector {
