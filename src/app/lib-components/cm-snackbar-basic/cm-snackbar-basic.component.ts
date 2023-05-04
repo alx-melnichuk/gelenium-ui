@@ -36,6 +36,7 @@ export class CmSnackbarBasicComponent {
   public transition02g: string = this.transition02gList[0];
   // Page: Config08
   isShowConfig08 = true;
+  public config08 = { horizontal: 'left', vertical: 'top' };
 
   idxBasic01 = 1;
   idxBasic02 = 1;
@@ -47,7 +48,9 @@ export class CmSnackbarBasicComponent {
   public transition01a: string = this.transition01aList[0];
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor(private snackbarService: GlnSnackbarService) {}
+  constructor(private snackbarService: GlnSnackbarService) {
+    console.log(`CmSnackbarBasic();`); //#
+  }
 
   // Page: Basic01
   public clickSimple(): void {
@@ -74,6 +77,9 @@ export class CmSnackbarBasicComponent {
   }
 
   // Page: Config08
+  public clickConfig(message: string, config: any): void {
+    this.snackbarService.open(message, '', config);
+  }
 
   // ** OLD **
 
