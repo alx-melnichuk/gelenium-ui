@@ -10,7 +10,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { GLN_SNACKBAR_DATA } from './gln-snackbar-config.interface';
-import { GlnSnackbarReference } from './gln-snackbar-reference';
+import { GlnSnackbarRef } from './gln-snackbar-reference';
 
 export interface GlnSnackbarAlertParams {
   message: string;
@@ -21,7 +21,7 @@ export interface GlnSnackbarAlertParams {
 
 export interface GlnSnackbarAlert {
   data: GlnSnackbarAlertParams;
-  snackbarRef?: GlnSnackbarReference<GlnSnackbarAlert> | undefined;
+  snackbarRef?: GlnSnackbarRef<GlnSnackbarAlert> | undefined;
   action: () => void;
   hasAction: boolean;
 }
@@ -43,7 +43,6 @@ export class GlnSnackbarAlertComponent implements GlnSnackbarAlert, OnInit {
   public hasInfo: boolean = false;
   public hasSuccess: boolean = false;
   public hasClose: boolean = false;
-
   /** If the action button should be shown. */
   public get hasAction(): boolean {
     return !!this.data.action;
@@ -54,7 +53,7 @@ export class GlnSnackbarAlertComponent implements GlnSnackbarAlert, OnInit {
     private hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
     @Inject(GLN_SNACKBAR_DATA) @Optional() data?: any,
-    @Optional() public snackbarRef?: GlnSnackbarReference<GlnSnackbarAlert>
+    @Optional() public snackbarRef?: GlnSnackbarRef<GlnSnackbarAlert>
   ) {
     this.data = data || { message: '' };
   }
@@ -67,7 +66,7 @@ export class GlnSnackbarAlertComponent implements GlnSnackbarAlert, OnInit {
     this.hasWarning = this.data.msgType === 'warning';
     this.hasClose = !this.data.isNoClose;
 
-    this.renderer.setAttribute(this.hostRef.nativeElement, 'nt-' + (this.data.msgType || 'default'), '');
+    this.renderer.setAttribute(this.hostRef.nativeElement, 'sn-' + (this.data.msgType || 'default'), '');
   }
 
   /** Performs the action on the snack bar. */

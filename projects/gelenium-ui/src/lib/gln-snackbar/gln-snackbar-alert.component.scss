@@ -11,28 +11,28 @@ gln-snackbar-alert {
 
   --glnsba---cur-cl: hsl(var(--glnsba--default-bg-h), var(--glnsba--default-bg-s), var(--glnsba--default-bg-l));
 
-  &[nt-default] {
+  &[sn-default] {
     --glnsba---cur-bg: hsl(var(--glnsba--default-h), var(--glnsba--default-s), var(--glnsba--default-l));
   }
-  &[nt-error] {
+  &[sn-error] {
     --glnsba--danger-h: var(--glncl-danger-h, var(--gln-danger-h));
     --glnsba--danger-s: var(--glncl-danger-s, var(--gln-danger-s));
     --glnsba--danger-l: var(--glncl-danger-l, var(--gln-danger-l));
     --glnsba---cur-bg: hsl(var(--glnsba--danger-h), var(--glnsba--danger-s), var(--glnsba--danger-l));
   }
-  &[nt-success] {
+  &[sn-success] {
     --glnsba--success-h: var(--glncl-success-h, var(--gln-success-h));
     --glnsba--success-s: var(--glncl-success-s, var(--gln-success-s));
     --glnsba--success-l: var(--glncl-success-l, var(--gln-success-l));
     --glnsba---cur-bg: hsl(var(--glnsba--success-h), var(--glnsba--success-s), var(--glnsba--success-l));
   }
-  &[nt-info] {
+  &[sn-info] {
     --glnsba--info-h: var(--glncl-info-h, var(--gln-info-h));
     --glnsba--info-s: var(--glncl-info-s, var(--gln-info-s));
     --glnsba--info-l: var(--glncl-info-l, var(--gln-info-l));
     --glnsba---cur-bg: hsl(var(--glnsba--info-h), var(--glnsba--info-s), var(--glnsba--info-l));
   }
-  &[nt-warning] {
+  &[sn-warning] {
     --glnsba--warning-h: var(--glncl-warning-h, var(--gln-warning-h));
     --glnsba--warning-s: var(--glncl-warning-s, var(--gln-warning-s));
     --glnsba--warning-l: var(--glncl-warning-l, var(--gln-warning-l));
