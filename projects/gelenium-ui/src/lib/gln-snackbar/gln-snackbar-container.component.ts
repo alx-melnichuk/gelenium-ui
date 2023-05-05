@@ -1,6 +1,6 @@
 import { DomPortalOutlet } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, Renderer2, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, Renderer2, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { EventListenerType, EventListenerUtil } from '../_utils/event-listener.util';
 import { GlnSnackbarConfig } from './gln-snackbar-config.interface';
 
@@ -28,12 +28,13 @@ export class GlnSnackbarContainerComponent {
   private removeWrapperFn: () => void = () => {};
 
   constructor(
-    private hostRef: ElementRef<HTMLElement>,
+    public hostRef: ElementRef<HTMLElement>,
+    public viewContainerRef: ViewContainerRef,
     private renderer: Renderer2,
     config: GlnSnackbarConfig,
     @Inject(DOCUMENT) private document: Document
   ) {
-    this.renderer.addClass(this.hostRef.nativeElement, 'gln-snackbar2-container');
+    this.renderer.addClass(this.hostRef.nativeElement, 'gln-snackbar-container');
     this.renderer.setAttribute(this.hostRef.nativeElement, 'role', 'presentation');
 
     const horizontal: string = config.horizontal || GlnSnackbarConfig.defaultHorizontal;
