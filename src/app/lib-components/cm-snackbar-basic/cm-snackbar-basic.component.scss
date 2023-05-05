@@ -54,6 +54,17 @@ app-cm-snackbar-basic {
     padding: 0 1.143em;
   }
 
+  // Page: Custom05
+  .sncs-btn {
+    border-radius: 4px;
+    border-width: 0;
+    cursor: pointer;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 1.143em;
+  }
+
   // Page: Config08
   .sncf-btn {
     border-radius: 4px;
@@ -65,3 +76,40 @@ app-cm-snackbar-basic {
     padding: 0 1.143em;
   }
 }
+
+
+// Page: Custom05
+.gln-snackbar-panel {
+  .sccs-alert {
+    align-items: center;
+    background-color: lavender;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
+    color: black;
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    min-height: 48px;
+    min-width: 300px;
+    padding: 0px 16px;
+  }
+  .sccs-close {
+    align-items: center;
+    background-color: transparent;
+    border: 0;
+    border-radius: 50%;
+    box-sizing: border-box;
+    color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: inherit;
+    justify-content: center;
+    // outline: 1px solid blue; // #
+    // outline: 0;
+    outline: 1px solid black;
+    overflow: visible;
+    padding: 4px 6px;
+  }
+} 

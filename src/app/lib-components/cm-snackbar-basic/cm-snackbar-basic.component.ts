@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EmbeddedViewRef,
+  Input,
+  TemplateRef,
+  ViewContainerRef,
+  ViewEncapsulation,
+} from '@angular/core';
 
 import { GlnSnackbarRef, GlnSnackbarService } from 'gelenium-ui';
 
@@ -34,8 +42,14 @@ export class CmSnackbarBasicComponent {
   isShowAttrib03 = false; // # true;
   public transition02gList: string[] = ['grow', 'fade', 'blur', 'slide', 'slide-dw', 'slide-lf', 'slide-rg', 'turn', 'turn-y'];
   public transition02g: string = this.transition02gList[0];
+
+  // TODO demostartion 'action'
+  // Page: Custom05
+  isShowCustom05 = true;
+  public snackbarRefTemplate: GlnSnackbarRef<EmbeddedViewRef<any>> | null = null;
+
   // Page: Config08
-  isShowConfig08 = true;
+  isShowConfig08 = false; // # true;
   public config08 = { horizontal: 'left', vertical: 'top' };
 
   idxBasic01 = 1;
@@ -48,7 +62,7 @@ export class CmSnackbarBasicComponent {
   public transition01a: string = this.transition01aList[0];
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor(private snackbarService: GlnSnackbarService) {
+  constructor(private snackbarService: GlnSnackbarService, private viewContainerRef: ViewContainerRef) {
     console.log(`CmSnackbarBasic();`); //#
   }
 
@@ -74,6 +88,14 @@ export class CmSnackbarBasicComponent {
 
   public clickTransition(message: string, config: any): void {
     this.snackbarService.open(message, '', config);
+  }
+
+  // Page: Custom05
+  public clickTemplate(template: TemplateRef<any>, content: Record<string, unknown> | null): void {
+    this.snackbarRefTemplate = this.snackbarService.openFromTemplate(template, { data: content, viewContainerRef: this.viewContainerRef });
+  }
+  public closeTemplate(snackbarRefTemplate: GlnSnackbarRef<EmbeddedViewRef<any>> | null): void {
+    snackbarRefTemplate?.close(undefined);
   }
 
   // Page: Config08

@@ -5,16 +5,19 @@
     <a [href]="urlCmSnackbar + '#Basic'">#</a>
   </h3>
   <span>
-    To display notifications in the <strong fw500>root module</strong> of your application
-    (<strong fw500>AppModule</strong>), you need to add:
+    To display notifications, you need to connect the "GlnSnackbarService" service.<br />
+    This service is described in the GlnSnackbarModule.<br />
+    Therefore, if GlnSnackbarModule is added to two of your modules, then two instances of
+    it will be created (and two instances of the GlnSnackbarService service).<br />
+    If you need to specify a single notification display configuration, then this will need
+    to be done for each instance of the GlnSnackbarService service.<br />
+    To avoid problems with specifying a single configuration, we suggest adding
+    GlnSnackbarModule to the <strong fw500>root module</strong> of your application
+    (<strong fw500>AppModule</strong>).
   </span>
   <code><pre source="ts">
 import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';</pre>
   </code>
-  <p>
-    This module contains the GlnSnackbarService service, which has methods
-    for displaying notifications.
-  </p>
   <span>
     Notifications inform the user about some event:
   </span>
@@ -1239,7 +1242,73 @@ app-snackbar &#123;
 <hr br-nn />
 
 
+<section *ngIf="isShowCustom05"
+  mr-vr
+  id="Customization">
+  <h4 class="app-hover-link">
+    Customization
+    <a [href]="urlCmSnackbar + '#Customization'">#</a>
+  </h4>
+  <p>
+    You can specify your own context when displaying the snackbar.
+  </p>
+  <span> For example:</span>
+  <!--
+  <code><pre source="html">
+&lt;ng-template #<i><strong>contextTemplate1</strong></i>
+  let-name="nameVar"&gt;
+  &lt;b&gt;<b>&#123;</b>&#123;name&#125;&#125;&lt;/b&gt; is a very &lt;em&gt;tasty&lt;/em&gt;&nbsp;&lt;u&gt;fruit&lt;/u&gt; !
+&lt;/ng-template&gt;
 
+&lt;button class="ttcs-btn"
+  <strong>[glnTooltip]</strong>="<i><strong>contextTemplate1</strong></i>"
+  <strong>[glnttContent]</strong>="&#123; nameVar: 'Mango' &#125;"&gt;
+  &lt;span&gt; Action &lt;/span&gt;
+&lt;/button&gt;</pre></code>
+-->
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show snackbar HTML.</em>
+      </small>
+    </div>
+    <div>
+      <ng-template #snackbarTemplate
+        let-name="nameVar">
+        <div class="sccs-alert">
+          <span>
+            <b>{{name}}</b> is a very <em>tasty</em>&nbsp;<u>fruit</u> !
+          </span>
+          <div>
+            <button class="sccs-close"
+              (click)="closeTemplate(snackbarRefTemplate)">
+              X
+            </button>
+          </div>
+        </div>
+      </ng-template>
+      <button class="sncs-btn"
+        tabindex="0"
+        type="button"
+        (click)="clickTemplate(snackbarTemplate, { nameVar: 'Mango', name: 'Mango2' })">
+        <span>Open snackbar HTML</span>
+      </button>
+
+      <!-- <button class="ttcs-btn"
+        [glnTooltip]="snackbarContextTmpl"
+        [glnttContent]="{ nameVar: 'Mango' }">
+        <span> Action </span>
+      </button> -->
+    </div>
+  </div>
+
+
+</div>
 
 <p></p>
 <p>_</p>
