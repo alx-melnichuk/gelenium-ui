@@ -14,6 +14,5 @@ import { GlnSnackbarUtil } from './gln-snackbar.util';
 export class GlnSnackbarModule {
   constructor() {
     GlnSnackbarUtil.injector = inject(Injector);
-    console.log(`GlnSnackbarUtil.injector = inject(Injector);`); // #
   }
 }

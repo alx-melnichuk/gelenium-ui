@@ -1,7 +1,7 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { EmbeddedViewRef, Injectable, OnDestroy, TemplateRef } from '@angular/core';
 
-import { GlnSnackbarAlert } from './gln-snackbar-alert.component';
+import { GlnSnackbarAlertComponent } from './gln-snackbar-alert.component';
 import { GlnSnackbarConfig } from './gln-snackbar-config.interface';
 import { GlnSnackbarRef } from './gln-snackbar-reference';
 import { GlnSnackbarModule } from './gln-snackbar.module';
@@ -11,10 +11,6 @@ import { GlnSnackbarUtil } from './gln-snackbar.util';
   providedIn: GlnSnackbarModule,
 })
 export class GlnSnackbarService implements OnDestroy {
-  constructor() {
-    console.log(`GlnSnackbarService();`); // #
-  }
-
   public ngOnDestroy(): void {
     GlnSnackbarUtil.clear();
   }
@@ -36,7 +32,11 @@ export class GlnSnackbarService implements OnDestroy {
     return GlnSnackbarUtil.openFromTemplate(template, config) as GlnSnackbarRef<EmbeddedViewRef<any>>;
   }
 
-  public open(message: string, action: string = '', config?: GlnSnackbarConfig): GlnSnackbarRef<GlnSnackbarAlert> {
+  public open(message: string, action: string = '', config?: GlnSnackbarConfig): GlnSnackbarRef<GlnSnackbarAlertComponent> {
     return GlnSnackbarUtil.open(message, action, config);
+  }
+
+  public clear(): void {
+    GlnSnackbarUtil.clear();
   }
 }

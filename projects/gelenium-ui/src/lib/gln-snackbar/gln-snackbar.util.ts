@@ -4,6 +4,7 @@ import {
   ApplicationRef,
   ComponentFactoryResolver,
   ComponentRef,
+  ElementRef,
   EmbeddedViewRef,
   Injector,
   TemplateRef,
@@ -11,7 +12,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { ArrayUtil } from '../_utils/array.util';
-import { GlnSnackbarAlert, GlnSnackbarAlertComponent } from './gln-snackbar-alert.component';
+import { GlnSnackbarAlertComponent } from './gln-snackbar-alert.component';
 import { GlnSnackbarConfig, GLN_SNACKBAR_DATA } from './gln-snackbar-config.interface';
 import { GlnSnackbarContainerComponent } from './gln-snackbar-container.component';
 import { GlnSnackbarRef, GlnSnackbarReference } from './gln-snackbar-reference';
@@ -28,9 +29,6 @@ let uniqueIdCounter = 0;
 
 export class GlnSnackbarUtil {
   public static injector: Injector;
-
-  /** The component that should be rendered as the snack bar's simple component. */
-  private static snackbarAlertComponent: Type<GlnSnackbarAlert> = GlnSnackbarAlertComponent;
 
   private static appRef: ApplicationRef | undefined;
   private static snackbarMetaMap: Map<string, GlnSnackbarMeta> = new Map();
@@ -63,10 +61,21 @@ export class GlnSnackbarUtil {
     return GlnSnackbarUtil.openContent(snackbarMeta, template, config2) as GlnSnackbarRef<EmbeddedViewRef<any>>;
   }
 
-  public static open(message: string, action: string = '', config?: GlnSnackbarConfig): GlnSnackbarRef<GlnSnackbarAlert> {
+  public static open(message: string, action: string = '', config?: GlnSnackbarConfig): GlnSnackbarRef<GlnSnackbarAlertComponent> {
     const dataConfig = { ...config };
     dataConfig.data = { ...{ message, action }, ...dataConfig.data };
-    return this.openFromComponent(this.snackbarAlertComponent, dataConfig);
+    return this.openFromComponent(GlnSnackbarAlertComponent, dataConfig);
+  }
+
+  public static settingCssColor(msgType: string | undefined, elementRef: ElementRef<HTMLElement>): void {
+    let colorName = '';
+    const msgTypeValue: string = (msgType || '').replace('error', 'danger');
+    if (['danger', 'success', 'info', 'warning'].indexOf(msgTypeValue) > -1) {
+      colorName = msgTypeValue;
+      elementRef.nativeElement.style.setProperty('--glncl-default-h', `var(--glncl-${colorName}-h, var(--gln-${colorName}-h))`);
+      elementRef.nativeElement.style.setProperty('--glncl-default-s', `var(--glncl-${colorName}-s, var(--gln-${colorName}-s))`);
+      elementRef.nativeElement.style.setProperty('--glncl-default-l', `var(--glncl-${colorName}-l, var(--gln-${colorName}-l))`);
+    }
   }
 
   // ** Private methods **
@@ -207,6 +216,8 @@ export class GlnSnackbarUtil {
     const wrapperElement: HTMLElement = snackbarContainer.createWrapper(id, wrapperClasses, transition);
     const wrapperPortal: DomPortalOutlet = GlnSnackbarUtil.createWrapPortal(wrapperElement);
 
+    GlnSnackbarUtil.settingCssColor(config2.data['msgType'], new ElementRef<HTMLElement>(wrapperElement));
+
     const snackbarReference = new GlnSnackbarReference<T | EmbeddedViewRef<any>>(id, config2.duration);
 
     // Add a wrapper element to the list for the current overlay.
@@ -222,7 +233,8 @@ export class GlnSnackbarUtil {
       appRef.components[0].hostView;
       const viewContainerRef: ViewContainerRef = (!!config2 && config2.viewContainerRef) || snackbarContainer.viewContainerRef;
       // Create a template portal.
-      const portal: TemplatePortal<any> = new TemplatePortal(content, viewContainerRef, { $implicit: config2.data, snackbarRef } as any);
+      const context: any = { $implicit: config2.data, snackbarRef, context: config2.data };
+      const portal: TemplatePortal<any> = new TemplatePortal(content, viewContainerRef, context as any);
       // Attach the template portal to the "containerPortal".
       snackbarReference.instance = wrapperPortal.attachTemplatePortal(portal);
       htmlElement = snackbarReference.instance.rootNodes[0];

@@ -10,34 +10,7 @@ gln-snackbar-alert {
   --glnsba--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
 
   --glnsba---cur-cl: hsl(var(--glnsba--default-bg-h), var(--glnsba--default-bg-s), var(--glnsba--default-bg-l));
-
-  &[sn-default] {
-    --glnsba---cur-bg: hsl(var(--glnsba--default-h), var(--glnsba--default-s), var(--glnsba--default-l));
-  }
-  &[sn-error] {
-    --glnsba--danger-h: var(--glncl-danger-h, var(--gln-danger-h));
-    --glnsba--danger-s: var(--glncl-danger-s, var(--gln-danger-s));
-    --glnsba--danger-l: var(--glncl-danger-l, var(--gln-danger-l));
-    --glnsba---cur-bg: hsl(var(--glnsba--danger-h), var(--glnsba--danger-s), var(--glnsba--danger-l));
-  }
-  &[sn-success] {
-    --glnsba--success-h: var(--glncl-success-h, var(--gln-success-h));
-    --glnsba--success-s: var(--glncl-success-s, var(--gln-success-s));
-    --glnsba--success-l: var(--glncl-success-l, var(--gln-success-l));
-    --glnsba---cur-bg: hsl(var(--glnsba--success-h), var(--glnsba--success-s), var(--glnsba--success-l));
-  }
-  &[sn-info] {
-    --glnsba--info-h: var(--glncl-info-h, var(--gln-info-h));
-    --glnsba--info-s: var(--glncl-info-s, var(--gln-info-s));
-    --glnsba--info-l: var(--glncl-info-l, var(--gln-info-l));
-    --glnsba---cur-bg: hsl(var(--glnsba--info-h), var(--glnsba--info-s), var(--glnsba--info-l));
-  }
-  &[sn-warning] {
-    --glnsba--warning-h: var(--glncl-warning-h, var(--gln-warning-h));
-    --glnsba--warning-s: var(--glncl-warning-s, var(--gln-warning-s));
-    --glnsba--warning-l: var(--glncl-warning-l, var(--gln-warning-l));
-    --glnsba---cur-bg: hsl(var(--glnsba--warning-h), var(--glnsba--warning-s), var(--glnsba--warning-l));
-  }
+  --glnsba---cur-bg: hsl(var(--glnsba--default-h), var(--glnsba--default-s), var(--glnsba--default-l));
 
   align-items: center;
   // background-color: #3131317a; // #313131; // # ng12 background: #323232;

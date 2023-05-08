@@ -4,12 +4,14 @@ export class GlnSnackbarRef<T> {
   /** The instance of the component making up the content of the snack bar. */
   public instance!: T | EmbeddedViewRef<any>;
   /** A promise that is resolved when closed (by an action or close button) and rejected when closed by a timeout. */
-  public readonly result: Promise<any> = new Promise((resolve) => {
-    this.resolve = resolve;
-  });
-  private resolve: (result: any) => void = () => {};
+  public readonly result: Promise<any>;
+  private resolve!: (result: any) => void;
 
-  constructor() {}
+  constructor() {
+    this.result = new Promise((resolve) => {
+      this.resolve = resolve;
+    });
+  }
 
   /** Closes the snack bar by clicking on the "action" or "close" button. */
   public close(resultAction?: any): void {
