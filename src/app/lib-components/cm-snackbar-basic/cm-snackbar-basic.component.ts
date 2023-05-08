@@ -35,7 +35,7 @@ export class CmSnackbarBasicComponent {
   // Page: Basic01
   isShowBasic01 = true;
   // Page: Attrib01
-  isShowAttrib01 = false; // # true;
+  isShowAttrib01 = true;
   // Page: Attrib02
   isShowAttrib02 = false; // # true;
   // Page: Attrib03
@@ -97,6 +97,10 @@ export class CmSnackbarBasicComponent {
     this.snackbarService.openFromTemplate(template, { data: context }).result.then((response) => {
       console.log(`Template response=${response}`);
     });
+  }
+
+  public clickMUI(message: string, action: string | undefined, config: any): void {
+    this.snackbarService.open(message, action, config);
   }
 
   // Page: Config08

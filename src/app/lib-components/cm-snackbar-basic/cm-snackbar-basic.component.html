@@ -780,6 +780,88 @@ app-snackbar &#123;
 <hr br-nn />
 
 
+<section *ngIf="isShowCustom05"
+  mr-vr
+  id="Customization">
+  <h4 class="app-hover-link">
+    Customization
+    <a [href]="urlCmSnackbar + '#Customization'">#</a>
+  </h4>
+  <p>
+    You can specify your own context when displaying the snackbar.
+  </p>
+  <span> For example:</span>
+  <!--
+  <code><pre source="html">
+&lt;ng-template #<i><strong>contextTemplate1</strong></i>
+  let-name="nameVar"&gt;
+  &lt;b&gt;<b>&#123;</b>&#123;name&#125;&#125;&lt;/b&gt; is a very &lt;em&gt;tasty&lt;/em&gt;&nbsp;&lt;u&gt;fruit&lt;/u&gt; !
+&lt;/ng-template&gt;
+
+&lt;button class="ttcs-btn"
+  <strong>[glnTool tip]</strong>="<i><strong>contextTemplate1</strong></i>"
+  <strong>[glnttContent]</strong>="&#123; nameVar: 'Mango' &#125;"&gt;
+  &lt;span&gt; Action &lt;/span&gt;
+&lt;/button&gt;</pre></code>
+-->
+</section>
+
+
+<div *ngIf="isShowCustom05"
+  class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show snackbar HTML.</em>
+      </small>
+    </div>
+    <div>
+      <ng-template #snackbarTemplate
+        let-context="context"
+        let-snackbarRef="snackbarRef">
+        <div class="sccs-alert">
+          <span>
+            <b>{{context.name}}</b> is a very <em>tasty</em>&nbsp;<u>fruit</u> !
+          </span>
+          <div>
+            <button class="sccs-close"
+              (click)="snackbarRef.close('close')">X
+            </button>
+          </div>
+        </div>
+      </ng-template>
+      <button class="sncs-btn"
+        tabindex="0"
+        type="button"
+        (click)="clickTemplate(snackbarTemplate, { name: 'Mango' })">
+        <span>Open snackbar HTML</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Style MUI.</em>
+      </small>
+    </div>
+    <div>
+      <button class="sncs-btn"
+        tabindex="0"
+        type="button"
+        (click)="clickMUI('snackbar MUI', '', { wrapperClass: 'sncs-MUI' })">
+        <span>Open snackbar MUI</span>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+
+<hr br-nn />
+
+
 
 <section *ngIf="isShowConfig08"
   mr-vr>
@@ -1243,68 +1325,6 @@ app-snackbar &#123;
 
 <hr br-nn />
 
-
-<section *ngIf="isShowCustom05"
-  mr-vr
-  id="Customization">
-  <h4 class="app-hover-link">
-    Customization
-    <a [href]="urlCmSnackbar + '#Customization'">#</a>
-  </h4>
-  <p>
-    You can specify your own context when displaying the snackbar.
-  </p>
-  <span> For example:</span>
-  <!--
-  <code><pre source="html">
-&lt;ng-template #<i><strong>contextTemplate1</strong></i>
-  let-name="nameVar"&gt;
-  &lt;b&gt;<b>&#123;</b>&#123;name&#125;&#125;&lt;/b&gt; is a very &lt;em&gt;tasty&lt;/em&gt;&nbsp;&lt;u&gt;fruit&lt;/u&gt; !
-&lt;/ng-template&gt;
-
-&lt;button class="ttcs-btn"
-  <strong>[glnTool tip]</strong>="<i><strong>contextTemplate1</strong></i>"
-  <strong>[glnttContent]</strong>="&#123; nameVar: 'Mango' &#125;"&gt;
-  &lt;span&gt; Action &lt;/span&gt;
-&lt;/button&gt;</pre></code>
--->
-</section>
-
-
-<div class="app-group">
-
-  <div class="app-elem">
-    <div>
-      <small>
-        <em>Show snackbar HTML.</em>
-      </small>
-    </div>
-    <div>
-      <ng-template #snackbarTemplate
-        let-context="context"
-        let-snackbarRef="snackbarRef">
-        <div class="sccs-alert">
-          <span>
-            <b>{{context.name}}</b> is a very <em>tasty</em>&nbsp;<u>fruit</u> !
-          </span>
-          <div>
-            <button class="sccs-close"
-              (click)="snackbarRef.close('close')">X
-            </button>
-          </div>
-        </div>
-      </ng-template>
-      <button class="sncs-btn"
-        tabindex="0"
-        type="button"
-        (click)="clickTemplate(snackbarTemplate, { name: 'Mango' })">
-        <span>Open snackbar HTML</span>
-      </button>
-    </div>
-  </div>
-
-
-</div>
 
 <p></p>
 <p>_</p>

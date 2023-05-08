@@ -112,4 +112,18 @@ app-cm-snackbar-basic {
     overflow: visible;
     padding: 4px 6px;
   }
+
+  .sncs-MUI {
+    --glnsbb-mn-hg: 48px;
+    --glnsbb-mn-wd: 288px;
+    --glncl-default-h: 0;
+    --glncl-default-s: 0%;
+    --glncl-default-l: 19.61%;
+    --glncl-default-bg-h: 0;
+    --glncl-default-bg-s: 0%;
+    --glncl-default-bg-l: 100%;
+    font-size: 14px;
+    // padding: 6px 16px;
+    --glnsbb-box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
+  }
 } 
