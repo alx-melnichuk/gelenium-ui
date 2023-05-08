@@ -84,9 +84,9 @@ export class GlnSnackbarUtil {
   }
   private static getKeySnackbar(snackbarConfig: GlnSnackbarConfig): string {
     let classListRes: string = '';
-    const panelClass: string[] = ArrayUtil.getList<string>(snackbarConfig.panelClass);
-    for (let idx = 0; idx < panelClass.length; idx++) {
-      classListRes = classListRes + panelClass[idx] + ',';
+    const overlayClasses: string[] = ArrayUtil.getList<string>(snackbarConfig.overlayClasses);
+    for (let idx = 0; idx < overlayClasses.length; idx++) {
+      classListRes = classListRes + overlayClasses[idx] + ',';
     }
     return (snackbarConfig.horizontal || '_') + '-' + classListRes + '-' + (snackbarConfig.vertical || '_');
   }
@@ -122,10 +122,10 @@ export class GlnSnackbarUtil {
     // This will correctly use the z-index for child elements.
     overlayRef.hostElement.style.zIndex = 'unset';
     overlayRef.overlayElement.classList.add(CSS_CLASS_PANEL);
-    const panelClass: string[] = ArrayUtil.getList<string>(config.panelClass);
-    for (let idx = 0; idx < panelClass.length; idx++) {
-      if (!!panelClass[idx]) {
-        overlayRef.overlayElement.classList.add(panelClass[idx]);
+    const overlayClasses: string[] = ArrayUtil.getList<string>(config.overlayClasses);
+    for (let idx = 0; idx < overlayClasses.length; idx++) {
+      if (!!overlayClasses[idx]) {
+        overlayRef.overlayElement.classList.add(overlayClasses[idx]);
       }
     }
     return overlayRef;

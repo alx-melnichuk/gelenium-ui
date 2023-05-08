@@ -95,7 +95,7 @@ export class NotificationComponent &#123;
       </tr>
       <tr>
         <td>
-          <code>panelClass?: string<br/>
+          <code>overlayClasses?: string<br/>
             &nbsp;| string[];</code>
         </td>
         <td>
@@ -894,7 +894,7 @@ export class AppComponent implements OnInit &#123;
       </td>
     </tr>
     <tr>
-      <td><code>panelClass?: string<br/>
+      <td><code>overlayClasses?: string<br/>
         &nbsp;&nbsp;| string[]<br/>
         &nbsp;&nbsp;| undefined<br/>
         &nbsp;&nbsp;= undefined;</code></td>
@@ -1014,7 +1014,7 @@ export class AppComponent implements OnInit &#123;
   </p>
   <ul>
     <li>"horizontal" will have the value "left";</li>
-    <li>"panelClass" will have the value "panel-custom";</li>
+    <li>"overlayClasses" will have the value "panel-custom";</li>
     <li>"vertical" will have the value "top";</li>
     <li>"transition" will have the value "turn";</li>
     <li>"wrapperClass" will have the value "wrapper-custom";</li>
@@ -1022,7 +1022,7 @@ export class AppComponent implements OnInit &#123;
   <code><pre source="ts">
 const glnTooltipConfigDefault: GlnTooltipConfig = &#123;
   horizontal: 'left',
-  panelClass: 'panel-custom',
+  overlayClasses: 'panel-custom',
   vertical: 'top',
   transition: 'turn',
   wrapperClass: 'wrapper-custom',
@@ -1060,7 +1060,7 @@ transition="blur"</pre></code>
 duration=6000,
 horizontal="center",
 maxCount=6,
-panelClass=undefined,
+overlayClasses=undefined,
 vertical="bottom",
 viewContainerRef=undefined,
 transition="grow",

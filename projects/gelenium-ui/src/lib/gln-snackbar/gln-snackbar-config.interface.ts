@@ -22,7 +22,7 @@ export class GlnSnackbarConfig<D = any> {
   /** The maximum number of visible snackbar items in the current overlay. */
   public maxCount?: number | undefined = GlnSnackbarConfig.defaultMaxCount;
   /** Additional CSS classes to add to the snackbar overlay panel. */
-  public panelClass?: string | string[] | undefined;
+  public overlayClasses?: string | string[] | undefined;
   /** Vertical position to accommodate the snackbar. ('bottom' - default, 'top', 'center') */
   public vertical?: string | undefined = GlnSnackbarConfig.defaultVertical;
   /** The dependency injection view container that serves as the parent of the snackbar. */
