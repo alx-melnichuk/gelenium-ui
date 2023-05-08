@@ -68,7 +68,9 @@ export class CmSnackbarBasicComponent {
 
   // Page: Basic01
   public clickSimple(): void {
-    this.snackbarService.open('simple notification !');
+    this.snackbarService.open('simple notification !').result.then((response) => {
+      console.log(`simple response=${response}`);
+    });
   }
 
   // Page: Attrib01
@@ -91,11 +93,10 @@ export class CmSnackbarBasicComponent {
   }
 
   // Page: Custom05
-  public clickTemplate(template: TemplateRef<any>, content: Record<string, unknown> | null): void {
-    this.snackbarRefTemplate = this.snackbarService.openFromTemplate(template, { data: content, viewContainerRef: this.viewContainerRef });
-  }
-  public closeTemplate(snackbarRefTemplate: GlnSnackbarRef<EmbeddedViewRef<any>> | null): void {
-    snackbarRefTemplate?.close(undefined);
+  public clickTemplate(template: TemplateRef<any>, context: Record<string, unknown> | null): void {
+    this.snackbarService.openFromTemplate(template, { data: context }).result.then((response) => {
+      console.log(`Template response=${response}`);
+    });
   }
 
   // Page: Config08

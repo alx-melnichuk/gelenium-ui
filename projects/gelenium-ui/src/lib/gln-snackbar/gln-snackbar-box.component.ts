@@ -13,7 +13,7 @@ import { GLN_SNACKBAR_DATA } from './gln-snackbar-config.interface';
 import { GlnSnackbarRef } from './gln-snackbar-reference';
 import { GlnSnackbarUtil } from './gln-snackbar.util';
 
-export interface GlnSnackbarAlertParams {
+export interface GlnSnackbarBoxParams {
   message: string;
   action?: string;
   msgType?: string;
@@ -21,17 +21,17 @@ export interface GlnSnackbarAlertParams {
 }
 
 @Component({
-  selector: 'gln-snackbar-alert',
-  exportAs: 'glnSnackbarAlert',
-  templateUrl: './gln-snackbar-alert.component.html',
-  styleUrls: ['./gln-snackbar-alert.component.scss'],
+  selector: 'gln-snackbar-box',
+  exportAs: 'glnSnackbarBox',
+  templateUrl: './gln-snackbar-box.component.html',
+  styleUrls: ['./gln-snackbar-box.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnSnackbarAlertComponent implements OnInit {
+export class GlnSnackbarBoxComponent implements OnInit {
   /** Data that was injected into the snack bar. */
   @Input('params')
-  public data: GlnSnackbarAlertParams;
+  public data: GlnSnackbarBoxParams;
   public hasError: boolean = false;
   public hasWarning: boolean = false;
   public hasInfo: boolean = false;
@@ -47,7 +47,7 @@ export class GlnSnackbarAlertComponent implements OnInit {
     private hostRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
     @Inject(GLN_SNACKBAR_DATA) @Optional() data?: any,
-    @Optional() public snackbarRef?: GlnSnackbarRef<GlnSnackbarAlertComponent>
+    @Optional() public snackbarRef?: GlnSnackbarRef<GlnSnackbarBoxComponent>
   ) {
     this.data = data || { message: '' };
   }

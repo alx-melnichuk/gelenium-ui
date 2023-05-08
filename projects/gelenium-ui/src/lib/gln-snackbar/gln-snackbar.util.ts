@@ -8,11 +8,10 @@ import {
   EmbeddedViewRef,
   Injector,
   TemplateRef,
-  Type,
   ViewContainerRef,
 } from '@angular/core';
 import { ArrayUtil } from '../_utils/array.util';
-import { GlnSnackbarAlertComponent } from './gln-snackbar-alert.component';
+import { GlnSnackbarBoxComponent } from './gln-snackbar-box.component';
 import { GlnSnackbarConfig, GLN_SNACKBAR_DATA } from './gln-snackbar-config.interface';
 import { GlnSnackbarContainerComponent } from './gln-snackbar-container.component';
 import { GlnSnackbarRef, GlnSnackbarReference } from './gln-snackbar-reference';
@@ -61,10 +60,10 @@ export class GlnSnackbarUtil {
     return GlnSnackbarUtil.openContent(snackbarMeta, template, config2) as GlnSnackbarRef<EmbeddedViewRef<any>>;
   }
 
-  public static open(message: string, action: string = '', config?: GlnSnackbarConfig): GlnSnackbarRef<GlnSnackbarAlertComponent> {
+  public static open(message: string, action: string = '', config?: GlnSnackbarConfig): GlnSnackbarRef<GlnSnackbarBoxComponent> {
     const dataConfig = { ...config };
     dataConfig.data = { ...{ message, action }, ...dataConfig.data };
-    return this.openFromComponent(GlnSnackbarAlertComponent, dataConfig);
+    return this.openFromComponent(GlnSnackbarBoxComponent, dataConfig);
   }
 
   public static settingCssColor(msgType: string | undefined, elementRef: ElementRef<HTMLElement>): void {

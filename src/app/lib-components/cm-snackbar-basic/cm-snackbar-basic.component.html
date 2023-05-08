@@ -7,13 +7,15 @@
   <span>
     To display notifications, you need to connect the "GlnSnackbarService" service.<br />
     This service is described in the GlnSnackbarModule.<br />
-    Therefore, if GlnSnackbarModule is added to two of your modules, then two instances of
-    it will be created (and two instances of the GlnSnackbarService service).<br />
-    If you need to specify a single notification display configuration, then this will need
-    to be done for each instance of the GlnSnackbarService service.<br />
-    To avoid problems with specifying a single configuration, we suggest adding
-    GlnSnackbarModule to the <strong fw500>root module</strong> of your application
-    (<strong fw500>AppModule</strong>).
+    If you need to specify a single notification display configuration for the entire application,
+    then you can call the setConfig(config: GlnSnackbarConfig) method of this service.<br />
+    It is recommended that you add the GlnSnackbarModule to your app's
+    <strong fw500>root module</strong> (<strong fw500>AppModule</strong>).<br />
+    This will allow a single configuration to be established before the rest of the modules are
+    loaded.
+  </span>
+  <span>
+    To use this service, in your module you need to add:
   </span>
   <code><pre source="ts">
 import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';</pre>
@@ -257,44 +259,44 @@ app-snackbar &#123;
 <div *ngIf="isShowAttrib01"
   class="snat1-elem">
   <p>
-    <gln-snackbar-alert class="snat1-box"
-      [params]="{ message: 'notifications with type \'default\''
+    <gln-snackbar-box class="snat1-box"
+      [params]="{ message: 'snackbar with type \'default\''
         , msgType: 'default', 'isNoClose': true }"
-      (click)="clickTypical('notifications with type \'default\''
+      (click)="clickTypical('snackbar with type \'default\''
         , '', { data: { msgType: 'default'}} )">
-    </gln-snackbar-alert>
+    </gln-snackbar-box>
   </p>
   <p>
-    <gln-snackbar-alert class="snat1-box"
-      [params]="{ message: 'notifications with type \'error\''
+    <gln-snackbar-box class="snat1-box"
+      [params]="{ message: 'snackbar with type \'error\''
         , msgType: 'error', 'isNoClose': true }"
-      (click)="clickTypical('notifications with type \'error\''
+      (click)="clickTypical('snackbar with type \'error\''
         , '', { data: { msgType: 'error'}})">
-    </gln-snackbar-alert>
+    </gln-snackbar-box>
   </p>
   <p>
-    <gln-snackbar-alert class="snat1-box"
-      [params]="{ message: 'notifications with type \'warning\''
+    <gln-snackbar-box class="snat1-box"
+      [params]="{ message: 'snackbar with type \'warning\''
         , msgType: 'warning', 'isNoClose': true }"
-      (click)="clickTypical('notifications with type \'warning\''
+      (click)="clickTypical('snackbar with type \'warning\''
         , '', { data: { msgType: 'warning'}})">
-    </gln-snackbar-alert>
+    </gln-snackbar-box>
   </p>
   <p>
-    <gln-snackbar-alert class="snat1-box"
-      [params]="{ message: 'notifications with type \'success\''
+    <gln-snackbar-box class="snat1-box"
+      [params]="{ message: 'snackbar with type \'success\''
         , msgType: 'success', 'isNoClose': true }"
-      (click)="clickTypical('notifications with type \'success\''
+      (click)="clickTypical('snackbar with type \'success\''
         , '', { data: { msgType: 'success'}})">
-    </gln-snackbar-alert>
+    </gln-snackbar-box>
   </p>
   <p>
-    <gln-snackbar-alert class="snat1-box"
-      [params]="{ message: 'notifications with type \'info\''
+    <gln-snackbar-box class="snat1-box"
+      [params]="{ message: 'snackbar with type \'info\''
         , msgType: 'info', 'isNoClose': true }"
-      (click)="clickTypical('notifications with type \'info\''
+      (click)="clickTypical('snackbar with type \'info\''
         , '', { data: { msgType: 'info'}})">
-    </gln-snackbar-alert>
+    </gln-snackbar-box>
   </p>
 </div>
 
@@ -312,44 +314,44 @@ app-snackbar &#123;
 &lt;div class="snat1-elem"&gt;
 
   &lt;p&gt;
-    &lt;gln-snackbar-alert class="snat1-box"
+    &lt;gln-snackbar-box class="snat1-box"
       [params]="&#123; message: 'notifications with type \'default\''
         , msgType: 'default', 'isNoClose': true &#125;"
       (click)="clickTypical('notifications with type \'default\''
         , '', &#123; data: &#123; msgType: 'default'&#125;&#125; )"&gt;
-    &lt;/gln-snackbar-alert&gt;
+    &lt;/gln-snackbar-box&gt;
   &lt;/p&gt;
   &lt;p&gt;
-    &lt;gln-snackbar-alert class="snat1-box"
+    &lt;gln-snackbar-box class="snat1-box"
       [params]="&#123; message: 'notifications with type \'error\''
         , msgType: 'error', 'isNoClose': true &#125;"
       (click)="clickTypical('notifications with type \'error\''
         , '', &#123; data: &#123; msgType: 'error'&#125;&#125;)"&gt;
-    &lt;/gln-snackbar-alert&gt;
+    &lt;/gln-snackbar-box&gt;
   &lt;/p&gt;
   &lt;p&gt;
-    &lt;gln-snackbar-alert class="snat1-box"
+    &lt;gln-snackbar-box class="snat1-box"
       [params]="&#123; message: 'notifications with type \'warning\''
         , msgType: 'warning', 'isNoClose': true &#125;"
       (click)="clickTypical('notifications with type \'warning\''
         , '', &#123; data: &#123; msgType: 'warning'&#125;&#125;)"&gt;
-    &lt;/gln-snackbar-alert&gt;
+    &lt;/gln-snackbar-box&gt;
   &lt;/p&gt;
   &lt;p&gt;
-    &lt;gln-snackbar-alert class="snat1-box"
+    &lt;gln-snackbar-box class="snat1-box"
       [params]="&#123; message: 'notifications with type \'success\''
         , msgType: 'success', 'isNoClose': true &#125;"
       (click)="clickTypical('notifications with type \'success\''
         , '', &#123; data: &#123; msgType: 'success'&#125;&#125;)"&gt;
-    &lt;/gln-snackbar-alert&gt;
+    &lt;/gln-snackbar-box&gt;
   &lt;/p&gt;
   &lt;p&gt;
-    &lt;gln-snackbar-alert class="snat1-box"
+    &lt;gln-snackbar-box class="snat1-box"
       [params]="&#123; message: 'notifications with type \'info\''
         , msgType: 'info', 'isNoClose': true &#125;"
       (click)="clickTypical('notifications with type \'info\''
         , '', &#123; data: &#123; msgType: 'info'&#125;&#125;)"&gt;
-    &lt;/gln-snackbar-alert&gt;
+    &lt;/gln-snackbar-box&gt;
   &lt;/p&gt;
 
 &lt;/div&gt;</pre></code>
@@ -1020,7 +1022,7 @@ export class AppComponent implements OnInit &#123;
     <li>"wrapperClass" will have the value "wrapper-custom";</li>
   </ul>
   <code><pre source="ts">
-const glnTooltipConfigDefault: GlnTooltipConfig = &#123;
+const glnSnackbarConfigDefault: GlnSnackbarConfig = &#123;
   horizontal: 'left',
   overlayClasses: 'panel-custom',
   vertical: 'top',
@@ -1037,7 +1039,7 @@ const glnTooltipConfigDefault: GlnTooltipConfig = &#123;
     <a [href]="urlCmSnackbar + '#config-params'">#</a>
   </h4>
   <p>
-    Suppose we have a provider in our application with "GlnTooltipConfig" and all
+    Suppose we have a provider in our application with "GlnSnackbarConfig" and all
     notifications accept its default values.
     We can change these values for an individual element.
     To do this, you need to specify in this element those properties that do not match the
@@ -1261,7 +1263,7 @@ app-snackbar &#123;
 &lt;/ng-template&gt;
 
 &lt;button class="ttcs-btn"
-  <strong>[glnTooltip]</strong>="<i><strong>contextTemplate1</strong></i>"
+  <strong>[glnTool tip]</strong>="<i><strong>contextTemplate1</strong></i>"
   <strong>[glnttContent]</strong>="&#123; nameVar: 'Mango' &#125;"&gt;
   &lt;span&gt; Action &lt;/span&gt;
 &lt;/button&gt;</pre></code>
@@ -1279,15 +1281,15 @@ app-snackbar &#123;
     </div>
     <div>
       <ng-template #snackbarTemplate
-        let-name="nameVar">
+        let-context="context"
+        let-snackbarRef="snackbarRef">
         <div class="sccs-alert">
           <span>
-            <b>{{name}}</b> is a very <em>tasty</em>&nbsp;<u>fruit</u> !
+            <b>{{context.name}}</b> is a very <em>tasty</em>&nbsp;<u>fruit</u> !
           </span>
           <div>
             <button class="sccs-close"
-              (click)="closeTemplate(snackbarRefTemplate)">
-              X
+              (click)="snackbarRef.close('close')">X
             </button>
           </div>
         </div>
@@ -1295,15 +1297,9 @@ app-snackbar &#123;
       <button class="sncs-btn"
         tabindex="0"
         type="button"
-        (click)="clickTemplate(snackbarTemplate, { nameVar: 'Mango', name: 'Mango2' })">
+        (click)="clickTemplate(snackbarTemplate, { name: 'Mango' })">
         <span>Open snackbar HTML</span>
       </button>
-
-      <!-- <button class="ttcs-btn"
-        [glnTooltip]="snackbarContextTmpl"
-        [glnttContent]="{ nameVar: 'Mango' }">
-        <span> Action </span>
-      </button> -->
     </div>
   </div>
 
