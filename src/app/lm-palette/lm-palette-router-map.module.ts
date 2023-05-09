@@ -95,6 +95,19 @@ const siteUrlsSelect: SiteUrl[] = [
 
 SiteMenuUtil.addItem('Palette', 'Select', { label: 'Select', siteUrls: siteUrlsSelect });
 
+// ** Menu for "Snackbar". **
+
+RouterConfig.add('URL_PALETTE_SNACKBAR', 'snackbar');
+const urlPlSnackbar = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_SNACKBAR');
+
+const siteUrlsSnackbar: SiteUrl[] = [
+  { label: 'Basic', url: urlPlSnackbar, fragment: 'Basic' },
+  { label: 'Like a Bootstrap', url: urlPlSnackbar, fragment: 'Bootstrap' },
+  { label: 'Like a Material-UI', url: urlPlSnackbar, fragment: 'MaterialUI' },
+];
+
+SiteMenuUtil.addItem('Palette', 'Snackbar', { label: 'Snackbar', siteUrls: siteUrlsSnackbar });
+
 // ** Menu for "Textarea". **
 
 RouterConfig.add('URL_PALETTE_TEXTAREA', 'textarea');

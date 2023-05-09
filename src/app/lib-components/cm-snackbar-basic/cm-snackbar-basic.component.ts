@@ -31,6 +31,7 @@ export class CmSnackbarBasicComponent {
   public labelCss = LABEL_CSS;
 
   public urlCmSnackbar = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SNACKBAR');
+  public urlPlSnackbar = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_SNACKBAR');
 
   // Page: Basic01
   isShowBasic01 = true;
@@ -47,6 +48,11 @@ export class CmSnackbarBasicComponent {
   // Page: Custom05
   isShowCustom05 = true;
   public snackbarRefTemplate: GlnSnackbarRef<EmbeddedViewRef<any>> | null = null;
+
+  // Page: Palette07Basic
+  isShowPal07Basic = true;
+  // Page: Palette07BS
+  isShowPal07BS = true;
 
   // Page: Config08
   isShowConfig08 = false; // # true;
@@ -100,6 +106,11 @@ export class CmSnackbarBasicComponent {
   }
 
   public clickMUI(message: string, action: string | undefined, config: any): void {
+    this.snackbarService.open(message, action, config);
+  }
+
+  // Page: Palette07Basic
+  public clickMsgType(message: string, action: string, config: any): void {
     this.snackbarService.open(message, action, config);
   }
 
