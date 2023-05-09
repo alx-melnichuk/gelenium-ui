@@ -1,5 +1,5 @@
 <svg *ngIf="hasError"
-  glnsbb-icon
+  glnsb-icon
   class="gln-snackbar-icon"
   focusable="false"
   aria-hidden="true"
@@ -10,7 +10,7 @@
 </svg>
 
 <svg *ngIf="hasWarning"
-  glnsbb-icon
+  glnsb-icon
   class="gln-snackbar-icon"
   focusable="false"
   aria-hidden="true"
@@ -20,7 +20,7 @@
 </svg>
 
 <svg *ngIf="hasInfo"
-  glnsbb-icon
+  glnsb-icon
   class="gln-snackbar-icon"
   focusable="false"
   aria-hidden="true"
@@ -31,7 +31,7 @@
 </svg>
 
 <svg *ngIf="hasSuccess"
-  glnsbb-icon
+  glnsb-icon
   class="gln-snackbar-icon"
   focusable="false"
   aria-hidden="true"
@@ -41,12 +41,12 @@
   </path>
 </svg>
 
-<span glnsbb-msg>{{ data.message }}</span>
+<span glnsb-msg>{{ data.message }}</span>
 
-<div glnsbb-action-panel
+<div glnsb-act-panel
   class="gln-snackbar-action-panel">
-  <button glnsbb-btn
-    glnsbb-action
+  <button glnsb-btn
+    glnsb-action
     *ngIf="hasAction"
     class="gln-snackbar-button"
     tabindex="0"
@@ -56,15 +56,15 @@
     <!-- <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"></span> -->
   </button>
 
-  <button glnsbb-btn
-    glnsbb-close
+  <button glnsb-btn
+    glnsb-close
     *ngIf="hasClose"
     class="gln-snackbar-close"
     tabindex="0"
     type="button"
     aria-label="close"
     (click)="close()">
-    <svg glnsbb-x-svg
+    <svg glnsb-x-svg
       class="gln-snackbar-svg"
       focusable="false"
       aria-hidden="true"

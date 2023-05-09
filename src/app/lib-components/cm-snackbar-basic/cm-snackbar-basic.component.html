@@ -259,44 +259,44 @@ app-snackbar &#123;
 <div *ngIf="isShowAttrib01"
   class="snat1-elem">
   <p>
-    <gln-snackbar-box class="snat1-box"
+    <gln-snackbar class="snat1-box"
       [params]="{ message: 'snackbar with type \'default\''
         , msgType: 'default', 'isNoClose': true }"
       (click)="clickTypical('snackbar with type \'default\''
         , '', { data: { msgType: 'default'}} )">
-    </gln-snackbar-box>
+    </gln-snackbar>
   </p>
   <p>
-    <gln-snackbar-box class="snat1-box"
+    <gln-snackbar class="snat1-box"
       [params]="{ message: 'snackbar with type \'error\''
         , msgType: 'error', 'isNoClose': true }"
       (click)="clickTypical('snackbar with type \'error\''
         , '', { data: { msgType: 'error'}})">
-    </gln-snackbar-box>
+    </gln-snackbar>
   </p>
   <p>
-    <gln-snackbar-box class="snat1-box"
+    <gln-snackbar class="snat1-box"
       [params]="{ message: 'snackbar with type \'warning\''
         , msgType: 'warning', 'isNoClose': true }"
       (click)="clickTypical('snackbar with type \'warning\''
         , '', { data: { msgType: 'warning'}})">
-    </gln-snackbar-box>
+    </gln-snackbar>
   </p>
   <p>
-    <gln-snackbar-box class="snat1-box"
+    <gln-snackbar class="snat1-box"
       [params]="{ message: 'snackbar with type \'success\''
         , msgType: 'success', 'isNoClose': true }"
       (click)="clickTypical('snackbar with type \'success\''
         , '', { data: { msgType: 'success'}})">
-    </gln-snackbar-box>
+    </gln-snackbar>
   </p>
   <p>
-    <gln-snackbar-box class="snat1-box"
+    <gln-snackbar class="snat1-box"
       [params]="{ message: 'snackbar with type \'info\''
         , msgType: 'info', 'isNoClose': true }"
       (click)="clickTypical('snackbar with type \'info\''
         , '', { data: { msgType: 'info'}})">
-    </gln-snackbar-box>
+    </gln-snackbar>
   </p>
 </div>
 
@@ -314,44 +314,44 @@ app-snackbar &#123;
 &lt;div class="snat1-elem"&gt;
 
   &lt;p&gt;
-    &lt;gln-snackbar-box class="snat1-box"
+    &lt;gln-snackbar class="snat1-box"
       [params]="&#123; message: 'notifications with type \'default\''
         , msgType: 'default', 'isNoClose': true &#125;"
       (click)="clickTypical('notifications with type \'default\''
         , '', &#123; data: &#123; msgType: 'default'&#125;&#125; )"&gt;
-    &lt;/gln-snackbar-box&gt;
+    &lt;/gln-snackbar&gt;
   &lt;/p&gt;
   &lt;p&gt;
-    &lt;gln-snackbar-box class="snat1-box"
+    &lt;gln-snackbar class="snat1-box"
       [params]="&#123; message: 'notifications with type \'error\''
         , msgType: 'error', 'isNoClose': true &#125;"
       (click)="clickTypical('notifications with type \'error\''
         , '', &#123; data: &#123; msgType: 'error'&#125;&#125;)"&gt;
-    &lt;/gln-snackbar-box&gt;
+    &lt;/gln-snackbar&gt;
   &lt;/p&gt;
   &lt;p&gt;
-    &lt;gln-snackbar-box class="snat1-box"
+    &lt;gln-snackbar class="snat1-box"
       [params]="&#123; message: 'notifications with type \'warning\''
         , msgType: 'warning', 'isNoClose': true &#125;"
       (click)="clickTypical('notifications with type \'warning\''
         , '', &#123; data: &#123; msgType: 'warning'&#125;&#125;)"&gt;
-    &lt;/gln-snackbar-box&gt;
+    &lt;/gln-snackbar&gt;
   &lt;/p&gt;
   &lt;p&gt;
-    &lt;gln-snackbar-box class="snat1-box"
+    &lt;gln-snackbar class="snat1-box"
       [params]="&#123; message: 'notifications with type \'success\''
         , msgType: 'success', 'isNoClose': true &#125;"
       (click)="clickTypical('notifications with type \'success\''
         , '', &#123; data: &#123; msgType: 'success'&#125;&#125;)"&gt;
-    &lt;/gln-snackbar-box&gt;
+    &lt;/gln-snackbar&gt;
   &lt;/p&gt;
   &lt;p&gt;
-    &lt;gln-snackbar-box class="snat1-box"
+    &lt;gln-snackbar class="snat1-box"
       [params]="&#123; message: 'notifications with type \'info\''
         , msgType: 'info', 'isNoClose': true &#125;"
       (click)="clickTypical('notifications with type \'info\''
         , '', &#123; data: &#123; msgType: 'info'&#125;&#125;)"&gt;
-    &lt;/gln-snackbar-box&gt;
+    &lt;/gln-snackbar&gt;
   &lt;/p&gt;
 
 &lt;/div&gt;</pre></code>
@@ -858,6 +858,33 @@ app-snackbar &#123;
 
 </div>
 
+
+<hr br-nn />
+
+<!-- Page: Pal07 -->
+<h3>Palette for GlnSnackbar.</h3>
+
+<!-- Page: isShowPal07Basic -->
+<!-- <div *ngIf="!showNum || showNum==='01'"
+  id="Basic">
+  <app-pl-select-basic></app-pl-select-basic>
+  <hr br-tp>
+</div> -->
+
+<!-- <div *ngIf="!showNum || showNum==='02'"
+  id="Bootstrap">
+  <app-pl-select-bootstrap></app-pl-select-bootstrap>
+  <hr br-tp>
+</div> -->
+
+<!-- <div *ngIf="!showNum || showNum==='03'"
+  id="MaterialUI">
+  <app-pl-select-material-ui></app-pl-select-material-ui>
+  <hr br-tp>
+</div> -->
+
+<br />
+<br />
 
 <hr br-nn />
 

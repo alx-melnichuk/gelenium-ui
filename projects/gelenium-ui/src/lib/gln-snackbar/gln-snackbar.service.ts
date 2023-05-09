@@ -1,7 +1,7 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { EmbeddedViewRef, Injectable, OnDestroy, TemplateRef } from '@angular/core';
 
-import { GlnSnackbarBoxComponent } from './gln-snackbar-box.component';
+import { GlnSnackbarComponent } from './gln-snackbar.component';
 import { GlnSnackbarConfig } from './gln-snackbar-config.interface';
 import { GlnSnackbarRef } from './gln-snackbar-reference';
 import { GlnSnackbarModule } from './gln-snackbar.module';
@@ -32,7 +32,7 @@ export class GlnSnackbarService implements OnDestroy {
     return GlnSnackbarUtil.openFromTemplate(template, config) as GlnSnackbarRef<EmbeddedViewRef<any>>;
   }
 
-  public open(message: string, action: string = '', config?: GlnSnackbarConfig): GlnSnackbarRef<GlnSnackbarBoxComponent> {
+  public open(message: string, action: string = '', config?: GlnSnackbarConfig): GlnSnackbarRef<GlnSnackbarComponent> {
     return GlnSnackbarUtil.open(message, action, config);
   }
 
