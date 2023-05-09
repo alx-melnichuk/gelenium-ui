@@ -162,6 +162,9 @@
     "analytics": false,
     "schematicCollections": [
       "@angular-eslint/schematics"
-    ]
+    ],
+    "cache": {
+      "enabled": false
+    }
   }
 }
