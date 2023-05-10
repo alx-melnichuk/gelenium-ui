@@ -9,15 +9,16 @@ gln-snackbar {
   --glnsb--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
   --glnsb--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
 
-  --glnsb---cur-cl: hsl(var(--glnsb--default-bg-h), var(--glnsb--default-bg-s), var(--glnsb--default-bg-l));
-  --glnsb---cur-bg: hsl(var(--glnsb--default-h), var(--glnsb--default-s), var(--glnsb--default-l));
+  --glnsb---cur-cl: var(--glnsb-color, hsl(var(--glnsb--default-bg-h), var(--glnsb--default-bg-s), var(--glnsb--default-bg-l)));
+  --glnsb---cur-bg: var(--glnsb-bg-color, hsl(var(--glnsb--default-h), var(--glnsb--default-s), var(--glnsb--default-l)));
 
   align-items: center;
   // background-color: #3131317a; // #313131; // # ng12 background: #323232;
   background-color: var(--glnsb---cur-bg);
-  border-radius: 0.25em;
+  border: var(--glnsb-brd-wd) var(--glnsb-brd-st, solid) var(--glnsb-brd-cl);
+  border-radius: var(--glnsb-brd-rds, 0.25em);
+  box-shadow: var(--glnsb-bx-shd, (0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12)));
   box-sizing: border-box;
-  box-shadow: var(--glnsb-box-shadow, (0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12)));
   // color: #fff; // # ng12 color: hsla(0,0%,100%,.7);
   color: var(--glnsb---cur-cl);
   display: flex;
@@ -25,17 +26,14 @@ gln-snackbar {
   flex-wrap: wrap;
   font-weight: 400;
   justify-content: space-between;
-  line-height: 20px;
+  line-height: var(--glnsb-ln-hg, 1.43);
   min-height: var(--glnsb-mn-hg, 48px);
   min-width: var(--glnsb-mn-wd, 300px);
-  padding: 0 0.5em 0 1em;
+  padding-top: var(--glnsb-pd-tp, 0px);
+  padding-right: var(--glnsb-pd-rg, 0.5em);
+  padding-bottom: var(--glnsb-pd-bt, 0px);
+  padding-left: var(--glnsb-pd-lf, 1em);
   // font-size: 0.875rem;
-  // line-height: 1.43;
-
-  // style-inline
-  // opacity: 1;
-  // transform: none;
-  // transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
   [glnsb-wrap-icon] {
     display: flex;
@@ -50,7 +48,6 @@ gln-snackbar {
     margin-right: 12px;
     opacity: .85;
     padding: 7px 0;
-    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     user-select: none;
     width: 22px;
   }

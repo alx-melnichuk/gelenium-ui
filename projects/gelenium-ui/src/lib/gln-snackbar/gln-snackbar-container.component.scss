@@ -2,8 +2,8 @@
 
 .gln-snackbar-panel {
   @media (max-width: 799.95px) { // 599.95px
-    --glnsbp--mr: 0.5rem;
-    --glnsb-panel-margin: var(--glnsb-panel-margin-mini);
+    --glnsbc--mr: 0.5rem;
+    --glnsbc-mr: var(--glnsbc-mr-mini);
     width: 100%;
   }
 }
@@ -22,7 +22,7 @@ gln-snackbar-container {
   // min-width: 300px;
   // padding: 6px 1rem;
   transform-origin: center;
-  margin: var(--glnsb-panel-margin, var(--glnsbp--mr, 1rem));
+  margin: var(--glnsbc-mr, var(--glnsbc--mr, 1rem));
   width: inherit;
 
   --glnsbcw--trn-dur: 260ms; // 260ms
