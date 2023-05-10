@@ -78,6 +78,11 @@ app-cm-snackbar-basic {
     max-width: 40ch;
   }
 
+  // Page: isShowPal07MUI
+  .snpl3-elem {
+    max-width: 40ch;
+  }
+
   // Page: Config08
   .sncf-btn {
     border-radius: 4px;
@@ -125,21 +130,6 @@ app-cm-snackbar-basic {
     overflow: visible;
     padding: 4px 6px;
   }
-
-  .sncs-MUI {
-    --glnsbb-mn-hg: 48px;
-    --glnsbb-mn-wd: 288px;
-    --glncl-default-h: 0;
-    --glncl-default-s: 0%;
-    --glncl-default-l: 19.61%;
-    --glncl-default-bg-h: 0;
-    --glncl-default-bg-s: 0%;
-    --glncl-default-bg-l: 100%;
-    font-size: 14px;
-    // padding: 6px 16px;
-    --glnsbb-box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
-  }
-
 } 
 
 // Page: isShowPal07Basic
@@ -176,6 +166,85 @@ app-cm-snackbar-basic {
 }
 
 // Page: isShowPal07BS Bootstrap
-.snpl2-bs {
+gln-snackbar.snpl2-bs-snackbar {
   cursor: pointer;
+}
+.snpl2-bs-overlay {
+  --glnsbc-mr-mini: 0.75rem;
+  --glnsbc-mr: 1.5rem;
+  z-index: 1090;
+}
+.snpl2-bs-snackbar {
+  --glnsb-brd-wd: 1px;
+  --glnsb-brd-cl: rgba(0, 0, 0, 0.175);
+  --glnsb-brd-rds: 0.375rem;
+  --glnsb-bx-shd: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --glnsb-mn-hg: 45px;
+  --glnsb-mn-wd: 350px;
+  font-size: 0.875rem;
+}
+.snpl2-bs-standard {
+  --glnsb-bg-color: #ffffffd9;
+  --glnsb-color: #212529;
+}
+.snpl2-bs-primary {
+  --glnsb-bg-color: #0d6efd;
+  --glnsb-color: #fafafa;
+}
+.snpl2-bs-secondary {
+  --glnsb-bg-color: #5c636a;
+  --glnsb-color: #fafafa;
+}
+.snpl2-bs-success {
+  --glnsb-bg-color: #198754;
+  --glnsb-color: #fafafa;
+}
+.snpl2-bs-danger {
+  --glnsb-bg-color: #dc3545;
+  --glnsb-color: #fafafa;
+}
+.snpl2-bs-warning {
+  --glnsb-bg-color: #ffc107;
+  --glnsb-color: #000;
+}
+.snpl2-bs-info {
+  --glnsb-bg-color: #0dcaf0;
+  --glnsb-color: #000;
+}
+
+// Page: isShowPal07MUI
+gln-snackbar.snpl3-mui-snackbar {
+  cursor: pointer;
+}
+.snpl3-mui-overlay {
+  --glnsbc-mr-mini: 0.75rem;
+  --glnsbc-mr: 1.5rem;
+  z-index: 1400;
+}
+.snpl3-mui-snackbar {
+  --glnsb-mn-hg: 48px;
+  --glnsb-mn-wd: 288px;
+  --glnsb-brd-rds: 4px;
+  --glnsb-bx-shd: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
+  font-size: 0.875rem;
+}
+.snpl3-mui-default {
+  --glnsb-bg-color: rgb(50, 50, 50);
+  --glnsb-color: #fff;
+}
+.snpl3-mui-error {
+  --glnsb-bg-color: #d32f2f;
+  --glnsb-color: #fff;
+}
+.snpl3-mui-warning {
+  --glnsb-bg-color: #ed6c02;
+  --glnsb-color: #fff;
+}
+.snpl3-mui-info {
+  --glnsb-bg-color: #0288d1;
+  --glnsb-color: #fff;
+}
+.snpl3-mui-success {
+  --glnsb-bg-color: #2e7d32;
+  --glnsb-color: #fff;
 }

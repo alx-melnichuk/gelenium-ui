@@ -34,9 +34,9 @@ export class CmSnackbarBasicComponent {
   public urlPlSnackbar = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_SNACKBAR');
 
   // Page: Basic01
-  isShowBasic01 = true;
+  isShowBasic01 = false; // # true;
   // Page: Attrib01
-  isShowAttrib01 = true;
+  isShowAttrib01 = false; // # true;
   // Page: Attrib02
   isShowAttrib02 = false; // # true;
   // Page: Attrib03
@@ -53,6 +53,8 @@ export class CmSnackbarBasicComponent {
   isShowPal07Basic = true;
   // Page: Palette07BS
   isShowPal07BS = true;
+  // Page: Palette07MUI
+  isShowPal07MUI = true;
 
   // Page: Config08
   isShowConfig08 = false; // # true;
@@ -105,13 +107,31 @@ export class CmSnackbarBasicComponent {
     });
   }
 
-  public clickMUI(message: string, action: string | undefined, config: any): void {
-    this.snackbarService.open(message, action, config);
-  }
-
   // Page: Palette07Basic
   public clickMsgType(message: string, action: string, config: any): void {
     this.snackbarService.open(message, action, config);
+  }
+
+  // Page: Palette07BS
+  public clickBootstrap(message: string, action: string, config: any): void {
+    const configBS = {
+      overlayClasses: 'snpl2-bs-overlay',
+      horizontal: 'right',
+      transition: 'fade',
+      vertical: 'top',
+    };
+    this.snackbarService.open(message, action, { ...configBS, ...config });
+  }
+
+  // Page: Palette07MUI
+  public clickMUI(message: string, action: string, config: any): void {
+    const configMUI = {
+      overlayClasses: 'snpl3-mui-overlay',
+      horizontal: 'center',
+      transition: 'grow',
+      vertical: 'bottom',
+    };
+    this.snackbarService.open(message, action, { ...configMUI, ...config });
   }
 
   // Page: Config08
