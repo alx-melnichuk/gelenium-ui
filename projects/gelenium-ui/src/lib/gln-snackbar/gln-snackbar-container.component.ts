@@ -61,12 +61,10 @@ export class GlnSnackbarContainerComponent {
       const buff: number[] = Array.from(this.wrapperMap.keys());
       result = buff[index];
     }
-    console.log(`*getItemByIndex(${index}); result=${result};`); // #
     return result;
   }
 
   public createWrapper(id: number, classNames: string[], transition: string): HTMLElement {
-    console.log(`*createWrapper(${id})`); // #
     const wrapper: HTMLElement = this.document.createElement('div');
     wrapper.id = `glnsbc-wrapper-${id}`;
     wrapper.classList.add('gln-container-wrapper');
@@ -90,13 +88,11 @@ export class GlnSnackbarContainerComponent {
   }
 
   public appendWrapper(id: number, wrapperPortal: DomPortalOutlet): SnackbarContainerItemResult {
-    console.log(`*appendWrapper(${id})`); // #
     const result: SnackbarContainerItemResult = {
       showAnimationCompleted: () => {},
       hideAnimationCompleted: () => {},
     };
     const animationEventFnc: () => void = () => {
-      console.log(`*animationEventFnc(${id})`); // #
       const isShow: boolean | null = this.animationEndForWrapper(wrapperPortal.outletElement);
       if (isShow) {
         result.showAnimationCompleted();
@@ -116,7 +112,6 @@ export class GlnSnackbarContainerComponent {
   }
 
   public showWrapper(id: number): void {
-    console.log(`*showWrapper(${id})`); // #
     const item: SnackbarContainerItem | undefined = this.wrapperMap.get(id);
     if (!!item) {
       item.wrapperPortal.outletElement.setAttribute('animated', '');
@@ -125,7 +120,6 @@ export class GlnSnackbarContainerComponent {
   }
 
   public hideWrapper(id: number): void {
-    console.log(`*hideWrapper(${id})`); // #
     const item: SnackbarContainerItem | undefined = this.wrapperMap.get(id);
     if (!!item) {
       item.wrapperPortal.outletElement.setAttribute('animated', '');
@@ -134,7 +128,6 @@ export class GlnSnackbarContainerComponent {
   }
 
   public removeWrapper(id: number): void {
-    console.log(`*removeWrapper(${id})`); // #
     const item: SnackbarContainerItem | undefined = this.wrapperMap.get(id);
     if (!!item) {
       EventListenerUtil.removeListeners(item.listeners);
@@ -148,7 +141,6 @@ export class GlnSnackbarContainerComponent {
   // ** Private methods **
 
   private animationEndForWrapper(wrapper: Element | null): boolean | null {
-    console.log(`*animationEndForWrapper(${wrapper?.getAttribute('id')})`); // #
     let result: boolean | null = null;
     if (!!wrapper) {
       wrapper.removeAttribute('animated');
@@ -159,7 +151,6 @@ export class GlnSnackbarContainerComponent {
         wrapper.removeAttribute('is-hide');
       }
     }
-    console.log(`*animationEndForWrapper(${wrapper?.getAttribute('id')}): result=${result}  ${result ? 'is-show' : 'is-hide'}`); // #
     return result;
   }
 }
