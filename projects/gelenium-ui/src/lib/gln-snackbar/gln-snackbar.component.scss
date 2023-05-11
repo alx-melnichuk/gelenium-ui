@@ -1,26 +1,25 @@
 /*# sourceURL=gln-snackbar.component.scss */
 
 gln-snackbar {
-  --glnsb--default-h: var(--glncl-default-h, var(--gln-default-h));
-  --glnsb--default-s: var(--glncl-default-s, var(--gln-default-s));
-  --glnsb--default-l: var(--glncl-default-l, var(--gln-default-l));
-
   --glnsb--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
   --glnsb--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
   --glnsb--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
 
-  --glnsb---cur-cl: var(--glnsb-color, hsl(var(--glnsb--default-bg-h), var(--glnsb--default-bg-s), var(--glnsb--default-bg-l)));
-  --glnsb---cur-bg: var(--glnsb-bg-color, hsl(var(--glnsb--default-h), var(--glnsb--default-s), var(--glnsb--default-l)));
+  --glnsb--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnsb--default-s: var(--glncl-default-s, var(--gln-default-s));
+  --glnsb--default-l: var(--glncl-default-l, var(--gln-default-l));
+
+  --glnsb---color: var(--glnsb-color, hsl(var(--glnsb--default-bg-h), var(--glnsb--default-bg-s), var(--glnsb--default-bg-l)));
+  --glnsb---bg-color: var(--glnsb-bg-color, hsl(var(--glnsb--default-h), var(--glnsb--default-s), calc(var(--glnsb--default-l) + 10%)));
+  --glnsb---action-color: var(--glnsb-action-color, #9326a6);
 
   align-items: center;
-  // background-color: #3131317a; // #313131; // # ng12 background: #323232;
-  background-color: var(--glnsb---cur-bg);
+  background-color: var(--glnsb---bg-color);
   border: var(--glnsb-brd-wd) var(--glnsb-brd-st, solid) var(--glnsb-brd-cl);
   border-radius: var(--glnsb-brd-rds, 0.25em);
   box-shadow: var(--glnsb-bx-shd, (0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12)));
   box-sizing: border-box;
-  // color: #fff; // # ng12 color: hsla(0,0%,100%,.7);
-  color: var(--glnsb---cur-cl);
+  color: var(--glnsb---color);
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;
@@ -33,7 +32,6 @@ gln-snackbar {
   padding-right: var(--glnsb-pd-rg, 0.5em);
   padding-bottom: var(--glnsb-pd-bt, 0px);
   padding-left: var(--glnsb-pd-lf, 1em);
-  // font-size: 0.875rem;
 
   [glnsb-wrap-icon] {
     display: flex;
@@ -44,12 +42,12 @@ gln-snackbar {
     display: inline-block;
     fill: currentColor;
     flex-shrink: 0;
-    height: 22px;
+    height: 1.5em;
     margin-right: 12px;
     opacity: .85;
     padding: 7px 0;
     user-select: none;
-    width: 22px;
+    width: 1.5em;
   }
 
   [glnsb-msg] {
@@ -69,11 +67,11 @@ gln-snackbar {
     cursor: pointer;
     display: inline-flex;
     font-family: inherit;
+    font-size: inherit;
     justify-content: center;
     letter-spacing: inherit;
     line-height: inherit;
     margin: 0;
-    // outline: 1px solid blue; // #
     outline: 0;
     position: relative;
     text-decoration: none;
@@ -83,8 +81,8 @@ gln-snackbar {
 
   [glnsb-action] {
     border-radius: 0.25em;
-    color: #9c27b0;
-    font-size: inherit; // font-size: 0.8125rem;
+    color: var(--glnsb---action-color);
+    font-size: inherit;
     font-weight: 500;
     line-height: 1.75;
     min-width: 64px;
@@ -116,5 +114,3 @@ gln-snackbar {
     font-size: 1.5rem;
   }
 }
-
-
