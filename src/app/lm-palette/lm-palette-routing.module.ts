@@ -13,6 +13,7 @@ const URL_PALETTE_INPUT = RouterConfig.get('URL_PALETTE_INPUT');
 const URL_PALETTE_PAGINATION = RouterConfig.get('URL_PALETTE_PAGINATION');
 const URL_PALETTE_RADIOBUTTON = RouterConfig.get('URL_PALETTE_RADIOBUTTON');
 const URL_PALETTE_SELECT = RouterConfig.get('URL_PALETTE_SELECT');
+const URL_PALETTE_SNACKBAR = RouterConfig.get('URL_PALETTE_SNACKBAR');
 const URL_PALETTE_TEXTAREA = RouterConfig.get('URL_PALETTE_TEXTAREA');
 
 const routes: Routes = [
@@ -47,6 +48,10 @@ const routes: Routes = [
       {
         path: URL_PALETTE_SELECT,
         loadChildren: () => import('../lib-palette/pl-select/pl-select.module').then((m) => m.PlSelectModule),
+      },
+      {
+        path: URL_PALETTE_SNACKBAR,
+        loadChildren: () => import('../lib-palette/pl-snackbar/pl-snackbar.module').then((m) => m.PlSnackbarModule),
       },
       {
         path: URL_PALETTE_TEXTAREA,
