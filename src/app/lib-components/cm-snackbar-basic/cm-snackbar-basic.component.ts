@@ -51,13 +51,6 @@ export class CmSnackbarBasicComponent {
   isShowCustom05 = true;
   public snackbarRefTemplate: GlnSnackbarRef<EmbeddedViewRef<any>> | null = null;
 
-  // Page: Palette07Basic
-  isShowPal07Basic = false; // #true;
-  // Page: Palette07BS
-  isShowPal07BS = false; // #true;
-  // Page: Palette07MUI
-  isShowPal07MUI = false; // #true;
-
   idxBasic01 = 1;
   idxBasic02 = 1;
 
@@ -116,70 +109,5 @@ export class CmSnackbarBasicComponent {
     this.snackbarService.openFromTemplate(template, { data: context }).result.then((response) => {
       console.log(`Template response=${response}`);
     });
-  }
-
-  // Page: Palette07Basic
-  public clickMsgType(message: string, action: string, config: any): void {
-    this.snackbarService.open(message, action, config);
-  }
-
-  // Page: Palette07BS
-  public clickBootstrap(message: string, action: string, config: any): void {
-    const configBS = {
-      overlayClasses: 'snpl2-bs-overlay',
-      horizontal: 'right',
-      transition: 'fade',
-      vertical: 'top',
-    };
-    this.snackbarService.open(message, action, { ...configBS, ...config });
-  }
-
-  // Page: Palette07MUI
-  public clickMUI(message: string, action: string, config: any): void {
-    const configMUI = {
-      overlayClasses: 'snpl3-mui-overlay',
-      horizontal: 'center',
-      transition: 'grow',
-      vertical: 'bottom',
-    };
-    this.snackbarService.open(message, action, { ...configMUI, ...config });
-  }
-
-  // ** OLD **
-
-  public getValue(eventTarget: any): any {
-    return eventTarget != null ? (eventTarget as Attr).value : '';
-  }
-
-  public clickDemo1(msgType01a: string, transition01a: string): void {
-    const idx: number = this.idxBasic01++;
-    const snackbarRef: GlnSnackbarRef<unknown> = this.snackbarService.open(`message Demo-${idx}`, undefined, {
-      data: { msgType: msgType01a },
-      transition: transition01a,
-    });
-    snackbarRef.result
-      .then((response) => {
-        console.log(`1_resolve(${idx} response=${response});`); // #
-      })
-      .catch(() => {
-        console.log(`1_reject(${idx});`); // #
-      });
-  }
-
-  public clickDemo2(): void {
-    const idx: number = this.idxBasic02++;
-    const snackbarRef: GlnSnackbarRef<unknown> = this.snackbarService.open(`message Demo-${idx}`, 'action1', {
-      data: { msgType: 'success', isNoClose: true },
-      duration: 4000,
-      horizontal: 'right',
-      vertical: 'top',
-    });
-    snackbarRef.result
-      .then((response) => {
-        console.log(`2_resolve(${idx} response=${response});`); // #
-      })
-      .catch(() => {
-        console.log(`2_reject(${idx});`); // #
-      });
   }
 }
