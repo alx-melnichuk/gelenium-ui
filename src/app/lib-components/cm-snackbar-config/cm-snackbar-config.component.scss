@@ -1,0 +1,15 @@
+/*# sourceURL=cm-snackbar-config.component.scss */
+
+app-cm-snackbar-config {
+  display: block;
+
+  .sncf-btn {
+    border-radius: 4px;
+    border-width: 0;
+    cursor: pointer;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 1.143em;
+  }
+}

@@ -8,7 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { GlnSnackbarRef, GlnSnackbarService } from 'gelenium-ui';
+import { GlnSnackbarOpenUtil, GlnSnackbarRef, GlnSnackbarService } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
@@ -34,15 +34,17 @@ export class CmSnackbarBasicComponent {
   public urlPlSnackbar = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_SNACKBAR');
 
   // Page: Basic01
-  isShowBasic01 = false; // # true;
+  isShowBasic01 = true;
   // Page: Attrib01
-  isShowAttrib01 = false; // # true;
+  isShowAttrib01 = true;
   // Page: Attrib02
-  isShowAttrib02 = false; // # true;
+  isShowAttrib02 = true;
   // Page: Attrib03
-  isShowAttrib03 = false; // # true;
+  isShowAttrib03 = true;
   public transition02gList: string[] = ['grow', 'fade', 'blur', 'slide', 'slide-dw', 'slide-lf', 'slide-rg', 'turn', 'turn-y'];
   public transition02g: string = this.transition02gList[0];
+  // Page: Attrib04
+  isShowAttrib04 = true;
 
   // TODO demostartion 'action'
   // Page: Custom05
@@ -50,15 +52,11 @@ export class CmSnackbarBasicComponent {
   public snackbarRefTemplate: GlnSnackbarRef<EmbeddedViewRef<any>> | null = null;
 
   // Page: Palette07Basic
-  isShowPal07Basic = true;
+  isShowPal07Basic = false; // #true;
   // Page: Palette07BS
-  isShowPal07BS = true;
+  isShowPal07BS = false; // #true;
   // Page: Palette07MUI
-  isShowPal07MUI = true;
-
-  // Page: Config08
-  isShowConfig08 = false; // # true;
-  public config08 = { horizontal: 'left', vertical: 'top' };
+  isShowPal07MUI = false; // #true;
 
   idxBasic01 = 1;
   idxBasic02 = 1;
@@ -72,6 +70,10 @@ export class CmSnackbarBasicComponent {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private snackbarService: GlnSnackbarService, private viewContainerRef: ViewContainerRef) {
     console.log(`CmSnackbarBasic();`); //#
+    // setTimeout(() => {
+    //   console.log(`CmSnackbarBasic(); GlnSnackbarOpenUtil.closeAll();`); //#
+    //   GlnSnackbarOpenUtil.closeAll();
+    // }, 6000);
   }
 
   // Page: Basic01
@@ -98,6 +100,15 @@ export class CmSnackbarBasicComponent {
 
   public clickTransition(message: string, config: any): void {
     this.snackbarService.open(message, '', config);
+  }
+
+  // Page: Attrib04
+  public clickAction(message: string, action: string, config: any): void {
+    this.snackbarService.open(message, action, config).result.then((response) => {
+      // response=undefined - When closing by the "close" button.
+      // response=UNDO      - When closing by the "action" button.
+      console.log(`simple action response=${response}`);
+    });
   }
 
   // Page: Custom05
@@ -132,11 +143,6 @@ export class CmSnackbarBasicComponent {
       vertical: 'bottom',
     };
     this.snackbarService.open(message, action, { ...configMUI, ...config });
-  }
-
-  // Page: Config08
-  public clickConfig(message: string, config: any): void {
-    this.snackbarService.open(message, '', config);
   }
 
   // ** OLD **
