@@ -16,7 +16,12 @@ export class GlnTooltipOpenUtil {
   public static getList(): GlnTooltipBaseDirective<any>[] {
     return GlnTooltipOpenUtil.list.slice();
   }
+  public static size(): number {
+    return GlnTooltipOpenUtil.list.length;
+  }
   public static closeAll(): void {
-    GlnTooltipOpenUtil.list.forEach((item: { hide(value: unknown): void }) => item.hide({ noAnimation: true }));
+    while (GlnTooltipOpenUtil.list.length > 0) {
+      GlnTooltipOpenUtil.list.pop()?.hide({ noAnimation: true });
+    }
   }
 }

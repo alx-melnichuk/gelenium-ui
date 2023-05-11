@@ -16,7 +16,12 @@ export class GlnAutocompleteOpenUtil {
   public static getList(): GlnAutocompleteComponent[] {
     return GlnAutocompleteOpenUtil.list.slice();
   }
+  public static size(): number {
+    return GlnAutocompleteOpenUtil.list.length;
+  }
   public static closeAll(): void {
-    GlnAutocompleteOpenUtil.list.forEach((item: { close(value: unknown): void }) => item.close({ noAnimation: true }));
+    while (GlnAutocompleteOpenUtil.list.length > 0) {
+      GlnAutocompleteOpenUtil.list.pop()?.close({ noAnimation: true });
+    }
   }
 }

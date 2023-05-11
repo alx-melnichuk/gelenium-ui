@@ -16,7 +16,12 @@ export class GlnSelectOpenUtil {
   public static getList(): GlnSelectComponent[] {
     return GlnSelectOpenUtil.list.slice();
   }
+  public static size(): number {
+    return GlnSelectOpenUtil.list.length;
+  }
   public static closeAll(): void {
-    GlnSelectOpenUtil.list.forEach((item: { close(value: unknown): void }) => item.close({ noAnimation: true }));
+    while (GlnSelectOpenUtil.list.length > 0) {
+      GlnSelectOpenUtil.list.pop()?.close({ noAnimation: true });
+    }
   }
 }
