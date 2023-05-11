@@ -1,5 +1,6 @@
 export * from './gln-snackbar-config.interface';
 export * from './gln-snackbar-container.component';
+export * from './gln-snackbar-open.util';
 export * from './gln-snackbar-reference';
 export * from './gln-snackbar.component';
 export * from './gln-snackbar.module';

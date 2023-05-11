@@ -13,6 +13,7 @@ import {
 import { ArrayUtil } from '../_utils/array.util';
 import { GlnSnackbarConfig, GLN_SNACKBAR_DATA } from './gln-snackbar-config.interface';
 import { GlnSnackbarContainerComponent } from './gln-snackbar-container.component';
+import { GlnSnackbarOpenUtil } from './gln-snackbar-open.util';
 import { GlnSnackbarRef, GlnSnackbarReference } from './gln-snackbar-reference';
 import { GlnSnackbarComponent } from './gln-snackbar.component';
 
@@ -251,10 +252,16 @@ export class GlnSnackbarUtil {
     htmlElement?.setAttribute('role', 'alert');
 
     snackbarReference.setHideWrapperFn(() => {
+      console.log(`#Container.hideWrapper(id);`); // #
       snackbarContainer.hideWrapper(id);
     });
     snackbarReference.setRemoveWrapperFn(() => {
+      console.log(`#Container.removeWrapper(id);`); // #
       snackbarContainer.removeWrapper(id);
+    });
+    snackbarContainer.setRemoveWrapperFn(() => {
+      console.log(`#OpenUtil.remove(snackbarRef);`); // #
+      GlnSnackbarOpenUtil.remove(snackbarRef);
     });
 
     if (snackbarMeta.maxCount > 0) {
@@ -266,6 +273,7 @@ export class GlnSnackbarUtil {
         }
       }
     }
+    GlnSnackbarOpenUtil.add(snackbarRef);
     return snackbarRef;
   }
 }
