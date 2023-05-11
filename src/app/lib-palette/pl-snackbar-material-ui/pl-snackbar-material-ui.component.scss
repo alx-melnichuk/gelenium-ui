@@ -1,0 +1,45 @@
+/*# sourceURL=pl-snackbar-material-ui.component.scss */
+
+app-pl-snackbar-material-ui {
+  display: block;
+
+  .snpl3-elem {
+    max-width: 40ch;
+  }
+}
+
+gln-snackbar.snpl3-mui-snackbar {
+  cursor: pointer;
+}
+.snpl3-mui-overlay {
+  --glnsbc-mr-mini: 0.75rem;
+  --glnsbc-mr: 1.5rem;
+  z-index: 1400;
+}
+.snpl3-mui-snackbar {
+  --glnsb-mn-hg: 48px;
+  --glnsb-mn-wd: 288px;
+  --glnsb-brd-rds: 4px;
+  --glnsb-bx-shd: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
+  font-size: 0.875rem;
+}
+.snpl3-mui-default {
+  --glnsb-bg-color: rgb(50, 50, 50);
+  --glnsb-color: #fff;
+}
+.snpl3-mui-error {
+  --glnsb-bg-color: #d32f2f;
+  --glnsb-color: #fff;
+}
+.snpl3-mui-warning {
+  --glnsb-bg-color: #ed6c02;
+  --glnsb-color: #fff;
+}
+.snpl3-mui-info {
+  --glnsb-bg-color: #0288d1;
+  --glnsb-color: #fff;
+}
+.snpl3-mui-success {
+  --glnsb-bg-color: #2e7d32;
+  --glnsb-color: #fff;
+}
