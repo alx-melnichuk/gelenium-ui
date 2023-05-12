@@ -7,6 +7,7 @@ export interface GlnSnackbarParams {
   message: string;
   action?: string;
   msgType?: string;
+  isInvert?: boolean;
   isNoClose?: boolean;
 }
 
@@ -19,7 +20,7 @@ export interface GlnSnackbarParams {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GlnSnackbarComponent implements OnInit {
-  /** Data that was injected into the snack bar. */
+  /** Data that was injected into the snackbar. */
   @Input('params')
   public data: GlnSnackbarParams;
   public hasError: boolean = false;
@@ -27,7 +28,7 @@ export class GlnSnackbarComponent implements OnInit {
   public hasInfo: boolean = false;
   public hasSuccess: boolean = false;
   public hasClose: boolean = false;
-  /** If the action button should be shown. */
+
   public get hasAction(): boolean {
     return !!this.data.action;
   }
@@ -48,13 +49,16 @@ export class GlnSnackbarComponent implements OnInit {
     this.hasWarning = this.data.msgType === 'warning';
     this.hasClose = !this.data.isNoClose;
     GlnSnackbarUtil.settingCssColor(this.data.msgType, this.hostRef);
+    if (this.data.isInvert) {
+      this.hostRef.nativeElement.setAttribute('glnsb-invert', '');
+    }
   }
 
-  /** Performs the action on the snack bar. */
+  /** Causes the snackbar to close. */
   public action(): void {
     this.snackbarRef?.close(this.data.action);
   }
-
+  /** Causes the snackbar to close with an action. */
   public close(): void {
     this.snackbarRef?.close(undefined);
   }

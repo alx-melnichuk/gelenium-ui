@@ -1,7 +1,7 @@
 import { EmbeddedViewRef } from '@angular/core';
 
 export class GlnSnackbarRef<T> {
-  /** The instance of the component making up the content of the snack bar. */
+  /** The instance of the component making up the content of the snackbar. */
   public instance!: T | EmbeddedViewRef<any>;
   /** A promise that is resolved when closed (by an action or close button) and rejected when closed by a timeout. */
   public readonly result: Promise<any>;
@@ -13,11 +13,11 @@ export class GlnSnackbarRef<T> {
     });
   }
 
-  /** Closes the snack bar by clicking on the "action" or "close" button. */
+  /** Closes the snackbar by clicking on the "action" or "close" button. */
   public close(resultAction?: any): void {
     this.resolve(resultAction);
   }
-  /** Closes the snack bar when the timeout expires. */
+  /** Closes the snackbar when the timeout expires. */
   public dismiss(options?: { noAnimation?: boolean }): void {
     this.resolve(undefined);
   }

@@ -9,13 +9,24 @@ gln-snackbar {
   --glnsb--default-s: var(--glncl-default-s, var(--gln-default-s));
   --glnsb--default-l: var(--glncl-default-l, var(--gln-default-l));
 
-  --glnsb---color: var(--glnsb-color, hsl(var(--glnsb--default-bg-h), var(--glnsb--default-bg-s), var(--glnsb--default-bg-l)));
-  --glnsb---bg-color: var(--glnsb-bg-color, hsl(var(--glnsb--default-h), var(--glnsb--default-s), calc(var(--glnsb--default-l) + 10%)));
   --glnsb---action-color: var(--glnsb-action-color, #9326a6);
+
+  &:not([glnsb-invert]) {
+    --glnsb---color: var(--glnsb-color, hsl(var(--glnsb--default-bg-h), var(--glnsb--default-bg-s), var(--glnsb--default-bg-l)));
+    --glnsb---bg-color: var(--glnsb-bg-color, hsl(var(--glnsb--default-h), var(--glnsb--default-s), calc(var(--glnsb--default-l) + 10%)));
+    --glnsb-brd-cl: var(--glnsb---bg-color);
+  }
+  &[glnsb-invert] {
+    --glnsb---bg-color: var(--glnsb-color, hsl(var(--glnsb--default-bg-h), var(--glnsb--default-bg-s), var(--glnsb--default-bg-l)));
+    --glnsb---color: var(--glnsb-bg-color, hsl(var(--glnsb--default-h), var(--glnsb--default-s), calc(var(--glnsb--default-l) + 0%)));
+    --glnsb-brd-cl: var(--glnsb---color);
+  }
 
   align-items: center;
   background-color: var(--glnsb---bg-color);
-  border: var(--glnsb-brd-wd) var(--glnsb-brd-st, solid) var(--glnsb-brd-cl);
+  border-color: var(--glnsb-brd-cl);
+  border-style: var(--glnsb-brd-st, solid);
+  border-width: var(--glnsb-brd-wd, 1px);
   border-radius: var(--glnsb-brd-rds, 0.25em);
   box-shadow: var(--glnsb-bx-shd, (0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12)));
   box-sizing: border-box;
@@ -23,7 +34,8 @@ gln-snackbar {
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;
-  font-weight: 400;
+  font-size: var(--glnsb-font-size, 14px);
+  font-weight: 500;
   justify-content: space-between;
   line-height: var(--glnsb-ln-hg, 1.43);
   min-height: var(--glnsb-mn-hg, 48px);
