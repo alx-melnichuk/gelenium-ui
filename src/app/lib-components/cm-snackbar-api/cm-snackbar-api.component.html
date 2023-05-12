@@ -1,0 +1,678 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    API: GlnSnackbar.
+    <a [href]="urlCmSnackbar + '#Api'">#</a>
+  </h3>
+  <p>
+    Selector:
+    <span fw500>gln-snackbar</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>glnSnackbar</span>
+  </p>
+</section>
+
+
+<section mr-vr
+  id="api-properties">
+  <h4 class="app-hover-link">
+    Properties.
+    <a [href]="urlCmSnackbar + '#api-properties'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>params: GlnSnackbarParams;</code>
+      </td>
+      <td>
+        <span>
+          Parameters to display the snackbar.
+        </span><br />
+        <span>
+          The GlnSnackbarParams interface contains:
+        </span>
+        <ul>
+          <li>
+            <span>message: string - short message text;</span>
+          </li>
+          <li>
+            <span>action?: string - action button name;</span>
+          </li>
+          <li>
+            <span>msgType?: string - message type name;</span>
+            <br />
+            <span>Takes values:</span>
+            <ul>
+              <li>'default' - default value (or if not set);</li>
+              <li>'error' - error type (color "danger");</li>
+              <li>'success' - success type (color "success");</li>
+              <li>'info' - information type (color "info");</li>
+              <li>'warning' - warning type (color "warning");</li>
+            </ul>
+          </li>
+          <li>
+            <span>
+              isInvert?: boolean - sign of inversion of background color and text color;
+            </span>
+          </li>
+          <li>
+            <span>
+              isNoClose?: boolean - sign of hiding the close button (default - false);
+            </span>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<section mr-vr
+  id="api-methods">
+  <h4 class="app-hover-link">
+    Methods
+    <a [href]="urlCmSnackbar + '#api-methods'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>close(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Close the snackbar.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>action(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Close the snackbar (by the specified action).<br />
+        The "action" property must be specified.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+
+<section mr-vr
+  id="api-css-variables-optional">
+  <h4 class="app-hover-link">
+    Css variables, optional. You can override the default values.
+    <a [href]="urlCmSnackbar + '#api-css-variables-optional'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="sbap-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--glnsb-bg-color:<br/>
+        &nbsp;hsla(--glnsb--default-[h,s,l]);</code>
+      </td>
+      <td>
+        <span>
+          Sets the background color for the snackbar.<br />
+          Based on system css variables: <code ubr>--gln--default-[h,s,l]</code>.<br />
+          Or the css-variable of the GlnColor directive: <code ubr>--glncl-default-[h,s,l]</code>.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsb-color:<br/>
+        &nbsp;hsla(--glnsb--default-bg-[h,s,l]);</code>
+      </td>
+      <td>
+        <span>
+          Sets the color for the snackbar.<br />
+          Based on system css variables: <code ubr>--gln--default-bg-[h,s,l]</code>.<br />
+          Or the css-variable of the GlnColor directive:
+          <code ubr>--glncl-default-bg-[h,s,l]</code>.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsb-action-color:<br/>
+        &nbsp;&nbsp;#9326a6;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the color of the action name for the snackbar.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsb-brd-cl:<br/>
+        &nbsp;&nbsp;undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the value of the 'border-color' for the snackbar.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsb-brd-st:solid;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the value of the 'border-style' for the snackbar.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsb-brd-wd: 1px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the value of the 'border-width' for the snackbar.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsb-brd-rds: 0.25em;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the value of the 'border-radius' for the snackbar.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsb-bx-shd:<br/>
+        &nbsp;&nbsp;0px 3px 5px -1px rgba(0,0,0,0.2);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the value of the 'box-shadow' for the snackbar.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsb-font-size: 14px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the value of the 'font-size' for the snackbar.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsb-ln-hg: 1.43;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the value of the 'line-height' for the snackbar.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsb-mn-hg: 48px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the value of the 'min-height' for the snackbar.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsb-mn-wd: 300px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the value of the 'min-width' for the snackbar.
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+
+<section mr-vr
+  id="api-service-methods">
+  <h4 class="app-hover-link">
+    GlnSnackbarService service methods.
+    <a [href]="urlCmSnackbar + '#api-service-methods'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>getConfig():
+        <a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a>;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Get the current global configuration object.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Return</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch">
+        <code><a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a>;</code>
+      </td>
+      <td>
+        Returns the value of the current global configuration object.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>setConfig(config:
+        <a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a>): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Set the value of the new global configuration object.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Parameters</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch">
+        <code>config:<br/>
+          &nbsp;&nbsp;<a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a>;</code>
+      </td>
+      <td>
+        The new value of the global configuration object.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>open( </span>
+      <span>message: string, action: string = '', config?:
+        <a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a></span>
+      <span fw500> ): <a [href]="urlCmSnackbar + '#api-ref-properties'">GlnSnackbarRef</a>&lt;<a
+          [href]="urlCmSnackbar + '#api-properties'">GlnSnackbarComponent</a>&gt;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Opens a snackbar with the specified short message, action (optional),
+        and configuration (optional).
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Parameters</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch"><code>message: string;</code></td>
+      <td>The value of the short message.</td>
+    </tr>
+    <tr>
+      <td class="sbap-mn-wd-22ch"><code>action: string = '';</code></td>
+      <td>The name of the action for the current short message.</td>
+    </tr>
+    <tr>
+      <td class="sbap-mn-wd-22ch">
+        <code>config?:<br/>
+          &nbsp;&nbsp;<a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a>;</code>
+      </td>
+      <td>The value of the configuration object for the current message.</td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Return</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch">
+        <code><a [href]="urlCmSnackbar + '#api-ref-properties'">GlnSnackbarRef</a><br/>
+          &lt;<a [href]="urlCmSnackbar + '#api-properties'">GlnSnackbarComponent</a>&gt;
+        </code>
+      </td>
+      <td>
+        Returns a <a [href]="urlCmSnackbar + '#api-ref-properties'">GlnSnackbarRef</a>
+        object containing a promise to react to when the snackbar closes.
+        There is also a method for closing the snackbar.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>openFromComponent&lt;T&gt;( </span>
+      <span>component: ComponentType&lt;T&gt;, config?:
+        <a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a>
+      </span>
+      <span fw500> ): <a
+          [href]="urlCmSnackbar + '#api-ref-properties'">GlnSnackbarRef</a>&lt;T&gt;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Creates and opens a snackbar with the specified content component (T).
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Parameters</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch"><code>component: ComponentType&lt;T&gt;</code></td>
+      <td>The type of the specified component to display in the snackbar.</td>
+    </tr>
+    <tr>
+      <td class="sbap-mn-wd-22ch">
+        <code>config?:<br/>
+          &nbsp;&nbsp;<a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a>;</code>
+      </td>
+      <td>The value of the configuration object for the current message.</td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Return</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch">
+        <code>
+          <a [href]="urlCmSnackbar + '#api-ref-properties'">GlnSnackbarRef</a>&lt;T&gt;
+        </code>
+      </td>
+      <td>
+        Returns a <a [href]="urlCmSnackbar + '#api-ref-properties'">GlnSnackbarRef</a>
+        object containing a promise to react to when the snackbar closes.
+        There is also a method for closing the snackbar.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>openFromTemplate( </span>
+      <span>template: TemplateRef&lt;any&gt;, config?:
+        <a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a>
+      </span>
+      <span fw500> ):
+        <a
+          [href]="urlCmSnackbar + '#api-ref-properties'">GlnSnackbarRef</a>&lt;EmbeddedViewRef&lt;any&gt;&gt;
+      </span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Creates and opens a snackbar with a specified content template.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Parameters</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch"><code>template: TemplateRef&lt;any&gt;</code></td>
+      <td>The specified content template to display in the snackbar.</td>
+    </tr>
+    <tr>
+      <td class="sbap-mn-wd-22ch">
+        <code>config?:<br/>
+          &nbsp;&nbsp;<a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a>;</code>
+      </td>
+      <td>The value of the configuration object for the current message.</td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Return</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch">
+        <code>
+          <a [href]="urlCmSnackbar + '#api-ref-properties'">GlnSnackbarRef</a>&lt;EmbeddedViewRef&lt;any&gt;&gt;
+        </code>
+      </td>
+      <td>
+        Returns a <a [href]="urlCmSnackbar + '#api-ref-properties'">GlnSnackbarRef</a>
+        object containing a promise to react to when the snackbar closes.
+        There is also a method for closing the snackbar.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>clear(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Close all currently opened snackbar (without animation).
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+
+<section mr-vr
+  id="api-ref-properties">
+  <h4 class="app-hover-link">
+    Class GlnSnackbarRef&lt;T&gt;.
+    <a [href]="urlCmSnackbar + '#api-ref-properties'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="2"><em>Description of class GlnSnackbarRef&lt;T&gt;.</em></td>
+    </tr>
+    <tr>
+      <td><code>instance!: T<br/>
+        &nbsp;&nbsp;| EmbeddedViewRef&lt;any&gt;;</code></td>
+      <td>
+        <span>
+          The instance of the component making up the content of the snackbar.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>readonly result:<br/>
+          &nbsp;&nbsp; Promise&lt;any&gt;;</code>
+      </td>
+      <td>
+        <span>Promise that resolves on close:</span>
+        <ul>
+          <li>using the action button (response=&lt;data.action&gt;);</li>
+          <li>using the close button (response=undefined);</li>
+          <li>when closing by timeout (response=undefined);</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<section mr-vr
+  id="api-ref-methods">
+  <h4 class="app-hover-link">
+    Class GlnSnackbarRef&lt;T&gt; methods.
+    <a [href]="urlCmSnackbar + '#api-ref-methods'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>close(resultAction?: any): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Causes the snackbar to close, with the option to specify an action value
+        (using animation).
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Parameters</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch"><code>resultAction?: any;</code></td>
+      <td>The value of the action at which the close was performed (optional).</td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>dismiss(options?: &#123; noAnimation?: boolean &#125;): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Causes the snackbar to close, with the option not to apply the animation).
+        Useful when the snackbar closes when you navigate to another page.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Parameters</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch"><code>
+        options?: &#123;<br/>
+        &nbsp;&nbsp;noAnimation?: boolean<br/>
+        &#125;</code></td>
+      <td>
+        Optional parameters.<br />
+        noAnimation - animation off flag.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<hr br-nn />
