@@ -174,8 +174,8 @@ const siteUrlsSnackbar: SiteUrl[] = [
   // { label: 'Size', url: urlSnackbar, fragment: 'Size' },
   // { label: 'Palette', url: urlSnackbar, fragment: 'Palette' },
   // { label: 'Customization', url: urlSnackbar, fragment: 'Customization' },
-  // { label: 'Config', url: urlSnackbar, fragment: 'Config' },
-  // { label: 'Api', url: urlSnackbar, fragment: 'Api' },
+  { label: 'Config', url: urlSnackbar, fragment: 'Config' },
+  { label: 'Api', url: urlSnackbar, fragment: 'Api' },
 ];
 SiteMenuUtil.addItem('Components', 'Snackbar', { label: 'Snackbar', siteUrls: siteUrlsSnackbar });
 
