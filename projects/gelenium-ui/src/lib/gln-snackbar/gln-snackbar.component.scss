@@ -40,10 +40,7 @@ gln-snackbar {
   line-height: var(--glnsb-ln-hg, 1.43);
   min-height: var(--glnsb-mn-hg, 48px);
   min-width: var(--glnsb-mn-wd, 300px);
-  padding-top: var(--glnsb-pd-tp, 0px);
-  padding-right: var(--glnsb-pd-rg, 0.5em);
-  padding-bottom: var(--glnsb-pd-bt, 0px);
-  padding-left: var(--glnsb-pd-lf, 1em);
+  padding: 0 0.5em 0 1em;
 
   [glnsb-wrap-icon] {
     display: flex;
