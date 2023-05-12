@@ -10,6 +10,12 @@ app-pl-snackbar-basic {
     cursor: pointer;
   }
 
+  .snpl2-elem {
+    max-width: 40ch;
+  }
+  .snpl2-box {
+    cursor: pointer;
+  }
 }
 
 .snpl1-customer {
@@ -18,11 +24,44 @@ app-pl-snackbar-basic {
   --glncl-default-s: 75%;
   --glncl-default-l: 50%;
   // color
-  --glncl-default-bg-h: 315;
-  --glncl-default-bg-s: 80%;
-  --glncl-default-bg-l: 90%;
+  --glncl-default-bg-h: 240;
+  --glncl-default-bg-s: 100%;
+  --glncl-default-bg-l: 98%;
 }
 .snpl1-svg-leaf .gln-snackbar-wrap-icon {
+  background-image: url("data:image/svg+xml,"
+  + "<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'"
+  + " fill='rgb(13 100 5 / 100%)'>"
+  + "<path d='M 32.5,2.5 C 33.1499,2.80393 33.8165,3.13727 34.5,3.5C"
+  + " 36.4996,11.3838 35.3329,18.7172 31,25.5C 25.4363,30.3422 19.10"
+  + "3,31.6755 12,29.5C 10.3804,31.2415 8.88041,33.0748 7.5,35C 6.20"
+  + "677,35.49 4.87344,35.6567 3.5,35.5C 3.33982,33.8008 3.50649,32."
+  + "1341 4,30.5C 9.04294,24.7243 15.2096,20.5576 22.5,18C 25.2239,1"
+  + "6.4779 27.2239,14.3112 28.5,11.5C 27.9984,10.479 27.3317,10.312"
+  + "3 26.5,11C 20.4243,15.7903 13.9243,19.957 7,23.5C 4.66714,14.66"
+  + "74 7.83381,8.50075 16.5,5C 21.9561,4.05529 27.2894,3.22195 32.5"
+  + ",2.5 Z'/>"
+  + "</svg>");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 30px;
+  margin-right: 0.5em;
+  width: 30px;
+}
+
+
+.snpl2-customer {
+  // background color
+  --glncl-default-h: 200;
+  --glncl-default-s: 75%;
+  --glncl-default-l: 50%;
+  // color
+  --glncl-default-bg-h: 240;
+  --glncl-default-bg-s: 100%;
+  --glncl-default-bg-l: 98%;
+}
+.snpl2-svg-leaf .gln-snackbar-wrap-icon {
   background-image: url("data:image/svg+xml,"
   + "<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'"
   + " fill='rgb(13 100 5 / 100%)'>"
