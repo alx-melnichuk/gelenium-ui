@@ -170,7 +170,7 @@ RouterConfig.add('URL_COMPONENTS_SNACKBAR', 'snackbar');
 const urlSnackbar = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SNACKBAR');
 const siteUrlsSnackbar: SiteUrl[] = [
   { label: 'Basic', url: urlSnackbar, fragment: 'Basic' },
-  // { label: 'Attributes', url: urlSnackbar, fragment: 'Attributes' },
+  { label: 'Attributes', url: urlSnackbar, fragment: 'Attributes' },
   // { label: 'Size', url: urlSnackbar, fragment: 'Size' },
   // { label: 'Palette', url: urlSnackbar, fragment: 'Palette' },
   // { label: 'Customization', url: urlSnackbar, fragment: 'Customization' },
