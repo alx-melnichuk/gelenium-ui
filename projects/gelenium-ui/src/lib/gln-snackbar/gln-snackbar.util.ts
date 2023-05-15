@@ -35,11 +35,14 @@ export class GlnSnackbarUtil {
   private static rootConfig: GlnSnackbarConfig = new GlnSnackbarConfig();
 
   public static clear(): void {
-    const overlayMetadataList: GlnSnackbarMeta[] = [...this.snackbarMetaMap.values()];
-    for (let idx = 0; idx < overlayMetadataList.length; idx++) {
-      overlayMetadataList[idx].overlayRef.detach();
+    const overlayMetaList: GlnSnackbarMeta[] = Array.from(this.snackbarMetaMap.values());
+    while (overlayMetaList.length > 0) {
+      const item: GlnSnackbarMeta | undefined = overlayMetaList.pop();
+      if (!!item) {
+        item.overlayRef.detach();
+        this.snackbarMetaMap.delete(item.key);
+      }
     }
-    this.snackbarMetaMap.clear();
   }
 
   public static getConfig(): GlnSnackbarConfig {
