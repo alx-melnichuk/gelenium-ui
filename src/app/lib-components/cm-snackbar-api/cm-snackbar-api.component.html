@@ -91,7 +91,8 @@
 <table class="app-tab">
   <thead>
     <th colspan="2">
-      <span fw500>close(): void;</span>
+      <span fw500>close</span>
+      <span>(): void;</span>
     </th>
   </thead>
   <tbody>
@@ -109,7 +110,8 @@
 <table class="app-tab">
   <thead>
     <th colspan="2">
-      <span fw500>action(): void;</span>
+      <span fw500>action</span>
+      <span>(): void;</span>
     </th>
   </thead>
   <tbody>
@@ -280,8 +282,8 @@
 <table class="app-tab">
   <thead>
     <th colspan="2">
-      <span fw500>getConfig():
-        <a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a>;</span>
+      <span fw500>getConfig</span>
+      <span>(): <a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a>;</span>
     </th>
   </thead>
   <tbody>
@@ -316,8 +318,10 @@
 <table class="app-tab">
   <thead>
     <th colspan="2">
-      <span fw500>setConfig(config:
-        <a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a>): void;</span>
+      <span fw500>setConfig</span>
+      <span>( config:
+        <a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a> )</span>
+      <span>: void;</span>
     </th>
   </thead>
   <tbody>
@@ -356,7 +360,7 @@
       <span fw500>open( </span>
       <span>message: string, action: string = '', config?:
         <a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a></span>
-      <span fw500> ): <a [href]="urlCmSnackbar + '#api-ref-properties'">GlnSnackbarRef</a>&lt;<a
+      <span> ): <a [href]="urlCmSnackbar + '#api-ref-properties'">GlnSnackbarRef</a>&lt;<a
           [href]="urlCmSnackbar + '#api-properties'">GlnSnackbarComponent</a>&gt;</span>
     </th>
   </thead>
@@ -417,12 +421,11 @@
 <table class="app-tab">
   <thead>
     <th colspan="2">
-      <span fw500>openFromComponent&lt;T&gt;( </span>
-      <span>component: ComponentType&lt;T&gt;, config?:
+      <span fw500>openFromComponent&lt;T&gt;</span>
+      <span>( component: ComponentType&lt;T&gt;, config?:
         <a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a>
       </span>
-      <span fw500> ): <a
-          [href]="urlCmSnackbar + '#api-ref-properties'">GlnSnackbarRef</a>&lt;T&gt;</span>
+      <span> ): <a [href]="urlCmSnackbar + '#api-ref-properties'">GlnSnackbarRef</a>&lt;T&gt;</span>
     </th>
   </thead>
   <tbody>
@@ -477,11 +480,11 @@
 <table class="app-tab">
   <thead>
     <th colspan="2">
-      <span fw500>openFromTemplate( </span>
-      <span>template: TemplateRef&lt;any&gt;, config?:
+      <span fw500>openFromTemplate</span>
+      <span>( template: TemplateRef&lt;any&gt;, config?:
         <a [href]="urlCmSnackbar + '#config-interface'">GlnSnackbarConfig</a>
       </span>
-      <span fw500> ):
+      <span> ):
         <a
           [href]="urlCmSnackbar + '#api-ref-properties'">GlnSnackbarRef</a>&lt;EmbeddedViewRef&lt;any&gt;&gt;
       </span>
@@ -539,7 +542,8 @@
 <table class="app-tab">
   <thead>
     <th colspan="2">
-      <span fw500>clear(): void;</span>
+      <span fw500>clear</span>
+      <span>(): void;</span>
     </th>
   </thead>
   <tbody>
@@ -615,7 +619,8 @@
 <table class="app-tab">
   <thead>
     <th colspan="2">
-      <span fw500>close(resultAction?: any): void;</span>
+      <span fw500>close</span>
+      <span>( resultAction?: any ): void;</span>
     </th>
   </thead>
   <tbody>
@@ -645,7 +650,8 @@
 <table class="app-tab">
   <thead>
     <th colspan="2">
-      <span fw500>dismiss(options?: &#123; noAnimation?: boolean &#125;): void;</span>
+      <span fw500>dismiss</span>
+      <span>( options?: &#123; noAnimation?: boolean &#125; ): void;</span>
     </th>
   </thead>
   <tbody>
@@ -674,5 +680,301 @@
   </tbody>
 </table>
 
+
+<hr br-nn />
+
+
+
+<section mr-vr
+  id="api-container-properties">
+  <h4 class="app-hover-link">
+    Class GlnSnackbarContainerComponent.
+    <a [href]="urlCmSnackbar + '#api-container-properties'">#</a>
+  </h4>
+  <p>
+    This component is a container for a list of snack bars with a single configuration.
+    <br />
+    If the configuration of two snackbars is the same, then they will have one common
+    GlnSnackbarContainerComponent instance.
+    <br />
+    Otherwise, if two snackbars don't have the same configuration, they will have two
+    different GlnSnackbarContainerComponent instances.
+  </p>
+  <span>
+    The unique key is determined by the following configuration properties:
+  </span>
+  <ul>
+    <li>horizontal;</li>
+    <li>overlayClasses</li>
+    <li>vertical</li>
+  </ul>
+</section>
+
+
+<section mr-vr
+  id="api-container-methods">
+  <h4 class="app-hover-link">
+    Class GlnSnackbarContainerComponent methods.
+    <a [href]="urlCmSnackbar + '#api-container-methods'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>createWrapper</span>
+      <span>( id: number, classNames: string[], transition: string</span>
+      <span> ): HTMLElement</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Creating a new DOM element "wrapper".
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Parameters</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch"><code>id: number;</code></td>
+      <td>Element ID.</td>
+    </tr>
+    <tr>
+      <td class="sbap-mn-wd-22ch"><code>classNames: string[];</code></td>
+      <td>List of CSS classes to add to the current element.</td>
+    </tr>
+    <tr>
+      <td class="sbap-mn-wd-22ch"><code>transition: string;</code></td>
+      <td>The "transition" value to add to the current element as an attribute.</td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Return</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch">
+        <code>
+          HTMLElement
+        </code>
+      </td>
+      <td>
+        Returns the HTMLElement of the new element.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>appendWrapper</span>
+      <span>( id: number, wrapperPortal: DomPortalOutlet</span>
+      <span> ): SnackbarContainerItemResult</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Add/remove event handlers for the element: 'animationend', 'animationcancel'.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Parameters</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch"><code>id: number;</code></td>
+      <td>Element ID.</td>
+    </tr>
+    <tr>
+      <td class="sbap-mn-wd-22ch"><code>wrapperPortal: DomPortalOutlet;</code></td>
+      <td>The DomPortalOutlet element for the current element.</td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Return</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch">
+        <code>
+          SnackbarContainerItemResult
+        </code>
+      </td>
+      <td>
+        Returns SnackbarContainerItemResult, an object with hooks to complete the opening
+        and closing of an element.
+        <code><pre source="ts">
+export type SnackbarContainerItemResult = &#123;
+  showAnimationCompleted: () => &#123;&#125;,
+  hideAnimationCompleted: () => &#123;&#125;,
+&#125;;</pre></code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>showWrapper</span>
+      <span>( id: number ): void</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Add the 'is-show' attribute to start the animation of opening the current element.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Parameters</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch"><code>id: number;</code></td>
+      <td>Element ID.</td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>hideWrapper</span>
+      <span>( id: number ): void</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Add an 'is-hide' attribute to start the closing animation of the current element.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Parameters</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch"><code>id: number;</code></td>
+      <td>Element ID.</td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>removeWrapper</span>
+      <span>( id: number ): void</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Remove handlers for the current element that were previously set.<br />
+        Detach from the overlay (wrapperPortal.detach();).<br />
+        Dispose of the current wrapper element (wrapperPortal.dispose();).
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2"><code>Parameters</code></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="sbap-mn-wd-22ch"><code>id: number;</code></td>
+      <td>Element ID.</td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+<hr br-nn />
+
+
+
+<section mr-vr
+  id="api-container-css-variables-optional">
+  <h4 class="app-hover-link">
+    CSS variables for GlnSnackbarContainerComponent, optional. You can override the default values.
+    <a [href]="urlCmSnackbar + '#api-container-css-variables-optional'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="sbap-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--glnsbc-mr: 1rem;</code>
+      </td>
+      <td>
+        <span>
+          The css size of the "margin" property for the current "wrapper" element.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsbc-mr-mini: 0.5rem;</code>
+      </td>
+      <td>
+        <span>
+          The css size of the "margin" property for the current "wrapper" element
+          when the screen size is less than 600px.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnsbc-trn-dur: 260ms;</code>
+      </td>
+      <td>
+        <span>
+          The runtime value (milliseconds) to animate the opening/closing of the
+          'Snackbar' element.
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <hr br-nn />
