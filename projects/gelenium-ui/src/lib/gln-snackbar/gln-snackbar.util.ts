@@ -255,15 +255,10 @@ export class GlnSnackbarUtil {
     htmlElement?.setAttribute('role', 'alert');
 
     snackbarReference.setHideWrapperFn(() => {
-      console.log(`#Container.hideWrapper(id);`); // #
       snackbarContainer.hideWrapper(id);
     });
     snackbarReference.setRemoveWrapperFn(() => {
-      console.log(`#Container.removeWrapper(id);`); // #
       snackbarContainer.removeWrapper(id);
-    });
-    snackbarContainer.setRemoveWrapperFn(() => {
-      console.log(`#OpenUtil.remove(snackbarRef);`); // #
       GlnSnackbarOpenUtil.remove(snackbarRef);
     });
 
