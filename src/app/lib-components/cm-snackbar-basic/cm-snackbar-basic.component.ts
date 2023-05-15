@@ -8,7 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { GlnSnackbarOpenUtil, GlnSnackbarRef, GlnSnackbarService } from 'gelenium-ui';
+import { GlnSnackbarRef, GlnSnackbarService } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-core/constants';
@@ -35,16 +35,6 @@ export class CmSnackbarBasicComponent {
 
   // Page: Basic01
   isShowBasic01 = true;
-  // Page: Attrib01
-  isShowAttrib01 = true;
-  // Page: Attrib02
-  isShowAttrib02 = true;
-  // Page: Attrib03
-  isShowAttrib03 = true;
-  public transition02gList: string[] = ['grow', 'fade', 'blur', 'slide', 'slide-dw', 'slide-lf', 'slide-rg', 'turn', 'turn-y'];
-  public transition02g: string = this.transition02gList[0];
-  // Page: Attrib04
-  isShowAttrib04 = true;
 
   // TODO demostartion 'action'
   // Page: Custom05
@@ -73,34 +63,6 @@ export class CmSnackbarBasicComponent {
   public clickSimple(): void {
     this.snackbarService.open('simple notification !').result.then((response) => {
       console.log(`simple response=${response}`);
-    });
-  }
-
-  // Page: Attrib01
-  public clickTypical(message: string, action: string = '', config: any): void {
-    this.snackbarService.open(message, action, config);
-  }
-
-  // Page: Attrib02
-  public clickPosition(message: string, action: string = '', config: any): void {
-    this.snackbarService.open(message, action, config);
-  }
-
-  // Page: Attrib03
-  public getValue02g(eventTarget: any): any {
-    return eventTarget != null ? (eventTarget as Attr).value : '';
-  }
-
-  public clickTransition(message: string, config: any): void {
-    this.snackbarService.open(message, '', config);
-  }
-
-  // Page: Attrib04
-  public clickAction(message: string, action: string, config: any): void {
-    this.snackbarService.open(message, action, config).result.then((response) => {
-      // response=undefined - When closing by the "close" button.
-      // response=UNDO      - When closing by the "action" button.
-      console.log(`simple action response=${response}`);
     });
   }
 
