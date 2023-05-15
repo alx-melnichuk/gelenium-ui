@@ -7,18 +7,18 @@ gln-snackbar {
 
   --glnsb--default-h: var(--glncl-default-h, var(--gln-default-h));
   --glnsb--default-s: var(--glncl-default-s, var(--gln-default-s));
-  --glnsb--default-l: var(--glncl-default-l, var(--gln-default-l));
+  --glnsb--default-l: var(--glncl-default-l, calc(var(--gln-default-l) + 7%));
 
   --glnsb---action-color: var(--glnsb-action-color, #9326a6);
 
   &:not([glnsb-invert]) {
     --glnsb---color: var(--glnsb-color, hsl(var(--glnsb--default-bg-h), var(--glnsb--default-bg-s), var(--glnsb--default-bg-l)));
-    --glnsb---bg-color: var(--glnsb-bg-color, hsl(var(--glnsb--default-h), var(--glnsb--default-s), calc(var(--glnsb--default-l) + 10%)));
+    --glnsb---bg-color: var(--glnsb-bg-color, hsl(var(--glnsb--default-h), var(--glnsb--default-s), calc(var(--glnsb--default-l) + 8%)));
     --glnsb-brd-cl: var(--glnsb---bg-color);
   }
   &[glnsb-invert] {
     --glnsb---bg-color: var(--glnsb-color, hsl(var(--glnsb--default-bg-h), var(--glnsb--default-bg-s), var(--glnsb--default-bg-l)));
-    --glnsb---color: var(--glnsb-bg-color, hsl(var(--glnsb--default-h), var(--glnsb--default-s), calc(var(--glnsb--default-l) + 0%)));
+    --glnsb---color: var(--glnsb-bg-color, hsl(var(--glnsb--default-h), var(--glnsb--default-s), var(--glnsb--default-l)));
     --glnsb-brd-cl: var(--glnsb---color);
   }
 
