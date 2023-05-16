@@ -970,8 +970,15 @@ export type SnackbarContainerItemResult = &#123;
       <td>
         <span>
           The runtime value (milliseconds) to animate the opening/closing of the
-          'Snackbar' element.
+          snackbar element.
+          <br />
+          If you want to disable the animation, then you need to set the value
+          of the parameter to zero.
         </span>
+        <code><pre source="css">
+gln-snackbar-container &#123;
+  --glnsbc-trn-dur: 0;
+&#125;</pre></code>
       </td>
     </tr>
   </tbody>
