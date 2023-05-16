@@ -25,6 +25,7 @@ export class CmSnackbarConfigComponent {
 
   public config08 = { horizontal: 'left', vertical: 'top' };
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private snackbarService: GlnSnackbarService) {}
 
   public clickConfig(message: string, config: any): void {
