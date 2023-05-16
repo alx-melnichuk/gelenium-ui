@@ -27,6 +27,7 @@ export class CmSnackbarAttributesComponent {
   public transition02gList: string[] = ['grow', 'fade', 'blur', 'slide', 'slide-dw', 'slide-lf', 'slide-rg', 'turn', 'turn-y'];
   public transition02g: string = this.transition02gList[0];
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private snackbarService: GlnSnackbarService) {}
 
   public clickTypical(message: string, action: string = '', config: any): void {
