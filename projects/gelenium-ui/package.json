@@ -1,4 +1,9 @@
 {
+  "author": {
+    "name": "Aleksii Melnichuk",
+    "email": "alx.melnichuk@gmail.com",
+    "url": "https://github.com/alx-melnichuk"
+  },
   "description": "Library of visual components in the style of \"Material UI\".",
   "dependencies": {
     "tslib": "^2.3.0"
