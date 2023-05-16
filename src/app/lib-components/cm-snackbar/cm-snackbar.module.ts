@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CmSnackbarBasicModule } from '../cm-snackbar-basic/cm-snackbar-basic.module';
 import { CmSnackbarAttributesModule } from '../cm-snackbar-attributes/cm-snackbar-attributes.module';
+import { CmSnackbarCustomizationModule } from '../cm-snackbar-customization/cm-snackbar-customization.module';
 import { CmSnackbarConfigModule } from '../cm-snackbar-config/cm-snackbar-config.module';
 import { CmSnackbarApiModule } from '../cm-snackbar-api/cm-snackbar-api.module';
 
@@ -15,6 +16,7 @@ import { CmSnackbarRoutingModule } from './cm-snackbar-routing.module';
     CommonModule,
     CmSnackbarBasicModule,
     CmSnackbarAttributesModule,
+    CmSnackbarCustomizationModule,
     CmSnackbarConfigModule,
     CmSnackbarApiModule,
     CmSnackbarRoutingModule,

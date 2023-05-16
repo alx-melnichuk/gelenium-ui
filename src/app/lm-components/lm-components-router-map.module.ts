@@ -171,9 +171,7 @@ const urlSnackbar = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfi
 const siteUrlsSnackbar: SiteUrl[] = [
   { label: 'Basic', url: urlSnackbar, fragment: 'Basic' },
   { label: 'Attributes', url: urlSnackbar, fragment: 'Attributes' },
-  // { label: 'Size', url: urlSnackbar, fragment: 'Size' },
-  // { label: 'Palette', url: urlSnackbar, fragment: 'Palette' },
-  // { label: 'Customization', url: urlSnackbar, fragment: 'Customization' },
+  { label: 'Customization', url: urlSnackbar, fragment: 'Customization' },
   { label: 'Config', url: urlSnackbar, fragment: 'Config' },
   { label: 'Api', url: urlSnackbar, fragment: 'Api' },
 ];
