@@ -31,7 +31,7 @@ export class CmSnackbarComponent implements AfterViewInit {
     // The zone will become stable when all components have fully rendered.
     this.ngZone.onStable.pipe(first()).subscribe(() => {
       // eslint-disable-next-line no-restricted-syntax
-      console.timeEnd(logLabel);
+      console.timeEnd(logLabel); // 280ms
     });
   }
 }

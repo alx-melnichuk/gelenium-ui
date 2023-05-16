@@ -31,7 +31,7 @@ export class CmCheckboxComponent implements AfterViewInit {
     // The zone will become stable when all components have fully rendered.
     this.ngZone.onStable.pipe(first()).subscribe(() => {
       // eslint-disable-next-line no-restricted-syntax
-      console.timeEnd(logLabel); // ???ms
+      console.timeEnd(logLabel); // 230ms
     });
   }
 }
