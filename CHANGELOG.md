@@ -1,3 +1,13 @@
+#### [0.6.0](https://github.com/alx-melnichuk/gelenium-ui/tree/0.6.0) (2023-05-17)
+
+#### Features
+
+* added a new **GlnChip** component;
+* added a new **GlnCheckbox** component;
+* added a new **GlnRadioButton** component;
+* added a new **GlnSnackbar** component;
+* added new service **GlnSnackbarService**;
+
 #### [0.5.0](https://github.com/alx-melnichuk/gelenium-ui/tree/0.5.0) (2023-03-21)
 
 #### BREAKING CHANGES
