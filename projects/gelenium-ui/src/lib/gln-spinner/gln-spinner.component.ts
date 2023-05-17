@@ -88,19 +88,19 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
     let isSize = false;
     let isStrokeWd = false;
 
-    if (changes['isExternal'] || (changes['config'] && this.isExternalVal == null && this.currConfig.isExternal != null)) {
+    if (changes['isExternal'] || (changes['config'] && this.isExternal == null && this.currConfig.isExternal != null)) {
       this.isExternalVal = !!(BooleanUtil.init(this.isExternal) ?? (this.currConfig.isExternal || null));
       this.settingExternal(this.isExternalVal, this.renderer, this.hostRef);
     }
-    if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimationVal == null && this.currConfig.isNoAnimation != null)) {
+    if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
       this.isNoAnimationVal = !!(BooleanUtil.init(this.isNoAnimation) ?? (this.currConfig.isNoAnimation || null));
       this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
-    if (changes['isNoPulsate'] || (changes['config'] && this.isNoPulsateVal == null && this.currConfig.isNoPulsate != null)) {
+    if (changes['isNoPulsate'] || (changes['config'] && this.isNoPulsate == null && this.currConfig.isNoPulsate != null)) {
       this.isNoPulsateVal = !!(BooleanUtil.init(this.isNoPulsate) ?? (this.currConfig.isNoPulsate || null));
       this.settingNoPulsate(this.isNoPulsateVal, this.renderer, this.hostRef);
     }
-    if (changes['progress'] || (changes['config'] && this.progressVal == null && this.currConfig.progress != null)) {
+    if (changes['progress'] || (changes['config'] && this.progress == null && this.currConfig.progress != null)) {
       this.progressVal = this.getProgress(this.progress ?? (this.currConfig.progress || null));
       isProgress = true;
     }

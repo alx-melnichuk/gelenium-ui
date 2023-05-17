@@ -8,12 +8,16 @@ import { LmComponentsComponent } from './lm-components.component';
 
 const URL_COMPONENTS_AUTOCOMPLETE = RouterConfig.get('URL_COMPONENTS_AUTOCOMPLETE');
 const URL_COMPONENTS_BUTTON = RouterConfig.get('URL_COMPONENTS_BUTTON');
+const URL_COMPONENTS_CHECKBOX = RouterConfig.get('URL_COMPONENTS_CHECKBOX');
+const URL_COMPONENTS_CHIP = RouterConfig.get('URL_COMPONENTS_CHIP');
 const URL_COMPONENTS_FRAME = RouterConfig.get('URL_COMPONENTS_FRAME');
 const URL_COMPONENTS_HINT_OR_ERROR = RouterConfig.get('URL_COMPONENTS_HINT_OR_ERROR');
 const URL_COMPONENTS_INFINITE_SCROLL = RouterConfig.get('URL_COMPONENTS_INFINITE_SCROLL');
 const URL_COMPONENTS_INPUT = RouterConfig.get('URL_COMPONENTS_INPUT');
 const URL_COMPONENTS_PAGINATION = RouterConfig.get('URL_COMPONENTS_PAGINATION');
+const URL_COMPONENTS_RADIOBUTTON = RouterConfig.get('URL_COMPONENTS_RADIOBUTTON');
 const URL_COMPONENTS_SELECT = RouterConfig.get('URL_COMPONENTS_SELECT');
+const URL_COMPONENTS_SNACKBAR = RouterConfig.get('URL_COMPONENTS_SNACKBAR');
 const URL_COMPONENTS_SPINNER = RouterConfig.get('URL_COMPONENTS_SPINNER');
 const URL_COMPONENTS_SWITCH = RouterConfig.get('URL_COMPONENTS_SWITCH');
 const URL_COMPONENTS_TEXTAREA = RouterConfig.get('URL_COMPONENTS_TEXTAREA');
@@ -31,6 +35,14 @@ const routes: Routes = [
       {
         path: URL_COMPONENTS_BUTTON,
         loadChildren: () => import('../lib-components/cm-button/cm-button.module').then((m) => m.CmButtonModule),
+      },
+      {
+        path: URL_COMPONENTS_CHECKBOX,
+        loadChildren: () => import('../lib-components/cm-checkbox/cm-checkbox.module').then((m) => m.CmCheckboxModule),
+      },
+      {
+        path: URL_COMPONENTS_CHIP,
+        loadChildren: () => import('../lib-components/cm-chip/cm-chip.module').then((m) => m.CmChipModule),
       },
       {
         path: URL_COMPONENTS_FRAME,
@@ -53,8 +65,16 @@ const routes: Routes = [
         loadChildren: () => import('../lib-components/cm-pagination/cm-pagination.module').then((m) => m.CmPaginationModule),
       },
       {
+        path: URL_COMPONENTS_RADIOBUTTON,
+        loadChildren: () => import('../lib-components/cm-radio/cm-radio.module').then((m) => m.CmRadioModule),
+      },
+      {
         path: URL_COMPONENTS_SELECT,
         loadChildren: () => import('../lib-components/cm-select/cm-select.module').then((m) => m.CmSelectModule),
+      },
+      {
+        path: URL_COMPONENTS_SNACKBAR,
+        loadChildren: () => import('../lib-components/cm-snackbar/cm-snackbar.module').then((m) => m.CmSnackbarModule),
       },
       {
         path: URL_COMPONENTS_SPINNER,

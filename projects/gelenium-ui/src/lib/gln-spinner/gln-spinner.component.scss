@@ -1,16 +1,12 @@
 /*# sourceURL=gln-spinner.component.scss */
 
-@import '../_styles/mx-display-flex.scss';
-
 gln-spinner {
-
   --glnsp--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
   --glnsp--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
   --glnsp--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
 
-  @include mxDisplayFlex();
-
   color: hsl(var(--glnsp--primary-h), var(--glnsp--primary-s), var(--glnsp--primary-l));
+  display: flex;
 
   // Blocks: "<svg glnsp-size" - (Internal svg), "<div glnsp-size>" - ("External svg").
   &>[glnsp-size] {
@@ -54,8 +50,8 @@ gln-spinner {
     }
   }
   &:not([noani]):not([nopul])>svg[glnsp-inner]>circle {
-    animation: kf-spi-move1 var(--glnsp-duration, 1.4s) ease-in-out infinite;
-    @keyframes kf-spi-move1 {
+    animation: kf-spi-move var(--glnsp-duration, 1.4s) ease-in-out infinite;
+    @keyframes kf-spi-move {
       0% {
         stroke-dasharray: 1px, 280%;
         stroke-dashoffset: 0px;
@@ -69,8 +65,8 @@ gln-spinner {
     }
   }
   /*&:not([noani]):not([nopul])>svg[glnsp-inner]>circle {
-    animation: kf-spi-move var(--glnsp-duration, 1.4s) ease-in-out infinite;
-    @keyframes kf-spi-move {
+    animation: kf-spi-move1 var(--glnsp-duration, 1.4s) ease-in-out infinite;
+    @keyframes kf-spi-move1 {
       0% {
         stroke-dasharray: 1px, var(--glnsp--stroke-array-max);   // stroke-array-max: 200px
         stroke-dashoffset: 0;

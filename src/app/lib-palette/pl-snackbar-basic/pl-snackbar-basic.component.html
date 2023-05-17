@@ -1,0 +1,403 @@
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Basic.
+    <a [href]="urlPlSnackbar + '#Basic'">#</a>
+  </h4>
+  <p>
+    For the GlnSnackbar component, you can specify the "msgType" parameter,
+    which takes the following values: "error", "warning", "success", "info".
+    If the "msgType" parameter is not specified, then it takes the "default" value.
+  </p>
+</section>
+
+
+<div class="snpl1-elem">
+  <p>
+    <gln-snackbar class="snpl1-box"
+      [params]="{ message: 'snackbar with type \'default\''
+        , msgType: 'default', 'isNoClose': true }"
+      (click)="clickMsgType('snackbar with type \'default\''
+        , '', { data: { msgType: 'default'}} )">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl1-box"
+      [params]="{ message: 'snackbar with type \'error\''
+        , msgType: 'error', 'isNoClose': true }"
+      (click)="clickMsgType('snackbar with type \'error\''
+        , '', { data: { msgType: 'error'}})">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl1-box"
+      [params]="{ message: 'snackbar with type \'warning\''
+        , msgType: 'warning', 'isNoClose': true }"
+      (click)="clickMsgType('snackbar with type \'warning\''
+        , '', { data: { msgType: 'warning'}})">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl1-box"
+      [params]="{ message: 'snackbar with type \'success\''
+        , msgType: 'success', 'isNoClose': true }"
+      (click)="clickMsgType('snackbar with type \'success\''
+        , '', { data: { msgType: 'success'}})">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl1-box"
+      [params]="{ message: 'snackbar with type \'info\''
+        , msgType: 'info', 'isNoClose': true }"
+      (click)="clickMsgType('snackbar with type \'info\''
+        , '', { data: { msgType: 'info'}})">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl1-box snpl1-customer snpl1-svg-leaf"
+      [params]="{ message: 'snackbar - customer'
+        , 'isNoClose': true }"
+      (click)="clickMsgType('snackbar - customer'
+        , '', { wrapperClass: ['snpl1-customer', 'snpl1-svg-leaf'] })">
+    </gln-snackbar>
+  </p>
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="snpl1-elem"&gt;
+
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl1-box"
+      [params]="&#123; message: 'snackbar with type \'default\''
+        , msgType: 'default', 'isNoClose': true &#125;"
+      (click)="clickMsgType('snackbar with type \'default\''
+        , '', &#123; data: &#123; msgType: 'default'&#125;&#125; )"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl1-box"
+      [params]="&#123; message: 'snackbar with type \'error\''
+        , msgType: 'error', 'isNoClose': true &#125;"
+      (click)="clickMsgType('snackbar with type \'error\''
+        , '', &#123; data: &#123; msgType: 'error'&#125;&#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl1-box"
+      [params]="&#123; message: 'snackbar with type \'warning\''
+        , msgType: 'warning', 'isNoClose': true &#125;"
+      (click)="clickMsgType('snackbar with type \'warning\''
+        , '', &#123; data: &#123; msgType: 'warning'&#125;&#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl1-box"
+      [params]="&#123; message: 'snackbar with type \'success\''
+        , msgType: 'success', 'isNoClose': true &#125;"
+      (click)="clickMsgType('snackbar with type \'success\''
+        , '', &#123; data: &#123; msgType: 'success'&#125;&#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl1-box"
+      [params]="&#123; message: 'snackbar with type \'info\''
+        , msgType: 'info', 'isNoClose': true &#125;"
+      (click)="clickMsgType('snackbar with type \'info\''
+        , '', &#123; data: &#123; msgType: 'info'&#125;&#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl1-box snpl1-customer snpl1-svg-leaf"
+      [params]="&#123; message: 'snackbar - customer'
+        , 'isNoClose': true &#125;"
+      (click)="clickMsgType('snackbar - customer'
+        , '', &#123; wrapperClass: ['snpl1-customer', 'snpl1-svg-leaf'] &#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GlnSnackbarService &#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-snackbar',
+  templateUrl: './snackbar.component.html',
+  styleUrls: ['./snackbar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SnackbarComponent &#123;
+
+  constructor(private snackbarService: GlnSnackbarService) &#123;&#125;
+
+  public clickMsgType(
+    message: string, action: string, config: any
+  ): void &#123;
+    this.snackbarService.open(message, action, config);
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-snackbar &#123;
+  .snpl1-elem &#123;
+    max-width: 40ch;    
+  &#125;
+  .snpl1-box &#123;
+    cursor: pointer;
+  &#125;
+&#125;
+.snpl1-customer &#123;
+  // background color
+  --glncl-default-h: 200;
+  --glncl-default-s: 75%;
+  --glncl-default-l: 50%;
+  // color
+  --glncl-default-bg-h: 240;
+  --glncl-default-bg-s: 100%;
+  --glncl-default-bg-l: 98%;
+&#125;
+.snpl1-svg-leaf .gln-snackbar-wrap-icon &#123;
+  background-image: url("data:image/svg+xml,"
+  + "&lt;svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'"
+  + " fill='rgb(13 100 5 / 100%)'&gt;"
+  + "&lt;path d='M 32.5,2.5 C 33.1499,2.80393 33.8165,3.13727 34.5,3.5C"
+  + " 36.4996,11.3838 35.3329,18.7172 31,25.5C 25.4363,30.3422 19.10"
+  + "3,31.6755 12,29.5C 10.3804,31.2415 8.88041,33.0748 7.5,35C 6.20"
+  + "677,35.49 4.87344,35.6567 3.5,35.5C 3.33982,33.8008 3.50649,32."
+  + "1341 4,30.5C 9.04294,24.7243 15.2096,20.5576 22.5,18C 25.2239,1"
+  + "6.4779 27.2239,14.3112 28.5,11.5C 27.9984,10.479 27.3317,10.312"
+  + "3 26.5,11C 20.4243,15.7903 13.9243,19.957 7,23.5C 4.66714,14.66"
+  + "74 7.83381,8.50075 16.5,5C 21.9561,4.05529 27.2894,3.22195 32.5"
+  + ",2.5 Z'/&gt;"
+  + "&lt;/svg&gt;");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 30px;
+  margin-right: 0.5em;
+  width: 30px;
+&#125;
+</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+
+<section mr-vr
+  id="invert-colors">
+  <h4 class="app-hover-link">
+    Invert Colors.
+    <a [href]="urlPlSnackbar + '#invert-colors'">#</a>
+  </h4>
+  <p>
+    It is possible for the GlnSnackbar component to invert colors.<br />
+    This requires the parameter "isInvert": true.
+  </p>
+</section>
+
+
+<div class="snpl2-elem">
+  <p>
+    <gln-snackbar class="snpl2-box"
+      [params]="{ message: 'snackbar with type \'default\''
+        , msgType: 'default', 'isNoClose': true, isInvert: true }"
+      (click)="clickMsgType('snackbar with type \'default\''
+        , '', { data: { msgType: 'default', isInvert: true}} )">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl2-box"
+      [params]="{ message: 'snackbar with type \'error\''
+        , msgType: 'error', 'isNoClose': true, isInvert: true }"
+      (click)="clickMsgType('snackbar with type \'error\''
+        , '', { data: { msgType: 'error', isInvert: true}})">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl2-box"
+      [params]="{ message: 'snackbar with type \'warning\''
+        , msgType: 'warning', 'isNoClose': true, isInvert: true }"
+      (click)="clickMsgType('snackbar with type \'warning\''
+        , '', { data: { msgType: 'warning', isInvert: true}})">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl2-box"
+      [params]="{ message: 'snackbar with type \'success\''
+        , msgType: 'success', 'isNoClose': true, isInvert: true }"
+      (click)="clickMsgType('snackbar with type \'success\''
+        , '', { data: { msgType: 'success', isInvert: true}})">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl2-box"
+      [params]="{ message: 'snackbar with type \'info\''
+        , msgType: 'info', 'isNoClose': true, isInvert: true }"
+      (click)="clickMsgType('snackbar with type \'info\''
+        , '', { data: { msgType: 'info', isInvert: true}})">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl2-box snpl2-customer snpl2-svg-leaf"
+      [params]="{ message: 'snackbar - customer'
+        , 'isNoClose': true, isInvert: true }"
+      (click)="clickMsgType('snackbar - customer', '', 
+        { wrapperClass: ['snpl2-customer', 'snpl2-svg-leaf']
+        , data: { isInvert: true }})">
+    </gln-snackbar>
+  </p>
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="snpl2-elem"&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl2-box"
+      [params]="&#123; message: 'snackbar with type \'default\''
+        , msgType: 'default', 'isNoClose': true, isInvert: true &#125;"
+      (click)="clickMsgType('snackbar with type \'default\''
+        , '', &#123; data: &#123; msgType: 'default', isInvert: true&#125;&#125; )"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl2-box"
+      [params]="&#123; message: 'snackbar with type \'error\''
+        , msgType: 'error', 'isNoClose': true, isInvert: true &#125;"
+      (click)="clickMsgType('snackbar with type \'error\''
+        , '', &#123; data: &#123; msgType: 'error', isInvert: true&#125;&#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl2-box"
+      [params]="&#123; message: 'snackbar with type \'warning\''
+        , msgType: 'warning', 'isNoClose': true, isInvert: true &#125;"
+      (click)="clickMsgType('snackbar with type \'warning\''
+        , '', &#123; data: &#123; msgType: 'warning', isInvert: true&#125;&#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl2-box"
+      [params]="&#123; message: 'snackbar with type \'success\''
+        , msgType: 'success', 'isNoClose': true, isInvert: true &#125;"
+      (click)="clickMsgType('snackbar with type \'success\''
+        , '', &#123; data: &#123; msgType: 'success', isInvert: true&#125;&#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl2-box"
+      [params]="&#123; message: 'snackbar with type \'info\''
+        , msgType: 'info', 'isNoClose': true, isInvert: true &#125;"
+      (click)="clickMsgType('snackbar with type \'info\''
+        , '', &#123; data: &#123; msgType: 'info', isInvert: true&#125;&#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl2-box snpl2-customer snpl2-svg-leaf"
+      [params]="&#123; message: 'snackbar - customer'
+        , 'isNoClose': true, isInvert: true &#125;"
+      (click)="clickMsgType('snackbar - customer', '',
+        &#123; wrapperClass: ['snpl2-customer', 'snpl2-svg-leaf']
+        , data: &#123; isInvert: true &#125;&#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GlnSnackbarService &#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-snackbar',
+  templateUrl: './snackbar.component.html',
+  styleUrls: ['./snackbar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SnackbarComponent &#123;
+
+  constructor(private snackbarService: GlnSnackbarService) &#123;&#125;
+
+  public clickMsgType(
+    message: string, action: string, config: any
+  ): void &#123;
+    this.snackbarService.open(message, action, config);
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-snackbar &#123;
+  .snpl2-elem &#123;
+    max-width: 40ch;    
+  &#125;
+  .snpl2-box &#123;
+    cursor: pointer;
+  &#125;
+&#125;
+.snpl2-customer &#123;
+  // background color
+  --glncl-default-h: 200;
+  --glncl-default-s: 75%;
+  --glncl-default-l: 50%;
+  // color
+  --glncl-default-bg-h: 240;
+  --glncl-default-bg-s: 100%;
+  --glncl-default-bg-l: 98%;
+&#125;
+.snpl2-svg-leaf .gln-snackbar-wrap-icon &#123;
+  background-image: url("data:image/svg+xml,"
+  + "&lt;svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'"
+  + " fill='rgb(13 100 5 / 100%)'&gt;"
+  + "&lt;path d='M 32.5,2.5 C 33.1499,2.80393 33.8165,3.13727 34.5,3.5C"
+  + " 36.4996,11.3838 35.3329,18.7172 31,25.5C 25.4363,30.3422 19.10"
+  + "3,31.6755 12,29.5C 10.3804,31.2415 8.88041,33.0748 7.5,35C 6.20"
+  + "677,35.49 4.87344,35.6567 3.5,35.5C 3.33982,33.8008 3.50649,32."
+  + "1341 4,30.5C 9.04294,24.7243 15.2096,20.5576 22.5,18C 25.2239,1"
+  + "6.4779 27.2239,14.3112 28.5,11.5C 27.9984,10.479 27.3317,10.312"
+  + "3 26.5,11C 20.4243,15.7903 13.9243,19.957 7,23.5C 4.66714,14.66"
+  + "74 7.83381,8.50075 16.5,5C 21.9561,4.05529 27.2894,3.22195 32.5"
+  + ",2.5 Z'/&gt;"
+  + "&lt;/svg&gt;");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 30px;
+  margin-right: 0.5em;
+  width: 30px;
+&#125;
+</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

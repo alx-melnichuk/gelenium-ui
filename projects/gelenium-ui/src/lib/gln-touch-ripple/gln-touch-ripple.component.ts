@@ -51,13 +51,13 @@ export class GlnTouchRippleComponent implements OnChanges {
 
   // ** Public methods **
 
-  public touchRipple(event: MouseEvent, isCenter: boolean = this.isCenterVal): void {
+  public trigger(event: MouseEvent | null, isCenter: boolean = this.isCenterVal): void {
     this.doRipple(event, isCenter);
   }
 
   // ** Private methods **
 
-  private doRipple(event: MouseEvent, isCenter: boolean): void {
+  private doRipple(event: MouseEvent | null, isCenter: boolean): void {
     const parentElement = this.hostRef.nativeElement.parentElement;
     if (!parentElement) {
       return;
@@ -69,7 +69,7 @@ export class GlnTouchRippleComponent implements OnChanges {
       const radius: number = Math.min(clientWidth, clientHeight) / 2;
       let offsetX: number = Math.round(clientWidth / 2);
       let offsetY: number = Math.round(clientHeight / 2);
-      if (!isCenter && event.currentTarget) {
+      if (!isCenter && !!event && !!event.currentTarget) {
         const rect: DOMRect = (event.currentTarget as HTMLElement).getBoundingClientRect() || { left: 0, top: 0 };
         offsetX = Math.round(event.clientX - rect.left);
         offsetY = Math.round(event.clientY - rect.top);

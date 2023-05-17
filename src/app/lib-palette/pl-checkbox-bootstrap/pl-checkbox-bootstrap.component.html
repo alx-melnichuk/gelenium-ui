@@ -1,0 +1,350 @@
+<section mr-vr
+  id="palette-bootstrap">
+  <h4 class="app-hover-link">
+    Like a Bootstrap.
+    <a [href]="urlPlCheckbox + '#palette-bootstrap'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnCheckbox in style as "Bootstrap".
+  </p>
+</section>
+
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabled04p=!isDisabled04p" />
+    Is disabled
+  </label>&nbsp;
+  <label>
+    <input type="checkbox"
+      (change)="isIndeterm04p=!isIndeterm04p" />
+    Is indeterminate
+  </label>
+</section>
+
+
+<form [formGroup]="formGroup04p"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem cbpl3-elem">
+      <div>
+        <small><em>color: bs-primary (default)</em></small>
+      </div>
+      <gln-checkbox class="cbpl3-bs-default cbpl3-bs-primary"
+        formControlName="model04p"
+        size="little"
+        isNoRipple
+        noHov
+        [isDisabled]="isDisabled04p"
+        [isIndeterm]="isIndeterm04p">
+        bs-primary
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl3-elem">
+      <div>
+        <small><em>color: bs-secondary</em></small>
+      </div>
+      <gln-checkbox class="cbpl3-bs-default cbpl3-bs-secondary"
+        formControlName="model04q"
+        size="little"
+        isNoRipple
+        noHov
+        [isDisabled]="isDisabled04p"
+        [isIndeterm]="isIndeterm04p">
+        bs-secondary
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl3-elem">
+      <div>
+        <small><em>color: bs-success</em></small>
+      </div>
+      <gln-checkbox class="cbpl3-bs-default cbpl3-bs-success"
+        formControlName="model04r"
+        size="little"
+        isNoRipple
+        noHov
+        [isDisabled]="isDisabled04p"
+        [isIndeterm]="isIndeterm04p">
+        bs-success
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl3-elem">
+      <div>
+        <small><em>color: bs-danger</em></small>
+      </div>
+      <gln-checkbox class="cbpl3-bs-default cbpl3-bs-danger"
+        formControlName="model04s"
+        size="little"
+        isNoRipple
+        noHov
+        [isDisabled]="isDisabled04p"
+        [isIndeterm]="isIndeterm04p">
+        bs-danger
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl3-elem">
+      <div>
+        <small><em>color: bs-warning</em></small>
+      </div>
+      <gln-checkbox class="cbpl3-bs-default cbpl3-bs-warning"
+        formControlName="model04t"
+        size="little"
+        isNoRipple
+        noHov
+        [isDisabled]="isDisabled04p"
+        [isIndeterm]="isIndeterm04p">
+        bs-warning
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl3-elem">
+      <div>
+        <small><em>color: bs-info</em></small>
+      </div>
+      <gln-checkbox class="cbpl3-bs-default cbpl3-bs-info"
+        formControlName="model04u"
+        size="little"
+        isNoRipple
+        noHov
+        [isDisabled]="isDisabled04p"
+        [isIndeterm]="isIndeterm04p">
+        bs-info
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbpl3-elem">
+      <div>
+        <small><em>color: bs-dark</em></small>
+      </div>
+      <gln-checkbox class="cbpl3-bs-default cbpl3-bs-dark"
+        formControlName="model04v"
+        size="little"
+        isNoRipple
+        noHov
+        [isDisabled]="isDisabled04p"
+        [isIndeterm]="isIndeterm04p">
+        bs-dark
+      </gln-checkbox>
+    </div>
+
+  </div>
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup04p"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem cbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: bs-primary (default)&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl3-bs-default cbpl3-bs-primary"
+        formControlName="model04p"
+        size="little"
+        isNoRipple
+        noHov
+        [isDisabled]="isDisabled04p"
+        [isIndeterm]="isIndeterm04p"&gt;
+        bs-primary
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: bs-secondary&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl3-bs-default cbpl3-bs-secondary"
+        formControlName="model04q"
+        size="little"
+        isNoRipple
+        noHov
+        [isDisabled]="isDisabled04p"
+        [isIndeterm]="isIndeterm04p"&gt;
+        bs-secondary
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: bs-success&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl3-bs-default cbpl3-bs-success"
+        formControlName="model04r"
+        size="little"
+        isNoRipple
+        noHov
+        [isDisabled]="isDisabled04p"
+        [isIndeterm]="isIndeterm04p"&gt;
+        bs-success
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: bs-danger&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl3-bs-default cbpl3-bs-danger"
+        formControlName="model04s"
+        size="little"
+        isNoRipple
+        noHov
+        [isDisabled]="isDisabled04p"
+        [isIndeterm]="isIndeterm04p"&gt;
+        bs-danger
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: bs-warning&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl3-bs-default cbpl3-bs-warning"
+        formControlName="model04t"
+        size="little"
+        isNoRipple
+        noHov
+        [isDisabled]="isDisabled04p"
+        [isIndeterm]="isIndeterm04p"&gt;
+        bs-warning
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: bs-info&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl3-bs-default cbpl3-bs-info"
+        formControlName="model04u"
+        size="little"
+        isNoRipple
+        noHov
+        [isDisabled]="isDisabled04p"
+        [isIndeterm]="isIndeterm04p"&gt;
+        bs-info
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: bs-dark&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox class="cbpl3-bs-default cbpl3-bs-dark"
+        formControlName="model04v"
+        size="little"
+        isNoRipple
+        noHov
+        [isDisabled]="isDisabled04p"
+        [isIndeterm]="isIndeterm04p"&gt;
+        bs-dark
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-checkbox',
+  templateUrl: './checkbox.component.html',
+  styleUrls: ['./checkbox.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CheckboxComponent &#123;
+  public isDisabled04p: boolean = false;
+  public isIndeterm04p: boolean = false;
+  public formGroup04p: FormGroup = new FormGroup(&#123;
+    model04p: new FormControl(true, []),
+    model04q: new FormControl(true, []),
+    model04r: new FormControl(true, []),
+    model04s: new FormControl(true, []),
+    model04t: new FormControl(true, []),
+    model04u: new FormControl(true, []),
+    model04v: new FormControl(true, []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cbpl3-elem &#123;
+    min-width: 17ch;
+  &#125;
+  .cbpl3-bs-default &#123;
+    &.gln-disabled &#123;
+      opacity: .5;
+    &#125;
+    --glncb-def-cl-svg: rgba(0,0,0,.25);
+    --glncb-dis-cl-svg: rgba(0,0,0,.25);
+  &#125;
+  .cbpl3-bs-primary &#123;
+    --glncb-def-chk-cl-svg: #0d6efd;
+    --glncb-dis-chk-cl-svg: #0d6efd;
+  &#125;
+  .cbpl3-bs-secondary &#123;
+    --glncb-def-chk-cl-svg: #6c757d;
+    --glncb-dis-chk-cl-svg: #6c757d;
+  &#125;
+  .cbpl3-bs-success &#123;
+    --glncb-def-chk-cl-svg: #198754;
+    --glncb-dis-chk-cl-svg: #198754;
+  &#125;
+  .cbpl3-bs-danger &#123;
+    --glncb-def-chk-cl-svg: #dc3545;
+    --glncb-dis-chk-cl-svg: #dc3545;
+  &#125;
+  .cbpl3-bs-warning &#123;
+    --glncb-def-chk-cl-svg: #ffc107;
+    --glncb-dis-chk-cl-svg: #ffc107;
+  &#125;
+  .cbpl3-bs-info &#123;
+    --glncb-def-chk-cl-svg: #0dcaf0;
+    --glncb-dis-chk-cl-svg: #0dcaf0;
+  &#125;
+  .cbpl3-bs-dark &#123;
+    --glncb-def-chk-cl-svg: #212529;
+    --glncb-dis-chk-cl-svg: #212529;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

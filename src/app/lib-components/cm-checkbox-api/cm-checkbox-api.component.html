@@ -1,0 +1,533 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    API: GlnCheckbox.
+    <a [href]="urlCmCheckbox + '#Api'">#</a>
+  </h3>
+  <p>
+    Selector:
+    <span fw500>gln-checkbox</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>glnCheckbox</span>
+  </p>
+</section>
+
+<section mr-vr
+  id="api-properties">
+  <h4 class="app-hover-link">
+    Properties.
+    <a [href]="urlCmCheckbox + '#api-properties'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>id: string;</code>
+      </td>
+      <td>
+        <span>
+          ID of the native element.
+          <br />(default = `glncb-$&#123;uniqueIdCounter++&#125;`;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>config: GlnCheckboxConfig<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Defines a configuration object.</span><br />
+        <a [href]="urlCmCheckbox + '#config-interface'">More details.</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isChecked: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          This property only sets the initial value of the element.
+          If an empty attribute is specified, then the initial value will be true.
+          <br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isDisabled: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>The element is disabled.<br />Attribute (no content).</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isIndeterm: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          This property sets the state to "indeterminate".
+          Changing by clicking or calling "toggle()" cancels this state.
+          <br />Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isNoHover?: boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Disable highlighting of the element area on hover.
+        </span>
+        <br />Attribute (no content).
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoRipple: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Flag for disabling the ripple effect.<br />
+          Attribute (no content).
+        </span><br />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isReadOnly: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates that the element is read-only.<br />
+          (default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isRequired: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Indicates that the field is required.<br />
+          (default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>position: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the position of the label relative to the element.
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"top" - the label is on the top;</li>
+          <li>"bottom" - the label is on the bottom;</li>
+          <li>"start" - the label is on the right;</li>
+          <li>"end" - the label is on the left;</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>size: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Determines the size of the element.<br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"little" - height: 30px;</li>
+          <li>"short" - height: 36px;</li>
+          <li>"small" - height: 42px (default);</li>
+          <li>"middle" - height: 48px;</li>
+          <li>"wide" - height: 54px;</li>
+          <li>"large" - height: 60px;</li>
+          <li>"huge" - height: 66px;</li>
+        </ul>
+        <span>
+          This property can also contain the element's height in pixels, either as a string
+          or as a number.<br />
+          The value in the units of "pixels" allow you to accurately calculate the size of
+          internal elements.<br />
+          For example: <code>size="53" or [size]="53"</code>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>tabIndex: number;</code>
+      </td>
+      <td>
+        <span>Indicates that its element can be focused.
+          <br />(default = 0;)
+        </span>
+      </td>
+    </tr>
+    <!-- Output -->
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>focused: EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>Fires when the element receives input focus.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>blured: EventEmitter&lt;void&gt;;</code>
+      </td>
+      <td>
+        <span>Fires when an element loses input focus.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>change: EventEmitter&lt;&#123;<br/>
+          &nbsp;checked: newValue,<br/>
+          &nbsp;source:<br/>
+          &nbsp;&nbsp;GlnCheckboxComponent<br/>
+          &#125;&gt;;
+        </code>
+      </td>
+      <td>
+        <span>
+          Fires when an element is checked/unchecked.<br />
+          The "change" parameter contains a reference to the current element.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Output()</code>
+        <code>indetermChange:<br/>
+          EventEmitter&lt;boolean&gt;;</code>
+      </td>
+      <td>
+        <span>
+          Fires when an element enters (leaves) the "indeterminate" state.
+        </span>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+
+<section mr-vr
+  id="api-methods">
+  <h4 class="app-hover-link">
+    Methods
+    <a [href]="urlCmCheckbox + '#api-methods'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>focus(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        This element is given input focus.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>toggle(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Toggles an element in the "checked" or "unchecked" state.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>getIndeterm(): boolean;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Get the current value of the status "indeterminate" (true/false).
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>setIndeterm(value: boolean): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Set the current value of the status "indeterminate" (true/false).
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Parameters</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>value: boolean;</code>
+      </td>
+      <td>
+        The new status value is "indeterminate" (true/false).
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="api-css-variables-optional">
+  <h4 class="app-hover-link">
+    Css variables, optional. You can override the default values.
+    <a [href]="urlCmCheckbox + '#api-css-variables-optional'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--glncb--default-[h,s,l]:<br/>
+        &nbsp;var(--glncl-default-[h,s,l],<br/>
+        &nbsp;&nbsp;var(--gln-default-[h,s,l])<br/>
+        &nbsp;);</code></td>
+      <td>
+        <span>
+          The color value of the element in the "disabled" state.
+        </span>
+        <br />
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-default-[h,s,l]</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-default-[h,s,l]</code>.<br />
+          The [h]-hue [s]-saturation [l]-lightness value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncb--primary-[h,s,l]:<br/>
+          &nbsp;var(--glncl-primary-[h,s,l],<br/>
+          &nbsp;&nbsp;var(--gln-primary-[h,s,l])<br/>
+          &nbsp;);</code>
+      </td>
+      <td>
+        <span>
+          The color value of the element in the "enabled" state.
+        </span>
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-primary-[h,s,l]</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-primary-[h,s,l]</code>.<br />
+          The [h]-hue [s]-saturation [l]-lightness value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+    <!-- of the "unchecked" -->
+    <tr>
+      <td><code>--glncb-def-cl-svg:<br/>
+        &nbsp;hsla(var(--glncb--default-[h,s,l]), 60%);</code></td>
+      <td><span>Determines the color for an element when unchecked.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glncb-def-bg-hov:<br/>
+        &nbsp;hsla(var(--glncb--default-[h,s]), 70%, 20%);</code></td>
+      <td><span>Determines the background color on hover when unchecked.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glncb-def-rip:<br/>
+        &nbsp;hsla(var(--glncb--default-[h,s]), 70%, 30%);</code></td>
+      <td><span>Determines the color ripple effect of the unchecked.</span></td>
+    </tr>
+    <!-- of the "checked" -->
+    <tr colspan="2">
+      <td>
+        <i>Parameters for state: "checked".</i>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncb-def-chk-cl-svg:<br/>
+        &nbsp;hsl(var(--glncb--primary-[h,s,l]));</code></td>
+      <td><span>Determines the color for an element when checked.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glncb-def-chk-bg-hov:<br/>
+        &nbsp;hsla(var(--glncb--primary-[h,s]), 75%, 20%);</code></td>
+      <td><span>Determines the background color on hover when checked.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glncb-def-chk-rip:<br/>
+        &nbsp;hsla(var(--glncb--primary-[h,s]), 75%, 30%);</code></td>
+      <td><span>Determines the color ripple effect of the checked.</span></td>
+    </tr>
+    <tr>
+      <td><code>--glnrb-def-lbl:<br/>
+        &nbsp;hsl(var(--glnrb--default[h,s,l]));</code></td>
+      <td><span>Specifies the label color for the checked and unchecked states.</span></td>
+    </tr>
+    <!-- of the "indeterminate" -->
+    <tr>
+      <td><code>--glncb-def-ind-cl-svg:<br/>
+        &nbsp;var(--glncb-def-chk-cl-svg);</code></td>
+      <td><span>Determines the color for an element when status "indeterminate".</span></td>
+    </tr>
+    <tr>
+      <td><code>--glncb-def-ind-bg-hov:<br/>
+        &nbsp;var(--glncb-def-chk-bg-hov);</code></td>
+      <td><span>Determines the background color on hover when status "indeterminate".</span></td>
+    </tr>
+    <tr>
+      <td><code>--glncb-def-ind-rip:<br/>
+        &nbsp;var(--glncb-def-chk-rip);</code></td>
+      <td><span>Determines the color ripple effect of the status "indeterminate".</span></td>
+    </tr>
+
+    <tr colspan="2">
+      <td>
+        <i>Parameters for state: "disabled".</i>
+      </td>
+    </tr>
+    <!-- disabled and of the "unchecked" -->
+    <tr>
+      <td><code>--glncb-dis-cl-svg:<br/>
+        &nbsp;hsla(var(--glncb--default-[h,s,l]), 30%);</code></td>
+      <td><span>Determines the color of an element when it is disabled and unchecked.</span></td>
+    </tr>
+    <!-- disabled and of the "checked" -->
+    <tr>
+      <td><code>--glncb-dis-chk-cl-svg:<br/>
+        &nbsp;hsla(var(--glncb--default-[h,s,l]), 30%);</code></td>
+      <td><span>Determines the color of an element when it is disabled and checked.</span></td>
+    </tr>
+    <!-- disabled and of the "indeterminate" -->
+    <tr>
+      <td><code>--glncb-dis-ind-cl-svg:<br/>
+        &nbsp;var(--glncb-dis-chk-cl-svg);</code></td>
+      <td><span>
+          Determines the color of an element when it is disabled and has the "indeterminate" status.
+        </span></td>
+    </tr>
+    <!-- disabled and of the "unchecked" or "checked" -->
+    <tr>
+      <td><code>--glncb-dis-lbl<br/>
+        &nbsp;hsla(var(--glncb--default-[h,s,l]), 50%);</code></td>
+      <td>
+        <span>Determines the label color of an element when it is disabled and
+          checked/unchecked.</span>
+      </td>
+    </tr>
+    <tr colspan="2">
+      <td>
+        <i>Parameters of additional elements.</i>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncb-icon-pd:<br/>
+        &nbsp;calculated (~0.625em);</code></td>
+      <td>
+        <span>Determines the padding for the SVG image.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncb-icon-sz:<br/>
+        &nbsp;calculated (~1.5em);</code></td>
+      <td>
+        <span>Determines the size (height and width) of the SVG image.</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />

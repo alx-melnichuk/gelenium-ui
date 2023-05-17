@@ -1,0 +1,45 @@
+<h3>Service: "GlnSnackbarService"</h3>
+
+<div *ngIf="!showNum || showNum==='01'"
+  id="Basic">
+  <app-cm-snackbar-basic></app-cm-snackbar-basic>
+  <hr br-tp>
+</div>
+
+<div *ngIf="!showNum || showNum==='02'"
+  id="Attributes">
+  <app-cm-snackbar-attributes></app-cm-snackbar-attributes>
+  <hr br-tp>
+</div>
+
+<div *ngIf="!showNum || showNum==='03'"
+  id="Customization">
+  <app-cm-snackbar-customization></app-cm-snackbar-customization>
+  <hr br-tp>
+</div>
+
+<section mr-vr
+  *ngIf="!showNum"
+  id="Palette">
+  <h3>Palette</h3>
+  <p>
+    The <a [href]="urlPlSnackbar + '#Basic'">"Palette GlnSnackbar#Basic"</a>
+    page shows you how to change the color palette of an element.
+  </p>
+  <hr br-tp>
+</section>
+
+<div *ngIf="!showNum || showNum==='08'"
+  id="Config">
+  <app-cm-snackbar-config></app-cm-snackbar-config>
+  <hr br-tp>
+</div>
+
+<div *ngIf="!showNum || showNum==='09'"
+  id="Api">
+  <app-cm-snackbar-api></app-cm-snackbar-api>
+  <hr br-tp>
+</div>
+
+<br />
+<br />

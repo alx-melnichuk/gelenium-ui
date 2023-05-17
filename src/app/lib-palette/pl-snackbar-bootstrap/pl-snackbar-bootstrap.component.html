@@ -1,0 +1,231 @@
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Like a Bootstrap.
+    <a [href]="urlPlSnackbar + '#Bootstrap'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnSnackbar in style as "Bootstrap".
+  </p>
+</section>
+
+
+<div class="snpl2-elem">
+  <p>
+    <gln-snackbar class="snpl2-bs-snackbar snpl2-bs-standard"
+      [params]="{ message: 'snackbar Bootstrap \'standard\''
+        , 'isNoClose': true }"
+      (click)="clickBootstrap('snackbar Bootstrap \'standard\'', '', 
+        { wrapperClass: ['snpl2-bs-snackbar', 'snpl2-bs-standard'] })">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl2-bs-snackbar snpl2-bs-primary"
+      [params]="{ message: 'snackbar Bootstrap \'primary\''
+        , 'isNoClose': true }"
+      (click)="clickBootstrap('snackbar Bootstrap \'primary\'', '', 
+        { wrapperClass: ['snpl2-bs-snackbar', 'snpl2-bs-primary'] })">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl2-bs-snackbar snpl2-bs-secondary"
+      [params]="{ message: 'snackbar Bootstrap \'secondary\''
+        , 'isNoClose': true }"
+      (click)="clickBootstrap('snackbar Bootstrap \'secondary\'', '', 
+        { wrapperClass: ['snpl2-bs-snackbar', 'snpl2-bs-secondary'] })">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl2-bs-snackbar snpl2-bs-success"
+      [params]="{ message: 'snackbar Bootstrap \'success\''
+        , 'isNoClose': true }"
+      (click)="clickBootstrap('snackbar Bootstrap \'success\'', '', 
+        { wrapperClass: ['snpl2-bs-snackbar', 'snpl2-bs-success'] })">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl2-bs-snackbar snpl2-bs-danger"
+      [params]="{ message: 'snackbar Bootstrap \'danger\''
+        , 'isNoClose': true }"
+      (click)="clickBootstrap('snackbar Bootstrap \'danger\'', '', 
+        { wrapperClass: ['snpl2-bs-snackbar', 'snpl2-bs-danger'] })">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl2-bs-snackbar snpl2-bs-warning"
+      [params]="{ message: 'snackbar Bootstrap \'warning\''
+        , 'isNoClose': true }"
+      (click)="clickBootstrap('snackbar Bootstrap \'warning\'', '', 
+        { wrapperClass: ['snpl2-bs-snackbar', 'snpl2-bs-warning'] })">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl2-bs-snackbar snpl2-bs-info"
+      [params]="{ message: 'snackbar Bootstrap \'info\''
+        , 'isNoClose': true }"
+      (click)="clickBootstrap('snackbar Bootstrap \'info\'', '', 
+        { wrapperClass: ['snpl2-bs-snackbar', 'snpl2-bs-info'] })">
+    </gln-snackbar>
+  </p>
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="snpl2-elem"&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl2-bs-snackbar snpl2-bs-standard"
+      [params]="&#123; message: 'snackbar Bootstrap \'standard\''
+        , 'isNoClose': true &#125;"
+      (click)="clickBootstrap('snackbar Bootstrap \'standard\'', '',
+        &#123; wrapperClass: ['snpl2-bs-snackbar', 'snpl2-bs-standard'] &#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl2-bs-snackbar snpl2-bs-primary"
+      [params]="&#123; message: 'snackbar Bootstrap \'primary\''
+        , 'isNoClose': true &#125;"
+      (click)="clickBootstrap('snackbar Bootstrap \'primary\'', '',
+        &#123; wrapperClass: ['snpl2-bs-snackbar', 'snpl2-bs-primary'] &#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl2-bs-snackbar snpl2-bs-secondary"
+      [params]="&#123; message: 'snackbar Bootstrap \'secondary\''
+        , 'isNoClose': true &#125;"
+      (click)="clickBootstrap('snackbar Bootstrap \'secondary\'', '',
+        &#123; wrapperClass: ['snpl2-bs-snackbar', 'snpl2-bs-secondary'] &#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl2-bs-snackbar snpl2-bs-success"
+      [params]="&#123; message: 'snackbar Bootstrap \'success\''
+        , 'isNoClose': true &#125;"
+      (click)="clickBootstrap('snackbar Bootstrap \'success\'', '',
+        &#123; wrapperClass: ['snpl2-bs-snackbar', 'snpl2-bs-success'] &#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl2-bs-snackbar snpl2-bs-danger"
+      [params]="&#123; message: 'snackbar Bootstrap \'danger\''
+        , 'isNoClose': true &#125;"
+      (click)="clickBootstrap('snackbar Bootstrap \'danger\'', '',
+        &#123; wrapperClass: ['snpl2-bs-snackbar', 'snpl2-bs-danger'] &#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl2-bs-snackbar snpl2-bs-warning"
+      [params]="&#123; message: 'snackbar Bootstrap \'warning\''
+        , 'isNoClose': true &#125;"
+      (click)="clickBootstrap('snackbar Bootstrap \'warning\'', '',
+        &#123; wrapperClass: ['snpl2-bs-snackbar', 'snpl2-bs-warning'] &#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl2-bs-snackbar snpl2-bs-info"
+      [params]="&#123; message: 'snackbar Bootstrap \'info\''
+        , 'isNoClose': true &#125;"
+      (click)="clickBootstrap('snackbar Bootstrap \'info\'', '',
+        &#123; wrapperClass: ['snpl2-bs-snackbar', 'snpl2-bs-info'] &#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GlnSnackbarService &#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-snackbar',
+  templateUrl: './snackbar.component.html',
+  styleUrls: ['./snackbar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SnackbarComponent &#123;
+
+  constructor(private snackbarService: GlnSnackbarService) &#123;&#125;
+
+  public clickBootstrap(
+    message: string, action: string, config: any
+  ): void &#123;
+    const configBS = &#123;
+      overlayClasses: 'snpl2-bs-overlay',
+      horizontal: 'right',
+      transition: 'fade',
+      vertical: 'top',
+    &#125;;
+    this.snackbarService.open(message, action, &#123; ...configBS, ...config &#125;);
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-snackbar &#123;
+  .snpl2-elem &#123;
+    max-width: 40ch;
+  &#125;
+&#125;
+
+gln-snackbar.snpl2-bs-snackbar &#123;
+  cursor: pointer;
+&#125;
+.snpl2-bs-overlay &#123;
+  --glnsbc-mr-mini: 0.75rem;
+  --glnsbc-mr: 1.5rem;
+  z-index: 1090;
+&#125;
+.snpl2-bs-snackbar &#123;
+  --glnsb-brd-wd: 1px;
+  --glnsb-brd-cl: rgba(0, 0, 0, 0.175);
+  --glnsb-brd-rds: 0.375rem;
+  --glnsb-bx-shd: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --glnsb-mn-hg: 45px;
+  --glnsb-mn-wd: 350px;
+  --glnsb-font-size: 0.875rem;
+  font-weight: 400;
+&#125;
+.snpl2-bs-standard &#123;
+  --glnsb-bg-color: #ffffffd9;
+  --glnsb-color: #212529;
+&#125;
+.snpl2-bs-primary &#123;
+  --glnsb-bg-color: #0d6efd;
+  --glnsb-color: #fafafa;
+&#125;
+.snpl2-bs-secondary &#123;
+  --glnsb-bg-color: #5c636a;
+  --glnsb-color: #fafafa;
+&#125;
+.snpl2-bs-success &#123;
+  --glnsb-bg-color: #198754;
+  --glnsb-color: #fafafa;
+&#125;
+.snpl2-bs-danger &#123;
+  --glnsb-bg-color: #dc3545;
+  --glnsb-color: #fafafa;
+&#125;
+.snpl2-bs-warning &#123;
+  --glnsb-bg-color: #ffc107;
+  --glnsb-color: #000;
+&#125;
+.snpl2-bs-info &#123;
+  --glnsb-bg-color: #0dcaf0;
+  --glnsb-color: #000;
+&#125;
+</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

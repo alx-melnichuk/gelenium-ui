@@ -333,7 +333,7 @@ app-autocomplete &#123;
       dropdown list of options.
     </li>
     <li>
-      "panelClass" - set the classes to be applied to the options panel.
+      "classes" - set the classes to be applied to the options panel.
       Supports the same syntax as 'ngClass'.
     </li>
   </ul>
@@ -426,7 +426,7 @@ app-autocomplete &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: panelClass.</em>
+          <em>Attribute: classes.</em>
         </small>
       </div>
       <gln-input formControlName="model02i"
@@ -434,10 +434,10 @@ app-autocomplete &#123;
         label="Fruit"
         [exterior]="exterior02c"
         [glnAutocompleteTrigger]="autocomplete02i"
-        helperText="Used: panelClass.">
+        helperText="Used: classes.">
       </gln-input>
       <gln-autocomplete #autocomplete02i="glnAutocomplete"
-        panelClass="aca-panel-color">
+        classes="aca-panel-color">
         <gln-option *ngFor="let item of fruitsB"
           [value]="item">
           {{ capitalizeFirstLetter(item) }}
@@ -532,7 +532,7 @@ app-autocomplete &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: panelClass.&lt;/em&gt;
+          &lt;em&gt;Attribute: classes.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-input formControlName="model02i"
@@ -540,10 +540,10 @@ app-autocomplete &#123;
         label="Fruit"
         [exterior]="exterior02c"
         [glnAutocompleteTrigger]="autocomplete02i"
-        helperText="Used: panelClass."&gt;
+        helperText="Used: classes."&gt;
       &lt;/gln-input&gt;
       &lt;gln-autocomplete #autocomplete02i="glnAutocomplete"
-        panelClass="aca-panel-color"&gt;
+      classes="aca-panel-color"&gt;
         &lt;gln-option *ngFor="let item of fruitsB"
           [value]="item"&gt;
           <b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;

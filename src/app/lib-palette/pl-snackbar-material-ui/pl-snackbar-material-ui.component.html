@@ -1,0 +1,198 @@
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Like a Material-UI.
+    <a [href]="urlPlSnackbar + '#MaterialUI'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnSnackbar in style as "Material-UI".
+  </p>
+</section>
+
+
+<div class="snpl3-elem">
+  <p>
+    <gln-snackbar class="snpl3-mui-snackbar snpl3-mui-default"
+      [params]="{ message: 'snackbar material-ui \'default\''
+        , 'isNoClose': true }"
+      (click)="clickMUI('snackbar material-ui \'default\'', '', 
+        { wrapperClass: ['snpl3-mui-snackbar', 'snpl3-mui-default'] })">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl3-mui-snackbar snpl3-mui-error"
+      [params]="{ message: 'snackbar material-ui \'error\''
+        , msgType: 'error', 'isNoClose': true }"
+      (click)="clickMUI('snackbar material-ui \'error\'', '', 
+        { data: { msgType: 'error'},
+          wrapperClass: ['snpl3-mui-snackbar', 'snpl3-mui-error'] })">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl3-mui-snackbar snpl3-mui-warning"
+      [params]="{ message: 'snackbar material-ui \'warning\''
+        , msgType: 'warning', 'isNoClose': true }"
+      (click)="clickMUI('snackbar material-ui \'warning\'', '', 
+        { data: { msgType: 'warning'},
+          wrapperClass: ['snpl3-mui-snackbar', 'snpl3-mui-warning'] })">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl3-mui-snackbar snpl3-mui-info"
+      [params]="{ message: 'snackbar material-ui \'info\''
+        , msgType: 'info', 'isNoClose': true }"
+      (click)="clickMUI('snackbar material-ui \'info\'', '', 
+        { data: { msgType: 'info'}, 
+          wrapperClass: ['snpl3-mui-snackbar', 'snpl3-mui-info'] })">
+    </gln-snackbar>
+  </p>
+  <p>
+    <gln-snackbar class="snpl3-mui-snackbar snpl3-mui-success"
+      [params]="{ message: 'snackbar material-ui \'success\''
+        , msgType: 'success', 'isNoClose': true }"
+      (click)="clickMUI('snackbar material-ui \'success\'', '', 
+        { data: { msgType: 'success'}, 
+          wrapperClass: ['snpl3-mui-snackbar', 'snpl3-mui-success'] })">
+    </gln-snackbar>
+  </p>
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="snpl3-elem"&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl3-mui-snackbar snpl3-mui-default"
+      [params]="&#123; message: 'snackbar material-ui \'default\''
+        , 'isNoClose': true &#125;"
+      (click)="clickMUI('snackbar material-ui \'default\'', '',
+        &#123; wrapperClass: ['snpl3-mui-snackbar', 'snpl3-mui-default'] &#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl3-mui-snackbar snpl3-mui-error"
+      [params]="&#123; message: 'snackbar material-ui \'error\''
+        , msgType: 'error', 'isNoClose': true &#125;"
+      (click)="clickMUI('snackbar material-ui \'error\'', '',
+        &#123; data: &#123; msgType: 'error'&#125;,
+          wrapperClass: ['snpl3-mui-snackbar', 'snpl3-mui-error'] &#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl3-mui-snackbar snpl3-mui-warning"
+      [params]="&#123; message: 'snackbar material-ui \'warning\''
+        , msgType: 'warning', 'isNoClose': true &#125;"
+      (click)="clickMUI('snackbar material-ui \'warning\'', '',
+        &#123; data: &#123; msgType: 'warning'&#125;,
+          wrapperClass: ['snpl3-mui-snackbar', 'snpl3-mui-warning'] &#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl3-mui-snackbar snpl3-mui-info"
+      [params]="&#123; message: 'snackbar material-ui \'info\''
+        , msgType: 'info', 'isNoClose': true &#125;"
+      (click)="clickMUI('snackbar material-ui \'info\'', '',
+        &#123; data: &#123; msgType: 'info'&#125;,
+          wrapperClass: ['snpl3-mui-snackbar', 'snpl3-mui-info'] &#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;gln-snackbar class="snpl3-mui-snackbar snpl3-mui-success"
+      [params]="&#123; message: 'snackbar material-ui \'success\''
+        , msgType: 'success', 'isNoClose': true &#125;"
+      (click)="clickMUI('snackbar material-ui \'success\'', '',
+        &#123; data: &#123; msgType: 'success'&#125;,
+          wrapperClass: ['snpl3-mui-snackbar', 'snpl3-mui-success'] &#125;)"&gt;
+    &lt;/gln-snackbar&gt;
+  &lt;/p&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GlnSnackbarService &#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-snackbar',
+  templateUrl: './snackbar.component.html',
+  styleUrls: ['./snackbar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SnackbarComponent &#123;
+
+  constructor(private snackbarService: GlnSnackbarService) &#123;&#125;
+
+  public clickMUI(
+    message: string, action: string, config: any
+  ): void &#123;
+    const configMUI = &#123;
+      overlayClasses: 'snpl3-mui-overlay',
+      horizontal: 'center',
+      transition: 'grow',
+      vertical: 'bottom',
+    &#125;;
+    this.snackbarService.open(message, action, &#123; ...configMUI, ...config &#125;);
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-snackbar &#123;
+  .snpl3-elem &#123;
+    max-width: 40ch;
+  &#125;
+&#125;
+
+gln-snackbar.snpl3-mui-snackbar &#123;
+  cursor: pointer;
+&#125;
+.snpl3-mui-overlay &#123;
+  --glnsbc-mr-mini: 0.75rem;
+  --glnsbc-mr: 1.5rem;
+  z-index: 1400;
+&#125;
+.snpl3-mui-snackbar &#123;
+  --glnsb-mn-hg: 48px;
+  --glnsb-mn-wd: 288px;
+  --glnsb-brd-rds: 4px;
+  --glnsb-bx-shd: 0px 3px 5px -1px rgba(0,0,0,0.2)
+    , 0px 6px 10px 0px rgba(0,0,0,0.14)
+    , 0px 1px 18px 0px rgba(0,0,0,0.12);
+  --glnsb-font-size: 0.875rem;
+&#125;
+.snpl3-mui-default &#123;
+  --glnsb-bg-color: rgb(50, 50, 50);
+  --glnsb-color: #fff;
+&#125;
+.snpl3-mui-error &#123;
+  --glnsb-bg-color: #d32f2f;
+  --glnsb-color: #fff;
+&#125;
+.snpl3-mui-warning &#123;
+  --glnsb-bg-color: #ed6c02;
+  --glnsb-color: #fff;
+&#125;
+.snpl3-mui-info &#123;
+  --glnsb-bg-color: #0288d1;
+  --glnsb-color: #fff;
+&#125;
+.snpl3-mui-success &#123;
+  --glnsb-bg-color: #2e7d32;
+  --glnsb-color: #fff;
+&#125;
+</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

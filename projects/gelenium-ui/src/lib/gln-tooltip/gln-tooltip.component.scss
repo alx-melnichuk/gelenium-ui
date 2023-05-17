@@ -10,7 +10,7 @@ gln-tooltip-cmp {
   --glntt--default-l: var(--glncl-default-l, var(--gln-default-l));
 
   --glntt---color: var(--glntt-color, hsl(var(--glntt--default-bg-h), var(--glntt--default-bg-s), var(--glntt--default-bg-l)));
-  --glntt---bg-color: var(--glntt-bg-color, hsl(var(--glntt--default-h), var(--glntt--default-s), calc(var(--glntt--default-l) + 20%)));
+  --glntt---bg-color: var(--glntt-bg-color, hsl(var(--glntt--default-h), var(--glntt--default-s), calc(var(--glntt--default-l) + 15%)));
 
   border-radius: 0.33em;
   background-color: var(--glntt---bg-color);

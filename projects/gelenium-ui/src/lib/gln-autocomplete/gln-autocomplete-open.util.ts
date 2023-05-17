@@ -1,22 +1,27 @@
 import { GlnAutocompleteComponent } from './gln-autocomplete.component';
 
 export class GlnAutocompleteOpenUtil {
-  private static autocompleteList: GlnAutocompleteComponent[] = [];
+  private static list: GlnAutocompleteComponent[] = [];
 
   public static add(value: GlnAutocompleteComponent): number {
     GlnAutocompleteOpenUtil.remove(value);
-    return GlnAutocompleteOpenUtil.autocompleteList.push(value);
+    return GlnAutocompleteOpenUtil.list.push(value);
   }
   public static remove(value: GlnAutocompleteComponent): void {
-    const index = GlnAutocompleteOpenUtil.autocompleteList.indexOf(value);
+    const index = GlnAutocompleteOpenUtil.list.indexOf(value);
     if (index > -1) {
-      GlnAutocompleteOpenUtil.autocompleteList.splice(index, 1);
+      GlnAutocompleteOpenUtil.list.splice(index, 1);
     }
   }
   public static getList(): GlnAutocompleteComponent[] {
-    return GlnAutocompleteOpenUtil.autocompleteList.slice();
+    return GlnAutocompleteOpenUtil.list.slice();
+  }
+  public static size(): number {
+    return GlnAutocompleteOpenUtil.list.length;
   }
   public static closeAll(): void {
-    GlnAutocompleteOpenUtil.autocompleteList.forEach((item: { close(value: unknown): void }) => item.close({ noAnimation: true }));
+    while (GlnAutocompleteOpenUtil.list.length > 0) {
+      GlnAutocompleteOpenUtil.list.pop()?.close({ noAnimation: true });
+    }
   }
 }

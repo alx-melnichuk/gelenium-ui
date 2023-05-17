@@ -29,7 +29,7 @@
     glnsl-rhomb
     gln-orn-rg
     [attr.opn]="isPanelOpen ? '' : null"
-    [attr.noAnm]="frameComp?.noAnimation ? '' : null"
+    [attr.noAnm]="frameComp.noAnimation ? '' : null"
     [ngClass]="['glnsl-rhomb', (isPanelOpen ? 'is-open' : '')]"
     focusable="false"
     aria-hidden="true">
@@ -83,7 +83,7 @@
   cdkConnectedOverlayLockPosition
   [cdkConnectedOverlayOpen]="isPanelOpen || hasPanelAnimation"
   [cdkConnectedOverlayOrigin]="origin"
-  [cdkConnectedOverlayPanelClass]="overlayPanelClass"
+  [cdkConnectedOverlayPanelClass]="overlayClassesVal"
   [cdkConnectedOverlayPositions]="positionList"
   [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
   (backdropClick)="backdropClick()"
@@ -93,13 +93,13 @@
 
   <div glnslp-wrap
     class="gln-select-panel-wrap"
-    [ngClass]="[(frameComp?.noAnimation ? 'gln-no-animation' : '')]"
-    [attr.noAnm]="frameComp?.noAnimation ? '' : null"
+    [ngClass]="[(frameComp.noAnimation ? 'gln-no-animation' : '')]"
+    [attr.noAnm]="frameComp.noAnimation ? '' : null"
     (animationend)="hasPanelAnimation = isPanelOpen"
     (animationcancel)="hasPanelAnimation = isPanelOpen">
     <div glnsl-panel
       class="gln-select-panel"
-      [ngClass]="panelClassVal || ''"
+      [ngClass]="classesVal || ''"
       [glnOptionsScroll]="options"
       (glnOptionsScrollAttached)="setOptionsScroll($event)"
       (glnOptionsScrollDetached)="setOptionsScroll(null)"

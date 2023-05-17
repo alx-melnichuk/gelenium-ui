@@ -11,10 +11,11 @@ import {
 import { Platform } from '@angular/cdk/platform';
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { AfterViewInit, ComponentRef, Directive, ElementRef, OnDestroy, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
-import { EventListenerType, EventListenerUtil } from '../_utils/event-listener.util';
 import { ParentScrollUtil } from '../_utils/parent-scroll.util';
 
+import { EventListenerType, EventListenerUtil } from '../_utils/event-listener.util';
 import { GlnTooltipBaseComponent } from './gln-tooltip-base.component';
+import { GlnTooltipOpenUtil } from './gln-tooltip-open.util';
 
 const CSS_ATTR_IS_HIDE = 'is-hide';
 const CSS_ATTR_IS_SHOW = 'is-show';
@@ -40,9 +41,10 @@ export const TOOLTIP_POSITION: { [key: string]: string } = {
   'left-start': 'left-start',
   'left-end': 'left-end',
 };
-
+let unidx: number = 0;
 @Directive()
 export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent> implements AfterViewInit, OnDestroy {
+  public idx = ++unidx;
   public content: Record<string, unknown> | null = null;
   public classesVal: string[] = []; // Binding attribute "classes"
   public hideDelayVal: number | null = null; // Binding attribute "hideDelay".
@@ -62,7 +64,7 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
     }
   }
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
-  public isNoHoverableVal: boolean | null = null; // Binding attribute "isNoMousable".
+  public isNoHoverableVal: boolean | null = null; // Binding attribute "isNoHoverable".
   public isNoHideOnScrollVal: boolean | null = null; // Binding attribute "isNoHideOnScroll".
   public isNoTouchableVal: boolean | null = null; // Binding attribute "isNoTouchable".
   public isNoTransformVal: boolean | null = null; // Binding attribute "isNoTransit".
@@ -103,7 +105,6 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
   private innIsDisabledVal: boolean | null = null;
   private innPositionVal: string | null = null;
   private isPhaseAfterViewInit: boolean = false;
-  private positionClassCurr: string = '';
   private timeoutForShow: number | undefined = undefined;
   private timeoutForHide: number | undefined = undefined;
 
@@ -195,6 +196,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       this.timeoutForShow = window.setTimeout(
         () => {
           this.timeoutForShow = undefined;
+          // Add the current object to the list of items in the open state.
+          GlnTooltipOpenUtil.add(this);
           this.performShow();
           resolve();
         },
@@ -225,6 +228,8 @@ export abstract class GlnTooltipBaseDirective<T extends GlnTooltipBaseComponent>
       this.timeoutForHide = window.setTimeout(
         () => {
           this.timeoutForHide = undefined;
+          // Remove the current object from the list of items in the open state.
+          GlnTooltipOpenUtil.remove(this);
           this.performHide(isNoAnimation);
           resolve();
         },

@@ -1,0 +1,276 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Size.
+    <a [href]="urlCmCheckbox + '#Size'">#</a>
+  </h3>
+  <p>
+    The GlnCheckbox component has the ability to change its size.
+    All component elements are associated with a font size for the gln-checkbox tag.
+    Thus, by changing the font size, you can choose the size of this component
+    that is optimal for you.
+  </p>
+  <span>For example:</span>
+</section>
+
+
+<form [formGroup]="formGroup03"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Little" height: 30px;</em></small>
+      </div>
+      <gln-checkbox formControlName="model03a"
+        size="little">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Short" height: 36px;</em></small>
+      </div>
+      <gln-checkbox formControlName="model03b"
+        size="short">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Small" height: 42px;</em></small>
+      </div>
+      <gln-checkbox formControlName="model03c"
+        size="small">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Middle" height: 48px;</em></small>
+      </div>
+      <gln-checkbox formControlName="model03d"
+        size="middle">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Wide" height: 54px;</em></small>
+      </div>
+      <gln-checkbox formControlName="model03e"
+        size="wide">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Large" height: 60px;</em></small>
+      </div>
+      <gln-checkbox formControlName="model03f"
+        size="large">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Huge" height: 66px;</em></small>
+      </div>
+      <gln-checkbox formControlName="model03g"
+        size="huge">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>"Custom" height: 53px;</em></small>
+      </div>
+      <gln-checkbox formControlName="model03h"
+        size="53">
+        Parameter definition label
+      </gln-checkbox>
+    </div>
+  </div>
+
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup03"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;"Little" height: 30px;&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox formControlName="model03a"
+        size="little"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;"Short" height: 36px;&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox formControlName="model03b"
+        size="short"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;"Small" height: 42px;&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox formControlName="model03c"
+        size="small"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;"Middle" height: 48px;&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox formControlName="model03d"
+        size="middle"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;"Wide" height: 54px;&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox formControlName="model03e"
+        size="wide"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;"Large" height: 60px;&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox formControlName="model03f"
+        size="large"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;"Huge" height: 66px;&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox formControlName="model03g"
+        size="huge"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;"Custom" height: 53px;&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox formControlName="model03h"
+        size="53"&gt;
+        Parameter definition label
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-checkbox',
+  templateUrl: './checkbox.component.html',
+  styleUrls: ['./checkbox.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CheckboxComponent &#123;
+  public formGroup03: FormGroup = new FormGroup(&#123;
+    model03a: new FormControl(true, []),
+    model03b: new FormControl(true, []),
+    model03c: new FormControl(true, []),
+    model03d: new FormControl(true, []),
+    model03e: new FormControl(true, []),
+    model03f: new FormControl(true, []),
+    model03g: new FormControl(true, []),
+    model03h: new FormControl(true, []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

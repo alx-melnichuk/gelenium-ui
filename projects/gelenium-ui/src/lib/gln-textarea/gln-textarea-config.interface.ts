@@ -11,6 +11,6 @@ export interface GlnTextareaConfig extends GlnFrameConfig {
   isError?: boolean | undefined;
   isPlaceholder?: boolean | undefined;
   isReadOnly?: boolean | undefined;
-  ornamLfAlign?: string | undefined; // GlnFrameOrnamAlignType
-  ornamRgAlign?: string | undefined; // GlnFrameOrnamAlignType
+  ornamLfAlign?: string | undefined; // 'default','center','flex-start','flex-end','baseline','stretch'
+  ornamRgAlign?: string | undefined; // 'default','center','flex-start','flex-end','baseline','stretch'
 }

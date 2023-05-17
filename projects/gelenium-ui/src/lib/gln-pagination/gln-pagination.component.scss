@@ -1,7 +1,5 @@
 /*# sourceURL=gln-pagination.component.scss */
 
-@import '../_styles/mx-display-flex.scss';
-
 gln-pagination {
   --glnpg--default-h: var(--glncl-default-h, var(--gln-default-h));
   --glnpg--default-s: var(--glncl-default-s, var(--gln-default-s));
@@ -20,7 +18,7 @@ gln-pagination {
   // Block "<ul glnpg-ul>"
   [glnpg-ul] {
     align-items: center;
-    @include mxDisplayFlex();
+    display: flex;
     flex-wrap: wrap;
     list-style: none;
     margin: 0;
@@ -122,6 +120,7 @@ gln-pagination {
 
         --glnbt-hov-lb-cl: var(--glnpg-sel-hov-lb-cl, hsl(var(--glnpg--default-bg-h), var(--glnpg--default-bg-s), var(--glnpg--default-bg-l)));
         --glnbt-hov-bg-cl: var(--glnpg-sel-hov-bg-cl, hsl(var(--glnpg--primary-h), var(--glnpg--primary-s), calc(var(--glnpg--primary-l) - 10%)));
+
 
         --glnbt-dis-bg-cl: var(--glnpg-sel-dis-bg-cl, hsla(var(--glnpg--default-h), var(--glnpg--default-s), var(--glnpg--default-l), 0.08));
 

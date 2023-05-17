@@ -1,0 +1,357 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmRadio + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnRadioButtonModule, GlnRadioGroupModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    GlnRadioButton components are typically used in groups that represent possible
+    values for a single parameter.
+    Components are grouped by a unique "name" attribute value that is the same for
+    all components in this group.
+    In this case, only one value can be selected.
+  </p>
+  <p>The GlnRadioButton component can be used in reactive forms.</p>
+  <span> For example:</span>
+  <code><pre source="html">
+&lt;form [formGroup]="formGroup01a" novalidate autocomplete="off"&gt;
+  &lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits01a"
+    formControlName="model01a"
+    <i>name="model01a"</i>
+    <i>[value]="item"</i>&gt; <b>&#123;</b>&#123; item &#125;&#125;
+  &lt;/<strong>gln-radio-button</strong>&gt;
+&lt;/form&gt;</pre></code>
+</section>
+
+
+<form [formGroup]="formGroup01a"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>
+            With "formControlName" model="{{ formGroup01a.controls['model01a'].value }}"
+          </em>
+        </small>
+      </div>
+      <gln-radio-button *ngFor="let item of fruits01a"
+        name="model01a"
+        formControlName="model01a"
+        [value]="item">
+        {{ item }}
+      </gln-radio-button>
+    </div>
+
+  </div>
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup01a"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;
+            With "formControlName" model="<b>&#123;</b>&#123; formGroup01a.controls['model01a'].value &#125;&#125;""
+          &lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-radio-button *ngFor="let item of fruits01a"
+        name="model01a"
+        formControlName="model01a"
+        [value]="item"&gt;
+        <b>&#123;</b>&#123; item &#125;&#125;
+      &lt;/gln-radio-button&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-radio-button',
+  templateUrl: './radio-button.component.html',
+  styleUrls: ['./radio-button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RadioButtonComponent &#123;
+  public fruits01a: string[] = ['apple', 'apricot', 'banana'];
+  public formGroup01a: FormGroup = new FormGroup(&#123;
+    model01a: new FormControl(this.fruits01a[0], []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+
+<section mr-vr>
+  <p>And also the GlnRadioButton component can be used without reactive forms.</p>
+  <span> For example:</span>
+  <code><pre source="html">
+&lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits01b"
+  [(ngModel)]="data01b"
+  <i>name="model01b"</i>
+  <i>[value]="item"</i>&gt; <b>&#123;</b>&#123; item &#125;&#125;
+&lt;/<strong>gln-radio-button</strong>&gt;</pre></code>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>With "ngModel" model="{{ data01b }}"</em>
+      </small>
+    </div>
+    <gln-radio-button *ngFor="let item of fruits01b"
+      name="model01b"
+      [(ngModel)]="data01b"
+      [value]="item">
+      {{ item }}
+    </gln-radio-button>
+
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;With "ngModel" model="<b>&#123;</b>&#123; data01b &#125;&#125;"&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-radio-button *ngFor="let item of fruits01b"
+      name="model01b"
+      [(ngModel)]="data01b"
+      [value]="item"&gt;
+      <b>&#123;</b>&#123; item &#125;&#125;
+    &lt;/gln-radio-button&gt;
+
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-radio-button',
+  templateUrl: './radio-button.component.html',
+  styleUrls: ['./radio-button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RadioButtonComponent &#123;
+  public fruits01b: string[] = ['kiwi', 'orange', 'lemon'];
+  public data01b: string = this.fruits01b[0];
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+
+<section mr-vr>
+  <p>
+    The GlnRadioGroup component allows you to select one value from a group of GlnRadioButton
+    elements.
+    And also apply settings attributes immediately for the entire group of GlnRadioButton elements.
+  </p>
+  <span> For example:</span>
+  <code><pre source="html">
+&lt;form [formGroup]="formGroup01c" novalidate autocomplete="off"&gt;
+  &lt;<strong>gln-radio-group</strong> <i>name="model01c"</i> label="Choose a fruit:"&gt;
+    &lt;<strong>gln-radio-button</strong> *ngFor="let item of fruits01c"
+      formControlName="model01c"
+      <i>[value]="item"</i>&gt; <b>&#123;</b>&#123; item &#125;&#125;
+    &lt;/<strong>gln-radio-button</strong>&gt;
+  &lt;/<strong>gln-radio-group</strong>&gt;
+&lt;/form&gt;</pre></code>
+</section>
+
+
+<form [formGroup]="formGroup01c"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small>
+          <em>
+            With GlnRadioGroup model="{{ formGroup01c.controls['model01c'].value }}"
+          </em>
+        </small>
+      </div>
+      <gln-radio-group name="model01c"
+        label="Choose a fruit:">
+        <gln-radio-button *ngFor="let item of fruits01c"
+          formControlName="model01c"
+          [value]="item">
+          {{ item }}
+        </gln-radio-button>
+      </gln-radio-group>
+    </div>
+
+  </div>
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup01c"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;
+            With GlnRadioGroup model="<b>&#123;</b>&#123; formGroup01c.controls['model01c'].value &#125;&#125;"
+          &lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-radio-group name="model01c"
+        label="Choose a fruit:"&gt;
+        &lt;gln-radio-button *ngFor="let item of fruits01c"
+          formControlName="model01c"
+          [value]="item"&gt;
+          <b>&#123;</b>&#123; item &#125;&#125;
+        &lt;/gln-radio-button&gt;
+      &lt;/gln-radio-group&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-radio-button',
+  templateUrl: './radio-button.component.html',
+  styleUrls: ['./radio-button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RadioButtonComponent &#123;
+  public fruits01c: string[] = ['mango', 'mandarin', 'peach'];
+  public formGroup01c: FormGroup = new FormGroup(&#123;
+    model01c: new FormControl(this.fruits01c[0], []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

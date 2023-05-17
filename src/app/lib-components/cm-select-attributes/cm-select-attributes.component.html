@@ -628,7 +628,7 @@ app-select &#123;
       dropdown list of options.
     </li>
     <li>
-      "panelClass" - set the classes to be applied to the options panel.
+      "classes" - set the classes to be applied to the options panel.
       Supports the same syntax as 'ngClass'.
     </li>
   </ul>
@@ -699,7 +699,7 @@ app-select &#123;
       <gln-select formControlName="model02n"
         class="sa-medium"
         label="Fruit"
-        panelClass="sa-max-width"
+        classes="sa-max-width"
         [exterior]="exterior02c"
         helperText="css: --glnslpo-max-width">
         <gln-option [value]="null"><em>None</em></gln-option>
@@ -712,15 +712,15 @@ app-select &#123;
     <div class="app-elem">
       <div>
         <small>
-          <em>Attribute: panelClass.</em>
+          <em>Attribute: classes.</em>
         </small>
       </div>
       <gln-select formControlName="model02o"
         class="sa-medium"
         label="Fruit"
-        panelClass="sa-panel-color"
+        classes="sa-panel-color"
         [exterior]="exterior02c"
-        helperText="Used: panelClass.">
+        helperText="Used: classes.">
         <gln-option [value]="null"><em>None</em></gln-option>
         <gln-option *ngFor="let item of fruits02C"
           [value]="item">{{ capitalizeFirstLetter(item) }}
@@ -793,7 +793,7 @@ app-select &#123;
       &lt;gln-select formControlName="model02n"
         class="sa-medium"
         label="Fruit"
-        panelClass="sa-max-width"
+        classes="sa-max-width"
         [exterior]="exterior02c"
         helperText="css: --glnslpo-max-width"&gt;
         &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
@@ -806,15 +806,15 @@ app-select &#123;
     &lt;div class="app-elem"&gt;
       &lt;div&gt;
         &lt;small&gt;
-          &lt;em&gt;Attribute: panelClass.&lt;/em&gt;
+          &lt;em&gt;Attribute: classes.&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
       &lt;gln-select formControlName="model02o"
         class="sa-medium"
         label="Fruit"
-        panelClass="sa-panel-color"
+        classes="sa-panel-color"
         [exterior]="exterior02c"
-        helperText="Used: panelClass."&gt;
+        helperText="Used: classes."&gt;
         &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;
         &lt;gln-option *ngFor="let item of fruits02C"
           [value]="item"&gt;<b>&#123;</b>&#123; capitalizeFirstLetter(item) &#125;&#125;
@@ -967,7 +967,7 @@ app-select &#123;
       <gln-select formControlName="model02q"
         class="sa-normal"
         label="Fruit"
-        panelClass="sa-max-height"
+        classes="sa-max-height"
         [exterior]="exterior02d"
         helperText="--glnslpo-max-height">
         <gln-option *ngFor="let item of flowers"
@@ -1004,7 +1004,7 @@ app-select &#123;
       <gln-select formControlName="model02s"
         class="sa-normal"
         label="Fruit"
-        panelClass="sa-no-elevation"
+        classes="sa-no-elevation"
         [exterior]="exterior02d"
         helperText="css: --glnslpo-elevation">
         <gln-option [value]="null"><em>None</em></gln-option>
@@ -1060,7 +1060,7 @@ app-select &#123;
       &lt;gln-select formControlName="model02q"
         class="sa-normal"
         label="Fruit"
-        panelClass="sa-max-height"
+        classes="sa-max-height"
         [exterior]="exterior02d"
         helperText="--glnslpo-max-height"&gt;
         &lt;gln-option *ngFor="let item of flowers"
@@ -1097,7 +1097,7 @@ app-select &#123;
       &lt;gln-select formControlName="model02s"
         class="sa-normal"
         label="Fruit"
-        panelClass="sa-no-elevation"
+        classes="sa-no-elevation"
         [exterior]="exterior02d"
         helperText="css: --glnslpo-elevation"&gt;
         &lt;gln-option [value]="null"&gt;&lt;em&gt;None&lt;/em&gt;&lt;/gln-option&gt;

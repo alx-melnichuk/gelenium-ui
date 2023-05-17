@@ -26,6 +26,7 @@ export class CmSwitchAttributesComponent {
   public data02a = true;
   public data02b = true;
   public formGroup02a: FormGroup = new FormGroup({
+    model02a: new FormControl(true, []),
     model02b: new FormControl(true, []),
     model02c: new FormControl(true, []),
     model02d: new FormControl(true, []),

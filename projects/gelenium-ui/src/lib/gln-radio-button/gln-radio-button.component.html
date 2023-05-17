@@ -1,0 +1,55 @@
+<label glnrb-container
+  class="gln-radio-container"
+  [formGroup]="formGroup">
+
+  <span glnrb-icon-block
+    class="gln-radio-icon-block">
+    <input #inputElementRef
+      glnrb-input
+      formControlName="radioinfo"
+      class="gln-radio-input glnrb-input"
+      type="radio"
+      [attr.id]="id + '_input'"
+      [attr.disabled]="isDisabledVal ? '': null"
+      [attr.readonly]="isReadOnlyVal ? '': null"
+      [attr.tabindex]="isDisabledVal || isCheckedVal === false ? '-1' : tabIndex"
+      aria-label="Radio demo"
+      (change)="$event.stopPropagation();"
+      (focus)="doFocus()"
+      (blur)="doBlur()"
+      (click)="doClickByInput($event)" />
+    <div glnrb-foc-vis></div>
+    <span glnrb-icon-wrap
+      class="gln-radio-icon-wrap">
+      <svg glnrb-icon
+        envelope
+        class="gln-radio-icon-envelope"
+        focusable="false"
+        aria-hidden="true"
+        viewBox="0 0 24 24">
+        <path
+          d="M12 2C6.47 2 2 6.48 2 12s4.47 10 10 10 10-4.47 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.57-8-8s3.58-8 8-8 8 3.57 8 8-3.58 8-8 8z">
+        </path>
+      </svg>
+      <svg glnrb-icon
+        circle
+        class="gln-radio-icon-checked"
+        focusable="false"
+        aria-hidden="true"
+        viewBox="0 0 24 24">
+        <path
+          d="M8.46 8.46C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.54 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.46 8.46Z">
+        </path>
+      </svg>
+    </span>
+
+    <gln-touch-ripple isCenter
+      *ngIf="!isDisabledVal && !isNoRippleVal && !isReadOnlyVal">
+    </gln-touch-ripple>
+  </span>
+
+  <span glnrb-content
+    class="gln-radio-content">
+    <ng-content></ng-content>
+  </span>
+</label>

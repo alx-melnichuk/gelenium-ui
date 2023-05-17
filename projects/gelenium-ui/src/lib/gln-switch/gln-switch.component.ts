@@ -40,7 +40,7 @@ import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.co
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { GlnSwitchChange } from './gln-switch-change.interface';
-import { GlnSwitchConfig } from './gln-switch.interface';
+import { GlnSwitchConfig } from './gln-switch-config.interface';
 import { ScreenUtil } from '../_utils/screen.util';
 import { HtmlConvertUtil } from '../_utils/html-convert.util';
 
@@ -49,7 +49,7 @@ const POSITION: { [key: string]: string } = { top: 'top', bottom: 'bottom', star
 const CSS_CLS_DISABLED = 'gln-disabled';
 const CSS_ATTR_DISABLED = 'dis';
 const CSS_ATTR_HIDE_ANIMATION_INIT = 'hdAnmInit';
-const CSS_PROP_LABEL_FONT_SIZE = '--glnsw--label-font-size';
+const CSS_PROP_LABEL_FONT_SIZE = '--glnsw--label-fn-sz';
 const CSS_PROP_CONTAINER_PADDING = '--glnsw--container-pd';
 const CSS_PROP_WRAP_PADDING = '--glnsw--wrap-pd';
 const CSS_PROP_WRAP_SHIFT = '--glnsw--wrap-shift';
@@ -106,7 +106,6 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   public currConfig: GlnSwitchConfig;
   public formControl: FormControl = new FormControl({ value: false, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
-  public idForInput = this.setIdForInput(this.id);
   public isCheckedVal: boolean | null = null; // Binding attribute "isChecked".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isNoAnimationVal: boolean | null = null; // Binding attribute "isNoAnimation".
@@ -126,41 +125,40 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null
   ) {
     this.currConfig = this.rootConfig || {};
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-switch', true);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
+    this.renderer.addClass(this.hostRef.nativeElement, 'gln-switch');
+    this.renderer.addClass(this.hostRef.nativeElement, 'gln-control');
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
-    if (changes['id']) {
-      this.idForInput = this.setIdForInput(this.id);
-    }
     if (changes['isDisabled']) {
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
-    if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimationVal == null && this.currConfig.isNoAnimation != null)) {
+    if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
       this.isNoAnimationVal = !!(BooleanUtil.init(this.isNoAnimation) ?? (this.currConfig.isNoAnimation || null));
       this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
-    if (changes['isNoRipple'] || (changes['config'] && this.isNoRippleVal == null && this.currConfig.isNoRipple != null)) {
+    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
       this.isNoRippleVal = !!(BooleanUtil.init(this.isNoRipple) ?? (this.currConfig.isNoRipple || null));
       this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
-    if (changes['isReadOnly'] || (changes['config'] && this.isReadOnlyVal == null && this.currConfig.isReadOnly != null)) {
+    if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
       this.isReadOnlyVal = !!(BooleanUtil.init(this.isReadOnly) ?? (this.currConfig.isReadOnly || null));
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
-    if (changes['isRequired'] || (changes['config'] && this.isRequiredVal == null && this.currConfig.isRequired != null)) {
+    if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
       this.isRequiredVal = !!(BooleanUtil.init(this.isRequired) ?? (this.currConfig.isRequired || null));
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
-    if (changes['position'] || (changes['config'] && this.positionVal == null && this.currConfig.position != null)) {
-      this.settingClassAndAttrByPosition(this.positionVal || '', false, this.renderer, this.hostRef);
+    if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
+      // Remove class by old position value.
+      this.settingByPosition(false, this.positionVal, this.renderer, this.hostRef);
       const positionStr: string = (this.position || this.currConfig.position || '').toString();
       this.positionVal = POSITION[positionStr] || POSITION['end'];
-      this.settingClassAndAttrByPosition(this.positionVal, true, this.renderer, this.hostRef);
+      // Add class by new position value.
+      this.settingByPosition(true, this.positionVal, this.renderer, this.hostRef);
     }
 
     if (changes['isRequired']) {
@@ -171,16 +169,17 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   public ngOnInit(): void {
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
+    // Defining internal CSS properties.
+    this.prepareCssProperties(this.hostRef);
+
     if (!this.isDisabledVal) {
       // Set the TagIndex value if the flag 'disabled' is not set.
       this.renderer.setAttribute(this.hostRef.nativeElement, 'tabindex', '' + this.tabIndex);
     }
-    this.prepareCssProperties(this.hostRef);
-
     const isChecked: boolean | null = BooleanUtil.init(this.isChecked) ?? (this.currConfig.isChecked || null);
     if (isChecked && !this.formControl.value) {
       this.formControl.setValue(true, { emitEvent: false });
-      this.settingChecked(true, this.renderer, this.hostRef);
+      this.settingChecked((this.isCheckedVal = true), this.renderer, this.hostRef);
     }
 
     if (this.isNoAnimationVal == null) {
@@ -202,7 +201,8 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     if (this.positionVal == null) {
       const positionStr: string = (this.position || this.currConfig.position || '').toString();
       const positionVal: string = POSITION[positionStr] || POSITION['end'];
-      this.settingClassAndAttrByPosition((this.positionVal = positionVal), true, this.renderer, this.hostRef);
+      // Add class by new position value.
+      this.settingByPosition(true, (this.positionVal = positionVal), this.renderer, this.hostRef);
     }
 
     if (this.isRequiredVal) {
@@ -231,7 +231,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   public writeValue(value: any): void {
     if (value !== this.formControl.value) {
       this.formControl.setValue(!!value, { emitEvent: false });
-      this.settingChecked(!!value, this.renderer, this.hostRef);
+      this.settingChecked((this.isCheckedVal = !!value), this.renderer, this.hostRef);
       this.changeDetectorRef.markForCheck();
     }
     if (this.isRemoveAttrHideAnimation) {
@@ -295,8 +295,8 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   // ** Public methods **
 
   public doClickByLabel(event: MouseEvent): void {
-    if (!this.isDisabledVal && !this.isReadOnlyVal && this.touchRipple) {
-      this.touchRipple.touchRipple(event, true);
+    if (!this.isDisabledVal && !this.isReadOnlyVal && this.touchRipple && !this.isNoRippleVal) {
+      this.touchRipple.trigger(event, true);
     }
   }
 
@@ -305,7 +305,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
     if (!this.isDisabledVal && !this.isReadOnlyVal) {
       const newValue = !this.formControl.value;
       this.formControl.setValue(newValue, { emitEvent: false });
-      this.settingChecked(newValue, this.renderer, this.hostRef);
+      this.settingChecked((this.isCheckedVal = newValue), this.renderer, this.hostRef);
       if (this.isRemoveAttrHideAnimation) {
         this.isRemoveAttrHideAnimation = false;
         // Remove an attribute that disables animation on initialization.
@@ -321,10 +321,6 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
 
   // ** Private methods **
 
-  private setIdForInput(id: string): string {
-    return `${id}-input`;
-  }
-
   private prepareFormGroup(isRequired: boolean | null): void {
     this.formControl.clearValidators();
     const newValidator: ValidatorFn[] = [];
@@ -336,14 +332,16 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
 
   private prepareCssProperties(hostRef: ElementRef<HTMLElement>): void {
     // Determine the font size of the parent element.
-    const parentElem: HTMLElement | null = hostRef && hostRef.nativeElement ? hostRef.nativeElement.parentElement : null;
-    const parentRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(parentElem);
-    const parentFontSize: number = HtmlElemUtil.propertyAsNumber(parentRef, 'font-size');
-    if (parentFontSize > 0) {
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_LABEL_FONT_SIZE, parentFontSize.toString().concat('px'));
-    }
     if (hostRef && hostRef.nativeElement) {
-      const hostElement: Element = hostRef.nativeElement;
+      const hostElement: HTMLElement = hostRef.nativeElement;
+
+      const parentElem: HTMLElement | null = hostRef && hostRef.nativeElement ? hostRef.nativeElement.parentElement : null;
+      const parentRef: ElementRef<HTMLElement> | null = HtmlElemUtil.getElementRef(parentElem);
+      const parentFontSize: number = HtmlElemUtil.propertyAsNumber(parentRef, 'font-size');
+      if (parentFontSize > 0) {
+        hostElement.style.setProperty(CSS_PROP_LABEL_FONT_SIZE, parentFontSize.toString().concat('px'));
+      }
+
       // Determine the font size of the host element.
       const hostFontSizeVal: number = HtmlElemUtil.propertyAsNumber(hostRef, 'font-size');
       const hostFontSize: number = Math.round(hostFontSizeVal * 100) / 100;
@@ -361,7 +359,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
 
       // Determine the border-radius of the 'track' element.
       const trackBorderRadius: number = Math.round((trackHeight / 2) * 100) / 100;
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_TRACK_BORDER_RADIUS, trackBorderRadius.toString().concat('px'));
+      hostElement.style.setProperty(CSS_PROP_TRACK_BORDER_RADIUS, trackBorderRadius.toString().concat('px'));
 
       // Determine the width of the 'track' element. (2.3em;)
       const trackWidthStr: string = getComputedStyle(hostElement).getPropertyValue(CSS_PROP_TRACK_WIDTH);
@@ -378,27 +376,26 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
       // Determine the padding of the container element.
       const containerPaddingNum = (3 * hostFontSize - trackHeight) / 2;
       const containerPadding = Math.round(containerPaddingNum * 100) / 100;
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_CONTAINER_PADDING, containerPadding.toString().concat('px'));
+      hostElement.style.setProperty(CSS_PROP_CONTAINER_PADDING, containerPadding.toString().concat('px'));
 
       // Determine the padding of the wrap element.
       const wrapPaddingNum = (3 * hostFontSize - thumbHeight) / 2;
       const wrapPadding = Math.round(wrapPaddingNum * 100) / 100;
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_WRAP_PADDING, wrapPadding.toString().concat('px'));
+      hostElement.style.setProperty(CSS_PROP_WRAP_PADDING, wrapPadding.toString().concat('px'));
 
       // Determine the shift of the wrap element.
       const containerLen = trackWidth + 2 * containerPadding;
       const wrapLen = thumbHeight + 2 * wrapPadding;
       const wrapShift = Math.round((containerLen - wrapLen) * 100) / 100;
-      HtmlElemUtil.setProperty(hostRef, CSS_PROP_WRAP_SHIFT, wrapShift.toString().concat('px'));
+      hostElement.style.setProperty(CSS_PROP_WRAP_SHIFT, wrapShift.toString().concat('px'));
     }
   }
 
   private settingChecked(isChecked: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    this.isCheckedVal = isChecked;
     HtmlElemUtil.setClass(renderer, elem, 'gln-checked', !!isChecked);
     HtmlElemUtil.setAttr(renderer, elem, 'chk', isChecked ? '' : null);
   }
-  private settingClassAndAttrByPosition(positionStr: string, isAdd: boolean, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+  private settingByPosition(isAdd: boolean, positionStr: string | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     if (positionStr) {
       HtmlElemUtil.setClass(renderer, elem, 'glnsw-' + positionStr, isAdd);
       HtmlElemUtil.setAttr(renderer, elem, 'pos-' + positionStr[0], isAdd ? '' : null);

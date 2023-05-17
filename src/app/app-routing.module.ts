@@ -37,6 +37,7 @@ const routes: Routes = [
       enableTracing: false,
       anchorScrolling: 'disabled',
       scrollPositionRestoration: 'disabled',
+      useHash: true,
     }),
     LmComponentsRouterMapModule,
     LmDirectivesRouterMapModule,

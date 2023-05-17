@@ -1,0 +1,443 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    API: GlnChip.
+    <a [href]="urlCmChip + '#Api'">#</a>
+  </h3>
+  <p>
+    Selector:
+    <span fw500>gln-chip</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>glnChip</span>
+  </p>
+</section>
+
+
+<section mr-vr
+  id="api-properties">
+  <h4 class="app-hover-link">
+    Properties.
+    <a [href]="urlCmChip + '#api-properties'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>id: string;</code>
+      </td>
+      <td>
+        <span>
+          ID of the native element.<br />
+          (default = `glnch-$&#123;uniqueIdCounter++&#125;`;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>config: GlnChipConfig<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Defines a configuration object.</span><br />
+        <a [href]="urlCmChip + '#config-interface'">More details.</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>exterior: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Determines the appearance of an element.<br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"outlined" (default);</li>
+          <li>"filled";</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isDisabled: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>The element is disabled.<br />
+          Attribute (no content).</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isElevation: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          This property adds the height effect of an element.<br />
+          Attribute (no content).</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isNoRipple: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Flag for disabling the ripple effect.<br />
+          Attribute (no content).
+        </span><br />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>label: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Defines a label within an element.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>size: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          This property determines the size of the element (its height).<br />
+          It takes the following values:
+        </span>
+        <ul>
+          <li>"short" - sets the height to 24px;</li>
+          <li>"little" - sets the height to 28px;</li>
+          <li>"small" - sets the height to 32px (default);</li>
+          <li>"middle" - sets the height to 36px;</li>
+          <li>"wide" - sets the height to 40px;</li>
+        </ul>
+        <span>
+          This property can contain the element's height in pixels, either as a string
+          or as a number.<br />
+          For example: <code>size="30" or [size]="30"</code>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="api-css-variables">
+  <h4 class="app-hover-link">
+    CSS variables at the component level.
+    <a [href]="urlCmChip + '#api-css-variables'">#</a>
+  </h4>
+</section>
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>--glnch--default-[h,s,l]:<br/>
+        var(--glncl-default-<br/>
+        [h,s,l]);</code>
+      </td>
+      <td>
+        <span>
+          This setting defines:
+        </span>
+        <ul>
+          <li>text color in ripple effect;</li>
+          <li>frame color (for "outlined" exterior);</li>
+          <li>background color when hovering the mouse;</li>
+        </ul>
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-default-[h,s,l]</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-default-[h,s,l]</code>.<br />
+          Parameters [h,s,l] defines the value of "hue", "saturation", "lightness".
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<section mr-vr
+  id="api-css-variables-option">
+  <h4>
+    Css variables, optional. You can override the default values.
+    <a [href]="urlCmChip + '#api-css-variables-option'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--glnch--br-rd: size / 2;</code></td>
+      <td>
+        <span>The value of the border radius.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnch--size: size;</code></td>
+      <td>
+        <span>Specifies the "height" value.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncl-basic-cl-[h,s,l]:<br />
+        &nbsp;undefined</code></td>
+      <td>
+        <span>Specifies the label color for the "filled" exterior.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncl-basic-bg-[h,s,l]:<br />
+        &nbsp;undefined</code></td>
+      <td>
+        <span>Specifies the background color for the "filled" exterior.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnch-pd-lf: size / 2;</code>
+      </td>
+      <td>
+        <span>
+          The value of the "padding-left" property for the label.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnch-pd-rg: size / 2;</code>
+      </td>
+      <td>
+        <span>
+          The value of the "padding-right" property for the label.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><em>Default values.</em></td>
+    </tr>
+    <tr>
+      <td>
+        <code>--glnch-def-lb-cl</code>
+      </td>
+      <td>
+        <span>Text color.</span><br />
+        <span>For exterior "outlined" value:</span><br />
+        <code>hsl(--glnch--default-[h,s,l])</code>
+        <span>For exterior "filled" value:</span><br />
+        <code>var(--glnch--basic-cl, hsl(--glnch--default-[h,s,l]))</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--glnch-def-br-cl:<br/>
+        hsla(--glnch--default-<br />
+        [h,s,l],50%);</code>
+      </td>
+      <td>
+        <span>
+          Border color.<br />
+          The value is defined only for the "outlined" mode.
+        </span><br />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--glnch-def-bg-cl:<br/>
+          hsla(--glnch--default-<br />
+          [h,s,l],10%);</code>
+      </td>
+      <td>
+        <span>
+          Background color.<br />
+          The value is defined only for the "filled" mode.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><em>Values on mouseover.</em></td>
+    </tr>
+    <tr>
+      <td>
+        <code>--glnch-hov-lb-cl</code>
+      </td>
+      <td>
+        <span>Text color when hovering the mouse.</span><br />
+        <span>For exterior "outlined" value: </span>
+        <code ubr>hsl(--glnch--default-[h,s,l])</code><br />
+        <span>For exterior "filled" value: </span>
+        <code ubr>var(--glnch--basic-cl, hsl(--glnch--default-[h,s,l]))</code><br />
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnch-hov-br-cl:<br/>
+        hsla(--glnch--default-<br/>
+        [h,s,l],60%);</code>
+      </td>
+      <td>
+        <span>
+          Border color when hovering the mouse.<br />
+          The value is defined only for the "outlined" mode.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnch-hov-bg-cl</code>
+      </td>
+      <td>
+        <span>
+          Background color when hovering the mouse.
+        </span><br />
+        <span>For exterior "outlined" value: </span>
+        <code ubr>hsla(--glnch--default-[h,s,l],6%)</code><br />
+        <span>For exterior "filled" value: </span>
+        <code ubr>var(--glncl-basic-bg, hsla(--glnch--default-[h,s,l],18%))</code><br />
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><em>Values when focus is received.</em></td>
+    </tr>
+    <tr>
+      <td>
+        <code>--glnch-foc-lb-cl</code>
+      </td>
+      <td>
+        <span>Text color when it receives focus.</span><br />
+        <span>For exterior "outlined" value: </span>
+        <code ubr>hsl(--glnch--default-[h,s,l])</code><br />
+        <span>For exterior "filled" value: </span>
+        <code ubr>var(--glnch--basic-cl, hsl(--glnch--default-[h,s,l]))</code><br />
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnch-foc-br-cl:<br/>
+        hsla(--glnch--default-<br/>
+        [h,s,l],60%);</code>
+      </td>
+      <td>
+        <span>
+          Border color when it receives focus.<br />
+          The value is defined only for the "outlined" mode.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnch-foc-bg-cl</code>
+      </td>
+      <td>
+        <span>
+          Background color when it receives focus.<br />
+          The value is defined only for the "filled" mode.
+        </span><br />
+        <span>For exterior "filled" value: </span>
+        <code ubr>var(--glncl-basic-bg, hsla(--glnch--default-[h,s,l],10%))</code><br />
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><em>Values when status: "disabled".</em></td>
+    </tr>
+    <tr>
+      <td><code>--glnch-dis-lb-cl:<br/>
+        hsla(--glnch--default-<br/>
+        [h,s,l],55%);</code>
+      </td>
+      <td>
+        <span>Text color in disabled state.</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnch-dis-br-cl:<br/>
+        hsla(--glnch--default-<br/>
+        [h,s,l],35%);</code>
+      </td>
+      <td>
+        <span>
+          Border color in disabled state.<br />
+          The value is defined only for the "outlined" mode.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glnch-dis-bg-cl:<br/>
+        hsla(--glnch--default-<br/>
+        [h,s,l],11%);</code>
+      </td>
+      <td>
+        <span>
+          Background color in disabled state.<br />
+          The value is defined only for the "filled" mode.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><em>Values for the "ripple" effect.</em></td>
+    </tr>
+    <tr>
+      <td><code>--glnch-ripple-cl</code>
+      </td>
+      <td>
+        <span>
+          The color of the ripple effect.
+        </span><br />
+        <span>For exterior "outlined" value: </span>
+        <code ubr>hsla(--glnch--default-[h,s,l],15%))</code><br />
+        <span>For exterior "filled" value: </span>
+        <code ubr>hsla(--glnch--default-[h,s,l],24%))</code><br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />

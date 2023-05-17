@@ -1,0 +1,636 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Ornaments.
+    <a [href]="urlCmChip + '#Ornaments'">#</a>
+  </h3>
+  <p>
+    For the GlnChip component, it is possible to display an ornament
+    (picture or text).
+    <br />
+    To display the ornament on the left, you need to add a block with the
+    "gln-orn-lf" attribute inside the "gln-chip".
+    <br />
+    To display the ornament on the right, you need to add a block with the
+    "gln-orn-rg" attribute inside the "gln-chip".
+  </p>
+  <span>
+    Example:
+  </span>
+  <code><pre source="html">
+&lt;gln-chip&gt;
+  <i>&lt;div <strong>gln-orn-lf</strong>&gt;&lt;span&gt;left&lt;/span&gt;&lt;/div&gt;</i>
+  <i>&lt;div <strong>gln-orn-rg</strong>&gt;&lt;span&gt;right&lt;/span&gt;&lt;/div&gt;</i>
+&lt;/gln-chip&gt;</pre></code>
+  <p>
+    For blocks: <code><i>&lt;span&gt;left&lt;/span&gt;</i></code> and
+    <code><i>&lt;span&gt;right&lt;/span&gt;</i></code>
+    you need to specify the value of horizontal indents.
+  </p>
+</section>
+
+
+<section mr-vr
+  id="ornament-text">
+  <h4 class="app-hover-link">
+    Ornament - text.
+    <a [href]="urlCmChip + '#ornament-text'">#</a>
+  </h4>
+  <p>
+    The css class "chor-text" defines the horizontal padding.
+    <br />
+    The css class "chor-fn-sz" defines the font size as 13px.
+  </p>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-lf" + text.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="outlined"
+      label="Previous value (text)">
+      <div gln-orn-lf
+        class="chor-text">
+        <span>
+          &lt;
+        </span>
+      </div>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-rg" + text.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="filled"
+      label="Next value (text)">
+      <div gln-orn-rg
+        class="chor-text">
+        <span>
+          &gt;
+        </span>
+      </div>
+    </gln-chip>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-lf" + text.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chor-fn-sz"
+      exterior="outlined"
+      label="Previous value (text)"&gt;
+      &lt;div gln-orn-lf
+        class="chor-text"&gt;
+        &lt;span&gt;
+          &lt;
+        &lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-rg" + text.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chor-fn-sz"
+      exterior="filled"
+      label="Next value (text)"&gt;
+      &lt;div gln-orn-rg
+        class="chor-text"&gt;
+        &lt;span&gt;
+          &gt;
+        &lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-chip',
+  templateUrl: './chip.component.html',
+  styleUrls: ['./chip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ChipComponent &#123;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-chip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .chor-fn-sz &#123;
+    font-size: 13px;
+  &#125;
+  .chor-text &#123;
+    color: black;
+    font-weight: 600;
+    margin-right: 10px;
+    margin-left: 10px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="ornament-uncode">
+  <h4 class="app-hover-link">
+    Ornament - uncode.
+    <a [href]="urlCmChip + '#ornament-uncode'">#</a>
+  </h4>
+  <p>
+    A unicode character can be used as an ornament.
+    <br />
+    In this example, the css class "chor-uncode" defines the horizontal padding.
+    <br />
+    The css class "chor-fn-sz" defines the font size as 13px.
+  </p>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-lf" + uncode.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="outlined"
+      label="Previous value (uncode)">
+      <div gln-orn-lf
+        class="chor-uncode">
+        &#9668;
+      </div>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-rg" + uncode.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="filled"
+      label="Next value (uncode)">
+      <div gln-orn-rg
+        class="chor-uncode">
+        &#9658;
+      </div>
+    </gln-chip>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-lf" + uncode.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chor-fn-sz"
+      exterior="outlined"
+      label="Previous value (uncode)"&gt;
+      &lt;div gln-orn-lf
+        class="chor-uncode"&gt;
+        &#9668;
+      &lt;/div&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-rg" + uncode.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chor-fn-sz"
+      exterior="filled"
+      label="Next value (uncode)"&gt;
+      &lt;div gln-orn-rg
+        class="chor-uncode"&gt;
+        &#9658;
+      &lt;/div&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-chip',
+  templateUrl: './chip.component.html',
+  styleUrls: ['./chip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ChipComponent &#123;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-chip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .chor-fn-sz &#123;
+    font-size: 13px;
+  &#125;
+  .chor-uncode &#123;
+    color: black;
+    margin-right: 7px;
+    margin-left: 7px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="ornament-svg">
+  <h4 class="app-hover-link">
+    Ornament - svg.
+    <a [href]="urlCmChip + '#ornament-svg'">#</a>
+  </h4>
+  <p>
+    A svg images can be used as an ornament.
+    <br />
+    In this example, the "bo-svg" css class defines the horizontal padding
+    and dimensions.
+  </p>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-lf" + svg.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="outlined"
+      label="Previous value (svg)"
+      size="middle">
+      <svg gln-orn-lf
+        class="chor-svg">
+        <use
+          href="assets/icons/lib-components/cm-chip-ornaments/icon-circle-left.svg#arrow-circle-down"
+          height="24"
+          width="24"></use>
+      </svg>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-rg" + svg.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="filled"
+      label="Next value (svg)"
+      size="middle">
+      <svg gln-orn-rg
+        class="chor-svg">
+        <use
+          href="assets/icons/lib-components/cm-chip-ornaments/icon-circle-right.svg#arrow-circle-down"
+          height="24"
+          width="24"></use>
+      </svg>
+    </gln-chip>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-lf" + svg.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chor-fn-sz"
+      exterior="outlined"
+      label="Previous value (svg)"
+      size="middle"&gt;
+      &lt;svg gln-orn-lf
+        class="chor-svg"&gt;
+        &lt;use
+          href="assets/icons/lib-components/cm-chip-ornaments/icon-circle-left.svg#arrow-circle-down"
+          height="24"
+          width="24"&gt;&lt;/use&gt;
+      &lt;/svg&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-rg" + svg.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chor-fn-sz"
+      exterior="filled"
+      label="Next value (svg)"
+      size="middle"&gt;
+      &lt;svg gln-orn-rg
+        class="chor-svg"&gt;
+        &lt;use
+          href="assets/icons/lib-components/cm-chip-ornaments/icon-circle-right.svg#arrow-circle-down"
+          height="24"
+          width="24"&gt;&lt;/use&gt;
+      &lt;/svg&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-chip',
+  templateUrl: './chip.component.html',
+  styleUrls: ['./chip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ChipComponent &#123;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-chip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .chor-fn-sz &#123;
+    font-size: 13px;
+  &#125;
+  .chor-svg &#123;
+    fill: black;
+    height: 24px;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 24px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="ornament-button">
+  <h4 class="app-hover-link">
+    Ornament - button.
+    <a [href]="urlCmChip + '#ornament-button'">#</a>
+  </h4>
+  <p>
+    A "button" element can be used as an ornament.
+    <br />
+    When a "button" element is clicked, a message is written to the console.
+    <br />
+    If an event is being processed on the "ornament" and you do not want the ripple
+    effect to work, then you need to cancel the further propagation of this event
+    ($event.stopPropagation();).
+  </p>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-lf" + button.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="outlined"
+      label="Outlined orn-left (button)">
+      <button gln-orn-lf
+        title="delete"
+        class="chor-btn chor-btn-bg"
+        (click)="showMsg('Outlined orn-left (button)', $event)">
+        <span class="chor-label">&#x2715;</span>
+      </button>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Section: "gln-orn-rg" + button.</em></small>
+    </div>
+    <gln-chip class="chor-fn-sz"
+      exterior="filled"
+      label="Filled orn-right (button)">
+      <button gln-orn-rg
+        title="delete"
+        class="chor-btn"
+        (click)="showMsg('Filled orn-right (button)', $event)">
+        <i class="chor-del"></i>
+      </button>
+    </gln-chip>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-lf" + button.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chor-fn-sz"
+      exterior="outlined"
+      label="Outlined orn-left (button)"&gt;
+      &lt;button gln-orn-lf
+        title="delete"
+        class="chor-btn chor-btn-bg"
+        (click)="showMsg('Outlined orn-left (button)', $event)"&gt;
+        &lt;span class="chor-label"&gt;&#x2715;&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Section: "gln-orn-rg" + button.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chor-fn-sz"
+      exterior="filled"
+      label="Filled orn-right (button)"&gt;
+      &lt;button gln-orn-rg
+        title="delete"
+        class="chor-btn"
+        (click)="showMsg('Filled orn-right (button)', $event)"&gt;
+        &lt;i class="chor-del"&gt;&lt;/i&gt;
+      &lt;/button&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-chip',
+  templateUrl: './chip.component.html',
+  styleUrls: ['./chip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ChipComponent &#123;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-chip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .chor-fn-sz &#123;
+    font-size: 13px;
+  &#125;
+  .chor-btn &#123;
+    border-radius: 50%;
+    border-width: 0;
+    cursor: pointer;
+    height: 1.5em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    outline: none;
+    padding: 0px;
+    width: 1.5em;
+    &:not(.chor-btn-bg) &#123;
+      background-color: transparent;
+    &#125;
+  &#125;
+  .chor-btn-bg &#123;
+    background-color: #00000033;
+    &:hover &#123;
+      background-color: #00000053;
+    &#125;
+  &#125;
+  .chor-label &#123;
+    display: block;
+    font-weight: 600;
+  &#125;
+  .chor-del &#123;
+    background-color: currentColor;
+    display: inline-block;
+    height: inherit;
+    mask: url("data:image/svg+xml;charset=utf8,"
+      + "&lt;svg xmlns='http://www.w3.org/2000/svg' "
+      + " viewBox='0 0 24 24'&gt;"
+      + "&lt;path d='M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-"
+      + "10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 "
+      + "10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z'&gt;"
+      + "&lt;/path&gt;"
+      + "&lt;/svg&gt;");
+    width: inherit;
+    color: #0000005c;
+    &:hover &#123;
+      color: #00000080;
+    &#125;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

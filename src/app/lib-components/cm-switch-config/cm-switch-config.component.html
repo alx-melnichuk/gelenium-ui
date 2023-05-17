@@ -48,80 +48,82 @@ export class AppComponent &#123;
 </section>
 
 <table class="app-tab">
-  <tr>
-    <th class="app-mn-wd-22ch">Name</th>
-    <th>Description</th>
-  </tr>
-
-  <tr>
-    <td><code>isChecked?: boolean | undefined;</code></td>
-    <td>
-      <span>
-        This property only sets the initial value of the element.
-        If an empty attribute is specified, then the initial value will be true.
-        <br />(default = false;)
-      </span><br />
-      <span>(optional)</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isNoAnimation?: boolean | undefined;</code></td>
-    <td>
-      <span>
-        Disable animation execution. (default = false;)
-      </span><br />
-      <span>(optional)</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isNoRipple?: boolean | undefined;</code></td>
-    <td>
-      <span>
-        This property to turn off the ripple effect.
-        <br />(default = false;)
-      </span><br />
-      <span>(optional)</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isReadOnly?: boolean | undefined;</code></td>
-    <td>
-      <span>
-        This property makes the element read-only.
-        <br />(default = false;)
-      </span><br />
-      <span>(optional)</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isRequired?: boolean | undefined;</code></td>
-    <td>
-      <span>
-        This property adds a condition: required field.
-        <br />(default = false;)
-      </span><br />
-      <span>(optional)</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>position?: string | undefined;</code></td>
-    <td>
-      <span>
-        This property defines the position of the label relative to
-        the element.
-        <br />(default = end;)
-      </span><br />
-      <span>(optional)</span>
-      <span>Possible values:</span>
-      <ul>
-        <li>"top" - the label is on the top;</li>
-        <li>"bottom" - the label is on the bottom;</li>
-        <li>"start" - the label is on the right;</li>
-        <li>"end" - the label is on the left;</li>
-      </ul>
-    </td>
-  </tr>
-
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>isChecked?: boolean | undefined;</code></td>
+      <td>
+        <span>
+          This property only sets the initial value of the element.
+          If an empty attribute is specified, then the initial value will be true.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isNoAnimation?: boolean | undefined;</code></td>
+      <td>
+        <span>
+          Disable animation execution. (default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isNoRipple?: boolean | undefined;</code></td>
+      <td>
+        <span>
+          This property to turn off the ripple effect.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isReadOnly?: boolean | undefined;</code></td>
+      <td>
+        <span>
+          This property makes the element read-only.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isRequired?: boolean | undefined;</code></td>
+      <td>
+        <span>
+          This property adds a condition: required field.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>position?: string | undefined;</code></td>
+      <td>
+        <span>
+          This property defines the position of the label relative to
+          the element.
+          <br />(default = end;)
+        </span><br />
+        <span>(optional)</span>
+        <span>Possible values:</span>
+        <ul>
+          <li>"top" - the label is on the top;</li>
+          <li>"bottom" - the label is on the bottom;</li>
+          <li>"start" - the label is on the right;</li>
+          <li>"end" - the label is on the left;</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 
@@ -152,7 +154,7 @@ const glnSwitchConfigDefault: GlnSwitchConfig = &#123;
     <a [href]="urlCmSwitch + '#config-params'">#</a>
   </h4>
   <p>
-    Suppose we have a provider in our application with "GlnurlCmSwitchConfig" and all
+    Suppose we have a provider in our application with "GlnSwitchConfig" and all
     input elements accept its default values.
     We can change these values for an individual element.
     To do this, you need to specify in this element those properties that do not match the
@@ -181,7 +183,6 @@ const glnSwitchConfigDefault: GlnSwitchConfig = &#123;
       Values from input parameters (if there is one).
     </li>
   </ul>
-
 </section>
 
 <form [formGroup]="formGroup06"
@@ -196,7 +197,8 @@ const glnSwitchConfigDefault: GlnSwitchConfig = &#123;
           <em>1. Config: isNoRipple="true", position="start".</em>
         </small>
       </div>
-      <gln-switch formControlName="model06a">parameter label 1
+      <gln-switch class="scf-fn-sz"
+        formControlName="model06a">parameter label 1
       </gln-switch>
     </div>
 
@@ -206,7 +208,8 @@ const glnSwitchConfigDefault: GlnSwitchConfig = &#123;
           <em>2. Parameters: isNoRipple="false", position="end".</em>
         </small>
       </div>
-      <gln-switch formControlName="model06b"
+      <gln-switch class="scf-fn-sz"
+        formControlName="model06b"
         isNoRipple="false"
         position="end">parameter label 2
       </gln-switch>
@@ -238,7 +241,8 @@ const glnSwitchConfigDefault: GlnSwitchConfig = &#123;
           &lt;em&gt;1. Config: isNoRipple="true", position="start".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-switch formControlName="model06a"&gt;parameter label 1
+      &lt;gln-switch class="scf-fn-sz"
+        formControlName="model06a"&gt;parameter label 1
       &lt;/gln-switch&gt;
     &lt;/div&gt;
 
@@ -248,7 +252,8 @@ const glnSwitchConfigDefault: GlnSwitchConfig = &#123;
           &lt;em&gt;2. Parameters: isNoRipple="false", position="end".&lt;/em&gt;
         &lt;/small&gt;
       &lt;/div&gt;
-      &lt;gln-switch formControlName="model06b"
+      &lt;gln-switch class="scf-fn-sz"
+        formControlName="model06b"
         isNoRipple="false"
         position="end"&gt;parameter label 2
       &lt;/gln-switch&gt;
@@ -302,6 +307,9 @@ app-switch &#123;
   .app-elem &#123;
     min-width: 26ch;
     margin: 10px 10px;
+  &#125;
+  .scf-fn-sz &#123;
+    font-size: 13px;
   &#125;
 &#125;</pre></code>
         </mat-tab>

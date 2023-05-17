@@ -43,96 +43,99 @@ export class AppComponent &#123;
 </section>
 
 <table class="app-tab">
-  <tr>
-    <th class="app-mn-wd-22ch">Name</th>
-    <th>Description</th>
-  </tr>
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="2">
+        The list of properties that are inherited from "GlnFrameConfig" can be viewed
+        at the <a [href]="urlCmFrame + '#config-interface'">"GlnFrame#config-interface" link</a>.
+      </td>
+    </tr>
 
-  <tr>
-    <td colspan="2">
-      The list of properties that are inherited from "GlnFrameConfig" can be viewed
-      at the <a [href]="urlCmFrame + '#config-interface'">"GlnFrame#config-interface" link</a>.
-    </td>
-  </tr>
-
-  <tr>
-    <td><code>isError?: boolean;</code></td>
-    <td>
-      <span>
-        Indicates that the element is in an error state.
-        <br />(default = false;)
-      </span><br />
-      <span>(optional)</span>
-    </td>
-  </tr>
-  <tr>
-    <td><code>isReadOnly?: boolean;</code></td>
-    <td>
-      <span>
-        Indicates that the element is read-only.
-        <br />(default = false;)
-      </span><br />
-      <span>(optional)</span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>ornamLfAlign?: string;<br/>
-      //&nbsp;GlnFrameOrnamAlignType
-      </code>
-    </td>
-    <td>
-      <span>
-        This property controls the vertical alignment for the left ornament.
-        <br />(default = 'default';)
-        It can take the following values:
-      </span>
-      <ul>
-        <li>"default" - defines the default</li>
-        <li>"center" - defines middle alignment</li>
-        <li>"flexStart" - defines top alignment</li>
-        <li>"flexEnd" - defines bottom alignment</li>
-        <li>"baseline" - defines baseline alignment</li>
-        <li>"stretch" - stretches across the entire height</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>ornamRgAlign?: string;<br/>
-      //&nbsp;GlnFrameOrnamAlignType
-      </code>
-    </td>
-    <td>
-      <span>
-        This property controls the vertical alignment of the right ornament.
-        <br />(default = 'default';)
-        It can take the following values:
-      </span>
-      <ul>
-        <li>"default" - defines the default</li>
-        <li>"center" - defines middle alignment</li>
-        <li>"flexStart" - defines top alignment</li>
-        <li>"flexEnd" - defines bottom alignment</li>
-        <li>"baseline" - defines baseline alignment</li>
-        <li>"stretch" - stretches across the entire height</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>isPlaceholder?: boolean;</code>
-    </td>
-    <td>
-      <span>
-        Specifies that the value of the "label" field be displayed
-        as the "placeholder" attribute for the "textarea" element.
-        <br />(default = false;)
-      </span>
-      <span>(optional)</span>
-    </td>
-  </tr>
-
+    <tr>
+      <td><code>isError?: boolean<br/>
+      &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Indicates that the element is in an error state.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isReadOnly?: boolean<br/>
+      &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Indicates that the element is read-only.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>ornamLfAlign?: string<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          This property controls the vertical alignment for the left ornament.
+          <br />(default = 'default';)
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"default" - defines the default</li>
+          <li>"center" - defines middle alignment</li>
+          <li>"flexStart" - defines top alignment</li>
+          <li>"flexEnd" - defines bottom alignment</li>
+          <li>"baseline" - defines baseline alignment</li>
+          <li>"stretch" - stretches across the entire height</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>ornamRgAlign?: string<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          This property controls the vertical alignment of the right ornament.
+          <br />(default = 'default';)
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"default" - defines the default</li>
+          <li>"center" - defines middle alignment</li>
+          <li>"flexStart" - defines top alignment</li>
+          <li>"flexEnd" - defines bottom alignment</li>
+          <li>"baseline" - defines baseline alignment</li>
+          <li>"stretch" - stretches across the entire height</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>isPlaceholder?: boolean<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies that the value of the "label" field be displayed
+          as the "placeholder" attribute for the "textarea" element.
+          <br />(default = false;)
+        </span>
+        <span>(optional)</span>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 

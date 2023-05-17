@@ -40,28 +40,29 @@ import {
 } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { GlnOrnament, ORNAMENT_ALIGN } from '../directives/gln-ornament/gln-ornament.interface';
+import { CSS_ATTR_ORN_LF, CSS_PROP_ORN_PD_LF, GlnOrnamentLeftDirective } from '../directives/gln-ornament/gln-ornament-left.directive';
 import { GlnOrnamentOwner, GLN_ORNAMENT_OWNER } from '../directives/gln-ornament/gln-ornament-owner.interface';
 import { GlnOrnamentOwnerUtil } from '../directives/gln-ornament/gln-ornament-owner.util';
-import { CSS_ATTR_ORN_LF, CSS_PROP_ORN_PD_LF, GlnOrnamentLeftDirective } from '../directives/gln-ornament/gln-ornament-left.directive';
 import { CSS_ATTR_ORN_RG, CSS_PROP_ORN_PD_RG, GlnOrnamentRightDirective } from '../directives/gln-ornament/gln-ornament-right.directive';
+import { ORNAMENT_ALIGN } from '../directives/gln-ornament/gln-ornament.interface';
+import { GlnOrnamentUtil } from '../directives/gln-ornament/gln-ornament.util';
 import { GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
 import { GlnOptionParent, GLN_OPTION_PARENT } from '../gln-option/gln-option-parent.interface';
 import { GlnOptionComponent } from '../gln-option/gln-option.component';
+import { GlnOption } from '../gln-option/gln-option.interface';
 import { GlnOptionUtil } from '../gln-option/gln-option.util';
+import { GlnOptionsScroll, OptionsScrollKeys } from '../gln-option/gln-options-scroll.interface';
 import { ArrayUtil } from '../_utils/array.util';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
-import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
 import { GlnSelectConfig } from './gln-select-config.interface';
-import { GlnSelectionChange } from './gln-selection-change.interface';
 import { GlnSelectOpenUtil } from './gln-select-open.util';
-import { GlnSelectTriggerDirective, GLN_SELECT_TRIGGER } from './gln-select-trigger.directive';
-import { GlnOption } from '../gln-option/gln-option.interface';
-import { GlnOptionsScroll, OptionsScrollKeys } from '../gln-option/gln-options-scroll.interface';
+import { GLN_SELECT_TRIGGER, GlnSelectTriggerDirective } from './gln-select-trigger.directive';
+import { GLN_SELECT_SCROLL_STRATEGY } from './gln-select.providers';
+import { GlnSelectionChange } from './gln-selection-change.interface';
 
 export const GLN_SELECT_CONFIG = new InjectionToken<GlnSelectConfig>('GLN_SELECT_CONFIG');
 
@@ -145,12 +146,12 @@ export class GlnSelectComponent
   @Input()
   public minLength: number | null | undefined;
   @Input()
-  public ornamLfAlign: string | null | undefined; // OrnamAlignType
+  public ornamLfAlign: string | null | undefined; // 'default','center','flex-start','flex-end','baseline','stretch'
   @Input()
-  public ornamRgAlign: string | null | undefined; // OrnamAlignType
+  public ornamRgAlign: string | null | undefined; // 'default','center','flex-start','flex-end','baseline','stretch'
   @Input()
   /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
-  public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = '';
+  public classes: string | string[] | Set<string> | { [key: string]: unknown } = '';
   @Input()
   public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
   @Input()
@@ -245,8 +246,8 @@ export class GlnSelectComponent
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public ornamLfAlignVal: string | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: string | null = null; // Binding attribute "ornamRgAlign".
-  public overlayPanelClass: string | string[] = '';
-  public panelClassVal: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
+  public overlayClassesVal: string | string[] = '';
+  public classesVal: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "classes"
   public positionList: ConnectedPosition[] = [];
   public selectedOptions: GlnOption[] = [];
   /** A strategy for handling scrolling when the overlay panel is open. */
@@ -278,8 +279,8 @@ export class GlnSelectComponent
   ) {
     this.currConfig = this.rootConfig || {};
     this.scrollStrategy = this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : this.overlay.scrollStrategies.block();
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-select', true);
-    HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-control', true);
+    this.renderer.addClass(this.hostRef.nativeElement, 'gln-select');
+    this.renderer.addClass(this.hostRef.nativeElement, 'gln-control');
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -327,19 +328,20 @@ export class GlnSelectComponent
     if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlign == null && this.currConfig.ornamLfAlign != null)) {
       this.ornamLfAlignVal = ORNAMENT_ALIGN[this.ornamLfAlign || this.currConfig.ornamLfAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
-      this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, this.getElements(this.ornamLeftList));
+      this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, GlnOrnamentUtil.getElements(this.ornamLeftList));
     }
     if (changes['ornamRgAlign'] || (changes['config'] && this.ornamRgAlign == null && this.currConfig.ornamRgAlign != null)) {
       this.ornamRgAlignVal = ORNAMENT_ALIGN[this.ornamRgAlign || this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
       const rhombRef: ElementRef<HTMLElement> | undefined = this.ornamRhomb?.hostRef;
-      this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList, rhombRef));
+      const ornamRgAlign: string = this.ornamRgAlignVal || '';
+      this.settingOrnamentList(CSS_ATTR_ORN_RG, ornamRgAlign, this.renderer, GlnOrnamentUtil.getElements(this.ornamRightList, rhombRef));
     }
-    if (changes['config'] && this.currConfig.overlayPanelClass != null) {
-      this.overlayPanelClass = this.currConfig.overlayPanelClass;
+    if (changes['config'] && this.currConfig.overlayClasses != null) {
+      this.overlayClassesVal = this.currConfig.overlayClasses;
     }
-    if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
-      this.panelClassVal = this.panelClass || this.currConfig.panelClass;
+    if (changes['classes'] || (changes['config'] && this.classes == null && this.currConfig.classes != null)) {
+      this.classesVal = this.classes || this.currConfig.classes;
     }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       this.positionList = this.getPositionList(this.position || this.currConfig.position);
@@ -353,8 +355,8 @@ export class GlnSelectComponent
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
-    const fontSize = HtmlElemUtil.propertyAsNumber(this.hostRef, 'font-size');
-    const lineHeight = HtmlElemUtil.propertyAsNumber(this.hostRef, 'line-height');
+    const fontSize: number = HtmlElemUtil.propertyAsNumber(this.hostRef, 'font-size');
+    const lineHeight: number = HtmlElemUtil.propertyAsNumber(this.hostRef, 'line-height');
     this.optionHeight = GlnOptionUtil.getHeightOption(fontSize, lineHeight);
 
     if (this.backdropClassVal == null) {
@@ -402,11 +404,11 @@ export class GlnSelectComponent
       this.ornamRgAlignVal = ORNAMENT_ALIGN[this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
     }
-    if (this.currConfig.overlayPanelClass != null) {
-      this.overlayPanelClass = this.currConfig.overlayPanelClass;
+    if (this.currConfig.overlayClasses != null) {
+      this.overlayClassesVal = this.currConfig.overlayClasses;
     }
-    if (this.panelClassVal == null) {
-      this.panelClassVal = this.currConfig.panelClass;
+    if (this.classesVal == null) {
+      this.classesVal = this.currConfig.classes;
     }
     if (this.positionList.length === 0) {
       this.positionList = this.getPositionList(this.currConfig.position);
@@ -437,9 +439,10 @@ export class GlnSelectComponent
       // Add an attribute that disables animation on initialization.
       this.isAttrHideAnimation = true;
     }
-    this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, this.getElements(this.ornamLeftList));
+    this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, GlnOrnamentUtil.getElements(this.ornamLeftList));
     const rhombRef: ElementRef<HTMLElement> | undefined = this.ornamRhomb?.hostRef;
-    this.settingOrnamentList(CSS_ATTR_ORN_RG, this.ornamRgAlignVal || '', this.renderer, this.getElements(this.ornamRightList, rhombRef));
+    const ornamRgAlign: string = this.ornamRgAlignVal || '';
+    this.settingOrnamentList(CSS_ATTR_ORN_RG, ornamRgAlign, this.renderer, GlnOrnamentUtil.getElements(this.ornamRightList, rhombRef));
   }
 
   public ngAfterViewInit(): void {
@@ -522,8 +525,8 @@ export class GlnSelectComponent
 
   public changeOrnament(isRemove: boolean, elementRef: ElementRef<HTMLElement>, isRight: boolean): void {
     const ornamList: ElementRef<HTMLElement>[] = !isRight
-      ? this.getElements(this.ornamLeftList)
-      : this.getElements(this.ornamRightList, this.ornamRhomb?.hostRef);
+      ? GlnOrnamentUtil.getElements(this.ornamLeftList)
+      : GlnOrnamentUtil.getElements(this.ornamRightList, this.ornamRhomb?.hostRef);
     const ornamWidth: number | null = GlnOrnamentOwnerUtil.getWidthAllOrnaments(ornamList, isRemove, elementRef);
     const nameProperty: string = !isRight ? CSS_PROP_ORN_PD_LF : CSS_PROP_ORN_PD_RG;
     HtmlElemUtil.setProperty(this.frameComp.hostRef, nameProperty, ornamWidth?.toString().concat('px'));
@@ -818,10 +821,6 @@ export class GlnSelectComponent
   }
 
   // ** Private methods **
-
-  private getElements(queryList: QueryList<GlnOrnament> | null, elem?: ElementRef<HTMLElement> | undefined): ElementRef<HTMLElement>[] {
-    return (queryList?.toArray() || []).map((item: GlnOrnament) => item.hostRef).concat(elem != null ? [elem] : []);
-  }
 
   private settingCheckmark(checkmark: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-checkmark', !!checkmark);

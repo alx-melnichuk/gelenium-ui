@@ -1,0 +1,434 @@
+<section mr-vr
+  id="palette-mui">
+  <h4 class="app-hover-link">
+    Like a Material-UI.
+    <a [href]="urlPlRadio + '#palette-mui'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnRadioButton in style as "Material-UI".
+  </p>
+</section>
+
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabled07q=!isDisabled07q"
+      [checked]="isDisabled07q" /> Is disabled
+  </label>
+</section>
+
+
+<form [formGroup]="formGroup07q"
+  novalidate
+  autocomplete="off">
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-primary</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui primary"
+        formControlName="model07q"
+        name="model07q"
+        value="primary1"
+        size="small"
+        [isDisabled]="isDisabled07q">primary 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-primary</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui primary"
+        formControlName="model07q"
+        name="model07q"
+        value="primary2"
+        size="small"
+        [isDisabled]="isDisabled07q">primary 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-secondary</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui secondary"
+        formControlName="model07r"
+        name="model07r"
+        value="secondary1"
+        size="small"
+        [isDisabled]="isDisabled07q">secondary 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-secondary</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui secondary"
+        formControlName="model07r"
+        name="model07r"
+        value="secondary2"
+        size="small"
+        [isDisabled]="isDisabled07q">secondary 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-success</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui success"
+        formControlName="model07s"
+        name="model07s"
+        value="success1"
+        size="small"
+        [isDisabled]="isDisabled07q">success 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-success</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui success"
+        formControlName="model07s"
+        name="model07s"
+        value="success2"
+        size="small"
+        [isDisabled]="isDisabled07q">success 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-default</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui default"
+        formControlName="model07t"
+        name="model07t"
+        value="default1"
+        size="small"
+        [isDisabled]="isDisabled07q">default 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-default</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui default"
+        formControlName="model07t"
+        name="model07t"
+        value="default2"
+        size="small"
+        [isDisabled]="isDisabled07q">default 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+  <gln-radio-group class="app-group">
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-pink</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui-pink"
+        formControlName="model07u"
+        name="model07u"
+        value="pink1"
+        size="small"
+        [isDisabled]="isDisabled07q">pink 1
+      </gln-radio-button>
+    </div>
+
+    <div class="app-elem rbpl3-elem">
+      <div>
+        <small><em>color: MUI-pink</em></small>
+      </div>
+      <gln-radio-button class="rbpl3-mui-pink"
+        formControlName="model07u"
+        name="model07u"
+        value="pink2"
+        size="small"
+        [isDisabled]="isDisabled07q">pink 2
+      </gln-radio-button>
+    </div>
+
+  </gln-radio-group>
+
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup07q"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;gln-radio-group class="app-group"&gt;
+
+    &lt;div class="app-elem rbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: MUI-primary&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-radio-button class="rbpl3-mui primary"
+        formControlName="model07q"
+        name="model07q"
+        value="primary1"
+        size="small"
+        [isDisabled]="isDisabled07q"&gt;primary 1
+      &lt;/gln-radio-button&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem rbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: MUI-primary&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-radio-button class="rbpl3-mui primary"
+        formControlName="model07q"
+        name="model07q"
+        value="primary2"
+        size="small"
+        [isDisabled]="isDisabled07q"&gt;primary 2
+      &lt;/gln-radio-button&gt;
+    &lt;/div&gt;
+
+  &lt;/gln-radio-group&gt;
+
+  &lt;gln-radio-group class="app-group"&gt;
+
+    &lt;div class="app-elem rbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: MUI-secondary&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-radio-button class="rbpl3-mui secondary"
+        formControlName="model07r"
+        name="model07r"
+        value="secondary1"
+        size="small"
+        [isDisabled]="isDisabled07q"&gt;secondary 1
+      &lt;/gln-radio-button&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem rbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: MUI-secondary&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-radio-button class="rbpl3-mui secondary"
+        formControlName="model07r"
+        name="model07r"
+        value="secondary2"
+        size="small"
+        [isDisabled]="isDisabled07q"&gt;secondary 2
+      &lt;/gln-radio-button&gt;
+    &lt;/div&gt;
+
+  &lt;/gln-radio-group&gt;
+
+  &lt;gln-radio-group class="app-group"&gt;
+
+    &lt;div class="app-elem rbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: MUI-success&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-radio-button class="rbpl3-mui success"
+        formControlName="model07s"
+        name="model07s"
+        value="success1"
+        size="small"
+        [isDisabled]="isDisabled07q"&gt;success 1
+      &lt;/gln-radio-button&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem rbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: MUI-success&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-radio-button class="rbpl3-mui success"
+        formControlName="model07s"
+        name="model07s"
+        value="success2"
+        size="small"
+        [isDisabled]="isDisabled07q"&gt;success 2
+      &lt;/gln-radio-button&gt;
+    &lt;/div&gt;
+
+  &lt;/gln-radio-group&gt;
+
+  &lt;gln-radio-group class="app-group"&gt;
+
+    &lt;div class="app-elem rbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: MUI-default&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-radio-button class="rbpl3-mui default"
+        formControlName="model07t"
+        name="model07t"
+        value="default1"
+        size="small"
+        [isDisabled]="isDisabled07q"&gt;default 1
+      &lt;/gln-radio-button&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem rbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: MUI-default&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-radio-button class="rbpl3-mui default"
+        formControlName="model07t"
+        name="model07t"
+        value="default2"
+        size="small"
+        [isDisabled]="isDisabled07q"&gt;default 2
+      &lt;/gln-radio-button&gt;
+    &lt;/div&gt;
+
+  &lt;/gln-radio-group&gt;
+
+  &lt;gln-radio-group class="app-group"&gt;
+
+    &lt;div class="app-elem rbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: MUI-pink&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-radio-button class="rbpl3-mui-pink"
+        formControlName="model07u"
+        name="model07u"
+        value="pink1"
+        size="small"
+        [isDisabled]="isDisabled07q"&gt;pink 1
+      &lt;/gln-radio-button&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem rbpl3-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;color: MUI-pink&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-radio-button class="rbpl3-mui-pink"
+        formControlName="model07u"
+        name="model07u"
+        value="pink2"
+        size="small"
+        [isDisabled]="isDisabled07q"&gt;pink 2
+      &lt;/gln-radio-button&gt;
+    &lt;/div&gt;
+
+  &lt;/gln-radio-group&gt;
+
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+selector: 'app-radio-button',
+templateUrl: './radio-button.component.html',
+styleUrls: ['./radio-button.component.scss'],
+encapsulation: ViewEncapsulation.None,
+&#125;)
+export class RadioButtonComponent &#123;
+public isDisabled07q = false;
+public formGroup07q: FormGroup = new FormGroup(&#123;
+  model07q: new FormControl('primary1', []),
+  model07r: new FormControl('secondary1', []),
+  model07s: new FormControl('success1', []),
+  model07t: new FormControl('default1', []),
+  model07u: new FormControl('pink1', []),
+&#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+.app-group &#123;
+  display: flex;
+  flex-wrap: wrap;
+&#125;
+.app-elem &#123;
+  min-width: 26ch;
+  margin: 10px 10px;
+&#125;
+.rbpl3-elem &#123;
+  min-width: 17ch;
+&#125;
+.rbpl3-mui &#123;
+  --glnrb-def-cl-svg: rgba(0, 0, 0, 0.6);
+  --glnrb-def-lbl: rgba(0, 0, 0, 0.6);
+  --glnrb-dis-cl-svg: rgba(0, 0, 0, 0.26);
+  --glnrb-dis-lbl: rgba(0, 0, 0, 0.38);
+
+  &.primary &#123;
+    --glncl-primary-h: 210;
+    --glncl-primary-s: 79%;
+    --glncl-primary-l: 46%;
+  &#125;
+  &.secondary &#123;
+    --glncl-primary-h: 291;
+    --glncl-primary-s: 64%;
+    --glncl-primary-l: 42%;
+  &#125;
+  &.success &#123;
+    --glncl-primary-h: 123;
+    --glncl-primary-s: 46%;
+    --glncl-primary-l: 34%;
+  &#125;
+  &.default &#123;
+    --glncl-primary-h: 0;
+    --glncl-primary-s: 0%;
+    --glncl-primary-l: 0%;
+    --glnrb-def-cl-svg: rgba(0, 0, 0, 0.6);
+    --glnrb-def-chk-cl-svg: rgba(0, 0, 0, 0.6);
+    --glnrb-dis-cl-svg: rgba(0, 0, 0, 0.26);
+    --glnrb-dis-chk-cl-svg: rgba(0, 0, 0, 0.26);
+  &#125;
+&#125;
+.rbpl3-mui-pink &#123;
+  --glnrb-def-lbl: rgba(0, 0, 0, 0.6);
+  --glnrb-dis-lbl: rgba(0, 0, 0, 0.38);
+
+  --glncl-primary-h: 338;
+  --glncl-primary-s: 78%;
+  --glncl-primary-l: 48%;
+
+  --glncl-default-h: 338;
+  --glncl-default-s: 78%;
+  --glncl-default-l: 48%;
+&#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

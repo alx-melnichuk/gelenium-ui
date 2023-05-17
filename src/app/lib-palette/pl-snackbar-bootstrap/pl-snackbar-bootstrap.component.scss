@@ -1,0 +1,56 @@
+/*# sourceURL=pl-snackbar-bootstrap.component.scss */
+
+app-pl-snackbar-bootstrap {
+  display: block;
+
+  .snpl2-elem {
+    max-width: 40ch;
+  }
+}
+
+gln-snackbar.snpl2-bs-snackbar {
+  cursor: pointer;
+}
+.snpl2-bs-overlay {
+  --glnsbc-mr-mini: 0.75rem;
+  --glnsbc-mr: 1.5rem;
+  z-index: 1090;
+}
+.snpl2-bs-snackbar {
+  --glnsb-brd-wd: 1px;
+  --glnsb-brd-cl: rgba(0, 0, 0, 0.175);
+  --glnsb-brd-rds: 0.375rem;
+  --glnsb-bx-shd: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --glnsb-mn-hg: 45px;
+  --glnsb-mn-wd: 350px;
+  --glnsb-font-size: 0.875rem;
+  font-weight: 400;
+}
+.snpl2-bs-standard {
+  --glnsb-bg-color: #ffffffd9;
+  --glnsb-color: #212529;
+}
+.snpl2-bs-primary {
+  --glnsb-bg-color: #0d6efd;
+  --glnsb-color: #fafafa;
+}
+.snpl2-bs-secondary {
+  --glnsb-bg-color: #5c636a;
+  --glnsb-color: #fafafa;
+}
+.snpl2-bs-success {
+  --glnsb-bg-color: #198754;
+  --glnsb-color: #fafafa;
+}
+.snpl2-bs-danger {
+  --glnsb-bg-color: #dc3545;
+  --glnsb-color: #fafafa;
+}
+.snpl2-bs-warning {
+  --glnsb-bg-color: #ffc107;
+  --glnsb-color: #000;
+}
+.snpl2-bs-info {
+  --glnsb-bg-color: #0dcaf0;
+  --glnsb-color: #000;
+}

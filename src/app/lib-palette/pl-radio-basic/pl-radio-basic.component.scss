@@ -1,0 +1,17 @@
+/*# sourceURL=pl-radio-basic.component.scss */
+
+app-pl-radio-basic {
+  display: block;
+
+  .rbpl1-elem {
+    min-width: 17ch;
+  }
+  .rbpl1-customer {
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
+
+    --glnrb-dis-cl-svg: hsla(var(--gln-customer-h), var(--gln-customer-s), var(--gln-customer-l), 0.3);
+    --glnrb-dis-chk-cl-svg: hsla(var(--gln-customer-h), var(--gln-customer-s), var(--gln-customer-l), 0.3);
+  }
+}

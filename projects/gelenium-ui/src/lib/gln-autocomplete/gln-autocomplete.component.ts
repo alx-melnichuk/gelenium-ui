@@ -83,7 +83,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public isOpenOnFocus: string | boolean | null | undefined;
   @Input()
   /** Classes to be passed to the options panel. Supports the same syntax as `ngClass`. */
-  public panelClass: string | string[] | Set<string> | { [key: string]: unknown } = '';
+  public classes: string | string[] | Set<string> | { [key: string]: unknown } = '';
   @Input()
   public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
   @Input()
@@ -121,7 +121,7 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public openOnFocus: boolean | null = null; // Binding attribute "isOpenOnFocus". // interface GlnAutocomplete
   public optionHeight: number = 0;
-  public panelClassVal: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "panelClass"
+  public classesVal: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "classes"
   public positionVal: string | null = null; // Binding attribute "position" ('start'|'center'|'end').
   public visibleSizeVal: number | null = null; // Binding attribute "visibleSize".
 
@@ -180,8 +180,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     if (changes['isOpenOnFocus'] || (changes['config'] && this.isOpenOnFocus == null && this.currConfig.isOpenOnFocus != null)) {
       this.openOnFocus = BooleanUtil.init(this.isOpenOnFocus) ?? !!this.currConfig.isOpenOnFocus;
     }
-    if (changes['panelClass'] || (changes['config'] && this.panelClass == null && this.currConfig.panelClass != null)) {
-      this.panelClassVal = this.panelClass || this.currConfig.panelClass;
+    if (changes['classes'] || (changes['config'] && this.classes == null && this.currConfig.classes != null)) {
+      this.classesVal = this.classes || this.currConfig.classes;
     }
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       this.positionVal = AUTOCOMPLETE_POSITION[this.position || this.currConfig.position || ''] || AUTOCOMPLETE_POSITION['start'];
@@ -197,8 +197,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
-    const fontSize = HtmlElemUtil.propertyAsNumber(this.hostRef, 'font-size');
-    const lineHeight = HtmlElemUtil.propertyAsNumber(this.hostRef, 'line-height');
+    const fontSize: number = HtmlElemUtil.propertyAsNumber(this.hostRef, 'font-size');
+    const lineHeight: number = HtmlElemUtil.propertyAsNumber(this.hostRef, 'line-height');
     this.optionHeight = GlnOptionUtil.getHeightOption(fontSize, lineHeight);
 
     if (this.isClearOnEscape == null) {
@@ -224,8 +224,8 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
     if (this.isOpenOnFocus == null) {
       this.openOnFocus = !!this.currConfig.isOpenOnFocus;
     }
-    if (this.panelClassVal == null) {
-      this.panelClassVal = this.currConfig.panelClass;
+    if (this.classesVal == null) {
+      this.classesVal = this.currConfig.classes;
     }
     if (this.positionVal == null) {
       this.positionVal = AUTOCOMPLETE_POSITION[this.currConfig.position || ''] || AUTOCOMPLETE_POSITION['start'];

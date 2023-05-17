@@ -1,0 +1,589 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Palette.
+    <a [href]="urlCmChip + '#Palette'">#</a>
+  </h3>
+  <p>
+    The GlnChip component has the ability to change its color.
+  </p>
+  <span>For example:</span>
+  <code><pre source="html">
+&lt;gln-chip
+  <i><strong>[glnColor]="&#123; default: 'primary' &#125;"</strong></i>
+  formControlName="model02a"&gt;
+  Label
+&lt;/gln-chip&gt;</pre></code>
+  <p>
+    This means that you want to use the system color "primary"
+    as the "default" color.
+  </p>
+  <span>
+    To use the glnColor directive, you need to add in your module:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnColorModule &#125; from 'gelenium-ui';</pre>
+  </code>
+</section>
+
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isElevation06a=!isElevation06a"
+      [checked]="isElevation06a" />
+    is Elevation
+  </label>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Primary".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="outlined"
+      label="Outlined - Primary"
+      [isElevation]="isElevation06a"
+      [glnColor]="{ default: 'primary' }">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Primary".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Primary"
+      [isElevation]="isElevation06a"
+      [glnColor]="{ default: 'primary' }">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Primary".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Primary"
+      [isElevation]="isElevation06a"
+      [glnColor]="{  'basic-cl': 'default-bg'
+        , 'basic-bg': 'primary' }">
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Danger".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="outlined"
+      label="Outlined - Danger"
+      [isElevation]="isElevation06a"
+      [glnColor]="{ default: 'danger' }">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Danger".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Danger"
+      [isElevation]="isElevation06a"
+      [glnColor]="{ default: 'danger' }">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Danger".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Danger"
+      [isElevation]="isElevation06a"
+      [glnColor]="{  'basic-cl': 'default-bg'
+        , 'basic-bg': 'danger' }">
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Success".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="outlined"
+      label="Outlined - Success"
+      [isElevation]="isElevation06a"
+      [glnColor]="{ 'default': 'success' }">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Success".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Success"
+      [isElevation]="isElevation06a"
+      [glnColor]="{ default: 'success' }">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Success".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Success"
+      [isElevation]="isElevation06a"
+      [glnColor]="{  'basic-cl': 'default-bg'
+        , 'basic-bg': 'success' }">
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Info".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="outlined"
+      label="Outlined - Info"
+      [isElevation]="isElevation06a"
+      [glnColor]="{ default: 'info' }">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Info".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Info"
+      [isElevation]="isElevation06a"
+      [glnColor]="{ 'basic-cl': 'default'
+        , default: 'info' }">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Info".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Info"
+      [isElevation]="isElevation06a"
+      [glnColor]="{  'basic-cl': 'default-bg'
+        , 'basic-bg': 'info' }">
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Warning".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="outlined"
+      label="Outlined - Warning"
+      [isElevation]="isElevation06a"
+      [glnColor]="{ default: 'warning' }">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Warning".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Warning"
+      [isElevation]="isElevation06a"
+      [glnColor]="{ 'basic-cl': 'default'
+        , default: 'warning' }">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Warning".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Warning"
+      [isElevation]="isElevation06a"
+      [glnColor]="{  'basic-cl': 'default-bg'
+        , 'basic-bg': 'warning' }">
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Customer".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz chpl-customer"
+      exterior="outlined"
+      label="Outlined - Customer"
+      [isElevation]="isElevation06a"
+      [glnColor]="{ default: 'customer' }">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Customer".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz chpl-customer"
+      exterior="filled"
+      label="Filled - Customer"
+      [isElevation]="isElevation06a"
+      [glnColor]="{ 'basic-cl': 'default'
+        , default: 'customer' }">
+    </gln-chip>
+  </div>
+
+  <div class="app-elem chpl-elem">
+    <div>
+      <small><em>color: "Customer".</em></small>
+    </div>
+    <gln-chip class="chpl-fn-sz chpl-customer"
+      exterior="filled"
+      label="Filled - Customer"
+      [isElevation]="isElevation06a"
+      [glnColor]="{  'basic-cl': 'default-bg'
+        , 'basic-bg': 'customer' }">
+    </gln-chip>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Primary".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="outlined"
+      label="Outlined - Primary"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123; default: 'primary' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Primary".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Primary"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123; default: 'primary' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Primary".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Primary"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123;  'basic-cl': 'default-bg'
+        , 'basic-bg': 'primary' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Danger".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="outlined"
+      label="Outlined - Danger"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123; default: 'danger' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Danger".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Danger"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123; default: 'danger' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Danger".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Danger"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123;  'basic-cl': 'default-bg'
+        , 'basic-bg': 'danger' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Success".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="outlined"
+      label="Outlined - Success"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123; 'default': 'success' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Success".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Success"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123; default: 'success' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Success".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Success"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123;  'basic-cl': 'default-bg'
+        , 'basic-bg': 'success' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Info".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="outlined"
+      label="Outlined - Info"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123; default: 'info' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Info".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Info"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123; 'basic-cl': 'default'
+        , default: 'info' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Info".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Info"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123;  'basic-cl': 'default-bg'
+        , 'basic-bg': 'info' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Warning".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="outlined"
+      label="Outlined - Warning"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123; default: 'warning' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Warning".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Warning"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123; 'basic-cl': 'default'
+        , default: 'warning' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Warning".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz"
+      exterior="filled"
+      label="Filled - Warning"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123;  'basic-cl': 'default-bg'
+        , 'basic-bg': 'warning' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Customer".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz chpl-customer"
+      exterior="outlined"
+      label="Outlined - Customer"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123; default: 'customer' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Customer".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz chpl-customer"
+      exterior="filled"
+      label="Filled - Customer"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123; 'basic-cl': 'default'
+        , default: 'customer' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem chpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: "Customer".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="chpl-fn-sz chpl-customer"
+      exterior="filled"
+      label="Filled - Customer"
+      [isElevation]="isElevation06a"
+      [glnColor]="&#123;  'basic-cl': 'default-bg'
+        , 'basic-bg': 'customer' &#125;"&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-chip',
+  templateUrl: './chip.component.html',
+  styleUrls: ['./chip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ChipComponent &#123;
+  public isElevation06a: boolean = false;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-chip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .chpl-elem &#123;
+    min-width: 20ch;
+  &#125;
+  .chpl-customer &#123;
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

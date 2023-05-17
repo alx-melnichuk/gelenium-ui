@@ -1,0 +1,19 @@
+/*# sourceURL=cm-snackbar-basic.component.scss */
+
+app-cm-snackbar-basic {
+  display: block;
+
+  .snbs1-mn-wd-12ch {
+    min-width: 12ch;
+  }
+
+  .snbs1-btn {
+    border-radius: 4px;
+    border-width: 0;
+    cursor: pointer;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 1.143em;
+  }
+}

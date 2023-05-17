@@ -1,0 +1,255 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Attributes.
+    <a [href]="urlCmChip + '#Attributes'">#</a>
+  </h3>
+  <span>The following attributes are supported:</span>
+  <ul>
+    <li>
+      "config" - Defines a configuration object.
+      <a [href]="urlCmChip + '#config-interface'">More details.</a>
+    </li>
+    <li>
+      "exterior" - Determines the appearance of an element.<br />
+      It can take the following values:
+      <ul>
+        <li>"outlined";</li>
+        <li>"filled";</li>
+      </ul>
+    </li>
+    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
+    <li>
+      "isElevation" - a sign displaying the height of the element (isElevation);
+    </li>
+    <li>"isNoRipple" - Disables the ripple effect.</li>
+  </ul>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isDisabled</em>
+      </small>
+    </div>
+    <gln-chip class="cha1-fn-sz-13"
+      exterior="outlined"
+      label="Outlined B"
+      isDisabled>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isDisabled</em>
+      </small>
+    </div>
+    <gln-chip class="cha1-fn-sz-13"
+      exterior="filled"
+      label="Filled B"
+      isDisabled>
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isElevation.</em>
+      </small>
+    </div>
+    <gln-chip class="cha1-fn-sz-13"
+      exterior="outlined"
+      label="Outlined C"
+      isElevation>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isElevation.</em>
+      </small>
+    </div>
+    <gln-chip class="cha1-fn-sz-13"
+      exterior="filled"
+      label="Filled C"
+      isElevation>
+    </gln-chip>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isNoRipple</em>
+      </small>
+    </div>
+    <gln-chip class="cha1-fn-sz-13"
+      exterior="outlined"
+      label="Outlined D"
+      isNoRipple>
+    </gln-chip>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Attribute: isNoRipple</em>
+      </small>
+    </div>
+    <gln-chip class="cha1-fn-sz-13"
+      exterior="filled"
+      label="Filled D"
+      isNoRipple>
+    </gln-chip>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: isDisabled&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="cha1-fn-sz-13"
+      exterior="outlined"
+      label="Outlined B"
+      isDisabled&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: isDisabled&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="cha1-fn-sz-13"
+      exterior="filled"
+      label="Filled B"
+      isDisabled&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: isElevation.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="cha1-fn-sz-13"
+      exterior="outlined"
+      label="Outlined C"
+      isElevation&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: isElevation.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="cha1-fn-sz-13"
+      exterior="filled"
+      label="Filled C"
+      isElevation&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: isNoRipple&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="cha1-fn-sz-13"
+      exterior="outlined"
+      label="Outlined D"
+      isNoRipple&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Attribute: isNoRipple&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-chip class="cha1-fn-sz-13"
+      exterior="filled"
+      label="Filled D"
+      isNoRipple&gt;
+    &lt;/gln-chip&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-chip',
+  templateUrl: './chip.component.html',
+  styleUrls: ['./chip.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ChipComponent &#123;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-chip &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cha1-fn-sz-13 &#123;
+    font-size: 13px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

@@ -1,8 +1,5 @@
 /*# sourceURL=gln-frame.component.scss */
 
-@import '../_styles/mx-align-items.scss';
-@import '../_styles/mx-display-inline-flex.scss';
-@import '../_styles/mx-flex-direction.scss';
 @import '../_styles/mx-transform-scale-x-y.scss';
 @import '../_styles/mx-transform-translate-x-y-scale-x-y.scss';
 @import '../_styles/mx-transform-scale-x-y-translate-x-y.scss';
@@ -95,9 +92,6 @@ gln-frame {
     text-size-adjust: 100%;
     top: 0;
     transform-origin: top left;
-    -webkit-transition: color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
-      , -webkit-transform var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
-      , max-width var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
       , transform var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms
       , max-width var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
@@ -222,7 +216,6 @@ gln-frame {
 
   // ** Section: Background-Color "div.glnfr-border" for "Underline" mode. **
   &>[dcr-bg] {
-    -webkit-transition: background-color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: background-color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     background-color: var(--glnfr--dcr-bg-cl);
   }
@@ -249,7 +242,6 @@ gln-frame {
       content: "\00a0";
       position: absolute;
       right: 0;
-      -webkit-transition: border-bottom-color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
       transition: border-bottom-color var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
       pointer-events: none;
     }
@@ -265,7 +257,6 @@ gln-frame {
       position: absolute;
       right: 0;
       @include mxTransform_ScaleXY(0, 1);
-      -webkit-transition: -webkit-transform var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
       transition: transform var(--glnfr-trn-drt-200, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
       pointer-events: none;
     }
@@ -366,7 +357,6 @@ gln-frame {
   &[shr], &:focus-within, &[foc], &[fil] {
     legend {
       max-width: 100%;
-      -webkit-transition: max-width var(--glnfr-trn-drt-100, 0ms) cubic-bezier(0.0, 0, 0.2, 1) var(--glnfr-trn-drt-50, 0ms);
       transition: max-width var(--glnfr-trn-drt-100, 0ms) cubic-bezier(0.0, 0, 0.2, 1) var(--glnfr-trn-drt-50, 0ms);
     }
     &[ind] legend {
@@ -375,7 +365,6 @@ gln-frame {
   }
   &:not([shr]):not([fil]):not(:focus-within):not([foc]) legend {
     max-width: 0.01px;
-    -webkit-transition: max-width var(--glnfr-trn-drt-50, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     transition: max-width var(--glnfr-trn-drt-50, 0ms) cubic-bezier(0.0, 0, 0.2, 1) 0ms;
   }
   

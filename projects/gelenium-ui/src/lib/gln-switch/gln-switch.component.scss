@@ -1,9 +1,6 @@
 /*# sourceURL=gln-switch.component.scss */
 
-@import '../_styles/mx-align-items.scss';
-@import '../_styles/mx-display-inline-flex.scss';
 @import '../_styles/mx-transform-translate-x-y.scss';
-@import '../_styles/mx-user-select.scss';
 
 gln-switch {
   --glnsw--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
@@ -18,13 +15,11 @@ gln-switch {
   --glnsw--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
   --glnsw--primary-l: var(--glncl-primary-s, var(--gln-primary-l));
 
-  @include mxAlignItems(center);
-  @include mxDisplayInlineFlex();
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
+  align-items: center;
+  display: inline-flex;
   flex-shrink: 0;
   outline: 0;
-  @include mxUserSelect(none);
+  user-select: none;
   &[pos-t] {
     flex-direction: column-reverse;
   }
@@ -68,7 +63,7 @@ gln-switch {
   }
 
   &:not([noani]):not([hdAnmInit]) {
-    --glnsw-trn-drt-150: 150ms;
+    --glnsw-trn-dur: 150ms; // transition-duration
   }
 
   &[rea] {
@@ -76,7 +71,7 @@ gln-switch {
   }
 
   div[glnsw-container] {
-    @include mxDisplayInlineFlex();
+    display: inline-flex;
     border-radius: var(--glnsw-container-brd-rds, 2em);
     cursor: pointer;
     flex-shrink: 0;
@@ -91,7 +86,7 @@ gln-switch {
     height: 1px;
     opacity: 0;
     position: absolute;
-    @include mxUserSelect(none);
+    user-select: none;
     width: 1px;
   }
 
@@ -107,9 +102,8 @@ gln-switch {
     padding: var(--glnsw-wrap-pd, var(--glnsw--wrap-pd, 0.75em));
     position: absolute;
     top: 0;
-    @include mxUserSelect(none);
-    -webkit-transition: left var(--glnsw-trn-drt-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms, -webkit-transform var(--glnsw-trn-drt-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    transition: left var(--glnsw-trn-drt-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform var(--glnsw-trn-drt-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    user-select: none;
+    transition: left var(--glnsw-trn-dur, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform var(--glnsw-trn-dur, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     z-index: 1;
   }
   
@@ -128,8 +122,7 @@ gln-switch {
     box-shadow: 0px 1px 3px 1px rgb(0 0 0 / 15%), 0px 0px 3px 1px rgb(0 0 0 / 15%);
     display: block;
     height: var(--glnsw-thumb-hg, 1.5em);
-    -webkit-transition: background-color var(--glnsw-trn-drt-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    transition: background-color var(--glnsw-trn-drt-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: background-color var(--glnsw-trn-dur, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     width: var(--glnsw-thumb-wd, 1.5em);
   }
 
@@ -140,16 +133,15 @@ gln-switch {
     border-radius: var(--glnsw-track-brd-rds, var(--glnsw--track-brd-rds, 32%/64%));
     height: var(--glnsw-track-hg, 1em);
     width: var(--glnsw-track-wd, 2.3em);
-    -webkit-transition: opacity var(--glnsw-trn-drt-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color var(--glnsw-trn-drt-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    transition: opacity var(--glnsw-trn-drt-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color var(--glnsw-trn-drt-150, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    @include mxUserSelect(none);
+    transition: opacity var(--glnsw-trn-dur, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color var(--glnsw-trn-dur, 0ms) cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    user-select: none;
     z-index: 0;
   }
 
   // ** Block: glnsw-label **
 
   label[glnsw-label] {
-    font-size: var(--glnsw-label-font-size, var(--glnsw--label-font-size));
+    font-size: var(--glnsw-label-fn-sz, var(--glnsw--label-fn-sz));
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

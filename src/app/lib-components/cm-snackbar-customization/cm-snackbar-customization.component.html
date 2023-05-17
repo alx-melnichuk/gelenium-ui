@@ -1,0 +1,213 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Customization
+    <a [href]="urlCmSnackbar + '#Customization'">#</a>
+  </h3>
+  <p>
+    You can specify your own context when displaying the snackbar.
+  </p>
+  <span> For example:</span>
+  <code><pre source="html">
+&lt;ng-template #<i><strong>contextTemplate1</strong></i> let-context="context" let-snackbarRef="snackbarRef"&gt;
+  &lt;div class="sccs-alert"&gt;
+    &lt;span&gt;
+      &lt;b&gt;<b>&#123;</b>&#123;context.name&#125;&#125;&lt;/b&gt; is a very &lt;em&gt;tasty&lt;/em&gt;&amp;nbsp;&lt;u&gt;fruit&lt;/u&gt; !
+    &lt;/span&gt;
+    &lt;div&gt;
+      &lt;button class="sccs-close" (click)="snackbarRef.close('close')"&gt;X&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/ng-template&gt;
+
+&lt;button class="sncs-btn"
+  tabindex="0"
+  type="button"
+  (click)="clickDemo(<i><strong>contextTemplate1</strong></i>, &#123; name: 'Mango' &#125;)"&gt;
+  &lt;span&gt; Action &lt;/span&gt;
+&lt;/button&gt;</pre></code>
+  <code><pre source="ts">
+import &#123; Component, ViewEncapsulation &#125; from '@angular/core';
+import &#123; GlnSnackbarService &#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-snackbar',
+  templateUrl: './snackbar.component.html',
+  styleUrls: ['./snackbar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SnackbarComponent &#123;
+
+  constructor(private snackbarService: GlnSnackbarService) &#123;&#125;
+
+  public clickDemo(template: TemplateRef&lt;any&gt;, context: Record&lt;string, any&gt;): void &#123;
+    this.snackbarService.openFromTemplate(template, &#123; data: context &#125;)
+    .result.then((response) => &#123;
+      console.log(`Template response=$&#123;response&#125;`);
+    &#125;);
+  &#125;
+&#125;</pre></code>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>Show snackbar HTML.</em>
+      </small>
+    </div>
+    <div>
+      <ng-template #snackbarTemplate
+        let-context="context"
+        let-snackbarRef="snackbarRef">
+        <div class="sccs-alert">
+          <span>
+            <b>{{context.name}}</b> is a very <em>tasty</em>&nbsp;<u>fruit</u> !
+          </span>
+          <div>
+            <button class="sccs-close"
+              (click)="snackbarRef.close('close')">X
+            </button>
+          </div>
+        </div>
+      </ng-template>
+      <button class="sncs-btn"
+        tabindex="0"
+        type="button"
+        (click)="clickTemplate(snackbarTemplate, { name: 'Mango' })">
+        <span>Open snackbar HTML</span>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;Show snackbar HTML.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;ng-template #snackbarTemplate
+        let-context="context"
+        let-snackbarRef="snackbarRef"&gt;
+        &lt;div class="sccs-alert"&gt;
+          &lt;span&gt;
+            &lt;b&gt;<b>&#123;</b>&#123;context.name&#125;&#125;&lt;/b&gt; is a very &lt;em&gt;tasty&lt;/em&gt;&nbsp;&lt;u&gt;fruit&lt;/u&gt; !
+          &lt;/span&gt;
+          &lt;div&gt;
+            &lt;button class="sccs-close"
+              (click)="snackbarRef.close('close')"&gt;X
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/ng-template&gt;
+      &lt;button class="sncs-btn"
+        tabindex="0"
+        type="button"
+        (click)="clickTemplate(snackbarTemplate, &#123; name: 'Mango' &#125;)"&gt;
+        &lt;span&gt;Open snackbar HTML&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GlnSnackbarService &#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-snackbar',
+  templateUrl: './snackbar.component.html',
+  styleUrls: ['./snackbar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SnackbarComponent &#123;
+
+  constructor(private snackbarService: GlnSnackbarService) &#123;&#125;
+
+  public clickTemplate(
+    template: TemplateRef&lt;any&gt;, context: Record&lt;string, unknown&gt; | null
+  ): void &#123;
+    this.snackbarService.openFromTemplate(template, &#123; data: context &#125;)
+    .result.then((response) => &#123;
+      console.log(`Template response=$&#123;response&#125;`);
+    &#125;);
+  &#125;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-snackbar &#123;
+  .sncs-btn &#123;
+    border-radius: 4px;
+    border-width: 0;
+    cursor: pointer;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 1.143em;
+  &#125;
+&#125;
+
+.gln-snackbar-panel &#123;
+  .sccs-alert &#123;
+    align-items: center;
+    background-color: aquamarine;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2)
+      , 0px 6px 10px 0px rgba(0,0,0,0.14)
+      , 0px 1px 18px 0px rgba(0,0,0,0.12);
+    color: black;
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    min-height: 48px;
+    min-width: 300px;
+    padding: 0px 16px;
+  &#125;
+  .sccs-close &#123;
+    align-items: center;
+    background-color: transparent;
+    border: 0;
+    border-radius: 50%;
+    box-sizing: border-box;
+    color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: inherit;
+    justify-content: center;
+    outline: 0;
+    outline: 1px solid black;
+    overflow: visible;
+    padding: 4px 6px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

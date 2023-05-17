@@ -1,7 +1,5 @@
 /*# sourceURL=gln-button.component.scss */
 
-@import '../_styles/mx-display-flex.scss';
-
 gln-button {
   --glnbt--default-h: var(--glncl-default-h, var(--gln-default-h));
   --glnbt--default-s: var(--glncl-default-s, var(--gln-default-s));
@@ -15,10 +13,10 @@ gln-button {
   --glnbt--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
   --glnbt--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
 
-  @include mxDisplayFlex();
-  height: max-content;
+  display: flex;
   font-weight: 500;
   font-size: 1em;
+  height: max-content;
   outline: none;
 
   &[wdFull] {
@@ -27,18 +25,16 @@ gln-button {
 
   &[ext-c] {
     --def-lb-pd-lf: 1em; // 16px
-    --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%, 0.3));
+    --glntr-ripple-cl: var(--glnbt-ripple-cl, hsla(var(--glnbt--default-bg-h), var(--glnbt--default-bg-s), 100%, 0.3));
   }
   &[ext-o] {
     --def-lb-pd-lf: 0.9375em; // 15px
-    --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
+    --glntr-ripple-cl: var(--glnbt-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
   }
   &[ext-t] {
     --def-lb-pd-lf: 0.5em; // 8px
-    --glntr--cl-ripple:  var(--glnbt-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
+    --glntr-ripple-cl: var(--glnbt-ripple-cl, hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), 46%, 0.3));
   }
-  // To pass the value to GlnTouchRipple.
-  --glntr-ripple-cl: var(--glntr--cl-ripple);
 
   &>[glnbt-clear] {
     appearance: none;
@@ -97,13 +93,13 @@ gln-button {
   // To block the display of a shadow for a button in the "Contained" mode, you must specify "--glnbt-elevation: none;".
   &[ext-c]:not([dis])>[glnbt-btn] {
     &:not(:hover):not(:active) {
-      box-shadow: var(--glnbt-elevation, 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%));
+      box-shadow: var(--glnbt-elevation, (0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%)));
     }
     &:hover {
-      box-shadow: var(--glnbt-elevation, 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%));
+      box-shadow: var(--glnbt-elevation, (0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%)));
     }
     &:active {
-      box-shadow: var(--glnbt-elevation, 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%));
+      box-shadow: var(--glnbt-elevation, (0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)));
     }
   }
   &[ext-c] {
@@ -130,7 +126,7 @@ gln-button {
     --glnbt--bg-cl-hov: hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l), 0.10);
 
     --glnbt--br-cl-dis: hsla(var(--glnbt--default-h), var(--glnbt--default-s), var(--glnbt--default-l), 0.25); // rgba(0, 0, 0, 0.12);
-    }
+  }
 
   // Exterior: "text"
   &[ext-t] {
@@ -138,7 +134,7 @@ gln-button {
 
     --glnbt--lb-cl-hov: hsl(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l));
     --glnbt--bg-cl-hov: hsla(var(--glnbt--primary-h), var(--glnbt--primary-s), var(--glnbt--primary-l), 0.10);
-    }
+  }
 
   // Definition of internal variables by element state.
   &:not([dis])>[glnbt-btn] {

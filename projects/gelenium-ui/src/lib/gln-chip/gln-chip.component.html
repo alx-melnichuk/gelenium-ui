@@ -1,0 +1,13 @@
+<ng-content select="[gln-orn-lf]"></ng-content>
+
+<ng-content select="[gln-orn-rg]"></ng-content>
+
+<span class="gln-chip-label"
+  glnch-label
+  glnch-pd-hor>
+  {{ label }}
+</span>
+
+<gln-touch-ripple *ngIf="!isDisabledVal && !isNoRippleVal"
+  skip-events>
+</gln-touch-ripple>

@@ -51,6 +51,62 @@
 </div>
 
 
+<div class="app-group">
+
+  <div class="app-elem btpl-elem">
+    <div>
+      <small><em>color: danger</em></small>
+    </div>
+    <gln-button [exterior]="exterior01a"
+      [glnColor]="{ primary: 'danger' }">
+      <span>{{ getLabel(exterior01a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem btpl-elem">
+    <div>
+      <small><em>color: success</em></small>
+    </div>
+    <gln-button [exterior]="exterior01a"
+      [glnColor]="{ primary: 'success' }">
+      <span>{{ getLabel(exterior01a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem btpl-elem">
+    <div>
+      <small><em>color: info</em></small>
+    </div>
+    <gln-button [exterior]="exterior01a"
+      [glnColor]="{ primary: 'info' }">
+      <span>{{ getLabel(exterior01a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem btpl-elem">
+    <div>
+      <small><em>color: warning</em></small>
+    </div>
+    <gln-button [exterior]="exterior01a"
+      [glnColor]="{ primary: 'warning' }">
+      <span>{{ getLabel(exterior01a) }}</span>
+    </gln-button>
+  </div>
+
+  <div class="app-elem btpl-elem btpl-customer">
+    <div>
+      <small><em>color: customer</em></small>
+    </div>
+    <gln-button [exterior]="exterior01a"
+      [glnColor]="{ primary: 'customer' }">
+      <span>{{ getLabel(exterior01a) }}</span>
+    </gln-button>
+  </div>
+
+</div>
+
+
+
 <section mr-vr>
   <mat-accordion>
     <mat-expansion-panel>
@@ -84,6 +140,61 @@
       &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior01a) &#125;&#125; Link&lt;/span&gt;
     &lt;/a&gt;
   &lt;/gln-button&gt;
+&lt;/div&gt;
+
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem btpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: danger&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior01a"
+      [glnColor]="&#123; primary: 'danger' &#125;"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior01a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem btpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: success&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior01a"
+      [glnColor]="&#123; primary: 'success' &#125;"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior01a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem btpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: info&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior01a"
+      [glnColor]="&#123; primary: 'info' &#125;"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior01a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem btpl-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: warning&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior01a"
+      [glnColor]="&#123; primary: 'warning' &#125;"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior01a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem btpl-elem btpl-customer"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: customer&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;gln-button [exterior]="exterior01a"
+      [glnColor]="&#123; primary: 'customer' &#125;"&gt;
+      &lt;span&gt;<b>&#123;</b>&#123; getLabel(exterior01a) &#125;&#125;&lt;/span&gt;
+    &lt;/gln-button&gt;
+  &lt;/div&gt;
+
 &lt;/div&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
@@ -123,6 +234,14 @@ app-button &#123;
   &#125;
   .bb-items &gt; :not(first-child) &#123;
     margin-left: 5%;
+  &#125;
+  .btpl-elem &#123;
+    min-width: 15ch;
+  &#125;
+  .btpl-customer &#123;
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
   &#125;
 &#125;</pre></code>
         </mat-tab>

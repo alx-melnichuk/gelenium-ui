@@ -30,6 +30,9 @@ export class CmSwitchSizeComponent {
     model03d: new FormControl(true, []),
     model03e: new FormControl(true, []),
     model03f: new FormControl(true, []),
+    model03g: new FormControl(true, []),
+    model03h: new FormControl(true, []),
+    model03i: new FormControl(true, []),
   });
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

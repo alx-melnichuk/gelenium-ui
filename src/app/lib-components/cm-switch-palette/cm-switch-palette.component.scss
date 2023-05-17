@@ -12,4 +12,7 @@ app-cm-switch-palette {
     --gln-customer-l: 50%;
     --gln-customer-cl: hsl(var(--gln-customer-h), var(--gln-customer-s), var(--gln-customer-l));
   }
+  .sp-fn-sz {
+    font-size: 13px;
+  }
 }

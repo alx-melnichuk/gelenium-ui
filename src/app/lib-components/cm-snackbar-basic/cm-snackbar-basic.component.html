@@ -1,0 +1,261 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmSnackbar + '#Basic'">#</a>
+  </h3>
+  <span>
+    To display notifications, you need to connect the "GlnSnackbarService" service.<br />
+    This service is described in the GlnSnackbarModule.<br />
+    If you need to specify a single notification display configuration for the entire application,
+    then you can call the setConfig(config: GlnSnackbarConfig) method of this service.<br />
+    It is recommended that you add the GlnSnackbarModule to your app's
+    <strong fw500>root module</strong> (<strong fw500>AppModule</strong>).<br />
+    This will allow a single configuration to be established before the rest of the modules are
+    loaded.
+  </span>
+  <span>
+    To use this service, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnSnackbarModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <span>
+    Notifications inform the user about some event:
+  </span>
+  <ul>
+    <li>start the data calculation process;</li>
+    <li>data saving was successful (or not);</li>
+    <li>file upload completed successfully (or not);</li>
+  </ul>
+  <span> For example:</span>
+  <code><pre source="html">
+&lt;button type="button" (click)="onClick()"&gt;
+  &lt;span&gt;Open notification&lt;/span&gt;
+&lt;/button&gt;
+</pre></code>
+  <code><pre source="ts">
+import &#123; <i><strong>GlnSnackbarModule</strong></i> &#125; from <i><strong>'gelenium-ui'</strong></i>;
+@Component(&#123; ... &#125;)
+export class NotificationComponent &#123;
+  constructor(private <strong>snackbarService: GlnSnackbarService</strong>) &#123;&#125;
+  public onClick(): void &#123;
+    this.<strong>snackbarService.open('text notification !');</strong>
+  &#125;
+&#125;</pre></code>
+  <br />
+  <span>
+    The "open" method of the <i>GlnSnackbarService</i> service has the following
+    parameters:
+  </span>
+  <ul>
+    <li>message: string; - notification text;</li>
+    <li>action?: string; - action button text (optional);</li>
+    <li>config?: <i>GlnSnackbarConfig</i>; - notification configuration (optional);</li>
+  </ul>
+  <p>
+    If the value "action" is specified, then an additional button (with this name)
+    will be displayed in the notification.
+  </p>
+  <span><i>GlnSnackbarConfig</i>&nbsp; basic configuration options:</span>
+  <table class="app-tab">
+    <thead>
+      <tr>
+        <th class="snbs1-mn-wd-12ch">Parameter</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <code>duration?: number<br/>
+            &nbsp;= 6000;</code>
+        </td>
+        <td>
+          Time to wait (in milliseconds) before automatically closing the snackbar.<br />
+          If set to 0, notifications will not automatically close.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>horizontal?: string<br/>
+            &nbsp;= 'center';</code>
+        </td>
+        <td>
+          Horizontal position to accommodate the snackbar.<br />
+          Takes values: 'left', 'center', 'right'.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>maxCount?: number<br/>
+            &nbsp;= 4;</code>
+        </td>
+        <td>
+          The maximum number of visible snackbar items in the current overlay.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>overlayClasses?: string<br/>
+            &nbsp;| string[];</code>
+        </td>
+        <td>
+          Additional CSS classes to add to the snackbar overlay panel.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>vertical?: string<br/>
+            &nbsp;= 'bottom';</code>
+        </td>
+        <td>
+          Vertical position to accommodate the snackbar.<br />
+          Takes values: 'top', 'center', 'bottom'.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>transition?: string<br/>
+            &nbsp;= 'grow';</code>
+        </td>
+        <td>
+          Type of transformation when displaying (hiding) the snackbar.<br />
+          Takes values: 'grow', 'fade', 'blur', 'slide', 'slide-dw', 'slide-lf',
+          'slide-rg','turn','turn-y';
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>wrapperClass?: string<br/>
+            &nbsp; | string[];</code>
+        </td>
+        <td>
+          Additional CSS classes to add on the wrapper to the snackbar.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+<section mr-vr
+  id="simple-snackbars">
+  <h4 class="app-hover-link">
+    Simple snackbars
+    <a [href]="urlCmSnackbar + '#simple-snackbars'">#</a>
+  </h4>
+  <p>
+    We can call the snackbarService.open() method to display snackbar.
+    <br />
+    It is possible to handle an event when the snackbar closes.
+  </p>
+  <span> For example:</span>
+  <code><pre source="html">
+&lt;button type="button" (click)="onClick()"&gt;
+  &lt;span&gt;Open notification&lt;/span&gt;
+&lt;/button&gt;
+</pre></code>
+  <code><pre source="ts">
+import &#123; <i><strong>GlnSnackbarModule</strong></i> &#125; from <i><strong>'gelenium-ui'</strong></i>;
+@Component(&#123; ... &#125;)
+export class NotificationComponent &#123;
+  constructor(private <strong>snackbarService: GlnSnackbarService</strong>) &#123;&#125;
+  public onClick(): void &#123;
+    this.<strong>snackbarService.open('text notification !')</strong>.result
+    .then((response) => &#123;
+      console.log(`response=$&#123;response&#125;`);
+    &#125;);
+  &#125;
+&#125;</pre></code>
+  <br />
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <button class="snbs1-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickSimple()">
+      <span>Open simple notification</span>
+    </button>
+  </div>
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;button class="snbs1-btn"
+      tabindex="0"
+      type="button"
+      (click)="clickSimple()"&gt;
+      &lt;span&gt;Open simple notification&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123; GlnSnackbarService &#125; from 'gelenium-ui';
+
+@Component(&#123;
+  selector: 'app-snackbar',
+  templateUrl: './snackbar.component.html',
+  styleUrls: ['./snackbar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class SnackbarComponent &#123;
+
+  constructor(private snackbarService: GlnSnackbarService) &#123;&#125;
+
+  public clickSimple(): void &#123;
+    this.snackbarService.open('simple notification !').result
+    .then((response) => &#123;
+      console.log(`simple response=$&#123;response&#125;`);
+    &#125;);
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-snackbar &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .snbs1-btn &#123;
+    border-radius: 4px;
+    border-width: 0;
+    cursor: pointer;
+    font-size: 0.875em;
+    height: 38px;
+    min-width: 64px;
+    padding: 0 1.143em;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

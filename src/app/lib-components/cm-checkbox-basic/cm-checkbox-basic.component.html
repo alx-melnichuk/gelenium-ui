@@ -1,0 +1,213 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmCheckbox + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnCheckboxModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    The GlnCheckbox component displays the behavior of a simple "state checkbox"
+    property (&lt;input type="checkbox"&gt;).
+    A component allows you to select one or more of these components.
+  </p>
+  <span> For example:</span>
+  <code><pre source="html">
+&lt;<strong>gln-checkbox</strong> formControlName="model01"&gt;
+&lt;/<strong>gln-checkbox</strong>&gt;</pre></code>
+</section>
+
+
+<form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem cbbs-elem">
+      <div>
+        <small><em>Checked.</em></small>
+      </div>
+      <gln-checkbox formControlName="model01a">
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbbs-elem">
+      <div>
+        <small><em>Unchecked.</em></small>
+      </div>
+      <gln-checkbox formControlName="model01b">
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbbs-elem">
+      <div>
+        <small><em>Indeterminate.</em></small>
+      </div>
+      <gln-checkbox formControlName="model01c"
+        isIndeterm>
+      </gln-checkbox>
+    </div>
+
+  </div>
+
+  <div class="app-group">
+
+    <div class="app-elem cbbs-elem">
+      <div>
+        <small><em>Disabled Checked.</em></small>
+      </div>
+      <gln-checkbox formControlName="model01d"
+        isDisabled>
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbbs-elem">
+      <div>
+        <small><em>Disabled Unchecked.</em></small>
+      </div>
+      <gln-checkbox formControlName="model01e"
+        isDisabled>
+      </gln-checkbox>
+    </div>
+
+    <div class="app-elem cbbs-elem">
+      <div>
+        <small><em>Disabled Indeterminate.</em></small>
+      </div>
+      <gln-checkbox formControlName="model01f"
+        isIndeterm
+        isDisabled>
+      </gln-checkbox>
+    </div>
+
+  </div>
+</form>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off"&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem cbbs-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Checked.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox formControlName="model01a"&gt;
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbbs-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Unchecked.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox formControlName="model01b"&gt;
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbbs-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Indeterminate.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox formControlName="model01c"
+        isIndeterm&gt;
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+  &lt;div class="app-group"&gt;
+
+    &lt;div class="app-elem cbbs-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Disabled Checked.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox formControlName="model01d"
+        isDisabled&gt;
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbbs-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Disabled Unchecked.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox formControlName="model01e"
+        isDisabled&gt;
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+    &lt;div class="app-elem cbbs-elem"&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Disabled Indeterminate.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;gln-checkbox formControlName="model01f"
+        isIndeterm
+        isDisabled&gt;
+      &lt;/gln-checkbox&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/form&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+import &#123;
+  FormControl, FormGroup
+&#125; from '@angular/forms';
+
+@Component(&#123;
+  selector: 'app-checkbox',
+  templateUrl: './checkbox.component.html',
+  styleUrls: ['./checkbox.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CheckboxComponent &#123;
+  public formGroup01: FormGroup = new FormGroup(&#123;
+    model01a: new FormControl(true, []),
+    model01b: new FormControl(false, []),
+    model01c: new FormControl(true, []),
+    model01d: new FormControl(true, []),
+    model01e: new FormControl(false, []),
+    model01f: new FormControl(false, []),
+  &#125;);
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cbbs-elem &#123;
+    min-width: 17ch;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

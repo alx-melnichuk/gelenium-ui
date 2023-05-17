@@ -1,0 +1,138 @@
+/*# sourceURL=gln-chip.component.scss */
+
+gln-chip {
+  --glnch--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glnch--default-s: var(--glncl-default-s, var(--gln-default-s));
+  --glnch--default-l: var(--glncl-default-l, var(--gln-default-l));
+
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--glnch--br-rd, 16px);
+  box-sizing: border-box;
+  height: var(--glnch--size, 32px);
+  justify-content: center;
+  margin: 0;
+  max-width: 100%;
+  outline: 0px;
+  padding: 0px;
+  position: relative;  // For TouchRipple
+  text-decoration: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+
+  // Exterior: "outlined"
+  &[ext-o] {
+    border-width: 1px;
+    border-style: solid;
+  }
+  &[ext-o] {
+    --glnch--lb-cl-def: hsl(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l));        // ~rgba(0, 0, 0, 0.87);
+    --glnch--br-cl-def: hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.50);
+
+    --glnch--lb-cl-hov: hsl(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l));
+    --glnch--br-cl-hov: hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.60);
+    --glnch--bg-cl-hov: hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.06); // ~rgba(0, 0, 0, 0.04);
+
+    --glnch--br-cl-dis: hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.35);
+  }
+  // Exterior: "filled"
+  &[ext-f] {
+    --glnch--basic-cl: hsl(var(--glncl-basic-cl-h), var(--glncl-basic-cl-s), var(--glncl-basic-cl-l)); // #!!
+    --glnch--basic-bg-def: hsl(var(--glncl-basic-bg-h), var(--glncl-basic-bg-s), var(--glncl-basic-bg-l)); // #!!
+    --glnch--basic-bg-hov: hsl(var(--glncl-basic-bg-h), var(--glncl-basic-bg-s), calc(var(--glncl-basic-bg-l) - 6%)); // #!!
+
+    --glnch--lb-cl-def: var(--glnch--basic-cl, hsl(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l))); // #!!
+    --glnch--bg-cl-def: var(--glnch--basic-bg-def, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.10)); // ~rgba(0, 0, 0, 0.08);
+
+    --glnch--lb-cl-hov: var(--glnch--basic-cl, hsl(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l))); // #!!
+    --glnch--bg-cl-hov: var(--glnch--basic-bg-hov, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.18)); // ~rgba(0, 0, 0, 0.12);
+
+    --glnch--bg-cl-dis: hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.11); // rgba(0, 0, 0, 0.12);
+  }
+
+  // Definition of internal variables by element state.
+  &:not([dis]) {
+    // The state without disabled, hover, focused.
+    &:not(:hover):not(:focus):not(:focus-within):not([foc]) {
+      --glnch--label-cl: var(--glnch-def-lb-cl, var(--glnch--lb-cl-def));
+      --glnch--border-cl: var(--glnch-def-br-cl, var(--glnch--br-cl-def));
+      --glnch--bground-cl: var(--glnch-def-bg-cl, var(--glnch--bg-cl-def));
+    } // The state without disabled and with hover or with hover, focused.
+    &:hover, &:hover:focus, &:hover:focus-within, &:hover[foc] {
+      --glnch--label-cl: var(--glnch-hov-lb-cl, var(--glnch--lb-cl-hov));
+      --glnch--border-cl: var(--glnch-hov-br-cl, var(--glnch--br-cl-hov));
+      --glnch--bground-cl: var(--glnch-hov-bg-cl, var(--glnch--bg-cl-hov));
+    }
+    &:focus, &:focus-within, &[foc] {
+      --glnch--label-cl: var(--glnch-foc-lb-cl, var(--glnch-def-lb-cl, var(--glnch--lb-cl-def)));
+      --glnch--border-cl: var(--glnch-foc-br-cl, var(--glnch-def-br-cl, var(--glnch--br-cl-def)));
+      --glnch--bground-cl: var(--glnch-foc-bg-cl, var(--glnch-def-bg-cl, var(--glnch--bg-cl-def)));
+    }
+    cursor: pointer;
+  } // The state with disabled.
+  &[dis] {
+    --glnch--label-cl: var(--glnch-dis-lb-cl, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.55));
+    --glnch--border-cl: var(--glnch-dis-br-cl, var(--glnch--br-cl-dis));
+    --glnch--bground-cl: var(--glnch-dis-bg-cl, var(--glnch--bg-cl-dis));
+    cursor: default;
+    pointer-events: none;
+
+  }
+  // Define styles for all exteriors.
+  color           : var(--glnch--label-cl);
+  border-color    : var(--glnch--border-cl);
+  background-color: var(--glnch--bground-cl);
+
+  &[ext-f] {
+    --glntr-ripple-cl:  var(--glnch-ripple-cl, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.24));
+  }
+  &[ext-o] {
+    --glntr-ripple-cl:  var(--glnch-ripple-cl, hsla(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l), 0.15));
+  }
+
+  &:not([dis]):not([hdAnmInit]) {
+    transition:
+      background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      border-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+
+  // Elevation display.
+  &[ele] {
+    &:not(:hover):not(:active) {
+      box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    }
+    &:hover {
+      box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+    }
+    &:active {
+      box-shadow: 0px 4px 5px -3px rgb(0 0 0 / 20%), 0px 7px 9px 1px rgb(0 0 0 / 14%), 0px 2px 10px 2px rgb(0 0 0 / 12%);
+    }
+  }
+
+  &>[glnch-label] {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // Ornament "padding".
+  &>[gln-orn-rg] {
+    order: 1;
+  }
+  &>[gln-orn-lf]~[glnch-pd-hor] {
+    --glnch--orn-lf: 0;
+  }
+  &>[gln-orn-rg]~[glnch-pd-hor] {
+    --glnch--orn-rg: 0;
+  }
+  &>[glnch-pd-hor] {
+    padding-left: var(--glnch--orn-lf, var(--glnch-pd-lf, var(--glnchf--pd-lf, 1em)));
+    padding-right: var(--glnch--orn-rg, var(--glnch-pd-rg, var(--glnchf--pd-rg, 1em)));
+  }
+}

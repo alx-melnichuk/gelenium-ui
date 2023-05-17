@@ -97,6 +97,9 @@ section[mr-vr] {
   .mat-expansion-panel-body {
     padding: 0 0;
   }
+  &>ul {
+    margin-top: 0px;
+  }
 }
 section[mr-vr2] {
   margin-top: 10px;
@@ -114,3 +117,4 @@ hr[br-nn-m8] {
   margin-block-start: 0.25em;
   margin-block-end: 0.25em;
 }
+

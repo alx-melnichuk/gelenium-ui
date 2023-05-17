@@ -1,0 +1,25 @@
+/*# sourceURL=cm-radio-attributes.component.scss */
+
+app-cm-radio-attributes {
+  display: block;
+
+  .rbat2-err {
+    color: red;
+  }
+
+  .rbat2-elem {
+    min-width: 17ch;
+  }
+
+  .rbat2-props {
+    display: inline-flex;
+    flex-wrap: wrap;
+    max-width: 60ch;
+    margin: 0;
+    
+    &>label {
+      margin-top: 0.5em;
+      min-width: 18ch;
+    }
+  }
+}
