@@ -35,7 +35,9 @@ export class CmInfiniteScrollOptionalComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmInfiniteScroll = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INFINITE_SCROLL');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmInfiniteScroll =
+    this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INFINITE_SCROLL');
 
   public elements2: Element[] = [];
   public isLoading = false;

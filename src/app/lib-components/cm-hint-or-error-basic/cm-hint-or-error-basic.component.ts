@@ -21,7 +21,9 @@ export class CmHintOrErrorBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmHintOrError = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_HINT_OR_ERROR');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmHintOrError =
+    this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_HINT_OR_ERROR');
 
   public controls01 = {
     model01a: new FormControl('is', []),

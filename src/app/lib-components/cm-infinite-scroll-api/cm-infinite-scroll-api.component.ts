@@ -10,7 +10,9 @@ import { RouterConfig } from '../../lib-core/config/router-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CmInfiniteScrollApiComponent {
-  public urlCmInfiniteScroll = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INFINITE_SCROLL');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmInfiniteScroll =
+    this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INFINITE_SCROLL');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
