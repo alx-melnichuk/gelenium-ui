@@ -172,6 +172,7 @@ const siteUrlsSnackbar: SiteUrl[] = [
   { label: 'Basic', url: urlSnackbar, fragment: 'Basic' },
   { label: 'Attributes', url: urlSnackbar, fragment: 'Attributes' },
   { label: 'Customization', url: urlSnackbar, fragment: 'Customization' },
+  { label: 'Palette', url: urlButton, fragment: 'Palette' },
   { label: 'Config', url: urlSnackbar, fragment: 'Config' },
   { label: 'Api', url: urlSnackbar, fragment: 'Api' },
 ];

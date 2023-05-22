@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RouterConfig } from './lib-core/config/router-config';
 
+// If not using HTML5 (useHash: true), then add '#'.
+RouterConfig.add('BASE_REF', window.location.origin + window.location.pathname + '#');
+
 // Defining a route map for an 'Components' partition.
 import { LmComponentsRouterMapModule } from './lm-components/lm-components-router-map.module';
 // Defining a route map for an 'Directives' partition.
