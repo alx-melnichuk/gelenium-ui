@@ -21,7 +21,8 @@ export class CmFrameBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmFrame = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
 
   public formGroup01: FormGroup = new FormGroup({
     model01a: new FormControl('', []),
