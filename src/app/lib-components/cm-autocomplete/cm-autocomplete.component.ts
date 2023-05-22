@@ -19,9 +19,9 @@ const logLabel = 'ComponentsAutocomplete';
 })
 export class CmAutocompleteComponent implements AfterViewInit, OnDestroy {
   public showNum = '';
-  // public urlCmFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
-  public urlPlSelect = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_SELECT');
-  // public urlPlButton = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_BUTTON');
+
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlPlSelect = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_SELECT');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax
