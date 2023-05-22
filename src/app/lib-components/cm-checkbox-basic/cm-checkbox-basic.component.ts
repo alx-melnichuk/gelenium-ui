@@ -21,7 +21,8 @@ export class CmCheckboxBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmCheckbox = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CHECKBOX');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmCheckbox = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CHECKBOX');
 
   public formGroup01: FormGroup = new FormGroup({
     model01a: new FormControl(true, []),

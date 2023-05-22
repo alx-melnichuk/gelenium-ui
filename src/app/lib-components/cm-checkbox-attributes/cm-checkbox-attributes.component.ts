@@ -21,7 +21,8 @@ export class CmCheckboxAttributesComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmCheckbox = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CHECKBOX');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmCheckbox = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CHECKBOX');
 
   public data02a = true;
   public data02b = true;
