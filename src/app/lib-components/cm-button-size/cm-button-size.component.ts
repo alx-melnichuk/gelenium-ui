@@ -29,7 +29,8 @@ export class CmButtonSizeComponent {
   public exterior03a = 'outlined';
   public exterior03b = 'outlined';
 
-  public urlCmButton = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_BUTTON');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmButton = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_BUTTON');
 
   public routerLink = this.urlCmButton;
   public fragment03g = 'size-link3g';

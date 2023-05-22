@@ -20,5 +20,6 @@ export class CmButtonBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmButton = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_BUTTON');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmButton = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_BUTTON');
 }
