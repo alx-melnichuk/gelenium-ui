@@ -20,7 +20,8 @@ export class CmSpinnerSizeComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmSpinner = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SPINNER');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmSpinner = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SPINNER');
 
   public isNoAnimation03a: boolean = true;
   public isNoAnimation03b: boolean = true;
