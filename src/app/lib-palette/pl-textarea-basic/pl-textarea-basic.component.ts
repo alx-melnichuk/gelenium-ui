@@ -35,7 +35,8 @@ export class PlTextareaBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlPlTextarea = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_TEXTAREA');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlPlTextarea = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_TEXTAREA');
 
   public exterior01a = 'outlined';
   public control01a = {

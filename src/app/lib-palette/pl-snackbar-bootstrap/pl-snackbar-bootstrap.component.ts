@@ -22,7 +22,8 @@ export class PlSnackbarBootstrapComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlPlSnackbar = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_SNACKBAR');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlPlSnackbar = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_SNACKBAR');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private snackbarService: GlnSnackbarService) {}

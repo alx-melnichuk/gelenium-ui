@@ -10,7 +10,8 @@ import { RouterConfig } from '../../lib-core/config/router-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GdDescriptionAboutLibraryComponent {
-  public urlGdDescription = '/' + RouterConfig.get('URL_GUIDES') + '/' + RouterConfig.get('URL_GUIDES_DESCRIPTION');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlGdDescription = this.baseRef + '/' + RouterConfig.get('URL_GUIDES') + '/' + RouterConfig.get('URL_GUIDES_DESCRIPTION');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

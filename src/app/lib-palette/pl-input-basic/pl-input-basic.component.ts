@@ -35,7 +35,8 @@ export class PlInputBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlPlInput = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_INPUT');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlPlInput = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_INPUT');
 
   public exterior01a = 'outlined';
   public control01a = {

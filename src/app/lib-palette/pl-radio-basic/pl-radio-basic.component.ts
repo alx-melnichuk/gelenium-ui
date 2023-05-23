@@ -21,7 +21,8 @@ export class PlRadioBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlPlRadio = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_RADIOBUTTON');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlPlRadio = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_RADIOBUTTON');
 
   public isDisabled07a = false;
   public formGroup07a: FormGroup = new FormGroup({
