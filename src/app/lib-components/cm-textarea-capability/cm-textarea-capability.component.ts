@@ -35,7 +35,8 @@ export class CmTextareaCapabilityComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmTextarea = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TEXTAREA');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmTextarea = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TEXTAREA');
 
   public text1 = 'line 1\nline 2';
   public text2 = this.text1 + '\nline 3\nline 4\nline 5';

@@ -29,7 +29,8 @@ export class CmSwitchConfigComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmSwitch = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SWITCH');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmSwitch = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SWITCH');
 
   public formGroup06: FormGroup = new FormGroup({
     model06a: new FormControl(true, []),
