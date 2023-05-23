@@ -35,7 +35,8 @@ export class DrRegexCheckBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlDrRegexCheck = '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_REGEX_CHECK');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlDrRegexCheck = this.baseRef + '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_REGEX_CHECK');
 
   public control01a = {
     model01a: new FormControl('1', []),
