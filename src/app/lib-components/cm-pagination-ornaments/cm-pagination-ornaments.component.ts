@@ -24,7 +24,8 @@ export class CmPaginationOrnamentsComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmPagination = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_PAGINATION');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmPagination = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_PAGINATION');
 
   public exterior05a = 'outlined';
   public page05a: number = 1;
