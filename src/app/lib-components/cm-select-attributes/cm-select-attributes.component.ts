@@ -35,7 +35,8 @@ export class CmSelectAttributesComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmSelect = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SELECT');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmSelect = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SELECT');
 
   // Block "attributes-supported01"
   public fruits = ['mango', 'lemon', 'orange', 'kiwi'];

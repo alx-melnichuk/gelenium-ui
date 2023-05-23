@@ -20,7 +20,8 @@ export class CmSpinnerApiComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmSpinner = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SPINNER');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmSpinner = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SPINNER');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
