@@ -10,8 +10,9 @@ import { RouterConfig } from '../../lib-core/config/router-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CmSelectApiComponent {
-  public urlCmFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
-  public urlCmSelect = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SELECT');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmFrame = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
+  public urlCmSelect = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SELECT');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

@@ -35,7 +35,8 @@ export class CmInputOrnamentsComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmInput = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INPUT');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmInput = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INPUT');
 
   public minLength05 = 3;
   public maxLength05 = 15;

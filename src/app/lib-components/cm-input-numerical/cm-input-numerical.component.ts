@@ -35,7 +35,8 @@ export class CmInputNumericalComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmInput = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INPUT');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmInput = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INPUT');
   public urlDrRegexMatch = '/' + 'directives' + '/' + 'regex-match'; // TODO replace to RouterConfig.get()
 
   public formGroup04: FormGroup = new FormGroup({

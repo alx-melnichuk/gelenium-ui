@@ -29,8 +29,9 @@ export class CmTextareaConfigComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmTextarea = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TEXTAREA');
-  public urlCmFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmTextarea = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TEXTAREA');
+  public urlCmFrame = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
 
   public formGroup07: FormGroup = new FormGroup({
     model07a: new FormControl('', []),

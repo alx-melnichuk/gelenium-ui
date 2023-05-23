@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 import { EXPANDED_HEIGHT } from '../lib-core/constants';
+import { ScrollAfterRoutingUtil } from '../lib-core/utils/scroll-after-routing.util';
 import { SiteItem, SiteMenuUtil, SiteUrl } from '../lib-core/utils/site-menu.util';
 
 @Component({
@@ -17,7 +18,7 @@ export class LmPaletteComponent {
     for (let idx = 0; idx < this.itemDataList.length; idx++) {
       this.itemDataList[idx].expanded = false;
     }
-    const siteItem: SiteItem | null = SiteMenuUtil.findSiteItemByUrl(this.itemDataList, location.pathname);
+    const siteItem: SiteItem | null = SiteMenuUtil.findSiteItemByUrl(this.itemDataList, ScrollAfterRoutingUtil.getPathname());
     if (siteItem) {
       siteItem.expanded = true;
     }

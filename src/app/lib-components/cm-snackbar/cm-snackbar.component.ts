@@ -17,7 +17,9 @@ const logLabel = 'ComponentsSnackbar';
 export class CmSnackbarComponent implements AfterViewInit {
   public showNum = '';
 
-  public urlPlSnackbar = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_SNACKBAR');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmSnackbar = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SNACKBAR');
+  public urlPlSnackbar = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_SNACKBAR');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

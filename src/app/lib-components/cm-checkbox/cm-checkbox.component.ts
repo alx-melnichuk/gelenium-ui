@@ -17,7 +17,9 @@ const logLabel = 'ComponentsCheckbox';
 export class CmCheckboxComponent implements AfterViewInit {
   public showNum = '';
 
-  public urlPlCheckbox = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CHECKBOX');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmCheckbox = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CHECKBOX');
+  public urlPlCheckbox = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CHECKBOX');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

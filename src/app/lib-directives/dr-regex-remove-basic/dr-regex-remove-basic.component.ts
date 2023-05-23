@@ -35,7 +35,8 @@ export class DrRegexRemoveBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlDrRegexRemove = '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_REGEX_REMOVE');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlDrRegexRemove = this.baseRef + '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_REGEX_REMOVE');
 
   public control01 = {
     model01a: new FormControl('123', []),

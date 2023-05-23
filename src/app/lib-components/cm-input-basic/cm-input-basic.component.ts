@@ -21,7 +21,8 @@ export class CmInputBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmInput = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INPUT');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmInput = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INPUT');
 
   public formGroup01: FormGroup = new FormGroup({
     model01a: new FormControl('', []),

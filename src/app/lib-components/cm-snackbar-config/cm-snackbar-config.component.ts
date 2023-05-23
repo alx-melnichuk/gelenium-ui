@@ -21,7 +21,8 @@ export class CmSnackbarConfigComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmSnackbar = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SNACKBAR');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmSnackbar = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SNACKBAR');
 
   public config08 = { horizontal: 'left', vertical: 'top' };
 

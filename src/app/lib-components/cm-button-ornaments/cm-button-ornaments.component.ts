@@ -26,7 +26,8 @@ export class CmButtonOrnamentsComponent {
   @Input()
   public labelText = BTN_TEXT;
 
-  public urlCmButton = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_BUTTON');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmButton = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_BUTTON');
 
   public routerLink = this.urlCmButton;
   public exterior05a = 'outlined';

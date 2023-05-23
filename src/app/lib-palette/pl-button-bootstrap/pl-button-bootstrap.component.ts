@@ -28,7 +28,8 @@ export class PlButtonBootstrapComponent {
   @Input()
   public labelText = BTN_TEXT;
 
-  public urlPlButton = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_BUTTON');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlPlButton = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_BUTTON');
 
   public routerLink = this.urlPlButton;
 

@@ -12,13 +12,14 @@ app-site-scheme {
     @media (min-width: 800px) { flex-basis: 200px; }
     @media (min-width: 1000px) { flex-basis: 250px; }
     @media (min-width: 1200px) { flex-basis: 300px; }
+    overflow: auto;
   }
   .ss-main-side {
     display: flex;
     flex-basis: 100%;
     flex-grow: 1;
     justify-content: center;
-    overflow-y: auto;
+    overflow: auto;
   }
   .ss-main-side-content {
     box-sizing: border-box;

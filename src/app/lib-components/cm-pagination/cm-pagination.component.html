@@ -33,7 +33,10 @@
 <section mr-vr
   *ngIf="!showNum"
   id="Palette">
-  <h3>Palette</h3>
+  <h3 class="app-hover-link">
+    Palette
+    <a [href]="urlCmPagination + '#Palette'">#</a>
+  </h3>
   <p>
     The <a [href]="urlPlPagination + '#Basic'">"Palette GlnPagination#Basic"</a>
     page shows you how to change the color palette of an element.

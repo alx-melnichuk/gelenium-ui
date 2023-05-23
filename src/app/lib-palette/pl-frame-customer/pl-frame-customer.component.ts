@@ -35,7 +35,8 @@ export class PlFrameCustomerComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlPlFrame = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_FRAME');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlPlFrame = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_FRAME');
 
   public exterior01a = 'outlined';
   public control01a = {

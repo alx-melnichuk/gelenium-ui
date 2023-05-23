@@ -24,7 +24,8 @@ export class CmPaginationSizeComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmPagination = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_PAGINATION');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmPagination = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_PAGINATION');
 
   public exterior03a = 'outlined';
   public page03a: number = 1;

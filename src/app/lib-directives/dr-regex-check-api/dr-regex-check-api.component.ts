@@ -10,7 +10,8 @@ import { RouterConfig } from '../../lib-core/config/router-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrRegexCheckApiComponent {
-  public urlDrRegexCheck = '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_REGEX_CHECK');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlDrRegexCheck = this.baseRef + '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_REGEX_CHECK');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

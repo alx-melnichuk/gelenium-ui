@@ -26,7 +26,8 @@ export class PlPaginationMaterialUiComponent {
   @Input()
   public labelText = BTN_TEXT;
 
-  public urlPlPagination = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_PAGINATION');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlPlPagination = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_PAGINATION');
 
   public page13a: number = 1;
   public page13b: number = 1;

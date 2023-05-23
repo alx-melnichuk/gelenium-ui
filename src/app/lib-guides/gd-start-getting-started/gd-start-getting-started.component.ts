@@ -10,7 +10,8 @@ import { RouterConfig } from '../../lib-core/config/router-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GdStartGettingStartedComponent {
-  public urlGdStart = '/' + RouterConfig.get('URL_GUIDES') + '/' + RouterConfig.get('URL_GUIDES_START');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlGdStart = this.baseRef + '/' + RouterConfig.get('URL_GUIDES') + '/' + RouterConfig.get('URL_GUIDES_START');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

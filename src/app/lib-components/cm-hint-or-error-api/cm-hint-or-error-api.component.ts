@@ -10,7 +10,9 @@ import { RouterConfig } from '../../lib-core/config/router-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CmHintOrErrorApiComponent {
-  public urlCmHintOrError = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_HINT_OR_ERROR');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmHintOrError =
+    this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_HINT_OR_ERROR');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

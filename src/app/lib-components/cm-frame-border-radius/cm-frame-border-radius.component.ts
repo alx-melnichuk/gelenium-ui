@@ -35,7 +35,8 @@ export class CmFrameBorderRadiusComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmFrame = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
 
   public borderRadius = 50;
   public ratioOutlined = 0.58;

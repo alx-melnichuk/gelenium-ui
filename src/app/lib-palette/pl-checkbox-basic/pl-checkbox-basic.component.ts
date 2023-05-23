@@ -21,7 +21,8 @@ export class PlCheckboxBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlPlCheckbox = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CHECKBOX');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlPlCheckbox = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CHECKBOX');
 
   public isDisabled04a: boolean = false;
   public isIndeterm04a: boolean = false;

@@ -10,7 +10,8 @@ import { RouterConfig } from '../../lib-core/config/router-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CmPaginationApiComponent {
-  public urlCmPagination = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_PAGINATION');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmPagination = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_PAGINATION');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

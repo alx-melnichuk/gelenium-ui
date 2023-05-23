@@ -10,7 +10,8 @@ import { RouterConfig } from '../../lib-core/config/router-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CmTooltipApiComponent {
-  public urlCmTooltip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TOOLTIP');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmTooltip = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TOOLTIP');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

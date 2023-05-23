@@ -10,7 +10,8 @@ import { RouterConfig } from '../../lib-core/config/router-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CmChipApiComponent {
-  public urlCmChip = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CHIP');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmChip = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CHIP');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

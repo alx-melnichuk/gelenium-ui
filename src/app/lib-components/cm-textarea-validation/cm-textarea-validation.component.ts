@@ -35,7 +35,8 @@ export class CmTextareaValidationComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmTextarea = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TEXTAREA');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmTextarea = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_TEXTAREA');
 
   public minLength03b = 3;
   public controls03 = {

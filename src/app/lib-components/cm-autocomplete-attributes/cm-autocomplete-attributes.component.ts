@@ -35,7 +35,9 @@ export class CmAutocompleteAttributesComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmAutocomplete = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_AUTOCOMPLETE');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmAutocomplete =
+    this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_AUTOCOMPLETE');
 
   // prettier-ignore
   public fruitsB = [

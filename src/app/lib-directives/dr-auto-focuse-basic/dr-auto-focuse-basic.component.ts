@@ -30,7 +30,8 @@ export class DrAutoFocuseBasicComponent implements OnInit {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlDrAutoFocuse = '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_AUTO_FOCUSE');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlDrAutoFocuse = this.baseRef + '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_AUTO_FOCUSE');
 
   public mode = MODE_A;
 

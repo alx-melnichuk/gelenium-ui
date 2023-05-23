@@ -35,7 +35,8 @@ export class CmFrameSizeComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmFrame = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
 
   public formGroup02a: FormGroup = new FormGroup({
     model02a: new FormControl('Demo Size Short', []),

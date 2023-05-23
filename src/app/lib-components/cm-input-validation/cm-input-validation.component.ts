@@ -35,7 +35,8 @@ export class CmInputValidationComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmInput = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INPUT');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmInput = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_INPUT');
 
   public minLength03b = 3;
   public controls03 = {

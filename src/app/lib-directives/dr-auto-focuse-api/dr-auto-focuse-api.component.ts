@@ -10,7 +10,8 @@ import { RouterConfig } from '../../lib-core/config/router-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrAutoFocuseApiComponent {
-  public urlDrAutoFocuse = '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_AUTO_FOCUSE');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlDrAutoFocuse = this.baseRef + '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_AUTO_FOCUSE');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

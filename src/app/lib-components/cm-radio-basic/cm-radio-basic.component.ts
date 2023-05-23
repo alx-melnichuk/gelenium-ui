@@ -21,7 +21,8 @@ export class CmRadioBasicComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmRadio = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_RADIOBUTTON');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmRadio = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_RADIOBUTTON');
 
   public fruits01a: string[] = ['apple', 'apricot', 'banana'];
   public formGroup01a: FormGroup = new FormGroup({

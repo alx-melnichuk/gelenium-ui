@@ -10,7 +10,8 @@ import { RouterConfig } from '../../lib-core/config/router-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrRegexRemoveApiComponent {
-  public urlDrRegexRemove = '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_REGEX_REMOVE');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlDrRegexRemove = this.baseRef + '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_REGEX_REMOVE');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

@@ -27,7 +27,8 @@ export class PlCheckboxBootstrapComponent {
   @Input()
   public labelText = BTN_TEXT;
 
-  public urlPlCheckbox = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CHECKBOX');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlPlCheckbox = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CHECKBOX');
 
   public isDisabled04p: boolean = false;
   public isIndeterm04p: boolean = false;

@@ -22,7 +22,8 @@ export class CmSnackbarAttributesComponent {
   @Input()
   public labelCss = LABEL_CSS;
 
-  public urlCmSnackbar = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SNACKBAR');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmSnackbar = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_SNACKBAR');
 
   public transition02gList: string[] = ['grow', 'fade', 'blur', 'slide', 'slide-dw', 'slide-lf', 'slide-rg', 'turn', 'turn-y'];
   public transition02g: string = this.transition02gList[0];

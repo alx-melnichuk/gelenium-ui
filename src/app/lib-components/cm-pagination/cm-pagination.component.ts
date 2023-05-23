@@ -16,7 +16,9 @@ const logLabel = 'ComponentsPagination';
 export class CmPaginationComponent implements AfterViewInit {
   public showNum = '';
 
-  public urlPlPagination = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_PAGINATION');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlCmPagination = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_PAGINATION');
+  public urlPlPagination = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_PAGINATION');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax

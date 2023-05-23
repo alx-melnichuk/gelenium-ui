@@ -10,7 +10,8 @@ import { RouterConfig } from '../../lib-core/config/router-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrRegexMatchApiComponent {
-  public urlDrRegexMatch = '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_REGEX_MATCH');
+  public baseRef: string = RouterConfig.get('BASE_REF');
+  public urlDrRegexMatch = this.baseRef + '/' + RouterConfig.get('URL_DIRECTIVES') + '/' + RouterConfig.get('URL_DIRECTIVES_REGEX_MATCH');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
