@@ -1,0 +1,99 @@
+<!-- isShowBasic -->
+<section *ngIf="isShowBasic01"
+  mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmDatepicker + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    The GlnDatepicker component is a form control for picking a date.<br />
+    It includes: a label, a list of options, and a help text.
+  </p>
+  <span>It comes in three versions:</span>
+  <ul>
+    <li>with an outline (exterior="outlined" - default)</li>
+    <li>with a fill (exterior="underline")</li>
+    <li>standard (exterior="standard")</li>
+  </ul>
+  <span>For example:</span>
+  <code><pre source="html">
+&lt;<strong>gln-datepicker</strong> formControlName="model01a"
+  label="Enter value"&gt;
+&lt;<strong>/gln-datepicker</strong>&gt;</pre></code>
+</section>
+
+
+<form *ngIf="isShowBasic01"
+  [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small><em>exterior: Outlined</em></small>
+      </div>
+      <div class="dpbs-mb">
+        <small>
+          <em>
+            Model: {{ control01.model01a.value ?? 'null' }}
+          </em>
+        </small>
+      </div>
+      <!-- <gln-datepicker formControlName="model01a"
+        label="Enter value"
+        exterior="outlined"
+        wdFull>
+      </gln-datepicker> -->
+      <gln-datepicker formControlName="model01a"
+        label="Enter value"
+        exterior="outlined"
+        wdFull9>
+      </gln-datepicker>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small><em>exterior: Underline</em></small>
+      </div>
+      <div class="dpbs-mb">
+        <small>
+          <em>
+            Model: {{ control01.model01b.value ?? 'null' }}
+          </em>
+        </small>
+      </div>
+      <!-- <gln-datepicker formControlName="model01b"
+        label="Enter value"
+        exterior="underline"
+        wdFull>
+      </gln-datepicker> -->
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small><em>exterior: Standard</em></small>
+      </div>
+      <div class="dpbs-mb">
+        <small>
+          <em>
+            Model: {{ control01.model01c.value ?? 'null' }}
+          </em>
+        </small>
+      </div>
+      <!-- <gln-datepicker formControlName="model01c"
+        label="Enter value"
+        exterior="standard"
+        wdFull>
+      </gln-datepicker> -->
+    </div>
+  </div>
+
+</form>

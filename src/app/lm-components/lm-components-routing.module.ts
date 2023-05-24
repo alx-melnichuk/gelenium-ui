@@ -10,6 +10,7 @@ const URL_COMPONENTS_AUTOCOMPLETE = RouterConfig.get('URL_COMPONENTS_AUTOCOMPLET
 const URL_COMPONENTS_BUTTON = RouterConfig.get('URL_COMPONENTS_BUTTON');
 const URL_COMPONENTS_CHECKBOX = RouterConfig.get('URL_COMPONENTS_CHECKBOX');
 const URL_COMPONENTS_CHIP = RouterConfig.get('URL_COMPONENTS_CHIP');
+const URL_COMPONENTS_DATEPICKER = RouterConfig.get('URL_COMPONENTS_DATEPICKER');
 const URL_COMPONENTS_FRAME = RouterConfig.get('URL_COMPONENTS_FRAME');
 const URL_COMPONENTS_HINT_OR_ERROR = RouterConfig.get('URL_COMPONENTS_HINT_OR_ERROR');
 const URL_COMPONENTS_INFINITE_SCROLL = RouterConfig.get('URL_COMPONENTS_INFINITE_SCROLL');
@@ -43,6 +44,10 @@ const routes: Routes = [
       {
         path: URL_COMPONENTS_CHIP,
         loadChildren: () => import('../lib-components/cm-chip/cm-chip.module').then((m) => m.CmChipModule),
+      },
+      {
+        path: URL_COMPONENTS_DATEPICKER,
+        loadChildren: () => import('../lib-components/cm-datepicker/cm-datepicker.module').then((m) => m.CmDatepickerModule),
       },
       {
         path: URL_COMPONENTS_FRAME,

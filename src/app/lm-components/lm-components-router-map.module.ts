@@ -63,6 +63,26 @@ const siteUrlsChip: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Chip', { label: 'Chip', siteUrls: siteUrlsChip });
 
+// -- Datepicker --
+RouterConfig.add('URL_COMPONENTS_DATEPICKER', 'datepicker');
+const urlDatepicker = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_DATEPICKER');
+const siteUrlsDatepicker: SiteUrl[] = [
+  { label: 'Basic', url: urlDatepicker, fragment: 'Basic' },
+  // { label: 'Attributes', url: urlDatepicker, fragment: 'Attributes' },
+  // { label: 'Validation', url: urlDatepicker, fragment: 'Validation' },
+  // { label: 'Group', url: urlDatepicker, fragment: 'Group' },
+  // { label: 'Trigger', url: urlDatepicker, fragment: 'Trigger' },
+  // { label: 'Ornaments', url: urlDatepicker, fragment: 'Ornaments' },
+  // { label: 'Size', url: urlDatepicker, fragment: 'Size' },
+  // { label: 'Helper text', url: urlDatepicker, fragment: 'HelperText' },
+  // { label: 'Border radius', url: urlDatepicker, fragment: 'BorderRadius' },
+  // { label: 'Palette', url: urlDatepicker, fragment: 'Palette' },
+  // { label: 'Feature', url: urlDatepicker, fragment: 'Feature' },
+  // { label: 'Config', url: urlDatepicker, fragment: 'Config' },
+  // { label: 'Api', url: urlDatepicker, fragment: 'Api' },
+];
+SiteMenuUtil.addItem('Components', 'Datepicker', { label: 'Datepicker', siteUrls: siteUrlsDatepicker });
+
 // -- Frame --
 RouterConfig.add('URL_COMPONENTS_FRAME', 'frame');
 const urlFrame = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_FRAME');
