@@ -1,0 +1,104 @@
+<ng-container [formGroup]="formGroup">
+  <gln-frame [ngClass]="[(isPanelOpen ? 'is-open' : '')]"
+    cdkOverlayOrigin
+    #origin="cdkOverlayOrigin"
+    #triggerRef
+    [config]="currConfig"
+    [cssElementRef]="hostRef"
+    [exterior]="exterior || currConfig.exterior"
+    [size]="size || currConfig.size"
+    [isAttrHideAnimation]="isAttrHideAnimation"
+    [isDisabled]="isDisabledVal"
+    [isError]="!!errors || isErrorVal"
+    [isFilled]="isFilled"
+    [isLabelShrink]="getBoolean(isLabelShrink) ?? currConfig.isLabelShrink"
+    [isNoAnimation]="getBoolean(isNoAnimation) ?? currConfig.isNoAnimation"
+    [isRequired]="isRequiredVal"
+    [label]="!isPlaceholderVal ? label : null"
+    [attr.opn]="isPanelOpen ? '' : null"
+    [attr.tabindex]="!isDisabledVal ? tabIndex : null"
+    (focus)="doFocus()"
+    (blur)="doBlur()">
+
+    <ng-content select="[gln-orn-lf]"></ng-content>
+    <ng-content select="[gln-orn-rg]"></ng-content>
+
+    <div ngIf9="!isNoIconVal"
+      glndp-sticker-box
+      gln-orn-rg
+      [attr.opn]="isPanelOpen ? '' : null"
+      [attr.noAnm]="frameComp.noAnimation ? '' : null"
+      [ngClass]="['glndp-sticker-box', (isPanelOpen ? 'is-open' : '')]"
+      focusable="false"
+      aria-hidden="true">
+      <button glndp-btn
+        class="gln-datepicker-btn">
+        <svg glndp-sticker
+          class="gln-datepicker-sticker"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24">
+          <path
+            d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z">
+          </path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- <div [attr.id]="id + '-elem'"    glnfr-pd-ver    glnfr-pd-hor    glnfr-elem>
+
+    <ng-container [ngSwitch]="isFilled">
+      <div *ngSwitchCase="false"        glndp-plc-hld        class="glnsl-placeholder">
+        <span>{{ !isPlaceholderVal ? '&ZeroWidthSpace;' : label }}</span>
+      </div>
+
+      <ng-container *ngSwitchCase="true"        [ngSwitch]="!!customTrigger">
+
+        <ng-content *ngSwitchCase="true"          select="gln-select-trigger">
+        </ng-content>
+
+        <ng-container *ngSwitchCase="false">
+          <ng-container
+            *ngFor="let option of selectedOptions; count as countVal; last as isLast; trackBy: trackByOption;">
+            <span [innerHTML]="option.getTrustHtml()"></span>
+            <span *ngIf="countVal > 1 && !isLast">, </span>
+          </ng-container>
+        </ng-container>
+
+      </ng-container>
+
+    </ng-container>
+  </div> -->
+
+    <input #inputElementRef
+      formControlName="textData"
+      glnfr-pd-ver
+      glnfr-pd-hor
+      glnfr-elem
+      [attr.id]="id + '_input'"
+      type="text"
+      [ngClass]="['glndp-input', (isReadOnlyVal ? 'gln-readonly' : '')]"
+      [attr.disabled]="isDisabledVal ? '': null"
+      attr.autocomplete="off"
+      [attr.placeholder]="!isPlaceholderVal ? null : label"
+      [attr.readonly]="isReadOnlyVal ? '': null"
+      attr9.min="min"
+      attr9.max="max"
+      attr9.step="step"
+      [attr.tabindex]="!isDisabledVal ? tabIndex : null"
+      pattern9="pattern"
+      (focus)="doFocus()"
+      (blur)="doBlur()"
+      (input)="doInput($event)" />
+
+
+  </gln-frame>
+
+  <gln-hint-or-error *ngIf="!!helperText"
+    [text]="helperText"
+    [isError]="!!errors || isErrorVal"
+    [isFocused]="isFocused"
+    [isDisabled]="isDisabledVal">
+  </gln-hint-or-error>
+
+</ng-container>

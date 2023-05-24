@@ -1,0 +1,146 @@
+/*# sourceURL=gln-datepicker.component.scss */
+
+gln-datepicker {
+  --glndp--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glndp--default-s: var(--glncl-default-s, var(--gln-default-s));
+
+  --glndp--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
+  --glndp--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
+
+  --glndp--danger-h: var(--glncl-danger-h, var(--gln-danger-h));
+  --glndp--danger-s: var(--glncl-danger-s, var(--gln-danger-s));
+
+  display: inline-flex;
+  flex-direction: column;
+  min-width: var(--glndp-min-width, 220px);
+
+  &[wdFull] {
+    width: 100%;
+  }
+
+  &[noHeEllipsis] {
+    gln-hint-or-error {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+    }  
+  }
+
+  // Element "Frame".
+  gln-frame {
+    &:focus-visible {
+      outline: none;
+    }
+    &:not([opn]):not([dis]) {
+      cursor: text;
+    }
+
+    // Element "gln-frame - glndp-sticker".
+    &:not([dis]) {
+      &:not([err]) { // The state without disabled, error, hover, focused.
+        &:not(:hover):not(:focus-within):not([foc]) {
+          --glndp-sticker-cl: var(--glndp-def-sticker, hsl(var(--glndp--primary-h), var(--glndp--primary-s), 45%));
+        } // The state without disabled, error, focused and with hover.
+        &:hover:not(:focus-within):not([foc]) {
+          --glndp-sticker-cl: var(--glndp-hov-sticker, hsl(var(--glndp--primary-h), var(--glndp--primary-s), 40%));
+        } // The state without disabled, error and with focused.
+        &:focus-within, &[foc] {
+          --glndp-sticker-cl: var(--glndp-foc-sticker, hsl(var(--glndp--primary-h), var(--glndp--primary-s), 50%));
+        }
+        --glndp-sticker-bg: var(--glndp-hov-bg-sticker, hsla(var(--glndp--primary-h), var(--glndp--primary-s), 50%, 0.15));
+      }
+      &[err] {// The state without disabled, hover, focused and error.
+        &:not(:hover):not(:focus-within):not([foc]) {
+          --glndp-sticker-cl: var(--glndp-def-err-sticker, hsl(var(--glndp--danger-h), var(--glndp--danger-s), 45%));
+        } // The state without disabled, focused and with hover.
+        &:hover:not(:focus-within):not([foc]) {
+          --glndp-sticker-cl: var(--glndp-hov-err-sticker, hsl(var(--glndp--danger-h), var(--glndp--danger-s), 40%));
+        } // The state without disabled and with focused.
+        &:focus-within, &[foc] {
+          --glndp-sticker-cl: var(--glndp-foc-err-sticker, hsl(var(--glndp--danger-h), var(--glndp--danger-s), 50%));
+        }
+      }
+    } // The state with disabled.
+    &[dis] {
+      --glndp-sticker-cl: var(--glndp-dis-sticker, hsl(var(--glndp--default-h), var(--glndp--default-s), 60%));
+    }
+  }
+
+  // Element "gln-frame - div.glndp-sticker-box".
+  gln-frame>div>[glndp-sticker-box] {
+    align-items: center;
+    color: var(--glndp-sticker-cl);
+    display: flex;
+    height: 1em;
+    position: relative;
+    user-select: none;
+    white-space: nowrap;
+
+    // &:not([noAnm])::after {
+    //   transition: transform 0.3s linear 0ms;
+    // }
+    // &[opn]::after {
+    //   transform: rotate(180deg);
+    // }
+  }
+  gln-frame:not([ext-s])>div>[glndp-sticker-box] {
+    padding-right: 0.25em; // 4px
+  }
+  [glndp-sticker-box]>button[glndp-btn] {
+    align-items: center;
+      background-color: transparent;
+    border: 0;
+    border-radius: 50%;
+    box-sizing: border-box;
+    color: inherit; // color: rgba(0, 0, 0, 0.54);
+    cursor: pointer;
+    display: inline-flex;
+    flex: 0 0 auto;
+    font-size: 1em;
+    justify-content: center;
+    margin: 0;
+    padding: 0.5em;
+    outline: 0;
+    overflow: visible;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    vertical-align: middle;
+
+    // color: rgba(0, 0, 0, 0.54);
+    // transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    &:hover {
+      background-color: var(--glndp-sticker-bg); // rgba(0, 0, 0, 0.04);
+    }
+  }
+  [glndp-sticker-box]>button>[glndp-sticker] {
+    display: inline-block;
+    fill: currentColor;
+    flex-shrink: 0;
+    height: 1.5em;
+    width: 1.5em;
+    // transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    user-select: none;
+  }
+  
+  // The style sets the line height: 1.4375em;
+  // This allows you to automatically change the padding when the font size changes.
+  // Element "Frame - glnfr-elem".
+  gln-frame>div>input[glnfr-elem] {
+    color: inherit;
+    border: 0;
+    background: none;
+    letter-spacing: inherit;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+
+  // Element "gln-hint-or-error"
+  gln-hint-or-error {
+    padding-left: var(--glndp-he-pd-lf, var(--glnfrs--pd-lf));
+    padding-right: var(--glndp-he-pd-rg, var(--glnfrs--pd-rg));
+  }
+}
