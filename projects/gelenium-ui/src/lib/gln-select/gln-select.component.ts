@@ -128,13 +128,13 @@ export class GlnSelectComponent
   @Input()
   public isNoAnimation: string | boolean | null | undefined;
   @Input()
-  public isPlaceholder: string | boolean | null | undefined;
-  @Input()
   /** Disable the display of the icon - the status of the state of the open list. */
   public isNoIcon: string | boolean | null | undefined;
   @Input()
   /** This property to turn off the ripple effect. */
   public isNoRipple: string | boolean | null | undefined;
+  @Input()
+  public isPlaceholder: string | boolean | null | undefined;
   @Input()
   public isReadOnly: string | boolean | null | undefined;
   @Input()
