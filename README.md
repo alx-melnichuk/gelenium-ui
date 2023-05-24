@@ -129,7 +129,7 @@ An ornament (text or picture) can be placed at the beginning or at the end of an
 
 #### Basic
 
-The GlnSelect component is a form control. It includes: label, option list and help text.
+The GlnSelect component is a form control. It includes: a label, a list of options, and a help text.
 It comes in three versions:
 
 - with an outline (exterior="outlined" - default)
