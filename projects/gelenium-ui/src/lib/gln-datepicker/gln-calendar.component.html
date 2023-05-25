@@ -1,1 +1,94 @@
-<p>gln-calendar works!</p>
+<div glncn-title
+  class="gln-calendar-title">
+  <div glncnt-month-year
+    class="gln-calendar-t-month-year">
+    {{ 'September'}} {{ '2023' }}
+  </div>
+  <div glncnt-prev
+    class="gln-calendar-t-prev">
+    <button glncn-btn
+      glncnt-btn
+      class="gln-calendar-t-btn btn-prev">
+      <svg glncnt-icon
+        class="gln-calendar-t-icon icon-prev"
+        focusable="false"
+        aria-hidden="true"
+        viewBox="0 0 24 24">
+        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+      </svg>
+    </button>
+  </div>
+  <div glncnt-next
+    class="gln-calendar-h-next">
+    <button glncn-btn
+      glncnt-btn
+      class="gln-calendar-h-btn btn-next">
+      <svg glncnt-icon
+        class="gln-calendar-t-icon icon-next"
+        focusable="false"
+        aria-hidden="true"
+        viewBox="0 0 24 24">
+        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<div glncn-header
+  class="gln-calendar-header">
+  <div *ngFor="let dayItem of daysOfWeek; trackBy: trackByIndex;"
+    glncn-cell
+    glncnh-day>
+    <span glncnh-day-text>{{ dayItem }}</span>
+  </div>
+</div>
+
+<div glncn-month
+  class="gln-calendar-month">
+
+  <div glncn-week
+    class="gln-calendar-week">
+    <div *ngFor="let day of week1; trackBy: trackByIndex;"
+      glncn-cell
+      glncnm-day>
+      <span glncnm-day-text>{{ day }}</span>
+    </div>
+  </div>
+
+  <div glncn-week
+    class="gln-calendar-week">
+    <div *ngFor="let day of week2; trackBy: trackByIndex;"
+      glncn-cell
+      glncnm-day>
+      <span glncnm-day-text>{{ day }}</span>
+    </div>
+  </div>
+
+  <div glncn-week
+    class="gln-calendar-week">
+    <div *ngFor="let day of week3; trackBy: trackByIndex;"
+      glncn-cell
+      glncnm-day>
+      <span glncnm-day-text>{{ day }}</span>
+    </div>
+  </div>
+
+  <div glncn-week
+    class="gln-calendar-week">
+    <div *ngFor="let day of week4; trackBy: trackByIndex;"
+      glncn-cell
+      glncnm-day>
+      <span glncnm-day-text>{{ day }}</span>
+    </div>
+  </div>
+
+  <div glncn-week
+    class="gln-calendar-week">
+    <div *ngFor="let day of week5; trackBy: trackByIndex;"
+      glncn-cell
+      glncnm-day>
+      <span glncnm-day-text>{{ day }}</span>
+    </div>
+  </div>
+
+</div>
