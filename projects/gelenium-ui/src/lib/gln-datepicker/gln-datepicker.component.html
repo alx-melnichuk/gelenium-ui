@@ -32,7 +32,9 @@
       focusable="false"
       aria-hidden="true">
       <button glndp-btn
-        class="gln-datepicker-btn">
+        glndp-btn-trait
+        class="gln-datepicker-btn"
+        (click)="!isDisabledVal ? toggle() : null">
         <svg glndp-sticker
           class="gln-datepicker-sticker"
           focusable="false"
@@ -102,3 +104,43 @@
   </gln-hint-or-error>
 
 </ng-container>
+
+
+<ng-template cdkConnectedOverlay
+  [cdkConnectedOverlayBackdropClass]="backdropClassVal || 'cdk-overlay-transparent-backdrop'"
+  cdkConnectedOverlayHasBackdrop
+  [cdkConnectedOverlayDisableClose]="true"
+  cdkConnectedOverlayLockPosition
+  [cdkConnectedOverlayOpen]="isPanelOpen || hasPanelAnimation"
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayPanelClass]="overlayClassesVal"
+  [cdkConnectedOverlayPositions]="positionList"
+  [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+  (backdropClick)="backdropClick()"
+  (attach)="attach()"
+  (detach)="detach()"
+  overlayKeydown9="doOverlayPanelKeydown($event)">
+
+  <div glndpp-wrap
+    [ngClass]="['gln-datepicker-panel-wrap', (frameComp.noAnimation ? 'gln-no-animation' : '')]"
+    [attr.noAnm]="frameComp.noAnimation ? '' : null"
+    (animationend)="hasPanelAnimation = isPanelOpen"
+    (animationcancel)="hasPanelAnimation = isPanelOpen">
+    <div glnsl-panel
+      class="gln-datepicker-panel glndp-btn"
+      [ngClass]="classesVal || ''"
+      style="width: 200px; height: 100px;"
+      focus9="doFocusOnPanel()">
+      Demo
+      <button (click)="close()">Close
+      </button>
+    </div>
+    <!-- <div glnsl-panel               class="gln-datepicker-panel"    [ngClass]="classesVal || ''"
+      [glnOptionsScroll]="options" (glnOptionsScrollAttached)="setOptionsScroll($event)"      (glnOptionsScrollDetached)="setOptionsScroll(null)"
+      role="listbox"               [attr.id]="id + '-panel'"   [attr.aria-multiselectable]="multiple"
+      (focus)="doFocusOnPanel()">
+      <ng-content select=":not(gln-select-trigger)"></ng-content>
+    </div> -->
+  </div>
+
+</ng-template>

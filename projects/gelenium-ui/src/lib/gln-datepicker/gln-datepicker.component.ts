@@ -58,17 +58,17 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
 import { GlnDatepickerConfig } from './gln-datepicker-config.interface';
+import { GLN_DATEPICKER_SCROLL_STRATEGY } from './gln-datepicker.providers';
 
 export const GLN_DATEPICKER_CONFIG = new InjectionToken<GlnDatepickerConfig>('GLN_DATEPICKER_CONFIG');
 
 const CSS_ATTR_FRAME_FOCUS = 'foc';
-// const CSS_ATTR_PANEL_OPENING_ANIMATION = 'is-show';
-// const CSS_ATTR_PANEL_CLOSING_ANIMATION = 'is-hide';
-// const CSS_PROP_BORDER_RADIUS = '--glnslpo--border-radius';
+const CSS_ATTR_PANEL_OPENING_ANIMATION = 'is-show';
+const CSS_ATTR_PANEL_CLOSING_ANIMATION = 'is-hide';
+const CSS_PROP_BORDER_RADIUS = '--glndppo--border-radius';
 // const CSS_PROP_MAX_HEIGHT = '--glnslpo--max-height';
-// const CSS_PROP_MAX_WIDTH = '--glnslpo--max-width';
-// const CSS_PROP_TRANSLATE_Y = '--glnslpo--translate-y';
-// const CSS_PROP_WIDTH = '--glnslpo--width';
+// #? const CSS_PROP_MAX_WIDTH = '--glndppo--max-width';
+// #? const CSS_PROP_WIDTH = '--glndppo--width';
 
 let uniqueIdCounter = 0;
 
@@ -86,10 +86,13 @@ let uniqueIdCounter = 0;
   ],
 })
 export class GlnDatepickerComponent
-  implements OnChanges, OnInit, AfterContentInit, OnDestroy, ControlValueAccessor, Validator, GlnNodeInternalValidator
+  implements OnChanges, OnInit, OnDestroy, AfterContentInit, AfterViewInit, ControlValueAccessor, Validator, GlnNodeInternalValidator
 {
   @Input()
   public id = `glndp-${uniqueIdCounter++}`;
+  @Input()
+  /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
+  public classes: string | string[] | Set<string> | { [key: string]: unknown } = '';
   @Input()
   public config: GlnDatepickerConfig | null | undefined;
   @Input()
@@ -102,6 +105,8 @@ export class GlnDatepickerComponent
   public isError: string | boolean | null | undefined;
   @Input()
   public isLabelShrink: string | boolean | null | undefined;
+  @Input()
+  public isMaxWd: string | boolean | null | undefined;
   @Input()
   public isNoAnimation: string | boolean | null | undefined;
   @Input()
@@ -121,6 +126,8 @@ export class GlnDatepickerComponent
   @Input()
   public ornamRgAlign: string | null | undefined; // 'default','center','flex-start','flex-end','baseline','stretch'
   @Input()
+  public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
+  @Input()
   public size: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
   @Input()
   public tabIndex: number = 0;
@@ -138,8 +145,14 @@ export class GlnDatepickerComponent
   @Output()
   readonly change: EventEmitter<Date> = new EventEmitter();
 
+  /** Overlay panel with its own parameters. */
+  @ViewChild(CdkConnectedOverlay)
+  protected connectedOverlay!: CdkConnectedOverlay;
   @ViewChild(GlnFrameComponent, { static: true })
   public frameComp!: GlnFrameComponent;
+  /** A trigger that opens a dropdown list of options. */
+  @ViewChild('triggerRef', { read: ElementRef<HTMLDivElement>, static: true })
+  public triggerRef!: ElementRef<HTMLDivElement>;
   @ViewChild('inputElementRef', { static: true })
   public inputElementRef!: ElementRef<HTMLElement>;
   @ContentChildren(GlnOrnamentLeftDirective, { descendants: true })
@@ -150,6 +163,7 @@ export class GlnDatepickerComponent
   @ViewChild(GlnOrnamentRightDirective)
   public ornamRhomb: GlnOrnamentRightDirective | undefined;
 
+  public backdropClassVal: string | null = null;
   public currConfig: GlnDatepickerConfig;
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
@@ -161,6 +175,7 @@ export class GlnDatepickerComponent
   public isFocused = false;
   public isFilled = false;
   public isPanelOpen = false;
+  public isMaxWdVal: boolean | null = null; // Binding attribute "isMaxWd".
   public isNoIconVal: boolean | null = null; // Binding attribute "isNoIcon",
   public isPlaceholderVal: boolean | null = null; // Binding attribute "isPlaceholder".
   public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
@@ -168,8 +183,18 @@ export class GlnDatepickerComponent
   public noRipple: boolean | null = null; // Binding attribute "isNoRipple". // interface GlnOptionParent
   public ornamLfAlignVal: string | null = null; // Binding attribute "ornamLfAlign".
   public ornamRgAlignVal: string | null = null; // Binding attribute "ornamRgAlign".
+  public overlayClassesVal: string | string[] = '';
+  public classesVal: string | string[] | Set<string> | { [key: string]: unknown } | undefined; // Binding attribute "classes"
+  public positionList: ConnectedPosition[] = [];
+  // /** A strategy for handling scrolling when the overlay panel is open. */
+  public scrollStrategy: ScrollStrategy;
+  /** The position and dimensions for the trigger's bounding box. */
+  public triggerRect: DOMRect | null = null;
 
+  private hostWidth: number = 0;
   private isFocusAttrOnFrame: boolean = false;
+  /** Saving the font size of the trigger element. */
+  private triggerFontSize: number = 0;
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -178,12 +203,13 @@ export class GlnDatepickerComponent
     public hostRef: ElementRef<HTMLElement>,
     private changeDetectorRef: ChangeDetectorRef,
     // private ngZone: NgZone,
-    // private overlay: Overlay,
+    private overlay: Overlay,
     @Optional() @Inject(GLN_DATEPICKER_CONFIG) private rootConfig: GlnDatepickerConfig | null,
-    @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null // @Optional() @Inject(GLN_SELECT_SCROLL_STRATEGY) private scrollStrategyFactory: (() => ScrollStrategy) | null
+    @Optional() @Host() @SkipSelf() private parentFormGroup: ControlContainer | null,
+    @Optional() @Inject(GLN_DATEPICKER_SCROLL_STRATEGY) private scrollStrategyFactory: (() => ScrollStrategy) | null
   ) {
     this.currConfig = this.rootConfig || {};
-    // this.scrollStrategy = this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : this.overlay.scrollStrategies.block();
+    this.scrollStrategy = this.scrollStrategyFactory != null ? this.scrollStrategyFactory() : this.overlay.scrollStrategies.block();
     this.renderer.addClass(this.hostRef.nativeElement, 'gln-datepicker');
     this.renderer.addClass(this.hostRef.nativeElement, 'gln-control');
   }
@@ -199,6 +225,9 @@ export class GlnDatepickerComponent
     if (changes['isError'] || (changes['config'] && this.isError == null && this.currConfig.isError != null)) {
       this.isErrorVal = BooleanUtil.init(this.isError) ?? !!this.currConfig.isError;
       this.settingError(this.isErrorVal, this.renderer, this.hostRef);
+    }
+    if (changes['isMaxWd'] || (changes['config'] && this.isMaxWd == null && this.currConfig.isMaxWd != null)) {
+      this.isMaxWdVal = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
     }
     if (changes['isNoIcon'] || (changes['config'] && this.isNoIcon == null && this.currConfig.isNoIcon != null)) {
       this.isNoIconVal = BooleanUtil.init(this.isNoIcon) ?? !!this.currConfig.isNoIcon;
@@ -231,6 +260,15 @@ export class GlnDatepickerComponent
       const ornamRgAlign: string = this.ornamRgAlignVal || '';
       this.settingOrnamentList(CSS_ATTR_ORN_RG, ornamRgAlign, this.renderer, GlnOrnamentUtil.getElements(this.ornamRightList, rhombRef));
     }
+    if (changes['config'] && this.currConfig.overlayClasses != null) {
+      this.overlayClassesVal = this.currConfig.overlayClasses;
+    }
+    if (changes['classes'] || (changes['config'] && this.classes == null && this.currConfig.classes != null)) {
+      this.classesVal = this.classes || this.currConfig.classes;
+    }
+    if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
+      this.positionList = this.getPositionList(this.position || this.currConfig.position);
+    }
 
     if (changes['isRequired']) {
       this.prepareFormGroup(this.isRequiredVal);
@@ -241,9 +279,15 @@ export class GlnDatepickerComponent
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
+    if (this.backdropClassVal == null) {
+      this.backdropClassVal = this.currConfig.backdropClass || null;
+    }
     if (this.isErrorVal == null) {
       this.isErrorVal = !!this.currConfig.isError;
       this.settingError(this.isErrorVal, this.renderer, this.hostRef);
+    }
+    if (this.isMaxWdVal == null) {
+      this.isMaxWdVal = !!this.currConfig.isMaxWd;
     }
     if (this.isNoIconVal == null) {
       this.isNoIconVal = !!this.currConfig.isNoIcon;
@@ -272,6 +316,15 @@ export class GlnDatepickerComponent
       this.ornamRgAlignVal = ORNAMENT_ALIGN[this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
     }
+    if (this.currConfig.overlayClasses != null) {
+      this.overlayClassesVal = this.currConfig.overlayClasses;
+    }
+    if (this.classesVal == null) {
+      this.classesVal = this.currConfig.classes;
+    }
+    if (this.positionList.length === 0) {
+      this.positionList = this.getPositionList(this.currConfig.position);
+    }
   }
 
   public ngOnDestroy(): void {
@@ -293,6 +346,10 @@ export class GlnDatepickerComponent
     const rhombRef: ElementRef<HTMLElement> | undefined = this.ornamRhomb?.hostRef;
     const ornamRgAlign: string = this.ornamRgAlignVal || '';
     this.settingOrnamentList(CSS_ATTR_ORN_RG, ornamRgAlign, this.renderer, GlnOrnamentUtil.getElements(this.ornamRightList, rhombRef));
+  }
+
+  public ngAfterViewInit(): void {
+    this.hostWidth = HtmlElemUtil.propertyAsNumber(this.hostRef, 'width');
   }
 
   // ** interface ControlValueAccessor - start **
@@ -432,8 +489,8 @@ export class GlnDatepickerComponent
       this.isFocused = false;
       this.settingFocus(this.isFocused, this.renderer, this.hostRef);
       this.isFilled = !!this.formControl.value;
-      this.onTouched();
       if (!this.isPanelOpen && !this.hasPanelAnimation) {
+        this.onTouched();
         // (Cases-B1) Panel is close and on the trigger, click the Tab key.
         this.blured.emit();
       } else {
@@ -446,14 +503,182 @@ export class GlnDatepickerComponent
       }
     }
   }
-
+  /** Occurs when a mouse click event occurs outside of the options list pane. */
+  public backdropClick(): void {
+    if (!this.isDisabledVal) {
+      // (Cases-B3) Panel is open and mouse click outside of panel and trigger.
+      // (Cases-B4) Panel is open and mouse click outside of panel but on trigger.
+      this.isFocused = true;
+      this.focus();
+      this.close();
+    }
+  }
+  /** Occurs when the panel receives input focus. */
+  public doFocusOnPanel(): void {
+    if (!this.isDisabledVal) {
+      // (Cases-B2) Panel is open and mouse click within the panel.
+      this.isFocused = true;
+      this.focus();
+    }
+  }
+  /*public doOverlayPanelKeydown(event: KeyboardEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    if (!this.isDisabledVal && this.isPanelOpen) {
+      switch (event.key) {
+        // (Cases-B5) Panel is open and click the Escape key.
+        // (Cases-B6) Panel is open and click the Tab key.
+        case 'Escape':
+        case 'Tab':
+          this.isFocused = true;
+          this.focus();
+          this.close();
+          break;
+      }
+    }
+  }*/
+  /** Open or close the overlay panel. */
+  public toggle(): void {
+    if (!this.isDisabledVal) {
+      if (this.isPanelOpen) {
+        this.close();
+      } else {
+        if (!this.isFocused) {
+          this.focus();
+        }
+        this.open();
+      }
+    }
+  }
+  /** Open overlay panel. */
+  public open(): void {
+    if (!this.isDisabledVal && !this.isReadOnlyVal && !this.isPanelOpen) {
+      this.isPanelOpen = true;
+      this.hasPanelAnimation = !this.frameComp.isNoAnimationVal;
+      this.triggerRect = this.triggerRef.nativeElement.getBoundingClientRect();
+      this.isFocusAttrOnFrame = false;
+      this.triggerFontSize = Number((getComputedStyle(this.triggerRef.nativeElement).fontSize || '0').replace('px', ''));
+      this.changeDetectorRef.markForCheck();
+      this.opened.emit();
+    }
+  }
   /** Closes the overlay panel and focuses the main element. */
   public close(options?: { noAnimation?: boolean }): void {
     if (this.isDisabledVal || !this.isPanelOpen) {
       return;
     }
-    // ??
+    if (this.isFocusAttrOnFrame) {
+      HtmlElemUtil.setAttr(this.renderer, this.frameComp.hostRef, CSS_ATTR_FRAME_FOCUS, null);
+    }
+    this.isPanelOpen = false;
+    this.changeDetectorRef.markForCheck();
+    this.onTouched();
+    const overlayElement: HTMLElement = this.connectedOverlay.overlayRef.overlayElement;
+    if (overlayElement != null) {
+      // #? const panelHeight = this.getHeight(this.selectPanelRef);
+      // #? if (panelHeight > 0) {
+      // #?   const overlayRef = HtmlElemUtil.getElementRef(overlayElement);
+      // #?   HtmlElemUtil.setProperty(overlayRef, CSS_PROP_TRANSLATE_Y, this.getTranslateY(this.triggerRect, panelHeight, ScreenUtil.getHeight()));
+      // #? }
+      if (!this.frameComp.isNoAnimationVal && !options?.noAnimation) {
+        const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement.children[0] as HTMLElement);
+        // Add an attribute for animation and transformation.
+        HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_PANEL_OPENING_ANIMATION, null);
+        HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_PANEL_CLOSING_ANIMATION, '');
+      }
+    }
+    if (options?.noAnimation && this.hasPanelAnimation) {
+      this.hasPanelAnimation = false;
+    }
+    // this.selectPanelRef = null;
+    this.closed.emit();
   }
+  /** Callback when the overlay panel is attached. */
+  public attach(): void {
+    // Add the current object to the list of elements with the panel open.
+    // #? GlnSelectOpenUtil.add(this);
+    // Adding z-index: 'unset' will allow you to have one parent with a single z-index value.
+    // This will correctly use the z-index for child elements.
+    this.connectedOverlay.overlayRef.hostElement.style.zIndex = 'unset';
+
+    // const validPosition: string = this.getValidPosition(this.positionVal);
+    // this.getConnectedPosition(validPosition)
+
+    const overlayElement: HTMLElement = this.connectedOverlay.overlayRef.overlayElement;
+    // Adding a class so that custom styles can be applied.
+    const overlayRef = HtmlElemUtil.getElementRef(overlayElement);
+    HtmlElemUtil.setAttr(this.renderer, overlayRef, 'glndppo-datepicker', '');
+    // #? // Setting property 'width'.
+    // #? HtmlElemUtil.setProperty(overlayRef, CSS_PROP_WIDTH, this.hostWidth.toString().concat('px'));
+
+    // Set the font size for the overlay.
+    if (this.triggerFontSize > 0) {
+      overlayElement.style.fontSize = `${this.triggerFontSize}px`;
+    }
+    if (this.frameComp.sizeVal != null && this.frameComp.sizeVal > 0) {
+      const borderRadius = Math.round((this.frameComp.sizeVal / 10) * 100) / 100;
+      HtmlElemUtil.setProperty(overlayRef, CSS_PROP_BORDER_RADIUS, borderRadius.toString().concat('px'));
+    }
+    // #? const visibleSize = this.visibleSizeVal ?? 0;
+    // #? if (visibleSize > 0 && this.optionHeight > 0) {
+    // #?   const maxHeightOfOptionsPanel = this.optionHeight * visibleSize;
+    // #?   HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_HEIGHT, maxHeightOfOptionsPanel.toString().concat('px'));
+    // #? }
+
+    // #? if (this.isMaxWdVal) {
+    // #?   HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_WIDTH, this.hostWidth.toString().concat('px'));
+    // #? }
+
+    // Important! These operations should be the last, they include animation and the dimensions of the panel are distorted.
+    const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement?.children[0] as HTMLElement);
+    if (this.frameComp.isNoAnimationVal) {
+      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, 'noAnm', '');
+      HtmlElemUtil.setClass(this.renderer, selectPanelWrapRef, 'gln-no-animation', true);
+    } else {
+      // Add an attribute for animation and transformation.
+      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_PANEL_OPENING_ANIMATION, '');
+    }
+  }
+  /** Callback when the overlay panel is detached. */
+  public detach() {
+    // Remove the current object from the list of items with the panel open.
+    // #? GlnSelectOpenUtil.remove(this);
+    if (this.isPanelOpen) {
+      this.close();
+    }
+  }
+
+  // ** Protected methods **
+
+  /** Get the correct "position" value. */
+  /*protected getValidPosition(position: string | null): string {
+    return TOOLTIP_POSITION[position || ''] || TOOLTIP_POSITION['bottom'];
+  }*/
+  /*private getPositionParts(positionIn: string | null): { position: string; alignment: string } {
+    const tokenList: string[] = (positionIn || '').split('-');
+    const position: string = tokenList[0] || 'bottom';
+    const alignment: string = tokenList[1] || 'center';
+    return { position, alignment };
+  }*/
+  /*private getConnectedPosition(positionIn: string | null): ConnectedPosition {
+    let originX: HorizontalConnectionPos = 'center'; // 'start' | 'center' | 'end'
+    let originY: VerticalConnectionPos = 'bottom'; // 'top' | 'center' | 'bottom'
+    let overlayX: HorizontalConnectionPos = 'center'; // 'start' | 'center' | 'end'
+    let overlayY: VerticalConnectionPos = 'top'; // 'top' | 'center' | 'bottom'
+
+    const { position, alignment } = this.getPositionParts(positionIn);
+
+    if ('top' === position || 'bottom' === position) {
+      originY = 'top' === position ? 'top' : 'bottom';
+      overlayY = 'top' === position ? 'bottom' : 'top';
+      originX = overlayX = 'start' === alignment ? 'start' : 'end' === alignment ? 'end' : 'center';
+    } else if ('left' === position || 'right' === position) {
+      originX = 'left' === position ? 'start' : 'end';
+      overlayX = 'left' === position ? 'end' : 'start';
+      originY = overlayY = 'start' === alignment ? 'top' : 'end' === alignment ? 'bottom' : 'center';
+    }
+    return { originX, originY, overlayX, overlayY, panelClass: ['glntt-' + position, 'glntt-' + alignment] };
+  }*/
 
   // ** Private methods **
 
@@ -474,10 +699,6 @@ export class GlnDatepickerComponent
     HtmlElemUtil.setClass(renderer, elem, 'gln-focused', !!focus);
     HtmlElemUtil.setAttr(renderer, elem, 'foc', focus ? '' : null);
   }
-  // private settingMultiple(multiple: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-  //   HtmlElemUtil.setClass(renderer, elem, 'gln-multiple', !!multiple);
-  //   HtmlElemUtil.setAttr(renderer, elem, 'mul', multiple ? '' : null);
-  // }
   private settingNoIcon(noIcon: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-no-icon', !!noIcon);
     HtmlElemUtil.setAttr(renderer, elem, 'noico', noIcon ? '' : null);
@@ -507,5 +728,17 @@ export class GlnDatepickerComponent
         HtmlElemUtil.setAttr(renderer, elementRefList[idx], attrName, ornamAlignValue);
       }
     }
+  }
+
+  private getPosition(value: string | null): HorizontalConnectionPos {
+    return (value && ['start', 'center', 'end'].indexOf(value) > -1 ? value : 'start') as HorizontalConnectionPos;
+  }
+
+  private getPositionList(position: string | undefined | null): ConnectedPosition[] {
+    const horizontAlignment: HorizontalConnectionPos = this.getPosition(position || null);
+    return [
+      { originX: horizontAlignment, originY: 'bottom', overlayX: horizontAlignment, overlayY: 'top', panelClass: ['glndp-bottom'] },
+      { originX: horizontAlignment, originY: 'top', overlayX: horizontAlignment, overlayY: 'bottom', panelClass: ['glndp-top'] },
+    ];
   }
 }
