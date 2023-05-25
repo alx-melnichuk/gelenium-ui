@@ -28,6 +28,17 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
 &lt;<strong>/gln-datepicker</strong>&gt;</pre></code>
 </section>
 
+<section mr-vr>
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>GlnCalendar</em></small>
+      </div>
+      <gln-calendar class="demo01_">
+      </gln-calendar>
+    </div>
+  </div>
+</section>
 
 <form *ngIf="isShowBasic01"
   [formGroup]="formGroup01"
@@ -55,6 +66,7 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
       <gln-datepicker formControlName="model01a"
         label="Enter value"
         exterior="outlined"
+        [config]="{ overlayClasses: 'overlay-demo1' }"
         wdFull9>
       </gln-datepicker>
     </div>
