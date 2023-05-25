@@ -107,6 +107,9 @@ export class GlnSelectComponent
   @Input()
   public id = `glnsl-${uniqueIdCounter++}`;
   @Input()
+  /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
+  public classes: string | string[] | Set<string> | { [key: string]: unknown } = '';
+  @Input()
   public config: GlnSelectConfig | null | undefined;
   @Input()
   public exterior: string | null | undefined; // 'outlined' | 'underline' | 'standard'
@@ -149,9 +152,6 @@ export class GlnSelectComponent
   public ornamLfAlign: string | null | undefined; // 'default','center','flex-start','flex-end','baseline','stretch'
   @Input()
   public ornamRgAlign: string | null | undefined; // 'default','center','flex-start','flex-end','baseline','stretch'
-  @Input()
-  /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
-  public classes: string | string[] | Set<string> | { [key: string]: unknown } = '';
   @Input()
   public position: string | null | undefined; // Horizontal position = 'start' | 'center' | 'end';
   @Input()
@@ -588,6 +588,7 @@ export class GlnSelectComponent
       this.isFocused = false;
       this.settingFocus(this.isFocused, this.renderer, this.hostRef);
       if (!this.isPanelOpen && !this.hasPanelAnimation) {
+        this.onTouched();
         // (Cases-B1) Panel is close and on the trigger, click the Tab key.
         this.blured.emit();
       } else {

@@ -92,8 +92,7 @@
   (overlayKeydown)="doOverlayPanelKeydown($event)">
 
   <div glnslp-wrap
-    class="gln-select-panel-wrap"
-    [ngClass]="[(frameComp.noAnimation ? 'gln-no-animation' : '')]"
+    [ngClass]="['gln-select-panel-wrap', (frameComp.noAnimation ? 'gln-no-animation' : '')]"
     [attr.noAnm]="frameComp.noAnimation ? '' : null"
     (animationend)="hasPanelAnimation = isPanelOpen"
     (animationcancel)="hasPanelAnimation = isPanelOpen">
