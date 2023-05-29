@@ -146,10 +146,10 @@ gln-datepicker {
 
 .cdk-overlay-pane[glndppo-datepicker] {
   &.glndp-bottom {
-    --glndp---trnsl-y: -60%;
+    --glndp---trnsl-y: -40%;
   }
   &.glndp-top {
-    --glndp---trnsl-y: 60%;
+    --glndp---trnsl-y: 40%;
   }
   &.glndp-left {
     --glndp---trnsl-x: 40%;
@@ -194,7 +194,7 @@ gln-datepicker {
     @keyframes kf-sl-show-panel {
       0% {
         opacity: 0;
-        // transform: translateY(var(--glnslpo--translate-y, 0px)) scale(0.6);
+        // transform: translateY(var(--glndppo--translate-y, 0px)) scale(0.6);
         transform: translate(var(--glndp---trnsl-x, 0px), var(--glndp---trnsl-y, 0px)) scale(0.3);
       }
       100% {
@@ -210,25 +210,25 @@ gln-datepicker {
       }
       100% {
         opacity: 0;
-        // transform: translateY(var(--glnslpo--translate-y, 0px)) scale(0.6);
+        // transform: translateY(var(--glndppo--translate-y, 0px)) scale(0.6);
         transform: translate(var(--glndp---trnsl-x, 0px), var(--glndp---trnsl-y, 0px)) scale(0.3);
       }
     }
-  }
-}
 
-.cdk-overlay-container {
-  // Element "gln-datepicker-panel" Overlay
-  .gln-datepicker-panel {
-    border-radius: var(--glnslpo-border-radius, var(--glndppo--border-radius, unset));
-    box-sizing: border-box;
-    max-height: var(--glnslpo-max-height, unset); // var(--glnslpo-max-height, var(--glnslpo--max-height, 80vh));
-    max-width: var(--glnslpo-max-width, unset); // var(--glnslpo-max-width, var(--glndppo--max-width, unset));
-    min-height: 16px;
-    min-width: var(--glnslpo-min-width, unset); // var(--glnslpo-min-width, var(--glndppo--width));
-    overflow: auto;
-    outline: 0;
-    // To block the display of a shadow, you must specify "--glnslpo-elevation: none;".
-    box-shadow: var(--glnslpo-elevation, (rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px));
+    // Element "gln-datepicker-panel" Overlay
+    [glndp-panel] {
+      border-radius: var(--glndppo-border-radius, var(--glndppo--border-radius, unset));
+      box-sizing: border-box;
+      // To block the display of a shadow, you must specify "--glndppo-elevation: none;".
+      box-shadow: var(--glndppo-elevation, (rgb(0 0 0 / 20%) 0px 5px 5px -3px, rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px 14px 2px));
+      max-height: var(--glndppo-max-height, unset); // var(--glndppo-max-height, var(--glndppo--max-height, 80vh));
+      max-width: var(--glndppo-max-width, unset); // var(--glndppo-max-width, var(--glndppo--max-width, unset));
+      min-height: 16px;
+      min-width: var(--glndppo-min-width, unset); // var(--glndppo-min-width, var(--glndppo--width));
+      overflow: auto;
+      outline: 0;
+      padding: 0.5em;
+    }
   }
+
 }
