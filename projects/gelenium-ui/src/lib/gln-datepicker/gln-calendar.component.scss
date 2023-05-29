@@ -17,37 +17,39 @@ gln-calendar {
     --glncn--dir1: column;
     --glncn--dir2: row;
   }
-  --glncn--cell-wd: 2em;
-  --glncn--cell-pd: 0.125em;
 
   display: inline-flex;
   flex-direction: var(--glncn--dir1);
   
   &:not([dis]) {
-    --glncn-sticker-cl: var(--glncn-foc-sticker, hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l)));
-    --glncn-sticker-bg: var(--glncn-hov-bg-sticker, hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.15));
+    --glncn-btn-cl   : var(--glncn-def-btn-cl, hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l)));
+    --glncn-btn-bg-cl: var(--glncn-def-btn-bg-cl, hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.10));
+    --glncn-btn-br-cl: var(--glncn-def-btn-br-cl, hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.70));
   } // The state with disabled.
   &[dis] {
-    --glncn-sticker-cl: var(--glncn-dis-sticker, hsl(var(--glncn--default-h), var(--glncn--default-s), 60%));
+    --glncn-btn-cl    : var(--glncn-dis-btn-cl, hsl(var(--glncn--default-h), var(--glncn--default-s), 60%));
   }
 
   // Setting for "button". // # { margin: 0; box-sizing: border-box; text-align: center; cursor: default; padding: 1px 6px; }
   button[glncn-btn] {
     align-items: center;
-    border: 0;
     display: inline-flex;
     flex-shrink: 0; // # flex: 0 0 auto;
     font-size: 1em;
+    font-family: inherit;
     justify-content: center;
     outline: 0;
     overflow: visible;
     text-decoration: none;
     vertical-align: middle;
+    &:not([glncn-border]) {
+      border: 0px;
+    }
   }
 
   // Element "title"
   &>[glncn-title] {
-    outline: 1px solid green; // #
+    // outline: 1px solid green; // #
     align-items: center;
     display: flex;
     flex-direction: var(--glncn--dir2);
@@ -56,7 +58,9 @@ gln-calendar {
   [glncnt-month-year] {
     // order: 0;
     outline: 1px dashed brown; // #
+    display: inline-flex;
     flex-grow: 1;
+    min-width: var(--glncn-month-mn-wd, 13ch);
     // margin-top: 1em;
     // margin-bottom: 1em;
     // # max-height: 30px;
@@ -66,6 +70,18 @@ gln-calendar {
   }
   &[hor] [glncnt-month-year] {
     margin-top: 4em;
+  }
+  [glncntt-btn] {
+    background-color: transparent;
+    padding: 0px;
+
+  }
+  [glncntt-month] {
+    font-weight: 500;
+  }
+  [glncntt-year] {
+    font-weight: 500;
+    margin-left: 0.5ch;
   }
   [glncnt-prev] {
     // order: 1;
@@ -90,16 +106,15 @@ gln-calendar {
   [glncnt-btn] {
     background-color: transparent;
     border-radius: 50%;
-    color: var(--glncn-sticker-cl); // # color: rgba(0, 0, 0, 0.54);
+    color: var(--glncn-btn-cl); // # color: rgba(0, 0, 0, 0.54);
     cursor: pointer;
     padding: 0.5em;
     position: relative;
     overflow: visible;
     // transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    text-decoration: none;
     user-select: none;
     &:hover {
-      background-color: var(--glncn-sticker-bg); // # rgba(0, 0, 0, 0.04);
+      background-color: var(--glncn-btn-bg-cl); // # rgba(0, 0, 0, 0.04);
     }
   }
   [glncnt-icon] {
@@ -115,36 +130,34 @@ gln-calendar {
   // Element "header", "list-days"
   [glncn-cell] {
     outline: 1px solid orange;
+    height: var(--glncn-cell-size, var(--glncn--cell-size)); // # 40px;
+    margin: 1px 1px;
+    padding: var(--glncn-cell-pd, 0px);
+    width: var(--glncn-cell-size, var(--glncn--cell-size)); // # 36px;
+  }
+  [glncn-flex] {
     align-items: center;
     display: flex;
-    height: var(--glncn--cell-wd); // # 40px;
     justify-content: center;
-    margin: 1px 1px;
-    padding: var(--glncn--cell-pd);
     text-align: center;
-    width: var(--glncn--cell-wd); // # 36px;
   }
 
   // Element "header"
   [glncn-header] {
-    outline: 1px solid green; // #
-    align-items: center;
-    display: flex;
+    // outline: 1px solid green; // #
     flex-direction: var(--glncn--dir2);
-    justify-content: center;
   }
   [glncnh-day] {
     color: rgba(0, 0, 0, 0.6);
   }
   [glncnh-day-text] {
-    font-size: 0.75em;
+    font-size: var(--glncnh--fn-sz, 0.75em);
     font-weight: 400;
   }
 
   [glncn-list] {  
     display: flex;
     flex-direction: var(--glncn--dir1);
-    // # min-height: calc(6 * (var(--glncn--cell-wd) + 2 * var(--glncn--cell-pd))); // #  + var(--glncn--cell-pd) 234px;
   }
   [glncn-row] {
     align-items: center;
@@ -154,11 +167,26 @@ gln-calendar {
   }
 
   // Element "list-days"
-  [glncnld-item] {
+  [glncnw-item] {
     background-color: transparent;
-    color: rgba(0, 0, 0, 0.87);
     border-radius: 50%;
+    cursor: pointer;
+    font-weight: 400;
+    &:hover {
+      background-color: var(--glncn-btn-bg-cl); // # rgba(0, 0, 0, 0.04);
+    }
+  }
+  [glncn-no-events] {
     // opacity: 0;
-    // pointer-events: none;
+    pointer-events: none;
+  }
+  [glncn-curr-month] {
+    color: rgba(0, 0, 0, 0.87);
+  }
+  [glncn-no-curr-month] {
+    color: rgba(0, 0, 0, 0.5);
+  }
+  [glncn-border] {
+    border: 1px solid var(--glncn-btn-br-cl); // # rgba(0, 0, 0, 0.6);
   }
 }

@@ -2,13 +2,21 @@
   class="gln-calendar-title">
   <div glncnt-month-year
     class="gln-calendar-t-month-year">
-    <span glncntmy-text
-      class="gln-calendar-t-month-year-text">
-      {{ 'September'}} {{ '2023' }}
-    </span>
+    <button glncn-btn
+      glncntt-btn
+      class="gln-calendar-t-btn-month-year">
+      <span glncntt-month
+        class="gln-calendar-t-month">
+        {{ 'September'}}
+      </span>
+      <span glncntt-year
+        class="gln-calendar-t-year">
+        {{ '2023' }}
+      </span>
+    </button>
     <button glncn-btn
       glncnt-btn
-      class="gln-calendar-t-switch"
+      class="gln-calendar-t-btn-switch"
       tabindex="0"
       type="button">
       <svg glncnt-icon
@@ -20,7 +28,6 @@
       </svg>
       <!-- <span class="MuiTouchRipple-root css-w0pj6f"></span> -->
     </button>
-
   </div>
   <div glncnt-prev
     class="gln-calendar-t-prev">
@@ -53,11 +60,14 @@
 </div>
 
 <div glncn-header
+  glncn-flex
   class="gln-calendar-header">
   <div *ngFor="let dayItem of daysOfWeek; trackBy: trackByIndex;"
     glncn-cell
+    glncn-flex
     glncnh-day>
-    <span glncnh-day-text>{{ dayItem }}</span>
+    <span glncnh-day-text
+      class="gln-calendar-header-text">{{ dayItem }}</span>
   </div>
 </div>
 
@@ -95,10 +105,33 @@
   <div glncn-row
     style="outline: 1px solid deepskyblue;"
     class="gln-calendar-week">
-    <div *ngFor="let day of dataForWeek; trackBy: trackByIndex;"
-      glncn-cell
-      glncnld-item>
-      <span glncnld-item-text>{{ day }}</span>
-    </div>
+
+    <ng-container *ngFor="let cell of dataForWeek; trackBy: trackByIndex;">
+
+      <ng-container *ngIf="cell.isCurrMonth; else elseBlockIsCurrMonth">
+        <button glncn-btn
+          style="outline: 1px solid orange;"
+          glncn-cell
+          glncnw-item
+          [attr.glncn-no-curr-month]="!cell.isCurrMonth ? '' : undefined"
+          [attr.glncn-curr-month]="cell.isCurrMonth ? '' : undefined"
+          [attr.glncn-border]="cell.isToday ? '' : undefined"
+          [ngClass]="[(cell.isCurrMonth ? 'gln-calendar-curr-month' : 'gln-calendar-no-curr-month')
+          ,(cell.isToday ? 'gln-calendar-today' : '')]">
+          <span glncnw-item-text>{{ cell.day }}</span>
+        </button>
+      </ng-container>
+      <ng-template #elseBlockIsCurrMonth>
+        <div glncn-cell
+          glncn-flex
+          glncn-no-events
+          glncn-no-curr-month
+          [ngClass]="['gln-calendar-no-curr-month', 'gln-calendar-no-events']">
+          <span glncnw-item-text>{{ !isHideDatesAround ? cell.day : '' }}</span>
+        </div>
+      </ng-template>
+
+    </ng-container>
+
   </div>
 </ng-template>
