@@ -37,6 +37,10 @@ export class CmDatepickerBasicComponent {
   // Page: Attrib02
   isShowAttrib02 = true;
 
+  // Page Calendar
+  // Page: CellSize
+  isShowCellSize = false;
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }
