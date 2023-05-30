@@ -22,7 +22,7 @@ export class CmDatepickerBasicComponent {
   public labelCss = LABEL_CSS;
 
   // Page: Basic01
-  isShowBasic01 = true;
+  isShowBasic01 = false;
 
   public baseRef: string = RouterConfig.get('BASE_REF');
   public urlCmDatepicker = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_DATEPICKER');
@@ -38,9 +38,13 @@ export class CmDatepickerBasicComponent {
   isShowAttrib02 = true;
 
   // Page Calendar
+  public urlCmCalendar = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_DATEPICKER');
+  public urlPlCalendar = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_DATEPICKER');
   // Page: CellSize
-  isShowCellSize = false;
-
+  isShowClnCellSize = false;
+  // Page: Bootstrap
+  isShowClnBootstrap = true;
+  public cfgBs = { cellSize: 30, weekday: 2 };
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }

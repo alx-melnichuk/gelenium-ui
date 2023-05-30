@@ -28,7 +28,7 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
 &lt;<strong>/gln-datepicker</strong>&gt;</pre></code>
 </section>
 
-<section mr-vr>
+<!-- <section mr-vr>
   <div class="app-group">
     <div class="app-elem">
       <div>
@@ -40,9 +40,9 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
 
     </div>
   </div>
-</section>
+</section> -->
 
-<form *ngIf="isShowBasic01"
+<form *ngIf="false && isShowBasic01"
   [formGroup]="formGroup01"
   novalidate
   autocomplete="off">
@@ -114,11 +114,11 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
 
 
 
-<ng-container *ngIf="isShowCellSize">
+<ng-container *ngIf="isShowClnCellSize">
   <section mr-vr>
     <h3 class="app-hover-link">
       Size
-      <a [href]="urlCmDatepicker + '#Size'">#</a>
+      <a [href]="urlCmCalendar + '#Size'">#</a>
     </h3>
     <p>
       The "cell-size" property determines the cell size of the element (its height and width).
@@ -251,6 +251,35 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
         style="font-size: 16px;"
         [cellSize]="41">
       </gln-calendar>
+    </div>
+  </div>
+
+</ng-container>
+
+
+<ng-container *ngIf="isShowClnBootstrap">
+  <section mr-vr>
+    <h4 class="app-hover-link">
+      Like a Bootstrap.
+      <a [href]="urlPlCalendar + '#Bootstrap'">#</a>
+    </h4>
+    <p>
+      It is possible to display GlnButton in style as "Bootstrap".
+      <br />
+      To do this, you need to specify the following configuration:
+    </p>
+  </section>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>Bootstrap style</em></small>
+      </div>
+      <div class="cnb1-br1">
+        <gln-calendar class="cnb1-bstr"
+          [config]="cfgBs">
+        </gln-calendar>
+      </div>
     </div>
   </div>
 
