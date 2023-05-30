@@ -3,6 +3,7 @@
 gln-calendar {
   --glncn--default-h: var(--glncl-default-h, var(--gln-default-h));
   --glncn--default-s: var(--glncl-default-s, var(--gln-default-s));
+  --glncn--default-l: var(--glncl-default-l, var(--gln-default-l));
 
   --glncn--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
   --glncn--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
@@ -18,16 +19,24 @@ gln-calendar {
     --glncn--dir2: row;
   }
 
-  display: inline-flex;
-  flex-direction: var(--glncn--dir1);
-  
+  display: block;
+
   &:not([dis]) {
-    --glncn-btn-cl   : var(--glncn-def-btn-cl, hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l)));
-    --glncn-btn-bg-cl: var(--glncn-def-btn-bg-cl, hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.10));
-    --glncn-btn-br-cl: var(--glncn-def-btn-br-cl, hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.70));
+    --glncn--btn-cl   : var(--glncn-def-btn-cl, hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l)));
+    --glncn--btn-bg-cl: var(--glncn-def-btn-bg-cl, hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.10));
+    --glncn--btn-br-cl: var(--glncn-def-btn-br-cl, hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.70));
+    --glncn--day1-cl  : var(--glncn-def-day1-cl, hsl(var(--glnch--default-h), var(--glnch--default-s), var(--glnch--default-l)));   // ~rgba(0, 0, 0, 0.87);
+    --glncn--day2-cl  : var(--glncn-def-day2-cl, hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.70));
   } // The state with disabled.
   &[dis] {
-    --glncn-btn-cl    : var(--glncn-dis-btn-cl, hsl(var(--glncn--default-h), var(--glncn--default-s), 60%));
+    --glncn--btn-cl    : var(--glncn-dis-btn-cl, hsl(var(--glncn--default-h), var(--glncn--default-s), 60%));
+  }
+
+  // Element "wrapper"
+  &>[glncn-wrapper] {
+    outline: 1px solid green;
+    display: flex;
+    flex-direction: var(--glncn--dir1);
   }
 
   // Setting for "button". // # { margin: 0; box-sizing: border-box; text-align: center; cursor: default; padding: 1px 6px; }
@@ -48,7 +57,7 @@ gln-calendar {
   }
 
   // Element "title"
-  &>[glncn-title] {
+  [glncn-title] {
     // outline: 1px solid green; // #
     align-items: center;
     display: flex;
@@ -56,57 +65,55 @@ gln-calendar {
     justify-content: space-around;
   }
   [glncnt-month-year] {
-    // order: 0;
-    outline: 1px dashed brown; // #
+    order: var(--glncnt-month-ord, unset);
+    // outline: 1px dashed brown; // #
+    align-items: center;
     display: inline-flex;
     flex-grow: 1;
-    min-width: var(--glncn-month-mn-wd, 13ch);
-    // margin-top: 1em;
-    // margin-bottom: 1em;
-    // # max-height: 30px;
-    // # min-height: 30px;
-    // padding-left: 1em;
-    // padding-right: 1em;
+    justify-content: center;
+    // min-width: var(--glncn-month-mn-wd, 13.5ch);
   }
   &[hor] [glncnt-month-year] {
-    margin-top: 4em;
-  }
-  [glncntt-btn] {
-    background-color: transparent;
-    padding: 0px;
+    padding-top: 4em;
 
+    [glncnt-btn] {
+      display: none;
+    }
+  }
+  [glncntn-btn] {
+    background-color: transparent;
+    color: var(--glncnt-cl, currentColor);
+    height: 2.5em;
+    padding: 0px;
   }
   [glncntt-month] {
-    font-weight: 500;
+    font-weight: var(--glncntt-fn-wg, 500);
   }
   [glncntt-year] {
-    font-weight: 500;
+    font-weight: var(--glncntt-fn-wg, 500);
     margin-left: 0.5ch;
   }
   [glncnt-prev] {
-    // order: 1;
-    outline: 1px dashed green; // #
+    order: var(--glncnt-prev-ord, unset);
     flex-shrink: 0;
   }
   [glncnt-next] {
-    // order: 2;
-    outline: 1px dashed blueviolet; // #
+    order: var(--glncnt-next-ord, unset);
     flex-shrink: 0;
   }
   &[hor] [glncnt-prev] {
     position: relative;
     right: 22%;
-    top: 5%;
   }
   &[hor] [glncnt-next] {
-    bottom: 10%;
+    bottom: 2.5em;
     left: 22%;
     position: relative;
   }
   [glncnt-btn] {
     background-color: transparent;
-    border-radius: 50%;
-    color: var(--glncn-btn-cl); // # color: rgba(0, 0, 0, 0.54);
+    border-radius: var(--glncn-br-rd, 50%);
+    color: var(--glncn--btn-cl); // # color: rgba(0, 0, 0, 0.54);
     cursor: pointer;
     padding: 0.5em;
     position: relative;
@@ -114,7 +121,7 @@ gln-calendar {
     // transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     user-select: none;
     &:hover {
-      background-color: var(--glncn-btn-bg-cl); // # rgba(0, 0, 0, 0.04);
+      background-color: var(--glncn--btn-bg-cl); // # rgba(0, 0, 0, 0.04);
     }
   }
   [glncnt-icon] {
@@ -129,7 +136,7 @@ gln-calendar {
 
   // Element "header", "list-days"
   [glncn-cell] {
-    outline: 1px solid orange;
+    // outline: 1px solid orange;
     height: var(--glncn-cell-size, var(--glncn--cell-size)); // # 40px;
     margin: 1px 1px;
     padding: var(--glncn-cell-pd, 0px);
@@ -148,11 +155,11 @@ gln-calendar {
     flex-direction: var(--glncn--dir2);
   }
   [glncnh-day] {
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--glncnh-cl, rgba(0, 0, 0, 0.6));
   }
   [glncnh-day-text] {
-    font-size: var(--glncnh--fn-sz, 0.75em);
-    font-weight: 400;
+    font-size: var(--glncnh-fn-sz, var(--glncnh--fn-sz, 0.75em));
+    font-weight: var(--glncnh-fn-wg, 400);
   }
 
   [glncn-list] {  
@@ -169,11 +176,11 @@ gln-calendar {
   // Element "list-days"
   [glncnw-item] {
     background-color: transparent;
-    border-radius: 50%;
+    border-radius: var(--glncn-br-rd, 50%);
     cursor: pointer;
     font-weight: 400;
     &:hover {
-      background-color: var(--glncn-btn-bg-cl); // # rgba(0, 0, 0, 0.04);
+      background-color: var(--glncn--btn-bg-cl); // # rgba(0, 0, 0, 0.04);
     }
   }
   [glncn-no-events] {
@@ -181,12 +188,14 @@ gln-calendar {
     pointer-events: none;
   }
   [glncn-curr-month] {
-    color: rgba(0, 0, 0, 0.87);
+    color: var(--glncn--day1-cl); // # rgba(0, 0, 0, 0.87); //*
+    --demo1: rgba(0, 0, 0, 0.87);
+    --demo2: rgba(0, 0, 0, 0.5);
   }
   [glncn-no-curr-month] {
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--glncn--day2-cl); // # rgba(0, 0, 0, 0.5); //*
   }
   [glncn-border] {
-    border: 1px solid var(--glncn-btn-br-cl); // # rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--glncn--btn-br-cl); // # rgba(0, 0, 0, 0.6);
   }
 }

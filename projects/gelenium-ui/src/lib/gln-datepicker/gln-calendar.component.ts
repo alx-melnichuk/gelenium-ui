@@ -39,11 +39,14 @@ export const GLN_CALENDAR_CONFIG = new InjectionToken<GlnCalendarConfig>('GLN_CA
 })
 export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
-  public config: any; // GlnDatepickerConfig | null | undefined;
+  public config: GlnCalendarConfig | null | undefined;
   @Input()
   public cellSize: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
+  @Input()
+  public weekday: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
 
   public daysOfWeek: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
   public week1Buff: CalendarCell[] = [];
   public week2Buff: CalendarCell[] = [];
   public week3Buff: CalendarCell[] = [];
@@ -61,21 +64,28 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public cellSizeVal: number | null = null; // Binding attribute "cellSize".
   public currConfig: any; // GlnDatepickerConfig;
   public isHideDatesAround: boolean = false;
+  public nameMonth: string = '';
+  public nameYear: string = '';
+  public weekdayVal: number | null = null; // Binding attribute "weekday".
 
   constructor(
     public hostRef: ElementRef<HTMLElement>,
     @Optional() @Inject(GLN_CALENDAR_CONFIG) private rootConfig: GlnCalendarConfig | null
   ) {
     this.currConfig = this.rootConfig || {};
-    const data1: string[] = this.getNameDaysOfWeek();
-    // console.log(`data1=`, data1);
-    const data2: string[] = this.getNameDaysOfWeek('narrow');
-    // console.log(`data2=`, data2);
-    const data3: string[] = this.getNameDaysOfWeek('short');
-    // console.log(`data3=`, data3);
+    // console.log(`getListDaysOfWeek('long')=`, this.getListDaysOfWeek('long'));
+    // console.log(`getListDaysOfWeek('narrow')=`, this.getListDaysOfWeek('narrow'));
+    // console.log(`getListDaysOfWeek('short')=`, this.getListDaysOfWeek('short'));
+    // console.log(`getListDaysOfWeek()=`, this.getListDaysOfWeek());
+    // console.log(`getListDaysOfWeek(1)=`, this.getListDaysOfWeek(1));
+    // console.log(`getListDaysOfWeek(2)=`, this.getListDaysOfWeek(2));
+    // console.log(`getListDaysOfWeek(3)=`, this.getListDaysOfWeek(3));
+    // console.log(`getListDaysOfWeek(4)=`, this.getListDaysOfWeek(4));
+    // console.log(`getListDaysOfWeek(-1)=`, this.getListDaysOfWeek(-1));
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
+    let isPrepareData: boolean = false;
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
@@ -85,6 +95,15 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.cellSizeVal = this.converSize(cellSizeStr, CELL_SIZE[cellSizeStr] || CELL_SIZE['small']);
       this.setCssCellSize(this.cellSizeVal, this.hostRef);
     }
+    if (changes['weekday'] || (changes['config'] && this.weekday == null && this.currConfig.weekday != null)) {
+      const weekdayStr: string = (this.weekday?.toString() || this.currConfig.weekday || '').toString();
+      this.weekdayVal = this.converWeekday(weekdayStr);
+      isPrepareData = true;
+    }
+
+    if (isPrepareData && this.weekdayVal != null) {
+      this.prepareData(new Date(), this.weekdayVal);
+    }
   }
 
   public ngOnInit(): void {
@@ -93,17 +112,22 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
 
     const fontSize: number = HtmlElemUtil.propertyAsNumber(this.hostRef, 'font-size');
     this.setCssFontSizeHeader(fontSize - 1, this.hostRef);
+    let isPrepareData: boolean = false;
 
     if (this.cellSizeVal == null) {
       const cellSizeStr: string = (this.currConfig.size || '').toString();
       this.cellSizeVal = this.converSize(cellSizeStr, CELL_SIZE[cellSizeStr] || CELL_SIZE['middle']);
       this.setCssCellSize(this.cellSizeVal, this.hostRef);
     }
+    if (this.weekdayVal == null) {
+      const weekdayStr: string = (this.currConfig.weekday || '').toString();
+      this.weekdayVal = this.converWeekday(weekdayStr);
+      isPrepareData = true;
+    }
 
-    // this.getDetailsDaysOfMonth(new Date('2023-01-01T03:24:00'));
-    this.getDetailsDaysOfMonth(new Date('2023-05-10T03:24:00'));
-    this.updateContentWeek();
-    this.isHideDatesAround = true;
+    if (isPrepareData && this.weekdayVal != null) {
+      this.prepareData(new Date(), this.weekdayVal);
+    }
   }
 
   public trackByIndex(index: number): number {
@@ -112,22 +136,92 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
 
   // Private methods
 
-  private getNameDaysOfWeek(weekdayValue?: 'long' | 'short' | 'narrow' | undefined, locale?: string | undefined): string[] {
-    const result: string[] = [];
-    const weekdayNameList = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const len: number = weekdayValue === 'short' ? 3 : weekdayValue === 'narrow' ? 1 : -1;
-    const userLocale = !!locale ? locale : navigator.language;
+  private prepareData(date: Date, weekdayLen: number): void {
+    this.nameYear = this.getInfoForYear(date);
+    this.nameMonth = this.getInfoForMonth(date);
+    this.daysOfWeek = this.getListDaysOfWeek(weekdayLen);
+    const cellBuff: CalendarCell[] = this.getListDaysOfMonth(date);
+    this.updateContentWeek(cellBuff);
+  }
+
+  private getInfoForYear(date: Date, year?: 'numeric' | '2-digit' | undefined): string {
+    return new Intl.DateTimeFormat('default', { year: year || 'numeric' }).format(date);
+  }
+
+  private getInfoForMonth(date: Date, month?: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined): string {
+    return new Intl.DateTimeFormat('default', { month: month || 'long' }).format(date);
+  }
+  private converWeekday(weekday: string | undefined): number {
+    let weekdayNum: number = 1;
+    if (weekday != undefined) {
+      const valueNum: number = Number.parseFloat(weekday);
+      if (!Number.isNaN(valueNum)) {
+        weekdayNum = 0 < valueNum && valueNum < 25 ? valueNum : -1;
+      } else {
+        weekdayNum = 'long' === weekday ? -1 : 'short' === weekday ? 3 : 1;
+      }
+    }
+    return weekdayNum;
+  }
+  // weekday?: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
+  private getListDaysOfWeek(weekdayLen: number): string[] {
+    const result: string[] = ['', '', '', '', '', '', ''];
+    const weekdayRes: 'long' | 'short' | 'narrow' = weekdayLen <= 0 || 3 < weekdayLen ? 'long' : 1 === weekdayLen ? 'narrow' : 'short';
     const current: Date = new Date();
     let first = current.getDate() - current.getDay();
     for (let i = 0; i < 7; i++) {
-      const data: Date = new Date(current.setDate(first++));
-      const nameDay: string = data.toLocaleDateString(userLocale, { weekday: weekdayValue || 'long' });
-      result.push(nameDay || weekdayNameList[i].substring(0, len > -1 ? len : undefined));
+      const date: Date = new Date(current.setDate(first++));
+      const value: string = new Intl.DateTimeFormat('default', { weekday: weekdayRes }).format(date);
+      result[i] = weekdayLen > 0 ? value.substring(0, weekdayLen) : value;
     }
     return result;
   }
 
+  private getListDaysOfMonth(date: Date): CalendarCell[] {
+    const result: CalendarCell[] = [];
+    const yearInit: number = date.getFullYear();
+    const monthInit: number = date.getMonth();
+    const dayInit: number = date.getDate();
+
+    const dateItem: Date = new Date(yearInit, monthInit, 1);
+    let indexDayOfWeeek: number = dateItem.getDay(); // 0-вс,1-пн,2-вт,3-ср,4-чт,5-пт,6-сб
+    // console.log(`dateItem.getDay()=`, dateItem.getDay());
+    dateItem.setDate(dateItem.getDate() - indexDayOfWeeek - 1);
+    // console.log(`dateItem2.getDay()=`, dateItem.getDay());
+
+    let idx: number = 0;
+    while (idx < 42) {
+      dateItem.setDate(dateItem.getDate() + 1);
+      const year: number = dateItem.getFullYear();
+      const month: number = dateItem.getMonth();
+      const day: number = dateItem.getDate();
+
+      const isToday: boolean | undefined = year === yearInit && month === monthInit && day === dayInit ? true : undefined;
+      result.push({ year, month, day, isCurrMonth: month === monthInit, isToday });
+      // console.log(`calendarCellBuff.push(idx:${idx} { year: ${year}, month: ${month}, day: ${day} }`); // #
+      idx++;
+    }
+    return result;
+  }
+
+  private updateContentWeek(cellBuff: CalendarCell[]): void {
+    this.week1Buff = cellBuff.slice(0, 7);
+    this.week2Buff = cellBuff.slice(7, 14);
+    this.week3Buff = cellBuff.slice(14, 21);
+    this.week4Buff = cellBuff.slice(21, 28);
+    this.week5Buff = cellBuff.slice(28, 35);
+    this.week6Buff = cellBuff.slice(35, 42);
+
+    this.contentWeek1 = { dataWeek: this.week1Buff };
+    this.contentWeek2 = { dataWeek: this.week2Buff };
+    this.contentWeek3 = { dataWeek: this.week3Buff };
+    this.contentWeek4 = { dataWeek: this.week4Buff };
+    this.contentWeek5 = { dataWeek: this.week5Buff };
+    this.contentWeek6 = { dataWeek: this.week6Buff };
+  }
+
   private getDetailsDaysOfMonth(dateInit: Date): void {
+    /*
     const yearInit: number = dateInit.getFullYear();
     const monthInit: number = dateInit.getMonth();
     const dayInit: number = dateInit.getDate();
@@ -158,7 +252,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     this.week4Buff = cellBuffList.slice(21, 28);
     this.week5Buff = cellBuffList.slice(28, 35);
     this.week6Buff = cellBuffList.slice(35, 42);
-
+    */
     /*
     const buff: string[] = [];
 
@@ -209,15 +303,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   private getIsWeekStartsOnMonday(): boolean {
     const he1: any = new Intl.Locale('default');
     return 1 === he1.weekInfo?.firstDay;
-  }
-
-  private updateContentWeek(): void {
-    this.contentWeek1 = { dataWeek: this.week1Buff };
-    this.contentWeek2 = { dataWeek: this.week2Buff };
-    this.contentWeek3 = { dataWeek: this.week3Buff };
-    this.contentWeek4 = { dataWeek: this.week4Buff };
-    this.contentWeek5 = { dataWeek: this.week5Buff };
-    this.contentWeek6 = { dataWeek: this.week6Buff };
   }
 
   private converSize(size: string, defaultValue: number): number {
