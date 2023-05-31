@@ -8,9 +8,11 @@ import {
   OnChanges,
   OnInit,
   Optional,
+  Renderer2,
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
+import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { GlnCalendarConfig } from './gln-calendar-config.interface';
 
@@ -43,6 +45,10 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public cellSize: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
   @Input()
+  public isHideOldDays: string | boolean | undefined;
+  @Input()
+  public isHorizont: string | boolean | null | undefined;
+  @Input()
   public weekday: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
 
   public daysOfWeek: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
@@ -63,12 +69,14 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
 
   public cellSizeVal: number | null = null; // Binding attribute "cellSize".
   public currConfig: any; // GlnDatepickerConfig;
-  public isHideDatesAround: boolean = false;
+  public isHideOldDaysVal: boolean | null = null; // Binding attribute "isHideOldDays".
+  public isHorizontVal: boolean | null = null; // Binding attribute "isHorizont".
   public nameMonth: string = '';
   public nameYear: string = '';
   public weekdayVal: number | null = null; // Binding attribute "weekday".
 
   constructor(
+    private renderer: Renderer2,
     public hostRef: ElementRef<HTMLElement>,
     @Optional() @Inject(GLN_CALENDAR_CONFIG) private rootConfig: GlnCalendarConfig | null
   ) {
@@ -95,6 +103,13 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.cellSizeVal = this.converSize(cellSizeStr, CELL_SIZE[cellSizeStr] || CELL_SIZE['small']);
       this.setCssCellSize(this.cellSizeVal, this.hostRef);
     }
+    if (changes['isHideOldDays'] || (changes['config'] && this.isHideOldDays == null && this.currConfig.isHideOldDays != null)) {
+      this.isHideOldDaysVal = BooleanUtil.init(this.isHideOldDays) ?? !!this.currConfig.isHideOldDays;
+    }
+    if (changes['isHorizont'] || (changes['config'] && this.isHorizont == null && this.currConfig.isHorizont != null)) {
+      this.isHorizontVal = BooleanUtil.init(this.isHorizont) ?? !!this.currConfig.isHorizont;
+      this.settingIsHorizont(this.isHorizontVal, this.renderer, this.hostRef);
+    }
     if (changes['weekday'] || (changes['config'] && this.weekday == null && this.currConfig.weekday != null)) {
       const weekdayStr: string = (this.weekday?.toString() || this.currConfig.weekday || '').toString();
       this.weekdayVal = this.converWeekday(weekdayStr);
@@ -118,6 +133,13 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       const cellSizeStr: string = (this.currConfig.size || '').toString();
       this.cellSizeVal = this.converSize(cellSizeStr, CELL_SIZE[cellSizeStr] || CELL_SIZE['middle']);
       this.setCssCellSize(this.cellSizeVal, this.hostRef);
+    }
+    if (this.isHideOldDaysVal == null) {
+      this.isHideOldDaysVal = !!this.currConfig.isHideOldDays;
+    }
+    if (this.isHorizontVal == null) {
+      this.isHorizontVal = !!this.currConfig.isHorizont;
+      this.settingIsHorizont(this.isHorizontVal, this.renderer, this.hostRef);
     }
     if (this.weekdayVal == null) {
       const weekdayStr: string = (this.currConfig.weekday || '').toString();
@@ -315,5 +337,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   }
   private setCssFontSizeHeader(fontSize: number, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setProperty(elem, CSS_PROP_FONT_SIZE_HEADER, (fontSize > 0 ? fontSize.toString() : null)?.concat('px'));
+  }
+  private settingIsHorizont(isHorizont: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-is-horizont', !!isHorizont);
+    HtmlElemUtil.setAttr(renderer, elem, 'hor', isHorizont ? '' : null);
   }
 }

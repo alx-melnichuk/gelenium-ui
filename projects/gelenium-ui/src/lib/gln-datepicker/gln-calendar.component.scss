@@ -40,7 +40,7 @@ gln-calendar {
   }
 
   // Setting for "button". // # { margin: 0; box-sizing: border-box; text-align: center; cursor: default; padding: 1px 6px; }
-  button[glncn-btn] {
+  button[glncn-btn] { // ??
     align-items: center;
     display: inline-flex;
     flex-shrink: 0; // # flex: 0 0 auto;
@@ -56,6 +56,22 @@ gln-calendar {
     }
   }
 
+  button[glncn-btn2] {
+    // align-items: center;
+    // display: inline-flex;
+    flex-shrink: 0; // # flex: 0 0 auto;
+    font-size: 1em;
+    font-family: inherit;
+    // justify-content: center;
+    outline: 0;
+    overflow: visible;
+    text-decoration: none;
+    vertical-align: middle;
+    // &:not([glncn-border]) {
+    border: 0px;
+    // }
+  }
+
   // Element "title"
   [glncn-title] {
     // outline: 1px solid green; // #
@@ -64,35 +80,70 @@ gln-calendar {
     flex-direction: var(--glncn--dir2);
     justify-content: space-around;
   }
+
+  // Block "month-year"
   [glncnt-month-year] {
-    order: var(--glncnt-month-ord, unset);
     // outline: 1px dashed brown; // #
     align-items: center;
     display: inline-flex;
     flex-grow: 1;
     justify-content: center;
-    // min-width: var(--glncn-month-mn-wd, 13.5ch);
+    order: var(--glncnt-month-ord, unset);
+
+    &>button {
+      align-items: center;
+      background-color: transparent;
+      color: var(--glncnt-cl, currentColor);
+      display: inline-flex;
+      font-weight: var(--glncntt-fn-wg, 500);
+      height: 2.5em;
+      justify-content: center;
+    }
   }
   &[hor] [glncnt-month-year] {
-    padding-top: 4em;
+    --glncntn-month-mn-wd: 9ch;
+    --glncntn-year-mn-wd: 4ch;
+  }
 
+  // Element button "name month"
+  [glncntb-month2] {
+    min-width: var(--glncntn-month-mn-wd);
+    padding: 0px;
+  }
+
+  // Element button "name year"
+  [glncntb-year2] {
+     min-width: var(--glncntn-year-mn-wd);
+     padding: 0px 0px 0px 0.5ch;
+  }
+
+  // Element button "switch"
+  [glncntb-switch] {
+
+  }
+
+  // *** OLD **
+
+  &[hor] [glncnt-month-year] {
+    padding-top: 4em;
+    // --glncntn-month-mn-wd: 9ch; // #
+    // --glncntn-year-mn-wd: 4ch;  // #
     [glncnt-btn] {
       display: none;
     }
   }
-  [glncntn-btn] {
+  [glncntn-btn] { // ??
     background-color: transparent;
     color: var(--glncnt-cl, currentColor);
     height: 2.5em;
     padding: 0px;
   }
-  [glncntt-month] {
-    font-weight: var(--glncntt-fn-wg, 500);
-  }
-  [glncntt-year] {
-    font-weight: var(--glncntt-fn-wg, 500);
-    margin-left: 0.5ch;
-  }
+  // [glncntn-month] {
+  //   min-width: var(--glncntn-month-mn-wd);
+  // }
+  // [glncntn-year] {
+  //   min-width: var(--glncntn-year-mn-wd);
+  // }
   [glncnt-prev] {
     order: var(--glncnt-prev-ord, unset);
     flex-shrink: 0;
@@ -136,9 +187,9 @@ gln-calendar {
 
   // Element "header", "list-days"
   [glncn-cell] {
-    // outline: 1px solid orange;
     height: var(--glncn-cell-size, var(--glncn--cell-size)); // # 40px;
     margin: 1px 1px;
+    line-height: normal;
     padding: var(--glncn-cell-pd, 0px);
     width: var(--glncn-cell-size, var(--glncn--cell-size)); // # 36px;
   }
