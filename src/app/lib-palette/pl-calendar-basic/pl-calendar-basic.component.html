@@ -1,0 +1,128 @@
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Basic.
+    <a [href]="urlPlCalendar + '#Basic'">#</a>
+  </h4>
+  <p>
+    The GlnCalendar component has a default palette.
+  </p>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>color: primary</em></small>
+    </div>
+    <gln-calendar>
+    </gln-calendar>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>color: danger</em></small>
+    </div>
+    <gln-calendar [glnColor]="{ primary: 'danger' }">
+    </gln-calendar>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>color: success</em></small>
+    </div>
+    <gln-calendar [glnColor]="{ primary: 'success' }">
+    </gln-calendar>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>color: info</em></small>
+    </div>
+    <gln-calendar [glnColor]="{ primary: 'info' }">
+    </gln-calendar>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>color: warning</em></small>
+    </div>
+    <gln-calendar [glnColor]="{ primary: 'warning' }">
+    </gln-calendar>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>color: customer</em></small>
+    </div>
+    <gln-calendar class="cnpl-customer"
+      [glnColor]="{ primary: 'customer' }">
+    </gln-calendar>
+  </div>
+
+</div>
+
+
+
+
+<span style="color: indianred;">source</span>
+<!--
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="bb-items"&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class ButtonComponent &#123;
+  public routerLink = '/palette/button';
+  public exterior01a = 'outlined';
+
+  public getLabel(exterior: string): string &#123;
+    return exterior ? exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-button &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+-->
+
+<hr br-nn />
