@@ -7,6 +7,7 @@ import { LmPaletteRouterMapModule } from './lm-palette-router-map.module';
 import { LmPaletteComponent } from './lm-palette.component';
 
 const URL_PALETTE_BUTTON = RouterConfig.get('URL_PALETTE_BUTTON');
+const URL_PALETTE_CALENDAR = RouterConfig.get('URL_PALETTE_CALENDAR');
 const URL_PALETTE_CHECKBOX = RouterConfig.get('URL_PALETTE_CHECKBOX');
 const URL_PALETTE_FRAME = RouterConfig.get('URL_PALETTE_FRAME');
 const URL_PALETTE_INPUT = RouterConfig.get('URL_PALETTE_INPUT');
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: URL_PALETTE_BUTTON,
         loadChildren: () => import('../lib-palette/pl-button/pl-button.module').then((m) => m.PlButtonModule),
+      },
+      {
+        path: URL_PALETTE_CALENDAR,
+        loadChildren: () => import('../lib-palette/pl-calendar/pl-calendar.module').then((m) => m.PlCalendarModule),
       },
       {
         path: URL_PALETTE_CHECKBOX,

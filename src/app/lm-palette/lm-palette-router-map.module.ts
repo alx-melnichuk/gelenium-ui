@@ -21,6 +21,19 @@ const siteUrlsButton: SiteUrl[] = [
 
 SiteMenuUtil.addItem('Palette', 'Button', { label: 'Button', siteUrls: siteUrlsButton });
 
+//  ** Menu for "Calendar". **
+
+RouterConfig.add('URL_PALETTE_CALENDAR', 'calendar');
+const urlPlCalendar = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CALENDAR');
+
+const siteUrlsCalendar: SiteUrl[] = [
+  { label: 'Basic', url: urlPlCalendar, fragment: 'Basic' },
+  { label: 'Like a Bootstrap', url: urlPlCalendar, fragment: 'Bootstrap' },
+  { label: 'Like a Material-UI', url: urlPlCalendar, fragment: 'MaterialUI' },
+];
+
+SiteMenuUtil.addItem('Palette', 'Calendar', { label: 'Calendar', siteUrls: siteUrlsCalendar });
+
 // ** Menu for "Checkbox". **
 
 RouterConfig.add('URL_PALETTE_CHECKBOX', 'checkbox');
