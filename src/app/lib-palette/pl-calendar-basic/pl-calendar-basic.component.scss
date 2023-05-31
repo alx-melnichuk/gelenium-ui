@@ -2,4 +2,10 @@
 
 app-pl-calendar-basic {
   display: block;
+
+  .cnpl-customer {
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
+  }
 }
