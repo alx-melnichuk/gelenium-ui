@@ -5,13 +5,24 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { GlnDatepickerModule } from 'gelenium-ui';
+import {
+  GlnDatepickerModule,
+  GlnColorModule, // Palitra - Basic
+} from 'gelenium-ui';
 
 import { CmDatepickerBasicComponent } from './cm-datepicker-basic.component';
 
 @NgModule({
   declarations: [CmDatepickerBasicComponent],
-  imports: [CommonModule, ReactiveFormsModule, MatButtonToggleModule, MatExpansionModule, MatTabsModule, GlnDatepickerModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatButtonToggleModule,
+    MatExpansionModule,
+    MatTabsModule,
+    GlnDatepickerModule,
+    GlnColorModule,
+  ],
   exports: [CmDatepickerBasicComponent],
 })
 export class CmDatepickerBasicModule {}

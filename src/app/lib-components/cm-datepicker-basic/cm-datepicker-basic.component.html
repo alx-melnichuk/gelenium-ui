@@ -114,6 +114,63 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
 
 
 
+<ng-container *ngIf="isShowClnBasic">
+  <section mr-vr>
+    <h3 class="app-hover-link">
+      Basic
+      <a [href]="urlCmCalendar + '#Basic'">#</a>
+    </h3>
+    <span>
+      To use this component, in your module you need to add:
+    </span>
+    <code><pre source="ts">
+import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
+    </code>
+    <p>
+      This component is designed to select a date from the table of days
+      of the specified month.
+    </p>
+    <span>
+      Here is an example of usage:
+    </span>
+    <code><pre source="html">
+&lt;gln-calendar class="demo"&gt;
+&lt;/gln-calendar&gt;</pre>
+    </code>
+  </section>
+
+  <div class="app-group">
+    <div class="app-elem">
+      <div>
+        <small><em>standard view</em></small>
+      </div>
+      <div>
+        <gln-calendar class="demo1">
+        </gln-calendar>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="app-elem">
+      <div>
+        <small><em>Horizontal Orientation</em></small>
+      </div>
+      <div>
+        <gln-calendar class="cnbs-demo2"
+          isHideOldDays
+          [isHorizont]="true">
+        </gln-calendar>
+      </div>
+    </div> -->
+</ng-container>
+
+
+<ng-container *ngIf="isShowClnAttr01">
+
+</ng-container>
+
+
+
 <ng-container *ngIf="isShowClnCellSize">
   <section mr-vr>
     <h3 class="app-hover-link">
@@ -140,28 +197,17 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
   <div class="app-group">
     <div class="app-elem">
       <div>
-        <small><em>exterior: Outlined</em></small>
-      </div>
-      <div class="dpbs-mb">
-        <small>
-          <em>
-            <em>"Short" height: 28px; font-size: 14px;</em>
-          </em>
-        </small>
+        <small><em>"Short" height: 28px; font-size: 14px;</em></small>
       </div>
       <gln-calendar class="demo01_"
         style="font-size: 14px;"
         cellSize="short">
       </gln-calendar>
     </div>
-  </div>
 
-  <div class="app-group">
     <div class="app-elem">
       <div>
-        <small>
-          <em>"Small" height: 32px; font-size: 15px;</em>
-        </small>
+        <small><em>"Small" height: 32px; font-size: 15px;</em></small>
       </div>
       <gln-calendar class="demo01_"
         style="font-size: 15px;"
@@ -173,22 +219,16 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
   <div class="app-group">
     <div class="app-elem">
       <div>
-        <small>
-          <em>"Middle" height: 36px; font-size: 16px;</em>
-        </small>
+        <small><em>"Middle" height: 36px; font-size: 16px;</em></small>
       </div>
       <gln-calendar class="demo01_"
         cellSize="middle">
       </gln-calendar>
     </div>
-  </div>
 
-  <div class="app-group">
     <div class="app-elem">
       <div>
-        <small>
-          <em>"Wide" height: 40px; font-size: 16px;</em>
-        </small>
+        <small><em>"Wide" height: 40px; font-size: 16px;</em></small>
       </div>
       <gln-calendar class="demo01_"
         cellSize="wide">
@@ -199,23 +239,17 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
   <div class="app-group">
     <div class="app-elem">
       <div>
-        <small>
-          <em>"Large" height: 44px; font-size: 18px;</em>
-        </small>
+        <small><em>"Large" height: 44px; font-size: 18px;</em></small>
       </div>
       <gln-calendar class="demo01_"
         style="font-size: 18px;"
         cellSize="large">
       </gln-calendar>
     </div>
-  </div>
 
-  <div class="app-group">
     <div class="app-elem">
       <div>
-        <small>
-          <em>"Huge" height: 48px; font-size: 20px;</em>
-        </small>
+        <small><em>"Huge" height: 48px; font-size: 20px;</em></small>
       </div>
       <gln-calendar class="demo01_"
         style="font-size: 20px;"
@@ -240,9 +274,7 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
         [cellSize]="41">
       </gln-calendar>
     </div>
-  </div>
 
-  <div class="app-group">
     <div class="app-elem">
       <div>
         <small><em>"Config" cell height: 41px; font-size: 16px;</em></small>
@@ -251,35 +283,6 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
         style="font-size: 16px;"
         [cellSize]="41">
       </gln-calendar>
-    </div>
-  </div>
-
-</ng-container>
-
-
-<ng-container *ngIf="isShowClnBootstrap">
-  <section mr-vr>
-    <h4 class="app-hover-link">
-      Like a Bootstrap.
-      <a [href]="urlPlCalendar + '#Bootstrap'">#</a>
-    </h4>
-    <p>
-      It is possible to display GlnButton in style as "Bootstrap".
-      <br />
-      To do this, you need to specify the following configuration:
-    </p>
-  </section>
-
-  <div class="app-group">
-    <div class="app-elem">
-      <div>
-        <small><em>Bootstrap style</em></small>
-      </div>
-      <div class="cnb1-br1">
-        <gln-calendar class="cnb1-bstr"
-          [config]="cfgBs">
-        </gln-calendar>
-      </div>
     </div>
   </div>
 

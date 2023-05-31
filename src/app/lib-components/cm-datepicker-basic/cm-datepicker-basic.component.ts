@@ -35,16 +35,18 @@ export class CmDatepickerBasicComponent {
   public formGroup01: FormGroup = new FormGroup(this.control01);
 
   // Page: Attrib02
-  isShowAttrib02 = true;
+  isShowAttrib02 = false;
 
   // Page Calendar
   public urlCmCalendar = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_DATEPICKER');
   public urlPlCalendar = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_DATEPICKER');
+  // Page: Basic
+  isShowClnBasic = true;
+  // Page: Attr01
+  isShowClnAttr01 = true;
   // Page: CellSize
   isShowClnCellSize = false;
-  // Page: Bootstrap
-  isShowClnBootstrap = true;
-  public cfgBs = { cellSize: 30, weekday: 2 };
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }
