@@ -13,29 +13,28 @@ app-pl-calendar-bootstrap {
     display: inline-block;
     font-size: 14px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    --glncnh-fn-sz: 14px;
-    // gln-calendar-t-month-year
-    --glncnt-cl: #333;
-    --glncntt-fn-wg: 700;
-    --glncnt-prev-ord: 0;
-    --glncnt-month-ord: 1;
-    --glncnt-next-ord: 2;
-    // gln-calendar-header-text
-    --glncnh-cl: #333;
-    --glncnh-fn-wg: 700;
-    .gln-calendar-t-btn-switch {
+
+    --glncn-prev-ord: 0;
+    --glncn-month-ord: 1;
+    --glncn-next-ord: 2;
+    // gln-calendar-title
+    --glncn-def-nav-cl: #333;
+    // gln-calendar-month-year
+    color: #333;
+    --glncn-month-fn-wg: 700;
+
+    .gln-calendar-btn-switch {
       display: none;
     }
-    .gln-calendar-t-month-year:hover {
+    .gln-calendar-month-year:hover {
       background: #eee;
     }
-    --glncn-def-btn-bg-cl: #eee;
-    --glncn-br-rd: 4px;
-    .gln-calendar-today {
-      border-width: 0;
-    }
-    --glncn-def-day1-cl: #333;
-    --glncn-def-day2-cl: #777;
+
+    // gln-calendar-header-cell
+    --glncn-def-cell-cl: #333;
+    --glncn-cell-fn-sz: 14px;
+    --glncn-cell-fn-wg: 700;
+
     .gln-calendar-t-btn {
       padding: 5px;
       &>svg {
@@ -55,6 +54,12 @@ app-pl-calendar-bootstrap {
     .gln-calendar-t-btn.btn-next::after {
       content: '»';
     }
+
+    --glncn-def-btn-bg-cl: #eee;
+    --glncn-br-rd: 4px;
+    --glncn-today-br-wd: 0;
+    --glncn-def-day1-cl: #333;
+    --glncn-def-day2-cl: #777;
   }
 
 }
