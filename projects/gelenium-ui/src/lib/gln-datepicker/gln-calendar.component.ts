@@ -189,12 +189,13 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   private getListDaysOfWeek(weekdayLen: number): string[] {
     const result: string[] = ['', '', '', '', '', '', ''];
     const weekdayRes: 'long' | 'short' | 'narrow' = weekdayLen <= 0 || 3 < weekdayLen ? 'long' : 1 === weekdayLen ? 'narrow' : 'short';
-    const current: Date = new Date();
-    let first = current.getDate() - current.getDay();
-    for (let i = 0; i < 7; i++) {
-      const date: Date = new Date(current.setDate(first++));
-      const value: string = new Intl.DateTimeFormat('default', { weekday: weekdayRes }).format(date);
-      result[i] = weekdayLen > 0 ? value.substring(0, weekdayLen) : value;
+    const currentDate: Date = new Date();
+    const current: Date = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    for (let i = 1; i < 8; i++) {
+      current.setDate(i);
+      const value: string = new Intl.DateTimeFormat('default', { weekday: weekdayRes }).format(current);
+      const index: number = current.getDay();
+      result[index] = weekdayLen > 0 ? value.substring(0, weekdayLen) : value;
     }
     return result;
   }
