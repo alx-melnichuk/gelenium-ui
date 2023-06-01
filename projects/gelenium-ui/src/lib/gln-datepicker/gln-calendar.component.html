@@ -3,30 +3,24 @@
   <div glncn-title
     class="gln-calendar-title">
     <div glncnt-month-year
-      class="gln-calendar-t-month-year">
-      <button glncn-btn2
-        glncntb-month2
-        class="gln-calendar-t-btn-month gln-t-name">
-        <span class="gln-calendar-t-month">
-          {{ nameMonth }}
-        </span>
+      class="gln-calendar-month-year">
+
+      <button glncntb-month
+        class="gln-calendar-btn-month">
+        {{ nameMonth }}
       </button>
-      <button glncn-btn2
-        glncntb-year2
-        class="gln-calendar-t-btn-year gln-t-name">
-        <span class="gln-calendar-t-year">
-          {{ nameYear }}
-        </span>
+
+      <button glncntb-year
+        class="gln-calendar-btn-year">
+        {{ nameYear }}
       </button>
-      <button glncn-btn
-        glncnt-btn
-        glncntb-switch
-        class="gln-calendar-t-btn-switch"
+
+      <button glncntb-switch
+        class="gln-calendar-btn-switch"
         tabindex="0"
         type="button">
         <svg glncnt-icon
-          glncnti-switch
-          class="gln-calendar-t-switch"
+          class="gln-calendar-switch"
           focusable="false"
           aria-hidden="true"
           viewBox="0 0 24 24">
@@ -36,50 +30,40 @@
       </button>
     </div>
 
-    <div glncnt-prev
-      class="gln-calendar-t-prev">
-      <button glncn-btn
-        glncnt-btn
-        class="gln-calendar-t-btn btn-prev">
-        <svg glncnt-icon
-          class="gln-calendar-t-icon icon-prev"
-          focusable="false"
-          aria-hidden="true"
-          viewBox="0 0 24 24">
-          <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
-        </svg>
-      </button>
-    </div>
+    <button glncntb-prev
+      class="gln-calendar-t-btn btn-prev">
+      <svg glncnt-icon
+        class="gln-calendar-t-icon icon-prev"
+        focusable="false"
+        aria-hidden="true"
+        viewBox="0 0 24 24">
+        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+      </svg>
+    </button>
 
-    <div glncnt-next
-      class="gln-calendar-t-next">
-      <button glncn-btn
-        glncnt-btn
-        class="gln-calendar-t-btn btn-next">
-        <svg glncnt-icon
-          class="gln-calendar-t-icon icon-next"
-          focusable="false"
-          aria-hidden="true"
-          viewBox="0 0 24 24">
-          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
-        </svg>
-      </button>
-    </div>
+    <button glncntb-next
+      class="gln-calendar-t-btn btn-next">
+      <svg glncnt-icon
+        class="gln-calendar-t-icon icon-next"
+        focusable="false"
+        aria-hidden="true"
+        viewBox="0 0 24 24">
+        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+      </svg>
+    </button>
   </div>
 
   <div glncn-header
-    glncn-flex
     class="gln-calendar-header">
     <div *ngFor="let dayItem of daysOfWeek; trackBy: trackByIndex;"
-      glncn-cell
-      glncn-flex
-      glncnh-day>
-      <span glncnh-day-text
-        class="gln-calendar-header-text">{{ dayItem }}</span>
+      glncnh-cell
+      glncn-size2
+      class="gln-calendar-header-cell">
+      {{ dayItem }}
     </div>
   </div>
 
-  <div glncn-list
+  <div glncn-rows
     class="gln-calendar-list-days">
 
     <ng-container [ngTemplateOutlet]="templateOrnament"
@@ -113,30 +97,24 @@
   let-dataForWeek="dataWeek">
   <div glncn-row
     style9="outline: 1px solid deepskyblue;"
-    class="gln-calendar-week">
+    class="gln-calendar-row">
 
     <ng-container *ngFor="let cell of dataForWeek; trackBy: trackByIndex;">
 
       <ng-container *ngIf="cell.isCurrMonth; else elseBlockIsCurrMonth">
-        <button glncn-btn
-          style9="outline: 1px solid orange;"
-          glncn-cell
-          glncnw-item
-          [attr.glncn-no-curr-month]="!cell.isCurrMonth ? '' : undefined"
-          [attr.glncn-curr-month]="cell.isCurrMonth ? '' : undefined"
-          [attr.glncn-border]="cell.isToday ? '' : undefined"
-          [ngClass]="[(cell.isCurrMonth ? 'gln-calendar-curr-month' : 'gln-calendar-no-curr-month')
-          ,(cell.isToday ? 'gln-calendar-today' : '')]">
-          <span glncnw-item-text>{{ cell.day }}</span>
+        <button style9="outline: 1px solid orange;"
+          glncn-size2
+          glncnr-item
+          [attr.glncnr-today]="cell.isToday ? '' : undefined"
+          [ngClass]="['gln-calendar-day', (cell.isToday ? 'gln-calendar-today' : '')]">
+          {{ cell.day }}
         </button>
       </ng-container>
       <ng-template #elseBlockIsCurrMonth>
-        <div glncn-cell
-          glncn-flex
-          glncn-no-events
-          glncn-no-curr-month
-          [ngClass]="['gln-calendar-no-curr-month', 'gln-calendar-no-events']">
-          <span glncnw-item-text>{{ !isHideOldDaysVal ? cell.day : '' }}</span>
+        <div glncn-size2
+          glncnr-old-item
+          [ngClass]="['gln-calendar-old-day']">
+          {{ !isHideOldDaysVal ? cell.day : '' }}
         </div>
       </ng-template>
 
