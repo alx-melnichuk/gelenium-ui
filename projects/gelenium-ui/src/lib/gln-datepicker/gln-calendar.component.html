@@ -2,26 +2,27 @@
   class="gln-calendar-wrapper">
   <div glncn-title
     class="gln-calendar-title">
-    <div glncnt-month-year
-      class="gln-calendar-month-year">
-
-      <button glncntb-month
-        class="gln-calendar-btn-month"
+    <div glncn-month2year
+      class="gln-calendar-month2year">
+      <button glncn-sign
+        glncn-month
+        class="gln-calendar-month"
         type="button">
         {{ nameMonth }}
       </button>
 
-      <button glncntb-year
-        class="gln-calendar-btn-year"
+      <button glncn-sign
+        glncn-year
+        class="gln-calendar-year"
         type="button">
         {{ nameYear }}
       </button>
 
-      <button glncntb-switch
-        class="gln-calendar-btn-switch"
+      <button glncn-switch
+        class="gln-calendar-switch"
         tabindex="0"
         type="button">
-        <svg glncnt-icon
+        <svg glncn-icon
           class="gln-calendar-switch"
           focusable="false"
           aria-hidden="true"
@@ -33,9 +34,9 @@
     </div>
 
     <button glncn-prev
-      class="gln-calendar-t-btn btn-prev"
+      class="gln-calendar-prev"
       type="button">
-      <svg glncnt-icon
+      <svg glncn-icon
         class="gln-calendar-t-icon icon-prev"
         focusable="false"
         aria-hidden="true"
@@ -45,9 +46,9 @@
     </button>
 
     <button glncn-next
-      class="gln-calendar-t-btn btn-next"
+      class="gln-calendar-next"
       type="button">
-      <svg glncnt-icon
+      <svg glncn-icon
         class="gln-calendar-t-icon icon-next"
         focusable="false"
         aria-hidden="true"
@@ -61,7 +62,6 @@
     class="gln-calendar-header">
     <div *ngFor="let dayItem of daysOfWeek; trackBy: trackByIndex;"
       glncn-cell
-      glncn-size2
       class="gln-calendar-header-cell">
       {{ dayItem }}
     </div>
@@ -107,10 +107,14 @@
     <ng-container *ngFor="let cell of dataForWeek; trackBy: trackByIndex;">
       <button type="button"
         glncn-item
-        glncn-item-sz
         [attr.glncn-today]="cell.isToday ? '' : undefined"
-        [ngClass]="[(cell.isCurrMonth ? 'gln-calendar-day' : 'gln-calendar-old-day')
-          , (cell.isToday ? 'gln-calendar-today' : '')]"
+        [attr.glncn-curr]="!cell.isSelected && cell.isCurrMonth ? '' : undefined"
+        [attr.glncn-old]="!cell.isSelected && !cell.isCurrMonth ? '' : undefined"
+        [attr.glncn-slct]="cell.isSelected ? '' : undefined"
+        [ngClass]="[(!cell.isSelected && cell.isCurrMonth ? 'gln-calendar-day' : '')
+          , (!cell.isSelected && !cell.isCurrMonth ? 'gln-calendar-old-day' : '')
+          , (cell.isToday ? 'gln-calendar-today' : '')
+          , (cell.isSelected ? 'gln-calendar-selected' : '')]"
         [attr.disabled]="isDisabledVal || (!cell.isCurrMonth && isHideOldDaysVal) ? '' : undefined"
         (click)="clickSelectItem(cell)">
         {{ cell.isCurrMonth ? cell.day : (!isHideOldDaysVal ? cell.day : '') }}

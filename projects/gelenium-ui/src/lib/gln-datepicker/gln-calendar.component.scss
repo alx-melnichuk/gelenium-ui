@@ -5,6 +5,10 @@ gln-calendar {
   --glncn--default-s: var(--glncl-default-s, var(--gln-default-s));
   --glncn--default-l: var(--glncl-default-l, var(--gln-default-l));
 
+  --glncn--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
+  --glncn--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
+  --glncn--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
+
   --glncn--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
   --glncn--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
   --glncn--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
@@ -23,35 +27,13 @@ gln-calendar {
   --glncn--nav-def-cl   : hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l));
   --glncn--nav-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.10);
   --glncn--sndr-dis-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), 60%);
-  --glncn--cell-def-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), calc(var(--glncn--default-l) - 20));    // rgba(0, 0, 0, 0.6);
+  --glncn--cell-def-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.60);    // rgba(0, 0, 0, 0.6);
   --glncn--item-def-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l));   // ~rgba(0, 0, 0, 0.87);
-  --glncn--item-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.10); // ~rgba(0, 0, 0, 0.04);
-  --glncn--today-def-br-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.70);
-
-&:not([dis]) {
-
-    // ** OLD **
-    --glncn--nav-cl    : var(--glncn-def-nav-cl, hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l)));
-    --glncn--nav-bg-cl : var(--glncn-def-nav-bg-cl, hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.10));
-
-    
-    
-    --glncn--day2-cl   : var(--glncn-def-day2-cl, hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.70));
-  } // The state with disabled.
-  &[dis] {
-
-    --glncn--def-next-cl   : var(--glncn-dis-next-cl, var(--glncn--sndr-dis-cl));
-    --glncn--def-next-bg-cl: var(--glncn-dis-next-bg-cl, transparent);
-
-    --glncn--def-cell-cl   : var(--glncn-dis-cell-cl, var(--glncn--sndr-dis-cl));
-    --glncn--def-cell-bg-cl: var(--glncn-dis-cell-bg-cl, transparent);
-
-    --glncn--def-item-cl   : var(--glncn-dis-item-cl, var(--glncn--sndr-dis-cl));
-    --glncn--def-item-bg-cl: var(--glncn-dis-item-bg-cl, transparent);
-
-    // ** OLD **
-    --glncn--nav-cl    : var(--glncn-dis-btn-cl, var(--glncn--sndr-dis-cl));
-  }
+  --glncn--item-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.15);
+  --glncn--today-def-br-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.80);
+  --glncn--slct-def-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.80);
+  --glncn--slct-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 1.00);
+  --glncn--slct-def-cl: hsl(var(--glncn--default-bg-h), var(--glncn--default-bg-s), var(--glncn--default-bg-l));
 
   // Level 1 Element "wrapper"
   &>[glncn-wrapper] {
@@ -60,116 +42,92 @@ gln-calendar {
     flex-direction: var(--glncn--dir-lv1);
   }
 
-  // Setting for "button". // # { margin: 0; box-sizing: border-box; text-align: center; cursor: default; padding: 1px 6px; }
-  button[glncn-btn] { // ??
-    align-items: center;
-    display: inline-flex;
-    flex-shrink: 0; // # flex: 0 0 auto;
-    font-size: 1em;
-    font-family: inherit;
-    justify-content: center;
-    outline: 0;
-    overflow: visible;
-    text-decoration: none;
-    vertical-align: middle;
-    &:not([glncn-border]) {
-      border: 0px;
-    }
-  }
-
   // Level 2 Element "title"
   [glncn-title] {
     // outline: 1px solid green; // #
     align-items: center;
     display: flex;
+    font-family: inherit;
+    font-size: 1em;
     font-weight: var(--glncn-title-fn-wg, inherit);
     flex-direction: var(--glncn--dir-lv2);
     justify-content: space-around;
   }
 
-  // Level 3 Element "month-year"
-  [glncnt-month-year] {
+  // Level 3 Element "month2year"
+  [glncn-month2year] {
     // outline: 1px dashed brown; // #
     align-items: center;
-    background-color: var(--glncn-month-year-bg-cl, transparent);
     display: inline-flex;
     flex-grow: 1;
     font-family: inherit;
     font-size: 1em;
-    font-weight: var(--glncn-month-year-fn-wg, 500);
+    font-weight: var(--glncn-month2year-fn-wg, 500);
     justify-content: center;
-    order: var(--glncn-month-year-ord, unset);
-    &:hover {
-      background-color: var(--glncn-hov-month-year-bg-cl);
-    }
+    order: var(--glncn-month2year-ord, unset);
   }
-  &[hor] [glncnt-month-year] {
+  &[hor] [glncn-month2year] {
     --glncntb--month-mn-wd: 9ch;
     --glncntb--year-mn-wd: 4ch;
     padding-top: 4em;
   }
 
-  // Level 4 Element title button "name month"
-  [glncntb-month] {
+  // Level 4 Element title button "name month", "name year"
+  [glncn-sign] {
     align-items: center;
-    background-color: var(--glncn-month-bg-cl, transparent);
-    border: 0px;
+    background-color: transparent;
+    border: 0;
     color: currentColor;
+    cursor: pointer;
     display: inline-flex;
     flex-shrink: 0;
-    font-family: inherit;
-    font-size: 1em;
-    font-weight: inherit;
+    font: inherit;
     height: 2.5em;
     justify-content: center;
-    min-width: var(--glncntb--month-mn-wd);
-    outline: 0;
     overflow: visible;
+    outline: 0;
     padding: 0;
     text-decoration: none;
     vertical-align: middle;
-    &:hover {
-      background-color: var(--glncn-hov-month-bg-cl);
-    }
   }
-
+  // Level 4 Element title button "name month"
+  [glncn-month] {
+    min-width: var(--glncntb--month-mn-wd);
+  }
   // Level 4 Element title button "name year"
-  [glncntb-year] {
-    align-items: center;
-    background-color: var(--glncn-year-bg-cl, transparent);
-    border: 0px;
-    color: currentColor;
-    display: inline-flex;
-    flex-shrink: 0;
-    font-family: inherit;
-    font-size: 1em;
-    font-weight: inherit;
-    height: 2.5em;
-    justify-content: center;
+  [glncn-year] {
     min-width: var(--glncntb--year-mn-wd);
-    outline: 0;
-    overflow: visible;
-    padding: 0px 0px 0px 0.5ch;
-    text-decoration: none;
-    vertical-align: middle;
-    &:hover {
-      background-color: var(--glncn-hov-year-bg-cl);
-    }
+  }
+  [glncn-month] ~ [glncn-year] {
+    padding-left: 0.5ch;
+    margin-right: 0.5ch;
   }
 
   // Level 4 Element title button "switch"
-  [glncntb-switch] {
-    align-items: center;
-    background-color: var(--glncn-switch-bg-cl, transparent);
-    border: 0px;
-    border-radius: var(--glncn-br-rd, 50%);
-    color: var(--glncn--nav-cl);
+  &:not([dis]) [glncn-switch] {
+    &:not(:hover) {
+      --glncn--switch-cl   : var(--glncn-def-switch-cl, var(--glncn--nav-def-cl));
+      --glncn--switch-bg-cl: var(--glncn-def-switch-bg-cl, transparent);
+    }
+    &:hover {
+      --glncn--switch-cl   : var(--glncn-hov-switch-cl, var(--glncn-def-switch-cl, var(--glncn--nav-def-cl)));
+      --glncn--switch-bg-cl: var(--glncn-hov-switch-bg-cl, var(--glncn--nav-hov-bg-cl));
+    }
     cursor: pointer;
-    display: var(--glncn-switch-ds, inline-flex);
+  }
+  &[dis] [glncn-switch] {
+    --glncn--switch-cl   : var(--glncn-dis-switch-cl, var(--glncn--sndr-dis-cl));
+    --glncn--switch-bg-cl: var(--glncn-dis-switch-bg-cl, transparent);
+  }
+  [glncn-switch] {
+    align-items: center;
+    background-color: var(--glncn--switch-bg-cl);
+    border: 0;
+    border-radius: var(--glncn-br-rd, 50%);
+    color: var(--glncn--switch-cl);
+    display: inline-flex;
     flex-shrink: 0;
-    font-family: inherit;
-    font-size: 1em;
-    font-weight: inherit;
+    font: inherit;
     justify-content: center;
     outline: 0;
     overflow: visible;
@@ -178,13 +136,13 @@ gln-calendar {
     text-decoration: none;
     user-select: none;
     vertical-align: middle;
-    &:hover {
-      background-color: var(--glncn-hov-switch-bg-cl, var(--glncn--nav-bg-cl));
-    }
+  }
+  &[hor] [glncn-switch] {
+    display: none;
   }
 
   // Level 5 Element svg "icon"
-  [glncnt-icon] {
+  [glncn-icon] {
     display: inline-block;
     fill: currentColor;
     flex-shrink: 0;
@@ -209,18 +167,15 @@ gln-calendar {
     --glncn--prev-cl   : var(--glncn-dis-prev-cl, var(--glncn--sndr-dis-cl));
     --glncn--prev-bg-cl: var(--glncn-dis-prev-bg-cl, transparent);
   }
- 
   [glncn-prev] {
     align-items: center;
     background-color: var(--glncn--prev-bg-cl);
-    border: 0px;
+    border: 0;
     border-radius: var(--glncn-br-rd, 50%);
     color: var(--glncn--prev-cl);
     display: inline-flex;
     flex-shrink: 0;
-    font-family: inherit;
-    font-size: 1em;
-    font-weight: inherit;
+    font: inherit;
     justify-content: center;
     order: var(--glncn-prev-ord, unset);
     outline: 0;
@@ -251,18 +206,15 @@ gln-calendar {
     --glncn--next-cl   : var(--glncn-dis-next-cl, var(--glncn--sndr-dis-cl));
     --glncn--next-bg-cl: var(--glncn-dis-next-bg-cl, transparent);
   }
-
   [glncn-next] {
     align-items: center;
     background-color: var(--glncn--next-bg-cl);
-    border: 0px;
+    border: 0;
     border-radius: var(--glncn-br-rd, 50%);
     color: var(--glncn--next-cl);
     display: inline-flex;
     flex-shrink: 0;
-    font-family: inherit;
-    font-size: 1em;
-    font-weight: inherit;
+    font: inherit;
     justify-content: center;
     order: var(--glncn-next-ord, unset);
     outline: 0;
@@ -288,13 +240,6 @@ gln-calendar {
     text-align: center;
   }
 
-  // Element "header", "list-days"
-  [glncn-size2] {
-    height: var(--glncn-cell-size, var(--glncn--item-size)); // # 40px;
-    margin: var(--glncn-cell-mr, 1px);
-    padding: var(--glncn-cell-pd, 0px);
-    width: var(--glncn-cell-size, var(--glncn--item-size)); // # 36px;
-  }
   // Level 3 Element "header cell"
   &:not([dis]) [glncn-cell] {
     &:not(:hover) {
@@ -310,7 +255,6 @@ gln-calendar {
     --glncn--cell-cl   : var(--glncn-dis-cell-cl, var(--glncn--sndr-dis-cl));
     --glncn--cell-bg-cl: var(--glncn-dis-cell-bg-cl, transparent);
   }
-
   [glncn-cell] {
     align-items: center;
     background-color: var(--glncn--cell-bg-cl);
@@ -318,8 +262,12 @@ gln-calendar {
     display: flex;
     font-size: var(--glncn-cell-fn-sz, var(--glncnh--fn-sz, 0.75em));
     font-weight: var(--glncn-cell-fn-wg, 400);
+    height: var(--glncn-cell-hg, var(--glncn--item-size));
     justify-content: center;
+    margin: var(--glncn-cell-mr, 1px);
     text-align: center;
+    padding: var(--glncn-cell-pd, 0px);
+    width: var(--glncn-cell-wd, var(--glncn--item-size));
   }
 
   // Level 2 Element "list days"
@@ -340,37 +288,55 @@ gln-calendar {
   // Level 4 Element "list days - row - item"
   &:not([dis]) [glncn-item] {
     &:not(:hover) {
-      --glncn--item-cl   : var(--glncn-def-item-cl, var(--glncn--item-def-cl));
-      --glncn--item-bg-cl: var(--glncn-def-item-bg-cl, transparent);
+      --glncn--curr-cl   : var(--glncn-def-curr-cl, var(--glncn--item-def-cl));
+      --glncn--curr-bg-cl: var(--glncn-def-curr-bg-cl, transparent);
+
+      --glncn--old-cl    : var(--glncn-def-old-cl, var(--glncn--cell-def-cl));
+      --glncn--old-bg-cl : var(--glncn-def-old-bg-cl, transparent);
+
+      --glncn--slct-cl   : var(--glncn-def-slct-cl, var(--glncn--slct-def-cl));
+      --glncn--slct-bg-cl: var(--glncn-def-slct-bg-cl, var(--glncn--slct-def-bg-cl));
     }
     &:hover:not([disabled]) {
-      --glncn--item-cl   : var(--glncn-hov-item-cl, var(--glncn-def-item-cl, var(--glncn--item-def-cl)));
-      --glncn--item-bg-cl: var(--glncn-hov-item-bg-cl, var(--glncn--item-hov-bg-cl));
+      --glncn--curr-cl   : var(--glncn-hov-curr-cl, var(--glncn-def-curr-cl, var(--glncn--item-def-cl)));
+      --glncn--curr-bg-cl: var(--glncn-hov-curr-bg-cl, var(--glncn--item-hov-bg-cl));
+
+      --glncn--old-cl    : var(--glncn-hov-old-cl, var(--glncn-def-old-cl, var(--glncn--cell-def-cl)));
+      --glncn--old-bg-cl : var(--glncn-hov-old-bg-cl, var(--glncn--item-hov-bg-cl));
+
+      --glncn--slct-cl   : var(--glncn-hov-slct-cl, var(--glncn-def-slct-cl, var(--glncn--slct-def-cl)));
+      --glncn--slct-bg-cl: var(--glncn-hov-slct-bg-cl, var(--glncn--slct-hov-bg-cl));
     }
-    --glncn--today-br-cl : var(--glncn-def-today-br-cl, var(--glncn--today-def-br-cl));
+    --glncn--today-br-cl: var(--glncn-def-today-br-cl, var(--glncn--today-def-br-cl));
     cursor: pointer;
   }
   &[dis] [glncn-item] {
-    --glncn--item-cl    : var(--glncn-dis-item-cl, var(--glncn--sndr-dis-cl));
-    --glncn--item-bg-cl : var(--glncn-dis-item-bg-cl, transparent);
+    --glncn--curr-cl   : var(--glncn-dis-curr-cl, var(--glncn--sndr-dis-cl));
+    --glncn--curr-bg-cl: var(--glncn-dis-item-bg-cl, transparent);
+    --glncn--old-cl    : var(--glncn-dis-old-cl, var(--glncn--sndr-dis-cl));
+    --glncn--old-bg-cl : var(--glncn-dis-old-bg-cl, transparent);
+    --glncn--slct-cl   : var(--glncn-dis-slct-cl, var(--glncn--sndr-dis-cl));
+    --glncn--slct-bg-cl: var(--glncn-dis-slct-bg-cl, var(--glncn--sndr-dis-cl));
     --glncn--today-br-cl: var(--glncn-dis-today-br-cl, var(--glncn--sndr-dis-cl));
   }
 
   [glncn-item] {
     align-items: center;
-    background-color: var(--glncn--item-bg-cl);
     border-radius: var(--glncn-br-rd, 50%);
-    color: var(--glncn--item-cl);
     display: inline-flex;
     flex-shrink: 0;
     font-family: inherit;
     font-size: var(--glncn-item-fn-sz, 1em);
     font-weight: inherit;
+    height: var(--glncn-item-hg, var(--glncn--item-size));
     justify-content: center;
+    margin: var(--glncn-item-mr, 1px);
     outline: 0;
     overflow: visible;
+    padding: var(--glncn-item-pd, 0px);
     text-decoration: none;
     vertical-align: middle;
+    width: var(--glncn-item-wd, var(--glncn--item-size));
     &[disabled] {
       pointer-events: none;
     }
@@ -378,26 +344,24 @@ gln-calendar {
       border: 0px;
     }
   }
+
+  [glncn-curr] {
+    color: var(--glncn--curr-cl);
+    background-color: var(--glncn--curr-bg-cl);
+  }
+  [glncn-old] {
+    color: var(--glncn--old-cl);
+    background-color: var(--glncn--old-bg-cl);
+  }
+  [glncn-slct] {
+    color: var(--glncn--slct-cl);
+    background-color: var(--glncn--slct-bg-cl);
+  }
+
   [glncn-today] {
     border-width: var(--glncn-today-br-wd, 1px);
     border-style: var(--glncn-today-br-st, solid);
     border-color: var(--glncn-today-br-cl, var(--glncn--today-br-cl));
   }
-  
-  // "row - item" sizes
-  [glncn-item-sz] {
-    height: var(--glncn-item-hg, var(--glncn--item-size)); // # 40px;
-    margin: var(--glncn-item-mr, 1px);
-    padding: var(--glncn-item-pd, 0px);
-    width: var(--glncn-item-wd, var(--glncn--item-size)); // # 36px;
-  }
 
-
-}
-
-.css-1hrukl9.Mui-selected {
-  color: #fff;
-  background-color: #1976d2;
-  font-weight: 500;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }

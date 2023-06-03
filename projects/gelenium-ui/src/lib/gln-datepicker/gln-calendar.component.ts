@@ -26,6 +26,7 @@ interface CalendarCell {
   month: number;
   day: number;
   isCurrMonth: boolean;
+  isSelected?: boolean;
   isToday?: boolean;
 }
 
@@ -149,7 +150,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
 
     if (isPrepareData && this.weekdayVal != null) {
-      this.prepareData(new Date(), this.weekdayVal);
+      const date: Date = new Date();
+      date.setDate(10);
+      this.prepareData(date, this.weekdayVal);
     }
   }
 
@@ -214,27 +217,41 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   /** Get a list of days in the specified month.
    * @param date: Date; Specifies the month and year.
    */
-  private getListDaysOfMonth(date: Date): CalendarCell[] {
+  private getListDaysOfMonth(dateSelected: Date): CalendarCell[] {
     const result: CalendarCell[] = [];
-    const yearInit: number = date.getFullYear();
-    const monthInit: number = date.getMonth();
-    const dayInit: number = date.getDate();
+    const yearSelected: number = dateSelected.getFullYear();
+    const monthSelected: number = dateSelected.getMonth();
+    const daySelected: number = dateSelected.getDate();
 
-    const dateItem: Date = new Date(yearInit, monthInit, 1);
+    const dateItem: Date = new Date(yearSelected, monthSelected, 1);
     let indexDayOfWeeek: number = dateItem.getDay(); // 0-вс,1-пн,2-вт,3-ср,4-чт,5-пт,6-сб
     // console.log(`dateItem.getDay()=`, dateItem.getDay());
     dateItem.setDate(dateItem.getDate() - indexDayOfWeeek - 1);
     // console.log(`dateItem2.getDay()=`, dateItem.getDay());
 
+    const dateToday: Date = new Date();
+    const yearToday: number = dateToday.getFullYear();
+    const monthToday: number = dateToday.getMonth();
+    const dayToday: number = dateToday.getDate();
+    let hasSelected: boolean = false;
+    let isSelected: boolean | undefined;
     let idx: number = 0;
     while (idx < 42) {
       dateItem.setDate(dateItem.getDate() + 1);
       const year: number = dateItem.getFullYear();
       const month: number = dateItem.getMonth();
       const day: number = dateItem.getDate();
-      const isToday: boolean | undefined = year === yearInit && month === monthInit && day === dayInit ? true : undefined;
-      result.push({ year, month, day, isCurrMonth: month === monthInit, isToday });
-      // console.log(`calendarCellBuff.push(idx:${idx} { year: ${year}, month: ${month}, day: ${day} }`); // #
+      isSelected = !hasSelected && year === yearSelected && month === monthSelected && day === daySelected ? true : undefined;
+      if (!hasSelected && isSelected) {
+        hasSelected = true;
+      }
+
+      const isToday: boolean | undefined = year === yearToday && month === monthToday && day === dayToday ? true : undefined;
+      result.push({ year, month, day, isCurrMonth: month === monthSelected, isSelected, isToday });
+      if (isSelected) {
+        console.log(`calendarCellBuff.push(idx:${idx} { year: ${year}, month: ${month}, day: ${day}, isSelected: ${isSelected} }`); // #
+      }
+
       idx++;
     }
     return result;
