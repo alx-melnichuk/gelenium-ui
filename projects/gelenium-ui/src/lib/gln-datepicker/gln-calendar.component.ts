@@ -2,12 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  EventEmitter,
   Inject,
   InjectionToken,
   Input,
   OnChanges,
   OnInit,
   Optional,
+  Output,
   Renderer2,
   SimpleChanges,
   ViewEncapsulation,
@@ -46,11 +48,16 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public cellSize: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
   @Input()
+  public isDisabled: string | boolean | null | undefined;
+  @Input()
   public isHideOldDays: string | boolean | undefined;
   @Input()
   public isHorizont: string | boolean | null | undefined;
   @Input()
   public weekday: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
+
+  @Output()
+  readonly selected: EventEmitter<{ value: unknown | null }> = new EventEmitter();
 
   public daysOfWeek: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
@@ -105,6 +112,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.cellSizeVal = this.converSize(cellSizeStr, CELL_SIZE[cellSizeStr] || CELL_SIZE['small']);
       this.setCssCellSize(this.cellSizeVal, this.hostRef);
     }
+    if (changes['isDisabled']) {
+      this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
+    }
     if (changes['isHideOldDays'] || (changes['config'] && this.isHideOldDays == null && this.currConfig.isHideOldDays != null)) {
       this.isHideOldDaysVal = BooleanUtil.init(this.isHideOldDays) ?? !!this.currConfig.isHideOldDays;
     }
@@ -119,7 +129,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
 
     if (isPrepareData && this.weekdayVal != null) {
-      this.prepareData(new Date(), this.weekdayVal);
+      const date: Date = new Date();
+      date.setDate(11);
+      this.prepareData(date, this.weekdayVal);
     }
   }
 
@@ -153,6 +165,21 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       const date: Date = new Date();
       date.setDate(10);
       this.prepareData(date, this.weekdayVal);
+    }
+  }
+
+  // ** -- **
+
+  public setDisabledState(disabled: boolean): void {
+    if (this.isDisabledVal !== disabled) {
+      this.isDisabledVal = disabled;
+      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', disabled);
+      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', disabled ? '' : null);
+      // if (disabled && !this.formControl.disabled) {
+      //   this.formControl.disable();
+      // } else if (!disabled && this.formControl.disabled) {
+      //   this.formControl.enable();
+      // }
     }
   }
 

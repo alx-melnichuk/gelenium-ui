@@ -26,14 +26,15 @@ gln-calendar {
 
   --glncn--nav-def-cl   : hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l));
   --glncn--nav-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.10);
-  --glncn--sndr-dis-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), 60%);
+  --glncn--sndr-dis-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.60);
   --glncn--cell-def-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.60);    // rgba(0, 0, 0, 0.6);
   --glncn--item-def-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l));   // ~rgba(0, 0, 0, 0.87);
   --glncn--item-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.15);
   --glncn--today-def-br-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.80);
-  --glncn--slct-def-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.80);
-  --glncn--slct-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 1.00);
+  --glncn--slct-def-bg-cl: hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l));
+  --glncn--slct-hov-bg-cl: hsl(var(--glncn--primary-h), var(--glncn--primary-s), calc(var(--glncn--primary-l) - 7%));
   --glncn--slct-def-cl: hsl(var(--glncn--default-bg-h), var(--glncn--default-bg-s), var(--glncn--default-bg-l));
+  --glncn--slct-dis-bg-cl: hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.40);
 
   // Level 1 Element "wrapper"
   &>[glncn-wrapper] {
@@ -71,6 +72,12 @@ gln-calendar {
     --glncntb--year-mn-wd: 4ch;
     padding-top: 4em;
   }
+  &:not([dis]) [glncn-month2year] {
+    color: var(--glncn-def-month2year-cl, var(--glncn--item-def-cl));
+  }
+  &[dis] [glncn-month2year] {
+    color: var(--glncn-dis-month2year-cl, var(--glncn--sndr-dis-cl));
+  }
 
   // Level 4 Element title button "name month", "name year"
   [glncn-sign] {
@@ -78,7 +85,6 @@ gln-calendar {
     background-color: transparent;
     border: 0;
     color: currentColor;
-    cursor: pointer;
     display: inline-flex;
     flex-shrink: 0;
     font: inherit;
@@ -89,6 +95,9 @@ gln-calendar {
     padding: 0;
     text-decoration: none;
     vertical-align: middle;
+  }
+  &:not([dis]) [glncn-sign] {
+    cursor: pointer;
   }
   // Level 4 Element title button "name month"
   [glncn-month] {
@@ -315,8 +324,8 @@ gln-calendar {
     --glncn--curr-bg-cl: var(--glncn-dis-item-bg-cl, transparent);
     --glncn--old-cl    : var(--glncn-dis-old-cl, var(--glncn--sndr-dis-cl));
     --glncn--old-bg-cl : var(--glncn-dis-old-bg-cl, transparent);
-    --glncn--slct-cl   : var(--glncn-dis-slct-cl, var(--glncn--sndr-dis-cl));
-    --glncn--slct-bg-cl: var(--glncn-dis-slct-bg-cl, var(--glncn--sndr-dis-cl));
+    --glncn--slct-cl   : var(--glncn-dis-slct-cl, var(--glncn--slct-def-cl));
+    --glncn--slct-bg-cl: var(--glncn-dis-slct-bg-cl, var(--glncn--slct-dis-bg-cl));
     --glncn--today-br-cl: var(--glncn-dis-today-br-cl, var(--glncn--sndr-dis-cl));
   }
 
@@ -330,7 +339,7 @@ gln-calendar {
     font-weight: inherit;
     height: var(--glncn-item-hg, var(--glncn--item-size));
     justify-content: center;
-    margin: var(--glncn-item-mr, 1px);
+    margin: var(--glncn-item-mr, 0px);
     outline: 0;
     overflow: visible;
     padding: var(--glncn-item-pd, 0px);
