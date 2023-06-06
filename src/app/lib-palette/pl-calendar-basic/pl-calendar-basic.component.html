@@ -9,13 +9,23 @@
 </section>
 
 
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabled01a=!isDisabled01a"
+      [checked]="isDisabled01a" />
+    Is disabled
+  </label>
+</section>
+
+
 <div class="app-group">
 
   <div class="app-elem">
     <div>
       <small><em>color: primary</em></small>
     </div>
-    <gln-calendar>
+    <gln-calendar [isDisabled]="isDisabled01a">
     </gln-calendar>
   </div>
 
@@ -23,7 +33,8 @@
     <div>
       <small><em>color: danger</em></small>
     </div>
-    <gln-calendar [glnColor]="{ primary: 'danger' }">
+    <gln-calendar [glnColor]="{ primary: 'danger' }"
+      [isDisabled]="isDisabled01a">
     </gln-calendar>
   </div>
 
@@ -35,7 +46,8 @@
     <div>
       <small><em>color: success</em></small>
     </div>
-    <gln-calendar [glnColor]="{ primary: 'success' }">
+    <gln-calendar [glnColor]="{ primary: 'success' }"
+      [isDisabled]="isDisabled01a">
     </gln-calendar>
   </div>
 
@@ -43,7 +55,8 @@
     <div>
       <small><em>color: info</em></small>
     </div>
-    <gln-calendar [glnColor]="{ primary: 'info' }">
+    <gln-calendar [glnColor]="{ primary: 'info' }"
+      [isDisabled]="isDisabled01a">
     </gln-calendar>
   </div>
 
@@ -55,7 +68,8 @@
     <div>
       <small><em>color: warning</em></small>
     </div>
-    <gln-calendar [glnColor]="{ primary: 'warning' }">
+    <gln-calendar [glnColor]="{ primary: 'warning' }"
+      [isDisabled]="isDisabled01a">
     </gln-calendar>
   </div>
 
@@ -64,7 +78,8 @@
       <small><em>color: customer</em></small>
     </div>
     <gln-calendar class="cnpl-customer"
-      [glnColor]="{ primary: 'customer' }">
+      [glnColor]="{ primary: 'customer' }"
+      [isDisabled]="isDisabled01a">
     </gln-calendar>
   </div>
 
