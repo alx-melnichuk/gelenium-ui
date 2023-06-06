@@ -9,69 +9,80 @@ app-pl-calendar-bootstrap {
     display: inline-block;
   }
 
-  .cnbt1-bstr {
-    color: #333;
-    display: inline-block;
-    font-size: 14px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    --glncn-br-rd: 4px;
-    // "title month2year"
-    --glncn-month2year-fn-wg: 700;
-    --glncn-month2year-ord: 1;
-    &:not([dis]) .gln-calendar-month2year {
-      cursor: pointer;
-      &:hover {
-        background-color: #eee;
-      }
+
+}
+
+.cnbt1-bstr {
+  color: #333;
+  display: inline-block;
+  font-size: 14px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  --glncn-br-rd: 4px;
+  // "title month2year"
+  --glncn-month2year-fn-wg: 700;
+  --glncn-month2year-ord: 1;
+  &:not([dis]) .gln-calendar-month2year {
+    cursor: pointer;
+    &:hover {
+      background-color: #eee;
     }
-    // "title switch"
-    .gln-calendar-switch {
+  }
+  // "title switch"
+  .gln-calendar-switch {
+    display: none;
+  }
+  // "title prev"
+  --glncn-prev-ord: 0;
+  --glncn-def-prev-cl: currentColor;
+  --glncn-hov-prev-bg-cl: #eee;
+  // "title next"
+  --glncn-next-ord: 2;
+  --glncn-def-next-cl: currentColor;
+  --glncn-hov-next-bg-cl: #eee;
+  // "title prev","title next"
+  .gln-calendar-title > button {
+    padding: 5px;
+    &>svg {
       display: none;
     }
-    // "title prev"
-    --glncn-prev-ord: 0;
-    --glncn-def-prev-cl: currentColor;
-    --glncn-hov-prev-bg-cl: #eee;
-    // "title next"
-    --glncn-next-ord: 2;
-    --glncn-def-next-cl: currentColor;
-    --glncn-hov-next-bg-cl: #eee;
-    // "title prev","title next"
-    .gln-calendar-title > button {
-      padding: 5px;
-      &>svg {
-        display: none;
-      }
-      &::after {
-        height: 1.5em;
-        width: 1.5em;
-        flex-shrink: 0;
-        line-height: 1.5em;
-        border-radius: 4px;
-      }
+    &::after {
+      height: 1.5em;
+      width: 1.5em;
+      flex-shrink: 0;
+      line-height: 1.5em;
+      border-radius: 4px;
     }
-    .gln-calendar-prev::after {
-      content: '«';
-    }
-    .gln-calendar-next::after {
-      content: '»';
-    }
-    // "header cell"
-    --glncn-def-cell-cl: currentColor;
-    --glncn-cell-fn-sz: 14px;
-    --glncn-cell-fn-wg: 700;
-    // "list item"
-    --glncn-def-cell-cl: #777;
-    --glncn-today-br-wd: 0;
-    --glncn-def-curr-cl: currentColor;
-    --glncn-hov-curr-bg-cl: #eee;
-    --glncn-hov-old-bg-cl: #eee;
-
-    // color: #fff;
-    // background-color: #286090;
-    // border-color: #204d74;
-    
-
   }
+  .gln-calendar-prev::after {
+    content: '«';
+  }
+  .gln-calendar-next::after {
+    content: '»';
+  }
+  // "header cell"
+  --glncn-def-cell-cl: currentColor;
+  --glncn-cell-fn-sz: 14px;
+  --glncn-cell-fn-wg: 700;
+  // "list item"
+  --glncn-today-br-wd: 0;
+  --glncn-def-curr-cl: currentColor;
+  --glncn-hov-curr-bg-cl: #eee;
+  --glncn-hov-old-bg-cl: #eee;
+  --glncn-def-slct-cl: #fff;
+  --glncn-def-slct-bg-cl: #286090;
+  --glncn-hov-slct-cl: #fff;
+  --glncn-hov-slct-bg-cl: #204d74;
 
+  .gln-calendar-selected {
+    &:hover {
+      border-color: #122b40;
+    }
+    &:not(:hover) {
+      border-color: #204d74;
+    }
+  }
+  --glncn-dis-curr-cl: #7e7e7e;
+  --glncn-dis-old-cl : #7e7e7e;
+  --glncn-dis-slct-bg-cl: #a8a8a8;
+  --glncn-dis-today-br-cl: #7e7e7e;
 }
