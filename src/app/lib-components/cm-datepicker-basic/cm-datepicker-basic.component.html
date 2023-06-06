@@ -139,13 +139,23 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
     </code>
   </section>
 
+  <section mr-vr>
+    <label>
+      <input type="checkbox"
+        (change)="isDisabled01a=!isDisabled01a"
+        [checked]="isDisabled01a" />
+      Is disabled
+    </label>
+  </section>
+
   <div class="app-group">
     <div class="app-elem">
       <div>
         <small><em>standard view</em></small>
       </div>
       <div>
-        <gln-calendar class="demo1">
+        <gln-calendar class="demo1_"
+          [isDisabled]="isDisabled01a">
         </gln-calendar>
       </div>
     </div>

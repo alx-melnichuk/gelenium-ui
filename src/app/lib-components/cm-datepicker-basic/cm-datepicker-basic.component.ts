@@ -47,6 +47,8 @@ export class CmDatepickerBasicComponent {
   // Page: CellSize
   isShowClnCellSize = false;
 
+  isDisabled01a = false;
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }
