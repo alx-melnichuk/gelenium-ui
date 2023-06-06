@@ -54,6 +54,10 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public isHorizont: string | boolean | null | undefined;
   @Input()
+  public isNoBorder: string | boolean | null | undefined;
+  @Input()
+  public isReadOnly: string | boolean | null | undefined;
+  @Input()
   public weekday: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
 
   @Output()
@@ -76,13 +80,16 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public contentWeek6: Record<string, CalendarCell[]> = { dataWeek: this.week6Buff };
 
   public cellSizeVal: number | null = null; // Binding attribute "cellSize".
-  public currConfig: any; // GlnDatepickerConfig;
+  public currConfig: GlnCalendarConfig;
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isHideOldDaysVal: boolean | null = null; // Binding attribute "isHideOldDays".
   public isHorizontVal: boolean | null = null; // Binding attribute "isHorizont".
+  public isNoBorderVal: boolean | null = null; // Binding attribute "isNoBorder".
+  public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
   public nameMonth: string = '';
   public nameYear: string = '';
   public weekdayVal: number | null = null; // Binding attribute "weekday".
+  // day of the week
 
   constructor(
     private renderer: Renderer2,
@@ -122,6 +129,14 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.isHorizontVal = BooleanUtil.init(this.isHorizont) ?? !!this.currConfig.isHorizont;
       this.settingIsHorizont(this.isHorizontVal, this.renderer, this.hostRef);
     }
+    if (changes['isNoBorder'] || (changes['config'] && this.isNoBorder == null && this.currConfig.isNoBorder != null)) {
+      this.isNoBorderVal = BooleanUtil.init(this.isNoBorder) ?? !!this.currConfig.isNoBorder;
+      this.settingIsNoBorder(this.isNoBorderVal, this.renderer, this.hostRef);
+    }
+    if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
+      this.isReadOnlyVal = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
+      this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
+    }
     if (changes['weekday'] || (changes['config'] && this.weekday == null && this.currConfig.weekday != null)) {
       const weekdayStr: string = (this.weekday?.toString() || this.currConfig.weekday || '').toString();
       this.weekdayVal = this.converWeekday(weekdayStr);
@@ -144,8 +159,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     let isPrepareData: boolean = false;
 
     if (this.cellSizeVal == null) {
-      const cellSizeStr: string = (this.currConfig.size || '').toString();
-      this.cellSizeVal = this.converSize(cellSizeStr, CELL_SIZE[cellSizeStr] || CELL_SIZE['middle']);
+      const cellSizeStr: string = (this.currConfig.cellSize || '').toString();
+      this.cellSizeVal = this.converSize(cellSizeStr, CELL_SIZE[cellSizeStr] || CELL_SIZE['small']);
       this.setCssCellSize(this.cellSizeVal, this.hostRef);
     }
     if (this.isHideOldDaysVal == null) {
@@ -154,6 +169,14 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     if (this.isHorizontVal == null) {
       this.isHorizontVal = !!this.currConfig.isHorizont;
       this.settingIsHorizont(this.isHorizontVal, this.renderer, this.hostRef);
+    }
+    if (this.isNoBorderVal == null) {
+      this.isNoBorderVal = !!this.currConfig.isNoBorder;
+      this.settingIsNoBorder(this.isNoBorderVal, this.renderer, this.hostRef);
+    }
+    if (this.isReadOnlyVal == null) {
+      this.isReadOnlyVal = !!this.currConfig.isReadOnly;
+      this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
     if (this.weekdayVal == null) {
       const weekdayStr: string = (this.currConfig.weekday || '').toString();
@@ -190,7 +213,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   }
 
   public clickSelectItem(cell: CalendarCell | null): void {
-    if (this.isDisabledVal || !cell || (!cell.isCurrMonth && this.isHideOldDaysVal)) {
+    if (this.isDisabledVal || this.isReadOnlyVal || !cell || (!cell.isCurrMonth && this.isHideOldDaysVal)) {
       console.log(`clickSelectItem() return;`); // #
       return;
     }
@@ -319,5 +342,13 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   private settingIsHorizont(isHorizont: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-is-horizont', !!isHorizont);
     HtmlElemUtil.setAttr(renderer, elem, 'hor', isHorizont ? '' : null);
+  }
+  private settingIsNoBorder(isNoBorder: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-is-no-border', !!isNoBorder);
+    HtmlElemUtil.setAttr(renderer, elem, 'nobrd', isNoBorder ? '' : null);
+  }
+  private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!readOnly);
+    HtmlElemUtil.setAttr(renderer, elem, 'rea', readOnly ? '' : null);
   }
 }

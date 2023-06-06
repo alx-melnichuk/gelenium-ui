@@ -13,8 +13,14 @@ gln-calendar {
   --glncn--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
   --glncn--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
 
+  box-sizing: border-box;
   display: block;
-  
+
+  &[wdFull] {
+    height: 100%;
+    width: 100%;
+  }
+
   &[hor] {
     --glncn--dir-lv1: row;
     --glncn--dir-lv2: column;
@@ -27,8 +33,8 @@ gln-calendar {
   --glncn--nav-def-cl   : hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l));
   --glncn--nav-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.10);
   --glncn--sndr-dis-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.60);
-  --glncn--cell-def-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.60);    // rgba(0, 0, 0, 0.6);
-  --glncn--item-def-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l));   // ~rgba(0, 0, 0, 0.87);
+  --glncn--cell-def-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.60);
+  --glncn--item-def-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l));
   --glncn--item-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.15);
   --glncn--today-def-br-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.80);
   --glncn--slct-def-bg-cl: hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l));
@@ -36,16 +42,22 @@ gln-calendar {
   --glncn--slct-def-cl: hsl(var(--glncn--default-bg-h), var(--glncn--default-bg-s), var(--glncn--default-bg-l));
   --glncn--slct-dis-bg-cl: hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.40);
 
+  &:not([nobrd]) {
+    border: 1px solid var(--glncn--sndr-dis-cl);
+  }
+
   // Level 1 Element "wrapper"
   &>[glncn-wrapper] {
-    outline: 1px solid green;
     display: flex;
     flex-direction: var(--glncn--dir-lv1);
   }
-
+  &[wdFull]>[glncn-wrapper] {
+    height: 100%;
+    width: 100%;
+  }
+  
   // Level 2 Element "title"
   [glncn-title] {
-    // outline: 1px solid green; // #
     align-items: center;
     display: flex;
     font-family: inherit;
@@ -57,7 +69,6 @@ gln-calendar {
 
   // Level 3 Element "month2year"
   [glncn-month2year] {
-    // outline: 1px dashed brown; // #
     align-items: center;
     display: inline-flex;
     flex-grow: 1;
@@ -241,12 +252,16 @@ gln-calendar {
 
   // Level 2 Element "glncn-header"
   [glncn-header] {
-    // outline: 1px solid green; // #
     align-items: center;
     display: flex;
     flex-direction: var(--glncn--dir-lv2);
-    justify-content: center;
     text-align: center;
+  }
+  &:not([wdFull]) [glncn-header] {
+    justify-content: center;
+  }
+  &[wdFull] [glncn-header] {
+    justify-content: space-between;
   }
 
   // Level 3 Element "header cell"
@@ -273,7 +288,7 @@ gln-calendar {
     font-weight: var(--glncn-cell-fn-wg, 400);
     height: var(--glncn-cell-hg, var(--glncn--item-size));
     justify-content: center;
-    margin: var(--glncn-cell-mr, 1px);
+    margin: var(--glncn-cell-mr, var(--glncn-item-mr, 0px));
     text-align: center;
     padding: var(--glncn-cell-pd, 0px);
     width: var(--glncn-cell-wd, var(--glncn--item-size));
@@ -284,6 +299,10 @@ gln-calendar {
     display: flex;
     flex-direction: var(--glncn--dir-lv1);
   }
+  &[wdFull] [glncn-rows] {
+    justify-content: space-between;
+    flex-grow: 1;
+  }
 
   // Level 3 Element "list days - row"
   [glncn-row] {
@@ -292,6 +311,10 @@ gln-calendar {
     flex-direction: var(--glncn--dir-lv2);
     font-weight: var(--glncn-row-fn-wg, 400);
     justify-content: center;
+  }
+  &[wdFull] [glncn-row] {
+    flex-grow: 1;
+    justify-content: space-between;
   }
 
   // Level 4 Element "list days - row - item"
@@ -311,7 +334,7 @@ gln-calendar {
       --glncn--curr-bg-cl: var(--glncn-hov-curr-bg-cl, var(--glncn--item-hov-bg-cl));
 
       --glncn--old-cl    : var(--glncn-hov-old-cl, var(--glncn-def-old-cl, var(--glncn--cell-def-cl)));
-      --glncn--old-bg-cl : var(--glncn-hov-old-bg-cl, var(--glncn--item-hov-bg-cl));
+      --glncn--old-bg-cl : var(--glncn-hov-old-bg-cl, var(--glncn-def-old-bg-cl, var(--glncn--item-hov-bg-cl)));
 
       --glncn--slct-cl   : var(--glncn-hov-slct-cl, var(--glncn-def-slct-cl, var(--glncn--slct-def-cl)));
       --glncn--slct-bg-cl: var(--glncn-hov-slct-bg-cl, var(--glncn--slct-hov-bg-cl));
@@ -340,7 +363,7 @@ gln-calendar {
     height: var(--glncn-item-hg, var(--glncn--item-size));
     justify-content: center;
     margin: var(--glncn-item-mr, 0px);
-    outline: 0;
+    // outline: 0;
     overflow: visible;
     padding: var(--glncn-item-pd, 0px);
     text-decoration: none;
@@ -353,7 +376,9 @@ gln-calendar {
       border: 0px;
     }
   }
-
+  &[rea] :not([disabled])[glncn-item] {
+    pointer-events: none;
+  }
   [glncn-curr] {
     color: var(--glncn--curr-cl);
     background-color: var(--glncn--curr-bg-cl);
@@ -372,5 +397,4 @@ gln-calendar {
     border-style: var(--glncn-today-br-st, solid);
     border-color: var(--glncn-today-br-cl, var(--glncn--today-br-cl));
   }
-
 }
