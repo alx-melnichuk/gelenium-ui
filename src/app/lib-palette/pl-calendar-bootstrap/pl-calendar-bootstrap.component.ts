@@ -24,6 +24,7 @@ export class PlCalendarBootstrapComponent {
   public urlPlCalendar = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CALENDAR');
 
   public isDisabled01a: boolean = false;
+  public isHideOldDays01a: boolean = false;
   public cfgBs = { cellSize: 30, weekday: 2 };
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

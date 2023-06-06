@@ -18,6 +18,13 @@
       [checked]="isDisabled01a" />
     Is disabled
   </label>
+  &nbsp;
+  <label>
+    <input type="checkbox"
+      (change)="isHideOldDays01a=!isHideOldDays01a"
+      [checked]="isHideOldDays01a" />
+    is hide old days
+  </label>
 </section>
 
 
@@ -29,7 +36,8 @@
     <div class="cnbt1-br1">
       <gln-calendar class="cnbt1-bstr"
         [config]="cfgBs"
-        [isDisabled]="isDisabled01a">
+        [isDisabled]="isDisabled01a"
+        [isHideOldDays]="isHideOldDays01a">
       </gln-calendar>
     </div>
   </div>
