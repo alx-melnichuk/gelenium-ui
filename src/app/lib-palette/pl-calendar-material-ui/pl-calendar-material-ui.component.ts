@@ -23,6 +23,7 @@ export class PlCalendarMaterialUiComponent {
   public baseRef: string = RouterConfig.get('BASE_REF');
   public urlPlCalendar = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CALENDAR');
 
+  public isDisabled01a: boolean = false;
   public cfgMui = { cellSize: 36, isHideOldDays: true, weekday: 1 };
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

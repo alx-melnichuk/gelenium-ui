@@ -11,6 +11,16 @@
 </section>
 
 
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabled01a=!isDisabled01a"
+      [checked]="isDisabled01a" />
+    Is disabled
+  </label>
+</section>
+
+
 <div class="app-group">
   <div class="app-elem">
     <div>
@@ -18,7 +28,8 @@
     </div>
     <div class="cnm1-br1">
       <gln-calendar class="cnm1-mui"
-        [config]="cfgMui">
+        [config]="cfgMui"
+        [isDisabled]="isDisabled01a">
       </gln-calendar>
     </div>
   </div>
