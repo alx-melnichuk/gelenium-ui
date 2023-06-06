@@ -6,13 +6,19 @@ app-cm-datepicker-basic {
   .app-elem {
     margin-left: 15px;
     margin-right: 15px;
+    min-width: 20ch;
   }
   // Page: Basic
   .dpbs-mb {
     margin-bottom: 0.5em;
   }
 
-  // Page: Attrib02
+  // Page: Attrib01
+  .cnat1-elem {
+    min-width: 300px;
+    min-height: 300px;
+    display: grid;
+  }
 
   // Page: 
   .demo01 {

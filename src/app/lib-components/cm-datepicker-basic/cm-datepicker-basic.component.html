@@ -42,7 +42,7 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
   </div>
 </section> -->
 
-<form *ngIf="false && isShowBasic01"
+<form *ngIf="isShowBasic01"
   [formGroup]="formGroup01"
   novalidate
   autocomplete="off">
@@ -112,6 +112,8 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
 
 </form>
 
+<span style="color: indianred;">source</span>
+
 
 
 <ng-container *ngIf="isShowClnBasic">
@@ -139,46 +141,233 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
     </code>
   </section>
 
-  <section mr-vr>
-    <label>
-      <input type="checkbox"
-        (change)="isDisabled01a=!isDisabled01a"
-        [checked]="isDisabled01a" />
-      Is disabled
-    </label>
-  </section>
 
   <div class="app-group">
+
     <div class="app-elem">
       <div>
-        <small><em>standard view</em></small>
+        <small><em>Standard view</em></small>
       </div>
       <div>
-        <gln-calendar class="demo1_"
-          [isDisabled]="isDisabled01a">
+        <gln-calendar [isDisabled]="isDisabled01a">
         </gln-calendar>
       </div>
     </div>
-  </div>
 
-  <!-- <div class="app-elem">
+    <div class="app-elem">
       <div>
-        <small><em>Horizontal Orientation</em></small>
+        <small><em>Horizontal orientation</em></small>
       </div>
       <div>
-        <gln-calendar class="cnbs-demo2"
-          isHideOldDays
-          [isHorizont]="true">
+        <gln-calendar [isHorizont]="true">
         </gln-calendar>
       </div>
-    </div> -->
+    </div>
+
+  </div>
+
+  <span style="color: indianred;">source</span>
+
 </ng-container>
+
+
 
 
 <ng-container *ngIf="isShowClnAttr01">
+  <i id="Attributes">_</i> <!-- # -->
+  <section mr-vr>
+    <h3 class="app-hover-link">
+      Attributes.
+      <a [href]="urlCmCalendar + '#Attributes'">#</a>
+    </h3>
+    <p>The following attributes are supported:</p>
+    <ul>
+      <!-- <li>"id" - parameter for defining the unique identifier of the input field
+        (id="unique_identifier");
+      </li> -->
+      <!-- <li>
+        "config" - Defines a configuration object.
+        <a [href]="urlCmCalendar + '#config-interface'">More details.</a>
+      </li> -->
+      <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
+      <li>
+        "isHideOldDays" - a sign of hiding the days of the previous and next month (isHideOldDays);
+      </li>
+      <li>"isHorizont" - renders a component with a horizontal layout (isHorizont);</li>
+      <li>"isNoBorder" - the attribute hides the display of the frame (isNoBorder);</li>
+      <li>"isReadOnly" - a sign that the field is read-only (isReadOnly);</li>
+    </ul>
+  </section>
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: isDisabled.</em></small>
+      </div>
+      <gln-calendar isDisabled>
+      </gln-calendar>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: isHideOldDays.</em></small>
+      </div>
+      <gln-calendar isHideOldDays>
+      </gln-calendar>
+    </div>
+
+  </div>
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: isHorizont.</em></small>
+      </div>
+      <gln-calendar isHorizont>
+      </gln-calendar>
+    </div>
+
+  </div>
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: isNoBorder.</em></small>
+      </div>
+      <gln-calendar isNoBorder>
+      </gln-calendar>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: isReadOnly.</em></small>
+      </div>
+      <gln-calendar isReadOnly>
+      </gln-calendar>
+    </div>
+
+  </div>
+
+  <span style="color: indianred;">source</span>
+
 
 </ng-container>
 
+<hr br-nn />
+
+
+
+<ng-container *ngIf="isShowClnAttr02">
+
+  <section mr-vr
+    id="attributes-supported02">
+    <h4 class="app-hover-link">
+      Attributes are also supported 2:
+      <a [href]="urlCmCalendar + '#attributes-supported02'">#</a>
+    </h4>
+    <ul>
+      <li>
+        "wdFull" - an attribute sets the width to the width of the parent (width: 100%).
+        <br />
+        In this case, the width must be defined at the parent or at the current level.
+        <br />
+        Without this parameter, the width is determined by the content and may change
+        when the font size is changed.
+        <br />
+        <i>To make the child element have the height of the parent, we specify "display: grid;"
+          for a parent.</i>
+      </li>
+      <li>"weekday"</li>
+    </ul>
+  </section>
+
+
+  <div class="app-group">
+
+    <div class="app-elem ">
+      <div>
+        <small><em>Attribute: wdFull (width: 300px; height: 300px;).</em></small>
+      </div>
+      <div class="cnat1-elem">
+        <gln-calendar wdFull>
+        </gln-calendar>
+      </div>
+    </div>
+
+    <div class="app-elem ">
+      <div>
+        <small><em>Attribute: wdFull style="width: 300px; height: 300px;".</em></small>
+      </div>
+      <gln-calendar wdFull
+        style="width: 300px; height: 300px;">
+      </gln-calendar>
+    </div>
+
+  </div>
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: wdFull, isHorizont (width: 300px; height: 300px;).</em></small>
+      </div>
+      <div class="cnat1-elem">
+        <gln-calendar wdFull
+          isHorizont>
+        </gln-calendar>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: weekday=1.</em></small>
+      </div>
+      <div class="cnat1-elem">
+        <gln-calendar [weekday]="1">
+        </gln-calendar>
+      </div>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: weekday=2.</em></small>
+      </div>
+      <div class="cnat1-elem">
+        <gln-calendar [weekday]="2">
+        </gln-calendar>
+      </div>
+    </div>
+
+    <div class="app-elem">
+      <div>
+        <small><em>Attribute: weekday=3.</em></small>
+      </div>
+      <div class="cnat1-elem">
+        <gln-calendar [weekday]="3">
+        </gln-calendar>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <span style="color: indianred;">source</span>
+
+</ng-container>
+
+<hr br-nn />
+
+<!-- <ng-container *ngIf="isShowClnAttr03">
+
+</ng-container> -->
 
 
 <ng-container *ngIf="isShowClnCellSize">

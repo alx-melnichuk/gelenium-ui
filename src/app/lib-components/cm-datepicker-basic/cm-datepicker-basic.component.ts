@@ -44,6 +44,10 @@ export class CmDatepickerBasicComponent {
   isShowClnBasic = true;
   // Page: Attr01
   isShowClnAttr01 = true;
+  // Page: Attr02
+  isShowClnAttr02 = true;
+  // Page: Attr03
+  isShowClnAttr03 = true;
   // Page: CellSize
   isShowClnCellSize = false;
 
