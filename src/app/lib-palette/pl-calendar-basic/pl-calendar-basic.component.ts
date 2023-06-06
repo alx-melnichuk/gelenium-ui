@@ -24,6 +24,7 @@ export class PlCalendarBasicComponent {
   public urlPlCalendar = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CALENDAR');
 
   public isDisabled01a: boolean = false;
+  public isHideOldDays01a: boolean = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

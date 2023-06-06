@@ -16,6 +16,13 @@
       [checked]="isDisabled01a" />
     Is disabled
   </label>
+  &nbsp;
+  <label>
+    <input type="checkbox"
+      (change)="isHideOldDays01a=!isHideOldDays01a"
+      [checked]="isHideOldDays01a" />
+    is hide old days
+  </label>
 </section>
 
 
@@ -25,7 +32,8 @@
     <div>
       <small><em>color: primary</em></small>
     </div>
-    <gln-calendar [isDisabled]="isDisabled01a">
+    <gln-calendar [isDisabled]="isDisabled01a"
+      [isHideOldDays]="isHideOldDays01a">
     </gln-calendar>
   </div>
 
@@ -34,7 +42,8 @@
       <small><em>color: danger</em></small>
     </div>
     <gln-calendar [glnColor]="{ primary: 'danger' }"
-      [isDisabled]="isDisabled01a">
+      [isDisabled]="isDisabled01a"
+      [isHideOldDays]="isHideOldDays01a">
     </gln-calendar>
   </div>
 
@@ -47,7 +56,8 @@
       <small><em>color: success</em></small>
     </div>
     <gln-calendar [glnColor]="{ primary: 'success' }"
-      [isDisabled]="isDisabled01a">
+      [isDisabled]="isDisabled01a"
+      [isHideOldDays]="isHideOldDays01a">
     </gln-calendar>
   </div>
 
@@ -56,7 +66,8 @@
       <small><em>color: info</em></small>
     </div>
     <gln-calendar [glnColor]="{ primary: 'info' }"
-      [isDisabled]="isDisabled01a">
+      [isDisabled]="isDisabled01a"
+      [isHideOldDays]="isHideOldDays01a">
     </gln-calendar>
   </div>
 
@@ -69,7 +80,8 @@
       <small><em>color: warning</em></small>
     </div>
     <gln-calendar [glnColor]="{ primary: 'warning' }"
-      [isDisabled]="isDisabled01a">
+      [isDisabled]="isDisabled01a"
+      [isHideOldDays]="isHideOldDays01a">
     </gln-calendar>
   </div>
 
@@ -79,7 +91,8 @@
     </div>
     <gln-calendar class="cnpl-customer"
       [glnColor]="{ primary: 'customer' }"
-      [isDisabled]="isDisabled01a">
+      [isDisabled]="isDisabled01a"
+      [isHideOldDays]="isHideOldDays01a">
     </gln-calendar>
   </div>
 
