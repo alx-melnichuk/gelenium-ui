@@ -15,6 +15,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { BooleanUtil } from '../_utils/boolean.util';
+import { DateUtil } from '../_utils/date.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { GlnCalendarConfig } from './gln-calendar-config.interface';
 
@@ -23,6 +24,11 @@ const CELL_SIZE: { [key: string]: number } = { short: 28, small: 32, middle: 36,
 const CSS_PROP_CELL_SIZE = '--glncn--item-size';
 const CSS_PROP_FONT_SIZE_HEADER = '--glncnh--fn-sz';
 
+interface CalendarRow {
+  cellList: CalendarCell[];
+  weekNumber: number;
+  valWeekNumber?: { weekNumber: number };
+}
 interface CalendarCell {
   year: number;
   month: number;
@@ -54,9 +60,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public isHorizont: string | boolean | null | undefined;
   @Input()
-  public isNoBorder: string | boolean | null | undefined;
-  @Input()
   public isReadOnly: string | boolean | null | undefined;
+  @Input()
+  public isWeekNumber: string | boolean | null | undefined;
   @Input()
   public weekday: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
 
@@ -65,27 +71,14 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
 
   public daysOfWeek: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
-  public week1Buff: CalendarCell[] = [];
-  public week2Buff: CalendarCell[] = [];
-  public week3Buff: CalendarCell[] = [];
-  public week4Buff: CalendarCell[] = [];
-  public week5Buff: CalendarCell[] = [];
-  public week6Buff: CalendarCell[] = [];
-
-  public contentWeek1: Record<string, CalendarCell[]> = { dataWeek: this.week1Buff };
-  public contentWeek2: Record<string, CalendarCell[]> = { dataWeek: this.week2Buff };
-  public contentWeek3: Record<string, CalendarCell[]> = { dataWeek: this.week3Buff };
-  public contentWeek4: Record<string, CalendarCell[]> = { dataWeek: this.week4Buff };
-  public contentWeek5: Record<string, CalendarCell[]> = { dataWeek: this.week5Buff };
-  public contentWeek6: Record<string, CalendarCell[]> = { dataWeek: this.week6Buff };
-
   public cellSizeVal: number | null = null; // Binding attribute "cellSize".
+  public calendarRows: CalendarRow[] = [];
   public currConfig: GlnCalendarConfig;
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isHideOldDaysVal: boolean | null = null; // Binding attribute "isHideOldDays".
   public isHorizontVal: boolean | null = null; // Binding attribute "isHorizont".
-  public isNoBorderVal: boolean | null = null; // Binding attribute "isNoBorder".
   public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
+  public isWeekNumberVal: boolean | null = null; // Binding attribute "isWeekNumber".
   public nameMonth: string = '';
   public nameYear: string = '';
   public weekdayVal: number | null = null; // Binding attribute "weekday".
@@ -97,15 +90,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     @Optional() @Inject(GLN_CALENDAR_CONFIG) private rootConfig: GlnCalendarConfig | null
   ) {
     this.currConfig = this.rootConfig || {};
-    // console.log(`getListDaysOfWeek('long')=`, this.getListDaysOfWeek('long'));
-    // console.log(`getListDaysOfWeek('narrow')=`, this.getListDaysOfWeek('narrow'));
-    // console.log(`getListDaysOfWeek('short')=`, this.getListDaysOfWeek('short'));
-    // console.log(`getListDaysOfWeek()=`, this.getListDaysOfWeek());
-    // console.log(`getListDaysOfWeek(1)=`, this.getListDaysOfWeek(1));
-    // console.log(`getListDaysOfWeek(2)=`, this.getListDaysOfWeek(2));
-    // console.log(`getListDaysOfWeek(3)=`, this.getListDaysOfWeek(3));
-    // console.log(`getListDaysOfWeek(4)=`, this.getListDaysOfWeek(4));
-    // console.log(`getListDaysOfWeek(-1)=`, this.getListDaysOfWeek(-1));
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -116,7 +100,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
 
     if (changes['cellSize'] || (changes['config'] && this.cellSize == null && this.currConfig.cellSize != null)) {
       const cellSizeStr: string = (this.cellSize || this.currConfig.cellSize || '').toString();
-      this.cellSizeVal = this.converSize(cellSizeStr, CELL_SIZE[cellSizeStr] || CELL_SIZE['small']);
+      this.cellSizeVal = this.converSize(cellSizeStr, CELL_SIZE[cellSizeStr] || CELL_SIZE['middle']);
       this.setCssCellSize(this.cellSizeVal, this.hostRef);
     }
     if (changes['isDisabled']) {
@@ -129,13 +113,13 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.isHorizontVal = BooleanUtil.init(this.isHorizont) ?? !!this.currConfig.isHorizont;
       this.settingIsHorizont(this.isHorizontVal, this.renderer, this.hostRef);
     }
-    if (changes['isNoBorder'] || (changes['config'] && this.isNoBorder == null && this.currConfig.isNoBorder != null)) {
-      this.isNoBorderVal = BooleanUtil.init(this.isNoBorder) ?? !!this.currConfig.isNoBorder;
-      this.settingIsNoBorder(this.isNoBorderVal, this.renderer, this.hostRef);
-    }
     if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
       this.isReadOnlyVal = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
+    }
+    if (changes['isWeekNumber'] || (changes['config'] && this.isWeekNumber == null && this.currConfig.isWeekNumber != null)) {
+      this.isWeekNumberVal = BooleanUtil.init(this.isWeekNumber) ?? !!this.currConfig.isWeekNumber;
+      isPrepareData = true;
     }
     if (changes['weekday'] || (changes['config'] && this.weekday == null && this.currConfig.weekday != null)) {
       const weekdayStr: string = (this.weekday?.toString() || this.currConfig.weekday || '').toString();
@@ -146,7 +130,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     if (isPrepareData && this.weekdayVal != null) {
       const date: Date = new Date();
       date.setDate(11);
-      this.prepareData(date, this.weekdayVal);
+      this.prepareData(date, this.weekdayVal, !!this.isWeekNumberVal);
     }
   }
 
@@ -160,7 +144,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
 
     if (this.cellSizeVal == null) {
       const cellSizeStr: string = (this.currConfig.cellSize || '').toString();
-      this.cellSizeVal = this.converSize(cellSizeStr, CELL_SIZE[cellSizeStr] || CELL_SIZE['small']);
+      this.cellSizeVal = this.converSize(cellSizeStr, CELL_SIZE[cellSizeStr] || CELL_SIZE['middle']);
       this.setCssCellSize(this.cellSizeVal, this.hostRef);
     }
     if (this.isHideOldDaysVal == null) {
@@ -170,13 +154,13 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.isHorizontVal = !!this.currConfig.isHorizont;
       this.settingIsHorizont(this.isHorizontVal, this.renderer, this.hostRef);
     }
-    if (this.isNoBorderVal == null) {
-      this.isNoBorderVal = !!this.currConfig.isNoBorder;
-      this.settingIsNoBorder(this.isNoBorderVal, this.renderer, this.hostRef);
-    }
     if (this.isReadOnlyVal == null) {
       this.isReadOnlyVal = !!this.currConfig.isReadOnly;
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
+    }
+    if (this.isWeekNumberVal == null) {
+      this.isWeekNumberVal = !!this.currConfig.isWeekNumber;
+      isPrepareData = true;
     }
     if (this.weekdayVal == null) {
       const weekdayStr: string = (this.currConfig.weekday || '').toString();
@@ -187,7 +171,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     if (isPrepareData && this.weekdayVal != null) {
       const date: Date = new Date();
       date.setDate(10);
-      this.prepareData(date, this.weekdayVal);
+      this.prepareData(date, this.weekdayVal, !!this.isWeekNumberVal);
     }
   }
 
@@ -212,6 +196,27 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     return index;
   }
 
+  public clickSwitch(): void {
+    if (this.isDisabledVal || this.isReadOnlyVal) {
+      console.log(`clickSwitch() return;`); // #
+      return;
+    }
+  }
+
+  public clickPrev(): void {
+    if (this.isDisabledVal || this.isReadOnlyVal) {
+      console.log(`clickPrev() return;`); // #
+      return;
+    }
+  }
+
+  public clickNext(): void {
+    if (this.isDisabledVal || this.isReadOnlyVal) {
+      console.log(`clickNext() return;`); // #
+      return;
+    }
+  }
+
   public clickSelectItem(cell: CalendarCell | null): void {
     if (this.isDisabledVal || this.isReadOnlyVal || !cell || (!cell.isCurrMonth && this.isHideOldDaysVal)) {
       console.log(`clickSelectItem() return;`); // #
@@ -221,12 +226,11 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
 
   // ** Private methods **
 
-  private prepareData(date: Date, weekdayLen: number): void {
+  private prepareData(date: Date, weekdayLen: number, isWeekNumber: boolean): void {
     this.nameYear = this.getInfoForYear(date);
     this.nameMonth = this.getInfoForMonth(date);
     this.daysOfWeek = this.getListDaysOfWeek(weekdayLen);
-    const cellBuff: CalendarCell[] = this.getListDaysOfMonth(date);
-    this.updateContentWeek(cellBuff);
+    this.calendarRows = this.getListDaysOfMonth(date, isWeekNumber);
   }
 
   private getInfoForYear(date: Date, year?: 'numeric' | '2-digit' | undefined): string {
@@ -251,10 +255,10 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   /** Get a list of days of the week.
    * @param weekday: number; 1-'narrow'(T); 2,3-'short'(Thu); -1-'long'(Thursday);
    */
-  private getListDaysOfWeek(weekdayLen: number, date?: Date | undefined): string[] {
+  private getListDaysOfWeek(weekdayLen: number): string[] {
     const result: string[] = ['', '', '', '', '', '', ''];
     const weekdayRes: 'long' | 'short' | 'narrow' = weekdayLen <= 0 || 3 < weekdayLen ? 'long' : 1 === weekdayLen ? 'narrow' : 'short';
-    const currentDate: Date = date || new Date();
+    const currentDate: Date = new Date();
     const current: Date = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     for (let i = 1; i < 8; i++) {
       current.setDate(i);
@@ -264,14 +268,13 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     return result;
   }
-  /** Get a list of days in the specified month.
-   * @param date: Date; Specifies the month and year.
-   */
-  private getListDaysOfMonth(dateSelected: Date): CalendarCell[] {
-    const result: CalendarCell[] = [];
+  private getListDaysOfMonth(dateSelected: Date, isWeekStartsOnMonday: boolean): CalendarRow[] {
+    const result: CalendarRow[] = [];
     const yearSelected: number = dateSelected.getFullYear();
     const monthSelected: number = dateSelected.getMonth();
     const daySelected: number = dateSelected.getDate();
+
+    const weekStartIndex: number = 0;
 
     const dateItem: Date = new Date(yearSelected, monthSelected, 1);
     let indexDayOfWeeek: number = dateItem.getDay(); // 0-вс,1-пн,2-вт,3-ср,4-чт,5-пт,6-сб
@@ -283,44 +286,41 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     const yearToday: number = dateToday.getFullYear();
     const monthToday: number = dateToday.getMonth();
     const dayToday: number = dateToday.getDate();
+
     let hasSelected: boolean = false;
     let isSelected: boolean | undefined;
+    let hasToday: boolean = false;
+    let isToday: boolean | undefined;
+    let calendarRow: CalendarRow | undefined;
     let idx: number = 0;
+
     while (idx < 42) {
       dateItem.setDate(dateItem.getDate() + 1);
       const year: number = dateItem.getFullYear();
       const month: number = dateItem.getMonth();
       const day: number = dateItem.getDate();
+
       isSelected = !hasSelected && year === yearSelected && month === monthSelected && day === daySelected ? true : undefined;
       if (!hasSelected && isSelected) {
         hasSelected = true;
       }
-
-      const isToday: boolean | undefined = year === yearToday && month === monthToday && day === dayToday ? true : undefined;
-      result.push({ year, month, day, isCurrMonth: month === monthSelected, isSelected, isToday });
-      if (isSelected) {
-        console.log(`calendarCellBuff.push(idx:${idx} { year: ${year}, month: ${month}, day: ${day}, isSelected: ${isSelected} }`); // #
+      isToday = !hasToday && year === yearToday && month === monthToday && day === dayToday ? true : undefined;
+      if (!hasToday && isToday) {
+        hasToday = true;
       }
+
+      const dayWeeek: number = dateItem.getDay();
+      if (weekStartIndex === dayWeeek) {
+        const weekNumber: number = DateUtil.getWeekNumber(dateItem);
+        calendarRow = { cellList: [], weekNumber, valWeekNumber: { weekNumber } };
+        result.push(calendarRow);
+      }
+      calendarRow?.cellList.push({ year, month, day, isCurrMonth: month === monthSelected, isSelected, isToday });
 
       idx++;
     }
+
     return result;
-  }
-
-  private updateContentWeek(cellBuff: CalendarCell[]): void {
-    this.week1Buff = cellBuff.slice(0, 7);
-    this.week2Buff = cellBuff.slice(7, 14);
-    this.week3Buff = cellBuff.slice(14, 21);
-    this.week4Buff = cellBuff.slice(21, 28);
-    this.week5Buff = cellBuff.slice(28, 35);
-    this.week6Buff = cellBuff.slice(35, 42);
-
-    this.contentWeek1 = { dataWeek: this.week1Buff };
-    this.contentWeek2 = { dataWeek: this.week2Buff };
-    this.contentWeek3 = { dataWeek: this.week3Buff };
-    this.contentWeek4 = { dataWeek: this.week4Buff };
-    this.contentWeek5 = { dataWeek: this.week5Buff };
-    this.contentWeek6 = { dataWeek: this.week6Buff };
   }
 
   private getIsWeekStartsOnMonday(): boolean {
@@ -342,10 +342,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   private settingIsHorizont(isHorizont: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-is-horizont', !!isHorizont);
     HtmlElemUtil.setAttr(renderer, elem, 'hor', isHorizont ? '' : null);
-  }
-  private settingIsNoBorder(isNoBorder: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setClass(renderer, elem, 'gln-is-no-border', !!isNoBorder);
-    HtmlElemUtil.setAttr(renderer, elem, 'nobrd', isNoBorder ? '' : null);
   }
   private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!readOnly);

@@ -29,22 +29,25 @@ gln-calendar {
     --glncn--dir-lv1: column;
     --glncn--dir-lv2: row;
   }
-
+  --glncn--item-hg: var(--glncn-item-hg, var(--glncn--item-size));
+  --glncn--item-wd: var(--glncn-item-wd, var(--glncn--item-size));
+  --glncn--item-mr: var(--glncn-item-mr, 0px);
+  --glncn--item-pd: var(--glncn-item-pd, 0px);
   --glncn--nav-def-cl   : hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l));
-  --glncn--nav-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.10);
-  --glncn--sndr-dis-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.60);
-  --glncn--cell-def-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.60);
+  --glncn--nav-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.1);
+  --glncn--sndr-dis-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.8);
+  --glncn--cell-def-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.6); // ~rgba(0, 0, 0, 0.6);
+  --glncn--cell-dis-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.5); // ~rgba(0, 0, 0, 0.6);
+  --glncn--week-def-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.6); // ~rgba(0, 0, 0, 0.38);
+  --glncn--week-dis-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.5); // ~rgba(0, 0, 0, 0.38);
   --glncn--item-def-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l));
   --glncn--item-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.15);
-  --glncn--today-def-br-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.80);
+  --glncn--today-def-br-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.8);
   --glncn--slct-def-bg-cl: hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l));
   --glncn--slct-hov-bg-cl: hsl(var(--glncn--primary-h), var(--glncn--primary-s), calc(var(--glncn--primary-l) - 7%));
   --glncn--slct-def-cl: hsl(var(--glncn--default-bg-h), var(--glncn--default-bg-s), var(--glncn--default-bg-l));
   --glncn--slct-dis-bg-cl: hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.40);
 
-  &:not([nobrd]) {
-    border: 1px solid var(--glncn--sndr-dis-cl);
-  }
 
   // Level 1 Element "wrapper"
   &>[glncn-wrapper] {
@@ -56,6 +59,11 @@ gln-calendar {
     width: 100%;
   }
   
+  button[disabled] {
+    pointer-events: none;
+    cursor: default;
+  }
+
   // Level 2 Element "title"
   [glncn-title] {
     align-items: center;
@@ -129,7 +137,7 @@ gln-calendar {
       --glncn--switch-cl   : var(--glncn-def-switch-cl, var(--glncn--nav-def-cl));
       --glncn--switch-bg-cl: var(--glncn-def-switch-bg-cl, transparent);
     }
-    &:hover {
+    &:hover:not([disabled]) {
       --glncn--switch-cl   : var(--glncn-hov-switch-cl, var(--glncn-def-switch-cl, var(--glncn--nav-def-cl)));
       --glncn--switch-bg-cl: var(--glncn-hov-switch-bg-cl, var(--glncn--nav-hov-bg-cl));
     }
@@ -255,7 +263,6 @@ gln-calendar {
     align-items: center;
     display: flex;
     flex-direction: var(--glncn--dir-lv2);
-    text-align: center;
   }
   &:not([wdFull]) [glncn-header] {
     justify-content: center;
@@ -264,19 +271,13 @@ gln-calendar {
     justify-content: space-between;
   }
 
-  // Level 3 Element "header cell"
+  // Level 3 Element "header - cell"
   &:not([dis]) [glncn-cell] {
-    &:not(:hover) {
-      --glncn--cell-cl   : var(--glncn-def-cell-cl, var(--glncn--cell-def-cl));
-      --glncn--cell-bg-cl: var(--glncn-def-cell-bg-cl, transparent);
-    }
-    &:hover {
-      --glncn--cell-cl   : var(--glncn-hov-cell-cl, var(--glncn-def-cell-cl, var(--glncn--cell-def-cl)));
-      --glncn--cell-bg-cl: var(--glncn-hov-cell-bg-cl, var(--glncn-def-cell-bg-cl, transparent));
-    }
+    --glncn--cell-cl   : var(--glncn-def-cell-cl, var(--glncn--cell-def-cl));
+    --glncn--cell-bg-cl: var(--glncn-def-cell-bg-cl, transparent);
   }
   &[dis] [glncn-cell] {
-    --glncn--cell-cl   : var(--glncn-dis-cell-cl, var(--glncn--sndr-dis-cl));
+    --glncn--cell-cl   : var(--glncn-dis-cell-cl, var(--glncn--cell-dis-cl));
     --glncn--cell-bg-cl: var(--glncn-dis-cell-bg-cl, transparent);
   }
   [glncn-cell] {
@@ -286,12 +287,11 @@ gln-calendar {
     display: flex;
     font-size: var(--glncn-cell-fn-sz, var(--glncnh--fn-sz, 0.75em));
     font-weight: var(--glncn-cell-fn-wg, 400);
-    height: var(--glncn-cell-hg, var(--glncn--item-size));
+    height: var(--glncn--item-hg);
     justify-content: center;
-    margin: var(--glncn-cell-mr, var(--glncn-item-mr, 0px));
-    text-align: center;
-    padding: var(--glncn-cell-pd, 0px);
-    width: var(--glncn-cell-wd, var(--glncn--item-size));
+    margin: var(--glncn--item-mr);
+    padding: var(--glncn--item-pd);
+    width: var(--glncn--item-wd);
   }
 
   // Level 2 Element "list days"
@@ -322,30 +322,29 @@ gln-calendar {
     &:not(:hover) {
       --glncn--curr-cl   : var(--glncn-def-curr-cl, var(--glncn--item-def-cl));
       --glncn--curr-bg-cl: var(--glncn-def-curr-bg-cl, transparent);
-
       --glncn--old-cl    : var(--glncn-def-old-cl, var(--glncn--cell-def-cl));
       --glncn--old-bg-cl : var(--glncn-def-old-bg-cl, transparent);
-
       --glncn--slct-cl   : var(--glncn-def-slct-cl, var(--glncn--slct-def-cl));
       --glncn--slct-bg-cl: var(--glncn-def-slct-bg-cl, var(--glncn--slct-def-bg-cl));
     }
     &:hover:not([disabled]) {
       --glncn--curr-cl   : var(--glncn-hov-curr-cl, var(--glncn-def-curr-cl, var(--glncn--item-def-cl)));
       --glncn--curr-bg-cl: var(--glncn-hov-curr-bg-cl, var(--glncn--item-hov-bg-cl));
-
       --glncn--old-cl    : var(--glncn-hov-old-cl, var(--glncn-def-old-cl, var(--glncn--cell-def-cl)));
       --glncn--old-bg-cl : var(--glncn-hov-old-bg-cl, var(--glncn-def-old-bg-cl, var(--glncn--item-hov-bg-cl)));
-
       --glncn--slct-cl   : var(--glncn-hov-slct-cl, var(--glncn-def-slct-cl, var(--glncn--slct-def-cl)));
       --glncn--slct-bg-cl: var(--glncn-hov-slct-bg-cl, var(--glncn--slct-hov-bg-cl));
     }
     --glncn--today-br-cl: var(--glncn-def-today-br-cl, var(--glncn--today-def-br-cl));
     cursor: pointer;
   }
+  // .css-1hrukl9:focus {
+  //   background-color: rgba(25, 118, 210, 0.12);
+  // }
   &[dis] [glncn-item] {
     --glncn--curr-cl   : var(--glncn-dis-curr-cl, var(--glncn--sndr-dis-cl));
     --glncn--curr-bg-cl: var(--glncn-dis-item-bg-cl, transparent);
-    --glncn--old-cl    : var(--glncn-dis-old-cl, var(--glncn--sndr-dis-cl));
+    --glncn--old-cl    : var(--glncn-dis-old-cl, var(--glncn--cell-dis-cl));
     --glncn--old-bg-cl : var(--glncn-dis-old-bg-cl, transparent);
     --glncn--slct-cl   : var(--glncn-dis-slct-cl, var(--glncn--slct-def-cl));
     --glncn--slct-bg-cl: var(--glncn-dis-slct-bg-cl, var(--glncn--slct-dis-bg-cl));
@@ -360,18 +359,15 @@ gln-calendar {
     font-family: inherit;
     font-size: var(--glncn-item-fn-sz, 1em);
     font-weight: inherit;
-    height: var(--glncn-item-hg, var(--glncn--item-size));
+    height: var(--glncn--item-hg);
     justify-content: center;
-    margin: var(--glncn-item-mr, 0px);
-    // outline: 0;
+    margin: var(--glncn--item-mr);
+    outline: 0;
     overflow: visible;
-    padding: var(--glncn-item-pd, 0px);
+    padding: var(--glncn--item-pd);
     text-decoration: none;
     vertical-align: middle;
-    width: var(--glncn-item-wd, var(--glncn--item-size));
-    &[disabled] {
-      pointer-events: none;
-    }
+    width: var(--glncn--item-wd);
     &:not([glncn-today]) {
       border: 0px;
     }
@@ -391,10 +387,36 @@ gln-calendar {
     color: var(--glncn--slct-cl);
     background-color: var(--glncn--slct-bg-cl);
   }
-
   [glncn-today] {
     border-width: var(--glncn-today-br-wd, 1px);
     border-style: var(--glncn-today-br-st, solid);
     border-color: var(--glncn-today-br-cl, var(--glncn--today-br-cl));
   }
+
+  // Level 3 Element "header - week", "list days - row - week"
+  &:not([dis]) [glncn-week] {
+    --glncn--week-cl   : var(--glncn-def-cell-cl, var(--glncn--cell-def-cl));
+    --glncn--week-bg-cl: var(--glncn-def-cell-bg-cl, transparent);
+  }
+  &[dis] [glncn-week] {
+    --glncn--week-cl   : var(--glncn-dis-cell-cl, var(--glncn--cell-dis-cl));
+    --glncn--week-bg-cl: var(--glncn-dis-cell-bg-cl, transparent);
+  }
+  [glncn-week] {
+    align-items: center;
+    // background-color: var(--glncn-def-week-bg-cl, transparent);
+    background-color: var(--glncn--week-bg-cl);
+    color: var(--glncn--week-cl);
+    // color: var(--glncn-def-week-cl, var(--glncn--week-def-cl));
+    display: flex;
+    font-size: var(--glncn-week-fn-sz, var(--glncnh--fn-sz, 0.75em));
+    font-weight: var(--glncn-week-fn-wg, 400);
+    height: var(--glncn--item-hg);
+    justify-content: center;
+    line-height: normal;
+    margin: var(--glncn--item-mr);
+    padding: var(--glncn--item-pd);
+    width: var(--glncn--item-wd);
+  }
+
 }

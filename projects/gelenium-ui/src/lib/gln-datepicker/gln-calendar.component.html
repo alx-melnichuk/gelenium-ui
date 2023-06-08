@@ -7,21 +7,25 @@
       <button glncn-sign
         glncn-month
         class="gln-calendar-month"
-        type="button">
+        type="button"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined">
         {{ nameMonth }}
       </button>
 
       <button glncn-sign
         glncn-year
         class="gln-calendar-year"
-        type="button">
+        type="button"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined">
         {{ nameYear }}
       </button>
 
       <button glncn-switch
         class="gln-calendar-switch"
         tabindex="0"
-        type="button">
+        type="button"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
+        (click)="clickSwitch()">
         <svg glncn-icon
           class="gln-calendar-switch"
           focusable="false"
@@ -35,7 +39,9 @@
 
     <button glncn-prev
       class="gln-calendar-prev"
-      type="button">
+      type="button"
+      [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
+      (click)="clickPrev()">
       <svg glncn-icon
         class="gln-calendar-t-icon icon-prev"
         focusable="false"
@@ -47,7 +53,9 @@
 
     <button glncn-next
       class="gln-calendar-next"
-      type="button">
+      type="button"
+      [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
+      (click)="clickNext()">
       <svg glncn-icon
         class="gln-calendar-t-icon icon-next"
         focusable="false"
@@ -60,6 +68,10 @@
 
   <div glncn-header
     class="gln-calendar-header">
+
+    <ng-container [ngTemplateOutlet]="isWeekNumberVal ? templateWeekNumberHeader : null">
+    </ng-container>
+
     <div *ngFor="let dayItem of daysOfWeek; trackBy: trackByIndex;"
       glncn-cell
       class="gln-calendar-header-cell">
@@ -70,52 +82,72 @@
   <div glncn-rows
     class="gln-calendar-list-days">
 
-    <ng-container [ngTemplateOutlet]="templateOrnament"
-      [ngTemplateOutletContext]="contentWeek1">
+    <ng-container [ngTemplateOutlet]="templateCellRow"
+      [ngTemplateOutletContext]="calendarRows[0]">
     </ng-container>
 
-    <ng-container [ngTemplateOutlet]="templateOrnament"
-      [ngTemplateOutletContext]="contentWeek2">
+    <ng-container [ngTemplateOutlet]="templateCellRow"
+      [ngTemplateOutletContext]="calendarRows[1]">
     </ng-container>
 
-    <ng-container [ngTemplateOutlet]="templateOrnament"
-      [ngTemplateOutletContext]="contentWeek3">
+    <ng-container [ngTemplateOutlet]="templateCellRow"
+      [ngTemplateOutletContext]="calendarRows[2]">
     </ng-container>
 
-    <ng-container [ngTemplateOutlet]="templateOrnament"
-      [ngTemplateOutletContext]="contentWeek4">
+    <ng-container [ngTemplateOutlet]="templateCellRow"
+      [ngTemplateOutletContext]="calendarRows[3]">
     </ng-container>
 
-    <ng-container [ngTemplateOutlet]="templateOrnament"
-      [ngTemplateOutletContext]="contentWeek5">
+    <ng-container [ngTemplateOutlet]="templateCellRow"
+      [ngTemplateOutletContext]="calendarRows[4]">
     </ng-container>
 
-    <ng-container [ngTemplateOutlet]="templateOrnament"
-      [ngTemplateOutletContext]="contentWeek6">
+    <ng-container [ngTemplateOutlet]="templateCellRow"
+      [ngTemplateOutletContext]="calendarRows[5]">
     </ng-container>
 
   </div>
 </div>
 
 
-<ng-template #templateOrnament
-  let-dataForWeek="dataWeek">
+<ng-template #templateWeekNumberHeader>
+  <div glncn-week
+    class="gln-calendar-header-week">
+  </div>
+</ng-template>
+
+<ng-template #templateWeekNumberRow
+  let-dataWeekNumber="weekNumber">
+  <div glncn-week
+    class="gln-calendar-row-week">
+    {{ dataWeekNumber }}
+  </div>
+</ng-template>
+
+<ng-template #templateCellRow
+  let-dataCells="cellList"
+  let-dataValWeekNumber="valWeekNumber">
   <div glncn-row
-    style9="outline: 1px solid deepskyblue;"
     class="gln-calendar-row">
 
-    <ng-container *ngFor="let cell of dataForWeek; trackBy: trackByIndex;">
+    <ng-container [ngTemplateOutlet]="isWeekNumberVal ? templateWeekNumberRow : null"
+      [ngTemplateOutletContext]="dataValWeekNumber">
+    </ng-container>
+
+    <ng-container *ngFor="let cell of dataCells; trackBy: trackByIndex;">
       <button type="button"
         glncn-item
-        [attr.glncn-today]="cell.isToday ? '' : undefined"
         [attr.glncn-curr]="!cell.isSelected && cell.isCurrMonth ? '' : undefined"
         [attr.glncn-old]="!cell.isSelected && !cell.isCurrMonth ? '' : undefined"
         [attr.glncn-slct]="cell.isSelected ? '' : undefined"
-        [ngClass]="[(!cell.isSelected && cell.isCurrMonth ? 'gln-calendar-day' : '')
-          , (!cell.isSelected && !cell.isCurrMonth ? 'gln-calendar-old-day' : '')
-          , (cell.isToday ? 'gln-calendar-today' : '')
-          , (cell.isSelected ? 'gln-calendar-selected' : '')]"
-        [attr.disabled]="isDisabledVal || (!cell.isCurrMonth && isHideOldDaysVal) ? '' : undefined"
+        [attr.glncn-today]="cell.isToday ? '' : undefined"
+        [ngClass]="['gln-calendar-day'
+          , (!cell.isSelected && cell.isCurrMonth ? 'current' : '')
+          , (!cell.isSelected && !cell.isCurrMonth ? 'old' : '')
+          , (cell.isSelected ? 'selected' : '')
+          , (cell.isToday ? 'today' : '')]"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal || (!cell.isCurrMonth && isHideOldDaysVal) ? '' : undefined"
+        [attr.tabindex]="!isDisabledVal && cell.isSelected ? 0 : -1"
         (click)="clickSelectItem(cell)">
         {{ cell.isCurrMonth ? cell.day : (!isHideOldDaysVal ? cell.day : '') }}
       </button>
