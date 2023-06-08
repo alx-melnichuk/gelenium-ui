@@ -12,12 +12,32 @@ app-cm-datepicker-basic {
   .dpbs-mb {
     margin-bottom: 0.5em;
   }
+  .cnbs1-clnd {
+    border: 1px solid darkgray;
+    padding: 5px;
+  }
 
   // Page: Attrib01
   .cnat1-elem {
     min-width: 300px;
     min-height: 300px;
     display: grid;
+  }
+  .cnat1-clnd {
+    border: 1px solid darkgray;
+    padding: 5px;
+  }
+
+  // Page: Attrib02
+  .cnat2-clnd {
+    border: 1px solid mediumseagreen;
+    padding: 5px;
+  }
+
+  // Page: Attrib03
+  .cnat3-clnd {
+    border: 1px solid mediumorchid;
+    padding: 5px;
   }
 
   // Page: 

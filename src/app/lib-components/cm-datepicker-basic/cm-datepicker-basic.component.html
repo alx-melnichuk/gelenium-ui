@@ -149,7 +149,7 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
         <small><em>Standard view</em></small>
       </div>
       <div>
-        <gln-calendar [isDisabled]="isDisabled01a">
+        <gln-calendar class="cnbs1-clnd">
         </gln-calendar>
       </div>
     </div>
@@ -159,7 +159,8 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
         <small><em>Horizontal orientation</em></small>
       </div>
       <div>
-        <gln-calendar [isHorizont]="true">
+        <gln-calendar class="cnbs1-clnd"
+          [isHorizont]="true">
         </gln-calendar>
       </div>
     </div>
@@ -194,7 +195,6 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
         "isHideOldDays" - a sign of hiding the days of the previous and next month (isHideOldDays);
       </li>
       <li>"isHorizont" - renders a component with a horizontal layout (isHorizont);</li>
-      <li>"isNoBorder" - the attribute hides the display of the frame (isNoBorder);</li>
       <li>"isReadOnly" - a sign that the field is read-only (isReadOnly);</li>
     </ul>
   </section>
@@ -205,7 +205,8 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
       <div>
         <small><em>Attribute: isDisabled.</em></small>
       </div>
-      <gln-calendar isDisabled>
+      <gln-calendar class="cnat1-clnd"
+        isDisabled>
       </gln-calendar>
     </div>
 
@@ -213,7 +214,8 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
       <div>
         <small><em>Attribute: isHideOldDays.</em></small>
       </div>
-      <gln-calendar isHideOldDays>
+      <gln-calendar class="cnat1-clnd"
+        isHideOldDays>
       </gln-calendar>
     </div>
 
@@ -225,19 +227,9 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
       <div>
         <small><em>Attribute: isHorizont.</em></small>
       </div>
-      <gln-calendar isHorizont>
-      </gln-calendar>
-    </div>
-
-  </div>
-
-  <div class="app-group">
-
-    <div class="app-elem">
-      <div>
-        <small><em>Attribute: isNoBorder.</em></small>
-      </div>
-      <gln-calendar isNoBorder>
+      <gln-calendar class="cnat1-clnd"
+        class="cnat1-clnd"
+        isHorizont>
       </gln-calendar>
     </div>
 
@@ -245,7 +237,8 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
       <div>
         <small><em>Attribute: isReadOnly.</em></small>
       </div>
-      <gln-calendar isReadOnly>
+      <gln-calendar class="cnat1-clnd"
+        isReadOnly>
       </gln-calendar>
     </div>
 
@@ -280,7 +273,7 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
         <i>To make the child element have the height of the parent, we specify "display: grid;"
           for a parent.</i>
       </li>
-      <li>"weekday"</li>
+      <li>"weekday" - length of the name of the day of the week ([weekday]="1")</li>
     </ul>
   </section>
 
@@ -292,30 +285,19 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
         <small><em>Attribute: wdFull (width: 300px; height: 300px;).</em></small>
       </div>
       <div class="cnat1-elem">
-        <gln-calendar wdFull>
+        <gln-calendar class="cnat2-clnd"
+          wdFull>
         </gln-calendar>
       </div>
     </div>
-
-    <div class="app-elem ">
-      <div>
-        <small><em>Attribute: wdFull style="width: 300px; height: 300px;".</em></small>
-      </div>
-      <gln-calendar wdFull
-        style="width: 300px; height: 300px;">
-      </gln-calendar>
-    </div>
-
-  </div>
-
-  <div class="app-group">
 
     <div class="app-elem">
       <div>
         <small><em>Attribute: wdFull, isHorizont (width: 300px; height: 300px;).</em></small>
       </div>
       <div class="cnat1-elem">
-        <gln-calendar wdFull
+        <gln-calendar class="cnat2-clnd"
+          wdFull
           isHorizont>
         </gln-calendar>
       </div>
@@ -330,7 +312,8 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
         <small><em>Attribute: weekday=1.</em></small>
       </div>
       <div class="cnat1-elem">
-        <gln-calendar [weekday]="1">
+        <gln-calendar class="cnat2-clnd"
+          [weekday]="1">
         </gln-calendar>
       </div>
     </div>
@@ -340,7 +323,8 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
         <small><em>Attribute: weekday=2.</em></small>
       </div>
       <div class="cnat1-elem">
-        <gln-calendar [weekday]="2">
+        <gln-calendar class="cnat2-clnd"
+          [weekday]="2">
         </gln-calendar>
       </div>
     </div>
@@ -350,11 +334,11 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
         <small><em>Attribute: weekday=3.</em></small>
       </div>
       <div class="cnat1-elem">
-        <gln-calendar [weekday]="3">
+        <gln-calendar class="cnat2-clnd"
+          [weekday]="3">
         </gln-calendar>
       </div>
     </div>
-
 
   </div>
 
@@ -365,9 +349,65 @@ import &#123; GlnDatepickerModule &#125; from 'gelenium-ui';</pre>
 
 <hr br-nn />
 
-<!-- <ng-container *ngIf="isShowClnAttr03">
 
-</ng-container> -->
+
+<ng-container *ngIf="isShowClnAttr03">
+
+  <section mr-vr
+    id="attributes-supported03">
+    <h4 class="app-hover-link">
+      Attributes are also supported 3:
+      <a [href]="urlCmCalendar + '#attributes-supported03'">#</a>
+    </h4>
+    <ul>
+      <li>"isWeekNumber" - indicates the display of the week number (isWeekNumber);</li>
+    </ul>
+  </section>
+
+
+  <section mr-vr>
+    <label>
+      <input type="checkbox"
+        (change)="isDisabled03a=!isDisabled03a"
+        [checked]="isDisabled03a" />
+      Is disabled
+    </label>
+  </section>
+
+  <div class="app-group">
+
+    <div class="app-elem ">
+      <div>
+        <small><em>Attribute: isWeekNumber.</em></small>
+      </div>
+      <div>
+        <gln-calendar class="cnat3-clnd"
+          isWeekNumber
+          [isDisabled]="isDisabled03a">
+        </gln-calendar>
+      </div>
+    </div>
+
+    <div class="app-elem ">
+      <div>
+        <small><em>Attribute: isWeekNumber, isHorizont.</em></small>
+      </div>
+      <div>
+        <gln-calendar class="cnat3-clnd"
+          isWeekNumber
+          isHorizont
+          [isDisabled]="isDisabled03a">
+        </gln-calendar>
+      </div>
+    </div>
+
+  </div>
+
+  <span style="color: indianred;">source</span>
+
+</ng-container>
+
+<hr br-nn />
 
 
 <ng-container *ngIf="isShowClnCellSize">

@@ -41,13 +41,14 @@ export class CmDatepickerBasicComponent {
   public urlCmCalendar = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_DATEPICKER');
   public urlPlCalendar = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_DATEPICKER');
   // Page: Basic
-  isShowClnBasic = true;
+  isShowClnBasic = false;
   // Page: Attr01
-  isShowClnAttr01 = true;
+  isShowClnAttr01 = false;
   // Page: Attr02
-  isShowClnAttr02 = true;
+  isShowClnAttr02 = false;
   // Page: Attr03
   isShowClnAttr03 = true;
+  isDisabled03a = false;
   // Page: CellSize
   isShowClnCellSize = false;
 
