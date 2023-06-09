@@ -7,6 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import {
   GlnDatepickerModule,
+  GlnCalendarModule,
   GlnColorModule, // Palitra - Basic
 } from 'gelenium-ui';
 
@@ -21,6 +22,7 @@ import { CmDatepickerBasicComponent } from './cm-datepicker-basic.component';
     MatExpansionModule,
     MatTabsModule,
     GlnDatepickerModule,
+    GlnCalendarModule,
     GlnColorModule,
   ],
   exports: [CmDatepickerBasicComponent],
