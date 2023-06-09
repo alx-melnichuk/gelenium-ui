@@ -8,6 +8,7 @@ import { LmComponentsComponent } from './lm-components.component';
 
 const URL_COMPONENTS_AUTOCOMPLETE = RouterConfig.get('URL_COMPONENTS_AUTOCOMPLETE');
 const URL_COMPONENTS_BUTTON = RouterConfig.get('URL_COMPONENTS_BUTTON');
+const URL_COMPONENTS_CALENDAR = RouterConfig.get('URL_COMPONENTS_CALENDAR');
 const URL_COMPONENTS_CHECKBOX = RouterConfig.get('URL_COMPONENTS_CHECKBOX');
 const URL_COMPONENTS_CHIP = RouterConfig.get('URL_COMPONENTS_CHIP');
 const URL_COMPONENTS_DATEPICKER = RouterConfig.get('URL_COMPONENTS_DATEPICKER');
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: URL_COMPONENTS_BUTTON,
         loadChildren: () => import('../lib-components/cm-button/cm-button.module').then((m) => m.CmButtonModule),
+      },
+      {
+        path: URL_COMPONENTS_CALENDAR,
+        loadChildren: () => import('../lib-components/cm-calendar/cm-calendar.module').then((m) => m.CmCalendarModule),
       },
       {
         path: URL_COMPONENTS_CHECKBOX,

@@ -36,6 +36,21 @@ const siteUrlsButton: SiteUrl[] = [
 ];
 SiteMenuUtil.addItem('Components', 'Button', { label: 'Button', siteUrls: siteUrlsButton });
 
+// -- Calendar --
+RouterConfig.add('URL_COMPONENTS_CALENDAR', 'calendar');
+const urlCalendar = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CALENDAR');
+const siteUrlsCalendar: SiteUrl[] = [
+  { label: 'Basic', url: urlCalendar, fragment: 'Basic' },
+  // { label: 'Attributes', url: urlCalendar, fragment: 'Attributes' },
+  // { label: 'Size', url: urlCalendar, fragment: 'Size' },
+  // { label: 'Border Radius', url: urlCalendar, fragment: 'BorderRadius' },
+  // { label: 'Ornaments', url: urlCalendar, fragment: 'Ornaments' },
+  // { label: 'Palette', url: urlCalendar, fragment: 'Palette' },
+  // { label: 'Config', url: urlCalendar, fragment: 'Config' },
+  // { label: 'Api', url: urlCalendar, fragment: 'Api' },
+];
+SiteMenuUtil.addItem('Components', 'Calendar', { label: 'Calendar', siteUrls: siteUrlsCalendar });
+
 // -- Checkbox --
 RouterConfig.add('URL_COMPONENTS_CHECKBOX', 'checkbox');
 const urlCheckbox = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CHECKBOX');
