@@ -172,12 +172,12 @@ export class GlnCheckboxComponent
     if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
       // Remove class by old position value.
       this.settingByPosition(false, this.positionVal, this.renderer, this.hostRef);
-      this.positionVal = this.converPosition((this.position || this.currConfig.position || '').toString());
+      this.positionVal = this.convertPosition((this.position || this.currConfig.position || '').toString());
       // Add class by new position value.
       this.settingByPosition(true, this.positionVal, this.renderer, this.hostRef);
     }
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
-      this.sizeVal = this.converSize((this.size || this.currConfig.size || '').toString());
+      this.sizeVal = this.convertSize((this.size || this.currConfig.size || '').toString());
       this.setCssSize(this.sizeVal, this.hostRef);
     }
 
@@ -212,12 +212,12 @@ export class GlnCheckboxComponent
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
     if (this.positionVal == null) {
-      this.positionVal = this.converPosition((this.currConfig.position || '').toString());
+      this.positionVal = this.convertPosition((this.currConfig.position || '').toString());
       // Add class by new position value.
       this.settingByPosition(true, this.positionVal, this.renderer, this.hostRef);
     }
     if (this.sizeVal == null) {
-      this.sizeVal = this.converSize((this.currConfig.size || '').toString());
+      this.sizeVal = this.convertSize((this.currConfig.size || '').toString());
       this.setCssSize(this.sizeVal, this.hostRef);
     }
 
@@ -397,10 +397,10 @@ export class GlnCheckboxComponent
     this.formControl.updateValueAndValidity();
   }
 
-  private converSize(sizeStr: string): number {
+  private convertSize(sizeStr: string): number {
     return NumberUtil.converInt(sizeStr, SIZE[sizeStr] || SIZE['small']);
   }
-  private converPosition(positionStr: string): string {
+  private convertPosition(positionStr: string): string {
     return POSITION[positionStr] || POSITION['end'];
   }
   private setCssSize(size: number, elem: ElementRef<HTMLElement>): void {

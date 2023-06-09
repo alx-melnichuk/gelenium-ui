@@ -106,7 +106,7 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
     }
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
-      this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
+      this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       isSize = true;
     }
     if (changes['strokeWd'] || (changes['config'] && this.strokeWd == null && this.currConfig.strokeWd != null)) {
@@ -148,7 +148,7 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
     }
     if (this.sizeVal == null) {
       const sizeStr: string = (this.currConfig.size || '').toString();
-      this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
+      this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       isSize = true;
     }
     if (this.strokeWd == null) {
@@ -169,7 +169,7 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
 
   // ** Private methods **
 
-  private converSize(size: string, defaultValue: number): number {
+  private convertSize(size: string, defaultValue: number): number {
     const sizeNum: number = Number.parseFloat(size);
     return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
   }

@@ -110,7 +110,7 @@ export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit {
     }
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
-      this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
+      this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       this.setCssSize(this.sizeVal, this.hostRef);
     }
   }
@@ -133,7 +133,7 @@ export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit {
     }
     if (this.sizeVal == null) {
       const sizeStr: string = (this.currConfig.size || '').toString();
-      this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
+      this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       this.setCssSize(this.sizeVal, this.hostRef);
     }
     // Add an attribute that disables animation on initialization.
@@ -151,7 +151,7 @@ export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit {
 
   // ** Private methods **
 
-  private converSize(size: string, defaultValue: number): number {
+  private convertSize(size: string, defaultValue: number): number {
     const sizeNum: number = Number.parseFloat(size);
     return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
   }

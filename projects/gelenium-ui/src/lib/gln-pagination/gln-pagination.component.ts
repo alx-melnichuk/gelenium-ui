@@ -155,7 +155,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     }
     if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
-      this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['short']);
+      this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['short']);
       this.setCssSize(this.sizeVal, this.hostRef);
       isBorderRadius = true;
     }
@@ -212,7 +212,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     }
     if (this.sizeVal == null) {
       const sizeStr: string = (this.currConfig.size || '').toString();
-      this.sizeVal = this.converSize(sizeStr, SIZE[sizeStr] || SIZE['short']);
+      this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['short']);
       this.setCssSize(this.sizeVal, this.hostRef);
       isBorderRadius = true;
     }
@@ -248,7 +248,7 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     return value != null && value > -1 ? value : null;
   }
 
-  private converSize(size: string, defaultValue: number): number {
+  private convertSize(size: string, defaultValue: number): number {
     const sizeNum: number = Number.parseFloat(size);
     return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
   }
