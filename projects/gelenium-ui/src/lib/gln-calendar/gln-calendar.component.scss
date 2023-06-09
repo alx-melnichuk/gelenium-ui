@@ -1,0 +1,422 @@
+/*# sourceURL=gln-calendar.component.scss */
+
+gln-calendar {
+  --glncn--default-h: var(--glncl-default-h, var(--gln-default-h));
+  --glncn--default-s: var(--glncl-default-s, var(--gln-default-s));
+  --glncn--default-l: var(--glncl-default-l, var(--gln-default-l));
+
+  --glncn--default-bg-h: var(--glncl-default-bg-h, var(--gln-default-bg-h));
+  --glncn--default-bg-s: var(--glncl-default-bg-s, var(--gln-default-bg-s));
+  --glncn--default-bg-l: var(--glncl-default-bg-l, var(--gln-default-bg-l));
+
+  --glncn--primary-h: var(--glncl-primary-h, var(--gln-primary-h));
+  --glncn--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
+  --glncn--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
+
+  box-sizing: border-box;
+  display: block;
+
+  &[wdFull] {
+    height: 100%;
+    width: 100%;
+  }
+
+  &[hor] {
+    --glncn--dir-lv1: row;
+    --glncn--dir-lv2: column;
+  }
+  &:not([hor]) {
+    --glncn--dir-lv1: column;
+    --glncn--dir-lv2: row;
+  }
+  --glncn--item-hg: var(--glncn-item-hg, var(--glncn--item-size));
+  --glncn--item-wd: var(--glncn-item-wd, var(--glncn--item-size));
+  --glncn--item-mr: var(--glncn-item-mr, 0px);
+  --glncn--item-pd: var(--glncn-item-pd, 0px);
+  --glncn--nav-def-cl   : hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l));
+  --glncn--nav-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.1);
+  --glncn--sndr-dis-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.8);
+  --glncn--cell-def-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.6); // ~rgba(0, 0, 0, 0.6);
+  --glncn--cell-dis-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.5); // ~rgba(0, 0, 0, 0.6);
+  --glncn--week-def-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.6); // ~rgba(0, 0, 0, 0.38);
+  --glncn--week-dis-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.5); // ~rgba(0, 0, 0, 0.38);
+  --glncn--item-def-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l));
+  --glncn--item-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.15);
+  --glncn--today-def-br-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.8);
+  --glncn--slct-def-bg-cl: hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l));
+  --glncn--slct-hov-bg-cl: hsl(var(--glncn--primary-h), var(--glncn--primary-s), calc(var(--glncn--primary-l) - 7%));
+  --glncn--slct-def-cl: hsl(var(--glncn--default-bg-h), var(--glncn--default-bg-s), var(--glncn--default-bg-l));
+  --glncn--slct-dis-bg-cl: hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.40);
+
+
+  // Level 1 Element "wrapper"
+  &>[glncn-wrapper] {
+    display: flex;
+    flex-direction: var(--glncn--dir-lv1);
+  }
+  &[wdFull]>[glncn-wrapper] {
+    height: 100%;
+    width: 100%;
+  }
+  
+  button[disabled] {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  // Level 2 Element "title"
+  [glncn-title] {
+    align-items: center;
+    display: flex;
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: var(--glncn-title-fn-wg, inherit);
+    flex-direction: var(--glncn--dir-lv2);
+    justify-content: space-around;
+  }
+
+  // Level 3 Element "month2year"
+  [glncn-month2year] {
+    align-items: center;
+    display: inline-flex;
+    flex-grow: 1;
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: var(--glncn-month2year-fn-wg, 500);
+    justify-content: center;
+    order: var(--glncn-month2year-ord, unset);
+  }
+  &[hor] [glncn-month2year] {
+    --glncntb--month-mn-wd: 9ch;
+    --glncntb--year-mn-wd: 4ch;
+    padding-top: 4em;
+  }
+  &:not([dis]) [glncn-month2year] {
+    color: var(--glncn-def-month2year-cl, var(--glncn--item-def-cl));
+  }
+  &[dis] [glncn-month2year] {
+    color: var(--glncn-dis-month2year-cl, var(--glncn--sndr-dis-cl));
+  }
+
+  // Level 4 Element title button "name month", "name year"
+  [glncn-sign] {
+    align-items: center;
+    background-color: transparent;
+    border: 0;
+    color: currentColor;
+    display: inline-flex;
+    flex-shrink: 0;
+    font: inherit;
+    height: 2.5em;
+    justify-content: center;
+    overflow: visible;
+    outline: 0;
+    padding: 0;
+    text-decoration: none;
+    vertical-align: middle;
+  }
+  &:not([dis]) [glncn-sign] {
+    cursor: pointer;
+  }
+  // Level 4 Element title button "name month"
+  [glncn-month] {
+    min-width: var(--glncntb--month-mn-wd);
+  }
+  // Level 4 Element title button "name year"
+  [glncn-year] {
+    min-width: var(--glncntb--year-mn-wd);
+  }
+  [glncn-month] ~ [glncn-year] {
+    padding-left: 0.5ch;
+    margin-right: 0.5ch;
+  }
+
+  // Level 4 Element title button "switch"
+  &:not([dis]) [glncn-switch] {
+    &:not(:hover) {
+      --glncn--switch-cl   : var(--glncn-def-switch-cl, var(--glncn--nav-def-cl));
+      --glncn--switch-bg-cl: var(--glncn-def-switch-bg-cl, transparent);
+    }
+    &:hover:not([disabled]) {
+      --glncn--switch-cl   : var(--glncn-hov-switch-cl, var(--glncn-def-switch-cl, var(--glncn--nav-def-cl)));
+      --glncn--switch-bg-cl: var(--glncn-hov-switch-bg-cl, var(--glncn--nav-hov-bg-cl));
+    }
+    cursor: pointer;
+  }
+  &[dis] [glncn-switch] {
+    --glncn--switch-cl   : var(--glncn-dis-switch-cl, var(--glncn--sndr-dis-cl));
+    --glncn--switch-bg-cl: var(--glncn-dis-switch-bg-cl, transparent);
+  }
+  [glncn-switch] {
+    align-items: center;
+    background-color: var(--glncn--switch-bg-cl);
+    border: 0;
+    border-radius: var(--glncn-br-rd, 50%);
+    color: var(--glncn--switch-cl);
+    display: inline-flex;
+    flex-shrink: 0;
+    font: inherit;
+    justify-content: center;
+    outline: 0;
+    overflow: visible;
+    padding: 0.5em;
+    position: relative;
+    text-decoration: none;
+    user-select: none;
+    vertical-align: middle;
+  }
+  &[hor] [glncn-switch] {
+    display: none;
+  }
+
+  // Level 5 Element svg "icon"
+  [glncn-icon] {
+    display: inline-block;
+    fill: currentColor;
+    flex-shrink: 0;
+    height: 1.5em;
+    width: 1.5em;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+
+  // Level 3 Element title button "prev"
+  &:not([dis]) [glncn-prev] {
+    &:not(:hover) {
+      --glncn--prev-cl   : var(--glncn-def-prev-cl, var(--glncn--nav-def-cl));
+      --glncn--prev-bg-cl: var(--glncn-def-prev-bg-cl, transparent);
+    }
+    &:hover {
+      --glncn--prev-cl   : var(--glncn-hov-prev-cl, var(--glncn-def-prev-cl, var(--glncn--nav-def-cl)));
+      --glncn--prev-bg-cl: var(--glncn-hov-prev-bg-cl, var(--glncn--nav-hov-bg-cl));
+    }
+    cursor: pointer;
+  }
+  &[dis] [glncn-prev] {
+    --glncn--prev-cl   : var(--glncn-dis-prev-cl, var(--glncn--sndr-dis-cl));
+    --glncn--prev-bg-cl: var(--glncn-dis-prev-bg-cl, transparent);
+  }
+  [glncn-prev] {
+    align-items: center;
+    background-color: var(--glncn--prev-bg-cl);
+    border: 0;
+    border-radius: var(--glncn-br-rd, 50%);
+    color: var(--glncn--prev-cl);
+    display: inline-flex;
+    flex-shrink: 0;
+    font: inherit;
+    justify-content: center;
+    order: var(--glncn-prev-ord, unset);
+    outline: 0;
+    overflow: visible;
+    padding: 0.5em;
+    text-decoration: none;
+    user-select: none;
+    vertical-align: middle;
+  }
+  &[hor] [glncn-prev] {
+    position: relative;
+    right: 22%;
+  }
+
+  // Level 3 Element title button "next"
+  &:not([dis]) [glncn-next] {
+    &:not(:hover) {
+      --glncn--next-cl   : var(--glncn-def-next-cl, var(--glncn--nav-def-cl));
+      --glncn--next-bg-cl: var(--glncn-def-next-bg-cl, transparent);
+    }
+    &:hover {
+      --glncn--next-cl   : var(--glncn-hov-next-cl, var(--glncn-def-next-cl, var(--glncn--nav-def-cl)));
+      --glncn--next-bg-cl: var(--glncn-hov-next-bg-cl, var(--glncn--nav-hov-bg-cl));
+    }
+    cursor: pointer;
+  }
+  &[dis] [glncn-next] {
+    --glncn--next-cl   : var(--glncn-dis-next-cl, var(--glncn--sndr-dis-cl));
+    --glncn--next-bg-cl: var(--glncn-dis-next-bg-cl, transparent);
+  }
+  [glncn-next] {
+    align-items: center;
+    background-color: var(--glncn--next-bg-cl);
+    border: 0;
+    border-radius: var(--glncn-br-rd, 50%);
+    color: var(--glncn--next-cl);
+    display: inline-flex;
+    flex-shrink: 0;
+    font: inherit;
+    justify-content: center;
+    order: var(--glncn-next-ord, unset);
+    outline: 0;
+    overflow: visible;
+    padding: 0.5em;
+    text-decoration: none;
+    user-select: none;
+    vertical-align: middle;
+  }
+  &[hor] [glncn-next] {
+    bottom: 2.5em;
+    left: 22%;
+    position: relative;
+  }
+
+  // Level 2 Element "glncn-header"
+  [glncn-header] {
+    align-items: center;
+    display: flex;
+    flex-direction: var(--glncn--dir-lv2);
+  }
+  &:not([wdFull]) [glncn-header] {
+    justify-content: center;
+  }
+  &[wdFull] [glncn-header] {
+    justify-content: space-between;
+  }
+
+  // Level 3 Element "header - cell"
+  &:not([dis]) [glncn-cell] {
+    --glncn--cell-cl   : var(--glncn-def-cell-cl, var(--glncn--cell-def-cl));
+    --glncn--cell-bg-cl: var(--glncn-def-cell-bg-cl, transparent);
+  }
+  &[dis] [glncn-cell] {
+    --glncn--cell-cl   : var(--glncn-dis-cell-cl, var(--glncn--cell-dis-cl));
+    --glncn--cell-bg-cl: var(--glncn-dis-cell-bg-cl, transparent);
+  }
+  [glncn-cell] {
+    align-items: center;
+    background-color: var(--glncn--cell-bg-cl);
+    color: var(--glncn--cell-cl);
+    display: flex;
+    font-size: var(--glncn-cell-fn-sz, var(--glncnh--fn-sz, 0.75em));
+    font-weight: var(--glncn-cell-fn-wg, 400);
+    height: var(--glncn--item-hg);
+    justify-content: center;
+    margin: var(--glncn--item-mr);
+    padding: var(--glncn--item-pd);
+    width: var(--glncn--item-wd);
+  }
+
+  // Level 2 Element "list days"
+  [glncn-rows] {
+    display: flex;
+    flex-direction: var(--glncn--dir-lv1);
+  }
+  &[wdFull] [glncn-rows] {
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+
+  // Level 3 Element "list days - row"
+  [glncn-row] {
+    align-items: center;
+    display: flex;
+    flex-direction: var(--glncn--dir-lv2);
+    font-weight: var(--glncn-row-fn-wg, 400);
+    justify-content: center;
+  }
+  &[wdFull] [glncn-row] {
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+
+  // Level 4 Element "list days - row - item"
+  &:not([dis]) [glncn-item] {
+    &:not(:hover) {
+      --glncn--curr-cl   : var(--glncn-def-curr-cl, var(--glncn--item-def-cl));
+      --glncn--curr-bg-cl: var(--glncn-def-curr-bg-cl, transparent);
+      --glncn--old-cl    : var(--glncn-def-old-cl, var(--glncn--cell-def-cl));
+      --glncn--old-bg-cl : var(--glncn-def-old-bg-cl, transparent);
+      --glncn--slct-cl   : var(--glncn-def-slct-cl, var(--glncn--slct-def-cl));
+      --glncn--slct-bg-cl: var(--glncn-def-slct-bg-cl, var(--glncn--slct-def-bg-cl));
+    }
+    &:hover:not([disabled]) {
+      --glncn--curr-cl   : var(--glncn-hov-curr-cl, var(--glncn-def-curr-cl, var(--glncn--item-def-cl)));
+      --glncn--curr-bg-cl: var(--glncn-hov-curr-bg-cl, var(--glncn--item-hov-bg-cl));
+      --glncn--old-cl    : var(--glncn-hov-old-cl, var(--glncn-def-old-cl, var(--glncn--cell-def-cl)));
+      --glncn--old-bg-cl : var(--glncn-hov-old-bg-cl, var(--glncn-def-old-bg-cl, var(--glncn--item-hov-bg-cl)));
+      --glncn--slct-cl   : var(--glncn-hov-slct-cl, var(--glncn-def-slct-cl, var(--glncn--slct-def-cl)));
+      --glncn--slct-bg-cl: var(--glncn-hov-slct-bg-cl, var(--glncn--slct-hov-bg-cl));
+    }
+    --glncn--today-br-cl: var(--glncn-def-today-br-cl, var(--glncn--today-def-br-cl));
+    cursor: pointer;
+  }
+  // .css-1hrukl9:focus {
+  //   background-color: rgba(25, 118, 210, 0.12);
+  // }
+  &[dis] [glncn-item] {
+    --glncn--curr-cl   : var(--glncn-dis-curr-cl, var(--glncn--sndr-dis-cl));
+    --glncn--curr-bg-cl: var(--glncn-dis-item-bg-cl, transparent);
+    --glncn--old-cl    : var(--glncn-dis-old-cl, var(--glncn--cell-dis-cl));
+    --glncn--old-bg-cl : var(--glncn-dis-old-bg-cl, transparent);
+    --glncn--slct-cl   : var(--glncn-dis-slct-cl, var(--glncn--slct-def-cl));
+    --glncn--slct-bg-cl: var(--glncn-dis-slct-bg-cl, var(--glncn--slct-dis-bg-cl));
+    --glncn--today-br-cl: var(--glncn-dis-today-br-cl, var(--glncn--sndr-dis-cl));
+  }
+
+  [glncn-item] {
+    align-items: center;
+    border-radius: var(--glncn-br-rd, 50%);
+    display: inline-flex;
+    flex-shrink: 0;
+    font-family: inherit;
+    font-size: var(--glncn-item-fn-sz, 1em);
+    font-weight: inherit;
+    height: var(--glncn--item-hg);
+    justify-content: center;
+    margin: var(--glncn--item-mr);
+    outline: 0;
+    overflow: visible;
+    padding: var(--glncn--item-pd);
+    text-decoration: none;
+    vertical-align: middle;
+    width: var(--glncn--item-wd);
+    &:not([glncn-today]) {
+      border: 0px;
+    }
+  }
+  &[rea] :not([disabled])[glncn-item] {
+    pointer-events: none;
+  }
+  [glncn-curr] {
+    color: var(--glncn--curr-cl);
+    background-color: var(--glncn--curr-bg-cl);
+  }
+  [glncn-old] {
+    color: var(--glncn--old-cl);
+    background-color: var(--glncn--old-bg-cl);
+  }
+  [glncn-slct] {
+    color: var(--glncn--slct-cl);
+    background-color: var(--glncn--slct-bg-cl);
+  }
+  [glncn-today] {
+    border-width: var(--glncn-today-br-wd, 1px);
+    border-style: var(--glncn-today-br-st, solid);
+    border-color: var(--glncn-today-br-cl, var(--glncn--today-br-cl));
+  }
+
+  // Level 3 Element "header - week", "list days - row - week"
+  &:not([dis]) [glncn-week] {
+    --glncn--week-cl   : var(--glncn-def-cell-cl, var(--glncn--cell-def-cl));
+    --glncn--week-bg-cl: var(--glncn-def-cell-bg-cl, transparent);
+  }
+  &[dis] [glncn-week] {
+    --glncn--week-cl   : var(--glncn-dis-cell-cl, var(--glncn--cell-dis-cl));
+    --glncn--week-bg-cl: var(--glncn-dis-cell-bg-cl, transparent);
+  }
+  [glncn-week] {
+    align-items: center;
+    // background-color: var(--glncn-def-week-bg-cl, transparent);
+    background-color: var(--glncn--week-bg-cl);
+    color: var(--glncn--week-cl);
+    // color: var(--glncn-def-week-cl, var(--glncn--week-def-cl));
+    display: flex;
+    font-size: var(--glncn-week-fn-sz, var(--glncnh--fn-sz, 0.75em));
+    font-weight: var(--glncn-week-fn-wg, 400);
+    height: var(--glncn--item-hg);
+    justify-content: center;
+    line-height: normal;
+    margin: var(--glncn--item-mr);
+    padding: var(--glncn--item-pd);
+    width: var(--glncn--item-wd);
+  }
+
+}

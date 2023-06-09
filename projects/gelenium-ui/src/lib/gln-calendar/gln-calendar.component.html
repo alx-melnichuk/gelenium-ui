@@ -1,0 +1,159 @@
+<div glncn-wrapper
+  class="gln-calendar-wrapper">
+  <div glncn-title
+    class="gln-calendar-title">
+    <div glncn-month2year
+      class="gln-calendar-month2year">
+      <button glncn-sign
+        glncn-month
+        class="gln-calendar-month"
+        type="button"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined">
+        {{ nameMonth }}
+      </button>
+
+      <button glncn-sign
+        glncn-year
+        class="gln-calendar-year"
+        type="button"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined">
+        {{ nameYear }}
+      </button>
+
+      <button glncn-switch
+        class="gln-calendar-switch"
+        tabindex="0"
+        type="button"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
+        (click)="clickSwitch()">
+        <svg glncn-icon
+          class="gln-calendar-switch"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24">
+          <path d="M7 10l5 5 5-5z"></path>
+        </svg>
+        <!-- <span class="MuiTouchRipple-root css-w0pj6f"></span> -->
+      </button>
+    </div>
+
+    <button glncn-prev
+      class="gln-calendar-prev"
+      type="button"
+      [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
+      (click)="clickPrev()">
+      <svg glncn-icon
+        class="gln-calendar-t-icon icon-prev"
+        focusable="false"
+        aria-hidden="true"
+        viewBox="0 0 24 24">
+        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+      </svg>
+    </button>
+
+    <button glncn-next
+      class="gln-calendar-next"
+      type="button"
+      [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
+      (click)="clickNext()">
+      <svg glncn-icon
+        class="gln-calendar-t-icon icon-next"
+        focusable="false"
+        aria-hidden="true"
+        viewBox="0 0 24 24">
+        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div glncn-header
+    class="gln-calendar-header">
+
+    <ng-container [ngTemplateOutlet]="isWeekNumberVal ? templateWeekNumberHeader : null">
+    </ng-container>
+
+    <div *ngFor="let dayItem of daysOfWeek; trackBy: trackByIndex;"
+      glncn-cell
+      class="gln-calendar-header-cell">
+      {{ dayItem }}
+    </div>
+  </div>
+
+  <div glncn-rows
+    class="gln-calendar-list-days">
+
+    <ng-container [ngTemplateOutlet]="templateCellRow"
+      [ngTemplateOutletContext]="calendarRows[0]">
+    </ng-container>
+
+    <ng-container [ngTemplateOutlet]="templateCellRow"
+      [ngTemplateOutletContext]="calendarRows[1]">
+    </ng-container>
+
+    <ng-container [ngTemplateOutlet]="templateCellRow"
+      [ngTemplateOutletContext]="calendarRows[2]">
+    </ng-container>
+
+    <ng-container [ngTemplateOutlet]="templateCellRow"
+      [ngTemplateOutletContext]="calendarRows[3]">
+    </ng-container>
+
+    <ng-container [ngTemplateOutlet]="templateCellRow"
+      [ngTemplateOutletContext]="calendarRows[4]">
+    </ng-container>
+
+    <ng-container [ngTemplateOutlet]="templateCellRow"
+      [ngTemplateOutletContext]="calendarRows[5]">
+    </ng-container>
+
+  </div>
+</div>
+
+
+<ng-template #templateWeekNumberHeader>
+  <div glncn-week
+    class="gln-calendar-header-week">
+  </div>
+</ng-template>
+
+
+<ng-template #templateWeekNumberRow
+  let-dataWeekNumber="weekNumber">
+  <div glncn-week
+    class="gln-calendar-row-week">
+    {{ dataWeekNumber }}
+  </div>
+</ng-template>
+
+
+<ng-template #templateCellRow
+  let-dataCells="cellList"
+  let-dataWeekNumberObj="weekNumberObj">
+  <div glncn-row
+    class="gln-calendar-row">
+
+    <ng-container [ngTemplateOutlet]="isWeekNumberVal ? templateWeekNumberRow : null"
+      [ngTemplateOutletContext]="dataWeekNumberObj">
+    </ng-container>
+
+    <ng-container *ngFor="let cell of dataCells; trackBy: trackByIndex;">
+      <button type="button"
+        glncn-item
+        [attr.glncn-curr]="!cell.isSelected && cell.isCurrMonth ? '' : undefined"
+        [attr.glncn-old]="!cell.isSelected && !cell.isCurrMonth ? '' : undefined"
+        [attr.glncn-slct]="cell.isSelected ? '' : undefined"
+        [attr.glncn-today]="cell.isToday ? '' : undefined"
+        [ngClass]="['gln-calendar-day'
+          , (!cell.isSelected && cell.isCurrMonth ? 'current' : '')
+          , (!cell.isSelected && !cell.isCurrMonth ? 'old' : '')
+          , (cell.isSelected ? 'selected' : '')
+          , (cell.isToday ? 'today' : '')]"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal || (!cell.isCurrMonth && isHideOldDaysVal) ? '' : undefined"
+        [attr.tabindex]="!isDisabledVal && cell.isSelected ? 0 : -1"
+        (click)="clickSelectItem(cell)">
+        {{ cell.isCurrMonth ? cell.day : (!isHideOldDaysVal ? cell.day : '') }}
+      </button>
+    </ng-container>
+
+  </div>
+</ng-template>
