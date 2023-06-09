@@ -1,0 +1,55 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Basic.
+    <a [href]="urlCmCalendar + '#Basic'">#</a>
+  </h3>
+  <span>
+    To use this component, in your module you need to add:
+  </span>
+  <code><pre source="ts">
+import &#123; GlnCalendarModule &#125; from 'gelenium-ui';</pre>
+  </code>
+  <p>
+    This component displays the calendar month (a grid of days of the month)
+    and allows you to select a date.
+  </p>
+  <span> For example:</span>
+  <code><pre source="html">
+&lt;<strong>gln-calendar</strong> formControlName="model01"&gt;
+&lt;/<strong>gln-calendar</strong>&gt;</pre></code>
+</section>
+
+<!-- selectedDate={{ selectedDate | date:'YYYY/MM/dd' }} -->
+
+
+
+
+<form [formGroup]="formGroup01"
+  novalidate
+  autocomplete="off">
+
+  <div class="app-group">
+
+    <div class="app-elem">
+      <!-- <div>
+        <small><em>exterior: Outlined</em></small>
+      </div> -->
+      <!-- class="slbs-mb" -->
+      <div>
+        <small>
+          <em>
+            Model: {{ control01.model01a.value === null
+            ? 'null' : control01.model01a.value | date:'YYYY/MM/dd' }}
+          </em>
+        </small>
+      </div>
+      <div>
+        <gln-calendar class="cnbs1-clnd"
+          formControlName="model01a">
+        </gln-calendar>
+      </div>
+    </div>
+
+  </div>
+
+</form>
