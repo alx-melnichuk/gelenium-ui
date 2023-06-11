@@ -5,7 +5,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  forwardRef,
   Host,
   Inject,
   InjectionToken,
@@ -19,15 +18,7 @@ import {
   SkipSelf,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  AbstractControl,
-  ControlContainer,
-  ControlValueAccessor,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
-  ValidationErrors,
-  Validator,
-} from '@angular/forms';
+import { ControlContainer, ValidationErrors } from '@angular/forms';
 import { BooleanUtil } from '../_utils/boolean.util';
 import { DateUtil } from '../_utils/date.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
@@ -63,12 +54,8 @@ let uniqueIdCounter = 0;
   styleUrls: ['./gln-calendar.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => GlnCalendarComponent), multi: true },
-    { provide: NG_VALIDATORS, useExisting: forwardRef(() => GlnCalendarComponent), multi: true },
-  ],
 })
-export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit, ControlValueAccessor, Validator {
+export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit {
   @Input()
   public id = `glncn-${uniqueIdCounter++}`;
   @Input()
@@ -88,20 +75,11 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
   @Input()
   public isWeekNumber: string | boolean | null | undefined;
   @Input()
-  public weekday: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
-
+  public startDate: Date | null | undefined;
   @Input()
-  get value(): Date | null {
-    return this.valueData;
-  }
-  set value(newValue: Date | null) {
-    if (newValue !== this.valueData) {
-      this.calendarRows = this.getListDaysOfMonth(newValue, !!this.isWeekNumberVal);
-      this.dataUpdateAndValidation(newValue);
-      this.changeDetectorRef.markForCheck();
-    }
-  }
-  private valueData: Date | null = null;
+  public value: Date | null | undefined;
+  @Input()
+  public weekday: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
 
   @Output()
   readonly selected: EventEmitter<{ value: unknown | null }> = new EventEmitter();
@@ -121,7 +99,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
   public nameMonth: string = '';
   public nameYear: string = '';
   public weekdayVal: number | null = null; // Binding attribute "weekday".
-  // day of the week
 
   constructor(
     // // eslint-disable-next-line @typescript-eslint/ban-types
@@ -138,7 +115,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    let isPrepareData: boolean = false;
+    console.log(`OnChanges()`); // #
+    let isPrepareData: boolean = !!changes['value'];
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
@@ -149,7 +127,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
       this.setCssCellSize(this.cellSizeVal, this.hostRef);
     }
     if (changes['isDisabled']) {
-      this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
+      this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
+      this.settingIsDisabled(this.isDisabledVal, this.renderer, this.hostRef);
     }
     if (changes['isHideOldDays'] || (changes['config'] && this.isHideOldDays == null && this.currConfig.isHideOldDays != null)) {
       this.isHideOldDaysVal = BooleanUtil.init(this.isHideOldDays) ?? !!this.currConfig.isHideOldDays;
@@ -177,11 +156,12 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
     }
 
     if (isPrepareData && this.weekdayVal != null) {
-      this.prepareData(this.valueData, this.weekdayVal, !!this.isWeekNumberVal);
+      this.updateValueAndDecor(this.value, this.weekdayVal, !!this.isWeekNumberVal, this.startDate || null);
     }
   }
 
   public ngOnInit(): void {
+    console.log(`OnInit()`); // #
     // Update ID value if it is missing.
     // HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
@@ -220,11 +200,12 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
     }
 
     if (isPrepareData && this.weekdayVal != null) {
-      this.prepareData(this.valueData, this.weekdayVal, !!this.isWeekNumberVal);
+      this.updateValueAndDecor(this.value, this.weekdayVal, !!this.isWeekNumberVal, this.startDate || null);
     }
   }
 
   public ngAfterContentInit(): void {
+    console.log(`AfterContentInit()`); // #
     // // When using [(ngModel)] parentFormGroup will be null.
     // this.isRemoveAttrHideAnimation = !this.parentFormGroup;
     // if (!this.isRemoveAttrHideAnimation) {
@@ -232,71 +213,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
     //   this.renderer.removeAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT);
     // }
   }
-
-  // ** interface ControlValueAccessor - start **
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public onChange: (val: unknown) => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public onTouched: () => void = () => {};
-
-  public writeValue(value: any): void {
-    // #if (value !== this.formControl.value) {
-    // #  this.formControl.setValue(value == null ? value : !!value, { emitEvent: false });
-    // #  this.calendarRows = this.getListDaysOfMonth(this.valueData, !!this.isWeekNumberVal);
-    // #  this.changeDetectorRef.markForCheck();
-    // #}
-    this.value = value;
-    // if (this.isRemoveAttrHideAnimation) {
-    //   this.isRemoveAttrHideAnimation = false;
-    // #?  Promise.resolve().then(() => {
-    // #?    // Remove an attribute that disables animation on initialization.
-    // #?    this.renderer.removeAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT);
-    // #?  });
-    // }
-  }
-
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-  public registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-  public registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  public setDisabledState(disabled: boolean): void {
-    if (this.isDisabledVal !== disabled) {
-      this.isDisabledVal = disabled;
-      HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', disabled);
-      HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', disabled ? '' : null);
-    }
-  }
-
-  // ** interface ControlValueAccessor - finish **
-
-  // ** interface Validator - start **
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public validate(control: AbstractControl): ValidationErrors | null {
-    let result: ValidationErrors | null = null;
-    if (this.isEmpty()) {
-      if (this.isRequiredVal) {
-        result = { ...(result || {}), ...{ required: true } };
-      }
-    }
-    // else if (this.multiple) {
-    //   const actualLength = Array.isArray(this.valueData) ? this.valueData.length : 0;
-    //   if (!!this.minLength && 0 < this.minLength && actualLength < this.minLength) {
-    //     result = { ...(result || {}), ...{ minlength: { requiredLength: this.minLength, actualLength } } };
-    //   } else if (!!this.maxLength && 0 < this.maxLength && actualLength > this.maxLength) {
-    //     result = { ...(result || {}), ...{ maxlength: { requiredLength: this.maxLength, actualLength } } };
-    //   }
-    // }
-    return (this.errors = result);
-  }
-
-  // ** interface Validator - finish **
 
   // ** -- **
 
@@ -307,7 +223,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
   }
 
   public isEmpty(): boolean {
-    return this.valueData == null;
+    return this.value == null;
   }
 
   public clickSwitch(): void {
@@ -340,12 +256,20 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
 
   // ** Private methods **
 
-  private prepareData(date: Date | null, weekdayLen: number, isWeekNumber: boolean): void {
-    const current: Date = new Date();
-    this.nameYear = this.getInfoForYear(date || current);
-    this.nameMonth = this.getInfoForMonth(date || current);
+  private updateValueAndDecor(
+    selected: Date | null | undefined,
+    weekdayLen: number,
+    isWeekOnMonday: boolean,
+    startDate: Date | null
+  ): void {
+    console.log(`prepareData()`); // #
+    const today: Date = new Date();
+    const initialDate: Date = this.getInitialDate(selected, startDate, today);
+    this.nameYear = this.getInfoForYear(initialDate);
+    this.nameMonth = this.getInfoForMonth(initialDate);
     this.daysOfWeek = this.getListDaysOfWeek(weekdayLen);
-    this.calendarRows = this.getListDaysOfMonth(date, isWeekNumber);
+    this.calendarRows = this.getGridDaysOfMonth(selected, isWeekOnMonday, initialDate, today);
+    this.changeDetectorRef.markForCheck();
   }
 
   private getInfoForYear(date: Date, year?: 'numeric' | '2-digit' | undefined): string {
@@ -371,23 +295,29 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
     }
     return result;
   }
-
-  private getListDaysOfMonth(selected: Date | null, isWeekStartsOnMonday: boolean, start?: Date | undefined): CalendarRow[] {
+  private getInitialDate(selected: Date | null | undefined, startDate: Date | null | undefined, defaultDate: Date): Date {
+    return selected || startDate || defaultDate;
+  }
+  private getGridDaysOfMonth(selected: Date | null | undefined, isWeekOnMonday: boolean, initialDate: Date, today: Date): CalendarRow[] {
+    console.log(`getGridDaysOfMonth()`); // #
     const result: CalendarRow[] = [];
+
     const selectedYear: number | undefined = selected?.getFullYear();
     const selectedMonth: number | undefined = selected?.getMonth();
     const selectedDay: number | undefined = selected?.getDate();
-    const today: Date = new Date();
+
     const yearToday: number = today.getFullYear();
     const monthToday: number = today.getMonth();
     const dayToday: number = today.getDate();
-    const monthCurrent: number = selectedMonth || monthToday;
 
-    const dateItem: Date = new Date(selected?.getFullYear() || yearToday, selected?.getMonth() || monthToday, 1);
+    const dateItem: Date = initialDate;
+    const monthCurrent: number = dateItem.getMonth();
+    dateItem.setDate(1);
+
     dateItem.setDate(dateItem.getDate() - dateItem.getDay() - 1); // dateItem.getDay() 0-вс,1-пн,2-вт,3-ср,4-чт,5-пт,6-сб
     const weekStartIndex: number = 0;
 
-    let hasSelected: boolean = selected === null; // false
+    let hasSelected: boolean = selected == null;
     let isSelected: boolean | undefined;
     let hasToday: boolean = false;
     let isToday: boolean | undefined;
@@ -426,13 +356,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
     return 1 === he1.weekInfo?.firstDay;
   }
 
-  /** Perform data update and validation. */
-  private dataUpdateAndValidation(newValueData: Date | null): void {
-    this.valueData = newValueData;
-    // Calling the validation method for the new value.
-    this.onChange(this.valueData);
-  }
-
   // **
 
   private convertSize(size: string, defaultValue: number): number {
@@ -458,6 +381,10 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
   }
   private setCssFontSizeHeader(fontSize: number, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setProperty(elem, CSS_PROP_FONT_SIZE_HEADER, (fontSize > 0 ? fontSize.toString() : null)?.concat('px'));
+  }
+  private settingIsDisabled(isDisabled: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-disabled', !!isDisabled);
+    HtmlElemUtil.setAttr(renderer, elem, 'dis', isDisabled ? '' : null);
   }
   private settingIsHorizont(isHorizont: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-is-horizont', !!isHorizont);
