@@ -139,19 +139,22 @@
     <ng-container *ngFor="let cell of dataCells; trackBy: trackByIndex;">
       <button type="button"
         glncn-item
-        [attr.glncn-curr]="!cell.isSelected && cell.isCurrMonth ? '' : undefined"
-        [attr.glncn-old]="!cell.isSelected && !cell.isCurrMonth ? '' : undefined"
-        [attr.glncn-slct]="cell.isSelected ? '' : undefined"
+        [attr.glncn-slct]="cell.attr1 == 'slct' ? '' : undefined"
+        [attr.glncn-curr]="cell.attr1 == 'curr' ? '' : undefined"
+        [attr.glncn-old]="cell.attr1 == 'old' ? '' : undefined"
         [attr.glncn-today]="cell.isToday ? '' : undefined"
+        [attr.glncn-dayoff]="!isHideDayoffVal && cell.isDayoff ? '' : undefined"
         [ngClass]="['gln-calendar-day'
-          , (!cell.isSelected && cell.isCurrMonth ? 'current' : '')
-          , (!cell.isSelected && !cell.isCurrMonth ? 'old' : '')
-          , (cell.isSelected ? 'selected' : '')
-          , (cell.isToday ? 'today' : '')]"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal || (!cell.isCurrMonth && isHideOldDaysVal) ? '' : undefined"
-        [attr.tabindex]="!isDisabledVal && cell.isSelected ? 0 : -1"
+          , (cell.attr1 == 'slct' ? 'selected' : '')
+          , (cell.attr1 == 'curr' ? 'current' : '')
+          , (cell.attr1 == 'old' ? 'old' : '')
+          , (cell.isToday ? 'today' : '') 
+          , (!isHideDayoffVal && cell.isDayoff ? 'dayoff' : '') 
+          ]"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && cell.attr1 == 'old') ? '' : undefined"
+        [attr.tabindex]="!isDisabledVal && cell.attr1 == 'slct' ? 0 : -1"
         (click)="clickSelectItem(cell)">
-        {{ cell.isCurrMonth ? cell.day : (!isHideOldDaysVal ? cell.day : '') }}
+        {{ isHideOldDaysVal && cell.attr1 == 'old' ? '' : cell.day }}
       </button>
     </ng-container>
 

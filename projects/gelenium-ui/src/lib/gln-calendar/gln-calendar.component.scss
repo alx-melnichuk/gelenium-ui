@@ -13,6 +13,10 @@ gln-calendar {
   --glncn--primary-s: var(--glncl-primary-s, var(--gln-primary-s));
   --glncn--primary-l: var(--glncl-primary-l, var(--gln-primary-l));
 
+  --glncn--danger-h: var(--glncl-danger-h, var(--gln-danger-h));
+  --glncn--danger-s: var(--glncl-danger-s, var(--gln-danger-s));
+  --glncn--danger-l: var(--glncl-danger-l, var(--gln-danger-l));
+
   box-sizing: border-box;
   display: block;
 
@@ -33,21 +37,30 @@ gln-calendar {
   --glncn--item-wd: var(--glncn-item-wd, var(--glncn--item-size));
   --glncn--item-mr: var(--glncn-item-mr, 0px);
   --glncn--item-pd: var(--glncn-item-pd, 0px);
+
   --glncn--nav-def-cl   : hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l));
   --glncn--nav-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.1);
   --glncn--sndr-dis-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.8);
+
   --glncn--cell-def-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.6); // ~rgba(0, 0, 0, 0.6);
   --glncn--cell-dis-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.5); // ~rgba(0, 0, 0, 0.6);
-  --glncn--week-def-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.6); // ~rgba(0, 0, 0, 0.38);
-  --glncn--week-dis-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.5); // ~rgba(0, 0, 0, 0.38);
+
   --glncn--item-def-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l));
   --glncn--item-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.15);
+
+  --glncn--dayoff-def-cl : hsl(var(--glncn--danger-h), var(--glncn--danger-s), var(--glncn--danger-l));
+  --glncn--dayoff-dis-cl : hsla(var(--glncn--danger-h), var(--glncn--danger-s), var(--glncn--danger-l), 0.8);
+
+  --glncn--dayoff-cell-def-cl: hsla(var(--glncn--danger-h), var(--glncn--danger-s), var(--glncn--danger-l), 0.6);
+  --glncn--dayoff-cell-dis-cl : hsla(var(--glncn--danger-h), var(--glncn--danger-s), var(--glncn--danger-l), 0.5);
+
   --glncn--today-def-br-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.8);
+
+  --glncn--slct-def-cl   : hsl(var(--glncn--default-bg-h), var(--glncn--default-bg-s), var(--glncn--default-bg-l));
+
   --glncn--slct-def-bg-cl: hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l));
   --glncn--slct-hov-bg-cl: hsl(var(--glncn--primary-h), var(--glncn--primary-s), calc(var(--glncn--primary-l) - 7%));
-  --glncn--slct-def-cl: hsl(var(--glncn--default-bg-h), var(--glncn--default-bg-s), var(--glncn--default-bg-l));
   --glncn--slct-dis-bg-cl: hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.40);
-
 
   // Level 1 Element "wrapper"
   &>[glncn-wrapper] {
@@ -319,36 +332,7 @@ gln-calendar {
 
   // Level 4 Element "list days - row - item"
   &:not([dis]) [glncn-item] {
-    &:not(:hover) {
-      --glncn--curr-cl   : var(--glncn-def-curr-cl, var(--glncn--item-def-cl));
-      --glncn--curr-bg-cl: var(--glncn-def-curr-bg-cl, transparent);
-      --glncn--old-cl    : var(--glncn-def-old-cl, var(--glncn--cell-def-cl));
-      --glncn--old-bg-cl : var(--glncn-def-old-bg-cl, transparent);
-      --glncn--slct-cl   : var(--glncn-def-slct-cl, var(--glncn--slct-def-cl));
-      --glncn--slct-bg-cl: var(--glncn-def-slct-bg-cl, var(--glncn--slct-def-bg-cl));
-    }
-    &:hover:not([disabled]) {
-      --glncn--curr-cl   : var(--glncn-hov-curr-cl, var(--glncn-def-curr-cl, var(--glncn--item-def-cl)));
-      --glncn--curr-bg-cl: var(--glncn-hov-curr-bg-cl, var(--glncn--item-hov-bg-cl));
-      --glncn--old-cl    : var(--glncn-hov-old-cl, var(--glncn-def-old-cl, var(--glncn--cell-def-cl)));
-      --glncn--old-bg-cl : var(--glncn-hov-old-bg-cl, var(--glncn-def-old-bg-cl, var(--glncn--item-hov-bg-cl)));
-      --glncn--slct-cl   : var(--glncn-hov-slct-cl, var(--glncn-def-slct-cl, var(--glncn--slct-def-cl)));
-      --glncn--slct-bg-cl: var(--glncn-hov-slct-bg-cl, var(--glncn--slct-hov-bg-cl));
-    }
-    --glncn--today-br-cl: var(--glncn-def-today-br-cl, var(--glncn--today-def-br-cl));
     cursor: pointer;
-  }
-  // .css-1hrukl9:focus {
-  //   background-color: rgba(25, 118, 210, 0.12);
-  // }
-  &[dis] [glncn-item] {
-    --glncn--curr-cl   : var(--glncn-dis-curr-cl, var(--glncn--sndr-dis-cl));
-    --glncn--curr-bg-cl: var(--glncn-dis-item-bg-cl, transparent);
-    --glncn--old-cl    : var(--glncn-dis-old-cl, var(--glncn--cell-dis-cl));
-    --glncn--old-bg-cl : var(--glncn-dis-old-bg-cl, transparent);
-    --glncn--slct-cl   : var(--glncn-dis-slct-cl, var(--glncn--slct-def-cl));
-    --glncn--slct-bg-cl: var(--glncn-dis-slct-bg-cl, var(--glncn--slct-dis-bg-cl));
-    --glncn--today-br-cl: var(--glncn-dis-today-br-cl, var(--glncn--sndr-dis-cl));
   }
 
   [glncn-item] {
@@ -375,17 +359,83 @@ gln-calendar {
   &[rea] :not([disabled])[glncn-item] {
     pointer-events: none;
   }
-  [glncn-curr] {
-    color: var(--glncn--curr-cl);
-    background-color: var(--glncn--curr-bg-cl);
+
+  // row - item - curr
+  &:not([dis]) [glncn-curr] {
+    &:not(:hover) {
+      --glncn--curr-cl   : var(--glncn-def-curr-cl, var(--glncn--item-def-cl)); // 1.0+
+      --glncn--curr-bg-cl: var(--glncn-def-curr-bg-cl, transparent);
+    }
+    &:hover:not([disabled]) {
+      --glncn--curr-cl   : var(--glncn-hov-curr-cl, var(--glncn-def-curr-cl, var(--glncn--item-def-cl))); // 1.0
+      --glncn--curr-bg-cl: var(--glncn-hov-curr-bg-cl, var(--glncn--item-hov-bg-cl));
+    }
   }
-  [glncn-old] {
-    color: var(--glncn--old-cl);
-    background-color: var(--glncn--old-bg-cl);
+  &[dis] [glncn-curr] {
+    --glncn--curr-cl   : var(--glncn-dis-curr-cl, var(--glncn--sndr-dis-cl)); // 0.8+
+    --glncn--curr-bg-cl: var(--glncn-dis-item-bg-cl, transparent);
   }
-  [glncn-slct] {
-    color: var(--glncn--slct-cl);
-    background-color: var(--glncn--slct-bg-cl);
+
+  // row - item - old
+  &:not([dis]) [glncn-old] {
+    &:not(:hover) {
+      --glncn--old-cl    : var(--glncn-def-old-cl, var(--glncn--cell-def-cl)); // 0.6+
+      --glncn--old-bg-cl : var(--glncn-def-old-bg-cl, transparent);
+    }
+    &:hover:not([disabled]) {
+      --glncn--old-cl    : var(--glncn-hov-old-cl, var(--glncn-def-old-cl, var(--glncn--cell-def-cl))); // 0.6
+      --glncn--old-bg-cl : var(--glncn-hov-old-bg-cl, var(--glncn-def-old-bg-cl, var(--glncn--item-hov-bg-cl)));
+    }
+  }
+  &[dis] [glncn-old] {
+    --glncn--old-cl    : var(--glncn-dis-old-cl, var(--glncn--cell-dis-cl)); // 0.5+
+    --glncn--old-bg-cl : var(--glncn-dis-old-bg-cl, transparent);
+  }
+
+  // row - item - dayoff
+  &:not([dis]) [glncn-dayoff] {
+    &[glncn-curr] {
+      --glncn--dayoff-cl: var(--glncn-def-dayoff-cl, var(--glncn--dayoff-def-cl)); // 1.0+
+    }
+    &[glncn-old] {
+      --glncn--dayoff-cl: var(--glncn-def-dayoff-cell-cl, var(--glncn--dayoff-cell-def-cl)); // 0.6+
+    }
+  }
+  &[dis] [glncn-dayoff] {
+    &[glncn-curr] {
+      --glncn--dayoff-cl  : var(--glncn-dis-dayoff-cl, var(--glncn--dayoff-dis-cl)); // 0.8+
+    }
+    &[glncn-old] {
+      --glncn--dayoff-cl  : var(--glncn-dis-dayoff-cell-cl, var(--glncn--dayoff-cell-dis-cl)); // 0.5+
+    }
+  }
+  
+  // row - item - slct
+  &:not([dis]) [glncn-slct] {
+    &:not(:hover) {
+      --glncn--slct-cl   : var(--glncn-def-slct-cl, var(--glncn--slct-def-cl));
+      --glncn--slct-bg-cl: var(--glncn-def-slct-bg-cl, var(--glncn--slct-def-bg-cl));
+    }
+    &:hover:not([disabled]) {
+      --glncn--slct-cl   : var(--glncn-hov-slct-cl, var(--glncn-def-slct-cl, var(--glncn--slct-def-cl)));
+      --glncn--slct-bg-cl: var(--glncn-hov-slct-bg-cl, var(--glncn--slct-hov-bg-cl));
+    }
+  }
+  &[dis] [glncn-slct] {
+    --glncn--slct-cl   : var(--glncn-dis-slct-cl, var(--glncn--slct-def-cl));
+    --glncn--slct-bg-cl: var(--glncn-dis-slct-bg-cl, var(--glncn--slct-dis-bg-cl));
+  }
+
+  [glncn-item] {
+    color: var(--glncn--slct-cl, var(--glncn--dayoff-cl, var(--glncn--curr-cl, var(--glncn--old-cl))));
+    background-color: var(--glncn--slct-bg-cl, var(--glncn--curr-bg-cl, var(--glncn--old-bg-cl)));
+  }
+
+  &:not([dis]) [glncn-today] {
+    --glncn--today-br-cl: var(--glncn-def-today-br-cl, var(--glncn--today-def-br-cl));
+  }
+  &[dis] [glncn-today] {
+    --glncn--today-br-cl: var(--glncn-dis-today-br-cl, var(--glncn--sndr-dis-cl));
   }
   [glncn-today] {
     border-width: var(--glncn-today-br-wd, 1px);
@@ -404,10 +454,8 @@ gln-calendar {
   }
   [glncn-week] {
     align-items: center;
-    // background-color: var(--glncn-def-week-bg-cl, transparent);
     background-color: var(--glncn--week-bg-cl);
     color: var(--glncn--week-cl);
-    // color: var(--glncn-def-week-cl, var(--glncn--week-def-cl));
     display: flex;
     font-size: var(--glncn-week-fn-sz, var(--glncnh--fn-sz, 0.75em));
     font-weight: var(--glncn-week-fn-wg, 400);

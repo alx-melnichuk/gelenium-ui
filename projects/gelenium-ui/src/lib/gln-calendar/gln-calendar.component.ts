@@ -38,12 +38,17 @@ interface CalendarCell {
   year: number;
   month: number;
   day: number;
-  isCurrMonth: boolean;
-  isSelected?: boolean;
-  isToday?: boolean;
+  attr1: string;
+  isToday?: boolean | undefined;
+  isDayoff?: boolean | undefined;
 }
 
 export const GLN_CALENDAR_CONFIG = new InjectionToken<GlnCalendarConfig>('GLN_CALENDAR_CONFIG');
+
+const WEEKDAY_NUM_DEFAULT = 2;
+const ATTR_SELECTED = 'slct';
+const ATTR_CURRENT = 'curr';
+const ATTR_OLD_MONTH = 'old';
 
 let uniqueIdCounter = 0;
 
@@ -66,6 +71,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
   public isDisabled: string | boolean | null | undefined;
   @Input()
   public isHideOldDays: string | boolean | undefined;
+  @Input()
+  public isHideDayoff: string | boolean | undefined;
   @Input()
   public isHorizont: string | boolean | null | undefined;
   @Input()
@@ -92,6 +99,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
   public errors: ValidationErrors | null = null;
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isHideOldDaysVal: boolean | null = null; // Binding attribute "isHideOldDays".
+  public isHideDayoffVal: boolean | null = null; // Binding attribute "isHideDayoff".
   public isHorizontVal: boolean | null = null; // Binding attribute "isHorizont".
   public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
   public isRequiredVal: boolean | null = null; // Binding attribute "isRequired".
@@ -133,6 +141,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
     if (changes['isHideOldDays'] || (changes['config'] && this.isHideOldDays == null && this.currConfig.isHideOldDays != null)) {
       this.isHideOldDaysVal = BooleanUtil.init(this.isHideOldDays) ?? !!this.currConfig.isHideOldDays;
     }
+    if (changes['isHideDayoff'] || (changes['config'] && this.isHideDayoff == null && this.currConfig.isHideDayoff != null)) {
+      this.isHideDayoffVal = BooleanUtil.init(this.isHideDayoff) ?? !!this.currConfig.isHideDayoff;
+    }
     if (changes['isHorizont'] || (changes['config'] && this.isHorizont == null && this.currConfig.isHorizont != null)) {
       this.isHorizontVal = BooleanUtil.init(this.isHorizont) ?? !!this.currConfig.isHorizont;
       this.settingIsHorizont(this.isHorizontVal, this.renderer, this.hostRef);
@@ -151,12 +162,13 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
     }
     if (changes['weekday'] || (changes['config'] && this.weekday == null && this.currConfig.weekday != null)) {
       const weekdayStr: string = (this.weekday?.toString() || this.currConfig.weekday || '').toString();
-      this.weekdayVal = this.convertWeekday(weekdayStr);
+      this.weekdayVal = this.convertWeekday(weekdayStr, WEEKDAY_NUM_DEFAULT);
       isPrepareData = true;
     }
 
     if (isPrepareData && this.weekdayVal != null) {
-      this.updateValueAndDecor(this.value, this.weekdayVal, !!this.isWeekNumberVal, this.startDate || null);
+      const isWeekOnMonday: boolean = false;
+      this.updateValue(this.value, this.weekdayVal, isWeekOnMonday, this.startDate || null);
     }
   }
 
@@ -177,6 +189,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
     if (this.isHideOldDaysVal == null) {
       this.isHideOldDaysVal = !!this.currConfig.isHideOldDays;
     }
+    if (this.isHideDayoffVal == null) {
+      this.isHideDayoffVal = !!this.currConfig.isHideDayoff;
+    }
     if (this.isHorizontVal == null) {
       this.isHorizontVal = !!this.currConfig.isHorizont;
       this.settingIsHorizont(this.isHorizontVal, this.renderer, this.hostRef);
@@ -195,12 +210,13 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
     }
     if (this.weekdayVal == null) {
       const weekdayStr: string = (this.currConfig.weekday || '').toString();
-      this.weekdayVal = this.convertWeekday(weekdayStr);
+      this.weekdayVal = this.convertWeekday(weekdayStr, WEEKDAY_NUM_DEFAULT);
       isPrepareData = true;
     }
 
     if (isPrepareData && this.weekdayVal != null) {
-      this.updateValueAndDecor(this.value, this.weekdayVal, !!this.isWeekNumberVal, this.startDate || null);
+      const isWeekOnMonday: boolean = false;
+      this.updateValue(this.value, this.weekdayVal, isWeekOnMonday, this.startDate || null);
     }
   }
 
@@ -248,7 +264,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
   }
 
   public clickSelectItem(cell: CalendarCell | null): void {
-    if (this.isDisabledVal || this.isReadOnlyVal || !cell || (!cell.isCurrMonth && this.isHideOldDaysVal)) {
+    if (this.isDisabledVal || this.isReadOnlyVal || !cell || (cell.attr1 != ATTR_CURRENT && this.isHideOldDaysVal)) {
       console.log(`clickSelectItem() return;`); // #
       return;
     }
@@ -256,31 +272,18 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
 
   // ** Private methods **
 
-  private updateValueAndDecor(
-    selected: Date | null | undefined,
-    weekdayLen: number,
-    isWeekOnMonday: boolean,
-    startDate: Date | null
-  ): void {
+  private updateValue(selected: Date | null | undefined, weekdayLen: number, isWeekOnMonday: boolean, startDate: Date | null): void {
     console.log(`prepareData()`); // #
     const today: Date = new Date();
-    const initialDate: Date = this.getInitialDate(selected, startDate, today);
-    this.nameYear = this.getInfoForYear(initialDate);
-    this.nameMonth = this.getInfoForMonth(initialDate);
+    const initDate: Date = selected || startDate || today;
+    this.nameYear = DateUtil.getNameYear(initDate, 'numeric');
+    this.nameMonth = DateUtil.getNameMonth(initDate, 'long');
     this.daysOfWeek = this.getListDaysOfWeek(weekdayLen);
-    this.calendarRows = this.getGridDaysOfMonth(selected, isWeekOnMonday, initialDate, today);
+    this.calendarRows = this.getGridDaysOfMonth(selected, isWeekOnMonday, initDate, today);
     this.changeDetectorRef.markForCheck();
   }
-
-  private getInfoForYear(date: Date, year?: 'numeric' | '2-digit' | undefined): string {
-    return new Intl.DateTimeFormat('default', { year: year || 'numeric' }).format(date);
-  }
-
-  private getInfoForMonth(date: Date, month?: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined): string {
-    return new Intl.DateTimeFormat('default', { month: month || 'long' }).format(date);
-  }
   /** Get a list of days of the week.
-   * @param weekday: number; 1-'narrow'(T); 2,3-'short'(Thu); -1-'long'(Thursday);
+   * @param weekday: number; // 1-'narrow'(T); 2,3-'short'(Thu); -1-'long'(Thursday);
    */
   private getListDaysOfWeek(weekdayLen: number): string[] {
     const result: string[] = ['', '', '', '', '', '', ''];
@@ -289,63 +292,62 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
     const current: Date = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     for (let i = 1; i < 8; i++) {
       current.setDate(i);
-      const value: string = new Intl.DateTimeFormat('default', { weekday: weekdayRes }).format(current);
+      const value: string = DateUtil.getNameWeekday(current, weekdayRes);
       const index: number = current.getDay();
       result[index] = weekdayLen > 0 ? value.substring(0, weekdayLen) : value;
     }
     return result;
   }
-  private getInitialDate(selected: Date | null | undefined, startDate: Date | null | undefined, defaultDate: Date): Date {
-    return selected || startDate || defaultDate;
-  }
-  private getGridDaysOfMonth(selected: Date | null | undefined, isWeekOnMonday: boolean, initialDate: Date, today: Date): CalendarRow[] {
+
+  private getGridDaysOfMonth(selected: Date | null | undefined, isWeekOnMonday: boolean, initDate: Date, today: Date): CalendarRow[] {
     console.log(`getGridDaysOfMonth()`); // #
     const result: CalendarRow[] = [];
-
     const selectedYear: number | undefined = selected?.getFullYear();
     const selectedMonth: number | undefined = selected?.getMonth();
     const selectedDay: number | undefined = selected?.getDate();
+    const todayYear: number = today.getFullYear();
+    const todayMonth: number = today.getMonth();
+    const todayDay: number = today.getDate();
 
-    const yearToday: number = today.getFullYear();
-    const monthToday: number = today.getMonth();
-    const dayToday: number = today.getDate();
-
-    const dateItem: Date = initialDate;
-    const monthCurrent: number = dateItem.getMonth();
-    dateItem.setDate(1);
-
-    dateItem.setDate(dateItem.getDate() - dateItem.getDay() - 1); // dateItem.getDay() 0-вс,1-пн,2-вт,3-ср,4-чт,5-пт,6-сб
+    const itemDate: Date = new Date(initDate.getFullYear(), initDate.getMonth(), initDate.getDate(), 0, 0, 0, 0);
+    const currentMonth: number = itemDate.getMonth();
+    itemDate.setDate(1);
+    // dateItem.getDay() 0-Sun,1-Mon,2-Tue,3-Wed,4-Thu,5-Fri,6-Sat;
+    itemDate.setDate(itemDate.getDate() - itemDate.getDay() - 1);
     const weekStartIndex: number = 0;
 
     let hasSelected: boolean = selected == null;
-    let isSelected: boolean | undefined;
     let hasToday: boolean = false;
     let isToday: boolean | undefined;
-
+    let isDayoff: boolean | undefined;
     let calendarRow: CalendarRow | undefined;
     let idx: number = 0;
     while (idx < 42) {
-      dateItem.setDate(dateItem.getDate() + 1);
-      const year: number = dateItem.getFullYear();
-      const month: number = dateItem.getMonth();
-      const day: number = dateItem.getDate();
-
-      isSelected = !hasSelected && year === selectedYear && month === selectedMonth && day === selectedDay ? true : undefined;
-      if (!hasSelected && isSelected) {
+      itemDate.setDate(itemDate.getDate() + 1);
+      const year: number = itemDate.getFullYear();
+      const month: number = itemDate.getMonth();
+      const day: number = itemDate.getDate();
+      const dayWeek: number = itemDate.getDay();
+      let attr1: string = '';
+      if (!hasSelected && year === selectedYear && month === selectedMonth && day === selectedDay) {
         hasSelected = true;
+        attr1 = ATTR_SELECTED;
+      } else if (month === currentMonth) {
+        attr1 = ATTR_CURRENT;
+      } else {
+        attr1 = ATTR_OLD_MONTH;
       }
-      isToday = !hasToday && year === yearToday && month === monthToday && day === dayToday ? true : undefined;
+
+      isToday = !hasToday && year === todayYear && month === todayMonth && day === todayDay ? true : undefined;
       if (!hasToday && isToday) {
         hasToday = true;
       }
-
-      const dayWeeek: number = dateItem.getDay();
-      if (weekStartIndex === dayWeeek) {
-        const weekNumber: number = DateUtil.getWeekNumber(dateItem);
-        calendarRow = { cellList: [], weekNumberObj: { weekNumber } };
+      isDayoff = dayWeek == 0 || dayWeek == 6 ? true : undefined;
+      if (weekStartIndex === dayWeek) {
+        calendarRow = { cellList: [], weekNumberObj: { weekNumber: DateUtil.getWeekNumber(itemDate) } };
         result.push(calendarRow);
       }
-      calendarRow?.cellList.push({ year, month, day, isCurrMonth: month === monthCurrent, isSelected, isToday });
+      calendarRow?.cellList.push({ year, month, day, attr1, isToday, isDayoff });
       idx++;
     }
     return result;
@@ -363,14 +365,14 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
     return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
   }
 
-  private convertWeekday(weekday: string | undefined): number {
-    let weekdayNum: number = 1;
-    if (weekday != undefined) {
+  private convertWeekday(weekday: string | undefined, defaultWeekdayNum: number): number {
+    let weekdayNum: number = defaultWeekdayNum;
+    if (weekday != undefined && !!weekday) {
       const valueNum: number = Number.parseFloat(weekday);
       if (!Number.isNaN(valueNum)) {
         weekdayNum = 0 < valueNum && valueNum < 25 ? valueNum : -1;
       } else {
-        weekdayNum = 'long' === weekday ? -1 : 'short' === weekday ? 3 : 1;
+        weekdayNum = 'long' === weekday ? -1 : 'short' === weekday ? 3 : weekdayNum;
       }
     }
     return weekdayNum;

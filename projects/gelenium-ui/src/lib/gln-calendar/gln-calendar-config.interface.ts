@@ -1,6 +1,7 @@
 export interface GlnCalendarConfig {
   cellSize?: number | string | undefined; // 'short','small','middle','wide','large','huge'
   isHideOldDays?: boolean | undefined;
+  isHideDayoff?: boolean | undefined;
   isHorizont?: boolean | undefined;
   isReadOnly?: boolean | undefined;
   isRequired?: boolean | undefined;
