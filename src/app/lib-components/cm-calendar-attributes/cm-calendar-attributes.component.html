@@ -1,0 +1,260 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Attributes.
+    <a [href]="urlCmCalendar + '#Attributes'">#</a>
+  </h3>
+  <p>The following attributes are supported:</p>
+  <ul>
+    <!-- <li>"id" - parameter for defining the unique identifier of the input field
+      (id="unique_identifier");
+    </li> -->
+    <!-- <li>
+      "config" - Defines a configuration object.
+      <a [href]="urlCmCalendar + '#config-interface'">More details.</a>
+    </li> -->
+    <li>"isDisabled" - a sign that the field is disabled (isDisabled);</li>
+    <li>
+      "isHideOldDays" - a sign of hiding the days of the previous and next month (isHideOldDays);
+    </li>
+    <li>"isHorizont" - renders a component with a horizontal layout (isHorizont);</li>
+    <li>"isReadOnly" - a sign that the field is read-only (isReadOnly);</li>
+  </ul>
+</section>
+
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>Attribute: isDisabled.</em></small>
+    </div>
+    <div class="cnat1-clnd">
+      <gln-calendar [value]="value02a"
+        isDisabled>
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Attribute: isHorizont.</em></small>
+    </div>
+    <div class="cnat1-clnd">
+      <gln-calendar [value]="value02b"
+        isHorizont>
+      </gln-calendar>
+    </div>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>Attribute: isReadOnly.</em></small>
+    </div>
+    <div class="cnat1-clnd">
+      <gln-calendar [value]="value02c"
+        isReadOnly>
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Attribute: isHideOldDays.</em></small>
+    </div>
+    <div class="cnat1-clnd">
+      <gln-calendar [value]="value02d"
+        isHideOldDays>
+      </gln-calendar>
+    </div>
+  </div>
+
+</div>
+
+
+
+<span style="color: indianred;">source</span>
+
+
+
+
+<section mr-vr
+  id="attributes-supported02">
+  <h4 class="app-hover-link">
+    Attributes are also supported 2:
+    <a [href]="urlCmCalendar + '#attributes-supported02'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "wdFull" - an attribute sets the width to the width of the parent (width: 100%).
+      <br />
+      In this case, the width must be defined at the parent or at the current level.
+      <br />
+      Without this parameter, the width is determined by the content and may change
+      when the font size is changed.
+      <br />
+      <i>To make the child element have the height of the parent, we specify "display: grid;"
+        for a parent.</i>
+    </li>
+    <li>"weekday" - length of the name of the day of the week ([weekday]="1")</li>
+  </ul>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem ">
+    <div>
+      <small><em>Attribute: wdFull (min-width: 320px; min-height: 320px;).</em></small>
+    </div>
+    <div class="cnat2-elem cnat2-clnd">
+      <gln-calendar wdFull
+        [value]="value02f">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Attribute: wdFull, isHorizont (min-width: 300px; min-height: 300px;).</em></small>
+    </div>
+    <div class="cnat2-elem cnat2-clnd">
+      <gln-calendar wdFull
+        isHorizont
+        [value]="value02g">
+      </gln-calendar>
+    </div>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>Attribute: weekday=1 ('M').</em></small>
+    </div>
+    <div class="cnat2-clnd">
+      <gln-calendar [weekday]="1"
+        [value]="value02h">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>Attribute: weekday=3 ('Mon').</em></small>
+    </div>
+    <div class="cnat2-clnd">
+      <gln-calendar [weekday]="3"
+        [value]="value02i">
+      </gln-calendar>
+    </div>
+  </div>
+
+</div>
+
+
+<span style="color: indianred;">source</span>
+
+
+
+<section mr-vr
+  id="attributes-supported03">
+  <h4 class="app-hover-link">
+    Attributes are also supported 3:
+    <a [href]="urlCmCalendar + '#attributes-supported03'">#</a>
+  </h4>
+  <ul>
+    <li>"isWeekNumber" - indicates the display of the week number (isWeekNumber);</li>
+  </ul>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem ">
+    <div>
+      <small><em>Attribute: isWeekNumber.</em></small>
+    </div>
+    <div class="cnat3-clnd">
+      <gln-calendar isWeekNumber
+        [value]="value02k">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem ">
+    <div>
+      <small><em>Attribute: isWeekNumber, isHorizont.</em></small>
+    </div>
+    <div class="cnat3-clnd">
+      <gln-calendar isWeekNumber
+        isHorizont
+        [value]="value02l">
+      </gln-calendar>
+    </div>
+  </div>
+
+</div>
+
+
+<span style="color: indianred;">source</span>
+
+
+<hr br-nn />
+<hr br-nn />
+
+<!-- selectedDate={{ selectedDate | date:'YYYY/MM/dd' }} -->
+
+<!--
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabled01a=!isDisabled01a"
+      [checked]="isDisabled01a" />
+    Is disabled
+  </label>
+  &nbsp;
+  <label>
+    <input type="checkbox"
+      (change)="isHideOldDays01a=!isHideOldDays01a"
+      [checked]="isHideOldDays01a" />
+    is hide old days
+  </label>
+  <label>
+    <input type="checkbox"
+      (change)="isHideDayoff01a=!isHideDayoff01a"
+      [checked]="isHideDayoff01a" />
+    is hide dayoff
+  </label>
+
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small><em>Attribute: value</em></small>
+    </div>
+    <div class="cnat-mb">
+      <small><em>Model: {{ value02z == null ? 'null' : value02z | date:'YYYY/MM/dd' }}</em></small>
+    </div>
+    <div>
+      <gln-calendar class="cnat-clnd"
+        [value]="value02z"
+        startDate9="startDate01a"
+        [isDisabled]="isDisabled01a"
+        [isHideOldDays]="isHideOldDays01a"
+        [isHideDayoff]="isHideDayoff01a">
+      </gln-calendar>
+    </div>
+  </div>
+
+</div>
+-->
