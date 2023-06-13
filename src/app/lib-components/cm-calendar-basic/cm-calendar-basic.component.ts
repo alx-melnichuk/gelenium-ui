@@ -31,9 +31,9 @@ export class CmCalendarBasicComponent {
   constructor() {}
 
   private getSelectedDate(): Date {
-    const date: Date = new Date();
-    const result: Date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0);
-    result.setDate(result.getDate() + (date.getDate() === 1 ? 1 : -1));
+    const d1: Date = new Date();
+    const result: Date = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0);
+    result.setDate(result.getDate() + (d1.getDate() === 1 ? 1 : -1));
     return result;
   }
 }
