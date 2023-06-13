@@ -26,6 +26,22 @@ export class PlCalendarBasicComponent {
   public isDisabled01a: boolean = false;
   public isHideOldDays01a: boolean = false;
 
+  public selectedDate: Date = this.getSelectedDate();
+
+  public value07a: Date | null = new Date(this.selectedDate);
+  public value07b: Date | null = new Date(this.selectedDate);
+  public value07c: Date | null = new Date(this.selectedDate);
+  public value07d: Date | null = new Date(this.selectedDate);
+  public value07e: Date | null = new Date(this.selectedDate);
+  public value07f: Date | null = new Date(this.selectedDate);
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
+
+  private getSelectedDate(): Date {
+    const d1: Date = new Date();
+    const result: Date = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0);
+    result.setDate(result.getDate() + (d1.getDate() === 1 ? 1 : -1));
+    return result;
+  }
 }

@@ -32,19 +32,25 @@
     <div>
       <small><em>color: primary</em></small>
     </div>
-    <gln-calendar [isDisabled]="isDisabled01a"
-      [isHideOldDays]="isHideOldDays01a">
-    </gln-calendar>
+    <div class="cnpl-clnd">
+      <gln-calendar [value]="value07a"
+        [isDisabled]="isDisabled01a"
+        [isHideOldDays]="isHideOldDays01a">
+      </gln-calendar>
+    </div>
   </div>
 
   <div class="app-elem">
     <div>
       <small><em>color: danger</em></small>
     </div>
-    <gln-calendar [glnColor]="{ primary: 'danger' }"
-      [isDisabled]="isDisabled01a"
-      [isHideOldDays]="isHideOldDays01a">
-    </gln-calendar>
+    <div class="cnpl-clnd">
+      <gln-calendar [glnColor]="{ primary: 'danger' }"
+        [value]="value07b"
+        [isDisabled]="isDisabled01a"
+        [isHideOldDays]="isHideOldDays01a">
+      </gln-calendar>
+    </div>
   </div>
 
 </div>
@@ -55,20 +61,26 @@
     <div>
       <small><em>color: success</em></small>
     </div>
-    <gln-calendar [glnColor]="{ primary: 'success' }"
-      [isDisabled]="isDisabled01a"
-      [isHideOldDays]="isHideOldDays01a">
-    </gln-calendar>
+    <div class="cnpl-clnd">
+      <gln-calendar [glnColor]="{ primary: 'success' }"
+        [value]="value07c"
+        [isDisabled]="isDisabled01a"
+        [isHideOldDays]="isHideOldDays01a">
+      </gln-calendar>
+    </div>
   </div>
 
   <div class="app-elem">
     <div>
       <small><em>color: info</em></small>
     </div>
-    <gln-calendar [glnColor]="{ primary: 'info' }"
-      [isDisabled]="isDisabled01a"
-      [isHideOldDays]="isHideOldDays01a">
-    </gln-calendar>
+    <div class="cnpl-clnd">
+      <gln-calendar [glnColor]="{ primary: 'info' }"
+        [value]="value07d"
+        [isDisabled]="isDisabled01a"
+        [isHideOldDays]="isHideOldDays01a">
+      </gln-calendar>
+    </div>
   </div>
 
 </div>
@@ -79,30 +91,33 @@
     <div>
       <small><em>color: warning</em></small>
     </div>
-    <gln-calendar [glnColor]="{ primary: 'warning' }"
-      [isDisabled]="isDisabled01a"
-      [isHideOldDays]="isHideOldDays01a">
-    </gln-calendar>
+    <div class="cnpl-clnd">
+      <gln-calendar [glnColor]="{ primary: 'warning' }"
+        [value]="value07e"
+        [isDisabled]="isDisabled01a"
+        [isHideOldDays]="isHideOldDays01a">
+      </gln-calendar>
+    </div>
   </div>
 
   <div class="app-elem">
     <div>
       <small><em>color: customer</em></small>
     </div>
-    <gln-calendar class="cnpl-customer"
-      [glnColor]="{ primary: 'customer' }"
-      [isDisabled]="isDisabled01a"
-      [isHideOldDays]="isHideOldDays01a">
-    </gln-calendar>
+    <div class="cnpl-clnd">
+      <gln-calendar class="cnpl-customer"
+        [value]="value07f"
+        [glnColor]="{ primary: 'customer' }"
+        [isDisabled]="isDisabled01a"
+        [isHideOldDays]="isHideOldDays01a">
+      </gln-calendar>
+    </div>
   </div>
 
 </div>
 
 
 
-
-<span style="color: indianred;">source</span>
-<!--
 <section mr-vr>
   <mat-accordion>
     <mat-expansion-panel>
@@ -112,7 +127,93 @@
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="labelHtml">
           <code><pre source="html">
-&lt;div class="bb-items"&gt;
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: primary&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnpl-clnd"&gt;
+      &lt;gln-calendar [value]="value07a"
+        [isDisabled]="isDisabled01a"
+        [isHideOldDays]="isHideOldDays01a"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: danger&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnpl-clnd"&gt;
+      &lt;gln-calendar [glnColor]="&#123; primary: 'danger' &#125;"
+        [value]="value07b"
+        [isDisabled]="isDisabled01a"
+        [isHideOldDays]="isHideOldDays01a"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: success&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnpl-clnd"&gt;
+      &lt;gln-calendar [glnColor]="&#123; primary: 'success' &#125;"
+        [value]="value07c"
+        [isDisabled]="isDisabled01a"
+        [isHideOldDays]="isHideOldDays01a"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: info&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnpl-clnd"&gt;
+      &lt;gln-calendar [glnColor]="&#123; primary: 'info' &#125;"
+        [value]="value07d"
+        [isDisabled]="isDisabled01a"
+        [isHideOldDays]="isHideOldDays01a"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: warning&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnpl-clnd"&gt;
+      &lt;gln-calendar [glnColor]="&#123; primary: 'warning' &#125;"
+        [value]="value07e"
+        [isDisabled]="isDisabled01a"
+        [isHideOldDays]="isHideOldDays01a"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;color: customer&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnpl-clnd"&gt;
+      &lt;gln-calendar class="cnpl-customer"
+        [value]="value07f"
+        [glnColor]="&#123; primary: 'customer' &#125;"
+        [isDisabled]="isDisabled01a"
+        [isHideOldDays]="isHideOldDays01a"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
 
 &lt;/div&gt;</pre></code>
         </mat-tab>
@@ -123,34 +224,55 @@ import &#123;
 &#125; from '@angular/core';
 
 @Component(&#123;
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
   encapsulation: ViewEncapsulation.None,
 &#125;)
-export class ButtonComponent &#123;
-  public routerLink = '/palette/button';
-  public exterior01a = 'outlined';
+export class CalendarComponent &#123;
+  public selectedDate: Date = this.getSelectedDate();
 
-  public getLabel(exterior: string): string &#123;
-    return exterior ? exterior.substring(0, 1).toUpperCase() + exterior.substring(1) : '';
+  public value07a: Date | null = new Date(this.selectedDate);
+  public value07b: Date | null = new Date(this.selectedDate);
+  public value07c: Date | null = new Date(this.selectedDate);
+  public value07d: Date | null = new Date(this.selectedDate);
+  public value07e: Date | null = new Date(this.selectedDate);
+  public value07f: Date | null = new Date(this.selectedDate);
+
+  private getSelectedDate(): Date &#123;
+    const d1: Date = new Date();
+    const result: Date = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0);
+    result.setDate(result.getDate() + (d1.getDate() === 1 ? 1 : -1));
+    return result;
   &#125;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
           <code><pre source="css">
-app-button &#123;
+app-checkbox &#123;
   .app-group &#123;
     display: flex;
     flex-wrap: wrap;
   &#125;
-
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cnpl-clnd &#123;
+    border: 1px solid cornflowerblue;
+    padding: 5px;
+  &#125;
+  .cnpl-customer &#123;
+    --gln-customer-h: 200;
+    --gln-customer-s: 75%;
+    --gln-customer-l: 50%;
+  &#125;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
     </mat-expansion-panel>
   </mat-accordion>
 </section>
--->
+
 
 <hr br-nn />

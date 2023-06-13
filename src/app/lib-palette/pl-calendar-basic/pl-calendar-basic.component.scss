@@ -3,6 +3,11 @@
 app-pl-calendar-basic {
   display: block;
 
+  .cnpl-clnd {
+    border: 1px solid cornflowerblue;
+    padding: 5px;
+  }
+
   .cnpl-customer {
     --gln-customer-h: 200;
     --gln-customer-s: 75%;
