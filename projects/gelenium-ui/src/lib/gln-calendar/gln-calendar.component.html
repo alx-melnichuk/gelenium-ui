@@ -72,10 +72,11 @@
     <ng-container [ngTemplateOutlet]="isWeekNumberVal ? templateWeekNumberHeader : null">
     </ng-container>
 
-    <div *ngFor="let dayItem of daysOfWeek; trackBy: trackByIndex;"
-      glncn-cell
-      class="gln-calendar-header-cell">
-      {{ dayItem }}
+    <div *ngFor="let cage of daysOfWeek; trackBy: trackByIndex;"
+      glncn-cage
+      [attr.glncn-dayoff]="!isHideDayoffVal && (cage.dayWeek == 0 || cage.dayWeek == 6) ? '' : undefined"
+      class="gln-calendar-header-cage">
+      {{ cage.name }}
     </div>
   </div>
 
@@ -143,13 +144,14 @@
         [attr.glncn-curr]="cell.attr1 == 'curr' ? '' : undefined"
         [attr.glncn-old]="cell.attr1 == 'old' ? '' : undefined"
         [attr.glncn-today]="cell.isToday ? '' : undefined"
-        [attr.glncn-dayoff]="!isHideDayoffVal && cell.isDayoff ? '' : undefined"
+        [attr.glncn-dayoff]="!isHideDayoffVal && (cell.dayWeek == 0 || cell.dayWeek == 6) ? '' : undefined"
         [ngClass]="['gln-calendar-day'
           , (cell.attr1 == 'slct' ? 'selected' : '')
           , (cell.attr1 == 'curr' ? 'current' : '')
           , (cell.attr1 == 'old' ? 'old' : '')
           , (cell.isToday ? 'today' : '') 
-          , (!isHideDayoffVal && cell.isDayoff ? 'dayoff' : '') 
+          , (!isHideDayoffVal && (cell.dayWeek == 0 || cell.dayWeek == 6) ? 'dayoff' : '')
+          , ('dayWeek' + cell.dayWeek)
           ]"
         [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && cell.attr1 == 'old') ? '' : undefined"
         [attr.tabindex]="!isDisabledVal && cell.attr1 == 'slct' ? 0 : -1"

@@ -4,7 +4,7 @@ export interface GlnCalendarConfig {
   isHideDayoff?: boolean | undefined;
   isHorizont?: boolean | undefined;
   isReadOnly?: boolean | undefined;
-  isRequired?: boolean | undefined;
+  isStartSunday?: boolean | undefined;
   isWeekNumber?: boolean | undefined;
-  weekday?: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
+  sizeDayWeek?: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
 }

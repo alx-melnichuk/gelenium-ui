@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -29,15 +28,21 @@ const CELL_SIZE: { [key: string]: number } = { short: 28, small: 32, middle: 36,
 const CSS_PROP_CELL_SIZE = '--glncn--item-size';
 const CSS_PROP_FONT_SIZE_HEADER = '--glncnh--fn-sz';
 
+interface CalendarCage {
+  name: string;
+  dayWeek: number;
+}
+
 interface CalendarRow {
   cellList: CalendarCell[];
-  weekNumberObj?: { weekNumber: number };
+  weekNumberObj: { weekNumber: number };
 }
 
 interface CalendarCell {
   year: number;
   month: number;
   day: number;
+  dayWeek: number;
   attr1: string;
   isToday?: boolean | undefined;
   isDayoff?: boolean | undefined;
@@ -60,7 +65,7 @@ let uniqueIdCounter = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit {
+export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public id = `glncn-${uniqueIdCounter++}`;
   @Input()
@@ -78,7 +83,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
   @Input()
   public isReadOnly: string | boolean | null | undefined;
   @Input()
-  public isRequired: string | boolean | null | undefined;
+  public isStartSunday: string | boolean | null | undefined;
   @Input()
   public isWeekNumber: string | boolean | null | undefined;
   @Input()
@@ -86,27 +91,26 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
   @Input()
   public value: Date | null | undefined;
   @Input()
-  public weekday: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
+  public sizeDayWeek: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
 
   @Output()
   readonly selected: EventEmitter<{ value: unknown | null }> = new EventEmitter();
 
-  public daysOfWeek: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-
   public cellSizeVal: number | null = null; // Binding attribute "cellSize".
   public calendarRows: CalendarRow[] = [];
   public currConfig: GlnCalendarConfig;
+  public daysOfWeek: CalendarCage[] = [];
   public errors: ValidationErrors | null = null;
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isHideOldDaysVal: boolean | null = null; // Binding attribute "isHideOldDays".
   public isHideDayoffVal: boolean | null = null; // Binding attribute "isHideDayoff".
   public isHorizontVal: boolean | null = null; // Binding attribute "isHorizont".
   public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
-  public isRequiredVal: boolean | null = null; // Binding attribute "isRequired".
+  public isStartSundayVal: boolean | null = null; // Binding attribute "isStartSunday".
   public isWeekNumberVal: boolean | null = null; // Binding attribute "isWeekNumber".
   public nameMonth: string = '';
   public nameYear: string = '';
-  public weekdayVal: number | null = null; // Binding attribute "weekday".
+  public sizeDayWeekVal: number | null = null; // Binding attribute "sizeDayWeek".
 
   constructor(
     // // eslint-disable-next-line @typescript-eslint/ban-types
@@ -123,7 +127,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    console.log(`OnChanges()`); // #
     let isPrepareData: boolean = !!changes['value'];
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
@@ -152,30 +155,28 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
       this.isReadOnlyVal = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
-    if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
-      this.isRequiredVal = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
-      this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
+    if (changes['isStartSunday'] || (changes['config'] && this.isStartSunday == null && this.currConfig.isStartSunday != null)) {
+      this.isStartSundayVal = BooleanUtil.init(this.isStartSunday) ?? !!this.currConfig.isStartSunday;
+      isPrepareData = true;
     }
     if (changes['isWeekNumber'] || (changes['config'] && this.isWeekNumber == null && this.currConfig.isWeekNumber != null)) {
       this.isWeekNumberVal = BooleanUtil.init(this.isWeekNumber) ?? !!this.currConfig.isWeekNumber;
       isPrepareData = true;
     }
-    if (changes['weekday'] || (changes['config'] && this.weekday == null && this.currConfig.weekday != null)) {
-      const weekdayStr: string = (this.weekday?.toString() || this.currConfig.weekday || '').toString();
-      this.weekdayVal = this.convertWeekday(weekdayStr, WEEKDAY_NUM_DEFAULT);
+    if (changes['sizeDayWeek'] || (changes['config'] && this.sizeDayWeek == null && this.currConfig.sizeDayWeek != null)) {
+      const sizeDayWeekStr: string = (this.sizeDayWeek?.toString() || this.currConfig.sizeDayWeek || '').toString();
+      this.sizeDayWeekVal = this.convertSizeDayWeek(sizeDayWeekStr, WEEKDAY_NUM_DEFAULT);
       isPrepareData = true;
     }
 
-    if (isPrepareData && this.weekdayVal != null) {
-      const isWeekOnMonday: boolean = false;
-      this.updateValue(this.value, this.weekdayVal, isWeekOnMonday, this.startDate || null);
+    if (isPrepareData && this.sizeDayWeekVal != null) {
+      this.updateValue(this.value, this.sizeDayWeekVal, !!this.isStartSundayVal, this.startDate || null);
     }
   }
 
   public ngOnInit(): void {
-    console.log(`OnInit()`); // #
     // Update ID value if it is missing.
-    // HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
+    HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
     const fontSize: number = HtmlElemUtil.propertyAsNumber(this.hostRef, 'font-size');
     this.setCssFontSizeHeader(fontSize - 1, this.hostRef);
@@ -200,37 +201,24 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
       this.isReadOnlyVal = !!this.currConfig.isReadOnly;
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
-    if (this.isRequiredVal == null) {
-      this.isRequiredVal = !!this.currConfig.isRequired;
-      this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
+    if (this.isStartSundayVal == null) {
+      this.isStartSundayVal = !!this.currConfig.isStartSunday;
+      isPrepareData = true;
     }
     if (this.isWeekNumberVal == null) {
       this.isWeekNumberVal = !!this.currConfig.isWeekNumber;
       isPrepareData = true;
     }
-    if (this.weekdayVal == null) {
-      const weekdayStr: string = (this.currConfig.weekday || '').toString();
-      this.weekdayVal = this.convertWeekday(weekdayStr, WEEKDAY_NUM_DEFAULT);
+    if (this.sizeDayWeekVal == null) {
+      const sizeDayWeekStr: string = (this.currConfig.sizeDayWeek || '').toString();
+      this.sizeDayWeekVal = this.convertSizeDayWeek(sizeDayWeekStr, WEEKDAY_NUM_DEFAULT);
       isPrepareData = true;
     }
 
-    if (isPrepareData && this.weekdayVal != null) {
-      const isWeekOnMonday: boolean = false;
-      this.updateValue(this.value, this.weekdayVal, isWeekOnMonday, this.startDate || null);
+    if (isPrepareData && this.sizeDayWeekVal != null) {
+      this.updateValue(this.value, this.sizeDayWeekVal, !!this.isStartSundayVal, this.startDate || null);
     }
   }
-
-  public ngAfterContentInit(): void {
-    console.log(`AfterContentInit()`); // #
-    // // When using [(ngModel)] parentFormGroup will be null.
-    // this.isRemoveAttrHideAnimation = !this.parentFormGroup;
-    // if (!this.isRemoveAttrHideAnimation) {
-    //   // Remove an attribute that disables animation on initialization.
-    //   this.renderer.removeAttribute(this.hostRef.nativeElement, CSS_ATTR_HIDE_ANIMATION_INIT);
-    // }
-  }
-
-  // ** -- **
 
   // ** Public methods **
 
@@ -272,35 +260,42 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
 
   // ** Private methods **
 
-  private updateValue(selected: Date | null | undefined, weekdayLen: number, isWeekOnMonday: boolean, startDate: Date | null): void {
-    console.log(`prepareData()`); // #
+  private updateValue(selected: Date | null | undefined, sizeDayWeek: number, isStartSunday: boolean, startDate: Date | null): void {
     const today: Date = new Date();
     const initDate: Date = selected || startDate || today;
     this.nameYear = DateUtil.getNameYear(initDate, 'numeric');
     this.nameMonth = DateUtil.getNameMonth(initDate, 'long');
-    this.daysOfWeek = this.getListDaysOfWeek(weekdayLen);
-    this.calendarRows = this.getGridDaysOfMonth(selected, isWeekOnMonday, initDate, today);
+    const dayStartWeek: number = !isStartSunday ? this.getDayStartWeekByLocale() : 0;
+    this.daysOfWeek = this.getListDaysOfWeek(sizeDayWeek, dayStartWeek);
+    this.calendarRows = this.getGridDaysOfMonth(selected, initDate, today, dayStartWeek);
     this.changeDetectorRef.markForCheck();
   }
   /** Get a list of days of the week.
-   * @param weekday: number; // 1-'narrow'(T); 2,3-'short'(Thu); -1-'long'(Thursday);
+   * @param sizeDayWeek: number; // 1-'narrow'(T); 2,3-'short'(Thu); -1-'long'(Thursday);
+   * @param dayStartWeek: number; // 0-Sunday (default), 1-Monday;
    */
-  private getListDaysOfWeek(weekdayLen: number): string[] {
-    const result: string[] = ['', '', '', '', '', '', ''];
-    const weekdayRes: 'long' | 'short' | 'narrow' = weekdayLen <= 0 || 3 < weekdayLen ? 'long' : 1 === weekdayLen ? 'narrow' : 'short';
-    const currentDate: Date = new Date();
-    const current: Date = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+  private getListDaysOfWeek(sizeDayWeek: number, dayStartWeek: number): CalendarCage[] {
+    const result: CalendarCage[] = [];
+    const dayWeekRes: 'long' | 'short' | 'narrow' = sizeDayWeek <= 0 || 3 < sizeDayWeek ? 'long' : 1 === sizeDayWeek ? 'narrow' : 'short';
+    const nuw: Date = new Date();
+    const current: Date = new Date(nuw.getFullYear(), nuw.getMonth(), 1, 0, 0, 0, 0);
+    current.setDate(current.getDate() - current.getDay() - 1 + dayStartWeek);
     for (let i = 1; i < 8; i++) {
-      current.setDate(i);
-      const value: string = DateUtil.getNameWeekday(current, weekdayRes);
-      const index: number = current.getDay();
-      result[index] = weekdayLen > 0 ? value.substring(0, weekdayLen) : value;
+      current.setDate(current.getDate() + 1);
+      const value: string = DateUtil.getNameWeekday(current, dayWeekRes);
+      const dayWeek: number = current.getDay();
+      const name: string = sizeDayWeek > 0 ? value.substring(0, sizeDayWeek) : value;
+      result.push({ name, dayWeek });
     }
     return result;
   }
-
-  private getGridDaysOfMonth(selected: Date | null | undefined, isWeekOnMonday: boolean, initDate: Date, today: Date): CalendarRow[] {
-    console.log(`getGridDaysOfMonth()`); // #
+  /** Get a grid of days in a month.
+   * @param selected: Date | null | undefined; // Selected date.
+   * @param initDate: Date; // Start date, used if "selected date" is not specified.
+   * @param today: Date; // Today's date
+   * @param dayStartWeek: number; // 0-Sunday (default), 1-Monday;
+   */
+  private getGridDaysOfMonth(selected: Date | null | undefined, initDate: Date, today: Date, dayStartWeek: number): CalendarRow[] {
     const result: CalendarRow[] = [];
     const selectedYear: number | undefined = selected?.getFullYear();
     const selectedMonth: number | undefined = selected?.getMonth();
@@ -309,17 +304,14 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
     const todayMonth: number = today.getMonth();
     const todayDay: number = today.getDate();
 
-    const itemDate: Date = new Date(initDate.getFullYear(), initDate.getMonth(), initDate.getDate(), 0, 0, 0, 0);
+    const itemDate: Date = new Date(initDate.getFullYear(), initDate.getMonth(), 1, 0, 0, 0, 0);
     const currentMonth: number = itemDate.getMonth();
-    itemDate.setDate(1);
-    // dateItem.getDay() 0-Sun,1-Mon,2-Tue,3-Wed,4-Thu,5-Fri,6-Sat;
-    itemDate.setDate(itemDate.getDate() - itemDate.getDay() - 1);
-    const weekStartIndex: number = 0;
+    // Date.getDay() 0-Sun, 1-Mon, 2-Tue, 3-Wed, 4-Thu, 5-Fri, 6-Sat;
+    itemDate.setDate(itemDate.getDate() - itemDate.getDay() - 1 + dayStartWeek);
 
     let hasSelected: boolean = selected == null;
     let hasToday: boolean = false;
     let isToday: boolean | undefined;
-    let isDayoff: boolean | undefined;
     let calendarRow: CalendarRow | undefined;
     let idx: number = 0;
     while (idx < 42) {
@@ -337,45 +329,41 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
       } else {
         attr1 = ATTR_OLD_MONTH;
       }
-
       isToday = !hasToday && year === todayYear && month === todayMonth && day === todayDay ? true : undefined;
       if (!hasToday && isToday) {
         hasToday = true;
       }
-      isDayoff = dayWeek == 0 || dayWeek == 6 ? true : undefined;
-      if (weekStartIndex === dayWeek) {
+      if (dayStartWeek === dayWeek) {
         calendarRow = { cellList: [], weekNumberObj: { weekNumber: DateUtil.getWeekNumber(itemDate) } };
         result.push(calendarRow);
       }
-      calendarRow?.cellList.push({ year, month, day, attr1, isToday, isDayoff });
+      calendarRow?.cellList.push({ year, month, day, dayWeek, attr1, isToday });
       idx++;
     }
     return result;
   }
-
-  private getIsWeekStartsOnMonday(): boolean {
-    const he1: any = new Intl.Locale('default');
-    return 1 === he1.weekInfo?.firstDay;
+  /** Get the day number of the start of the week by locale. */
+  private getDayStartWeekByLocale(): number {
+    const he1: any = new Intl.Locale('default'); // dayStartWeek
+    return he1.weekInfo?.firstDay || 0;
   }
-
-  // **
 
   private convertSize(size: string, defaultValue: number): number {
     const sizeNum: number = Number.parseFloat(size);
     return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
   }
 
-  private convertWeekday(weekday: string | undefined, defaultWeekdayNum: number): number {
-    let weekdayNum: number = defaultWeekdayNum;
-    if (weekday != undefined && !!weekday) {
-      const valueNum: number = Number.parseFloat(weekday);
+  private convertSizeDayWeek(sizeDayWeek: string | undefined, defaultWeekdayNum: number): number {
+    let sizeDayWeekNum: number = defaultWeekdayNum;
+    if (sizeDayWeek != undefined && !!sizeDayWeek) {
+      const valueNum: number = Number.parseFloat(sizeDayWeek);
       if (!Number.isNaN(valueNum)) {
-        weekdayNum = 0 < valueNum && valueNum < 25 ? valueNum : -1;
+        sizeDayWeekNum = 0 < valueNum && valueNum < 25 ? valueNum : -1;
       } else {
-        weekdayNum = 'long' === weekday ? -1 : 'short' === weekday ? 3 : weekdayNum;
+        sizeDayWeekNum = 'long' === sizeDayWeek ? -1 : 'short' === sizeDayWeek ? 3 : sizeDayWeekNum;
       }
     }
-    return weekdayNum;
+    return sizeDayWeekNum;
   }
 
   private setCssCellSize(cellSize: number, elem: ElementRef<HTMLElement>): void {
@@ -395,9 +383,5 @@ export class GlnCalendarComponent implements OnChanges, OnInit, AfterContentInit
   private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!readOnly);
     HtmlElemUtil.setAttr(renderer, elem, 'rea', readOnly ? '' : null);
-  }
-  private settingRequired(required: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setClass(renderer, elem, 'gln-required', !!required);
-    HtmlElemUtil.setAttr(renderer, elem, 'req', required ? '' : null);
   }
 }

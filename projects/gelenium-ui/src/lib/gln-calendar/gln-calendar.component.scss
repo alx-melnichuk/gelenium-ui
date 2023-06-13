@@ -42,8 +42,8 @@ gln-calendar {
   --glncn--nav-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.1);
   --glncn--sndr-dis-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.8);
 
-  --glncn--cell-def-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.6); // ~rgba(0, 0, 0, 0.6);
-  --glncn--cell-dis-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.5); // ~rgba(0, 0, 0, 0.6);
+  --glncn--cage-def-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.6); // ~rgba(0, 0, 0, 0.6);
+  --glncn--cage-dis-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.5); // ~rgba(0, 0, 0, 0.6);
 
   --glncn--item-def-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l));
   --glncn--item-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.15);
@@ -51,8 +51,8 @@ gln-calendar {
   --glncn--dayoff-def-cl : hsl(var(--glncn--danger-h), var(--glncn--danger-s), var(--glncn--danger-l));
   --glncn--dayoff-dis-cl : hsla(var(--glncn--danger-h), var(--glncn--danger-s), var(--glncn--danger-l), 0.8);
 
-  --glncn--dayoff-cell-def-cl: hsla(var(--glncn--danger-h), var(--glncn--danger-s), var(--glncn--danger-l), 0.6);
-  --glncn--dayoff-cell-dis-cl : hsla(var(--glncn--danger-h), var(--glncn--danger-s), var(--glncn--danger-l), 0.5);
+  --glncn--dayoff-old-def-cl: hsla(var(--glncn--danger-h), var(--glncn--danger-s), var(--glncn--danger-l), 0.6);
+  --glncn--dayoff-old-dis-cl : hsla(var(--glncn--danger-h), var(--glncn--danger-s), var(--glncn--danger-l), 0.5);
 
   --glncn--today-def-br-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.8);
 
@@ -284,22 +284,32 @@ gln-calendar {
     justify-content: space-between;
   }
 
-  // Level 3 Element "header - cell"
-  &:not([dis]) [glncn-cell] {
-    --glncn--cell-cl   : var(--glncn-def-cell-cl, var(--glncn--cell-def-cl));
-    --glncn--cell-bg-cl: var(--glncn-def-cell-bg-cl, transparent);
+  // Level 3 Element "header - cage"
+  &:not([dis]) [glncn-cage] {
+    --glncn--cage-bg-cl: var(--glncn-def-cage-bg-cl, transparent);
+    &:not([glncn-dayoff]) {
+      --glncn--cage-cl : var(--glncn-def-cage-cl, var(--glncn--cage-def-cl));
+    }
+    &[glncn-dayoff] {
+      --glncn--cage-cl : var(--glncn-def-dayoff-cage-cl, var(--glncn--dayoff-old-def-cl)); // 0.6+
+    }
   }
-  &[dis] [glncn-cell] {
-    --glncn--cell-cl   : var(--glncn-dis-cell-cl, var(--glncn--cell-dis-cl));
-    --glncn--cell-bg-cl: var(--glncn-dis-cell-bg-cl, transparent);
+  &[dis] [glncn-cage] {
+    --glncn--cage-bg-cl: var(--glncn-dis-cage-bg-cl, transparent);
+    &:not([glncn-dayoff]) {
+      --glncn--cage-cl : var(--glncn-dis-cage-cl, var(--glncn--cage-dis-cl));
+    }
+    &[glncn-dayoff] {
+      --glncn--cage-cl : var(--glncn-dis-dayoff-cage-cl, var(--glncn--dayoff-old-dis-cl)); // 0.5+
+    }
   }
-  [glncn-cell] {
+  [glncn-cage] {
     align-items: center;
-    background-color: var(--glncn--cell-bg-cl);
-    color: var(--glncn--cell-cl);
+    background-color: var(--glncn--cage-bg-cl);
+    color: var(--glncn--cage-cl);
     display: flex;
-    font-size: var(--glncn-cell-fn-sz, var(--glncnh--fn-sz, 0.75em));
-    font-weight: var(--glncn-cell-fn-wg, 400);
+    font-size: var(--glncn-cage-fn-sz, var(--glncnh--fn-sz, 0.75em));
+    font-weight: var(--glncn-cage-fn-wg, 400);
     height: var(--glncn--item-hg);
     justify-content: center;
     margin: var(--glncn--item-mr);
@@ -379,16 +389,16 @@ gln-calendar {
   // row - item - old
   &:not([dis]) [glncn-old] {
     &:not(:hover) {
-      --glncn--old-cl    : var(--glncn-def-old-cl, var(--glncn--cell-def-cl)); // 0.6+
+      --glncn--old-cl    : var(--glncn-def-old-cl, var(--glncn--cage-def-cl)); // 0.6+
       --glncn--old-bg-cl : var(--glncn-def-old-bg-cl, transparent);
     }
     &:hover:not([disabled]) {
-      --glncn--old-cl    : var(--glncn-hov-old-cl, var(--glncn-def-old-cl, var(--glncn--cell-def-cl))); // 0.6
+      --glncn--old-cl    : var(--glncn-hov-old-cl, var(--glncn-def-old-cl, var(--glncn--cage-def-cl))); // 0.6
       --glncn--old-bg-cl : var(--glncn-hov-old-bg-cl, var(--glncn-def-old-bg-cl, var(--glncn--item-hov-bg-cl)));
     }
   }
   &[dis] [glncn-old] {
-    --glncn--old-cl    : var(--glncn-dis-old-cl, var(--glncn--cell-dis-cl)); // 0.5+
+    --glncn--old-cl    : var(--glncn-dis-old-cl, var(--glncn--cage-dis-cl)); // 0.5+
     --glncn--old-bg-cl : var(--glncn-dis-old-bg-cl, transparent);
   }
 
@@ -398,7 +408,7 @@ gln-calendar {
       --glncn--dayoff-cl: var(--glncn-def-dayoff-cl, var(--glncn--dayoff-def-cl)); // 1.0+
     }
     &[glncn-old] {
-      --glncn--dayoff-cl: var(--glncn-def-dayoff-cell-cl, var(--glncn--dayoff-cell-def-cl)); // 0.6+
+      --glncn--dayoff-cl: var(--glncn-def-dayoff-item-cl, var(--glncn--dayoff-old-def-cl)); // 0.6+
     }
   }
   &[dis] [glncn-dayoff] {
@@ -406,7 +416,7 @@ gln-calendar {
       --glncn--dayoff-cl  : var(--glncn-dis-dayoff-cl, var(--glncn--dayoff-dis-cl)); // 0.8+
     }
     &[glncn-old] {
-      --glncn--dayoff-cl  : var(--glncn-dis-dayoff-cell-cl, var(--glncn--dayoff-cell-dis-cl)); // 0.5+
+      --glncn--dayoff-cl  : var(--glncn-dis-dayoff-item-cl, var(--glncn--dayoff-old-dis-cl)); // 0.5+
     }
   }
   
@@ -445,12 +455,12 @@ gln-calendar {
 
   // Level 3 Element "header - week", "list days - row - week"
   &:not([dis]) [glncn-week] {
-    --glncn--week-cl   : var(--glncn-def-cell-cl, var(--glncn--cell-def-cl));
-    --glncn--week-bg-cl: var(--glncn-def-cell-bg-cl, transparent);
+    --glncn--week-cl   : var(--glncn-def-cage-cl, var(--glncn--cage-def-cl));
+    --glncn--week-bg-cl: var(--glncn-def-cage-bg-cl, transparent);
   }
   &[dis] [glncn-week] {
-    --glncn--week-cl   : var(--glncn-dis-cell-cl, var(--glncn--cell-dis-cl));
-    --glncn--week-bg-cl: var(--glncn-dis-cell-bg-cl, transparent);
+    --glncn--week-cl   : var(--glncn-dis-cage-cl, var(--glncn--cage-dis-cl));
+    --glncn--week-bg-cl: var(--glncn-dis-cage-bg-cl, transparent);
   }
   [glncn-week] {
     align-items: center;
