@@ -14,15 +14,15 @@
 <section mr-vr>
   <label>
     <input type="checkbox"
-      (change)="isDisabled01a=!isDisabled01a"
-      [checked]="isDisabled01a" />
+      (change)="isDisabled07j=!isDisabled07j"
+      [checked]="isDisabled07j" />
     Is disabled
   </label>
   &nbsp;
   <label>
     <input type="checkbox"
-      (change)="isHideOldDays01a=!isHideOldDays01a"
-      [checked]="isHideOldDays01a" />
+      (change)="isHideOldDays07j=!isHideOldDays07j"
+      [checked]="isHideOldDays07j" />
     is hide old days
   </label>
 </section>
@@ -33,12 +33,146 @@
     <div>
       <small><em>Material-UI style</em></small>
     </div>
-    <div class="cnm1-br1">
-      <gln-calendar class="cnm1-mui"
+    <div class="cnmt-clnd">
+      <gln-calendar class="cnmt-mui"
+        [value]="value07j"
         [config]="cfgMui"
-        [isDisabled]="isDisabled01a"
-        [isHideOldDays]="isHideOldDays01a">
+        [isDisabled]="isDisabled07j"
+        [isHideOldDays]="isHideOldDays07j">
       </gln-calendar>
     </div>
   </div>
 </div>
+
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Material-UI style&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnmt-clnd"&gt;
+      &lt;gln-calendar class="cnmt-mui"
+        [value]="value07j"
+        [config]="cfgMui"
+        [isDisabled]="isDisabled07j"
+        [isHideOldDays]="isHideOldDays07j"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CalendarComponent &#123;
+  public isDisabled07j: boolean = false;
+  public isHideOldDays07j: boolean = false;
+  public cfgMui = &#123;
+    cellSize: 36,
+    isHideDayoff: true,
+    isHideOldDays: true,
+    isStartSunday: true,
+    sizeDayWeek: 1
+  &#125;;
+  public selectedDate: Date = this.getSelectedDate();
+  public value07j: Date | null = new Date(this.selectedDate);
+
+  private getSelectedDate(): Date &#123;
+    const d1: Date = new Date();
+    const result: Date = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0);
+    result.setDate(result.getDate() + (d1.getDate() === 1 ? 1 : -1));
+    return result;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cnmt-clnd &#123;
+    border: 1px solid deepskyblue;
+    box-sizing: border-box;
+    display: inline-block;
+  &#125;
+&#125;
+
+.cnmt-mui &#123;
+  color: #1a2027;
+  display: inline-block;
+  font-size: 16px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  width: 320px;
+  // "title month2year"
+  --glncn-month2year-fn-wg: 500;
+  // "title switch"
+  --glncn-def-switch-cl: rgba(0, 0, 0, 0.54);
+  --glncn-hov-switch-bg-cl: rgba(0, 0, 0, 0.04);
+  // "title prev"
+  --glncn-def-prev-cl: rgba(0, 0, 0, 0.54);
+  --glncn-hov-prev-bg-cl: rgba(0, 0, 0, 0.04);
+  // "title next"
+  --glncn-def-next-cl: rgba(0, 0, 0, 0.54);
+  --glncn-hov-next-bg-cl: rgba(0, 0, 0, 0.04);
+  // "header cage"
+  --glncn-def-cage-cl: rgba(0, 0, 0, 0.6);
+  --glncn-cage-fn-sz: 12px;
+  // "row item"
+  --glncn-item-mr: 0 2px 0 2px;
+  --glncn-def-curr-cl: rgba(0, 0, 0, 0.87);
+  --glncn-hov-curr-bg-cl: rgba(25, 118, 210, 0.04);
+  --glncn-hov-old-bg-cl: rgba(25, 118, 210, 0.04);
+  --glncn-item-fn-sz: 12px;
+  --glncn-def-today-br-cl: rgba(0, 0, 0, 0.6);
+  --glncn-def-old-cl: rgba(0, 0, 0, 0.6);
+  --glncn-def-slct-cl: #fff;
+  --glncn-def-slct-bg-cl: #1976d2;
+  --glncn-hov-slct-cl: #fff;
+  --glncn-hov-slct-bg-cl: #1565c0;
+  --glncn-dis-slct-cl: #fff;
+  --glncn-dis-slct-bg-cl: #1976d2;
+
+  &[dis] .gln-calendar-list-days &#123;
+    opacity: 0.6;
+  &#125;
+  .gln-calendar-title &#123;
+    padding-left: 24px;
+    padding-right: 12px;
+  &#125;
+  .gln-calendar-month2year &#123;
+    justify-content: flex-start;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<hr br-nn />

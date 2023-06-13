@@ -23,10 +23,25 @@ export class PlCalendarMaterialUiComponent {
   public baseRef: string = RouterConfig.get('BASE_REF');
   public urlPlCalendar = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CALENDAR');
 
-  public isDisabled01a: boolean = false;
-  public isHideOldDays01a: boolean = false;
-  public cfgMui = { cellSize: 36, isHideOldDays: true, weekday: 1 };
+  public isDisabled07j: boolean = false;
+  public isHideOldDays07j: boolean = false;
+  public cfgMui = {
+    cellSize: 36,
+    isHideDayoff: true,
+    isHideOldDays: true,
+    isStartSunday: true,
+    sizeDayWeek: 1,
+  };
+  public selectedDate: Date = this.getSelectedDate();
+  public value07j: Date | null = new Date(this.selectedDate);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
+
+  private getSelectedDate(): Date {
+    const d1: Date = new Date();
+    const result: Date = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0);
+    result.setDate(result.getDate() + (d1.getDate() === 1 ? 1 : -1));
+    return result;
+  }
 }
