@@ -1,0 +1,361 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Size
+    <a [href]="urlCmCalendar + '#Size'">#</a>
+  </h3>
+  <p>
+    The "cell-size" property determines the cell size of the element (its height and width).
+  </p>
+  <p>
+    It takes the following values:
+  </p>
+  <ul>
+    <li>"short" - sets the height to 28px;</li>
+    <li>"small" - sets the height to 32px;</li>
+    <li>"middle" - sets the height to 36px (default);</li>
+    <li>"wide" - sets the height to 40px;</li>
+    <li>"large" - sets the height to 44px;</li>
+    <li>"huge" - sets the height to 48px;</li>
+  </ul>
+</section>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>"Short" height: 28px; font-size: 14px;</em></small>
+    </div>
+    <div class="cnsz-clnd">
+      <gln-calendar style="font-size: 14px;"
+        [value]="value03a"
+        cellSize="short">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>"Small" height: 32px; font-size: 15px;</em></small>
+    </div>
+    <div class="cnsz-clnd">
+      <gln-calendar style="font-size: 15px;"
+        [value]="value03b"
+        cellSize="small">
+      </gln-calendar>
+    </div>
+  </div>
+</div>
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>"Middle" height: 36px; font-size: 16px;</em></small>
+    </div>
+    <div class="cnsz-clnd">
+      <gln-calendar style="font-size: 16px;"
+        [value]="value03c"
+        cellSize="middle">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>"Wide" height: 40px; font-size: 16px;</em></small>
+    </div>
+    <div class="cnsz-clnd">
+      <gln-calendar style="font-size: 16px;"
+        [value]="value03d"
+        cellSize="wide">
+      </gln-calendar>
+    </div>
+  </div>
+</div>
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>"Large" height: 44px; font-size: 18px;</em></small>
+    </div>
+    <div class="cnsz-clnd">
+      <gln-calendar style="font-size: 18px;"
+        [value]="value03e"
+        cellSize="large">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>"Huge" height: 48px; font-size: 20px;</em></small>
+    </div>
+    <div class="cnsz-clnd">
+      <gln-calendar style="font-size: 20px;"
+        [value]="value03f"
+        cellSize="huge">
+      </gln-calendar>
+    </div>
+  </div>
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;"Short" height: 28px; font-size: 14px;&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnsz-clnd"&gt;
+      &lt;gln-calendar style="font-size: 14px;"
+        [value]="value03a"
+        cellSize="short"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;"Small" height: 32px; font-size: 15px;&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnsz-clnd"&gt;
+      &lt;gln-calendar style="font-size: 15px;"
+        [value]="value03b"
+        cellSize="small"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;"Middle" height: 36px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnsz-clnd"&gt;
+      &lt;gln-calendar style="font-size: 16px;"
+        [value]="value03c"
+        cellSize="middle"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;"Wide" height: 40px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnsz-clnd"&gt;
+      &lt;gln-calendar style="font-size: 16px;"
+        [value]="value03d"
+        cellSize="wide"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;"Large" height: 44px; font-size: 18px;&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnsz-clnd"&gt;
+      &lt;gln-calendar style="font-size: 18px;"
+        [value]="value03e"
+        cellSize="large"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;"Huge" height: 48px; font-size: 20px;&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnsz-clnd"&gt;
+      &lt;gln-calendar style="font-size: 20px;"
+        [value]="value03f"
+        cellSize="huge"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CalendarComponent &#123;
+  public selectedDate: Date = this.getSelectedDate();
+
+  public value03a: Date | null = new Date(this.selectedDate);
+  public value03b: Date | null = new Date(this.selectedDate);
+  public value03c: Date | null = new Date(this.selectedDate);
+  public value03d: Date | null = new Date(this.selectedDate);
+  public value03e: Date | null = new Date(this.selectedDate);
+  public value03f: Date | null = new Date(this.selectedDate);
+
+  private getSelectedDate(): Date &#123;
+    const d1: Date = new Date();
+    const result: Date = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0);
+    result.setDate(result.getDate() + (d1.getDate() === 1 ? 1 : -1));
+    return result;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cnsz-clnd &#123;
+    border: 1px solid blue;
+    padding: 5px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<hr br-nn />
+
+<h4 class="app-hover-link"
+  id="calendar-cell-size-config">
+  Configuration for custom cell height (41px).
+  <a [href]="urlCmCalendar + '#calendar-cell-size-config'">#</a>
+</h4>
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>"Config" cell height: 41px; font-size: 14px;</em></small>
+    </div>
+    <div class="cnsz-clnd">
+      <gln-calendar style="font-size: 14px;"
+        [value]="value03g"
+        [cellSize]="41">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small><em>"Config" cell height: 41px; font-size: 16px;</em></small>
+    </div>
+    <div class="cnsz-clnd">
+      <gln-calendar style="font-size: 16px;"
+        [value]="value03h"
+        [cellSize]="41">
+      </gln-calendar>
+    </div>
+  </div>
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;"Config" cell height: 41px; font-size: 14px;&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnsz-clnd"&gt;
+      &lt;gln-calendar style="font-size: 14px;"
+        [value]="value03g"
+        [cellSize]="41"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;"Config" cell height: 41px; font-size: 16px;&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnsz-clnd"&gt;
+      &lt;gln-calendar style="font-size: 16px;"
+        [value]="value03h"
+        [cellSize]="41"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CalendarComponent &#123;
+  public selectedDate: Date = this.getSelectedDate();
+
+  public value03g: Date | null = new Date(this.selectedDate);
+  public value03h: Date | null = new Date(this.selectedDate);
+
+  private getSelectedDate(): Date &#123;
+    const d1: Date = new Date();
+    const result: Date = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0);
+    result.setDate(result.getDate() + (d1.getDate() === 1 ? 1 : -1));
+    return result;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cnsz-clnd &#123;
+    border: 1px solid blue;
+    padding: 5px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />
+<hr br-nn />

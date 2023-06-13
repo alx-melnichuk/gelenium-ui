@@ -42,9 +42,7 @@ const urlCalendar = '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfi
 const siteUrlsCalendar: SiteUrl[] = [
   { label: 'Basic', url: urlCalendar, fragment: 'Basic' },
   { label: 'Attributes', url: urlCalendar, fragment: 'Attributes' },
-  // { label: 'Size', url: urlCalendar, fragment: 'Size' },
-  // { label: 'Border Radius', url: urlCalendar, fragment: 'BorderRadius' },
-  // { label: 'Ornaments', url: urlCalendar, fragment: 'Ornaments' },
+  { label: 'Size', url: urlCalendar, fragment: 'Size' },
   // { label: 'Palette', url: urlCalendar, fragment: 'Palette' },
   // { label: 'Config', url: urlCalendar, fragment: 'Config' },
   // { label: 'Api', url: urlCalendar, fragment: 'Api' },
