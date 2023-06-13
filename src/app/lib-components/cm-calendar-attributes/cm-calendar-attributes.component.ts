@@ -47,21 +47,12 @@ export class CmCalendarAttributesComponent {
   public isHideDayoff01a: boolean = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {
-    /*setTimeout(() => {
-      const date: Date = new Date();
-      const newDate: Date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0);
-      newDate.setDate(newDate.getDate() + 3);
-      console.log(`newDate=`, newDate);
-      this.value02a = newDate;
-    }, 2000);*/
-  }
+  constructor() {}
 
   private getSelectedDate(): Date {
     const date: Date = new Date();
     const result: Date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0);
     result.setDate(result.getDate() + (date.getDate() === 1 ? 1 : -1));
-    console.log(`result`, result); // #
     return result;
   }
 }
