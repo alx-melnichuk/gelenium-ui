@@ -34,18 +34,6 @@ export class CmDatepickerBasicComponent {
   };
   public formGroup01: FormGroup = new FormGroup(this.control01);
 
-  // Page: Attrib02
-  isShowAttrib02 = false;
-
-  // Page Calendar
-  public urlCmCalendar = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_DATEPICKER');
-  public urlPlCalendar = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_DATEPICKER');
-
-  // Page: CellSize
-  isShowClnCellSize = false;
-
-  isDisabled01a = false;
-
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }
