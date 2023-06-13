@@ -14,16 +14,9 @@
 <section mr-vr>
   <label>
     <input type="checkbox"
-      (change)="isDisabled01a=!isDisabled01a"
-      [checked]="isDisabled01a" />
+      (change)="isDisabled07h=!isDisabled07h"
+      [checked]="isDisabled07h" />
     Is disabled
-  </label>
-  &nbsp;
-  <label>
-    <input type="checkbox"
-      (change)="isHideOldDays01a=!isHideOldDays01a"
-      [checked]="isHideOldDays01a" />
-    is hide old days
   </label>
 </section>
 
@@ -33,12 +26,169 @@
     <div>
       <small><em>Bootstrap style</em></small>
     </div>
-    <div class="cnbt1-br1">
-      <gln-calendar class="cnbt1-bstr"
+    <div class="cnbs-clnd">
+      <gln-calendar class="cnbs-bstr"
         [config]="cfgBs"
-        [isDisabled]="isDisabled01a"
-        [isHideOldDays]="isHideOldDays01a">
+        [value]="value07h"
+        [isDisabled]="isDisabled07h">
       </gln-calendar>
     </div>
   </div>
 </div>
+
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Bootstrap style&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnbs-clnd"&gt;
+      &lt;gln-calendar class="cnbs-bstr"
+        [config]="cfgBs"
+        [value]="value07h"
+        [isDisabled]="isDisabled07h"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CalendarComponent &#123;
+  public isDisabled07h: boolean = false;
+  public cfgBs = &#123;
+    cellSize: 30,
+    isHideDayoff: true,
+    isStartSunday: true,
+    sizeDayWeek: 2
+  &#125;;
+  public selectedDate: Date = this.getSelectedDate();
+  public value07h: Date | null = new Date(this.selectedDate);
+
+  private getSelectedDate(): Date &#123;
+    const d1: Date = new Date();
+    const result: Date = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0);
+    result.setDate(result.getDate() + (d1.getDate() === 1 ? 1 : -1));
+    return result;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cnbs-clnd &#123;
+    border: 1px solid deepskyblue;
+    display: inline-block;
+  &#125;
+&#125;
+
+.cnbs-bstr &#123;
+  color: #333;
+  display: inline-block;
+  font-size: 14px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  --glncn-br-rd: 4px;
+  // "title month2year"
+  --glncn-month2year-fn-wg: 700;
+  --glncn-month2year-ord: 1;
+  &:not([dis]) .gln-calendar-month2year &#123;
+    cursor: pointer;
+    &:hover &#123;
+      background-color: #eee;
+    &#125;
+  &#125;
+  // "title switch"
+  .gln-calendar-switch &#123;
+    display: none;
+  &#125;
+  // "title prev"
+  --glncn-prev-ord: 0;
+  --glncn-def-prev-cl: currentColor;
+  --glncn-hov-prev-bg-cl: #eee;
+  // "title next"
+  --glncn-next-ord: 2;
+  --glncn-def-next-cl: currentColor;
+  --glncn-hov-next-bg-cl: #eee;
+  // "title prev","title next"
+  .gln-calendar-title > button &#123;
+    padding: 5px;
+    &>svg &#123;
+      display: none;
+    &#125;
+    &::after &#123;
+      height: 1.5em;
+      width: 1.5em;
+      flex-shrink: 0;
+      line-height: 1.5em;
+      border-radius: 4px;
+    &#125;
+  &#125;
+  .gln-calendar-prev::after &#123;
+    content: '«';
+  &#125;
+  .gln-calendar-next::after &#123;
+    content: '»';
+  &#125;
+  // "header cage"
+  --glncn-def-cage-cl: currentColor;
+  --glncn-cage-fn-sz: 14px;
+  --glncn-cage-fn-wg: 700;
+  // "list item"
+  --glncn-today-br-wd: 0;
+  --glncn-def-curr-cl: currentColor;
+  --glncn-hov-curr-bg-cl: #eee;
+  --glncn-hov-old-bg-cl: #eee;
+  --glncn-def-slct-cl: #fff;
+  --glncn-def-slct-bg-cl: #286090;
+  --glncn-hov-slct-cl: #fff;
+  --glncn-hov-slct-bg-cl: #204d74;
+
+  .gln-calendar-selected &#123;
+    &:hover &#123;
+      border-color: #122b40;
+    &#125;
+    &:not(:hover) &#123;
+      border-color: #204d74;
+    &#125;
+  &#125;
+  --glncn-dis-curr-cl: #7e7e7e;
+  --glncn-dis-old-cl : #7e7e7e;
+  --glncn-dis-slct-bg-cl: #a8a8a8;
+  --glncn-dis-today-br-cl: #7e7e7e;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<hr br-nn />

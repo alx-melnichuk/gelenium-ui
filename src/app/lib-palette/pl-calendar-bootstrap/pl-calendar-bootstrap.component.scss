@@ -3,16 +3,13 @@
 app-pl-calendar-bootstrap {
   display: block;
 
-  .cnbt1-br1 {
+  .cnbs-clnd  {
     border: 1px solid deepskyblue;
-    box-sizing: border-box;
     display: inline-block;
   }
-
-
 }
 
-.cnbt1-bstr {
+.cnbs-bstr {
   color: #333;
   display: inline-block;
   font-size: 14px;
@@ -59,10 +56,10 @@ app-pl-calendar-bootstrap {
   .gln-calendar-next::after {
     content: '»';
   }
-  // "header cell"
-  --glncn-def-cell-cl: currentColor;
-  --glncn-cell-fn-sz: 14px;
-  --glncn-cell-fn-wg: 700;
+  // "header cage"
+  --glncn-def-cage-cl: currentColor;
+  --glncn-cage-fn-sz: 14px;
+  --glncn-cage-fn-wg: 700;
   // "list item"
   --glncn-today-br-wd: 0;
   --glncn-def-curr-cl: currentColor;

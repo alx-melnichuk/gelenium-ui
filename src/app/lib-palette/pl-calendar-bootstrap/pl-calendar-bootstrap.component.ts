@@ -23,10 +23,23 @@ export class PlCalendarBootstrapComponent {
   public baseRef: string = RouterConfig.get('BASE_REF');
   public urlPlCalendar = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CALENDAR');
 
-  public isDisabled01a: boolean = false;
-  public isHideOldDays01a: boolean = false;
-  public cfgBs = { cellSize: 30, weekday: 2 };
+  public isDisabled07h: boolean = false;
+  public cfgBs = {
+    cellSize: 30,
+    isHideDayoff: true,
+    isStartSunday: true,
+    sizeDayWeek: 2,
+  };
+  public selectedDate: Date = this.getSelectedDate();
+  public value07h: Date | null = new Date(this.selectedDate);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
+
+  private getSelectedDate(): Date {
+    const d1: Date = new Date();
+    const result: Date = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0);
+    result.setDate(result.getDate() + (d1.getDate() === 1 ? 1 : -1));
+    return result;
+  }
 }
