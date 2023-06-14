@@ -43,8 +43,8 @@ const siteUrlsCalendar: SiteUrl[] = [
   { label: 'Basic', url: urlCalendar, fragment: 'Basic' },
   { label: 'Attributes', url: urlCalendar, fragment: 'Attributes' },
   { label: 'Size', url: urlCalendar, fragment: 'Size' },
-  // { label: 'Palette', url: urlCalendar, fragment: 'Palette' },
-  // { label: 'Config', url: urlCalendar, fragment: 'Config' },
+  { label: 'Palette', url: urlCalendar, fragment: 'Palette' },
+  { label: 'Config', url: urlCalendar, fragment: 'Config' },
   // { label: 'Api', url: urlCalendar, fragment: 'Api' },
 ];
 SiteMenuUtil.addItem('Components', 'Calendar', { label: 'Calendar', siteUrls: siteUrlsCalendar });

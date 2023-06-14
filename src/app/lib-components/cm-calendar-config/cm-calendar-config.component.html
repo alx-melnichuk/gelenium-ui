@@ -1,0 +1,355 @@
+<section mr-vr>
+  <h3 class="app-hover-link">
+    Config.
+    <a [href]="urlCmCalendar + '#Config'">#</a>
+  </h3>
+  <p>
+    If your application will have a single style for GlnCalendar elements, then you can set a
+    single configuration.
+    To do this, you need to create an object with the GlnCalendarConfig interface and define the
+    required values.
+    Next, specify the resulting object in the list of providers for the entire application (at the
+    level of the AppComponent).
+  </p>
+  <code><pre source="ts">
+import &#123;
+  GlnCalendarConfig, GLN_CALENDAR_CONFIG
+&#125; from 'gelenium-ui';
+
+const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
+  cellSize: 'wide',
+  isHideOldDays: true,
+&#125;;
+
+@Component(&#123;
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  providers: [
+    &#123; provide: GLN_CALENDAR_CONFIG, useValue: glnCalendarConfigDefault &#125;
+  ],
+&#125;)
+export class AppComponent &#123;
+  title = 'demo';
+&#125;</pre></code>
+  <p>
+    After that, all input elements based on the "GlnCalendar" component will have the same
+    configuration.
+  </p>
+</section>
+
+
+<section mr-vr
+  id="config-interface">
+  <h4 class="app-hover-link">
+    GlnCalendarConfig interface.
+    <a [href]="urlCmCalendar + '#config-interface'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>cellSize?: number<br/>
+        &nbsp;&nbsp;| string<br/>
+        &nbsp;&nbsp;| undefined;<br/>
+      </code>
+      </td>
+      <td>
+        <span>
+          Determines the cell size of the element (its height and width).
+          <br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"short" - height: 28px;</li>
+          <li>"small" - height: 32px;</li>
+          <li>"middle" - height: 36px (default);</li>
+          <li>"wide" - height: 40px;</li>
+          <li>"large" - height: 44px;</li>
+          <li>"huge" - height: 48px;</li>
+        </ul>
+        <span>
+          This property can also contain the element's size in pixels as a string or a number.
+          <br />
+          For example: <code>size="41" or [size]="41"</code>
+        </span>
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isHideOldDays?: boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>Hide the days of the previous and next months. (default = false;)</span>
+        <br /><span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isHideDayoff?: boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>Hide display of dayoffs in "danger" color. (default = false;)</span>
+        <br /><span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isHorizont?: boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Renders a component with a horizontal layout.
+          (default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isReadOnly?: boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          This property makes the element read-only.
+          <br />(default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isStartSunday?: boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Specifies the start of the week from "Sunday".
+          By default, the start of the week is determined by the locale.
+          (default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isWeekNumber?: boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Specifies the display of the week number.
+          (default = false;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>sizeDayWeek?: number<br/>
+        &nbsp;&nbsp;| string<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Specifies the length of the name of the day of the week.
+          (default = 2;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<section mr-vr
+  id="config-provide">
+  <h4 class="app-hover-link">
+    1. Configuration with "cellSize: 'wide'" and "isHideOldDays: true".
+    <a [href]="urlCmCalendar + '#config-provide'">#</a>
+  </h4>
+  <p>
+    For example, let's prepare a configuration in which:
+  </p>
+  <ul>
+    <li>"cellSize" will have the value 'wide';</li>
+    <li>"isHideOldDays" will have the value "true";</li>
+  </ul>
+  <code><pre source="ts">
+const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
+  cellSize: 'wide',
+  isHideOldDays: true,
+&#125;;</pre></code>
+</section>
+
+
+<section mr-vr
+  id="config-params">
+  <h4 class="app-hover-link">
+    2. Parameter values: "cellSize=42" and "isHideOldDays=false".
+    <a [href]="urlCmCalendar + '#config-params'">#</a>
+  </h4>
+  <p>
+    Suppose we have a provider in our application with "GlnCalendarConfig" and all
+    input elements accept its default values.
+    We can change these values for an individual element.
+    To do this, you need to specify in this element those properties that do not match the
+    provider's configuration.
+  </p>
+  <p>
+    For example, let's specify the following parameters:
+  </p>
+  <code><pre source="html">
+  &lt;gln-calendar
+    <strong>[<i>cellSize</i>]="42"</strong>
+    <strong>[<i>isHideOldDays</i>]=false</strong>
+    [value]="value08a"&gt;
+  &lt;/gln-calendar&gt;</pre></code>
+  <p>
+    In other words, there is the following order of determining the configuration parameters:
+  </p>
+  <ul>
+    <li>
+      Standard values are taken (if there is one).
+    </li>
+    <li>
+      Values from the default configuration provider (if there is one).
+    </li>
+    <li>
+      Values from input parameters (if there is one).
+    </li>
+  </ul>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>1. Config: cellSize='wide', isHideOldDays: true.</em>
+      </small>
+    </div>
+    <div class="cncf-clnd">
+      <gln-calendar [value]="value08a">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem">
+    <div>
+      <small>
+        <em>2. Parameters: cellSize=42, isHideOldDays: false.</em>
+      </small>
+    </div>
+    <div class="cncf-clnd">
+      <gln-calendar [value]="value08b"
+        [cellSize]="42"
+        [isHideOldDays]="false">
+      </gln-calendar>
+    </div>
+  </div>
+
+</div>
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;1. Config: cellSize='wide', isHideOldDays: true.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cncf-clnd"&gt;
+      &lt;gln-calendar [value]="value08a"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;2. Parameters: cellSize=42, isHideOldDays: false.&lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cncf-clnd"&gt;
+      &lt;gln-calendar [value]="value08b"
+        [cellSize]="42"
+        [isHideOldDays]="false"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+import &#123;
+  GlnCalendarConfig, GLN_CALENDAR_CONFIG
+&#125; from 'gelenium-ui';
+
+const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
+  cellSize: 'wide',
+  isHideOldDays: true,
+&#125;;
+
+@Component(&#123;
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [&#123;
+    provide: GLN_CALENDAR_CONFIG, useValue: glnCalendarConfigDefault
+  &#125;],
+&#125;)
+export class CalendarComponent &#123;
+  public selectedDate: Date = this.getSelectedDate();
+
+  public value08a: Date | null = new Date(this.selectedDate);
+  public value08b: Date | null = new Date(this.selectedDate);
+
+  private getSelectedDate(): Date &#123;
+    const d1: Date = new Date();
+    const result: Date = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0);
+    result.setDate(result.getDate() + (d1.getDate() === 1 ? 1 : -1));
+    return result;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-calendar &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cncf-clnd &#123;
+    border: 1px solid cadetblue;
+    padding: 5px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<hr br-nn />

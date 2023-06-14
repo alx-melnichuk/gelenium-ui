@@ -19,7 +19,7 @@ export class CmCalendarComponent implements AfterViewInit {
 
   public baseRef: string = RouterConfig.get('BASE_REF');
   public urlCmCalendar = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CALENDAR');
-  // public urlPlCalendar = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CALENDAR');
+  public urlPlCalendar = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CALENDAR');
 
   constructor(private ngZone: NgZone) {
     // eslint-disable-next-line no-restricted-syntax
