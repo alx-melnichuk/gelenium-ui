@@ -161,7 +161,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     if (changes['isWeekNumber'] || (changes['config'] && this.isWeekNumber == null && this.currConfig.isWeekNumber != null)) {
       this.isWeekNumberVal = BooleanUtil.init(this.isWeekNumber) ?? !!this.currConfig.isWeekNumber;
-      isPrepareData = true;
     }
     if (changes['sizeDayWeek'] || (changes['config'] && this.sizeDayWeek == null && this.currConfig.sizeDayWeek != null)) {
       const sizeDayWeekStr: string = (this.sizeDayWeek?.toString() || this.currConfig.sizeDayWeek || '').toString();
@@ -207,7 +206,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     if (this.isWeekNumberVal == null) {
       this.isWeekNumberVal = !!this.currConfig.isWeekNumber;
-      isPrepareData = true;
     }
     if (this.sizeDayWeekVal == null) {
       const sizeDayWeekStr: string = (this.currConfig.sizeDayWeek || '').toString();
