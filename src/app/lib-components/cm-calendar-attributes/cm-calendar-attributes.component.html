@@ -100,7 +100,8 @@
       <i>To make the child element have the height of the parent, we specify "display: grid;"
         for a parent.</i>
     </li>
-    <li>"sizeDayWeek" - length of the name of the day of the week ([sizeDayWeek]="1")</li>
+    <li>"sizeDayWeek" - specifies the length of the name of the day of the week ([sizeDayWeek]="2")
+    </li>
   </ul>
 </section>
 
@@ -171,14 +172,14 @@
   </h4>
   <ul>
     <li>
-      "isHideDayoff" - hide the rendering of the output with the "danger" color (isHideDayoff);
+      "isHideDayoff" - hide display of dayoffs in "danger" color (isHideDayoff);
     </li>
     <li>
-      "isStartSunday" - set the start of the week from "Sunday".
+      "isStartSunday" - specifies the start of the week from "Sunday".
       <br />
       By default, the start of the week is determined by the locale.
     </li>
-    <li>"isWeekNumber" - indicates the display of the week number (isWeekNumber);</li>
+    <li>"isWeekNumber" - specifies the display of the week number (isWeekNumber);</li>
   </ul>
 </section>
 
@@ -198,11 +199,11 @@
 
   <div class="app-elem ">
     <div>
-      <small><em>Attribute: isStartSunday.</em></small>
+      <small><em>Attribute: isWeekNumber.</em></small>
     </div>
     <div class="cnat3-clnd">
-      <gln-calendar [value]="value02k"
-        isStartSunday>
+      <gln-calendar isWeekNumber
+        [value]="value02l">
       </gln-calendar>
     </div>
   </div>
@@ -213,11 +214,11 @@
 
   <div class="app-elem ">
     <div>
-      <small><em>Attribute: isWeekNumber.</em></small>
+      <small><em>Attribute: isStartSunday.</em></small>
     </div>
     <div class="cnat3-clnd">
-      <gln-calendar isWeekNumber
-        [value]="value02k">
+      <gln-calendar [value]="value02m"
+        isStartSunday>
       </gln-calendar>
     </div>
   </div>
@@ -229,7 +230,7 @@
     <div class="cnat3-clnd">
       <gln-calendar isWeekNumber
         isHorizont
-        [value]="value02l">
+        [value]="value02n">
       </gln-calendar>
     </div>
   </div>
