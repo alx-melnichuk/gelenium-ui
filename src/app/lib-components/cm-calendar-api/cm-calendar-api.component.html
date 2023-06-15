@@ -1,0 +1,244 @@
+<p>cm-calendar-api works!</p>
+<section mr-vr>
+  <h3 class="app-hover-link">
+    API: GlnCalendar.
+    <a [href]="urlCmCalendar + '#Api'">#</a>
+  </h3>
+  <p>
+    Selector:
+    <span fw500>gln-calendar</span>
+  </p>
+  <p>
+    Exported as:
+    <span fw500>glnCalendar</span>
+  </p>
+</section>
+
+<section mr-vr
+  id="api-properties">
+  <h4 class="app-hover-link">
+    Properties.
+    <a [href]="urlCmCalendar + '#api-properties'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>id: string;</code>
+      </td>
+      <td>
+        <span>ID of the native element.
+          <br />(default = `glncn-$&#123;uniqueIdCounter++&#125;`;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>config: GlnCalendarConfig<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Defines a configuration object.</span><br />
+        <a [href]="urlCmCalendar + '#config-interface'">More details.</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>cellSize: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Determines the cell size of the element (its height and width).
+          <br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"short" - height: 28px;</li>
+          <li>"small" - height: 32px;</li>
+          <li>"middle" - height: 36px (default);</li>
+          <li>"wide" - height: 40px;</li>
+          <li>"large" - height: 44px;</li>
+          <li>"huge" - height: 48px;</li>
+        </ul>
+        <span>
+          This property can also contain the element's size in pixels as a string or a number.
+          <br />
+          For example: <code>size="41" or [size]="41"</code>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isDisabled: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>The element is disabled.
+          <br />(default = false;) Attribute (no content).</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isHideOldDays: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Hide the days of the previous and next months.
+          <br />(default = false;) Attribute (no content).</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isHideDayoff: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Hide display of dayoffs in "danger" color.
+          <br />(default = false;) Attribute (no content).</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isHorizont: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Renders a component with a horizontal layout.
+          <br />(default = false;) Attribute (no content).</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isReadOnly: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Indicates that the element is read-only.
+          <br />(default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isStartSunday: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Specifies the start of the week from "Sunday".
+          By default, the start of the week is determined by the locale.
+          <br />(default = false;) Attribute (no content).</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isWeekNumber: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Specifies the display of the week number.
+          <br />(default = false;) Attribute (no content).</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>startDate: Date<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Specifies the start date of the calendar.
+          If not specified, the value of the "selected date" is used.
+          If no "selected date" is specified, then today is taken.
+          <br />(default = undefined;)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>value: Date<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Specifies the "selected date".
+          <br />(default = undefined;)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>sizeDayWeek: number<br/>
+        &nbsp;&nbsp;| string<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Specifies the length of the name of the day of the week.
+          <br />(default = 2;)
+          It can take the following values:
+        </span>
+        <ul>
+          <li>1 - (T);</li>
+          <li>2 - (Th);</li>
+          <li>3 - (Thu);</li>
+          <li>-1 - (Thursday); </li>
+          <li>"narrow" - (T);</li>
+          <li>"short" - (Thu);</li>
+          <li>"long" - (Thursday);</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>wdFull: string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Sets the width to the parent's width (width: 100%;).
+          At the same time, it proportionally stretches the internal elements.
+          <br />(default = false;) Attribute (no content).</span>
+      </td>
+    </tr>
+
+
+  </tbody>
+</table>

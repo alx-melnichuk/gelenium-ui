@@ -45,7 +45,7 @@ const siteUrlsCalendar: SiteUrl[] = [
   { label: 'Size', url: urlCalendar, fragment: 'Size' },
   { label: 'Palette', url: urlCalendar, fragment: 'Palette' },
   { label: 'Config', url: urlCalendar, fragment: 'Config' },
-  // { label: 'Api', url: urlCalendar, fragment: 'Api' },
+  { label: 'Api', url: urlCalendar, fragment: 'Api' },
 ];
 SiteMenuUtil.addItem('Components', 'Calendar', { label: 'Calendar', siteUrls: siteUrlsCalendar });
 

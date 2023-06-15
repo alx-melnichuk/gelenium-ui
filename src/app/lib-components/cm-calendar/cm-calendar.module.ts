@@ -5,6 +5,7 @@ import { CmCalendarBasicModule } from '../cm-calendar-basic/cm-calendar-basic.mo
 import { CmCalendarAttributesModule } from '../cm-calendar-attributes/cm-calendar-attributes.module';
 import { CmCalendarSizeModule } from '../cm-calendar-size/cm-calendar-size.module';
 import { CmCalendarConfigModule } from '../cm-calendar-config/cm-calendar-config.module';
+import { CmCalendarApiModule } from '../cm-calendar-api/cm-calendar-api.module';
 
 import { CmCalendarComponent } from './cm-calendar.component';
 import { CmCalendarRoutingModule } from './cm-calendar-routing.module';
@@ -17,6 +18,7 @@ import { CmCalendarRoutingModule } from './cm-calendar-routing.module';
     CmCalendarAttributesModule,
     CmCalendarSizeModule,
     CmCalendarConfigModule,
+    CmCalendarApiModule,
     CmCalendarRoutingModule,
   ],
   exports: [CmCalendarComponent],
