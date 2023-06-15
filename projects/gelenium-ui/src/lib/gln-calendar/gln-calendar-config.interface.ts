@@ -6,5 +6,6 @@ export interface GlnCalendarConfig {
   isReadOnly?: boolean | undefined;
   isStartSunday?: boolean | undefined;
   isWeekNumber?: boolean | undefined;
+  startDate?: Date | undefined;
   sizeDayWeek?: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
 }

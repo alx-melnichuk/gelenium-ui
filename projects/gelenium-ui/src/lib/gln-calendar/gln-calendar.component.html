@@ -72,7 +72,7 @@
     <ng-container [ngTemplateOutlet]="isWeekNumberVal ? templateWeekNumberHeader : null">
     </ng-container>
 
-    <div *ngFor="let cage of daysOfWeek; trackBy: trackByIndex;"
+    <div *ngFor="let cage of calendarDayNameList; trackBy: trackByIndex;"
       glncn-cage
       [attr.glncn-dayoff]="!isHideDayoffVal && (cage.dayWeek == 0 || cage.dayWeek == 6) ? '' : undefined"
       class="gln-calendar-header-cage">
@@ -83,28 +83,28 @@
   <div glncn-rows
     class="gln-calendar-list-days">
 
-    <ng-container [ngTemplateOutlet]="templateCellRow"
-      [ngTemplateOutletContext]="calendarRows[0]">
+    <ng-container [ngTemplateOutlet]="templateDayInfoRow"
+      [ngTemplateOutletContext]="calendarDayInfoRowList[0]">
     </ng-container>
 
-    <ng-container [ngTemplateOutlet]="templateCellRow"
-      [ngTemplateOutletContext]="calendarRows[1]">
+    <ng-container [ngTemplateOutlet]="templateDayInfoRow"
+      [ngTemplateOutletContext]="calendarDayInfoRowList[1]">
     </ng-container>
 
-    <ng-container [ngTemplateOutlet]="templateCellRow"
-      [ngTemplateOutletContext]="calendarRows[2]">
+    <ng-container [ngTemplateOutlet]="templateDayInfoRow"
+      [ngTemplateOutletContext]="calendarDayInfoRowList[2]">
     </ng-container>
 
-    <ng-container [ngTemplateOutlet]="templateCellRow"
-      [ngTemplateOutletContext]="calendarRows[3]">
+    <ng-container [ngTemplateOutlet]="templateDayInfoRow"
+      [ngTemplateOutletContext]="calendarDayInfoRowList[3]">
     </ng-container>
 
-    <ng-container [ngTemplateOutlet]="templateCellRow"
-      [ngTemplateOutletContext]="calendarRows[4]">
+    <ng-container [ngTemplateOutlet]="templateDayInfoRow"
+      [ngTemplateOutletContext]="calendarDayInfoRowList[4]">
     </ng-container>
 
-    <ng-container [ngTemplateOutlet]="templateCellRow"
-      [ngTemplateOutletContext]="calendarRows[5]">
+    <ng-container [ngTemplateOutlet]="templateDayInfoRow"
+      [ngTemplateOutletContext]="calendarDayInfoRowList[5]">
     </ng-container>
 
   </div>
@@ -127,7 +127,7 @@
 </ng-template>
 
 
-<ng-template #templateCellRow
+<ng-template #templateDayInfoRow
   let-dataCells="cellList"
   let-dataWeekNumberObj="weekNumberObj">
   <div glncn-row

@@ -33,4 +33,8 @@ export class DateUtil {
   public static getNameWeekday(date: Date, weekday?: 'long' | 'short' | 'narrow' | undefined): string {
     return new Intl.DateTimeFormat('default', { weekday: weekday }).format(date);
   }
+
+  public static addMonth(date: Date, delta: number = 1): Date {
+    return new Date(date.getFullYear(), date.getMonth() + delta, 1, 0, 0, 0, 0);
+  }
 }
