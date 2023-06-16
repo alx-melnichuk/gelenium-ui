@@ -80,7 +80,18 @@
     </div>
   </div>
 
+  <ng-container [ngTemplateOutlet]="templateDayInfoRowList">
+  </ng-container>
+
+</div>
+
+
+<ng-template #templateDayInfoRowList>
   <div glncn-rows
+    #dayInfoRowListRef
+    (focusin)="focusinDayInfoRowList($event)"
+    (focusout)="focusoutDayInfoRowList($event)"
+    (keydown)="keydownDayInfoRowList($event)"
     class="gln-calendar-list-days">
 
     <ng-container [ngTemplateOutlet]="templateDayInfoRow"
@@ -108,7 +119,7 @@
     </ng-container>
 
   </div>
-</div>
+</ng-template>
 
 
 <ng-template #templateWeekNumberHeader>
@@ -149,12 +160,13 @@
           , (cell.attr1 == 'slct' ? 'selected' : '')
           , (cell.attr1 == 'curr' ? 'current' : '')
           , (cell.attr1 == 'old' ? 'old' : '')
-          , (cell.isToday ? 'today' : '') 
+          , (cell.isToday ? 'today' : '')
           , (!isHideDayoffVal && (cell.dayWeek == 0 || cell.dayWeek == 6) ? 'dayoff' : '')
           , ('dayWeek' + cell.dayWeek)
           ]"
         [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && cell.attr1 == 'old') ? '' : undefined"
         [attr.tabindex]="!isDisabledVal && cell.attr1 == 'slct' ? 0 : -1"
+        [attr.data-label]="cell.label"
         (click)="clickSelectItem(cell)">
         {{ isHideOldDaysVal && cell.attr1 == 'old' ? '' : cell.day }}
       </button>

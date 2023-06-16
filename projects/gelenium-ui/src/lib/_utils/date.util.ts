@@ -34,7 +34,13 @@ export class DateUtil {
     return new Intl.DateTimeFormat('default', { weekday: weekday }).format(date);
   }
 
+  public static addYear(date: Date, delta: number = 1): Date {
+    return new Date(date.getFullYear() + delta, date.getMonth(), date.getDate(), 0, 0, 0, 0);
+  }
   public static addMonth(date: Date, delta: number = 1): Date {
-    return new Date(date.getFullYear(), date.getMonth() + delta, 1, 0, 0, 0, 0);
+    return new Date(date.getFullYear(), date.getMonth() + delta, date.getDate(), 0, 0, 0, 0);
+  }
+  public static addDay(date: Date, delta: number = 1): Date {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate() + delta, 0, 0, 0, 0);
   }
 }

@@ -47,6 +47,7 @@ gln-calendar {
 
   --glncn--item-def-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l));
   --glncn--item-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.15);
+  --glncn--item-foc-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.30);
 
   --glncn--dayoff-def-cl : hsl(var(--glncn--danger-h), var(--glncn--danger-s), var(--glncn--danger-l));
   --glncn--dayoff-dis-cl : hsla(var(--glncn--danger-h), var(--glncn--danger-s), var(--glncn--danger-l), 0.8);
@@ -340,11 +341,10 @@ gln-calendar {
     justify-content: space-between;
   }
 
-  // Level 4 Element "list days - row - item"
+  // Level 4 Element "List - DayInfoRow - item"
   &:not([dis]) [glncn-item] {
     cursor: pointer;
   }
-
   [glncn-item] {
     align-items: center;
     border-radius: var(--glncn-br-rd, 50%);
@@ -361,6 +361,7 @@ gln-calendar {
     padding: var(--glncn--item-pd);
     text-decoration: none;
     transition: background-color 180ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    user-select: none;
     vertical-align: middle;
     width: var(--glncn--item-wd);
     &:not([glncn-today]) {
@@ -371,83 +372,76 @@ gln-calendar {
     pointer-events: none;
   }
 
-  // row - item - curr
-  &:not([dis]) [glncn-curr] {
-    &:not(:hover) {
+  &:not([dis]) [glncn-item] {
+    &:not(:hover):not(:focus) {
       --glncn--curr-cl   : var(--glncn-def-curr-cl, var(--glncn--item-def-cl)); // 1.0+
       --glncn--curr-bg-cl: var(--glncn-def-curr-bg-cl, transparent);
-    }
-    &:hover:not([disabled]) {
-      --glncn--curr-cl   : var(--glncn-hov-curr-cl, var(--glncn-def-curr-cl, var(--glncn--item-def-cl))); // 1.0
-      --glncn--curr-bg-cl: var(--glncn-hov-curr-bg-cl, var(--glncn--item-hov-bg-cl));
-    }
-  }
-  &[dis] [glncn-curr] {
-    --glncn--curr-cl   : var(--glncn-dis-curr-cl, var(--glncn--sndr-dis-cl)); // 0.8+
-    --glncn--curr-bg-cl: var(--glncn-dis-item-bg-cl, transparent);
-  }
-
-  // row - item - old
-  &:not([dis]) [glncn-old] {
-    &:not(:hover) {
+      --glncn--slct-cl   : var(--glncn-def-slct-cl, var(--glncn--slct-def-cl)); // default-bg
+      --glncn--slct-bg-cl: var(--glncn-def-slct-bg-cl, var(--glncn--slct-def-bg-cl));
       --glncn--old-cl    : var(--glncn-def-old-cl, var(--glncn--cage-def-cl)); // 0.6+
       --glncn--old-bg-cl : var(--glncn-def-old-bg-cl, transparent);
     }
-    &:hover:not([disabled]) {
-      --glncn--old-cl    : var(--glncn-hov-old-cl, var(--glncn-def-old-cl, var(--glncn--cage-def-cl))); // 0.6
-      --glncn--old-bg-cl : var(--glncn-hov-old-bg-cl, var(--glncn-def-old-bg-cl, var(--glncn--item-hov-bg-cl)));
-    }
-  }
-  &[dis] [glncn-old] {
-    --glncn--old-cl    : var(--glncn-dis-old-cl, var(--glncn--cage-dis-cl)); // 0.5+
-    --glncn--old-bg-cl : var(--glncn-dis-old-bg-cl, transparent);
-  }
-
-  // row - item - dayoff
-  &:not([dis]) [glncn-dayoff] {
-    &[glncn-curr] {
-      --glncn--dayoff-cl: var(--glncn-def-dayoff-cl, var(--glncn--dayoff-def-cl)); // 1.0+
-    }
-    &[glncn-old] {
-      --glncn--dayoff-cl: var(--glncn-def-dayoff-item-cl, var(--glncn--dayoff-old-def-cl)); // 0.6+
-    }
-  }
-  &[dis] [glncn-dayoff] {
-    &[glncn-curr] {
-      --glncn--dayoff-cl  : var(--glncn-dis-dayoff-cl, var(--glncn--dayoff-dis-cl)); // 0.8+
-    }
-    &[glncn-old] {
-      --glncn--dayoff-cl  : var(--glncn-dis-dayoff-item-cl, var(--glncn--dayoff-old-dis-cl)); // 0.5+
-    }
-  }
-  
-  // row - item - slct
-  &:not([dis]) [glncn-slct] {
-    &:not(:hover) {
-      --glncn--slct-cl   : var(--glncn-def-slct-cl, var(--glncn--slct-def-cl));
-      --glncn--slct-bg-cl: var(--glncn-def-slct-bg-cl, var(--glncn--slct-def-bg-cl));
-    }
-    &:hover:not([disabled]) {
-      --glncn--slct-cl   : var(--glncn-hov-slct-cl, var(--glncn-def-slct-cl, var(--glncn--slct-def-cl)));
+    &:hover:not(:focus) {
+      --glncn--curr-cl   : var(--glncn-hov-curr-cl, var(--glncn-def-curr-cl, var(--glncn--item-def-cl))); // 1.0
+      --glncn--curr-bg-cl: var(--glncn-hov-curr-bg-cl, var(--glncn--item-hov-bg-cl)); // primary 0.15
+      --glncn--slct-cl   : var(--glncn-hov-slct-cl, var(--glncn-def-slct-cl, var(--glncn--slct-def-cl))); // default-bg
       --glncn--slct-bg-cl: var(--glncn-hov-slct-bg-cl, var(--glncn--slct-hov-bg-cl));
+      --glncn--old-cl    : var(--glncn-hov-old-cl, var(--glncn-def-old-cl, var(--glncn--cage-def-cl))); // 0.6
+      --glncn--old-bg-cl : var(--glncn-hov-old-bg-cl, var(--glncn-def-old-bg-cl, var(--glncn--item-hov-bg-cl))); // primary 0.15
     }
-  }
-  &[dis] [glncn-slct] {
-    --glncn--slct-cl   : var(--glncn-dis-slct-cl, var(--glncn--slct-def-cl));
-    --glncn--slct-bg-cl: var(--glncn-dis-slct-bg-cl, var(--glncn--slct-dis-bg-cl));
-  }
-
-  [glncn-item] {
-    color: var(--glncn--slct-cl, var(--glncn--dayoff-cl, var(--glncn--curr-cl, var(--glncn--old-cl))));
-    background-color: var(--glncn--slct-bg-cl, var(--glncn--curr-bg-cl, var(--glncn--old-bg-cl)));
-  }
-
-  &:not([dis]) [glncn-today] {
+    &:focus {
+      --glncn--curr-cl   : var(--glncn-foc-curr-cl, var(--glncn-def-curr-cl, var(--glncn--item-def-cl))); // 1.0
+      --glncn--curr-bg-cl: var(--glncn-foc-curr-bg-cl, var(--glncn--item-foc-bg-cl));  // primary 0.3
+      --glncn--slct-cl   : var(--glncn-foc-slct-cl, var(--glncn-def-slct-cl, var(--glncn--slct-def-cl))); // default-bg
+      --glncn--slct-bg-cl: var(--glncn-foc-slct-bg-cl, var(--glncn--slct-hov-bg-cl));
+      --glncn--old-cl    : var(--glncn-foc-old-cl, var(--glncn-def-old-cl, var(--glncn--cage-def-cl))); // 0.6
+      --glncn--old-bg-cl : var(--glncn-foc-old-bg-cl, var(--glncn-def-old-bg-cl, var(--glncn--item-foc-bg-cl))); // primary 0.2
+    }
+    --glncn--curr-dayoff-cl: var(--glncn-def-dayoff-cl, var(--glncn--dayoff-def-cl)); // 1.0+
+    --glncn--old-dayoff-cl: var(--glncn-def-dayoff-item-cl, var(--glncn--dayoff-old-def-cl)); // 0.6+
     --glncn--today-br-cl: var(--glncn-def-today-br-cl, var(--glncn--today-def-br-cl));
   }
-  &[dis] [glncn-today] {
+  &[dis] [glncn-item] {
+    --glncn--curr-cl   : var(--glncn-dis-curr-cl, var(--glncn--sndr-dis-cl)); // 0.8+
+    --glncn--curr-bg-cl: var(--glncn-dis-item-bg-cl, transparent);
+    --glncn--slct-cl   : var(--glncn-dis-slct-cl, var(--glncn--slct-def-cl)); // default-bg
+    --glncn--slct-bg-cl: var(--glncn-dis-slct-bg-cl, var(--glncn--slct-dis-bg-cl));
+    --glncn--old-cl    : var(--glncn-dis-old-cl, var(--glncn--cage-dis-cl)); // 0.5+
+    --glncn--old-bg-cl : var(--glncn-dis-old-bg-cl, transparent);
+
+    --glncn--curr-dayoff-cl: var(--glncn-dis-dayoff-cl, var(--glncn--dayoff-dis-cl)); // 0.8+
+    --glncn--old-dayoff-cl: var(--glncn-dis-dayoff-item-cl, var(--glncn--dayoff-old-dis-cl)); // 0.5+
     --glncn--today-br-cl: var(--glncn-dis-today-br-cl, var(--glncn--sndr-dis-cl));
   }
+  [glncn-item] {
+    &[glncn-slct] {
+      color: var(--glncn--slct-cl);
+      background-color: var(--glncn--slct-bg-cl);
+    }
+    &[glncn-curr] {
+      background-color: var(--glncn--curr-bg-cl);
+    }
+    &[glncn-old] {
+      background-color: var(--glncn--old-bg-cl);
+    }
+    &:not(&[glncn-dayoff]) {
+      &[glncn-curr] {
+        color: var(--glncn--curr-cl);
+      }
+      &[glncn-old] {
+        color: var(--glncn--old-cl);
+      }
+    }
+    &[glncn-dayoff] {
+      &[glncn-curr] {
+        color: var(--glncn--curr-dayoff-cl);
+      }
+      &[glncn-old] {
+        color: var(--glncn--old-dayoff-cl);
+      }
+    }
+  }
+
   [glncn-today] {
     border-width: var(--glncn-today-br-wd, 1px);
     border-style: var(--glncn-today-br-st, solid);

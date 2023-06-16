@@ -15,6 +15,7 @@ import {
   Renderer2,
   SimpleChanges,
   SkipSelf,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlContainer, ValidationErrors } from '@angular/forms';
@@ -39,8 +40,8 @@ interface CalendarDayInfo {
   day: number;
   dayWeek: number;
   attr1: string;
+  label: string;
   isToday?: boolean | undefined;
-  isDayoff?: boolean | undefined;
 }
 interface CalendarDayInfoRow {
   cellList: CalendarDayInfo[];
@@ -88,14 +89,17 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public startDate: Date | null | undefined;
   @Input()
-  public value: Date | null | undefined;
-  @Input()
   public sizeDayWeek: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
+  @Input()
+  public value: Date | null | undefined;
   @Input()
   public wdFull: string | null | undefined;
 
   @Output()
   readonly selected: EventEmitter<Date | null> = new EventEmitter();
+
+  @ViewChild('dayInfoRowListRef', { read: ElementRef<HTMLDivElement>, static: false })
+  public dayInfoRowListRef: ElementRef<HTMLDivElement> | undefined;
 
   public calendarDayInfoRowList: CalendarDayInfoRow[] = [];
   public calendarDayNameList: CalendarDayName[] = [];
@@ -110,6 +114,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
   public isStartSundayVal: boolean | null = null; // Binding attribute "isStartSunday".
   public isWeekNumberVal: boolean | null = null; // Binding attribute "isWeekNumber".
+  public markedDate: Date | null = null;
   public startDateVal: Date | null = null; // Binding attribute "startDate".
   public nameMonth: string = '';
   public nameYear: string = '';
@@ -130,7 +135,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    let isPrepareData: boolean = !!changes['value'];
+    let isPrepareData: boolean = false;
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
@@ -175,6 +180,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       const sizeDayWeekStr: string = (this.sizeDayWeek?.toString() || this.currConfig.sizeDayWeek || '').toString();
       this.sizeDayWeekVal = this.convertSizeDayWeek(sizeDayWeekStr, WEEKDAY_NUM_DEFAULT);
       isPrepareData = true;
+    }
+    if (changes['value']) {
+      this.markedDate = this.value || null;
     }
 
     if (isPrepareData && this.sizeDayWeekVal != null) {
@@ -281,6 +289,46 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     this.selected.emit(newDate);
   }
 
+  public focusinDayInfoRowList(event: FocusEvent): void {
+    console.log(`focusinDayInfoRowList() event=`, event); // #
+    // if (event.target != null) {
+    //   const htmlElement: HTMLElement = event.target as HTMLElement;
+    //   htmlElement.focus()
+    // }
+  }
+  public focusoutDayInfoRowList(event: FocusEvent): void {
+    console.log(`focusoutDayInfoRowList() event=`, event); // #
+  }
+  public keydownDayInfoRowList(event: KeyboardEvent): void {
+    console.log(`keydownDayInfoRowList() event=`, event); // #
+    // event.key === 'ArrowRight' 'ArrowLeft' 'ArrowUp' 'ArrowDown' 'Tab' 'Escape' 'Enter' 'June 6, 2023'
+    if (this.markedDate != null) {
+      event.preventDefault();
+      event.stopPropagation();
+      let delta: number = 0;
+      if (!this.isHorizontVal) {
+        if ('ArrowRight' === event.key) {
+          delta = 1;
+        } else if ('ArrowLeft' === event.key) {
+          delta = -1;
+        } else if ('ArrowUp' === event.key) {
+          delta = -7;
+        } else if ('ArrowDown' === event.key) {
+          delta = 7;
+        }
+      }
+      const newMarkedDate: Date = DateUtil.addDay(this.markedDate, delta);
+      const label: string | null = this.getLabelByDate(newMarkedDate) || '';
+      this.markedDate = newMarkedDate;
+      const elem: HTMLElement | null = this.dayInfoRowListRef?.nativeElement.querySelector(`button[data-label='${label}']`) as HTMLElement;
+      if (elem != null) {
+        console.log(`elem!=null-`, elem); // #
+        setTimeout(() => {
+          elem.focus();
+        }, 50);
+      }
+    }
+  }
   // ** Private methods **
 
   private updateValue(selected: Date | null, sizeDayWeek: number, isStartSunday: boolean, startDate: Date | null): void {
@@ -363,7 +411,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
         calendarRow = { cellList: [], weekNumberObj: { weekNumber: DateUtil.getWeekNumber(itemDate) } };
         result.push(calendarRow);
       }
-      calendarRow?.cellList.push({ year, month, day, dayWeek, attr1, isToday });
+      const label: string = this.getLabelByDate(itemDate) || '';
+      calendarRow?.cellList.push({ year, month, day, dayWeek, attr1, label, isToday });
       idx++;
     }
     return result;
@@ -374,6 +423,13 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     return he1.weekInfo?.firstDay || 0;
   }
 
+  private getLabelByDate(date: Date | null): string | null {
+    let result: string | null = null;
+    if (date != null) {
+      result = new Intl.DateTimeFormat('default', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
+    } // 'Thu, June 8, 2023'
+    return result;
+  }
   private convertSize(size: string, defaultValue: number): number {
     const sizeNum: number = Number.parseFloat(size);
     return !Number.isNaN(sizeNum) && sizeNum > 0 ? sizeNum : defaultValue;
