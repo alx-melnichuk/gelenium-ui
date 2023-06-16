@@ -23,6 +23,13 @@ public model01: Date | null = new Date();</pre>
   </code>
 </section>
 
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabled01a=!isDisabled01a" />
+    isDisabled01a
+  </label>
+</section>
 
 <div class="app-group">
 
@@ -38,8 +45,12 @@ public model01: Date | null = new Date();</pre>
       </small>
     </div>
     <div class="cnbs-clnd">
-      <gln-calendar [value]="value01a">
+      <gln-calendar [value]="value01a"
+        [isDisabled]="isDisabled01a"
+        (selected)="value01a=$event">
       </gln-calendar>
+      <!-- <gln-calendar [value]="value01a">
+      </gln-calendar> -->
     </div>
   </div>
 

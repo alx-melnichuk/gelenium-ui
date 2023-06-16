@@ -15,7 +15,7 @@ const logLabel = 'ComponentsCalendar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CmCalendarComponent implements AfterViewInit {
-  public showNum = '';
+  public showNum = '01';
 
   public baseRef: string = RouterConfig.get('BASE_REF');
   public urlCmCalendar = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CALENDAR');
