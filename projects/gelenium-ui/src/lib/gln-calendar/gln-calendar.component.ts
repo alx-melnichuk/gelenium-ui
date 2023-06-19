@@ -106,7 +106,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public cellSizeVal: number | null = null; // Binding attribute "cellSize".
   public currConfig: GlnCalendarConfig;
   public errors: ValidationErrors | null = null;
-  public initDate: Date | null = null;
+  public initDateStart: Date = new Date();
+  public initDateFinish: Date = new Date();
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isHideOldDaysVal: boolean | null = null; // Binding attribute "isHideOldDays".
   public isHideDayoffVal: boolean | null = null; // Binding attribute "isHideDayoff".
@@ -139,7 +140,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     if (changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
-
     if (changes['cellSize'] || (changes['config'] && this.cellSize == null && this.currConfig.cellSize != null)) {
       const cellSizeStr: string = (this.cellSize || this.currConfig.cellSize || '').toString();
       this.cellSizeVal = this.convertSize(cellSizeStr, CELL_SIZE[cellSizeStr] || CELL_SIZE['middle']);
@@ -183,6 +183,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     if (changes['value']) {
       this.markedDate = this.value || null;
+      isPrepareData = true;
     }
 
     if (isPrepareData && this.sizeDayWeekVal != null) {
@@ -263,8 +264,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       console.log(`clickPrev() return;`); // #
       return;
     }
-    if (this.initDate != null && this.sizeDayWeekVal != null) {
-      const date: Date = DateUtil.addMonth(this.initDate, -1);
+    if (this.sizeDayWeekVal != null) {
+      const date: Date = DateUtil.addMonth(this.initDateStart, -1);
       this.updateValue(this.value || null, this.sizeDayWeekVal, !!this.isStartSundayVal, date);
     }
   }
@@ -274,8 +275,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       console.log(`clickNext() return;`); // #
       return;
     }
-    if (this.initDate != null && this.sizeDayWeekVal != null) {
-      const date: Date = DateUtil.addMonth(this.initDate, 1);
+    if (this.sizeDayWeekVal != null) {
+      const date: Date = DateUtil.addMonth(this.initDateStart, 1);
       this.updateValue(this.value || null, this.sizeDayWeekVal, !!this.isStartSundayVal, date);
     }
   }
@@ -290,57 +291,86 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   }
 
   public focusinDayInfoRowList(event: FocusEvent): void {
-    console.log(`focusinDayInfoRowList() event=`, event); // #
+    console.log(`focusinDayInfoRowList()  data-label=${(event.target as HTMLElement)?.getAttribute('data-label')}`); // #
     // if (event.target != null) {
     //   const htmlElement: HTMLElement = event.target as HTMLElement;
     //   htmlElement.focus()
     // }
   }
   public focusoutDayInfoRowList(event: FocusEvent): void {
-    console.log(`focusoutDayInfoRowList() event=`, event); // #
+    console.log(`focusoutDayInfoRowList() data-label=${(event.target as HTMLElement)?.getAttribute('data-label')}`); // #
   }
   public keydownDayInfoRowList(event: KeyboardEvent): void {
-    console.log(`keydownDayInfoRowList() event=`, event); // #
+    console.log(`keydownDayInfoRowList()  data-label=${(event.target as HTMLElement)?.getAttribute('data-label')}`); // #
     // event.key === 'ArrowRight' 'ArrowLeft' 'ArrowUp' 'ArrowDown' 'Tab' 'Escape' 'Enter' 'June 6, 2023'
     if (this.markedDate != null) {
-      event.preventDefault();
-      event.stopPropagation();
       let delta: number = 0;
-      if (!this.isHorizontVal) {
-        if ('ArrowRight' === event.key) {
-          delta = 1;
-        } else if ('ArrowLeft' === event.key) {
-          delta = -1;
-        } else if ('ArrowUp' === event.key) {
-          delta = -7;
-        } else if ('ArrowDown' === event.key) {
-          delta = 7;
+      const deltaRightLeft: number = !this.isHorizontVal ? 1 : 7;
+      const deltaUpDown: number = !this.isHorizontVal ? -7 : -1;
+      if ('ArrowRight' === event.key) {
+        delta = deltaRightLeft;
+      } else if ('ArrowLeft' === event.key) {
+        delta = -deltaRightLeft;
+      } else if ('ArrowUp' === event.key) {
+        delta = deltaUpDown;
+      } else if ('ArrowDown' === event.key) {
+        delta = -deltaUpDown;
+      }
+      if (delta != 0) {
+        const currElem: HTMLElement | null = this.getElementByDate(this.dayInfoRowListRef, this.getLabelByDate(this.markedDate));
+        const newMarkedDate: Date = DateUtil.addDay(this.markedDate, delta);
+        if (DateUtil.compare(newMarkedDate, this.initDateStart) === 1) {
+          console.log(`newMarkedDate < this.initDateStart`); // #
+        } else if (DateUtil.compare(this.initDateFinish, newMarkedDate) === 1) {
+          console.log(`this.initDateFinish < newMarkedDate`); // #
+        } else {
+          const newElem: HTMLElement | null = this.getElementByDate(this.dayInfoRowListRef, this.getLabelByDate(newMarkedDate));
+          if (newElem != null) {
+            this.markedDate = newMarkedDate;
+            HtmlElemUtil.setAttr(this.renderer, HtmlElemUtil.getElementRef(currElem), 'tabindex', '-1');
+            HtmlElemUtil.setAttr(this.renderer, HtmlElemUtil.getElementRef(newElem), 'tabindex', '0');
+            Promise.resolve().then(() => {
+              newElem.focus();
+            });
+          }
+        }
+      } else if (' ' === event.key || 'Enter' === event.key) {
+        const elem: HTMLElement | null = this.getElementByDate(this.dayInfoRowListRef, this.getLabelByDate(this.markedDate));
+        if (elem != null) {
+          delta = 9;
+          this.selected.emit(new Date(this.markedDate));
         }
       }
-      const newMarkedDate: Date = DateUtil.addDay(this.markedDate, delta);
-      const label: string | null = this.getLabelByDate(newMarkedDate) || '';
-      this.markedDate = newMarkedDate;
-      const elem: HTMLElement | null = this.dayInfoRowListRef?.nativeElement.querySelector(`button[data-label='${label}']`) as HTMLElement;
-      if (elem != null) {
-        console.log(`elem!=null-`, elem); // #
-        setTimeout(() => {
-          elem.focus();
-        }, 50);
+
+      if (delta != 0) {
+        event.preventDefault();
+        event.stopPropagation();
       }
     }
   }
   // ** Private methods **
 
+  private getElementByDate(dayInfoRowListRef: ElementRef<HTMLDivElement> | undefined, label: string | null): HTMLElement | null {
+    let result: HTMLElement | null = null;
+    if (!!dayInfoRowListRef && !!label) {
+      result = dayInfoRowListRef.nativeElement.querySelector(`button[data-label='${label}']`) as HTMLElement;
+    }
+    return result;
+  }
   private updateValue(selected: Date | null, sizeDayWeek: number, isStartSunday: boolean, startDate: Date | null): void {
     const today: Date = new Date();
-    this.initDate = startDate || selected || today;
+    const initDate: Date = startDate || selected || today;
+    const year: number = initDate.getFullYear();
+    const month: number = initDate.getMonth();
+    this.initDateStart = new Date(year, month, 1, 0, 0, 0, 0);
+    this.initDateFinish = DateUtil.addDay(new Date(year, month + 1, 1, 0, 0, 0, 0), -1);
 
-    this.nameYear = DateUtil.getNameYear(this.initDate, 'numeric');
-    this.nameMonth = DateUtil.getNameMonth(this.initDate, 'long');
+    this.nameYear = DateUtil.getNameYear(this.initDateStart, 'numeric');
+    this.nameMonth = DateUtil.getNameMonth(this.initDateStart, 'long');
 
     const dayStartWeek: number = !isStartSunday ? this.getDayStartWeekByLocale() : 0;
     this.calendarDayNameList = this.getCalendarDayNameList(sizeDayWeek, dayStartWeek);
-    this.calendarDayInfoRowList = this.getCalendarDayInfoRowList(selected, dayStartWeek, this.initDate, today);
+    this.calendarDayInfoRowList = this.getCalendarDayInfoRowList(selected, dayStartWeek, this.initDateStart, today);
 
     this.changeDetectorRef.markForCheck();
   }

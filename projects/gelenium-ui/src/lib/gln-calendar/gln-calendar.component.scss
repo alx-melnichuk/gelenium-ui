@@ -179,9 +179,9 @@ gln-calendar {
     user-select: none;
     vertical-align: middle;
   }
-  &[hor] [glncn-switch] {
-    display: none;
-  }
+  // #&[hor] [glncn-switch] {
+  // #  display: none;
+  // #}
 
   // Level 5 Element svg "icon"
   [glncn-icon] {
@@ -471,5 +471,4 @@ gln-calendar {
     padding: var(--glncn--item-pd);
     width: var(--glncn--item-wd);
   }
-
 }

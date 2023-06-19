@@ -21,9 +21,10 @@
       </button>
 
       <button glncn-switch
+        *ngIf="!isDisabledVal && !isHorizontVal"
         class="gln-calendar-switch"
-        tabindex="0"
         type="button"
+        [attr.tabindex]="!isDisabledVal ? 0 : -1"
         [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
         (click)="clickSwitch()">
         <svg glncn-icon
@@ -40,6 +41,7 @@
     <button glncn-prev
       class="gln-calendar-prev"
       type="button"
+      [attr.tabindex]="!isDisabledVal ? 0 : -1"
       [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
       (click)="clickPrev()">
       <svg glncn-icon
@@ -54,6 +56,7 @@
     <button glncn-next
       class="gln-calendar-next"
       type="button"
+      [attr.tabindex]="!isDisabledVal ? 0 : -1"
       [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
       (click)="clickNext()">
       <svg glncn-icon
