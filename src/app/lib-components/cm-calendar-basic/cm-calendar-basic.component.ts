@@ -26,6 +26,7 @@ export class CmCalendarBasicComponent {
   public selectedDate: Date = this.getSelectedDate();
 
   public value01a: Date | null = new Date(this.selectedDate);
+  public value01b: Date | null = new Date(this.selectedDate);
 
   isDisabled01a = false;
 

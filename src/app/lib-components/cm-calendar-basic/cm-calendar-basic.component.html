@@ -54,6 +54,28 @@ public model01: Date | null = new Date();</pre>
     </div>
   </div>
 
+  <div class="app-elem">
+    <div>
+      <small><em>Attribute: value</em></small>
+    </div>
+    <div class="cnbs-mb">
+      <small>
+        <em>
+          Model: {{ value01b == null ? 'null' : value01b | date:'YYYY/MM/dd' }}
+        </em>
+      </small>
+    </div>
+    <div class="cnbs-clnd">
+      <gln-calendar [value]="value01b"
+        isHorizont
+        [isDisabled]="isDisabled01a"
+        (selected)="value01b=$event">
+      </gln-calendar>
+      <!-- <gln-calendar [value]="value01a">
+      </gln-calendar> -->
+    </div>
+  </div>
+
 </div>
 
 
