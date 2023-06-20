@@ -22,11 +22,11 @@ export class DateUtil {
     return week;
   }
   /** Get the name of the year for the specified date. */
-  public static getNameYear(date: Date, year?: 'numeric' | '2-digit' | undefined): string {
+  public static getYearName(date: Date, year?: 'numeric' | '2-digit' | undefined): string {
     return new Intl.DateTimeFormat('default', { year: year }).format(date);
   }
   /** Get the name of the month for the specified date. */
-  public static getNameMonth(date: Date, month?: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined): string {
+  public static getMonthName(date: Date, month?: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined): string {
     return new Intl.DateTimeFormat('default', { month: month }).format(date);
   }
 
