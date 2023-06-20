@@ -5,19 +5,21 @@
     <div glncn-month2year
       class="gln-calendar-month2year">
       <button glncn-sign
-        glncn-month
+        glncn-month-name
         class="gln-calendar-month"
         type="button"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined">
-        {{ nameMonth }}
+        [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
+        (click)="clickSwitch()">
+        {{ calendarMonthName }}
       </button>
 
       <button glncn-sign
-        glncn-year
+        glncn-year-name
         class="gln-calendar-year"
         type="button"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined">
-        {{ nameYear }}
+        [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
+        (click)="clickSwitch()">
+        {{ calendarYearName }}
       </button>
 
       <button glncn-switch
@@ -42,7 +44,8 @@
       class="gln-calendar-prev"
       type="button"
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
-      [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
+      [attr.disabled]="isDisabledVal || isReadOnlyVal || view !== VIEW_DAY? '' : undefined"
+      [attr.glncn-hide]="view !== VIEW_DAY ? '' : undefined"
       (click)="clickPrev()">
       <svg glncn-icon
         class="gln-calendar-t-icon icon-prev"
@@ -57,7 +60,8 @@
       class="gln-calendar-next"
       type="button"
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
-      [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
+      [attr.disabled]="isDisabledVal || isReadOnlyVal || view !== VIEW_DAY ? '' : undefined"
+      [attr.glncn-hide]="view !== VIEW_DAY ? '' : undefined"
       (click)="clickNext()">
       <svg glncn-icon
         class="gln-calendar-t-icon icon-next"
@@ -69,60 +73,80 @@
     </button>
   </div>
 
-  <div glncn-header
-    class="gln-calendar-header">
+  <div glncn-view-day
+    class="gln-calendar-view-day">
 
-    <ng-container [ngTemplateOutlet]="isWeekNumberVal ? templateWeekNumberHeader : null">
-    </ng-container>
+    <div glncn-header
+      class="gln-calendar-header"
+      [attr.glncn-hide]="view !== VIEW_DAY ? '' : undefined">
 
-    <div *ngFor="let cage of calendarDayNameList; trackBy: trackByIndex;"
-      glncn-cage
-      [attr.glncn-dayoff]="!isHideDayoffVal && (cage.dayWeek == 0 || cage.dayWeek == 6) ? '' : undefined"
-      class="gln-calendar-header-cage">
-      {{ cage.name }}
+      <ng-container [ngTemplateOutlet]="isWeekNumberVal ? templateWeekNumberHeader : null">
+      </ng-container>
+
+      <div *ngFor="let cage of calendarDayNameList; trackBy: trackByIndex;"
+        glncn-cage
+        [attr.glncn-dayoff]="!isHideDayoffVal && (cage.dayWeek == 0 || cage.dayWeek == 6) ? '' : undefined"
+        class="gln-calendar-cage">
+        {{ cage.name }}
+      </div>
     </div>
-  </div>
 
-  <ng-container [ngTemplateOutlet]="templateDayInfoRowList">
-  </ng-container>
+    <div glncn-rows
+      #dayInfoRowListRef
+      (keydown)="keydownDayInfoRowList($event)"
+      class="gln-calendar-list-days"
+      [attr.glncn-hide]="view !== VIEW_DAY ? '' : undefined">
+
+      <ng-container [ngTemplateOutlet]="templateDayInfoRow"
+        [ngTemplateOutletContext]="calendarDayInfoRowList[0]">
+      </ng-container>
+
+      <ng-container [ngTemplateOutlet]="templateDayInfoRow"
+        [ngTemplateOutletContext]="calendarDayInfoRowList[1]">
+      </ng-container>
+
+      <ng-container [ngTemplateOutlet]="templateDayInfoRow"
+        [ngTemplateOutletContext]="calendarDayInfoRowList[2]">
+      </ng-container>
+
+      <ng-container [ngTemplateOutlet]="templateDayInfoRow"
+        [ngTemplateOutletContext]="calendarDayInfoRowList[3]">
+      </ng-container>
+
+      <ng-container [ngTemplateOutlet]="templateDayInfoRow"
+        [ngTemplateOutletContext]="calendarDayInfoRowList[4]">
+      </ng-container>
+
+      <ng-container [ngTemplateOutlet]="templateDayInfoRow"
+        [ngTemplateOutletContext]="calendarDayInfoRowList[5]">
+      </ng-container>
+
+    </div>
+
+    <div *ngIf="view == VIEW_MONTH"
+      glncn-view-month
+      class="gln-calendar-view-month">
+      <div *ngFor="let monthCell of monthCells; index as monthIdx; trackBy: trackByIndex;"
+        glncn-month-wrapper
+        class="gln-calendar-month-cell-wrapper">
+        <button type="button"
+          tabindex="0"
+          glncn-month-cell
+          glncn-tint
+          [attr.glncn-slct]="monthIdx === calendarMonthValue ? '' : undefined"
+          [attr.glncn-curr]="monthIdx !== calendarMonthValue ? '' : undefined"
+          [ngClass]="['gln-calendar-month-cell'
+          , (monthIdx === calendarMonthValue ? 'selected' : '')
+          ]"
+          (click)="clickMonthCell(monthIdx)">
+          {{ monthCell }}
+        </button>
+      </div>
+    </div>
+
+  </div>
 
 </div>
-
-
-<ng-template #templateDayInfoRowList>
-  <div glncn-rows
-    #dayInfoRowListRef
-    (focusin)="focusinDayInfoRowList($event)"
-    (focusout)="focusoutDayInfoRowList($event)"
-    (keydown)="keydownDayInfoRowList($event)"
-    class="gln-calendar-list-days">
-
-    <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-      [ngTemplateOutletContext]="calendarDayInfoRowList[0]">
-    </ng-container>
-
-    <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-      [ngTemplateOutletContext]="calendarDayInfoRowList[1]">
-    </ng-container>
-
-    <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-      [ngTemplateOutletContext]="calendarDayInfoRowList[2]">
-    </ng-container>
-
-    <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-      [ngTemplateOutletContext]="calendarDayInfoRowList[3]">
-    </ng-container>
-
-    <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-      [ngTemplateOutletContext]="calendarDayInfoRowList[4]">
-    </ng-container>
-
-    <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-      [ngTemplateOutletContext]="calendarDayInfoRowList[5]">
-    </ng-container>
-
-  </div>
-</ng-template>
 
 
 <ng-template #templateWeekNumberHeader>
@@ -159,7 +183,7 @@
         [attr.glncn-old]="cell.attr1 == 'old' ? '' : undefined"
         [attr.glncn-today]="cell.isToday ? '' : undefined"
         [attr.glncn-dayoff]="!isHideDayoffVal && (cell.dayWeek == 0 || cell.dayWeek == 6) ? '' : undefined"
-        [ngClass]="['gln-calendar-day'
+        [ngClass]="['gln-calendar-day-cell'
           , (cell.attr1 == 'slct' ? 'selected' : '')
           , (cell.attr1 == 'curr' ? 'current' : '')
           , (cell.attr1 == 'old' ? 'old' : '')

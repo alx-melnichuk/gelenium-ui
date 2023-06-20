@@ -63,6 +63,10 @@ gln-calendar {
   --glncn--slct-hov-bg-cl: hsl(var(--glncn--primary-h), var(--glncn--primary-s), calc(var(--glncn--primary-l) - 7%));
   --glncn--slct-dis-bg-cl: hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.40);
 
+  [glncn-hide] {
+    opacity: 0;
+  }
+
   // Level 1 Element "wrapper"
   &>[glncn-wrapper] {
     display: flex;
@@ -80,6 +84,7 @@ gln-calendar {
 
   // Level 2 Element "title"
   [glncn-title] {
+    // # outline: 1px solid green;
     align-items: center;
     display: flex;
     font-family: inherit;
@@ -133,14 +138,14 @@ gln-calendar {
     cursor: pointer;
   }
   // Level 4 Element title button "name month"
-  [glncn-month] {
+  [glncn-month-name] {
     min-width: var(--glncntb--month-mn-wd);
   }
   // Level 4 Element title button "name year"
-  [glncn-year] {
+  [glncn-year-name] {
     min-width: var(--glncntb--year-mn-wd);
   }
-  [glncn-month] ~ [glncn-year] {
+  [glncn-month-name] ~ [glncn-year-name] {
     padding-left: 0.5ch;
     margin-right: 0.5ch;
   }
@@ -179,9 +184,6 @@ gln-calendar {
     user-select: none;
     vertical-align: middle;
   }
-  // #&[hor] [glncn-switch] {
-  // #  display: none;
-  // #}
 
   // Level 5 Element svg "icon"
   [glncn-icon] {
@@ -272,7 +274,14 @@ gln-calendar {
     position: relative;
   }
 
-  // Level 2 Element "glncn-header"
+  // Level 2 Element "glncn-view-day"
+  [glncn-view-day] {
+    display: flex;
+    flex-direction: var(--glncn--dir-lv1);
+    position: relative;
+  }
+
+  // Level 3 Element "glncn-header"
   [glncn-header] {
     align-items: center;
     display: flex;
@@ -285,7 +294,7 @@ gln-calendar {
     justify-content: space-between;
   }
 
-  // Level 3 Element "header - cage"
+  // Level 4 Element "header - cage"
   &:not([dis]) [glncn-cage] {
     --glncn--cage-bg-cl: var(--glncn-def-cage-bg-cl, transparent);
     &:not([glncn-dayoff]) {
@@ -318,7 +327,7 @@ gln-calendar {
     width: var(--glncn--item-wd);
   }
 
-  // Level 2 Element "list days"
+  // Level 3 Element "list days"
   [glncn-rows] {
     display: flex;
     flex-direction: var(--glncn--dir-lv1);
@@ -328,7 +337,7 @@ gln-calendar {
     flex-grow: 1;
   }
 
-  // Level 3 Element "list days - row"
+  // Level 4 Element "list days - row"
   [glncn-row] {
     align-items: center;
     display: flex;
@@ -341,7 +350,7 @@ gln-calendar {
     justify-content: space-between;
   }
 
-  // Level 4 Element "List - DayInfoRow - item"
+  // Level 5 Element "List - DayInfoRow - item"
   &:not([dis]) [glncn-item] {
     cursor: pointer;
   }
@@ -448,7 +457,7 @@ gln-calendar {
     border-color: var(--glncn-today-br-cl, var(--glncn--today-br-cl));
   }
 
-  // Level 3 Element "header - week", "list days - row - week"
+  // Level 4 Element "header - week", "list days - row - week"
   &:not([dis]) [glncn-week] {
     --glncn--week-cl   : var(--glncn-def-cage-cl, var(--glncn--cage-def-cl));
     --glncn--week-bg-cl: var(--glncn-def-cage-bg-cl, transparent);
@@ -471,4 +480,99 @@ gln-calendar {
     padding: var(--glncn--item-pd);
     width: var(--glncn--item-wd);
   }
+
+  // Level 3 Element "view-month"
+  [glncn-view-month] {
+    // #outline: 1px solid blue;
+    bottom: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    left: 0px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+
+  // Level 4 Element "glncn-month-wrapper"
+  [glncn-month-wrapper] {
+    // # outline: 1px solid green;
+    align-items: center;
+    display: flex;
+    flex-basis: 33.3%;
+    justify-content: center;
+  }
+
+  // Level 5 Element "glncn-month-cell"
+  &:not([dis]) [glncn-tint] {
+    &:not(:hover):not(:focus) {
+      --glncn--curr-cl   : var(--glncn-def-curr-cl   , var(--glncn--item-def-cl   )); // 1.0+
+      --glncn--curr-bg-cl: var(--glncn-def-curr-bg-cl, transparent);
+      --glncn--slct-cl   : var(--glncn-def-slct-cl   , var(--glncn--slct-def-cl   )); // default-bg
+      --glncn--slct-bg-cl: var(--glncn-def-slct-bg-cl, var(--glncn--slct-def-bg-cl));
+    }
+    &:hover:not(:focus) {
+      --glncn--curr-cl   : var(--glncn-hov-curr-cl   , var(--glncn-def-curr-cl    , var(--glncn--item-def-cl))); // 1.0
+      --glncn--curr-bg-cl: var(--glncn-hov-curr-bg-cl, var(--glncn--item-hov-bg-cl)); // primary 0.15
+      --glncn--slct-cl   : var(--glncn-hov-slct-cl   , var(--glncn-def-slct-cl    , var(--glncn--slct-def-cl))); // default-bg
+      --glncn--slct-bg-cl: var(--glncn-hov-slct-bg-cl, var(--glncn--slct-hov-bg-cl));
+    }
+    &:focus {
+      --glncn--curr-cl   : var(--glncn-foc-curr-cl   , var(--glncn-def-curr-cl    , var(--glncn--item-def-cl))); // 1.0
+      --glncn--curr-bg-cl: var(--glncn-foc-curr-bg-cl, var(--glncn--item-foc-bg-cl));  // primary 0.3
+      --glncn--slct-cl   : var(--glncn-foc-slct-cl   , var(--glncn-def-slct-cl    , var(--glncn--slct-def-cl))); // default-bg
+      --glncn--slct-bg-cl: var(--glncn-foc-slct-bg-cl, var(--glncn--slct-hov-bg-cl));
+    }
+  }
+  &[dis] [glncn-tint] {
+    --glncn--curr-cl   : var(--glncn-dis-curr-cl   , var(--glncn--sndr-dis-cl   )); // 0.8+
+    --glncn--curr-bg-cl: var(--glncn-dis-item-bg-cl, transparent);
+    --glncn--slct-cl   : var(--glncn-dis-slct-cl   , var(--glncn--slct-def-cl   )); // default-bg
+    --glncn--slct-bg-cl: var(--glncn-dis-slct-bg-cl, var(--glncn--slct-dis-bg-cl));
+  }
+  [glncn-tint] {
+    &[glncn-slct] {
+      background-color: var(--glncn--slct-bg-cl);
+      color: var(--glncn--slct-cl);
+    }
+    &[glncn-curr] {
+      background-color: var(--glncn--curr-bg-cl);
+      color: var(--glncn--curr-cl);
+    }
+  }
+
+  [glncn-month-cell] {
+    border: 0;
+    border-radius: var(--glncn-month-cell-br-rd, calc(var(--glncn--item-hg) / 2));
+    // # border-radius: 18px;
+    font-family: inherit;
+    font-size: var(--glncn-item-fn-sz, 1em);
+    font-weight: inherit;
+    height: var(--glncn--item-hg);
+    // # margin: var(--glncn--item-mr);
+    outline: 0; // outline: 1px solid orange; // 
+    //  padding: var(--glncn--item-pd);
+    //  text-decoration: none;
+    //  transition: background-color 180ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    //  user-select: none;
+    width: var(--glncn-month-cell-wd, 85%);
+
+    cursor: pointer;
+    color: unset;
+    background-color: transparent;
+    // # margin: 8px 0;
+    // # height: 36px;
+    // # width: 72px;
+    
+
+    // &:hover {
+    // #  background-color: rgba(0, 0, 0, 0.04);
+    // }
+    // &:focus {
+    // #  background-color: rgba(0, 0, 0, 0.04);
+    // }
+  }
+  // [glncn-month-cell][slct] {
+  //  # color: #fff;
+  //  # background-color: #1976d2;
+  // }
 }

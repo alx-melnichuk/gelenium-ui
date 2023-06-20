@@ -25,6 +25,7 @@ import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { GlnCalendarConfig } from './gln-calendar-config.interface';
 
 const CELL_SIZE: { [key: string]: number } = { short: 28, small: 32, middle: 36, wide: 40, large: 44, huge: 48 };
+// ? const VIEW: { [key: string]: string } = { day: 'day', month: 'month', year: 'year' };
 
 const CSS_PROP_CELL_SIZE = '--glncn--item-size';
 const CSS_PROP_FONT_SIZE_HEADER = '--glncnh--fn-sz';
@@ -33,7 +34,6 @@ interface CalendarDayName {
   name: string;
   dayWeek: number;
 }
-
 interface CalendarDayInfo {
   year: number;
   month: number;
@@ -97,12 +97,22 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
 
   @Output()
   readonly selected: EventEmitter<Date | null> = new EventEmitter();
+  @Output()
+  readonly monthSelected: EventEmitter<number> = new EventEmitter();
+  @Output()
+  readonly yearSelected: EventEmitter<number> = new EventEmitter();
+  @Output()
+  readonly viewChanged: EventEmitter<string> = new EventEmitter();
 
   @ViewChild('dayInfoRowListRef', { read: ElementRef<HTMLDivElement>, static: false })
   public dayInfoRowListRef: ElementRef<HTMLDivElement> | undefined;
 
   public calendarDayInfoRowList: CalendarDayInfoRow[] = [];
   public calendarDayNameList: CalendarDayName[] = [];
+  public calendarMonthValue: number = 0;
+  public calendarMonthName: string = '';
+  public calendarYearValue: number = 0;
+  public calendarYearName: string = '';
   public cellSizeVal: number | null = null; // Binding attribute "cellSize".
   public currConfig: GlnCalendarConfig;
   public errors: ValidationErrors | null = null;
@@ -116,10 +126,16 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public isStartSundayVal: boolean | null = null; // Binding attribute "isStartSunday".
   public isWeekNumberVal: boolean | null = null; // Binding attribute "isWeekNumber".
   public markedDate: Date | null = null;
-  public startDateVal: Date | null = null; // Binding attribute "startDate".
-  public nameMonth: string = '';
-  public nameYear: string = '';
+
   public sizeDayWeekVal: number | null = null; // Binding attribute "sizeDayWeek".
+  public startDateVal: Date | null = null; // Binding attribute "startDate".
+  public VIEW_DAY: string = 'day';
+  public VIEW_MONTH: string = 'month';
+  public VIEW_YEAR: string = 'year';
+  public view: string = this.VIEW_DAY;
+  // public dayCells
+  public monthCells: string[] = this.getMonthCellList('short');
+  // public yearCells
 
   constructor(
     // // eslint-disable-next-line @typescript-eslint/ban-types
@@ -257,10 +273,11 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       console.log(`clickSwitch() return;`); // #
       return;
     }
+    this.nextViewMode();
   }
 
   public clickPrev(): void {
-    if (this.isDisabledVal || this.isReadOnlyVal) {
+    if (this.isDisabledVal || this.isReadOnlyVal || this.view === this.VIEW_MONTH) {
       console.log(`clickPrev() return;`); // #
       return;
     }
@@ -271,7 +288,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   }
 
   public clickNext(): void {
-    if (this.isDisabledVal || this.isReadOnlyVal) {
+    if (this.isDisabledVal || this.isReadOnlyVal || this.view === this.VIEW_MONTH) {
       console.log(`clickNext() return;`); // #
       return;
     }
@@ -280,6 +297,32 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.updateValue(this.value || null, this.sizeDayWeekVal, !!this.isStartSundayVal, date);
     }
   }
+
+  public nextViewMode(): void {
+    if (this.view === this.VIEW_DAY) {
+      this.view = this.VIEW_MONTH;
+      this.changeDetectorRef.markForCheck();
+    } else if (this.view === this.VIEW_MONTH) {
+      this.view = this.VIEW_YEAR;
+      this.changeDetectorRef.markForCheck();
+    } else if (this.view === this.VIEW_YEAR) {
+      this.view = this.VIEW_DAY;
+      this.changeDetectorRef.markForCheck();
+    }
+  }
+
+  // -- Methods for the mode "view month" --
+
+  public clickMonthCell(month: number): void {
+    console.log(`clickMonthCell(${month})`); // #
+    if (-1 < month && month < 12 && this.sizeDayWeekVal != null) {
+      const startDate: Date = new Date(2023, month, 1, 0, 0, 0, 0);
+      this.updateValue(this.value || null, this.sizeDayWeekVal, !!this.isStartSundayVal, startDate);
+      this.nextViewMode();
+    }
+  }
+
+  // -- Methods for the mode "view day" --
 
   public clickSelectItem(cell: CalendarDayInfo | null): void {
     if (this.isDisabledVal || this.isReadOnlyVal || !cell || (cell.attr1 != ATTR_CURRENT && this.isHideOldDaysVal)) {
@@ -290,65 +333,70 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     this.selected.emit(newDate);
   }
 
-  public focusinDayInfoRowList(event: FocusEvent): void {
-    console.log(`focusinDayInfoRowList()  data-label=${(event.target as HTMLElement)?.getAttribute('data-label')}`); // #
-    // if (event.target != null) {
-    //   const htmlElement: HTMLElement = event.target as HTMLElement;
-    //   htmlElement.focus()
-    // }
-  }
-  public focusoutDayInfoRowList(event: FocusEvent): void {
-    console.log(`focusoutDayInfoRowList() data-label=${(event.target as HTMLElement)?.getAttribute('data-label')}`); // #
-  }
   public keydownDayInfoRowList(event: KeyboardEvent): void {
     console.log(`keydownDayInfoRowList()  data-label=${(event.target as HTMLElement)?.getAttribute('data-label')}`); // #
     // event.key === 'ArrowRight' 'ArrowLeft' 'ArrowUp' 'ArrowDown' 'Tab' 'Escape' 'Enter' 'June 6, 2023'
-    if (this.markedDate != null) {
-      let delta: number = 0;
-      const deltaRightLeft: number = !this.isHorizontVal ? 1 : 7;
-      const deltaUpDown: number = !this.isHorizontVal ? -7 : -1;
-      if ('ArrowRight' === event.key) {
-        delta = deltaRightLeft;
-      } else if ('ArrowLeft' === event.key) {
-        delta = -deltaRightLeft;
-      } else if ('ArrowUp' === event.key) {
-        delta = deltaUpDown;
-      } else if ('ArrowDown' === event.key) {
-        delta = -deltaUpDown;
-      }
-      if (delta != 0) {
-        const currElem: HTMLElement | null = this.getElementByDate(this.dayInfoRowListRef, this.getLabelByDate(this.markedDate));
-        const newMarkedDate: Date = DateUtil.addDay(this.markedDate, delta);
-        if (DateUtil.compare(newMarkedDate, this.initDateStart) === 1) {
-          console.log(`newMarkedDate < this.initDateStart`); // #
-        } else if (DateUtil.compare(this.initDateFinish, newMarkedDate) === 1) {
-          console.log(`this.initDateFinish < newMarkedDate`); // #
-        } else {
-          const newElem: HTMLElement | null = this.getElementByDate(this.dayInfoRowListRef, this.getLabelByDate(newMarkedDate));
-          if (newElem != null) {
-            this.markedDate = newMarkedDate;
-            HtmlElemUtil.setAttr(this.renderer, HtmlElemUtil.getElementRef(currElem), 'tabindex', '-1');
-            HtmlElemUtil.setAttr(this.renderer, HtmlElemUtil.getElementRef(newElem), 'tabindex', '0');
-            Promise.resolve().then(() => {
-              newElem.focus();
-            });
-          }
-        }
-      } else if (' ' === event.key || 'Enter' === event.key) {
-        const elem: HTMLElement | null = this.getElementByDate(this.dayInfoRowListRef, this.getLabelByDate(this.markedDate));
-        if (elem != null) {
-          delta = 9;
-          this.selected.emit(new Date(this.markedDate));
+    if (this.view !== this.VIEW_DAY || this.markedDate == null) {
+      return;
+    }
+    let delta: number = 0;
+    const deltaRightLeft: number = !this.isHorizontVal ? 1 : 7;
+    const deltaUpDown: number = !this.isHorizontVal ? -7 : -1;
+    if ('ArrowRight' === event.key) {
+      delta = deltaRightLeft;
+    } else if ('ArrowLeft' === event.key) {
+      delta = -deltaRightLeft;
+    } else if ('ArrowUp' === event.key) {
+      delta = deltaUpDown;
+    } else if ('ArrowDown' === event.key) {
+      delta = -deltaUpDown;
+    }
+    if (delta != 0) {
+      const currElem: HTMLElement | null = this.getElementByDate(this.dayInfoRowListRef, this.getLabelByDate(this.markedDate));
+      const newMarkedDate: Date = DateUtil.addDay(this.markedDate, delta);
+      if (DateUtil.compare(newMarkedDate, this.initDateStart) === 1) {
+        console.log(`newMarkedDate < this.initDateStart`); // #
+      } else if (DateUtil.compare(this.initDateFinish, newMarkedDate) === 1) {
+        console.log(`this.initDateFinish < newMarkedDate`); // #
+      } else {
+        const newElem: HTMLElement | null = this.getElementByDate(this.dayInfoRowListRef, this.getLabelByDate(newMarkedDate));
+        if (newElem != null) {
+          this.markedDate = newMarkedDate;
+          HtmlElemUtil.setAttr(this.renderer, HtmlElemUtil.getElementRef(currElem), 'tabindex', '-1');
+          HtmlElemUtil.setAttr(this.renderer, HtmlElemUtil.getElementRef(newElem), 'tabindex', '0');
+          Promise.resolve().then(() => {
+            newElem.focus();
+          });
         }
       }
-
-      if (delta != 0) {
-        event.preventDefault();
-        event.stopPropagation();
+    } else if (' ' === event.key || 'Enter' === event.key) {
+      const elem: HTMLElement | null = this.getElementByDate(this.dayInfoRowListRef, this.getLabelByDate(this.markedDate));
+      if (elem != null) {
+        delta = 9;
+        this.selected.emit(new Date(this.markedDate));
       }
     }
+
+    if (delta != 0) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
   }
+
   // ** Private methods **
+
+  // -- Methods for the mode "view month" --
+
+  private getMonthCellList(month?: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined): string[] {
+    const result: string[] = [];
+    const year: number = new Date().getFullYear();
+    for (let i = 0; i < 12; i++) {
+      result.push(DateUtil.getMonthName(new Date(year, i, 1, 0, 0, 0, 0), month));
+    }
+    return result;
+  }
+
+  // -- Methods for the mode "view day" --
 
   private getElementByDate(dayInfoRowListRef: ElementRef<HTMLDivElement> | undefined, label: string | null): HTMLElement | null {
     let result: HTMLElement | null = null;
@@ -360,13 +408,13 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   private updateValue(selected: Date | null, sizeDayWeek: number, isStartSunday: boolean, startDate: Date | null): void {
     const today: Date = new Date();
     const initDate: Date = startDate || selected || today;
-    const year: number = initDate.getFullYear();
-    const month: number = initDate.getMonth();
-    this.initDateStart = new Date(year, month, 1, 0, 0, 0, 0);
-    this.initDateFinish = DateUtil.addDay(new Date(year, month + 1, 1, 0, 0, 0, 0), -1);
+    this.calendarYearValue = initDate.getFullYear();
+    this.calendarMonthValue = initDate.getMonth();
+    this.initDateStart = new Date(this.calendarYearValue, this.calendarMonthValue, 1, 0, 0, 0, 0);
+    this.initDateFinish = DateUtil.addDay(new Date(this.calendarYearValue, this.calendarMonthValue + 1, 1, 0, 0, 0, 0), -1);
 
-    this.nameYear = DateUtil.getNameYear(this.initDateStart, 'numeric');
-    this.nameMonth = DateUtil.getNameMonth(this.initDateStart, 'long');
+    this.calendarYearName = DateUtil.getYearName(this.initDateStart, 'numeric');
+    this.calendarMonthName = DateUtil.getMonthName(this.initDateStart, 'long');
 
     const dayStartWeek: number = !isStartSunday ? this.getDayStartWeekByLocale() : 0;
     this.calendarDayNameList = this.getCalendarDayNameList(sizeDayWeek, dayStartWeek);
@@ -381,8 +429,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   private getCalendarDayNameList(sizeDayWeek: number, dayStartWeek: number): CalendarDayName[] {
     const result: CalendarDayName[] = [];
     const dayWeekRes: 'long' | 'short' | 'narrow' = sizeDayWeek <= 0 || 3 < sizeDayWeek ? 'long' : 1 === sizeDayWeek ? 'narrow' : 'short';
-    const nuw: Date = new Date();
-    const current: Date = new Date(nuw.getFullYear(), nuw.getMonth(), 1, 0, 0, 0, 0);
+    const now: Date = new Date();
+    const current: Date = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0);
     current.setDate(current.getDate() - current.getDay() - 1 + dayStartWeek);
     for (let i = 1; i < 8; i++) {
       current.setDate(current.getDate() + 1);
