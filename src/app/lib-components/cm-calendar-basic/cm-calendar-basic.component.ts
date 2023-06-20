@@ -35,7 +35,7 @@ export class CmCalendarBasicComponent {
 
   private getSelectedDate(): Date {
     const d1: Date = new Date();
-    const result: Date = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0);
+    const result: Date = new Date(d1.getFullYear(), d1.getMonth() - 1, d1.getDate(), 0, 0, 0, 0);
     result.setDate(result.getDate() + (d1.getDate() === 1 ? 1 : -1));
     return result;
   }
