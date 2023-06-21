@@ -29,6 +29,7 @@ export class CmCalendarBasicComponent {
   public value01b: Date | null = new Date(this.selectedDate);
 
   isDisabled01a = false;
+  isHideDayoff01a = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
