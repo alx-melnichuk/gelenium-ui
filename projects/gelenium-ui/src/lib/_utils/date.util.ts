@@ -15,6 +15,11 @@ export class DateUtil {
   public static equality(date1: Date | null | undefined, date2: Date | null | undefined): boolean {
     return DateUtil.compare(date1, date2) === 0;
   }
+  /** Get the day number of the start of the week by locale. */
+  public static getDayStartWeekByLocale(): number {
+    const he1: any = new Intl.Locale('default'); // dayStartWeek
+    return he1.weekInfo?.firstDay || 0;
+  }
   /** Get the week number for the specified date. */
   public static getWeekNumber(date: Date): number {
     const onejan = new Date(date.getFullYear(), 0, 1);
