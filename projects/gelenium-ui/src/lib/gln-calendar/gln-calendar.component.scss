@@ -298,28 +298,8 @@ gln-calendar {
   }
 
   // Level 4 Element "header - cage"
-  &:not([dis]) [glncn-cage] {
-    --glncn--cage-bg-cl: var(--glncn-def-cage-bg-cl, transparent);
-    &:not([glncn-dayoff]) {
-      --glncn--cage-cl : var(--glncn-def-cage-cl, var(--glncn--cage-def-cl));
-    }
-    &[glncn-dayoff] {
-      --glncn--cage-cl : var(--glncn-def-dayoff-cage-cl, var(--glncn--dayoff-old-def-cl)); // 0.6+
-    }
-  }
-  &[dis] [glncn-cage] {
-    --glncn--cage-bg-cl: var(--glncn-dis-cage-bg-cl, transparent);
-    &:not([glncn-dayoff]) {
-      --glncn--cage-cl : var(--glncn-dis-cage-cl, var(--glncn--cage-dis-cl));
-    }
-    &[glncn-dayoff] {
-      --glncn--cage-cl : var(--glncn-dis-dayoff-cage-cl, var(--glncn--dayoff-old-dis-cl)); // 0.5+
-    }
-  }
   [glncn-cage] {
     align-items: center;
-    background-color: var(--glncn--cage-bg-cl);
-    color: var(--glncn--cage-cl);
     display: flex;
     font-size: var(--glncn-cage-fn-sz, var(--glncnh--fn-sz, 0.75em));
     font-weight: var(--glncn-cage-fn-wg, 400);
@@ -327,6 +307,7 @@ gln-calendar {
     justify-content: center;
     margin: var(--glncn--item-mr);
     padding: var(--glncn--item-pd);
+    pointer-events: none;
     width: var(--glncn--item-wd);
   }
 

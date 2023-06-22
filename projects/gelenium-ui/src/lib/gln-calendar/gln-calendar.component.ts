@@ -41,7 +41,7 @@ interface CalendarDayInfo {
   month: number;
   day: number;
   dayWeek: number;
-  attr1: string;
+  attr: string;
   label: string;
   isToday?: boolean | undefined;
   isDayoff?: boolean | undefined;
@@ -338,7 +338,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   // -- Methods for the mode "view day" --
 
   public clickSelectItem(cell: CalendarDayInfo | null): void {
-    if (this.isDisabledVal || this.isReadOnlyVal || !cell || (cell.attr1 != ATTR_CURRENT && this.isHideOldDaysVal)) {
+    if (this.isDisabledVal || this.isReadOnlyVal || !cell || (cell.attr != ATTR_CURRENT && this.isHideOldDaysVal)) {
       console.log(`clickSelectItem() return;`); // #
       return;
     }
@@ -502,30 +502,26 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     const itemDate: Date = new Date(initDate.getFullYear(), initDate.getMonth(), 1, 0, 0, 0, 0);
     const currentMonth: number = itemDate.getMonth();
     // Date.getDay() 0-Sun, 1-Mon, 2-Tue, 3-Wed, 4-Thu, 5-Fri, 6-Sat;
-    itemDate.setDate(itemDate.getDate() - itemDate.getDay() - 1 + dayStartWeek);
-
+    const dayWeek1: number = itemDate.getDay();
+    itemDate.setDate(dayStartWeek !== dayWeek1 ? dayStartWeek - dayWeek1 : -7);
     let hasSelected: boolean = selected == null;
     let hasToday: boolean = false;
-    let isToday: boolean | undefined;
-    let isDayoff: boolean | undefined;
     let calendarRow: CalendarDayInfoRow | undefined;
     let idx: number = 0;
     while (idx < 42) {
       itemDate.setDate(itemDate.getDate() + 1);
-      const year: number = itemDate.getFullYear();
-      const month: number = itemDate.getMonth();
-      const day: number = itemDate.getDate();
-      const dayWeek: number = itemDate.getDay();
-      let attr1: string = '';
-      if (!hasSelected && year === selectedYear && month === selectedMonth && day === selectedDay) {
+      const year = itemDate.getFullYear();
+      const month = itemDate.getMonth();
+      const day = itemDate.getDate();
+      const dayWeek = itemDate.getDay();
+
+      const isSelected: boolean | undefined = !hasSelected && year === selectedYear && month === selectedMonth && day === selectedDay;
+      if (!hasSelected && isSelected) {
         hasSelected = true;
-        attr1 = ATTR_SELECTED;
-      } else if (month === currentMonth) {
-        attr1 = ATTR_CURRENT;
-      } else {
-        attr1 = ATTR_OLD_MONTH;
       }
-      isToday = !hasToday && year === todayYear && month === todayMonth && day === todayDay ? true : undefined;
+      const attr: string = isSelected ? ATTR_SELECTED : month === currentMonth ? ATTR_CURRENT : ATTR_OLD_MONTH;
+
+      const isToday: boolean | undefined = !hasToday && year === todayYear && month === todayMonth && day === todayDay ? true : undefined;
       if (!hasToday && isToday) {
         hasToday = true;
       }
@@ -533,8 +529,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
         calendarRow = { cellList: [], weekNumberObj: { weekNumber: DateUtil.getWeekNumber(itemDate) } };
         result.push(calendarRow);
       }
-      isDayoff = dayWeek == 0 || dayWeek == 6 ? true : undefined;
-      calendarRow?.cellList.push({ year, month, day, dayWeek, attr1, label: this.getLabelByDate(itemDate) || '', isToday, isDayoff });
+      const isDayoff = dayWeek == 0 || dayWeek == 6 ? true : undefined;
+      calendarRow?.cellList.push({ year, month, day, dayWeek, attr, label: this.getLabelByDate(itemDate) || '', isToday, isDayoff });
       idx++;
     }
     return result;
