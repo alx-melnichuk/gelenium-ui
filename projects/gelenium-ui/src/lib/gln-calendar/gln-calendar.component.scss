@@ -85,7 +85,6 @@ gln-calendar {
   
   button[disabled] {
     pointer-events: none;
-    cursor: default;
   }
 
   // Level 2 Element "title"
@@ -139,9 +138,6 @@ gln-calendar {
     padding: 0;
     text-decoration: none;
     vertical-align: middle;
-  }
-  &:not([dis]) [glncn-sign] {
-    cursor: pointer;
   }
   // Level 4 Element title button "name month"
   [glncn-month-name] {
@@ -337,32 +333,32 @@ gln-calendar {
   // Element "glncn-tint" used by "glncn-year-cell", "glncn-month-cell", 
   &:not([dis]) [glncn-tint] {
     &:not(:hover):not(:focus) {
-      --glncn--curr-cl   : var(--glncn-def-curr-cl   , var(--glncn--item-def-cl)); // 1.0+
-      --glncn--curr-bg-cl: var(--glncn-def-curr-bg-cl, transparent);
-      --glncn--slct-cl   : var(--glncn-def-slct-cl   , var(--glncn--slct-def-cl)); // default-bg
-      --glncn--slct-bg-cl: var(--glncn-def-slct-bg-cl, var(--glncn--slct-def-bg-cl));
-      --glncn--old-cl    : var(--glncn-def-old-cl    , var(--glncn--cage-def-cl)); // 0.6+
-      --glncn--old-bg-cl : var(--glncn-def-old-bg-cl , transparent);
+      --glncn--curr-cl   : var(--glncn-def-curr-cl    , var(--glncn--item-def-cl)); // 1.0+
+      --glncn--curr-bg-cl: var(--glncn-def-curr-bg-cl , transparent);
+      --glncn--slct-cl   : var(--glncn-def-slct-cl    , var(--glncn--slct-def-cl)); // default-bg
+      --glncn--slct-bg-cl: var(--glncn-def-slct-bg-cl , var(--glncn--slct-def-bg-cl));
+      --glncn--old-cl    : var(--glncn-def-old-cl     , var(--glncn--cage-def-cl)); // 0.6+
+      --glncn--old-bg-cl : var(--glncn-def-old-bg-cl  , transparent);
     }
     &:hover:not(:focus) {
-      --glncn--curr-cl   : var(--glncn-hov-curr-cl   , var(--glncn-def-curr-cl    , var(--glncn--item-def-cl))); // 1.0
-      --glncn--curr-bg-cl: var(--glncn-hov-curr-bg-cl, var(--glncn--item-hov-bg-cl)); // primary 0.15
-      --glncn--slct-cl   : var(--glncn-hov-slct-cl   , var(--glncn-def-slct-cl    , var(--glncn--slct-def-cl))); // default-bg
-      --glncn--slct-bg-cl: var(--glncn-hov-slct-bg-cl, var(--glncn--slct-hov-bg-cl));
-      --glncn--old-cl    : var(--glncn-hov-old-cl    , var(--glncn-def-old-cl     , var(--glncn--cage-def-cl))); // 0.6
-      --glncn--old-bg-cl : var(--glncn-hov-old-bg-cl , var(--glncn-def-old-bg-cl  , var(--glncn--item-hov-bg-cl))); // primary 0.15
+      --glncn--curr-cl   : var(--glncn-hov-curr-cl    , var(--glncn-def-curr-cl    , var(--glncn--item-def-cl))); // 1.0
+      --glncn--curr-bg-cl: var(--glncn-hov-curr-bg-cl , var(--glncn--item-hov-bg-cl)); // primary 0.15
+      --glncn--slct-cl   : var(--glncn-hov-slct-cl    , var(--glncn-def-slct-cl    , var(--glncn--slct-def-cl))); // default-bg
+      --glncn--slct-bg-cl: var(--glncn-hov-slct-bg-cl , var(--glncn--slct-hov-bg-cl));
+      --glncn--old-cl    : var(--glncn-hov-old-cl     , var(--glncn-def-old-cl     , var(--glncn--cage-def-cl))); // 0.6
+      --glncn--old-bg-cl : var(--glncn-hov-old-bg-cl  , var(--glncn-def-old-bg-cl  , var(--glncn--item-hov-bg-cl))); // primary 0.15
     }
     &:focus {
-      --glncn--curr-cl   : var(--glncn-foc-curr-cl   , var(--glncn-def-curr-cl    , var(--glncn--item-def-cl))); // 1.0
-      --glncn--curr-bg-cl: var(--glncn-foc-curr-bg-cl, var(--glncn--item-foc-bg-cl));  // primary 0.3
-      --glncn--slct-cl   : var(--glncn-foc-slct-cl   , var(--glncn-def-slct-cl    , var(--glncn--slct-def-cl))); // default-bg
-      --glncn--slct-bg-cl: var(--glncn-foc-slct-bg-cl, var(--glncn--slct-hov-bg-cl));
-      --glncn--old-cl    : var(--glncn-foc-old-cl    , var(--glncn-def-old-cl     , var(--glncn--cage-def-cl))); // 0.6
-      --glncn--old-bg-cl : var(--glncn-foc-old-bg-cl , var(--glncn-def-old-bg-cl  , var(--glncn--item-foc-bg-cl))); // primary 0.2
+      --glncn--curr-cl   : var(--glncn-foc-curr-cl    , var(--glncn-hov-curr-cl    , var(--glncn-def-curr-cl    , var(--glncn--item-def-cl)))); // 1.0
+      --glncn--curr-bg-cl: var(--glncn-foc-curr-bg-cl , var(--glncn-hov-curr-bg-cl , var(--glncn--item-foc-bg-cl)));  // primary 0.3
+      --glncn--slct-cl   : var(--glncn-foc-slct-cl    , var(--glncn-hov-slct-cl    , var(--glncn-def-slct-cl    , var(--glncn--slct-def-cl)))); // default-bg
+      --glncn--slct-bg-cl: var(--glncn-foc-slct-bg-cl , var(--glncn-hov-slct-bg-cl , var(--glncn--slct-hov-bg-cl)));
+      --glncn--old-cl    : var(--glncn-foc-old-cl     , var(--glncn-hov-old-cl     , var(--glncn-def-old-cl     , var(--glncn--cage-def-cl)))); // 0.6
+      --glncn--old-bg-cl : var(--glncn-foc-old-bg-cl  , var(--glncn-hov-old-bg-cl  , var(--glncn-def-old-bg-cl  , var(--glncn--item-foc-bg-cl)))); // primary 0.2
     }
-    --glncn--curr-off-cl: var(--glncn-def-curr-off-cl, var(--glncn--dayoff-def-cl)); // 1.0+
-    --glncn--old-off-cl : var(--glncn-def-old-off-cl , var(--glncn--dayoff-old-def-cl)); // 0.6+
-    --glncn--today-br-cl: var(--glncn-def-today-br-cl, var(--glncn--today-def-br-cl));
+    --glncn--curr-off-cl: var(--glncn-def-curr-off-cl , var(--glncn--dayoff-def-cl)); // 1.0+
+    --glncn--old-off-cl : var(--glncn-def-old-off-cl  , var(--glncn--dayoff-old-def-cl)); // 0.6+
+    --glncn--today-br-cl: var(--glncn-def-today-br-cl , var(--glncn--today-def-br-cl));
   }
   &[dis] [glncn-tint] {
     --glncn--curr-cl   : var(--glncn-dis-curr-cl   , var(--glncn--sndr-dis-cl)); // 0.8+

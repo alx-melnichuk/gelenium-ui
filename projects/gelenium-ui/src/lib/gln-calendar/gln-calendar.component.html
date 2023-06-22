@@ -4,22 +4,25 @@
     class="gln-calendar-title">
     <div glncn-month2year
       class="gln-calendar-month2year">
-      <button glncn-sign
+
+      <button type="button"
         glncn-month-name
+        glncn-sign
+        glncn-crs-pnt
         class="gln-calendar-month"
-        type="button"
         [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
         (click)="clickSwitch()">
-        {{ calendarMonthName }}
+        {{ calendarDayCurrMonthName }}
       </button>
 
-      <button glncn-sign
+      <button type="button"
         glncn-year-name
+        glncn-sign
+        glncn-crs-pnt
         class="gln-calendar-year"
-        type="button"
         [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
         (click)="clickSwitch()">
-        {{ calendarYearName }}
+        {{ calendarDayCurrYearName }}
       </button>
 
       <button type="button"
@@ -91,7 +94,6 @@
         glncn-tint
         [attr.glncn-old]="isHideDayoffVal || !cage.isDayoff ? '' : undefined"
         [attr.glncn-old-off]="!isHideDayoffVal && cage.isDayoff ? '' : undefined"
-        [attr.glncn-dayoff]="!isHideDayoffVal && (cage.dayWeek == 0 || cage.dayWeek == 6) ? '' : undefined"
         [ngClass]="['gln-calendar-cage', ('dayWeek' + cage.dayWeek)
           , (!isHideDayoffVal && cage.isDayoff ? 'gln-dayoff' : '')]">
         {{ cage.name }}
@@ -105,27 +107,27 @@
       [attr.glncn-hide]="view !== VIEW_DAY ? '' : undefined">
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-        [ngTemplateOutletContext]="calendarDayInfoRowList[0]">
+        [ngTemplateOutletContext]="calendarDayCellRowList[0]">
       </ng-container>
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-        [ngTemplateOutletContext]="calendarDayInfoRowList[1]">
+        [ngTemplateOutletContext]="calendarDayCellRowList[1]">
       </ng-container>
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-        [ngTemplateOutletContext]="calendarDayInfoRowList[2]">
+        [ngTemplateOutletContext]="calendarDayCellRowList[2]">
       </ng-container>
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-        [ngTemplateOutletContext]="calendarDayInfoRowList[3]">
+        [ngTemplateOutletContext]="calendarDayCellRowList[3]">
       </ng-container>
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-        [ngTemplateOutletContext]="calendarDayInfoRowList[4]">
+        [ngTemplateOutletContext]="calendarDayCellRowList[4]">
       </ng-container>
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-        [ngTemplateOutletContext]="calendarDayInfoRowList[5]">
+        [ngTemplateOutletContext]="calendarDayCellRowList[5]">
       </ng-container>
 
     </div>
@@ -211,25 +213,24 @@
         glncn-crs-pnt
         glncn-item
         glncn-tint
-        [attr.glncn-old]="cell.attr == 'old' && (isHideDayoffVal || !cell.isDayoff) ? '' : undefined"
-        [attr.glncn-old-off]="cell.attr == 'old' && !isHideDayoffVal && cell.isDayoff ? '' : undefined"
-        [attr.glncn-dayoff]="!isHideDayoffVal && cell.isDayoff ? '' : undefined"
-        [attr.glncn-curr]="cell.attr == 'curr' && (isHideDayoffVal || !cell.isDayoff) ? '' : undefined"
-        [attr.glncn-curr-off]="cell.attr == 'curr' && !isHideDayoffVal && cell.isDayoff ? '' : undefined"
-        [attr.glncn-slct]="cell.attr == 'slct' ? '' : undefined"
+        [attr.glncn-old]="cell.state == 'old' && (isHideDayoffVal || !cell.isDayoff) ? '' : undefined"
+        [attr.glncn-old-off]="cell.state == 'old' && !isHideDayoffVal && cell.isDayoff ? '' : undefined"
+        [attr.glncn-curr]="cell.state == 'curr' && (isHideDayoffVal || !cell.isDayoff) ? '' : undefined"
+        [attr.glncn-curr-off]="cell.state == 'curr' && !isHideDayoffVal && cell.isDayoff ? '' : undefined"
+        [attr.glncn-slct]="cell.state == 'slct' ? '' : undefined"
         [attr.glncn-today]="cell.isToday ? '' : undefined"
         [ngClass]="['gln-calendar-day-cell'
           , ('dayWeek' + cell.dayWeek)
-          , (cell.attr == 'old' ? 'gln-old' : '')
-          , (!isHideDayoffVal && (cell.dayWeek == 0 || cell.dayWeek == 6) ? 'gln-dayoff' : '')
-          , (cell.attr == 'curr' ? 'gln-current' : '')
-          , (cell.attr == 'slct' ? 'gln-selected' : '')
+          , (cell.state == 'old' ? 'gln-old' : '')
+          , (cell.state == 'curr' ? 'gln-current' : '')
+          , (cell.state == 'slct' ? 'gln-selected' : '')
+          , (!isHideDayoffVal && cell.isDayoff ? 'gln-dayoff' : '')
           , (cell.isToday ? 'gln-today' : '') ]"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && cell.attr == 'old') ? '' : undefined"
-        [attr.tabindex]="!isDisabledVal && cell.attr == 'slct' ? 0 : -1"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && cell.state == 'old') ? '' : undefined"
+        [attr.tabindex]="!isDisabledVal && cell.state == 'slct' ? 0 : -1"
         [attr.data-label]="cell.label"
         (click)="clickSelectItem(cell)">
-        {{ isHideOldDaysVal && cell.attr == 'old' ? '' : cell.day }}
+        {{ isHideOldDaysVal && cell.state == 'old' ? '' : cell.day }}
       </button>
     </ng-container>
 
