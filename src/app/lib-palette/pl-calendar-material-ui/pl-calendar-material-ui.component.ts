@@ -23,8 +23,8 @@ export class PlCalendarMaterialUiComponent {
   public baseRef: string = RouterConfig.get('BASE_REF');
   public urlPlCalendar = this.baseRef + '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig.get('URL_PALETTE_CALENDAR');
 
-  public isDisabled07j: boolean = false;
-  public isHideOldDays07j: boolean = false;
+  public isDisabled07l: boolean = false;
+  public isHideOldDays07l: boolean = false;
   public cfgMui = {
     cellSize: 36,
     isHideDayoff: true,
@@ -33,7 +33,7 @@ export class PlCalendarMaterialUiComponent {
     sizeDayWeek: 1,
   };
   public selectedDate: Date = this.getSelectedDate();
-  public value07j: Date | null = new Date(this.selectedDate);
+  public value07l: Date | null = new Date(this.selectedDate);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
