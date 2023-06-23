@@ -24,23 +24,17 @@ public model01: Date | null = new Date();</pre>
 </section>
 
 <section mr-vr>
-  <label>
-    <input type="checkbox"
-      (change)="isDisabled01a=!isDisabled01a" />
-    isDisabled01a
-  </label>
+  <label> <input type="checkbox"
+      (change)="isDisabled01a=!isDisabled01a" />isDisabled</label>
   -
-  <label>
-    <input type="checkbox"
-      (change)="isHideDayoff01a=!isHideDayoff01a" />
-    isHideDayoff01a
-  </label>
+  <label><input type="checkbox"
+      (change)="isHideDayoff01a=!isHideDayoff01a" />isHideDayoff</label>
   -
-  <label>
-    <input type="checkbox"
-      (change)="isReadOnly01a=!isReadOnly01a" />
-    isReadOnly01a
-  </label>
+  <label><input type="checkbox"
+      (change)="isReadOnly01a=!isReadOnly01a" />isReadOnly</label>
+  -
+  <label><input type="checkbox"
+      (change)="isWeekNumber01a=!isWeekNumber01a" />isWeekNumber</label>
 </section>
 
 <div class="app-group">
@@ -61,6 +55,7 @@ public model01: Date | null = new Date();</pre>
         [isDisabled]="isDisabled01a"
         [isHideDayoff]="isHideDayoff01a"
         [isReadOnly]="isReadOnly01a"
+        [isWeekNumber]="isWeekNumber01a"
         (selected)="value01a=$event">
       </gln-calendar>
       <!-- <gln-calendar [value]="value01a">
@@ -83,6 +78,9 @@ public model01: Date | null = new Date();</pre>
       <gln-calendar [value]="value01b"
         isHorizont
         [isDisabled]="isDisabled01a"
+        [isHideDayoff]="isHideDayoff01a"
+        [isReadOnly]="isReadOnly01a"
+        [isWeekNumber]="isWeekNumber01a"
         (selected)="value01b=$event">
       </gln-calendar>
       <!-- <gln-calendar [value]="value01a">
