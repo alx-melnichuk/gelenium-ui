@@ -33,7 +33,6 @@ const VIEW_YEAR = 'year';
 const AMOUNT_YEARS = 16;
 
 const CSS_PROP_CELL_SIZE = '--glncn--item-size';
-const CSS_PROP_FONT_SIZE_HEADER = '--glncnh--fn-sz';
 
 export const GLN_CALENDAR_CONFIG = new InjectionToken<GlnCalendarConfig>('GLN_CALENDAR_CONFIG');
 
@@ -71,6 +70,10 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public isWeekNumber: string | boolean | null | undefined;
   @Input()
+  public monthFormByDays: string | null | undefined;
+  @Input()
+  public monthFormByMonths: string | null | undefined;
+  @Input()
   public startDate: Date | null | undefined;
   @Input()
   public sizeDayWeek: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
@@ -99,6 +102,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public calendarDateFinish: Date = new Date();
   public calendarMonthCellList: string[] = [];
   public calendarYearCellList: number[] = [];
+  public calendarYearFirst: number = -1;
+  public calendarYearLast: number = -1;
   public cellSizeVal: number | null = null; // Binding attribute "cellSize".
   public currConfig: GlnCalendarConfig;
   public errors: ValidationErrors | null = null;
@@ -110,6 +115,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public isStartSundayVal: boolean | null = null; // Binding attribute "isStartSunday".
   public isWeekNumberVal: boolean | null = null; // Binding attribute "isWeekNumber".
   public markedDate: Date | null = null;
+  public monthFormByDaysVal: string | null = null; // Binding attribute "monthFormByDays".
+  public monthFormByMonthsVal: string | null = null; // Binding attribute "monthFormByMonths".
   public selectedMonth: number = -1;
   public selectedYear: number = -1;
   public sizeDayWeekVal: number | null = null; // Binding attribute "sizeDayWeek".
@@ -169,6 +176,16 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     if (changes['isWeekNumber'] || (changes['config'] && this.isWeekNumber == null && this.currConfig.isWeekNumber != null)) {
       this.isWeekNumberVal = BooleanUtil.init(this.isWeekNumber) ?? !!this.currConfig.isWeekNumber;
+      this.settingIsWeekNumber(this.isWeekNumberVal, this.renderer, this.hostRef);
+    }
+    if (changes['monthFormByDays'] || (changes['config'] && this.monthFormByDays == null && this.currConfig.monthFormByDays != null)) {
+      this.monthFormByDaysVal = this.monthFormByDays || this.currConfig.monthFormByDays || '';
+    }
+    if (
+      changes['monthFormByMonths'] ||
+      (changes['config'] && this.monthFormByMonths == null && this.currConfig.monthFormByMonths != null)
+    ) {
+      this.monthFormByMonthsVal = this.monthFormByMonths || this.currConfig.monthFormByMonths || '';
     }
     if (changes['startDate'] || (changes['config'] && this.startDate == null && this.currConfig.startDate != null)) {
       this.startDateVal = this.startDate || this.currConfig.startDate || null;
@@ -187,7 +204,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
 
     if (isPrepareData && this.sizeDayWeekVal != null) {
-      this.updateViewDayCells(this.value || null, this.sizeDayWeekVal, !!this.isStartSundayVal, this.startDateVal);
+      this.updateViewDayCells(this.value || null, this.sizeDayWeekVal, !!this.isStartSundayVal, this.startDateVal, this.monthFormByDaysVal);
     }
   }
 
@@ -195,8 +212,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
-    const fontSize: number = HtmlElemUtil.propertyAsNumber(this.hostRef, 'font-size');
-    this.setCssFontSizeHeader(fontSize - 1, this.hostRef);
     let isPrepareData: boolean = false;
 
     if (this.cellSizeVal == null) {
@@ -224,6 +239,13 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     if (this.isWeekNumberVal == null) {
       this.isWeekNumberVal = !!this.currConfig.isWeekNumber;
+      this.settingIsWeekNumber(this.isWeekNumberVal, this.renderer, this.hostRef);
+    }
+    if (this.monthFormByDaysVal == null) {
+      this.monthFormByDaysVal = this.currConfig.monthFormByDays || '';
+    }
+    if (this.monthFormByMonthsVal == null) {
+      this.monthFormByMonthsVal = this.currConfig.monthFormByMonths || '';
     }
     if (this.startDateVal == null) {
       this.startDateVal = this.currConfig.startDate || null;
@@ -238,7 +260,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
 
     if (isPrepareData && this.sizeDayWeekVal != null) {
-      this.updateViewDayCells(this.value || null, this.sizeDayWeekVal, !!this.isStartSundayVal, this.startDateVal);
+      this.updateViewDayCells(this.value || null, this.sizeDayWeekVal, !!this.isStartSundayVal, this.startDateVal, this.monthFormByDaysVal);
     }
   }
 
@@ -264,7 +286,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     if (this.view === VIEW_DAY) {
       const date: Date = DateUtil.addMonth(this.calendarDateStart, -1);
-      this.updateViewDayCells(this.value || null, this.sizeDayWeekVal, !!this.isStartSundayVal, date);
+      this.updateViewDayCells(this.value || null, this.sizeDayWeekVal, !!this.isStartSundayVal, date, this.monthFormByDaysVal);
     }
   }
 
@@ -274,7 +296,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     if (this.view === VIEW_DAY) {
       const date: Date = DateUtil.addMonth(this.calendarDateStart, 1);
-      this.updateViewDayCells(this.value || null, this.sizeDayWeekVal, !!this.isStartSundayVal, date);
+      this.updateViewDayCells(this.value || null, this.sizeDayWeekVal, !!this.isStartSundayVal, date, this.monthFormByDaysVal);
     }
   }
 
@@ -284,10 +306,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.updateViewYearCells(this.startDateVal, this.value, AMOUNT_YEARS);
     } else if (this.view === VIEW_YEAR) {
       this.view = VIEW_MONTH;
-      this.updateViewMonthCells(this.value);
+      this.updateViewMonthCells(this.value, this.monthFormByMonthsVal);
     } else if (this.view === VIEW_MONTH) {
       this.view = VIEW_DAY;
-      // TODO this.updateViewDayCells();
     }
   }
 
@@ -318,7 +339,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.selectedMonth = month;
       this.monthSelected.emit(month + 1);
       const startDate: Date = new Date(this.selectedYear, month, 1, 0, 0, 0, 0);
-      this.updateViewDayCells(this.value || null, this.sizeDayWeekVal, !!this.isStartSundayVal, startDate);
+      this.updateViewDayCells(this.value || null, this.sizeDayWeekVal, !!this.isStartSundayVal, startDate, this.monthFormByDaysVal);
       this.nextView();
     }
   }
@@ -397,34 +418,35 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     const initDate: Date = startDate || selected || today;
     const yearStart: number = Math.round(initDate.getFullYear() / 10) * 10;
     this.calendarYearCellList = GlnCalendarUtil.getYearCellList(yearStart, amountYears);
-
+    this.calendarYearFirst = yearStart;
+    this.calendarYearLast = yearStart + amountYears - 1;
     this.changeDetectorRef.markForCheck();
   }
   // -- Methods for the mode "view month" --
-  private updateViewMonthCells(selected: Date | null | undefined): void {
+  private updateViewMonthCells(selected: Date | null | undefined, monthFormByMonths: string | null): void {
     const today: Date = new Date();
     this.todaysMonth = today.getMonth();
     this.selectedMonth = selected?.getMonth() || this.todaysMonth;
 
-    this.calendarMonthCellList = GlnCalendarUtil.getMonthCellList('short');
+    this.calendarMonthCellList = GlnCalendarUtil.getMonthCellList(DateUtil.convertMonthFormat(monthFormByMonths || 'short'));
 
     this.changeDetectorRef.markForCheck();
   }
 
   // -- Methods for the mode "view day" --
-  private updateViewDayCells(selected: Date | null, sizeDayWeek: number, isStartSunday: boolean, startDate: Date | null): void {
+  private updateViewDayCells(selected: Date | null, szDayWeek: number, isSunday: boolean, start: Date | null, format: string | null): void {
     const today: Date = new Date();
-    const initDate: Date = startDate || selected || today;
+    const initDate: Date = start || selected || today;
     const year: number = initDate.getFullYear();
     const month = initDate.getMonth();
     this.calendarDateStart = new Date(year, month, 1, 0, 0, 0, 0);
     this.calendarDateFinish = DateUtil.addDay(new Date(year, month + 1, 1, 0, 0, 0, 0), -1);
 
     this.calendarDayCurrYearName = DateUtil.getYearName(this.calendarDateStart, 'numeric');
-    this.calendarDayCurrMonthName = DateUtil.getMonthName(this.calendarDateStart, 'long');
+    this.calendarDayCurrMonthName = DateUtil.getMonthName(this.calendarDateStart, DateUtil.convertMonthFormat(format || 'long'));
 
-    const dayStartWeek: number = !isStartSunday ? DateUtil.getDayStartWeekByLocale() : 0;
-    this.calendarDayNameList = GlnCalendarUtil.getDayNameList(sizeDayWeek, dayStartWeek);
+    const dayStartWeek: number = !isSunday ? DateUtil.getDayStartWeekByLocale() : 0;
+    this.calendarDayNameList = GlnCalendarUtil.getDayNameList(szDayWeek, dayStartWeek);
     this.calendarDayCellRowList = GlnCalendarUtil.getDayCellRowList(selected, dayStartWeek, this.calendarDateStart, today);
 
     this.changeDetectorRef.markForCheck();
@@ -459,9 +481,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   private setCssCellSize(cellSize: number, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setProperty(elem, CSS_PROP_CELL_SIZE, (cellSize > 0 ? cellSize.toString() : null)?.concat('px'));
   }
-  private setCssFontSizeHeader(fontSize: number, elem: ElementRef<HTMLElement>): void {
-    HtmlElemUtil.setProperty(elem, CSS_PROP_FONT_SIZE_HEADER, (fontSize > 0 ? fontSize.toString() : null)?.concat('px'));
-  }
   private settingIsDisabled(isDisabled: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-disabled', !!isDisabled);
     HtmlElemUtil.setAttr(renderer, elem, 'dis', isDisabled ? '' : null);
@@ -469,6 +488,10 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   private settingIsHorizont(isHorizont: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-is-horizont', !!isHorizont);
     HtmlElemUtil.setAttr(renderer, elem, 'hor', isHorizont ? '' : null);
+  }
+  private settingIsWeekNumber(isWeekNumber: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
+    HtmlElemUtil.setClass(renderer, elem, 'gln-is-week-number', !!isWeekNumber);
+    HtmlElemUtil.setAttr(renderer, elem, 'wee', isWeekNumber ? '' : null);
   }
   private settingReadOnly(readOnly: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-read-only', !!readOnly);

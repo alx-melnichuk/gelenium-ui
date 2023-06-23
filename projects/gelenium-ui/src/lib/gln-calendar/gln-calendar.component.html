@@ -2,27 +2,25 @@
   class="gln-calendar-wrapper">
   <div glncn-title
     class="gln-calendar-title">
-    <div glncn-month2year
-      class="gln-calendar-month2year">
+
+    <div glncn-title-block
+      [attr.glncn-title-day]="view === VIEW_DAY ? '' : undefined"
+      [attr.glncn-title-month]="view === VIEW_MONTH ? '' : undefined"
+      [attr.glncn-title-year]="view === VIEW_YEAR ? '' : undefined"
+      [ngClass]="['gln-calendar-title-block'
+        , (view === VIEW_DAY ? 'gln-title-day' : '')
+        , (view === VIEW_MONTH ? 'gln-title-month' : '')
+        , (view === VIEW_YEAR ? 'gln-title-year' : '')]">
 
       <button type="button"
-        glncn-month-name
-        glncn-sign
+        glncn-title-caption
         glncn-crs-pnt
-        class="gln-calendar-month"
+        class="gln-calendar-title-caption"
         [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
         (click)="clickSwitch()">
-        {{ calendarDayCurrMonthName }}
-      </button>
-
-      <button type="button"
-        glncn-year-name
-        glncn-sign
-        glncn-crs-pnt
-        class="gln-calendar-year"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
-        (click)="clickSwitch()">
-        {{ calendarDayCurrYearName }}
+        {{ view === VIEW_DAY ? calendarDayCurrMonthName + ' ' + calendarDayCurrYearName :
+        (view === VIEW_MONTH ? calendarDayCurrYearName : calendarYearFirst + ' - ' +
+        calendarYearLast ) }}
       </button>
 
       <button type="button"
@@ -42,12 +40,14 @@
         </svg>
         <!-- <span class="MuiTouchRipple-root css-w0pj6f"></span> -->
       </button>
+
     </div>
 
     <button type="button"
+      glncn-nav
       glncn-prev
       glncn-crs-pnt
-      class="gln-calendar-prev"
+      class="gln-calendar-nav gln-calendar-prev"
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
       [attr.disabled]="isDisabledVal || isReadOnlyVal || view !== VIEW_DAY? '' : undefined"
       [attr.glncn-hide]="view !== VIEW_DAY ? '' : undefined"
@@ -62,9 +62,10 @@
     </button>
 
     <button type="button"
+      glncn-nav
       glncn-next
       glncn-crs-pnt
-      class="gln-calendar-next"
+      class="gln-calendar-nav gln-calendar-next"
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
       [attr.disabled]="isDisabledVal || isReadOnlyVal || view !== VIEW_DAY ? '' : undefined"
       [attr.glncn-hide]="view !== VIEW_DAY ? '' : undefined"

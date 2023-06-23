@@ -30,6 +30,14 @@ export class DateUtil {
   public static getYearName(date: Date, year?: 'numeric' | '2-digit' | undefined): string {
     return new Intl.DateTimeFormat('default', { year: year }).format(date);
   }
+  public static convertMonthFormat(month: string | undefined): 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined {
+    let result: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined;
+    if (!!month) {
+      result = !result ? (month === 'numeric' ? 'numeric' : month === '2-digit' ? '2-digit' : undefined) : result;
+      result = !result ? (month === 'long' ? 'long' : month === 'short' ? 'short' : month === 'narrow' ? 'narrow' : undefined) : result;
+    }
+    return result;
+  }
   /** Get the name of the month for the specified date. */
   public static getMonthName(date: Date, month?: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined): string {
     return new Intl.DateTimeFormat('default', { month: month }).format(date);

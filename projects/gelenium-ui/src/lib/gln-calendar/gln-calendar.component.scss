@@ -89,67 +89,56 @@ gln-calendar {
 
   // Level 2 Element "title"
   [glncn-title] {
-    // # outline: 1px solid green;
     align-items: center;
     display: flex;
     font-family: inherit;
     font-size: 1em;
-    font-weight: var(--glncn-title-fn-wg, inherit);
+    font-weight: var(--glncn-title-fn-wg, 500);
     flex-direction: var(--glncn--dir-lv2);
     justify-content: space-around;
   }
 
-  // Level 3 Element "month2year"
-  [glncn-month2year] {
+  // Level 3 Element "title-block"
+  [glncn-title-block] {
     align-items: center;
     display: inline-flex;
     flex-grow: 1;
-    font-family: inherit;
-    font-size: 1em;
-    font-weight: var(--glncn-month2year-fn-wg, 500);
-    justify-content: center;
-    order: var(--glncn-month2year-ord, unset);
+    order: var(--glncn-tblock-ord, unset);
+    min-width: var(--glncn-tblock-mn-wd, 15ch);
   }
-  &[hor] [glncn-month2year] {
-    --glncntb--month-mn-wd: 9ch;
-    --glncntb--year-mn-wd: 4ch;
+  &[hor] [glncn-title-block] {
+    justify-content: center;
     padding-top: 4em;
   }
-  &:not([dis]) [glncn-month2year] {
-    color: var(--glncn-def-month2year-cl, var(--glncn--item-def-cl));
+  &:not([hor]) [glncn-title-block] {
+    padding-left: var(--glncn---wee-tblock-pd-lf, var(--glncn-tblock-pd-lf, calc(var(--glncn--item-size) * 0.25)));
   }
-  &[dis] [glncn-month2year] {
-    color: var(--glncn-dis-month2year-cl, var(--glncn--sndr-dis-cl));
+  &[wee]:not([hor]) [glncn-title-block] {
+    --glncn---wee-tblock-pd-lf: var(--glncn-week-tblock-pd-lf, calc(var(--glncn--item-size) * 1.25));
+  }
+  &:not([dis]) [glncn-title-block] {
+    color: var(--glncn-def-tblock-cl, var(--glncn--item-def-cl));
+  }
+  &[dis] [glncn-title-block] {
+    color: var(--glncn-dis-tblock-cl, var(--glncn--sndr-dis-cl));
   }
 
-  // Level 4 Element title button "name month", "name year"
-  [glncn-sign] {
+  // Level 4 Element title button "title-caption"
+  [glncn-title-caption] {
     align-items: center;
     background-color: transparent;
     border: 0;
-    color: currentColor;
+    color: inherit;
     display: inline-flex;
     flex-shrink: 0;
     font: inherit;
-    height: 2.5em;
+    height: var(--glncn-cap-hg, 2.5em);
     justify-content: center;
     overflow: visible;
     outline: 0;
-    padding: 0;
+    padding: var(--glncn-cap-pd, 0);
     text-decoration: none;
     vertical-align: middle;
-  }
-  // Level 4 Element title button "name month"
-  [glncn-month-name] {
-    min-width: var(--glncntb--month-mn-wd);
-  }
-  // Level 4 Element title button "name year"
-  [glncn-year-name] {
-    min-width: var(--glncntb--year-mn-wd);
-  }
-  [glncn-month-name] ~ [glncn-year-name] {
-    padding-left: 0.5ch;
-    margin-right: 0.5ch;
   }
 
   // Level 4 Element title button "switch"
@@ -196,38 +185,70 @@ gln-calendar {
     transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
 
-  // Level 3 Element title button "prev"
-  &:not([dis]) [glncn-prev] {
+  // Level 3 Element "title nav"
+  &:not([dis]) [glncn-nav] {
     &:not(:hover) {
-      --glncn--prev-cl   : var(--glncn-def-prev-cl, var(--glncn--nav-def-cl));
-      --glncn--prev-bg-cl: var(--glncn-def-prev-bg-cl, transparent);
+      --glncn--nav-cl   : var(--glncn-def-nav-cl, var(--glncn--nav-def-cl));
+      --glncn--nav-bg-cl: var(--glncn-def-nav-bg-cl, transparent);
     }
     &:hover {
-      --glncn--prev-cl   : var(--glncn-hov-prev-cl, var(--glncn-def-prev-cl, var(--glncn--nav-def-cl)));
-      --glncn--prev-bg-cl: var(--glncn-hov-prev-bg-cl, var(--glncn--nav-hov-bg-cl));
+      --glncn--nav-cl   : var(--glncn-hov-nav-cl, var(--glncn-def-nav-cl, var(--glncn--nav-def-cl)));
+      --glncn--nav-bg-cl: var(--glncn-hov-nav-bg-cl, var(--glncn--nav-hov-bg-cl));
     }
   }
-  &[dis] [glncn-prev] {
-    --glncn--prev-cl   : var(--glncn-dis-prev-cl, var(--glncn--sndr-dis-cl));
-    --glncn--prev-bg-cl: var(--glncn-dis-prev-bg-cl, transparent);
+  &[dis] [glncn-nav] {
+    --glncn--nav-cl   : var(--glncn-dis-nav-cl, var(--glncn--sndr-dis-cl));
+    --glncn--nav-bg-cl: var(--glncn-dis-nav-bg-cl, transparent);
   }
-  [glncn-prev] {
+  [glncn-nav] {
     align-items: center;
-    background-color: var(--glncn--prev-bg-cl);
+    background-color: var(--glncn--nav-bg-cl);
     border: 0;
-    border-radius: var(--glncn-br-rd, 50%);
-    color: var(--glncn--prev-cl);
+    border-radius: var(--glncn-nav-br-rd, 50%);
+    color: var(--glncn--nav-cl);
     display: inline-flex;
     flex-shrink: 0;
     font: inherit;
     justify-content: center;
-    order: var(--glncn-prev-ord, unset);
     outline: 0;
     overflow: visible;
-    padding: 0.5em;
+    padding: var(--glncn-nav-pd, 0.5em);
     text-decoration: none;
     user-select: none;
     vertical-align: middle;
+  }
+  // Level 3 Element "title button "prev"
+  // &:not([dis]) [glncn-prev] {
+  //   &:not(:hover) {
+  //     --glncn--prev-cl   : var(--glncn-def-prev-cl, var(--glncn--nav-def-cl));
+  //     --glncn--prev-bg-cl: var(--glncn-def-prev-bg-cl, transparent);
+  //   }
+  //   &:hover {
+  //     --glncn--prev-cl   : var(--glncn-hov-prev-cl, var(--glncn-def-prev-cl, var(--glncn--nav-def-cl)));
+  //     --glncn--prev-bg-cl: var(--glncn-hov-prev-bg-cl, var(--glncn--nav-hov-bg-cl));
+  //   }
+  // }
+  // &[dis] [glncn-prev] {
+  //   --glncn--prev-cl   : var(--glncn-dis-prev-cl, var(--glncn--sndr-dis-cl));
+  //   --glncn--prev-bg-cl: var(--glncn-dis-prev-bg-cl, transparent);
+  // }
+  [glncn-prev] {
+    // align-items: center;
+    // background-color: var(--glncn--prev-bg-cl);
+    // border: 0;
+    // border-radius: var(--glncn-br-rd, 50%);
+    // color: var(--glncn--prev-cl);
+    // display: inline-flex;
+    // flex-shrink: 0;
+    // font: inherit;
+    // justify-content: center;
+    order: var(--glncn-prev-ord, unset);
+    // outline: 0;
+    // overflow: visible;
+    // padding: 0.5em;
+    // text-decoration: none;
+    // user-select: none;
+    // vertical-align: middle;
   }
   &[hor] [glncn-prev] {
     position: relative;
@@ -235,37 +256,37 @@ gln-calendar {
   }
 
   // Level 3 Element title button "next"
-  &:not([dis]) [glncn-next] {
-    &:not(:hover) {
-      --glncn--next-cl   : var(--glncn-def-next-cl, var(--glncn--nav-def-cl));
-      --glncn--next-bg-cl: var(--glncn-def-next-bg-cl, transparent);
-    }
-    &:hover {
-      --glncn--next-cl   : var(--glncn-hov-next-cl, var(--glncn-def-next-cl, var(--glncn--nav-def-cl)));
-      --glncn--next-bg-cl: var(--glncn-hov-next-bg-cl, var(--glncn--nav-hov-bg-cl));
-    }
-  }
-  &[dis] [glncn-next] {
-    --glncn--next-cl   : var(--glncn-dis-next-cl, var(--glncn--sndr-dis-cl));
-    --glncn--next-bg-cl: var(--glncn-dis-next-bg-cl, transparent);
-  }
+  // &:not([dis]) [glncn-next] {
+  //   &:not(:hover) {
+  //     --glncn--next-cl   : var(--glncn-def-next-cl, var(--glncn--nav-def-cl));
+  //     --glncn--next-bg-cl: var(--glncn-def-next-bg-cl, transparent);
+  //   }
+  //   &:hover {
+  //     --glncn--next-cl   : var(--glncn-hov-next-cl, var(--glncn-def-next-cl, var(--glncn--nav-def-cl)));
+  //     --glncn--next-bg-cl: var(--glncn-hov-next-bg-cl, var(--glncn--nav-hov-bg-cl));
+  //   }
+  // }
+  // &[dis] [glncn-next] {
+  //   --glncn--next-cl   : var(--glncn-dis-next-cl, var(--glncn--sndr-dis-cl));
+  //   --glncn--next-bg-cl: var(--glncn-dis-next-bg-cl, transparent);
+  // }
   [glncn-next] {
-    align-items: center;
-    background-color: var(--glncn--next-bg-cl);
-    border: 0;
-    border-radius: var(--glncn-br-rd, 50%);
-    color: var(--glncn--next-cl);
-    display: inline-flex;
-    flex-shrink: 0;
-    font: inherit;
-    justify-content: center;
+    // align-items: center;
+    // background-color: var(--glncn--next-bg-cl);
+    // border: 0;
+    // border-radius: var(--glncn-br-rd, 50%);
+    // color: var(--glncn--next-cl);
+    // display: inline-flex;
+    // flex-shrink: 0;
+    // font: inherit;
+    // justify-content: center;
     order: var(--glncn-next-ord, unset);
-    outline: 0;
-    overflow: visible;
-    padding: 0.5em;
-    text-decoration: none;
-    user-select: none;
-    vertical-align: middle;
+    // outline: 0;
+    // overflow: visible;
+    // padding: 0.5em;
+    // text-decoration: none;
+    // user-select: none;
+    // vertical-align: middle;
   }
   &[hor] [glncn-next] {
     bottom: 2.5em;
@@ -297,7 +318,7 @@ gln-calendar {
   [glncn-cage] {
     align-items: center;
     display: flex;
-    font-size: var(--glncn-cage-fn-sz, var(--glncnh--fn-sz, 0.75em));
+    font-size: var(--glncn-cage-fn-sz, calc(1em - 1px));
     font-weight: var(--glncn-cage-fn-wg, 400);
     height: var(--glncn--item-hg);
     justify-content: center;
@@ -442,7 +463,7 @@ gln-calendar {
     background-color: var(--glncn--week-bg-cl);
     color: var(--glncn--week-cl);
     display: flex;
-    font-size: var(--glncn-week-fn-sz, var(--glncnh--fn-sz, 0.75em));
+    font-size: var(--glncn-week-fn-sz, calc(1em - 1px));
     font-weight: var(--glncn-week-fn-wg, 400);
     height: var(--glncn--item-hg);
     justify-content: center;
@@ -454,7 +475,6 @@ gln-calendar {
 
   // Level 3 Element "view-month"
   [glncn-view-month] {
-    // #outline: 1px solid blue;
     display: flex;
     flex-wrap: wrap;
     inset: 0px;
@@ -463,7 +483,6 @@ gln-calendar {
 
   // Level 4 Element "glncn-month-wrapper"
   [glncn-month-wrapper] {
-    // # outline: 1px solid green;
     align-items: center;
     display: flex;
     flex-basis: 33.3%;
@@ -472,36 +491,18 @@ gln-calendar {
 
   // Level 5 Element "glncn-month-cell"
   [glncn-month-cell] {
-    // # border: 0;
+    border: 0;
     border-radius: var(--glncn-month-cell-br-rd, calc(var(--glncn--item-hg) / 2));
-    // # border-radius: 18px;
     font-family: inherit;
     font-size: var(--glncn-item-fn-sz, 1em);
     font-weight: inherit;
     height: var(--glncn--item-hg);
-    // # margin: var(--glncn--item-mr);
     outline: 0; // outline: 1px solid orange; // 
     //  padding: var(--glncn--item-pd);
     //  text-decoration: none;
     //  user-select: none;
     width: var(--glncn-month-cell-wd, 85%);
-    // # margin: 8px 0;
-    // # height: 36px;
-    // # width: 72px;
   }
-  // [glncn-month-cell] {
-  //   &:hover {
-  //     background-color: rgba(0, 0, 0, 0.04);
-  //   }
-  //   &:focus {
-  //     background-color: rgba(0, 0, 0, 0.04);
-  //   }
-  // }
-  // [glncn-month-cell][slct] {
-  //   color: #fff;
-  //   background-color: #1976d2;
-  // }
-
 
   // Level 3 Element "view-year"
   [glncn-view-year] {
