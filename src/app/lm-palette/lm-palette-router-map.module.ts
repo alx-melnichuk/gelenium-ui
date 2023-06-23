@@ -29,6 +29,7 @@ const urlPlCalendar = '/' + RouterConfig.get('URL_PALETTE') + '/' + RouterConfig
 const siteUrlsCalendar: SiteUrl[] = [
   { label: 'Basic', url: urlPlCalendar, fragment: 'Basic' },
   { label: 'Like a Bootstrap', url: urlPlCalendar, fragment: 'Bootstrap' },
+  { label: 'Like a Mat', url: urlPlCalendar, fragment: 'Mat' },
   { label: 'Like a Material-UI', url: urlPlCalendar, fragment: 'MaterialUI' },
 ];
 

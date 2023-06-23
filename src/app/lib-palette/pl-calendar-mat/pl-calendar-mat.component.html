@@ -1,0 +1,124 @@
+<section mr-vr>
+  <h4 class="app-hover-link">
+    Like a Mat.
+    <a [href]="urlPlCalendar + '#Mat'">#</a>
+  </h4>
+  <p>
+    It is possible to display GlnCalendar in style as "Mat".
+    <br />
+    To do this, you need to specify the following configuration:
+  </p>
+</section>
+
+
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isDisabled07j=!isDisabled07j"
+      [checked]="isDisabled07j" />
+    Is disabled
+  </label>
+  &nbsp;
+  <label>
+    <input type="checkbox"
+      (change)="isHideOldDays07j=!isHideOldDays07j"
+      [checked]="isHideOldDays07j" />
+    is hide old days
+  </label>
+</section>
+
+
+<div class="app-group">
+  <div class="app-elem">
+    <div>
+      <small><em>Material-UI style</em></small>
+    </div>
+    <div class="cnma-clnd"
+      style="position: relative;">
+      <gln-calendar class="cnma-mat"
+        [value]="value07j"
+        [config]="cfgMui"
+        [isDisabled]="isDisabled07j"
+        [isHideOldDays]="isHideOldDays07j"
+        (selected)="value07j=$event">
+      </gln-calendar>
+    </div>
+  </div>
+</div>
+
+
+
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CalendarComponent &#123;
+  public isDisabled07j: boolean = false;
+  public isHideOldDays07j: boolean = false;
+  public cfgMui = &#123;
+    cellSize: 36,
+    isHideDayoff: true,
+    isHideOldDays: true,
+    isStartSunday: true,
+    sizeDayWeek: 1
+  &#125;;
+  public selectedDate: Date = this.getSelectedDate();
+  public value07j: Date | null = new Date(this.selectedDate);
+
+  private getSelectedDate(): Date &#123;
+    const d1: Date = new Date();
+    const result: Date = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0);
+    result.setDate(result.getDate() + (d1.getDate() === 1 ? 1 : -1));
+    return result;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cnmt-clnd &#123;
+    border: 1px solid deepskyblue;
+    box-sizing: border-box;
+    display: inline-block;
+  &#125;
+&#125;
+
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<hr br-nn />
