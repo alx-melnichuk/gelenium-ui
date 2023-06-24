@@ -29,8 +29,8 @@ gln-calendar {
   --glncn--nav-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.1);
   --glncn--sndr-dis-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.8);
 
-  --glncn--cage-def-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.6); // ~rgba(0, 0, 0, 0.6);
-  --glncn--cage-dis-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.5); // ~rgba(0, 0, 0, 0.6);
+  --glncn--old-def-cl : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.6);
+  --glncn--old-dis-cl : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.5);
 
   --glncn--item-def-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l));
   --glncn--item-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.15);
@@ -72,7 +72,6 @@ gln-calendar {
     cursor: pointer;
   }
 
-
   // Level 1 Element "wrapper"
   &>[glncn-wrapper] {
     display: flex;
@@ -85,6 +84,15 @@ gln-calendar {
   
   button[disabled] {
     pointer-events: none;
+  }
+
+  // Centering button content. ("item")
+  [glncn-center] {
+    align-items: center;
+    display: flex;
+    font: inherit;
+    justify-content: center;
+    line-height: 1.5;
   }
 
   // Level 2 Element "title"
@@ -204,7 +212,7 @@ gln-calendar {
     align-items: center;
     background-color: var(--glncn--nav-bg-cl);
     border: 0;
-    border-radius: var(--glncn-nav-br-rd, 50%);
+    border-radius: var(--glncn-nav-br-rd, var(--glncn-br-rd, 50%));
     color: var(--glncn--nav-cl);
     display: inline-flex;
     flex-shrink: 0;
@@ -218,37 +226,8 @@ gln-calendar {
     vertical-align: middle;
   }
   // Level 3 Element "title button "prev"
-  // &:not([dis]) [glncn-prev] {
-  //   &:not(:hover) {
-  //     --glncn--prev-cl   : var(--glncn-def-prev-cl, var(--glncn--nav-def-cl));
-  //     --glncn--prev-bg-cl: var(--glncn-def-prev-bg-cl, transparent);
-  //   }
-  //   &:hover {
-  //     --glncn--prev-cl   : var(--glncn-hov-prev-cl, var(--glncn-def-prev-cl, var(--glncn--nav-def-cl)));
-  //     --glncn--prev-bg-cl: var(--glncn-hov-prev-bg-cl, var(--glncn--nav-hov-bg-cl));
-  //   }
-  // }
-  // &[dis] [glncn-prev] {
-  //   --glncn--prev-cl   : var(--glncn-dis-prev-cl, var(--glncn--sndr-dis-cl));
-  //   --glncn--prev-bg-cl: var(--glncn-dis-prev-bg-cl, transparent);
-  // }
   [glncn-prev] {
-    // align-items: center;
-    // background-color: var(--glncn--prev-bg-cl);
-    // border: 0;
-    // border-radius: var(--glncn-br-rd, 50%);
-    // color: var(--glncn--prev-cl);
-    // display: inline-flex;
-    // flex-shrink: 0;
-    // font: inherit;
-    // justify-content: center;
     order: var(--glncn-prev-ord, unset);
-    // outline: 0;
-    // overflow: visible;
-    // padding: 0.5em;
-    // text-decoration: none;
-    // user-select: none;
-    // vertical-align: middle;
   }
   &[hor] [glncn-prev] {
     position: relative;
@@ -256,37 +235,8 @@ gln-calendar {
   }
 
   // Level 3 Element title button "next"
-  // &:not([dis]) [glncn-next] {
-  //   &:not(:hover) {
-  //     --glncn--next-cl   : var(--glncn-def-next-cl, var(--glncn--nav-def-cl));
-  //     --glncn--next-bg-cl: var(--glncn-def-next-bg-cl, transparent);
-  //   }
-  //   &:hover {
-  //     --glncn--next-cl   : var(--glncn-hov-next-cl, var(--glncn-def-next-cl, var(--glncn--nav-def-cl)));
-  //     --glncn--next-bg-cl: var(--glncn-hov-next-bg-cl, var(--glncn--nav-hov-bg-cl));
-  //   }
-  // }
-  // &[dis] [glncn-next] {
-  //   --glncn--next-cl   : var(--glncn-dis-next-cl, var(--glncn--sndr-dis-cl));
-  //   --glncn--next-bg-cl: var(--glncn-dis-next-bg-cl, transparent);
-  // }
   [glncn-next] {
-    // align-items: center;
-    // background-color: var(--glncn--next-bg-cl);
-    // border: 0;
-    // border-radius: var(--glncn-br-rd, 50%);
-    // color: var(--glncn--next-cl);
-    // display: inline-flex;
-    // flex-shrink: 0;
-    // font: inherit;
-    // justify-content: center;
     order: var(--glncn-next-ord, unset);
-    // outline: 0;
-    // overflow: visible;
-    // padding: 0.5em;
-    // text-decoration: none;
-    // user-select: none;
-    // vertical-align: middle;
   }
   &[hor] [glncn-next] {
     bottom: 2.5em;
@@ -316,15 +266,12 @@ gln-calendar {
 
   // Level 4 Element "header - cage"
   [glncn-cage] {
-    align-items: center;
-    display: flex;
     font-size: var(--glncn-cage-fn-sz, calc(1em - 1px));
     font-weight: var(--glncn-cage-fn-wg, 400);
-    height: var(--glncn--item-hg);
-    justify-content: center;
+    height: var(--glncn-cage-hg, var(--glncn--item-hg));
     margin: var(--glncn--item-mr);
     padding: var(--glncn--item-pd);
-    pointer-events: none;
+    pointer-events: none; // Block display on :hover.
     width: var(--glncn--item-wd);
   }
 
@@ -358,7 +305,7 @@ gln-calendar {
       --glncn--curr-bg-cl: var(--glncn-def-curr-bg-cl , transparent);
       --glncn--slct-cl   : var(--glncn-def-slct-cl    , var(--glncn--slct-def-cl)); // default-bg
       --glncn--slct-bg-cl: var(--glncn-def-slct-bg-cl , var(--glncn--slct-def-bg-cl));
-      --glncn--old-cl    : var(--glncn-def-old-cl     , var(--glncn--cage-def-cl)); // 0.6+
+      --glncn--old-cl    : var(--glncn-def-old-cl     , var(--glncn--old-def-cl)); // 0.6+
       --glncn--old-bg-cl : var(--glncn-def-old-bg-cl  , transparent);
     }
     &:hover:not(:focus) {
@@ -366,7 +313,7 @@ gln-calendar {
       --glncn--curr-bg-cl: var(--glncn-hov-curr-bg-cl , var(--glncn--item-hov-bg-cl)); // primary 0.15
       --glncn--slct-cl   : var(--glncn-hov-slct-cl    , var(--glncn-def-slct-cl    , var(--glncn--slct-def-cl))); // default-bg
       --glncn--slct-bg-cl: var(--glncn-hov-slct-bg-cl , var(--glncn--slct-hov-bg-cl));
-      --glncn--old-cl    : var(--glncn-hov-old-cl     , var(--glncn-def-old-cl     , var(--glncn--cage-def-cl))); // 0.6
+      --glncn--old-cl    : var(--glncn-hov-old-cl     , var(--glncn-def-old-cl     , var(--glncn--old-def-cl))); // 0.6
       --glncn--old-bg-cl : var(--glncn-hov-old-bg-cl  , var(--glncn-def-old-bg-cl  , var(--glncn--item-hov-bg-cl))); // primary 0.15
     }
     &:focus {
@@ -374,7 +321,7 @@ gln-calendar {
       --glncn--curr-bg-cl: var(--glncn-foc-curr-bg-cl , var(--glncn-hov-curr-bg-cl , var(--glncn--item-foc-bg-cl)));  // primary 0.3
       --glncn--slct-cl   : var(--glncn-foc-slct-cl    , var(--glncn-hov-slct-cl    , var(--glncn-def-slct-cl    , var(--glncn--slct-def-cl)))); // default-bg
       --glncn--slct-bg-cl: var(--glncn-foc-slct-bg-cl , var(--glncn-hov-slct-bg-cl , var(--glncn--slct-hov-bg-cl)));
-      --glncn--old-cl    : var(--glncn-foc-old-cl     , var(--glncn-hov-old-cl     , var(--glncn-def-old-cl     , var(--glncn--cage-def-cl)))); // 0.6
+      --glncn--old-cl    : var(--glncn-foc-old-cl     , var(--glncn-hov-old-cl     , var(--glncn-def-old-cl     , var(--glncn--old-def-cl)))); // 0.6
       --glncn--old-bg-cl : var(--glncn-foc-old-bg-cl  , var(--glncn-hov-old-bg-cl  , var(--glncn-def-old-bg-cl  , var(--glncn--item-foc-bg-cl)))); // primary 0.2
     }
     --glncn--curr-off-cl: var(--glncn-def-curr-off-cl , var(--glncn--dayoff-def-cl)); // 1.0+
@@ -386,7 +333,7 @@ gln-calendar {
     --glncn--curr-bg-cl: var(--glncn-dis-item-bg-cl, transparent);
     --glncn--slct-cl   : var(--glncn-dis-slct-cl   , var(--glncn--slct-def-cl)); // default-bg
     --glncn--slct-bg-cl: var(--glncn-dis-slct-bg-cl, var(--glncn--slct-dis-bg-cl));
-    --glncn--old-cl    : var(--glncn-dis-old-cl    , var(--glncn--cage-dis-cl)); // 0.5+
+    --glncn--old-cl    : var(--glncn-dis-old-cl    , var(--glncn--old-dis-cl)); // 0.5+
     --glncn--old-bg-cl : var(--glncn-dis-old-bg-cl , transparent);
 
     --glncn--curr-off-cl: var(--glncn-dis-curr-off-cl, var(--glncn--dayoff-dis-cl)); // 0.8+
@@ -426,23 +373,19 @@ gln-calendar {
 
   // Level 5 Element "List - DayInfoRow - item"
   [glncn-item] {
-    align-items: center;
     border-radius: var(--glncn-br-rd, 50%);
-    display: inline-flex;
     flex-shrink: 0;
-    font-family: inherit;
     font-size: var(--glncn-item-fn-sz, 1em);
-    font-weight: inherit;
     height: var(--glncn--item-hg);
-    justify-content: center;
+    // #line-height: 1.5;
+    line-height: normal;
     margin: var(--glncn--item-mr);
-    outline: 0;
-    overflow: visible;
+    // ??overflow: visible;
     padding: var(--glncn--item-pd);
     text-decoration: none;
     transition: background-color 180ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     user-select: none;
-    vertical-align: middle;
+    // ??vertical-align: middle;
     width: var(--glncn--item-wd);
   }
   &[rea] :not([disabled])[glncn-item] {
@@ -450,26 +393,17 @@ gln-calendar {
   }
 
   // Level 4 Element "header - week", "list days - row - week"
-  &:not([dis]) [glncn-week] {
-    --glncn--week-cl   : var(--glncn-def-cage-cl, var(--glncn--cage-def-cl));
-    --glncn--week-bg-cl: var(--glncn-def-cage-bg-cl, transparent);
-  }
-  &[dis] [glncn-week] {
-    --glncn--week-cl   : var(--glncn-dis-cage-cl, var(--glncn--cage-dis-cl));
-    --glncn--week-bg-cl: var(--glncn-dis-cage-bg-cl, transparent);
-  }
   [glncn-week] {
-    align-items: center;
-    background-color: var(--glncn--week-bg-cl);
-    color: var(--glncn--week-cl);
-    display: flex;
+    // #align-items: center;
+    // #display: flex;
     font-size: var(--glncn-week-fn-sz, calc(1em - 1px));
     font-weight: var(--glncn-week-fn-wg, 400);
-    height: var(--glncn--item-hg);
-    justify-content: center;
-    line-height: normal;
+    height: var(--glncn-week-hg, var(--glncn--item-hg));
+    // #justify-content: center;
+    // line-height: normal;
     margin: var(--glncn--item-mr);
     padding: var(--glncn--item-pd);
+    pointer-events: none; // Block display on :hover.
     width: var(--glncn--item-wd);
   }
 

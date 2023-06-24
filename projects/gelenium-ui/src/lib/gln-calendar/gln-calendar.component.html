@@ -91,6 +91,7 @@
       </ng-container>
 
       <div *ngFor="let cage of calendarDayNameList; trackBy: trackByIndex;"
+        glncn-center
         glncn-cage
         glncn-tint
         [attr.glncn-old]="isHideDayoffVal || !cage.isDayoff ? '' : undefined"
@@ -184,7 +185,10 @@
 
 
 <ng-template #templateWeekNumberHeader>
-  <div glncn-week
+  <div glncn-center
+    glncn-week
+    glncn-tint
+    glncn-old
     class="gln-calendar-header-week">
   </div>
 </ng-template>
@@ -192,7 +196,10 @@
 
 <ng-template #templateWeekNumberRow
   let-dataWeekNumber="weekNumber">
-  <div glncn-week
+  <div glncn-center
+    glncn-week
+    glncn-tint
+    glncn-old
     class="gln-calendar-row-week">
     {{ dataWeekNumber }}
   </div>
@@ -211,9 +218,10 @@
 
     <ng-container *ngFor="let cell of dataCells; trackBy: trackByIndex;">
       <button type="button"
-        glncn-crs-pnt
+        glncn-center
         glncn-item
         glncn-tint
+        glncn-crs-pnt
         [attr.glncn-old]="cell.state == 'old' && (isHideDayoffVal || !cell.isDayoff) ? '' : undefined"
         [attr.glncn-old-off]="cell.state == 'old' && !isHideDayoffVal && cell.isDayoff ? '' : undefined"
         [attr.glncn-curr]="cell.state == 'curr' && (isHideDayoffVal || !cell.isDayoff) ? '' : undefined"
