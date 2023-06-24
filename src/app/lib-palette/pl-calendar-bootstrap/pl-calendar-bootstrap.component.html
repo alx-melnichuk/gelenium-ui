@@ -121,28 +121,37 @@ app-checkbox &#123;
   // "title-block"
   --glncn-title-fn-wg: 700;
   --glncn-tblock-ord: 1;
+  --glncn-tblock-pd-lf: 0;
+  .gln-calendar-title-block &#123;
+    justify-content: center;
+  &#125;
   &:not([dis]) .gln-calendar-title-block &#123;
     cursor: pointer;
     &:hover &#123;
       background-color: #eee;
+      border-radius: 4px;
     &#125;
   &#125;
+  // "title-caption"
+  --glncn-cap-hg: 30px;
   // "title switch"
   .gln-calendar-switch &#123;
     display: none;
   &#125;
+  // "title prev", "title next"
+  --glncn-def-nav-cl: currentColor;
+  --glncn-hov-nav-bg-cl: #eee;
+  .gln-calendar-nav &#123;
+    border-radius: 4px;
+  &#125;
   // "title prev"
   --glncn-prev-ord: 0;
-  --glncn-def-prev-cl: currentColor;
-  --glncn-hov-prev-bg-cl: #eee;
   // "title next"
   --glncn-next-ord: 2;
-  --glncn-def-next-cl: currentColor;
-  --glncn-hov-next-bg-cl: #eee;
   // "title prev","title next"
-  .gln-calendar-title > button &#123;
+  .gln-calendar-title &gt; button &#123;
     padding: 5px;
-    &>svg &#123;
+    &&gt;svg &#123;
       display: none;
     &#125;
     &::after &#123;
@@ -160,18 +169,24 @@ app-checkbox &#123;
     content: '»';
   &#125;
   // "header cage"
-  --glncn-def-cage-cl: currentColor;
+  .gln-calendar-cage &#123;
+    --glncn-def-old-cl: currentColor;
+  &#125;
   --glncn-cage-fn-sz: 14px;
   --glncn-cage-fn-wg: 700;
   // "list item"
   --glncn-today-br-wd: 0;
   --glncn-def-curr-cl: currentColor;
-  --glncn-hov-curr-bg-cl: #eee;
-  --glncn-hov-old-bg-cl: #eee;
   --glncn-def-slct-cl: #fff;
   --glncn-def-slct-bg-cl: #286090;
+  --glncn-hov-curr-bg-cl: #eee;
+  --glncn-hov-old-bg-cl: #eee;
   --glncn-hov-slct-cl: #fff;
   --glncn-hov-slct-bg-cl: #204d74;
+  --glncn-dis-curr-cl: #7e7e7e;
+  --glncn-dis-old-cl : #7e7e7e;
+  --glncn-dis-slct-bg-cl: #a8a8a8;
+  --glncn-dis-today-br-cl: #7e7e7e;
 
   .gln-calendar-selected &#123;
     &:hover &#123;
@@ -181,10 +196,6 @@ app-checkbox &#123;
       border-color: #204d74;
     &#125;
   &#125;
-  --glncn-dis-curr-cl: #7e7e7e;
-  --glncn-dis-old-cl : #7e7e7e;
-  --glncn-dis-slct-bg-cl: #a8a8a8;
-  --glncn-dis-today-br-cl: #7e7e7e;
 &#125;</pre></code>
         </mat-tab>
       </mat-tab-group>
