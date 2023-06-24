@@ -15,8 +15,8 @@ app-pl-calendar-mat {
   background-color: #fff;
   outline: 1px solid black;
   z-index: 1;
-  top: -89px;
-  left: 72px;
+  top: -63px;
+  left: 80px;
 }
 
 .cnma-mat {
@@ -29,14 +29,16 @@ app-pl-calendar-mat {
   // border-color: transparent;
   width: 280px;
   .gln-calendar-title {
-    padding: 8px 5px 2px 3px;
+    padding: 8px 0 6px 3px;
   }
   // "title-block"
   --glncn-title-fn-wg: 500;
   --glncn-def-tblock-cl: #000;
+  --glncn-tblock-pd-lf: 2px;
   // "title-caption"
   --glncn-cap-hg: 36px;
-  --glncn-cap-pd: 8px 2px 8px 8px;
+  --glncn-cap-pd: 8px 3px 8px 8px;
+
   .gln-calendar-title-caption {
     letter-spacing: 1.25px;
     text-transform: uppercase;
@@ -51,7 +53,7 @@ app-pl-calendar-mat {
         + '</svg>');
       display: block;
       height: 22px;
-      width: 22px;
+      width: 20px;
     }
   }
   // "title switch"
@@ -66,15 +68,15 @@ app-pl-calendar-mat {
   --glncn-nav-pd: 8px;
   --glncn-def-nav-cl: rgba(0, 0, 0, 0.54);
   --glncn-hov-nav-bg-cl: rgba(0, 0, 0, 0.04);
-
   // "view-day"
   // "header"
   .gln-calendar-header {
     border-bottom: 1px solid rgba(128,128,128, 0.3);
+    margin-bottom: 7px;
   }
   // "header cage"
-  // --glncn-def-cage-cl: rgba(0, 0, 0, 0.54); // BAD not used
   --glncn-cage-fn-sz: 11px;
+  --glncn-cage-hg: 25px;
   // "row item"
   --glncn-item-mr: 2px 2px 2px 2px;
 
