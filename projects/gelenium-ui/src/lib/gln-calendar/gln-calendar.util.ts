@@ -133,4 +133,22 @@ export class GlnCalendarUtil {
     }
     return result;
   }
+
+  public static checkYearMonthDayAsDate(year: number, month: number, day: number): boolean {
+    const date: Date = new Date(year, month, day, 0, 0, 0, 0);
+    return date.getFullYear() === year && date.getMonth() === month && date.getDate() === day;
+  }
+
+  public static getLastDayOfMonth(year: number, month: number): Date {
+    const date: Date = new Date(year, month + 1, 1, 0, 0, 0, 0);
+    return DateUtil.addDay(date, -1);
+  }
+
+  public static updateDateByParts(value: Date, year: number | null, month: number | null, day: number | null): Date {
+    const newYear: number = year || value.getFullYear();
+    const newMonth: number = month || value.getMonth();
+    const newDay: number = day || value.getDate();
+    const isCorrectYearMonthDay: boolean = GlnCalendarUtil.checkYearMonthDayAsDate(newYear, newMonth, newDay);
+    return isCorrectYearMonthDay ? new Date(newYear, newMonth, newDay, 0, 0, 0, 0) : GlnCalendarUtil.getLastDayOfMonth(newYear, newMonth);
+  }
 }

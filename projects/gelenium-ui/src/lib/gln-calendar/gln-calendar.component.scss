@@ -93,6 +93,7 @@ gln-calendar {
     font: inherit;
     justify-content: center;
     line-height: 1.5;
+    outline: 0;
   }
 
   // Level 2 Element "title"
@@ -444,11 +445,11 @@ gln-calendar {
     display: flex;
     flex-wrap: wrap;
     inset: 0px;
+    overflow: auto;
     position: absolute;
   }
   // Level 4 Element "glncn-year-wrapper"
   [glncn-year-wrapper] {
-    outline: 1px solid green;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -462,9 +463,9 @@ gln-calendar {
     font-family: inherit;
     font-size: var(--glncn-item-fn-sz, 1em);
     font-weight: inherit;
-    height: var(--glncn--item-hg);
+    height: var(--glncn-year-cell-hg, var(--glncn--item-hg));
     // # margin: var(--glncn--item-mr);
-    outline: 1px solid orange; // outline: 0;
+    outline: 1px solid orange; // !! outline: 0; // # // 
     //  padding: var(--glncn--item-pd);
     //  text-decoration: none;
     //  transition: background-color 180ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;

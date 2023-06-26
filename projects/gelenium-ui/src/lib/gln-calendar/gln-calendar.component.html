@@ -146,10 +146,10 @@
           glncn-month-cell
           glncn-crs-pnt
           glncn-tint
-          [attr.glncn-slct]="monthIdx === selectedMonth ? '' : undefined"
-          [attr.glncn-curr]="monthIdx !== selectedMonth ? '' : undefined"
+          [attr.glncn-slct]="monthIdx === calendarMonthSelected ? '' : undefined"
+          [attr.glncn-curr]="monthIdx !== calendarMonthSelected ? '' : undefined"
           [attr.glncn-today]="monthIdx === todaysMonth ? '' : undefined"
-          [ngClass]="['gln-calendar-month-cell', (monthIdx === selectedMonth ? 'selected' : '')
+          [ngClass]="['gln-calendar-month-cell', (monthIdx === calendarMonthSelected ? 'gln-selected' : '')
           , (monthIdx === todaysMonth ? 'gln-today' : '')]"
           (click)="clickMonthCell(monthIdx)">
           {{ monthCell }}
@@ -168,10 +168,10 @@
           glncn-year-cell
           glncn-crs-pnt
           glncn-tint
-          [attr.glncn-curr]="yearCell !== selectedYear ? '' : undefined"
-          [attr.glncn-slct]="yearCell === selectedYear ? '' : undefined"
+          [attr.glncn-curr]="yearCell !== calendarYearSelected ? '' : undefined"
+          [attr.glncn-slct]="yearCell === calendarYearSelected ? '' : undefined"
           [attr.glncn-today]="yearCell === todaysYear ? '' : undefined"
-          [ngClass]="['gln-calendar-year-cell', (yearCell === selectedYear ? 'selected' : '')
+          [ngClass]="['gln-calendar-year-cell', (yearCell === calendarYearSelected ? 'gln-selected' : '')
           , (yearCell === todaysYear ? 'gln-today' : '')]"
           (click)="clickYearCell(yearCell)">
           {{ yearCell }}
