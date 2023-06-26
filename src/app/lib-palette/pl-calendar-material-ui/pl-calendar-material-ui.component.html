@@ -39,7 +39,7 @@
         [config]="cfgMui"
         [isDisabled]="isDisabled07l"
         [isHideOldDays]="isHideOldDays07l"
-        (selected)="value07l=$event">
+        (change)="value07l=$event.value">
       </gln-calendar>
     </div>
   </div>
@@ -67,7 +67,7 @@
         [config]="cfgMui"
         [isDisabled]="isDisabled07l"
         [isHideOldDays]="isHideOldDays07l"
-        (selected)="value07l=$event"&gt;
+        (change)="value07l=$event.value"&gt;
       &lt;/gln-calendar&gt;
     &lt;/div&gt;
   &lt;/div&gt;
