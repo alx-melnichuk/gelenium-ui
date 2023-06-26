@@ -56,7 +56,7 @@ public model01: Date | null = new Date();</pre>
         [isHideDayoff]="isHideDayoff01a"
         [isReadOnly]="isReadOnly01a"
         [isWeekNumber]="isWeekNumber01a"
-        (selected)="value01a=$event">
+        (change)="value01a=$event.value">
       </gln-calendar>
       <!-- <gln-calendar [value]="value01a">
       </gln-calendar> -->
@@ -81,9 +81,10 @@ public model01: Date | null = new Date();</pre>
         [isHideDayoff]="isHideDayoff01a"
         [isReadOnly]="isReadOnly01a"
         [isWeekNumber]="isWeekNumber01a"
-        (selected)="value01b=$event">
+        (change)="value01b=$event.value">
       </gln-calendar>
-      <!-- <gln-calendar [value]="value01a">
+      <!-- <gln-calendar [value]="value01a"
+        (change)="value01a=$event.value">
       </gln-calendar> -->
     </div>
   </div>
