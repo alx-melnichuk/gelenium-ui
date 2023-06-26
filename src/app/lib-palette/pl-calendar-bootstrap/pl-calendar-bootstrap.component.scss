@@ -93,4 +93,24 @@ app-pl-calendar-bootstrap {
       border-color: #204d74;
     }
   }
+
+  // Level 4 Element "glncn-year-wrapper"
+  --glncn-year-cell-br-rd: 4px;
+  --glncn-year-cell-hg: 100%;
+  --glncn-year-cell-wd: 100%;
+  .gln-calendar-view-year {
+    padding: 9px 4px 9px 4px;
+  }
+  .gln-calendar-year-cell-wrapper {
+    height: 54px;
+    width: 23%;
+    margin: 2px;
+  }
+  &.gln-calendar .gln-calendar-year-cell.gln-selected {
+    --glncn-def-slct-cl: currentColor;
+    --glncn-def-slct-bg-cl: #eee;
+    --glncn-hov-slct-cl: currentColor;
+    --glncn-hov-slct-bg-cl: #eee;
+  }
+
 }

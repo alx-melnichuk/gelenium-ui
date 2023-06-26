@@ -28,6 +28,7 @@ export class PlCalendarBootstrapComponent {
     cellSize: 30,
     isHideDayoff: true,
     isStartSunday: true,
+    numberOfYears: 12,
     sizeDayWeek: 2,
   };
   public selectedDate: Date = this.getSelectedDate();

@@ -31,7 +31,7 @@
         [config]="cfgBs"
         [value]="value07h"
         [isDisabled]="isDisabled07h"
-        (selected)="value07h=$event">
+        (change)="value07h=$event.value">
       </gln-calendar>
     </div>
   </div>
@@ -58,7 +58,7 @@
         [config]="cfgBs"
         [value]="value07h"
         [isDisabled]="isDisabled07h"
-        (selected)="value07h=$event"&gt;
+        (change)="value07h=$event.value"&gt;
       &lt;/gln-calendar&gt;
     &lt;/div&gt;
   &lt;/div&gt;
