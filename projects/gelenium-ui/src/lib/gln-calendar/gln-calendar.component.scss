@@ -195,7 +195,7 @@ gln-calendar {
   }
 
   // Level 3 Element "title nav"
-  &:not([dis]) [glncn-nav] {
+  &:not([dis]) :not([disabled])[glncn-nav] {
     &:not(:hover) {
       --glncn--nav-cl   : var(--glncn-def-nav-cl, var(--glncn--nav-def-cl));
       --glncn--nav-bg-cl: var(--glncn-def-nav-bg-cl, transparent);
@@ -205,8 +205,8 @@ gln-calendar {
       --glncn--nav-bg-cl: var(--glncn-hov-nav-bg-cl, var(--glncn--nav-hov-bg-cl));
     }
   }
-  &[dis] [glncn-nav] {
-    --glncn--nav-cl   : var(--glncn-dis-nav-cl, var(--glncn--sndr-dis-cl));
+  &[dis] [glncn-nav], [disabled][glncn-nav] {
+    --glncn--nav-cl   : var(--glncn-dis-nav-cl, var(--glncn--old-def-cl));
     --glncn--nav-bg-cl: var(--glncn-dis-nav-bg-cl, transparent);
   }
   [glncn-nav] {
@@ -257,6 +257,7 @@ gln-calendar {
     align-items: center;
     display: flex;
     flex-direction: var(--glncn--dir-lv2);
+    user-select: none;
   }
   &:not([wdFull]) [glncn-header] {
     justify-content: center;
@@ -454,7 +455,7 @@ gln-calendar {
     display: flex;
     justify-content: center;
     width: 25%;
-    height: 25%;
+    height: 20%;
   }
   // Level 5 Element "glncn-year-cell"
   [glncn-year-cell] {

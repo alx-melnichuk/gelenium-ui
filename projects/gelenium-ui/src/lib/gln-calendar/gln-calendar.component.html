@@ -24,7 +24,7 @@
       </button>
 
       <button type="button"
-        *ngIf="!isDisabledVal && !isHorizontVal"
+        *ngIf="!isDisabledVal && !isHorizontVal && view === VIEW_DAY"
         glncn-switch
         glncn-crs-pnt
         class="gln-calendar-switch"
@@ -44,14 +44,14 @@
     </div>
 
     <button type="button"
+      *ngIf="view !== VIEW_MONTH"
       glncn-nav
       glncn-prev
       glncn-crs-pnt
       class="gln-calendar-nav gln-calendar-prev"
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
-      [attr.disabled]="isDisabledVal || isReadOnlyVal || view !== VIEW_DAY? '' : undefined"
-      [attr.glncn-hide]="view !== VIEW_DAY ? '' : undefined"
-      (click)="clickPrev()">
+      [attr.disabled]="isDisabledVal || isReadOnlyVal || (view === VIEW_YEAR && calendarYearFirst === YEAR_PERIOD_MIN) ? '' : undefined"
+      (click)="clickPrev(view === VIEW_DAY ? VIEW_MONTH : (view === VIEW_YEAR ? VIEW_YEAR : ''))">
       <svg glncn-icon
         class="gln-calendar-t-icon icon-prev"
         focusable="false"
@@ -62,14 +62,14 @@
     </button>
 
     <button type="button"
+      *ngIf="view !== VIEW_MONTH"
       glncn-nav
       glncn-next
       glncn-crs-pnt
       class="gln-calendar-nav gln-calendar-next"
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
-      [attr.disabled]="isDisabledVal || isReadOnlyVal || view !== VIEW_DAY ? '' : undefined"
-      [attr.glncn-hide]="view !== VIEW_DAY ? '' : undefined"
-      (click)="clickNext()">
+      [attr.disabled]="isDisabledVal || isReadOnlyVal || (view === VIEW_YEAR && calendarYearLast === YEAR_PERIOD_MAX) ? '' : undefined"
+      (click)="clickNext(view === VIEW_DAY ? VIEW_MONTH : (view === VIEW_YEAR ? VIEW_YEAR : ''))">
       <svg glncn-icon
         class="gln-calendar-t-icon icon-next"
         focusable="false"
