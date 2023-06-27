@@ -42,18 +42,20 @@ export class DateUtil {
   public static getMonthName(date: Date, month?: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined): string {
     return new Intl.DateTimeFormat('default', { month: month }).format(date);
   }
-
+  /** Get the name of the day of the week for the specified date. */
   public static getNameWeekday(date: Date, weekday?: 'long' | 'short' | 'narrow' | undefined): string {
     return new Intl.DateTimeFormat('default', { weekday: weekday }).format(date);
   }
-
-  public static addYear(date: Date, delta: number = 1): Date {
-    return new Date(date.getFullYear() + delta, date.getMonth(), date.getDate(), 0, 0, 0, 0);
+  /** Add "delta" years for the specified date. */
+  public static addYear(d: Date, delta: number = 1): Date {
+    return new Date(d.getFullYear() + delta, d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
   }
-  public static addMonth(date: Date, delta: number = 1): Date {
-    return new Date(date.getFullYear(), date.getMonth() + delta, date.getDate(), 0, 0, 0, 0);
+  /** Add "delta" months for the specified date. */
+  public static addMonth(d: Date, delta: number = 1): Date {
+    return new Date(d.getFullYear(), d.getMonth() + delta, d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
   }
-  public static addDay(date: Date, delta: number = 1): Date {
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate() + delta, 0, 0, 0, 0);
+  /** Add "delta" days for the specified date. */
+  public static addDay(d: Date, delta: number = 1): Date {
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate() + delta, d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
   }
 }
