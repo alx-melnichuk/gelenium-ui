@@ -10,6 +10,9 @@ export const CALENDAR_DAY_CURRENT = 'curr';
 export const CALENDAR_DAY_PREVIOUS = 'old';
 export const CALENDAR_DAY_SELECTED = 'slct';
 
+export const CALENDAR_YEAR_PERIOD_MIN = 1000;
+export const CALENDAR_YEAR_PERIOD_MAX = 2150;
+
 export interface CalendarDayCell {
   year: number;
   month: number;
@@ -144,11 +147,21 @@ export class GlnCalendarUtil {
     return DateUtil.addDay(date, -1);
   }
 
-  public static updateDateByParts(value: Date, year: number | null, month: number | null, day: number | null): Date {
+  public static getDateByItsDetails(value: Date, year: number | null, month: number | null, day: number | null): Date {
     const newYear: number = year || value.getFullYear();
     const newMonth: number = month || value.getMonth();
     const newDay: number = day || value.getDate();
     const isCorrectYearMonthDay: boolean = GlnCalendarUtil.checkYearMonthDayAsDate(newYear, newMonth, newDay);
     return isCorrectYearMonthDay ? new Date(newYear, newMonth, newDay, 0, 0, 0, 0) : GlnCalendarUtil.getLastDayOfMonth(newYear, newMonth);
+  }
+
+  public static getFirstYearOfPeriod(years: number, numberOfYears: number): number {
+    let result: number = -1;
+    if (0 < years && years < CALENDAR_YEAR_PERIOD_MAX && 0 < numberOfYears && numberOfYears < 101 && years >= CALENDAR_YEAR_PERIOD_MIN) {
+      const delta: number = years - CALENDAR_YEAR_PERIOD_MIN;
+      const valueResult = CALENDAR_YEAR_PERIOD_MIN + Math.trunc(delta / numberOfYears) * numberOfYears;
+      result = valueResult < CALENDAR_YEAR_PERIOD_MAX - numberOfYears ? valueResult : result;
+    }
+    return result;
   }
 }
