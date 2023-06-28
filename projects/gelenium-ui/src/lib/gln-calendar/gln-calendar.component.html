@@ -137,8 +137,7 @@
     <div *ngIf="view == VIEW_MONTH"
       glncn-view-month
       class="gln-calendar-view-month">
-      <div
-        *ngFor="let monthCell of calendarMonthCellList; index as monthIdx; trackBy: trackByIndex;"
+      <div *ngFor="let monthCell of calendarMonthCellList; index as monthIdx; trackBy: trackByIndex;"
         glncn-month-wrapper
         class="gln-calendar-month-cell-wrapper">
         <button type="button"

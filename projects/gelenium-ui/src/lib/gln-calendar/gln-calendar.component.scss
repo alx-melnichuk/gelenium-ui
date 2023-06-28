@@ -371,6 +371,7 @@ gln-calendar {
       background-color: var(--glncn--old-bg-cl);
       color: var(--glncn--old-off-cl);
     }
+    transition: background-color 180ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
 
   // Level 5 Element "List - DayInfoRow - item"
@@ -385,9 +386,7 @@ gln-calendar {
     // ??overflow: visible;
     padding: var(--glncn--item-pd);
     text-decoration: none;
-    transition: background-color 180ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     user-select: none;
-    // ??vertical-align: middle;
     width: var(--glncn--item-wd);
   }
   &[rea] :not([disabled])[glncn-item] {
@@ -411,18 +410,25 @@ gln-calendar {
 
   // Level 3 Element "view-month"
   [glncn-view-month] {
+    box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
     inset: 0px;
+    padding: var(--glncn-view-month-pd, 0px);
     position: absolute;
   }
 
   // Level 4 Element "glncn-month-wrapper"
   [glncn-month-wrapper] {
     align-items: center;
+    box-sizing: border-box;
     display: flex;
-    flex-basis: 33.3%;
+    height: var(--glncn-month-wrapper-hg, 25%);
     justify-content: center;
+    margin: var(--glncn-month-wrapper-mr, 0px);
+    padding: var(--glncn-month-wrapper-pd, 0px);
+    width: var(--glncn-month-wrapper-wd, 33.32%);
+    // # outline: 1px solid orange; // #    
   }
 
   // Level 5 Element "glncn-month-cell"
@@ -432,45 +438,44 @@ gln-calendar {
     font-family: inherit;
     font-size: var(--glncn-item-fn-sz, 1em);
     font-weight: inherit;
-    height: var(--glncn--item-hg);
-    outline: 0; // outline: 1px solid orange; // 
-    //  padding: var(--glncn--item-pd);
-    //  text-decoration: none;
-    //  user-select: none;
+    height: var(--glncn-month-cell-hg, var(--glncn--item-hg));
+    outline: 0;
+    user-select: none;
     width: var(--glncn-month-cell-wd, 85%);
   }
 
   // Level 3 Element "view-year"
   [glncn-view-year] {
-    outline: 1px solid blue;
+    // outline: 1px solid blue;
+    box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
     inset: 0px;
     overflow: auto;
+    padding: var(--glncn-view-year-pd, 0px);
     position: absolute;
   }
   // Level 4 Element "glncn-year-wrapper"
   [glncn-year-wrapper] {
     align-items: center;
+    box-sizing: border-box;
     display: flex;
+    height: var(--glncn-year-wrapper-hg, 20%);
     justify-content: center;
-    width: 25%;
-    height: 20%;
+    margin: var(--glncn-year-wrapper-mr, 0px);
+    padding: var(--glncn-year-wrapper-pd, 0px);
+    width: var(--glncn-year-wrapper-wd, 25%);
+    // # outline: 1px solid orange; // #
   }
   // Level 5 Element "glncn-year-cell"
   [glncn-year-cell] {
     border: 0;
     border-radius: var(--glncn-year-cell-br-rd, calc(var(--glncn--item-hg) / 2));
     font-family: inherit;
-    font-size: var(--glncn-item-fn-sz, 1em);
+    font-size: var(--glncn-year-cell-fn-sz, var(--glncn-item-fn-sz, 1em));
     font-weight: inherit;
     height: var(--glncn-year-cell-hg, var(--glncn--item-hg));
-    // # margin: var(--glncn--item-mr);
-    outline: 1px solid orange; // !! outline: 0; // # // 
-    //  padding: var(--glncn--item-pd);
-    //  text-decoration: none;
-    //  transition: background-color 180ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    //  user-select: none;
-    width: var(--glncn-year-cell-wd, 94%);
+    user-select: none;
+    width: var(--glncn-year-cell-wd, 80px);
   }
 }
