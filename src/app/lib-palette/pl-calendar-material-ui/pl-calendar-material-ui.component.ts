@@ -30,6 +30,7 @@ export class PlCalendarMaterialUiComponent {
     isHideDayoff: true,
     isHideOldDays: true,
     isStartSunday: true,
+    numberOfYears: 15,
     sizeDayWeek: 1,
   };
   public selectedDate: Date = this.getSelectedDate();
