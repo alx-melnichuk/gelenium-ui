@@ -114,10 +114,16 @@ gln-calendar {
     flex-grow: 1;
     order: var(--glncn-tblock-ord, unset);
     min-width: var(--glncn-tblock-mn-wd, 15ch);
+    &[glncn-title-year], &[glncn-title-month] {
+      justify-content: center;
+    }
   }
+
   &[hor] [glncn-title-block] {
     justify-content: center;
-    padding-top: 4em;
+    &:not([glncn-title-month]) {
+      padding-top: 4em;
+    }
   }
   &:not([hor]) [glncn-title-block] {
     padding-left: var(--glncn---wee-tblock-pd-lf, var(--glncn-tblock-pd-lf, calc(var(--glncn--item-size) * 0.25)));
