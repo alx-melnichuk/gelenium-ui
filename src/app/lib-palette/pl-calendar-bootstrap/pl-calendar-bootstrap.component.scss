@@ -10,6 +10,14 @@ app-pl-calendar-bootstrap {
 }
 
 .cnbs-bstr {
+  position: absolute;
+  background: #fff;
+  outline: 1px solid #000;
+  top: 693px;
+  left: 205px;
+  z-index: 2;
+}
+.cnbs-bstr {
   color: #333;
   display: inline-block;
   font-size: 14px;
