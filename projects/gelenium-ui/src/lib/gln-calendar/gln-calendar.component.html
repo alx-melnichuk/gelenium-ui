@@ -18,13 +18,13 @@
         class="gln-calendar-title-caption"
         [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
         (click)="clickSwitch()">
-        {{ view === VIEW_DAY ? calendarDayCurrMonthName + ' ' + calendarDayCurrYearName :
-        (view === VIEW_MONTH ? calendarDayCurrYearName : calendarYearFirst + ' - ' +
+        {{ view === VIEW_DAY ? calendarDayMonthName + ' ' + calendarDayYearName :
+        (view === VIEW_MONTH ? calendarDayYearName : calendarYearFirst + ' - ' +
         calendarYearLast ) }}
       </button>
 
       <button type="button"
-        *ngIf="!isDisabledVal && !isHorizontVal && view === VIEW_DAY"
+        *ngIf="!isDisabledVal && !isHorizontVal"
         glncn-switch
         glncn-crs-pnt
         class="gln-calendar-switch"
@@ -43,41 +43,41 @@
 
     </div>
 
-    <button type="button"
-      *ngIf="view !== VIEW_MONTH"
-      glncn-nav
-      glncn-prev
-      glncn-crs-pnt
-      class="gln-calendar-nav gln-calendar-prev"
-      [attr.tabindex]="!isDisabledVal ? 0 : -1"
-      [attr.disabled]="isDisabledVal || isReadOnlyVal || (view === VIEW_YEAR && calendarYearFirst === YEAR_PERIOD_MIN) ? '' : undefined"
-      (click)="clickPrev(view === VIEW_DAY ? VIEW_MONTH : (view === VIEW_YEAR ? VIEW_YEAR : ''))">
-      <svg glncn-icon
-        class="gln-calendar-t-icon icon-prev"
-        focusable="false"
-        aria-hidden="true"
-        viewBox="0 0 24 24">
-        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
-      </svg>
-    </button>
+    <ng-container *ngIf="view !== VIEW_MONTH">
+      <button type="button"
+        glncn-nav
+        glncn-prev
+        glncn-crs-pnt
+        class="gln-calendar-nav gln-calendar-prev"
+        [attr.tabindex]="!isDisabledVal ? 0 : -1"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal || (view === VIEW_YEAR && calendarYearFirst === YEAR_PERIOD_MIN) ? '' : undefined"
+        (click)="clickPrev(view === VIEW_DAY ? VIEW_MONTH : (view === VIEW_YEAR ? VIEW_YEAR : ''))">
+        <svg glncn-icon
+          class="gln-calendar-t-icon icon-prev"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24">
+          <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+        </svg>
+      </button>
 
-    <button type="button"
-      *ngIf="view !== VIEW_MONTH"
-      glncn-nav
-      glncn-next
-      glncn-crs-pnt
-      class="gln-calendar-nav gln-calendar-next"
-      [attr.tabindex]="!isDisabledVal ? 0 : -1"
-      [attr.disabled]="isDisabledVal || isReadOnlyVal || (view === VIEW_YEAR && calendarYearLast === YEAR_PERIOD_MAX) ? '' : undefined"
-      (click)="clickNext(view === VIEW_DAY ? VIEW_MONTH : (view === VIEW_YEAR ? VIEW_YEAR : ''))">
-      <svg glncn-icon
-        class="gln-calendar-t-icon icon-next"
-        focusable="false"
-        aria-hidden="true"
-        viewBox="0 0 24 24">
-        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
-      </svg>
-    </button>
+      <button type="button"
+        glncn-nav
+        glncn-next
+        glncn-crs-pnt
+        class="gln-calendar-nav gln-calendar-next"
+        [attr.tabindex]="!isDisabledVal ? 0 : -1"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal || (view === VIEW_YEAR && calendarYearLast === YEAR_PERIOD_MAX) ? '' : undefined"
+        (click)="clickNext(view === VIEW_DAY ? VIEW_MONTH : (view === VIEW_YEAR ? VIEW_YEAR : ''))">
+        <svg glncn-icon
+          class="gln-calendar-t-icon icon-next"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24">
+          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+        </svg>
+      </button>
+    </ng-container>
   </div>
 
   <div glncn-view-day

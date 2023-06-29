@@ -198,7 +198,18 @@ gln-calendar {
     height: 1.5em;
     width: 1.5em;
     transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: transform 300ms;
   }
+  [glncn-title-day] > [glncn-switch] > [glncn-icon] {
+    transform: rotate(0deg);
+  }
+  [glncn-title-year] > [glncn-switch] > [glncn-icon] {
+    transform: rotate(180deg);
+  }
+  [glncn-title-month] > [glncn-switch] > [glncn-icon] {
+    transform: rotate(180deg);
+  }
+
 
   // Level 3 Element "title nav"
   &:not([dis]) :not([disabled])[glncn-nav] {
