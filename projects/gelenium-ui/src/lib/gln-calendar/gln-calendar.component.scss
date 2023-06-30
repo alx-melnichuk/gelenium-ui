@@ -153,41 +153,13 @@ gln-calendar {
     outline: 0;
     padding: var(--glncn-cap-pd, 0);
     text-decoration: none;
+    user-select: none;
     vertical-align: middle;
   }
 
   // Level 4 Element title button "switch"
-  &:not([dis]) [glncn-switch] {
-    &:not(:hover) {
-      --glncn--switch-cl   : var(--glncn-def-switch-cl, var(--glncn--nav-def-cl));
-      --glncn--switch-bg-cl: var(--glncn-def-switch-bg-cl, transparent);
-    }
-    &:hover:not([disabled]) {
-      --glncn--switch-cl   : var(--glncn-hov-switch-cl, var(--glncn-def-switch-cl, var(--glncn--nav-def-cl)));
-      --glncn--switch-bg-cl: var(--glncn-hov-switch-bg-cl, var(--glncn--nav-hov-bg-cl));
-    }
-  }
-  &[dis] [glncn-switch] {
-    --glncn--switch-cl   : var(--glncn-dis-switch-cl, var(--glncn--sndr-dis-cl));
-    --glncn--switch-bg-cl: var(--glncn-dis-switch-bg-cl, transparent);
-  }
   [glncn-switch] {
-    align-items: center;
-    background-color: var(--glncn--switch-bg-cl);
-    border: 0;
-    border-radius: var(--glncn-br-rd, 50%);
-    color: var(--glncn--switch-cl);
-    display: inline-flex;
-    flex-shrink: 0;
-    font: inherit;
-    justify-content: center;
-    outline: 0;
-    overflow: visible;
-    padding: 0.5em;
     position: relative;
-    text-decoration: none;
-    user-select: none;
-    vertical-align: middle;
   }
 
   // Level 5 Element svg "icon"
@@ -213,13 +185,17 @@ gln-calendar {
 
   // Level 3 Element "title nav"
   &:not([dis]) :not([disabled])[glncn-nav] {
-    &:not(:hover) {
+    &:not(:hover):not(:focus) {
       --glncn--nav-cl   : var(--glncn-def-nav-cl, var(--glncn--nav-def-cl));
       --glncn--nav-bg-cl: var(--glncn-def-nav-bg-cl, transparent);
     }
-    &:hover {
+    &:hover:not(:focus) {
       --glncn--nav-cl   : var(--glncn-hov-nav-cl, var(--glncn-def-nav-cl, var(--glncn--nav-def-cl)));
       --glncn--nav-bg-cl: var(--glncn-hov-nav-bg-cl, var(--glncn--nav-hov-bg-cl));
+    }
+    &:focus {
+      --glncn--nav-cl   : var(--glncn-foc-nav-cl, var(--glncn-hov-nav-cl, var(--glncn-def-nav-cl, var(--glncn--nav-def-cl))));
+      --glncn--nav-bg-cl: var(--glncn-foc-nav-bg-cl , var(--glncn-hov-nav-bg-cl, var(--glncn--nav-hov-bg-cl)));
     }
   }
   &[dis] [glncn-nav], [disabled][glncn-nav] {
