@@ -164,4 +164,8 @@ export class GlnCalendarUtil {
     }
     return result;
   }
+
+  public static getElementByLabel(elementListRef: HTMLDivElement | undefined, label: string | null): HTMLElement | null {
+    return (elementListRef?.querySelector(`button[data-label='${label}']`) as HTMLElement) || null;
+  }
 }
