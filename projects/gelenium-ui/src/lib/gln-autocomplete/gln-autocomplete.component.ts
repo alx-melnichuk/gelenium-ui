@@ -28,6 +28,7 @@ import { GlnOptionUtil } from '../gln-option/gln-option.util';
 
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { ChangeUtil } from '../_utils/change.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
 import { GlnAutocomplete } from './gln-autocomplete.interface';
@@ -154,40 +155,38 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);
     }
-    if (changes['isClearOnEscape'] || (changes['config'] && this.isClearOnEscape == null && this.currConfig.isClearOnEscape != null)) {
+    if (changes['isClearOnEscape'] || (ChangeUtil.check(changes['config'], 'isClearOnEscape') && this.currConfig.isClearOnEscape != null)) {
       this.clearOnEscape = BooleanUtil.init(this.isClearOnEscape) ?? !!this.currConfig.isClearOnEscape;
     }
-    if (changes['isMaxWd'] || (changes['config'] && this.isMaxWd == null && this.currConfig.isMaxWd != null)) {
+    if (!!changes['isMaxWd'] || (ChangeUtil.check(changes['config'], 'isMaxWd') && this.currConfig.isMaxWd != null)) {
       this.isMaxWdVal = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
       this.setCssMaxWidth(this.isMaxWdVal, this.hostRef);
     }
-    if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
+    if (!!changes['isNoAnimation'] || (ChangeUtil.check(changes['config'], 'isNoAnimation') && this.currConfig.isNoAnimation != null)) {
       this.isNoAnimationVal = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
     }
-    if (
-      changes['isNoCloseOnSelect'] ||
-      (changes['config'] && this.isNoCloseOnSelect == null && this.currConfig.isNoCloseOnSelect != null)
-    ) {
+    const isNoCloseOnSelect: boolean | undefined = this.currConfig.isNoCloseOnSelect;
+    if (!!changes['isNoCloseOnSelect'] || (ChangeUtil.check(changes['config'], 'isNoCloseOnSelect') && isNoCloseOnSelect != null)) {
       this.isNoCloseOnSelectVal = BooleanUtil.init(this.isNoCloseOnSelect) ?? !!this.currConfig.isNoCloseOnSelect;
     }
-    if (changes['isNoOpenOnMouse'] || (changes['config'] && this.isNoOpenOnMouse == null && this.currConfig.isNoOpenOnMouse != null)) {
+    if (changes['isNoOpenOnMouse'] || (ChangeUtil.check(changes['config'], 'isNoOpenOnMouse') && this.currConfig.isNoOpenOnMouse != null)) {
       this.noOpenOnMouse = BooleanUtil.init(this.isNoOpenOnMouse) ?? !!this.currConfig.isNoOpenOnMouse;
     }
-    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
+    if (!!changes['isNoRipple'] || (ChangeUtil.check(changes['config'], 'isNoRipple') && this.currConfig.isNoRipple != null)) {
       this.noRipple = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
       this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
     }
-    if (changes['isOpenOnFocus'] || (changes['config'] && this.isOpenOnFocus == null && this.currConfig.isOpenOnFocus != null)) {
+    if (!!changes['isOpenOnFocus'] || (ChangeUtil.check(changes['config'], 'isOpenOnFocus') && this.currConfig.isOpenOnFocus != null)) {
       this.openOnFocus = BooleanUtil.init(this.isOpenOnFocus) ?? !!this.currConfig.isOpenOnFocus;
     }
-    if (changes['classes'] || (changes['config'] && this.classes == null && this.currConfig.classes != null)) {
+    if (!!changes['classes'] || (ChangeUtil.check(changes['config'], 'classes') && this.currConfig.classes != null)) {
       this.classesVal = this.classes || this.currConfig.classes;
     }
-    if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
+    if (!!changes['position'] || (ChangeUtil.check(changes['config'], 'position') && this.currConfig.position != null)) {
       this.positionVal = AUTOCOMPLETE_POSITION[this.position || this.currConfig.position || ''] || AUTOCOMPLETE_POSITION['start'];
       this.setCssJustifyContent(this.positionVal, this.hostRef);
     }
-    if (changes['visibleSize'] || (changes['config'] && this.visibleSize == null && this.currConfig.visibleSize != null)) {
+    if (!!changes['visibleSize'] || (ChangeUtil.check(changes['config'], 'visibleSize') && this.currConfig.visibleSize != null)) {
       this.visibleSizeVal = this.visibleSize || this.currConfig.visibleSize || null;
       this.setCssMaxHeight(this.optionHeight, this.visibleSizeVal, this.hostRef);
     }
