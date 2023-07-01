@@ -38,11 +38,13 @@ import {
 import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../directives/gln-regex/gln-node-internal-validator.interface';
 import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
 import { BooleanUtil } from '../_utils/boolean.util';
+import { ChangeUtil } from '../_utils/change.util';
+import { HtmlConvertUtil } from '../_utils/html-convert.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+import { ScreenUtil } from '../_utils/screen.util';
+
 import { GlnSwitchChange } from './gln-switch-change.interface';
 import { GlnSwitchConfig } from './gln-switch-config.interface';
-import { ScreenUtil } from '../_utils/screen.util';
-import { HtmlConvertUtil } from '../_utils/html-convert.util';
 
 const POSITION: { [key: string]: string } = { top: 'top', bottom: 'bottom', start: 'start', end: 'end' };
 
@@ -130,29 +132,29 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['config']) {
+    if (!!changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
-    if (changes['isDisabled']) {
+    if (!!changes['isDisabled']) {
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
-    if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
+    if (!!changes['isNoAnimation'] || (ChangeUtil.check(changes['config'], 'isNoAnimation') && this.currConfig.isNoAnimation != null)) {
       this.isNoAnimationVal = !!(BooleanUtil.init(this.isNoAnimation) ?? (this.currConfig.isNoAnimation || null));
       this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
-    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
+    if (!!changes['isNoRipple'] || (ChangeUtil.check(changes['config'], 'isNoRipple') && this.currConfig.isNoRipple != null)) {
       this.isNoRippleVal = !!(BooleanUtil.init(this.isNoRipple) ?? (this.currConfig.isNoRipple || null));
       this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
-    if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
+    if (!!changes['isReadOnly'] || (ChangeUtil.check(changes['config'], 'isReadOnly') && this.currConfig.isReadOnly != null)) {
       this.isReadOnlyVal = !!(BooleanUtil.init(this.isReadOnly) ?? (this.currConfig.isReadOnly || null));
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
-    if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
+    if (!!changes['isRequired'] || (ChangeUtil.check(changes['config'], 'isRequired') && this.currConfig.isRequired != null)) {
       this.isRequiredVal = !!(BooleanUtil.init(this.isRequired) ?? (this.currConfig.isRequired || null));
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
-    if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
+    if (!!changes['position'] || (ChangeUtil.check(changes['config'], 'position') && this.currConfig.position != null)) {
       // Remove class by old position value.
       this.settingByPosition(false, this.positionVal, this.renderer, this.hostRef);
       const positionStr: string = (this.position || this.currConfig.position || '').toString();
@@ -161,7 +163,7 @@ export class GlnSwitchComponent implements OnChanges, OnInit, AfterContentInit, 
       this.settingByPosition(true, this.positionVal, this.renderer, this.hostRef);
     }
 
-    if (changes['isRequired']) {
+    if (!!changes['isRequired']) {
       this.prepareFormGroup(this.isRequiredVal);
     }
   }
