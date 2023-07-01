@@ -23,6 +23,7 @@ import {
 import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.component';
 
 import { BooleanUtil } from '../_utils/boolean.util';
+import { ChangeUtil } from '../_utils/change.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnButtonConfig } from './gln-button-config.interface';
@@ -101,16 +102,16 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['config']) {
+    if (!!changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     let isUpdateCssParams = false;
-    if (changes['exterior'] || (changes['config'] && this.exterior == null && this.currConfig.exterior != null)) {
+    if (!!changes['exterior'] || (ChangeUtil.check(changes['config'], 'exterior') && this.currConfig.exterior != null)) {
       this.exteriorVal = EXTERIOR[this.exterior || this.currConfig.exterior || ''] || EXTERIOR['outlined'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
       isUpdateCssParams = true;
     }
-    if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
+    if (!!changes['size'] || (ChangeUtil.check(changes['config'], 'size') && this.currConfig.size != null)) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
       this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       this.setCssSize(this.sizeVal, this.hostRef);
@@ -120,12 +121,12 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       this.updateCssParams(this.exteriorVal, this.sizeVal, this.getLineHeight(), this.hostRef);
     }
 
-    if (changes['isDisabled']) {
+    if (!!changes['isDisabled']) {
       this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabledVal || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabledVal ? '' : null);
     }
-    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
+    if (!!changes['isNoRipple'] || (ChangeUtil.check(changes['config'], 'isNoRipple') && this.currConfig.isNoRipple != null)) {
       this.isNoRippleVal = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
       this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
