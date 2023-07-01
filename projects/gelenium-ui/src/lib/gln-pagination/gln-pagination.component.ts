@@ -15,7 +15,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { BooleanUtil } from '../_utils/boolean.util';
+import { ChangeUtil } from '../_utils/change.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
+
 import { GlnPaginationConfig } from './gln-pagination-config.interface';
 import { GlnPaginationUtil } from './gln-pagination.util';
 
@@ -100,20 +102,20 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['config']) {
+    if (!!changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     let isBorderRadius: boolean = false;
     let isPageBuffer: boolean = !!changes['page'];
-    if (changes['count'] || (changes['config'] && this.count == null && this.currConfig.count != null)) {
+    if (!!changes['count'] || (ChangeUtil.check(changes['config'], 'count') && this.currConfig.count != null)) {
       this.countVal = this.getNotNegative(this.count ?? this.currConfig.count) ?? COUNT;
       isPageBuffer = true;
     }
-    if (changes['countBorder'] || (changes['config'] && this.countBorder == null && this.currConfig.countBorder != null)) {
+    if (!!changes['countBorder'] || (ChangeUtil.check(changes['config'], 'countBorder') && this.currConfig.countBorder != null)) {
       this.countBorderVal = this.getNotNegative(this.countBorder ?? this.currConfig.countBorder) ?? COUNT_BORDER;
       isPageBuffer = true;
     }
-    if (changes['countNearby'] || (changes['config'] && this.countNearby == null && this.currConfig.countNearby != null)) {
+    if (!!changes['countNearby'] || (ChangeUtil.check(changes['config'], 'countNearby') && this.currConfig.countNearby != null)) {
       this.countNearbyVal = this.getNotNegative(this.countNearby ?? this.currConfig.countNearby) ?? COUNT_NEARBY;
       isPageBuffer = true;
     }
@@ -121,39 +123,39 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       this.pageBuffer = GlnPaginationUtil.createPageBuffer(this.countVal, this.page, this.countNearbyVal, this.countBorderVal);
     }
 
-    if (changes['exterior'] || (changes['config'] && this.exterior == null && this.currConfig.exterior != null)) {
+    if (!!changes['exterior'] || (ChangeUtil.check(changes['config'], 'exterior') && this.currConfig.exterior != null)) {
       this.exteriorVal = EXTERIOR[this.exterior || this.currConfig.exterior || ''] || EXTERIOR['text'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
     }
-    if (changes['isDisabled']) {
+    if (!!changes['isDisabled']) {
       this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabledVal || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabledVal ? '' : null);
     }
-    if (changes['isHideNext'] || (changes['config'] && this.isHideNext == null && this.currConfig.isHideNext != null)) {
+    if (!!changes['isHideNext'] || (ChangeUtil.check(changes['config'], 'isHideNext') && this.currConfig.isHideNext != null)) {
       this.isHideNextVal = !!(BooleanUtil.init(this.isHideNext) ?? (this.currConfig.isHideNext || null));
       this.settingHideNext(this.isHideNextVal, this.renderer, this.hostRef);
     }
-    if (changes['isHidePrev'] || (changes['config'] && this.isHidePrev == null && this.currConfig.isHidePrev != null)) {
+    if (!!changes['isHidePrev'] || (ChangeUtil.check(changes['config'], 'isHidePrev') && this.currConfig.isHidePrev != null)) {
       this.isHidePrevVal = !!(BooleanUtil.init(this.isHidePrev) ?? (this.currConfig.isHidePrev || null));
       this.settingHidePrev(this.isHidePrevVal, this.renderer, this.hostRef);
     }
-    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
+    if (!!changes['isNoRipple'] || (ChangeUtil.check(changes['config'], 'isNoRipple') && this.currConfig.isNoRipple != null)) {
       this.isNoRippleVal = !!(BooleanUtil.init(this.isNoRipple) ?? (this.currConfig.isNoRipple || null));
     }
-    if (changes['isNoRounded'] || (changes['config'] && this.isNoRounded == null && this.currConfig.isNoRounded != null)) {
+    if (!!changes['isNoRounded'] || (ChangeUtil.check(changes['config'], 'isNoRounded') && this.currConfig.isNoRounded != null)) {
       this.isNoRoundedVal = !!(BooleanUtil.init(this.isNoRounded) ?? (this.currConfig.isNoRounded || null));
       isBorderRadius = true;
     }
-    if (changes['isShowFirst'] || (changes['config'] && this.isShowFirst == null && this.currConfig.isShowFirst != null)) {
+    if (!!changes['isShowFirst'] || (ChangeUtil.check(changes['config'], 'isShowFirst') && this.currConfig.isShowFirst != null)) {
       this.isShowFirstVal = !!(BooleanUtil.init(this.isShowFirst) ?? (this.currConfig.isShowFirst || null));
       this.settingShowFirst(this.isShowFirstVal, this.renderer, this.hostRef);
     }
-    if (changes['isShowLast'] || (changes['config'] && this.isShowLast == null && this.currConfig.isShowLast != null)) {
+    if (!!changes['isShowLast'] || (ChangeUtil.check(changes['config'], 'isShowLast') && this.currConfig.isShowLast != null)) {
       this.isShowLastVal = !!(BooleanUtil.init(this.isShowLast) ?? (this.currConfig.isShowLast || null));
       this.settingShowLast(this.isShowLastVal, this.renderer, this.hostRef);
     }
-    if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
+    if (!!changes['size'] || (ChangeUtil.check(changes['config'], 'size') && this.currConfig.size != null)) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
       this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['short']);
       this.setCssSize(this.sizeVal, this.hostRef);
