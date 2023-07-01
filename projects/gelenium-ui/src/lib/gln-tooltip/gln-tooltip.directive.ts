@@ -18,6 +18,7 @@ import {
 } from '@angular/core';
 
 import { BooleanUtil } from '../_utils/boolean.util';
+import { ChangeUtil } from '../_utils/change.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
 
@@ -117,70 +118,71 @@ export class GlnTooltipDirective extends GlnTooltipBaseDirective<GlnTooltipCompo
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['config']) {
+    if (!!changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
 
-    if (changes['classes'] || (changes['config'] && this.classes == null && this.currConfig.classes != null)) {
+    if (!!changes['classes'] || (ChangeUtil.check(changes['config'], 'classes') && this.currConfig.classes != null)) {
       const classes: string | string[] = this.classes || this.currConfig.classes || [];
       this.classesVal = Array.isArray(classes) ? classes : [classes];
     }
-    if (changes['hideDelay'] || (changes['config'] && this.hideDelay == null && this.currConfig.hideDelay != null)) {
+    if (!!changes['hideDelay'] || (ChangeUtil.check(changes['config'], 'hideDelay') && this.currConfig.hideDelay != null)) {
       const hideDelayStr: string = (this.hideDelay || this.currConfig.hideDelay || '').toString();
       this.hideDelayVal = NumberUtil.converInt(hideDelayStr, HIDE_DELAY_FOR_MOUSE);
     }
-    if (changes['hideTouchDelay'] || (changes['config'] && this.hideTouchDelay == null && this.currConfig.hideTouchDelay != null)) {
+    if (!!changes['hideTouchDelay'] || (ChangeUtil.check(changes['config'], 'hideTouchDelay') && this.currConfig.hideTouchDelay != null)) {
       const hideTouchDelayStr: string = (this.hideTouchDelay || this.currConfig.hideTouchDelay || '').toString();
       this.hideTouchDelayVal = NumberUtil.converInt(hideTouchDelayStr, HIDE_DELAY_FOR_TOUCH);
     }
-    if (changes['isArrow'] || (changes['config'] && this.isArrow == null && this.currConfig.isArrow != null)) {
+    if (!!changes['isArrow'] || (ChangeUtil.check(changes['config'], 'isArrow') && this.currConfig.isArrow != null)) {
       this.isArrowVal = BooleanUtil.init(this.isArrow) ?? !!this.currConfig.isArrow;
     }
-    if (changes['isDisabled']) {
+    if (!!changes['isDisabled']) {
       this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
     }
-    if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
+    if (!!changes['isNoAnimation'] || (ChangeUtil.check(changes['config'], 'isNoAnimation') && this.currConfig.isNoAnimation != null)) {
       this.isNoAnimationVal = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
     }
-    if (changes['isNoHideOnScroll'] || (changes['config'] && this.isNoHideOnScroll == null && this.currConfig.isNoHideOnScroll != null)) {
+    const isNoHideOnScroll: boolean | undefined = this.currConfig.isNoHideOnScroll;
+    if (!!changes['isNoHideOnScroll'] || (ChangeUtil.check(changes['config'], 'isNoHideOnScroll') && isNoHideOnScroll != null)) {
       this.isNoHideOnScrollVal = BooleanUtil.init(this.isNoHideOnScroll) ?? !!this.currConfig.isNoHideOnScroll;
     }
-    if (changes['isNoHoverable'] || (changes['config'] && this.isNoHoverable == null && this.currConfig.isNoHoverable != null)) {
+    if (!!changes['isNoHoverable'] || (ChangeUtil.check(changes['config'], 'isNoHoverable') && this.currConfig.isNoHoverable != null)) {
       this.isNoHoverableVal = BooleanUtil.init(this.isNoHoverable) ?? !!this.currConfig.isNoHoverable;
     }
-    if (changes['isNoTouchable'] || (changes['config'] && this.isNoTouchable == null && this.currConfig.isNoTouchable != null)) {
+    if (!!changes['isNoTouchable'] || (ChangeUtil.check(changes['config'], 'isNoTouchable') && this.currConfig.isNoTouchable != null)) {
       this.isNoTouchableVal = BooleanUtil.init(this.isNoTouchable) ?? !!this.currConfig.isNoTouchable;
     }
-    if (changes['isNoTransform'] || (changes['config'] && this.isNoTransform == null && this.currConfig.isNoTransform != null)) {
+    if (!!changes['isNoTransform'] || (ChangeUtil.check(changes['config'], 'isNoTransform') && this.currConfig.isNoTransform != null)) {
       this.isNoTransformVal = BooleanUtil.init(this.isNoTransform) ?? !!this.currConfig.isNoTransform;
     }
-    if (changes['maxHeight'] || (changes['config'] && this.maxHeight == null && this.currConfig.maxHeight != null)) {
+    if (!!changes['maxHeight'] || (ChangeUtil.check(changes['config'], 'maxHeight') && this.currConfig.maxHeight != null)) {
       const maxHeightStr: string = (this.maxHeight || this.currConfig.maxHeight || '').toString();
       this.maxHeightVal = NumberUtil.converInt(maxHeightStr, -1);
     }
-    if (changes['maxWidth'] || (changes['config'] && this.maxWidth == null && this.currConfig.maxWidth != null)) {
+    if (!!changes['maxWidth'] || (ChangeUtil.check(changes['config'], 'maxWidth') && this.currConfig.maxWidth != null)) {
       const maxWidthStr: string = (this.maxWidth || this.currConfig.maxWidth || '').toString();
       this.maxWidthVal = NumberUtil.converInt(maxWidthStr, MAX_WIDTH);
     }
-    if (changes['minHeight'] || (changes['config'] && this.minHeight == null && this.currConfig.minHeight != null)) {
+    if (!!changes['minHeight'] || (ChangeUtil.check(changes['config'], 'minHeight') && this.currConfig.minHeight != null)) {
       const minHeightStr: string = (this.minHeight || this.currConfig.minHeight || '').toString();
       this.minHeightVal = NumberUtil.converInt(minHeightStr, -1);
     }
-    if (changes['minWidth'] || (changes['config'] && this.minWidth == null && this.currConfig.minWidth != null)) {
+    if (!!changes['minWidth'] || (ChangeUtil.check(changes['config'], 'minWidth') && this.currConfig.minWidth != null)) {
       const minWidthStr: string = (this.minWidth || this.currConfig.minWidth || '').toString();
       this.minWidthVal = NumberUtil.converInt(minWidthStr, -1);
     }
-    if (changes['message']) {
+    if (!!changes['message']) {
       this.messageVal = this.message || null;
     }
-    if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
+    if (!!changes['position'] || (ChangeUtil.check(changes['config'], 'position') && this.currConfig.position != null)) {
       this.positionVal = this.position || this.currConfig.position || null;
     }
-    if (changes['showDelay'] || (changes['config'] && this.showDelay == null && this.currConfig.showDelay != null)) {
+    if (!!changes['showDelay'] || (ChangeUtil.check(changes['config'], 'showDelay') && this.currConfig.showDelay != null)) {
       const showDelayStr: string = (this.showDelay || this.currConfig.showDelay || '').toString();
       this.showDelayVal = NumberUtil.converInt(showDelayStr, SHOW_DELAY_FOR_MOUSE);
     }
-    if (changes['showTouchDelay'] || (changes['config'] && this.showTouchDelay == null && this.currConfig.showTouchDelay != null)) {
+    if (!!changes['showTouchDelay'] || (ChangeUtil.check(changes['config'], 'showTouchDelay') && this.currConfig.showTouchDelay != null)) {
       const showTouchDelayStr: string = (this.showTouchDelay || this.currConfig.showTouchDelay || '').toString();
       this.showTouchDelayVal = NumberUtil.converInt(showTouchDelayStr, SHOW_DELAY_FOR_TOUCH);
     }
