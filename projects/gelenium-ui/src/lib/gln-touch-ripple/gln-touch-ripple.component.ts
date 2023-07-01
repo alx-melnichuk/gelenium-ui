@@ -44,7 +44,7 @@ export class GlnTouchRippleComponent implements OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['isCenter']) {
+    if (!!changes['isCenter']) {
       this.isCenterVal = !!BooleanUtil.init(this.isCenter);
     }
   }
