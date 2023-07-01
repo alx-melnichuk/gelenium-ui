@@ -35,6 +35,15 @@ public model01: Date | null = new Date();</pre>
   -
   <label><input type="checkbox"
       (change)="isWeekNumber01a=!isWeekNumber01a" />isWeekNumber</label>
+  -
+  <label><input type="checkbox"
+      (change)="isTwoDigitDay01a=!isTwoDigitDay01a" />isTwoDigitDay</label>
+  -
+  <label><input type="checkbox"
+      (change)="isStartSunday01a=!isStartSunday01a" />isStartSunday</label>
+  -
+  <label><input type="checkbox"
+      (change)="isConfig01a=!isConfig01a" />isConfig01a</label>
 </section>
 
 <div class="app-group">
@@ -56,6 +65,9 @@ public model01: Date | null = new Date();</pre>
         [isHideDayoff]="isHideDayoff01a"
         [isReadOnly]="isReadOnly01a"
         [isWeekNumber]="isWeekNumber01a"
+        [config]="isConfig01a ? config01a : undefined"
+        [isTwoDigitDay]="isTwoDigitDay01a"
+        isStartSunday9="isStartSunday01a"
         (change)="value01a=$event">
       </gln-calendar>
       <!-- <gln-calendar [value]="value01a">
@@ -75,14 +87,14 @@ public model01: Date | null = new Date();</pre>
       </small>
     </div>
     <div class="cnbs-clnd">
-      <gln-calendar [value]="value01b"
+      <!-- <gln-calendar [value]="value01b"
         isHorizont
         [isDisabled]="isDisabled01a"
         [isHideDayoff]="isHideDayoff01a"
         [isReadOnly]="isReadOnly01a"
         [isWeekNumber]="isWeekNumber01a"
         (change)="value01b=$event">
-      </gln-calendar>
+      </gln-calendar> -->
       <!-- <gln-calendar [value]="value01a"
         (change)="value01a=$event">
       </gln-calendar> -->
