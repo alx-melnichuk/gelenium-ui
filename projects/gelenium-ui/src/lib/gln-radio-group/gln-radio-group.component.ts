@@ -84,38 +84,38 @@ export class GlnRadioGroupComponent implements OnChanges, OnInit, OnDestroy, Gln
 
   public ngOnChanges(changes: SimpleChanges): void {
     const properties: Record<string, unknown> = {};
-    if (changes['isDisabled']) {
+    if (!!changes['isDisabled']) {
       this.disabled = !!BooleanUtil.init(this.isDisabled);
       this.settingDisabled(this.disabled, this.renderer, this.hostRef);
       properties['isDisabled'] = this.disabled;
     }
-    if (changes['isNoAnimation']) {
+    if (!!changes['isNoAnimation']) {
       this.noAnimation = BooleanUtil.init(this.isNoAnimation);
       this.settingNoAnimation(this.noAnimation, this.renderer, this.hostRef);
       properties['isNoAnimation'] = this.noAnimation ? 'true' : null;
     }
-    if (changes['isNoHover']) {
+    if (!!changes['isNoHover']) {
       this.noHover = BooleanUtil.init(this.isNoHover);
       this.settingNoHover(this.noHover, this.renderer, this.hostRef);
       properties['isNoHover'] = this.noHover ? 'true' : null;
     }
-    if (changes['isNoRipple']) {
+    if (!!changes['isNoRipple']) {
       this.noRipple = BooleanUtil.init(this.isNoRipple);
       this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
       properties['isNoRipple'] = this.noRipple ? 'true' : null;
     }
-    if (changes['isReadOnly']) {
+    if (!!changes['isReadOnly']) {
       this.readOnly = !!BooleanUtil.init(this.isReadOnly);
       this.settingReadOnly(this.readOnly, this.renderer, this.hostRef);
       properties['isReadOnly'] = this.readOnly ? 'true' : null;
     }
-    if (changes['name']) {
+    if (!!changes['name']) {
       properties['name'] = this.name;
     }
-    if (changes['position']) {
+    if (!!changes['position']) {
       properties['position'] = this.position || null;
     }
-    if (changes['size']) {
+    if (!!changes['size']) {
       properties['size'] = this.size || null;
     }
 
