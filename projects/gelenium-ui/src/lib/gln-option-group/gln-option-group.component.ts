@@ -40,7 +40,7 @@ export class GlnOptionGroupComponent implements OnChanges, OnInit, GlnOptionGrou
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['isDisabled']) {
+    if (!!changes['isDisabled']) {
       this.setDisabled(BooleanUtil.init(this.isDisabled));
     }
   }
