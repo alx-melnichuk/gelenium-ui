@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 
 import { BooleanUtil } from '../_utils/boolean.util';
+import { ChangeUtil } from '../_utils/change.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 
 import { GlnFrameConfig } from './gln-frame-config.interface';
@@ -116,26 +117,26 @@ export class GlnFrameComponent implements OnChanges, OnInit {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['config']) {
+    if (!!changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
 
     let isUpdateCssParams = false;
-    if (changes['exterior'] || (changes['config'] && this.exterior == null && this.currConfig.exterior != null)) {
+    if (!!changes['exterior'] || (ChangeUtil.check(changes['config'], 'exterior') && this.currConfig.exterior != null)) {
       this.exteriorVal = EXTERIOR[this.exterior || this.currConfig.exterior || ''] || EXTERIOR['outlined'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
       isUpdateCssParams = true;
     }
-    if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
+    if (!!changes['size'] || (ChangeUtil.check(changes['config'], 'size') && this.currConfig.size != null)) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
       this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['middle']);
       isUpdateCssParams = true;
     }
-    if (isUpdateCssParams && this.exteriorVal) {
+    if (isUpdateCssParams && !!this.exteriorVal) {
       this.updateCssParams(this.exteriorVal, this.sizeVal, this.getLineHeight(), this.cssElementRef);
     }
 
-    if (changes['isAttrHideAnimation']) {
+    if (!!changes['isAttrHideAnimation']) {
       this.isAttrHideAnimationVal = !!BooleanUtil.init(this.isAttrHideAnimation);
       if (this.isAttrHideAnimationVal) {
         HtmlElemUtil.setAttr(this.renderer, this.hostRef, CSS_ATTR_HIDE_ANIMATION_INIT, '');
@@ -145,36 +146,36 @@ export class GlnFrameComponent implements OnChanges, OnInit {
         });
       }
     }
-    if (changes['isDisabled']) {
+    if (!!changes['isDisabled']) {
       this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabledVal);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabledVal ? '' : null);
     }
-    if (changes['isError']) {
+    if (!!changes['isError']) {
       this.isErrorVal = !!BooleanUtil.init(this.isError);
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-error', this.isErrorVal);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'err', this.isErrorVal ? '' : null);
     }
-    if (changes['isFilled']) {
+    if (!!changes['isFilled']) {
       this.isFilledVal = !!BooleanUtil.init(this.isFilled);
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-filled', this.isFilledVal);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilledVal ? '' : null);
     }
 
-    if (changes['isLabelShrink'] || (changes['config'] && this.isLabelShrink == null && this.currConfig.isLabelShrink != null)) {
+    if (!!changes['isLabelShrink'] || (ChangeUtil.check(changes['config'], 'isLabelShrink') && this.currConfig.isLabelShrink != null)) {
       this.isLabelShrinkVal = BooleanUtil.init(this.isLabelShrink) ?? !!this.currConfig.isLabelShrink;
       this.settingLabelShrink(this.isLabelShrinkVal, this.renderer, this.hostRef);
     }
-    if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
+    if (!!changes['isNoAnimation'] || (ChangeUtil.check(changes['config'], 'isNoAnimation') && this.currConfig.isNoAnimation != null)) {
       this.isNoAnimationVal = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
       this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
-    if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
+    if (!!changes['isRequired'] || (ChangeUtil.check(changes['config'], 'isRequired') && this.currConfig.isRequired != null)) {
       this.isRequiredVal = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
 
-    if (changes['label'] || changes['isRequired']) {
+    if (!!changes['label'] || !!changes['isRequired']) {
       const isIndent = !!this.label || this.isRequired;
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'glnfr-lgn-indent', !!isIndent);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'ind', isIndent ? '' : null);
