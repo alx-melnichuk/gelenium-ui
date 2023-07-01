@@ -43,6 +43,7 @@ import { GlnTouchRippleComponent } from '../gln-touch-ripple/gln-touch-ripple.co
 import { BooleanUtil } from '../_utils/boolean.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { NumberUtil } from '../_utils/number.util';
+import { SimpleChangeUtil } from '../_utils/simple-change.util';
 
 import { GlnRadioButtonCheckedUtil } from './gln-radio-button-checked.util';
 import { GlnRadioButtonConfig } from './gln-radio-button-config.interface';
@@ -157,39 +158,39 @@ export class GlnRadioButtonComponent
     if (changes['isDisabled']) {
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
-    if (changes['isNoAnimation'] || (changes['config'] && this.isNoAnimation == null && this.currConfig.isNoAnimation != null)) {
+    if (changes['isNoAnimation'] || (SimpleChangeUtil.check(changes['config'], 'isNoAnimation') && this.currConfig.isNoAnimation != null)) {
       this.isNoAnimationVal = !!(BooleanUtil.init(this.isNoAnimation) ?? this.group?.noAnimation ?? this.currConfig.isNoAnimation);
       this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
-    if (changes['isNoHover'] || (changes['config'] && this.isNoHover == null && this.currConfig.isNoHover != null)) {
+    if (!!changes['isNoHover'] || (SimpleChangeUtil.check(changes['config'], 'isNoHover') && this.currConfig.isNoHover != null)) {
       this.isNoHoverVal = !!(BooleanUtil.init(this.isNoHover) ?? this.group?.noHover ?? this.currConfig.isNoHover);
       this.settingNoHover(this.isNoHoverVal, this.renderer, this.hostRef);
     }
-    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
+    if (!!changes['isNoRipple'] || (SimpleChangeUtil.check(changes['config'], 'isNoRipple') && this.currConfig.isNoRipple != null)) {
       this.isNoRippleVal = !!(BooleanUtil.init(this.isNoRipple) ?? this.group?.noRipple ?? this.currConfig.isNoRipple);
       this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
-    if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
+    if (!!changes['isReadOnly'] || (SimpleChangeUtil.check(changes['config'], 'isReadOnly') && this.currConfig.isReadOnly != null)) {
       this.isReadOnlyVal = !!(BooleanUtil.init(this.isReadOnly) ?? this.group?.readOnly ?? this.currConfig.isReadOnly);
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
-    if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
+    if (!!changes['isRequired'] || (SimpleChangeUtil.check(changes['config'], 'isRequired') && this.currConfig.isRequired != null)) {
       this.isRequiredVal = !!(BooleanUtil.init(this.isRequired) ?? (this.currConfig.isRequired || null));
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
-    if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
+    if (!!changes['position'] || (SimpleChangeUtil.check(changes['config'], 'position') && this.currConfig.position != null)) {
       // Remove class by old position value.
       this.settingByPosition(false, this.positionVal, this.renderer, this.hostRef);
-      this.positionVal = this.convertPosition((this.position || this.currConfig.position || '').toString());
+      this.positionVal = this.convertPosition((this.position || this.group?.position || this.currConfig.position || '').toString());
       // Add class by new position value.
       this.settingByPosition(true, this.positionVal, this.renderer, this.hostRef);
     }
-    if (changes['size'] || (changes['config'] && this.size == null && this.currConfig.size != null)) {
+    if (!!changes['size'] || (SimpleChangeUtil.check(changes['config'], 'size') && this.currConfig.size != null)) {
       this.sizeVal = this.convertSize((this.size || this.group?.size || this.currConfig.size || '').toString());
       this.setCssSize(this.sizeVal, this.hostRef);
     }
 
-    if (changes['isRequired']) {
+    if (!!changes['isRequired']) {
       this.prepareFormGroup(this.isRequiredVal);
     }
   }
