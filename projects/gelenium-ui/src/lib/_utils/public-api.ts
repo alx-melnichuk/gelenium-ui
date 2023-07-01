@@ -1,5 +1,6 @@
 export * from './array.util';
 export * from './boolean.util';
+export * from './change.util';
 export * from './date.util';
 export * from './event-listener.util';
 export * from './html-convert.util';
