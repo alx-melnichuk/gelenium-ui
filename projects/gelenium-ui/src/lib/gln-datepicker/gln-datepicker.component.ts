@@ -6,7 +6,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ContentChild,
   ContentChildren,
   ElementRef,
   EventEmitter,
@@ -54,6 +53,7 @@ import { GlnNodeInternalValidator, GLN_NODE_INTERNAL_VALIDATOR } from '../direct
 import { GlnFrameComponent } from '../gln-frame/gln-frame.component';
 import { ArrayUtil } from '../_utils/array.util';
 import { BooleanUtil } from '../_utils/boolean.util';
+import { ChangeUtil } from '../_utils/change.util';
 import { HtmlElemUtil } from '../_utils/html-elem.util';
 import { ScreenUtil } from '../_utils/screen.util';
 
@@ -215,62 +215,62 @@ export class GlnDatepickerComponent
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['config']) {
+    if (!!changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
 
-    if (changes['isDisabled']) {
+    if (!!changes['isDisabled']) {
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
-    if (changes['isError'] || (changes['config'] && this.isError == null && this.currConfig.isError != null)) {
+    if (!!changes['isError'] || (ChangeUtil.check(changes['config'], 'isError') && this.currConfig.isError != null)) {
       this.isErrorVal = BooleanUtil.init(this.isError) ?? !!this.currConfig.isError;
       this.settingError(this.isErrorVal, this.renderer, this.hostRef);
     }
-    if (changes['isMaxWd'] || (changes['config'] && this.isMaxWd == null && this.currConfig.isMaxWd != null)) {
+    if (!!changes['isMaxWd'] || (ChangeUtil.check(changes['config'], 'isMaxWd') && this.currConfig.isMaxWd != null)) {
       this.isMaxWdVal = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
     }
-    if (changes['isNoIcon'] || (changes['config'] && this.isNoIcon == null && this.currConfig.isNoIcon != null)) {
+    if (!!changes['isNoIcon'] || (ChangeUtil.check(changes['config'], 'isNoIcon') && this.currConfig.isNoIcon != null)) {
       this.isNoIconVal = BooleanUtil.init(this.isNoIcon) ?? !!this.currConfig.isNoIcon;
       this.settingNoIcon(this.isNoIconVal, this.renderer, this.hostRef);
     }
-    if (changes['isNoRipple'] || (changes['config'] && this.isNoRipple == null && this.currConfig.isNoRipple != null)) {
+    if (!!changes['isNoRipple'] || (ChangeUtil.check(changes['config'], 'isNoRipple') && this.currConfig.isNoRipple != null)) {
       this.noRipple = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
       this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
     }
-    if (changes['isPlaceholder'] || (changes['config'] && this.isPlaceholder == null && this.currConfig.isPlaceholder != null)) {
+    if (!!changes['isPlaceholder'] || (ChangeUtil.check(changes['config'], 'isPlaceholder') && this.currConfig.isPlaceholder != null)) {
       this.isPlaceholderVal = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
     }
-    if (changes['isReadOnly'] || (changes['config'] && this.isReadOnly == null && this.currConfig.isReadOnly != null)) {
+    if (!!changes['isReadOnly'] || (ChangeUtil.check(changes['config'], 'isReadOnly') && this.currConfig.isReadOnly != null)) {
       this.isReadOnlyVal = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
-    if (changes['isRequired'] || (changes['config'] && this.isRequired == null && this.currConfig.isRequired != null)) {
+    if (!!changes['isRequired'] || (ChangeUtil.check(changes['config'], 'isRequired') && this.currConfig.isRequired != null)) {
       this.isRequiredVal = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
-    if (changes['ornamLfAlign'] || (changes['config'] && this.ornamLfAlign == null && this.currConfig.ornamLfAlign != null)) {
+    if (!!changes['ornamLfAlign'] || (ChangeUtil.check(changes['config'], 'ornamLfAlign') && this.currConfig.ornamLfAlign != null)) {
       this.ornamLfAlignVal = ORNAMENT_ALIGN[this.ornamLfAlign || this.currConfig.ornamLfAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
       this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, GlnOrnamentUtil.getElements(this.ornamLeftList));
     }
-    if (changes['ornamRgAlign'] || (changes['config'] && this.ornamRgAlign == null && this.currConfig.ornamRgAlign != null)) {
+    if (!!changes['ornamRgAlign'] || (ChangeUtil.check(changes['config'], 'ornamRgAlign') && this.currConfig.ornamRgAlign != null)) {
       this.ornamRgAlignVal = ORNAMENT_ALIGN[this.ornamRgAlign || this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
       const rhombRef: ElementRef<HTMLElement> | undefined = this.ornamRhomb?.hostRef;
       const ornamRgAlign: string = this.ornamRgAlignVal || '';
       this.settingOrnamentList(CSS_ATTR_ORN_RG, ornamRgAlign, this.renderer, GlnOrnamentUtil.getElements(this.ornamRightList, rhombRef));
     }
-    if (changes['config'] && this.currConfig.overlayClasses != null) {
+    if (ChangeUtil.check(changes['config'], 'overlayClasses') && this.currConfig.overlayClasses != null) {
       this.overlayClassesVal = this.currConfig.overlayClasses;
     }
-    if (changes['classes'] || (changes['config'] && this.classes == null && this.currConfig.classes != null)) {
+    if (!!changes['classes'] || (ChangeUtil.check(changes['config'], 'classes') && this.currConfig.classes != null)) {
       this.classesVal = this.classes || this.currConfig.classes;
     }
-    if (changes['position'] || (changes['config'] && this.position == null && this.currConfig.position != null)) {
+    if (!!changes['position'] || (ChangeUtil.check(changes['config'], 'position') && this.currConfig.position != null)) {
       this.positionList = this.getPositionList(this.position || this.currConfig.position);
     }
 
-    if (changes['isRequired']) {
+    if (!!changes['isRequired']) {
       this.prepareFormGroup(this.isRequiredVal);
     }
   }
