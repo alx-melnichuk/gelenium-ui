@@ -17,6 +17,7 @@ export interface CalendarDayCell {
   year: number;
   month: number;
   day: number;
+  day2d: string;
   dayWeek: number;
   state: CALENDAR_DAY_STATE;
   label: string;
@@ -104,8 +105,9 @@ export class GlnCalendarUtil {
       }
       const label: string = GlnCalendarUtil.getLabelByDate(itemDate) || '';
       const isDayoff = dayWeek == 0 || dayWeek == 6 ? true : undefined;
+      const day2d: string = ('0' + day.toString()).slice(-2);
 
-      calendarRow?.cellList.push({ year, month, day, dayWeek, state, label, isToday, isDayoff });
+      calendarRow?.cellList.push({ year, month, day, day2d, dayWeek, state, label, isToday, isDayoff });
       idx++;
     }
     return result;
