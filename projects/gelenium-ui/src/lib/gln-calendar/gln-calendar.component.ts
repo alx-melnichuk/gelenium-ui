@@ -52,6 +52,8 @@ export const GLN_CALENDAR_CONFIG = new InjectionToken<GlnCalendarConfig>('GLN_CA
 
 const WEEKDAY_NUM_DEFAULT = 2;
 const NUMBER_OF_YEARS_DEFAULT = 20;
+const FORMAT_BY_MONTH_DEFAULT = 'short';
+const MONTH_FORMAT_DEFAULT = 'long';
 
 let uniqueIdCounter = 0;
 
@@ -71,6 +73,10 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public cellSize: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
   @Input()
+  public formatByMonths: string | null | undefined;
+  @Input()
+  public formatForMonth: string | null | undefined;
+  @Input()
   public isDisabled: string | boolean | null | undefined;
   @Input()
   public isHideOldDays: string | boolean | undefined;
@@ -86,10 +92,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public isTwoDigitDay: string | boolean | null | undefined;
   @Input()
   public isWeekNumber: string | boolean | null | undefined;
-  @Input()
-  public monthFormat: string | null | undefined;
-  @Input()
-  public formatByMonth: string | null | undefined;
   @Input()
   public numberOfYears: string | null | undefined;
   @Input()
@@ -114,16 +116,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @ViewChild('yearCellListRef', { read: ElementRef<HTMLDivElement>, static: false })
   public yearCellListRef: ElementRef<HTMLDivElement> | undefined;
 
-  public get numberOfYearsValue(): number {
-    return this.numberOfYearsVal || NUMBER_OF_YEARS_DEFAULT;
-  }
-  public set numberOfYearsValue(value: number) {}
-
-  public get sizeDayWeekValue(): number {
-    return this.sizeDayWeekVal || WEEKDAY_NUM_DEFAULT;
-  }
-  public set sizeDayWeekValue(value: number) {}
-
   public calendarDayCellRowList: CalendarDayCellRow[] = [];
   public calendarDayNameList: CalendarDayName[] = [];
   public calendarDayMonth: number = -1;
@@ -132,6 +124,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public calendarDayYearName: string = '';
   public calendarMonthCellList: string[] = [];
   public calendarMonthSelected: number = -1;
+  public calendarMonthToday: number = -1;
   public calendarYearCellList: number[] = [];
   public calendarYearFirst: number = -1;
   public calendarYearLast: number = -1;
@@ -140,6 +133,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public cellSizeVal: number | null = null; // Binding attribute "cellSize".
   public currConfig: GlnCalendarConfig;
   public errors: ValidationErrors | null = null;
+  public formatByMonthsVal: string | null = null; // Binding attribute "formatByMonths".
+  public formatForMonthVal: string | null = null; // Binding attribute "formatForMonth".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
   public isHideOldDaysVal: boolean | null = null; // Binding attribute "isHideOldDays".
   public isHideDayoffVal: boolean | null = null; // Binding attribute "isHideDayoff".
@@ -150,16 +145,12 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public isWeekNumberVal: boolean | null = null; // Binding attribute "isWeekNumber".
   public markedDate: Date | null = null;
   public markedYear: number | null = null;
-  public monthFormatVal: string | null = null; // Binding attribute "monthFormat".
-  public formatByMonthVal: string | null = null; // Binding attribute "formatByMonth".
   public numberOfYearsVal: number | null = null; // Binding attribute "numberOfYears".
-  public numberCellsByYearsVal: string | null = null; // Binding attribute "numberCellsByYears".
   public sizeDayWeekVal: number | null = null; // Binding attribute "sizeDayWeek".
   public startDateVal: Date | null = null; // Binding attribute "startDate".
   public STATE_CURR: string = CALENDAR_DAY_CURRENT;
   public STATE_OLD: string = CALENDAR_DAY_PREVIOUS;
   public STATE_SLCT: string = CALENDAR_DAY_SELECTED;
-  public todaysMonth: number = -1;
   public todaysYear: number = -1;
   public VIEW_DAY: string = CALENDAR_VIEW_DAY;
   public VIEW_MONTH: string = CALENDAR_VIEW_MONTH;
@@ -184,9 +175,14 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    let isPrepareToViewDay: boolean = false;
-    let isPrepareToViewMonth: boolean = false;
-    let isPrepareToViewYear: boolean = false;
+    let hasFormatByMonths: boolean = false;
+    let hasFormatForMonth: boolean = false;
+    let hasIsStartSunday: boolean = false;
+    let hasNumberOfYears: boolean = false;
+    let hasSizeDayWeek: boolean = false;
+    let hasStartDate: boolean = false;
+    let hasValue: boolean = false;
+
     if (!!changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
@@ -194,6 +190,16 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       const cellSizeStr: string = (this.cellSize || this.currConfig.cellSize || '').toString();
       this.cellSizeVal = this.convertNumber(cellSizeStr, CELL_SIZE[cellSizeStr] || CELL_SIZE['middle']);
       this.setCssCellSize(this.cellSizeVal, this.hostRef);
+    }
+    if (!!changes['formatByMonths'] || ChangeUtil.check(changes['config'], 'formatByMonths')) {
+      this.formatByMonthsVal = this.formatByMonths || this.currConfig.formatByMonths || '';
+      hasFormatByMonths = true;
+      console.log(`OnChanges() formatByMonths`); // #
+    }
+    if (changes['formatForMonth'] || ChangeUtil.check(changes['config'], 'formatForMonth')) {
+      this.formatForMonthVal = this.formatForMonth || this.currConfig.formatForMonth || '';
+      hasFormatForMonth = true;
+      console.log(`OnChanges() formatForMonth`); // #
     }
     if (!!changes['isDisabled']) {
       this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
@@ -215,7 +221,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     if (!!changes['isStartSunday'] || ChangeUtil.check(changes['config'], 'isStartSunday')) {
       this.isStartSundayVal = BooleanUtil.init(this.isStartSunday) ?? !!this.currConfig.isStartSunday;
-      isPrepareToViewDay = changes['isStartSunday']?.firstChange === false || !changes['isStartSunday'];
+      hasIsStartSunday = true;
       console.log(`OnChanges() isStartSunday`); // #
     }
     if (!!changes['isTwoDigitDay'] || ChangeUtil.check(changes['config'], 'isTwoDigitDay')) {
@@ -225,54 +231,49 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.isWeekNumberVal = BooleanUtil.init(this.isWeekNumber) ?? !!this.currConfig.isWeekNumber;
       this.settingIsWeekNumber(this.isWeekNumberVal, this.renderer, this.hostRef);
     }
-    if (changes['monthFormat'] || ChangeUtil.check(changes['config'], 'monthFormat')) {
-      this.monthFormatVal = this.monthFormat || this.currConfig.monthFormat || '';
-      isPrepareToViewDay = true;
-      console.log(`OnChanges() monthFormat`); // #
-    }
-    if (!!changes['formatByMonth'] || ChangeUtil.check(changes['config'], 'formatByMonth')) {
-      this.formatByMonthVal = this.formatByMonth || this.currConfig.formatByMonth || '';
-      isPrepareToViewMonth = true;
-      console.log(`OnChanges() formatByMonth`); // #
-    }
     if (!!changes['numberOfYears'] || ChangeUtil.check(changes['config'], 'numberOfYears')) {
-      const numberOfYearsStr: string = this.formatByMonth || this.currConfig.numberOfYears?.toString() || '';
+      const numberOfYearsStr: string = this.numberOfYears || this.currConfig.numberOfYears?.toString() || '';
       this.numberOfYearsVal = this.convertNumber(numberOfYearsStr, NUMBER_OF_YEARS_DEFAULT);
-      isPrepareToViewYear = true;
+      hasNumberOfYears = true;
       console.log(`OnChanges() numberOfYears`); // #
     }
     if (!!changes['startDate'] || ChangeUtil.check(changes['config'], 'startDate')) {
       this.startDateVal = this.startDate || this.currConfig.startDate || null;
       if (!this.value && !!this.startDateVal) {
-        isPrepareToViewDay = true;
-        isPrepareToViewYear = true;
+        hasStartDate = true;
         console.log(`OnChanges() startDate`); // #
       }
     }
     if (!!changes['sizeDayWeek'] || ChangeUtil.check(changes['config'], 'sizeDayWeek')) {
       const sizeDayWeekStr: string = (this.sizeDayWeek?.toString() || this.currConfig.sizeDayWeek || '').toString();
       this.sizeDayWeekVal = this.convertSizeDayWeek(sizeDayWeekStr, WEEKDAY_NUM_DEFAULT);
-      isPrepareToViewDay = true;
+      hasSizeDayWeek = true;
       console.log(`OnChanges() sizeDayWeek`); // #
     }
     if (changes['value'] && !changes['value'].firstChange) {
-      isPrepareToViewDay = true;
-      isPrepareToViewMonth = true;
-      isPrepareToViewYear = true;
+      hasValue = true;
       this.markedDate = this.value || new Date();
       console.log(`OnChanges() value`); // #
     }
 
-    if (isPrepareToViewDay) {
-      const isStartSundayVal: boolean = !!this.isStartSundayVal;
-      this.updateViewDayCells(this.value || null, this.sizeDayWeekValue, isStartSundayVal, this.startDateVal, this.monthFormatVal);
+    if (hasIsStartSunday || hasSizeDayWeek) {
+      this.updateViewDayHeader(this.isStartSundayVal, this.sizeDayWeekVal);
     }
-    if (isPrepareToViewMonth) {
-      this.updateViewMonthCells(this.value, this.formatByMonthVal);
+    const current = this.initDate(this.calendarDayMonth, this.calendarDayYear, this.currentDate(this.startDateVal, this.value, new Date()));
+    if (hasFormatForMonth) {
+      this.updateViewDayTitle(this.formatForMonthVal, current);
     }
-    if (isPrepareToViewYear) {
-      this.updateViewYearCells(this.startDateVal, this.value, this.numberOfYearsValue);
-      this.updateViewYearPeriodLimits(this.numberOfYearsValue, CALENDAR_YEAR_PERIOD_MIN, CALENDAR_YEAR_PERIOD_MAX);
+    if (hasIsStartSunday || hasStartDate || hasValue) {
+      this.updateViewDayCells(this.isStartSundayVal, current, this.value);
+    }
+    if (hasFormatByMonths || hasValue) {
+      this.updateViewMonthCells(this.formatByMonthsVal, this.value);
+    }
+    if (hasNumberOfYears) {
+      this.updateViewYearPeriodLimits(this.numberOfYearsVal, CALENDAR_YEAR_PERIOD_MIN, CALENDAR_YEAR_PERIOD_MAX);
+    }
+    if (hasNumberOfYears || hasStartDate || hasValue) {
+      this.updateViewYearCells(this.numberOfYearsVal, this.startDateVal, this.value);
     }
   }
 
@@ -280,14 +281,18 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     // Update ID value if it is missing.
     HtmlElemUtil.updateIfMissing(this.renderer, this.hostRef, 'id', this.id);
 
-    let isPrepareToViewDay: boolean = false;
-    let isPrepareToViewMonth: boolean = false;
-    let isPrepareToViewYear: boolean = false;
-
     if (this.cellSizeVal == null) {
       const cellSizeStr: string = (this.currConfig.cellSize || '').toString();
       this.cellSizeVal = this.convertNumber(cellSizeStr, CELL_SIZE[cellSizeStr] || CELL_SIZE['middle']);
       this.setCssCellSize(this.cellSizeVal, this.hostRef);
+    }
+    if (this.formatByMonthsVal == null) {
+      this.formatByMonthsVal = this.currConfig.formatByMonths || FORMAT_BY_MONTH_DEFAULT;
+      console.log(`OnInit() formatByMonthsVal == null`); // #
+    }
+    if (this.formatForMonthVal == null) {
+      this.formatForMonthVal = this.currConfig.formatForMonth || '';
+      console.log(`OnInit() formatForMonthVal == null`); // #
     }
     if (this.isHideOldDaysVal == null) {
       this.isHideOldDaysVal = !!this.currConfig.isHideOldDays;
@@ -305,7 +310,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     if (this.isStartSundayVal == null) {
       this.isStartSundayVal = !!this.currConfig.isStartSunday;
-      isPrepareToViewDay = true;
       console.log(`OnInit() isStartSundayVal == null`); // #
     }
     if (this.isTwoDigitDayVal == null) {
@@ -315,49 +319,42 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.isWeekNumberVal = !!this.currConfig.isWeekNumber;
       this.settingIsWeekNumber(this.isWeekNumberVal, this.renderer, this.hostRef);
     }
-    if (this.monthFormatVal == null) {
-      this.monthFormatVal = this.currConfig.monthFormat || '';
-      isPrepareToViewDay = true;
-      console.log(`OnInit() monthFormatVal == null`); // #
-    }
-    if (this.formatByMonthVal == null) {
-      this.formatByMonthVal = this.currConfig.formatByMonth || '';
-      isPrepareToViewMonth = true;
-      console.log(`OnInit() formatByMonthVal == null`); // #
-    }
     if (this.numberOfYearsVal == null) {
       this.numberOfYearsVal = this.convertNumber(this.currConfig.numberOfYears?.toString() || '', NUMBER_OF_YEARS_DEFAULT);
-      isPrepareToViewYear = true;
       console.log(`OnInit() numberOfYearsVal == null`); // #
     }
     if (this.startDateVal == null) {
       this.startDateVal = this.currConfig.startDate || null;
       if (!this.value && !!this.startDateVal) {
-        isPrepareToViewDay = true;
-        isPrepareToViewYear = true;
         console.log(`OnInit() startDateVal == null`); // #
       }
     }
     if (this.sizeDayWeekVal == null) {
       const sizeDayWeekStr: string = (this.currConfig.sizeDayWeek || '').toString();
       this.sizeDayWeekVal = this.convertSizeDayWeek(sizeDayWeekStr, WEEKDAY_NUM_DEFAULT);
-      isPrepareToViewDay = true;
       console.log(`OnInit() sizeDayWeekVal == null`); // #
     }
 
-    if (isPrepareToViewDay) {
-      const isStartSundayVal: boolean = !!this.isStartSundayVal;
-      this.updateViewDayCells(this.value || null, this.sizeDayWeekValue, isStartSundayVal, this.startDateVal, this.monthFormatVal);
+    if (this.calendarDayNameList.length === 0) {
+      this.updateViewDayHeader(this.isStartSundayVal, this.sizeDayWeekVal);
     }
-    if (isPrepareToViewMonth) {
-      this.updateViewMonthCells(this.value, this.formatByMonthVal);
+    const current = this.initDate(this.calendarDayMonth, this.calendarDayYear, this.currentDate(this.startDateVal, this.value, new Date()));
+    if (!this.calendarDayMonthName) {
+      this.updateViewDayTitle(this.formatForMonthVal, current);
     }
-    if (isPrepareToViewYear) {
-      this.updateViewYearCells(this.startDateVal, this.value, this.numberOfYearsValue);
-      this.updateViewYearPeriodLimits(this.numberOfYearsValue, CALENDAR_YEAR_PERIOD_MIN, CALENDAR_YEAR_PERIOD_MAX);
+    if (this.calendarDayCellRowList.length === 0) {
+      this.updateViewDayCells(this.isStartSundayVal, current, this.value);
+    }
+    if (this.calendarMonthCellList.length === 0) {
+      this.updateViewMonthCells(this.formatByMonthsVal, this.value);
+    }
+    if (this.YEAR_PERIOD_MIN === -1) {
+      this.updateViewYearPeriodLimits(this.numberOfYearsVal, CALENDAR_YEAR_PERIOD_MIN, CALENDAR_YEAR_PERIOD_MAX);
+    }
+    if (this.calendarYearCellList.length === 0) {
+      this.updateViewYearCells(this.numberOfYearsVal, this.startDateVal, this.value);
     }
   }
-
   // ** Public methods **
 
   public trackByIndex(index: number): number {
@@ -393,12 +390,16 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       return;
     }
     if (CALENDAR_VIEW_MONTH === newView) {
-      const startDate: Date = new Date(this.calendarDayYear, this.calendarDayMonth - 1, 1, 0, 0, 0, 0);
-      this.updateViewDayCells(this.value || null, this.sizeDayWeekValue, !!this.isStartSundayVal, startDate, this.monthFormatVal);
+      const currentMonth: Date = new Date(this.calendarDayYear, this.calendarDayMonth - 1, 1, 0, 0, 0, 0);
+      this.updateViewDayTitle(this.formatForMonthVal, currentMonth);
+      this.updateViewDayCells(this.isStartSundayVal, currentMonth, this.value);
+      this.changeDetectorRef.markForCheck();
     } else if (CALENDAR_VIEW_YEAR === newView) {
-      const yearStart: number = GlnCalendarUtil.getFirstYearOfPeriod(this.calendarYearFirst - 1, this.numberOfYearsValue);
+      const numberOfYears: number = this.numberOfYearsVal || NUMBER_OF_YEARS_DEFAULT;
+      const yearStart: number = GlnCalendarUtil.getFirstYearOfPeriod(this.calendarYearFirst - 1, numberOfYears);
       if (yearStart !== -1) {
-        this.updateViewYearCells(new Date(yearStart, 0, 1, 0, 0, 0, 0), this.value, this.numberOfYearsValue);
+        this.updateViewYearCells(this.numberOfYearsVal, new Date(yearStart, 0, 1, 0, 0, 0, 0), this.value);
+        this.changeDetectorRef.markForCheck();
       }
     }
   }
@@ -408,12 +409,16 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       return;
     }
     if (CALENDAR_VIEW_MONTH === newView) {
-      const startDate: Date = new Date(this.calendarDayYear, this.calendarDayMonth + 1, 1, 0, 0, 0, 0);
-      this.updateViewDayCells(this.value || null, this.sizeDayWeekValue, !!this.isStartSundayVal, startDate, this.monthFormatVal);
+      const currentMonth: Date = new Date(this.calendarDayYear, this.calendarDayMonth + 1, 1, 0, 0, 0, 0);
+      this.updateViewDayTitle(this.formatForMonthVal, currentMonth);
+      this.updateViewDayCells(this.isStartSundayVal, currentMonth, this.value);
+      this.changeDetectorRef.markForCheck();
     } else if (CALENDAR_VIEW_YEAR === newView) {
-      const yearStart: number = GlnCalendarUtil.getFirstYearOfPeriod(this.calendarYearLast + 1, this.numberOfYearsValue);
+      const numberOfYears: number = this.numberOfYearsVal || NUMBER_OF_YEARS_DEFAULT;
+      const yearStart: number = GlnCalendarUtil.getFirstYearOfPeriod(this.calendarYearLast + 1, numberOfYears);
       if (yearStart !== -1) {
-        this.updateViewYearCells(new Date(yearStart, 0, 1, 0, 0, 0, 0), this.value, this.numberOfYearsValue);
+        this.updateViewYearCells(this.numberOfYearsVal, new Date(yearStart, 0, 1, 0, 0, 0, 0), this.value);
+        this.changeDetectorRef.markForCheck();
       }
     }
   }
@@ -436,20 +441,21 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.clickSwitch();
     }
   }
-  public keydownYearCellList(event: KeyboardEvent, elementRef: HTMLDivElement, yearFirst: number, numberOfYears: number): void {
+  public keydownYearCellList(event: KeyboardEvent, elementRef: HTMLDivElement, yearFirst: number, numberOfYears: number | null): void {
     console.log(``); // #
     console.log(`$$ keydownYearCell()  data-label=${(event.target as HTMLElement)?.getAttribute('data-label')}`); // #
     if (this.view !== CALENDAR_VIEW_YEAR || this.markedYear == null) {
       return;
     }
     let delta: number = 0;
-    const deltaRightLeft: number = !this.isHorizontVal ? 1 : numberOfYears;
-    const deltaUpDown: number = !this.isHorizontVal ? -numberOfYears : -1;
+    const numberOfYears2: number = numberOfYears || NUMBER_OF_YEARS_DEFAULT;
+    const deltaRightLeft: number = !this.isHorizontVal ? 1 : numberOfYears2;
+    const deltaUpDown: number = !this.isHorizontVal ? -numberOfYears2 : -1;
     delta = 'ArrowRight' === event.key ? deltaRightLeft : 'ArrowLeft' === event.key ? -deltaRightLeft : delta;
     delta = 'ArrowUp' === event.key ? deltaUpDown : 'ArrowDown' === event.key ? -deltaUpDown : delta;
     console.log(`$$ keydownYearCell(); delta: ${delta} elementRef${elementRef != null ? '!' : ''}=null key: ${event.key}`); // #
     console.log(`$$ keydownYearCell(); markedYear='${this.markedYear}'`); // #
-    console.log(`$$ keydownYearCell(); yearFirst=${yearFirst} yearLast=${yearFirst + numberOfYears - 1}`); // #
+    console.log(`$$ keydownYearCell(); yearFirst=${yearFirst} yearLast=${yearFirst + numberOfYears2 - 1}`); // #
     if (delta != 0) {
       const newMarkedYear: number = this.markedYear + delta;
       const currElem: HTMLElement | null = GlnCalendarUtil.getElementByLabel(elementRef, this.markedYear.toString());
@@ -457,9 +463,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.markedYear = newMarkedYear;
       console.log(`$$ keydownYearCell();new markedYear='${this.markedYear}'`); // #
       let isZoneOnStable: boolean = false;
-      // this.calendarYearFirst
-      // #?this.calendarYearLast = yearFirst + numberOfYears - 1;
-      const yearLast: number = yearFirst + numberOfYears - 1;
+      const yearLast: number = yearFirst + numberOfYears2 - 1;
       if (newMarkedYear < yearFirst) {
         console.log(`$$ keydownYearCell; clickPrev(CALENDAR_VIEW_YEAR);`); // #
         this.clickPrev(CALENDAR_VIEW_YEAR);
@@ -565,64 +569,57 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   // ** Private methods **
 
   // -- Methods for the mode "view year" --
-  private updateViewYearCells(startDate: Date | null, selected: Date | null | undefined, numberOfYears: number): void {
+  private updateViewYearCells(numberOfYears: number | null, startDate: Date | null, selected: Date | null | undefined): void {
     const today: Date = new Date();
     this.todaysYear = today.getFullYear();
     this.calendarYearSelected = selected?.getFullYear() || this.todaysYear;
     this.calendarYearCurrent = this.todaysYear;
 
-    const initDate: Date = startDate || selected || today;
-    let yearStart: number = GlnCalendarUtil.getFirstYearOfPeriod(initDate.getFullYear(), numberOfYears);
+    const numberOfYears2: number = numberOfYears || NUMBER_OF_YEARS_DEFAULT;
+    const initDate: Date = this.currentDate(startDate, selected, new Date());
+    let yearStart: number = GlnCalendarUtil.getFirstYearOfPeriod(initDate.getFullYear(), numberOfYears2);
     if (yearStart === -1) {
-      yearStart = GlnCalendarUtil.getFirstYearOfPeriod((selected || today).getFullYear(), numberOfYears);
+      yearStart = GlnCalendarUtil.getFirstYearOfPeriod((selected || today).getFullYear(), numberOfYears2);
     }
-    this.calendarYearCellList = GlnCalendarUtil.getYearCellList(yearStart, numberOfYears);
+    this.calendarYearCellList = GlnCalendarUtil.getYearCellList(yearStart, numberOfYears2);
     this.calendarYearFirst = yearStart;
-    this.calendarYearLast = yearStart + numberOfYears - 1;
+    this.calendarYearLast = yearStart + numberOfYears2 - 1;
 
     this.markedYear = selected?.getFullYear() || today.getFullYear();
-
-    this.changeDetectorRef.markForCheck();
   }
-  private updateViewYearPeriodLimits(numberOfYears: number, yearPeriodMin: number, yearPeriodMax: number): void {
-    this.YEAR_PERIOD_MIN = GlnCalendarUtil.getFirstYearOfPeriod(yearPeriodMin, numberOfYears);
-    this.YEAR_PERIOD_MAX = GlnCalendarUtil.getFirstYearOfPeriod(yearPeriodMax - numberOfYears, numberOfYears) + numberOfYears - 1;
+  private updateViewYearPeriodLimits(numberOfYears: number | null, yearPeriodMin: number, yearPeriodMax: number): void {
+    const numberOfYears2: number = numberOfYears || NUMBER_OF_YEARS_DEFAULT;
+    this.YEAR_PERIOD_MIN = GlnCalendarUtil.getFirstYearOfPeriod(yearPeriodMin, numberOfYears2);
+    this.YEAR_PERIOD_MAX = GlnCalendarUtil.getFirstYearOfPeriod(yearPeriodMax - numberOfYears2, numberOfYears2) + numberOfYears2 - 1;
   }
   // -- Methods for the mode "view month" --
-  private updateViewMonthCells(selected: Date | null | undefined, formatByMonth: string | null): void {
+  private updateViewMonthCells(formatByMonths: string | null, selected: Date | null | undefined): void {
     const today: Date = new Date();
-    this.todaysMonth = today.getMonth();
-    this.calendarMonthSelected = selected?.getMonth() || this.todaysMonth;
-
-    this.calendarMonthCellList = GlnCalendarUtil.getMonthCellList(DateUtil.convertMonthFormat(formatByMonth || 'short'));
-
-    this.changeDetectorRef.markForCheck();
+    this.calendarMonthToday = today.getMonth();
+    this.calendarMonthSelected = selected?.getMonth() || this.calendarMonthToday;
+    this.calendarMonthCellList = GlnCalendarUtil.getMonthCellList(DateUtil.convertMonthFormat(formatByMonths || FORMAT_BY_MONTH_DEFAULT));
   }
 
   // -- Methods for the mode "view day" --
-  private updateViewDayCells(
-    selected: Date | null,
-    sizeDayWeek: number,
-    isSunday: boolean,
-    startDate: Date | null,
-    format: string | null
-  ): void {
+  private updateViewDayTitle(formatForMonth: string | null, currentDate: Date): void {
+    this.calendarDayYear = currentDate.getFullYear();
+    this.calendarDayMonth = currentDate.getMonth();
+    this.calendarDayYearName = DateUtil.getYearName(currentDate, 'numeric');
+    this.calendarDayMonthName = DateUtil.getMonthName(currentDate, DateUtil.convertMonthFormat(formatForMonth || MONTH_FORMAT_DEFAULT));
+    console.log(`updateViewDayTitle() calendarDayMonth=${this.calendarDayMonth} calendarDayYear=${this.calendarDayYear}`); // #
+  }
+  private updateViewDayHeader(isStartSunday: boolean | null, sizeDayWeek: number | null): void {
+    const dayStartWeek: number = !isStartSunday ? DateUtil.getDayStartWeekByLocale() : 0;
+    const sizeDayWeekVal: number = sizeDayWeek || WEEKDAY_NUM_DEFAULT;
+    this.calendarDayNameList = GlnCalendarUtil.getDayNameList(sizeDayWeekVal, dayStartWeek);
+    console.log(`updateViewDayHeader() isStartSunday=${isStartSunday} sizeDayWeek=${sizeDayWeekVal}`); // #
+  }
+  private updateViewDayCells(isStartSunday: boolean | null, currentMonth: Date, selected: Date | null | undefined): void {
     const today: Date = new Date();
-    const date: Date = startDate || selected || today;
-    this.calendarDayYear = date.getFullYear();
-    this.calendarDayMonth = date.getMonth();
-    const date2: Date = new Date(this.calendarDayYear, this.calendarDayMonth, 1, 0, 0, 0, 0);
-
-    this.calendarDayYearName = DateUtil.getYearName(date2, 'numeric');
-    this.calendarDayMonthName = DateUtil.getMonthName(date2, DateUtil.convertMonthFormat(format || 'long'));
-
-    const dayStartWeek: number = !isSunday ? DateUtil.getDayStartWeekByLocale() : 0;
-    this.calendarDayNameList = GlnCalendarUtil.getDayNameList(sizeDayWeek, dayStartWeek);
-    this.calendarDayCellRowList = GlnCalendarUtil.getDayCellRowList(selected, dayStartWeek, date2, today);
+    const dayStartWeek: number = !isStartSunday ? DateUtil.getDayStartWeekByLocale() : 0;
+    this.calendarDayCellRowList = GlnCalendarUtil.getDayCellRowList(selected || null, dayStartWeek, currentMonth, today);
     const mDate = ` markedDate=${!!this.markedDate ? this.markedDate.toISOString() : 'null'}`;
-    console.log(`updateViewDayCells() calendarDayYear=${this.calendarDayYear} calendarDayMonth=${this.calendarDayMonth}${mDate}`); // #
-
-    this.changeDetectorRef.markForCheck();
+    console.log(`updateViewDayCells()  calendarDayMonth=${this.calendarDayMonth} calendarDayYear=${this.calendarDayYear} ${mDate}`); // #
   }
   // -- --
   private moveFocusToAnotherElement(elementRef: HTMLDivElement, newMarkedLabel: string): void {
@@ -661,6 +658,12 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     return sizeDayWeekNum;
   }
 
+  private currentDate(startDate: Date | null, selected: Date | null | undefined, today: Date): Date {
+    return startDate || selected || today;
+  }
+  private initDate(calendarDayMonth: number, calendarDayYear: number, defaultValue: Date): Date {
+    return calendarDayMonth > -1 && calendarDayYear > -1 ? new Date(calendarDayYear, calendarDayMonth, 1, 0, 0, 0, 0) : defaultValue;
+  }
   private setCssCellSize(cellSize: number, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setProperty(elem, CSS_PROP_CELL_SIZE, (cellSize > 0 ? cellSize.toString() : null)?.concat('px'));
   }

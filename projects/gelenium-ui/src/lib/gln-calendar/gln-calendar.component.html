@@ -148,10 +148,10 @@
           glncn-tint
           [attr.glncn-slct]="monthIdx === calendarMonthSelected ? '' : undefined"
           [attr.glncn-curr]="monthIdx !== calendarMonthSelected ? '' : undefined"
-          [attr.glncn-today]="monthIdx === todaysMonth ? '' : undefined"
+          [attr.glncn-today]="monthIdx === calendarMonthToday ? '' : undefined"
           [ngClass]="['gln-calendar-month-cell'
             , (monthIdx === calendarMonthSelected ? 'gln-selected' : '')
-            , (monthIdx === todaysMonth ? 'gln-today' : '')]"
+            , (monthIdx === calendarMonthToday ? 'gln-today' : '')]"
           (click)="clickMonthCell(monthIdx)">
           {{ monthCell }}
         </button>
@@ -162,7 +162,7 @@
       glncn-view-year
       class="gln-calendar-view-year"
       #yearCellListRef
-      (keydown)="keydownYearCellList($event, yearCellListRef, calendarYearFirst, numberOfYearsValue)">
+      (keydown)="keydownYearCellList($event, yearCellListRef, calendarYearFirst, numberOfYearsVal)">
       <div *ngFor="let yearCell of calendarYearCellList; trackBy: trackByNumber"
         glncn-year-wrapper
         class="gln-calendar-year-cell-wrapper">
