@@ -158,34 +158,34 @@ export class GlnRadioButtonComponent
     if (!!changes['isDisabled']) {
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
-    if (!!changes['isNoAnimation'] || (ChangeUtil.check(changes['config'], 'isNoAnimation') && this.currConfig.isNoAnimation != null)) {
+    if (!!changes['isNoAnimation'] || ChangeUtil.check(changes['config'], 'isNoAnimation')) {
       this.isNoAnimationVal = !!(BooleanUtil.init(this.isNoAnimation) ?? this.group?.noAnimation ?? this.currConfig.isNoAnimation);
       this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isNoHover'] || (ChangeUtil.check(changes['config'], 'isNoHover') && this.currConfig.isNoHover != null)) {
+    if (!!changes['isNoHover'] || ChangeUtil.check(changes['config'], 'isNoHover')) {
       this.isNoHoverVal = !!(BooleanUtil.init(this.isNoHover) ?? this.group?.noHover ?? this.currConfig.isNoHover);
       this.settingNoHover(this.isNoHoverVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isNoRipple'] || (ChangeUtil.check(changes['config'], 'isNoRipple') && this.currConfig.isNoRipple != null)) {
+    if (!!changes['isNoRipple'] || ChangeUtil.check(changes['config'], 'isNoRipple')) {
       this.isNoRippleVal = !!(BooleanUtil.init(this.isNoRipple) ?? this.group?.noRipple ?? this.currConfig.isNoRipple);
       this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isReadOnly'] || (ChangeUtil.check(changes['config'], 'isReadOnly') && this.currConfig.isReadOnly != null)) {
+    if (!!changes['isReadOnly'] || ChangeUtil.check(changes['config'], 'isReadOnly')) {
       this.isReadOnlyVal = !!(BooleanUtil.init(this.isReadOnly) ?? this.group?.readOnly ?? this.currConfig.isReadOnly);
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isRequired'] || (ChangeUtil.check(changes['config'], 'isRequired') && this.currConfig.isRequired != null)) {
+    if (!!changes['isRequired'] || ChangeUtil.check(changes['config'], 'isRequired')) {
       this.isRequiredVal = !!(BooleanUtil.init(this.isRequired) ?? (this.currConfig.isRequired || null));
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
-    if (!!changes['position'] || (ChangeUtil.check(changes['config'], 'position') && this.currConfig.position != null)) {
+    if (!!changes['position'] || ChangeUtil.check(changes['config'], 'position')) {
       // Remove class by old position value.
       this.settingByPosition(false, this.positionVal, this.renderer, this.hostRef);
       this.positionVal = this.convertPosition((this.position || this.group?.position || this.currConfig.position || '').toString());
       // Add class by new position value.
       this.settingByPosition(true, this.positionVal, this.renderer, this.hostRef);
     }
-    if (!!changes['size'] || (ChangeUtil.check(changes['config'], 'size') && this.currConfig.size != null)) {
+    if (!!changes['size'] || ChangeUtil.check(changes['config'], 'size')) {
       this.sizeVal = this.convertSize((this.size || this.group?.size || this.currConfig.size || '').toString());
       this.setCssSize(this.sizeVal, this.hostRef);
     }
