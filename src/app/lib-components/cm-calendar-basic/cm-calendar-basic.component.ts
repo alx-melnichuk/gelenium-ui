@@ -33,12 +33,18 @@ export class CmCalendarBasicComponent {
   isReadOnly01a = false;
   isWeekNumber01a = false;
   isTwoDigitDay01a = false;
-  isStartSunday01a: boolean = false;
+
   isConfig01a = false;
   config01a = {
     isStartSunday: true,
     isWeekNumber: true,
+    formatForMonth: 'short',
+    sizeDayWeek: 1,
   };
+  isStartSunday01a: boolean = false;
+  isFormatForMonth01a: boolean = false;
+  isSizeDayWeek01a: boolean = false;
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 

@@ -30,8 +30,8 @@ export class PlCalendarMatComponent {
     isHideDayoff: true,
     isHideOldDays: true,
     isStartSunday: true,
-    monthFormat: 'short', // 'numeric' (6), '2-digit' (06), 'long' (June) 'short' (Jun), 'narrow' (J)
-    // formatByMonth?: string| undefined; // 'numeric' (6), '2-digit' (06), 'long' (June) 'short' (Jun), 'narrow' (J)
+    formatForMonth: 'short', // 'numeric' (6), '2-digit' (06), 'long' (June) 'short' (Jun), 'narrow' (J)
+    // formatByMonths?: string| undefined; // 'numeric' (6), '2-digit' (06), 'long' (June) 'short' (Jun), 'narrow' (J)
     sizeDayWeek: 1,
   };
   public selectedDate: Date = this.getSelectedDate();

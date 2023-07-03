@@ -38,12 +38,19 @@ public model01: Date | null = new Date();</pre>
   -
   <label><input type="checkbox"
       (change)="isTwoDigitDay01a=!isTwoDigitDay01a" />isTwoDigitDay</label>
+</section>
+<section>
+  <label><input type="checkbox"
+      (change)="isConfig01a=!isConfig01a" />isConfig01a</label>
   -
   <label><input type="checkbox"
       (change)="isStartSunday01a=!isStartSunday01a" />isStartSunday</label>
   -
   <label><input type="checkbox"
-      (change)="isConfig01a=!isConfig01a" />isConfig01a</label>
+      (change)="isFormatForMonth01a=!isFormatForMonth01a" />isFormatForMonth</label>
+  -
+  <label><input type="checkbox"
+      (change)="isSizeDayWeek01a=!isSizeDayWeek01a" />isSizeDayWeek</label>
 </section>
 
 <div class="app-group">
@@ -65,9 +72,11 @@ public model01: Date | null = new Date();</pre>
         [isHideDayoff]="isHideDayoff01a"
         [isReadOnly]="isReadOnly01a"
         [isWeekNumber]="isWeekNumber01a"
-        [config]="isConfig01a ? config01a : undefined"
         [isTwoDigitDay]="isTwoDigitDay01a"
-        isStartSunday9="isStartSunday01a"
+        [config]="isConfig01a ? config01a : undefined"
+        [isStartSunday]="isConfig01a ? undefined : (isStartSunday01a ? true : undefined)"
+        [formatForMonth]="isConfig01a ? undefined : (isFormatForMonth01a ? 'short' : undefined)"
+        [sizeDayWeek]="isConfig01a ? undefined : (isSizeDayWeek01a ? 1 : undefined)"
         (change)="value01a=$event">
       </gln-calendar>
       <!-- <gln-calendar [value]="value01a">
