@@ -191,35 +191,36 @@ export class GlnInputComponent
     if (!!changes['isDisabled']) {
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
-    if (!!changes['isError'] || (ChangeUtil.check(changes['config'], 'isError') && this.currConfig.isError != null)) {
+    if (!!changes['isError'] || ChangeUtil.check(changes['config'], 'isError')) {
       this.isErrorVal = BooleanUtil.init(this.isError) ?? !!this.currConfig.isError;
       this.settingError(this.isErrorVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isReadOnly'] || (ChangeUtil.check(changes['config'], 'isReadOnly') && this.currConfig.isReadOnly != null)) {
+    if (!!changes['isReadOnly'] || ChangeUtil.check(changes['config'], 'isReadOnly')) {
       this.isReadOnlyVal = BooleanUtil.init(this.isReadOnly) ?? !!this.currConfig.isReadOnly;
       this.settingReadOnly(this.isReadOnlyVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isRequired'] || (ChangeUtil.check(changes['config'], 'isRequired') && this.currConfig.isRequired != null)) {
+    if (!!changes['isRequired'] || ChangeUtil.check(changes['config'], 'isRequired')) {
       this.isRequiredVal = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
-    if (!!changes['ornamLfAlign'] || (ChangeUtil.check(changes['config'], 'ornamLfAlign') && this.currConfig.ornamLfAlign != null)) {
+    if (!!changes['ornamLfAlign'] || ChangeUtil.check(changes['config'], 'ornamLfAlign')) {
       this.ornamLfAlignVal = ORNAMENT_ALIGN[this.ornamLfAlign || this.currConfig.ornamLfAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamLfAlign(this.ornamLfAlignVal, this.renderer, this.hostRef);
       this.settingOrnamentList(CSS_ATTR_ORN_LF, this.ornamLfAlignVal || '', this.renderer, GlnOrnamentUtil.getElements(this.ornamLeftList));
     }
-    if (!!changes['ornamRgAlign'] || (ChangeUtil.check(changes['config'], 'ornamRgAlign') && this.currConfig.ornamRgAlign != null)) {
+    if (!!changes['ornamRgAlign'] || ChangeUtil.check(changes['config'], 'ornamRgAlign')) {
       this.ornamRgAlignVal = ORNAMENT_ALIGN[this.ornamRgAlign || this.currConfig.ornamRgAlign || ''] || ORNAMENT_ALIGN['default'];
       this.settingOrnamRgAlign(this.ornamRgAlignVal, this.renderer, this.hostRef);
       const ornamRgAlign: string = this.ornamRgAlignVal || '';
       this.settingOrnamentList(CSS_ATTR_ORN_RG, ornamRgAlign, this.renderer, GlnOrnamentUtil.getElements(this.ornamRightList));
     }
-    if (!!changes['isPlaceholder'] || (ChangeUtil.check(changes['config'], 'isPlaceholder') && this.currConfig.isPlaceholder != null)) {
+    if (!!changes['isPlaceholder'] || ChangeUtil.check(changes['config'], 'isPlaceholder')) {
       this.isPlaceholderVal = BooleanUtil.init(this.isPlaceholder) ?? !!this.currConfig.isPlaceholder;
     }
     if (!!changes['type']) {
       this.typeVal = INPUT_TYPE[this.type] || INPUT_TYPE['text'];
     }
+
     if (!!changes['isRequired'] || !!changes['minLength'] || !!changes['maxLength']) {
       this.prepareFormGroup(this.isRequiredVal, this.minLength, this.maxLength);
     }
