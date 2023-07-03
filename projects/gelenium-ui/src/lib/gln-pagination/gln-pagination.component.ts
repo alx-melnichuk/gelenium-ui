@@ -48,11 +48,11 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
   @Input()
   public config: GlnPaginationConfig | null | undefined;
   @Input()
-  public count: number | null | undefined = 1;
+  public count: number | null | undefined;
   @Input()
-  public countBorder: number | null | undefined = 1;
+  public countBorder: number | null | undefined;
   @Input()
-  public countNearby: number | null | undefined = 1;
+  public countNearby: number | null | undefined;
   @Input()
   public exterior: string | null | undefined;
   @Input()
@@ -107,23 +107,19 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     }
     let isBorderRadius: boolean = false;
     let isPageBuffer: boolean = !!changes['page'];
-    if (!!changes['count'] || (ChangeUtil.check(changes['config'], 'count') && this.currConfig.count != null)) {
+    if (!!changes['count'] || ChangeUtil.check(changes['config'], 'count')) {
       this.countVal = this.getNotNegative(this.count ?? this.currConfig.count) ?? COUNT;
       isPageBuffer = true;
     }
-    if (!!changes['countBorder'] || (ChangeUtil.check(changes['config'], 'countBorder') && this.currConfig.countBorder != null)) {
+    if (!!changes['countBorder'] || ChangeUtil.check(changes['config'], 'countBorder')) {
       this.countBorderVal = this.getNotNegative(this.countBorder ?? this.currConfig.countBorder) ?? COUNT_BORDER;
       isPageBuffer = true;
     }
-    if (!!changes['countNearby'] || (ChangeUtil.check(changes['config'], 'countNearby') && this.currConfig.countNearby != null)) {
+    if (!!changes['countNearby'] || ChangeUtil.check(changes['config'], 'countNearby')) {
       this.countNearbyVal = this.getNotNegative(this.countNearby ?? this.currConfig.countNearby) ?? COUNT_NEARBY;
       isPageBuffer = true;
     }
-    if (isPageBuffer && this.countVal != null && this.page != null && this.countNearbyVal != null && this.countBorderVal != null) {
-      this.pageBuffer = GlnPaginationUtil.createPageBuffer(this.countVal, this.page, this.countNearbyVal, this.countBorderVal);
-    }
-
-    if (!!changes['exterior'] || (ChangeUtil.check(changes['config'], 'exterior') && this.currConfig.exterior != null)) {
+    if (!!changes['exterior'] || ChangeUtil.check(changes['config'], 'exterior')) {
       this.exteriorVal = EXTERIOR[this.exterior || this.currConfig.exterior || ''] || EXTERIOR['text'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
     }
@@ -132,37 +128,41 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabledVal || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabledVal ? '' : null);
     }
-    if (!!changes['isHideNext'] || (ChangeUtil.check(changes['config'], 'isHideNext') && this.currConfig.isHideNext != null)) {
+    if (!!changes['isHideNext'] || ChangeUtil.check(changes['config'], 'isHideNext')) {
       this.isHideNextVal = !!(BooleanUtil.init(this.isHideNext) ?? (this.currConfig.isHideNext || null));
       this.settingHideNext(this.isHideNextVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isHidePrev'] || (ChangeUtil.check(changes['config'], 'isHidePrev') && this.currConfig.isHidePrev != null)) {
+    if (!!changes['isHidePrev'] || ChangeUtil.check(changes['config'], 'isHidePrev')) {
       this.isHidePrevVal = !!(BooleanUtil.init(this.isHidePrev) ?? (this.currConfig.isHidePrev || null));
       this.settingHidePrev(this.isHidePrevVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isNoRipple'] || (ChangeUtil.check(changes['config'], 'isNoRipple') && this.currConfig.isNoRipple != null)) {
+    if (!!changes['isNoRipple'] || ChangeUtil.check(changes['config'], 'isNoRipple')) {
       this.isNoRippleVal = !!(BooleanUtil.init(this.isNoRipple) ?? (this.currConfig.isNoRipple || null));
     }
-    if (!!changes['isNoRounded'] || (ChangeUtil.check(changes['config'], 'isNoRounded') && this.currConfig.isNoRounded != null)) {
+    if (!!changes['isNoRounded'] || ChangeUtil.check(changes['config'], 'isNoRounded')) {
       this.isNoRoundedVal = !!(BooleanUtil.init(this.isNoRounded) ?? (this.currConfig.isNoRounded || null));
       isBorderRadius = true;
     }
-    if (!!changes['isShowFirst'] || (ChangeUtil.check(changes['config'], 'isShowFirst') && this.currConfig.isShowFirst != null)) {
+    if (!!changes['isShowFirst'] || ChangeUtil.check(changes['config'], 'isShowFirst')) {
       this.isShowFirstVal = !!(BooleanUtil.init(this.isShowFirst) ?? (this.currConfig.isShowFirst || null));
       this.settingShowFirst(this.isShowFirstVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isShowLast'] || (ChangeUtil.check(changes['config'], 'isShowLast') && this.currConfig.isShowLast != null)) {
+    if (!!changes['isShowLast'] || ChangeUtil.check(changes['config'], 'isShowLast')) {
       this.isShowLastVal = !!(BooleanUtil.init(this.isShowLast) ?? (this.currConfig.isShowLast || null));
       this.settingShowLast(this.isShowLastVal, this.renderer, this.hostRef);
     }
-    if (!!changes['size'] || (ChangeUtil.check(changes['config'], 'size') && this.currConfig.size != null)) {
+    if (!!changes['size'] || ChangeUtil.check(changes['config'], 'size')) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
       this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['short']);
       this.setCssSize(this.sizeVal, this.hostRef);
       isBorderRadius = true;
     }
+
     if (isBorderRadius) {
       this.setCssBorderRadius(this.sizeVal, this.isNoRoundedVal, this.hostRef);
+    }
+    if (isPageBuffer && this.countVal != null && this.page != null && this.countNearbyVal != null && this.countBorderVal != null) {
+      this.pageBuffer = GlnPaginationUtil.createPageBuffer(this.countVal, this.page, this.countNearbyVal, this.countBorderVal);
     }
   }
 
@@ -222,7 +222,6 @@ export class GlnPaginationComponent implements OnChanges, OnInit {
     if (isBorderRadius) {
       this.setCssBorderRadius(this.sizeVal, this.isNoRoundedVal, this.hostRef);
     }
-
     if (isPageBuffer || this.pageBuffer.length === 0) {
       this.pageBuffer = GlnPaginationUtil.createPageBuffer(this.countVal, this.page, this.countNearbyVal, this.countBorderVal);
     }
