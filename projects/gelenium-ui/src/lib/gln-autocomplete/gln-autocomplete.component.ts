@@ -146,47 +146,46 @@ export class GlnAutocompleteComponent implements OnChanges, OnInit, OnDestroy, G
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['config']) {
+    if (!!changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
 
-    if (changes['isDisabled']) {
+    if (!!changes['isDisabled']) {
       this.disabled = !!BooleanUtil.init(this.isDisabled);
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.disabled);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.disabled ? '' : null);
     }
-    if (changes['isClearOnEscape'] || (ChangeUtil.check(changes['config'], 'isClearOnEscape') && this.currConfig.isClearOnEscape != null)) {
+    if (!!changes['isClearOnEscape'] || ChangeUtil.check(changes['config'], 'isClearOnEscape')) {
       this.clearOnEscape = BooleanUtil.init(this.isClearOnEscape) ?? !!this.currConfig.isClearOnEscape;
     }
-    if (!!changes['isMaxWd'] || (ChangeUtil.check(changes['config'], 'isMaxWd') && this.currConfig.isMaxWd != null)) {
+    if (!!changes['isMaxWd'] || ChangeUtil.check(changes['config'], 'isMaxWd')) {
       this.isMaxWdVal = BooleanUtil.init(this.isMaxWd) ?? !!this.currConfig.isMaxWd;
       this.setCssMaxWidth(this.isMaxWdVal, this.hostRef);
     }
-    if (!!changes['isNoAnimation'] || (ChangeUtil.check(changes['config'], 'isNoAnimation') && this.currConfig.isNoAnimation != null)) {
+    if (!!changes['isNoAnimation'] || ChangeUtil.check(changes['config'], 'isNoAnimation')) {
       this.isNoAnimationVal = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
     }
-    const isNoCloseOnSelect: boolean | undefined = this.currConfig.isNoCloseOnSelect;
-    if (!!changes['isNoCloseOnSelect'] || (ChangeUtil.check(changes['config'], 'isNoCloseOnSelect') && isNoCloseOnSelect != null)) {
+    if (!!changes['isNoCloseOnSelect'] || ChangeUtil.check(changes['config'], 'isNoCloseOnSelect')) {
       this.isNoCloseOnSelectVal = BooleanUtil.init(this.isNoCloseOnSelect) ?? !!this.currConfig.isNoCloseOnSelect;
     }
-    if (changes['isNoOpenOnMouse'] || (ChangeUtil.check(changes['config'], 'isNoOpenOnMouse') && this.currConfig.isNoOpenOnMouse != null)) {
+    if (changes['isNoOpenOnMouse'] || ChangeUtil.check(changes['config'], 'isNoOpenOnMouse')) {
       this.noOpenOnMouse = BooleanUtil.init(this.isNoOpenOnMouse) ?? !!this.currConfig.isNoOpenOnMouse;
     }
-    if (!!changes['isNoRipple'] || (ChangeUtil.check(changes['config'], 'isNoRipple') && this.currConfig.isNoRipple != null)) {
+    if (!!changes['isNoRipple'] || ChangeUtil.check(changes['config'], 'isNoRipple')) {
       this.noRipple = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
       this.settingNoRipple(this.noRipple, this.renderer, this.hostRef);
     }
-    if (!!changes['isOpenOnFocus'] || (ChangeUtil.check(changes['config'], 'isOpenOnFocus') && this.currConfig.isOpenOnFocus != null)) {
+    if (!!changes['isOpenOnFocus'] || ChangeUtil.check(changes['config'], 'isOpenOnFocus')) {
       this.openOnFocus = BooleanUtil.init(this.isOpenOnFocus) ?? !!this.currConfig.isOpenOnFocus;
     }
-    if (!!changes['classes'] || (ChangeUtil.check(changes['config'], 'classes') && this.currConfig.classes != null)) {
+    if (!!changes['classes'] || ChangeUtil.check(changes['config'], 'classes')) {
       this.classesVal = this.classes || this.currConfig.classes;
     }
-    if (!!changes['position'] || (ChangeUtil.check(changes['config'], 'position') && this.currConfig.position != null)) {
+    if (!!changes['position'] || ChangeUtil.check(changes['config'], 'position')) {
       this.positionVal = AUTOCOMPLETE_POSITION[this.position || this.currConfig.position || ''] || AUTOCOMPLETE_POSITION['start'];
       this.setCssJustifyContent(this.positionVal, this.hostRef);
     }
-    if (!!changes['visibleSize'] || (ChangeUtil.check(changes['config'], 'visibleSize') && this.currConfig.visibleSize != null)) {
+    if (!!changes['visibleSize'] || ChangeUtil.check(changes['config'], 'visibleSize')) {
       this.visibleSizeVal = this.visibleSize || this.currConfig.visibleSize || null;
       this.setCssMaxHeight(this.optionHeight, this.visibleSizeVal, this.hostRef);
     }
