@@ -122,12 +122,12 @@ export class GlnFrameComponent implements OnChanges, OnInit {
     }
 
     let isUpdateCssParams = false;
-    if (!!changes['exterior'] || (ChangeUtil.check(changes['config'], 'exterior') && this.currConfig.exterior != null)) {
+    if (!!changes['exterior'] || ChangeUtil.check(changes['config'], 'exterior')) {
       this.exteriorVal = EXTERIOR[this.exterior || this.currConfig.exterior || ''] || EXTERIOR['outlined'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
       isUpdateCssParams = true;
     }
-    if (!!changes['size'] || (ChangeUtil.check(changes['config'], 'size') && this.currConfig.size != null)) {
+    if (!!changes['size'] || ChangeUtil.check(changes['config'], 'size')) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
       this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['middle']);
       isUpdateCssParams = true;
@@ -162,15 +162,15 @@ export class GlnFrameComponent implements OnChanges, OnInit {
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'fil', this.isFilledVal ? '' : null);
     }
 
-    if (!!changes['isLabelShrink'] || (ChangeUtil.check(changes['config'], 'isLabelShrink') && this.currConfig.isLabelShrink != null)) {
+    if (!!changes['isLabelShrink'] || ChangeUtil.check(changes['config'], 'isLabelShrink')) {
       this.isLabelShrinkVal = BooleanUtil.init(this.isLabelShrink) ?? !!this.currConfig.isLabelShrink;
       this.settingLabelShrink(this.isLabelShrinkVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isNoAnimation'] || (ChangeUtil.check(changes['config'], 'isNoAnimation') && this.currConfig.isNoAnimation != null)) {
+    if (!!changes['isNoAnimation'] || ChangeUtil.check(changes['config'], 'isNoAnimation')) {
       this.isNoAnimationVal = BooleanUtil.init(this.isNoAnimation) ?? !!this.currConfig.isNoAnimation;
       this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isRequired'] || (ChangeUtil.check(changes['config'], 'isRequired') && this.currConfig.isRequired != null)) {
+    if (!!changes['isRequired'] || ChangeUtil.check(changes['config'], 'isRequired')) {
       this.isRequiredVal = BooleanUtil.init(this.isRequired) ?? !!this.currConfig.isRequired;
       this.settingRequired(this.isRequiredVal, this.renderer, this.hostRef);
     }
