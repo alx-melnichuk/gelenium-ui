@@ -92,7 +92,7 @@ export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit {
     if (!!changes['config']) {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
-    if (!!changes['exterior'] || (ChangeUtil.check(changes['config'], 'exterior') && this.currConfig.exterior != null)) {
+    if (!!changes['exterior'] || ChangeUtil.check(changes['config'], 'exterior')) {
       this.exteriorVal = EXTERIOR[this.exterior || this.currConfig.exterior || ''] || EXTERIOR['outlined'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
     }
@@ -101,15 +101,15 @@ export class GlnChipComponent implements OnChanges, OnInit, AfterContentInit {
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabledVal || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabledVal ? '' : null);
     }
-    if (!!changes['isElevation'] || (ChangeUtil.check(changes['config'], 'isElevation') && this.currConfig.isElevation != null)) {
+    if (!!changes['isElevation'] || ChangeUtil.check(changes['config'], 'isElevation')) {
       this.isElevationVal = BooleanUtil.init(this.isElevation) ?? !!this.currConfig.isElevation;
       this.setCssElevation(this.isElevationVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isNoRipple'] || (ChangeUtil.check(changes['config'], 'isNoRipple') && this.currConfig.isNoRipple != null)) {
+    if (!!changes['isNoRipple'] || ChangeUtil.check(changes['config'], 'isNoRipple')) {
       this.isNoRippleVal = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
       this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
     }
-    if (!!changes['size'] || (ChangeUtil.check(changes['config'], 'size') && this.currConfig.size != null)) {
+    if (!!changes['size'] || ChangeUtil.check(changes['config'], 'size')) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
       this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       this.setCssSize(this.sizeVal, this.hostRef);
