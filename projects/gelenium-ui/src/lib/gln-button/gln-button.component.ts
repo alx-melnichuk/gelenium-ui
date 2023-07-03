@@ -106,29 +106,29 @@ export class GlnButtonComponent implements OnChanges, OnInit, AfterContentInit {
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
     let isUpdateCssParams = false;
-    if (!!changes['exterior'] || (ChangeUtil.check(changes['config'], 'exterior') && this.currConfig.exterior != null)) {
+    if (!!changes['exterior'] || ChangeUtil.check(changes['config'], 'exterior')) {
       this.exteriorVal = EXTERIOR[this.exterior || this.currConfig.exterior || ''] || EXTERIOR['outlined'];
       this.settingExterior(this.exteriorVal, this.renderer, this.hostRef);
       isUpdateCssParams = true;
     }
-    if (!!changes['size'] || (ChangeUtil.check(changes['config'], 'size') && this.currConfig.size != null)) {
-      const sizeStr: string = (this.size || this.currConfig.size || '').toString();
-      this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
-      this.setCssSize(this.sizeVal, this.hostRef);
-      isUpdateCssParams = true;
-    }
-    if (isUpdateCssParams && this.exteriorVal) {
-      this.updateCssParams(this.exteriorVal, this.sizeVal, this.getLineHeight(), this.hostRef);
-    }
-
     if (!!changes['isDisabled']) {
       this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
       HtmlElemUtil.setClass(this.renderer, this.hostRef, 'gln-disabled', this.isDisabledVal || false);
       HtmlElemUtil.setAttr(this.renderer, this.hostRef, 'dis', this.isDisabledVal ? '' : null);
     }
-    if (!!changes['isNoRipple'] || (ChangeUtil.check(changes['config'], 'isNoRipple') && this.currConfig.isNoRipple != null)) {
+    if (!!changes['isNoRipple'] || ChangeUtil.check(changes['config'], 'isNoRipple')) {
       this.isNoRippleVal = BooleanUtil.init(this.isNoRipple) ?? !!this.currConfig.isNoRipple;
       this.settingNoRipple(this.isNoRippleVal, this.renderer, this.hostRef);
+    }
+    if (!!changes['size'] || ChangeUtil.check(changes['config'], 'size')) {
+      const sizeStr: string = (this.size || this.currConfig.size || '').toString();
+      this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
+      this.setCssSize(this.sizeVal, this.hostRef);
+      isUpdateCssParams = true;
+    }
+
+    if (isUpdateCssParams && this.exteriorVal) {
+      this.updateCssParams(this.exteriorVal, this.sizeVal, this.getLineHeight(), this.hostRef);
     }
   }
 
