@@ -89,28 +89,28 @@ export class GlnSpinnerComponent implements OnChanges, OnInit {
     let isSize = false;
     let isStrokeWd = false;
 
-    if (!!changes['isExternal'] || (ChangeUtil.check(changes['config'], 'isExternal') && this.currConfig.isExternal != null)) {
+    if (!!changes['isExternal'] || ChangeUtil.check(changes['config'], 'isExternal')) {
       this.isExternalVal = !!(BooleanUtil.init(this.isExternal) ?? (this.currConfig.isExternal || null));
       this.settingExternal(this.isExternalVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isNoAnimation'] || (ChangeUtil.check(changes['config'], 'isNoAnimation') && this.currConfig.isNoAnimation != null)) {
+    if (!!changes['isNoAnimation'] || ChangeUtil.check(changes['config'], 'isNoAnimation')) {
       this.isNoAnimationVal = !!(BooleanUtil.init(this.isNoAnimation) ?? (this.currConfig.isNoAnimation || null));
       this.settingNoAnimation(this.isNoAnimationVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isNoPulsate'] || (ChangeUtil.check(changes['config'], 'isNoPulsate') && this.currConfig.isNoPulsate != null)) {
+    if (!!changes['isNoPulsate'] || ChangeUtil.check(changes['config'], 'isNoPulsate')) {
       this.isNoPulsateVal = !!(BooleanUtil.init(this.isNoPulsate) ?? (this.currConfig.isNoPulsate || null));
       this.settingNoPulsate(this.isNoPulsateVal, this.renderer, this.hostRef);
     }
-    if (!!changes['progress'] || (ChangeUtil.check(changes['config'], 'progress') && this.currConfig.progress != null)) {
+    if (!!changes['progress'] || ChangeUtil.check(changes['config'], 'progress')) {
       this.progressVal = this.getProgress(this.progress ?? (this.currConfig.progress || null));
       isProgress = true;
     }
-    if (!!changes['size'] || (ChangeUtil.check(changes['config'], 'size') && this.currConfig.size != null)) {
+    if (!!changes['size'] || ChangeUtil.check(changes['config'], 'size')) {
       const sizeStr: string = (this.size || this.currConfig.size || '').toString();
       this.sizeVal = this.convertSize(sizeStr, SIZE[sizeStr] || SIZE['small']);
       isSize = true;
     }
-    if (!!changes['strokeWd'] || (ChangeUtil.check(changes['config'], 'strokeWd') && this.currConfig.strokeWd != null)) {
+    if (!!changes['strokeWd'] || ChangeUtil.check(changes['config'], 'strokeWd')) {
       this.strokeWdVal = this.setStrokeWd(this.strokeWd || this.currConfig.strokeWd || null, this.sizeVal);
       isStrokeWd = true;
     }
