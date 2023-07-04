@@ -32,6 +32,10 @@ export interface CalendarDayName {
 }
 
 export class GlnCalendarUtil {
+  public static COLS_BY_YEARS_DEFAULT = 4;
+  public static ROWS_BY_YEARS_DEFAULT = 5;
+  public static COLS_BY_MONTHS_DEFAULT = 3;
+
   // -- Methods for the mode "view year" --
 
   public static getYearCellList(yearStart: number, amountYears: number): number[] {
@@ -157,17 +161,43 @@ export class GlnCalendarUtil {
     return isCorrectYearMonthDay ? new Date(newYear, newMonth, newDay, 0, 0, 0, 0) : GlnCalendarUtil.getLastDayOfMonth(newYear, newMonth);
   }
 
-  public static getFirstYearOfPeriod(years: number, numberOfYears: number): number {
+  public static getFirstYearOfPeriod(years: number, yearsPerPage: number): number {
     let result: number = -1;
-    if (0 < years && years < CALENDAR_YEAR_PERIOD_MAX && 0 < numberOfYears && numberOfYears < 101 && years >= CALENDAR_YEAR_PERIOD_MIN) {
+    if (0 < years && years < CALENDAR_YEAR_PERIOD_MAX && 0 < yearsPerPage && yearsPerPage < 101 && years >= CALENDAR_YEAR_PERIOD_MIN) {
       const delta: number = years - CALENDAR_YEAR_PERIOD_MIN;
-      const valueResult = CALENDAR_YEAR_PERIOD_MIN + Math.trunc(delta / numberOfYears) * numberOfYears;
-      result = valueResult < CALENDAR_YEAR_PERIOD_MAX - numberOfYears ? valueResult : result;
+      const valueResult = CALENDAR_YEAR_PERIOD_MIN + Math.trunc(delta / yearsPerPage) * yearsPerPage;
+      result = valueResult < CALENDAR_YEAR_PERIOD_MAX - yearsPerPage ? valueResult : result;
     }
     return result;
   }
 
   public static getElementByLabel(elementListRef: HTMLDivElement | undefined, label: string | null): HTMLElement | null {
     return (elementListRef?.querySelector(`button[data-label='${label}']`) as HTMLElement) || null;
+  }
+
+  public static getColsByYears(value: number): number {
+    return 0 < value && value < 13 ? value : GlnCalendarUtil.COLS_BY_YEARS_DEFAULT;
+  }
+  public static getRowsByYears(value: number): number {
+    return 0 < value && value < 13 ? value : GlnCalendarUtil.ROWS_BY_YEARS_DEFAULT;
+  }
+  public static getColsByMonths(value: number): number {
+    return 0 < value && value < 13 ? value : GlnCalendarUtil.COLS_BY_MONTHS_DEFAULT;
+  }
+  public static getRowsByMonthsByCols(value: number): number {
+    return Math.round((12 / value) * 100) / 100;
+  }
+
+  public static convertSizeDayWeek(sizeDayWeek: string | undefined, defaultWeekdayNum: number): number {
+    let sizeDayWeekNum: number = defaultWeekdayNum;
+    if (sizeDayWeek != undefined && !!sizeDayWeek) {
+      const valueNum: number = Number.parseFloat(sizeDayWeek);
+      if (!Number.isNaN(valueNum)) {
+        sizeDayWeekNum = 0 < valueNum && valueNum < 25 ? valueNum : -1;
+      } else {
+        sizeDayWeekNum = 'long' === sizeDayWeek ? -1 : 'short' === sizeDayWeek ? 3 : sizeDayWeekNum;
+      }
+    }
+    return sizeDayWeekNum;
   }
 }

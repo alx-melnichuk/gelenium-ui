@@ -162,7 +162,7 @@
       glncn-view-year
       class="gln-calendar-view-year"
       #yearCellListRef
-      (keydown)="keydownYearCellList($event, yearCellListRef, calendarYearFirst, numberOfYearsVal)">
+      (keydown)="keydownYearCellList($event, yearCellListRef, calendarYearFirst, yearsPerPage)">
       <div *ngFor="let yearCell of calendarYearCellList; trackBy: trackByNumber"
         glncn-year-wrapper
         class="gln-calendar-year-cell-wrapper">

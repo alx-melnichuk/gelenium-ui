@@ -416,12 +416,10 @@ gln-calendar {
     align-items: center;
     box-sizing: border-box;
     display: flex;
-    height: var(--glncn-month-wrapper-hg, 25%);
+    height: var(--glncn--month-wrapper-hg, 25%);
     justify-content: center;
-    margin: var(--glncn-month-wrapper-mr, 0px);
     padding: var(--glncn-month-wrapper-pd, 0px);
-    width: var(--glncn-month-wrapper-wd, 33.32%);
-    // # outline: 1px solid orange; // #    
+    width: var(--glncn--month-wrapper-wd, 33.32%);
   }
 
   // Level 5 Element "glncn-month-cell"
@@ -429,7 +427,7 @@ gln-calendar {
     border: 0;
     border-radius: var(--glncn-month-cell-br-rd, calc(var(--glncn--item-hg) / 2));
     font-family: inherit;
-    font-size: var(--glncn-item-fn-sz, 1em);
+    font-size: var(--glncn-month-cell-fn-sz, var(--glncn-item-fn-sz, 1em));
     font-weight: inherit;
     height: var(--glncn-month-cell-hg, var(--glncn--item-hg));
     outline: 0;
@@ -453,16 +451,13 @@ gln-calendar {
     align-items: center;
     box-sizing: border-box;
     display: flex;
-    height: var(--glncn-year-wrapper-hg, 20%);
+    height: var(--glncn--year-wrapper-hg, 20%);
     justify-content: center;
-    margin: var(--glncn-year-wrapper-mr, 0px);
     padding: var(--glncn-year-wrapper-pd, 0px);
-    width: var(--glncn-year-wrapper-wd, 25%);
-    // # outline: 1px solid orange; // #
+    width: var(--glncn--year-wrapper-wd, 25%);
   }
   // Level 5 Element "glncn-year-cell"
   [glncn-year-cell] {
-    border: 0;
     border-radius: var(--glncn-year-cell-br-rd, calc(var(--glncn--item-hg) / 2));
     font-family: inherit;
     font-size: var(--glncn-year-cell-fn-sz, var(--glncn-item-fn-sz, 1em));
