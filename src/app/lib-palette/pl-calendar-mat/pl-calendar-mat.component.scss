@@ -10,7 +10,7 @@ app-pl-calendar-mat {
   }
 }
 
-.cnma-mat {
+.cnma-mat9 {
   position: absolute;
   background-color: #fff;
   outline: 1px solid black;
@@ -96,6 +96,32 @@ app-pl-calendar-mat {
   
   --glncn-item-fn-sz: 13.33px;
 
+  // "view month"
+  --glncn-view-month-pd: 60px 0px 85px 0px;
+  // "month wrapper"
+  --glncn-month-wrapper-pd: 0.7% 1%;
+  // "month cell"
+  .gln-calendar-month-cell {
+    transition: unset;
+    text-transform: uppercase;
+  }
+  --glncn-month-cell-br-rd: 2em;
+  --glncn-month-cell-hg: 100%;
+  --glncn-month-cell-wd: 100%;
+
+  // "view year"
+  --glncn-view-year-pd: 7px 4px 7px 4px;
+  // "year-wrapper"
+  --glncn-year-wrapper-pd: 0.7% 1%;
+  // "year cell"
+  .gln-calendar-year-cell {
+    transition: unset;
+  }
+  --glncn-year-cell-br-rd: 2em;
+  --glncn-year-cell-hg: 100%;
+  --glncn-year-cell-wd: 100%;
+
+  
   // &[dis] .gln-calendar-list-days {
   //   opacity: 0.6;
   // }

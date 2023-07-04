@@ -27,11 +27,14 @@ export class PlCalendarMatComponent {
   public isHideOldDays07j: boolean = false;
   public cfgMui = {
     cellSize: 36,
+    colsByYears: 4,
+    colsByMonths: 4,
     isHideDayoff: true,
     isHideOldDays: true,
     isStartSunday: true,
     formatForMonth: 'short', // 'numeric' (6), '2-digit' (06), 'long' (June) 'short' (Jun), 'narrow' (J)
     // formatByMonths?: string| undefined; // 'numeric' (6), '2-digit' (06), 'long' (June) 'short' (Jun), 'narrow' (J)
+    rowsByYears: 6,
     sizeDayWeek: 1,
   };
   public selectedDate: Date = this.getSelectedDate();
