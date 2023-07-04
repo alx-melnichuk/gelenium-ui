@@ -26,9 +26,11 @@ export class PlCalendarBootstrapComponent {
   public isDisabled07h: boolean = false;
   public cfgBs = {
     cellSize: 30,
+    colsByYears: 4,
+    colsByMonths: 4,
     isHideDayoff: true,
     isStartSunday: true,
-    numberOfYears: 12,
+    rowsByYears: 3,
     sizeDayWeek: 2,
   };
   public selectedDate: Date = this.getSelectedDate();

@@ -9,7 +9,7 @@ app-pl-calendar-bootstrap {
   }
 }
 
-.cnbs-bstr {
+.cnbs-bstr9 {
   position: absolute;
   background: #fff;
   outline: 1px solid #000;
@@ -98,24 +98,25 @@ app-pl-calendar-bootstrap {
   --glncn-dis-today-br-cl: #7e7e7e;
 
   // "view month"
-  --glncn-view-month-pd: 15px 4px 15px 4px;
+  --glncn-view-month-pd: 17px 4px 17px 4px;
   // "month wrapper"
-  --glncn-month-wrapper-hg: 30%;
-  --glncn-month-wrapper-mr: 1%;
-  --glncn-month-wrapper-wd: 23%;
+  --glncn-month-wrapper-pd: 1%;
   // "month cell"
+  .gln-calendar-month-cell {
+    transition: unset;
+  }
   --glncn-month-cell-br-rd: 4px;
   --glncn-month-cell-hg: 100%;
   --glncn-month-cell-wd: 100%;
 
   // "view year"
-  --glncn-view-year-pd: 15px 4px 15px 4px;
+  --glncn-view-year-pd: 17px 4px 17px 4px;
   // "year-wrapper"
-  --glncn-year-wrapper-hg: 30%;
-  --glncn-year-wrapper-mr: 1%;
-  --glncn-year-wrapper-wd: 23%;
-
-  // Level 4 Element "glncn-year-wrapper"
+  --glncn-year-wrapper-pd: 1%;
+  // "year cell"
+  .gln-calendar-year-cell {
+    transition: unset;
+  }
   --glncn-year-cell-br-rd: 4px;
   --glncn-year-cell-hg: 100%;
   --glncn-year-cell-wd: 100%;
