@@ -31,14 +31,20 @@ export class CmCalendarBasicComponent {
   isDisabled01a = false;
   isHideDayoff01a = false;
   isReadOnly01a = false;
+  isColsByYears01a = false;
+  isColsByMonths01a = false;
+  isRowsByYears01a = false;
   isWeekNumber01a = false;
   isTwoDigitDay01a = false;
 
   isConfig01a = false;
   config01a = {
+    colsByYears: 5,
+    colsByMonths: 4,
+    formatForMonth: 'short',
     isStartSunday: true,
     isWeekNumber: true,
-    formatForMonth: 'short',
+    rowsByYears: 4,
     sizeDayWeek: 1,
   };
   isStartSunday01a: boolean = false;
