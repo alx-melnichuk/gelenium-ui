@@ -27,10 +27,11 @@ export class PlCalendarMaterialUiComponent {
   public isHideOldDays07l: boolean = false;
   public cfgMui = {
     cellSize: 36,
+    colsByYears: 3,
     isHideDayoff: true,
     isHideOldDays: true,
     isStartSunday: true,
-    numberOfYears: 15,
+    rowsByYears: 5,
     sizeDayWeek: 1,
   };
   public selectedDate: Date = this.getSelectedDate();
