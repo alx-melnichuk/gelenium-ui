@@ -41,6 +41,8 @@ export class CmCalendarAttributesComponent {
   public value02n: Date | null = new Date(this.selectedDate);
   // Part 4
   public value02p: Date | null = new Date(this.selectedDate);
+  public value02q: Date | null = new Date(this.selectedDate);
+  public value02r: Date | null = new Date(this.selectedDate);
 
   // Demo
   public value02z: Date | null = new Date(this.selectedDate);
