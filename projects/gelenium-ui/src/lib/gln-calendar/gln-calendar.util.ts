@@ -35,6 +35,9 @@ export class GlnCalendarUtil {
   public static COLS_BY_YEARS_DEFAULT = 4;
   public static ROWS_BY_YEARS_DEFAULT = 5;
   public static COLS_BY_MONTHS_DEFAULT = 3;
+  public static VIEW_DAY = 'day';
+  public static VIEW_MONTH = 'month';
+  public static VIEW_YEAR = 'year';
 
   // -- Methods for the mode "view year" --
 
@@ -199,5 +202,33 @@ export class GlnCalendarUtil {
       }
     }
     return sizeDayWeekNum;
+  }
+
+  public static getViewModes(): string[] {
+    return [GlnCalendarUtil.VIEW_DAY, GlnCalendarUtil.VIEW_YEAR, GlnCalendarUtil.VIEW_MONTH];
+  }
+  public static checkViews(views: string[] | null | undefined): string[] {
+    const result: string[] = [];
+    if (Array.isArray(views)) {
+      const modes: string[] = GlnCalendarUtil.getViewModes();
+      for (let index = 0; index < views.length; index++) {
+        if (modes.indexOf(views[index]) > -1) {
+          result.push(views[index]);
+        }
+      }
+    }
+    return result;
+  }
+  public static getNextView(views: string[], currView: string): string {
+    let result: string = currView;
+    const index: number = views.indexOf(currView);
+    if (views.length > 0 && index > -1) {
+      const nextIndex: number = index === views.length - 1 ? 0 : index + 1;
+      const modes: string[] = GlnCalendarUtil.getViewModes();
+      if (modes.indexOf(views[nextIndex]) > -1) {
+        result = views[nextIndex];
+      }
+    }
+    return result;
   }
 }

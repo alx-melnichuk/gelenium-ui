@@ -4,13 +4,13 @@
     class="gln-calendar-title">
 
     <div glncn-title-block
-      [attr.glncn-title-day]="view === VIEW_DAY ? '' : undefined"
-      [attr.glncn-title-month]="view === VIEW_MONTH ? '' : undefined"
-      [attr.glncn-title-year]="view === VIEW_YEAR ? '' : undefined"
+      [attr.glncn-title-day]="viewMode === VIEW_DAY ? '' : undefined"
+      [attr.glncn-title-month]="viewMode === VIEW_MONTH ? '' : undefined"
+      [attr.glncn-title-year]="viewMode === VIEW_YEAR ? '' : undefined"
       [ngClass]="['gln-calendar-title-block'
-        , (view === VIEW_DAY ? 'gln-title-day' : '')
-        , (view === VIEW_MONTH ? 'gln-title-month' : '')
-        , (view === VIEW_YEAR ? 'gln-title-year' : '')]">
+        , (viewMode === VIEW_DAY ? 'gln-title-day' : '')
+        , (viewMode === VIEW_MONTH ? 'gln-title-month' : '')
+        , (viewMode === VIEW_YEAR ? 'gln-title-year' : '')]">
 
       <button type="button"
         glncn-title-caption
@@ -19,8 +19,8 @@
         [attr.tabindex]="!isDisabledVal ? 0 : -1"
         [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
         (click)="clickSwitch()">
-        {{ view === VIEW_DAY ? calendarDayMonthName + ' ' + calendarDayYearName
-        : (view === VIEW_MONTH ? calendarDayYearName : calendarYearFirst + ' - ' + calendarYearLast) }}
+        {{ viewMode === VIEW_DAY ? calendarDayMonthName + ' ' + calendarDayYearName
+        : (viewMode === VIEW_MONTH ? calendarDayYearName : calendarYearFirst + ' - ' + calendarYearLast) }}
       </button>
 
       <button type="button"
@@ -43,15 +43,15 @@
       </button>
     </div>
 
-    <ng-container *ngIf="view !== VIEW_MONTH">
+    <ng-container *ngIf="viewMode !== VIEW_MONTH">
       <button type="button"
         glncn-prev
         glncn-crs-pnt
         glncn-nav
         class="gln-calendar-nav gln-calendar-prev"
         [attr.tabindex]="!isDisabledVal ? 0 : -1"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal || (view === VIEW_YEAR && calendarYearFirst === YEAR_PERIOD_MIN) ? '' : undefined"
-        (click)="clickPrev(view === VIEW_DAY ? VIEW_MONTH : (view === VIEW_YEAR ? VIEW_YEAR : ''))">
+        [attr.disabled]="isDisabledVal || isReadOnlyVal || (viewMode === VIEW_YEAR && calendarYearFirst === YEAR_PERIOD_MIN) ? '' : undefined"
+        (click)="clickPrev(viewMode === VIEW_DAY ? VIEW_MONTH : (viewMode === VIEW_YEAR ? VIEW_YEAR : ''))">
         <svg glncn-icon
           class="gln-calendar-t-icon icon-prev"
           focusable="false"
@@ -67,8 +67,8 @@
         glncn-nav
         class="gln-calendar-nav gln-calendar-next"
         [attr.tabindex]="!isDisabledVal ? 0 : -1"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal || (view === VIEW_YEAR && calendarYearLast === YEAR_PERIOD_MAX) ? '' : undefined"
-        (click)="clickNext(view === VIEW_DAY ? VIEW_MONTH : (view === VIEW_YEAR ? VIEW_YEAR : ''))">
+        [attr.disabled]="isDisabledVal || isReadOnlyVal || (viewMode === VIEW_YEAR && calendarYearLast === YEAR_PERIOD_MAX) ? '' : undefined"
+        (click)="clickNext(viewMode === VIEW_DAY ? VIEW_MONTH : (viewMode === VIEW_YEAR ? VIEW_YEAR : ''))">
         <svg glncn-icon
           class="gln-calendar-t-icon icon-next"
           focusable="false"
@@ -85,7 +85,7 @@
 
     <div glncn-header
       class="gln-calendar-header"
-      [attr.glncn-hide]="view !== VIEW_DAY ? '' : undefined">
+      [attr.glncn-hide]="viewMode !== VIEW_DAY ? '' : undefined">
 
       <ng-container [ngTemplateOutlet]="isWeekNumberVal ? templateWeekNumberHeader : null">
       </ng-container>
@@ -105,7 +105,7 @@
 
     <div glncn-rows
       class="gln-calendar-list-days"
-      [attr.glncn-hide]="view !== VIEW_DAY ? '' : undefined"
+      [attr.glncn-hide]="viewMode !== VIEW_DAY ? '' : undefined"
       #dayInfoRowListRef
       (keydown)="keydownDayCellRowList($event, dayInfoRowListRef)">
 
@@ -135,7 +135,7 @@
 
     </div>
 
-    <div *ngIf="view == VIEW_MONTH"
+    <div *ngIf="viewMode == VIEW_MONTH"
       glncn-view-month
       class="gln-calendar-view-month">
       <div *ngFor="let monthCell of calendarMonthCellList; index as monthIdx; trackBy: trackByIndex;"
@@ -158,7 +158,7 @@
       </div>
     </div>
 
-    <div *ngIf="view == VIEW_YEAR"
+    <div *ngIf="viewMode == VIEW_YEAR"
       glncn-view-year
       class="gln-calendar-view-year"
       #yearCellListRef
