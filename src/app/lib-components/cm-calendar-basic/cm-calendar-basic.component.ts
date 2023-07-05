@@ -45,6 +45,7 @@ export class CmCalendarBasicComponent {
     isStartSunday: true,
     isWeekNumber: true,
     rowsByYears: 4,
+    views: ['month', 'year'], // views9="['day','year','month']"
     sizeDayWeek: 1,
   };
   isStartSunday01a: boolean = false;
