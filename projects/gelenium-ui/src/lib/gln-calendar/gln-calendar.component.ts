@@ -82,9 +82,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public isDisabled: string | boolean | null | undefined;
   @Input()
-  public isHideOldDays: string | boolean | undefined;
-  @Input()
   public isHideDayoff: string | boolean | undefined;
+  @Input()
+  public isHideOldDays: string | boolean | undefined;
   @Input()
   public isHorizont: string | boolean | null | undefined;
   @Input()
@@ -145,8 +145,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public formatByMonthsVal: string | null = null; // Binding attribute "formatByMonths".
   public formatForMonthVal: string | null = null; // Binding attribute "formatForMonth".
   public isDisabledVal: boolean | null = null; // Binding attribute "isDisabled".
-  public isHideOldDaysVal: boolean | null = null; // Binding attribute "isHideOldDays".
   public isHideDayoffVal: boolean | null = null; // Binding attribute "isHideDayoff".
+  public isHideOldDaysVal: boolean | null = null; // Binding attribute "isHideOldDays".
   public isHorizontVal: boolean | null = null; // Binding attribute "isHorizont".
   public isReadOnlyVal: boolean | null = null; // Binding attribute "isReadOnly".
   public isStartSundayVal: boolean | null = null; // Binding attribute "isStartSunday".
@@ -229,11 +229,11 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.isDisabledVal = !!BooleanUtil.init(this.isDisabled);
       this.settingIsDisabled(this.isDisabledVal, this.renderer, this.hostRef);
     }
-    if (!!changes['isHideOldDays'] || ChangeUtil.check(changes['config'], 'isHideOldDays')) {
-      this.isHideOldDaysVal = BooleanUtil.init(this.isHideOldDays) ?? !!this.currConfig.isHideOldDays;
-    }
     if (!!changes['isHideDayoff'] || ChangeUtil.check(changes['config'], 'isHideDayoff')) {
       this.isHideDayoffVal = BooleanUtil.init(this.isHideDayoff) ?? !!this.currConfig.isHideDayoff;
+    }
+    if (!!changes['isHideOldDays'] || ChangeUtil.check(changes['config'], 'isHideOldDays')) {
+      this.isHideOldDaysVal = BooleanUtil.init(this.isHideOldDays) ?? !!this.currConfig.isHideOldDays;
     }
     if (!!changes['isHorizont'] || ChangeUtil.check(changes['config'], 'isHorizont')) {
       this.isHorizontVal = BooleanUtil.init(this.isHorizont) ?? !!this.currConfig.isHorizont;
@@ -336,11 +336,11 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     if (this.formatForMonthVal == null) {
       this.formatForMonthVal = this.currConfig.formatForMonth || '';
     }
-    if (this.isHideOldDaysVal == null) {
-      this.isHideOldDaysVal = !!this.currConfig.isHideOldDays;
-    }
     if (this.isHideDayoffVal == null) {
       this.isHideDayoffVal = !!this.currConfig.isHideDayoff;
+    }
+    if (this.isHideOldDaysVal == null) {
+      this.isHideOldDaysVal = !!this.currConfig.isHideOldDays;
     }
     if (this.isHorizontVal == null) {
       this.isHorizontVal = !!this.currConfig.isHorizont;
