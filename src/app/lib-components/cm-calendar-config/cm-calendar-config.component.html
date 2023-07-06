@@ -86,6 +86,70 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
+      <td><code>colsByYears?: number<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Specifies the number of columns in the years grid.
+          <br />[1..12] (for view='year').
+          (default = 4;)
+        </span>
+        <br /><span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>colsByMonths?: number<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Specifies the number of columns in the months grid.
+          <br />[1..12] (for view='month').
+          (default = 3;)
+        </span>
+        <br /><span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>formatByMonths?: string<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Specifies the format for naming months in a grid of months (for view='month').
+          <br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"numeric" - "6";</li>
+          <li>"2-digit" - "06";</li>
+          <li>"long" - "June";</li>
+          <li>"short" - "Jun" (default);</li>
+          <li>"narrow" - "J";</li>
+          <li>"huge" - height: 48px;</li>
+        </ul>
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>formatForMonth?: string<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Specifies the format of the month name in the header (for view='day').
+          <br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"numeric" - "6";</li>
+          <li>"2-digit" - "06";</li>
+          <li>"long" - "June" (default);</li>
+          <li>"short" - "Jun";</li>
+          <li>"narrow" - "J";</li>
+          <li>"huge" - height: 48px;</li>
+        </ul>
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
       <td><code>isHideOldDays?: boolean<br/>
         &nbsp;&nbsp;| undefined;</code></td>
       <td>
@@ -136,6 +200,18 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
+      <td><code>isTwoDigitDay?: boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Specifies the display of the day as a two-digit number (06) (for view='day').
+          (default = false;)
+        </span>
+        <br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
       <td><code>isWeekNumber?: boolean<br/>
         &nbsp;&nbsp;| undefined;</code></td>
       <td>
@@ -147,14 +223,82 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
+      <td><code>rowsByYears?: number<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Specifies the number of rows in the years grid.
+          <br />[1..12] (for view='year').
+          (default = 5;)
+        </span>
+        <br /><span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>startDate?: Date<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Specifies the start date of the display if no value is specified.
+          (default = undefined;)
+        </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
       <td><code>sizeDayWeek?: number<br/>
         &nbsp;&nbsp;| string<br/>
         &nbsp;&nbsp;| undefined;</code></td>
       <td>
         <span>
-          Specifies the length of the name of the day of the week.
+          Specifies the length of the name of the day of the week (for view='day').
           (default = 2;)
-        </span><br />
+          <br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>1 - "T";</li>
+          <li>2 - "Th" (default);</li>
+          <li>3 - "Thu";</li>
+          <li>-1 - "Thursday";</li>
+        </ul>
+        <br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>view?: string<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Specifies the initial value of the display mode.
+          <br />(default = 'day';)
+          <br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>'day' - display mode for day selection;</li>
+          <li>'month' - display mode for month selection;</li>
+          <li>'year' - display mode for year selection;</li>
+        </ul>
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>views?: string[]<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Specifies the available values for the display mode.
+          <br />(default = ['day', 'year', 'month'];)
+          <br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>'day' - display mode for day selection;</li>
+          <li>'month' - display mode for month selection;</li>
+          <li>'year' - display mode for year selection;</li>
+        </ul>
         <span>(optional)</span>
       </td>
     </tr>
@@ -165,7 +309,7 @@ export class AppComponent &#123;
 <section mr-vr
   id="config-provide">
   <h4 class="app-hover-link">
-    1. Configuration with "cellSize: 'wide'" and "isHideOldDays: true".
+    1. Configuration with "cellSize: 'wide'", "isHideDayoff: true" and "isHideOldDays: true".
     <a [href]="urlCmCalendar + '#config-provide'">#</a>
   </h4>
   <p>
@@ -173,11 +317,13 @@ export class AppComponent &#123;
   </p>
   <ul>
     <li>"cellSize" will have the value 'wide';</li>
+    <li>"isHideDayoff" will have the value "true";</li>
     <li>"isHideOldDays" will have the value "true";</li>
   </ul>
   <code><pre source="ts">
 const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
   cellSize: 'wide',
+  isHideDayoff: true,
   isHideOldDays: true,
 &#125;;</pre></code>
 </section>
@@ -186,7 +332,7 @@ const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
 <section mr-vr
   id="config-params">
   <h4 class="app-hover-link">
-    2. Parameter values: "cellSize=42" and "isHideOldDays=false".
+    2. Parameter values: "cellSize=42", "isHideDayoff=false" and "isHideOldDays=false".
     <a [href]="urlCmCalendar + '#config-params'">#</a>
   </h4>
   <p>
@@ -202,6 +348,7 @@ const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
   <code><pre source="html">
   &lt;gln-calendar
     <strong>[<i>cellSize</i>]="42"</strong>
+    <strong>[<i>isHideDayoff</i>]=false</strong>
     <strong>[<i>isHideOldDays</i>]=false</strong>
     [value]="value08a"&gt;
   &lt;/gln-calendar&gt;</pre></code>
@@ -226,9 +373,16 @@ const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
 
   <div class="app-elem">
     <div>
-      <small>
-        <em>1. Config: cellSize='wide', isHideOldDays: true.</em>
-      </small>
+      <div>
+        <small>
+          <em>1. Config: cellSize='wide', isHideDayoff=true,</em>
+        </small>
+      </div>
+      <div>
+        <small>
+          <em>isHideOldDays=true.</em>
+        </small>
+      </div>
     </div>
     <div class="cncf-clnd">
       <gln-calendar [value]="value08a">
@@ -238,18 +392,25 @@ const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
 
   <div class="app-elem">
     <div>
-      <small>
-        <em>2. Parameters: cellSize=42, isHideOldDays: false.</em>
-      </small>
+      <div>
+        <small>
+          <em>2. Parameters: cellSize=42, isHideDayoff=false,</em>
+        </small>
+      </div>
+      <div>
+        <small>
+          <em>isHideOldDays=false.</em>
+        </small>
+      </div>
     </div>
     <div class="cncf-clnd">
       <gln-calendar [value]="value08b"
         [cellSize]="42"
+        [isHideDayoff]="false"
         [isHideOldDays]="false">
       </gln-calendar>
     </div>
   </div>
-
 </div>
 
 
@@ -266,9 +427,16 @@ const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
 
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;1. Config: cellSize='wide', isHideOldDays: true.&lt;/em&gt;
-      &lt;/small&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;1. Config: cellSize='wide', isHideDayoff=true,&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;isHideOldDays=true.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class="cncf-clnd"&gt;
       &lt;gln-calendar [value]="value08a"&gt;
@@ -278,18 +446,25 @@ const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
 
   &lt;div class="app-elem"&gt;
     &lt;div&gt;
-      &lt;small&gt;
-        &lt;em&gt;2. Parameters: cellSize=42, isHideOldDays: false.&lt;/em&gt;
-      &lt;/small&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;2. Parameters: cellSize=42, isHideDayoff=false,&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;small&gt;
+          &lt;em&gt;isHideOldDays=false.&lt;/em&gt;
+        &lt;/small&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class="cncf-clnd"&gt;
       &lt;gln-calendar [value]="value08b"
         [cellSize]="42"
+        [isHideDayoff]="false"
         [isHideOldDays]="false"&gt;
       &lt;/gln-calendar&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-
 &lt;/div&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">

@@ -7,6 +7,7 @@ import { LABEL_CSS, LABEL_HTML, LABEL_SHOW_SOURCE, LABEL_TS } from '../../lib-co
 
 const glnCalendarConfigDefault: GlnCalendarConfig = {
   cellSize: 'wide',
+  isHideDayoff: true,
   isHideOldDays: true,
 };
 
