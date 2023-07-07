@@ -148,6 +148,7 @@ gln-calendar {
     flex-shrink: 0;
     font: inherit;
     height: var(--glncn-cap-hg, 2.5em);
+    line-height: 1;
     justify-content: center;
     overflow: visible;
     outline: 0;
@@ -159,6 +160,7 @@ gln-calendar {
 
   // Level 4 Element title button "switch"
   [glncn-switch] {
+    line-height: 1;
     position: relative;
   }
 
@@ -221,6 +223,7 @@ gln-calendar {
   }
   // Level 3 Element "title button "prev"
   [glncn-prev] {
+    line-height: 1;
     order: var(--glncn-prev-ord, unset);
   }
   &[hor] [glncn-prev] {
@@ -230,6 +233,7 @@ gln-calendar {
 
   // Level 3 Element title button "next"
   [glncn-next] {
+    line-height: 1;
     order: var(--glncn-next-ord, unset);
   }
   &[hor] [glncn-next] {
@@ -264,6 +268,7 @@ gln-calendar {
     font-size: var(--glncn-cage-fn-sz, calc(1em - 1px));
     font-weight: var(--glncn-cage-fn-wg, 400);
     height: var(--glncn-cage-hg, var(--glncn--item-hg));
+    line-height: 1;
     margin: var(--glncn--item-mr);
     padding: var(--glncn--item-pd);
     pointer-events: none; // Block display on :hover.
@@ -373,8 +378,7 @@ gln-calendar {
     flex-shrink: 0;
     font-size: var(--glncn-item-fn-sz, 1em);
     height: var(--glncn--item-hg);
-    // #line-height: 1.5;
-    line-height: normal;
+    line-height: 1;
     margin: var(--glncn--item-mr);
     // ??overflow: visible;
     padding: var(--glncn--item-pd);
@@ -394,7 +398,7 @@ gln-calendar {
     font-weight: var(--glncn-week-fn-wg, 400);
     height: var(--glncn-week-hg, var(--glncn--item-hg));
     // #justify-content: center;
-    // line-height: normal;
+    line-height: 1;
     margin: var(--glncn--item-mr);
     padding: var(--glncn--item-pd);
     pointer-events: none; // Block display on :hover.
@@ -424,7 +428,6 @@ gln-calendar {
 
   // Level 5 Element "glncn-month-cell"
   [glncn-month-cell] {
-    border: 0;
     border-radius: var(--glncn-month-cell-br-rd, calc(var(--glncn--item-hg) / 2));
     font-family: inherit;
     font-size: var(--glncn-month-cell-fn-sz, var(--glncn-item-fn-sz, 1em));
@@ -463,6 +466,7 @@ gln-calendar {
     font-size: var(--glncn-year-cell-fn-sz, var(--glncn-item-fn-sz, 1em));
     font-weight: inherit;
     height: var(--glncn-year-cell-hg, var(--glncn--item-hg));
+    line-height: 1;
     user-select: none;
     width: var(--glncn-year-cell-wd, 80px);
   }

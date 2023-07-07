@@ -76,9 +76,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public colsByMonths: number | string | null | undefined; // [1 - 12] default 3
   @Input()
-  public formatByMonths: string | null | undefined;
+  public formatByMonths: string | null | undefined; // 'numeric'(6),'2-digit'(06),'long'(June),'short'(Jun),'narrow'(J)
   @Input()
-  public formatForMonth: string | null | undefined;
+  public formatForMonth: string | null | undefined; // 'numeric'(6),'2-digit'(06),'long'(June),'short'(Jun),'narrow'(J)
   @Input()
   public isDisabled: string | boolean | null | undefined;
   @Input()
@@ -100,7 +100,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public sizeDayWeek: number | string | null | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
   @Input()
-  public startDate: Date | null | undefined;
+  public startDate: Date | null | undefined; // # no example
   @Input()
   public value: Date | null | undefined;
   @Input()
