@@ -40,9 +40,15 @@ export class CmCalendarAttributesComponent {
   public value02m: Date | null = new Date(this.selectedDate);
   public value02n: Date | null = new Date(this.selectedDate);
   // Part 4
+  public value02o: Date | null = new Date(this.selectedDate);
   public value02p: Date | null = new Date(this.selectedDate);
   public value02q: Date | null = new Date(this.selectedDate);
   public value02r: Date | null = new Date(this.selectedDate);
+  // Part 5
+  public value02s: Date | null = new Date(this.selectedDate);
+  public value02t: Date | null = new Date(this.selectedDate);
+  public value02u: Date | null = new Date(this.selectedDate);
+  public value02v: Date | null = new Date(this.selectedDate);
 
   // Demo
   public value02z: Date | null = new Date(this.selectedDate);

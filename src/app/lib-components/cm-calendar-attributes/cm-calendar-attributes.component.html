@@ -113,8 +113,8 @@
       <small><em>Attribute: wdFull (min-width: 320px; min-height: 320px;).</em></small>
     </div>
     <div class="cnat2-block cnat2-clnd">
-      <gln-calendar wdFull
-        [value]="value02f">
+      <gln-calendar [value]="value02f"
+        wdFull>
       </gln-calendar>
     </div>
   </div>
@@ -124,9 +124,9 @@
       <small><em>Attribute: wdFull, isHorizont (min-width: 320px; min-height: 320px;).</em></small>
     </div>
     <div class="cnat2-block cnat2-clnd">
-      <gln-calendar wdFull
-        isHorizont
-        [value]="value02g">
+      <gln-calendar [value]="value02g"
+        wdFull
+        isHorizont>
       </gln-calendar>
     </div>
   </div>
@@ -140,8 +140,8 @@
       <small><em>Attribute: sizeDayWeek=1 ('M').</em></small>
     </div>
     <div class="cnat2-clnd">
-      <gln-calendar [sizeDayWeek]="1"
-        [value]="value02h">
+      <gln-calendar [value]="value02h"
+        [sizeDayWeek]="1">
       </gln-calendar>
     </div>
   </div>
@@ -151,8 +151,8 @@
       <small><em>Attribute: sizeDayWeek=3 ('Mon').</em></small>
     </div>
     <div class="cnat2-clnd">
-      <gln-calendar [sizeDayWeek]="3"
-        [value]="value02i">
+      <gln-calendar [value]="value02i"
+        [sizeDayWeek]="3">
       </gln-calendar>
     </div>
   </div>
@@ -252,6 +252,40 @@
     <li>
       "isTwoDigitDay" - defines a two-digit day value (isTwoDigitDay);
     </li>
+    <li>
+      "formatForMonth" - defines the format of the month name in the header.
+      <br />
+      <i>takes the following values:</i>
+      <ul>
+        <li>"numeric" - "6";</li>
+        <li>"2-digit" - "06";</li>
+        <li>"long" - "June";</li>
+        <li>"short" - "Jun" (default);</li>
+        <li>"narrow" - "J";</li>
+      </ul>
+    </li>
+    <li>
+      "views" - defines an array of available values for the display mode.
+      <br />
+      (default = ['day', 'year', 'month'];)
+      <br />
+      <i>takes the following values:</i>
+      <ul>
+        <li>'day' - display mode for day selection;</li>
+        <li>'month' - display mode for month selection;</li>
+        <li>'year' - display mode for year selection;</li>
+      </ul>
+    </li>
+    <li>
+      "view" - defines the initial value of the display mode.
+      <br />
+      <i>takes the following values:</i>
+      <ul>
+        <li>'day' - display mode for day selection;</li>
+        <li>'month' - display mode for month selection;</li>
+        <li>'year' - display mode for year selection;</li>
+      </ul>
+    </li>
   </ul>
 </section>
 
@@ -263,7 +297,7 @@
       <small><em>Attribute: isTwoDigitDay.</em></small>
     </div>
     <div class="cnat4-clnd">
-      <gln-calendar [value]="value02p"
+      <gln-calendar [value]="value02o"
         isTwoDigitDay>
       </gln-calendar>
     </div>
@@ -271,11 +305,11 @@
 
   <div class="app-elem ">
     <div>
-      <small><em>Attribute: views=['month', 'year'].</em></small>
+      <small><em>Attribute: formatForMonth='2-digit'.</em></small>
     </div>
     <div class="cnat4-clnd">
-      <gln-calendar [value]="value02q"
-        [views]="['month', 'year']">
+      <gln-calendar [value]="value02p"
+        formatForMonth="2-digit">
       </gln-calendar>
     </div>
   </div>
@@ -289,9 +323,20 @@
       <small><em>Attribute: views=['month', 'year'], view='year'.</em></small>
     </div>
     <div class="cnat4-clnd">
-      <gln-calendar [value]="value02r"
+      <gln-calendar [value]="value02q"
         [views]="['month', 'year']"
         view="year">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem ">
+    <div>
+      <small><em>Attribute: views=['month', 'year'].</em></small>
+    </div>
+    <div class="cnat4-clnd">
+      <gln-calendar [value]="value02r"
+        [views]="['month', 'year']">
       </gln-calendar>
     </div>
   </div>
@@ -299,7 +344,121 @@
 </div>
 
 
+
 <span style="color: indianred;">source</span>
+
+
+
+<section mr-vr
+  id="attributes-supported05">
+  <h4 class="app-hover-link">
+    Attributes are also supported 5:
+    <a [href]="urlCmCalendar + '#attributes-supported05'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "formatByMonths" - defines the format for naming months in a grid of months
+      (for view='month');
+      <br />
+      <i>takes the following values:</i>
+      <ul>
+        <li>"numeric" - "6";</li>
+        <li>"2-digit" - "06";</li>
+        <li>"long" - "June";</li>
+        <li>"short" - "Jun" (default);</li>
+        <li>"narrow" - "J";</li>
+      </ul>
+    </li>
+    <li>
+      "colsByMonths" - defines the number of columns in the months grid.
+      <br />[1..12] (for view='month').
+      (default = 3;)
+    </li>
+    <li>
+      "colsByYears" - defines the number of columns in the years grid.
+      <br />[1..12] (for view='year').
+      (default = 4;)
+    </li>
+    <li>
+      "rowsByYears" - defines the number of rows in the years grid.
+      <br />[1..12] (for view='year').
+      (default = 5;)
+    </li>
+  </ul>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem ">
+    <div>
+      <div>
+        <small><em>Attribute: formatByMonths='long',</em></small>
+      </div>
+      <div>
+        <small><em>wdFull (min-width: 300px; min-height: 300px;).</em></small>
+      </div>
+    </div>
+    <div class="cnat5-block cnat5-clnd">
+      <gln-calendar [value]="value02s"
+        style="--glncn-month-cell-wd: 100%;"
+        formatByMonths="long"
+        view="month"
+        wdFull>
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem ">
+    <div>
+      <div>
+        <small><em>Attribute: colsByMonths=4,</em></small>
+      </div>
+      <div>
+        <small><em>view='month'.</em></small>
+      </div>
+    </div>
+    <div class="cnat5-clnd">
+      <gln-calendar [value]="value02t"
+        [colsByMonths]="4"
+        view="month">
+      </gln-calendar>
+    </div>
+  </div>
+
+</div>
+
+<div class="app-group">
+
+  <div class="app-elem ">
+    <div>
+      <small><em>Attribute: colsByYears=3, view="year".</em></small>
+    </div>
+    <div class="cnat5-clnd">
+      <gln-calendar [value]="value02u"
+        [colsByYears]="3"
+        view="year">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem ">
+    <div>
+      <small><em>Attribute: rowsByYears=4, view="year".</em></small>
+    </div>
+    <div class="cnat5-clnd">
+      <gln-calendar [value]="value02v"
+        [rowsByYears]="4"
+        view="year">
+      </gln-calendar>
+    </div>
+  </div>
+
+</div>
+
+<span style="color: indianred;">source</span>
+
+
 
 <hr br-nn />
 <hr br-nn />

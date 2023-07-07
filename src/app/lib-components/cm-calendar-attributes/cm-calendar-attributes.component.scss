@@ -8,14 +8,14 @@ app-cm-calendar-attributes {
     padding: 5px;
   }
 
+  .cnat2-clnd {
+    border: 1px solid mediumseagreen;
+    padding: 5px;
+  }
   .cnat2-block {
     min-width: 320px;
     min-height: 320px;
     display: grid;
-  }
-  .cnat2-clnd {
-    border: 1px solid mediumseagreen;
-    padding: 5px;
   }
 
   .cnat3-clnd {
@@ -26,5 +26,15 @@ app-cm-calendar-attributes {
   .cnat4-clnd {
     border: 1px solid cornflowerblue;
     padding: 5px;
+  }
+
+  .cnat5-clnd {
+    border: 1px solid  mediumblue;
+    padding: 5px;
+  }
+  .cnat5-block {
+    min-width: 300px;
+    min-height: 300px;
+    display: grid;
   }
 }
