@@ -231,4 +231,18 @@ export class GlnCalendarUtil {
     }
     return result;
   }
+  public static isMoreMinDate(date: Date, minDate: Date | null | undefined): boolean {
+    const currYear: number = date.getFullYear();
+    const minYear: number = (minDate || date).getFullYear();
+    const currMonth: number = date.getMonth();
+    const minMonth: number = (minDate || date).getMonth();
+    return minYear < currYear || (minYear === currYear && minMonth <= currMonth);
+  }
+  public static isLessMaxDate(date: Date, maxDate: Date | null | undefined): boolean {
+    const currYear: number = date.getFullYear();
+    const maxYear: number = (maxDate || date).getFullYear();
+    const currMonth: number = date.getMonth();
+    const maxMonth: number = (maxDate || date).getMonth();
+    return currYear < maxYear || (currYear === maxYear && currMonth <= maxMonth);
+  }
 }

@@ -96,6 +96,10 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public isWeekNumber: string | boolean | null | undefined;
   @Input()
+  public maxDate: Date | null | undefined; // The maximum selectable date.
+  @Input()
+  public minDate: Date | null | undefined; // The minimum selectable date.
+  @Input()
   public rowsByYears: number | string | null | undefined; // [1 - 12] default 5
   @Input()
   public sizeDayWeek: number | string | null | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
@@ -442,9 +446,11 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     if (GlnCalendarUtil.VIEW_MONTH === newView) {
       const currentMonth: Date = new Date(this.calendarDayYear, this.calendarDayMonth - 1, 1, 0, 0, 0, 0);
-      this.updateViewDayTitle(this.formatForMonthVal, currentMonth);
-      this.updateViewDayCells(this.isStartSundayVal, currentMonth, this.value);
-      this.changeDetectorRef.markForCheck();
+      if (GlnCalendarUtil.isMoreMinDate(currentMonth, this.minDate)) {
+        this.updateViewDayTitle(this.formatForMonthVal, currentMonth);
+        this.updateViewDayCells(this.isStartSundayVal, currentMonth, this.value);
+        this.changeDetectorRef.markForCheck();
+      }
     } else if (GlnCalendarUtil.VIEW_YEAR === newView) {
       const yearStart: number = GlnCalendarUtil.getFirstYearOfPeriod(this.calendarYearFirst - 1, this.yearsPerPage);
       if (yearStart !== -1) {
@@ -460,9 +466,11 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     if (GlnCalendarUtil.VIEW_MONTH === newView) {
       const currentMonth: Date = new Date(this.calendarDayYear, this.calendarDayMonth + 1, 1, 0, 0, 0, 0);
-      this.updateViewDayTitle(this.formatForMonthVal, currentMonth);
-      this.updateViewDayCells(this.isStartSundayVal, currentMonth, this.value);
-      this.changeDetectorRef.markForCheck();
+      if (GlnCalendarUtil.isLessMaxDate(currentMonth, this.maxDate)) {
+        this.updateViewDayTitle(this.formatForMonthVal, currentMonth);
+        this.updateViewDayCells(this.isStartSundayVal, currentMonth, this.value);
+        this.changeDetectorRef.markForCheck();
+      }
     } else if (GlnCalendarUtil.VIEW_YEAR === newView) {
       const yearStart: number = GlnCalendarUtil.getFirstYearOfPeriod(this.calendarYearLast + 1, this.yearsPerPage);
       if (yearStart !== -1) {
