@@ -45,12 +45,14 @@ export class CmCalendarBasicComponent {
     isStartSunday: true,
     isWeekNumber: true,
     rowsByYears: 4,
-    views: ['month', 'year'], // views9="['day','year','month']"
+    // views: ['month', 'year'], // views9="['day','year','month']"
     sizeDayWeek: 1,
   };
   isStartSunday01a: boolean = false;
   isFormatForMonth01a: boolean = false;
   isSizeDayWeek01a: boolean = false;
+  minDate: Date = new Date(2023, 5, 5);
+  maxDate: Date = new Date(2023, 8, 20);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

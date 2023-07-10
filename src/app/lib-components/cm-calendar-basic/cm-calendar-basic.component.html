@@ -78,7 +78,7 @@ public model01: Date | null = new Date();</pre>
       </small>
     </div>
     <div class="cnbs-clnd">
-      <!-- <gln-calendar [value]="value01a"
+      <gln-calendar [value]="value01a"
         [isDisabled]="isDisabled01a"
         [isHideDayoff]="isHideDayoff01a"
         [isReadOnly]="isReadOnly01a"
@@ -91,14 +91,15 @@ public model01: Date | null = new Date();</pre>
         [isStartSunday]="isConfig01a ? undefined : (isStartSunday01a ? true : undefined)"
         [rowsByYears]="isConfig01a ? undefined : (isRowsByYears01a ? 4 : undefined)"
         [sizeDayWeek]="isConfig01a ? undefined : (isSizeDayWeek01a ? 1 : undefined)"
+        [minDate]="minDate"
+        [maxDate]="maxDate"
         (change)="value01a=$event">
-      </gln-calendar> -->
+      </gln-calendar>
       <!-- views -->
-      <gln-calendar [value]="value01a"
+      <!-- <gln-calendar [value]="value01a"
         [config]="config01a"
         [view]="'year'">
-        <!-- 'day','year','month' -->
-      </gln-calendar>
+      </gln-calendar> -->
       <!-- <gln-calendar [value]="value01a">
       </gln-calendar> -->
     </div>
