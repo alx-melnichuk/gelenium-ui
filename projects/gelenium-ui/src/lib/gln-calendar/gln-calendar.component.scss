@@ -378,7 +378,7 @@ gln-calendar {
     flex-shrink: 0;
     font-size: var(--glncn-item-fn-sz, 1em);
     height: var(--glncn--item-hg);
-    line-height: 1;
+    line-height: var(--glncn--item-hg);
     margin: var(--glncn--item-mr);
     // ??overflow: visible;
     padding: var(--glncn--item-pd);
