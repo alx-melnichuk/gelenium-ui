@@ -20,7 +20,7 @@
         [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
         (click)="clickSwitch()">
         {{ viewMode === VIEW_DAY ? calendarDayMonthName + ' ' + calendarDayYearName
-        : (viewMode === VIEW_MONTH ? calendarDayYearName : calendarYearFirst + ' - ' + calendarYearLast) }}
+        : (viewMode === VIEW_MONTH ? calendarDayYearName : viewYfirstYear + ' - ' + viewYlastYear) }}
       </button>
 
       <button type="button"
@@ -50,7 +50,7 @@
         glncn-nav
         class="gln-calendar-nav gln-calendar-prev"
         [attr.tabindex]="!isDisabledVal ? 0 : -1"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal || (viewMode === VIEW_YEAR && calendarYearFirst === YEAR_PERIOD_MIN) ? '' : undefined"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal || (viewMode === VIEW_YEAR && viewYfirstYear === viewYminYear) ? '' : undefined"
         (click)="clickPrev(viewMode === VIEW_DAY ? VIEW_MONTH : (viewMode === VIEW_YEAR ? VIEW_YEAR : ''))">
         <svg glncn-icon
           class="gln-calendar-t-icon icon-prev"
@@ -67,7 +67,7 @@
         glncn-nav
         class="gln-calendar-nav gln-calendar-next"
         [attr.tabindex]="!isDisabledVal ? 0 : -1"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal || (viewMode === VIEW_YEAR && calendarYearLast === YEAR_PERIOD_MAX) ? '' : undefined"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal || (viewMode === VIEW_YEAR && viewYlastYear === viewYmaxYear) ? '' : undefined"
         (click)="clickNext(viewMode === VIEW_DAY ? VIEW_MONTH : (viewMode === VIEW_YEAR ? VIEW_YEAR : ''))">
         <svg glncn-icon
           class="gln-calendar-t-icon icon-next"
@@ -162,7 +162,7 @@
       glncn-view-year
       class="gln-calendar-view-year"
       #yearCellListRef
-      (keydown)="keydownYearCellList($event, yearCellListRef, calendarYearFirst, yearsPerPage)">
+      (keydown)="keydownYearCellList($event, yearCellListRef, viewYfirstYear, yearsPerPage)">
       <div *ngFor="let yearCell of calendarYearCellList; trackBy: trackByNumber"
         glncn-year-wrapper
         class="gln-calendar-year-cell-wrapper">
@@ -170,13 +170,15 @@
           glncn-year-cell
           glncn-crs-pnt
           glncn-tint
-          [attr.glncn-curr]="yearCell !== calendarYearSelected ? '' : undefined"
-          [attr.glncn-slct]="yearCell === calendarYearSelected ? '' : undefined"
-          [attr.glncn-today]="yearCell === todaysYear ? '' : undefined"
+          [attr.glncn-curr]="yearCell !== viewYselectedYear ? '' : undefined"
+          [attr.glncn-slct]="yearCell === viewYselectedYear ? '' : undefined"
+          [attr.glncn-today]="yearCell === viewYtodaysYear ? '' : undefined"
+          [attr.disabled]="isDisabledVal || isReadOnlyVal
+            || (yearCell &lt; viewYminDateYear) || (viewYmaxDateYear &lt; yearCell) ? '' : undefined"
           [ngClass]="['gln-calendar-year-cell'
-            , (yearCell === calendarYearSelected ? 'gln-selected' : '')
-            , (yearCell === todaysYear ? 'gln-today' : '')]"
-          [attr.tabindex]="!isDisabledVal && (yearCell === calendarYearSelected || yearCell === markedYear)? 0 : -1"
+            , (yearCell === viewYselectedYear ? 'gln-selected' : '')
+            , (yearCell === viewYtodaysYear ? 'gln-today' : '')]"
+          [attr.tabindex]="!isDisabledVal && (yearCell === viewYselectedYear || yearCell === markedYear)? 0 : -1"
           [attr.data-label]="yearCell"
           (click)="clickYearCell(yearCell)">
           {{ yearCell }}

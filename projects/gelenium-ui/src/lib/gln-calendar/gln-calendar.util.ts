@@ -10,8 +10,10 @@ export const CALENDAR_DAY_CURRENT = 'curr';
 export const CALENDAR_DAY_PREVIOUS = 'old';
 export const CALENDAR_DAY_SELECTED = 'slct';
 
-export const CALENDAR_YEAR_PERIOD_MIN = 1000;
-export const CALENDAR_YEAR_PERIOD_MAX = 2150;
+// export const CALENDAR_YEAR_MIN = 1000;
+// export const CALENDAR_YEAR_MAX = 2150;
+export const CALENDAR_YEAR_MIN = 1960;
+export const CALENDAR_YEAR_MAX = 2100;
 
 export interface CalendarDayCell {
   year: number;
@@ -166,10 +168,10 @@ export class GlnCalendarUtil {
 
   public static getFirstYearOfPeriod(years: number, yearsPerPage: number): number {
     let result: number = -1;
-    if (0 < years && years < CALENDAR_YEAR_PERIOD_MAX && 0 < yearsPerPage && yearsPerPage < 101 && years >= CALENDAR_YEAR_PERIOD_MIN) {
-      const delta: number = years - CALENDAR_YEAR_PERIOD_MIN;
-      const valueResult = CALENDAR_YEAR_PERIOD_MIN + Math.trunc(delta / yearsPerPage) * yearsPerPage;
-      result = valueResult < CALENDAR_YEAR_PERIOD_MAX - yearsPerPage ? valueResult : result;
+    if (0 < years && CALENDAR_YEAR_MIN <= years && years < CALENDAR_YEAR_MAX && 0 < yearsPerPage && yearsPerPage < 101) {
+      const delta: number = years - CALENDAR_YEAR_MIN;
+      const valueResult = CALENDAR_YEAR_MIN + Math.trunc(delta / yearsPerPage) * yearsPerPage;
+      result = valueResult <= CALENDAR_YEAR_MAX - yearsPerPage ? valueResult : result;
     }
     return result;
   }

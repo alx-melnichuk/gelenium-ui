@@ -34,8 +34,8 @@ import {
   CALENDAR_DAY_CURRENT,
   CALENDAR_DAY_PREVIOUS,
   CALENDAR_DAY_SELECTED,
-  CALENDAR_YEAR_PERIOD_MAX,
-  CALENDAR_YEAR_PERIOD_MIN,
+  CALENDAR_YEAR_MAX,
+  CALENDAR_YEAR_MIN,
   GlnCalendarUtil,
 } from './gln-calendar.util';
 import { GlnCalendarConfig } from './gln-calendar-config.interface';
@@ -137,10 +137,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public calendarMonthSelected: number = -1;
   public calendarMonthToday: number = -1;
   public calendarYearCellList: number[] = [];
-  public calendarYearFirst: number = -1;
-  public calendarYearLast: number = -1;
-  public calendarYearCurrent: number = -1;
-  public calendarYearSelected: number = -1;
   public cellSizeVal: number | null = null; // Binding attribute "cellSize".
   public colsByYearsVal: number | null = null; // Binding attribute "colsByYears".
   public colsByMonthsVal: number | null = null; // Binding attribute "colsByMonths".
@@ -165,15 +161,21 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public STATE_CURR: string = CALENDAR_DAY_CURRENT;
   public STATE_OLD: string = CALENDAR_DAY_PREVIOUS;
   public STATE_SLCT: string = CALENDAR_DAY_SELECTED;
-  public todaysYear: number = -1;
+  public viewYtodaysYear: number = -1;
   public VIEW_DAY: string = GlnCalendarUtil.VIEW_DAY;
   public VIEW_MONTH: string = GlnCalendarUtil.VIEW_MONTH;
   public VIEW_YEAR: string = GlnCalendarUtil.VIEW_YEAR;
   public viewMode: string = GlnCalendarUtil.VIEW_DAY;
   public viewVal: string | null = null; // Binding attribute "view".
   public viewsVal: string[] = []; // Binding attribute "views".
-  public YEAR_PERIOD_MIN: number = -1;
-  public YEAR_PERIOD_MAX: number = -1;
+  public viewYcurrentYear: number = -1;
+  public viewYfirstYear: number = -1;
+  public viewYlastYear: number = -1;
+  public viewYmaxYear: number = -1;
+  public viewYminYear: number = -1;
+  public viewYmaxDateYear: number = CALENDAR_YEAR_MAX;
+  public viewYminDateYear: number = CALENDAR_YEAR_MIN;
+  public viewYselectedYear: number = -1;
   public yearsPerPage: number = -1;
 
   constructor(
@@ -195,6 +197,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     let hasFormatByMonths: boolean = false;
     let hasFormatForMonth: boolean = false;
     let hasIsStartSunday: boolean = false;
+    let hasMinDateMaxDate: boolean = false;
     let hasSizeDayWeek: boolean = false;
     let hasStartDate: boolean = false;
     let hasValue: boolean = false;
@@ -258,6 +261,16 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.isWeekNumberVal = BooleanUtil.init(this.isWeekNumber) ?? !!this.currConfig.isWeekNumber;
       this.settingIsWeekNumber(this.isWeekNumberVal, this.renderer, this.hostRef);
     }
+    if (!!changes['maxDate']) {
+      this.viewYmaxDateYear = this.maxDate?.getFullYear() || CALENDAR_YEAR_MAX;
+      console.log(`OnChange(); viewYmaxDateYear=${this.viewYmaxDateYear}`); // #
+      hasMinDateMaxDate = true;
+    }
+    if (!!changes['minDate']) {
+      this.viewYminDateYear = this.minDate?.getFullYear() || CALENDAR_YEAR_MIN;
+      console.log(`OnChange(); viewYminDateYear=${this.viewYminDateYear}`); // #
+      hasMinDateMaxDate = true;
+    }
     if (!!changes['rowsByYears'] || ChangeUtil.check(changes['config'], 'rowsByYears')) {
       const rowsByYearsVal: number = this.convertNumber((this.rowsByYears || this.currConfig.rowsByYears || '').toString(), -1);
       this.rowsByYearsVal = GlnCalendarUtil.getRowsByYears(rowsByYearsVal);
@@ -277,6 +290,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     if (changes['value']) {
       hasValue = true;
       this.markedDate = this.value || new Date();
+      this.viewYselectedYear = this.value?.getFullYear() || -1;
     }
     if (!!changes['views'] || ChangeUtil.check(changes['config'], 'views')) {
       const viewsInput: string[] = GlnCalendarUtil.checkViews(this.views);
@@ -304,13 +318,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       console.log(`OnChange(); updateViewMonthCells();`); // #
       this.updateViewMonthCells(this.formatByMonthsVal, this.value);
     }
-    if (hasYearsPerPage && this.yearsPerPage > -1) {
-      console.log(`OnChange(); updateViewYearPeriodLimits();`); // #
-      this.updateViewYearPeriodLimits(this.yearsPerPage, CALENDAR_YEAR_PERIOD_MIN, CALENDAR_YEAR_PERIOD_MAX);
-    }
-    if ((hasYearsPerPage || hasStartDate || hasValue) && this.yearsPerPage > -1) {
-      console.log(`OnChange(); updateViewYearCells();`); // #
-      this.updateViewYearCells(this.yearsPerPage, this.startDateVal, this.value);
+    if ((hasYearsPerPage || hasMinDateMaxDate || hasStartDate || hasValue) && this.yearsPerPage > -1) {
+      const startDate: Date = this.startDateVal || this.value || new Date();
+      this.updateViewYearCellsAndLimits(this.yearsPerPage, startDate, this.viewYminDateYear, this.viewYmaxDateYear);
     }
   }
   public ngOnInit(): void {
@@ -407,13 +417,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       console.log(`OnInit(); updateViewMonthCells();`); // #
       this.updateViewMonthCells(this.formatByMonthsVal, this.value);
     }
-    if (this.YEAR_PERIOD_MIN === -1 && this.yearsPerPage > -1) {
-      console.log(`OnInit(); updateViewYearPeriodLimits();`); // #
-      this.updateViewYearPeriodLimits(this.yearsPerPage, CALENDAR_YEAR_PERIOD_MIN, CALENDAR_YEAR_PERIOD_MAX);
-    }
     if (this.calendarYearCellList.length === 0 && this.yearsPerPage > -1) {
-      console.log(`OnInit(); updateViewYearCells();`); // #
-      this.updateViewYearCells(this.yearsPerPage, this.startDateVal, this.value);
+      const startDate: Date = this.startDateVal || this.value || new Date();
+      this.updateViewYearCellsAndLimits(this.yearsPerPage, startDate, this.viewYminDateYear, this.viewYmaxDateYear);
     }
   }
   // ** Public methods **
@@ -452,9 +458,10 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
         this.changeDetectorRef.markForCheck();
       }
     } else if (GlnCalendarUtil.VIEW_YEAR === newView) {
-      const yearStart: number = GlnCalendarUtil.getFirstYearOfPeriod(this.calendarYearFirst - 1, this.yearsPerPage);
+      const yearStart: number = GlnCalendarUtil.getFirstYearOfPeriod(this.viewYfirstYear - 1, this.yearsPerPage);
       if (yearStart !== -1) {
-        this.updateViewYearCells(this.yearsPerPage, new Date(yearStart, 0, 1, 0, 0, 0, 0), this.value);
+        const startDate: Date = new Date(yearStart, 0, 1, 0, 0, 0, 0);
+        this.updateViewYearCellsAndLimits(this.yearsPerPage, startDate, this.viewYminDateYear, this.viewYmaxDateYear);
         this.changeDetectorRef.markForCheck();
       }
     }
@@ -472,9 +479,10 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
         this.changeDetectorRef.markForCheck();
       }
     } else if (GlnCalendarUtil.VIEW_YEAR === newView) {
-      const yearStart: number = GlnCalendarUtil.getFirstYearOfPeriod(this.calendarYearLast + 1, this.yearsPerPage);
+      const yearStart: number = GlnCalendarUtil.getFirstYearOfPeriod(this.viewYlastYear + 1, this.yearsPerPage);
       if (yearStart !== -1) {
-        this.updateViewYearCells(this.yearsPerPage, new Date(yearStart, 0, 1, 0, 0, 0, 0), this.value);
+        const startDate: Date = new Date(yearStart, 0, 1, 0, 0, 0, 0);
+        this.updateViewYearCellsAndLimits(this.yearsPerPage, startDate, this.viewYminDateYear, this.viewYmaxDateYear);
         this.changeDetectorRef.markForCheck();
       }
     }
@@ -492,7 +500,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     if (minYear <= year && year <= maxYear) {
       const yearValue: number = this.value?.getFullYear() || -1;
       if (year !== yearValue) {
-        this.calendarYearCurrent = year;
+        this.viewYcurrentYear = year;
         this.yearSelected.emit(new Date(year, 0, 1, 0, 0, 0, 0));
       }
       this.clickSwitch();
@@ -549,7 +557,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     const monthValue: number = this.value?.getMonth() || -1;
     if (-1 < month && month < 12) {
       if (month !== monthValue) {
-        const year: number = this.calendarYearCurrent !== -1 ? this.calendarYearCurrent : new Date().getFullYear();
+        const year: number = this.viewYcurrentYear !== -1 ? this.viewYcurrentYear : new Date().getFullYear();
         this.monthSelected.emit(new Date(year, month, 1, 0, 0, 0, 0));
       }
       this.clickSwitch();
@@ -625,26 +633,28 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   // ** Private methods **
 
   // -- Methods for the mode "view year" --
-  private updateViewYearCells(yearsPerPage: number, startDate: Date | null, selected: Date | null | undefined): void {
-    const today: Date = new Date();
-    this.todaysYear = today.getFullYear();
-    this.calendarYearSelected = selected?.getFullYear() || this.todaysYear;
-    this.calendarYearCurrent = this.todaysYear;
+  private updateViewYearCellsAndLimits(yearsPerPage: number, startDate: Date, yearPeriodMin: number, yearPeriodMax: number): void {
+    const todaysYear: number = new Date().getFullYear();
+    this.viewYtodaysYear = todaysYear;
+    this.viewYcurrentYear = this.viewYtodaysYear;
 
-    const initDate: Date = this.currentDate(startDate, selected, new Date());
-    let yearStart: number = GlnCalendarUtil.getFirstYearOfPeriod(initDate.getFullYear(), yearsPerPage);
-    if (yearStart === -1) {
-      yearStart = GlnCalendarUtil.getFirstYearOfPeriod((selected || today).getFullYear(), yearsPerPage);
+    this.viewYminYear = GlnCalendarUtil.getFirstYearOfPeriod(yearPeriodMin, yearsPerPage);
+    this.viewYmaxYear = GlnCalendarUtil.getFirstYearOfPeriod(yearPeriodMax - 1, yearsPerPage) + yearsPerPage - 1;
+    console.log(`updateViewYearCellsAndLimits(); viewYminYear=${this.viewYminYear}`); // #
+    console.log(`updateViewYearCellsAndLimits(); viewYmaxYear=${this.viewYmaxYear}`); // #
+
+    let startYear: number = startDate.getFullYear();
+    if (startYear < this.viewYminYear) {
+      startYear = this.viewYminYear;
+    } else if (this.viewYmaxYear < startYear) {
+      startYear = this.viewYmaxYear;
     }
+    let yearStart: number = GlnCalendarUtil.getFirstYearOfPeriod(startYear, yearsPerPage);
     this.calendarYearCellList = GlnCalendarUtil.getYearCellList(yearStart, yearsPerPage);
-    this.calendarYearFirst = yearStart;
-    this.calendarYearLast = yearStart + yearsPerPage - 1;
+    this.viewYfirstYear = yearStart;
+    this.viewYlastYear = yearStart + yearsPerPage - 1;
 
-    this.markedYear = selected?.getFullYear() || today.getFullYear();
-  }
-  private updateViewYearPeriodLimits(yearsPerPage: number, yearPeriodMin: number, yearPeriodMax: number): void {
-    this.YEAR_PERIOD_MIN = GlnCalendarUtil.getFirstYearOfPeriod(yearPeriodMin, yearsPerPage);
-    this.YEAR_PERIOD_MAX = GlnCalendarUtil.getFirstYearOfPeriod(yearPeriodMax - yearsPerPage, yearsPerPage) + yearsPerPage - 1;
+    // ##this.markedYear = selected?.getFullYear() || today.getFullYear();
   }
   // -- Methods for the mode "view month" --
   private updateViewMonthCells(formatByMonths: string | null, selected: Date | null | undefined): void {
