@@ -26,25 +26,25 @@ public model01: Date | null = new Date();</pre>
 <section mr-vr>
   <label> <input type="checkbox"
       (change)="isDisabled01a=!isDisabled01a" />isDisabled</label>
-  -
+  <!-- -
   <label><input type="checkbox"
-      (change)="isHideDayoff01a=!isHideDayoff01a" />isHideDayoff</label>
+      (change)="isHideDayoff01a=!isHideDayoff01a" />isHideDayoff</label> -->
   -
   <label><input type="checkbox"
       (change)="isReadOnly01a=!isReadOnly01a" />isReadOnly</label>
-  -
+  <!-- -
   <label><input type="checkbox"
       (change)="isWeekNumber01a=!isWeekNumber01a" />isWeekNumber</label>
   -
   <label><input type="checkbox"
-      (change)="isTwoDigitDay01a=!isTwoDigitDay01a" />isTwoDigitDay</label>
+      (change)="isTwoDigitDay01a=!isTwoDigitDay01a" />isTwoDigitDay</label> -->
 </section>
-<section>
+<!-- <section>
   <label><input type="checkbox"
       (change)="isConfig01a=!isConfig01a" />isConfig01a</label>
   -
-</section>
-<section>
+</section> -->
+<!-- <section>
   <label><input type="checkbox"
       (change)="isColsByYears01a=!isColsByYears01a" />ColsByYears</label>
   -
@@ -62,6 +62,14 @@ public model01: Date | null = new Date();</pre>
   -
   <label><input type="checkbox"
       (change)="isRowsByYears01a=!isRowsByYears01a" />RowsByYears</label>
+</section> -->
+<section>
+  -
+  <label><input type="checkbox"
+      (change)="isMinDate01a=!isMinDate01a" />MinDate</label>
+  -
+  <label><input type="checkbox"
+      (change)="isMaxDate01a=!isMaxDate01a" />MaxDate</label>
 </section>
 
 <div class="app-group">
@@ -78,7 +86,7 @@ public model01: Date | null = new Date();</pre>
       </small>
     </div>
     <div class="cnbs-clnd">
-      <gln-calendar [value]="value01a"
+      <!-- <gln-calendar [value]="value01a"
         [isDisabled]="isDisabled01a"
         [isHideDayoff]="isHideDayoff01a"
         [isReadOnly]="isReadOnly01a"
@@ -91,15 +99,21 @@ public model01: Date | null = new Date();</pre>
         [isStartSunday]="isConfig01a ? undefined : (isStartSunday01a ? true : undefined)"
         [rowsByYears]="isConfig01a ? undefined : (isRowsByYears01a ? 4 : undefined)"
         [sizeDayWeek]="isConfig01a ? undefined : (isSizeDayWeek01a ? 1 : undefined)"
-        [minDate]="minDate"
-        [maxDate]="maxDate"
+        minDate9="minDate"
+        maxDate9="maxDate"
         (change)="value01a=$event">
-      </gln-calendar>
+      </gln-calendar> -->
       <!-- views -->
       <!-- <gln-calendar [value]="value01a"
         [config]="config01a"
         [view]="'year'">
       </gln-calendar> -->
+      <gln-calendar [value]="value01a"
+        [isDisabled]="isDisabled01a"
+        [isReadOnly]="isReadOnly01a"
+        [minDate]="isMinDate01a ? minDate : undefined"
+        [maxDate]="isMaxDate01a ? maxDate : undefined">
+      </gln-calendar>
       <!-- <gln-calendar [value]="value01a">
       </gln-calendar> -->
     </div>

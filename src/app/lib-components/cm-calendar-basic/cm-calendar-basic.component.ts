@@ -25,7 +25,7 @@ export class CmCalendarBasicComponent {
 
   public selectedDate: Date = this.getSelectedDate();
 
-  public value01a: Date | null = null; // new Date(this.selectedDate);
+  public value01a: Date | null = new Date(this.selectedDate);
   public value01b: Date | null = new Date(this.selectedDate);
 
   isDisabled01a = false;
@@ -51,8 +51,10 @@ export class CmCalendarBasicComponent {
   isStartSunday01a: boolean = false;
   isFormatForMonth01a: boolean = false;
   isSizeDayWeek01a: boolean = false;
-  minDate: Date = new Date(2023, 5, 5);
-  maxDate: Date = new Date(2023, 8, 20);
+  isMinDate01a = false;
+  isMaxDate01a = false;
+  minDate: Date = new Date(2043, 5, 5);
+  maxDate: Date = new Date(1990, 8, 20);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
