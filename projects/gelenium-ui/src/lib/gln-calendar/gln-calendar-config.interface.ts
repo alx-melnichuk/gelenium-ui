@@ -3,7 +3,7 @@ export interface GlnCalendarConfig {
   colsByYears?: number | undefined; // [1 - 12]  default 4
   colsByMonths?: number | undefined; // [1 - 12] default 3
   formatByMonths?: string | undefined; // 'numeric' (6), '2-digit' (06), 'long' (June) 'short' (Jun), 'narrow' (J)
-  formatForMonth?: string | undefined; // 'numeric' (6), '2-digit' (06), 'long' (June) 'short' (Jun), 'narrow' (J)
+  formatMonth?: string | undefined; // 'numeric' (6), '2-digit' (06), 'long' (June) 'short' (Jun), 'narrow' (J)
   isHideOldDays?: boolean | undefined;
   isHideDayoff?: boolean | undefined;
   isHorizont?: boolean | undefined;
