@@ -55,7 +55,7 @@ public model01: Date | null = new Date();</pre>
       (change)="isStartSunday01a=!isStartSunday01a" />StartSunday</label>
   -
   <label><input type="checkbox"
-      (change)="isFormatForMonth01a=!isFormatForMonth01a" />FormatForMonth</label>
+      (change)="isFormatMonth01a=!isFormatMonth01a" />FormatMonth</label>
   -
   <label><input type="checkbox"
       (change)="isSizeDayWeek01a=!isSizeDayWeek01a" />SizeDayWeek</label>
@@ -95,7 +95,7 @@ public model01: Date | null = new Date();</pre>
         [config]="isConfig01a ? config01a : undefined"
         [colsByYears]="isConfig01a ? undefined : (isColsByYears01a ? 5 : undefined)"
         [colsByMonths]="isConfig01a ? undefined : (isColsByMonths01a ? 4 : undefined)"
-        [formatForMonth]="isConfig01a ? undefined : (isFormatForMonth01a ? 'short' : undefined)"
+        [formatMonth]="isConfig01a ? undefined : (isFormatMonth01a ? 'short' : undefined)"
         [isStartSunday]="isConfig01a ? undefined : (isStartSunday01a ? true : undefined)"
         [rowsByYears]="isConfig01a ? undefined : (isRowsByYears01a ? 4 : undefined)"
         [sizeDayWeek]="isConfig01a ? undefined : (isSizeDayWeek01a ? 1 : undefined)"
@@ -108,12 +108,20 @@ public model01: Date | null = new Date();</pre>
         [config]="config01a"
         [view]="'year'">
       </gln-calendar> -->
-      <gln-calendar [value]="value01a"
+      <!-- <gln-calendar [value]="value01a"
         [isDisabled]="isDisabled01a"
         [isReadOnly]="isReadOnly01a"
         [minDate]="isMinDate01a ? minDate : undefined"
         [maxDate]="isMaxDate01a ? maxDate : undefined">
+      </gln-calendar> -->
+
+      <gln-calendar [value]="value01a"
+        [startDate]="startDate01a">
       </gln-calendar>
+
+      <!-- <gln-calendar>
+      </gln-calendar> -->
+
       <!-- <gln-calendar [value]="value01a">
       </gln-calendar> -->
     </div>

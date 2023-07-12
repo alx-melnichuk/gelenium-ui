@@ -25,9 +25,10 @@ export class CmCalendarBasicComponent {
 
   public selectedDate: Date = this.getSelectedDate();
 
-  public value01a: Date | null = new Date(this.selectedDate);
+  public value01a: Date | null = new Date(2022, 6, 10); // new Date(this.selectedDate);
   public value01b: Date | null = new Date(this.selectedDate);
 
+  startDate01a: Date = new Date(2021, 5, 8);
   isDisabled01a = false;
   isHideDayoff01a = false;
   isReadOnly01a = false;
@@ -41,7 +42,7 @@ export class CmCalendarBasicComponent {
   config01a = {
     colsByYears: 5,
     colsByMonths: 4,
-    formatForMonth: 'short',
+    formatMonth: 'short',
     isStartSunday: true,
     isWeekNumber: true,
     rowsByYears: 4,
@@ -49,7 +50,7 @@ export class CmCalendarBasicComponent {
     sizeDayWeek: 1,
   };
   isStartSunday01a: boolean = false;
-  isFormatForMonth01a: boolean = false;
+  isFormatMonth01a: boolean = false;
   isSizeDayWeek01a: boolean = false;
   isMinDate01a = false;
   isMaxDate01a = false;
@@ -61,7 +62,7 @@ export class CmCalendarBasicComponent {
 
   private getSelectedDate(): Date {
     const d1: Date = new Date();
-    const result: Date = new Date(d1.getFullYear(), d1.getMonth() - 1, d1.getDate(), 0, 0, 0, 0);
+    const result: Date = new Date(d1.getFullYear(), d1.getMonth() /* - 1 */, d1.getDate(), 0, 0, 0, 0);
     result.setDate(result.getDate() + (d1.getDate() === 1 ? 1 : -1));
     return result;
   }
