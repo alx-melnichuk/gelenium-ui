@@ -32,7 +32,7 @@ export class PlCalendarMatComponent {
     isHideDayoff: true,
     isHideOldDays: true,
     isStartSunday: true,
-    formatForMonth: 'short', // 'numeric' (6), '2-digit' (06), 'long' (June) 'short' (Jun), 'narrow' (J)
+    formatMonth: 'short', // 'numeric' (6), '2-digit' (06), 'long' (June) 'short' (Jun), 'narrow' (J)
     // formatByMonths?: string| undefined; // 'numeric' (6), '2-digit' (06), 'long' (June) 'short' (Jun), 'narrow' (J)
     rowsByYears: 6,
     sizeDayWeek: 1,
