@@ -26,28 +26,32 @@ public model01: Date | null = new Date();</pre>
 <section mr-vr>
   <label> <input type="checkbox"
       (change)="isDisabled01a=!isDisabled01a" />isDisabled</label>
-  <!-- -
+  -
   <label><input type="checkbox"
-      (change)="isHideDayoff01a=!isHideDayoff01a" />isHideDayoff</label> -->
+      (change)="isHideDayoff01a=!isHideDayoff01a" />isHideDayoff</label>
   -
   <label><input type="checkbox"
       (change)="isReadOnly01a=!isReadOnly01a" />isReadOnly</label>
-  <!-- -
+  -
   <label><input type="checkbox"
       (change)="isWeekNumber01a=!isWeekNumber01a" />isWeekNumber</label>
   -
   <label><input type="checkbox"
-      (change)="isTwoDigitDay01a=!isTwoDigitDay01a" />isTwoDigitDay</label> -->
+      (change)="isTwoDigitDay01a=!isTwoDigitDay01a" />isTwoDigitDay</label>
 </section>
-<!-- <section>
+
+<section mr-vr>
   <label><input type="checkbox"
       (change)="isConfig01a=!isConfig01a" />isConfig01a</label>
   -
-</section> -->
-<!-- <section>
   <label><input type="checkbox"
       (change)="isColsByYears01a=!isColsByYears01a" />ColsByYears</label>
   -
+  <label><input type="checkbox"
+      (change)="isRowsByYears01a=!isRowsByYears01a" />RowsByYears</label>
+</section>
+
+<section mr-vr>
   <label><input type="checkbox"
       (change)="isColsByMonths01a=!isColsByMonths01a" />ColsByMonths</label>
   -
@@ -59,18 +63,15 @@ public model01: Date | null = new Date();</pre>
   -
   <label><input type="checkbox"
       (change)="isSizeDayWeek01a=!isSizeDayWeek01a" />SizeDayWeek</label>
-  -
-  <label><input type="checkbox"
-      (change)="isRowsByYears01a=!isRowsByYears01a" />RowsByYears</label>
-</section> -->
-<section>
+</section>
+<!-- <section>
   -
   <label><input type="checkbox"
       (change)="isMinDate01a=!isMinDate01a" />MinDate</label>
   -
   <label><input type="checkbox"
       (change)="isMaxDate01a=!isMaxDate01a" />MaxDate</label>
-</section>
+</section> -->
 
 <div class="app-group">
 
@@ -86,7 +87,7 @@ public model01: Date | null = new Date();</pre>
       </small>
     </div>
     <div class="cnbs-clnd">
-      <!-- <gln-calendar [value]="value01a"
+      <gln-calendar [value]="value01a"
         [isDisabled]="isDisabled01a"
         [isHideDayoff]="isHideDayoff01a"
         [isReadOnly]="isReadOnly01a"
@@ -102,7 +103,7 @@ public model01: Date | null = new Date();</pre>
         minDate9="minDate"
         maxDate9="maxDate"
         (change)="value01a=$event">
-      </gln-calendar> -->
+      </gln-calendar>
       <!-- views -->
       <!-- <gln-calendar [value]="value01a"
         [config]="config01a"
@@ -115,9 +116,9 @@ public model01: Date | null = new Date();</pre>
         [maxDate]="isMaxDate01a ? maxDate : undefined">
       </gln-calendar> -->
 
-      <gln-calendar [value]="value01a"
+      <!-- <gln-calendar [value]="value01a"
         [startDate]="startDate01a">
-      </gln-calendar>
+      </gln-calendar> -->
 
       <!-- <gln-calendar>
       </gln-calendar> -->
