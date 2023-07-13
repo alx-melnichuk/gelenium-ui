@@ -12,8 +12,8 @@ export const CALENDAR_DAY_SELECTED = 'slct';
 
 // export const CALENDAR_YEAR_MIN = 1000;
 // export const CALENDAR_YEAR_MAX = 2150;
-export const CALENDAR_YEAR_MIN = 1960;
-export const CALENDAR_YEAR_MAX = 2100;
+export const CALENDAR_YEAR_MIN = 1958; // 1960;
+export const CALENDAR_YEAR_MAX = 2110; // 2120;
 
 export interface CalendarDayCell {
   year: number;
@@ -165,15 +165,26 @@ export class GlnCalendarUtil {
     const isCorrectYearMonthDay: boolean = GlnCalendarUtil.checkYearMonthDayAsDate(newYear, newMonth, newDay);
     return isCorrectYearMonthDay ? new Date(newYear, newMonth, newDay, 0, 0, 0, 0) : GlnCalendarUtil.getLastDayOfMonth(newYear, newMonth);
   }
-
   public static getFirstYearOfPeriod(years: number, yearsPerPage: number): number {
     let result: number = -1;
-    if (0 < years && CALENDAR_YEAR_MIN <= years && years < CALENDAR_YEAR_MAX && 0 < yearsPerPage && yearsPerPage < 101) {
+    if (0 < years && CALENDAR_YEAR_MIN <= years && years <= CALENDAR_YEAR_MAX && 0 < yearsPerPage && yearsPerPage < 101) {
       const delta: number = years - CALENDAR_YEAR_MIN;
       const valueResult = CALENDAR_YEAR_MIN + Math.trunc(delta / yearsPerPage) * yearsPerPage;
       result = valueResult <= CALENDAR_YEAR_MAX - yearsPerPage ? valueResult : result;
     }
     return result;
+  }
+
+  public static getPeriodLimits(yearsPerPage: number, yearMin: number, yearMax: number): { start: number; finish: number } {
+    let start: number = -1;
+    let finish: number = -1;
+    if (0 < yearsPerPage && yearsPerPage < 101 && CALENDAR_YEAR_MIN <= yearMin && yearMax <= CALENDAR_YEAR_MAX && yearMin < yearMax) {
+      start = Math.trunc(yearMin / yearsPerPage) * yearsPerPage;
+      const delta: number = yearMax / yearsPerPage;
+      const truncDelta: number = Math.trunc(delta);
+      finish = (truncDelta + (delta - truncDelta > 0 ? 1 : 0)) * yearsPerPage - 1;
+    }
+    return { start, finish };
   }
 
   public static getElementByLabel(elementListRef: HTMLDivElement | undefined, label: string | null): HTMLElement | null {

@@ -19,9 +19,9 @@
         [attr.tabindex]="!isDisabledVal ? 0 : -1"
         [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
         (click)="clickSwitch()">
-        {{ viewMode === VIEW_DAY ? viewCurrMonthStr + ' ' + viewCurrYear
-        : (viewMode === VIEW_YEAR ? (viewYear.cells.at(0) || -1) + ' - ' + (viewYear.cells.at(-1) || -1)
-        : viewCurrYearChoice || viewCurrYear )
+        {{ viewMode === VIEW_DAY ? currMonthStr + ' ' + currYear
+        : (viewMode === VIEW_YEAR ? (frameYearCells.at(0) || -1) + ' - ' + (frameYearCells.at(-1) || -1)
+        : currYearChoice || currYear )
         }}
       </button>
 
@@ -53,7 +53,7 @@
         class="gln-calendar-nav gln-calendar-prev"
         [attr.tabindex]="!isDisabledVal ? 0 : -1"
         [attr.disabled]="isDisabledVal || isReadOnlyVal
-          || (viewMode === VIEW_YEAR && (viewYear.cells.at(0) || -1) === viewYear.min) ? '' : undefined"
+          || (viewMode === VIEW_YEAR && (frameYearCells.at(0) || -1) === frameYearStart) ? '' : undefined"
         (click)="clickPrev(viewMode === VIEW_DAY ? VIEW_MONTH : (viewMode === VIEW_YEAR ? VIEW_YEAR : ''))">
         <svg glncn-icon
           class="gln-calendar-t-icon icon-prev"
@@ -71,7 +71,7 @@
         class="gln-calendar-nav gln-calendar-next"
         [attr.tabindex]="!isDisabledVal ? 0 : -1"
         [attr.disabled]="isDisabledVal || isReadOnlyVal
-          || (viewMode === VIEW_YEAR && (viewYear.cells.at(-1) || -1) === viewYear.max) ? '' : undefined"
+          || (viewMode === VIEW_YEAR && (frameYearCells.at(-1) || -1) === frameYearFinish) ? '' : undefined"
         (click)="clickNext(viewMode === VIEW_DAY ? VIEW_MONTH : (viewMode === VIEW_YEAR ? VIEW_YEAR : ''))">
         <svg glncn-icon
           class="gln-calendar-t-icon icon-next"
@@ -94,7 +94,7 @@
       <ng-container [ngTemplateOutlet]="isWeekNumberVal ? templateWeekNumberHeader : null">
       </ng-container>
 
-      <div *ngFor="let cage of viewDay.names; trackBy: trackByIndex;"
+      <div *ngFor="let cage of frameDayNames; trackBy: trackByIndex;"
         glncn-center
         glncn-cage
         glncn-tint
@@ -114,27 +114,27 @@
       (keydown)="keydownDayCellRowList($event, dayInfoRowListRef)">
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-        [ngTemplateOutletContext]="viewDay.cellRows[0]">
+        [ngTemplateOutletContext]="frameDayCellRows[0]">
       </ng-container>
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-        [ngTemplateOutletContext]="viewDay.cellRows[1]">
+        [ngTemplateOutletContext]="frameDayCellRows[1]">
       </ng-container>
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-        [ngTemplateOutletContext]="viewDay.cellRows[2]">
+        [ngTemplateOutletContext]="frameDayCellRows[2]">
       </ng-container>
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-        [ngTemplateOutletContext]="viewDay.cellRows[3]">
+        [ngTemplateOutletContext]="frameDayCellRows[3]">
       </ng-container>
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-        [ngTemplateOutletContext]="viewDay.cellRows[4]">
+        [ngTemplateOutletContext]="frameDayCellRows[4]">
       </ng-container>
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
-        [ngTemplateOutletContext]="viewDay.cellRows[5]">
+        [ngTemplateOutletContext]="frameDayCellRows[5]">
       </ng-container>
 
     </div>
@@ -142,7 +142,7 @@
     <div *ngIf="viewMode == VIEW_MONTH"
       glncn-view-month
       class="gln-calendar-view-month">
-      <div *ngFor="let monthCell of viewMonth.cells; index as monthIdx; trackBy: trackByIndex;"
+      <div *ngFor="let monthCell of frameMonthCells; index as monthIdx; trackBy: trackByIndex;"
         glncn-month-wrapper
         class="gln-calendar-month-cell-wrapper">
         <button type="button"
@@ -150,12 +150,12 @@
           glncn-month-cell
           glncn-crs-pnt
           glncn-tint
-          [attr.glncn-slct]="monthIdx === viewMonth.value ? '' : undefined"
-          [attr.glncn-curr]="monthIdx !== viewMonth.value ? '' : undefined"
-          [attr.glncn-today]="monthIdx === viewMonth.today ? '' : undefined"
+          [attr.glncn-slct]="monthIdx === frameMonthValue ? '' : undefined"
+          [attr.glncn-curr]="monthIdx !== frameMonthValue ? '' : undefined"
+          [attr.glncn-today]="monthIdx === frameMonthToday ? '' : undefined"
           [ngClass]="['gln-calendar-month-cell'
-            , (monthIdx === viewMonth.value ? 'gln-selected' : '')
-            , (monthIdx === viewMonth.today ? 'gln-today' : '')]"
+            , (monthIdx === frameMonthValue ? 'gln-selected' : '')
+            , (monthIdx === frameMonthToday ? 'gln-today' : '')]"
           (click)="clickMonthCell(monthIdx)">
           {{ monthCell }}
         </button>
@@ -166,25 +166,25 @@
       glncn-view-year
       class="gln-calendar-view-year"
       #yearCellListRef
-      (keydown)="keydownYearCellList($event, yearCellListRef, (viewYear.cells.at(0) || -1), yearsPerPage)">
-      <div *ngFor="let yearCell of viewYear.cells; trackBy: trackByNumber"
+      (keydown)="keydownYearCellList($event, yearCellListRef, (frameYearCells.at(0) || -1), yearsPerPage)">
+      <div *ngFor="let yearCell of frameYearCells; trackBy: trackByNumber"
         glncn-year-wrapper
         class="gln-calendar-year-cell-wrapper">
         <button type="button"
           glncn-year-cell
           glncn-crs-pnt
           glncn-tint
-          [attr.glncn-curr]="yearCell !== viewYear.value ? '' : undefined"
-          [attr.glncn-slct]="yearCell === viewYear.value ? '' : undefined"
-          [attr.glncn-today]="yearCell === viewYear.today ? '' : undefined"
+          [attr.glncn-curr]="yearCell !== frameYearValue ? '' : undefined"
+          [attr.glncn-slct]="yearCell === frameYearValue ? '' : undefined"
+          [attr.glncn-today]="yearCell === frameYearToday ? '' : undefined"
           [attr.disabled]="isDisabledVal || isReadOnlyVal
-            || (!!viewYear.minDate && yearCell &lt; viewYear.minDate)
-            || (!!viewYear.maxDate && viewYear.maxDate &lt; yearCell)
+            || (!!frameYearMinDate && yearCell &lt; frameYearMinDate)
+            || (!!frameYearMaxDate && frameYearMaxDate &lt; yearCell)
             ? '' : undefined"
           [ngClass]="['gln-calendar-year-cell'
-            , (yearCell === viewYear.value ? 'gln-selected' : '')
-            , (yearCell === viewYear.today ? 'gln-today' : '')]"
-          [attr.tabindex]="!isDisabledVal && (yearCell === viewYear.value || yearCell === markedYear)? 0 : -1"
+            , (yearCell === frameYearValue ? 'gln-selected' : '')
+            , (yearCell === frameYearToday ? 'gln-today' : '')]"
+          [attr.tabindex]="!isDisabledVal && (yearCell === frameYearValue || yearCell === markedYear)? 0 : -1"
           [attr.data-label]="yearCell"
           (click)="clickYearCell(yearCell)">
           {{ yearCell }}
