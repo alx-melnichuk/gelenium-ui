@@ -60,4 +60,23 @@ export class DateUtil {
   public static addDay(d: Date, delta: number = 1): Date {
     return new Date(d.getFullYear(), d.getMonth(), d.getDate() + delta, d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
   }
+
+  public static getDateUTC(year: number, month: number, day: number): Date {
+    return new Date(Date.UTC(year, month, day));
+  }
+  public static setTime(date: Date, h?: number | undefined, m?: number | undefined, s?: number | undefined, ms?: number | undefined): Date {
+    if (h != undefined) {
+      date.setHours(h);
+    }
+    if (m != undefined) {
+      date.setMinutes(m);
+    }
+    if (s != undefined) {
+      date.setSeconds(s);
+    }
+    if (ms != undefined) {
+      date.setMilliseconds(ms);
+    }
+    return date;
+  }
 }

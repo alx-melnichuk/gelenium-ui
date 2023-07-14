@@ -21,7 +21,7 @@
         (click)="clickSwitch()">
         {{ viewMode === VIEW_DAY ? currMonthStr + ' ' + currYear
         : (viewMode === VIEW_YEAR ? (frameYearCells.at(0) || -1) + ' - ' + (frameYearCells.at(-1) || -1)
-        : currYearChoice || currYear )
+        : frameMonthCurrYear )
         }}
       </button>
 
@@ -45,43 +45,46 @@
       </button>
     </div>
 
-    <ng-container *ngIf="viewMode !== VIEW_MONTH">
-      <button type="button"
-        glncn-prev
-        glncn-crs-pnt
-        glncn-nav
-        class="gln-calendar-nav gln-calendar-prev"
-        [attr.tabindex]="!isDisabledVal ? 0 : -1"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal
-          || (viewMode === VIEW_YEAR && (frameYearCells.at(0) || -1) === frameYearStart) ? '' : undefined"
-        (click)="clickPrev(viewMode === VIEW_DAY ? VIEW_MONTH : (viewMode === VIEW_YEAR ? VIEW_YEAR : ''))">
-        <svg glncn-icon
-          class="gln-calendar-t-icon icon-prev"
-          focusable="false"
-          aria-hidden="true"
-          viewBox="0 0 24 24">
-          <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
-        </svg>
-      </button>
+    <button type="button"
+      glncn-prev
+      glncn-crs-pnt
+      glncn-nav
+      class="gln-calendar-nav gln-calendar-prev"
+      [attr.tabindex]="!isDisabledVal ? 0 : -1"
+      [attr.disabled]="isDisabledVal || isReadOnlyVal
+        || (viewMode === VIEW_YEAR && (frameYearCells.at(0) || -1) === frameYearStart)
+        || (viewMode === VIEW_MONTH && (frameMonthCurrYear === frameMonthMinYear))
+        ? '' : undefined"
+      (click)="clickPrev(viewMode)">
+      <svg glncn-icon
+        class="gln-calendar-t-icon icon-prev"
+        focusable="false"
+        aria-hidden="true"
+        viewBox="0 0 24 24">
+        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+      </svg>
+    </button>
 
-      <button type="button"
-        glncn-next
-        glncn-crs-pnt
-        glncn-nav
-        class="gln-calendar-nav gln-calendar-next"
-        [attr.tabindex]="!isDisabledVal ? 0 : -1"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal
-          || (viewMode === VIEW_YEAR && (frameYearCells.at(-1) || -1) === frameYearFinish) ? '' : undefined"
-        (click)="clickNext(viewMode === VIEW_DAY ? VIEW_MONTH : (viewMode === VIEW_YEAR ? VIEW_YEAR : ''))">
-        <svg glncn-icon
-          class="gln-calendar-t-icon icon-next"
-          focusable="false"
-          aria-hidden="true"
-          viewBox="0 0 24 24">
-          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
-        </svg>
-      </button>
-    </ng-container>
+    <button type="button"
+      glncn-next
+      glncn-crs-pnt
+      glncn-nav
+      class="gln-calendar-nav gln-calendar-next"
+      [attr.tabindex]="!isDisabledVal ? 0 : -1"
+      [attr.disabled]="isDisabledVal || isReadOnlyVal
+        || (viewMode === VIEW_YEAR && (frameYearCells.at(-1) || -1) === frameYearFinish) 
+        || (viewMode === VIEW_MONTH && (frameMonthCurrYear === frameMonthMaxYear))
+        ? '' : undefined"
+      (click)="clickNext(viewMode)">
+      <svg glncn-icon
+        class="gln-calendar-t-icon icon-next"
+        focusable="false"
+        aria-hidden="true"
+        viewBox="0 0 24 24">
+        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+      </svg>
+    </button>
+
   </div>
 
   <div glncn-view-day
@@ -150,12 +153,16 @@
           glncn-month-cell
           glncn-crs-pnt
           glncn-tint
-          [attr.glncn-slct]="monthIdx === frameMonthValue ? '' : undefined"
-          [attr.glncn-curr]="monthIdx !== frameMonthValue ? '' : undefined"
-          [attr.glncn-today]="monthIdx === frameMonthToday ? '' : undefined"
+          [attr.glncn-slct]="frameMonthCurrYear === frameMonthValueYear && monthIdx === frameMonthValueMonth ? '' : undefined"
+          [attr.glncn-curr]="!(frameMonthCurrYear === frameMonthValueYear && monthIdx === frameMonthValueMonth) ? '' : undefined"
+          [attr.glncn-today]="frameMonthCurrYear === frameMonthTodayYear && monthIdx === frameMonthTodayMonth ? '' : undefined"
+          [attr.disabled]="isDisabledVal || isReadOnlyVal
+            || isDisableMonthByMin(frameMonthCurrYear, monthIdx, frameMonthMinMonth, frameMonthMinYear)
+            || isDisableMonthByMax(frameMonthCurrYear, monthIdx, frameMonthMaxMonth, frameMonthMaxYear)
+            ? '' : undefined"
           [ngClass]="['gln-calendar-month-cell'
-            , (monthIdx === frameMonthValue ? 'gln-selected' : '')
-            , (monthIdx === frameMonthToday ? 'gln-today' : '')]"
+            , (frameMonthCurrYear === frameMonthValueYear && monthIdx === frameMonthValueMonth ? 'gln-selected' : '')
+            , (frameMonthCurrYear === frameMonthTodayYear && monthIdx === frameMonthTodayMonth ? 'gln-today' : '')]"
           (click)="clickMonthCell(monthIdx)">
           {{ monthCell }}
         </button>

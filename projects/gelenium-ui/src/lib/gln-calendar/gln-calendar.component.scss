@@ -437,7 +437,9 @@ gln-calendar {
     user-select: none;
     width: var(--glncn-month-cell-wd, 85%);
   }
-
+  // #[glncn-month-cell][disabled] { // # temp
+  // #  background-color: gainsboro;
+  // #}
   // Level 3 Element "view-year"
   [glncn-view-year] {
     // outline: 1px solid blue;
