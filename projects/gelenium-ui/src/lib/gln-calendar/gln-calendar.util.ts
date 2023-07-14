@@ -11,9 +11,9 @@ export const CALENDAR_DAY_PREVIOUS = 'old';
 export const CALENDAR_DAY_SELECTED = 'slct';
 
 // export const CALENDAR_YEAR_MIN = 1000;
-// export const CALENDAR_YEAR_MAX = 2150;
-export const CALENDAR_YEAR_MIN = 1958; // 1960;
-export const CALENDAR_YEAR_MAX = 2110; // 2120;
+// export const CALENDAR_YEAR_MAX = 9999;
+export const CALENDAR_YEAR_MIN = 1955; // 1960; // 1000
+export const CALENDAR_YEAR_MAX = 2115; // 2120; // 2150
 
 export interface CalendarDayCell {
   year: number;
@@ -153,28 +153,6 @@ export class GlnCalendarUtil {
     return date.getFullYear() === year && date.getMonth() === month && date.getDate() === day;
   }
 
-  public static getLastDayOfMonth(year: number, month: number): Date {
-    const date: Date = new Date(year, month + 1, 1, 0, 0, 0, 0);
-    return DateUtil.addDay(date, -1);
-  }
-
-  public static getDateByItsDetails(value: Date, year: number | null, month: number | null, day: number | null): Date {
-    const newYear: number = year || value.getFullYear();
-    const newMonth: number = month || value.getMonth();
-    const newDay: number = day || value.getDate();
-    const isCorrectYearMonthDay: boolean = GlnCalendarUtil.checkYearMonthDayAsDate(newYear, newMonth, newDay);
-    return isCorrectYearMonthDay ? new Date(newYear, newMonth, newDay, 0, 0, 0, 0) : GlnCalendarUtil.getLastDayOfMonth(newYear, newMonth);
-  }
-  public static getFirstYearOfPeriod(years: number, yearsPerPage: number): number {
-    let result: number = -1;
-    if (0 < years && CALENDAR_YEAR_MIN <= years && years <= CALENDAR_YEAR_MAX && 0 < yearsPerPage && yearsPerPage < 101) {
-      const delta: number = years - CALENDAR_YEAR_MIN;
-      const valueResult = CALENDAR_YEAR_MIN + Math.trunc(delta / yearsPerPage) * yearsPerPage;
-      result = valueResult <= CALENDAR_YEAR_MAX - yearsPerPage ? valueResult : result;
-    }
-    return result;
-  }
-
   public static getPeriodLimits(yearsPerPage: number, yearMin: number, yearMax: number): { start: number; finish: number } {
     let start: number = -1;
     let finish: number = -1;
@@ -185,6 +163,16 @@ export class GlnCalendarUtil {
       finish = (truncDelta + (delta - truncDelta > 0 ? 1 : 0)) * yearsPerPage - 1;
     }
     return { start, finish };
+  }
+
+  public static getYearCurrInLimits(yearStart: number, yearFinish: number, yearCurr: number, yearsPerPage: number): number {
+    let result: number = -1;
+    if (yearStart > 0 && yearFinish > 0 && yearStart <= yearFinish && yearCurr > 0 && yearsPerPage > 0) {
+      const yearValue: number =
+        yearStart <= yearCurr && yearCurr <= yearFinish ? yearCurr : yearStart + Math.trunc((yearFinish - yearStart) / 2);
+      result = Math.trunc(yearValue / yearsPerPage) * yearsPerPage;
+    }
+    return result;
   }
 
   public static getElementByLabel(elementListRef: HTMLDivElement | undefined, label: string | null): HTMLElement | null {
