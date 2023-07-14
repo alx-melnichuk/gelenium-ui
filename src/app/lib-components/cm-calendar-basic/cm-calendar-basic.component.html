@@ -113,7 +113,8 @@ public model01: Date | null = new Date();</pre>
         [colsByYears]="isConfig01a ? undefined : (isColsByYears01a ? 5 : undefined)"
         [rowsByYears]="isConfig01a ? undefined : (isRowsByYears01a ? 4 : undefined)"
         [minDate]="isMinDate01a ? minDate : undefined"
-        [maxDate]="isMaxDate01a ? maxDate : undefined">
+        [maxDate]="isMaxDate01a ? maxDate : undefined"
+        (change2)="value01a=$event">
       </gln-calendar>
 
       <!-- <gln-calendar [value]="value01a"

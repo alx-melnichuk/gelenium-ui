@@ -54,9 +54,11 @@ export class CmCalendarBasicComponent {
   isSizeDayWeek01a: boolean = false;
   isMinDate01a = false;
   isMaxDate01a = false;
-  minDate: Date = new Date(1965, 1, 1);
-  // maxDate: Date = new Date(2095, 1, 1);
-  maxDate: Date = new Date(2015, 1, 1);
+  // minDate: Date = new Date(1965, 1, 1);
+  // // maxDate: Date = new Date(2095, 1, 1);
+  // maxDate: Date = new Date(2015, 1, 1);
+  minDate: Date = new Date(2023, 2, 1);
+  maxDate: Date = new Date(2035, 2, 1);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
