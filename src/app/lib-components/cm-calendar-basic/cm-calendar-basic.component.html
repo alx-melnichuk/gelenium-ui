@@ -64,14 +64,14 @@ public model01: Date | null = new Date();</pre>
   <label><input type="checkbox"
       (change)="isSizeDayWeek01a=!isSizeDayWeek01a" />SizeDayWeek</label>
 </section>
-<!-- <section>
+<section>
   -
   <label><input type="checkbox"
       (change)="isMinDate01a=!isMinDate01a" />MinDate</label>
   -
   <label><input type="checkbox"
       (change)="isMaxDate01a=!isMaxDate01a" />MaxDate</label>
-</section> -->
+</section>
 
 <div class="app-group">
 
@@ -87,7 +87,7 @@ public model01: Date | null = new Date();</pre>
       </small>
     </div>
     <div class="cnbs-clnd">
-      <gln-calendar [value]="value01a"
+      <!-- <gln-calendar [value]="value01a"
         [isDisabled]="isDisabled01a"
         [isHideDayoff]="isHideDayoff01a"
         [isReadOnly]="isReadOnly01a"
@@ -103,18 +103,18 @@ public model01: Date | null = new Date();</pre>
         minDate9="minDate"
         maxDate9="maxDate"
         (change)="value01a=$event">
-      </gln-calendar>
+      </gln-calendar> -->
       <!-- views -->
       <!-- <gln-calendar [value]="value01a"
         [config]="config01a"
         [view]="'year'">
       </gln-calendar> -->
-      <!-- <gln-calendar [value]="value01a"
-        [isDisabled]="isDisabled01a"
-        [isReadOnly]="isReadOnly01a"
+      <gln-calendar [value]="value01a"
+        [colsByYears]="isConfig01a ? undefined : (isColsByYears01a ? 5 : undefined)"
+        [rowsByYears]="isConfig01a ? undefined : (isRowsByYears01a ? 4 : undefined)"
         [minDate]="isMinDate01a ? minDate : undefined"
         [maxDate]="isMaxDate01a ? maxDate : undefined">
-      </gln-calendar> -->
+      </gln-calendar>
 
       <!-- <gln-calendar [value]="value01a"
         [startDate]="startDate01a">
