@@ -40,6 +40,7 @@ export class GlnCalendarUtil {
   public static VIEW_DAY = 'day';
   public static VIEW_MONTH = 'month';
   public static VIEW_YEAR = 'year';
+  public static YEARS = 'years';
 
   // -- Methods for the mode "view year" --
 

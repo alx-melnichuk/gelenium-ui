@@ -52,10 +52,11 @@
       class="gln-calendar-nav gln-calendar-prev"
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
       [attr.disabled]="isDisabledVal || isReadOnlyVal
-        || (viewMode === VIEW_YEAR && (frameYearCells.at(0) || -1) === frameYearStart)
+        || (viewMode === VIEW_DAY && !isEnabledPrevViewDay())
+        || (viewMode === VIEW_YEAR && !isEnabledPrevViewYear())
         || (viewMode === VIEW_MONTH && (frameMonthCurrYear === frameMonthMinYear))
         ? '' : undefined"
-      (click)="clickPrev(viewMode)">
+      (click)="prevPeriod(getCodeByViewMode(viewMode))">
       <svg glncn-icon
         class="gln-calendar-t-icon icon-prev"
         focusable="false"
@@ -72,10 +73,11 @@
       class="gln-calendar-nav gln-calendar-next"
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
       [attr.disabled]="isDisabledVal || isReadOnlyVal
-        || (viewMode === VIEW_YEAR && (frameYearCells.at(-1) || -1) === frameYearFinish) 
+        || (viewMode === VIEW_DAY && !isEnabledNextViewDay())
+        || (viewMode === VIEW_YEAR && !isEnabledNextViewYear())
         || (viewMode === VIEW_MONTH && (frameMonthCurrYear === frameMonthMaxYear))
         ? '' : undefined"
-      (click)="clickNext(viewMode)">
+      (click)="nextPeriod(getCodeByViewMode(viewMode))">
       <svg glncn-icon
         class="gln-calendar-t-icon icon-next"
         focusable="false"
