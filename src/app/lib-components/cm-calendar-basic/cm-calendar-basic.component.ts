@@ -25,7 +25,7 @@ export class CmCalendarBasicComponent {
 
   public selectedDate: Date = this.getSelectedDate();
 
-  public value01a: Date | null = new Date(2022, 6, 10); // new Date(this.selectedDate);
+  public value01a: Date | null = new Date(this.selectedDate); // new Date(2022, 6, 10); // new Date(this.selectedDate);
   public value01b: Date | null = new Date(this.selectedDate);
 
   startDate01a: Date = new Date(2021, 5, 8);
@@ -57,8 +57,8 @@ export class CmCalendarBasicComponent {
   // minDate: Date = new Date(1965, 1, 1);
   // // maxDate: Date = new Date(2095, 1, 1);
   // maxDate: Date = new Date(2015, 1, 1);
-  minDate: Date = new Date(2023, 2, 1);
-  maxDate: Date = new Date(2035, 2, 1);
+  minDate: Date = new Date(2023, 2, 10);
+  maxDate: Date = new Date(2024, 2, 10);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}

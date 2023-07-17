@@ -67,10 +67,12 @@ public model01: Date | null = new Date();</pre>
 <section>
   -
   <label><input type="checkbox"
-      (change)="isMinDate01a=!isMinDate01a" />MinDate</label>
+      (change)="isMinDate01a=!isMinDate01a" />MinDate {{ isMinDate01a ? minDate.toString().substring(4, 33) :
+    ''}}</label>
   -
   <label><input type="checkbox"
-      (change)="isMaxDate01a=!isMaxDate01a" />MaxDate</label>
+      (change)="isMaxDate01a=!isMaxDate01a" />MaxDate {{ isMaxDate01a ? maxDate.toString().substring(4, 33) :
+    ''}}</label>
 </section>
 
 <div class="app-group">
