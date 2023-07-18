@@ -1,31 +1,17 @@
 import { DateUtil } from '../_utils/date.util';
 
-export interface CalendarDayCellRow {
-  cellList: CalendarDayCell[];
-  weekNumberObj: { weekNumber: number };
-}
-
-export type CALENDAR_DAY_STATE = 'curr' | 'old' | 'slct';
-export const CALENDAR_DAY_CURRENT = 'curr';
-export const CALENDAR_DAY_PREVIOUS = 'old';
-export const CALENDAR_DAY_SELECTED = 'slct';
-
 // export const CALENDAR_YEAR_MIN = 1000;
 // export const CALENDAR_YEAR_MAX = 9999;
 export const CALENDAR_YEAR_MIN = 1955; // 1960; // 1000
 export const CALENDAR_YEAR_MAX = 2115; // 2120; // 2150
 
-export interface CalendarDayCell {
-  year: number;
-  month: number;
-  day: number;
-  day2d: string;
-  dayWeek: number;
-  state: CALENDAR_DAY_STATE;
-  label: string;
-  isToday?: boolean | undefined;
-  isDayoff?: boolean | undefined;
-}
+export const CALENDAR_VIEW_DAY = 'day';
+export const CALENDAR_VIEW_MONTH = 'month';
+export const CALENDAR_VIEW_YEAR = 'year';
+
+export const CALENDAR_PERIOD_MONTH = 'period_month';
+export const CALENDAR_PERIOD_YEAR = 'period_year';
+export const CALENDAR_PERIOD_YEARS = 'period_years';
 
 export interface CalendarDayName {
   name: string;
@@ -33,14 +19,48 @@ export interface CalendarDayName {
   isDayoff: boolean | undefined;
 }
 
+export const CALENDAR_FORMAT_BY_MONTH_DEFAULT = 'short';
+
+export type CALENDAR_TINT_STATE = 'act' | 'psv' | 'slct';
+export const CALENDAR_TINT_ACTIVE = 'act';
+export const CALENDAR_TINT_PASSIVE = 'psv';
+export const CALENDAR_TINT_SELECTED = 'slct';
+
+// -- Interfaces for the mode "view day" --
+
+export interface CalendarDayCellRow {
+  cellList: CalendarDayCell[];
+  weekNumberObj: { weekNumber: number };
+}
+
+export interface CalendarDayCell {
+  day: number;
+  dayWeek: number;
+  isDayoff?: boolean | undefined;
+  isDisabled?: boolean | undefined;
+  isToday?: boolean | undefined;
+  label: string;
+  month: number;
+  note: string;
+  state: CALENDAR_TINT_STATE;
+  year: number;
+}
+
+// -- Interfaces for the mode "view month" --
+
+export interface CalendarMonthCell {
+  isDisabled?: boolean | undefined;
+  isSelected?: boolean | undefined;
+  isToday?: boolean | undefined;
+  label: string;
+  month: number;
+  state: CALENDAR_TINT_STATE;
+}
+
 export class GlnCalendarUtil {
   public static COLS_BY_YEARS_DEFAULT = 4;
   public static ROWS_BY_YEARS_DEFAULT = 5;
   public static COLS_BY_MONTHS_DEFAULT = 3;
-  public static VIEW_DAY = 'day';
-  public static VIEW_MONTH = 'month';
-  public static VIEW_YEAR = 'year';
-  public static YEARS = 'years';
 
   // -- Methods for the mode "view year" --
 
@@ -56,33 +76,87 @@ export class GlnCalendarUtil {
 
   // -- Methods for the mode "view month" --
 
-  public static getMonthCellList(month?: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined): string[] {
-    const result: string[] = [];
-    const year: number = new Date().getFullYear();
-    for (let i = 0; i < 12; i++) {
-      result.push(DateUtil.getMonthName(new Date(year, i, 1, 0, 0, 0, 0), month));
+  /** Get a grid of months in a year.
+   * @param current: Date;                     // Current date.
+   * @param selected: Date | null | undefined; // Selected date.
+   * @param today: Date,                       // Today's date.
+   * @param minDate: Date | null | undefined;  // Minimum date.
+   * @param maxDate: Date | null | undefined;  // Maximum date.
+   * @param formatByMonths: string | null;     // Month name format.
+   */
+  public static getMonthCellList(
+    current: Date,
+    selected: Date | null,
+    today: Date,
+    minDate: Date | null | undefined,
+    maxDate: Date | null | undefined,
+    formatByMonths: string | null
+  ): CalendarMonthCell[] {
+    const result: CalendarMonthCell[] = [];
+    const year: number = current.getFullYear();
+    const selectedYear: number | undefined = selected?.getFullYear();
+    const selectedMonth: number | undefined = selected?.getMonth();
+    const todayYear: number = today.getFullYear();
+    const todayMonth: number = today.getMonth();
+    const formatMonth = DateUtil.convertMonthFormat(formatByMonths || CALENDAR_FORMAT_BY_MONTH_DEFAULT);
+
+    for (let month = 0; month < 12; month++) {
+      const isDisabledMinDate: boolean = GlnCalendarUtil.isDisabledMonthByMin(year, month, minDate);
+      const isDisabledMaxDate: boolean = GlnCalendarUtil.isDisabledMonthByMax(year, month, maxDate);
+      const isDisabled: boolean | undefined = isDisabledMinDate || isDisabledMaxDate ? true : undefined;
+      const isSelected: boolean | undefined = year === selectedYear && month === selectedMonth ? true : undefined;
+      const isToday: boolean | undefined = year === todayYear && month === todayMonth ? true : undefined;
+      const label: string = DateUtil.getMonthName(new Date(year, month, 1, 0, 0, 0, 0), formatMonth);
+      const state = isSelected ? CALENDAR_TINT_SELECTED : CALENDAR_TINT_ACTIVE;
+      result.push({ isDisabled, isSelected, isToday, label, month, state });
     }
     return result;
+  }
+  public static isDisabledMonthByMin(year: number, month: number, minDate: Date | null | undefined): boolean {
+    const minYear: number | null = minDate?.getFullYear() || null;
+    const minMonth: number | null = minDate?.getMonth() || null;
+    return minYear !== null && minMonth !== null && (year < minYear || (year === minYear && month < minMonth));
+  }
+  public static isDisabledMonthByMax(year: number, month: number, maxDate: Date | null | undefined): boolean {
+    const maxYear: number | null = maxDate?.getFullYear() || null;
+    const maxMonth: number | null = maxDate?.getMonth() || null;
+    return maxYear !== null && maxMonth !== null && (maxYear < year || (maxYear === year && maxMonth < month));
   }
 
   // -- Methods for the mode "view day" --
 
   /** Get a grid of days in a month.
+   * @param current: Date;                     // Current date.
    * @param selected: Date | null | undefined; // Selected date.
-   * @param dayStartWeek: number; // 0-Sunday (default), 1-Monday;
-   * @param initDate: Date; // Start date, used if "selected date" is not specified.
-   * @param today: Date; // Today's date
+   * @param today: Date,                       // Today's date.
+   * @param minDate: Date | null | undefined;  // Minimum date.
+   * @param maxDate: Date | null | undefined;  // Maximum date.
+   * @param dayStartWeek: number;              // 0-Sunday (default), 1-Monday;
    */
-  public static getDayCellRowList(selected: Date | null, dayStartWeek: number, initDate: Date, today: Date): CalendarDayCellRow[] {
+  public static getDayCellRowList(
+    current: Date,
+    selected: Date | null,
+    today: Date,
+    minDate: Date | null | undefined,
+    maxDate: Date | null | undefined,
+    dayStartWeek: number
+  ): CalendarDayCellRow[] {
     const result: CalendarDayCellRow[] = [];
+
     const selectedYear: number | undefined = selected?.getFullYear();
     const selectedMonth: number | undefined = selected?.getMonth();
     const selectedDay: number | undefined = selected?.getDate();
     const todayYear: number = today.getFullYear();
     const todayMonth: number = today.getMonth();
     const todayDay: number = today.getDate();
+    const minYear: number | null = minDate?.getFullYear() || null;
+    const minMonth: number | null = minDate?.getMonth() || null;
+    const minDay: number | null = minDate?.getDate() || null;
+    const maxYear: number | null = maxDate?.getFullYear() || null;
+    const maxMonth: number | null = maxDate?.getMonth() || null;
+    const maxDay: number | null = maxDate?.getDate() || null;
 
-    const itemDate: Date = new Date(initDate.getFullYear(), initDate.getMonth(), 1, 0, 0, 0, 0);
+    const itemDate: Date = new Date(current.getFullYear(), current.getMonth(), 1, 0, 0, 0, 0);
     const currMonth: number = itemDate.getMonth();
     // Date.getDay() 0-Sun, 1-Mon, 2-Tue, 3-Wed, 4-Thu, 5-Fri, 6-Sat;
     const dayWeek1: number = itemDate.getDay();
@@ -90,7 +164,6 @@ export class GlnCalendarUtil {
     let hasSelected: boolean = selected == null;
     let hasToday: boolean = false;
     let calendarRow: CalendarDayCellRow | undefined;
-    let state: CALENDAR_DAY_STATE = CALENDAR_DAY_PREVIOUS;
     let idx: number = 0;
     while (idx < 42) {
       itemDate.setDate(itemDate.getDate() + 1);
@@ -103,7 +176,7 @@ export class GlnCalendarUtil {
       if (!hasSelected && isSelected) {
         hasSelected = true;
       }
-      state = isSelected ? CALENDAR_DAY_SELECTED : month === currMonth ? CALENDAR_DAY_CURRENT : CALENDAR_DAY_PREVIOUS;
+      const state = isSelected ? CALENDAR_TINT_SELECTED : month === currMonth ? CALENDAR_TINT_ACTIVE : CALENDAR_TINT_PASSIVE;
 
       const isToday: boolean | undefined = !hasToday && year === todayYear && month === todayMonth && day === todayDay ? true : undefined;
       if (!hasToday && isToday) {
@@ -113,15 +186,27 @@ export class GlnCalendarUtil {
         calendarRow = { cellList: [], weekNumberObj: { weekNumber: DateUtil.getWeekNumber(itemDate) } };
         result.push(calendarRow);
       }
+
+      let isMinDate: boolean = false;
+      if (minYear !== null && minMonth !== null && minDay !== null) {
+        isMinDate = year < minYear || (year === minYear && (month < minMonth || (month === minMonth && day < minDay)));
+      }
+      let isMaxDate: boolean = false;
+      if (maxYear !== null && maxMonth !== null && maxDay !== null) {
+        isMaxDate = maxYear < year || (maxYear === year && (maxMonth < month || (maxMonth === month && maxDay < day)));
+      }
+      const isDisabled: boolean | undefined = isMinDate || isMaxDate ? true : undefined;
+
       const label: string = GlnCalendarUtil.getLabelByDate(itemDate) || '';
       const isDayoff = dayWeek == 0 || dayWeek == 6 ? true : undefined;
-      const day2d: string = ('0' + day.toString()).slice(-2);
+      const note: string = ('0' + day.toString()).slice(-2);
 
-      calendarRow?.cellList.push({ year, month, day, day2d, dayWeek, state, label, isToday, isDayoff });
+      calendarRow?.cellList.push({ day, dayWeek, isDayoff, isDisabled, isToday, label, month, note, state, year });
       idx++;
     }
     return result;
   }
+
   public static getLabelByDate(date: Date | null): string | null {
     let result: string | null = null;
     if (date != null) {
@@ -207,7 +292,7 @@ export class GlnCalendarUtil {
   }
 
   public static getViewModes(): string[] {
-    return [GlnCalendarUtil.VIEW_DAY, GlnCalendarUtil.VIEW_YEAR, GlnCalendarUtil.VIEW_MONTH];
+    return [CALENDAR_VIEW_DAY, CALENDAR_VIEW_YEAR, CALENDAR_VIEW_MONTH];
   }
   public static checkViews(views: string[] | null | undefined): string[] {
     const result: string[] = [];
