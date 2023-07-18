@@ -75,25 +75,25 @@ app-pl-calendar-bootstrap {
   }
   // "header cage"
   .gln-calendar-cage {
-    --glncn-def-old-cl: currentColor;
+    --glncn-def-psv-cl: currentColor;
   }
   --glncn-cage-fn-sz: 14px;
   --glncn-cage-fn-wg: 700;
   // "list item"
   --glncn-today-br-wd: 0;
 
-  --glncn-def-curr-cl: currentColor;
-  --glncn-def-old-cl: #777;
+  --glncn-def-act-cl: currentColor;
+  --glncn-def-psv-cl: #777;
   --glncn-def-slct-cl: #fff;
   --glncn-def-slct-bg-cl: #286090;
 
-  --glncn-hov-curr-bg-cl: #eee;
-  --glncn-hov-old-bg-cl: #eee;
+  --glncn-hov-act-bg-cl: #eee;
+  --glncn-hov-psv-bg-cl: #eee;
   --glncn-hov-slct-cl: #fff;
   --glncn-hov-slct-bg-cl: #204d74;
 
-  --glncn-dis-curr-cl: #7e7e7e;
-  --glncn-dis-old-cl : #7e7e7e;
+  --glncn-dis-act-cl: #7e7e7e;
+  --glncn-dis-psv-cl : #7e7e7e;
   --glncn-dis-slct-bg-cl: #a8a8a8;
   --glncn-dis-today-br-cl: #7e7e7e;
 
