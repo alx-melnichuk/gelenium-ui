@@ -80,14 +80,14 @@ app-pl-calendar-mat {
   // "row item"
   --glncn-item-mr: 2px 2px 2px 2px;
 
-  --glncn-def-curr-cl: rgba(0, 0, 0, 0.87);
-  --glncn-def-old-cl: rgba(0, 0, 0, 0.6);
+  --glncn-def-act-cl: rgba(0, 0, 0, 0.87);
+  --glncn-def-psv-cl: rgba(0, 0, 0, 0.6);
   --glncn-def-slct-cl: #fff;
   --glncn-def-slct-bg-cl: #3f51b5; // # #1976d2;
   --glncn-def-today-br-cl: rgba(0, 0, 0, 0.38);
 
-  --glncn-hov-curr-bg-cl: #3f51b54d; // # rgba(25, 118, 210, 0.04);
-  --glncn-hov-old-bg-cl: #3f51b54d; // # rgba(25, 118, 210, 0.04);
+  --glncn-hov-act-bg-cl: #3f51b54d; // # rgba(25, 118, 210, 0.04);
+  --glncn-hov-psv-bg-cl: #3f51b54d; // # rgba(25, 118, 210, 0.04);
   --glncn-hov-slct-cl: #fff;
   --glncn-hov-slct-bg-cl: #3f51b5;
 
