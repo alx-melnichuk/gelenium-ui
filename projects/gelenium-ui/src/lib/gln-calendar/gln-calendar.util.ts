@@ -1,4 +1,5 @@
 import { DateUtil } from '../_utils/date.util';
+import { StringUtil } from '../_utils/string.util';
 
 // export const CALENDAR_YEAR_MIN = 1000;
 // export const CALENDAR_YEAR_MAX = 9999;
@@ -82,6 +83,7 @@ export class GlnCalendarUtil {
    * @param today: Date,                       // Today's date.
    * @param minDate: Date | null | undefined;  // Minimum date.
    * @param maxDate: Date | null | undefined;  // Maximum date.
+   * @param locale: string | null;             // Locale ('en-US', 'de-DE', 'fr-FR')
    * @param formatByMonths: string | null;     // Month name format.
    */
   public static getMonthCellList(
@@ -90,6 +92,7 @@ export class GlnCalendarUtil {
     today: Date,
     minDate: Date | null | undefined,
     maxDate: Date | null | undefined,
+    locale: string | null,
     formatByMonths: string | null
   ): CalendarMonthCell[] {
     const result: CalendarMonthCell[] = [];
@@ -106,11 +109,26 @@ export class GlnCalendarUtil {
       const isDisabled: boolean | undefined = isDisabledMinDate || isDisabledMaxDate ? true : undefined;
       const isSelected: boolean | undefined = year === selectedYear && month === selectedMonth ? true : undefined;
       const isToday: boolean | undefined = year === todayYear && month === todayMonth ? true : undefined;
-      const label: string = DateUtil.getMonthName(new Date(year, month, 1, 0, 0, 0, 0), formatMonth);
+      const date: Date = new Date(year, month, 1, 0, 0, 0, 0);
+      let monthStr: string = '';
+      try {
+        // Get the name of the month for the specified date.
+        monthStr = DateUtil.formatDateTime(date, { month: formatMonth }, locale || undefined);
+      } catch (e) {
+        console.error(e);
+        monthStr = DateUtil.formatDateTime(date, { month: formatMonth }, undefined);
+      }
+      const label: string = StringUtil.camelize(monthStr);
       const state = isSelected ? CALENDAR_TINT_SELECTED : CALENDAR_TINT_ACTIVE;
       result.push({ isDisabled, isSelected, isToday, label, month, state });
     }
     return result;
+  }
+  // d1 < d2 = -1 (<0);  d1 == d2 = (==0);  d1 > d2 = 1 (>0)
+  public static compareYearMonthByDate(year1: number, month1: number, date2: Date): number {
+    const year2: number = date2.getFullYear();
+    const month2: number = date2.getMonth();
+    return year1 < year2 ? -1 : year1 > year2 ? 1 : month1 < month2 ? -1 : month1 > month2 ? 1 : 0;
   }
   public static isDisabledMonthByMin(year: number, month: number, minDate: Date | null | undefined): boolean {
     const minYear: number | null = minDate?.getFullYear() || null;
@@ -206,19 +224,21 @@ export class GlnCalendarUtil {
     }
     return result;
   }
-
+  // 'Thu, June 8, 2023'
   public static getLabelByDate(date: Date | null): string | null {
     let result: string | null = null;
     if (date != null) {
-      result = new Intl.DateTimeFormat('default', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
-    } // 'Thu, June 8, 2023'
+      // Get year, month and day in short form.
+      result = DateUtil.formatDateTime(date, { year: 'numeric', month: 'long', day: 'numeric' }, 'default');
+    }
     return result;
   }
   /** Get a list of days of the week.
-   * @param sizeDayWeek: number; // 1-'narrow'(T); 2,3-'short'(Thu); -1-'long'(Thursday);
-   * @param dayStartWeek: number; // 0-Sunday (default), 1-Monday;
+   * @param sizeDayWeek: number;   // 1-'narrow'(T); 2,3-'short'(Thu); -1-'long'(Thursday);
+   * @param dayStartWeek: number;  // 0-Sunday (default), 1-Monday;
+   * @param locale: string | null; // Locale ('en-US', 'de-DE', 'fr-FR')
    */
-  public static getDayNameList(sizeDayWeek: number, dayStartWeek: number): CalendarDayName[] {
+  public static getDayNameList(sizeDayWeek: number, dayStartWeek: number, locale: string | null): CalendarDayName[] {
     const result: CalendarDayName[] = [];
     const dayWeekRes: 'long' | 'short' | 'narrow' = sizeDayWeek <= 0 || 3 < sizeDayWeek ? 'long' : 1 === sizeDayWeek ? 'narrow' : 'short';
     const now: Date = new Date();
@@ -226,9 +246,16 @@ export class GlnCalendarUtil {
     current.setDate(current.getDate() - current.getDay() - 1 + dayStartWeek);
     for (let i = 1; i < 8; i++) {
       current.setDate(current.getDate() + 1);
-      const value: string = DateUtil.getNameWeekday(current, dayWeekRes);
+      let value: string = '';
+      try {
+        // Get the name of the day of the week for the specified date.
+        value = DateUtil.formatDateTime(current, { weekday: dayWeekRes }, locale || undefined);
+      } catch (e) {
+        console.error(e);
+        value = DateUtil.formatDateTime(current, { weekday: dayWeekRes });
+      }
       const dayWeek: number = current.getDay();
-      const name: string = sizeDayWeek > 0 ? value.substring(0, sizeDayWeek) : value;
+      const name: string = StringUtil.camelize(sizeDayWeek > 0 ? value.substring(0, sizeDayWeek) : value);
       result.push({ name, dayWeek, isDayoff: dayWeek == 0 || dayWeek == 6 });
     }
     return result;
@@ -237,6 +264,14 @@ export class GlnCalendarUtil {
   public static checkYearMonthDayAsDate(year: number, month: number, day: number): boolean {
     const date: Date = new Date(year, month, day, 0, 0, 0, 0);
     return date.getFullYear() === year && date.getMonth() === month && date.getDate() === day;
+  }
+  public static getLastDayOfMonth(year: number, month: number): Date {
+    const date: Date = new Date(year, month + 1, 1, 0, 0, 0, 0);
+    return DateUtil.addDay(date, -1);
+  }
+  public static getDateByItsDetails(year: number, month: number, day: number): Date {
+    const isCorrectYearMonthDay: boolean = GlnCalendarUtil.checkYearMonthDayAsDate(year, month, day);
+    return isCorrectYearMonthDay ? new Date(year, month, day, 0, 0, 0, 0) : GlnCalendarUtil.getLastDayOfMonth(year, month);
   }
 
   public static getPeriodLimits(yearsPerPage: number, yearMin: number, yearMax: number): { start: number; finish: number } {
@@ -317,19 +352,5 @@ export class GlnCalendarUtil {
       }
     }
     return result;
-  }
-  public static isMoreMinDate(date: Date, minDate: Date | null | undefined): boolean {
-    const currYear: number = date.getFullYear();
-    const minYear: number = (minDate || date).getFullYear();
-    const currMonth: number = date.getMonth();
-    const minMonth: number = (minDate || date).getMonth();
-    return minYear < currYear || (minYear === currYear && minMonth <= currMonth);
-  }
-  public static isLessMaxDate(date: Date, maxDate: Date | null | undefined): boolean {
-    const currYear: number = date.getFullYear();
-    const maxYear: number = (maxDate || date).getFullYear();
-    const currMonth: number = date.getMonth();
-    const maxMonth: number = (maxDate || date).getMonth();
-    return currYear < maxYear || (currYear === maxYear && currMonth <= maxMonth);
   }
 }
