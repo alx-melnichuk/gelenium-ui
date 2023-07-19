@@ -28,10 +28,6 @@ export class DateUtil {
     const week = Math.ceil(((date.getTime() - onejan.getTime()) / 86400000 + onejan.getDay() + 1) / 7);
     return week;
   }
-  /** Get the name of the year for the specified date. */
-  public static getYearName(date: Date, year?: 'numeric' | '2-digit' | undefined): string {
-    return new Intl.DateTimeFormat('default', { year: year }).format(date);
-  }
   public static convertMonthFormat(month: string | undefined): 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined {
     let result: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined;
     if (!!month) {
@@ -40,14 +36,26 @@ export class DateUtil {
     }
     return result;
   }
-  /** Get the name of the month for the specified date. */
-  public static getMonthName(date: Date, month?: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined): string {
-    return new Intl.DateTimeFormat('default', { month: month }).format(date);
+  /** Get date information in the specified format. */
+  /*interface DateTimeFormatOptions {
+      localeMatcher?: "best fit" | "lookup" | undefined;
+      weekday?: "long" | "short" | "narrow" | undefined;
+      era?: "long" | "short" | "narrow" | undefined;
+      year?: "numeric" | "2-digit" | undefined;
+      month?: "numeric" | "2-digit" | "long" | "short" | "narrow" | undefined;
+      day?: "numeric" | "2-digit" | undefined;
+      hour?: "numeric" | "2-digit" | undefined;
+      minute?: "numeric" | "2-digit" | undefined;
+      second?: "numeric" | "2-digit" | undefined;
+      timeZoneName?: "short" | "long" | "shortOffset" | "longOffset" | "shortGeneric" | "longGeneric" | undefined;
+      formatMatcher?: "best fit" | "basic" | undefined;
+      hour12?: boolean | undefined;
+      timeZone?: string | undefined;
+  }*/
+  public static formatDateTime(d: Date, options: Intl.DateTimeFormatOptions | undefined, locales?: string | string[] | undefined): string {
+    return new Intl.DateTimeFormat(locales || 'default', options).format(d);
   }
-  /** Get the name of the day of the week for the specified date. */
-  public static getNameWeekday(date: Date, weekday?: 'long' | 'short' | 'narrow' | undefined): string {
-    return new Intl.DateTimeFormat('default', { weekday: weekday }).format(date);
-  }
+
   /** Add "delta" years for the specified date. */
   public static addYear(d: Date, delta: number = 1): Date {
     return new Date(d.getFullYear() + delta, d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
