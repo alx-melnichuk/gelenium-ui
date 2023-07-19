@@ -51,10 +51,10 @@
       glncn-nav
       class="gln-calendar-nav gln-calendar-prev"
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
-      [attr.disabled]="isDisabledVal || isReadOnlyVal
-        || (viewMode === VIEW_DAY && !isEnabledPrevViewDay())
+      [attr.disabled]="isDisabledVal || isReadOnlyVal || !isEnabledPrev()
+        
         || (viewMode === VIEW_YEAR && !isEnabledPrevViewYear())
-        || (viewMode === VIEW_MONTH && false && !isEnabledPrevViewMonth())
+
         ? '' : undefined"
       (click)="prevPeriod(getPeriodByViewMode(viewMode))">
       <svg glncn-icon
@@ -72,10 +72,10 @@
       glncn-nav
       class="gln-calendar-nav gln-calendar-next"
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
-      [attr.disabled]="isDisabledVal || isReadOnlyVal
-        || (viewMode === VIEW_DAY && !isEnabledNextViewDay())
+      [attr.disabled]="isDisabledVal || isReadOnlyVal || !isEnabledNext()
+        
         || (viewMode === VIEW_YEAR && !isEnabledNextViewYear())
-        || (viewMode === VIEW_MONTH && false && !isEnabledNextViewMonth())
+
         ? '' : undefined"
       (click)="nextPeriod(getPeriodByViewMode(viewMode))">
       <svg glncn-icon
