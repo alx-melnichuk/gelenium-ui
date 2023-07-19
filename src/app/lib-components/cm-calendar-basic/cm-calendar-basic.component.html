@@ -49,6 +49,9 @@ public model01: Date | null = new Date();</pre>
   -
   <label><input type="checkbox"
       (change)="isRowsByYears01a=!isRowsByYears01a" />RowsByYears</label>
+  -
+  <label><input type="checkbox"
+      (change)="isLocale01a=!isLocale01a" />Locale 'fr-FR'</label>
 </section>
 
 <section mr-vr>
@@ -67,12 +70,13 @@ public model01: Date | null = new Date();</pre>
 <section>
   -
   <label><input type="checkbox"
-      (change)="isMinDate01a=!isMinDate01a" />MinDate {{ isMinDate01a ? minDate.toString().substring(4, 33) :
+      (change)="isMinDate01a=!isMinDate01a" />MinDate {{ isMinDate01a
+    ? '"' +minDate.toString().substring(4, 31)+'"' :
     ''}}</label>
   -
   <label><input type="checkbox"
-      (change)="isMaxDate01a=!isMaxDate01a" />MaxDate {{ isMaxDate01a ? maxDate.toString().substring(4, 33) :
-    ''}}</label>
+      (change)="isMaxDate01a=!isMaxDate01a" />MaxDate {{ isMaxDate01a
+    ? '"' + maxDate.toString().substring(4, 31)+'"' : ''}}</label>
 </section>
 
 <div class="app-group">
@@ -116,6 +120,7 @@ public model01: Date | null = new Date();</pre>
         [rowsByYears]="isConfig01a ? undefined : (isRowsByYears01a ? 4 : undefined)"
         [minDate]="isMinDate01a ? minDate : undefined"
         [maxDate]="isMaxDate01a ? maxDate : undefined"
+        [locale]="isLocale01a ? 'fr-FR' : undefined"
         (change2)="value01a=$event">
       </gln-calendar>
 

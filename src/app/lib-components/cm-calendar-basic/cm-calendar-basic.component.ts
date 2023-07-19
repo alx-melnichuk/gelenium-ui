@@ -37,6 +37,7 @@ export class CmCalendarBasicComponent {
   isRowsByYears01a = false;
   isWeekNumber01a = false;
   isTwoDigitDay01a = false;
+  isLocale01a = false;
 
   isConfig01a = false;
   config01a = {
