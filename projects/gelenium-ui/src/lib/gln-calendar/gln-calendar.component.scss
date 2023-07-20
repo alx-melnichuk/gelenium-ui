@@ -44,6 +44,8 @@ gln-calendar {
 
   --glncn--today-def-br-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.8);
 
+  --glncn--curr-def-br-cl: hsla(var(--gln-success-h), var(--gln-success-s), var(--gln-success-l), 0.9); // TODO ??
+
   --glncn--slct-def-cl   : hsl(var(--glncn--default-bg-h), var(--glncn--default-bg-s), var(--glncn--default-bg-l));
 
   --glncn--slct-def-bg-cl: hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l));
@@ -327,6 +329,7 @@ gln-calendar {
     --glncn--act-off-cl: var(--glncn-def-act-off-cl , var(--glncn--dayoff-def-cl)); // 1.0+
     --glncn--psv-off-cl : var(--glncn-def-psv-off-cl  , var(--glncn--dayoff-psv-def-cl)); // 0.6+
     --glncn--today-br-cl: var(--glncn-def-today-br-cl , var(--glncn--today-def-br-cl));
+    --glncn--curr-br-cl: var(--glncn--curr-def-br-cl); // TODO ?
   }
   &[dis] [glncn-tint] {
     --glncn--act-cl   : var(--glncn-dis-act-cl   , var(--glncn--sndr-dis-cl)); // 0.8+
@@ -339,6 +342,7 @@ gln-calendar {
     --glncn--act-off-cl: var(--glncn-dis-act-off-cl, var(--glncn--dayoff-dis-cl)); // 0.8+
     --glncn--psv-off-cl : var(--glncn-dis-psv-off-cl , var(--glncn--dayoff-psv-dis-cl)); // 0.5+
     --glncn--today-br-cl: var(--glncn-dis-today-br-cl, var(--glncn--sndr-dis-cl));
+    --glncn--curr-br-cl: var(--glncn--curr-def-br-cl); // TODO ?
   }
   [glncn-tint] {
     &:not([glncn-today]) {
@@ -348,6 +352,9 @@ gln-calendar {
       border-width: var(--glncn-today-br-wd, 1px);
       border-style: var(--glncn-today-br-st, solid);
       border-color: var(--glncn-today-br-cl, var(--glncn--today-br-cl));
+    }
+    &[glncn-curr] {
+      outline: 1px solid var(--glncn--curr-br-cl);
     }
     &[glncn-slct] {
       background-color: var(--glncn--slct-bg-cl);
