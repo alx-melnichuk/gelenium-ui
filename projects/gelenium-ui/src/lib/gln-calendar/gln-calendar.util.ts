@@ -28,27 +28,6 @@ export const CALENDAR_TINT_ACTIVE = 'act';
 export const CALENDAR_TINT_PASSIVE = 'psv';
 export const CALENDAR_TINT_SELECTED = 'slct';
 
-// -- Interfaces for the mode "view day" --
-
-export interface CalendarDayCellRow {
-  cellList: CalendarDayCell[];
-  weekNumberObj: { weekNumber: number };
-}
-
-export interface CalendarDayCell {
-  day: number;
-  dayWeek: number;
-  isCurrent?: boolean | undefined;
-  isDayoff?: boolean | undefined;
-  isDisabled?: boolean | undefined;
-  isToday?: boolean | undefined;
-  label: string;
-  month: number;
-  note: string;
-  state: CALENDAR_TINT_STATE;
-  year: number;
-}
-
 // -- Interfaces for the mode "view month", "view year" --
 
 export interface CalendarCell {
@@ -56,8 +35,29 @@ export interface CalendarCell {
   isDisabled?: boolean | undefined;
   isToday?: boolean | undefined;
   label: string;
-  value: number;
   state: CALENDAR_TINT_STATE;
+  value: number;
+}
+
+// -- Interfaces for the mode "view day" --
+
+export interface CalendarDayCellRow {
+  cellList: CalendarDayCell[];
+  weekNumberObj: { weekNumber: number };
+}
+
+export interface CalendarDayCell extends CalendarCell {
+  // day: number;  value
+  dayWeek: number;
+  // isCurrent?: boolean | undefined;
+  isDayoff?: boolean | undefined;
+  // isDisabled?: boolean | undefined;
+  // isToday?: boolean | undefined;
+  // label: string;
+  month: number;
+  // state: CALENDAR_TINT_STATE;
+  value: number;
+  year: number;
 }
 
 export class GlnCalendarUtil {
@@ -134,7 +134,7 @@ export class GlnCalendarUtil {
       hasSelected = !hasSelected && isSelected ? true : hasSelected;
       const state = isSelected ? CALENDAR_TINT_SELECTED : CALENDAR_TINT_ACTIVE;
 
-      result.push({ isCurrent, isDisabled, isToday, label, value: year, state });
+      result.push({ isCurrent, isDisabled, isToday, label, state, value: year });
       year++;
     }
     return result;
@@ -193,7 +193,7 @@ export class GlnCalendarUtil {
       hasSelected = !hasSelected && isSelected ? true : hasSelected;
 
       const state = isSelected ? CALENDAR_TINT_SELECTED : CALENDAR_TINT_ACTIVE;
-      result.push({ isCurrent, isDisabled, isToday, label, value: month, state });
+      result.push({ isCurrent, isDisabled, isToday, label, state, value: month });
     }
     return result;
   }
@@ -288,12 +288,24 @@ export class GlnCalendarUtil {
       const isToday: boolean | undefined = !hasToday && year === todayYear && month === todayMonth && day === todayDay ? true : undefined;
       hasToday = !hasToday && isToday ? true : hasToday;
       const label: string = GlnCalendarUtil.getLabelByDate(itemDate) || '';
-      const note: string = ('0' + day.toString()).slice(-2);
+
       const isSelected: boolean | undefined = !hasSelected && year === selectedYear && month === selectedMonth && day === selectedDay;
       hasSelected = !hasSelected && isSelected ? true : hasSelected;
       const state = isSelected ? CALENDAR_TINT_SELECTED : month === currMonth ? CALENDAR_TINT_ACTIVE : CALENDAR_TINT_PASSIVE;
 
-      calendarRow?.cellList.push({ day, dayWeek, isCurrent, isDayoff, isDisabled, isToday, label, month, note, state, year });
+      calendarRow?.cellList.push({ dayWeek, isCurrent, isDayoff, isDisabled, isToday, label, month, state, value: day, year });
+      //       // day: number;  value
+      // dayWeek: number;
+      // // isCurrent?: boolean | undefined;
+      // isDayoff?: boolean | undefined;
+      // // isDisabled?: boolean | undefined;
+      // // isToday?: boolean | undefined;
+      // // label: string;
+      // month: number;
+      // // state: CALENDAR_TINT_STATE;
+      // value: number;
+      // year: number;
+
       idx++;
     }
     return result;
