@@ -25,8 +25,8 @@ export class CmCalendarBasicComponent {
 
   public selectedDate: Date = this.getSelectedDate();
 
-  public value01a: Date | null = new Date(this.selectedDate); // new Date(2022, 6, 10); // new Date(this.selectedDate);
-  public value01b: Date | null = new Date(this.selectedDate);
+  public value01a: Date | null | undefined = new Date(this.selectedDate); // new Date(2022, 6, 10); // new Date(this.selectedDate);
+  public value01b: Date | null | undefined = new Date(this.selectedDate);
 
   startDate01a: Date = new Date(2021, 5, 8);
   isDisabled01a = false;
