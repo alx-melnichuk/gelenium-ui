@@ -354,7 +354,8 @@ gln-calendar {
       border-color: var(--glncn-today-br-cl, var(--glncn--today-br-cl));
     }
     &[glncn-curr] {
-      outline: 1px solid var(--glncn--curr-br-cl);
+      // outline: 1px solid var(--glncn--curr-br-cl);
+      box-shadow: 0px 0px 0px 1px var(--glncn--curr-br-cl);
     }
     &[glncn-slct] {
       background-color: var(--glncn--slct-bg-cl);

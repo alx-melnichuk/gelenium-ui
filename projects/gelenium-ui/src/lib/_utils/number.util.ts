@@ -9,4 +9,7 @@ export class NumberUtil {
     const sizeNum: number = Number.parseInt(size);
     return !Number.isNaN(sizeNum) ? sizeNum : defaultValue;
   }
+  public static getDigit(value: number, size: number = 2): string {
+    return ('0'.repeat(size) + value.toString()).slice(-size);
+  }
 }

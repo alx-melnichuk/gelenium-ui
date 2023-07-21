@@ -13,10 +13,6 @@ export class DateUtil {
     }
     return result;
   }
-  /** Equality of two dates. */
-  public static equality(date1: Date | null | undefined, date2: Date | null | undefined): boolean {
-    return DateUtil.compare(date1, date2) === 0;
-  }
   /** Get the day number of the start of the week by locale. */
   public static getDayStartWeekByLocale(): number {
     const he1: any = new Intl.Locale('default'); // dayStartWeek

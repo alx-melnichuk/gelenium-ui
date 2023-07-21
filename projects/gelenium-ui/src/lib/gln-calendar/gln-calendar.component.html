@@ -256,7 +256,8 @@
         [attr.tabindex]="!isDisabledVal && dayCell.state == STATE_SLCT ? 0 : -1"
         [attr.data-label]="dayCell.label"
         (click)="clickSelectItem(dayCell)">
-        {{ isHideOldDaysVal && dayCell.state == STATE_PSV ? '' : (isTwoDigitDayVal ? dayCell.note : dayCell.day) }}
+        {{ isHideOldDaysVal && dayCell.state == STATE_PSV
+        ? '' : (isTwoDigitDayVal ? get2Digit(dayCell.value) : dayCell.value) }}
       </button>
     </ng-container>
 
