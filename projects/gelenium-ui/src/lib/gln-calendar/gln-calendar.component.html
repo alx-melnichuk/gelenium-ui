@@ -95,11 +95,11 @@
         glncn-center
         glncn-cage
         glncn-tint
-        [attr.glncn-psv]="isHideDayoffVal || !cage.isDayoff ? '' : undefined"
-        [attr.glncn-psv-off]="!isHideDayoffVal && cage.isDayoff ? '' : undefined"
+        [attr.glncn-psv]="isHideDayoffVal || !isDayoff(cage.dayWeek) ? '' : undefined"
+        [attr.glncn-psv-off]="!isHideDayoffVal && isDayoff(cage.dayWeek) ? '' : undefined"
         [ngClass]="['gln-calendar-cage'
           , ('dayWeek' + cage.dayWeek)
-          , (!isHideDayoffVal && cage.isDayoff ? 'gln-dayoff' : '')]">
+          , (!isHideDayoffVal && isDayoff(cage.dayWeek) ? 'gln-dayoff' : '')]">
         {{ cage.name }}
       </div>
     </div>
@@ -156,7 +156,7 @@
             , (monthCell.state == STATE_SLCT ? 'gln-selected' : '')
             , (monthCell.isToday ? 'gln-today' : '')
             , (monthCell.isCurrent ? 'gln-current' : '')
-            ]"
+            ].concat(getClassesByCell(monthCell, 'month'))"
           (click)="clickMonthCell(monthCell.value)">
           {{ monthCell.label }}
         </button>
@@ -184,10 +184,9 @@
             , (yearCell.state == STATE_SLCT ? 'gln-selected' : '')
             , (yearCell.isToday ? 'gln-today' : '')
             , (yearCell.isCurrent ? 'gln-current' : '')
-            ]"
+            ].concat(getClassesByCell(yearCell, 'year'))"
           [attr.data-label]="yearCell.label"
           (click)="clickYearCell(yearCell.value)">
-          <!-- [attr.tabindex]="!isDisabledVal && (yearCell.value === frameYearValue || yearCell.value === markedYear)? 0 : -1" -->
           {{ yearCell.value }}
         </button>
       </div>
@@ -236,10 +235,10 @@
         glncn-item
         glncn-tint
         glncn-crs-pnt
-        [attr.glncn-psv]="dayCell.state == STATE_PSV && (isHideDayoffVal || !dayCell.isDayoff) ? '' : undefined"
-        [attr.glncn-psv-off]="dayCell.state == STATE_PSV && !isHideDayoffVal && dayCell.isDayoff ? '' : undefined"
-        [attr.glncn-act]="dayCell.state == STATE_ACT && (isHideDayoffVal || !dayCell.isDayoff) ? '' : undefined"
-        [attr.glncn-act-off]="dayCell.state == STATE_ACT && !isHideDayoffVal && dayCell.isDayoff ? '' : undefined"
+        [attr.glncn-psv]="dayCell.state == STATE_PSV && (isHideDayoffVal || !isDayoff(dayCell.dayWeek)) ? '' : undefined"
+        [attr.glncn-psv-off]="dayCell.state == STATE_PSV && !isHideDayoffVal && isDayoff(dayCell.dayWeek) ? '' : undefined"
+        [attr.glncn-act]="dayCell.state == STATE_ACT && (isHideDayoffVal || !isDayoff(dayCell.dayWeek)) ? '' : undefined"
+        [attr.glncn-act-off]="dayCell.state == STATE_ACT && !isHideDayoffVal && isDayoff(dayCell.dayWeek) ? '' : undefined"
         [attr.glncn-slct]="dayCell.state == STATE_SLCT ? '' : undefined"
         [attr.glncn-today]="dayCell.isToday ? '' : undefined"
         [attr.glncn-curr]="dayCell.isCurrent ? '' : undefined"
@@ -248,8 +247,9 @@
           , (dayCell.state == STATE_PSV ? 'gln-passive' : '')
           , (dayCell.state == STATE_ACT ? 'gln-active' : '')
           , (dayCell.state == STATE_SLCT ? 'gln-selected' : '')
-          , (!isHideDayoffVal && dayCell.isDayoff ? 'gln-dayoff' : '')
-          , (dayCell.isToday ? 'gln-today' : '')]"
+          , (!isHideDayoffVal && isDayoff(dayCell.dayWeek) ? 'gln-dayoff' : '')
+          , (dayCell.isToday ? 'gln-today' : '')
+          ].concat(getClassesByCell(dayCell, 'day'))"
         [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && dayCell.state == STATE_PSV)
           || dayCell.isDisabled
           ? '' : undefined"

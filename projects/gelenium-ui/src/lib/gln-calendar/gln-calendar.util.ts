@@ -17,7 +17,6 @@ export const CALENDAR_PERIOD_YEARS = 'period_years';
 export interface CalendarDayName {
   name: string;
   dayWeek: number;
-  isDayoff: boolean | undefined;
 }
 
 export const CALENDAR_FORMAT_BY_MONTH_DEFAULT = 'short';
@@ -31,6 +30,7 @@ export const CALENDAR_TINT_SELECTED = 'slct';
 // -- Interfaces for the mode "view month", "view year" --
 
 export interface CalendarCell {
+  date: Date;
   isCurrent?: boolean | undefined;
   isDisabled?: boolean | undefined;
   isToday?: boolean | undefined;
@@ -50,7 +50,6 @@ export interface CalendarDayCell extends CalendarCell {
   // day: number;  value
   dayWeek: number;
   // isCurrent?: boolean | undefined;
-  isDayoff?: boolean | undefined;
   // isDisabled?: boolean | undefined;
   // isToday?: boolean | undefined;
   // label: string;
@@ -134,7 +133,7 @@ export class GlnCalendarUtil {
       hasSelected = !hasSelected && isSelected ? true : hasSelected;
       const state = isSelected ? CALENDAR_TINT_SELECTED : CALENDAR_TINT_ACTIVE;
 
-      result.push({ isCurrent, isDisabled, isToday, label, state, value: year });
+      result.push({ date, isCurrent, isDisabled, isToday, label, state, value: year });
       year++;
     }
     return result;
@@ -193,7 +192,7 @@ export class GlnCalendarUtil {
       hasSelected = !hasSelected && isSelected ? true : hasSelected;
 
       const state = isSelected ? CALENDAR_TINT_SELECTED : CALENDAR_TINT_ACTIVE;
-      result.push({ isCurrent, isDisabled, isToday, label, state, value: month });
+      result.push({ date, isCurrent, isDisabled, isToday, label, state, value: month });
     }
     return result;
   }
@@ -251,31 +250,31 @@ export class GlnCalendarUtil {
     const maxMonth: number | null = maxDate?.getMonth() || null;
     const maxDay: number | null = maxDate?.getDate() || null;
 
-    const itemDate: Date = new Date(current.getFullYear(), current.getMonth(), 1, 0, 0, 0, 0);
-    const currMonth: number = itemDate.getMonth();
+    const innerDate: Date = new Date(current.getFullYear(), current.getMonth(), 1, 0, 0, 0, 0);
+    const currMonth: number = innerDate.getMonth();
     // Date.getDay() 0-Sun, 1-Mon, 2-Tue, 3-Wed, 4-Thu, 5-Fri, 6-Sat;
-    const dayWeek1: number = itemDate.getDay();
-    itemDate.setDate(dayStartWeek !== dayWeek1 ? dayStartWeek - dayWeek1 : -7);
+    const dayWeek1: number = innerDate.getDay();
+    innerDate.setDate(dayStartWeek !== dayWeek1 ? dayStartWeek - dayWeek1 : -7);
     let hasSelected: boolean = selected == null;
     let hasToday: boolean = false;
     let hasCurrent: boolean = false;
     let calendarRow: CalendarDayCellRow | undefined;
     let idx: number = 0;
     while (idx < 42) {
-      itemDate.setDate(itemDate.getDate() + 1);
-      const year = itemDate.getFullYear();
-      const month = itemDate.getMonth();
-      const day = itemDate.getDate();
-      const dayWeek = itemDate.getDay();
+      innerDate.setDate(innerDate.getDate() + 1);
+      const date: Date = new Date(innerDate.getFullYear(), innerDate.getMonth(), innerDate.getDate(), 0, 0, 0, 0);
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      const day = date.getDate();
+      const dayWeek = date.getDay();
 
       if (dayStartWeek === dayWeek) {
-        calendarRow = { cellList: [], weekNumberObj: { weekNumber: DateUtil.getWeekNumber(itemDate) } };
+        calendarRow = { cellList: [], weekNumberObj: { weekNumber: DateUtil.getWeekNumber(date) } };
         result.push(calendarRow);
       }
       const isCurrent: boolean | undefined =
         !hasCurrent && year === currentYear && month === currentMonth && day === currentDay ? true : undefined;
       hasCurrent = !hasCurrent && isCurrent ? true : hasCurrent;
-      const isDayoff = dayWeek == 0 || dayWeek == 6 ? true : undefined;
       let isMinDate: boolean = false;
       if (minYear !== null && minMonth !== null && minDay !== null) {
         isMinDate = year < minYear || (year === minYear && (month < minMonth || (month === minMonth && day < minDay)));
@@ -287,17 +286,16 @@ export class GlnCalendarUtil {
       const isDisabled: boolean | undefined = isMinDate || isMaxDate ? true : undefined;
       const isToday: boolean | undefined = !hasToday && year === todayYear && month === todayMonth && day === todayDay ? true : undefined;
       hasToday = !hasToday && isToday ? true : hasToday;
-      const label: string = GlnCalendarUtil.getLabelByDate(itemDate) || '';
+      const label: string = GlnCalendarUtil.getLabelByDate(date) || '';
 
       const isSelected: boolean | undefined = !hasSelected && year === selectedYear && month === selectedMonth && day === selectedDay;
       hasSelected = !hasSelected && isSelected ? true : hasSelected;
       const state = isSelected ? CALENDAR_TINT_SELECTED : month === currMonth ? CALENDAR_TINT_ACTIVE : CALENDAR_TINT_PASSIVE;
 
-      calendarRow?.cellList.push({ dayWeek, isCurrent, isDayoff, isDisabled, isToday, label, month, state, value: day, year });
+      calendarRow?.cellList.push({ date, dayWeek, isCurrent, isDisabled, isToday, label, month, state, value: day, year });
       //       // day: number;  value
       // dayWeek: number;
       // // isCurrent?: boolean | undefined;
-      // isDayoff?: boolean | undefined;
       // // isDisabled?: boolean | undefined;
       // // isToday?: boolean | undefined;
       // // label: string;
@@ -342,7 +340,7 @@ export class GlnCalendarUtil {
       }
       const dayWeek: number = current.getDay();
       const name: string = StringUtil.camelize(sizeDayWeek > 0 ? value.substring(0, sizeDayWeek) : value);
-      result.push({ name, dayWeek, isDayoff: dayWeek == 0 || dayWeek == 6 });
+      result.push({ name, dayWeek });
     }
     return result;
   }

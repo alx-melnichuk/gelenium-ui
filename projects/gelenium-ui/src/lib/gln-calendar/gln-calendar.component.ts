@@ -91,6 +91,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public colsByMonths: number | string | null | undefined; // [1 - 12] default 3
   @Input()
+  public dateClasses = (date: Date, view: string, currentDate: Date): string[] => [];
+  @Input()
   public formatByMonths: string | null | undefined; // 'numeric'(6),'2-digit'(06),'long'(June),'short'(Jun),'narrow'(J)
   @Input()
   public formatMonth: string | null | undefined; // 'numeric'(6),'2-digit'(06),'long'(June),'short'(Jun),'narrow'(J)
@@ -481,6 +483,12 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   }
   public get2Digit(value: number): string {
     return NumberUtil.getDigit(value, 2);
+  }
+  public isDayoff(dayWeek: number): boolean {
+    return dayWeek == 0 || dayWeek == 6;
+  }
+  public getClassesByCell(cell: CalendarCell, view: string): string[] {
+    return this.dateClasses != null ? this.dateClasses(new Date(cell.date), view, new Date(this.currDate)) : [];
   }
   public getPeriodByViewMode(viewMode: string): string {
     let result: string = '';
