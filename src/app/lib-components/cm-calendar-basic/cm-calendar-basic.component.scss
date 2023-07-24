@@ -10,4 +10,10 @@ app-cm-calendar-basic {
   .cnbs-mb {
     margin-bottom: 0.5em;
   }
+
+  .gln-calendar button {
+    &.cnbs-demo1 {
+      background: orange;
+    }
+  }
 }

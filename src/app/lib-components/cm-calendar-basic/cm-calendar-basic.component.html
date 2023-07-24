@@ -119,6 +119,7 @@ public model01: Date | null = new Date();</pre>
         [minDate]="isMinDate01a ? minDate : undefined"
         [maxDate]="isMaxDate01a ? maxDate : undefined"
         [locale]="isLocale01a ? 'fr-FR' : undefined"
+        [dateClasses]="dateClasses01a"
         (change2)="value01a=$event?.date">
       </gln-calendar>
 

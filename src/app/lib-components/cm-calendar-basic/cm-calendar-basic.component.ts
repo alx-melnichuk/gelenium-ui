@@ -61,6 +61,24 @@ export class CmCalendarBasicComponent {
   minDate: Date = new Date(2023, 2, 10);
   maxDate: Date = new Date(2024, 2, 10);
 
+  dateClasses01a = (date: Date, view: string, currentDate: Date): string[] => {
+    const result: string[] = [];
+    const day: number = date.getDate();
+    const month: number = date.getMonth();
+    const year: number = date.getFullYear();
+    const currentMonth: number = currentDate.getMonth();
+    // const currentYear: number = currentDate.getFullYear();
+    if ('day' === view && month == currentMonth && (day === 1 || day === 20)) {
+      result.push('cnbs-demo1');
+    } else if ('month' === view && (month === 1 || month === 4)) {
+      result.push('cnbs-demo1');
+    } else if ('year' === view && (year === 2025 || year === 2021)) {
+      result.push('cnbs-demo1');
+    }
+
+    return result;
+  };
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
