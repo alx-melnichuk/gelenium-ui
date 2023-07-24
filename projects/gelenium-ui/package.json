@@ -17,7 +17,8 @@
     "angular-material",
     "material-design",
     "angular-ui-component",
-    "angular14"
+    "angular14",
+    "scalable UI components"
   ],
   "license": "MIT",
   "name": "gelenium-ui",
