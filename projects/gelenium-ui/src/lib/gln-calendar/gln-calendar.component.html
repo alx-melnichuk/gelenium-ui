@@ -156,7 +156,7 @@
             , (monthCell.state == STATE_SLCT ? 'gln-selected' : '')
             , (monthCell.isToday ? 'gln-today' : '')
             , (monthCell.isCurrent ? 'gln-current' : '')
-            ].concat(getClassesByCell(monthCell, 'month'))"
+            ].concat(monthCell.classes)"
           (click)="clickMonthCell(monthCell.value)">
           {{ monthCell.label }}
         </button>
@@ -184,7 +184,7 @@
             , (yearCell.state == STATE_SLCT ? 'gln-selected' : '')
             , (yearCell.isToday ? 'gln-today' : '')
             , (yearCell.isCurrent ? 'gln-current' : '')
-            ].concat(getClassesByCell(yearCell, 'year'))"
+            ].concat(yearCell.classes)"
           [attr.data-label]="yearCell.label"
           (click)="clickYearCell(yearCell.value)">
           {{ yearCell.value }}
@@ -229,7 +229,7 @@
       [ngTemplateOutletContext]="dataWeekNumberObj">
     </ng-container>
 
-    <ng-container *ngFor="let dayCell of dataCells; trackBy: trackByDayCell;">
+    <ng-container *ngFor="let dayCell of dataCells; trackBy: trackByCell;">
       <button type="button"
         glncn-center
         glncn-item
@@ -249,7 +249,7 @@
           , (dayCell.state == STATE_SLCT ? 'gln-selected' : '')
           , (!isHideDayoffVal && isDayoff(dayCell.dayWeek) ? 'gln-dayoff' : '')
           , (dayCell.isToday ? 'gln-today' : '')
-          ].concat(getClassesByCell(dayCell, 'day'))"
+          ].concat(dayCell.classes)"
         [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && dayCell.state == STATE_PSV)
           || dayCell.isDisabled
           ? '' : undefined"
