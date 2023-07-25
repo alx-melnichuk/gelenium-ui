@@ -112,7 +112,8 @@ public model01: Date | null = new Date();</pre>
         [config]="config01a"
         [view]="'year'">
       </gln-calendar> -->
-      <gln-calendar [value]="value01a"
+
+      <!-- <gln-calendar [value]="value01a"
         [isTwoDigitDay]="isTwoDigitDay01a"
         [colsByYears]="isConfig01a ? undefined : (isColsByYears01a ? 5 : undefined)"
         [rowsByYears]="isConfig01a ? undefined : (isRowsByYears01a ? 4 : undefined)"
@@ -121,6 +122,12 @@ public model01: Date | null = new Date();</pre>
         [locale]="isLocale01a ? 'fr-FR' : undefined"
         [dateClasses]="dateClasses01a"
         (change2)="value01a=$event?.date">
+      </gln-calendar> -->
+
+      <gln-calendar [value]="value01a"
+        [config]="isConfig01a ? config01b : undefined"
+        [minDate]="isMinDate01a ? minDate : undefined"
+        [maxDate]="isMaxDate01a ? maxDate : undefined">
       </gln-calendar>
 
       <!-- <gln-calendar [value]="value01a"
