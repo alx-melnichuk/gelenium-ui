@@ -25,6 +25,7 @@ export class CmCalendarAttributesComponent {
 
   public selectedDate: Date = this.getSelectedDate();
   // Part 1
+
   public value02a: Date | null = new Date(this.selectedDate);
   public value02b: Date | null = new Date(this.selectedDate);
   public value02c: Date | null = new Date(this.selectedDate);
@@ -49,6 +50,45 @@ export class CmCalendarAttributesComponent {
   public value02t: Date | null = new Date(this.selectedDate);
   public value02u: Date | null = new Date(this.selectedDate);
   public value02v: Date | null = new Date(this.selectedDate);
+  // Part 6
+  public value02w: Date | null = new Date(this.selectedDate);
+  public dateClasses02w = (date: Date, view: string, currentDate: Date): string[] => {
+    const result: string[] = [];
+    const day: number = date.getDate();
+    const month: number = date.getMonth();
+    const year: number = date.getFullYear();
+    const currentMonth: number = currentDate.getMonth();
+    if ('day' === view && month == currentMonth && (day === 1 || day === 20)) {
+      console.log(`view='day'   date="${date.toDateString()}" cnat6-demo1`);
+      result.push('cnat6-demo1');
+    } else if ('month' === view && (month === 1 || month === 4)) {
+      console.log(`view='month' date="${date.toDateString()}" cnat6-demo1`);
+      result.push('cnat6-demo1');
+    } else if ('year' === view && (year === 2025 || year === 2021)) {
+      console.log(`view='year'  date="${date.toDateString()}" cnat6-demo1`);
+      result.push('cnat6-demo1');
+    }
+    return result;
+  };
+  public value02x: Date | null = new Date(this.selectedDate);
+  dateDisabled02x = (date: Date, view: string, currentDate: Date): boolean => {
+    let result: boolean = false;
+    const dayWeek: number = date.getDay();
+    const month: number = date.getMonth();
+    const year: number = date.getFullYear();
+    const currentMonth: number = currentDate.getMonth();
+    if ('day' === view && month == currentMonth && (dayWeek === 0 || dayWeek === 1)) {
+      console.log(`view='day'   date="${date.toDateString()}" isDisabled`); // #
+      result = true;
+    } else if ('month' === view && (month === 1 || month === 4)) {
+      console.log(`view='month' date="${date.toDateString()}" isDisabled`); // #
+      result = true;
+    } else if ('year' === view && (year === 2025 || year === 2021)) {
+      console.log(`view='year'  date="${date.toDateString()}" isDisabled`); // #
+      result = true;
+    }
+    return result;
+  };
 
   // Demo
   public value02z: Date | null = new Date(this.selectedDate);
