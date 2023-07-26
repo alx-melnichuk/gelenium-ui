@@ -25,7 +25,6 @@ export class CmCalendarAttributesComponent {
 
   public selectedDate: Date = this.getSelectedDate();
   // Part 1
-
   public value02a: Date | null = new Date(this.selectedDate);
   public value02b: Date | null = new Date(this.selectedDate);
   public value02c: Date | null = new Date(this.selectedDate);
