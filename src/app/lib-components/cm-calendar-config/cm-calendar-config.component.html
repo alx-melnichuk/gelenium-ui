@@ -110,6 +110,54 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
+      <td><code>dateClasses?:<br/>
+        GlnCalendarCellClassesFun<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          A function that can be used to add custom CSS classes to dates.
+          <code><pre source="ts">
+dateClasses1 = (
+  date: Date, view: string, currentDate: Date
+): string[] => &#123;
+  const result: string[] = [];
+  const day: number = date.getDate();
+  if ('day' === view
+    && date.getMonth() === currentDate.getMonth()
+    && (day === 1 || day === 20)) &#123;
+    result.push('cnat6-demo1');
+  &#125;
+  return result;
+&#125;;</pre>
+          </code>
+          (default = undefined;)
+        </span>
+        <br /><span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>dateDisabled?:<br/>
+        GlnCalendarCellDisabledFun<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          A function that can be used to disable a date based on a custom condition.
+          <code><pre source="ts">
+dateDisabled1 = (
+  date: Date, view: string, currentDate: Date
+): boolean => &#123;
+  const dayWeek: number = date.getDay();
+  return 'day' ==== view
+    && date.getMonth() === currentDate.getMonth()
+    && (dayWeek === 0 || dayWeek === 1);
+&#125;;</pre>
+          </code>
+          (default = undefined;)
+        </span>
+        <br /><span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
       <td><code>formatByMonths?: string<br/>
         &nbsp;&nbsp;| undefined;</code></td>
       <td>
@@ -148,18 +196,18 @@ export class AppComponent &#123;
       </td>
     </tr>
     <tr>
-      <td><code>isHideOldDays?: boolean<br/>
-        &nbsp;&nbsp;| undefined;</code></td>
-      <td>
-        <span>Hide the days of the previous and next months. (default = false;)</span>
-        <br /><span>(optional)</span>
-      </td>
-    </tr>
-    <tr>
       <td><code>isHideDayoff?: boolean<br/>
         &nbsp;&nbsp;| undefined;</code></td>
       <td>
         <span>Hide display of dayoffs in "danger" color. (default = false;)</span>
+        <br /><span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>isHideOldDays?: boolean<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>Hide the days of the previous and next months. (default = false;)</span>
         <br /><span>(optional)</span>
       </td>
     </tr>
@@ -217,6 +265,25 @@ export class AppComponent &#123;
           Specifies the display of the week number.
           (default = false;)
         </span><br />
+        <span>(optional)</span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>locale?: string<br/>
+        &nbsp;&nbsp;| undefined;</code></td>
+      <td>
+        <span>
+          Specifies the value 'locales' for Intl.DateTimeFormat.
+        </span>
+        <br />
+        <span>
+          (default = undefined;) Examples: 'en-US', 'de-DE', 'fr-FR'.
+        </span>
+        <br />
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat">
+          More details: MDN "DateTimeFormat".
+        </a>
+        <br />
         <span>(optional)</span>
       </td>
     </tr>
