@@ -103,9 +103,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public locale: string | null | undefined; // Locale ('en-US', 'de-DE', 'fr-FR') // # TODO ?? no example
   @Input()
-  public maxDate: Date | null | undefined; // The maximum selectable date. // # TODO ?? no example
+  public maxDate: Date | null | undefined; // The maximum selectable date. // # TODO ?? no example, add to config
   @Input()
-  public minDate: Date | null | undefined; // The minimum selectable date. // # TODO ?? no example
+  public minDate: Date | null | undefined; // The minimum selectable date. // # TODO ?? no example, add to config
   @Input()
   public rowsByYears: number | string | null | undefined; // [1 - 12] default 5
   @Input()
