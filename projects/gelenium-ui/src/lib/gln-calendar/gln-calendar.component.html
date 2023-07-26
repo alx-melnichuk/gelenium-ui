@@ -19,10 +19,7 @@
         [attr.tabindex]="!isDisabledVal ? 0 : -1"
         [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
         (click)="switchViewMode()">
-        {{ viewMode === VIEW_DAY ? currMonthStr + ' ' + currYearStr
-        : (viewMode === VIEW_YEAR ? frameYearCells[0].label + ' - ' + frameYearCells[frameYearCells.length - 1].label
-        : (viewMode === VIEW_MONTH ? currYearStr : '') )
-        }}
+        {{ (viewMode === VIEW_MONTH ? '&emsp;' : '') + getCaption(viewMode) }}
       </button>
 
       <button type="button"
@@ -250,10 +247,9 @@
           , (!isHideDayoffVal && isDayoff(dayCell.dayWeek) ? 'gln-dayoff' : '')
           , (dayCell.isToday ? 'gln-today' : '')
           ].concat(dayCell.classes)"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && dayCell.state == STATE_PSV)
-          || dayCell.isDisabled
+        [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && dayCell.state == STATE_PSV) || dayCell.isDisabled
           ? '' : undefined"
-        [attr.tabindex]="!isDisabledVal && dayCell.state == STATE_SLCT ? 0 : -1"
+        [attr.tabindex]="!isDisabledVal && !dayCell.isDisabled && dayCell.isCurrent ? 0 : -1"
         [attr.data-label]="dayCell.label"
         (click)="clickSelectItem(dayCell)">
         {{ isHideOldDaysVal && dayCell.state == STATE_PSV

@@ -1,12 +1,10 @@
 import { DateUtil } from '../_utils/date.util';
 import { StringUtil } from '../_utils/string.util';
 
-import { GlnCalendarCellClassesFun } from './gln-calendar.interface';
+import { GlnCalendarCellClassesFun, GlnCalendarCellDisabledFun } from './gln-calendar.interface';
 
-// export const CALENDAR_YEAR_MIN = 1000;
-// export const CALENDAR_YEAR_MAX = 9999;
-export const CALENDAR_YEAR_MIN = 1955; // 1960; // 1000
-export const CALENDAR_YEAR_MAX = 2115; // 2120; // 2150
+export const CALENDAR_YEAR_MIN = 1900; // 1960; // 1000
+export const CALENDAR_YEAR_MAX = 2100; // 2120; // 2150
 
 export const CALENDAR_VIEW_DAY = 'day';
 export const CALENDAR_VIEW_MONTH = 'month';
@@ -56,6 +54,7 @@ export interface CalendarViewParams {
   maxDate?: Date | null | undefined; // Maximum date.
   locale?: string | null | undefined; // Locale ('en-US', 'de-DE', 'fr-FR')
   dateClasses?: GlnCalendarCellClassesFun | null | undefined;
+  dateDisabled?: GlnCalendarCellDisabledFun | null | undefined;
 }
 
 export class GlnCalendarUtil {
@@ -64,7 +63,7 @@ export class GlnCalendarUtil {
   public static COLS_BY_MONTHS_DEFAULT = 3;
 
   // -- Methods for the mode: "view year", "view month", "view day" --
-  public static getCurrMonthStr(currDate: Date, formatMonth: string | null, locale: string | null): string {
+  public static getActiveMonthStr(currDate: Date, formatMonth: string | null, locale: string | null): string {
     const monthFormat = DateUtil.convertMonthFormat(formatMonth || CALENDAR_MONTH_FORMAT_DEFAULT);
     let monthStr: string = '';
     try {
@@ -76,7 +75,6 @@ export class GlnCalendarUtil {
     }
     return StringUtil.camelize(monthStr);
   }
-
   // -- Methods for the mode "view year" --
   /** Get a grid of years.
    * @param current: Date;                     // Current date.
@@ -109,9 +107,6 @@ export class GlnCalendarUtil {
       const dayWeek = date.getDay();
 
       const classes: string[] = params.dateClasses != null ? params.dateClasses(date, CALENDAR_VIEW_YEAR, current) : [];
-      // #if (classes.length > 0) {
-      // #  console.log(`dateClasses(date, CALENDAR_VIEW_YEAR, current)=${classes}`); //#
-      // #}
 
       let yearStr: string = '';
       try {
@@ -136,7 +131,8 @@ export class GlnCalendarUtil {
         yearCell.isCurrent = true;
       }
 
-      if ((minYear != null && year < minYear) || (maxYear != null && maxYear < year)) {
+      const isDisabled: boolean = params.dateDisabled != null ? params.dateDisabled(date, CALENDAR_VIEW_YEAR, current) : false;
+      if (isDisabled || (minYear != null && year < minYear) || (maxYear != null && maxYear < year)) {
         yearCell.isDisabled = true;
       }
 
@@ -176,9 +172,6 @@ export class GlnCalendarUtil {
       const dayWeek = date.getDay();
 
       const classes: string[] = params.dateClasses != null ? params.dateClasses(date, CALENDAR_VIEW_MONTH, current) : [];
-      // #if (classes.length > 0) {
-      // #  console.log(`dateClasses(date, CALENDAR_VIEW_MONTH, current)=${classes}`); //#
-      // #}
 
       let monthStr: string = '';
       try {
@@ -203,7 +196,9 @@ export class GlnCalendarUtil {
         monthCell.isCurrent = true;
       }
 
+      const isDisabled: boolean = params.dateDisabled != null ? params.dateDisabled(date, CALENDAR_VIEW_MONTH, current) : false;
       if (
+        isDisabled ||
         GlnCalendarUtil.isDisabledMonthByMin(year, month, params.minDate) ||
         GlnCalendarUtil.isDisabledMonthByMax(year, month, params.maxDate)
       ) {
@@ -290,9 +285,6 @@ export class GlnCalendarUtil {
       }
 
       const classes: string[] = params.dateClasses != null ? params.dateClasses(date, CALENDAR_VIEW_DAY, current) : [];
-      // #if (classes.length > 0) {
-      // #  console.log(`dateClasses(date, CALENDAR_VIEW_DAY, current)=${classes}`); //#
-      // #}
 
       const label: string = GlnCalendarUtil.getLabelByDate(date) || '';
 
@@ -309,6 +301,7 @@ export class GlnCalendarUtil {
         dayCell.isCurrent = true;
       }
 
+      const isDisabled: boolean = params.dateDisabled != null ? params.dateDisabled(date, CALENDAR_VIEW_DAY, current) : false;
       let isMinDate: boolean = false;
       if (minYear !== null && minMonth !== null && minDay !== null) {
         isMinDate = year < minYear || (year === minYear && (month < minMonth || (month === minMonth && day < minDay)));
@@ -317,7 +310,7 @@ export class GlnCalendarUtil {
       if (maxYear !== null && maxMonth !== null && maxDay !== null) {
         isMaxDate = maxYear < year || (maxYear === year && (maxMonth < month || (maxMonth === month && maxDay < day)));
       }
-      if (isMinDate || isMaxDate) {
+      if (isDisabled || isMinDate || isMaxDate) {
         dayCell.isDisabled = true;
       }
 
@@ -381,12 +374,14 @@ export class GlnCalendarUtil {
     return isCorrectYearMonthDay ? new Date(year, month, day, 0, 0, 0, 0) : GlnCalendarUtil.getLastDayOfMonth(year, month);
   }
 
-  public static getPeriodLimits(yearsPerPage: number, yearMin: number, yearMax: number): { start: number; finish: number } {
+  public static getPeriodLimits(yearsPerPage: number, yearMin: number | null, yearMax: number | null): { start: number; finish: number } {
     let start: number = -1;
     let finish: number = -1;
-    if (0 < yearsPerPage && yearsPerPage < 101 && CALENDAR_YEAR_MIN <= yearMin && yearMax <= CALENDAR_YEAR_MAX && yearMin < yearMax) {
-      start = Math.trunc(yearMin / yearsPerPage) * yearsPerPage;
-      const delta: number = yearMax / yearsPerPage;
+    const yearMin2: number = yearMin || CALENDAR_YEAR_MIN;
+    const yearMax2: number = yearMax || CALENDAR_YEAR_MAX;
+    if (0 < yearsPerPage && yearsPerPage < 101 && CALENDAR_YEAR_MIN <= yearMin2 && yearMax2 <= CALENDAR_YEAR_MAX && yearMin2 < yearMax2) {
+      start = Math.trunc(yearMin2 / yearsPerPage) * yearsPerPage;
+      const delta: number = yearMax2 / yearsPerPage;
       const truncDelta: number = Math.trunc(delta);
       finish = (truncDelta + (delta - truncDelta > 0 ? 1 : 0)) * yearsPerPage - 1;
     }

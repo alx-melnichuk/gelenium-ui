@@ -361,19 +361,21 @@ gln-calendar {
       background-color: var(--glncn--slct-bg-cl);
       color: var(--glncn--slct-cl);
     }
-    &[glncn-act] {
+    &[glncn-act]:not([disabled]) {
       background-color: var(--glncn--act-bg-cl);
       color: var(--glncn--act-cl);
     }
-    &[glncn-act-off] {
+    &[glncn-act-off]:not([disabled]) {
       background-color: var(--glncn--act-bg-cl);
       color: var(--glncn--act-off-cl);
     }
-    &[glncn-psv] {
+    &[glncn-psv],
+    &[glncn-act][disabled] {
       background-color: var(--glncn--psv-bg-cl);
       color: var(--glncn--psv-cl);
     }
-    &[glncn-psv-off] {
+    &[glncn-psv-off],
+    &[glncn-act-off][disabled] {
       background-color: var(--glncn--psv-bg-cl);
       color: var(--glncn--psv-off-cl);
     }
