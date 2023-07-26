@@ -456,8 +456,81 @@
 
 </div>
 
+
 <span style="color: indianred;">source</span>
 
+
+
+<section mr-vr
+  id="attributes-supported06">
+  <h4 class="app-hover-link">
+    Attributes are also supported 6:
+    <a [href]="urlCmCalendar + '#attributes-supported06'">#</a>
+  </h4>
+  <ul>
+    <li>
+      "dateClasses" - function that can be used to add custom CSS classes to dates;
+      <br />
+      <code><pre source="ts">
+dateClasses1 = (date: Date, view: string, currentDate: Date): string[] => &#123;
+  const result: string[] = [];
+  const day: number = date.getDate();
+  if ('day' === view && date.getMonth() === currentDate.getMonth()
+    && (day === 1 || day === 20)) &#123;
+    result.push('cnat6-demo1');
+  &#125;
+  return result;
+&#125;;</pre>
+      </code>
+      <br />
+      (default = undefined;)
+    </li>
+    <li>
+      "dateDisabled" - function that can be used to disable a date based on a custom condition;
+      <br />
+      <code><pre source="ts">
+dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
+  const dayWeek: number = date.getDay();
+  return 'day' ==== view && date.getMonth() === currentDate.getMonth()
+    && (dayWeek === 0 || dayWeek === 1);
+&#125;;</pre>
+      </code>
+      <br />
+      (default = undefined;)
+    </li>
+  </ul>
+</section>
+
+
+<div class="app-group">
+
+  <div class="app-elem ">
+    <div>
+      <div>
+        <small><em>Attribute: dateClasses.</em></small>
+      </div>
+    </div>
+    <div class="cnat6-clnd">
+      <gln-calendar [value]="value02w"
+        [dateClasses]="dateClasses02w">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem ">
+    <div>
+      <div>
+        <small><em>Attribute: dateDisabled.</em></small>
+      </div>
+    </div>
+    <div class="cnat6-clnd">
+      <gln-calendar [value]="value02x"
+        [dateDisabled]="dateDisabled02x">
+      </gln-calendar>
+    </div>
+  </div>
+
+</div>
 
 
 <hr br-nn />
