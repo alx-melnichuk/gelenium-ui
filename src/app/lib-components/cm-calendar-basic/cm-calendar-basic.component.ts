@@ -67,22 +67,42 @@ export class CmCalendarBasicComponent {
     const month: number = date.getMonth();
     const year: number = date.getFullYear();
     const currentMonth: number = currentDate.getMonth();
-    console.log(`view=${view}`);
     if ('day' === view && month == currentMonth && (day === 1 || day === 20)) {
-      console.log(`_day   date="${date.toDateString()}" cnbs-demo1`); // #
+      console.log(`view='day'   date="${date.toDateString()}" cnbs-demo1`); // #
       result.push('cnbs-demo1');
     } else if ('month' === view && (month === 1 || month === 4)) {
-      console.log(`_month date="${date.toDateString()}" cnbs-demo1`); // #
+      console.log(`view='month' date="${date.toDateString()}" cnbs-demo1`); // #
       result.push('cnbs-demo1');
     } else if ('year' === view && (year === 2025 || year === 2021)) {
-      console.log(`_year  date="${date.toDateString()}" cnbs-demo1`); // #
+      console.log(`view='year'  date="${date.toDateString()}" cnbs-demo1`); // #
       result.push('cnbs-demo1');
     }
 
     return result;
   };
+
+  dateDisabled01a = (date: Date, view: string, currentDate: Date): boolean => {
+    let result: boolean = false;
+    const dayWeek: number = date.getDay();
+    const month: number = date.getMonth();
+    const year: number = date.getFullYear();
+    const currentMonth: number = currentDate.getMonth();
+    if ('day' === view && month == currentMonth && (dayWeek === 0 || dayWeek === 1)) {
+      console.log(`view='day'   date="${date.toDateString()}" isDisabled`); // #
+      result = true;
+    } else if ('month' === view && (month === 1 || month === 4)) {
+      console.log(`view='month' date="${date.toDateString()}" isDisabled`); // #
+      result = true;
+    } else if ('year' === view && (year === 2025 || year === 2021)) {
+      console.log(`view='year'  date="${date.toDateString()}" isDisabled`); // #
+      result = true;
+    }
+    return result;
+  };
+
   config01b = {
     dateClasses: this.dateClasses01a,
+    dateDisabled: this.dateDisabled01a,
   };
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
