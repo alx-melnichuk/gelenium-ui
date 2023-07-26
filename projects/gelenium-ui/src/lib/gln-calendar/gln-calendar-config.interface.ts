@@ -8,8 +8,8 @@ export interface GlnCalendarConfig {
   dateDisabled?: GlnCalendarCellDisabledFun | undefined;
   formatByMonths?: string | undefined; // 'numeric' (6), '2-digit' (06), 'long' (June) 'short' (Jun), 'narrow' (J)
   formatMonth?: string | undefined; // 'numeric' (6), '2-digit' (06), 'long' (June) 'short' (Jun), 'narrow' (J)
-  isHideOldDays?: boolean | undefined;
   isHideDayoff?: boolean | undefined;
+  isHideOldDays?: boolean | undefined;
   isHorizont?: boolean | undefined;
   isReadOnly?: boolean | undefined;
   isStartSunday?: boolean | undefined;
