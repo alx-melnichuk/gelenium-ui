@@ -125,9 +125,14 @@ public model01: Date | null = new Date();</pre>
       </gln-calendar> -->
 
       <gln-calendar [value]="value01a"
-        [config]="isConfig01a ? config01b : undefined"
         [minDate]="isMinDate01a ? minDate : undefined"
-        [maxDate]="isMaxDate01a ? maxDate : undefined">
+        [maxDate]="isMaxDate01a ? maxDate : undefined"
+        (change)="value01a = $event">
+        <!-- [views]="['month', 'year']"        view="year"
+
+          [config]="isConfig01a ? config01b : undefined"
+           
+           -->
       </gln-calendar>
 
       <!-- <gln-calendar [value]="value01a"

@@ -59,7 +59,7 @@ export class CmCalendarBasicComponent {
   // // maxDate: Date = new Date(2095, 1, 1);
   // maxDate: Date = new Date(2015, 1, 1);
   minDate: Date = new Date(2023, 2, 10);
-  maxDate: Date = new Date(2024, 2, 10);
+  maxDate: Date = new Date(2024, 2, 20);
 
   dateClasses01a = (date: Date, view: string, currentDate: Date): string[] => {
     const result: string[] = [];
