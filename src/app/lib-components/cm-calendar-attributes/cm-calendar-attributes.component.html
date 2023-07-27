@@ -520,12 +520,41 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
   <div class="app-elem ">
     <div>
       <div>
-        <small><em>Attribute: dateDisabled.</em></small>
+        <small><em>Attribute: dateDisabled, isHideOldDays.</em></small>
       </div>
     </div>
     <div class="cnat6-clnd">
       <gln-calendar [value]="value02x"
+        isHideOldDays
         [dateDisabled]="dateDisabled02x">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem ">
+    <div>
+      <div>
+        <small><em>Attribute: minDate="{{minDate02y.toDateString()}}".</em></small>
+      </div>
+    </div>
+    <div class="cnat6-clnd">
+      <gln-calendar [value]="value02y"
+        [minDate]="minDate02y"
+        (change)="value02y=$event">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem ">
+    <div>
+      <div>
+        <small><em>Attribute: maxDate="{{maxDate2z.toDateString()}}".</em></small>
+      </div>
+    </div>
+    <div class="cnat6-clnd">
+      <gln-calendar [value]="value02z"
+        [maxDate]="maxDate2z"
+        (change)="value02z=$event">
       </gln-calendar>
     </div>
   </div>

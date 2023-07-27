@@ -23,7 +23,10 @@ export class CmCalendarAttributesComponent {
   public baseRef: string = RouterConfig.get('BASE_REF');
   public urlCmCalendar = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_CALENDAR');
 
-  public selectedDate: Date = this.getSelectedDate();
+  public today: Date = new Date();
+  public day: number = this.today.getDate() + (this.today.getDate() === 1 ? 1 : -1);
+  public selectedDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.day, 0, 0, 0, 0);
+  // public selectedDate: Date = this.getSelectedDate();
   // Part 1
   public value02a: Date | null = new Date(this.selectedDate);
   public value02b: Date | null = new Date(this.selectedDate);
@@ -88,9 +91,16 @@ export class CmCalendarAttributesComponent {
     }
     return result;
   };
+  public value02y: Date | null = new Date(this.selectedDate);
+  // public minDate02y: Date = new Date(2023, 2, 12);
+  public minDate02y: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 3, 0, 0, 0, 0);
+
+  public value02z: Date | null = new Date(this.selectedDate);
+  // public maxDate2z: Date = new Date(2024, 2, 24);
+  public maxDate2z: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 3, 0, 0, 0, 0);
 
   // Demo
-  public value02z: Date | null = new Date(this.selectedDate);
+  public value02_z: Date | null = new Date(this.selectedDate);
   public startDate01a: Date = new Date(2023, 4, 12);
   public isDisabled01a: boolean = false;
   public isHideOldDays01a: boolean = false;
