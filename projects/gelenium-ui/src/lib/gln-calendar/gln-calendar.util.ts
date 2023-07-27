@@ -9,6 +9,7 @@ export const CALENDAR_YEAR_MAX = 2100; // 2120; // 2150
 export const CALENDAR_VIEW_DAY = 'day';
 export const CALENDAR_VIEW_MONTH = 'month';
 export const CALENDAR_VIEW_YEAR = 'year';
+export type CALENDAR_VIEW_TYPE = 'day' | 'month' | 'year';
 
 export const CALENDAR_PERIOD_MONTH = 'period_month';
 export const CALENDAR_PERIOD_YEAR = 'period_year';
@@ -428,31 +429,25 @@ export class GlnCalendarUtil {
     return sizeDayWeekNum;
   }
 
-  public static getViewModes(): string[] {
+  public static getViewModes(): CALENDAR_VIEW_TYPE[] {
     return [CALENDAR_VIEW_DAY, CALENDAR_VIEW_YEAR, CALENDAR_VIEW_MONTH];
   }
-  public static checkViews(views: string[] | null | undefined): string[] {
-    const result: string[] = [];
-    if (Array.isArray(views)) {
-      const modes: string[] = GlnCalendarUtil.getViewModes();
-      for (let index = 0; index < views.length; index++) {
-        if (modes.indexOf(views[index]) > -1) {
-          result.push(views[index]);
-        }
+  public static convertView(view: string): CALENDAR_VIEW_TYPE | null {
+    return CALENDAR_VIEW_DAY === view || CALENDAR_VIEW_MONTH === view || CALENDAR_VIEW_YEAR === view ? view : null;
+  }
+  public static convertViews(views: string[]): CALENDAR_VIEW_TYPE[] {
+    const result: CALENDAR_VIEW_TYPE[] = [];
+    const list: CALENDAR_VIEW_TYPE[] = GlnCalendarUtil.getViewModes();
+    for (let index = 0; index < views.length; index++) {
+      const viewType: CALENDAR_VIEW_TYPE | null = GlnCalendarUtil.convertView(views[index]);
+      if (viewType != null && list.indexOf(viewType) > -1) {
+        result.push(viewType);
       }
     }
     return result;
   }
-  public static getNextView(views: string[], currView: string): string {
-    let result: string = currView;
+  public static getNextView(views: CALENDAR_VIEW_TYPE[], currView: CALENDAR_VIEW_TYPE): CALENDAR_VIEW_TYPE {
     const index: number = views.indexOf(currView);
-    if (views.length > 0 && index > -1) {
-      const nextIndex: number = index === views.length - 1 ? 0 : index + 1;
-      const modes: string[] = GlnCalendarUtil.getViewModes();
-      if (modes.indexOf(views[nextIndex]) > -1) {
-        result = views[nextIndex];
-      }
-    }
-    return result;
+    return views.length > 0 && index > -1 ? views[index === views.length - 1 ? 0 : index + 1] : currView;
   }
 }

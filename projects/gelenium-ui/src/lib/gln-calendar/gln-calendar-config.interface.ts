@@ -16,9 +16,11 @@ export interface GlnCalendarConfig {
   isTwoDigitDay?: boolean | undefined;
   isWeekNumber?: boolean | undefined;
   locale?: string | undefined; // Locale ('en-US', 'de-DE', 'fr-FR')
+  maxDate?: Date | undefined;
+  minDate?: Date | undefined;
   rowsByYears?: number | undefined; // [1 - 12] default 5
   startDate?: Date | undefined;
   sizeDayWeek?: number | string | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
-  view?: string | undefined; // 'day','month','year' default 'day'
+  view?: string | undefined; // 'day','month','year'  default 'day'
   views?: string[] | undefined; // Array<'day' | 'month' | 'year'>, default ['day', 'year', 'month']
 }

@@ -4,13 +4,13 @@
     class="gln-calendar-title">
 
     <div glncn-title-block
-      [attr.glncn-title-day]="viewMode === VIEW_DAY ? '' : undefined"
-      [attr.glncn-title-month]="viewMode === VIEW_MONTH ? '' : undefined"
-      [attr.glncn-title-year]="viewMode === VIEW_YEAR ? '' : undefined"
+      [attr.glncn-title-day]="isViewModeDay() ? '' : undefined"
+      [attr.glncn-title-month]="isViewModeMonth() ? '' : undefined"
+      [attr.glncn-title-year]="isViewModeYear() ? '' : undefined"
       [ngClass]="['gln-calendar-title-block'
-        , (viewMode === VIEW_DAY ? 'gln-title-day' : '')
-        , (viewMode === VIEW_MONTH ? 'gln-title-month' : '')
-        , (viewMode === VIEW_YEAR ? 'gln-title-year' : '')]">
+        , (isViewModeDay() ? 'gln-title-day' : '')
+        , (isViewModeMonth() ? 'gln-title-month' : '')
+        , (isViewModeYear() ? 'gln-title-year' : '')]">
 
       <button type="button"
         glncn-title-caption
@@ -19,7 +19,7 @@
         [attr.tabindex]="!isDisabledVal ? 0 : -1"
         [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
         (click)="switchViewMode()">
-        {{ (viewMode === VIEW_MONTH ? '&emsp;' : '') + getCaption(viewMode) }}
+        {{ (isViewModeMonth() ? '&emsp;' : '') + getCaption() }}
       </button>
 
       <button type="button"
@@ -49,7 +49,7 @@
       class="gln-calendar-nav gln-calendar-prev"
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
       [attr.disabled]="isDisabledVal || isReadOnlyVal || !isEnabledPrev() ? '' : undefined"
-      (click)="prevPeriod(getPeriodByViewMode(viewMode))">
+      (click)="prevPeriod(getPeriodByViewMode())">
       <svg glncn-icon
         class="gln-calendar-t-icon icon-prev"
         focusable="false"
@@ -66,7 +66,7 @@
       class="gln-calendar-nav gln-calendar-next"
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
       [attr.disabled]="isDisabledVal || isReadOnlyVal || !isEnabledNext() ? '' : undefined"
-      (click)="nextPeriod(getPeriodByViewMode(viewMode))">
+      (click)="nextPeriod(getPeriodByViewMode())">
       <svg glncn-icon
         class="gln-calendar-t-icon icon-next"
         focusable="false"
@@ -83,7 +83,7 @@
 
     <div glncn-header
       class="gln-calendar-header"
-      [attr.glncn-hide]="viewMode !== VIEW_DAY ? '' : undefined">
+      [attr.glncn-hide]="!isViewModeDay() ? '' : undefined">
 
       <ng-container [ngTemplateOutlet]="isWeekNumberVal ? templateWeekNumberHeader : null">
       </ng-container>
@@ -103,7 +103,7 @@
 
     <div glncn-rows
       class="gln-calendar-list-days"
-      [attr.glncn-hide]="viewMode !== VIEW_DAY ? '' : undefined"
+      [attr.glncn-hide]="!isViewModeDay() ? '' : undefined"
       #dayInfoRowListRef
       (keydown)="keydownDayCellRowList($event, dayInfoRowListRef)">
 
@@ -133,7 +133,7 @@
 
     </div>
 
-    <div *ngIf="viewMode == VIEW_MONTH"
+    <div *ngIf="isViewModeMonth()"
       glncn-view-month
       class="gln-calendar-view-month">
       <div *ngFor="let monthCell of frameMonthCells; trackBy: trackByCell;"
@@ -144,13 +144,13 @@
           glncn-month-cell
           glncn-crs-pnt
           glncn-tint
-          [attr.glncn-act]="monthCell.state == STATE_ACT ? '' : undefined"
-          [attr.glncn-slct]="monthCell.state == STATE_SLCT ? '' : undefined"
+          [attr.glncn-act]="isStateActive(monthCell) ? '' : undefined"
+          [attr.glncn-slct]="isStateSelected(monthCell) ? '' : undefined"
           [attr.glncn-today]="monthCell.isToday ? '' : undefined"
           [attr.glncn-curr]="monthCell.isCurrent ? '' : undefined"
           [attr.disabled]="isDisabledVal || isReadOnlyVal || monthCell.isDisabled ? '' : undefined"
           [ngClass]="['gln-calendar-month-cell'
-            , (monthCell.state == STATE_SLCT ? 'gln-selected' : '')
+            , (isStateSelected(monthCell) ? 'gln-selected' : '')
             , (monthCell.isToday ? 'gln-today' : '')
             , (monthCell.isCurrent ? 'gln-current' : '')
             ].concat(monthCell.classes)"
@@ -160,11 +160,11 @@
       </div>
     </div>
 
-    <div *ngIf="viewMode == VIEW_YEAR"
+    <div *ngIf="isViewModeYear()"
       glncn-view-year
       class="gln-calendar-view-year"
       #yearCellListRef
-      (keydown)="keydownYearCellList($event, yearCellListRef, frameYearCells[0].value, yearsPerPage)">
+      (keydown)="keydownYearCellList($event, yearCellListRef, frameYearCells[0].value, getYearsPerPage())">
       <div *ngFor="let yearCell of frameYearCells; trackBy: trackByCell"
         glncn-year-wrapper
         class="gln-calendar-year-cell-wrapper">
@@ -172,13 +172,13 @@
           glncn-year-cell
           glncn-crs-pnt
           glncn-tint
-          [attr.glncn-act]="yearCell.state == STATE_ACT ? '' : undefined"
-          [attr.glncn-slct]="yearCell.state == STATE_SLCT ? '' : undefined"
+          [attr.glncn-act]="isStateActive(yearCell) ? '' : undefined"
+          [attr.glncn-slct]="isStateSelected(yearCell) ? '' : undefined"
           [attr.glncn-today]="yearCell.isToday ? '' : undefined"
           [attr.glncn-curr]="yearCell.isCurrent ? '' : undefined"
           [attr.disabled]="isDisabledVal || isReadOnlyVal || yearCell.isDisabled ? '' : undefined"
           [ngClass]="['gln-calendar-year-cell'
-            , (yearCell.state == STATE_SLCT ? 'gln-selected' : '')
+            , (isStateSelected(yearCell) ? 'gln-selected' : '')
             , (yearCell.isToday ? 'gln-today' : '')
             , (yearCell.isCurrent ? 'gln-current' : '')
             ].concat(yearCell.classes)"
@@ -232,27 +232,27 @@
         glncn-item
         glncn-tint
         glncn-crs-pnt
-        [attr.glncn-psv]="dayCell.state == STATE_PSV && (isHideDayoffVal || !isDayoff(dayCell.dayWeek)) ? '' : undefined"
-        [attr.glncn-psv-off]="dayCell.state == STATE_PSV && !isHideDayoffVal && isDayoff(dayCell.dayWeek) ? '' : undefined"
-        [attr.glncn-act]="dayCell.state == STATE_ACT && (isHideDayoffVal || !isDayoff(dayCell.dayWeek)) ? '' : undefined"
-        [attr.glncn-act-off]="dayCell.state == STATE_ACT && !isHideDayoffVal && isDayoff(dayCell.dayWeek) ? '' : undefined"
-        [attr.glncn-slct]="dayCell.state == STATE_SLCT ? '' : undefined"
+        [attr.glncn-psv]="isStatePassive(dayCell) && (isHideDayoffVal || !isDayoff(dayCell.dayWeek)) ? '' : undefined"
+        [attr.glncn-psv-off]="isStatePassive(dayCell) && !isHideDayoffVal && isDayoff(dayCell.dayWeek) ? '' : undefined"
+        [attr.glncn-act]="isStateActive(dayCell) && (isHideDayoffVal || !isDayoff(dayCell.dayWeek)) ? '' : undefined"
+        [attr.glncn-act-off]="isStateActive(dayCell) && !isHideDayoffVal && isDayoff(dayCell.dayWeek) ? '' : undefined"
+        [attr.glncn-slct]="isStateSelected(dayCell) ? '' : undefined"
         [attr.glncn-today]="dayCell.isToday ? '' : undefined"
         [attr.glncn-curr]="dayCell.isCurrent ? '' : undefined"
         [ngClass]="['gln-calendar-day-cell'
           , ('dayWeek' + dayCell.dayWeek)
-          , (dayCell.state == STATE_PSV ? 'gln-passive' : '')
-          , (dayCell.state == STATE_ACT ? 'gln-active' : '')
-          , (dayCell.state == STATE_SLCT ? 'gln-selected' : '')
+          , (isStatePassive(dayCell) ? 'gln-passive' : '')
+          , (isStateActive(dayCell) ? 'gln-active' : '')
+          , (isStateSelected(dayCell) ? 'gln-selected' : '')
           , (!isHideDayoffVal && isDayoff(dayCell.dayWeek) ? 'gln-dayoff' : '')
           , (dayCell.isToday ? 'gln-today' : '')
           ].concat(dayCell.classes)"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && dayCell.state == STATE_PSV) || dayCell.isDisabled
+        [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && isStatePassive(dayCell)) || dayCell.isDisabled
           ? '' : undefined"
         [attr.tabindex]="!isDisabledVal && !dayCell.isDisabled && dayCell.isCurrent ? 0 : -1"
         [attr.data-label]="dayCell.label"
         (click)="clickSelectItem(dayCell)">
-        {{ isHideOldDaysVal && dayCell.state == STATE_PSV
+        {{ isHideOldDaysVal && isStatePassive(dayCell)
         ? '' : (isTwoDigitDayVal ? get2Digit(dayCell.value) : dayCell.value) }}
       </button>
     </ng-container>

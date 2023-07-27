@@ -173,7 +173,6 @@ gln-calendar {
     flex-shrink: 0;
     height: 1.5em;
     width: 1.5em;
-    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     transition: transform 300ms;
   }
   [glncn-title-day] > [glncn-switch] > [glncn-icon] {
@@ -379,7 +378,7 @@ gln-calendar {
       background-color: var(--glncn--psv-bg-cl);
       color: var(--glncn--psv-off-cl);
     }
-    transition: background-color 180ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: background-color 140ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
 
   // Level 5 Element "List - DayInfoRow - item"
