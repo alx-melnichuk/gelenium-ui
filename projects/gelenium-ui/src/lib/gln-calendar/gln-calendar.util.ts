@@ -400,7 +400,7 @@ export class GlnCalendarUtil {
   }
 
   public static getElementByLabel(elementListRef: HTMLDivElement | undefined, label: string | null): HTMLElement | null {
-    return (elementListRef?.querySelector(`button[data-label='${label}']`) as HTMLElement) || null;
+    return label != null ? (elementListRef?.querySelector(`button[data-label='${label}']`) as HTMLElement) || null : null;
   }
 
   public static getColsByYears(value: number): number {

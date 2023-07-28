@@ -1,5 +1,7 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -11,6 +13,7 @@ import {
   OnInit,
   Optional,
   Output,
+  PLATFORM_ID,
   Renderer2,
   SimpleChanges,
   ViewChild,
@@ -135,14 +138,14 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @ViewChild('yearCellListRef', { read: ElementRef<HTMLDivElement>, static: false })
   public yearCellListRef: ElementRef<HTMLDivElement> | undefined;
 
-  public get activeDate(): Date {
+  public get markedDate(): Date {
     return this.currentDate;
   }
-  public set activeDate(value: Date) {}
-  public get activeView(): 'day' | 'month' | 'year' {
+  public set markedDate(value: Date) {}
+  public get currentView(): 'day' | 'month' | 'year' {
     return this.viewMode;
   }
-  public set activeView(value: 'day' | 'month' | 'year') {}
+  public set currentView(value: 'day' | 'month' | 'year') {}
 
   public cellSizeVal: number | null = null; // Binding attribute "cellSize".
   public colsByYearsVal: number | null = null; // Binding attribute "colsByYears".
@@ -178,15 +181,17 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   private currentYearStr: string = '';
   private frameYearFinish: number = -1;
   private frameYearStart: number = -1;
-  private markedDate: Date | null = null;
   private markedYear: number | null = null;
   private rowsByMonths: number | null = null;
   private viewMode: CALENDAR_VIEW_TYPE = CALENDAR_VIEW_DAY;
   private yearsPerPage: number = -1;
 
   constructor(
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    @Inject(PLATFORM_ID) private platformId: Object,
     private renderer: Renderer2,
     public hostRef: ElementRef<HTMLElement>,
+    private changeDetectorRef: ChangeDetectorRef,
     private ngZone: NgZone,
     @Optional() @Inject(GLN_CALENDAR_CONFIG) private rootConfig: GlnCalendarConfig | null
   ) {
@@ -300,10 +305,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     if (!!changes['startDate'] || ChangeUtil.check(changes['config'], 'startDate')) {
       this.startDateVal = this.startDate || this.currConfig.startDate || null;
       hasStartDate = true;
-    }
-    if (!!changes['value']) {
-      this.markedDate = this.value || new Date();
-      this.log(`OnChange(); value=${this.value != null ? this.value.toString().substring(4, 31) : 'null'}`);
     }
     if (!!changes['views'] || ChangeUtil.check(changes['config'], 'views')) {
       const viewsInput: CALENDAR_VIEW_TYPE[] = GlnCalendarUtil.convertViews(this.views || []);
@@ -544,6 +545,16 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     result = this.viewMode === CALENDAR_VIEW_YEAR ? CALENDAR_PERIOD_YEARS : result;
     return result;
   }
+  public focus(): void {
+    const labelMarkedDate: string | null = GlnCalendarUtil.getLabelByDate(this.currentDate);
+    this.log(`@@ focus(); labelMarkedDate=${labelMarkedDate}`); // #
+    if (!this.isDisabledVal && isPlatformBrowser(this.platformId) && !!labelMarkedDate) {
+      const viewElement: HTMLDivElement | undefined = this.getElementRefCurrentView()?.nativeElement;
+      const buttonElement: HTMLElement | null = GlnCalendarUtil.getElementByLabel(viewElement, labelMarkedDate);
+      this.log(`@@ focus(); buttonElement${buttonElement != null ? '!' : ''}=null`); // #
+      buttonElement?.focus();
+    }
+  }
   public getCaption(): string {
     return this.viewMode === CALENDAR_VIEW_DAY
       ? this.currentMonthStr + ' ' + this.currentYearStr
@@ -657,13 +668,13 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
         isZoneOnStable = true;
       } else {
         this.log(`$$ keydownYearCell(); 1moveFocusToAnotherElement(${newMarkedYear});`); // #
-        this.moveFocusToAnotherElement(elementRef, newMarkedYear.toString());
+        // this.moveFocusToAnotherElement(elementRef, newMarkedYear.toString());
       }
       if (isZoneOnStable) {
         // Update the position once the zone is stable so that the component will be fully rendered.
-        this.ngZone.onStable.pipe(first()).subscribe(() => {
-          this.moveFocusToAnotherElement(elementRef, newMarkedYear.toString());
-        });
+        // this.ngZone.onStable.pipe(first()).subscribe(() => {
+        //  this.moveFocusToAnotherElement(elementRef, newMarkedYear.toString());
+        // });
       }
     }
   }
@@ -692,70 +703,47 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       const result: Date | null = !!cell ? new Date(cell.date.getFullYear(), cell.date.getMonth(), cell.date.getDate(), 0, 0, 0, 0) : null;
       this.change.emit(result);
       this.log(`   change.emit("${result?.toString().substring(4, 31) || 'null'}");`);
-      const currDate: Date = result || this.currentDate;
+      const currDate: Date = result || this.currentDate; // TODO set value null, currentDate=today
       this.updateViewAllCells(currDate);
-      this.markedDate = currDate;
     }
   }
-  public keydownDayCellRowList(event: KeyboardEvent, elementRef: HTMLDivElement): void {
+  public keydownDayCell(event: KeyboardEvent): void {
     this.log(``); // #
-    this.log(`@@ keydownDayCellRowList()  data-label=${(event.target as HTMLElement)?.getAttribute('data-label')}`); // #
-    if (this.viewMode !== CALENDAR_VIEW_DAY || this.markedDate == null) {
+    this.log(`@@ keydownDayCell() key: ${event.key} data-label: ${(event.target as HTMLElement)?.getAttribute('data-label')}`); // #
+    if (this.isDisabledVal || this.isReadOnlyVal) {
       return;
     }
-    let delta: number = 0;
-    const deltaRightLeft: number = !this.isHorizontVal ? 1 : 7;
-    const deltaUpDown: number = !this.isHorizontVal ? -7 : -1;
-    delta = 'ArrowRight' === event.key ? deltaRightLeft : 'ArrowLeft' === event.key ? -deltaRightLeft : delta;
-    delta = 'ArrowUp' === event.key ? deltaUpDown : 'ArrowDown' === event.key ? -deltaUpDown : delta;
-    this.log(`@@ keydownDayCell(); delta: ${delta} elementRef${elementRef != null ? '!' : ''}=null key: ${event.key}`); // #
-    this.log(`@@ keydownDayCell(); markedDate='${GlnCalendarUtil.getLabelByDate(this.markedDate)}'`); // #
-    this.log(`@@ keydownDayCell(); currDate=${this.currentDate.toDateString().substring(4)}`); // #
-    if (delta != 0) {
-      const newMarkedDate: Date = DateUtil.addDay(this.markedDate, delta);
-      const currElem: HTMLElement | null = GlnCalendarUtil.getElementByLabel(elementRef, GlnCalendarUtil.getLabelByDate(this.markedDate));
-      HtmlElemUtil.setAttr(this.renderer, HtmlElemUtil.getElementRef(currElem), 'tabindex', '-1');
-      this.markedDate = newMarkedDate;
-      this.log(`@@ keydownDayCell();new markedDate='${GlnCalendarUtil.getLabelByDate(this.markedDate)}'`); // #
-      let isZoneOnStable: boolean = false;
-      const year: number = this.currentDate.getFullYear();
-      const month: number = this.currentDate.getMonth();
-      const dateBegin: Date = new Date(year, month, 1, 0, 0, 0, 0);
-      const dateEnd: Date = DateUtil.addDay(new Date(year, month + 1, 1, 0, 0, 0, 0), -1);
-      // TODO change compare
-      if (DateUtil.compare(newMarkedDate, dateBegin) < 0) {
-        this.log(`@@ keydownDayCell(); clickPrev (VIEW_MONTH);`); // #
-        // this.clickPrev (CALENDAR_VIEW_MONTH);
-        isZoneOnStable = true;
-      } else if (DateUtil.compare(dateEnd, newMarkedDate) < 0) {
-        this.log(`@@ keydownDayCell(); clickNext (VIEW_MONTH);`); // #
-        // this.clickNext (CALENDAR_VIEW_MONTH);
-        isZoneOnStable = true;
-      } else {
-        this.log(`@@ keydownDayCell(); 1moveFocusToAnotherElement(${GlnCalendarUtil.getLabelByDate(newMarkedDate) || ''});`); // #
-        this.moveFocusToAnotherElement(elementRef, GlnCalendarUtil.getLabelByDate(newMarkedDate) || '');
-      }
-
-      if (isZoneOnStable) {
-        // Update the position once the zone is stable so that the component will be fully rendered.
-        this.ngZone.onStable.pipe(first()).subscribe(() => {
-          this.log(`@@ keydownDayCell(); 2moveFocusToAnotherElement(${GlnCalendarUtil.getLabelByDate(newMarkedDate) || ''});`); // #
-          this.moveFocusToAnotherElement(elementRef, GlnCalendarUtil.getLabelByDate(newMarkedDate) || '');
-        });
-      }
-    } else if (' ' === event.key || 'Enter' === event.key) {
-      const elem: HTMLElement | null = GlnCalendarUtil.getElementByLabel(elementRef, GlnCalendarUtil.getLabelByDate(this.markedDate));
-      if (elem != null) {
-        delta = 9;
-        // ??this.change.emit(new Date(this.markedDate));
-      }
+    if (this.viewMode !== CALENDAR_VIEW_DAY || this.currentDate == null) {
+      return;
     }
+    this.log(`@@ keydownDayCell(); currDate=${this.currentDate.toDateString().substring(4)}`); // #
+
+    let delta: number = 0;
+    const deltaRightOrLeft: number = !this.isHorizontVal ? 1 : 7;
+    const deltaUpOrDown: number = !this.isHorizontVal ? -7 : -1;
+
+    delta = 'ArrowRight' === event.key ? deltaRightOrLeft : delta;
+    delta = 'ArrowLeft' === event.key ? -deltaRightOrLeft : delta;
+    delta = 'ArrowUp' === event.key ? deltaUpOrDown : delta;
+    delta = 'ArrowDown' === event.key ? -deltaUpOrDown : delta;
+
+    this.log(`@@ keydownDayCell(); delta: ${delta} `); // #
+
     if (delta != 0) {
+      const newMarkedDate: Date = DateUtil.addDay(this.currentDate, delta);
+      this.log(`@@ keydownDayCell(); newMarkedDate=${newMarkedDate.toDateString().substring(4)}`); // #
+      this.updateViewAllCells(newMarkedDate);
+      this.changeDetectorRef.markForCheck();
+
+      /** Transfer focus to the active cell after the microtask queue is empty. */
+      this.ngZone.onStable.pipe(first()).subscribe(() => {
+        this.focus();
+      });
+      // Cancel subsequent processing of the event.
       event.preventDefault();
       event.stopPropagation();
     }
   }
-
   // ** Private methods **
 
   // -- Methods for the mode: "view year", "view month", "view day" --
@@ -766,13 +754,13 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     formatMonth: string | null,
     locale: string | null
   ): void {
-    let currentDate2: Date = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0, 0);
-    if (minDate != null && DateUtil.compare(currentDate2, minDate) < 0) {
-      currentDate2 = minDate;
-    } else if (maxDate != null && DateUtil.compare(maxDate, currentDate2) < 0) {
-      currentDate2 = maxDate;
+    let nexCurrentDate: Date = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0, 0);
+    if (minDate != null && DateUtil.compare(nexCurrentDate, minDate) < 0) {
+      nexCurrentDate = minDate;
+    } else if (maxDate != null && DateUtil.compare(maxDate, nexCurrentDate) < 0) {
+      nexCurrentDate = maxDate;
     }
-    this.currentDate = currentDate2;
+    this.currentDate = nexCurrentDate;
     this.currentYearStr = currentDate.getFullYear().toString();
     this.currentMonthStr = GlnCalendarUtil.getActiveMonthStr(this.currentDate, formatMonth, locale);
     this.log(`updateViewCurrent();   currDate="${this.currentDate.toString().substring(4, 31)}"`); // #
@@ -802,9 +790,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   private changePeriod(period: string, isNext: boolean): void {
     let currYear: number = this.currentDate.getFullYear();
     let currMonth: number = this.currentDate.getMonth();
-
     let yearPeriod: number = 0;
-
     if (CALENDAR_PERIOD_MONTH === period) {
       currMonth = currMonth + (isNext ? 1 : -1);
     } else if (CALENDAR_PERIOD_YEAR === period) {
@@ -819,7 +805,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     const month: number = current.getMonth();
 
     let resultCompare: boolean = false;
-
     if (CALENDAR_PERIOD_MONTH === period) {
       if (isNext) {
         resultCompare =
@@ -874,8 +859,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     this.log(`updateViewDate(); getYearCellList();`); // #
     this.frameYearCells = GlnCalendarUtil.getYearCellList(currentDate, today, viewParams, yearStar, this.yearsPerPage);
   }
-
-  private moveFocusToAnotherElement(elementRef: HTMLDivElement, newMarkedLabel: string): void {
+  /*private moveFocusToAnotherElement(elementRef: HTMLDivElement, newMarkedLabel: string): void {
     const newElem: HTMLElement | null = GlnCalendarUtil.getElementByLabel(elementRef, newMarkedLabel);
     this.log(`moveFocusToAnotherElement(${newMarkedLabel}) newElem${newElem != null ? '!' : ''}=null`); // #
     if (newElem != null) {
@@ -883,16 +867,18 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       // Promise.resolve().then(() => {
       //   newElem.focus();
       // });
-      setTimeout(() => {
-        newElem.focus();
-      }, 300);
-      // // Update the position once the zone is stable so that the component will be fully rendered.
-      // this.ngZone.onStable.pipe(first()).subscribe(() => {
+      // setTimeout(() => {
       //   newElem.focus();
-      // });
+      // }, 300);
+      // Update the position once the zone is stable so that the component will be fully rendered.
+      this.ngZone.onStable.pipe(first()).subscribe(() => {
+        newElem.focus();
+      });
     }
+  }*/
+  private getElementRefCurrentView(): ElementRef<HTMLDivElement> | undefined {
+    return this.isViewModeYear() ? this.yearCellListRef /*: this.isViewModeMonth() ? this.monthCellListRef*/ : this.dayInfoRowListRef;
   }
-
   private getPercentage(total: number, value: number): number | null {
     let result: number = (total / value) * 100;
     const residue: number = result % 10;

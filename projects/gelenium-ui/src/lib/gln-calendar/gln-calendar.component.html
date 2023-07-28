@@ -105,7 +105,7 @@
       class="gln-calendar-list-days"
       [attr.glncn-hide]="!isViewModeDay() ? '' : undefined"
       #dayInfoRowListRef
-      (keydown)="keydownDayCellRowList($event, dayInfoRowListRef)">
+      (keydown)="keydownDayCell($event)">
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
         [ngTemplateOutletContext]="frameDayCellRows[0]">
@@ -238,12 +238,13 @@
         [attr.glncn-act-off]="isStateActive(dayCell) && !isHideDayoffVal && isDayoff(dayCell.dayWeek) ? '' : undefined"
         [attr.glncn-slct]="isStateSelected(dayCell) ? '' : undefined"
         [attr.glncn-today]="dayCell.isToday ? '' : undefined"
-        [attr.glncn-curr]="dayCell.isCurrent ? '' : undefined"
+        [attr.glncn-mar]="dayCell.isCurrent ? '' : undefined"
         [ngClass]="['gln-calendar-day-cell'
           , ('dayWeek' + dayCell.dayWeek)
           , (isStatePassive(dayCell) ? 'gln-passive' : '')
           , (isStateActive(dayCell) ? 'gln-active' : '')
           , (isStateSelected(dayCell) ? 'gln-selected' : '')
+          , (dayCell.isCurrent ? 'gln-marked' : '')
           , (!isHideDayoffVal && isDayoff(dayCell.dayWeek) ? 'gln-dayoff' : '')
           , (dayCell.isToday ? 'gln-today' : '')
           ].concat(dayCell.classes)"
