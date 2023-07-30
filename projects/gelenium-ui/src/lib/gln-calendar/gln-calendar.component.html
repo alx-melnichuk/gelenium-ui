@@ -48,7 +48,9 @@
       glncn-nav
       class="gln-calendar-nav gln-calendar-prev"
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
-      [attr.disabled]="isDisabledVal || isReadOnlyVal || !isEnabledPrev() ? '' : undefined"
+      [attr.disabled]="isDisabledVal || isReadOnlyVal
+        || (isViewModeDay() ? !isPrevMonthAvailable : (isViewModeMonth() ? !isPrevYearAvailable : !isPrevYearsAvailable) )
+        ? '' : undefined"
       (click)="prevPeriod(getPeriodByViewMode())">
       <svg glncn-icon
         class="gln-calendar-t-icon icon-prev"
@@ -65,7 +67,9 @@
       glncn-nav
       class="gln-calendar-nav gln-calendar-next"
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
-      [attr.disabled]="isDisabledVal || isReadOnlyVal || !isEnabledNext() ? '' : undefined"
+      [attr.disabled]="isDisabledVal || isReadOnlyVal
+        || (isViewModeDay() ? !isNextMonthAvailable : (isViewModeMonth() ? !isNextYearAvailable : !isNextYearsAvailable) )
+          ? '' : undefined"
       (click)="nextPeriod(getPeriodByViewMode())">
       <svg glncn-icon
         class="gln-calendar-t-icon icon-next"
@@ -147,8 +151,10 @@
           [attr.glncn-act]="isStateActive(monthCell) ? '' : undefined"
           [attr.glncn-slct]="isStateSelected(monthCell) ? '' : undefined"
           [attr.glncn-today]="monthCell.isToday ? '' : undefined"
-          [attr.glncn-curr]="monthCell.isCurrent ? '' : undefined"
+          [attr.glncn-mar]="monthCell.isCurrent ? '' : undefined"
           [attr.disabled]="isDisabledVal || isReadOnlyVal || monthCell.isDisabled ? '' : undefined"
+          [attr.tabindex]="!isDisabledVal && !monthCell.isDisabled && monthCell.isCurrent ? 0 : -1"
+          [attr.data-label]="monthCell.label"
           [ngClass]="['gln-calendar-month-cell'
             , (isStateSelected(monthCell) ? 'gln-selected' : '')
             , (monthCell.isToday ? 'gln-today' : '')
@@ -175,14 +181,15 @@
           [attr.glncn-act]="isStateActive(yearCell) ? '' : undefined"
           [attr.glncn-slct]="isStateSelected(yearCell) ? '' : undefined"
           [attr.glncn-today]="yearCell.isToday ? '' : undefined"
-          [attr.glncn-curr]="yearCell.isCurrent ? '' : undefined"
+          [attr.glncn-mar]="yearCell.isCurrent ? '' : undefined"
           [attr.disabled]="isDisabledVal || isReadOnlyVal || yearCell.isDisabled ? '' : undefined"
+          [attr.tabindex]="!isDisabledVal && !yearCell.isDisabled && yearCell.isCurrent ? 0 : -1"
+          [attr.data-label]="yearCell.label"
           [ngClass]="['gln-calendar-year-cell'
             , (isStateSelected(yearCell) ? 'gln-selected' : '')
             , (yearCell.isToday ? 'gln-today' : '')
             , (yearCell.isCurrent ? 'gln-current' : '')
             ].concat(yearCell.classes)"
-          [attr.data-label]="yearCell.label"
           (click)="clickYearCell(yearCell.value)">
           {{ yearCell.value }}
         </button>
@@ -239,6 +246,10 @@
         [attr.glncn-slct]="isStateSelected(dayCell) ? '' : undefined"
         [attr.glncn-today]="dayCell.isToday ? '' : undefined"
         [attr.glncn-mar]="dayCell.isCurrent ? '' : undefined"
+        [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && isStatePassive(dayCell)) || dayCell.isDisabled
+          ? '' : undefined"
+        [attr.tabindex]="!isDisabledVal && !dayCell.isDisabled && dayCell.isCurrent ? 0 : -1"
+        [attr.data-label]="dayCell.label"
         [ngClass]="['gln-calendar-day-cell'
           , ('dayWeek' + dayCell.dayWeek)
           , (isStatePassive(dayCell) ? 'gln-passive' : '')
@@ -248,10 +259,6 @@
           , (!isHideDayoffVal && isDayoff(dayCell.dayWeek) ? 'gln-dayoff' : '')
           , (dayCell.isToday ? 'gln-today' : '')
           ].concat(dayCell.classes)"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && isStatePassive(dayCell)) || dayCell.isDisabled
-          ? '' : undefined"
-        [attr.tabindex]="!isDisabledVal && !dayCell.isDisabled && dayCell.isCurrent ? 0 : -1"
-        [attr.data-label]="dayCell.label"
         (click)="clickSelectItem(dayCell)">
         {{ isHideOldDaysVal && isStatePassive(dayCell)
         ? '' : (isTwoDigitDayVal ? get2Digit(dayCell.value) : dayCell.value) }}
