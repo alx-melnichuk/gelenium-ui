@@ -55,7 +55,7 @@ export interface CalendarViewParams {
   selected?: Date | null | undefined; // Selected date.
   minDate?: Date | null | undefined; // Minimum date.
   maxDate?: Date | null | undefined; // Maximum date.
-  locale?: string | null | undefined; // Locale ('en-US', 'de-DE', 'fr-FR')
+  locales?: string | null | undefined; // Locale ('en-US', 'de-DE', 'fr-FR')
   dateClasses?: GlnCalendarCellClassesFun | null | undefined;
   dateDisabled?: GlnCalendarCellDisabledFun | null | undefined;
 }
@@ -112,7 +112,7 @@ export class GlnCalendarUtil {
       let yearStr: string = '';
       try {
         // Get the name of the year for the specified date.
-        yearStr = DateUtil.formatDateTime(date, { year: 'numeric' }, params.locale || undefined);
+        yearStr = DateUtil.formatDateTime(date, { year: 'numeric' }, params.locales || undefined);
       } catch (e) {
         console.error(e);
         yearStr = DateUtil.formatDateTime(date, { year: 'numeric' }, undefined);
@@ -187,7 +187,7 @@ export class GlnCalendarUtil {
       let monthStr: string = '';
       try {
         // Get the name of the month for the specified date.
-        monthStr = DateUtil.formatDateTime(date, { month: monthFormat }, params.locale || undefined);
+        monthStr = DateUtil.formatDateTime(date, { month: monthFormat }, params.locales || undefined);
       } catch (e) {
         console.error(e);
         monthStr = DateUtil.formatDateTime(date, { month: monthFormat }, undefined);

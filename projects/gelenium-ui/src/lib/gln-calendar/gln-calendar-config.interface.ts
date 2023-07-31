@@ -15,7 +15,7 @@ export interface GlnCalendarConfig {
   isStartSunday?: boolean | undefined;
   isTwoDigitDay?: boolean | undefined;
   isWeekNumber?: boolean | undefined;
-  locale?: string | undefined; // Locale ('en-US', 'de-DE', 'fr-FR')
+  locales?: string | undefined; // Locales ('en-US', 'de-DE', 'fr-FR')
   maxDate?: Date | undefined;
   minDate?: Date | undefined;
   rowsByYears?: number | undefined; // [1 - 12] default 5

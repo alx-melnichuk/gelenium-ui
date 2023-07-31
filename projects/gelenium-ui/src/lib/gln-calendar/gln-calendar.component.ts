@@ -104,7 +104,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public isWeekNumber: string | boolean | null | undefined;
   @Input()
-  public locale: string | null | undefined; // Locale ('en-US', 'de-DE', 'fr-FR')
+  public locales: string | null | undefined; // Locales ('en-US', 'de-DE', 'fr-FR')
   @Input()
   public maxDate: Date | null | undefined;
   @Input()
@@ -113,6 +113,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public rowsByYears: number | string | null | undefined; // [1 - 12] default 5
   @Input()
   public sizeDayWeek: number | string | null | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
+
   @Input()
   public startDate: Date | null | undefined; // # TODO ?? no example
   @Input()
@@ -171,7 +172,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public isStartSundayVal: boolean | null = null; // Binding attribute "isStartSunday".
   public isTwoDigitDayVal: boolean | null = null; // Binding attribute "isTwoDigitDay".
   public isWeekNumberVal: boolean | null = null; // Binding attribute "isWeekNumber".
-  public localeVal: string | null = null; // Binding attribute "locale".
+  public localesVal: string | null = null; // Binding attribute "locales".
   public maxDateVal: Date | null = null; // Binding attribute "maxDate".
   public minDateVal: Date | null = null; // Binding attribute "minDate".
   public rowsByYearsVal: number | null = null; // Binding attribute "rowsByYears".
@@ -288,8 +289,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.isWeekNumberVal = BooleanUtil.init(this.isWeekNumber) ?? !!this.currConfig.isWeekNumber;
       this.settingIsWeekNumber(this.isWeekNumberVal, this.renderer, this.hostRef);
     }
-    if (!!changes['locale'] || ChangeUtil.check(changes['config'], 'locale')) {
-      this.localeVal = this.locale || this.currConfig.locale || '';
+    if (!!changes['locales'] || ChangeUtil.check(changes['config'], 'locales')) {
+      this.localesVal = this.locales || this.currConfig.locales || '';
       hasLocale = true;
     }
     if (!!changes['maxDate'] || ChangeUtil.check(changes['config'], 'maxDate')) {
@@ -325,15 +326,16 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       }
     }
     if (!!changes['view'] || ChangeUtil.check(changes['config'], 'view')) {
-      this.viewVal = GlnCalendarUtil.convertView(this.view || '') || GlnCalendarUtil.convertView(this.currConfig.view || '');
-      if (this.viewVal != null && this.viewsVal.length > 0 && this.viewsVal.indexOf(this.viewVal) > -1 && this.viewMode != this.viewVal) {
-        this.viewMode = this.viewVal;
+      const viewVal = GlnCalendarUtil.convertView(this.view || '') || GlnCalendarUtil.convertView(this.currConfig.view || '');
+      if (viewVal != null && this.viewsVal.length > 0 && this.viewsVal.indexOf(viewVal) > -1 && this.viewMode != viewVal) {
+        this.viewVal = viewVal;
+        this.viewMode = viewVal;
       }
     }
 
     if (hasIsStartSunday || hasLocale || hasSizeDayWeek) {
       this.log(`OnChange(); frameDayNames = getDayNameList();`); // #
-      this.frameDayNames = GlnCalendarUtil.getDayNameList(this.sizeDayWeekVal, this.dayStartWeek, this.localeVal);
+      this.frameDayNames = GlnCalendarUtil.getDayNameList(this.sizeDayWeekVal, this.dayStartWeek, this.localesVal);
     }
     const todayDate: Date = new Date();
     const today: Date = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate(), 0, 0, 0, 0);
@@ -342,7 +344,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       selected: this.value,
       minDate: this.minDateVal,
       maxDate: this.maxDateVal,
-      locale: this.localeVal,
+      locales: this.localesVal,
       dateClasses: this.dateClassesVal,
       dateDisabled: this.dateDisabledVal,
     };
@@ -430,8 +432,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.isWeekNumberVal = !!this.currConfig.isWeekNumber;
       this.settingIsWeekNumber(this.isWeekNumberVal, this.renderer, this.hostRef);
     }
-    if (this.localeVal == null) {
-      this.localeVal = this.currConfig.locale || '';
+    if (this.localesVal == null) {
+      this.localesVal = this.currConfig.locales || '';
     }
     if (this.maxDateVal == null) {
       this.maxDateVal = this.currConfig.maxDate || null;
@@ -460,15 +462,16 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       }
     }
     if (this.viewVal == null) {
-      this.viewVal = GlnCalendarUtil.convertView(this.currConfig.view || '');
-      if (this.viewVal != null && this.viewsVal.length > 0 && this.viewsVal.indexOf(this.viewVal) > -1 && this.viewMode != this.viewVal) {
-        this.viewMode = this.viewVal;
+      const viewVal = GlnCalendarUtil.convertView(this.view || '') || GlnCalendarUtil.convertView(this.currConfig.view || '');
+      if (viewVal != null && this.viewsVal.length > 0 && this.viewsVal.indexOf(viewVal) > -1 && this.viewMode != viewVal) {
+        this.viewVal = viewVal;
+        this.viewMode = viewVal;
       }
     }
 
     if (this.frameDayNames.length === 0) {
       this.log(`OnInit(); frameDayNames = getDayNameList();`); // #
-      this.frameDayNames = GlnCalendarUtil.getDayNameList(this.sizeDayWeekVal, this.dayStartWeek, this.localeVal);
+      this.frameDayNames = GlnCalendarUtil.getDayNameList(this.sizeDayWeekVal, this.dayStartWeek, this.localesVal);
     }
     const todayDate: Date = new Date();
     const today: Date = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate(), 0, 0, 0, 0);
@@ -477,7 +480,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       selected: this.value,
       minDate: this.minDateVal,
       maxDate: this.maxDateVal,
-      locale: this.localeVal,
+      locales: this.localesVal,
       dateClasses: this.dateClassesVal,
       dateDisabled: this.dateDisabledVal,
     };
@@ -730,7 +733,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     this.currentDate = newCurrentDate;
     this.currentYearStr = currentDate.getFullYear().toString();
-    this.currentMonthStr = GlnCalendarUtil.getActiveMonthStr(this.currentDate, formatMonth, params.locale);
+    this.currentMonthStr = GlnCalendarUtil.getActiveMonthStr(this.currentDate, formatMonth, params.locales);
     this.log(`updateViewCurrent();   currDate="${this.currentDate.toString().substring(4, 31)}"`); // #
 
     this.isPrevMonthAvailable = GlnCalendarUtil.getPrevMonthAvailability(this.currentDate, this.minDateVal) < 0;
@@ -816,7 +819,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       selected: this.value,
       minDate: this.minDateVal,
       maxDate: this.maxDateVal,
-      locale: this.localeVal,
+      locales: this.localesVal,
       dateClasses: this.dateClassesVal,
       dateDisabled: this.dateDisabledVal,
     };
