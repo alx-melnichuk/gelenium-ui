@@ -124,16 +124,21 @@ public model01: Date | null = new Date();</pre>
         (change2)="value01a=$event?.date">
       </gln-calendar> -->
 
-      <gln-calendar [value]="value01a"
+      <!-- [views]="['month', 'year']"        view="year"
+          [config]="isConfig01a ? config01b : undefined"
+           -->
+      <!-- <gln-calendar [value]="value01a"
         [minDate]="isMinDate01a ? minDate : undefined"
         [maxDate]="isMaxDate01a ? maxDate : undefined"
         (change)="value01a = $event">
-        <!-- [views]="['month', 'year']"        view="year"
+      </gln-calendar> -->
 
-          [config]="isConfig01a ? config01b : undefined"
-           
-           -->
+      <gln-calendar [value]="value01a"
+        [colsByYears]="3"
+        view="year"
+        (change)="value01a=$event">
       </gln-calendar>
+
 
       <!-- <gln-calendar [value]="value01a"
         [startDate]="startDate01a">
@@ -147,7 +152,7 @@ public model01: Date | null = new Date();</pre>
     </div>
   </div>
 
-  <div class="app-elem">
+  <!-- <div class="app-elem">
     <div>
       <small><em>Attribute: value</em></small>
     </div>
@@ -159,19 +164,16 @@ public model01: Date | null = new Date();</pre>
       </small>
     </div>
     <div class="cnbs-clnd">
-      <!-- <gln-calendar [value]="value01b"
+      <gln-calendar [value]="value01b"
         isHorizont
         [isDisabled]="isDisabled01a"
         [isHideDayoff]="isHideDayoff01a"
         [isReadOnly]="isReadOnly01a"
         [isWeekNumber]="isWeekNumber01a"
         (change)="value01b=$event">
-      </gln-calendar> -->
-      <!-- <gln-calendar [value]="value01a"
-        (change)="value01a=$event">
-      </gln-calendar> -->
+      </gln-calendar>
     </div>
-  </div>
+  </div> -->
 
 </div>
 
