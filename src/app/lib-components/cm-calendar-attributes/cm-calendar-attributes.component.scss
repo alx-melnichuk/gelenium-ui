@@ -7,20 +7,30 @@ app-cm-calendar-attributes {
     border: 1px solid burlywood;
     padding: 5px;
   }
+  .gln-calendar button[glncn-tint].cnat1-demo1 {
+    background: orange;
+  }
 
   .cnat2-clnd {
     border: 1px solid mediumseagreen;
     padding: 5px;
   }
   .cnat2-block {
-    min-width: 320px;
-    min-height: 320px;
+    min-width: 300px;
+    min-height: 300px;
     display: grid;
   }
 
   .cnat3-clnd {
     border: 1px solid mediumorchid;
     padding: 5px;
+  }
+
+  // ===
+  .cnat-2-block {
+    min-width: 320px;
+    min-height: 320px;
+    display: grid;
   }
 
   .cnat4-clnd {
@@ -32,18 +42,10 @@ app-cm-calendar-attributes {
     border: 1px solid  mediumblue;
     padding: 5px;
   }
-  .cnat5-block {
-    min-width: 300px;
-    min-height: 300px;
-    display: grid;
-  }
 
   .cnat6-clnd {
     border: 1px solid darkgreen;
     padding: 5px;
-  }
-  .gln-calendar button[glncn-tint].cnat6-demo1 {
-    background: orange;
   }
 
 }
