@@ -109,34 +109,34 @@ gln-calendar {
     justify-content: space-around;
   }
 
-  // Level 3 Element "title-block"
-  [glncn-title-block] {
+  // Level 3 Element "title-box"
+  [glncn-title-box] {
     align-items: center;
     display: inline-flex;
     flex-grow: 1;
     order: var(--glncn-tblock-ord, unset);
-    min-width: var(--glncn-tblock-mn-wd, 15ch);
+    min-width: var(--glncn-tblock-mn-wd, 8em);
     &[glncn-title-year], &[glncn-title-month] {
       justify-content: center;
     }
   }
 
-  &[hor] [glncn-title-block] {
+  &[hor] [glncn-title-box] {
     justify-content: center;
     &:not([glncn-title-month]) {
       padding-top: 4em;
     }
   }
-  &:not([hor]) [glncn-title-block] {
+  &:not([hor]) [glncn-title-box] {
     padding-left: var(--glncn---wee-tblock-pd-lf, var(--glncn-tblock-pd-lf, calc(var(--glncn--item-size) * 0.25)));
   }
-  &[wee]:not([hor]) [glncn-title-block] {
+  &[wee]:not([hor]) [glncn-title-box] {
     --glncn---wee-tblock-pd-lf: var(--glncn-week-tblock-pd-lf, calc(var(--glncn--item-size) * 1.25));
   }
-  &:not([dis]) [glncn-title-block] {
+  &:not([dis]) [glncn-title-box] {
     color: var(--glncn-def-tblock-cl, var(--glncn--item-def-cl));
   }
-  &[dis] [glncn-title-block] {
+  &[dis] [glncn-title-box] {
     color: var(--glncn-dis-tblock-cl, var(--glncn--sndr-dis-cl));
   }
 

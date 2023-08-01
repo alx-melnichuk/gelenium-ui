@@ -3,11 +3,11 @@
   <div glncn-title
     class="gln-calendar-title">
 
-    <div glncn-title-block
+    <div glncn-title-box
       [attr.glncn-title-day]="isViewModeDay() ? '' : undefined"
       [attr.glncn-title-month]="isViewModeMonth() ? '' : undefined"
       [attr.glncn-title-year]="isViewModeYear() ? '' : undefined"
-      [ngClass]="['gln-calendar-title-block'
+      [ngClass]="['gln-calendar-title-box'
         , (isViewModeDay() ? 'gln-title-day' : '')
         , (isViewModeMonth() ? 'gln-title-month' : '')
         , (isViewModeYear() ? 'gln-title-year' : '')]">
