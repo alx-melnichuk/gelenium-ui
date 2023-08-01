@@ -23,58 +23,6 @@ public model01: Date | null = new Date();</pre>
   </code>
 </section>
 
-<section mr-vr>
-  <label> <input type="checkbox"
-      (change)="isDisabled01a=!isDisabled01a" />isDisabled</label>
-  -
-  <label><input type="checkbox"
-      (change)="isHideDayoff01a=!isHideDayoff01a" />isHideDayoff</label>
-  -
-  <label><input type="checkbox"
-      (change)="isReadOnly01a=!isReadOnly01a" />isReadOnly</label>
-  -
-  <label><input type="checkbox"
-      (change)="isWeekNumber01a=!isWeekNumber01a" />isWeekNumber</label>
-  -
-  <label><input type="checkbox"
-      (change)="isTwoDigitDay01a=!isTwoDigitDay01a" />isTwoDigitDay</label>
-</section>
-
-<section mr-vr>
-  <label><input type="checkbox"
-      (change)="isConfig01a=!isConfig01a" />isConfig01a</label>
-  -
-  <label><input type="checkbox"
-      (change)="isColsByYears01a=!isColsByYears01a" />ColsByYears</label>
-  -
-  <label><input type="checkbox"
-      (change)="isRowsByYears01a=!isRowsByYears01a" />RowsByYears</label>
-  -
-  <label><input type="checkbox"
-      (change)="isLocale01a=!isLocale01a" />Locale 'fr-FR'</label>
-</section>
-
-<section mr-vr>
-  <label><input type="checkbox"
-      (change)="isColsByMonths01a=!isColsByMonths01a" />ColsByMonths</label>
-  -
-  <label><input type="checkbox"
-      (change)="isStartSunday01a=!isStartSunday01a" />StartSunday</label>
-  -
-  <label><input type="checkbox"
-      (change)="isFormatMonth01a=!isFormatMonth01a" />FormatMonth</label>
-  -
-  <label><input type="checkbox"
-      (change)="isSizeDayWeek01a=!isSizeDayWeek01a" />SizeDayWeek</label>
-</section>
-<section>
-  -
-  <label><input type="checkbox"
-      (change)="isMinDate01a=!isMinDate01a" />MinDate "{{ minDate.toString().substring(4, 31) }}"</label>
-  -
-  <label><input type="checkbox"
-      (change)="isMaxDate01a=!isMaxDate01a" />MaxDate "{{ maxDate.toString().substring(4, 31) }}"</label>
-</section>
 
 <div class="app-group">
 
@@ -85,76 +33,20 @@ public model01: Date | null = new Date();</pre>
     <div class="cnbs-mb">
       <small>
         <em>
-          Model: {{ value01a == null ? 'null' : value01a | date:'YYYY/MM/dd' }}
+          Model: {{ value01a == null ? 'null' : value01a.toDateString() }}
         </em>
       </small>
     </div>
     <div class="cnbs-clnd">
-      <!-- <gln-calendar [value]="value01a"
-        [isDisabled]="isDisabled01a"
-        [isHideDayoff]="isHideDayoff01a"
-        [isReadOnly]="isReadOnly01a"
-        [isWeekNumber]="isWeekNumber01a"
-        [isTwoDigitDay]="isTwoDigitDay01a"
-        [config]="isConfig01a ? config01a : undefined"
-        [colsByYears]="isConfig01a ? undefined : (isColsByYears01a ? 5 : undefined)"
-        [colsByMonths]="isConfig01a ? undefined : (isColsByMonths01a ? 4 : undefined)"
-        [formatMonth]="isConfig01a ? undefined : (isFormatMonth01a ? 'short' : undefined)"
-        [isStartSunday]="isConfig01a ? undefined : (isStartSunday01a ? true : undefined)"
-        [rowsByYears]="isConfig01a ? undefined : (isRowsByYears01a ? 4 : undefined)"
-        [sizeDayWeek]="isConfig01a ? undefined : (isSizeDayWeek01a ? 1 : undefined)"
-        minDate9="minDate"
-        maxDate9="maxDate"
-        (change)="value01a=$event">
-      </gln-calendar> -->
-      <!-- views -->
-      <!-- <gln-calendar [value]="value01a"
-        [config]="config01a"
-        [view]="'year'">
-      </gln-calendar> -->
-
-      <!-- <gln-calendar [value]="value01a"
-        [isTwoDigitDay]="isTwoDigitDay01a"
-        [colsByYears]="isConfig01a ? undefined : (isColsByYears01a ? 5 : undefined)"
-        [rowsByYears]="isConfig01a ? undefined : (isRowsByYears01a ? 4 : undefined)"
-        [minDate]="isMinDate01a ? minDate : undefined"
-        [maxDate]="isMaxDate01a ? maxDate : undefined"
-        [locale]="isLocale01a ? 'fr-FR' : undefined"
-        [dateClasses]="dateClasses01a"
-        (change2)="value01a=$event?.date">
-      </gln-calendar> -->
-
-      <!-- [views]="['month', 'year']"        view="year"
-          [config]="isConfig01a ? config01b : undefined"
-           -->
-      <!-- <gln-calendar [value]="value01a"
-        [minDate]="isMinDate01a ? minDate : undefined"
-        [maxDate]="isMaxDate01a ? maxDate : undefined"
-        (change)="value01a = $event">
-      </gln-calendar> -->
-
       <gln-calendar [value]="value01a"
-        [colsByYears]="3"
-        view="year"
         (change)="value01a=$event">
       </gln-calendar>
-
-
-      <!-- <gln-calendar [value]="value01a"
-        [startDate]="startDate01a">
-      </gln-calendar> -->
-
-      <!-- <gln-calendar>
-      </gln-calendar> -->
-
-      <!-- <gln-calendar [value]="value01a">
-      </gln-calendar> -->
     </div>
   </div>
 
-  <!-- <div class="app-elem">
+  <div class="app-elem">
     <div>
-      <small><em>Attribute: value</em></small>
+      <small><em>Attribute: value, isHorizont</em></small>
     </div>
     <div class="cnbs-mb">
       <small>
@@ -166,14 +58,10 @@ public model01: Date | null = new Date();</pre>
     <div class="cnbs-clnd">
       <gln-calendar [value]="value01b"
         isHorizont
-        [isDisabled]="isDisabled01a"
-        [isHideDayoff]="isHideDayoff01a"
-        [isReadOnly]="isReadOnly01a"
-        [isWeekNumber]="isWeekNumber01a"
         (change)="value01b=$event">
       </gln-calendar>
     </div>
-  </div> -->
+  </div>
 
 </div>
 
@@ -221,16 +109,10 @@ import &#123;
   encapsulation: ViewEncapsulation.None,
 &#125;)
 export class CalendarComponent &#123;
-  public selectedDate: Date = this.getSelectedDate();
 
-  public value01a: Date | null = new Date(this.selectedDate);
+  public value01a: Date | null | undefined;
+  public value01b: Date | null | undefined;
 
-  private getSelectedDate(): Date &#123;
-    const d1: Date = new Date();
-    const result: Date = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0);
-    result.setDate(result.getDate() + (d1.getDate() === 1 ? 1 : -1));
-    return result;
-  &#125;
 &#125;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelCss">
@@ -246,7 +128,6 @@ app-checkbox &#123;
   &#125;
   .cnbs-clnd &#123;
     border: 1px solid darkgray;
-    padding: 5px;
   &#125;
   .cnbs-mb &#123;
     margin-bottom: 0.5em;
