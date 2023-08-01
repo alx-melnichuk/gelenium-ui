@@ -66,12 +66,12 @@ export class GlnCalendarUtil {
   public static COLS_BY_MONTHS_DEFAULT = 3;
 
   // -- Methods for the mode: "view year", "view month", "view day" --
-  public static getActiveMonthStr(currDate: Date, formatMonth: string | null, locale: string | null | undefined): string {
+  public static getActiveMonthStr(currDate: Date, formatMonth: string | null, locales: string | null | undefined): string {
     const monthFormat = DateUtil.convertMonthFormat(formatMonth || CALENDAR_MONTH_FORMAT_DEFAULT);
     let monthStr: string = '';
     try {
       // Get the name of the month for the specified date.
-      monthStr = DateUtil.formatDateTime(currDate, { month: monthFormat }, locale || undefined);
+      monthStr = DateUtil.formatDateTime(currDate, { month: monthFormat }, locales || undefined);
     } catch (e) {
       console.error(e);
       monthStr = DateUtil.formatDateTime(currDate, { month: monthFormat }, undefined);
@@ -338,9 +338,9 @@ export class GlnCalendarUtil {
   /** Get a list of days of the week.
    * @param sizeDayWeek: number;   // 1-'narrow'(T); 2,3-'short'(Thu); -1-'long'(Thursday);
    * @param dayStartWeek: number;  // 0-Sunday (default), 1-Monday;
-   * @param locale: string | null; // Locale ('en-US', 'de-DE', 'fr-FR')
+   * @param locales: string | null; // Locale ('en-US', 'de-DE', 'fr-FR')
    */
-  public static getDayNameList(sizeDayWeek: number | null, dayStartWeek: number, locale: string | null): CalendarDayName[] {
+  public static getDayNameList(sizeDayWeek: number | null, dayStartWeek: number, locales: string | null): CalendarDayName[] {
     const result: CalendarDayName[] = [];
     const szDayWeek: number = sizeDayWeek || CALENDAR_WEEKDAY_NUM_DEFAULT;
     const dayWeekRes: 'long' | 'short' | 'narrow' = szDayWeek <= 0 || 3 < szDayWeek ? 'long' : 1 === szDayWeek ? 'narrow' : 'short';
@@ -352,7 +352,7 @@ export class GlnCalendarUtil {
       let value: string = '';
       try {
         // Get the name of the day of the week for the specified date.
-        value = DateUtil.formatDateTime(current, { weekday: dayWeekRes }, locale || undefined);
+        value = DateUtil.formatDateTime(current, { weekday: dayWeekRes }, locales || undefined);
       } catch (e) {
         console.error(e);
         value = DateUtil.formatDateTime(current, { weekday: dayWeekRes });

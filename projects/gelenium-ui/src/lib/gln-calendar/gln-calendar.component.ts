@@ -113,7 +113,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public rowsByYears: number | string | null | undefined; // [1 - 12] default 5
   @Input()
   public sizeDayWeek: number | string | null | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
-
   @Input()
   public startDate: Date | null | undefined; // # TODO ?? no example
   @Input()
@@ -217,7 +216,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     let hasFormatByMonths: boolean = false;
     let hasFormatMonth: boolean = false;
     let hasIsStartSunday: boolean = false;
-    let hasLocale: boolean = false;
+    let hasLocales: boolean = false;
     let hasMinDateOrMaxDate: boolean = false;
     let hasSizeDayWeek: boolean = false;
     let hasStartDate: boolean = false;
@@ -291,7 +290,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     if (!!changes['locales'] || ChangeUtil.check(changes['config'], 'locales')) {
       this.localesVal = this.locales || this.currConfig.locales || '';
-      hasLocale = true;
+      hasLocales = true;
     }
     if (!!changes['maxDate'] || ChangeUtil.check(changes['config'], 'maxDate')) {
       this.maxDateVal = this.maxDate || this.currConfig.maxDate || null;
@@ -333,7 +332,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       }
     }
 
-    if (hasIsStartSunday || hasLocale || hasSizeDayWeek) {
+    if (hasIsStartSunday || hasLocales || hasSizeDayWeek) {
       this.log(`OnChange(); frameDayNames = getDayNameList();`); // #
       this.frameDayNames = GlnCalendarUtil.getDayNameList(this.sizeDayWeekVal, this.dayStartWeek, this.localesVal);
     }
@@ -349,10 +348,10 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       dateDisabled: this.dateDisabledVal,
     };
 
-    if (changes['value'] || hasMinDateOrMaxDate || hasFormatMonth || hasLocale) {
+    if (changes['value'] || hasMinDateOrMaxDate || hasFormatMonth || hasLocales) {
       this.log(`OnChange(); updateViewCurrent();`); // #
       const isFirstChange: boolean = changes[Object.keys(changes)[0]].firstChange;
-      const date: Date = new Date(isFirstChange ? /*this.startDateVal || */ this.value || today : this.currentDate);
+      const date: Date = new Date(isFirstChange ? this.startDateVal || today : this.currentDate);
       const current: Date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0);
       this.updateViewCurrentDate(current, viewParams, this.formatMonthVal);
     }
@@ -362,7 +361,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.log(`OnChange(); getDayCellRowList();`); // #
       this.frameDayCellRows = GlnCalendarUtil.getDayCellRowList(currentDate, viewParams, today, this.isStartSundayVal); // !!??
     }
-    if (changes['value'] || hasMinDateOrMaxDate || hasDateClasses || hasDateDisabled || hasFormatByMonths || hasLocale) {
+    if (changes['value'] || hasMinDateOrMaxDate || hasDateClasses || hasDateDisabled || hasFormatByMonths || hasLocales) {
       this.log(`OnChange(); getMonthCellList();`); // #
       this.frameMonthCells = GlnCalendarUtil.getMonthCellList(currentDate, viewParams, today, this.formatByMonthsVal);
     }
@@ -487,7 +486,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
 
     if (!this.currentMonthStr) {
       this.log(`OnInit(); updateViewCurrent();`); // #
-      const date: Date = new Date(/*this.startDateVal || */ this.value || today);
+      const date: Date = new Date(this.startDateVal || today);
       const current: Date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0);
       this.updateViewCurrentDate(current, viewParams, this.formatMonthVal);
     }
