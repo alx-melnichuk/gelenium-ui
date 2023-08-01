@@ -184,13 +184,13 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
         <small><em>wdFull (min-width: 300px; min-height: 300px;).</em></small>
       </div>
     </div>
-    <div class="cnat2-block cnat2-clnd">
-      <gln-calendar [value]="value02f"
+    <div class="cnat2-clnd cnat2-box">
+      <gln-calendar [value]="value02e"
         style="--glncn-month-cell-wd: 100%;"
         formatByMonths="long"
         view="month"
         wdFull
-        (change)="value02f=$event">
+        (change)="value02e=$event">
       </gln-calendar>
     </div>
   </div>
@@ -202,10 +202,10 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div>
       <small>&nbsp;</small>
     </div>
-    <div class="cnat2-clnd">
-      <gln-calendar [value]="value02g"
+    <div class="cnat2-clnd cnat2-title-day">
+      <gln-calendar [value]="value02f"
         formatMonth="2-digit"
-        (change)="value02g=$event">
+        (change)="value02f=$event">
       </gln-calendar>
     </div>
   </div>
@@ -215,9 +215,9 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <small><em>Attribute: isDisabled.</em></small>
     </div>
     <div class="cnat2-clnd">
-      <gln-calendar [value]="value02h"
+      <gln-calendar [value]="value02g"
         isDisabled
-        (change)="value02h=$event">
+        (change)="value02g=$event">
       </gln-calendar>
     </div>
   </div>
@@ -227,9 +227,9 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <small><em>Attribute: isHideDayoff.</em></small>
     </div>
     <div class="cnat2-clnd">
-      <gln-calendar [value]="value02i"
+      <gln-calendar [value]="value02h"
         isHideDayoff
-        (change)="value02i=$event">
+        (change)="value02h=$event">
       </gln-calendar>
     </div>
   </div>
@@ -270,9 +270,9 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <small><em>Attribute: isHideOldDays.</em></small>
     </div>
     <div class="cnat3-clnd">
-      <gln-calendar [value]="value02k"
+      <gln-calendar [value]="value02i"
         isHideOldDays
-        (change)="value02k=$event">
+        (change)="value02i=$event">
       </gln-calendar>
     </div>
   </div>
@@ -282,9 +282,9 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <small><em>Attribute: isHorizont.</em></small>
     </div>
     <div class="cnat3-clnd">
-      <gln-calendar [value]="value02l"
+      <gln-calendar [value]="value02j"
         isHorizont
-        (change)="value02l=$event">
+        (change)="value02j=$event">
       </gln-calendar>
     </div>
   </div>
@@ -294,9 +294,9 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <small><em>Attribute: isReadOnly.</em></small>
     </div>
     <div class="cnat3-clnd">
-      <gln-calendar [value]="value02m"
+      <gln-calendar [value]="value02k"
         isReadOnly
-        (change)="value02m=$event">
+        (change)="value02k=$event">
       </gln-calendar>
     </div>
   </div>
@@ -306,9 +306,9 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <small><em>Attribute: isStartSunday.</em></small>
     </div>
     <div class="cnat3-clnd">
-      <gln-calendar [value]="value02n"
+      <gln-calendar [value]="value02l"
         isStartSunday
-        (change)="value02n=$event">
+        (change)="value02l=$event">
       </gln-calendar>
     </div>
   </div>
@@ -353,9 +353,9 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <small><em>Attribute: isTwoDigitDay.</em></small>
     </div>
     <div class="cnat4-clnd">
-      <gln-calendar [value]="value02o"
+      <gln-calendar [value]="value02m"
         isTwoDigitDay
-        (change)="value02o=$event">
+        (change)="value02m=$event">
       </gln-calendar>
     </div>
   </div>
@@ -365,37 +365,37 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <small><em>Attribute: isWeekNumber.</em></small>
     </div>
     <div class="cnat4-clnd">
-      <gln-calendar [value]="value02p"
+      <gln-calendar [value]="value02n"
         isWeekNumber
+        (change)="value02n=$event">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem ">
+    <div>
+      <div>
+        <small><em>Attribute: minDate="{{minDate02o.toDateString()}}".</em></small>
+      </div>
+    </div>
+    <div class="cnat4-clnd">
+      <gln-calendar [value]="value02o"
+        [minDate]="minDate02o"
+        (change)="value02o=$event">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem ">
+    <div>
+      <div>
+        <small><em>Attribute: maxDate="{{maxDate02p.toDateString()}}".</em></small>
+      </div>
+    </div>
+    <div class="cnat4-clnd">
+      <gln-calendar [value]="value02p"
+        [maxDate]="maxDate02p"
         (change)="value02p=$event">
-      </gln-calendar>
-    </div>
-  </div>
-
-  <div class="app-elem ">
-    <div>
-      <div>
-        <small><em>Attribute: minDate="{{minDate02q.toDateString()}}".</em></small>
-      </div>
-    </div>
-    <div class="cnat4-clnd">
-      <gln-calendar [value]="value02q"
-        [minDate]="minDate02q"
-        (change)="value02q=$event">
-      </gln-calendar>
-    </div>
-  </div>
-
-  <div class="app-elem ">
-    <div>
-      <div>
-        <small><em>Attribute: maxDate="{{maxDate02r.toDateString()}}".</em></small>
-      </div>
-    </div>
-    <div class="cnat4-clnd">
-      <gln-calendar [value]="value02r"
-        [maxDate]="maxDate02r"
-        (change)="value02r=$event">
       </gln-calendar>
     </div>
   </div>
@@ -431,7 +431,6 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <li>
       "sizeDayWeek" - specifies the length of the name of the day of the week ([sizeDayWeek]="2")
     </li>
-
   </ul>
 </section>
 
@@ -442,10 +441,10 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div>
       <small><em>Attribute: locales='fr-FR'.</em></small>
     </div>
-    <div class="cnat5-clnd">
-      <gln-calendar [value]="value02s"
+    <div class="cnat5-clnd cnat5-header">
+      <gln-calendar [value]="value02q"
         [locales]="'fr-FR'"
-        (change)="value02s=$event">
+        (change)="value02q=$event">
       </gln-calendar>
     </div>
   </div>
@@ -455,10 +454,10 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <small><em>Attribute: rowsByYears=4, view="year".</em></small>
     </div>
     <div class="cnat5-clnd">
-      <gln-calendar [value]="value02t"
+      <gln-calendar [value]="value02r"
         [rowsByYears]="4"
         view="year"
-        (change)="value02t=$event">
+        (change)="value02r=$event">
       </gln-calendar>
     </div>
   </div>
@@ -468,9 +467,9 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <small><em>Attribute: sizeDayWeek=1 ('M').</em></small>
     </div>
     <div class="cnat5-clnd">
-      <gln-calendar [value]="value02u"
+      <gln-calendar [value]="value02s"
         [sizeDayWeek]="1"
-        (change)="value02u=$event">
+        (change)="value02s=$event">
       </gln-calendar>
     </div>
   </div>
@@ -480,9 +479,9 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <small><em>Attribute: sizeDayWeek=3 ('Mon').</em></small>
     </div>
     <div class="cnat5-clnd">
-      <gln-calendar [value]="value02v"
+      <gln-calendar [value]="value02t"
         [sizeDayWeek]="3"
-        (change)="value02v=$event">
+        (change)="value02t=$event">
       </gln-calendar>
     </div>
   </div>
@@ -502,6 +501,33 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <a [href]="urlCmCalendar + '#attributes-supported06'">#</a>
   </h4>
   <ul>
+    <li>
+      "startDate" - defines the date (also month and year) from which the calendar opens;
+      <br />
+      The default is 'today'.
+    </li>
+    <li>
+      "views" - defines an array of available values for the display mode.
+      <br />
+      (default = ['day', 'year', 'month'];)
+      <br />
+      <i>takes the following values:</i>
+      <ul>
+        <li>'day' - display mode for day selection;</li>
+        <li>'month' - display mode for month selection;</li>
+        <li>'year' - display mode for year selection;</li>
+      </ul>
+    </li>
+    <li>
+      "view" - defines the initial value of the display mode.
+      <br />
+      <i>takes the following values:</i>
+      <ul>
+        <li>'day' - display mode for day selection;</li>
+        <li>'month' - display mode for month selection;</li>
+        <li>'year' - display mode for year selection;</li>
+      </ul>
+    </li>
 
   </ul>
 </section>
@@ -509,6 +535,53 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
 
 <div class="app-group">
 
+  <div class="app-elem ">
+    <div>
+      <small><em>Attribute: startDate="{{startDate02u.toDateString()}}".</em></small>
+    </div>
+    <div class="cnat6-clnd">
+      <gln-calendar [value]="value02u"
+        [startDate]="startDate02u"
+        (change)="value02u=$event">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem ">
+    <div>
+      <small><em>Attribute: without startDate.</em></small>
+    </div>
+    <div class="cnat6-clnd">
+      <gln-calendar [value]="value02v"
+        (change)="value02v=$event">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem ">
+    <div>
+      <small><em>Attribute: views=['month', 'year'], view='year'.</em></small>
+    </div>
+    <div class="cnat4-clnd">
+      <gln-calendar [value]="value02w"
+        [views]="['month', 'year']"
+        view="year"
+        (change)="value02w=$event">
+      </gln-calendar>
+    </div>
+  </div>
+
+  <div class="app-elem ">
+    <div>
+      <small><em>Attribute: views=['month', 'year'].</em></small>
+    </div>
+    <div class="cnat4-clnd">
+      <gln-calendar [value]="value02x"
+        [views]="['month', 'year']"
+        (change)="value02x=$event">
+      </gln-calendar>
+    </div>
+  </div>
 
 </div>
 
@@ -517,16 +590,12 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
 
 <hr br-nn />
 
-<!--  -->
-
-
-
 
 <section mr-vr
-  id="attributes-supported0_2">
+  id="attributes-supported07">
   <h4 class="app-hover-link">
-    Attributes are also supported 2:
-    <a [href]="urlCmCalendar + '#attributes-supported0_2'">#</a>
+    Attributes are also supported 7:
+    <a [href]="urlCmCalendar + '#attributes-supported07'">#</a>
   </h4>
   <ul>
     <li>
@@ -550,9 +619,10 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div>
       <small><em>Attribute: wdFull (min-width: 320px; min-height: 320px;).</em></small>
     </div>
-    <div class="cnat-2-block cnat2-clnd">
-      <gln-calendar [value]="value0_2f"
-        wdFull>
+    <div class="cnat7-clnd cnat7-box">
+      <gln-calendar [value]="value02y"
+        wdFull
+        (change)="value02y=$event">
       </gln-calendar>
     </div>
   </div>
@@ -561,51 +631,11 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div>
       <small><em>Attribute: wdFull, isHorizont (min-width: 320px; min-height: 320px;).</em></small>
     </div>
-    <div class="cnat-2-block cnat2-clnd">
-      <gln-calendar [value]="value0_2g"
+    <div class="cnat7-clnd cnat7-box">
+      <gln-calendar [value]="value02z"
         wdFull
-        isHorizont>
-      </gln-calendar>
-    </div>
-  </div>
-
-</div>
-
-<div class="app-group">
-
-</div>
-
-
-<span style="color: indianred;">source</span>
-
-
-
-<section mr-vr
-  id="attributes-supported0_3">
-  <h4 class="app-hover-link">
-    Attributes are also supported 3:
-    <a [href]="urlCmCalendar + '#attributes-supported0_3'">#</a>
-  </h4>
-  <ul>
-  </ul>
-</section>
-
-
-<div class="app-group">
-
-
-</div>
-
-<div class="app-group">
-
-  <div class="app-elem ">
-    <div>
-      <small><em>Attribute: isWeekNumber, isHorizont.</em></small>
-    </div>
-    <div class="cnat3-clnd">
-      <gln-calendar isWeekNumber
         isHorizont
-        [value]="value0_2n">
+        (change)="value02z=$event">
       </gln-calendar>
     </div>
   </div>
@@ -615,92 +645,4 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
 
 <span style="color: indianred;">source</span>
 
-
-
-<section mr-vr
-  id="attributes-supported0_4">
-  <h4 class="app-hover-link">
-    Attributes are also supported 4:
-    <a [href]="urlCmCalendar + '#attributes-supported0_4'">#</a>
-  </h4>
-  <ul>
-    <li>
-      "views" - defines an array of available values for the display mode.
-      <br />
-      (default = ['day', 'year', 'month'];)
-      <br />
-      <i>takes the following values:</i>
-      <ul>
-        <li>'day' - display mode for day selection;</li>
-        <li>'month' - display mode for month selection;</li>
-        <li>'year' - display mode for year selection;</li>
-      </ul>
-    </li>
-    <li>
-      "view" - defines the initial value of the display mode.
-      <br />
-      <i>takes the following values:</i>
-      <ul>
-        <li>'day' - display mode for day selection;</li>
-        <li>'month' - display mode for month selection;</li>
-        <li>'year' - display mode for year selection;</li>
-      </ul>
-    </li>
-  </ul>
-</section>
-
-
-<div class="app-group">
-
-  <div class="app-elem ">
-    <div>
-      <small><em>Attribute: views=['month', 'year'], view='year'.</em></small>
-    </div>
-    <div class="cnat4-clnd">
-      <gln-calendar [value]="value0_2q"
-        [views]="['month', 'year']"
-        view="year">
-      </gln-calendar>
-    </div>
-  </div>
-
-  <div class="app-elem ">
-    <div>
-      <small><em>Attribute: views=['month', 'year'].</em></small>
-    </div>
-    <div class="cnat4-clnd">
-      <gln-calendar [value]="value0_2r"
-        [views]="['month', 'year']">
-      </gln-calendar>
-    </div>
-  </div>
-
-</div>
-
-
-
-<span style="color: indianred;">source</span>
-
-
-
-
-
-<section mr-vr
-  id="attributes-supported0_6">
-  <h4 class="app-hover-link">
-    Attributes are also supported 6:
-    <a [href]="urlCmCalendar + '#attributes-supported0_6'">#</a>
-  </h4>
-  <ul>
-  </ul>
-</section>
-
-
-<div class="app-group">
-
-
-</div>
-
-
-<hr br-nn />
 <hr br-nn />

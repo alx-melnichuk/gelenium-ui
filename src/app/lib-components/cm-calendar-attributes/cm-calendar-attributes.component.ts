@@ -26,7 +26,7 @@ export class CmCalendarAttributesComponent {
   public today: Date = new Date();
   public day: number = this.today.getDate() + (this.today.getDate() === 1 ? 1 : -1);
   public selectedDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.day, 0, 0, 0, 0);
-  // public selectedDate: Date = this.getSelectedDate();
+
   // Part 1
   public value02a: Date | null = new Date(this.selectedDate);
   public value02b: Date | null = new Date(this.selectedDate);
@@ -34,65 +34,41 @@ export class CmCalendarAttributesComponent {
   public value02d: Date | null = new Date(this.selectedDate);
 
   // Part 2
+  public value02e: Date | null = new Date(this.selectedDate);
   public value02f: Date | null = new Date(this.selectedDate);
   public value02g: Date | null = new Date(this.selectedDate);
   public value02h: Date | null = new Date(this.selectedDate);
-  public value02i: Date | null = new Date(this.selectedDate);
 
   // Part 3
+  public value02i: Date | null = new Date(this.selectedDate);
+  public value02j: Date | null = new Date(this.selectedDate);
   public value02k: Date | null = new Date(this.selectedDate);
   public value02l: Date | null = new Date(this.selectedDate);
+
+  // Part 4
   public value02m: Date | null = new Date(this.selectedDate);
   public value02n: Date | null = new Date(this.selectedDate);
-
-  // Part 4
   public value02o: Date | null = new Date(this.selectedDate);
+  public minDate02o: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 3, 0, 0, 0, 0);
   public value02p: Date | null = new Date(this.selectedDate);
-  public value02q: Date | null = new Date(this.selectedDate);
-  public minDate02q: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 3, 0, 0, 0, 0);
-  public value02r: Date | null = new Date(this.selectedDate);
-  public maxDate02r: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 3, 0, 0, 0, 0);
+  public maxDate02p: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 3, 0, 0, 0, 0);
 
   // Part 5
+  public value02q: Date | null = new Date(this.selectedDate);
+  public value02r: Date | null = new Date(this.selectedDate);
   public value02s: Date | null = new Date(this.selectedDate);
   public value02t: Date | null = new Date(this.selectedDate);
-  public value02u: Date | null = new Date(this.selectedDate);
-  public value02v: Date | null = new Date(this.selectedDate);
 
-  // ===
-  // Part 1
-  public value0_2a: Date | null = new Date(this.selectedDate);
-  public value0_2b: Date | null = new Date(this.selectedDate);
-  public value0_2c: Date | null = new Date(this.selectedDate);
-  public value0_2d: Date | null = new Date(this.selectedDate);
-  // Part 2
-  public value0_2f: Date | null = new Date(this.selectedDate);
-  public value0_2g: Date | null = new Date(this.selectedDate);
-  public value0_2h: Date | null = new Date(this.selectedDate);
-  public value0_2i: Date | null = new Date(this.selectedDate);
-  // Part 3
-  public value0_2k: Date | null = new Date(this.selectedDate);
-  public value0_2l: Date | null = new Date(this.selectedDate);
-  public value0_2m: Date | null = new Date(this.selectedDate);
-  public value0_2n: Date | null = new Date(this.selectedDate);
-  // Part 4
-  public value0_2o: Date | null = new Date(this.selectedDate);
-  public value0_2p: Date | null = new Date(this.selectedDate);
-  public value0_2q: Date | null = new Date(this.selectedDate);
-  public value0_2r: Date | null = new Date(this.selectedDate);
-  // Part 5
-  public value0_2s: Date | null = new Date(this.selectedDate);
-  public value0_2t: Date | null = new Date(this.selectedDate);
-  public value0_2u: Date | null = new Date(this.selectedDate);
-  public value0_2v: Date | null = new Date(this.selectedDate);
   // Part 6
+  public value02u: Date | null = new Date(this.selectedDate);
+  public startDate02u: Date = new Date(this.today.getFullYear(), this.today.getMonth() - 1, this.today.getDate(), 0, 0, 0, 0);
+  public value02v: Date | null = new Date(this.selectedDate);
+  public value02w: Date | null = null;
+  public value02x: Date | null = null;
 
-  // Demo
-  public value0_2_z: Date | null = new Date(this.selectedDate);
-  public startDate01a: Date = new Date(2023, 4, 12);
-  public isDisabled01a: boolean = false;
-  public isHideOldDays01a: boolean = false;
-  public isHideDayoff01a: boolean = false;
+  // Part 7
+  public value02y: Date | null = new Date(this.selectedDate);
+  public value02z: Date | null = new Date(this.selectedDate);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
@@ -128,11 +104,4 @@ export class CmCalendarAttributesComponent {
     }
     return result;
   };
-
-  private getSelectedDate(): Date {
-    const date: Date = new Date();
-    const result: Date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0);
-    result.setDate(result.getDate() + (date.getDate() === 1 ? 1 : -1));
-    return result;
-  }
 }

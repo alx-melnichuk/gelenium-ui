@@ -15,22 +15,18 @@ app-cm-calendar-attributes {
     border: 1px solid mediumseagreen;
     padding: 5px;
   }
-  .cnat2-block {
+  .cnat2-box {
     min-width: 300px;
     min-height: 300px;
     display: grid;
+  }
+  .cnat2-title-day .gln-calendar-title-caption {
+    color: blue;
   }
 
   .cnat3-clnd {
     border: 1px solid mediumorchid;
     padding: 5px;
-  }
-
-  // ===
-  .cnat-2-block {
-    min-width: 320px;
-    min-height: 320px;
-    display: grid;
   }
 
   .cnat4-clnd {
@@ -43,9 +39,24 @@ app-cm-calendar-attributes {
     padding: 5px;
   }
 
+  .cnat5-header .gln-calendar-header {
+    font-style: italic;
+  }
+  .cnat5-header .gln-calendar-cage:not(.dayWeek0):not(.dayWeek6) {
+    color: rgb(0 0 255 / 50%);
+  }
+
   .cnat6-clnd {
     border: 1px solid darkgreen;
     padding: 5px;
   }
 
+  .cnat7-clnd {
+    border: 1px solid mediumslateblue;
+  }
+  .cnat7-box {
+    min-width: 320px;
+    min-height: 320px;
+    display: grid;
+  }
 }
