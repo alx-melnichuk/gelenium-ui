@@ -27,10 +27,10 @@ app-pl-calendar-bootstrap {
   --glncn-title-fn-wg: 700;
   --glncn-tblock-ord: 1;
   --glncn-tblock-pd-lf: 0;
-  .gln-calendar-title-block {
+  .gln-calendar-title-box {
     justify-content: center;
   }
-  &:not([dis]) .gln-calendar-title-block {
+  &:not([dis]) .gln-calendar-title-box {
     cursor: pointer;
     &:hover {
       background-color: #eee;
