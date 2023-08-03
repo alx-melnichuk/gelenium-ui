@@ -123,9 +123,7 @@ gln-calendar {
 
   &[hor] [glncn-title-box] {
     justify-content: center;
-    &:not([glncn-title-month]) {
-      padding-top: 4em;
-    }
+    padding-top: 4em;
   }
   &:not([hor]) [glncn-title-box] {
     padding-left: var(--glncn---wee-tblock-pd-lf, var(--glncn-tblock-pd-lf, calc(var(--glncn--item-size) * 0.25)));
@@ -280,6 +278,7 @@ gln-calendar {
   [glncn-rows] {
     display: flex;
     flex-direction: var(--glncn--dir-lv1);
+    padding: 2px;
   }
   &[wdFull] [glncn-rows] {
     justify-content: space-between;
@@ -426,7 +425,7 @@ gln-calendar {
     display: flex;
     flex-wrap: wrap;
     inset: 0px;
-    padding: var(--glncn-view-month-pd, 0px);
+    padding: var(--glncn-view-month-pd, 2px);
     position: absolute;
   }
 
@@ -460,8 +459,11 @@ gln-calendar {
     flex-wrap: wrap;
     inset: 0px;
     overflow: auto;
-    padding: var(--glncn-view-year-pd, 0px);
+    padding: var(--glncn-view-year-pd, 2px);
     position: absolute;
+  }
+  &[hor] [glncn-view-year] {
+    flex-direction: column;
   }
   // Level 4 Element "glncn-year-wrapper"
   [glncn-year-wrapper] {

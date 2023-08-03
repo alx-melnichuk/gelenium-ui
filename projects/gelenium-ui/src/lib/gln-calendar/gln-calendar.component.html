@@ -109,7 +109,7 @@
       class="gln-calendar-list-days"
       [attr.glncn-hide]="!isViewModeDay() ? '' : undefined"
       #dayInfoRowListRef
-      (keydown)="keydownDayCell($event)">
+      (keydown)="keydownDayCell($event, 7, 7)">
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
         [ngTemplateOutletContext]="frameDayCellRows[0]">
@@ -170,7 +170,7 @@
       glncn-view-year
       class="gln-calendar-view-year"
       #yearCellListRef
-      (keydown)="keydownYearCellList($event, yearCellListRef, frameYearCells[0].value, getYearsPerPage())">
+      (keydown)="keydownYearCell($event, yearCellListRef, colsByYearsVal || 0, rowsByYearsVal || 0)">
       <div *ngFor="let yearCell of frameYearCells; trackBy: trackByCell"
         glncn-year-wrapper
         class="gln-calendar-year-cell-wrapper">

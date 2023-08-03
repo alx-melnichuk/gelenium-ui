@@ -613,46 +613,49 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.switchViewMode();
     }
   }
-  public keydownYearCellList(event: KeyboardEvent, elementRef: HTMLDivElement, yearFirst: number, yearsPerPage: number): void {
+  public keydownYearCell(event: KeyboardEvent, elementRef: HTMLDivElement, incrementX: number, incrementY: number): void {
     this.log(``); // #
-    this.log(`$$ keydownYearCell()  data-label=${(event.target as HTMLElement)?.getAttribute('data-label')}`); // #
-    if (CALENDAR_VIEW_YEAR !== this.viewMode || this.markedYear == null) {
+    this.log(`@@ keydownYearCell() key: ${event.key} data-label: ${(event.target as HTMLElement)?.getAttribute('data-label')}`); // #
+    if (this.isDisabledVal || this.isReadOnlyVal) {
       return;
     }
+    if (this.viewMode !== CALENDAR_VIEW_YEAR || this.currentDate == null) {
+      return;
+    }
+    this.log(`@@ keydownYearCell(); currDate=${this.currentDate.toDateString().substring(4)}`); // #
+    let isStopPropagation: boolean = false;
+    const deltaRightOrLeft: number = !this.isHorizontVal ? 1 : incrementY;
+    const deltaUpOrDown: number = !this.isHorizontVal ? incrementX : 1;
     let delta: number = 0;
-    const deltaRightLeft: number = !this.isHorizontVal ? 1 : yearsPerPage;
-    const deltaUpDown: number = !this.isHorizontVal ? -yearsPerPage : -1;
-    delta = 'ArrowRight' === event.key ? deltaRightLeft : 'ArrowLeft' === event.key ? -deltaRightLeft : delta;
-    delta = 'ArrowUp' === event.key ? deltaUpDown : 'ArrowDown' === event.key ? -deltaUpDown : delta;
-    this.log(`$$ keydownYearCell(); delta: ${delta} elementRef${elementRef != null ? '!' : ''}=null key: ${event.key}`); // #
-    this.log(`$$ keydownYearCell(); markedYear='${this.markedYear}'`); // #
-    this.log(`$$ keydownYearCell(); yearFirst=${yearFirst} yearLast=${yearFirst + yearsPerPage - 1}`); // #
+    delta = 'ArrowRight' === event.key ? deltaRightOrLeft : delta;
+    delta = 'ArrowLeft' === event.key ? -deltaRightOrLeft : delta;
+    delta = 'ArrowUp' === event.key ? -deltaUpOrDown : delta;
+    delta = 'ArrowDown' === event.key ? deltaUpOrDown : delta;
+
+    this.log(`$$ keydownYearCell();  delta: ${delta} `); // #
     if (delta != 0) {
-      const newMarkedYear: number = this.markedYear + delta;
-      const currElem: HTMLElement | null = GlnCalendarUtil.getElementByLabel(elementRef, this.markedYear.toString());
-      HtmlElemUtil.setAttr(this.renderer, HtmlElemUtil.getElementRef(currElem), 'tabindex', '-1');
-      this.markedYear = newMarkedYear;
-      this.log(`$$ keydownYearCell();new markedYear='${this.markedYear}'`); // #
-      let isZoneOnStable: boolean = false;
-      const yearLast: number = yearFirst + yearsPerPage - 1;
-      if (newMarkedYear < yearFirst) {
-        this.log(`$$ keydownYearCell; clickPrev (VIEW_YEAR);`); // #
-        // this.clickPrev (CALENDAR_VIEW_YEAR);
-        isZoneOnStable = true;
-      } else if (yearLast < newMarkedYear) {
-        this.log(`$$ keydownYearCell; clickNext (VIEW_YEAR);`); // #
-        // this.clickNext (CALENDAR_VIEW_YEAR);
-        isZoneOnStable = true;
-      } else {
-        this.log(`$$ keydownYearCell(); 1moveFocusToAnotherElement(${newMarkedYear});`); // #
-        // this.moveFocusToAnotherElement(elementRef, newMarkedYear.toString());
-      }
-      if (isZoneOnStable) {
-        // Update the position once the zone is stable so that the component will be fully rendered.
-        // this.ngZone.onStable.pipe(first()).subscribe(() => {
-        //  this.moveFocusToAnotherElement(elementRef, newMarkedYear.toString());
-        // });
-      }
+      const newMarkedDate: Date = DateUtil.addYear(this.currentDate, delta);
+      this.log(`@@ keydownDayCell(); newMarkedDate=${newMarkedDate.toDateString().substring(4)}`); // #
+      this.updateViewAllCells(newMarkedDate);
+      this.changeDetectorRef.markForCheck();
+
+      /** Transfer focus to the active cell after the microtask queue is empty. */
+      this.ngZone.onStable.pipe(first()).subscribe(() => {
+        setTimeout(() => {
+          this.focus();
+        }, 200);
+      });
+      isStopPropagation = true;
+    } else if (' ' === event.key || 'Enter' === event.key) {
+      // const date: Date = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), 0, 0, 0, 0);
+      // this.change.emit(date);
+      isStopPropagation = true;
+    }
+
+    if (isStopPropagation) {
+      // Cancel subsequent processing of the event.
+      event.preventDefault();
+      event.stopPropagation();
     }
   }
   // -- Methods for the mode "view month" --
@@ -684,7 +687,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.updateViewAllCells(currDate);
     }
   }
-  public keydownDayCell(event: KeyboardEvent): void {
+  public keydownDayCell(event: KeyboardEvent, incrementX: number, incrementY: number): void {
     this.log(``); // #
     this.log(`@@ keydownDayCell() key: ${event.key} data-label: ${(event.target as HTMLElement)?.getAttribute('data-label')}`); // #
     if (this.isDisabledVal || this.isReadOnlyVal) {
@@ -694,15 +697,14 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       return;
     }
     this.log(`@@ keydownDayCell(); currDate=${this.currentDate.toDateString().substring(4)}`); // #
-
+    let isStopPropagation: boolean = false;
+    const deltaRightOrLeft: number = !this.isHorizontVal ? 1 : incrementY;
+    const deltaUpOrDown: number = !this.isHorizontVal ? incrementX : 1;
     let delta: number = 0;
-    const deltaRightOrLeft: number = !this.isHorizontVal ? 1 : 7;
-    const deltaUpOrDown: number = !this.isHorizontVal ? -7 : -1;
-
     delta = 'ArrowRight' === event.key ? deltaRightOrLeft : delta;
     delta = 'ArrowLeft' === event.key ? -deltaRightOrLeft : delta;
-    delta = 'ArrowUp' === event.key ? deltaUpOrDown : delta;
-    delta = 'ArrowDown' === event.key ? -deltaUpOrDown : delta;
+    delta = 'ArrowUp' === event.key ? -deltaUpOrDown : delta;
+    delta = 'ArrowDown' === event.key ? deltaUpOrDown : delta;
 
     this.log(`@@ keydownDayCell(); delta: ${delta} `); // #
     if (delta != 0) {
@@ -715,6 +717,14 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.ngZone.onStable.pipe(first()).subscribe(() => {
         this.focus();
       });
+      isStopPropagation = true;
+    } else if (' ' === event.key || 'Enter' === event.key) {
+      const date: Date = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), 0, 0, 0, 0);
+      this.change.emit(date);
+      isStopPropagation = true;
+    }
+
+    if (isStopPropagation) {
       // Cancel subsequent processing of the event.
       event.preventDefault();
       event.stopPropagation();
