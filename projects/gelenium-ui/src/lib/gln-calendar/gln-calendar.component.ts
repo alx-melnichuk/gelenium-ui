@@ -125,7 +125,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public wdFull: string | null | undefined;
 
   @Output()
-  readonly change: EventEmitter<Date | null> = new EventEmitter();
+  readonly selected: EventEmitter<Date | null> = new EventEmitter();
   @Output() // Emits selected month from the list. This does not mean that the selected date has changed.
   readonly monthSelected: EventEmitter<Date> = new EventEmitter();
   @Output() // Emits selected year from the list. This does not mean that the selected date has changed.
@@ -186,7 +186,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   private currentYearStr: string = '';
   private frameYearFinish: number = -1;
   private frameYearStart: number = -1;
-  private markedYear: number | null = null;
   private rowsByMonths: number | null = null;
   private viewMode: CALENDAR_VIEW_TYPE = CALENDAR_VIEW_DAY;
   private yearsPerPage: number = -1;
@@ -217,7 +216,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     let hasFormatMonth: boolean = false;
     let hasIsStartSunday: boolean = false;
     let hasLocales: boolean = false;
-    let hasMinDateOrMaxDate: boolean = false;
+    let hasMinOrMaxDate: boolean = false;
     let hasSizeDayWeek: boolean = false;
     let hasStartDate: boolean = false;
     let hasYearsPerPage: boolean = false;
@@ -294,11 +293,11 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     if (!!changes['maxDate'] || ChangeUtil.check(changes['config'], 'maxDate')) {
       this.maxDateVal = this.maxDate || this.currConfig.maxDate || null;
-      hasMinDateOrMaxDate = true;
+      hasMinOrMaxDate = true;
     }
     if (!!changes['minDate'] || ChangeUtil.check(changes['config'], 'minDate')) {
       this.minDateVal = this.minDate || this.currConfig.minDate || null;
-      hasMinDateOrMaxDate = true;
+      hasMinOrMaxDate = true;
     }
     if (!!changes['rowsByYears'] || ChangeUtil.check(changes['config'], 'rowsByYears')) {
       const rowsByYearsVal: number = NumberUtil.converInt((this.rowsByYears || this.currConfig.rowsByYears || '').toString(), -1);
@@ -348,7 +347,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       dateDisabled: this.dateDisabledVal,
     };
 
-    if (changes['value'] || hasMinDateOrMaxDate || hasFormatMonth || hasLocales) {
+    if (!!changes['value'] || hasStartDate || hasMinOrMaxDate || hasFormatMonth || hasLocales || hasStartDate) {
       this.log(`OnChange(); updateViewCurrent();`); // #
       const isFirstChange: boolean = changes[Object.keys(changes)[0]].firstChange;
       const date: Date = new Date(isFirstChange ? this.startDateVal || today : this.currentDate);
@@ -357,19 +356,20 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     const currentDate: Date = this.currentDate;
 
-    if (changes['value'] || hasMinDateOrMaxDate || hasDateClasses || hasDateDisabled || hasIsStartSunday) {
+    if (!!changes['value'] || hasMinOrMaxDate || hasDateClasses || hasDateDisabled || hasIsStartSunday || hasStartDate) {
       this.log(`OnChange(); getDayCellRowList();`); // #
       this.frameDayCellRows = GlnCalendarUtil.getDayCellRowList(currentDate, viewParams, today, this.isStartSundayVal); // !!??
     }
-    if (changes['value'] || hasMinDateOrMaxDate || hasDateClasses || hasDateDisabled || hasFormatByMonths || hasLocales) {
+    if (!!changes['value'] || hasMinOrMaxDate || hasDateClasses || hasDateDisabled || hasFormatByMonths || hasLocales || hasStartDate) {
       this.log(`OnChange(); getMonthCellList();`); // #
       this.frameMonthCells = GlnCalendarUtil.getMonthCellList(currentDate, viewParams, today, this.formatByMonthsVal);
     }
-    if ((hasYearsPerPage || hasMinDateOrMaxDate) && this.yearsPerPage > -1) {
+    if ((hasYearsPerPage || hasMinOrMaxDate) && this.yearsPerPage > -1) {
       this.log(`OnChange(); updateViewYearStartFinish();`); // #
       this.updateViewYearStartFinish(this.yearsPerPage, this.minDateVal?.getFullYear() || null, this.maxDateVal?.getFullYear() || null);
     }
-    if ((changes['value'] || hasMinDateOrMaxDate || hasDateClasses || hasDateDisabled || hasYearsPerPage) && this.yearsPerPage > -1) {
+    const isYearsPerPage: boolean = this.yearsPerPage > -1;
+    if ((!!changes['value'] || hasMinOrMaxDate || hasDateClasses || hasDateDisabled || hasYearsPerPage || hasStartDate) && isYearsPerPage) {
       this.log(`OnChange(); updateViewYearCell();`); // #
       this.updateViewYearCell(currentDate, viewParams, today, this.frameYearStart, this.frameYearFinish, this.yearsPerPage);
     }
@@ -647,8 +647,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       });
       isStopPropagation = true;
     } else if (' ' === event.key || 'Enter' === event.key) {
-      // const date: Date = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), 0, 0, 0, 0);
-      // this.change.emit(date);
+      const date: Date = new Date(this.currentDate.getFullYear(), 0, 1, 0, 0, 0, 0);
+      this.yearSelected.emit(date);
+      this.log(` yearSelected.emit("${date.toString().substring(4, 31)}");`);
       isStopPropagation = true;
     }
 
@@ -681,10 +682,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public clickSelectItem(cell: CalendarCell | null): void {
     if (!this.isDisabledVal && !this.isReadOnlyVal) {
       const result: Date | null = !!cell ? new Date(cell.date.getFullYear(), cell.date.getMonth(), cell.date.getDate(), 0, 0, 0, 0) : null;
-      this.change.emit(result);
+      this.selected.emit(result);
       this.log(`   change.emit("${result?.toString().substring(4, 31) || 'null'}");`);
-      const currDate: Date = result || this.currentDate; // TODO set value null, currentDate=today
-      this.updateViewAllCells(currDate);
+      this.updateViewAllCells(result || this.currentDate);
     }
   }
   public keydownDayCell(event: KeyboardEvent, incrementX: number, incrementY: number): void {
@@ -720,7 +720,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       isStopPropagation = true;
     } else if (' ' === event.key || 'Enter' === event.key) {
       const date: Date = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), 0, 0, 0, 0);
-      this.change.emit(date);
+      this.selected.emit(date);
       isStopPropagation = true;
     }
 
