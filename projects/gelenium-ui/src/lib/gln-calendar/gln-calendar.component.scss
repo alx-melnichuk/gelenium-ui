@@ -428,6 +428,9 @@ gln-calendar {
     padding: var(--glncn-view-month-pd, 2px);
     position: absolute;
   }
+  &[hor] [glncn-view-month] {
+    flex-direction: column;
+  }
 
   // Level 4 Element "glncn-month-wrapper"
   [glncn-month-wrapper] {

@@ -139,7 +139,8 @@
 
     <div *ngIf="isViewModeMonth()"
       glncn-view-month
-      class="gln-calendar-view-month">
+      class="gln-calendar-view-month"
+      (keydown)="keydownMonthCell($event, colsByMonthsVal || 0, rowsByMonthsVal || 0)">
       <div *ngFor="let monthCell of frameMonthCells; trackBy: trackByCell;"
         glncn-month-wrapper
         class="gln-calendar-month-cell-wrapper">
@@ -170,7 +171,7 @@
       glncn-view-year
       class="gln-calendar-view-year"
       #yearCellListRef
-      (keydown)="keydownYearCell($event, yearCellListRef, colsByYearsVal || 0, rowsByYearsVal || 0)">
+      (keydown)="keydownYearCell($event, colsByYearsVal || 0, rowsByYearsVal || 0)">
       <div *ngFor="let yearCell of frameYearCells; trackBy: trackByCell"
         glncn-year-wrapper
         class="gln-calendar-year-cell-wrapper">
