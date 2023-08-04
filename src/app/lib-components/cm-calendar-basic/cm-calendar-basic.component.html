@@ -39,7 +39,7 @@ public model01: Date | null = new Date();</pre>
     </div>
     <div class="cnbs-clnd">
       <gln-calendar [value]="value01a"
-        (change)="value01a=$event">
+        (selected)="value01a=$event">
       </gln-calendar>
     </div>
   </div>
@@ -58,7 +58,7 @@ public model01: Date | null = new Date();</pre>
     <div class="cnbs-clnd">
       <gln-calendar [value]="value01b"
         isHorizont
-        (change)="value01b=$event">
+        (selected)="value01b=$event">
       </gln-calendar>
     </div>
   </div>

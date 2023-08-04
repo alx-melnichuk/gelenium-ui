@@ -68,7 +68,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <gln-calendar [value]="value02a"
         [colsByYears]="3"
         view="year"
-        (change)="value02a=$event">
+        (selected)="value02a=$event">
       </gln-calendar>
     </div>
   </div>
@@ -83,7 +83,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <gln-calendar [value]="value02b"
         [colsByMonths]="4"
         view="month"
-        (change)="value02b=$event">
+        (selected)="value02b=$event">
       </gln-calendar>
     </div>
   </div>
@@ -100,7 +100,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat1-clnd">
       <gln-calendar [value]="value02c"
         [dateClasses]="dateClasses02c"
-        (change)="value02c=$event">
+        (selected)="value02c=$event">
       </gln-calendar>
     </div>
   </div>
@@ -118,7 +118,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <gln-calendar [value]="value02d"
         isHideOldDays
         [dateDisabled]="dateDisabled02d"
-        (change)="value02d=$event">
+        (selected)="value02d=$event">
       </gln-calendar>
     </div>
   </div>
@@ -188,7 +188,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
         formatByMonths="long"
         view="month"
         wdFull
-        (change)="value02e=$event">
+        (selected)="value02e=$event">
       </gln-calendar>
     </div>
   </div>
@@ -203,7 +203,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat2-clnd cnat2-title-day">
       <gln-calendar [value]="value02f"
         formatMonth="2-digit"
-        (change)="value02f=$event">
+        (selected)="value02f=$event">
       </gln-calendar>
     </div>
   </div>
@@ -215,7 +215,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat2-clnd">
       <gln-calendar [value]="value02g"
         isDisabled
-        (change)="value02g=$event">
+        (selected)="value02g=$event">
       </gln-calendar>
     </div>
   </div>
@@ -227,7 +227,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat2-clnd">
       <gln-calendar [value]="value02h"
         isHideDayoff
-        (change)="value02h=$event">
+        (selected)="value02h=$event">
       </gln-calendar>
     </div>
   </div>
@@ -270,7 +270,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat3-clnd">
       <gln-calendar [value]="value02i"
         isHideOldDays
-        (change)="value02i=$event">
+        (selected)="value02i=$event">
       </gln-calendar>
     </div>
   </div>
@@ -282,7 +282,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat3-clnd">
       <gln-calendar [value]="value02j"
         isHorizont
-        (change)="value02j=$event">
+        (selected)="value02j=$event">
       </gln-calendar>
     </div>
   </div>
@@ -294,7 +294,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat3-clnd">
       <gln-calendar [value]="value02k"
         isReadOnly
-        (change)="value02k=$event">
+        (selected)="value02k=$event">
       </gln-calendar>
     </div>
   </div>
@@ -306,7 +306,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat3-clnd">
       <gln-calendar [value]="value02l"
         isStartSunday
-        (change)="value02l=$event">
+        (selected)="value02l=$event">
       </gln-calendar>
     </div>
   </div>
@@ -353,7 +353,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat4-clnd">
       <gln-calendar [value]="value02m"
         isTwoDigitDay
-        (change)="value02m=$event">
+        (selected)="value02m=$event">
       </gln-calendar>
     </div>
   </div>
@@ -365,7 +365,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat4-clnd">
       <gln-calendar [value]="value02n"
         isWeekNumber
-        (change)="value02n=$event">
+        (selected)="value02n=$event">
       </gln-calendar>
     </div>
   </div>
@@ -379,7 +379,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat4-clnd">
       <gln-calendar [value]="value02o"
         [minDate]="minDate02o"
-        (change)="value02o=$event">
+        (selected)="value02o=$event">
       </gln-calendar>
     </div>
   </div>
@@ -393,7 +393,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat4-clnd">
       <gln-calendar [value]="value02p"
         [maxDate]="maxDate02p"
-        (change)="value02p=$event">
+        (selected)="value02p=$event">
       </gln-calendar>
     </div>
   </div>
@@ -442,7 +442,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat5-clnd cnat5-header">
       <gln-calendar [value]="value02q"
         [locales]="'fr-FR'"
-        (change)="value02q=$event">
+        (selected)="value02q=$event">
       </gln-calendar>
     </div>
   </div>
@@ -455,7 +455,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <gln-calendar [value]="value02r"
         [rowsByYears]="4"
         view="year"
-        (change)="value02r=$event">
+        (selected)="value02r=$event">
       </gln-calendar>
     </div>
   </div>
@@ -467,7 +467,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat5-clnd">
       <gln-calendar [value]="value02s"
         [sizeDayWeek]="1"
-        (change)="value02s=$event">
+        (selected)="value02s=$event">
       </gln-calendar>
     </div>
   </div>
@@ -479,7 +479,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat5-clnd">
       <gln-calendar [value]="value02t"
         [sizeDayWeek]="3"
-        (change)="value02t=$event">
+        (selected)="value02t=$event">
       </gln-calendar>
     </div>
   </div>
@@ -540,7 +540,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat6-clnd">
       <gln-calendar [value]="value02u"
         [startDate]="startDate02u"
-        (change)="value02u=$event">
+        (selected)="value02u=$event">
       </gln-calendar>
     </div>
   </div>
@@ -551,7 +551,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     </div>
     <div class="cnat6-clnd">
       <gln-calendar [value]="value02v"
-        (change)="value02v=$event">
+        (selected)="value02v=$event">
       </gln-calendar>
     </div>
   </div>
@@ -564,7 +564,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <gln-calendar [value]="value02w"
         [views]="['month', 'year']"
         view="year"
-        (change)="value02w=$event">
+        (selected)="value02w=$event">
       </gln-calendar>
     </div>
   </div>
@@ -576,7 +576,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat4-clnd">
       <gln-calendar [value]="value02x"
         [views]="['month', 'year']"
-        (change)="value02x=$event">
+        (selected)="value02x=$event">
       </gln-calendar>
     </div>
   </div>
@@ -620,7 +620,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
     <div class="cnat7-clnd cnat7-box">
       <gln-calendar [value]="value02y"
         wdFull
-        (change)="value02y=$event">
+        (selected)="value02y=$event">
       </gln-calendar>
     </div>
   </div>
@@ -633,7 +633,7 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
       <gln-calendar [value]="value02z"
         wdFull
         isHorizont
-        (change)="value02z=$event">
+        (selected)="value02z=$event">
       </gln-calendar>
     </div>
   </div>
