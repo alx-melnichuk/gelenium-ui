@@ -577,6 +577,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public switchViewMode(activeView: 'day' | 'month' | 'year' = this.viewMode): void {
     if (!this.isDisabledVal && !this.isReadOnlyVal && this.viewsVal.length > 1) {
       this.viewMode = GlnCalendarUtil.getNextView(this.viewsVal, activeView);
+      this.ngZone.onStable.pipe(first()).subscribe(() => {
+        this.focus();
+      });
     }
   }
   /** Transition to the previous period. */

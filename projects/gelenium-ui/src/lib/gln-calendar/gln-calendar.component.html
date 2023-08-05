@@ -250,7 +250,7 @@
         [attr.glncn-mar]="dayCell.isCurrent ? '' : undefined"
         [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && isStatePassive(dayCell)) || dayCell.isDisabled
           ? '' : undefined"
-        [attr.tabindex]="!isDisabledVal && !dayCell.isDisabled && dayCell.isCurrent ? 0 : -1"
+        [attr.tabindex]="isViewModeDay() && !isDisabledVal && !dayCell.isDisabled && dayCell.isCurrent ? 0 : -1"
         [attr.data-label]="dayCell.label"
         [ngClass]="['gln-calendar-day-cell'
           , ('dayWeek' + dayCell.dayWeek)
