@@ -108,7 +108,7 @@
     <div glncn-rows
       class="gln-calendar-list-days"
       [attr.glncn-hide]="!isViewModeDay() ? '' : undefined"
-      #dayInfoRowListRef
+      #dayRowCellListRef
       (keydown)="keydownDayCell($event, 7, 7)">
 
       <ng-container [ngTemplateOutlet]="templateDayInfoRow"
@@ -140,6 +140,7 @@
     <div *ngIf="isViewModeMonth()"
       glncn-view-month
       class="gln-calendar-view-month"
+      #monthCellListRef
       (keydown)="keydownMonthCell($event, colsByMonthsVal || 0, rowsByMonthsVal || 0)">
       <div *ngFor="let monthCell of frameMonthCells; trackBy: trackByCell;"
         glncn-month-wrapper

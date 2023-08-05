@@ -109,15 +109,7 @@ export class GlnCalendarUtil {
 
       const classes: string[] = params.dateClasses != null ? params.dateClasses(date, CALENDAR_VIEW_YEAR, current) : [];
 
-      let yearStr: string = '';
-      try {
-        // Get the name of the year for the specified date.
-        yearStr = DateUtil.formatDateTime(date, { year: 'numeric' }, params.locales || undefined);
-      } catch (e) {
-        console.error(e);
-        yearStr = DateUtil.formatDateTime(date, { year: 'numeric' }, undefined);
-      }
-      const label: string = yearStr;
+      const label: string = GlnCalendarUtil.getLabelByYear(date, params.locales || undefined);
 
       const isSelected: boolean = !hasSelected && year === selectedYear;
       hasSelected = !hasSelected && isSelected ? true : hasSelected;
@@ -151,6 +143,17 @@ export class GlnCalendarUtil {
     }
     return result;
   }
+  public static getLabelByYear(date: Date, locales: string | null | undefined): string {
+    let yearStr: string = '';
+    try {
+      // Get the name of the year for the specified date.
+      yearStr = DateUtil.formatDateTime(date, { year: 'numeric' }, locales || undefined);
+    } catch (e) {
+      console.error(e);
+      yearStr = DateUtil.formatDateTime(date, { year: 'numeric' }, undefined);
+    }
+    return yearStr;
+  }
   public static getNextYearAvailability(currentDate: Date, maxDate: Date | null | undefined): number {
     return maxDate == null ? 1 : DateUtil.compareYear(maxDate, currentDate);
   }
@@ -173,7 +176,6 @@ export class GlnCalendarUtil {
     const selectedMonth: number | undefined = params.selected?.getMonth();
     const todayYear: number = today.getFullYear();
     const todayMonth: number = today.getMonth();
-    const monthFormat = DateUtil.convertMonthFormat(formatByMonths || CALENDAR_FORMAT_BY_MONTH_DEFAULT);
     let hasSelected: boolean = params.selected == null;
     let hasToday: boolean = false;
     let hasCurrent: boolean = false;
@@ -183,16 +185,7 @@ export class GlnCalendarUtil {
       const dayWeek = date.getDay();
 
       const classes: string[] = params.dateClasses != null ? params.dateClasses(date, CALENDAR_VIEW_MONTH, current) : [];
-
-      let monthStr: string = '';
-      try {
-        // Get the name of the month for the specified date.
-        monthStr = DateUtil.formatDateTime(date, { month: monthFormat }, params.locales || undefined);
-      } catch (e) {
-        console.error(e);
-        monthStr = DateUtil.formatDateTime(date, { month: monthFormat }, undefined);
-      }
-      const label: string = StringUtil.camelize(monthStr);
+      const label: string = GlnCalendarUtil.getLabelByMonth(date, formatByMonths, params.locales);
 
       const isSelected: boolean = !hasSelected && year === selectedYear && month === selectedMonth;
       hasSelected = !hasSelected && isSelected ? true : hasSelected;
@@ -223,6 +216,18 @@ export class GlnCalendarUtil {
       }
     }
     return result;
+  }
+  public static getLabelByMonth(date: Date, formatByMonths: string | null, locales: string | null | undefined): string {
+    const monthFormat = DateUtil.convertMonthFormat(formatByMonths || CALENDAR_FORMAT_BY_MONTH_DEFAULT);
+    let monthStr: string = '';
+    try {
+      // Get the name of the month for the specified date.
+      monthStr = DateUtil.formatDateTime(date, { month: monthFormat }, locales || undefined);
+    } catch (e) {
+      console.error(e);
+      monthStr = DateUtil.formatDateTime(date, { month: monthFormat }, undefined);
+    }
+    return StringUtil.camelize(monthStr);
   }
   public static getNextMonthAvailability(currentDate: Date, maxDate: Date | null | undefined): number {
     return maxDate == null ? 1 : DateUtil.compareYearMonth(maxDate, currentDate);
@@ -288,7 +293,7 @@ export class GlnCalendarUtil {
 
       const classes: string[] = params.dateClasses != null ? params.dateClasses(date, CALENDAR_VIEW_DAY, current) : [];
 
-      const label: string = GlnCalendarUtil.getLabelByDate(date) || '';
+      const label: string = GlnCalendarUtil.getLabelByDate2(date, params.locales);
 
       const isSelected: boolean | undefined = !hasSelected && year === selectedYear && month === selectedMonth && day === selectedDay;
       hasSelected = !hasSelected && isSelected ? true : hasSelected;
@@ -334,6 +339,17 @@ export class GlnCalendarUtil {
       result = DateUtil.formatDateTime(date, { year: 'numeric', month: 'long', day: 'numeric' }, 'default');
     }
     return result;
+  }
+  public static getLabelByDate2(date: Date, locales: string | null | undefined): string {
+    let dateStr: string = '';
+    try {
+      // Get the name of the year for the specified date.
+      dateStr = DateUtil.formatDateTime(date, { year: 'numeric', month: 'long', day: 'numeric' }, locales || undefined);
+    } catch (e) {
+      console.error(e);
+      dateStr = DateUtil.formatDateTime(date, { year: 'numeric', month: 'long', day: 'numeric' }, undefined);
+    }
+    return dateStr;
   }
   /** Get a list of days of the week.
    * @param sizeDayWeek: number;   // 1-'narrow'(T); 2,3-'short'(Thu); -1-'long'(Thursday);
