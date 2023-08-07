@@ -617,39 +617,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.switchViewMode();
     }
   }
-  public keydownYearCell(event: KeyboardEvent, incrementX: number, incrementY: number): void {
-    if (this.isDisabledVal || this.isReadOnlyVal || this.viewMode !== CALENDAR_VIEW_YEAR || this.currentDate == null) {
-      return;
-    }
-    let isStopPropagation: boolean = false;
-    const deltaRightOrLeft: number = !this.isHorizontVal ? 1 : incrementY;
-    const deltaUpOrDown: number = !this.isHorizontVal ? incrementX : 1;
-    let delta: number = 0;
-    delta = 'ArrowRight' === event.key ? deltaRightOrLeft : delta;
-    delta = 'ArrowLeft' === event.key ? -deltaRightOrLeft : delta;
-    delta = 'ArrowUp' === event.key ? -deltaUpOrDown : delta;
-    delta = 'ArrowDown' === event.key ? deltaUpOrDown : delta;
-    if (delta != 0) {
-      const newMarkedDate: Date = DateUtil.addYear(this.currentDate, delta);
-      this.updateViewAllCells(newMarkedDate);
-      this.changeDetectorRef.markForCheck();
-      Promise.resolve().then(() => this.focus());
-      isStopPropagation = true;
-    } else if (' ' === event.key || 'Enter' === event.key) {
-      const newYear: number = this.currentDate.getFullYear();
-      const yearValue: number = this.value?.getFullYear() || -1;
-      if (newYear !== yearValue) {
-        const date: Date = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), 0, 0, 0, 0);
-        this.yearSelected.emit(date);
-      }
-      this.switchViewMode();
-      isStopPropagation = true;
-    }
-    if (isStopPropagation) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-  }
   // -- Methods for the mode "view month" --
   public clickMonthCell(newMonth: number): void {
     this.log(`clickMonthCell(${newMonth})`); // #
@@ -669,34 +636,30 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.switchViewMode();
     }
   }
-  public keydownMonthCell(event: KeyboardEvent, incrementX: number, incrementY: number): void {
-    if (this.isDisabledVal || this.isReadOnlyVal || this.viewMode !== CALENDAR_VIEW_MONTH || this.currentDate == null) {
+  public keydownCell(event: KeyboardEvent, deltaX: number, deltaY: number, viewMode: 'day' | 'month' | 'year' = this.viewMode): void {
+    if (this.isDisabledVal || this.isReadOnlyVal || this.currentDate == null) {
       return;
     }
     let isStopPropagation: boolean = false;
-    const deltaRightOrLeft: number = !this.isHorizontVal ? 1 : incrementY;
-    const deltaUpOrDown: number = !this.isHorizontVal ? incrementX : 1;
+    const deltaRightOrLeft: number = !this.isHorizontVal ? 1 : deltaY;
+    const deltaUpOrDown: number = !this.isHorizontVal ? deltaX : 1;
     let delta: number = 0;
     delta = 'ArrowRight' === event.key ? deltaRightOrLeft : delta;
     delta = 'ArrowLeft' === event.key ? -deltaRightOrLeft : delta;
     delta = 'ArrowUp' === event.key ? -deltaUpOrDown : delta;
     delta = 'ArrowDown' === event.key ? deltaUpOrDown : delta;
     if (delta != 0) {
-      const newMarkedDate: Date = DateUtil.addMonth(this.currentDate, delta);
+      // const newMarkedDate: Date = DateUtil.addMonth(this.currentDate, delta);
+      const newMarkedDate: Date = this.addDeltaByViewMode(this.currentDate, delta, viewMode);
       this.updateViewAllCells(newMarkedDate);
       this.changeDetectorRef.markForCheck();
       Promise.resolve().then(() => this.focus());
       isStopPropagation = true;
     } else if (' ' === event.key || 'Enter' === event.key) {
-      const year: number = this.currentDate.getFullYear();
-      const newMonth: number = this.currentDate.getMonth();
-      const monthValue: number = this.value?.getMonth() || -1;
-      const yearValue: number = this.value?.getFullYear() || -1;
-      if (newMonth !== monthValue || year !== yearValue) {
-        const date: Date = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), 0, 0, 0, 0);
-        this.monthSelected.emit(date);
+      this.sendEventByViewMode(this.currentDate, this.value, viewMode);
+      if (CALENDAR_VIEW_DAY !== viewMode) {
+        this.switchViewMode();
       }
-      this.switchViewMode();
       isStopPropagation = true;
     }
     if (isStopPropagation) {
@@ -704,7 +667,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       event.stopPropagation();
     }
   }
-
   // -- Methods for the mode "view day" --
   public clickSelectItem(cell: CalendarCell | null): void {
     if (!this.isDisabledVal && !this.isReadOnlyVal) {
@@ -712,35 +674,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.selected.emit(result);
       this.log(`   change.emit("${result?.toString().substring(4, 31) || 'null'}");`);
       this.updateViewAllCells(result || this.currentDate);
-    }
-  }
-  public keydownDayCell(event: KeyboardEvent, incrementX: number, incrementY: number): void {
-    if (this.isDisabledVal || this.isReadOnlyVal || this.viewMode !== CALENDAR_VIEW_DAY || this.currentDate == null) {
-      return;
-    }
-    let isStopPropagation: boolean = false;
-    const deltaRightOrLeft: number = !this.isHorizontVal ? 1 : incrementY;
-    const deltaUpOrDown: number = !this.isHorizontVal ? incrementX : 1;
-    let delta: number = 0;
-    delta = 'ArrowRight' === event.key ? deltaRightOrLeft : delta;
-    delta = 'ArrowLeft' === event.key ? -deltaRightOrLeft : delta;
-    delta = 'ArrowUp' === event.key ? -deltaUpOrDown : delta;
-    delta = 'ArrowDown' === event.key ? deltaUpOrDown : delta;
-    if (delta != 0) {
-      const newMarkedDate: Date = DateUtil.addDay(this.currentDate, delta);
-      this.updateViewAllCells(newMarkedDate);
-      this.changeDetectorRef.markForCheck();
-      Promise.resolve().then(() => this.focus());
-      isStopPropagation = true;
-    } else if (' ' === event.key || 'Enter' === event.key) {
-      const date: Date = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), 0, 0, 0, 0);
-      this.selected.emit(date);
-      isStopPropagation = true;
-    }
-
-    if (isStopPropagation) {
-      event.preventDefault();
-      event.stopPropagation();
     }
   }
   // ** Private methods **
@@ -887,6 +820,35 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       ? GlnCalendarUtil.getLabelByMonth(date, formatByMonths, locales)
       : '';
   }
+  private addDeltaByViewMode(date: Date, delta: number, viewMode: string): Date {
+    return CALENDAR_VIEW_YEAR === viewMode
+      ? DateUtil.addYear(date, delta)
+      : CALENDAR_VIEW_MONTH === viewMode
+      ? DateUtil.addMonth(date, delta)
+      : CALENDAR_VIEW_DAY === viewMode
+      ? DateUtil.addDay(date, delta)
+      : date;
+  }
+  private sendEventByViewMode(currentDate: Date, value: Date | null | undefined, viewMode: string): void {
+    const yearCurr: number = currentDate.getFullYear();
+    const monthCurr: number = currentDate.getMonth();
+    const dayCurr: number = currentDate.getDate();
+    const yearValue: number = value?.getFullYear() || -1;
+    const monthValue: number = value?.getMonth() || -1;
+    const dayValue: number = value?.getDate() || -1;
+
+    if (CALENDAR_VIEW_YEAR === viewMode && yearCurr !== yearValue) {
+      const date: Date = new Date(yearCurr, monthCurr, dayCurr, 0, 0, 0, 0);
+      this.yearSelected.emit(date);
+    } else if (CALENDAR_VIEW_MONTH === viewMode && (monthCurr !== monthValue || yearCurr !== yearValue)) {
+      const date: Date = new Date(yearCurr, monthCurr, dayCurr, 0, 0, 0, 0);
+      this.monthSelected.emit(date);
+    } else if (CALENDAR_VIEW_DAY === viewMode && (monthCurr !== monthValue || yearCurr !== yearValue || dayCurr !== dayValue)) {
+      const date: Date = new Date(yearCurr, monthCurr, dayCurr, 0, 0, 0, 0);
+      this.selected.emit(date);
+    }
+  }
+
   private getPercentage(total: number, value: number): number | null {
     let result: number = (total / value) * 100;
     const residue: number = result % 10;
