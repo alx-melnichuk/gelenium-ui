@@ -598,7 +598,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   }
 
   // -- Methods for the mode "view year" --
-
   public clickYearCell(newYear: number): void {
     this.log(`clickYearCell(${newYear})`); // #
     if (this.isDisabledVal || this.isReadOnlyVal || CALENDAR_VIEW_YEAR !== this.viewMode) {
@@ -649,7 +648,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     delta = 'ArrowUp' === event.key ? -deltaUpOrDown : delta;
     delta = 'ArrowDown' === event.key ? deltaUpOrDown : delta;
     if (delta != 0) {
-      // const newMarkedDate: Date = DateUtil.addMonth(this.currentDate, delta);
       const newMarkedDate: Date = this.addDeltaByViewMode(this.currentDate, delta, viewMode);
       this.updateViewAllCells(newMarkedDate);
       this.changeDetectorRef.markForCheck();
@@ -813,7 +811,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   }
   private getLabelByActiveView(activeView: string, date: Date, locales: string | null | undefined, formatByMonths: string | null): string {
     return CALENDAR_VIEW_DAY === activeView
-      ? GlnCalendarUtil.getLabelByDate2(date, locales)
+      ? GlnCalendarUtil.getLabelByDate(date, locales)
       : CALENDAR_VIEW_YEAR === activeView
       ? GlnCalendarUtil.getLabelByYear(date, locales)
       : CALENDAR_VIEW_MONTH === activeView
