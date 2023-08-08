@@ -293,7 +293,7 @@ export class GlnCalendarUtil {
 
       const classes: string[] = params.dateClasses != null ? params.dateClasses(date, CALENDAR_VIEW_DAY, current) : [];
 
-      const label: string = GlnCalendarUtil.getLabelByDate2(date, params.locales);
+      const label: string = GlnCalendarUtil.getLabelByDate(date, params.locales);
 
       const isSelected: boolean | undefined = !hasSelected && year === selectedYear && month === selectedMonth && day === selectedDay;
       hasSelected = !hasSelected && isSelected ? true : hasSelected;
@@ -332,15 +332,7 @@ export class GlnCalendarUtil {
     return result;
   }
   // 'Thu, June 8, 2023'
-  public static getLabelByDate(date: Date | null): string | null {
-    let result: string | null = null;
-    if (date != null) {
-      // Get year, month and day in short form.
-      result = DateUtil.formatDateTime(date, { year: 'numeric', month: 'long', day: 'numeric' }, 'default');
-    }
-    return result;
-  }
-  public static getLabelByDate2(date: Date, locales: string | null | undefined): string {
+  public static getLabelByDate(date: Date, locales: string | null | undefined): string {
     let dateStr: string = '';
     try {
       // Get the name of the year for the specified date.
