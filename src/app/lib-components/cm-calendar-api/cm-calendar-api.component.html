@@ -86,6 +86,144 @@
     <tr>
       <td>
         <code>@Input()</code>
+        <code>colsByYears: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the number of columns in the years grid.
+          <br />[1..12] (for view='year').
+          (default = 4;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>colsByMonths: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the number of columns in the months grid.
+          <br />[1..12] (for view='month').
+          (default = 3;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>dateClasses:<br/>
+        GlnCalendarCellClassesFun<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          A function that can be used to add custom CSS classes to dates.
+          <code>
+            GlnCalendarCellClassesFun = (<br/>
+            &nbsp;&nbsp;date: Date, view: 'day' | 'month' | 'year', current: Date<br/>
+            ) => string[];
+          </code>
+          <code><pre source="ts">
+dateClasses1 = (
+  date: Date, view: string, currentDate: Date
+): string[] => &#123;
+  const result: string[] = [];
+  const day: number = date.getDate();
+  if ('day' === view
+    && date.getMonth() === currentDate.getMonth()
+    && (day === 1 || day === 20)) &#123;
+    result.push('cnat6-demo1');
+  &#125;
+  return result;
+&#125;;</pre>
+          </code>
+          (default = undefined;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>dateDisabled:<br/>
+        GlnCalendarCellDisabledFun<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          A function that can be used to disable a date based on a custom condition.
+          <code>
+            GlnCalendarCellDisabledFun = (<br/>
+            &nbsp;&nbsp;date: Date, view: 'day' | 'month' | 'year', current: Date<br/>
+            ) => boolean;
+          </code>
+          <code><pre source="ts">
+dateDisabled1 = (
+  date: Date, view: string, currentDate: Date
+): boolean => &#123;
+  const dayWeek: number = date.getDay();
+  return 'day' ==== view
+    && date.getMonth() === currentDate.getMonth()
+    && (dayWeek === 0 || dayWeek === 1);
+&#125;;</pre>
+          </code>
+          (default = undefined;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>formatByMonths: string<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the format for naming months in a grid of months (for view='month').
+          <br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"numeric" - "6";</li>
+          <li>"2-digit" - "06";</li>
+          <li>"long" - "June";</li>
+          <li>"short" - "Jun" (default);</li>
+          <li>"narrow" - "J";</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>formatMonth: string<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the format of the month name in the header (for view='day').
+          <br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>"numeric" - "6";</li>
+          <li>"2-digit" - "06";</li>
+          <li>"long" - "June" (default);</li>
+          <li>"short" - "Jun";</li>
+          <li>"narrow" - "J";</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
         <code>isDisabled: string<br/>
           &nbsp;&nbsp;| boolean<br/>
           &nbsp;&nbsp;| null<br/>
@@ -93,6 +231,20 @@
       </td>
       <td>
         <span>The element is disabled.
+          <br />(default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isHideDayoff: string<br/>
+          &nbsp;&nbsp;| boolean<br/>
+          &nbsp;&nbsp;| null<br/>
+          &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Hide display of dayoffs in "danger" color.
           <br />(default = false;) Attribute (no content).</span>
       </td>
     </tr>
@@ -106,19 +258,6 @@
       </td>
       <td>
         <span>Hide the days of the previous and next months.
-          <br />(default = false;) Attribute (no content).</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>isHideDayoff: string<br/>
-          &nbsp;&nbsp;| boolean<br/>
-          &nbsp;&nbsp;| null<br/>
-          &nbsp;&nbsp;| undefined;</code>
-      </td>
-      <td>
-        <span>Hide display of dayoffs in "danger" color.
           <br />(default = false;) Attribute (no content).</span>
       </td>
     </tr>
@@ -160,7 +299,23 @@
       <td>
         <span>Specifies the start of the week from "Sunday".
           By default, the start of the week is determined by the locale.
-          <br />(default = false;) Attribute (no content).</span>
+          <br />(default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>isTwoDigitDay: string<br/>
+        &nbsp;&nbsp;| boolean<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the display of the day as a two-digit number (06) (for view='day').
+          <br />(default = false;) Attribute (no content).
+        </span>
       </td>
     </tr>
     <tr>
@@ -173,7 +328,94 @@
       </td>
       <td>
         <span>Specifies the display of the week number.
-          <br />(default = false;) Attribute (no content).</span>
+          <br />(default = false;) Attribute (no content).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>locales: string<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the value 'locales' for Intl.DateTimeFormat.
+          <br />(default = undefined;) Examples: 'en-US', 'de-DE', 'fr-FR'.
+        </span>
+        <br />
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat">
+          More details: MDN "DateTimeFormat".
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>maxDate: Date<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          The maximum selectable date.
+          <br />(default = undefined;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>minDate: Date<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          The minimum selectable date.
+          <br />(default = undefined;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>rowsByYears: number<br/>
+          &nbsp;&nbsp;| string<br/>
+          &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the number of rows in the years grid.
+          <br />[1..12] (for view='year').
+          (default = 5;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>sizeDayWeek: number<br/>
+        &nbsp;&nbsp;| string<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>Specifies the length of the name of the day of the week.
+          <br />(default = 2;)
+          <br />It can take the following values:
+        </span>
+        <ul>
+          <li>1 - (T);</li>
+          <li>2 - (Th);</li>
+          <li>3 - (Thu);</li>
+          <li>-1 - (Thursday); </li>
+          <li>"narrow" - (T);</li>
+          <li>"short" - (Thu);</li>
+          <li>"long" - (Thursday);</li>
+        </ul>
       </td>
     </tr>
     <tr>
@@ -187,30 +429,8 @@
         <span>Specifies the start date of the calendar.
           If not specified, the value of the "selected date" is used.
           If no "selected date" is specified, then today is taken.
-          <br />(default = undefined;)</span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>@Input()</code>
-        <code>sizeDayWeek: number<br/>
-        &nbsp;&nbsp;| string<br/>
-        &nbsp;&nbsp;| undefined;</code>
-      </td>
-      <td>
-        <span>Specifies the length of the name of the day of the week.
-          <br />(default = 2;)
-          It can take the following values:
+          <br />(default = undefined;)
         </span>
-        <ul>
-          <li>1 - (T);</li>
-          <li>2 - (Th);</li>
-          <li>3 - (Thu);</li>
-          <li>-1 - (Thursday); </li>
-          <li>"narrow" - (T);</li>
-          <li>"short" - (Thu);</li>
-          <li>"long" - (Thursday);</li>
-        </ul>
       </td>
     </tr>
     <tr>
@@ -228,6 +448,46 @@
     <tr>
       <td>
         <code>@Input()</code>
+        <code>view: string<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the initial value of the display mode.
+          <br />(default = 'day';)
+          <br />It can take the following values:
+        </span>
+        <ul>
+          <li>'day' - display mode for day selection;</li>
+          <li>'month' - display mode for month selection;</li>
+          <li>'year' - display mode for year selection;</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
+        <code>views: string[]<br/>
+        &nbsp;&nbsp;| null<br/>
+        &nbsp;&nbsp;| undefined;</code>
+      </td>
+      <td>
+        <span>
+          Specifies an array of available values for the display mode.
+          <br />(default = ['day', 'year', 'month'];)
+          <br />It can take the following values:
+        </span>
+        <ul>
+          <li>'day' - display mode for day selection;</li>
+          <li>'month' - display mode for month selection;</li>
+          <li>'year' - display mode for year selection;</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>@Input()</code>
         <code>wdFull: string<br/>
           &nbsp;&nbsp;| null<br/>
           &nbsp;&nbsp;| undefined;</code>
@@ -238,7 +498,5 @@
           <br />(default = false;) Attribute (no content).</span>
       </td>
     </tr>
-
-
   </tbody>
 </table>
