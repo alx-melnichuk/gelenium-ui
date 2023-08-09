@@ -114,9 +114,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public sizeDayWeek: number | string | null | undefined; // number (1, 2, 3, -1), 'narrow'-(T), 'short'-(Thu), 'long'-(Thursday)
   @Input()
-  public startDate: Date | null | undefined; // # TODO ?? no example
+  public startDate: Date | null | undefined;
   @Input()
-  public value: Date | null | undefined; // # TODO ?? no example
+  public value: Date | null | undefined;
   @Input()
   public view: string | null | undefined; // 'day','month','year' default 'day'
   @Input()
@@ -627,7 +627,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       const monthValue: number = this.value?.getMonth() || -1;
       const yearValue: number = this.value?.getFullYear() || -1;
       if (newMonth !== monthValue || year !== yearValue) {
-        const date: Date = GlnCalendarUtil.getDateByItsDetails(year, newMonth, this.currentDate.getDate());
+        const date: Date = GlnCalendarUtil.getDateByItsDetails(this.currentDate.getFullYear(), newMonth, this.currentDate.getDate());
         this.monthSelected.emit(date);
         this.log(`monthSelected.emit("${date.toString().substring(4, 31)}");`);
         this.updateViewAllCells(date);
