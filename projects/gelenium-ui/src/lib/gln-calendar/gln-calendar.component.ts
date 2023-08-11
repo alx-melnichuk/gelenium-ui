@@ -606,7 +606,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     const firstYear: number = this.frameYearCells[0].value || -1;
     const lastYear: number = this.frameYearCells[this.frameYearCells.length - 1].value;
     if (firstYear > 0 && lastYear > 0 && firstYear <= newYear && newYear <= lastYear) {
-      const yearValue: number = this.value?.getFullYear() || -1;
+      const yearValue: number = this.value?.getFullYear() || this.currentDate.getFullYear();
       if (newYear !== yearValue) {
         const date: Date = GlnCalendarUtil.getDateByItsDetails(newYear, this.currentDate.getMonth(), this.currentDate.getDate());
         this.yearSelected.emit(date);
@@ -624,9 +624,9 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
     const year: number = this.currentDate.getFullYear();
     if (-1 < newMonth && newMonth < 12) {
-      const monthValue: number = this.value?.getMonth() || -1;
-      const yearValue: number = this.value?.getFullYear() || -1;
-      if (newMonth !== monthValue || year !== yearValue) {
+      const yearValue: number = this.value?.getFullYear() || this.currentDate.getFullYear();
+      const monthValue: number = this.value?.getMonth() || this.currentDate.getMonth();
+      if (year !== yearValue || newMonth !== monthValue) {
         const date: Date = GlnCalendarUtil.getDateByItsDetails(this.currentDate.getFullYear(), newMonth, this.currentDate.getDate());
         this.monthSelected.emit(date);
         this.log(`monthSelected.emit("${date.toString().substring(4, 31)}");`);
