@@ -59,6 +59,7 @@ import { ScreenUtil } from '../_utils/screen.util';
 
 import { GlnDatepickerConfig } from './gln-datepicker-config.interface';
 import { GLN_DATEPICKER_SCROLL_STRATEGY } from './gln-datepicker.providers';
+import { DateUtil } from '../_utils/date.util';
 
 export const GLN_DATEPICKER_CONFIG = new InjectionToken<GlnDatepickerConfig>('GLN_DATEPICKER_CONFIG');
 
@@ -195,6 +196,7 @@ export class GlnDatepickerComponent
   private isFocusAttrOnFrame: boolean = false;
   /** Saving the font size of the trigger element. */
   private triggerFontSize: number = 0;
+  private valueDate: Date | null | undefined;
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -360,9 +362,10 @@ export class GlnDatepickerComponent
   public onTouched: () => void = () => {};
 
   public writeValue(value: any): void {
-    const isFilledOld = !!this.formControl.value;
-    this.formControl.setValue(value, { emitEvent: false });
-    this.isFilled = this.formControl.value !== '' && this.formControl.value != null;
+    const isFilledOld: boolean = this.isFilled;
+    this.valueDate = value;
+    this.formControl.setValue(this.formatDate(value), { emitEvent: false });
+    this.isFilled = !!this.formControl.value;
     if (isFilledOld !== this.isFilled) {
       this.changeDetectorRef.markForCheck();
     }
@@ -648,6 +651,15 @@ export class GlnDatepickerComponent
     }
   }
 
+  public dateSelected(selectedDate: Date | null): void {
+    this.valueDate = selectedDate;
+    this.formControl.setValue(this.formatDate(selectedDate), { emitEvent: false });
+    this.isFilled = !!this.formControl.value;
+    this.onChange(this.formControl.value);
+    if (this.isPanelOpen) {
+      this.close();
+    }
+  }
   // ** Protected methods **
 
   /** Get the correct "position" value. */
@@ -691,6 +703,18 @@ export class GlnDatepickerComponent
     this.formControl.setValidators(newValidator);
   }
 
+  private formatDate(dateValue: Date | null | undefined): string | null | undefined {
+    let result: string | null | undefined = null;
+    if (dateValue != null) {
+      const year: string = DateUtil.formatDateTime(dateValue, { year: 'numeric' }, 'default');
+      const month: string = DateUtil.formatDateTime(dateValue, { month: '2-digit' }, 'default');
+      const day: string = DateUtil.formatDateTime(dateValue, { day: '2-digit' }, 'default');
+      result = `${day}/${month}/${year}`;
+    } else {
+      result = dateValue;
+    }
+    return result;
+  }
   private settingError(error: boolean | null, renderer: Renderer2, elem: ElementRef<HTMLElement>): void {
     HtmlElemUtil.setClass(renderer, elem, 'gln-error', !!error);
     HtmlElemUtil.setAttr(renderer, elem, 'err', error ? '' : null);

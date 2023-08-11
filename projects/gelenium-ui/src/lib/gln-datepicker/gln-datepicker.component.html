@@ -134,7 +134,8 @@
       [ngClass]="classesVal || ''"
       focus9="doFocusOnPanel()">
 
-      <gln-calendar class="demo01_">
+      <gln-calendar class="demo01_"
+        (selected)="dateSelected($event)">
       </gln-calendar>
 
       <!-- <button (click)="close()">Close
