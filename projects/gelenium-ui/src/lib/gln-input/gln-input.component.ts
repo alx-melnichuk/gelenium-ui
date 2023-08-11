@@ -275,7 +275,7 @@ export class GlnInputComponent
   public writeValue(value: any): void {
     const isFilledOld = !!this.formControl.value;
     this.formControl.setValue(value, { emitEvent: false });
-    this.isFilled = this.formControl.value !== '' && this.formControl.value != null;
+    this.isFilled = !!this.formControl.value;
     if (isFilledOld !== this.isFilled) {
       this.changeDetectorRef.markForCheck();
     }

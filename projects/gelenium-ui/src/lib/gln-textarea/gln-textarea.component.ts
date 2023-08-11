@@ -263,7 +263,7 @@ export class GlnTextareaComponent
     const isFilledOld = !!this.formControl.value;
     const cntLinesOld = this.getNumberLines(this.formControl.value);
     this.formControl.setValue(value, { emitEvent: false });
-    this.isFilled = this.formControl.value !== '' && this.formControl.value != null;
+    this.isFilled = !!this.formControl.value;
     const cntLines = this.getNumberLines(this.formControl.value);
     if (cntLinesOld != cntLines) {
       this.currentRows = this.cntRows || this.getCurrentRows(this.getNumberLines(this.formControl.value), this.minRows, this.maxRows);
