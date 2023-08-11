@@ -22,7 +22,7 @@ export class CmDatepickerBasicComponent {
   public labelCss = LABEL_CSS;
 
   // Page: Basic01
-  isShowBasic01 = false;
+  isShowBasic01 = true;
 
   public baseRef: string = RouterConfig.get('BASE_REF');
   public urlCmDatepicker = this.baseRef + '/' + RouterConfig.get('URL_COMPONENTS') + '/' + RouterConfig.get('URL_COMPONENTS_DATEPICKER');
