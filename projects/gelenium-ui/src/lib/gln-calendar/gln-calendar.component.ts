@@ -150,6 +150,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public cellSizeVal: number | null = null; // Binding attribute "cellSize".
   public colsByYearsVal: number | null = null; // Binding attribute "colsByYears".
   public colsByMonthsVal: number | null = null; // Binding attribute "colsByMonths".
+  public currentMonthStr: string = '';
+  public currentYearStr: string = '';
   public dateClassesVal: GlnCalendarCellClassesFun | null = null; // Binding attribute "dateClasses".
   public dateDisabledVal: GlnCalendarCellDisabledFun | null = null; // Binding attribute "dateDisabled".
   public formatByMonthsVal: string | null = null; // Binding attribute "formatByMonths".
@@ -184,8 +186,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
 
   private currConfig: GlnCalendarConfig;
   private currentDate: Date = new Date();
-  private currentMonthStr: string = '';
-  private currentYearStr: string = '';
   private frameYearFinish: number = -1;
   private frameYearStart: number = -1;
   private viewMode: CALENDAR_VIEW_TYPE = CALENDAR_VIEW_DAY;
@@ -887,6 +887,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     HtmlElemUtil.setAttr(renderer, elem, 'rea', readOnly ? '' : null);
   }
   private log(...arg: any): void {
-    console.log(...arg);
+    // console.log(...arg);
   }
 }

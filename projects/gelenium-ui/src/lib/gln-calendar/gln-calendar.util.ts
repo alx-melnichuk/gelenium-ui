@@ -271,8 +271,9 @@ export class GlnCalendarUtil {
     const innerDate: Date = new Date(current.getFullYear(), current.getMonth(), 1, 0, 0, 0, 0);
     const currMonth: number = innerDate.getMonth();
     // Date.getDay() 0-Sun, 1-Mon, 2-Tue, 3-Wed, 4-Thu, 5-Fri, 6-Sat;
-    const dayWeek1: number = innerDate.getDay();
-    innerDate.setDate(dayStartWeek !== dayWeek1 ? dayStartWeek - dayWeek1 : -7);
+    const dayWeekInit: number = innerDate.getDay();
+    const deltaDays = (dayWeekInit > dayStartWeek ? 0 : -7) + dayStartWeek - dayWeekInit;
+    innerDate.setDate(deltaDays);
     let hasSelected: boolean = params.selected == null;
     let hasToday: boolean = false;
     let hasCurrent: boolean = false;

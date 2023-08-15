@@ -19,7 +19,12 @@
         [attr.tabindex]="!isDisabledVal ? 0 : -1"
         [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
         (click)="switchViewMode()">
-        {{ (isViewModeMonth() ? '&emsp;' : '') + getCaption() }}
+
+        <ng-container
+          [ngTemplateOutlet]="isViewModeDay() ? templateTitleCaptionViewModeDay 
+          : (isViewModeMonth() ? templateTitleCaptionViewModeMonth : (isViewModeYear() ? templateTitleCaptionViewModeYear : null))">
+        </ng-container>
+
       </button>
 
       <button type="button"
@@ -69,7 +74,7 @@
       [attr.tabindex]="!isDisabledVal ? 0 : -1"
       [attr.disabled]="isDisabledVal || isReadOnlyVal
         || (isViewModeDay() ? !isNextMonthAvailable : (isViewModeMonth() ? !isNextYearAvailable : !isNextYearsAvailable) )
-          ? '' : undefined"
+        ? '' : undefined"
       (click)="nextPeriod(getPeriodByViewMode())">
       <svg glncn-icon
         class="gln-calendar-t-icon icon-next"
@@ -154,7 +159,8 @@
           [attr.glncn-slct]="isStateSelected(monthCell) ? '' : undefined"
           [attr.glncn-today]="monthCell.isToday ? '' : undefined"
           [attr.glncn-mar]="monthCell.isCurrent ? '' : undefined"
-          [attr.disabled]="isDisabledVal || isReadOnlyVal || monthCell.isDisabled ? '' : undefined"
+          [attr.disabled]="isDisabledVal || monthCell.isDisabled ? '' : undefined"
+          [attr.read-only]="isReadOnlyVal ? '' : undefined"
           [attr.tabindex]="!isDisabledVal && !monthCell.isDisabled && monthCell.isCurrent ? 0 : -1"
           [attr.data-label]="monthCell.label"
           [ngClass]="['gln-calendar-month-cell'
@@ -184,7 +190,8 @@
           [attr.glncn-slct]="isStateSelected(yearCell) ? '' : undefined"
           [attr.glncn-today]="yearCell.isToday ? '' : undefined"
           [attr.glncn-mar]="yearCell.isCurrent ? '' : undefined"
-          [attr.disabled]="isDisabledVal || isReadOnlyVal || yearCell.isDisabled ? '' : undefined"
+          [attr.disabled]="isDisabledVal || yearCell.isDisabled ? '' : undefined"
+          [attr.read-only]="isReadOnlyVal ? '' : undefined"
           [attr.tabindex]="!isDisabledVal && !yearCell.isDisabled && yearCell.isCurrent ? 0 : -1"
           [attr.data-label]="yearCell.label"
           [ngClass]="['gln-calendar-year-cell'
@@ -201,6 +208,22 @@
   </div>
 
 </div>
+
+<ng-template #templateTitleCaptionViewModeDay>
+  <span class="gln-calendar-caption-month">{{ currentMonthStr }}</span>
+  <span class="gln-calendar-caption-year">{{ '&ensp;' + currentYearStr }}</span>
+</ng-template>
+
+<ng-template #templateTitleCaptionViewModeMonth>
+  <span class="gln-calendar-caption-label-month">{{ '&emsp;' + currentYearStr }}</span>
+</ng-template>
+
+<ng-template #templateTitleCaptionViewModeYear>
+  <span class="
+    gln-calendar-caption-label-year">
+    {{ frameYearCells[0].label + ' - ' + frameYearCells[frameYearCells.length - 1].label }}
+  </span>
+</ng-template>
 
 
 <ng-template #templateWeekNumberHeader>
@@ -248,8 +271,8 @@
         [attr.glncn-slct]="isStateSelected(dayCell) ? '' : undefined"
         [attr.glncn-today]="dayCell.isToday ? '' : undefined"
         [attr.glncn-mar]="dayCell.isCurrent ? '' : undefined"
-        [attr.disabled]="isDisabledVal || isReadOnlyVal || (isHideOldDaysVal && isStatePassive(dayCell)) || dayCell.isDisabled
-          ? '' : undefined"
+        [attr.disabled]="isDisabledVal || (isHideOldDaysVal && isStatePassive(dayCell)) || dayCell.isDisabled ? '' : undefined"
+        [attr.read-only]="isReadOnlyVal ? '' : undefined"
         [attr.tabindex]="isViewModeDay() && !isDisabledVal && !dayCell.isDisabled && dayCell.isCurrent ? 0 : -1"
         [attr.data-label]="dayCell.label"
         [ngClass]="['gln-calendar-day-cell'
