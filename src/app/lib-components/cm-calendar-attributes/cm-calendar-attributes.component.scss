@@ -59,4 +59,25 @@ app-cm-calendar-attributes {
     min-height: 320px;
     display: grid;
   }
+
+  .cnex1-calendar {
+    .gln-calendar-switch, .gln-calendar-nav, .gln-calendar-caption-year {
+      display: none;
+    }
+    .gln-calendar-title-caption {
+      flex-grow: 1;
+    }
+    .gln-today {
+      border: 0px;
+    }
+  }
+  .cnex1-name {
+    justify-content: center;
+    font-weight: 500;
+    font-size: x-large;
+    max-width: calc(((36px * 7) + 6px) * 3);
+  }
+  .cnex1-clnd {
+    border: 1px solid lightsteelblue;
+  }
 }

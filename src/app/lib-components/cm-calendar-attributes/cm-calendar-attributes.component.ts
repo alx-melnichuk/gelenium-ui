@@ -70,6 +70,24 @@ export class CmCalendarAttributesComponent {
   public value02y: Date | null = new Date(this.selectedDate);
   public value02z: Date | null = new Date(this.selectedDate);
 
+  // Example01
+  public startYear: number = this.today.getFullYear();
+  public startDate01: Date | null = new Date(this.startYear, 0, 1);
+  public startDate02: Date | null = new Date(this.startYear, 1, 1);
+  public startDate03: Date | null = new Date(this.startYear, 2, 1);
+
+  public startDate04: Date | null = new Date(this.startYear, 3, 1);
+  public startDate05: Date | null = new Date(this.startYear, 4, 1);
+  public startDate06: Date | null = new Date(this.startYear, 5, 1);
+
+  public startDate07: Date | null = new Date(this.startYear, 6, 1);
+  public startDate08: Date | null = new Date(this.startYear, 7, 1);
+  public startDate09: Date | null = new Date(this.startYear, 8, 1);
+
+  public startDate10: Date | null = new Date(this.startYear, 9, 1);
+  public startDate11: Date | null = new Date(this.startYear, 10, 1);
+  public startDate12: Date | null = new Date(this.startYear, 11, 1);
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
