@@ -500,3 +500,427 @@ dateDisabled1 = (
     </tr>
   </tbody>
 </table>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="api-properties">
+  <h4 class="app-hover-link">
+    Internal properties:
+    <a [href]="urlCmCalendar + '#api-internal-properties'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>markedDate: Date;</code>
+      </td>
+      <td>
+        <span>The current cursor-marked date value.
+          <br />(default = startDate || today;)
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>activeView: 'day'<br/>
+          &nbsp;&nbsp;| 'month'<br/>
+          &nbsp;&nbsp;| 'year';</code>
+      </td>
+      <td>
+        <span>
+          The current value of the view mode.
+          <br />It can take the following values:
+        </span>
+        <ul>
+          <li>'day' - view mode "day";</li>
+          <li>'month' - view mode "month";</li>
+          <li>'year' - view mode "year";</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>currentMonthStr: string;</code>
+      </td>
+      <td>
+        <span>The current value of the month name.</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>currentYearStr: string;</code>
+      </td>
+      <td>
+        <span>The current value of the year.</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+<section mr-vr
+  id="api-methods">
+  <h4 class="app-hover-link">
+    Methods
+    <a [href]="urlCmCalendar + '#api-methods'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>focus(): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        The current view element (day, month, or year) receives input focus.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>isViewModeDay(): boolean;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        The method returns "true" if the current representation is "day".
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>isViewModeMonth(): boolean;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        The method returns "true" if the current representation is "month".
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>isViewModeYear(): boolean;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        The method returns "true" if the current representation is "year".
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>switchViewMode(activeView: 'day' | 'month' | 'year' = this.viewMode): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        The method performs the transition to the next view in the list (views).
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Parameters</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="app-mn-wd-22ch">
+        <code>activeView:<br/>
+          &nbsp;'day'<br/>
+          &nbsp;| 'month'<br/>
+          &nbsp;| 'year';
+        </code>
+      </td>
+      <td>
+        <span>
+          Specifies the current view mode.
+          <br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>'day' - view mode "day";</li>
+          <li>'month' - view mode "month";</li>
+          <li>'year' - view mode "year";</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>getPeriodByViewMode(): 'period_month' | 'period_year' | 'period_years';</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        The method returns the period type for the 'prevPeriod()', 'nextPeriod()' methods, depending on the view mode.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>prevPeriod(period: string): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Transition to the previous reporting period.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Parameters</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="app-mn-wd-22ch">
+        <code>period: string;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the period type for the transition.
+          <br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>'period_month' - period month;</li>
+          <li>'period year' - period year;</li>
+          <li>'period years' - period "list of years";</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>nextPeriod(period: string): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Transition to the next reporting period.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Parameters</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="app-mn-wd-22ch">
+        <code>period: string;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the period type for the transition.
+          <br />
+          It can take the following values:
+        </span>
+        <ul>
+          <li>'period_month' - period month;</li>
+          <li>'period year' - period year;</li>
+          <li>'period years' - period "list of years";</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>clickYearCell(newYear: number): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Method to select "year" for "year" view mode.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Parameters</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="app-mn-wd-22ch">
+        <code>newYear: number;</code>
+      </td>
+      <td>
+        <span>
+          The new value for "year". Triggers the "yearSelected" event.
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>clickMonthCell(newMonth: number): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Method to select "month" for "month" view mode.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Parameters</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="app-mn-wd-22ch">
+        <code>newMonth: number;</code>
+      </td>
+      <td>
+        <span>
+          The new value for "month". Triggers the "monthSelected" event.
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <span fw500>clickSelectItem(cell: CalendarCell | null): void;</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        Method to select "day" (and the previously selected "month", "year") for "day" view mode.
+        Triggers the "selected" event.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Parameters</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="app-mn-wd-22ch">
+        <code>cell: CalendarCell<br/>
+          &nbsp;&nbsp;| null;</code>
+      </td>
+      <td>
+        <span>
+          The new value is "day" (and the previously selected "month", "year").
+        </span>
+        <code>CalendarCell &#123;<br/>
+          &nbsp;classes: string[];<br/>
+          &nbsp;date: Date;<br/>
+          &nbsp;dayWeek: number;<br/>
+          &nbsp;isCurrent?: boolean | undefined;<br/>
+          &nbsp;isDisabled?: boolean | undefined;<br/>
+          &nbsp;isToday?: boolean | undefined;<br/>
+          &nbsp;label: string;<br/>
+          &nbsp;state: 'act' | 'psv' | 'slct';<br/>
+          &nbsp;value: number;<br/>
+          &#125;</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
