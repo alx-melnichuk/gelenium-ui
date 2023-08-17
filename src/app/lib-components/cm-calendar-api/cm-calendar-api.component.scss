@@ -2,4 +2,11 @@
 
 app-cm-calendar-api {
   display: block;
+  
+  .cnap-mn-wd-25ch {
+    min-width: 25ch;
+  }
+  table.cnap-tab td {
+    padding: 8px 4px 8px 8px;
+  }
 }

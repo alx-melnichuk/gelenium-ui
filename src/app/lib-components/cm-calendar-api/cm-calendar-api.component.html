@@ -924,3 +924,84 @@ dateDisabled1 = (
 </table>
 
 <hr br-nn />
+
+
+<section mr-vr
+  id="api-css-variables">
+  <h4 class="app-hover-link">
+    CSS variables at the component level.
+    <a [href]="urlCmCalendar + '#api-css-variables'">#</a>
+  </h4>
+</section>
+
+
+<table class="app-tab cnap-tab">
+  <thead>
+    <tr>
+      <th class="cnap-mn-wd-25ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--glncn--default-[h,s,l]:<br/>
+        var(--glncl-default-[h,s,l],<br/>
+        var(--gln-default-[h,s,l])<br/>
+        );</code></td>
+      <td>
+        <span>
+          In the "disabled" state, determines the color of: the title, the navigation buttons for the days of the month.
+        </span>
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-default-[h,s,l]</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-default-[h,s,l]</code>.<br />
+          The hue value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn--default-bg-[h,s,l]:<br/>
+        var(--glncl-default-bg-[h,s,l],<br/>
+        var(--gln-default-bg-[h,s,l])<br/>
+        );</code>
+      </td>
+      <td>
+        <span>
+          Specifies a light text color for the selected day, month, year on a dark background.
+        </span>
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-default-bg-[h,s,l]</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-default-bg-[h,s,l]</code>.<br />
+          The hue value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn--primary-[h,s,l]:<br/>
+        var(--glncl-primary-[h,s,l],<br/>
+        var(--gln-primary-[h,s,l])<br/>
+        );</code>
+      </td>
+      <td>
+        <span>
+          Specifies the color of the navigation buttons and the background color for the selected day, month, year.
+        </span>
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-primary-[h,s,l]</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-primary-[h,s,l]</code>.<br />
+          The hue value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+
+
+  </tbody>
+</table>
+
+<hr br-nn />
