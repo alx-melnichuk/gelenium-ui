@@ -439,7 +439,8 @@ const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
     <strong>[<i>cellSize</i>]="42"</strong>
     <strong>[<i>isHideDayoff</i>]=false</strong>
     <strong>[<i>isHideOldDays</i>]=false</strong>
-    [value]="value08a"&gt;
+    [value]="value08a"
+    (selected)="value08a=$event"&gt;
   &lt;/gln-calendar&gt;</pre></code>
   <p>
     In other words, there is the following order of determining the configuration parameters:
@@ -474,7 +475,8 @@ const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
       </div>
     </div>
     <div class="cncf-clnd">
-      <gln-calendar [value]="value08a">
+      <gln-calendar [value]="value08a"
+        (selected)="value08a=$event">
       </gln-calendar>
     </div>
   </div>
@@ -496,7 +498,8 @@ const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
       <gln-calendar [value]="value08b"
         [cellSize]="42"
         [isHideDayoff]="false"
-        [isHideOldDays]="false">
+        [isHideOldDays]="false"
+        (selected)="value08b=$event">
       </gln-calendar>
     </div>
   </div>
@@ -528,7 +531,8 @@ const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
       &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class="cncf-clnd"&gt;
-      &lt;gln-calendar [value]="value08a"&gt;
+      &lt;gln-calendar [value]="value08a"
+      (selected)="value08a=$event"&gt;
       &lt;/gln-calendar&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -550,7 +554,8 @@ const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
       &lt;gln-calendar [value]="value08b"
         [cellSize]="42"
         [isHideDayoff]="false"
-        [isHideOldDays]="false"&gt;
+        [isHideOldDays]="false"
+        (selected)="value08b=$event"&gt;
       &lt;/gln-calendar&gt;
     &lt;/div&gt;
   &lt;/div&gt;
