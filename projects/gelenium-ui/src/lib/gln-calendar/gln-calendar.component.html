@@ -1,13 +1,13 @@
 <div glncn-wrapper
   class="gln-calendar-wrapper">
-  <div glncn-title
-    class="gln-calendar-title">
+  <div glncn-head
+    class="gln-calendar-head">
 
-    <div glncn-title-box
+    <div glncn-header
       [attr.glncn-title-day]="isViewModeDay() ? '' : undefined"
       [attr.glncn-title-month]="isViewModeMonth() ? '' : undefined"
       [attr.glncn-title-year]="isViewModeYear() ? '' : undefined"
-      [ngClass]="['gln-calendar-title-box'
+      [ngClass]="['gln-calendar-header'
         , (isViewModeDay() ? 'gln-title-day' : '')
         , (isViewModeMonth() ? 'gln-title-month' : '')
         , (isViewModeYear() ? 'gln-title-year' : '')]">
@@ -24,6 +24,24 @@
           [ngTemplateOutlet]="isViewModeDay() ? templateTitleCaptionViewModeDay 
           : (isViewModeMonth() ? templateTitleCaptionViewModeMonth : (isViewModeYear() ? templateTitleCaptionViewModeYear : null))">
         </ng-container>
+
+        <ng-template #templateTitleCaptionViewModeDay>
+          <span class="gln-calendar-caption-month">{{ currentMonthStr }}</span>
+          <span class="gln-calendar-caption-year">{{ '&ensp;' + currentYearStr
+            }}</span>
+        </ng-template>
+
+        <ng-template #templateTitleCaptionViewModeMonth>
+          <span class="gln-calendar-caption-label-month">{{ '&emsp;' + currentYearStr
+            }}</span>
+        </ng-template>
+
+        <ng-template #templateTitleCaptionViewModeYear>
+          <span class="
+            gln-calendar-caption-label-year">
+            {{ frameYearCells[0].label + ' - ' + frameYearCells[frameYearCells.length - 1].label }}
+          </span>
+        </ng-template>
 
       </button>
 
@@ -90,12 +108,21 @@
   <div glncn-view-day
     class="gln-calendar-view-day">
 
-    <div glncn-header
-      class="gln-calendar-header"
+    <div glncn-day-header
+      class="gln-calendar-day-header"
       [attr.glncn-hide]="!isViewModeDay() ? '' : undefined">
 
-      <ng-container [ngTemplateOutlet]="isWeekNumberVal ? templateWeekNumberHeader : null">
+      <ng-container [ngTemplateOutlet]="isWeekNumberVal ? templateWeekNumberDayHeader : null">
       </ng-container>
+
+      <ng-template #templateWeekNumberDayHeader>
+        <div glncn-center
+          glncn-week
+          glncn-tint
+          glncn-psv
+          class="gln-calendar-day-header-week">
+        </div>
+      </ng-template>
 
       <div *ngFor="let cage of frameDayNames; trackBy: trackByIndex;"
         glncn-center
@@ -209,31 +236,7 @@
 
 </div>
 
-<ng-template #templateTitleCaptionViewModeDay>
-  <span class="gln-calendar-caption-month">{{ currentMonthStr }}</span>
-  <span class="gln-calendar-caption-year">{{ '&ensp;' + currentYearStr }}</span>
-</ng-template>
 
-<ng-template #templateTitleCaptionViewModeMonth>
-  <span class="gln-calendar-caption-label-month">{{ '&emsp;' + currentYearStr }}</span>
-</ng-template>
-
-<ng-template #templateTitleCaptionViewModeYear>
-  <span class="
-    gln-calendar-caption-label-year">
-    {{ frameYearCells[0].label + ' - ' + frameYearCells[frameYearCells.length - 1].label }}
-  </span>
-</ng-template>
-
-
-<ng-template #templateWeekNumberHeader>
-  <div glncn-center
-    glncn-week
-    glncn-tint
-    glncn-psv
-    class="gln-calendar-header-week">
-  </div>
-</ng-template>
 
 
 <ng-template #templateWeekNumberRow

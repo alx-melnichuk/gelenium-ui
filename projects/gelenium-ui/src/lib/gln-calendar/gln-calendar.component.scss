@@ -27,7 +27,7 @@ gln-calendar {
 
   --glncn--nav-def-cl   : hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l));
   --glncn--nav-hov-bg-cl: hsla(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l), 0.1);
-  --glncn--sndr-dis-cl  : hsl(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.8);
+  --glncn--sndr-dis-cl  : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.8);
 
   --glncn--psv-def-cl : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.6);
   --glncn--psv-dis-cl : hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.5);
@@ -94,44 +94,44 @@ gln-calendar {
     outline: 0;
   }
 
-  // Level 2 Element "title"
-  [glncn-title] {
+  // Level 2 Element "head"
+  [glncn-head] {
     align-items: center;
     display: flex;
     font-family: inherit;
     font-size: 1em;
-    font-weight: var(--glncn-title-fn-wg, 500);
+    font-weight: var(--glncn-head-fn-wg, 500);
     flex-direction: var(--glncn--dir-lv2);
     justify-content: space-around;
   }
 
   // Level 3 Element "title-box"
-  [glncn-title-box] {
+  [glncn-header] {
     align-items: center;
     display: inline-flex;
     flex-grow: 1;
-    order: var(--glncn-tblock-ord, unset);
-    min-width: var(--glncn-tblock-mn-wd, 8em);
+    order: var(--glncn-title-ord, unset);
+    min-width: var(--glncn-title-mn-wd, 8em);
     &[glncn-title-year], &[glncn-title-month] {
       justify-content: center;
     }
   }
 
-  &[hor] [glncn-title-box] {
+  &[hor] [glncn-header] {
     justify-content: center;
     padding-top: 4em;
   }
-  &:not([hor]) [glncn-title-box] {
-    padding-left: var(--glncn---wee-tblock-pd-lf, var(--glncn-tblock-pd-lf, calc(var(--glncn--item-size) * 0.25)));
+  &:not([hor]) [glncn-header] {
+    padding-left: var(--glncn---wee-tblock-pd-lf, var(--glncn-title-pd-lf, calc(var(--glncn--item-size) * 0.25)));
   }
-  &[wee]:not([hor]) [glncn-title-box] {
-    --glncn---wee-tblock-pd-lf: var(--glncn-week-tblock-pd-lf, calc(var(--glncn--item-size) * 1.25));
+  &[wee]:not([hor]) [glncn-header] {
+    --glncn---wee-tblock-pd-lf: var(--glncn-week-title-pd-lf, calc(var(--glncn--item-size) * 1.25));
   }
-  &:not([dis]) [glncn-title-box] {
-    color: var(--glncn-def-tblock-cl, var(--glncn--item-def-cl));
+  &:not([dis]) [glncn-header] {
+    color: var(--glncn-def-title-cl, var(--glncn--item-def-cl));
   }
-  &[dis] [glncn-title-box] {
-    color: var(--glncn-dis-tblock-cl, var(--glncn--sndr-dis-cl));
+  &[dis] [glncn-header] {
+    color: var(--glncn-dis-title-cl, var(--glncn--sndr-dis-cl));
   }
 
   // Level 4 Element title button "title-caption"
@@ -143,7 +143,7 @@ gln-calendar {
     display: inline-flex;
     flex-shrink: 0;
     font: inherit;
-    height: var(--glncn-cap-hg, 2.5em);
+    height: var(--glncn-caption-hg, 2.5em);
     line-height: 1;
     justify-content: center;
     overflow: visible;
@@ -244,17 +244,17 @@ gln-calendar {
     position: relative;
   }
 
-  // Level 3 Element "glncn-header"
-  [glncn-header] {
+  // Level 3 Element "glncn-day-header"
+  [glncn-day-header] {
     align-items: center;
     display: flex;
     flex-direction: var(--glncn--dir-lv2);
     user-select: none;
   }
-  &:not([wdFull]) [glncn-header] {
+  &:not([wdFull]) [glncn-day-header] {
     justify-content: center;
   }
-  &[wdFull] [glncn-header] {
+  &[wdFull] [glncn-day-header] {
     justify-content: space-between;
   }
 
