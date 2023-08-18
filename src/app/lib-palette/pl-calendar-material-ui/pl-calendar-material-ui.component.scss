@@ -17,7 +17,7 @@ app-pl-calendar-material-ui {
   font-family: "Roboto","Helvetica","Arial",sans-serif;
   width: 320px;
   // "title-block"
-  --glncn-title-fn-wg: 500;
+  --glncn-head-fn-wg: 500;
   // "title nav"
   --glncn-def-nav-cl: rgba(0, 0, 0, 0.54);
   --glncn-hov-nav-bg-cl: rgba(0, 0, 0, 0.04);
@@ -41,11 +41,11 @@ app-pl-calendar-material-ui {
   &[dis] .gln-calendar-list-days {
     opacity: 0.6;
   }
-  .gln-calendar-title {
+  .gln-calendar-head {
     padding-left: 24px;
     padding-right: 12px;
   }
-  .gln-calendar-title-box {
+  .gln-calendar-header {
     justify-content: flex-start;
   }
 
