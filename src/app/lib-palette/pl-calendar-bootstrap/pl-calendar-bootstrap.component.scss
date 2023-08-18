@@ -24,13 +24,13 @@ app-pl-calendar-bootstrap {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   --glncn-br-rd: 4px;
   // "title-block"
-  --glncn-title-fn-wg: 700;
-  --glncn-tblock-ord: 1;
-  --glncn-tblock-pd-lf: 0;
-  .gln-calendar-title-box {
+  --glncn-head-fn-wg: 700;
+  --glncn-title-ord: 1;
+  --glncn-title-pd-lf: 0;
+  .gln-calendar-header {
     justify-content: center;
   }
-  &:not([dis]) .gln-calendar-title-box {
+  &:not([dis]) .gln-calendar-header {
     cursor: pointer;
     &:hover {
       background-color: #eee;
@@ -38,7 +38,7 @@ app-pl-calendar-bootstrap {
     }
   }
   // "title-caption"
-  --glncn-cap-hg: 30px;
+  --glncn-caption-hg: 30px;
   // "title switch"
   .gln-calendar-switch {
     display: none;
@@ -54,7 +54,7 @@ app-pl-calendar-bootstrap {
   // "title next"
   --glncn-next-ord: 2;
   // "title prev","title next"
-  .gln-calendar-title > button {
+  .gln-calendar-head > button {
     padding: 5px;
     &>svg {
       display: none;

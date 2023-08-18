@@ -119,13 +119,13 @@ app-checkbox &#123;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   --glncn-br-rd: 4px;
   // "title-block"
-  --glncn-title-fn-wg: 700;
-  --glncn-tblock-ord: 1;
-  --glncn-tblock-pd-lf: 0;
-  .gln-calendar-title-box &#123;
+  --glncn-head-fn-wg: 700;
+  --glncn-title-ord: 1;
+  --glncn-title-pd-lf: 0;
+  .gln-calendar-header &#123;
     justify-content: center;
   &#125;
-  &:not([dis]) .gln-calendar-title-box &#123;
+  &:not([dis]) .gln-calendar-header &#123;
     cursor: pointer;
     &:hover &#123;
       background-color: #eee;
@@ -133,7 +133,7 @@ app-checkbox &#123;
     &#125;
   &#125;
   // "title-caption"
-  --glncn-cap-hg: 30px;
+  --glncn-caption-hg: 30px;
   // "title switch"
   .gln-calendar-switch &#123;
     display: none;
@@ -149,7 +149,7 @@ app-checkbox &#123;
   // "title next"
   --glncn-next-ord: 2;
   // "title prev","title next"
-  .gln-calendar-title &gt; button &#123;
+  .gln-calendar-head &gt; button &#123;
     padding: 5px;
     &&gt;svg &#123;
       display: none;
