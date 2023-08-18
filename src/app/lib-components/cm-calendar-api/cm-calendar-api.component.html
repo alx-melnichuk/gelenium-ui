@@ -935,19 +935,21 @@ dateDisabled1 = (
 </section>
 
 
-<table class="app-tab cnap-tab">
+<table class="app-tab">
   <thead>
     <tr>
-      <th class="cnap-mn-wd-25ch">Name</th>
+      <th class="app-mn-wd-22ch">Name</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code>--glncn--default-[h,s,l]:<br/>
-        var(--glncl-default-[h,s,l],<br/>
-        var(--gln-default-[h,s,l])<br/>
-        );</code></td>
+      <td pd-h05><code>--glncn--default-[h,s,l]:<br/>
+        var(<br/>
+        &nbsp;--glncl-default-[h,s,l],<br/>
+        &nbsp;var(--gln-default-[h,s,l])<br/>
+        );</code>
+      </td>
       <td>
         <span>
           In the "disabled" state, determines the color of: the title, the navigation buttons for the days of the month.
@@ -962,9 +964,11 @@ dateDisabled1 = (
       </td>
     </tr>
     <tr>
-      <td><code>--glncn--default-bg-[h,s,l]:<br/>
-        var(--glncl-default-bg-[h,s,l],<br/>
-        var(--gln-default-bg-[h,s,l])<br/>
+      <td pd-h05><code>--glncn--default-bg-[h,s,l]:<br/>
+        var(<br/>
+        --glncl-default-bg-[h,s,l],<br/>
+        &nbsp;var(<br/>
+        &nbsp;--gln-default-bg-[h,s,l])<br/>
         );</code>
       </td>
       <td>
@@ -981,9 +985,11 @@ dateDisabled1 = (
       </td>
     </tr>
     <tr>
-      <td><code>--glncn--primary-[h,s,l]:<br/>
-        var(--glncl-primary-[h,s,l],<br/>
-        var(--gln-primary-[h,s,l])<br/>
+      <td pd-h05><code>--glncn--primary-[h,s,l]:<br/>
+        var(<br/>
+        &nbsp;--glncl-primary-[h,s,l],<br/>
+        &nbsp;var(<br/>
+        &nbsp;--gln-primary-[h,s,l])<br/>
         );</code>
       </td>
       <td>
@@ -996,6 +1002,183 @@ dateDisabled1 = (
           Or the css-variable of the GlnColor directive
           <code ubr>--glncl-primary-[h,s,l]</code>.<br />
           The hue value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn--danger-[h,s,l]:<br/>
+        var(<br/>
+        &nbsp;--glncl-danger-[h,s,l],<br/>
+        &nbsp;var(--gln-danger-[h,s,l])<br/>
+        );</code>
+      </td>
+      <td>
+        <span>
+          Specifies the color value of the weekend text for the "day" view mode.
+        </span>
+        <span>
+          The value is determined by the system css-variable
+          <code ubr>--gln-danger-[h,s,l]</code>.<br />
+          Or the css-variable of the GlnColor directive
+          <code ubr>--glncl-danger-[h,s,l]</code>.<br />
+          The hue value for the "hsl()" css function.
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td><code>--glncn-item-hg:<br/>
+        var(--glncn--item-size);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the cell height for all view modes.
+          <br />By default corresponds to the specified "cellSize" parameter.
+        </span>
+        <span>
+          The value is determined by the internal css variable
+          <code ubr>--glncn--item-size</code>.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-item-wd:<br/>
+        var(--glncn--item-size);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the cell width for all view modes.
+          <br />By default corresponds to the specified "cellSize" parameter.
+        </span>
+        <span>
+          The value is determined by the internal css variable
+          <code ubr>--glncn--item-size</code>.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-item-mr: 0px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the margin of the cell for all view modes.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-item-pd: 0px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the cell padding for all view modes.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-head-fn-wg: 500;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "font-weight" value for the title text.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-title-ord: unset;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "order" value for the header text.
+          <br />For example, if you specify <code ubr>--glncn-title-ord: 1;</code>
+          then we get the style as "bootstrap".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-title-mn-wd: 8em;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "min-width" value for the header text.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-title-pd-lf:<br/>
+        calc(<br/>
+        &nbsp;var(--glncn--item-size)<br/>
+        &nbsp;* 0.25<br/>
+        );</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "padding-left" value for the header text when displayed vertically.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-week-title-pd-lf:<br/>
+        calc(<br/>
+        &nbsp;var(--glncn--item-size)<br/>
+        &nbsp;* 1.25<br/>
+        );</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "padding-left" value for the header text when displayed vertically and when displaying the week
+          number ("isWeekNumber" flag).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-def-title-cl:<br/>
+      hsl(<br/>
+      &nbsp;var(--gln-default-[h,s,l])<br/>
+      );</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "color" value for the general title default.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-dis-title-cl:<br/>
+      hsla(<br/>
+      &nbsp;var(--gln-default-[h,s,l]),<br/>
+      &nbsp;0.8<br/>
+      );</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "color" value for the general title in "disabled" mode.
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<section mr-vr
+  id="api-css-variables-tmp01">
+  <h4 class="app-hover-link">
+    CSS variables-tmp01.
+    <a [href]="urlCmCalendar + '#api-css-variables-tmp01'">#</a>
+  </h4>
+</section>
+<table class="app-tab">
+  <thead>
+    <tr>
+      <th class="app-mn-wd-22ch">Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--glncn-caption-hg: 2.5em;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "height" value for the caption text.
         </span>
       </td>
     </tr>
