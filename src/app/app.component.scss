@@ -83,10 +83,16 @@ app-root {
       background: whitesmoke;
     }
     th, td {
-      padding: 8px 16px;
       code:not([ubr]) {
         display: block;
       }
+      &:not([pd-h05]) {
+        padding: 0.5em 1em;
+      }
+    }
+    td[pd-h05] {
+      padding-left: 0.5em;
+      padding-right: 0.1em;
     }
     ul {
       margin-block-start: 0;
