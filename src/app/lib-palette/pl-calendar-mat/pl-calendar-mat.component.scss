@@ -28,15 +28,15 @@ app-pl-calendar-mat {
   
   // border-color: transparent;
   width: 280px;
-  .gln-calendar-title {
+  .gln-calendar-head {
     padding: 8px 0 6px 3px;
   }
   // "title-block"
-  --glncn-title-fn-wg: 500;
-  --glncn-def-tblock-cl: #000;
-  --glncn-tblock-pd-lf: 2px;
+  --glncn-head-fn-wg: 500;
+  --glncn-def-title-cl: #000;
+  --glncn-title-pd-lf: 2px;
   // "title-caption"
-  --glncn-cap-hg: 36px;
+  --glncn-caption-hg: 36px;
   --glncn-cap-pd: 8px 3px 8px 8px;
 
   .gln-calendar-title-caption {
@@ -70,7 +70,7 @@ app-pl-calendar-mat {
   --glncn-hov-nav-bg-cl: rgba(0, 0, 0, 0.04);
   // "view-day"
   // "header"
-  .gln-calendar-header {
+  .gln-calendar-day-header {
     border-bottom: 1px solid rgba(128,128,128, 0.3);
     margin-bottom: 7px;
   }
@@ -121,15 +121,4 @@ app-pl-calendar-mat {
   --glncn-year-cell-hg: 100%;
   --glncn-year-cell-wd: 100%;
 
-  
-  // &[dis] .gln-calendar-list-days {
-  //   opacity: 0.6;
-  // }
-  // .gln-calendar-title {
-  //   padding-left: 24px;
-  //   padding-right: 12px;
-  // }
-  // .gln-calendar-title-box {
-  //   justify-content: flex-start;
-  // }
 }
