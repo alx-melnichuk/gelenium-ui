@@ -20,7 +20,7 @@ app-cm-calendar-attributes {
     min-height: 300px;
     display: grid;
   }
-  .cnat2-title-day .gln-calendar-title-caption {
+  .cnat2-title-day .gln-calendar-header-caption {
     color: blue;
   }
 
@@ -64,7 +64,7 @@ app-cm-calendar-attributes {
     .gln-calendar-switch, .gln-calendar-nav, .gln-calendar-caption-year {
       display: none;
     }
-    .gln-calendar-title-caption {
+    .gln-calendar-header-caption {
       flex-grow: 1;
     }
     .gln-today {
