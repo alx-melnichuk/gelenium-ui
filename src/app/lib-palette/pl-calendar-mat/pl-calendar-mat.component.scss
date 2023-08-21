@@ -37,9 +37,9 @@ app-pl-calendar-mat {
   --glncn-title-pd-lf: 2px;
   // "title-caption"
   --glncn-caption-hg: 36px;
-  --glncn-cap-pd: 8px 3px 8px 8px;
+  --glncn-caption-pd: 8px 3px 8px 8px;
 
-  .gln-calendar-title-caption {
+  .gln-calendar-header-caption {
     letter-spacing: 1.25px;
     text-transform: uppercase;
     &:hover {
