@@ -4,18 +4,18 @@
     class="gln-calendar-head">
 
     <div glncn-header
-      [attr.glncn-title-day]="isViewModeDay() ? '' : undefined"
-      [attr.glncn-title-month]="isViewModeMonth() ? '' : undefined"
-      [attr.glncn-title-year]="isViewModeYear() ? '' : undefined"
+      [attr.glncn-header-day]="isViewModeDay() ? '' : undefined"
+      [attr.glncn-header-month]="isViewModeMonth() ? '' : undefined"
+      [attr.glncn-header-year]="isViewModeYear() ? '' : undefined"
       [ngClass]="['gln-calendar-header'
-        , (isViewModeDay() ? 'gln-title-day' : '')
-        , (isViewModeMonth() ? 'gln-title-month' : '')
-        , (isViewModeYear() ? 'gln-title-year' : '')]">
+        , (isViewModeDay() ? 'gln-day' : '')
+        , (isViewModeMonth() ? 'gln-month' : '')
+        , (isViewModeYear() ? 'gln-year' : '')]">
 
       <button type="button"
-        glncn-title-caption
+        glncn-header-caption
         glncn-crs-pnt
-        class="gln-calendar-title-caption"
+        class="gln-calendar-header-caption"
         [attr.tabindex]="!isDisabledVal ? 0 : -1"
         [attr.disabled]="isDisabledVal || isReadOnlyVal ? '' : undefined"
         (click)="switchViewMode()">
@@ -32,13 +32,13 @@
         </ng-template>
 
         <ng-template #templateTitleCaptionViewModeMonth>
-          <span class="gln-calendar-caption-label-month">{{ '&emsp;' + currentYearStr
-            }}</span>
+          <span class="gln-calendar-caption-label-month">
+            {{ '&emsp;' + currentYearStr }}
+          </span>
         </ng-template>
 
         <ng-template #templateTitleCaptionViewModeYear>
-          <span class="
-            gln-calendar-caption-label-year">
+          <span class="gln-calendar-caption-label-years">
             {{ frameYearCells[0].label + ' - ' + frameYearCells[frameYearCells.length - 1].label }}
           </span>
         </ng-template>

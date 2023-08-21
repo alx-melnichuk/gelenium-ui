@@ -105,14 +105,14 @@ gln-calendar {
     justify-content: space-around;
   }
 
-  // Level 3 Element "title-box"
+  // Level 3 Element "header"
   [glncn-header] {
     align-items: center;
     display: inline-flex;
     flex-grow: 1;
-    order: var(--glncn-title-ord, unset);
-    min-width: var(--glncn-title-mn-wd, 8em);
-    &[glncn-title-year], &[glncn-title-month] {
+    order: var(--glncn-header-ord, unset);
+    min-width: var(--glncn-header-mn-wd, 8em);
+    &[glncn-header-year], &[glncn-header-month] {
       justify-content: center;
     }
   }
@@ -135,7 +135,7 @@ gln-calendar {
   }
 
   // Level 4 Element title button "title-caption"
-  [glncn-title-caption] {
+  [glncn-header-caption] {
     align-items: center;
     background-color: transparent;
     border: 0;
@@ -148,7 +148,7 @@ gln-calendar {
     justify-content: center;
     overflow: visible;
     outline: 0;
-    padding: var(--glncn-cap-pd, 0);
+    padding: var(--glncn-caption-pd, 0px);
     text-decoration: none;
     user-select: none;
     vertical-align: middle;
@@ -169,13 +169,13 @@ gln-calendar {
     width: 1.5em;
     transition: transform 300ms;
   }
-  [glncn-title-day] > [glncn-switch] > [glncn-icon] {
+  [glncn-header-day] > [glncn-switch] > [glncn-icon] {
     transform: rotate(0deg);
   }
-  [glncn-title-year] > [glncn-switch] > [glncn-icon] {
+  [glncn-header-year] > [glncn-switch] > [glncn-icon] {
     transform: rotate(180deg);
   }
-  [glncn-title-month] > [glncn-switch] > [glncn-icon] {
+  [glncn-header-month] > [glncn-switch] > [glncn-icon] {
     transform: rotate(180deg);
   }
 
@@ -266,7 +266,7 @@ gln-calendar {
     line-height: 1;
     margin: var(--glncn--item-mr);
     padding: var(--glncn--item-pd);
-    pointer-events: none; // Block display on :hover.
+    pointer-events: none; // Block the background from changing on hover (":hover").
     width: var(--glncn--item-wd);
   }
 
@@ -297,39 +297,39 @@ gln-calendar {
   // Element "glncn-tint" used by "glncn-year-cell", "glncn-month-cell", 
   &:not([dis]) [glncn-tint] {
     &:not(:hover):not(:focus) {
-      --glncn--act-cl   : var(--glncn-def-act-cl    , var(--glncn--item-def-cl)); // 1.0+
-      --glncn--act-bg-cl: var(--glncn-def-act-bg-cl , transparent);
-      --glncn--slct-cl   : var(--glncn-def-slct-cl    , var(--glncn--slct-def-cl)); // default-bg
-      --glncn--slct-bg-cl: var(--glncn-def-slct-bg-cl , var(--glncn--slct-def-bg-cl));
-      --glncn--psv-cl    : var(--glncn-def-psv-cl     , var(--glncn--psv-def-cl)); // 0.6+
-      --glncn--psv-bg-cl : var(--glncn-def-psv-bg-cl  , transparent);
+      --glncn--act-cl   : var(--glncn-def-act-cl   , var(--glncn--item-def-cl)); // 1.0+
+      --glncn--act-bg-cl: var(--glncn-def-act-bg-cl, transparent);
+      --glncn--slct-cl   : var(--glncn-def-slct-cl   , var(--glncn--slct-def-cl)); // default-bg
+      --glncn--slct-bg-cl: var(--glncn-def-slct-bg-cl, var(--glncn--slct-def-bg-cl));
+      --glncn--psv-cl    : var(--glncn-def-psv-cl   , var(--glncn--psv-def-cl)); // 0.6+
+      --glncn--psv-bg-cl : var(--glncn-def-psv-bg-cl, transparent);
     }
     &:hover:not(:focus) {
-      --glncn--act-cl   : var(--glncn-hov-act-cl    , var(--glncn-def-act-cl    , var(--glncn--item-def-cl))); // 1.0
-      --glncn--act-bg-cl: var(--glncn-hov-act-bg-cl , var(--glncn--item-hov-bg-cl)); // primary 0.15
-      --glncn--slct-cl   : var(--glncn-hov-slct-cl    , var(--glncn-def-slct-cl    , var(--glncn--slct-def-cl))); // default-bg
-      --glncn--slct-bg-cl: var(--glncn-hov-slct-bg-cl , var(--glncn--slct-hov-bg-cl));
-      --glncn--psv-cl    : var(--glncn-hov-psv-cl     , var(--glncn-def-psv-cl     , var(--glncn--psv-def-cl))); // 0.6
-      --glncn--psv-bg-cl : var(--glncn-hov-psv-bg-cl  , var(--glncn-def-psv-bg-cl  , var(--glncn--item-hov-bg-cl))); // primary 0.15
+      --glncn--act-cl   : var(--glncn-hov-act-cl   , var(--glncn-def-act-cl    , var(--glncn--item-def-cl))); // 1.0
+      --glncn--act-bg-cl: var(--glncn-hov-act-bg-cl, var(--glncn--item-hov-bg-cl)); // primary 0.15
+      --glncn--slct-cl   : var(--glncn-hov-slct-cl   , var(--glncn-def-slct-cl    , var(--glncn--slct-def-cl))); // default-bg
+      --glncn--slct-bg-cl: var(--glncn-hov-slct-bg-cl, var(--glncn--slct-hov-bg-cl));
+      --glncn--psv-cl    : var(--glncn-hov-psv-cl   , var(--glncn-def-psv-cl     , var(--glncn--psv-def-cl))); // 0.6
+      --glncn--psv-bg-cl : var(--glncn-hov-psv-bg-cl, var(--glncn-def-psv-bg-cl  , var(--glncn--item-hov-bg-cl))); // primary 0.15
     }
     &:focus {
-      --glncn--act-cl   : var(--glncn-foc-act-cl     , var(--glncn-hov-act-cl    , var(--glncn-def-act-cl    , var(--glncn--item-def-cl))));
-      --glncn--act-bg-cl: var(--glncn-foc-act-bg-cl  , var(--glncn-hov-act-bg-cl , var(--glncn--item-foc-bg-cl)));  // primary 0.3
+      --glncn--act-cl   : var(--glncn-foc-act-cl    , var(--glncn-hov-act-cl    , var(--glncn-def-act-cl    , var(--glncn--item-def-cl))));
+      --glncn--act-bg-cl: var(--glncn-foc-act-bg-cl , var(--glncn-hov-act-bg-cl , var(--glncn--item-foc-bg-cl)));  // primary 0.3
       --glncn--slct-cl   : var(--glncn-foc-slct-cl   , var(--glncn-hov-slct-cl   , var(--glncn-def-slct-cl   , var(--glncn--slct-def-cl))));
       --glncn--slct-bg-cl: var(--glncn-foc-slct-bg-cl, var(--glncn-hov-slct-bg-cl, var(--glncn--slct-hov-bg-cl)));
-      --glncn--psv-cl    : var(--glncn-foc-psv-cl    , var(--glncn-hov-psv-cl    , var(--glncn-def-psv-cl    , var(--glncn--psv-def-cl))));
+      --glncn--psv-cl    : var(--glncn-foc-psv-cl  , var(--glncn-hov-psv-cl    , var(--glncn-def-psv-cl    , var(--glncn--psv-def-cl))));
       --glncn--psv-bg-cl: var(--glncn-foc-psv-bg-cl, var(--glncn-hov-psv-bg-cl , var(--glncn-def-psv-bg-cl, var(--glncn--item-foc-bg-cl))));
     }
     --glncn--act-off-cl: var(--glncn-def-act-off-cl , var(--glncn--dayoff-def-cl)); // 1.0+
-    --glncn--psv-off-cl : var(--glncn-def-psv-off-cl  , var(--glncn--dayoff-psv-def-cl)); // 0.6+
+    --glncn--psv-off-cl : var(--glncn-def-psv-off-cl, var(--glncn--dayoff-psv-def-cl)); // 0.6+
   }
   &[dis] [glncn-tint] {
     --glncn--act-cl   : var(--glncn-dis-act-cl   , var(--glncn--sndr-dis-cl)); // 0.8+
     --glncn--act-bg-cl: var(--glncn-dis-item-bg-cl, transparent);
     --glncn--slct-cl   : var(--glncn-dis-slct-cl   , var(--glncn--slct-def-cl)); // default-bg
     --glncn--slct-bg-cl: var(--glncn-dis-slct-bg-cl, var(--glncn--slct-dis-bg-cl));
-    --glncn--psv-cl    : var(--glncn-dis-psv-cl    , var(--glncn--psv-dis-cl)); // 0.5+
-    --glncn--psv-bg-cl : var(--glncn-dis-psv-bg-cl , transparent);
+    --glncn--psv-cl    : var(--glncn-dis-psv-cl   , var(--glncn--psv-dis-cl)); // 0.5+
+    --glncn--psv-bg-cl : var(--glncn-dis-psv-bg-cl, transparent);
 
     --glncn--act-off-cl: var(--glncn-dis-act-off-cl, var(--glncn--dayoff-dis-cl)); // 0.8+
     --glncn--psv-off-cl : var(--glncn-dis-psv-off-cl , var(--glncn--dayoff-psv-dis-cl)); // 0.5+
