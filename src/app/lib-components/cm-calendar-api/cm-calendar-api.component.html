@@ -1074,6 +1074,14 @@ dateDisabled1 = (
         </span>
       </td>
     </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-header">
+      <th colspan="2">
+        Section "header".
+        <a [href]="urlCmCalendar + '#api-css-variables-header'">#</a>
+      </th>
+    </tr>
     <tr>
       <td><code>--glncn-head-fn-wg: 500;</code>
       </td>
@@ -1084,18 +1092,20 @@ dateDisabled1 = (
       </td>
     </tr>
     <tr>
-      <td><code>--glncn-title-ord: unset;</code>
+      <td><code>--glncn-header-ord: unset;</code>
       </td>
       <td>
         <span>
           Specifies the "order" value for the header text.
-          <br />For example, if you specify <code ubr>--glncn-title-ord: 1;</code>
+          <br />
+          You can change the order of elements: "title text", "previous" button, "next" button.
+          <br />For example, if you specify <code ubr>--glncn-header-ord: 1;</code>
           then we get the style as "bootstrap".
         </span>
       </td>
     </tr>
     <tr>
-      <td pd-h05><code>--glncn-title-mn-wd: 8em;</code>
+      <td pd-h05><code>--glncn-header-mn-wd: 8em;</code>
       </td>
       <td>
         <span>
@@ -1146,8 +1156,7 @@ dateDisabled1 = (
       <td pd-h05><code>--glncn-dis-title-cl:<br/>
       hsla(<br/>
       &nbsp;var(--gln-default-[h,s,l]),<br/>
-      &nbsp;0.8<br/>
-      );</code>
+      0.8);</code>
       </td>
       <td>
         <span>
@@ -1155,9 +1164,449 @@ dateDisabled1 = (
         </span>
       </td>
     </tr>
+    <tr>
+      <td><code>--glncn-caption-hg: 2.5em;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "height" value for the caption text.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-caption-pd: 0px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "padding" value for the caption text.
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-nav">
+      <th colspan="2">
+        Section "nav". Buttons: "switch view", "previous", "next".
+        <a [href]="urlCmCalendar + '#api-css-variables-nav'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-def-nav-cl:<br/>
+        hsl(<br/>
+        &nbsp;var(--gln-primary-[h,s,l])<br/>
+        );</code>
+      </td>
+      <td>
+        <span>
+          Specifies the default text color for buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-def-nav-bg-cl:<br/>
+        transparent;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the default background color for buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td pd-h05><code>--glncn-hov-nav-cl:<br/>
+        var(--glncn-def-nav-cl);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text color of the mouse hover for buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-hov-nav-bg-cl:<br/>
+        hsla(<br/>
+        &nbsp;var(--gln-primary-[h,s,l]),<br/>
+        0.1);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the background color for mouse hover buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td pd-h05><code>--glncn-foc-nav-cl:<br/>
+        var(--glncn-hov-nav-cl);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text color when receiving focus for buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-foc-nav-bg-cl:<br/>
+        var(--glncn-hov-nav-bg-cl);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the background color when receiving focus for buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td pd-h05><code>--glncn-dis-nav-cl:<br/>
+        hsla(<br/>
+        &nbsp;var(--gln-default-[h,s,l]),<br/>
+        0.6);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the color of the text when the state is "disabled" for buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-dis-nav-bg-cl:<br/>
+        transparent;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the background color when the state is "disabled" for buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td><code>--glncn-nav-br-rd:<br/>
+        var(--glncn-br-rd, 50%);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "border-radius" property for buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-nav-pd: 0.5em;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "padding" property for buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td><code>--glncn-prev-ord: unset;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "order" property for the "previous" button.
+          <br />
+          You can change the order of elements: "title text", "previous" button, "next" button.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-next-ord: unset;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "order" property for the "next" button.
+          <br />
+          You can change the order of elements: "title text", "previous" button, "next" button.
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-day-cage">
+      <th colspan="2">
+        Section "cage" view mode "day". The header "name of the days of the week".
+        <a [href]="urlCmCalendar + '#api-css-variables-day-cage'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td><code>font-size:<br/>
+        &nbsp;calc(1em - 1px);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "font-size" property for the "days of the week" header.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-cage-fn-wg: 400;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "font-weight" property for the "days of the week" header.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-cage-hg:<br/>
+        &nbsp;var(--glncn-item-hg);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "height" property for the "days of the week" header.
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-day-row">
+      <th colspan="2">
+        Section "row" view mode "day".
+        <a [href]="urlCmCalendar + '#api-css-variables-day-row'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td><code>--glncn-row-fn-wg: 400;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "font-weight" property for the "day of the month" row.
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-day-cell-def">
+      <th colspan="2">
+        Section "cell" view mode "day" - default text and background color.
+        <a [href]="urlCmCalendar + '#api-css-variables-day-cell-def'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-def-act-cl:<br/>
+        hsl(<br/>
+        &nbsp;var(--gln-default-[h,s,l])<br/>
+        );</code>
+      </td>
+      <td>
+        <span>
+          Specifies the default text color for the "day of the month" cell for the current month (active).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-def-act-bg-cl:<br/>
+        transparent;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the default background color for the "day of the month" cell for the current month (active).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-def-slct-cl:<br/>
+        hsl(<br/>
+        var(--gln-default-bg-[h,s,l])<br/>
+        );</code>
+      </td>
+      <td>
+        <span>
+          Specifies the default text color for the "day of the month" cell for the selected date.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-def-slct-bg-cl:<br/>
+        hsl(<br/>
+          &nbsp;var(--gln-primary-[h,s,l])<br/>
+        );</code>
+      </td>
+      <td>
+        <span>
+          Specifies the default background color for the "day of the month" cell for the selected date.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-def-psv-cl:<br/>
+        hsla(<br/>
+        &nbsp;var(--gln-default-[h,s,l]),<br/>
+        0.6);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the default text color for the "day of the month" cell for the previous (next) month (passive).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-def-psv-bg-cl:<br/>
+        transparent;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the default background color for the "day of the month" cell for the previous (next) month
+          (passive).
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-day-cell-hov">
+      <th colspan="2">
+        Section "cell" view mode "day" - text and background color on mouse hover.
+        <a [href]="urlCmCalendar + '#api-css-variables-day-cell-hov'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td><code>--glncn-hov-act-cl:<br/>
+        var(--glncn-def-act-cl);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text color for the "day of the month" cell on mouse hover for the current (active) month.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-hov-act-bg-cl:<br/>
+        hsla(<br/>
+        &nbsp;var(--gln-primary-[h,s,l]),<br/>
+        0.15);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the background color for the "day of the month" cell on mouse hover for the current month (active).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-hov-slct-cl:<br/>
+        var(--glncn-def-slct-cl);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text color for the "day of the month" cell on mouse hover for the selected date.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-hov-slct-bg-cl:<br/>
+        hsl(<br/>
+          &nbsp;var(--gln--primary-h),<br/>
+          &nbsp;var(--gln--primary-s),<br/>
+          &nbsp;calc(var(--gln--primary-l) - 7%)<br/>
+        );</code>
+      </td>
+      <td>
+        <span>
+          Specifies the background color for the "day of the month" cell on mouse hover for the selected date.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-hov-psv-cl:<br/>
+        &nbsp;var(--glncn-def-psv-cl);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text color for the "day of the month" cell on mouse hover for the previous (next) month
+          (passive).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-hov-psv-bg-cl:<br/>
+        &nbsp;var(--glncn-def-psv-bg-cl);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the background color for the "day of the month" cell on mouse hover for the previous (next) month
+          (passive).
+        </span>
+      </td>
+    </tr>
+
+    <!-- <tr>
+      <td pd-h05><code>--glncn-hov-nav-cl:<br/>
+        var(--glncn-def-nav-cl);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text color of the mouse hover for buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-hov-nav-bg-cl:<br/>
+        hsla(<br/>
+        &nbsp;var(--gln-primary-[h,s,l]),<br/>
+        0.1);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the background color for mouse hover buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr> -->
+
+    <!-- <tr>
+      <td pd-h05><code>--glncn-foc-nav-cl:<br/>
+        var(--glncn-hov-nav-cl);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text color when receiving focus for buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-foc-nav-bg-cl:<br/>
+        var(--glncn-hov-nav-bg-cl);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the background color when receiving focus for buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr> -->
+
+    <!-- <tr>
+      <td pd-h05><code>--glncn-dis-nav-cl:<br/>
+        hsla(<br/>
+        &nbsp;var(--gln-default-[h,s,l]),<br/>
+        0.6);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the color of the text when the state is "disabled" for buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-dis-nav-bg-cl:<br/>
+        transparent;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the background color when the state is "disabled" for buttons: "switch view", "previous", "next".
+        </span>
+      </td>
+    </tr> -->
+
   </tbody>
 </table>
 
+<!-- <tr colspan="2"
+      id="api-css-variables-nav">
+      <th colspan="2">
+        Section "nav". Buttons: "switch view", "previous", "next".
+        <a [href]="urlCmCalendar + '#api-css-variables-nav'">#</a>
+      </th>
+    </tr> -->
 <section mr-vr
   id="api-css-variables-tmp01">
   <h4 class="app-hover-link">
@@ -1173,16 +1622,19 @@ dateDisabled1 = (
     </tr>
   </thead>
   <tbody>
+
     <tr>
-      <td><code>--glncn-caption-hg: 2.5em;</code>
+      <td pd-h05><code>--glncn-def-nav-cl:<br/>
+        hsl(<br/>
+        &nbsp;var(--gln-primary-[h,s,l])<br/>
+        );</code>
       </td>
       <td>
         <span>
-          Specifies the "height" value for the caption text.
+          Specifies the default text color for buttons: "switch view", "previous", "next".
         </span>
       </td>
     </tr>
-
 
   </tbody>
 </table>
