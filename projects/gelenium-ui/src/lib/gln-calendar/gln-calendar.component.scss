@@ -320,19 +320,19 @@ gln-calendar {
       --glncn--psv-cl    : var(--glncn-foc-psv-cl  , var(--glncn-hov-psv-cl    , var(--glncn-def-psv-cl    , var(--glncn--psv-def-cl))));
       --glncn--psv-bg-cl: var(--glncn-foc-psv-bg-cl, var(--glncn-hov-psv-bg-cl , var(--glncn-def-psv-bg-cl, var(--glncn--item-foc-bg-cl))));
     }
-    --glncn--act-off-cl: var(--glncn-def-act-off-cl , var(--glncn--dayoff-def-cl)); // 1.0+
-    --glncn--psv-off-cl : var(--glncn-def-psv-off-cl, var(--glncn--dayoff-psv-def-cl)); // 0.6+
+    --glncn--act-off-cl: var(--glncn-def-act-off-cl , var(--glncn--dayoff-def-cl)); // danger 1.0+
+    --glncn--psv-off-cl : var(--glncn-def-psv-off-cl, var(--glncn--dayoff-psv-def-cl)); // danger 0.6+
   }
   &[dis] [glncn-tint] {
     --glncn--act-cl   : var(--glncn-dis-act-cl   , var(--glncn--sndr-dis-cl)); // 0.8+
-    --glncn--act-bg-cl: var(--glncn-dis-item-bg-cl, transparent);
+    --glncn--act-bg-cl: var(--glncn-dis-act-bg-cl, transparent);
     --glncn--slct-cl   : var(--glncn-dis-slct-cl   , var(--glncn--slct-def-cl)); // default-bg
-    --glncn--slct-bg-cl: var(--glncn-dis-slct-bg-cl, var(--glncn--slct-dis-bg-cl));
+    --glncn--slct-bg-cl: var(--glncn-dis-slct-bg-cl, var(--glncn--slct-dis-bg-cl)); // default 0.4
     --glncn--psv-cl    : var(--glncn-dis-psv-cl   , var(--glncn--psv-dis-cl)); // 0.5+
     --glncn--psv-bg-cl : var(--glncn-dis-psv-bg-cl, transparent);
 
-    --glncn--act-off-cl: var(--glncn-dis-act-off-cl, var(--glncn--dayoff-dis-cl)); // 0.8+
-    --glncn--psv-off-cl : var(--glncn-dis-psv-off-cl , var(--glncn--dayoff-psv-dis-cl)); // 0.5+
+    --glncn--act-off-cl: var(--glncn-dis-act-off-cl, var(--glncn--dayoff-dis-cl)); // danger 0.8+
+    --glncn--psv-off-cl : var(--glncn-dis-psv-off-cl , var(--glncn--dayoff-psv-dis-cl)); // danger 0.5+
   }
   [glncn-tint] {
     border-style: none;
@@ -375,7 +375,6 @@ gln-calendar {
     height: var(--glncn--item-hg);
     line-height: var(--glncn--item-hg);
     margin: var(--glncn--item-mr);
-    // ??overflow: visible;
     padding: var(--glncn--item-pd);
     text-decoration: none;
     user-select: none;
