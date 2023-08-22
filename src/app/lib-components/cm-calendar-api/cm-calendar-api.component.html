@@ -1462,7 +1462,7 @@ dateDisabled1 = (
       </th>
     </tr>
     <tr>
-      <td><code>--glncn-hov-act-cl:<br/>
+      <td pd-h05><code>--glncn-hov-act-cl:<br/>
         var(--glncn-def-act-cl);</code>
       </td>
       <td>
@@ -1484,7 +1484,7 @@ dateDisabled1 = (
       </td>
     </tr>
     <tr>
-      <td><code>--glncn-hov-slct-cl:<br/>
+      <td pd-h05><code>--glncn-hov-slct-cl:<br/>
         var(--glncn-def-slct-cl);</code>
       </td>
       <td>
@@ -1508,8 +1508,8 @@ dateDisabled1 = (
       </td>
     </tr>
     <tr>
-      <td><code>--glncn-hov-psv-cl:<br/>
-        &nbsp;var(--glncn-def-psv-cl);</code>
+      <td pd-h05><code>--glncn-hov-psv-cl:<br/>
+        var(--glncn-def-psv-cl);</code>
       </td>
       <td>
         <span>
@@ -1519,8 +1519,8 @@ dateDisabled1 = (
       </td>
     </tr>
     <tr>
-      <td><code>--glncn-hov-psv-bg-cl:<br/>
-        &nbsp;var(--glncn-def-psv-bg-cl);</code>
+      <td pd-h05><code>--glncn-hov-psv-bg-cl:<br/>
+        var(--glncn-def-psv-bg-cl);</code>
       </td>
       <td>
         <span>
@@ -1530,72 +1530,309 @@ dateDisabled1 = (
       </td>
     </tr>
 
-    <!-- <tr>
-      <td pd-h05><code>--glncn-hov-nav-cl:<br/>
-        var(--glncn-def-nav-cl);</code>
+    <tr colspan="2"
+      id="api-css-variables-day-cell-foc">
+      <th colspan="2">
+        Section "cell" view mode "day" - text and background color when the focus.
+        <a [href]="urlCmCalendar + '#api-css-variables-day-cell-foc'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-foc-act-cl:<br/>
+        var(--glncn-hov-act-cl);</code>
       </td>
       <td>
         <span>
-          Specifies the text color of the mouse hover for buttons: "switch view", "previous", "next".
+          Specifies the text color for the "day of the month" cell when the focus for the current (active) month.
         </span>
       </td>
     </tr>
     <tr>
-      <td pd-h05><code>--glncn-hov-nav-bg-cl:<br/>
-        hsla(<br/>
-        &nbsp;var(--gln-primary-[h,s,l]),<br/>
-        0.1);</code>
+      <td pd-h05><code>--glncn-foc-act-bg-cl:<br/>
+        var(--glncn-hov-act-bg-cl);</code>
       </td>
       <td>
         <span>
-          Specifies the background color for mouse hover buttons: "switch view", "previous", "next".
-        </span>
-      </td>
-    </tr> -->
-
-    <!-- <tr>
-      <td pd-h05><code>--glncn-foc-nav-cl:<br/>
-        var(--glncn-hov-nav-cl);</code>
-      </td>
-      <td>
-        <span>
-          Specifies the text color when receiving focus for buttons: "switch view", "previous", "next".
+          Specifies the background color for the "day of the month" cell when the focus for the current month (active).
         </span>
       </td>
     </tr>
     <tr>
-      <td pd-h05><code>--glncn-foc-nav-bg-cl:<br/>
-        var(--glncn-hov-nav-bg-cl);</code>
+      <td pd-h05><code>--glncn-foc-slct-cl:<br/>
+        var(--glncn-hov-slct-cl);</code>
       </td>
       <td>
         <span>
-          Specifies the background color when receiving focus for buttons: "switch view", "previous", "next".
+          Specifies the text color for the "day of the month" cell when the focus for the selected date.
         </span>
       </td>
-    </tr> -->
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-foc-slct-bg-cl:<br/>
+        var(--glncn-hov-slct-bg-cl);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the background color for the "day of the month" cell when the focus for the selected date.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-foc-psv-cl:<br/>
+        var(--glncn-hov-psv-cl);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text color for the "day of the month" cell when the focus for the previous (next) month
+          (passive).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-foc-psv-bg-cl:<br/>
+        var(--glncn-hov-psv-bg-cl);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the background color for the "day of the month" cell when the focus for the previous (next) month
+          (passive).
+        </span>
+      </td>
+    </tr>
 
-    <!-- <tr>
-      <td pd-h05><code>--glncn-dis-nav-cl:<br/>
+    <tr colspan="2"
+      id="api-css-variables-day-cell-dayoff-ena">
+      <th colspan="2">
+        Section "cell" view mode "day" - text and background color weekend in the "enabled" state.
+        <a [href]="urlCmCalendar + '#api-css-variables-day-cell-dayoff-ena'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-def-act-off-cl:<br/>
+        hsl(<br/>
+        &nbsp;var(--gln-danger-[h,s,l])<br/>
+        );</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text color for the "day of the month" cell when weekend in the "enabled" state
+          for the current (active) month.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-def-psv-off-cl:<br/>
         hsla(<br/>
-        &nbsp;var(--gln-default-[h,s,l]),<br/>
+        &nbsp;var(--gln-danger-[h,s,l]),<br/>
         0.6);</code>
       </td>
       <td>
         <span>
-          Specifies the color of the text when the state is "disabled" for buttons: "switch view", "previous", "next".
+          Specifies the text color for the "day of the month" cell when weekend in the "enabled" state
+          for the previous (next) month (passive).
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-day-cell-dis">
+      <th colspan="2">
+        Section "cell" view mode "day" - text and background color when the state is "disabled".
+        <a [href]="urlCmCalendar + '#api-css-variables-day-cell-dis'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-dis-act-cl:<br/>
+        hsla(<br/>
+        &nbsp;var(--gln-default-[h,s,l]),<br/>
+        0.8);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text color for the "day of the month" cell when the state is "disabled" for the current (active)
+          month.
         </span>
       </td>
     </tr>
     <tr>
-      <td pd-h05><code>--glncn-dis-nav-bg-cl:<br/>
+      <td pd-h05><code>--glncn-dis-act-bg-cl:<br/>
         transparent;</code>
       </td>
       <td>
         <span>
-          Specifies the background color when the state is "disabled" for buttons: "switch view", "previous", "next".
+          Specifies the background color for the "day of the month" cell when the state is "disabled" for the current
+          month (active).
         </span>
       </td>
-    </tr> -->
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-dis-slct-cl:<br/>
+        hsl(<br/>
+        var(--gln-default-bg-[h,s,l])<br/>
+        );</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text color for the "day of the month" cell when the state is "disabled" for the selected date.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-dis-slct-bg-cl:<br/>
+        hsla(<br/>
+        &nbsp;var(--gln-default-[h,s,l]),<br/>
+        0.4);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the background color for the "day of the month" cell when the state is "disabled" for the selected
+          date.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-dis-psv-cl:<br/>
+        hsla(<br/>
+        &nbsp;var(--gln-default-[h,s,l]),<br/>
+        0.5);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text color for the "day of the month" cell when the state is "disabled" for the previous (next)
+          month
+          (passive).
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-dis-psv-bg-cl:<br/>
+        transparent;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the background color for the "day of the month" cell when the state is "disabled" for the previous
+          (next) month
+          (passive).
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-day-cell-dayoff-dis">
+      <th colspan="2">
+        Section "cell" view mode "day" - text and background color weekend in the "disabled" state.
+        <a [href]="urlCmCalendar + '#api-css-variables-day-cell-dayoff-dis'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-dis-act-off-cl:<br/>
+        hsla(<br/>
+        &nbsp;var(--gln-danger-[h,s,l]),<br/>
+        0.8);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text color for the "day of the month" cell when weekend in the "disabled" state
+          for the current (active) month.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-dis-psv-off-cl:<br/>
+        hsla(<br/>
+        &nbsp;var(--gln-danger-[h,s,l]),<br/>
+        0.5);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the text color for the "day of the month" cell when weekend in the "disabled" state
+          for the previous (next) month (passive).
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-cell-today">
+      <th colspan="2">
+        Section "cell" - border for the date "today".
+        <a [href]="urlCmCalendar + '#api-css-variables-cell-today'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td><code>--glncn-today-br-cl:<br/>
+        var(--glncn-def-psv-cl);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "border-color" property for the date "today".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-today-br-st:<br/>
+         solid;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "border-style" property for the date "today".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-today-br-wd: 1px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "border-width" property for the date "today".
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-day-cell-item">
+      <th colspan="2">
+        Section "cell" - view mode "day" - cell parameters.
+        <a [href]="urlCmCalendar + '#api-css-variables-day-cell-item'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td><code>--glncn-br-rd: 50%;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "border-radius" property for the cell - view mode "day".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-item-fn-sz: 1em;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "font-size" property for the cell - view mode "day".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-item-mr: 0px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "margin" property for the cell - view mode "day".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><code>--glncn-item-pd: 0px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "padding" property for the cell - view mode "day".
+        </span>
+      </td>
+    </tr>
+
+    <!-- glncn-week -->
 
   </tbody>
 </table>
