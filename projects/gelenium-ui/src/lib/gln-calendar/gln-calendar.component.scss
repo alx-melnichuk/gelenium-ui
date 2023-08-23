@@ -395,7 +395,7 @@ gln-calendar {
     line-height: 1;
     margin: var(--glncn--item-mr);
     padding: var(--glncn--item-pd);
-    pointer-events: none; // Block display on :hover.
+    pointer-events: none; // Block the background from changing on hover (":hover").
     width: var(--glncn--item-wd);
   }
 
