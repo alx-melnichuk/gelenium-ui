@@ -1027,7 +1027,7 @@ dateDisabled1 = (
     </tr>
 
     <tr>
-      <td><code>--glncn-item-hg:<br/>
+      <td id="--glncn-item-hg"><code>--glncn-item-hg:<br/>
         var(--glncn--item-size);</code>
       </td>
       <td>
@@ -1351,7 +1351,7 @@ dateDisabled1 = (
     </tr>
     <tr>
       <td><code>--glncn-cage-hg:<br/>
-        &nbsp;var(--glncn-item-hg);</code>
+        &nbsp;var(<a [href]="urlCmCalendar + '#--glncn-item-hg'">--glncn-item-hg</a>);</code>
       </td>
       <td>
         <span>
@@ -1805,7 +1805,7 @@ dateDisabled1 = (
       </td>
     </tr>
     <tr>
-      <td><code>--glncn-item-fn-sz: 1em;</code>
+      <td id="--glncn-item-fn-sz"><code>--glncn-item-fn-sz: 1em;</code>
       </td>
       <td>
         <span>
@@ -1832,48 +1832,214 @@ dateDisabled1 = (
       </td>
     </tr>
 
-    <!-- glncn-week -->
-
-  </tbody>
-</table>
-
-<!-- <tr colspan="2"
-      id="api-css-variables-nav">
+    <tr colspan="2"
+      id="api-css-variables-day-cell-week">
       <th colspan="2">
-        Section "nav". Buttons: "switch view", "previous", "next".
-        <a [href]="urlCmCalendar + '#api-css-variables-nav'">#</a>
+        Section "cell" - view mode "day" - Week number column.
+        <a [href]="urlCmCalendar + '#api-css-variables-day-cell-week'">#</a>
       </th>
-    </tr> -->
-<section mr-vr
-  id="api-css-variables-tmp01">
-  <h4 class="app-hover-link">
-    CSS variables-tmp01.
-    <a [href]="urlCmCalendar + '#api-css-variables-tmp01'">#</a>
-  </h4>
-</section>
-<table class="app-tab">
-  <thead>
-    <tr>
-      <th class="app-mn-wd-22ch">Name</th>
-      <th>Description</th>
     </tr>
-  </thead>
-  <tbody>
-
     <tr>
-      <td pd-h05><code>--glncn-def-nav-cl:<br/>
-        hsl(<br/>
-        &nbsp;var(--gln-primary-[h,s,l])<br/>
-        );</code>
+      <td pd-h05><code>--glncn-week-fn-sz:<br/>
+        &nbsp;calc(1em - 1px);</code>
       </td>
       <td>
         <span>
-          Specifies the default text color for buttons: "switch view", "previous", "next".
+          Specifies the "font-size" property for the week number column - view mode "day".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-week-fn-wg:<br/>
+        400;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "font-weight" property for the week number column - view mode "day".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-week-hg:<br/>
+        &nbsp;var(<a [href]="urlCmCalendar + '#--glncn-item-hg'">--glncn-item-hg</a>);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "height" property for the week number column - view mode "day".
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-month">
+      <th colspan="2">
+        Section "list of months" - view mode "month".
+        <a [href]="urlCmCalendar + '#api-css-variables-month'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-view-month-pd:<br/>
+        2px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "padding" property for the list of months - view mode "month".
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-month-wrapper">
+      <th colspan="2">
+        Section "month wrapper" - view mode "month".
+        <a [href]="urlCmCalendar + '#api-css-variables-month-wrapper'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-month-wrapper-pd:<br/>
+        0px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "padding" property for the "month wrapper" - view mode "month".
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-month-cell">
+      <th colspan="2">
+        Section "month cell" - view mode "month".
+        <a [href]="urlCmCalendar + '#api-css-variables-month-cell'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-month-cell-br-rd:<br/>
+        calc(var(<a [href]="urlCmCalendar + '#--glncn-item-hg'">--glncn-item-hg</a>)/2);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "border-radius" property for the "month cell" - view mode "month".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-month-cell-fn-sz:<br/>
+        var(<a [href]="urlCmCalendar + '#--glncn-item-fn-sz'">--glncn-item-fn-sz</a>, 1em);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "font-size" property for the "month cell" - view mode "month".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-month-cell-hg:<br/>
+        &nbsp;var(<a [href]="urlCmCalendar + '#--glncn-item-hg'">--glncn-item-hg</a>);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "height" property for the "month cell" - view mode "month".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-month-cell-wd:<br/>
+        85%;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "width" property for the "month cell" - view mode "month".
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-year">
+      <th colspan="2">
+        Section "list years" - view mode "year".
+        <a [href]="urlCmCalendar + '#api-css-variables-year'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-view-year-pd:<br/>
+        2px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "padding" property for the "list years" - view mode "year".
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-year-wrapper">
+      <th colspan="2">
+        Section "year-wrapper" - view mode "year".
+        <a [href]="urlCmCalendar + '#api-css-variables-year-wrapper'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-year-wrapper-pd:<br/>
+        0px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "padding" property for the "year wrapper" - view mode "year".
+        </span>
+      </td>
+    </tr>
+
+    <tr colspan="2"
+      id="api-css-variables-year-cell">
+      <th colspan="2">
+        Section "year-cell" - view mode "year".
+        <a [href]="urlCmCalendar + '#api-css-variables-year-cell'">#</a>
+      </th>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-year-cell-br-rd:<br/>
+        calc(var(<a [href]="urlCmCalendar + '#--glncn-item-hg'">--glncn-item-hg</a>)/2);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "border-radius" property for the "year-cell" - view mode "year".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-year-cell-fn-sz:<br/>
+        var(<a [href]="urlCmCalendar + '#--glncn-item-fn-sz'">--glncn-item-fn-sz</a>, 1em);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "font-size" property for the "year-cell" - view mode "year".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-year-cell-hg:<br/>
+        var(<a [href]="urlCmCalendar + '#--glncn-item-hg'">--glncn-item-hg</a>);</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "height" property for the "year-cell" - view mode "year".
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td pd-h05><code>--glncn-year-cell-wd:<br/>
+        80px;</code>
+      </td>
+      <td>
+        <span>
+          Specifies the "width" property for the "year-cell" - view mode "year".
         </span>
       </td>
     </tr>
 
   </tbody>
 </table>
+
 
 <hr br-nn />
