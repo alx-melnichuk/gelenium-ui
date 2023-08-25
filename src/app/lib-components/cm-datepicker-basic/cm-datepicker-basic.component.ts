@@ -34,6 +34,10 @@ export class CmDatepickerBasicComponent {
   };
   public formGroup01: FormGroup = new FormGroup(this.control01);
 
+  configCalendar01 = {
+    cellSize: 'wide',
+  };
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 }
