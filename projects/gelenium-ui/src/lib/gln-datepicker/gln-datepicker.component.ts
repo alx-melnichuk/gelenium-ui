@@ -60,6 +60,7 @@ import { ScreenUtil } from '../_utils/screen.util';
 import { GlnDatepickerConfig } from './gln-datepicker-config.interface';
 import { GLN_DATEPICKER_SCROLL_STRATEGY } from './gln-datepicker.providers';
 import { DateUtil } from '../_utils/date.util';
+import { GlnCalendarConfig } from '../gln-calendar/gln-calendar-config.interface';
 
 export const GLN_DATEPICKER_CONFIG = new InjectionToken<GlnDatepickerConfig>('GLN_DATEPICKER_CONFIG');
 
@@ -96,6 +97,8 @@ export class GlnDatepickerComponent
   public classes: string | string[] | Set<string> | { [key: string]: unknown } = '';
   @Input()
   public config: GlnDatepickerConfig | null | undefined;
+  @Input()
+  public configCalendar: GlnCalendarConfig | null | undefined;
   @Input()
   public exterior: string | null | undefined; // 'outlined' | 'underline' | 'standard'
   @Input()
@@ -166,6 +169,7 @@ export class GlnDatepickerComponent
 
   public backdropClassVal: string | null = null;
   public currConfig: GlnDatepickerConfig;
+  public configCalendarVal: GlnCalendarConfig | null = null;
   public formControl: FormControl = new FormControl({ value: null, disabled: false }, []);
   public formGroup: FormGroup = new FormGroup({ textData: this.formControl });
   public errors: ValidationErrors | null = null;
@@ -221,6 +225,9 @@ export class GlnDatepickerComponent
       this.currConfig = { ...this.rootConfig, ...this.config };
     }
 
+    if (!!changes['configCalendar'] || ChangeUtil.check(changes['config'], 'configCalendar')) {
+      this.configCalendarVal = this.configCalendar ?? (this.currConfig.configCalendar || null);
+    }
     if (!!changes['isDisabled']) {
       this.setDisabledState(!!BooleanUtil.init(this.isDisabled));
     }
@@ -283,6 +290,9 @@ export class GlnDatepickerComponent
 
     if (this.backdropClassVal == null) {
       this.backdropClassVal = this.currConfig.backdropClass || null;
+    }
+    if (this.configCalendarVal == null) {
+      this.configCalendarVal = this.currConfig.configCalendar || null;
     }
     if (this.isErrorVal == null) {
       this.isErrorVal = !!this.currConfig.isError;
