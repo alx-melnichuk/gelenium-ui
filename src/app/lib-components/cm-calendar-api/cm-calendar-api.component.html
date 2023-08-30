@@ -652,6 +652,24 @@ dateDisabled1 = (
 <table class="app-tab">
   <thead>
     <th colspan="2">
+      <span fw500>getPeriodByViewMode(): 'period_month' | 'period_year' | 'period_years';</span>
+    </th>
+  </thead>
+  <tbody>
+    <tr colspan="2">
+      <td>
+        The method returns the period type for the 'prevPeriod()', 'nextPeriod()' methods, depending on the view mode.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr br-nn />
+
+
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
       <span fw500>switchViewMode(activeView: 'day' | 'month' | 'year' = this.viewMode): void;</span>
     </th>
   </thead>
@@ -699,20 +717,40 @@ dateDisabled1 = (
 <table class="app-tab">
   <thead>
     <th colspan="2">
-      <span fw500>getPeriodByViewMode(): 'period_month' | 'period_year' | 'period_years';</span>
+      <span fw500>setValue(value: Date | null): void;</span>
     </th>
   </thead>
   <tbody>
     <tr colspan="2">
       <td>
-        The method returns the period type for the 'prevPeriod()', 'nextPeriod()' methods, depending on the view mode.
+        The method sets the new value of the selected date.
+        Or resets the value if you pass null.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="app-tab">
+  <thead>
+    <th colspan="2">
+      <code>Parameters</code>
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="app-mn-wd-22ch">
+        <code>value: Date | null;
+        </code>
+      </td>
+      <td>
+        <span>
+          The new value of the component.
+        </span>
       </td>
     </tr>
   </tbody>
 </table>
 
 <hr br-nn />
-
 
 <table class="app-tab">
   <thead>
