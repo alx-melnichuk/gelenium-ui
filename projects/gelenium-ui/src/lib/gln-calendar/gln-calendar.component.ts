@@ -559,6 +559,14 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       });
     }
   }
+  public setValue(value: Date | null): void {
+    if (!this.isDisabledVal && !this.isReadOnlyVal) {
+      const result: Date | null = !!value ? new Date(value.getFullYear(), value.getMonth(), value.getDate(), 0, 0, 0, 0) : null;
+      this.selected.emit(result);
+      this.updateViewAllCells(result || this.currentDate);
+      this.changeDetectorRef.markForCheck();
+    }
+  }
   /** Transition to the previous period. */
   public prevPeriod(period: string): void {
     if (this.isDisabledVal || this.isReadOnlyVal) {
@@ -608,6 +616,15 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       this.switchViewMode();
     }
   }
+  // -- Methods for the mode "view day" --
+  public clickSelectItem(cell: CalendarCell | null): void {
+    if (!this.isDisabledVal && !this.isReadOnlyVal) {
+      const newDate: Date | null = !!cell ? new Date(cell.date.getFullYear(), cell.date.getMonth(), cell.date.getDate(), 0, 0, 0, 0) : null;
+      // this.selected.emit(result);
+      // this.updateViewAllCells(result || this.currentDate);
+      this.setValue(newDate);
+    }
+  }
   public keydownCell(event: KeyboardEvent, deltaX: number, deltaY: number, viewMode: 'day' | 'month' | 'year' = this.viewMode): void {
     if (this.isDisabledVal || this.isReadOnlyVal || this.currentDate == null) {
       return;
@@ -636,14 +653,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     if (isStopPropagation) {
       event.preventDefault();
       event.stopPropagation();
-    }
-  }
-  // -- Methods for the mode "view day" --
-  public clickSelectItem(cell: CalendarCell | null): void {
-    if (!this.isDisabledVal && !this.isReadOnlyVal) {
-      const result: Date | null = !!cell ? new Date(cell.date.getFullYear(), cell.date.getMonth(), cell.date.getDate(), 0, 0, 0, 0) : null;
-      this.selected.emit(result);
-      this.updateViewAllCells(result || this.currentDate);
     }
   }
 
