@@ -270,7 +270,7 @@ export class GlnCalendarUtil {
 
     const innerDate: Date = new Date(current.getFullYear(), current.getMonth(), 1, 0, 0, 0, 0);
     const currMonth: number = innerDate.getMonth();
-    // Date.getDay() 0-Sun, 1-Mon, 2-Tue, 3-Wed, 4-Thu, 5-Fri, 6-Sat;
+    // Date.getDay()  0-Sun, 1-Mon, 2-Tue, 3-Wed, 4-Thu, 5-Fri, 6-Sat;
     const dayWeekInit: number = innerDate.getDay();
     const deltaDays = (dayWeekInit > dayStartWeek ? 0 : -7) + dayStartWeek - dayWeekInit;
     innerDate.setDate(deltaDays);
