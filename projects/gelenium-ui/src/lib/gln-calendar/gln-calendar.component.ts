@@ -76,7 +76,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public cellSize: number | string | null | undefined; // 'short','small','middle','wide','large','huge'
   @Input()
-  public colsByYears: number | string | null | undefined; // [1 - 12]  default 4
+  public colsByYears: number | string | null | undefined; //  [1 - 12] default 4
   @Input()
   public colsByMonths: number | string | null | undefined; // [1 - 12] default 3
   @Input()
@@ -118,7 +118,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   @Input()
   public value: Date | null | undefined;
   @Input()
-  public view: string | null | undefined; // 'day','month','year' default 'day'
+  public view: string | null | undefined; // 'day','month','year' default - 'day'
   @Input()
   public views: string[] | null | undefined; // default ['day', 'year', 'month']
   @Input()
@@ -698,7 +698,7 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   // -- --
   /** Transition to the next or previous period.
    * @param period: string;  // 'period_month' - previous month (view = 'day');
-   *                         // 'period_year'  - previous year (view = 'month');
+   *                         // 'period_year'  - previous year  (view = 'month');
    *                         // 'period_years' - previous years (view = 'year');
    * @param isNext: boolean; // true - next period; false - previous period;
    */
