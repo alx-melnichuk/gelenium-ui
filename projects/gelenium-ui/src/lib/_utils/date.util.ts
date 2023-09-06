@@ -70,4 +70,11 @@ export class DateUtil {
   public static addDay(d: Date, delta: number = 1): Date {
     return new Date(d.getFullYear(), d.getMonth(), d.getDate() + delta, d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
   }
+  /** Month in JavaScript is 0-indexed (January is 0, February is 1, etc), but by using 0 as the day
+   *  it will give us the last day of the prior month. So passing in 1 as the month number will return
+   *  the last day of January, not February.
+   */
+  public static daysInMonth(date: Date): number {
+    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  }
 }
