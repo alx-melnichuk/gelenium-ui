@@ -43,7 +43,6 @@ gln-calendar {
   --glncn--dayoff-psv-dis-cl : hsla(var(--glncn--danger-h), var(--glncn--danger-s), var(--glncn--danger-l), 0.5);
 
   --glncn--slct-def-cl   : hsl(var(--glncn--default-bg-h), var(--glncn--default-bg-s), var(--glncn--default-bg-l));
-
   --glncn--slct-def-bg-cl: hsl(var(--glncn--primary-h), var(--glncn--primary-s), var(--glncn--primary-l));
   --glncn--slct-hov-bg-cl: hsl(var(--glncn--primary-h), var(--glncn--primary-s), calc(var(--glncn--primary-l) - 7%));
   --glncn--slct-dis-bg-cl: hsla(var(--glncn--default-h), var(--glncn--default-s), var(--glncn--default-l), 0.40);
@@ -52,7 +51,9 @@ gln-calendar {
     height: 100%;
     width: 100%;
   }
-
+  [glncn-center][glncn-mar] { // # temp
+    outline: 1px solid chocolate;
+  }
   &[hor] {
     --glncn--dir-lv1: row;
     --glncn--dir-lv2: column;
@@ -386,12 +387,9 @@ gln-calendar {
 
   // Level 4 Element "header - week", "list days - row - week"
   [glncn-week] {
-    // #align-items: center;
-    // #display: flex;
     font-size: var(--glncn-week-fn-sz, calc(1em - 1px));
     font-weight: var(--glncn-week-fn-wg, 400);
     height: var(--glncn-week-hg, var(--glncn--item-hg));
-    // #justify-content: center;
     line-height: 1;
     margin: var(--glncn--item-mr);
     padding: var(--glncn--item-pd);

@@ -191,11 +191,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   private viewMode: CALENDAR_VIEW_TYPE = CALENDAR_VIEW_DAY;
   private yearsPerPage: number = -1;
 
-  private get dayStartWeek(): number {
-    return !this.isStartSundayVal ? DateUtil.getDayStartWeekByLocale() : 0;
-  }
-  private set dayStartWeek(value: number) {}
-
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -333,7 +328,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
 
     if (hasIsStartSunday || hasLocales || hasSizeDayWeek) {
-      this.frameDayNames = GlnCalendarUtil.getDayNameList(this.sizeDayWeekVal, this.dayStartWeek, this.localesVal);
+      let dayStartWeek: number = this.getDayStartWeek(this.isStartSundayVal);
+      this.frameDayNames = GlnCalendarUtil.getDayNameList(this.sizeDayWeekVal, dayStartWeek, this.localesVal);
     }
     const todayDate: Date = new Date();
     const today: Date = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate(), 0, 0, 0, 0);
@@ -464,7 +460,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     }
 
     if (this.frameDayNames.length === 0) {
-      this.frameDayNames = GlnCalendarUtil.getDayNameList(this.sizeDayWeekVal, this.dayStartWeek, this.localesVal);
+      let dayStartWeek: number = this.getDayStartWeek(this.isStartSundayVal);
+      this.frameDayNames = GlnCalendarUtil.getDayNameList(this.sizeDayWeekVal, dayStartWeek, this.localesVal);
     }
     const todayDate: Date = new Date();
     const today: Date = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate(), 0, 0, 0, 0);
@@ -620,8 +617,6 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
   public clickSelectItem(cell: CalendarCell | null): void {
     if (!this.isDisabledVal && !this.isReadOnlyVal) {
       const newDate: Date | null = !!cell ? new Date(cell.date.getFullYear(), cell.date.getMonth(), cell.date.getDate(), 0, 0, 0, 0) : null;
-      // this.selected.emit(result);
-      // this.updateViewAllCells(result || this.currentDate);
       this.setValue(newDate);
     }
   }
@@ -632,11 +627,27 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     let isStopPropagation: boolean = false;
     const deltaRightOrLeft: number = !this.isHorizontVal ? 1 : deltaY;
     const deltaUpOrDown: number = !this.isHorizontVal ? deltaX : 1;
+    const valueDay: number = this.currentDate.getDate();
+
+    // const prevMonth: Date = DateUtil.addMonth(this.currentDate, -1);
+    // const countDaysInPrevMonth: number = DateUtil.daysInMonth(prevMonth);
+    // const daysUntilEndOfPrevMonth: number = countDaysInPrevMonth - valueDay;
+
+    // const nextMonth: Date = DateUtil.addMonth(this.currentDate, +1);
+    // const countDaysInCurrMonth: number = DateUtil.daysInMonth(this.currentDate);
+    // const daysUntilEndOfCurrMonth: number = countDaysInCurrMonth - valueDay;
+
+    const lastDayOfMonth: Date = GlnCalendarUtil.getLastDayOfMonth(this.currentDate.getFullYear(), this.currentDate.getMonth());
+    const lastDay: number = lastDayOfMonth.getDate();
     let delta: number = 0;
     delta = 'ArrowRight' === event.key ? deltaRightOrLeft : delta;
     delta = 'ArrowLeft' === event.key ? -deltaRightOrLeft : delta;
     delta = 'ArrowUp' === event.key ? -deltaUpOrDown : delta;
     delta = 'ArrowDown' === event.key ? deltaUpOrDown : delta;
+    delta = 'Home' === event.key ? -valueDay + 1 : delta;
+    delta = 'End' === event.key ? lastDay - valueDay : delta;
+    // delta = 'PageDown' === event.key ? daysUntilEndOfCurrMonth + DateUtil.addMonth(this.currentDate, +1).getDate() : delta;
+    // "PageUp" "PageDown"
     if (delta != 0) {
       const newMarkedDate: Date = this.addDeltaByViewMode(this.currentDate, delta, viewMode);
       this.updateViewAllCells(newMarkedDate);
@@ -692,8 +703,8 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
 
     // let year: number = yearPeriodStart;
     const yearFinish: number = yearStart + perPage;
-    this.isPrevYearsAvailable = this.frameYearStart < yearStart /*this.frameYearCells[0].value*/;
-    this.isNextYearsAvailable = /*this.frameYearCells[this.frameYearCells.length - 1].value*/ yearFinish < this.frameYearFinish;
+    this.isPrevYearsAvailable = this.frameYearStart < yearStart;
+    this.isNextYearsAvailable = yearFinish < this.frameYearFinish;
   }
   // -- --
   /** Transition to the next or previous period.
@@ -823,6 +834,10 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
       const date: Date = new Date(yearCurr, monthCurr, dayCurr, 0, 0, 0, 0);
       this.selected.emit(date);
     }
+  }
+
+  private getDayStartWeek(isStartSundayVal: boolean | null): number {
+    return !isStartSundayVal ? DateUtil.getDayStartWeekByLocale() : 0;
   }
 
   private getPercentage(total: number, value: number): number | null {
