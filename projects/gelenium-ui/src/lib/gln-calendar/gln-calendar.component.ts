@@ -624,21 +624,12 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     if (this.isDisabledVal || this.isReadOnlyVal || this.currentDate == null) {
       return;
     }
-    let isStopPropagation: boolean = false;
     const deltaRightOrLeft: number = !this.isHorizontVal ? 1 : deltaY;
     const deltaUpOrDown: number = !this.isHorizontVal ? deltaX : 1;
     const valueDay: number = this.currentDate.getDate();
-
-    // const prevMonth: Date = DateUtil.addMonth(this.currentDate, -1);
-    // const countDaysInPrevMonth: number = DateUtil.daysInMonth(prevMonth);
-    // const daysUntilEndOfPrevMonth: number = countDaysInPrevMonth - valueDay;
-
-    // const nextMonth: Date = DateUtil.addMonth(this.currentDate, +1);
-    // const countDaysInCurrMonth: number = DateUtil.daysInMonth(this.currentDate);
-    // const daysUntilEndOfCurrMonth: number = countDaysInCurrMonth - valueDay;
-
     const lastDayOfMonth: Date = GlnCalendarUtil.getLastDayOfMonth(this.currentDate.getFullYear(), this.currentDate.getMonth());
     const lastDay: number = lastDayOfMonth.getDate();
+
     let delta: number = 0;
     delta = 'ArrowRight' === event.key ? deltaRightOrLeft : delta;
     delta = 'ArrowLeft' === event.key ? -deltaRightOrLeft : delta;
@@ -646,24 +637,41 @@ export class GlnCalendarComponent implements OnChanges, OnInit {
     delta = 'ArrowDown' === event.key ? deltaUpOrDown : delta;
     delta = 'Home' === event.key ? -valueDay + 1 : delta;
     delta = 'End' === event.key ? lastDay - valueDay : delta;
-    // delta = 'PageDown' === event.key ? daysUntilEndOfCurrMonth + DateUtil.addMonth(this.currentDate, +1).getDate() : delta;
-    // "PageUp" "PageDown"
+
+    const oldCurrentDate: Date = this.currentDate;
+    let isStopPropagation: boolean = false;
+    let isFocus: boolean = false;
     if (delta != 0) {
       const newMarkedDate: Date = this.addDeltaByViewMode(this.currentDate, delta, viewMode);
       this.updateViewAllCells(newMarkedDate);
       this.changeDetectorRef.markForCheck();
-      Promise.resolve().then(() => this.focus());
       isStopPropagation = true;
+      isFocus = true;
     } else if (' ' === event.key || 'Enter' === event.key) {
       this.sendEventByViewMode(this.currentDate, this.value, viewMode);
       if (CALENDAR_VIEW_DAY !== viewMode) {
         this.switchViewMode();
       }
       isStopPropagation = true;
+    } else if ('PageUp' === event.key) {
+      this.prevPeriod(this.getPeriodByViewMode());
+      this.changeDetectorRef.markForCheck();
+      isStopPropagation = true;
+      isFocus = true;
+    } else if ('PageDown' === event.key) {
+      this.nextPeriod(this.getPeriodByViewMode());
+      this.changeDetectorRef.markForCheck();
+      isStopPropagation = true;
+      isFocus = true;
     }
     if (isStopPropagation) {
       event.preventDefault();
       event.stopPropagation();
+    }
+    if (isFocus && DateUtil.compare(oldCurrentDate, this.currentDate) !== 0) {
+      this.ngZone.onStable.pipe(first()).subscribe(() => {
+        this.focus();
+      });
     }
   }
 

@@ -51,9 +51,6 @@ gln-calendar {
     height: 100%;
     width: 100%;
   }
-  [glncn-center][glncn-mar] { // # temp
-    outline: 1px solid chocolate;
-  }
   &[hor] {
     --glncn--dir-lv1: row;
     --glncn--dir-lv2: column;
