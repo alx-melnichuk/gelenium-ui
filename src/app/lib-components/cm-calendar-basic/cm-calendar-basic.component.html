@@ -33,7 +33,7 @@ public model01: Date | null = new Date();</pre>
     <div class="cnbs-mb">
       <small>
         <em>
-          Model: {{ value01a == null ? 'null' : value01a.toDateString() }}
+          Model: {{ value01a == null ? 'null' : value01a | date:'YYYY/MM/dd' }}
         </em>
       </small>
     </div>
@@ -89,7 +89,27 @@ public model01: Date | null = new Date();</pre>
       &lt;/small&gt;
     &lt;/div&gt;
     &lt;div class="cnbs-clnd"&gt;
-      &lt;gln-calendar [value]="value01a"&gt;
+      &lt;gln-calendar [value]="value01a"
+        (selected)="value01a=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: value, isHorizont&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnbs-mb"&gt;
+      &lt;small&gt;
+        &lt;em&gt;
+          Model: <b>&#123;</b>&#123; value01b == null ? 'null' : value01b | date:'YYYY/MM/dd' &#125;&#125;
+        &lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnbs-clnd"&gt;
+      &lt;gln-calendar [value]="value01b"
+        isHorizont
+        (selected)="value01b=$event"&gt;
       &lt;/gln-calendar&gt;
     &lt;/div&gt;
   &lt;/div&gt;
