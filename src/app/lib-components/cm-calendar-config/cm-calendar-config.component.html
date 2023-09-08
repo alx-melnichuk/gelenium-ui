@@ -503,6 +503,7 @@ const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
       </gln-calendar>
     </div>
   </div>
+
 </div>
 
 
@@ -532,7 +533,7 @@ const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
     &lt;/div&gt;
     &lt;div class="cncf-clnd"&gt;
       &lt;gln-calendar [value]="value08a"
-      (selected)="value08a=$event"&gt;
+        (selected)="value08a=$event"&gt;
       &lt;/gln-calendar&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -559,6 +560,7 @@ const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
       &lt;/gln-calendar&gt;
     &lt;/div&gt;
   &lt;/div&gt;
+
 &lt;/div&gt;</pre></code>
         </mat-tab>
         <mat-tab [label]="labelTs">
@@ -573,8 +575,9 @@ import &#123;
 
 const glnCalendarConfigDefault: GlnCalendarConfig = &#123;
   cellSize: 'wide',
+  isHideDayoff: true,
   isHideOldDays: true,
-&#125;;
+  &#125;;
 
 @Component(&#123;
   selector: 'app-calendar',
