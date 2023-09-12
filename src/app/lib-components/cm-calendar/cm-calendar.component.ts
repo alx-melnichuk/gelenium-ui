@@ -33,7 +33,7 @@ export class CmCalendarComponent implements AfterViewInit {
     // The zone will become stable when all components have fully rendered.
     this.ngZone.onStable.pipe(first()).subscribe(() => {
       // eslint-disable-next-line no-restricted-syntax
-      console.timeEnd(logLabel); // 745ms - 774ms (50 items GlnCalendar)
+      console.timeEnd(logLabel); // 981ms - 993ms (= 50 items GlnCalendar)
     });
   }
 }
