@@ -126,7 +126,165 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
 </div>
 
 
-<span style="color: indianred;">source</span>
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: colsByYears=3, view="year".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat1-clnd"&gt;
+      &lt;gln-calendar [value]="value02a"
+        [colsByYears]="3"
+        view="year"
+        (selected)="value02a=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attribute: colsByMonths=4, view="year"&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat1-clnd"&gt;
+      &lt;gln-calendar [value]="value02b"
+        [colsByMonths]="4"
+        view="month"
+        (selected)="value02b=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attribute: dateClasses&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;day=[1,20], month=[1,4], year=[2021,2025]&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat1-clnd"&gt;
+      &lt;gln-calendar [value]="value02c"
+        [dateClasses]="dateClasses02c"
+        (selected)="value02c=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attribute: dateDisabled, isHideOldDays.&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;dayWeek=[0,1], month=[1,4], year=[2021,2025]&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat1-clnd"&gt;
+      &lt;gln-calendar [value]="value02d"
+        isHideOldDays
+        [dateDisabled]="dateDisabled02d"
+        (selected)="value02d=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CalendarComponent &#123;
+
+  public today: Date = new Date();
+  public day: number = this.today.getDate() + (this.today.getDate() === 1 ? 1 : -1);
+  public selectedDate: Date = new Date(
+    this.today.getFullYear(), this.today.getMonth(), this.day, 0, 0, 0, 0);
+
+  public value02a: Date | null = new Date(this.selectedDate);
+  public value02b: Date | null = new Date(this.selectedDate);
+  public value02c: Date | null = new Date(this.selectedDate);
+  public value02d: Date | null = new Date(this.selectedDate);
+
+  public dateClasses02c = (date: Date, view: string, currentDate: Date): string[] => &#123;
+    const result: string[] = [];
+    const day: number = date.getDate();
+    const month: number = date.getMonth();
+    const year: number = date.getFullYear();
+    const currentMonth: number = currentDate.getMonth();
+    if ('day' === view && month == currentMonth && (day === 1 || day === 20)) &#123;
+      result.push('cnat1-demo1');
+    &#125; else if ('month' === view && (month === 1 || month === 4)) &#123;
+      result.push('cnat1-demo1');
+    &#125; else if ('year' === view && (year === 2021 || year === 2025)) &#123;
+      result.push('cnat1-demo1');
+    &#125;
+    return result;
+  &#125;;
+
+  public dateDisabled02d = (date: Date, view: string, currentDate: Date): boolean => &#123;
+    let result: boolean = false;
+    const dayWeek: number = date.getDay();
+    const month: number = date.getMonth();
+    const year: number = date.getFullYear();
+    const currentMonth: number = currentDate.getMonth();
+    if ('day' === view && month == currentMonth && (dayWeek === 0 || dayWeek === 1)) &#123;
+      result = true;
+    &#125; else if ('month' === view && (month === 1 || month === 4)) &#123;
+      result = true;
+    &#125; else if ('year' === view && (year === 2021 || year === 2025)) &#123;
+      result = true;
+    &#125;
+    return result;
+  &#125;;
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cnat1-clnd &#123;
+    border: 1px solid burlywood;
+    padding: 5px;
+  &#125;
+  .gln-calendar button[glncn-tint].cnat1-demo1 &#123;
+    background: orange;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
 
 <hr br-nn />
 
@@ -235,7 +393,133 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
 </div>
 
 
-<span style="color: indianred;">source</span>
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attribute: formatByMonths='long',&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;wdFull (min-width: 300px; min-height: 300px;).&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat2-clnd cnat2-box"&gt;
+      &lt;gln-calendar [value]="value02e"
+        style="--glncn-month-cell-wd: 100%;"
+        formatByMonths="long"
+        view="month"
+        wdFull
+        (selected)="value02e=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: formatMonth='2-digit'.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;small&gt;&nbsp;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat2-clnd cnat2-title-day"&gt;
+      &lt;gln-calendar [value]="value02f"
+        formatMonth="2-digit"
+        (selected)="value02f=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: isDisabled.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat2-clnd"&gt;
+      &lt;gln-calendar [value]="value02g"
+        isDisabled
+        (selected)="value02g=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: isHideDayoff.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat2-clnd"&gt;
+      &lt;gln-calendar [value]="value02h"
+        isHideDayoff
+        (selected)="value02h=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CalendarComponent &#123;
+
+  public today: Date = new Date();
+  public day: number = this.today.getDate() + (this.today.getDate() === 1 ? 1 : -1);
+  public selectedDate: Date = new Date(
+    this.today.getFullYear(), this.today.getMonth(), this.day, 0, 0, 0, 0);
+
+  public value02e: Date | null = new Date(this.selectedDate);
+  public value02f: Date | null = new Date(this.selectedDate);
+  public value02g: Date | null = new Date(this.selectedDate);
+  public value02h: Date | null = new Date(this.selectedDate);
+
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cnat2-clnd &#123;
+    border: 1px solid mediumseagreen;
+    padding: 5px;
+  &#125;
+  .cnat2-box &#123;
+    min-width: 300px;
+    min-height: 300px;
+    display: grid;
+  &#125;
+  .cnat2-title-day .gln-calendar-header-caption &#123;
+    color: blue;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
 
 <hr br-nn />
 
@@ -314,7 +598,114 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
 </div>
 
 
-<span style="color: indianred;">source</span>
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: isHideOldDays.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat3-clnd"&gt;
+      &lt;gln-calendar [value]="value02i"
+        isHideOldDays
+        (selected)="value02i=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: isHorizont.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat3-clnd"&gt;
+      &lt;gln-calendar [value]="value02j"
+        isHorizont
+        (selected)="value02j=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: isReadOnly.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat3-clnd"&gt;
+      &lt;gln-calendar [value]="value02k"
+        isReadOnly
+        (selected)="value02k=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: isStartSunday.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat3-clnd"&gt;
+      &lt;gln-calendar [value]="value02l"
+        isStartSunday
+        (selected)="value02l=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CalendarComponent &#123;
+
+  public today: Date = new Date();
+  public day: number = this.today.getDate() + (this.today.getDate() === 1 ? 1 : -1);
+  public selectedDate: Date = new Date(
+    this.today.getFullYear(), this.today.getMonth(), this.day, 0, 0, 0, 0);
+
+  public value02i: Date | null = new Date(this.selectedDate);
+  public value02j: Date | null = new Date(this.selectedDate);
+  public value02k: Date | null = new Date(this.selectedDate);
+  public value02l: Date | null = new Date(this.selectedDate);
+  
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cnat3-clnd &#123;
+    border: 1px solid mediumorchid;
+    padding: 5px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
 
 <hr br-nn />
 
@@ -401,7 +792,122 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
 </div>
 
 
-<span style="color: indianred;">source</span>
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: isTwoDigitDay.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat4-clnd"&gt;
+      &lt;gln-calendar [value]="value02m"
+        isTwoDigitDay
+        (selected)="value02m=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: isWeekNumber.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat4-clnd"&gt;
+      &lt;gln-calendar [value]="value02n"
+        isWeekNumber
+        (selected)="value02n=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attribute: minDate="<b>&#123;</b>&#123; minDate02o.toDateString() &#125;&#125;".&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat4-clnd"&gt;
+      &lt;gln-calendar [value]="value02o"
+        [minDate]="minDate02o"
+        (selected)="value02o=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;div&gt;
+        &lt;small&gt;&lt;em&gt;Attribute: maxDate="<b>&#123;</b>&#123; maxDate02p.toDateString() &#125;&#125;".&lt;/em&gt;&lt;/small&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat4-clnd"&gt;
+      &lt;gln-calendar [value]="value02p"
+        [maxDate]="maxDate02p"
+        (selected)="value02p=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CalendarComponent &#123;
+
+  public today: Date = new Date();
+  public day: number = this.today.getDate() + (this.today.getDate() === 1 ? 1 : -1);
+  public selectedDate: Date = new Date(
+    this.today.getFullYear(), this.today.getMonth(), this.day, 0, 0, 0, 0);
+
+  public value02m: Date | null = new Date(this.selectedDate);
+  public value02n: Date | null = new Date(this.selectedDate);
+  public value02o: Date | null = new Date(this.selectedDate);
+  public minDate02o: Date = new Date(
+    this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 3, 0, 0, 0, 0);
+  public value02p: Date | null = new Date(this.selectedDate);
+  public maxDate02p: Date = new Date(
+    this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 3, 0, 0, 0, 0);
+  
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cnat4-clnd &#123;
+    border: 1px solid cornflowerblue;
+    padding: 5px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
 
 <hr br-nn />
 
@@ -487,7 +993,121 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
 </div>
 
 
-<span style="color: indianred;">source</span>
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: locales='fr-FR'.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat5-clnd cnat5-header"&gt;
+      &lt;gln-calendar [value]="value02q"
+        [locales]="'fr-FR'"
+        (selected)="value02q=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: rowsByYears=4, view="year".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat5-clnd"&gt;
+      &lt;gln-calendar [value]="value02r"
+        [rowsByYears]="4"
+        view="year"
+        (selected)="value02r=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: sizeDayWeek=1 ('M').&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat5-clnd"&gt;
+      &lt;gln-calendar [value]="value02s"
+        [sizeDayWeek]="1"
+        (selected)="value02s=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: sizeDayWeek=3 ('Mon').&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat5-clnd"&gt;
+      &lt;gln-calendar [value]="value02t"
+        [sizeDayWeek]="3"
+        (selected)="value02t=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CalendarComponent &#123;
+
+  public today: Date = new Date();
+  public day: number = this.today.getDate() + (this.today.getDate() === 1 ? 1 : -1);
+  public selectedDate: Date = new Date(
+    this.today.getFullYear(), this.today.getMonth(), this.day, 0, 0, 0, 0);
+
+  public value02q: Date | null = new Date(this.selectedDate);
+  public value02r: Date | null = new Date(this.selectedDate);
+  public value02s: Date | null = new Date(this.selectedDate);
+  public value02t: Date | null = new Date(this.selectedDate);
+  
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cnat5-clnd &#123;
+    border: 1px solid  mediumblue;
+    padding: 5px;
+  &#125;
+  .cnat5-header .gln-calendar-day-header &#123;
+    font-style: italic;
+  &#125;
+  .cnat5-header .gln-calendar-cage:not(.dayWeek0):not(.dayWeek6) &#123;
+    color: rgb(0 0 255 / 50%);
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
 
 <hr br-nn />
 
@@ -584,7 +1204,116 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
 </div>
 
 
-<span style="color: indianred;">source</span>
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: startDate="<b>&#123;</b>&#123;startDate02u.toDateString()&#125;&#125;".&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat6-clnd"&gt;
+      &lt;gln-calendar [value]="value02u"
+        [startDate]="startDate02u"
+        (selected)="value02u=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: without startDate.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat6-clnd"&gt;
+      &lt;gln-calendar [value]="value02v"
+        (selected)="value02v=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: views=['month', 'year'], view='year'.&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat4-clnd"&gt;
+      &lt;gln-calendar [value]="value02w"
+        [views]="['month', 'year']"
+        view="year"
+        (selected)="value02w=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: views=['month', 'year'].&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat4-clnd"&gt;
+      &lt;gln-calendar [value]="value02x"
+        [views]="['month', 'year']"
+        (selected)="value02x=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CalendarComponent &#123;
+
+  public today: Date = new Date();
+  public day: number = this.today.getDate() + (this.today.getDate() === 1 ? 1 : -1);
+  public selectedDate: Date = new Date(
+    this.today.getFullYear(), this.today.getMonth(), this.day, 0, 0, 0, 0);
+
+  public value02u: Date | null = new Date(this.selectedDate);
+  public startDate02u: Date = new Date(
+    this.today.getFullYear(), this.today.getMonth() - 1, this.today.getDate(), 0, 0, 0, 0);
+  public value02v: Date | null = new Date(this.selectedDate);
+  public value02w: Date | null = null;
+  public value02x: Date | null = null;
+  
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cnat6-clnd &#123;
+    border: 1px solid darkgreen;
+    padding: 5px;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
 
 <hr br-nn />
 
@@ -641,7 +1370,97 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
 </div>
 
 
-<span style="color: indianred;">source</span>
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group"&gt;
+
+  &lt;div class="app-elem "&gt;
+    &lt;div&gt;
+      &lt;small&gt;&lt;em&gt;Attribute: wdFull (min-width: 320px; min-height: 320px;).&lt;/em&gt;&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat7-clnd cnat7-box"&gt;
+      &lt;gln-calendar [value]="value02y"
+        wdFull
+        (selected)="value02y=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="app-elem"&gt;
+    &lt;div&gt;
+      &lt;small&gt;
+        &lt;em&gt;
+          Attribute: wdFull, isHorizont (min-width: 320px; min-height: 320px;).
+        &lt;/em&gt;
+      &lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="cnat7-clnd cnat7-box"&gt;
+      &lt;gln-calendar [value]="value02z"
+        wdFull
+        isHorizont
+        (selected)="value02z=$event"&gt;
+      &lt;/gln-calendar&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CalendarComponent &#123;
+
+  public today: Date = new Date();
+  public day: number = this.today.getDate() + (this.today.getDate() === 1 ? 1 : -1);
+  public selectedDate: Date = new Date(
+    this.today.getFullYear(), this.today.getMonth(), this.day, 0, 0, 0, 0);
+
+  public value02y: Date | null = new Date(this.selectedDate);
+  public value02z: Date | null = new Date(this.selectedDate);
+  
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cnat7-clnd &#123;
+    border: 1px solid mediumslateblue;
+  &#125;
+  .cnat7-box &#123;
+    min-width: 320px;
+    min-height: 320px;
+    display: grid;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
 
 <hr br-nn />
 
@@ -657,80 +1476,342 @@ dateDisabled1 = (date: Date, view: string, currentDate: Date): boolean => &#123;
   </p>
 </section>
 
+<section mr-vr>
+  <label>
+    <input type="checkbox"
+      (change)="isHorizontEx01=!isHorizontEx01"
+      [checked]="isHorizontEx01" />
+    isHorizont
+  </label>
+</section>
+
 
 <div class="app-group cnex1-name">
   <span>{{ startYear }}</span>
 </div>
 <div class="app-group cnex1-calendar">
 
-  <gln-calendar class="cnex1-clnd"
-    [startDate]="startDate01"
-    isHideOldDays
-    isReadOnly>
-  </gln-calendar>
-  <gln-calendar class="cnex1-clnd"
-    [startDate]="startDate02"
-    isHideOldDays
-    isReadOnly>
-  </gln-calendar>
-  <gln-calendar class="cnex1-clnd"
-    [startDate]="startDate03"
-    isHideOldDays
-    isReadOnly>
-  </gln-calendar>
+  <div class="cnex1-month cnex1-clnd">
+    <div class="cnex1-month-name">{{ calendar01.currentMonthStr }}</div>
+    <gln-calendar #calendar01="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate01"
+      isHideOldDays
+      isReadOnly>
+    </gln-calendar>
+  </div>
+  <div class="cnex1-month cnex1-clnd">
+    <div class="cnex1-month-name">{{ calendar02.currentMonthStr }}</div>
+    <gln-calendar #calendar02="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate02"
+      isHideOldDays
+      isReadOnly>
+    </gln-calendar>
+  </div>
+  <div class="cnex1-month cnex1-clnd">
+    <div class="cnex1-month-name">{{ calendar03.currentMonthStr }}</div>
+    <gln-calendar #calendar03="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate03"
+      isHideOldDays
+      isReadOnly>
+    </gln-calendar>
+  </div>
 
-  <gln-calendar class="cnex1-clnd"
-    [startDate]="startDate04"
-    isHideOldDays
-    isReadOnly>
-  </gln-calendar>
-  <gln-calendar class="cnex1-clnd"
-    [startDate]="startDate05"
-    isHideOldDays
-    isReadOnly>
-  </gln-calendar>
-  <gln-calendar class="cnex1-clnd"
-    [startDate]="startDate06"
-    isHideOldDays
-    isReadOnly>
-  </gln-calendar>
+  <div class="cnex1-month cnex1-clnd">
+    <div class="cnex1-month-name">{{ calendar04.currentMonthStr }}</div>
+    <gln-calendar #calendar04="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate04"
+      isHideOldDays
+      isReadOnly>
+    </gln-calendar>
+  </div>
+  <div class="cnex1-month cnex1-clnd">
+    <div class="cnex1-month-name">{{ calendar05.currentMonthStr }}</div>
+    <gln-calendar #calendar05="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate05"
+      isHideOldDays
+      isReadOnly>
+    </gln-calendar>
+  </div>
+  <div class="cnex1-month cnex1-clnd">
+    <div class="cnex1-month-name">{{ calendar06.currentMonthStr }}</div>
+    <gln-calendar #calendar06="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate06"
+      isHideOldDays
+      isReadOnly>
+    </gln-calendar>
+  </div>
 
-  <gln-calendar class="cnex1-clnd"
-    [startDate]="startDate07"
-    isHideOldDays
-    isReadOnly>
-  </gln-calendar>
-  <gln-calendar class="cnex1-clnd"
-    [startDate]="startDate08"
-    isHideOldDays
-    isReadOnly>
-  </gln-calendar>
-  <gln-calendar class="cnex1-clnd"
-    [startDate]="startDate09"
-    isHideOldDays
-    isReadOnly>
-  </gln-calendar>
+  <div class="cnex1-month cnex1-clnd">
+    <div class="cnex1-month-name">{{ calendar07.currentMonthStr }}</div>
+    <gln-calendar #calendar07="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate07"
+      isHideOldDays
+      isReadOnly>
+    </gln-calendar>
+  </div>
+  <div class="cnex1-month cnex1-clnd">
+    <div class="cnex1-month-name">{{ calendar08.currentMonthStr }}</div>
+    <gln-calendar #calendar08="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate08"
+      isHideOldDays
+      isReadOnly>
+    </gln-calendar>
+  </div>
+  <div class="cnex1-month cnex1-clnd">
+    <div class="cnex1-month-name">{{ calendar09.currentMonthStr }}</div>
+    <gln-calendar #calendar09="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate09"
+      isHideOldDays
+      isReadOnly>
+    </gln-calendar>
+  </div>
 
-  <gln-calendar class="cnex1-clnd"
-    [startDate]="startDate10"
-    isHideOldDays
-    isReadOnly>
-  </gln-calendar>
-  <gln-calendar class="cnex1-clnd"
-    [startDate]="startDate11"
-    isHideOldDays
-    isReadOnly>
-  </gln-calendar>
-  <gln-calendar class="cnex1-clnd"
-    [startDate]="startDate12"
-    isHideOldDays
-    isReadOnly>
-  </gln-calendar>
+  <div class="cnex1-month cnex1-clnd">
+    <div class="cnex1-month-name">{{ calendar10.currentMonthStr }}</div>
+    <gln-calendar #calendar10="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate10"
+      isHideOldDays
+      isReadOnly>
+    </gln-calendar>
+  </div>
+  <div class="cnex1-month cnex1-clnd">
+    <div class="cnex1-month-name">{{ calendar11.currentMonthStr }}</div>
+    <gln-calendar #calendar11="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate11"
+      isHideOldDays
+      isReadOnly>
+    </gln-calendar>
+  </div>
+  <div class="cnex1-month cnex1-clnd">
+    <div class="cnex1-month-name">{{ calendar12.currentMonthStr }}</div>
+    <gln-calendar #calendar12="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate12"
+      isHideOldDays
+      isReadOnly>
+    </gln-calendar>
+  </div>
 
 </div>
 
 <hr br-nn />
 
-<span style="color: indianred;">source</span>
+<section mr-vr>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ labelShowSource }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="labelHtml">
+          <code><pre source="html">
+&lt;div class="app-group cnex1-name"&gt;
+  &lt;span&gt;<b>&#123;</b>&#123; startYear &#125;&#125;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="app-group cnex1-calendar"&gt;
+
+  &lt;div class="cnex1-month cnex1-clnd"&gt;
+    &lt;div class="cnex1-month-name"&gt;<b>&#123;</b>&#123; calendar01.currentMonthStr &#125;&#125;&lt;/div&gt;
+    &lt;gln-calendar #calendar01="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate01"
+      isHideOldDays
+      isReadOnly&gt;
+    &lt;/gln-calendar&gt;
+  &lt;/div&gt;
+  &lt;div class="cnex1-month cnex1-clnd"&gt;
+    &lt;div class="cnex1-month-name"&gt;<b>&#123;</b>&#123; calendar02.currentMonthStr &#125;&#125;&lt;/div&gt;
+    &lt;gln-calendar #calendar02="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate02"
+      isHideOldDays
+      isReadOnly&gt;
+    &lt;/gln-calendar&gt;
+  &lt;/div&gt;
+  &lt;div class="cnex1-month cnex1-clnd"&gt;
+    &lt;div class="cnex1-month-name"&gt;<b>&#123;</b>&#123; calendar03.currentMonthStr &#125;&#125;&lt;/div&gt;
+    &lt;gln-calendar #calendar03="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate03"
+      isHideOldDays
+      isReadOnly&gt;
+    &lt;/gln-calendar&gt;
+  &lt;/div&gt;
+
+  &lt;div class="cnex1-month cnex1-clnd"&gt;
+    &lt;div class="cnex1-month-name"&gt;<b>&#123;</b>&#123; calendar04.currentMonthStr &#125;&#125;&lt;/div&gt;
+    &lt;gln-calendar #calendar04="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate04"
+      isHideOldDays
+      isReadOnly&gt;
+    &lt;/gln-calendar&gt;
+  &lt;/div&gt;
+  &lt;div class="cnex1-month cnex1-clnd"&gt;
+    &lt;div class="cnex1-month-name"&gt;<b>&#123;</b>&#123; calendar05.currentMonthStr &#125;&#125;&lt;/div&gt;
+    &lt;gln-calendar #calendar05="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate05"
+      isHideOldDays
+      isReadOnly&gt;
+    &lt;/gln-calendar&gt;
+  &lt;/div&gt;
+  &lt;div class="cnex1-month cnex1-clnd"&gt;
+    &lt;div class="cnex1-month-name"&gt;<b>&#123;</b>&#123; calendar06.currentMonthStr &#125;&#125;&lt;/div&gt;
+    &lt;gln-calendar #calendar06="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate06"
+      isHideOldDays
+      isReadOnly&gt;
+    &lt;/gln-calendar&gt;
+  &lt;/div&gt;
+
+  &lt;div class="cnex1-month cnex1-clnd"&gt;
+    &lt;div class="cnex1-month-name"&gt;<b>&#123;</b>&#123; calendar07.currentMonthStr &#125;&#125;&lt;/div&gt;
+    &lt;gln-calendar #calendar07="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate07"
+      isHideOldDays
+      isReadOnly&gt;
+    &lt;/gln-calendar&gt;
+  &lt;/div&gt;
+  &lt;div class="cnex1-month cnex1-clnd"&gt;
+    &lt;div class="cnex1-month-name"&gt;<b>&#123;</b>&#123; calendar08.currentMonthStr &#125;&#125;&lt;/div&gt;
+    &lt;gln-calendar #calendar08="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate08"
+      isHideOldDays
+      isReadOnly&gt;
+    &lt;/gln-calendar&gt;
+  &lt;/div&gt;
+  &lt;div class="cnex1-month cnex1-clnd"&gt;
+    &lt;div class="cnex1-month-name"&gt;<b>&#123;</b>&#123; calendar09.currentMonthStr &#125;&#125;&lt;/div&gt;
+    &lt;gln-calendar #calendar09="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate09"
+      isHideOldDays
+      isReadOnly&gt;
+    &lt;/gln-calendar&gt;
+  &lt;/div&gt;
+
+  &lt;div class="cnex1-month cnex1-clnd"&gt;
+    &lt;div class="cnex1-month-name"&gt;<b>&#123;</b>&#123; calendar10.currentMonthStr &#125;&#125;&lt;/div&gt;
+    &lt;gln-calendar #calendar10="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate10"
+      isHideOldDays
+      isReadOnly&gt;
+    &lt;/gln-calendar&gt;
+  &lt;/div&gt;
+  &lt;div class="cnex1-month cnex1-clnd"&gt;
+    &lt;div class="cnex1-month-name"&gt;<b>&#123;</b>&#123; calendar11.currentMonthStr &#125;&#125;&lt;/div&gt;
+    &lt;gln-calendar #calendar11="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate11"
+      isHideOldDays
+      isReadOnly&gt;
+    &lt;/gln-calendar&gt;
+  &lt;/div&gt;
+  &lt;div class="cnex1-month cnex1-clnd"&gt;
+    &lt;div class="cnex1-month-name"&gt;<b>&#123;</b>&#123; calendar12.currentMonthStr &#125;&#125;&lt;/div&gt;
+    &lt;gln-calendar #calendar12="glnCalendar"
+      [isHorizont]="isHorizontEx01"
+      [startDate]="startDate12"
+      isHideOldDays
+      isReadOnly&gt;
+    &lt;/gln-calendar&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelTs">
+          <code><pre source="ts">
+import &#123;
+  Component, ViewEncapsulation
+&#125; from '@angular/core';
+
+@Component(&#123;
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+&#125;)
+export class CalendarComponent &#123;
+
+  public today: Date = new Date();
+  public isHorizontEx01: boolean = true;
+  public startYear: number = this.today.getFullYear();
+  public startDate01: Date | null = new Date(this.startYear, 0, 1);
+  public startDate02: Date | null = new Date(this.startYear, 1, 1);
+  public startDate03: Date | null = new Date(this.startYear, 2, 1);
+
+  public startDate04: Date | null = new Date(this.startYear, 3, 1);
+  public startDate05: Date | null = new Date(this.startYear, 4, 1);
+  public startDate06: Date | null = new Date(this.startYear, 5, 1);
+
+  public startDate07: Date | null = new Date(this.startYear, 6, 1);
+  public startDate08: Date | null = new Date(this.startYear, 7, 1);
+  public startDate09: Date | null = new Date(this.startYear, 8, 1);
+
+  public startDate10: Date | null = new Date(this.startYear, 9, 1);
+  public startDate11: Date | null = new Date(this.startYear, 10, 1);
+  public startDate12: Date | null = new Date(this.startYear, 11, 1);
+  
+&#125;</pre></code>
+        </mat-tab>
+        <mat-tab [label]="labelCss">
+          <code><pre source="css">
+app-checkbox &#123;
+  .app-group &#123;
+    display: flex;
+    flex-wrap: wrap;
+  &#125;
+  .app-elem &#123;
+    min-width: 26ch;
+    margin: 10px 10px;
+  &#125;
+  .cnex1-calendar &#123;
+    .gln-calendar-head &#123;
+      display: none;
+    &#125;
+    .gln-today &#123;
+      border: 0px;
+    &#125;
+  &#125;
+  .cnex1-month &#123;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  &#125;
+  .cnex1-month-name &#123;
+    font-weight: 500;
+    line-height: 2.5em;
+  &#125;
+  .cnex1-name &#123;
+    justify-content: center;
+    font-weight: 500;
+    font-size: x-large;
+    max-width: calc(((36px * 7) + 6px) * 3);
+  &#125;
+  .cnex1-clnd &#123;
+    border: 1px solid lightsteelblue;
+  &#125;
+&#125;</pre></code>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
 
 <hr br-nn />

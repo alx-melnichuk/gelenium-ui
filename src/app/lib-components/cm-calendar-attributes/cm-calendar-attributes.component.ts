@@ -71,6 +71,7 @@ export class CmCalendarAttributesComponent {
   public value02z: Date | null = new Date(this.selectedDate);
 
   // Example01
+  public isHorizontEx01: boolean = true;
   public startYear: number = this.today.getFullYear();
   public startDate01: Date | null = new Date(this.startYear, 0, 1);
   public startDate02: Date | null = new Date(this.startYear, 1, 1);

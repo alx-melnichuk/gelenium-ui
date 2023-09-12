@@ -38,7 +38,6 @@ app-cm-calendar-attributes {
     border: 1px solid  mediumblue;
     padding: 5px;
   }
-
   .cnat5-header .gln-calendar-day-header {
     font-style: italic;
   }
@@ -61,15 +60,21 @@ app-cm-calendar-attributes {
   }
 
   .cnex1-calendar {
-    .gln-calendar-switch, .gln-calendar-nav, .gln-calendar-caption-year {
+    .gln-calendar-head {
       display: none;
-    }
-    .gln-calendar-header-caption {
-      flex-grow: 1;
     }
     .gln-today {
       border: 0px;
     }
+  }
+  .cnex1-month {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cnex1-month-name {
+    font-weight: 500;
+    line-height: 2.5em;
   }
   .cnex1-name {
     justify-content: center;
