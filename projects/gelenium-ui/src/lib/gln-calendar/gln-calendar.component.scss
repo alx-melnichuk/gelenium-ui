@@ -206,13 +206,15 @@ gln-calendar {
     display: inline-flex;
     flex-shrink: 0;
     font: inherit;
+    height: var(--glncn--item-size);
     justify-content: center;
     outline: 0;
     overflow: visible;
-    padding: var(--glncn-nav-pd, 0.5em);
+    padding: var(--glncn-nav-pd, 0px);
     text-decoration: none;
     user-select: none;
     vertical-align: middle;
+    width: var(--glncn--item-size);
   }
   // Level 3 Element "title button "prev"
   [glncn-prev] {
