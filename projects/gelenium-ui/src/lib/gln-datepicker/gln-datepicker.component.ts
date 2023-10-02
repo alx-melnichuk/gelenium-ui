@@ -462,17 +462,17 @@ export class GlnDatepickerComponent
     return BooleanUtil.init(value);
   }
 
-  public focus(): void {
-    if (!this.isDisabledVal && isPlatformBrowser(this.platformId) && !!this.inputElementRef) {
-      this.inputElementRef.nativeElement.focus();
-    }
-  }
-
   public doInput(event: Event): void {
     // https://github.com/angular/angular/issues/9587 "event.stopImmediatePropagation() called from listeners not working"
     // Added Event.cancelBubble check to make sure there was no call to event.stopImmediatePropagation() in previous handlers.
     if (!!event && !event.cancelBubble) {
       this.onChange(this.formControl.value);
+    }
+  }
+
+  public focus(): void {
+    if (!this.isDisabledVal && isPlatformBrowser(this.platformId) && !!this.inputElementRef) {
+      this.inputElementRef.nativeElement.focus();
     }
   }
 
@@ -535,7 +535,7 @@ export class GlnDatepickerComponent
       this.focus();
     }
   }
-  /*public doOverlayPanelKeydown(event: KeyboardEvent): void {
+  public doOverlayPanelKeydown(event: KeyboardEvent): void {
     event.preventDefault();
     event.stopPropagation();
     if (!this.isDisabledVal && this.isPanelOpen) {
@@ -543,14 +543,14 @@ export class GlnDatepickerComponent
         // (Cases-B5) Panel is open and click the Escape key.
         // (Cases-B6) Panel is open and click the Tab key.
         case 'Escape':
-        case 'Tab':
+          // #- case 'Tab':
           this.isFocused = true;
           this.focus();
           this.close();
           break;
       }
     }
-  }*/
+  }
   /** Open or close the overlay panel. */
   public toggle(): void {
     if (!this.isDisabledVal) {
@@ -643,14 +643,16 @@ export class GlnDatepickerComponent
     // #?   HtmlElemUtil.setProperty(overlayRef, CSS_PROP_MAX_WIDTH, this.hostWidth.toString().concat('px'));
     // #? }
 
+    // selectPanelWrapRef.nativeElement.children[0].children[0] => gln-calendar glndp-calendar
+
     // Important! These operations should be the last, they include animation and the dimensions of the panel are distorted.
-    const selectPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement?.children[0] as HTMLElement);
+    const datepickerPanelWrapRef = HtmlElemUtil.getElementRef(overlayElement?.children[0] as HTMLElement);
     if (this.frameComp.isNoAnimationVal) {
-      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, 'noAnm', '');
-      HtmlElemUtil.setClass(this.renderer, selectPanelWrapRef, 'gln-no-animation', true);
+      HtmlElemUtil.setAttr(this.renderer, datepickerPanelWrapRef, 'noAnm', '');
+      HtmlElemUtil.setClass(this.renderer, datepickerPanelWrapRef, 'gln-no-animation', true);
     } else {
       // Add an attribute for animation and transformation.
-      HtmlElemUtil.setAttr(this.renderer, selectPanelWrapRef, CSS_ATTR_PANEL_OPENING_ANIMATION, '');
+      HtmlElemUtil.setAttr(this.renderer, datepickerPanelWrapRef, CSS_ATTR_PANEL_OPENING_ANIMATION, '');
     }
   }
   /** Callback when the overlay panel is detached. */

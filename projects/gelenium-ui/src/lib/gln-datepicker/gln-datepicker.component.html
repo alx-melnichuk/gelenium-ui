@@ -122,7 +122,7 @@
   (backdropClick)="backdropClick()"
   (attach)="attach()"
   (detach)="detach()"
-  overlayKeydown9="doOverlayPanelKeydown($event)">
+  (overlayKeydown)="doOverlayPanelKeydown($event)">
 
   <div glndpp-wrap
     [ngClass]="['gln-datepicker-panel-wrap', (frameComp.noAnimation ? 'gln-no-animation' : '')]"
@@ -132,9 +132,11 @@
     <div glndp-panel
       class="gln-datepicker-panel"
       [ngClass]="classesVal || ''"
+      [attr.id]="id + '-panel'"
       focus9="doFocusOnPanel()">
 
-      <gln-calendar class="demo01_"
+      <gln-calendar glndp-calendar
+        class="gln-datepicker-calendar"
         [config]="configCalendarVal"
         (selected)="dateSelected($event)">
       </gln-calendar>
