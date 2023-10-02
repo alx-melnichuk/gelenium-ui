@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-// import { GlnSelectOpenUtil } from 'gelenium-ui';
+import { GlnDatepickerOpenUtil } from 'gelenium-ui';
 
 import { RouterConfig } from '../../lib-core/config/router-config';
 import { CE_SITE_SCHEME_SCROLL } from '../../lib-core/constants';
@@ -35,7 +35,7 @@ export class CmDatepickerComponent implements AfterViewInit, OnDestroy {
   }
 
   public handlerEventSiteSchemeScroll = (): void => {
-    // GlnSelectOpenUtil.closeAll();
+    GlnDatepickerOpenUtil.closeAll();
   };
 
   public ngAfterViewInit(): void {

@@ -90,7 +90,7 @@ const siteUrlsDatepicker: SiteUrl[] = [
   // { label: 'Helper text', url: urlDatepicker, fragment: 'HelperText' },
   // { label: 'Border radius', url: urlDatepicker, fragment: 'BorderRadius' },
   // { label: 'Palette', url: urlDatepicker, fragment: 'Palette' },
-  // { label: 'Feature', url: urlDatepicker, fragment: 'Feature' },
+  { label: 'Feature', url: urlDatepicker, fragment: 'Feature' },
   // { label: 'Config', url: urlDatepicker, fragment: 'Config' },
   // { label: 'Api', url: urlDatepicker, fragment: 'Api' },
 ];
