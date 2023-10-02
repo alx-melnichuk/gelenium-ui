@@ -61,6 +61,7 @@ import { GlnDatepickerConfig } from './gln-datepicker-config.interface';
 import { GLN_DATEPICKER_SCROLL_STRATEGY } from './gln-datepicker.providers';
 import { DateUtil } from '../_utils/date.util';
 import { GlnCalendarConfig } from '../gln-calendar/gln-calendar-config.interface';
+import { GlnDatepickerOpenUtil } from './gln-datepicker-open.util';
 
 export const GLN_DATEPICKER_CONFIG = new InjectionToken<GlnDatepickerConfig>('GLN_DATEPICKER_CONFIG');
 
@@ -609,7 +610,7 @@ export class GlnDatepickerComponent
   /** Callback when the overlay panel is attached. */
   public attach(): void {
     // Add the current object to the list of elements with the panel open.
-    // #? GlnSelectOpenUtil.add(this);
+    GlnDatepickerOpenUtil.add(this);
     // Adding z-index: 'unset' will allow you to have one parent with a single z-index value.
     // This will correctly use the z-index for child elements.
     this.connectedOverlay.overlayRef.hostElement.style.zIndex = 'unset';
@@ -655,7 +656,7 @@ export class GlnDatepickerComponent
   /** Callback when the overlay panel is detached. */
   public detach() {
     // Remove the current object from the list of items with the panel open.
-    // #? GlnSelectOpenUtil.remove(this);
+    GlnDatepickerOpenUtil.remove(this);
     if (this.isPanelOpen) {
       this.close();
     }
